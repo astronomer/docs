@@ -5,9 +5,21 @@
     <atom:link href="https://docs.astronomer.io/astro-cli-release-notes.xml" rel="self" type="application/rss+xml"/>
     <title>Astro CLI Release Notes</title>
     <link>https://docs.astronomer.io/astro/cli/release-notes</link>
-    <pubDate>Tue, 28 Mar 2023 08:12:42 GMT</pubDate>
+    <pubDate>Tue, 11 Apr 2023 12:57:01 GMT</pubDate>
     <description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro CLI.</description>
     <language>en-US</language>
+    <item>
+      <title>Astro CLI 1.13.0</title>
+      <link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1130</link>
+      <guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1130</guid>
+      <description><![CDATA[<p>Release date: March 30, 2023</p><p>:::caution</p><p>The command <code>astro user invite</code> will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to <a href="/cli/astro-organization-user-invite.md"><code>astro organization user invite</code></a> before Astro CLI v1.15.0 is released.</p><p>:::</p><h3>New flag <code>--clean-output</code> for Deployment commands</h3><p>You can now use the <code>-—clean-output</code> flag with the following commands to make sure that any output comes only from the command itself.</p><ul>
+<li><code>astro deployment inspect</code></li>
+<li><code>astro deployment create</code></li>
+<li><code>astro deployment update</code></li>
+</ul><p>This is helpful for users automating actions with deployment files, like using the Deploy Action template with <a href="/astro/ci-cd.md#github-actions">Github Actions</a>.</p><h3>New environment variable <code>ASTRO_HOME</code></h3><p>The new environment variable <code>ASTRO_HOME</code> allows you to change the directory where the Astro CLI stores its global config file. This can be useful in environments where the CLI doesn’t have access to the HOME directory.</p><h3>Additional improvements</h3><ul>
+<li>The command <code>astro login</code> won’t ask for email input in the command line anymore. You can now provide your email address in the browser when you log in.</li>
+</ul>]]></description>
+    </item>
     <item>
       <title>Astro CLI 1.12.1</title>
       <link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1121</link>

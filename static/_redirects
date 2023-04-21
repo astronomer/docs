@@ -292,3 +292,7 @@
 /astro-runtime-release-notes.rss /astro-runtime-release-notes.xml 301
 /astro-cli-release-notes.rss /astro-cli-release-notes.xml 301
 /astro-release-notes.rss /astro-release-notes.xml 301
+
+# redirect for consolidated docs
+
+/astro/manage-organization /astro/configure-idp

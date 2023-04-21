@@ -154,6 +154,7 @@ module.exports = {
         'airflow-azure-data-explorer',
         'airflow-azure-data-factory-integration',
         'airflow-databricks',
+        'airflow-dbt-cloud',
         'airflow-dbt',
         'airflow-fivetran',
         'airflow-great-expectations',

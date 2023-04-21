@@ -5,14 +5,63 @@
     <atom:link href="https://docs.astronomer.io/astro-release-notes.xml" rel="self" type="application/rss+xml"/>
     <title>Astro Release Notes</title>
     <link>https://docs.astronomer.io/astro/release-notes</link>
-    <pubDate>Tue, 28 Mar 2023 08:12:42 GMT</pubDate>
+    <pubDate>Tue, 11 Apr 2023 12:57:01 GMT</pubDate>
     <description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro.</description>
     <language>en-US</language>
+    <item>
+      <title>April 4, 2023</title>
+      <link>https://docs.astronomer.io/astro/release-notes#april-4-2023</link>
+      <guid>https://docs.astronomer.io/astro/release-notes#april-4-2023</guid>
+      <description><![CDATA[<h3>Preview Deployments</h3><p>You can now create preview Deployments from feature branches in your Git repository. Use a <a href="/ci-cd-templates/template-overview.md#preview-deployment-templates">preview Deployment template</a> or <a href="/ci-cd-templates/github-actions.md#deployment-preview-templates">GitHub Actions template</a> to configure your Astro pipelines to:</p><ul>
+<li>Create the preview Deployment when you create a new branch.</li>
+<li>Deploy code changes to Astro when you make updates in the branch.</li>
+<li>Delete the preview Deployment when you delete the branch.</li>
+<li>Deploy your changes to your base Deployment after you merge your changes into your main branch.</li>
+</ul><h3>Additional improvements</h3><ul>
+<li>Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Deployment API key or Workspace token.</li>
+<li>When you create a new cell in the Astro Cloud IDE, the editor auto-scrolls to your new cell and selects it.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed a bug where if a Deployment creation fails, the DB rollback tried to delete a Prisma record that had already been deleted.</li>
+<li>Fixed an issues where alerts did not cache as expected.</li>
+<li>Fixed a bug where the UI passed the wrong cluster type.</li>
+<li>Fixed an issue where the Deployment status shows as 'deploying' when KPOs are running.</li>
+<li>Fixed a bug in the AWS templates to address NAT gateway configuration.</li>
+</ul>]]></description>
+    </item>
+    <item>
+      <title>March 28, 2023</title>
+      <link>https://docs.astronomer.io/astro/release-notes#march-28-2023</link>
+      <guid>https://docs.astronomer.io/astro/release-notes#march-28-2023</guid>
+      <description><![CDATA[<h3>New GCP node instance types available</h3><p>You can now use the following node instance types for worker nodes in GCP clusters:</p><ul>
+<li><code>e2-standard-32</code></li>
+<li><code>e2-highcpu-32</code></li>
+<li><code>n2-standard-32</code></li>
+<li><code>n2-standard-48</code></li>
+<li><code>n2-standard-64</code></li>
+<li><code>n2-highmem-32</code></li>
+<li><code>n2-highmem-48</code></li>
+<li><code>n2-highmem-64</code></li>
+<li><code>n2-highcpu-32</code></li>
+<li><code>n2-highcpu-48</code></li>
+<li><code>n2-highcpu-64</code></li>
+</ul><p>For a list of all instance types available for GCP, see <a href="resource-reference-gcp.md#supported-worker-node-pool-instance-types">Supported worker node pool instance types</a>.</p><h3>Additional improvements</h3><ul>
+<li>You can now use <code>db.m6g</code> and <code>db.r6g</code> RDS instance types on AWS clusters.</li>
+<li>The default RDS instance type for new AWS clusters has been reduced from <code>db.r5.large</code> to <code>db.m6g.large</code></li>
+<li>The default CIDR range for new AWS clusters has been reduced from /19 to /20.</li>
+<li>You can now submit a <strong>Request type</strong> in the <a href="https://cloud.astronomer.io/support">Cloud UI support form</a>. When you choose a request type, the form updates to help you submit the most relevant information for your support request.</li>
+<li>You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where you could set a Deployment's scheduler resources to less than 5 AU.</li>
+</ul>]]></description>
+    </item>
     <item>
       <title>March 21, 2023</title>
       <link>https://docs.astronomer.io/astro/release-notes#march-21-2023</link>
       <guid>https://docs.astronomer.io/astro/release-notes#march-21-2023</guid>
       <description><![CDATA[<h3>Automate Workspace and Deployment actions using Workspace API tokens</h3><p>Use Workspace API tokens to automate Workspace actions, such as adding users to a Workspace and creating new Deployments, or for processes that a <a href="api-keys.md">Deployment API key</a> can automate. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes.</p><p>To create and use Workspace API tokens, see <a href="workspace-api-tokens.md">Workspace API tokens</a>.</p><h3>Additional improvements</h3><ul>
+<li>
+<p>In the Astro Cloud IDE, you can now specify the output table for a Warehouse SQL cell using both literal and Python expressions. See <a href="cloud-ide/run-sql.md#create-a-sql-cell">Create a SQL cell</a>.</p>
+</li>
 <li>
 <p>Port 80 is no longer used for certificate management on the data plane.</p>
 </li>

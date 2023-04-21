@@ -17,7 +17,7 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 ## Add a user to an Organization
 
-If your Organization has a configured identity provider (IdP), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. See [Configure just-in-time provisioning for single sign-on](manage-organization.md#configure-just-in-time-provisioning-for-single-sign-on).
+If your Organization has a configured identity provider (IdP), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. To change this behavior, see [Disable just-in-time provisioning](configure-idp.md#disable-just-in-time-provisioning).
 
 If you want to invite a user to an Organization from a domain that you don't own, such as a third party consultant, or you want to invite someone from your company to Astro with a higher level role, follow these steps.
 
@@ -116,4 +116,4 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     ```sh
     sh path/to/add-users.sh path/to/users.txt
     ```
-6. Optional. To use this script as part of a CI/CD pipeline, create a Workspace API token and specify the environment variable `ASTRO_API_TOKEN=<your-token>` in your CI/CD environment. See [Manage Workspace API tokens](workspace-api-tokens.md). Note that Workspace API tokens work only for inviting groups of users to a Workspace. 
+6. (Optional) To use this script as part of a CI/CD pipeline, create a Workspace API token and specify the environment variable `ASTRO_API_TOKEN=<your-token>` in your CI/CD environment. See [Manage Workspace API tokens](workspace-api-tokens.md). Note that you can use Workspace API tokens to manage users only at the Workspace level.

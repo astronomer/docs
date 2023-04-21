@@ -14,7 +14,7 @@ sidebar_custom_props: { icon: 'img/integrations/mongodb.png' }
 
 In this tutorial, you'll learn how to use Airflow to load data from an API into MongoDB.
 
-:::note
+:::info
 
 This tutorial was developed in partnership with MongoDB. For more details on this integration, including additional instruction on using MongoDB Charts, check out MongoDB's post [Using MongoDB with Apache Airflow](https://www.mongodb.com/developer/products/mongodb/mongodb-apache-airflow/).
 
