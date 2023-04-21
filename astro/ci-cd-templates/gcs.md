@@ -48,44 +48,44 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 9. Add the following code to `main.py`:
 
-```python
-import os
-import tarfile
-import subprocess
-from pathlib import Path
-from google.cloud import storage
+    ```python
+    import os
+    import tarfile
+    import subprocess
+    from pathlib import Path
+    from google.cloud import storage
 
-BUCKET = os.getenv("BUCKET", "my-demo-bucket")
-
-
-def untar(filename: str, destination: str) -> None:
-    with tarfile.open(filename) as file:
-        file.extractall(destination)
+    BUCKET = os.getenv("BUCKET", "my-demo-bucket")
 
 
-def run_command(cmd: str) -> None:
-    p = subprocess.Popen("set -x; " + cmd, shell=True)
-    p.communicate()
+    def untar(filename: str, destination: str) -> None:
+        with tarfile.open(filename) as file:
+            file.extractall(destination)
+    
+
+    def run_command(cmd: str) -> None:
+        p = subprocess.Popen("set -x; " + cmd, shell=True)
+        p.communicate()
 
 
-def download_to_local(bucket_name: str, gcs_folder: str, local_dir: str = None) -> None:
-    """Download the contents of a folder directory
-    :param bucket_name: the name of the gcs bucket
-    :param gcs_folder: the folder path in the gcs bucket
-    :param local_dir: a relative or absolute directory path in the local file system
-    """
+    def download_to_local(bucket_name: str, gcs_folder: str, local_dir: str = None) -> None:
+        """Download the contents of a folder directory
+        :param bucket_name: the name of the gcs bucket
+        :param gcs_folder: the folder path in the gcs bucket
+        :param local_dir: a relative or absolute directory path in the local file system
+        """
 
-    ## create a storage client to access GCS objects
-    storage_client = storage.Client()
-    source_bucket = storage_client.bucket(bucket_name)
+        ## create a storage client to access GCS objects
+        storage_client = storage.Client()
+        source_bucket = storage_client.bucket(bucket_name)
 
-    ## get a list of all the files in the bucket folder
-    blobs = source_bucket.list_blobs(prefix=gcs_folder)
+        ## get a list of all the files in the bucket folder
+        blobs = source_bucket.list_blobs(prefix=gcs_folder)
 
-    ## download each of the dag to local
-    for blob in blobs:
-        if blob.name.endswith('/'):
-            continue
+        ## download each of the dag to local
+        for blob in blobs:
+            if blob.name.endswith('/'):
+                continue
 
         target = blob.name if local_dir is None \
             else os.path.join(local_dir, os.path.relpath(blob.name, gcs_folder))
@@ -94,27 +94,27 @@ def download_to_local(bucket_name: str, gcs_folder: str, local_dir: str = None) 
             os.makedirs(os.path.dirname(target))
 
         blob.download_to_filename(target)
-    print("downloaded file")
+        print("downloaded file")
     
 
-def astro_deploy(event, context) -> None:
-    """Triggered by a change to a Cloud Storage bucket.
-    :param event: Event payload.
-    :param context: Metadata for the event.
-    """
+    def astro_deploy(event, context) -> None:
+        """Triggered by a change to a Cloud Storage bucket.
+        :param event: Event payload.
+        :param context: Metadata for the event.
+        """
 
-    base_dir = '/tmp/astro'
-    ## download dag files to temp local storage
-    download_to_local(BUCKET, 'dags', f'{base_dir}/dags')
+        base_dir = '/tmp/astro'
+        ## download dag files to temp local storage
+        download_to_local(BUCKET, 'dags', f'{base_dir}/dags')
     
-    ## download astro cli binary and move to /tmp/astro
-    download_to_local(BUCKET, 'cli_binary', base_dir)
+        ## download astro cli binary and move to /tmp/astro
+        download_to_local(BUCKET, 'cli_binary', base_dir)
 
-    ## deploy to astro
-    os.chdir(base_dir)
-    untar('./astro_cli.tar.gz', '.')
-    run_command('echo y | ./astro dev init')
-    run_command(f'./astro deploy --dags')
+        ## deploy to astro
+        os.chdir(base_dir)
+        untar('./astro_cli.tar.gz', '.')
+        run_command('echo y | ./astro dev init')
+        run_command(f'./astro deploy --dags')
   ```
 
 10. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).
