@@ -136,7 +136,7 @@ This DAG will run continuously by scheduling a new run as soon as the previous r
 
 :::caution
 
-Be aware that Airflow should not be used for streaming or low-latency processes.
+Be aware that Airflow is designed to handle orchestration of data pipelines in batches and this feature is not intended to be used for streaming or low-latency processes. If you need to run pipelines more frequently than every minute, consider using Airflow in combination with tools designed specifically for that purpose like for example [Apache Kafka](airflow-kafka.md).
 
 :::
 
