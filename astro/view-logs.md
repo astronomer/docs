@@ -19,7 +19,7 @@ View task and component logs for your DAGs to troubleshoot your data pipelines a
 
 ### Log Levels 
 
-Each log and message type is also associated with one of the following _log levels_: 
+Logs and messages might also be associated with one of the following _log levels_: 
 
 - **Error**: Emitted when a process fails or does not complete. For example, these logs might indicate a missing DAG file, an issue with your scheduler's connection to the Airflow database, or an irregularity with your scheduler's heartbeat.
 - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
@@ -48,7 +48,7 @@ You can access scheduler, triggerer, and worker logs in the Cloud UI to find the
 
 2. Click the **Logs** tab.
 
-    When a Deployment generates more than 500 lines of logs in 24 hours, only the most recent 500 lines are shown. If there are no logs available for a given Deployment, the following message appears:
+    The maximum number of lines returned is 10,000, with 25 results displayed per page. If there are no logs available for a given Deployment, the following message appears:
 
     ```text
     No matching events have been recorded in the past 24 hours.
@@ -60,7 +60,7 @@ You can access scheduler, triggerer, and worker logs in the Cloud UI to find the
 
 You can use the following options to specify the types of logs or messages that you want to view. 
 
-- **String search**: Enter a string, keyword, or phrase to find in your logs.
+- **String search**: Enter a string, keyword, or phrase to find in your logs. You can also search with suffix wildcards by adding a `*` to your search query. For example, `acti*` returns results that include `action` and `acting`. The string search does not include fuzzy matching, so misspelled strings or incomplete strings without a wildcard, `*`, return zero results.
 
 - **Time range**: Filter the logs displayed based on time. 
 
