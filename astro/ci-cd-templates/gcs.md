@@ -54,19 +54,15 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
     import subprocess
     from pathlib import Path
     from google.cloud import storage
-
     BUCKET = os.getenv("BUCKET", "my-demo-bucket")
-
 
     def untar(filename: str, destination: str) -> None:
         with tarfile.open(filename) as file:
             file.extractall(destination)
     
-
     def run_command(cmd: str) -> None:
         p = subprocess.Popen("set -x; " + cmd, shell=True)
         p.communicate()
-
 
     def download_to_local(bucket_name: str, gcs_folder: str, local_dir: str = None) -> None:
         """Download the contents of a folder directory
@@ -96,7 +92,6 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         blob.download_to_filename(target)
         print("downloaded file")
     
-
     def astro_deploy(event, context) -> None:
         """Triggered by a change to a Cloud Storage bucket.
         :param event: Event payload.
