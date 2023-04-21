@@ -509,7 +509,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         - name: Delete preview Deployment
           uses: astronomer/deploy-action@v0.2
           with:
-            action: deploy-deployment-preview
+            action: delete-deployment-preview
             deployment-id: <main-deployment-id>
     ```
 
