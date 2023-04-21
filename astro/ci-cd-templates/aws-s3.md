@@ -16,7 +16,7 @@ Use the following CI/CD template to automate deploying Apache Airflow DAGs from 
 
 ### DAG-based deploy
 
-This CI/CD template can be used to deploy DAGs from a single S3 bucket to a single Astro Deployment. When you create or modify a DAG in the S3 bucket, a Lambda function triggers to deploy your DAGs to Astro.
+This CI/CD template can be used to deploy DAGs from a single S3 bucket to a single Astro Deployment. When you create or modify a DAG in the S3 bucket, a Lambda function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
 
 :::info
 

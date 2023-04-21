@@ -14,7 +14,7 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 
 ### DAG-based deploy
 
-This CI/CD template can be used to deploy DAGs from a single GCS bucket to a single Astro Deployment. When you create or modify a DAG in the GCS bucket, a Lambda function triggers your project to deploy DAGs to Astro.
+This CI/CD template can be used to deploy DAGs from a single GCS bucket to a single Astro Deployment. When you create or modify a DAG in the GCS bucket, a Cloud function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
 
 :::info
 
