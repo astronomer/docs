@@ -115,7 +115,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         untar('./astro_cli.tar.gz', '.')
         run_command('echo y | ./astro dev init')
         run_command(f'./astro deploy --dags')
-  ```
+    ```
 
 10. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).
 11. Add your DAGs to the `dags` folder in your storage bucket.
