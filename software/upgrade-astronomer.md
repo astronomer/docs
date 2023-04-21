@@ -203,7 +203,7 @@ In Kubernetes 1.25, [PodSecurityPolicies (PSPs)](https://kubernetes.io/blog/2021
 
 - Implement Pod Security through a third-party Open Policy Agent tool such as [GateKeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/).
 
-#### Kubernetes 1.24 on Azure
+### Upgrade to Kubernetes 1.24 (Azure only)
 
 To use Kubernetes 1.24 and later on Azure, you must set `nginx.ingressAnnotations.service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"` in your `config.yaml` file. See [Apply a platform config change](apply-platform-config.md).
 
