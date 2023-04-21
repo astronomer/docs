@@ -96,11 +96,9 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         with tarfile.open(filename) as file:
             file.extractall(destination)
 
-
     def run_command(cmd: str) -> None:
         p = subprocess.Popen("set -x; " + cmd, shell=True)
         p.communicate()
-
 
     def download_to_local(bucket_name: str, s3_folder: str, local_dir: str = None) -> None:
         """
@@ -120,7 +118,6 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
                 continue
             bucket.download_file(obj.key, target)
         print("downloaded file")
-
 
     def lambda_handler(event, context) -> None:
         """Triggered by a change to a Cloud Storage bucket.
