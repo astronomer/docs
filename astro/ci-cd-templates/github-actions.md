@@ -447,7 +447,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
     on:
       create:
         branches:
-        - "**"
+          - "**"
     
     env:
       ## Set your Workspace API key token as a GitHub secret
@@ -495,10 +495,9 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
     name: Astronomer CI - Delete Preview Deployment
 
     on:
-      pull_request:
+      delete:
         branches:
-          - main
-    
+          - "**"
     env:
       ## Set your Workspace API key token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
