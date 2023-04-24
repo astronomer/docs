@@ -249,6 +249,20 @@ To see the full method, see the source code [here](https://github.com/apache/air
 
 You can customize this content by setting the `subject_template` and/or `html_content_template` variables in your `airflow.cfg` with the path to your jinja template files for subject and content respectively.
 
+Custom callback functions can also be used to send email notifications. For example, if you want to send emails for successful task runs, you can provide an email function to your `on_success_callback`:
+
+```python
+from airflow.utils.email import send_email
+
+def success_email_function(context):
+    dag_run = context.get("dag_run")
+
+    msg = "DAG ran successfully"
+    subject = f"DAG {dag_run} has completed"
+    send_email(to=your_emails, subject=subject, html_content=msg)
+
+```
+
 ## Notifiers
 
 Airflow 2.6 added the concept of [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize callback functions.
@@ -332,70 +346,6 @@ You can find a full list of all notifiers created for Airflow providers [here](h
 
 :::
 
-#### Slack notifications pre-2.6
-
-If you are on an Airflow version older than 2.6 and want to implement Slack notification you can follow this example.
-It uses the [Slack provider](https://registry.astronomer.io/providers/slack) `SlackWebhookOperator` with a Slack Webhook to send messages. This is the method Slack recommends to post messages from apps.
-
-1. From your Slack workspace, create a Slack app and an incoming Webhook. See [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks). 
-2. Copy the Slack Webhook URL. You'll use it in your Python function.
-3. Create an Airflow connection to provide your Slack Webhook to Airflow. Choose an HTTP connection type. Enter [`https://hooks.slack.com/services/`](https://hooks.slack.com/services/) as the Host, and enter the remainder of your Webhook URL from the last step as the Password (formatted as `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`). 
-
-![Slack Connection](/img/guides/slack_webhook_connection.png)
-
-In Airflow 2.0 or later, you'll need to install the `apache-airflow-providers-slack` provider package to use the `SlackWebhookOperator`.
-
-4. Create a Python function to use as your `on_failure_callback` method. Within the function, define the information you want to send and invoke the `SlackWebhookOperator` to send the message similar to this example:
-
-```python
-from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
-
-def slack_notification(context):
-    slack_msg = """
-            :red_circle: Task Failed. 
-            *Task*: {task}  
-            *Dag*: {dag} 
-            *Execution Time*: {exec_date}  
-            *Log Url*: {log_url} 
-            """.format(
-        task=context.get("task_instance").task_id,
-        dag=context.get("task_instance").dag_id,
-        ti=context.get("task_instance"),
-        exec_date=context.get("execution_date"),
-        log_url=context.get("task_instance").log_url,
-    )
-    failed_alert = SlackWebhookOperator(
-        task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
-    )
-    return failed_alert.execute(context=context)
-```
-
-5. Define your `on_failure_callback` parameter in your DAG either as a `default_arg` for the whole DAG, or for specific tasks. Set it equal to the function you created in the previous step.
-
-### Custom notifications
-
-The email notification parameters shown in the previous sections are examples of built-in Airflow alerting mechanisms. These have to be turned on and don't require any additional configuration.
-
-You can define your own notifications to customize how Airflow alerts you about callback events. The most straightforward way of doing this is by defining Python functions and provide them to the `*_callback` parameters. The following example DAG has a custom `on_failure_callback` function set at the DAG level and an `on_success_callback` function for the `success_task`.
-
-<CodeBlock language="python">{callbacks_example_dag}</CodeBlock>
-
-Custom notification functions can also be used to send email notifications. For example, if you want to send emails for successful task runs, you can define an email function in your `on_success_callback`:
-
-```python
-from airflow.utils.email import send_email
-
-def success_email_function(context):
-    dag_run = context.get("dag_run")
-
-    msg = "DAG ran successfully"
-    subject = f"DAG {dag_run} has completed"
-    send_email(to=your_emails, subject=subject, html_content=msg)
-
-```
-
-This functionality may also be useful when your pipelines have conditional branching, and you want to be notified if a certain path is taken.
-
 ## Airflow service-level agreements
 
 [Airflow service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period. 
@@ -465,3 +415,43 @@ There is no functionality to disable email alerting for SLAs. If you have an `'e
 If you are running Airflow with Astronomer Software or Astro, there are a number of options available for managing your Airflow notifications. All of the previous methods for sending task notifications from Airflow can be implemented on Astronomer. See the [Astronomer Software](https://docs.astronomer.io/software/airflow-alerts) and [Astro](https://docs.astronomer.io/astro/airflow-alerts) documentation to learn how to leverage notifications on the platform, including how to set up SMTP to enable email notifications.
 
 Astronomer also provides deployment and platform-level alerting to notify you if any aspect of your Airflow or Astronomer infrastructure is unhealthy. For more on that, including how to customize notifications for Software users, see [Alerting in Astronomer Software](https://docs.astronomer.io/software/platform-alerts).
+
+## Legacy: Slack notifications pre-2.6
+
+If you are on an Airflow version older than 2.6 and want to implement Slack notification you can follow this example.
+It uses the [Slack provider](https://registry.astronomer.io/providers/slack) `SlackWebhookOperator` with a Slack Webhook to send messages. This is the method Slack recommends to post messages from apps.
+
+1. From your Slack workspace, create a Slack app and an incoming Webhook. See [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks). 
+2. Copy the Slack Webhook URL. You'll use it in your Python function.
+3. Create an Airflow connection to provide your Slack Webhook to Airflow. Choose an HTTP connection type. Enter [`https://hooks.slack.com/services/`](https://hooks.slack.com/services/) as the Host, and enter the remainder of your Webhook URL from the last step as the Password (formatted as `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`). 
+
+![Slack Connection](/img/guides/slack_webhook_connection.png)
+
+In Airflow 2.0 or later, you'll need to install the `apache-airflow-providers-slack` provider package to use the `SlackWebhookOperator`.
+
+4. Create a Python function to use as your `on_failure_callback` method. Within the function, define the information you want to send and invoke the `SlackWebhookOperator` to send the message similar to this example:
+
+```python
+from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
+
+def slack_notification(context):
+    slack_msg = """
+            :red_circle: Task Failed. 
+            *Task*: {task}  
+            *Dag*: {dag} 
+            *Execution Time*: {exec_date}  
+            *Log Url*: {log_url} 
+            """.format(
+        task=context.get("task_instance").task_id,
+        dag=context.get("task_instance").dag_id,
+        ti=context.get("task_instance"),
+        exec_date=context.get("execution_date"),
+        log_url=context.get("task_instance").log_url,
+    )
+    failed_alert = SlackWebhookOperator(
+        task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
+    )
+    return failed_alert.execute(context=context)
+```
+
+5. Define your `on_failure_callback` parameter in your DAG either as a `default_arg` for the whole DAG, or for specific tasks. Set it equal to the function you created in the previous step.
