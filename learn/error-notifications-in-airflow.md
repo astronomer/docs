@@ -324,7 +324,7 @@ It can be imported from the Slack provider package and used with any `*_callback
 
 The DAG above has one task sending a notification to Slack. It necessitates configuring an [Airflow connection](connections.md) to Slack with the connection ID `slack_conn`.
 
-![Slack notification](/img/docs/slack_notification.png)
+![Slack notification](/img/guides/slack_notification.png)
 
 :::info
 
