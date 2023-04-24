@@ -80,7 +80,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
     apache-airflow-providers-snowflake
     ```
 
-    The packages in this file will be installed in your virtual environment. The `snowflake-snowpark-python` package is required to run Snowpark queries. The other packages are required to access an Airflow connection to Snowflake from within the virtual environment. If you are using a different method of connecting to Snowflake, such as a secrets manager or managing secrets locally, you can update or remove these lines.
+    The packages in this file will be installed in your virtual environment. Your Airflow task requires the `snowflake-snowpark-python` package to run Snowpark queries in the virtual environment.  The virtual environment uses the other packages to access the Snowflake connection you defined in Airflow. If you are using a different method of connecting to Snowflake, such as a secrets manager or managing secrets locally, you can update or remove these lines.
 
 3. Add the following to your `packages.txt` file:
 
