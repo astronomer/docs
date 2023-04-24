@@ -69,6 +69,9 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
             link: `${pageURL}#${post.slug.replace(/\./g, '')}`
           },
           {
+            pubDate: post.pubDate
+          },
+          {
             guid: `${pageURL}#${post.slug.replace(/\./g, '')}`
           },
           {
