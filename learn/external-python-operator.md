@@ -99,7 +99,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
     ```
 
     These commands install `pyenv` in your Airflow environment and create a Python 3.8 virtual environment called `snowpark` with the required packages to run Snowpark. The `pyenv` environment is initialized when you start your Airflow project and can be used by any ExternalPythonOperator tasks. 
-
+    
     Creating a `pyenv` environment in your Airflow project requires installing multiple operating system level packages and a series of Docker commands. The open source [Astro BuildKit](https://github.com/astronomer/astro-provider-venv) simplifies this process and allows you to create a Python virtual environment with only two lines of code.
 
     :::note
@@ -124,7 +124,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
     astro dev start
     ```
 
-  :::note
+  :::info
 
   The build of this project's Dockerfile can take up to 20 minutes due to the `pyenv` and Python 3.8 installation. If you are an Astronomer customer and will be deploying this project to Astro, you can use a `dag-only` deploy after the initial deployment to avoid rebuilding the Dockerfile when making changes to DAGs in the project.
 

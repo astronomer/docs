@@ -117,9 +117,9 @@ Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apac
 
  ```python
   train_model = PythonOperator(
-   task_id = 'train_model',
-   python_callable = train_model_flights
-   queue = 'machine-learning-tasks'
+   task_id='train_model',
+   python_callable=train_model_flights
+   queue='machine-learning-tasks'
   )
  ```
 
@@ -128,7 +128,7 @@ Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apac
 <TabItem value="taskflow">
 
  ```python
-  @task(task_id='train_model', queue = 'machine-learning-tasks')
+  @task(task_id='train_model', queue='machine-learning-tasks')
   def train_model_flights(x_train, y_train):
    import xgboost
    from sklearn.preprocessing import StandardScaler

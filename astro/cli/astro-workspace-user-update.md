@@ -36,7 +36,7 @@ astro workspace user update --role <user-role>
 | Option                | Description                                          | Valid Values                                                                     |
 | --------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `<email>`             | The email address of the user whose role you want to update. | Any valid email                                                                  |
-| `--role` (_Required_) | The user's role in the Workspace.                    | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role` (_Required_) | The user's role in the Workspace.                    | Valid values are `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
 
