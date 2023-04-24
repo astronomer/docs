@@ -72,6 +72,7 @@ module.exports = {
           'registry-backend',
           'namespace-pools',
           'configure-platform-resources',
+          'cluster-resource-provisioning',
           ],
         },
         {
