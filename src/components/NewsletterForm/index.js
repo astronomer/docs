@@ -10,7 +10,9 @@ function useNewsletterFormConfig() {
 export default function NewsletterForm(
   {
     title,
-    buttonText
+    buttonText,
+    successMessage,
+    errorMessage
   }
 ) {
   const [email, setEmail] = useState("");
@@ -197,10 +199,10 @@ export default function NewsletterForm(
         <img src="/img/spinner.gif" alt="Sending your email address to our servers..." className={styles.newsletterForm__spinner} width="20" height="20" />
       }
       {success &&
-        <p className={styles.newsletterForm__success}>Success! ✓</p>
+        <p className={styles.newsletterForm__success}>{successMessage || content.successMessage}</p>
       }
       {error &&
-        <p className={styles.newsletterForm__error}>Sorry, there was issue sending your email. Please try again.</p>
+        <p className={styles.newsletterForm__error}>{errorMessage || content.errorMessage}</p>
       }
       <p className={styles.newsletterForm__disclaimer}>You can unsubscribe at any time. <br />By proceeding you agree to our <a href="https://www.astronomer.io/privacy/" target="_blank">Privacy Policy</a>, our <a href="https://www.astronomer.io/legal/terms-of-service/" target="_blank">Website Terms</a> and to receive emails from Astronomer.</p>
     </form>
