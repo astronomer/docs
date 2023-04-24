@@ -62,6 +62,7 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
   function buildFeed(posts, pageURL) {
     const feedItems = [];
     posts.map((post) => {
+      const pubDate = new Date(post.pubDate);
       const item = {
         item: [
           { title: post.title },
@@ -69,7 +70,7 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
             link: `${pageURL}#${post.slug.replace(/\./g, '')}`
           },
           {
-            pubDate: post.pubDate
+            pubDate: pubDate.toUTCString()
           },
           {
             guid: `${pageURL}#${post.slug.replace(/\./g, '')}`

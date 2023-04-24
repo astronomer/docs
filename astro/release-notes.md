@@ -639,7 +639,7 @@ To learn more, see [Export Airflow metrics to Datadog](deployment-metrics.md#exp
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
 - You can now configure [worker queues](configure-deployment-resources.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
-## Bug fixes
+### Bug fixes
 
 - The timestamp shown in the **Updated** field of the Deployment view in the Cloud UI is now properly updated when you create or modify environment variables.
 - Fixed an issue where logging in to the Airflow UI with unrecognized credentials could freeze you on an error page.
