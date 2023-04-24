@@ -171,6 +171,146 @@ mutation CreateDeployment {
 
 Here, `<airflow-executor>` can be `LocalExecutor`, `CeleryExecutor`, or `KubernetesExecutor`.
 
+### Create or update a Deployment with configurations
+
+The `upsertDeployment` mutation can be used to both create and update Deployments with all possible Deployment configurations. If you query `upsertDeployment` with a `deploymentUuid` that doesn't exist, the Houston API creates a new Deployment according to your specifications. If the `deploymentUuid` does exist, the Houston API updates a Deployment with that ID.
+
+The following query creates a new Deployment in a custom namespace `test-new-dep` and configures a Deployment environment variable `AIRFLOW__CORE__COLORED_LOG_FORMAT`.
+
+```graphql
+mutation upsertDeployment(
+  $workspaceUuid: Uuid,
+	$deploymentUuid: Uuid,
+  $label: String,
+  $description: String,
+  $releaseName: String,
+  $namespace: String,
+  $environmentVariables: [InputEnvironmentVariable],
+  $image: String,
+  $dockerconfigjson: JSON,
+  $version: String,
+  $airflowVersion: String,
+  $runtimeVersion: String,
+  $desiredRuntimeVersion: String,
+  $executor: ExecutorType,
+  $workers: Workers,
+  $webserver: Webserver,
+  $scheduler: Scheduler,
+  $triggerer: Triggerer,
+  $dagDeployment: DagDeployment,
+  $properties: JSON,
+  $cloudRole: String
+) {
+  upsertDeployment(
+    workspaceUuid: $workspaceUuid,
+    deploymentUuid: $deploymentUuid,
+    label: $label,
+    description: $description,
+    releaseName: $releaseName,
+    namespace: $namespace,
+    environmentVariables: $environmentVariables,
+    image: $image,
+    dockerconfigjson: $dockerconfigjson,
+    version: $version,
+    airflowVersion: $airflowVersion,
+    runtimeVersion: $runtimeVersion,
+    desiredRuntimeVersion: $desiredRuntimeVersion,
+    executor: $executor,
+    workers: $workers,
+    webserver: $webserver,
+    scheduler: $scheduler,
+    triggerer: $triggerer,
+    dagDeployment: $dagDeployment,
+    properties: $properties,
+    cloudRole: $cloudRole
+) {
+    id
+    config
+    urls {
+      type
+      url
+      __typename
+    }
+    properties
+    description
+    label
+    releaseName
+    namespace
+    status
+    type
+    version
+    workspace {
+      id
+      label
+      __typename
+    }
+    airflowVersion
+    runtimeVersion
+    desiredAirflowVersion
+    upsertedEnvironmentVariables {
+      key
+      value
+      isSecret
+      __typename
+    }
+    dagDeployment {
+      type
+      nfsLocation
+      repositoryUrl
+      branchName
+      syncInterval
+      syncTimeout
+      ephemeralStorage
+      dagDirectoryLocation
+      rev
+      sshKey
+      knownHosts
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+{
+  "workspaceUuid": "cldemxl9502454yxe6vjlxy23",
+	"environmentVariables": [
+    {
+      "key": "AIRFLOW__CORE__COLORED_LOG_FORMAT",
+      "value": "test",
+      "isSecret": false
+    }
+  ],
+  "releaseName": "",
+  "namespace": "test-new-dep",
+  "type": "airflow",
+  "executor": "CeleryExecutor",
+  "workers": {},
+  "webserver": {},
+  "scheduler": {
+    "replicas": 1
+  },
+  "label": "test-new-dep",
+  "description": "",
+  "runtimeVersion": "7.2.0",
+  "properties": {
+    "extra_au": 0
+  },
+  "dagDeployment": {
+    "type": "image",
+    "nfsLocation": "",
+    "repositoryUrl": "",
+    "branchName": "",
+    "syncInterval": 1,
+    "syncTimeout": 120,
+    "ephemeralStorage": 2,
+    "dagDirectoryLocation": "",
+    "rev": "",
+    "sshKey": "",
+    "knownHosts": ""
+  }
+}
+```
 
 ### Delete a Deployment
 
