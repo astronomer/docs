@@ -19,10 +19,11 @@ import sla_dag_level_example_taskflow from '!!raw-loader!../code-samples/dags/er
 import sla_dag_level_example_traditional from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_dag_level_example_traditional.py';
 import sla_task_level_example_taskflow from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_task_level_example_taskflow.py';
 import sla_task_level_example_traditional from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_task_level_example_traditional.py';
+import slack_notifier_example_dag from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/slack_notifier_example_dag.py';
 
 When you're using a data orchestration tool, how do you know when something has gone wrong? Airflow users can check the Airflow UI to determine the status of their DAGs, but this is an inefficient way of managing errors systematically, especially if certain failures need to be addressed promptly or by multiple team members. Fortunately, Airflow has built-in notification mechanisms that can be leveraged to configure error notifications in a way that works for your organization. 
 
-In this guide, you'll learn the basics of Airflow notifications and how to set up common notification mechanisms including email, Slack, and SLAs. You'll also learn how to make the most of Airflow alerting when using Astro.
+In this guide, you'll learn the basics of Airflow notifications and how to set up common notification mechanisms including email, Slack, custom notifier classes and SLAs. You'll also learn how to make the most of Airflow alerting when using Astro.
 
 ## Assumed knowledge
 
@@ -31,123 +32,183 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 - Task dependencies. See [Managing dependencies in Apache Airflow](managing-dependencies.md).
 
-## Airflow notification basics
+## Airflow callbacks 
 
-Having your DAGs defined as Python code gives you full autonomy to define your tasks and notifications in whatever way makes sense for your organization.
+In Airflow you can define actions to be taken for successful and failed runs a two different notification levels, the task and at the DAG-level:
 
-This section provides an overview of the notification options that are available in Airflow. 
+- `on_success_callback`: Invoked when a task or DAG succeeds.
+- `on_failure_callback`: Invoked when a task or DAG fails.
 
-### Notification levels
+Additionally there are two callbacks which are only available at the task level:
 
-Sometimes, it's helpful to standardize notifications across your entire DAG. Notifications set at the DAG level filter down to each task in the DAG. These notifications are usually defined in `default_args`.
+- `on_execute_callback`: Invoked right before a task begins executing.
+- `on_retry_callback`: Invoked when a task is retried. 
 
-In the following DAG example, `email_on_failure` is set to `True`, meaning any task in this DAG's context will send a failure email to all addresses in the `email` array.
+The `sla_miss_callback` which is invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements) can only be defined at the DAG level to be used for each task in a DAG which has an SLA defined.
 
-```python
-from pendulum import datetime
-from airflow import DAG
+Any Python callable can be provided to the `*_callback` parameters. Airflow 2.6 added the functionality of using [notifiers](#) and the option to provide several callback items to the same callback parameter in a list.
 
-default_args = {
-    "owner": "airflow",
-    "start_date": datetime(2018, 1, 30),
-    "email": ["noreply@astronomer.io"],
-    "email_on_failure": True,
-}
+:::info
 
-with DAG(
-    "sample_dag", default_args=default_args, schedule="@daily", catchup=False
-) as dag:
+The number of retries a task will be given can be set using the `retries` parameter. The time spent between retries is defined by the `retry_delay` (default: `timedelta(seconds=300)`). To progressively increases the wait time between retries until `max_retry_delay` (default: `None`) is reached, set `retry_exponential_backoff` to `True`.
 
-...
-```
+:::
 
-Sometimes, it's helpful to limit notifications to specific tasks. The `BaseOperator` includes support for built-in notification arguments. So, you can configure each task individually. In the following example DAG, email notifications are turned off by default at the DAG level, but are enabled for the `will_email` task.
+## Notification levels
 
-<CodeBlock language="python">{email_alert_example_dag}</CodeBlock>
-
-### Notification triggers
-
-The most common trigger for notifications in Airflow is a task failure. However, notifications can be set based on other events, including retries and successes.
-
-Emails on retries can be useful for debugging indirect failures; if a task needed to retry but eventually succeeded, this might indicate that the problem was caused by extraneous factors like load on an external system. To turn on email notifications for retries, simply set the `email_on_retry` parameter to `True` as shown in the DAG below.
+To define a notification at the DAG level, you can set the `*_callback` parameters in your DAG instantiation.
 
 ```python
-from pendulum import datetime, duration
-from airflow import DAG
+def my_callback_function(context):
+    pass
 
-default_args = {
-    "owner": "airflow",
-    "start_date": datetime(2018, 1, 30),
-    "email": ["noreply@astronomer.io"],
-    "email_on_failure": True,
-    "email_on_retry": True,
-    "retry_exponential_backoff": True,
-    "retry_delay": duration(seconds=300),
-    "retries": 3,
-}
 
-with DAG(
-    "sample_dag", default_args=default_args, schedule="@daily", catchup=False
-) as dag:
-
-...
+@dag(
+    start_date=datetime(2023,4,25),
+    schedule="@daily",
+    catchup=False,
+    on_success_callback=my_callback_function,
+    on_failure_callback=my_callback_function,
+    sla_miss_callback=my_callback_function
+)
 ```
 
-When working with retries, you should configure a `retry_delay`. This is the amount of time between a task failure and when the next try will begin. You can also turn on `retry_exponential_backoff`, which progressively increases the wait time between retries. This can be useful if you expect that extraneous factors might cause failures periodically.
-
-### Custom notifications
-
-The email notification parameters shown in the previous sections are examples of built-in Airflow alerting mechanisms. These have to be turned on and don't require any additional configuration.
-
-You can define your own notifications to customize how Airflow alerts you about failures or successes. The most straightforward way of doing this is by defining `on_failure_callback` and `on_success_callback` Python functions. These functions can be set at the DAG or task level, and the functions are called when tasks fail or complete successfully. The following example DAG has a custom `on_failure_callback` function set at the DAG level and an `on_success_callback` function for the `success_task`.
-
-<CodeBlock language="python">{callbacks_example_dag}</CodeBlock>
-
-Custom notification functions can also be used to send email notifications. For example, if you want to send emails for successful task runs, you can define an email function in your `on_success_callback`. For example:
+If you want each task in a DAG to invoke a task-level call back you can standarize task-level callbacks across your entire DAG using the DAG parameter `default_args`. Items listed in the dictionary provided to the `default_args` parameter will be set for each task in the DAG.
 
 ```python
-from airflow.utils.email import send_email
+def my_callback_function(context):
+    pass
 
-def success_email_function(context):
-    dag_run = context.get("dag_run")
 
-    msg = "DAG ran successfully"
-    subject = f"DAG {dag_run} has completed"
-    send_email(to=your_emails, subject=subject, html_content=msg)
-
+@dag(
+    start_date=datetime(2023,4,25),
+    schedule="@daily",
+    catchup=False,
+    default_args={
+        "on_execute_callback": my_callback_function,
+        "on_retry_callback": my_callback_function,
+        "on_success_callback": my_callback_function,
+        "on_failure_callback": my_callback_function
+    }
+)
 ```
 
-This functionality may also be useful when your pipelines have conditional branching, and you want to be notified if a certain path is taken.
+For use cases where an individual task should use a specific callback, the task-level callback parameters can be defined in the task instantiation. Callbacks defined at the individual task level will override callbacks passed in via `default_args`.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="notification-levels"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+def my_callback_function(context):
+    pass
+
+
+@task(
+    on_execute_callback=my_callback_function,
+    on_retry_callback=my_callback_function,
+    on_success_callback=my_callback_function,
+    on_failure_callback=my_callback_function,
+)
+def t1():
+    return "hello"
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+def my_callback_function(context):
+    pass
+
+
+def say_hello():
+    return "hello"
+
+
+t1 = PythonOperator(
+    task_id="t1",
+    python_callable=say_hello,
+    on_execute_callback=my_callback_function,
+    on_retry_callback=my_callback_function,
+    on_success_callback=my_callback_function,
+    on_failure_callback=my_callback_function,
+)
+```
+
+</TabItem>
+</Tabs>
 
 ## Email notifications
 
-Email notifications are a native Airflow feature. The `email_on_failure` and `email_on_retry` parameters can be set to `True` either at the DAG level or task level to send emails when tasks fail or retry. The `email` parameter can be used to specify which email(s) you want to receive the notification. If you want to receive email notifications for all DAG failures and retries, you define default arguments similar to this example:
+Aside from the general purpose `*_callback` parameters, all Airflow operators are able to use the two BaseOperator parameters `email_on_failure` and `email_on_retry` if the parameter `email` has been set and the `SMTP` have been configured for the Airflow environment. 
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="email-notifications"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 ```python
-from datetime import datetime, timedelta
+@task(
+    email=["noreply@astronomer.io", "noreply2@astronomer.io"],
+    email_on_failure=True,
+    email_on_retry=True
+)
+def t1():
+    return "hello"
+```
 
-from airflow import DAG
+</TabItem>
 
+<TabItem value="traditional">
+
+```python
+def say_hello():
+    return "hello"
+
+
+t1 = PythonOperator(
+    task_id="t1",
+    python_callable=say_hello,
+    email=["noreply@astronomer.io", "noreply2@astronomer.io"],
+    email_on_failure=True,
+    email_on_retry=True
+)
+```
+
+</TabItem>
+</Tabs>
+
+The email notification parameters can be given to all tasks in an Airflow DAG by defining them in the `default_args` parameter.
+
+```python
 default_args = {
-    "owner": "airflow",
-    "start_date": datetime(2018, 1, 30),
     "email": ["noreply@astronomer.io"],
     "email_on_failure": True,
     "email_on_retry": True,
-    "retry_delay": timedelta(seconds=300),
-    "retries": 1,
 }
 
-with DAG(
-    "sample_dag",
-    default_args=default_args,
+@dag(
+    start_date=datetime(2023, 4, 25),
     schedule="@daily",
-    catchup=False,
-) as dag:
-    ...
+    catchup=None,
+    default_args=default_args
+)
 ```
 
-To allow Airflow to send emails, you complete the SMTP section of your `airflow.cfg` similar to this example:
+To allow Airflow to send emails, you have to provide values to the SMTP section of your `airflow.cfg` similar to this example:
 
 ```yaml
 [smtp]
@@ -166,9 +227,9 @@ smtp_mail_from = noreply@astronomer.io
 
 You can also set these values using environment variables. In this case, all parameters are preceded by `AIRFLOW__SMTP__`. For example, `smtp_host` can be specified by setting the `AIRFLOW__SMTP__SMTP_HOST` variable. For more on Airflow email configuration, see [Email Configuration](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html). 
 
-If you are using Astro, you use environment variables to set up SMTP because the `airflow.cfg` cannot be directly edited.
+If you are using Astro, use environment variables to set up SMTP because the `airflow.cfg` cannot be directly edited.
 
-### Customize email notifications
+### Custom email notifications
 
 By default, email notifications are sent in a standard format that are defined in the `email_alert()` and `get_email_subject_content()` methods of the `TaskInstance` class. The default email content appears similar to this example:
 
@@ -190,44 +251,150 @@ To see the full method, see the source code [here](https://github.com/apache/air
 
 You can customize this content by setting the `subject_template` and/or `html_content_template` variables in your `airflow.cfg` with the path to your jinja template files for subject and content respectively.
 
-## Slack notifications
+## Notifiers
 
-In the following example, you'll use the [Slack provider](https://registry.astronomer.io/providers/slack) `SlackWebhookOperator` with a Slack Webhook to send messages. This is the method Slack recommends to post messages from apps.
+Airflow 2.6 added the concept of [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize callback functions.
 
- 1. From your Slack workspace, create a Slack app and an incoming Webhook. See [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks). 
- 2. Copy the Slack Webhook URL. You'll use it in your Python function.
- 3. Create an Airflow connection to provide your Slack Webhook to Airflow. Choose an HTTP connection type. Enter [`https://hooks.slack.com/services/`](https://hooks.slack.com/services/) as the Host, and enter the remainder of your Webhook URL from the last step as the Password (formatted as `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`). 
+An Airflow notifier can be created by inheriting from the `BaseNotifier` class and defining the action which should be taken in case the notifier is used in the `.notify()` method.
 
-    ![Slack Connection](/img/guides/slack_webhook_connection.png)
-    
-    In Airflow 2.0 or later, you'll need to install the `apache-airflow-providers-slack` provider package to use the `SlackWebhookOperator`.
+```python
+class MyNotifier(BaseNotifier):
+    """
+    Basic notifier, prints the task_id, state and a message.
+    """
 
- 4. Create a Python function to use as your `on_failure_callback` method. Within the function, define the information you want to send and invoke the `SlackWebhookOperator` to send the message similar to this example:
+    template_fields = ("message",)
 
-    ```python
-    from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
+    def __init__(self, message):
+        self.message = message
 
-    def slack_notification(context):
-        slack_msg = """
-                :red_circle: Task Failed. 
-                *Task*: {task}  
-                *Dag*: {dag} 
-                *Execution Time*: {exec_date}  
-                *Log Url*: {log_url} 
-                """.format(
-            task=context.get("task_instance").task_id,
-            dag=context.get("task_instance").dag_id,
-            ti=context.get("task_instance"),
-            exec_date=context.get("execution_date"),
-            log_url=context.get("task_instance").log_url,
+    def notify(self, context):
+        t_id = context["ti"].task_id
+        t_state = context["ti"].state
+        print(
+            f"Hi from MyNotifier! {t_id} finished as: {t_state} and says {self.message}"
         )
-        failed_alert = SlackWebhookOperator(
-            task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
-        )
-        return failed_alert.execute(context=context)
-    ```
+```
 
- 5. Define your `on_failure_callback` parameter in your DAG either as a `default_arg` for the whole DAG, or for specific tasks. Set it equal to the function you created in the previous step.
+To use the custom notifier in a DAG provide its instantiation to any callback parameter, for example:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="notifiers"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+@task(
+    on_failure_callback=MyNotifier(message="Hello failed!"),
+)
+def t1():
+    return "hello"
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+def say_hello():
+    return "hello"
+
+
+t1 = PythonOperator(
+    task_id="t1",
+    python_callable=say_hello,
+    on_failure_callback=MyNotifier(message="Hello failed!"),
+)
+```
+
+Notifiers are useful to abstract and standardize complex logic used to send a notification from Airflow. 
+
+### Pre-built notifier: Slack
+
+An example of a community provided pre-built notifier is the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/latest/_api/airflow/providers/slack/notifications/slack_notifier/index.html). 
+
+It can be imported from the Slack provider package and used with any `*_callback` function:
+
+<CodeBlock language="python">{slack_notifier_example_dag}</CodeBlock>
+
+The DAG above has one task sending a notification to Slack. It necessitates configuring an [Airflow connection](connections.md) to Slack with the connection ID `slack_conn`.
+
+![Slack notification](/img/docs/slack_notification.png)
+
+:::info
+
+You can find a full list of all notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html).
+
+:::
+
+#### Slack notifications pre-2.6
+
+If you are on an Airflow version older than 2.6 and want to implement Slack notification you can follow this example.
+It uses the [Slack provider](https://registry.astronomer.io/providers/slack) `SlackWebhookOperator` with a Slack Webhook to send messages. This is the method Slack recommends to post messages from apps.
+
+1. From your Slack workspace, create a Slack app and an incoming Webhook. See [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks). 
+2. Copy the Slack Webhook URL. You'll use it in your Python function.
+3. Create an Airflow connection to provide your Slack Webhook to Airflow. Choose an HTTP connection type. Enter [`https://hooks.slack.com/services/`](https://hooks.slack.com/services/) as the Host, and enter the remainder of your Webhook URL from the last step as the Password (formatted as `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`). 
+
+![Slack Connection](/img/guides/slack_webhook_connection.png)
+
+In Airflow 2.0 or later, you'll need to install the `apache-airflow-providers-slack` provider package to use the `SlackWebhookOperator`.
+
+4. Create a Python function to use as your `on_failure_callback` method. Within the function, define the information you want to send and invoke the `SlackWebhookOperator` to send the message similar to this example:
+
+```python
+from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
+
+def slack_notification(context):
+    slack_msg = """
+            :red_circle: Task Failed. 
+            *Task*: {task}  
+            *Dag*: {dag} 
+            *Execution Time*: {exec_date}  
+            *Log Url*: {log_url} 
+            """.format(
+        task=context.get("task_instance").task_id,
+        dag=context.get("task_instance").dag_id,
+        ti=context.get("task_instance"),
+        exec_date=context.get("execution_date"),
+        log_url=context.get("task_instance").log_url,
+    )
+    failed_alert = SlackWebhookOperator(
+        task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
+    )
+    return failed_alert.execute(context=context)
+```
+
+5. Define your `on_failure_callback` parameter in your DAG either as a `default_arg` for the whole DAG, or for specific tasks. Set it equal to the function you created in the previous step.
+
+### Custom notifications
+
+The email notification parameters shown in the previous sections are examples of built-in Airflow alerting mechanisms. These have to be turned on and don't require any additional configuration.
+
+You can define your own notifications to customize how Airflow alerts you about callback events. The most straightforward way of doing this is by defining Python functions and provide them to the `*_callback` parameters. The following example DAG has a custom `on_failure_callback` function set at the DAG level and an `on_success_callback` function for the `success_task`.
+
+<CodeBlock language="python">{callbacks_example_dag}</CodeBlock>
+
+Custom notification functions can also be used to send email notifications. For example, if you want to send emails for successful task runs, you can define an email function in your `on_success_callback`:
+
+```python
+from airflow.utils.email import send_email
+
+def success_email_function(context):
+    dag_run = context.get("dag_run")
+
+    msg = "DAG ran successfully"
+    subject = f"DAG {dag_run} has completed"
+    send_email(to=your_emails, subject=subject, html_content=msg)
+
+```
+
+This functionality may also be useful when your pipelines have conditional branching, and you want to be notified if a certain path is taken.
 
 ## Airflow service-level agreements
 
