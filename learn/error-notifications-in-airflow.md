@@ -121,7 +121,6 @@ def t1():
 ```
 
 </TabItem>
-
 <TabItem value="traditional">
 
 ```python
@@ -171,7 +170,6 @@ def t1():
 ```
 
 </TabItem>
-
 <TabItem value="traditional">
 
 ```python
@@ -297,7 +295,6 @@ def t1():
 ```
 
 </TabItem>
-
 <TabItem value="traditional">
 
 ```python
@@ -311,6 +308,9 @@ t1 = PythonOperator(
     on_failure_callback=MyNotifier(message="Hello failed!"),
 )
 ```
+
+</TabItem>
+</Tabs>
 
 Notifiers are useful to abstract and standardize complex logic used to send a notification from Airflow. 
 
@@ -417,7 +417,6 @@ You can set an SLA for all tasks in your DAG by defining `'sla'` as a default ar
 <CodeBlock language="python">{sla_dag_level_example_taskflow}</CodeBlock>
 
 </TabItem>
-
 <TabItem value="traditional">
 
 <CodeBlock language="python">{sla_dag_level_example_traditional}</CodeBlock>
@@ -444,7 +443,6 @@ SLAs have some unique behaviors that you should consider before you implement th
 <CodeBlock language="python">{sla_task_level_example_taskflow}</CodeBlock>
 
 </TabItem>
-
 <TabItem value="traditional">
 
 <CodeBlock language="python">{sla_task_level_example_traditional}</CodeBlock>
