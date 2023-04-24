@@ -121,7 +121,7 @@ Custom timetables can be registered as part of an Airflow plugin. They must be a
 
 ### Continuous timetable
 
-As of Airflow 2.6 you can run a DAG continuously using a pre-defined timetable. To use the [ContinuousTimetable](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/timetables/simple/index.html#module-airflow.timetables.simple.ContinuousTimetable), set the schedule of your DAG to `"@continuous"` and set `max_active_runs` to 1.
+As of Airflow 2.6, you can run a DAG continuously with a pre-defined timetable. To use the [ContinuousTimetable](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/timetables/simple/index.html#module-airflow.timetables.simple.ContinuousTimetable), set the schedule of your DAG to `"@continuous"` and set `max_active_runs` to 1.
 
 ```python
 @dag(
@@ -132,11 +132,11 @@ As of Airflow 2.6 you can run a DAG continuously using a pre-defined timetable. 
 )
 ```
 
-This DAG will run continuously by scheduling a new run as soon as the previous run has completed, regardless of whether the previous run succeeded or failed. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
+This schedule will create one continuous DAG run, with a new run starting as soon as the previous run has completed, regardless of whether the previous run succeeded or failed. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
 
 :::caution
 
-Be aware that Airflow is designed to handle orchestration of data pipelines in batches and this feature is not intended to be used for streaming or low-latency processes. If you need to run pipelines more frequently than every minute, consider using Airflow in combination with tools designed specifically for that purpose like for example [Apache Kafka](airflow-kafka.md).
+Airflow is designed to handle orchestration of data pipelines in batches, and this feature is not intended for streaming or low-latency processes. If you need to run pipelines more frequently than every minute, consider using Airflow in combination with tools designed specifically for that purpose like [Apache Kafka](airflow-kafka.md).
 
 :::
 
