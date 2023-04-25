@@ -22,7 +22,6 @@ The Astronomer product you're using determines the behavior and format of comman
 - [`astro dev start`](cli/astro-dev-start.md)
 - [`astro dev restart`](cli/astro-dev-restart.md)
 - [`astro deploy`](cli/astro-deploy.md)
-- [`astro run`](cli/astro-run.md)
 
 ## Global Options
 
