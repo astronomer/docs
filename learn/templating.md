@@ -177,7 +177,7 @@ BashOperator(
 
 :::info
 
-You can find a list of pre-injected functions in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#macros). Additionally to the listed functions you can load information in JSON format using `"{{ macros.json.loads(...) }}"` and information in YAML format using `"{{ macros.yaml.safe_load(...) }}"`.
+You can find a list of pre-injected functions in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#macros). You can also load information in JSON format using `"{{ macros.json.loads(...) }}"` and information in YAML format using `"{{ macros.yaml.safe_load(...) }}"`.
 
 :::
 
