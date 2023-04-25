@@ -27,7 +27,7 @@ Logs and messages might also be associated with one of the following _log levels
 
 ## View logs in the Cloud UI
 
-You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. 
+You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. 
 
 1. In the Cloud UI, select a Workspace and then a Deployment.
 
