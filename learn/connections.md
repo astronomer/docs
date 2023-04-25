@@ -72,7 +72,7 @@ You don't have to specify every field for most connections. However, the values 
 
 Any parameters that don't have specific fields in the connection form can be defined in the **Extra** field as a JSON dictionary. For example, you can add the `sslmode` or a client `sslkey` in the **Extra** field of your PostgreSQL connection.
 
-Starting in Airflow 2.2, you can test some connection types from the Airflow UI with the **Test** button. After running a connection test, a message appears on the top of the screen showing either a success confirmation or an error message.
+Starting in Airflow 2.2, you can test some connection types from the Airflow UI with the **Test** button. After running a connection test, a message appears on the top of the screen showing either a success confirmation or an error message. When using the **Test** button, the connection to your external tool is made from the webserver component of Airflow. See also [Testing connections in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections).
 
 ## Define connections with environment variables
 
@@ -121,6 +121,14 @@ To store a connection in JSON as an Astro environment variable, remove all line 
 ## Masking sensitive information
 
 Connections often contain sensitive credentials. By default, Airflow hides the `password` field in the UI and in the Airflow logs. If `AIRFLOW__CORE__HIDE_SENSITIVE_VAR_CONN_FIELDS` is set to `True`, values from the connection's `Extra` field are also hidden if their keys contain any of the words listed in `AIRFLOW__CORE__SENSITIVE_VAR_CONN_NAMES`. You can find more information on masking, including a list of the default values in this environment variable, in the Airflow documentation on [Masking sensitive data](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/mask-sensitive-values.html).
+
+## Testing connections
+
+Airflow offers several ways to test your connections by calling the `test_connection` method of the [Airflow hook](what-is-a-hook.md) associated with your connection. Note that not all provider hooks have this method defined in which case you will not be able to test your connection through Airflow.
+
+- UI: You can test many types of Airflow connections directly from the UI by using the **Test** button. See also [Defining connections in the Airflow UI](#defining-connections-in-the-airflow-ui).
+- REST API: The Airflow REST API offers the [`connections/test` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/test_connection) to test connections. 
+- CLI: As of Airflow 2.6 you can test a connection from the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using the command `astro dev run connections test <conn_id>`.
 
 ## Example: Configuring the SnowflakeToSlackOperator
 
