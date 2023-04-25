@@ -25,7 +25,33 @@ Logs and messages might also be associated with one of the following _log levels
 - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
 - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent but can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
 
-## View Airflow task logs
+## View logs in the Cloud UI
+
+You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. 
+
+1. In the Cloud UI, select a Workspace and then a Deployment.
+
+2. Click the **Logs** tab.
+
+The maximum number of lines returned is 10,000, with 25 results displayed per page. If there are no logs available for a given Deployment, the following message appears:
+
+```text
+No matching events have been recorded in the past 24 hours.
+```
+
+Typically, this indicates that the Deployment you selected does not currently have any DAGs running.
+
+### Filter options
+
+You can use the following options to specify the types of logs or messages that you want to view. 
+
+- **String search**: Enter a string, keyword, or phrase to find in your logs. You can also search with suffix wildcards by adding a `*` to your search query. For example, `acti*` returns results that include `action` and `acting`. The string search does not include fuzzy matching, so misspelled strings or incomplete strings without a wildcard, `*`, return zero results.
+
+- **Time range**: Filter the logs displayed based on time. 
+
+- **Log type**: Filter based on whether the log message is from a scheduler, worker, webserver, or trigger. 
+
+## View Airflow task logs on Astro
 
 Airflow task logs for both local Airflow environments and Deployments on Astro are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
 
@@ -40,31 +66,6 @@ On clusters hosted in your own cloud, task logs are stored indefinitely. On clus
 5. Click **Instance Details**.
 6. Click **Log**.
 
-## View logs in the Cloud UI
-
-You can access scheduler, triggerer, and worker logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. 
-
-1. In the Cloud UI, select a Workspace and then a Deployment.
-
-2. Click the **Logs** tab.
-
-    The maximum number of lines returned is 10,000, with 25 results displayed per page. If there are no logs available for a given Deployment, the following message appears:
-
-    ```text
-    No matching events have been recorded in the past 24 hours.
-    ```
-
-    Typically, this indicates that the Deployment you selected does not currently have any DAGs running.
-
-### Filter options
-
-You can use the following options to specify the types of logs or messages that you want to view. 
-
-- **String search**: Enter a string, keyword, or phrase to find in your logs. You can also search with suffix wildcards by adding a `*` to your search query. For example, `acti*` returns results that include `action` and `acting`. The string search does not include fuzzy matching, so misspelled strings or incomplete strings without a wildcard, `*`, return zero results.
-
-- **Time range**: Filter the logs displayed based on time. 
-
-- **Log type**: Filter based on whether the log message is from a scheduler, worker, webserver, or trigger. 
 
 ## Access Airflow component logs locally
 
