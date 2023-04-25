@@ -15,10 +15,15 @@ Release date:
 
 ### New cron job to clean Deployment task data
 
+You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of storage Astronomer Software uses by archiving data that you don't need to access on a regular basis. See [docs link] for configuration steps.
+
 ### Programmatically create and update Deployments with the Houston API
+
+You can now programmatically create or update Deployments using the Houston API `upsertDeployment` mutation. Unlike `createDeployment`, the `upsertDeployment` mutation includes keys for configuring Deployment resources such as environment variables. See [Doc link].
 
 ### Modify AU size in development environments
 
+You can now change the amount of CPU and memory that an AU represents in development environments, allowing you to more accurately provision resources based on the requirements for your development Deployments. See [doc link] for configuration steps.
   
 ### Additional improvements
 
