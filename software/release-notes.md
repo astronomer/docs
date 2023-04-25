@@ -27,6 +27,7 @@ Release date:
 - If you configured [git-sync deploys](deploy-git-sync.md) for a Deployment, you can now [view error logs](deployment-logs.md) emitted from the git-sync Kubernetes Pod in the Software UI.
 - The indexing frequency for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) has been reduced from daily to monthly.
 - You can now configure custom environment variables for ElasticSearch logging using the `astronomer.customLogging.extraEnv` value in your `config.yaml` file.
+- The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` key has been replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled`, and the feature flag now optimizes the performance of additional Software UI pages.
 
 ### Bug fixes
 
