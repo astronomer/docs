@@ -383,9 +383,9 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 16. Click **Save**.
 
-17. Click the toggle in the top right to enable the application.
+17. (Optional) If you configured your application on a PingFederate server, enable the **Include the certificate in the signature `<KeyInfo>` element** setting for your server. See [Ping documentation](https://docs.pingidentity.com/r/en-us/pingfederate-110/help_sp_credentialstasklet_signingcertstate).
     
-18. (Optional) If you configured your application on a PingFederate server, enable the **Include the certificate in the signature `<KeyInfo>` element** setting for your server. See [Ping documentation](https://docs.pingidentity.com/r/en-us/pingfederate-110/help_sp_credentialstasklet_signingcertstate).
+18. Click the toggle in the top right to enable the application.
     
 19. Assign yourself to Astro from Ping Identity. See [Editing a user](https://docs.pingidentity.com/r/en-us/pingone/p1_t_edituser?section=gnn1564020489010).
     
