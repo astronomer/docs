@@ -180,7 +180,7 @@ The following query creates a new Deployment in a custom namespace `test-new-dep
 ```graphql
 mutation upsertDeployment(
   $workspaceUuid: Uuid,
-	$deploymentUuid: Uuid,
+  $deploymentUuid: Uuid,
   $label: String,
   $description: String,
   $releaseName: String,
