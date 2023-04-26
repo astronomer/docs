@@ -41,7 +41,7 @@ When using Airflow, you have different options to configure notifications geared
 - **Airflow notifiers**: Notifiers, which were added in Airflow 2.6, offer a way to modularize callback functions into custom classes to easily be reused and standardized. Provider packages can ship pre-built notifiers like the SlackNotifier. Notifiers can be provided to all callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing the action to be taken on task failures across several Airflow instances.
 - **Airflow service-level agreements (SLAs)**: SLAs in Airflow define the expected time it takes from the DAG execution until a specific task has been completed. If an SLA is missed the callable or notifier provided to the `sla_miss_callback` parameter is executed and if the SMTP connection is configured an email will be sent as well. Since an SLA miss does not stop a task from running, this type of notification is used when intervention by a data professional is needed if a specific task is taking longer than expected.
 
-Most notifications can be set at the level of both a DAG and a task, like the `on_failure_callback`, while others can only be set at the task or DAG level. Setting a parameter within a DAGs `default_args` dictionary will apply it to all tasks in the DAG.
+Most notifications can be set at the level of both a DAG and a task, like the `on_failure_callback`, while others can only be set at the task or DAG level. Setting a parameter within a DAGs `default_args` dictionary will apply it to all tasks in the DAG, you can see examples in the [set DAG and task level callbacks](#set-dag-and-task-level-callbacks) section.
 
 ## Email notifications
 
