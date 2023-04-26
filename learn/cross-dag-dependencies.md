@@ -137,7 +137,7 @@ If your dependent DAG requires a config input or a specific execution date, you 
 
 :::info
 
-In Airflow 2.6+ you can turn the TriggerDagRunOperator into a [deferrable operator](deferrable-operators.md) by setting its `deferrable` parameter to `True`. Deferrable operators increase Airflow's scalability and can result in cost savings.
+In Airflow 2.6+, you can turn the TriggerDagRunOperator into a [deferrable operator](deferrable-operators.md) by setting its `deferrable` parameter to `True`. Deferrable operators increase Airflow's scalability and can reduce cost.
 
 :::
 

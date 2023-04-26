@@ -72,7 +72,7 @@ You don't have to specify every field for most connections. However, the values 
 
 Any parameters that don't have specific fields in the connection form can be defined in the **Extra** field as a JSON dictionary. For example, you can add the `sslmode` or a client `sslkey` in the **Extra** field of your PostgreSQL connection.
 
-Starting in Airflow 2.2, you can test some connection types from the Airflow UI with the **Test** button. After running a connection test, a message appears on the top of the screen showing either a success confirmation or an error message. When using the **Test** button, the connection to your external tool is made from the webserver component of Airflow. See also [Testing connections in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections).
+Starting in Airflow 2.2, you can test some connection types from the Airflow UI with the **Test** button. After running a connection test, a message shows either a success confirmation or an error message. When using the **Test** button, the connection to your external tool is made from the webserver component of Airflow. See also [Testing connections in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections).
 
 ## Define connections with environment variables
 
@@ -128,7 +128,7 @@ Airflow offers several ways to test your connections by calling the `test_connec
 
 - UI: You can test many types of Airflow connections directly from the UI by using the **Test** button. See also [Defining connections in the Airflow UI](#defining-connections-in-the-airflow-ui).
 - REST API: The Airflow REST API offers the [`connections/test` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/test_connection) to test connections. 
-- CLI: As of Airflow 2.6 you can test a connection from the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using the command `airflow connections test <conn_id>`. If you are using the Astro CLI you can access this command by running `astro dev run connections test <conn_id>`.
+- CLI: As of Airflow 2.6, you can test a connection from the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using the command `airflow connections test <conn_id>`. If you use the Astro CLI, you can access this command by running `astro dev run connections test <conn_id>`.
 
 ## Example: Configuring the SnowflakeToSlackOperator
 
