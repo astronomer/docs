@@ -182,13 +182,7 @@ Additionally there are two task parameters that take a callable which is execute
 
 The `sla_miss_callback` which is invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements) can only be defined at the DAG level to be used for each task in a DAG which has an SLA defined.
 
-Any Python callable can be provided to the `*_callback` parameters. Airflow 2.6 added the functionality of using [notifiers](#) and the option to provide several callback items to the same callback parameter in a list.
-
-:::info
-
-The number of retries a task will be given can be set using the `retries` parameter. The time spent between retries is defined by the `retry_delay` (default: `timedelta(seconds=300)`). To progressively increases the wait time between retries until `max_retry_delay` (default: `None`) is reached, set `retry_exponential_backoff` to `True`.
-
-:::
+Any Python callable can be provided to the `*_callback` parameters. Airflow 2.6 added the functionality of using [notifiers](#notifiers) and the option to provide several callback items to the same callback parameter in a list.
 
 ### Set DAG and task-level callbacks
 
