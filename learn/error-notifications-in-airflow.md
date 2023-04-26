@@ -327,7 +327,9 @@ t1 = PythonOperator(
 
 ## Notifiers
 
-Airflow 2.6 added the concept of [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize callback functions.
+Airflow 2.6 added the concept of [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers get passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
+
+Notifiers are defined in provider packages or imported from the include folder and can be used across any of your DAGs. This feature has the advantage that community members can define and share functionality previously used in callback functions as Airflow modules, creating pre-built callbacks to send notifications to other data tools.
 
 An Airflow notifier can be created by inheriting from the `BaseNotifier` class and defining the action which should be taken in case the notifier is used in the `.notify()` method.
 
