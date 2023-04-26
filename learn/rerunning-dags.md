@@ -126,7 +126,9 @@ The time spent between retries is defined by the `retry_delay` parameter (defaul
 
 To progressively increases the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
 
-It is a common practice to set the number of retries for all tasks in a DAG by using `default_args` and modify it for specifc tasks as needed. 
+It is a common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specifc tasks as needed by providing a different value to the task level parameter. 
+
+The DAG below contains 4 tasks that will always fail. Each of the tasks uses a different retry parameter configuration.
 
 <CodeBlock language="python">{retry_example}</CodeBlock>
 
