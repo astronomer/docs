@@ -283,7 +283,6 @@ mutation upsertDeployment(
   ],
   "releaseName": "",
   "namespace": "test-new-dep",
-  "type": "airflow",
   "executor": "CeleryExecutor",
   "workers": {},
   "webserver": {},
