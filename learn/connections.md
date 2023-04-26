@@ -124,7 +124,7 @@ Connections often contain sensitive credentials. By default, Airflow hides the `
 
 ## Testing connections
 
-Airflow offers several ways to test your connections by calling the `test_connection` method of the [Airflow hook](what-is-a-hook.md) associated with your connection. Note that not all provider hooks have this method defined in which case you will not be able to test your connection through Airflow.
+Airflow offers several ways to test your connections by calling the `test_connection` method of the [Airflow hook](what-is-a-hook.md) associated with your connection. Provider hooks that do not have this method defined cannot be tested using these methods.
 
 - UI: You can test many types of Airflow connections directly from the UI by using the **Test** button. See also [Defining connections in the Airflow UI](#defining-connections-in-the-airflow-ui).
 - REST API: The Airflow REST API offers the [`connections/test` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/test_connection) to test connections. 
