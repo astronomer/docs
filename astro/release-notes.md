@@ -21,6 +21,14 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
 
+## April 26, 2023
+
+### Improved log viewing in the Cloud UI
+
+The Deployment **Logs** page in the Cloud UI now shows logs for your Deployment's workers, schedulers, triggerers, and webserver. Additionally, you can now view up to the last 10,000 logs emitted by your Deployment from the Cloud UI.
+
+To make it easier to parse this larger log volume, the **Logs** page now lets you filter by log type, date, and keyword. See [View logs](view-logs.md) for more information.
+
 ## April 18, 2023
 
 ### Self-service configuration for single sign-on (SSO) connections

@@ -66,7 +66,6 @@ On clusters hosted in your own cloud, task logs are stored indefinitely. On clus
 5. Click **Instance Details**.
 6. Click **Log**.
 
-
 ## Access Airflow component logs locally
 
 To show logs for your Airflow scheduler, webserver, or triggerer locally, run the following Astro CLI command:
