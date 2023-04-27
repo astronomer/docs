@@ -81,7 +81,7 @@ The second limitation in using the standard XCom backend is that only certain ty
 
 ### Custom XCom backends
 
-Using a [custom XCom backend](custom-xcom-backends-tutorial.md) means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. This is a concept in its own right and you can learn more by reading [Custom XCom Backends](custom-xcom-backends-tutorial.md).
+Using a [custom XCom backend](custom-xcom-backends-tutorial.md) means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. To learn how to implement a custom XCom backend follow this [step-by-step tutorial](custom-xcom-backends-tutorial.md).
 
 ### Example DAG using XComs
 
