@@ -696,7 +696,7 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 A powerful feature of custom XCom backends is the possibility to create custom serialization and deserialization methods. This is particularly useful for handling objects that cannot be JSON-serialized. In this step, you will create a new custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file. Being serialized as CSV, the content of the XCom becomes accessible to CSV query tools like [csvq](https://mithrandie.github.io/csvq/).
 
-Note that as of Airflow 2.6, Pandas dataframes can be serialized by XCom using `pyarrow`. This step is still useful if you are using an older version of Airflow, and to highlight the general process for creating a custom serialization method.
+Note that as of Airflow 2.6, Pandas dataframes can be serialized by the standard XCom backend using `pyarrow`. This step is still useful if you are using an older version of Airflow, and to highlight the general process for creating a custom serialization method.
 
 :::info
 
