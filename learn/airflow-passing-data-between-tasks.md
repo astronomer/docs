@@ -77,7 +77,7 @@ When using the standard XCom backend, the size-limit for an XCom is determined b
 
 You can see that these limits aren't very big. If you think your data passed via XCom might exceed the size of your metadata database, either use a custom XCom backend or [intermediary data storage](#intermediary-data-storage).
 
-The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as serialization of Pandas dataframes in version 2.6+, if you need to serialize data of additional types you can do so by using a [custom XCom backend](custom-xcom-backends-tutorial.md).
+The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as serialization of Pandas dataframes in version 2.6+, if you need to serialize other data types you can do so by using a [custom XCom backend](custom-xcom-backends-tutorial.md).
 
 ### Custom XCom backends
 
