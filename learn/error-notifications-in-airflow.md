@@ -38,7 +38,7 @@ When using Airflow, you have different options to configure notifications geared
 
 - **Email notifications**: Every Airflow operator derived from the BaseOperator has parameters dedicated to configure email alerts in case of a task failure or retry. Email alerts are often set on tasks in production pipelines where task failures or retries need immediate attention by a data professional. 
 - **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or Airflow notifier to these parameters to be executed in different events like success or failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions specific to a task or DAG failure or success. 
-- **Airflow notifiers**: Notifiers, which were added in Airflow 2.6, offer a way to modularize callback functions into custom classes to easily be reused and standardized. Provider packages can ship pre-built notifiers like the SlackNotifier. Notifiers can be provided to all callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing the action to be taken on task failures across several Airflow instances.
+- **Airflow notifiers**: Notifiers, which were added in Airflow 2.6, offer a way to modularize callback functions into custom classes to easily be reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://registry.astronomer.io/providers/apache-airflow-providers-slack/versions/7.2.0/modules/SlackNotifier). Notifiers can be provided to all callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing the action to be taken on task failures across several Airflow instances.
 - **Airflow service-level agreements (SLAs)**: SLAs in Airflow define the expected time it takes from the DAG execution until a specific task has been completed. If an SLA is missed, the callable or notifier provided to the `sla_miss_callback` parameter is executed. If an SMTP connection is configured in that Airflow environment, an email will be sent as well. Since an SLA miss does not stop a task from running, this type of notification is used when intervention is needed if a specific task is taking longer than expected.
 
 Most notifications can be set at the level of both a DAG and a task. Setting a parameter within a DAG's `default_args` dictionary will apply it to all tasks in the DAG. You can see examples of this in the [set DAG and task level callbacks](#set-dag-and-task-level-callbacks) section.
@@ -123,7 +123,7 @@ smtp_mail_from = noreply@astronomer.io
 
 You can also set these values using environment variables. In this case, all parameters are preceded by `AIRFLOW__SMTP__`. For example, `smtp_host` can be specified by setting the `AIRFLOW__SMTP__SMTP_HOST` variable. For more on Airflow email configuration, see [Email Configuration](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html). 
 
-If you are using Astro, use environment variables to set up SMTP because the `airflow.cfg` cannot be directly edited.
+If you are using Astro, [use environment variables](https://docs.astronomer.io/astro/environment-variables) to set up SMTP because the `airflow.cfg` cannot be directly edited.
 
 ### Custom email notifications
 
@@ -170,23 +170,19 @@ def success_email_function(context):
 
 ## Airflow callbacks 
 
-In Airflow you can define actions to be taken after successful and failed runs using the following parameters:
+In Airflow you can define actions to be taken due to different DAG or task states using `*_callback` parameters:
 
 - `on_success_callback`: Invoked when a task or DAG succeeds.
 - `on_failure_callback`: Invoked when a task or DAG fails.
-
-Additionally there are two task parameters that take a callable which is executed when a task is in a certain state:
-
-- `on_execute_callback`: Invoked right before a task begins executing.
-- `on_retry_callback`: Invoked when a task is retried. 
-
-The `sla_miss_callback` which is invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements) can only be defined at the DAG level to be used for each task in a DAG which has an SLA defined.
+- `on_execute_callback`: Invoked right before a task begins executing. This callback only exists at the task level.
+- `on_retry_callback`: Invoked when a task is retried. This callback only exists at the task level.
+- `sla_miss_callback`: Invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements). This callback can only be defined at the DAG level to be used for each task in a DAG which has an SLA defined.
 
 Any Python callable can be provided to the `*_callback` parameters. Airflow 2.6 added the functionality of using [notifiers](#notifiers) and the option to provide several callback items to the same callback parameter in a list.
 
-### Set DAG and task-level callbacks
+### Set DAG and task level callbacks
 
-To define a notification at the DAG level, you can set the `*_callback` parameters in your DAG instantiation.
+To define a notification at the DAG level, you can set the `*_callback` parameters in your DAG instantiation. DAG level notifications will trigger callback functions based on the state of the entire DAG run.
 
 ```python
 def my_success_callback_function(context):
@@ -211,7 +207,7 @@ def my_sla_callback_function(context):
 )
 ```
 
-To apply a task-level callback to each task in your DAG, you can pass the callback function to the `default_args` parameter. Items listed in the dictionary provided to the `default_args` parameter will be set for each task in the DAG.
+To apply a task level callback to each task in your DAG, you can pass the callback function to the `default_args` parameter. Items listed in the dictionary provided to the `default_args` parameter will be set for each task in the DAG.
 
 ```python
 def my_execute_callback_function(context):
@@ -243,7 +239,7 @@ def my_failure_callback_function(context):
 )
 ```
 
-For use cases where an individual task should use a specific callback, the task-level callback parameters can be defined in the task instantiation. Callbacks defined at the individual task level will override callbacks passed in via `default_args`.
+For use cases where an individual task should use a specific callback, the task level callback parameters can be defined in the task instantiation. Callbacks defined at the individual task level will override callbacks passed in via `default_args`.
 
 <Tabs
     defaultValue="taskflow"
@@ -514,6 +510,21 @@ def slack_notification(context):
         task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
     )
     return failed_alert.execute(context=context)
+
+@dag(
+    start_date=datetime(2023, 1, 1),
+    schedule="@daily",
+    catchup=False
+)
+def post_to_slack():
+    @task(
+        on_success_callback=slack_notification
+    )
+    def post_to_slack():
+        return 10
+
+post_to_slack()
+
 ```
 
 5. Define your `on_failure_callback` parameter in your DAG either as a `default_arg` for the whole DAG, or for specific tasks. Set it equal to the function you created in the previous step.
