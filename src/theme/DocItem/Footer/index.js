@@ -4,6 +4,7 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
 export default function FooterWrapper(props) {
   return (
     <>
+      <NewsletterForm />
       <Footer {...props} />
     </>
   );

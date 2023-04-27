@@ -8,9 +8,6 @@ export default function FooterLayout({ style, links, logo, copyright }) {
         'footer--dark': style === 'dark',
       })}>
       <div className="container container-fluid">
-        <NewsletterForm />
-      </div>
-      <div className="container container-fluid">
         {links}
         {(logo || copyright) && (
           <div className="footer__bottom text--center">
