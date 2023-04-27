@@ -135,12 +135,6 @@ In the following image, you can see that the `trigger_dependent_dag` task in the
 
 If your dependent DAG requires a config input or a specific execution date, you can specify them in the operator using the `conf` and `execution_date` params respectively.
 
-:::info
-
-In Airflow 2.6+, you can turn the TriggerDagRunOperator into a [deferrable operator](deferrable-operators.md) by setting its `deferrable` parameter to `True`.
-
-:::
-
 ### ExternalTaskSensor
 
 To create cross-DAG dependencies from a downstream DAG, consider using one or more [ExternalTaskSensors](https://registry.astronomer.io/providers/apache-airflow/modules/externaltasksensor). The downstream DAG will pause until a task is completed in the upstream DAG before resuming.
