@@ -5,6 +5,9 @@ description: "How to catchup, backfill, and clear task instances in Airflow."
 id: rerunning-dags
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import retry_example from '!!raw-loader!../code-samples/dags/rerunning-dags/retry_example.py';
+
 Running DAGs whenever you want is one of the most powerful and flexible features of Airflow. Scheduling DAGs can ensure future DAG runs happen at the right time, but you also have options for running DAGs in the past. For example, you might need to run a DAG in the past if:
 
 - You need to rerun a failed task for one or multiple DAG runs.
@@ -114,6 +117,21 @@ Catchup is a powerful feature, but it should be used with caution. For example, 
 
 If you want to deploy your DAG with catchup enabled but there are some tasks you don't want to run during the catchup, you can use the [`LatestOnlyOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/latestonlyoperator) in your DAG. This operator only runs during the DAG's most recent scheduled interval. In every other DAG run it is ignored, along with any tasks downstream of it.
 
+## Retry tasks
+
+In Airflow you can configure individual tasks to retry automatically in case of a failure. The number of times a task will retry again before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or via the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. By default tasks will not retry. 
+The setting in the Airflow config can be overwritten on the task level with the `retries` parameter.
+
+The time spent between retries is defined by the `retry_delay` parameter (default: `timedelta(seconds=300)`). As of Airflow 2.6, a maximum value for the retry delay can be set in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which by default is set at 24 hours, or for individual tasks with the parameter `max_retry_delay`.
+
+To progressively increases the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
+
+It is a common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed by providing a different value to the task-level parameter. 
+
+The DAG below contains 4 tasks that will always fail. Each of the tasks uses a different retry parameter configuration.
+
+<CodeBlock language="python">{retry_example}</CodeBlock>
+
 ## Backfill
 
 Backfilling lets you use a DAG to process data prior to the DAG's start date. [Backfilling](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#backfill) is the concept of running a DAG for a specified historical period. Unlike catchup, which triggers missed DAG runs from the DAG's `start_date` through the current data interval, backfill periods can be specified explicitly and can include periods prior to the DAG's `start_date`. 
@@ -138,3 +156,6 @@ When using backfill keep the following considerations in mind:
 Alternatively, you can deploy a copy of the DAG with a new name and a start date that is the date you want to backfill to. Airflow will consider this a separate DAG so you won't see all the DAG runs and task instances in the same place, but it would accomplish running the DAG for data in the desired time period. If you have a small number of DAG runs to backfill, you can trigger them manually from the Airflow UI and choose the desired logical date as shown in the following image:
 
 ![Trigger Execution Date](/img/guides/trigger_execution_date.png)
+
+
+
