@@ -13,34 +13,30 @@ description: Astronomer Software release notes.
 
 Release date: 
 
-### New cron job to clean Deployment task data
-
-You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of storage Astronomer Software uses by archiving data that you don't need to access on a regular basis. See [docs link] for configuration steps.
 
 ### Programmatically create and update Deployments with the Houston API
 
 You can now programmatically create or update Deployments using the Houston API `upsertDeployment` mutation. Unlike `createDeployment`, the `upsertDeployment` mutation includes keys for configuring Deployment resources such as environment variables. See [Doc link].
 
-### Modify AU size in development environments
+### Reduce resource requests for Airflow components in development environments
 
-You can now change the amount of CPU and memory that an AU represents in development environments, allowing you to more accurately provision resources based on the requirements for your development Deployments. See [doc link] for configuration steps.
+You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [doc link] for configuration steps.
   
 ### Additional improvements
 
 - Upgraded to Postgres 15.
 - Workspaces are now required to have unique names. If you have existing Workspaces with identical names, upon upgrade the duplicate names will be appended with an underscore and a number.
 - If you configured [git-sync deploys](deploy-git-sync.md) for a Deployment, you can now [view error logs](deployment-logs.md) emitted from the git-sync Kubernetes Pod in the Software UI.
-- The indexing frequency for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) has been reduced from daily to monthly.
-- You can now configure custom environment variables for ElasticSearch logging using the `astronomer.customLogging.extraEnv` value in your `config.yaml` file.
-- The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` key has been replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled`, and the feature flag now optimizes the performance of additional Software UI pages.
+- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `global.loggingSidecar. indexPattern` in your `config.yaml` file.
+- You can now configure custom environment variables for ElasticSearch-based custom logging using the `astronomer.customLogging.extraEnv` value in your `config.yaml` file.
+- The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` key has been replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled`  for improved performance across additional Software UI views.
 
 ### Bug fixes
 
-- Fixed an issue where Deployment statuses did not appear in the Software UI sidebar.
 - Fixed an issue in the Software UI where you could not view Deployment details for a Deployment that included "team" in its name.
 - Fixed an issue where a service account with Workspace Editor permissions could update Deployments. 
-- Fixed an issue where statsd was using more memory than expected.
-- Fixed an issue  in the Software UI where a text search could return multiple entries for a single Deployment.
+- Fixed an issue where Prometheus was using more memory than expected due to a misconfiguration of statsd.
+Fixed an issue in the Software UI where a text search returned duplicate entries for a single Deployment name.
 - Fixed an issue where authentication tokens were visible in Nginx logs produced by the Software UI.
 - Fixed the following vulnerabilities:
 
