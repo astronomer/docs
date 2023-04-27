@@ -36,7 +36,7 @@ with DAG(
         task_id="trigger_dependent_dag",
         trigger_dag_id="dependent_dag",
         wait_for_completion=True,
-        deferrable=True  # Note that this parameter only exists in Airflow 2.6+
+        deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
     )
 
     end_task = PythonOperator(
