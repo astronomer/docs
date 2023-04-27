@@ -223,7 +223,7 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
 
 #### Renamed feature flag in Helm configuration
 
-The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` key has been replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled`, and the feature flag now optimizes the performance of additional Software UI pages.
+The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` flag has been deprecated and replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled` for improved performance across additional Software UI views.
 
 If you set `sysAdminScalabilityImprovementsEnabled` in your `config.yaml` file, replace it with `performanceOptimizationModeEnabled` before upgrading. If you don't replace the key, the upgrade will fail.
 
