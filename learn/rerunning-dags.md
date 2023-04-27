@@ -8,7 +8,7 @@ id: rerunning-dags
 import CodeBlock from '@theme/CodeBlock';
 import retry_example from '!!raw-loader!../code-samples/dags/rerunning-dags/retry_example.py';
 
-Airflow DAGs can be set to run using a wide variety of [scheduling](scheduling-in-airflow.md) options. There are cases in which you might want a task to run again, or rerun whole DAGs for past logical dates. For example if:
+Airflow DAGs can be set to run using a wide variety of [scheduling](scheduling-in-airflow.md) options. There are some uses cases in which you want tasks or whole DAGs to run outside of their regular schedule, for example if:
 
 - You want one or more tasks to automatically try running again in case they fail.
 - You need to manually rerun a failed task for one or multiple DAG runs.
