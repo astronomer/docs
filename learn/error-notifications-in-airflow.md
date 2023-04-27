@@ -176,9 +176,9 @@ In Airflow you can define actions to be taken due to different DAG or task state
 - `on_failure_callback`: Invoked when a task or DAG fails.
 - `on_execute_callback`: Invoked right before a task begins executing. This callback only exists at the task level.
 - `on_retry_callback`: Invoked when a task is retried. This callback only exists at the task level.
-- `sla_miss_callback`: Invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements). This callback can only be defined at the DAG level to be used for each task in a DAG which has an SLA defined.
+- `sla_miss_callback`: Invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements). This callback is defined at the DAG level for DAGs with defined SLAs and will be applied to every task.
 
-Any Python callable can be provided to the `*_callback` parameters. Airflow 2.6 added the functionality of using [notifiers](#notifiers) and the option to provide several callback items to the same callback parameter in a list.
+You can provide any Python callable to the `*_callback` parameters. As of Airflow 2.6, you can also use [notifiers](#notifiers) for your callbacks, and you can provide several callback items to the same callback parameter in a list.
 
 ### Set DAG and task level callbacks
 
