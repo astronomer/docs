@@ -67,19 +67,21 @@ You can view your XComs in the Airflow UI by going to **Admin** > **XComs**. You
 
 XComs should be used to pass small amounts of data between tasks. For example, task metadata, dates, model accuracy, or single value query results are all ideal data to use with XCom.
 
-While there is nothing stopping you from passing small data sets with XCom, be very careful when doing so. This is not what XCom was designed for, and using it to pass data like pandas dataframes can degrade the performance of your DAGs and take up storage in the metadata database.
+While there is nothing stopping you from passing larger amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](custom-xcom-backends-tutorial.md) while paying close attention to appropriately [scaling your Airflow resources](airflow-scaling-workers.md).
 
-XCom cannot be used for passing large data sets between tasks. The limit for the size of the XCom is determined by which metadata database you are using:
+When using the standard XCom backend, the size-limit for an XCom is determined by the metadata database you are using. Common sizes are: 
 
 - Postgres: 1 Gb
 - SQLite: 2 Gb
 - MySQL: 64 Kb
 
-You can see that these limits aren't very big. And even if you think your data might meet the maximum allowable limit, don't use XComs. Instead, use intermediary data storage, which is more appropriate for larger amounts of data.  
+You can see that these limits aren't very big. If you think your data passed via XCom might exceed the size of your metadata database, either use a custom XCom backend or [intermediary data storage](#intermediary-data-storage).
+
+The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as serialization of Pandas dataframes in version 2.6+, if you need to serialize data of additional types you can do so by using a [custom XCom backend](custom-xcom-backends-tutorial.md).
 
 ### Custom XCom backends
 
-[Custom XCom Backends](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html#custom-xcom-backends) are a new feature available in Airflow 2.0 and greater. Using an XCom backend means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. This is a concept in its own right and you can learn more by reading [Custom XCom Backends](custom-xcom-backends-tutorial.md).
+Using a [custom XCom backend](custom-xcom-backends-tutorial.md) means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. This is a concept in its own right and you can learn more by reading [Custom XCom Backends](custom-xcom-backends-tutorial.md).
 
 ### Example DAG using XComs
 
