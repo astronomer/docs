@@ -122,13 +122,13 @@ To store a connection in JSON as an Astro environment variable, remove all line 
 
 Connections often contain sensitive credentials. By default, Airflow hides the `password` field in the UI and in the Airflow logs. If `AIRFLOW__CORE__HIDE_SENSITIVE_VAR_CONN_FIELDS` is set to `True`, values from the connection's `Extra` field are also hidden if their keys contain any of the words listed in `AIRFLOW__CORE__SENSITIVE_VAR_CONN_NAMES`. You can find more information on masking, including a list of the default values in this environment variable, in the Airflow documentation on [Masking sensitive data](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/mask-sensitive-values.html).
 
-## Testing connections
+## Test a connection
 
 Airflow offers several ways to test your connections by calling the `test_connection` method of the [Airflow hook](what-is-a-hook.md) associated with your connection. Provider hooks that do not have this method defined cannot be tested using these methods.
 
-- UI: You can test many types of Airflow connections directly from the UI by using the **Test** button. See also [Defining connections in the Airflow UI](#defining-connections-in-the-airflow-ui).
-- REST API: The Airflow REST API offers the [`connections/test` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/test_connection) to test connections. 
-- CLI: As of Airflow 2.6, you can test a connection from the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using the command `airflow connections test <conn_id>`. If you use the Astro CLI, you can access this command by running `astro dev run connections test <conn_id>`.
+- Airflow UI: You can test many types of Airflow connections directly from the UI using the **Test** button on the **Connections** page. See [Defining connections in the Airflow UI](#defining-connections-in-the-airflow-ui).
+- Airflow REST API: The Airflow REST API offers the [`connections/test` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/test_connection) to test connections. This is the same endpoint that the Airflow UI uses to test connections.
+- Airflow CLI: As of Airflow 2.6, you can test a connection from the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using `airflow connections test <conn_id>`. If you use the Astro CLI, you can access this command by running `astro dev run connections test <conn_id>`.
 
 ## Example: Configuring the SnowflakeToSlackOperator
 

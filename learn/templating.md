@@ -175,12 +175,7 @@ BashOperator(
 )
 ```
 
-:::info
-
-You can find a list of pre-injected functions in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#macros). You can also load information in JSON format using `"{{ macros.json.loads(...) }}"` and information in YAML format using `"{{ macros.yaml.safe_load(...) }}"`.
-
-:::
-
+Airflow includes some pre-injected functions out of the box for you to use in your templates. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#macros) for a list of available functions. You can also load information in JSON format using `"{{ macros.json.loads(...) }}"` and information in YAML format using `"{{ macros.yaml.safe_load(...) }}"`.
 Besides pre-injected functions, you can also use self-defined variables and functions in your templates. Airflow provides a convenient way to inject these into the Jinja environment. In the following example, a function is added to the DAG to print the number of days since May 1st, 2015:
 
 ```python
