@@ -119,14 +119,14 @@ If you want to deploy your DAG with catchup enabled but there are some tasks you
 
 ## Retry tasks
 
-In Airflow you can set individual tasks to try running again automatically in case of a task failing. The number of times a task can try to run again before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or via the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. By default tasks will not retry. 
+In Airflow you can configure individual tasks to retry automatically in case of a failure. The number of times a task will retry again before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or via the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. By default tasks will not retry. 
 The setting in the Airflow config can be overwritten on the task level with the `retries` parameter.
 
 The time spent between retries is defined by the `retry_delay` parameter (default: `timedelta(seconds=300)`). As of Airflow 2.6, a maximum value for the retry delay can be set in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which by default is set at 24 hours, or for individual tasks with the parameter `max_retry_delay`.
 
 To progressively increases the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
 
-It is a common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specifc tasks as needed by providing a different value to the task level parameter. 
+It is a common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed by providing a different value to the task-level parameter. 
 
 The DAG below contains 4 tasks that will always fail. Each of the tasks uses a different retry parameter configuration.
 
