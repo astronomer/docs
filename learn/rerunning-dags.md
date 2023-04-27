@@ -137,4 +137,4 @@ When using backfill keep the following considerations in mind:
 
 Alternatively, you can deploy a copy of the DAG with a new name and a start date that is the date you want to backfill to. Airflow will consider this a separate DAG so you won't see all the DAG runs and task instances in the same place, but it would accomplish running the DAG for data in the desired time period. If you have a small number of DAG runs to backfill, you can trigger them manually from the Airflow UI and choose the desired logical date as shown in the following image:
 
-![Trigger Execution Date](/img/guides/trigger_execution_date.png) 
+![Trigger Execution Date](/img/guides/trigger_execution_date.png)
