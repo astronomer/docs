@@ -111,7 +111,6 @@ The script uses your owner role to complete following actions:
     - `servicenetworking.googleapis.com`
     - `dns.googleapis.com`
     - `servicedirectory.googleapis.com`
-    - `cloud.servicedirectory.v1beta1.ManagedResourceService.AddServiceBundle"`
 
 ### Provide setup information to Astronomer
 
