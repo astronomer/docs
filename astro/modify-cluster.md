@@ -95,17 +95,17 @@ Astro uses the following databases:
     <tr>
         <td>AWS</td>
         <td><a href='https://aws.amazon.com/rds/'>Amazon RDS</a></td>
-        <td><a href='resource-reference-aws.md#supported-rds-instance-types'>Supported RDS instance types</a></td>
+        <td><a href='resource-reference-aws#supported-rds-instance-types'>Supported RDS instance types</a></td>
     </tr>
     <tr>
         <td>GCP</td>
         <td><a href='https://cloud.google.com/sql'>Cloud SQL</a></td>
-        <td><a href='resource-reference-gcp.md#supported-cloud-sql-instance-types'>Supported Cloud SQL instance types</a></td>
+        <td><a href='resource-reference-gcp#supported-cloud-sql-instance-types'>Supported Cloud SQL instance types</a></td>
     </tr>
     <tr>
         <td>Azure</td>
         <td><a href='https://azure.microsoft.com/en-us/products/postgresql/'>Azure Database for PostgreSQL</a></td>
-        <td><a href='resource-reference-azure.md#supported-azure-database-for-postgresql-instance-types'>Supported Azure Database for PostgreSQL instance types</a></td>
+        <td><a href='resource-reference-azure#supported-azure-database-for-postgresql-instance-types'>Supported Azure Database for PostgreSQL instance types</a></td>
     </tr>
 
 
