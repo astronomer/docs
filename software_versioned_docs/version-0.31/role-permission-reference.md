@@ -157,4 +157,4 @@ For a given Deployment, the Deployment Admin has the same default permissions as
 
 ### Root user
 
-A root user is assigned all available Astronomer Software permissions. There can only be one root user for each Software installation. See [Manage the root user](manage-root-user.md).
+A root user is assigned all available Astronomer Software permissions. There can only be one root user for each Software installation. See [Manage the root user](https://docs.astronomer.io/software/0.31/manage-root-user#log-in-as-the-root-user).

@@ -57,7 +57,7 @@ Astronomer defines the required Roles or ClusterRoles. The default mode requires
 
 ### What are the default usernames and passwords?
 
-When you install Astronomer Software, the root user `root@<your-basedomain>` with all permissions is automatically created. The password is stored as a Kubernetes secret on your installation. See [Manage the root user](manage-root-user.md). There are no other default users or passwords. 
+When you install Astronomer Software, the root user `root@<your-basedomain>` with all permissions is automatically created. The password is stored as a Kubernetes secret on your installation. See [Manage the root user](https://docs.astronomer.io/software/0.31/manage-root-user#log-in-as-the-root-user). There are no other default users or passwords. 
 
 ### Are there separate credentials or accesses that Astronomer provisions?
 
