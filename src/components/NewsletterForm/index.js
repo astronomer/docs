@@ -176,7 +176,7 @@ export default function NewsletterForm(
       id="newsletterForm"
     >
       <h2>{title || content.title}</h2>
-      <p className={styles.newsletterForm__description}>Get a summary of our release notes from us once a month.</p>
+      <p className={styles.newsletterForm__description}>Get a summary of new Astro features once a month.</p>
       {!submitting && !success && !error && (
         <div className={styles.newsletterForm__inputWrapper}>
           <input
