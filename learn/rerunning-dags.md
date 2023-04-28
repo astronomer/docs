@@ -10,7 +10,7 @@ import retry_example from '!!raw-loader!../code-samples/dags/rerunning-dags/retr
 
 Airflow DAGs can be set to run using a wide variety of [scheduling](scheduling-in-airflow.md) options. There are some uses cases in which you want tasks or whole DAGs to run outside of their regular schedule, for example if:
 
-- You want one or more tasks to automatically try running again in case they fail.
+- You want one or more tasks to automatically run again if they fail.
 - You need to manually rerun a failed task for one or multiple DAG runs.
 - You want to deploy a DAG with a start date of one year ago and trigger all DAG runs that would have been scheduled in the past year.
 - You have a running DAG and realize you need it to process data for two months prior to the DAG's start date.
@@ -25,20 +25,20 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Automatically retry tasks
 
-In Airflow you can configure individual tasks to retry automatically in case of a failure. The number of times a task will retry again before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or via the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. 
+In Airflow you can configure individual tasks to retry automatically in case of a failure. The default number of times a task will retry before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or via the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. 
 The `default_task_retries` of an Airflow environment can be overwritten at the task level by using the `retries` parameter.
 
 The time spent between retries is defined by the `retry_delay` parameter (default: `timedelta(seconds=300)`). As of Airflow 2.6, a maximum value for the retry delay can be set in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which by default is set at 24 hours, or for individual tasks with the parameter `max_retry_delay`.
 
 To progressively increase the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
 
-It is a common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed by providing a different value to the task-level `retries` parameter. 
+It is common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed by providing a different value to the task-level `retries` parameter. 
 
 The DAG below contains 4 tasks that will always fail. Each of the tasks uses a different retry parameter configuration.
 
 <CodeBlock language="python">{retry_example}</CodeBlock>
 
-## Manually rerun tasks
+## Manually rerun tasks or DAGs
 
 [Rerunning tasks](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#re-run-tasks) or full DAGs in Airflow is a common workflow. 
 
@@ -57,7 +57,7 @@ A popup window will appear giving you the following options to clear and rerun a
 - Recursive: Clears any task instances of the task in the child DAG and any parent DAGs if you have cross-DAG dependencies.
 - Only Failed: Clears only failed instances of any task instances selected based on the above options.
 
-Check which task instances will be clear with the current settings by expanding the dropdown menu **Affected tasks: X**. Click **Clear** to confirm and the task(s) will be cleared and rescheduled for another run.
+Check which task instances will be cleared with the current settings by expanding the dropdown menu **Affected tasks: X**. Click **Clear** to confirm and the task(s) will be cleared and rescheduled for another run.
 
 ![Task Instance Summary](/img/guides/task_instance_confirmation.png)
 
@@ -77,7 +77,7 @@ To clear a full DAG run, go to the Grid View in the Airflow UI, click on the DAG
 
 :::caution
 
-Clearing or changing task statuses directly in the Airflow metastore can cause unexpected behavior in Airflow.
+You should not clear or chang task statuses directly in the Airflow metastore as doing so can cause unexpected behavior in Airflow.
 
 :::
 
