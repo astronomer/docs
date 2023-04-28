@@ -41,7 +41,7 @@ Airflow has a few options for notifying you on the status of your DAGs:
 - **Airflow notifiers**: Notifiers are custom classes for callback functions that can be easily reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://registry.astronomer.io/providers/apache-airflow-providers-slack/versions/7.2.0/modules/SlackNotifier). Notifiers can be provided to callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing actions for task failures across several Airflow instances.
 - **Airflow service-level agreements (SLAs)**: SLAs define the expected time it takes for a specific task to complete. If an SLA is missed, the callable or notifier provided to the `sla_miss_callback` parameter is executed. If you configure an SMTP connection, an email will be sent as well. Since an SLA miss does not stop a task from running, this type of notification is used when intervention is needed if a specific task is taking longer than expected.
 
-Most notifications can be set at the level of both a DAG and a task. Setting a parameter within a DAG's `default_args` dictionary will apply it to all tasks in the DAG. You can see examples of this in the [set DAG and task level callbacks](#set-dag-and-task-level-callbacks) section.
+Most notifications can be set at the level of both a DAG and a task. Setting a parameter within a DAG's `default_args` dictionary will apply it to all tasks in the DAG. You can see examples of this in the [set DAG and task-level callbacks](#set-dag-and-task-level-callbacks) section.
 
 ## Email notifications
 
@@ -182,7 +182,7 @@ You can provide any Python callable to the `*_callback` parameters. As of Airflo
 
 ### Set DAG and task-level callbacks
 
-To define a notification at the DAG level, you can set the `*_callback` parameters in your DAG instantiation. DAG level notifications will trigger callback functions based on the state of the entire DAG run.
+To define a notification at the DAG level, you can set the `*_callback` parameters in your DAG instantiation. DAG-level notifications will trigger callback functions based on the state of the entire DAG run.
 
 ```python
 def my_success_callback_function(context):
@@ -207,7 +207,7 @@ def my_sla_callback_function(context):
 )
 ```
 
-To apply a task level callback to each task in your DAG, you can pass the callback function to the `default_args` parameter. Items listed in the dictionary provided to the `default_args` parameter will be set for each task in the DAG.
+To apply a task-level callback to each task in your DAG, you can pass the callback function to the `default_args` parameter. Items listed in the dictionary provided to the `default_args` parameter will be set for each task in the DAG.
 
 ```python
 def my_execute_callback_function(context):
@@ -239,7 +239,7 @@ def my_failure_callback_function(context):
 )
 ```
 
-For use cases where an individual task should use a specific callback, the task level callback parameters can be defined in the task instantiation. Callbacks defined at the individual task level will override callbacks passed in via `default_args`.
+For use cases where an individual task should use a specific callback, the task-level callback parameters can be defined in the task instantiation. Callbacks defined at the individual task level will override callbacks passed in via `default_args`.
 
 <Tabs
     defaultValue="taskflow"
@@ -489,42 +489,42 @@ It uses the [Slack provider](https://registry.astronomer.io/providers/slack) `Sl
 
 4. Create a Python function to use as your `on_failure_callback` method. Within the function, define the information you want to send and invoke the `SlackWebhookOperator` to send the message similar to this example:
 
-```python
-from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
+    ```python
+    from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
 
-def slack_notification(context):
-    slack_msg = """
-            :red_circle: Task Failed. 
-            *Task*: {task}  
-            *Dag*: {dag} 
-            *Execution Time*: {exec_date}  
-            *Log Url*: {log_url} 
-            """.format(
-        task=context.get("task_instance").task_id,
-        dag=context.get("task_instance").dag_id,
-        ti=context.get("task_instance"),
-        exec_date=context.get("execution_date"),
-        log_url=context.get("task_instance").log_url,
-    )
-    failed_alert = SlackWebhookOperator(
-        task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
-    )
-    return failed_alert.execute(context=context)
+    def slack_notification(context):
+        slack_msg = """
+                :red_circle: Task Failed. 
+                *Task*: {task}  
+                *Dag*: {dag} 
+                *Execution Time*: {exec_date}  
+                *Log Url*: {log_url} 
+                """.format(
+            task=context.get("task_instance").task_id,
+            dag=context.get("task_instance").dag_id,
+            ti=context.get("task_instance"),
+            exec_date=context.get("execution_date"),
+            log_url=context.get("task_instance").log_url,
+        )
+        failed_alert = SlackWebhookOperator(
+            task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
+        )
+        return failed_alert.execute(context=context)
 
-@dag(
-    start_date=datetime(2023, 1, 1),
-    schedule="@daily",
-    catchup=False
-)
-def post_to_slack():
-    @task(
-        on_success_callback=slack_notification
+    @dag(
+        start_date=datetime(2023, 1, 1),
+        schedule="@daily",
+        catchup=False
     )
     def post_to_slack():
-        return 10
+        @task(
+            on_success_callback=slack_notification
+        )
+        def post_to_slack():
+            return 10
 
-post_to_slack()
+    post_to_slack()
 
-```
+    ```
 
 5. Define your `on_failure_callback` parameter in your DAG either as a `default_arg` for the whole DAG, or for specific tasks. Set it equal to the function you created in the previous step.
