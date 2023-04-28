@@ -27,6 +27,7 @@ Astronomer Software version 0.32 upgrades PostgreSQL from 11.18.0-1 to 15. If yo
 
 ### Additional improvements
 
+- The root user feature introduced in Astronomer Software version 0.31 has been deprecated. System Admins now have the highest level of permissions on the platform.
 - Workspaces are now required to have unique names. If you have existing Workspaces with identical names, upon upgrade the duplicate names will be appended with an underscore and a number.
 - If you configured [git-sync deploys](deploy-git-sync.md) for a Deployment, you can now [view error logs](deployment-logs.md) emitted from the git-sync Kubernetes Pod in the Software UI.
 - You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `global.loggingSidecar. indexPattern` in your `config.yaml` file.
@@ -35,6 +36,7 @@ Astronomer Software version 0.32 upgrades PostgreSQL from 11.18.0-1 to 15. If yo
 
 ### Bug fixes
 
+- Fixed an issue where sidecar containers would sometimes not terminate properly after their primary container was terminated.
 - Fixed an issue in the Software UI where you could not view Deployment details for a Deployment that included "team" in its name.
 - Fixed an issue where a service account with Workspace Editor permissions could update Deployments. 
 - Fixed an issue where Prometheus was using more memory than expected due to a misconfiguration of statsd.
