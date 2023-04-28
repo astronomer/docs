@@ -23,7 +23,7 @@ You can reduce the amount of CPU and memory that an Airflow component requests i
 
 ### Assign System-level permissions to Teams
 
-You can assign the System Admin, System Editor, and System Viewer permissions to teams through the following Helm configuration:
+You can assign the System Admin, System Editor, and System Viewer permissions to teams by setting the following values in your `config.yaml` file:
 
 ```sh
 # Auth configuration.
@@ -38,7 +38,7 @@ auth:
       systemViewer: ["<your-system-viewer-groups>"]
 ```
 
-This feature, coupled with [disabling individual user management](import-idp-groups.md#disable-individual-user-management), allows you to control all user permissions on Astronomer Software exclusively through your identity provider. For more information, see [Import IdP groups](import-idp-groups.md).
+When coupled with [disabling individual user management](import-idp-groups.md#disable-individual-user-management), this feature allows you to control all user permissions on Astronomer Software exclusively through your identity provider. For more information, see [Import IdP groups](import-idp-groups.md).
 
 ### PostgreSQL 15
 
