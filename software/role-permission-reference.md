@@ -154,7 +154,3 @@ For a given Deployment, the Deployment Admin has the same default permissions as
 - `deployment.config.delete`: Delete the Deployment
 - `deployment.userRoles.update`: Update Deployment-level permissions for users within the Deployment
 - `deployment.teamRoles.update`: Update Deployment-level permissions for Teams within the Deployment
-
-### Root user
-
-A root user is assigned all available Astronomer Software permissions. There can only be one root user for each Software installation. See [Manage the root user](manage-root-user.md).

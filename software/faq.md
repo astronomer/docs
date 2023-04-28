@@ -55,10 +55,6 @@ No. Astronomer makes use of Kubernetes cluster-level features (including K8s RBA
 
 Astronomer defines the required Roles or ClusterRoles. The default mode requires a ClusterRole that has access to create namespaces and other objects for new Airflow deployments.
 
-### What are the default usernames and passwords?
-
-When you install Astronomer Software, the root user `root@<your-basedomain>` with all permissions is automatically created. The password is stored as a Kubernetes secret on your installation. See [Manage the root user](manage-root-user.md). There are no other default users or passwords. 
-
 ### Are there separate credentials or accesses that Astronomer provisions?
 
 No. Review the [Astronomer Helm chart repo](https://github.com/astronomer/astronomer) to learn more about Astronomer Software default configurations. 

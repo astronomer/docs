@@ -64,8 +64,8 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         # needed to prevent zombie deployment worker pods when using KubernetesExecutor
         terminationEndpoint: http://localhost:8000/quitquitquit
     ```
-3. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
+3. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
 :::info
 
