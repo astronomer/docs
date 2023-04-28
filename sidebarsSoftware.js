@@ -121,7 +121,6 @@ module.exports = {
         type: 'category',
         label: 'User access and management',
         items: [
-        'manage-root-user',
         'manage-workspaces',
         'import-idp-groups',
         'workspace-permissions',

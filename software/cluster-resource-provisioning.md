@@ -1,13 +1,13 @@
 ---
-title: "Change how Astronomer Software provisions resources"
-sidebar_label: "Cluster resource provisioning"
+title: "Underprovision Airflow component resources on Astronomer Software"
+sidebar_label: "Underprovision Airflow resources"
 id: cluster-resource-provisioning
-description: Configure your Astronomer cluster to over- or underprovision Deployment resources.
+description: Configure your Astronomer cluster to underprovision Deployment resources.
 ---
 
 :::danger Development workloads only
 
-Changing cluster resource provisioning is only recommended for development clusters and can result in task failures. Astronomer can't provide support or troubleshoot issues related to  over- or underprovisioning Deployments through this configuration.
+Changing cluster resource provisioning is only recommended for development clusters and can result in task failures. Astronomer can't provide support or troubleshoot issues related to underprovisioning Deployments through this configuration.
 
 :::
 

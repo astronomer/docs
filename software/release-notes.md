@@ -15,11 +15,11 @@ Release date: April 28, 2023
 
 ### Programmatically create and update Deployments with the Houston API
 
-You can now programmatically create or update Deployments using the Houston API `upsertDeployment` mutation. Unlike `createDeployment`, the `upsertDeployment` mutation includes keys for configuring Deployment resources such as environment variables. See [Doc link].
+You can now programmatically create or update Deployments using the Houston API `upsertDeployment` mutation. Unlike `createDeployment`, the `upsertDeployment` mutation includes keys for configuring Deployment resources such as environment variables. See [Create or update a Deployment with configurations](houston-api.md#create-or-update-a-deployment-with-configurations).
 
 ### Reduce resource requests for Airflow components in development environments
 
-You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [doc link] for configuration steps.
+You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
 
 ### Assign System-level permissions to Teams
 
