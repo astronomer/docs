@@ -15,7 +15,7 @@ By default, Deployments specify CPU and memory [requests and limits](https://kub
 
 To change this behavior, you can change the amount of CPU and memory that an AU requests, allowing you to more efficiently provision resources based on the requirements for your Deployments. 
 
-1. Add the following configuration to your `config.yaml` file. Replace the values for `overProvisioningFactorMem` and `overProvisioningFactorCPU` with the factor by which you want to increase or decrease the amount of CPU and memory in an AU.
+1. Add the following configuration to your `config.yaml` file. Replace the values for `overProvisioningFactorMem` and `overProvisioningFactorCPU` with the factor by which you want to set your resource requests as a percentage of your resource limits.
 
     ```yaml
     astronomer:
