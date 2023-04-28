@@ -34,7 +34,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Airflow notification types
 
-Airflow has a few options for notifying you on the status of your DAGs:
+Airflow has a few options for notifying you on the status of your DAGs and tasks:
 
 - **Email notifications**: Most Airflow operators have parameters for setting email alerts in case of a task failure or retry. Use email alerts in production pipelines where task failures or retries need immediate attention by a data professional. 
 - **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or Airflow notifier to these parameters, and Airflow will run them in the case of specific events, such as a task failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions for specific instances of task failures or successes.
