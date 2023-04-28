@@ -50,7 +50,7 @@ Astronomer Software version 0.32 upgrades PostgreSQL from 11.18.0-1 to 15. If yo
 - The root user feature introduced in Astronomer Software version 0.31 has been deprecated. System Admins now have the highest level of permissions on the platform.
 - Workspaces are now required to have unique names. If you have existing Workspaces with identical names, upon upgrade the duplicate names will be appended with an underscore and a number.
 - If you configured [git-sync deploys](deploy-git-sync.md) for a Deployment, you can now [view error logs](deployment-logs.md) emitted from the git-sync Kubernetes Pod in the Software UI.
-- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `global.loggingSidecar. indexPattern` in your `config.yaml` file.
+- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `deployments.helm.loggingSidecar.indexPattern` in your `config.yaml` file.
 - You can now configure custom environment variables for ElasticSearch-based custom logging using the `astronomer.customLogging.extraEnv` value in your `config.yaml` file.
 - The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` key has been replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled`  for improved performance across additional Software UI views.
 
