@@ -99,6 +99,11 @@ The Astronomer product you're using determines the format and behavior of the co
 
 
 ## Run the Astro CLI using Podman
+:::info 
+
+If you are using M1 Mac, you will need to turn on rootful mode for Podman using `podman machine set --rootful`.
+
+:::
 
 The Astro CLI requires a container management engine to run Apache Airflow components on your local machine and deploy to Astro. For example, the `astro dev start` and `astro deploy` commands both require containers.
 
