@@ -233,5 +233,9 @@ Changing the name of a DAG also creates a new entry in the database that powers 
 
 In a distributed environment where task containers are executed on shared hosts, it's possible for tasks to be killed off unexpectedly. When this happens, you might see  a [zombie process](https://en.wikipedia.org/wiki/Zombie_process) in the Airflow logs.
 
-Issues like this can be resolved by using task retries. Retries can be set at the DAG level using `default_args`, at the task level using the parameter `retries`, or at the deployment level by setting the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. Setting retries to 2 will protect a given task from problems common to distributed environments.
+You can resolve issues like zombies by using task retries. Retries can be set at different levels with the following precedence:
+1. **Tasks:**  Pass the `retries` parameter to the task's Operator.
+2. **DAGs:** Include `retries` in a DAG's `default_args` object.
+3. **Deployments:** Set the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`.
 
+Setting retries to `2` will protect a task from most problems common to distributed environments.
