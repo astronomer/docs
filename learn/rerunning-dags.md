@@ -32,7 +32,7 @@ The time spent between retries is defined by the `retry_delay` parameter (defaul
 
 To progressively increase the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
 
-It is common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed by providing a different value to the task-level `retries` parameter. 
+It is common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed by providing a different value to the task level `retries` parameter. 
 
 The DAG below contains 4 tasks that will always fail. Each of the tasks uses a different retry parameter configuration.
 
@@ -61,7 +61,10 @@ Check which task instances will be cleared with the current settings by expandin
 
 ![Task Instance Summary](/img/guides/task_instance_confirmation.png)
 
-You can also run the following command in the Airflow CLI to clear task statuses:
+You can also clear task statuses fromm the Graph view. 
+
+If you want to use the Airflow CLI to clear task statuses, you can use the following command:
+
 
 ``` bash
 airflow tasks clear [-h] [-R] [-d] [-e END_DATE] [-X] [-x] [-f] [-r]
@@ -77,7 +80,7 @@ To clear a full DAG run, go to the Grid View in the Airflow UI, click on the DAG
 
 :::caution
 
-You should not clear or chang task statuses directly in the Airflow metastore as doing so can cause unexpected behavior in Airflow.
+You should not clear or change task statuses directly in the Airflow metastore as doing so can cause unexpected behavior in Airflow.
 
 :::
 
