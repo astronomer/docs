@@ -21,6 +21,25 @@ You can now programmatically create or update Deployments using the Houston API 
 
 You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [doc link] for configuration steps.
 
+### Assign System-level permissions to Teams
+
+You can assign the System Admin, System Editor, and System Viewer permissions to teams through the following Helm configuration:
+
+```sh
+# Auth configuration.
+auth:
+  openidConnect:
+    idpGroupsImportEnabled: true
+    # Optional configuration. Set to assign System-level permissions using Teams.
+    manageSystemPermissionsViaIdpGroups:
+      enabled: true
+      systemAdmin: ["<your-system-admin-groups>"] // Only these groups will be treated as SysAdmin Groups
+      systemEditor: ["<your-system-editor-groups>"]
+      systemViewer: ["<your-system-viewer-groups>"]
+```
+
+This feature, coupled with [disabling individual user management](import-idp-groups.md#disable-individual-user-management), allows you to control all user permissions on Astronomer Software exclusively through your identity provider. For more information, see [Import IdP groups](import-idp-groups.md).
+
 ### PostgreSQL 15
 
 Astronomer Software version 0.32 upgrades PostgreSQL from 11.18.0-1 to 15. If you use in-cluster PostgreSQL for your workflows, upgrading to Software 0.32 without pinning your PostgreSQL version can impact your workflows. See the [Upgrade to Postgres 15](upgrade-astronomer.md#upgrade-to-postgres-15) for upgrade considerations and steps.
