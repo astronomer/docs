@@ -11,8 +11,7 @@ description: Astronomer Software release notes.
 
 ## 0.32.0
 
-Release date: 
-
+Release date: April 28, 2023
 
 ### Programmatically create and update Deployments with the Houston API
 
@@ -21,10 +20,13 @@ You can now programmatically create or update Deployments using the Houston API 
 ### Reduce resource requests for Airflow components in development environments
 
 You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [doc link] for configuration steps.
-  
+
+### PostgreSQL 15
+
+Astronomer Software version 0.32 upgrades PostgreSQL from 11.18.0-1 to 15. If you use in-cluster PostgreSQL for your workflows, upgrading to Software 0.32 without pinning your PostgreSQL version can impact your workflows. See the [Upgrade to Postgres 15](upgrade-astronomer.md#upgrade-to-postgres-15) for upgrade considerations and steps.
+
 ### Additional improvements
 
-- Upgraded to Postgres 15.
 - Workspaces are now required to have unique names. If you have existing Workspaces with identical names, upon upgrade the duplicate names will be appended with an underscore and a number.
 - If you configured [git-sync deploys](deploy-git-sync.md) for a Deployment, you can now [view error logs](deployment-logs.md) emitted from the git-sync Kubernetes Pod in the Software UI.
 - You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `global.loggingSidecar. indexPattern` in your `config.yaml` file.
