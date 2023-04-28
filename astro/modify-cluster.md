@@ -80,36 +80,12 @@ During the cluster creation process, you are asked to specify a **DB Instance Ty
 
 Astro uses the following databases:
 
-<table>
-    <tr>
-        <th>
-            Cloud
-        </th>
-        <th>
-            Database
-        </th>
-        <th>
-            Supported Instances
-        </th>
-    </tr>
-    <tr>
-        <td>AWS</td>
-        <td><a href='https://aws.amazon.com/rds/'>Amazon RDS</a></td>
-        <td><a href='resource-reference-aws#supported-rds-instance-types'>Supported RDS instance types</a></td>
-    </tr>
-    <tr>
-        <td>GCP</td>
-        <td><a href='https://cloud.google.com/sql'>Cloud SQL</a></td>
-        <td><a href='resource-reference-gcp#supported-cloud-sql-instance-types'>Supported Cloud SQL instance types</a></td>
-    </tr>
-    <tr>
-        <td>Azure</td>
-        <td><a href='https://azure.microsoft.com/en-us/products/postgresql/'>Azure Database for PostgreSQL</a></td>
-        <td><a href='resource-reference-azure#supported-azure-database-for-postgresql-instance-types'>Supported Azure Database for PostgreSQL instance types</a></td>
-    </tr>
+| Cloud          | Database                                                                                | Instance Types                                        |
+| -------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| AWS            | [Amazon RDS](https://aws.amazon.com/rds/)                                               | [Supported RDS instance types](resource-reference-aws#supported-rds-instance-types) |
+| GCP            | [Cloud SQL](https://cloud.google.com/sql)                                               | [Supported Cloud SQL instance types](resource-reference-gcp#supported-cloud-sql-instance-types) |
+| Azure          | [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/) | [Supported Azure Database for PostgreSQL instance types](resource-reference-azure#supported-azure-database-for-postgresql-instance-types) |
 
-
-</table>
 
 To request support for a different database instance type or to modify the database instance type after cluster creation, contact [Astronomer support](https://cloud.astronomer.io/support).
 
