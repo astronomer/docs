@@ -8,7 +8,7 @@ id: rerunning-dags
 import CodeBlock from '@theme/CodeBlock';
 import retry_example from '!!raw-loader!../code-samples/dags/rerunning-dags/retry_example.py';
 
-Airflow DAGs can be set to run using a wide variety of [scheduling](scheduling-in-airflow.md) options. There are some uses cases in which you want tasks or whole DAGs to run outside of their regular schedule, for example if:
+You can set when to run Airflow DAGs using a wide variety of [scheduling](scheduling-in-airflow.md) options. Some uses cases where you might want tasks or DAGs to run outside of their regular schedule include:
 
 - You want one or more tasks to automatically run again if they fail.
 - You need to manually rerun a failed task for one or multiple DAG runs.
@@ -25,14 +25,14 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Automatically retry tasks
 
-In Airflow you can configure individual tasks to retry automatically in case of a failure. The default number of times a task will retry before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or via the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. 
-The `default_task_retries` of an Airflow environment can be overwritten at the task level by using the `retries` parameter.
+In Airflow, you can configure individual tasks to retry automatically in case of a failure. The default number of times a task will retry before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or with the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. 
+You can overwrite the `default_task_retries` of an Airflow environment at the task level by using the `retries` parameter.
 
-The time spent between retries is defined by the `retry_delay` parameter (default: `timedelta(seconds=300)`). As of Airflow 2.6, a maximum value for the retry delay can be set in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which by default is set at 24 hours, or for individual tasks with the parameter `max_retry_delay`.
+The `retry_delay` parameter (default: `timedelta(seconds=300)`) defines the time spent between retries. As of Airflow 2.6, you can set a maximum value for the retry delay in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which, by default, is set at 24 hours. Or, for individual tasks, you can set the maximum retry delay with the parameter, `max_retry_delay`.
 
 To progressively increase the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
 
-It is common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed by providing a different value to the task level `retries` parameter. 
+It is common practice to set the number of retries for all tasks in a DAG by using `default_args` and override it for specific tasks as needed. To override specific tasks, provide a different value to the task level `retries` parameter. 
 
 The DAG below contains 4 tasks that will always fail. Each of the tasks uses a different retry parameter configuration.
 
@@ -48,7 +48,7 @@ To clear the task status, go to the Grid View in the Airflow UI, select the task
 
 ![Clear Task Status](/img/guides/clear_tasks_ui.png)
 
-A popup window will appear giving you the following options to clear and rerun additional task instances related to the selected task:
+A popup window appears, giving you the following options to clear and rerun additional task instances related to the selected task:
 
 - Past: Clears any instances of the task in DAG runs with a data interval before the selected task instance.
 - Future: Clears any instances of the task in DAG runs with a data interval after the selected task instance.
@@ -74,13 +74,13 @@ airflow tasks clear [-h] [-R] [-d] [-e END_DATE] [-X] [-x] [-f] [-r]
 
 For more info on the positional arguments for the `clear` command, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clear).
 
-To clear a full DAG run, go to the Grid View in the Airflow UI, click on the DAG run and then click **Clear** as shown in the following image. 
+To clear a full DAG run, go to the Grid View in the Airflow UI, click on the DAG run, and then click **Clear** as shown in the following image. 
 
 ![Clear DAG Status](/img/guides/clear_dag_ui.png)
 
 :::caution
 
-You should not clear or change task statuses directly in the Airflow metastore as doing so can cause unexpected behavior in Airflow.
+Don't clear or change task statuses directly in the Airflow metastore. This can cause unexpected behavior in Airflow.
 
 :::
 
@@ -113,7 +113,7 @@ To rerun multiple DAGs, click **Browse** > **DAG Runs**, select the DAGs to reru
 
 You can use the built-in [catchup](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html#catchup) DAG argument to process data for logical dates between the set `start_date` of a DAG and the current date.
 
-When the catchup parameter for a DAG is set to `True`, at the time the DAG is turned on in Airflow the scheduler starts a DAG run for every data interval that has not been run between the DAG's `start_date` and the current data interval. For example, if your DAG is scheduled to run daily and has a `start_date` of 1/1/2023, and you deploy that DAG and turn it on 2/1/2023, Airflow will schedule and start all of the daily DAG runs for January. Catchup is also triggered when you turn a DAG off for a period and then turn it on again.
+When the catchup parameter for a DAG is set to `True`, at the time the DAG is turned on in Airflow, the scheduler starts a DAG run for every data interval that has not been run between the DAG's `start_date` and the current data interval. For example, if your DAG is scheduled to run daily and has a `start_date` of 1/1/2023, and you deploy that DAG and turn it on 2/1/2023, Airflow will schedule and start all of the daily DAG runs for January. Catchup is also triggered when you turn a DAG off for a period and then turn it on again.
 
 Catchup can be controlled by setting the parameter in your DAG's arguments. By default, catchup is set to `True`. This example DAG doesn't use catchup:
 
@@ -161,6 +161,6 @@ When using backfill keep the following considerations in mind:
 - Consider your available resources. If your backfill will trigger many DAG runs, you might want to add some of the catchup parameters to your DAG.
 - Clearing the task or DAG status of a backfilled DAG run does not rerun the task or DAG.
 
-Alternatively, you can deploy a copy of the DAG with a new name and a start date that is the date you want to backfill to. Airflow will consider this a separate DAG so you won't see all the DAG runs and task instances in the same place, but it would accomplish running the DAG for data in the desired time period. If you have a small number of DAG runs to backfill, you can trigger them manually from the Airflow UI via `Trigger DAG w/ config` and choose the desired logical date as shown in the following image:
+Alternatively, you can deploy a copy of the DAG using a new name with the start date as the date you want to backfill to. Airflow considers this a separate DAG, so you won't see all the DAG runs and task instances in the same place, but it runs the DAG for data in the desired time period. If you have a small number of DAG runs to backfill, you can trigger them manually from the Airflow UI via `Trigger DAG w/ config` and choose the desired logical date as shown in the following image:
 
 ![Trigger Execution Date](/img/guides/trigger_execution_date.png)
