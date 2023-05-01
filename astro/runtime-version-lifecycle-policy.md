@@ -87,7 +87,7 @@ The following table contains the exact lifecycle for each published version of A
 | [5](runtime-release-notes.md#astro-runtime-500) | 2.3                    | April 30, 2022     | October 2023            |
 | [6](runtime-release-notes.md#astro-runtime-600) | 2.4                    | September 19, 2022 | March 2024              |
 | [7](runtime-release-notes.md#astro-runtime-700) | 2.5                    | December 3, 2022   | June 2023               |
-| [8](runtime-release-notes.md#astro-runtime-800) | 2.6                    | TBD                | October 2023            |
+| [8](runtime-release-notes.md#astro-runtime-800) | 2.6                    | April 30, 2023                | October 2023            |
 
 ### Long-term support (LTS) releases 
 
