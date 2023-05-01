@@ -24,7 +24,7 @@ For more information on each template or to configure your own, see [Template ov
 
 ## Prerequisites
 
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) hosted in a GitHub repository.
+- An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitHub repository.
 - An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - Access to [GitHub Actions](https://github.com/features/actions).
@@ -242,7 +242,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 ## DAG-based templates
 
-The following templates are examples of how to implement DAG-based deploys in GitHub Actions. They use the [Deploy Actions](https://github.com/astronomer/deploy-action) `dag-deploy-enabled` option to implement a DAG-based deploy workflow.
+The following templates show how to configure DAG-based deploys in GitHub Actions. They use the [Deploy action](https://github.com/astronomer/deploy-action) `dag-deploy-enabled` option to implement a DAG-based deploy workflow.
 
 <Tabs
     defaultValue="standard"
@@ -447,7 +447,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
     on:
       create:
         branches:
-        - "**"
+          - "**"
     
     env:
       ## Set your Workspace API key token as a GitHub secret
@@ -495,10 +495,9 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
     name: Astronomer CI - Delete Preview Deployment
 
     on:
-      pull_request:
+      delete:
         branches:
-          - main
-    
+          - "**"
     env:
       ## Set your Workspace API key token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
@@ -510,7 +509,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         - name: Delete preview Deployment
           uses: astronomer/deploy-action@v0.2
           with:
-            action: deploy-deployment-preview
+            action: delete-deployment-preview
             deployment-id: <main-deployment-id>
     ```
 

@@ -1,17 +1,23 @@
-from datetime import datetime, timedelta
-
-from airflow import DAG
+from pendulum import datetime
+from airflow.decorators import dag
 from airflow.operators.bash import BashOperator
 
+PATH_TO_DBT_PROJECT = "<path to your dbt project>"
+PATH_TO_DBT_VENV = "<path to your venv activate binary>"
 
-with DAG(
-    dag_id="dbt_dag",
-    start_date=datetime(2021, 12, 23),
-    description="An Airflow DAG to invoke simple dbt commands",
-    schedule=timedelta(days=1),
-) as dag:
-    dbt_run = BashOperator(task_id="dbt_run", bash_command="dbt run")
 
-    dbt_test = BashOperator(task_id="dbt_test", bash_command="dbt test")
+@dag(
+    start_date=datetime(2023, 3, 23),
+    schedule="@daily",
+    catchup=False,
+)
+def simple_dbt_dag():
+    dbt_run = BashOperator(
+        task_id="dbt_run",
+        bash_command="source $PATH_TO_DBT_VENV && dbt run --models .",
+        env={"PATH_TO_DBT_VENV": PATH_TO_DBT_VENV},
+        cwd=PATH_TO_DBT_PROJECT,
+    )
 
-    dbt_run >> dbt_test
+
+simple_dbt_dag()

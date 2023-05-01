@@ -59,9 +59,6 @@ On Astronomer, you can ask for GraphQL:
 
 - [Queries](https://GraphQL.org/learn/queries/#fields) - Queries to return information
 - [Mutations](https://GraphQL.org/learn/queries/#mutations) - Queries to modify data
-- [Subscriptions](https://GraphQL.org/blog/subscriptions-in-GraphQL-and-relay/) - Describes all of the events that can be subscribed to
-
-This guide will stay away from Subscriptions.
 
 ### Houston API schema
 

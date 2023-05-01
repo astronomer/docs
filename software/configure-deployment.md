@@ -202,3 +202,7 @@ To reuse a custom release name given to an existing Deployment, you need to firs
 ![Hard delete checkbox](/img/software/hard-delete.png)
 
 This action permanently deletes all data associated with a Deployment, including the database and underlying Kubernetes resources.
+
+## Programmatically create or update Deployments
+
+You can programmatically create or update Deployments with all possible configurations using the Houston API `upsertDeployment` mutation. See [Create or update a Deployment with configurations](houston-api.md#create-or-update-a-deployment-with-configurations).

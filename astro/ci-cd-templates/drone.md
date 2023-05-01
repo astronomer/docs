@@ -13,7 +13,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 ## Prerequisites
 
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) hosted in a Git repository that Drone can access.
+- An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Drone can access.
 - An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - A functional Drone [server](https://docs.drone.io/server/overview/).

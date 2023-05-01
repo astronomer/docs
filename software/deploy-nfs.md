@@ -38,7 +38,7 @@ For AWS and GCP, Astronomer recommends using the primary NFS volume solution pro
 * AWS: [EFS](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html)
 * GCP: [Filestore](https://cloud.google.com/filestore/docs/creating-instances)
 
-For instructions specific to Azure, see [Create and mount an Azure file share](#provision-an-azure-nfs-volume).
+For instructions specific to Azure, see [Create and mount an Azure file share](#create-and-mount-an-azure-file-share).
 
 For each NFS volume you provision for DAG deploys, you need to configure:
 

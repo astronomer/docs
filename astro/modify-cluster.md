@@ -76,21 +76,18 @@ To change the maximum node count for a node pool, contact [Astronomer Support](h
 
 Every Astro cluster is created with and requires a managed PostgreSQL database. This database serves as a primary relational database for the data plane and powers the metadata database of each Astro Deployment within a single cluster.
 
-Astro uses the following databases:
-
-- AWS: [Amazon RDS](https://aws.amazon.com/rds/)
-- GCP: [Cloud SQL](https://cloud.google.com/sql)
-- Azure: [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/)
-
 During the cluster creation process, you are asked to specify a **DB Instance Type** according to your use case and expected workload, but it can be modified at any time. Each database instance type costs a different amount of money and comprises of varying combinations of CPU, memory, and network performance.
 
-For the list of database instance types available on Astro, see: 
+Astro uses the following databases:
 
-- [Supported RDS instance types](resource-reference-aws.md#supported-rds-instance-types)
-- [Supported Cloud SQL instance types](resource-reference-gcp.md#supported-cloud-sql-instance-types).
-- [Supported Azure Database for PostgreSQL instance types](resource-reference-azure.md#supported-azure-database-for-postgresql-instance-types)
+| Cloud          | Database                                                                                | Instance Types                                        |
+| -------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| AWS            | [Amazon RDS](https://aws.amazon.com/rds/)                                               | [Supported RDS instance types](resource-reference-aws#supported-rds-instance-types) |
+| GCP            | [Cloud SQL](https://cloud.google.com/sql)                                               | [Supported Cloud SQL instance types](resource-reference-gcp#supported-cloud-sql-instance-types) |
+| Azure          | [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/) | [Supported Azure Database for PostgreSQL instance types](resource-reference-azure#supported-azure-database-for-postgresql-instance-types) |
 
-To request support for a different database instance type, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+To request support for a different database instance type or to modify the database instance type after cluster creation, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Authorize Workspaces to a cluster
 

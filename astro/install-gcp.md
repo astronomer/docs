@@ -99,6 +99,7 @@ The script uses your owner role to complete following actions:
 - Create a service account role that Astro uses to access the data plane.
 - Enable the following required services for running the data plane:
 
+    - `storage.googleapis.com`
     - `storage-component.googleapis.com`
     - `storage-api.googleapis.com`
     - `compute.googleapis.com`
@@ -109,6 +110,7 @@ The script uses your owner role to complete following actions:
     - `sqladmin.googleapis.com`
     - `servicenetworking.googleapis.com`
     - `dns.googleapis.com`
+    - `servicedirectory.googleapis.com`
 
 ### Provide setup information to Astronomer
 

@@ -53,6 +53,12 @@ In your `config.yaml` file, set the following value.
 auth:
   openidConnect:
     idpGroupsImportEnabled: true
+    # Optional configuration. Set to assign System-level permissions using Teams.
+    manageSystemPermissionsViaIdpGroups:
+      enabled: true
+      systemAdmin: ["<your-system-admin-groups>"] // Only these groups will be treated as SysAdmin Groups
+      systemEditor: ["<your-system-editor-groups>"]
+      systemViewer: ["<your-system-viewer-groups>"]
 ```
 
 Save this configuration and push it to your platform as described in [Apply a Platform Config Change](apply-platform-config.md).

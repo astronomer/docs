@@ -30,7 +30,7 @@ To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GC
 
 <Tabs
     defaultValue="byoc"
-    groupId= "byoc"
+    groupId= "aws"
     values={[
         {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
@@ -133,7 +133,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
 
 <Tabs
     defaultValue="byoc"
-    groupId= "byoc"
+    groupId= "azure"
     values={[
         {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
@@ -182,7 +182,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
 
 <Tabs
     defaultValue="byoc"
-    groupId= "byoc"
+    groupId= "gcp"
     values={[
         {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},

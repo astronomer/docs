@@ -8,7 +8,6 @@ Disallow: /software_versioned_sidebars/
 Disallow: /README.md
 Disallow: /docusaurus.config.js
 Disallow: /astro/astro-audit-logs
-Disallow: /astro/cli/sql-cli
 Disallow: /astro/cross-account-role-setup
 
 Sitemap: https://docs.astronomer.io/sitemap.xml

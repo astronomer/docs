@@ -19,7 +19,23 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest Astro Runtime Version**: 7.4.2 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.13.2 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
+
+## April 26, 2023
+
+### Improved log viewing in the Cloud UI
+
+The Deployment **Logs** page in the Cloud UI now shows logs for your Deployment's workers, schedulers, triggerers, and webserver. Additionally, you can now view up to the last 10,000 logs emitted by your Deployment from the Cloud UI.
+
+To make it easier to parse this larger log volume, the **Logs** page now lets you filter by log type, date, and keyword. See [View logs](view-logs.md) for more information.
+
+## April 18, 2023
+
+### Self-service configuration for single sign-on (SSO) connections
+
+You can now configure SSO connections directly from the Cloud UI without assistance from Astronomer support. Use the **Authentication** page to configure different authentication environments for your Organization by creating and managing multiple SSO connections and domains.
+
+To review the new process for creating SSO connections, see [Set up authentication and SSO](configure-idp.md). To create new managed domains to map to your SSO connections, see [Manage domains](manage-domains.md).
 
 ## April 11, 2023
 
@@ -46,11 +62,8 @@ You can now create preview Deployments from feature branches in your Git reposit
 
 ### Bug fixes
 
-- Fixed a bug where if a Deployment creation fails, the DB rollback tried to delete a Prisma record that had already been deleted.
-- Fixed an issues where alerts did not cache as expected.
 - Fixed a bug where the UI passed the wrong cluster type. 
 - Fixed an issue where the Deployment status shows as 'deploying' when KPOs are running.
-- Fixed a bug in the AWS templates to address NAT gateway configuration.
 
 ## March 28, 2023
 
@@ -204,7 +217,7 @@ For Organization Owners, this migration has the following additional effects:
 - You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
 - Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
 
-For more information about how these changes can affect the Astro log in experience, see the [Login FAQ](log-in-to-astro.md#frequently-asked-questions). To configure authentication behavior, see [Manage an Organization on Astro](manage-organization.md).
+For more information about how these changes can affect the Astro log in experience, see the [Login FAQ](log-in-to-astro.md#frequently-asked-questions). To configure authentication behavior, see [Configure SSO](configure-idp.md#advanced-setup).
 
 ### New Hosted regions available
 

@@ -203,7 +203,7 @@ In Kubernetes 1.25, [PodSecurityPolicies (PSPs)](https://kubernetes.io/blog/2021
 
 - Implement Pod Security through a third-party Open Policy Agent tool such as [GateKeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/).
 
-#### Kubernetes 1.24 on Azure
+### Upgrade to Kubernetes 1.24 (Azure only)
 
 To use Kubernetes 1.24 and later on Azure, you must set `nginx.ingressAnnotations.service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"` in your `config.yaml` file. See [Apply a platform config change](apply-platform-config.md).
 
@@ -218,6 +218,23 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
     kubectl exec -it `kubectl get pods -l component=houston --no-headers -n <deployment-namespace>` -n <deployment-namespace> -- yarn run upgrade-deployments
     ```
 3. Upgrade Kubernetes to version 1.22.
+
+### Upgrade to Astronomer Software 0.32
+
+#### Upgrade to Postgres 15
+
+Astronomer Software uses Postgres 15 by default. If you aren't using an off-cluster database solution, Astronomer recommends that you configure Astronomer Software to stay on Postgres 11.18.0-1 when you upgrade to 0.32. To do so:
+
+- Set `global.postgresql.image.tag=11.18.0-1` in your `config.yaml` file.
+- Complete the upgrade as documented.
+
+You can then upgrade to Postgres 15 after the upgrade is complete. See [How to upgrade PostgreSQL in Docker and Kubernetes](https://www.cloudytuts.com/tutorials/docker/how-to-upgrade-postgresql-in-docker-and-kubernetes/).
+
+#### Renamed feature flag in Helm configuration
+
+The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` flag has been deprecated and replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled` for improved performance across additional Software UI views.
+
+If you set `sysAdminScalabilityImprovementsEnabled` in your `config.yaml` file, replace it with `performanceOptimizationModeEnabled` before upgrading. If you don't replace the key, the upgrade will fail.
 
 ### Upgrade to Astronomer Software 0.31
 
@@ -240,9 +257,9 @@ If your current usage is expected and higher than the default resource limits, u
 
 ### Upgrade to Astronomer Software 0.30
 
-#### Running the 0.30 upgrade script with --no-hooks
+#### Do not run the 0.30 upgrade script with --no-hooks
 
-Using the `--no-hooks` flag in [Step 7](#step-7-run-astronomers-upgrade-script) results in the upgrade script skipping a necessary database migration job. Because of this, you should not specify this flag when running the upgrade script.
+Using the `--no-hooks` flag in [Step 7](#step-7-run-astronomers-upgrade-script) results in the upgrade script skipping a necessary database migration job. For almost all use cases, you should not specify this flag when upgrading to 0.30.
 
 If you do specify the `--no-hooks` flag, the upgrade script will return a success message even though it failed, resulting in broken behavior in your upgraded environment.
 

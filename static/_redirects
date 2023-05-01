@@ -4,7 +4,7 @@
 /api/event https://plausible.io/api/event 200
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.31/* /software/:splat
+/software/0.32/* /software/:splat
 
 # redirect relative links for deprecated Software docs to archive page. Version-specific
 /software/0.16/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.16/:splat.md 301
@@ -20,8 +20,6 @@
 /software/*/install-packages https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/install-packages.md 301
 /software/*/single-node-install https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/single-node-install.md 301
 /software/*/upgrade-ac https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/upgrade-ac.md 301
-
-
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
@@ -292,3 +290,7 @@
 /astro-runtime-release-notes.rss /astro-runtime-release-notes.xml 301
 /astro-cli-release-notes.rss /astro-cli-release-notes.xml 301
 /astro-release-notes.rss /astro-release-notes.xml 301
+
+# redirect for consolidated docs
+
+/astro/manage-organization /astro/configure-idp
