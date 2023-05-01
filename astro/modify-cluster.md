@@ -39,12 +39,23 @@ To confirm a modification was completed, click the **Clusters** tab in the Cloud
 
 ### About worker node pools
 
-All Astro clusters have one worker node pool for one worker type by default, but you can configure up to 30 additional worker types. After Astronomer creates a worker node pool for a cluster, your team can configure a worker queue in any Deployment with that worker type. The worker type appears as a new option on the **Worker Type** page of the Cloud UI and as an option in the Astro CLI. If your cluster only has one worker type, all tasks across Deployments in your cluster can only run on that type of worker. Individual worker nodes run only on a single Deployment, but a worker node pool can have worker nodes spread across multiple Deployments.
+:::tip
 
-Creating a worker node pool does not necessarily mean that the infrastructure is created in your cluster. A worker node pool has zero nodes if any of the following are true:
+- Node Pool, a Kubernetes Concept, is used to refer to a group of nodes within a cluster that have the same configuration. 
+- In Astro Cluster, Worker Node Pool is a node pool for the Airflow Workers for an Airflow Deployment. 
+- Worker Type is a node instance type (based on your choice of cloud) chosen for running Airflow Workers.
+- [Worker Queue](https://docs.astronomer.io/astro/configure-worker-queues) in Astro utilizes the concept of Celery Queues, when using Celery Executor, to segregate different types of tasks to achieve effective resource utilization. Individual tasks in a DAG can be assigned to a particular worker queue. 
+:::
 
-- There are no Deployments in your cluster that have worker queues configured with the worker type.
-- There are no default worker queues configured with the worker type. The default worker queue cannot scale to zero workers, but additional worker queues can scale to zero.
+- During Astro cluster creation process, you can chose a default worker type, which is used for the default worker node pool. A new deployment will automatically start with minimum 1 worker in the default worker node pool. 
+
+- You can configure up to 30 additional [worker types](modify-cluster.md#manage-worker-types). For each different worker type added, a separate worker node pool is created but nodes are not added until and unless that worker node pool is used in your Deployment
+
+- Default worker node pool will always have 1 minimum node. Additional nodes will be added as required based on the auto-scaling logic of your executor (Celery vs Kuberenetes). Non-default worker node pool can scale down to zero.
+
+- A worker node pool can have worker nodes utilized across multiple Deployments, but worker nodes themselves are not shared across Astro Deployments. 
+
+- Once a new worker type has been added to your cluster, it becomes available for you to use in an existing or a new Worker Queue
 
 ### Configure node instance type
 
