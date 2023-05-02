@@ -5,17 +5,17 @@ id: airflow-email-notifications
 description: Set up email notifications for Airflow task successes and failures.
 ---
 
-Incorporating a notification framework is critical to the health of your data pipelines. In addition to [DAG alerts](dag-alerts.md), you can configure the following Apacche Airflow notification types on Astro
+Incorporating a notification framework is critical to the health of your data pipelines. In addition to [DAG alerts](dag-alerts.md), you can configure the following Apacche Airflow notification types on Astro:
 
 - Slack notifications
 - SLAs
 - Email notifcations
 
-Use this guide to integrate with an SMTP service have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [DAG alerts](dag-alerts.md). For best practices on configuring notifications in Airflow, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
+Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [DAG alerts](dag-alerts.md). For best practices on configuring notifications in Airflow, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 ## Configure Airflow email notifications
 
-On Astro, setting up email notifications requires configuring an SMTP service for delivering each notification. You can use a single SMTP service for your Organization, but email notifications have to be configured for each Deployment.
+On Astro, setting up email notifications requires configuring an SMTP service for delivering each notification. You can use a single SMTP service for your Organization, but you must configure email notifications for each Deployment.
 
 If your organization isn't using an SMTP service currently, Astronomer recommends one of the following:
 
@@ -30,7 +30,7 @@ The following topics provide setup steps for integrating each of these external 
 
 1. [Create a SendGrid account](https://signup.sendgrid.com). Be prepared to disclose some standard information about yourself and your organization.
 
-2. [Verify a Single Sender Identity](https://sendgrid.com/docs/ui/sending-email/sender-verification/). Because you're sending emails only for internal administrative purposes, a single sender identity is sufficient for integrating with Astro. The email address you verify here is used as the sender for your Airflow notification emails.
+2. [Verify a Single Sender Identity](https://sendgrid.com/docs/ui/sending-email/sender-verification/). Because you're sending emails for only internal administrative purposes, a single sender identity is sufficient for integrating with Astro. The email address you verify here sends your Airflow notification emails.
 
 3. Create a Sendgrid API key. In SendGrid, go to **Email API** > **Integration Guide**. Follow the steps to generate a new API key using SendGrid's Web API and cURL.
 
@@ -72,7 +72,7 @@ The following topics provide setup steps for integrating each of these external 
     'email': ['<recipient-address>'],
     ```
 
-Repeat steps 7-10 for each Deployment in which you want to configure Airflow notifications.
+Repeat steps 7-10 for each Deployment where you want to configure Airflow notifications.
 
 ### Integrate with Amazon SES
 
