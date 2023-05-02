@@ -64,7 +64,7 @@
 /add-user /astro/add-user 301
 /airflow-alerts /astro/airflow-alerts 301
 /airflow-api /astro/airflow-api 301
-/ci-cd /astro/ci-cd 301
+/ci-cd /astro/set-up-ci-cd 301
 /cli-release-notes /astro/cli-release-notes 301
 /configure-deployment /astro/configure-deployment 301
 /create-cluster /astro/create-cluster 301
@@ -96,7 +96,7 @@
 /cloud/api-keys /astro/api-keys 301
 /cloud/airflow-alerts /astro/airflow-alerts 301
 /cloud/airflow-api /astro/airflow-api 301
-/cloud/ci-cd /astro/ci-cd 301
+/cloud/ci-cd /astro/set-up-ci-cd 301
 /cloud/cli-reference /astro/cli-reference 301
 /cloud/cli-release-notes /astro/cli-release-notes 301
 /cloud/configure-deployment /astro/configure-deployment 301
