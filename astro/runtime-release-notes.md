@@ -39,6 +39,26 @@ Astro Runtime 8 is based on Airflow 2.6, which includes a number of new features
 
 To learn more, see the [Apache Airflow 2.6.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-6-0-2023-04-30).
 
+### Fewer dependencies installed by default
+
+:::danger Breaking change
+
+This change can result in DAGs working differently after upgrade. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) before upgrading.
+
+:::
+
+Astro Runtime now includes fewer default dependencies to save on memory usage. The following provider packages are no longer installed by default:
+
+- `apache-airflow-providers-apache-hive`
+- `apache-airflow-providers-apache-livy`
+- `apache-airflow-providers-databricks`
+- `apache-airflow-providers-dbt-cloud`
+- `apache-airflow-providers-microsoft-mssql`
+- `apache-airflow-providers-sftp`
+- `apache-airflow-providers-snowflake`
+
+If your DAGs use any of these providers, ensure that the provider packages are listed in your Astro project `requirements.txt` file before upgrading. 
+
 ## Astro Runtime 7.4.2
 
 - Release date: April 1, 2023

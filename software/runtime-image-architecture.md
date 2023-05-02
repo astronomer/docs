@@ -49,22 +49,17 @@ Each Runtime version in a given minor series supports only a single version of A
 All Astro Runtime images have the following open source provider packages pre-installed:
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
-- Apache Hive [`apache-airflow-providers-apache-hive`](https://pypi.org/project/apache-airflow-providers-apache-hive/)
-- Apache Livy [`apache-airflow-providers-apache-livy`](https://pypi.org/project/apache-airflow-providers-apache-livy/)
-- Databricks [`apache-airflow-providers-databricks`](https://pypi.org/project/apache-airflow-providers-databricks/)
+- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
+- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/)
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
 - Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
-- Google [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-google/)
-- HTTP [`apache-airflow-password`](https://pypi.org/project/http/)
+- HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)
 - Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
-- StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
-- Snowflake [`apache-airflow-snowflake`](https://pypi.org/project/apache-airflow-providers-snowflake/)
-- Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
+- Snowflake [`apache-airflow-providers-snowflake`](https://pypi.org/project/apache-airflow-providers-snowflake/)
 - OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
-- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
 
 ### Provider package versioning
