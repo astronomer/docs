@@ -14,7 +14,7 @@ Using the Astro CLI to push your Astro project, including your DAG code, to a De
 
 To run `astro deploy --dags`, you must first enable the [DAG-only deploys](deploy-code.md#enable-dag-only-deploys-on-a-deployment) feature for each Deployment.
 
-Follow the steps in this document to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [CI/CD](ci-cd.md).
+Follow the steps in this document to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 To exclude specific files during a code deploy, see [Ignore files with `.airflowignore`](develop-project.md#deploy-dags-only).
 
@@ -43,7 +43,7 @@ After running this command, you are prompted to open your web browser and log in
 
 :::tip
 
-If you have [Deployment API key](api-keys.md) credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys with [CI/CD](ci-cd.md).
+If you have [Deployment API key](api-keys.md) credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys with [CI/CD](set-up-ci-cd.md).
 
 :::
 
@@ -116,7 +116,7 @@ Enabling DAG-only deploys on Astro has a few benefits:
 
 - DAG-only deploys are significantly faster than running `astro deploy` when you have only made changes to your DAGs.
 - When you run `astro deploy --dags`, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart. This results in a more efficient use of running workers and no downtime for your Deployment.
-- You can have different sets of users deploy project changes versus DAG changes. See [DAG-based workflows](ci-cd.md#dag-based-workflows) for how you can set this up in your CI/CD pipelines.
+- You can have different sets of users deploy project changes versus DAG changes. See [DAG-based templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-based-templates) for how you can set this up in your CI/CD pipelines.
 
 ### Enable DAG-only deploys on a Deployment
 
@@ -200,6 +200,6 @@ WARNING: The requested image's platform (linux/amd64) does not match the detecte
 
 ## Related documentation
 
-- [Automate code deploys with CI/CD](ci-cd.md)
+- [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)
 - [Develop your project](develop-project.md)
 - [Set environment variables](environment-variables.md)

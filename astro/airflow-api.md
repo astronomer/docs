@@ -51,7 +51,7 @@ curl --location --request POST "https://auth.astronomer.io/oauth/token" \
 
 The token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
 
-If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generating an access token manually, Astronomer recommends that you automate the API request to generate a new access token.
+If you've configured a [CI/CD process](set-up-ci-cd.md) and you want to avoid generating an access token manually, Astronomer recommends that you automate the API request to generate a new access token.
 
 :::
 

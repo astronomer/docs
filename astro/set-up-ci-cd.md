@@ -11,7 +11,7 @@ There are many strategies for organizing your source code and building CI/CD pip
 - Learn the benefits of CI/CD.
 - Determine what kind of Deployment and CI/CD strategy you want your data team to use.
 
-When you're ready to implement your CI/CD strategy, see [CI/CD templates](ci-cd.md) for setup steps and examples for third-party CI/CD tools, like GitHub Actions and CircleCI.
+When you're ready to implement your CI/CD strategy, see [CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) for setup steps and examples for third-party CI/CD tools, like GitHub Actions and CircleCI.
 
 ## Benefits of CI/CD on Astro
 
@@ -171,7 +171,7 @@ When you set up a CI/CD workflow on Astro, you will:
 
 - Select a CI/CD strategy after reviewing this document and the requirements of your team.
 - Set up your repositories and permissions based on your CI/CD strategy.
-- Add an Astronomer [CI/CD template](ci-cd.md) to your repositories.
+- Add an Astronomer [CI/CD template](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) to your repositories.
 - Modify the Astronomer template or GitHub action to meet the requirements of your organization. 
 
 If you use GitHub, Astronomer recommends using the [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action) that is maintained by Astronomer.
