@@ -15,7 +15,7 @@ An environment variable on Astro is a key-value configuration that is applied to
 
 - Identify a production Deployment versus a development Deployment that allows you to apply conditional logic in your DAG code.
 - Store [Airflow connections and variables](environment-variables.md#add-airflow-connections-and-variables-using-environment-variables).
-- Set up an SMTP service to receive [Airflow alerts](airflow-alerts.md) by email.
+- Set up an SMTP service to receive [Airflow alerts](airflow-email-notifications.md) by email.
 - Integrate with Datadog or other third-party tooling to [export Deployment metrics](deployment-metrics.md#export-airflow-metrics-to-datadog).
 - Set [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html?), such as default timezone and maximum active runs per DAG.
 
