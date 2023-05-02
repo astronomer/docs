@@ -44,6 +44,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 5             | 2.3                    |
 | 6             | 2.4                    |
 | 7             | 2.5                    |
+| 8             | 2.6                    |
 
 For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
@@ -140,6 +141,7 @@ The following table lists the operating systems and architectures supported by e
 | 5             | Debian 11.3 (bullseye) | AMD64           |
 | 6             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
 | 7             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 8             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 
