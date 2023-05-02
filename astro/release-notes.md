@@ -21,6 +21,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
 
+## May 2, 2023
+
+### Bug fixes
+
+- Fixed an issue where SSO configurations made through Astronomer support could be overridden by updating the SSO configuration through the Cloud UI.
+
 ## April 26, 2023
 
 ### Improved log viewing in the Cloud UI
