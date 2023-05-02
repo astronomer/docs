@@ -43,7 +43,7 @@ To learn more, see the [Apache Airflow 2.6.0 release notes](https://airflow.apac
 
 :::danger Breaking change
 
-This change can result in DAGs working differently after upgrade. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) before upgrading.
+This change can result in DAGs working differently after upgrading. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) before upgrading.
 
 :::
 
