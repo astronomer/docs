@@ -57,6 +57,10 @@ To confirm a modification was completed, click the **Clusters** tab in the Cloud
 
 - Once a new worker type has been added to your cluster, it becomes available for you to use in an existing or a new Worker Queue
 
+- Each worker node pool can scale up to a max number of worker nodes that can be set when adding that worker type. You can choose to go with the default of 20 or any number up to 100.
+
+![Worker Node Pool and Worker Queues](/img/docs/worker-node-pool.png)
+
 ### Configure node instance type
 
 Each worker type on Astro is configured with a node instance type that is defined by your cloud provider. For example, `m5.2xlarge` on AWS, `Standard_D8_v5` on Azure, or `e2-standard-8` on GCP. Node instance types are comprised of varying combinations of CPU, memory, storage, and networking capacity. By choosing a node instance type, you can provide the appropriate balance of resources for your Airflow tasks.
