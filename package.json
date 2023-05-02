@@ -29,7 +29,6 @@
     "clsx": "^1.1.1",
     "docusaurus2-dotenv": "^1.4.0",
     "file-loader": "^6.2.0",
-    "fs-extra": "^11.1.1",
     "jsdom": "^20.0.3",
     "markdown-it": "^13.0.1",
     "n": "^8.2.0",
