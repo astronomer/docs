@@ -109,7 +109,7 @@ module.exports = {
           items: ["set-up-data-lineage", "data-lineage"],
         },
         "dag-alerts",
-        "airflow-alerts",
+        "airflow-email-notifications",
       ],
     },
     {
