@@ -258,6 +258,7 @@
 # redirect links to renamed files
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
+/astro/pipline-alerts /astro/dag-alerts 301
 /astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-gcp#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
