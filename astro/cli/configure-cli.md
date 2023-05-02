@@ -100,12 +100,6 @@ The Astronomer product you're using determines the format and behavior of the co
 
 ## Run the Astro CLI using Podman
 
-:::info 
-
-If you use an M1 Mac, turn on rootful mode for Podman by using `podman machine set --rootful`.
-
-:::
-
 The Astro CLI requires a container management engine to run Apache Airflow components on your local machine and deploy to Astro. For example, the `astro dev start` and `astro deploy` commands both require containers.
 
 By default, the Astro CLI uses [Docker](https://www.docker.com/) as its container management engine. However, if your organization uses [Podman](https://podman.io/) to run and manage containers, you can configure the Astro CLI to use it instead. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
@@ -126,6 +120,7 @@ Set up Podman on a Mac operating system so you can run Apache Airflow locally an
 
 - Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`.
+- If you use an M1 Mac, turn on rootful mode for Podman by using `podman machine set --rootful`.
 
 :::tip
 
