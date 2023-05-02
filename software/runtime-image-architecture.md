@@ -46,7 +46,7 @@ Each Runtime version in a given minor series supports only a single version of A
 
 ## Provider packages
 
-All Astro Runtime images have the following open source provider packages pre-installed:
+The latest version of Astro Runtime has the following open source provider packages pre-installed:
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
