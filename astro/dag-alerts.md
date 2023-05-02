@@ -1,7 +1,7 @@
 ---
-sidebar_label: 'Pipeline Alerts'
-title: 'Set up pipeline alerts (Private Preview)'
-id: pipeline-alerts
+sidebar_label: 'DAG alerts'
+title: 'Set up Astro DAG alerts'
+id: dag-alerts
 toc_main_heading_level: 2
 ---
 
@@ -9,23 +9,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-:::caution
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews).
-:::
+Astro DAG alerts provide an additional level of observability to Airflow's notification systems. You can configure a DAG alert to notify you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a specified time. 
 
-You can configure your Deployments to alert you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a specified time. 
+Unlike Airflow callbacks and SLAs, Astro DAG alerts require no changes to DAG code and are designed to integrate with Slack and PagerDuty. Follow this guide to set up your Slack or PagerDuty to receive alerts from Astro and then configure your Deployment to send alerts.
 
-Follow this guide to set up your Slack or PagerDuty to receive alerts from Astro and then configure your Deployment to send alerts in certain circumstances.
-
-:::info
-Pipeline failure alerts are available with Astro Runtime versions 7.1.0 and greater. 
-:::
+To configure Airflow notifications, see [Airflow email notifications](airflow-alerts.md) and [Manage Airflow DAG notifications](error-notifications-in-airflow.md)
 
 ## Prerequisites
 
 - An [Astro project](develop-project.md).
-- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Pipeline failure alerts.
-- Slack workspace and/or PagerDuty service.
+- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure DAG alerts.
+- A Slack workspace and/or PagerDuty service.
 
 ## Step 1: Configure your communication channel
 
@@ -38,7 +32,7 @@ Pipeline failure alerts are available with Astro Runtime versions 7.1.0 and grea
     ]}>
 <TabItem value="Slack">
 
-To set up alerts in Slack, you need to create a Slack app in your Slack workspace. After you've created your app, you can generate a webhook URL in Slack where Astro will send pipeline alerts. 
+To set up alerts in Slack, you need to create a Slack app in your Slack workspace. After you've created your app, you can generate a webhook URL in Slack where Astro will send DAG alerts. 
 
 1. Go to [Slack API: Applications](https://api.slack.com/apps/new) to create a new app in your organization's Slack workspace.
 
@@ -69,7 +63,7 @@ To set up alerts in Slack, you need to create a Slack app in your Slack workspac
 </TabItem>
 <TabItem value="PagerDuty">
 
-To set up an alert integration with PagerDuty, you need access to your organization's PagerDuty Service. PagerDuty uses the [Events API v2](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgw-events-api-v2-overview#getting-started) to create a new integration that connects your Service with the Astro pipeline alerts.
+To set up an alert integration with PagerDuty, you need access to your organization's PagerDuty Service. PagerDuty uses the [Events API v2](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgw-events-api-v2-overview#getting-started) to create a new integration that connects your Service with Astro.
 
 1. Open your PagerDuty service.
 
@@ -114,12 +108,12 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     </TabItem>
     </Tabs>
 
-7. Add Pipelines or Tasks to your alert.
+7. Add DAG or Tasks to your alert.
 
-     - **Pipeline failure**: Click **Pipeline** to choose the Pipeline that you want to send an alert about if it fails. A Pipeline is another word for an Airflow DAG.
+     - **Pipeline failure**: Click **Pipeline** to choose the DAG that you want to send an alert about if it fails.
     
-    - **Task duration**: Click **Task** and choose the Deployment, Pipeline, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
+    - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
 
-     You can add more Pipelines or tasks after you create your alert. 
+     You can add more DAGs or tasks after you create your alert. 
 
 8. Click **Create alert**.

@@ -1,23 +1,21 @@
 ---
-sidebar_label: 'Airflow alerts'
-title: 'Configure Airflow alerts on Astro'
-id: airflow-alerts
-description: Set up email alerts for Airflow task successes and failures.
+sidebar_label: 'Airflow email notifications'
+title: 'Configure Airflow email notifications on Astro'
+id: airflow-email-alerts
+description: Set up email notifications for Airflow task successes and failures.
 ---
 
-Incorporating an alerting framework is critical to the health of your data pipelines. In addition to the observability functionality provided on Astro, Apache Airflow supports:
+Incorporating a notification framework is critical to the health of your data pipelines. In addition to [DAG alerts](dag-alerts.md), you can configure the following Apacche Airflow notification types on Astro
 
 - Slack notifications
 - SLAs
 - Email alerts
 
-Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow alerts](https://docs.astronomer.io/learn/error-notifications-in-airflow).
+Use this guide to integrate with an SMTP service have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [DAG alerts](dag-alerts.md). For best practices on configuring notifications in Airflow, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
-This guide focuses on setting up email alerts on Astro with an SMTP service.
+## Configure Airflow email notifications
 
-## Configure Airflow email alerts
-
-On Astro, setting up email alerts requires configuring an SMTP service for delivering each alert. You can use a single SMTP service for your Organization, but email alerts have to be configured for each Deployment.
+On Astro, setting up email notifications requires configuring an SMTP service for delivering each notification. You can use a single SMTP service for your Organization, but email notifications have to be configured for each Deployment.
 
 If your organization isn't using an SMTP service currently, Astronomer recommends one of the following:
 
@@ -28,11 +26,11 @@ The following topics provide setup steps for integrating each of these external 
 
 ### Integrate with SendGrid
 
-[SendGrid](https://sendgrid.com/) is an email delivery service that you can use to configure Airflow alerts. A free SendGrid account grants users 40,000 free emails within the first 30 days of an account opening and 100 emails per day after that. This should be enough emails for most alerting use cases.
+[SendGrid](https://sendgrid.com/) is an email delivery service that you can use to configure Airflow notifications. A free SendGrid account grants users 40,000 free emails within the first 30 days of an account opening and 100 emails per day after that. This should be enough emails for most notification use cases.
 
 1. [Create a SendGrid account](https://signup.sendgrid.com). Be prepared to disclose some standard information about yourself and your organization.
 
-2. [Verify a Single Sender Identity](https://sendgrid.com/docs/ui/sending-email/sender-verification/). Because you're sending emails only for internal administrative purposes, a single sender identity is sufficient for integrating with Astro. The email address you verify here is used as the sender for your Airflow alert emails.
+2. [Verify a Single Sender Identity](https://sendgrid.com/docs/ui/sending-email/sender-verification/). Because you're sending emails only for internal administrative purposes, a single sender identity is sufficient for integrating with Astro. The email address you verify here is used as the sender for your Airflow notification emails.
 
 3. Create a Sendgrid API key. In SendGrid, go to **Email API** > **Integration Guide**. Follow the steps to generate a new API key using SendGrid's Web API and cURL.
 
@@ -67,18 +65,18 @@ The following topics provide setup steps for integrating each of these external 
 
 9. Click **Save** to finalize your configuration.
 
-10. To receive email alerts for task failures within a given DAG, configure the following values in the DAG's `default_args`:
+10. To receive email notifications for task failures within a given DAG, configure the following values in the DAG's `default_args`:
 
     ```python
     'email_on_failure': True,
     'email': ['<recipient-address>'],
     ```
 
-Repeat steps 7-10 for each Deployment in which you want to configure Airflow alerts.
+Repeat steps 7-10 for each Deployment in which you want to configure Airflow notifications.
 
 ### Integrate with Amazon SES
 
-Use your existing Amazon SES instance to send Airflow alerts by email.
+Use your existing Amazon SES instance to send Airflow notifications by email.
 
 1. Sign in to the AWS Management Console and open the Amazon SES console at https://console.aws.amazon.com/ses/.
 
@@ -89,7 +87,7 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
     - To confirm the email account is working and the Amazon SES service can send emails to it, click an email address in the **Identity** column and then click **Send test email**. When the owner of the email address receives the test email, they need to select the validation link in the email.
     - To add a new email address, click **Create Identity**, add the email address, and then click **Create Identity**.
 
-    For email alerts, Astronomer recommends using one email address as the sender and a second email address as the recipient. All email addresses must be verified.
+    For email notifications, Astronomer recommends using one email address as the sender and a second email address as the recipient. All email addresses must be verified.
 
     For more information about configuring Amazon SES, read [Creating an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#:~:text=of%20those%20Regions.-,Creating%20an%20email%20address%20identity,-Complete%20the%20following) and  [Verifying an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#:~:text=address%20identity.-,Verifying%20an%20email%20address%20identity,-After%20you%E2%80%99ve%20created) in the Amazon documentation.
 
@@ -118,11 +116,11 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
 
     See [Set environment variables on Astro](https://docs.astronomer.io/astro/environment-variables).
 
-9. To begin receiving Airflow alerts by email for task failures within a given DAG, configure the following values in the DAG's `default_args`:
+9. To begin receiving Airflow notifications by email for task failures within a given DAG, configure the following values in the DAG's `default_args`:
 
     ```python
     'email_on_failure': True,
     'email': ['<recipient-address>'],
     ```
 
-Repeat steps 7-10 for each Deployment in which you want to configure Airflow alerts.
+Repeat steps 7-10 for each Deployment in which you want to configure Airflow notifications.
