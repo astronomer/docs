@@ -5,13 +5,13 @@ id: airflow-email-notifications
 description: Set up email notifications for Airflow task successes and failures.
 ---
 
-Incorporating a notification framework is critical to the health of your data pipelines. In addition to [DAG alerts](dag-alerts.md), you can configure the following Apacche Airflow notification types on Astro
+Incorporating a notification framework is critical to the health of your data pipelines. In addition to [Astro alerts](alerts.md), you can configure the following Apacche Airflow notification types on Astro
 
 - Slack notifications
 - SLAs
-- Email notifcations
+- Email notifications
 
-Use this guide to integrate with an SMTP service have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [DAG alerts](dag-alerts.md). For best practices on configuring notifications in Airflow, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
+Use this guide to integrate with an SMTP service have Astro send email notifications whenever a task run fails. To configure Astro alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices on configuring notifications in Airflow, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 ## Configure Airflow email notifications
 
