@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure a DAG alert to notify you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a specified time. 
+Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a specified time. 
 
 Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code and are designed to integrate with Slack and PagerDuty. Follow this guide to set up your Slack or PagerDuty to receive alerts from Astro and then configure your Deployment to send alerts.
 
