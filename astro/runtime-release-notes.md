@@ -59,6 +59,25 @@ Astro Runtime now includes fewer default dependencies to save on memory usage. T
 
 If your DAGs use any of these providers, ensure that the provider packages are listed in your Astro project `requirements.txt` file before upgrading. 
 
+### Additional improvements
+
+- Upgraded to Python 3.10. to continue using Python 3.9, see [Python versioning](runtime-image-architecture.md#python-versioning)
+- Upgraded `astronomer-providers` to 1.15.4, which includes a bug fix for a backwards compatibility issue. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1154-2023-04-19) for a complete list of changes. 
+- Upgraded `openlineage-airflow` to 0.23.0, which includes support for dbt snapshots and support for parsing additional SQL commands. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md#0230---2023-4-20) for a complete list of changes.
+
+## Astro Runtime 7.4.3
+
+- Release date: April 28, 2023
+- Airflow version: 2.5.3
+
+### Early access Airflow bug fixes
+
+- Fix KubernetesExecutor sending state to scheduler ([30872](https://github.com/apache/airflow/pull/30872))
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.15.4, which includes a bug fix for a backwards compatibility issue. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1154-2023-04-19) for a complete list of changes. 
+
 ## Astro Runtime 7.4.2
 
 - Release date: April 1, 2023
