@@ -101,7 +101,7 @@ The Astronomer product you're using determines the format and behavior of the co
 ## Run the Astro CLI using Podman
 :::info 
 
-If you are using M1 Mac, you will need to turn on rootful mode for Podman using `podman machine set --rootful`.
+If you use an M1 Mac, turn on rootful mode for Podman by using `podman machine set --rootful`.
 
 :::
 
