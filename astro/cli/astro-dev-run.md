@@ -24,7 +24,7 @@ $ astro dev run connections export - --file-format=env --serialization-format=js
 # Export connections in your local Airflow environment to STDOUT in a JSON format 
 
 $ astro dev run connections export - --file-format=env
-# Export connections in your local Airflow environment to STDOUT in the default URI format
+# Export connections in your local Airflow environment to STDOUT in a URI format
 ```
 
 ## Related Commands
