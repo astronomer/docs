@@ -132,9 +132,7 @@ For more information, see [Airflow API](airflow-api.md).
 
 **Limitations**
 
-- Dependency on a separate process to keep the secrets in sync.
-- Ability to Airflow users to override
-- Secret values are omitted or redacted from the response when exporting connections/variables
+- You need an additional tool or process to keep your secrets in sync across environments.
 
 
 ## Deploy to Astro
