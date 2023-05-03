@@ -135,7 +135,9 @@ For more information, see [Airflow API](airflow-api.md).
 - You need an additional tool or process to keep your secrets in sync across environments.
 
 
-### Import/Export
+## Import and export Airflow connections and variables
+
+In production environments with multiple team members, you might want to export Airflow connections and variables from your local Airflow environment to an Astro Deployment. Similarly, you might want to import connections and variables from an Astro Deployment to work on a project locally. Use the following topics to learn different strategies for exporting and importing Airflow objects.
 
 
 #### Secrets backend
