@@ -22,7 +22,15 @@ It is not necessary to choose the same approach for both connections and variabl
 
 :::
 
-We recommend that you use [Astro CLI](https://docs.astronomer.io/astro/cli/overview) to run a local Airflow environment and test your DAGs locally before Deploying to Astro. There are 5 different approaches that are discussed here and you can choose the strategy that suits you best. Regardless of the strategy you choose, keep in mind the following:
+Astronomer recommends using the [Astro CLI](cli/overview.md) to run a local Airflow environment and test your DAGs locally before deploying to Astro. Your Airflow connection and variable management strategy to be compatible with both your local testing workflows as well as your Astro workflows. Therefore, to minimize complexity, try using only one type of strategy for both local and deployed Airflow environments. 
+
+The following table suggests some possible management strategies for specific use cases.
+
+| Scenario | Strategy |
+| I'm just getting started and want to quickly create Airflow objects | Airflow UI |
+| I want to deploy the same connections and variables across multiple different Airflow environments  | `airflow_settings.yaml` or environment variables |
+| I need to keep my connections and variables as secure as possible | Environment variables or secrets backend |
+
 
 
 ### Airflow UI
