@@ -40,11 +40,9 @@ The easiest and most accessible way to create Airflow connections and variables 
 
 **Benefits**
 
-- The UI helps you correctly format and test your connections
-- The UI also allows you to import/export your variables to/from Airflow
-- Useful in generating the URI/JSON format connection string for storing in a Secrets Manager
-- Ability to export connections and variables using API
-- Connections and variables are encrypted and stored in the Airflow metadata database
+- The UI has features for correctly formatting and testing your connections.
+- You can export your variables from the Airflow UI, as well as import them to the Airflow UI from a json file.
+- Connections and variables are encrypted and stored in the Airflow metadata database.
 
 **Limitations**
 
