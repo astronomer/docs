@@ -55,7 +55,7 @@ The following table suggests some possible management strategies for specific us
 ### Airflow UI
 
 
-The easiest and most accessible way to create Airflow connections and variables locally is through the Airflow UI. This experience is similar across all different flavours of Airflow. This is also the first step for creating, testing and generating the URI/JSON format for a new connection.
+The quickest way to create Airflow connections and variables is through the Airflow UI. This experience is the same for both local Airflow environments and Astro Deployments. Astronomer recommends this method if you're just getting started with Airflow or you want to get your DAGs running quickly or if you want to export connections in a URI/JSON format
 
 **Benefits**
 
