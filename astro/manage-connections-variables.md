@@ -148,7 +148,13 @@ If you use a secrets backend, the method for managing connections and variables 
 
 - Import of connections and variables from the `.env` file is not possible either in local or Astro.
 - You can export both connections and variables from local to `.env` file in URI format. See [examples](manage-connections-variables#how-to-use-astro-cli-to-export-from-local)
+#### Airflow API
 
+You can use the [List Connections API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connections) and [Get Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connection) to export connections from any Airflow environment.
+
+You can use [List Variables API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variables) and [Get Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variable) to export variables from any Airflow environment.
+
+To import connections or variables to any Airflow environment, you can use the [Create Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_connection) and [Create Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_variables) respectively.
 ### How to use Astro CLI to export from local
 
 - **YAML**
