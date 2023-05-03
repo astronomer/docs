@@ -115,24 +115,6 @@ You can use the Airflow REST API to programmatically create Airflow connections 
 - Ability to Airflow users to override
 - Secret values are omitted or redacted from the response when exporting connections/variables
 
-### Local only `airflow_settings.yaml`
-
-You can use the Astro CLI to manage local Airflow connections and variables with an [`airflow_settings.yaml`](manage-connections-variables#local-only-airflow_settingsyaml) file. The CLI automatically adds all Airflow connections, variables, and pools listed in this file to your local metadata database.
-
-**Benefits**
-
-- For local Airflow, if your local metadata database gets corrupted or accidentally deleted, you will still have access to your connections and variables.
-- You can have multiple files for different groups of objects. For example, you can use a file called `airflow_settings_dev.yaml` to test DAGs with resources specific to dev.
-- You can apply changes from the file without restarting your local Airflow environment.
-- Ability to see connections and variables from the UI
-- Ability to export connections and variables using API
-- Connections and variables are encrypted and stored in the Airflow metadata database
-
-**Limitations**
-
-- You can't directly export your configurations to Astro because this file does not work on Astro deployments Airflow environments. It requires a two-step process of export and import using Astro CLI
-- You have to manage your connections and variables as YAML.
-- It’s not secure or centralized as a secrets backend
 
 ## Deploy to Astro
 
