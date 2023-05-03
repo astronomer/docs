@@ -54,7 +54,10 @@ The easiest and most accessible way to create Airflow connections and variables 
 ### Secrets backend
 
 
-A secrets backend is the most secure and recommended way to access connections and variables on Airflow. To unit test your DAGs locally, you can choose to use to skip this but it is advisable to integrate with a Secrets backend before you deploy to production. See how you can configure a secrets backend [locally](cli/authenticate-to-clouds) and on [Astro](secrets-backend). 
+A secrets backend is the most secure way to store connections and variables. You can access a secrets backend both locally and on Astro by configuring the appropriate credentials in your Airflow environment. Astronomer recommends this method for all critical production workflows. See the following documentation for setup steps:
+
+- [Authenticate to clouds locally](cli/authenticate-to-clouds.md)
+- [Configure a secrets backend](secrets-backend.md)
 
 **Benefits**
 
