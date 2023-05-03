@@ -46,10 +46,10 @@ The easiest and most accessible way to create Airflow connections and variables 
 
 **Limitations**
 
-- You can ***only*** automatically export your variables to Astro as environment variables
-- Managing many connections or variables this way can become unwieldy.
+- You can only automatically export your Airflow variables to Astro as environment variables.
+- Managing many connections or variables can become unwieldy.
 - It's not the most secure option for sensitive variables.
-- For local Airflow, you'll lose your connections and variables if you delete your metadata database with `astro dev kill`.
+- In a local environment, you'll lose your connections and variables if you delete your metadata database with `astro dev kill`.
 
 ### Secrets backend
 
