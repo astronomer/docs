@@ -14,7 +14,7 @@ Use this document to understand all available options for managing variables and
 
 - A locally hosted Astro project using Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md).
-## Choose a strategy
+## Choose a variable and connection management strategy
 
 :::tip 
 
