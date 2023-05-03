@@ -12,9 +12,8 @@ Use this document to understand all available options for managing variables and
 
 ## Prerequisites
 
-- A locally hosted Astro project using Astro CLI. See [Create a project](http://localhost:3000/astro/develop-project#create-an-astro-project).
-- A Deployment on Astro. See [Create a Deployment](http://localhost:3000/astro/create-deployment).
-
+- A locally hosted Astro project using Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
+- A Deployment on Astro. See [Create a Deployment](create-deployment.md).
 ## Choose a strategy
 
 :::tip 
