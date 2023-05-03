@@ -73,7 +73,7 @@ A secrets backend is the most secure way to store connections and variables. You
 - You cannot use the Airflow UI to view connections and variables.
 - You are responsible to ensure the secrets are encrypted.
 
-### Environment Variables
+### Environment variables
 
 :::tip IMPORTANT
 
