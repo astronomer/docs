@@ -75,11 +75,6 @@ A secrets backend is the most secure way to store connections and variables. You
 
 ### Environment variables
 
-:::tip IMPORTANT
-
-Astronomer recommends this for local Airflow only
-
-:::
 
 You can use Airflow's system-level environment variables to store connections and variables. This strategy is good if you don't have a secrets backend, but you still want to take advantage of security and RBAC features to limit access to connections and variables. Generally, this strategy is used for local Airflow and the connections are prefixed using `AIRFLOW_CONN_` and variables using `AIRFLOW_VAR_` .
 
