@@ -68,10 +68,10 @@ A secrets backend is the most secure way to store connections and variables. You
 
 **Limitations**
 
-- Third-party secrets manager is required
-- Ways to access secrets manager locally and from Astro differ, hence first-time setup is complicated.
-- You cannot use Airflow UI to view connections and variables.
-- You are responsible to ensure the secrets are encrypted
+- A third-party secrets manager is required.
+- There are separate configurations for using a secrets backend locally and on Astro.
+- You cannot use the Airflow UI to view connections and variables.
+- You are responsible to ensure the secrets are encrypted.
 
 ### Environment Variables
 
