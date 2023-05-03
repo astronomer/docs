@@ -23,7 +23,26 @@ It is not necessary to choose the same approach for both connections and variabl
 :::
 
 Astronomer recommends using the [Astro CLI](cli/overview.md) to run a local Airflow environment and test your DAGs locally before deploying to Astro. Your Airflow connection and variable management strategy to be compatible with both your local testing workflows as well as your Astro workflows. Therefore, to minimize complexity, try using only one type of strategy for both local and deployed Airflow environments. 
+### Storage and encryption
 
+If you want to choose a strategy based on how Airflow connections and variables are stored, use the following table to understand which storage and encryption methods each strategy uses.
+
+| Strategy | Storage location | Visible via UI | Encrypted |
+|-----------|----------------|-----|------|
+| Airflow UI | Airflow metadata database | Yes | Yes. See [Fernet Key](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/fernet.html#fernet) | 
+| Airflow API | Airflow metadata database | Yes | Yes. See [Fernet Key](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/fernet.html#fernet) |
+| Environment variables | On local environments, in plain text. On Astro, in the control plane. | No | Yes, on Astro only. See [Data Protection](data-protection.md) | 
+| Secrets backend | Third-party secrets backend | No | Refer to your secrets backend tool documentation. |
+
+#### How Astro prioritizes storage locations
+
+If the same variable or connection is stored in multiple location, Astro applies and overrides your configurations in the following order:
+
+- Secrets backend 
+- Environment variables
+- Metadata database (any connection or variable which is visible in the Airflow UI)
+
+For example, if you set AIRFLOW_VAR_MY_VARIABLE with one value as an environment variable and you set the same variable `MY_VARIABLE` with another value in the Airflow UI, Astro uses the value set in the environment variable.
 The following table suggests some possible management strategies for specific use cases.
 
 | Scenario | Strategy |
