@@ -122,11 +122,13 @@ You can use the Airflow REST API to programmatically create Airflow connections 
 
 **Benefits**
 
-- Manage secrets at a central point and programmatically load in Airflow using API
-- Allow to have a secure as well as consistent environment for local and Astro
-- Connections and variables are encrypted and stored in the Airflow metadata database
-- Ability to see connections and variables from the UI
-- Ability to export connections and variables using API
+- You can still manage your secrets using a centralized service like a secrets backend. 
+- Programmatically update Airflow both locally and on Astro to ensure parity across environments. 
+- Connections and variables are encrypted and stored in the Airflow metadata database.
+- You can see your variables and connections in the Airflow UI.
+- You can export variables and connections using the Airflow API.
+
+For more information, see [Airflow API](airflow-api.md).
 
 **Limitations**
 
