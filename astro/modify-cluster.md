@@ -12,7 +12,7 @@ New clusters on Astro typically have default configurations that are suitable fo
 - Create a VPC connection or a transit gateway connection between your Astro cluster and a target VPC.
 - Apply custom tags, which can help your team identify your Astro clusters and associate them with a particular purpose or owner within your cloud provider ecosystem. (AWS only)
 
-Most of these modifications can't be completed in the Cloud UI or with the Astro CLI and require you to contact [Astronomer support](https://support.astronomer.io). Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Airflow UI and Cloud UI continue to be available and your Airflow tasks are not interrupted.
+Most of these modifications can't be completed in the Cloud UI or with the Astro CLI and require you to contact [Astronomer support](https://cloud.astronomer.io/support/). Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Airflow UI and Cloud UI continue to be available and your Airflow tasks are not interrupted.
 
 The information provided here will help you determine which modifications you can make to your clusters on Astro and how to request or apply the modifications. To create a new cluster, see [Create a cluster](create-cluster.md).
 
