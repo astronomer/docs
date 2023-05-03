@@ -156,7 +156,7 @@ To deploy to Astro from local Airflow, user might need to export the connections
 
 #### Secrets backend
 
-- Import/export of your connections and variables will depend on the chosen secret manager's API. Refer [here](secrets-backend.md) for information on supported secrets backend.
+If you use a secrets backend, the method for managing connections and variables between local environments and Deployments will vary based on your secrets backend, security policy, and naming conventions. 
 
 #### Environment variables
 
