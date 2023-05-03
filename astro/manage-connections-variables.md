@@ -135,18 +135,6 @@ For more information, see [Airflow API](airflow-api.md).
 - You need an additional tool or process to keep your secrets in sync across environments.
 
 
-## Deploy to Astro
-
-To deploy to Astro from local Airflow, user might need to export the connections and variables from local and import into Astro deployment. Import or export will depend on where the connections and variables are stored. There are three possible storage locations for the strategies discussed above and how to access the connections and variables from them:
-
-| Strategy | Storage location | Visible via UI | Encrypted |
-|-----------|----------------|-----|------|
-| Airflow UI | Airflow metadata database | Yes | Yes. See [Fernet Key](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/fernet.html#fernet) | 
-| Airflow API | Airflow metadata database | Yes | Yes. See [Fernet Key](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/fernet.html#fernet) |
-| `airflow_settings.yaml` | Airflow metadata database | Yes | Yes. See [Fernet Key](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/fernet.html#fernet) |
-| Environment variables | System-level environment | No | Yes, on Astro only. See [Data Protection](data-protection.md) | 
-| Secrets backend | Third-party cloud secret manager | No | Refer to your [secret manager](secrets-backend.md) |
-
 ### Import/Export
 
 
