@@ -153,14 +153,6 @@ To deploy to Astro from local Airflow, user might need to export the connections
 
 ### Import/Export
 
-**Airflow Metadata Database**
-
-- Airflow UI can neither be used to import nor export connections.
-- Airflow UI can be used to import/export variables from/to a `json` file from local and Astro.
-- Astro CLI can be used to export connections from local only. See [examples](manage-connections-variables#how-to-use-astro-cli-to-export-from-local)
-- You can use [List Connections API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connections) and [Get Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connection) to export connections.
-- You can use [List Variables API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variables) and [Get Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variable) to export variables.
-- You can use [Create Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_connection) and [Create Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_variables)
 
 #### Secrets backend
 
