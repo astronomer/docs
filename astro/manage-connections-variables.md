@@ -24,8 +24,6 @@ It is not necessary to choose the same approach for both connections and variabl
 
 We recommend that you use [Astro CLI](https://docs.astronomer.io/astro/cli/overview) to run a local Airflow environment and test your DAGs locally before Deploying to Astro. There are 5 different approaches that are discussed here and you can choose the strategy that suits you best. Regardless of the strategy you choose, keep in mind the following:
 
-- To minimize complexity, try to use only one management strategy per project.
-- In an ideal scenario, your strategy for managing connections and variables locally should be compatible with your management strategy on Astro. 
 
 ### Airflow UI
 
