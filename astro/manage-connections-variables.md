@@ -86,7 +86,7 @@ You can use Airflow's system-level environment variables to store connections an
 - For local Airflow, if your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables in the `.env` file.
 - You can export environment variables from local Airflow to Astro using the Astro CLI.
 - In case you want to override, variables set using Environment Variables take precedence over variables defined in the Airflow UI.
-- For Astro Deployment, you can edit/manage your connections and variables from the Cloud UI.
+- On Astro, you can manage your connections and variables from the Cloud UI.
 - Environment variables marked as secret are encrypted in the Astronomer control plane.
 
 **Limitations**
