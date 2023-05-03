@@ -61,6 +61,8 @@ After you select a Deployment, the CLI parses your DAGs to ensure that they don'
 
 If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
+If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. Since `astro deploy` deploys your entire Astro project, you can set up [DAG only deploys](#deploy-dags-only) to update DAG changes over a slow connection. For updating the full image over a slow connection, you can [set up CI/CD](set-up-ci-cd.md).
+
 :::tip
 
 To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy also fails. This can help you prevent your team from deploying DAGs to Astro that contain errors.
@@ -117,6 +119,7 @@ Enabling DAG-only deploys on Astro has a few benefits:
 - DAG-only deploys are significantly faster than running `astro deploy` when you have only made changes to your DAGs.
 - When you run `astro deploy --dags`, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart. This results in a more efficient use of running workers and no downtime for your Deployment.
 - You can have different sets of users deploy project changes versus DAG changes. See [DAG-based workflows](ci-cd.md#dag-based-workflows) for how you can set this up in your CI/CD pipelines.
+- You can use it to update your DAGs when you have slow upload speed with your internet connection.
 
 ### Enable DAG-only deploys on a Deployment
 
@@ -130,7 +133,7 @@ Before you enable DAG-only deploys on a Deployment, ensure that you have access 
 
 2. When the prompt appears in the Astro CLI, select the Deployment where you want to enable the feature. Running tasks will not be interrupted, but new tasks will not be scheduled until you trigger your first DAG-only deploy.
 3. Open your Deployment's Astro project.
-4. Run the following command finalize the setup and trigger a DAG-only deploy to your Deployment:  
+4. Run the following command to finalize the setup and trigger a DAG-only deploy to your Deployment:  
 
     ```sh
     astro deploy --dags
