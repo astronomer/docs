@@ -23,11 +23,11 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 2, 2023
 
-### Receive DAG alerts on Slack or PagerDuty
+### Receive Astro alerts on Slack or PagerDuty
 
-DAG alerts are a new way to be notified when your DAGs aren't running as expected. Unlike Airflow callbacks and SLAs, Astro DAG alerts require no changes to DAG code and integrate with Slack and PagerDuty.
+Astro alerts are a new way to be notified when your DAGs aren't running as expected. Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code and integrate with Slack and PagerDuty.
 
-You can set an alert on any DAG to be notified when the DAG fails or when a task takes longer to run than expected. See [Doc link] for configuration steps.
+You can set an alert on any DAG to be notified when the DAG fails or when a task takes longer to run than expected. See [Astro alerts](alerts.md) for configuration steps.
 
 ### Bug fixes
 
