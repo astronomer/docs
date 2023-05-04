@@ -39,7 +39,6 @@ To confirm a modification was completed, click the **Clusters** tab in the Cloud
 
 ### About worker node pools
 
-:::tip
 
 - Node Pool, a Kubernetes Concept, is used to refer to a group of nodes within a cluster that have the same configuration. 
 - In Astro Cluster, Worker Node Pool is a node pool for the Airflow Workers for an Airflow Deployment. 
