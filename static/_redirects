@@ -97,6 +97,7 @@
 /cloud/airflow-alerts /astro/airflow-alerts 301
 /cloud/airflow-api /astro/airflow-api 301
 /cloud/ci-cd /astro/set-up-ci-cd 301
+/astro/ci-cd /astro/set-up-ci-cd 301
 /cloud/cli-reference /astro/cli-reference 301
 /cloud/cli-release-notes /astro/cli-release-notes 301
 /cloud/configure-deployment /astro/configure-deployment 301
