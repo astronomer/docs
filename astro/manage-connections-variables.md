@@ -152,7 +152,7 @@ If you use a secrets backend, the method for managing connections and variables 
 astro deployment variable create -d <deployment_id> --load --env .env
 ```
 
-#### Airflow metadata database
+### Airflow metadata database
 
 Airflow connections and variables stored in metadata database can be exported using Astro CLI or Airflow API.
 
