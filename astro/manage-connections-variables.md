@@ -158,20 +158,24 @@ Airflow connections and variables stored in metadata database can be exported us
 
 ##### Astro CLI
 
-- You can use the following commands to export connections and variables from local and then deploy to Astro. This will deploy connections and variables as environment variables.
+Run the following command to export your Airflow connections and variables to Astro as environment variables:
+
 ```bash
 # export all airflow objects including connections and variables to `.env` file in URI format
 astro dev object export --env-export 
 
 # import into Astro variables and/or connections defined as environment variables in the .env file
 astro deployment variable create -d <deployment_id> --load --env .env
-```
+``
 
-- You can also export only variables from local and then either directly deploy to Astro Deployment or check-in to source control for CI/CD.
+You can also export only variables from your local environment and then deploy them to Astro as part of your `include` folder:
+
 ```bash
 # export variables in JSON format to vars.json in your astro project's include dir
 astro dev run variables export /usr/local/airflow/include/vars.json
-```
+``
+
+You can't automatically import Airflow connections and variables from Astro to a local environment if they're set as environment variables. However, you can pull down all non-secret environment variables from a Deployment using `astro deployment variable list` and then copy them into your `.env` file. 
 
 #### Airflow API
 
