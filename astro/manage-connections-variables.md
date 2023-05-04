@@ -154,7 +154,7 @@ astro deployment variable create -d <deployment_id> --load --env .env
 
 ### Airflow metadata database
 
-Airflow connections and variables stored in metadata database can be exported using Astro CLI or Airflow API.
+Airflow connections and variables stored in metadata database can be exported using the Astro CLI or Airflow API. An Airflow connection or variable is stored in the metadata database if it's viewable in the Airflow UI under **Connections** or **Variables**.
 
 ##### Astro CLI
 
