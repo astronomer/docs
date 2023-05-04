@@ -130,7 +130,6 @@ You can use the Airflow REST API to programmatically create Airflow connections 
 
 - You need an additional tool or process to keep your secrets in sync across environments.
 
-For more information, see [Airflow API](airflow-api.md).
 
 ## Import and export connections and variables
 
