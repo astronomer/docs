@@ -120,6 +120,9 @@ You can use Airflow's system-level environment variables to store connections an
 
 You can use the Airflow REST API to programmatically create Airflow connections and variables on a Deployment. Airflow objects created this way are stored in the Airflow metadata database. This strategy is good for teams setting up large Deployments with many Airflow connections and variables.
 
+For more information, see [Airflow API](airflow-api.md).
+
+
 #### Benefits
 
 - You can still manage your secrets using a centralized service like a secrets backend. 
