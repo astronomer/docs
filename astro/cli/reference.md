@@ -17,17 +17,11 @@ The Astronomer product you're using determines the behavior and format of comman
 
 ## Core Commands
 
-We expect that you'll use these commands most often when managing your Astro projects and Deployments:
-
 - [`astro login`](cli/astro-login.md)
 - [`astro dev init`](cli/astro-dev-init.md)
 - [`astro dev start`](cli/astro-dev-start.md)
-- [`astro dev stop`](cli/astro-dev-stop.md)
 - [`astro dev restart`](cli/astro-dev-restart.md)
 - [`astro deploy`](cli/astro-deploy.md)
-- [`astro run`](cli/astro-run.md)
-
-Each of these commands has a dedicated documentation page with additional notes and examples.
 
 ## Global Options
 

@@ -20,7 +20,7 @@ astro deployment variable list
 
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`

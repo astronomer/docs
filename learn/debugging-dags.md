@@ -138,8 +138,9 @@ It is possible for a DAG to start but its tasks to be stuck in various states or
 - If your tasks have the `depends_on_past` parameter set to `True`, those newly added tasks won't run until you set the state of prior task runs.
 - When running many instances of a task or DAG, be mindful of scaling parameters and configurations. Airflow has default settings that limit the amount of concurrently running DAGs and tasks. See [Scaling Airflow to optimize performance](airflow-scaling-workers.md) to learn more.
 - If you are using task decorators and your tasks are not showing up in the **Graph** and **Grid** view, make sure you are calling your tasks. See also [Introduction to Airflow decorators](airflow-decorators.md).
-- Double check your task dependencies and trigger rules. See [Manage DAG and task dependencies in Airflow](managing-dependencies.md). Consider recreating your DAG structure with [EmptyOperators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/empty/index.html) to ensure that your deendencies are structured as expected.
-- If you are using the Celery executor and tasks get stuck in the `queued` state, consider turning on [`stalled_task_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#stalled-task-timeout).
+- Check your task dependencies and trigger rules. See [Manage DAG and task dependencies in Airflow](managing-dependencies.md). Consider recreating your DAG structure with [EmptyOperators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/empty/index.html) to ensure that your dependencies are structured as expected.
+- As of Airflow 2.6, the [`task_queued_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#task-queued-timeout) parameter controls how long tasks can be in queued state before they are either retried or marked as failed. The default is 600 seconds.
+- If you are using the CeleryExecutor in an Airflow version earlier than 2.6 and tasks get stuck in the `queued` state, consider turning on [`stalled_task_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#stalled-task-timeout).
 
 ### Tasks are failing 
 Most task failure issues fall into one of 3 categories:
@@ -220,7 +221,7 @@ The following are some debugging steps you can try:
 - Change the `<external tool>_default` connection to use your connection details or define a new connection with a different name and pass the new name to the hook or operator.
 - Define connections using Airflow environment variables instead of adding them in the Airflow UI. Make sure you're not defining the same connection in multiple places. If you do, the environment variable takes precedence.
 - Test if your credentials work when used in a direct API call to the external tool.
-- Use the test connection feature added in Airflow 2.2 that many connection types have available.
+- Test your connections using the Airflow UI or the Airflow CLI. See [Testing connections](connections.md#testing-connections).
 
     ![Test Connections](/img/guides/test_connections_2.png)
 

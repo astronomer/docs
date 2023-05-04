@@ -91,5 +91,5 @@ For all use cases, you must make the following environment variable available to
 ASTRO_API_TOKEN=<your-token>
 ```
 
-After you set this environment variable, you can run Astro CLI commands from CI/CD pipelines without needing to manually authenticate to Astro. For more information and examples, see [Automate code deploys with CI/CD](ci-cd.md).
+After you set this environment variable, you can run Astro CLI commands from CI/CD pipelines without needing to manually authenticate to Astro. For more information and examples, see [Automate code deploys with CI/CD](set-up-ci-cd.md).
 

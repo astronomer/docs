@@ -5,13 +5,14 @@ id: airflow-email-notifications
 description: Set up email notifications for Airflow task successes and failures.
 ---
 
-Incorporating a notification framework is critical to the health of your data pipelines. In addition to [Astro alerts](alerts.md), you can configure the following Apacche Airflow notification types on Astro:
+Incorporating a notification framework is critical to the health of your data pipelines. In addition to [Astro alerts](alerts.md), you can configure the following Apache Airflow notification types on Astro:
 
 - Slack notifications
 - SLAs
 - Email notifications
+- Custom callbacks and notifiers
 
-Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices on configuring notifications in Airflow, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
+Use this guide to integrate with an SMTP service to have Astro send email notifications whenever a task run fails. To configure DAG alerts for Slack and PagerDuty, see [Astro alerts](alerts.md). For best practices and instructions on configuring other notifications in Airflow, including notifiers and custom callbacks, see [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 ## Configure Airflow email notifications
 
@@ -105,14 +106,14 @@ Use your existing Amazon SES instance to send Airflow notifications by email.
 7. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 8. In the environment variables area, click **Edit Variables** and add these variables:
-    - `ENV AIRFLOW__SMTP__SMTP_HOST`: Enter the value you copied in step 5
-    - `ENV AIRFLOW__SMTP__SMTP_STARTTLS`: Enter `True`.
-    - `ENV AIRFLOW__SMTP__SMTP_SSL`: Enter `False`.
-    - `ENV AIRFLOW__SMTP__SMTP_USER`: Enter the value you copied in step 6.
-    - `ENV AIRFLOW__SMTP__SMTP_PASSWORD`: Enter the value you copied in step 6.
-    - `ENV AIRFLOW__SMTP__SMTP_PORT`: Enter `587`.
-    - `ENV AIRFLOW__SMTP__SMTP_MAIL_FROM`: Enter your from email.
-    - `ENV AIRFLOW__EMAIL__EMAIL_BACKEND`: Enter `airflow.utils.email.send_email_smtp`.
+    - `AIRFLOW__SMTP__SMTP_HOST`: Enter the value you copied in step 5
+    - `AIRFLOW__SMTP__SMTP_STARTTLS`: Enter `True`.
+    - `AIRFLOW__SMTP__SMTP_SSL`: Enter `False`.
+    - `AIRFLOW__SMTP__SMTP_USER`: Enter the value you copied in step 6.
+    - `AIRFLOW__SMTP__SMTP_PASSWORD`: Enter the value you copied in step 6.
+    - `AIRFLOW__SMTP__SMTP_PORT`: Enter `587`.
+    - `AIRFLOW__SMTP__SMTP_MAIL_FROM`: Enter your from email.
+    - `AIRFLOW__EMAIL__EMAIL_BACKEND`: Enter `airflow.utils.email.send_email_smtp`.
 
     See [Set environment variables on Astro](https://docs.astronomer.io/astro/environment-variables).
 
