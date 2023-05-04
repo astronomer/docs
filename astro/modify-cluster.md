@@ -47,17 +47,15 @@ To confirm a modification was completed, click the **Clusters** tab in the Cloud
 - [Worker Queue](https://docs.astronomer.io/astro/configure-worker-queues) in Astro utilizes the concept of Celery Queues, when using Celery Executor, to segregate different types of tasks to achieve effective resource utilization. Individual tasks in a DAG can be assigned to a particular worker queue. 
 :::
 
-- During Astro cluster creation process, you can chose a default worker type, which is used for the default worker node pool. A new deployment will automatically start with minimum 1 worker in the default worker node pool. 
+During the Astro cluster creation process, you configure a default worker node pool by specifying a worker type and a maximum node count. This node pool is available in all of your Deployments and can't be deleted. You can then configure up to 30 additional worker node pools, each having a different [worker type](modify-cluster.md#manage-worker-types). 
 
-- You can configure up to 30 additional [worker types](modify-cluster.md#manage-worker-types). For each different worker type added, a separate worker node pool is created but nodes are not added until and unless that worker node pool is used in your Deployment
+After you configure a worker node pool, you can configure [worker queues](configure-worker-queues.md) that use the node pool's worker type. Each worker in a worker queue uses the entirety of a node in the worker node pool.
 
-- Default worker node pool will always have 1 minimum node. Additional nodes will be added as required based on the auto-scaling logic of your executor (Celery vs Kuberenetes). Non-default worker node pool can scale down to zero.
+Your default worker node pool always runs a minimum of one node, while additional worker node pools can scale to zero. Additional nodes spin up as required based on the auto-scaling logic of your Deployment Airflow executor and your worker queues.
 
-- A worker node pool can have worker nodes utilized across multiple Deployments, but worker nodes themselves are not shared across Astro Deployments. 
+A worker node pool can be shared across multiple Deployments, but each node runs only the work of a single Deployment. A worker node pool's maximum node count applies across all Deployments where the node pool is used. For example, consider two Deployments that share a worker node pool with a maximum node count of 30. If one Deployment is using all 30 of the available worker nodes, the other Deployment can't use any additional nodes and therefore can't run tasks that rely on that worker type.
 
-- Once a new worker type has been added to your cluster, it becomes available for you to use in an existing or a new Worker Queue
-
-- Each worker node pool can scale up to a max number of worker nodes that can be set when adding that worker type. You can choose to go with the default of 20 or any number up to 100.
+In the following diagram, you can see the relationship between worker node pools, Deployments, and worker queues. The worker node pools can be assigned to multiple Deployments, but each node in a given worker pool is used in only one Deployment worker queue.
 
 ![Worker Node Pool and Worker Queues](/img/docs/worker-node-pool.png)
 
