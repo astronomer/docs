@@ -61,7 +61,7 @@ After you select a Deployment, the CLI parses your DAGs to ensure that they don'
 
 If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
-If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. Since `astro deploy` deploys your entire Astro project, you can set up [DAG only deploys](#deploy-dags-only) to update DAG changes over a slow connection. For updating the full image over a slow connection, you can [set up CI/CD](set-up-ci-cd.md).
+If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, set up [DAG only deploys](#deploy-dags-only) to deploy your changes over a slow connection. To make a non-DAG update over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
 
 :::tip
 
