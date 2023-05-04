@@ -49,7 +49,9 @@ To install the Starship plugin on your Cloud Composer 1 or Cloud Composer 2 inst
 You can alternatively complete this installation with the `gcloud` CLI by running the following command:
 
 ```sh
-gcloud composer environments update [GCC_NAME] --update-pypi-package=astronomer-starship
+gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
+    --location [LOCATION] \
+    --update-pypi-package=astronomer-starship
 ```
 
 :::
@@ -145,7 +147,9 @@ The core migration of your project is now complete. Read the following topics to
 If you used CI/CD to deploy code to your source Airflow environment, read the following documentation to learn about setting up a similar CI/CD pipeline for your Astro project:
 
 - [Set-Up CI/CD](set-up-ci-cd.md)
-- [CI/CD templates](ci-cd.md)
+- [CI/CD templates](ci-cd-templates/template-overview.md)
+
+Similarly to GCC, you can deploy DAGs to Astro directly from a Google Cloud Storage (GCS) bucket. See [Deploy DAGs to from Google Cloud Storage to Astro](ci-cd-templates/gcs.md).
 
 ### Set up a secrets backend
 

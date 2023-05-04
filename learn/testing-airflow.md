@@ -117,7 +117,7 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 :::tip
 
-You can view the attributes and methods available for the `dag` model in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html).
+You can view the attributes and methods available for the `dag` model in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/DAG).
 
 :::
 
@@ -191,7 +191,7 @@ jobs:
         astro dev pytest
 ```
 
-If you are an Astro customer, you can find further information on how to set up CI/CD to your Astro deployment in [CI/CD](https://docs.astronomer.io/astro/ci-cd).
+If you are an Astro customer, you can find further information on how to set up CI/CD to your Astro deployment in [CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd).
 
 ## Debug interactively with dag.test()
 

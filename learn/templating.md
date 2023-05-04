@@ -153,7 +153,7 @@ The Rendered Template view and the output of the templated attributes are shown 
 
 ![Rendered Template view](/img/guides/renderedtemplate.png)
 
-## Using custom functions and variables in templates
+## Macros: using custom functions and variables in templates
 
 As discussed previously, there are several variables available during templating. A Jinja environment and Airflow runtime are different. You can view a Jinja environment as a very stripped-down Python environment. That, among other things, means modules cannot be imported. For example, this command won't work in a Jinja template:
 
@@ -175,6 +175,7 @@ BashOperator(
 )
 ```
 
+Airflow includes some pre-injected functions out of the box for you to use in your templates. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#macros) for a list of available functions. You can also load information in JSON format using `"{{ macros.json.loads(...) }}"` and information in YAML format using `"{{ macros.yaml.safe_load(...) }}"`.
 Besides pre-injected functions, you can also use self-defined variables and functions in your templates. Airflow provides a convenient way to inject these into the Jinja environment. In the following example, a function is added to the DAG to print the number of days since May 1st, 2015:
 
 ```python

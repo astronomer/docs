@@ -34,11 +34,11 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 
 | Astro Runtime | Apache Airflow version |
 | ------------- | ---------------------- |
-| 4.1.x         | 2.2.4                  |
-| 4.2.x         | 2.2.4-2.2.5            |
-| 5.0.x         | 2.3.0-2.3.4            |
-| 6.0.x         | 2.4.0-2.4.1            |
-| 7.0.x         | 2.5.0            |
+| 4             | 2.2                    |
+| 5             | 2.3                    |
+| 6             | 2.4                    |
+| 7             | 2.5                    |
+| 8             | 2.6                    |
 
 :::info
 Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
@@ -46,25 +46,20 @@ Each Runtime version in a given minor series supports only a single version of A
 
 ## Provider packages
 
-All Astro Runtime images have the following open source provider packages pre-installed:
+The latest version of Astro Runtime has the following open source provider packages pre-installed:
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
-- Apache Hive [`apache-airflow-providers-apache-hive`](https://pypi.org/project/apache-airflow-providers-apache-hive/)
-- Apache Livy [`apache-airflow-providers-apache-livy`](https://pypi.org/project/apache-airflow-providers-apache-livy/)
-- Databricks [`apache-airflow-providers-databricks`](https://pypi.org/project/apache-airflow-providers-databricks/)
+- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
+- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/)
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
 - Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
-- Google [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-google/)
-- HTTP [`apache-airflow-password`](https://pypi.org/project/http/)
+- HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)
 - Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
-- StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
-- Snowflake [`apache-airflow-snowflake`](https://pypi.org/project/apache-airflow-providers-snowflake/)
-- Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
+- Snowflake [`apache-airflow-providers-snowflake`](https://pypi.org/project/apache-airflow-providers-snowflake/)
 - OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
-- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
 
 ### Provider package versioning
@@ -104,13 +99,12 @@ For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/rep
 
 The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
 
-| Astro Runtime | Operating System (OS)                 | Architecture    |
-| ------------- | ---------------------- | -------------   |
-| 4.1.x         | Debian 11.3 (bullseye)        | AMD64           |
-| 4.2.x         | Debian 11.3 (bullseye)        | AMD64           |
-| 5.0.x         | Debian 11.3 (bullseye)        | AMD64           |
-| 6.0.0 - 6.0.3         | Debian 11.3 (bullseye)        | AMD64           |
-| 6.0.4 - 6.0.x         | Debian 11.3 (bullseye)        | AMD64 and ARM64 |
-| 7.0.x         | Debian 11.3 (bullseye)        | AMD64 and ARM64 |
+| Astro Runtime | Operating System (OS)  | Architecture    |
+| ------------- | ---------------------- | --------------- |
+| 4             | Debian 11.3 (bullseye) | AMD64           |
+| 5             | Debian 11.3 (bullseye) | AMD64           |
+| 6             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 7             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 8             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.

@@ -1,0 +1,834 @@
+# This file contains non-secret configurations.
+
+# API webserver configuration.
+webserver:
+  port: 8871
+  endpoint: "/v1"
+  subscriptions: "/ws"
+
+
+# CORS Access
+cors:
+  allowedOrigins: []
+
+# Prisma configuration.
+prisma:
+  endpoint: "http://localhost:4466/houston"
+  secret: ~
+  debug: false
+  trgmSimilarityIndex: 0.1
+
+# NATS configuration.
+nats:
+  servers: ["nats://localhost:4222"]
+  clusterID: houston
+  ackTimeout: 120000
+  ackWait: 300000
+  connectTimeout: 3000
+  maxPubAcksInflight: 16384
+  maxReconnectAttempts: 200
+  stanMaxPingOut: 20
+  stanPingInterval: 5000
+  reconnect: true
+  reconnectTimeWait: 5000
+  reconnectJitter: 150
+  reconnectJitterTLS: 1000
+  waitOnFirstConnect: true
+workers:
+  deleteDeploymentConfig:
+    retryCount: 5
+  updateDeploymentConfig:
+    retryCount: 5
+  deploymentRefreshTaskUsage:
+    retryCount: 5
+  deploymentCleanupAirflowDb:
+    retryCount: 5
+
+# Logging configuration.
+logging:
+  level: "info"
+
+# Database connection.
+# This is mostly for knexfile now.
+# Also defined for Prisma service separately.
+database:
+  schema: houston$default
+  # this is for enabling ssl connection for database
+  ssl: false
+  # Knex migrations
+  migrations:
+    # Table to store migrations
+    tableName: migrations
+    # Schema for migrations.
+    # prisma deploy fails if this table exists in the same schema
+    # as prisma tables.
+    schemaName: public
+    # Disable wrapping migrations with transaction
+    # Currently disabling to allow better cooperation with prisma.
+    disableTransactions: true
+
+  knex:
+    pool: {
+        min: 0,
+        max: 10,
+        createTimeoutMillis: 3000,
+        acquireTimeoutMillis: 30000,
+        idleTimeoutMillis: 30000,
+        reapIntervalMillis: 1000,
+        createRetryIntervalMillis: 100,
+        propagateCreateError: false
+    }
+
+  # Knex connection
+  connection:
+    user: postgres
+    password: postgres
+    host: localhost
+    port: 5432
+    database: postgres
+
+# Houston service in cluster
+houston:
+  host: localhost
+
+# Commander configuration.
+commander:
+  enabled: false
+  host: localhost
+  port: 50051
+
+# Docker Registry configuration.
+registry:
+  host: localhost
+  port: 5000
+  authHeader: ~
+  protectedCustomRegistry:
+    enabled: false
+    baseRegistry:
+      enabled: false
+      host: localhost
+      user: ~
+      email: ~
+      pass: ~
+      secretName: ~
+      secretSourcedFromHelm: true
+    updateRegistry:
+      enabled: false
+      host: localhost
+      user: ~
+      email: ~
+      pass: ~
+      secretName: ~
+      secretSourcedFromHelm: true
+
+# Email configuration.
+email:
+  # Enable sending emails.
+  enabled: false
+
+  # Open HTML emails in browser when sent.
+  preview: false
+
+  # The "from" address to use.
+  reply: "noreply@astronomer.io"
+
+  # The SMTP server URL.
+  smtpUrl: ~
+  smtp:
+    enabled: false
+    host: ~
+    port: ~
+    secure: true
+    auth:
+      user: ~
+      pass: ~
+    tls:
+      rejectUnauthorized: true
+
+
+# Stripe configuration.
+stripe:
+  enabled: false
+  secretKey: ~
+
+# Analytics configuration
+analytics:
+  writeKey: ~
+
+# Apollo schema reporting configuration
+apollo:
+  schema:
+    reporting: false
+  key: ~
+  graphVariant: ~
+  # whether or not introspection apis are available via graphql
+  introspection: true
+
+# Set the length of a Cloud Trial
+trial:
+  # Cloud trial length in days
+  length: 14
+
+# UI configuration.
+ui:
+  subdomain: app
+  port: 5000
+  externalUrls:
+    documentation:
+      base:  https://docs.astronomer.io/software/
+      manageAirflowVersions:  https://docs.astronomer.io/software/manage-airflow-versions/
+      cliInstallWindows10:  https://docs.astronomer.io/software/cli-install-windows-10/
+      cliQuickstart:  https://docs.astronomer.io/software/cli-quickstart/
+      deployCli:  https://docs.astronomer.io/software/deploy-cli/
+      configureDeployment:  https://docs.astronomer.io/software/configure-deployment/
+      ciCd:  https://docs.astronomer.io/software/ci-cd/
+      manageWorkspaces:  https://docs.astronomer.io/software/manage-workspaces/
+    statusPage: ~
+
+# Elasticsearch configuration for Houston to pull logs.
+# This is passed striaght to the es client.
+elasticsearch:
+  # Enable or disable querying for logs in ES. This supersedes mock configuration below.
+  enabled: false
+
+  # Client configuration, passed directly to es-client constructor.
+  client:
+    node: ~
+    log: error
+
+  # If in NODE_ENV is development and this is enabled, generate sample log records.
+  mockInDevelopment: true
+
+  # Interval that data is grabbed and sent
+  pollInterval: 1000
+
+# Prometheus Metrics configuration
+prometheus:
+  # Sample data - false for no querying prometheus, true for querying prometheus.
+  enabled: false
+  host: localhost
+  port: 9090
+  pollInterval: 30000
+  statusPollInterval: 60000
+
+# Charts live here.
+# This is where the airflow chart is installed from.
+repository: "https://helm.astronomer.io/"
+
+# Helm configuration.
+# These values are set at runtime and used for airflow deployments.
+helm:
+  baseDomain: ~
+  registryAuthSecret: ~
+  releaseName: ~
+  releaseNamespace: ~
+  releaseVersion: ~
+  singleNamespace: false
+
+allowedSystemLevelDomains: []
+  # - astronomer.io
+  # - gmail.com
+
+# Auth configuration.
+auth:
+  # Local database (user/pass) configuration.
+  local:
+    enabled: false
+
+  openidConnect:
+    teamFilterRegex: ""
+    # flow option is needed until we EOL impicit (valid values "code" and "impicit")
+    flow: "implicit"
+    # import and reconcile groups from OpenID Connect
+    idpGroupsImportEnabled: false
+    manageSystemPermissionsViaIdpGroups:
+      enabled: false
+      systemAdmin: []
+      systemEditor: []
+      systemViewer: []
+    # Set the JWT expiry = Minimum of Access Token expiry and jwt.authDuration
+    # import and reconcile groups from OpenID Connect whenever JWT is expired and then issue a new JWT
+    idpGroupsRefreshEnabled: false
+    # interval (in miuntes) when reconciler runs
+    idpGroupReconcilerInterval: 60
+    clockTolerance: 0
+    # Auth0 integration configuration.
+    auth0:
+      # This "enabled" flag is currently a little misleading.
+      # The enabled flag refers only to showing the native
+      # Auth0 button in the UI. The rest of the settings here
+      # could potentially be used as to auth with Google/Github/etc
+      # if those integrations are enabled, but do not have connection
+      # information.
+      enabled: false
+      clientId: ~
+      discoveryUrl: https://astronomerio.auth0.com
+      authUrlParams:
+        audience: "astronomer-ee"
+
+    # Google oauth configuration.
+    google:
+      displayName: Google
+      enabled: false
+      # If blank we will go via Auth0
+      clientId: ~
+      discoveryUrl: https://accounts.google.com
+
+    okta:
+      enabled: false
+      scimAuthCode: ~
+      clientId: ~
+      discoveryUrl: ~
+
+    custom:
+      displayName: "Custom oAuth"
+      enabled: false
+      # If blank we will go via Auth0
+      clientId: ~
+      discoveryUrl: ~
+
+    microsoft:
+      displayName: "Azure AD"
+      scimAuthCode: ~
+      enabled: false
+      claimsMapping:
+        email: preferred_username
+      clientId: ~
+      discoveryUrl: ~
+
+    adfs:
+      displayName: "ADFS"
+      enabled: false
+      # Disable userInfo request for providers such as ADFS
+      fetchUserInfo: false
+      claimsMapping:
+        email: upn
+        name: upn
+      clientId: ~
+      discoveryUrl: ~
+
+    masqueraders:
+      uri: ~
+      providerName: ~
+      method: "GET"
+      claimsMapping:
+        email: ~
+
+  # Github via auth0
+  github:
+    enabled: false
+
+# Houston JWT configuration.
+jwt:
+  testJWT:
+    enabled: false
+    okta:
+      username: ~
+      password: ~
+      codeChallenge: ~
+      verifier: ~
+  # Development only: Passphrase to sign JWTs used to authenticate our GraphQL
+  # API.
+  #passphrase: ~
+
+  # Duration in milliseconds after user has to be logged out, irrespective of current JWT's expiry status.
+  authDuration: 86400000
+
+  # Path to folder containing tls.crt and tls.key, used for signing JWT tokens
+  # to authenticate against the Docker registry and Airflow FAB UI
+  certPath: ~
+
+  # Docker registry configuration.
+  registry:
+    certPath: ~
+    issuer: ~
+    service: ~
+    # A list of "base" images in the repository that every user will be able to
+    # pull/remount to share base layers. Pushable by SYSTEM_ADMIN and
+    # SYSTEM_EDITOR
+    baseImages:
+      - base-images/airflow
+# User management config if disabled only service accounts and users associated to groups can use astro
+userManagement:
+  enabled: true
+# Service Account configuration.
+serviceAccounts:
+  enabled: true
+  # When a new service account is created, return the full apiKey for
+  # this many minutes. After this amount of time, return a partially obfuscated version.
+  showFor: 10
+
+  # Display this many characters of the real apiKey after showFor has been exceeded.
+  showFirstChars: 6
+
+# Allow public signups.
+publicSignups: false
+
+# URL to send users to for signup when publicSignups is disabled
+externalSignupUrl: ~
+
+# Require email confirmation.
+emailConfirmation: true
+
+# Subdomain under base domain.
+subdomain: houston
+
+# Subdomain using https.
+subdomainHttpsEnabled: true
+
+# ui app name
+appSubName: "Astronomer Software"
+
+# Format: ${SCOPE}.${RESOURCE}.${VERB}
+roles:
+  # To explicitly remove a permission defined in this base config set it to false in your local config
+  # roles:
+  #   SYSTEM_VIEWER:
+  #     permissions:
+  #       system.monitoring.get: false
+
+  #
+  # Workspace Roles
+  #
+  WORKSPACE_VIEWER:
+    name: Workspace Viewer
+    permissions: &PERMS__WORKSPACE_VIEWER
+      ? workspace.config.get
+      ? workspace.deployments.get
+      ? workspace.serviceAccounts.get
+      ? workspace.users.get
+      ? workspace.teams.get
+      ? workspace.taskUsage.get
+
+  WORKSPACE_EDITOR:
+    name: Workspace Editor
+    permissions: &PERMS__WORKSPACE_EDITOR
+      <<: *PERMS__WORKSPACE_VIEWER
+      ? workspace.config.update
+      ? workspace.deployments.create
+      ? workspace.deployments.upsert
+      ? workspace.serviceAccounts.create
+      ? workspace.serviceAccounts.update
+      ? workspace.serviceAccounts.delete
+
+  WORKSPACE_ADMIN:
+    name: Workspace Admin
+    permissions: &PERMS__WORKSPACE_ADMIN
+      <<: *PERMS__WORKSPACE_EDITOR
+      ? workspace.billing.update
+      ? workspace.invites.get
+      ? workspace.config.delete
+      ? workspace.iam.update
+      ? workspace.teams.getAll
+      ? workspace.users.getAll
+
+  #
+  # Deployment Roles
+  #
+  DEPLOYMENT_VIEWER:
+    name: Deployment Viewer
+    permissions: &PERMS__DEPLOYMENT_VIEWER
+      ? deployment.airflow.get
+      ? deployment.config.get
+      ? deployment.logs.get
+      ? deployment.images.pull
+      ? deployment.metrics.get
+      ? deployment.serviceAccounts.get
+      ? deployment.variables.get
+      ? deployment.users.get
+      ? deployment.teams.get
+      ? deployment.taskUsage.get
+
+  DEPLOYMENT_EDITOR:
+    name: Deployment Editor
+    permissions: &PERMS__DEPLOYMENT_EDITOR
+      <<: *PERMS__DEPLOYMENT_VIEWER
+      ? deployment.airflow.user
+      ? deployment.config.update
+      ? deployment.images.push
+      ? deployment.images.pull
+      ? deployment.serviceAccounts.create
+      ? deployment.serviceAccounts.update
+      ? deployment.serviceAccounts.delete
+      ? deployment.variables.update
+      ? deployment.config.upsert
+
+  DEPLOYMENT_ADMIN:
+    name: Deployment Admin
+    permissions: &PERMS__DEPLOYMENT_ADMIN
+      <<: *PERMS__DEPLOYMENT_EDITOR
+      ? deployment.airflow.admin
+      ? deployment.config.delete
+      ? deployment.userRoles.update
+      ? deployment.teamRoles.update
+
+    #
+  # System Roles
+  #
+  SYSTEM_VIEWER:
+    name: System Viewer
+    permissions: &PERMS__SYSTEM_VIEWER
+      <<: [*PERMS__WORKSPACE_VIEWER, *PERMS__DEPLOYMENT_VIEWER]
+      ? system.airflow.get
+      ? system.deployment.variables.get
+      ? system.deployments.get
+      ? system.invite.get
+      ? system.monitoring.get
+      ? system.serviceAccounts.get
+      ? system.updates.get
+      ? system.users.get
+      ? system.teams.get
+      ? system.workspace.get
+      ? system.airflow.viewer
+      ? system.taskUsage.get
+
+  SYSTEM_EDITOR:
+    name: System Editor
+    permissions: &PERMS__SYSTEM_EDITOR
+      <<: [*PERMS__SYSTEM_VIEWER, *PERMS__WORKSPACE_EDITOR, *PERMS__DEPLOYMENT_EDITOR]
+      ? system.deployment.variables.update
+      ? system.serviceAccounts.update
+      ? system.airflow.user
+      ? system.registryBaseImages.push
+
+  SYSTEM_ADMIN:
+    name: System Admin
+    permissions:
+      <<: [*PERMS__SYSTEM_EDITOR, *PERMS__WORKSPACE_ADMIN, *PERMS__DEPLOYMENT_ADMIN]
+      ? system.iam.update
+      ? system.deployments.create
+      ? system.deployments.upsert
+      ? system.deployments.update
+      ? system.deployments.delete
+      ? system.deployments.logs
+      ? system.deployments.metrics
+      ? system.invites.get
+      ? system.serviceAccounts.create
+      ? system.serviceAccounts.update
+      ? system.serviceAccounts.delete
+      ? system.user.invite
+      ? system.user.delete
+      ? system.user.verifyEmail
+      ? system.workspace.addCustomerId
+      ? system.workspace.delete
+      ? system.workspace.suspend
+      ? system.workspace.extendTrial
+      ? system.airflow.admin
+      ? system.deployments.images.push
+      ? system.workspace.update
+      ? system.teams.remove
+      ? system.cleanupAirflowDb.delete
+
+  #
+  # User Role (Everyone)
+  #
+  USER:
+    name: User
+    permissions:
+      ? system.workspace.create
+      ? system.getAirflowReleaseById
+      ? system.getEmailById
+      ? system.getDeploymentById
+
+#
+# Airflow Deployment Configurations
+#
+deployments:
+  # This is a multiplying factor as a percentage/100 of the limits.
+  # Constraints - [0 < overProvisioningFactor < 1]
+  overProvisioningFactorMem: 1
+  overProvisioningFactorCPU: 1
+
+  runtimeEnvOverideSemverCheck: '>=4.2.8 <5.0.0 || >=5.0.11 <6.0.0 || >= 6.0.5'
+  subdomain: 'deployments'
+  # Airflow chart settings
+  # Static helm configurations for this chart are found below.
+  chart:
+    # This version number controls the default Airflow chart version that will be installed
+    # when creating a new deployment in the system. This is also used to ensure all
+    # child airflow deployments are kept up to date and on the latest version.
+    version: 0.0.0
+
+  # releaseVerification determines what docker images are allowed to be installed
+  # STABLE = only official Astronomer Core releases that mirror Airflow releaseVersion
+  # EDGE   = also allow Astronomer Core Edge (astronomer/core:edge) to be used
+  # DEV    = also allow hand-built dev images to be used
+  releaseVerification: STABLE
+
+  airflowReleasesFile: 'airflow_releases.json'
+  astroRuntimeReleasesFile: 'astro_runtime_releases.json'
+  # Labels specifed here are applied to Airflow deployment namespaces.
+  namespaceLabels: {}
+
+  # configureDagDeployment
+  configureDagDeployment: false
+
+  # Enable bucket based dag deployment
+  nfsMountDagDeployment: false
+
+  # Enable git sync dag deployment
+  gitSyncDagDeployment: false
+
+  # Enable astro runtime image type
+  astroRuntimeEnabled: true
+
+  # shows kibana in ui flag is set in config map in astronomer/astronomer
+  kibanaUIEnabled: true
+
+  # shows grafana in ui flag is set in config map in astronomer/astronomer
+  grafanaUIEnabled: true
+
+  # Enable manual release names
+  manualReleaseNames: false
+
+  # Enable manual namespace names:
+  # Note: for now works only with combination with preCreatedNamespaces
+  manualNamespaceNames: false
+
+  # Precreated namespaces
+  preCreatedNamespaces: []
+    # - name: test1
+    # - name: test2
+
+  # Enable namespace to be free-form text field
+  namespaceFreeFormEntry: false
+
+  # Pre-deployment webhook url
+  # Note: for now works only in combination with namespaceFreeFormEntry
+  preDeploymentValidationHook: ~
+
+  # Pre-deployment webhook API timeout in milliseconds
+  preDeploymentValidationHookTimeout: 30000
+
+  pagination:
+    workspaceUsers:
+      maxTake: 101
+    workspaceTasks:
+      maxTake: 101
+    deploymentUsers:
+      maxTake: 101
+    workspace:
+      maxTake: 101
+    system:
+      maxTake: 101
+    taskUsage:
+      maxTake: 101
+
+  # Enable Hard Delete deployments
+  hardDeleteDeployment: false
+
+  # Enable Triggerer Airflow component
+  triggererEnabled: true
+
+  # Enable Feature Flag that improves the performance of list pages at the cost of some features
+  performanceOptimizationModeEnabled: false
+
+  # Enable Upsert Deployment Mutation
+  upsertDeploymentEnabled: false
+
+  # Feature flag that controls whether the docker registry webhook endpoint is exposed
+  exposeDockerWebhookEndpoint: true
+  # Feature flag that controls whether the update deployment image endpoint is enabled
+  enableUpdateDeploymentImageEndpoint: false
+  # feature flag that controls whether we verify the image exists and th euser has access to the image that they want to deploy
+  enableUpdateDeploymentImageEndpointDockerValidation: false
+  # feature flag that controls whether a system admin can create airflows of deprecated versions
+  enableSystemAdminCanCreateDeprecatedAirflows: false
+
+  # Log out final helm values whenever they are generated, before deployment.
+  logHelmValues: false
+
+
+  taskUsageReport:
+    # feature flag to display Task usage views on system, workspace and deployment levels with a csv export functionality for sys ads
+    taskUsageMetricsEnabled: false
+    taskUsageReportNumberOfDays: 90
+
+  cleanupAirflowDb:
+    enabled: false
+
+  # CLI image tag prefix
+  # This is the prefix to use for houston-generated tags.
+  tagPrefix: deploy
+
+  authSideCar:
+    enabled: false
+    repository: nginxinc/nginx-unprivileged
+    tag: stable
+    pullPolicy: IfNotPresent
+    port: 8084
+    annotations: {}
+
+  loggingSidecar:
+    enabled: false
+    name: sidecar-log-consumer
+    image: quay.io/astronomer/ap-vector:0.23.0
+    customConfig: false
+    resources: {}
+    extraEnv: []
+
+  # This is the database connection that we use to connect
+  # and create other databases/schemas/users for each
+  # individual airflow deployment.
+  database:
+    # If disabled, skip db creation.
+    enabled: true
+
+    # Keep the airflow databases around after a
+    # deployment is deleted.
+    retainOnDelete: false
+
+    # If true, leave GRANTs in place for root user.
+    # This lets users log in with the root creds and query
+    # deployment databases.
+    allowRootAccess: false
+
+    # Connection details for root user.
+    # This can also be overridden with a connection string.
+    connection:
+      user: postgres
+      password: postgres
+      host: localhost
+      port: 5432
+      database: postgres
+
+  # An astro unit defines the smallest billable unit
+  # in the system. Default values are based on
+  # the GCP n1-standard-1. CPU should always be expressed
+  # in millicpu and memory should be expressed in Mibibytes.
+  astroUnit:
+    cpu: 100
+    memory: 384
+    pods: 1
+    airflowConns: 5
+    actualConns: 0.5
+    price: 0
+
+  # This defines how much extra capacity, in astro units,
+  # that a user can expand a deployment to. This is currently
+  # represented as a slider in the UI.
+  maxExtraAu: 400
+
+  # This defines the maximum size a pod can be in astro units.
+  maxPodAu: 35
+
+  # This defines any extra resources to account for any sidecars that
+  # are appied to every deployment component. Ex: istio.
+  sidecars:
+    cpu: 0
+    memory: 0
+
+  # Allows users to overide default component values found in defaultComponents in /src/lib/constants/index.js
+  # deployment and the default AU to use for the kubernetes
+  # resource requests, as well as its limits and minimums.
+  components: []
+
+  # This defines which executors should be supported, as well
+  # as the components required to run a particular
+  # executor configuration.
+  executors:
+    - name: LocalExecutor
+      enabled: true
+      components:
+        - scheduler
+        - webserver
+        - statsd
+        - pgbouncer
+        - triggerer
+      defaultExtraAu: 0
+    - name: CeleryExecutor
+      enabled: true
+      components:
+        - scheduler
+        - webserver
+        - statsd
+        - pgbouncer
+        - workers
+        - flower
+        - redis
+        - triggerer
+      defaultExtraAu: 0
+    - name: KubernetesExecutor
+      enabled: true
+      components:
+        - scheduler
+        - webserver
+        - statsd
+        - pgbouncer
+        - triggerer
+      defaultExtraAu: 10
+
+  defaultDistribution: buster
+
+  # These are static configs that get merged directly into the values
+  # passed to helm for each deployment.
+  helm:
+    # Define default sslmode
+    sslmode: disable
+    # Enable networkpolicies with namespace selector
+    networkNSLabels: false
+
+    # Default runtime repository
+    defaultRuntimeRepository: quay.io/astronomer/astro-runtime
+
+    # Default runtime images
+    runtimeImages:
+      airflow:
+        repository: quay.io/astronomer/astro-runtime
+      flower:
+        repository: quay.io/astronomer/astro-runtime
+
+    airflow:
+      # Elasticsearch configuration for deployments.
+      # Airflow clients access Elasticsearch differently.
+      # Houston has full acces, while the deployments connect
+      # via NGINX for auth.
+      elasticsearch:
+        enabled: false
+        connection:
+          host: localhost
+          port: 9200
+      # Set default for debian image, which is the now the default for new
+      # deployments. On image push, this will be read from (and validated) from
+      # the labels in the docker image.
+      uid: 50000
+      gid: 50000
+
+      # If enabled, deploy ServiceAccounts / Roles / RoleBindings
+      # for components that require kubernetes apiserver access.
+      rbac:
+        create: true
+      networkPolicies:
+        # Enabled network polices to restrict the way pods can communicate.
+        enabled: false
+      pgbouncer:
+        # Adds a pgbouncer service between the airflow pods (scheduler / webserver/ workers),
+        # and the backend database.
+        enabled: true
+      # Allow scheduler/workers to launch pods by default. This is required for
+      # the KubernetesPodOperator and KubernetesExecutor. This is what signals to apply the
+      # required RoleBindings.
+      allowPodLaunching: true
+    ingress:
+      # Attach an airflow deployment to the system level ingress controller.
+      enabled: true
+  mockWebhook:
+    enabled: false
+    host: ~
+    port: ~
+    database: ~
+    shouldCreateDb: true
+  # Annotation name to map the `cloud-role` from creating a deployment to on the Deployment Service account.
+  # AWS - eks.amazonaws.com/role-arn
+  # GCP - iam.gke.io/gcp-service-account
+  serviceAccountAnnotationKey: ~
+  # This minimum runtime version which is working currently with platform
+  # more details at https://github.com/astronomer/astro-runtime/blob/main/metadata/versions.json
+  minAstroRuntimeVersion: 4.2.5
+  airflowMinimumAstroRuntimeVersion: 2.2.5
+updateAirflowCheckEnabled: true
+updateRuntimeCheckEnabled: true
+disableSSLVerify: false
+useAutoCompleteForSensitiveFields: true
+shouldLogUsername: false
+maxDockerJwtExtraDeployments: 50

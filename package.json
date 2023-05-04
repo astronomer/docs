@@ -25,6 +25,7 @@
     "@fontsource/inter": "^4.5.0",
     "@mdx-js/react": "^1.6.21",
     "@svgr/webpack": "^5.5.0",
+    "analytics-node": "^6.2.0",
     "classnames": "^2.3.2",
     "clsx": "^1.1.1",
     "docusaurus2-dotenv": "^1.4.0",

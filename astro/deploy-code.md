@@ -14,7 +14,7 @@ Using the Astro CLI to push your Astro project, including your DAG code, to a De
 
 To run `astro deploy --dags`, you must first enable the [DAG-only deploys](deploy-code.md#enable-dag-only-deploys-on-a-deployment) feature for each Deployment.
 
-Follow the steps in this document to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [CI/CD](ci-cd.md).
+Follow the steps in this document to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 To exclude specific files during a code deploy, see [Ignore files with `.airflowignore`](develop-project.md#deploy-dags-only).
 
@@ -28,7 +28,7 @@ If you're using Astro Runtime 6.0.5 or later on a Mac computer with an M1 chip, 
 
 - The [Astro CLI](cli/overview.md) is installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for local development, you must install Astro CLI 1.4.0 or later to deploy to Astro.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
+- An [Astro project](develop-project.md#create-an-astro-project).
 - [Docker](https://www.docker.com/products/docker-desktop).
 
 ## Step 1: Authenticate to Astro
@@ -43,7 +43,7 @@ After running this command, you are prompted to open your web browser and log in
 
 :::tip
 
-If you have [Deployment API key](api-keys.md) credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys with [CI/CD](ci-cd.md).
+If you have [Deployment API key](api-keys.md) credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys with [CI/CD](set-up-ci-cd.md).
 
 :::
 
@@ -60,6 +60,8 @@ This command returns a list of Deployments available in your Workspace and promp
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails.
 
 If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
+
+If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, set up [DAG only deploys](#deploy-dags-only) to deploy your changes over a slow connection. To make a non-DAG update over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
 
 :::tip
 
@@ -116,7 +118,8 @@ Enabling DAG-only deploys on Astro has a few benefits:
 
 - DAG-only deploys are significantly faster than running `astro deploy` when you have only made changes to your DAGs.
 - When you run `astro deploy --dags`, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart. This results in a more efficient use of running workers and no downtime for your Deployment.
-- You can have different sets of users deploy project changes versus DAG changes. See [DAG-based workflows](ci-cd.md#dag-based-workflows) for how you can set this up in your CI/CD pipelines.
+- You can have different sets of users deploy project changes versus DAG changes. See [DAG-based templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-based-templates) for how you can set this up in your CI/CD pipelines.
+- You can use it to update your DAGs when you have slow upload speed with your internet connection.
 
 ### Enable DAG-only deploys on a Deployment
 
@@ -130,7 +133,7 @@ Before you enable DAG-only deploys on a Deployment, ensure that you have access 
 
 2. When the prompt appears in the Astro CLI, select the Deployment where you want to enable the feature. Running tasks will not be interrupted, but new tasks will not be scheduled until you trigger your first DAG-only deploy.
 3. Open your Deployment's Astro project.
-4. Run the following command finalize the setup and trigger a DAG-only deploy to your Deployment:  
+4. Run the following command to finalize the setup and trigger a DAG-only deploy to your Deployment:  
 
     ```sh
     astro deploy --dags
@@ -200,6 +203,6 @@ WARNING: The requested image's platform (linux/amd64) does not match the detecte
 
 ## Related documentation
 
-- [Automate code deploys with CI/CD](ci-cd.md)
+- [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)
 - [Develop your project](develop-project.md)
 - [Set environment variables](environment-variables.md)

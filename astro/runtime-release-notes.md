@@ -24,6 +24,60 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 8.0.0
+
+- Release date: April 30, 2023
+- Airflow version: 2.6.0
+
+### Airflow 2.6
+
+Astro Runtime 8 is based on Airflow 2.6, which includes a number of new features and improvements with an emphasis on observability. Most notably, Airflow 2.6 includes the following changes:
+
+- [Notifiers](https://airflow.apache.org/docs/apache-airflow/latest/howto/notifications.html) are a new class that can be used to send notifications from a DAG to a third party application, such as Slack. This release includes the [SlackNotifier](https://airflow.apache.orgdocs/apache-airflow-providers-slack/latest/_api/airflow/providers/slack/notifications/slack_notifier/index.html#airflow.providers.slack.notifications.slack_notifier.SlackNotifier), with more notifiers coming in the future. 
+- A major bug related to zombie tasks has been fixed. The logic for handling stalled tasks has been moved to the scheduler, and any tasks that have been queued for more than `scheduler.task_queued_timeout` are now marked as failed. This prevents a type of zombie task where tasks are stuck in an infinite loop of being scheduled and queued. 
+- You can now view logs for individual triggers in the Airflow UI. Trigger logs tell you when an individual task is sleeping and when it's triggered.
+
+To learn more, see the [Apache Airflow 2.6.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-6-0-2023-04-30).
+
+### Fewer dependencies installed by default
+
+:::warning Breaking change
+
+This change can result in DAGs working differently after upgrading. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) before upgrading.
+
+:::
+
+Astro Runtime now includes fewer default dependencies to save on memory usage. The following provider packages are no longer installed by default:
+
+- `apache-airflow-providers-apache-hive`
+- `apache-airflow-providers-apache-livy`
+- `apache-airflow-providers-databricks`
+- `apache-airflow-providers-dbt-cloud`
+- `apache-airflow-providers-microsoft-mssql`
+- `apache-airflow-providers-sftp`
+- `apache-airflow-providers-snowflake`
+
+If your DAGs use any of these providers, ensure that the provider packages are listed in your Astro project `requirements.txt` file before upgrading. 
+
+### Additional improvements
+
+- Upgraded to Python 3.10. to continue using Python 3.9, see [Python versioning](runtime-image-architecture.md#python-versioning)
+- Upgraded `astronomer-providers` to 1.15.4, which includes a bug fix for a backwards compatibility issue. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1154-2023-04-19) for a complete list of changes. 
+- Upgraded `openlineage-airflow` to 0.23.0, which includes support for dbt snapshots and support for parsing additional SQL commands. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md#0230---2023-4-20) for a complete list of changes.
+
+## Astro Runtime 7.4.3
+
+- Release date: April 28, 2023
+- Airflow version: 2.5.3
+
+### Early access Airflow bug fixes
+
+- Fix KubernetesExecutor sending state to scheduler ([30872](https://github.com/apache/airflow/pull/30872))
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.15.4, which includes a bug fix for a backwards compatibility issue. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1154-2023-04-19) for a complete list of changes. 
+
 ## Astro Runtime 7.4.2
 
 - Release date: April 1, 2023
