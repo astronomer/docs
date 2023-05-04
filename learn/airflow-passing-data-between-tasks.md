@@ -67,9 +67,9 @@ You can view your XComs in the Airflow UI by going to **Admin** > **XComs**. You
 
 XComs should be used to pass small amounts of data between tasks. For example, task metadata, dates, model accuracy, or single value query results are all ideal data to use with XCom.
 
-While there is nothing stopping you from passing larger amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](custom-xcom-backends-tutorial.md) while paying close attention to appropriately [scaling your Airflow resources](airflow-scaling-workers.md).
+While you can technically pass large amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](custom-xcom-backends-tutorial.md) and [scaling your Airflow resources](airflow-scaling-workers.md).
 
-When using the standard XCom backend, the size-limit for an XCom is determined by the metadata database you are using. Common sizes are: 
+When you use the standard XCom backend, the size-limit for an XCom is determined by your metadata database. Common sizes are: 
 
 - Postgres: 1 Gb
 - SQLite: 2 Gb
@@ -77,7 +77,7 @@ When using the standard XCom backend, the size-limit for an XCom is determined b
 
 You can see that these limits aren't very big. If you think your data passed via XCom might exceed the size of your metadata database, either use a custom XCom backend or [intermediary data storage](#intermediary-data-storage).
 
-The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as serialization of Pandas dataframes in version 2.6+, if you need to serialize other data types you can do so by using a [custom XCom backend](custom-xcom-backends-tutorial.md).
+The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as Pandas dataframe serialization in version 2.6 and later. If you need to serialize other data types you can do so using a [custom XCom backend](custom-xcom-backends-tutorial.md).
 
 ### Custom XCom backends
 
