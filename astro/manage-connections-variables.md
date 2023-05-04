@@ -144,7 +144,7 @@ In production environments with multiple team members, you might want to export 
 
 If you use a secrets backend, the method for managing connections and variables between local environments and Deployments will vary based on your secrets backend and its API. You can still export the connections and variables from local, but you have to rely on secret manager's API to migrate.
 
-#### Environment variables
+### Environment variables
 
 - You can only import connections and variables from the `.env` file from local to Astro using Astro CLI.
 ```bash
