@@ -1,7 +1,7 @@
 ---
-sidebar_label: "AWS cluster settings"
-title: "AWS cluster settings"
-id: resource-reference-aws
+sidebar_label: "AWS Hybrid cluster settings"
+title: "AWS Hybrid cluster settings"
+id: resource-reference-aws-hybrid
 description: Reference of all supported configurations for new Astro clusters on Amazon Web Services.
 sidebar_custom_props: { icon: "img/aws.png" }
 ---

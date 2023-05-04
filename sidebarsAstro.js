@@ -118,16 +118,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Install Astro",
-          link: {
-            type: 'generated-index',
-            title: 'Install Astro',
-            description: 'Install Astro on the Astronomer-hosted cloud or your existing cloud instance.'
-          },
-          items: ["install-aws", "install-azure", "install-gcp"],
-        },
-        {
-          type: "category",
           label: "User access",
           items: ["configure-idp","add-user", "user-permissions", "manage-domains"],
         },
@@ -142,33 +132,53 @@ module.exports = {
           items: [
             "create-cluster",
             "modify-cluster",
-            {
-              type: "category",
-              label: "Cluster settings reference",
-              link: {
-                type: "generated-index",
-                title: "Cluster settings reference",
-                description:
-                  "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
-              },
-              items: [
-                "resource-reference-aws",
-                "resource-reference-azure",
-                "resource-reference-gcp",
-              ],
-            },
+            "resource-reference-hosted",
           ],
         },
         {
           type: "category",
-          label: "Connect Astro",
-          link: {
-            type: "generated-index",
-            title: "Connect Astro to external data sources",
-            description:
-              "Connect Astro to external data sources. A connection to AWS, Azure, or GCP allows Astro to access data stored on your AWS, Azure, or GCP instances and is a necessary step to running pipelines in a production environment.",
-          },
-          items: ["connect-aws", "connect-azure", "connect-gcp"],
+          label: "Manage Astro Hybrid",
+          items: [
+            "hybrid-overview",
+            {
+              type: "category",
+              label: "Install Astro Hybrid",
+              link: {
+                type: 'generated-index',
+                title: 'Install Astro Hybrid',
+                description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
+              },
+              items: ["install-aws", "install-azure", "install-gcp"],
+            },
+            {
+              type: "category",
+              label: "Connect to Hybrid clusters",
+              link: {
+                type: "generated-index",
+                title: "Connect Astro Hybrid clusters to external data sources",
+                description:
+                  "Connect Astro Hybrid clusters to external data sources. A connection to AWS, Azure, or GCP allows Astro to access data stored on your AWS, Azure, or GCP instances and is a necessary step to running pipelines in a production environment.",
+              },
+              items: ["connect-aws", "connect-azure", "connect-gcp"],
+            },
+            "create-hybrid-cluster",
+            "modify-hybrid-cluster",
+            {
+              type: "category",
+              label: "Hybrid cluster settings reference",
+              link: {
+                type: "generated-index",
+                title: "Astro Hybrid cluster settings reference",
+                description:
+                  "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
+              },
+              items: [
+                "resource-reference-aws-hybrid",
+                "resource-reference-azure-hybrid",
+                "resource-reference-gcp-hybrid",
+              ],
+            },
+          ],
         },
       ],
     },
@@ -197,21 +207,6 @@ module.exports = {
           items: [
             "runtime-image-architecture",
             "runtime-version-lifecycle-policy",
-          ],
-        },
-        {
-          type: "category",
-          label: "Cluster settings",
-          link: {
-            type: "generated-index",
-            title: "Cluster settings reference",
-            description:
-              "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
-          },
-          items: [
-            "resource-reference-aws",
-            "resource-reference-azure",
-            "resource-reference-gcp",
           ],
         },
         'platform-variables',

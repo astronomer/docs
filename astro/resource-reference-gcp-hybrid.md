@@ -1,7 +1,7 @@
 ---
-sidebar_label: "GCP cluster settings"
-title: "GCP cluster settings"
-id: resource-reference-gcp
+sidebar_label: "GCP Hybrid cluster settings"
+title: "GCP Hybrid cluster settings"
+id: resource-reference-gcp-hybrid
 description: Reference of all supported infrastructure and configurations for new Astro clusters on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
