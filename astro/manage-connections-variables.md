@@ -22,7 +22,16 @@ It is not necessary to choose the same approach for both connections and variabl
 
 :::
 
-Astronomer recommends using the [Astro CLI](cli/overview.md) to run a local Airflow environment and test your DAGs locally before deploying to Astro. Your Airflow connection and variable management strategy to be compatible with both your local testing workflows as well as your Astro workflows. Therefore, to minimize complexity, try using only one type of strategy for both local and deployed Airflow environments. 
+Astronomer recommends using the [Astro CLI](cli/overview.md) to run a local Airflow environment and test your DAGs locally before deploying to Astro. Your Airflow connection and variable management strategies should be compatible with both your local testing workflows and your Astro workflows.
+
+The following table suggests some possible management strategies for specific use cases.
+
+| Scenario | Strategy |
+|----------|----------|
+| I'm just getting started and want to quickly create Airflow objects | Airflow UI |
+| I want to test my connection and export as URI format | Airflow UI. For exporting as URI refer to [Import and export](manage-connections-variables#import-and-export-airflow-connections-and-variables) |
+| I want to deploy the same variables across multiple different Airflow environments  | Environment variables or [export as json](manage-connections-variables#astro-cli) |
+| I need to keep my connections and variables centralized and as secure as possible | Secrets backend |
 ### Storage and encryption
 
 If you want to choose a strategy based on how Airflow connections and variables are stored, use the following table to understand which storage and encryption methods each strategy uses.
