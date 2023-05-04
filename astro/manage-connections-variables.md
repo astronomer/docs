@@ -140,7 +140,7 @@ For more information, see [Airflow API](airflow-api.md).
 
 In production environments with multiple team members, you might want to export Airflow connections and variables from your local Airflow environment to an Astro Deployment. Similarly, you might want to import connections and variables from an Astro Deployment to work on a project locally. Use the following topics to learn different strategies for exporting and importing Airflow objects based on where they are stored:
 
-#### Secrets backend
+### Secrets backend
 
 If you use a secrets backend, the method for managing connections and variables between local environments and Deployments will vary based on your secrets backend and it's API. You can still export the connections and variables from local, but you have to rely on secret manager's API to migrate.
 
