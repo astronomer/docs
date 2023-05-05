@@ -465,24 +465,22 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
 
 #### Deploy to Astro
 
-1. Run the following commands to export your environment variables to Astro: See [Set environment variables in the CLoud UI](https://docs.astronomer.io/astro/environment-variables#set-environment-variables-in-the-cloud-ui) for more information.
-    
+1. Run the following commands to export your environment variables to Astro.
  
     ```sh
     astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
     ```
+    
+    In the Cloud UI, mark `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_CLIENT_SECRET`, and `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret**. See [Set environment variables in the Cloud UI](environment-variables.md#set-environment-variables-in-the-cloud-ui).
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
   
     ```sh
     astro deploy --deployment-id <your-deployment-id> 
     ```
-:::note
-  
-  Do not store sensitive information such as passwords in Git, including in your `.env` files
-  
-:::
-  
+    
+3. Optional. Remove the environment variables from your `.env` file, or store your `.env` file so that your credentials are hidden, for example with GitHub secrets.
+
 </TabItem>
 
 </Tabs>
