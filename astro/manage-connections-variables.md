@@ -55,7 +55,8 @@ For example, if you set `AIRFLOW_VAR_MY_VARIABLE` with one value as an environme
 
 ## Airflow connection and variable management strategies 
 
-Learn about the benefits, limitations, and implementations of each strategy in the following topics 
+The following sections explain the benefits, limitations, and implementations of each strategy in more detail.
+
 ### Airflow UI
 
 The quickest way to create Airflow connections and variables is through the Airflow UI. This experience is the same for both local Airflow environments and Astro Deployments. Astronomer recommends this method if you're just getting started with Airflow, you want to get your DAGs running quickly, or if you want to export connections in a URI/JSON format
