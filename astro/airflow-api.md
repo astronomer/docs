@@ -49,8 +49,8 @@ To retrieve an Astro access token, run the following API request with your Deplo
 curl --location --request POST "https://auth.astronomer.io/oauth/token" \
         --header "content-type: application/json" \
         --data-raw '{
-            "client_id": "[api-key-id]",
-            "client_secret": "[api-key-secret]",
+            "client_id": "<api-key-id]",
+            "client_secret": "<api-key-secret>",
             "audience": "astronomer-ee",
             "grant_type": "client_credentials"}'
 ```
@@ -64,8 +64,8 @@ def get_api_token() -> str:
   r = requests.post(
       "https://auth.astronomer.io/oauth/token",
       json={
-          "client_id": "[api-key-id]",
-          "client_secret": "[api-key-secret]",
+          "client_id": "<api-key-id>",
+          "client_secret": "<api-key-secret>",
           "audience": "astronomer-ee",
           "grant_type": "client_credentials"
       }
@@ -89,7 +89,7 @@ If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generatin
 Run the following command to retrieve a Deployment URL:
 
 ```sh
-astro deployment inspect -n [deployment-name] -k metadata.webserver_url
+astro deployment inspect -n <deployment-name> -k metadata.webserver_url
 ```
 
 The Deployment URL includes the name of your Organization and a short Deployment ID. For example, the Deployment URL for an Organization named `mycompany` with the Deployment ID `dhbhijp0` is `https://mycompany.astronomer.run/dhbhijp0`.
@@ -114,17 +114,17 @@ To retrieve a list of all DAGs in a Deployment, you can run a `GET` request to t
 #### cURL
 
 ```sh
-curl -X GET [your-deployment-url]/api/v1/dags \
+curl -X GET <your-deployment-url>/api/v1/dags \
    -H 'Cache-Control: no-cache' \
-   -H 'Authorization: Bearer [your-access-token]'
+   -H 'Authorization: Bearer <your-access-token>'
 ```
 
 #### Python
 
 ```python
 import requests
-token = "[your-access-token]"
-deployment_url = "[your-deployment-url]"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
 response = requests.get(
    url=f"{deployment_url}/api/v1/dags",
    headers={"Authorization": f"Bearer {token}"}
@@ -142,10 +142,10 @@ This will trigger a DAG run for the DAG you specify with a `logical_date` value 
 #### cURL
 
 ```sh
-curl -X POST [your-deployment-url]/api/v1/dags/[your-dag-id]/dagRuns \
+curl -X POST <your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
    -H 'Content-Type: application/json' \
    -H 'Cache-Control: no-cache' \
-   -H 'Authorization: Bearer [your-access-token]' \
+   -H 'Authorization: Bearer <your-access-token>' \
    -d '{}'
 ```
 
@@ -153,9 +153,9 @@ curl -X POST [your-deployment-url]/api/v1/dags/[your-dag-id]/dagRuns \
 
 ```python
 import requests
-token = "[your-access-token]"
-deployment_url = "[your-deployment-url]"
-dag_id = "[your-dag-id]"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
+dag_id = "<your-dag-id>"
 response = requests.post(
     url=f"{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
     headers={
@@ -183,8 +183,8 @@ You can also specify a `logical_date` at the time in which you wish to trigger t
 #### cURL
 
 ```sh
-curl -v -X POST [your-deployment-url]/api/v1/dags/[your-dag-id]/dagRuns \
-   -H 'Authorization: Bearer [your-access-token]' \
+curl -v -X POST <your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
+   -H 'Authorization: Bearer <your-access-token>' \
    -H 'Cache-Control: no-cache' \
    -H 'content-type: application/json' \
    -d '{"logical_date":"2022-11-16T11:34:00Z"}'
@@ -195,9 +195,9 @@ curl -v -X POST [your-deployment-url]/api/v1/dags/[your-dag-id]/dagRuns \
 Using Python:
 ```python
 import requests
-token = "[your-access-token]"
-deployment_url = "[your-deployment-url]"
-dag_id = "[your-dag-id]"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
+dag_id = "<your-dag-id>"
 response = requests.post(
     url=f"{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
     headers={
@@ -219,10 +219,10 @@ Replace `[your-dag-id]` with your own value.
 #### cURL
 
 ```sh
-curl -X PATCH [your-deployment-url]/api/v1/dags/[your-dag-id] \
+curl -X PATCH <your-deployment-url>/api/v1/dags/<your-dag-id> \
    -H 'Content-Type: application/json' \
    -H 'Cache-Control: no-cache' \
-   -H 'Authorization: Bearer [your-access-token]' \
+   -H 'Authorization: Bearer <your-access-token>' \
    -d '{"is_paused": true}'
 ```
 
@@ -230,9 +230,9 @@ curl -X PATCH [your-deployment-url]/api/v1/dags/[your-dag-id] \
 
 ```python
 import requests
-token = "[your-access-token]"
-deployment_url = "[your-deployment-url]"
-dag_id = "[your-dag-id]"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
+dag_id = "<your-dag-id>"
 response = requests.patch(
     url=f"{deployment_url}/api/v1/dags/{dag_id}",
     headers={
@@ -242,7 +242,7 @@ response = requests.patch(
     data='{"is_paused": true}'
 )
 print(response.json())
-# Prints data about the DAG with id [dag-id]
+# Prints data about the DAG with id <dag-id>
 ```
 ## Trigger DAG runs across Deployments
 
@@ -254,7 +254,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
 
 2. On the triggering Deployment, set the API key ID and API key secret from the target Deployment as `KEY_ID` and `KEY_SECRET` environment variables in the Cloud UI. Make `KEY_SECRET` secret. See [Set environment variables on Astro](environment-variables.md).
 
-3. In your DAG, write a task called `get-token` that uses your Deployment API key ID and secret to make a request to the Astronomer API that retrieves the access token that's required for authentication to the Airflow API. In another task called `trigger_external_dag`, use the access token to make a request to the `dagRuns` endpoint of the Airflow REST API. Make sure to replace `[target-deployment-url]` with your own value. For example:
+3. In your DAG, write a task called `get-token` that uses your Deployment API key ID and secret to make a request to the Astronomer API that retrieves the access token that's required for authentication to the Airflow API. In another task called `trigger_external_dag`, use the access token to make a request to the `dagRuns` endpoint of the Airflow REST API. Make sure to replace `<target-deployment-url>` with your own value. For example:
 
     ````python
     import requests
@@ -263,7 +263,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
     from airflow.decorators import dag, task
     KEY_ID = os.environ.get("KEY_ID")
     KEY_SECRET = os.environ.get("KEY_SECRET")
-    AIRFLOW_URL = "[target-deployment-url]"
+    AIRFLOW_URL = "<target-deployment-url>"
     @dag(schedule="@daily",
         start_date=datetime(2022, 1, 1),
         catchup=False)
@@ -275,7 +275,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
                                         "grant_type": "client_credentials",
                                         "client_id": {KEY_ID},
                                         "client_secret": {KEY_SECRET})
-            return response.json()["access_token"]
+            return response.json()<"access_token">
         @task
         def trigger_external_dag(token):
             dag_id = "target"
