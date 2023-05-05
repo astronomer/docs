@@ -49,7 +49,7 @@ To retrieve an Astro access token, run the following API request with your Deplo
 curl --location --request POST "https://auth.astronomer.io/oauth/token" \
         --header "content-type: application/json" \
         --data-raw '{
-            "client_id": "<api-key-id]",
+            "client_id": "<api-key-id>",
             "client_secret": "<api-key-secret>",
             "audience": "astronomer-ee",
             "grant_type": "client_credentials"}'
@@ -214,7 +214,7 @@ print(response.json())
 
 You can pause a DAG by executing a `PATCH` command against the [`dag` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/patch_dag).
 
-Replace `[your-dag-id]` with your own value.
+Replace `<your-dag-id>` with your own value.
 
 #### cURL
 
