@@ -84,7 +84,7 @@ A secrets backend is the most secure way to store connections and variables. You
 
 - It's compatible with strict organization security standards.
 - All connections and variables are centralized and standardized.
-- Secrets that can be shared across different Airflow environments
+- Secrets that can be shared across different Airflow environments.
 - You can configure secrets backend to allow selective access to connections and variables based on naming convention.
 
 #### Limitations
