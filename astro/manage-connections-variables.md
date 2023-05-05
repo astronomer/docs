@@ -123,7 +123,6 @@ You can use the Airflow REST API to programmatically create Airflow connections 
 
 For more information, see [Airflow API](airflow-api.md).
 
-
 #### Benefits
 
 - You can still manage your secrets using a centralized service like a secrets backend. 
