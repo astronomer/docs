@@ -33,7 +33,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 Astro Runtime 8 is based on Airflow 2.6, which includes a number of new features and improvements with an emphasis on observability. Most notably, Airflow 2.6 includes the following changes:
 
-- [Notifiers](https://airflow.apache.org/docs/apache-airflow/latest/howto/notifications.html) are a new class that can be used to send notifications from a DAG to a third party application, such as Slack. This release includes the [SlackNotifier](https://airflow.apache.orgdocs/apache-airflow-providers-slack/latest/_api/airflow/providers/slack/notifications/slack_notifier/index.html#airflow.providers.slack.notifications.slack_notifier.SlackNotifier), with more notifiers coming in the future. 
+- [Notifiers]( https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html) are a new class that can be used to send notifications from a DAG to a third party application, such as Slack. This release includes the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/_api/airflow/providers/slack/notifications/slack_notifier/index.html#airflow.providers.slack.notifications.slack_notifier.SlackNotifier), with more notifiers coming in the future. 
 - A major bug related to zombie tasks has been fixed. The logic for handling stalled tasks has been moved to the scheduler, and any tasks that have been queued for more than `scheduler.task_queued_timeout` are now marked as failed. This prevents a type of zombie task where tasks are stuck in an infinite loop of being scheduled and queued. 
 - You can now view logs for individual triggers in the Airflow UI. Trigger logs tell you when an individual task is sleeping and when it's triggered.
 
