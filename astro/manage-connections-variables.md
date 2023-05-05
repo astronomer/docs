@@ -18,7 +18,7 @@ Use this document to understand all available options for managing variables and
 
 :::tip 
 
-It is not necessary to choose the same approach for both connections and variables. Many a times, variables decide the flow of execution of your DAG and you might prefer to check them in to source control. You also might want to view or edit them via Airflow UI. For such cases, you can export your variables in a `json` file from the Airflow UI or using Astro CLI.
+It is not necessary to choose the same approach for both connections and variables. Variables often determine your DAG's flow of execution and you might prefer to check them into source control. You also might want to view or edit them in the Airflow UI. For such cases, you can export your variables in a `json` file from the Airflow UI or using Astro CLI.
 
 :::
 
