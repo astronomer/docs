@@ -158,7 +158,7 @@ You can export Airflow connections and variables stored in metadata database usi
 
 ##### Astro CLI
 
-Run the following command to export your Airflow connections and variables to Astro as environment variables:
+Run the following command to export your Airflow connections and variables and import them to Astro as environment variables:
 
 ```bash
 # export all airflow objects including connections and variables to `.env` file in URI format
