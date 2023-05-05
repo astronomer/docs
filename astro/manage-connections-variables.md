@@ -114,7 +114,7 @@ You can use Airflow's system-level environment variables to store connections an
 #### Limitations
 
 - Connections and variables can't be viewed from the Airflow UI, but you can use them in your DAGs. 
-- You have to restart your local environment using `astro dev restart` whenever you make changes to your `.env` file.
+- You must restart your local environment using `astro dev restart` whenever you make changes to your `.env` file.
 - The environment variables are defined in plain text in `.env` and you can only mark them as a secret once you deploy to Astro.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are neither secure nor centralized as a secrets backend.
