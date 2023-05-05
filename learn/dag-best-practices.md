@@ -238,4 +238,4 @@ You can resolve issues like zombies by using task retries. Retries can be set at
 2. **DAGs:** Include `retries` in a DAG's `default_args` object.
 3. **Deployments:** Set the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`.
 
-Setting retries to `2` will protect a task from most problems common to distributed environments.
+Setting retries to `2` will protect a task from most problems common to distributed environments. For more on using retries, see [Rerun DAGs and Tasks](rerunning-dags.md).
