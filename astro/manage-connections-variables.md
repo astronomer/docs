@@ -177,7 +177,7 @@ You can also export only variables from your local environment and then deploy t
 astro dev run variables export /usr/local/airflow/include/vars.json
 ``
 
-You can't automatically import Airflow connections and variables from Astro to a local environment if they're set as environment variables. However, you can pull down all non-secret environment variables from a Deployment using `astro deployment variable list` and then copy them into your `.env` file. 
+You can't automatically export Airflow connections and variables from Astro and import them to a local environment if they're set as environment variables. However, you can pull down all non-secret environment variables from a Deployment using `astro deployment variable list` and then copy them into your `.env` file. 
 
 #### Airflow API
 
