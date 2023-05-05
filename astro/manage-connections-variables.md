@@ -63,7 +63,7 @@ The quickest way to create Airflow connections and variables is through the Airf
 #### Benefits
 
 - The UI has features for correctly formatting and testing your connections.
-- You can export your variables from the Airflow UI, as well as import them to the Airflow UI from a json file.
+- You can export your variables from the Airflow UI, as well as import them to the Airflow UI from a JSON file.
 - Connections and variables are encrypted and stored in the Airflow metadata database.
 
 #### Limitations
