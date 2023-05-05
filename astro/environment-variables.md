@@ -170,7 +170,7 @@ You can then use the following Python functions in the top level of your DAG cod
 
 :::caution
 
-Some Airflow configurations should not be overridden because of how Astro uses them. See [Global environment variables](platform-variables.md) for a list of all non-configurable environment variables.
+Some Airflow configurations should not be overridden because Astro already uses them. See [Global environment variables](platform-variables.md) for a list of all non-configurable environment variables.
 
 :::
 
