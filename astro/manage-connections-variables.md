@@ -109,7 +109,7 @@ You can use Airflow's system-level environment variables to store connections an
 - You can export environment variables from local Airflow to Astro using the Astro CLI.
 - In case you want to override variables in the Airflow UI, Airflow variables set in environment variables take precedence over Airflow UI variables.
 - On Astro, you can manage your connections and variables from the Cloud UI.
-- Environment variables marked as secret are encrypted in the Astronomer control plane.
+- Environment variables marked as **Secret** are encrypted in the Astronomer control plane.
 
 #### Limitations
 
