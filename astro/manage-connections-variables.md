@@ -52,6 +52,7 @@ If the same variable or connection is stored in multiple location, Astro applies
 3. Metadata database (any connection or variable which is visible in the Airflow UI)
 
 For example, if you set `AIRFLOW_VAR_MY_VARIABLE` with one value as an environment variable and you set the same variable `MY_VARIABLE` with another value in the Airflow UI, Astro uses the value set in the environment variable.
+
 ## Airflow connection and variable management strategies 
 
 Learn about the benefits, limitations, and implementations of each strategy in the following topics 
