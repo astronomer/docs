@@ -11,7 +11,7 @@ Use this document to understand all available options for managing variables and
 
 ## Prerequisites
 
-- A locally hosted Astro project using Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
+- A locally hosted Astro project created with the Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md).
 
 ## Choose a connection and variable management strategy
