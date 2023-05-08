@@ -120,7 +120,7 @@ Set up Podman on a Mac operating system so you can run Apache Airflow locally an
 
 - Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`.
-- Turn on rootful mode for Podman by using `podman machine set --rootful`.
+- Mac M1 machines. Turn on rootful mode for Podman by using `podman machine set --rootful`.
 
 :::tip
 
