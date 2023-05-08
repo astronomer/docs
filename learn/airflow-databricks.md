@@ -12,11 +12,15 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 
 [Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive workspaces. Astronomer recommends using Airflow primarily as an orchestrator, and to use an execution framework like Apache Spark to do the heavy lifting of data processing. It follows that using Airflow to orchestrate Databricks jobs is a natural solution for many common use cases.
 
-Astronomer has many customers who use Databricks to run jobs as part of complex pipelines. This can easily be accomplished by leveraging the [Databricks provider](https://registry.astronomer.io/providers/databricks), which includes Airflow hooks and operators that are actively maintained by the Databricks and Airflow communities. In this guide, you'll learn about the hooks and operators available for interacting with Databricks clusters and run jobs, and how to use both available operators in an Airflow DAG.
+Thanks to the open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) you can create Databricks jobs from your Airflow DAG code with full integration and observability, including repair features.
+
+Additionally to the Astro Databricks provider created by Astronomer, a [Databricks provider](https://registry.astronomer.io/providers/databricks) created and maintained by the Airflow community is available. Due to the advanced features available in the Astro Databricks provider, Astronomer recommends its use over the older Databricks provider. For reference you can find information on the community-managed Databricks provider in the [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow) section.
+
+In this tutorial you will learn how to use the Astro Databricks provider with an example use case analyzing renewable energy data.
 
 :::info
 
-All code in this guide can be found on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/databricks-tutorial).
+All code in this tutorial can be found on [the Astronomer Registry] (INSERT REGISTRY LINK LATER).
 
 :::
 
