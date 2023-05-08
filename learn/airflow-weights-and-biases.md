@@ -61,7 +61,7 @@ Use the Astro CLI to create and run an Airflow project locally.
 
 ## Step 2: Prepare the data
 
-This tutorial will create a model that predicts....[ADD MORE HERE ON WHAT THE MODEL ACTUALLY DOES/WHAT THE DATA IS]
+This tutorial will create a model that classifies churn risk based on customer data.
 
 1. Create a folder called `data` in your `include` directory.
 2. Download the CSV files from [this GitHub directory](https://github.com/astronomer/airflow-wandb-demo/tree/simple/include/data).
