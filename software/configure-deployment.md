@@ -187,21 +187,31 @@ To deploy DAGs via git-sync, you add DAGs to a repository that has been configur
 
 ## Delete a Deployment
 
-You can delete an Airflow Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab.
+You can delete an Airflow Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab. 
 
-When you delete a Deployment, your Airflow webserver, scheduler, metadata database, and deploy history will be deleted, and you will lose any configurations set in the Airflow UI.
+When you delete a Deployment, you delete your Airflow webserver, scheduler, metadata database, and deploy history, and you lose any configurations set in the Airflow UI. 
 
-In your Astronomer database, the corresponding `Deployment` record will be given a `deletedAt` value and continue to persist until permanently deleted.
+By default, Astro performs a _soft delete_ when you delete a Deployment. After you delete a Deployment, your Astronomer database, the corresponding `Deployment` record receives a `deletedAt` value and continues to persist until permanently deleted through a _hard delete_. A hard delete includes both the Deployment's metadata database and the Deployment entry in your Astronomer database.
+
+:::tip
+
+Astronomer recommends regularly doing a database audit to confirm that you hard delete databases.
+
+:::
 
 ### Hard delete a Deployment
 
-> **Note:** This feature must first be enabled at the platform level before it can be used. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `config.yaml` file and push the changes to your platform as described in [Apply a config change](apply-platform-config.md).
+To reuse a custom release name given to an existing Deployment, you need to first hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. 
 
-To reuse a custom release name given to an existing Deployment, you need to first hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. To do so, select the **Hard Delete?** checkbox before clicking **Delete Deployment**. Alternatively, you can run `astro deployment delete --hard` via the Astro CLI.
+1. Enable hard delete as an option at the platform level. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `config.yaml` file and push the changes to your platform as described in [Apply a config change](apply-platform-config.md).
 
-![Hard delete checkbox](/img/software/hard-delete.png)
+2. You can delete a Deployment with the UI or CLI.
+  - **In the UI:** Go to the Deployment's **Settings** tab and select **Delete Deployment**. Then, select the **Hard Delete?** checkbox before confirming **Delete Deployment**. 
+  - **Astro CLI:** Alternatively, you can run `astro deployment delete --hard`.
 
 This action permanently deletes all data associated with a Deployment, including the database and underlying Kubernetes resources.
+
+![Hard delete checkbox](/img/software/hard-delete.png)
 
 ## Programmatically create or update Deployments
 
