@@ -28,26 +28,26 @@ def log_data_analysis(df: pd.DataFrame):
     If the latest year in the data was also the year with the highest % of solar
     capacity and/or the year with the highest % of renewables capacity a
     celebratory message is logged as weel."""
-
-    latest_year = df.YEAR.max()
-    year_with_the_highest_solar_pct = df.loc[df["SOLAR_PCT"].idxmax(), "YEAR"]
-    year_with_the_highest_renewables_pct = df.loc[df["RENEWABLES_PCT"].idxmax(), "YEAR"]
-    df["% Solar"] = round(df["SOLAR_PCT"] * 100, 2)
-    df["% Renewable Energy Sources"] = round(df["RENEWABLES_PCT"] * 100, 2)
+    
+    latest_year = df.year.max()
+    year_with_the_highest_solar_pct = df.loc[df["solar_pct"].idxmax(), "year"]
+    year_with_the_highest_renewables_pct = df.loc[df["renewables_pct"].idxmax(), "year"]
+    df["% Solar"] = round(df["solar_pct"] * 100, 2)
+    df["% Renewable Energy Sources"] = round(df["renewables_pct"] * 100, 2)
 
     task_logger.info(
-        df[["YEAR", "% Solar", "% Renewable Energy Sources"]]
-        .sort_values(by="YEAR", ascending=True)
+        df[["year", "% Solar", "% Renewable Energy Sources"]]
+        .sort_values(by="year", ascending=True)
         .drop_duplicates()
     )
 
     if latest_year == year_with_the_highest_solar_pct:
         task_logger.info(
-            f"Yay! In {df.COUNTRY.unique()[0]} adoption of solar energy is growing!"
+            f"Yay! In {df.country.unique()[0]} adoption of solar energy is growing!"
         )
     if latest_year == year_with_the_highest_renewables_pct:
         task_logger.info(
-            f"Yay! In {df.COUNTRY.unique()[0]} adoption of renewable energy is growing!"
+            f"Yay! In {df.country.unique()[0]} adoption of renewable energy is growing!"
         )
 
 
