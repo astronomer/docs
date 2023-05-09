@@ -47,7 +47,9 @@ There is also an incompatibility between Astro Runtime 8.0.0 and the following p
 - `apache-airflow-providers-cncf-kubernetes==6.1.0`
 - `apache-airflow-providers-google==10.0.0`
 
-Runtime 8.0.0 includes both of these packages as built-in components. A new function included in this version, `get_xcom_sidecar_container_resources`, is used in `KubernetesHook`. But, Google because uses `GKEPodHook`, which doesn’t have this function, it breaks `GKEStartPodOperator`.
+That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt`file.
+
+This incompatibility occurs because Runtime 8.0.0 includes both of these packages as built-in components. A new function included in this version, `get_xcom_sidecar_container_resources`, is used in `KubernetesHook`. But, Google because uses `GKEPodHook`, which doesn’t have this function, it breaks `GKEStartPodOperator`. 
 
 #### Runtime 6 (Airflow 2.4)
 
