@@ -111,7 +111,7 @@ In this tutorial we will use an example dbt job that consists of two dbt models.
 
 2. In the `dbt` folder, create a folder called `my_energy_project`.
 
-3. In the `my_energy_project` folder, create a YAML file called `dbt-project.yml`. Add the following YAML configuration to the file. This will be used to create a dbt project called `my_energy_project`.
+3. In the `my_energy_project` folder, create a YAML file called `dbt_project.yml`. Add the following YAML configuration to the file. This will be used to create a dbt project called `my_energy_project`.
 
     ```yml
     name: 'my_energy_project'
