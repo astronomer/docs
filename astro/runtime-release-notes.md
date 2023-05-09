@@ -56,6 +56,7 @@ Astro Runtime now includes fewer default dependencies to save on memory usage. T
 - `apache-airflow-providers-microsoft-mssql`
 - `apache-airflow-providers-sftp`
 - `apache-airflow-providers-snowflake`
+- `apache-airflow-providers-ssh`
 
 If your DAGs use any of these providers, ensure that the provider packages are listed in your Astro project `requirements.txt` file before upgrading. 
 
