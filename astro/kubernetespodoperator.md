@@ -35,6 +35,11 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - An [Astro project](develop-project.md#create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
 
+## Airflow Connection
+Since `apache-airflow-providers-cncf-kubernetes==6.0.0`, a default connection is required for KubernetesPodOperator. Read more for [Default Connecion Id](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/connections/kubernetes.html#default-connection-ids).
+
+To use in_cluster config for KPO on Astro we can create an empty connection with default connection id `kubernetes_default` of type "Kubernetes Cluster Connection" and Astro will default it to in_cluster.
+
 ## Set up the KubernetesPodOperator
 
 To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:
