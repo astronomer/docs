@@ -20,7 +20,7 @@ import AstroCard from '@site/src/components/AstroCard';
 <LinkCardGrid>
   <LinkCard topIcon label="Create a Deployment" description="A Deployment is an instance of Apache Airflow hosted on Astro." href="/astro/create-deployment" icon="/img/deployment.svg" />
   <LinkCard topIcon label="Deploy code" description="Get your DAGs up and running on Astro." href="/astro/deploy-code" icon="/img/code.svg" />
-  <LinkCard topIcon label="Automate with CI/CD" description="Push code to Astro using templates for popular CI/CD tools." href="/astro/ci-cd" icon="/img/automation.svg" />
+  <LinkCard topIcon label="Automate with CI/CD" description="Push code to Astro using templates for popular CI/CD tools." href="/astro/ci-cd-templates/template-overview" icon="/img/automation.svg" />
 </LinkCardGrid>
 
 ## Get started
@@ -34,6 +34,6 @@ import AstroCard from '@site/src/components/AstroCard';
 
 <LinkCardGrid>
   <LinkCard truncate label="Develop your Astro project" description="Add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." href="/astro/develop-project" />
-  <LinkCard truncate label="Automate code deploys with CI/CD" description="Configure your Airflow environments to run faster and cost less." href="/astro/ci-cd" />
+  <LinkCard truncate label="Automate code deploys with CI/CD" description="Configure your Airflow environments to run faster and cost less." href="/astro/set-up-ci-cd" />
   <LinkCard truncate label="Deploy code to Astro" description="Use the Astro CLI to push your Astro project to a Deployment" href="/astro/deploy-code" />
 </LinkCardGrid>

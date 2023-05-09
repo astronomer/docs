@@ -155,6 +155,12 @@ This command returns a list of Deployments available in your Workspace and promp
 
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. 
 
+:::info
+
+If your internet connection has slow upload speeds, it can cause your Astro project deploy to fail. You can fix this by switching to [DAG-only deploys](deploy-code.md#enable-dag-only-deploys-on-a-deployment), where the Astro CLI only pushes your DAGs to your Deployment instead of a new Docker image.
+
+:::
+
 ## Step 6: Trigger your DAG on Astro
 
 When you deploy your Astro project, all example DAGs will initially be paused and will not start running automatically. To run one of these example DAGs according to its schedule, you have to unpause it from the Airflow UI.

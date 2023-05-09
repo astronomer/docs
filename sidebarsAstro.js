@@ -108,7 +108,8 @@ module.exports = {
           label: "Data lineage",
           items: ["set-up-data-lineage", "data-lineage"],
         },
-        "airflow-alerts",
+        "alerts",
+        "airflow-email-notifications",
       ],
     },
     {

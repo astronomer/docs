@@ -28,6 +28,20 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
 
+#### Runtime 8 (Airflow 2.6)
+
+Astro Runtime 8 includes fewer default dependencies than previous versions. Specifically, the following provider packages are no longer installed by default:
+
+- `apache-airflow-providers-apache-hive`
+- `apache-airflow-providers-apache-livy`
+- `apache-airflow-providers-databricks`
+- `apache-airflow-providers-dbt-cloud`
+- `apache-airflow-providers-microsoft-mssql`
+- `apache-airflow-providers-sftp`
+- `apache-airflow-providers-snowflake`
+
+If your DAGs depend on any of these provider packages, add the provider packages to your Astro project `requirements.txt` file before upgrading. You can also [pin specific provider package versions](#optional-pin-provider-package-versions) to ensure that none of your provider packages change after upgrading.
+
 #### Runtime 6 (Airflow 2.4)
 
 Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).

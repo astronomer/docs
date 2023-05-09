@@ -9,10 +9,10 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
 </head>
 
-<p>
-    <a href="/astro-release-notes.xml" target="_blank">
-        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
-    </a>
+<p class="rssButton">
+  <a href="/astro-release-notes.xml" target="_blank">
+    <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+  </a>
 </p>
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
@@ -20,6 +20,18 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 **Latest Astro Runtime Version**: 7.4.2 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
+
+## May 2, 2023
+
+### Receive Astro alerts on Slack or PagerDuty
+
+Astro alerts are a new way to be notified when your DAGs aren't running as expected. Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code and integrate with Slack and PagerDuty.
+
+You can set an alert on any DAG to be notified when the DAG fails or when a task takes longer to run than expected. See [Astro alerts](alerts.md) for configuration steps.
+
+### Bug fixes
+
+- Fixed an issue where SSO configurations made through Astronomer support could be overridden by updating the SSO configuration through the Cloud UI.
 
 ## April 26, 2023
 
@@ -71,11 +83,11 @@ You can now create preview Deployments from feature branches in your Git reposit
 
 You can now use the following node instance types for worker nodes in GCP clusters:
 
-- `e2-standard-32` 
-- `e2-highcpu-32` 
+- `e2-standard-32`
+- `e2-highcpu-32`
 - `n2-standard-32`
-- `n2-standard-48` 
-- `n2-standard-64` 
+- `n2-standard-48`
+- `n2-standard-64`
 - `n2-highmem-32`  
 - `n2-highmem-48`  
 - `n2-highmem-64`  
@@ -91,7 +103,7 @@ For a list of all instance types available for GCP, see [Supported worker node p
 - The default RDS instance type for new AWS clusters has been reduced from `db.r5.large` to `db.m6g.large`
 - The default CIDR range for new AWS clusters has been reduced from /19 to /20.
 - You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/support). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
-- You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace. 
+- You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace.
 
 ### Bug fixes
 
@@ -108,7 +120,7 @@ To create and use Workspace API tokens, see [Workspace API tokens](workspace-api
 ### Additional improvements
 
 - In the Astro Cloud IDE, you can now specify the output table for a Warehouse SQL cell using both literal and Python expressions. See [Create a SQL cell](cloud-ide/run-sql.md#create-a-sql-cell).
-- Port 80 is no longer used for certificate management on the data plane. 
+- Port 80 is no longer used for certificate management on the data plane.
 - To switch Organizations in the Cloud UI, you now use the **Switch Organization** button next to your Organization's name.
 
     ![Switch Organizations button](/img/release-notes/switch-organizations.png)
@@ -446,7 +458,7 @@ For more information about these worker types, see [N2 machine series](https://c
 
 Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
 
-For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-based-templates)).
 
 ### Improved data lineage interface
 
@@ -644,7 +656,7 @@ To learn more, see [Export Airflow metrics to Datadog](deployment-metrics.md#exp
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
 - You can now configure [worker queues](configure-deployment-resources.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
-## Bug fixes
+### Bug fixes
 
 - The timestamp shown in the **Updated** field of the Deployment view in the Cloud UI is now properly updated when you create or modify environment variables.
 - Fixed an issue where logging in to the Airflow UI with unrecognized credentials could freeze you on an error page.
@@ -1429,7 +1441,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 :::danger
 
-This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
+This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](set-up-ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 
 :::
 
@@ -1449,7 +1461,7 @@ This release introduces a breaking change to code deploys via the Astro CLI. Sta
 
 ### Support for Deployment API keys
 
-Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
+Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](set-up-ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
 
 ## September 3, 2021
 

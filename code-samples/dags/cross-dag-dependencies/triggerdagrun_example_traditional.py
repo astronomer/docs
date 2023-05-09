@@ -5,9 +5,6 @@ from pendulum import datetime, duration
 
 
 def print_task_type(**kwargs):
-    """
-    Example function to call before and after dependent DAG.
-    """
     print(f"The {kwargs['task_type']} task has completed.")
 
 
@@ -22,7 +19,7 @@ default_args = {
 }
 
 with DAG(
-    "trigger-dagrun-dag-traditional",
+    dag_id="trigger_dagrun_dag",
     start_date=datetime(2023, 1, 1),
     max_active_runs=1,
     schedule="@daily",
@@ -30,15 +27,16 @@ with DAG(
     catchup=False,
 ) as dag:
     start_task = PythonOperator(
-        task_id="starting_task",
+        task_id="start_task",
         python_callable=print_task_type,
         op_kwargs={"task_type": "starting"},
     )
 
     trigger_dependent_dag = TriggerDagRunOperator(
         task_id="trigger_dependent_dag",
-        trigger_dag_id="dependent-dag",
+        trigger_dag_id="dependent_dag",
         wait_for_completion=True,
+        deferrable=True,  # Note that this parameter only exists in Airflow 2.6+
     )
 
     end_task = PythonOperator(

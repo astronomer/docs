@@ -746,3 +746,13 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
   width: 100%;
   flex: 1 1 100%;
 }
+
+[class*="docItemContainer_"] {
+  position: relative;
+}
+
+.rssButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

@@ -102,6 +102,12 @@ module.exports = {
         }
       }
     },
+    newsletterForm: {
+      title: "Sign up for Developer Updates",
+      buttonText: "Submit",
+      successMessage: "Success! ✓",
+      errorMessage: "Sorry, there was issue sending your email. Please try again.",
+    },
     softwareNav: {
       items: [
         {
