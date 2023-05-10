@@ -71,6 +71,7 @@ deployment:
         description: ""
         runtime_version: 7.1.0
         dag_deploy_enabled: true
+        executor: CeleryExecutor
         scheduler_au: 5
         scheduler_count: 1
         cluster_name: AWS Cluster
