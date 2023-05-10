@@ -29,6 +29,12 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Release date: April 30, 2023
 - Airflow version: 2.6.0
 
+:::warning Breaking change
+
+Runtime 8 includes changes that can result in DAGs running differently after upgrading. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) before upgrading.
+
+:::
+
 ### Airflow 2.6
 
 Astro Runtime 8 is based on Airflow 2.6, which includes a number of new features and improvements with an emphasis on observability. Most notably, Airflow 2.6 includes the following changes:
@@ -40,12 +46,6 @@ Astro Runtime 8 is based on Airflow 2.6, which includes a number of new features
 To learn more, see the [Apache Airflow 2.6.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-6-0-2023-04-30).
 
 ### Fewer dependencies installed by default
-
-:::warning Breaking change
-
-This change can result in DAGs working differently after upgrading. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) before upgrading.
-
-:::
 
 Astro Runtime now includes fewer default dependencies to save on memory usage. The following provider packages are no longer installed by default:
 
@@ -59,9 +59,12 @@ Astro Runtime now includes fewer default dependencies to save on memory usage. T
 
 If your DAGs use any of these providers, ensure that the provider packages are listed in your Astro project `requirements.txt` file before upgrading. 
 
+### Upgrade to Python 3.10
+
+Astro Runtime now uses Python 3.10 by default. To continue using Python 3.9, see [Python versioning](runtime-image-architecture.md#python-versioning).
+
 ### Additional improvements
 
-- Upgraded to Python 3.10. to continue using Python 3.9, see [Python versioning](runtime-image-architecture.md#python-versioning)
 - Upgraded `astronomer-providers` to 1.15.4, which includes a bug fix for a backwards compatibility issue. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1154-2023-04-19) for a complete list of changes. 
 - Upgraded `openlineage-airflow` to 0.23.0, which includes support for dbt snapshots and support for parsing additional SQL commands. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md#0230---2023-4-20) for a complete list of changes.
 
