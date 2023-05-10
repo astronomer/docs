@@ -21,6 +21,10 @@ You can now programmatically create or update Deployments using the Houston API 
 
 You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
 
+### New cron job to clean Deployment task data
+
+You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of storage Astronomer Software uses by archiving data that you don't need to access on a regular basis. See [Configure a Deployment](configure-deployment.md#clean-deployment-task-metadata) for configuration steps.
+
 ### Assign System-level permissions to Teams
 
 You can assign the System Admin, System Editor, and System Viewer permissions to teams by setting the following values in your `config.yaml` file:
