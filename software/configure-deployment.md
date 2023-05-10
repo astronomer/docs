@@ -214,7 +214,7 @@ You can run a cron job to automatically archive task and DAG metadata from your 
 1. For each of your Deployments, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
 
     ```text
-    RUN pip install https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
+    https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
 2. Configure an Airflow connection to your external storage service in JSON or URI format so that it can be stored as an environment variable. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables).
