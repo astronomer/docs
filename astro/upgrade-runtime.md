@@ -31,6 +31,7 @@ This is where you'll find the upgrade considerations for specific Astro Runtime 
 #### Runtime 8 (Airflow 2.6)
 
 ##### Package dependency conflicts
+
 Astro Runtime 8.0.0 includes fewer default dependencies than previous versions. Specifically, the following provider packages are no longer installed by default:
 
 - `apache-airflow-providers-apache-hive`
@@ -43,6 +44,8 @@ Astro Runtime 8.0.0 includes fewer default dependencies than previous versions. 
 
 If your DAGs depend on any of these provider packages, add the provider packages to your Astro project `requirements.txt` file before upgrading. You can also [pin specific provider package versions](#optional-pin-provider-package-versions) to ensure that none of your provider packages change after upgrading.
 
+##### Provider incompatibilities
+
 There is also an incompatibility between Astro Runtime 8.0.0 and the following provider packages:
 
 - `apache-airflow-providers-cncf-kubernetes==6.1.0`
@@ -52,12 +55,23 @@ That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2
 
 This incompatibility occurs because Runtime 8.0.0 includes both of these packages as built-in components. A new function included in this version, `get_xcom_sidecar_container_resources`, is used in `KubernetesHook`. But, Google because uses `GKEPodHook`, which doesn’t have this function, it breaks `GKEStartPodOperator`. 
 
+##### `KubernetesPodOperators` and Runtime 8.1.0
+
+There is an incompatibility between `KubernetesPodOperators` and Astro Runtime 8.0.0. A fix for this issue has been included in Version 8.1.0. 
+
+To use this fix, update your Dockerfile to use the 8.1.0 image, like in the following example:
+
+```sh
+FROM [quay.io/astronomer/astro-runtime:8.1.0](http://quay.io/astronomer/astro-runtime:8.1.0)
+```
+
 ##### Upgrade to Python 3.10
 
 Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet support Python 3.10, use one of the following options to stay on Python 3.9:
 
 - Run your tasks using the KubernetesPodOperator or PythonVirtualenvOperator. You can configure the environment that these tasks run in to use Python 3.9.
 - Use the [`astronomer-provider-venv`](https://github.com/astronomer/astro-provider-venv) to configure a custom virtual environment that you can apply to individual tasks.
+
 #### Runtime 6 (Airflow 2.4)
 
 Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
