@@ -55,16 +55,15 @@ That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2
 
 This incompatibility occurs because Runtime 8.0.0 includes both of these packages as built-in components. A new function included in this version, `get_xcom_sidecar_container_resources`, is used in `KubernetesHook`. But, Google because uses `GKEPodHook`, which doesn’t have this function, it breaks `GKEStartPodOperator`. 
 
-##### `KubernetesPodOperators` and Runtime 8.1.0
+##### Using the KubernetesPodOperator on Astro Runtime 8
 
-There is an incompatibility between `KubernetesPodOperators` and Astro Runtime 8.0.0. A fix for this issue has been included in Version 8.1.0. 
+Astro Runtime 8 introduced a bug related to using the KubernetesPodOperator without a configured Airflow connection. If you're using the KubernetesPodOperator on Astro Runtime 8, complete only one of the following setup steps to ensure that your tasks continue to work:
 
-To use this fix, update your Dockerfile to use the 8.1.0 image, like in the following example:
-
-```sh
-FROM [quay.io/astronomer/astro-runtime:8.1.0](http://quay.io/astronomer/astro-runtime:8.1.0)
-```
-
+- Pin `apache-airflow-providers-cncf-kubernetes==5.3.0` in your `requirements.txt` file.
+- Create an Airflow connection in your Deployment with the following values:
+     - **Connection Id:**: `kubernetes_default`
+     - **Connection Type**: **Kubernetes Cluster Connection**
+- Wait to upgrade until this issue is fixed in a later patch version of Runtime 8.
 ##### Upgrade to Python 3.10
 
 Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet support Python 3.10, use one of the following options to stay on Python 3.9:
