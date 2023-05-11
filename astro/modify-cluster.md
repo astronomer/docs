@@ -114,7 +114,7 @@ You can raise a request with [Astronomer Support](https://cloud.astronomer.io/su
 
 As an Organization Owner, you can keep teams, resources, and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over your cloud resources by ensuring that only authorized pipelines are running on specific clusters.
 
-1. In the Cloud UI, go click the **Astronomer** logo in the top left corner to go to your Organization's home page.
+1. In the Cloud UI, go click the Astronomer logo in the top left corner to go to your Organization's home page.
 2. Click **Clusters** tab and then select a cluster.
 2. Click the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
 3. Click **Restricted** and select the Workspaces that you want to map to the cluster. 
