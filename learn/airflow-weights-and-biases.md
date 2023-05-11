@@ -12,9 +12,9 @@ import weights_and_biases from '!!raw-loader!../code-samples/dags/airflow-weight
 
 In this tutorial, you'll learn how to create an Airflow DAG that completes feature engineering, model training, and predictions with the Astro Python SDK and scikit-learn, and registers the model with W&B for evaluation and visualization.
 
-:::note
+:::info
 
-This tutorial was developed in partnership with Weights and Biases. For a more complex example integration that includes dbt for data transformations, check out ADD LINK TO OTHER POSTS/TUTORIALS HERE.
+This tutorial was developed in partnership with Weights and Biases. For a more complex example integration that includes dbt for data transformations, see ADD LINK TO OTHER POSTS/TUTORIALS HERE.
 
 :::
 
@@ -57,21 +57,21 @@ Use the Astro CLI to create and run an Airflow project locally.
     scikit-learn==1.2.2
     ```
 
-    This installs the packages needed to transform the data and complete feature engineering, model training and predictions.
+    This installs the packages needed to transform the data and run feature engineering, model training, and predictions.
 
 ## Step 2: Prepare the data
 
 This tutorial will create a model that classifies churn risk based on customer data.
 
-1. Create a folder called `data` in your `include` directory.
-2. Download the CSV files from [this GitHub directory](https://github.com/astronomer/airflow-wandb-demo/tree/simple/include/data).
-3. Save the downloaded CSV files in the `include/data` folder. You should have 8 total files.
+1. Create a subfolder called `data` in your Astro project `include` folder.
+2. Download the demo CSV files from [this GitHub directory](https://github.com/astronomer/airflow-wandb-demo/tree/simple/include/data).
+3. Save the downloaded CSV files in the `include/data` folder. You should have 8 files in total.
 
 ## Step 3: Create your SQL transformation scripts
 
 Before feature engineering and training, the data needs to be transformed. This tutorial uses the Astro Python SDK `transform_file` function to complete several transformations using SQL.
 
-1. Create a file in your `include` directory called `customer_churn_month.sql` and copy the following code into the file.
+1. Create a file in your `include` folder called `customer_churn_month.sql` and copy the following code into the file.
 
     ```sql
     with subscription_periods as (
@@ -156,7 +156,7 @@ Before feature engineering and training, the data needs to be transformed. This 
     select * from joined1;
     ```
 
-2. Create another file in your `include` directory called `customers.sql` and copy the following code into the file.
+2. Create another file in your `include` folder called `customers.sql` and copy the following code into the file.
 
     ```sql
     with
@@ -209,11 +209,11 @@ Before feature engineering and training, the data needs to be transformed. This 
 
 ## Step 4: Create a W&B API Key
 
-In your W&B account, create an API key that you will use to connect Airflow to W&B. You can create a key by going to the [authorize](https://wandb.ai/authorize) page, or under your user settings.
+In your W&B account, create an API key that you will use to connect Airflow to W&B. You can create a key by going to the [Authorize](https://wandb.ai/authorize) page or your user settings.
 
 ## Step 5: Set up your connections and environment variables
 
-This tutorial uses environment variables to create Airflow connections to Snowflake and W&B and configure the Astro Python SDK.
+You'll use environment variables to create Airflow connections to Snowflake and W&B, as well as to configure the Astro Python SDK.
 
 1. Open the `.env` file in your Astro project and paste the following code.
 
@@ -221,16 +221,16 @@ This tutorial uses environment variables to create Airflow connections to Snowfl
     AIRFLOW_CONN_SNOWFLAKE_DEFAULT='snowflake://<USER_NAME>:<PASSWORD>@/<ROLE_NAME>?account=<ACCOUNT_NAME>&region=<REGION_NAME>&database=<DATABASE_NAME>&warehouse=<WAREHOUSE_NAME>&role=<ROLE>'
 
     ####WANDB
-    WANDB_API_KEY='xxxxxxxxxxxxxxxxxxxxxxx'
+    WANDB_API_KEY='<your-wandb-api-key>'
 
     ###SDK
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='s3://local-xcom'
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID='minio_local'
     ```
 
-2. Update the `AIRFLOW_CONN_SNOWFLAKE_DEFAULT` variable with your Snowflake credentials.
+2. Update the placeholder values in `AIRFLOW_CONN_SNOWFLAKE_DEFAULT` with your Snowflake credentials.
 
-3. Update the `WANDB_API_KEY` variable with the API key you created in [Step 4](#step-4-create-a-wb-api-key).
+3. Replace `<your-wandb-api-key>` with the API key you created in [Step 4](#step-4-create-a-wb-api-key).
 
 ## Step 6: Create your DAG
 
