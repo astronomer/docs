@@ -5,7 +5,7 @@ id: modify-cluster
 description: Learn what you can configure on an existing Astro cluster.
 ---
 
-Astro cluster runs your Astro Deployments in isolated namespaces on the Kubernetes cluster. Your organization might choose to have one or multiple clusters to meet certain networking, governance, or use case requirements. You can always start with one cluster and [create additional clusters](create-cluster.md) later. New clusters on Astro typically have default configurations that are suitable for standard use cases. You can request [Astronomer support](https://support.astronomer.io) to edit the configuration of an existing cluster. For example, you might need to:
+An Astro cluster is a Kubernetes cluster runs your Astro Deployments in isolated namespaces. Your organization might choose to have one or multiple clusters to meet certain networking, governance, or use case requirements. You can always start with one cluster and [create additional clusters](create-cluster.md) later. New clusters on Astro typically have default configurations that are suitable for standard use cases. You can request [Astronomer support](https://support.astronomer.io) to edit the configuration of an existing cluster. For example, you might need to:
 
 - Add a [worker type](#manage-worker-type), which creates a new [worker node pool](#about-worker-node-pools) in your cluster and allows your team to select that worker type in a Deployment.
 - Increase or decrease the maximum number of worker nodes for a given worker type that your cluster can scale-up to. 
