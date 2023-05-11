@@ -17,7 +17,9 @@ If you don't have a cluster on Astro, see [Install Astro](https://docs.astronome
 
 ## View clusters
 
-In the **Cloud UI**, go to your organization's home page by clicking on the Astronomer icon ![icon](/img/favicon.ico) on the top left-hand-side corner. Then, click the **Clusters** tab to view a list of the clusters that are available to your organization. Click a cluster to view it's Cloud provider, region, creation date and last update date. Refer the below table for additional cluster information you can access: 
+1. In the **Cloud UI**, go click the Astronomer logo in the top left corner to go to your Organization's home page. 
+2. Click **Clusters** to view a list of the clusters that are available to your Organization. 
+3. Click a cluster to view its information. See the following table for more information about each available information page.
 
 | Tab name | Information | Access | 
 |----------|-------------|---------|
