@@ -32,7 +32,7 @@ If you're the first person on your team to try Astro, see [Start your Astro tria
 
 :::info
 
-This guide shows you how to deploy your DAGs to Astro, which does not require Docker. For a standard deployment of a complete Astro project, see [Deploy Code](deploy-code.md).
+This guide shows you how to deploy only your DAG files to Astro. To deploy other project changes, such as Python dependencies, see [Deploy Code](deploy-code.md).
 
 :::
 
@@ -118,7 +118,7 @@ When you create a Deployment on Astro, infrastructure is created in your cluster
 
 ## Step 4: Deploy your DAGs to your Astro Deployment
 
-You can use DAG-only deploys to quickly update your Astro Deployment without building a Docker image of your entire project. 
+You can use DAG-only deploys to quickly update your Astro Deployment.
 
 1. Run the following command to enable DAG-only code deploys.
 
@@ -126,9 +126,9 @@ You can use DAG-only deploys to quickly update your Astro Deployment without bui
     astro deployment update --dag-deploy enable
     ```
 
-3. When the prompt appears in the Astro CLI, select the Deployment where you want to run your DAGs. 
+2. When the prompt appears in the Astro CLI, select the Deployment where you want to deploy your DAGs. 
 
-4. Run the following command to finalize the setup and trigger a DAG-only deploy to your Deployment:  
+3. Run the following command to finalize the setup and trigger a DAG-only deploy to your Deployment:  
 
     ```sh
     astro deploy --dags
@@ -180,6 +180,7 @@ To limit resource usage, you might want to delete your Deployment after you fini
 
 Now that you've created and run your first DAG on Astro, the next step is to learn how to deploy a complete Astro Project to the Cloud UI.
 
+- [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, including the ability to run Airflow locally and customize your Deployment's Airflow environment. 
 - [Deploy code to Astro](/astro/deploy-code)
 - [Develop a project](/astro/develop-project)
 - [Learn how to write your own DAGs](https://docs.astronomer.io/learn/category/dags)
