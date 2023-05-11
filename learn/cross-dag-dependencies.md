@@ -102,11 +102,11 @@ See [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md) to lear
 
 The TriggerDagRunOperator is a straightforward method of implementing cross-DAG dependencies from an upstream DAG. This operator allows you to have a task in one DAG that triggers another DAG in the same Airflow environment. For more information about this operator, see [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/modules/triggerdagrunoperator).
 
-You can trigger a downstream DAG with the TriggerDagRunOperator from any point in the upstream DAG. If you set the operator's  `wait_for_completion` parameter to `True`, the upstream DAG will pause and resume only once the downstream DAG has finished running.
+You can trigger a downstream DAG with the TriggerDagRunOperator from any point in the upstream DAG. If you set the operator's  `wait_for_completion` parameter to `True`, the upstream DAG will pause and resume only once the downstream DAG has finished running. As of Airflow 2.6 this waiting process can be deferred to the triggerer by setting the parameter `deferrable` to True, turning the operator into a [deferrable operator](deferrable-operators.md) which increases Airflow's scalability and can reduce cost.
 
 A common use case for this implementation is when an upstream DAG fetches new testing data for a machine learning pipeline, runs and tests a model, and publishes the model's prediction. In case of the model underperforming, the TriggerDagRunOperator is used to start a separate DAG that retrains the model while the upstream DAG waits. Once the model is retrained and tested by the downstream DAG, the upstream DAG resumes and publishes the new model's results.
 
-The following example DAG implements the TriggerDagRunOperator to trigger the `dependent-dag` between two other tasks. The `trigger-dagrun-dag` waits until `dependent-dag` is finished its run before running `end_task`, since `wait_for_completion` in the `TriggerDagRunOperator` has been set to `True`.
+The following example DAG implements the TriggerDagRunOperator to trigger a DAG with the `dag_id` `dependent_dag` between two other tasks. Since both the `wait_for_completion` and the `deferrable` parameters of the `trigger_dependent_dag` task in the `trigger_dagrun_dag` are set to `True`, the task is deferred until the `dependent_dag` has finished its run. Once the `trigger_dagrun_dag` task completes, the `end_task` will run.
 
 <Tabs
     defaultValue="taskflow"

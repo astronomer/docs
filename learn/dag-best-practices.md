@@ -229,8 +229,13 @@ Additionally, if you change the `start_date` of your DAG you should also change 
 
 Changing the name of a DAG also creates a new entry in the database that powers the dashboard. Follow a consistent naming convention since changing a DAG's name doesn't delete the entry in the database for the old name.
 
-### Set retries at the DAG level
+### Set retries
 
 In a distributed environment where task containers are executed on shared hosts, it's possible for tasks to be killed off unexpectedly. When this happens, you might see  a [zombie process](https://en.wikipedia.org/wiki/Zombie_process) in the Airflow logs.
 
-Issues like this can be resolved by using task retries. The best practice is to set retries as a `default_arg` so they are applied at the DAG level and get more granular for specific tasks only where necessary. A good range is ~2–4 retries.
+You can resolve issues like zombies by using task retries. Retries can be set at different levels with the following precedence:
+1. **Tasks:**  Pass the `retries` parameter to the task's Operator.
+2. **DAGs:** Include `retries` in a DAG's `default_args` object.
+3. **Deployments:** Set the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`.
+
+Setting retries to `2` will protect a task from most problems common to distributed environments. For more on using retries, see [Rerun DAGs and Tasks](rerunning-dags.md).

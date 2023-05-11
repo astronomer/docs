@@ -191,7 +191,7 @@ jobs:
         astro dev pytest
 ```
 
-If you are an Astro customer, you can find further information on how to set up CI/CD to your Astro deployment in [CI/CD](https://docs.astronomer.io/astro/ci-cd).
+If you are an Astro customer, you can find further information on how to set up CI/CD to your Astro deployment in [CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd).
 
 ## Debug interactively with dag.test()
 

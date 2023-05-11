@@ -74,6 +74,10 @@ The **Grid** view was introduced in Airflow 2.3 and shows a grid representation 
 
 Click a square in the grid to view more details about the task instance and access links to additional views and actions.
 
+In Airflow version 2.6 and later, the **Grid** view includes an integrated graph visualization of the tasks and dependencies in your DAG. If you select a task or task group instance in the **Grid** column, the graph highlights and zooms to the selected task. You can also navigate complex DAGs using **Filter Tasks** and the minimap. 
+
+![Grid graph](/img/guides/ui_grid_graph.png)
+
 The **Grid** view replaced the [Tree View](https://airflow.apache.org/docs/apache-airflow/2.2.5/ui.html#tree-view) in Airflow version 2.3 and later.
 
 ### Calendar view
