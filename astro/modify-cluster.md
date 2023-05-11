@@ -101,7 +101,16 @@ To request support for a different database instance type or to modify the datab
 
 ## Add Tags to your Astronomer Infrastructure (AWS only)
 
-You can request Astronomer Support to add Tags to the Astronomer infrastructure in your Data Plane account. The tags are applied to the Astronomer provisioned infrastructure, for example, EKS Cluster, RDS Metadata database, S3 Logs Bucket, IAM Roles. You can raise a request with [Astronomer Support](https://cloud.astronomer.io/support) to add or remove tags at any time. 
+You can request Astronomer Support to add [tags](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html) to your AWS clusters. Specifically, the tags are applied to the following components in your data plane:
+
+- EKS cluster
+- RDS metadata database
+- S3 logging bucket
+- IAM roles
+  
+Tags can help your team identify your Astro clusters and associate them with a particular purpose or owner within your cloud provider ecosystem. 
+
+You can raise a request with [Astronomer Support](https://cloud.astronomer.io/support) to add or remove tags. To view your current cluster tags, see [View clusters](#view-clusters).
 
 ## Authorize Workspaces to a cluster
 
