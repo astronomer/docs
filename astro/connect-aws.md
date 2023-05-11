@@ -137,7 +137,7 @@ Authorization is the process of verifying a user or service's permissions before
     ]}>
 <TabItem value="AWS IAM roles">
 
-To grant an Astro cluster access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
+To grant an Astro deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
 
 1. In the Cloud UI, click on your Deployment, then click on **Details** and copy the value displayed in the **Workload Identity** section for the Astro deployment that needs access to AWS service resources.
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
