@@ -118,7 +118,7 @@ Follow these steps to configure Azure AD as your OIDC provider.
         - Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
         - Web / `https://houston.BASEDOMAIN/v1/oauth/callback/`.
 
-    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URIs should be https://houston.mycompany.com/v1/oauth/redirect/ and https://houston.mycompany.com/v1/oauth/callback/.
+    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URIs should be `https://houston.mycompany.com/v1/oauth/redirect/` and `https://houston.mycompany.com/v1/oauth/callback/`.
 
 3. Click **Register**.
 
@@ -148,8 +148,10 @@ Complete this setup only if you want to import Azure AD groups to Astronomer Sof
     - `openid`
     - `profile`
     - `User.Read
-    `<br /> **Note:** Make sure that you have granted the Admin Consent for all these permissions.
-    ![azure_api_permissions_consent.png](/img/software/azure_api_permissions_consent.png)
+    
+    For each of these permissions, select **Grant Admin Consent for Astronomer Data**. Your Microsoft Graph permissions should look similar to the following image:
+    
+    ![Completed permissions page in Azure](/img/software/azure_api_permissions_consent.png)
 
 
 8. Click **Token configuration** in the left menu.
