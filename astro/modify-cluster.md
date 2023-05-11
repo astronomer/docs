@@ -31,7 +31,7 @@ If you don't have a cluster on Astro, see [Install Astro](https://docs.astronome
 
 ## Manage worker types
 
-On Astro, _worker nodes_ are the nodes that are used to run Airflow workers, which are responsible for executing Airflow tasks in your Deployments. A _worker type_ is one of your cloud provider's available node instance types. This determines how much CPU and memory your workers have for running tasks. Workers are organized using [worker node pools](modify-cluster.md#about-worker-node-pools) grouping nodes of a specific instance type.
+On Astro, _worker nodes_ are the nodes that are used to run Airflow workers, which are responsible for executing Airflow tasks in your Deployments. A _worker type_ is one of your cloud provider's available node instance types. This determines how much CPU and memory your workers have for running tasks. Workers are organized using [worker node pools](modify-cluster.md#about-worker-node-pools) that groups together nodes of a specific instance type.
 
 To have a Deployment run Airflow tasks with a specific worker type, you can configure a Worker queue in your Deployment to use that worker type. If the worker type is not available to your cluster, you can raise a request with [Astronomer support](https://support.astronomer.io) with the name of the worker type to enable it for your cluster.
 
