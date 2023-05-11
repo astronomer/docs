@@ -14,7 +14,7 @@ In this tutorial, you'll learn how to create an Airflow DAG that completes featu
 
 :::info
 
-This tutorial was developed in partnership with Weights and Biases. For a more complex example integration that includes dbt for data transformations, see ADD LINK TO OTHER POSTS/TUTORIALS HERE.
+This tutorial was developed in partnership with Weights and Biases. For resources on implementing other use cases with W&B, see [Tutorials](https://wandb.ai/site/tutorials).
 
 :::
 
