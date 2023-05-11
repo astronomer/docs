@@ -22,11 +22,11 @@ If you don't have a cluster on Astro, see [Install Astro](https://docs.astronome
 3. Click a cluster to view its information. See the following table for more information about each available information page.
 
 | Tab name | Description |
-|----------|-------------|---------|
-| Details  | - Name <br/> - VPC Subnet Range <br/> - DB Instance Type <br/> - Account ID/Project ID/Subscription ID/Tenant ID <br/> - External IPs | You can only view the details from Cloud UI |
-| Worker Types | - Node Instance Type <br/> - Max Node Count| You can only view the details from Cloud UI | 
-| Tags | All tags that exist on the cluster | You can only view the details from Cloud UI | 
-| Workspace Authorization | List of Workspaces that can create Deployments on this cluster | You can restrict or authorize workspaces to a cluster. See [Authorize Workspaces to a cluster](modify-cluster.md#authorize-workspaces-to-a-cluster) |
+|----------|-------------|
+| Details  | General permanent configurations, including cluster name, IDs, and connectivity options.  | 
+| Worker Types | The available worker types for configuring worker queues on your cluster. See [Manage worker types](#manage-worker-types). | 
+| Tags | (AWS only) Configured cluster tags. See [Add tags to your cluster](#add-tags-to-your-cluster-aws-only).| 
+| Workspace Authorization | List of Workspaces that can create Deployments on this cluster. See [Authorize Workspaces to a cluster](modify-cluster.md#authorize-workspaces-to-a-cluster). |
 
 
 ## Manage worker types
