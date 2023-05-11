@@ -35,7 +35,7 @@ On Astro, _worker nodes_ are the nodes that are used to run Airflow workers, whi
 
 To have a Deployment run Airflow tasks with a specific worker type, you can configure a Worker queue in your Deployment to use that worker type. If the worker type is not available to your cluster, you can raise a request with [Astronomer support](https://support.astronomer.io) with the name of the worker type to enable it for your cluster.
 
-To confirm a modification was completed, you can [check your cluster settings](modify-cluster.md#view-clusters).
+After you make a change to your available worker types, you can [check your cluster settings](modify-cluster.md#view-clusters) to confirm that the change was applied.
 
 ### About worker node pools
 
