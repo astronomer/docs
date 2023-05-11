@@ -39,7 +39,7 @@ After you make a change to your available worker types, you can [check your clus
 
 ### About worker node pools
 
-A Kubernetes _node pool_ is group of nodes within a cluster that share the same configuration. On Astro, a _worker node pool_ is a Kubernetes node pool that's used to run Airflow workers, which are responsible for executing Airflow tasks in your Deployments. Each worker node pool has:
+A Kubernetes _node pool_ is a group of nodes within a cluster that share the same configuration. On Astro, a _worker node pool_ is a Kubernetes node pool that's used to run Airflow workers, which are responsible for executing Airflow tasks in your Deployments. Each worker node pool has:
 
 - A _worker type_, which is one of your cloud provider's available node instance types.
 - A _maximum node count_, which is the the maximum number of nodes that can run concurrently in the worker node pool across all Deployments.
