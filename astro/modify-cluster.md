@@ -99,7 +99,7 @@ Astro uses the following databases:
 
 To request support for a different database instance type or to modify the database instance type after cluster creation, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Add Tags to your Astronomer Infrastructure (AWS only)
+## Add tags to your cluster (AWS only)
 
 You can request Astronomer Support to add [tags](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html) to your AWS clusters. Specifically, the tags are applied to the following components in your data plane:
 
