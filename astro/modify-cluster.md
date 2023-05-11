@@ -21,7 +21,7 @@ If you don't have a cluster on Astro, see [Install Astro](https://docs.astronome
 2. Click **Clusters** to view a list of the clusters that are available to your Organization. 
 3. Click a cluster to view its information. See the following table for more information about each available information page.
 
-| Tab name | Information | Access | 
+| Tab name | Description |
 |----------|-------------|---------|
 | Details  | - Name <br/> - VPC Subnet Range <br/> - DB Instance Type <br/> - Account ID/Project ID/Subscription ID/Tenant ID <br/> - External IPs | You can only view the details from Cloud UI |
 | Worker Types | - Node Instance Type <br/> - Max Node Count| You can only view the details from Cloud UI | 
