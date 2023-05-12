@@ -104,6 +104,7 @@ For a list of all instance types available for GCP, see [Supported worker node p
 - The default CIDR range for new AWS clusters has been reduced from /19 to /20.
 - You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/support). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
 - You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace.
+- Organization Role permissions have changed so that only Organization Owners can create Workspaces.
 
 ### Bug fixes
 
