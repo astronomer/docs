@@ -34,7 +34,23 @@ To get the most out of this tutorial, you should be familiar with:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A [Weights and Biases](https://wandb.ai/site) account. Personal accounts are available for free.
-- A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://signup.snowflake.com/) for 30 days. 
+
+## Quickstart:  
+  
+    If you have a github account you can get started quickly by cloning the demo repository.
+      
+    ```sh
+    git clone https://github.com/astronomer/airflow-wandb-demo
+    cd airflow-wandb-demo
+    ```
+      
+    Edit the .env file with your WANDB_API_KEY.
+
+    ```sh
+    astro dev start
+    ```
+      
+    For more details on how the demo was built follow the steps below.
 
 ## Step 1: Configure your Astro project
 
@@ -50,7 +66,7 @@ Use the Astro CLI to create and run an Airflow project locally.
 2. Add the following line to the `requirements.txt` file of your Astro project:
 
     ```text
-    astro-sdk-python[snowflake]==1.5.3
+    astro-sdk-python[postgres]==1.5.3
     wandb==0.14.0
     pandas==1.5.3
     numpy==1.24.2
@@ -64,8 +80,8 @@ Use the Astro CLI to create and run an Airflow project locally.
 This tutorial will create a model that classifies churn risk based on customer data.
 
 1. Create a subfolder called `data` in your Astro project `include` folder.
-2. Download the demo CSV files from [this GitHub directory](https://github.com/astronomer/airflow-wandb-demo/tree/simple/include/data).
-3. Save the downloaded CSV files in the `include/data` folder. You should have 8 files in total.
+2. Download the demo CSV files from [this GitHub directory](https://github.com/astronomer/airflow-wandb-demo/tree/main/include/data).
+3. Save the downloaded CSV files in the `include/data` folder. You should have 5 files in total.
 
 ## Step 3: Create your SQL transformation scripts
 
@@ -82,9 +98,11 @@ Before feature engineering and training, the data needs to be transformed. This 
             monthly_amount 
             from {{subscription_periods}}
     ),
+
     months as (
         select cast(date_month as date) as date_month from {{util_months}}
     ),
+
     customers as (
         select
             customer_id,
@@ -93,6 +111,7 @@ Before feature engineering and training, the data needs to be transformed. This 
         from subscription_periods
         group by 1
     ),
+
     customer_months as (
         select
             customers.customer_id,
@@ -102,6 +121,7 @@ Before feature engineering and training, the data needs to be transformed. This 
             on  months.date_month >= customers.date_month_start
             and months.date_month < customers.date_month_end
     ),
+
     joined as (
         select
             customer_months.date_month,
@@ -114,6 +134,7 @@ Before feature engineering and training, the data needs to be transformed. This 
             and (customer_months.date_month < subscription_periods.end_date
                     or subscription_periods.end_date is null)
     ),
+
     customer_revenue_by_month as (
         select
             date_month,
@@ -140,7 +161,9 @@ Before feature engineering and training, the data needs to be transformed. This 
             else false end as is_last_month
         from joined
     ),
+
     joined1 as (
+
         select
             date_month + interval '1 month' as date_month,
             customer_id,
@@ -150,9 +173,13 @@ Before feature engineering and training, the data needs to be transformed. This 
             last_active_month,
             false as is_first_month,
             false as is_last_month
+
         from customer_revenue_by_month
+
         where is_last_month
+
     )
+
     select * from joined1;
     ```
 
@@ -161,35 +188,55 @@ Before feature engineering and training, the data needs to be transformed. This 
     ```sql
     with
     customers as (
+
         select *
         from {{customers_table}}
+
     ),
+
     orders as (
+
         select *
         from {{orders_table}}
+
     ),
+
     payments as (
+
         select *
         from {{payments_table}}
+
     ),
+
     customer_orders as (
+
         select
         customer_id,
         cast(min(order_date) as date) as first_order,
         cast(max(order_date) as date) as most_recent_order,
         count(order_id) as number_of_orders
         from orders
+
         group by customer_id
+
     ),
+
     customer_payments as (
+
         select
         orders.customer_id,
         sum(amount / 100) as total_amount
+
         from payments
+
         left join orders on payments.order_id = orders.order_id
+
         group by orders.customer_id
+
     ),
+
     final as (
+
         select
         customers.customer_id,
         customers.first_name,
@@ -198,10 +245,15 @@ Before feature engineering and training, the data needs to be transformed. This 
         customer_orders.most_recent_order,
         customer_orders.number_of_orders,
         customer_payments.total_amount as customer_lifetime_value
+
         from customers
+
         left join customer_orders on customers.customer_id = customer_orders.customer_id
+
         left join customer_payments on customers.customer_id = customer_payments.customer_id
+
     )
+
     select
     *
     from final
@@ -218,19 +270,11 @@ You'll use environment variables to create Airflow connections to Snowflake and 
 1. Open the `.env` file in your Astro project and paste the following code.
 
     ```text
-    AIRFLOW_CONN_SNOWFLAKE_DEFAULT='snowflake://<USER_NAME>:<PASSWORD>@/<ROLE_NAME>?account=<ACCOUNT_NAME>&region=<REGION_NAME>&database=<DATABASE_NAME>&warehouse=<WAREHOUSE_NAME>&role=<ROLE>'
-
-    ####WANDB
     WANDB_API_KEY='<your-wandb-api-key>'
-
-    ###SDK
-    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='s3://local-xcom'
-    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID='minio_local'
+    AIRFLOW_CONN_POSTGRES_DEFAULT='postgresql://postgres:postgres@host.docker.internal:5432/postgres?options=-csearch_path%3Dtmp_astro'
     ```
 
-2. Update the placeholder values in `AIRFLOW_CONN_SNOWFLAKE_DEFAULT` with your Snowflake credentials.
-
-3. Replace `<your-wandb-api-key>` with the API key you created in [Step 4](#step-4-create-a-wb-api-key).
+2. Replace `<your-wandb-api-key>` with the API key you created in [Step 4](#step-4-create-a-wb-api-key).  No changes are needed for the AIRFLOW_CONN_POSTGRES_DEFAULT environment variable.
 
 ## Step 6: Create your DAG
 
@@ -240,11 +284,11 @@ You'll use environment variables to create Airflow connections to Snowflake and 
 
     This DAG completes the following steps:
 
-    - The `extract_and_load` task group contains one task for each CSV in your `include/data` folder that uses the Astro Python SDK `load_file` function to load the data to Snowflake.
+    - The `extract_and_load` task group contains one task for each CSV in your `include/data` folder that uses the Astro Python SDK `load_file` function to load the data to Postgres.
     - The `transform` task group contains two tasks that transform the data using the Astro Python SDK `transform_file` function and the SQL scripts in your `include` folder.
     - The `features` task is a Python function implemented with the Astro Python SDK `@dataframe` decorator that uses Pandas to create the features needed for the model.
     - The `train` task is a Python function implemented with the Astro Python SDK `@dataframe` decorator that uses scikit-learn to train a Random Forest classifier model and push the results to W&B.
-    - The `predict` task completes a prediction on the model from W&B.
+    - The `predict` task pulls the model from W&B in order to make predictions and stores them in postgres.
 
 2. Run the following command to start your project in a local environment:
 
@@ -254,7 +298,7 @@ You'll use environment variables to create Airflow connections to Snowflake and 
 
 ## Step 7: Run your DAG and view results
 
-1. Go to the Airflow UI, unpause the `customer_analytics` DAG, and trigger the DAG.
+1. Open the (Airflow UI)[http://localhost:8080], unpause the `customer_analytics` DAG, and trigger the DAG.
 
 2. The logs in the `train` and `predict` tasks will contain a link to your W&B project which shows plotted results from the training and prediction. 
 
