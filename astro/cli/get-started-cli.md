@@ -117,7 +117,7 @@ astro dev kill
 After you have finished Getting Started with the CLI, you can configure your CLI to locally debug your Airflow environment, authenticate to cloud services to test your DAGs with data stored on the cloud, or you can learn more about developing DAGs with Astro.
 
 - [Configure the CLI](configure-cli.md)
-- [Authenticate to cloud services](authenticate-to-cloud.md)
+- [Authenticate to cloud services](authenticate-to-clouds.md)
 - [Build and run a project locally](develop-project.md#build-and-run-a-project-locally)
 
 
