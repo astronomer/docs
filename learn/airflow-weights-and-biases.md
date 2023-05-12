@@ -39,16 +39,16 @@ To get the most out of this tutorial, you should be familiar with:
   
 If you have a github account you can get started quickly by cloning the demo repository.
       
-    ```sh
-    git clone https://github.com/astronomer/airflow-wandb-demo
-    cd airflow-wandb-demo
-    ```
+```sh 
+git clone https://github.com/astronomer/airflow-wandb-demo
+cd airflow-wandb-demo
+```
       
 Update the .env file with your WANDB_API_KEY.
 
-    ```sh
-    astro dev start
-    ```
+```sh 
+astro dev start
+```
 Skip to step 7.
   
   
