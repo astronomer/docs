@@ -101,7 +101,7 @@ When you create a Deployment on Astro, infrastructure is created in your cluster
 
 1. In the Cloud UI, select a **Workspace**.
 
-2. On the **Deployments** page, click **Deployment**.
+2. On the **Deployments** page, click **+ Deployment**.
 
 3. Complete the following fields:
 
@@ -120,7 +120,7 @@ When you create a Deployment on Astro, infrastructure is created in your cluster
 
 You can use DAG-only deploys to quickly update your Astro Deployment.
 
-1. Run the following command to enable DAG-only code deploys.
+1. Run the following command to enable DAG-only code deploys on your Deployment.
 
     ```sh
     astro deployment update --dag-deploy enable
@@ -178,10 +178,8 @@ To limit resource usage, you might want to delete your Deployment after you fini
 
 ## Next Steps
 
-Now that you've created and run your first DAG on Astro, the next step is to learn how to deploy a complete Astro Project to the Cloud UI.
+Now that you've created and run your first DAG on Astro, the next step is to learn how to deploy a complete Astro Project to the Cloud UI. See:
 
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, including the ability to run Airflow locally and customize your Deployment's Airflow environment. 
 - [Deploy code to Astro](/astro/deploy-code)
 - [Develop a project](/astro/develop-project)
-- [Learn how to write your own DAGs](https://docs.astronomer.io/learn/category/dags)
-- [Set up CI/CD](/astro/set-up-ci-cd)
