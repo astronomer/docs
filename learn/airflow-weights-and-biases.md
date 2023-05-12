@@ -49,7 +49,8 @@ Update the .env file with your WANDB_API_KEY.
 ```sh 
 astro dev start
 ```
-Skip to step 7.
+
+After connecting Airflow and W&B using a [key](https://wandb.ai/authorize) and replacing the relevant variables in the .env file with your own credentials skip to Step 7
   
   
 Alternatively, for more details on how the demo was built follow the steps below.
