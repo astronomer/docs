@@ -34,7 +34,7 @@ def customer_analytics():
                 task_id=f"load_{source}",
                 input_file=File(f"{local_data_dir}/{source}.csv"),
                 output_table=Table(
-                 name=f"STG_{source.upper()}", conn_id=_POSTGRES_CONN
+                    name=f"STG_{source.upper()}", conn_id=_POSTGRES_CONN
                 ),
                 if_exists="replace",
             )
@@ -63,7 +63,7 @@ def customer_analytics():
             parameters={
                 "customers_table": Table(name="STG_CUSTOMERS", conn_id=_POSTGRES_CONN),
                 "orders_table": Table(name="STG_ORDERS", conn_id=_POSTGRES_CONN),
-                "payments_table": Table(name="STG_PAYMENTS", conn_id=_POSTGRES_CONN)
+                "payments_table": Table(name="STG_PAYMENTS", conn_id=_POSTGRES_CONN),
             },
             op_kwargs={"output_table": Table(name="CUSTOMERS", conn_id=_POSTGRES_CONN)},
         )
@@ -77,10 +77,12 @@ def customer_analytics():
         churned_df.set_index("customer_id", inplace=True)
         churned_df["is_active"] = churned_df["is_active"].astype(int).replace(0, 1)
 
-        df = customer_df[['number_of_orders', 'customer_lifetime_value']]\
-            .join(churned_df[['is_active']], how='left')\
-            .fillna(0)\
-            .reset_index()  # inplace=True)
+        df = (
+            customer_df[["number_of_orders", "customer_lifetime_value"]]
+            .join(churned_df[["is_active"]], how="left")
+            .fillna(0)
+            .reset_index()
+            )  # inplace=True)
 
         return df
 
@@ -123,7 +125,8 @@ def customer_analytics():
             group="wandb-demo",
             name="jaffle_churn",
             dir="include",
-            mode="online")
+            mode="online",
+        )
 
         wandb.config.update(
             {"test_size": test_size, "train_len": len(X_train), "test_len": len(X_test)}
@@ -158,7 +161,8 @@ def customer_analytics():
             name="jaffle_churn",
             dir="include",
             resume="must",
-            id=model_info["run_id"])
+            id=model_info["run_id"],
+        )
 
         customer_df.fillna(0, inplace=True)
 
@@ -171,7 +175,7 @@ def customer_analytics():
         with tempfile.TemporaryDirectory() as td:
             with open(artifact.file(td), "rb") as mf:
                 model = pickle.load(mf)
-                customer_df['PRED'] = model.predict_proba(
+                customer_df["PRED"] = model.predict_proba(
                     np.array(customer_df[features].values.tolist())
                 )[:, 0]
 
@@ -195,7 +199,7 @@ def customer_analytics():
     _predict_churn = predict(
         model_info=_model_info,
         customer_df=Table(name="customers", conn_id=_POSTGRES_CONN),
-        output_table=Table(name=f'pred_churn', conn_id=_POSTGRES_CONN),
+        output_table=Table(name=f"pred_churn", conn_id=_POSTGRES_CONN),
     )
 
     _extract_and_load >> _transformed >> _features
