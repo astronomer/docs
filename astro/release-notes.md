@@ -504,7 +504,7 @@ To create your first project in the Astro Cloud IDE, see the [Cloud IDE quicksta
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in [Public Preview](feature-previews.md).
 
 :::
 
