@@ -95,6 +95,11 @@ module.exports = {
         "environment-variables",
         "secrets-backend",
         "manage-deployments-as-code",
+        {
+          type: "category",
+          label: "Manage clusters",
+          items: ["view-cluster-details", "create-dedicated-cluster"],
+        },
       ],
     },
     {
@@ -131,7 +136,7 @@ module.exports = {
           label: "Manage clusters",
           items: [
             "create-cluster",
-            "modify-cluster",
+            "configure-cluster",
             "resource-reference-hosted",
           ],
         },
@@ -161,8 +166,7 @@ module.exports = {
               },
               items: ["connect-aws", "connect-azure", "connect-gcp"],
             },
-            "create-hybrid-cluster",
-            "modify-hybrid-cluster",
+            "manage-hybrid-clusters",
             {
               type: "category",
               label: "Hybrid cluster settings reference",

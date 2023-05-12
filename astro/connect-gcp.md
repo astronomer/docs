@@ -100,6 +100,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
     ```text
     astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
     ```
+    
   :::info
 
   GCP has a 30-character limit for service account names. For Deployment namespaces which are longer than 24 characters, use only the first 24 characters when determining your service account name.
@@ -108,6 +109,9 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
 
   ```text
   astro-nuclear-scintillation-27@astronomer-prod.iam.gserviceaccount.com
+  ```
+
+  :::
 
 3. Grant the Google service account for your Astro Deployment an IAM role that has access to your external data service. With the Google Cloud CLI, run:
 
