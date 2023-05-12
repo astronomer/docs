@@ -1,4 +1,5 @@
 from datetime import datetime 
+import os
 
 from astro import sql as aql 
 from astro.files import File 
@@ -17,30 +18,28 @@ import wandb
 from wandb.sklearn import plot_precision_recall, plot_feature_importances
 from wandb.sklearn import plot_class_proportions, plot_learning_curve, plot_roc
 
-_SNOWFLAKE_CONN = 'snowflake_default'
+_POSTGRES_CONN = 'postgres_default'
+wandb_project='demo'
+wandb_team='astro-demos'
 local_data_dir = 'include/data'
-sources = ['customers', 
+sources = ['subscription_periods',
            'util_months', 
-           'payments', 
-           'subscription_periods', 
-           'customer_conversions', 
+           'customers', 
            'orders', 
-           'sessions', 
-           'ad_spend']
+           'payments']
 
-
-@dag(schedule_interval=None, start_date=datetime(2023, 1, 1), catchup=False, )
+@dag(schedule=None, start_date=datetime(2023, 1, 1), catchup=False)
 def customer_analytics():
 
     @task_group()
     def extract_and_load(sources: list) -> dict:
         for source in sources:
             aql.load_file(task_id=f'load_{source}',
-                          input_file=File(f'{local_data_dir}/{source}.csv'),
-                          output_table=Table(name=f'STG_{source.upper()}', 
-                                             conn_id=_SNOWFLAKE_CONN),
-                          if_exists='replace',
-                          )
+                input_file = File(f'{local_data_dir}/{source}.csv'), 
+                output_table = Table(name=f'STG_{source.upper()}', 
+                                     conn_id=_POSTGRES_CONN),
+                if_exists='replace',
+                )
                 
     @task_group()
     def transform():
@@ -49,24 +48,24 @@ def customer_analytics():
             task_id='transform_churn',
             file_path=f"{Path(__file__).parent.as_posix()}/../include/customer_churn_month.sql",
             parameters={"subscription_periods": Table(name="STG_SUBSCRIPTION_PERIODS", 
-                                                      conn_id=_SNOWFLAKE_CONN),
+                                                      conn_id=_POSTGRES_CONN),
                         "util_months": Table(name="STG_UTIL_MONTHS", 
-                                             conn_id=_SNOWFLAKE_CONN)},
+                                             conn_id=_POSTGRES_CONN)},
             op_kwargs={"output_table": Table(name="CUSTOMER_CHURN_MONTH", 
-                                             conn_id=_SNOWFLAKE_CONN)},
+                                             conn_id=_POSTGRES_CONN)},
         )
 
         aql.transform_file(
             task_id='transform_customers',
             file_path=f"{Path(__file__).parent.as_posix()}/../include/customers.sql",
             parameters={"customers_table": Table(name="STG_CUSTOMERS", 
-                                                 conn_id=_SNOWFLAKE_CONN),
+                                                 conn_id=_POSTGRES_CONN),
                         "orders_table": Table(name="STG_ORDERS", 
-                                              conn_id=_SNOWFLAKE_CONN),
+                                              conn_id=_POSTGRES_CONN),
                         "payments_table": Table(name="STG_PAYMENTS", 
-                                                conn_id=_SNOWFLAKE_CONN)},
+                                                conn_id=_POSTGRES_CONN)},
             op_kwargs={"output_table": Table(name="CUSTOMERS", 
-                                             conn_id=_SNOWFLAKE_CONN)},
+                                             conn_id=_POSTGRES_CONN)},
         )
 
     @aql.dataframe()
@@ -81,13 +80,14 @@ def customer_analytics():
         churned_df['is_active'] = churned_df['is_active'].astype(int).replace(0, 1)
 
         df = customer_df[['number_of_orders', 'customer_lifetime_value']]\
-            .join(churned_df[['is_active']], how='left').fillna(0)
-        df.reset_index(inplace=True)
+            .join(churned_df[['is_active']], how='left')\
+            .fillna(0)\
+            .reset_index() #inplace=True)
 
         return df
         
     @aql.dataframe()
-    def train(wandb_project: str, df: pd.DataFrame) -> dict:
+    def train(df: pd.DataFrame) -> dict:
 
         features = ['number_of_orders', 'customer_lifetime_value']
         target = ['is_active']
@@ -117,6 +117,7 @@ def customer_analytics():
         run = wandb.init(
             project=wandb_project, 
             config=model_params, 
+            entity=wandb_team,
             group='wandb-demo', 
             name='jaffle_churn', 
             dir='include',
@@ -129,32 +130,34 @@ def customer_analytics():
                 "test_len" : len(X_test)
             }
         )
-        plot_class_proportions(y_train, y_test, ['not_churned', 'churned'])
+        plot_class_proportions(y_train, y_test, ['not_churned','churned'])
         plot_learning_curve(model, X_train, y_train)
         plot_roc(y_test, y_probas, ['not_churned','churned'])
-        plot_precision_recall(y_test, y_probas, ['not_churned', 'churned'])
+        plot_precision_recall(y_test, y_probas, ['not_churned','churned'])
         plot_feature_importances(model)
 
         model_artifact_name = 'churn_classifier'
 
-        with tempfile.NamedTemporaryFile() as tf:
+        with tempfile.NamedTemporaryFile(delete=False) as tf:
             pickle.dump(model, tf)
+            tf.close()
             artifact = wandb.Artifact(model_artifact_name, type='model')
             artifact.add_file(local_path=tf.name, name=model_artifact_name)
             wandb.log_artifact(artifact)
+            os.remove(tf.name)
 
         wandb.finish()
 
-        return {'wandb_project': wandb_project, 
-                'run_id': run.id, 
-                'artifact_name': model_artifact_name}
+        return {'run_id':run.id, 
+                'artifact_name':model_artifact_name}
 
     @aql.dataframe()
     def predict(model_info: dict, customer_df: pd.DataFrame) -> pd.DataFrame:
 
         wandb.login()
         run = wandb.init(
-            project=model_info['wandb_project'], 
+            project=wandb_project, 
+            entity=wandb_team,
             group='wandb-demo', 
             name='jaffle_churn', 
             dir='include',
@@ -183,17 +186,17 @@ def customer_analytics():
     _transformed = transform()
 
     _features = features(
-        customer_df=Table(name="CUSTOMERS", conn_id=_SNOWFLAKE_CONN), 
-        churned_df=Table(name="CUSTOMER_CHURN_MONTH", conn_id=_SNOWFLAKE_CONN))
+        customer_df=Table(name="customers", conn_id=_POSTGRES_CONN), 
+        churned_df=Table(name="customer_churn_month", conn_id=_POSTGRES_CONN))
 
-    _model_info = train(wandb_project='demo', df=_features)
+    _model_info = train(df=_features)
 
     _predict_churn = predict(
         model_info=_model_info, 
-        customer_df=Table(name="CUSTOMERS", conn_id=_SNOWFLAKE_CONN),
-        output_table=Table(name=f'PRED_CHURN', conn_id=_SNOWFLAKE_CONN))
+        customer_df=Table(name="customers", conn_id=_POSTGRES_CONN),
+        output_table=Table(name=f'pred_churn', conn_id=_POSTGRES_CONN))
 
     _extract_and_load >> _transformed >> _features
-
-
+        
+        
 customer_analytics()
