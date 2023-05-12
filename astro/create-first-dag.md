@@ -136,7 +136,7 @@ You can use DAG-only deploys to quickly update your Astro Deployment.
 
     This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code.
 
-## Step 6: Trigger your DAG on Astro
+## Step 5: Trigger your DAG on Astro
 
 When you deploy your Astro project, all example DAGs are paused and will not start running automatically. To run one of these example DAGs according to its schedule, you must unpause it from the Airflow UI.
 
@@ -158,7 +158,7 @@ When you deploy your Astro project, all example DAGs are paused and will not sta
 
 5. Pause your DAG by clicking the slider button next to `example-dag-basic`. This prevents your example DAG from running automatically and consuming your Deployment resources.
 
-## Step 7: View your DAG status in the Cloud UI
+## Step 6: View your DAG status in the Cloud UI
 
 Your Airflow UI view allows you to examine your DAGs in detail, while the Cloud UI shows you information about the health of your Deployment including analytics and logs of your DAG runs.
 
@@ -166,7 +166,7 @@ Go back to your Deployment page in the Cloud UI. Because you ran your example DA
 
 ![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 
-## Step 8: (Optional) Delete your Deployment
+## Step 7: (Optional) Delete your Deployment
 
 To limit resource usage, you might want to delete your Deployment after you finish triggering your DAG test runs.
 
