@@ -35,25 +35,26 @@ To get the most out of this tutorial, you should be familiar with:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A [Weights and Biases](https://wandb.ai/site) account. Personal accounts are available for free.
 
-## Quickstart:  
+## Quickstart  
   
-If you have a github account you can get started quickly by cloning the demo repository.
-      
-```sh 
-git clone https://github.com/astronomer/airflow-wandb-demo
-cd airflow-wandb-demo
-```
-      
-Update the .env file with your WANDB_API_KEY.
+If you have a Github account, you can get started quickly by cloning the demo repository. For more detailed instructions for setting up the project, start with [Step 1](#step-1-configure-your-astro-project).
 
-```sh 
-astro dev start
-```
+1. Clone the demo repository:
+      
+    ```sh 
+    git clone https://github.com/astronomer/airflow-wandb-demo
+    cd airflow-wandb-demo
+    ```
+      
+2. Update the .env file with your WANDB_API_KEY.
 
-After connecting Airflow and W&B using a [key](https://wandb.ai/authorize) and replacing the relevant variables in the .env file with your own credentials skip to Step 7
-  
-  
-Alternatively, for more details on how the demo was built follow the steps below.
+3. Start Airflow by running:
+
+    ```sh 
+    astro dev start
+    ```
+
+4. Continue with [Step 7](#step-7-run-your-dag-and-view-results) below.
 
 ## Step 1: Configure your Astro project
 

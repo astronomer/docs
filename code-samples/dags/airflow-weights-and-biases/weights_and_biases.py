@@ -82,7 +82,7 @@ def customer_analytics():
             .join(churned_df[["is_active"]], how="left")
             .fillna(0)
             .reset_index()
-            )  # inplace=True)
+        )  # inplace=True)
 
         return df
 
