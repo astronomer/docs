@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deployment metrics'
-title: 'Deployment metrics'
+sidebar_label: 'Deployments'
+title: 'View metrics for Astro Deployments'
 id: deployment-metrics
 ---
 
@@ -11,11 +11,13 @@ id: deployment-metrics
 
 The Cloud UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
 
+To see metrics about individual DAGs, see 
+
 ## Deployment analytics
 
 The **Analytics** page contains a suite of metrics for a given Deployment. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
 
-To view metrics for a Deployment, open the Deployment in the Cloud UI and click **Analytics**. The following topics contain information about each available metric.
+To view metrics for a Deployment, open the Deployment in the Cloud UI, click **Analytics**, then click **Get Analytics**. The following topics contain information about each available metric.
 
 ### DAG and task runs
 
@@ -149,30 +151,6 @@ The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibili
  A known issue with Celery might cause worker memory allocation to increase without a corresponding increase in task count or DAG memory use. To correct this issue, redeploy your code without making any changes to restart the Celery worker and reset memory requests. See [Deploy code to Astro](deploy-code.md). This issue should not affect your tasks or cause OutOfMemory (OOM) errors. If you experience complications, contact Astronomer Support.
 
 :::
-
-## DAG runs
-
-You can view key metrics about recent DAG runs using the **DAGs** page in the Cloud UI. This page shows DAG runs from the last 14 days across either all Deployments or a specific Deployment in a Workspace. For a given DAG, the **DAGs** page shows:
-
-- Total DAG runs over the last 14 days, expressed as a bar chart.
-
-    Each bar in the chart represents an individual DAG run. A bar's color represents whether the DAG run was a success or a failure, while its length represents the total duration of the DAG run. If there are more than 14 DAG runs in the last 14 days, then the chart shows only the 14 most recent DAG runs.
-
-- **Last Run End**: The ending time of the DAG's most recent DAG run, expressed relative to the current time.
-- **Last Run Duration**: The duration of the DAG's most recent DAG run.
-- **Average Duration**: The average Duration of all DAG runs from the last 14 days.
-
-:::info DAG visibility
-
-If a DAG run for any given DAG has not run in the last 14 days, then it will not appear in the **DAGs** view.
-
-Additionally, the `astronomer_monitoring_dag` will never appear in this view even if it ran in the last 14 days.
-
-:::
-
-To access the **DAGs** page, you can either click the DAGs icon in the UI or click **View DAGs** on a Deployment's information page.
-
-![DAGs page](/img/docs/dags-page.png)
 
 ## Export Airflow metrics to Datadog
 

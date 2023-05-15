@@ -83,6 +83,7 @@ module.exports = {
         "create-deployment",
         "configure-deployment-resources",
         "executors",
+        "manage-dags",
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
@@ -95,8 +96,11 @@ module.exports = {
       label: "Observability",
       items: [
         "view-logs",
-        "deployment-metrics",
-        "pipeline-metrics",
+        {
+          type: "category",
+          label: "View metrics",
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+        },
         {
           type: "category",
           label: "Data lineage",

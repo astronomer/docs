@@ -1,8 +1,8 @@
 ---
-title: 'View logs'
-sidebar_label: 'View logs'
+title: 'View Deployment logs'
+sidebar_label: 'View Deployment logs'
 id: view-logs
-description: View logs for your data pipelines both locally and on Astro.
+description: View logs for your Deployments both locally and on Astro.
 ---
 
 View Airflow task and component logs to troubleshoot your data pipelines and better understand the behavior of your tasks and their execution environment.
@@ -15,32 +15,21 @@ On Astro, Airflow task logs are stored in the data plane on your cloud. On Amazo
 
 On clusters hosted in your own cloud, task logs are stored indefinitely. On clusters hosted in Astronomer's cloud, task logs are hosted for 90 days. The task log retention policy is not currently configurable.
 
+To access task logs from the Cloud UI:
+
+1. In the Cloud UI, select a Workspace.
+2. Click **DAGs**.
+3. Click the DAG you want to view task logs for. 
+4. Click a task run in the DAG run grid. The task run's logs appear in the blue window.
+
+To view task logs in the Airflow UI
+
 1.  Access the Airflow UI. To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**. To access the Airflow UI in a local environment, open a browser and go to `http://localhost:8080`.
 2. Click a DAG.
 3. Click **Graph**.
 4. Click a task run.
 5. Click **Instance Details**.
 6. Click **Log**.
-
-## Access Airflow component logs locally
-
-To show logs for your Airflow scheduler, webserver, or triggerer locally, run the following Astro CLI command:
-
-```sh
-astro dev logs
-```
-
-Once you run this command, the most recent logs for these components appear in your terminal window.
-
-By default, running `astro dev logs` shows logs for all Airflow components. To see logs only for a specific component, add any of the following flags to your command:
-
-- `--scheduler`
-- `--webserver`
-- `--triggerer`
-
-To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md).
-
-Logs for the Airflow webserver, worker, and triggerer are not available for Deployments on Astro.
 
 ## View Airflow scheduler logs
 
@@ -63,6 +52,26 @@ No matching events have been recorded in the past 24 hours.
 ```
 
 Typically, this indicates that the Deployment you selected does not currently have any DAGs running.
+
+## Access Airflow component logs locally
+
+To show logs for your Airflow scheduler, webserver, or triggerer locally, run the following Astro CLI command:
+
+```sh
+astro dev logs
+```
+
+Once you run this command, the most recent logs for these components appear in your terminal window.
+
+By default, running `astro dev logs` shows logs for all Airflow components. To see logs only for a specific component, add any of the following flags to your command:
+
+- `--scheduler`
+- `--webserver`
+- `--triggerer`
+
+To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md).
+
+Logs for the Airflow webserver, worker, and triggerer are not available for Deployments on Astro.
 
 ## Export task logs to Datadog (_AWS only_)
 
