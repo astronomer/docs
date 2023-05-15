@@ -22,16 +22,12 @@ The **DAGs** page shows DAG runs from the last 14 days across either all Deploym
 - **State**: Indicates whether the DAG is **Active** or **Paused**. If a DAG has a purple lightning symbol next to its name, that DAG is **Active**.
 - **Last Run**: The duration of the last DAG run and the ending time of the DAG's most recent DAG run, expressed relative to the current time.
 - **Schedule**: The frequency that the DAG runs and the starting time of the next DAG run, expressed relative to the current time.
+- **Deployment**:  The Deployment ID of the Deployment for the current DAG Run.
 - **Owner(s)**: The Airflow DAG owner attribute. You can change the owner attribute when you write or update your DAG.
 - **Tags**: The custom tags that you marked your DAG with. To add custom tags to a DAG, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html).
 
-:::info DAG visibility
 
-If a DAG run for any given DAG has not run in the last 14 days, then it will not appear in the **DAGs** view.
-
-:::
-
-To view more detailed information about a specific DAG, you can either **Open in Airflow** or select the DAG to open more details. 
+To view more detailed information about a specific DAG, you can either **Open in Airflow** or select the DAG to manage it from the Cloud UI. See [Manage DAGs](manage-dags.md).
 
 ## See also 
 
