@@ -71,8 +71,6 @@ By default, running `astro dev logs` shows logs for all Airflow components. To s
 
 To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md).
 
-Logs for the Airflow webserver, worker, and triggerer are not available for Deployments on Astro.
-
 ## Export task logs to Datadog (_AWS only_)
 
 Astro supports forwarding Airflow task logs to [Datadog](https://www.datadoghq.com/). You only need to enable Datadog once for each Astro cluster. After you enable Datadog, task logs from all Deployments in the cluster are exported.

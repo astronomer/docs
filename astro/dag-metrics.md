@@ -13,7 +13,7 @@ The **DAGs** page in the Cloud UI lets you view and manage each DAG running on y
 
 ## DAGs overview
 
-The **DAGs** page shows DAG runs from the last 14 days across either all Deployments or a specific Deployment in a Workspace. The **Pipelines** page shows the following summary information:
+The **DAGs** page shows the following summary information, all of which you can filter on using the left menu:
 
 - Total DAG runs over the last 14 days, expressed as a bar chart.
 
