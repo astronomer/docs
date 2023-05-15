@@ -86,7 +86,7 @@ If you used an alternative package manager to install Node, such as `npm` or `ho
 To serve a local version of the docs site with your changes, run:
 
 ```sh
-yarn start
+yarn run start
 ```
 
 You might also need to install `fs-extra` before you can build the site locally. To install it, run:

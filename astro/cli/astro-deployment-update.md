@@ -26,7 +26,7 @@ The behavior and format of this command differs depending on what Astronomer pro
 
 Update the configuration for a Deployment on Astro. 
 
-:::note
+:::info
 
 To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment).
 
@@ -40,7 +40,7 @@ astro deployment update <deployment-id> <flags>
 
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`

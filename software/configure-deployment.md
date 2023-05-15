@@ -187,18 +187,54 @@ To deploy DAGs via git-sync, you add DAGs to a repository that has been configur
 
 ## Delete a Deployment
 
-You can delete an Airflow Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab.
+You can delete an Airflow Deployment using the **Delete Deployment** button at the bottom of the Deployment's **Settings** tab. 
 
-When you delete a Deployment, your Airflow webserver, scheduler, metadata database, and deploy history will be deleted, and you will lose any configurations set in the Airflow UI.
+When you delete a Deployment, you delete your Airflow webserver, scheduler, metadata database, and deploy history, and you lose any configurations set in the Airflow UI. 
 
-In your Astronomer database, the corresponding `Deployment` record will be given a `deletedAt` value and continue to persist until permanently deleted.
+By default, Astro performs a _soft delete_ when you delete a Deployment. After you delete a Deployment, your Astronomer database, the corresponding `Deployment` record receives a `deletedAt` value and continues to persist until permanently deleted through a _hard delete_. A hard delete includes both the Deployment's metadata database and the Deployment entry in your Astronomer database. 14 days after your Deployment's soft delete, Astronomer automatically runs a hard delete cronjob that deletes any values that remained after your soft delete.
+
+:::tip
+
+Astronomer recommends regularly doing a database audit to confirm that you hard delete databases.
+
+:::
+
+### Automate Deployment deletion clean up 
+
+Astronomer runs a cronjob to hard delete the deleted Deployment's metadata database and Deployment entry in your Astronomer database at midnight on a specified day. You can enable whether this cronjob runs or not, how many days after your soft delete to run the cronjob, and what time of day to run the cronjob by editing `astronomer.houston.cleanupDeployments` in your Astronomer Helm chart.
+
+The following is an example of how you might configure the cronjob in your Helm chart: 
+
+```yaml
+# Cleanup deployments that have been soft-deleted
+  # This clean up runs as a CronJob
+  cleanupDeployments:
+    # Enable the clean up CronJob
+    enabled: true
+
+    # Default time for the CronJob to run https://crontab.guru/#0_0_*_*_*
+    schedule: "0 0 * * *"
+
+    # Number of days after the Deployment deletion to run the CronJob
+    olderThan: 14
+```
 
 ### Hard delete a Deployment
 
-> **Note:** This feature must first be enabled at the platform level before it can be used. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `config.yaml` file and push the changes to your platform as described in [Apply a config change](apply-platform-config.md).
+To reuse a custom release name given to an existing Deployment after a soft delete but before Astronomer automatically cleans up any persisting Deployment records, you need to hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. 
 
-To reuse a custom release name given to an existing Deployment, you need to first hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. To do so, select the **Hard Delete?** checkbox before clicking **Delete Deployment**. Alternatively, you can run `astro deployment delete --hard` via the Astro CLI.
+1. Enable hard delete as an option at the platform level. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `config.yaml` file and push the changes to your platform as described in [Apply a config change](apply-platform-config.md).
 
-![Hard delete checkbox](/img/software/hard-delete.png)
+2. Hard delete a Deployment with the Software UI or Astro CLI.
+  - **Software UI:** Go to the Deployment's **Settings** tab and select **Delete Deployment**. Then, select the **Hard Delete?** checkbox before confirming **Delete Deployment**. 
+  
+    ![Hard delete checkbox](/img/software/hard-delete.png)
+    
+  - **Astro CLI:** Run `astro deployment delete --hard`.
 
 This action permanently deletes all data associated with a Deployment, including the database and underlying Kubernetes resources.
+
+
+## Programmatically create or update Deployments
+
+You can programmatically create or update Deployments with all possible configurations using the Houston API `upsertDeployment` mutation. See [Create or update a Deployment with configurations](houston-api.md#create-or-update-a-deployment-with-configurations).

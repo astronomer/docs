@@ -172,4 +172,4 @@ Every DAG requires a `dag_id` and a `schedule`. All other parameters are optiona
 - `default_view`: The default view of the DAG in the Airflow UI (grid, graph, duration, gantt, or landing_times). 
 - `tags`: A list of tags shown in the Airflow UI to help with filtering DAGs.
 
-For a list of all DAG parameters, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html).
+For a list of all DAG parameters, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/DAG).

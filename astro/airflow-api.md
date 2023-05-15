@@ -9,6 +9,9 @@ id: airflow-api
   <meta name="og:description" content="Learn how to make requests to the Airflow REST API and how you can use the Airflow REST API to automate Airflow workflows in your Deployments. Common examples of API requests are provided." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 You can use the Airflow [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
 
 To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#make-requests-to-the-airflow-rest-api).
@@ -23,7 +26,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 
 - A Deployment on Astro.
 - A [Deployment API key](api-keys.md).
-- [cURL](https://curl.se/).
+- [cURL](https://curl.se/) or, if using Python, the [Requests library](https://docs.python-requests.org/en/latest/index.html).
 - The [Astro CLI](cli/overview.md).
 
 ## Step 1: Retrieve an access token and Deployment URL
@@ -35,7 +38,12 @@ Calling the Airflow REST API for a Deployment requires:
 
 ### Retrieve an access token
 
-To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret:
+<Tabs groupId="retrieve-an-access-token">
+
+<TabItem value="sh" label="Shell">
+
+To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret using [cURL](https://curl.se/):
+
 
 ```sh
 curl --location --request POST "https://auth.astronomer.io/oauth/token" \
@@ -46,12 +54,33 @@ curl --location --request POST "https://auth.astronomer.io/oauth/token" \
             "audience": "astronomer-ee",
             "grant_type": "client_credentials"}'
 ```
+</TabItem>
+<TabItem value="python" label="Python">
 
+To retrieve an Astro access token, use the [`requests`](https://docs.python-requests.org/en/latest/index.html) library to make your API request. For example, your code might look like the following:
+
+```python
+def get_api_token() -> str:
+  r = requests.post(
+      "https://auth.astronomer.io/oauth/token",
+      json={
+          "client_id": "<api-key-id>",
+          "client_secret": "<api-key-secret>",
+          "audience": "astronomer-ee",
+          "grant_type": "client_credentials"
+      }
+  )
+  r.raise_for_status()
+  return r.json()
+```
+
+</TabItem>
+</Tabs>
 :::info
 
 The token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
 
-If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generating an access token manually, Astronomer recommends that you automate the API request to generate a new access token.
+If you've configured a [CI/CD process](set-up-ci-cd.md) and you want to avoid generating an access token manually, Astronomer recommends that you automate the API request to generate a new access token.
 
 :::
 
@@ -246,7 +275,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
                                         "grant_type": "client_credentials",
                                         "client_id": {KEY_ID},
                                         "client_secret": {KEY_SECRET})
-            return response.json()["access_token"]
+            return response.json()<"access_token">
         @task
         def trigger_external_dag(token):
             dag_id = "target"

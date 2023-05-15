@@ -141,7 +141,7 @@ There are several chains of inheritance in the Software RBAC system. In the foll
 
 <!--- Version-specific -->
 
-Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.31/default.yaml) and determine the following:
+Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.32/default.yaml) and determine the following:
 
 - What role you want to configure. For example, `DEPLOYMENT_EDITOR`.
 - What permission(s) you want to add or remove from the role, For example, `deployment.images.push`.

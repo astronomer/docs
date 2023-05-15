@@ -17,6 +17,36 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.14.1
+
+Release date: April 20, 2023
+
+### Bug fixes
+
+- Fixed an issue where `astro workspace user list` didn't work when using a Workspace API token.
+
+## Astro CLI 1.14.0
+
+Release date: April 19, 2023
+
+### New commands to manage Astro Workspaces
+
+You can now manage Astro Workspaces from the Astro CLI using the following new commands:
+
+- [`astro workspace create`](cli/astro-workspace-create.md)
+- [`astro workspace update`](cli/astro-workspace-update.md)
+- [`astro workspace delete`](cli/astro-workspace-delete.md)
+
+To automate Workspace management, you can run these commands using a [Workspace API token](workspace-api-tokens.md).
+
+## Astro CLI 1.13.2
+
+Release date: April 11, 2023
+
+### Bug fixes
+
+- Fixed an issue where the CLI added the `dags` folder to `.dockerignore` whenever an image build was interrupted, resulting in DAGs not being deployed on the next image build.
+
 ## Astro CLI 1.13.0
 
 Release date: March 30, 2023
@@ -34,7 +64,7 @@ You can now use the `-—clean-output` flag with the following commands to make 
 - `astro deployment create`
 - `astro deployment update`
 
-This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd.md#github-actions).
+This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions.md).
 
 ### New environment variable `ASTRO_HOME`
 
@@ -220,7 +250,7 @@ Deploying only DAGs:
 
 When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](set-up-ci-cd.md).
 
 ### New `astro deployment inspect` command
 
@@ -426,7 +456,7 @@ The Astro CLI now follows a new process to determine which Deployment to run a c
 
 These changes make it easier to run and automate Deployment-level commands with the Astro CLI. Most notably, it means that you no longer need to specify a Deployment ID in cases where it can be automatically implied by our system.
 
-If your CI/CD pipelines currently define one or more Deployment IDs, you may remove those IDs and their corresponding environment variables as they are no longer required. For up-to-date CI/CD templates, see [Automate code deploys with CI/CD](ci-cd.md).
+If your CI/CD pipelines currently define one or more Deployment IDs, you may remove those IDs and their corresponding environment variables as they are no longer required. For up-to-date CI/CD templates, see [Automate code deploys with CI/CD](set-up-ci-cd.md).
 
 ### Bug fixes
 
@@ -474,7 +504,7 @@ For Astro users, these are the only changes to existing CLI functionality. All o
 
 If you currently have CI/CD pipelines that install the `astrocloud` executable of the Astro CLI, we encourage you to update them to use the latest version of `astro` to ensure reliability. All `astrocloud` commands will continue to work for some time but will be deprecated by Astronomer soon.
 
-For updated CI/CD examples, see [CI/CD](ci-cd.md).
+For updated CI/CD examples, see [CI/CD](set-up-ci-cd.md).
 :::
 
 
@@ -640,7 +670,7 @@ With an existing Deployment API key, you can set `ASTRONOMER_KEY_ID` and `ASTRON
 
 When `astro deploy` is run, the CLI will now automatically look for and use the Deployment API key credentials that were set as environment variables to authorize and complete a code push.
 
-Previously, any script that automated code pushes to Astro had to include a series of `cURL` requests to the Cloud API and could not use Deployment API keys to run an Astro CLI command. If your existing CI/CD pipelines still utilize this method, we recommend replacing those commands with an Astro CLI-based workflow. For more information and guiding examples, see [CI/CD](ci-cd.md).
+Previously, any script that automated code pushes to Astro had to include a series of `cURL` requests to the Cloud API and could not use Deployment API keys to run an Astro CLI command. If your existing CI/CD pipelines still utilize this method, we recommend replacing those commands with an Astro CLI-based workflow. For more information and guiding examples, see [CI/CD](set-up-ci-cd.md).
 
 ### New command to run DAG unit tests with pytest
 

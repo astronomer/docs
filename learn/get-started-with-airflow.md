@@ -200,7 +200,7 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
     - `schedule`: The frequency the DAG runs. You can define this as a timedelta object, a [CRON expression](https://crontab.guru/), or as a macro such as "@daily". If you don't set this value, the DAG runs every 24 hours after the `start_date`.
     - `catchup`: Defines whether the DAG reruns all DAG runs that were scheduled before today's date. The default value is `True`, but it is recommended that you set this argument to `False` unless you are explicitly running your DAG to backfill runs.
     - `tags`: Defines the **Tags** that appear in the **DAGs** page of the Airflow UI. These can help you organize DAGs in more complex projects.
-    - `default_args`: A list of configurations for the DAG's behavior. In this DAG, these arguments change the owner of the DAG, give the DAG a maximum of two retries in case of failure, and tell the DAG to wait five minutes before retrying. Many more arguments can be passed to a DAG at instantiation. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html) for a complete list.
+    - `default_args`: A list of configurations for the DAG's behavior. In this DAG, these arguments change the owner of the DAG, give the DAG a maximum of two retries in case of failure, and tell the DAG to wait five minutes before retrying. Many more arguments can be passed to a DAG at instantiation. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/DAG) for a complete list.
 
 4. Add a task to your DAG:
 

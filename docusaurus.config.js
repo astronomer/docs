@@ -102,12 +102,23 @@ module.exports = {
         }
       }
     },
+    newsletterForm: {
+      title: "Sign up for Developer Updates",
+      buttonText: "Submit",
+      successMessage: "Success! ✓",
+      errorMessage: "Sorry, there was issue sending your email. Please try again.",
+    },
     softwareNav: {
       items: [
         {
-          label: '0.31 (Latest)',
+          label: '0.32 (Latest)',
           to: '/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.31',
+          to: '/software/0.31/',
+          activeBaseRegex: '(software\/0.31)+',
         },
         {
           label: '0.30',
@@ -217,7 +228,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.31',
+            label: '0.32',
             path: '',
             banner: 'none',
           },

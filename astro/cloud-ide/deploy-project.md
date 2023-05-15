@@ -9,7 +9,7 @@ description: Learn how to use the Astro Cloud IDE's built-in GitHub support to m
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it on the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in [Public Preview](feature-previews.md).
 
 :::
 
@@ -22,7 +22,7 @@ After you create a project in the Cloud IDE, you can deploy it to Astro and run 
 
 Astro Cloud IDE projects use the same structure as Astro projects created with the Astro CLI. You can download your pipeline code from the Astro Cloud IDE, copy it to an existing Astro project, and deploy that project to Astro using the [Astro CLI](cli/overview.md).
 
-1. Create an Astro project. See [Create a project](create-first-dag.md#step-1-create-an-astro-project).
+1. Create an Astro project. See [Create a project](develop-project.md#create-an-astro-project).
 2. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
 3. Select the project you'd like to deploy.
 4. Select a pipeline that you want to export.

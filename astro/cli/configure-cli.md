@@ -118,8 +118,9 @@ Set up Podman on a Mac operating system so you can run Apache Airflow locally an
 
 ### Prerequisites
 
-- Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
+- Podman 3 or later. See [Getting started with Podman](https://podman.io/get-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`.
+- (M1 MacOS) Turn on rootful mode for Podman by using `podman machine set --rootful`. A [Podman bug](https://github.com/containers/podman/issues/15976) currently causes issues with volumes when running in rootless mode on M1.
 
 :::tip
 
@@ -174,7 +175,7 @@ Set up Podman on Windows so you can run Apache Airflow locally and deploy to Ast
 
 ### Prerequisites
 
-- Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/getting-started/).
+- Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/get-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps` in your Linux terminal. 
 - The Astro CLI Linux distribution installed on WSL 2. See [Install the Astro CLI on Linux](https://docs.astronomer.io/astro/cli/install-cli?tab=linux#install-the-astro-cli).
 
@@ -237,7 +238,7 @@ Set up Podman on Linux so you can run Apache Airflow locally and deploy to Astro
 
 ### Prerequisites
 
-- Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
+- Podman 3 or later. See [Getting started with Podman](https://podman.io/get-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`. 
 
 :::tip

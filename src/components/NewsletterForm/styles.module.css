@@ -1,0 +1,95 @@
+.newsletterForm {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 2rem 0;
+  background-color: var(--gray-100);
+  color: var(--black);
+  padding: 1em;
+  border-radius: 6px;
+}
+
+.newsletterForm h2 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.newsletterForm p {
+  margin: 0;
+}
+
+.newsletterForm__description,
+.newsletterForm__success,
+.newsletterForm__error {
+  font-size: 0.75rem;
+}
+
+.newsletterForm input {
+  padding: 8px 10px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border: 1px solid var(--gray-500);
+  border-right: none;
+  width: 100%;
+}
+
+.newsletterForm button {
+  color: var(--gray-800);
+  background-color: var(--gray-300);
+  border-color: transparent;
+  border-left: none;
+  padding: 8px 10px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  font-size: 0.65rem;
+  font-weight: 600;
+  min-width: 25%;
+}
+
+.newsletterForm__disclaimer {
+  font-size: 0.6rem;
+  line-height: 1.25;
+}
+
+.newsletterForm + [class*="theme-doc-sidebar-menu"] {
+  display: none;
+}
+
+.newsletterForm__inputWrapper {
+  display: flex;
+}
+
+.newsletterForm__success,
+.newsletterForm__spinner,
+.newssletterForm__error {
+  text-align: center;
+  margin: auto;
+}
+
+.newsletterForm__success {
+  color: var(--mint-600)
+}
+
+.newsletterForm__error {
+  color: var(--orange-600)
+}
+
+.newsletterForm__inputWrapper  > * {
+  flex: 0 1 auto;
+}
+
+/* don't show sidebar newsletter signup when on Astro release notes page */
+[class*="docs-doc-id-release-notes"] aside .newsletterForm {
+  display: none;
+}
+
+html[data-theme="dark"] .newsletterForm {
+  background-color: var(--gray-800);
+  color: var(--white);
+}
+
+html[data-theme="dark"] .newsletterForm a {
+  color:  var(--ifm-link-color);
+}

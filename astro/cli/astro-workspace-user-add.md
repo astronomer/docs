@@ -38,7 +38,7 @@ astro workspace user add <email>
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `<email-address>` | The email address of the user that you want to add to the Workspace. | Any valid email address                                                                            |
-| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
 

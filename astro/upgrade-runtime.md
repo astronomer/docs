@@ -28,6 +28,49 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
 
+#### Runtime 8 (Airflow 2.6)
+
+##### Package dependency conflicts
+
+Astro Runtime 8.0.0 includes fewer default dependencies than previous versions. Specifically, the following provider packages are no longer installed by default:
+
+- `apache-airflow-providers-apache-hive`
+- `apache-airflow-providers-apache-livy`
+- `apache-airflow-providers-databricks`
+- `apache-airflow-providers-dbt-cloud`
+- `apache-airflow-providers-microsoft-mssql`
+- `apache-airflow-providers-sftp`
+- `apache-airflow-providers-snowflake`
+
+If your DAGs depend on any of these provider packages, add the provider packages to your Astro project `requirements.txt` file before upgrading. You can also [pin specific provider package versions](#optional-pin-provider-package-versions) to ensure that none of your provider packages change after upgrading.
+
+##### Provider incompatibilities
+
+There is also an incompatibility between Astro Runtime 8.0.0 and the following provider packages:
+
+- `apache-airflow-providers-cncf-kubernetes==6.1.0`
+- `apache-airflow-providers-google==10.0.0`
+
+That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt`file.
+
+This incompatibility occurs because Runtime 8.0.0 includes both of these packages as built-in components. A new function included in this version, `get_xcom_sidecar_container_resources`, is used in `KubernetesHook`. But, Google because uses `GKEPodHook`, which doesn’t have this function, it breaks `GKEStartPodOperator`. 
+
+##### Using the KubernetesPodOperator on Astro Runtime 8
+
+Astro Runtime 8 introduced a bug related to using the KubernetesPodOperator without a configured Airflow connection. If you're using the KubernetesPodOperator on Astro Runtime 8, complete only one of the following setup steps to ensure that your tasks continue to work:
+
+- Pin `apache-airflow-providers-cncf-kubernetes==5.3.0` in your `requirements.txt` file.
+- Create an Airflow connection in your Deployment with the following values:
+     - **Connection Id:**: `kubernetes_default`
+     - **Connection Type**: **Kubernetes Cluster Connection**
+- Wait to upgrade until this issue is fixed in a later patch version of Runtime 8.
+##### Upgrade to Python 3.10
+
+Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet support Python 3.10, use one of the following options to stay on Python 3.9:
+
+- Run your tasks using the KubernetesPodOperator or PythonVirtualenvOperator. You can configure the environment that these tasks run in to use Python 3.9.
+- Use the [`astronomer-provider-venv`](https://github.com/astronomer/astro-provider-venv) to configure a custom virtual environment that you can apply to individual tasks.
+
 #### Runtime 6 (Airflow 2.4)
 
 Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
@@ -49,7 +92,7 @@ For more information on Airflow 2.3, see ["Apache Airflow 2.3.0 is here"](https:
 
 ## Prerequisites
 
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
+- An [Astro project](develop-project.md#create-an-astro-project).
 - An [Astro Deployment](create-deployment.md).
 - The [Astro CLI](cli/install-cli.md).
 

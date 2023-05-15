@@ -78,7 +78,7 @@ For more information about Airflow and AWS connections, see [Amazon Web Services
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
+- An [Astro project](develop-project.md#create-an-astro-project) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
 - An IAM role with the `SecretsManagerReadWrite` policy that your Astro cluster can assume. See [AWS IAM roles](https://docs.astronomer.io/astro/connect-aws?tab=AWS%20IAM%20roles#authorization-options).
 
 #### Add Airflow secrets to Secrets Manager
@@ -172,7 +172,7 @@ This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.i
 - A [Deployment](create-deployment.md) on Astro.
 - [The Astro CLI](cli/overview.md).
 - A local or hosted Vault server. See [Starting the Server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) or [Create a Vault Cluster on HCP](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault).
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
+- An [Astro project](develop-project.md#create-an-astro-project).
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
 - Your Vault Server's URL. If you're using a local server, this should be `http://127.0.0.1:8200/`.
 
@@ -303,7 +303,7 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
+- An [Astro project](develop-project.md#create-an-astro-project) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
 - An IAM role with access to the [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html) that your Astro cluster can assume. See [AWS IAM roles](connect-aws.md#AWS-IAM-roles).
 
 #### Create Airflow secrets directories in Parameter Store
@@ -347,7 +347,7 @@ This topic provides setup steps for configuring [Google Cloud Secret Manager](ht
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
+- An [Astro project](develop-project.md#create-an-astro-project).
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
@@ -420,7 +420,7 @@ This topic provides setup steps for configuring [Azure Key Vault](https://azure.
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
+- An [Astro project](develop-project.md#create-an-astro-project).
 - An existing Azure Key Vault linked to a resource group.
 - Your Key Vault URL. To find this, go to your Key Vault overview page > **Vault URI**.
 
@@ -455,7 +455,7 @@ Add the following environment variables to your `.env` file:
 AZURE_CLIENT_ID="<your-client-id>" # Found on App Registration page > 'Application (Client) ID'
 AZURE_TENANT_ID="<your-tenant-id>" # Found on App Registration page > 'Directory (tenant) ID'
 AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
-AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.azure_key_vault.AzureKeyVaultBackend
+AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}
 ```
 
@@ -465,20 +465,21 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
 
 #### Deploy to Astro
 
-1. Run the following commands to export your environment variables to Astro:   
+1. Run the following commands to export your environment variables to Astro.
  
     ```sh
-    $ astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
+    astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
+    ```
+    
+    In the Cloud UI, mark `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_CLIENT_SECRET`, and `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret**. See [Set environment variables in the Cloud UI](environment-variables.md#set-environment-variables-in-the-cloud-ui).
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
   
     ```sh
     astro deploy --deployment-id <your-deployment-id> 
     ```
-
-3. Set the values of `AZURE_CLIENT_ID`, `AZURE_CLIENT_ID`, and `AZURE_CLIENT_ID` as secret in the Cloud UI. See [Set environment variables in the CLoud UI](https://docs.astronomer.io/astro/environment-variables#set-environment-variables-in-the-cloud-ui).
-  
-4. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials.
+    
+3. Optional. Remove the environment variables from your `.env` file, or store your `.env` file so that your credentials are hidden, for example with GitHub secrets.
 
 </TabItem>
 

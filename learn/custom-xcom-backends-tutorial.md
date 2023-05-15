@@ -19,8 +19,8 @@ Common reasons to use a custom XCom backend include:
 
 - Needing more storage space for XCom than the metadata database can offer.
 - Running a production environment where you require custom retention, deletion, and backup policies for XComs. With a custom XCom backend, you don't need to worry about periodically cleaning up the metadata database.
-- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization, which puts limits on the type of data that you can pass through XComs. Pickling is also available, but it has [known security implications](https://docs.python.org/3/library/pickle.html). A custom XCom backend allows you to implement your own serialization and deserialization methods.
-- Accessing XCom without accessing the metadata database.  
+- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization, which limits the types of data you can pass through XComs. You can serialize other types of data using [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling), however this method is not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). A custom XCom backend allows you to implement your own serialization and deserialization methods that are suitable for production workflows.
+- Accessing XCom without accessing the metadata database.
 
 After you complete this tutorial, you'll be able to:
 
@@ -247,6 +247,12 @@ MINIO_IP=host.docker.internal:9000
 ## Step 4: Define a custom XCom class using JSON serialization
 
 For Airflow to use your custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
+
+:::info
+
+The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage, with a set of added serialization methods. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. When you use a pre-built XCom backend, you don't need to create any new files in the `include` folder and you can skip both Step 4 and [Step 6](#step-6-create-a-custom-serialization-method-to-handle-pandas-dataframes) of this tutorial.
+
+:::
 
 1. In your Astro project, create a new file in the `include` directory called `xcom_backend_json.py`.
 
@@ -688,7 +694,16 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 ## Step 6: Create a custom serialization method to handle Pandas dataframes
 
-A powerful feature of custom XCom backends is the possibility to create custom serialization and deserialization methods. This is particularly useful for handling objects that cannot be JSON-serialized. In this step, you will create a new custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
+A powerful feature of custom XCom backends is the possibility to create custom serialization and deserialization methods. This is particularly useful for handling objects that cannot be JSON-serialized. In this step, you will create a new custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file. When you serialize your data as a CSV file, you can query it with tools like [csvq](https://mithrandie.github.io/csvq/).
+
+Note that as of Airflow 2.6, Pandas dataframes can be serialized by the standard XCom backend using `pyarrow`. This step is still useful if you are using an older version of Airflow.
+
+:::info
+
+The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage with added serialization methods for Pandas dataframes and datetime date objects. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. 
+When using a pre-built XCom backend you do not have to create any new files in the `include` folder and you can skip [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) and Step 6 of this tutorial.
+
+:::
 
 1. Create a second file in your `include` folder called `xcom_backend_pandas.py`.
 
@@ -1239,6 +1254,57 @@ def clear(
     # delete the XCom containing the reference string from metadata database
     query.delete()
 ```
+
+## Use pre-built XCom backends
+
+The [Astronomer provider package](https://registry.astronomer.io/providers/astronomer-providers/versions/latest) includes alternative XComs backends for AWS S3 and GCP Cloud Storage. In addition to saving your XComs in a remote storage, these XCom backends contain serialization methods for `pandas.DataFrame` and `datetime.date` objects, so you don't have to write them yourself.
+
+To use these pre-built XCom backends, modify the core tutorial with the following changes:
+
+- In [Step 1](#step-1-create-an-astro-project), add the Astronomer provider to your Astro project `requirements.txt` file:
+
+    ```text
+    astronomer-providers
+    ```
+
+- In [Step 3](#step-3-create-a-connection), use the connection ID `aws_default` for an AWS S3 connection and `google_cloud_default` for a GCP Cloud Storage connection. You can override which connection ID the backend uses by setting the Airflow environment variable `CONNECTION_NAME` for AWS or `XCOM_BACKEND_CONNECTION_NAME` for GCS.
+
+- In [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization), do not define your own custom XCom class. When you open the Astro project `.env`, add the following lines to use the pre-built XCom backend instead of your own:
+
+<Tabs
+    defaultValue="aws"
+    groupId= "use-pre-built-xcom-backends"
+    values={[
+        {label: 'AWS S3', value: 'aws'},
+        {label: 'GCP Cloud Storage', value: 'gcp'},
+    ]}>
+<TabItem value="aws">
+
+```text
+AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.amazon.aws.xcom_backends.s3.S3XComBackend
+XCOM_BACKEND_BUCKET_NAME=<your-bucket-name>
+```
+
+</TabItem>
+
+<TabItem value="gcp">
+
+```text
+AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.google.cloud.xcom_backends.gcs.GCSXComBackend
+XCOM_BACKEND_BUCKET_NAME=<your-bucket-name>
+```
+
+</TabItem>
+
+</Tabs>
+
+- Skip [Step 6](#step-6-create-a-custom-serialization-method-to-handle-pandas-dataframes). The pre-built XCom backend includes a serialization method for `pandas.DataFrame` objects out of the box.
+
+:::tip
+
+The Astronomer provider XCom backends support gzip compression for all XComs. To enable gzip compression, set `UPLOAD_CONTENT_AS_GZIP=True` in your Astro project  `.env` file.
+
+:::
 
 ## Conclusion
 

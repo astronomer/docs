@@ -64,8 +64,8 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         # needed to prevent zombie deployment worker pods when using KubernetesExecutor
         terminationEndpoint: http://localhost:8000/quitquitquit
     ```
-3. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
+3. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
 :::info
 
@@ -128,16 +128,16 @@ After you've created an Elastic deployment and endpoint, you have two options to
 
  ```yaml
  global:
-    fluentdEnabled: true
-    customLogging:
-    enabled: true
-    scheme: https
-    # host endpoint copied from elasticsearch console with https
-    # and port number removed.
-    host: "<host-URL>"
-    port: "9243"
-    # encoded credentials from above step 1
-    secret: "<encoded credentials>"    
+   fluentdEnabled: true
+   customLogging:
+     enabled: true
+     scheme: https
+     # host endpoint copied from elasticsearch console with https
+     # and port number removed.
+     host: "<host-URL>"
+     port: "9243"
+     # encoded credentials from above step 1
+     secret: "<encoded credentials>"    
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
@@ -163,16 +163,16 @@ After you've created an Elastic deployment and endpoint, you have two options to
 
  ```yaml
  global:
-    fluentdEnabled: true
-    customLogging:
-    enabled: true
-    scheme: https
-    # host endpoint copied from elasticsearch console with https
-    # and port number removed.
-    host: "<host-URL>"
-    port: "9243"
-    # kubernetes secret containing credentials
-    secretName: elasticcreds   
+   fluentdEnabled: true
+   customLogging:
+     enabled: true
+     scheme: https
+     # host endpoint copied from elasticsearch console with https
+     # and port number removed.
+     host: "<host-URL>"
+     port: "9243"
+     # kubernetes secret containing credentials
+     secretName: elasticcreds   
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 

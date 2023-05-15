@@ -42,7 +42,7 @@ For more information about managing Google Cloud projects, see [GCP documentatio
 - A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
 - A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
 - [Google Cloud Shell](https://cloud.google.com/shell).
-- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36. To adjust your project's quota limits, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console). To view the quota limits for a project, run `gcloud services enable compute.googleapis.com` in the Google Cloud CLI.
+- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 48. To adjust your project's quota limits, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console). To view the quota limits for a project, run `gcloud services enable compute.googleapis.com` in the Google Cloud CLI.
 - A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24. To adjust your project's quota limits, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console). To view the quota limits for a project, run `gcloud services enable compute.googleapis.com` in the Google Cloud CLI.
 - A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or scheduled maintenance is required.
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
@@ -90,34 +90,27 @@ The CIDR range sizes must be equal to or greater than the default range sizes fo
 
 The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
-1. Run the following commands in your Google Cloud Shell:
+Click the following button to open Google Cloud Shell and run a script to activate the data plane:
 
-    ```sh
-    export GOOGLE_CLOUD_PROJECT=$<your-project-id>
-    gcloud auth application-default login
-    gcloud services enable storage-component.googleapis.com
-    gcloud services enable storage-api.googleapis.com
-    gcloud services enable compute.googleapis.com
-    gcloud services enable container.googleapis.com
-    gcloud services enable deploymentmanager.googleapis.com
-    gcloud services enable cloudresourcemanager.googleapis.com
-    gcloud services enable cloudkms.googleapis.com
-    gcloud services enable sqladmin.googleapis.com
-    gcloud services enable servicenetworking.googleapis.com
-    gcloud services enable dns.googleapis.com
-    curl \
-    https://storage.googleapis.com/storage/v1/projects/$GOOGLE_CLOUD_PROJECT/serviceAccount \
-    --header "Authorization: Bearer `gcloud auth application-default print-access-token`"   \
-    --header 'Accept: application/json'   --compressed
-    ```
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/?cloudshell_git_repo=github.com/astronomer/astro-gcp-onboarding&ephemeral=true&cloudshell_print=README.md)
 
-2. Run the following commands in your Google Cloud Shell:
+The script uses your owner role to complete following actions:
 
-    ```sh
-    export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
-    ```
+- Create a service account role that Astro uses to access the data plane.
+- Enable the following required services for running the data plane:
+
+    - `storage.googleapis.com`
+    - `storage-component.googleapis.com`
+    - `storage-api.googleapis.com`
+    - `compute.googleapis.com`
+    - `container.googleapis.com`
+    - `deploymentmanager.googleapis.com`
+    - `cloudresourcemanager.googleapis.com`
+    - `cloudkms.googleapis.com`
+    - `sqladmin.googleapis.com`
+    - `servicenetworking.googleapis.com`
+    - `dns.googleapis.com`
+    - `servicedirectory.googleapis.com`
 
 ### Provide setup information to Astronomer
 

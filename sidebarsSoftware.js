@@ -72,6 +72,7 @@ module.exports = {
           'registry-backend',
           'namespace-pools',
           'configure-platform-resources',
+          'cluster-resource-provisioning',
           ],
         },
         {
@@ -120,7 +121,6 @@ module.exports = {
         type: 'category',
         label: 'User access and management',
         items: [
-        'manage-root-user',
         'manage-workspaces',
         'import-idp-groups',
         'workspace-permissions',

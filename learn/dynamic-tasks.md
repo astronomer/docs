@@ -89,7 +89,9 @@ When you work with mapped tasks, keep the following in mind:
 - Some parameters can't be mapped. For example, `task_id`, `pool`, and many `BaseOperator` arguments.
 - `expand()` only accepts keyword arguments.
 - The maximum amount of mapped task instances is determined by the `max_map_length` parameter in the [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). By default it is set to 1024.
-- You can limit the number of mapped task instances for a particular task that run in parallel across all DAG runs by setting the `max_active_tis_per_dag` parameter in your dynamically mapped task.
+- You can limit the number of mapped task instances for a particular task that run in parallel by setting the following parameters in your dynamically mapped task:
+    - Set a limit across all DAG runs with the `max_active_tis_per_dag` parameter.
+    - Set a limit for parallel runs within a single DAG with the `max_active_tis_per_dagrun` parameter. This parameter is only available in Airflow 2.6+.
 - XComs created by mapped task instances are stored in a list and can be accessed by using the map index of a specific mapped task instance. For example, to access the XComs created by the third mapped task instance (map index of 2) of `my_mapped_task`, use `ti.xcom_pull(task_ids=['my_mapped_task'])[2]`. In Airflow version 2.5 the `map_indexes` parameter was added to the `.xcom_pull()` function allowing to specify a list of map indexes of interest (`ti.xcom_pull(task_ids=['my_mapped_task'], map_indexes=[2])`).
 
 For additional examples of how to apply dynamic task mapping functions, see [Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html) in the official Airflow documentation.
@@ -435,6 +437,96 @@ The add_nums task will have three mapped instances with the following results:
 - Map index 0: `111` (1+10+100)
 - Map index 1: `1202` (2+1000+200)
 - Map index 2: `2300` (1000+1000+300)
+
+## Repeated mapping
+
+You can dynamically map an Airflow task over the output of another dynamically mapped task. This results in one mapped task instance for every mapped task instance of the upstream task.
+
+The following example shows three dynamically mapped tasks.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="repeated-mapping"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+@task
+def multiply_by_2(num):
+    return num * 2
+
+@task
+def add_10(num):
+    return num + 10
+
+@task
+def multiply_by_100(num):
+    return num * 100
+
+multiply_by_100.expand(
+    num=add_10.expand(
+        num=multiply_by_2.expand(
+            num=[1, 2, 3]
+        )
+    )
+)
+```
+</TabItem>
+<TabItem value="traditional">
+
+```python
+def multiply_by_2_func(num):
+    return [num * 2]
+
+def add_10_func(num):
+    return [num + 10]
+
+def multiply_by_100_func(num):
+    return num * 100
+
+multiply_by_2 = PythonOperator.partial(
+    task_id="multiply_by_2",
+    python_callable=multiply_by_2_func
+).expand(op_args=[[1], [2], [3]])
+
+add_10 = PythonOperator.partial(
+    task_id="add_10",
+    python_callable=add_10_func
+).expand(op_args=multiply_by_2.output)
+
+multiply_by_100 = PythonOperator.partial(
+    task_id="multiply_by_100",
+    python_callable=multiply_by_100_func
+).expand(op_args=add_10.output)
+
+multiply_by_2 >> add_10 >> multiply_by_100
+```
+</TabItem>
+</Tabs>
+
+In the example above, the `multiply_by_2` task is dynamically mapped over a list of three elements (`[1, 2, 3]`). The task has three mapped task instances containing the following values:
+
+- Map index 0: `2` (1*2)
+- Map index 1: `4` (2*2)
+- Map index 2: `6` (3*2)
+
+The `add_10` task is dynamically mapped over the output of the `multiply_by_2` task. It has 3 mapped task instances (one for each mapped instance of the previous task) which contain the following values:
+
+- Map index 0: `12` (2+10)
+- Map index 1: `14` (4+10)
+- Map index 2: `16` (6+10)
+
+The `multiply_by_100` task is dynamically mapped over the output of the `add_10` task, which results in three mapped task instances with the following outputs:
+
+- Map index 0: `1200` (12*100)
+- Map index 1: `1400` (14*100)
+- Map index 2: `1600` (16*100)
+
+You can chain an arbitrary number of dynamically mapped tasks in this manner. It is currently not possible to exponentially increase the number of mapped task instances.
 
 ## Mapping over task groups
 

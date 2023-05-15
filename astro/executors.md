@@ -36,7 +36,7 @@ See [Manage the Celery executor](#manage-the-celery-executor) to learn more abou
 
 ### Kubernetes executor
 
-The Kubernetes executor runs each task in an individual Kubernetes Pod instead of in shared Celery workers. For each task that needs to run, the executor calls the Kubernetes API to dynamically launch a Pod for the task. You can specify the configuration of the task and Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg. When the task completes, the Pod terminates. On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
+The Kubernetes executor runs each task in an individual Kubernetes Pod instead of in shared Celery workers. For each task that needs to run, the executor calls the Kubernetes API to dynamically launch a Pod for the task. You can specify the configuration of the task's Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg. When the task completes, the Pod terminates. On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
 The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment of each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
@@ -106,9 +106,11 @@ On Astro, you can configure Kubernetes executor in the following ways:
 - Customize individual tasks, including CPU and memory requests, using a `pod_override` configuration. 
 - Change the worker node type on which your Pods run.
 
+### Kubernetes worker autoscaling logic
+
 By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 256Mi of memory. These Pods run on a worker node in your Astro data plane. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
-### Customize a task and Kubernetes Pod
+### Customize a task's Kubernetes Pod
 
 :::warning
 
@@ -116,7 +118,7 @@ While you can customize all values for a worker Pod, Astronomer does not recomme
 
 :::
 
-For each task with the Kubernetes executor, you can customize its individual worker Pod and override the defaults used in Astro by configuring a `pod_override` file.
+For each task running with the Kubernetes executor, you can customize its individual worker Pod and override the defaults used in Astro by configuring a `pod_override` file.
 
 1. Add the following import to your DAG file:
 
@@ -129,7 +131,7 @@ For each task with the Kubernetes executor, you can customize its individual wor
 
 See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests) for an example `pod_override` configuration. 
 
-### Example: Set CPU or memory limits and requests
+#### Example: Set CPU or memory limits and requests
 
 One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for a task. When requesting resources, make sure that your requests don't exceed the available resources in your current [Pod worker node type](#change-the-pod-worker-node-type).
 
@@ -141,6 +143,7 @@ import time
 
 from airflow import DAG
 from airflow.decorators import task
+from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.example_dags.libs.helper import print_stuff
 from kubernetes.client import models as k8s
@@ -168,7 +171,11 @@ with DAG(
     start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
     catchup=False
 ):
-
+    BashOperator(
+      task_id="bash_resource_requirements_override_example",
+      bash_command="echo hi",
+      executor_config=k8s_exec_config_resource_requirements
+    )
 
     @task(executor_config=k8s_exec_config_resource_requirements)
     def resource_requirements_override_example():
@@ -179,6 +186,92 @@ with DAG(
 ```
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+
+### Mount secret environment variables to worker Pods
+
+<!-- Same content in other products -->
+
+Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
+
+1. Add the following import to your DAG file:
+   
+    ```python
+    from airflow.kubernetes.secret import Secret
+    ```
+
+2. Define a Kubernetes `Secret` in your DAG instantiation using the following format:
+
+    ```python
+    secret_env = Secret(deploy_type="env", deploy_target="<VARIABLE_KEY>", secret="env-secrets", key="<VARIABLE_KEY>")
+    namespace = conf.get("kubernetes", "NAMESPACE")
+    ```
+
+3. Specify the `Secret` in the `secret_key_ref` section of your `pod_override` configuration.
+
+4. In the task where you want to use the secret value, add the following task-level argument:
+
+    ```python
+    op_kwargs={
+            "env_name": secret_env.deploy_target
+    },
+    ```
+
+5. In the executable for the task, call the secret value using `os.environ[env_name]`.
+
+In the following example, a secret named `MY_SECRET` is pulled from `env-secrets` and printed to logs.
+ 
+```python
+import pendulum
+from kubernetes.client import models as k8s
+
+from airflow.configuration import conf
+from airflow.kubernetes.secret import Secret
+from airflow.models import DAG
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.operators.python import PythonOperator
+
+
+def print_env(env_name):
+    import os
+    print(os.environ[env_name])
+
+with DAG(
+        dag_id='test-secret',
+        start_date=pendulum.datetime(2022, 1, 1, tz="UTC"),
+        end_date=pendulum.datetime(2022, 1, 5, tz="UTC"),
+        schedule_interval="@once",
+) as dag:
+    secret_env = Secret(deploy_type="env", deploy_target="MY_SECRET", secret="env-secrets", key="MY_SECRET")
+    namespace = conf.get("kubernetes", "NAMESPACE")
+
+    p = PythonOperator(
+        python_callable=print_env,
+        op_kwargs={
+            "env_name": secret_env.deploy_target
+        },
+        task_id='test-py-env',
+        executor_config={
+            "pod_override": k8s.V1Pod(
+                spec=k8s.V1PodSpec(
+                    containers=[
+                        k8s.V1Container(
+                            name="base",
+                            env=[
+                                k8s.V1EnvVar(
+                                    name=secret_env.deploy_target,
+                                    value_from=k8s.V1EnvVarSource(
+                                        secret_key_ref=k8s.V1SecretKeySelector(name=secret_env.secret,
+                                                                               key=secret_env.key)
+                                    ),
+                                )
+                            ],
+                        )
+                    ]
+                )
+            ),
+        }
+    )
+```
 
 ### Change the worker node type
 

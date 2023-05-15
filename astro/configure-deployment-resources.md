@@ -88,6 +88,10 @@ Alert emails assigned to a Deployment are used by Astronomer support to notify r
 
 In addition to alert emails for your Deployments, Astronomer recommends subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe, you'll receive email notifications about system-wide incidents in real time.
 
+## Update Airflow configurations
+
+To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](environment-variables.md#set-airflow-configurations-using-environment-variables).
+
 ## Enforce CI/CD deploys
 
 By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment, the Deployment only accepts code deploys if they are triggered with a Deployment API key or Workspace token. 
@@ -126,7 +130,7 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 3. Enter `Delete` and click **Yes, Continue**.
 
-## Next steps
+## See also
 
 - [Set environment variables on Astro](environment-variables.md).
 - [Manage Deployment API keys](api-keys.md).

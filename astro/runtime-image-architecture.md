@@ -16,6 +16,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 - A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
 - A custom security manager that enforces user roles and permissions as defined by Astro. See [User permissions](user-permissions.md).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
+- A monitoring DAG that the Astronomer team uses to monitor the health of Astro Deployments.
 
 For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](runtime-release-notes.md).
 
@@ -43,19 +44,31 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 5             | 2.3                    |
 | 6             | 2.4                    |
 | 7             | 2.5                    |
+| 8             | 2.6                    |
 
 For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
 ## Default environment variables
 
-The following table lists the default Runtime environment variables. You can override the values of these environment variables to meet the unique requirements of your organization. For information about the global environment variables set on the Astro data plane, see [Global environment variables](platform-variables.md). To edit default environment variable values, see [Set environment variables on Astro](environment-variables.md).
+The following table lists the Airflow environment variables that have different default values on Astro Runtime. Unlike [global environment variables](platform-variables.md) set on the data plane, you can override the values of these variables for specific use cases. To edit the values of the default Airflow environment variables, see [Set environment variables on Astro](environment-variables.md).
 
-| Environment Variable                       | Description                                                                                                          | Value                                   |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` | The time in seconds that Airflow waits before re-scanning the `dags` directory for new files. Note that this environment variable is set for all Deployments regardless of Runtime version. |  `30` |
-| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The maximum time in seconds that tasks running with the Celery executor can remain in a `queued` state before they are automatically rescheduled.  | `600`   |
-| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of task instances that can run concurrently for each scheduler in your Deployment.                                                           | `[number-of-running-workers-for-all-worker-queues] * [max-tasks-per-worker]`           |
-| `AIRFLOW__KUBERNETES_EXECUTOR__WORKER_PODS_CREATION_BATCH_SIZE`                    | The number of worker Pods that can be created each time the scheduler parses DAGs. This setting limits the number of tasks that can be scheduled at one time.                                                           | `16`           |
+| Environment Variable                                            | Description                                                                                                                                                                                 | Value                                                                        |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL`                     | The time in seconds that Airflow waits before re-scanning the `dags` directory for new files. Note that this environment variable is set for all Deployments regardless of Runtime version. | `30`                                                                         |
+| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                         | The maximum time in seconds that tasks running with the Celery executor can remain in a `queued` state before they are automatically rescheduled.                                           | `600`                                                                        |
+| `AIRFLOW_CORE_PARALLELISM`                                      | The maximum number of task instances that can run concurrently for each scheduler in your Deployment.                                                                                       | `[number-of-running-workers-for-all-worker-queues] * [max-tasks-per-worker]` |
+| `AIRFLOW__KUBERNETES_EXECUTOR__WORKER_PODS_CREATION_BATCH_SIZE` | The number of worker Pods that can be created each time the scheduler parses DAGs. This setting limits the number of tasks that can be scheduled at one time.                               | `16`                                                                         |
+
+## Astro monitoring DAG
+
+Astro Runtime includes a monitoring DAG that is pre-installed in the Docker image and enabled for all Astro Deployments. In addition to generating Deployment health and metrics functionality, this DAG allows the Astronomer team to monitor the health of your data plane by enabling real-time visibility into whether your workers are healthy and tasks are running.
+
+The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot. The DAG runs and appears in the Airflow UI only on Astro Deployments. 
+
+Because this DAG is essential to Astro's managed service, you are not charged for its task runs. For the same reasons, this DAG can't be modified or disabled through the Airflow UI. To modify when this DAG runs on a Deployment, set the following [Deployment environment variable](environment-variables.md):
+
+- Key: `AIRFLOW_MONITORING_DAG_SCHEDULE_INTERVAL`
+- Value: An alternative schedule defined as a [cron expression](https://crontab.guru/)
 
 ## Provider packages
 
@@ -64,9 +77,6 @@ All Astro Runtime images have the following open source provider packages pre-in
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
 - Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/)
-- Apache Hive [`apache-airflow-providers-apache-hive`](https://pypi.org/project/apache-airflow-providers-apache-hive/)
-- Apache Livy [`apache-airflow-providers-apache-livy`](https://pypi.org/project/apache-airflow-providers-apache-livy/)
-- Databricks [`apache-airflow-providers-databricks`](https://pypi.org/project/apache-airflow-providers-databricks/)
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
 - Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
@@ -90,7 +100,15 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 
 ## Python versioning
 
-Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version and you're running Astro Runtime 6.0 (based on Airflow 2.4) or later, Astronomer recommends that you use the `ExternalPythonOperator`. See [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator).
+| Astro Runtime | Python version |
+| ------------- | -------------- |
+| 4             | 3.9            |
+| 5             | 3.9            |
+| 6             | 3.9            |
+| 7             | 3.9            |
+| 8             | 3.10           |
+
+If your data pipelines require an unsupported Python version and you're running Astro Runtime 6.0 (based on Airflow 2.4) or later, Astronomer recommends that you use the `ExternalPythonOperator`. See [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator).
 
 If you're currently using the `KubernetesPodOperator` or the `PythonVirtualenvOperator` in your DAGs, you can continue to use them to create virtual or isolated environments that can run tasks with different versions of Python.
 
@@ -117,12 +135,13 @@ For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/rep
 
 The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
 
-| Astro Runtime | Operating System (OS)                 | Architecture    |
-| ------------- | ------------------------------------- | -------------   |
-| 4             | Debian 11.3 (bullseye)                | AMD64           |
-| 5             | Debian 11.3 (bullseye)                | AMD64           |
-| 6             | Debian 11.3 (bullseye)                | AMD64 and ARM64 |
-| 7             | Debian 11.3 (bullseye)                | AMD64 and ARM64 |
+| Astro Runtime | Operating System (OS)  | Architecture    |
+| ------------- | ---------------------- | --------------- |
+| 4             | Debian 11.3 (bullseye) | AMD64           |
+| 5             | Debian 11.3 (bullseye) | AMD64           |
+| 6             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 7             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 8             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 
