@@ -44,7 +44,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 :::warning Breaking change
 
-Runtime 8 includes changes that can result in DAGs running differently after upgrading. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) before upgrading.
+Runtime 8 includes changes that can result in DAGs running differently after upgrading. It also includes a major bug that was subsequently fixed in Runtime 8.1. To use Airflow 2.6, Astronomer recommends upgrading directly to Runtime 8.1. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) for more information.
 
 :::
 
