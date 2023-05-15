@@ -12,9 +12,9 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 
 [Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive workspaces. Astronomer recommends using Airflow primarily as an orchestrator, and to use an execution framework like Apache Spark to do the heavy lifting of data processing. It follows that using Airflow to orchestrate Databricks jobs is a natural solution for many common use cases.
 
-Thanks to the open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) you can create Databricks jobs from your Airflow DAG code with full integration and observability, including repair features.
+The easiest way to orchestrate your Databricks notebooks from Airflow and execute them as Databricks Workflows is to use the open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) which provides full observability and control from Airflow so you can manage your workflows from one place.
 
-Additionally to the Astro Databricks provider created by Astronomer, a [Databricks provider](https://registry.astronomer.io/providers/databricks) created and maintained by the Airflow community is available. Due to the advanced features available in the Astro Databricks provider, Astronomer recommends its use over the older Databricks provider. For reference you can find information on the community-managed Databricks provider in the [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow) section.
+For orchestration of Databricks tools other than Databricks Workflows, the [Databricks provider](https://registry.astronomer.io/providers/databricks) created and maintained by the Airflow community is available. You can find information on the community-managed Databricks provider in the [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow) section.
 
 In this tutorial you will learn how to use the Astro Databricks provider with an example use case analyzing renewable energy data.
 
@@ -40,8 +40,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- Access to a Databricks workspace. See [Databricks' documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks workflows](https://docs.databricks.com/workflows/index.html) feature with a user having permissions to create notebooks and Databricks jobs. You can use any underlying cloud service and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
-- Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This tutorial uses an [AWS S3](https://aws.amazon.com/s3/) bucket, if you are using a different object storage you will need to make changes to the Databricks notebook code and the DAG code that is shown.
+- Access to a Databricks workspace. See [Databricks' documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You will need a user with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
+- Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This tutorial uses an [AWS S3](https://aws.amazon.com/s3/) bucket.
 - Access to a [relational database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html). This tutorial uses [PostgreSQL](https://www.postgresql.org/).
 
 ## Step 1: Configure your Astro project
@@ -55,7 +55,7 @@ An Astro project contains all of the files you need to run Airflow locally.
     $ astro dev init
     ```
 
-2. Add the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html), as well as the plotting libraries [seaborn](https://seaborn.pydata.org/) and [matplotlib](https://matplotlib.org/) to your Astro project `requirements.txt` file. This tutorial uses the Astro Python SDK to load and analyze data transformed using a Databricks workflow and seaborn together with matplotlib to produce a graph.
+2. Add the following packaged to your `requirements.txt` file. The [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) are used to load, transform, and analyze, the data. [seaborn](https://seaborn.pydata.org/) and [matplotlib](https://matplotlib.org/) are used to plot the results.
 
     ```text
     astro-provider-databricks==0.1.3
@@ -79,9 +79,9 @@ This tutorial uses an Airflow DAG to orchestrate a Databricks job that joins dat
 
 This tutorial uses parts of a dataset from a [Kaggle](https://www.kaggle.com/datasets/programmerrdai/renewable-energy) about renewable energy derived from [Our World in Data](https://ourworldindata.org/renewable-energy) (License [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
 
-## Step 3: Prepare your Object storage
+## Step 3: Prepare your object storage
 
-In you object storage solution create a new bucket. This tutorial uses AWS S3 and a bucket named `databricks-tutorial-bucket`. 
+Create a new bucket named `databricks-tutorial-bucket` in your object storage solution. In this tutorial we use AWS S3, but you can use any solution that is supported by the Astro SDK.
 
 ## Step 4: Create Databricks Notebooks
 
@@ -89,7 +89,7 @@ In this tutorial you will orchestrate a Databricks job that sequentially runs tw
 
 1. [Create an empty notebook](https://docs.databricks.com/notebooks/notebooks-manage.html) in your Databricks workspace called `join_data`. 
 
-2. Copy and paste the following code into the `join_data` notebook. You can divide the code into cells as you see fit. Make sure to replace the `ACCESS_KEY` and `SECRET_KEY` variables with your respective credentials, see the Databricks documentation for recommended ways to securely [manage Secrets](https://docs.databricks.com/security/secrets/index.html) in Databricks. If you are using a different object storage than AWS S3 you will need to replace the code wrapped in `# --------- AWS S3 specific -------- #` comments with code connecting to your object storage.
+2. Copy and paste the following code into the `join_data` notebook. You can divide the code into cells as you see fit. Make sure to replace the `ACCESS_KEY` and `SECRET_KEY` variables with your respective credentials. If you are using a different object storage than AWS S3 you will need to replace the code wrapped in `# --------- AWS S3 specific -------- #` comments with code connecting to your object storage.
 
     ```python
     # package imports
@@ -277,7 +277,7 @@ This tutorial uses three data tools external to Airflow: Databricks, Amazon S3 (
 
 :::info
 
-If a connection type isn't available, you might need to make it available by adding the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and running `astro dev restart`.
+If the right connection type isn't available, you might need to add the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and run `astro dev restart`.
 
 :::
 
@@ -285,7 +285,7 @@ If a connection type isn't available, you might need to make it available by add
 
 The DAG you'll write uses the Astro Databricks provider to create a Databricks workflow from Airflow tasks referencing the Databricks notebooks you prepared in [Step 4](#step-4-create-databricks-notebooks).
 
-1. In your `dags` folder, create a file called `renewable_analysis_dag`.
+1. In your `dags` folder, create a file called `renewable_analysis_dag.py`.
 
 2. Copy and paste the following DAG code into the file:
 
