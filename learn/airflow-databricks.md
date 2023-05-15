@@ -299,7 +299,6 @@ The DAG you'll write uses the Astro Databricks provider to create a Databricks W
 
     This DAG consists of seven tasks and one task group:
 
-
     - The `in_tables` task uses the [`LoadFileOperator`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) of the Astro Python SDK in order to load CSV files from the local `include` directory to the relational database. This task is [dynamically mapped](dynamic-tasks.md), creating one mapped task instance for each file.
     - The `select_countries` task uses the [`aql.transform`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/transform.html) decorator from the Astro Python SDK to run a SQL query, selecting the relevant rows for `COUNTRY` from each of the temporary tables created by the previous task. The result is stored in another temporary table.
     - The `save_files_to_S3` task dynamically maps over the country subsets created by the previous task and creates one CSV file per table in your S3 bucket via the [ExportToFileOperator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html). This task uses the `.map` function, a utility function that can transform XComArg objects, learn more [here](dynamic-tasks.md#transform-outputs-with-map).
