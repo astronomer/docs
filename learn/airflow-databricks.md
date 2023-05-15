@@ -331,7 +331,7 @@ If you are using a different object storage you will need to make changes to the
 
 This section will explain Astro Databricks provider functionality in more depth. You can learn more about the Astro Databricks provider in the [provider documentation](https://astronomer.github.io/astro-provider-databricks/).
 
-### Defining params
+### Additional parameters
 
 The DatabricksWorkflowTaskGroup provides configuration options via several parameters:
 
