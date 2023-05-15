@@ -2,8 +2,8 @@
 title: 'View Deployment logs'
 sidebar_label: 'View Deployment logs'
 id: view-logs
-
 description: View logs for your Deployments both locally and on Astro.
+---
 
 View task and component logs for your DAGs to troubleshoot your data pipelines and better understand the behavior of your tasks and their execution environment.
 
