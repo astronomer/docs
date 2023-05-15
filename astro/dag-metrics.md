@@ -33,3 +33,7 @@ If a DAG run for any given DAG has not run in the last 14 days, then it will not
 
 To view more detailed information about a specific DAG, you can either **Open in Airflow** or select the DAG to open more details. 
 
+## See also 
+
+- [Manage DAGs](manage-dags.md)
+
