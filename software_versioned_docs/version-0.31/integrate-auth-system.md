@@ -147,7 +147,7 @@ Complete this setup only if you want to import Azure AD groups to Astronomer Sof
     - `Group.Read.All`
     - `openid`
     - `profile`
-    - `User.Read
+    - `User.Read`
     
     For each of these permissions, select **Grant Admin Consent for Astronomer Data**. Your Microsoft Graph permissions should look similar to the following image:
     
