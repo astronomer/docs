@@ -18,7 +18,7 @@ After you create an Astro Deployment, you can modify its settings using the Clou
 - Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
 
-For advanced Deployment resource configurations, see [Manage Deployment executors](executors.md) and [Configure compute queues](configure-worker-queues.md).
+For advanced Deployment resource configurations, see [Manage Deployment executors](executors.md) and [Configure worker queues](configure-worker-queues.md).
 
 :::cli
 

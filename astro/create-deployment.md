@@ -46,12 +46,12 @@ If you prefer, you can also run `astro deployment create` to create a Deployment
         To upgrade the Astro Runtime version for your Deployment, you’ll need to update your Docker image in your Astro project directory. See [Upgrade Astro Runtime](upgrade-runtime.md).
     
     - **Scheduler**: Select the amount of resources you want your Deployment scheduler to use. The scheduler is responsible for queueing and scheduling your Airflow tasks. Choose **Small** for most workloads. See [Configure Deployment resources](configure-deployment-resources.md#scheduler-resources) for more information.
-    - **Compute queue**: Configure the `default` compute queue for your Deployment. A compute queue is a group of identically-configured machines responsible for running your tasks. The default options for the `default` compute queue are suitable for most workloads. See [Compute queues](configure-deployment-resources.md#worker-queues).
+    - **Worker queue**: Configure the `default` worker queue for your Deployment. A worker queue is a group of identically-configured workers responsible for running your tasks. The default options for the `default` worker queue are suitable for most workloads. See [Worker queues](configure-deployment-resources.md#worker-queues).
 
 4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:
 
     - The celery executor.
-    - A compute queue named `default` that runs a maximum of 10 machines. Each machine in the queue has 1 vCPU and 2G of RAM, and they can each run a maximum of 5 tasks at a time.
+    - A worker queue named `default` that runs a maximum of 10 machines. Each machine in the queue has 1 vCPU and 2G of RAM, and they can each run a maximum of 5 tasks at a time.
     - A scheduler with 1 CPU and 2 GiB of memory.
 
 5. Click **Create Deployment**.
