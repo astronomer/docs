@@ -66,14 +66,8 @@ You can learn more about connecting to local Kafka from within a Docker containe
 
     ```text
     confluent-kafka==1.8.2
-    airflow-provider-kafka
+    apache-airflow-providers-apache-kafka==1.0.0
     ```
-
-:::info
-
-If you are running Airflow as a standalone application and are using an M1 Mac, complete the additional setup in the [`airflow-provider-kafka` README](https://github.com/astronomer/airflow-provider-kafka#setup-on-m1-mac).
-
-:::
 
 4. Add the following environment variables in `.env`. Provide your own Kafka topic name, boostrap server, API Key and API Secret.
 
@@ -99,7 +93,7 @@ If you are connecting to the local Kafka server created with the `server.propert
 
 ## Step 2: Create a DAG with a producer task
 
-The [Airflow Kafka provider package](https://github.com/astronomer/airflow-provider-kafka) contains the ProduceToTopicOperator, which you can use to produce events directly to a Kafka topic.
+The [Airflow Kafka provider package](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) contains the ProduceToTopicOperator, which you can use to produce events directly to a Kafka topic.
 
 1. Create a new file in your `dags` folder called `kafka_example_dag_1.py`.
 
