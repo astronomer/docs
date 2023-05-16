@@ -17,6 +17,48 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.15.0
+
+Release date: May 18, 2023
+
+### New flag `--args` for `astro dev pytest` command
+
+You can now use the `--args` flag pytest arguments to run with `astro dev pytest`. For example `astro dev pytest --args "-p pytest_cov"` will run the command `pytest -p pytest_cov`.
+
+### Support for Organization API Tokens
+
+You can now use Organization API Tokens with the CLI by setting the environment variable `ASTRO_API_TOKEN` to the tokens value. This allows you to automate actions such as workspace creation and updating organization user roles.
+
+### Create and Use Custom Compose files with the Astro CLI
+
+You can now create a Docker/Podman compose file for your Astro project with the command `astro dev object export --compose-file`. You can customize this file and then use it to start your project with `astro dev start --compose-file <compose file location>`.
+
+### New Commands to Manage Airflow Deployments Connections, Variables, and Pools
+
+- astro deployment connection list
+- astro deployment connection create
+- astro deployment connection update
+- astro deployment connection copy
+- astro deployment airflow-variable list
+- astro deployment airflow-variable create
+- astro deployment airflow-variable update
+- astro deployment airflow-variable copy
+- astro deployment pool list
+- astro deployment pool create
+- astro deployment pool update
+- astro deployment pool copy
+
+### Additional improvements
+
+- Add new congfig file options `postgres.repository` and `postgres.tag`. You can use these to customize the postgres database used by the local astro container.
+- Quotes are now trimmed out of the beginning and end of environment variables being pushed to astro.
+- The command `astro user invite` has been removed.
+
+### Bug fixes
+
+- Fixed an issue were `astro deployment variable create/update` was not producing error when it failed to create an environment variable
+- Fixed an issue were Podman deploys were failing if the user didn't have the docker cli installed
+
 ## Astro CLI 1.14.1
 
 Release date: April 20, 2023
