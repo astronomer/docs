@@ -42,19 +42,19 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 3. Click **Edit Details**. 
 4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
 5. Click **Update**.
-6. Optional. Configure worker queues and tasks to optimize resource usage on your Deployment. See [Configure an executor](executors.md).
+6. Optional. Configure worker queues and tasks to optimize your executor resource usage. See [Configure an executor](executors.md).
 
 ## Scheduler size
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. 
 
-Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory. See the following table for recommendations of 
+Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory. See the following table for all possible scheduler sizes.
 
-| Deployment size | Scheduler size |
-|-----------------|----------------|
-|                 |                |
-|                 |                |
-|                 |                |
+| Scheduler size | vCPU | Memory |
+| -------------- | ---- | ------ |
+| Small          | 1    | 2G     |
+| Medium         | 2    | 4G     |
+| Large          | 4    | 8G     |
 
 ### Update scheduler size 
 
