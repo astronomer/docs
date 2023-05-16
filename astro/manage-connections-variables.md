@@ -149,19 +149,15 @@ If you use a secrets backend, the method for managing connections and variables 
 
 ### Environment variables
 
-- You can only import connections and variables from the `.env` file from local to Astro using Astro CLI.
-```bash
-# import into Astro variables and/or connections defined as environment variables in the .env file
-astro deployment variable create -d <deployment_id> --load --env .env
-```
+You can easily import connections and variables stored as Environment variables in `.env` file to another local Airflow by copying the `.env` file to another Astro project. To import Airflow connections and variables to Astro, you can refer the commands defined in [Astro CLI](#using-astro-cli) to import all environment variables in your `.env` file to a Deployment on Astro.
 
 ### Airflow metadata database
 
-You can export Airflow connections and variables stored in metadata database using the Astro CLI or Airflow API. An Airflow connection or variable is stored in the metadata database if it's viewable in the Airflow UI under **Connections** or **Variables**.
+You can export Airflow connections and variables stored in metadata database using the [Astro CLI](#using-astro-cli) or [Airflow API](#using-airflow-api). An Airflow connection or variable is stored in the metadata database if it's viewable in the Airflow UI under **Connections** or **Variables**. For variables, you can also use [Airflow UI](#using-airflow-ui) to import or export.
 
-##### Astro CLI
+#### Using Astro CLI
 
-Run the following command to export your Airflow connections and variables and import them to Astro as environment variables:
+Run the following command to import or export your Airflow connections and variables and import them to Astro as environment variables:
 
 ```bash
 # export all airflow objects including connections and variables to `.env` file in URI format
@@ -169,21 +165,33 @@ astro dev object export --env-export
 
 # import into Astro variables and/or connections defined as environment variables in the .env file
 astro deployment variable create -d <deployment_id> --load --env .env
-``
+```
 
 You can also export only variables from your local environment and then deploy them to Astro as part of your `include` folder:
 
 ```bash
 # export variables in JSON format to vars.json in your astro project's include dir
 astro dev run variables export /usr/local/airflow/include/vars.json
-``
+```
 
-You can't automatically export Airflow connections and variables from Astro and import them to a local environment if they're set as environment variables. However, you can pull down all non-secret environment variables from a Deployment using `astro deployment variable list` and then copy them into your `.env` file. 
+You can't automatically export Airflow connections and variables from Astro and import them to a local environment if they're set as environment variables. However, you can pull down all non-secret environment variables from a Deployment using `astro deployment variable list` and then copy them into your `.env` file. Refer
 
-#### Airflow API
+#### Using Airflow API
 
 To export connections from any Airflow environment, you can use the [List Connections API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connections) and [Get Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connection) .
 
 To export variables from any Airflow environment, you can use [List Variables API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variables) and [Get Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variable).
 
 To import connections or variables to any Airflow environment, you can use the [Create Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_connection) and [Create Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_variables) respectively.
+
+#### Using Airflow UI
+
+To export variables from a local Airflow or Astro Deployment, go to the **Admin** menu on the Airflow UI, click on **Variables** and select the variables you want to export. Then, click on **Export** option in the **Actions** dropdown. The file `variables.json` will be downloaded.
+
+![Export Variables](/img/docs/airflow-ui-export-vars.png)
+
+To import variables to a local Airflow or Astro Deployment from a `json` file, go to the **Admin** menu on the Airflow UI, click on **Variables** and click on **Choose file**. Select the file you want to import and then click on **Import Variables**.
+
+![Import Variables](/img/docs/airflow-ui-import-vars.png)
+
+Learn more about [connections](https://docs.astronomer.io/learn/connections) in Learn.
