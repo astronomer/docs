@@ -21,20 +21,15 @@ Specifically, you will:
 - Deploy your DAGs to Astro with the Astro CLI.
 - Trigger a run of an example DAG in the Airflow UI. 
 
+If you don't have an account on Astro and want to run Airflow locally, see [LINK]. If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](learn/get-started-with-airflow.md).
+
 ## Prerequisites
 
 - The [Astro CLI](cli/install-cli.md), but you do not need to install Docker to complete this guide
 - An Astronomer account
 - An Astro Organization and [Workspace](manage-workspaces.md)
-- An Astro [cluster](create-cluster.md)
 
 If you're the first person on your team to try Astro, see [Start your Astro trial](astro/trial.md). If your team has an existing Organization on Astro that you are not a member of, see [Add a user to an Organization](astro/add-user#add-a-user-to-an-organization).
-
-:::info
-
-This guide shows you how to deploy only your DAG files to Astro. To deploy other project changes, such as Python dependencies, see [Deploy Code](deploy-code.md).
-
-:::
 
 ## Step 1: Create an Astro project
 
