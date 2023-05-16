@@ -25,7 +25,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 ## Prerequisites
 
 - A Deployment on Astro.
-- A [Deployment API key](api-keys.md).
+- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
 - [cURL](https://curl.se/) or, if using Python, the [Requests library](https://docs.python-requests.org/en/latest/index.html).
 - The [Astro CLI](cli/overview.md).
 

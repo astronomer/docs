@@ -134,7 +134,7 @@ module.exports = {
         {
           type: "category",
           label: "Manage Workspaces",
-          items: ["manage-workspaces", "workspace-api-tokens"],
+          items: ["manage-workspaces", "workspace-api-tokens", "organization-api-tokens"],
         },
         {
           type: "category",

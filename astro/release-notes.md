@@ -21,6 +21,21 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
 
+## May 16, 2023
+
+### Automate Organization management with Organization API tokens
+
+You can now create Organization API tokens to automate key actions across your Organization and all of the Workspaces in it. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes. Some common actions that you can automate with Organization API keys are:
+
+- Creating Workspaces.
+- Inviting users to an Organization or Workspace.
+- Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md).
+- Exporting audit logs.
+- Gathering metadata about Deployments using the Airflow REST API.
+- Completing any of the actions you can complete with a Workspace API token or Deployment API key across all Deployments in your Organization.
+
+See [Manage Organization API tokens](organization-api-tokens.md) for more information.
+
 ## May 2, 2023
 
 ### Receive Astro alerts on Slack or PagerDuty
