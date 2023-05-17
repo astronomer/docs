@@ -15,9 +15,9 @@ body:
       multiple: true
       options:
         - Inaccurate content
-        - Misleading
+        - Missing context
         - Typo
-        - Bug / broken link
+        - Bug/ broken link
     validations:
       required: true
   - type: input
