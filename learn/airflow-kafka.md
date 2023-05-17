@@ -34,7 +34,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Quickstart
 
-For this tutorial a [quickstart repository](https://github.com/TJaniF/airflow-kafka-quickstart) which automatically starts up Airflow and a local Kafka cluster and configures all necessary connections is available. Clone the repository and skip to step X.
+For this tutorial a [quickstart repository](https://github.com/astronomer/airflow-kafka-quickstart) which automatically starts up Airflow and a local Kafka cluster and configures all necessary connections is available. Clone the repository and skip to step X.
 
 ## Prerequisites
 
