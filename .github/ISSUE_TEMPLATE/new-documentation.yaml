@@ -26,7 +26,7 @@ body:
     id: relateddocs
     attributes:
       label: Links to related documentation
-  - type: textarea
+  - type: input
     id: reviewers
     attributes:
       label: Due date
