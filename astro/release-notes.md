@@ -17,7 +17,7 @@ id: release-notes
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 8.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 8.2 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
 
