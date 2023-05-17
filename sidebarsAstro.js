@@ -178,7 +178,6 @@ module.exports = {
                 "resource-reference-gcp-hybrid",
               ],
             },
-            "manage-hybrid-deployments",
           ],
         },
       ],
