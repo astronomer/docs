@@ -48,13 +48,13 @@ If you prefer, you can also run `astro deployment create` to create a Deployment
     - **Scheduler**: Select the amount of resources you want your Deployment scheduler to use. The scheduler is responsible for queueing and scheduling your Airflow tasks. Choose **Small** for most workloads. See [Configure Deployment resources](configure-deployment-resources.md#scheduler-resources) for more information.
     - **Worker queue**: Configure the `default` worker queue for your Deployment. A worker queue is a group of identically-configured workers responsible for running your tasks. The default options for the `default` worker queue are suitable for most workloads. See [Worker queues](configure-deployment-resources.md#worker-queues).
 
-4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:
+    If you don't change any Deployment resource settings, your Deployment is created with the following resources:
 
     - The celery executor.
-    - A worker queue named `default` that runs a maximum of 10 machines. Each machine in the queue has 1 vCPU and 2G of RAM, and they can each run a maximum of 5 tasks at a time.
+    - A worker queue named `default` that runs a maximum of 10 workers. Each workers has 1 vCPU and 2G of RAM, and they can each run a maximum of 5 tasks at a time.
     - A scheduler with 1 CPU and 2 GiB of memory.
 
-5. Click **Create Deployment**.
+4. Click **Create Deployment**.
 
      A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
     

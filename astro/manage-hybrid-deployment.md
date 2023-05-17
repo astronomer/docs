@@ -12,37 +12,6 @@ To create a Deployment on Astro Hosted, see [Create a Deployment](create-deploym
 
 :::
 
-## Create a Hybrid Deployment
-
-1. In the Cloud UI, select a Workspace.
-
-2. On the **Deployments** page, click **Deployment**.
-
-3. Complete the following fields:
-
-    - **Name**: Enter a name for your Deployment.
-    - **Astro Runtime**: By default, the latest version of Astro Runtime is selected. The Astro Runtime versions provided in the Cloud UI are limited to patches for the most recent major and minor releases. Deprecated versions of Astro Runtime aren't available.
-
-        To upgrade the Astro Runtime version for your Deployment, you’ll need to update your Docker image in your Astro project directory. For more information about upgrading Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md).
-
-    - **Description**: Optional. Enter a description for your Deployment.
-    - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
-    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks in a single worker and is a good choice for most teams. The Kubernetes executor runs each task in an isolated Kubernetes Pod and is a good option for teams that want fine-grained control over the execution environment for each of their tasks. For more information about the benefits and limitations of each executor, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
-    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
-
-4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:
-
-    - The celery executor
-    - A worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
-    - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
-
-5. Click **Create Deployment**.
-
-     A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
-    
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
-
-
 ## Configure Hybrid Deployment resources
 
 After you create an Astro Deployment, you can modify its settings to meet the unique requirements of your organization. Using the Cloud UI and Astro CLI, you can:

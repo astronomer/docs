@@ -48,20 +48,14 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. 
 
-Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory. See the following table for all possible scheduler sizes.
-
-| Scheduler size | vCPU | Memory |
-| -------------- | ---- | ------ |
-| Small          | 1    | 2G     |
-| Medium         | 2    | 4G     |
-| Large          | 4    | 8G     |
+Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory.
 
 ### Update scheduler size 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
-4. Choose a scheduler size. See [Scheduler resources](#scheduler-resources).
+4. Choose a scheduler size. See [Scheduler size](#scheduler-size).
 5. Click **Update**.
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
