@@ -128,13 +128,24 @@ module.exports = {
         },
         {
           type: "category",
-          label: "User access",
-          items: ["configure-idp","add-user", "user-permissions", "manage-domains"],
+          label: "Manage Organizations",
+          items: [
+            {
+              type: "category",
+              label: "User access",
+              items: [
+                "configure-idp",
+                "add-user", 
+                "user-permissions", 
+                "manage-domains"],
+            },
+            "organization-api-tokens",
+          ],
         },
         {
           type: "category",
           label: "Manage Workspaces",
-          items: ["manage-workspaces", "workspace-api-tokens", "organization-api-tokens"],
+          items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
