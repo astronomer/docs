@@ -2,8 +2,7 @@ name: Request new documentation
 description: A new doc or topic on an existing Astro feature or behavior
 assignees:
   - jwitz
-  - kwcanuck
-labels: ["new-feature"]
+labels: ["kind/enhancement"]
 body:
   - type: dropdown
     id: impact
