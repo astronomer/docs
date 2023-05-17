@@ -26,7 +26,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ## Astro Runtime 8.2.0
 
-- Release date: May 17, 2023
+- Release date: May 16, 2023
 - Airflow version: 2.6.1
 
 ### Airflow 2.6.1
