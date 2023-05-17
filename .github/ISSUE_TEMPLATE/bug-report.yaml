@@ -2,7 +2,6 @@ name: Report an issue in documentation
 description: Any request related to existing documentation that has an issue
 assignees:
   - jwitz
-  - kwcanuck
 body:
   - type: markdown
     attributes:
@@ -11,7 +10,7 @@ body:
   - type: dropdown
     id: issuetype
     attributes:
-      label: What's the issue? 
+      label: Issue type
       multiple: true
       options:
         - Inaccurate content
@@ -23,7 +22,7 @@ body:
   - type: input
     id: doc
     attributes:
-      label: Where do you see this issue?
+      label: Affected docs
       description: Share a link to the document(s) where the issue exists.
       placeholder: For example, 'https://docs.astronomer.io/astro/develop-project', 'All CLI docs', 'Release notes'
     validations:
@@ -31,7 +30,7 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: What needs to be fixed, added, or removed?
+      label: Describe the issue and the fix
       description: Describe the issue and how it should be fixed.
       placeholder:  Be as descriptive as possible. If there is existing documentation or related issues, link to them here. If you're not sot sure how best to proceed with your request, contact the docs team.
     validations:
