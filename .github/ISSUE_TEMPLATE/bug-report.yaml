@@ -2,6 +2,7 @@ name: Report an issue in documentation
 description: Any request related to existing documentation that has an issue
 assignees:
   - jwitz
+labels: ["error/wrong-info", "error/misleading"]
 body:
   - type: markdown
     attributes:
@@ -19,7 +20,7 @@ body:
         - Bug/ broken link
     validations:
       required: true
-  - type: input
+  - type: textarea
     id: doc
     attributes:
       label: Affected docs
