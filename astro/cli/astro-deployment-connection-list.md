@@ -6,7 +6,7 @@ description: Reference documentation for astro deployment connection list.
 hide_table_of_contents: true
 ---
 
-For a given Deployment on Astro, list its connections stored in the Airflow metadata database.
+List the Airflow connections stored in a Deployment's metadata database. 
 
 ## Usage
 
@@ -14,16 +14,7 @@ For a given Deployment on Astro, list its connections stored in the Airflow meta
 astro deployment connection list
 ```
 
-:::tip
-
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
-
-- `ASTRONOMER_KEY_ID`
-- `ASTRONOMER_KEY_SECRET`
-
-After setting the variables, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
-
-:::
+This command only lists Airflow connections that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
 
 ## Options
 

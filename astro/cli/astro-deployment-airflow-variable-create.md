@@ -6,7 +6,7 @@ description: Reference documentation for astro deployment airflow-variable creat
 hide_table_of_contents: true
 ---
 
-For a given Deployment on Astro, create airflow variables that are stored in the Airflow metadata database.
+Create Airflow variables on a Deployment. Airflow variables are stored in the Deployment's metadata database and appear in the Airflow UI.  
 
 ## Usage
 
@@ -16,7 +16,7 @@ astro deployment airflow-variable create
 
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
@@ -29,9 +29,9 @@ After setting the variables, this command works for a Deployment without you hav
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-d`,`--deployment-id`           |    The ID of the Deployment for which to create airflow-variables                                                | Any valid Deployment ID |
-| `--deployment-name` | The name of the Deployment for which to create airflow variables. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
-| `-w`,`--workspace-id`          | create airflow variables for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed           | Any valid Workspace ID                                                         |
+| `-d`,`--deployment-id`           |    The ID of the Deployment where you want to create Airflow variables.                                                | Any valid Deployment ID |
+| `--deployment-name` | The name of the Deployment where you want to create Airflow variables. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
+| `-w`,`--workspace-id`          | Create Airflow variables in a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.          | Any valid Workspace ID                                                         |
 | `-k`,`--key`          | The Airflow variable key. Required.          | string                                                         |
 | `-v`,`--value`          | The Airflow variable value. Required.           | string                                                         |
 | `--description`          | The Airflow variable description.          | string                                                         |
@@ -48,5 +48,5 @@ $ astro deployment airflow-variable create --deployment-name="My Deployment" --k
 
 ## Related Commands
 
-- [`astro deployment airflow-variable copy`](cli/astro-deployment-airflow-variable-copy.md)
-- [`astro deployment airflow-variable update`](cli/astro-deployment-airflow-variable-update.md)
+- [`astro deployment airflow variable copy`](cli/astro-deployment-airflow-variable-copy.md)
+- [`astro deployment airflow variable update`](cli/astro-deployment-airflow-variable-update.md)

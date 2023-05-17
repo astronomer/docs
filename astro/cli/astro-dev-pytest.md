@@ -27,7 +27,7 @@ astro dev pytest
 | Option               | Description                                                                                                                                           | Possible Values                                                  |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `<pytest-filepath>`  | The filepath to an alternative pytest file or directory. Must be within the `tests` directory                                                         | Any valid filepath within the `tests` directory                  |
-| `-a`, `--args` | pytest arguments you'd like passed to the pytest command. Surround the args in quotes. For example 'astro dev pytest --args "–-cov-config path"' | any set of pytest command args surrounded by quotes |
+| `-a`, `--args` | Arguments to pass to pytest. Surround the args in quotes. | Any set of pytest command arguments surrounded by quotes |
 | `-e`, `--env`        | The filepath to your environment variables. The default is `.env`)                                                                                    | Any valid filepath within your Astro project                     |
 | `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 
@@ -36,6 +36,10 @@ astro dev pytest
 ```sh
 $ astro dev pytest --env=myAlternativeEnvFile.env
 # Specify env file at root of Astro project
+
+$ astro dev pytest --args "–-cov-config path"
+# Specify an argument for pytest
+
 ```
 
 ## Related Commands

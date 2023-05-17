@@ -1,12 +1,12 @@
 ---
 sidebar_label: "astro deployment airflow-variable list"
-title: "astro deployment airflow-variable list"
+title: "astro deployment airflow variable list"
 id: astro-deployment-airflow-variable-list
 description: Reference documentation for astro deployment airflow-variable list.
 hide_table_of_contents: true
 ---
 
-For a given Deployment on Astro, list the airflow variables stored in the Airflow metadata database.
+List the Airflow variables stored in a Deployment's metadata database. 
 
 ## Usage
 
@@ -14,24 +14,15 @@ For a given Deployment on Astro, list the airflow variables stored in the Airflo
 astro deployment airflow-variable list
 ```
 
-:::tip
-
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
-
-- `ASTRONOMER_KEY_ID`
-- `ASTRONOMER_KEY_SECRET`
-
-After setting the variables, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
-
-:::
+This command only lists Airflow variables that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
 
 ## Options
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-d`,`--deployment-id`           |    The ID of the Deployment for which to list airflow variables                                                | Any valid Deployment ID |
-| `--deployment-name` | The name of the Deployment for which to list Conections. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
-| `-w`,`--workspace-id`          | List airflow variables for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed           | Any valid Workspace ID                                                         |
+| `-d`,`--deployment-id`           |    The ID of the Deployment to list Airflow variables for.                                                | Any valid Deployment ID |
+| `--deployment-name` | The name of the Deployment to list Airflow variables for. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
+| `-w`,`--workspace-id`          | List Airflow variables for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.           | Any valid Workspace ID                                                         |
 
 ## Examples
 

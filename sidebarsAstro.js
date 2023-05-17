@@ -288,11 +288,41 @@ module.exports = {
           label: "astro deployment",
           items: [
             'cli/astro-deployment-airflow-upgrade',
+            {
+              type: "category",
+              label: "astro deployment airflow-variable",
+              items: [
+                'cli/astro-deployment-airflow-variable-copy',
+                'cli/astro-deployment-airflow-variable-create',
+                'cli/astro-deployment-airflow-variable-list',
+                'cli/astro-deployment-airflow-variable-update',
+              ],
+            },
+            {
+              type: "category",
+              label: "astro deployment connection",
+              items: [
+                'cli/astro-deployment-connection-copy',
+                'cli/astro-deployment-connection-create',
+                'cli/astro-deployment-connection-list',
+                'cli/astro-deployment-connection-update',
+              ],
+            },
             'cli/astro-deployment-create',
             'cli/astro-deployment-delete',
             'cli/astro-deployment-inspect',
             'cli/astro-deployment-list',
             'cli/astro-deployment-logs',
+            {
+              type: "category",
+              label: "astro deployment pool",
+              items: [
+                'cli/astro-deployment-pool-copy',
+                'cli/astro-deployment-pool-create',
+                'cli/astro-deployment-pool-list',
+                'cli/astro-deployment-pool-update',
+              ],
+            },
             'cli/astro-deployment-runtime-upgrade',
             'cli/astro-deployment-service-account',
             'cli/astro-deployment-team',

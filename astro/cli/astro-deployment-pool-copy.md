@@ -1,12 +1,4 @@
----
-sidebar_label: "astro deployment pool copy"
-title: "astro deployment pool copy"
-id: astro-deployment-pool-copy
-description: Reference documentation for astro deployment pool copy.
-hide_table_of_contents: true
----
-
-For a given Deployment on Astro, copy its pools stored in the Airflow metadata database to another Deployment on Astro
+Copy Airflow pools from one Astro Deployment to another. Airflow pools are stored in the target Deployment's metadata database and appear in the Airflow UI.  
 
 ## Usage
 
@@ -14,14 +6,16 @@ For a given Deployment on Astro, copy its pools stored in the Airflow metadata d
 astro deployment pool copy
 ```
 
+This command only copies Airflow pools that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
+
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment pools in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
 
-After setting the variables, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
+After setting the pools, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
 
 :::
 
@@ -29,11 +23,11 @@ After setting the variables, this command works for a Deployment without you hav
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-s`,`--source-id`           |    The ID of the Deployment to copy pools from.                                             | Any valid Deployment ID |
-| `-n`, `--source-name` | The name of the Deployment for which to copy pools from. Use as an alternative to `<source-id>`. | Any valid Deployment name                                            |
-| `-t`, `--target-id` | The ID of the Deployment to receive the copied pools                                     |
-| `--target-name` | The name of the Deployment to receive the copied pools.  Use as an alternative to `<target-id>`. | Any valid Deployment name                                            |
-| `-w`,`--workspace-id`          | copy pools for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.          | Any valid Workspace ID                                                         |
+| `-s`,`--source-id`           |    The ID of the Deployment to copy Airflow pools from.                                             | Any valid Deployment ID |
+| `-n`, `--source-name` | The name of the Deployment from which to copy Airflow pools. Use as an alternative to `<source-id>`. | Any valid Deployment name                                            |
+| `-t`, `--target-id` | The ID of the Deployment to receive the copied Airflow pools                                     |
+| `--target-name` | The name of the Deployment to receive the copied Airflow pools.  Use as an alternative to `<target-id>`. | Any valid Deployment name                                            |
+| `-w`,`--workspace-id`          | Specify to copy Airflow pools to a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.          | Any valid Workspace ID      |
 
 ## Examples
 

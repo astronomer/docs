@@ -6,7 +6,7 @@ description: Reference documentation for astro deployment airflow-variable copy.
 hide_table_of_contents: true
 ---
 
-For a given Deployment on Astro, copy its airflow variables stored in the Airflow metadata database to another Deployment on Astro
+Copy Airflow variables from one Astro Deployment to another. Airflow variables are stored in the target Deployment's metadata database and appear in the Airflow UI.  
 
 ## Usage
 
@@ -14,9 +14,11 @@ For a given Deployment on Astro, copy its airflow variables stored in the Airflo
 astro deployment airflow-variable copy
 ```
 
+This command only copies Airflow variables that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
+
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
@@ -29,11 +31,11 @@ After setting the variables, this command works for a Deployment without you hav
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-s`,`--source-id`           |    The ID of the Deployment to copy airflow variables from.                                             | Any valid Deployment ID |
-| `-n`, `--source-name` | The name of the Deployment for which to copy airflow variables from. Use as an alternative to `<source-id>`. | Any valid Deployment name                                            |
-| `-t`, `--target-id` | The ID of the Deployment to receive the copied airflow variables                                     |
-| `--target-name` | The name of the Deployment to receive the copied airflow variables.  Use as an alternative to `<target-id>`. | Any valid Deployment name                                            |
-| `-w`,`--workspace-id`          | copy airflow variables for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.          | Any valid Workspace ID                                                         |
+| `-s`,`--source-id`           |    The ID of the Deployment to copy Airflow variables from.                                             | Any valid Deployment ID |
+| `-n`, `--source-name` | The name of the Deployment from which to copy Airflow variables. Use as an alternative to `<source-id>`. | Any valid Deployment name                                            |
+| `-t`, `--target-id` | The ID of the Deployment to receive the copied Airflow variables                                     |
+| `--target-name` | The name of the Deployment to receive the copied Airflow variables.  Use as an alternative to `<target-id>`. | Any valid Deployment name                                            |
+| `-w`,`--workspace-id`          | Specify to copy Airflow variables to a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.          | Any valid Workspace ID                                                         |
 
 ## Examples
 
@@ -47,5 +49,5 @@ $ astro deployment airflow-variable copy --source-name="My Deployment" --target-
 
 ## Related Commands
 
-- [`astro deployment airflow-variable create`](cli/astro-deployment-airflow-variable-create.md)
-- [`astro deployment airflow-variable update`](cli/astro-deployment-airflow-variable-update.md)
+- [`astro deployment airflow variable create`](cli/astro-deployment-airflow-variable-create.md)
+- [`astro deployment airflow variable update`](cli/astro-deployment-airflow-variable-update.md)

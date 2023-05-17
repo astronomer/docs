@@ -21,8 +21,8 @@ By default, the command exports all variables, connections, and pools as YAML co
 
 | Option              | Description                                                                                                        | Possible Values             |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| `--compose` | Export the Compose file used to start Airflow locally.                                                                          |                |
-| `--compose-file`            | The location to export the Compose file used to start Airflow locally. (default `compose.yaml`)                                 | Any valid filepath              |
+| `--compose` | Export the Docker Compose file used to start Airflow locally.                                                                          |                |
+| `--compose-file`            | The location Docker Compose file to export. The default is `compose.yaml`.                                 | Any valid filepath              |
 | `-c`,`--connections` | Export connections to a given local file | ``|
 | `-e`,`--env`            | Location of the file to export Airflow objects to as Astro environment variables. Use this option only with `--env-export`. The default file path is `env`.                                                                          | Any valid filepath                 |
 | `-n`,`--env-export`            | Export Airflow objects as Astro environment variables.                                                                                  | ``                 |

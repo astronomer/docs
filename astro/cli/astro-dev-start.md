@@ -20,7 +20,7 @@ astro dev start
 
 | Option          | Description                   | Possible Values                                                  |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `--compose-file`            | The location of compose file if you wish to use a custom compose file with the start comman                                 | Any valid filepath              |
+| `--compose-file`            | The location of a custom Docker Compose file to use for starting Airflow on Docker.                           | Any valid filepath              |
 | `-e`,`--env`         | Path to your environment variable file. Default is `.env`                                                                                             | Valid filepaths                                                  |
 | `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 | `-n`, `--no-browser` | Starts a local Airflow environment without opening a web browser for the Airflow UI      | None                                                             |

@@ -6,22 +6,22 @@ description: Reference documentation for astro deployment pool create.
 hide_table_of_contents: true
 ---
 
-For a given Deployment on Astro, create pools that are stored in the Airflow metadata database.
+Create Airflow pools on a Deployment. Airflow pools are stored in the Deployment's metadata database and appear in the Airflow UI.  
 
 ## Usage
 
 ```sh
-astro deployment pool create
+astro deployment airflow-pool create
 ```
 
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment pools in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
 
-After setting the variables, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
+After setting the pools, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
 
 :::
 
@@ -29,12 +29,12 @@ After setting the variables, this command works for a Deployment without you hav
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-d`,`--deployment-id`           |    The ID of the Deployment for which to create pools                                                | Any valid Deployment ID |
-| `-n`, `--deployment-name` | The name of the Deployment for which to create pools. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
-| `-w`,`--workspace-id`          | create pools for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed           | Any valid Workspace ID                                                         |
-| `--name`          | The Airflow pool name. Required         | string                                                         |
-| `-v`,`--slots`          | Number of airflow pool slots. Required.           | intieger                                                         |
-| `--description`          | The pool description.          | string                                                         |
+| `-d`,`--deployment-id`           |    The ID of the Deployment where you want to create Airflow pools.                                                | Any valid Deployment ID |
+| `--deployment-name` | The name of the Deployment where you want to create Airflow pools. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
+| `-w`,`--workspace-id`          | Create Airflow pools in a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.          | Any valid Workspace ID                                                         |
+| `--name`          | The Airflow pool name. Required.        | Any string                                                         |
+| `-v`,`--slots`          | Number of airflow pool slots. Required.           | Any integer                                                         |
+| `--description`          | The pool description.          | Any string                                                         |
 
 ## Examples
 
