@@ -221,7 +221,7 @@ Common patterns include:
 - Configuring a Kafka cluster with a blob storage like S3 as a sink. Batch process data from S3 at regular intervals.
 - Using the ProduceToTopicOperator in Airflow to produce messages to a Kafka cluster as one of several producers.
 - Consuming data from a Kafka cluster via the ConsumeFromTopicOperator in batches using the apply function to extract and load information to a blob storage or data warehouse.
-- Listening for specific messages in a data stream running through a Kafka cluster using the AwaitKafkaMessageOperator to trigger downstream tasks once the message appears.
+- Listening for specific messages in a data stream running through a Kafka cluster using the AwaitMessageTriggerFunctionSensor to trigger downstream tasks once the message appears.
 
 ## Conclusion
 
