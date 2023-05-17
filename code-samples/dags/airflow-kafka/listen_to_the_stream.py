@@ -49,7 +49,7 @@ def event_triggered_function(event, **context):
         task_id=f"triggered_downstream_dag_{uuid.uuid4()}",
         wait_for_completion=True,  # wait for downstream DAG completion
         conf={"pet_name": pet_name},
-        poke_interval=5
+        poke_interval=5,
     ).execute(context)
 
     print(f"The walk has concluded and {pet_name} is now happily taking a nap!")
