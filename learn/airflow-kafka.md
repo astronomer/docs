@@ -34,7 +34,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Quickstart
 
-For this tutorial a [quickstart repository](https://github.com/astronomer/airflow-kafka-quickstart) which automatically starts up Airflow and a local Kafka cluster and configures all necessary connections is available. Clone the repository and skip to step X.
+For this tutorial a [quickstart repository](https://github.com/astronomer/airflow-kafka-quickstart) which automatically starts up Airflow and a local Kafka cluster and configures all necessary connections is available. Clone the repository and skip to [Step 6](#step-6-run-the-dags).
 
 ## Prerequisites
 
@@ -185,7 +185,7 @@ The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator
 
     <CodeBlock language="python">{walking_my_pet}</CodeBlock>
 
-    This DAG will only has one task that picks a random amount of minutes your pet will go for a walk with you. Note that the `walking_your_pet` task retrieves the `pet_name` from the [Airflow context `params`](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/params.html). The name of your pet was injected into this DAGs context via the `conf` parameter of the `TriggerDagRunOperator` in the `event_triggered_function` of the `listen_for_mood` task in the `listen_to_the_stream` DAG. 
+    This DAG only has one task that picks a random amount of minutes your pet will go for a walk with you. Note that the `walking_your_pet` task retrieves the `pet_name` from the [Airflow context `params`](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/params.html). The name of your pet was injected into this DAG's context via the `conf` parameter of the `TriggerDagRunOperator` in the `event_triggered_function` of the `listen_for_mood` task in the `listen_to_the_stream` DAG. 
 
 ## Step 6: Run the DAGs
 
@@ -200,8 +200,6 @@ Now that all 3 DAGs are ready, lets see how they work together.
 3. Manually run the `produce_consume_treats` DAG to give your pet some treats (and produce a few messages to the Kafka cluster).
 
 4. Check the logs of the `listen_for_mood` task in the `listen_to_the_stream` DAG to see if a message fitting the criteria defined by the `listen_function` has been detected. It is possible that you will need to run the `produce_consume_treats` DAG a couple of times for such a message to appear.
-
-    ![Kafka deferred state](/img/guides/kafka-deferred-task.png)
 
     If the TriggerEvent of the `listen_for_mood` task fires, you will see the run of the `walking_my_pet` DAG being intiated from within the `listen_for_mood` task logs.
 
