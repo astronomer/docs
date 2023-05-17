@@ -14,24 +14,24 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: What is the new feature and who is it for?
+      label: New feature description
       description: Why is the new feature or functionality significant? What benefit does it provide? Why should customers care about this feature or functionality?
     validations:
       required: true
   - type: input
     id: reviewer
     attributes:
-      label: Who should review the change?
+      label: Required reviewers
     validations:
       required: true
   - type: textarea
     id: relateddocs
     attributes:
-      label: Provide links to existing or related source documentation here.
+      label: Notion/ GitHub/ ProductBoard links
   - type: textarea
     id: deadline
     attributes:
-      label: When will the new feature be released?
+      label: Release date
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: textarea
     id: notes
