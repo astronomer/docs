@@ -21,7 +21,7 @@ Specifically, you will:
 - Deploy your DAGs to Astro with the Astro CLI.
 - Trigger a run of an example DAG in the Airflow UI. 
 
-If you don't have an account on Astro and want to run Airflow locally, see [LINK]. If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](learn/get-started-with-airflow.md).
+If you don't have an account on Astro and want to run Airflow locally, see [LINK]. If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
 ## Prerequisites
 
