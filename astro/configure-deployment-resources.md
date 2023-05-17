@@ -111,6 +111,21 @@ By default, Deployments accept code deploys from any authenticated source. When 
 
 You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
 
+## Enable high availability
+
+:::info
+
+This feature is on by default for Astro Hybrid users. 
+
+:::
+
+When a Deployment has high availability enabled, it runs multiple instances of its Airflow components across separate nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of the clusters your component instance is running on.
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Details** tab.
+3. Click **Edit Details**.
+4. In **High Availability**, click the toggle to **On**.
+
 ## Transfer a Deployment to another Workspace 
 
 Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.
