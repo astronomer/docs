@@ -8,7 +8,7 @@ body:
   - type: dropdown
     id: impact
     attributes:
-      label: What kind of change are you requesting? 
+      label: Request type
       multiple: true
       options:
         - Setup steps for an existing feature or supported configuration
@@ -19,22 +19,22 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: What kind of doc do you want us to write, and why?
+      label: Describe the documentation request
     validations:
       required: true
   - type: textarea
     id: relateddocs
     attributes:
-      label: Provide links to existing or related source documentation here.
+      label: Links to related documentation
   - type: textarea
     id: reviewers
     attributes:
-      label: When do you need the documentation?
+      label: Due date
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: input
     id: deadline
     attributes:
-      label: Who should review the change?
+      label: Required reviewers
   - type: textarea
     id: notes
     attributes:
