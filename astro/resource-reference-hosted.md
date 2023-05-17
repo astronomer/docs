@@ -52,6 +52,8 @@ The following table lists all available worker types on Astro Deployments.
 | A10         | 2    | 4G     |
 | A20         | 4    | 8G     |
 
+All worker types additionally have 5 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
+
 ## Standard cluster configurations
 
 A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astronomer. Astronomer maintains standard clusters in a limited regions and clouds, with support for more regions and clouds coming soon.
