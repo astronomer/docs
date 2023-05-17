@@ -111,7 +111,7 @@ The operators of the Apache Kafka Airflow provider use Kafka connection provided
 
 7. Click Save.
 
-## Step 2: Create a DAG with a producer and a consumer task
+## Step 3: Create a DAG with a producer and a consumer task
 
 The [Airflow Kafka provider package](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) contains both a ProduceToTopicOperator, which you can use to produce messages directly to a Kafka topic and a ConsumeFromTopicOperator which can directly consume messages from a topic.
 
@@ -149,7 +149,7 @@ A common use case is to directly connect a blob storage (for example an Amazon S
 
 :::
 
-## Step 3: Create a listener DAG
+## Step 4: Create a listener DAG
 
 A common use case is to run a downstream task when a specific message appears in your Kafka topic. The AwaitMessageTriggerFunctionSensor is a deferrable operator that will listen to your Kafka topic for a message that fulfills specific criteria.
 
@@ -175,7 +175,7 @@ Lets add a second DAG which will listen for a message fitting special criteria i
     The AwaitMessageTriggerFunctionSensor will always be running and listening. In case the task fails, for example due to a malformed message being consumed, the DAG will complete as failed and automatically start its next DAG run thanks to the [`@continuous` schedule](scheduling-in-airflow.md#continuous-timetable).
 
 
-## Step 4: Create a downstream DAG
+## Step 5: Create a downstream DAG
 
 The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator starts a downstream DAG, in this step you will add this DAG to your environment.
 
@@ -187,7 +187,7 @@ The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator
 
     This DAG will only has one task that picks a random amount of minutes your pet will go for a walk with you. Note that the `walking_your_pet` task retrieves the `pet_name` from the [Airflow context `params`](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/params.html). The name of your pet was injected into this DAGs context via the `conf` parameter of the `TriggerDagRunOperator` in the `event_triggered_function` of the `listen_for_mood` task in the `listen_to_the_stream` DAG. 
 
-## Step 5: Run the DAGs
+## Step 6: Run the DAGs
 
 Now that all 3 DAGs are ready, lets see how they work together.
 
