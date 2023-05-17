@@ -36,6 +36,7 @@ An Organization role grants a user some level of access to an Astro Organization
 | Update roles and permissions of existing Organization users      |                         |                                | ✔️                      |
 | Invite a new user to an Organization                             |                         |                                | ✔️                      |
 | Remove a user from an Organization                               |                         |                                | ✔️                      |
+| Create Organization API tokens                                   |                         |                                | ✔️                      |
 | Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                      |
 
 To update user Organization roles, see [Manage users](add-user.md).
@@ -64,5 +65,7 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Create, Update and Delete API Keys                  |                      |                      | ✔️                   |
 | Update user roles and permissions                   |                      |                      | ✔️                   |
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
+| Create Workspace API tokens                         |                      |                      | ✔️                   |
+
 
 To update user Workspace roles, see [Manage users](add-user.md).
