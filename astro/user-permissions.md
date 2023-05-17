@@ -65,7 +65,7 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Create, Update and Delete API Keys                  |                      |                      | ✔️                   |
 | Update user roles and permissions                   |                      |                      | ✔️                   |
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
-| Create Workspace API tokens                         |                      |                      | ✔️                   |
+| Create, update and delete Workspace API tokens                         |                      |                      | ✔️                   |
 
 
 To update user Workspace roles, see [Manage users](add-user.md).
