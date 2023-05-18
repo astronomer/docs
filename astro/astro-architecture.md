@@ -5,22 +5,17 @@ id: astro-architecture
 description: Astro uses a multi-plane structure to help make Airflow more secure and reliable. Learn how the control plane and data plane work together on the cloud.
 ---
 
-Astro is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Astro is built with a multi-plane architecture which consists of:
+Astro Hosted is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow environments are hosted and managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
 
-- A control plane that is hosted by Astronomer.
-- A data plane that can run either in your cloud or in a single-tenant account hosted by Astronomer.
+Astro Hosted consists of three core components for managing Airflow, all hosted on Astronomer's cloud:
 
-Astro can be activated on Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure. Astronomer runs Astro on managed Kubernetes services for each cloud provider, including AWS Elastic Kubernetes Service (EKS), Google Kubernetes Engine (GKE), and Azure Kubernetes Service (AKS).
+- The _Astro control plane_ is Astronomer's interface for managing your Airflow environments in the cloud. It includes the Cloud UI, the Astro CLI, and Cloud API.
+- _Astro clusters_ are dedicated Kubernetes clusters that can run multiple Airflow environments.
+- A _Deployment_ is an Airflow environment running on Astro. Each Deployment includes all of the core Airflow components, plus additional Astronomer tooling that help you optimize resource usage, observability, and security.
 
-The control plane and data plane are managed by Astronomer and require no operational oversight by your organization. The Astro architecture ensures that tasks are executed securely within your corporate network.
+Astro Deployments can securely connect to external data services so that you can place Airflow at the heart of your data ecosystem. 
 
-![Astro architecture overview](/img/docs/architecture-overview.png)
+![Astro Hosted overview](/img/architecture/overview.png)
 
-For more information about Astro architecture, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Related documentation
 
-- [Shared responsibility model](shared-responsibility-model.md)
-- [Install Astro on AWS](install-aws.md)
-- [Install Astro on GCP](install-gcp.md)
-- [Install Astro on Azure](install-azure.md)

@@ -14,8 +14,8 @@ module.exports = {
       label: 'Overview',
       link: { type: 'doc', id: 'overview' },
       items: [
-        'features',
         'astro-architecture',
+        'features',
       ],
     },
     {
