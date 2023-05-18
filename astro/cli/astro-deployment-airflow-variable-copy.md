@@ -14,7 +14,7 @@ Copy Airflow variables from one Astro Deployment to another. Airflow variables a
 astro deployment airflow-variable copy
 ```
 
-This command only copies Airflow variables that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
+This command only copies Airflow variables that were configured through the Airflow UI or Airflow REST API
 
 :::tip
 
