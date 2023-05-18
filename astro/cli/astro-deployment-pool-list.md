@@ -11,7 +11,7 @@ List the Airflow pools stored in a Deployment's metadata database.
 ## Usage
 
 ```sh
-astro deployment airflow-pool list
+astro deployment pool list
 ```
 
 This command only lists Airflow pools that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
@@ -26,13 +26,12 @@ This command only lists Airflow pools that were configured through the Airflow U
 
 ## Examples
 
-```sh
+```bash
 # List pools stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment pool list --deployment-id cl03oiq7d80402nwn7fsl3dmv
+astro deployment pool list --deployment-id cl03oiq7d80402nwn7fsl3dmv
 
 # List pools stored in the Deployment "My Deployment"
-$ astro deployment pool list --deployment-name="My Deployment"
-```
+astro deployment pool list --deployment-name="My Deployment"
 
 ## Related Commands
 

@@ -38,12 +38,12 @@ After setting the pools, this command works for a Deployment without you having 
 
 ## Examples
 
-```sh
+```bash
 # update pool called my-pool stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment pool update --deployment-id cl03oiq7d80402nwn7fsl3dmv --name my-pool --slots 10
+astro deployment pool update --deployment-id cl03oiq7d80402nwn7fsl3dmv --name my-pool --slots 10
 
 # update pools stored in the Deployment "My Deployment"
-$ astro deployment pool update --deployment-name="My Deployment" --name my-pool --slots 10
+astro deployment pool update --deployment-name="My Deployment" --name my-pool --slots 10
 
 ## Related Commands
 

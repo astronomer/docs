@@ -39,13 +39,12 @@ After setting the connections, this command works for a Deployment without you h
 
 ## Examples
 
-```sh
+```bash
 # copy connections stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv to a deployment with an ID of cl03oiq7d80402nwn7fsl3dcd
-$ astro deployment connection copy --source-id cl03oiq7d80402nwn7fsl3dmv --target cl03oiq7d80402nwn7fsl3dcd
+astro deployment connection copy --source-id cl03oiq7d80402nwn7fsl3dmv --target cl03oiq7d80402nwn7fsl3dcd
 
 # copy connections stored in the Deployment "My Deployment" to another Deployment "My Other Deployment"
-$ astro deployment connection copy --source-name="My Deployment" --target-name="My Other Deployment"
-```
+astro deployment connection copy --source-name="My Deployment" --target-name="My Other Deployment"
 
 ## Related Commands
 

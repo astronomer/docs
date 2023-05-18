@@ -26,12 +26,12 @@ This command only lists Airflow connections that were configured through the Air
 
 ## Examples
 
-```sh
+```bash
 # List connections stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment connection list --deployment-id cl03oiq7d80402nwn7fsl3dmv
+astro deployment connection list --deployment-id cl03oiq7d80402nwn7fsl3dmv
 
 # List connections stored in the Deployment "My Deployment"
-$ astro deployment connection list --deployment-name="My Deployment"
+astro deployment connection list --deployment-name="My Deployment"
 ```
 
 ## Related Commands

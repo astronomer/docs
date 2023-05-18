@@ -38,13 +38,12 @@ After setting the variables, this command works for a Deployment without you hav
 
 ## Examples
 
-```sh
+```bash
 # update airflow-variable called my-airflow-variable stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment airflow-variable update --deployment-id cl03oiq7d80402nwn7fsl3dmv --key my-variable ---value VAR
+astro deployment airflow-variable update --deployment-id cl03oiq7d80402nwn7fsl3dmv --key my-variable ---value VAR
 
 # update airflow-variables stored in the Deployment "My Deployment"
-$ astro deployment airflow-variable update --deployment-name="My Deployment" --key my-variable ---value VAR
-```
+astro deployment airflow-variable update --deployment-name="My Deployment" --key my-variable ---value VAR
 
 ## Related Commands
 

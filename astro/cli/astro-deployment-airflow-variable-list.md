@@ -26,12 +26,12 @@ This command only lists Airflow variables that were configured through the Airfl
 
 ## Examples
 
-```sh
+```bash
 # List airflow variables stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment airflow-variable list --deployment-id cl03oiq7d80402nwn7fsl3dmv
+astro deployment airflow-variable list --deployment-id cl03oiq7d80402nwn7fsl3dmv
 
 # List airflow variables stored in the Deployment "My Deployment"
-$ astro deployment airflow-variable list --deployment-name="My Deployment"
+astro deployment airflow-variable list --deployment-name="My Deployment"
 ```
 
 ## Related Commands

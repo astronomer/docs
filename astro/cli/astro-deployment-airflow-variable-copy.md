@@ -18,7 +18,7 @@ This command only copies Airflow variables that were configured through the Airf
 
 :::tip
 
-This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate Workspace API Token and set the following OS-level environment variable in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
@@ -39,12 +39,12 @@ After setting the variables, this command works for a Deployment without you hav
 
 ## Examples
 
-```sh
+```bash
 # copy airflow variables stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv to a deployment with an ID of cl03oiq7d80402nwn7fsl3dcd
-$ astro deployment airflow-variable copy --source-id cl03oiq7d80402nwn7fsl3dmv --target cl03oiq7d80402nwn7fsl3dcd
+astro deployment airflow-variable copy --source-id cl03oiq7d80402nwn7fsl3dmv --target cl03oiq7d80402nwn7fsl3dcd
 
 # copy airflow variables stored in the Deployment "My Deployment" to another Deployment "My Other Deployment"
-$ astro deployment airflow-variable copy --source-name="My Deployment" --target-name="My Other Deployment"
+astro deployment airflow-variable copy --source-name="My Deployment" --target-name="My Other Deployment"
 ```
 
 ## Related Commands

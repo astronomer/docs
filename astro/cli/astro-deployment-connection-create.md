@@ -11,7 +11,7 @@ List the Airflow connections stored in a Deployment's metadata database.
 ## Usage
 
 ```sh
-astro deployment airflow-variable list
+astro deployment connection list
 ```
 
 ## Options
@@ -33,12 +33,12 @@ astro deployment airflow-variable list
 
 ## Examples
 
-```sh
+```bash
 # create connection called my-connection stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment connection create --deployment-id cl03oiq7d80402nwn7fsl3dmv --conn-id my-connection --conn-type http
+astro deployment connection create --deployment-id cl03oiq7d80402nwn7fsl3dmv --conn-id my-connection --conn-type http
 
 # create connections stored in the Deployment "My Deployment"
-$ astro deployment connection create --deployment-name="My Deployment" --conn-id my-connection --conn-type http
+astro deployment connection create --deployment-name="My Deployment" --conn-id my-connection --conn-type http
 ```
 
 ## Related Commands

@@ -11,7 +11,7 @@ Update the value for a Deployment's Airflow variable.
 ## Usage
 
 ```sh
-astro deployment airflow-variable update
+astro deployment connection update
 ```
 
 :::tip
@@ -44,12 +44,12 @@ After setting the variables, this command works for a Deployment without you hav
 
 ## Examples
 
-```sh
+```bash
 # update connection called my-connection stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment connection update --deployment-id cl03oiq7d80402nwn7fsl3dmv --conn-id my-connection --conn-type http
+astro deployment connection update --deployment-id cl03oiq7d80402nwn7fsl3dmv --conn-id my-connection --conn-type http
 
 # update connections stored in the Deployment "My Deployment"
-$ astro deployment connection update --deployment-name="My Deployment" --conn-id my-connection --conn-type http
+astro deployment connection update --deployment-name="My Deployment" --conn-id my-connection --conn-type http
 ```
 
 ## Related Commands

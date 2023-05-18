@@ -33,13 +33,12 @@ astro dev pytest
 
 ## Examples
 
-```sh
-$ astro dev pytest --env=myAlternativeEnvFile.env
+```bash
 # Specify env file at root of Astro project
+astro dev pytest --env=myAlternativeEnvFile.env
 
-$ astro dev pytest --args "–-cov-config path"
 # Specify an argument for pytest
-
+astro dev pytest --args "–-cov-config path"
 ```
 
 ## Related Commands

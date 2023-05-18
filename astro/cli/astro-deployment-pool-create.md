@@ -11,7 +11,7 @@ Create Airflow pools on a Deployment. Airflow pools are stored in the Deployment
 ## Usage
 
 ```sh
-astro deployment airflow-pool create
+astro deployment pool create
 ```
 
 :::tip
@@ -38,13 +38,12 @@ After setting the pools, this command works for a Deployment without you having 
 
 ## Examples
 
-```sh
+```bash
 # create pool called my-pool stored in the Deployment with an ID of cl03oiq7d80402nwn7fsl3dmv
-$ astro deployment pool create --deployment-id cl03oiq7d80402nwn7fsl3dmv --name my-pool --slots 10
+astro deployment pool create --deployment-id cl03oiq7d80402nwn7fsl3dmv --name my-pool --slots 10
 
 # create pool stored in the Deployment "My Deployment"
-$ astro deployment pool create --deployment-name="My Deployment" --name my-pool --slots 10
-```
+astro deployment pool create --deployment-name="My Deployment" --name my-pool --slots 10
 
 ## Related Commands
 
