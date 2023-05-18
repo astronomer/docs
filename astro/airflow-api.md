@@ -201,7 +201,7 @@ You can also specify a `logical_date` at the time in which you wish to trigger t
 #### cURL
 
 ```sh
-curl -v -X POST <your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
+curl -v -X POST https://<your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
    -H 'Authorization: Bearer <your-access-token>' \
    -H 'Cache-Control: no-cache' \
    -H 'content-type: application/json' \
@@ -217,7 +217,7 @@ token = "<your-access-token>"
 deployment_url = "<your-deployment-url>"
 dag_id = "<your-dag-id>"
 response = requests.post(
-    url=f"{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
+    url=f"https://{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
     headers={
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
@@ -237,7 +237,7 @@ Replace `<your-dag-id>` with your own value.
 #### cURL
 
 ```sh
-curl -X PATCH <your-deployment-url>/api/v1/dags/<your-dag-id> \
+curl -X PATCH https://<your-deployment-url>/api/v1/dags/<your-dag-id> \
    -H 'Content-Type: application/json' \
    -H 'Cache-Control: no-cache' \
    -H 'Authorization: Bearer <your-access-token>' \
@@ -252,7 +252,7 @@ token = "<your-access-token>"
 deployment_url = "<your-deployment-url>"
 dag_id = "<your-dag-id>"
 response = requests.patch(
-    url=f"{deployment_url}/api/v1/dags/{dag_id}",
+    url=f"https://{deployment_url}/api/v1/dags/{dag_id}",
     headers={
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
