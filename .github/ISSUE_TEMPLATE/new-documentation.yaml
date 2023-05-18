@@ -27,7 +27,7 @@ body:
     id: reviewers
     attributes:
       label: Due date
-      placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
+      description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: input
     id: deadline
     attributes:
@@ -36,6 +36,6 @@ body:
     id: notes
     attributes:
       label: Additional information
-      description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, Slack messages are all welcome and encouraged!
+      description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, ZenDesk tickets, and Slack messages are all welcome and encouraged!
 
   

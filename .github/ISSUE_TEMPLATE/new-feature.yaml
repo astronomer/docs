@@ -8,14 +8,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        Want to document the new feature yourself? Use the [new feature documentation template](https://github.com/astronomer/docs/blob/main/new-feature-template.md).
+        Want to document the new feature yourself? See [Document a new feature](https://www.notion.so/astronomerio/Document-a-new-feature-e54d4f70d119428b8d3a80d142241828).
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
       label: New feature description
-      description: Why is the new feature or functionality significant? What benefit does it provide? Why should customers care about this feature or functionality?
+      description: Why is the new feature or functionality significant? What benefit does it provide? 
     validations:
       required: true
   - type: input
@@ -32,7 +32,7 @@ body:
     id: deadline
     attributes:
       label: Release date
-      placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
+      description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: textarea
     id: notes
     attributes:

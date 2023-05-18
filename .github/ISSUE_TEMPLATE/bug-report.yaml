@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        To submit a quick fix yourself, see [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
+        If you want to submit a quick fix yourself, you don't need to write an issue. See [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
   - type: dropdown
     id: issuetype
     attributes:
@@ -25,21 +25,20 @@ body:
     attributes:
       label: Affected docs
       description: Share a link to the document(s) where the issue exists.
-      placeholder: For example, 'https://docs.astronomer.io/astro/develop-project', 'All CLI docs', 'Release notes'
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
       label: Describe the issue and the fix
-      description: Describe the issue and how it should be fixed.
-      placeholder:  Be as descriptive as possible. If there is existing documentation or related issues, link to them here. If you're not sot sure how best to proceed with your request, contact the docs team.
+      description: Describe the issue and how it should be fixed. Be as descriptive as possible. If there is existing documentation or related issues, link to them here. If you're not sot sure how best to proceed with your request, contact the docs team.
+      placeholder:  
     validations:
       required: true
   - type: textarea
     id: notes
     attributes:
       label: Additional notes
-      description: Add additional information here that can help the docs team resolve the issue.
+      description: Add any related Slack threads, ZenDesk tickets, or other information that the docs team can use to solve the issue. 
 
   
