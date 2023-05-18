@@ -28,11 +28,11 @@ def listen_function(message, pet_moods_needing_a_walk=[]):
     message_content = json.loads(message.value())
     print(f"Full message: {message_content}")
     pet_name = message_content["pet_name"]
-    pet_moode_post_treat = message_content["pet_moode_post_treat"]
+    pet_mood_post_treat = message_content["pet_mood_post_treat"]
     final_treat = message_content["final_treat"]
     if final_treat:
-        if pet_moode_post_treat in pet_moods_needing_a_walk:
-            return pet_name, pet_moode_post_treat
+        if pet_mood_post_treat in pet_moods_needing_a_walk:
+            return pet_name, pet_mood_post_treat
 
 
 def event_triggered_function(event, **context):

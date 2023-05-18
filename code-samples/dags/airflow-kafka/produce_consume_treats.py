@@ -24,7 +24,7 @@ def prod_function(num_treats, pet_name):
 
     for i in range(num_treats):
         final_treat = False
-        pet_moode_post_treat = random.choices(
+        pet_mood_post_treat = random.choices(
             ["content", "happy", "zoomy", "bouncy"], weights=[2, 2, 1, 1], k=1
         )[0]
         if i + 1 == num_treats:
@@ -47,9 +47,9 @@ def consume_function(message, name):
     key = json.loads(message.key())
     message_content = json.loads(message.value())
     pet_name = message_content["pet_name"]
-    pet_moode_post_treat = message_content["pet_moode_post_treat"]
+    pet_mood_post_treat = message_content["pet_mood_post_treat"]
     print(
-        f"Message #{key}: Hello {name}, your pet {pet_name} has consumed another treat and is now {pet_moode_post_treat}!"
+        f"Message #{key}: Hello {name}, your pet {pet_name} has consumed another treat and is now {pet_mood_post_treat}!"
     )
 
 
