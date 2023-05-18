@@ -83,36 +83,14 @@ To allow data pipelines running on GCP to access Google Cloud services in a secu
 
 To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
 
-1. In the Cloud UI, select a Workspace, select a Deployment, and then copy the value in the **Namespace** field.
+1. In the Cloud UI, select your Deployment, and then go to the **Details** tab of the Deployment.
 
-2. Use the Deployment namespace value and the name of your Google Cloud project to identify the Google service account for your Deployment.
-
-    Google service accounts for Astro Deployments are formatted as follows:
-
-    ```text
-    astro-<deployment-namespace>@<gcp-account-id>.iam.gserviceaccount.com
-    ```
-    
-    To locate your Google Cloud account ID, in the Cloud UI click **Clusters**. The Google Cloud account ID is located in the **Account ID** column.
-
-    For example, for a Google Cloud project named `astronomer-prod` and a Deployment namespace defined as `nuclear-science-2730`, the service account for the Deployment would be:
-
-    ```text
-    astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
-    ```
-  :::info
-
-  GCP has a 30-character limit for service account names. For Deployment namespaces which are longer than 24 characters, use only the first 24 characters when determining your service account name.
-
-  For example, if your Google Cloud project is named `astronomer-prod` and your Deployment namespace is `nuclear-scintillation-2730`, the service account name is:
-
-  ```text
-  astro-nuclear-scintillation-27@astronomer-prod.iam.gserviceaccount.com
+2. Copy the service account shown under **Workload Identity**. This service account will be used in Step 3 to grant access.
 
 3. Grant the Google service account for your Astro Deployment an IAM role that has access to your external data service. With the Google Cloud CLI, run:
 
     ```text
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com --role=roles/viewer
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:<your-astro-service-account> --role=roles/viewer
     ```
 
     For instructions on how to grant your service account an IAM role in the Google Cloud console, see [Grant an IAM role](https://cloud.google.com/iam/docs/grant-role-console#grant_an_iam_role).
