@@ -42,7 +42,7 @@ Use the following new Astro CLI commands to manage your Airflow variables, pools
 
 - You can now use the `--args` flag to specify pytest arguments to run with `astro dev pytest`. For example, you can run `astro dev pytest --args "-p pytest_cov"` to plugin the `pytest_cov` plugin with your pyests.
 - You can now use Organization API tokens to automate Astro CLI tokens. Specify the Organization API token using the environment variable `ASTRO_API_TOKEN` in the environment where you run the Astro CLI. 
-- You can now create a custom Docker/Podman compose file for your Astro project with the command `astro dev object export --compose-file`. After you modify the file, you can use it to start your project with `astro dev start --compose-file <compose-file-location>`.
+- You can now create a custom Docker/Podman compose file for your Astro project with the command `astro dev object export --compose`. After you modify the file, you can use it to start your project with `astro dev start --compose-file <compose-file-location>`.
 - You can now set `postgres.repository` and `postgres.tag` with `astro config set`. You can use these configurations to customize the postgres database used in your local Airflow environments.
 - The Astro CLI now automatically trims quotation marks from the beginning and end of environment variables being pushed to Astro.
 - The command `astro user invite` has been deprecated.
