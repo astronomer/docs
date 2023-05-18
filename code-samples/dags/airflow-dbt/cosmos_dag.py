@@ -28,6 +28,8 @@ def log_data_analysis(df: pd.DataFrame):
     If the latest year in the data was also the year with the highest % of solar
     capacity and/or the year with the highest % of renewables capacity a
     celebratory message is logged as weel."""
+    
+    # Compatible with Postgres. If you are using database other than Postgres, you might need to adjust the pd.DataFrame column names in this code to be lowercase.
 
     latest_year = df.YEAR.max()
     year_with_the_highest_solar_pct = df.loc[df["SOLAR_PCT"].idxmax(), "YEAR"]
