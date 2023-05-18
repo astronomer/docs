@@ -96,10 +96,10 @@ The Kafka Airflow provider uses a Kafka connection provided to the `kafka_conn_i
 
     ```json
     {
-    "bootstrap.servers": "kafka:19092",
-    "group.id": "group_1",
-    "security.protocol": "PLAINTEXT",
-    "auto.offset.reset": "beginning"
+        "bootstrap.servers": "kafka:19092",
+        "group.id": "group_1",
+        "security.protocol": "PLAINTEXT",
+        "auto.offset.reset": "beginning"
     }
     ```
 
