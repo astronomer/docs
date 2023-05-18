@@ -30,40 +30,39 @@ Worker queues can enhance performance, decrease cost, and increase the reliabili
 
 By configuring multiple worker queues and assigning tasks to these queues based on the requirements of the tasks, you can enhance the performance, reliability, and throughput of your Deployment. For example, consider the following scenario:
 
-- You are running Task A and Task B in a Deployment on an AWS cluster.
+- You are running Task A and Task B in a Deployment.
 - Task A and Task B are dependent on each other, so they need to run in the same Deployment.
-- Task A is a long-running task that uses a lot of CPU and little memory, while Task B is a short-running task that uses minimal amounts of CPU and memory.
+- Task A is a long-running task that uses a lot of CPU and memory, while Task B is a short-running task that uses minimal amounts of CPU and memory.
 
-You can assign Task A to a worker queue that is configured to use the [`c6i.4xlarge`](https://aws.amazon.com/ec2/instance-types/c6i/) worker type that's optimized for compute. Then, you can assign Task B to a worker queue that is configured to use the [`m5.xlarge`](https://aws.amazon.com/ec2/instance-types/m5) worker type that is smaller and optimized for general usage.
+You can assign Task A to a worker queue that is configured to use the A20 worker type that's optimized for running larger tasks. Then, you can assign Task B to a worker queue that is configured to use the A5 worker type that's smaller and optimized for general usage.
 
 ## Worker queue settings
 
 You can configure each worker queue on Astro with the following settings:
 
 - **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
-- **Worker Type:** The size and type of workers in the worker queue, defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on an AWS cluster. A worker’s total available CPU, memory, storage, and GPU is defined by its worker type. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
+- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, storage, and GPU is defined by its worker size. 
 - **Max Tasks per Worker:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. It is 16 by default.
 - **Worker Count**: The minimum and maximum number of workers that can run at a time.  The number of running workers changes regularly based on Maximum Tasks per Worker and the current number of tasks in a `queued` or `running` state. By default, the minimum number of workers is 1 and the maximum is 10.
 
-### Default worker queue
+:::info Alternative Astro Hybrid setup 
 
-Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the default worker queue.
+On Astro Hybrid clusters, worker type is defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on a Hybrid AWS cluster hosted on your cloud. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
 
-If you don’t change any settings in the default worker queue:
-
-- A maximum of 16 tasks can run at one time per worker. If more than 16 tasks are queued or running, a new worker is added to run the remaining tasks.
-- A maximum of 10 workers can run at once, meaning that a maximum of 160 tasks can be in a `running` state at a time. Remaining tasks will stay in a `queued` or `scheduled` state until running tasks complete.
-
-You can change all settings of the default worker queue except for its name.
-
-## Request a worker type
-
-Your organization can enable up to 10 different worker types for each cluster. After a worker type is enabled on an Astro cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
+Your Organization can enable up to 10 different worker types for each Hybrid cluster. After a worker type is enabled on an Astro Hybrid cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
 1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws.md#worker-node-types), [Azure](resource-reference-azure.md#worker-node-size-resource-reference), or [GCP](resource-reference-gcp.md#worker-node-size-resource-reference).
 2. Contact [Astronomer support](https://cloud.astronomer.io/support) with the name of the worker type(s) you want to enable for your cluster. For example, `m6i.2xlarge`.
 
-For more information on requesting cluster changes, see [Modify a cluster](modify-cluster.md).
+For more information on requesting cluster changes, see [LINK].
+
+:::
+
+## Default worker queue
+
+Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the default worker queue.
+
+You can change all settings of the default worker queue except for its name.
 
 ## Create a worker queue
 

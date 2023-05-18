@@ -63,7 +63,7 @@ On Astro, you can configure Celery executor in the following ways:
 
 You can set these configurations per worker queue, which is a set of configurations that apply to a group of workers in your Deployment. With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
-This topic discusses basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md). To add more worker types to your Deployment, see [Manage worker types](modify-cluster.md#manage-worker-types).
+This topic discusses basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
 
 ### Celery worker autoscaling logic
 
@@ -108,7 +108,7 @@ On Astro, you can configure Kubernetes executor in the following ways:
 
 ### Kubernetes worker autoscaling logic
 
-By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 256Mi of memory. These Pods run on a worker node in your Astro data plane. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
+By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 256Mi of memory. These Pods run on a worker node in your Astro Deployment. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
 ### Customize a task's Kubernetes Pod
 
@@ -185,7 +185,7 @@ with DAG(
     resource_requirements_override_example()
 ```
 
-When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your Deployment. Once the task finishes, the Pod terminates gracefully.
 
 ### Mount secret environment variables to worker Pods
 
@@ -275,13 +275,13 @@ with DAG(
 
 ### Change the worker node type
 
-A Deployment using the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker node that this queue uses from the Cloud UI.
+A Deployment using the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker that this queue uses from the Cloud UI.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Worker Queues** tab and then click **Edit** to edit the `default` worker queue.
 
-3. In the **Worker Type** list, select the type of worker node to run your Pods on.
+3. In the **Worker Type** list, select the type of worker to run your Pods on.
 
 4. Click **Update Queue**.
 

@@ -67,7 +67,7 @@ This is the minimum configuration required to run tasks with the KubernetesPodOp
 
 ## Configure task-level Pod resources
 
-Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, meaning that the operator could theoretically use any CPU and memory that's available in your cluster to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
+Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, meaning that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
 To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `resources` argument of the KubernetesPodOperator. For example:
 
@@ -96,9 +96,9 @@ KubernetesPodOperator(
 )
 ```
 
-Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod will terminate gracefully.
+Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your Deployment. Once the task finishes, the Pod will terminate gracefully.
 
-### Mount a temporary directory (_AWS only_)
+### Mount a temporary directory (_AWS Hybrid clusters only_)
 
 Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
 
@@ -140,7 +140,7 @@ To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
  
 ## Run images from a private registry
 
-By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you'll need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories)
+By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you'll need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories).
 
 ### Prerequisites
 
@@ -183,6 +183,12 @@ KubernetesPodOperator(
 ```
 ### Docker images hosted in private Amazon ECR repositories
 
+:::info
+
+This setup is available only on Astro Hybrid. 
+
+:::
+
 If your Docker image is hosted in an Amazon ECR repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret, or specify the Kubernetes secret in your DAG. Docker images hosted on Amazon ECR repositories can only be pulled from AWS clusters.
 
 1. Log in to the Amazon ECR Dashboard and then select **Menu** > **Repositories**.
@@ -209,10 +215,12 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
         ]
     }
     ```
-6. Replace `<AstroAccountID>` with your Astro AWS account ID. 
-7. Click **Save** to create a new permissions policy named **AllowImagePullAstro**.
-8. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator).
-9. Replace `<your-docker-image>` in the instantiation of the KubernetesPodOperator with the Amazon ECR repository URI that hosts the Docker image. To locate the URI:
+
+    Replace `<AstroAccountID>` with your Astro AWS account ID. 
+
+6. Click **Save** to create a new permissions policy named **AllowImagePullAstro**.
+7. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator).
+8. Replace `<your-docker-image>` in the instantiation of the KubernetesPodOperator with the Amazon ECR repository URI that hosts the Docker image. To locate the URI:
 
     - In the Amazon ECR Dashboard, click **Repositories** in the left menu.
     - Click the **Private** tab and then copy the URI of the repository that hosts the Docker image.
