@@ -139,12 +139,12 @@ Authorization is the process of verifying a user or service's permissions before
 
 To grant an Astro cluster access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
 
-1. In the Cloud UI, click **Clusters** and then copy the value displayed in the **Cluster ID** column for the Astro cluster that needs access to AWS service resources.
+1. In the Cloud UI, select your Deployment and then click **Details**. Copy the `arn` given under **Workload Identity**.
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 4. Click **Roles** and in the **Role name** column, select the role you created in step 2.
 5. Click the **Trust relationships** tab.
-6. Click **Edit trust policy** and update the `arn` value:
+6. Click **Edit trust policy** and paste the `arn` you copied from Step 1 in the trust policy.
 
     ```text {8}
     {
@@ -162,7 +162,6 @@ To grant an Astro cluster access to a service that is running in an AWS account 
         ]
     }
     ```
-    To locate your `<dataplane-AWS-account-ID>` and `<cluster-ID>`, in the Cloud UI click **Clusters**. The `<dataplane-AWS-account-ID>` is located in the **Account ID** column and the cluster ID is located in the **ID** column. 
     
     The Astro cluster data plane account includes the `AirflowLogsS3-<clusterid>` role. When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, use `"arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"` as the value for `aws_arn`.
 

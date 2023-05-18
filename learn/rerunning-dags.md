@@ -92,8 +92,8 @@ To add a note to a task instance or DAG run:
 
 1.  Go to the **Grid View** of the Airflow UI.
 2. Select a task instance or DAG run.
-3. Click **Details** > **Task Instance Notes** or **DAG Run notes** > **Add Note**
-4. Write a note and click **Save Note**
+3. Click **Details** > **Task Instance Notes** or **DAG Run notes** > **Add Note**.
+4. Write a note and click **Save Note**.
 
 ![Add task note](/img/guides/2_5_task_notes.png)
 

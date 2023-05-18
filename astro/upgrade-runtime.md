@@ -30,9 +30,13 @@ This is where you'll find the upgrade considerations for specific Astro Runtime 
 
 #### Runtime 8 (Airflow 2.6)
 
+##### Upgrade directly to Astro Runtime 8.1
+
+Astro Runtime 8.0 introduced a number of bugs and dependency conflicts which were subsequently fixed in Runtime 8.1. As a result, Astro Runtime 8.0 is not available in the Astro UI and no longer supported by Astronomer. To use Airflow 2.6, upgrade directly to Runtime 8.1.
+
 ##### Package dependency conflicts
 
-Astro Runtime 8.0.0 includes fewer default dependencies than previous versions. Specifically, the following provider packages are no longer installed by default:
+Astro Runtime 8 includes fewer default dependencies than previous versions. Specifically, the following provider packages are no longer installed by default:
 
 - `apache-airflow-providers-apache-hive`
 - `apache-airflow-providers-apache-livy`
@@ -44,26 +48,6 @@ Astro Runtime 8.0.0 includes fewer default dependencies than previous versions. 
 
 If your DAGs depend on any of these provider packages, add the provider packages to your Astro project `requirements.txt` file before upgrading. You can also [pin specific provider package versions](#optional-pin-provider-package-versions) to ensure that none of your provider packages change after upgrading.
 
-##### Provider incompatibilities
-
-There is also an incompatibility between Astro Runtime 8.0.0 and the following provider packages:
-
-- `apache-airflow-providers-cncf-kubernetes==6.1.0`
-- `apache-airflow-providers-google==10.0.0`
-
-That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt`file.
-
-This incompatibility occurs because Runtime 8.0.0 includes both of these packages as built-in components. A new function included in this version, `get_xcom_sidecar_container_resources`, is used in `KubernetesHook`. But, Google because uses `GKEPodHook`, which doesn’t have this function, it breaks `GKEStartPodOperator`. 
-
-##### Using the KubernetesPodOperator on Astro Runtime 8
-
-Astro Runtime 8 introduced a bug related to using the KubernetesPodOperator without a configured Airflow connection. If you're using the KubernetesPodOperator on Astro Runtime 8, complete only one of the following setup steps to ensure that your tasks continue to work:
-
-- Pin `apache-airflow-providers-cncf-kubernetes==5.3.0` in your `requirements.txt` file.
-- Create an Airflow connection in your Deployment with the following values:
-     - **Connection Id:**: `kubernetes_default`
-     - **Connection Type**: **Kubernetes Cluster Connection**
-- Wait to upgrade until this issue is fixed in a later patch version of Runtime 8.
 ##### Upgrade to Python 3.10
 
 Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet support Python 3.10, use one of the following options to stay on Python 3.9:
@@ -71,6 +55,27 @@ Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet su
 - Run your tasks using the KubernetesPodOperator or PythonVirtualenvOperator. You can configure the environment that these tasks run in to use Python 3.9.
 - Use the [`astronomer-provider-venv`](https://github.com/astronomer/astro-provider-venv) to configure a custom virtual environment that you can apply to individual tasks.
 
+##### Provider incompatibilities
+
+There is an incompatibility between Astro Runtime 8 and the following provider packages:
+
+- `apache-airflow-providers-cncf-kubernetes==6.1.0`
+- `apache-airflow-providers-google==10.0.0`
+
+That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt`file.
+
+This incompatibility occurs because Runtime 8 includes both of these packages as built-in components. A new function used in the new version of `KubernetesHook`, `get_xcom_sidecar_container_resources`, sets resource limits for the XCOM sidecar container. But, because Google uses `GKEPodHook`, which doesn't set any limits, it breaks `GKEStartPodOperator`. 
+
+##### Using the KubernetesPodOperator on Astro Runtime 8
+
+Astro Runtime 8.0 introduced a bug related to using the KubernetesPodOperator without a configured Airflow connection. If you're using the KubernetesPodOperator on Astro Runtime 8.0.0, complete only one of the following setup steps to ensure that your tasks continue to work:
+
+- Upgrade to Astro Runtime 8.1
+- Pin `apache-airflow-providers-cncf-kubernetes==5.3.0` in your `requirements.txt` file.
+- Create an Airflow connection in your Deployment with the following values:
+     - **Connection Id:**: `kubernetes_default`
+     - **Connection Type**: **Kubernetes Cluster Connection**
+  
 #### Runtime 6 (Airflow 2.4)
 
 Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
