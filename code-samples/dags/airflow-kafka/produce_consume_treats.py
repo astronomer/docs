@@ -34,7 +34,7 @@ def prod_function(num_treats, pet_name):
             json.dumps(
                 {
                     "pet_name": pet_name,
-                    "pet_moode_post_treat": pet_moode_post_treat,
+                    "pet_mood_post_treat": pet_mood_post_treat,
                     "final_treat": final_treat,
                 }
             ),
