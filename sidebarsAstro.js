@@ -95,6 +95,11 @@ module.exports = {
         "environment-variables",
         "secrets-backend",
         "manage-deployments-as-code",
+        {
+          type: "category",
+          label: "Connect to external resources",
+          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
+        },
       ],
     },
     {
@@ -149,17 +154,6 @@ module.exports = {
                 description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
               },
               items: ["install-aws", "install-azure", "install-gcp"],
-            },
-            {
-              type: "category",
-              label: "Connect to Hybrid clusters",
-              link: {
-                type: "generated-index",
-                title: "Connect Astro Hybrid clusters to external data sources",
-                description:
-                  "Connect Astro Hybrid clusters to external data sources. A connection to AWS, Azure, or GCP allows Astro to access data stored on your AWS, Azure, or GCP instances and is a necessary step to running pipelines in a production environment.",
-              },
-              items: ["connect-aws", "connect-azure", "connect-gcp"],
             },
             "create-hybrid-cluster",
             "modify-hybrid-cluster",
