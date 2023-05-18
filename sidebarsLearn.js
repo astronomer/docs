@@ -96,7 +96,6 @@ module.exports = {
             'airflow-database',
             'airflow-scaling-workers',
             'airflow-executors-explained',
-            'airflow-pools',
           ],
         },
         {
@@ -110,6 +109,7 @@ module.exports = {
           items: [
             'testing-airflow',
             'logging',
+            'airflow-pools',
             'kubepod-operator',
             'data-quality',
             'airflow-sql-data-quality',
