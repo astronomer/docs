@@ -1,3 +1,12 @@
+---
+sidebar_label: "astro deployment pool copy"
+title: "astro deployment pool copy"
+id: astro-deployment-pool-copy
+description: Reference documentation for astro deployment  pool copy.
+hide_table_of_contents: true
+---
+
+
 Copy Airflow pools from one Astro Deployment to another. Airflow pools are stored in the target Deployment's metadata database and appear in the Airflow UI.  
 
 ## Usage
