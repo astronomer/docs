@@ -5,7 +5,7 @@ id: workspace-api-tokens
 description: Create and manage Workspace API tokens to automate key Workspace actions, like adding users and creating Deployments. 
 ---
 
-Use Workspace API tokens to automate Workspace actions such as creating Deployments and managing users as part of your CI/CD pipelines. Using Workspace API tokens, you can automate:
+Use Workspace API tokens to automate Workspace actions such as creating Deployments and managing users as part of your CI/CD pipelines. You need to be a Workspace Admin to manage Workspace API tokens. Using Workspace API tokens, you can automate:
 
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md)
 - Adding batches of users to a Workspace in a CI/CD pipeline. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
