@@ -15,7 +15,7 @@ Astro Hosted consists of three core components for managing Airflow, all hosted 
 
 Astro Deployments can securely connect to external data services so that you can place Airflow at the heart of your data ecosystem. 
 
-![Astro Hosted overview](/img/architecture/overview.png)
+![Astro Hosted overview](/img/docs/architecture-overview.png)
 
 
 
