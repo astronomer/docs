@@ -74,6 +74,7 @@ Astro Runtime 8 introduced a bug related to using the KubernetesPodOperator with
 - Create an Airflow connection in your Deployment with the following values:
      - **Connection Id:**: `kubernetes_default`
      - **Connection Type**: **Kubernetes Cluster Connection**
+- Add `AIRFLOW_CONN_KUBERNETES_DEFAULT="kubernetes://"` as an environment variable.
   
 #### Runtime 6 (Airflow 2.4)
 
