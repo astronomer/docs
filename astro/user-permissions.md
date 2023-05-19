@@ -7,7 +7,7 @@ description: Learn about Astronomer's RBAC system and how to assign roles to use
 
 To better protect your data pipelines and cloud infrastructure, Astro provides role based access control for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Role based access control is not available for Deployments.
 
-API tokens also have a role based access based on their scope - Organization or Workspace - allowing the user to use them using Astro CLI to automate Astro operations like creating a deployment, automating CI/CD. See [Manage Deployments as code](manage-deployments-as-code.md) and for more details.
+You can also apply roles to API tokens to limit the scope of their actions in CI/CD and automation pipelines. See [Manage Deployments as code](manage-deployments-as-code.md).
 
 Astro has hierarchical role based access control. Within a given Workspace or Organization, users or API tokens with senior roles have their own permissions in addition to the permissions granted to lower roles. For example, a user or API token with Organization Owner permission inherits Organization Billing Admin and Organization Member permissions because these roles are lower in the hierarchy. 
 
