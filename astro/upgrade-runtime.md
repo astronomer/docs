@@ -68,10 +68,9 @@ This incompatibility results in breaking the GKEStartPodOperator. This operator 
 
 ##### Using the KubernetesPodOperator on Astro Runtime 8
 
-Astro Runtime 8.0 introduced a bug related to using the KubernetesPodOperator without a configured Airflow connection. If you're using the KubernetesPodOperator on Astro Runtime 8.0.0, complete only one of the following setup steps to ensure that your tasks continue to work:
+Astro Runtime 8 introduced a bug related to using the KubernetesPodOperator without a configured Airflow connection. If you're using the KubernetesPodOperator on Astro Runtime 8, complete only one of the following setup steps to ensure that your tasks continue to work:
 
-- Upgrade to Astro Runtime 8.1
-- Pin `apache-airflow-providers-cncf-kubernetes==5.3.0` in your `requirements.txt` file.
+- Pin `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt` file.
 - Create an Airflow connection in your Deployment with the following values:
      - **Connection Id:**: `kubernetes_default`
      - **Connection Type**: **Kubernetes Cluster Connection**
