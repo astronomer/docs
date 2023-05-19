@@ -107,7 +107,7 @@ The Kafka Airflow provider uses a Kafka connection provided to the `kafka_conn_i
 
 5. Create a second new connection. 
 
-6.  Name your second connection `kafka_listener` and select the `Generic` connection type. Provide the same details as in step 2.3, with the exception of setting the `group.id` to `"group_2"`. Having a second connection with a different `group.id` is necessary because the DAGs in this tutorial will have two consuming tasks which consume messages from the same Kafka topic. Learn more in [Kafka's Consumer Configs documentation](https://kafka.apache.org/documentation/#consumerconfigs).
+6.  Name your second connection `kafka_listener` and select the `Generic` connection type. Provide the same details as you did in Step 2.3, but set the `group.id` to `"group_2"`. Having a second connection with a different `group.id` is necessary because the DAGs in this tutorial will have two consuming tasks which consume messages from the same Kafka topic. Learn more in [Kafka's Consumer Configs documentation](https://kafka.apache.org/documentation/#consumerconfigs).
 
 7. Click Save.
 
@@ -123,9 +123,9 @@ The [Kafka Airflow provider package](https://registry.astronomer.io/providers/ap
 
     This DAG will produce messages to a Kafka topic (`KAFKA_TOPIC`) and consume them. 
 
-    - The `produce_treats` task produces `num_treats` messages to a Kafka topic, each carrying information containing the pet name, a randomly picked pet mood after the treat has been given and whether or not a treat was the last one in a series. The `ProduceToTopicOperator` accomplishes this by using using a function passed to its `producer_function` parameter which returns a generator containing contains key-value pairs. 
+    - The `produce_treats` task produces a given number (`num_treats`) of messages to a Kafka topic, each containing the pet name, a randomly picked pet mood after the treat has been given, and whether or not a treat was the last one in a series. The `ProduceToTopicOperator` accomplishes this by using using a function passed to its `producer_function` parameter which returns a generator containing contains key-value pairs. 
     The number of treats pushed to [XCom](airflow-passing-data-between-tasks.md#what-is-xcom) from the upstream `get_number_of_treats` task is retrieved and supplied to the `producer_function` as a positional argument via the `producer_function_args` parameter. The name of your pet is retrieved in the same fashion from the upstream `get_your_pet_name` task and provided as a kwarg to `producer_function_kwargs`.
-    - The `consume_treats` task consumes messages from the same Kafka topic and modifies them using the callable provided to the `apply_function` parameter to print a string to the logs. The pet owner name is retrieved from XCom and supplied as a kwarg via the `apply_function_kwargs` parameter.
+    - The `consume_treats` task consumes messages from the same Kafka topic and modifies them to print a string to the logs using the callable provided to the `apply_function` parameter. The pet owner name is retrieved from XCom and supplied as a kwarg via the `apply_function_kwargs` parameter.
 
 3. Nagivate to the Airflow UI and manually run your DAG.
 
@@ -151,7 +151,7 @@ A common use case is to directly connect a blob storage (for example an Amazon S
 
 ## Step 4: Create a listener DAG
 
-A common use case is to run a downstream task when a specific message appears in your Kafka topic. The AwaitMessageTriggerFunctionSensor is a [deferrable operator](deferrable-operators.md) that will listen to your Kafka topic for a message that fulfills specific criteria.
+A common Airflow use case is to run a downstream task when a specific message appears in your Kafka topic. The AwaitMessageTriggerFunctionSensor is a [deferrable operator](deferrable-operators.md) that will listen to your Kafka topic for a message that fulfills specific criteria.
 
 1. Create a new file in your `dags` folder called `listen_to_the_stream.py`.
 
@@ -161,10 +161,10 @@ A common use case is to run a downstream task when a specific message appears in
 
     This DAG has one task called `listen_for_mood` which uses the AwaitMessageTriggerFunctionSensor to listen to messages in all topics supplied to its `topics` parameters. For each message which is consumed, the following actions are performed:
 
-    - The message is consumed and processed by the `listen_function` supplied to the `apply_function` parameter of the AwaitMessageTriggerFunctionSensor. Note that the function is supplied in as a dot notation string, this is necessary because the Airflow triggerer component will need to access this function.
+    - The message is consumed and processed by the `listen_function`, which is supplied to the `apply_function` parameter of the AwaitMessageTriggerFunctionSensor. Note that the function is provided as a dot notation string, which is necessary because the Airflow triggerer component will need to access this function.
     - If the message consumed causes the `listen_function` to return a value, a [TriggerEvent](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html) fires.
     - After a TriggerEvent has been fired, the AwaitMessageTriggerFunctionSensor will execute the function provided to the `event_triggered_function` parameter.
-    In this example the `event_triggered_function` starts a downstream DAG using the `.execute()` method of the `TriggerDagRunOperator`. (Learn more about the [TriggerDagRunOperator](cross-dag-dependencies#triggerdagrunoperator)).
+    In this example, the `event_triggered_function` starts a downstream DAG using the `.execute()` method of the [`TriggerDagRunOperator`](cross-dag-dependencies#triggerdagrunoperator).
     - After the `event_triggered_function` has completed, the AwaitMessageTriggerFunctionSensor goes back into a deferred state.
 
     The AwaitMessageTriggerFunctionSensor will always be running and listening. In case the task fails, for example due to a malformed message being consumed, the DAG will complete as failed and automatically start its next DAG run thanks to the [`@continuous` schedule](scheduling-in-airflow.md#continuous-timetable).
@@ -172,7 +172,7 @@ A common use case is to run a downstream task when a specific message appears in
 
 ## Step 5: Create a downstream DAG
 
-The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator starts a downstream DAG, in this step you will add this DAG to your environment.
+The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator starts a downstream DAG to show implementing a dependency based on messages that appear in your Kafka topic.
 
 1. Create a new file in your `dags` folder called `walking_my_pet.py`.
 
@@ -180,11 +180,11 @@ The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator
 
     <CodeBlock language="python">{walking_my_pet}</CodeBlock>
 
-    This DAG acts as a downstream dependency to the `listen_to_the_stream` DAG and has its runs triggered via the `TriggerDagRunOperator` within the `listen_for_mood` task. You can add any tasks to this DAG.
+    This DAG acts as a downstream dependency to the `listen_to_the_stream` DAG. You can add any tasks to this DAG.
 
 ## Step 6: Run the DAGs
 
-Now that all 3 DAGs are ready, lets see how they work together.
+Now that all 3 DAGs are ready, run them to see how they work together.
 
 1. Make sure all DAGs are unpaused in the Airflow UI and that your Kafka cluster is running.
 
@@ -196,7 +196,7 @@ Now that all 3 DAGs are ready, lets see how they work together.
 
 4. Check the logs of the `listen_for_mood` task in the `listen_to_the_stream` DAG to see if a message fitting the criteria defined by the `listen_function` has been detected. It is possible that you will need to run the `produce_consume_treats` DAG a couple of times for such a message to appear.
 
-    If the TriggerEvent of the `listen_for_mood` task fires, you will see the run of the `walking_my_pet` DAG being intiated from within the `listen_for_mood` task logs.
+    If the TriggerEvent of the `listen_for_mood` task fires, the `listen_for_mood` task logs will show the `walking_my_pet` DAG being initiated.
 
     ![Kafka logs TDRO](/img/guides/kafka_tdro.png)
 
