@@ -55,7 +55,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 4. Select the user's name and email address in the **Organization Member** list.
    
-5. Select a role for the user and then click **Add member**. See [Workspace roles](user-permissions.md#workspace-roles) to decide the role.
+5. Select a role for the user and then click **Add member**. See [Workspace roles reference](user-permissions.md#workspace-roles).
 
 6. Click **Add member**.
 
