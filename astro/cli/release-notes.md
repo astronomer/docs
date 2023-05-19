@@ -38,7 +38,7 @@ Use the following new Astro CLI commands to manage your Airflow variables, pools
 - [`astro deployment pool update`](cli/astro-deployment-pool-update.md)
 - [`astro deployment pool copy`](cli/astro-deployment-pool-copy.md)
 
-### Additional imrpovements
+### Additional improvements
 
 - You can now use the `--args` flag to specify pytest arguments to run with `astro dev pytest`. For example, you can run `astro dev pytest --args "-p pytest_cov"` to plugin the `pytest_cov` plugin with your pyests.
 - You can now use Organization API tokens to automate Astro CLI tokens. Specify the Organization API token using the environment variable `ASTRO_API_TOKEN` in the environment where you run the Astro CLI. 
