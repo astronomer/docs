@@ -31,9 +31,44 @@ If you don't have an account on Astro and want to run Airflow locally, see [LINK
 
 If you're the first person on your team to try Astro, see [Start your Astro trial](astro/trial.md). If your team has an existing Organization on Astro that you are not a member of, see [Add a user to an Organization](astro/add-user#add-a-user-to-an-organization).
 
-## Step 1: Create an Astro project
+## Step 1: Log in to Astro CLI and Cloud UI
 
-An _Astro project_ contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. All new Astro projects contain two example DAGs. In this tutorial, you'll be deploying these example DAGs to Astro.
+While you run your DAGs locally, you don't need to log in with the CLI or Cloud UI. But to run your DAGs on the Cloud UI, you need to authenticate with both the Astro CLI and Cloud UI.
+
+1. Run the following command to authenticate to Astro on the CLI:
+
+    ```sh
+    astro login
+    ```
+
+    After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. Then, you are automatically authenticated to the CLI.
+
+2. Go to `https://cloud.astronomer.io`, and select one of the available options to access the Cloud UI.
+
+## Step 2: Create a Deployment
+
+An Astro _Deployment_ is an instance of Airflow that hosts all core Airflow components, including a webserver, scheduler, and one or more workers. You can have one or more Deployments within a _Workspace_, which is a collection of users that have access to the same Deployments.
+
+1. In the Cloud UI, select a **Workspace**.
+
+2. On the **Deployments** page, click **+ Deployment**.
+
+3. Complete the following fields:
+
+    - **Name**: Enter a name for your Deployment.
+  
+    You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
+
+4. Click **Create Deployment**.
+
+     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
+    
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Configure a Deployment](configure-deployment-resources).
+
+
+## Step 3: Create an Astro project
+
+An _Astro project_ contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. All new Astro projects contain two example DAGs. In this tutorial, you'll be deploying these example DAGs to your Deployment on Astro.
 
 1. Open your terminal or IDE
 
@@ -73,40 +108,6 @@ An _Astro project_ contains the set of files necessary to run Airflow, including
     ├── packages.txt # For OS-level packages
     └── requirements.txt # For Python packages
     ```
-
-## Step 2: Log in to Astro CLI and Cloud UI
-
-While you run your DAGs locally, you don't need to log in with the CLI or Cloud UI. But to run your DAGs on the Cloud UI, you need to authenticate with both the Astro CLI and Cloud UI.
-
-1. Run the following command to authenticate to Astro on the CLI:
-
-    ```sh
-    astro login
-    ```
-
-    After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. Then, you are automatically authenticated to the CLI.
-
-2. Go to `https://cloud.astronomer.io`, and select one of the available options to access the Cloud UI.
-
-## Step 3: Create a Deployment
-
-An Astro _Deployment_ is an instance of Airflow that hosts all core Airflow components, including a webserver, scheduler, and one or more workers. You can have one or more Deployments within a _Workspace_, which is a collection of users that have access to the same Deployments.
-
-1. In the Cloud UI, select a **Workspace**.
-
-2. On the **Deployments** page, click **+ Deployment**.
-
-3. Complete the following fields:
-
-    - **Name**: Enter a name for your Deployment.
-  
-    You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
-
-4. Click **Create Deployment**.
-
-     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
-    
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Configure a Deployment](configure-deployment-resources).
 
 ## Step 4: Deploy example DAGs to your Astro Deployment
 
