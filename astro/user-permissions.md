@@ -16,6 +16,8 @@ The Astro role hierarchies in order of inheritance are:
 - Organization Owner > Organization Billing Admin > Organization Member 
 - Workspace Admin > Workspace Editor > Workspace Member
 
+Additionally, Organization Owners inherit Workspace Admin permissions for all Workspaces in the Organization.
+
 
 ## Organization roles
 
