@@ -7,23 +7,22 @@ description: Learn about Astronomer's RBAC system and how to assign roles to use
 
 To better protect your data pipelines and cloud infrastructure, Astro provides role based access control for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Role based access control is not available for Deployments.
 
-Astro has hierarchical role based access control. Within a given Workspace or Organization, users with senior roles have their own permissions in addition to the permissions granted to lower roles. For example, users with Organization Owner permissions inherit Organization Billing Admin and Organization Member permissions because the roles are lower in the hierarchy. 
+API tokens also have a role based access based on their scope - Organization or Workspace - allowing the user to use them using Astro CLI to automate Astro operations like creating a deployment, creating a user. See [Manage Deployments as code](manage-deployments-as-code.md) for more details.
+
+Astro has hierarchical role based access control. Within a given Workspace or Organization, users or API tokens with senior roles have their own permissions in addition to the permissions granted to lower roles. For example, a user or API token with Organization Owner permission inherits Organization Billing Admin and Organization Member permissions because these roles are lower in the hierarchy. 
 
 The Astro role hierarchies in order of inheritance are: 
 
 - Organization Owner > Organization Billing Admin > Organization Member 
 - Workspace Admin > Workspace Editor > Workspace Member
 
-Users with Organization Owner permissions also inherit Workspace Admin permissions on all Workspaces.
+:::tip
+Users and API tokens with Organization Owner permissions also inherit Workspace Admin permissions on all Workspaces.
+:::
 
 ## Organization roles
 
-An Organization role grants a user some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace. The following table lists the available Organization roles:
-
-### Update Organization roles
-
-1. In the Cloud UI, go to **Settings** > **Access Management**.
-2. Find the user in the table and click **Edit**. The **Members** table lists all users that have been added to a Workspace in your Organization. If you can't find a user, it might be because they haven't been invited to a Workspace or accepted their invite.
+An Organization role grants a user or API token some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace whereas an API token's access is based on it's scope. The following table lists the available Organization roles:
 
 | Permission                                                       | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
 | ---------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
@@ -39,11 +38,19 @@ An Organization role grants a user some level of access to an Astro Organization
 | Create, update and delete Organization API tokens                                   |                         |                                | ✔️                      |
 | Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                      |
 
-To update user Organization roles, see [Manage users](add-user.md).
+### Update Organization roles
+
+1. In the Cloud UI, click on the Astronomer icon and go to **Settings** > **Access Management**.
+2. To change the access:
+    1. For a user, go the **Users** tab, find the user in the table and click **Edit**, select the new role and click on **Update member**. The **Members** table lists all users that have been added to your Organization. If you can't find a user, it might be because they haven't been invited to the Organization or accepted their invite.
+    2. For an API token, go the **API Tokens** tab, find the API token in the table, click **Edit** and select the new role.
+
+
+To manage users in a organization, see manage users[Manage users](add-user.md).
 
 ## Workspace roles
 
-A Workspace role grants a user some level of access to a specific Workspace. The following table lists the available Workspace roles:
+A Workspace role grants a user or API token some level of access to a specific Workspace. All Deployments in a Workspace will be accessible to the user or API token based on it's Workspace role. The following table lists the available Workspace roles:
 
 | Permission                                          | **Workspace Member** | **Workspace Editor** | **Workspace Admin** |
 | --------------------------------------------------- | -------------------- | -------------------- | ------------------- |
@@ -67,5 +74,11 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
 | Create, update and delete Workspace API tokens                         |                      |                      | ✔️                   |
 
+### Update Organization roles
 
-To update user Workspace roles, see [Manage users](add-user.md).
+1. In the Cloud UI, select your Workspace and go to **Workspace Settings** > **Access Management**.
+2. To change the access:
+    1. For a user, go the **Users** tab, find the user in the table, click **Edit**, select the new role and click on **Update member**. The **Members** table lists all users that have been added to a Workspace in your Organization. If you can't find a user, it might be because they haven't been invited to a Workspace or accepted their invite.
+    2. For an API token, go the **API Tokens** tab, find the API token in the table, click **Edit**, select the new role and click on **Update API Token**.
+
+To manage users in a Workspace, see [Manage users](add-user.md#add-a-user-to-a-workspace).
