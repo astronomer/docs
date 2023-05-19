@@ -10,7 +10,7 @@ Astro Hosted is a managed service for data orchestration that is built for the c
 Astro Hosted consists of three core components for managing Airflow, all hosted on Astronomer's cloud:
 
 - The _Astro control plane_ is Astronomer's interface for managing your Airflow environments in the cloud. It includes the Cloud UI, the Astro CLI, and Cloud API.
-- _Astro clusters_ are dedicated Kubernetes clusters that can run multiple Airflow environments.
+- An _Astro cluster_ is a dedicated Kubernetes cluster that can run multiple Airflow environments.
 - A _Deployment_ is an Airflow environment running on Astro. Each Deployment includes all of the core Airflow components, plus additional Astronomer tooling that help you optimize resource usage, observability, and security.
 
 Astro Deployments can securely connect to external data services so that you can place Airflow at the heart of your data ecosystem. 
