@@ -27,7 +27,7 @@ If you want to invite a user to an Organization from a domain that you don't own
 
 3. Enter the user's email.
 
-4. Set an Organization role for the user. See [User permissions](user-permissions.md).
+4. Set an Organization role for the user. See [Organization roles](user-permissions.md#organization-roles) to decide the role.
 
 5. Click **Add member**.
 
@@ -41,7 +41,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
    
 2. Find the user in the **Members** list and then click **Edit**.
    
-3. Optional. Edit the user's role. See [User permissions](user-permissions.md). 
+3. Optional. Edit the user's role. See [Update Organization roles](user-permissions.md#update-organization-roles). 
    
 4. If you updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
@@ -55,7 +55,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 4. Select the user's name and email address in the **Organization Member** list.
    
-5. Select a role for the user and then click **Add member**. See [User permissions](user-permissions.md).
+5. Select a role for the user and then click **Add member**. See [Workspace roles](user-permissions.md#workspace-roles) to decide the role.
 
 6. Click **Add member**.
 
@@ -69,7 +69,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 3. Click **Edit** next to the user name:
 
-4. Optional. Edit the user's name and role. See [User permissions](user-permissions.md).
+4. Optional. Edit the user's name and role. See [Update Workspace roles](user-permissions.md#update-workspace-roles).
    
 5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
