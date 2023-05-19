@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-By default, all tasks run in a default worker queue that does not require configuration or code. If you're using the Celery executor, you can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](executors.md).
+By default, all tasks using the Celery executor run in a `default` worker queue that does not require configuration or code. You can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](executors.md).
 
 Use worker queues to create optimized execution environments for different types of tasks in the same Deployment. You can use worker queues to:
 
@@ -41,9 +41,9 @@ You can assign Task A to a worker queue that is configured to use the A20 worker
 You can configure each worker queue on Astro with the following settings:
 
 - **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
-- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, storage, and GPU is defined by its worker size. 
-- **Max Tasks per Worker:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. It is 16 by default.
-- **Worker Count**: The minimum and maximum number of workers that can run at a time.  The number of running workers changes regularly based on Maximum Tasks per Worker and the current number of tasks in a `queued` or `running` state. By default, the minimum number of workers is 1 and the maximum is 10.
+- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information about worker types, see [LINK]
+- **Concurrency:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. The default for your worker type is suitable for most use cases.
+- **Min # Workers / Max # Workers**: The minimum and maximum number of workers that can run at a time.  The number of running workers changes regularly based on **Concurrency** and the current number of tasks in a `queued` or `running` state. 
 
 :::info Alternative Astro Hybrid setup 
 
