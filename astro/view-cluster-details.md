@@ -14,4 +14,4 @@ In the Cloud UI, select a Workspace, click **Deployments**, then select a Deploy
 ## View dedicated cluster information
 
 1. In the Cloud UI, select a Workspace, then click **Deployments**, then select a Deployment.
-2. Click **Details**. Find the dedicated cluster's name under X.
+2. Click **Details**. Find the dedicated cluster's name under **Name**.

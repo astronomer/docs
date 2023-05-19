@@ -30,13 +30,11 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 3. Configure the following details about your cluster:
 
     - **Name**: The name for your cluster.
-    - **Region**: Select the region that your cluster runs in
+    - **Region**: Select the region that you want your cluster to run in.
     - **VPC Subnet Range**: Provide a subnet range for Astro to connect to your existing AWS resources through VPC peering. The default is `172.20.0.0/20`.
    
 4. Click **Create cluster**. 
    
-5. Wait for Astronomer to finish creating the cluster.
-
 </TabItem>
 <TabItem value="gcp">
 
