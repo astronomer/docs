@@ -35,14 +35,6 @@ An Organization role grants a user or API token some level of access to an Astro
 | Create, update and delete Organization API tokens                                   |                         |                                | ✔️                      |
 | Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                      |
 
-### Update Organization roles
-
-1. In the Cloud UI, click on the Astronomer icon and go to **Settings** > **Access Management**.
-2. To change the access:
-    1. For a user, go the **Users** tab, find the user in the table and click **Edit**, select the new role and click on **Update member**. The **Members** table lists all users that have been added to your Organization. If you can't find a user, it might be because they haven't been invited to the Organization or accepted their invite.
-    2. For an API token, go the **API Tokens** tab, find the API token in the table, click **Edit** and select the new role.
-
-
 To manage users in a organization, see [Manage users](add-user.md).
 
 ## Workspace roles
