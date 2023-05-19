@@ -63,11 +63,4 @@ A Workspace role grants a user or API token some level of access to a specific W
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
 | Create, update and delete Workspace API tokens                         |                      |                      | ✔️                   |
 
-### Update Workspace roles
-
-1. In the Cloud UI, select your Workspace and go to **Workspace Settings** > **Access Management**.
-2. To change the access:
-    1. For a user, go the **Users** tab, find the user in the table, click **Edit**, select the new role and click on **Update member**. The **Members** table lists all users that have been added to a Workspace in your Organization. If you can't find a user, it might be because they haven't been invited to a Workspace or accepted their invite.
-    2. For an API token, go the **API Tokens** tab, find the API token in the table, click **Edit**, select the new role and click on **Update API Token**.
-
 To manage users in a Workspace, see [Manage users](add-user.md#add-a-user-to-a-workspace).
