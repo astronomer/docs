@@ -27,7 +27,7 @@ If you want to invite a user to an Organization from a domain that you don't own
 
 3. Enter the user's email.
 
-4. Set an Organization role for the user. See [Organization roles](user-permissions.md#organization-roles) to decide the role.
+4. Set an Organization role for the user. See [Organization roles reference](user-permissions.md#organization-roles).
 
 5. Click **Add member**.
 
