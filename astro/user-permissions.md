@@ -35,7 +35,7 @@ An Organization role grants a user or API token some level of access to an Astro
 | Create, update and delete Organization API tokens                                   |                         |                                | ✔️                      |
 | Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                      |
 
-To manage users in a organization, see [Manage users](add-user.md).
+To manage users in a organization, see [Manage users](add-user.md). To manage the Organization permissions of your API tokens, see [Organization API tokens](organization-api-tokens.md).
 
 ## Workspace roles
 
