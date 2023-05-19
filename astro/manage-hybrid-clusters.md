@@ -45,7 +45,7 @@ To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GC
 
 To create a new Astro cluster on AWS for your Organization, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
-- Your AWS Account ID.
+- Your Astro AWS Account ID.
 - Your preferred Astro cluster name.
 - The AWS region that you want to host your cluster in.
 - Your preferred node instance type.
