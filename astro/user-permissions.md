@@ -9,7 +9,7 @@ To better protect your data pipelines and cloud infrastructure, Astro provides r
 
 You can also apply roles to API tokens to limit the scope of their actions in CI/CD and automation pipelines. See [Manage Deployments as code](manage-deployments-as-code.md).
 
-Astro has hierarchical role based access control. Within a given Workspace or Organization, users or API tokens with senior roles have their own permissions in addition to the permissions granted to lower roles. For example, a user or API token with Organization Owner permission inherits Organization Billing Admin and Organization Member permissions because these roles are lower in the hierarchy. 
+Astro has hierarchical RBAC. Within a given Workspace or Organization, senior roles have their own permissions in addition to the permissions granted to lower roles. For example, a user or API token with Organization Owner permissions inherits Organization Billing Admin and Organization Member permissions because those roles are lower in the hierarchy. 
 
 The Astro role hierarchies in order of inheritance are: 
 
