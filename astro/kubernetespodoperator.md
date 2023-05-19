@@ -35,6 +35,21 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - An [Astro project](develop-project.md#create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
 
+## Configure the KubernetesPodOperator in the Cloud UI
+
+While you still need to configure the KubernetesPodOperator in your DAG code to define your task environment, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. Do this by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
+
+1. In the Cloud UI, select a Deployment.
+2. Click **Resource quotas**.
+3. Configure the following values:
+
+    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
+    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
+    - **Default CPU**: The amount of CPU that a task Pod uses if it has no configured requests.
+    - **Default Memory**: The amount of memory that a task Pod uses if it has no configured requests.
+
+Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If your CPU and memory quota exceed a certain limit, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
+
 ## Set up the KubernetesPodOperator
 
 To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:

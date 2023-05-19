@@ -60,10 +60,17 @@ On Astro, you can configure Celery executor in the following ways:
 - The type and size of your workers.
 - The minimum and maximum number of workers that your Deployment can run at a time.
 - The number of tasks that each worker can run at a time.
+- The resources used by the [KubernetesPodOperator](kubernetespodoperator.md).
 
 You can set these configurations per worker queue, which is a set of configurations that apply to a group of workers in your Deployment. With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
 This topic discusses basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
+
+:::tip
+
+If you plan to use only the KubernetesPodOperator in your Deployment, set your Celery executor resources to the lowest possible amounts, as the executor is only required for launching your Pods. See [KubernetesPodOperator](kubernetespodoperator.md) for more information. 
+
+:::
 
 ### Celery worker autoscaling logic
 
@@ -106,18 +113,20 @@ On Astro, you can configure Kubernetes executor in the following ways:
 - Change the resource usage for the default Pods on which your tasks run.
 - Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration. 
 
-### Configure the default Kubernetes Pod
+### Set defaults and limits for Kubernetes executor Pods in the Cloud UI
 
-By default, each task on Astro runs in a dedicated Kubernetes Pod with 250M CPU and 500Mi of memory. You can customize the default worker Pod's resource usage from the Cloud UI. Any tasks that make requests above the resource quota or below the resource defaults will throw an error. 
+You can configure the minimum and maximum resources that any Kubernetes executor Pod uses from the Cloud UI. Tasks that make requests above your resource quotas or **Max Pod Size** will fail.
 
 1. In the Cloud UI, select a Deployment.
 2. Click **Resource quotas**.
 3. Configure the following values:
 
-    - **CPU quota**: The maximum amount of CPU that any Pod can use on your Deployment. 
-    - **Memory Quota**: The maximum amount of memory that any Pod can use on your Deployment.
-    - **Default CPU**: The minimum amount of CPU that any Pod can use on your Deployment. 
-    - **Default Memory**: The minimum amount of memory that any Pod can use on your Deployment. 
+    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
+    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
+    - **Default CPU**: The amount of CPU that a task Pod uses if it has no configured requests.
+    - **Default Memory**: The amount of memory that a task Pod uses if it has no configured requests.
+
+Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If your CPU and memory quota exceed a certain limit, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
 
 :::info Alternative setup on Astro Hybrid
 
