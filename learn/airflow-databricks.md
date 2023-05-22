@@ -24,6 +24,19 @@ All code in this tutorial can be found on [the Astronomer Registry] (INSERT REGI
 
 :::
 
+## Why to use Airflow with Databricks
+
+Many data teams like to leverage Databricks' compute to run heavy work loads like machine learning models, data transformations, and data analysis. While Databricks offers some orchestration via Databricks Workflows, it is limited in functionality and does not integrate with the rest of your data stack. Using a tool-agnostic orchestrator like Airflow gives you several advantages, like the ability to:
+
+- have a CI/CD process on your Workflow structures. Airflow DAGs are Python code, and can be [integrated with a variety of CI/CD tools](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) and [tested](testing-airflow.md).
+- repair single tasks in your Databricks Workflow. If a task fails, you can [re-run it](#repairing-a-databricks-workflow) without having to re-run the entire Workflow, saving valuable compute.
+- use [task groups](task-groups.md) within Databricks Workflows, enabling you to collapse and expand parts of larger Databricks Workflows visually.
+- leverage Airflow [cross-DAG dependencies](cross-dag-dependencies.md) to trigger Databricks Workflows from other DAGs in your Airflow environment, allowing for a data-driven architecture.
+- use familiar Airflow code as your interface to orchestrate Databricks notebooks as Workflows.
+- [inject parameters](#parameters) into your Databricks Workflow at the Workflow-level. These parameters can even be dynamic and retrieved at runtime from other Airflow tasks.
+
+All while keeping the benefits of using Databricks Workflows like cheaper Workflow compute, being able to use CI/CD with code of your Notebooks and view Databricks Workflows from the Databricks UI.
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.
