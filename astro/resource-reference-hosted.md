@@ -104,7 +104,7 @@ Currently, standard clusters are available on the following clouds and regions:
 | `westeurope`    | West Europe    |
 | `westus2`       | West US 2      |
 
-<TabItem>
+</TabItem>
 
 <TabItem value="gcp">
 
@@ -118,4 +118,5 @@ Currently, standard clusters are available on the following clouds and regions:
 | `us-west-2`      | US West (Oregon)      |
 
 </TabItem>
+
 </Tabs>
