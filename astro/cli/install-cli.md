@@ -33,9 +33,9 @@ Install the Astro CLI on a Mac operating system with a single command.
 #### Prerequisites
 
 - [Homebrew](https://brew.sh/)
-- [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
+- Optional. [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
-By default, the Astro CLI uses Docker as its container management engine. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
 
 #### Installation
 
@@ -83,12 +83,12 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 
 #### Prerequisites
 
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/).
 - Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
 - The latest version of the Windows [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca).
 - Windows 10 1709 (build 16299) or later or Windows 11.
+- Optional. [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
-By default, the Astro CLI uses Docker as its container management engine. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
 
 #### Installation
 
@@ -152,9 +152,9 @@ This is where you'll find information about installing the Astro CLI on Linux.
 
 #### Prerequisites
 
-- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
+- Optional. [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
-By default, the Astro CLI uses Docker as its container management engine. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
 
 #### Installation
 
