@@ -7,7 +7,7 @@ description: Learn what you can configure on an Astro cluster.
 
 :::caution
 
-This document applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+This document applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 To create a cluster on Astro Hosted, see [Create a cluster](create-cluster.md).
 

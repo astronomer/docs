@@ -65,7 +65,7 @@ Unlike workers, schedulers do not autoscale. The resources you set for them are 
 
 :::info Alternative setup for Astro Hybrid
 
-This document applies only to Astro Hybrid users. Astro Hybrid is a version of Astro that runs in your own company's cloud. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+This document applies only to Astro Hybrid users. Astro Hybrid is a version of Astro that runs in your own company's cloud. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 To configure the scheduler on an Astro Hybrid Deployment:
 

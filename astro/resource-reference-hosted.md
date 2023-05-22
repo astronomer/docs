@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 :::info
 
-This document applies only to Astro Hosted. To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+This document applies only to Astro Hosted. To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 For Astro Hybrid resource reference material, see:
 
