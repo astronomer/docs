@@ -92,7 +92,7 @@ The Kafka Airflow provider uses a Kafka connection provided to the `kafka_conn_i
 
 2. Click Admin -> Connections -> **+** to create a new connection.
 
-3. Name your connection `kafka_default` and select the `Generic` connection type. Provide the details for the connection to your Kafka cluster as a JSON in the `Extra` field. If you are connecting to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
+3. Name your connection `kafka_default` and select the `Apache Kafka` connection type. Provide the details for the connection to your Kafka cluster as a JSON in the `Extra` field. If you are connecting to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
 
     ```json
     {
@@ -107,7 +107,7 @@ The Kafka Airflow provider uses a Kafka connection provided to the `kafka_conn_i
 
 5. Create a second new connection. 
 
-6.  Name your second connection `kafka_listener` and select the `Generic` connection type. Provide the same details as you did in Step 2.3, but set the `group.id` to `"group_2"`. Having a second connection with a different `group.id` is necessary because the DAGs in this tutorial will have two consuming tasks which consume messages from the same Kafka topic. Learn more in [Kafka's Consumer Configs documentation](https://kafka.apache.org/documentation/#consumerconfigs).
+6.  Name your second connection `kafka_listener` and select the `Apache Kafka` connection type. Provide the same details as you did in Step 2.3, but set the `group.id` to `"group_2"`. Having a second connection with a different `group.id` is necessary because the DAGs in this tutorial will have two consuming tasks which consume messages from the same Kafka topic. Learn more in [Kafka's Consumer Configs documentation](https://kafka.apache.org/documentation/#consumerconfigs).
 
 7. Click Save.
 
