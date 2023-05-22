@@ -23,11 +23,8 @@ To start your trial, Astronomer recommends using the name of your company as the
 
 ## Next steps
 
-You're now ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
+You're now ready to start deploying and running DAGs on Astro. See [Run your first DAG on Astro](create-first-dag.md) for a detailed quickstart. You'll create a local Astro project, then push that project to your Astro Deployment. The entire process takes about 5 minutes. 
 
-1. [Create a Deployment](create-deployment.md). A Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow and where you can run DAGs.
-2. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is an open source command line interface for developing Airflow DAGs on your local machine and deploying them to Astro
-3. [Run your first DAG on Astro](create-first-dag.md). You'll create a local Astro project, then push that project to your Astro Deployment. The entire process takes about 5 minutes. 
 
 ## Trial limitations
 
