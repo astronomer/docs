@@ -26,7 +26,7 @@ The Celery executor is the default for all new Deployments. It uses a group of w
 The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your Deployment if:
 
 - You're just getting started with Airflow.
-- You want to use multiple worker queues. This allows you to use multiple worker types for different types of tasks and optimize for task performance. See [Configure worker queues](configure-worker-queues.md).
+- You want to use different worker types based on the type of task you're running. See [Configure worker queues](configure-worker-queues.md).
 - You have a high number of short-running tasks and want to ensure low latency between tasks.
 - You don't often experience conflicts between Python or OS-level packages and don't require dependency isolation.
 
@@ -60,7 +60,6 @@ On Astro, you can configure Celery executor in the following ways:
 - The type and size of your workers.
 - The minimum and maximum number of workers that your Deployment can run at a time.
 - The number of tasks that each worker can run at a time.
-- The resources used by the [KubernetesPodOperator](kubernetespodoperator.md).
 
 You can set these configurations per worker queue, which is a set of configurations that apply to a group of workers in your Deployment. With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
@@ -115,7 +114,7 @@ On Astro, you can configure Kubernetes executor in the following ways:
 
 ### Set defaults and limits for Kubernetes executor Pods in the Cloud UI
 
-You can configure the minimum and maximum resources that any Kubernetes executor Pod uses from the Cloud UI. Tasks that make requests above your resource quotas or **Max Pod Size** will fail.
+You can configure the maximum resources that any Kubernetes executor Pod uses from the Cloud UI. Tasks that make requests above your resource quotas or **Max Pod Size** will fail.
 
 1. In the Cloud UI, select a Deployment.
 2. Click **Resource quotas**.
@@ -123,10 +122,8 @@ You can configure the minimum and maximum resources that any Kubernetes executor
 
     - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
     - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
-    - **Default CPU**: The amount of CPU that a task Pod uses if it has no configured requests.
-    - **Default Memory**: The amount of memory that a task Pod uses if it has no configured requests.
 
-Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If your CPU and memory quota exceed a certain limit, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
+Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is instead determined by the size of the Astro-hosted infrastructure running your tasks.
 
 :::info Alternative setup on Astro Hybrid
 
@@ -301,11 +298,11 @@ with DAG(
 
 :::info
 
-This topic applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+This topic applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 :::
 
-A Hybrid Deployment using the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker that this queue uses from the Cloud UI.
+A Deployment on Astro Hybrid using the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker that this queue uses from the Cloud UI.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 

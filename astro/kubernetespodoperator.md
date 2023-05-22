@@ -45,10 +45,8 @@ While you still need to configure the KubernetesPodOperator in your DAG code to 
 
     - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
     - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
-    - **Default CPU**: The amount of CPU that a task Pod uses if it has no configured requests.
-    - **Default Memory**: The amount of memory that a task Pod uses if it has no configured requests.
 
-Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If your CPU and memory quota exceed a certain limit, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
+Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is instead determined by the size of the Astro-hosted infrastructure running your tasks.
 
 ## Set up the KubernetesPodOperator
 
