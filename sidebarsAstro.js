@@ -135,8 +135,7 @@ module.exports = {
           type: "category",
           label: "Manage clusters",
           items: [
-            "create-cluster",
-            "configure-cluster",
+            "create-dedicated-cluster",
             "resource-reference-hosted",
           ],
         },

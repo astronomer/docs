@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Manage Hybrid clusters'
 title: "Manage Hybrid clusters"
-id: configure-hybrid-cluster
+id: manage-hybrid-clusters
 description: Learn what you can configure on an Astro cluster.
 ---
 
