@@ -42,13 +42,16 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 3. Click **Edit Details**. 
 4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
 5. Click **Update**.
-6. Optional. Configure worker queues and tasks to optimize your executor resource usage. See [Configure an executor](executors.md).
+
+See [Configure an executor](executors.md) for more information about each available executor type, including how to optimize executor usage.
 
 ## Scheduler size
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. 
 
 Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory.
+
+Unlike workers, schedulers do not autoscale. The resources you set for them are the resources you have regardless of usage. For more information about how scheduler configuration affects resources usage, see [LINK].
 
 ### Update scheduler size 
 
@@ -62,7 +65,7 @@ Scheduler resources must be set for each Deployment and are managed separately f
 
 :::info Alternative setup for Astro Hybrid
 
-This document applies only to Astro Hybrid users. Astro Hybrid runs is a version of Astro that runs in your own company's cloud. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+This document applies only to Astro Hybrid users. Astro Hybrid is a version of Astro that runs in your own company's cloud. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
 
 To configure the scheduler on an Astro Hybrid Deployment:
 
@@ -119,7 +122,7 @@ This feature is on by default for Astro Hosted users.
 
 :::
 
-When a Deployment has high availability enabled, it runs multiple instances of its Airflow components across separate nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of the clusters your component instance is running on.
+When a Deployment has high availability enabled, it runs multiple instances of its Airflow components across separate nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific cluster, or if a cluster experiences an outage. Because this setting results in more resource usage, it can increase the cost of your Deployment. See [LINK].
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
