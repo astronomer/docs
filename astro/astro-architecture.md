@@ -5,22 +5,23 @@ id: astro-architecture
 description: Astro uses a multi-plane structure to help make Airflow more secure and reliable. Learn how the control plane and data plane work together on the cloud.
 ---
 
-Astro is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Astro is built with a multi-plane architecture which consists of:
+Astro is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
 
-- A control plane that is hosted by Astronomer.
-- A data plane that can run either in your cloud or in a single-tenant account hosted by Astronomer.
+There are two ways to run Astro:
 
-Astro can be activated on Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure. Astronomer runs Astro on managed Kubernetes services for each cloud provider, including AWS Elastic Kubernetes Service (EKS), Google Kubernetes Engine (GKE), and Azure Kubernetes Service (AKS).
+- _Astro Hosted_ is a version of Astro that's hosted and managed on Astronomer's Cloud. This version of Astro is ideal for those wanting to run Airflow with as little friction as possible.
+- _Astro Hybrid_ is a version of Astro that's managed by Astronomer, but your Airflow infrastructure is hosted in your company's cloud. This version of Astro is ideal for companies that want more control over their cloud infrastructure. 
 
-The control plane and data plane are managed by Astronomer and require no operational oversight by your organization. The Astro architecture ensures that tasks are executed securely within your corporate network.
+Astro Hosted consists of three core components for managing Airflow, all hosted on Astronomer's cloud:
 
-![Astro architecture overview](/img/docs/architecture-overview.png)
+- The _Astro control plane_ is Astronomer's interface for managing your Airflow environments in the cloud. It includes the Cloud UI, the Astro CLI, and Cloud API.
+- An _Astro cluster_ is a dedicated Kubernetes cluster that can run multiple Airflow environments.
+- A _Deployment_ is an Airflow environment running on Astro. Each Deployment includes all of the core Airflow components, plus additional Astronomer tooling that help you optimize resource usage, observability, and security.
 
-For more information about Astro architecture, contact [Astronomer support](https://cloud.astronomer.io/support).
+Astro Deployments can securely connect to external data services so that you can place Airflow at the heart of your data ecosystem. 
 
-## Related documentation
+![Astro Hosted overview](/img/docs/architecture-overview.png)
 
-- [Shared responsibility model](shared-responsibility-model.md)
-- [Install Astro on AWS](install-aws.md)
-- [Install Astro on GCP](install-gcp.md)
-- [Install Astro on Azure](install-azure.md)
+
+To learn more about Astro Hybrid architecture and features, see [LINK]
+

@@ -1,19 +1,149 @@
 ---
-sidebar_label: 'Configure a Hybrid cluster'
-title: "Manage and modify clusters"
-id: modify-hybrid-cluster
-description: Learn what you can configure on an existing Astro cluster.
+sidebar_label: 'Manage Hybrid clusters'
+title: "Manage Hybrid clusters"
+id: configure-hybrid-cluster
+description: Learn what you can configure on an Astro cluster.
 ---
 
-Astro cluster runs your Astro Deployments in isolated namespaces on the Kubernetes cluster. Your organization might choose to have one or multiple clusters to meet certain networking, governance, or use case requirements. You can always start with one cluster and [create additional clusters](create-cluster.md) later. New clusters on Astro typically have default configurations that are suitable for standard use cases. You can request [Astronomer support](https://support.astronomer.io) to edit the configuration of an existing cluster. For example, you might need to:
+:::caution
+
+This document applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+
+To create a cluster on Astro Hosted, see [Create a cluster](create-cluster.md).
+
+:::
+
+An Astro Hybrid cluster runs your Astro Deployments in isolated namespaces on your cloud. Your organization might choose to have one or multiple clusters to meet certain networking, governance, or use case requirements. You can always start with one cluster and [create additional clusters](create-cluster.md) later. New clusters on Astro typically have default configurations that are suitable for standard use cases. You can request [Astronomer support](https://support.astronomer.io) to edit the configuration of an existing cluster. For example, you might need to:
 
 - Add a [worker type](#manage-worker-type), which creates a new [worker node pool](#about-worker-node-pools) in your cluster and allows your team to select that worker type in a Deployment.
 - Increase or decrease the maximum number of worker nodes for a given worker type that your cluster can scale-up to. 
-- Create a VPC connection or a transit gateway connection between your Astro cluster and a target VPC 
+- Create a VPC connection or a transit gateway connection between your Astro cluster and a target VPC.
 
 Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Cloud UI and Airflow UI continue to be available and your Airflow tasks are not interrupted.
 
 If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro).
+
+## Create a cluster
+
+The Astro install typically starts with one cluster for each Organization. However, your organization can choose to configure multiple Astro clusters. This could enable a few benefits, including:
+
+- Clusters in different regions
+- Different clusters for development and production environments
+
+Within a single Workspace, you can host Deployments across multiple clusters. For example, you might have a production Deployment running in a production cluster and a development Deployment running in a development cluster. Both of those Deployments can be in the same Workspace.
+
+This guide provides instructions for provisioning additional clusters within your Astro Organization.
+
+### Prerequisites
+
+To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GCP), you'll need the following:
+
+- An activated data plane.
+- Permissions to configure IAM in the dedicated account for Astro on your cloud.
+
+### AWS
+
+To create a new Astro cluster on AWS for your Organization, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+
+- Your Astro AWS Account ID.
+- Your preferred Astro cluster name.
+- The AWS region that you want to host your cluster in.
+- Your preferred node instance type.
+- Your preferred max node count.
+- Your preferred VPC CIDR.
+
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/20,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws.md).
+
+#### Additional set up for AWS regions that are disabled by default
+
+Some AWS regions that Astronomer supports are [disabled by default on AWS](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable). These regions are:
+
+- `af-south-1` - Africa (Cape Town)
+- `ap-east-1` - Asia Pacific (Hong Kong)
+- `me-south-1` - Middle East (Bahrain)
+
+To create a cluster in one of these regions, complete the following additional set up in your AWS account:
+
+1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html):
+
+    ```YAML
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::406882777402:root"
+          },
+          "Action": "sts:AssumeRole",
+          "Condition": {
+            "StringEquals": {
+              "sts:ExternalId": "<External-ID>"
+            }
+          }
+        }
+        {
+            "Sid": "EnableDisableRegion",
+            "Effect": "Allow",
+            "Action": [
+                "account:EnableRegion",
+                "account:DisableRegion"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {"account:TargetRegion": "<your-aws-region>"}
+            }
+        },
+        {
+            "Sid": "ViewConsole",
+            "Effect": "Allow",
+            "Action": [
+                "aws-portal:ViewAccount",
+                "account:ListRegions"
+            ],
+            "Resource": "*"
+        }
+      ]
+    }
+    ```
+
+2. In the AWS Management Console, enable the desired region as described in [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable).
+3. Upgrade your [global endpoint session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-manage-tokens) to version 2, which is valid in all AWS regions, by running the following command in the [AWS CLI](https://aws.amazon.com/cli/):
+
+    ```sh
+    aws iam set-security-token-service-preferences --global-endpoint-token-version v2Token
+    ```
+
+### Azure
+
+To create a new Astro cluster on Azure for your Organization, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+
+- Your Azure Tenant ID and Subscription ID.
+- Your preferred Astro cluster name.
+- The Azure region that you want to host your cluster in.
+- Your preferred node instance type. See [Azure Hybrid cluster resource reference](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types).
+- Your preferred maximum node count.
+
+If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Network (VNet) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/19` is implemented.
+
+For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure.md).  
+
+### GCP
+
+To create a new Astro cluster on Google Cloud Platform (GCP) for your Organization, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+
+- Your preferred Astro cluster name.
+- The GCP region that you want to host your cluster in.
+- Your preferred node instance type.
+- Your preferred CloudSQL instance type.
+- Your preferred maximum node count.
+- Your preferred VPC CIDR.
+
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp.md). 
+
+### Confirm cluster creation
+
+Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
 
 ## View clusters
 
@@ -26,16 +156,15 @@ If you don't have a cluster on Astro, see [Install Astro](https://docs.astronome
 | Details  | General permanent configurations, including cluster name, IDs, and connectivity options.  | 
 | Worker Types | The available worker types for configuring worker queues on your cluster. See [Manage worker types](#manage-worker-types). | 
 | Tags | (AWS only) Configured cluster tags. See [Add tags to your cluster](#add-tags-to-your-cluster-aws-only).| 
-| Workspace Authorization | List of Workspaces that can create Deployments on this cluster. See [Authorize Workspaces to a cluster](modify-cluster.md#authorize-workspaces-to-a-cluster). |
-
+| Workspace Authorization | List of Workspaces that can create Deployments on this cluster. See [Authorize Workspaces to a cluster](#authorize-workspaces-to-a-cluster). |
 
 ## Manage worker types
 
-On Astro, _worker nodes_ are the nodes that are used to run Airflow workers, which are responsible for executing Airflow tasks in your Deployments. A _worker type_ is one of your cloud provider's available node instance types. This determines how much CPU and memory your workers have for running tasks. Workers are organized using [worker node pools](modify-cluster.md#about-worker-node-pools) that groups together nodes of a specific instance type.
+On Astro, _worker nodes_ are the nodes that are used to run Airflow workers, which are responsible for executing Airflow tasks in your Deployments. A _worker type_ is one of your cloud provider's available node instance types. This determines how much CPU and memory your workers have for running tasks. Workers are organized using [worker node pools](#about-worker-node-pools) that groups together nodes of a specific instance type.
 
-To have a Deployment run Airflow tasks with a specific worker type, you can configure a Worker queue in your Deployment to use that worker type. If the worker type is not available to your cluster, you can contact [Astronomer support](https://support.astronomer.io) and ask to have a worker type enabled for your cluster.
+To have a Deployment run Airflow tasks with a specific worker type, you can configure a worker queue in your Deployment to use that worker type. If the worker type is not available to your cluster, you can contact [Astronomer support](https://support.astronomer.io) and ask to have a worker type enabled for your cluster.
 
-After you make a change to your available worker types, you can [check your cluster settings](modify-cluster.md#view-clusters) to confirm that the change was applied.
+After you make a change to your available worker types, you can [check your cluster settings](#view-clusters) to confirm that the change was applied.
 
 ### About worker node pools
 
@@ -44,7 +173,7 @@ A Kubernetes _node pool_ is a group of nodes within a cluster that share the sam
 - A _worker type_, which is one of your cloud provider's available node instance types.
 - A _maximum node count_, which is the maximum number of nodes that can run concurrently in the worker node pool across all Deployments.
 
-During the Astro cluster creation process, you provide Astronomer with a default worker type and a maximum node count to configure a default worker node pool. This node pool is used for the default worker queues for all of your Deployments. When you request Astronomer support to add a [new worker type](modify-cluster.md#configure-node-instance-type) to your cluster, a new worker node pool of that type is created on the cluster. You can then configure [worker queues](configure-worker-queues.md) that use the new worker type. 
+During the Astro cluster creation process, you provide Astronomer with a default worker type and a maximum node count to configure a default worker node pool. This node pool is used for the default worker queues for all of your Deployments. When you request Astronomer support to add a [new worker type](#configure-node-instance-type) to your cluster, a new worker node pool of that type is created on the cluster. You can then configure [worker queues](configure-worker-queues.md) that use the new worker type. 
 
 Your default worker node pool always runs a minimum of one node, while additional worker node pools can scale to zero. Additional nodes spin up as required based on the auto-scaling logic of your Deployment Airflow executor and your worker queues.
 

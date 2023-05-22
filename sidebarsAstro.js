@@ -14,17 +14,17 @@ module.exports = {
       label: 'Overview',
       link: { type: 'doc', id: 'overview' },
       items: [
-        'features',
         'astro-architecture',
+        'features',
       ],
     },
     {
       type: "category",
       label: "Get started",
       items: [
-        'trial', 
-        'log-in-to-astro', 
+        "trial",
         "create-first-DAG",
+        'log-in-to-astro', 
         {
           type: "category",
           label: "Migrate to Astro",
@@ -99,7 +99,7 @@ module.exports = {
           type: "category",
           label: "Connect to external resources",
           items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
-        },
+        },       
       ],
     },
     {
@@ -136,7 +136,7 @@ module.exports = {
           label: "Manage clusters",
           items: [
             "create-cluster",
-            "modify-cluster",
+            "configure-cluster",
             "resource-reference-hosted",
           ],
         },
@@ -155,8 +155,18 @@ module.exports = {
               },
               items: ["install-aws", "install-azure", "install-gcp"],
             },
-            "create-hybrid-cluster",
-            "modify-hybrid-cluster",
+            {
+              type: "category",
+              label: "Connect to Hybrid clusters",
+              link: {
+                type: "generated-index",
+                title: "Connect Astro Hybrid clusters to external data sources",
+                description:
+                  "Connect Astro Hybrid clusters to external data sources. A connection to AWS, Azure, or GCP allows Astro to access data stored on your AWS, Azure, or GCP instances and is a necessary step to running pipelines in a production environment.",
+              },
+              items: ["connect-aws", "connect-azure", "connect-gcp"],
+            },
+            "manage-hybrid-clusters",
             {
               type: "category",
               label: "Hybrid cluster settings reference",
@@ -232,6 +242,11 @@ module.exports = {
       type: "doc",
       label: "Install the CLI",
       id: "cli/install-cli",
+    },
+    {
+      type: "doc",
+      label: "Get started with the CLI",
+      id: "cli/get-started-cli",
     },
     {
       type: "doc",
