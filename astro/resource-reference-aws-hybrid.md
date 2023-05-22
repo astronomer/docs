@@ -11,9 +11,9 @@ sidebar_custom_props: { icon: "img/aws.png" }
   <meta name="og:description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
 </head>
 
-:::info
+:::caution
 
-This document applies only to Astro Hybrid. To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
 
