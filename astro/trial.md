@@ -23,7 +23,7 @@ To start your trial, Astronomer recommends using the name of your company as the
 
 ## Next steps
 
-After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
+You're now ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
 
 1. [Create a Deployment](create-deployment.md). A Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow and where you can run DAGs.
 2. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is an open source command line interface for developing Airflow DAGs on your local machine and deploying them to Astro
@@ -33,8 +33,11 @@ After Astronomer creates your cluster, you're ready to start deploying and runni
 
 Astro trials have some limitations that aren't present in the paid product:
 
-- You can only create Deployments in standard clusters, which are clusters that are shared with other Astro users. 
+- You can only create Deployments in standard clusters, which do not support VPC Peer network configurations for access to your internal data sources
 - You can only have up to two Deployments at any given time.
+- For each of your Deployments, you have the following usage limits on executors:
+    - Celery executor: 4vCPU and 8G RAM.
+    - Kubernetes executor: 12vCPU and 24G RAM.
 - You can only configure the `default` worker queue, and you can only have a maximum worker count of two.
    
 ## After your trial
