@@ -245,6 +245,11 @@ module.exports = {
     },
     {
       type: "doc",
+      label: "Get started with the CLI",
+      id: "cli/get-started-cli",
+    },
+    {
+      type: "doc",
       label: "Configure the CLI",
       id: "cli/configure-cli",
     },
