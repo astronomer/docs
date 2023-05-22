@@ -121,10 +121,10 @@ To create a new Astro cluster on Azure for your Organization, submit a request t
 - Your Azure Tenant ID and Subscription ID.
 - Your preferred Astro cluster name.
 - The Azure region that you want to host your cluster in.
-- Your preferred node instance type.
+- Your preferred node instance type. See [Azure Hybrid cluster resource reference](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types).
 - Your preferred maximum node count.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Private Cloud (VPC) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/19` is implemented.
+If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Network (VNet) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/19` is implemented.
 
 For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure.md).  
 
@@ -162,7 +162,7 @@ Astronomer support sends you a notification when your cluster is created. After 
 
 On Astro, _worker nodes_ are the nodes that are used to run Airflow workers, which are responsible for executing Airflow tasks in your Deployments. A _worker type_ is one of your cloud provider's available node instance types. This determines how much CPU and memory your workers have for running tasks. Workers are organized using [worker node pools](#about-worker-node-pools) that groups together nodes of a specific instance type.
 
-To have a Deployment run Airflow tasks with a specific worker type, you can configure a Worker queue in your Deployment to use that worker type. If the worker type is not available to your cluster, you can contact [Astronomer support](https://support.astronomer.io) and ask to have a worker type enabled for your cluster.
+To have a Deployment run Airflow tasks with a specific worker type, you can configure a worker queue in your Deployment to use that worker type. If the worker type is not available to your cluster, you can contact [Astronomer support](https://support.astronomer.io) and ask to have a worker type enabled for your cluster.
 
 After you make a change to your available worker types, you can [check your cluster settings](#view-clusters) to confirm that the change was applied.
 

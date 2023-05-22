@@ -10,7 +10,7 @@ A _dedicated cluster_ exclusively runs Deployments from your Organization within
 - You want more options for the region your cluster is hosted in. 
 - You otherwise want to keep your Deployments as isolated as possible. 
 
-Dedicated clusters offer the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within a single-tenant environment.
+Dedicated clusters offer the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within a single-tenant environment. If you don't need the aforementioned features, you can use one of the standard clusters when you [Create a Deployment](create-deployment.md).
 
 ## Setup
 <Tabs
