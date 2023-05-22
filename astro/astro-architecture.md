@@ -9,7 +9,7 @@ Astro is a managed service for data orchestration that is built for the cloud an
 
 There are two ways to run Astro:
 
-- _Astro Hosted_ is a version of Astro that's hosted and managed on Astronomer's Cloud. This version of Astro is ideal for those wanting to run Airflow with as little friction as possible.
+- _Astro Hosted_ is a version of Astro that's hosted and managed on Astronomer's Cloud. This version of Astro is ideal if you want to run Airflow with as little friction as possible.
 - _Astro Hybrid_ is a version of Astro that's managed by Astronomer, but your Airflow infrastructure is hosted in your company's cloud. This version of Astro is ideal for companies that want more control over their cloud infrastructure. 
 
 Astro Hosted consists of three core components for managing Airflow, all hosted on Astronomer's cloud:
