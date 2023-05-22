@@ -21,6 +21,20 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
 
+## May 22, 2023
+
+### Introducing Astro Hosted
+
+Astro Hosted is a new way to run Airflow entirely on Astronomer's cloud. Your Airflow environments are hosted and managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
+
+For more information about how Astro Hosted works, see [LINK].
+
+### Documentation refactor for Astro Hosted
+
+The following updates have been made to documentation to accommodate Astronomer's new Astro Hosted product:
+
+- 
+
 ## May 2, 2023
 
 ### Receive Astro alerts on Slack or PagerDuty
