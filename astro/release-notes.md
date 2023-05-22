@@ -23,17 +23,22 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 22, 2023
 
-### Introducing Astro Hosted
+### Introducing Astro Hosted and Hybrid
 
-Astro Hosted is a new way to run Airflow entirely on Astronomer's cloud. Your Airflow environments are hosted and managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
+Astro Hosted is a new way to run Airflow on Astronomer's cloud. On Astro Hosted, Airflow environments are managed and hosted entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
 
 For more information about how Astro Hosted works, see [LINK].
 
-### Documentation refactor for Astro Hosted
+If you're already an Astro user and your Deployments run in your company's own cloud, you're using Astro Hybrid. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**. 
 
-The following updates have been made to documentation to accommodate Astronomer's new Astro Hosted product:
+See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-hybrid) to learn how the current documentation has changed for Astro Hybrid users.
 
-- 
+### Documentation refactor for Astro Hybrid
+
+The following updates have been made to documentation to accommodate the new Astro Hosted product:
+
+- Astro Hybrid documentation now has a dedicated menu under "Administration" that contains all docs related to Hybrid installation and cluster management.
+- All other docs now assume Astro Hosted by default. If a feature has a functionality difference between Hosted and Hybrid, the documentation for that feature will include a note about how that setup differs for Hybrid.
 
 ## May 2, 2023
 
