@@ -97,9 +97,9 @@ module.exports = {
         "manage-deployments-as-code",
         {
           type: "category",
-          label: "Manage clusters",
-          items: ["view-cluster-details", "create-dedicated-cluster"],
-        },
+          label: "Connect to external resources",
+          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
+        },       
       ],
     },
     {
