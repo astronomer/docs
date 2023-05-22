@@ -4,14 +4,14 @@ title: 'Get started with Airflow using the Astro CLI'
 id: get-started-cli
 ---
 
-After you install the Astro CLI and Docker Desktop, you can use the following CLI commands to quickly build and run your Airflow projects locally. 
+One of the Astro CLI's main features is its ability to run Airflow on your local computer. After you install the Astro CLI and Docker Desktop, follow these steps to quickly build a project and run Airflow locally. 
 
 ## Prerequisites
 
 - The [Astro CLI](install-cli.md)
 - [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
-## Step 1: Create an Astro project with `astro dev init`
+## Step 1: Create an Astro project
 
 An _Astro project_ contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. All new Astro projects contain two example DAGs. This set of files builds a Docker image that you can both run on your local machine with Airflow and deploy to Astro.
 
@@ -38,7 +38,7 @@ This command generates the following files in the directory:
 └── requirements.txt # For Python packages
 ```
 
-## Step 2: Run Airflow locally using `astro dev start`
+## Step 2: Run Airflow locally
 
 Building your project locally allows you to test your DAGs and confirm that your example Astro project builds correctly before you run it remotely in Astro. While this step is not required for deploying and running your code on Astro, Astronomer recommends always using the Astro CLI to test locally before deploying.
 
@@ -69,7 +69,7 @@ The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the
 
 :::
 
-## Step 3: Developing locally with the CLI
+## Step 3: Develop locally with the CLI
 
 The `astro dev` command options include a number of other useful actions that you can use while developing locally. 
 
@@ -119,7 +119,3 @@ After you have finished Getting Started with the CLI, you can configure your CLI
 - [Configure the CLI](configure-cli.md)
 - [Authenticate to cloud services](authenticate-to-clouds.md)
 - [Build and run a project locally](develop-project.md#build-and-run-a-project-locally)
-
-
-
-

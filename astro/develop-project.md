@@ -86,6 +86,19 @@ The command builds your Astro project into a Docker image and creates the follow
 
 After the project builds, you can access the Airflow UI at `http://localhost:8080/`. You can also access your Postgres database at `localhost:5432/postgres`. As long as your Airflow environment is running, any changes you make in your `dags`, `plugins`, and `include` directories are automatically applied without needing to restart the environment. 
 
+### Restart your local environment
+
+You must restart your environment to apply changes from any of the following files in your Astro project:
+
+- `packages.txt`
+- `Dockerfile`
+- `requirements.txt`
+- `airflow_settings.yaml`
+
+To restart your local Airflow environment, run:
+
+```sh
+astro dev restart
 ## Add DAGs
 
 In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graphs (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Airflow DAGs](https://docs.astronomer.io/learn/dags).
