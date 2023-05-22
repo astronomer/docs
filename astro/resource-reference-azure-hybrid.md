@@ -1,10 +1,18 @@
 ---
-sidebar_label: "Azure cluster settings"
-title: "Microsoft Azure cluster settings"
-id: resource-reference-azure
+sidebar_label: "Azure Hybrid cluster settings"
+title: "Microsoft Azure Hybrid cluster settings"
+id: resource-reference-azure-hybrid
 description: Reference of all supported configurations for new Astro clusters on Microsoft Azure.
 sidebar_custom_props: { icon: 'img/azure.png' }
 ---
+
+:::info
+
+This document applies only to Astro Hybrid. To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+
+To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
+
+:::
 
 Unless otherwise specified, new clusters on Astro are created with a set of default Azure resources that should be suitable for most use cases.
 

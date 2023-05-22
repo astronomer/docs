@@ -1,10 +1,18 @@
 ---
-sidebar_label: "GCP cluster settings"
-title: "GCP cluster settings"
-id: resource-reference-gcp
+sidebar_label: "GCP Hybrid cluster settings"
+title: "GCP Hybrid cluster settings"
+id: resource-reference-gcp-hybrid
 description: Reference of all supported infrastructure and configurations for new Astro clusters on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
+
+:::info
+
+This document applies only to Astro Hybrid. To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**.
+
+To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
+
+:::
 
 Unless otherwise specified, new Clusters on Google Cloud Platform (GCP) are created with a set of default resources that our team has deemed appropriate for most use cases.
 
