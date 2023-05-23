@@ -1,0 +1,58 @@
+name: Request new Learn content 
+description: New content on an existing Airflow feature or behavior
+labels: ["kind/enhancement", "area/learn"]
+assignees:
+  - kentdanas
+  - TJaniF
+body:
+  - type: dropdown
+    id: content_type
+    attributes:
+      label: Content type
+      options:
+        - Get started
+        - Airflow concepts
+        - Airflow tutorials
+        - Integrations
+        - References
+        - I am not sure where this best fits
+      validations:
+        required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Request type
+      multiple: true
+      options:
+        - Additional information on a feature or behavior already described
+        - Add a previously not described Airflow feature or behavior to an existing page
+        - Add a new page
+      validations:
+        required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe your Learn request. If you want to add information to an existing page, please provide the link to it!
+      validations:
+        required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe who the content is intended for, e.g. Airflow beginners, expert users...?
+  - type: input
+    id: reviewers
+    attributes:
+      label: Due date
+      description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
+  - type: input
+    id: version
+    attributes:
+      label: Airflow Version
+      description: Airflow version in which the feature/behavior was added. Please provide for features which are upcoming.
+      placeholder: ex. 2.6.1
+  - type: 
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional information
+      description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, ZenDesk tickets, and Slack messages are all welcome and encouraged!
