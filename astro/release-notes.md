@@ -17,9 +17,24 @@ id: release-notes
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 8.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 8.2 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.15.0 ([Release notes](cli/release-notes.md))
+
+## May 16, 2023
+
+### Automate Organization management with Organization API tokens
+
+You can now create Organization API tokens to automate key actions across your Organization and all of the Workspaces in it. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes. Some common actions that you can automate with Organization API token are:
+
+- Creating Workspaces.
+- Inviting users to an Organization or Workspace.
+- Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md).
+- Exporting audit logs.
+- Gathering metadata about Deployments using the Airflow REST API.
+- Completing any of the actions you can complete with a Workspace API token or Deployment API key across all Deployments in your Organization.
+
+See [Manage Organization API tokens](organization-api-tokens.md) for more information.
 
 ## May 23, 2023
 
@@ -125,6 +140,7 @@ For a list of all instance types available for GCP, see [Supported worker node p
 - The default CIDR range for new AWS clusters has been reduced from /19 to /20.
 - You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/support). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
 - You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace.
+- Organization role permissions have changed so that only Organization Owners can create Workspaces.
 
 ### Bug fixes
 
@@ -525,7 +541,7 @@ To create your first project in the Astro Cloud IDE, see the [Cloud IDE quicksta
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in [Public Preview](feature-previews.md).
 
 :::
 

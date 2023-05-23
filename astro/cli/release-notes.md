@@ -17,6 +17,41 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.15.0
+
+Release date: May 18, 2023
+
+### New commands to manage Airflow resources on Deployments
+
+Use the following new Astro CLI commands to manage your Airflow variables, pools, connections, on Astro Deployments. These commands are particularly useful for automating the creation of new Deployments based on old ones, as you can now transfer all Airflow resources from a source Deployment to a target Deployment: 
+
+- [`astro deployment connection list`](cli/astro-deployment-connection-list.md)
+- [`astro deployment connection create`](cli/astro-deployment-connection-create.md)
+- [`astro deployment connection update`](cli/astro-deployment-connection-update.md)
+- [`astro deployment connection copy`](cli/astro-deployment-connection-copy.md)
+- [`astro deployment airflow-variable list`](cli/astro-deployment-airflow-variable-list.md)
+- [`astro deployment airflow-variable create`](cli/astro-deployment-airflow-variable-create.md)
+- [`astro deployment airflow-variable update`](cli/astro-deployment-airflow-variable-update.md)
+- [`astro deployment airflow-variable copy`](cli/astro-deployment-airflow-variable-copy.md)
+- [`astro deployment pool list`](cli/astro-deployment-pool-list.md)
+- [`astro deployment pool create`](cli/astro-deployment-pool-create.md)
+- [`astro deployment pool update`](cli/astro-deployment-pool-update.md)
+- [`astro deployment pool copy`](cli/astro-deployment-pool-copy.md)
+
+### Additional improvements
+
+- You can now use the `--args` flag to specify pytest arguments to run with `astro dev pytest`. For example, you can run `astro dev pytest --args "-p pytest_cov"` to plugin the `pytest_cov` plugin with your pyests.
+- You can now use Organization API tokens to automate Astro CLI tokens. Specify the Organization API token using the environment variable `ASTRO_API_TOKEN` in the environment where you run the Astro CLI. 
+- You can now create a custom Docker/Podman compose file for your Astro project with the command `astro dev object export --compose`. After you modify the file, you can use it to start your project with `astro dev start --compose-file <compose-file-location>`.
+- You can now set `postgres.repository` and `postgres.tag` with `astro config set`. You can use these configurations to customize the postgres database used in your local Airflow environments.
+- The Astro CLI now automatically trims quotation marks from the beginning and end of environment variables being pushed to Astro.
+- The command `astro user invite` has been deprecated.
+
+### Bug fixes
+
+- Fixed an issue were `astro deployment variable create/update` was not producing error when it failed to create an environment variable.
+- Fixed an issue were Podman deploys were failing if the user didn't have the Docker CLI installed. 
+
 ## Astro CLI 1.14.1
 
 Release date: April 20, 2023

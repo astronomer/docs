@@ -129,7 +129,9 @@ The Cloud UI also shows the **Default CPU** and **Default Memory** for your _def
 
 :::info Alternative Astro Hybrid setup
 
-On Astro Hybrid, Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
+On Astro Hybrid, Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory. 
+
+To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
 
 :::
 
