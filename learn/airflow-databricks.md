@@ -15,7 +15,7 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 The easiest way to orchestrate your Databricks notebooks from Airflow and execute them as Databricks Workflows is to use the open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks), which provides full observability and control from Airflow so you can manage your Workflows from one place.
 
 
-This tutorial covers how to use the Astro Databricks provider for an example use case analyzing renewable energy data. It also discusses why you would want to [use Databricks with Airflow]() and [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow) for if the Astro Databricks Provider doesn't fit your use case.
+This tutorial covers how to use the Astro Databricks provider for an example use case analyzing renewable energy data. It also discusses why you would want to [use Databricks with Airflow](#why-use-airflow-with-databricks) and [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow) for if the Astro Databricks Provider doesn't fit your use case.
 
 :::info
 
@@ -33,7 +33,6 @@ Many data teams leverage Databricks' optimized Spark engine to run heavy work lo
 - Leverage Airflow [cross-DAG dependencies](cross-dag-dependencies.md) to trigger Databricks Workflows from other DAGs in your Airflow environment, allowing for a data-driven architecture.
 - Use familiar Airflow code as your interface to orchestrate Databricks notebooks as Workflows.
 - [Inject parameters](#parameters) into your Databricks Workflow at the Workflow-level. These parameters can even be dynamic and retrieved at runtime from other Airflow tasks.
-
 
 ## Time to complete
 
