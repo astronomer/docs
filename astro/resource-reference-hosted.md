@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Astro Hosted resource reference"
-title: "Resource reference"
+sidebar_label: "Resource reference"
+title: "Astro Hosted resource reference"
 id: resource-reference-hosted
 description: Reference of all supported infrastructure for new Astro Hosted clusters.
 ---
