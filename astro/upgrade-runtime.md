@@ -61,7 +61,7 @@ Astro Runtime 8 introduced a bug related to using the KubernetesPodOperator with
 
 - Pin `apache-airflow-providers-cncf-kubernetes==5.3.0` in your `requirements.txt` file.
 - Create an Airflow connection in your Deployment with the following values:
-     - **Connection Id:**: `kubernetes_default`
+     - **Connection Id**: `kubernetes_default`
      - **Connection Type**: **Kubernetes Cluster Connection**
 - Wait to upgrade until this issue is fixed in a later patch version of Runtime 8.
 ##### Upgrade to Python 3.10
