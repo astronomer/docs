@@ -34,7 +34,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Quickstart
 
-If you have a GitHub account, you can use the [quickstart repository](https://github.com/astronomer/airflow-kafka-quickstart) for this tutorial, which automatically starts up Airflow and a local Kafka cluster and configures all necessary connections. Clone the repository and skip to [Step 6](#step-6-run-the-dags).
+If you have a GitHub account, you can use the [quickstart repository](https://github.com/astronomer/airflow-kafka-quickstart) for this tutorial, which automatically starts up Airflow, initiates a local Kafka cluster, and configures all necessary connections. Clone the quickstart repository and then skip to [Step 6: Run the DAGs](#step-6-run-the-dags).
 
 ## Prerequisites
 
@@ -86,13 +86,13 @@ You can learn more about connecting to local Kafka from within a Docker containe
 
 ## Step 2: Create two Kafka connections
 
-The Kafka Airflow provider uses a Kafka connection provided to the `kafka_conn_id` parameter of each operator to interact with a Kafka cluster. For this tutorial you will define two Kafka connections, because two different consumers will be created.
+The Kafka Airflow provider uses a Kafka connection associated with the `kafka_conn_id` parameter of each operator to interact with a Kafka cluster. For this tutorial you define two Kafka connections, because two different consumers will be created.
 
 1. In your web browser, go to `localhost:8080` to access the Airflow UI.
 
-2. Click Admin -> Connections -> **+** to create a new connection.
+2. Click **Admin** > **Connections** > **+** to create a new connection.
 
-3. Name your connection `kafka_default` and select the `Apache Kafka` connection type. Provide the details for the connection to your Kafka cluster as a JSON in the `Extra` field. If you are connecting to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
+3. Name your connection `kafka_default` and select the **Apache Kafka** connection type. Provide the details for the connection to your Kafka cluster as JSON in the **Extra** field. If you are connecting to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
 
     ```json
     {
@@ -103,13 +103,13 @@ The Kafka Airflow provider uses a Kafka connection provided to the `kafka_conn_i
     }
     ```
 
-4. Click Save.
+4. Click **Save**.
 
 5. Create a second new connection. 
 
-6.  Name your second connection `kafka_listener` and select the `Apache Kafka` connection type. Provide the same details as you did in Step 2.3, but set the `group.id` to `"group_2"`. Having a second connection with a different `group.id` is necessary because the DAGs in this tutorial will have two consuming tasks which consume messages from the same Kafka topic. Learn more in [Kafka's Consumer Configs documentation](https://kafka.apache.org/documentation/#consumerconfigs).
+6.  Name your second connection `kafka_listener` and select the `Apache Kafka` connection type. Provide the same details as you did in Step 2, but set the `group.id` to `group_2`. You must have a second connection with a different `group.id` because the DAGs in this tutorial have two consuming tasks that consume messages from the same Kafka topic. Learn more in [Kafka's Consumer Configs documentation](https://kafka.apache.org/documentation/#consumerconfigs).
 
-7. Click Save.
+7. Click **Save**.
 
 ## Step 3: Create a DAG with a producer and a consumer task
 
@@ -117,23 +117,23 @@ The [Kafka Airflow provider package](https://registry.astronomer.io/providers/ap
 
 1. Create a new file in your `dags` folder called `produce_consume_treats.py`.
 
-2. Copy and paste the following code into the file:
+2. Copy and paste the following code into the `produce_consume_treats.py` file:
 
     <CodeBlock language="python">{produce_consume_treats}</CodeBlock>
 
-    This DAG will produce messages to a Kafka topic (`KAFKA_TOPIC`) and consume them. 
+    This DAG produces messages in a Kafka topic (`KAFKA_TOPIC`) and consumes them. 
 
-    - The `produce_treats` task produces a given number (`num_treats`) of messages to a Kafka topic, each containing the pet name, a randomly picked pet mood after the treat has been given, and whether or not a treat was the last one in a series. The `ProduceToTopicOperator` accomplishes this by using using a function passed to its `producer_function` parameter which returns a generator containing contains key-value pairs. 
-    The number of treats pushed to [XCom](airflow-passing-data-between-tasks.md#what-is-xcom) from the upstream `get_number_of_treats` task is retrieved and supplied to the `producer_function` as a positional argument via the `producer_function_args` parameter. The name of your pet is retrieved in the same fashion from the upstream `get_your_pet_name` task and provided as a kwarg to `producer_function_kwargs`.
+    - The `produce_treats` task creates a given number (`num_treats`) of messages to a Kafka topic. Each messages contains the pet name, a randomly picked pet mood after the treat has been given, and whether or not a treat was the last one in a series. The `ProduceToTopicOperator` accomplishes this by using a function passed to its `producer_function` parameter, which returns a generator containing key-value pairs. 
+    The number of treats pushed to [XCom](airflow-passing-data-between-tasks.md#what-is-xcom) from the upstream `get_number_of_treats` task is retrieved and supplied to the `producer_function` as a positional argument with the `producer_function_args` parameter. The name of your pet is retrieved in the same fashion from the upstream `get_your_pet_name` task and provided as a kwarg to `producer_function_kwargs`.
     - The `consume_treats` task consumes messages from the same Kafka topic and modifies them to print a string to the logs using the callable provided to the `apply_function` parameter. The pet owner name is retrieved from XCom and supplied as a kwarg via the `apply_function_kwargs` parameter.
 
 3. Nagivate to the Airflow UI and manually run your DAG.
 
-4. View the produced events in your Kafka cluster. The example screenshot below shows 4 messages that have been produced to a topic called `test_topic_1` in Confluent Cloud.
+4. View the produced events in your Kafka cluster. The following example screenshot shows four messages that have been produced to a topic called `test_topic_1` in Confluent Cloud.
 
     ![Producer logs](/img/guides/confluent-produced-tasks.png)
 
-5. View the logs of your `consume_treats` task. The consumed events will be listed.
+5. View the logs of your `consume_treats` task, which shows a list of the consumed events.
 
     ![Consumer logs](/img/guides/kafka-producer-logs.png)
 
@@ -145,13 +145,13 @@ If you have defined a schema for your Kafka topic, the generator needs to return
 
 :::tip
 
-A common use case is to directly connect a blob storage (for example an Amazon S3 bucket) to your Kafka topic as a consumer. The ConsumeFromTopicOperator is helpful if you want to use Airflow to schedule the consuming task. Instead of writing the messages retrieved to the Airflow logs, you can for example write them to S3 using the [S3CreateObjectOperator](https://registry.astronomer.io/providers/amazon/modules/s3createobjectoperator).
+You can directly connect a blob storage (for example an Amazon S3 bucket) to your Kafka topic as a consumer. The ConsumeFromTopicOperator helps you use Airflow to schedule the consuming task. Instead of writing the messages retrieved to the Airflow logs, you can instead write them to S3 with the [S3CreateObjectOperator](https://registry.astronomer.io/providers/amazon/modules/s3createobjectoperator).
 
 :::
 
 ## Step 4: Create a listener DAG
 
-A common Airflow use case is to run a downstream task when a specific message appears in your Kafka topic. The AwaitMessageTriggerFunctionSensor is a [deferrable operator](deferrable-operators.md) that will listen to your Kafka topic for a message that fulfills specific criteria.
+Airflow can run a downstream task when a specific message appears in your Kafka topic. The AwaitMessageTriggerFunctionSensor is a [deferrable operator](deferrable-operators.md) that listens to your Kafka topic for a message that fulfills specific criteria, which, when met, initiates another process in your DAG.
 
 1. Create a new file in your `dags` folder called `listen_to_the_stream.py`.
 
@@ -159,20 +159,20 @@ A common Airflow use case is to run a downstream task when a specific message ap
 
     <CodeBlock language="python">{listen_to_the_stream}</CodeBlock>
 
-    This DAG has one task called `listen_for_mood` which uses the AwaitMessageTriggerFunctionSensor to listen to messages in all topics supplied to its `topics` parameters. For each message which is consumed, the following actions are performed:
+    This DAG has one task called `listen_for_mood` which uses the AwaitMessageTriggerFunctionSensor to listen to messages in all topics supplied to its `topics` parameters. For each message that is consumed, the following actions are performed:
 
-    - The message is consumed and processed by the `listen_function`, which is supplied to the `apply_function` parameter of the AwaitMessageTriggerFunctionSensor. Note that the function is provided as a dot notation string, which is necessary because the Airflow triggerer component will need to access this function.
+    - The `listen_function` consumes and processes the message, then supplies the output to the `apply_function` parameter of the AwaitMessageTriggerFunctionSensor. The `listen_function` is provided as a dot notation string, which is necessary because the Airflow triggerer component needs to access this function.
     - If the message consumed causes the `listen_function` to return a value, a [TriggerEvent](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html) fires.
-    - After a TriggerEvent has been fired, the AwaitMessageTriggerFunctionSensor will execute the function provided to the `event_triggered_function` parameter.
+    - After a TriggerEvent fires, the AwaitMessageTriggerFunctionSensor executes the function provided to the `event_triggered_function` parameter.
     In this example, the `event_triggered_function` starts a downstream DAG using the `.execute()` method of the [`TriggerDagRunOperator`](cross-dag-dependencies#triggerdagrunoperator).
-    - After the `event_triggered_function` has completed, the AwaitMessageTriggerFunctionSensor goes back into a deferred state.
+    - After the `event_triggered_function` has completes, the AwaitMessageTriggerFunctionSensor returns to a deferred state.
 
-    The AwaitMessageTriggerFunctionSensor will always be running and listening. In case the task fails, for example due to a malformed message being consumed, the DAG will complete as failed and automatically start its next DAG run thanks to the [`@continuous` schedule](scheduling-in-airflow.md#continuous-timetable).
+    The AwaitMessageTriggerFunctionSensor always runs and listens. If the task fails, like if a malformed message is consumed, the DAG completes as `failed` and automatically starts its next DAG run because of the [`@continuous` schedule](scheduling-in-airflow.md#continuous-timetable).
 
 
 ## Step 5: Create a downstream DAG
 
-The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator starts a downstream DAG to show implementing a dependency based on messages that appear in your Kafka topic.
+The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator starts a downstream DAG. This example shows how to implement a dependency based on messages that appear in your Kafka topic.
 
 1. Create a new file in your `dags` folder called `walking_my_pet.py`.
 
@@ -184,19 +184,19 @@ The `event_triggered_function` of the AwaitMessageTriggerFunctionSensor operator
 
 ## Step 6: Run the DAGs
 
-Now that all 3 DAGs are ready, run them to see how they work together.
+Now that all three DAGs are ready, run them to see how they work together.
 
-1. Make sure all DAGs are unpaused in the Airflow UI and that your Kafka cluster is running.
+1. Make sure you unpause all DAGs in the Airflow UI and that your Kafka cluster is running.
 
-2. Notice how the `listen_to_the_stream` DAG will immediately start running once it is unpaused with the `listen_for_mood` task going into a deferred state (purple square).
+2. The `listen_to_the_stream` DAG immediately starts running after it is unpaused and the `listen_for_mood` task goes into a **Deferred** state, which is indicated with a purple square in the Airflow UI.
 
     ![Kafka deferred state](/img/guides/kafka-deferred-task.png)
 
-3. Manually run the `produce_consume_treats` DAG to give your pet some treats (and produce a few messages to the Kafka cluster).
+3. Manually run the `produce_consume_treats` DAG to give your pet some treats and produce a few messages to the Kafka cluster.
 
 4. Check the logs of the `listen_for_mood` task in the `listen_to_the_stream` DAG to see if a message fitting the criteria defined by the `listen_function` has been detected. It is possible that you will need to run the `produce_consume_treats` DAG a couple of times for such a message to appear.
 
-    If the TriggerEvent of the `listen_for_mood` task fires, the `listen_for_mood` task logs will show the `walking_my_pet` DAG being initiated.
+    If the TriggerEvent of the `listen_for_mood` task fires, the `listen_for_mood` task logs shows the `walking_my_pet` DAG initiating.
 
     ![Kafka logs TDRO](/img/guides/kafka_tdro.png)
 
@@ -218,4 +218,4 @@ Common patterns include:
 
 ## Conclusion
 
-Congratulations! You now know how to use the Kafka Airflow provider to directly interact with a Kafka topic from within Apache Airflow.
+Congratulations! You used the Kafka Airflow provider to directly interact with a Kafka topic from within Apache Airflow.
