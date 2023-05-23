@@ -98,45 +98,48 @@ KubernetesPodOperator(
 
 Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod will terminate gracefully.
 
-### Mount a temporary directory (_AWS only_)
+### Mount a temporary directory
 
-Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
+:::info Alternative Astro Hybrid setup
 
-To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
+This configuration only works on AWS Hybrid clusters where you have enabled `m5d` and `m6id` worker types. These worker types have NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
 
-1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
-2. Mount an [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
+See [Modify a cluster](modify-cluster.md) for instructions on enabling `m5d` and `m6id` workers on your cluster. See [Configure a worker queue](configure-worker-queues.md) to configure a worker queue to use one of these worker types. 
 
-    ```python {5-14,26-27}
-    from airflow.configuration import conf
-    from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
-    from kubernetes.client import models as k8s
+:::
 
-    volume = k8s.V1Volume(
-        name="cache-volume",
-        emptyDir={},
+To run a task run the KubernetesPodOperator that utilizes your Deployment's ephemeral storage, mount an [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
+
+```python {5-14,26-27}
+from airflow.configuration import conf
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from kubernetes.client import models as k8s
+
+volume = k8s.V1Volume(
+    name="cache-volume",
+    emptyDir={},
+)
+
+volume_mounts = [
+    k8s.V1VolumeMount(
+        mount_path="/cache", name="cache-volume"
     )
+]
 
-    volume_mounts = [
-        k8s.V1VolumeMount(
-            mount_path="/cache", name="cache-volume"
-        )
-    ]
-
-    example_volume_test = KubernetesPodOperator(
-        namespace=namespace,
-        image="<your-docker-image>",
-        cmds=["<commands-for-image>"],
-        arguments=["<arguments-for-image>"],
-        labels={"<pod-label>": "<label-name>"},
-        name="<pod-name>",
-        resources=compute_resources,
-        task_id="<task-name>",
-        get_logs=True,
-        volume_mounts=volume_mounts,
-        volumes=[volume],
-    )
-    ```
+example_volume_test = KubernetesPodOperator(
+    namespace=namespace,
+    image="<your-docker-image>",
+    cmds=["<commands-for-image>"],
+    arguments=["<arguments-for-image>"],
+    labels={"<pod-label>": "<label-name>"},
+    name="<pod-name>",
+    resources=compute_resources,
+    task_id="<task-name>",
+    get_logs=True,
+    volume_mounts=volume_mounts,
+    volumes=[volume],
+)
+```
  
 ## Run images from a private registry
 

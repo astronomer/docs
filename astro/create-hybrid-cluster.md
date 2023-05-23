@@ -116,11 +116,11 @@ To create a cluster in one of these regions, complete the following additional s
 
 ### Submit a request to Astronomer support
 
-To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](https://cloud.astronomer.io/support). In your request, provide the following information for every new cluster that you want to provision:
 
 - Your preferred cluster installation region. See [Supported regions](resource-reference-aws-hybrid.md#aws-region).
 - Optional. Your preferred worker instance type for your first cluster. See [Worker node types](resource-reference-aws-hybrid.md#worker-node-types).
-- Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-aws#vpc-peering-prerequisites-optional).
+- Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-aws-hybrid.md#vpc-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
@@ -165,11 +165,11 @@ This feature is currently Private Preview. Contact [Astronomer support](https://
 
 ### Submit a request to Astronomer support
 
-To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](https://cloud.astronomer.io/support). In your request, provide the following information for every new cluster that you want to provision:
 
 - Your preferred cluster installation region. See [Supported regions](resource-reference-azure-hybrid.md#supported-regions).
-- Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-azure#worker-node-pools).
-- Optional. Your VNet peering requirements. See [VNet peering prerequisites](install-azure#vnet-peering-prerequisites-optional).
+- Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-azure-hybrid.md#worker-node-pools).
+- Optional. Your VNet peering requirements. See [VNet peering prerequisites](install-azure-hybrid.md#vnet-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
@@ -218,7 +218,7 @@ To create a new Astro cluster on the hosted cloud, submit a request to [Astronom
 
 - Your preferred cluster installation region. See [Supported regions](resource-reference-gcp-hybrid.md#supported-regions).
 - Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-gcp-hybrid.md#worker-node-pools).
-- Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-gcp#vpc-peering-prerequisites-optional).
+- Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-gcp-hybrid.md#vpc-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
@@ -233,7 +233,7 @@ Astronomer support sends you a notification when your cluster is created. After 
 
 ## Related documentation
 
-- [Manage and modify clusters](modify-cluster.md)
+- [Manage and modify clusters](manage-hybrid-clusters.md)
 - [AWS cluster settings](resource-reference-aws-hybrid.md)
 - [Microsoft Azure cluster settings](resource-reference-azure-hybrid.md)
 - [GCP cluster settings](resource-reference-gcp-hybrid.md)

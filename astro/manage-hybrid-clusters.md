@@ -219,9 +219,9 @@ Astro uses the following databases:
 
 | Cloud          | Database                                                                                | Instance Types                                        |
 | -------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| AWS            | [Amazon RDS](https://aws.amazon.com/rds/)                                               | [Supported RDS instance types](resource-reference-aws#supported-rds-instance-types) |
-| GCP            | [Cloud SQL](https://cloud.google.com/sql)                                               | [Supported Cloud SQL instance types](resource-reference-gcp#supported-cloud-sql-instance-types) |
-| Azure          | [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/) | [Supported Azure Database for PostgreSQL instance types](resource-reference-azure#supported-azure-database-for-postgresql-instance-types) |
+| AWS            | [Amazon RDS](https://aws.amazon.com/rds/)                                               | [Supported RDS instance types](resource-reference-aws-hybrid.md#supported-rds-instance-types) |
+| GCP            | [Cloud SQL](https://cloud.google.com/sql)                                               | [Supported Cloud SQL instance types](resource-reference-gcp-hybrid.md#supported-cloud-sql-instance-types) |
+| Azure          | [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/) | [Supported Azure Database for PostgreSQL instance types](resource-reference-azure-hybrid.md#supported-azure-database-for-postgresql-instance-types) |
 
 
 To request support for a different database instance type or to modify the database instance type after cluster creation, contact [Astronomer support](https://cloud.astronomer.io/support).

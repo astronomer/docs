@@ -281,7 +281,7 @@ In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can n
 
 You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
 
-To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](modify-cluster.md#authorize-workspaces-to-a-cluster).
+To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](manage-hybrid-clusters.md#authorize-workspaces-to-a-cluster).
 
 ### New Deployment health statuses and information in the Cloud UI
 
@@ -345,7 +345,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 ### Additional improvements
 
 - Ingress to the Airflow UI and API on Astro clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
-- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](modify-cluster.md#view-clusters).
+- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](manage-hybrid-clusters.md##view-clusters).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 
@@ -779,7 +779,7 @@ If your organization has [implemented an identity provider (IdP)](configure-idp.
 
 Astro now officially supports Astro clusters on AKS. This includes support for an initial set of AKS regions.
 
-For more information about the installation process and supported configurations, see [Install Astro on Azure](install-azure.md) and [Resource Reference Azure](resource-reference-azure-hybrid.md).
+For more information about the installation process and supported configurations, see [Install Astro on Azure](install-azure-hybrid.md) and [Resource Reference Azure](resource-reference-azure-hybrid.md).
 
 ### Bug fixes
 
@@ -958,7 +958,7 @@ This functionality is still early access and under active development. If you ha
 
 Astro now officially supports Astro clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as [Workload Identity](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) for secure connection to other GCP data services in your ecosystem.
 
-For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp-hybrid.md).
+For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp-hybrid.md) and [Resource Reference GCP](resource-reference-gcp-hybrid.md).
 
 ### Support for Organization-Level user invites
 
