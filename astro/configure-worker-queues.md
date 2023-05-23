@@ -34,7 +34,7 @@ By configuring multiple worker queues and assigning tasks to these queues based 
 - Task A and Task B are dependent on each other, so they need to run in the same Deployment.
 - Task A is a long-running task that uses a lot of CPU and memory, while Task B is a short-running task that uses minimal amounts of CPU and memory.
 
-You can assign Task A to a worker queue that is configured to use the A20 worker type that's optimized for running compute-heavy tasks. Then, you can assign Task B to a worker queue that is configured to use the A5 worker type that's smaller and optimized for general usage.
+You can assign Task A to a worker queue that is configured to use the A20 worker type, which is optimized for running compute-heavy tasks. Then, you can assign Task B to a worker queue that is configured to use the A5 worker type, which is smaller and optimized for general usage.
 
 ## Worker queue settings
 
@@ -49,7 +49,7 @@ You can configure each worker queue on Astro with the following settings:
 
 On Astro Hybrid clusters, worker type is defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on a Hybrid AWS cluster hosted on your cloud. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
 
-Your Organization can enable up to 10 different worker types for each Hybrid cluster. After a worker type is enabled on an Astro Hybrid cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
+Your Organization can enable up to 10 additional different worker types for each Hybrid cluster. After a worker type is enabled on an Astro Hybrid cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
 1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws.md#worker-node-types), [Azure](resource-reference-azure.md#worker-node-size-resource-reference), or [GCP](resource-reference-gcp.md#worker-node-size-resource-reference).
 2. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information: 

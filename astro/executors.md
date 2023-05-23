@@ -63,11 +63,11 @@ On Astro, you can configure Celery executor in the following ways:
 
 You can set these configurations per worker queue, which is a set of configurations that apply to a group of workers in your Deployment. With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
-This topic discusses basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
+The following section discusses basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
 
 :::tip
 
-If you plan to use only the KubernetesPodOperator in your Deployment, set your Celery executor resources to the lowest possible amounts, as the executor is only required for launching your Pods. See [KubernetesPodOperator](kubernetespodoperator.md) for more information. 
+If you plan to use only the KubernetesPodOperator in your Deployment, set your Celery executor resources to the lowest possible amounts, because the executor is only required for launching your Pods. See [KubernetesPodOperator](kubernetespodoperator.md) for more information. 
 
 :::
 
@@ -125,7 +125,7 @@ You can configure the maximum resources that any Kubernetes executor Pod uses fr
 
 Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is instead determined by the size of the Astro-hosted infrastructure running your tasks.
 
-:::info Alternative setup on Astro Hybrid
+:::info Alternative Astro Hybrid setup
 
 On Astro Hybrid, Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
 
@@ -154,7 +154,7 @@ See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests)
 
 #### Example: Set CPU or memory limits and requests
 
-One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for a task. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](#configure-the-default-kubernetes-pod).
+You can request a specific amount of resources Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](#configure-the-default-kubernetes-pod).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
@@ -206,7 +206,7 @@ with DAG(
     resource_requirements_override_example()
 ```
 
-When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your Deployment. Once the task finishes, the Pod terminates gracefully.
+When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your Deployment. After the task finishes, the Pod terminates gracefully.
 
 ### Mount secret environment variables to worker Pods
 
@@ -298,11 +298,11 @@ with DAG(
 
 :::info
 
-This topic applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This section applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 :::
 
-A Deployment on Astro Hybrid using the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker that this queue uses from the Cloud UI.
+A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker that this queue uses from the Cloud UI.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
