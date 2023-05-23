@@ -538,7 +538,7 @@ The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have
 
 ### New Azure regions
 
-You can now [create an Astro cluster on Azure](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on Azure](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `japaneast`
 - `southafricanorth`
@@ -730,13 +730,13 @@ Note that switching Organizations with the Astro CLI is not yet supported. For m
 
 ### New Azure region (Australia East)
 
-You can now [create an Astro cluster on Azure](create-cluster.md) in Australia East (New South Wales).
+You can now [create an Astro cluster on Azure](manage-hybrid-clusters.md#create-a-cluster) in Australia East (New South Wales).
 
 For a list of all Azure regions that Astro supports, see [Azure resource reference](resource-reference-azure-hybrid.md#supported-regions).
 
 ### New Google Cloud Platform regions
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `australia-southeast2` (Melbourne)
 - `asia-east1` (Taiwan)
@@ -830,7 +830,7 @@ For more information on Deployment configurations, see [Configure Deployment res
 
 ### New Google Cloud Platform regions
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `asia-northeast1` (Tokyo)
 - `asia-northeast2` (Osaka)
@@ -855,7 +855,7 @@ For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [
 
 ### New Google Cloud Platform regions
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `asia-southeast1` (Singapore)
 - `australia-southeast1` (Sydney)
@@ -911,7 +911,7 @@ Specifically, you can now run the following commands with Deployment API keys:
 
 ### Support for the `us-east4` GCP region
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the `us-east4` region, which is located in northern Virginia, USA.
 
 For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
@@ -1040,7 +1040,7 @@ For more information about what to expect when lineage tools go live, read Astro
 
 ### New AWS regions available
 
-You can now [create new Clusters](create-cluster.md) in:
+You can now [create new Clusters](manage-hybrid-clusters.md#create-a-cluster) in:
 
 - `af-south-1` (Cape Town)
 - `ap-east-1` (Hong Kong)

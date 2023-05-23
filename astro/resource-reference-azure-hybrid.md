@@ -96,5 +96,4 @@ If your Organization needs an instance type that supports a larger worker size, 
 
 ## Related documentation
 
-- [Create a new cluster on Astro](create-cluster.md)
-- [Manage and modify clusters](modify-cluster.md)
+- [Manage and modify Hybrid clusters](manage-hybrid-clusters.md)

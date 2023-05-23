@@ -28,7 +28,7 @@ If you're new to Airflow and want a more in-depth tutorial, see [Write your Firs
 - An Astro account. To start an Astro trial, see [Start a trial](trial.md). 
 - [The Astro CLI](cli/install-cli.md). 
 
-Astronomer recommends installing [Docker Desktop](https://docs.docker.com/get-docker/) for testing and running Airflow on your local computer, but it's not required for this tutorial. If you just want to run Airflow on your local machine, see [Get started with Airflow using the Astro CLI](get-started-cli.md).
+Astronomer recommends installing [Docker Desktop](https://docs.docker.com/get-docker/) for testing and running Airflow on your local computer, but it's not required for this tutorial. If you just want to run Airflow on your local machine, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md).
 
 ## Step 1: Create a Deployment
 
