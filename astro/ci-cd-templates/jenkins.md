@@ -164,7 +164,8 @@ If your Astro project requires additional build-time arguments to build an image
 
 2. At the root of your Astro Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    <pre><code parentName="pre">{`pipeline {
+```text
+{`pipeline {
         agent any
         stages {
             stage('Deploy to Astronomer') {
