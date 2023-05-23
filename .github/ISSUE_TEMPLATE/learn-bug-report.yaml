@@ -1,0 +1,59 @@
+name: Request a fix in Learn content
+description: Any request related to existing documentation that contains a bug or is misleading
+labels: ["error/wrong-info", ""error/misleading", "area/learn"]
+assignees:
+  - kentdanas
+  - TJaniF
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Please provide links to the affected page(s)
+    validations:
+      required: true
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Request type
+      multiple: true
+      options:
+        - Fix a typo/grammar
+        - Fix a bug in provided code (snippets)
+        - Fix misleading language
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: Issue description. If you are reporting a bug please provide relevant error messages and code!
+    validations:
+      required: true
+  - type: input
+    id: airflow_version
+    attributes:
+      label: Airflow Version
+      description: Provide the Airflow version for which the information in the learn content is inaccurate.
+      placeholder: ex. 2.6.1
+  - type: textarea
+    id: provider_versions
+    attributes:
+      label: Provider Versions
+      description: Provide versions of relevant providers for which the information in the learn content is inaccurate. 
+      placeholder: ex. apache-airflow-providers-snowflake==4.0.5
+  - type: textarea
+    id: package_versions
+    attributes:
+      label: Package versions and tools
+      description: Provide versions of relevant packages or relevant tools for which the information in the learn content is inaccurate. 
+      placeholder: ex. duckdb==0.8.0, works in Snowflake but not in Postgres...
+  - type: input
+    id: sme
+    attributes:
+      label: SME / technical reviewer
+      description: Are you the right person to review a fix for technical accuracy? If not, who is?
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Additional information
+      description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, ZenDesk tickets, and Slack messages are all welcome and encouraged!

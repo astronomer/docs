@@ -55,7 +55,7 @@ body:
     id: sme
     attributes:
       label: SME / technical reviewer
-      description: Are you the right person to review a draft of the guide for technical accuracy? If not, who is?
+      description: Are you the right person to review a draft for technical accuracy? If not, who is?
   - type: textarea
     id: additional_info
     attributes:
