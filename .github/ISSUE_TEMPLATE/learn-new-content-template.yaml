@@ -9,6 +9,7 @@ body:
     id: content_type
     attributes:
       label: Content type
+      multiple: true
       options:
         - Get started
         - Airflow concepts
@@ -36,7 +37,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: target_user_descroption
+    id: target_user_description
     attributes:
       label: Describe who the content is intended for, e.g. Airflow beginners, expert users...?
   - type: input
@@ -50,6 +51,11 @@ body:
       label: Airflow Version
       description: Airflow version in which the feature/behavior was added. Please provide for features which are upcoming.
       placeholder: ex. 2.6.1
+  - type: input
+    id: sme
+    attributes:
+      label: SME / technical reviewer
+      description: Are you the right person to review a draft of the guide for technical accuracy? If not, who is?
   - type: textarea
     id: additional_info
     attributes:
