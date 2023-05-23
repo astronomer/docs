@@ -34,7 +34,7 @@ Publicly accessible endpoints allow you to quickly connect Astro to AWS. To conf
 - Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
 - Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-When you use publicly accessible endpoints to connect Astro and AWS, traffic moves directly between your Astro data plane and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+When you use publicly accessible endpoints to connect Astro and AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
 
 </TabItem>
 
@@ -62,7 +62,7 @@ After receiving your request, Astronomer support initiates a peering request and
 
 To resolve DNS hostnames from your target VPC, every Astro VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
-If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows Astro clusters to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astro VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/).
 
@@ -182,7 +182,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
     }
     ```
     
-    The Astro cluster data plane account includes the `AirflowLogsS3-<clusterid>` role. When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, use `"arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"` as the value for `aws_arn`.
+    The Astro cluster includes the `AirflowLogsS3-<clusterid>` role. When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, use `"arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"` as the value for `aws_arn`.
 
 7. Click **Update policy**.
 8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
@@ -202,7 +202,7 @@ Astronomer recommends using an external secrets backend to store your AWS access
 
 ## Hostname resolution options
 
-Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service. 
+Securely connect Astro to resources running in other VPCs or on-premises through a resolving service. 
 
 Using Route 53 requires sharing a resolver rule with your Astro account. If this is a security concern, Astronomer recommends using Domain Name System (DNS) forwarding.
 

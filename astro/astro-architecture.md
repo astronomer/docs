@@ -2,7 +2,7 @@
 sidebar_label: 'Architecture'
 title: 'Astro architecture'
 id: astro-architecture
-description: Astro uses a multi-plane structure to help make Airflow more secure and reliable. Learn how the control plane and data plane work together on the cloud.
+description: Learn about how Astro is structured to maximize the power of Apache Airflow.
 ---
 
 Astro is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 

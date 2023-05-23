@@ -55,7 +55,7 @@ You can use the following options to specify the types of logs or messages that 
 
 Airflow task logs for both local Airflow environments and Deployments on Astro are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
 
-On Astro, Airflow task logs are stored in the data plane on your cloud. On Amazon Web Services (AWS), they are stored in S3. On Google Cloud Platform (GCP), they are stored in Cloud Storage. On Azure, they are stored in Azure Blob Storage. 
+On Astro, Airflow task logs are stored in your cluster. On Amazon Web Services (AWS), they are stored in S3. On Google Cloud Platform (GCP), they are stored in Cloud Storage. On Azure, they are stored in Azure Blob Storage. 
 
 On clusters hosted in your own cloud, task logs are stored indefinitely. On clusters hosted in Astronomer's cloud, task logs are hosted for 90 days. The task log retention policy is not currently configurable.
 

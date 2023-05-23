@@ -21,7 +21,7 @@ Specifically, you will:
 - Deploy DAGs to Astro with the Astro CLI.
 - Trigger a run of an example DAG in the Airflow UI. 
 
-If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
+This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
 ## Prerequisites
 
@@ -38,15 +38,11 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
 2. On the **Deployments** page, click **+ Deployment**.
 
-3. Complete the following fields:
-
-    - **Name**: Enter a name for your Deployment.
-  
-    You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
+3. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
 
 4. Click **Create Deployment**.
 
-     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
+    A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
     
     For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Configure a Deployment](configure-deployment-resources).
 
@@ -168,5 +164,5 @@ To limit resource usage, you might want to delete your Deployment after you fini
 Now that you've created and run your first DAG on Astro, the next step is to add your own DAGs, build out the rest of your Astro project, and start testing real data. See:
 
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, including the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
-- [Deploy code to Astro](/astro/deploy-code)
-- [Develop a project](/astro/develop-project)
+- [Deploy code to Astro](/astro/deploy-code).
+- [Develop a project](/astro/develop-project).

@@ -17,7 +17,7 @@ Go to [Try Astro](https://www.astronomer.io/try-astro/) to activate your free 14
 
 After you've created your Astro user account, you'll be asked to create an Organization and your first Workspace. 
 
-An **Organization** is the highest management level on Astro. An Organization contains **Workspaces**, which are collections of Deployments, or Airflow environments, that are typically owned by a single team. You can manage user roles and permissions both at the Organization and Workspace levels.
+An _Organization_ is the highest management level on Astro. An Organization contains _Workspaces_, which are collections of _Deployments_, or Airflow environments, that are typically owned by a single team. You can manage user roles and permissions both at the Organization and Workspace levels.
 
 To start your trial, Astronomer recommends using the name of your company as the name of your Organization and naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Cloud UI after you finish activating your trial. 
 
@@ -30,7 +30,7 @@ You're now ready to start deploying and running DAGs on Astro. See [Run your fir
 
 Astro trials have some limitations that aren't present in the paid product:
 
-- You can only create Deployments in standard clusters, which do not support VPC Peer network configurations for access to your internal data sources
+- You can only create Deployments in standard clusters, which do not support VPC Peer network configurations for access to your internal data sources.
 - You can only have up to two Deployments at any given time.
 - For each of your Deployments, you have the following usage limits on executors:
     - Celery executor: 4vCPU and 8G RAM.

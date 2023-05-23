@@ -2,7 +2,7 @@
 sidebar_label: 'Azure'
 title: 'Connect Astro to Azure data sources'
 id: connect-azure
-description: Connect your Astro data plane to Microsoft Azure.
+description: Connect Astro to Microsoft Azure.
 sidebar_custom_props: { icon: 'img/azure.png' }
 ---
 
@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the information provided here to learn how you can securely connect your Astro data plane to your existing Azure instance. A connection to Azure allows Astro to access data stored on your Azure instance and is a necessary step to running pipelines in a production environment.
+Use the information provided here to learn how you can securely connect Astro to your existing Azure instance. A connection to Azure allows Astro to access data stored on your Azure instance and is a necessary step to running pipelines in a production environment.
 
 ## Connection options
 
@@ -31,7 +31,7 @@ Publicly accessible endpoints allow you to quickly connect Astro to Azure. To co
 - Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
 - Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-When you use publicly accessible endpoints to connect Astro and Azure, traffic moves directly between your Astro data plane and the Azure API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+When you use publicly accessible endpoints to connect Astro and Azure, traffic moves directly between your Astro clusters and the Azure API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
 
 </TabItem>
 
