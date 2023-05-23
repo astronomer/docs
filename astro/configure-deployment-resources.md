@@ -63,7 +63,7 @@ Unlike workers, schedulers do not autoscale. The resources you set for them are 
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
-:::caution Alternative setup for Astro Hybrid
+:::caution Alternative Astro Hybrid setup
 
 To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
