@@ -47,6 +47,7 @@ If you prefer, you can also run `astro deployment create` to create a Deployment
     
     - **Scheduler**: Select the amount of resources you want your Deployment scheduler to use. The scheduler is responsible for queueing and scheduling your Airflow tasks. See [Configure Deployment resources](configure-deployment-resources.md#scheduler-resources) for more information.
     - **Worker queue**: Configure the `default` worker queue for your Deployment. A worker queue is a group of identically-configured workers responsible for running your tasks. The default options for the `default` worker queue are suitable for most workloads. See [Worker queues](configure-deployment-resources.md#worker-queues).
+    - **Kubernetes Executor and KPO Pods**: (Optional) If you're using the Kubernetes executor or KubernetesPodOperator, configure the default Pods that tasks run in. See [Configure the Kubernetes executor](executors.md#configure-the-kubernetes-executor) and [Configure the KubernetesPodOperator](kubernetespodoperator.md#configure-the-kubernetespodoperator-in-the-cloud-ui).
 
     These are the essential fields for configuring a Deployment. You can optionally configure additional details for your Deployment based on resource usage, user permissions, and resiliency. For all available Deployment options, see [Configure Deployment resources](configure-deployment-resources.md).
 
