@@ -124,7 +124,7 @@ This feature is only configurable on Astro Hosted Deployments.
 
 :::
 
-When a Deployment has high availability enabled, it runs multiple instances of its Airflow components across separate nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Because this setting results in more resource usage, it can increase the cost of your Deployment. See [LINK].
+When a Deployment has high availability enabled, it runs multiple instances of its Airflow components across separate nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.

@@ -33,7 +33,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
     - **Region**: Select the region that you want your cluster to run in.
     - **VPC Subnet Range**: Provide a subnet range for Astro to connect to your existing AWS resources through VPC peering. The default is `172.20.0.0/20`.
    
-4. Click **Create cluster**. 
+4. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md). 
    
 </TabItem>
 <TabItem value="gcp">
@@ -51,11 +51,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
     - **Service Subnet Range**: Provide a subnet range for Astro to connect to GKE services. The default is `172.22.0.0/22`.
     - **Service Peering Range**: Provide a subnet range for Astro to connect to GKE services through VPC peering. The default is `172.23.0.0/20`.
    
-4. Click **Create cluster**.
-   
-5. Wait for Astronomer to finish creating the cluster.
-
-    The cluster is created with a default set of resources that are suitable for most use cases. See [GCP cluster settings](resource-reference-gcp.md#default-cluster-values) for a list of all default resources.
+4. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md). 
 
 </TabItem>
 <TabItem value="azure">

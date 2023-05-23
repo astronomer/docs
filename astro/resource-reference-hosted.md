@@ -68,7 +68,7 @@ Currently, standard clusters are available on the following clouds and regions:
 
 ## Dedicated cluster configurations
 
-A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Cloud UI in a variety of clouds and regions. More more information about dedicated clusters, see [LINK].
+A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Cloud UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
 Currently, standard clusters are available on the following clouds and regions:
 
