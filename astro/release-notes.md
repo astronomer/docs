@@ -29,7 +29,9 @@ _Astro Hosted_ is a new way to run Airflow on Astronomer's cloud. On Astro Hoste
 
 For more information about how Astro Hosted works, see the [Architecture overview](astro-architecture.md).
 
-If you're already an Astro user and your Deployments run in your company's own cloud, you're using _Astro Hybrid_, formerly known as Astro - Bring Your Own Cloud. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**. 
+If you're already an Astro user and your Deployments run in your company's own cloud, you're using _Astro Hybrid_. This version of Astro was formerly known as Astro - Bring Your Own Cloud. 
+
+To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**. 
 
 See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-hybrid) to learn how the current documentation has changed for Astro Hybrid users.
 
