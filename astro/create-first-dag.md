@@ -34,13 +34,15 @@ Astronomer recommends installing [Docker Desktop](https://docs.docker.com/get-do
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
 
-1. In the Cloud UI, select a **Workspace**.
+1. Log in to the [Cloud UI](https://cloud.astronomer.io)
 
-2. On the **Deployments** page, click **+ Deployment**.
+2. Select a **Workspace**.
 
-3. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
+3. On the **Deployments** page, click **+ Deployment**.
 
-4. Click **Create Deployment**.
+4. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
+
+5. Click **Create Deployment**.
 
     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment are healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
     
@@ -99,7 +101,7 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
     astro login
     ```
 
-    After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. Then, you are automatically authenticated to the CLI.
+    After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. Then, automatically authenticates your CLI.
 
 2. Go to `https://cloud.astronomer.io`, and select one of the available options to access the Cloud UI.
 
