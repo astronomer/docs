@@ -246,7 +246,7 @@ The setup process assumes that you've already provided Astronomer support with t
 
 - Your preferred cluster installation region. See the supported region lists for [Azure](resource-reference-azure-hybrid.md#supported-regions).
 - Optional. Your preferred worker instance type for your first cluster. See [Azure cluster configurations](resource-reference-azure-hybrid.md#worker-node-pools).
-- Optional. Your VNet peering requirements for [Azure](install-azure-hubrid.md#vnet-peering-prerequisites-optional).
+- Optional. Your VNet peering requirements for [Azure](install-azure-hybrid.md#vnet-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
