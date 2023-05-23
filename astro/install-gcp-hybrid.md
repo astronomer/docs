@@ -169,7 +169,7 @@ The setup process assumes that you've already provided Astronomer support with t
 
 - Your preferred cluster installation region. See the supported region lists for [GCP](resource-reference-gcp-hybrid.md#supported-regions).
 - Optional. Your preferred worker instance type for your first cluster. See [GCP cluster configurations](resource-reference-gcp-hybrid.md#supported-cluster-configurations).
-- Optional. Your VPC peering requirements for [GCP](install-gcp#vpc-peering-with-astronomer).
+- Optional. Your VPC peering requirements for [GCP](install-gcp-hybrid.md#vpc-peering-with-astronomer).
 - The email address of your first Astro user.
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
