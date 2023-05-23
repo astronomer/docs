@@ -120,7 +120,7 @@ You can also update your Workspace so that any new Deployments in the Workspace 
 
 :::info
 
-This feature is on by default for Astro Hosted users. 
+This feature is only configurable on Astro Hosted Deployments.
 
 :::
 
