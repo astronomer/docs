@@ -191,7 +191,8 @@ If your Astro project requires additional build-time arguments to build an image
                 cleanWs()
             }
         }
-    }`}</code></pre>
+    }`}
+    ```
 
     This `Jenkinsfile` triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
