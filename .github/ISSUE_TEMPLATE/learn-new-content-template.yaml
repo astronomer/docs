@@ -19,7 +19,7 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: impact
+    id: request_type
     attributes:
       label: Request type
       multiple: true
@@ -30,28 +30,28 @@ body:
     validations:
       required: true
   - type: textarea
-    id: description
+    id: request_description
     attributes:
       label: Describe your Learn request. If you want to add information to an existing page, please provide the link to it!
     validations:
       required: true
   - type: textarea
-    id: description
+    id: target_user_descroption
     attributes:
       label: Describe who the content is intended for, e.g. Airflow beginners, expert users...?
   - type: input
-    id: reviewers
+    id: due_date
     attributes:
       label: Due date
       description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: input
-    id: version
+    id: airflow_version
     attributes:
       label: Airflow Version
       description: Airflow version in which the feature/behavior was added. Please provide for features which are upcoming.
       placeholder: ex. 2.6.1
   - type: textarea
-    id: notes
+    id: additional_info
     attributes:
       label: Additional information
       description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, ZenDesk tickets, and Slack messages are all welcome and encouraged!
