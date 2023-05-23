@@ -33,7 +33,7 @@ If you're already an Astro user and your Deployments run in your company's own c
 
 To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**. 
 
-See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-hybrid) to learn how the current documentation has changed for Astro Hybrid users.
+See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-hybrid) to learn how the documentation has changed for current Astro Hybrid users.
 
 ### Documentation refactor for Astro Hybrid
 
