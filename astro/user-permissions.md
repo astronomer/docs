@@ -5,7 +5,7 @@ id: user-permissions
 description: Learn about Astronomer's RBAC system and how to assign roles to users.
 ---
 
-To better protect your data pipelines and cloud infrastructure, Astro provides role based access control (RBAC) for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Role based access control is not available for Deployments.
+To better protect your data pipelines and cloud infrastructure, Astro provides role based access control (RBAC) for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Organization Admins can create _Astro Teams_ of individual users, and then assign those teams of users the same Workspace role level. Role based access control is not available for Deployments.
 
 You can also apply roles to API tokens to limit the scope of their actions in CI/CD and automation pipelines. See [Manage Deployments as code](manage-deployments-as-code.md).
 
@@ -16,8 +16,18 @@ The Astro role hierarchies in order of inheritance are:
 - Organization Owner > Organization Billing Admin > Organization Member 
 - Workspace Admin > Workspace Editor > Workspace Member
 
-Additionally, Organization Owners inherit Workspace Admin permissions for all Workspaces in the Organization.
+Additionally, Organization Owners inherit Workspace Admin permissions for all Workspaces in the Organization and only Organization Owners can create Teams.
 
+## Roles and Teams
+
+There are two ways to define user roles for a Workspace:
+
+- Define the individual user role when you [add a user](/astro/add-user.md#add-a-user-to-a-workspace) to a Workspace 
+- Assign a Workspace role to a [team of users](ADD LINK)
+
+If the user role that you assign at the Team level is different from what you assigned the user individually, then Astronomer recognizes the more privileged role.
+
+For example, if an Organization Owner first adds a user to a Workspace as an **Organization Member** and a **Workspace Member**. Then, they assign this user to a Team of users with **Workspace Admin** privileges, this user now has **Workspace Admin** privileges for any Workspaces the Team is added to.
 
 ## Organization roles
 
@@ -36,6 +46,7 @@ An Organization role grants a user or API token some level of access to an Astro
 | Remove a user from an Organization                               |                         |                                | ✔️                      |
 | Create, update and delete Organization API tokens                                   |                         |                                | ✔️                      |
 | Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                      |
+| Create a Team of users |                         |                                | ✔️                      |
 
 To manage users in a organization, see [Manage users](add-user.md). To manage the Organization permissions of your API tokens, see [Organization API tokens](organization-api-tokens.md).
 
@@ -63,6 +74,7 @@ A Workspace role grants a user or API token some level of access to a specific W
 | Create, Update and Delete API Keys                  |                      |                      | ✔️                   |
 | Update user roles and permissions                   |                      |                      | ✔️                   |
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
+| Assign Teams to Workspaces or Deployments         |                      |                      | ✔️                   |
 | Create, update and delete Workspace API tokens                         |                      |                      | ✔️                   |
 
 To manage a user's Workspace permissions, see [Manage users](add-user.md#add-a-user-to-a-workspace).
