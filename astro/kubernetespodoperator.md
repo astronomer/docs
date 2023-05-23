@@ -48,6 +48,8 @@ While you still need to configure the KubernetesPodOperator in your DAG code to 
 
 Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
 
+The Cloud UI also shows the **Default CPU** and **Default Memory** for your _default Pod_. If you don't configure CPU or memory for a task in your DAG code, the task runs in the default Pod with these default resources. 
+
 ## Set up the KubernetesPodOperator
 
 To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:

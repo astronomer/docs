@@ -125,6 +125,8 @@ You can configure the maximum resources that any Kubernetes executor Pod uses fr
 
 Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is instead determined by the size of the Astro-hosted infrastructure running your tasks.
 
+The Cloud UI also shows the **Default CPU** and **Default Memory** for your _default Pod_. If you don't configure CPU or memory for a task in your DAG code, the task runs in the default Pod with these default resources. 
+
 :::info Alternative Astro Hybrid setup
 
 On Astro Hybrid, Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
