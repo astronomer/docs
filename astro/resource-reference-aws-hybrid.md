@@ -13,7 +13,7 @@ sidebar_custom_props: { icon: "img/aws.png" }
 
 :::caution
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
 
@@ -197,5 +197,4 @@ If you need to pass significant data between Airflow tasks, Astronomer recommend
 
 ## Related documentation
 
-- [Create a new cluster on Astro](create-cluster.md)
-- [Manage and modify clusters](modify-cluster.md)
+- [Manage and modify Hybrid clusters](manage-hybrid-clusters.md)

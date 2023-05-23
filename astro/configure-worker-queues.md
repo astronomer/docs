@@ -60,7 +60,7 @@ You can change all settings of the default worker queue except for its name.
 
 Your organization can enable up to 10 different worker types for each cluster. After a worker type is enabled on an Astro cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
-1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws.md#worker-node-types), [Azure](resource-reference-azure.md#worker-node-size-resource-reference), or [GCP](resource-reference-gcp.md#worker-node-size-resource-reference).
+1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws-hybrid.md#worker-node-types), [Azure](resource-reference-azure-hybrid.md#worker-node-size-resource-reference), or [GCP](resource-reference-gcp-hybrid.md#worker-node-size-resource-reference).
 2. Contact [Astronomer support](https://cloud.astronomer.io/support) with the name of the worker type(s) you want to enable for your cluster. For example, `m6i.2xlarge`.
 
 For more information on requesting cluster changes, see [Modify a cluster](modify-cluster.md).

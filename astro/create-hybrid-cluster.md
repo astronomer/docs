@@ -48,7 +48,7 @@ To create a new Astro cluster on AWS for your Organization, submit a request to 
 - Your preferred max node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/20,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws.md).
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/20,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md).
 
 ### Additional set up for AWS regions that are disabled by default
 
@@ -118,8 +118,8 @@ To create a cluster in one of these regions, complete the following additional s
 
 To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
-- Your preferred cluster installation region. See [Supported regions](resource-reference-aws.md#aws-region).
-- Optional. Your preferred worker instance type for your first cluster. See [Worker node types](resource-reference-aws.md#worker-node-types).
+- Your preferred cluster installation region. See [Supported regions](resource-reference-aws-hybrid.md#aws-region).
+- Optional. Your preferred worker instance type for your first cluster. See [Worker node types](resource-reference-aws-hybrid.md#worker-node-types).
 - Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-aws#vpc-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
@@ -151,7 +151,7 @@ To create a new Astro cluster on Azure for your Organization, submit a request t
 
 If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Private Cloud (VPC) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/19` is implemented.
 
-For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure.md).  
+For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure-hybrid.md).  
 
 </TabItem>
 
@@ -167,7 +167,7 @@ This feature is currently Private Preview. Contact [Astronomer support](https://
 
 To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
-- Your preferred cluster installation region. See [Supported regions](resource-reference-azure.md#supported-regions).
+- Your preferred cluster installation region. See [Supported regions](resource-reference-azure-hybrid.md#supported-regions).
 - Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-azure#worker-node-pools).
 - Optional. Your VNet peering requirements. See [VNet peering prerequisites](install-azure#vnet-peering-prerequisites-optional).
 - The email address of your first Astro user.
@@ -200,7 +200,7 @@ To create a new Astro cluster on Google Cloud Platform (GCP) for your Organizati
 - Your preferred maximum node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp.md). 
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md). 
 
 </TabItem>
 
@@ -216,8 +216,8 @@ This feature is currently Private Preview. Contact [Astronomer support](https://
 
 To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
-- Your preferred cluster installation region. See [Supported regions](resource-reference-gcp.md#supported-regions).
-- Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-gcp.md#worker-node-pools).
+- Your preferred cluster installation region. See [Supported regions](resource-reference-gcp-hybrid.md#supported-regions).
+- Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-gcp-hybrid.md#worker-node-pools).
 - Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-gcp#vpc-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
@@ -234,7 +234,7 @@ Astronomer support sends you a notification when your cluster is created. After 
 ## Related documentation
 
 - [Manage and modify clusters](modify-cluster.md)
-- [AWS cluster settings](resource-reference-aws.md)
-- [Microsoft Azure cluster settings](resource-reference-azure.md)
-- [GCP cluster settings](resource-reference-gcp.md)
+- [AWS cluster settings](resource-reference-aws-hybrid.md)
+- [Microsoft Azure cluster settings](resource-reference-azure-hybrid.md)
+- [GCP cluster settings](resource-reference-gcp-hybrid.md)
 

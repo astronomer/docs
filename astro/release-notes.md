@@ -95,7 +95,7 @@ You can now use the following node instance types for worker nodes in GCP cluste
 - `n2-highcpu-48`  
 - `n2-highcpu-64`  
 
-For a list of all instance types available for GCP, see [Supported worker node pool instance types](resource-reference-gcp.md#supported-worker-node-pool-instance-types).
+For a list of all instance types available for GCP, see [Supported worker node pool instance types](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types).
 
 ### Additional improvements
 
@@ -423,7 +423,7 @@ You can now configure worker queues with the following `n2` worker types on Goog
 - `n2-highcpu-8`
 - `n2-highcpu-16`
 
-For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp.md#worker-node-size-resource-reference).
+For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp-hybrid.md#worker-node-size-resource-reference).
 
 ### Additional improvements
 
@@ -621,7 +621,7 @@ You can now access your Account Dashboard to manage your user account settings a
 
 ### Additional improvements
 
-- You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws.md#worker-node-types).
+- You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws-hybrid.md#worker-node-types).
 - New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
 
 ### Bug fixes
@@ -704,7 +704,7 @@ Astro's worker sizing enables a few benefits:
 - A higher level of reliability. This worker sizing model results in less volatility and a lower frequency of cluster autoscaling events, which lowers the frequency of errors such as zombie tasks and missing task logs.
 - The legacy **AU** unit is no longer applicable in the context of the worker. You only have to think about CPU, memory, and worker type.
 
-Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-deployment-resources.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws.md#worker-node-types), [GCP](resource-reference-gcp.md#worker-node-types), and [Azure](resource-reference-azure.md#worker-node-types) resource references.
+Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-deployment-resources.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#worker-node-types), [GCP](resource-reference-gcp-hybrid.md#worker-node-types), and [Azure](resource-reference-azure-hybrid.md#worker-node-types) resource references.
 
 ### New Maximum Tasks per Worker setting
 
@@ -732,7 +732,7 @@ Note that switching Organizations with the Astro CLI is not yet supported. For m
 
 You can now [create an Astro cluster on Azure](create-cluster.md) in Australia East (New South Wales).
 
-For a list of all Azure regions that Astro supports, see [Azure resource reference](resource-reference-azure.md#supported-regions).
+For a list of all Azure regions that Astro supports, see [Azure resource reference](resource-reference-azure-hybrid.md#supported-regions).
 
 ### New Google Cloud Platform regions
 
@@ -779,7 +779,7 @@ If your organization has [implemented an identity provider (IdP)](configure-idp.
 
 Astro now officially supports Astro clusters on AKS. This includes support for an initial set of AKS regions.
 
-For more information about the installation process and supported configurations, see [Install Astro on Azure](install-azure.md) and [Resource Reference Azure](resource-reference-azure.md).
+For more information about the installation process and supported configurations, see [Install Astro on Azure](install-azure.md) and [Resource Reference Azure](resource-reference-azure-hybrid.md).
 
 ### Bug fixes
 
@@ -841,7 +841,7 @@ You can now [create an Astro cluster on GCP](create-cluster.md) in the following
 - `northamerica-northeast1` (Montreal)
 - `us-west3` (Salt Lake City)
 
-For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ### Additional improvements
 
@@ -866,7 +866,7 @@ You can now [create an Astro cluster on GCP](create-cluster.md) in the following
 - `us-west2` (Los Angeles)
 - `us-west4` (Nevada)
 
-For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ## June 16, 2022
 
@@ -913,7 +913,7 @@ Specifically, you can now run the following commands with Deployment API keys:
 
 You can now [create an Astro cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
 
-For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ## May 26, 2022
 
@@ -958,7 +958,7 @@ This functionality is still early access and under active development. If you ha
 
 Astro now officially supports Astro clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as [Workload Identity](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) for secure connection to other GCP data services in your ecosystem.
 
-For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
+For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp-hybrid.md).
 
 ### Support for Organization-Level user invites
 
@@ -980,7 +980,7 @@ To widen our support for various use cases and levels of scale, we've expanded t
 - [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
 - [Memory Optimized R6i instances](https://aws.amazon.com/ec2/instance-types/r6i/)
 
-For a full list of node instance types that are supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws.md#node-instance-type). To modify an existing Astro cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
+For a full list of node instance types that are supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#node-instance-type). To modify an existing Astro cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
 
 ### Additional improvements
 
@@ -996,7 +996,7 @@ If your Astro cluster is configured with the `m5d.8xlarge` node type, for exampl
 
 ![Worker size error](/img/release-notes/worker-size-error.png)
 
-For a reference of all node instance types Astro supports and their corresponding worker size limits, see [Resources required for Astro on AWS](resource-reference-aws.md#node-instance-type), [Resources required for Astro on Azure](resource-reference-azure.md#node-instance-type), or  [Resources required for Astro on GCP](resource-reference-gcp.md#node-instance-type).
+For a reference of all node instance types Astro supports and their corresponding worker size limits, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#node-instance-type), [Resources required for Astro on Azure](resource-reference-azure-hybrid.md#node-instance-type), or  [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md#node-instance-type).
 
 ## April 14, 2022
 
@@ -1047,7 +1047,7 @@ You can now [create new Clusters](create-cluster.md) in:
 - `ap-northeast-3` (Osaka)  
 - `me-south-1` (Bahrain)
 
-For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws.md#aws-region).
+For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#aws-region).
 
 ### Additional improvements
 
@@ -1389,7 +1389,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 - You can now create new clusters in `us-east-2` and `ca-central-1`.
 - In the Deployment detail page, **Astro Runtime** now shows the version of Apache Airflow that the Deployment's Astro Runtime version is based on.
-- You can now create or modify an existing Astro cluster to run any size of the `t2`,`t3`, `m5`, or `m5d` [AWS EC2 instances](resource-reference-aws.md).
+- You can now create or modify an existing Astro cluster to run any size of the `t2`,`t3`, `m5`, or `m5d` [AWS EC2 instances](resource-reference-aws-hybrid.md).
 
 ### Bug fixes
 

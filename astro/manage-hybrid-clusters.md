@@ -9,11 +9,11 @@ description: Learn what you can configure on an Astro cluster.
 
 This document applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
-To create a cluster on Astro Hosted, see [Create a cluster](create-cluster.md).
+To create a cluster on Astro Hosted, see [Create a cluster](create-dedicated-cluster.md).
 
 :::
 
-An Astro Hybrid cluster runs your Astro Deployments in isolated namespaces on your cloud. Your organization might choose to have one or multiple clusters to meet certain networking, governance, or use case requirements. You can always start with one cluster and [create additional clusters](create-cluster.md) later. New clusters on Astro typically have default configurations that are suitable for standard use cases. You can request [Astronomer support](https://support.astronomer.io) to edit the configuration of an existing cluster. For example, you might need to:
+An Astro Hybrid cluster runs your Astro Deployments in isolated namespaces on your cloud. Your organization might choose to have one or multiple clusters to meet certain networking, governance, or use case requirements. You can always start with one cluster and [create additional clusters](#create-a-cluster) later. New clusters on Astro typically have default configurations that are suitable for standard use cases. You can request [Astronomer support](https://support.astronomer.io) to edit the configuration of an existing cluster. For example, you might need to:
 
 - Add a [worker type](#manage-worker-type), which creates a new [worker node pool](#about-worker-node-pools) in your cluster and allows your team to select that worker type in a Deployment.
 - Increase or decrease the maximum number of worker nodes for a given worker type that your cluster can scale-up to. 
@@ -52,7 +52,7 @@ To create a new Astro cluster on AWS for your Organization, submit a request to 
 - Your preferred max node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/20,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws.md).
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/20,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md).
 
 #### Additional set up for AWS regions that are disabled by default
 
@@ -126,7 +126,7 @@ To create a new Astro cluster on Azure for your Organization, submit a request t
 
 If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Network (VNet) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/19` is implemented.
 
-For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure.md).  
+For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure-hybrid.md).  
 
 ### GCP
 
@@ -139,7 +139,7 @@ To create a new Astro cluster on Google Cloud Platform (GCP) for your Organizati
 - Your preferred maximum node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp.md). 
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md). 
 
 ### Confirm cluster creation
 
@@ -189,7 +189,7 @@ Each worker type on Astro is configured with a node instance type that is define
 
 How your Airflow tasks use the capacity of a worker node depends on which executor is selected for your Deployment. With the Celery executor, each worker node runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead. With the Kubernetes executor, each worker node can run an unlimited number of Pods (one Pod per Airflow task) as long as the sum of all requests from each Pod doesn't exceed the total capacity of the node minus Astro's system overhead.
 
-To add a new node instance type, contact [Astronomer Support](https://cloud.support.astronomer.io). For the list of worker node pool instance types available on Astro, see [AWS supported worker node pool instance types](resource-reference-aws.md#supported-worker-node-pool-instance-types), [Azure supported worker node pool instance types](resource-reference-azure.md#supported-worker-node-pool-instance-types), or [GCP supported worker node pool instance types](resource-reference-gcp.md#supported-worker-node-pool-instance-types).
+To add a new node instance type, contact [Astronomer Support](https://cloud.support.astronomer.io). For the list of worker node pool instance types available on Astro, see [AWS supported worker node pool instance types](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [Azure supported worker node pool instance types](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types), or [GCP supported worker node pool instance types](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types).
 
 ### Configure maximum node count
 

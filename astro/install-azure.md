@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Azure'
-title: 'Install Astro on Azure'
+title: 'Install Astro Hybrid on Azure'
 id: install-azure
 sidebar_custom_props: { icon: 'img/azure.png' }
 toc_min_heading_level: 2
@@ -15,10 +15,15 @@ toc_max_heading_level: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-You have two options to install Astro on Azure:
+:::caution
 
-- Bring Your Own Cloud -  Create an Astro cluster in a dedicated Azure account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
-- Hosted - Create an Astro cluster in a dedicated Azure account that's hosted and owned by Astronomer. This removes the complexity of adding another Azure account to your network.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+
+To get started on Astro Hosted, see [Start a trial](trial.md).
+
+:::
+
+To install Astro Hybrid on Azure, Astronomer will create an Astro cluster in a dedicated Azure account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 
 To complete the installation process, you'll:
 
@@ -77,7 +82,7 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
     - `https://updates.astronomer.io/`
     - `https://install.astronomer.io/`
 
-For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure.md).
+For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure-hybrid.md).
 
 #### VNet peering prerequisites (Optional)
 
@@ -215,7 +220,7 @@ After you've prepared your environment for data plane activation, provide Astron
 - Optional. Your preferred maximum node count.
 - Optional. Your custom CIDR ranges for Astronomer service connections. The default is `172.20.0.0/19`.
 
-If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `CentralUS` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure.md).
+If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `CentralUS` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure-hybrid.md).
 
 ### Astronomer support creates the cluster
 
@@ -239,8 +244,8 @@ When providing hosting services, Astronomer adheres to industry best practices a
 
 The setup process assumes that you've already provided Astronomer support with the following information: 
 
-- Your preferred cluster installation region. See the supported region lists for [Azure](resource-reference-azure.md#supported-regions).
-- Optional. Your preferred worker instance type for your first cluster. See [Azure cluster configurations](resource-reference-azure.md#worker-node-pools).
+- Your preferred cluster installation region. See the supported region lists for [Azure](resource-reference-azure-hybrid.md#supported-regions).
+- Optional. Your preferred worker instance type for your first cluster. See [Azure cluster configurations](resource-reference-azure-hybrid.md#worker-node-pools).
 - Optional. Your VNet peering requirements for [Azure](install-azure#vnet-peering-prerequisites-optional).
 - The email address of your first Astro user.
 

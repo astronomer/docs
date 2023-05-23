@@ -56,7 +56,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 </TabItem>
 <TabItem value="azure">
 
-You cannot currently create dedicated Azure clusters from the Cloud UI. To create a dedicated Azure cluster, contact [Astronomer support](cloud.astronomer.io/support).
+You cannot currently create dedicated Azure clusters from the Cloud UI. If you are interested in creating a dedicated Azure cluster, contact [Astronomer support](cloud.astronomer.io/support).
 
 </TabItem>
 </Tabs>
