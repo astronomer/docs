@@ -37,7 +37,13 @@ When you use publicly accessible endpoints to connect Astro and GCP, traffic mov
 
 <TabItem value="VPC peering">
 
-Every Astro cluster runs in a dedicated Virtual Private Cloud (VPC). To set up a private connection between an Astro VPC and a GCP VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
+:::info 
+
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+
+:::
+
+VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
 To create a VPC peering connection between an Astro VPC and a GCP VPC, contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
 

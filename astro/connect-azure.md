@@ -43,7 +43,7 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 :::
 
-Every Astro cluster runs in a dedicated Virtual Network (VNet). To set up a private connection between an Astro VNet and an Azure VNet, you can create a VNet peering connection. VNet peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
+To set up a private connection between an Astro Virtual Network (VNet) and an Azure VNet, you can create a VNet peering connection. VNet peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
 To create a VNet peering connection between an Astro VNet and an Azure VNet, contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
 

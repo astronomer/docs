@@ -46,7 +46,7 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 :::
 
-Every Astro cluster runs in a dedicated Virtual Private Network (VPC). To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
+To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
 To create a VPC peering connection between an Astro VPC and an AWS VPC, contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
 

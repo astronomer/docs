@@ -39,32 +39,32 @@ Read the following document for a reference of our default resources as well as 
 
 ## Supported cluster regions
 
-Depending on how you installed Astro, you can host Astro clusters in the following Azure regions:
+You can host Astro Hybrid clusters in the following Azure regions:
 
-| Code               | Name               | Astro - Bring Your Own Cloud | Astro - Hosted      |
-| ------------------ | ------------------ | ---------------------------- | ------------------- |
-| `australiaeast`    | Australia East     | ✔️                            | ✔️                   |
-| `canadacentral`    | Canada Central     | ✔️                            |                     |
-| `centralindia`     | Central India      | ✔️                            |                     |
-| `centralus`        | Central US         | ✔️                            |                     |
-| `eastasia`         | East Asia          | ✔️                            |                     |
-| `eastus`           | East US            | ✔️                            |                     |
-| `eastus2`          | East US 2          | ✔️ ¹                          | ✔️                   |
-| `francecentral`    | France Central     | ✔️ ¹                          |                     |
-| `japaneast`        | Japan East         | ✔️                            | ✔️                   |
-| `koreacentral`     | Korea Central      | ✔️                            |                     |
-| `northeurope`      | North Europe       | ✔️                            | ✔️                   |
-| `southafricanorth` | South Africa North | ✔️                            |                     |
-| `southcentralus`   | South Central US   | ✔️                            |                     |
-| `southeastasia`    | South East Asia    | ✔️ ¹                          |                     |
-| `uksouth`          | UK South           | ✔️                            |                     |
-| `westeurope`       | West Europe        | ✔️  ¹                         | ✔️                   |
-| `westus2`          | West US 2          | ✔️ ¹                          | ✔️                   |
-| `westus3`          | West US 3          | ✔️                            |                     |
+| Code               | Name               | 
+| ------------------ | ------------------ | 
+| `australiaeast`    | Australia East     | 
+| `canadacentral`    | Canada Central     | 
+| `centralindia`     | Central India      | 
+| `centralus`        | Central US         | 
+| `eastasia`         | East Asia          | 
+| `eastus`           | East US            | 
+| `eastus2`          | East US 2          | 
+| `francecentral`    | France Central     | 
+| `japaneast`        | Japan East         | 
+| `koreacentral`     | Korea Central      | 
+| `northeurope`      | North Europe       | 
+| `southafricanorth` | South Africa North | 
+| `southcentralus`   | South Central US   | 
+| `southeastasia`    | South East Asia    | 
+| `uksouth`          | UK South           | 
+| `westeurope`       | West Europe        | 
+| `westus2`          | West US 2          | 
+| `westus3`          | West US 3          | 
 
 Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-¹ If you want to host Astro in a dedicated account owned by your Organization (Bring Your Own Cloud) in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/support). 
+¹ If you want to host Astro in a dedicated account owned by your Organization in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/support). 
 
 ## Supported Azure Database for PostgreSQL instance types
 

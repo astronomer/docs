@@ -35,18 +35,7 @@ When you've completed the installation process, Astronomer support creates a clu
 
 For more information about managing Azure subscriptions with the Azure CLI, see [How to manage Azure subscriptions with the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli).
 
-## Set up
-
-<Tabs
-    defaultValue="byoc"
-    groupId= "byoc"
-    values={[
-        {label: 'Bring Your Own Cloud', value: 'byoc'},
-        {label: 'Hosted', value: 'astronomer hosted data plane'},
-    ]}>
-<TabItem value="byoc">
-
-### Prerequisites
+## Prerequisites
 
 - A clean Azure subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 - An Azure AD user with the following role assignments:
@@ -84,7 +73,7 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
 
 For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure-hybrid.md).
 
-#### VNet peering prerequisites (Optional)
+### VNet peering prerequisites (Optional)
 
 To give Astro access to any Azure resources on a private network, you must create a VNet peering connection between Astronomer's VNet and the VNets for your broader network. 
 
@@ -105,7 +94,7 @@ Additionally, ensure that your Azure AD user has at least one of the following r
   
 From here, Astronomer support will set up the VNet connection to Astro.
 
-### Access Astro
+## Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
@@ -118,7 +107,7 @@ From here, Astronomer support will set up the VNet connection to Astro.
 
     If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-### Prepare for data plane activation
+## Prepare for data plane activation
 
 The data plane is a collection of Astro infrastructure components that run in your cloud and are managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
@@ -209,7 +198,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
 </TabItem>
 </Tabs>
 
-### Provide setup information to Astronomer support
+## Provide setup information to Astronomer support
 
 After you've prepared your environment for data plane activation, provide Astronomer support with the following information:
 
@@ -222,61 +211,13 @@ After you've prepared your environment for data plane activation, provide Astron
 
 If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `CentralUS` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure-hybrid.md).
 
-### Astronomer support creates the cluster
+## Astronomer support creates the cluster
 
 After you provide Astronomer support with the setup information for your organization, Astronomer support creates your first cluster on Azure.
 
 Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
 
-</TabItem>
-
-<TabItem value="astronomer hosted data plane">
-
-:::info
-
-This feature is currently Private Preview. Contact [Astronomer support](https://cloud.astronomer.io/support) to enable it.
-
-:::
-
-When providing hosting services, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
-
-### Prerequisites
-
-The setup process assumes that you've already provided Astronomer support with the following information: 
-
-- Your preferred cluster installation region. See the supported region lists for [Azure](resource-reference-azure-hybrid.md#supported-regions).
-- Optional. Your preferred worker instance type for your first cluster. See [Azure cluster configurations](resource-reference-azure-hybrid.md#worker-node-pools).
-- Optional. Your VNet peering requirements for [Azure](install-azure-hybrid.md#vnet-peering-prerequisites-optional).
-- The email address of your first Astro user.
-
-If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
-
-### Astronomer support creates the cluster
-
-Astronomer support creates your first Astro cluster in a dedicated Azure account after you've provided your setup information.
-
-Wait for confirmation that the installation is successful before you access Astro and create a Deployment.
-
-### Access Astro
-
-1. Optional. If you haven't created an Astronomer account, go to https://cloud.astronomer.io/ and create an account.
-
-2. Go to https://cloud.astronomer.io, enter your email address, and then click **Continue**.
-
-3. Select one of the following options to access the Cloud UI:
-
-    - Enter your password and click **Continue**.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
-    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
-    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
-
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
-
-</TabItem>
-
-</Tabs>
-
-### Create a Deployment and confirm the install
+## Create a Deployment and confirm the install
 
 When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). 
 

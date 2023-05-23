@@ -36,43 +36,43 @@ Read the following document for a reference of our default resources as well as 
 
 ## Supported cluster regions
 
-Depending on how you installed Astro, you can host Astro clusters in the following GCP regions:
+You can host Astro Hybrid clusters in the following GCP regions:
 
-| Code                      | Name                          | Astro - Bring Your Own Cloud | Astro - Hosted |
-| ------------------------- | ----------------------------- | ---------------------------- | -------------- |
-| `asia-east1`              | Taiwan, Asia                  | ✔️                            |                |
-| `asia-northeast1`         | Tokyo, Asia                   | ✔️                            | ✔️              |
-| `asia-northeast2`         | Osaka, Asia                   | ✔️                            |                |
-| `asia-northeast3`         | Seoul, Asia                   | ✔️                            |                |
-| `asia-south1`             | Mumbai, Asia                  | ✔️                            |                |
-| `asia-south2`             | Delhi, Asia                   | ✔️                            |                |
-| `asia-southeast1`         | Singapore, Asia               | ✔️                            |                |
-| `asia-southeast2`         | Jakarta, Asia                 | ✔️                            |                |
-| `australia-southeast1`    | Sydney, Australia             | ✔️                            | ✔️              |
-| `australia-southeast2`    | Melbourne, Australia          | ✔️                            |                |
-| `europe-central2`         | Warsaw, Europe                | ✔️                            |                |
-| `europe-north1`           | Finland, Europe               | ✔️                            |                |
-| `europe-southwest1`       | Madrid, Europe                | ✔️                            |                |
-| `europe-west1`            | Belgium, Europe               | ✔️                            | ✔️              |
-| `europe-west2`            | England, Europe               | ✔️                            | ✔️              |
-| `europe-west3`            | Frankfurt, Europe             | ✔️                            |                |
-| `europe-west4`            | Netherlands, Europe           | ✔️                            |                |
-| `europe-west6`            | Zurich, Europe                | ✔️                            |                |
-| `europe-west8`            | Milan, Europe                 | ✔️                            |                |
-| `europe-west9`            | Paris, Europe                 | ✔️                            |                |
-| `northamerica-northeast1` | Montreal, North America       | ✔️                            |                |
-| `northamerica-northeast2` | Toronto, North America        | ✔️                            |                |
-| `southamerica-east1`      | Sau Paolo, South America      | ✔️                            |                |
-| `southamerica-west1`      | Santiago, South America       | ✔️                            |                |
-| `us-central1`             | Iowa, North America           | ✔️                            | ✔️              |
-| `us-east1`                | South Carolina, North America | ✔️                            |                |
-| `us-east4`                | Virginia, North America       | ✔️                            | ✔️              |
-| `us-east5`                | Columbus, North America       | ✔️                            |                |
-| `us-south1`               | Dallas, North America         | ✔️                            |                |
-| `us-west1`                | Oregon, North America         | ✔️                            |                |
-| `us-west2`                | Los Angeles, North America    | ✔️                            |                |
-| `us-west3`                | Salt Lake City, North America | ✔️                            |                |
-| `us-west4`                | Nevada, North America         | ✔️                            |                |
+| Code                      | Name                          | 
+| ------------------------- | ----------------------------- |  
+| `asia-east1`              | Taiwan, Asia                  | 
+| `asia-northeast1`         | Tokyo, Asia                   |       
+| `asia-northeast2`         | Osaka, Asia                   |   
+| `asia-northeast3`         | Seoul, Asia                   |         
+| `asia-south1`             | Mumbai, Asia                  |               
+| `asia-south2`             | Delhi, Asia                   |          
+| `asia-southeast1`         | Singapore, Asia               |         
+| `asia-southeast2`         | Jakarta, Asia                 |              
+| `australia-southeast1`    | Sydney, Australia             |            
+| `australia-southeast2`    | Melbourne, Australia          |               
+| `europe-central2`         | Warsaw, Europe                |               
+| `europe-north1`           | Finland, Europe               |               
+| `europe-southwest1`       | Madrid, Europe                |               
+| `europe-west1`            | Belgium, Europe               |            
+| `europe-west2`            | England, Europe               |            
+| `europe-west3`            | Frankfurt, Europe             |               
+| `europe-west4`            | Netherlands, Europe           |               
+| `europe-west6`            | Zurich, Europe                |               
+| `europe-west8`            | Milan, Europe                 |               
+| `europe-west9`            | Paris, Europe                 |               
+| `northamerica-northeast1` | Montreal, North America       |               
+| `northamerica-northeast2` | Toronto, North America        |               
+| `southamerica-east1`      | Sau Paolo, South America      |               
+| `southamerica-west1`      | Santiago, South America       |               
+| `us-central1`             | Iowa, North America           |            
+| `us-east1`                | South Carolina, North America |               
+| `us-east4`                | Virginia, North America       |             
+| `us-east5`                | Columbus, North America       |               
+| `us-south1`               | Dallas, North America         |               
+| `us-west1`                | Oregon, North America         |               
+| `us-west2`                | Los Angeles, North America    |               
+| `us-west3`                | Salt Lake City, North America |               
+| `us-west4`                | Nevada, North America         |               
 
 Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
