@@ -22,6 +22,5 @@ Astro Deployments can securely connect to external data services so that you can
 
 ![Astro Hosted overview](/img/docs/architecture-overview.png)
 
-
-To learn more about Astro Hybrid architecture and features, see [LINK]
+To learn more about Astro Hybrid architecture and features, see [Astro Hybrid overview](hybrid-overview.md)
 
