@@ -186,7 +186,7 @@ For more information, see [Book office hours in the Cloud UI](astro-support.md#b
 
 ### Astro no longer requires administrator access on AWS
 
-Astro no longer requires administrator permissions for its dedicated AWS account. Instead, Astro now assumes a cross-account IAM role with the minimum necessary permissions for running and managing clusters. See [Install Astro on AWS](install-aws.md) for more information.
+Astro no longer requires administrator permissions for its dedicated AWS account. Instead, Astro now assumes a cross-account IAM role with the minimum necessary permissions for running and managing clusters. See [Install Astro on AWS](install-aws-hybrid.md) for more information.
 
 ### IdP-initiated logins through the Okta dashboard
 

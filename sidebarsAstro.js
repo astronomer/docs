@@ -152,7 +152,7 @@ module.exports = {
                 title: 'Install Astro Hybrid',
                 description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
               },
-              items: ["install-aws", "install-azure", "install-gcp"],
+              items: ["install-aws-hybrid", "install-azure-hybrid", "install-gcp-hybrid"],
             },
             {
               type: "category",

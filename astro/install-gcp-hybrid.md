@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'GCP'
 title: 'Install Astro on GCP'
-id: install-gcp
+id: install-gcp-hybrid
 description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
 toc_min_heading_level: 2

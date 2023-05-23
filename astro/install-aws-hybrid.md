@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'AWS'
 title: 'Install Astro Hybrid on AWS'
-id: install-aws
+id: install-aws-hybrid
 sidebar_custom_props: { icon: 'img/aws.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2
@@ -211,7 +211,7 @@ The setup process assumes that you've already provided Astronomer support with t
 
 - Your preferred cluster installation region. See the supported region lists for [AWS](resource-reference-aws-hybrid.md#aws-region).
 - Optional. Your preferred worker instance type for your first cluster. See [AWS cluster configurations](resource-reference-aws-hybrid.md#worker-node-types).
-- Optional. Your VPC peering requirements for [AWS](install-aws.md#vpc-peering-prerequisites-optional-2).
+- Optional. Your VPC peering requirements for [AWS](install-aws-hybrid.md#vpc-peering-prerequisites-optional-2).
 - The email address of your first Astro user.
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative.

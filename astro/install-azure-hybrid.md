@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Azure'
 title: 'Install Astro Hybrid on Azure'
-id: install-azure
+id: install-azure-hybrid
 sidebar_custom_props: { icon: 'img/azure.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2

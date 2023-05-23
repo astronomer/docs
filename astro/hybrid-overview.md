@@ -19,6 +19,6 @@ For more information about Astro architecture, contact [Astronomer support](http
 
 ## Related documentation
 
-- [Install Astro Hybrid on AWS](install-aws.md)
-- [Install Astro Hybrid on GCP](install-gcp.md)
-- [Install Astro Hybrid on Azure](install-azure.md)
+- [Install Astro Hybrid on AWS](install-aws-hybrid.md)
+- [Install Astro Hybrid on GCP](install-gcp-hybrid.md)
+- [Install Astro Hybrid on Azure](install-azure-hybrid.md)
