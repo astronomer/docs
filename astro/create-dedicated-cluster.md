@@ -4,6 +4,9 @@ title: 'Create a dedicated cluster'
 id: 'create-dedicated-cluster'
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 A _dedicated cluster_ exclusively runs Deployments from your Organization within a single-tenant environment on Astronomer's cloud. Dedicated clusters provide more configuration options for regions, connectivity, and security than standard clusters. You might want to create a dedicated cluster if:
 
 - You need to connect Astronomer's cloud to an external cloud using VPC peering. Standard clusters are compatible with all other supported connection types.
