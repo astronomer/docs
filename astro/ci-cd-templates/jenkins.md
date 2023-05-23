@@ -145,6 +145,57 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
     This `Jenkinsfile` triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
 </TabItem>
+
+<TabItem value="custom">
+
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+
+#### Configuration requirements
+
+- An Astro project that requires additional build-time arguments to build the Runtime image.
+
+1. In your Jenkins pipeline configuration, add the following parameters:
+
+    - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
+    - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
+    - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
+
+    Be sure to set the values for your API credentials as secret.
+
+2. At the root of your Astro Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+
+    <pre><code parentName="pre">{`pipeline {
+        agent any
+        stages {
+            stage('Deploy to Astronomer') {
+                when {
+                    expression {
+                        return env.GIT_BRANCH == "origin/main"
+                    }
+                }
+                steps {
+                    checkout scm
+                    sh '''
+                    export astro_id=$(date +%Y%m%d%H%M%S)
+                    docker build -f Dockerfile --progress=plain --build-arg <your-build-arguments> -t $astro_id .
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                    tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                    ./astro deploy --image-name $astro_id
+                    '''
+                }
+            }
+        }
+        post {
+            always {
+                cleanWs()
+            }
+        }
+    }`}</code></pre>
+
+    This `Jenkinsfile` triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
+
+</TabItem>
+
 </Tabs>
 
 ## DAG-based templates
