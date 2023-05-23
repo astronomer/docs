@@ -38,7 +38,7 @@ See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-
 The following updates have been made to documentation to accommodate the new Astro Hosted product:
 
 - Astro Hybrid documentation now has a dedicated menu under "Administration" that contains all docs related to Hybrid installation and cluster management. [LINK]
-- All other docs now assume Astro Hosted by default. If a feature has a functionality difference between Hosted and Hybrid, the documentation for that feature will include a note about how that setup differs for Hybrid.
+- All other docs now assume Astro Hosted by default. If a feature is functionally different between Hosted and Hybrid, the documentation for that feature will include a note about how that setup differs for Hybrid. Look for the blue **Alternative Astro Hybrid setup** notes throughout documentation.
 
 ## May 2, 2023
 
