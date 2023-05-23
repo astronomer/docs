@@ -18,17 +18,6 @@ The Astro role hierarchies in order of inheritance are:
 
 Additionally, Organization Owners inherit Workspace Admin permissions for all Workspaces in the Organization and only Organization Owners can create Teams.
 
-## Roles and Teams
-
-There are two ways to define user roles for a Workspace:
-
-- Define the individual user role when you [add a user](/astro/add-user.md#add-a-user-to-a-workspace) to a Workspace 
-- Assign a Workspace role to a [team of users](ADD LINK)
-
-If the user role that you assign at the Team level is different from what you assigned the user individually, then Astronomer recognizes the more privileged role.
-
-For example, if an Organization Owner first adds a user to a Workspace as an **Organization Member** and a **Workspace Member**. Then, they assign this user to a Team of users with **Workspace Admin** privileges, this user now has **Workspace Admin** privileges for any Workspaces the Team is added to.
-
 ## Organization roles
 
 An Organization role grants a user or API token some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace whereas an API token's access is based on it's scope. The following table lists the available Organization roles:
@@ -78,3 +67,14 @@ A Workspace role grants a user or API token some level of access to a specific W
 | Create, update and delete Workspace API tokens                         |                      |                      | ✔️                   |
 
 To manage a user's Workspace permissions, see [Manage users](add-user.md#add-a-user-to-a-workspace).
+
+## Roles and Teams
+
+There are two ways to define user roles for a Workspace:
+
+- Define the individual user role when you [add a user](/astro/add-user.md#add-a-user-to-a-workspace) to a Workspace 
+- Assign a Workspace role to a [team of users](ADD LINK)
+
+If the user role that you assign at the Team level is different from what you assigned the user individually, then Astronomer recognizes the more privileged role.
+
+For example, if an Organization Owner first adds a user to a Workspace as an **Organization Member** and a **Workspace Member**. Then, they assign this user to a Team of users with **Workspace Admin** privileges, this user now has **Workspace Admin** privileges for any Workspaces the Team is added to.
