@@ -16,8 +16,8 @@ body:
         - Integrations
         - References
         - I am not sure where this best fits
-      validations:
-        required: true
+    validations:
+      required: true
   - type: dropdown
     id: impact
     attributes:
@@ -27,14 +27,14 @@ body:
         - Additional information on a feature or behavior already described
         - Add a previously not described Airflow feature or behavior to an existing page
         - Add a new page
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
       label: Describe your Learn request. If you want to add information to an existing page, please provide the link to it!
-      validations:
-        required: true
+    validations:
+      required: true
   - type: textarea
     id: description
     attributes:
@@ -50,7 +50,6 @@ body:
       label: Airflow Version
       description: Airflow version in which the feature/behavior was added. Please provide for features which are upcoming.
       placeholder: ex. 2.6.1
-  - type: 
   - type: textarea
     id: notes
     attributes:
