@@ -41,7 +41,7 @@ You can assign Task A to a worker queue that is configured to use the A20 worker
 You can configure each worker queue on Astro with the following settings:
 
 - **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
-- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information about worker types, see [LINK]
+- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information about worker types, see [Astro Hosted resource reference](resource-reference-hosted.md).
 - **Concurrency:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. The default for your worker type is suitable for most use cases.
 - **Min # Workers / Max # Workers**: The minimum and maximum number of workers that can run at a time. The number of workers autoscales based on **Concurrency** and the current number of tasks in a `queued` or `running` state. 
 
@@ -51,13 +51,13 @@ On Astro Hybrid clusters, worker type is defined as a node instance type that is
 
 Your Organization can enable up to 10 additional different worker types for each Hybrid cluster. After a worker type is enabled on an Astro Hybrid cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
-1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws.md#worker-node-types), [Azure](resource-reference-azure.md#worker-node-size-resource-reference), or [GCP](resource-reference-gcp.md#worker-node-size-resource-reference).
+1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws.md#worker-node-types), [Azure](resource-reference-azure.md#worker-node-size-resource-reference), or [GCP resource references](resource-reference-gcp.md#worker-node-size-resource-reference).
 2. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information: 
   
     - The name of your cluster. 
     - The name of the worker type(s) you want to enable for your cluster. For example, `m6i.2xlarge`.
 
-For more information on requesting cluster changes, see [LINK].
+For more information on requesting cluster changes, see [Manage Hybrid clusters](manage-hybrid-clusters.md).
 
 :::
 
