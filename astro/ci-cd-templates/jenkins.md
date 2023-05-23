@@ -43,11 +43,13 @@ Each CI/CD template implementation might have additional requirements.
 
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
-1. In your Jenkins pipeline configuration, add the following parameters:
+1. In your Jenkins pipeline configuration, add the following environment variables:
 
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
     - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
+
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**. To see Jenkins documentation on environment variables click [here](https://www.jenkins.io/doc/pipeline/tour/environment/)
 
     Be sure to set the values for your API credentials as secret.
 
@@ -96,7 +98,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
     - `DEV_ASTRONOMER_KEY_SECRET`: Your Development Deployment API key secret
     - `DEV_DEPLOYMENT_ID`: The Deployment ID of your Development Deployment
 
-    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**.
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**. To see Jenkins documentation on environment variables click [here](https://www.jenkins.io/doc/pipeline/tour/environment/)
 
     Be sure to set the values for your API credentials as secret.
 
@@ -154,11 +156,13 @@ If your Astro project requires additional build-time arguments to build an image
 
 - An Astro project that requires additional build-time arguments to build the Runtime image.
 
-1. In your Jenkins pipeline configuration, add the following parameters:
+1. In your Jenkins pipeline configuration, add the following environment variables:
 
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
     - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
+
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**. To see Jenkins documentation on environment variables click [here](https://www.jenkins.io/doc/pipeline/tour/environment/)
 
     Be sure to set the values for your API credentials as secret.
 
