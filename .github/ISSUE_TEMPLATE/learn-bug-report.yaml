@@ -1,6 +1,6 @@
 name: Request a fix in Learn content
 description: Any request related to existing documentation that contains a bug or is misleading
-labels: ["error/wrong-info", ""error/misleading", "area/learn"]
+labels: ["error/wrong-info", "error/misleading", "area/learn"]
 assignees:
   - kentdanas
   - TJaniF
