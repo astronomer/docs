@@ -21,7 +21,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
 
-## May 22, 2023
+## May 23, 2023
 
 ### Introducing Astro Hosted and Hybrid
 
