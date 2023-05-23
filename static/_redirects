@@ -256,6 +256,17 @@
 /software/upgrade-to-0-25 /software/upgrade-astronomer 301
 /software/0.25/upgrade-to-0-25 /software/0.25/upgrade-astronomer 301
 
+
+# Hosted redirects
+/astro/resource-reference-gcp /astro/resource-reference-gcp-hybrid
+/astro/resource-reference-aws /astro/resource-reference-aws-hybrid
+/astro/resource-reference-azure /astro/resource-reference-azure-hybrid
+/astro/install-aws /astro/install-aws-hybrid
+/astro/install-gcp /astro/install-gcp-hybrid
+/astro/install-azure /astro/install-azure-hybrid
+/astro/modify-cluster /astro/manage-hybrid-clusters
+/astro/create-cluster /astro/create-hybrid-cluster
+
 # redirect links to renamed files
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301

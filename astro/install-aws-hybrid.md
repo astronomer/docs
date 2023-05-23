@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'AWS'
-title: 'Install Astro on AWS'
-id: install-aws
+title: 'Install Astro Hybrid on AWS'
+id: install-aws-hybrid
 sidebar_custom_props: { icon: 'img/aws.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2
@@ -15,14 +15,19 @@ toc_max_heading_level: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Astro data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Service (EKS). You have two options to install Astro on AWS:
+:::caution
 
-- Bring Your Own Cloud -  Create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
-- Hosted - Create an Astro cluster in a dedicated AWS account that's hosted and owned by Astronomer. This removes the complexity of adding another AWS account to your network.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
-With the two options, the user experience is identical and Astronomer is responsible for managing Astro. The differences between the two options are security and networking.
+To get started on Astro Hosted, see [Start a trial](trial.md).
 
-For a list of the AWS resources and configurations that Astronomer supports, see [AWS resource reference](resource-reference-aws.md). For more information about the shared responsibility model, see [Shared responsibility model](shared-responsibility-model.md).
+:::
+
+The Astro Hybrid data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Service (EKS). 
+
+To install Astro, Astronomer will create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
+
+For a list of the AWS resources and configurations that Astronomer supports, see [AWS resource reference](resource-reference-aws-hybrid.md). For more information about the shared responsibility model, see [Shared responsibility model](shared-responsibility-model.md).
 
 ## Set up
 
@@ -159,9 +164,9 @@ After creating the AWS account, provide Astronomer with the following informatio
 - Your preferred maximum node count.
 - An instance type for the Airflow metadata database.
 
-If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` and a default `db.m6g.large` Amazon RDS instance type. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
+If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` and a default `db.m6g.large` Amazon RDS instance type. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws-hybrid.md).
 
-To provision additional clusters after completing your initial installation, see [Create a cluster](create-cluster.md).
+To provision additional clusters after completing your initial installation, see [Create a cluster](manage-hybrid-clusters.md#create-a-cluster).
 
 :::caution
 
@@ -169,7 +174,7 @@ Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
 
-If you're setting up your first cluster in any of these regions, you need to complete the additional setup described in [Create a cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
+If you're setting up your first cluster in any of these regions, you need to complete the additional setup described in [Create a cluster](manage-hybrid-clusters.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 
 :::
 
@@ -204,9 +209,9 @@ When providing hosted services, Astronomer adheres to industry best practices an
 
 The setup process assumes that you've already provided Astronomer support with the following information: 
 
-- Your preferred cluster installation region. See the supported region lists for [AWS](resource-reference-aws.md#aws-region).
-- Optional. Your preferred worker instance type for your first cluster. See [AWS cluster configurations](resource-reference-aws.md#worker-node-types).
-- Optional. Your VPC peering requirements for [AWS](install-aws.md#vpc-peering-prerequisites-optional-2).
+- Your preferred cluster installation region. See the supported region lists for [AWS](resource-reference-aws-hybrid.md#aws-region).
+- Optional. Your preferred worker instance type for your first cluster. See [AWS cluster configurations](resource-reference-aws-hybrid.md#worker-node-types).
+- Optional. Your VPC peering requirements for [AWS](install-aws-hybrid.md#vpc-peering-prerequisites-optional-2).
 - The email address of your first Astro user.
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative.

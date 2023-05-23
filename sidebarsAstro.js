@@ -14,17 +14,17 @@ module.exports = {
       label: 'Overview',
       link: { type: 'doc', id: 'overview' },
       items: [
-        'features',
         'astro-architecture',
+        'features',
       ],
     },
     {
       type: "category",
       label: "Get started",
       items: [
-        'trial', 
-        'log-in-to-astro', 
+        "trial",
         "create-first-DAG",
+        'log-in-to-astro', 
         {
           type: "category",
           label: "Migrate to Astro",
@@ -95,6 +95,11 @@ module.exports = {
         "environment-variables",
         "secrets-backend",
         "manage-deployments-as-code",
+        {
+          type: "category",
+          label: "Connect to external resources",
+          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
+        },       
       ],
     },
     {
@@ -130,8 +135,7 @@ module.exports = {
           type: "category",
           label: "Manage clusters",
           items: [
-            "create-cluster",
-            "modify-cluster",
+            "create-dedicated-cluster",
             "resource-reference-hosted",
           ],
         },
@@ -148,7 +152,7 @@ module.exports = {
                 title: 'Install Astro Hybrid',
                 description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
               },
-              items: ["install-aws", "install-azure", "install-gcp"],
+              items: ["install-aws-hybrid", "install-azure-hybrid", "install-gcp-hybrid"],
             },
             {
               type: "category",
@@ -161,8 +165,7 @@ module.exports = {
               },
               items: ["connect-aws", "connect-azure", "connect-gcp"],
             },
-            "create-hybrid-cluster",
-            "modify-hybrid-cluster",
+            "manage-hybrid-clusters",
             {
               type: "category",
               label: "Hybrid cluster settings reference",
@@ -238,6 +241,11 @@ module.exports = {
       type: "doc",
       label: "Install the CLI",
       id: "cli/install-cli",
+    },
+    {
+      type: "doc",
+      label: "Get started with the CLI",
+      id: "cli/get-started-cli",
     },
     {
       type: "doc",

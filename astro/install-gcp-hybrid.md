@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'GCP'
 title: 'Install Astro on GCP'
-id: install-gcp
+id: install-gcp-hybrid
 description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
 toc_min_heading_level: 2
@@ -11,10 +11,15 @@ toc_max_heading_level: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP). You have two options to install Astro on GCP:
+:::caution
 
-- Bring Your Own Cloud -  Create an Astro cluster in a dedicated GCP account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
-- Hosted - Create an Astro cluster in a dedicated GCP account that's hosted and owned by Astronomer. This removes the complexity of adding another GCP account to your network.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+
+To get started on Astro Hosted, see [Start a trial](trial.md).
+
+:::
+
+To install Astro Hybrid on GCP, Astronomer will create an Astro cluster in a dedicated GCP account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 
 To complete the installation process, you'll:
 
@@ -55,7 +60,7 @@ For more information about managing Google Cloud projects, see [GCP documentatio
     - `https://updates.astronomer.io/`
     - `https://install.astronomer.io/`
 
-For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
+For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp-hybrid.md).
 
 #### VPC peering prerequisites (optional)
 
@@ -124,7 +129,7 @@ Once you've activated your data plane, provide Astronomer with:
 - Your preferred maximum node count.
 - (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
 
-If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with a node pool of `e2-standard-4` nodes. For more information, see [GCP resource reference](resource-reference-gcp.md).
+If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with a node pool of `e2-standard-4` nodes. For more information, see [GCP resource reference](resource-reference-gcp-hybrid.md).
 
 #### Provide VPC peering information (Optional)
 
@@ -162,9 +167,9 @@ When providing hosting services, Astronomer adheres to industry best practices a
 
 The setup process assumes that you've already provided Astronomer support with the following information: 
 
-- Your preferred cluster installation region. See the supported region lists for [GCP](resource-reference-gcp.md#supported-regions).
-- Optional. Your preferred worker instance type for your first cluster. See [GCP cluster configurations](resource-reference-gcp.md#supported-cluster-configurations).
-- Optional. Your VPC peering requirements for [GCP](install-gcp#vpc-peering-with-astronomer).
+- Your preferred cluster installation region. See the supported region lists for [GCP](resource-reference-gcp-hybrid.md#supported-regions).
+- Optional. Your preferred worker instance type for your first cluster. See [GCP cluster configurations](resource-reference-gcp-hybrid.md#supported-cluster-configurations).
+- Optional. Your VPC peering requirements for [GCP](install-gcp-hybrid.md#vpc-peering-with-astronomer).
 - The email address of your first Astro user.
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
