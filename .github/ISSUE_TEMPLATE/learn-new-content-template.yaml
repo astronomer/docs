@@ -1,4 +1,4 @@
-name: Request new Learn content 
+name: Request updates or new content in Learn
 description: New or updated content on an existing Airflow feature or use case
 labels: ["kind/enhancement", "area/learn"]
 assignees:
