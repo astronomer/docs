@@ -19,6 +19,14 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 ## Astro CLI 1.15.0
 
+Release date: May 19, 2023
+
+### Bug fixes 
+
+- Fixed an issue where you could not create a Deployment on a standard Hosted cluster.
+
+## Astro CLI 1.15.0
+
 Release date: May 18, 2023
 
 ### New commands to manage Airflow resources on Deployments
