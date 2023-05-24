@@ -59,7 +59,6 @@ On Astro, Airflow task logs are stored in your cluster. On Amazon Web Services (
 
 On clusters hosted in your own cloud, task logs are stored indefinitely. On clusters hosted in Astronomer's cloud, task logs are hosted for 90 days. The task log retention policy is not currently configurable.
 
-
 To access task logs from the Cloud UI:
 
 1. In the Cloud UI, select a Workspace.
