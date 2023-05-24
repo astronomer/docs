@@ -1,5 +1,5 @@
 name: Request new Learn content 
-description: New content on an existing Airflow feature or behavior
+description: New or updated content on an existing Airflow feature or use case
 labels: ["kind/enhancement", "area/learn"]
 assignees:
   - kentdanas
@@ -43,8 +43,8 @@ body:
   - type: input
     id: due_date
     attributes:
-      label: Due date
-      description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
+      label: Desired publish date
+      description: For example, is there a particular release, relevant event, etc. that this should be coordinated with?
   - type: input
     id: airflow_version
     attributes:
