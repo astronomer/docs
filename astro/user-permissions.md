@@ -5,7 +5,7 @@ id: user-permissions
 description: Learn about Astronomer's RBAC system and how to assign roles to users.
 ---
 
-To better protect your data pipelines and cloud infrastructure, Astro provides role based access control (RBAC) for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Organization Admins can create _Astro Teams_ of individual users, and then assign those teams of users the same Workspace role level. Role based access control is not available for Deployments.
+To better protect your data pipelines and cloud infrastructure, Astro provides role based access control (RBAC) for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](add-user.md#make-a-team), which apply the same Workspace role to a group of users. Role based access control is not available for Deployments.
 
 You can also apply roles to API tokens to limit the scope of their actions in CI/CD and automation pipelines. See [Manage Deployments as code](manage-deployments-as-code.md).
 
@@ -16,7 +16,7 @@ The Astro role hierarchies in order of inheritance are:
 - Organization Owner > Organization Billing Admin > Organization Member 
 - Workspace Admin > Workspace Editor > Workspace Member
 
-Additionally, Organization Owners inherit Workspace Admin permissions for all Workspaces in the Organization and only Organization Owners can create Teams.
+Additionally, Organization Owners inherit Workspace Admin permissions for all Workspaces in the Organization.
 
 ## Organization roles
 
@@ -68,13 +68,13 @@ A Workspace role grants a user or API token some level of access to a specific W
 
 To manage a user's Workspace permissions, see [Manage users](add-user.md#add-a-user-to-a-workspace).
 
-## Roles and Teams
+## User roles and Team roles
 
-There are two ways to define user roles for a Workspace:
+There are two ways to define a user's role in a Workspace:
 
-- Define the individual user role when you [add a user](/astro/add-user.md#add-a-user-to-a-workspace) to a Workspace 
-- Assign a Workspace role to a [team of users](ADD LINK)
+- Define the individual user role when you [add a user](/astro/add-user.md#add-a-user-to-a-workspace) to a Workspace.
+- Assign a Workspace role to a [Team](/astro/add-user.md#add-a-team-to-a-workspace).
 
-If the user role that you assign at the Team level is different from what you assigned the user individually, then Astronomer recognizes the more privileged role.
+If a user has permissions to a Workspace both as an individual and as a member of a Team, then Astronomer recognizes the more privileged role.
 
-For example, if an Organization Owner first adds a user to a Workspace as an **Organization Member** and a **Workspace Member**. Then, they assign this user to a Team of users with **Workspace Admin** privileges, this user now has **Workspace Admin** privileges for any Workspaces the Team is added to.
+For example, if a user belongs to a Workspace as a **Workspace Member**, but also belongs to a Team in the Workspace with **Workspace Admin** privileges, then the user has **Workspace Admin** privileges in the Workspace.
