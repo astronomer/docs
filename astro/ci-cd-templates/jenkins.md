@@ -168,8 +168,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 2. At the root of your Astro Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-```text
-{`pipeline {
+<pre><code parentName="pre">{`pipeline {
         agent any
         stages {
             stage('Deploy to Astronomer') {
@@ -181,11 +180,11 @@ If your Astro project requires additional build-time arguments to build an image
                 steps {
                     checkout scm
                     sh '''
-                    export astro_id=$(date +%Y%m%d%H%M%S)
-                    docker build -f Dockerfile --progress=plain --build-arg <your-build-arguments> -t $astro_id .
+                    export astro_id=${siteVariables.jenkinsenv3}
+                    docker build -f Dockerfile --progress=plain --build-arg <your-build-arguments> -t ${siteVariables.jenkinsenv4} .
                     curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
                     tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
-                    ./astro deploy --image-name $astro_id
+                    ./astro deploy --image-name ${siteVariables.jenkinsenv4}
                     '''
                 }
             }
@@ -195,8 +194,7 @@ If your Astro project requires additional build-time arguments to build an image
                 cleanWs()
             }
         }
-    }`}
-    ```
+    }`}</code></pre>
 
     This `Jenkinsfile` triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
