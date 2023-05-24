@@ -14,17 +14,17 @@ module.exports = {
       label: 'Overview',
       link: { type: 'doc', id: 'overview' },
       items: [
-        'features',
         'astro-architecture',
+        'features',
       ],
     },
     {
       type: "category",
       label: "Get started",
       items: [
-        'trial', 
-        'log-in-to-astro', 
+        "trial",
         "create-first-DAG",
+        'log-in-to-astro', 
         {
           type: "category",
           label: "Migrate to Astro",
@@ -96,6 +96,11 @@ module.exports = {
         "environment-variables",
         "secrets-backend",
         "manage-deployments-as-code",
+        {
+          type: "category",
+          label: "Connect to external resources",
+          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
+        },       
       ],
     },
     {
@@ -123,18 +128,19 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Install Astro",
-          link: {
-            type: 'generated-index',
-            title: 'Install Astro',
-            description: 'Install Astro on the Astronomer-hosted cloud or your existing cloud instance.'
-          },
-          items: ["install-aws", "install-azure", "install-gcp"],
-        },
-        {
-          type: "category",
-          label: "User access",
-          items: ["configure-idp","add-user", "user-permissions", "manage-domains"],
+          label: "Manage Organizations",
+          items: [
+            {
+              type: "category",
+              label: "User access",
+              items: [
+                "configure-idp",
+                "add-user", 
+                "user-permissions", 
+                "manage-domains"],
+            },
+            "organization-api-tokens",
+          ],
         },
         {
           type: "category",
@@ -145,35 +151,42 @@ module.exports = {
           type: "category",
           label: "Manage clusters",
           items: [
-            "create-cluster",
-            "modify-cluster",
-            {
-              type: "category",
-              label: "Cluster settings reference",
-              link: {
-                type: "generated-index",
-                title: "Cluster settings reference",
-                description:
-                  "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
-              },
-              items: [
-                "resource-reference-aws",
-                "resource-reference-azure",
-                "resource-reference-gcp",
-              ],
-            },
+            "create-dedicated-cluster",
+            "resource-reference-hosted",
           ],
         },
         {
           type: "category",
-          label: "Connect Astro",
-          link: {
-            type: "generated-index",
-            title: "Connect Astro to external data sources",
-            description:
-              "Connect Astro to external data sources. A connection to AWS, Azure, or GCP allows Astro to access data stored on your AWS, Azure, or GCP instances and is a necessary step to running pipelines in a production environment.",
-          },
-          items: ["connect-aws", "connect-azure", "connect-gcp"],
+          label: "Manage Astro Hybrid",
+          items: [
+            "hybrid-overview",
+            {
+              type: "category",
+              label: "Install Astro Hybrid",
+              link: {
+                type: 'generated-index',
+                title: 'Install Astro Hybrid',
+                description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
+              },
+              items: ["install-aws-hybrid", "install-azure-hybrid", "install-gcp-hybrid"],
+            },
+            "manage-hybrid-clusters",
+            {
+              type: "category",
+              label: "Hybrid cluster settings reference",
+              link: {
+                type: "generated-index",
+                title: "Astro Hybrid cluster settings reference",
+                description:
+                  "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
+              },
+              items: [
+                "resource-reference-aws-hybrid",
+                "resource-reference-azure-hybrid",
+                "resource-reference-gcp-hybrid",
+              ],
+            },
+          ],
         },
       ],
     },
@@ -202,21 +215,6 @@ module.exports = {
           items: [
             "runtime-image-architecture",
             "runtime-version-lifecycle-policy",
-          ],
-        },
-        {
-          type: "category",
-          label: "Cluster settings",
-          link: {
-            type: "generated-index",
-            title: "Cluster settings reference",
-            description:
-              "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
-          },
-          items: [
-            "resource-reference-aws",
-            "resource-reference-azure",
-            "resource-reference-gcp",
           ],
         },
         'platform-variables',
@@ -248,6 +246,11 @@ module.exports = {
       type: "doc",
       label: "Install the CLI",
       id: "cli/install-cli",
+    },
+    {
+      type: "doc",
+      label: "Get started with the CLI",
+      id: "cli/get-started-cli",
     },
     {
       type: "doc",
@@ -293,11 +296,41 @@ module.exports = {
           label: "astro deployment",
           items: [
             'cli/astro-deployment-airflow-upgrade',
+            {
+              type: "category",
+              label: "astro deployment airflow-variable",
+              items: [
+                'cli/astro-deployment-airflow-variable-copy',
+                'cli/astro-deployment-airflow-variable-create',
+                'cli/astro-deployment-airflow-variable-list',
+                'cli/astro-deployment-airflow-variable-update',
+              ],
+            },
+            {
+              type: "category",
+              label: "astro deployment connection",
+              items: [
+                'cli/astro-deployment-connection-copy',
+                'cli/astro-deployment-connection-create',
+                'cli/astro-deployment-connection-list',
+                'cli/astro-deployment-connection-update',
+              ],
+            },
             'cli/astro-deployment-create',
             'cli/astro-deployment-delete',
             'cli/astro-deployment-inspect',
             'cli/astro-deployment-list',
             'cli/astro-deployment-logs',
+            {
+              type: "category",
+              label: "astro deployment pool",
+              items: [
+                'cli/astro-deployment-pool-copy',
+                'cli/astro-deployment-pool-create',
+                'cli/astro-deployment-pool-list',
+                'cli/astro-deployment-pool-update',
+              ],
+            },
             'cli/astro-deployment-runtime-upgrade',
             'cli/astro-deployment-service-account',
             'cli/astro-deployment-team',

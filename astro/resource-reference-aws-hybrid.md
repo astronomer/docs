@@ -1,7 +1,7 @@
 ---
-sidebar_label: "AWS cluster settings"
-title: "AWS cluster settings"
-id: resource-reference-aws
+sidebar_label: "AWS Hybrid cluster settings"
+title: "AWS Hybrid cluster settings"
+id: resource-reference-aws-hybrid
 description: Reference of all supported configurations for new Astro clusters on Amazon Web Services.
 sidebar_custom_props: { icon: "img/aws.png" }
 ---
@@ -10,6 +10,14 @@ sidebar_custom_props: { icon: "img/aws.png" }
   <meta name="description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
   <meta name="og:description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
 </head>
+
+:::caution
+
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+
+To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
+
+:::
 
 Unless otherwise specified, new clusters on Astro are created with a set of default AWS resources that should be suitable for most use cases.
 
@@ -20,10 +28,10 @@ Read the following document for a reference of our default resources as well as 
 | Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable                                                                                         |
 | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | [EKS Cluster](https://aws.amazon.com/eks)                                                           | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                                                            | 1x                                            |                                                                                                      |
-| Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | Yes. See [Manage worker node pools](modify-cluster.md#about-worker-node-pools).                     |
+| Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | Yes. See [Manage worker node pools](manage-hybrid-clusters.md#about-worker-node-pools).                     |
 | Airflow node pool                                                                                   | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of m5.xlarge nodes                    |                                                                                                      |
 | Astro system node pool                                                                              | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all other system components required in Astro. The availability zone determines how many nodes are created.  This node pool is fully managed by Astronomer.                                                                                                         | 1x pool of m5.xlarge nodes                    |                                                                                                      |
-| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster. All RDS instances on Astro are multi-AZ.                                                                                                                                                                                                                      | 1x db.m6g.large                                | Yes. See [Configure your relational database](modify-cluster.md#configure-a-database-instance-type). |
+| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster. All RDS instances on Astro are multi-AZ.                                                                                                                                                                                                                      | 1x db.m6g.large                                | Yes. See [Configure your relational database](manage-hybrid-clusters.md#configure-a-database-instance-type). |
 | [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)    | Required for connectivity with the Astro control plane and other public services.                                                                                                                                                                                                                                                                        | 2x                                            |                                                                                                      |
 | [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)                        | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes.                                        | 2x /26 (public) and 1x /21 + 1x /22 (private) | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                        |
 | [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)      | Required for connectivity with the control plane and other public services.                                                                                                                                                                                                                                                                              | 1x                                            |                                                                                                      |
@@ -37,31 +45,31 @@ Read the following document for a reference of our default resources as well as 
 
 ## Supported cluster regions
 
-Depending on how you installed Astro, you can host Astro clusters in the following AWS regions:
+You can host Astro Hybrid clusters in the following AWS regions:
 
-| Code             | Name                      | Astro - Bring Your Own Cloud | Astro - Hosted |
-| ---------------- | ------------------------- | ---------------------------- | -------------- |
-| `af-south-1`     | Africa (Cape Town)        | ✔️                            |                |
-| `ap-east-1`      | Asia Pacific (Hong Kong)  | ✔️                            |                |
-| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            | ✔️              |
-| `ap-northeast-2` | Asia Pacific (Seoul)      | ✔️                            |                |
-| `ap-northeast-3` | Asia Pacific (Osaka)      | ✔️                            |                |
-| `ap-southeast-1` | Asia Pacific (Singapore)  | ✔️                            |                |
-| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            | ✔️              |
-| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            |                |
-| `ca-central-1`   | Canada (Central)          | ✔️                            |                |
-| `eu-central-1`   | Europe (Frankfurt)        | ✔️                            | ✔️              |
-| `eu-north-1`     | Europe (Stockholm)        | ✔️                            |                |
-| `eu-south-1`     | Europe (Milan)            | ✔️                            |                |
-| `eu-west-1`      | Europe (Ireland)          | ✔️                            | ✔️              |
-| `eu-west-2`      | Europe (London)           | ✔️                            |                |
-| `eu-west-3`      | Europe (Paris)            | ✔️                            |                |
-| `me-south-1`     | Middle East (Bahrain)     | ✔️                            |                |
-| `sa-east-1`      | South America (São Paulo) | ✔️                            |                |
-| `us-east-1`      | US East (N. Virginia)     | ✔️                            | ✔️              |
-| `us-east-2`      | US East (Ohio)            | ✔️                            |                |
-| `us-west-1`      | US West (N. California)   | ✔️                            |                |
-| `us-west-2`      | US West (Oregon)          | ✔️                            | ✔️              |
+| Code             | Name                      |
+| ---------------- | ------------------------- |
+| `af-south-1`     | Africa (Cape Town)        |
+| `ap-east-1`      | Asia Pacific (Hong Kong)  |
+| `ap-northeast-1` | Asia Pacific (Tokyo)      |
+| `ap-northeast-2` | Asia Pacific (Seoul)      |
+| `ap-northeast-3` | Asia Pacific (Osaka)      |
+| `ap-southeast-1` | Asia Pacific (Singapore)  |
+| `ap-southeast-2` | Asia Pacific (Sydney)     |
+| `ap-south-1`     | Asia Pacific (Mumbai)     |
+| `ca-central-1`   | Canada (Central)          |
+| `eu-central-1`   | Europe (Frankfurt)        |
+| `eu-north-1`     | Europe (Stockholm)        |
+| `eu-south-1`     | Europe (Milan)            |
+| `eu-west-1`      | Europe (Ireland)          |
+| `eu-west-2`      | Europe (London)           |
+| `eu-west-3`      | Europe (Paris)            |
+| `me-south-1`     | Middle East (Bahrain)     |
+| `sa-east-1`      | South America (São Paulo) |
+| `us-east-1`      | US East (N. Virginia)     |
+| `us-east-2`      | US East (Ohio)            |
+| `us-west-1`      | US West (N. California)   |
+| `us-west-2`      | US West (Oregon)          |
 
 Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
@@ -189,5 +197,4 @@ If you need to pass significant data between Airflow tasks, Astronomer recommend
 
 ## Related documentation
 
-- [Create a new cluster on Astro](create-cluster.md)
-- [Manage and modify clusters](modify-cluster.md)
+- [Manage and modify Hybrid clusters](manage-hybrid-clusters.md)

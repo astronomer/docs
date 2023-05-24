@@ -2,7 +2,7 @@
 sidebar_label: 'AWS'
 title: 'Connect Astro to AWS data sources'
 id: connect-aws
-description: Connect your Astro data plane to AWS.
+description: Connect Astro to AWS resources.
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 sidebar_custom_props: { icon: 'img/aws.png' }
@@ -12,11 +12,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the information provided here to learn how you can securely connect your Astro data plane to your existing AWS instance. A connection to AWS allows Astro to access data stored on your AWS instance and is a necessary step to running pipelines in a production environment.
+You have a number of options for connecting Deployments on an AWS cluster to external data sources. Use the following topics to learn about each available connection option and how to configure them.
 
 ## Connection options
 
-The connection option that you choose is determined by the requirements of your organization and your existing infrastructure. You can choose a straightforward implementation, or a more complex implementation that provides enhanced data security. Astronomer recommends that you review all of the available connection options before selecting one for your organization.
+The connection option that you choose is determined by the requirements of your company and your existing infrastructure. You can choose a straightforward implementation, or a more complex implementation that provides enhanced data security. 
 
 <Tabs
     defaultValue="Public endpoints"
@@ -34,13 +34,19 @@ Publicly accessible endpoints allow you to quickly connect Astro to AWS. To conf
 - Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
 - Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-When you use publicly accessible endpoints to connect Astro and AWS, traffic moves directly between your Astro data plane and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+When you use publicly accessible endpoints to connect Astro and AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
 
 </TabItem>
 
 <TabItem value="VPC peering">
 
-Every Astro cluster runs in a dedicated Virtual Private Network (VPC). To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
+:::info 
+
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+
+:::
+
+To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
 To create a VPC peering connection between an Astro VPC and an AWS VPC, contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
 
@@ -56,7 +62,7 @@ After receiving your request, Astronomer support initiates a peering request and
 
 To resolve DNS hostnames from your target VPC, every Astro VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
-If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows Astro clusters to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astro VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/).
 
@@ -65,6 +71,12 @@ To retrieve the ID of any Astro VPC, contact [Astronomer support](https://cloud.
 </TabItem>
 
 <TabItem value="Transit Gateways">
+
+:::info 
+
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+
+:::
 
 Use AWS Transit Gateway to connect one or more Astro clusters to other VPCs, AWS accounts, and on-premises networks supported by your organization.
 
@@ -102,6 +114,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 <TabItem value="AWS PrivateLink">
 
+
 Use AWS PrivateLink to create private connections from Astro to your AWS services without exposing your data to the public internet. If your AWS services are located in a different region than Astro, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 Astro clusters are pre-configured with the following AWS PrivateLink endpoint services:
@@ -137,14 +150,20 @@ Authorization is the process of verifying a user or service's permissions before
     ]}>
 <TabItem value="AWS IAM roles">
 
+:::info 
+
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+
+:::
+
 To grant an Astro cluster access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
 
-1. In the Cloud UI, click **Clusters** and then copy the value displayed in the **Cluster ID** column for the Astro cluster that needs access to AWS service resources.
+1. In the Cloud UI, select your Deployment and then click **Details**. Copy the `arn` given under **Workload Identity**.
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 4. Click **Roles** and in the **Role name** column, select the role you created in step 2.
 5. Click the **Trust relationships** tab.
-6. Click **Edit trust policy** and update the `arn` value:
+6. Click **Edit trust policy** and paste the `arn` you copied from Step 1 in the trust policy.
 
     ```text {8}
     {
@@ -162,9 +181,8 @@ To grant an Astro cluster access to a service that is running in an AWS account 
         ]
     }
     ```
-    To locate your `<dataplane-AWS-account-ID>` and `<cluster-ID>`, in the Cloud UI click **Clusters**. The `<dataplane-AWS-account-ID>` is located in the **Account ID** column and the cluster ID is located in the **ID** column. 
     
-    The Astro cluster data plane account includes the `AirflowLogsS3-<clusterid>` role. When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, use `"arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"` as the value for `aws_arn`.
+    The Astro cluster includes the `AirflowLogsS3-<clusterid>` role. When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, use `"arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"` as the value for `aws_arn`.
 
 7. Click **Update policy**.
 8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
@@ -184,7 +202,7 @@ Astronomer recommends using an external secrets backend to store your AWS access
 
 ## Hostname resolution options
 
-Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service. 
+Securely connect Astro to resources running in other VPCs or on-premises through a resolving service. 
 
 Using Route 53 requires sharing a resolver rule with your Astro account. If this is a security concern, Astronomer recommends using Domain Name System (DNS) forwarding.
 
