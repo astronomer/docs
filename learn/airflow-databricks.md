@@ -19,7 +19,7 @@ This tutorial shows how to use the Astro Databricks provider with an example use
 
 :::info
 
-All code in this tutorial can be found on [the Astronomer Registry] (INSERT REGISTRY LINK LATER).
+All code in this tutorial can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/renewable_analysis_dag/versions/latest).
 
 :::
 
