@@ -33,11 +33,11 @@ Conversely, choose a **Python expression** if you want to define a parameter val
 
 For example, the S3toSnowflakeOperator has a parameter called `autocommit` that takes a boolean value. Because the IDE detects the required value format, it shows a toggle when you select **Literal value**. 
 
-![A boolean formatted as a literal value](/img/docs/cloud-ide/literal-value.png)
+![A boolean formatted as a literal value](/img/cloud-ide/literal-value.png)
 
 If you click the toggle on and then select **Python expression**, you see that the IDE converts the toggle into a raw Python expression.
 
-![A boolean formatted as a Python expression](/img/docs/cloud-ide/python-expression.png)
+![A boolean formatted as a Python expression](/img/cloud-ide/python-expression.png)
 
 :::
 
