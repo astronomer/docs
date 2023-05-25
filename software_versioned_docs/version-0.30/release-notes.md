@@ -24,7 +24,7 @@ Release date: May 25, 2023
 - You can now configure `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
 - You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
 - You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `config.yaml` file.
-- All users other than System Admins can no longer create Deployments with Astronomer Certified images. The Software UI will show a warning message for Deployments currently running an Astronomer Certified image.
+- The Software UI now shows a warning message for Deployments currently running an Astronomer Certified image. Only System Admins can create Deployments with deprecated Astronomer Certified images by setting `deployments.enableSystemAdminCanCreateDeprecatedAirflows` to `true`.
 - Grafana now includes an **Astronomer Houston Dashboard** that you can use to view Houston metrics. 
 
 ### Bug fixes
