@@ -16,7 +16,7 @@ description: Astronomer Software release notes.
 
 ## 0.30.7
 
-Release date: May 18, 2023
+Release date: May 25, 2023
 
 ### Additional improvements
 
@@ -24,12 +24,15 @@ Release date: May 18, 2023
 - You can now configure `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
 - You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
 - You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `config.yaml` file.
+- All users other than System Admins can no longer create Deployments with Astronomer Certified images. The Software UI will show a warning message for Deployments currently running an Astronomer Certified image.
+- Grafana now includes an **Astronomer Houston Dashboard** that you can use to view Houston metrics. 
 
 ### Bug fixes
 
+- Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
+- Fixed a security vulnerability where credentials could be leaked from NGinx controller logs.
 - Fixed an issue where sidecar containers would sometimes not terminate properly after their primary container was terminated.
 - Fixed an issue where Prometheus was using more memory than expected due to a misconfiguration of statsd.
-- Fixed an issue where creating a git-sync-based Deployment through the Houston API would cause the Deployment to have a default sync interval of 1 second. 
 - Fixed an issue where a service account with the Workspace Editor role could update a Deployment when it didn't have any Deployment-level permissions for the Deployment. 
 - Fixed an issue in the Software UI where you could not view Deployment details for a Deployment that included "team" in its name.
 - Fixed the following vulnerabilities: 
