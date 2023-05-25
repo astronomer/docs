@@ -55,7 +55,7 @@ To import a custom operator that your team uses into the Astro Cloud IDE, create
 
 5. Enter a **Custom Cell Type Name**. This is the name that appears in the cell body and when you search for the cell type in your pipeline editor. 
 
-6. Enter a **Definition** for the cell type. A definition is a JSON configuration that defines how a user interacts with the cell type, as well as how the cell type can access your custom operator code. For a complete reference for possible JSON values, see [Custom cell type reference](custome-cell-reference.md).
+6. Enter a **Definition** for the cell type. A definition is a JSON configuration that defines how a user interacts with the cell type, as well as how the cell type can access your custom operator code. For a complete reference for possible JSON values, see [Custom cell type reference](custom-cell-reference.md).
 
 7. Click **Validate** to check that your JSON configuration is valid. After it's validated, click **Add**.
 
