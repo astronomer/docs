@@ -30,7 +30,7 @@ Release date: May 25, 2023
 ### Bug fixes
 
 - Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
-- Fixed a security vulnerability where credentials could be leaked from NGinx controller logs.
+- Fixed a security vulnerability in logging.
 - Fixed an issue where sidecar containers would sometimes not terminate properly after their primary container was terminated.
 - Fixed an issue where Prometheus was using more memory than expected due to a misconfiguration of statsd.
 - Fixed an issue where a service account with the Workspace Editor role could update a Deployment when it didn't have any Deployment-level permissions for the Deployment. 
