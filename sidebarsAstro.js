@@ -46,6 +46,7 @@ module.exports = {
             "cloud-ide/quickstart",
             "cloud-ide/run-python",
             "cloud-ide/run-sql",
+            "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
