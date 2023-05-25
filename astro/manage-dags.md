@@ -6,7 +6,7 @@ id: manage-dags
 
 When you select a specific DAG in the **DAGs** page, you can see detailed information about your DAG runs and complete a number of tasks that are normally available from the Airflow UI. This page compiles the most commonly used information and actions from the Airflow UI into one place.
 
-![DAGs page](/img/docs/pipeline-details.png)
+![DAGs page](/img/docs/DAGs-overview.png)
 
 To access the DAG management page:
 
