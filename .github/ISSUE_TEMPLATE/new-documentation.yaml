@@ -5,24 +5,24 @@ body:
   - type: dropdown
     id: impact
     attributes:
-      label: Request type
+      label: Request Type
       multiple: true
       options:
-        - Setup steps for an existing feature or supported configuration
-        - Best practices or recommendations
-        - Technical overview or reference
+        - Additional information for an existing feature
+        - A new set of best practices or recommendations
+        - A new technical overview, explanation, or reference
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
-      label: Describe the documentation request
+      label: Documentation Request
     validations:
       required: true
   - type: textarea
     id: relateddocs
     attributes:
-      label: Links to related documentation
+      label: Links to Related Docs
   - type: input
     id: reviewers
     attributes:
@@ -31,11 +31,11 @@ body:
   - type: input
     id: deadline
     attributes:
-      label: Required reviewers
+      label: Required Reviewers
   - type: textarea
     id: notes
     attributes:
-      label: Additional information
+      label: Additional Notes
       description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, ZenDesk tickets, and Slack messages are all welcome and encouraged!
 
   

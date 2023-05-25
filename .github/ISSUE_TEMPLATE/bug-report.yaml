@@ -11,11 +11,11 @@ body:
   - type: dropdown
     id: issuetype
     attributes:
-      label: Issue type
+      label: Issue Type
       multiple: true
       options:
         - Inaccurate content
-        - Missing context
+        - Missing or misleading content
         - Typo
         - Bug/ broken link
     validations:
@@ -23,22 +23,22 @@ body:
   - type: textarea
     id: doc
     attributes:
-      label: Affected docs
+      label: Links to Affected Docs
       description: Share a link to the document(s) where the issue exists.
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
-      label: Describe the issue and the fix
-      description: Describe the issue and how it should be fixed. Be as descriptive as possible. If there is existing documentation or related issues, link to them here. If you're not sot sure how best to proceed with your request, contact the docs team.
+      label: Describe the Issue and Proposed Fix
+      description: Describe the issue and what you think needs to be added, updated, or otherwise changed. Be as descriptive as possible.
       placeholder:  
     validations:
       required: true
   - type: textarea
     id: notes
     attributes:
-      label: Additional notes
-      description: Add any related Slack threads, ZenDesk tickets, or other information that the docs team can use to solve the issue. 
+      label: Additional Notes
+      description: Add any related Slack threads, Zendesk tickets, or other information that the docs team can use to resolve the issue.
 
   
