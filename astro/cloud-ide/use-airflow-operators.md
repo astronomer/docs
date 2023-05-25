@@ -9,7 +9,7 @@ You can import any Airflow operator available on the Astronomer Registry and run
 
 ## Create an operator cell
 
-1. In the Cloud UI, select a Workspace and then select Cloud IDE.
+1. In the Cloud UI, select **Cloud IDE**.
 
 2. Select a project.
 
@@ -40,6 +40,26 @@ If you click the toggle on and then select **Python expression**, you see that t
 [Image]
 
 :::
+
+## Create custom operator cells
+
+To import a custom operator that your team uses into the Astro Cloud IDE, create a custom cell type in your project configuration.
+
+1. If you're using a custom cell type to call custom operator code, [commit your IDE project to a Git repository](deploy-project.md#commit-your-project-to-a-git-repository) and add your custom operator code to the `include` folder of your repository.
+   
+2. In the Cloud UI, select **Cloud IDE**.
+
+3. Select a project.
+
+4. Click **Custom Cells**, then click **+ Cell Type**
+
+5. Enter a **Custom Cell Type Name**. This is the name that appears in the cell body and when you search for the cell type in your pipeline editor. 
+
+6. Enter a **Definition** for the cell type. A definition is a JSON configuration that defines how a user interacts with the cell type, as well as how the cell type can access your custom operator code. For a complete reference for possible JSON values, see [Custom cell type reference](custome-cell-reference.md).
+
+7. Click **Validate** to check that your JSON configuration is valid. After it's validated, click **Add**.
+
+8. Add the cell type to your pipeline as you would for a standard operator cell. See [Create an operator cell](#create-an-operator-cell).
 
 ## Run an operator cell
 
