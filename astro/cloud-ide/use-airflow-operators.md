@@ -25,7 +25,7 @@ You can import any Airflow operator available on the Astronomer Registry and run
 
 5. Fill out the parameters in the operator cell body. For each parameter, use the switch to the right of the parameter to configure whether your input is treated as a **Literal value** or a **Python expression**.
 
-:::info Literal expressions and Python expressions
+:::info Literal values and Python expressions
 
 The Astro Cloud IDE is often able to detect the required format for an operator's parameter values. When it does detect the required format, choose **Literal value** to let the Cloud IDE format and check your parameter values.
 
@@ -33,11 +33,11 @@ Conversely, choose a **Python expression** if you want to define a parameter val
 
 For example, the S3toSnowflakeOperator has a parameter called `autocommit` that takes a boolean value. Because the IDE detects the required value format, it shows a toggle when you select **Literal value**. 
 
-[Image]
+![A boolean formatted as a literal value](/img/docs/cloud-ide/literal-value.png)
 
 If you click the toggle on and then select **Python expression**, you see that the IDE converts the toggle into a raw Python expression.
 
-[Image]
+![A boolean formatted as a Python expression](/img/docs/cloud-ide/python-expression.png)
 
 :::
 

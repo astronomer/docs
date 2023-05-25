@@ -147,4 +147,4 @@ The following configuration is an example of how you can configure a custom oper
 
 This is how the cell will render in the pipeline editor:
 
-![How the example cell appears in the Cloud UI]()
+![How the example cell appears in the Cloud UI](/img/docs/cloud-ide/custom-cell-example.png)
