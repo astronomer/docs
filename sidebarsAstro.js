@@ -52,6 +52,7 @@ module.exports = {
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
+            "cloud-ide/custom-cell-reference"
           ],
         },
         "upgrade-runtime",
