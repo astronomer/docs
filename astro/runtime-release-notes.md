@@ -31,8 +31,8 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Early access Airflow bug fixes
 
-- Fixed a bug to ensure that `min_backoff` in the base sensor is at least `1` ((31412)[https://github.com/apache/airflow/pull/31412])
-- Updated error messaging ((31502)[https://github.com/apache/airflow/pull/31502])
+- Fixed a bug to ensure that `min_backoff` in the base sensor is at least `1` ([31412](https://github.com/apache/airflow/pull/31412))
+- Updated error messaging ([31502](https://github.com/apache/airflow/pull/31502))
 
 ### Additional Improvements
 
