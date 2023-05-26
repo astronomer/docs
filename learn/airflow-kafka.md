@@ -105,12 +105,7 @@ The Kafka Airflow provider uses a Kafka connection assigned to the `kafka_conn_i
     }
     ```
 
-
-    ::: info
-
     The key-value pairs for your connection depend on what kind of Kafka cluster you are connecting to. Most operators in the Kafka Airflow provider mandate that you define the `bootstrap.servers` key. You can find a full list of optional connection parameters in the [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md). 
-
-    :::
 
 4. Click **Save**.
 
