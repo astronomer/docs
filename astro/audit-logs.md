@@ -53,17 +53,6 @@ The following table maps some common `operationName` attributes to their corresp
 
 | Event | `operationName` attribute                                          | `requestInput` attributes                   |
 | ------- | ---------------------------------------------------- | --------------------------------- |
-| The Organization is updated. | `updateOrganization` | `id`, `name` |
-| A new user is invited to an organization.   | `createUserInvite` | `inviteeEmail`, `role` |
-| A user has accepted their invite to an organization. | `updateUserInvite` |
-| A user is deleted from an organization.  | `deleteUserInvite` | `inviteId` |
-| A user is assigned a new role.  | `assignUserOrganizationRole` | `role`, `userId` |
-| A user is removed from an organization.  | `deleteOrganizationUser` | `organizationId`, `userId` |
-| A Workspace is created.  | `createWorkspace` | `label`, `organizationId` |
-| A Workspace is updated.  | `updateWorkspace` | `label`, `id` |
-| A Workspace is deleted.  | `deleteWorkspace` | `id` |
-| A user is added to a Workspace, or a user role is updated. | `assignUserWorkspaceRole` | `email`, `role`, `workspaceId` |
-| A user is removed from a workspace. | `deleteUserWorkspaceRole` | `userId`, `workspaceId` |
 | A new Deployment is created. | `createDeployment` | `label`, `workspaceId` |
 | A Deployment is updated. | `updateDeployment` | `deploymentSpec` |
 | A Deployment variable is updated. | `updateDeploymentVariables` | `isSecret`, `key` |
@@ -87,14 +76,52 @@ The following table maps some common `path` attributes to their corresponding `r
 
 | Event | `path` attribute                                          | `requestBody` attributes                   |
 | ------- | ---------------------------------------------------- | --------------------------------- |
-| A new user is invited to an organization.   | `/v1alpha1/organizations/{orgShortNameId}/invites` | `inviteeEmail`, `role` |
-| A invite to the organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/invites/{inviteId}` | |
+| A Organization is created.   | `/v1alpha1/organizations` | `metadata`, `name` |
+| A Organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}` | `billingEmail`, `isScimEnabled`, `metadata`, `name` |
+| A managed domain for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/domains` | `enforcedLogins` `name` |
+| A managed domain for an Organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/domains/{domainId}` | `enforcedLogins` |
+| A managed domain for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/domains/{domainId}` | |
+| A managed domain for an Organization is verified.   | `/v1alpha1/organizations/{orgShortNameId}/domains/{domainId}/verify` | |
+| SSO Bypass Key for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/sso-bypass-key` | |
+| SSO Bypass Key for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/sso-bypass-key` | |
+| SSO Connection for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections` | |
+| SSO Connection for an Organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
+| SSO Connection for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
+| A new user is invited to an organization.   | `/v1alpha1/organizations/{orgShortNameId}/invites` | `inviteEmail`, `role` |
+| A invite to the organization is updated.   | `/v1alpha1/users/self/invites/{inviteId}` | `inviteStatus` |
+| A invite to the organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/invites/{inviteId}` | |
 | A user is deleted from an organization.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}` | |
 | A user is assigned a new organization role.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}/role` | `role` |
 | A user is assigned a new workspace role.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/users/{userId}/role` | `role`|
 | A user is removed from a workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/users/{userId}` | |
+| A Workspace is created.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces` | `apiKeyOnlyDeploymentsDefault`, `description`, `name` |
+| A Workspace is updated.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}` | `apiKeyOnlyDeploymentsDefault`, `description`, `name` |
+| A Workspace is deleted. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}` | |
 | A deployment is transferred to another workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/deployments/{deploymentId}` | `workspaceIdTarget` |
-
+| A AWS cluster is created.  | `/v1alpha1/organizations/{orgShortNameId}/clusers/aws` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
+| A AWS cluster is updated.  | `/v1alpha1/organizations/{orgShortNameId}/clusers/aws/{clusterId}` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
+| A Azure cluster is created.  | `/v1alpha1/organizations/{orgShortNameId}/clusers/azure` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `providerAccount`, `region`, `templateVersion`, `tenantId`, `type`, `vpcSubnetRange` |
+| A Azure cluster is updated.  | `/v1alpha1/organizations/{orgShortNameId}/clusers/azure/{clusterId}` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion`, |
+| A GCP cluster is created.  | `/v1alpha1/organizations/{orgShortNameId}/clusers/gcp` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `podSubnetRange` `providerAccount`, `region`, `servicePeeringRange`, `serviceSubnetRange`, `templateVersion`, `type`, `vpcSubnetRange` |
+| A GCP cluster is updated.  | `/v1alpha1/organizations/{orgShortNameId}/clusers/gcp/{clusterId}` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
+| A cluster is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/clusers/{clusterId}` | |
+| A team is updated.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | `description`, `name` |
+| A team is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | |
+| A Organization API token is created.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens` | `description`, `name`, `role`, `tokenExpiryPeriodInDays` |
+| A Organization API token is updated.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}` | `description`, `name`, `roles` |
+| A Organization API token is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}` | |
+| A Organization API token is rotated.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}/rotate` | |
+| A Workspace API token is created.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens` | `description`, `name`, `role`, `tokenExpiryPeriodInDays` |
+| A Workspace API token is updated.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens/{apiTokenId}` | `description`, `name`, `role` |
+| A Workspace API token is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens/{apiTokenId}` | |
+| A Workspace API token is rotated.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens/{apiTokenId}/rotate` | |
+| A team is created.  | `/v1alpha1/organizations/{orgShortNameId}/teams` | `description`, `name`, `memberIds` |
+| A team is updated.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | `description`, `name` |
+| A team is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | |
+| Add members to a team.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}/members` | `memberIds` |
+| Remove a member from a team.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}/members` | |
+| Remove a team from a workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/teams/{teamId}` | |
+| Update a teams workspace role.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/teams/{teamId}/role` | `role` |
 
 Use your analytics or audit tool to view additional attribute mapping information. 
 
@@ -117,6 +144,44 @@ The following table lists the fields that are unique to Astronomer container reg
 | `deploymentId` | A unique identifier that identifies the Deployment on which the event occurred. |
 | `path` | The path to the image in the registry. |
 | `method` | The HTTP method for the request. |
+
+#### Astro CLI access event fields
+
+The following table lists the fields that are unique to Astro CLI access events.
+
+| Field  | Description                                          |
+| ------- | ---------------------------------------------------- |
+| `astroClient` | A unique identifier for the API client. `astro-cli` means the requst came from the Astro CLI. |
+| `astroClientVersion` | A unique identifier for the API client version. |
+| `userAgent` | A unique identifier for the API client type and version. |
+
+##### Cloud IDE API Event Fields
+
+The Cloud IDE uses the same unique events as the v2 API.
+
+The following table maps some common `path` attributes to their corresponding `requestBody` attributes. 
+
+| Event | `path` attribute                                          | `requestBody` attributes                   |
+| ------- | ---------------------------------------------------- | --------------------------------- |
+| Create an IDE Pipeline.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines` | `description`, `name`, `scheduleInterval`, `startDate`, `timezone` |
+| Update an IDE Pipeline.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | `cellPositions`, `description`, `imports` `name`, `scheduleInterval`, `startDate`, `timezone` |
+| Delete an IDE Pipeline.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | |
+| Create an IDE Project.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects` | `description`, `name` |
+| Update an IDE Project.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}` | `connections`, `git`, `includes`, `requirements`, `variables`, `description`, `name` |
+| Delete an IDE Project.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}` | |
+| Create a git branch for a project | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/git/branches` | `from`, `name` |
+| Create a git branch for a project | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/git/commits` | `branch`, `message`, `paths` |
+| Test a connections against a project | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/test-connection` | `extra`, `host`, `id`, `login`, `password`, `port`, `schema`, `type` |
+| Create a new Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types` | `behavior`, `configs`, `datatype`, `display`, `name` |
+| Update a Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types/{cellTypeName}` | `behavior`, `configs`, `datatype`, `display`, `name` |
+| Delete a Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types/{cellTypeName}` | |
+| Validate a Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/validate-cell-type` | `behavior`, `configs`, `datatype`, `display`, `name` |
+| Create a new Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells` | `dependenciesExplicit`, `name`, `type`, `typeConfigForms`, `typeConfigs` |
+| Update a Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}` | `dependenciesExplicit`, `name`, `type`, `typeConfigForms`, `typeConfigs` |
+| Delete a Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}` | |
+| Duplicate a Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}/duplicate` | `name` |
+| Create a new Cloud IDE cell run | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}/runs` | `pipelineSessionId` |
+| Create a new Cloud IDE pipeline session | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | `pipelineSessionId` |
 
 ### Export audit logs
 
