@@ -1,7 +1,7 @@
 """
 ### DAG which produces to and consumes from a Kafka cluster
 
-This DAG will produce messages of several elements to a Kafka cluster and consume
+This DAG will produce messages consisting of several elements to a Kafka cluster and consume
 them.
 """
 

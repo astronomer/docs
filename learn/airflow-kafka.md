@@ -125,11 +125,12 @@ The [Kafka Airflow provider package](https://registry.astronomer.io/providers/ap
 
     <CodeBlock language="python">{produce_consume_treats}</CodeBlock>
 
-    This DAG produces messages to a Kafka topic (`KAFKA_TOPIC`) and consumes them. 
+    This DAG produces messages to a Kafka topic (`KAFKA_TOPIC`) and consumes them.
 
-    - The `produce_treats` task writes a given number (`num_treats`) of messages to a Kafka topic. Each messages contains the pet name, a randomly picked pet mood after the treat has been given, and whether or not a treat was the last one in a series. The `ProduceToTopicOperator` accomplishes this by using a function passed to its `producer_function` parameter, which returns a generator containing key-value pairs. 
-    - The `produce_treats` task also retrieves the number of treats pushed to [XCom](airflow-passing-data-between-tasks.md#what-is-xcom) from the upstream `get_number_of_treats` task. Then, the task supplies the number of treats to the `producer_function` as a positional argument with the `producer_function_args` parameter. In a similar process, the task also retrieves the name of your pet from the upstream `get_your_pet_name` task and provides it as a kwarg to `producer_function_kwargs`.
-    - The `consume_treats` task consumes messages from the same Kafka topic and modifies them to print a string to the logs using the callable provided to the `apply_function` parameter. The task also retrieves the pet owner name from XCom and supplies it as a kwarg with the `apply_function_kwargs` parameter.
+    - The `produce_treats` task retrieves the number of treats (`num_treats`) to give to your pet from the upstream `get_number_of_treats` task. Then, the task supplies the number of treats to the `producer_function` as a positional argument with the `producer_function_args` parameter.
+    In a similar process, the task also retrieves the name of your pet from the upstream `get_your_pet_name` task and provides it as a kwarg to `producer_function_kwargs`.
+    - Next, the `produce_treats` task writes one message for every treat to a Kafka topic. Each message contains the pet name, a randomly picked pet mood after the treat has been given, and whether or not a treat was the last one in a series. The `ProduceToTopicOperator` accomplishes this by using a function passed to its `producer_function` parameter, which returns a generator containing key-value pairs. 
+    - The `consume_treats` task consumes messages from the same Kafka topic and modifies them to print a string to the logs using the callable provided to the `apply_function` parameter. This task also retrieves a value from an upstream task and supplies it as a kwarg to the `apply_function` with the `apply_function_kwargs` parameter.
 
 3. Navigate to the Airflow UI (`localhost:8080` if you are running Airflow locally) and manually run your DAG.
 
@@ -165,7 +166,7 @@ Airflow can run a function when a specific message appears in your Kafka topic. 
 
     This DAG has one task called `listen_for_mood` which uses the AwaitMessageTriggerFunctionSensor to listen to messages in all topics supplied to its `topics` parameters. For each message that is consumed, the following actions are performed:
 
-    - The `listen_function` consumes and processes the message, then supplies the output to the `apply_function` parameter of the AwaitMessageTriggerFunctionSensor. The `listen_function` is provided as a dot notation string, which is necessary because the Airflow triggerer component needs to access this function.
+    - The `listen_function` supplied to the `apply_function` parameter of the AwaitMessageTriggerFunctionSensor consumes and processes the message. The `listen_function` is provided as a dot notation string, which is necessary because the Airflow triggerer component needs to access this function.
     - If the message consumed causes the `listen_function` to return a value, a [TriggerEvent](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html) fires.
     - After a TriggerEvent fires, the AwaitMessageTriggerFunctionSensor executes the function provided to the `event_triggered_function` parameter.
  In this example, the `event_triggered_function` starts a downstream DAG using the `.execute()` method of the [`TriggerDagRunOperator`](cross-dag-dependencies#triggerdagrunoperator).
