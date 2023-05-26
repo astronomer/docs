@@ -26,6 +26,23 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ## Astro Runtime 8.2.0
 
+- Release date: May 26, 2023
+- Airflow version: 2.6.1
+
+### Additional Improvements
+
+- Upgraded astronomer-providers to 1.16.0
+- Upgraded openlineage-airflow to 0.26.0
+- Blocked the ability to pause the Monitoring DAG with the Airflow API. The Monitoring DAG is used by Astronomer to operate your Deployments and should not be paused.
+- Adds Datadog as a provider. See the GitHub Provider Page on the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow-providers-datadog/versions/3.3.0).
+
+### Bug fixes
+
+- Fixed a bug to ensure that `min_backoff` in the base sensor is at least `1`.
+- Updated error messaging. 
+
+## Astro Runtime 8.2.0
+
 - Release date: May 16, 2023
 - Airflow version: 2.6.1
 
