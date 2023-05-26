@@ -92,7 +92,9 @@ The Kafka Airflow provider uses a Kafka connection assigned to the `kafka_conn_i
 
 2. Click **Admin** > **Connections** > **+** to create a new connection.
 
-3. Name your connection `kafka_default` and select the **Apache Kafka** connection type. Provide the details for the connection to your Kafka cluster as JSON in the **Extra** field. The key-value pairs for your connection depend on what kind of Kafka cluster you are connecting to. Most operators in the Kafka Airflow provider mandate that you define the `bootstrap.servers` key. You can find a full list of optional connection parameters in the [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md). If you connect to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
+3. Name your connection `kafka_default` and select the **Apache Kafka** connection type. Provide the details for the connection to your Kafka cluster as JSON in the **Extra** field. 
+
+    If you connect to a local Kafka cluster created with the `server.properties` in the info box from the [Prerequisites](#prerequisites) section, use the following configuration:
 
     ```json
     {
@@ -102,6 +104,12 @@ The Kafka Airflow provider uses a Kafka connection assigned to the `kafka_conn_i
         "auto.offset.reset": "beginning"
     }
     ```
+
+::: info
+
+The key-value pairs for your connection depend on what kind of Kafka cluster you are connecting to. Most operators in the Kafka Airflow provider mandate that you define the `bootstrap.servers` key. You can find a full list of optional connection parameters in the [librdkafka documentation](https://github.com/confluentinc/librdkafka/blob/master/CONFIGURATION.md). 
+
+:::
 
 4. Click **Save**.
 
@@ -124,7 +132,7 @@ The [Kafka Airflow provider package](https://registry.astronomer.io/providers/ap
     This DAG produces messages to a Kafka topic (`KAFKA_TOPIC`) and consumes them. 
 
     - The `produce_treats` task writes a given number (`num_treats`) of messages to a Kafka topic. Each messages contains the pet name, a randomly picked pet mood after the treat has been given, and whether or not a treat was the last one in a series. The `ProduceToTopicOperator` accomplishes this by using a function passed to its `producer_function` parameter, which returns a generator containing key-value pairs. 
-    The `produce_treats` task retrieves the number of treats pushed to [XCom](airflow-passing-data-between-tasks.md#what-is-xcom) from the upstream `get_number_of_treats` task. Then, the task supplies the number of treats to the `producer_function` as a positional argument with the `producer_function_args` parameter. In a similar process, the task also retrieves the name of your pet from the upstream `get_your_pet_name` task and provides it as a kwarg to `producer_function_kwargs`.
+    - The `produce_treats` task also retrieves the number of treats pushed to [XCom](airflow-passing-data-between-tasks.md#what-is-xcom) from the upstream `get_number_of_treats` task. Then, the task supplies the number of treats to the `producer_function` as a positional argument with the `producer_function_args` parameter. In a similar process, the task also retrieves the name of your pet from the upstream `get_your_pet_name` task and provides it as a kwarg to `producer_function_kwargs`.
     - The `consume_treats` task consumes messages from the same Kafka topic and modifies them to print a string to the logs using the callable provided to the `apply_function` parameter. The task also retrieves the pet owner name from XCom and supplies it as a kwarg with the `apply_function_kwargs` parameter.
 
 3. Navigate to the Airflow UI (`localhost:8080` if you are running Airflow locally) and manually run your DAG.
