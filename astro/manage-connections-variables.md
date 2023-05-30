@@ -149,7 +149,7 @@ If you use a secrets backend, the method for managing connections and variables 
 
 ### Environment variables
 
-You can easily import connections and variables stored as Environment variables in `.env` file to another local Airflow by copying the `.env` file to another Astro project. To import Airflow connections and variables to Astro, you can refer the commands defined in [Astro CLI](#using-astro-cli) to import all environment variables in your `.env` file to a Deployment on Astro.
+You can import connections and variables stored as Environment variables in `.env` file to another local Airflow by copying the `.env` file to another Astro project. To import Airflow connections and variables to Astro, refer to the commands defined in [Astro CLI](#using-astro-cli) to import all environment variables in your `.env` file to a Deployment on Astro.
 
 ### Airflow metadata database
 
