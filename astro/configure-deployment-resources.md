@@ -18,7 +18,7 @@ After you create an Astro Deployment, you can modify its settings using the Clou
 - Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
 
-For advanced Deployment resource configurations, see [Manage Deployment executors](executors.md) and [Configure worker queues](configure-worker-queues.md).
+For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.md).
 
 :::cli
 
@@ -33,7 +33,7 @@ Astro supports two executors, both of which are available in the Apache Airflow 
 - Celery executor
 - Kubernetes executor
 
-All Deployments use the Celery executor by default. See [Choose an executor](executors.md#choose-an-executor) to understand the benefits and limitations of each executor. When you've determined the right executor type for your Deployment, complete the steps in the following topic to update your Deployment's executor type.
+All Deployments use the Celery executor by default. See [Choose an executor](executors-overview.md#choose-an-executor) to understand the benefits and limitations of each executor. When you've determined the right executor type for your Deployment, complete the steps in the following topic to update your Deployment's executor type.
 
 ### Update the Deployment executor
 
@@ -43,7 +43,7 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
 5. Click **Update**.
 
-See [Configure an executor](executors.md) for more information about each available executor type, including how to optimize executor usage.
+See [Configure an executor](executors-overview.md) for more information about each available executor type, including how to optimize executor usage.
 
 ## Scheduler size
 
@@ -130,6 +130,31 @@ When a Deployment has high availability enabled, it runs multiple instances of i
 2. Click the **Details** tab.
 3. Click **Edit Details**.
 4. In **High Availability**, click the toggle to **On**.
+
+## Configure Kubernetes Pod resources
+
+The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure these components in your DAG code to define your task environment, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. 
+
+Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
+
+1. In the Cloud UI, select a Deployment.
+2. Click **Resource quotas**.
+3. Configure the following values:
+
+    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
+    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
+
+Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
+
+The Cloud UI also shows the **Default CPU** and **Default Memory** for your _default Pod_. If you don't configure CPU or memory for a task in your DAG code, the task runs in the default Pod with these default resources. 
+
+:::info Alternative Astro Hybrid setup
+
+On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory. 
+
+To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
+
+:::
 
 ## Transfer a Deployment to another Workspace 
 
