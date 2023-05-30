@@ -108,7 +108,7 @@ The Airflow pipeline presented in this tutorial consists of three DAGs. The firs
 
     This DAG will first complete two setup tasks:
 
-    - The `create_buckets_if_not_exists` tasks creates the data bucket `DATA_BUCKET_NAME` which will store the features engineered from the possum dataset and the MLflow artifact bucket `MLFLOW_ARTIFACT_BUCKET_NAME` which will store the MLflow artifacts using the [S3CreateBucketOperator](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/S3CreateBucketOperator).
+    - The `create_buckets_if_not_exists` tasks creates the data bucket `DATA_BUCKET_NAME` which will store the features engineered from the possum dataset and the MLflow artifact bucket `MLFLOW_ARTIFACT_BUCKET_NAME` which will store the MLflow artifacts using the [S3CreateBucketOperator](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/S3CreateBucketOperator). Additionally, the task also create a bucket to use as a [custom XCom backend](custom-xcom-backends-tutorial.md) if you have one defined.
     - The `prepare_mlflow_experiment` [task group](task-groups.md) checks all existing experiments in your MLflow instance for an experiment with the name `EXPERIMENT_NAME`. The `check_if_experiment_exists` task uses the [@task.branch decorator](airflow-decorators.md#list-of-available-airflow-decorators) to decide if creating the experiment is needed or not. In both cases the `get_current_experiment_id` task retrieves the correct experiment ID for `EXPERIMENT_NAME`. The tasks in this task group establish a connection to your MLflow instance using the [MLflowClientHook](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/hooks/client.py).
 
     After the setup is complete data processing takes place:
@@ -120,12 +120,73 @@ The Airflow pipeline presented in this tutorial consists of three DAGs. The firs
 
 ## Step 5: Create a model training DAG
 
-The second DAG will train a linear regression model on the engineered features, keeping track of the model in MLflow. 
+The second DAG will train a linear regression model on the engineered features, keeping track of the model in MLflow. This DAG runs as soon as the `s3://data_possum.csv` [Dataset](airflow-datasets.md) is updated.
 
-<CodeBlock language="python">{train}</CodeBlock>
+1. In your `dags` folder, create a file called `train.py`.
+
+2. Copy the following code into the file. 
+
+    <CodeBlock language="python">{train}</CodeBlock>
+
+    This DAG will train a [RidgeCV model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html#sklearn.linear_model.RidgeCV) on the features engineered in the previous DAG.
+
+    - The `fetch_feature_df` task pulls the feature dataframe from [XCom](airflow-passing-data-between-tasks.md#what-is-xcom). 
+    - The `fetch_experiment_id` task retrieves the experiment ID for the `EXPERIMENT_NAME` experiment from MLflow.
+    - In the `train_model` task the RidgeCV model trains on the feature dataframe. Note that you can provide additional hyperparameters to the model by passing them to the `hyper_parameters` keyword argument of the `train_model` task. The model is tracked in MLflow using the [mlflow.sklearn.autolog](https://mlflow.org/docs/latest/python_api/mlflow.sklearn.html#mlflow.sklearn.autolog) method.
+
+    After the model has been trained the `register_model` task group takes care of model registration and versioning. 
+    
+    - The `check_if_model_already_registered` task uses the @task.branch decorator to determine if a model of that name already exists in your MLflow registry.
+    - The `create_registered_model` task [registers the model](https://mlflow.org/docs/latest/registry.html?highlight=register%20model) within MLflow if it does not exist yet.
+    - The `create_model_version` task [creates a new version](https://mlflow.org/docs/latest/registry.html?highlight=register%20model#creating-a-new-version-of-a-registered-model) of the model in MLflow using the `CreateModelVersionOperator` of the MLflow Airflow provider. 
+    - Finally, the `transition_model` task will put the latest model version into the `Staging` stage. This is done using the `TransitionModelVersionStageOperator` of the MLflow Airflow provider.
 
 ## Step 6: Create your prediction DAG
 
-<CodeBlock language="python">{predict}</CodeBlock>
+The final step of this pipeline is to create predictions based on the trained model and plot predictions and target values next to each other to visually evaluate how well the RidgeCV model can be fitted to the data at hand. This DAG runs as soon as the last task in the previous DAG updates the `model_trained` [Dataset](airflow-datasets.md).
+
+1. In your `dags` folder, create a file called `predict.py`.
+
+2. Copy the following code into the file. 
+
+    <CodeBlock language="python">{predict}</CodeBlock>
+
+    - In a first step, the feature dataframe, target column and model ID are retrieved from XCom of the upstream DAGs.
+    - Next, the `add_line_to_file` task adds the packages [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) and pandas to the MLflow model artifact `requirements.txt` file in the `MLFLOW_ARTIFACT_BUCKET`. This is necessary because the model prediction happens in a virtual environment.
+    - The `run_prediction` task uses the ModelLoadAndPredictOperator of the MLFlow Airflow provider to create predictions using the latest model run on the full feature dataframe.
+    - The `plot_predictions` task uses [matplotlib](https://matplotlib.org/) to create a line graph visually comparing the predictions against the target values. And saves the resulting image to the `include` folder.
+    - Lastly, the predictions are also saved as a CSV file in the `data` bucket.
 
 ## Step 7: Run your DAGs
+
+1. Run `astro dev start` in your Astro project to start up Airflow.
+
+2. Navigate to the Airflow UI at `localhost:8080` and unpause all three DAGs by clicking the toggle to the left of the DAG name.
+
+3. Manually run the `feature_eng` DAG by clicking the play button. All your DAGs will run in the correct order based on [data driven scheduling](airflow-datasets.md).
+
+    ![DAGs overview](/img/guides/mlflow_dags.png)
+
+4. Navigate to the **Grid** view of each of the three DAGs and click on the **Graph** button to see a full DAG graph next in the Grid view.
+
+    ![Feature eng grid view](/img/guides/mlflow_feature_eng_grid.png)
+
+    ![Train grid view](/img/guides/mlflow_train_grid.png)
+
+    ![Predict grid view](/img/guides/mlflow_predict_grid.png)
+
+5. Open the MLflow UI (if you are running locally at `localhost:5000`) to see the data collected on your experiments and models.
+
+    ![MLflow UI experiments](/img/guides/mlflow_ui_experiments.png)
+
+    ![MLflow UI models](/img/guides/mlflow_ui_models.png)
+
+6. Finally, open the `possum_tails.png` in `include/plots`.
+
+    ![Possum tails](/img/guides/possum_tails.png)
+
+## Conclusion
+
+Congratulations! You ran a ML flow pipeline tracking model parameters and versions in MLflow using the MLflow Airflow provider. You can now use this pipeline as a template for your own MLflow projects.
+
+
