@@ -14,7 +14,10 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 
 ## Create a Workspace API token
 
-You can either create a new Workspace API token or add an existing Organization API token to a Workspace with appropriate permissions. You might want to add an Organization API token if your Organization API token only has Organization Member permissions, but you want to grant it Workspace Admin permissions for several Workspaces.
+There are two ways to use API tokens to interact with a Workspace:
+
+- Create a new Workspace API token that's scoped only to a single Workspace.
+- Add an existing [Organization API token](organization-api-tokens.md) to a Workspace and grant it Workspace permissions. You can add an Organization API token to multiple Workspaces.
 
 ### Create a Workspace API token
 
