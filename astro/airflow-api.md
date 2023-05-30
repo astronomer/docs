@@ -64,7 +64,7 @@ Refer to [Organization API tokens](organization-api-tokens#create-an-organizatio
 
 <TabItem value="deployment" label="Deployment API key">
 
-:::info
+:::caution
 Deployment API keys will soon be phased out in favor of Deployment-level API tokens. Astronomer recommends using Workspace tokens to reach the Airflow API until Deployment API tokens are released. 
 :::
 
