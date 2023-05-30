@@ -134,7 +134,6 @@ Astro Runtime now uses Python 3.10 by default. To continue using Python 3.9, see
 - Upgraded `astro-sdk-python` to 1.6.1, which includes support for MySQL and loading data from Azure blob storage to Databricks. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 - Upgraded `openlineage-airflow` to 0.26.0. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.26.0) for a complete list of changes. 
 - Blocked the ability to pause the Monitoring DAG with the Airflow API. The Monitoring DAG is used by Astronomer to operate your Deployments and should not be paused.
-- Added the Datadog provider. See the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow-providers-datadog/versions/3.3.0) for more information on using the provider.
 
 ## Astro Runtime 7.4.3
 
@@ -301,7 +300,6 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - Upgraded `astronomer-providers` to 1.16.0. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1160-2023-05-19) for a complete list of changes. 
 - Upgraded `openlineage-airflow` to 0.26.0. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.26.0) for a complete list of changes. 
 - Blocked the ability to pause the Monitoring DAG with the Airflow API. The Monitoring DAG is used by Astronomer to operate your Deployments and should not be paused.
-- Added the Datadog provider. See the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow-providers-datadog/versions/3.3.0) for more information on using the provider.
 
 ## Astro Runtime 6.4.0
 
