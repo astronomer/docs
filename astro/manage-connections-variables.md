@@ -167,7 +167,7 @@ astro dev object export --env-export
 astro deployment variable create -d <deployment_id> --load --env .env
 ```
 
-You can also export only variables from your local environment and then deploy them to Astro as part of your `include` folder:
+You can also export only variables from your local environment, and then deploy them to Astro as part of your `include` folder:
 
 ```bash
 # export variables in JSON format to vars.json in your astro project's include dir
