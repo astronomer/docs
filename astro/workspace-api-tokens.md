@@ -40,6 +40,7 @@ There are two ways to use API tokens to interact with a Workspace:
 
 
 ### Add an Organization API token to a Workspace
+You might want to add an Organization API token if your Organization API token only has Organization Member permissions, but you want to grant it Workspace Admin permissions for several Workspaces.
 
 1. In the Cloud UI, open your Workspace.
    
