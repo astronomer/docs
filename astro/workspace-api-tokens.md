@@ -71,7 +71,6 @@ If you delete a Workspace API token, make sure that no existing CI/CD pipelines 
 
 If you delete a Workspace API token or remove an Organization API token from your Workspace, make sure that no existing CI/CD pipelines are using the token. After you delete a Workspace API token, it can't be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
-
 1. In the Cloud UI, open your Workspace.
    
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
