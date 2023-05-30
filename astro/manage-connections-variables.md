@@ -35,7 +35,7 @@ The following table suggests possible management strategies for specific use cas
 
 ### Storage and encryption
 
-If you want to choose a strategy based on how Airflow connections and variables are stored, use the following table to understand which storage and encryption methods each strategy uses.
+If you want to choose a strategy based on how Airflow connections and variables are stored, the following table shows which storage and encryption methods that each strategy uses.
 
 | Strategy | Storage location | Visible via UI | Encrypted |
 |-----------|----------------|-----|------|
