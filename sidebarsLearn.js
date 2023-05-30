@@ -160,6 +160,7 @@ module.exports = {
         'airflow-great-expectations',
         'execute-notebooks',
         'marquez',
+        'airflow-mlflow',
         'airflow-mongodb',
         'airflow-snowflake',
         'soda-data-quality',

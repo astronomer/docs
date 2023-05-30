@@ -89,17 +89,23 @@ Please note that the **Test** button might return a 405 error message even if yo
     - **AWS Access Key ID**: Your [AWS Access Key ID](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html) or Minio login.
     - **AWS Secret Access Key**: Your AWS Secret Access Key or Minio password.
 
+## Step 3: Get the data 
 
-## Step 3: Create your feature engineering DAG
+In this tutorial we will predict the length of a possum's tail based on other attributes of the animal such as age, skull width, foot and head length. 
 
-<CodeBlock language="python">{feature_eng}</CodeBlock>
+1. Download [the dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/possum.csv) and save it in your `include` folder.
+2. Add a picture of a possum in your `include` folder and name it `opossum.jpeg`. If you don't have a possum picture ready you can use [this one from wikipedia](https://commons.wikimedia.org/wiki/File:Opossum_%2816701021016%29.jpg).
 
 ## Step 4: Create your feature engineering DAG
 
+<CodeBlock language="python">{feature_eng}</CodeBlock>
+
+## Step 5: Create your feature engineering DAG
+
 <CodeBlock language="python">{train}</CodeBlock>
 
-## Step 5: Create your prediction DAG
+## Step 6: Create your prediction DAG
 
 <CodeBlock language="python">{predict}</CodeBlock>
 
-## Step 6: Run your DAGs
+## Step 7: Run your DAGs
