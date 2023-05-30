@@ -21,6 +21,18 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.15.1 ([Release notes](cli/release-notes.md))
 
+## May 30, 2023
+
+### Manage permissions for groups of users with Teams
+
+Configure Teams from the Cloud UI to manage the permissions for many users across Workspaces from a single page. _Teams_ are a group of users in an Organization that you grant the same Workspace permissions, without needing to define them individually. 
+
+See [Make a Team](add-users.md#make-a-team) for setup steps.
+
+### Use Airflow operators in the Astro Cloud IDE
+
+You can now configure _operator cells_ in the Astro Cloud IDE to add Airflow operator functionality to your pipelines. You can create an operator cell based on any available Airflow operator in the [Astronomer Registry](https://registry.astronomer.io/), or you can create a custom operator cell type to run your team's custom operators. See [LINK] for more information. 
+
 ## May 23, 2023
 
 ### Introducing Astro Hosted and Hybrid
