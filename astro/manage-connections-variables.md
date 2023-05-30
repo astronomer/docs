@@ -186,7 +186,7 @@ To import connections or variables to any Airflow environment, you can use the [
 
 #### Using Airflow UI
 
-To export variables from a local Airflow or Astro Deployment, go to the **Admin** menu on the Airflow UI, click on **Variables** and select the variables you want to export. Then, click on **Export** option in the **Actions** dropdown. The file `variables.json` will be downloaded.
+To export variables from a local Airflow or Astro Deployment, go to the **Admin** menu on the Airflow UI, click on **Variables** and select the variables you want to export. Then, click on **Export** option in the **Actions** dropdown. This downloads the `variables.json` file locally.
 
 ![Export Variables](/img/docs/airflow-ui-export-vars.png)
 
