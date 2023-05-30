@@ -49,7 +49,7 @@ def predict():
         feature_df.dropna(inplace=True)  # drop rows with missing values
         feature_df.drop(target_column, axis=1, inplace=True)  # drop target column
         return feature_df.to_numpy()
-    
+
     # -------------------------- #
     # Retrieve the target column #
     # -------------------------- #
@@ -61,7 +61,7 @@ def predict():
         )
         feature_df.dropna(inplace=True)
         return feature_df[[target_column]]
-    
+
     # ------------------------- #
     # Retrieve the model run ID #
     # ------------------------- #
