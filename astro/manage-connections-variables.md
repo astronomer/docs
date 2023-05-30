@@ -141,7 +141,7 @@ For more information, see [Airflow API](airflow-api.md).
 
 In production environments with multiple team members, you might want to export Airflow connections and variables from an Airflow environment and import them to another environment. For example, you can export an Airflow connection that you use locally and import it to an Astro Deployment after you've tested it. 
 
-Use the following topics to learn different strategies for exporting and importing Airflow objects based on where they are stored:
+The following sections describe different strategies for exporting and importing Airflow objects based on where you store them:
 
 ### Secrets backend
 
