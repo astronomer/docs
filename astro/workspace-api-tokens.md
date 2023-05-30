@@ -51,7 +51,6 @@ There are two ways to use API tokens to interact with a Workspace:
 
 5. Click **Add**.
 
-
 ## Update a Workspace API token
 
 If you delete a Workspace API token, make sure that no existing CI/CD pipelines are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
