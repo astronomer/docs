@@ -46,7 +46,7 @@ If you want to choose a strategy based on how Airflow connections and variables 
 
 #### How Astro prioritizes storage locations
 
-If the same variable or connection is stored in multiple location, Astro applies and overrides your configurations in the following order:
+If you store the same variable or connection in multiple locations, Astro applies and overrides your configurations in the following order:
 
 1. Secrets backend 
 2. Environment variables
