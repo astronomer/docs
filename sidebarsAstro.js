@@ -92,7 +92,7 @@ module.exports = {
         {
           type: "category",
           label: "Executors",
-          items: ["choose-an-executor","celery-executor", "kubernetes-executor"],
+          items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
         "api-keys",
