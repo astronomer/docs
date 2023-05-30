@@ -5,6 +5,8 @@ id: custom-cell-reference
 description: Learn how to configure a custom cell type as JSON.
 ---
 
+This page contains reference information about all available JSON configurations for the custom operator cell type in the Astro Cloud IDE.  You enter this JSON when you create a new custom operator cell type in the Astro Cloud IDE. See [Create custom operator cells](cloud-ide/use-airflow-operators.md#create-custom-operator-cells) for setup steps.
+
 ## Display JSON reference
 
 The following table is a reference for all possible key-value pairs in the `display` section of the JSON request.
