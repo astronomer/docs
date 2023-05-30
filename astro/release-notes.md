@@ -33,6 +33,11 @@ See [Make a Team](add-users.md#make-a-team) for setup steps.
 
 You can now configure _operator cells_ in the Astro Cloud IDE to add Airflow operator functionality to your pipelines. You can create an operator cell based on any available Airflow operator in the [Astronomer Registry](https://registry.astronomer.io/), or you can create a custom operator cell type to run your team's custom operators. See [LINK] for more information. 
 
+### Bug fixes
+
+- In Astro Hosted, removed an irrelevant **AWS external ID** info page from the Cloud UI.
+- Fixed an issue where DAG-only deploys could be unreliable due to the deploy process not requesting enough resources in the cluster. 
+
 ## May 23, 2023
 
 ### Introducing Astro Hosted and Hybrid
