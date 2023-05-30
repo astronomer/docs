@@ -35,6 +35,12 @@ To see whether you're an Astro Hybrid user, open your Organization in the Cloud 
 
 See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-hybrid) to learn how the documentation has changed for current Astro Hybrid users.
 
+### Configure default Kubernetes Pods on Astro Hosted
+
+One of the biggest risks of running the Kubernetes executor or KubernetesPodOperator is that your tasks can accidentally request more resources than expected, which can drive up costs. To limit this risk, you can now configure default and maximum Pod resources from the Cloud UI. If a task tries to request Pod resources that are more than your configured limits, the task fails. 
+
+See [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources) for setup steps. 
+
 ### Documentation refactor for Astro Hybrid
 
 The following updates have been made to documentation to accommodate new Astro Hosted information:
