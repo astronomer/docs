@@ -34,7 +34,7 @@ If you have a GitHub account, you can use the [quickstart repository](https://gi
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 - An MLflow instance. This tutorial uses a local instance.
-- A blob storage account. This tutorial uses a local Minio bucket.
+- An object storage. This tutorial uses [Amazon S3](https://aws.amazon.com/s3/). For local testing you can also connect to [Minio](https://min.io/).
 
 ## Step 1: Configure your Astro project
 
@@ -93,14 +93,34 @@ Please note that the **Test** button might return a 405 error message even if yo
 
 In this tutorial we will predict the length of a possum's tail based on other attributes of the animal such as age, skull width, foot and head length. 
 
-1. Download [the dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/possum.csv) and save it in your `include` folder.
-2. Add a picture of a possum in your `include` folder and name it `opossum.jpeg`. If you don't have a possum picture ready you can use [this one from wikipedia](https://commons.wikimedia.org/wiki/File:Opossum_%2816701021016%29.jpg).
+1. Download [the dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/possum.csv) and save it in your `include` folder as `possum.csv`.
+2. Add a picture of a possum in your `include` folder and name it `possum.jpeg`. If you don't have a possum picture ready you can use [this one from wikipedia](https://commons.wikimedia.org/wiki/File:Opossum_%2816701021016%29.jpg).
 
-## Step 4: Create your feature engineering DAG
+## Step 4: Create a feature engineering DAG
 
-<CodeBlock language="python">{feature_eng}</CodeBlock>
+The Airflow pipeline presented in this tutorial consists of three DAGs. The first DAG will create the necessary object storage buckets, MLflow experiment and perform feature engineering on the possum dataset.
 
-## Step 5: Create your feature engineering DAG
+1. In your `dags` folder, create a file called `feature_eng.py`.
+
+2. Copy the following code into the file. 
+
+    <CodeBlock language="python">{feature_eng}</CodeBlock>
+
+    This DAG will first complete two setup tasks:
+
+    - The `create_buckets_if_not_exists` tasks creates the data bucket `DATA_BUCKET_NAME` which will store the features engineered from the possum dataset and the MLflow artifact bucket `MLFLOW_ARTIFACT_BUCKET_NAME` which will store the MLflow artifacts using the [S3CreateBucketOperator](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/S3CreateBucketOperator).
+    - The `prepare_mlflow_experiment` [task group](task-groups.md) checks all existing experiments in your MLflow instance for an experiment with the name `EXPERIMENT_NAME`. The `check_if_experiment_exists` task uses the [@task.branch decorator](airflow-decorators.md#list-of-available-airflow-decorators) to decide if creating the experiment is needed or not. In both cases the `get_current_experiment_id` task retrieves the correct experiment ID for `EXPERIMENT_NAME`. The tasks in this task group establish a connection to your MLflow instance using the [MLflowClientHook](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/hooks/client.py).
+
+    After the setup is complete data processing takes place:
+
+    - The `extract_data` task retrieves the data from the local CSV file using the [aql.dataframe decorator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) from the Astro Python SDK.
+    - The `build_features` task uses methods from [pandas](https://pandas.pydata.org/docs/) and [scikit-learn](https://scikit-learn.org/stable/) to one-hot encode categorical features and scale all features. The [mlflow](https://pypi.org/project/mlflow/) package is used to track these feature engineering steps in MLflow.
+
+    Lastly, `save_data_to_s3` task saves the dataframe containing the engineered features to the `DATA_BUCKET_NAME` S3 bucket using the [aql.export_file operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html) from the Astro Python SDK.
+
+## Step 5: Create a model training DAG
+
+The second DAG will train a linear regression model on the engineered features, keeping track of the model in MLflow. 
 
 <CodeBlock language="python">{train}</CodeBlock>
 

@@ -37,14 +37,22 @@ def predict():
     start = EmptyOperator(task_id="start")
     end = EmptyOperator(task_id="end")
 
+    # --------------------------------- #
+    # Retrieve the feature df from XCom #
+    # --------------------------------- #
+
     @task
     def fetch_feature_df_no_target(target_column, **context):
         feature_df = context["ti"].xcom_pull(
             dag_id="feature_eng", task_ids="build_features", include_prior_dates=True
         )
-        feature_df.dropna(inplace=True)
-        feature_df.drop(target_column, axis=1, inplace=True)
+        feature_df.dropna(inplace=True)  # drop rows with missing values
+        feature_df.drop(target_column, axis=1, inplace=True)  # drop target column
         return feature_df.to_numpy()
+    
+    # -------------------------- #
+    # Retrieve the target column #
+    # -------------------------- #
 
     @task
     def fetch_target(target_column, **context):
@@ -53,6 +61,10 @@ def predict():
         )
         feature_df.dropna(inplace=True)
         return feature_df[[target_column]]
+    
+    # ------------------------- #
+    # Retrieve the model run ID #
+    # ------------------------- #
 
     @task
     def fetch_model_run_id(**context):
@@ -125,7 +137,7 @@ def predict():
         ax.legend(loc="lower right")
 
         # Load and display the possum image in the upper right corner
-        possum_img = mpimg.imread("include/opossum.jpeg")
+        possum_img = mpimg.imread("include/possum.jpeg")
         ax_img = fig.add_axes(
             [0.75, 0.7, 0.2, 0.3]
         )  # Adjust the coordinates and size as needed

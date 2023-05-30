@@ -19,6 +19,10 @@ from mlflow_provider.operators.registry import (
 )
 import numpy as np
 
+# -------------- #
+# Set parameters #
+# -------------- #
+
 FILE_PATH = "possum.csv"
 
 ## AWS S3 parameters
@@ -45,6 +49,10 @@ def train():
     start = EmptyOperator(task_id="start")
     end = EmptyOperator(task_id="end", outlets=[Dataset("model_trained")])
 
+    # ------------------------------ #
+    # Retrieve the feature dataframe #
+    # ------------------------------ #
+
     @task
     def fetch_feature_df(**context):
         "Fetch the feature dataframe from the feature engineering DAG."
@@ -53,6 +61,10 @@ def train():
             dag_id="feature_eng", task_ids="build_features", include_prior_dates=True
         )
         return feature_df
+
+    # -------------------------- #
+    # Retrieve the experiment ID #
+    # -------------------------- #
 
     @task
     def fetch_experiment_id(experiment_name, max_results=1000):
@@ -69,6 +81,10 @@ def train():
                 return experiment["experiment_id"]
             else:
                 raise ValueError(f"{experiment_name} not found in MLFlow experiments.")
+
+    # --------------- #
+    # Train the model #
+    # --------------- #
 
     # Train a model
     @aql.dataframe()
@@ -109,6 +125,10 @@ def train():
         hyper_parameters={"alphas": np.logspace(-3, 1, num=30)},
         run_name="RidgeCV",
     )
+
+    # --------------------------------------------------------- #
+    # Register the model with MLflow and transition it to stage #
+    # --------------------------------------------------------- #
 
     @task_group
     def register_model():

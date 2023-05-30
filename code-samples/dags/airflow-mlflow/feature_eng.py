@@ -21,6 +21,9 @@ from airflow.operators.empty import EmptyOperator
 from airflow.providers.amazon.aws.operators.s3 import S3CreateBucketOperator
 import os
 
+# -------------- #
+# Set parameters #
+# -------------- #
 
 FILE_PATH = "possum.csv"
 
@@ -52,10 +55,19 @@ def feature_eng():
         outlets=[Dataset("s3://" + DATA_BUCKET_NAME + "_" + FILE_PATH)],
     )
 
+    # --------------------- #
+    # Create all S3 buckets #
+    # --------------------- #
+
     create_buckets_if_not_exists = S3CreateBucketOperator.partial(
         task_id="create_buckets_if_not_exists",
         aws_conn_id=AWS_CONN_ID,
     ).expand(bucket_name=[DATA_BUCKET_NAME, MLFLOW_ARTIFACT_BUCKET])
+
+    # ------------------------------------------- #
+    # Task group to prepare the MLflow experiment #
+    # and retrieve the experiment ID              #
+    # ------------------------------------------- #
 
     @task_group
     def prepare_mlflow_experiment():
@@ -146,14 +158,20 @@ def feature_eng():
             >> experiment_id
         )
 
+    # ------------------------------------------- #
+    # Extracting the data from the local CSV file #
+    # ------------------------------------------- #
+
     @aql.dataframe()
     def extract_data(data_file_path) -> DataFrame:
         import pandas as pd
 
         df = pd.read_csv(f"include/{data_file_path}")
-        return df.iloc[
-            :, 1:
-        ]  # fetch_california_housing(download_if_missing=True, as_frame=True).frame
+        return df.iloc[:, 1:]
+
+    # ------------------- #
+    # Feature engineering #
+    # ------------------- #
 
     @aql.dataframe()
     def build_features(
@@ -198,6 +216,10 @@ def feature_eng():
         return X_encoded
 
     extracted_df = extract_data(data_file_path=FILE_PATH)
+
+    # ----------------------- #
+    # Save the features in S3 #
+    # ----------------------- #
 
     save_data_to_s3 = aql.export_file(
         task_id="save_data_to_s3",
