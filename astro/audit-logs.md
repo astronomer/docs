@@ -124,35 +124,35 @@ The following table maps some common `path` attributes to their corresponding `r
 | A Workspace is updated.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}` | `apiKeyOnlyDeploymentsDefault`, `description`, `name` |
 | A Workspace is deleted. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}` | |
 | A deployment is transferred to another workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/deployments/{deploymentId}` | `workspaceIdTarget` |
-| A AWS cluster is created.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/aws` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
-| A AWS cluster is updated.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/aws/{clusterId}` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
+| An AWS cluster is created.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/aws` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
+| An AWS cluster is updated.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/aws/{clusterId}` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
 | A Azure cluster is created.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/azure` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `providerAccount`, `region`, `templateVersion`, `tenantId`, `type`, `vpcSubnetRange` |
 | A Azure cluster is updated.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/azure/{clusterId}` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion`, |
 | A GCP cluster is created.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/gcp` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `podSubnetRange` `providerAccount`, `region`, `servicePeeringRange`, `serviceSubnetRange`, `templateVersion`, `type`, `vpcSubnetRange` |
 | A GCP cluster is updated.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/gcp/{clusterId}` | `dbInstanceType`, `k8sTags`, `name`, `nodePools`, `templateVersion` |
 | A cluster is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/clusters/{clusterId}` | |
-| A Organization API token is created.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens` | `description`, `name`, `role`, `tokenExpiryPeriodInDays` |
-| A Organization API token is updated.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}` | `description`, `name`, `roles` |
-| A Organization API token is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}` | |
-| A Organization API token is rotated.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}/rotate` | |
+| An Organization API token is created.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens` | `description`, `name`, `role`, `tokenExpiryPeriodInDays` |
+| An Organization API token is updated.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}` | `description`, `name`, `roles` |
+| An Organization API token is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}` | |
+| An Organization API token is rotated.  | `/v1alpha1/organizations/{orgShortNameId}/api-tokens/{apiTokenId}/rotate` | |
 | A Workspace API token is created.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens` | `description`, `name`, `role`, `tokenExpiryPeriodInDays` |
 | A Workspace API token is updated.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens/{apiTokenId}` | `description`, `name`, `role` |
 | A Workspace API token is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens/{apiTokenId}` | |
 | A Workspace API token is rotated.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/api-tokens/{apiTokenId}/rotate` | |
-| A team is created.  | `/v1alpha1/organizations/{orgShortNameId}/teams` | `description`, `name`, `memberIds` |
-| A team is updated.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | `description`, `name` |
-| A team is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | |
-| Add members to a team.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}/members` | `memberIds` |
-| Remove a member from a team.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}/members` | |
-| Remove a team from a workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/teams/{teamId}` | |
-| Update a teams workspace role.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/teams/{teamId}/role` | `role` |
-| Update a DAG.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}` | `isPaused` |
-| Create a DAG run.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs` | `logicalDate` |
-| Set the state of a DAG run.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs/{pipelineRunId}` | `state` |
-| Clear a DAG run.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs/{pipelineRunId}/clear` | `isDryRun` |
-| Clear a task instances for a DAG run.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/clear-task-instances` | `endDate`, `includeDownstream`, `includeFuture`, `includeParentPipelines`, `includePast`, `includeSubPipelines`, `includeUpstream`, `onlyFailed`, `onlyRunning`, `pipelineRunId`, `resetPipelineRuns`, `startDate`, `taskIds` |
-| Set the state of a task.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs/{pipelineRunId}/tasks/{taskId}` | `state` |
-| Update the task instances state.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/update-task-instances-state` | `executionDate`, `includeDownstream`, `includeFuture`, `includePast`, `includeUpstream`, `isDryRun`, `pipelineRunId`, `state`, `taskId` |
+| A Team is created.  | `/v1alpha1/organizations/{orgShortNameId}/teams` | `description`, `name`, `memberIds` |
+| A Team is updated.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | `description`, `name` |
+| A Team is deleted.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}` | |
+| A user is added to a Team.  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}/members` | `memberIds` |
+| A user is removed from a Team  | `/v1alpha1/organizations/{orgShortNameId}/teams/{teamId}/members` | |
+| A Team is removed from a Workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/teams/{teamId}` | |
+| A Team's role in a Workspace is updated.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/teams/{teamId}/role` | `role` |
+| A DAG is updated.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}` | `isPaused` |
+| A DAG run is created.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs` | `logicalDate` |
+| A DAG run has its state updated.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs/{pipelineRunId}` | `state` |
+| A DAG run is cleared.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs/{pipelineRunId}/clear` | `isDryRun` |
+| A task instance for a DAG run is cleared.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/clear-task-instances` | `endDate`, `includeDownstream`, `includeFuture`, `includeParentPipelines`, `includePast`, `includeSubPipelines`, `includeUpstream`, `onlyFailed`, `onlyRunning`, `pipelineRunId`, `resetPipelineRuns`, `startDate`, `taskIds` |
+| A task instance's state is set.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/runs/{pipelineRunId}/tasks/{taskId}` | `state` |
+| A task instance's state is updated.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/runtimes/{runtimeId}/pipelines/{pipelineName}/update-task-instances-state` | `executionDate`, `includeDownstream`, `includeFuture`, `includePast`, `includeUpstream`, `isDryRun`, `pipelineRunId`, `state`, `taskId` |
 
 Use your analytics or audit tool to view additional attribute mapping information. 
 
@@ -184,11 +184,11 @@ The following table lists the fields that are unique to Astro CLI access events.
 | ------- | ---------------------------------------------------- |
 | `astroClient` | A unique identifier for the API client. `cli` means the requst came from the Astro CLI. |
 | `astroClientVersion` | A unique identifier for the API client version. |
-| `userAgent` | A unique identifier for the API client type and version. `astro-cli/1.15.1` means the request came from v1.15.1 of the Astro CLI.|
+| `userAgent` | A unique identifier for the API client type and version. `astro-cli/1.15.1` means the request came from version 1.15.1 of the Astro CLI.|
 
 ### Cloud IDE API event fields
 
-The Cloud IDE uses the same unique events as the v2 API.
+The Astro Cloud IDE uses the same unique events as the v2 API.
 
 The following table maps some common `path` attributes to their corresponding `requestBody` attributes. 
 
