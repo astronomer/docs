@@ -135,7 +135,7 @@ module.exports = {
                 "manage-domains"],
             },
             "organization-api-tokens",
-            "astro-audit-logs",
+            "audit-logs",
           ],
         },
         {
@@ -214,6 +214,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",
