@@ -31,7 +31,7 @@ See [Make a Team](add-users.md#make-a-team) for setup steps.
 
 ### Bug fixes
 
-- In Astro Hosted, removed an irrelevant **AWS external ID** info page from the Cloud UI.
+- In Astro Hosted, an irrelevant **AWS external ID** info page has been removed from the Cloud UI.
 - Fixed an issue where DAG-only deploys could be unreliable due to the deploy process not requesting enough resources in the cluster. 
 
 ## May 23, 2023
