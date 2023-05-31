@@ -108,11 +108,11 @@ The following table maps some common `path` attributes to their corresponding `r
 | A managed domain for an Organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/domains/{domainId}` | `enforcedLogins` |
 | A managed domain for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/domains/{domainId}` | |
 | A managed domain for an Organization is verified.   | `/v1alpha1/organizations/{orgShortNameId}/domains/{domainId}/verify` | |
-| SSO Bypass Key for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/sso-bypass-key` | |
-| SSO Bypass Key for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/sso-bypass-key` | |
-| SSO Connection for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections` | |
-| SSO Connection for an Organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
-| SSO Connection for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
+| An SSO Bypass Key for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/sso-bypass-key` | |
+| An SSO Bypass Key for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/sso-bypass-key` | |
+| An SSO Connection for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections` | |
+| An SSO Connection for an Organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
+| An SSO Connection for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
 | A new user is invited to an Organization.   | `/v1alpha1/organizations/{orgShortNameId}/invites` | `inviteEmail`, `role` |
 | A invite to the Organization is updated.   | `/v1alpha1/users/self/invites/{inviteId}` | `inviteStatus` |
 | A invite to the Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/invites/{inviteId}` | |
