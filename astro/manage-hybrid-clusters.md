@@ -21,7 +21,7 @@ An Astro Hybrid cluster runs your Astro Deployments in isolated namespaces on yo
 
 Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Cloud UI and Airflow UI continue to be available and your Airflow tasks are not interrupted.
 
-If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro-hybrid).
+If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro).
 
 ## Create a cluster
 

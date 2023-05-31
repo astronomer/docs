@@ -308,6 +308,7 @@ If this style of DAG writing feels more intuitive to you, read more about it on 
 Astronomer offers a variety of resources like this tutorial to learn more about how to use Airflow.
 
 - [Astronomer Webinars](https://www.astronomer.io/events/webinars/) cover concepts and use cases in-depth and offer the possibility to ask us questions live on air.
+- [Live with Astronomer](https://www.astronomer.io/events/live/) are hands-on and code focussed live walkthroughs of specific Airflow features.
 - [Astronomer Learn](https:/docs.astronomer.io/learn/) covers both entry and expert level concepts in Airflow.
 - [Astronomer Academy](https://academy.astronomer.io/) offers many video tutorials and the option to purchase full length Airflow courses and to take exams to get certified.
 

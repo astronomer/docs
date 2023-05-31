@@ -121,6 +121,7 @@ To learn more about the Airflow infrastructure, see [Airflow Components](airflow
 
 - [Astro CLI](https://docs.astronomer.io/astro/cli/get-started)
 - [Astronomer Webinars](https://www.astronomer.io/events/webinars/)
+- [LIVE with Astronomer](https://www.astronomer.io/events/live/)
 - [Astronomer Learn](https:/docs.astronomer.io/learn/)
 - [Astronomer Academy](https://academy.astronomer.io/)
 - [Official Airflow Documentation](https://airflow.apache.org/docs/)

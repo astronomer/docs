@@ -101,11 +101,6 @@ module.exports = {
         "manage-deployments-as-code",
         {
           type: "category",
-          link: {
-            type: 'generated-index',
-            title: 'Connect Astro',
-            description: 'Connect Astro to your existing cloud resources.'
-          },
           label: "Connect to external resources",
           items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
         },       
@@ -170,7 +165,7 @@ module.exports = {
               link: {
                 type: 'generated-index',
                 title: 'Install Astro Hybrid',
-                description: 'Install Astro Hybrid on your cloud.'
+                description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
               },
               items: ["install-aws-hybrid", "install-azure-hybrid", "install-gcp-hybrid"],
             },
