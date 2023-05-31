@@ -87,9 +87,9 @@ The following table maps some common `path` attributes to their corresponding `r
 | SSO Connection for an Organization is created.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections` | |
 | SSO Connection for an Organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
 | SSO Connection for an Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/sso-connections/{connectionId}` | |
-| A new user is invited to an organization.   | `/v1alpha1/organizations/{orgShortNameId}/invites` | `inviteEmail`, `role` |
-| A invite to the organization is updated.   | `/v1alpha1/users/self/invites/{inviteId}` | `inviteStatus` |
-| A invite to the organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/invites/{inviteId}` | |
+| A new user is invited to an Organization.   | `/v1alpha1/organizations/{orgShortNameId}/invites` | `inviteEmail`, `role` |
+| A invite to the Organization is updated.   | `/v1alpha1/users/self/invites/{inviteId}` | `inviteStatus` |
+| A invite to the Organization is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/invites/{inviteId}` | |
 | A user is deleted from an organization.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}` | |
 | A user is assigned a new organization role.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}/role` | `role` |
 | A user is assigned a new workspace role.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/users/{userId}/role` | `role`|
@@ -155,7 +155,7 @@ The following table lists the fields that are unique to Astro CLI access events.
 | `astroClientVersion` | A unique identifier for the API client version. |
 | `userAgent` | A unique identifier for the API client type and version. |
 
-##### Cloud IDE API Event Fields
+#### Cloud IDE API Event Fields
 
 The Cloud IDE uses the same unique events as the v2 API.
 
