@@ -10,9 +10,9 @@ On Astro, you can configure Celery executor in the following ways:
 - The minimum and maximum number of workers that your Deployment can run at a time.
 - The number of tasks that each worker can run at a time.
 
-You can set these configurations per worker queue, which is a set of configurations that apply to a group of workers in your Deployment. With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
+You can set these configurations per [worker queue](configure-worker-queues.me). With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
-The following section discusses basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
+The following document explains basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
 
 :::tip
 

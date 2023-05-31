@@ -133,7 +133,7 @@ When a Deployment has high availability enabled, it runs multiple instances of i
 
 ## Configure Kubernetes Pod resources
 
-The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure these components in your DAG code to define your task environment, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. 
+The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure Pods in your DAG code to define individual task environments, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. 
 
 Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
 
