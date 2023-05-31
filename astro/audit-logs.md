@@ -5,7 +5,7 @@ id: astro-audit-logs
 
 :::caution
 
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews).
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
 :::
 
