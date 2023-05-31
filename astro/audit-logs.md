@@ -1,6 +1,7 @@
 ---
-title: 'Astro audit logs'
+title: 'Export Astro audit logs'
 id: astro-audit-logs
+sidebar_label: Export audit logs
 ---
 
 :::caution
@@ -9,9 +10,33 @@ This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-pre
 
 :::
 
-Astro audit logs record Astro control plane administrative activities and events. You can use the audit logs to determine who did what, where, and when. You can also use audit logs to ensure your organization is meeting its security and regulatory requirements. For example, you can use audit logs to determine when users were added to your organization or to individual Workspaces.
+Astro audit logs record Astro control plane administrative activities and events. You can use the audit logs to determine who did what, where, and when. You can also use audit logs to ensure your Organization is meeting its security and regulatory requirements. For example, you can use audit logs to determine when users were added to your Organization or to individual Workspaces.
 
-### Available audit log data
+## Export audit logs
+
+Audit logs are retained for 90 days. Organization Owner permissions are required to export audit logs. 
+
+1. In the Cloud UI, click the **Settings** tab.
+
+2. Select the number days of audit data to export in the **Audit Logs** area and then click **Export**.
+
+    The extracted audit log data is saved as a JSON file in your `downloads` directory with the default filename `<astro-organization-name>-logs-<number-of-days>-days-<date>.json`.
+
+You can also export logs using the Astro CLI.
+
+1. Run the following command to enable the feature:
+
+    ```sh
+    astro config set -g beta.audit_logs true
+    ```
+
+2. Run the following command to export audit logs as a GZIP file to your current directory:
+
+    ```sh
+    astro organization audit-logs export --organization-name="<your-organization-name>"
+    ```
+
+## Reference: Available audit log data
 
 The following categories of event data are available in the audit log:
 
@@ -21,7 +46,7 @@ The following categories of event data are available in the audit log:
 
 The audit log file is provided as a newline delimited JSON (NDJSON) file. Every entry in the audit log file corresponds to an event, and event attributes provide additional information about each event. 
 
-#### Common fields
+### Common fields
 
 The following table lists the common fields shared by all three categories of event data.
 
@@ -34,11 +59,12 @@ The following table lists the common fields shared by all three categories of ev
 | `sourceIp` | The IP address of the originating request. |
 | `userAgent` | The application used to make the request. |
 
-#### API event fields
+### API event fields
 
 Audit log events can be generated from the v1 API or the v2 API. Each API generates different fields for the same actions, and your audit log might include events from both APIs. Audit log events for the v1 API are expected to decline as Astronomer transitions to the v2 API. 
 
-##### v1 API event fields
+#### v1 API event fields
+
 The following table lists the fields that are unique to v1 API events.
 
 | Field  | Description                                          |
@@ -60,7 +86,7 @@ The following table maps some common `operationName` attributes to their corresp
 | An API key is deleted for a Deployment. | `deleteDeploymentApiKey` | `id` |
 | The code for a Deployment is updated. | `ImageCreate` | `deploymentId` |
 
-##### v2 API event fields 
+#### v2 API event fields 
 
 The following table lists the fields that are unique to v2 API events.
 
@@ -130,7 +156,7 @@ The following table maps some common `path` attributes to their corresponding `r
 
 Use your analytics or audit tool to view additional attribute mapping information. 
 
-#### Airflow UI access event fields
+### Airflow UI access event fields
 
 The following table lists the fields that are unique to Airflow UI access events.
 
@@ -140,7 +166,7 @@ The following table lists the fields that are unique to Airflow UI access events
 | `path` | The relative path of the page being accessed. For example, `/dzl9chy4/configuration`.  |
 | `method` | The HTTP method for the request. |
 
-#### Astronomer container registry access event fields
+### Astronomer container registry access event fields
 
 The following table lists the fields that are unique to Astronomer container registry access events.
 
@@ -150,7 +176,7 @@ The following table lists the fields that are unique to Astronomer container reg
 | `path` | The path to the image in the registry. |
 | `method` | The HTTP method for the request. |
 
-#### Astro CLI access event fields
+### Astro CLI access event fields
 
 The following table lists the fields that are unique to Astro CLI access events.
 
@@ -160,7 +186,7 @@ The following table lists the fields that are unique to Astro CLI access events.
 | `astroClientVersion` | A unique identifier for the API client version. |
 | `userAgent` | A unique identifier for the API client type and version. `astro-cli/1.15.1` means the request came from v1.15.1 of the Astro CLI.|
 
-#### Cloud IDE API Event Fields
+### Cloud IDE API event fields
 
 The Cloud IDE uses the same unique events as the v2 API.
 
@@ -168,49 +194,23 @@ The following table maps some common `path` attributes to their corresponding `r
 
 | Event | `path` attribute                                          | `requestBody` attributes                   |
 | ------- | ---------------------------------------------------- | --------------------------------- |
-| Create an IDE Pipeline.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines` | `description`, `name`, `scheduleInterval`, `startDate`, `timezone` |
-| Update an IDE Pipeline.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | `cellPositions`, `description`, `imports` `name`, `scheduleInterval`, `startDate`, `timezone` |
-| Delete an IDE Pipeline.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | |
-| Create an IDE Project.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects` | `description`, `name` |
-| Update an IDE Project.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}` | `connections`, `git`, `includes`, `requirements`, `variables`, `description`, `name` |
-| Delete an IDE Project.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}` | |
-| Create a git branch for a project | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/git/branches` | `from`, `name` |
-| Create a git branch for a project | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/git/commits` | `branch`, `message`, `paths` |
-| Test a connections against a project | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/test-connection` | `extra`, `host`, `id`, `login`, `password`, `port`, `schema`, `type` |
-| Create a new Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types` | `behavior`, `configs`, `datatype`, `display`, `name` |
-| Update a Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types/{cellTypeName}` | `behavior`, `configs`, `datatype`, `display`, `name` |
-| Delete a Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types/{cellTypeName}` | |
-| Validate a Cloud IDE cell type | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/validate-cell-type` | `behavior`, `configs`, `datatype`, `display`, `name` |
-| Create a new Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells` | `dependenciesExplicit`, `name`, `type`, `typeConfigForms`, `typeConfigs` |
-| Update a Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}` | `dependenciesExplicit`, `name`, `type`, `typeConfigForms`, `typeConfigs` |
-| Delete a Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}` | |
-| Duplicate a Cloud IDE cell | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}/duplicate` | `name` |
-| Create a new Cloud IDE cell run | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}/runs` | `pipelineSessionId` |
-| Create a new Cloud IDE pipeline session | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | `pipelineSessionId` |
+| An pipeline is created.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines` | `description`, `name`, `scheduleInterval`, `startDate`, `timezone` |
+| A pipeline is updated.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | `cellPositions`, `description`, `imports` `name`, `scheduleInterval`, `startDate`, `timezone` |
+| A pipeline is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | |
+| A project is created.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects` | `description`, `name` |
+| A project is updated.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}` | `connections`, `git`, `includes`, `requirements`, `variables`, `description`, `name` |
+| A project is deleted.   | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}` | |
+| A branch for a project is created. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/git/branches` | `from`, `name` |
+| A commit for a project branch is created. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/git/commits` | `branch`, `message`, `paths` |
+| A connection is tested in a project. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/test-connection` | `extra`, `host`, `id`, `login`, `password`, `port`, `schema`, `type` |
+| A custom operator cell type is created. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types` | `behavior`, `configs`, `datatype`, `display`, `name` |
+| A custom operator cell type is updated. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types/{cellTypeName}` | `behavior`, `configs`, `datatype`, `display`, `name` |
+| A custom operator cell type is deleted. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/cell-types/{cellTypeName}` | |
+| A custom operator cell type is tested. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/validate-cell-type` | `behavior`, `configs`, `datatype`, `display`, `name` |
+| A cell instance is created. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells` | `dependenciesExplicit`, `name`, `type`, `typeConfigForms`, `typeConfigs` |
+| A cell instance is updated. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}` | `dependenciesExplicit`, `name`, `type`, `typeConfigForms`, `typeConfigs` |
+| A cell instance is deleted. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}` | |
+| A cell instance is duplicated. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}/duplicate` | `name` |
+| A cell run is triggered. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}/cells/{cellId}/runs` | `pipelineSessionId` |
+| A pipeline run is triggered. | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/projects/{projectId}/pipelines/{pipelineId}` | `pipelineSessionId` |
 
-### Export audit logs
-
- Audit logs are retained for 90 days. Organization Owner permissions are required to export audit logs. 
-
- 1. In the Cloud UI, click the **Settings** tab.
-
- 2. Select the number days of audit data to export in the **Audit Logs** area and then click **Export**.
-
-    The extracted audit log data is saved as a JSON file in your `downloads` directory with the default filename `<astro-organization-name>-logs-<number-of-days>-days-<date>.json`.
-
-
-You can also export logs using the Astro CLI.
-
-1. Run the following command to enable the feature:
-
-    ```sh
-    astro config set -g beta.audit_logs true
-    ```
-
-2. Run the following command to export audit logs as a GZIP file to your current directory:
-
-    ```sh
-    astro organization audit-logs export --organization-name="<your-organization-name>"
-    ```
-
-    
