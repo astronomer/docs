@@ -503,7 +503,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 14. In the **Scope** setting list, select **Sync only assigned users and groups**.
    
-15. Click the *Provisioning status** toggle to turn provisioning status on.
+15. Click the **Provisioning status** toggle to turn provisioning status on.
 
 16. Click **Save**.
 

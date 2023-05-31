@@ -9,6 +9,39 @@ description: Astronomer Software release notes.
 
 0.32 is the latest stable version of Astronomer Software, while 0.30 remains the latest long-term support (LTS) release. To upgrade to 0.32, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.31.1
+
+Release date: June 2, 2023
+
+### Additional improvements
+
+- [Underprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
+
+    - PGBouncer
+    - Statsd
+    - Flower
+  
+- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [underprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
+- Teams without any users are now automatically deleted.
+- You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
+- You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
+
+### Bug fixes
+
+- Fixed an issue where a service account with the Workspace Editor role could update a Deployment when it didn't have any Deployment-level permissions for the Deployment. 
+- Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
+- Fixed an issue where resource requests configured from the Software UI could get out of sync with the Houston database.
+- Fixed an issue where underprovisioning factors did not persist in the Houston database.
+- Reduced the number of redundant calls that Astronomer Software makes to your identity provider (IdP) when a user logs in.
+- Fixed a security vulnerability in logging.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491)
+    - [CVE-2023-1999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1999)
+    - [CVE-2023-27561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27561)
+    - [CVE-2022-41727](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41727)
+    - [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840)
+
 ## 0.32.0
 
 Release date: April 28, 2023
