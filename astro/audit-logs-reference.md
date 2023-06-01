@@ -1,7 +1,7 @@
 ---
 title: 'Reference: Astro audit log fields'
 id: audit-logs-reference
-sidebar_label: Astro audit log fields
+sidebar_label: Audit log fields
 ---
 
 This document is a reference for all available fields in [Astro audit logs](audit-logs.md).
