@@ -26,7 +26,7 @@ To change this behavior, you can change the amount of CPU and memory that an AU 
             overProvisioningFactorMem: 1
             overProvisioningFactorCPU: 1
 
-            ## (Optional) Remove components that the underprovisioning factor should not apply to
+            ## (Optional) Remove components that the overprovisioning factor should not apply to
             overProvisioningComponents:
 
               - scheduler
