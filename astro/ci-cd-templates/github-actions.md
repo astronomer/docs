@@ -541,7 +541,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
 
 ## Private network templates
 
-If you use GitHub Enterprise and can't use the public Astronomer [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme), use the following templates to implement CI/CD.
+If you use GitHub Enterprise and can't use the public Astronomer [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace, use the following templates to implement CI/CD.
 
 <Tabs
     defaultValue="standard"
