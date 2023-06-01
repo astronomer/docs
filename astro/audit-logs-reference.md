@@ -17,7 +17,9 @@ The audit log file is provided as a newline delimited JSON (NDJSON) file. Every 
 
 ## Common fields
 
-The following table lists the common fields shared by all three categories of event data.
+The following table lists the common fields shared by all categories of event data.
+
+#### Table: Common fields in audit logs
 
 | Field            | Description                                                                                                           |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -32,9 +34,7 @@ The following table lists the common fields shared by all three categories of ev
 
 Audit log events can be generated from the v1 API or the v2 API. Each API generates different fields for the same actions, and your audit log might include events from both APIs. Audit log event frequency for the v1 API are expected to decline as Astronomer transitions to the v2 API. 
 
-### v1 API event fields
-
-The following table lists the fields that are unique to v1 API events.
+#### Table: v1 API event fields
 
 | Field               | Description                                                                      |
 | ------------------- | -------------------------------------------------------------------------------- |
@@ -47,6 +47,8 @@ The following table lists the fields that are unique to v1 API events.
 
 The following table maps some common `operationName` attributes to their corresponding `requestInput` attributes. 
 
+#### Table: `operationName` attribute mappings
+
 | Event                                   | `operationName` attribute   | `requestInput` attributes |
 | --------------------------------------- | --------------------------- | ------------------------- |
 | A new Deployment is created.            | `createDeployment`          | `label`, `workspaceId`    |
@@ -56,9 +58,7 @@ The following table maps some common `operationName` attributes to their corresp
 | An API key is deleted for a Deployment. | `deleteDeploymentApiKey`    | `id`                      |
 | The code for a Deployment is updated.   | `ImageCreate`               | `deploymentId`            |
 
-### v2 API event fields 
-
-The following table lists the fields that are unique to v2 API events.
+#### Table: v2 API event fields 
 
 | Field             | Description                                     |
 | ----------------- | ----------------------------------------------- |
@@ -69,6 +69,8 @@ The following table lists the fields that are unique to v2 API events.
 | `response status` | The HTTP response status code.                  |
 
 The following table maps some common `path` attributes to their corresponding `requestBody` attributes. 
+
+#### Table: `path` attribute mappings
 
 | Event                                             | `path` attribute                                                                                                                                      | `requestBody` attributes                                                                                                                                                                                                      |
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -130,15 +132,17 @@ Use your analytics or audit tool to view additional attribute mapping informatio
 
 The following table lists the fields that are unique to Airflow UI access events.
 
+#### Table: Airflow UI access event fields
+
 | Field       | Description                                                                                                                                                        |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `method`    | The HTTP method for the request.                                                                                                                                   |
 | `path`      | The relative path of the page being accessed. For example, `/dzl9chy4/configuration`.                                                                              |
 | `targetUrl` | The URL for the canonical name record in the Airflow webserver that runs in the Astro data plane. For example, `https://cl8gwrnw601f10tyxhgrhaayw.astronomer.run`. |
 
-## Astronomer container registry access event fields
-
 The following table lists the fields that are unique to Astronomer container registry access events.
+
+#### Table: Astronomer container registry access event fields
 
 | Field          | Description                                                                     |
 | -------------- | ------------------------------------------------------------------------------- |
@@ -150,17 +154,17 @@ The following table lists the fields that are unique to Astronomer container reg
 
 The following table lists the fields that are unique to Astro CLI access events.
 
+#### Table: Astro CLI access event fields
+
 | Field                | Description                                                                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `astroClient`        | A unique identifier for the API client. `cli` means the request came from the Astro CLI.                                                 |
 | `astroClientVersion` | A unique identifier for the API client version.                                                                                          |
 | `userAgent`          | A unique identifier for the API client type and version. `astro-cli/1.15.1` means the request came from version 1.15.1 of the Astro CLI. |
 
-## Astro Cloud IDE API event fields
+The Astro Cloud IDE uses the same unique events as the v2 API. The following table maps some common `path` attributes to their corresponding `requestBody` attributes. 
 
-The Astro Cloud IDE uses the same unique events as the v2 API.
-
-The following table maps some common `path` attributes to their corresponding `requestBody` attributes. 
+#### Table: Astro Cloud IDE `path` mappings
 
 | Event                                     | `path` attribute                                                                                                                         | `requestBody` attributes                                                                      |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
