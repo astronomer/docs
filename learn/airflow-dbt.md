@@ -22,19 +22,19 @@ For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud w
 
 If you are already familiar with Airflow and dbt Core, you can get started using this code sample:
 
-    ```python
-    DbtTaskGroup(
-        group_id="transform_data",
-        dbt_project_name=DBT_PROJECT_NAME,
-        conn_id=CONNECTION_ID,
-        dbt_root_path=DBT_ROOT_PATH,
-        dbt_args={
-            "dbt_executable_path": DBT_EXECUTABLE_PATH,
-            "schema": SCHEMA_NAME,
-            "vars": '{"my_name": "Astro"}',
-        },
-    )
-    ```
+```python
+DbtTaskGroup(
+    group_id="transform_data",
+    dbt_project_name=DBT_PROJECT_NAME,
+    conn_id=CONNECTION_ID,
+    dbt_root_path=DBT_ROOT_PATH,
+    dbt_args={
+        "dbt_executable_path": DBT_EXECUTABLE_PATH,
+        "schema": SCHEMA_NAME,
+        "vars": '{"my_name": "Astro"}',
+    },
+)
+```
 
 ## Why use Airflow with dbt Core?
 
