@@ -167,5 +167,29 @@ module.exports = {
         'airflow-weights-and-biases',
       ],
     },
+    {
+      type: 'category',
+      label: 'Examples',
+      link: {
+        type: 'generated-index',
+        title: 'Examples',
+        description: 'See examples of use cases and more with Apache Airflow.'
+      },
+      items: [
+        {
+          type: 'category',
+          label: 'Local Development',
+          link: {
+            type: 'generated-index',
+            title: 'Local Development',
+            description: 'See examples of setting up local development environments for Airflow.',
+          },
+          items: [
+            'pycharm-local-dev',
+            'vscode-local-dev',
+          ],
+        },
+      ],
+    },
   ],
 };
