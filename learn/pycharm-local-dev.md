@@ -60,8 +60,8 @@ From the Services pane, start Docker by clicking the green play button and youâ€
 
 You can view logs for the containers by clicking on `/scheduler`, `/triggerer`, `/webserver`, or `/airflow-dev_2cd823-postgres` (this may be a different string based on what the name of the parent directory for your project is):
 
-![Logs](/img/examples/pycharm_local_dev_docker_logs.png)
+![Logs](/img/examples/pycharm_local_dev_logs.png)
 
 You can run Airflow CLI commands by right clicking on `/scheduler` and selecting `Create Terminal` to bash into the container:
 
-![CLI](/img/examples/pycharm_local_dev_docker_cli.png)
+![CLI](/img/examples/pycharm_local_dev_cli.png)
