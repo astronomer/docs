@@ -140,6 +140,7 @@ module.exports = {
                 "manage-domains"],
             },
             "organization-api-tokens",
+            "audit-logs",
           ],
         },
         {
@@ -218,6 +219,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",
