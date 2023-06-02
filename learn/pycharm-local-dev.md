@@ -34,11 +34,11 @@ Using PyCharm to write Airflow DAGs has multiple advantages like code autocomple
 
 Here is an example of deprecated imports:
 
-![Deprecated Imports](/img/examples/pycharm_local_dev_deprecated_imports.png)
+![Deprecated Imports](/img/examples/pycharm_local_dev_deprecated_import.png)
 
 Here is an example of an unused import:
 
-![Unused Imports](/img/examples/pycharm_local_dev_unused_imports.png)
+![Unused Imports](/img/examples/pycharm_local_dev_unused_import.png)
 
 Here is an example error syntax highlighting:
 
