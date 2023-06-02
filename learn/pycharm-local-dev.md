@@ -20,7 +20,7 @@ In your PyCharm preferences go to **Build, Execution, Deployment** >> **Docker**
 
 ![Docker settings](/img/examples/pycharm_local_dev_docker_settings.png)
 
-Go to **Project: <your-project-name>** >> **Python Interpreter** and click the settings gear icon next to Python Interpreter, then click **Add**:
+Go to **Project: your-project-name** >> **Python Interpreter** and click the settings gear icon next to Python Interpreter, then click **Add**:
 
 ![Interpreter settings](/img/examples/pycharm_local_dev_interpreter.png)
 
