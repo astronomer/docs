@@ -10,7 +10,7 @@ from astro_databricks.operators.notebook import DatabricksNotebookOperator
 from astro_databricks.operators.workflow import DatabricksWorkflowTaskGroup
 
 
-DATABRICKS_LOGIN_EMAIL = "tamara.fingerlin+1@gmail.com"
+DATABRICKS_LOGIN_EMAIL = "<your-databricks-login-email>"
 DATABRICKS_NOTEBOOK_NAME_1 = "notebook1"
 DATABRICKS_NOTEBOOK_NAME_2 = "notebook2"
 DATABRICKS_NOTEBOOK_PATH_1 = (
@@ -19,7 +19,6 @@ DATABRICKS_NOTEBOOK_PATH_1 = (
 DATABRICKS_NOTEBOOK_PATH_2 = (
     f"/Users/{DATABRICKS_LOGIN_EMAIL}/{DATABRICKS_NOTEBOOK_NAME_2}"
 )
-
 DATABRICKS_JOB_CLUSTER_KEY = "tutorial-cluster"
 DATABRICKS_CONN_ID = "databricks_conn"
 
@@ -48,7 +47,7 @@ job_cluster_spec = [
 ]
 
 
-@dag(start_date=datetime(2023, 1, 1), schedule=None, catchup=False)
+@dag(start_date=datetime(2023, 6, 1), schedule=None, catchup=False)
 def my_simple_databricks_dag():
     task_group = DatabricksWorkflowTaskGroup(
         group_id="databricks_workflow",

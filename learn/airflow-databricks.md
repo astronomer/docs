@@ -76,8 +76,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Configure your Astro project
 
-To use dbt with Airflow install the Astro Databricks provider in your Astro project.
-
 1. Add the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) to your requirements.txt file.
 
     ```text
@@ -110,9 +108,7 @@ You can orchestrate any existing Databricks notebooks in a Databricks Workflow u
     print("World")
     ```
 
-## Step 5: Configure the Databricks connection
-
-Connect your Airflow environment to Databricks via an [Airflow connection](connections.md).
+## Step 3: Configure the Databricks connection
 
 1. Start Airflow by running `astro dev start`.
 
@@ -126,20 +122,21 @@ Connect your Airflow environment to Databricks via an [Airflow connection](conne
     - **Login**: Your Databricks login username (email).
     - **Password**: Your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#databricks-personal-access-tokens).
 
-## Step 6: Create your DAG
+## Step 4: Create your DAG
 
 1. In your `dags` folder, create a file called `my_simple_databricks_dag.py`.
 
-2. Copy and paste the following DAG code into the file:
+2. Copy and paste the following DAG code into the file. Make sure to replace the `DATABRICKS_LOGIN_EMAIL` variable with your Databricks login email. If you are using your existing Databricks notebooks you also will have to adjust the notebook names and potentially have to add additional tasks defined with the DatabricksNotebookOperator to orchestrate more than two Databricks notebooks in this Databricks Workflow.
 
     <CodeBlock language="python">{databricks_tutorial_dag}</CodeBlock>
 
-    This DAG uses the Astro Databricks provider to create a Databricks Workflow that runs the two notebooks you prepared in [Step 4](#step-4-create-databricks-notebooks).
+    This DAG uses the Astro Databricks provider to create a Databricks Workflow that runs two notebooks.
 
     The `databricks_workflow` task group, created using the `DatabricksWorkflowTaskGroup` class, automatically creates a Databricks Workflow that executes the Databricks notebooks you specified in the individual DatabricksNotebookOperators. One of the biggest benefits of this setup is the use of a Databricks job cluster, allowing you to [significantly reduce your Databricks cost](https://www.databricks.com/product/pricing). The task group contains three tasks:
-        - The `launch` task, which the task group automatically generates, provisions a Databricks `job_cluster` with the spec defined as `job_cluster_spec` and creates the Databricks job from the tasks within the task group.
-        - The `notebook1` task runs the `notebook1` notebook in this cluster as the first part of the Databricks job.
-        - The `notebook2` task runs the `notebook2` notebook as the second part of the Databricks job. 
+
+    - The `launch` task, which the task group automatically generates, provisions a Databricks `job_cluster` with the spec defined as `job_cluster_spec` and creates the Databricks job from the tasks within the task group.
+    - The `notebook1` task runs the `notebook1` notebook in this cluster as the first part of the Databricks job.
+    - The `notebook2` task runs the `notebook2` notebook as the second part of the Databricks job. 
 
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task group in order to expand it and see all tasks.  
 
