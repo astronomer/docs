@@ -1,5 +1,5 @@
 """
-### Run a dbt Core project as a task group with the Astro dbt provider
+### Run a dbt Core project as a task group with Cosmos
 
 Simple DAG showing how to run a dbt project as a task group, using
 an Airflow connection and injecting a variable into the dbt project.
@@ -13,7 +13,7 @@ CONNECTION_ID = "db_conn"
 DB_NAME = "<your-db-name>"
 SCHEMA_NAME = "<your-schema-name>"
 DBT_PROJECT_NAME = "my_simple_dbt_project"
-# the path where the Astro dbt provider will find the dbt executable
+# the path where Cosmos will find the dbt executable
 # in the virtual environment created in the Dockerfile
 DBT_EXECUTABLE_PATH = "/usr/local/airflow/dbt_venv/bin/dbt"
 # The path to your dbt root directory
