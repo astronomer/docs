@@ -56,7 +56,7 @@ With PyCharm configured to use the Python Interpreter from Docker, you can conne
 
 From the Services pane, start Docker by clicking the green play button and you’ll see the same containers appear as when you run `docker ps`:
 
-![Containers](/img/examples/pycharm_local_dev_docker_containers.png)
+![Containers](/img/examples/pycharm_local_dev_containers.png)
 
 You can view logs for the containers by clicking on `/scheduler`, `/triggerer`, `/webserver`, or `/airflow-dev_2cd823-postgres` (this may be a different string based on what the name of the parent directory for your project is):
 

@@ -41,4 +41,4 @@ Install the [Python Extension](https://marketplace.visualstudio.com/items?itemNa
     
 Ensure the Python interpreter is configured properly by opening the `dags/example_dag_basic.py` file in your Astro project `dags/` folder and start writing some Python. In the example below, you can see that the Python interpreter is working properly and attempting to auto-complete the import line as it is being written.
 
-![Code](/img/examples/vscode_local_dev_open_code.png)
+![Code](/img/examples/vscode_local_dev_code.png)
