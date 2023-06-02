@@ -18,9 +18,27 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 
 For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
 
+## Quickstart
+
+If you are already familiar with Airflow and dbt Core, you can get started using this code sample:
+
+    ```python
+    DbtTaskGroup(
+        group_id="transform_data",
+        dbt_project_name=DBT_PROJECT_NAME,
+        conn_id=CONNECTION_ID,
+        dbt_root_path=DBT_ROOT_PATH,
+        dbt_args={
+            "dbt_executable_path": DBT_EXECUTABLE_PATH,
+            "schema": SCHEMA_NAME,
+            "vars": '{"my_name": "Astro"}',
+        },
+    )
+    ```
+
 ## Why use Airflow with dbt Core?
 
-dbt offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). The [Astro dbt provider](https://astronomer.github.io/astronomer-cosmos/), also known as Cosmos, allows you to seamlessly integrate dbt jobs into your Airflow orchestration environment as a standalone DAG or task group within a DAG. 
+dbt Core offers the possibility to build modular, reuseable SQL components with built-in dependency management and [incremental builds](https://docs.getdbt.com/docs/build/incremental-models). The [Astro dbt provider](https://astronomer.github.io/astronomer-cosmos/), also known as Cosmos, allows you to seamlessly integrate dbt jobs into your Airflow orchestration environment as a standalone DAG or task group within a DAG. 
 
 The benefits of using Airflow with dbt Core include:
 
@@ -53,12 +71,11 @@ You do not need to have dbt Core installed locally in order to complete this tut
 
 ## Step 1: Configure your Astro project
 
-To use dbt with Airflow you need to install dbt Core in a virtual environment and the Astro dbt provider in your Astro project.
+To use dbt with Airflow install dbt Core in a virtual environment and the Astro dbt provider in your Astro project.
 
-1. In a new Astro project open the `Dockerfile` in your Astro project directory and add the following lines to the end of the file:
+1. In an empty Astro project open the `Dockerfile` and add the following lines to the end of the file:
 
     ```text
-    # install dbt into a virtual environment
     # replace dbt-postgres with another supported adapter if you're using a different warehouse type
     RUN python -m venv dbt_venv && source dbt_venv/bin/activate && \
     pip install --no-cache-dir dbt-postgres && deactivate
@@ -74,7 +91,7 @@ To use dbt with Airflow you need to install dbt Core in a virtual environment an
 
 ## Step 2: Prepare your dbt project
 
-In order to integrate your existing dbt project with Airflow, you need to add the dbt project in the `dags` folder.
+In order to integrate your dbt project with Airflow, you need to add the dbt project in a folder called `dbt` in the `dags` folder. You can either add your own project or follow the steps below to create a simple project using two models.
 
 1. Create a folder called `dbt` in your `dags` folder. 
 
@@ -143,7 +160,7 @@ If a connection type for your database isn't available, you might need to make i
 
 ## Step 4: Write your Airflow DAG
 
-The DAG you'll write uses the Astro dbt provider to create tasks from existing dbt models and embeds those tasks within other actions in your data ecosystem.
+The DAG you'll write uses the Astro dbt provider to create tasks from existing dbt models. You can add up- and downstream tasks to and embeds the dbt project within other actions in your data ecosystem.
 
 1. In your `dags` folder, create a file called `my_simple_dbt_dag.py`.
 
@@ -151,8 +168,8 @@ The DAG you'll write uses the Astro dbt provider to create tasks from existing d
 
     <CodeBlock language="python">{cosmos_dag}</CodeBlock>
 
-    This DAG uses the `DbtTaskGroup` class from the Astro dbt provider to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. If your dbt project contains dbt tests, they will be run directly after a model has completed.
-    Using the `vars` keyword in the dictionary provided to the `dbt_args` parameter, you can inject variables into the dbt project. This DAG injects `Astro` for the `my_name` variable.
+    This DAG uses the `DbtTaskGroup` class from the Astro dbt provider to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks.
+    Using the `vars` keyword in the dictionary provided to the `dbt_args` parameter, you can inject variables into the dbt project. This DAG injects `Astro` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
 
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
 
