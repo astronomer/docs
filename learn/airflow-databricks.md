@@ -16,9 +16,7 @@ The open source [Astro Databricks provider](https://github.com/astronomer/astro-
 
 This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you use Databricks services other than Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
 
-## Quickstart
-
-If you are already familiar with Airflow and Databricks, you can get started using this code sample:
+The Astro Databricks provider allows you to create a Databricks Workflow from existing Databricks notebooks as a task group in your Airflow DAG. You can run two Databricks notebooks as a Databricks Workflow with just a few lines of code:
 
 ```python
 task_group = DatabricksWorkflowTaskGroup(
@@ -44,6 +42,12 @@ with task_group:
     )
     notebook_1 >> notebook_2
 ```
+
+:::info 
+
+If you are already familiar with Airflow and Databricks, you can get started using [this quickstart](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md).
+
+:::
 
 ## Why use Airflow with Databricks
 
@@ -71,18 +75,25 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview) with an empty Astro project created by `astro dev init`.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - Access to a Databricks workspace. See [Databricks' documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
 
 ## Step 1: Configure your Astro project
 
-1. Add the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) to your requirements.txt file.
+1. Create a new Astro project:
+
+    ```sh
+    $ mkdir astro-databricks-tutorial && cd astro-databricks-tutorial
+    $ astro dev init
+    ```
+
+2. Add the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) to your requirements.txt file.
 
     ```text
     astro-provider-databricks==0.1.3
     ```
 
-2. Define the following environment variable in your `.env` file. This allows you to serialize Astro Databricks provider objects.
+3. Define the following environment variable in your `.env` file. This allows you to serialize Astro Databricks provider objects.
 
     ```text
     AIRFLOW__CORE__ALLOWED_DESERIALIZATION_CLASSES = airflow\.* astro_databricks\.*
