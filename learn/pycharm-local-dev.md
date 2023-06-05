@@ -1,11 +1,11 @@
 ---
-title: "Develop Airflow locally with PyCharm"
+title: "Develop Airflow DAGs locally with PyCharm"
 description: "Integrate the Astro CLI with PyCharm for local development."
 id: pycharm-local-dev
 sidebar_label: "Develop with PyCharm"
 ---
 
-This example shows how to set up [PyCharm]((https://www.jetbrains.com/pycharm/)) for local development with Airflow and the [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+This example shows how to set up [PyCharm](https://www.jetbrains.com/pycharm/) for local development with Airflow and the [Astro CLI](https://docs.astronomer.io/astro/cli/overview). Setting up a local development environment allows you to iterate more quickly when developing DAGs by taking advantage of IDE features.
 
 ## Before you start
 
@@ -17,15 +17,11 @@ Before trying this example, make sure you have:
 
 ## Configure the Python interpreter
 
-1. In your PyCharm preferences go to **Build, Execution, Deployment** >> **Docker** and set up the following:
+To develop Airflow DAGs in PyCharm, you need to configure at least one Python interpreter. In this example we configure an interpreter using Docker, which allows you to write Python code as well as interact with your DAGs in the Docker containers created by the Astro CLI from within PyCharm.
 
-    - **Name**: Docker
-    - **Connect to Docker Daemon with**: Docker for Mac
-    - **Path mappings**: Enter `/Users` for both **Virtual machine path** and **Local path**.
-    
-    ![Docker settings](/img/examples/pycharm_local_dev_docker_settings.png)
+1. In your PyCharm preferences go to **Build, Execution, Deployment** >> **Docker** and specify how to connect to the Docker daemon. For more, see [Connect to Docker](https://www.jetbrains.com/help/pycharm/docker.html#connect_to_docker).
 
-2. Go to **Project: <your-project-name>** >> **Python Interpreter**. Click the settings gear icon next to **Python Interpreter**, then click **Add**:
+2. Go to **Project: \<your-project-name\>** >> **Python Interpreter**. Click the settings gear icon next to **Python Interpreter**, then click **Add**:
 
     ![Interpreter settings](/img/examples/pycharm_local_dev_interpreter.png)
 
@@ -35,9 +31,9 @@ Before trying this example, make sure you have:
 
 ## Write Airflow code with PyCharm
 
-Using PyCharm to write Airflow DAGs has multiple advantages like code autocompletion, identifying deprecated or unused imports, and error and warning syntax highlighting.
+Now that PyCharm is using the correct interpreter for Airflow, you get multiple advantages like code autocompletion, identifying deprecated or unused imports, and error and warning syntax highlighting.
 
-PyCharm will show you when there's deprecated imports in your project:
+PyCharm will show you when there are deprecated imports in your project:
 
 ![Deprecated Imports](/img/examples/pycharm_local_dev_deprecated_import.png)
 
@@ -74,3 +70,4 @@ Run Airflow CLI commands by right clicking on `/scheduler` and selecting **Creat
 ## See also
 
 - [Develop with VS Code](vscode-local-dev.md)
+- [Debug interactively with dag.test()](https://docs.astronomer.io/learn/testing-airflow#debug-interactively-with-dagtest)
