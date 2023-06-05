@@ -4,6 +4,10 @@ title: 'Astro release notes'
 id: release-notes
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
+
+
 <head>
   <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
@@ -117,7 +121,6 @@ You can now create preview Deployments from feature branches in your Git reposit
 - Delete the preview Deployment when you delete the branch.
 - Deploy your changes to your base Deployment after you merge your changes into your main branch.
 
-
 ### Additional improvements
 
 - Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Deployment API key or Workspace token.
@@ -131,6 +134,8 @@ You can now create preview Deployments from feature branches in your Git reposit
 ## March 28, 2023
 
 ### New GCP node instance types available
+
+</HybridBadge>
 
 You can now use the following node instance types for worker nodes in GCP clusters:
 
