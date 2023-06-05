@@ -135,7 +135,7 @@ You can now create preview Deployments from feature branches in your Git reposit
 
 ### New GCP node instance types available
 
-</HybridBadge>
+<HybridBadge/>
 
 You can now use the following node instance types for worker nodes in GCP clusters:
 
