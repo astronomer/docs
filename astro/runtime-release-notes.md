@@ -24,6 +24,20 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 8.4.0
+
+- Release date: June 2, 2023
+- Airflow version: 2.6.1
+
+### Early access Airflow bug fixes
+
+- Fixed the scheduler crashing when you cleared a run of a normal task that is now a mapped task ([31352](https://github.com/apache/airflow/pull/31352))
+
+### Additional improvements
+
+- Upgraded `astro-sdk-python` to 1.6.1, which includes support for MySQL and loading data from Azure blob storage to Databricks. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+- Upgraded `apache-airflow-providers-cncf-kubernetes` to [7.0.0](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html#id1).
+
 ## Astro Runtime 8.3.0
 
 - Release date: May 26, 2023
@@ -34,7 +48,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Fixed a bug to ensure that `min_backoff` in the base sensor is at least `1` ([31412](https://github.com/apache/airflow/pull/31412))
 - Updated error messaging ([31502](https://github.com/apache/airflow/pull/31502))
 
-### Additional Improvements
+### Additional improvements
 
 - Upgraded `astronomer-providers` to 1.16.0. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1160-2023-05-19) for a complete list of changes. 
 - Upgraded `openlineage-airflow` to 0.26.0. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.26.0) for a complete list of changes. 
