@@ -1,5 +1,4 @@
-import pendulum
-from datetime import datetime
+from pendulum import datetime
 
 from airflow import DAG, Dataset
 from airflow.decorators import task
@@ -9,8 +8,8 @@ INFO = Dataset("file://localhost/airflow/include/cocktail_info.txt")
 
 with DAG(
     dag_id="datasets_consumer_dag",
-    start_date=pendulum.datetime(2022, 10, 1, tz="UTC"),
-    schedule=[INSTRUCTIONS, INFO],  # Scheduled on the Datasets
+    start_date=datetime(2022, 10, 1, tz="UTC"),
+    schedule=[INSTRUCTIONS, INFO],  # Scheduled on both Datasets
     tags=["datasets", "cross-DAG dependencies"],
     catchup=False,
 ):
