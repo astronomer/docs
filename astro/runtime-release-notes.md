@@ -38,6 +38,10 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Upgraded `astro-sdk-python` to 1.6.1, which includes support for MySQL and loading data from Azure blob storage to Databricks. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 - Upgraded `apache-airflow-providers-cncf-kubernetes` to [7.0.0](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html#id1).
 
+### Bug fixes
+
+- Fixed an issue where you could not use the KubernetesPodOperator without setting `AIRFLOW_CONN_KUBERNETES_DEFAULT="kubernetes://` in your environment.
+
 ## Astro Runtime 8.3.0
 
 - Release date: May 26, 2023
