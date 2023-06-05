@@ -14,7 +14,7 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 
 The open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) provides full observability and control from Airflow so you can manage your Workflows from one place, which enables you to orchestrate your Databricks notebooks from Airflow and execute them as Databricks Workflows.
 
-This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. It also discusses why you would want to [use Databricks with Airflow](#why-use-airflow-with-databricks) and [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow), if the Astro Databricks Provider doesn't fit your use case.
+This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you use Databricks services other than Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
 
 ## Quickstart
 
@@ -90,7 +90,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create Databricks Notebooks
 
-You can orchestrate any existing Databricks notebooks in a Databricks Workflow using the Astro Databricks provider. If you don't have Databricks notebooks ready follow the steps below to create two notebooks to use in this tutorial.
+You can orchestrate any existing Databricks notebooks in a Databricks Workflow using the Astro Databricks provider. If you don't have Databricks notebooks ready, follow the steps below to create two notebooks to use in this tutorial.
 
 1. [Create an empty notebook](https://docs.databricks.com/notebooks/notebooks-manage.html) in your Databricks workspace called `notebook1`. 
 
@@ -126,7 +126,7 @@ You can orchestrate any existing Databricks notebooks in a Databricks Workflow u
 
 1. In your `dags` folder, create a file called `my_simple_databricks_dag.py`.
 
-2. Copy and paste the following DAG code into the file. Make sure to replace the `DATABRICKS_LOGIN_EMAIL` variable with your Databricks login email. If you are using your existing Databricks notebooks you also will have to adjust the notebook names and potentially have to add additional tasks defined with the DatabricksNotebookOperator to orchestrate more than two Databricks notebooks in this Databricks Workflow.
+2. Copy and paste the following DAG code into the file. Replace the `DATABRICKS_LOGIN_EMAIL` variable with your Databricks login email. If you already had Databricks notebooks and did not create new ones in Step 2, replace the notebook names in the DatabricksNotebookOperators.
 
     <CodeBlock language="python">{databricks_tutorial_dag}</CodeBlock>
 
