@@ -14,9 +14,7 @@ import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-d
 
 The open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) provides full observability and control from Airflow so you can manage your Workflows from one place, which enables you to orchestrate your Databricks notebooks from Airflow and execute them as Databricks Workflows.
 
-This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you use Databricks services other than Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
-
-The Astro Databricks provider allows you to create a Databricks Workflow from existing Databricks notebooks as a task group in your Airflow DAG. You can run two Databricks notebooks as a Databricks Workflow with just a few lines of code:
+You can create a Databricks Workflow from existing Databricks notebooks as a task group in your Airflow DAG with just a few lines of code:
 
 ```python
 task_group = DatabricksWorkflowTaskGroup(
@@ -42,6 +40,12 @@ with task_group:
     )
     notebook_1 >> notebook_2
 ```
+
+:::info
+
+This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you use Databricks services other than Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
+
+:::
 
 :::info 
 
