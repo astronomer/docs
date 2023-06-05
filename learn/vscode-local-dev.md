@@ -30,7 +30,7 @@ Follow these steps to start writing your DAGs in VS Code.
     
     ![Container](/img/examples/vscode_local_dev_container.png)
     
-4. Install the [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) to your new session of VS Code. Go to the **Extensions** nav bar option, search for `Python`, and the first result should be the extension published by Microsoft. Install it by clicking the button **Install in Container <your container name>**.
+4. Install the [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) to your new session of VS Code. Go to the **Extensions** nav bar option, search for `Python`, and the first result should be the extension published by Microsoft. Install it by clicking the button **Install in Container \<your container name\>**.
     
     ![Extension](/img/examples/vscode_local_dev_extension.png)
     
