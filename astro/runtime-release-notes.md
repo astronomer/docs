@@ -31,7 +31,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Early access Airflow bug fixes
 
-- Fixed the scheduler crashing when you cleared a run of a normal task that is now a mapped task ([31352](https://github.com/apache/airflow/pull/31352))
+- Fixed the scheduler crashing when you cleared a run of a normal task that is now a mapped task ([31352](https://github.com/apache/airflow/pull/31352)).
 
 ### Additional improvements
 
