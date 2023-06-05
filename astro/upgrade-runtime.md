@@ -30,7 +30,7 @@ This is where you'll find the upgrade considerations for specific Astro Runtime 
 
 #### Runtime 8 (Airflow 2.6)
 
-##### Breaking change to `apache-airflow-providers-cncf-kubernetes` in Runtime 8.4.0
+##### Breaking change to `apache-airflow-providers-cncf-kubernetes` in version 8.4.0
 
 Astro Runtime 8.4.0 upgrades `apache-airflow-providers-cncf-kubernetes` to 7.0.0, which includes a breaking change by [removing some deprecated features from KubernetesHook](https://github.com/apache/airflow/commit/a1f5a5425e65c40e9baaf5eb4faeaed01cee3569). If you are using any of these features, either pin your current version of `apache-airflow-providers-cncf-kubernetes` to your `requirements.txt` file or ensure that you don't use any of the deprecated features before upgrading.
 
