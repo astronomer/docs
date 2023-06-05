@@ -50,7 +50,7 @@ The benefits of using Airflow with dbt Core include:
 
 ## Time to complete
 
-This tutorial takes approximately 30min to complete.
+This tutorial takes approximately 30 minutes to complete.
 
 ## Assumed knowledge
 
@@ -91,7 +91,7 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
 
 ## Step 2: Prepare your dbt project
 
-In order to integrate your dbt project with Airflow, you need to add the dbt project in a folder called `dbt` in the `dags` folder. You can either add your own project or follow the steps below to create a simple project using two models.
+In order to integrate your dbt project with Airflow, you need to add your dbt project in a subfolder called `dbt` within your `dags` folder. You can either add your own project, or follow the steps below to create a simple project using two models.
 
 1. Create a folder called `dbt` in your `dags` folder. 
 
