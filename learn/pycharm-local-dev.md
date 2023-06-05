@@ -1,67 +1,76 @@
 ---
-title: "Develop locally with PyCharm"
+title: "Develop Airflow locally with PyCharm"
 description: "Integrate the Astro CLI with PyCharm for local development."
 id: pycharm-local-dev
-sidebar_label: "PyCharm"
+sidebar_label: "Develop with PyCharm"
 ---
 
 This example shows how to set up [PyCharm]((https://www.jetbrains.com/pycharm/)) for local development with Airflow and the [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 
 ## Before you start
 
-Before using this example, make sure you have:
+Before trying this example, make sure you have:
 
 - [PyCharm](https://www.jetbrains.com/pycharm/)
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) installed and a project running locally
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
+- An Astro project running locally on your computer. See [Getting started with the Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli)
 
 ## Configure the Python interpreter
 
-In your PyCharm preferences go to **Build, Execution, Deployment** >> **Docker** and set up the following:
+1. In your PyCharm preferences go to **Build, Execution, Deployment** >> **Docker** and set up the following:
 
-![Docker settings](/img/examples/pycharm_local_dev_docker_settings.png)
+    - **Name**: Docker
+    - **Connect to Docker Daemon with**: Docker for Mac
+    - **Path mappings**: Enter `/Users` for both **Virtual machine path** and **Local path**.
+    
+    ![Docker settings](/img/examples/pycharm_local_dev_docker_settings.png)
 
-Go to **Project: your-project-name** >> **Python Interpreter** and click the settings gear icon next to Python Interpreter, then click **Add**:
+2. Go to **Project: <your-project-name>** >> **Python Interpreter**. Click the settings gear icon next to **Python Interpreter**, then click **Add**:
 
-![Interpreter settings](/img/examples/pycharm_local_dev_interpreter.png)
+    ![Interpreter settings](/img/examples/pycharm_local_dev_interpreter.png)
 
-In the window that appears, click on **Docker** in the left pane, and in the **Image name** field select the Docker image that your Airflow environment is running. Then click **OK**.
+3. In the window that appears, click **Docker** in the left pane. In the **Image name** field, select the Docker image that your Airflow environment is running, then click **OK**.
 
-![Image settings](/img/examples/pycharm_local_dev_docker_image.png)
+    ![Image settings](/img/examples/pycharm_local_dev_docker_image.png)
 
 ## Write Airflow code with PyCharm
 
 Using PyCharm to write Airflow DAGs has multiple advantages like code autocompletion, identifying deprecated or unused imports, and error and warning syntax highlighting.
 
-Here is an example of deprecated imports:
+PyCharm will show you when there's deprecated imports in your project:
 
 ![Deprecated Imports](/img/examples/pycharm_local_dev_deprecated_import.png)
 
-Here is an example of an unused import:
+It can also alert you when an import is unused:
 
 ![Unused Imports](/img/examples/pycharm_local_dev_unused_import.png)
 
-Here is an example error syntax highlighting:
+Like with other Python projects, PyCharm will highlight syntax errors in your Airflow code:
 
 ![Syntax Highlighting](/img/examples/pycharm_local_dev_syntax_highlighting.png)
 
-Here is an example of code autocompletion and built in definitions:
+Lastly, here is an example of PyCharm autocompleting code and showing built-in definitions:
 
 ![Code Autocompletion](/img/examples/pycharm_local_dev_autocomplete.png)
 
 ## Manage Docker containers with PyCharm
 
-With PyCharm configured to use the Python Interpreter from Docker, you can connect to your Docker containers directly from PyCharm using the ***Services*** pane. If you do not see this pane, try pressing `cmd+8`.
+With PyCharm configured to use the Python interpreter from Docker, you can connect to your Docker containers directly from PyCharm using the ***Services*** pane. If you do not see this pane, try pressing `cmd+8`.
 
 ![Services](/img/examples/pycharm_local_dev_docker_services.png)
 
-From the Services pane, start Docker by clicking the green play button and you’ll see the same containers appear as when you run `docker ps`:
+From the **Services** pane, start Docker by clicking the green play button. You’ll see the same containers appear as when you run `docker ps` after starting your Astro project locally:
 
 ![Containers](/img/examples/pycharm_local_dev_containers.png)
 
-You can view logs for the containers by clicking on `/scheduler`, `/triggerer`, `/webserver`, or `/airflow-dev_2cd823-postgres` (this may be a different string based on what the name of the parent directory for your project is):
+View logs for the containers by clicking on `/scheduler`, `/triggerer`, `/webserver`, or `/airflow-dev_2cd823-postgres`. Note that these strings might differ based on where the parent directory for your project is located:
 
 ![Logs](/img/examples/pycharm_local_dev_logs.png)
 
-You can run Airflow CLI commands by right clicking on `/scheduler` and selecting `Create Terminal` to bash into the container:
+Run Airflow CLI commands by right clicking on `/scheduler` and selecting **Create Terminal** to bash into the container:
 
 ![CLI](/img/examples/pycharm_local_dev_cli.png)
+
+## See also
+
+- [Develop with VS Code](vscode-local-dev.md)

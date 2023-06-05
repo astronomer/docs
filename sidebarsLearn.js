@@ -178,7 +178,7 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Local Development',
+          label: 'Local development',
           link: {
             type: 'generated-index',
             title: 'Local Development',
