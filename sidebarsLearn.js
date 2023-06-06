@@ -176,19 +176,8 @@ module.exports = {
         description: 'See examples of use cases and more with Apache Airflow.'
       },
       items: [
-        {
-          type: 'category',
-          label: 'Local development',
-          link: {
-            type: 'generated-index',
-            title: 'Local Development',
-            description: 'See examples of setting up local development environments for Airflow.',
-          },
-          items: [
-            'pycharm-local-dev',
-            'vscode-local-dev',
-          ],
-        },
+          'pycharm-local-dev',
+          'vscode-local-dev',
       ],
     },
   ],

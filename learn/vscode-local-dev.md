@@ -26,15 +26,14 @@ Follow these steps to start writing your DAGs in VS Code.
     
 2. The Finder/File Explorer will open prompting you to select the project folder. Ensure that your Astro project is selected and click **Open**, then **From 'Dockerfile'**.
     
-3. A new VS Code window appears. Note in the lower left corner of the window that your IDE is now pointing to that running Docker container.
+    A new VS Code window appears. Note in the lower left corner of the window that your IDE is now pointing to that running Docker container.
     
-    ![Container](/img/examples/vscode_local_dev_container.png)
     
-4. Install the [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) to your new session of VS Code. Go to the **Extensions** nav bar option, search for `Python`, and the first result should be the extension published by Microsoft. Install it by clicking the button **Install in Container \<your container name\>**.
+3. Install the [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) to your new session of VS Code. Go to the **Extensions** nav bar option, search for `Python`, and the first result should be the extension published by Microsoft. Install it by clicking the button **Install in Container \<your container name\>**.
     
     ![Extension](/img/examples/vscode_local_dev_extension.png)
     
-5. Ensure the Python interpreter is configured properly by opening the `dags/example_dag_basic.py` file in your Astro project `dags/` folder and start writing some Python. In the example below, you can see that the Python interpreter is working properly and attempting to auto-complete the import line.
+4. Ensure the Python interpreter is configured properly by opening the `dags/example_dag_basic.py` file in your Astro project `dags/` folder and start writing some Python. In the example below, you can see that the Python interpreter is working properly and attempting to auto-complete the import line.
 
     ![Code](/img/examples/vscode_local_dev_code.png)
     
