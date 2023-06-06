@@ -181,7 +181,7 @@ Deploying a prebuilt Docker image allows you to:
 
 To deploy your Astro project as a prebuilt Docker image:
 
-1. Run `docker build` from an Astro project directory or specify the command in a CI/CD pipeline. This Docker image must be based on Astro Runtime and be available in a local Docker registry. If you run this command on an Apple M1 computer or on a computer with an ARM64 processor, you must specify `--platform=linux/amd64` or else the deploy will fail. The Astro data plane requires an AMD64-based image and does not support ARM64 architecture.
+1. Run `docker build` from an Astro project directory or specify the command in a CI/CD pipeline. This Docker image must be based on Astro Runtime and be available in a local Docker registry. If you run this command on an Apple M1 computer or on a computer with an ARM64 processor, you must specify `--platform=linux/amd64` or else the deploy will fail. Astro Deployments require an AMD64-based image and do not support ARM64 architecture.
 2. Optional. Test your Docker image in a local Airflow environment by adding the `--image-name <image-name>` flag to any of the following commands:
     - `astro dev start`
     - `astro dev restart`

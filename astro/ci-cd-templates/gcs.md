@@ -1,18 +1,18 @@
 ---
 sidebar_label: GCS bucket
-title: Deploy DAGs to from Google Cloud Storage to Astro
+title: Deploy DAGs from Google Cloud Storage to Astro
 id: gcs
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Google Cloud Storage.
 ---
 
-### Prerequisites
+## Prerequisites
 
 - A Google cloud storage (GCS) bucket.
 - An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-code.md#enable-dag-only-deploys-on-a-deployment).
-- A [Deployment API key ID and secret](api-keys.md).
+- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
-### DAG-based deploy
+## DAG-based deploy
 
 This CI/CD template can be used to deploy DAGs from a single GCS bucket to a single Astro Deployment. When you create or modify a DAG in the GCS bucket, a Cloud function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
 

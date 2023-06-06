@@ -7,15 +7,36 @@ tags: [Integrations, DAGs]
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
 
-[Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive workspaces. Astronomer recommends using Airflow primarily as an orchestrator, and to use an execution framework like Apache Spark to do the heavy lifting of data processing. It follows that using Airflow to orchestrate Databricks jobs is a natural solution for many common use cases.
+import CodeBlock from '@theme/CodeBlock';
+import databricks_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-databricks/databricks_tutorial_dag.py';
 
-Astronomer has many customers who use Databricks to run jobs as part of complex pipelines. This can easily be accomplished by leveraging the [Databricks provider](https://registry.astronomer.io/providers/databricks), which includes Airflow hooks and operators that are actively maintained by the Databricks and Airflow communities. In this guide, you'll learn about the hooks and operators available for interacting with Databricks clusters and run jobs, and how to use both available operators in an Airflow DAG.
+[Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive workspaces.
+
+The open source [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) provides full observability and control from Airflow so you can manage your Workflows from one place, which enables you to orchestrate your Databricks notebooks from Airflow and execute them as Databricks Workflows.
+
+
+This tutorial shows how to use the Astro Databricks provider with an example use case analyzing renewable energy data. It also discusses why you would want to [use Databricks with Airflow](#why-use-airflow-with-databricks) and [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow), if the Astro Databricks Provider doesn't fit your use case.
 
 :::info
 
-All code in this guide can be found on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/databricks-tutorial).
+All code in this tutorial can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/renewable_analysis_dag/versions/latest).
 
 :::
+
+## Why use Airflow with Databricks
+
+Many data teams leverage Databricks' optimized Spark engine to run heavy workloads like machine learning models, data transformations, and data analysis. While Databricks offers some orchestration with Databricks Workflows, they are limited in functionality and do not integrate with the rest of your data stack. Using a tool-agnostic orchestrator like Airflow gives you several advantages, like the ability to:
+
+- Use CI/CD to manage your workflow deployment. Airflow DAGs are Python code, and can be [integrated with a variety of CI/CD tools](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) and [tested](testing-airflow.md).
+- Repair single tasks in your Databricks Workflow. If a task fails, you can [re-run it](#repairing-a-databricks-workflow) without having to re-run the entire Workflow, saving valuable compute resources.
+- Use [task groups](task-groups.md) within Databricks Workflows, enabling you to collapse and expand parts of larger Databricks Workflows visually.
+- Leverage Airflow [cross-DAG dependencies](cross-dag-dependencies.md) to trigger Databricks Workflows from other DAGs in your Airflow environment, allowing for a data-driven architecture.
+- Use familiar Airflow code as your interface to orchestrate Databricks notebooks as Workflows.
+- [Inject parameters](#parameters) into your Databricks Workflow at the Workflow-level. These parameters can be dynamic and retrieved at runtime from other Airflow tasks.
+
+## Time to complete
+
+This tutorial takes approximately 1 hour to complete.
 
 ## Assumed knowledge
 
@@ -26,144 +47,335 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 
-## Databricks hooks and operators
+## Prerequisites
 
-The Databricks provider package includes many hooks and operators that allow users to accomplish most common Databricks-related use cases without writing a ton of code.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- Access to a Databricks workspace. See [Databricks' documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
+- Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This tutorial uses an [AWS S3](https://aws.amazon.com/s3/) bucket.
+- Access to a [relational database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html). This tutorial uses [PostgreSQL](https://www.postgresql.org/).
+
+## Step 1: Configure your Astro project
+
+An Astro project contains all of the files you need to run Airflow locally.
+
+1. Create a new Astro project:
+
+    ```sh
+    $ mkdir astro-databricks-tutorial && cd astro-databricks-tutorial
+    $ astro dev init
+    ```
+
+2. Add the following packages to your `requirements.txt` file. The [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) load, transform, and analyze, the data. [seaborn](https://seaborn.pydata.org/) and [matplotlib](https://matplotlib.org/) plot the results.
+
+    ```text
+    astro-provider-databricks==0.1.3
+    astro-sdk-python==1.6.0
+    seaborn==0.12.2
+    matplotlib==3.7.1
+    ```
+
+3. Define the following environment variable in your `.env` file. This allows you to serialize Astro Python SDK and Astro Databricks provider objects.
+
+    ```text
+    AIRFLOW__CORE__ALLOWED_DESERIALIZATION_CLASSES = airflow\.* astro\.* astro_databricks\.*
+    ```
+
+## Step 2: Prepare the data
+
+In this tutorial, you analyze two renewable energy datasets to calculate the percentage of electricity coming from solar, wind, and hydro power for a given country over time. In this step, you prepare your data for later analysis.
+
+1. [Download the CSV files](https://github.com/astronomer/learn-tutorials-data/tree/main/databricks-tutorial) from GitHub.
+2. Save the downloaded CSV files in the `include` directory of your Astro project.
+
+This data comes from a [Kaggle dataset](https://www.kaggle.com/datasets/programmerrdai/renewable-energy) about renewable energy derived from [Our World in Data](https://ourworldindata.org/renewable-energy) (License [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
+
+## Step 3: Prepare your object storage
+
+Create a new bucket named `databricks-tutorial-bucket` in your object storage solution. This tutorial uses AWS S3, but you can use any solution that is supported by the Astro SDK.
+
+## Step 4: Create Databricks Notebooks
+
+Next, you need to orchestrate a Databricks job that sequentially runs two notebooks. 
+
+1. [Create an empty notebook](https://docs.databricks.com/notebooks/notebooks-manage.html) in your Databricks workspace called `join_data`. 
+
+2. Copy and paste the following code into the `join_data` notebook. You can divide the code into cells as you see fit. Make sure to replace the `ACCESS_KEY` and `SECRET_KEY` variables with your respective credentials.
+
+    ```python
+    # package imports
+    import csv
+
+    # --------- AWS S3 specific --------- #
+    import boto3
+    # --------- /AWS S3 specific -------- #
+
+    import pandas as pd
+    from io import StringIO
+    from pyspark.sql.types import (
+        StructType,
+        StructField,
+        StringType,
+        IntegerType,
+    )
+
+    # set variables
+    ACCESS_KEY = "<your AWS Access Key ID>"  # dbutils.secrets.get(scope="my-scope", key="my-aws-key-key")
+    SECRET_KEY = "<your AWS Secret Access Key>"  # dbutils.secrets.get(scope="my-scope", key="my-aws-secret-key")
+    BUCKET_NAME = "databricks-tutorial-bucket"
+    S3_FOLDER_COUNTRY_SUBSET = "country_subset"
+    S3_FOLDER_JOINED_DATA = "joined_data"
+
+    # --------- AWS S3 specific -------- #
+    # list files in the `country_subset` directory of your S3 bucket
+    s3 = boto3.client("s3", aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+    objects = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=f"{S3_FOLDER_COUNTRY_SUBSET}/")
+    csv_files = [obj["Key"] for obj in objects["Contents"] if obj["Key"].endswith(".csv")]
+    # --------- /AWS S3 specific ------- #
+
+    # load data from CSVs in the `country_subset` folder into separate Spark dataframes
+    dfs = []
+    for file in csv_files:
+        obj = s3.get_object(Bucket=BUCKET_NAME, Key=file)
+        body = obj["Body"].read().decode("utf-8")
+        csv_reader = csv.reader(StringIO(body), delimiter=",", quotechar='"')
+        header = next(csv_reader)
+        schema = StructType([StructField(col, StringType(), True) for col in header])
+        df = spark.createDataFrame(csv_reader, schema)
+        dfs.append(df)
+
+    # collect name of the country assessed
+    entity_name = dfs[0].select("Entity").distinct().collect()[0]["Entity"]
+
+    # define results table
+    schema = StructType(
+        [
+            StructField("Year", IntegerType(), True),
+        ]
+    )
+    result_df = spark.createDataFrame([], schema)
+
+    # join data tables to result table
+    for df in dfs:
+        col_name = df.columns[3]
+
+        df = df.select("Year", col_name)
+        result_df = result_df.join(df, "Year", "outer")
+
+    # convert spark dataframe to pandas and remove potentially duplicated columns
+    pandas_df = result_df.toPandas()
+    df_t = pandas_df.T
+    df_t = df_t.loc[~df_t.index.duplicated(keep="first")]
+    df_clean = df_t.T
+    csv_buffer = StringIO()
+    df_clean.to_csv(csv_buffer, index=False)
+
+    # --------- AWS S3 specific --------- #
+    # upload data as a CSV file to S3
+    s3 = boto3.client("s3", aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+    s3.put_object(
+        Body=csv_buffer.getvalue(),
+        Bucket=BUCKET_NAME,
+        Key=f"{S3_FOLDER_JOINED_DATA}/{entity_name}.csv",
+    )
+    # --------- /AWS S3 specific -------- #
+    ```
+
+3. Create a second empty notebook in your Databricks workspace called `transform_data`.
+
+4. Copy and paste the following code into the `transform_data` notebook. You can divide the code into cells as you see fit. Make sure to replace the `ACCESS_KEY` and `SECRET_KEY` variables with your respective credentials.
+
+    ```python
+    import csv
+
+    # --------- AWS S3 specific --------- #
+    import boto3
+    # --------- /AWS S3 specific -------- #
+
+    from io import StringIO
+    from pyspark.sql.functions import col
+    from pyspark.sql.types import StructType, StructField, StringType
+
+    # set variables
+    ACCESS_KEY = "<your AWS Access Key ID>"  # dbutils.secrets.get(scope="my-scope", key="my-aws-key-key")
+    SECRET_KEY = "<your AWS Secret Access Key>"  # dbutils.secrets.get(scope="my-scope", key="my-aws-secret-key")
+    BUCKET_NAME = "databricks-tutorial-bucket"
+    S3_FOLDER_JOINED_DATA = "joined_data"
+    S3_FOLDER_TRANSFORMED_DATA = "transformed_data"
+
+    # --------- AWS S3 specific -------- #
+    # list files in the `joined_data` directory of your S3 bucket
+    s3 = boto3.client("s3", aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+    objects = s3.list_objects_v2(Bucket=BUCKET_NAME, Prefix=f"{S3_FOLDER_JOINED_DATA}/")
+    csv_files = [obj["Key"] for obj in objects["Contents"] if obj["Key"].endswith(".csv")]
+    # --------- /AWS S3 specific -------- #
+
+    # load data from CSVs in the `joined_data` folder into separate Spark dataframes
+    dfs = []
+    for file in csv_files:
+        obj = s3.get_object(Bucket=BUCKET_NAME, Key=file)
+        body = obj["Body"].read().decode("utf-8")
+        csv_reader = csv.reader(StringIO(body), delimiter=",", quotechar='"')
+        header = next(csv_reader)
+        schema = StructType([StructField(col, StringType(), True) for col in header])
+        df = spark.createDataFrame(csv_reader, schema)
+        dfs.append(df)
+
+    # calculate summation column for each Spark dataframe
+    dfs_transformed = []
+    for df in dfs:
+        df = df.withColumn(
+            "SHW%",
+            col("Solar (% electricity)")
+            + col("Hydro (% electricity)")
+            + col("Wind (% electricity)"),
+        )
+        dfs_transformed.append(df)
+
+    # convert each spark dataframe into pandas and load to S3
+    for file_name, df in zip(csv_files, dfs_transformed):
+        # Convert Spark DataFrame to Pandas DataFrame and write to in memory CSV file
+        pandas_df = df.toPandas()
+        csv_buffer = StringIO()
+        pandas_df.to_csv(csv_buffer, index=False)
+
+        # --------- AWS S3 specific --------- #
+        # upload data to S3
+        s3 = boto3.client(
+            "s3", aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY
+        )
+        s3.put_object(
+            Body=csv_buffer.getvalue(),
+            Bucket=BUCKET_NAME,
+            Key=f"{S3_FOLDER_TRANSFORMED_DATA}/{file_name.split('/')[1]}",
+        )
+        # --------- /AWS S3 specific -------- #
+
+    ```
 
 :::info
 
-In Airflow 2.0, provider packages are separate from the core of Airflow. If you are running 2.0, you may need to install the `apache-airflow-providers-databricks` provider package to use the hooks, operators, and connections described here. In an Astronomer project this can be accomplished by adding the packages to your `requirements.txt` file. To learn more, see [Provider Packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).
+Providing your credentials to AWS in plain text in your notebook code is highly discouraged in production environments. See the Databricks documentation for recommended ways to securely [manage Secrets](https://docs.databricks.com/security/secrets/index.html) in Databricks for other options.
 
 :::
 
-### Hooks
+:::info
 
-Using the [Databricks hook](https://registry.astronomer.io/providers/databricks/modules/databrickshook) is the best way to interact with a Databricks cluster or job from Airflow. The hook has methods to submit and run jobs to the Databricks REST API, which are used by the operators described below. There are also additional methods users can leverage to:
+If you use a different object storage than AWS S3, you need to replace the code wrapped in `# --------- AWS S3 specific -------- #` comments with code connecting to your object storage.
 
-- Get information about runs or jobs
-- Cancel, start, or terminate a cluster
-- Install and uninstall libraries on a cluster
+:::
 
-### Operators
+## Step 5: Configure connections
 
-There are currently two operators in the Databricks provider package:
+To analyze your data, you need to use three data tools external to Airflow: Databricks, Amazon S3 (or another object storage), and a PostgreSQL database (or another relational database). When you use external tools with Airflow, you must create an Airflow connection to each of these tools.
 
-- The `DatabricksSubmitRunOperator` makes use of the Databricks [Runs Submit API Endpoint](https://docs.databricks.com/dev-tools/api/latest/jobs.html#runs-submit) and submits a new Spark job run to Databricks.
-- The `DatabricksRunNowOperator` makes use of the Databricks [Run Now API Endpoint](https://docs.databricks.com/dev-tools/api/latest/jobs.html#run-now) and runs an existing Spark job.
+1. Start Airflow by running `astro dev start`.
 
-The `DatabricksRunNowOperator` should be used when you have an existing job defined in your Databricks workspace that you want to trigger using Airflow. The `DatabricksSubmitRunOperator` should be used if you want to manage the definition of your Databricks job and its cluster configuration within Airflow. Both operators allow you to run the job on a Databricks General Purpose cluster you've already created or on a separate Job Cluster that is created for the job and terminated upon the job’s completion.
+2. In the Airflow UI, go to **Admin** > **Connections** and click **+**. 
 
-Documentation for both operators can be found on the [Astronomer Registry](https://registry.astronomer.io/providers/databricks?type=operators).
+3. Create a new connection named `databricks_conn`. Select the connection type `Databricks` and enter the following information:
 
-## Example - Using Airflow with Databricks
+    - **Connection ID**: `databricks_conn`.
+    - **Connection Type**: `Databricks`.
+    - **Host**: Your Databricks host address (format: `https://dbc-1234cb56-d7c8.cloud.databricks.com/`).
+    - **Login**: Your Databricks login username (email).
+    - **Password**: Your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#databricks-personal-access-tokens).
 
-You'll now learn how to write a DAG that makes use of both the `DatabricksSubmitRunOperator` and the `DatabricksRunNowOperator`. Before diving into the DAG itself, you need to set up your environment to run Databricks jobs.
+4. Create a new connection named `aws_conn`. Make sure the credentials you add have permission to read and write from your S3 bucket. If you use a different object storage, you need to adjust this step for your provider.
 
-### Create a Databricks connection
+    - **Connection ID**: `aws_conn`.
+    - **Connection Type**: `Amazon Web Services`.
+    - **AWS Access Key ID**: Your [AWS Access Key ID](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html). 
+    - **AWS Secret Access Key**: Your AWS Secret Access Key.
 
-In order to use any Databricks hooks or operators, you first need to create an Airflow connection that allows Airflow to talk to your Databricks account. In general, Databricks recommends using a personal access token (PAT) to authenticate to the Databricks REST API. For more information on how to generate a PAT for your account, read the [Managing dependencies in data pipelines](https://docs.databricks.com/dev-tools/data-pipelines.html).
+5. Create a new connection named `db_conn`. Select the connection type and supplied parameters based on the data warehouse you are using. For a Postgres connection, enter the following information:
 
-For this example, you'll use the PAT authentication method and set up a connection using the Airflow UI. It should look something like this:
+    - **Connection ID**: `db_conn`.
+    - **Connection Type**: `Postgres`.
+    - **Host**: Your Postgres host address.
+    - **Schema**: Your Postgres database. 
+    - **Login**: Your Postgres login username.
+    - **Password**: Your Postgres password.
+    - **Port**: Your Postgres port.
 
-![Databricks Connection](/img/guides/databricks_connection.png)
+:::info
 
-The **Host** should be your Databricks workspace URL, and your PAT should be added as a JSON block in **Extra**.
+If the right connection type isn't available, you might need to add the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and run `astro dev restart`.
 
-Note that it is also possible to use your login credentials to authenticate, although this isn't Databricks' recommended method of authentication. To use this method, you would enter the username and password you use to sign in to your Databricks account in the Login and Password fields of the connection.
+:::
 
-### Create a Databricks job
+## Step 6: Create your DAG
 
-In order to use the `DatabricksRunNowOperator` you must have a job already defined in your Databricks workspace. If you are new to creating jobs on Databricks, [this guide](https://docs.databricks.com/jobs.html) walks through all the basics.
 
-To follow the example DAG below, you will want to create a job that has a cluster attached and a parameterized notebook as a task. For more information on parameterizing a notebook, see [this page](https://docs.databricks.com/notebooks/widgets.html).
+1. In your `dags` folder, create a file called `renewable_analysis_dag.py`.
 
-Once you create a job, you should be able to see it in the Databricks UI Jobs tab:
+2. Copy and paste the following DAG code into the file:
 
-![Databricks Job](/img/guides/databricks_job.png)
+    <CodeBlock language="python">{databricks_tutorial_dag}</CodeBlock>
 
-### Define the DAG
+    This DAG uses the Astro Databricks provider to create a Databricks Workflow that runs the two notebooks you prepared in [Step 4](#step-4-create-databricks-notebooks) with the following tasks:
 
-Now that you have a Databricks job and Airflow connection set up, you can define your DAG to orchestrate a couple of Spark jobs. This example makes use of both operators, each of which are running a notebook in Databricks.
+    - The `in_tables` task uses the Astro Python SDK [`LoadFileOperator`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) to load CSV files from your local `include` directory to your relational database. This task is [dynamically mapped](dynamic-tasks.md), creating one mapped task instance for each file.
+    - The `select_countries` task uses the Astro Python SDK [`aql.transform`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/transform.html) decorator to run a SQL query selecting the relevant rows for `COUNTRY` from each of the temporary tables created by the previous task. The result is stored in another temporary table.
+    - The `save_files_to_S3` task uses the [ExportToFileOperator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html) to dynamically map over the country subsets created by the previous task and create one CSV file per table in your S3 bucket. This task uses the [`.map` function](dynamic-tasks.md#transform-outputs-with-map), a utility function that can transform XComArg objects.
 
-```python
-from airflow import DAG
-from airflow.providers.databricks.operators.databricks import DatabricksSubmitRunOperator, DatabricksRunNowOperator
-from datetime import datetime, timedelta
+    - The `databricks_workflow` task group, created using the `DatabricksWorkflowTaskGroup` class, automatically creates a Databricks Workflow that executes the Databricks notebooks you specified in the individual DatabricksNotebookOperators. One of the biggest benefits of this setup is the use of a Databricks job cluster, allowing you to [significantly reduce your Databricks cost](https://www.databricks.com/product/pricing). The task group contains three tasks:
+        - The `launch` task, which the task group automatically generates, provisions a Databricks `job_cluster` with the spec defined as `job_cluster_spec` and creates the Databricks job from the tasks within the task group.
+        - The `join_data` task runs the `join_data` notebook in this cluster as the first part of the Databricks job. In this notebook the information from the three input CSVs is joined in one file, using Spark.
+        - The `transform_data` task runs the `transform_data` notebook as the second part of the Databricks job. This notebook creates a new column in the data called `"SHW%"`, which contains the sum of the percentage of solar, wind, and hydro in your country's electricity supply.
 
-#Define params for Submit Run Operator
-new_cluster = {
-    'spark_version': '7.3.x-scala2.12',
-    'num_workers': 2,
-    'node_type_id': 'i3.xlarge',
-}
+    - The `delete_intake_files_S3` task deletes all files from the `country_subset` folder in S3.
+    - The `load_file` task retrieves the CSV file that the `transform_data` Databricks notebook wrote to S3 and saves the contents in a temporary table in your relational database.
+    - The `create_graph` task uses the Astro Python SDK `@aql.dataframe` decorator to create a graph of the `"SHW%"` column. The graph is saved as a `.png` file in your `include` directory.
+    - Finally, the `cleanup` task uses the Astro Python SDK [`aql.cleanup`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/cleanup.html) operator to clean up any temporary tables created by the Astro Python SDK when they are not needed anymore.
 
-notebook_task = {
-    'notebook_path': '/Users/kenten+001@astronomer.io/Quickstart_Notebook',
-}
+3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task group in order to expand it and see all tasks.  
 
-#Define params for Run Now Operator
-notebook_params = {
-    "Variable":5
-}
+    ![Astro Databricks DAG graph view](/img/guides/astro_databricks_provider_dag_graph.png)
+    
+4. Open the `shw.png` file in your `include` folder to see your graph.
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=2)
-}
+    ![SWH graph Switzerland](/img/guides/databricks_tutorial_shw_graph.png)
 
-with DAG('databricks_dag',
-    start_date=datetime(2021, 1, 1),
-    schedule='@daily',
-    catchup=False,
-    default_args=default_args
-    ) as dag:
+:::info
 
-    opr_submit_run = DatabricksSubmitRunOperator(
-        task_id='submit_run',
-        databricks_conn_id='databricks',
-        new_cluster=new_cluster,
-        notebook_task=notebook_task
-    )
-    opr_run_now = DatabricksRunNowOperator(
-        task_id='run_now',
-        databricks_conn_id='databricks',
-        job_id=5,
-        notebook_params=notebook_params
-    )
+If you are using a different object storage you need to change the preceeding DAG code, specifically the `OBJECT_STORAGE_CONN_ID` and the operator used in the `delete_intake_files_S3` task. To find relevant operators for your object storage see the [Astronomer registry](https://registry.astronomer.io/).
 
-    opr_submit_run >> opr_run_now
-```
+:::
 
-For both operators you need to provide the `databricks_conn_id` and necessary parameters.
+## How it works
 
-For the `DatabricksSubmitRunOperator`, you need to provide parameters for the cluster that will be spun up (`new_cluster`). This should include, at a minimum:
+This section explains Astro Databricks provider functionality in more depth. You can learn more about the Astro Databricks provider in the [provider documentation](https://astronomer.github.io/astro-provider-databricks/).
 
-- Spark version
-- Number of workers
-- Node type ID
+### Parameters
 
-These can be defined more granularly as needed. For more information on what Spark version runtimes are available, see the [Databricks REST API documentation](https://docs.databricks.com/dev-tools/api/latest/index.html#runtime-version-strings).
+The DatabricksWorkflowTaskGroup provides configuration options via several parameters:
 
-You also need to provide the task that will be run. In this example you use the `notebook_task`, which is the path to the Databricks notebook you want to run. This could also be a Spark JAR task, Spark Python task, or Spark submit task, which would be defined using the `spark_jar_task`, `spark_python_test`, or `spark_submit_task` parameters respectively. The operator will look for one of these four options to be defined.
+- `job_clusters`: the job clusters for this Workflow to use. You can provide the full `job_cluster_spec` as shown in the tutorial DAG.
+- `notebook_params`: a dictionary of parameters to make available to all notebook tasks in a Workflow.
+- `notebook_packages`: a list of dictionaries defining Python packages to install in all notebook tasks in a Workflow.
+- `extra_job_params`: a dictionary with properties to override the default Databricks Workflow job definitions.
 
-For the `DatabricksRunNowOperator`, you only need to provide the `job_id` for the job you want to submit, since the job parameters should already be configured in Databricks. You can find the `job_id` on the **Jobs** tab of your Databricks account. However, you can also provide `notebook_params`, `python_params`, or `spark_submit_params` as needed for your job. In this case, you parameterized your notebook to take in a `Variable` integer parameter and passed in '5' for this example.
+You also have the ability to specifiy parameters at the task level in the DatabricksNotebookOperator:
 
-### Error handling
+- `notebook_params`: a dictionary of parameters to make available to the notebook.
+- `notebook_packages`: a list of dictionaries defining Python packages to install in the notebook.
 
-When using either of these operators, any failures in submitting the job, starting or accessing the cluster, or connecting with the Databricks API will propagate to a failure of the Airflow task and generate an error message in the logs.
+Note that you cannot specify the same packages in both the `notebook_packages` parameter of a DatabricksWorkflowTaskGroup and the `notebook_packages` parameter of a task using the DatabricksNotebookOperator in that same task group. Duplicate entries in this parameter cause an error in Databricks.
 
-If there is a failure in the job itself, like in one of the notebooks in this example, that failure will also propagate to a failure of the Airflow task. In that case, the error message may not be shown in the Airflow logs, but the logs should include a URL link to the Databricks job status which will include errors, print statements, etc. For example, if you set up the notebook in Job ID 5 in the example above to have a bug in it, you get a failure in the task causing the Airflow task log to look something like this:
+### Repairing a Databricks Workflow
 
-![Error Log Example](/img/guides/databricks_failure_airflow_log.png)
+The Astro Databricks provider includes functionality to repair a failed Databricks Workflow by making a repair request to the [Databricks Jobs API](https://docs.databricks.com/api-explorer/workspace/jobs/repairrun). Databricks expects a single repair request for all tasks that need to be rerun in one cluster, this can be achieved via the Airflow UI by using the operator extra link **Repair All Failed Tasks**. If you would be using Airflow's built in [retry functionality](rerunning-dags.md#automatically-retry-tasks) a separete cluster would be created for each failed task.
 
-In the case above, you can click on the URL link to get to the Databricks log in order to debug the issue.
+![Repair All Failed Tasks OEL](/img/guides/repair_all_failed_databricks_tasks_oel.png)
 
-## Next steps
+If you only want to rerun specific tasks within your Workflow, you can use the **Repair a single failed task** operator extra link on an individual task in the Databricks Workflow.
 
-This example DAG shows how little code is required to get started orchestrating Databricks jobs with Airflow. By using existing hooks and operators, you can easily manage your Databricks jobs from one place while also building your data pipelines. With just a few more tasks, you can turn the DAG above into a pipeline for orchestrating many different systems:
+![Repair a single failed task OEL](/img/guides/repair_single_failed_databricks_task_oel.png)
 
-![Pipeline Example](/img/guides/pipeline_example_w_databricks.png)
+## Alternative ways to run Databricks with Airflow
+
+The Astro Databricks provider is under active development, and support for more Databricks task types is still being added. If you want to orchestrate an action in your Databricks environment that is not yet supported by the Astro Databricks provider such as [updating a Databricks repository](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest/modules/DatabricksReposUpdateOperator), check the [community-managed Databricks provider](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest) for relevant operators. 
+
+Additionally, the community-managed Databricks provider contains hooks (for example the [DatabricksHook](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest/modules/DatabricksHook)) that simplify interaction with Databricks, including writing your own [custom Databricks operators](airflow-importing-custom-hooks-operators.md#create-a-custom-operator).
+
+You can find several example DAGs that use the community-managed Databricks provider on the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest).

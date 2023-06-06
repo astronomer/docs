@@ -1,0 +1,41 @@
+name: Request new documentation 
+description: A new doc or topic on an existing Astro feature or behavior
+labels: ["kind/enhancement"]
+body:
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Request Type
+      multiple: true
+      options:
+        - Additional information for an existing feature
+        - A new set of best practices or recommendations
+        - A new technical overview, explanation, or reference
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Documentation Request
+    validations:
+      required: true
+  - type: textarea
+    id: relateddocs
+    attributes:
+      label: Links to Related Docs
+  - type: input
+    id: reviewers
+    attributes:
+      label: Due Date
+      description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
+  - type: input
+    id: deadline
+    attributes:
+      label: Required Reviewers
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, ZenDesk tickets, and Slack messages are all welcome and encouraged!
+
+  

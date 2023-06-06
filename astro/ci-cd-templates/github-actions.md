@@ -26,7 +26,7 @@ For more information on each template or to configure your own, see [Template ov
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitHub repository.
 - An [Astro Deployment](create-deployment.md).
-- A [Deployment API key ID and secret](api-keys.md).
+- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
 - Access to [GitHub Actions](https://github.com/features/actions).
 
 Each CI/CD template implementation might have additional requirements.
@@ -72,7 +72,7 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
     ```
 
 </TabItem>
@@ -119,7 +119,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
@@ -129,7 +129,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
     ```
 
 </TabItem>
@@ -184,7 +184,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
     ```
@@ -226,7 +226,7 @@ If your Astro project requires additional build-time arguments to build an image
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
     ```
@@ -283,7 +283,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
           with:
             dag-deploy-enabled: true
     ```
@@ -336,7 +336,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
           with:
             dag-deploy-enabled: true
         
@@ -349,7 +349,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
           with:
             dag-deploy-enabled: true
     ```
@@ -406,7 +406,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.1
+          uses: astronomer/deploy-action@v0.2
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
             dag-deploy-enabled: true
@@ -536,3 +536,5 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
           with:
             deployment-id: <main-deployment-id>
     ```
+
+    All four workflow files must have the same Deployment ID specified. The actions use this Deployment ID to create and delete preview Deployments based on your main Deployment.

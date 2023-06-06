@@ -78,12 +78,12 @@ To set up an alert integration with PagerDuty, you need access to your organizat
 </TabItem>
 </Tabs>
 
-## Step 2: Create your workspace alert in the Cloud UI
+## Step 2: Create your Workspace alert in the Cloud UI
 
 In the Cloud UI, you can enable alerts from the **Workspace Settings** page. 
 
 
-1. In the Cloud UI, select the Astro workspace you want to create an alert for.
+1. In the Cloud UI, select the Astro Workspace you want to create an alert for.
 
 2. Click **Workspace Settings**, then click **Alerts**.
 

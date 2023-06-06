@@ -253,9 +253,9 @@ commit, age, hash, filename
 1682530966,6 days ago,5660c201,astro/user-permissions.md
 1682587166,5 days ago,7ac323eb,astro/install-gcp.md
 1682686810,4 days ago,4cea1dc1,astro/modify-cluster.md
-1682686810,4 days ago,4cea1dc1,astro/resource-reference-aws.md
-1682686810,4 days ago,4cea1dc1,astro/resource-reference-azure.md
-1682686810,4 days ago,4cea1dc1,astro/resource-reference-gcp.md
+1682686810,4 days ago,4cea1dc1,astro/resource-reference-aws-hybrid.md
+1682686810,4 days ago,4cea1dc1,astro/resource-reference-azure-hybrid.md
+1682686810,4 days ago,4cea1dc1,astro/resource-reference-gcp-hybrid.md
 1682702236,4 days ago,937b03f0,software/apply-platform-config.md
 1682702236,4 days ago,937b03f0,software/cluster-resource-provisioning.md
 1682702236,4 days ago,937b03f0,software/configure-deployment.md

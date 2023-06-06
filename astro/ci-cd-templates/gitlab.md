@@ -15,7 +15,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitLab repository.
 - An [Astro Deployment](create-deployment.md).
-- A [Deployment API key ID and secret](api-keys.md) for each Deployment.
+- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
 
 Each CI/CD template implementation might have additional requirements.
 
