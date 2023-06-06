@@ -1,5 +1,5 @@
 name: Request updates or new content in Learn
-description: New or updated content on an existing Airflow feature or use case
+description: Request new or updated [Learn](https://docs.astronomer.io/learn) content on an Apache Airflow feature or use case.
 labels: ["kind/enhancement", "area/learn"]
 assignees:
   - kentdanas
@@ -25,15 +25,16 @@ body:
       label: Request type
       multiple: true
       options:
-        - Additional information on a feature or behavior already described
-        - Add a previously not described Airflow feature or behavior to an existing page
-        - Add a new page
+        - Additional information for an existing guide or tutorial
+        - New content for an undocumented or under-documented Airflow feature
+        - New guide for a specific use case (for example, how to integrate Airflow with a specific 3rd party tool)
     validations:
       required: true
   - type: textarea
     id: request_description
     attributes:
-      label: Describe your Learn request. If you want to add information to an existing page, please provide the link to it!
+      label: Describe your Learn request.
+      description: If you want Astronomer to add information to an existing page, please provide the link to it here.
     validations:
       required: true
   - type: textarea
@@ -44,17 +45,17 @@ body:
     id: due_date
     attributes:
       label: Desired publish date
-      description: For example, is there a particular release, relevant event, etc. that this should be coordinated with?
+      description: Is there a particular release, relevant event, etc. that this should be coordinated with?
   - type: input
     id: airflow_version
     attributes:
       label: Airflow Version
-      description: Airflow version in which the feature/behavior was added. Please provide for features which are upcoming.
-      placeholder: ex. 2.6.1
+      description: Airflow version in which the feature/behavior was added. Please provide for features which are not yet released.
+      placeholder: For example: Airflow 2.6.1
   - type: input
     id: sme
     attributes:
-      label: SME / technical reviewer
+      label: Reviewer
       description: Are you the right person to review a draft for technical accuracy? If not, who is?
   - type: textarea
     id: additional_info
