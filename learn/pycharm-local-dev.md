@@ -17,7 +17,7 @@ Before trying this example, make sure you have:
 
 ## Configure the Python interpreter
 
-To develop Airflow DAGs in PyCharm, you need to configure at least one Python interpreter. In this example we configure an interpreter using Docker, which allows you to write Python code as well as interact with your DAGs in the Docker containers created by the Astro CLI from within PyCharm.
+To develop Airflow DAGs in PyCharm, you need to configure at least one Python interpreter. In this example you configure an interpreter using Docker, which allows you to write Python code and interact with running DAGs from within PyCharm.
 
 1. In your PyCharm preferences go to **Build, Execution, Deployment** >> **Docker** and specify how to connect to the Docker daemon. For more, see [Connect to Docker](https://www.jetbrains.com/help/pycharm/docker.html#connect_to_docker).
 
@@ -31,7 +31,7 @@ To develop Airflow DAGs in PyCharm, you need to configure at least one Python in
 
 ## Write Airflow code with PyCharm
 
-Now that PyCharm is using the correct interpreter for Airflow, you get multiple advantages like code autocompletion, identifying deprecated or unused imports, and error and warning syntax highlighting.
+After you configure PyCharm to use the correct interpreter for Airflow, you get multiple advantages like code autocompletion, identifying deprecated or unused imports, and error syntax highlighting.
 
 PyCharm will show you when there are deprecated imports in your project:
 
@@ -49,7 +49,7 @@ Lastly, here is an example of PyCharm autocompleting code and showing built-in d
 
 ![Code Autocompletion](/img/examples/pycharm_local_dev_autocomplete.png)
 
-## Manage Docker containers with PyCharm
+## Manage Airflow Docker containers with PyCharm
 
 With PyCharm configured to use the Python interpreter from Docker, you can connect to your Docker containers directly from PyCharm using the ***Services*** pane. If you do not see this pane, try pressing `cmd+8`.
 
