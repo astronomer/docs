@@ -34,7 +34,7 @@ DbtTaskGroup(
 
 :::info
 
-If you are already familiar with Airflow and dbt Core check out this [github repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example).
+If you are already familiar with Airflow and dbt Core and just want to get a project running, clone [Astronomers Cosmos example repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example) and run it locally using the Astro CLI.
 
 :::
 
