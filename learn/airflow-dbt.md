@@ -1,5 +1,5 @@
 ---
-title: "Orchestrate dbt Core jobs with Cosmos"
+title: "Orchestrate dbt Core jobs with Airflow and Cosmos"
 sidebar_label: "dbt Core"
 id: airflow-dbt
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
@@ -16,7 +16,7 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
-The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to automatically create Airflow tasks from dbt models, seamlessly integrating dbt jobs into your Airflow orchestration environment. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
+The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into your Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
 
 ```python
 DbtTaskGroup(
@@ -38,11 +38,7 @@ If you are already familiar with Airflow and dbt Core check out this [github rep
 
 :::
 
-:::info
-
-For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
-
-:::
+For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
 
 ## Why use Airflow with dbt Core?
 
@@ -50,7 +46,7 @@ dbt Core offers the possibility to build modular, reuseable SQL components with 
 
 The benefits of using Airflow with dbt Core include:
 
-- Use Airflow's [data-aware scheduling](airflow-datasets.md) and [Airflow sensors](what-is-a-sensor.md) to run models depending on any other event in your data ecosystem.
+- Use Airflow's [data-aware scheduling](airflow-datasets.md) and [Airflow sensors](what-is-a-sensor.md) to run models depending on other events in your data ecosystem.
 - Turn each dbt model into a task, complete with Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [error notifications](error-notifications-in-airflow.md), as well as full observability into past runs directly in the Airflow UI.
 - Run `dbt test` on tables created by individual models immediately after a model has completed. Catch issues before moving downstream and integrate additional [data quality checks](data-quality.md) with your preferred tool to run alongside dbt tests.
 - Run dbt projects using [Airflow connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/secrets-backend/index.html).
@@ -106,7 +102,7 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
 
 ## Step 2: Prepare your dbt project
 
-In order to integrate your dbt project with Airflow, you need to add your dbt project in a subfolder called `dbt` within your `dags` folder. You can either add your own project, or follow the steps below to create a simple project using two models.
+To integrate your dbt project with Airflow, you need to add your dbt project to a subfolder called `dbt` within your `dags` folder. You can either add your own project, or follow the steps below to create a simple project using two models.
 
 1. Create a folder called `dbt` in your `dags` folder. 
 
@@ -120,7 +116,7 @@ In order to integrate your dbt project with Airflow, you need to add your dbt pr
         my_name: "No entry"
     ```
 
-4. Add your dbt models in a folder called `models` within the `my_simple_dbt_project` folder. You can add as many models as you want to run. This tutorial uses the following two models:
+4. Add your dbt models in a subfolder called `models` in the `my_simple_dbt_project` folder. You can add as many models as you want to run. This tutorial uses the following two models:
 
     `model1.sql`:
 
@@ -151,7 +147,7 @@ You should now have the following structure within your Astro project:
 
 ## Step 3: Create an Airflow connection to your data warehouse
 
-Cosmos allows you to use Airflow connections inside your dbt project. 
+Cosmos allows you to apply Airflow connections to your dbt project. 
 
 1. Start Airflow by running `astro dev start`.
 
@@ -175,7 +171,7 @@ If a connection type for your database isn't available, you might need to make i
 
 ## Step 4: Write your Airflow DAG
 
-The DAG you'll write uses Cosmos to create tasks from existing dbt models. You can add up- and downstream tasks to embed the dbt project within other actions in your data ecosystem.
+The DAG you'll write uses Cosmos to create tasks from existing dbt models. You can add upstream and downstream tasks to embed the dbt project within other actions in your data ecosystem.
 
 1. In your `dags` folder, create a file called `my_simple_dbt_dag.py`.
 
@@ -196,7 +192,6 @@ The DbtTaskGroup class populates an Airflow task group with Airflow tasks create
 
 :::
 
-## Next steps
 
 Congratulations! You've run a DAG using Cosmos to automatically create tasks from dbt models. Cosmos is under active development. You can learn more about it in the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/index.html).
 
