@@ -35,7 +35,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 
 <TabItem value="workspace" label="Workspace token (Recommended)">
 
-You can follow the steps in [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token) to create your token. You will need to save the token on creation in order to re-use it later.
+Follow the steps in [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
 </TabItem>
 
