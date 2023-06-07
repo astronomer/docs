@@ -11,7 +11,7 @@ id: deployment-metrics
 
 The Cloud UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
 
-To see metrics about individual DAGs, see 
+To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md).
 
 ## Deployment analytics
 
