@@ -58,7 +58,7 @@ Keep in mind the following when creating Organization API tokens for Airflow RES
 - You can assign [Organization roles](user-permissions.md#user-permissions#organization-roles) to the API token during creation based on the actions you want to perform.
 - Organization API tokens are an easy way to control access to all your Workspaces and Deployments, so you might want to use and share them with caution.
 
-Refer to [Organization API tokens](organization-api-tokens#create-an-organization-api-token) to create a token.
+Refer to [Organization API tokens](organization-api-tokens.md#create-an-organization-api-token) to create a token.
 
 </TabItem>
 
