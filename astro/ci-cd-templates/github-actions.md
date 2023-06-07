@@ -692,7 +692,7 @@ If your Astro project requires additional build-time arguments to build an image
           id: image_tag
           run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
         - name: Build image
-          uses: docker/build-push-action@v2
+          uses: docker/build-push-action@v4
           with:
             tags: ${{ steps.image_tag.outputs.image_tag }}
             load: true
