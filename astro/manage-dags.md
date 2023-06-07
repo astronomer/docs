@@ -4,6 +4,11 @@ title: "Manage DAGs"
 id: manage-dags
 ---
 
+:::info
+
+Managing DAGs from the Cloud UI is currently available only on [Astro Hosted](astro-overview.md). Support on Astro Hybrid is coming soon.
+
+:::
 When you select a specific DAG in the **DAGs** page, you can see detailed information about your DAG runs and complete a number of tasks that are normally available from the Airflow UI. This page compiles the most commonly used information and actions from the Airflow UI into one place.
 
 ![DAGs page](/img/docs/DAGs-overview.png)
