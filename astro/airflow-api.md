@@ -41,7 +41,7 @@ Follow the steps in [Create a Workspace API token](workspace-api-tokens.md#creat
 
 <TabItem value="organization" label="Organization token">
 
-You can follow the steps in [Create a Orgaization API token](organization-api-tokens.md#create-an-organization-api-token) to create your token. You will need to save the token on creation in order to re-use it later.
+Follow the steps in [Create a Orgaization API token](organization-api-tokens.md#create-an-organization-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
 </TabItem>
 
