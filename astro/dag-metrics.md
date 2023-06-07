@@ -31,6 +31,7 @@ The **DAGs** page shows the following summary information, all of which you can 
 - **Owner(s)**: The Airflow DAG owner attribute. You can change the owner attribute when you write or update your DAG.
 - **Tags**: The custom tags that you marked your DAG with. To add custom tags to a DAG, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html).
 
+## View metrics for a DAG
 
 To view more detailed information about a specific DAG, you can either **Open in Airflow** or select the DAG to manage it from the Cloud UI. See [Manage DAGs](manage-dags.md).
 
