@@ -12,7 +12,7 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 - Creating preview Deployments whenever you create a feature branch in your Astro project Git repository. 
 - Performing Deployment-level actions on any Deployment in a Workspace, such as deploying code or making calls to the Airflow rest API. Workspace API tokens can complete the same actions as Deployment API keys for any Deployment in the Workspace. 
 
-## Create a Workspace API token
+## Interact with Workspace
 
 There are two ways to use API tokens to interact with a Workspace:
 

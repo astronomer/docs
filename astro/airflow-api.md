@@ -35,30 +35,13 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 
 <TabItem value="workspace" label="Workspace token (Recommended)">
 
-Workspace API tokens allow users to programmatically perform Workspace actions as well as Airflow API access. 
-
-Keep in mind the following when creating Workspace API tokens for Airflow REST API access:
-
-- You can create these tokens using the Cloud UI only and can also set the expiration period for it. 
-- You can assign [Workspace roles](user-permissions.md#workspace-roles) to the API token during creation based on the actions you want to perform.
-- Workspace API tokens are an easy way to control access to all your Deployments that you want to manage with same set of permissions.
-
-Refer to [Workspace API tokens](workspace-api-tokens.md#create-a-workspace-api-token) to create a token.
+You can follow the steps in [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token) to create your token. You will need to save the token on creation in order to re-use it later.
 
 </TabItem>
 
 <TabItem value="organization" label="Organization token">
 
-Organization API tokens allow users to programmatically perform Organization operations in Astro as well as Airflow API access. 
-
-Keep in mind the following when creating Organization API tokens for Airflow REST API access:
-
-- You can create these tokens using the Cloud UI only and can also set the expiration period for it. 
-- Organization API token with `Organization Member` role will not be able to access any Workspaces or Deployments. You will need to give permission to it to a specific Workspace. See Give Workspace permissions to an Organization token for more details.
-- You can assign [Organization roles](user-permissions.md#user-permissions#organization-roles) to the API token during creation based on the actions you want to perform.
-- Organization API tokens are an easy way to control access to all your Workspaces and Deployments, so you might want to use and share them with caution.
-
-Refer to [Organization API tokens](organization-api-tokens.md#create-an-organization-api-token) to create a token.
+You can follow the steps in [Create a Orgaization API token](organization-api-tokens.md#create-an-organization-api-token) to create your token. You will need to save the token on creation in order to re-use it later.
 
 </TabItem>
 
@@ -112,7 +95,7 @@ The Deployment URL is used to access your Astro Deployment's Airflow UI. It incl
 
 For example, the Deployment URL for an Organization named `mycompany` with the Deployment ID `dhbhijp0vt68400dj40tmc8virf` is `mycompany.astronomer.run/dhbhijp0`.
 
-## Step 2: Make an Airflow API request
+## Step 3: Make an Airflow API request
 
 You can execute requests against any endpoint that is listed in the [Airflow REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
