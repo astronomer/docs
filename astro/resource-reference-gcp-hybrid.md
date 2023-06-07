@@ -82,8 +82,13 @@ The following Cloud SQL instance types are supported on Astro:
 
 - Small General Purpose (2 CPU, 8 GiB MEM)
 - Medium General Purpose (4 CPU, 16 GiB MEM)
+- Large General Purpose (8 CPU, 32 GiB MEM)
 - Small Memory Optimized (2 CPU, 12 GiB MEM)
 - Medium Memory Optimized (4 CPU, 24 GiB MEM)
+- Large Memory Optimized (8 CPU, 36 GiB MEM)
+- Small Compute Optimized (4 CPU, 8 GiB MEM)
+- Medium Compute Optimized (8 CPU, 16 GiB MEM)
+- Large Compute Optimized (16 CPU, 32 GiB MEM)
 
 For detailed information about each instance type, see the [Cloud SQL documentation](https://cloud.google.com/sql). If you're interested in an Cloud SQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
 

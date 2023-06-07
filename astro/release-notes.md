@@ -23,6 +23,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
 
+## June 6, 2023
+
+### Additional improvements 
+
+- You can now configure Hybrid GCP clusters with additional Memory Optimized and Compute Optimized Cloud SQL instance types. See [Supported Cloud SQL instance types](resource-reference-gcp-hybrid.md#supported-cloud-sql-instance-types).
+
 ## May 30, 2023
 
 ### Manage permissions for groups of users with Teams
