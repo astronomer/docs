@@ -89,6 +89,8 @@ For detailed information about each instance type, see the [Cloud SQL documentat
 
 ## Supported worker node pool instance types
 
+<!-- For new node instance types, subtract 2 CPU and 1.5 GiB RAM from the listed  figures in the cloud provider's reference page-->
+
 Each worker node in a pool runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead.
 
 The following table lists all available instance types for worker node pools, as well as the Pod size that is supported for each instance type. As the system requirements of Astro change, these values can increase or decrease.
