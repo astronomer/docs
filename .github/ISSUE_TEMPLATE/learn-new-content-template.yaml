@@ -51,7 +51,7 @@ body:
     attributes:
       label: Airflow Version
       description: Airflow version in which the feature/behavior was added. Please provide for features which are not yet released.
-      placeholder: For example: Airflow 2.6.1
+      placeholder: For example, Airflow 2.6.1
   - type: input
     id: sme
     attributes:
