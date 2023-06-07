@@ -84,7 +84,7 @@ This is the minimum configuration required to run tasks with the KubernetesPodOp
 
 Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, which means that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
-To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `resources` argument of the KubernetesPodOperator. For example:
+To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `container_resources` argument of the KubernetesPodOperator. For example:
 
 ```python {20}
 from airflow.configuration import conf
@@ -105,7 +105,7 @@ KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    resources=compute_resources,
+    container_resources=compute_resources,
     task_id="<task-name>",
     get_logs=True,
 )
@@ -148,7 +148,6 @@ example_volume_test = KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    resources=compute_resources,
     task_id="<task-name>",
     get_logs=True,
     volume_mounts=volume_mounts,
