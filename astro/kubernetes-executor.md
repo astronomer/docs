@@ -7,7 +7,7 @@ id: 'kubernetes-executor'
 On Astro, you can configure Kubernetes executor in the following ways:
 
 - Change the resource usage for the default Pods on which your tasks run in the Cloud UI.
-- Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration. 
+- Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration in your DAG code. 
 
 This document describes how to configure individual task Pods for different use cases. To configure defaults for all Kubernetes executor task Pods, see [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources).
 
