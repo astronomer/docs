@@ -11,7 +11,7 @@ description: Astronomer Software release notes.
 
 ## 0.32.1
 
-Release date: June 2, 2023
+Release date: June 8, 2023
 
 ### Additional improvements
 
