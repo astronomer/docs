@@ -142,9 +142,7 @@ You can orchestrate any Databricks notebooks in a Databricks Workflow using the 
 
     <CodeBlock language="python">{databricks_tutorial_dag}</CodeBlock>
 
-    This DAG uses the Astro Databricks provider to create a Databricks Workflow that runs two notebooks.
-
-    The `databricks_workflow` task group, created using the `DatabricksWorkflowTaskGroup` class, automatically creates a Databricks Workflow that executes the Databricks notebooks you specified in the individual DatabricksNotebookOperators. One of the biggest benefits of this setup is the use of a Databricks job cluster, allowing you to [significantly reduce your Databricks cost](https://www.databricks.com/product/pricing). The task group contains three tasks:
+    This DAG uses the Astro Databricks provider to create a Databricks Workflow that runs two notebooks. The `databricks_workflow` task group, created using the `DatabricksWorkflowTaskGroup` class, automatically creates a Databricks Workflow that executes the Databricks notebooks you specified in the individual DatabricksNotebookOperators. One of the biggest benefits of this setup is the use of a Databricks job cluster, allowing you to [significantly reduce your Databricks cost](https://www.databricks.com/product/pricing). The task group contains three tasks:
 
     - The `launch` task, which the task group automatically generates, provisions a Databricks `job_cluster` with the spec defined as `job_cluster_spec` and creates the Databricks job from the tasks within the task group.
     - The `notebook1` task runs the `notebook1` notebook in this cluster as the first part of the Databricks job.
