@@ -2,8 +2,8 @@
 ### Show three ways to use MLFlow with Airflow
 
 This DAG shows how you can use the MLflowClientHook to create an experiment in MLFlow,
-directly log metrics and parameters to MLFlow in a TaskFlow task via mlflow.sklearn.autolog() and
-create a new model.
+directly log metrics and parameters to MLFlow in a TaskFlow task via the mlflow Python package and
+create a new model using the CreateRegisteredModelOperator of the MLflow Airflow provider package.
 """
 
 from airflow.decorators import dag, task
@@ -12,13 +12,14 @@ from astro.dataframes.pandas import DataFrame
 from mlflow_provider.hooks.client import MLflowClientHook
 from mlflow_provider.operators.registry import CreateRegisteredModelOperator
 
+# Adjust these parameters
+EXPERIMENT_ID = 1
+ARTIFACT_BUCKET = "<your-bucket-name>"
+
 ## MLFlow parameters
 MLFLOW_CONN_ID = "mlflow_default"
-MAX_RESULTS_MLFLOW_LIST_EXPERIMENTS = 100
 EXPERIMENT_NAME = "Housing"
-EXPERIMENT_ID = 1  # adjust as necessary
-REGISTERED_MODEL_NAME = "<your-registered-model-name>"
-ARTIFACT_BUCKET = "<your-bucket-name>"
+REGISTERED_MODEL_NAME = "my_model"
 
 
 @dag(
