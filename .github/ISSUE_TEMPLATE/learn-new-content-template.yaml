@@ -37,10 +37,6 @@ body:
       description: If you want Astronomer to add information to an existing page, please provide the link to it here.
     validations:
       required: true
-  - type: textarea
-    id: target_user_description
-    attributes:
-      label: Describe who the content is intended for, e.g. Airflow beginners, expert users...?
   - type: input
     id: due_date
     attributes:
@@ -51,7 +47,6 @@ body:
     attributes:
       label: Airflow Version
       description: Airflow version in which the feature/behavior was added. Please provide for features which are not yet released.
-      placeholder: For example, Airflow 2.6.1
   - type: input
     id: sme
     attributes:
