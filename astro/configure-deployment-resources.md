@@ -30,8 +30,8 @@ This document focuses on configuring Deployments through the Cloud UI. For steps
 
 Astro supports two executors, both of which are available in the Apache Airflow open source project:
 
-- Celery executor
-- Kubernetes executor
+- [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery.html)
+- [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html)
 
 All Deployments use the Celery executor by default. See [Choose an executor](executors-overview.md#choose-an-executor) to understand the benefits and limitations of each executor. When you've determined the right executor type for your Deployment, complete the steps in the following topic to update your Deployment's executor type.
 
