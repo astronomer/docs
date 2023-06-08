@@ -8,6 +8,7 @@ id: dag-metrics
   <meta name="description" content="Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting." />
   <meta name="og:description" content="Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting." />
 </head>
+
 :::info
 
 DAG metrics are currently available only on Astro Hosted. Support on Astro Hybrid is coming soon.
