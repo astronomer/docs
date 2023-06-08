@@ -174,11 +174,11 @@ with DAG(
     )
 ```
 
-## (Hybrid clusters only) Change the Kubernetes executor's worker node type
+## (Astro Hybrid only) Change the Kubernetes executor's worker node type
 
 :::info
 
-This section applies only to Astro Hybrid users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This section applies only to [Astro Hybrid](hybrid-overview.md) users. To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
 
 :::
 
