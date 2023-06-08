@@ -53,7 +53,7 @@ If you set up a project manually, you will see a `great_expectations` directory 
 
 :::info
 
-The `GreatExpectationsOperator` requires Airflow 2.1 or later, and you will need to change the value of `enable_xcom_pickling` to `true` in your `airflow.cfg` file. If you are using an Astronomer project structure, add `ENV AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` to your Dockerfile. If you are working from the demo repository, this step has already been completed for you.
+The `GreatExpectationsOperator` requires custom handling of XComs. You can either enable XCom pickling by setting the environment variable AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://docs.astronomer.io/learn/xcom-backend-tutorial).
 
 :::
 
