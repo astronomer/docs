@@ -29,7 +29,7 @@ To complete the migration process, you will:
 
 <Prerequisites />
 
-You can additionally utilize `gcloud` CLI to expedite some steps in this guide.
+You can additionally use the `gcloud` CLI to expedite some steps in this guide.
 
 ## Step 1: Install Astronomer Starship
 
@@ -92,15 +92,15 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-    The `Dockerfile` defines environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
+   The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to make certain resources available to your Airflow environment, like certificates or keys. For this migration, you only need to update your Runtime version. 
 
 2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your source Airflow environment. 
 
 3. Open your Astro project `dags` folder. Copy your DAG files to `dags` from either your source control platform or GCS Bucket.
 
-4. If you utilized the [`plugins` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#folders_in_the_bucket) in your Cloud Composer storage bucket, copy the contents of this folder from your source control platform or GCS Bucket to your Astro project `/plugins` folder.
+4. If you used the [`plugins` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#folders_in_the_bucket) in your Cloud Composer storage bucket, copy the contents of this folder from your source control platform or GCS Bucket to your Astro project `/plugins` folder.
 
-5. If you utilized the [`data` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#data) in Cloud Composer, copy the contents of that folder from your source control platform or GCS Bucket to your Astro project `include` folder.
+5. If you used the [`data` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#data) in Cloud Composer, copy the contents of that folder from your source control platform or GCS Bucket to your Astro project `include` folder.
 
 </TabItem>
 <TabItem value="gcloud">
@@ -111,7 +111,7 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-    The `Dockerfile` defines environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
+    The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to make certain resources available to your Airflow environment, like certificates or keys. For this migration, you only need to update your Runtime version. 
 
 2. Open your Astro project in your terminal. Run the following command to copy your PyPI packages from GCC to your `requirements.txt` file:
 

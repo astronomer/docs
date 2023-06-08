@@ -48,7 +48,7 @@ This setup varies slightly for Astro Hybrid users. See [Configure Deployment res
     - **Description**: (Optional) Enter a description for your Deployment.
     - **Cluster**: Choose whether you want to run your Deployment in a **Standard cluster** or **Dedicated cluster**. If you don't have specific networking or cloud requirements, Astronomer recommends using the default **Standard cluster** configurations.
 
-        To configure and use dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md). If you don't have the option of choosing between standard or dedicated, you are an Astro Hybrid user and must choose a cluster that has been configured for your Organization. See [Manage Hybrid clusters](manage-hybrid-clusters.md).
+                To configure and use dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md). If you don't have the option of choosing between standard or dedicated, that means you are an Astro Hybrid user and must choose a cluster that has been configured for your Organization. See [Manage Hybrid clusters](manage-hybrid-clusters.md).
 
     - **Executor**: Choose the same executor as in your source Airflow environment. 
     - **Scheduler**: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
@@ -61,7 +61,7 @@ This setup varies slightly for Astro Hybrid users. See [Configure Deployment res
 
   :::info
 
-  ²Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource usage on Astro. See [Configure Deployment](/astro/configure-deployment-resources.md)
+  ²Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource use on Astro. See [Configure Deployment](/astro/configure-deployment-resources.md)
 
   :::
 

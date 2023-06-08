@@ -271,4 +271,4 @@ The lineage graph shows you how these two DAGs are connected and how data flows 
 
 ## Conclusion
 
-Congratulations! You are now able to run Marquez and Airflow locally and trace data through your DAGs by viewing their lineage. A great next step is to try other Airflow operators that generate lineage metadata, or, if you are an Astronomer customer, check out [lineage in Astro](https://docs.astronomer.io/astro/data-lineage).
+Congratulations! You can now run Marquez and Airflow locally and trace data through your DAGs by viewing their lineage. As a great next step, try other Airflow operators that generate lineage metadata. Or, if you are an Astronomer customer, check out [lineage in Astro](https://docs.astronomer.io/astro/data-lineage).
