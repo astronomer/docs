@@ -15,7 +15,7 @@ body:
         - Airflow concepts
         - Airflow tutorials
         - Integrations
-        - References
+        - Examples
         - I am not sure where this best fits
     validations:
       required: true
