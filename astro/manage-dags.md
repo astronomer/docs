@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Manage DAG runs from the Cloud UI'
-title: "Manage DAGs"
+sidebar_label: 'Manage DAGs'
+title: "Manage DAG runs from the Cloud UI"
 id: manage-dags
 ---
 
