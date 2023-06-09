@@ -25,18 +25,8 @@ To start your trial, Astronomer recommends using the name of your company as the
 
 You're now ready to start deploying and running DAGs on Astro. See [Run your first DAG on Astro](create-first-dag.md) for a detailed quickstart. You'll create a local Astro project, then push that project to your Astro Deployment. The entire process takes about 5 minutes. 
 
+You have 14 days and $300 to spend in credits before your trial ends. See [Manage billing](manage-billing.md) to view how much credit you've used over the course of your trial. See [Pricing](https://www.astronomer.io/pricing/) for a breakdown of how much it costs to run Airflow on Astro.
 
-## Trial limitations
-
-Astro trials have some limitations that aren't present in the paid product:
-
-- You can only create Deployments in standard clusters, which do not support VPC Peer network configurations for access to your internal data sources.
-- You can only have up to two Deployments at any given time.
-- For each of your Deployments, you have the following usage limits on executors:
-    - Celery executor: 4vCPU and 8G RAM.
-    - Kubernetes executor: 12vCPU and 24G RAM.
-- You can only configure the `default` worker queue, and you can only have a maximum worker count of two.
-   
 ## After your trial
 
 After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Cloud UI. You can still access your user account page and Astronomer support forms. Any DAGs you deployed will continue to run for an additional 7-day grace period.

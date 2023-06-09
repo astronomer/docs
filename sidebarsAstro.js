@@ -189,6 +189,7 @@ module.exports = {
             },
           ],
         },
+        "manage-billing",
       ],
     },
     {
