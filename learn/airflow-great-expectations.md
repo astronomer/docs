@@ -53,7 +53,8 @@ If you set up a project manually, you will see a `great_expectations` directory 
 
 :::info
 
-The `GreatExpectationsOperator` requires custom handling of XComs. You can either enable XCom pickling by setting the environment variable AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://docs.astronomer.io/learn/xcom-backend-tutorial).
+By default, the `GreatExpectationsOperator` pushes a [CheckpointResult object](https://docs.greatexpectations.io/docs/terms/checkpoint/#checkpointresult) to XCom. You can change this behavior by setting the `return_json_dict` parameter to `True` to cause the operator to return a json-serializable dictionary instead.
+If you do not want to use this built-in serialization, you can either enable XCom pickling by setting the environment variable AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://docs.astronomer.io/learn/xcom-backend-tutorial).
 
 :::
 
