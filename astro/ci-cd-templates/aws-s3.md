@@ -11,7 +11,7 @@ Use the following CI/CD template to automate deploying Apache Airflow DAGs from 
 
 - An AWS S3 bucket
 - An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-code.md#enable-dag-only-deploys-on-a-deployment).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
 ### DAG-based deploy
@@ -76,9 +76,10 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 6. Configure the following [Lambda environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) for your Lambda function:
 
-    `ASTRO_HOME` = `\tmp`
-    `ASTRONOMER_KEY_ID` = `<your-deployment-api-key-id>`
-    `ASTRONOMER_KEY_SECRET` = `<your-deployment-api-key-secret>`
+    - `ASTRO_HOME`: `\tmp`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+
+    For production Deployments, Astronomer recommends storing your API credentials in AWS Secrets Manager and referencing them from Lambda. See [https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html](https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html)
 
 7. Add the following code to `lambda_function.py`
 

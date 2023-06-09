@@ -24,7 +24,7 @@ _DAG-based templates_ use the `--dags` flag in the Astro CLI to push DAG changes
 CI/CD templates that use the DAG-based workflow:
 
 - Require that each Deployment have the DAG-only deploy feature enabled. See [Enable DAG-only deploys on a Deployment](/astro/deploy-code#enable-dag-only-deploys-on-a-deployment).
-- Use [Deployment API key credentials](astro/api-keys#create-an-api-key). These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
+- Use a [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
 - Trigger the following Astro CLI commands depending on which files were updated by the commit:
     - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment.
@@ -34,8 +34,7 @@ This process is equivalent to the following shell script:
 
 ```sh
 # Set Deployment API key credentials as environment variables
-export ASTRONOMER_KEY_ID="<your-api-key-id>"
-export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
+export ASTRO_API_TOKEN="<your-api-token>"
 export DAG_FOLDER="<path to dag folder ie. dags/>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
@@ -67,7 +66,7 @@ _Image-only templates_ build a Docker image and push it to Astro whenever you up
 
 CI/CD templates that use image-only workflows:
 
-- Use Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
+- Use a [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
 - Run the `astro deploy` command. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image to your Deployment.
 
@@ -75,12 +74,11 @@ This is equivalent to running the following shell script:
 
 ```sh
 # Set Deployment API key credentials as environment variables
-$ export ASTRONOMER_KEY_ID="<your-api-key-id>"
-$ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
+export ASTRO_API_TOKEN="<your-api-token>"
 # Install the latest version of Astro CLI
-$ curl -sSL install.astronomer.io | sudo bash -s
+curl -sSL install.astronomer.io | sudo bash -s
 # Build your Astro project into a Docker image and push the image to your Deployment
-$ astro deploy
+astro deploy
 ```
 
 ## Preview Deployment templates

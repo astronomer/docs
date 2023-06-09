@@ -9,7 +9,7 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 
 - A Google cloud storage (GCS) bucket.
 - An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-code.md#enable-dag-only-deploys-on-a-deployment).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
 ## DAG-based deploy
@@ -41,8 +41,9 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 7. Set the following [environment variables](https://cloud.google.com/functions/docs/configuring/env-var#setting_runtime_environment_variables) for your Cloud Function:
 
     - `ASTRO_HOME` = `\tmp`
-    - `ASTRONOMER_KEY_ID` = `<your-deployment-api-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-deployment-api-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+
+    For production Deployments, ensure that you store the value for your API token in a secrets backend. See [Secret Manager overview](https://cloud.google.com/secret-manager/docs/overview).
 
 8. Add the dependency `google-cloud-storage` to the `requirements.txt` file for your Cloud Function. See [Specifying Dependencies in Python](https://cloud.google.com/functions/docs/writing/specifying-dependencies-python).
 

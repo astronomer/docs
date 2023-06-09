@@ -15,17 +15,16 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that CircleCI can access.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - Access to [CircleCI](https://circleci.com/).
 
 ## Single branch implementation
 
 To automate code deploys to a Deployment using CircleCI, complete the following setup in a Git-based repository that hosts an Astro project:
 
-1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
+1. Set the following environment variable in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
 
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
 
@@ -54,8 +53,7 @@ To automate code deploys to a Deployment using CircleCI, complete the following 
           - run:
               name: "Setup custom environment variables"
               command: |
-                echo export ASTRONOMER_KEY_ID=${ASTRONOMER_KEY_ID} >> $BASH_ENV
-                echo export ASTRONOMER_KEY_SECRET=${ASTRONOMER_KEY_SECRET} >> $BASH_ENV
+                echo export ASTRO_API_TOKEN=${ASTRO_API_TOKEN_} >> $BASH_ENV
           - run:
               name: "Deploy to Astro"
               command: |
