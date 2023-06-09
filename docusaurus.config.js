@@ -108,6 +108,10 @@ module.exports = {
       successMessage: "Success! ✓",
       errorMessage: "Sorry, there was issue sending your email. Please try again.",
     },
+    feedbackWidget: {
+      question: "Was this page helpful?",
+      thanksText: "Thank you for your feedback!",
+    },
     softwareNav: {
       items: [
         {
