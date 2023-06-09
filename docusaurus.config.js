@@ -116,11 +116,6 @@ module.exports = {
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
         {
-          label: '0.31',
-          to: '/software/0.31/',
-          activeBaseRegex: '(software\/0.31)+',
-        },
-        {
           label: '0.30',
           to: '/software/0.30/',
           activeBaseRegex: '(software\/0.30)+',
