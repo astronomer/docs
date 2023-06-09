@@ -139,7 +139,7 @@ Astro Runtime now uses Python 3.10 by default. To continue using Python 3.9, see
 ## Astro Runtime 7.5.0
 
 - Release date: May 29, 2023
-- Airflow version: 2.6.1
+- Airflow version: 2.5.3
 
 ### Early access Airflow bug fixes
 
@@ -307,7 +307,7 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 ## Astro Runtime 6.5.0
 
 - Release date: May 29, 2023
-- Airflow version: 2.6.1
+- Airflow version: 2.4.3
 
 ### Early access Airflow bug fixes
 
