@@ -14,12 +14,6 @@
 /software/0.27/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.27/:splat.md 301
 /software/0.28/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.28/:splat.md 301
 /software/0.29/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.29/:splat.md 301
-/software/*/ac-cve https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/ac-cve.md 301
-/software/*/ac-support-policy https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/ac-support-policy.md 301
-/software/*/image-architecture https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/image-architecture.md 301
-/software/*/install-packages https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/install-packages.md 301
-/software/*/single-node-install https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/single-node-install.md 301
-/software/*/upgrade-ac https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/upgrade-ac.md 301
 /software/0.31/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.31/:splat.md 301
 
 # redirect base cloud path to astro overview
