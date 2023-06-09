@@ -27,7 +27,7 @@ Astro Cloud IDE requests can come from the following IP address:
 
 - `20.232.242.54`
 
-Add these IP addresses to your allowlist to run the Astro Cloud IDE in a private network. These IP addresses are subject to change. 
+Add this IP address to your allowlist to run the Astro Cloud IDE in a private network. This address is subject to change. 
 
 ## Execution
 
