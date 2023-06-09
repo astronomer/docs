@@ -70,7 +70,7 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
     ```
 
 </TabItem>
@@ -114,7 +114,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             deployment-id: <dev-deployment-id>
       prod-push:
@@ -125,7 +125,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             deployment-id: <prod-deployment-id>
     ```
@@ -180,7 +180,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
     ```
@@ -221,7 +221,7 @@ If your Astro project requires additional build-time arguments to build an image
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
     ```
@@ -276,7 +276,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             dag-deploy-enabled: true
     ```
@@ -326,7 +326,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             dag-deploy-enabled: true
             deployment-id: <main-deployment-id>
@@ -339,7 +339,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             dag-deploy-enabled: true
             deployment-id: <prod-deployment-id>
@@ -395,7 +395,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
             dag-deploy-enabled: true
@@ -447,7 +447,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Create preview Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             action: create-deployment-preview
             deployment-id: <main-deployment-id>
@@ -472,7 +472,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to preview
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             action: deploy-deployment-preview
             deployment-id: <main-deployment-id>
@@ -496,7 +496,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Delete preview Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             action: delete-deployment-preview
             deployment-id: <main-deployment-id>
@@ -521,7 +521,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to main Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             deployment-id: <main-deployment-id>
     ```
