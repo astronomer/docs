@@ -23,7 +23,7 @@ The Cloud IDE stores Python cell outputs in an encrypted S3 bucket. SQL cell out
 
 ## Networking
 
-Astro Cloud IDE requests can come from the following IP addresses:
+Astro Cloud IDE requests can come from the following IP address:
 
 - `20.232.242.54`
 
