@@ -42,7 +42,19 @@ With deferrable operators, worker slots are released when a task is polling for 
 
 ## Use deferrable operators
 
-Deferrable operators should be used whenever you have tasks that occupy a worker slot while polling for a condition in an external system. For example, using deferrable operators for sensor tasks can provide efficiency gains and reduce operational costs. Smart Sensors were deprecated in Airflow 2.2.4, and were removed in Airflow 2.4.0. Use deferrable operators instead of Smart Sensors because they provide greater functionality and they are supported by Airflow.
+Deferrable operators should be used whenever you have tasks that occupy a worker slot while polling for a condition in an external system. For example, using deferrable operators for sensor tasks can provide efficiency gains and reduce operational costs. Use deferrable operators instead of Smart Sensors, which were removed in Airflow 2.4.0, because they provide greater functionality and they are supported by Airflow.
+
+### Start a triggerer
+
+To use deferrable operators, you must have a triggerer running in your Airflow environment. If you are running Airflow on [Astro](https://docs.astronomer.io/astro) or using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview), the triggerer runs automatically if you are on Astro Runtime 4.0 and later. If you are using Astronomer Software 0.26 and later, you can add a triggerer to an Airflow 2.2 and later deployment in the **Deployment Settings** tab. See [Configure a Deployment on Astronomer Software - Triggerer](https://docs.astronomer.io/enterprise/configure-deployment#triggerer) to configure the triggerer.
+
+If you are not using Astro, to start a triggerer process run `airflow triggerer` in your Airflow environment. Your output should be similar to the following image.
+
+![Triggerer Logs](/img/guides/triggerer_logs.png)
+
+As tasks are raised into a deferred state, triggers are registered in the triggerer. You can set the number of concurrent triggers that can run in a single triggerer process with the [`default_capacity`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#triggerer) configuration setting in Airflow. This can also be set with the `AIRFLOW__TRIGGERER__DEFAULT_CAPACITY` environment variable. The default value is `1,000`.
+
+### Update your DAGs
 
 To use a deferrable version of a core Airflow operator in your DAG, you only need to replace the import statement for the existing operator. For example, Airflow's `TimeSensorAsync` is a replacement of the non-deferrable `TimeSensor` ([source](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)). To use `TimeSensorAsync`, remove your existing `import` and replace it with the following:
 
@@ -53,7 +65,7 @@ To use a deferrable version of a core Airflow operator in your DAG, you only nee
 from airflow.sensors.time_sensor import TimeSensorAsync as TimeSensor
 ```
 
-If you are using a deferrable operator that is part of the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package, you will also need to ensure that package is installed in your Airflow environment. For example, to use the Snowflake deferrable operator:
+If you are using a deferrable operator that is part of a provider package, you will also need to ensure that package is installed in your Airflow environment. For example, to use the Snowflake deferrable operator from the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package:
 
 1. Add the following to your `requirements.txt` file:
 
@@ -78,29 +90,20 @@ There are numerous benefits to using deferrable operators including:
 
 - Reduced resource consumption: Depending on the available resources and the workload of your triggers, you can run hundreds to thousands of deferred tasks in a single triggerer process. This can lead to a reduction in the number of workers needed to run tasks during periods of high concurrency. With less workers needed, you are able to scale down the underlying infrastructure of your Airflow environment.
 - Resiliency against restarts: Triggers are stateless by design. This means your deferred tasks are not set to a failure state if a triggerer needs to be restarted due to a deployment or infrastructure issue. When a triggerer is back up and running in your environment, your deferred tasks will resume.
-- Gateway to event-based DAGs: The presence of `asyncio` in core Airflow is a potential foundation for event-triggered DAGs.
 
 Some additional notes about using deferrable operators:
 
 - If you want to replace non-deferrable operators in an existing project with deferrable operators, Astronomer recommends importing the deferrable operator class as its non-deferrable class name. If you don't include this part of the import statement, you need to replace all instances of non-deferrable operators in your DAGs. In the above example, that would require replacing all instances of `TimeSensor` with `TimeSensorAsync`.
-- Currently, not all operators have a deferrable version. There are a few open source deferrable operators, plus additional operators designed and maintained by Astronomer.
-- If you're interested in the deferrable version of an operator that is not generally available, you can write your own and contribute it back to the open source project. 
 - There are some use cases where it can be more appropriate to use a traditional sensor instead of a deferrable operator. For example, if your task needs to wait only a few seconds for a condition to be met, Astronomer recommends using a Sensor in [`reschedule` mode](https://github.com/apache/airflow/blob/1.10.2/airflow/sensors/base_sensor_operator.py#L46-L56) to avoid unnecessary resource overhead.
 
 ## Available deferrable operators
 
-The following deferrable operators are installed by default in Airflow:
+The easiest way to check if an operator has a deferrable option and learn how to install it is to search the [Astronomer Registry](https://registry.astronomer.io/). 
 
-- [TimeSensorAsync](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)
-- [DateTimeSensorAsync](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/date_time/index.html#airflow.sensors.date_time.DateTimeSensorAsync)
+Some deferrable operators are installed by default in Airflow, including the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/2.6.1/modules/TimeSensorAsync)
+and [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/2.6.1/modules/TriggerDagRunOperator). 
 
-You can use additional deferrable operators built and maintained by Astronomer by installing the open source [Astronomer Providers](https://github.com/astronomer/astronomer-providers) Python package. The operators and sensors in this package are deferrable versions of commonly used operators. For example, the package includes:
-
-- `SnowflakeOperatorAsync`
-- `DatabricksSubmitRunOperatorAsync`
-- `HttpSensorAsync`
- 
-For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html). You can also create your own deferrable operator for your use case.
+Other deferrable operators are available in provider packages, including many built and maintained by Astronomer as part of the open source [Astronomer Providers](https://github.com/astronomer/astronomer-providers) Python package. For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html). 
 
 ## Example workflow
 
@@ -125,21 +128,10 @@ In the following screenshot, all tasks are shown in a deferred (violet) state. T
 
 ![Deferrable sensor Grid View](/img/guides/deferrable_grid_view.png)
 
-
-## Run deferrable tasks
-
-To start a triggerer process, run `airflow triggerer` in your Airflow environment. Your output should be similar to the following image.
-
-![Triggerer Logs](/img/guides/triggerer_logs.png)
-
-If you are running Airflow on [Astro](https://docs.astronomer.io/cloud/deferrable-operators#prerequisites), the triggerer runs automatically if you are on Astro Runtime 4.0 and later. If you are using Astronomer Software 0.26 and later, you can add a triggerer to an Airflow 2.2 and later deployment in the **Deployment Settings** tab. See [Configure a Deployment on Astronomer Software - Triggerer](https://docs.astronomer.io/enterprise/configure-deployment#triggerer) to configure the triggerer.
-
-As tasks are raised into a deferred state, triggers are registered in the triggerer. You can set the number of concurrent triggers that can run in a single triggerer process with the [`default_capacity`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#triggerer) configuration setting in Airflow. This can also be set with the `AIRFLOW__TRIGGERER__DEFAULT_CAPACITY` environment variable. The default value is `1,000`.
-
-### High availability
+## High availability
 
 Triggers are designed to be highly available. You can implement this by starting multiple triggerer processes. Similar to the [HA scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#running-more-than-one-scheduler) introduced in Airflow 2.0, Airflow ensures that they co-exist with correct locking and high availability. See [High Availability](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#high-availability) for more information on this topic.
 
-### Create a deferrable operator
+## Create a deferrable operator
 
 If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow or Astronomer Providers, you can create your own. See [Writing Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#writing-deferrable-operators).
