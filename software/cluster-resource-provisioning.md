@@ -40,7 +40,7 @@ To change this behavior, you can change the amount of CPU and memory that an AU 
 
     For example, if you set `overProvisioningFactorMem: 0.75` and `overProvisioningFactorCPU: 0.5`, a scheduler using 1 AU will only request 0.075 CPU and 192.5 MB of memory on a node, allowing you to run more components on that node than before.
 
-    By default, this configuration applies to all Airflow components. Any components that you remove from `overProvisioningComponents` will not be underprovisioned.
+    By default, this configuration applies to all Airflow components. Any components that you remove from `overProvisioningComponents` will not have overprovisioning applied.
 
 2. Save the `config.yaml` file and push the configuration change to your platform. See [Apply a config change](apply-platform-config.md). After the change is applied, new Deployments automatically use the updated AU definition.
 3. Redeploy code to your existing Deployments to have them start using your updated AU definition. See [Deploy code](deploy-cli.md).
