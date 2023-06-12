@@ -29,7 +29,9 @@ Release date: June 8, 2023
 
 ### Bug fixes
 
+- Fixed an issue where `git-sync-relay` containers wouldn't restart as expected after being terminated.
 - Fixed an issue where a service account with the Workspace Editor role could update a Deployment when it didn't have any Deployment-level permissions for the Deployment. 
+- Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana.
 - System Admins can no longer change a user's system role if the user is imported to Astronomer through an IdP group.
 - Fixed an issue where you could not create a new Deployment from the Cloud UI if you updated its scheduler count using the text-based input field. 
 - Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
