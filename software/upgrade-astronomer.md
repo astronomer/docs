@@ -223,9 +223,9 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
 
 #### Upgrade to Postgres 15
 
-Astronomer Software uses Postgres 15 by default. If you aren't using an off-cluster database solution, Astronomer recommends that you configure Astronomer Software to stay on Postgres 11.18.0-1 when you upgrade to 0.32. To do so:
+Astronomer Software uses Postgres 15 by default. If you are using an in-cluster database solution, Astronomer recommends that you configure Astronomer Software to stay on Postgres 11.18.0-1 when you upgrade to 0.32. To do so:
 
-- Set `global.postgresql.image.tag=11.18.0-1` in your `config.yaml` file.
+- Set `global.postgresql.image.tag=11.<latest-patch-version>` in your `config.yaml` file.
 - Complete the upgrade as documented.
 
 You can then upgrade to Postgres 15 after the upgrade is complete. See [How to upgrade PostgreSQL in Docker and Kubernetes](https://www.cloudytuts.com/tutorials/docker/how-to-upgrade-postgresql-in-docker-and-kubernetes/).
