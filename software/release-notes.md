@@ -15,13 +15,13 @@ Release date: June 12, 2023
 
 ### Additional improvements
 
-- [Underprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
+- [Overprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
 
     - PGBouncer
     - Statsd
     - Flower
   
-- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [underprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
+- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [overprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
 - Teams without any users are now automatically deleted when SCIM is disabled.
 - You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
 - You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
