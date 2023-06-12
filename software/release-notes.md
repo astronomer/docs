@@ -13,10 +13,6 @@ description: Astronomer Software release notes.
 
 Release date: June 12, 2023
 
-### Clean Deployment task metadata
-
-Astronomer Software now includes a cron job that automatically archives task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) for all of your Deployments and exports the results for each Deployment as a file to your external storage service. To configure this job, see [Clean Deployment task metadata](configure-deployment.md#clean-deployment-task-metadata).
-
 ### Additional improvements
 
 - [Underprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
@@ -27,6 +23,7 @@ Astronomer Software now includes a cron job that automatically archives task and
   
 - You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [underprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
 - Teams without any users are now automatically deleted.
+- You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
 - You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
 - You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
 - You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
@@ -55,6 +52,10 @@ Astronomer Software now includes a cron job that automatically archives task and
 ## 0.32.0
 
 Release date: April 28, 2023
+
+### Clean Deployment task metadata
+
+You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of data Airflow stores in your Deployment metadata database by archiving data that you don't need to access on a regular basis. To configure this job, see [Clean Deployment task metadata](configure-deployment.md#clean-deployment-task-metadata).
 
 ### Programmatically create and update Deployments with the Houston API
 
