@@ -27,14 +27,14 @@ body:
     validations:
       required: true
   - type: textarea
-    id: description
+    id: issue
     attributes:
       label: The Issue or Context
       description: Describe what exactly is wrong or missing in the context of current documentation. Be as descriptive as possible.
     validations:
       required: true
   - type: textarea
-    id: description
+    id: fix
     attributes:
       label: The Fix
       description: Describe what needs to be added, updated, or otherwise changed.
