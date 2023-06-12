@@ -37,7 +37,7 @@ Release date: June 12, 2023
 - Fixed an issue where you could not create a new Deployment from the Cloud UI if you updated its scheduler count using the text-based input field. 
 - Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
 - Fixed an issue where resource requests configured from the Software UI could get out of sync with the Houston database.
-- Fixed an issue where where updating a Deployment's resource configuration did not persist in the Houston database when that Deployment had overprovisiniong enabled.
+- Fixed an issue where where updating a Deployment's resource configuration did not persist in the Houston database when that Deployment had overprovisioning enabled.
 - Reduced the number of redundant calls that Astronomer Software makes to your identity provider (IdP) when a user logs in.
 - Fixed a security vulnerability in logging.
 - Fixed the following vulnerabilities:
