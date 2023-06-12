@@ -22,7 +22,7 @@ Release date: June 12, 2023
     - Flower
   
 - You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [underprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
-- Teams without any users are now automatically deleted.
+- Teams without any users are now automatically deleted when SCIM is disabled.
 - You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
 - You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
 - You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
