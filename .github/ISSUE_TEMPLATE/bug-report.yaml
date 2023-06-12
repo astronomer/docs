@@ -1,21 +1,21 @@
-name: Report an issue in documentation
-description: Any request related to existing documentation that has an issue
+name: Report an Issue
+description: Anything in existing documentation that is wrong, missing, or misleading.
 labels: ["error/wrong-info", "error/misleading"]
 body:
   - type: markdown
     attributes:
       value: |
-        If you want to submit a quick fix yourself, you don't need to write an issue. See [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
+        If you want to contribute a quick fix yourself, you don't need to write an issue. See [Submit a Docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
   - type: dropdown
     id: issuetype
     attributes:
       label: Issue Type
       multiple: true
       options:
-        - Inaccurate content
-        - Missing or misleading content
-        - Typo
-        - Bug/ broken link
+        - Inaccurate or out-of-date
+        - Missing or misleading
+        - Typo or broken link
+        - Issue with Docs website
     validations:
       required: true
   - type: textarea
@@ -28,8 +28,16 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Describe the Issue and Proposed Fix
-      description: Describe the issue and what you think needs to be added, updated, or otherwise changed. Be as descriptive as possible.
+      label: The Issue
+      description: Describe what exactly is wrong. Be as descriptive as possible.
+      placeholder:  
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: The Fix
+      description: Describe what needs to be added, updated, or otherwise changed to address the issue.
       placeholder:  
     validations:
       required: true
