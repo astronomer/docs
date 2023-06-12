@@ -138,7 +138,14 @@ To use AWS S3 as a registry backend solution, you'll need:
 
 2. Create a new IAM User and attach the Policy. Your access key and secret key are generated and displayed after you create the user.
 
-3. Select one of the following options:
+3. Create Kubernetes secrets for your key credentials in your Astronomer installation:
+
+    ```sh
+    $ kubectl create secret generic astronomer-s3-access-key --from-literal=accesskey=<your-access-key> -n <your-namespace>
+    $ kubectl create secret generic astronomer-s3-secret-key --from-literal=secretkey=<your-secret-key> -n <your-namespace>
+    ```
+   
+4. Select one of the following options:
 
   - To authenticate to AWS with your registry credentials, add this entry to the `config.yaml` file:
 
@@ -147,12 +154,24 @@ To use AWS S3 as a registry backend solution, you'll need:
       registry:
         s3:
           enabled: true
-          accesskey: my-access-key
-          secretkey: my-secret-key
           region: us-east-1
           regionendpoint: <your-region-endpoint>
           bucket: <your-bucket-name>
+        extraEnvVars: 
+          - name: REGISTRY_STORAGE_S3_REGION
+            value: <your-s3-region>
+          - name: REGISTRY_STORAGE_S3_ACCESSKEY
+              valueFrom:
+                secretKeyRef:
+                  name: astronomer-s3-access-key
+                  key: AWS_ACCESS_KEY_ID
+          - name: REGISTRY_STORAGE_S3_SECRETKEY
+              valueFrom:
+                secretKeyRef:
+                  name: astronomer-s3-secret-key
+                  key: AWS_ACCESS_SECRET_ACCESS_KEY
     ```
+
   - To authenticate to AWS without providing your registry credentials, add this entry to the `config.yaml` file:
 
   ```yaml
@@ -163,6 +182,9 @@ To use AWS S3 as a registry backend solution, you'll need:
           region: us-east-1
           regionendpoint: <your-region-endpoint>
           bucket: <your-bucket-name>
+        extraEnvVars: 
+          - name: REGISTRY_STORAGE_S3_REGION
+            value: <your-s3-region>
     ```
 
 4. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
@@ -171,19 +193,37 @@ To use AWS S3 as a registry backend solution, you'll need:
 
 1. Create a key in AWS Key Management Service (KMS). During the key creation process you'll be asked to add "key users". Add the user created above as a "key user".
 
-2. Add the following values to your `config.yaml` file to enable encryption:
+2. Create Kubernetes secrets for your key credentials:
+
+    ```sh
+    $ kubectl create secret generic astronomer-s3-access-key --from-literal=accesskey=<your-access-key> -n <your-namespace>
+    $ kubectl create secret generic astronomer-s3-secret-key --from-literal=secretkey=<your-secret-key> -n <your-namespace>
+    ```
+
+3. Add the following values to your `config.yaml` file to enable encryption:
 
 ```yaml
 astronomer:
   registry:
     s3:
       enabled: true
-      accesskey: my-access-key
-      secretkey: my-secret-key
       region: us-east-1
       bucket: my-s3-bucket
       encrypt: true
       keyid: my-kms-key-id
+    extraEnvVars: 
+      - name: REGISTRY_STORAGE_S3_REGION
+        value: <your-s3-region>
+      - name: REGISTRY_STORAGE_S3_ACCESSKEY
+          valueFrom:
+            secretKeyRef:
+              name: astronomer-s3-access-key
+              key: AWS_ACCESS_KEY_ID
+      - name: REGISTRY_STORAGE_S3_SECRETKEY
+          valueFrom:
+            secretKeyRef:
+              name: astronomer-s3-secret-key
+              key: AWS_ACCESS_SECRET_ACCESS_KEY
 ```
 
 3. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
@@ -205,7 +245,14 @@ To use Azure Blog Storage as a registry backend solution, you'll need:
 
 ### Configure the registry backend
 
-1. Add the following to your `config.yaml` file:
+1. Create Kubernetes secrets for your key credentials:
+
+    ```sh
+    $ kubectl create secret generic astronomer-azure-access-key --from-literal=accountname=<your-account-name> -n <your-namespace>
+    $ kubectl create secret generic astronomer-azure-secret-key --from-literal=accountkey=<your-account-key> -n <your-namespace>
+    ```
+
+2. Add the following to your `config.yaml` file:
 
 ```yaml
 astronomer:
@@ -216,6 +263,19 @@ astronomer:
       accountkey: my-account-key
       container: my-container-name
       realm: core.windows.net
+    extraEnvVars: 
+      - name: REGISTRY_STORAGE_AZURE_REGION
+        value: <your-azure-region>
+      - name: REGISTRY_STORAGE_AZURE_ACCOUNTNAME
+          valueFrom:
+            secretKeyRef:
+              name: astronomer-azure-access-key
+              key: AZURE_ACCESS_KEY_ID
+      - name: REGISTRY_STORAGE_AZURE_ACCOUNTKEY
+          valueFrom:
+            secretKeyRef:
+              name: astronomer-azure-secret-key
+              key: AZURE_ACCESS_SECRET_ACCESS_KEY
 ```
 
-2. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+3. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).

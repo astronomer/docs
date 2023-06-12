@@ -25,10 +25,13 @@ Release date: June 8, 2023
 - Teams without any users are now automatically deleted.
 - You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
 - You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
 
 ### Bug fixes
 
 - Fixed an issue where a service account with the Workspace Editor role could update a Deployment when it didn't have any Deployment-level permissions for the Deployment. 
+- System Admins can no longer change a user's system role if the user is imported to Astronomer through an IdP group.
+- Fixed an issue where you could not create a new Deployment from the Cloud UI if you updated its scheduler count using the text-based input field. 
 - Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
 - Fixed an issue where resource requests configured from the Software UI could get out of sync with the Houston database.
 - Fixed an issue where underprovisioning factors did not persist in the Houston database.
@@ -41,6 +44,7 @@ Release date: June 8, 2023
     - [CVE-2023-27561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27561)
     - [CVE-2022-41727](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41727)
     - [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840)
+    - [CVE-2023-2650](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650)
 
 ## 0.32.0
 
