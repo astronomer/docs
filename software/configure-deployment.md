@@ -249,7 +249,7 @@ You can run a cron job to automatically archive task and DAG metadata from your 
         bucketName: "/tmp"
      
         # The name of the Kubernetes Secret containing your Airflow connection
-        providerEnvSecretName: ""
+        providerEnvSecretName: "<your-secret-name>"
      
         # Run cleanup on specific table or list of tables in a comma separated format
         tables: ""
