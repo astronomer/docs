@@ -1,19 +1,19 @@
 ---
-title: "Underprovision Airflow component resources on Astronomer Software"
-sidebar_label: "Underprovision Airflow resources"
+title: "Overprovision Deployments on Astronomer Software"
+sidebar_label: "Overprovision Deployments"
 id: cluster-resource-provisioning
-description: Configure your Astronomer cluster to underprovision Deployment resources.
+description: Configure your Astronomer cluster to overprovision Deployments.
 ---
 
 :::danger Development workloads only
 
-Changing cluster resource provisioning is only recommended for development clusters and can result in task failures. Astronomer can't provide support or troubleshoot issues related to underprovisioning Deployments through this configuration.
+Changing cluster resource provisioning is only recommended for development clusters and can result in task failures. Astronomer can't provide support or troubleshoot issues related to overprovisioning Deployments through this configuration.
 
 :::
 
 By default, Deployments specify CPU and memory [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits) for Kubernetes in terms of Astronomer Units (AU). For example, if an Airflow scheduler uses 1AU, it has both a request and a limit of 0.1 CPU and 385 MB of memory on its given Kubernetes node. Because you can't normally have a request lower than a limit, some Airflow components might reserve more resources on a node than they actually require.
 
-To change this behavior, you can change the amount of CPU and memory that an AU requests, allowing you to more efficiently provision resources based on the requirements for your Deployments. 
+To change this behavior, you can change the amount of CPU and memory that an AU requests, allowing you to more efficiently provision resources based on the requirements for your Deployments. This is known as overprovisioning, because it allows more Airflow component instances to exist on a single Kubernetes node.
 
 1. Add the following configuration to your `config.yaml` file. Replace the values for `overProvisioningFactorMem` and `overProvisioningFactorCPU` with the factor by which you want to set your resource requests as a percentage of your resource limits.
 
