@@ -13,6 +13,10 @@ description: Astronomer Software release notes.
 
 Release date: June 12, 2023
 
+### Clean Deployment task metadata
+
+Astronomer Software now includes a cron job that automatically archives task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) for all of your Deployments and exports the results for each Deployment as a file to your external storage service. To configure this job, see [Clean Deployment task metadata](configure-deployment.md#clean-deployment-task-metadata).
+
 ### Additional improvements
 
 - [Underprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
