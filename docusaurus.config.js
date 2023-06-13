@@ -7,8 +7,8 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'warn', // 'warn' for drafts, 'throw' for prod
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
+  onBrokenMarkdownLinks: 'throw',
   markdown: {
     mermaid: true,
   },
