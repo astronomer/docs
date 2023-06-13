@@ -31,6 +31,7 @@ Use the new **Billing** page in the Cloud UI to see both high-level and detailed
 
 ### Additional improvements
 
+- Trial Deployments now have [DAG-only deploys](deploy-code.md#deploy-dags-only) enabled by default.
 - The Cloud UI now shows your **Organization Short Name** and **Astro SAML Connection Name** in the Cloud UI.
 - You can now view mapped tasks from the **DAGs** page in the Cloud UI.
 
