@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Manage Airflow connections and variables'
+sidebar_label: 'Manage connections and variables'
 title: 'Manage Airflow connections and variables on Astro'
 id: manage-connections-variables
 description: "Learn about different strategies for managing Airflow connections and variables in local environments and on Astro"
