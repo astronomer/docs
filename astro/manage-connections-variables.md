@@ -189,7 +189,7 @@ To export variables from a local Airflow or Astro Deployment, go to the **Admin*
 
 ![Export Variables](/img/docs/airflow-ui-export-vars.png)
 
-To import variables to a local Airflow or Astro Deployment from a `json` file, go to the **Admin** menu on the Airflow UI, click on **Variables** and click on **Choose file**. Select the file you want to import and then click on **Import Variables**.
+To import variables to a local Airflow environment or Astro Deployment from a `json` file, go to **Admin** in the Airflow UI, click **Variables**, then and click **Choose file**. Select the file you want to import and then click **Import Variables**.
 
 ![Import Variables](/img/docs/airflow-ui-import-vars.png)
 
