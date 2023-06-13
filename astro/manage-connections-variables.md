@@ -183,7 +183,7 @@ To export variables from any Airflow environment, you can use [List Variables AP
 
 To import connections or variables to any Airflow environment, you can use the [Create Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_connection) and [Create Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_variables) respectively.
 
-#### Using Airflow UI
+#### Using the Airflow UI
 
 To export variables from a local Airflow environment or Astro Deployment, go to **Admin** in the Airflow UI, click **Variables** and select the variables you want to export. Then, click **Export** in the **Actions** dropdown menu. This exports a file named `variables.json` to your local computer.
 
