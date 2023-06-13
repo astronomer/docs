@@ -9,8 +9,6 @@ from pendulum import datetime
 import duckdb
 import pandas as pd
 
-DUCKDB_CONNECTION_URI = "include/my_garden_ducks.db"
-
 
 @dag(start_date=datetime(2023, 6, 1), schedule=None, catchup=False)
 def duckdb_tutorial_dag_1():
@@ -24,10 +22,11 @@ def duckdb_tutorial_dag_1():
         return ducks_in_my_garden_df
 
     @task
-    def create_duckdb_table_from_pandas_df(ducks_in_my_garden_df, conn_uri):
+    def create_duckdb_table_from_pandas_df(ducks_in_my_garden_df):
         "Create a table in MotherDuck based on a pandas DataFrame and query it"
 
-        conn = duckdb.connect(conn_uri)
+        # change the path to connect to a different database
+        conn = duckdb.connect("include/my_garden_ducks.db")
         conn.sql(
             f"""CREATE TABLE IF NOT EXISTS ducks_garden AS 
             SELECT * FROM ducks_in_my_garden_df;"""
@@ -37,9 +36,7 @@ def duckdb_tutorial_dag_1():
         for ducks in sets_of_ducks:
             print("quack " * ducks[0])
 
-    create_duckdb_table_from_pandas_df(
-        ducks_in_my_garden_df=create_pandas_df(), conn_uri=DUCKDB_CONNECTION_URI
-    )
+    create_duckdb_table_from_pandas_df(ducks_in_my_garden_df=create_pandas_df())
 
 
 duckdb_tutorial_dag_1()
