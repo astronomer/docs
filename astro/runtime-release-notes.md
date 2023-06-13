@@ -136,6 +136,19 @@ Astro Runtime now uses Python 3.10 by default. To continue using Python 3.9, see
 - Upgraded `astronomer-providers` to 1.15.4, which includes a bug fix for a backwards compatibility issue. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1154-2023-04-19) for a complete list of changes. 
 - Upgraded `openlineage-airflow` to 0.23.0, which includes support for dbt snapshots and support for parsing additional SQL commands. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md#0230---2023-4-20) for a complete list of changes.
 
+## Astro Runtime 7.6.0
+
+- Release date: June 13, 2023
+- Airflow version: 2.5.3
+
+### Early access Airflow bug fixes
+
+- Mark `[secrets] backend_kwargs` as a sensitive config ([31788](https://github.com/apache/airflow/pull/31788))
+
+### Additional Improvements
+
+- Upgraded `openlineage-airflow` to 0.27.2. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.27.2) for a complete list of changes. 
+
 ## Astro Runtime 7.5.0
 
 - Release date: May 29, 2023
@@ -303,6 +316,19 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
+
+## Astro Runtime 6.6.0
+
+- Release date: June 13, 2023
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Mark `[secrets] backend_kwargs` as a sensitive config ([31788](https://github.com/apache/airflow/pull/31788))
+
+### Additional Improvements
+
+- Upgraded `openlineage-airflow` to 0.27.2. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.27.2) for a complete list of changes. 
 
 ## Astro Runtime 6.5.0
 
