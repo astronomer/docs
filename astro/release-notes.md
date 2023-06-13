@@ -19,7 +19,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest Astro Runtime Version**: 8.4 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.15.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.16.0 ([Release notes](cli/release-notes.md))
 
 <!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
 
