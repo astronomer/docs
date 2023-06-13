@@ -118,18 +118,23 @@ You can also update your Workspace so that any new Deployments in the Workspace 
 
 ## Enable high availability
 
-:::info
+:::info Hybrid high availability
 
-This setting is configurable only on Astro Hosted Deployments.
+**This setting is configurable only on Astro Hosted Deployments. **
 
+On Astro Hybrid, by default, PgBouncer is highly available. Every Deployment has 2 PgBouncer pods each assigned to a different node. This prevents against zombie tasks. PgBouncer is not configurable and is managed by Astronomer. 
+
+Each Deployment has only one scheduler by default. But users can configure their Deployment to use up to 4 schedulers. For users who set Scheduler Count in the Cloud UI to 2, this means that those 2 scheduler Pods cannot be assigned to the same node and instead require a minimum of 2 nodes total. To avoid significant increases in cost, 3 or 4 schedulers can share the same 2 nodes and will not necessarily result in a higher node count.
 :::
 
-When a Deployment has high availability enabled, it runs multiple instances of its Airflow components across separate nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
+By default, all of your Airflow components have one instance running which are spread across multiple nodes. When you enable high availability for a Deployment, it runs two instances of [PgBouncer](https://www.pgbouncer.org/) and scheduler on different nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**.
 4. In **High Availability**, click the toggle to **On**.
+
+*Multiple instances of [PgBouncer](https://www.pgbouncer.org/) run across availability zones; for scheduler it is not guaranteed but is possible because the cluster is across two availability zones. Support for scheduler is coming soon*
 
 ## Transfer a Deployment to another Workspace 
 
