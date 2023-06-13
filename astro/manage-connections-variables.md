@@ -193,4 +193,4 @@ To import variables to a local Airflow or Astro Deployment from a `json` file, g
 
 ![Import Variables](/img/docs/airflow-ui-import-vars.png)
 
-Learn more about [connections](https://docs.astronomer.io/learn/connections) in Learn.
+See [Connections](https://docs.astronomer.io/learn/connections) for more information about importing and exporting connections in the Airflow UI.
