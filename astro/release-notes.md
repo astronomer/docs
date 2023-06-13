@@ -25,7 +25,9 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## June 13, 2023
 
-### Manage 
+### Manage billing and track usage for Astro Hosted
+
+Use the new **Billing** page in the Cloud UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](manage-billing.md) for more information.
 
 ### Additional improvements
 
@@ -34,6 +36,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Bug fixes
 
+- Fixed an issue where worker node pools in Hosted dedicated clusters on Azure were not being updated correctly.
 - Fixed an issue the Cloud UI would reset a Deployment's **Min Worker Count** from 0 to 1 after you edited the Deployment in any way.
 
 ## June 6, 2023
