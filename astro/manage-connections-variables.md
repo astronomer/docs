@@ -20,7 +20,6 @@ Use this document to understand all available options for managing variables and
 
 It is not necessary to choose the same approach for both connections and variables. Variables often determine your DAG's flow of execution and you might prefer to check them into source control. You also might want to view or edit them in the Airflow UI. For such cases, you can export your variables in a `json` file from the Airflow UI or using Astro CLI.
 
-:::
 
 Astronomer recommends using the [Astro CLI](cli/overview.md) to run a local Airflow environment and test your DAGs locally before deploying to Astro. Your Airflow connection and variable management strategies should be compatible with both your local testing workflows and your Astro workflows. However, you might need to use one strategy for storing variables and a different strategy for storing connections.
 
