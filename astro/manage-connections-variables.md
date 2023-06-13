@@ -154,7 +154,7 @@ You can import connections and variables stored as Environment variables in `.en
 
 You can export Airflow connections and variables stored in metadata database using the [Astro CLI](#using-the-astro-cli), [Airflow UI](#using-the-airflow-ui), or [Airflow API](#using-the-airflow-api). An Airflow connection or variable is stored in the metadata database if it's viewable in the Airflow UI under **Connections** or **Variables**. For variables, you can also use [Airflow UI](#using-airflow-ui) to import or export.
 
-#### Using Astro CLI
+#### Using the Astro CLI
 
 Run the following command to import or export your Airflow connections and variables, and then import them to Astro as environment variables:
 
