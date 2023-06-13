@@ -2,7 +2,7 @@
 sidebar_label: 'Manage Airflow connections and variables'
 title: 'Manage Airflow connections and variables on Astro'
 id: manage-connections-variables
-description: "Manage Airflow Connections and Variables"
+description: "Learn about different strategies for managing Airflow connections and variables in local environments and on Astro"
 ---
 
 You can store Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) locally in Airflow or remotely on Astro using several different methods. Each of these methods has advantages and limitations related to their security, ease of use, and performance. Similarly, you can choose different strategies for testing connections and variables on your local computer and then deploying these configurations to Astro.
