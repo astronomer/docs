@@ -16,6 +16,7 @@ The following table is a reference for all possible key-value pairs in the `disp
 | ------------- | ------ | ------------------------------------------------- |
 | `label`       | String | The label to show in the **Add Cell** menu.       |
 | `description` | String | The description to show in the **Add Cell** menu. |
+| `logoUrl` | String | The URL of the logo to show in the **Add Cell** menu. |
 
 
 ## Behavior JSON reference
@@ -39,9 +40,6 @@ The following table is a reference for all possible key-value pairs in the `gene
 | ------------------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`         | String, only option is `invoke`.                              | Determines how the operator is called.                                                                                                                                      |
 | `invoke`    | Key-value pairs                              | The configuration for how the operator is invoked. Set `functionName` (String), `imports` (List of Strings), and `excludeTaskArgId` (Boolean)                                                                                                                         |
-| `namingStrategy`   | String, either `increment` or `uuid` | Determines how the default names are generated for new cells.                                                                                                                      |
-| `excludeFromGraph` | Boolean                              | Determines whether to hide instances of the cell from the graph view of your pipeline editor.                                                                                      |
-| `returnsRawValue`  | Boolean                              | Indicates whether the custom operator returns a raw value. Set to `true` if the operator uses TaskFlow. If set to false, `.output` is appended to the name of the operator output. |
 
 
 ## Configs JSON reference
@@ -53,10 +51,8 @@ You can configure multiple `configs` objects for each parameter you want the use
 | Name               | Type                                 | Description                                                                                                                                                                        |
 | ------------------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `key`         | String                             | The unique identifier for the parameter.                                                                                                                                      |
-| `dataType`    | String, either `string`, `stringList`, `boolean`, `integer`                              | The parameter's value type.                                                              |
+| `dataType`    | String, must be one of: `string`, `stringList`, `stringMap`, `stringListMap`, `stringMapList`, `stringSet`, `boolean`, `integer`, `float`, `duration`, `unsupported`                              | The parameter's value type.                                                              |
 | `display`   | Key-value pairs | Determines how the parameter is displayed. See [Display JSON reference](#display-json-reference)                                                                                                                      |
-| `excludeFromGraph` | Boolean                              | Determines whether to hide instances of the cell from the graph view of your pipeline editor.                                                                                      |
-| `returnsRawValue`  | Boolean                              | Indicates whether the custom operator returns a raw value. Set to `true` if the operator uses TaskFlow. If set to false, `.output` is appended to the name of the operator output. |
 | `validity` | Key-value pairs | Configurations to determine which inputs for the parameter are valid. See [Validity JSON reference](#validity-json-reference)|
 
 ### Display JSON reference
@@ -67,10 +63,7 @@ For each `configs` object, you can configure the following values in a `display`
 | ------------------ | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `label`         | String                             | The label for the parameter.                                                                                                                                      |
 | `description`    | String                              | The description for the parameter.                                                            |
-| `default`   | Key-value pair. The key becomes the default `dataType` and the value becomes the default value. | The default type and value for the parameter.                                                                                                                      |
 | `example` | Key-value pair. The key becomes the default `dataType` and the value becomes the default value.                              | The example value that appears in placeholder text.                                                                                      |
-| `fixedWidthFont`  | Boolean                              | Determines whether to format input as a fixed-width font. |
-| `numLines`  | Integer                              | The number of lines to show for the user input. |
 | `highlightLanguage`  | String, either `python`, `sql`, or `js`.                              | Determines whether the user's input is formatted with syntax highlighting. |
 
 

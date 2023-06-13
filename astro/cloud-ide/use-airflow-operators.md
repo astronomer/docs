@@ -7,7 +7,7 @@ description: Learn how to run Airflow operators by creating and configuring oper
 
 You can import any Airflow operator available on the Astronomer Registry and run it as part of your Cloud IDE pipeline. In most cases, the Cloud IDE can parse parameters and provides you with a detailed form for configuring the operator. 
 
-## Create an operator cell
+## Use Airflow operator cells
 
 1. In the Cloud UI, select **Cloud IDE**.
 
@@ -45,7 +45,7 @@ If you click the toggle on and then select **Python expression**, you see that t
 
 To import a custom operator that your team uses into the Astro Cloud IDE, create a custom cell type in your project configuration.
 
-1. If you're using a custom cell type to call custom operator code, [commit your IDE project to a Git repository](deploy-project.md#commit-your-project-to-a-git-repository) and add your custom operator code to the `include` folder of your repository.
+1. If you're using a custom cell type to call custom operator code, [link your IDE project to a Git repository](deploy-project.md#commit-your-project-to-a-git-repository) and add your custom operator code to the `include` folder of your repository.
    
 2. In the Cloud UI, select **Cloud IDE**.
 
