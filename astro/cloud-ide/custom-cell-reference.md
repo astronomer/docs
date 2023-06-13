@@ -2,7 +2,7 @@
 sidebar_label: Custom cell configuration reference
 title: Custom cell configuration reference
 id: custom-cell-reference
-description: Learn how to configure a custom cell type as JSON.
+description: Learn how to import custom operators by configuring a custom cell type with JSON.
 ---
 
 This page contains reference information about all available JSON configurations for the custom operator cell type in the Astro Cloud IDE.  You enter this JSON when you create a new custom operator cell type in the Astro Cloud IDE. See [Create custom operator cells](cloud-ide/use-airflow-operators.md#create-custom-operator-cells) for setup steps.
