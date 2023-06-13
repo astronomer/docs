@@ -29,7 +29,7 @@ The following table suggests possible management strategies for specific use cas
 |----------|----------|
 | I'm getting started and want to quickly create Airflow objects | Airflow UI |
 | I want to test my connection and export as URI format | Airflow UI. For exporting as URI refer to [Import and export](manage-connections-variables#import-and-export-airflow-connections-and-variables) |
-| I want to deploy the same variables across multiple different Airflow environments  | Environment variables or [export as json](manage-connections-variables#astro-cli) |
+| I want to deploy the same variables across multiple different Airflow environments  | Environment variables or [JSON + Astro CLI](manage-connections-variables#astro-cli) |
 | I need to keep my connections and variables centralized and as secure as possible | Secrets backend |
 
 ### Storage and encryption
