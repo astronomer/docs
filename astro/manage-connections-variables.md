@@ -21,7 +21,7 @@ Use this document to understand all available options for managing variables and
 It is not necessary to choose the same approach for both connections and variables. Variables often determine your DAG's flow of execution and you might prefer to check them into source control. You also might want to view or edit them in the Airflow UI. For such cases, you can export your variables in a `json` file from the Airflow UI or using Astro CLI.
 
 
-Astronomer recommends using the [Astro CLI](cli/overview.md) to run a local Airflow environment and test your DAGs locally before deploying to Astro. Your Airflow connection and variable management strategies should be compatible with both your local testing workflows and your Astro workflows. However, you might need to use one strategy for storing variables and a different strategy for storing connections.
+Astronomer recommends using the [Astro CLI](cli/overview.md) to run a local Airflow environment and to test your DAGs locally before deploying them to Astro. Your Airflow connection and variable management strategies should be compatible with both your local testing workflows and your Astro workflows. However, you might need to use one strategy for storing variables and a different strategy for storing connections.
 
 The following table suggests possible management strategies for specific use cases.
 
@@ -34,14 +34,14 @@ The following table suggests possible management strategies for specific use cas
 
 ### Storage and encryption
 
-If you want to choose a strategy based on how Airflow connections and variables are stored, the following table shows which storage and encryption methods that each strategy uses.
+To choose a strategy based on how Airflow connections and variables are stored, use the following table to understand which storage and encryption methods that each strategy uses.
 
 | Strategy | Storage location | Visible via UI | Encrypted |
 |-----------|----------------|-----|------|
 | Airflow UI | Airflow metadata database | Yes | Yes. See [Fernet Key](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/fernet.html#fernet) | 
 | Airflow API | Airflow metadata database | Yes | Yes. See [Fernet Key](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/fernet.html#fernet) |
 | Environment variables | On local environments, in plain text. On Astro, in the control plane. | No | Yes, on Astro only. See [Data Protection](data-protection.md) | 
-| Secrets backend | Third-party secrets backend | No | Refer to your secrets backend tool documentation. |
+| Secrets backend | Third-party secrets backend | No | Refer to your secrets backend tool documentation |
 
 #### How Astro prioritizes storage locations
 
@@ -51,7 +51,7 @@ If you store the same variable or connection in multiple locations, Astro applie
 2. Environment variables
 3. Metadata database (any connection or variable which is visible in the Airflow UI)
 
-For example, if you set `AIRFLOW_VAR_MY_VARIABLE` with one value as an environment variable and you set the same variable `MY_VARIABLE` with another value in the Airflow UI, Astro uses the value set in the environment variable.
+For example, if you set `AIRFLOW_VAR_MY_VARIABLE` as an environment variable and you set the same variable `MY_VARIABLE` with a different value in the Airflow UI, Astro uses the value set in the environment variable.
 
 ## Airflow connection and variable management strategies 
 
@@ -59,12 +59,12 @@ The following sections explain the benefits, limitations, and implementations of
 
 ### Airflow UI
 
-The quickest way to create Airflow connections and variables is through the Airflow UI. This experience is the same for both local Airflow environments and Astro Deployments. Astronomer recommends this method if you're just getting started with Airflow, you want to get your DAGs running quickly, or if you want to export connections in a URI/JSON format
+The quickest way to create Airflow connections and variables is through the Airflow UI. This experience is the same for both local Airflow environments and Astro Deployments. Astronomer recommends this method if you're just getting started with Airflow, you want to get your DAGs running quickly, or if you want to export connections in a URI/JSON format.
 
 #### Benefits
 
 - The UI has features for correctly formatting and testing your connections.
-- You can export your variables from the Airflow UI, as well as import them to the Airflow UI from a JSON file.
+- You can export your variables from the Airflow UI to a JSON file and import them to the Airflow UI from a JSON file.
 - Connections and variables are encrypted and stored in the Airflow metadata database.
 
 #### Limitations
