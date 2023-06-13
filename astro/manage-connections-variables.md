@@ -144,7 +144,7 @@ The following sections describe different strategies for exporting and importing
 
 ### Secrets backend
 
-If you use a secrets backend, the method for managing connections and variables between local environments and Deployments varies based on your secrets backend and its API. You can still export the connections and variables from local, but you must rely on secret manager's API to migrate.
+If you use a secrets backend, your secrets backend and its API determines how you manage connections and variables between local environments and Deployments. Refer to your secrets backend provider's documentation to learn how to manage resources using API calls.
 
 ### Environment variables
 
