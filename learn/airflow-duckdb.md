@@ -131,9 +131,7 @@ If you want to use an in-memory DuckDB database you can leave the `File (leave b
 
     This simple DAG will query all information from a table in a DuckDB instance. Make sure the table you are querying exists in the DuckDB instance you specified in your DuckDB connection.
 
-4. Run the DAG manually by clicking the play button and view the DAG in the grid view. In the logs of the `create_duckdb_table_from_pandas_df` task you will find a quack for each duck in your garden.
-
-    ![DuckDB tutorial DAG 1 Grid view](/img/tutorials/airflow-duckdb_tutorial_dag_1_grid_view.png)
+4. Run the DAG manually by clicking the play button.
 
 :::info
 
