@@ -54,6 +54,7 @@ These commands can be used to manage API tokens as part of an automated workflow
 
 ### Additional improvements
 
+- You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
 - You can now specify the `enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](configure-deployment-resources.md#enforce-ci-cd-deploys) on a given Deployment. 
 - You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted. 
