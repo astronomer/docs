@@ -38,6 +38,7 @@ module.exports = {
       items: [
         "develop-project",
         "kubernetespodoperator",
+        "manage-connections-variables",
         {
           type: "category",
           label: "Cloud IDE",
