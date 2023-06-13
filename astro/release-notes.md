@@ -29,6 +29,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 Use the new **Billing** page in the Cloud UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](manage-billing.md) for more information.
 
+### New cell type for using Airflow operators in the Astro Cloud IDE
+
+You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](use-airflow-operators.md).
+
+Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](use-airflow-operators.md#create-custom-operator-cells).
+
 ### Additional improvements
 
 - Trial Deployments now have [DAG-only deploys](deploy-code.md#deploy-dags-only) enabled by default.
