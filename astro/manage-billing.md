@@ -5,7 +5,7 @@ id: manage-billing
 description: "Change your billing details and view your current spend from the Cloud UI."
 ---
 
-On Astro Hosted, you're billed based on how many hours you run your Deployment, as well as how many resources your Deployment components use. See [Pricing](https://www.astronomer.io/pricing/) for more a complete breakdown of possible costs.
+Astro Hosted meters and bills based on consumption of cloud resources associated with clusters, Deployments, and workers. Pricing is charged at an hourly rate, but is measured by the second. See [Pricing](https://www.astronomer.io/pricing/) for complete pricing and billing details.
 
 You can configure payment information and check your total Astro spend from the Cloud UI so that you don't go over your budget for running Airflow.
 
