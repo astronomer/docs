@@ -1,5 +1,5 @@
 """
-### Use the DuckDBHook in an Airflow task
+### DuckDB tutorial DAG 2
 
 This DAG shows how to use the DuckDBHook in an Airflow task.
 """
