@@ -9,7 +9,7 @@ Astro Hosted meters and bills based on consumption of cloud resources associated
 
 You can configure payment information and check your total Astro spend from the Cloud UI so that you don't go over your budget for running Airflow.
 
-## Update billing details
+## View billing details
 
 In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Billing**. The **Billing** menu includes the following tabs for tracking your payments:
 
