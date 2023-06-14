@@ -35,6 +35,17 @@ You can now use any Airflow operator available on the Astronomer Registry in you
 
 Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](use-airflow-operators.md#create-custom-operator-cells).
 
+### IMDSv2 is now enforced on AWS clusters
+
+:::warning Breaking change
+
+If your DAGs assume IAM roles to directly access metadata on your cluster using IMDSv1, this change can result in DAG run failures. Upgrade your DAGs to use IMDSv2 for all cluster metadata requests.
+
+See [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) for more information.
+
+:::
+
+Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources on your clusters are now session-based and muse include a token in the request body.
 ### Additional improvements
 
 - Trial Deployments now have [DAG-only deploys](deploy-code.md#deploy-dags-only) enabled by default.
