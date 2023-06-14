@@ -52,7 +52,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
     - **Name**: The name for your cluster.
     - **Region**: Select the region that your cluster runs in.
-    - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/22`).
+    - **Subnet CIDR**: Specify the range used by nodes in your GKE cluster (Default: `172.20.0.0/22`).
     - **Pod CIDR**: Specify the range used by GKE Pods (Default: `172.21.0.0/19`).
     - **Service Address CIDR**: Specify the range used by GKE services (Default: `172.22.0.0/22`).
     - **Service VPC Peering**: Specify the range used by Private Service connections (Default: `172.23.0.0/20`).
