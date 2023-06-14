@@ -17,6 +17,14 @@ If you are already familiar with MLflow and Airflow and want to get a use case u
 
 :::
 
+## Three ways to use MLflow with Airflow
+
+The DAG in this tutorial shows three different ways Airflow can interact with MLFlow:
+
+- Using an MLflow operator from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow): The MLflow provider contains several operators that abstract over common actions you might want to perform in MLflow, for example creating a deployment with the [CreateDeploymentOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/deployment.py) or running predictions from an existing model with the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py). 
+- Using an MLflow hook from the MLflow Airflow provider: The MLflow provider contains several [Airflow hooks](what-is-a-hook.md) that allow you to connect to MLflow using credentials stored in an Airflow connection. Using these hooks is ideal to perform actions in MLflow from within an Airflow tasks for which no dedicated operator exists. You can also use these hooks to create your own [custom operators](airflow-importing-custom-hooks-operators.md).
+- Using the MLflow Python package directly in a [@task decorated task](airflow-decorators.md): When performing ML related actions in an Airflow task such as feature engineering you can track metrics and artifacts using the MLflow Python package directly like in any Python script. 
+
 ## Time to complete
 
 This tutorial takes approximately 30 minutes to complete.
