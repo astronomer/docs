@@ -405,7 +405,6 @@ module.exports = {
             "cli/astro-workspace-team-add",
             "cli/astro-workspace-team-list",
             "cli/astro-workspace-team-remove",
-            "cli/astro-workspace-team-delete",
             "cli/astro-workspace-token-add",
             "cli/astro-workspace-token-create",
             "cli/astro-workspace-token-list",
