@@ -9,11 +9,11 @@ sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 import CodeBlock from '@theme/CodeBlock';
 import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflow/mlflow_tutorial_dag.py';
 
-[MLflow](https://mlflow.org/) is a commonly used tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration, leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
+[MLflow](https://mlflow.org/) is a commonly used tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
 
 :::info
 
-If you are already familiar with MLflow and Airflow and want to get a use case up and running, check out this [quickstart repository](https://github.com/astronomer/learn-airflow-mlflow-tutorial) which automatically starts up Airflow and local MLflow and MinIO instances. Clone the quickstart repository, configure the local MLflow connection as shown in Step 2 of this tutorial, and run the three example DAGs.
+If you are already familiar with MLflow and Airflow and want to get a use case up and running, check out this [quickstart repository](https://github.com/astronomer/learn-airflow-mlflow-tutorial) which automatically starts up Airflow and local MLflow and MinIO instances. Clone the quickstart repository, configure the local MLflow connection as shown in [Step 2](#step-2-configure-your-airflow-connection) of this tutorial, and run the three example DAGs.
 
 :::
 
@@ -34,7 +34,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
-- An MLflow instance. This tutorial uses a local instance.
+- An [MLflow instance](https://www.mlflow.org/docs/latest/quickstart.html). This tutorial uses a local instance.
 - An object storage connected to your MLflow instance. This tutorial uses [MinIO](https://min.io/).
 
 ## Step 1: Configure your Astro project
@@ -78,7 +78,7 @@ To connect Airflow to your MLflow instance, you need to create a [connection in 
 
 :::info 
 
-If you are using a remote MLflow instance, you need to enter the MLflow instance (`https://mlflow.myhost.com`) as a **Host** and provide your username to the **Login** and your password to the **Password** field. To run your MLflow instance via Databricks, provide your Databricks URL to the **Host** field, enter the string `token` in the **Login** field and your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) in the **Password** field.
+If you are using a remote MLflow instance, you need to enter the MLflow instance URL as a **Host** and provide your username to the **Login** and your password to the **Password** field. To run your MLflow instance via Databricks, provide your Databricks URL to the **Host** field, enter the string `token` in the **Login** field and your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) in the **Password** field.
 Please note that the **Test** button might return a 405 error message even if your credentials are correct. 
 
 :::
