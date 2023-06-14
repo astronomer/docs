@@ -42,7 +42,7 @@ With deferrable operators, worker slots are released when a task is polling for 
 
 ## Use deferrable operators
 
-Deferrable operators should be used whenever you have tasks that occupy a worker slot while polling for a condition in an external system. For example, using deferrable operators for sensor tasks can provide efficiency gains and reduce operational costs. Use deferrable operators instead of Smart Sensors, which were removed in Airflow 2.4.0, because they provide greater functionality and they are supported by Airflow.
+Deferrable operators should be used whenever you have tasks that occupy a worker slot while polling for a condition in an external system. For example, using deferrable operators for sensor tasks can provide efficiency gains and reduce operational costs. Use deferrable operators instead of Smart Sensors, which were removed in Airflow 2.4.0.
 
 ### Start a triggerer
 
@@ -52,7 +52,7 @@ If you are not using Astro, to start a triggerer process run `airflow triggerer`
 
 ![Triggerer Logs](/img/guides/triggerer_logs.png)
 
-As tasks are raised into a deferred state, triggers are registered in the triggerer. You can set the number of concurrent triggers that can run in a single triggerer process with the [`default_capacity`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#triggerer) configuration setting in Airflow. This can also be set with the `AIRFLOW__TRIGGERER__DEFAULT_CAPACITY` environment variable. The default value is `1,000`.
+As tasks are raised into a deferred state, triggers are registered in the triggerer. You can set the number of concurrent triggers that can run in a single triggerer process with the [`default_capacity`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#triggerer) configuration setting in Airflow. This config can also be set with the `AIRFLOW__TRIGGERER__DEFAULT_CAPACITY` environment variable. The default value is `1,000`.
 
 ### Update your DAGs
 
