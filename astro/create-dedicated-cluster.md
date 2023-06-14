@@ -53,9 +53,9 @@ Dedicated clusters offer the self-service convenience of a fully managed service
     - **Name**: The name for your cluster.
     - **Region**: Select the region that your cluster runs in.
     - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/22`).
-    - **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`).
-    - **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/22`).
-    - **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/20`).
+    - **Pod CIDR**: Specify the range used by GKE Pods (Default: `172.21.0.0/19`).
+    - **Service Address CIDR**: Specify the range used by GKE services (Default: `172.22.0.0/22`).
+    - **Service VPC Peering**: Specify the range used by Private Service connections (Default: `172.23.0.0/20`).
    
 4. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md). 
 
