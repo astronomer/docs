@@ -46,6 +46,7 @@ See [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring
 :::
 
 Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources on your clusters are now session-based and muse include a token in the request body.
+
 ### Additional improvements
 
 - Trial Deployments now have [DAG-only deploys](deploy-code.md#deploy-dags-only) enabled by default.
