@@ -48,7 +48,7 @@ Deferrable operators should be used whenever you have tasks that occupy a worker
 
 To use deferrable operators, you must have a triggerer running in your Airflow environment. If you are running Airflow on [Astro](https://docs.astronomer.io/astro) or using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview), the triggerer runs automatically if you are on Astro Runtime 4.0 and later. If you are using Astronomer Software 0.26 and later, you can add a triggerer to an Airflow 2.2 and later deployment in the **Deployment Settings** tab. See [Configure a Deployment on Astronomer Software - Triggerer](https://docs.astronomer.io/enterprise/configure-deployment#triggerer) to configure the triggerer.
 
-If you are not using Astro, to start a triggerer process run `airflow triggerer` in your Airflow environment. Your output should be similar to the following image.
+If you are not using Astro, run `airflow triggerer` to start a triggerer process in your Airflow environment. Your output should look similar to the following image:
 
 ![Triggerer Logs](/img/guides/triggerer_logs.png)
 
