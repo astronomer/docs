@@ -2,7 +2,7 @@
 ### Show three ways to use MLFlow with Airflow
 
 This DAG shows how you can use the MLflowClientHook to create an experiment in MLFlow,
-directly log metrics and parameters to MLFlow in a TaskFlow task via the mlflow Python package and
+directly log metrics and parameters to MLFlow in a TaskFlow task via the mlflow Python package, and
 create a new model using the CreateRegisteredModelOperator of the MLflow Airflow provider package.
 """
 
@@ -47,7 +47,7 @@ def mlflow_tutorial_dag():
 
         return new_experiment_information
 
-    # 2. Use a mlflow.sklearn autologging in a TaskFlow task
+    # 2. Use mlflow.sklearn autologging in a TaskFlow task
     @task
     def scale_features(experiment_id: str) -> DataFrame:
         """Track feature scaling by sklearn in Mlflow."""
