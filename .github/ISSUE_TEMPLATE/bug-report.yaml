@@ -39,7 +39,7 @@ body:
       label: The Fix
       description: Describe what needs to be added, updated, or otherwise changed.
     validations:
-      required: true
+      required: false
   - type: textarea
     id: notes
     attributes:
