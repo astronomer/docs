@@ -1,7 +1,7 @@
 ---
 title: "Use MLflow with Apache Airflow"
 sidebar_label: "MLflow"
-description: "How to produce to use the MLflow Airflow provider"
+description: "How to use MLflow with Airflow in three different ways."
 id: airflow-mlflow
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
@@ -109,22 +109,22 @@ Please note that the **Test** button might return a 405 error message even if yo
 
 1. Manually run the `mlflow_tutorial_dag` DAG by clicking the play button.
 
-    ![DAGs overview](/img/guides/mlflow_tutorial_dag_graph_view.png)
+    ![DAGs overview](/img/guides/airflow-mlflow_dag_graph_view.png)
 
 2. Open the MLflow UI (if you are running locally at `localhost:5000`) to see the data recorded by each task in your DAG.
 
     The `create_experiment` task created the `Housing` experiments, where your `Scaler` run from the `scale_features` task was recorded.
 
-    ![MLflow UI experiments](/img/guides/mlflow_experiments.png)
+    ![MLflow UI experiments](/img/guides/airflow-mlflow_experiments.png)
 
     The `create_registered_model` task created a registered model with two tags.
 
-    ![MLflow UI models](/img/guides/mlflow_registered_models.png)
+    ![MLflow UI models](/img/guides/airflow-mlflow_registered_models.png)
 
 3. Open your object storage (if you are using a local MinIO instance at `localhost:9000`) to see your MLflow artifacts.
 
-    ![MinIO experiment artifacts](/img/guides/mlflow_experiment_artifacts_in_minio.png)
+    ![MinIO experiment artifacts](/img/guides/airflow-mlflow_experiment_artifacts_in_minio.png)
 
 ## Conclusion
 
-Congratulations! You used MLflow and Airflow together in three different ways. Learn more about other operators and hooks in the MLflow Airflow provider in the [documentation](https://github.com/astronomer/airflow-provider-mlflow).
+Congratulations! You used MLflow and Airflow together in three different ways. Learn more about other operators and hooks in the MLflow Airflow provider in the [official GitHub repository](https://github.com/astronomer/airflow-provider-mlflow).
