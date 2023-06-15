@@ -9,9 +9,53 @@ description: Astronomer Software release notes.
 
 0.32 is the latest stable version of Astronomer Software, while 0.30 remains the latest long-term support (LTS) release. To upgrade to 0.32, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.32.1
+
+Release date: June 12, 2023
+
+### Additional improvements
+
+- [Overprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
+
+    - PGBouncer
+    - Statsd
+    - Flower
+  
+- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [overprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
+- Teams without any users are now automatically deleted when SCIM is disabled.
+- You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
+- You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
+- You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
+
+### Bug fixes
+
+- Fixed an issue where `git-sync-relay` containers wouldn't restart as expected after being terminated.
+- Fixed an issue where a service account with the Workspace Editor role could update a Deployment when it didn't have any Deployment-level permissions for the Deployment. 
+- Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana.
+- System Admins can no longer change a user's system role if the user is imported to Astronomer through an IdP group and `manageSystemPermissionsViaIdpGroups` is set to `true`.
+- Fixed an issue where you could not create a new Deployment from the Cloud UI if you updated its scheduler count using the text-based input field. 
+- Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
+- Fixed an issue where resource requests configured from the Software UI could get out of sync with the Houston database.
+- Fixed an issue where where updating a Deployment's resource configuration did not persist in the Houston database when that Deployment had overprovisioning enabled.
+- Reduced the number of redundant calls that Astronomer Software makes to your identity provider (IdP) when a user logs in.
+- Fixed a security vulnerability in logging.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491)
+    - [CVE-2023-1999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1999)
+    - [CVE-2023-27561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27561)
+    - [CVE-2022-41727](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41727)
+    - [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840)
+    - [CVE-2023-2650](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650)
+
 ## 0.32.0
 
 Release date: April 28, 2023
+
+### Clean Deployment task metadata
+
+You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of data Airflow stores in your Deployment metadata database by archiving data that you don't need to access on a regular basis. To configure this job, see [Clean Deployment task metadata](configure-deployment.md#clean-deployment-task-metadata).
 
 ### Programmatically create and update Deployments with the Houston API
 
@@ -20,6 +64,10 @@ You can now programmatically create or update Deployments using the Houston API 
 ### Reduce resource requests for Airflow components in development environments
 
 You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
+
+### New cron job to clean Deployment task data
+
+You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of storage Astronomer Software uses by archiving data that you don't need to access on a regular basis. See [Configure a Deployment](configure-deployment.md#clean-deployment-task-metadata) for configuration steps.
 
 ### Assign System-level permissions to Teams
 
@@ -90,6 +138,4 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
     - [CVE-2022-3510](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3510)
     - [CVE-2022-25857](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25857)
     - [CVE-2022-42898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42898)
-    - [CVE-2022-3970](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3970)
-    - [CVE-2023-0464](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0464)
-  
+    - [CVE-2022-3970](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3970)  

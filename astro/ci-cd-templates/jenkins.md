@@ -24,7 +24,7 @@ For more information on each template or to configure your own, see [Template ov
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Jenkins can access.
 - An [Astro Deployment](create-deployment.md).
-- A [Deployment API key ID and secret](api-keys.md).
+- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
 - Access to [Jenkins](https://www.jenkins.io/).
 
 Each CI/CD template implementation might have additional requirements.
@@ -43,11 +43,13 @@ Each CI/CD template implementation might have additional requirements.
 
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
-1. In your Jenkins pipeline configuration, add the following parameters:
+1. In your Jenkins pipeline configuration, add the following environment variables:
 
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
     - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
+
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**. To see Jenkins documentation on environment variables click [here](https://www.jenkins.io/doc/pipeline/tour/environment/)
 
     Be sure to set the values for your API credentials as secret.
 
@@ -96,7 +98,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
     - `DEV_ASTRONOMER_KEY_SECRET`: Your Development Deployment API key secret
     - `DEV_DEPLOYMENT_ID`: The Deployment ID of your Development Deployment
 
-    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**.
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**. To see Jenkins documentation on environment variables click [here](https://www.jenkins.io/doc/pipeline/tour/environment/)
 
     Be sure to set the values for your API credentials as secret.
 
@@ -145,6 +147,59 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
     This `Jenkinsfile` triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
 </TabItem>
+
+<TabItem value="custom">
+
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+
+#### Configuration requirements
+
+- An Astro project that requires additional build-time arguments to build the Runtime image.
+
+1. In your Jenkins pipeline configuration, add the following environment variables:
+
+    - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
+    - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
+    - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
+
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**. To see Jenkins documentation on environment variables click [here](https://www.jenkins.io/doc/pipeline/tour/environment/)
+
+    Be sure to set the values for your API credentials as secret.
+
+2. At the root of your Astro Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+
+<pre><code parentName="pre">{`pipeline {
+        agent any
+        stages {
+            stage('Deploy to Astronomer') {
+                when {
+                    expression {
+                        return env.GIT_BRANCH == "origin/main"
+                    }
+                }
+                steps {
+                    checkout scm
+                    sh '''
+                    export astro_id=${siteVariables.jenkinsenv3}
+                    docker build -f Dockerfile --progress=plain --build-arg <your-build-arguments> -t ${siteVariables.jenkinsenv4} .
+                    curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                    tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                    ./astro deploy --image-name ${siteVariables.jenkinsenv4}
+                    '''
+                }
+            }
+        }
+        post {
+            always {
+                cleanWs()
+            }
+        }
+    }`}</code></pre>
+
+This `Jenkinsfile` triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
+
+</TabItem>
+
 </Tabs>
 
 ## DAG-based templates

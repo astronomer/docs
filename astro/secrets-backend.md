@@ -43,7 +43,7 @@ Secrets backend integrations are configured individually with each Astro Deploym
 
 :::info
 
-If you enable a secrets backend on Astro, you can continue to define Airflow variables and connections either [as environment variables](environment-variables.md) or in the Airflow UI. If you set set Airflow variables and connections in the Airflow UI, they are stored as encrypted values in the Airflow metadata database.
+If you enable a secrets backend on Astro, you can continue to define Airflow variables and connections either [as environment variables](environment-variables.md) or in the Airflow UI. If you set Airflow variables and connections in the Airflow UI, they are stored as encrypted values in the Airflow metadata database.
 
 Airflow checks for the value of an Airflow variable or connection in the following order:
 
@@ -351,7 +351,7 @@ This topic provides setup steps for configuring [Google Cloud Secret Manager](ht
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
-- Optional: A [JSON service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) for the service account. This is required to provide access to a secrets backend from a local machine, or when not you're using Workload Identity.
+- Optional: A [JSON service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) for the service account. This is required to provide access to a secrets backend from a local machine, or when you're not using Workload Identity.
 
 #### Create an Airflow variable or connection in Google Cloud Secret Manager
 
@@ -455,7 +455,7 @@ Add the following environment variables to your `.env` file:
 AZURE_CLIENT_ID="<your-client-id>" # Found on App Registration page > 'Application (Client) ID'
 AZURE_TENANT_ID="<your-tenant-id>" # Found on App Registration page > 'Directory (tenant) ID'
 AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
-AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.azure_key_vault.AzureKeyVaultBackend
+AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}
 ```
 
@@ -465,20 +465,21 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
 
 #### Deploy to Astro
 
-1. Run the following commands to export your environment variables to Astro:   
+1. Run the following commands to export your environment variables to Astro.
  
     ```sh
-    $ astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
+    astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
+    ```
+    
+    In the Cloud UI, mark `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, and `AZURE_CLIENT_SECRET`, and `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret**. See [Set environment variables in the Cloud UI](environment-variables.md#set-environment-variables-in-the-cloud-ui).
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
   
     ```sh
     astro deploy --deployment-id <your-deployment-id> 
     ```
-
-3. Set the values of `AZURE_CLIENT_ID`, `AZURE_CLIENT_ID`, and `AZURE_CLIENT_ID` as secret in the Cloud UI. See [Set environment variables in the CLoud UI](https://docs.astronomer.io/astro/environment-variables#set-environment-variables-in-the-cloud-ui).
-  
-4. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials.
+    
+3. Optional. Remove the environment variables from your `.env` file, or store your `.env` file so that your credentials are hidden, for example with GitHub secrets.
 
 </TabItem>
 

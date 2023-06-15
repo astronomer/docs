@@ -40,7 +40,7 @@ astro deployment update <deployment-id> <flags>
 
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
@@ -58,6 +58,7 @@ After setting the variables, this command works for a Deployment and you don't n
 | `<deployment-id>` (_Required_) | The ID of the Deployment to update                                                               | Any valid Deployment ID                                                        |
 | `--deployment-name` | The name of the Deployment to update. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
 | `-d`,`--description`           | The description for the Deployment                                                     | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
+| `-e`,`--executor`        | The executor to use for the Deployment                                                                                                          |  CeleryExecutor or KubernetesExecutor             |
 | `-l`,`--name`                  | The Deployment's name                                                                  | Any string. Multiple-word descriptions should be specified in quotations       |
 | `-s`,`--scheduler-au`          | The number of AU to allocate towards the Deployment's Scheduler(s). The default is`5`. | Integer between `0` and `24`                                                   |
 | `-r`,`--scheduler-replicas`    | The number of scheduler replicas for the Deployment. The default is `1`.               | Integer between `0` and `4`                                                    |

@@ -71,6 +71,7 @@ deployment:
         description: ""
         runtime_version: 7.1.0
         dag_deploy_enabled: true
+        executor: CeleryExecutor
         scheduler_au: 5
         scheduler_count: 1
         cluster_name: AWS Cluster
@@ -199,4 +200,4 @@ To update a Deployment using a Deployment file:
 
 - [Manage Deployment API keys](api-keys.md)
 - [Deploy Code](deploy-code.md)
-- [CI/CD](ci-cd.md)
+- [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)

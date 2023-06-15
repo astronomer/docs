@@ -49,7 +49,9 @@ To install the Starship plugin on your Cloud Composer 1 or Cloud Composer 2 inst
 You can alternatively complete this installation with the `gcloud` CLI by running the following command:
 
 ```sh
-gcloud composer environments update [GCC_NAME] --update-pypi-package=astronomer-starship
+gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
+    --location [LOCATION] \
+    --update-pypi-package=astronomer-starship
 ```
 
 :::

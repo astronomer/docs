@@ -7,7 +7,7 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
   onBrokenMarkdownLinks: 'throw',
   markdown: {
     mermaid: true,
@@ -114,11 +114,6 @@ module.exports = {
           label: '0.32 (Latest)',
           to: '/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
-        },
-        {
-          label: '0.31',
-          to: '/software/0.31/',
-          activeBaseRegex: '(software\/0.31)+',
         },
         {
           label: '0.30',

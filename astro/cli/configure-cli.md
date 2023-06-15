@@ -68,6 +68,8 @@ The Astronomer product you're using determines the format and behavior of the co
 | `postgres.password`     | The password for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`       | Any string                                         |
 | `postgres.host`         | The hostname for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`       | Any string                                         |
 | `postgres.port`         | The port for the Postgres metadata database.                                                                                                                                                                                                       | `5432`           | Any available port                                 |
+| `postgres.repository`         | Image repository to pull the Postgres image from                                                                                                                                                                                                    | `docker.io/postgres`           | Any Postgres image in a repository                                 |
+| `postgres.tag`         | The tag for your Postgres image                                                                                                                                                                                                    | `12.6`           | Any valid image tag                                |
 | `project.name`          | The name of your Astro project.                                                                                                                                                                                                                    | Empty string     | Any string                                         |
 | `show_warnings`         | Determines whether warning messages appear when starting a local Airflow environment. For example, when set to `true`, you'll receive warnings when a new version of Astro Runtime is available and when your Astro project doesn't have any DAGs. | `true`           | `true`, `false`                                    |
 | `skip_parse`            | Determines whether the CLI parses DAGs before pushing code to a Deployment.                                                                                                                                                                        | `false`          | `true`, `false`                                    |
@@ -118,8 +120,9 @@ Set up Podman on a Mac operating system so you can run Apache Airflow locally an
 
 ### Prerequisites
 
-- Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
+- Podman 3 or later. See [Getting started with Podman](https://podman.io/get-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`.
+- (M1 MacOS) Turn on rootful mode for Podman by using `podman machine set --rootful`. A [Podman bug](https://github.com/containers/podman/issues/15976) currently causes issues with volumes when running in rootless mode on M1.
 
 :::tip
 
@@ -174,7 +177,7 @@ Set up Podman on Windows so you can run Apache Airflow locally and deploy to Ast
 
 ### Prerequisites
 
-- Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/getting-started/).
+- Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/get-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps` in your Linux terminal. 
 - The Astro CLI Linux distribution installed on WSL 2. See [Install the Astro CLI on Linux](https://docs.astronomer.io/astro/cli/install-cli?tab=linux#install-the-astro-cli).
 
@@ -237,7 +240,7 @@ Set up Podman on Linux so you can run Apache Airflow locally and deploy to Astro
 
 ### Prerequisites
 
-- Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
+- Podman 3 or later. See [Getting started with Podman](https://podman.io/get-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`. 
 
 :::tip

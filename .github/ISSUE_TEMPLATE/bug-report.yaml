@@ -1,0 +1,42 @@
+name: Report an issue in documentation
+description: Any request related to existing documentation that has an issue
+labels: ["error/wrong-info", "error/misleading"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If you want to submit a quick fix yourself, you don't need to write an issue. See [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
+  - type: dropdown
+    id: issuetype
+    attributes:
+      label: Issue Type
+      multiple: true
+      options:
+        - Inaccurate content
+        - Missing or misleading content
+        - Typo
+        - Bug/ broken link
+    validations:
+      required: true
+  - type: textarea
+    id: doc
+    attributes:
+      label: Links to Affected Docs
+      description: Share a link to the document(s) where the issue exists.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the Issue and Proposed Fix
+      description: Describe the issue and what you think needs to be added, updated, or otherwise changed. Be as descriptive as possible.
+      placeholder:  
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Add any related Slack threads, Zendesk tickets, or other information that the docs team can use to resolve the issue.
+
+  

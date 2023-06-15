@@ -9,9 +9,9 @@ An API key is a unique key ID and secret pair that you can use as an alternative
 
 You can use Deployment API keys to complete the following actions without authenticating as a user:
 
-- Deploy code to Astro [through CI/CD](ci-cd.md) with tools such as GitHub Actions or Circle CI.
+- Deploy code to Astro [through CI/CD](set-up-ci-cd.md) with tools such as GitHub Actions or Circle CI.
 - Update Deployment [environment variables](environment-variables.md).
-- Update Deployment resources. See [Manage Deployments as code](manage-deployments-as-code.md)
+- Update Deployment resources. See [Manage Deployments as code](manage-deployments-as-code.md).
 - Fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
 
 You can't use a Deployment API key to [create Deployments](create-deployment.md) or manage users within a Deployment's Workspace.
@@ -67,7 +67,7 @@ After you set the variables, you can run `astro deployment update` for the Deplo
 
 If you deploy DAGs regularly to a production environment, Astronomer recommends using Deployment API keys to automate pushing code with a tool such as GitHub Actions or Circle CI.
 
-For more information and examples, see [Automate code deploys with CI/CD](ci-cd.md).
+For more information and examples, see [Automate code deploys with CI/CD](set-up-ci-cd.md).
 
 ## Delete an API key
 
@@ -85,6 +85,6 @@ If you delete an API key, make sure that no existing CI/CD pipelines are using i
 
 ## Related documentation
 
-- [CI/CD](ci-cd.md)
+- [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)
 - [Deploy code](deploy-code.md)
 - [Airflow API](airflow-api.md)
