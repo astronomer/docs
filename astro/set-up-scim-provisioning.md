@@ -20,7 +20,7 @@ Astro supports integration with the open standard System for Cross-Domain Identi
 
 ## Supported SSO identity providers
 
-Single Sign On (SSO) authorization allows users to log in using their company credentials, managed through an IdP. This provides a streamlined login experience for your Astro users, as they are able to leverage the same credentials across multiple applications. In addition, this provides improved security and control for organizations to manage access from a single source. Astro supports integrations with the following IdPs:
+Astro supports SCIM provisioning with the following IdPs:
 
 - [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
 - [Okta](https://www.okta.com/)
