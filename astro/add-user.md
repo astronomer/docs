@@ -13,7 +13,7 @@ As a Workspace Admin or Organization Owner, you can add new team members to Astr
 - To add edit, or remove Workspace users, you need Workspace Admin permissions for a given Workspace. The user must also already be a part of the Organization that hosts the Workspace.
 - To remove yourself from an Organization as an Organization Owner, one or more Organization Owners must be assigned to the Organization. If you're the only Organization Owner for your Organization, you'll need to assign another Organization Owner before removing yourself from the Organization.
 
-For more information on user roles, see [Manage user permissions on Astro](user-permissions.md).
+For more information on user roles, see [Manage user permissions on Astro](user-permissions.md). To manage groups of users, see [Manage Teams](manage-teams.md).
 
 ## Add a user to an Organization
 
@@ -61,6 +61,8 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
     After you add the user, their information appears in the **Access Management** tab as a new entry in the **Members** list. To access the Workspace, the user needs to accept the invitation sent by email and log in.
 
+You can also add groups of users to a Workspace through Teams. See [Manage Teams](manage-teams.md).
+
 ## Update or remove a Workspace user
 
 1. In the Cloud UI, select a Workspace.
@@ -72,49 +74,6 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 4. Optional. Edit the user's name and role. See [Update Workspace roles](user-permissions.md#update-workspace-roles).
    
 5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
-
-## Make a Team
-
-_Teams_ are a group of users in an Organization that you can grant the same Workspace permissions, without needing to define them individually. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles).
-
-### Create a Team
-
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
-
-2. Click **Teams**.
-
-3. Click **+ Team** to create a new team.
-
-4. Enter a **Team Name** and then click **Add users** to choose the Organization users you want to add to the team. 
-
-    If you don't find the user you want to add, you might need to [add the user to your Organization](#add-a-user-to-an-organization).
-
-5. After you finish adding users to the Team, click **Add Team**.
-
-You can now [add your Team to a Workspace](#add-a-team-to-a-workspace) and define the Team users' permissions in the Workspace.
-
-### Update existing Teams
-
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
-
-2. Click **Teams**.
-
-3. Click the name of the Team you want to update.
-
-4. Update your Team:
-
-    - Click **+ Member** to add an existing Organization member to your Team.
-    - Click the delete icon to remove Team members.
-
-### Add a Team to a Workspace
-
-1. In the Cloud UI, select a Workspace and click **Workspace Settings** > **Access Management**.
-
-2. Click **Teams**.
-
-3. Click **+ Team**.
-
-4. Select the **Team** you want to add and define their **Workspace Role**, which determines their [Workspace user permissions](/astro/user-permissions.md#workspace-roles).
 
 ## Add a group of users to Astro using the Astro CLI
 

@@ -68,7 +68,7 @@ This section provides setup steps for setting up Okta as your IdP on Astro. Afte
 
 To set up Okta as your IdP, you will create a Security Assertion Markup Language (SAML) connection to Okta.
 
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
 2. In the **SSO Configuration** menu, click **Configure SSO**.
 3. Configure the following values for your connection:
 
@@ -76,50 +76,25 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
     - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Okta.
     - **Automatic Membership**: Set the default role for users who join your Organization through Okta and without an explicit invite from Astro.
 
-4. Copy the **Single Sign-On URL** and **Audience URI (SP ENTITY ID)** for the next step.
-5. Open a new tab and go to Okta. In the Okta Admin Console, create a SAML app integration. See [Create SAML app integrations using AIW](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm). Complete the following fields:
+4. Copy the **Connection Name** for use in Step 6.
+5. Open a new tab and go to Okta. In the Okta Admin Console, go to **[Applications](https://help.okta.com/en-us/Content/Topics/Apps/apps-access.htm)** and click **Browse App Catalogue**. Then, search the catalogue, select the **Astro** app integration, and click **Add Integration**. After configuring a label for the integration, the application appears in **Applications**.
+6. Open the Astro application you just configured, click **Sign On**, then click **Edit**. Configure the following values:
 
-    - **App logo**: (Optional) Use the [official Astronomer monogram asset](https://github.com/astronomer/docs/tree/main/static/img/assets/astronomer-monogram-rgb-600px.png) hosted on GitHub.
-    - **Single sign on URL**: `<your-sso-url>`
-    - **Audience URI (SP Entity ID)**: `<your-audience-uri>`
-    - **Name ID format**: `Unspecified`
-    - **Application username**: `Email`
+    - **Attributes**: (Optional) Create attributes to map from Okta to Astro user accounts. You can map attributes to Astro user account first names, last names, and email.
+    - **Connection Name**: Enter the **Connection Name** you copied from the Cloud UI.
     - **Update application username on**: `Create and update`
   
-6. In the **Advanced Settings** section of your configuration, set the following values:
-
-    - **Response**: `Signed`
-    - **Assertion Signature**: `Signed`
-    - **Signature Algorithm**: `RSA-SHA256`
-    - **Digest Algorithm**: `SHA256`
-    - **Assertion Encryption**: `Unencrypted`
-
-7. In the **Attribute Statements** section of your configuration, create the following four attribute statements, making sure to use the exact capitalization as shown:
-
-    | Name      | Name Format | Value            |
-    | --------- | ----------- | ---------------- |
-    | email     | Unspecified | user.email       |
-    | firstName | Unspecified | user.firstName   |
-    | lastName  | Unspecified | user.lastName    |
-    | name      | Unspecified | user.displayName |
-
-  :::info
-
-  These values might be different if Okta is connected to an Active Directory. In this case, replace each `Value` with the equivalent Active Directory values for a user's first name, last name, and full email address.
-
-  :::
-
-8. Complete the remainder of the setup as documented in Okta until you finish creating your integration.
-9. On the page for your Okta app integration, click **View Setup Instructions**. Copy the values for **Single Sign-On URL** and **X.509 Certificate** that appear. 
-10. Assign yourself to the Astro app integration from Okta. See [Assign an app integration to a user](https://help.okta.com/en-us/Content/Topics/Provisioning/lcm/lcm-assign-app-user.htm).
-11. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
+7. Copy the values for **Sign-on URL**, **Sign out URL**, and **X.509 Certificate** for use in Step 9.
+8. Assign yourself to the Astro app integration from Okta. See [Assign an app integration to a user](https://help.okta.com/en-us/Content/Topics/Provisioning/lcm/lcm-assign-app-user.htm).
+9. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
 
     - **Identity Provider Single Sign-on URL**: Enter your **Single Sign-on URL**.
+    - **Identity Provider Sign-out URL**: Enter your **Single Sign-out URL**.
     - **X.509 Certificate**: Enter your **X.509 Certificate**.
 
-12. Click **Create**. Your Okta integration appears as an entry in **SSO Configuration**.
-13. In **SSO Configuration**, click **Activate**. You are redirected to Okta to test your configuration. After you have successfully authenticated, you are redirected to Astro.
-14. Click **Activate SSO**.
+10. Click **Create**. Your Okta integration appears as an entry in **SSO Configuration**.
+11. In **SSO Configuration**, click **Activate**. You are redirected to Okta to test your configuration. After you have successfully authenticated, you are redirected to Astro.
+12. Click **Activate SSO**.
 
 #### Step 2: Copy your SSO bypass link
 
@@ -131,7 +106,7 @@ Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, any
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click the **Settings** tab.
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
    
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -140,6 +115,10 @@ If you don't want to maintain an SSO bypass link, click **Delete**. You can alwa
 #### Step 3: Assign users to your Okta application
 
 On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, see [Assign applications to users](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
+
+#### Step 4: (Optional) Configure SCIM provisioning
+
+SCIM provisioning allows you to manage Astro users from your identity provider platform. See [Set up SCIM provisioning](set-up-scim-provisioning.md) for setup steps.
 
 </TabItem>
 
@@ -191,7 +170,7 @@ If your Azure Active Directory is configured to require admin approval on API pe
 #### Step 4: Create an SSO connection to Azure AD
 
 1. Assign yourself to Astro from Azure AD. See [Assign users and groups to an Application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal?pivots=portal).
-2. In the Cloud UI, click **Settings**, then click **Authentication**.
+2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
 3. In the **SSO Configuration** menu, click **Configure SSO**.
 4. Configure the following values for your connection:
 
@@ -217,7 +196,7 @@ Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, any
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click the **Settings** tab.
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
    
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -229,6 +208,10 @@ If you don't want to maintain an SSO bypass link, click **Delete**. You can alwa
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
 
 When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
+
+#### Step 7: (Optional) Configure SCIM provisioning
+
+SCIM provisioning allows you to manage Astro users from your identity provider platform. See [Set up SCIM provisioning](set-up-scim-provisioning.md) for setup steps.
 
 </TabItem>
 
@@ -246,11 +229,11 @@ This section provides setup steps for setting up OneLogin as your IdP on Astro. 
 
 To set up OneLogin as your IdP, you will create a Security Assertion Markup Language (SAML) connection to OneLogin.
 
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
 2. In the **SSO Configuration** menu, click **Configure SSO**.
 3. Configure the following values for your connection:
 
-    - **Connection type**: Select **SAML**.
+    - **Connection Type**: Select **SAML**.
     - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to OneLogin.
     - **Automatic Membership**: Set the default role for users who join your Organization through OneLogin and without an explicit invite from Astro.
 
@@ -308,7 +291,7 @@ Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, any
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click the **Settings** tab.
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
    
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -336,7 +319,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 #### Step 1: Configure Ping Identity
 
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
    
 2. In the **SSO Configuration** menu, click **Configure SSO**.
    
@@ -410,7 +393,7 @@ Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, any
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click the **Settings** tab.
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
    
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -428,11 +411,11 @@ When a user assigned to the application accesses Astro, they are automatically s
 
 ## Advanced setup
 
-### Disable just-in-time provisioning
+### Configure just-in-time provisioning
 
 Astro supports just-in-time provisioning by default for all single sign-on (SSO) integrations. This means that if someone without an Astronomer account tries logging into Astronomer with an email address from a domain that you manage, they are automatically granted a default role in your Organization without needing an invite. Users with emails outside of this domain need to be invited to your Organization to access it. 
 
-Contact [Astronomer support](https://cloud.astronomer.io/support) for assistance with enabling or disabling just-in-time provisioning.
+To enable or disable just-in-time provisioning, [Steps]
 
 ### Restrict authentication options 
 

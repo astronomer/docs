@@ -137,7 +137,9 @@ module.exports = {
               label: "User access",
               items: [
                 "configure-idp",
+                "set-up-scim-provisioning",
                 "add-user", 
+                "manage-teams",
                 "user-permissions", 
                 "manage-domains"],
             },
