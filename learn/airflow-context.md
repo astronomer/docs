@@ -1,0 +1,236 @@
+---
+title: "Access the Apache Airflow context"
+sidebar_label: "Context"
+description: "Access the Airflow context in your tasks."
+id: airflow-context
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import context_and_xcom from '!!raw-loader!../code-samples/dags/airflow-context/context_and_xcom.py';
+
+The Airflow context is a dictionary containing information about your Airflow environment and the current DAG, that can be accessed within Airflow tasks.
+
+Common reasons to access the Airflow context are:
+
+- You want to use DAG level params in your Airflow tasks.
+- You want to use the DAG run's logical date in an Airflow task, for example as part of a file name.
+- You want to explicitly push and pull values to [XCom](airflow-passing-data-between-tasks.md#xcom) with a custom key.
+- You want to make an action in your pipeline conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
+- You want to access information stored in an Airflow connection within your task.
+
+## Assumed knowledge
+
+To get the most out of this guide, you should have an understanding of:
+
+- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
+- Airflow operators. See [Operators 101](what-is-an-operator.md).
+
+## Accessing the context
+
+The Airflow context is available in all Airflow tasks. You can access information from the context:
+
+- In the task function used in an [`@task` decorated task](airflow-decorators.md) or [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonOperator) by passing a `**context` argument to the function.
+- As Jinja templates to templatable parameters of traditional Airflow operators.
+- In a traditional operator's `.execute` method via the `context` kwarg.
+
+You cannot access the Airflow context dictionary outside of an Airflow task.
+
+### @task decorator / PythonOperator
+
+To access the Airflow context in your @task decorated or PythonOperator task, you need to add a `**context` argument to your task function. This will make the context available as a dictionary in your task.
+
+The code snippets below show how to print out the full context dictionary from a task:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "task-decorator-PythonOperator"
+    values={[
+        {label: 'TaskFlow', value: 'taskflow'},
+        {label: 'Traditional Operator', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+from pprint import pprint
+
+@task
+def print_context(**context)
+    pprint(context)
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+from pprint import pprint
+
+def print_context_func(**context):
+    pprint(context)
+
+print_context = PythonOperator(
+    task_id="print_context",
+    python_callable=print_context_func,
+)
+```
+
+</TabItem>
+
+</Tabs>
+
+### Jinja templating
+
+Many elements of the Airflow context can be accessed by using Jinja templates in parameters of Airflow operators that allow templated arguments. You can get the list of all parameters that allow templates for any operator by printing out its `.template_fields` attribute.
+
+For example, you can access a DAG's logical date in the format `YYYY-MM-DD` by using the template `{{ ds }}` in the `bash_command` parameter of the BashOperator.
+
+```python
+print_logical_date = BashOperator(
+    task_id="print_logical_date",
+    bash_command="echo {{ ds }}",
+)
+```
+
+It is also common to use Jinja templating to access [XCom](airflow-passing-data-between-tasks.md#xcom) values in the parameter of a traditional task. The code snippet below contains two tasks, the first task `return_greeting` will push the string "Hello" to XCom, the second task `greet_friend` will use a Jinja template to pull that value from the `ti` (task instance) object of the Airflow context and print `Hello friend! :)` into the logs.
+
+```python
+@task 
+def return_greeting():
+    return "Hello"
+
+greet_friend = BashOperator(
+    task_id="greet_friend",
+    bash_command="echo '{{ ti.xcom_pull(task_ids='return_greeting') }} friend! :)'",
+)
+
+return_greeting() >> greet_friend
+```
+
+To learn more about Jinja templates see the [Use Airflow templates](templating.md) concept guide. You can find an up to date list of all available templates in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html). You can learn more about using XCom to pass data between Airflow tasks in the [Pass data between tasks](airflow-passing-data-between-tasks.md) concept guide.
+
+### Custom operators
+
+In a traditional operator the context is always passed to the `.execute` method via the `context` keyword argument. If you are writing a custom operator, you have to make sure to include a `context` kwarg in the `execute` method as shown in the custom operator example below.
+
+```python
+class PrintDAGIDOperator(BaseOperator):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def execute(self, context):
+        print(context["dag"].dag_id)
+```
+
+This Operator will print the ID of the current DAG that was retrieved from the context. To learn more about custom operators see the [Custom hooks and operators](airflow-importing-custom-hooks-operators.md) concept guide.
+
+## Content of the context
+
+An up to date list of all keys in the context and their type can be found in the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/utils/context.pyi). This section will give you an overview of the most commonly used keys.
+
+### Keys relating scheduling
+
+One of the most common reasons for tasks to access the Airflow context is to retrieve information about the schedule of the DAG. A common pattern is to use the timestamp of the logical date of a DAG run in names of files written from a DAG to ensure one unique file for each DAG run.
+
+```python
+@task
+def write_file_with_ts(**context):
+    ts = context["ts"]
+    with open(f"include/{ts}_hello.txt", "a") as f:
+        f.write("Hello, World!")
+```
+
+The code snippet above will create a new text file in the include folder for each run of a DAG with the timestamp of the DAG run in the filename in the format `YYYY-MM-DDTHH:MM:SS+00:00`. Refer to the [Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html) for an up to date list of time related keys in the context and our guide on [Jinja templating](templating.md) for more information on how to pass these values to templatable parameters of traditional operators.
+
+### conf
+
+The `conf` key of the context contains an [AirflowConfigParser object](https://github.com/apache/airflow/blob/main/airflow/configuration.py#L149) that contains information about your Airflow configuration. To see the full current Airflow configuration in dictionary format use the following code snippet:
+
+```python 
+from pprint import pprint
+
+@task
+def print_config(**context)
+    pprint(context["conf"].as_dict())
+```
+
+The Airflow configuration includes information about the settings for your Airflow environment. By accessing these settings programmatically you can make your pipeline conditional on the setting of a specific Airflow configuration. For example, you could have a task check which [executor](airflow-executors-explained.md) your environment is using by accessing the [executor configuration setting](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#executor) from the context and then [branch](airflow-branch-operator.md) depending on the result.
+
+```python
+@task.branch
+def branch_based_on_executor(**context):
+    executor = context["conf"].get(section="core", key="EXECUTOR")
+    if executor == "LocalExecutor":
+        return "t1"
+    else:
+        return "t2"
+```
+
+### dag
+
+The `dag` key of the context contains the DAG object of the DAG in which a task is located. There are many attributes and methods available for the DAG object, one example is the `.get_run_dates` method from which you can fetch a list of all timestamps on which the DAG will run within a certain time period. This is especially useful for DAGs with [complex schedules](scheduling-in-airflow.md).
+
+```python 
+@task
+def get_dagrun_dates(**context):
+    run_dates = context["dag"].get_run_dates(
+        start_date=datetime(2023, 10, 1), end_date=datetime(2023, 10, 10)
+    )
+    print(run_dates)
+```
+
+You can find a list of all attributes and methods of the DAG object in the [Airflow documentation of the DAG object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html#airflow.models.dag.DAG).
+
+### dag_run
+
+The `dag_run` key of the context contains the [DAG run object](https://github.com/apache/airflow/blob/main/airflow/models/dagrun.py). Two often used elements of the DAG run object are the `.active_runs_of_dags` method, which will give you the number of currently active runs of a specific DAG and the `.external_trigger` attribute, which will return `True` if a DAG run was triggered outside of its normal schedule.
+
+```python
+@task
+def print_dagrun_info(**context):
+    print(context["dag_run"].active_runs_of_dags())
+    print(context["dag_run"].external_trigger)
+```
+
+You can find a list of all attributes and methods of the DAG run object in the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/models/dagrun.py).
+
+### params
+
+In the `params` key you can find a dictionary of all DAG- and task-level params that were passed to a specific task instance. Individual params can be accessed using their respective key.
+
+```python
+@task
+def print_param(**context):
+    print(context["params"]["my_favorite_param"])
+```
+
+Learn more about params in the [Airflow params guide](airflow-params.md).
+
+### ti / task_instance
+
+The `ti` or `task_instance` key of the context contains the [TaskInstance object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html) of the task from where the key is retrieved. While this object has many attributes and methods, the most commonly used ones are `.xcom_pull` and `.xcom_push`, which allow you to push to and pull from [XComs](airflow-passing-data-between-tasks.md).
+
+<CodeBlock language="python">{context_and_xcom}</CodeBlock>
+
+This DAG shows a simple example of using `context["ti"].xcom_push(...)` and `context["ti"].xcom_pull(...)` to pass data between tasks. Both, explicit pushing and pulling as well as implicit passing of data through XComs via returning a value (`19`) and passing it as positional argument (`passed_num`) are shown.
+
+The `downstream_task` will print the following information to the logs:
+
+```text
+[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Returned Num:  19
+[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Passed Num:  19
+[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Explicit Num:  23
+```
+
+### var
+
+The `var` key of the Airflow context contains all Airflow variables of your Airflow instance. An Airflow variable is a key-value pair that can be used to store information in your Airflow environment, they are commonly used to store instance level information that rarely changes. Learn more in the [Airflow Variables guide](airflow-variables.md).
+
+```python
+@task
+def get_var_from_context(**context):
+    print(context["var"]["value"].get("my_regular_var"))
+    print(context["var"]["json"].get("my_json_var")["num2"])
+```

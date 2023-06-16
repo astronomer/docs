@@ -45,6 +45,7 @@ module.exports = {
           items: [
             'bashoperator',
             'connections',
+            'airflow-context',
             'dags',
             'what-is-a-hook',
             'intro-to-airflow',
@@ -56,6 +57,7 @@ module.exports = {
             'what-is-a-sensor',
             'managing-dependencies',
             'airflow-ui',
+            'airflow-variables',
           ],
         },
         {
@@ -76,6 +78,7 @@ module.exports = {
             'debugging-dags',
             'dynamic-tasks',
             'templating',
+            'airflow-params',
             'airflow-passing-data-between-tasks',
             'rerunning-dags',
             'subdags',
