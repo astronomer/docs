@@ -121,7 +121,7 @@ Please note that the **Test** button might return a 405 error message even if yo
 
     ![MLflow UI models](/img/guides/airflow-mlflow_registered_models.png)
 
-3. Open your object storage (if you are using a local MinIO instance at `localhost:9000`) to see your MLflow artifacts.
+3. Open your object storage (if you are using a local MinIO instance at `localhost:9001`) to see your MLflow artifacts.
 
     ![MinIO experiment artifacts](/img/guides/airflow-mlflow_experiment_artifacts_in_minio.png)
 
