@@ -10,6 +10,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import tdro_example_upstream from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_upstream.py';
 import tdro_example_downstream from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_downstream.py';
+import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
 
 Params are arguments which are passed to an Airflow DAG or task at runtime and stored in the [Airflow context dictionary](airflow-context.md) of a specific DAG run. Both DAG- and task-level params can be passed to a DAG run using the respective `params` keyword.
 
