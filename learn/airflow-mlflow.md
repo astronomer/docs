@@ -9,21 +9,21 @@ sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 import CodeBlock from '@theme/CodeBlock';
 import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflow/mlflow_tutorial_dag.py';
 
-[MLflow](https://mlflow.org/) is a commonly used tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
+[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
 
 :::info
 
-If you are already familiar with MLflow and Airflow and want to get a use case up and running, check out this [quickstart repository](https://github.com/astronomer/learn-airflow-mlflow-tutorial) which automatically starts up Airflow and local MLflow and MinIO instances. Clone the quickstart repository, configure the local MLflow connection as shown in [Step 2](#step-2-configure-your-airflow-connection) of this tutorial, and run the three example DAGs.
+If you're already familiar with MLflow and Airflow and want to get a use case up and running, clone the [quickstart repository](https://github.com/astronomer/learn-airflow-mlflow-tutorial) to automatically start up Airflow and local MLflow and MinIO instances. After you clone the repository, configure the local MLflow connection as shown in [Step 2](#step-2-configure-your-airflow-connection) of this tutorial, and run the three example DAGs.
 
 :::
 
 ## Three ways to use MLflow with Airflow
 
-The DAG in this tutorial shows three different ways Airflow can interact with MLFlow:
+The DAG in this tutorial shows three different ways Airflow can interact with MLflow:
 
-- Using an MLflow operator from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow): The MLflow provider contains several operators that abstract over common actions you might want to perform in MLflow, for example creating a deployment with the [CreateDeploymentOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/deployment.py) or running predictions from an existing model with the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py). 
-- Using an MLflow hook from the MLflow Airflow provider: The MLflow provider contains several [Airflow hooks](what-is-a-hook.md) that allow you to connect to MLflow using credentials stored in an Airflow connection. You can use these hooks if you need to perform actions in MLflow for which no dedicated operator exists. You can also use these hooks to create your own [custom operators](airflow-importing-custom-hooks-operators.md).
-- Using the MLflow Python package directly in a [@task decorated task](airflow-decorators.md): The MLflow Python package contains functionality like tracking metrics and artifacts with [`mlflow.sklearn.autolog`](https://mlflow.org/docs/latest/python_api/mlflow.sklearn.html). You can use this package to write custom Airflow tasks for ML-related actions like feature engineering.
+- Use an MLflow operator from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow). The MLflow provider contains several operators that abstract over common actions you might want to perform in MLflow, such as creating a deployment with the [CreateDeploymentOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/deployment.py) or running predictions from an existing model with the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py). 
+- Use an MLflow hook from the MLflow Airflow provider. The MLflow provider contains several [Airflow hooks](what-is-a-hook.md) that allow you to connect to MLflow using credentials stored in an Airflow connection. You can use these hooks if you need to perform actions in MLflow for which no dedicated operator exists. You can also use these hooks to create your own [custom operators](airflow-importing-custom-hooks-operators.md).
+- Use the MLflow Python package directly in a [@task decorated task](airflow-decorators.md). The MLflow Python package contains functionality like tracking metrics and artifacts with [`mlflow.sklearn.autolog`](https://mlflow.org/docs/latest/python_api/mlflow.sklearn.html). You can use this package to write custom Airflow tasks for ML-related actions like feature engineering.
 
 ## Time to complete
 
@@ -73,20 +73,20 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 To connect Airflow to your MLflow instance, you need to create a [connection in Airflow](connections.md). 
 
-1. Run `astro dev start` in your Astro project to start up Airflow and navigate to the Airflow UI at `localhost:8080`.
+1. Run `astro dev start` in your Astro project to start up Airflow and open the Airflow UI at `localhost:8080`.
 
 2. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
 3. Create a new connection named `mlflow_default` and choose the `HTTP` connection type. Enter the following values to create a connection to a local MLflow instance:
 
-    - **Connection ID**: `mlflow_default`.
-    - **Connection Type**: `HTTP`.
+    - **Connection ID**: `mlflow_default`
+    - **Connection Type**: `HTTP`
     - **Host**: `http://host.docker.internal`
     - **Port**: `5000`
 
 :::info 
 
-If you are using a remote MLflow instance, enter your MLflow instance URL as the **Host** and your username and password as the **Login** and **Password** fields in the connection. If you are running your MLflow instance via Databricks, provide your Databricks URL to the **Host** field, enter the string `token` in the **Login** field and your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) in the **Password** field.
+If you are using a remote MLflow instance, enter your MLflow instance URL as the **Host** and your username and password as the **Login** and **Password** in the connection. If you are running your MLflow instance via Databricks, enter your Databricks URL as the **Host**, enter `token` as the **Login** and your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) as the **Password**.
 Please note that the **Test** button might return a 405 error message even if your credentials are correct. 
 
 :::
@@ -107,7 +107,7 @@ Please note that the **Test** button might return a 405 error message even if yo
 
 ## Step 4: Run your DAG
 
-1. Manually run the `mlflow_tutorial_dag` DAG by clicking the play button.
+1. In the Airflow UI run the `mlflow_tutorial_dag` DAG by clicking the play button.
 
     ![DAGs overview](/img/guides/airflow-mlflow_dag_graph_view.png)
 
