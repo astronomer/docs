@@ -129,7 +129,7 @@ Because this setting results in more resource usage, it can increase the cost of
 
 :::info Alternative Astro Hybrid Setup
 
-On Astro Hybrid, PgBouncer is highly available by default for your Deployment whereas to enable high availability of schedulers you need to configure your scheduler count to more than 1. 
+On Astro Hybrid, PgBouncer is highly available by default for all Deployments. Schedulers are highly available if a Deployment uses two or more schedulers. 
 
 Every Deployment has 2 PgBouncer Pods assigned to two different nodes to prevent zombie tasks. If you configure your Deployment with 2 schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses 3 or 4 schedulers can assign all scheduler Pods across two nodes.
 :::
