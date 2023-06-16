@@ -7,7 +7,7 @@ description: Create Deployment API keys to make requests to Airflow's REST API a
 
 :::caution
 
-Deployment API keys will soon be deprecated in favor of Deployment API tokens. Astronomer recommends using either [Workspace API tokens](workspace-api-tokens.md) or [Organization API tokens](organization-api-tokens.md) in place of Deployment API keys.
+Deployment API keys will soon be deprecated in favor of Deployment API tokens. If you have strict Deployment-level security requirements, you can continue to use Deployment API keys, but there will soon be a one-time migration to Deployment API tokens. Otherwise, Astronomer recommends using either [Workspace API tokens](workspace-api-tokens.md) or [Organization API tokens](organization-api-tokens.md) in place of Deployment API keys.
 
 :::
 
