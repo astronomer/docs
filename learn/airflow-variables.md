@@ -18,6 +18,15 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
+## Best practices for storing information in Airflow
+
+Airflow offers several ways to store your variables. The ideal option often depends on what type of information you are storing and where and how you want to access it:
+
+- Environment variables are a common way to store small pieces of information to be available in your whole Airflow environment. The advantage of using environment variables is that you can include their creation in your CI/CD process. Environment variables are the only type of variable storage that can be accessed in top-level DAG code. Note that unless you create an Airflow variable via the environment variable by starting it with `AIRFLOW_VAR_` you will not be able to view or update it in the Airflow UI. 
+- Airflow variables are ideal to store key-value pairs or short JSON objects that need to be accessible in your whole Airflow environment. It is best practice to use Airflow variables for information that is runtime dependent but does not change too frequently. Airflow variables are also encrypted making them suitable to be used for storing secrets.
+- [Params](airflow-params.md) can be used to store variables that are specific to a DAG or DAG run. You can define defaults for params at the DAG or task level and override them at runtime. Params are not encrypted and should not be used to store secrets.
+- [XComs](airflow-passing-data-between-tasks.md) can be used to pass small pieces of information between Airflow tasks. Use XComs when the information is likely to change with each DAG run and mostly needs to be accessed by individual tasks in or outside of the DAG from within which the XCom is created.
+
 ## Create an Airflow variable
 
 Airflow variables can be created via X different methods:
