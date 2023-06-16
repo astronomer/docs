@@ -103,7 +103,7 @@ Please note that the **Test** button might return a 405 error message even if yo
 
     - The `create_experiment` task creates a new experiment in MLflow by using the [MLflowClientHook](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/hooks/client.py) in a TaskFlow API task. The MLflowClientHook is one of several [hooks](https://github.com/astronomer/airflow-provider-mlflow/tree/main/mlflow_provider/hooks) in the MLflow provider that contains abstractions over calls to the MLflow API. 
     - The `scale_features` task uses the [mlflow](https://pypi.org/project/mlflow/) package in a Python decorated task with [scikit-learn](https://pypi.org/project/scikit-learn/) to log information about the scaler to MLflow. This functionality is not included in any modules of the MLflow provider, so a custom Python function is the best way to implement this task.
-    - The `create_registered_model` uses the [CreateRegisteredModelOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/registry.py) to register a new model in your MLflow instance.
+    - The `create_registered_model` task uses the [CreateRegisteredModelOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/registry.py) to register a new model in your MLflow instance.
 
 ## Step 4: Run your DAG
 
