@@ -118,15 +118,6 @@ You can also update your Workspace so that any new Deployments in the Workspace 
 
 ## Enable high availability
 
-:::info High availability on Astro Hybrid
-
-High availability is configurable only on Astro Hosted Deployments.
-
-On Astro Hybrid, PgBouncer is highly available by default. Every Deployment has 2 PgBouncer Pods assigned to two different nodes to prevent zombie tasks.
-
-By default, each Deployment uses 1 scheduler. If you configure your Deployment with 2 schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses 3 or 4 schedulers can assign all scheduler Pods across two nodes.
-:::
-
 By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of its scheduler across different nodes. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Note that PGBouncer Pods are guaranteed to run across multiple availability zones, but scheduler Pods are not. 
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
@@ -136,6 +127,12 @@ Because this setting results in more resource usage, it can increase the cost of
 3. Click **Edit Details**.
 4. In **High Availability**, click the toggle to **On**.
 
+:::info Alternative Astro Hybrid Setup
+
+On Astro Hybrid, PgBouncer is highly available by default for your Deployment whereas to enable high availability of schedulers you need to configure your scheduler count to more than 1. 
+
+Every Deployment has 2 PgBouncer Pods assigned to two different nodes to prevent zombie tasks. If you configure your Deployment with 2 schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses 3 or 4 schedulers can assign all scheduler Pods across two nodes.
+:::
 
 ## Transfer a Deployment to another Workspace 
 
