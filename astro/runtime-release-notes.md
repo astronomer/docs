@@ -24,6 +24,28 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 8.5.0
+
+- Release date: June 17, 2023
+- Airflow version: 2.6.2
+
+### Airflow 2.6.2
+
+Astro Runtime 8.2.0 includes same-day support for Apache Airflow 2.6.2. Airflow 2.6.2 contains a number of bug fixes including:
+
+- Fix Kubernetes executors detection of deleted pods ([31274](https://github.com/apache/airflow/pull/31274))
+- Fix crash when clearing run with task from normal to mapped ([31352](https://github.com/apache/airflow/pull/31352))
+
+For a complete list of the changes, see the [Apache Airflow 2.6.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+
+### Additional improvements
+
+- Upgraded `openlineage-airflow` to 0.28.0. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.28.0) for a complete list of changes. 
+
+### Bug fixes
+
+- Fixed an issue where Istio versions were being parsed as [Python versions](https://peps.python.org/pep-0440/) instead of [semantic versions](https://semver.org/), resulting in DAG errors.
+
 ## Astro Runtime 8.4.0
 
 - Release date: June 2, 2023
