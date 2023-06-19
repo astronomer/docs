@@ -1,5 +1,5 @@
-name: General Docs Request
-description: Anything in existing documentation that is wrong, missing, or misleading.
+name: Request a Docs Change
+description: Use this template to request any type of change to Astronomer docs.
 body:
   - type: markdown
     attributes:
@@ -12,11 +12,9 @@ body:
       multiple: true
       options:
         - Inaccurate, misleading, or out-of-date information
-        - A new set of best practices or recommendations
-        - A new technical overview, explanation, or reference
         - Missing content for an existing feature
         - Typo or broken link
-        - Issue with Docs website
+        - Issue with website functionality
     validations:
       required: true
   - type: textarea
@@ -30,13 +28,13 @@ body:
     id: issue
     attributes:
       label: The Issue or Context
-      description: Describe what exactly is wrong or missing in the context of current documentation. Be as descriptive as possible.
+      description: Describe what is wrong or missing in the documentation. Be as descriptive as possible.
     validations:
       required: true
   - type: textarea
     id: fix
     attributes:
-      label: The Fix
+      label: Fix or Proposed Change
       description: Describe what needs to be added, updated, or otherwise changed.
     validations:
       required: false
