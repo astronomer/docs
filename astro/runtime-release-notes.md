@@ -31,7 +31,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Airflow 2.6.2
 
-Astro Runtime 8.2.0 includes same-day support for Apache Airflow 2.6.1. Airflow 2.6.1 contains a number of bug fixes including:
+Astro Runtime 8.2.0 includes same-day support for Apache Airflow 2.6.2. Airflow 2.6.2 contains a number of bug fixes including:
 
 - Fix Kubernetes executors detection of deleted pods ([31274](https://github.com/apache/airflow/pull/31274))
 - Fix crash when clearing run with task from normal to mapped ([31352](https://github.com/apache/airflow/pull/31352))
