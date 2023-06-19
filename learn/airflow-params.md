@@ -16,8 +16,8 @@ Params are arguments which are passed to an Airflow DAG or task at runtime and s
 
 This concept guide covers:
 
-- Different of passing params to a DAG at runtime.
-- How to define DAG-level params defaults which are rendered in the Trigger DAG w/config UI.
+- Different ways of passing params to a DAG at runtime.
+- How to define DAG-level param defaults which are rendered in the Trigger DAG w/config UI.
 - How to access params in an Airflow task.
 - The hierarchy of params in Airflow.
 
@@ -34,10 +34,10 @@ To get the most out of this guide, you should have an understanding of:
 Params can be passed to a DAG at runtime in three different ways:
 
 - In the Airflow UI by using the **Trigger DAG w/ config** button.
-- Through Airflow CLI commands that run a DAG by using the `--conf` flag.
-- Through a TriggerDagRunOperator by using the `conf` parameter.
+- Using the Airflow CLI to run a DAG with the `--conf` flag.
+- Using the TriggerDagRunOperator with the `conf` parameter.
 
-Params values passed to a DAG by any of these methods will override existing default values for the same key as long as the [Airflow core config `dag_run_conf_overrides_params`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`. 
+Param values passed to a DAG by any of these methods will override existing default values for the same key as long as the [Airflow core config `dag_run_conf_overrides_params`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`. 
 
 :::info 
 
@@ -56,16 +56,16 @@ Params can be passed to a DAG from the Airflow UI by clicking on the Play button
 The **Trigger DAG w/ config** button opens a UI where details for a DAG run can be specified: 
 
 - The **Logical date** of the DAG run can be set to any date that is in between the `start_date` and the `end_date` of the DAG to create DAG runs in the past or future.
-- The **Run id** can be set to any string. If no run id is specified the run id will be generated based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date of the run, for example: `manual__2023-06-16T08:03:45+00:00`. 
+- The **Run id** can be set to any string. If no run id is specified, it will be generated based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date, for example: `manual__2023-06-16T08:03:45+00:00`. 
 - You can select configurations from recent DAG runs in the **Select Recent Configurations** dropdown menu.
-- For DAG-level params that have a defined default a UI element is rendered to set the param value. See also [Define DAG-level params defaults](#define-dag-level-params-defaults).
+- For DAG-level params that have a defined default value, a UI element is rendered to set the param value. See also [Define DAG-level params defaults](#define-dag-level-params-defaults).
 - From information in the UI elements a Configuration JSON is generated. You can directly edit the **Generated Configuration JSON** in the UI and add any additional params, whether a default has been defined for them or not.
 
-After setting the configuration you can start the DAG run with the **Trigger** button.
+After setting the configuration, you can start the DAG run with the **Trigger** button.
 
 ### CLI
 
-When running an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags) you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for the `param1` run: 
+When running an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags), you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example, to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for `param1`, run: 
 
 <Tabs
     defaultValue="astro"
@@ -97,7 +97,7 @@ The configuration for the triggered run will be printed into the command line:
 
 ![CLI output](/img/guides/airflow-params_cli_param_output.png)
 
-The Airflow CLI sub-commands with a `--conf` flag are:
+You can use a `--conf` flag with the following Airflow CLI sub-commands:
 
 - `airflow dags backfill`
 - `airflow dags test`
@@ -105,19 +105,18 @@ The Airflow CLI sub-commands with a `--conf` flag are:
 
 ### TriggerDagRunOperator
 
-The TriggerDagRunOperators is a core Airflow operator that allows you to kick of a DAG run from within another DAG. Two key use cases of the TriggerDagRunOperator are to trigger another DAG and wait for its completion and to be able to trigger another DAG with a specific configuration. You can learn more about the TriggerDagRunOperator in the [Cross-DAG dependencies](cross-dag-dependencies.md#triggerdagrunoperator) guide. 
+The [TriggerDagRunOperator](cross-dag-dependencies.md#triggerdagrunoperator) is a core Airflow operator that allows you to kick off a DAG run from within another DAG. You can use the TriggerDAGRunOperator `conf` param to trigger the dependent DAG with a specific configuration.
 
-The code below shows a simple DAG `tdro_example_upstream` that uses the TriggerDagRunOperator to trigger the `tdro_example_downstream` DAG while passing a dynamic value for the `upstream_color` param to the downstream DAG via the `conf` parameter. The value for `upstream_color` is passed via a [Jinja template](templating.md) pulling the return value of an upstream task via [XCom](airflow-passing-data-between-tasks.md#xcom).
+The DAG below uses the TriggerDagRunOperator to trigger the `tdro_example_downstream` DAG while passing a dynamic value for the `upstream_color` param via the `conf` parameter. The value for `upstream_color` is passed via a [Jinja template](templating.md) pulling the return value of an upstream task via [XCom](airflow-passing-data-between-tasks.md#xcom).
 
 <CodeBlock language="python">{tdro_example_upstream}</CodeBlock>
 
-Runs of the `tdro_example_downstream` DAG which are triggered by this upstream DAG will override the default value of the `upstream_color` param with the value passed via the `conf` parameter, which leads to the `print_color` task to print out one of the values `red`, `green`, `blue` or `yellow`. 
+Runs of the `tdro_example_downstream` DAG that are triggered by this upstream DAG will override the default value of the `upstream_color` param with the value passed via the `conf` parameter, which leads to the `print_color` task to print out one of the values `red`, `green`, `blue` or `yellow`. 
 
 <CodeBlock language="python">{tdro_example_downstream}</CodeBlock>
 
-This functionality is one of several ways to pass information between your DAGs. Note that you can also use XCom across different DAGs.
 
-## Define DAG-level params defaults
+## Define DAG-level param defaults
 
 Default values for DAG-level params can be created by passing them to the `param` parameter of the `@dag` decorator or the `DAG` class in your DAG file. You can directly specify a default value or use the `Param` class to define a default value with additional attributes.
 
@@ -137,7 +136,7 @@ By default values provided to a keyword in the `params` dictionary are assumed t
 
 ### Param types
 
-Params can support one or more of seven types:
+The following param types are supported:
 
 - `string`: A string. This is the default type.
 - `null`: Allows the param to be None by being left empty.
@@ -148,13 +147,13 @@ Params can support one or more of seven types:
 
 :::info
 
-When a `type` is specified for a Param the field will turn into a required input by default because of [JSON validation](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration). To make a field optional allow NULL values by setting the type to `["null", "<my_type>"]`.
+When a `type` is specified for a param, the field will be a required input by default because of [JSON validation](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration). To make a field optional, allow NULL values by setting the type to `["null", "<my_type>"]`.
 
 :::
 
 ### Param attributes
 
-Aside from the `type` attribute the `Param` class has several other attributes that can be used to define a default value:
+Aside from the `type` attribute, the `Param` class has several other attributes that can be used to define a default value:
 
 - `title`: The title of the param that will be displayed in the Trigger DAG UI instead of the param key when specified.
 - `description`: A description of the param where further instructions can be added.
