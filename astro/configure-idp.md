@@ -76,15 +76,16 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
     - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Okta.
     - **Automatic Membership**: Set the default role for users who join your Organization through Okta and without an explicit invite from Astro.
 
-4. Copy the **Connection Name** for use in Step 6.
+4. Copy the **Connection Name**.
 5. Open a new tab and go to Okta. In the Okta Admin Console, go to **[Applications](https://help.okta.com/en-us/Content/Topics/Apps/apps-access.htm)** and click **Browse App Catalogue**. Then, search the catalogue, select the **Astro** app integration, and click **Add Integration**. After configuring a label for the integration, the application appears in **Applications**.
 6. Open the Astro application you just configured, click **Sign On**, then click **Edit**. Configure the following values:
 
     - **Attributes**: (Optional) Create attributes to map from Okta to Astro user accounts. You can map attributes to Astro user account first names, last names, and email.
     - **Connection Name**: Enter the **Connection Name** you copied from the Cloud UI.
-    - **Update application username on**: `Create and update`
+    - **Application username format**: **Email**.
+    - **Update application username on**: `Create and update`.
   
-7. Copy the values for **Sign-on URL**, **Sign out URL**, and **X.509 Certificate** for use in Step 9.
+7. Copy the values for **Sign-on URL**, **Sign out URL**, and **X.509 Certificate** from the **Metadata Details** section.
 8. Assign yourself to the Astro app integration from Okta. See [Assign an app integration to a user](https://help.okta.com/en-us/Content/Topics/Provisioning/lcm/lcm-assign-app-user.htm).
 9. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
 
@@ -413,7 +414,7 @@ When a user assigned to the application accesses Astro, they are automatically s
 
 ### Configure just-in-time provisioning
 
-Astro supports just-in-time provisioning by default for all single sign-on (SSO) integrations. This means that if someone without an Astronomer account tries logging into Astronomer with an email address from a domain that you manage, they are automatically granted a default role in your Organization without needing an invite. Users with emails outside of this domain need to be invited to your Organization to access it. 
+Astro supports just-in-time provisioning by default for all single sign-on (SSO) integrations. This means that if someone without an Astro account tries logging into Astro with an email address from a domain that you manage, they are automatically granted a default role in your Organization without needing an invite. Users with emails outside of this domain need to be invited to your Organization to access it. 
 
 To enable or disable just-in-time provisioning, [Steps]
 

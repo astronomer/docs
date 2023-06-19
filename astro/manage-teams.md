@@ -19,11 +19,11 @@ If you have configured SCIM provisioning, you can add groups of users from your 
 
 4. Enter a **Team Name** and then click **Add users** to choose the Organization users you want to add to the team. 
 
-    If you don't find the user you want to add, you might need to [add the user to your Organization](#add-a-user-to-an-organization).
+    If you don't find the user you want to add, you might need to [add the user to your Organization](add-user.md#add-a-user-to-an-organization).
 
 5. After you finish adding users to the Team, click **Add Team**.
 
-You can now [add your Team to a Workspace](#add-a-team-to-a-workspace) and define the Team users' permissions in the Workspace.
+You can now [add your Team to a Workspace](add-user.md#add-a-team-to-a-workspace) and define the Team users' permissions in the Workspace.
 
 ## Update existing Teams
 
