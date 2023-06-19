@@ -35,10 +35,11 @@ Astro supports SCIM provisioning with the following IdPs:
     defaultValue="Okta"
     groupId= "setup"
     values={[
-        {label: 'Okta', value: 'Okta'},
+        {label: 'Okta - Astro integration (Recommended)', value: 'Okta'},
+        {label: 'Okta - Manual', value: 'OktaManual'},
         {label: 'Azure AD', value: 'Azure AD'},
     ]}>
-<TabItem value="Okta">
+<TabItem value= "Okta">
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
 2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **General**.
@@ -57,6 +58,42 @@ Astro supports SCIM provisioning with the following IdPs:
     See [Okta documentation](https://developer.okta.com/docs/guides/scim-provisioning-integration-connect/main/#to-app) for more information on configuring these values.
 
 8.  Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
+
+</TabItem>
+<TabItem value="OktaManual">
+
+Complete the manual setup if you configured your existing Astro app without using the Okta app catalogue.
+
+1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
+2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
+3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
+4. Copy the **SCIM Integration URL** that appears.
+5. In the Okta admin dashboard, add SCIM provisioning to your existing Astro app integration and configure the following values: 
+
+    - **Supported provisioning actions**: Select **Push New Users**, **Push Profile Updates**, and **Push Groups**.
+    - **SCIM connector base URL**: Enter the SCIM integration URL you copied from the Cloud UI.
+    - **Authentication Mode**: Choose **HTTP Header** and paste your Organization API token in the **Bearer** field.
+  
+    See [Okta documentation](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm) for more information about setting up SCIM provisioning. 
+
+6. In the **Provisioning** menu, click **To App** and configure the following:
+
+    - **Provisioning to App**: Select **Create Users**, **Update User Attributes**, and **Deactivate Users**.
+    - **Astro Attribute Mappings**: Configure the following mappings:
+
+    | Attribute                    | Attribute Type | Value                          | Apply On          |
+    | ---------------------------- | -------------- | ------------------------------ | ----------------- |
+    | Username (`userName`)        | Personal       | Configured in sign-on settings |                   |
+    | Given name  (`givenName`)    | Personal       | user.firstName                 | Create and update |
+    | Family name (`familyName`)   | Personal       | user.lastName                  | Create and update |
+    | Email  (`email`)             | Personal       | user.email                     | Create and update |
+    | Display name (`displayName`) | Personal       | user.displayName               | Create and update |
+    | Profile Url  (`profileUrl`)  | Personal       | user.profileUrl                | Create and update |
+
+    See [Okta documentation](https://developer.okta.com/docs/guides/scim-provisioning-integration-connect/main/#to-app) for more information on configuring these values.
+
+7. Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
+
 
 </TabItem>
 <TabItem value="Azure AD">
