@@ -24,9 +24,10 @@ Each CI/CD template implementation might have additional requirements.
 
 To automate code deploys from a single branch to a single Deployment using AWS CodeBuild, complete the following setup in the Git-based repository that hosts your Astro project:
 
-1. In your AWS CodeBuild pipeline configuration, add the following environment variable:
+1. In your AWS CodeBuild pipeline configuration, add the following environment variables:
 
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: The ID for your Deployment.
 
     Be sure to set the value of your API token as secret.
 
@@ -46,7 +47,7 @@ To automate code deploys from a single branch to a single Deployment using AWS C
          - echo "${CODEBUILD_WEBHOOK_HEAD_REF}"
          - export ASTRO_API_TOKEN="${ASTRO_API_TOKEN}"
          - curl -sSL install.astronomer.io | sudo bash -s
-         - astro deploy -f
+         - astro deploy "${ASTRO_DEPLOYMENT_ID}" -f
 
     ```
 

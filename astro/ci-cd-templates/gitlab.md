@@ -63,13 +63,13 @@ Use this template to push code to both a development and a production Deployment
 
     For production Deployments, Astronomer recommends storing the value for your API token as either a [file-type variable](https://docs.gitlab.com/ee/ci/variables/#use-file-type-cicd-variables) or [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html).
 
-:::caution
+  :::caution
 
-When you create environment variables that will be used in multiple branches, you might want to protect where you use them. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
+  When you create environment variables that will be used in multiple branches, you might want to protect where you use them. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
 
-:::
+  :::
 
-1. Go to the **Editor** option in your project's CI/CD section and commit the following:
+2. Go to the **Editor** option in your project's CI/CD section and commit the following:
 
    ```
    ---

@@ -16,7 +16,7 @@ Use the following CI/CD template to automate deploying Apache Airflow DAGs from 
 
 ### DAG-based deploy
 
-This CI/CD template can be used to deploy DAGs from a single S3 bucket to a single Astro Deployment. When you create or modify a DAG in the S3 bucket, a Lambda function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
+This CI/CD template can be used to deploy DAGs from a single S3 bucket to a single Astro Deployment. When you create or modify a DAG in the S3 bucket, a Lambda function triggers and initializes an `astro` project to deploy your DAGs using Astro CLI.
 
 :::info
 
@@ -78,6 +78,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
     - `ASTRO_HOME`: `\tmp`
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: Your Deployment ID.
 
     For production Deployments, Astronomer recommends storing your API credentials in AWS Secrets Manager and referencing them from Lambda. See [https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html](https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html)
 
@@ -92,6 +93,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
     BUCKET = os.getenv("BUCKET", "astronomer-field-engineering-demo")
     s3 = boto3.resource('s3')
+    deploymentId = os.environ.get('ASTRO_DEPLOYMENT_ID')
 
     def untar(filename: str, destination: str) -> None:
         with tarfile.open(filename) as file:
@@ -133,7 +135,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         untar('./astro_cli.tar.gz', '.')
         
         run_command('echo y | ./astro dev init')
-        run_command('./astro deploy --dags')
+        run_command(f"./astro deploy {deploymentId} --dags")
         
         return {"statusCode": 200}
     ```
