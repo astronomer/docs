@@ -44,7 +44,7 @@ For a complete list of the changes, see the [Apache Airflow 2.6.2 release notes]
 
 ### Bug fixes
 
-- Fixed an issue where Istio versions were being parsed as Python versions instead of semantic versions, resulting in DAG errors.
+- Fixed an issue where Istio versions were being parsed as [Python versions](https://peps.python.org/pep-0440/) instead of [semantic versions](https://semver.org/), resulting in DAG errors.
 
 ## Astro Runtime 8.4.0
 
