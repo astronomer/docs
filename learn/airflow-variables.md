@@ -22,10 +22,16 @@ To get the most out of this guide, you should have an understanding of:
 
 Airflow offers several ways to store your information, including variables. The ideal option often depends on what type of information you are storing and where and how you want to access it:
 
-- Environment variables store small pieces of information that you want to be available in your whole Airflow environment. The advantage of using environment variables is that you can include their creation in your CI/CD process. Environment variables are the only type of variable storage that can be accessed in top-level DAG code. Note that unless you create an Airflow variable via the environment variable by starting it with `AIRFLOW_VAR_` you will not be able to view or update it in the Airflow UI. 
+- Environment variables store small pieces of information that you want to be available in your whole Airflow environment. The advantage of using environment variables is that you can include their creation in your CI/CD process. Note that environment variables are not visible from within the Airflow UI, unless they are an Airflow variable created by starting the name with `AIRFLOW_VAR_`.
 - Airflow variables store key-value pairs or short JSON objects that need to be accessible in your whole Airflow environment. It is best practice to use Airflow variables for information that is runtime dependent but does not change too frequently. Airflow variables are also encrypted, making them suitable for storing secrets.
 - [Params](airflow-params.md) can be used to store variables that are specific to a DAG or DAG run. You can define defaults for params at the DAG or task level and override them at runtime. Params are not encrypted and should not be used to store secrets.
 - [XComs](airflow-passing-data-between-tasks.md) can be used to pass small pieces of information between Airflow tasks. Use XComs when the information is likely to change with each DAG run and mostly needs to be accessed by individual tasks in or outside of the DAG from within which the XCom is created.
+
+:::info
+
+To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/environment-variables).
+
+:::
 
 ## Create an Airflow variable
 
@@ -78,7 +84,7 @@ AIRFLOW_VAR_MYREGULARVAR='my_value'
 AIRFLOW_VAR_MYJSONVAR='{"hello":"world"}'
 ```
 
-Astro CLI users can create Airflow variables from the `airflow_settings.yaml` file. 
+[Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) users can create Airflow variables from the `airflow_settings.yaml` file. 
 
 ```yaml
   variables:

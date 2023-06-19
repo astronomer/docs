@@ -45,7 +45,6 @@ module.exports = {
           items: [
             'bashoperator',
             'connections',
-            'airflow-context',
             'dags',
             'what-is-a-hook',
             'intro-to-airflow',
@@ -71,6 +70,7 @@ module.exports = {
           items: [
             'astro-python-sdk-etl',
             'airflow-branch-operator',
+            'airflow-context',
             'cross-dag-dependencies',
             'airflow-importing-custom-hooks-operators',
             'error-notifications-in-airflow',
