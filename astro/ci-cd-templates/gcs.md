@@ -42,6 +42,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
     - `ASTRO_HOME` = `\tmp`
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: Your Deployment ID.
 
     For production Deployments, ensure that you store the value for your API token in a secrets backend. See [Secret Manager overview](https://cloud.google.com/secret-manager/docs/overview).
 
@@ -55,7 +56,8 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
     import subprocess
     from pathlib import Path
     from google.cloud import storage
-    BUCKET = os.getenv("BUCKET", "my-demo-bucket")
+    BUCKET = os.environ.get("BUCKET", "my-demo-bucket")
+    deploymentId = os.environ.get("ASTRO_DEPLOYMENT_ID", "missing-deployment-id")
 
     def untar(filename: str, destination: str) -> None:
         with tarfile.open(filename) as file:
@@ -110,7 +112,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         os.chdir(base_dir)
         untar('./astro_cli.tar.gz', '.')
         run_command('echo y | ./astro dev init')
-        run_command(f'./astro deploy --dags')
+        run_command(f'./astro deploy {deploymentId} --dags')
     ```
 
 10. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).

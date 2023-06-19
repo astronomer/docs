@@ -22,9 +22,10 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 To automate code deploys to a Deployment using CircleCI, complete the following setup in a Git-based repository that hosts an Astro project:
 
-1. Set the following environment variable in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
+1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
 
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: The ID for your Deployment.
 
 2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
 
@@ -58,7 +59,7 @@ To automate code deploys to a Deployment using CircleCI, complete the following 
               name: "Deploy to Astro"
               command: |
                 curl -sSL install.astronomer.io | sudo bash -s
-                astro deploy -f
+                astro deploy ${ASTRO_DEPLOYMENT_ID} -f
 
     # Invoke jobs with workflows
     # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

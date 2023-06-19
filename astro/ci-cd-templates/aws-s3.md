@@ -91,7 +91,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
     import os
     import tarfile
 
-    BUCKET = os.getenv("BUCKET", "astronomer-field-engineering-demo")
+    BUCKET = os.environ.get("BUCKET", "astronomer-field-engineering-demo")
     s3 = boto3.resource('s3')
     deploymentId = os.environ.get('ASTRO_DEPLOYMENT_ID')
 

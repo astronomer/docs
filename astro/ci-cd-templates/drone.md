@@ -56,7 +56,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
         - name: dockersock
           path: /var/run
         commands:
-        - astro deploy -f
+        - astro deploy <your-deployment-id> -f
         depends on:
         - wait
 
