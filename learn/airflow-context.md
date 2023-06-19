@@ -20,6 +20,12 @@ Common reasons to access the Airflow context are:
 - You want to make an action in your pipeline conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 - You want to access information stored in an Airflow connection within your task.
 
+:::info
+
+A very commonly used element of the Airflow context is the `ti` / `task_instance` keyword, which allows you to access attributes and methods of the [`taskinstance` object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). See also the [ti / task_instance](#ti--task_instance) section of this guide.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -129,6 +135,22 @@ class PrintDAGIDOperator(BaseOperator):
 
 An up to date list of all keys in the context and their types can be found in the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/utils/context.pyi). This section gives an overview of the most commonly used keys.
 
+### ti / task_instance
+
+The `ti` or `task_instance` key contains the [TaskInstance object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). The most commonly used attributes are `.xcom_pull` and `.xcom_push`, which allow you to push to and pull [XComs](airflow-passing-data-between-tasks.md).
+
+<CodeBlock language="python">{context_and_xcom}</CodeBlock>
+
+This DAG shows a simple example of using `context["ti"].xcom_push(...)` and `context["ti"].xcom_pull(...)` to explicitly pass data between tasks (implicit use of XCom is also shown).
+
+The `downstream_task` will print the following information to the logs:
+
+```text
+[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Returned Num:  19
+[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Passed Num:  19
+[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Explicit Num:  23
+```
+
 ### Scheduling keys
 
 One of the most common reasons to access the Airflow context in your tasks is to retrieve information about the schedule of the DAG. A common pattern is to use the timestamp of the logical date in names of files written from a DAG to ensure one unique file for each DAG run.
@@ -206,22 +228,6 @@ def print_param(**context):
 ```
 
 Learn more about params in the [Airflow params guide](airflow-params.md).
-
-### ti / task_instance
-
-The `ti` or `task_instance` key contains the [TaskInstance object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). The most commonly used attributes are `.xcom_pull` and `.xcom_push`, which allow you to push to and pull [XComs](airflow-passing-data-between-tasks.md).
-
-<CodeBlock language="python">{context_and_xcom}</CodeBlock>
-
-This DAG shows a simple example of using `context["ti"].xcom_push(...)` and `context["ti"].xcom_pull(...)` to explicitly pass data between tasks (implicit use of XCom is also shown).
-
-The `downstream_task` will print the following information to the logs:
-
-```text
-[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Returned Num:  19
-[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Passed Num:  19
-[2023-06-16, 13:14:11 UTC] {logging_mixin.py:149} INFO - Explicit Num:  23
-```
 
 ### var
 

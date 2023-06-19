@@ -51,7 +51,7 @@ The Airflow CLI contains options to set, get and delete [Airflow variables](http
 
 <Tabs
     defaultValue="astro"
-    groupId= "create-airflow-variable"
+    groupId= "create-an-airflow-variable"
     values={[
         {label: 'Astro CLI', value: 'astro'},
         {label: 'Airflow CLI', value: 'airflow'},

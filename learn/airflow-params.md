@@ -69,7 +69,7 @@ When running an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apach
 
 <Tabs
     defaultValue="astro"
-    groupId= "airflow-cli"
+    groupId= "cli"
     values={[
         {label: 'Astro CLI', value: 'astro'},
         {label: 'Airflow CLI', value: 'airflow'},
@@ -105,7 +105,7 @@ You can use a `--conf` flag with the following Airflow CLI sub-commands:
 
 ### TriggerDagRunOperator
 
-The [TriggerDagRunOperator](cross-dag-dependencies.md#triggerdagrunoperator) is a core Airflow operator that allows you to kick off a DAG run from within another DAG. You can use the TriggerDAGRunOperator `conf` param to trigger the dependent DAG with a specific configuration.
+The [TriggerDagRunOperator](cross-dag-dependencies.md#triggerdagrunoperator) is a core Airflow operator that allows you to start a DAG run from within another DAG. You can use the TriggerDAGRunOperator `conf` param to trigger the dependent DAG with a specific configuration.
 
 The DAG below uses the TriggerDagRunOperator to trigger the `tdro_example_downstream` DAG while passing a dynamic value for the `upstream_color` param via the `conf` parameter. The value for `upstream_color` is passed via a [Jinja template](templating.md) pulling the return value of an upstream task via [XCom](airflow-passing-data-between-tasks.md#xcom).
 
@@ -130,6 +130,12 @@ The Trigger DAG UI will render an element for each param with the respective def
 
 :::info
 
+When a `type` is specified for a param, the field will be a required input by default because of [JSON validation](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration). To make a field optional, allow NULL values by setting the type to `["null", "<my_type>"]`.
+
+:::
+
+:::info
+
 By default values provided to a keyword in the `params` dictionary are assumed to be strings. You can change this behavior by setting the DAG parameter `render_template_as_native_obj=True`. See also [Render native Python code](templating.md#render-native-python-code).
 
 :::
@@ -145,30 +151,24 @@ The following param types are supported:
 - `array`: A HTML multi line text field, every line edited will be made into a string array as value
 - `object`: A JSON entry field.
 
-:::info
-
-When a `type` is specified for a param, the field will be a required input by default because of [JSON validation](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration). To make a field optional, allow NULL values by setting the type to `["null", "<my_type>"]`.
-
-:::
-
 ### Param attributes
 
 Aside from the `type` attribute, the `Param` class has several other attributes that can be used to define a default value:
 
 - `title`: The title of the param that will be displayed in the Trigger DAG UI instead of the param key when specified.
 - `description`: A description of the param where further instructions can be added.
-- `description_html`: A description that will be rendered in html format that can contain links and other html elements. Note that adding invalid HTML might lead to the UI not rendering correctly.
+- `description_html`: A description that will be rendered in HTML format that can contain links and other HTML elements. Note that adding invalid HTML might lead to the UI not rendering correctly.
 - `section`: Creates a section under which the param will be displayed in the Trigger DAG UI. All params with no specified section will be displayed under the default section **DAG conf Parameters**.
 - `format`: a [JSON format](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration) the input will be validated against.
 - `enum`: A defined list of valid values for a param. Setting this attribute will create a dropdown menu in the Trigger DAG UI.
 - `const`: Setting this attribute to a valid value will make that value a constant default and hide the param from the Trigger DAG UI. Note that you still need to provide a `default` value for the param.
 - `custom_html_form`: Allows you to create custom HTML on top of the provided features.
 
-All Param attributes are optional to set. For Params of the type string you can additionally set `min_length` and `max_length` to define the minimum and maximum length of the input. Similarly Params of the types `integer` and `number` can have a `minimum` and `maximum` value.
+All `Param` attributes are optional to set. For params of the type string you can additionally set `min_length` and `max_length` to define the minimum and maximum length of the input. Similarly params of the types `integer` and `number` can have a `minimum` and `maximum` value.
 
 ### Param default examples
 
-This section presents a few examples of Param defaults and how they are rendered in the Trigger DAG UI.
+This section presents a few examples of param defaults and how they are rendered in the Trigger DAG UI.
 
 The code snippet below defines a mandatory param of the type `string` with UI elements like the section and title specified.
 
@@ -262,7 +262,7 @@ You can access params in an Airflow task like other elements in the [Airflow con
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "define-task-level-param-defaults"
+    groupId= "access-params-in-a-task"
     values={[
         {label: 'TaskFlow', value: 'taskflow'},
         {label: 'Traditional Operator', value: 'traditional'},
