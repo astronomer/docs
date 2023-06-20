@@ -23,6 +23,6 @@ astro workspace token add
 
 ## Related commands
 
-- [astro workspace token update](cli/astro-workspace-token-update)
-- [astro workspace token rotate](cli/astro-workspace-token-rotate)
-- [astro workspace switch](cli/astro-workspace-switch)
+- [astro workspace token update](cli/astro-workspace-token-update.md)
+- [astro workspace token rotate](cli/astro-workspace-token-rotate.md)
+- [astro workspace switch](cli/astro-workspace-switch.md)
