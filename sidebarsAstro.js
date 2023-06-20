@@ -91,7 +91,11 @@ module.exports = {
       items: [
         "create-deployment",
         "configure-deployment-resources",
-        "executors",
+        {
+          type: "category",
+          label: "Executors",
+          items: ["executors-overview","celery-executor", "kubernetes-executor"],
+        }, 
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
