@@ -33,6 +33,6 @@ astro workspace token update --new-name "My updated API token" --role WORKSPACE_
 
 ## Related commands
 
-- [astro workspace token rotate](cli/astro-workspace-token-rotate)
-- [astro workspace token delete](cli/astro-workspace-token-delete)
-- [astro workspace switch](cli/astro-workspace-switch)
+- [astro workspace token rotate](cli/astro-workspace-token-rotate.md)
+- [astro workspace token delete](cli/astro-workspace-token-delete.md)
+- [astro workspace switch](cli/astro-workspace-switch.md)
