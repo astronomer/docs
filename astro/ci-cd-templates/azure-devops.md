@@ -25,6 +25,7 @@ Complete the following setup in an Azure repository that hosts an Astro project:
 1. Set the following environment variable as a [DevOps pipeline variable](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
 
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: The ID for your Deployment.
 
     For production Deployments, ensure that you set the value for your API token as a [secret](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch#secret-variables).
 
@@ -45,8 +46,9 @@ Complete the following setup in an Azure repository that hosts an Astro project:
         steps:
         - script: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy ${ASTRO_DEPLOYMENT_ID} -f
           env:
             ASTRO_API_TOKEN_: $(ASTRO_API_TOKEN)
+            ASTRO_DEPLOYMENT_ID: $(ASTRO_DEPLOYMENT_ID)
     ```
 

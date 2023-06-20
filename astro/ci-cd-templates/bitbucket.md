@@ -25,6 +25,7 @@ To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org
 1. Set the following environment variable as a [Bitbucket pipeline variable](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
 
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: Your Deployment ID.
 
     For production Deployments, be sure to set the value of your API token as **secured**.
 
@@ -39,7 +40,7 @@ To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org
               deployment: Production
               script:
                 - curl -sSL install.astronomer.io | sudo bash -s
-                - astro deploy
+                - astro deploy ${ASTRO_DEPLOYMENT_ID} -f
               services:
                 - docker
     ```

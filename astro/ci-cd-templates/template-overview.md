@@ -78,7 +78,7 @@ export ASTRO_API_TOKEN="<your-api-token>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
 # Build your Astro project into a Docker image and push the image to your Deployment
-astro deploy
+astro deploy <your-deployment-id> -f
 ```
 
 ## Preview Deployment templates
