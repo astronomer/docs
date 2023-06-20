@@ -14,12 +14,7 @@
 /software/0.27/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.27/:splat.md 301
 /software/0.28/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.28/:splat.md 301
 /software/0.29/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.29/:splat.md 301
-/software/*/ac-cve https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/ac-cve.md 301
-/software/*/ac-support-policy https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/ac-support-policy.md 301
-/software/*/image-architecture https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/image-architecture.md 301
-/software/*/install-packages https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/install-packages.md 301
-/software/*/single-node-install https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/single-node-install.md 301
-/software/*/upgrade-ac https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/upgrade-ac.md 301
+/software/0.31/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.31/:splat.md 301
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
@@ -32,7 +27,7 @@
 
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
-/astro/connect-external-services https://docs.astronomer.io/astro/category/connect-astro 301
+/astro/connect-external-services https://docs.astronomer.io/astro/category/connect-to-external-resources 301
 
 # tutorial redirects 
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
@@ -271,6 +266,7 @@
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
 /astro/pipeline-alerts /astro/alerts 301
+/astro/executors /astro/executors-overview 301
 /astro/airflow-alerts /astro/airflow-email-notifications 301
 /astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301

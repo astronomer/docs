@@ -73,6 +73,49 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
    
 5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
+## Make a Team
+
+_Teams_ are a group of users in an Organization that you can grant the same Workspace permissions, without needing to define them individually. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles).
+
+### Create a Team
+
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
+
+2. Click **Teams**.
+
+3. Click **+ Team** to create a new team.
+
+4. Enter a **Team Name** and then click **Add users** to choose the Organization users you want to add to the team. 
+
+    If you don't find the user you want to add, you might need to [add the user to your Organization](#add-a-user-to-an-organization).
+
+5. After you finish adding users to the Team, click **Add Team**.
+
+You can now [add your Team to a Workspace](#add-a-team-to-a-workspace) and define the Team users' permissions in the Workspace.
+
+### Update existing Teams
+
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
+
+2. Click **Teams**.
+
+3. Click the name of the Team you want to update.
+
+4. Update your Team:
+
+    - Click **+ Member** to add an existing Organization member to your Team.
+    - Click the delete icon to remove Team members.
+
+### Add a Team to a Workspace
+
+1. In the Cloud UI, select a Workspace and click **Workspace Settings** > **Access Management**.
+
+2. Click **Teams**.
+
+3. Click **+ Team**.
+
+4. Select the **Team** you want to add and define their **Workspace Role**, which determines their [Workspace user permissions](/astro/user-permissions.md#workspace-roles).
+
 ## Add a group of users to Astro using the Astro CLI
 
 You can use the Astro CLI and a shell script to add multiple users to an Organization or Workspace at a time using a shell script. The shell script reads from a text file that your team creates which contains user information. To automate adding users to Astro, generate the text file for each new batch of users that need to assigned to an Organization or Workspace and run the script with the Astro CLI.
@@ -108,7 +151,7 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     done < "$1"
     ```
 
-    Replace the Astro CLI command with `astro workspace user add "$email" --role "$role"` if you're inviting a group of users to an Organization. Note that users must be first invited to an Organization before they can be added to a Workspace. 
+    Replace the Astro CLI command with `astro workspace user add "$email" --role "$role"` if you're inviting a group of users to an Organization. Note that users must be first invited to an Organization before they can be added to a Workspace.
 
 4. Log in to the Astro CLI using `astro login`, and then run `astro organization list` or `astro workspace list` to ensure that you're in the same Organization or Workspace where you want to add the users. If you're not in the right context, run `astro organization switch` or `astro workspace switch`.
 5. Run the following command to execute the shell script:
@@ -117,3 +160,6 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     sh path/to/add-users.sh path/to/users.txt
     ```
 6. (Optional) To use this script as part of a CI/CD pipeline, create an [Organization API token](organization-api-tokens.md) or [Workspace API token](workspace-api-tokens.md) and specify the environment variable `ASTRO_API_TOKEN=<your-token>` in your CI/CD environment. Note that you can use Workspace API tokens to manage users only at the Workspace level.
+
+
+

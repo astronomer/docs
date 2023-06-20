@@ -7,8 +7,8 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'warn', // 'warn' for drafts, 'throw' for prod
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
+  onBrokenMarkdownLinks: 'throw',
   markdown: {
     mermaid: true,
   },
@@ -108,17 +108,16 @@ module.exports = {
       successMessage: "Success! ✓",
       errorMessage: "Sorry, there was issue sending your email. Please try again.",
     },
+    feedbackWidget: {
+      question: "Was this page helpful?",
+      thanksText: "Thank you for your feedback!",
+    },
     softwareNav: {
       items: [
         {
           label: '0.32 (Latest)',
           to: '/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
-        },
-        {
-          label: '0.31',
-          to: '/software/0.31/',
-          activeBaseRegex: '(software\/0.31)+',
         },
         {
           label: '0.30',

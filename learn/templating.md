@@ -37,18 +37,16 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Jinja templating. See [Jinja basics](https://jinja.palletsprojects.com/en/3.1.x/api/#basics). 
 
-## Runtime variables in Airflow
+## Templating variables in Airflow
 
 Templating in Airflow works the same as Jinja templating in Python. You enclose the code you want evaluated between double curly braces, and the expression is evaluated at runtime. 
 
-This table lists some of the most commonly used Airflow variables that you can use in templates:
+Some of the most commonly used Airflow variables that you can use in templates are:
 
-| Variable name  | Description                                                |
-|----------------|------------------------------------------------------------|
-| execution_date | Starting datetime of DAG run interval                      |
-| ds             | `execution_date` formatted as "2022-12-27"                 |
-| ds_nodash      | `execution_date` formatted as "20221227"                   |
-| next_ds        | next `execution_date` (= end of current interval) datetime |
+- `{{ ds }}`: The DAG Run’s logical date as `YYYY-MM-DD`.
+- `{{ ds_nodash }}`: The DAG run’s logical date as `YYYYMMDD`.
+- `{{ data_interval_start }}`: The start of the data interval.
+- `{{ data_interval_end }}`: The end of the data interval.
 
 For a complete list of the available variables, see the Airflow [Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/macros-ref.html#default-variables).
 

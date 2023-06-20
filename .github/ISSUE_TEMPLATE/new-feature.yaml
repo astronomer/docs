@@ -1,0 +1,37 @@
+name: New Feature
+description: Request documentation or an upcoming Astro, Astro CLI, or Astronomer Software feature. Mainly for use by Astronomer product managers.
+labels: ["new-feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Want to document the new feature yourself? See [Document a new feature](https://www.notion.so/astronomerio/Document-a-new-feature-e54d4f70d119428b8d3a80d142241828).
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: New Feature Description
+      description: Why is the new feature or functionality significant? What benefit does it provide? 
+    validations:
+      required: true
+  - type: input
+    id: reviewer
+    attributes:
+      label: Required Reviewers
+    validations:
+      required: true
+  - type: textarea
+    id: relateddocs
+    attributes:
+      label: Links to Internal Info or Resources
+  - type: textarea
+    id: deadline
+    attributes:
+      label: Release Date
+      description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Add additional information here that can help the docs team understand the requirements.
