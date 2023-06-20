@@ -81,6 +81,8 @@ deployment:
         workspace_name: Data Science Workspace
         is_high_availability: false
         ci_cd_enforcement: false
+        pod_cpu: 1
+        pod_memory: 2
     worker_queues:
         - name: default
           max_worker_count: 10
