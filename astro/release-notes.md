@@ -27,6 +27,18 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
 
+## June 20, 2023
+
+### Additional improvements
+
+- You can now configure Deployments with the `A40` machine type, which has 8 vCPU and 16 GiB. See [Astro hosted resource reference](resource-reference-hosted.md).
+- The Cloud UI now shows your Team IDs in **Settings** > **Access Management** > **Teams**. Use Team IDs to add Teams to Workspaces using the Astro CLI.
+- A Team's **Updated At** and **Updated By** values are now updated when you change the Team's permissions in a Workspace or Organization.
+
+### Bug fixes
+
+- Fixed an issue where a Workspace descriptions were incorrectly required when creating a new Workspace through the Astro CLI.
+
 ## June 13, 2023
 
 ### Manage billing and track usage for Astro Hosted
