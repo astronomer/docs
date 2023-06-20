@@ -17,5 +17,5 @@ astro workspace team remove
 ## Related commands
 
 - [`astro workspace team add`](cli/astro-workspace-team-add.md)
-- [`astro organization team remove`](cli/astro-organization-team-remove.md)
+- [`astro organization team remove`](cli/astro-organization-team-delete.md)
 
