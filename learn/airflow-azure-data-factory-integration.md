@@ -52,7 +52,7 @@ Before you can orchestrate your ADF pipelines with Airflow, you have to make the
 
 4. Add a role assignment with the following settings:
 
-    - Role: Contributor
+    - Role: Data Factory Contributor
     - Assign access to: User, group, or service principal
 
     Search for your app, add it to 'Selected members' and click save.
@@ -92,7 +92,7 @@ Now that you have your Azure resources configured, you can move on to setting up
 
 Add a connection that Airflow will use to connect to ADF. In the Airflow UI, go to **Admin** -> **Connections**.
 
-Create a new connection named `azure_data_factory` and choose the `Azure Data Explorer` connection type. Enter the following information:
+Create a new connection named `azure_data_factory` and choose the `Azure Data Factory` connection type. Enter the following information:
 
 - **Login:** Your Azure **Client ID** from Step 1
 - **Password:** Your Azure **Client secret** from Step 1

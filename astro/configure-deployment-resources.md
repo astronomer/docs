@@ -118,18 +118,21 @@ You can also update your Workspace so that any new Deployments in the Workspace 
 
 ## Enable high availability
 
-:::info
+By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of its scheduler across different nodes. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Note that PGBouncer Pods are guaranteed to run across multiple availability zones, but scheduler Pods are not. 
 
-This setting is configurable only on Astro Hosted Deployments.
-
-:::
-
-When a Deployment has high availability enabled, it runs multiple instances of its Airflow components across separate nodes for resiliency. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
+Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**.
 4. In **High Availability**, click the toggle to **On**.
+
+:::info Alternative Astro Hybrid Setup
+
+On Astro Hybrid, PgBouncer is highly available by default for all Deployments. Schedulers are highly available if a Deployment uses two or more schedulers. 
+
+Every Deployment has two PgBouncer Pods assigned to two different nodes to prevent zombie tasks. If you configure your Deployment with two schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses three or four schedulers can assign all scheduler Pods across two nodes.
+:::
 
 ## Transfer a Deployment to another Workspace 
 

@@ -160,6 +160,7 @@ module.exports = {
         'airflow-great-expectations',
         'execute-notebooks',
         'marquez',
+        'airflow-mlflow',
         'airflow-mongodb',
         'airflow-snowflake',
         'soda-data-quality',
@@ -178,6 +179,13 @@ module.exports = {
       items: [
           'pycharm-local-dev',
           'vscode-local-dev',
+          {
+            type: 'category',
+            label: 'Use cases',
+            items: [
+              'use-case-airflow-dbt',
+            ],
+          },
       ],
     },
   ],
