@@ -84,7 +84,7 @@ You can use the [duckdb Python package](https://pypi.org/project/duckdb/) direct
 
     <CodeBlock language="python">{duckdb_tutorial_dag_1}</CodeBlock>
 
-    This simple DAG passes a Pandas dataframe from an upstream task to a downstream task. The downstream task uses the duckdb Python package to create and query a table in DuckDB. You can control the database you connect to by changing the string in the `duckdb.connect()` function:
+    This simple DAG passes a Pandas dataframe from an upstream task to a downstream task. The downstream task uses the DuckDB Python package to create and query a table in DuckDB. You can control the database you connect to by changing the string in the `duckdb.connect()` function:
 
     - Use an empty string to utilize an in-memory database (For example, `duckdb.connect("")`).
     - Specify a local file path to create/connect to a local DuckDB database in which your table will persist (For example, `duckdb.connect("include/my_garden_ducks.db")`)
@@ -125,7 +125,7 @@ If you are connecting to MotherDuck, you will need to specify your connection in
 
     This simple DAG will query all information from a table in a DuckDB instance. Make sure the table you are querying exists in the DuckDB instance you specified in your DuckDB connection.
 
-4. Run the DAG manually by clicking the play button.
+4. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button.
 
 :::info
 
