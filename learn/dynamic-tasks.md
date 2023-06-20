@@ -467,13 +467,9 @@ def add_10(num):
 def multiply_by_100(num):
     return num * 100
 
-multiply_by_100.expand(
-    num=add_10.expand(
-        num=multiply_by_2.expand(
-            num=[1, 2, 3]
-        )
-    )
-)
+multiplied_value_1 = multiply_by_2.expand(num=[1, 2, 3])
+summed_value = add_10.expand(num=multiplied_value_1)
+multiply_by_100.expand(num=summed_value)
 ```
 </TabItem>
 <TabItem value="traditional">
