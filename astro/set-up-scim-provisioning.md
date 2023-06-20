@@ -120,7 +120,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 
   :::info
 
-  If you use a field other than `userPrincipalName` as your user name attribute, replace `userPrincipalName` with the attribute you use.
+  This setup assumes that `userPrincipalName` contains your users' email. If you use a field other than `userPrincipalName` to define your user email, replace `userPrincipalName` with the attribute you use.
 
   ::: 
 
