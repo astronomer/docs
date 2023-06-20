@@ -38,7 +38,7 @@ This section contains links to documentation sets that correspond to all previou
   
 ### Unmaintained versions
 
-- [v0.31](https://docs.astronomer.io/software/0.31/)
+- [v0.31](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.31)
 - [v0.29](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.29)
 - [v0.28](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.28)
 - [v0.27](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.27)
