@@ -68,10 +68,11 @@ Complete the manual setup if you configured your existing Astro app without usin
 2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
-5. In the Okta admin dashboard, add SCIM provisioning to your existing Astro app integration and configure the following values: 
+5. In the Okta admin dashboard, add SCIM provisioning to your existing Astro app integration. Then, open your app in Okta and go to **Provisioning** > **Integration** to configure the following values: 
 
     - **Supported provisioning actions**: Select **Push New Users**, **Push Profile Updates**, and **Push Groups**.
     - **SCIM connector base URL**: Enter the SCIM integration URL you copied from the Cloud UI.
+    - **Unique identifier field for users**: `email`.
     - **Authentication Mode**: Choose **HTTP Header** and paste your Organization API token in the **Bearer** field.
   
     See [Okta documentation](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm) for more information about setting up SCIM provisioning. 
@@ -102,7 +103,8 @@ Complete the manual setup if you configured your existing Astro app without usin
 2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
-5. In the Azure AD management dashboard, click **Provisioning** and configure the following values:
+5. In the Azure AD management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application).
+6. In the menu for your new application, click **Provisioning** and configure the following values:
 
     - **Provisioning mode**: Set to **Automatic**.
     - **Admin Credentials** > **Tenant URL**: Enter the SCIM integration URL that you copied from the Cloud UI.
@@ -116,7 +118,13 @@ Complete the manual setup if you configured your existing Astro app without usin
     | givenName                        | name.givenName  |
     | surname                          | name.familyName |
 
-6. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+  :::info
+
+  If you use a field other than `userPrincipalName` as your user name attribute, replace `userPrincipalName` with the attribute you use.
+
+  ::: 
+
+1. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
 </TabItem>
 </Tabs>

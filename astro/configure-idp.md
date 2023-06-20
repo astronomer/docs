@@ -416,7 +416,13 @@ When a user assigned to the application accesses Astro, they are automatically s
 
 Astro supports just-in-time provisioning by default for all single sign-on (SSO) integrations. This means that if someone without an Astro account tries logging into Astro with an email address from a domain that you manage, they are automatically granted a default role in your Organization without needing an invite. Users with emails outside of this domain need to be invited to your Organization to access it. 
 
-To enable or disable just-in-time provisioning, [Steps]
+To enable or disable just-in-time provisioning:
+
+1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
+   
+2. In the **SSO Configuration** menu, click the pencil icon to edit your SSO connection.
+
+3. In **Automatic Membership**, select the default Organization role for users who log in to Astro for the first time through your identity provider. To disable just-in-time provisioning, select **Disabled**.
 
 ### Restrict authentication options 
 
