@@ -6,7 +6,7 @@ id: 'executors-overview'
 
 The Airflow executor determines which worker resources run your scheduled tasks. 
 
-On Astro, every Deployment requires an executor and you can update the executor at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
+On Astro, every Deployment requires an executor and you can change the executor at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
 
 To learn more about executors in Airflow, see [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
 
@@ -43,7 +43,7 @@ On Astro, the Kubernetes infrastructure required to run the Kubernetes executor 
 The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment of each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
 - You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when you deploy code.
-- Your tasks are compute-intensive or you are processing large volumes of data within the task. Kubernetes executor tasks run separately in a dedicated pod per task. 
+- Your tasks are compute-intensive or you are processing large volumes of data within the task. Kubernetes executor tasks run separately in a dedicated Pod per task. 
 - You have a strong understanding of the CPU and memory that your tasks require and would benefit from being able to allocate and optimize infrastructure resources at the task level.
 - You have had issues running certain tasks reliably with the Celery executor.
   

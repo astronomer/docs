@@ -34,7 +34,7 @@ See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests)
 
 ### Example: Set CPU or memory limits and requests
 
-You can request a specific amount of resources Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](configure-deployment-resources.md#configure-kubernetes-pod-resources).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
@@ -140,7 +140,7 @@ with DAG(
         dag_id='test-secret',
         start_date=pendulum.datetime(2022, 1, 1, tz="UTC"),
         end_date=pendulum.datetime(2022, 1, 5, tz="UTC"),
-        schedule_interval="@once",
+        schedule="@once",
 ) as dag:
     secret_env = Secret(deploy_type="env", deploy_target="MY_SECRET", secret="env-secrets", key="MY_SECRET")
     namespace = conf.get("kubernetes", "NAMESPACE")
