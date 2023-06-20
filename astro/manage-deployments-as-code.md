@@ -73,7 +73,7 @@ deployment:
         deployment_type: standard
         # 'cloud_provider' and 'region' are used only when deployment_type=standard. These values are replaced by 'cluster_name' when deployment_type=dedicated.
         cloud_provider: gcp
-        region:
+        region: us-central1
         dag_deploy_enabled: true
         executor: CeleryExecutor
         scheduler_size: small
