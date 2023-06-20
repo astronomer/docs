@@ -91,9 +91,10 @@ module.exports = {
       items: [
         "create-deployment",
         "configure-deployment-resources",
+        "manage-dags",
         {
           type: "category",
-          label: "Executors",
+          label: "Configure executors",
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
@@ -118,7 +119,11 @@ module.exports = {
       label: "Observability",
       items: [
         "view-logs",
-        "deployment-metrics",
+        {
+          type: "category",
+          label: "View metrics",
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+        },
         {
           type: "category",
           label: "Data lineage",
