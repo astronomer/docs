@@ -6,7 +6,7 @@ id: manage-dags
 
 :::info
 
-Managing DAGs from the Cloud UI is currently available only on Astro Hosted. Support on Astro Hybrid is coming soon.
+Managing DAGs from the Cloud UI is currently available only on [Astro Hosted](overview.md). Support on Astro Hybrid is coming soon.
 
 :::
 

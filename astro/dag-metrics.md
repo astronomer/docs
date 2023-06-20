@@ -11,7 +11,7 @@ id: dag-metrics
 
 :::info
 
-DAG metrics are currently available only on Astro Hosted. Support on Astro Hybrid is coming soon.
+DAG metrics are currently available only on [Astro Hosted](overview.md). Support on Astro Hybrid is coming soon.
 
 :::
 
