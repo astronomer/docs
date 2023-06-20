@@ -26,7 +26,7 @@ This tutorial takes about 15 minutes. If you're new to Airflow and want a more i
 ## Prerequisites
 
 - An Astro account. To start an Astro trial, see [Start a trial](trial.md). 
-- [The Astro CLI](cli/install-cli.md). 
+- The latest version of the [the Astro CLI](cli/overview.md). 
 
 Astronomer recommends installing [Docker Desktop](https://docs.docker.com/get-docker/) for testing and running Airflow on your local computer, but it's not required for this tutorial. If you just want to run Airflow on your local machine, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md).
 
@@ -37,7 +37,6 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 1. Log in to the [Cloud UI](https://cloud.astronomer.io)
 
 2. On the **Deployments** page, click **+ Deployment**.
-
 
 3. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
 
@@ -97,22 +96,12 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
 1. Run the following command to authenticate to Astro on the CLI:
 
     ```sh
-    astro login
+    astro login astronomer.io
     ```
 
-    After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. The Cloud UI then automatically authenticates you to the CLI.
+    After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. The Cloud UI then automatically authenticates you to the CLI. The next time you log in, you can run `astro login` without specifying a domain.
 
-2. Go to `https://cloud.astronomer.io`, and select one of the available options to access the Cloud UI.
-
-3. Run the following command to enable DAG-only code deploys on your Deployment.
-
-    ```sh
-    astro deployment update --dag-deploy enable
-    ```
-
-4. When the prompt appears in the Astro CLI, select the Deployment where you want to deploy your DAGs. 
-
-5. Run the following command to deploy your DAGs to Astro: 
+2. Run the following command to deploy your DAGs to Astro: 
    
     ```sh
     astro deploy --dags

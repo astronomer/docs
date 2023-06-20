@@ -46,11 +46,13 @@ module.exports = {
             "cloud-ide/quickstart",
             "cloud-ide/run-python",
             "cloud-ide/run-sql",
+            "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
+            "cloud-ide/custom-cell-reference"
           ],
         },
         "upgrade-runtime",
@@ -102,6 +104,11 @@ module.exports = {
         {
           type: "category",
           label: "Connect to external resources",
+          link: {
+            type: 'generated-index',
+            title: 'Connect Astro',
+            description: 'Connect Astro to your existing cloud resources.'
+          },
           items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
         },       
       ],
@@ -139,6 +146,7 @@ module.exports = {
                 "manage-domains"],
             },
             "organization-api-tokens",
+            "audit-logs",
           ],
         },
         {
@@ -165,7 +173,7 @@ module.exports = {
               link: {
                 type: 'generated-index',
                 title: 'Install Astro Hybrid',
-                description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
+                description: 'Install Astro Hybrid on your cloud.'
               },
               items: ["install-aws-hybrid", "install-azure-hybrid", "install-gcp-hybrid"],
             },
@@ -187,6 +195,7 @@ module.exports = {
             },
           ],
         },
+        "manage-billing",
       ],
     },
     {
@@ -217,6 +226,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",

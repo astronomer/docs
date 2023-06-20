@@ -4,6 +4,10 @@ title: 'Astro release notes'
 id: release-notes
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
+
+
 <head>
   <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
@@ -17,9 +21,69 @@ id: release-notes
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 8.2 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 8.5 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.15.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.16.1 ([Release notes](cli/release-notes.md))
+
+<!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
+
+## June 13, 2023
+
+### Manage billing and track usage for Astro Hosted
+
+Use the new **Billing** page in the Cloud UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](manage-billing.md) for more details.
+
+### New cell type for using Airflow operators in the Astro Cloud IDE
+
+You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators).
+
+Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators#create-custom-operator-cells).
+
+### IMDSv2 is now enforced on AWS clusters
+
+:::warning Breaking change
+
+If your DAGs assume IAM roles to directly access metadata on your cluster using IMDSv1, this change can result in DAG run failures. Upgrade your DAGs to use IMDSv2 for all cluster metadata requests.
+
+See [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) for more information.
+
+:::
+
+Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources on your clusters are now session-based and muse include a token in the request body.
+
+### Additional improvements
+
+- Trial Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#deploy-dags-only) enabled by default.
+- The Cloud UI now shows your **Organization Short Name** and **Astro SAML Connection Name** in the Cloud UI.
+- You can now view mapped tasks from the **DAGs** page in the Cloud UI.
+
+### Bug fixes
+
+- Fixed an issue where worker node pools in Hosted dedicated clusters on Azure were not being updated correctly.
+- Fixed an issue the Cloud UI would reset a Deployment's **Min Worker Count** from 0 to 1 after you edited the Deployment in any way.
+
+## June 6, 2023
+
+### Track user actions and ensure compliance with audit logs
+
+You can now export audit logs from the Cloud UI to view all actions taken in your Organization over a given time period. See [Export audit logs](audit-logs.md) for setup steps, and see [Audit log fields](audit-logs-reference.md) for a reference of all available audit log fields.
+
+### Additional improvements 
+
+- You can now configure Hybrid GCP clusters with additional Memory Optimized and Compute Optimized Cloud SQL instance types. See [Supported Cloud SQL instance types](resource-reference-gcp-hybrid.md#supported-cloud-sql-instance-types).
+
+## May 30, 2023
+
+### Manage permissions for groups of users with Teams
+
+Configure Teams from the Cloud UI to manage the permissions for many users across Workspaces from a single page. _Teams_ are a group of users in an Organization that you grant the same Workspace permissions, without needing to define them individually. 
+
+See [Make a Team](https://docs.astronomer.io/astro/add-user#make-a-team) for setup steps.
+
+### Bug fixes
+
+- In Astro Hosted, an irrelevant **AWS external ID** info page has been removed from the Cloud UI.
+- Fixed an issue where DAG-only deploys could be unreliable due to the deploy process not requesting enough resources in the cluster. 
 
 ## May 23, 2023
 
@@ -108,7 +172,6 @@ You can now create preview Deployments from feature branches in your Git reposit
 - Delete the preview Deployment when you delete the branch.
 - Deploy your changes to your base Deployment after you merge your changes into your main branch.
 
-
 ### Additional improvements
 
 - Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Deployment API key or Workspace token.
@@ -122,6 +185,8 @@ You can now create preview Deployments from feature branches in your Git reposit
 ## March 28, 2023
 
 ### New GCP node instance types available
+
+<HybridBadge/>
 
 You can now use the following node instance types for worker nodes in GCP clusters:
 

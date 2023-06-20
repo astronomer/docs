@@ -1,23 +1,20 @@
-name: Report an issue in documentation
-description: Any request related to existing documentation that has an issue
-assignees:
-  - jwitz
-labels: ["error/wrong-info", "error/misleading"]
+name: Request a Docs Change
+description: Use this template to request any type of change to Astronomer docs.
 body:
   - type: markdown
     attributes:
       value: |
-        If you want to submit a quick fix yourself, you don't need to write an issue. See [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
+        If you want to contribute a fix yourself, you don't need to write an issue. See [Submit a Docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
   - type: dropdown
     id: issuetype
     attributes:
       label: Issue Type
       multiple: true
       options:
-        - Inaccurate content
-        - Missing or misleading content
-        - Typo
-        - Bug/ broken link
+        - Inaccurate, misleading, or out-of-date information
+        - Missing content for an existing feature
+        - Typo or broken link
+        - Issue with website functionality
     validations:
       required: true
   - type: textarea
@@ -28,17 +25,26 @@ body:
     validations:
       required: true
   - type: textarea
-    id: description
+    id: issue
     attributes:
-      label: Describe the Issue and Proposed Fix
-      description: Describe the issue and what you think needs to be added, updated, or otherwise changed. Be as descriptive as possible.
-      placeholder:  
+      label: The Issue or Context
+      description: Describe what is wrong or missing in the documentation. Be as descriptive as possible.
     validations:
       required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Fix or Proposed Change
+      description: Describe what needs to be added, updated, or otherwise changed.
+    validations:
+      required: false
   - type: textarea
     id: notes
     attributes:
       label: Additional Notes
       description: Add any related Slack threads, Zendesk tickets, or other information that the docs team can use to resolve the issue.
-
-  
+  - type: input
+    id: reviewers
+    attributes:
+      label: Required Reviewers
+      description: Once the Docs team addresses this, who needs to review our changes?

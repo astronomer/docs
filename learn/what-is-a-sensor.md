@@ -23,7 +23,7 @@ In this guide, you'll learn how sensors are used in Airflow, best practices for 
 
 :::info
 
-Sensors are one of several options to schedule your DAGs in an event-based manner. Learn more about sensors and how they compare to other Airflow features in [Video: Implementing Event-Based DAGs with Airflow](https://airflowsummit.org/sessions/2022/implementing-event-based-dags-with-airflow/). 
+For a video course on Airflow sensors, check out the [Astronomer Academy](https://academy.astronomer.io/sensors-course).
 
 :::
 

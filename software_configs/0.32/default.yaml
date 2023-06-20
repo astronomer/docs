@@ -14,6 +14,7 @@ cors:
 # Prisma configuration.
 prisma:
   endpoint: "http://localhost:4466/houston"
+  subscriptionEndpoint: "ws://houston.local.astronomer.io:8871"
   secret: ~
   debug: false
   trgmSimilarityIndex: 0.1
@@ -183,6 +184,7 @@ ui:
       configureDeployment:  https://docs.astronomer.io/software/configure-deployment/
       ciCd:  https://docs.astronomer.io/software/ci-cd/
       manageWorkspaces:  https://docs.astronomer.io/software/manage-workspaces/
+      migrateToRuntime:  https://docs.astronomer.io/software/migrate-to-runtime/
     statusPage: ~
 
 # Elasticsearch configuration for Houston to pull logs.
@@ -410,6 +412,7 @@ roles:
       ? workspace.serviceAccounts.create
       ? workspace.serviceAccounts.update
       ? workspace.serviceAccounts.delete
+      ? workspace.adminCount.get
 
   WORKSPACE_ADMIN:
     name: Workspace Admin
@@ -438,6 +441,7 @@ roles:
       ? deployment.users.get
       ? deployment.teams.get
       ? deployment.taskUsage.get
+      ? deployment.status.get
 
   DEPLOYMENT_EDITOR:
     name: Deployment Editor
@@ -452,6 +456,7 @@ roles:
       ? deployment.serviceAccounts.delete
       ? deployment.variables.update
       ? deployment.config.upsert
+      ? deployment.adminCount.get
 
   DEPLOYMENT_ADMIN:
     name: Deployment Admin
@@ -481,6 +486,9 @@ roles:
       ? system.workspace.get
       ? system.airflow.viewer
       ? system.taskUsage.get
+      ? system.deployments.logs
+      ? system.deployments.metrics
+      ? system.deployments.status
 
   SYSTEM_EDITOR:
     name: System Editor
@@ -490,6 +498,7 @@ roles:
       ? system.serviceAccounts.update
       ? system.airflow.user
       ? system.registryBaseImages.push
+      ? system.adminCount.get
 
   SYSTEM_ADMIN:
     name: System Admin
@@ -500,8 +509,6 @@ roles:
       ? system.deployments.upsert
       ? system.deployments.update
       ? system.deployments.delete
-      ? system.deployments.logs
-      ? system.deployments.metrics
       ? system.invites.get
       ? system.serviceAccounts.create
       ? system.serviceAccounts.update
@@ -535,9 +542,18 @@ roles:
 #
 deployments:
   # This is a multiplying factor as a percentage/100 of the limits.
-  # Constraints - [0 < overProvisioningFactor < 1]
+  # Constraints - [0 < overProvisioningFactor <= 1]
   overProvisioningFactorMem: 1
   overProvisioningFactorCPU: 1
+
+  overProvisioningComponents:
+    - scheduler
+    - webserver
+    - workers
+    - triggerer
+    - flower
+    - pgbouncer
+    - statsd
 
   runtimeEnvOverideSemverCheck: '>=4.2.8 <5.0.0 || >=5.0.11 <6.0.0 || >= 6.0.5'
   subdomain: 'deployments'
@@ -664,8 +680,14 @@ deployments:
     name: sidecar-log-consumer
     image: quay.io/astronomer/ap-vector:0.23.0
     customConfig: false
-    resources: {}
     extraEnv: []
+    resources:
+      limits:
+        memory: 384Mi
+        cpu: 100m
+      requests:
+        memory: 384Mi
+        cpu: 100m
 
   # This is the database connection that we use to connect
   # and create other databases/schemas/users for each
@@ -805,10 +827,27 @@ deployments:
         # Adds a pgbouncer service between the airflow pods (scheduler / webserver/ workers),
         # and the backend database.
         enabled: true
+        metricsExporterSidecar:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 384Mi
+            limits:
+              cpu: 100m
+              memory: 384Mi
       # Allow scheduler/workers to launch pods by default. This is required for
       # the KubernetesPodOperator and KubernetesExecutor. This is what signals to apply the
       # required RoleBindings.
       allowPodLaunching: true
+      scheduler:
+        logGroomerSidecar:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 384Mi
+            limits:
+              cpu: 100m
+              memory: 384Mi
     ingress:
       # Attach an airflow deployment to the system level ingress controller.
       enabled: true
