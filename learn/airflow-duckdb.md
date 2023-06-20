@@ -18,11 +18,11 @@ import duckdb_tutorial_dag_2 from '!!raw-loader!../code-samples/dags/airflow-duc
 
 Airflow can interact with DuckDB in three key ways:
 
-- Use the duckdb Python package directly in [@task decorated tasks](airflow-decorators.md): This method is useful if you want to do ad-hoc analysis in-memory or combine information stored in various DuckDB files.
-- Connect to DuckDB via the [DuckDB Airflow provider](https://registry.astronomer.io/providers/airflow-provider-duckdb/versions/0.1.0): The DuckDB Airflow provider is ideal if you connect to the same DuckDB database from many tasks in your Airflow environment and want to standardize this connection in a central place. You can also use the DuckDBHook to create custom operators to modularize your DuckDB interactions from within Airflow.
+- Use the DuckDB Python package directly in [@task decorated tasks](airflow-decorators.md). This method is useful if you want to do ad-hoc analysis in-memory or combine information stored in various DuckDB files.
+- Connect to DuckDB via the [DuckDB Airflow provider](https://registry.astronomer.io/providers/airflow-provider-duckdb/versions/0.1.0). The DuckDB Airflow provider is ideal if you access the same DuckDB database from many tasks in your Airflow environment and want to standardize this connection in a central place. You can also use the DuckDBHook to create custom operators to modularize your DuckDB interactions from within Airflow.
 - Use DuckDB with the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html). The Astro Python SDK is an open-source package created by Astronomer to make interactions with relational data simple and tool-agnostic. The Astro Python SDK is the ideal tool if you want to easily connect to several database tools without changing any underlying code.
 
-In this tutorial we will cover the first two ways. To learn more about how to connect to DuckDB (and other data warehouses) with the Astro Python SDK, see the [Write a DAG with the Astro Python SDK](astro-python-sdk.md) tutorial.
+In this tutorial we will cover the first two ways. To learn more about how to connect to DuckDB (and other data warehouses) with the Astro Python SDK, see [Write a DAG with the Astro Python SDK](astro-python-sdk.md).
 
 :::info
 
@@ -64,15 +64,17 @@ To use DuckDB with Airflow, install the [DuckDB Airflow provider](https://github
     airflow-provider-duckdb==0.1.0
     ```
 
-3. If you are connecting to the DuckDB cloud service, MotherDuck, you need to use the amd64 version of Astro Runtime to prevent package conflicts. Use the following import statement in your Dockerfile. If you are only using DuckDB locally, you do not need to modify your Dockerfile.
+3. If you are connecting to MotherDuck, the DuckDB cloud service, you need to use the amd64 version of Astro Runtime to prevent package conflicts. In this case, replace the `FROM` statement in your Dockerfile with the following line:
 
     ```Dockerfile
     FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:8.4.0
     ```
 
-## Step 2: Create a DAG using the duckdb Python package
+    If you are only using DuckDB locally, you do not need to modify your Dockerfile.
 
-You can use the [duckdb Python package](https://pypi.org/project/duckdb/) directly in your DAG by utilizing it within your @task decorated tasks. This way of using DuckDB in Airflow does not require you to configure an Airflow connection.
+## Step 2: Create a DAG using the DuckDB Python package
+
+You can use the [duckdb Python package](https://pypi.org/project/duckdb/) directly in your `@task` decorated tasks. This method does not require you to configure an Airflow connection.
 
 1. Start Airflow by running `astro dev start`.
 
@@ -82,20 +84,20 @@ You can use the [duckdb Python package](https://pypi.org/project/duckdb/) direct
 
     <CodeBlock language="python">{duckdb_tutorial_dag_1}</CodeBlock>
 
-    This simple DAG shows how you can pass a Pandas dataframe from an upstream task into a task utilizing the duckdb Python package to create and query a table in DuckDB. You can control the database you connect to by changing the string in the `duckdb.connect()` function:
+    This simple DAG passes a Pandas dataframe from an upstream task to a downstream task. The downstream task uses the duckdb Python package to create and query a table in DuckDB. You can control the database you connect to by changing the string in the `duckdb.connect()` function:
 
-    - Use an empty string to utilize an in-memory database: `duckdb.connect("")`.
-    - Specify a local file path to create/connect to a local DuckDB database in which your table will persist: `duckdb.connect("include/my_garden_ducks.db")`
-    - Specify a MotherDuck connection string without a database to connect to your default MotherDuck database: `duckdb.connect(f"motherduck:?token={YOUR_MOTHERDUCK_TOKEN}")`
-    - Specify a MotherDuck connection string with a database to connect to a specific MotherDuck database: `duckdb.connect(f"motherduck:MY_DB?token={YOUR_MOTHERDUCK_TOKEN}")`
+    - Use an empty string to utilize an in-memory database (For example, `duckdb.connect("")`).
+    - Specify a local file path to create/connect to a local DuckDB database in which your table will persist (For example, `duckdb.connect("include/my_garden_ducks.db")`)
+    - Specify a MotherDuck connection string without a database to connect to your default MotherDuck database (For example, `duckdb.connect(f"motherduck:?token={YOUR_MOTHERDUCK_TOKEN}")`).
+    - Specify a MotherDuck connection string with a database to connect to a specific MotherDuck database (For example, `duckdb.connect(f"motherduck:MY_DB?token={YOUR_MOTHERDUCK_TOKEN}")`)
 
-4. Run the DAG manually by clicking the play button and view the DAG in the grid view. In the logs of the `create_duckdb_table_from_pandas_df` task you will find a quack for each duck in your garden.
+4. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button, then click the DAG name to view the DAG in the **Grid** view. In the logs for `create_duckdb_table_from_pandas_df`, you will find a quack for each duck in your garden.
 
     ![DuckDB tutorial DAG 1 Grid view](/img/tutorials/airflow-duckdb_tutorial_dag_1_grid_view.png)
 
 ## Step 3: Create a DuckDB Airflow connection
 
-Next, you will create another DAG that uses the DuckDB Airflow provider. To use the provider, you will need to define an Airflow connection to your DuckDB database.
+Next, you will create a DAG that instead uses the DuckDB Airflow provider. To use the provider, you will need to define an Airflow connection to your DuckDB database.
 
 1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
 
@@ -109,7 +111,7 @@ Next, you will create another DAG that uses the DuckDB Airflow provider. To use 
 
 :::info
 
-If you are connecting to MotherDuck you will need to specify your connection in the **File (leave blank for in-memory database)** field as `motherduck:<your database name>?token=<your token>`.
+If you are connecting to MotherDuck, you will need to specify your connection in the **File (leave blank for in-memory database)** field as `motherduck:<your database name>?token=<your token>`.
 
 :::
 
