@@ -109,7 +109,6 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
    
     When the prompt appears in the Astro CLI, select the Deployment where you want to deploy your DAGs. 
 
-
 3. Run the following command to deploy your DAGs to Astro: 
    
     ```sh
