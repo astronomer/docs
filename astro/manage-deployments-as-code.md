@@ -88,12 +88,12 @@ deployment:
           max_worker_count: 10
           min_worker_count: 1
           worker_concurrency: 16
-          astro_machine: A5
+          worker_type: A5
         - name: machine-learning-tasks
           max_worker_count: 4
           min_worker_count: 0
           worker_concurrency: 10
-          astro_machine: A10
+          worker_type: A10
     alert_emails:
         - paola@cosmicenergy.io
         - viraj@cosmicenergy.io
@@ -117,7 +117,6 @@ deployment:
 Astro Hybrid template files have the following differences compared to Astro Hosted:
 
 - `scheduler_au` replaces `scheduler_size`.
-- `worker_type` replaces `astro_machine`.
 - `deployment_type`, `cloud_provider`, and `region` don't exist.
 - `is_high_availability` doesn't exist.
 
