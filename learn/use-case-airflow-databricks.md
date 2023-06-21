@@ -1,12 +1,12 @@
 ---
-title: "ELT pipelines with Airflow, Databricks, the Astro Databricks provider, and the Astro Python SDK"
+title: "ELT pipelines with Airflow, the Astro Databricks provider, and the Astro Python SDK"
 description: "Use Airflow, Databricks and the Astro Python SDK in an ELT pipeline to analyze energy data."
 id: use-case-airflow-databricks
 sidebar_label: "ELT with Airflow + Databricks + Astro SDK"
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
 
-[Databricks](https://databricks.com/) is a popular unified data and analytics platform built around fully managed Apache Spark clusters. With the [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) provider package you can create a Databricks Workflow from existing Databricks notebooks as a task group in your Airflow DAG, allowing you to use Airflow's orchestration capabilities in combination with Databricks' cheapest compute. See also [Why use Airflow with Databricks](airflow-databricks.md#why-use-airflow-with-databricks). The open-source [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) greatly simplifies common ELT tasks like loading data and allows users to easily use Pandas on data stored in a data warehouse. 
+[Databricks](https://databricks.com/) is a popular unified data and analytics platform built around fully managed Apache Spark clusters. With the [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) package you can create a Databricks Workflow from existing Databricks notebooks as a task group in your Airflow DAG, allowing you to use Airflow's orchestration capabilities in combination with Databricks' cheapest compute. The open-source [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) greatly simplifies common ELT tasks like loading data and allows users to easily use Pandas on data stored in a data warehouse. 
 
 This example shows a DAG that extracts data from three local CSV files containing the share of solar, hydro and wind electricity in different countries over several years, runs a transformation on each file and loads the results to S3, using [dynamic task mapping](dynamic-tasks.md) over operators from the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html). Transformation steps in Databricks are fully integrated into the DAG as a task group via the Astro Databricks provider and filter and aggregate the data to get a combined measure of solar, hydro and wind electricity share for a user-selected country. Lastly, a task created with the `@aql.dataframe` decorator from the Astro Python SDK leverages [seaborn](https://seaborn.pydata.org/) and [matplotlib](https://matplotlib.org/) to create a line chart of the aggregated data.
 
@@ -28,12 +28,12 @@ Before trying this example, make sure you have:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 - Access to a Databricks workspace. See [Databricks' documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
-- Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This tutorial uses an [AWS S3](https://aws.amazon.com/s3/) bucket.
+- Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This example uses an [AWS S3](https://aws.amazon.com/s3/) bucket.
 - Access to a [relational database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html). This tutorial uses [PostgreSQL](https://www.postgresql.org/).
 
 ## Clone the project
 
-Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/learn-airflow-databricks-tutorial). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory and replace the connection details with your own. You will also need to replace the `DATABRICKS_LOGIN_EMAIL`, `S3_BUCKET` and `AWS_REGION` variables with your own values at the start of the DAG code. Change the `COUNTRY` to analyze a different country (for available countries, refer to the source data in the `include` folder).
+Clone the example project from this [Astronomer GitHub repo](https://github.com/astronomer/learn-airflow-databricks-tutorial). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory and replace the connection details with your own. You will also need to replace the `DATABRICKS_LOGIN_EMAIL`, `S3_BUCKET` and `AWS_REGION` variables with your own values at the start of the DAG code. Change the `COUNTRY` to analyze a different country (for available countries, refer to the source data in the `include` folder).
 
 ## Run the project
 
@@ -57,7 +57,7 @@ The subset of data used in this example can be found in the include folder of th
 
 This project consists of one DAG, [renewable_analysis_dag](https://github.com/astronomer/learn-airflow-databricks-tutorial/blob/main/dags/renewable_analysis_dag.py), which performs an ELT process using the Astro Python SDK and a task group created through the Astro Databricks provider that orchestrates two Databricks notebooks in a Databricks Workflow.
 
-First, all three separate CSV files, each containing the energy percentages for a list of countries for solar, hydro and wind power respectively are loaded into a new temporary table in the data warehouse using the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html). The operator uses [dynamic task mapping](dynamic-tasks.md) to create a mapped task instance for each file provided to the `input_file` parameter of the `.expand` method, which are then executed in parallel.
+First, three separate CSV files, each containing the energy percentages by country for solar, hydro, and wind power respectively, are loaded into a new temporary table in the data warehouse using the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html). The operator uses [dynamic task mapping](dynamic-tasks.md) to create a mapped task instance for each file provided to the `input_file` parameter of the `.expand` method, which are then executed in parallel.
 
 ```python
 in_tables = aql.LoadFileOperator.partial(
@@ -108,7 +108,7 @@ save_files_to_S3 = aql.ExportToFileOperator.partial(
 ```
 
 Using the Astro Python SDK in the first three steps allows you to easily switch between data warehouses and object storage solutions, simply by changing the connection ID.
-After these preparatory steps follows a task group created by the [Astro Databricks provider DatabricksWorkflowTaskGroup](https://astronomer.github.io/astro-provider-databricks/#databricks-workflow-taskgroup):
+After these extract steps are completed, a task group created by the [Astro Databricks provider DatabricksWorkflowTaskGroup](https://astronomer.github.io/astro-provider-databricks/#databricks-workflow-taskgroup) completes the transformations:
 
 ```python
 task_group = DatabricksWorkflowTaskGroup(
@@ -137,7 +137,7 @@ with task_group:
 
 This task group contains three tasks: 
 
-- `launch`: This task is automatically created byt the task group and launches a job cluster with the specifications provided in the `job_cluster_spec`.
+- `launch`: This task is automatically created by the task group and launches a job cluster with the specifications provided in the `job_cluster_spec`.
 - `join_data`: This task executes the first notebook in the Databricks Workflow, which joins the data from the three CSV files created in the object storage into a single CSV file. View the full notebook code [here](https://github.com/astronomer/learn-airflow-databricks-tutorial/blob/main/databricks_notebook_code/join_data_notebook_code.py), note that if you are using an object storage other than S3 you will need to make changes to the code enclosed in `# --------- AWS S3 specific --------- #` comments.
 - `transform_data`: This task executes the second notebook in the Databricks Workflow, which fetches the CSV created by the `join_data` task, creates a new column `SHW%` by summing the % points for solar, hydro and wind energy for each year in the specified country and saves the result as a CSV in the object storage. View the full notebook code [here](https://github.com/astronomer/learn-airflow-databricks-tutorial/blob/main/databricks_notebook_code/transform_data_notebook_code.py) (adjust for other object storage solutions as described above).
 
@@ -178,6 +178,6 @@ Finally, the [Astro Python SDK `aql.cleanup()`](https://astro-sdk-python.readthe
 
 ## See also
 
-- Tutorial: [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-databricks.md).
+- Tutorial: [Orchestrate Databricks jobs with Airflow](airflow-databricks.md).
 - Documentation: [Astro Databricks provider](https://astronomer.github.io/astro-provider-databricks/).
-- Webinar: [The easiest way to orchestrate your dbt workflows from Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
+- Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
