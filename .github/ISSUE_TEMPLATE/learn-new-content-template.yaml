@@ -1,0 +1,59 @@
+name: Request new Apache Airflow content in Learn
+description: Request new or updated [Learn](https://docs.astronomer.io/learn) content on an Apache Airflow feature or use case.
+labels: ["kind/enhancement", "area/learn"]
+assignees:
+  - kentdanas
+  - TJaniF
+body:
+  - type: dropdown
+    id: content_type
+    attributes:
+      label: Content type
+      multiple: true
+      options:
+        - Get started
+        - Airflow concepts
+        - Airflow tutorials
+        - Integrations
+        - Examples
+        - I am not sure where this best fits
+    validations:
+      required: true
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Request type
+      multiple: true
+      options:
+        - Additional information for an existing guide or tutorial
+        - New content for an undocumented or under-documented Airflow feature
+        - New guide for a specific use case (for example, how to integrate Airflow with a specific 3rd party tool)
+    validations:
+      required: true
+  - type: textarea
+    id: request_description
+    attributes:
+      label: Describe your Learn request.
+      description: If you want Astronomer to add information to an existing page, please provide the link to it here.
+    validations:
+      required: true
+  - type: input
+    id: due_date
+    attributes:
+      label: Desired publish date
+      description: Is there a particular release, relevant event, etc. that this should be coordinated with?
+  - type: input
+    id: airflow_version
+    attributes:
+      label: Airflow Version
+      description: Airflow version in which the feature/behavior was added. Please provide for features which are not yet released.
+  - type: input
+    id: sme
+    attributes:
+      label: Reviewer
+      description: Are you the right person to review a draft for technical accuracy? If not, who is?
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: Additional information
+      description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, ZenDesk tickets, and Slack messages are all welcome and encouraged!

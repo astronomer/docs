@@ -51,6 +51,7 @@ The following table lists all available worker types on Astro Deployments.
 | A5          | 1    | 2G     |
 | A10         | 2    | 4G     |
 | A20         | 4    | 8G     |
+| A40         | 8    | 16G     |
 
 All worker types additionally have 5 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
 
@@ -70,7 +71,7 @@ Currently, standard clusters are available on the following clouds and regions:
 
 A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Cloud UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
-Currently, standard clusters are available on the following clouds and regions:
+Currently, dedicated clusters are available on the following clouds and regions:
 
 <Tabs
     defaultValue="aws"
@@ -82,14 +83,14 @@ Currently, standard clusters are available on the following clouds and regions:
     ]}>
 <TabItem value="aws">
 
-| Code            | Region         |
-| --------------- | -------------- |
-| `australiaeast` | Australia East |
-| `eastus2`       | East US 2      |
-| `japaneast`     | Japan East     |
-| `northeurope`   | North Europe   |
-| `westeurope`    | West Europe    |
-| `westus2`       | West US 2      |
+| Code             | Region                |
+| ---------------- | --------------------- |
+| `ap-northeast-1` | Asia Pacific (Tokyo)  |
+| `ap-southeast-2` | Asia Pacific (Sydney) |
+| `eu-central-1`   | Europe (Frankfurt)    |
+| `eu-west-1`      | Europe (Ireland)      |
+| `us-east-1`      | US East (N. Virginia) |
+| `us-west-2`      | US West (Oregon)      |
 
 </TabItem>
 
@@ -108,14 +109,14 @@ Currently, standard clusters are available on the following clouds and regions:
 
 <TabItem value="gcp">
 
-| Code             | Region                |
-| ---------------- | --------------------- |
-| `ap-northeast-1` | Asia Pacific (Tokyo)  |
-| `ap-southeast-2` | Asia Pacific (Sydney) |
-| `eu-central-1`   | Europe (Frankfurt)    |
-| `eu-west-1`      | Europe (Ireland)      |
-| `us-east-1`      | US East (N. Virginia) |
-| `us-west-2`      | US West (Oregon)      |
+| Code                   | Region                  |
+| ---------------------- | ----------------------- |
+| `asia-northeast1`      | Tokyo, Asia             |
+| `australia-southeast1` | Sydney, Australia       |
+| `europe-west1`         | Belgium, Europe         |
+| `europe-west2`         | England, Europe         |
+| `us-central1`          | Iowa, North America     |
+| `us-east4`             | Virginia, North America |
 
 </TabItem>
 

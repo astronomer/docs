@@ -160,11 +160,32 @@ module.exports = {
         'airflow-great-expectations',
         'execute-notebooks',
         'marquez',
+        'airflow-mlflow',
         'airflow-mongodb',
         'airflow-snowflake',
         'soda-data-quality',
         'airflow-talend-integration',
         'airflow-weights-and-biases',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Examples',
+      link: {
+        type: 'generated-index',
+        title: 'Examples',
+        description: 'See examples of use cases and more with Apache Airflow.'
+      },
+      items: [
+          'pycharm-local-dev',
+          'vscode-local-dev',
+          {
+            type: 'category',
+            label: 'Use cases',
+            items: [
+              'use-case-airflow-dbt',
+            ],
+          },
       ],
     },
   ],

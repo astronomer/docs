@@ -11,6 +11,8 @@ id: kubernetespodoperator
 
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
 
+This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+
 ## Benefits
 
 You can use the KubernetesPodOperator to:
@@ -34,21 +36,6 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 
 - An [Astro project](develop-project.md#create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
-
-## Configure the KubernetesPodOperator in the Cloud UI
-
-While you still need to configure the KubernetesPodOperator in your DAG code to define your task environment, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
-
-1. In the Cloud UI, select a Deployment.
-2. Click **Resource quotas**.
-3. Configure the following values:
-
-    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
-    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
-
-Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
-
-The Cloud UI also shows the **Default CPU** and **Default Memory** for your _default Pod_. If you don't configure CPU or memory for a task in your DAG code, the task runs in the default Pod with these default resources. 
 
 ## Set up the KubernetesPodOperator
 
@@ -84,7 +71,7 @@ This is the minimum configuration required to run tasks with the KubernetesPodOp
 
 Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, which means that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
-To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `resources` argument of the KubernetesPodOperator. For example:
+To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `container_resources` argument of the KubernetesPodOperator. For example:
 
 ```python {20}
 from airflow.configuration import conf
@@ -105,7 +92,7 @@ KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    resources=compute_resources,
+    container_resources=compute_resources,
     task_id="<task-name>",
     get_logs=True,
 )
@@ -148,7 +135,6 @@ example_volume_test = KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    resources=compute_resources,
     task_id="<task-name>",
     get_logs=True,
     volume_mounts=volume_mounts,

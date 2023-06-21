@@ -1,48 +1,27 @@
+"""
+### Run notebooks in databricks as a Databricks Workflow using the Astro Databricks provider
+
+This DAG runs two Databricks notebooks as a Databricks workflow.
+"""
+
 from airflow.decorators import dag
 from pendulum import datetime
-from astro import sql as aql
-from astro.files import File
-from astro.sql.table import Table
 from astro_databricks.operators.notebook import DatabricksNotebookOperator
 from astro_databricks.operators.workflow import DatabricksWorkflowTaskGroup
-from airflow.providers.amazon.aws.operators.s3 import S3DeleteObjectsOperator
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
-# ----------------- #
-# Setting variables #
-# ----------------- #
 
-# ------- ENTER YOUR INFORMATION HERE ------ #
-COUNTRY = "Switzerland"
-DATABRICKS_LOGIN_EMAIL = "<your Databricks login email>"
-S3_BUCKET = "databricks-tutorial-bucket"
-OBJECT_STORAGE_CONN_ID = "aws_conn"
-# ------- \ENTER YOUR INFORMATION HERE ------ #
-
-DATABRICKS_NOTEBOOK_NAME_1 = "join_data"
-DATABRICKS_NOTEBOOK_NAME_2 = "transform_data"
-DATABRICKS_NOTEBOOK_PATH_JOIN_DATA = (
+DATABRICKS_LOGIN_EMAIL = "<your-databricks-login-email>"
+DATABRICKS_NOTEBOOK_NAME_1 = "notebook1"
+DATABRICKS_NOTEBOOK_NAME_2 = "notebook2"
+DATABRICKS_NOTEBOOK_PATH_1 = (
     f"/Users/{DATABRICKS_LOGIN_EMAIL}/{DATABRICKS_NOTEBOOK_NAME_1}"
 )
-DATABRICKS_NOTEBOOK_PATH_TRANSFORM_DATA = (
+DATABRICKS_NOTEBOOK_PATH_2 = (
     f"/Users/{DATABRICKS_LOGIN_EMAIL}/{DATABRICKS_NOTEBOOK_NAME_2}"
 )
-SOLAR_CSV_PATH = "include/share-electricity-solar.csv"
-HYDRO_CSV_PATH = "include/share-electricity-hydro.csv"
-WIND_CSV_PATH = "include/share-electricity-wind.csv"
-S3_FOLDER_COUNTRY_SUBSET = "country_subset"
-S3_FOLDER_TRANSFORMED_DATA = "transformed_data"
-DATABRICKS_RESULT_FILE_PATH = (
-    f"s3://{S3_BUCKET}/{S3_FOLDER_TRANSFORMED_DATA}/{COUNTRY}.csv"
-)
 DATABRICKS_JOB_CLUSTER_KEY = "tutorial-cluster"
-
 DATABRICKS_CONN_ID = "databricks_conn"
-DB_CONN_ID = "db_conn"
 
-S3_FOLDER_COUNTRY_SUBSET = "country_subset"
 
 job_cluster_spec = [
     {
@@ -67,74 +46,9 @@ job_cluster_spec = [
     }
 ]
 
-# -------------------------- #
-# Astro SDK transformations  #
-# -------------------------- #
 
-
-@aql.transform
-def select_countries(in_table, country):
-    return """SELECT * FROM {{ in_table }} WHERE "Entity" = {{ country }}"""
-
-
-@aql.dataframe
-def create_graph(df: pd.DataFrame):
-    sns.set_style("whitegrid")
-    sns.lineplot(x="Year", y="SHW%", data=df)
-    plt.title(f"% of Solar, Hydro and Wind in {COUNTRY}")
-    plt.xlabel("Year")
-    plt.ylabel("Combined SHW (in %)")
-    plt.savefig("include/shw.png")
-
-
-# --- #
-# DAG #
-# --- #
-
-
-@dag(start_date=datetime(2023, 1, 1), schedule=None, catchup=False)
-def renewable_analysis_dag():
-    # load files from the `include` directory into a temporary table each
-    # by using dynamic task mapping over the LoadFileOperator
-    in_tables = aql.LoadFileOperator.partial(
-        task_id="in_tables",
-        output_table=Table(
-            conn_id=DB_CONN_ID,
-        ),
-    ).expand(
-        input_file=[
-            File(path=SOLAR_CSV_PATH),
-            File(path=HYDRO_CSV_PATH),
-            File(path=WIND_CSV_PATH),
-        ]
-    )
-
-    # select the data from `COUNTRY` for each temporary table, store in
-    # another temporary table
-    country_tables = select_countries.partial(country=COUNTRY).expand(
-        in_table=in_tables.output
-    )
-
-    # export the information from each temporary table into a CSV file in S3
-    save_files_to_S3 = aql.ExportToFileOperator.partial(
-        task_id="save_files_to_S3",
-        if_exists="replace",
-    ).expand_kwargs(
-        country_tables.map(
-            lambda x: {
-                "input_data": x,
-                "output_file": File(
-                    path=f"s3://{S3_BUCKET}/{S3_FOLDER_COUNTRY_SUBSET}/{x.name}.csv",
-                    conn_id=OBJECT_STORAGE_CONN_ID,
-                ),
-            }
-        )
-    )
-
-    # ------------------------------------ #
-    # Astro Databricks provider task group #
-    # ------------------------------------ #
-
+@dag(start_date=datetime(2023, 6, 1), schedule=None, catchup=False)
+def my_simple_databricks_dag():
     task_group = DatabricksWorkflowTaskGroup(
         group_id="databricks_workflow",
         databricks_conn_id=DATABRICKS_CONN_ID,
@@ -143,47 +57,20 @@ def renewable_analysis_dag():
 
     with task_group:
         notebook_1 = DatabricksNotebookOperator(
-            task_id="join_data",
+            task_id="notebook1",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=DATABRICKS_NOTEBOOK_PATH_JOIN_DATA,
-            source=S3_BUCKET,
+            notebook_path=DATABRICKS_NOTEBOOK_PATH_1,
+            source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
         notebook_2 = DatabricksNotebookOperator(
-            task_id="transform_data",
+            task_id="notebook2",
             databricks_conn_id=DATABRICKS_CONN_ID,
-            notebook_path=DATABRICKS_NOTEBOOK_PATH_TRANSFORM_DATA,
-            source=S3_BUCKET,
+            notebook_path=DATABRICKS_NOTEBOOK_PATH_2,
+            source="WORKSPACE",
             job_cluster_key=DATABRICKS_JOB_CLUSTER_KEY,
         )
         notebook_1 >> notebook_2
 
-    # delete files from ingestion bucket in S3
-    delete_intake_files_S3 = S3DeleteObjectsOperator(
-        task_id="delete_intake_files_S3",
-        bucket=S3_BUCKET,
-        prefix=f"{S3_FOLDER_COUNTRY_SUBSET}/",
-        aws_conn_id=OBJECT_STORAGE_CONN_ID,
-    )
 
-    # load CSV file containing the result from the transformation in the
-    # Databricks job into the relational database
-    load_file_to_db = aql.load_file(
-        input_file=File(
-            path=DATABRICKS_RESULT_FILE_PATH, conn_id=OBJECT_STORAGE_CONN_ID
-        ),
-        output_table=Table(conn_id=DB_CONN_ID),
-    )
-
-    (
-        save_files_to_S3
-        >> task_group
-        >> [load_file_to_db, delete_intake_files_S3]
-        >> create_graph(load_file_to_db)  # use the Astro SDK to graph the results
-    )
-
-    # cleanup temporary tables in the relational database
-    aql.cleanup()
-
-
-renewable_analysis_dag()
+my_simple_databricks_dag()

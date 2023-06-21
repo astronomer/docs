@@ -46,11 +46,13 @@ module.exports = {
             "cloud-ide/quickstart",
             "cloud-ide/run-python",
             "cloud-ide/run-sql",
+            "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
+            "cloud-ide/custom-cell-reference"
           ],
         },
         "upgrade-runtime",
@@ -89,7 +91,12 @@ module.exports = {
       items: [
         "create-deployment",
         "configure-deployment-resources",
-        "executors",
+        "manage-dags",
+        {
+          type: "category",
+          label: "Configure executors",
+          items: ["executors-overview","celery-executor", "kubernetes-executor"],
+        }, 
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
@@ -112,7 +119,11 @@ module.exports = {
       label: "Observability",
       items: [
         "view-logs",
-        "deployment-metrics",
+        {
+          type: "category",
+          label: "View metrics",
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+        },
         {
           type: "category",
           label: "Data lineage",
@@ -189,6 +200,7 @@ module.exports = {
             },
           ],
         },
+        "manage-billing",
       ],
     },
     {

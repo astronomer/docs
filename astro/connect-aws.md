@@ -156,7 +156,7 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 :::
 
-To grant an Astro cluster access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
+To grant an Astro Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
 
 1. In the Cloud UI, select your Deployment and then click **Details**. Copy the `arn` given under **Workload Identity**.
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
@@ -173,7 +173,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
                 "Effect": "Allow",
                 "Principal": {
                     "AWS": [
-                        "arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"
+                        "<workload-identity-role>"
                     ]
                 },
                 "Action": "sts:AssumeRole"
@@ -181,12 +181,11 @@ To grant an Astro cluster access to a service that is running in an AWS account 
         ]
     }
     ```
-    
-    The Astro cluster includes the `AirflowLogsS3-<clusterid>` role. When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, use `"arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"` as the value for `aws_arn`.
+    When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, specify the ARN of the role that you would like to assume (the role created in step 2) as the value for `aws_arn`.
 
 7. Click **Update policy**.
 8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
-9. Optional. Repeat these steps for each Astro cluster that requires access to external data services on AWS.
+9. Optional. Repeat these steps for each Astro Deployment that requires access to external data services on AWS.
 
 </TabItem>
 

@@ -15,17 +15,19 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Azure DevOps can access.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - Access to [Azure DevOps](https://dev.azure.com/).
 
 ## Single branch implementation
 
 Complete the following setup in an Azure repository that hosts an Astro project:
 
-1. Set the following environment variables as [DevOps pipeline variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
+1. Set the following environment variable as a [DevOps pipeline variable](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
 
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: The ID for your Deployment.
+
+    For production Deployments, ensure that you set the value for your API token as a [secret](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch#secret-variables).
 
 2. Create a new Azure DevOps pipeline named `astro-devops-cicd.yaml` at the root of the repository that includes the following configuration:
 
@@ -44,9 +46,9 @@ Complete the following setup in an Azure repository that hosts an Astro project:
         steps:
         - script: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy ${ASTRO_DEPLOYMENT_ID} -f
           env:
-            ASTRONOMER_KEY_ID: $(ASTRONOMER_KEY_ID)
-            ASTRONOMER_KEY_SECRET: $(ASTRONOMER_KEY_SECRET)
+            ASTRO_API_TOKEN_: $(ASTRO_API_TOKEN)
+            ASTRO_DEPLOYMENT_ID: $(ASTRO_DEPLOYMENT_ID)
     ```
 
