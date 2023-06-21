@@ -8,7 +8,7 @@ description: Common Astro terms that will help you understand and implement Astr
 
 | Term | Definition |
 |------|-------------|
-| API Key | An API key is a unique key ID and secret pair that identifies a Deployment to automate deploys, manage Deployments as code, or use the Airflow REST API. API keys will be deprecatd soon in favor of API tokens. |
+| API Key | An API key is a unique key ID and secret pair that identifies a Deployment to automate deploys, manage Deployments as code, or use the Airflow REST API. API keys will eventually be deprecated in favor of API tokens. |
 | API Token | An API token is an alphanumeric token used to automate operations for a Workspace or Organization. See [Organization API token](organization-api-tokens.md) or [Workspace API token](workspace-api-tokens.md). |
 | Astro | SaaS application that provides fully-managed Apache Airflow service in cloud allowing customers to run multiple Airflow environments in one or more Kuberentes clusters. Each Airflow environment runs in its own isolated namespace with the ability to scale up or down based on the number of tasks queued or running. See [Astro Architecture](astro-architecture.md) |
 | Astro Alerts | Astro Alerts is a feature for creating Slack and Pagerduty alerts for Deployments running on Astro. Unlike Airflow alerts, Astro alerts are configured directly from the Cloud UI and require no changes to the DAG code. See [Alerts](alerts.md) |
