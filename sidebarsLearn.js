@@ -56,6 +56,7 @@ module.exports = {
             'what-is-a-sensor',
             'managing-dependencies',
             'airflow-ui',
+            'airflow-glossary'
           ],
         },
         {
