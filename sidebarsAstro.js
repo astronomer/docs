@@ -247,6 +247,14 @@ module.exports = {
             "secrets-management",
           ],
         },
+        {
+          type: "category",
+          label: "Glossary",
+          items: [
+            "astro-glossary",
+            "airflow-glossary"
+          ],
+        },
       ],
     },
   ],
