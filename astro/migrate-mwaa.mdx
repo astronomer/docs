@@ -12,6 +12,8 @@ import Deployments from "./migration-partials/deployments.mdx";
 import DirectorySetup from "./migration-partials/directory-setup.mdx";
 import FinalStep from "./migration-partials/final-step.mdx";
 import Deploy from "./migration-partials/deploy.mdx";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Migrate your Airflow environment from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://aws.amazon.com/managed-workflows-for-apache-airflow/resources/) to Astro.
 
@@ -87,7 +89,6 @@ To complete this setup from the command line:
 
 ## Step 6: Migrate project code and dependencies to your Astro project
 
-
 <Tabs
     defaultValue="manual"
     groupId= "step-6-migrate-project-code-and-dependencies-to-your-astro-project"
@@ -107,12 +108,12 @@ To complete this setup from the command line:
 
 2. Open your Astro project `requirements.txt` file and add all Python packages from your source Airflow environment's `requirements.txt` file. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket.
 
-  :::caution 
+:::caution 
 
-  To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake
+To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake
 ==3.3.0` to your Astro `requirements.txt` file.
 
-  :::
+:::
 
 3. Open your Astro project `dags` folder. Add your DAG files from either your source control platform or S3. 
 
@@ -145,12 +146,12 @@ To complete this setup from the command line:
     
     Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported.
 
-  :::caution 
+:::caution 
 
-  To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake
+To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake
 ==3.3.0` to your Astro `requirements.txt` file.
 
-  :::
+:::
 
 4. If you used the [`plugins` folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html) in your MWAA project, run the following command to directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
   

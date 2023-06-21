@@ -119,21 +119,29 @@ This option is available only on [Astro Hybrid](hybrid-overview.md).
 
     | Airflow Version | Runtime Version        |
     |-----------------|------------------------|
-    | 2.0             | 3.0.4 (Airflow 2.1.1)* |
+    | 2.0             | 3.0.4 (Airflow 2.1.1)¹ |
     | 2.2             | 4.2.9 (Airflow 2.2.5)  |
     | 2.4             | 6.3.0 (Airflow 2.4.3)  |
 
-    > *The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
+  :::info  
+
+  ¹The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
+
+  :::
 
     - `<scheduler-au>`: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
 
     | Environment size         | AUs | CPU / memory |
     | ------------------------ | --- | ------------------------ |
     | Small (Up to ~50 DAGs)   | 5   | .5vCPU, 1.88GiB          |
-    | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
-    | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
+    | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB²           |
+    | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB²         |
 
-    > *Some of the following recommendations for CPU and memory are smaller than what you have in the equivalent source environment. Although you might not need more CPU or memory than what's recommended, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+  :::info 
+
+  ² Some of the following recommendations for CPU and memory are smaller than what you have in the equivalent source environment. Although you might not need more CPU or memory than what's recommended, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+
+  :::
 
     - `<scheduler-count>`: Specify the same number of schedulers as in your source Airflow environment.
     - `<cluster-name>`: Specify name of the Astro cluster in which you want to create this Deployment.
