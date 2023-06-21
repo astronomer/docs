@@ -2,7 +2,7 @@
 sidebar_label: 'Airflow Terms'
 title: 'Airflow Terms'
 id: airflow-glossary
-description: Common Airflow terms that will help you understand and implement Airflow.
+description: Common Airflow terms that will help you understand Airflow concepts.
 ---
 
 
