@@ -37,7 +37,11 @@ Single Sign On (SSO) authorization allows users to log in using their company cr
 - [OneLogin](https://www.onelogin.com/)
 - [Ping Identity](https://www.pingidentity.com/en.html)
 
+:::info
+
 You can configure multiple SSO connections for a single Organization. This requires having a unique [verified domain](manage-domains.md) for each new SSO connection.
+
+:::
 
 ## Configure your SSO identity provider
 
