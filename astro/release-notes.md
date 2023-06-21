@@ -31,6 +31,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
+- You can now add a new Astro user to Workspaces before the user has accepted their invite.
 - You can now configure Deployments with the `A40` machine type, which has 8 vCPU and 16 GiB. See [Astro hosted resource reference](resource-reference-hosted.md).
 - The Cloud UI now shows your Team IDs in **Settings** > **Access Management** > **Teams**. Use Team IDs to add Teams to Workspaces using the Astro CLI.
 - A Team's **Updated At** and **Updated By** values are now updated when you change the Team's permissions in a Workspace or Organization.
