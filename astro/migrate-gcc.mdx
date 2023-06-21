@@ -92,7 +92,7 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-   The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to make certain resources available to your Airflow environment, like certificates or keys. For this migration, you only need to update your Runtime version. 
+   The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to include build-time arguments for your Airflow environment, such as environment variables or credentials. For this migration, you only need to modify the Dockerfile to update your Astro Runtime version. 
 
 2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your source Airflow environment. 
 
@@ -111,7 +111,7 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-    The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to make certain resources available to your Airflow environment, like certificates or keys. For this migration, you only need to update your Runtime version. 
+     The `Dockerfile` defines the environment where all your Airflow components run. You can modify it to include build-time arguments for your Airflow environment, such as environment variables or credentials. For this migration, you only need to modify the Dockerfile to update your Astro Runtime version. 
 
 2. Open your Astro project in your terminal. Run the following command to copy your PyPI packages from GCC to your `requirements.txt` file:
 
@@ -139,7 +139,7 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
 
 5. If you utilized the [`data` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#data) in Cloud Composer, run the following command to copy your `data` folder contents to your Astro project:
 
-    ```
+    ```sh
     gcloud composer environments storage data export --destination=include
     ```  
   
