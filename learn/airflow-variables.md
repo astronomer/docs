@@ -5,7 +5,7 @@ description: "Create and use Airflow Variables."
 id: airflow-variables
 ---
 
-An Airflow variable is a key-value pair that can be used to store information in your Airflow environment. They are commonly used to store instance level information that rarely changes, including secrets like for example an API key or the path to a configuration file. Airflow variables are [Fernet](https://github.com/fernet/spec/) encrypted and can also be retrieved from a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/secrets-backend/index.html).
+An Airflow variable is a key-value pair that can be used to store information in your Airflow environment. They are commonly used to store instance level information that rarely changes, including secrets like an API key or the path to a configuration file. Airflow variables are [Fernet](https://github.com/fernet/spec/) encrypted and can also be retrieved from a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/secrets-backend/index.html).
 
 There are two distinct types of Airflow variables, regular values and JSON serialized values. 
 
