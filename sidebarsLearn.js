@@ -156,6 +156,7 @@ module.exports = {
         'airflow-databricks',
         'airflow-dbt-cloud',
         'airflow-dbt',
+        'airflow-duckdb',
         'airflow-fivetran',
         'airflow-great-expectations',
         'execute-notebooks',
