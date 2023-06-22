@@ -59,7 +59,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC:
 2. Using the information provided by Astronomer support, [create a peering connection](https://cloud.google.com/vpc/docs/using-vpc-peering#creating_a_peering_configuration) from your target VPC to your Astro cluster VPC. For example, you can use the following gcloud CLI command to create the connection:
 
    ```sh
-   gcloud compute networks peerings create <choose-any-name> --network=cloud-composer-vpc-network  --peer-project=<your-cluster-project-id> --peer-network=<your-cluster-vpc-name>
+   gcloud compute networks peerings create <choose-any-name> --network=target-vpc-network  --peer-project=<your-cluster-project-id> --peer-network=<your-cluster-vpc-name>
    ```
 
 After both VPC peering connections have been created, the connection becomes active.
