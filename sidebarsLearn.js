@@ -55,8 +55,8 @@ module.exports = {
             'scheduling-in-airflow',
             'what-is-a-sensor',
             'managing-dependencies',
-            'airflow-ui',
-            'airflow-glossary'
+            'airflow-glossary',
+            'airflow-ui'
           ],
         },
         {
