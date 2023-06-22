@@ -26,7 +26,7 @@ For more information on each template or to configure your own, see [Template ov
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitHub repository.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - Access to [GitHub Actions](https://github.com/features/actions).
 
 Each CI/CD template implementation might have additional requirements.
@@ -47,10 +47,9 @@ Each CI/CD template implementation might have additional requirements.
 
 To automate code deploys to a single Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
 
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+1. Set the following as a [GitHub secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+   - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -63,16 +62,15 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
           - main
 
     env:
-      ## Sets Deployment API key credentials as environment variables
-      ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
-      ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+      ## Sets Deployment API credentials as environment variables
+      ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:
       build:
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
     ```
 
 </TabItem>
@@ -85,16 +83,14 @@ The following template can be used to create a multiple branch CI/CD pipeline us
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
-- You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
+- You have at least one API token with access to both of your Deployments.
 
 #### Implementation
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
-   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
-   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
-   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
+   - `PROD_ASTRO_API_TOKEN`: The value for your production Workspace or Organization API token.
+   - `DEV_ASTRO_API_TOKEN`: The value for your development Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -113,23 +109,25 @@ The following template can be used to create a multiple branch CI/CD pipeline us
       dev-push:
         if: github.ref == 'refs/heads/dev'
         env:
-          ## Sets DEV Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.DEV_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.DEV_ASTRONOMER_KEY_SECRET }}
+          ## Sets DEV Deployment API credential as an environment variable
+          ASTRO_API_TOKEN: ${{ secrets.DEV_ASTRO_API_TOKEN }}
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
+          with:
+            deployment-id: <dev-deployment-id>
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
-          ## Sets PROD Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.PROD_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.PROD_ASTRONOMER_KEY_SECRET }}
+          ## Sets Prod Deployment API credential as an environment variable
+          ASTRO_API_TOKEN: ${{ secrets.PROD_ASTRO_API_TOKEN }}
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
+          with:
+            deployment-id: <prod-deployment-id>
     ```
 
 </TabItem>
@@ -144,10 +142,9 @@ If your Astro project requires additional build-time arguments to build an image
 
 #### Implementation
 
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+1. Set the following as a [GitHub secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-  - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-  - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+  - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -163,8 +160,7 @@ If your Astro project requires additional build-time arguments to build an image
       build:
         runs-on: ubuntu-latest
         env:
-          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+          ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
         steps:
         - name: Check out the repo
           uses: actions/checkout@v3
@@ -184,7 +180,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
     ```
@@ -203,8 +199,7 @@ If your Astro project requires additional build-time arguments to build an image
       build:
         runs-on: ubuntu-latest
         env:
-          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+          ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
         steps:
         - name: Check out the repo
           uses: actions/checkout@v3
@@ -226,7 +221,7 @@ If your Astro project requires additional build-time arguments to build an image
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
     ```
@@ -260,8 +255,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+   - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -274,16 +268,15 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           - main
 
     env:
-      ## Sets Deployment API key credentials as environment variables
-      ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
-      ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+      ## Sets Deployment API token as an environment variable
+      ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:
       build:
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             dag-deploy-enabled: true
     ```
@@ -302,16 +295,14 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
-- You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
+- You have at least one API token that can access both of your Deployments.
 
 #### Implementation
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
-   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
-   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
-   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
+   - `PROD_ASTRO_API_TOKEN`: The value for your production Workspace or Organization API token.
+   - `DEV_ASTRO_API_TOKEN`: The value for your development Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -330,28 +321,28 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
       dev-push:
         if: github.ref == 'refs/heads/dev'
         env:
-          ## Sets DEV Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.DEV_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.DEV_ASTRONOMER_KEY_SECRET }}
+          ## Sets DEV Deployment API credential as an environment variable
+          ASTRO_API_TOKEN: ${{ secrets.DEV_ASTRO_API_TOKEN }}
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             dag-deploy-enabled: true
+            deployment-id: <main-deployment-id>
         
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
-          ## Sets PROD Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.PROD_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.PROD_ASTRONOMER_KEY_SECRET }}
+          ## Sets PROD Deployment API credential as an environment variable
+          ASTRO_API_TOKEN: ${{ secrets.PROD_ASTRO_API_TOKEN }}
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             dag-deploy-enabled: true
+            deployment-id: <prod-deployment-id>
     ```
 
 </TabItem>
@@ -366,10 +357,9 @@ If your Astro project requires additional build-time arguments to build an image
 
 #### Implementation
 
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+1. Set the following as a [GitHub secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-  - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-  - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+  - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -385,8 +375,7 @@ If your Astro project requires additional build-time arguments to build an image
       build:
         runs-on: ubuntu-latest
         env:
-          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+          ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
         steps:
         - name: Check out the repo
           uses: actions/checkout@v3
@@ -406,7 +395,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
             dag-deploy-enabled: true
@@ -450,7 +439,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
           - "**"
     
     env:
-      ## Set your Workspace API key token as a GitHub secret
+      ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
     
     jobs:
@@ -458,7 +447,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Create preview Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             action: create-deployment-preview
             deployment-id: <main-deployment-id>
@@ -475,7 +464,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
           - main
     
     env:
-      ## Set your Workspace API key token as a GitHub secret
+      ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
     
     jobs:
@@ -483,7 +472,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to preview
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             action: deploy-deployment-preview
             deployment-id: <main-deployment-id>
@@ -499,7 +488,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         branches:
           - "**"
     env:
-      ## Set your Workspace API key token as a GitHub secret
+      ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
     
     jobs:
@@ -507,7 +496,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Delete preview Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             action: delete-deployment-preview
             deployment-id: <main-deployment-id>
@@ -524,7 +513,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
           - main
     
     env:
-      ## Set your Workspace API key token as a GitHub secret
+      ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
     
     jobs:
@@ -532,7 +521,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to main Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.3
           with:
             deployment-id: <main-deployment-id>
     ```
@@ -557,8 +546,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+   - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -571,9 +559,8 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           - main
 
     env:
-      ## Sets Deployment API key credentials as environment variables
-      ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
-      ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+      ## Sets API token as an environment variable
+      ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:
       build:
@@ -597,16 +584,14 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
-- You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
+- You have at least one API token with access to both of your Deployments.
 
 #### Setup
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
-   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
-   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
-   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
+   - `PROD_ASTRO_API_TOKEN`: The value for your production Workspace or Organization API token.
+   - `DEV_ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -625,9 +610,8 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
       dev-push:
         if: github.ref == 'refs/heads/dev'
         env:
-          ## Sets DEV Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.DEV_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.DEV_ASTRONOMER_KEY_SECRET }}
+          ## Sets DEV Deployment API token credential as an environment variable
+          ASTRO_API_TOKEN: ${{ secrets.DEV_ASTRO_API_TOKEN }}
         runs-on: ubuntu-latest
         steps:
         - name: checkout repo
@@ -635,13 +619,12 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy --deployment-name "<dev-deployment-name>"
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
-          ## Sets PROD Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.PROD_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.PROD_ASTRONOMER_KEY_SECRET }}
+          ## Sets PROD Deployment API token credential as an environment variable
+          ASTRO_API_TOKEN: ${{ secrets.PROD_ASTRO_API_TOKEN }}
         runs-on: ubuntu-latest
         steps:
         - name: checkout repo
@@ -649,7 +632,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy --deployment-name "<prod-deployment-name>"
     ```
 
 </TabItem>
@@ -666,8 +649,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-  - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-  - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+  - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -683,8 +665,7 @@ If your Astro project requires additional build-time arguments to build an image
       build:
         runs-on: ubuntu-latest
         env:
-          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+          ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
         steps:
         - name: Check out the repo
           uses: actions/checkout@v3
@@ -723,8 +704,7 @@ If your Astro project requires additional build-time arguments to build an image
       build:
         runs-on: ubuntu-latest
         env:
-          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+          ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
         steps:
         - name: Check out the repo
           uses: actions/checkout@v3

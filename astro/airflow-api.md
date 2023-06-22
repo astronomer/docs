@@ -48,7 +48,9 @@ Follow the steps in [Create a Orgaization API token](organization-api-tokens.md#
 <TabItem value="deployment" label="Deployment API key">
 
 :::caution
-Deployment API keys will soon be phased out in favor of Deployment-level API tokens. Astronomer recommends only using Workspace API tokens until Deployment API tokens are released. 
+
+Deployment API keys will soon be deprecated in favor of Deployment API tokens. If you have strict Deployment-level security requirements, you can continue to use Deployment API keys, but you will have to complete a one-time migration to Deployment API tokens in the future. Otherwise, Astronomer recommends using either [Workspace API tokens](workspace-api-tokens.md) or [Organization API tokens](organization-api-tokens.md) in place of Deployment API keys.
+
 :::
 
 To retrieve an access token using [cURL](https://curl.se/), run the following API request with your Deployment API key ID and secret:

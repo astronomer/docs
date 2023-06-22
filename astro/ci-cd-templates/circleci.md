@@ -39,8 +39,8 @@ To automate code deploys to a Deployment using CircleCI, complete the following 
 
 1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
 
-   - `ASTRO_API_TOKEN` = `<your-workspace-or-organization-api-token-with-access-to-prod-deployment>`
-   - `ASTRO_DEPLOYMENT_ID` = `<your-deployment-id>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: The ID for your Deployment.
 
 2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
 
