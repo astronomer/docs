@@ -23,7 +23,7 @@ def duckdb_tutorial_dag_1():
 
     @task
     def create_duckdb_table_from_pandas_df(ducks_in_my_garden_df):
-        "Create a table in MotherDuck based on a pandas DataFrame and query it"
+        "Create a table in DuckDB based on a pandas DataFrame and query it"
 
         # change the path to connect to a different database
         conn = duckdb.connect("include/my_garden_ducks.db")

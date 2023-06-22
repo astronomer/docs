@@ -89,7 +89,7 @@ You can use the [duckdb Python package](https://pypi.org/project/duckdb/) direct
     - Use an empty string to utilize an in-memory database (For example, `duckdb.connect("")`).
     - Specify a local file path to create/connect to a local DuckDB database in which your table will persist (For example, `duckdb.connect("include/my_garden_ducks.db")`)
     - Specify a MotherDuck connection string without a database to connect to your default MotherDuck database (For example, `duckdb.connect(f"motherduck:?token={YOUR_MOTHERDUCK_TOKEN}")`).
-    - Specify a MotherDuck connection string with a database to connect to a specific MotherDuck database (For example, `duckdb.connect(f"motherduck:MY_DB?token={YOUR_MOTHERDUCK_TOKEN}")`)
+    - Specify a MotherDuck connection string with a database to connect to a specific MotherDuck database (For example, `duckdb.connect(f"motherduck:{YOUR_DB}?token={YOUR_MOTHERDUCK_TOKEN}")`)
 
 4. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button, then click the DAG name to view the DAG in the **Grid** view. In the logs for `create_duckdb_table_from_pandas_df`, you will find a quack for each duck in your garden.
 
