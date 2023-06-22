@@ -54,9 +54,15 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC:
     - VPC NAME of the target VPC.
     - Classless Inter-Domain Routing (CIDR) block of the target VPC.
 
-    After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. You will receive a message that contains the GCP project ID and VPC name that you need to connect to from the target VPC. 
+    After receiving your request, Astronomer support will create a VPC peering connection from your Astro VPC to your target VPC. The support team will then provide you with your Astro cluster GCP project ID and VPC name.
     
-2. Using the information provided by Astronomer support, [create a peering connection request](https://cloud.google.com/vpc/docs/using-vpc-peering#creating_a_peering_configuration) from your target VPC to your Astro cluster VPC. After both connection requests have been made, the connection becomes active.
+2. Using the information provided by Astronomer support, [create a peering connection request](https://cloud.google.com/vpc/docs/using-vpc-peering#creating_a_peering_configuration) from your target VPC to your Astro cluster VPC. For example, you can use the following gcloud CLI command to create the connection:
+
+   ```sh
+   gcloud compute networks peerings create <choose-any-name> --network=cloud-composer-vpc-network  --peer-project=<your-cluster-project-id> --peer-network=<your-cluster-vpc-name>
+   ```
+
+After both VPC peering connections have been created, the connection becomes active.
 
 </TabItem>
 
