@@ -39,7 +39,7 @@ When you use publicly accessible endpoints to connect Astro and GCP, traffic mov
 
 :::info 
 
-This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+This connection option is only available for dedicated Astro Hosted clusters.
 
 :::
 
