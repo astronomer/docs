@@ -238,16 +238,16 @@ If your Astro project requires additional build-time arguments to build an image
 
 ## DAG-based templates
 
-A [DAG-based template](template-overview#dag-based-templates) uses the `--dags` flag in the Astro CLI `astro depoy` command to push only DAGs to your Deployment. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified whereas it deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code#deploy-dags-only).
+A [DAG-based template](template-overview#dag-based-templates) uses the `--dags` flag in the Astro CLI `astro depoy` command to push only DAGs to your Deployment. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified whereas it deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 ### Single branch implementation
 
 To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
 
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
 
-   - `ASTRO_API_TOKEN` = `<your-workspace-or-organization-api-token-with-access-to-your-deployment>`
-   - `ASTRO_DEPLOYMENT_ID` = `<your-deployment-id>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: The ID for your Deployment.
 
 2. In your project repository, create a new YAML file in `.circleci/config.yml` that includes the following configuration:
 
