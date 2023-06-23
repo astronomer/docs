@@ -39,6 +39,7 @@ module.exports = {
         "develop-project",
         "kubernetespodoperator",
         "manage-connections-variables",
+        "import-export-airflow-objects",
         {
           type: "category",
           label: "Cloud IDE",
@@ -95,7 +96,7 @@ module.exports = {
         "api-keys",
         "environment-variables",
         "secrets-backend",
-        "manage-deployments-as-code",
+        "manage-deployments-as-code"
       ],
     },
     {

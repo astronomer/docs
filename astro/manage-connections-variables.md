@@ -20,21 +20,20 @@ For in-depth information on creating and managing connections see [Connection Ba
 
 ## Choose a connection and variable management strategy
 
-:::tip
-If you just want to test your connection and export in JSON or URI format, use Airflow UI to [create your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) and Astro CLI commands [`astro dev object export`](https://docs.astronomer.io/astro/cli/astro-dev-object-export) or [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run) to export.
-:::
-
 The following table suggests possible management strategies for specific use cases.
 
 | Scenario | Strategy |
 |----------|----------|
 | I'm getting started and want to quickly create Airflow objects | [Airflow UI](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) |
-| I keep my variables in version control system and want to directly upload to Airflow | [Airflow UI](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) |
+| I prefer to manage my Airflow variables in a Git repository and to upload directly to Airflow | [Airflow UI](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) |
 | I need to keep my connections and variables centralized and as secure as possible | [Secrets backend](secrets-backend.md#benefits) |
-| I don't have a secrets backend and want to reduce the calls to metadata db to improve performance or override existing connections defined in Airflow UI | [Environment variables](environment-variables.md) |
-
+| I don't have a secrets backend and want to reduce the calls to metadata db to improve performance or override existing objects defined in Airflow UI | [Environment variables](environment-variables.md) |
 
 Because variables and connections serve different purpose in Airflow, you might want to choose a different strategy for each. For example, you can choose secrets backend for connections and use combination of a `json` file and Airflow UI for variables. See [variable basics](https://docs.astronomer.io/learn/) for in-depth information.
+
+:::tip
+If you just want to test your connection and export in JSON or URI format, use Airflow UI to [create your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) and Astro CLI commands [`astro dev object export`](https://docs.astronomer.io/astro/cli/astro-dev-object-export) or [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run) to export.
+:::
 
 ## Compare connection and variable management strategies 
 
@@ -71,6 +70,7 @@ A secrets backend is the most secure way to store connections and variables. You
 - Recover objects if your Airflow environments go down.
 - Share secrets across different Airflow environments.
 - You can configure your secrets backend to allow selective access to connections and variables by using `connections_prefix` or `variables_prefix`. 
+- Limit the number of open connections to your metadata database, especially if you are using your connections and variables outside of task definitions.
 
 #### Limitations
 
@@ -93,7 +93,7 @@ You can use Airflow's system-level environment variables to store connections an
 - In case you want to override variables in the Airflow UI, Airflow variables set in environment variables take precedence over Airflow UI variables. See [Environment variable priority](environment-variables.md#environment-variable-priority)
 - On Astro, you can create your connections and variables as environment variables from the Cloud UI. See [use environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui) for more details. 
 - Environment variables marked as **Secret** are encrypted in the Astronomer control plane. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-on-astro) for details.
-- Limits open connections to your metadata database, especially if you are using your connections and variables outside of task definitions.
+- This approach limits the number of open connections to your metadata database, especially if you are using your connections and variables outside of task definitions.
 
 #### Limitations
 
