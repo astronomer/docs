@@ -113,3 +113,4 @@ While it's possible to manage Airflow connections and variables with these strat
 
 ## See also
 - [Import and export Airflow objects](import-export-airflow-objects)
+- [Authenticate to cloud from local](cli/authenticate-to-clouds)

@@ -17,7 +17,7 @@ Based on your management strategy, the storage location for your Airflow objects
 
 Use this document to understand these methods and also how to use simple Astro CLI commands to import or export.
 
-## From the Airflow UI/ metadata database
+## From the Airflow UI/metadata database
 
 When you use the Airflow UI to store your Airflow connections and variables, they are stored in Airflow's metadata database. If your variables are stored in Airflow's metadata database, you can use the Airflow UI to import and export them in bulk.
 
@@ -72,9 +72,9 @@ astro deployment variable list --deployment-id <deployment-id> --save
 ```
 See [Use environment variables on Astro](environment-variables.md#add-airflow-connections-and-variables-using-environment-variables) and refer to [`astro deployment variable create`](cli/astro-deployment-variable-create.md#examples) for more examples.
 
-### Airflow REST API
+## From Airflow REST API
 
-You can use [Airflow REST API with Astro](airflow-api.md) to setup import and export workflow for your connections and variables and easily replicate your Deployment settings.
+You can use [Airflow REST API with Astro](airflow-api.md) to setup import and export workflow for your connections and variables and easily replicate your Deployment settings. You can use REST API only if your connections and variables are stored in Airflow's metadata database.
 
 To export connections from any Airflow environment, you can use the [List Connections API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connections) and [Get Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connection).
 
@@ -82,4 +82,3 @@ To export variables from any Airflow environment, you can use [List Variables AP
 
 To import connections or variables to any Airflow environment, you can use the [Create Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_connection) and [Create Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_variables) respectively.
 
-See 
