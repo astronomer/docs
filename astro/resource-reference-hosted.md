@@ -62,8 +62,8 @@ Currently, standard clusters are available on the following clouds and regions:
 
 | Cloud    | Code          | Region                  |
 | -------- | ------------- | ----------------------- |
-| **GCP**: | `us-central1` | Iowa, North America     |
-| **GCP**: | `us-east4`    | Virginia, North America |
+| **GCP** | `us-central1` | Iowa, North America     |
+| **GCP** | `us-east4`    | Virginia, North America |
 
 
 ## Dedicated cluster configurations
