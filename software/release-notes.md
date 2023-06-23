@@ -16,7 +16,7 @@ Release date: June 23, 2023
 ### Bug fixes
 
 - Reverted a change which prevented Workspace-level service accounts from accessing a Deployment when the service account didn't have specific permissions for that Deployment.
-- Fixed an issue where the Airflow UI for some Deployments would produce an HTTP 500 internal server error.
+- Fixed an issue where some screens of the Airflow UI would produce an HTTP 500 internal server error.
 
 ## 0.32.1
 
