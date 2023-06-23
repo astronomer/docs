@@ -40,19 +40,19 @@ Some Deployment configurations, including worker queue and worker type, can be s
 | Option | Description | Possible Values |
 | ----- | --- | ------ |
 | `-p`, `--cloud-provider` | The Cloud Provider to use for your Deployment. The default is `gcp` | N/A |
-| `-c`, `--cluster-id` | The cluster in which you want to create a Deployment. You will get a prompt to choose a cluster, if this flag is skipped in case of Astro Hybrid or Astro Hosted Dedicated. | The id of a cluster that you can create Deployments in. See [View clusters](manage-hybrid-clusters#view-clusters) to find your cluster id.|
+| `-c`, `--cluster-id` | (Astro Hybrid and Astro Hosted dedicated clusters only) The cluster in which you want to create a Deployment | A valid [cluster ID](manage-hybrid-clusters.md#view-clusters).|
 | `--cluster-type` | (Astro Hosted only) The type of cluster you want to run the Deployment on. The default is `standard`. | Either `dedicated` or `standard`. |
 | `--dag-deploy` | Enables DAG-only deploys for the Deployment. The default is `disable` | Either `enable` or `disable`. |
 | `--deployment-file` | Location of the template file that specifies the configuration of the new Deployment. File can be in either JSON or YAML format. See [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-deployment-with-a-deployment-file) | A valid file path for YAML or JSON template file |
 | `-d`,`--description` | The description for the Deployment. | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
 | `--enforce-cicd` | Specify that the Deployment can only accept code deploys from API tokens and keys. | None|
 | `-e`,`--executor` | The executor to use for the Deployment. |  CeleryExecutor or KubernetesExecutor |
-| `-a`, `--high-availability` | Enables High Availability for the Deployment. The default is `disable`. | Either `enable` or `disable`. |
+| `-a`, `--high-availability` | Enables high availibility for the Deployment. The default is `disable`. | Either `enable` or `disable`. |
 | `-n`,`--name` | The name of the Deployment. | Any string. Multiple-word descriptions should be specified in quotations |
-| `--region` | (Astro Hosted only) The region which you want to use for a Deployment. You will get a prompt to choose the region if a value is not provided. | The [list of regions](resource-reference-hosted?tab=gcp#standard-cluster-configurations) supported for your cloud provider for a standard cluster. |
+| `--region` | (Astro Hosted only) The region where you want to host the Deployment. | The code for any [supported region](resource-reference-hosted.md#standard-cluster-configurations) |
 | `-v`,`--runtime-version`    | The Astro Runtime version for the Deployment | Any supported version of Astro Runtime. Major, minor, and patch versions must be specified. |
-| `-s`,`--scheduler-size` | The size of scheduler for the Deployment. The default is `small`. | Possible values can be `small`, `medium` or`large`. |
-| `--wait` | The time to wait for the new Deployment to have a [healthy](deployment-metrics.md#deployment-health) status before completing the command . | None |
+| `-s`,`--scheduler-size` | The size of scheduler for the Deployment. The default is `small`. | Either `small`, `medium`, or `large`. |
+| `--wait` | Wait for the new Deployment to have a [healthy](deployment-metrics.md#deployment-health) status before completing the command  | None |
 | `--workspace-id` | The Workspace in which to create a Deployment. If not specified, your current Workspace is assumed. | Any valid Workspace ID |
 
 ## Examples
@@ -67,10 +67,10 @@ astro deployment create -d="My Deployment Description" --name="My Deployment Nam
 # Specify the new Deployment's configuration with a yaml file
 astro deployment create --deployment-file deployment.yaml
 
-# Create a deployment on Astro Hosted using a Standard cluster
+# Create a deployment on Astro Hosted using a standard cluster
 astro deployment create --name="my-gcp-deployment" --region="us-central1"
 
-# Create a deployment on Astro Hosted using a Dedicated cluster
+# Create a deployment on Astro Hosted using a dedicated cluster
 astro deployment create --name="my-gcp-deployment" --cluster-type="dedicated" --cluster-id="clj123n1311p901muj9hwpgjb"
 ```
 
