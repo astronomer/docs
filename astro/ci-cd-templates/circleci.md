@@ -18,7 +18,7 @@ Refer to [Template overview](template-overview.md) to see generic templates expr
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that CircleCI can access.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - A [CircleCI](https://circleci.com/vcs-authorize/) account.
 
 ## Image-only templates
@@ -97,11 +97,10 @@ The following template can be used to create a multiple branch CI/CD pipeline us
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
-- You have [Workspace API token](https://docs.astronomer.io/astro/workspace-api-tokens) or [Organization API token](https://docs.astronomer.io/astro/organization-api-tokens).
 
 #### Implementation
 
-1. Set the following environment variables each in different Production and Development [CircleCI context](https://circleci.com/docs/2.0/contexts/):
+1. Set the following environment variables in both your production and development [CircleCI contexts](https://circleci.com/docs/2.0/contexts/):
 
    - `ASTRO_API_TOKEN` = `<your-workspace-or-organization-api-token-with-access-to-prod-deployment>`
    - `ASTRO_DEPLOYMENT_ID` = `<your-prod-deployment-id>`
@@ -159,7 +158,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
                     - <YOUR-DEVELOPMENT-BRANCH-NAME>
     ```
 
-Read more about multiple workflows in [CircleCI Docs](https://circleci.com/docs/schedule-pipelines-with-multiple-workflows/).
+Read more about multiple workflows in the [CircleCI documentation](https://circleci.com/docs/schedule-pipelines-with-multiple-workflows/).
 
 </TabItem>
 
@@ -169,7 +168,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 #### Prerequisites
 
-- An Astro project that requires additional build-time arguments to build the Runtime image.
+- An Astro project that uses additional build-time arguments in its Astro Runtime image.
 
 #### Implementation
 
@@ -240,6 +239,10 @@ If your Astro project requires additional build-time arguments to build an image
 
 A [DAG-based template](template-overview#dag-based-templates) uses the `--dags` flag in the Astro CLI `astro depoy` command to push only DAGs to your Deployment. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified whereas it deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
+### Configuration requirements
+
+For each Deployment that you use with DAG-based templates, you must [enable DAG deploys](deploy-code.md#deploy-dags-only).
+
 ### Single branch implementation
 
 To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
@@ -305,5 +308,5 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
 
 This script checks the diff between your current commit and the HEAD of your branch to which you are pushing the changes to. If the changes are only in `dags` then it will perform `dag-only` deploy else do an image based deploy. Make sure to customize the script to use your specific branch and context. 
 
-You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy](circleci?tab=multibranch#image-only-templates) by creating separate `job` and `workflow` for each branch.
+You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy template](circleci?tab=multibranch#image-only-templates) by creating separate `job` and `workflow` for each branch.
 
