@@ -66,10 +66,10 @@ A secrets backend is the most secure way to store connections and variables. You
 
 #### Benefits
 
-- A centralized location alongside other secrets from other tools and systems used by your organization.
+- Store objects in a centralized location alongside other secrets used by your organization.
 - Comply with internal security postures and policies that protect your organization.
-- Recover in the case of an incident.
-- Secrets can be shared across different Airflow environments, allowing you to integrate with your new Deployment instead of having to set them manually in the Airflow UI.
+- Recover objects if your Airflow environments go down.
+- Share secrets across different Airflow environments.
 - You can configure your secrets backend to allow selective access to connections and variables by using `connections_prefix` or `variables_prefix`. 
 
 #### Limitations
@@ -77,7 +77,7 @@ A secrets backend is the most secure way to store connections and variables. You
 - A third-party secrets manager is required.
 - Separate configurations might be required for using a secrets backend locally and on Astro.
 - You cannot use the Airflow UI to view connections and variables.
-- You are responsible to ensure the secrets are encrypted.
+- You are responsible for ensuring that secrets are encrypted.
 
 ### Environment variables
 
@@ -102,12 +102,14 @@ You can use Airflow's system-level environment variables to store connections an
 - The environment variables are defined in plain text in `.env` file.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are not as secure or centralized compared to a [secrets backend](secrets-backend.md).
-- You cannot directly export your environment variables from Astro Cloud UI. See [import and export Airflow objects](import-export-airflow-objects#environment-variables).
+- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [import and export Airflow objects](import-export-airflow-objects#environment-variables).
 
 ## Other strategies
 
-- You can use Airflow REST API to programmatically create Airflow connections and variables for a Deployment. Airflow objects created with the API are stored in the Airflow metadata database and hence visible on the Airflow UI. This helps you to programmatically update Airflow both locally and on Astro to ensure parity across environments.
-- For local Astro projects, you can also use `airflow_settings.yaml` for defining your connections and variables. See [Configure `airflow_settings.yaml`](develop-project.md#configure-airflow_settingsyaml-local-development-only) for more details.
+While it's possible to manage Airflow connections and variables with these strategies, Astronomer doesn't recommend them at scale: 
 
-## Read next
+- You can use the Airflow REST API to programmatically create Airflow connections and variables for a Deployment. Airflow objects created with the API are stored in the Airflow metadata database and hence visible on the Airflow UI.
+- For local Astro projects, you can use `airflow_settings.yaml` for defining your connections and variables. See [Configure `airflow_settings.yaml`](develop-project.md#configure-airflow_settingsyaml-local-development-only) for more details.
+
+## See also
 - [Import and export Airflow objects](import-export-airflow-objects)
