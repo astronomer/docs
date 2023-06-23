@@ -35,7 +35,15 @@ Refer to [Template overview](template-overview.md) to see generic templates expr
     ]}>
 <TabItem value="standard">
 
-To automate code deploys to a Deployment using CircleCI, complete the following setup in a Git-based repository that hosts an Astro project:
+To automate code deploys to a Deployment using CircleCI for a single branch implementation, complete the following setup in a Git-based repository that hosts an Astro project:
+
+#### Configuration requirements
+
+- You have a `main` branch of an Astro project hosted in a single GitHub repository.
+- You have a `prod` Deployment on Astro where you deploy your `main` GitHub branche to.
+- You have a `prod` CircleCI context where you create your environment variables to use in CI/CD workflow.
+
+#### Implementation
 
 1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
 
@@ -97,6 +105,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
+- You have respective `dev` and `prod` CircleCI contexts where you create your environment variables to use in CI/CD workflow.
 
 #### Implementation
 
@@ -166,9 +175,11 @@ Read more about multiple workflows in the [CircleCI documentation](https://circl
 
 If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments in `docker build` command and then use the `image tag` to deploy to Astro. See [`docker build`](https://docs.docker.com/build/guide/build-args/) for reference.
 
-#### Prerequisites
+#### Configuration requirements
 
-- An Astro project that uses additional build-time arguments in its Astro Runtime image.
+- You have a `main` branch of an Astro project hosted in a single GitHub repository.
+- You have a `prod` Deployment on Astro where you deploy your `main` GitHub branche to.
+- You have a `prod` CircleCI context where you create your environment variables to use in CI/CD workflow.
 
 #### Implementation
 
