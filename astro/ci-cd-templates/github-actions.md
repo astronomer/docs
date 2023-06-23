@@ -237,7 +237,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 ## DAG-based templates
 
-The following templates show how to configure DAG-based deploys in GitHub Actions. They use the [Deploy action](https://github.com/astronomer/deploy-action) `dag-deploy-enabled` option to implement a DAG-based deploy workflow.
+The following templates show how to configure DAG-based deploys in GitHub Actions. The [Deploy action](https://github.com/astronomer/deploy-action) will automatically implement DAG-based deploy workflow if DAG deploy is enabled for your Deployment.
 
 <Tabs
     defaultValue="standard"
@@ -277,8 +277,6 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         steps:
         - name: Deploy to Astro
           uses: astronomer/deploy-action@v0.2
-          with:
-            dag-deploy-enabled: true
     ```
 
 This Github Actions script checks the diff between your current commit and your `main` branch when a commit is pushed to `main`. Make sure to customize the script for your specific use case. 
@@ -328,7 +326,6 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         - name: Deploy to Astro
           uses: astronomer/deploy-action@v0.2
           with:
-            dag-deploy-enabled: true
             deployment-id: <main-deployment-id>
         
       prod-push:
@@ -341,7 +338,6 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
         - name: Deploy to Astro
           uses: astronomer/deploy-action@v0.2
           with:
-            dag-deploy-enabled: true
             deployment-id: <prod-deployment-id>
     ```
 
@@ -398,7 +394,6 @@ If your Astro project requires additional build-time arguments to build an image
           uses: astronomer/deploy-action@v0.2
           with:
             image-name: ${{ steps.image_tag.outputs.image_tag }}
-            dag-deploy-enabled: true
     ```
 
   :::info
