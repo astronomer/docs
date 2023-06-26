@@ -55,7 +55,6 @@ module.exports = {
             'scheduling-in-airflow',
             'what-is-a-sensor',
             'managing-dependencies',
-            'airflow-glossary',
             'airflow-ui'
           ],
         },
@@ -189,5 +188,6 @@ module.exports = {
           },
       ],
     },
+    'airflow-glossary'
   ],
 };
