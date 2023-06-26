@@ -40,8 +40,8 @@ To automate code deploys to a Deployment using CircleCI for a single branch impl
 #### Configuration requirements
 
 - You have a `main` branch of an Astro project hosted in a single GitHub repository.
-- You have a `prod` Deployment on Astro where you deploy your `main` GitHub branche to.
-- You have a `prod` CircleCI context where you create your environment variables to use in CI/CD workflow.
+- You have a production Deployment on Astro where you want to deploy your `main` GitHub branch.
+- You have a production CircleCI context that stores environment variables for your CI/CD workflows.
 
 #### Implementation
 
@@ -104,8 +104,8 @@ The following template can be used to create a multiple branch CI/CD pipeline us
 #### Configuration requirements
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
-- You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
-- You have respective `dev` and `prod` CircleCI contexts where you create your environment variables to use in CI/CD workflow.
+- You have respective development and production Deployments on Astro where you deploy your GitHub branches to.
+- You have respective development and production CircleCI contexts that store environment variables to use in your CI/CD workflows.
 
 #### Implementation
 
@@ -178,7 +178,7 @@ If your Astro project requires additional build-time arguments to build an image
 #### Configuration requirements
 
 - You have a `main` branch of an Astro project hosted in a single GitHub repository.
-- You have a `prod` Deployment on Astro where you deploy your `main` GitHub branche to.
+- You have a production Deployment on Astro where you want to deploy your `main` GitHub branch.
 - You have a production CircleCI context where you store environment variables to use in your CI/CD workflow.s
 
 #### Implementation
@@ -317,7 +317,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
                     - <YOUR-BRANCH-NAME>
     ```
 
-This script checks the diff between your current commit and the HEAD of your branch to which you are pushing the changes to. If the changes are only in `dags` then it will perform `dag-only` deploy else do an image based deploy. Make sure to customize the script to use your specific branch and context. 
+This script checks the diff between your current commit and the HEAD of your branch to which you are pushing the changes to. If the changes are only in `dags` then it executes a `dag-only` deploy. Otherwise, it executes an image-based deploy. Make sure to customize the script to use your specific branch and context. 
 
 You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy template](circleci?tab=multibranch#image-only-templates) by creating separate `job` and `workflow` for each branch.
 
