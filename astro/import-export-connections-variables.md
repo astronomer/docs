@@ -31,7 +31,7 @@ For security reasons, you can't bulk import or export connections from the Airfl
 
 ## From a secrets backend
 
-If you use a secrets backend to store connections and variables, you need to use your secrets backend's API to manage connections and variables between environments. Note that this is necessary only in rare circumstances, when:
+If you use a secrets backend to store connections and variables, you need to use your secrets backend's API to manage connections and variables between environments. Note that importing/exporting from a secrets backend is necessary only in rare circumstances, such as when:
 
 - You want to migrate your secrets backend to a different account.
 - You want to use your secrets as a reference for another Deployment and then customize it. Astronomer recommends maintaining separate `development` and `production` secrets backend.
