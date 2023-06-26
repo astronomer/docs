@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 An Airflow variable is a key-value pair that can be used to store information in your Airflow environment. They are commonly used to store instance level information that rarely changes, including secrets like an API key or the path to a configuration file. 
 
-There are two distinct types of Airflow variables, regular values and JSON serialized values. 
+There are two distinct types of Airflow variables: regular values and JSON serialized values. 
 
 ![Variables in the Airflow UI](/img/guides/airflow-variables_variables_in_UI.png)
 
@@ -29,24 +29,19 @@ To get the most out of this guide, you should have an understanding of:
 
 There are some best practices to keep in mind when using Airflow variables:
 
-- Airflow variables should be used for information that is runtime dependent but does not change too frequently.
-- You should avoid using Airflow variables in top-level DAG code, as they will create a connection to the Airflow metastore every time the DAG is parsed, which can lead to performance issues. See also [DAG writing best practices in Apache Airflow](dag-best-practices.md#avoid-top-level-code-in-your-dag-file).
-- You can use the [Jinja template](templating.md) syntax to access Airflow variables in top-level DAG code, since they will only be rendered once a task executes.
-- Airflow variables are encrypted with [Fernet](https://github.com/fernet/spec/) when they are written to the Airflow metastore. To mask Airflow variables in the UI and when printed to logs, include a substring indicating a sensitive value in your Airflow variable name. See [Hiding sensitive information](#hiding-sensitive-information).
+- Airflow variables should be used for information that is runtime dependent but doesn't change too frequently.
+- You should avoid using Airflow variables outside of tasks in top-level DAG code, as they will create a connection to the Airflow metastore every time the DAG is parsed, which can lead to performance issues. See [DAG writing best practices in Apache Airflow](dag-best-practices.md#avoid-top-level-code-in-your-dag-file).
+- If you do use Airflow variables in top-level DAG code, use the [Jinja template](templating.md) syntax so that your variables are only rendered when a task executes.
+- Airflow variables are encrypted with [Fernet](https://github.com/fernet/spec/) when they are written to the Airflow metastore. To mask Airflow variables in the UI and logs, include a substring indicating a sensitive value in your Airflow variable name. See [Hiding sensitive information](#hiding-sensitive-information).
 
-See the Airflow documentation for example code showing [good and bad practices accessing Airflow Variables in a DAG](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html#airflow-variables).
+See the Airflow documentation for examples of code showing [good and bad practices for accessing Airflow Variables in a DAG](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html#airflow-variables).
 
 Aside from Airflow variables, there are other ways of storing information in Airflow. The ideal option often depends on what type of information you are storing and where and how you want to access it:
 
-- Environment variables store small pieces of information that are available to the whole Airflow environment. There is no direct way to see environment variables in the Airflow UI but they can be accessed using `os.getenv("MY_ENV_VAR")` inside of Airflow DAGs and tasks. Environment variables are very versatile, they can be used to store arbitrary information but also to [configure Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html) (e.g. `AIRFLOW__CORE__DAGS_FOLDER`), [set Airflow connections](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables) (`AIRFLOW_CONN_MYDBCONN`) and [set Airflow variables](#create-an-airflow-variable) (`AIRFLOW_VAR_MYVARNAME`). The advantage of using environment variables is that you can include their creation in your CI/CD process. They are also often used to store credentials for local development.
+- Environment variables store small pieces of information that are available to the whole Airflow environment. There is no direct way to see environment variables in the Airflow UI but they can be accessed using `os.getenv("MY_ENV_VAR")` inside of Airflow DAGs and tasks. Environment variables are very versatile, as they can be used to both store arbitrary information and [configure Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html). One advantage of using environment variables is that you can include their creation in your CI/CD process. They are also often used to store credentials for local development.
 - [Params](airflow-params.md) can be used to store variables that are specific to a DAG or DAG run. You can define defaults for params at the DAG or task level and override them at runtime. Params are not encrypted and should not be used to store secrets.
 - [XComs](airflow-passing-data-between-tasks.md) can be used to pass small pieces of information between Airflow tasks. Use XComs when the information is likely to change with each DAG run and mostly needs to be accessed by individual tasks in or outside of the DAG from within which the XCom is created. Default XComs are not encrypted and should not be used to store secrets.
 
-:::info
-
-To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/environment-variables).
-
-:::
 
 ## Create an Airflow variable
 
@@ -55,7 +50,6 @@ There are several ways to create Airflow variables:
 - Using the Airflow UI
 - Using the Airflow CLI.
 - Using an environment variable.
-- Using the `airflow_settings.yaml` file (Astro CLI users).
 - Programmatically from within an Airflow task.
 
 To create an Airflow Variable in the UI, click on the **Admin** tab and select **Variables**. Then click on the **+** button and enter a key, value and an optional description for your variable. You also have the option to **Import Variables** from a file.
@@ -99,15 +93,6 @@ AIRFLOW_VAR_MYREGULARVAR='my_value'
 AIRFLOW_VAR_MYJSONVAR='{"hello":"world"}'
 ```
 
-[Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) users can create Airflow variables from the `airflow_settings.yaml` file. 
-
-```yaml
-  variables:
-    - variable_name: my_regular_variable_key
-      variable_value: my_value
-    - variable_name: my_json_variable_key
-      variable_value: '{"hello":"world"}'
-```
 
 Lastly, you can programmatically set Variables within your Airflow tasks via the [Variable model](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable). If you want to serialize a JSON value, make sure to set `serialize_json=True`.
 
@@ -123,7 +108,7 @@ Updating an Airflow variable works the same way by using the `.update()` method.
 
 ## Retrieving an Airflow variable
 
-To programmatically retrieve an Airflow variable, you can either use the `.get()` method of the Airflow Variable model or you can pull the Variable value directly from the [Airflow context](airflow-context).
+To programmatically retrieve an Airflow variable, you can either use the `.get()` method of the Airflow Variable model or you can pull the variable value directly from the [Airflow context](airflow-context).
 
 When retrieving a JSON serialized variable, make sure to set `deserialize_json=True` in the `.get()` method or access the `json` key from the `var` dictionary in the Airflow context.
 
@@ -146,7 +131,7 @@ def get_var_from_context(**context):
     print(my_json_var)
 ```
 
-For using Airflow variables in traditional Airflow operators it is often easier to use a [Jinja template](templating.md). See also [Airflow Variables in Templates](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#airflow-variables-in-templates).
+When using traditional Airflow operators, it's often easier to use a [Jinja template](templating.md) to retrieve Airflow variables. See [Airflow Variables in Templates](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#airflow-variables-in-templates).
 
 ```python
 get_var_jinja = BashOperator(
@@ -155,13 +140,13 @@ get_var_jinja = BashOperator(
 )
 ```
 
-You can also retrieve an Airflow variable via the Airflow CLI's [`get`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#get_repeat3) and [`list`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#list_repeat8) commands. 
+You can also retrieve an Airflow variable using the Airflow CLI's [`get`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#get_repeat3) and [`list`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#list_repeat8) commands. 
 
-## Hiding sensitive information
+## Hide sensitive information in variables
 
 Airflow variables are [Fernet](https://github.com/fernet/spec/) encrypted in the Airflow metastore.
 
-As seen in the screenshot at the beginning of this guide, some Airflow variables are additionally masked in the Airflow UI and if printed to the logs. This behavior is controlled via the Airflow configuration. By default, the [`hide_sensitive_var_conn_fields`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#hide-sensitive-var-conn-fields) configuration is set to `True`, which masks all Airflow variables that contain the following strings:
+As seen in the screenshot at the beginning of this guide, some Airflow variables are additionally masked in the Airflow UI and logs. While you can manually mark variables as secrets, some variables are marked automatically using an Airflow configuration. By default, the [`hide_sensitive_var_conn_fields`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#hide-sensitive-var-conn-fields) configuration is set to `True`, which automatically masks all Airflow variables that contain the following strings:
 
 - `access_token`
 - `api_key`
@@ -174,12 +159,10 @@ As seen in the screenshot at the beginning of this guide, some Airflow variables
 - `secret`
 - `token`
 
-This list can be extended by adding comma separated strings to the [`sensitive_var_conn_names`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#sensitive-var-conn-names) configuration.
-
-See also [Masking sensitive data](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/mask-sensitive-values.html).
+This list can be extended by adding comma separated strings to the [`sensitive_var_conn_names`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#sensitive-var-conn-names) configuration. See [Masking sensitive data](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/mask-sensitive-values.html).
 
 :::info
 
-If you need to access the same sensitive information in several Airflow instances, we recommend to use a [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/secrets-backend/index.html).
+If you need to access the same sensitive information in several Airflow instances, consider using a [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/secrets-backend/index.html).
 
 :::

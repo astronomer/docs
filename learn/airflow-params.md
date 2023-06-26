@@ -12,11 +12,11 @@ import tdro_example_upstream from '!!raw-loader!../code-samples/dags/airflow-par
 import tdro_example_downstream from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_downstream.py';
 import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
 
-Params are arguments which are passed to an Airflow DAG or task at runtime and stored in the [Airflow context dictionary](airflow-context.md) of a specific DAG run. Both DAG- and task-level params can be passed to a DAG run using the respective `params` keyword.
+Params are arguments which you can pass to an Airflow DAG or task at runtime and stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params to a DAG run by calling their keywords in `params`.
 
-This concept guide covers:
+This guide covers:
 
-- Different ways of passing params to a DAG at runtime.
+- How to pass params to a DAG at runtime.
 - How to define DAG-level param defaults which are rendered in the Trigger DAG w/config UI.
 - How to access params in an Airflow task.
 - The hierarchy of params in Airflow.
@@ -34,26 +34,26 @@ To get the most out of this guide, you should have an understanding of:
 Params can be passed to a DAG at runtime in three different ways:
 
 - In the Airflow UI by using the **Trigger DAG w/ config** button.
-- Using the Airflow CLI to run a DAG with the `--conf` flag.
+- Running a DAG with the `--conf` flag using the Airflow CLI.
 - Using the TriggerDagRunOperator with the `conf` parameter.
 
 Param values passed to a DAG by any of these methods will override existing default values for the same key as long as the [Airflow core config `dag_run_conf_overrides_params`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`. 
 
 :::info 
 
-While passing non-JSON serializable params is possible, this behavior is deprecated and will be removed in a future release. It is best practice to make sure your params are JSON serializable.
+While it's possible to pass non-JSON serializable params, this behavior is deprecated and will be removed in a future release. It is best practice to make sure your params are JSON serializable.
 
 :::
 
 ### Trigger DAG w/ config
 
-Params can be passed to a DAG from the Airflow UI by clicking on the Play button and selecting **Trigger DAG w/ config**.
+You can pass params to a DAG from the Airflow UI by clicking on the Play button and selecting **Trigger DAG w/ config**.
 
 ![Trigger DAG w/ config](/img/guides/airflow-params_trigger_dag_w_config.png)
 
 ![Trigger DAG UI](/img/guides/airflow-params_trigger_dag_ui.png)
 
-The **Trigger DAG w/ config** button opens a UI where details for a DAG run can be specified: 
+The **Trigger DAG w/ config** button opens a UI you can specify details for the DAG run: 
 
 - The **Logical date** of the DAG run can be set to any date that is in between the `start_date` and the `end_date` of the DAG to create DAG runs in the past or future.
 - The **Run id** can be set to any string. If no run id is specified, it will be generated based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date, for example: `manual__2023-06-16T08:03:45+00:00`. 
@@ -65,7 +65,7 @@ After setting the configuration, you can start the DAG run with the **Trigger** 
 
 ### CLI
 
-When running an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags), you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example, to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for `param1`, run: 
+When you run an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#dags), you can pass params to the DAG run by providing a JSON string to the `--conf` flag. For example, to trigger the `params_default_example` DAG with the value of `Hello from the CLI` for `param1`, run: 
 
 <Tabs
     defaultValue="astro"
@@ -93,7 +93,7 @@ airflow dags trigger params_defaults_example --conf '{"param1" : "Hello from the
 
 </Tabs>
 
-The configuration for the triggered run will be printed into the command line:
+The CLI prints configuration for the triggered run to the command line:
 
 ![CLI output](/img/guides/airflow-params_cli_param_output.png)
 
@@ -118,25 +118,25 @@ Runs of the `tdro_example_downstream` DAG that are triggered by this upstream DA
 
 ## Define DAG-level param defaults
 
-Default values for DAG-level params can be created by passing them to the `param` parameter of the `@dag` decorator or the `DAG` class in your DAG file. You can directly specify a default value or use the `Param` class to define a default value with additional attributes.
+To specify params for all runs of a given DAG, pass new default values to the `param` parameter of the `@dag` decorator or the `DAG` class in your DAG file. You can directly specify a default value or use the `Param` class to define a default value with additional attributes.
 
-The DAG below has two DAG-level params with a defined default: `param1` and `param2`, the latter having been defined to only accept integers.
+The DAG below has two DAG-level params with defaults: `param1` and `param2`, the latter only accepting integers.
 
 <CodeBlock language="python">{simple_param_dag}</CodeBlock>
 
-The Trigger DAG UI will render an element for each param with the respective default. A param with a red asterisk is a required param.
+If you trigger an individual DAG run from the Airflow UI, the **Trigger DAG** now renders a form for each param. From here, you can then override your new defaults for individual DAG runs. A param with a red asterisk is a required param.
 
 ![Trigger DAG with simple defaults](/img/guides/airflow-params_simple_param_dag_trigger_ui.png)
 
 :::info
 
-When a `type` is specified for a param, the field will be a required input by default because of [JSON validation](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration). To make a field optional, allow NULL values by setting the type to `["null", "<my_type>"]`.
+When you specify a required `type` for a param, the field will be a required input by default because of [JSON validation](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration). To make a field optional but still require a specific input type, allow NULL values by setting the type to `["null", "<my_type>"]`.
 
 :::
 
 :::info
 
-By default values provided to a keyword in the `params` dictionary are assumed to be strings. You can change this behavior by setting the DAG parameter `render_template_as_native_obj=True`. See also [Render native Python code](templating.md#render-native-python-code).
+By default, Airflow assumes that the values provided to a keyword in the `params` dictionary are strings. You can change this behavior by setting the DAG parameter `render_template_as_native_obj=True`. See [Render native Python code](templating.md#render-native-python-code).
 
 :::
 
@@ -148,29 +148,29 @@ The following param types are supported:
 - `null`: Allows the param to be None by being left empty.
 - `integer` or `number`: An integer (floats are not supported).
 - `boolean`: `True` or `False`.
-- `array`: A HTML multi line text field, every line edited will be made into a string array as value
+- `array`: An HTML multi line text field, every line edited will be made into a string array as the value.
 - `object`: A JSON entry field.
 
 ### Param attributes
 
-Aside from the `type` attribute, the `Param` class has several other attributes that can be used to define a default value:
+Aside from the `type` attribute, the `Param` class has several other attributes that you can use to define how users interact with the param:
 
-- `title`: The title of the param that will be displayed in the Trigger DAG UI instead of the param key when specified.
-- `description`: A description of the param where further instructions can be added.
-- `description_html`: A description that will be rendered in HTML format that can contain links and other HTML elements. Note that adding invalid HTML might lead to the UI not rendering correctly.
-- `section`: Creates a section under which the param will be displayed in the Trigger DAG UI. All params with no specified section will be displayed under the default section **DAG conf Parameters**.
-- `format`: a [JSON format](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration) the input will be validated against.
-- `enum`: A defined list of valid values for a param. Setting this attribute will create a dropdown menu in the Trigger DAG UI.
-- `const`: Setting this attribute to a valid value will make that value a constant default and hide the param from the Trigger DAG UI. Note that you still need to provide a `default` value for the param.
+- `title`: The title of the param that appears in the **Trigger DAG** UI.
+- `description`: A description of the param.
+- `description_html`: A description defined in HTML that can contain links and other HTML elements. Note that adding invalid HTML might lead to the UI not rendering correctly.
+- `section`: Creates a section under which the param will appear in the Trigger DAG UI. All params with no specified section will appear under the default section **DAG conf Parameters**.
+- `format`: A [JSON format](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration) that Airflow will validate a user's input against.
+- `enum`: A list of valid values for a param. Setting this attribute creates a dropdown menu in the UI.
+- `const`: Defines a permanent default value and hides the param from the **Trigger DAG** UI. Note that you still need to provide a `default` value for the param.
 - `custom_html_form`: Allows you to create custom HTML on top of the provided features.
 
-All `Param` attributes are optional to set. For params of the type string you can additionally set `min_length` and `max_length` to define the minimum and maximum length of the input. Similarly params of the types `integer` and `number` can have a `minimum` and `maximum` value.
+All `Param` attributes are optional to set. For string type params, you can additionally set `min_length` and `max_length` to define the minimum and maximum length of the input. Similarly, integer and number type params can have a `minimum` and `maximum` value.
 
-### Param default examples
+### Param examples in the Airflow UI
 
-This section presents a few examples of param defaults and how they are rendered in the Trigger DAG UI.
+This section presents a few examples of params and how they are rendered in the **Trigger DAG** UI.
 
-The code snippet below defines a mandatory param of the type `string` with UI elements like the section and title specified.
+The code snippet below defines a mandatory string param with a few UI elements to help users input a value.
 
 ```python
 "my_string_param": Param(
@@ -186,7 +186,7 @@ The code snippet below defines a mandatory param of the type `string` with UI el
 
 ![String param example](/img/guides/airflow-params_string_param_example.png)
 
-By defining a [valid date, datetime or time format](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6) you can create a calendar picker in the Trigger DAG UI.
+When you define [date, datetime, or time param](https://datatracker.ietf.org/doc/html/rfc3339#section-5.6), a calendar picker appears in the **Trigger DAG** UI.
 
 ```python
 "my_datetime_param": Param(
@@ -198,7 +198,7 @@ By defining a [valid date, datetime or time format](https://datatracker.ietf.org
 
 ![Datetime param example](/img/guides/airflow-params_datetime_picker.png)
 
-Providing a list of values to the `enum` attribute will create a dropdown menu in the Trigger DAG UI. Note that the default value must also be in the list of valid values provided to `enum`. Due to JSON validation rules, a value has to be selected.
+Providing a list of values to the `enum` attribute will create a dropdown menu in the **Trigger DAG** UI. Note that the default value must also be in the list of valid values provided to `enum`. Due to JSON validation rules, a value has to be selected.
 
 ```python
 "my_enum_param": Param(
@@ -208,7 +208,7 @@ Providing a list of values to the `enum` attribute will create a dropdown menu i
 
 ![Enum param example](/img/guides/airflow-params_enum_example.png)
 
-A boolean type param will create a toggle in the Trigger DAG UI.
+A boolean type param will create a toggle in the **Trigger DAG** UI.
 
 ```python
  "my_bool_param": Param(True, type="boolean"),
@@ -216,13 +216,13 @@ A boolean type param will create a toggle in the Trigger DAG UI.
 
 ![Bool param example](/img/guides/airflow-params_bool.png)
 
-Lastly, by providing custom HTML to the `description_html` attribute you can create more complex UI elements like a color picker. You can find the code which created the UI element below in [this example DAG in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html).
+If you provide custom HTML to the `description_html` attribute, you can create more complex UI elements like a color picker. For sample code, see the [the example DAG in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html).
 
 ![Bool param example](/img/guides/airflow-params_color_picker.png)
 
 ## Define task-level param defaults
 
-Defaults for a param at the task level can be set in the same manner as for DAG-level params. If a param of the same key is specified at the DAG- and task-level, the task-level param will take precedence.
+You can set task-level param defaults in the same way as for DAG-level params. If a param of the same key is specified at both the DAG and task level, the task-level param will take precedence.
 
 <Tabs
     defaultValue="taskflow"
@@ -258,7 +258,7 @@ t1 = BashOperator(
 
 ## Access params in a task
 
-You can access params in an Airflow task like other elements in the [Airflow context](airflow-context.md).
+You can access params in an Airflow task like you can with other elements in the [Airflow context](airflow-context.md).
 
 <Tabs
     defaultValue="taskflow"
@@ -295,9 +295,11 @@ t1 = PythonOperator(
 
 Params are also accessible as a [Jinja template](templating.md) using the `{{ params.my_param }}` syntax.
 
-If you try to access a param that has not been specified for a specific DAG run the task will fail with an exception. 
+If you try to access a param that has not been specified for a specific DAG run, the task will fail with an exception. 
 
-The order of precedence for params is as follows:
+## Param precedence
+
+The order of precedence for params, with the first item taking most precedence, is as follows:
 
 - Params that have been provided for a specific DAG run by a method detailed in [pass params to a DAG run at runtime](#pass-params-to-a-dag-run-at-runtime) as long as the [Airflow config core.dag_run_conf_overrides_params](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-run-conf-overrides-params) is set to `True`.
 - Param defaults that have been defined at the task level.
