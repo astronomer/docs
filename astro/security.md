@@ -33,7 +33,7 @@ Astronomer is a global remote company first. The Astronomer offices in the Unite
 
 ## Data privacy and compliance
 
-Astro is compliant with AICPA SOC 2 controls with respect to the security, availability, and confidentiality Trust Service Categories. If you are interested in obtaining (NDA required) our SOC 2 Report and Penetration Test report, contact [sales@astronomer.io](mailto:sales@astronomer.io)
+Astro is compliant with AICPA SOC 2 controls with respect to the security, availability, and confidentiality Trust Service Categories. To obtain reports related to Astronomer's compliance, such as a SOC 2 Type 2 Report or a Penetration Test Report, visit the [Astronomer Trust Center](https://trust.astronomer.io/).
 
 Astronomer is also [GDPR-compliant](gdpr-compliance.md) as an organization, and the Astro platform is GDPR-ready. Astronomer offers a Data Processing Agreement (DPA), which satisfies the requirements the GDPR imposes on data controllers with respect to data processors.
 

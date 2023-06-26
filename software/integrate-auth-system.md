@@ -114,9 +114,11 @@ Follow these steps to configure Azure AD as your OIDC provider.
   
     - **Name**: Any
     - **Supported account types**: Accounts in this organizational directory only (Astronomer only - single tenant)
-    - **Redirect URI**: Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
+    - **Redirect URIs**:
+        - Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
+        - Web / `https://houston.BASEDOMAIN/v1/oauth/callback/`.
 
-    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URI is https://houston.mycompany.com/v1/oauth/redirect/
+    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URIs should be `https://houston.mycompany.com/v1/oauth/redirect/` and `https://houston.mycompany.com/v1/oauth/callback/`.
 
 3. Click **Register**.
 
@@ -139,22 +141,27 @@ Complete this setup only if you want to import Azure AD groups to Astronomer Sof
 4. Click **Add**.
 5. Copy the values in the **Value** and **Secret ID** columns. 
 6. Click **API permissions** in the left menu.
-5. Click **Microsoft Graph** and add the following minimum permissions for Microsoft Graph:
+7. Click **Microsoft Graph** and add the following minimum permissions for Microsoft Graph:
 
     - `email`
     - `Group.Read.All`
     - `openid`
     - `profile`
     - `User.Read`
+    
+    For each of these permissions, select **Grant Admin Consent for Astronomer Data**. Your Microsoft Graph permissions should look similar to the following image:
+    
+    ![Completed permissions page in Azure](/img/software/azure_api_permissions_consent.png)
 
-5. Click **Token configuration** in the left menu.
-6. Click **Add groups claim** and select the following options:
+
+8. Click **Token configuration** in the left menu.
+9. Click **Add groups claim** and select the following options:
 
     - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option. 
     - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
     
-7. Click **Add**.
-8. Encrypt the secret value you copied as a Kubernetes Secret on your Astronomer installation. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
+10. Click **Add**.
+11. Encrypt the secret value you copied as a Kubernetes Secret on your Astronomer installation. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
 
 #### Enable Azure AD in your config.yaml file
 
@@ -166,14 +173,16 @@ astronomer:
     config:
       auth:
         openidConnect:
+          flow: "code"
           google:
             enabled: false
           microsoft:
             enabled: true
             clientId: <your-client-id>
-            discoveryUrl: https://login.microsoftonline.com/<tenant-id>/v2.0/
+            discoveryUrl: https://login.microsoftonline.com/<tenant-id>/v2.0/.well-known/openid-configuration
             # Configure a secret only if you're importing Azure AD user groups as Teams
             clientSecret: <your-client-secret>
+            baseDomain: login.microsoftonline.com
             authUrlParams:
               audience: <your-client-id>
         github:
@@ -494,7 +503,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 14. In the **Scope** setting list, select **Sync only assigned users and groups**.
    
-15. Click the *Provisioning status** toggle to turn provisioning status on.
+15. Click the **Provisioning status** toggle to turn provisioning status on.
 
 16. Click **Save**.
 

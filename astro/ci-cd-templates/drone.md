@@ -15,17 +15,16 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Drone can access.
 - An [Astro Deployment](create-deployment.md).
-- A [Deployment API key ID and secret](api-keys.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - A functional Drone [server](https://docs.drone.io/server/overview/).
 - A user with admin privileges to your Drone server.
 - A [Docker runner](https://docs.drone.io/runner/docker/overview/).
 
 ## Single branch implementation
 
-1. Set the following environment variables as repository-level [secrets](https://docs.drone.io/secret/repository/) on Drone:
+1. Set the following environment variable as a repository-level [secret](https://docs.drone.io/secret/repository/) on Drone:
 
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your Drone server, open your Astro project repository and go to **Settings** > **General**. Under **Project Settings**, turn on the **Trusted** setting.
 
@@ -57,15 +56,13 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
         - name: dockersock
           path: /var/run
         commands:
-        - astro deploy -f
+        - astro deploy <your-deployment-id> -f
         depends on:
         - wait
 
         environment:
-          ASTRONOMER_KEY_ID:
-            from_secret: ASTRONOMER_KEY_ID
-          ASTRONOMER_KEY_SECRET:
-            from_secret: ASTRONOMER_KEY_SECRET
+          ASTRO_API_TOKEN:
+            from_secret: ASTRO_API_TOKEN
 
     services:
     - name: docker

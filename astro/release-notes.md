@@ -4,6 +4,10 @@ title: 'Astro release notes'
 id: release-notes
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
+
+
 <head>
   <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
@@ -17,9 +21,135 @@ id: release-notes
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 7.4.2 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 8.5 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.14.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.16.1 ([Release notes](cli/release-notes.md))
+
+<!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
+
+## June 20, 2023
+
+### Additional improvements
+
+- You can now add a new Astro user to Workspaces before the user has accepted their invite.
+- The Cloud UI now shows your Team IDs in **Settings** > **Access Management** > **Teams**. Use Team IDs to add Teams to Workspaces using the Astro CLI.
+- A Team's **Updated At** and **Updated By** values are now updated when you change the Team's permissions in a Workspace or Organization.
+
+### Bug fixes
+
+- Fixed an issue where a Workspace descriptions were incorrectly required when creating a new Workspace through the Astro CLI.
+
+## June 13, 2023
+
+### Manage billing and track usage for Astro Hosted
+
+Use the new **Billing** page in the Cloud UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](https://docs.astronomer.io/astro/manage-billing) for more details.
+
+### New cell type for using Airflow operators in the Astro Cloud IDE
+
+You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators).
+
+Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators#create-custom-operator-cells).
+
+### IMDSv2 is now enforced on AWS clusters
+
+:::warning Breaking change
+
+If your DAGs assume IAM roles to directly access metadata on your cluster using IMDSv1, this change can result in DAG run failures. Upgrade your DAGs to use IMDSv2 for all cluster metadata requests.
+
+See [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) for more information.
+
+:::
+
+Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources on your clusters are now session-based and muse include a token in the request body.
+
+### Additional improvements
+
+- Trial Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#deploy-dags-only) enabled by default.
+- The Cloud UI now shows your **Organization Short Name** and **Astro SAML Connection Name** in the Cloud UI.
+- You can now view mapped tasks from the **DAGs** page in the Cloud UI.
+
+### Bug fixes
+
+- Fixed an issue where worker node pools in Hosted dedicated clusters on Azure were not being updated correctly.
+- Fixed an issue the Cloud UI would reset a Deployment's **Min Worker Count** from 0 to 1 after you edited the Deployment in any way.
+
+## June 6, 2023
+
+### Track user actions and ensure compliance with audit logs
+
+You can now export audit logs from the Cloud UI to view all actions taken in your Organization over a given time period. See [Export audit logs](audit-logs.md) for setup steps, and see [Audit log fields](audit-logs-reference.md) for a reference of all available audit log fields.
+
+### Additional improvements 
+
+- You can now configure Hybrid GCP clusters with additional Memory Optimized and Compute Optimized Cloud SQL instance types. See [Supported Cloud SQL instance types](resource-reference-gcp-hybrid.md#supported-cloud-sql-instance-types).
+
+## May 30, 2023
+
+### Manage permissions for groups of users with Teams
+
+Configure Teams from the Cloud UI to manage the permissions for many users across Workspaces from a single page. _Teams_ are a group of users in an Organization that you grant the same Workspace permissions, without needing to define them individually. 
+
+See [Make a Team](https://docs.astronomer.io/astro/add-user#make-a-team) for setup steps.
+
+### Bug fixes
+
+- In Astro Hosted, an irrelevant **AWS external ID** info page has been removed from the Cloud UI.
+- Fixed an issue where DAG-only deploys could be unreliable due to the deploy process not requesting enough resources in the cluster. 
+
+## May 23, 2023
+
+### Introducing Astro Hosted and Hybrid
+
+_Astro Hosted_ is a new way to run Airflow on Astronomer's cloud. On Astro Hosted, Airflow environments are managed and hosted entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
+
+For more information about how Astro Hosted works, see the [Architecture overview](https://docs.astronomer.io/astro/astro-architecture).
+
+If you're already an Astro user and your Deployments run in your company's own cloud, you're using _Astro Hybrid_. This version of Astro was formerly known as Astro - Bring Your Own Cloud. 
+
+To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**. 
+
+See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-hybrid) to learn how the documentation has changed for current Astro Hybrid users.
+
+### Configure default Kubernetes Pods on Astro Hosted
+
+One of the biggest risks of running the Kubernetes executor or KubernetesPodOperator is that your tasks can accidentally request more resources than expected, which can drive up costs. To limit this risk, you can now configure default and maximum Pod resources from the Cloud UI. If a task tries to request Pod resources that are more than your configured limits, the task fails. 
+
+See [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources) for setup steps. 
+
+### Documentation refactor for Astro Hybrid
+
+The following updates have been made to documentation to accommodate new Astro Hosted information:
+
+- Astro Hybrid documentation now has a dedicated menu under "Administration" that contains all docs related to Hybrid installation and cluster management. See [Astro Hybrid overview](https://docs.astronomer.io/astro/hybrid-overview).
+- All other docs now assume Astro Hosted by default. If a feature is functionally different between Hosted and Hybrid, the documentation for that feature will include a note about how that setup differs for Hybrid. Look for the blue **Alternative Astro Hybrid setup** notes throughout documentation.
+
+## May 16, 2023
+
+### Automate Organization management with Organization API tokens
+
+You can now create Organization API tokens to automate key actions across your Organization and all of the Workspaces in it. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes. Some common actions that you can automate with Organization API token are:
+
+- Creating Workspaces.
+- Inviting users to an Organization or Workspace.
+- Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md).
+- Exporting audit logs.
+- Gathering metadata about Deployments using the Airflow REST API.
+- Completing any of the actions you can complete with a Workspace API token or Deployment API key across all Deployments in your Organization.
+
+See [Manage Organization API tokens](organization-api-tokens.md) for more information.
+
+## May 2, 2023
+
+### Receive Astro alerts on Slack or PagerDuty
+
+Astro alerts are a new way to be notified when your DAGs aren't running as expected. Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code and integrate with Slack and PagerDuty.
+
+You can set an alert on any DAG to be notified when the DAG fails or when a task takes longer to run than expected. See [Astro alerts](alerts.md) for configuration steps.
+
+### Bug fixes
+
+- Fixed an issue where SSO configurations made through Astronomer support could be overridden by updating the SSO configuration through the Cloud UI.
 
 ## April 26, 2023
 
@@ -54,7 +184,6 @@ You can now create preview Deployments from feature branches in your Git reposit
 - Delete the preview Deployment when you delete the branch.
 - Deploy your changes to your base Deployment after you merge your changes into your main branch.
 
-
 ### Additional improvements
 
 - Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Deployment API key or Workspace token.
@@ -68,6 +197,8 @@ You can now create preview Deployments from feature branches in your Git reposit
 ## March 28, 2023
 
 ### New GCP node instance types available
+
+<HybridBadge/>
 
 You can now use the following node instance types for worker nodes in GCP clusters:
 
@@ -83,7 +214,7 @@ You can now use the following node instance types for worker nodes in GCP cluste
 - `n2-highcpu-48`  
 - `n2-highcpu-64`  
 
-For a list of all instance types available for GCP, see [Supported worker node pool instance types](resource-reference-gcp.md#supported-worker-node-pool-instance-types).
+For a list of all instance types available for GCP, see [Supported worker node pool instance types](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types).
 
 ### Additional improvements
 
@@ -92,6 +223,7 @@ For a list of all instance types available for GCP, see [Supported worker node p
 - The default CIDR range for new AWS clusters has been reduced from /19 to /20.
 - You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/support). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
 - You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace.
+- Organization role permissions have changed so that only Organization Owners can create Workspaces.
 
 ### Bug fixes
 
@@ -126,7 +258,7 @@ You can now configure your Deployments to use the Kubernetes executor for execut
 
 The Kubernetes executor runs each task in its own Kubernetes Pod instead of in shared Celery workers. Astronomer fully manages the infrastructure required to run the executor and automatically spins Pods up and down for each of your task runs. This executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks.
 
-To learn whether the Kubernetes executor works for your use case, see [Choose an executor](executors.md#choose-an-executor). To configure the Kubernetes executor for a task or Deployment, see [Configure the Kubernetes executor](executors.md#configure-the-kubernetes-executor).
+To learn whether the Kubernetes executor works for your use case, see [Choose an executor](executors-overview.md#choose-an-executor). To configure the Kubernetes executor for a task or Deployment, see [Configure the Kubernetes executor](kubernetes-executor.md).
 
 ### Simplified Organization management in the Cloud UI
 
@@ -174,7 +306,7 @@ For more information, see [Book office hours in the Cloud UI](astro-support.md#b
 
 ### Astro no longer requires administrator access on AWS
 
-Astro no longer requires administrator permissions for its dedicated AWS account. Instead, Astro now assumes a cross-account IAM role with the minimum necessary permissions for running and managing clusters. See [Install Astro on AWS](install-aws.md) for more information.
+Astro no longer requires administrator permissions for its dedicated AWS account. Instead, Astro now assumes a cross-account IAM role with the minimum necessary permissions for running and managing clusters. See [Install Astro on AWS](install-aws-hybrid.md) for more information.
 
 ### IdP-initiated logins through the Okta dashboard
 
@@ -269,7 +401,7 @@ In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can n
 
 You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
 
-To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](modify-cluster.md#authorize-workspaces-to-a-cluster).
+To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](manage-hybrid-clusters.md#authorize-workspaces-to-a-cluster).
 
 ### New Deployment health statuses and information in the Cloud UI
 
@@ -333,7 +465,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 ### Additional improvements
 
 - Ingress to the Airflow UI and API on Astro clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
-- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](modify-cluster.md#view-clusters).
+- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](manage-hybrid-clusters.md##view-clusters).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 
@@ -411,7 +543,7 @@ You can now configure worker queues with the following `n2` worker types on Goog
 - `n2-highcpu-8`
 - `n2-highcpu-16`
 
-For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp.md#worker-node-size-resource-reference).
+For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp-hybrid.md#worker-node-size-resource-reference).
 
 ### Additional improvements
 
@@ -446,7 +578,7 @@ For more information about these worker types, see [N2 machine series](https://c
 
 Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
 
-For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-based-templates)).
 
 ### Improved data lineage interface
 
@@ -492,7 +624,7 @@ To create your first project in the Astro Cloud IDE, see the [Cloud IDE quicksta
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in [Public Preview](feature-previews.md).
 
 :::
 
@@ -526,7 +658,7 @@ The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have
 
 ### New Azure regions
 
-You can now [create an Astro cluster on Azure](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on Azure](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `japaneast`
 - `southafricanorth`
@@ -609,7 +741,7 @@ You can now access your Account Dashboard to manage your user account settings a
 
 ### Additional improvements
 
-- You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws.md#worker-node-types).
+- You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws-hybrid.md#worker-node-types).
 - New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
 
 ### Bug fixes
@@ -644,7 +776,7 @@ To learn more, see [Export Airflow metrics to Datadog](deployment-metrics.md#exp
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
 - You can now configure [worker queues](configure-deployment-resources.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
-## Bug fixes
+### Bug fixes
 
 - The timestamp shown in the **Updated** field of the Deployment view in the Cloud UI is now properly updated when you create or modify environment variables.
 - Fixed an issue where logging in to the Airflow UI with unrecognized credentials could freeze you on an error page.
@@ -692,7 +824,7 @@ Astro's worker sizing enables a few benefits:
 - A higher level of reliability. This worker sizing model results in less volatility and a lower frequency of cluster autoscaling events, which lowers the frequency of errors such as zombie tasks and missing task logs.
 - The legacy **AU** unit is no longer applicable in the context of the worker. You only have to think about CPU, memory, and worker type.
 
-Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-deployment-resources.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws.md#worker-node-types), [GCP](resource-reference-gcp.md#worker-node-types), and [Azure](resource-reference-azure.md#worker-node-types) resource references.
+Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-deployment-resources.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#worker-node-types), [GCP](resource-reference-gcp-hybrid.md#worker-node-types), and [Azure](resource-reference-azure-hybrid.md#worker-node-types) resource references.
 
 ### New Maximum Tasks per Worker setting
 
@@ -700,7 +832,7 @@ A new **Maximum Tasks per Worker** configuration is now available in the Deploym
 
 Previously, maximum tasks per worker was permanently set to 16 and was not configurable on Astro. Now, you can set maximum tasks per worker anywhere between 1 and 64 based on the needs of your tasks. It can be set per worker queue on a Deployment.
 
-To learn more, see [Worker autoscaling logic](executors.md#celery-worker-autoscaling-logic).
+To learn more, see [Worker autoscaling logic](celery-executor.md#celery-worker-autoscaling-logic).
 
 ### New Worker Count (Min-Max) setting
 
@@ -718,13 +850,13 @@ Note that switching Organizations with the Astro CLI is not yet supported. For m
 
 ### New Azure region (Australia East)
 
-You can now [create an Astro cluster on Azure](create-cluster.md) in Australia East (New South Wales).
+You can now [create an Astro cluster on Azure](manage-hybrid-clusters.md#create-a-cluster) in Australia East (New South Wales).
 
-For a list of all Azure regions that Astro supports, see [Azure resource reference](resource-reference-azure.md#supported-regions).
+For a list of all Azure regions that Astro supports, see [Azure resource reference](resource-reference-azure-hybrid.md#supported-regions).
 
 ### New Google Cloud Platform regions
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `australia-southeast2` (Melbourne)
 - `asia-east1` (Taiwan)
@@ -767,7 +899,7 @@ If your organization has [implemented an identity provider (IdP)](configure-idp.
 
 Astro now officially supports Astro clusters on AKS. This includes support for an initial set of AKS regions.
 
-For more information about the installation process and supported configurations, see [Install Astro on Azure](install-azure.md) and [Resource Reference Azure](resource-reference-azure.md).
+For more information about the installation process and supported configurations, see [Install Astro on Azure](install-azure-hybrid.md) and [Resource Reference Azure](resource-reference-azure-hybrid.md).
 
 ### Bug fixes
 
@@ -818,7 +950,7 @@ For more information on Deployment configurations, see [Configure Deployment res
 
 ### New Google Cloud Platform regions
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `asia-northeast1` (Tokyo)
 - `asia-northeast2` (Osaka)
@@ -829,7 +961,7 @@ You can now [create an Astro cluster on GCP](create-cluster.md) in the following
 - `northamerica-northeast1` (Montreal)
 - `us-west3` (Salt Lake City)
 
-For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ### Additional improvements
 
@@ -843,7 +975,7 @@ For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [
 
 ### New Google Cloud Platform regions
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the following regions:
 
 - `asia-southeast1` (Singapore)
 - `australia-southeast1` (Sydney)
@@ -854,7 +986,7 @@ You can now [create an Astro cluster on GCP](create-cluster.md) in the following
 - `us-west2` (Los Angeles)
 - `us-west4` (Nevada)
 
-For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ## June 16, 2022
 
@@ -868,7 +1000,7 @@ Support requests can now be created and submitted in the Cloud UI. You no longer
 
 To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
 
-A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](executors.md#celery-worker-autoscaling-logic) for more information.
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](celery-executor.md#celery-worker-autoscaling-logic) for more information.
 
 Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
 
@@ -899,9 +1031,9 @@ Specifically, you can now run the following commands with Deployment API keys:
 
 ### Support for the `us-east4` GCP region
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
+You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the `us-east4` region, which is located in northern Virginia, USA.
 
-For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ## May 26, 2022
 
@@ -946,7 +1078,7 @@ This functionality is still early access and under active development. If you ha
 
 Astro now officially supports Astro clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as [Workload Identity](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) for secure connection to other GCP data services in your ecosystem.
 
-For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
+For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp-hybrid.md) and [Resource Reference GCP](resource-reference-gcp-hybrid.md).
 
 ### Support for Organization-Level user invites
 
@@ -968,7 +1100,7 @@ To widen our support for various use cases and levels of scale, we've expanded t
 - [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
 - [Memory Optimized R6i instances](https://aws.amazon.com/ec2/instance-types/r6i/)
 
-For a full list of node instance types that are supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws.md#node-instance-type). To modify an existing Astro cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
+For a full list of node instance types that are supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#node-instance-type). To modify an existing Astro cluster to use any of these instance types, see [Modify a Cluster](manage-hybrid-clusters.md).
 
 ### Additional improvements
 
@@ -984,7 +1116,7 @@ If your Astro cluster is configured with the `m5d.8xlarge` node type, for exampl
 
 ![Worker size error](/img/release-notes/worker-size-error.png)
 
-For a reference of all node instance types Astro supports and their corresponding worker size limits, see [Resources required for Astro on AWS](resource-reference-aws.md#node-instance-type), [Resources required for Astro on Azure](resource-reference-azure.md#node-instance-type), or  [Resources required for Astro on GCP](resource-reference-gcp.md#node-instance-type).
+For a reference of all node instance types Astro supports and their corresponding worker size limits, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#node-instance-type), [Resources required for Astro on Azure](resource-reference-azure-hybrid.md#node-instance-type), or  [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md#node-instance-type).
 
 ## April 14, 2022
 
@@ -1028,14 +1160,14 @@ For more information about what to expect when lineage tools go live, read Astro
 
 ### New AWS regions available
 
-You can now [create new Clusters](create-cluster.md) in:
+You can now [create new Clusters](manage-hybrid-clusters.md#create-a-cluster) in:
 
 - `af-south-1` (Cape Town)
 - `ap-east-1` (Hong Kong)
 - `ap-northeast-3` (Osaka)  
 - `me-south-1` (Bahrain)
 
-For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws.md#aws-region).
+For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#aws-region).
 
 ### Additional improvements
 
@@ -1377,7 +1509,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 - You can now create new clusters in `us-east-2` and `ca-central-1`.
 - In the Deployment detail page, **Astro Runtime** now shows the version of Apache Airflow that the Deployment's Astro Runtime version is based on.
-- You can now create or modify an existing Astro cluster to run any size of the `t2`,`t3`, `m5`, or `m5d` [AWS EC2 instances](resource-reference-aws.md).
+- You can now create or modify an existing Astro cluster to run any size of the `t2`,`t3`, `m5`, or `m5d` [AWS EC2 instances](resource-reference-aws-hybrid.md).
 
 ### Bug fixes
 
@@ -1429,7 +1561,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 :::danger
 
-This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
+This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](set-up-ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 
 :::
 
@@ -1449,7 +1581,7 @@ This release introduces a breaking change to code deploys via the Astro CLI. Sta
 
 ### Support for Deployment API keys
 
-Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
+Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](set-up-ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
 
 ## September 3, 2021
 

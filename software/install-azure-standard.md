@@ -249,7 +249,7 @@ kubectl create secret generic astronomer-bootstrap \
 > **Note:** You must URL encode any special characters in your Postgres password.
 
 A few additional configuration notes:
-- If you provision an external database, `postgresqlEnabled` should be set to `false` in Step 8.
+- If you provision an external database, `postgresqlEnabled` should be set to `false` in Step 8. The in-cluster database should be used only for development or proof-of-concept installations. All production installations should use an external database.
 - If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 - If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `config.yaml`.
 
@@ -305,14 +305,6 @@ global:
   ssl:
     enabled: true
     mode: "prefer"
-
-# Settings for database deployed on AKS cluster.
-# postgresql:
-#  replication:
-#    enabled: true
-#    slaveReplicas: 2
-#    synchronousCommit: "on"
-#    numSynchronousReplicas: 1
 
 #################################
 ### Nginx configuration

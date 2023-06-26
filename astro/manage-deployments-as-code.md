@@ -70,22 +70,30 @@ deployment:
         name: ""
         description: ""
         runtime_version: 7.1.0
+        deployment_type: standard
+        # 'cloud_provider' and 'region' are used only when deployment_type=standard. These values are replaced by 'cluster_name' when deployment_type=dedicated.
+        cloud_provider: gcp
+        region: us-central1
         dag_deploy_enabled: true
-        scheduler_au: 5
+        executor: CeleryExecutor
+        scheduler_size: small
         scheduler_count: 1
-        cluster_name: AWS Cluster
         workspace_name: Data Science Workspace
+        is_high_availability: false
+        ci_cd_enforcement: false
+        pod_cpu: 1
+        pod_memory: 2
     worker_queues:
         - name: default
           max_worker_count: 10
           min_worker_count: 1
           worker_concurrency: 16
-          worker_type: m5.xlarge
+          worker_type: A5
         - name: machine-learning-tasks
           max_worker_count: 4
           min_worker_count: 0
           worker_concurrency: 10
-          worker_type: m5.8xlarge
+          worker_type: A10
     alert_emails:
         - paola@cosmicenergy.io
         - viraj@cosmicenergy.io
@@ -104,6 +112,15 @@ deployment:
         webserver_url: 
 ```
 
+:::info Alternative Astro Hybrid values
+
+Astro Hybrid template files have the following differences compared to Astro Hosted:
+
+- `scheduler_au` replaces `scheduler_size`.
+- `deployment_type`, `cloud_provider`, and `region` don't exist.
+- `is_high_availability` doesn't exist.
+
+:::
 
 #### `deployment.environment_variables`
 
@@ -132,9 +149,12 @@ See [Worker queues](configure-worker-queues.md).
 You can create a Deployment in the Astro CLI according to the configurations specified in a given template file. Before you do, keep the following in mind:
 
 - Deployment names must be unique within a single Workspace. Make sure that you replace the `name` field in the file with the desired name of your new Deployment.
-- The `name` and `cluster_name` fields are the only fields required to create a Deployment. The CLI will create the Deployment using default values for each unspecified configuration. These default values are the same default values that are used when you create a Deployment from the Cloud UI.
-- When creating worker queues, the `name` and `worker_type` fields are required. Any unspecified fields are populated with smart defaults based on the worker types available in your cluster.
-- When creating environment variables, each variable must include a `key` and a `value`.
+- The `name` and `deployment_type` fields are the only fields required to create a Deployment on Astro Hosted. The CLI will create the Deployment using default values for each unspecified configuration. These default values are the same default values that are used when you create a Deployment from the Cloud UI.
+
+    On Astro Hybrid, `name` and `cluster_name` are required.
+
+- When you create worker queues, the `name` and `astro_machine` fields are required. Any unspecified fields are populated with smart defaults based on the worker types available in your cluster. On Astro Hybrid, `astro_machine` is replaced with `worker_type`.
+- When you create environment variables, each variable must include a `key` and a `value`.
 
 To create a new Deployment from an existing template file:
 
@@ -199,4 +219,4 @@ To update a Deployment using a Deployment file:
 
 - [Manage Deployment API keys](api-keys.md)
 - [Deploy Code](deploy-code.md)
-- [CI/CD](ci-cd.md)
+- [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)

@@ -9,7 +9,7 @@ description: Learn how to use the Astro Cloud IDE's built-in GitHub support to m
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it on the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in [Public Preview](feature-previews.md).
 
 :::
 
@@ -106,15 +106,13 @@ The default workflow provided by the Astro Cloud IDE will:
 These actions are not dependent on each other, meaning that you can modify the following steps to deploy only a single production or development Deployment. 
 
 1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page.
-2. Create a Deployment API key for each of your Deployments. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
-3. Set the following environment variables in your Git repository:
+2. Create a Workspace or Organization API token. See [Create a Workspace API token](workspace-api-tokens.md) and [Create an Organization API token](organization-api-tokens.md). Copy the API token.
+3. Set the following environment variables in your Git repository as secrets:
    
-    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
-    - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-api-key-secret>`
-    - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
-    - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-api-key-id>`
-    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
-    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
+    - `PROD_ASTRO_API_TOKEN`: The value for your production Workspace or Organization API token.
+    - `DEV_ASTRO_API_TOKEN`: The value for your development Workspace or Organization API token.
+    - `PROD_ASTRONOMER_DEPLOYMENT_ID` = The Deployment ID for your production Deployment.
+    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = The Deployment ID for your development Deployment. 
 
     See [GitHub](https://docs.github.com/en/actions/learn-github-actions/variables) and [GitLab](https://docs.gitlab.com/ee/ci/variables/) documentation on setting environment variables.  
 

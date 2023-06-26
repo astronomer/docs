@@ -40,7 +40,7 @@ Airflow connections can be created by using one of the following methods:
 - The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection)
 - A [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) (a system for managing secrets external to Airflow)
 - The [`airflow.cfg` file](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html)
-- The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html)
+- The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli)
 
 This guide focuses on adding connections using the Airflow UI and environment variables. For more in-depth information on configuring connections using other methods, see the [REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection), [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) and [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 
@@ -50,7 +50,7 @@ To standardize connections, Airflow includes many different connection types. Th
 
 Each connection type requires different configurations and values based on the service it's connecting to. There are a couple of ways to find the information you need to provide for a particular connection type:
 
-- Open the relevant provider's page in the [Astronomer Registry](https://registry.astronomer.io/providers/) and go to the **Docs** tab to access the Apache Airflow documentation for the provider. Most commonly used providers will have documentation on each of their associated connection types. For example, you can find information on how to set up different connections to Azure in the [Azure provider docs](https://registry.astronomer.io/providers/microsoft-azure).
+- Open the relevant provider page in the [Astronomer Registry](https://registry.astronomer.io/providers/) and go to the first link under **Helpful Links** to access the Apache Airflow documentation for the provider. Most commonly used providers will have documentation on each of their associated connection types. For example, you can find information on how to set up different connections to Azure in the [Azure provider docs](https://registry.astronomer.io/providers/microsoft-azure).
 - Check the documentation of the external tool you are connecting to and see if it offers guidance on how to authenticate.
 - Refer to the source code of the hook that is being used by your operator.
 
@@ -72,7 +72,7 @@ You don't have to specify every field for most connections. However, the values 
 
 Any parameters that don't have specific fields in the connection form can be defined in the **Extra** field as a JSON dictionary. For example, you can add the `sslmode` or a client `sslkey` in the **Extra** field of your PostgreSQL connection.
 
-Starting in Airflow 2.2, you can test some connection types from the Airflow UI with the **Test** button. After running a connection test, a message appears on the top of the screen showing either a success confirmation or an error message.
+Starting in Airflow 2.2, you can test some connection types from the Airflow UI with the **Test** button. After running a connection test, a message shows either a success confirmation or an error message. When using the **Test** button, the connection to your external tool is made from the webserver component of Airflow. See also [Testing connections in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections).
 
 ## Define connections with environment variables
 
@@ -121,6 +121,14 @@ To store a connection in JSON as an Astro environment variable, remove all line 
 ## Masking sensitive information
 
 Connections often contain sensitive credentials. By default, Airflow hides the `password` field in the UI and in the Airflow logs. If `AIRFLOW__CORE__HIDE_SENSITIVE_VAR_CONN_FIELDS` is set to `True`, values from the connection's `Extra` field are also hidden if their keys contain any of the words listed in `AIRFLOW__CORE__SENSITIVE_VAR_CONN_NAMES`. You can find more information on masking, including a list of the default values in this environment variable, in the Airflow documentation on [Masking sensitive data](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/mask-sensitive-values.html).
+
+## Test a connection
+
+Airflow offers several ways to test your connections by calling the `test_connection` method of the [Airflow hook](what-is-a-hook.md) associated with your connection. Provider hooks that do not have this method defined cannot be tested using these methods.
+
+- Airflow UI: You can test many types of Airflow connections directly from the UI using the **Test** button on the **Connections** page. See [Defining connections in the Airflow UI](#defining-connections-in-the-airflow-ui).
+- Airflow REST API: The Airflow REST API offers the [`connections/test` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/test_connection) to test connections. This is the same endpoint that the Airflow UI uses to test connections.
+- Airflow CLI: As of Airflow 2.6, you can test a connection from the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) using `airflow connections test <conn_id>`. If you use the Astro CLI, you can access this command by running `astro dev run connections test <conn_id>`.
 
 ## Example: Configuring the SnowflakeToSlackOperator
 

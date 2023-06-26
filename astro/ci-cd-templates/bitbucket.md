@@ -15,17 +15,19 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Bitbucket can access.
 - An [Astro Deployment](create-deployment.md).
-- A [Deployment API key ID and secret](api-keys.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - Access to [Bitbucket](https://bitbucket.org/product).
 
 ## Single branch implementation
 
 To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org/), complete the following setup in a Git-based repository that hosts an Astro project:
 
-1. Set the following environment variables as [Bitbucket pipeline variables](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
+1. Set the following environment variable as a [Bitbucket pipeline variable](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
 
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: Your Deployment ID.
+
+    For production Deployments, be sure to set the value of your API token as **secured**.
 
 2. Create a new YAML file in `bitbucket-pipelines.yml` at the root of the repository that includes the following configuration:
 
@@ -38,7 +40,7 @@ To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org
               deployment: Production
               script:
                 - curl -sSL install.astronomer.io | sudo bash -s
-                - astro deploy
+                - astro deploy ${ASTRO_DEPLOYMENT_ID} -f
               services:
                 - docker
     ```

@@ -18,7 +18,7 @@ The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/apache
 
 :::info
 
-For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with the Astro dbt provider](airflow-dbt.md).
+For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with Cosmos](airflow-dbt.md).
 
 :::
 

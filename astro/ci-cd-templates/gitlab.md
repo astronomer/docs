@@ -15,7 +15,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitLab repository.
 - An [Astro Deployment](create-deployment.md).
-- A [Deployment API key ID and secret](api-keys.md) for each Deployment.
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 
 Each CI/CD template implementation might have additional requirements.
 
@@ -27,8 +27,9 @@ Use this template to push code to from a GitLab repository to Astro.
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
 
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+
+    For production Deployments, Astronomer recommends storing the value for your API token as either a [file-type variable](https://docs.gitlab.com/ee/ci/variables/#use-file-type-cicd-variables) or [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html).
 
 2. Go to the **Editor** option in your project's CI/CD section and commit the following:
 
@@ -40,8 +41,7 @@ Use this template to push code to from a GitLab repository to Astro.
       services:
        - docker:dind
       variables:
-         ASTRONOMER_KEY_ID: ${ASTRONOMER_KEY_ID}
-         ASTRONOMER_KEY_SECRET: ${ASTRONOMER_KEY_SECRET}
+         ASTRO_API_TOKEN: ${ASTRO_API_TOKEN}
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
        - apk add bash
@@ -58,16 +58,16 @@ Use this template to push code to both a development and a production Deployment
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
 
-    - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
-    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
-    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
-    - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
+    - `PROD_ASTRO_API_TOKEN`: The value for your production Workspace or Organization API token.
+    - `DEV_ASTRO_API_TOKEN`: The value for your development Workspace or Organization API token.
 
-:::caution
+    For production Deployments, Astronomer recommends storing the value for your API token as either a [file-type variable](https://docs.gitlab.com/ee/ci/variables/#use-file-type-cicd-variables) or [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html).
 
-When you create environment variables that will be used in multiple branches, you might want to protect where you use them. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
+  :::caution
 
-:::
+  When you create environment variables that will be used in multiple branches, you might want to protect where you use them. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
+
+  :::
 
 2. Go to the **Editor** option in your project's CI/CD section and commit the following:
 
@@ -79,15 +79,14 @@ When you create environment variables that will be used in multiple branches, yo
         services:
           - docker:dind
         variables:
-            ASTRONOMER_KEY_ID: ${DEV_ASTRONOMER_KEY_ID}
-            ASTRONOMER_KEY_SECRET: ${DEV_ASTRONOMER_KEY_SECRET}
+            ASTRO_API_TOKEN: ${DEV_ASTRO_API_TOKEN}
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
           - apk add jq
         script:
           - (curl -sSL install.astronomer.io | bash -s)
-          - astro deploy -f
+          - astro deploy -f --deployment-name "<dev-deployment-name>"
         only:
           - dev
 
@@ -97,15 +96,14 @@ When you create environment variables that will be used in multiple branches, yo
         services:
           - docker:dind
         variables:
-            ASTRONOMER_KEY_ID: ${PROD_ASTRONOMER_KEY_ID}
-            ASTRONOMER_KEY_SECRET: ${PROD_ASTRONOMER_KEY_SECRET}
+            ASTRO_API_TOKEN: ${PROD_ASTRO_API_TOKEN}
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
           - apk add jq
         script:
           - (curl -sSL install.astronomer.io | bash -s)
-          - astro deploy -f
+          - astro deploy -f --deployment-name "<prod-deployment-name>"
         only:
           - main
    ```
@@ -120,8 +118,9 @@ Use this template to push code to from a GitLab repository to Astro.
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
 
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+
+    For production Deployments, Astronomer recommends storing the value for your API token as either a [file-type variable](https://docs.gitlab.com/ee/ci/variables/#use-file-type-cicd-variables) or [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html).
 
 2. Go to the **Editor** option in your project's CI/CD section and commit the following:
    
@@ -132,8 +131,7 @@ Use this template to push code to from a GitLab repository to Astro.
       services:
        - docker:dind
       variables:
-        ASTRONOMER_KEY_ID: ${ASTRONOMER_KEY_ID}
-        ASTRONOMER_KEY_SECRET: ${ASTRONOMER_KEY_SECRET}
+        ASTRO_API_TOKEN: ${ASTRO_API_TOKEN}
         DAG_FOLDER: "/dags"
       before_script:
         - apk add --update curl && rm -rf /var/cache/apk/*

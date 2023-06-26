@@ -2,7 +2,7 @@
 sidebar_label: 'GCP'
 title: 'Connect Astro to GCP data sources'
 id: connect-gcp
-description: Connect your Astro data plane to GCP.
+description: Connect Astro to GCP.
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 
@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the information provided here to learn how you can securely connect your Astro data plane to your existing Google Cloud Platform (GCP) instance. A connection to GCP allows Astro to access data stored on your GCP instance and is a necessary step to running pipelines in a production environment.
+Use the information provided here to learn how you can securely connect Astro to your existing Google Cloud Platform (GCP) instance. A connection to GCP allows Astro to access data stored on your GCP instance and is a necessary step to running pipelines in a production environment.
 
 ## Connection options
 
@@ -31,22 +31,38 @@ Publicly accessible endpoints allow you to quickly connect Astro to GCP. To conf
 - Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
 - Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-When you use publicly accessible endpoints to connect Astro and GCP, traffic moves directly between your Astro data plane and the GCP API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+When you use publicly accessible endpoints to connect Astro and GCP, traffic moves directly between your Astro clusters and the GCP API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
 
 </TabItem>
 
 <TabItem value="VPC peering">
 
-Every Astro cluster runs in a dedicated Virtual Private Cloud (VPC). To set up a private connection between an Astro VPC and a GCP VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
+:::info 
 
-To create a VPC peering connection between an Astro VPC and a GCP VPC, contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+This connection option is available only for dedicated Astro Hosted clusters and Astro Hybrid.
 
-- Astro cluster ID and name
-- Google Cloud project ID of the target VPC
-- VPC NAME of the target VPC
-- Classless Inter-Domain Routing (CIDR) block of the target VPC
+:::
 
-After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
+VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
+
+To create a VPC peering connection between an Astro VPC and a GCP VPC: 
+ 
+1. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+
+    - Astro cluster ID and name.
+    - Google Cloud project ID of the target VPC.
+    - VPC NAME of the target VPC.
+    - Classless Inter-Domain Routing (CIDR) block of the target VPC.
+
+    After receiving your request, Astronomer support will create a VPC peering connection from your Astro VPC to your target VPC. The support team will then provide you with your Astro cluster GCP project ID and VPC name.
+    
+2. Using the information provided by Astronomer support, [create a peering connection](https://cloud.google.com/vpc/docs/using-vpc-peering#creating_a_peering_configuration) from your target VPC to your Astro cluster VPC. For example, you can use the following gcloud CLI command to create the connection:
+
+   ```sh
+   gcloud compute networks peerings create <choose-any-name> --network=<your-target-vpc-network-name>  --peer-project=<your-cluster-project-id> --peer-network=<your-cluster-vpc-name>
+   ```
+
+After both VPC peering connections have been created, the connection becomes active.
 
 </TabItem>
 
@@ -54,7 +70,7 @@ After receiving your request, Astronomer support initiates a peering request and
 
 Use Private Service Connect (PSC) to create private connections from Astro to GCP services without connecting over the public internet. See [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) to learn more.
 
-The Astro data plane is by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis#supported-apis). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
+Astro clusters are by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis#supported-apis). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
 
 A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
 
@@ -83,36 +99,14 @@ To allow data pipelines running on GCP to access Google Cloud services in a secu
 
 To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
 
-1. In the Cloud UI, select a Workspace, select a Deployment, and then copy the value in the **Namespace** field.
+1. In the Cloud UI, select your Deployment, then click **Details**
 
-2. Use the Deployment namespace value and the name of your Google Cloud project to identify the Google service account for your Deployment.
-
-    Google service accounts for Astro Deployments are formatted as follows:
-
-    ```text
-    astro-<deployment-namespace>@<gcp-account-id>.iam.gserviceaccount.com
-    ```
-    
-    To locate your Google Cloud account ID, in the Cloud UI click **Clusters**. The Google Cloud account ID is located in the **Account ID** column.
-
-    For example, for a Google Cloud project named `astronomer-prod` and a Deployment namespace defined as `nuclear-science-2730`, the service account for the Deployment would be:
-
-    ```text
-    astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
-    ```
-  :::info
-
-  GCP has a 30-character limit for service account names. For Deployment namespaces which are longer than 24 characters, use only the first 24 characters when determining your service account name.
-
-  For example, if your Google Cloud project is named `astronomer-prod` and your Deployment namespace is `nuclear-scintillation-2730`, the service account name is:
-
-  ```text
-  astro-nuclear-scintillation-27@astronomer-prod.iam.gserviceaccount.com
+2. Copy the service account shown under **Workload Identity**.
 
 3. Grant the Google service account for your Astro Deployment an IAM role that has access to your external data service. With the Google Cloud CLI, run:
 
     ```text
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com --role=roles/viewer
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:<your-astro-service-account> --role=roles/viewer
     ```
 
     For instructions on how to grant your service account an IAM role in the Google Cloud console, see [Grant an IAM role](https://cloud.google.com/iam/docs/grant-role-console#grant_an_iam_role).

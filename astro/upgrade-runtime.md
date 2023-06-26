@@ -28,6 +28,48 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
 
+#### Runtime 8 (Airflow 2.6)
+
+##### Breaking change to `apache-airflow-providers-cncf-kubernetes` in version 8.4.0
+
+Astro Runtime 8.4.0 upgrades `apache-airflow-providers-cncf-kubernetes` to 7.0.0, which includes a breaking change by [removing some deprecated features from KubernetesHook](https://github.com/apache/airflow/commit/a1f5a5425e65c40e9baaf5eb4faeaed01cee3569). If you are using any of these features, either pin your current version of `apache-airflow-providers-cncf-kubernetes` to your `requirements.txt` file or ensure that you don't use any of the deprecated features before upgrading.
+
+##### Upgrade directly to Astro Runtime 8.1
+
+Astro Runtime 8.0 introduced a number of bugs and dependency conflicts which were subsequently fixed in Runtime 8.1. As a result, Astro Runtime 8.0 is not available in the Cloud UI and no longer supported by Astronomer. To use Airflow 2.6, upgrade directly to Runtime 8.1.
+
+##### Package dependency conflicts
+
+Astro Runtime 8 includes fewer default dependencies than previous versions. Specifically, the following provider packages are no longer installed by default:
+
+- `apache-airflow-providers-apache-hive`
+- `apache-airflow-providers-apache-livy`
+- `apache-airflow-providers-databricks`
+- `apache-airflow-providers-dbt-cloud`
+- `apache-airflow-providers-microsoft-mssql`
+- `apache-airflow-providers-sftp`
+- `apache-airflow-providers-snowflake`
+
+If your DAGs depend on any of these provider packages, add the provider packages to your Astro project `requirements.txt` file before upgrading. You can also [pin specific provider package versions](#optional-pin-provider-package-versions) to ensure that none of your provider packages change after upgrading.
+
+##### Upgrade to Python 3.10
+
+Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet support Python 3.10, use one of the following options to stay on Python 3.9:
+
+- Run your tasks using the KubernetesPodOperator or PythonVirtualenvOperator. You can configure the environment that these tasks run in to use Python 3.9.
+- Use the [`astronomer-provider-venv`](https://github.com/astronomer/astro-provider-venv) to configure a custom virtual environment that you can apply to individual tasks.
+
+##### Provider incompatibilities
+
+There is an incompatibility between Astro Runtime 8 and the following provider packages:
+
+- `apache-airflow-providers-cncf-kubernetes==6.1.0`
+- `apache-airflow-providers-google==10.0.0`
+
+That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt`file.
+
+This incompatibility results in breaking the GKEStartPodOperator. This operator inherits from the KubernetesPodOperator, but then overrides the hook attribute with the GKEPodHook. In the included version of the `cncf-kubernetes` providers package, the KubernetesPodOperator uses a new method, `get_xcom_sidecar_container_resources`. This method is present in the KubernetesHook, but not the GKEPodHook. Therefore, when it is called it causes the task execution to break. 
+
 #### Runtime 6 (Airflow 2.4)
 
 Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
