@@ -5,13 +5,13 @@ id: manage-connections-variables
 description: "Learn about different strategies for managing Airflow connections and variables in local environments and on Astro"
 ---
 
-*Airflow connections* are used for storing credentials and other information necessary for connecting to external services whereas *Airflow variables* are a generic way to store and retrieve arbitrary content or settings as a simple key value store within Airflow.
+*Airflow connections* are used for storing credentials and other information necessary for connecting to external services. *Airflow variables* are a generic way to store and retrieve arbitrary content or settings as a simple key value store within Airflow.
 
-To store Airflow connections and variables in local Airflow or Astro, you can choose from different management strategies based on your usecase. Each of these strategies have benefits and limitations related to their security and ease of use. The strategy you choose should ideally be compatible with both your local environment and Astro Deployment for seamless integration. However, based on security requirements, permissions or your use-case, you might need to use one strategy for local and another for Astro Deployment.
+Airflow supports several different methods for managing connections and variables. Each of these strategies has benefits and limitations related to their security and ease of use. The strategy you choose should be compatible with both your local environment and Astro Deployment. However, based on your security requirements, permissions, or use-case, you might need to use one strategy for your local environment and another for your Astro Deployment.
 
-Astro allows you to seamlessly integrate [secrets backend](secrets-backend.md) of your choice, which is recommended as the most secure and centralized management strategy. We also recommend using [Astro CLI](cli/overview.md) to run a local Airflow environment and test your DAGs locally before deploying to production. If it is not possible to run local Airflow, you can easily create dev ephemeral Deployments to test on Astro using [CI/CD](set-up-ci-cd.md#create-a-cicd-pipeline) and [Deployments-as-code](manage-deployments-as-code.md#create-a-deployment-from-a-template-file).
+Use this document to select the right Airflow connection and variable management strategies for your team.
 
-For in-depth information on creating and managing connections see [Connection Basics](https://docs.astronomer.io/learn/connections).
+For in-depth information on creating and managing connections, see [Connection Basics](https://docs.astronomer.io/learn/connections).
 
 ## Prerequisites
 
@@ -24,12 +24,12 @@ The following table suggests possible management strategies for specific use cas
 
 | Scenario | Strategy |
 |----------|----------|
-| I'm getting started and want to quickly create Airflow objects | [Airflow UI](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) |
-| I prefer to manage my Airflow variables in a Git repository and to upload directly to Airflow | [Airflow UI](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) |
-| I need to keep my connections and variables centralized and as secure as possible | [Secrets backend](secrets-backend.md#benefits) |
-| I don't have a secrets backend and want to reduce the calls to metadata db to improve performance or override existing objects defined in Airflow UI | [Environment variables](environment-variables.md) |
+| I'm getting started and want to quickly create Airflow objects | [Airflow UI](#airflow-ui) |
+| I prefer to manage my Airflow variables in a Git repository and to upload directly to Airflow | [Airflow UI](#airflow-ui) |
+| I need to keep my connections and variables stored in a centralized and secure location. | [Secrets backend](#secrets-backend) |
+| I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Environment variables](#environment-variables). |
 
-Because variables and connections serve different purpose in Airflow, you might want to choose a different strategy for each. For example, you can choose secrets backend for connections and use combination of a `json` file and Airflow UI for variables. See [variable basics](https://docs.astronomer.io/learn/) for in-depth information.
+Because variables and connections serve different purposes in Airflow, you might want to use a different strategy for each object type. For example, you can use a secrets backend for connections and use combination of a `json` files and the Airflow UI for variables.
 
 :::tip
 If you just want to test your connection and export in JSON or URI format, use Airflow UI to [create your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) and Astro CLI commands [`astro dev object export`](https://docs.astronomer.io/astro/cli/astro-dev-object-export) or [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run) to export.
@@ -46,8 +46,8 @@ The quickest way to create Airflow connections and variables is through the Airf
 #### Benefits
 
 - The UI has features for correctly formatting and testing your connections.
-- Easy to change variables or connections to test different usecases on-the-fly.
-- You can export your variables from the Airflow UI to a JSON file and import them to the Airflow UI from a JSON file.
+- It's easy to change variables or connections to test different use cases on the fly.
+- You can export and import your variables from the Airflow UI using JSON files and the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-metadata-database).
 - Connections and variables are encrypted and stored in the Airflow metadata database.
 
 #### Limitations
@@ -69,7 +69,7 @@ A secrets backend is the most secure way to store connections and variables. You
 - Comply with internal security postures and policies that protect your organization.
 - Recover objects if your Airflow environments go down.
 - Share secrets across different Airflow environments.
-- You can configure your secrets backend to allow selective access to connections and variables by using `connections_prefix` or `variables_prefix`. 
+- Allow selective access to connections and variables by using `connections_prefix` and `variables_prefix`. 
 - Limit the number of open connections to your metadata database, especially if you are using your connections and variables outside of task definitions.
 
 #### Limitations
@@ -88,10 +88,10 @@ You can use Airflow's system-level environment variables to store connections an
 
 #### Benefits
 
-- If you user `.env` file for local Airflow and your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables.
-- You can export environment variables from local Airflow to Astro using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#environment-variables).
-- In case you want to override variables in the Airflow UI, Airflow variables set in environment variables take precedence over Airflow UI variables. See [Environment variable priority](environment-variables.md#environment-variable-priority)
-- On Astro, you can create your connections and variables as environment variables from the Cloud UI. See [use environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui) for more details. 
+- If you use an `.env` file for your local Airflow environment and your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables.
+- You can export environment variables from a local Airflow environment to Astro using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#environment-variables).
+- You can override Airflow variables set in the Airflow UI. See [Environment variable priority](environment-variables.md#environment-variable-priority)
+- You can create your connections and variables as environment variables from the Cloud UI. See [Use environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui). 
 - Environment variables marked as **Secret** are encrypted in the Astronomer control plane. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-on-astro) for details.
 - This approach limits the number of open connections to your metadata database, especially if you are using your connections and variables outside of task definitions.
 
@@ -99,10 +99,10 @@ You can use Airflow's system-level environment variables to store connections an
 
 - You can't view connections and variables from the Airflow UI. 
 - You must restart your local environment using `astro dev restart` whenever you make changes to your `.env` file.
-- The environment variables are defined in plain text in `.env` file.
+- The environment variables are defined in plain text in your `.env` file.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are not as secure or centralized compared to a [secrets backend](secrets-backend.md).
-- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [import and export Airflow objects](import-export-connections-variables.md#environment-variables).
+- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [Import and export Airflow objects](import-export-connections-variables.md#environment-variables).
 
 ## Other strategies
 
@@ -113,4 +113,4 @@ While it's possible to manage Airflow connections and variables with these strat
 
 ## See also
 - [Import and export Airflow objects](import-export-connections-variables.md)
-- [Authenticate to cloud from local](cli/authenticate-to-clouds.md)
+- [Authenticate to cloud services with user credentials](cli/authenticate-to-clouds.md)

@@ -11,11 +11,9 @@ After you create connections and variables in an Airflow environment, you might 
 - You need to replicate a production Airflow environment on your local machine.
 - Your team is migrating old Airflow environments to a new location.
 
-Use this document to learn how to export and import environment variables based on different connection and variable [storage and management strategies](manage-connections-variables.md). 
+Based on the [management strategy for your connections and variables](manage-connections-variables.md), their storage location will vary. Use this document to learn how to export and import them from one environment to another. 
 
-Based on your management strategy, the storage location for your Airflow objects will vary and hence the methods to import and export will vary as well. [Astro CLI](https://docs.astronomer.io/astro/cli/overview) can be used to export/import your Airflow objects from/to your local Airflow or Astro Deployment for all management strategies except Secrets Backend. 
 
-Use this document to understand these methods and also how to use simple Astro CLI commands to import or export.
 
 ## From the Airflow UI/metadata database
 
@@ -25,7 +23,7 @@ To export variables from a local Airflow environment or Astro Deployment, go to 
 
 ![Export Variables](/img/docs/airflow-ui-export-vars.png)
 
-To import variables to a local Airflow environment or Astro Deployment from a `json` file, go to **Admin** in the Airflow UI, click **Variables**, then and click **Choose file**. Select the file you want to import and then click **Import Variables**.
+To import variables to a local Airflow environment or Astro Deployment from a `json` file, go to **Admin** in the Airflow UI, click **Variables**, then click **Choose file**. Select the file you want to import and then click **Import Variables**.
 
 ![Import Variables](/img/docs/airflow-ui-import-vars.png)
 
@@ -46,7 +44,7 @@ Refer to your secrets backend provider's documentation to learn how to manage re
 - Azure key vault's [SDK and API](https://learn.microsoft.com/en-us/azure/key-vault/general/developers-guide#apis-and-sdks-for-key-vault-management) reference.
 - Hashicorp Vault's [Python SDK](https://developer.hashicorp.com/vault/docs/get-started/developer-qs#step-2-install-a-client-library)
 
-To set up a secrets backend on Astro, see [configure secrets backend](secrets-backend).
+To set up a secrets backend on Astro, see [configure secrets backend](secrets-backend.md).
 
 ## From environment variables
 
