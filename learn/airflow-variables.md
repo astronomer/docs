@@ -30,8 +30,8 @@ To get the most out of this guide, you should have an understanding of:
 There are some best practices to keep in mind when using Airflow variables:
 
 - Airflow variables should be used for information that is runtime dependent but does not change too frequently.
-- You should avoid using Variables in top-level Airflow code, as they will create a connection to the Airflow metastore every time the DAG is parsed, which can lead to performance issues. See also [DAG writing best practices in Apache Airflow](dag-best-practices.md#avoid-top-level-code-in-your-dag-file).
-- You can use the [Jinja template](templating.md) syntax to access Variables in top-level Airflow code, since they will only be rendered one a task executes.
+- You should avoid using Airflow variables in top-level DAG code, as they will create a connection to the Airflow metastore every time the DAG is parsed, which can lead to performance issues. See also [DAG writing best practices in Apache Airflow](dag-best-practices.md#avoid-top-level-code-in-your-dag-file).
+- You can use the [Jinja template](templating.md) syntax to access Airflow variables in top-level DAG code, since they will only be rendered once a task executes.
 - Airflow variables are encrypted with [Fernet](https://github.com/fernet/spec/) when they are written to the Airflow metastore. To mask Airflow variables in the UI and when printed to logs, include a substring indicating a sensitive value in your Airflow variable name. See [Hiding sensitive information](#hiding-sensitive-information).
 
 See the Airflow documentation for example code showing [good and bad practices accessing Airflow Variables in a DAG](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html#airflow-variables).
