@@ -179,7 +179,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 - You have a `main` branch of an Astro project hosted in a single GitHub repository.
 - You have a `prod` Deployment on Astro where you deploy your `main` GitHub branche to.
-- You have a `prod` CircleCI context where you create your environment variables to use in CI/CD workflow.
+- You have a production CircleCI context where you store environment variables to use in your CI/CD workflow.s
 
 #### Implementation
 
