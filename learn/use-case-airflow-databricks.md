@@ -34,7 +34,7 @@ Before you try this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from this [Astronomer GitHub repo](https://github.com/astronomer/learn-airflow-databricks-tutorial). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory and replace the connection details with your own. 
+Clone the example project from this [Astronomer GitHub repo](https://github.com/astronomer/learn-airflow-databricks-tutorial). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory and replace the connection details with your own. `.env` is already included in the list of files which git will ignore when creating commits (`.gitignore`). This is necessary to ensure that secrets stored in `.env` are not accidentally pushed to GitHub.
 
 In `renewable_analysis_dag.py`, replace the `DATABRICKS_LOGIN_EMAIL`, `S3_BUCKET` and `AWS_REGION` variables with your own values. Change the `COUNTRY` to analyze a different country. For available countries, refer to the source data in the `include` folder.
 
