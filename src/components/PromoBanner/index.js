@@ -12,10 +12,10 @@ export default function PromoBanner() {
   const [closed, setClosed] = useState(false);
 
   const wasBannerClosed =
-    window && window.sessionStorage.getItem("promoBannerClosed");
+    typeof window !== "undefined" && window.sessionStorage.getItem("promoBannerClosed");
 
   function closePromoBanner() {
-    window?.sessionStorage.setItem("promoBannerClosed", "true");
+    typeof window !== "undefined" && window.sessionStorage.setItem("promoBannerClosed", "true");
     setClosed(true);
   }
 
