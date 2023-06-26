@@ -89,7 +89,7 @@ You can use Airflow's system-level environment variables to store connections an
 #### Benefits
 
 - If you user `.env` file for local Airflow and your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables.
-- You can export environment variables from local Airflow to Astro using the Astro CLI. See [import and export Airflow objects](import-export-airflow-objects#environment-variables).
+- You can export environment variables from local Airflow to Astro using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#environment-variables).
 - In case you want to override variables in the Airflow UI, Airflow variables set in environment variables take precedence over Airflow UI variables. See [Environment variable priority](environment-variables.md#environment-variable-priority)
 - On Astro, you can create your connections and variables as environment variables from the Cloud UI. See [use environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui) for more details. 
 - Environment variables marked as **Secret** are encrypted in the Astronomer control plane. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-on-astro) for details.
@@ -102,7 +102,7 @@ You can use Airflow's system-level environment variables to store connections an
 - The environment variables are defined in plain text in `.env` file.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are not as secure or centralized compared to a [secrets backend](secrets-backend.md).
-- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [import and export Airflow objects](import-export-airflow-objects#environment-variables).
+- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [import and export Airflow objects](import-export-connections-variables.md#environment-variables).
 
 ## Other strategies
 
@@ -112,5 +112,5 @@ While it's possible to manage Airflow connections and variables with these strat
 - For local Astro projects, you can use `airflow_settings.yaml` for defining your connections and variables. See [Configure `airflow_settings.yaml`](develop-project.md#configure-airflow_settingsyaml-local-development-only) for more details.
 
 ## See also
-- [Import and export Airflow objects](import-export-airflow-objects)
-- [Authenticate to cloud from local](cli/authenticate-to-clouds)
+- [Import and export Airflow objects](import-export-connections-variables.md)
+- [Authenticate to cloud from local](cli/authenticate-to-clouds.md)

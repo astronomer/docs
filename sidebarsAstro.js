@@ -38,8 +38,14 @@ module.exports = {
       items: [
         "develop-project",
         "kubernetespodoperator",
-        "manage-connections-variables",
-        "import-export-connections-variables",
+        {
+          type: "category",
+          label: "Airflow connections and variables",
+          items: [
+            "manage-connections-variables",
+            "import-export-connections-variables",
+          ],
+        },
         {
           type: "category",
           label: "Cloud IDE",
