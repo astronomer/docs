@@ -235,6 +235,8 @@ To find information about what parameters are required for a specific connection
 - Check the documentation of the external tool you are connecting to and see if it offers guidance on how to authenticate.
 - View the source code of the hook that is being used by your operator.
 
+You can also test connections from within your IDE by using the `dag.test()` method. See [Debug interactively with dag.test()](testing-airflow.md#use-variables-and-connections-in-dagtest) and [How to test and debug your Airflow connections](https://www.astronomer.io/events/webinars/how-to-test-and-debug-your-airflow-connections/).
+
 ## I need more help
 
 The information provided here should help you resolve the most common issues. If your issue was not covered in this guide, try the following resources:
