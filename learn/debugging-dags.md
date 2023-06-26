@@ -36,6 +36,12 @@ To give yourself the best possible chance of fixing a bug in Airflow, contextual
 
 Answering these questions will help you narrow down what kind of issue you're dealing with and inform your next steps. 
 
+:::info
+
+You can debug your DAG code with IDE debugging tools using the `dag.test()` method which was added in Airflow 2.5. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest). This method also allows you to test and debug your Airflow connections, see [How to test and debug your Airflow connections](https://www.astronomer.io/events/webinars/how-to-test-and-debug-your-airflow-connections/).
+
+:::
+
 ## Airflow is not starting on the Astro CLI
 
 The 3 most common ways to run Airflow locally are using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli), running a [standalone instance](https://airflow.apache.org/docs/apache-airflow/stable/start.html), or running [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). This guide focuses on troubleshooting the Astro CLI, which is an open source tool for quickly running Airflow on a local machine. 
