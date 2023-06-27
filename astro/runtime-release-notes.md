@@ -32,7 +32,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 ### Additional improvements 
 
 - Upgraded `astronomer-providers` to 1.17.1, which includes enhancements to the `S3KeySizeSensorAsync` and some bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1170-2023-06-21) for a complete list of changes.
-- - Upgraded `apache-airflow-providers-providers-amazon` to [8.2.0](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html#id1).
+- Upgraded `apache-airflow-providers-providers-amazon` to [8.2.0](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html#id1).
 
 ## Astro Runtime 8.5.0
 
