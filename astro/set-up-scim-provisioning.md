@@ -25,6 +25,15 @@ Astro supports SCIM provisioning with the following IdPs:
 - [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
 - [Okta](https://www.okta.com/)
 
+### Supported Okta features
+
+Okta's Astro integration supports the following SCIM actions:
+
+- Create users
+- Update user attributes
+- Deactivate users
+- Group push
+
 ## Prerequisites
 
 - A configured identity provider. See [Set up SSO](configure-idp.md).
@@ -40,6 +49,7 @@ Astro supports SCIM provisioning with the following IdPs:
         {label: 'Azure AD', value: 'Azure AD'},
     ]}>
 <TabItem value= "Okta">
+
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
 2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **General**.
@@ -118,7 +128,7 @@ Complete the manual setup if you configured your existing Astro app without usin
     | givenName                        | name.givenName  |
     | surname                          | name.familyName |
 
-  :::info
+  :::caution
 
   This setup assumes that `userPrincipalName` contains your users' email. If you use a field other than `userPrincipalName` to define your user email, replace `userPrincipalName` with the attribute you use.
 

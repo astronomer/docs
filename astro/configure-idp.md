@@ -58,6 +58,14 @@ At a high level, to configure an SSO identity provider (IdP) you will:
 
 This section provides setup steps for setting up Okta as your IdP on Astro. After completing this setup, all users in your organization can use Okta to log in to Astro.
 
+#### Supported Okta features
+
+The Astro integration with Okta supports the following authentication options:
+
+- IdP-initiated SSO
+- Service provider (SP)-initiated SSO
+- Just-In-Time provisioning
+
 #### Prerequisites
 
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
@@ -78,16 +86,29 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 
 4. Copy the **Connection Name**.
 5. Open a new tab and go to Okta. In the Okta Admin Console, go to **[Applications](https://help.okta.com/en-us/Content/Topics/Apps/apps-access.htm)** and click **Browse App Catalogue**. Then, search the catalogue, select the **Astro** app integration, and click **Add Integration**. After configuring a label for the integration, the application appears in **Applications**.
+
+  :::info
+
+  When you create your application, Okta automatically maps the following attributes to Astro user account values:
+
+  | Attribute      | Value        |  
+  | --------- | ---------------- |
+  | email     | user.email       |
+  | firstName | user.firstName   |
+  | lastName  | user.lastName    |
+  | name      | user.displayName |
+
+  :::
+
 6. Open the Astro application you just configured, click **Sign On**, then click **Edit**. Configure the following values:
 
-    - **Attributes**: (Optional) Create attributes to map from Okta to Astro user accounts. You can map attributes to Astro user account first names, last names, and email.
     - **Connection Name**: Enter the **Connection Name** you copied from the Cloud UI.
     - **Application username format**: **Email**.
     - **Update application username on**: `Create and update`.
   
 7. Copy the values for **Sign-on URL**, **Sign out URL**, and **X.509 Certificate** from the **Metadata Details** section.
 8. Assign yourself to the Astro app integration from Okta. See [Assign an app integration to a user](https://help.okta.com/en-us/Content/Topics/Provisioning/lcm/lcm-assign-app-user.htm).
-9. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
+9.  Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
 
     - **Identity Provider Single Sign-on URL**: Enter your **Single Sign-on URL**.
     - **Identity Provider Sign-out URL**: Enter your **Single Sign-out URL**.
@@ -256,12 +277,12 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
 
 10. Click **Parameters** in the left menu, and add the following four parameters, using the same capitalization shown in the **Value** column:
 
-    | Field name | Value           |
-    | ---------  | -----------------| 
-    | email      | Email            |
-    | firstName  | First Name       |
-    | lastName   | Last Name        |
-    | name       | Name             |
+    | Field name | Value      |
+    | ---------- | ---------- |
+    | email      | Email      |
+    | firstName  | First Name |
+    | lastName   | Last Name  |
+    | name       | Name       |
 
     Select the **Include in SAML assertion** checkbox for every parameter that you add and then click **Save**.
 
@@ -357,13 +378,13 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 15. Click the **Attribute Mappings** tab, click **Edit**, and add the following attributes, using the capitalization shown in both columns:
 
-    | Astronomer        | PingOne           |
-    | ------------      | ----------------| 
-    | saml_subject      | User ID         |
-    | email             | Email Address   |
-    | firstName         | Given Name      |
-    | lastName          | Family Name     |
-    | name              | Formatted       |
+    | Astronomer   | PingOne       |
+    | ------------ | ------------- |
+    | saml_subject | User ID       |
+    | email        | Email Address |
+    | firstName    | Given Name    |
+    | lastName     | Family Name   |
+    | name         | Formatted     |
 
 16. Click **Save**.
 
