@@ -27,6 +27,27 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
 
+## June 27, 2023
+
+### Support for dedicated clusters on Azure
+
+<HostedBadge/>
+
+You can now create a dedicated cluster in the following Azure regions:
+
+- `australiaeast`
+- `eastus2`
+- `northeurope`
+- `westeurope`
+- `uswest2`
+
+See [Astro Hosted resource reference](resource-reference-hosted.md) for more information.
+
+### Additional improvements
+
+- The Cloud UI now shows how many Workspaces each Team belongs to in **Settings** > **Access Management** > **Teams**.
+- You can now create dedicated clusters in `us-west1` on GCP.
+
 ## June 20, 2023
 
 ### Additional improvements
