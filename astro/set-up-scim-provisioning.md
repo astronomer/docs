@@ -150,7 +150,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 
 If you removed an Okta user but their Astro account remains, [delete the account from Astro](add-user.md#update-or-remove-an-organization-user).
 
-If an Astro user is not appearing for an Okta user as expected , remove and re-assign the user in Okta.
+If an Astro user is not appearing for an Okta user as expected, remove and re-assign the user in Okta.
 
 ### What if an Azure user or group is out of sync with an Astro user or Team?
 
