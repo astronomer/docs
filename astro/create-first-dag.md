@@ -28,7 +28,12 @@ This tutorial takes about 15 minutes. If you're new to Airflow and want a more i
 - An Astro account. To start an Astro trial, see [Start a trial](trial.md). 
 - The latest version of the [the Astro CLI](cli/overview.md). 
 
-Astronomer recommends installing [Docker Desktop](https://docs.docker.com/get-docker/) for testing and running Airflow on your local computer, but it's not required for this tutorial. If you just want to run Airflow on your local machine, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md).
+Although it's not required for this tutorial, Astronomer also recommends installing a supported container engine for testing your DAGs locally and deploying more complex project changes to Astro. The following container engines are supported with the Astro CLI:
+
+- [Docker Desktop](https://docs.docker.com/get-docker/) (Recommended).
+- [Podman](https://podman.io/). See [Run the Astro CLI using Podman](cli/configure-cli.md#run-the-astro-cli-using-podman).
+
+If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md).
 
 ## Step 1: Create a Deployment
 
