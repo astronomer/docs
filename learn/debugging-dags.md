@@ -38,7 +38,7 @@ Answering these questions will help you narrow down what kind of issue you're de
 
 :::info
 
-You can debug your DAG code with IDE debugging tools using the `dag.test()` method which was added in Airflow 2.5. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest). This method also allows you to test and debug your Airflow connections, see [How to test and debug your Airflow connections](https://www.astronomer.io/events/webinars/how-to-test-and-debug-your-airflow-connections/).
+You can debug your DAG code with IDE debugging tools using the `dag.test()` method, which was added in Airflow 2.5. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest).
 
 :::
 
