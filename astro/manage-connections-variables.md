@@ -32,7 +32,7 @@ The following table suggests possible management strategies for specific use cas
 Because variables and connections serve different purposes in Airflow, you might want to use a different strategy for each object type. For example, you can use a secrets backend for connections and use combination of a `json` files and the Airflow UI for variables.
 
 :::tip
-If you just want to test your connection and export in JSON or URI format, use Airflow UI to [create your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui) and Astro CLI commands [`astro dev object export`](https://docs.astronomer.io/astro/cli/astro-dev-object-export) or [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run) to export.
+If you only want to test connections or export connections in  a JSON or URI format, use the Airflow UI to [manage your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui).  You can then use the Astro CLI commands to export the connections in a URI or JSON format. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-metadata-database).
 :::
 
 ## Compare connection and variable management strategies 
