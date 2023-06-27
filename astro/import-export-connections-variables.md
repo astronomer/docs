@@ -13,8 +13,6 @@ After you create connections and variables in an Airflow environment, you might 
 
 Based on the [management strategy for your connections and variables](manage-connections-variables.md), their storage location will vary. Use this document to learn how to export and import them from one environment to another. 
 
-
-
 ## From the Airflow UI/metadata database
 
 When you use the Airflow UI to store your Airflow connections and variables, they are stored in Airflow's metadata database. If your variables are stored in Airflow's metadata database, you can use the Airflow UI to import and export them in bulk.
