@@ -218,12 +218,12 @@ astronomer:
           valueFrom:
             secretKeyRef:
               name: astronomer-s3-access-key
-              key: AWS_ACCESS_KEY_ID
+              key: accesskey
       - name: REGISTRY_STORAGE_S3_SECRETKEY
           valueFrom:
             secretKeyRef:
               name: astronomer-s3-secret-key
-              key: AWS_ACCESS_SECRET_ACCESS_KEY
+              key: secretkey
 ```
 
 3. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
@@ -270,12 +270,12 @@ astronomer:
           valueFrom:
             secretKeyRef:
               name: astronomer-azure-access-key
-              key: AZURE_ACCESS_KEY_ID
+              key: accountname
       - name: REGISTRY_STORAGE_AZURE_ACCOUNTKEY
           valueFrom:
             secretKeyRef:
               name: astronomer-azure-secret-key
-              key: AZURE_ACCESS_SECRET_ACCESS_KEY
+              key: accountkey
 ```
 
 3. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
