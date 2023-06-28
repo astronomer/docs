@@ -46,7 +46,6 @@ astro dev pytest --args "–-cov-config path"
 astro dev pytest --args "--cov --cov-report xml:include/coverage.xml"
 ```
 
-
 ## Related Commands
 
 - [`astro dev init`](cli/astro-dev-init.md)
