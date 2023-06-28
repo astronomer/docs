@@ -113,7 +113,7 @@ Next, you will create a DAG that instead uses the DuckDB Airflow provider. To us
 
 :::info
 
-If you are connecting to MotherDuck, you will need to add your [MotherDuck Service token](https://motherduck.com/docs/authenticating-to-motherduck/) in the **MotherDuck Service token** field and leave the **Path to local database file** field empty. Optionally you can add a MotherDuck database name in the **MotherDuck database name** field, if no name is specified your connection will be to your MotherDuck default database (`my_db`).
+If you are connecting to MotherDuck, you will need to add your [MotherDuck Service token](https://motherduck.com/docs/authenticating-to-motherduck/) in the **MotherDuck Service token** field and leave the **Path to local database file** field empty. Optionally, you can add a MotherDuck database name in the **MotherDuck database name** field. The default name is the default MotherDuck database (`my_db`).
 
 :::
 
