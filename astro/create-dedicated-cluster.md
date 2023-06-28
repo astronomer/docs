@@ -31,9 +31,10 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 1. In the Cloud UI, open your Organization page by clicking the Astronomer logo in the upper left corner.
    
 2. Click **Cluster** > **+ Cluster**.
-   
+  
 3. Configure the following details about your cluster:
 
+    - **Cloud Provider**: Select **AWS**.
     - **Name**: The name for your cluster.
     - **Region**: Select the region that you want your cluster to run in.
     - **VPC Subnet Range**: Provide a subnet range for Astro to connect to your existing AWS resources through VPC peering. The default is `172.20.0.0/20`.
@@ -50,6 +51,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
    
 3. Configure the following details about your cluster:
 
+    - **Cloud Provider**: Select **GCP**.
     - **Name**: The name for your cluster.
     - **Region**: Select the region that your cluster runs in.
     - **Subnet CIDR**: Specify the range used by nodes in your GKE cluster (Default: `172.20.0.0/22`).
@@ -63,7 +65,18 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 <TabItem value="azure">
 
-You cannot currently create dedicated Azure clusters from the Cloud UI. If you are interested in creating a dedicated Azure cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
+1. In the Cloud UI, open your Organization page by clicking the Astronomer logo in the upper left corner.
+   
+2. Click **Cluster** > **+ Cluster**.
+   
+3. Configure the following details about your cluster:
+
+    - **Cloud Provider**: Select **Azure**.
+    - **Name**: The name for your cluster.
+    - **Region**: Select the region that you want your cluster to run in.
+    - **VPC Subnet Range**: Provide a subnet range for Astro to connect to your existing AWS resources through VPC peering. The default is `172.20.0.0/19`.
+  
+4. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md). 
 
 </TabItem>
 
