@@ -28,13 +28,17 @@ Before you try this example, make sure you have:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
-- Access to a Databricks workspace. See [Databricks' documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
+- Access to a Databricks workspace. See [Databricks documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
 - Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This example uses an [AWS S3](https://aws.amazon.com/s3/) bucket.
 - Access to a [relational database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html). This tutorial uses [PostgreSQL](https://www.postgresql.org/).
 
 ## Clone the project
 
-Clone the example project from this [Astronomer GitHub repo](https://github.com/astronomer/learn-airflow-databricks-tutorial). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory and replace the connection details with your own. `.env` is already included in the list of files which git will ignore when creating commits (`.gitignore`). This is necessary to ensure that secrets stored in `.env` are not accidentally pushed to GitHub.
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/learn-airflow-databricks-tutorial). 
+
+## Edit the project
+
+The project contains a file called `.env_example` which includes placeholder values for your credential details. After you clone the project, create a file called `.env`, copy the contents of `.env_example` into it, and delete `.env_example`. This is required because only `.env` is included in the list of files which Git will ignore when creating commits (`.gitignore`), and cloning an `.env` file directly will cause it to not be ignored the next time you push it to a Git repository.
 
 In `renewable_analysis_dag.py`, replace the `DATABRICKS_LOGIN_EMAIL`, `S3_BUCKET` and `AWS_REGION` variables with your own values. Change the `COUNTRY` to analyze a different country. For available countries, refer to the source data in the `include` folder.
 
@@ -60,7 +64,7 @@ The subset of data used in this example can be found in the include folder of th
 
 This project consists of one DAG, [renewable_analysis_dag](https://github.com/astronomer/learn-airflow-databricks-tutorial/blob/main/dags/renewable_analysis_dag.py), which performs an ELT process. It uses the Astro Python SDK and Astro Databricks provider to orchestrate two Databricks notebooks in a Databricks Workflow.
 
-First, three separate CSV files, each containing the energy percentages by country for solar, hydro, and wind power respectively, are loaded into new tables in the data warehouse using the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html). The operator uses [dynamic task mapping](dynamic-tasks.md) to create a mapped task instance for each dictionary in a list provided to the `.expand_kwargs` method, which are then executed in parallel.
+First, three separate CSV files, each containing the energy percentages by country for solar, hydro, and wind power respectively, are loaded into new tables in the data warehouse using the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html). The operator uses [dynamic task mapping](dynamic-tasks.md) to create a mapped task instance for each dictionary in the list provided to the `.expand_kwargs` method. These tasks are then executed in parallel.
 
 ```python
 in_tables = aql.LoadFileOperator.partial(
