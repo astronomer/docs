@@ -38,7 +38,7 @@ Clone the example project from the [Astronomer GitHub](https://github.com/astron
 
 ## Edit the project
 
-The project contains a file called `.env_example` which includes placeholder values for your credential details. After you clone the project, create a file called `.env`, copy the contents of `.env_example` into it, and delete `.env_example`. This is required because only `.env` is included in the list of files which Git will ignore when creating commits (`.gitignore`), and cloning an `.env` file directly will cause it to not be ignored the next time you push it to a Git repository.
+The project contains a file called `.env_example` which includes placeholder values for your credential details. After you clone the project, create a file called `.env`, copy the contents of `.env_example` into it, and delete `.env_example`. This is required because only `.env` is included in the list of files which Git will ignore when creating commits (`.gitignore`), and cloning an `.env` file directly will cause it to not be ignored the next time you push it to a GitHub repository.
 
 In `renewable_analysis_dag.py`, replace the `DATABRICKS_LOGIN_EMAIL`, `S3_BUCKET` and `AWS_REGION` variables with your own values. Change the `COUNTRY` to analyze a different country. For available countries, refer to the source data in the `include` folder.
 
