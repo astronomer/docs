@@ -30,7 +30,7 @@ Before you try this example, make sure you have:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 - Access to a Databricks workspace. See [Databricks documentation](https://docs.databricks.com/getting-started/index.html) for instructions. You can use any workspace that has access to the [Databricks Workflows](https://docs.databricks.com/workflows/index.html) feature. You need a user account with permissions to create notebooks and Databricks jobs. You can use any underlying cloud service, and a [14-day free trial](https://www.databricks.com/try-databricks) is available.
 - Access to an [object storage supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_file.html). This example uses an [AWS S3](https://aws.amazon.com/s3/) bucket.
-- Access to a [relational database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html). This tutorial uses [PostgreSQL](https://www.postgresql.org/).
+- Access to a [relational database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html). This example uses [PostgreSQL](https://www.postgresql.org/).
 
 ## Clone the project
 
@@ -58,7 +58,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 
 This example analyzes the share of solar, wind and hydro electricity for different countries. The full source data including other electricity modalities can be found in this [Kaggle dataset](https://www.kaggle.com/datasets/programmerrdai/renewable-energy) derived from [Our World in Data](https://ourworldindata.org/renewable-energy) (License [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
 
-The subset of data used in this example can be found in the include folder of the accompanying [GitHub repository](https://github.com/astronomer/learn-airflow-databricks-tutorial/tree/main/include).
+The subset of data used in this example can be found in the `include` folder of the accompanying [GitHub repository](https://github.com/astronomer/learn-airflow-databricks-tutorial/tree/main/include).
 
 ### Project code
 
