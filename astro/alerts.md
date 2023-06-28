@@ -9,26 +9,28 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a specified time. 
+Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or email if you have a DAG run failure or if a task duration exceeds a specified time. 
 
-Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code and are designed to integrate with Slack and PagerDuty. Follow this guide to set up your Slack or PagerDuty to receive alerts from Astro and then configure your Deployment to send alerts.
+Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. Follow this guide to set up your Slack, PagerDuty, or email to receive alerts from Astro and then configure your Deployment to send alerts.
 
-To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow)
+To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 ## Prerequisites
 
 - An [Astro project](develop-project.md).
 - An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts.
-- A Slack workspace and/or PagerDuty service.
+- A Slack workspace, PagerDuty service, or email address.
 
-## Step 1: Configure your communication channel
+
+## Step 1: Configure your communication channel <!-- Sensitive header used in product - do not change without a redirect-->
 
 <Tabs
     defaultValue="Slack"
     groupId= "step-1-configure-your-communication-channel"
     values={[
         {label: 'Slack', value: 'Slack'},
-        {label: 'PagerDuty', value: 'PagerDuty'}
+        {label: 'PagerDuty', value: 'PagerDuty'},
+        {label: 'Email', value: 'Email'}
     ]}>
 <TabItem value="Slack">
 
@@ -76,6 +78,11 @@ To set up an alert integration with PagerDuty, you need access to your organizat
 5. Copy the **Integration Key** for your new Astro alert integration.
 
 </TabItem>
+<TabItem value="Email">
+
+No external configuration is required for the email integration.
+
+</TabItem>
 </Tabs>
 
 ## Step 2: Create your Workspace alert in the Cloud UI
@@ -91,11 +98,18 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 4. Enter your **Alert Name** and choose the alert type, either **Pipeline Failure** or **Task Duration**. 
 
-5. Choose the **Communication Channel** where you want to send your alert. You can choose to send alerts to both Slack and PagerDuty.
+5. Choose the **Communication Channels** where you want to send your alert.
 
 6. Add your communication channel information.
 
-    <Tabs>
+    <Tabs
+        defaultValue="Slack"
+        groupId= "step-1-configure-your-communication-channel"
+        values={[
+            {label: 'Slack', value: 'Slack'},
+            {label: 'PagerDuty', value: 'PagerDuty'},
+            {label: 'Email', value: 'Email'}
+        ]}>
     <TabItem value="Slack">
     
     Paste the Webhook URL from your Slack workspace app. If you need to find a URL for an app you've already created, go to your [Slack Apps](https://api.slack.com/apps) page, select your app, and then choose the **Incoming Webhooks** page. 
@@ -104,6 +118,11 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     <TabItem value="PagerDuty">
 
     Paste the Integration Key from your PagerDuty Integration and select the **Severity** of the alert.
+    
+    </TabItem>
+    <TabItem value="Email">
+
+    Enter the email addresses that should receive the alert. 
     
     </TabItem>
     </Tabs>
