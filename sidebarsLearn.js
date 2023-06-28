@@ -184,7 +184,8 @@ module.exports = {
             type: 'category',
             label: 'Use cases',
             items: [
-              'use-case-airflow-dbt',
+              'use-case-airflow-databricks',
+              'use-case-airflow-dbt'
             ],
           },
       ],

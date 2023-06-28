@@ -24,6 +24,16 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 8.6.0
+
+- Release date: June 27, 2023
+- Airflow version: 2.6.2
+
+### Additional improvements 
+
+- Upgraded `astronomer-providers` to 1.17.1, which includes enhancements to the `S3KeySizeSensorAsync` and some bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1170-2023-06-21) for a complete list of changes.
+- Upgraded `apache-airflow-providers-providers-amazon` to [8.2.0](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html#id1).
+
 ## Astro Runtime 8.5.0
 
 - Release date: June 17, 2023

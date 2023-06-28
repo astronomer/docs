@@ -158,6 +158,8 @@ On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro clu
 
 To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
 
+:::
+
 ## Transfer a Deployment to another Workspace 
 
 Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.

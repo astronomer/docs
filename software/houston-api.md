@@ -486,6 +486,7 @@ You can create Deployment and Workspace-level accounts in the Software UI as des
 mutation CreateSystemServiceAccount {
   createSystemServiceAccount(label: "<label>", role: SYSTEM_ADMIN) {
      apiKey
+     id
   }
 }
 ```

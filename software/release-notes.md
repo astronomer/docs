@@ -9,6 +9,15 @@ description: Astronomer Software release notes.
 
 0.32 is the latest long-term support (LTS) release for Astronomer Software. To upgrade to 0.32, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.32.2
+
+Release date: June 23, 2023
+
+### Bug fixes
+
+- Reverted a change which prevented Workspace-level service accounts from accessing a Deployment when the service account didn't have specific permissions for that Deployment.
+- Fixed an issue where some screens of the Airflow UI would produce an HTTP 500 internal server error.
+
 ## 0.32.1
 
 Release date: June 12, 2023

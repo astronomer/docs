@@ -21,11 +21,32 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 8.5 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 8.6 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.16.1 ([Release notes](cli/release-notes.md))
 
 <!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
+
+## June 27, 2023
+
+### Support for dedicated clusters on Azure
+
+<HostedBadge/>
+
+You can now create a dedicated cluster in the following Azure regions:
+
+- `australiaeast`
+- `eastus2`
+- `northeurope`
+- `westeurope`
+- `uswest2`
+
+See [Astro Hosted resource reference](resource-reference-hosted.md) for more information.
+
+### Additional improvements
+
+- The Cloud UI now shows how many Workspaces each Team belongs to in **Settings** > **Access Management** > **Teams**.
+- You can now create dedicated clusters in `us-west1` on GCP.
 
 ## June 20, 2023
 

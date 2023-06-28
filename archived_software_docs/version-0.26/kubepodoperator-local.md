@@ -9,7 +9,7 @@ description: Test the KubernetesPodOperator on your local machine.
 
 ### Windows and Mac
 
-The latest version of Docker for Windows and Mac comes with the ability to run a single node Kubernetes cluster on your local machine. If you are on Windows, follow [this guide](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly) for setting up Docker for Windows 10 and WSL (you don’t need to install docker-compose if you don’t want to).
+The latest version of Docker for Windows and Mac comes with the ability to run a single node Kubernetes cluster on your local machine. If you are on Windows, follow [this guide](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly) for setting up Docker for Windows 10 and WSL (you don’t need to install docker compose if you don’t want to).
 
 Go into Docker>Settings>Kubernetes to check the `Enable Kubernetes` checkbox and change the default orchestrator to Kubernetes. Once these changes are applied, the docker service will restart and the green dot in the bottom left hand corner will indicate Kubernetes is running. [Docker's docs](https://docs.docker.com/docker-for-mac/#kubernetes)
 

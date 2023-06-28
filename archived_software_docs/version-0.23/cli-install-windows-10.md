@@ -62,7 +62,7 @@ Then bind this mount point:
 
 You're all set! You can now run `docker run hello-world` through your WSL instance to ensure everything works as expected. Keep in mind that you will need to bind your mount point each time you start up a new WSL instance.
 
-**Last thing**: Whenever you run Docker-compose up, you'll want to make sure you navigate to the `/c/Users/name/dev/myapplication` first, otherwise your volume won't work. In other words, never access `/mnt/c` directly.
+**Last thing**: Whenever you run docker compose up, you'll want to make sure you navigate to the `/c/Users/name/dev/myapplication` first, otherwise your volume won't work. In other words, never access `/mnt/c` directly.
 
 ### Step 6. Final Install
 

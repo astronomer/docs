@@ -107,7 +107,6 @@ Currently, dedicated clusters are available on the following clouds and regions:
 | --------------- | -------------- |
 | `australiaeast` | Australia East |
 | `eastus2`       | East US 2      |
-| `japaneast`     | Japan East     |
 | `northeurope`   | North Europe   |
 | `westeurope`    | West Europe    |
 | `westus2`       | West US 2      |
@@ -124,6 +123,7 @@ Currently, dedicated clusters are available on the following clouds and regions:
 | `europe-west2`         | England, Europe         |
 | `us-central1`          | Iowa, North America     |
 | `us-east4`             | Virginia, North America |
+| `us-west1`             | Oregon, North America   |
 
 </TabItem>
 
