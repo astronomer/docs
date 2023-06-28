@@ -11,6 +11,8 @@ function usePromoBannerConfig() {
 export default function PromoBanner() {
   const [closed, setClosed] = useState(false);
 
+  const content = usePromoBannerConfig();
+
   const wasBannerClosed =
     typeof window !== "undefined" && window.sessionStorage.getItem("promoBannerClosed");
 
@@ -19,19 +21,35 @@ export default function PromoBanner() {
     setClosed(true);
   }
 
+  function trackCTR() {
+    typeof window !== "undefined" && window.analytics.track(`Promo Banner Button Click`, {
+      bannerText: content.text,
+      buttonText: content.buttonText,
+      buttonURL: content.url,
+    });
+  }
+
+  function trackClose() {
+    typeof window !== "undefined" && window.analytics.track(`Promo Banner Close Click`, {
+      bannerText: content.text,
+      buttonText: content.buttonText,
+      buttonURL: content.url,
+    });
+  }
+
+
   useEffect(() => {
     wasBannerClosed && setClosed(true);
   }, [wasBannerClosed]);
 
-  const content = usePromoBannerConfig();
   return (
     <div className={cn(styles.promoBanner, closed && styles.hidden)} id="promoBanner">
       <div className={cn(styles.promoBanner__content)}>
         <div className={cn(styles.promoBanner__copy)}>
           <p className={cn(styles.promoBanner__text)}>{content.text}</p>
-          <a href={content.url} className={cn(styles.promoBanner__link)} onClick={() => closePromoBanner()}>{content.buttonText}</a>
+          <a href={content.url} className={cn(styles.promoBanner__link)} onClick={() => { closePromoBanner(); trackCTR(); }}>{content.buttonText}</a>
         </div>
-        <button className={cn(styles.promoBanner__close)} aria-label="Close Banner" onClick={() => closePromoBanner()}> &#10006;</button>
+        <button className={cn(styles.promoBanner__close)} aria-label="Close Banner" onClick={() => { closePromoBanner(); trackClose(); }}> &#10006;</button>
       </div>
     </div>
   );
