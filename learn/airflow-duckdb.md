@@ -61,13 +61,13 @@ To use DuckDB with Airflow, install the [DuckDB Airflow provider](https://github
 2. Add the DuckDB Airflow provider to your Astro project `requirements.txt` file.
 
     ```text
-    airflow-provider-duckdb==0.1.0
+    airflow-provider-duckdb==0.2.0
     ```
 
 3. If you are connecting to MotherDuck, the DuckDB cloud service, you need to use the amd64 version of Astro Runtime to prevent package conflicts. In this case, replace the `FROM` statement in your Dockerfile with the following line:
 
     ```Dockerfile
-    FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:8.4.0
+    FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:8.6.0
     ```
 
     If you are only using DuckDB locally, you do not need to modify your Dockerfile.
@@ -84,7 +84,7 @@ You can use the [duckdb Python package](https://pypi.org/project/duckdb/) direct
 
     <CodeBlock language="python">{duckdb_tutorial_dag_1}</CodeBlock>
 
-    This simple DAG passes a Pandas dataframe from an upstream task to a downstream task. The downstream task uses the DuckDB Python package to create and query a table in DuckDB. You can control the database you connect to by changing the string in the `duckdb.connect()` function:
+    This simple DAG passes a pandas DataFrame from an upstream task to a downstream task. The downstream task uses the DuckDB Python package to create and query a table in DuckDB. You can control the database you connect to by changing the string in the `duckdb.connect()` function:
 
     - Use an empty string to utilize an in-memory database (For example, `duckdb.connect("")`).
     - Specify a local file path to create/connect to a local DuckDB database in which your table will persist (For example, `duckdb.connect("include/my_garden_ducks.db")`)
@@ -105,13 +105,15 @@ Next, you will create a DAG that instead uses the DuckDB Airflow provider. To us
 
     - **Connection ID**: `my_duckdb_conn`.
     - **Connection Type**: `DuckDB`.
-    - **File (leave blank for in-memory database)**: `include/my_garden_ducks.db`.
+    - **Path to local database file**: `include/my_garden_ducks.db`.
+
+    ![DuckDB tutorial DAG 1 Grid view](/img/tutorials/airflow-duckdb_local_connection_ui.png)
 
 3. Click **Save**. Note that you cannot currently test a connection to DuckDB from the Airflow UI.
 
 :::info
 
-If you are connecting to MotherDuck, you will need to specify your connection in the **File (leave blank for in-memory database)** field as `motherduck:<your database name>?token=<your token>`.
+If you are connecting to MotherDuck, you will need to add your [MotherDuck Service token](https://motherduck.com/docs/authenticating-to-motherduck/) in the **MotherDuck Service token** field and leave the **Path to local database file** field empty. Optionally you can add a MotherDuck database name in the **MotherDuck database name** field, if no name is specified your connection will be to your MotherDuck default database (`my_db`).
 
 :::
 
