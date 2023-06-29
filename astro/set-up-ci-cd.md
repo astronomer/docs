@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Choose a CI/CD strategy'
-title: 'Choose a CI/CD Strategy for deploying code to Astro'
+sidebar_label: 'Develop a CI/CD workflow'
+title: 'Develop a CI/CD workflow for deploying code to Astro'
 id: set-up-ci-cd
 ---
 
