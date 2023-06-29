@@ -16,5 +16,5 @@ There are three common patterns for deploying code to a Deployment:
 
 ## See also
 
-- [Create an Astro project](create-project.md)
+- [Create an Astro project](develop-project.md#create-an-astro-project)
 - [Develop your Astro project](develop-project.md)
