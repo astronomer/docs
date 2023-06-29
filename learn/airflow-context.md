@@ -10,21 +10,15 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import context_and_xcom from '!!raw-loader!../code-samples/dags/airflow-context/context_and_xcom.py';
 
-The Airflow context is a dictionary containing information about your Airflow environment and a given DAG that can be accessed from the DAG's tasks.
+The Airflow context is a dictionary containing information about your Airflow environment and a given DAG that can be accessed from the DAG's tasks. A very commonly used element of the Airflow context is the `ti` / `task_instance` keyword, which allows you to access attributes and methods of the [`taskinstance` object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). See also the [ti / task_instance](#ti--task_instance) section of this guide.
 
-Common reasons to access the Airflow context are:
+Other Common reasons to access the Airflow context are:
 
-- You want to use DAG-level parameters in your Airflow tasks.
+- You want to use [DAG-level parameters](airflow-params.md) in your Airflow tasks.
 - You want to use the DAG run's logical date in an Airflow task, for example as part of a file name.
 - You want to explicitly push and pull values to [XCom](airflow-passing-data-between-tasks.md#xcom) with a custom key.
 - You want to make an action in your task conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 - You want to access information stored in an Airflow connection from your task.
-
-:::info
-
-A very commonly used element of the Airflow context is the `ti` / `task_instance` keyword, which allows you to access attributes and methods of the [`taskinstance` object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). See also the [ti / task_instance](#ti--task_instance) section of this guide.
-
-:::
 
 ## Assumed knowledge
 
@@ -40,7 +34,7 @@ The Airflow context is available in all Airflow tasks. You can access informatio
 
 - Pass the `**context` argument to the function used in a [`@task` decorated task](airflow-decorators.md) or [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonOperator).
 - Use Jinja templating in traditional Airflow operators.
-- In a traditional operator's `.execute` method via the `context` kwarg.
+- Access the context `kwarg` in the `.execute` method of any traditional or custom operator.
 
 You cannot access the Airflow context dictionary outside of an Airflow task.
 
@@ -130,7 +124,6 @@ class PrintDAGIDOperator(BaseOperator):
         print(context["dag"].dag_id)
 ```
 
-
 ## Common Airflow context values
 
 This section gives an overview of the most commonly used keys in the Airflow context dictionary. To see an up-to-date list of all keys and their types, view the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/utils/context.pyi). 
@@ -139,9 +132,9 @@ This section gives an overview of the most commonly used keys in the Airflow con
 
 The `ti` or `task_instance` key contains the [TaskInstance object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). The most commonly used attributes are `.xcom_pull` and `.xcom_push`, which allow you to push to and pull [XComs](airflow-passing-data-between-tasks.md).
 
-<CodeBlock language="python">{context_and_xcom}</CodeBlock>
+The following DAG shows an example of using `context["ti"].xcom_push(...)` and `context["ti"].xcom_pull(...)` to explicitly pass data between tasks.
 
-This DAG shows a simple example of using `context["ti"].xcom_push(...)` and `context["ti"].xcom_pull(...)` to explicitly pass data between tasks (implicit use of XCom is also shown).
+<CodeBlock language="python">{context_and_xcom}</CodeBlock>
 
 The `downstream_task` will print the following information to the logs:
 
@@ -155,6 +148,8 @@ The `downstream_task` will print the following information to the logs:
 
 One of the most common reasons to access the Airflow context in your tasks is to retrieve information about the scheduling of their DAG. A common pattern is to use the timestamp of the logical date in names of files written from a DAG to create a unique file for each DAG run.
 
+The task below creates a new text file in the `include` folder for each DAG run with the timestamp in the filename in the format `YYYY-MM-DDTHH:MM:SS+00:00`. Refer to [Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html) for an up to date list of time related keys in the context, and [Jinja templating](templating.md) for more information on how to pass these values to templateable parameters of traditional operators.
+
 ```python
 @task
 def write_file_with_ts(**context):
@@ -162,8 +157,6 @@ def write_file_with_ts(**context):
     with open(f"include/{ts}_hello.txt", "a") as f:
         f.write("Hello, World!")
 ```
-
-The code above will create a new text file in the `include` folder for each DAG run with the timestamp in the filename in the format `YYYY-MM-DDTHH:MM:SS+00:00`. Refer to [Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html) for an up to date list of time related keys in the context, and [Jinja templating](templating.md) for more information on how to pass these values to templateable parameters of traditional operators.
 
 ### conf
 
@@ -177,7 +170,7 @@ def print_config(**context)
     pprint(context["conf"].as_dict())
 ```
 
-The Airflow configuration includes information about the settings for your Airflow environment. By accessing these settings programmatically, you can make your pipeline conditional on the setting of a specific Airflow configuration. For example, you can have a task check which [executor](airflow-executors-explained.md) your environment is using by accessing the [executor configuration setting](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#executor). The task can then [branch](airflow-branch-operator.md) depending on the result.
+The Airflow configuration includes information about the settings for your Airflow environment. By accessing these settings programmatically, you can make your pipeline conditional on the setting of a specific Airflow configuration. For example, you can have a task check which [executor](airflow-executors-explained.md) your environment is using by accessing the [executor configuration setting](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#executor). The task can then [branch](airflow-branch-operator.md) depending on the result:
 
 ```python
 @task.branch
