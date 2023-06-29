@@ -8,7 +8,7 @@ from airflow.decorators import dag, task
 from pendulum import datetime
 from duckdb_provider.hooks.duckdb_hook import DuckDBHook
 
-DUCKDB_CONN_ID = "my_duckdb_conn"
+DUCKDB_CONN_ID = "my_local_duckdb_conn"
 DUCKDB_TABLE_NAME = "ducks_garden"
 
 

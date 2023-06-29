@@ -101,9 +101,9 @@ Next, you will create a DAG that instead uses the DuckDB Airflow provider. To us
 
 1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
 
-2. Create a new connection named `my_duckdb_conn` using the following information:
+2. Create a new connection named `my_local_duckdb_conn` using the following information:
 
-    - **Connection ID**: `my_duckdb_conn`.
+    - **Connection ID**: `my_local_duckdb_conn`.
     - **Connection Type**: `DuckDB`.
     - **Path to local database file**: `include/my_garden_ducks.db`.
 
