@@ -7,9 +7,9 @@ description: "Learn about different strategies for managing Airflow connections 
 
 *Airflow connections* are used for storing credentials and other information necessary for connecting to external services. *Airflow variables* are a generic way to store and retrieve arbitrary content or settings as a simple key value store within Airflow.
 
-Airflow supports several different methods for managing connections and variables. Each of these strategies has benefits and limitations related to their security and ease of use. The strategy you choose should be compatible with both your local environment and Astro Deployment. However, based on your security requirements, permissions, or use-case, you might need to use one strategy for your local environment and another for your Astro Deployment.
-
 Use this document to select the right Airflow connection and variable management strategies for your team.
+
+Airflow supports several different methods for managing connections and variables. Each of these strategies has benefits and limitations related to their security and ease of use. The strategies you choose should be compatible with both your local environments and Astro Deployments, allowing you to [import and export objects](import-export-connections-variables.md) between the two contexts.
 
 For in-depth information on creating and managing connections, see [Connection Basics](https://docs.astronomer.io/learn/connections).
 
