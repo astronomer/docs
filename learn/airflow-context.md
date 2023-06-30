@@ -10,15 +10,17 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import context_and_xcom from '!!raw-loader!../code-samples/dags/airflow-context/context_and_xcom.py';
 
-The Airflow context is a dictionary containing information about your Airflow environment and a given DAG that can be accessed from the DAG's tasks. A very commonly used element of the Airflow context is the `ti` / `task_instance` keyword, which allows you to access attributes and methods of the [`taskinstance` object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). See also the [ti / task_instance](#ti--task_instance) section of this guide.
+The Airflow context is a dictionary containing information about a running DAG and its Airflow environment that can be accessed from a task. One of the most common values to retrieve from the Airflow context is the [`ti` / `task_instance` keyword](#ti--task_instance), which allows you to access attributes and methods of the [`taskinstance` object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html).
 
-Other Common reasons to access the Airflow context are:
+Other common reasons to access the Airflow context are:
 
 - You want to use [DAG-level parameters](airflow-params.md) in your Airflow tasks.
 - You want to use the DAG run's logical date in an Airflow task, for example as part of a file name.
 - You want to explicitly push and pull values to [XCom](airflow-passing-data-between-tasks.md#xcom) with a custom key.
 - You want to make an action in your task conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 - You want to access information stored in an Airflow connection from your task.
+
+Use this document to learn about the data stored in the Airflow context and how to access it.
 
 ## Assumed knowledge
 
@@ -28,7 +30,7 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
-## Accessing the context
+## Access the Airflow context
 
 The Airflow context is available in all Airflow tasks. You can access information from the context using the following methods:
 

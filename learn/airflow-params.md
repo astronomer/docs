@@ -1,7 +1,7 @@
 ---
-title: "Use DAG- and task-level params in Airflow"
+title: "Create and use params in Airflow"
 sidebar_label: "Params"
-description: "Create and access DAG- and task-level params in Airflow."
+description: "Create and use DAG and task-level params in Airflow."
 id: airflow-params
 ---
 
@@ -59,7 +59,7 @@ This button opens a UI in which you can specify details for the DAG run:
 ![Trigger DAG UI](/img/guides/airflow-params_trigger_dag_ui.png)
 
 - You can set the **Logical date** of the DAG run to any date that is in between the `start_date` and the `end_date` of the DAG to create DAG runs in the past or future.
-- You can set the **Run id** to any string. If no run id is specified, it will be generated based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date, for example: `manual__2023-06-16T08:03:45+00:00`. 
+- You can set the **Run id** to any string. If no run ID is specified, Airflow generates one based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date (for example: `manual__2023-06-16T08:03:45+00:00`). 
 - You can select configurations from recent DAG runs in the **Select Recent Configurations** dropdown menu.
 - The **Trigger DAG w/config** UI will render a UI element for every DAG-level params you define with a default value. See also [Define DAG-level params defaults](#define-dag-level-params-defaults).
 - The information in the UI elements generates a Configuration JSON. You can directly edit the **Generated Configuration JSON** in the UI and add any additional params, whether a default has been defined for them or not.
@@ -78,6 +78,8 @@ When you run an [Airflow DAG from the CLI](https://airflow.apache.org/docs/apach
         {label: 'Airflow CLI', value: 'airflow'},
     ]}>
 <TabItem value="astro">
+
+Run Airflow commands from the Astro CLI using `astro dev run`: 
 
 ```sh
 astro dev run dags trigger params_defaults_example --conf '{"param1" : "Hello from the CLI"}'
@@ -114,7 +116,7 @@ The DAG below uses the TriggerDagRunOperator to trigger the `tdro_example_downst
 
 <CodeBlock language="python">{tdro_example_upstream}</CodeBlock>
 
-Runs of the `tdro_example_downstream` DAG that are triggered by this upstream DAG will override the default value of the `upstream_color` param with the value passed via the `conf` parameter, which leads to the `print_color` task to print out one of the values `red`, `green`, `blue` or `yellow`. 
+Runs of the `tdro_example_downstream` DAG that are triggered by this upstream DAG will override the default value of the `upstream_color` param with the value passed via the `conf` parameter, which leads to the `print_color` task to print either `red`, `green`, `blue` or `yellow`. 
 
 <CodeBlock language="python">{tdro_example_downstream}</CodeBlock>
 

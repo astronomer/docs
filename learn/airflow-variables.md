@@ -1,5 +1,5 @@
 ---
-title: "Use Airflow Variables"
+title: "Use Airflow variables"
 sidebar_label: "Variables"
 description: "Create and use Airflow Variables."
 id: airflow-variables
@@ -36,7 +36,7 @@ There are some best practices to keep in mind when using Airflow Variables:
 
 See the Airflow documentation for examples of code showing [good and bad practices for accessing Airflow Variables in a DAG](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html#airflow-variables).
 
-Aside from Airflow Variables, there are other ways of storing information in Airflow. The ideal option often depends on what type of information you are storing and where and how you want to access it:
+Aside from Airflow Variables, there are other ways of storing information in Airflow. The ideal option depends on what type of information you are storing and where and how you want to access it:
 
 - Environment variables store small pieces of information that are available to the whole Airflow environment. There is no direct way to see environment variables in the Airflow UI but they can be accessed using `os.getenv("MY_ENV_VAR")` inside of Airflow DAGs and tasks. Environment variables are very versatile, as they can be used to both store arbitrary information and [configure Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html). One advantage of using environment variables is that you can include their creation in your CI/CD process. They are also often used to store credentials for local development.
 - [Params](airflow-params.md) can be used to store information specific to a DAG or DAG run. You can define defaults for params at the DAG or task level and override them at runtime. Params are not encrypted and should not be used to store secrets.
