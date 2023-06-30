@@ -54,7 +54,7 @@ There are several ways to create Airflow variables:
 
 To create an Airflow variable in the UI, click on the **Admin** tab and select **Variables**. Then click on the **+** button and enter a key, value and an optional description for your Airflow variable. You also have the option to **Import Variables** from a file.
 
-![UI](/img/guides/airflow-variables_UI.png)
+![UI](/img/guides/airflow-variables_UI_600.png) 
 
 The Airflow CLI contains options to set, get and delete [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#variables). To create an Airflow variable via the CLI use the following command:
 
