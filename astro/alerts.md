@@ -80,7 +80,7 @@ To set up an alert integration with PagerDuty, you need access to your organizat
 </TabItem>
 <TabItem value="Email">
 
-No external configuration is required for the email integration.
+No external configuration is required for the email integration. Astronomer recommends allowlisting `astronomer.io` with your email provider to ensure that no alerts go to your spam folder. Alerts are sent from `no-reply@astronomer.io`.
 
 </TabItem>
 </Tabs>
