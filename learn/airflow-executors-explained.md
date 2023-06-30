@@ -108,12 +108,6 @@ When running Celery on top of a managed Kubernetes service, if a node that conta
 
 :::
 
-### Worker termination grace period
-
-An Airflow deployment on Astronomer Software running with Celery workers has a setting called **Worker Termination Grace Period** that helps minimize task disruption upon deployment by continuing to run tasks for a number of minutes after you push up a deploy.
-
-Conversely, when using the Local executor, tasks start immediately upon deployment regardless of whether or not tasks were mid-execution, which could be disruptive.
-
 ### Pros
 
 - High availability
