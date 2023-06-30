@@ -18,7 +18,6 @@ Other common reasons to access the Airflow context are:
 - You want to use the DAG run's logical date in an Airflow task, for example as part of a file name.
 - You want to explicitly push and pull values to [XCom](airflow-passing-data-between-tasks.md#xcom) with a custom key.
 - You want to make an action in your task conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
-- You want to access information stored in an Airflow connection from your task.
 
 Use this document to learn about the data stored in the Airflow context and how to access it.
 
