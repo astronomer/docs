@@ -45,7 +45,6 @@ Okta's Astro integration supports the following SCIM actions:
     values={[
         {label: 'Okta - Astro integration (Recommended)', value: 'Okta'},
         {label: 'Okta - Manual', value: 'OktaManual'},
-        {label: 'Azure AD', value: 'Azure AD'},
     ]}>
 <TabItem value= "Okta">
 
