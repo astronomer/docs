@@ -25,7 +25,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Best practices for storing information in Airflow
 
-[Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/variables.html#variables) store key-value pairs or short JSON objects that need to be accessible in your whole Airflow instance. They are are Airflow’s runtime configuration concept and defined using the [`airflow.model.variable`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable) object. 
+[Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/variables.html#variables) store key-value pairs or short JSON objects that need to be accessible in your whole Airflow instance. They are Airflow’s runtime configuration concept and defined using the [`airflow.model.variable`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable) object. 
 
 There are some best practices to keep in mind when using Airflow variables:
 

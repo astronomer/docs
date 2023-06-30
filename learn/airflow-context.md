@@ -15,7 +15,7 @@ The Airflow context is a dictionary containing information about a running DAG a
 Other common reasons to access the Airflow context are:
 
 - You want to use [DAG-level parameters](airflow-params.md) in your Airflow tasks.
-- You want to use the DAG run's logical date in an Airflow task, for example as part of a file name.
+- You want to use the DAG run's [logical date](scheduling-in-airflow.md#scheduling-concepts) in an Airflow task, for example as part of a file name.
 - You want to explicitly push and pull values to [XCom](airflow-passing-data-between-tasks.md#xcom) with a custom key.
 - You want to make an action in your task conditional on the setting of a specific [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 
@@ -34,7 +34,7 @@ To get the most out of this guide, you should have an understanding of:
 The Airflow context is available in all Airflow tasks. You can access information from the context using the following methods:
 
 - Pass the `**context` argument to the function used in a [`@task` decorated task](airflow-decorators.md) or [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonOperator).
-- Use Jinja templating in traditional Airflow operators.
+- Use [Jinja templating](templating.md) in traditional Airflow operators.
 - Access the context `kwarg` in the `.execute` method of any traditional or custom operator.
 
 You cannot access the Airflow context dictionary outside of an Airflow task.
@@ -131,7 +131,7 @@ This section gives an overview of the most commonly used keys in the Airflow con
 
 ### ti / task_instance
 
-The `ti` or `task_instance` key contains the [TaskInstance object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). The most commonly used attributes are `.xcom_pull` and `.xcom_push`, which allow you to push to and pull [XComs](airflow-passing-data-between-tasks.md).
+The `ti` or `task_instance` key contains the [TaskInstance object](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/taskinstance/index.html). The most commonly used attributes are `.xcom_pull` and `.xcom_push`, which allow you to push and pull [XComs](airflow-passing-data-between-tasks.md).
 
 The following DAG shows an example of using `context["ti"].xcom_push(...)` and `context["ti"].xcom_pull(...)` to explicitly pass data between tasks.
 

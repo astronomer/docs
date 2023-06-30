@@ -61,7 +61,7 @@ This button opens a UI in which you can specify details for the DAG run:
 - You can set the **Logical date** of the DAG run to any date that is in between the `start_date` and the `end_date` of the DAG to create DAG runs in the past or future.
 - You can set the **Run id** to any string. If no run ID is specified, Airflow generates one based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date (for example: `manual__2023-06-16T08:03:45+00:00`). 
 - You can select configurations from recent DAG runs in the **Select Recent Configurations** dropdown menu.
-- The **Trigger DAG w/config** UI will render a UI element for every DAG-level params you define with a default value. See also [Define DAG-level params defaults](#define-dag-level-params-defaults).
+- The **Trigger DAG w/config** UI will render a UI element for every DAG-level params you define with a default value. See also [Define DAG-level param defaults](#define-dag-level-params-defaults).
 - The information in the UI elements generates a Configuration JSON. You can directly edit the **Generated Configuration JSON** in the UI and add any additional params, whether a default has been defined for them or not.
 
 After setting the configuration, you can start the DAG run with the **Trigger** button.
@@ -98,7 +98,7 @@ airflow dags trigger params_defaults_example --conf '{"param1" : "Hello from the
 
 </Tabs>
 
-The CLI prints configuration for the triggered run to the command line:
+The CLI prints the configuration for the triggered run to the command line:
 
 ![CLI output](/img/guides/airflow-params_cli_param_output.png)
 
@@ -221,9 +221,9 @@ A boolean type param will create a toggle in the **Trigger DAG w/config** UI.
 
 ![Bool param example](/img/guides/airflow-params_bool.png)
 
-If you provide custom HTML to the `description_html` attribute, you can create more complex UI elements like a color picker. For sample code, see the [the example DAG in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html).
+If you provide custom HTML to the `custom_html_form` attribute, you can create more complex UI elements like a color picker. For sample code, see [this example DAG in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html).
 
-![Bool param example](/img/guides/airflow-params_color_picker.png)
+![Color picker example](/img/guides/airflow-params_color_picker.png)
 
 ## Define task-level param defaults
 
