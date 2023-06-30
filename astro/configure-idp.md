@@ -231,10 +231,6 @@ Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-d
 
 When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
 
-#### Step 7: (Optional) Configure SCIM provisioning
-
-SCIM provisioning allows you to manage Astro users from your identity provider platform. See [Set up SCIM provisioning](set-up-scim-provisioning.md) for setup steps.
-
 </TabItem>
 
 <TabItem value="OneLogin">
