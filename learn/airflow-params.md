@@ -56,7 +56,7 @@ You can pass params to a DAG from the Airflow UI by clicking on the Play button 
 
 This button opens a UI in which you can specify details for the DAG run:
 
-![Trigger DAG UI](/img/guides/airflow-params_trigger_dag_ui.png)
+![Trigger DAG UI](/img/guides/airflow-params_trigger_dag_ui_500.png)
 
 - You can set the **Logical date** of the DAG run to any date that is in between the `start_date` and the `end_date` of the DAG to create DAG runs in the past or future.
 - You can set the **Run id** to any string. If no run ID is specified, Airflow generates one based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date (for example: `manual__2023-06-16T08:03:45+00:00`). 
