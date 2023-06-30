@@ -22,7 +22,7 @@ Audit logs are retained for 90 days. Organization Owner permissions are required
 
 2. In **Audit Logs**, select the number days of audit data to export and then click **Export**.
 
-    The extracted audit log data is saved as a JSON file in your `downloads` directory with the default filename `<astro-organization-name>-logs-<number-of-days>-days-<date>.json`.
+    The extracted audit log data is saved as a [newline delimited JSON (ndjson)](https://github.com/ndjson/ndjson-spec) file with the default filename `<astro-organization-name>-logs-<number-of-days>-days-<date>.ndjson`.
 
 :::cli
 

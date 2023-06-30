@@ -108,6 +108,15 @@ module.exports = {
       successMessage: "Success! ✓",
       errorMessage: "Sorry, there was issue sending your email. Please try again.",
     },
+    promoBanner: {
+      text: "Don't miss the biggest Airflow event of the year: Airflow Summit 2023, Sept 19-23",
+      buttonText: "Join Us →",
+      url: "https://www.astronomer.io/events/airflow-summit-2023/"
+    },
+    feedbackWidget: {
+      question: "Was this page helpful?",
+      thanksText: "Thank you for your feedback!",
+    },
     softwareNav: {
       items: [
         {

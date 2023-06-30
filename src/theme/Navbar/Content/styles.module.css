@@ -31,21 +31,21 @@
 
 .button__outline,
 .button__outline:visited {
-  color: var(--purple-300);
-  border-color: var(--purple-300);
+  color: var(--gray-100);
+  border-color: var(--gray-100);
   background: none;
   margin-right: 0.75rem;
 }
 
 .button__outline:hover {
-  color: var(--purple-600);
-  border-color: var(--purple-300);
-  background: var(--purple-300);
+  color: var(--gray-900);
+  border-color: var(--white);
+  background: var(--white);
 }
 
 a.navbar__logolink {
   font-weight: 600;
-  color: var(--purple-400);
+  color: var(--white);
   font-size: 15px;
   position: relative;
 }
@@ -55,9 +55,9 @@ a.navbar__logolink::before {
   display: block;
   position: absolute;
   left: -14px;
-  height: 32px;
+  height: 28px;
   width: 2px;
-  background-color: var(--purple-600);
+  background-color: var(--white);
 }
 
 .navbar,

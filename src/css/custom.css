@@ -249,7 +249,7 @@ small {
 
 .navbar,
 .navbar-sidebar__brand {
-  background-color: #554288;
+  background-color: #14193A;
 }
 
 .navbar {
@@ -272,7 +272,7 @@ a.navbar__link {
 
 a.navbar__link.navbar__link--active,
 a.navbar__link.navbar__link:hover {
-  border-bottom: 4px solid var(--purple-700)
+  border-bottom: 4px solid #14193A;
 }
 
 html[data-theme="dark"] .navbar__item {
@@ -361,7 +361,7 @@ html .DocSearch-Button-Key {
 
 
 html .DocSearch {
-  --docsearch-searchbox-background: #4B3677;
+  --docsearch-searchbox-background: #363C60;
   border-radius: 6px;
   width: 400px;
 }
@@ -372,7 +372,7 @@ html .DocSearch-Button-Placeholder {
 
 html .DocSearch-Button-Placeholder,
 html .DocSearch-Button .DocSearch-Search-Icon {
-  color: #BFAFEB;
+  color: var(--gray-400);
 }
 
 .DocSearch-Button:active .DocSearch-Search-Icon,
@@ -381,7 +381,7 @@ html .DocSearch-Button .DocSearch-Search-Icon {
 .DocSearch-Button:active .DocSearch-Button-Placeholder,
 .DocSearch-Button:focus .DocSearch-Button-Placeholder,
 .DocSearch-Button:hover .DocSearch-Button-Placeholder, {
-  color: black;
+  color: black !important;
 }
 
 .DocSearch-Button-Keys {

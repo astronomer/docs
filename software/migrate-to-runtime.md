@@ -11,8 +11,6 @@ All versions of Astronomer Certified (AC) are no longer supported on Astronomer 
 
 Migrating a Deployment to Astro Runtime is similar to the standard upgrade process. There are no known disruptions when migrating a Deployment from AC to the equivalent version of Astro Runtime.
 
-If you are still using AC for some Deployments or you want to review information about AC, see the [Astronomer documentation archive](https://github.com/astronomer/docs/blob/main/archived_software_docs/astronomer-certified) for archived versions of all AC documentation.
-
 ## Prerequisites
 
 To migrate to Astro Runtime, you must have Astronomer Software 0.29 or later. See [Upgrade Astronomer](upgrade-astronomer.md).

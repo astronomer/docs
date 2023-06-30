@@ -40,6 +40,14 @@ module.exports = {
         "kubernetespodoperator",
         {
           type: "category",
+          label: "Airflow connections and variables",
+          items: [
+            "manage-connections-variables",
+            "import-export-connections-variables",
+          ],
+        },
+        {
+          type: "category",
           label: "Cloud IDE",
           items: [
             "cloud-ide/overview",
@@ -91,7 +99,12 @@ module.exports = {
       items: [
         "create-deployment",
         "configure-deployment-resources",
-        "executors",
+        "manage-dags",
+        {
+          type: "category",
+          label: "Configure executors",
+          items: ["executors-overview","celery-executor", "kubernetes-executor"],
+        }, 
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
@@ -114,7 +127,11 @@ module.exports = {
       label: "Observability",
       items: [
         "view-logs",
-        "deployment-metrics",
+        {
+          type: "category",
+          label: "View metrics",
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+        },
         {
           type: "category",
           label: "Data lineage",
@@ -238,6 +255,7 @@ module.exports = {
             "secrets-management",
           ],
         },
+        "astro-glossary"
       ],
     },
   ],
@@ -373,9 +391,15 @@ module.exports = {
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
+            "cli/astro-organization-team-create",
+            "cli/astro-organization-team-delete",
+            "cli/astro-organization-team-list",
+            "cli/astro-organization-team-update",
+            "cli/astro-organization-team-user",
             "cli/astro-organization-user-invite",
             "cli/astro-organization-user-list",
             "cli/astro-organization-user-update",
+            
           ],
         },
         'cli/astro-run',
@@ -397,6 +421,14 @@ module.exports = {
             "cli/astro-workspace-user-list",
             "cli/astro-workspace-user-remove",
             "cli/astro-workspace-user-update",
+            "cli/astro-workspace-team-add",
+            "cli/astro-workspace-team-list",
+            "cli/astro-workspace-team-remove",
+            "cli/astro-workspace-token-add",
+            "cli/astro-workspace-token-create",
+            "cli/astro-workspace-token-list",
+            "cli/astro-workspace-token-rotate",
+            "cli/astro-workspace-token-update",
           ],
         },
       ],

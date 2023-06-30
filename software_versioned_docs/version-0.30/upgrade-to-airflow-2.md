@@ -28,8 +28,8 @@ Airflow 2.3 subsequently introduced several powerful features, the most notable 
 
 This setup requires:
 
-- The [Astro CLI](install-cli.md).
-- An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md) before following these steps.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md).
 
 ## Step 1: Run the Airflow upgrade check script
 
@@ -77,19 +77,19 @@ For other compatibility considerations, see [Step 5: Upgrade Airflow DAGs](http:
 
 ## Step 3: Upgrade to Airflow 2.3
 
-If the upgrade check script didn't identify any issues with your existing DAGs and configurations, you're ready to upgrade to Airflow 2.3.0.
+If the upgrade check script didn't identify any issues with your existing DAGs and configurations, you're ready to upgrade to Airflow 2.3.
 
-To upgrade to Airflow 2.3.0,
+To upgrade to Airflow 2.3,
 
 1. Initialize the Airflow upgrade process via the Astronomer UI or CLI.
 2. Depending on what distribution of Airflow you want to use, add one of the following lines to your project's `Dockerfile`:
 
     ```docker
-    FROM quay.io/astronomer/astro-runtime:5.0.4
+    FROM quay.io/astronomer/astro-runtime:5.4.0
     ```
 
     ```docker
-    FROM quay.io/astronomer/ap-airflow:2.3.0-onbuild
+    FROM quay.io/astronomer/ap-airflow:2.3.4-onbuild
     ```
 
 3. Modify all backport providers and replace them with fully supported [provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html). For example, if you were using the [Mongo backport provider](https://pypi.org/project/apache-airflow-backport-providers-mongo/), replace `apache-airflow-backport-providers-mongo` with `apache-airflow-providers-mongo` in your `requirements.txt` file. For more information, see [Airflow documentation on provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).

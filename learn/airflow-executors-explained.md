@@ -35,7 +35,7 @@ The difference between Executors comes down to the resources they have at hand a
 
 When you're learning about task execution, you'll want to be familiar with these [somewhat confusing](https://issues.apache.org/jira/browse/AIRFLOW-57) terms, all of which are called "environment variables." The terms themselves have changed a bit over Airflow versions, but this list is compatible with 1.10+.
 
-- Environment variables: A set of configurable values that allow you to dynamically fine tune your Airflow deployment. They're defined in your `airflow.cfg` (or directly through the Astro UI) and encompass everything from [email alerts](https://docs.astronomer.io/software/airflow-alerts) to DAG concurrency (see below).
+- Environment variables: A set of configurable values that allow you to dynamically fine tune your Airflow deployment. They're defined in your `airflow.cfg` (or directly through the Astro Cloud UI) and include everything from [email alerts](https://docs.astronomer.io/software/airflow-alerts) to DAG concurrency (see the following).
 
 - Parallelism: Determines how many task instances can be _actively_ running in parallel across DAGs given the resources available at any given time at the deployment level. Think of this as "maximum active tasks anywhere." `ENV AIRFLOW__CORE__PARALLELISM=18`
 

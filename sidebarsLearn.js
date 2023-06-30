@@ -159,10 +159,12 @@ module.exports = {
         'airflow-databricks',
         'airflow-dbt-cloud',
         'airflow-dbt',
+        'airflow-duckdb',
         'airflow-fivetran',
         'airflow-great-expectations',
         'execute-notebooks',
         'marquez',
+        'airflow-mlflow',
         'airflow-mongodb',
         'airflow-snowflake',
         'soda-data-quality',
@@ -185,10 +187,12 @@ module.exports = {
             type: 'category',
             label: 'Use cases',
             items: [
-              'use-case-airflow-dbt',
+              'use-case-airflow-databricks',
+              'use-case-airflow-dbt'
             ],
           },
       ],
     },
+    'airflow-glossary'
   ],
 };

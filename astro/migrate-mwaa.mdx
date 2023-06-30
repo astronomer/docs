@@ -1,8 +1,8 @@
 ---
 sidebar_label: "From MWAA"
-title: "Migrate to Astro from MWAA"
+title: "Migrate to Astro Hosted from MWAA"
 id: migrate-mwaa
-description: Get started on Astro by migrating your Airflow code from Amazon Managed Workflows for Apache Airflow (MWAA).
+description: Get started on Astro Hosted by migrating your Airflow code from Amazon Managed Workflows for Apache Airflow (MWAA).
 ---
 
 import Prerequisites from "./migration-partials/prereqs.mdx";
@@ -12,6 +12,8 @@ import Deployments from "./migration-partials/deployments.mdx";
 import DirectorySetup from "./migration-partials/directory-setup.mdx";
 import FinalStep from "./migration-partials/final-step.mdx";
 import Deploy from "./migration-partials/deploy.mdx";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Migrate your Airflow environment from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://aws.amazon.com/managed-workflows-for-apache-airflow/resources/) to Astro.
 
@@ -87,6 +89,15 @@ To complete this setup from the command line:
 
 ## Step 6: Migrate project code and dependencies to your Astro project
 
+<Tabs
+    defaultValue="manual"
+    groupId= "step-6-migrate-project-code-and-dependencies-to-your-astro-project"
+    values={[
+        {label: 'Manual', value: 'manual'},
+        {label: 'AWS CLI', value: 'aws'},
+    ]}>
+<TabItem value="manual">
+
 1. Open your Astro project Dockerfile. Update the Runtime version in first line to the version you selected for your Deployment in [Step 3](#step-3-create-astro-deployment). For example, if your Runtime version was 6.3.0, your Dockerfile would look like the following:
 
     ```Dockerfile
@@ -97,46 +108,62 @@ To complete this setup from the command line:
 
 2. Open your Astro project `requirements.txt` file and add all Python packages from your source Airflow environment's `requirements.txt` file. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket.
 
-  :::tip 
+:::caution 
 
-  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run the following AWS CLI command:
+To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake
+==3.3.0` to your Astro `requirements.txt` file.
 
-  ```sh
-  aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
-  ```  
-
-  Review the output in `requirements.txt` after running this command to ensure that all packages were imported on their own line of text.    
-
-  :::
+:::
 
 3. Open your Astro project `dags` folder. Add your DAG files from either your source control platform or S3. 
 
-  :::tip
-
-  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run the following AWS CLI command:
-  
-  ```sh
-  aws s3 cp --recursive s3://[BUCKET]/dags dags
-  ```  
-  
-  Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported. 
-
-  :::
-
 4. If you used the [`plugins` folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html) in your MWAA project, copy the contents of this folder from your source control platform or S3 to the `/plugins` folder of your Astro project.
 
-  :::tip
+</TabItem>
+<TabItem value="aws">
+
+1. Open your Astro project Dockerfile. Update the Runtime version in first line to the version you selected for your Deployment in [Step 3](#step-3-create-astro-deployment). For example, if your Runtime version was 6.3.0, your Dockerfile would look like the following:
+
+    ```Dockerfile
+    FROM quay.io/astronomer/astro-runtime:6.3.0
+    ```
+
+    The `Dockerfile` defines the environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
+
+2. Run the following command to copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
+
+    ```sh
+    aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
+    ```  
+
+    See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket. Review the output in your Astro project `requirements.txt` file after running this command to ensure that all packages were imported on their own line of text.  
+
+3. Run the following command to copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
   
-  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run the following AWS CLI command:
+    ```sh
+    aws s3 cp --recursive s3://[BUCKET]/dags dags
+    ```  
+    
+    Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported.
+
+:::caution 
+
+To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake
+==3.3.0` to your Astro `requirements.txt` file.
+
+:::
+
+4. If you used the [`plugins` folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html) in your MWAA project, run the following command to directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
   
-  ```sh
-  aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip
-  unzip plugins.zip
-  ```
-  
-  Review the contents of your Astro project `plugins` folder after running this command to ensure that all files were successfully exported. 
-  
-  :::
+    ```sh
+    aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip
+    unzip plugins.zip
+    ```
+    
+    Review the contents of your Astro project `plugins` folder after running this command to ensure that all files were successfully exported. 
+
+</TabItem>
+</Tabs>
 
 ## Step 7: Configure additional data pipeline infrastructure
 

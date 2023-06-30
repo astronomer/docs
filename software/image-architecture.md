@@ -32,20 +32,7 @@ The Astronomer Certified Docker image is built from the Python wheel and incorpo
 
 ![Diagram of AC distribution scheme](/img/software/ac-diagram.png)
 
-Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all supported Astronomer Certified images can be found in [Astronomer's `ap-airflow` GitHub repository](https://github.com/astronomer/ap-airflow):
-
-- [Airflow 2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/bullseye/Dockerfile)
-- [Airflow 2.2.3](https://github.com/astronomer/ap-airflow/blob/master/2.2.3/bullseye/Dockerfile)
-- [Airflow 2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/bullseye/Dockerfile)
-- [Airflow 2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/bullseye/Dockerfile)
-- [Airflow 2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/bullseye/Dockerfile)
-- [Airflow 2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/Dockerfile)
-- [Airflow 2.0.2](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/buster/Dockerfile)
-- [Airflow 2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/buster/Dockerfile)
-- [Airflow 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
-- [Airflow 1.10.14](https://github.com/astronomer/ap-airflow/blob/master/1.10.14/buster/Dockerfile)
-- [Airflow 1.10.12](https://github.com/astronomer/ap-airflow/blob/master/1.10.12/buster/Dockerfile)
-- [Airflow 1.10.10](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/buster/Dockerfile)
+Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all supported Astronomer Certified images can be found in [Astronomer's `ap-airflow` GitHub repository](https://github.com/astronomer/ap-airflow).
 
 ## Image Requirements
 
@@ -55,8 +42,7 @@ Running Airflow with the Astronomer Certified Docker image requires specific ver
 - Database: PostgreSQL (11, 12), MySQL (5.7, 8.0+)
 - System Distribution: Debian 10 (Buster)
 
-> **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. To run Astronomer Certified on Docker with Python 3.6 or 3.8, you can create a custom image with a different Python version specified. For more information, read [Change Python Versions](https://www.astronomer.iocustomize-image#build-with-a-different-python-version).
-
+> **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. 
 These requirements are slightly different for running only the Python wheel. For the Python wheel, you can use:
 
 - Python: 3.6, 3.7, 3.8, 3.9

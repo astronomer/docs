@@ -8,8 +8,6 @@ id: debugging-dags
 This guide explains how to identify and resolve common Airflow DAG issues. It also includes resources to try out if you can't find a solution to an Airflow issue.
 While the focus of the troubleshooting steps provided lies on local development, much of the information is also relevant for running Airflow in a production context.
 
-This guide was written for Airflow 2. If you are running Airflow 1.15 or earlier, upgrade to prevent compatibility issues and receive the latest bug fixes. For assistance in upgrading see the documentation on [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/howto/upgrading-from-1-10/index.html).
-
 :::tip
 
 Consider implementing systematic testing of your DAGs to prevent common issues. See the [Test Airflow DAGs](testing-airflow.md) guide.
@@ -37,6 +35,12 @@ To give yourself the best possible chance of fixing a bug in Airflow, contextual
 - Can you reproduce the problem in a new local Airflow instance using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview)?
 
 Answering these questions will help you narrow down what kind of issue you're dealing with and inform your next steps. 
+
+:::info
+
+You can debug your DAG code with IDE debugging tools using the `dag.test()` method, which was added in Airflow 2.5. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest).
+
+:::
 
 ## Airflow is not starting on the Astro CLI
 
@@ -230,6 +234,8 @@ To find information about what parameters are required for a specific connection
 - Read provider documentation in the [Astronomer Registry](https://registry.astronomer.io/providers?page=1) to access the Apache Airflow documentation for the provider. Most commonly used providers will have documentation on each of their associated connection types. For example, you can find information on how to set up different connections to Azure in the Azure provider docs.
 - Check the documentation of the external tool you are connecting to and see if it offers guidance on how to authenticate.
 - View the source code of the hook that is being used by your operator.
+
+You can also test connections from within your IDE by using the `dag.test()` method. See [Debug interactively with dag.test()](testing-airflow.md#use-variables-and-connections-in-dagtest) and [How to test and debug your Airflow connections](https://www.astronomer.io/events/webinars/how-to-test-and-debug-your-airflow-connections/).
 
 ## I need more help
 

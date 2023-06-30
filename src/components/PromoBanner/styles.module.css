@@ -1,0 +1,63 @@
+.promoBanner {
+  background: linear-gradient(
+    90deg,
+    #322e46 0%,
+    #286e76 49.88%,
+    #322e46 100%
+  );
+  z-index: 4;
+  width: 100%;
+  color: var(--white);
+  padding: 0.75rem;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  position: relative;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none;
+}
+
+.promoBanner p {
+  margin-bottom: 0;
+}
+
+.promoBanner__content,
+.promoBanner__copy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.promoBanner__copy {
+  flex-wrap: wrap;
+}
+
+.promoBanner__copy {
+  flex: 0 1 auto;
+}
+
+.promoBanner__link {
+  font-weight: 700;
+  color: #201E2E;
+  background-color: #ED9E70;
+  text-decoration: none;
+  border-radius: 4px;
+  padding: 0.25rem 1rem;
+  transition: filter 0.25s ease;
+}
+
+.promoBanner__link:hover {
+  filter: brightness(80%);
+  text-decoration: none;
+  color: #201E2E;
+}
+
+.promoBanner__close {
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

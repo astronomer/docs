@@ -266,6 +266,7 @@
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
 /astro/pipeline-alerts /astro/alerts 301
+/astro/executors /astro/executors-overview 301
 /astro/airflow-alerts /astro/airflow-email-notifications 301
 /astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
@@ -273,6 +274,7 @@
 /astro/connect-aws#resolving-services /astro/connect-aws#hostname-resolution-options 301
 /astro/configure-deployment /astro/configure-deployment-resources 301
 /astro/scheduler-logs /astro/view-logs 301
+/astro/deployment-metrics#astro-usage /astro/organization-metrics 301
 /astro/cross-account-role-setup /astro/install-aws 301
 /astro/cloud-ide/deploy-project.md#commit-your-project-to-github /astro/cloud-ide/deploy-project.md#commit-your-project-to-a-git-repository 301
 /configure-executors /astro/executors 301
@@ -280,6 +282,7 @@
 /software/manage-platform-users#reference-system-permissions /software/role-permission-reference 301
 /software/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
 /software/*/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
+
 
 
 # redirect links out in the wild (beyond our control)

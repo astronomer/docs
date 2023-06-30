@@ -26,7 +26,7 @@ In addition to SSO authorization, there are 3 ways that users can to authenticat
 - Google social login
 - GitHub social login
 
-To limit users to only a subset of these options, see [Restrict authentication options](#restrict-authentication-options)
+To limit users to only a subset of these options, see [Restrict authentication options](#restrict-authentication-options).
 
 ## Supported SSO identity providers
 
@@ -36,6 +36,12 @@ Single Sign On (SSO) authorization allows users to log in using their company cr
 - [Okta](https://www.okta.com/)
 - [OneLogin](https://www.onelogin.com/)
 - [Ping Identity](https://www.pingidentity.com/en.html)
+
+:::info
+
+You can configure multiple SSO connections for a single Organization. This requires having a unique [verified domain](manage-domains.md) for each new SSO connection.
+
+:::
 
 ## Configure your SSO identity provider
 
