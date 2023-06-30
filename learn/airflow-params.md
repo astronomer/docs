@@ -52,7 +52,7 @@ While it's possible to pass non-JSON serializable params, this behavior is depre
 
 You can pass params to a DAG from the Airflow UI by clicking on the Play button and selecting **Trigger DAG w/ config**. 
 
-<img src="/img/guides/airflow-params_trigger_dag_w_config.png" alt="Trigger DAG w/ config" width="100" height="100">
+![Trigger DAG w/ config](/img/guides/airflow-params_trigger_dag_w_config.png)
 
 This button opens a UI in which you can specify details for the DAG run:
 
