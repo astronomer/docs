@@ -23,7 +23,7 @@ Release date: June 30, 2023
 
 ### Bug fixes 
 
-- Fixed an issue where the `isHighAvailability` and `CICDEnforcement` fields in the deployment file were not working properly.
+- Fixed an issue where the `isHighAvailability` and `CICDEnforcement` fields in Deployment files were not processed correctly.
 
 ## Astro CLI 1.16.1
 
