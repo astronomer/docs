@@ -33,9 +33,11 @@ Follow these steps to start writing your DAGs in VS Code.
 
     ![Extension](/img/examples/vscode_local_dev_extension.png)
 
-4. Ensure the Python interpreter is configured properly by opening the `dags/example_dag_basic.py` file in your Astro project `dags/` folder and start writing some Python. In the example below, you can see that the Python interpreter is working properly and attempting to auto-complete the import line.
+4. Ensure the Python interpreter is configured properly by opening the `dags/example_dag_basic.py` file in your Astro project `dags/` folder and start writing some Python.
 
-    ![Code](/img/examples/vscode_local_dev_code.png)
+After you configure the integration, VScode starts showing warnings and autocompletion suggestions for Airflow. In the example below, you can see that the Python interpreter is attempting to auto-complete the import line.
+
+![Code](/img/examples/vscode_local_dev_code.png)
 
 ## See also
 
