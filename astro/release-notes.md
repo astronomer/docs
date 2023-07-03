@@ -27,6 +27,31 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- Make sure that all links to internal docs are the complete URLS including HTTPS. Otherwise the links will break in RSS. -->
 
+## July 4, 2023
+
+### Send Astro alerts to email
+
+You can now configure multiple email addresses to receive Astro alerts. See [Astro alerts](alerts.md) for setup steps.
+
+### See pricing estimate when creating a Deployment 
+
+</HostedBadge>
+
+The Deployment creation page in the Cloud UI has been reorganized to make it easier to focus on specific configurations for your Deployment. Each configuration is now collapsible and includes guidance for different environment sizes. Additionally, the page now shows cost estimates for a Deployment before you create it.
+
+![Deployment creation screen with new pricing information](/img/release-notes/deployment-pricing.png)
+
+### Additional improvements
+
+- You can now configure Deployments with the `A40` machine type, which has 8 vCPU and 16 GiB. See [Astro hosted resource reference](resource-reference-hosted.md).
+- You can now access your Organization settings from a Workspace by clicking the name of your Organization/ Workspace.
+- On Astro Hybrid, the default worker type for Azure DB instances is now `Standard D2ds_v4`.
+- The Deployment creation screen for Astro Hybrid has been updated to be consistent with Astro Hosted.
+
+### Bug fixes
+
+- Fixed an issue where DAGs that used the KubernetesPodOperator and had tasks with `in_cluster=False` could not be parsed.
+
 ## June 27, 2023
 
 ### Support for dedicated clusters on Azure
