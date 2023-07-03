@@ -37,11 +37,21 @@ To get the most out of this guide, you should have an understanding of:
 Airflow has a few options for notifying you on the status of your DAGs and tasks:
 
 - **Email notifications**: Most Airflow operators have parameters for setting email alerts in case of a task failure or retry. Use email alerts in production pipelines where task failures or retries need immediate attention by a data professional. 
-- **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or Airflow notifier to these parameters, and Airflow will run them in the case of specific events, such as a task failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions for specific instances of task failures or successes.
-- **Airflow notifiers**: Notifiers are custom classes for callback functions that can be easily reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://registry.astronomer.io/providers/apache-airflow-providers-slack/versions/7.2.0/modules/SlackNotifier). Notifiers can be provided to callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing actions for task failures across several Airflow instances.
+- **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or [Airflow notifier](#notifiers) to these parameters, and Airflow will run them in the case of specific events, such as a task failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions for specific instances of task failures or successes.
+- **Airflow notifiers**: Notifiers are custom classes to use as an Airflow callback that can be easily reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/7.3.1/_api/airflow/providers/slack/notifications/slack/index.html). Notifiers can be provided to callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing actions for task failures across several Airflow instances.
 - **Airflow service-level agreements (SLAs)**: SLAs define the expected time it takes for a specific task to complete. If an SLA is missed, the callable or notifier provided to the `sla_miss_callback` parameter is executed. If you configure an SMTP connection, an email will be sent as well. Since an SLA miss does not stop a task from running, this type of notification is used when intervention is needed if a specific task is taking longer than expected.
 
 Most notifications can be set at the level of both a DAG and a task. Setting a parameter within a DAG's `default_args` dictionary will apply it to all tasks in the DAG. You can see examples of this in the [set DAG and task-level callbacks](#set-dag-and-task-level-callbacks) section.
+
+## Choosing a notification type
+
+When choosing a notification type, it is best practice to use pre-built solutions whenever possible. This modular approach makes your DAGs more robust by reducing the amount of custom code that needs to be maintained and by standardizing the way notifications are handled across different Airflow environments in your organization.
+
+- Use [Email notifications](#email-notifications) over custom functions in an Airflow callback when you want to be alerted of task failures or retries via email.
+- Use the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for use cases where you want to receive email notifications for other events such as task or DAG successes or task execution.
+- Use [Notifiers](#notifiers) over custom functions in Airflow callbacks whenever a suitable notifier class is available. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html). A notifier can be provided to any callback parameter (`*callback`).
+- Use custom [Airflow callback](#airflow-callbacks) functions when no notifier is available for your use case.
+- Use [SLAs](#airflow-service-level-agreements) to be alerted of tasks taking longer than expected to complete.
 
 ## Email notifications
 
@@ -180,9 +190,92 @@ In Airflow you can define actions to be taken due to different DAG or task state
 
 You can provide any Python callable to the `*_callback` parameters. As of Airflow 2.6, you can also use [notifiers](#notifiers) for your callbacks, and you can provide several callback items to the same callback parameter in a list.
 
-### Set DAG and task-level callbacks
+### Notifiers
 
-To define a notification at the DAG level, you can set the `*_callback` parameters in your DAG instantiation. DAG-level notifications will trigger callback functions based on the state of the entire DAG run.
+Airflow 2.6 added the concept of [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers get passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
+
+Notifiers are defined in provider packages or imported from the include folder and can be used across any of your DAGs. This feature has the advantage that community members can define and share functionality previously used in callback functions as Airflow modules, creating pre-built callbacks to send notifications to other data tools.
+
+An Airflow notifier can be created by inheriting from the `BaseNotifier` class and defining the action which should be taken in case the notifier is used in the `.notify()` method.
+
+```python
+class MyNotifier(BaseNotifier):
+    """
+    Basic notifier, prints the task_id, state and a message.
+    """
+
+    template_fields = ("message",)
+
+    def __init__(self, message):
+        self.message = message
+
+    def notify(self, context):
+        t_id = context["ti"].task_id
+        t_state = context["ti"].state
+        print(
+            f"Hi from MyNotifier! {t_id} finished as: {t_state} and says {self.message}"
+        )
+```
+
+To use the custom notifier in a DAG, provide its instantiation to any callback parameter. For example:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="notifiers"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+@task(
+    on_failure_callback=MyNotifier(message="Hello failed!"),
+)
+def t1():
+    return "hello"
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+def say_hello():
+    return "hello"
+
+
+t1 = PythonOperator(
+    task_id="t1",
+    python_callable=say_hello,
+    on_failure_callback=MyNotifier(message="Hello failed!"),
+)
+```
+
+</TabItem>
+</Tabs>
+
+### Example pre-built notifier: Slack
+
+An example of a community provided pre-built notifier is the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/latest/_api/airflow/providers/slack/notifications/slack_notifier/index.html). 
+
+It can be imported from the Slack provider package and used with any `*_callback` function:
+
+<CodeBlock language="python">{slack_notifier_example_dag}</CodeBlock>
+
+The DAG above has one task sending a notification to Slack. It uses a Slack [Airflow connection](connections.md) with the connection ID `slack_conn`.
+
+![Slack notification](/img/guides/slack_notification.png)
+
+:::info
+
+You can find a full list of all notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html).
+
+:::
+
+### Set DAG and task-level custom callbacks
+
+To define a custom notification at the DAG level, you can set the `*_callback` parameters in your DAG instantiation. DAG-level notifications will trigger callback functions based on the state of the entire DAG run.
 
 ```python
 def my_success_callback_function(context):
@@ -314,89 +407,6 @@ t1 = PythonOperator(
 
 </TabItem>
 </Tabs>
-
-## Notifiers
-
-Airflow 2.6 added the concept of [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers get passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
-
-Notifiers are defined in provider packages or imported from the include folder and can be used across any of your DAGs. This feature has the advantage that community members can define and share functionality previously used in callback functions as Airflow modules, creating pre-built callbacks to send notifications to other data tools.
-
-An Airflow notifier can be created by inheriting from the `BaseNotifier` class and defining the action which should be taken in case the notifier is used in the `.notify()` method.
-
-```python
-class MyNotifier(BaseNotifier):
-    """
-    Basic notifier, prints the task_id, state and a message.
-    """
-
-    template_fields = ("message",)
-
-    def __init__(self, message):
-        self.message = message
-
-    def notify(self, context):
-        t_id = context["ti"].task_id
-        t_state = context["ti"].state
-        print(
-            f"Hi from MyNotifier! {t_id} finished as: {t_state} and says {self.message}"
-        )
-```
-
-To use the custom notifier in a DAG, provide its instantiation to any callback parameter. For example:
-
-<Tabs
-    defaultValue="taskflow"
-    groupId="notifiers"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
-    ]}>
-
-<TabItem value="taskflow">
-
-```python
-@task(
-    on_failure_callback=MyNotifier(message="Hello failed!"),
-)
-def t1():
-    return "hello"
-```
-
-</TabItem>
-<TabItem value="traditional">
-
-```python
-def say_hello():
-    return "hello"
-
-
-t1 = PythonOperator(
-    task_id="t1",
-    python_callable=say_hello,
-    on_failure_callback=MyNotifier(message="Hello failed!"),
-)
-```
-
-</TabItem>
-</Tabs>
-
-### Pre-built notifier: Slack
-
-An example of a community provided pre-built notifier is the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/latest/_api/airflow/providers/slack/notifications/slack_notifier/index.html). 
-
-It can be imported from the Slack provider package and used with any `*_callback` function:
-
-<CodeBlock language="python">{slack_notifier_example_dag}</CodeBlock>
-
-The DAG above has one task sending a notification to Slack. It uses a Slack [Airflow connection](connections.md) with the connection ID `slack_conn`.
-
-![Slack notification](/img/guides/slack_notification.png)
-
-:::info
-
-You can find a full list of all notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html).
-
-:::
 
 ## Airflow service-level agreements
 
