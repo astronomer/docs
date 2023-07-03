@@ -75,9 +75,9 @@ You can now manage [Astro Teams](add-user.md#make-a-team) using the following CL
 - [`astro organization team list`](cli/astro-organization-team-list.md)
 - [`astro organization team update`](cli/astro-organization-team-update.md)
 - [`astro organization team delete`](cli/astro-organization-team-delete.md)
-- [`astro organization team user remove`](cli/astro-organization-team-user-remove.md)
-- [`astro organization team user add`](cli/astro-organization-team-user-add.md)
-- [`astro organization team user list`](cli/astro-organization-team-user-list.md)
+- [`astro organization team user remove`](cli/astro-organization-team-user.md)
+- [`astro organization team user add`](cli/astro-organization-team-user.md)
+- [`astro organization team user list`](cli/astro-organization-team-user.md)
 
 You can use these commands in automated workflows with [Workspace API tokens](workspace-api-tokens.md) and [Organization API tokens](organization-api-tokens.md).
 
