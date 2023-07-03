@@ -17,6 +17,40 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.17.0
+
+Release date: July 3, 2023
+
+### Manage Organization API tokens with the Astro CLI
+
+You can now manage [Organization API tokens](organization-api-tokens.md) using the following CLI commands:
+
+- [`astro organization token create`](cli/astro-organization-token-create.md)
+- [`astro organization token roles`](cli/astro-organization-token-roles.md)
+- [`astro organization token list`](cli/astro-organization-token-list.md)
+- [`astro organization token update`](cli/astro-organization-token-update.md)
+- [`astro organization token rotate`](cli/astro-organization-token-rotate.md)
+- [`astro organization token delete`](cli/astro-organization-token-delete.md)
+
+### Download resources from the Astronomer Registry to your Astro project
+
+You can now use the following commands to download resources from the Astronomer Registry:
+
+- [`astro registry add dag`](cli/astro-registry-add-dag.md)
+- [`astro registry add provider`](cli/astro-registry-add-provider.md)
+
+The Astro registry contains DAGs and provider packages that are ready to use out of the box. Use these commands to quickly add resources to an Astro project, which you can then run locally or on Astro.
+
+### Additional improvements
+
+- You can now create Deployments on AWS standard clusters. 
+- If you belong to only one Workspace, the Astro CLI now uses that Workspace by default for all commands. 
+
+### Bug fixes 
+
+- Fixed an issue where the Astro CLI could not retrieve the health status of a Deployment.
+- Fixed an issue where you could not set `worker_concurrency` to 0 in a Deployment file. 
+
 ## Astro CLI 1.16.2
 
 Release date: June 30, 2023
@@ -33,17 +67,17 @@ Release date: June 13, 2023
 
 You can now manage [Astro Teams](add-user.md#make-a-team) using the following CLI commands:
 
-- `astro workspace team add`
-- `astro workspace team list`
-- `astro workspace team update`
-- `astro workspace team remove`
-- `astro organization team create`
-- `astro organization team list`
-- `astro organization team update`
-- `astro organization team remove`
-- `astro organization team user remove`
-- `astro organization team user add`
-- `astro organization team user list`
+- [`astro workspace team add`](cli/astro-workspace-team-add.md)
+- [`astro workspace team list`](cli/astro-workspace-team-list.md)
+- [`astro workspace team update`](cli/astro-workspace-team-update.md)
+- [`astro workspace team remove`](cli/astro-workspace-team-remove.md)
+- [`astro organization team create`](cli/astro-workspace-team-create.md)
+- [`astro organization team list`](cli/astro-organization-team-list.md)
+- [`astro organization team update`](cli/astro-organization-team-update.md)
+- [`astro organization team remove`](cli/astro-organization-team-remove.md)
+- [`astro organization team user remove`](cli/astro-organization-team-user-remove.md)
+- [`astro organization team user add`](cli/astro-organization-team-user-add.md)
+- [`astro organization team user list`](cli/astro-organization-team-user-list.md)
 
 You can use these commands in automated workflows with [Workspace API tokens](workspace-api-tokens.md) and [Organization API tokens](organization-api-tokens.md).
 
@@ -51,12 +85,12 @@ You can use these commands in automated workflows with [Workspace API tokens](wo
 
 You can now manage [Workspace API tokens](workspace-api-tokens.md) using the following CLI commands:
 
-- `astro workspace token create`
-- `astro workspace token add`
-- `astro workspace token list`
-- `astro workspace token update`
-- `astro workspace token rotate`
-- `astro workspace token delete`
+- [`astro workspace token create`](cli/astro-workspace-token-create.md)
+- [`astro workspace token add`](cli/astro-workspace-token-add.md)
+- [`astro workspace token list`](cli/astro-workspace-token-list.md)
+- [`astro workspace token update`](cli/astro-workspace-token-update.md)
+- [`astro workspace token rotate`](cli/astro-workspace-token-rotate.md)
+- [`astro workspace token delete`](cli/astro-workspace-token-delete.md)
   
 These commands can be used to manage API tokens as part of an automated workflow.
 
