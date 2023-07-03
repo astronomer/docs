@@ -71,7 +71,7 @@ You can now manage [Astro Teams](add-user.md#make-a-team) using the following CL
 - [`astro workspace team list`](cli/astro-workspace-team-list.md)
 - [`astro workspace team update`](cli/astro-workspace-team-update.md)
 - [`astro workspace team remove`](cli/astro-workspace-team-remove.md)
-- [`astro organization team create`](cli/astro-workspace-team-create.md)
+- [`astro organization team create`](cli/astro-organization-team-create.md)
 - [`astro organization team list`](cli/astro-organization-team-list.md)
 - [`astro organization team update`](cli/astro-organization-team-update.md)
 - [`astro organization team remove`](cli/astro-organization-team-remove.md)

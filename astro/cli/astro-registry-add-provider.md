@@ -31,5 +31,5 @@ astro registry add dag --version 1.2.0
 
 ## Related commands
 
-- [astro registry add dags](cli/astro-registry-add-dags.md)
+- [astro registry add dags](cli/astro-registry-add-dag.md)
 - [astro dev start](cli/astro-dev-start.md)
