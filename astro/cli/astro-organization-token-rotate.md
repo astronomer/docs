@@ -1,12 +1,12 @@
 ---
-sidebar_label: "astro workspace token rotate"
-title: "astro workspace token rotate"
-id: astro-workspace-token-rotate
-description: Reference documentation for astro workspace token rotate.
+sidebar_label: "astro organization token rotate"
+title: "astro organization token rotate"
+id: astro-organization-token-rotate
+description: Reference documentation for astro organization token rotate.
 hide_table_of_contents: true
 ---
 
-Rotate a Workspace API token in your current Workspace.
+Rotate an Organization API token.
 
 ## Usage
 
@@ -25,11 +25,11 @@ astro workspace token rotate <flags>
 ## Examples
 
 ```sh
-astro workspace token rotate --name "My token" --force
+astro organization token rotate --name "My token" --force
 ```
 
 ## Related commands
 
-- [astro workspace token update](cli/astro-workspace-token-update.md)
-- [astro workspace token delete](cli/astro-workspace-token-delete.md)
-- [astro workspace switch](cli/astro-workspace-switch.md)
+- [astro organization token update](cli/astro-workspace-token-update.md)
+- [astro organization token delete](cli/astro-workspace-token-delete.md)
+- [astro organization switch](cli/astro-workspace-switch.md)

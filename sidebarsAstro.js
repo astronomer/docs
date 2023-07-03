@@ -396,10 +396,24 @@ module.exports = {
             "cli/astro-organization-team-list",
             "cli/astro-organization-team-update",
             "cli/astro-organization-team-user",
+            "cli/astro-organization-token-create",
+            "cli/astro-organization-token-delete",
+            "cli/astro-organization-token-list",
+            "cli/astro-organization-token-roles",
+            "cli/astro-organization-token-rotate",
+            "cli/astro-organization-token-update",
             "cli/astro-organization-user-invite",
             "cli/astro-organization-user-list",
             "cli/astro-organization-user-update",
             
+          ],
+        },
+        {
+          type: "category",
+          label: "astro registry",
+          items: [
+            "cli/astro-registry-add-dag",
+            "cli/astro-registry-add-provider"
           ],
         },
         'cli/astro-run',

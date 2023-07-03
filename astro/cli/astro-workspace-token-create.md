@@ -11,7 +11,7 @@ Create a Workspace API token in your current Workspace.
 ## Usage
 
 ```sh
-astro workspace token add
+astro workspace token create
 ```
 
 ## Options
@@ -24,10 +24,10 @@ astro workspace token add
 | `--name` | The name for the token. | Any string surrounded by quotations |
 | `--role`  | The token's role in the Workspace.                | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
-## Usage
+## Examples
 
 ```sh
-astro workspace token add --name "My production API token" --role WORKSPACE_MEMBER
+astro workspace token create --name "My production API token" --role WORKSPACE_MEMBER
 ```
 
 ## Related commands

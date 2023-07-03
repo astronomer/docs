@@ -1,17 +1,17 @@
 ---
-sidebar_label: "astro workspace token update"
-title: "astro workspace token update"
-id: astro-workspace-token-update
-description: Reference documentation for astro workspace token update.
+sidebar_label: "astro organization token update"
+title: "astro organization token update"
+id: astro-organization-token-update
+description: Reference documentation for astro organization token update.
 hide_table_of_contents: true
 ---
 
-Update a Workspace API token in your current Workspace.
+Update an Organization API token.
 
 ## Usage
 
 ```sh
-astro workspace token update <flags>
+astro organization token update <flags>
 ```
 
 ## Options
@@ -23,16 +23,16 @@ astro workspace token update <flags>
 | `--expiration` | The expiration date for the token. By default there is no expiration date. | Any integer between 1 and 3650, used to represent days |
 | `--name` | The current name for the token. | Any string surrounded by quotations |
 | `--new-name` | The updated name for the token. | Any string surrounded by quotations |
-| `--role`  | The token's role in the Workspace.                | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`         | The token's role in the Organization.                                      | Possible values are either `ORGANIZATION_MEMBER`, `ORGANIZATION_BILLING_ADMIN`, or `ORGANIZATION_OWNER`. |
 
 ## Examples
 
 ```sh
-astro workspace token update --new-name "My updated API token" --role WORKSPACE_MEMBER
+astro organization token update --new-name "My updated API token" --role ORGANIZATION_MEMBER
 ```
 
 ## Related commands
 
-- [astro workspace token rotate](cli/astro-workspace-token-rotate.md)
-- [astro workspace token delete](cli/astro-workspace-token-delete.md)
-- [astro workspace switch](cli/astro-workspace-switch.md)
+- [astro organization token rotate](cli/astro-organization-token-rotate.md)
+- [astro organization token delete](cli/astro-organization-token-delete.md)
+- [astro organization switch](cli/astro-organization-switch.md)
