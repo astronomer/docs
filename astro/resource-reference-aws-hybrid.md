@@ -178,7 +178,7 @@ The following table lists all available instance types for worker node pools, as
 | c6i.12xlarge     | 46 CPUs | 94.5 GiB MEM   |
 | c6i.16xlarge     | 62 CPUs | 126.5 GiB MEM  |
 | c6i.24xlarge     | 94 CPUs | 190.5 GiB MEM  |
-| c6i.metal        | 94 CPUs | 190.5 GiB MEM  |
+| c6i.metal        | 126 CPUs |  254.5 GiB MEM  |
 | t2.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
 | t3.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
 | t3.2xlarge       | 6 CPUs  | 30.5 GiB MEM   |
