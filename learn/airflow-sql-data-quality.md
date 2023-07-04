@@ -1,7 +1,7 @@
 ---
-title: "Airflow data quality checks with SQL Operators"
-sidebar_label: "SQL check operators"
-description: "Executing queries in Apache Airflow DAGs to ensure data quality."
+title: "Run data quality checks using SQL check operators"
+sidebar_label: "Use SQL check operators"
+description: "Learn how to use the QLColumnCheckOperator, SQLTableCheckOperator and SQLCheckOperator."
 id: "airflow-sql-data-quality"
 ---
 
