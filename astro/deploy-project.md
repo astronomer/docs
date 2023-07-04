@@ -20,7 +20,7 @@ For production environments, Astronomer recommends automating all code deploys w
 - The [Astro CLI](cli/overview.md) is installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for local development, you must install Astro CLI 1.4.0 or later to deploy to Astro.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
 - An [Astro project](develop-project.md#create-an-astro-project).
-- [Docker](https://www.docker.com/products/docker-desktop).
+- [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
 
 ## Step 1: Authenticate to Astro
 
@@ -34,7 +34,7 @@ After running this command, you are prompted to open your web browser and log in
 
 :::tip
 
-If you have [Deployment API key](api-keys.md) credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys with [CI/CD](set-up-ci-cd.md).
+If you have API credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys with [CI/CD](set-up-ci-cd.md).
 
 :::
 
@@ -52,13 +52,17 @@ After you select a Deployment, the CLI parses your DAGs to ensure that they don'
 
 If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. 
 
-If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, set up [DAG only deploys](deploy-dags.md) to deploy DAG changes over a slow connection. To make a non-DAG update over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
+:::info
+
+If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, set up [DAG only deploys](deploy-dags.md) so that you're only deploying DAGs over your connection. To deploy a complete project over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
+
+:::
 
 :::tip
 
 To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy also fails. This can help you prevent your team from deploying DAGs to Astro that contain errors.
 
-For more information about using Pytest, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
+For more information about using Pytest, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
 :::
 
