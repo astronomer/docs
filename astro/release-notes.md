@@ -35,7 +35,7 @@ You can now configure multiple email addresses to receive Astro alerts. See [Ast
 
 ### Configure SCIM provisioning for Okta
 
-If your Organization uses Okta for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning allows you to add and remove Astro users and Teams from Okta based on your existing user groups. See [Set up SCIM provisioning](set-up-scim-provisioning.md) for more information.
+If your Organization uses Okta for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](set-up-scim-provisioning.md) for more information.
 
 ### See pricing estimate when creating a Deployment 
 
