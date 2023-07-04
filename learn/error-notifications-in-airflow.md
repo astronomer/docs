@@ -192,6 +192,12 @@ You can provide any Python callable to the `*_callback` parameters. As of Airflo
 
 Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers get passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
 
+:::info
+
+You can find a full list of all pre-built notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html).
+
+:::
+
 Notifiers are defined in provider packages or imported from the include folder and can be used across any of your DAGs. This feature has the advantage that community members can define and share functionality previously used in callback functions as Airflow modules, creating pre-built callbacks to send notifications to other data tools.
 
 An Airflow notifier can be created by inheriting from the `BaseNotifier` class and defining the action which should be taken in case the notifier is used in the `.notify()` method.
@@ -264,12 +270,6 @@ It can be imported from the Slack provider package and used with any `*_callback
 The DAG above has one task sending a notification to Slack. It uses a Slack [Airflow connection](connections.md) with the connection ID `slack_conn`.
 
 ![Slack notification](/img/guides/slack_notification.png)
-
-:::info
-
-You can find a full list of all notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html).
-
-:::
 
 ### Set DAG and task-level custom callbacks
 
