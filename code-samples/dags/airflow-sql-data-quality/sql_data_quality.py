@@ -22,7 +22,7 @@ _TABLE_NAME = "birds"
     start_date=datetime(2023, 7, 1),
     schedule=None,
     catchup=False,
-    template_searchpath="/usr/local/airflow/include/",
+    template_searchpath=["/usr/local/airflow/include/"],
 )
 def sql_data_quality():
     create_table = SqliteOperator(

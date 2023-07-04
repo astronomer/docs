@@ -64,7 +64,7 @@ To use SQL check operators, install the [Common SQL provider](https://registry.a
     - **Connection Type**: `SQLite`.
     - **Host**: `/tmp/sqlite.db`.
 
-## Step 3: Add a SQL file for a custom check
+## Step 3: Add a SQL file with a custom check
 
 1. In the `include` folder, create a file called `custom_check.sql`.
 
@@ -96,13 +96,15 @@ To use SQL check operators, install the [Common SQL provider](https://registry.a
 
     This DAG creates and populates a small SQlite table `birds` with information about birds. Then, three tasks containing data quality checks are run on the table:
 
-    - The `column_checks` task uses the `SQLColumnCheckOperator`. The operator uses a operator-level `partition_clause` which is `bird_name IS NOT NULL`. This means all checks contained in the `column_mapping` dictionary only run on rows where the `bird_name` column is not null. The `column_mapping` dictionary contains checks on all three columns:
+    - The `column_checks` task uses the `SQLColumnCheckOperator`. The operator uses a operator-level [`partition_clause`](#partition_clause) which is `bird_name IS NOT NULL`. This means all checks contained in the `column_mapping` dictionary only run on rows where the `bird_name` column is not null. The `column_mapping` dictionary contains checks on all three columns:
       - `bird_name`: This column is checked to not have any null values and at least 2 distinct values.
       - `observation_year`: This column is checked to only have values below 2023.
       - `bird_happiness`: This columns is checked to only have values between 0 and 10.
-    - The `table_checks` task uses the `SQLTableCheckOperator`. The operator does not have an operator-level `partition_clause`. The `checks` dictionary for this task contains two checks:
+    
+    - The `table_checks` task uses the `SQLTableCheckOperator`. The operator does not have an operator-level [`partition_clause`](#partition_clause). The `checks` dictionary for this task contains two checks:
       - `row_count_check`: This check makes sure the table has a least three rows.
       - `average_happiness_check`: This check makes sure the average happiness of the birds is at least 9. This check has a check-level `partition_clause` which is `observation_year >= 2021`. This means the check only runs on rows with observations from 2021 onwards.
+    
     - The `custom_check` task uses the `SQLCheckOperator`. This operator can run any SQL statement that returns a single row and will deem the data quality check failed if the that row contains any value [Python bool casting](https://docs.python.org/3/library/stdtypes.html) evaluates as `False`, for example `0`. Otherwise, the data quality check and the task will be marked as successful. This task will run the SQL statement in the file `include/custom_check.sql` on the `table_name` passed as a parameter. Note that in order to run SQL stored in a file, the path to the SQL file has to be added to the `template_searchpath` parameter of the DAG.
 
 4. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button, then click the DAG name to view the DAG in the **Grid** view. All checks are set up to pass.
