@@ -7,8 +7,6 @@ description: Create, delete, and update Teams on Astro.
 
 _Teams_ are a group of users in an Organization that you can grant the same Workspace permissions, without needing to define them individually. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles).
 
-If you have configured SCIM provisioning, you can add groups of users from your identity provider to Astro as Teams. See [Set up SCIM provisioning](set-up-scim-provisioning.md).
-
 ## Create a Team
 
 1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
@@ -47,3 +45,16 @@ You can now [add your Team to a Workspace](add-user.md#add-a-team-to-a-workspace
 3. Click **+ Team**.
 
 4. Select the **Team** you want to add and define their **Workspace Role**, which determines their [Workspace user permissions](/astro/user-permissions.md#workspace-roles).
+
+## Teams and SCIM provisioning
+
+To preserve a single source of truth for user group management, some Team management actions are limited when you [set up SCIM provisioning](set-up-scim-provisioning.md). Specifically, when you set up SCIM provisioning:
+
+- You can't create new Teams.
+- You can't add users to existing Teams.
+
+For any Teams that were created before you set up SCIM provisioning, you can still complete the following actions:
+
+- Update the Team's permissions.
+- Remove users from the Team.
+- Delete the Team.

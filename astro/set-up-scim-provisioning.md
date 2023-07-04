@@ -24,6 +24,10 @@ Astro supports integration with the open standard System for Cross-Domain Identi
 - Add and remove Team members.
 - Retrieve user and Team information.
 
+:::info
+
+Some user management features on Astro behave differently after you set up SCIM provisioning. See [Manage Teams](manage-teams.md#teams-and-scim-provisioning) for more information.
+
 ## Supported SSO identity providers
 
 Astro supports SCIM provisioning with [Okta](https://www.okta.com/). You can configure SCIM provisioning on Okta both with and without using the official Astro Okta integration.
