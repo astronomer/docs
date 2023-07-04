@@ -38,20 +38,18 @@ Airflow has a few options for notifying you on the status of your DAGs and tasks
 
 - **Email notifications**: Most Airflow operators have parameters for setting email alerts in case of a task failure or retry. Use email alerts in production pipelines where task failures or retries need immediate attention by a data professional. 
 - **Airflow callbacks**: Callback parameters (`*_callback`) exist both at the task and at the DAG level. You can pass any callable or [Airflow notifier](#notifiers) to these parameters, and Airflow will run them in the case of specific events, such as a task failure. Airflow callbacks offer a lot of flexibility to execute any code based on the state of a task or DAG. They are often used to define actions for specific instances of task failures or successes.
-- **Airflow notifiers**: Notifiers are custom classes to use as an Airflow callback that can be easily reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/7.3.1/_api/airflow/providers/slack/notifications/slack/index.html). Notifiers can be provided to callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing actions for task failures across several Airflow instances.
+- **Airflow notifiers**: Notifiers are custom classes for Airflow callbacks that can be easily reused and standardized. Provider packages can ship pre-built notifiers like the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/7.3.1/_api/airflow/providers/slack/notifications/slack/index.html). Notifiers can be provided to callback parameters to define which task or DAG state should cause them to be executed. A common use case for notifiers is standardizing actions for task failures across several Airflow instances.
 - **Airflow service-level agreements (SLAs)**: SLAs define the expected time it takes for a specific task to complete. If an SLA is missed, the callable or notifier provided to the `sla_miss_callback` parameter is executed. If you configure an SMTP connection, an email will be sent as well. Since an SLA miss does not stop a task from running, this type of notification is used when intervention is needed if a specific task is taking longer than expected.
 
 Most notifications can be set at the level of both a DAG and a task. Setting a parameter within a DAG's `default_args` dictionary will apply it to all tasks in the DAG. You can see examples of this in the [set DAG and task-level callbacks](#set-dag-and-task-level-callbacks) section.
 
-## Choosing a notification type
+## Choose a notification type
 
-When choosing a notification type, it is best practice to use pre-built solutions whenever possible. This modular approach makes your DAGs more robust by reducing the amount of custom code that needs to be maintained and by standardizing the way notifications are handled across different Airflow environments in your organization.
+It's best practice to use pre-built solutions whenever possible. This approach makes your DAGs more robust by reducing custom code and standardizing notifications across different Airflow environments.
 
-- Use [Email notifications](#email-notifications) over custom functions in an Airflow callback when you want to be alerted of task failures or retries via email.
-- Use the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for use cases where you want to receive email notifications for other events such as task or DAG successes or task execution.
-- Use [Notifiers](#notifiers) over custom functions in Airflow callbacks whenever a suitable notifier class is available. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html). A notifier can be provided to any callback parameter (`*callback`).
-- Use custom [Airflow callback](#airflow-callbacks) functions when no notifier is available for your use case.
-- Use [SLAs](#airflow-service-level-agreements) to be alerted of tasks taking longer than expected to complete.
+If you want to deliver alerts to email, use [email notifications](#email-notifications) for task failures or retries and the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for other events such as successful task runs. To receive alerts for tasks taking longer than expected, use [SLAs](#airflow-service-level-agreements).
+
+If a [notifier class]((#notifiers) exists for your use case, you should always use it instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html). A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
 
 ## Email notifications
 
@@ -192,7 +190,7 @@ You can provide any Python callable to the `*_callback` parameters. As of Airflo
 
 ### Notifiers
 
-Airflow 2.6 added the concept of [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers get passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
+Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers get passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
 
 Notifiers are defined in provider packages or imported from the include folder and can be used across any of your DAGs. This feature has the advantage that community members can define and share functionality previously used in callback functions as Airflow modules, creating pre-built callbacks to send notifications to other data tools.
 
