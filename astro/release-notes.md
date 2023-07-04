@@ -35,7 +35,7 @@ You can now configure multiple email addresses to receive Astro alerts. See [Ast
 
 ### See pricing estimate when creating a Deployment 
 
-</HostedBadge>
+<HostedBadge/>
 
 The Deployment creation page in the Cloud UI has been reorganized to make it easier to focus on specific configurations for your Deployment. Each configuration is now collapsible and includes guidance for different environment sizes. Additionally, the page now shows cost estimates for a Deployment before you create it.
 
