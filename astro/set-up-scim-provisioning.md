@@ -63,20 +63,21 @@ Okta's Astro integration supports the following SCIM actions:
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
 2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **General**.
 3. Copy your **Organization Short Name** to use later in this setup.
-4. In the Okta admin dashboard, open your Astro app integration and click **Provisioning**.
-5. Click **Configure API integration**, check **Enable API integration**, then configure the following values:
+4. Navigate to **Settings > Authentication**. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
+5. In the Okta admin dashboard, open your Astro app integration and click **Provisioning**.
+6. Click **Configure API integration**, check **Enable API integration**, then configure the following values:
 
     - **Organization short name**: Enter your **Organization Short Name**.
     - **API token**: Enter your Organization API token.
   
-6.  Test your API credentials, then click **Save**.
-7.  In the **Provisioning** menu, click **To App** and configure the following:
+7.  Test your API credentials, then click **Save**.
+8.  In the **Provisioning** menu, click **To App** and configure the following:
 
     - **Provisioning to App**: Select only **Create Users**, **Update User Attributes**, and **Deactivate Users**. 
   
     See [Okta documentation](https://developer.okta.com/docs/guides/scim-provisioning-integration-connect/main/#to-app) for more information on configuring these values.
 
-8.  Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
+9.  Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
 
 </TabItem>
 <TabItem value="OktaManual">
