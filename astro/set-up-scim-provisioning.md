@@ -63,7 +63,7 @@ Okta's Astro integration supports the following SCIM actions:
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
 2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **General**.
 3. Copy your **Organization Short Name** to use later in this setup.
-4. Navigate to **Settings > Authentication**. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
+4. Go to **Settings > Authentication**. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 5. In the Okta admin dashboard, open your Astro app integration and click **Provisioning**.
 6. Click **Configure API integration**, check **Enable API integration**, then configure the following values:
 
