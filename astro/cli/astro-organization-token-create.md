@@ -11,7 +11,7 @@ Create an Organization API token.
 ## Usage
 
 ```sh
-astro organization token add
+astro organization token create
 ```
 
 ## Options
