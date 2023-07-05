@@ -18,9 +18,9 @@ astro organization token rotate <flags>
 
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `--clean-output`   | Print only the token as output. Use this flag in automated workflows.                                                                                                      | None   |
-| `--force` | Rotate the token without showing a warning |  None |
-| `--name` | The name for the token. | Any string surrounded by quotations |
+| `--clean-output`   | Print only the token as output. Use this flag in automated workflows.                                                                                                      | None.   |
+| `--force` | Rotate the token without showing a warning. |  None. |
+| `--name` | The name for the token. | Any string surrounded by quotations. |
 
 ## Examples
 

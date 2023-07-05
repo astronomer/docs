@@ -21,7 +21,7 @@ astro organization token create
 | `--clean-output` | Print only the token as output. Use this flag in automated workflows.      | None.                                                                                                     |
 | `--description`  | The description for the token.                                              | Any string surrounded by quotations.                                                                      |
 | `--expiration`   | The expiration date for the token. By default there is no expiration date. | Any integer between 1 and 3650, used to represent days.                                                   |
-| `--name`         | The name for the token.                                                    | Any string surrounded by quotations                                                                      |
+| `--name`         | The name for the token.                                                    | Any string surrounded by quotations.                                                                      |
 | `--role`         | The token's role in the Organization.                                      | Possible values are either `ORGANIZATION_MEMBER`, `ORGANIZATION_BILLING_ADMIN`, or `ORGANIZATION_OWNER`. |
 
 ## Examples

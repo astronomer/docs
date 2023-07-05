@@ -18,8 +18,8 @@ astro organization token delete
 
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `--force`   | Delete or remove the API token without showing a warning.                                                                                                     | None   |
-| `--name` |The name of the token to delete. | Any string surrounded by quotations |
+| `--force`   | Delete or remove the API token without showing a warning.                                                                                                     | None.   |
+| `--name` |The name of the token to delete. | Any string surrounded by quotations. |
 
 ## Related commands
 

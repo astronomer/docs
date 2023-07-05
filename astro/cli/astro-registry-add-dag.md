@@ -21,7 +21,7 @@ When you run the command, the CLI prompts you for a DAG ID to download. To retri
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `--version`   | The version of the DAG to download.                                                                                                      | Any valid version.   |
-| `--add-providers` | Attempt to add the required providers for the DAG to `requirements.txt`. | None |
+| `--add-providers` | Attempt to add the required providers for the DAG to `requirements.txt`. | None. |
 
 ## Examples
 
