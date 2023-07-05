@@ -6,24 +6,106 @@ id: airflow-great-expectations
 sidebar_custom_props: { icon: 'img/integrations/great-expectations.png' }
 ---
 
-:::info
+import CodeBlock from '@theme/CodeBlock';
+import gx_dag from '!!raw-loader!../code-samples/dags/airflow-great-expectations/gx_dag.py';
 
-You can now find the [Great Expectations Provider](https://registry.astronomer.io/providers/great-expectations) on the [Astronomer Registry](https://registry.astronomer.io), the discovery and distribution hub for Apache Airflow integrations created to aggregate and curate the best bits of the ecosystem.
+[Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against a data in a [Source Data System](https://docs.greatexpectations.io/docs/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/0.15.50/guides/connecting_to_your_data/in_memory/pandas/). Astronomer, with help from Superconductive, maintains the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
 
-:::
+This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG and the Astronomer environment, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
 
-[Great Expectations](https://greatexpectations.io) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in Python, then run validations using those “expectations” against datasets with [Checkpoints](https://docs.greatexpectations.io/docs/reference/checkpoints_and_actions). Astronomer, with help from Superconductive, maintains an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) that gives users a convenient method for running validations directly from their DAGs.
+## Time to complete
 
-This guide will walk you through how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/great-expectations/modules/greatexpectationsoperator) in an Airflow DAG and the Astronomer environment.
+This tutorial takes approximately 20 minutes to complete.
 
 ## Assumed knowledge
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- The basics of Great Expectations. See [Getting started with Great Expectations](https://docs.greatexpectations.io/docs/tutorials/getting_started/tutorial_overview).
+- The basics of Great Expectations. See [GX Quickstart](https://docs.greatexpectations.io/docs/tutorials/getting_started/tutorial_overview).
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+
+## Prerequisites
+
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- Access to a SQL database. This tutorial uses a local Postgres instance.
+
+## Step 1: Configure your Astro project
+
+To use GX with Airflow, install the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) in your Astro project.
+
+1. Create a new Astro project:
+
+    ```sh
+    $ mkdir astro-gx-tutorial && cd astro-gx-tutorial
+    $ astro dev init
+    ```
+
+2. Add the GX Airflow provider to your Astro project `requirements.txt` file.
+
+    ```text
+    airflow-provider-great-expectations==0.2.6
+    ```
+
+## Step 2: Initialize a GX project
+
+1. Make sure you have the latest version of the [`great_expectations` package](https://pypi.org/project/great-expectations/) installed.
+
+    ```sh
+    $ pip install great-expectations
+    ```
+
+2. Initialize a new GX project in your Astro project's `include` folder.
+
+    ```sh
+    $ great_expectations init
+    ```
+
+    The following folder and file-structure will be created in your `include` folder:
+
+    ```text
+    └── include
+        └── great_expectations
+            ├── checkpoints
+            ├── expectations
+            ├── plugins
+            ├── profilers
+            ├── uncommitted
+            ├── .gitignore
+            └── great_expectations.yml
+    ```
+
+## Step 3: Create a database connection
+
+The easiest way to use GX with Airflow is to let the GreatExpectationsOperator create a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and [Datasource](https://docs.greatexpectations.io/docs/terms/datasource) based on an Airflow connection. To set up a connection to a Postgres database complete the following steps:
+
+1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
+
+2. Create a new connection named `postgres_default` using the following information:
+
+    - **Connection Id**: `postgres_default`.
+    - **Connection Type**: `Postgres`.
+    - **Host**: `<your postgres host>`.
+    - **Login**: `<your postgres username>`.
+    - **Password**: `<your postgres password>`.
+    - **Schema**: `postgres`.
+    - **Port**: `<your postgres port`.
+
+3. Click **Save**.
+
+## Step 4: Create a DAG
+
+1. Create a new file in your `dags` folder called `gx_tutorial.py`.
+
+2. Copy and paste the following DAG code into the file:
+
+    <CodeBlock language="python">{gx_tutorial}</CodeBlock>
+
+    This simple DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
+
+4. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button.
+
 
 ## Great Expectations concepts
 
