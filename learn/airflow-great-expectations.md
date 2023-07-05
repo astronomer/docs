@@ -135,7 +135,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
     This simple DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
 
     - The `create_table_pg` task uses the [PostgresOperator](https://registry.astronomer.io/providers/apache-airflow-providers-postgres/versions/latest/modules/PostgresOperator) to run a `CREATE TABLE` and `INSERT INTO` statement, creating and populating a small table about Strawberry orders.
-    - The data in the table is validated using the GreatExpectationsOperator. The operator will automatically create a default Checkpoint and Datasource based on the `postgres_default` connection and run the expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that for some database your might need to provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`.
+    - The data in the table is validated using the GreatExpectationsOperator. The operator will automatically create a default Checkpoint and Datasource based on the `postgres_default` connection and run the expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that for some database your might need to provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
     - The `drop_table_pg` task drops the `strawberries` table.
 
 3. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button.
