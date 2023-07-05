@@ -190,7 +190,7 @@ You can provide any Python callable to the `*_callback` parameters. As of Airflo
 
 ### Notifiers
 
-Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers get passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
+Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers can be passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
 
 :::info
 
