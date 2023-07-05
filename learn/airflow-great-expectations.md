@@ -178,16 +178,16 @@ When using the GreatExpectationsOperator, you must pass in either one of the fol
 - `data_context_root_dir` (str): The path to your great_expectations project directory. This is the directory containing your `great_expectations.yml` file.
 - `data_context_config` (DataContextConfig): To use an in-memory [Data Context](https://docs.greatexpectations.io/docs/terms/data_context), a `DataContextConfig` must be defined and passed to the operator, see also [this example DataContextConfig](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_data_context_config.py).
 
-Next, the operator will determine the Checkpoint and Data Source used to run your GX validations:
+Next, the operator will determine the Checkpoint and Datasource used to run your GX validations:
 
-- If your Data Context does not specify a Data Source, and you do not pass in a Checkpoint, then the operator will build a Data Source and Checkpoint for you based on the `conn_id` you pass in and run the given Expectation Suite. This is the simplest way to use the operator and what is shown in this tutorial.
-- If your project's Data Context specifies Data Sources already, all you need to pass in is the Data Context and the Expectation Suite, the operator will use the Data Sources in the Data Context and create a default Checkpoint.
+- If your Data Context does not specify a Datasource, and you do not pass in a Checkpoint, then the operator will build a Datasource and Checkpoint for you based on the `conn_id` you pass in and run the given Expectation Suite. This is the simplest way to use the operator and what is shown in this tutorial.
+- If your project's Data Context specifies Datasources already, all you need to pass in is the Data Context and the Expectation Suite, the operator will use the Datasources in the Data Context and create a default Checkpoint.
 - If your project's [CheckpointStore](https://docs.greatexpectations.io/docs/terms/checkpoint_store) already contains a Checkpoint you can specify its use by passing the name to the `checkpoint_name` parameter. The CheckpointStore is often in the `great_expectations/checkpoints/` path, so that `checkpoint_name = "strawberries.pass.chk"` would reference the file `great_expectations/checkpoints/strawberries/pass/chk.yml`.
 - If you want to run a custom Checkpoint you can either pass a CheckpointConfig object to `checkpoint_config` or a dictionary of your checkpoint config to `checkpoint_kwargs`. `checkpoint_kwargs` can also be used to specify additional overwriting configurations. See also [this example CheckpointConfig](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_checkpoint_config.py).
 
-The Data Source can also be a pandas DataFrame, as shown in [Running GX validations on pandas DataFrames](#running-gx-validations-on-pandas-dataframes). Depending on how you define your data source the `data_asset_name` parameter has to be adjusted:
+The Datasource can also be a pandas DataFrame, as shown in [Running GX validations on pandas DataFrames](#running-gx-validations-on-pandas-dataframes). Depending on how you define your Datasource the `data_asset_name` parameter has to be adjusted:
 
-- If a pandas DataFrame is passed, the `data_asset_name` parameter can be any name that will help you identify the dataframe.
+- If a pandas DataFrame is passed, the `data_asset_name` parameter can be any name that will help you identify the DataFrame.
 - If a `conn_id` is supplied, the `data_asset_name` must be the name of the table the expectations suite runs on.
 
 By default, a Great Expectations task runs validations and raises an `AirflowException` if any of the tests fail. To override this behavior and continue running the pipeline even if tests fail, set the `fail_task_on_validation_failure` flag to `False`.
@@ -202,4 +202,4 @@ For a full list of parameters, see the [the Astronomer registry](https://registr
 
 ### Connections and backends
 
-The GreatExpectationsOperator can run a Checkpoint on a dataset stored in any backend compatible with GX. This includes BigQuery, MSSQL, MySQL, PostgreSQL, Redshift, Snowflake, SQLite, and Athena, among others. All that’s needed to get the GreatExpectationsOperator to point at an external dataset is to set up an [Airflow Connection](connections.md) to the Data Source and set the `conn_id` parameter. Connections will still work if you have your connection configured in both Airflow and Great Expectations, as long as the correct Data Source is specified in the Checkpoint passed to the operator.
+The GreatExpectationsOperator can run a Checkpoint on a dataset stored in any backend compatible with GX. This includes BigQuery, MSSQL, MySQL, PostgreSQL, Redshift, Snowflake, SQLite, and Athena, among others. All that’s needed to get the GreatExpectationsOperator to point at an external dataset is to set up an [Airflow Connection](connections.md) to the Datasource and set the `conn_id` parameter. Connections will still work if you have your connection configured in both Airflow and Great Expectations, as long as the correct Datasource is specified in the Checkpoint passed to the operator.
