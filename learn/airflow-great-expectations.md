@@ -130,7 +130,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
 
 2. Copy and paste the following DAG code into the file:
 
-    <CodeBlock language="python">{gx_tutorial}</CodeBlock>
+    <CodeBlock language="python">{gx_dag}</CodeBlock>
 
     This simple DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
 
