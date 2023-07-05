@@ -11,7 +11,7 @@ Rotate an Organization API token.
 ## Usage
 
 ```sh
-astro workspace token rotate <flags>
+astro organization token rotate <flags>
 ```
 
 ## Options
@@ -30,6 +30,6 @@ astro organization token rotate --name "My token" --force
 
 ## Related commands
 
-- [astro organization token update](cli/astro-workspace-token-update.md)
-- [astro organization token delete](cli/astro-workspace-token-delete.md)
-- [astro organization switch](cli/astro-workspace-switch.md)
+- [astro organization token update](cli/astro-organization-token-update.md)
+- [astro organization token delete](cli/astro-organization-token-delete.md)
+- [astro organization switch](cli/astro-organization-switch.md)

@@ -25,11 +25,11 @@ When you run the command, the CLI prompts you for a provider to download. To ret
 ## Examples
 
 ```sh
-# Download version 1.2.0 of a DAG
-astro registry add dag --version 1.2.0
+# Download version 1.2.0 of a provider
+astro registry add provider --version 1.2.0
 ```
 
 ## Related commands
 
-- [astro registry add dags](cli/astro-registry-add-dag.md)
+- [astro registry add dag](cli/astro-registry-add-dag.md)
 - [astro dev start](cli/astro-dev-start.md)
