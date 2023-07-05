@@ -73,13 +73,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:ro
         webserver:
             volumes:
-            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:ro
         triggerer:
             volumes:
-            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:ro
     ```
     
     </TabItem>
