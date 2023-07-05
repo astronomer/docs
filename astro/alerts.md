@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or email if you have a DAG run failure or if a task duration exceeds a specified time. 
+Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or through email if you have a DAG run failure or if a task duration exceeds a specified time. 
 
 Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. Follow this guide to set up your Slack, PagerDuty, or email to receive alerts from Astro and then configure your Deployment to send alerts.
 
@@ -104,7 +104,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
     <Tabs
         defaultValue="Slack"
-        groupId= "step-1-configure-your-communication-channel"
+        groupId= "step-2-create-your-workspace-alert-in-the-cloud-ui"
         values={[
             {label: 'Slack', value: 'Slack'},
             {label: 'PagerDuty', value: 'PagerDuty'},
