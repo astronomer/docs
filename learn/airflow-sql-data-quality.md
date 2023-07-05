@@ -10,7 +10,7 @@ import sql_data_quality from '!!raw-loader!../code-samples/dags/airflow-sql-data
 
 Data quality is key to the success of an organization's data systems. With in-DAG quality checks, you can halt pipelines and alert stakeholders before bad data makes its way to a production lake or warehouse.
 
-The SQL check operators are a simple and effective way to implement data quality checks in your Airflow DAGs. Using this set of operators, you can quickly put together a pipeline specifically for checking data quality, or you can add data quality checks to existing pipelines with just a few more lines of code.
+The SQL check operators in the Common SQL provider are a simple and effective way to implement data quality checks in your Airflow DAGs. Using this set of operators, you can quickly put together a pipeline specifically for checking data quality, or you can add data quality checks to existing pipelines with just a few more lines of code.
 
 This tutorial shows how to use three SQL check operators (SQLColumnCheckOperator, SQLTableCheckOperator and SQLCheckOperator) to build a robust data quality suite for your DAGs.
 
@@ -66,9 +66,9 @@ To use SQL check operators, install the [Common SQL provider](https://registry.a
 
 ## Step 3: Add a SQL file with a custom check
 
-1. In the `include` folder, create a file called `custom_check.sql`.
+1. In your `include` folder, create a file called `custom_check.sql`.
 
-2. Copy and past the following SQL statement into the file:
+2. Copy and paste the following SQL statement into the file:
 
   ```sql
   WITH all_combinations_unique AS (
@@ -96,14 +96,14 @@ To use SQL check operators, install the [Common SQL provider](https://registry.a
 
     This DAG creates and populates a small SQlite table `birds` with information about birds. Then, three tasks containing data quality checks are run on the table:
 
-    - The `column_checks` task uses the `SQLColumnCheckOperator`. The operator uses a operator-level [`partition_clause`](#partition_clause) which is `bird_name IS NOT NULL`. This means all checks contained in the `column_mapping` dictionary only run on rows where the `bird_name` column is not null. The `column_mapping` dictionary contains checks on all three columns:
+    - The `column_checks` task uses the `SQLColumnCheckOperator` to run the column-level checks provided to the `column_mapping` dictionary. The task also uses an operator-level [`partition_clause`](#partition_clause) to only run the checks on rows where the `bird_name` column is not null. 
       - `bird_name`: This column is checked to not have any null values and at least 2 distinct values.
       - `observation_year`: This column is checked to only have values below 2023.
       - `bird_happiness`: This columns is checked to only have values between 0 and 10.
     
-    - The `table_checks` task uses the `SQLTableCheckOperator`. The operator does not have an operator-level [`partition_clause`](#partition_clause). The `checks` dictionary for this task contains two checks:
+    - The `table_checks` task uses the `SQLTableCheckOperator` to run two checks on the whole table:
       - `row_count_check`: This check makes sure the table has a least three rows.
-      - `average_happiness_check`: This check makes sure the average happiness of the birds is at least 9. This check has a check-level `partition_clause` which is `observation_year >= 2021`. This means the check only runs on rows with observations from 2021 onwards.
+      - `average_happiness_check`: This check makes sure the average happiness of the birds is at least 9. This check has a check-level `partition_clause` which means the check only runs on rows with observations from 2021 onwards.
     
     - The `custom_check` task uses the `SQLCheckOperator`. This operator can run any SQL statement that returns a single row and will deem the data quality check failed if the that row contains any value [Python bool casting](https://docs.python.org/3/library/stdtypes.html) evaluates as `False`, for example `0`. Otherwise, the data quality check and the task will be marked as successful. This task will run the SQL statement in the file `include/custom_check.sql` on the `table_name` passed as a parameter. Note that in order to run SQL stored in a file, the path to the SQL file has to be added to the `template_searchpath` parameter of the DAG.
 
@@ -169,9 +169,7 @@ To use SQL check operators, install the [Common SQL provider](https://registry.a
     [2023-07-04, 11:18:01 UTC] {sql.py:716} INFO - Success.
     ```
 
-## Conclusion
 
-With the SQL check operators you have the foundation for a robust data quality suite right in your pipelines. If you are looking for more examples, or want to see how to use backend-specific operators like Redshift, BigQuery, or Snowflake, see the [data quality demo repository](https://github.com/astronomer/airflow-data-quality-demo/).
 
 ## How it works
 
@@ -179,7 +177,7 @@ The SQL check operators are versions of the `SQLOperator` that abstract SQL quer
 
 The following SQL check operators are recommended for implementing data quality checks:
 
-- **[`SQLColumnCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcolumncheckoperator)**: Runs multiple predefined data quality checks on multiple columns within the same task.
+- **[`SQLColumnCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcolumncheckoperator)**: Runs one or more predefined data quality checks on one or more columns within the same task.
 - **[`SQLTableCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqltablecheckoperator)**: Runs multiple user-defined checks on one or more columns of a table.
 - **[`SQLCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcheckoperator)**: Takes any SQL query and returns a single row that is evaluated to booleans. This operator is useful for more complicated checks that could span several tables of your database.
 - **[`SQLIntervalCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlintervalcheckoperator)**: Checks current data against historical data.
@@ -220,9 +218,9 @@ The resulting values can be compared to an expected value using any of the follo
 
 Additionally, the SQLColumnCheckOperator:
 
-- allows you to specify a tolerance to the comparisons in the form of a fraction (0.1 = 10% tolerance).
-- converts a returned `result` of `None` to 0 by default and still runs the check. For example, if a column check for the `MY_COL` column is set to accept a minimum value of -10 or more but runs on an empty table, the check would still pass because the `None` result is treated as 0. You can toggle this behavior by setting `accept_none=False`, which will cause all checks returning `None` to fail. In previous versions of the provider, running a column check on an empty table always resulted in a failed check.
-- accepts an operator-level `partition_clause` parameter that allows you to run checks on a subset of your table. See the [partition_clause](#partition_clause) section for more information.
+- Allows you to specify a tolerance to the comparisons in the form of a fraction (0.1 = 10% tolerance).
+- Converts a returned `result` of `None` to 0 by default and still runs the check. For example, if a column check for the `MY_COL` column is set to accept a minimum value of -10 or more but runs on an empty table, the check would still pass because the `None` result is treated as 0. You can toggle this behavior by setting `accept_none=False`, which will cause all checks returning `None` to fail. In previous versions of the provider, running a column check on an empty table always resulted in a failed check.
+- Accepts an operator-level `partition_clause` parameter that allows you to run checks on a subset of your table. See the [partition_clause](#partition_clause) section for more information.
 
 ### SQLTableCheckOperator
 
