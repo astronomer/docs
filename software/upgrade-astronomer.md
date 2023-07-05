@@ -379,5 +379,5 @@ Before upgrading to 0.25, ensure that the following software is updated to the a
 Upgrading to 0.25 requires a non-standard upgrade script. Ignore Step 4 in the standard upgrade process and run the following command instead:
 
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/release-0.25/migrations/scripts/lts-to-lts/0.23-to-0.25/manifests/upgrade-0.23-to-0.25.yaml
+kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/v0.25.15-final/migrations/scripts/lts-to-lts/0.23-to-0.25/manifests/upgrade-0.23-to-0.25.yaml
 ```

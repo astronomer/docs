@@ -134,7 +134,7 @@ If you encounter an issue during your upgrade that requires you to recover your 
 
 1. Apply the rollback automation script by running the following command:
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/release-0.23/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/rollback-0.16-to-0.23.yaml
+kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/v0.23.18/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/rollback-0.16-to-0.23.yaml
 ```
 This restores the platform database and the Helm state of the Astronomer Helm chart.
 
