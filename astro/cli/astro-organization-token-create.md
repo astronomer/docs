@@ -27,7 +27,7 @@ astro organization token create
 ## Examples
 
 ```sh
-astro organization token add --name "My Org Owner API token" --role ORGANIZATION OWNER
+astro organization token create --name "My Org Owner API token" --role ORGANIZATION OWNER
 ```
 
 ## Related commands
