@@ -49,7 +49,7 @@ It's best practice to use pre-built solutions whenever possible. This approach m
 
 If you want to deliver alerts to email, use [email notifications](#email-notifications) for task failures or retries and the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for other events such as successful task runs. To receive alerts for tasks taking longer than expected, use [SLAs](#airflow-service-level-agreements).
 
-If a [notifier class]((#notifiers) exists for your use case, you should always use it instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html). A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
+If a [notifier class](#notifiers) exists for your use case, you should always use it instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html). A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
 
 ## Email notifications
 
