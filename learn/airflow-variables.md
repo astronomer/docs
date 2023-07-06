@@ -97,6 +97,15 @@ To learn more about how to set environment variables on Astro, see [Environment 
 
 Lastly, you can programmatically set Airflow variables within your Airflow tasks via the [`Variable` model](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable). If you want to serialize a JSON value, make sure to set `serialize_json=True`.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="create-an-airflow-variable-2"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 ```python
 @task
 def set_var():
@@ -105,6 +114,28 @@ def set_var():
     Variable.set(key="my_json_var", value={"num1": 23, "num2": 42}, serialize_json=True)
 ```
 
+</TabItem>
+<TabItem value="traditional">
+
+
+```python
+def set_var_func():
+    from airflow.models import Variable
+    Variable.set(key="my_regular_var", value="Hello!")
+    Variable.set(key="my_json_var", value={"num1": 23, "num2": 42}, serialize_json=True)
+
+
+PythonOperator(
+    task_id="set_var",
+    python_callable=set_var_func,
+)
+```
+
+</TabItem>
+
+</Tabs>
+
+
 Updating an Airflow variable works the same way by using the `.update()` method.
 
 ## Retrieving an Airflow variable
@@ -112,6 +143,15 @@ Updating an Airflow variable works the same way by using the `.update()` method.
 To programmatically retrieve an Airflow variable, you can either use the `.get()` method of the Airflow variable model or you can pull the Airflow variable value directly from the [Airflow context](airflow-context).
 
 When retrieving a JSON serialized Airflow variable, make sure to set `deserialize_json=True` in the `.get()` method or access the `json` key from the `var` dictionary in the Airflow context.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="retrieving-an-airflow-variable"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
 
 ```python
 @task
@@ -131,6 +171,43 @@ def get_var_from_context(**context):
     print(my_regular_var)
     print(my_json_var)
 ```
+
+</TabItem>
+<TabItem value="traditional">
+
+
+```python
+def get_var_regular_func():
+    from airflow.models import Variable
+    my_regular_var = Variable.get("my_regular_var", default_var=None)
+    my_json_var = Variable.get(
+        "my_json_var", deserialize_json=True, default_var=None
+    )["num1"]
+    print(my_regular_var)
+    print(my_json_var)
+
+
+def get_var_from_context_func(**context):
+    my_regular_var = context["var"]["value"].get("my_regular_var")
+    my_json_var = context["var"]["json"].get("my_json_var")["num2"]
+    print(my_regular_var)
+    print(my_json_var)
+
+
+PythonOperator(
+    task_id="get_var_regular",
+    python_callable=get_var_regular_func,
+)
+
+PythonOperator(
+    task_id="get_var_from_context",
+    python_callable=get_var_from_context_func,
+)
+```
+
+</TabItem>
+
+</Tabs>
 
 When using traditional Airflow operators, it's often easier to use a [Jinja template](templating.md) to retrieve Airflow variables. See [Airflow variables in Templates](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#airflow-variables-in-templates).
 
