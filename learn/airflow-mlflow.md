@@ -6,8 +6,11 @@ id: airflow-mlflow
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflow/mlflow_tutorial_dag.py';
+import mlflow_tutorial_dag_traditional from '!!raw-loader!../code-samples/dags/airflow-mlflow/mlflow_tutorial_dag_traditional.py';
 
 [MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
 
@@ -97,7 +100,26 @@ Please note that the **Test** button might return a 405 error message even if yo
 
 2. Copy the following code into the file. Make sure to provide the name of a bucket in your object storage that is connected to your MLflow instance to the `ARTIFACT_BUCKET` variable.
 
-    <CodeBlock language="python">{mlflow_tutorial_dag}</CodeBlock>
+<Tabs
+    defaultValue="taskflow"
+    groupId="step-3-create-your-dag"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{mlflow_tutorial_dag}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{mlflow_tutorial_dag_traditional}</CodeBlock>
+
+</TabItem>
+
+</Tabs>
 
     This DAG consists of three tasks, each showing a different way to use MLflow with Airflow.
 

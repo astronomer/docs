@@ -49,7 +49,7 @@ def mlflow_tutorial_dag():
 
     # 2. Use mlflow.sklearn autologging in a TaskFlow task
     @task
-    def scale_features(experiment_id: str) -> DataFrame:
+    def scale_features(experiment_id: str):
         """Track feature scaling by sklearn in Mlflow."""
         from sklearn.datasets import fetch_california_housing
         from sklearn.preprocessing import StandardScaler
