@@ -10,6 +10,8 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import tdro_example_upstream from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_upstream.py';
 import tdro_example_downstream from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_downstream.py';
+import tdro_example_upstream from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_upstream_traditional.py';
+import tdro_example_downstream from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_downstream_traditional.py';
 import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
 
 Params are arguments which you can pass to an Airflow DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
@@ -114,11 +116,45 @@ The [TriggerDagRunOperator](cross-dag-dependencies.md#triggerdagrunoperator) is 
 
 The DAG below uses the TriggerDagRunOperator to trigger the `tdro_example_downstream` DAG while passing a dynamic value for the `upstream_color` param via the `conf` parameter. The value for `upstream_color` is passed via a [Jinja template](templating.md) pulling the return value of an upstream task via [XCom](airflow-passing-data-between-tasks.md#xcom).
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "triggerdagrunoperator"
+    values={[
+        {label: 'TaskFlow', value: 'taskflow'},
+        {label: 'Traditional Operator', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{tdro_example_upstream}</CodeBlock>
 
-Runs of the `tdro_example_downstream` DAG that are triggered by this upstream DAG will override the default value of the `upstream_color` param with the value passed via the `conf` parameter, which leads to the `print_color` task to print either `red`, `green`, `blue` or `yellow`. 
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{tdro_example_upstream_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
+
+Runs of the `tdro_example_downstream` DAG that are triggered by this upstream DAG will override the default value of the `upstream_color` param with the value passed via the `conf` parameter, which leads to the `print_color` task to print either `red`, `green`, `blue` or `yellow`.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "triggerdagrunoperator"
+    values={[
+        {label: 'TaskFlow', value: 'taskflow'},
+        {label: 'Traditional Operator', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
 
 <CodeBlock language="python">{tdro_example_downstream}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{tdro_example_downstream_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 
 ## Define DAG-level param defaults

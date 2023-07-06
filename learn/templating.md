@@ -246,7 +246,11 @@ sum_numbers("1", "2", "3")  # TypeError: unsupported operand type(s) for +=: 'in
 Consider a scenario where you're passing a list of values to this function by triggering a DAG with a config that holds some numbers:
 
 ```python
-with DAG(dag_id="failing_template", start_date=datetime.datetime(2021, 1, 1), schedule=None) as dag:
+with DAG(
+    dag_id="failing_template",
+    start_date=datetime.datetime(2021, 1, 1),
+    schedule=None, catchup=False
+) as dag:
     sumnumbers = PythonOperator(
         task_id="sumnumbers",
         python_callable=sum_numbers,
