@@ -123,7 +123,7 @@ The parameters above are inherited from the `BaseOperator`, so you can set them 
 
 <Tabs
     defaultValue="taskflow"
-    groupId="dataset-concepts"
+    groupId="task-level-airflow-settings"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

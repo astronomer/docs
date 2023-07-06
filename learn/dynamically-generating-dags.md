@@ -8,9 +8,11 @@ id: dynamically-generating-dags
   <meta name="description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
   <meta name="og:description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
 </head>
-
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import create_dag_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example.py';
+import create_dag_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example_traditional.py';
 import dags_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example.py';
 import dags_from_connections from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections.py';
 
@@ -55,6 +57,37 @@ In the following examples, the single-file method is implemented differently bas
 
 To dynamically create DAGs from a file, you need to define a Python function that will generate the DAGs based on an input parameter. In this case, you're going to define a DAG template within a `create_dag` function. The code here is very similar to what you would use when creating a single DAG, but it is wrapped in a method that allows for custom parameters to be passed in.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-use-a-create_dag-function"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+from airflow import DAG
+from airflow.decorators import task
+
+
+def create_dag(dag_id, schedule, dag_number, default_args):
+    dag = DAG(dag_id, schedule=schedule, default_args=default_args)
+
+    with dag:
+        @task
+        def hello_world(*args):
+            print("Hello World")
+            print("This is DAG: {}".format(str(dag_number)))
+
+        hello_world()
+
+    return dag
+```
+
+</TabItem>
+<TabItem value="traditional">
+
 ```python
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -75,9 +108,29 @@ def create_dag(dag_id, schedule, dag_number, default_args):
     return dag
 ```
 
+</TabItem>
+</Tabs>
+
 In this example, the input parameters can come from any source that the Python script can access. You can then set a simple loop (`range(1, 4)`) to generate these unique parameters and pass them to the global scope, thereby registering them as valid DAGs with the Airflow scheduler:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-use-a-create_dag-function"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{create_dag_example}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{create_dag_example_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 The DAGs appear in the Airflow UI:
 
@@ -91,7 +144,24 @@ As mentioned previously, the input parameters don't have to exist in the DAG fil
 
 You can retrieve this value by importing the Variable class and passing it into your `range`. The `default_var` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-generate-dags-from-variables"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{dags_from_var_example}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{dags_from_var_example_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 The DAGs appear in the Airflow UI:
 
@@ -105,7 +175,24 @@ To implement this method, you pull the connections from your Airflow metadata da
 
 ![List of connections in the Airflow UI](/img/guides/connections.png)
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-generate-dags-from-connections"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{dags_from_connections}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{dags_from_connections_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 You are accessing the Models library to bring in the `Connection` class (as you did previously with the `Variable` class). You are also accessing the `Session()` class from `settings`, which will allow us to query the current database session.
 
