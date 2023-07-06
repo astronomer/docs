@@ -1,19 +1,18 @@
 from pendulum import datetime
-
-from airflow import DAG, Dataset
-from airflow.decorators import task
+from airflow import Dataset
+from airflow.decorators import dag, task
 
 API = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
 INSTRUCTIONS = Dataset("file://localhost/airflow/include/cocktail_instructions.txt")
 INFO = Dataset("file://localhost/airflow/include/cocktail_info.txt")
 
-with DAG(
-    dag_id="datasets_producer_dag",
+
+@dag(
     start_date=datetime(2022, 10, 1, tz="UTC"),
     schedule=None,
     catchup=False,
-):
-
+)
+def datasets_producer_dag():
     @task
     def get_cocktail(api):
         import requests
@@ -48,3 +47,6 @@ with DAG(
 
     write_instructions_to_file(cocktail)
     write_info_to_file(cocktail)
+
+
+datasets_producer_dag()
