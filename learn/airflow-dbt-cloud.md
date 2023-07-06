@@ -88,7 +88,7 @@ In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not m
 
 <Tabs
     defaultValue="taskflow"
-    groupId="dataset-concepts"
+    groupId="write-a-dbt-cloud-dag"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

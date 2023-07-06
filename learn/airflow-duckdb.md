@@ -10,9 +10,13 @@ sidebar_custom_props: { icon: 'img/integrations/duckdb.png' }
   <meta name="og:description" content="Learn how to use DuckDB with Airflow." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import duckdb_tutorial_dag_1 from '!!raw-loader!../code-samples/dags/airflow-duckdb/duckdb_tutorial_dag_1.py';
 import duckdb_tutorial_dag_2 from '!!raw-loader!../code-samples/dags/airflow-duckdb/duckdb_tutorial_dag_2.py';
+import duckdb_tutorial_dag_1_traditional from '!!raw-loader!../code-samples/dags/airflow-duckdb/duckdb_tutorial_dag_1_traditional.py';
+import duckdb_tutorial_dag_2_traditional from '!!raw-loader!../code-samples/dags/airflow-duckdb/duckdb_tutorial_dag_2_traditional.py';
 
 [DuckDB](https://duckdb.org/) is an open-source in-process SQL OLAP database management system. It allows you to run complex queries on relational datasets using either local, file-based DuckDB instances, or the cloud service [MotherDuck](https://motherduck.com/). The ability to create a local DuckDB instance is useful for testing complex Airflow pipelines without the need to connect to a remote database.
 
@@ -82,7 +86,26 @@ You can use the [duckdb Python package](https://pypi.org/project/duckdb/) direct
 
 3. Copy and paste the following DAG code into the file:
 
-    <CodeBlock language="python">{duckdb_tutorial_dag_1}</CodeBlock>
+<Tabs
+    defaultValue="taskflow"
+    groupId="step-2-create-a-dag-using-the-duckdb-python-package"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{duckdb_tutorial_dag_1}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{duckdb_tutorial_dag_1_traditional}</CodeBlock>
+
+</TabItem>
+
+</Tabs>
 
     This simple DAG passes a pandas DataFrame from an upstream task to a downstream task. The downstream task uses the DuckDB Python package to create and query a table in DuckDB. You can control the database you connect to by changing the string in the `duckdb.connect()` function:
 
@@ -123,7 +146,26 @@ If you are connecting to MotherDuck, you will need to add your [MotherDuck Servi
 
 3. Copy and paste the following DAG code into the file:
 
-    <CodeBlock language="python">{duckdb_tutorial_dag_2}</CodeBlock>
+<Tabs
+    defaultValue="taskflow"
+    groupId="step-4-create-a-dag-using-the-airflow-duckdb-provider"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{duckdb_tutorial_dag_2}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{duckdb_tutorial_dag_2_traditional}</CodeBlock>
+
+</TabItem>
+
+</Tabs>
 
     This simple DAG will query all information from a table in a DuckDB instance. Make sure the table you are querying exists in the DuckDB instance you specified in your DuckDB connection.
 
