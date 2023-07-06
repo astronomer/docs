@@ -153,21 +153,6 @@ The GreatExpectationsOperator also allows you to pass in a CheckpointConfig obje
 
 For more examples, check out the [Get Improved Data Quality Checks in Airflow with the Updated Great Expectations Operator](https://www.astronomer.io/blog/improved-data-quality-checks-in-airflow-with-great-expectations-operator/) blog post and the [Airflow data quality demo repository](https://github.com/astronomer/airflow-data-quality-demo/).
 
-### Running GX validations on pandas DataFrames
-
-The GreatExpectationsOperator can also be used to run validations on CSV files by passing them in as a pandas DataFrame. This pattern is useful to test pipelines locally with small amounts of data. Note that the `execution_engine` parameter needs to be adjusted. 
-
-    ```python
-    gx_validate_pg = GreatExpectationsOperator(
-        task_id="gx_validate_pg",
-        data_context_root_dir="include/great_expectations",
-        dataframe_to_validate=pd.read_csv("include/strawberries.csv"),
-        execution_engine="PandasExecutionEngine",
-        expectation_suite_name="strawberry_suite",
-        return_json_dict=True,
-    )
-    ```
-
 ### Operator parameters
 
 The GreatExpectationsOperator is highly customizable to allow expert GX users to use their custom objects. This section explains some of the most commonly used parameters. Please refer to the [GX documentation](https://docs.greatexpectations.io/docs/) for in depth explanations of GX concepts.
@@ -194,6 +179,21 @@ By default, a Great Expectations task runs validations and raises an `AirflowExc
 By default in Astronomer or any environment with OpenLineage configured, the `GreatExpectationsOperator` will automatically add the OpenLineage action to its default action list when a Checkpoint is not specified to the operator. To turn off this feature, set the `use_open_lineage` parameter to `False`.
 
 For a full list of parameters, see the [the Astronomer registry](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator). For more information about possible parameters and examples, see the [README in the provider repository](https://github.com/great-expectations/airflow-provider-great-expectations).
+
+### Running GX validations on pandas DataFrames
+
+The GreatExpectationsOperator can also be used to run validations on CSV files by passing them in as a pandas DataFrame. This pattern is useful to test pipelines locally with small amounts of data. Note that the `execution_engine` parameter needs to be adjusted. 
+
+    ```python
+    gx_validate_pg = GreatExpectationsOperator(
+        task_id="gx_validate_pg",
+        data_context_root_dir="include/great_expectations",
+        dataframe_to_validate=pd.read_csv("include/strawberries.csv"),
+        execution_engine="PandasExecutionEngine",
+        expectation_suite_name="strawberry_suite",
+        return_json_dict=True,
+    )
+    ```
 
 ### Connections and backends
 
