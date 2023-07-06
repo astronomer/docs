@@ -9,6 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import dataset_producer from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_producer.py';
+import dataset_producer_traditional from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_producer_traditional.py';
 import dataset_consumer from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_consumer.py';
 import example_sdk_datasets from '!!raw-loader!../code-samples/dags/airflow-datasets/example_sdk_datasets.py';
 
@@ -38,7 +39,26 @@ You can reference the dataset in a task by passing it to the task's `outlets` pa
 
 When you define a task's `outlets` parameter, Airflow labels the task as a producer task that updates the datasets. It is up to you to determine which tasks should be considered producer tasks for a dataset. As long as a task has an outlet dataset, Airflow considers it a producer task even if that task doesn't operate on the referenced dataset. In the following example, the `write_instructions_to_file` and `write_info_to_file` are both producer tasks because they have defined outlets.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="dataset-concepts"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{dataset_producer}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{dataset_producer_traditional}</CodeBlock>
+
+</TabItem>
+
+</Tabs>
 
 A consumer DAG runs whenever the dataset(s) it is scheduled on is updated by a producer task, rather than running on a time-based schedule. For example, if you have a DAG that should run when the `INSTRUCTIONS` and `INFO` datasets are updated, you define the DAG's schedule using the names of those two datasets.
 
