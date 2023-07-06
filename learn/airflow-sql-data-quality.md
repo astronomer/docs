@@ -201,9 +201,10 @@ The `SQLCheckOperator` returns a single row from a provided SQL query and checks
 - A specific, single column value.
 - Part of or an entire row compared to a known set of values.
 - Options for categorical variables and data types.
+- Comparisons between multiple tables.
 - The results of any other function that can be written as a SQL query.
 
-The target table for the `SQLCheckOperator` has to be specified within the SQL statement. The `sql` parameter of this operator can be either a complete SQL query as a string or, as in this tutorial, a reference to a query stored in a local file. 
+The target table(s) for the `SQLCheckOperator` has to be specified within the SQL statement. The `sql` parameter of this operator can be either a complete SQL query as a string or, as in this tutorial, a reference to a query stored in a local file. 
 
 ### `partition_clause`
 
