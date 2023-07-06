@@ -177,7 +177,7 @@ The resulting values can be compared to an expected value using any of the follo
 
 Additionally, the SQLColumnCheckOperator:
 
-- Allows you to specify a tolerance to the comparisons as a fraction (0.1 = 10% tolerance).
+- Allows you to specify a tolerance to the comparisons as a fraction (0.1 = 10% tolerance), see the [partition_clause](#partition_clause) section for an example.
 - Converts a returned `result` of `None` to 0 by default and still runs the check. For example, if a column check for the `MY_COL` column is set to accept a minimum value of -10 or more but runs on an empty table, the check would still pass because the `None` result is treated as 0. You can toggle this behavior by setting `accept_none=False`, which will cause all checks returning `None` to fail.
 - Accepts an operator-level `partition_clause` parameter that allows you to run checks on a subset of your table. See the [partition_clause](#partition_clause) section for more information.
 
@@ -213,7 +213,7 @@ The code snippet below shows a SQLColumnCheckOperator defined with a `partition_
 
 In the following example, the operator checks whether:
 
-- `MY_NUM_COL_1` has a minimum value greater than 10.
+- `MY_NUM_COL_1` has a minimum value of 10 with a tolerance of 10%, meaning that the check will pass if the minimum value in this column is between 9 and 11.
 - `MY_NUM_COL_2` has a maximum value less than 300. Only rows that fulfill the check-level `partition_clause` are checked (rows where `CUSTOMER_STATUS = 'active'`).
 
 Both of the above checks only run on rows that fulfill the operator-level partition clause `CUSTOMER_NAME IS NOT NULL`. If both an operator-level `partition_clause` and a check-level `partition_clause` are defined for a check, the check will only run on rows fulfilling both clauses.
@@ -225,7 +225,7 @@ column_checks = SQLColumnCheckOperator(
     table="MY_TABLE",
     partition_clause="CUSTOMER_NAME IS NOT NULL",
     column_mapping={
-        "MY_NUM_COL_1": {"min": {"greater_than": 10}},
+        "MY_NUM_COL_1": {"min": {"equal_to": 10, "tolerance": 0.1}},
         "MY_NUM_COL_2": {
             "max": {"less_than": 300, "partition_clause": "CUSTOMER_STATUS = 'active'"}
         },
