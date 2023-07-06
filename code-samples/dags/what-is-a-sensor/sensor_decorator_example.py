@@ -1,3 +1,10 @@
+"""
+### Create a custom sensor using the @task.sensor decorator
+
+This DAG showcases how to create a custom sensor using the @task.sensor decorator
+to check the availability of an API.
+"""
+
 from airflow.decorators import dag, task
 from pendulum import datetime
 import requests
