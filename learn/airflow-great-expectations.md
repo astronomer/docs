@@ -11,7 +11,7 @@ import gx_dag from '!!raw-loader!../code-samples/dags/airflow-great-expectations
 
 [Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against a data in a [Source Data System](https://docs.greatexpectations.io/docs/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/0.15.50/guides/connecting_to_your_data/in_memory/pandas/). Astronomer, with help from Superconductive, maintains the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
 
-This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG and the Astronomer environment, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
+This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
 
 ## Time to complete
 
@@ -56,13 +56,13 @@ To use GX with Airflow, install the [Great Expectations Airflow Provider](https:
     $ pip install great-expectations
     ```
 
-2. Initialize a new GX project in your Astro project's `include` folder.
+2. Initialize a new GX project in your Astro project `include` folder.
 
     ```sh
     $ great_expectations init
     ```
 
-3. Create a new file in the `include/great_expectations/expectations` called `strawberry_suite.json` and copy and paste the following code into the file:
+3. Create a new file in your `include/great_expectations/expectations` folder called `strawberry_suite.json` and copy and paste the following code into the file:
 
     ```json
     {
@@ -91,7 +91,7 @@ To use GX with Airflow, install the [Great Expectations Airflow Provider](https:
 
     This JSON code defines an [Expectation Suite](https://docs.greatexpectations.io/docs/terms/expectation_suite) containing one expectation of the type [`expect_table_row_count_to_be_between`](https://greatexpectations.io/expectations/expect_table_row_count_to_be_between). This expectation will check that the number of rows in a table is between 2 and 1000.
 
-    You should now have the following folder and file-structure will be created in your `include` folder:
+    You should now have the following file structure in your `include` folder:
 
     ```text
     └── include
@@ -120,7 +120,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
     - **Login**: `<your postgres username>`.
     - **Password**: `<your postgres password>`.
     - **Schema**: `postgres`.
-    - **Port**: `<your postgres port`.
+    - **Port**: `<your postgres port>`.
 
 3. Click **Save**.
 
@@ -132,17 +132,16 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
 
     <CodeBlock language="python">{gx_dag}</CodeBlock>
 
-    This simple DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
+    This DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
 
-    - The `create_table_pg` task uses the [PostgresOperator](https://registry.astronomer.io/providers/apache-airflow-providers-postgres/versions/latest/modules/PostgresOperator) to run a `CREATE TABLE` and `INSERT INTO` statement, creating and populating a small table about Strawberry orders.
-    - The data in the table is validated using the GreatExpectationsOperator. The operator will automatically create a default Checkpoint and Datasource based on the `postgres_default` connection and run the expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that for some database your might need to provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
-    - The `drop_table_pg` task drops the `strawberries` table.
+The data in the table is validated using the GreatExpectationsOperator. The operator will automatically create a default Checkpoint and Datasource based on the `postgres_default` connection and run the expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that for some database your might need to provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
 
 3. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button.
 
 :::info
 
-By default, the `GreatExpectationsOperator` pushes a [CheckpointResult object](https://docs.greatexpectations.io/docs/terms/checkpoint/#checkpointresult) to XCom. You can change this behavior by setting the `return_json_dict` parameter to `True` to cause the operator to return a json-serializable dictionary instead.
+By default, the `GreatExpectationsOperator` pushes a [CheckpointResult object](https://docs.greatexpectations.io/docs/terms/checkpoint/#checkpointresult) to XCom. You can instead  return a json-serializable dictionary by setting the `return_json_dict` parameter to `True`.
+
 If you do not want to use this built-in serialization, you can either enable XCom pickling by setting the environment variable `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://docs.astronomer.io/learn/xcom-backend-tutorial).
 
 :::
@@ -150,13 +149,13 @@ If you do not want to use this built-in serialization, you can either enable XCo
 ## How it works
 
 The GreatExpectationsOperator is a versatile operator allowing you to integrate GX into your Airflow environment. This tutorial shows the simplest way of using the operator by letting it create a default Checkpoint and Datasource based on an Airflow connection.
-For users familiar with GX the GreatExpectationsOperator also allows to pass in a CheckpointConfig object via the `checkpoint_config` parameter or a `checkpoint_kwargs` dictionary. Additional customization includes the use of other [Execution Engines](https://docs.greatexpectations.io/docs/terms/execution_engine) and passing [DataContextConfig objects](https://docs.greatexpectations.io/docs/terms/data_context). See also the [Operator parameters](#operator-parameters) section below.
+The GreatExpectationsOperator also allows you to pass in a CheckpointConfig object using the `checkpoint_config` parameter or a `checkpoint_kwargs` dictionary. You can also customize the [Execution Engines](https://docs.greatexpectations.io/docs/terms/execution_engine) and pass [DataContextConfig objects](https://docs.greatexpectations.io/docs/terms/data_context) by configuring [Operator parameters](#operator-parameters).
 
 For more examples, check out the [Get Improved Data Quality Checks in Airflow with the Updated Great Expectations Operator](https://www.astronomer.io/blog/improved-data-quality-checks-in-airflow-with-great-expectations-operator/) blog post and the [Airflow data quality demo repository](https://github.com/astronomer/airflow-data-quality-demo/).
 
 ### Running GX validations on pandas DataFrames
 
-The GreatExpectationsOperator can also be used to run validations on CSV files by passing them in as a pandas DataFrame. This pattern is useful to test pipelines locally with small amounts of data. Not that the `execution_engine` parameter needs to be adjusted. 
+The GreatExpectationsOperator can also be used to run validations on CSV files by passing them in as a pandas DataFrame. This pattern is useful to test pipelines locally with small amounts of data. Note that the `execution_engine` parameter needs to be adjusted. 
 
     ```python
     gx_validate_pg = GreatExpectationsOperator(
@@ -181,9 +180,9 @@ When using the GreatExpectationsOperator, you must pass in either one of the fol
 Next, the operator will determine the Checkpoint and Datasource used to run your GX validations:
 
 - If your Data Context does not specify a Datasource, and you do not pass in a Checkpoint, then the operator will build a Datasource and Checkpoint for you based on the `conn_id` you pass in and run the given Expectation Suite. This is the simplest way to use the operator and what is shown in this tutorial.
-- If your project's Data Context specifies Datasources already, all you need to pass in is the Data Context and the Expectation Suite, the operator will use the Datasources in the Data Context and create a default Checkpoint.
-- If your project's [CheckpointStore](https://docs.greatexpectations.io/docs/terms/checkpoint_store) already contains a Checkpoint you can specify its use by passing the name to the `checkpoint_name` parameter. The CheckpointStore is often in the `great_expectations/checkpoints/` path, so that `checkpoint_name = "strawberries.pass.chk"` would reference the file `great_expectations/checkpoints/strawberries/pass/chk.yml`.
-- If you want to run a custom Checkpoint you can either pass a CheckpointConfig object to `checkpoint_config` or a dictionary of your checkpoint config to `checkpoint_kwargs`. `checkpoint_kwargs` can also be used to specify additional overwriting configurations. See also [this example CheckpointConfig](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_checkpoint_config.py).
+- If your project's Data Context specifies Datasources already, all you need to pass is the Data Context and the Expectation Suite. The operator will use the Datasources in the Data Context to create a default Checkpoint.
+- If your project's [CheckpointStore](https://docs.greatexpectations.io/docs/terms/checkpoint_store) already contains a Checkpoint, you can specify its use by passing the name to the `checkpoint_name` parameter. The CheckpointStore is often in the `great_expectations/checkpoints/` path, so that `checkpoint_name = "strawberries.pass.chk"` would reference the file `great_expectations/checkpoints/strawberries/pass/chk.yml`.
+- If you want to run a custom Checkpoint, you can either pass a CheckpointConfig object to `checkpoint_config` or a dictionary of your checkpoint config to `checkpoint_kwargs`. `checkpoint_kwargs` can also be used to specify additional overwriting configurations. See the [example CheckpointConfig](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_checkpoint_config.py).
 
 The Datasource can also be a pandas DataFrame, as shown in [Running GX validations on pandas DataFrames](#running-gx-validations-on-pandas-dataframes). Depending on how you define your Datasource the `data_asset_name` parameter has to be adjusted:
 
@@ -194,11 +193,7 @@ By default, a Great Expectations task runs validations and raises an `AirflowExc
 
 By default in Astronomer or any environment with OpenLineage configured, the `GreatExpectationsOperator` will automatically add the OpenLineage action to its default action list when a Checkpoint is not specified to the operator. To turn off this feature, set the `use_open_lineage` parameter to `False`.
 
-:::info
-
 For a full list of parameters, see the [the Astronomer registry](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator). For more information about possible parameters and examples, see the [README in the provider repository](https://github.com/great-expectations/airflow-provider-great-expectations).
-
-:::
 
 ### Connections and backends
 
