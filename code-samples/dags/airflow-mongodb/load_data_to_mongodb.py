@@ -24,7 +24,7 @@ def load_data_to_mongodb():
     )
 
     @task
-    def uploadtomongo(result, **context):
+    def uploadtomongo(result):
         hook = MongoHook(mongo_conn_id="mongo_default")
         client = hook.get_conn()
         db = (
