@@ -19,7 +19,7 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 ## Astro CLI 1.17.0
 
-Release date: July 3, 2023
+Release date: July 6, 2023
 
 ### Manage Organization API tokens with the Astro CLI
 
