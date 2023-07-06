@@ -15,6 +15,8 @@ import create_dag_example from '!!raw-loader!../code-samples/dags/dynamically-ge
 import create_dag_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example_traditional.py';
 import dags_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example.py';
 import dags_from_connections from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections.py';
+import dags_from_var_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example_traditional.py';
+import dags_from_connections_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections_traditional.py';
 
 In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
 
