@@ -8,8 +8,10 @@ id: dynamically-generating-dags
   <meta name="description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
   <meta name="og:description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
 </head>
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
 import CodeBlock from '@theme/CodeBlock';
 import create_dag_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example.py';
 import create_dag_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example_traditional.py';
