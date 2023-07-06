@@ -20,13 +20,14 @@ When you run the command, the CLI prompts you for a provider to download. To ret
 
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `<provider-name>`   | The provider to download.                                                                                                      | Any valid provider name. Must be the first option in the command.   |
 | `--version`   | The version of the provider to download.                                                                                                      | Any valid version.   |
 
 ## Examples
 
 ```sh
 # Download version 1.2.0 of a provider
-astro registry add provider --version 1.2.0
+astro registry add provider apache-airflow-providers-airbyte --version 1.2.0
 ```
 
 ## Related commands

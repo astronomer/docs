@@ -20,14 +20,15 @@ When you run the command, the CLI prompts you for a DAG ID to download. To retri
 
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `<dag-id>`   | The DAG ID to download.                                                                                                      | Any valid DAG ID. Must be the first option in the command.  |
 | `--version`   | The version of the DAG to download.                                                                                                      | Any valid version.   |
 | `--add-providers` | Attempt to add the required providers for the DAG to `requirements.txt`. | None. |
 
 ## Examples
 
 ```sh
-# Download version 1.2.0 of a DAG
-astro registry add dag --version 1.2.0
+# Download version 1.2.0 of a DAG called 'upload_files_to_s3'
+astro registry add dag upload_files_to_s3 --version 1.2.0
 ```
 
 ## Related commands
