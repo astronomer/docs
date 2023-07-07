@@ -183,7 +183,8 @@ from datetime import datetime
 
 BashOperator(
     task_id="print_now",
-    bash_command="echo It is currently {{ datetime.now() }}",  # raises jinja2.exceptions.UndefinedError: 'datetime' is undefined
+    # raises jinja2.exceptions.UndefinedError: 'datetime' is undefined
+    bash_command="echo It is currently {{ datetime.now() }}",
 )
 ```
 
@@ -192,7 +193,8 @@ However, it is possible to inject functions into your Jinja environment. In Airf
 ```python
 BashOperator(
     task_id="print_now",
-    bash_command="echo It is currently {{ macros.datetime.now() }}",  # It is currently 2021-08-30 13:51:55.820299
+    # It is currently 2021-08-30 13:51:55.820299
+    bash_command="echo It is currently {{ macros.datetime.now() }}",  
 )
 ```
 
@@ -222,7 +224,8 @@ def days_to_now(starting_date):
 def demo_template():
     print_days = BashOperator(
         task_id="print_days",
-        bash_command="echo Days since {{ starting_date }} is {{ days_to_now(starting_date) }}",  # Call user defined macros
+        # Call user defined macros
+        bash_command="echo Days since {{ starting_date }} is {{ days_to_now(starting_date) }}",  
     )
     # Days since 2015-05-01 00:00:00 is 2313
 
@@ -237,13 +240,15 @@ It's also possible to inject functions as Jinja [filters](https://jinja.palletsp
 @dag(
     start_date=datetime(2021, 1, 1),
     schedule=None,
-    user_defined_filters={"days_to_now": days_to_now},  # Set user_defined_filters to use function as pipe-operation
+    # Set user_defined_filters to use function as pipe-operation
+    user_defined_filters={"days_to_now": days_to_now},  
     user_defined_macros={"starting_date": datetime(2015, 5, 1)},
 )
 def bash_script_template():
     print_days = BashOperator(
         task_id="print_days",
-        bash_command="echo Days since {{ starting_date }} is {{ starting_date | days_to_now }}",  # Pipe value to function
+        # Pipe value to function
+        bash_command="echo Days since {{ starting_date }} is {{ starting_date | days_to_now }}", 
     )
     # Days since 2015-05-01 00:00:00 is 2313
 
@@ -270,8 +275,10 @@ def sum_numbers(*args):
         total += val
     return total
 
-sum_numbers(1, 2, 3)  # returns 6
-sum_numbers("1", "2", "3")  # TypeError: unsupported operand type(s) for +=: 'int' and 'str'
+sum_numbers(1, 2, 3)
+# returns 6
+sum_numbers("1", "2", "3")
+# TypeError: unsupported operand type(s) for +=: 'int' and 'str'
 ```
 
 Consider a scenario where you're passing a list of values to this function by triggering a DAG with a config that holds some numbers:
@@ -322,7 +329,8 @@ def sum_numbers(*args):
     dag_id="native_templating",
     start_date=datetime.datetime(2021, 1, 1),
     schedule=None,
-    render_template_as_native_obj=True,  # Render templates using Jinja NativeEnvironment
+    # Render templates using Jinja NativeEnvironment
+    render_template_as_native_obj=True,
 )
 def native_templating()
     sumnumbers = PythonOperator(
