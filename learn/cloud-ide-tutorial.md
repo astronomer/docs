@@ -1,5 +1,5 @@
 ---
-title: 'ML with the Astro Cloud IDE'
+title: 'ML pipelines with the Astro Cloud IDE'
 sidebar_label: 'ML with the Astro Cloud IDE'
 id: cloud-ide-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
