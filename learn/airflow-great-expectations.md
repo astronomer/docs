@@ -30,6 +30,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - Access to a SQL database. This tutorial uses a local Postgres instance.
+- Optional. Local installation of the [`great_expectations` package](https://pypi.org/project/great-expectations/).
 
 ## Step 1: Configure your Astro project
 
@@ -49,6 +50,8 @@ To use GX with Airflow, install the [Great Expectations Airflow Provider](https:
     ```
 
 ## Step 2: Configure a GX project
+
+The Great Expectations Airflow Provider requires a GX project to be present in your Airflow environment. The easiest way to create a GX project is by using the [`great_expectations` package](https://pypi.org/project/great-expectations/) and following the steps below. If you cannot install the GX package locally, you can copy the [`great_expectations` folder from this GitHub repository](https://github.com/astronomer/gx-tutorial/tree/main/include/great_expectations) into your Astro project `include` folder instead and continue this tutorial at [Step 3](#step-3-create-a-database-connection).
 
 1. Make sure you have the latest version of the [`great_expectations` package](https://pypi.org/project/great-expectations/) installed.
 
