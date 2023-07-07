@@ -3,6 +3,7 @@ title: "Manage your ML models with Weights and Biases and Airflow"
 sidebar_label: "Weights and Biases"
 description: "Learn how to use Airflow and Weights and Biases to manage and visualize your ML model lifecycle."
 id: airflow-weights-and-biases
+sidebar_custom_props: { icon: 'img/integrations/wandb_logo.svg' }
 ---
 
 import CodeBlock from '@theme/CodeBlock';
