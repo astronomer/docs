@@ -36,8 +36,8 @@ You can now manage [Organization API tokens](organization-api-tokens.md) using t
 
 You can now use the following commands to download resources from the Astronomer Registry:
 
-- [`astro registry add dag`](cli/astro-registry-add-dag.md)
-- [`astro registry add provider`](cli/astro-registry-add-provider.md)
+- [`astro registry dag add`](cli/astro-registry-dag-add.md)
+- [`astro registry provider add`](cli/astro-registry-provider-add.md)
 
 The Astro registry contains DAGs and provider packages that are ready to use out of the box. Use these commands to quickly add resources to an Astro project, which you can then run locally or on Astro.
 

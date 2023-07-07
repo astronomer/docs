@@ -1,7 +1,7 @@
 ---
 sidebar_label: "astro registry add provider"
 title: "astro registry add provider"
-id: astro-registry-add-provider
+id: astro-registry-provider-add
 description: Reference documentation for astro registry add provider.
 hide_table_of_contents: true
 ---
@@ -27,10 +27,10 @@ When you run the command, the CLI prompts you for a provider to download. To ret
 
 ```sh
 # Download version 1.2.0 of a provider
-astro registry add provider apache-airflow-providers-airbyte --version 1.2.0
+astro registry provider add apache-airflow-providers-airbyte --version 1.2.0
 ```
 
 ## Related commands
 
-- [astro registry add dag](cli/astro-registry-add-dag.md)
+- [astro registry dag add](cli/astro-registry-dag-add.md)
 - [astro dev start](cli/astro-dev-start.md)

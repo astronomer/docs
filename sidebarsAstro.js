@@ -415,8 +415,8 @@ module.exports = {
           type: "category",
           label: "astro registry",
           items: [
-            "cli/astro-registry-add-dag",
-            "cli/astro-registry-add-provider"
+            "cli/astro-registry-dag-add",
+            "cli/astro-registry-provider-add"
           ],
         },
         'cli/astro-run',
