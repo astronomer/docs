@@ -8,9 +8,9 @@ from airflow.providers.common.sql.operators.sql import (
 )
 
 DB_CONN = "snowflake_default"
-DB = "SANDBOX"
-SCHEMA = "TAMARAFINGERLIN"
-TABLE = "dq_test_table"
+DB = "database_name"
+SCHEMA = "schema_name"
+TABLE = "example_table"
 
 
 @dag(
