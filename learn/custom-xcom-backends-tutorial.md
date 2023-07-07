@@ -1,6 +1,6 @@
 ---
-title: 'Set up a custom XCom backend using cloud-based or local object storage'
-sidebar_label: 'Set up a custom XCom backend'
+title: 'Set up a custom XCom backend'
+sidebar_label: 'Custom XCom backends'
 id: xcom-backend-tutorial
 description: 'Use this tutorial to learn how to set up a custom XCom backend in AWS, GCP, Azure or MinIO.'
 ---

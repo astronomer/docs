@@ -1,8 +1,8 @@
 ---
-title: "ELT pipelines with Airflow, the Astro Databricks provider, and the Astro Python SDK"
+title: "ELT with Airflow and Databricks"
 description: "Use Airflow, Databricks and the Astro Python SDK in an ELT pipeline to analyze energy data."
 id: use-case-airflow-databricks
-sidebar_label: "ELT with Airflow + Databricks + Astro SDK"
+sidebar_label: "ELT with Airflow + Databricks"
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
 
