@@ -2,6 +2,7 @@
 title: "Orchestrate dbt Cloud jobs with Airflow"
 sidebar_label: "dbt Cloud"
 id: airflow-dbt-cloud
+sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
 <head>
