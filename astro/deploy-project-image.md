@@ -1,13 +1,13 @@
 ---
-sidebar_label: 'Deploy a project'
-title: 'Deploy a project to Astro'
-id: deploy-project
+sidebar_label: 'Deploy an image'
+title: 'Deploy an Astro project as an image'
+id: deploy-project-image
 description: Deploy a complete Astro project to a Deployment as a Docker image.
 ---
 
 import {siteVariables} from '@site/src/versions';
 
-A project deploy builds every file in your Astro project as a Docker image and deploys the image to all Airflow components in a Deployment. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages.
+An image deploy builds every file in your Astro project as a Docker image and deploys the image to all Airflow components in a Deployment. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages.
 
 Follow the steps in this document to manually push your Astro project to a Deployment. 
 

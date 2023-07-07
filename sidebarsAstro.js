@@ -65,7 +65,7 @@ module.exports = {
       label: "Deploy code",
       items: [
         "overview",
-        "deploy-project",
+        "deploy-project-image",
         "deploy-dags", 
         "set-up-ci-cd", 
         {
