@@ -175,24 +175,24 @@ This example shows the steps necessary to perform the same set of data quality c
 
 The checks performed for both tools are:
 
-- "MY_DATE_COL" has only unique values.
-- "MY_DATE_COL" has only values between 2017-01-01 and 2022-01-01.
-- "MY_TEXT_COL" has no null values.
-- "MY_TEXT_COL" has at least 10 distinct values.
-- "MY_NUM_COL" has a minimum value between 90 and 110.
-- `example_table` has at least 1000 rows.
-- The value in each row of "MY_COL_1" plus the value of the same row in "MY_COL_2" is equal to 100.
-- "MY_COL_3" contains only the values `val1`, `val2`, `val3` and `val4`.
+- `MY_DATE_COL` has only unique values.
+- `MY_DATE_COL` has only values between 2017-01-01 and 2022-01-01.
+- `MY_TEXT_COL` has no null values.
+- `MY_TEXT_COL` has at least 10 distinct values.
+- `MY_NUM_COL` has a minimum value between 90 and 110.
+- `example_table` has at least 10 rows.
+- The value in each row of `MY_COL_1` plus the value of the same row in `MY_COL_2` is equal to 100.
+- The most common value in `MY_COL_3` is either `val1` or `val4`.
 
 ### Example: SQL check operators
 
 The example DAG includes the following tasks:
 
 - The`SQLColumnCheckOperator` performs checks on several columns in the target table.
-- Two `SQLTableCheckOperators` perform one check each. One operator checks several columns, while the other checks the entire table.
-- The `SQLCheckOperator` makes sure a categorical variable is set to one of four options.
+- The `SQLTableCheckOperators` performs checks on the whole table, involving one or more columns.
+- The `SQLCheckOperator` makes sure the most common value of a categorical variable is one of two options.
 
-While this example shows all the checks being written within the Python file defining the DAG, it is possible to modularize commonly used checks and SQL statements in separate files. If you're using the Astro CLI, you can add the files to the `/include` directory.
+While this example shows all the checks being written within the Python file defining the DAG, it is possible to modularize commonly used checks and SQL statements in separate files. If you're using the Astro CLI, you can add the files to the `include` directory.
 
 <CodeBlock language="python">{example_dag_sql_check_operators}</CodeBlock>
 
@@ -200,130 +200,138 @@ While this example shows all the checks being written within the Python file def
 
 The following example runs the same data quality checks as the SQL check operators example against the same database. After setting up the Great Expectations instance with at least the data context, the checks can be defined in a JSON file to form an Expectation Suite.
 
-:::info 
+:::info
+
 For each of the checks in this example, an Expectation already exists. This is not always the case, and for more complicated checks you may need to define a [custom Expectation](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview).
+
 :::
 
 
 ```json
 {
-  "data_asset_type": null,
-  "expectation_suite_name": "my_suite",
-  "expectations": [
-      {
-      "expectation_context": {
-        "description": "MY_DATE_COL has values between 2017-01-01 - 2022-01-01"
-      },
-      "expectation_type": "expect_column_values_to_be_between",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "column": "MY_DATE_COL",
-        "max_value": "2022-01-01",
-        "min_value": "2017-01-01"
-      },
-      "meta": {}
-    },
-    {
-      "expectation_context": {
-        "description": "MY_DATE_COL's values are all unique"
-      },
-      "expectation_type": "expect_column_values_to_be_unique",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "column": "MY_DATE_COL"
-      },
-      "meta": {}
-    },
-    {
-      "expectation_context": {
-        "description": "MY_TEXT_COL has at least 10 distinct values"
-      },
-      "expectation_type": "expect_column_unique_value_count_to_be_between",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "column": "MY_TEXT_COL",
-        "min_value": 10
-      },
-      "meta": {}
-    },
-    {
-      "expectation_context": {
-        "description": "MY_TEXT_COL has no NULL values"
-      },
-      "expectation_type": "expect_column_values_to_not_be_null",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "column": "MY_TEXT_COL"
-      },
-      "meta": {}
-    },
-    {
-      "expectation_context": {
-        "description": "MY_NUM_COL has a maximum val between 90 and 110"
-      },
-      "expectation_type": "expect_column_max_to_be_between",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "column": "MY_NUM_COL",
-        "min_value": 90,
-        "max_value": 110
-      },
-      "meta": {}
-    },
-    {
-      "expectation_context": {
-        "description": "the table has at least 1000 rows"
-      },
-      "expectation_type": "expect_table_row_count_to_be_between",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "min_value": 1000
-      },
-      "meta": {}
-    },
-    {
-      "expectation_context": {
-        "description": "for each row MY_COL_1 plus MY_COL_2 is = 100"
-      },
-      "expectation_type": "expect_multicolumn_sum_to_equal",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "column_list": ["MY_COL_1", "MY_COL_2"],
-        "sum_total": 100
-      },
-      "meta": {}
-    },
-    {
-      "expectation_context": {
-        "description": "MY_COL_3 only contains values from a defined set"
-      },
-      "expectation_type": "expect_column_values_to_be_in_set",
-      "ge_cloud_id": null,
-      "kwargs": {
-        "column": "MY_COL_3",
-        "value_set": ["val1", "val2", "val3", "val4"]
-      },
-      "meta": {}
+    "data_asset_type": null,
+    "expectation_suite_name": "my_suite",
+    "expectations": [
+        {
+            "expectation_context": {
+                "description": "MY_DATE_COL has values between 2017-01-01 - 2022-01-01"
+            },
+            "expectation_type": "expect_column_values_to_be_between",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "column": "MY_DATE_COL",
+                "max_value": "2022-01-01",
+                "min_value": "2017-01-01"
+            },
+            "meta": {}
+        },
+        {
+            "expectation_context": {
+                "description": "MY_DATE_COL's values are all unique"
+            },
+            "expectation_type": "expect_column_values_to_be_unique",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "column": "MY_DATE_COL"
+            },
+            "meta": {}
+        },
+        {
+            "expectation_context": {
+                "description": "MY_TEXT_COL has at least 10 distinct values"
+            },
+            "expectation_type": "expect_column_unique_value_count_to_be_between",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "column": "MY_TEXT_COL",
+                "min_value": 10
+            },
+            "meta": {}
+        },
+        {
+            "expectation_context": {
+                "description": "MY_TEXT_COL has no NULL values"
+            },
+            "expectation_type": "expect_column_values_to_not_be_null",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "column": "MY_TEXT_COL"
+            },
+            "meta": {}
+        },
+        {
+            "expectation_context": {
+                "description": "MY_NUM_COL has a maximum val between 90 and 110"
+            },
+            "expectation_type": "expect_column_max_to_be_between",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "column": "MY_NUM_COL",
+                "min_value": 90,
+                "max_value": 110
+            },
+            "meta": {}
+        },
+        {
+            "expectation_context": {
+                "description": "the table has at least 10 rows"
+            },
+            "expectation_type": "expect_table_row_count_to_be_between",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "min_value": 10
+            },
+            "meta": {}
+        },
+        {
+            "expectation_context": {
+                "description": "for each row MY_COL_1 plus MY_COL_2 is = 100"
+            },
+            "expectation_type": "expect_multicolumn_sum_to_equal",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "column_list": [
+                    "MY_COL_1",
+                    "MY_COL_2"
+                ],
+                "sum_total": 100
+            },
+            "meta": {}
+        },
+        {
+            "expectation_context": {
+                "description": "the most common value in MY_COL_3 is in the set ['val1', 'val4']"
+            },
+            "expectation_type": "expect_column_most_common_value_to_be_in_set",
+            "ge_cloud_id": null,
+            "kwargs": {
+                "column": "MY_COL_3",
+                "value_set": [
+                    "val1",
+                    "val4"
+                ]
+            },
+            "meta": {}
+        }
+    ],
+    "ge_cloud_id": null,
+    "meta": {
+        "great_expectations_version": "0.15.14"
     }
-  ],
-  "ge_cloud_id": null,
-  "meta": {
-    "great_expectations_version": "0.15.14"
-  }
 }
 ```
 
-The corresponding DAG code shows how all the Expectations are run within one task using the `GreatExpectationsOperator`. Only the root directory of the data context and the data asset have to be provided. To use XComs with the `GreatExpectationsOperator` you must enable XCom pickling as described in the [Orchestrate Great Expectations with Airflow](airflow-great-expectations.md) tutorial.
+The corresponding DAG code shows how all the Expectations are run within one task using the GreatExpectationsOperator. Only the root directory of the data context, the schema and the data asset name have to be provided. For a step-by-step example and more information on the parameters of this operator see the [Orchestrate Great Expectations with Airflow](airflow-great-expectations.md) tutorial.
 
 <CodeBlock language="python">{gx_example_dag}</CodeBlock>
 
 ## Conclusion
 
-The growth of tools designed to perform data quality checks reflect the importance of ensuring data quality in production workflows. Commitment to data quality requires in-depth planning and collaboration between data professionals. What kind of data quality your organization needs will depend on your unique use case, which you can explore using the steps outlined in this guide. Special consideration should be given to the type of data quality checks and their location in the data pipeline.
+The growth of tools designed to perform data quality checks reflect the importance of ensuring data quality in production workflows. Commitment to data quality requires in-depth planning and collaboration between data professionals. What kind of data quality solution your organization needs will depend on your unique use case, which you can explore using the steps outlined in this guide. Special consideration should be given to the type of data quality checks and their location in the data pipeline.
 
 Integrating Airflow with a data lineage tool can further enhance your ability to trace the origin of data that did not pass the checks you established.
 
-This guide highlights two data quality tools and their use cases:
+This guide highlights two types of data quality tools and their use cases:
 
 - SQL check operators offer a way to define your checks directly from within the DAG, with no other tools necessary.
 - If you run many checks on different databases, you may benefit from using a more complex testing solution like Great Expectations or Soda.
