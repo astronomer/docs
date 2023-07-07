@@ -50,7 +50,7 @@ The following code snippets show how to print out the full context dictionary fr
     groupId= "task-decorator-PythonOperator"
     values={[
         {label: 'TaskFlow', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 <TabItem value="taskflow">
 
