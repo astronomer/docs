@@ -1,8 +1,8 @@
 ---
-sidebar_label: "astro registry add provider"
-title: "astro registry add provider"
+sidebar_label: "astro registry provider add"
+title: "astro registry provider add"
 id: astro-registry-provider-add
-description: Reference documentation for astro registry add provider.
+description: Reference documentation for astro registry provider add.
 hide_table_of_contents: true
 ---
 
@@ -11,7 +11,7 @@ Download a provider package from the [Astronomer Registry](https://registry.astr
 ## Usage 
 
 ```sh
-astro registry add provider
+astro registry provider add
 ```
 
 When you run the command, the CLI prompts you for a provider to download. To retrieve the provider name, open the provider in the Astronomer registry and copy the URL between `providers/` and `/versions`. For example, in the URL `https://registry.astronomer.io/providers/apache-airflow-providers-airbyte/versions/3.3.1`, copy `apache-airflow-providers-airbyte`. 
