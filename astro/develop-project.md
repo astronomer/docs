@@ -358,7 +358,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
 
     ```docker
     USER root
-    COPY <internal-ca.crt>/usr/local/share/ca-certificates/<your-company-name>/
+    COPY <internal-ca.crt> /usr/local/share/ca-certificates/<your-company-name>/
     RUN update-ca-certificates
     USER astro
     ```
