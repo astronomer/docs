@@ -53,19 +53,13 @@ To use GX with Airflow, install the [Great Expectations Airflow Provider](https:
 
 The Great Expectations Airflow Provider requires a GX project to be present in your Airflow environment. The easiest way to create a GX project is by using the [`great_expectations` package](https://pypi.org/project/great-expectations/) and following the steps below. If you cannot install the GX package locally, you can copy the [`great_expectations` folder from this GitHub repository](https://github.com/astronomer/gx-tutorial/tree/main/include/great_expectations) into your Astro project `include` folder instead and continue this tutorial at [Step 3](#step-3-create-a-database-connection).
 
-1. Make sure you have the latest version of the [`great_expectations` package](https://pypi.org/project/great-expectations/) installed.
-
-    ```sh
-    $ pip install great-expectations
-    ```
-
-2. Initialize a new GX project in your Astro project `include` folder.
+1. Initialize a new GX project in your Astro project `include` folder.
 
     ```sh
     $ great_expectations init
     ```
 
-3. Create a new file in your `include/great_expectations/expectations` folder called `strawberry_suite.json` and copy and paste the following code into the file:
+2. Create a new file in your `include/great_expectations/expectations` folder called `strawberry_suite.json` and copy and paste the following code into the file:
 
     ```json
     {
