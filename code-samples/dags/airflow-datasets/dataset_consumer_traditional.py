@@ -18,9 +18,8 @@ def read_about_cocktail_func():
 
 with DAG(
     dag_id="datasets_consumer_dag",
-    start_date=datetime(2022, 10, 1, tz="UTC"),
+    start_date=datetime(2022, 10, 1),
     schedule=[INSTRUCTIONS, INFO],  # Scheduled on both Datasets
-    tags=["datasets", "cross-DAG dependencies"],
     catchup=False,
 ):
     PythonOperator(

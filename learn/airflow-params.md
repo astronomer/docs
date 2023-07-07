@@ -13,6 +13,7 @@ import tdro_example_downstream from '!!raw-loader!../code-samples/dags/airflow-p
 import tdro_example_upstream_traditional from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_upstream_traditional.py';
 import tdro_example_downstream_traditional from '!!raw-loader!../code-samples/dags/airflow-params/tdro_example_downstream_traditional.py';
 import simple_param_dag from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag.py';
+import simple_param_dag_traditional from '!!raw-loader!../code-samples/dags/airflow-params/simple_param_dag_traditional.py';
 
 Params are arguments which you can pass to an Airflow DAG or task at runtime and are stored in the [Airflow context dictionary](airflow-context.md) for each DAG run. You can pass DAG and task-level params by using the `params` parameter.
 
@@ -121,7 +122,7 @@ The DAG below uses the TriggerDagRunOperator to trigger the `tdro_example_downst
     groupId= "triggerdagrunoperator"
     values={[
         {label: 'TaskFlow', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 <TabItem value="taskflow">
 
@@ -142,7 +143,7 @@ Runs of the `tdro_example_downstream` DAG that are triggered by this upstream DA
     groupId= "triggerdagrunoperator"
     values={[
         {label: 'TaskFlow', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 <TabItem value="taskflow">
 
@@ -163,7 +164,24 @@ To specify params for all runs of a given DAG, pass default values to the `param
 
 The DAG below has two DAG-level params with defaults: `param1` and `param2`, the latter only accepting integers.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "define-dag-level-param-defaults"
+    values={[
+        {label: 'TaskFlow', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{simple_param_dag}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{simple_param_dag_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 If you define DAG-level param defaults, the **Trigger DAG w/config** UI renders a form for each param. From this UI, you can then override your defaults for individual DAG runs. A param with a red asterisk is a required param.
 
@@ -270,7 +288,7 @@ You can set task-level param defaults in the same way as for DAG-level params. I
     groupId= "define-task-level-param-defaults"
     values={[
         {label: 'TaskFlow', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 <TabItem value="taskflow">
 
@@ -306,7 +324,7 @@ You can access params in an Airflow task like you can with other elements in the
     groupId= "access-params-in-a-task"
     values={[
         {label: 'TaskFlow', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 <TabItem value="taskflow">
 

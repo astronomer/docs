@@ -103,11 +103,32 @@ There are three primary DAG-level Airflow settings that you can define in code:
 
 You can define any DAG-level settings within your DAG definition. For example:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="dag-level-airflow-settings"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 ```python
 # Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
 @dag("my_dag_id", concurrency=10, max_active_runs=3)
 def my_dag():
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+# Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
+with DAG("my_dag_id", concurrency=10, max_active_runs=3):
+```
+
+</TabItem>
+</Tabs>
 
 ### Task-level Airflow settings
 

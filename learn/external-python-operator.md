@@ -152,7 +152,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
 ## Step 4: Create your DAG
 
-In your Astro project `dags` folder, create a new file called `external-python-pipeline.py`. Paste the following code into the file:
+In your Astro project `dags` folder, create a new file called `external-python-pipeline.py`. Choose between the TaskFlow API (recommended) and traditional syntax for your DAG and paste the code into your file:
 
 <Tabs
     defaultValue="taskflow"

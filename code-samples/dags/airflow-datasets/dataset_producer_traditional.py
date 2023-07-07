@@ -42,9 +42,10 @@ def write_info_to_file_func(response):
 
 with DAG(
     dag_id="datasets_producer_dag",
-    start_date=datetime(2022, 10, 1, tz="UTC"),
+    start_date=datetime(2022, 10, 1),
     schedule=None,
     catchup=False,
+    render_template_as_native_obj=True
 ):
     get_cocktail = PythonOperator(
         task_id="get_cocktail",

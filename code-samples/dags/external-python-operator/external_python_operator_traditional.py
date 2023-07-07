@@ -1,9 +1,7 @@
 from __future__ import annotations
-
 import os
 from pprint import pprint
-import pendulum
-
+from pendulum import datetime
 from airflow import DAG
 from airflow.operators.python import PythonOperator, ExternalPythonOperator
 
@@ -33,9 +31,9 @@ def callable_external_python_func():
 
 
 with DAG(
-    "py_virtual_env",
-    schedule_interval=None,
-    start_date=pendulum.datetime(2022, 10, 10, tz="UTC"),
+    dag_id="py_virtual_env",
+    start_date=datetime(2022, 10, 10),
+    schedule=None,
     catchup=False,
     tags=["pythonvirtualenv"],
 ) as dag:

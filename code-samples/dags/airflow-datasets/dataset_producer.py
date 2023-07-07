@@ -8,7 +8,7 @@ INFO = Dataset("file://localhost/airflow/include/cocktail_info.txt")
 
 
 @dag(
-    start_date=datetime(2022, 10, 1, tz="UTC"),
+    start_date=datetime(2022, 10, 1),
     schedule=None,
     catchup=False,
 )

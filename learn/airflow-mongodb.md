@@ -87,7 +87,7 @@ The connections you configure will connect to MongoDB and the API providing samp
     - **Host:** Your MongoDB Atlas host name
     - **Login:** Your database user ID
     - **Password:** Your database user password
-    - **Extra:** {"srv": true}
+    - **Extra:** `{"srv": true}`
 
     Your connection should look something like this:
 

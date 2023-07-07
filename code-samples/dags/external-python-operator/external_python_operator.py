@@ -1,21 +1,17 @@
 from __future__ import annotations
-
 import os
 from pprint import pprint
-import pendulum
-
-from airflow import DAG
-from airflow.decorators import task
+from pendulum import datetime
+from airflow.decorators import dag, task
 
 
-with DAG(
-    "py_virtual_env",
-    schedule_interval=None,
-    start_date=pendulum.datetime(2022, 10, 10, tz="UTC"),
+@dag(
+    start_date=datetime(2022, 10, 10),
+    schedule=None,
     catchup=False,
     tags=["pythonvirtualenv"],
-) as dag:
-
+)
+def py_virtual_env():
     @task(task_id="print_the_context")
     def print_context(ds=None, **kwargs):
         """Print the Airflow context and ds variable from the context."""
@@ -46,3 +42,6 @@ with DAG(
     task_external_python = callable_external_python()
 
     task_print >> task_external_python
+
+
+py_virtual_env()
