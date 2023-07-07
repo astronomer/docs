@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/great-expectations.png' }
 import CodeBlock from '@theme/CodeBlock';
 import gx_dag from '!!raw-loader!../code-samples/dags/airflow-great-expectations/gx_dag.py';
 
-[Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against a data in a [Source Data System](https://docs.greatexpectations.io/docs/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/0.15.50/guides/connecting_to_your_data/in_memory/pandas/). Astronomer, with help from Superconductive, maintains the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
+[Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against data in a [Source Data System](https://docs.greatexpectations.io/docs/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/0.15.50/guides/connecting_to_your_data/in_memory/pandas/). Astronomer, with help from Superconductive, maintains the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
 
 This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
 
@@ -86,7 +86,7 @@ The Great Expectations Airflow Provider requires a GX project to be present in y
     }
     ```
 
-    This JSON code defines an [Expectation Suite](https://docs.greatexpectations.io/docs/terms/expectation_suite) containing one expectation of the type [`expect_table_row_count_to_be_between`](https://greatexpectations.io/expectations/expect_table_row_count_to_be_between). This expectation will check that the number of rows in a table is between 2 and 1000.
+    This JSON file defines an [Expectation Suite](https://docs.greatexpectations.io/docs/terms/expectation_suite) containing one expectation of the type [`expect_table_row_count_to_be_between`](https://greatexpectations.io/expectations/expect_table_row_count_to_be_between). This expectation will check that the number of rows in a table is between 2 and 1000.
 
     You should now have the following file structure in your `include` folder:
 
@@ -131,7 +131,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
 
     This DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
 
-The data in the table is validated using the GreatExpectationsOperator. The operator will automatically create a default Checkpoint and Datasource based on the `postgres_default` connection and run the expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that for some database your might need to provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
+    The data in the table is validated using the GreatExpectationsOperator. The operator will automatically create a default Checkpoint and Datasource based on the `postgres_default` connection and run the Expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that for some databases your might need to provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
 
 3. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button.
 
@@ -156,7 +156,7 @@ The GreatExpectationsOperator is highly customizable to allow expert GX users to
 
 When using the GreatExpectationsOperator, you must pass in either one of the following parameters:
 
-- `data_context_root_dir` (str): The path to your great_expectations project directory. This is the directory containing your `great_expectations.yml` file.
+- `data_context_root_dir` (str): The path to your GX project directory. This is the directory containing your `great_expectations.yml` file.
 - `data_context_config` (DataContextConfig): To use an in-memory [Data Context](https://docs.greatexpectations.io/docs/terms/data_context), a `DataContextConfig` must be defined and passed to the operator, see also [this example DataContextConfig](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_data_context_config.py).
 
 Next, the operator will determine the Checkpoint and Datasource used to run your GX validations:
@@ -169,29 +169,29 @@ Next, the operator will determine the Checkpoint and Datasource used to run your
 The Datasource can also be a pandas DataFrame, as shown in [Running GX validations on pandas DataFrames](#running-gx-validations-on-pandas-dataframes). Depending on how you define your Datasource the `data_asset_name` parameter has to be adjusted:
 
 - If a pandas DataFrame is passed, the `data_asset_name` parameter can be any name that will help you identify the DataFrame.
-- If a `conn_id` is supplied, the `data_asset_name` must be the name of the table the expectations suite runs on.
+- If a `conn_id` is supplied, the `data_asset_name` must be the name of the table the Expectations Suite runs on.
 
 By default, a Great Expectations task runs validations and raises an `AirflowException` if any of the tests fail. To override this behavior and continue running the pipeline even if tests fail, set the `fail_task_on_validation_failure` flag to `False`.
 
-By default in Astronomer or any environment with OpenLineage configured, the `GreatExpectationsOperator` will automatically add the OpenLineage action to its default action list when a Checkpoint is not specified to the operator. To turn off this feature, set the `use_open_lineage` parameter to `False`.
+In Astronomer or any environment with OpenLineage configured, the `GreatExpectationsOperator` will automatically add the OpenLineage action to its default action list when a Checkpoint is not specified to the operator. To turn off this feature, set the `use_open_lineage` parameter to `False`.
 
-For a full list of parameters, see the [the Astronomer registry](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator). For more information about possible parameters and examples, see the [README in the provider repository](https://github.com/great-expectations/airflow-provider-great-expectations).
+For a full list of parameters, see the [the Astronomer registry](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator). For more information about the parameters and examples, see the [README in the provider repository](https://github.com/great-expectations/airflow-provider-great-expectations).
 
 ### Running GX validations on pandas DataFrames
 
 The GreatExpectationsOperator can also be used to run validations on CSV files by passing them in as a pandas DataFrame. This pattern is useful to test pipelines locally with small amounts of data. Note that the `execution_engine` parameter needs to be adjusted. 
 
-    ```python
-    gx_validate_pg = GreatExpectationsOperator(
-        task_id="gx_validate_pg",
-        data_context_root_dir="include/great_expectations",
-        dataframe_to_validate=pd.read_csv("include/strawberries.csv"),
-        execution_engine="PandasExecutionEngine",
-        expectation_suite_name="strawberry_suite",
-        return_json_dict=True,
-    )
-    ```
+```python
+gx_validate_pg = GreatExpectationsOperator(
+    task_id="gx_validate_pg",
+    data_context_root_dir="include/great_expectations",
+    dataframe_to_validate=pd.read_csv("include/strawberries.csv"),
+    execution_engine="PandasExecutionEngine",
+    expectation_suite_name="strawberry_suite",
+    return_json_dict=True,
+)
+```
 
 ### Connections and backends
 
-The GreatExpectationsOperator can run a Checkpoint on a dataset stored in any backend compatible with GX. This includes BigQuery, MSSQL, MySQL, PostgreSQL, Redshift, Snowflake, SQLite, and Athena, among others. All that’s needed to get the GreatExpectationsOperator to point at an external dataset is to set up an [Airflow Connection](connections.md) to the Datasource and set the `conn_id` parameter. Connections will still work if you have your connection configured in both Airflow and Great Expectations, as long as the correct Datasource is specified in the Checkpoint passed to the operator.
+The GreatExpectationsOperator can run a Checkpoint on a dataset stored in any backend compatible with GX. This includes BigQuery, MSSQL, MySQL, PostgreSQL, Redshift, Snowflake, SQLite, and Athena, among others. All that’s needed to get the GreatExpectationsOperator to point at an external dataset is to set up an [Airflow Connection](connections.md) to the Datasource and setting the `conn_id` parameter. Connections will still work if you have your connection configured in both Airflow and Great Expectations, as long as the correct Datasource is specified in the Checkpoint passed to the operator.
