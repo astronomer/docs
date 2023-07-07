@@ -221,7 +221,7 @@ Some disadvantages of this method:
 
 ### Example: Generate DAGs from JSON config files
 
-One way of implementing the multiple-file method is by using a Python script to generate DAG files based on a set of JSON configuration files. For this example, you'll assume that all DAGs have a single task that uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator) to run a Bash command. This use case might be relevant for a team of analysts who need to schedule bash commands, where the DAG is largely the same, but the command, an environment variable and the schedule change.
+One way of implementing the multiple-file method is by using a Python script to generate DAG files based on a set of JSON configuration files. For this example, you'll assume that all DAGs have a single task that uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator) to run a Bash command. This use case might be relevant for a team of analysts who need to schedule Bash commands, where the DAG is largely the same, but the command, an environment variable and the schedule change.
 
 To start, you'll create a DAG 'template' file that defines the DAG's structure. This looks just like a regular DAG file, but specific variables have been added where information is going to be dynamically generated, namely `dag_id_to_replace`, `schedule_to_replace`, `bash_command_to_replace`  and `env_var_to_replace`.
 
