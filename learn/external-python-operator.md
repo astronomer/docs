@@ -5,6 +5,8 @@ description: "Learn how to run a Snowpark query in a virtual Python environment 
 id: external-python-operator
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import external_python_operator from '!!raw-loader!../code-samples/dags/external-python-operator/external_python_operator.py';
 import external_python_operator_traditional from '!!raw-loader!../code-samples/dags/external-python-operator/external_python_operator_traditional.py';

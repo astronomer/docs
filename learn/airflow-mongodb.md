@@ -6,11 +6,8 @@ id: "airflow-mongodb"
 sidebar_custom_props: { icon: 'img/integrations/mongodb.png' }
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import load_data_to_mongodb from '!!raw-loader!../code-samples/dags/airflow-mongodb/load_data_to_mongodb.py';
-import load_data_to_mongodb_traditional from '!!raw-loader!../code-samples/dags/airflow-mongodb/load_data_to_mongodb_traditional.py';
 
 [MongoDB](https://www.mongodb.com/) is an open-source general purpose database built by developers, for developers. MongoDB's popularity is driven by its use of flexible document schemas and horizontal scalability. By leveraging the [Mongo provider](https://registry.astronomer.io/providers/mongo), you can easily orchestrate many use cases with Airflow such as:
 
@@ -108,26 +105,7 @@ The connections you configure will connect to MongoDB and the API providing samp
 
 In your Astro project `dags` folder, create a new file called `mongo-pipeline.py`. Paste the following code into the file:
 
-<Tabs
-    defaultValue="taskflow"
-    groupId="step-4-create-your-dag"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
-    ]}>
-<TabItem value="taskflow">
-
 <CodeBlock language="python">{load_data_to_mongodb}</CodeBlock>
-
-</TabItem>
-
-<TabItem value="traditional">
-
-<CodeBlock language="python">{load_data_to_mongodb_traditional}</CodeBlock>
-
-</TabItem>
-
-</Tabs>
 
 This DAG gets currency data from an API using the SimpleHttpOperator and loads the data into MongoDB using the MongoHook and the PythonOperator. The data will be loaded as a new collection in a database called `MyDB`.
 

@@ -9,11 +9,8 @@ id: airflow-dbt-cloud
   <meta name="og:description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Airflow." />
 </head>
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cloud/airflow_dbt_simple.py';
-import airflow_dbt_simple_traditional from '!!raw-loader!../code-samples/dags/airflow-dbt-cloud/airflow_dbt_simple_traditional.py';
 
 [dbt Cloud](https://getdbt.com/) is a managed service that provides a hosted architecture to run dbt, a tool that helps you build interdependent SQL models for in-warehouse data transformation.
 
@@ -86,26 +83,7 @@ In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not m
 
 2. Copy the following code into the file, making sure to replace `<your dbt Cloud job id>` with the `job_id` you copied.
 
-<Tabs
-    defaultValue="taskflow"
-    groupId="write-a-dbt-cloud-dag"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
-    ]}>
-<TabItem value="taskflow">
-
-<CodeBlock language="python">{airflow_dbt_simple}</CodeBlock>
-
-</TabItem>
-
-<TabItem value="traditional">
-
-<CodeBlock language="python">{airflow_dbt_simple_traditional}</CodeBlock>
-
-</TabItem>
-
-</Tabs>
+    <CodeBlock language="python">{airflow_dbt_simple}</CodeBlock>
 
     This DAG shows a simple implementation of using the [DbtCloudRunJobOperator](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud/modules/dbtcloudrunjoboperator) and [DbtCloudHook](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud/modules/dbtcloudhook). The DAG consists of two tasks:
 
