@@ -45,7 +45,7 @@ with DAG(
     start_date=datetime(2022, 10, 1),
     schedule=None,
     catchup=False,
-    render_template_as_native_obj=True
+    render_template_as_native_obj=True,
 ):
     get_cocktail = PythonOperator(
         task_id="get_cocktail",
