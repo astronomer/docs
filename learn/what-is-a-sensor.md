@@ -92,7 +92,7 @@ This DAG waits for data to be available in a Postgres database before running va
 
 ## Sensor decorator / PythonSensor
 
-If no sensor exists for your use case you can create your own sensor using either the [`@task.sensor` decorator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/decorators/sensor/index.html) (added in Airflow 2.5) that returns a `PokeReturnValue` as an instance of the BaseSensorOperator or the [PythonSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonSensor) with a `python_callable` that returns `True` or `False`.
+If no sensor exists for your use case you can create your own sensor using either the [`@task.sensor` decorator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/decorators/sensor/index.html) (added in Airflow 2.5) or the [PythonSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonSensor). The `@task.sensor` decorator returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The PythonSensor takes a `python_callable` that returns `True` or `False`.
 
 The following DAG shows how to use either the sensor decorator and PythonSensor to create the same custom sensor:
 
