@@ -5,18 +5,20 @@ from airflow.operators.python import PythonOperator
 
 
 def create_dag(dag_id, schedule, dag_number, default_args):
-    def hello_world_py(*args):
+    def hello_world_py():
         print("Hello World")
         print("This is DAG: {}".format(str(dag_number)))
 
-    dag = DAG(dag_id, schedule=schedule, default_args=default_args)
+    generated_dag = DAG(dag_id, schedule=schedule, default_args=default_args)
 
-    with dag:
-        t1 = PythonOperator(task_id="hello_world", python_callable=hello_world_py)
+    with generated_dag:
+        PythonOperator(task_id="hello_world", python_callable=hello_world_py)
 
-    return dag
+    return generated_dag
 
 
+# adjust the filter criteria to filter which of your connections to use
+# to generated your DAGs
 session = settings.Session()
 conns = (
     session.query(Connection.conn_id)
@@ -27,7 +29,7 @@ conns = (
 for conn in conns:
     dag_id = "connection_hello_world_{}".format(conn[0])
 
-    default_args = {"owner": "airflow", "start_date": datetime(2018, 1, 1)}
+    default_args = {"owner": "airflow", "start_date": datetime(2023, 7, 1)}
 
     schedule = "@daily"
     dag_number = conn
