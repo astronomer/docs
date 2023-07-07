@@ -8,9 +8,9 @@ from airflow.providers.common.sql.operators.sql import (
 )
 
 DB_CONN = "snowflake_default"
-DB = "database_name"
-SCHEMA = "schema_name"
-TABLE = "example_table"
+DB = "SANDBOX"
+SCHEMA = "TAMARAFINGERLIN"
+TABLE = "dq_test_table"
 
 
 @dag(
@@ -63,33 +63,30 @@ def example_dag_sql_check_operators():
         },
     )
 
-    # SQLCheckOperator example: ensure categorical values in MY_COL_3
-    # are one of a list of 4 options
-    check_val_in_list = SQLCheckOperator(
-        task_id="check_today_val_in_bounds",
+    # SQLCheckOperator example: ensure the most common categorical value in MY_COL_3
+    # is one of a list of 2 options
+    check_most_common_val_in_list = SQLCheckOperator(
+        task_id="check_most_common_val_in_list",
         sql="""
-                WITH
-
-                not_in_list AS (
-
-                SELECT COUNT(*) as count_not_in_list
-                FROM {{ params.db_to_query }}.{{ params.schema }}.\
-                     {{ params.table }}
-                WHERE {{ params.col }} NOT IN {{ params.options_tuple }}
-                )
-
-                SELECT
-                    CASE WHEN count_not_in_list = 0 THEN 1
-                    ELSE 0
-                    END AS testresult
-                FROM not_in_list
+            SELECT CASE
+                WHEN (
+                    SELECT {{ params.col }}
+                    FROM {{ params.db_to_query }}.{{ params.schema }}.\
+                            {{ params.table }}
+                    GROUP BY {{ params.col }}
+                    ORDER BY COUNT(*) DESC
+                    LIMIT 1
+                ) IN {{ params.options_tuple }}
+                THEN 1
+                ELSE 0
+            END AS result;
             """,
         params={
             "db_to_query": DB,
             "schema": SCHEMA,
             "table": TABLE,
             "col": "MY_COL_3",
-            "options_tuple": "('val1', 'val2', 'val3', 'val4')",
+            "options_tuple": "('val1', 'val4')",
         },
     )
 
@@ -98,7 +95,7 @@ def example_dag_sql_check_operators():
         >> [
             column_checks,
             table_checks,
-            check_val_in_list,
+            check_most_common_val_in_list,
         ]
         >> end
     )

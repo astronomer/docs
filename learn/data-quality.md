@@ -74,7 +74,7 @@ The following DAG graph shows the typical locations for data quality checks:
 
 ![Different locations for data quality checks in an ETL pipeline](/img/guides/dq_checks_locations_example_graph.png)
 
-It's common to use downstream tasks of data quality checks (`post_check_action_1` and `post_check_action_2`) or [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals with error notifications of data quality issues, for example as an email or a Slack message. It is also possible to create a downstream task that only runs when all data quality checks are successful. For example, the successful checking event for reporting purposes.
+It's common to use downstream tasks of data quality checks (`post_check_action_1` and `post_check_action_2`) or [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals of data quality issues, for example as an email or a Slack message. It is also possible to create a downstream task that only runs when all data quality checks are successful. For example, the successful checking event for reporting purposes.
 
 When implementing data quality checks, consider how a check success or failure should influence downstream dependencies. [Trigger Rules](managing-dependencies.md#trigger-rules) are especially useful for managing operator dependencies.
 
