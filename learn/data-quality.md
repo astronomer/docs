@@ -135,7 +135,7 @@ The SQL check operators work with any backend solution that accepts SQL queries 
 - [SQLCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcheckoperator): Can be used with any SQL statement that returns a single row of booleans.
 - [SQLIntervalCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlintervalcheckoperator): Runs checks against historical data.
 
-As well as the older [SQLValueCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlvaluecheckoperator) and [SQLThresholdCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlthresholdcheckoperator).
+Astronomer recommends using the SQLColumnCheckOperator and SQLTableCheckOperator over the older [SQLValueCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlvaluecheckoperator) and [SQLThresholdCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlthresholdcheckoperator).
 
 The logs from SQL check operators can be found in the regular Airflow task logs.
 
