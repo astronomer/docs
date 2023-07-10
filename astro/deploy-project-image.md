@@ -7,13 +7,9 @@ description: Deploy a complete Astro project to a Deployment as a Docker image.
 
 import {siteVariables} from '@site/src/versions';
 
-An image deploy builds every file in your Astro project as a Docker image and deploys the image to all Airflow components in a Deployment. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages.
+In an image deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
 
-Follow the steps in this document to manually push your Astro project to a Deployment. 
-
-:::info
-For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
-:::
+Use this document to learn how image deploys work and how to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
@@ -50,7 +46,7 @@ This command returns a list of Deployments available in your Workspace and promp
 
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
-If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. 
+If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `dags` directory is excluded from this Docker image and pushed separately. 
 
 :::info
 
@@ -87,11 +83,11 @@ If your Deployment has [DAG-only deploys](deploy-dags.md) enabled, the **DAG bun
 
 ## What happens during a project deploy
 
-When you deploy a project to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running Apache Airflow on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and is pushed separately.
+When you deploy a project to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running Apache Airflow on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `dags` directory is excluded from this Docker image and is pushed separately.
 
 ![Deploy code](/img/docs/deploy-architecture.png)
 
-With the exception of the Airflow webserver and some Celery workers, Kubernetes gracefully terminates all containers during this process. This forces them to restart and begin running your latest code.
+After Astro receives the deploy, it gracefully terminates all containers except for the Airflow webserver and Celery workers that are currently running tasks. All new containers will run your new code.
 
 If you deploy code to a Deployment that is running a previous version of your code, then the following happens:
 

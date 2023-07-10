@@ -38,9 +38,6 @@ Before you enable DAG-only deploys on a Deployment, ensure that you have access 
 
 5. (Optional) Open your Deployment in the Cloud UI. Confirm your deploy was successful by checking the Deployment's **DAG Bundle Version**. The version name should include the date and time that you triggered the deploy.
 
-
-
-
 ## Trigger a DAG-only deploy
 
 Triggering a DAG-only deploy pushes DAGs to Astro and mounts them to the workers and schedulers in your Deployment. DAG-only deploys do not disrupt running tasks and do not cause any components to restart when you push code. If you deploy changes to a DAG that is currently running, active task runs finish executing according to the code from before you triggered a deploy. New task runs are scheduled using the code from your latest deploy.
