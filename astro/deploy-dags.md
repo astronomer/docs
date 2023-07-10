@@ -39,9 +39,6 @@ Before you enable DAG-only deploys on a Deployment, ensure that you have access 
 5. (Optional) Open your Deployment in the Cloud UI. Confirm your deploy was successful by checking the Deployment's **DAG Bundle Version**. The version name should include the date and time that you triggered the deploy.
 
 
-|zxdFkjbsdfkjabsdfkjsb|dslfjsd|sdjfnsdkjbA|dfkjpgndfljgnb|
-|---|------|---|---|
-|cdsoiuhgsdro|  fdsouifnhgsd | sdofglihdsgwr | sdfolginsfdgln|
 
 
 ## Trigger a DAG-only deploy
