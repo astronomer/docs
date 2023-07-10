@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deploy DAGs to Astro'
-title: 'Deploy DAGs'
+sidebar_label: 'Deploy DAGs'
+title: 'Deploy DAGs  to Astro'
 id: deploy-dags
 description: Learn about the different ways you can deploy code to Astro.
 ---
