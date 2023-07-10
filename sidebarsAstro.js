@@ -64,7 +64,7 @@ module.exports = {
       type: "category",
       label: "Deploy code",
       items: [
-        "overview",
+        "deploy-code",
         "deploy-project-image",
         "deploy-dags", 
         "set-up-ci-cd", 
