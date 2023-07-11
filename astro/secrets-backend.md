@@ -245,6 +245,14 @@ $ vault kv get secret/variables/<your-variable-key>
 $ vault kv get secret/connections/<your-connection-id>
 ```
 
+:::tip important
+
+For Airflow variables, the name of the key for the Vault secret you create must be `value`. For example, if you are creating a secret called secret/variables/my-var, the **key** must be named `value` and **value** will be your variable's value.
+
+For Airflow connections, the name of the key for the Vault secret you create must be `conn_uri`. For example, if you are creating a secret called secret/connections/my-conn, the **key** must be named `conn_uri` and **value** will be your connection's URI. See [Import and export connections](import-export-connections-variables.md#using-astro-cli) to export your connection in URI format.
+
+:::
+
 #### Set up Vault locally
 
 In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
