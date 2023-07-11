@@ -31,7 +31,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Airflow 2.6.3
 
-Astro Runtime 8.6.0 includes same-day support for Apache Airflow 2.6.3. Airflow 2.6.3 contains a number of bug fixes including:
+Astro Runtime 8.7.0 includes same-day support for Apache Airflow 2.6.3. Airflow 2.6.3 contains a number of bug fixes including:
 
 - Fix `operator_extra_links` property serialization in mapped tasks ([31904](https://github.com/apache/airflow/pull/31904))
 - You can now specify a format for manual `run_id` inputs. Manually entered `run_ids` must conform with the regex specified in the `[scheduler]allowed_run_id_pattern` setting. [32293](https://github.com/apache/airflow/pull/32293))
