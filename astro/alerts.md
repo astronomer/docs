@@ -21,8 +21,8 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 - An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts.
 - A Slack workspace, PagerDuty service, or email address.
 
-
-## Step 1: Configure your communication channel <!-- Sensitive header used in product - do not change without a redirect-->
+<!-- Sensitive header used in product - do not change without a redirect-->
+## Step 1: Configure your communication channel
 
 <Tabs
     defaultValue="Slack"
