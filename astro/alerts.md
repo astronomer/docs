@@ -104,7 +104,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
     <Tabs
         defaultValue="Slack"
-        groupId= "step-2-create-your-workspace-alert-in-the-cloud-ui"
+        groupId= "step-1-configure-your-communication-channel"
         values={[
             {label: 'Slack', value: 'Slack'},
             {label: 'PagerDuty', value: 'PagerDuty'},
