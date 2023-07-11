@@ -27,11 +27,25 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## July 11, 2023
+
+### Send Astro alerts to email
+
+You can now send Astro alerts to multiple email addresses. Sending Astro alerts to email requires no configuration outside of Astro, which makes it a quick option to improve your alerting infrastructure. See [Configure Astro alerts](https://docs.astronomer.io/astro/alerts?tab=Email#step-1-configure-your-communication-channel) for setup steps.
+
+### Configure SCIM provisioning for Azure AD
+
+If your Organization uses Azure for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://docs.astronomer.io/astro/set-up-scim-provisioning?tab=Azure#setup) for more information.
+
+### Additional improvements
+
+- The `astronomer_monitoring_dag` has been removed from all Deployments on Astro Hosted.
+
 ## July 5, 2023
 
 ### Configure SCIM provisioning for Okta
 
-If your Organization uses Okta for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://docs.astronomer.io/astro/set-up-scim-provisioning) for more information.
+If your Organization uses Okta for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://docs.astronomer.io/astro/set-up-scim-provisioning?tab=Okta#setup) for more information.
 
 ### See pricing estimate when creating a Deployment 
 
