@@ -32,9 +32,10 @@ Some user management features on Astro behave differently after you set up SCIM 
 
 ## Supported SSO identity providers
 
-Astro supports SCIM provisioning with [Okta](https://www.okta.com/). You can configure SCIM provisioning on Okta both with and without using the official Astro Okta integration.
+Astro supports SCIM provisioning with the following IdPs:
 
-Support for [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/) is coming soon.
+- [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Okta](https://www.okta.com/)
 
 ### Supported Okta features
 
