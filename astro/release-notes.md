@@ -39,7 +39,7 @@ If your Organization uses Azure for single sign-on (SSO), you can now set up SCI
 
 ### Additional improvements
 
-- The `astronomer_monitoring_dag` has been removed from all Deployments on Astro Hosted.
+- On Astro Hosted deployments, the `astronomer_monitoring_dag` has been paused for all image-based deployments and removed entirely from all deployments with DAG deploys enabled. Previously this DAG was used to monitor the deployment's health; this is now replaced with a more robust alternative while allowing the workers to be scaled to 0 when not used.
 
 ## July 5, 2023
 
