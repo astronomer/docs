@@ -23,7 +23,7 @@ Release date: July 12, 2023
 
 ### Bug Fixes
 
-- Fixed an issue were some deployment updates on Astro Hosted were not working.
+- Fixed an issue were some Astro Hosted Deployment updates triggered by the Astro CLI were not working.
 
 ## Astro CLI 1.17.0
 
