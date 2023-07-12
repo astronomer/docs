@@ -22,13 +22,25 @@ To develop Airflow DAGs in PyCharm, you need to configure at least one Python in
 
 1. In your PyCharm preferences go to **Build, Execution, Deployment** >> **Docker** and specify how to connect to the Docker daemon. For more, see [Connect to Docker](https://www.jetbrains.com/help/pycharm/docker.html#connect_to_docker).
 
-2. Go to **Project: \<your-project-name\>** >> **Python Interpreter**. Click the settings gear icon next to **Python Interpreter**, then click **Add**:
+2. Go to **Project: \<your-project-name\>** >> **Python Interpreter**. Click the **Add Interpreter** button on the right, and then click **On Docker**:
 
-    ![Interpreter settings](/img/examples/pycharm_local_dev_interpreter.png)
+    ![Interpreter settings](/img/examples/pycharm_local_dev_interpreter_docker.png)
 
-3. In the window that appears, click **Docker** in the left pane. In the **Image name** field, select the Docker image that your Airflow environment is running, then click **OK**.
+3. In the window that appears, select **Pull or use existing** for the **Image** option. In the **Image tag** field, select the Docker image that your Airflow environment is running, then click **Next**.
 
-    ![Image settings](/img/examples/pycharm_local_dev_docker_image.png)
+    ![Image settings](/img/examples/pycharm_local_dev_docker_target.png)
+
+4. Wait for PyCharm to finish pulling the Docker image and then click **Next**.
+
+    ![Image settings](/img/examples/pycharm_local_dev_docker_image_pull.png)
+
+5. Ensure the **System Interpreter** is set to Python 3. By default this path will point to the location of Python 3 on the machine and should not need to be changed. Then, click **Create**.
+
+    ![Image settings](/img/examples/pycharm_local_dev_system_interpreter.png)
+
+6. On the original **Python Interpreter** setup screen, ensure the Python interpreter is set to the docker image and click **Apply**, followed by **OK**.
+
+    ![Image settings](/img/examples/pycharm_local_dev_complete_setup.png)
 
 ## Write Airflow code with PyCharm
 
@@ -54,7 +66,7 @@ Lastly, here is an example of PyCharm autocompleting code and showing built-in d
 
 With PyCharm configured to use the Python interpreter from Docker, you can connect to your Docker containers directly from PyCharm using the ***Services*** pane. If you do not see this pane, try pressing `cmd+8`.
 
-![Services](/img/examples/pycharm_local_dev_docker_services.png)
+![Services](/img/exa@enova.commples/pycharm_local_dev_docker_services.png)
 
 From the **Services** pane, start Docker by clicking the green play button. You’ll see the same containers appear as when you run `docker ps` after starting your Astro project locally:
 
