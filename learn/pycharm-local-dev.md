@@ -66,7 +66,7 @@ Lastly, here is an example of PyCharm autocompleting code and showing built-in d
 
 With PyCharm configured to use the Python interpreter from Docker, you can connect to your Docker containers directly from PyCharm using the ***Services*** pane. If you do not see this pane, try pressing `cmd+8`.
 
-![Services](/img/exa@enova.commples/pycharm_local_dev_docker_services.png)
+![Services](/img/examples/pycharm_local_dev_docker_services.png)
 
 From the **Services** pane, start Docker by clicking the green play button. You’ll see the same containers appear as when you run `docker ps` after starting your Astro project locally:
 
