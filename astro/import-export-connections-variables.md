@@ -31,7 +31,7 @@ For security reasons, you can't bulk import or export connections from the Airfl
 
 ### Using the Astro CLI (Local environments only)
 
-Use [`astro dev object export`](cli/astro-dev-object-export.md), [`astro dev object import`](cli/astro-dev-object-import.md) and [`astro dev run`](cli/astro-dev-run.md) to import and export connections and variables from a local Airflow environment to various formats. For example:
+Use [`astro dev object export`](cli/astro-dev-object-export.md), [`astro dev object import`](cli/astro-dev-object-import.md), and [`astro dev run`](cli/astro-dev-run.md) to import and export connections and variables from a local Airflow environment to various formats. For example:
 
 - To export all Airflow objects including connections, variables, and pools to your Astro project `.env` file in a URI format, run:
     

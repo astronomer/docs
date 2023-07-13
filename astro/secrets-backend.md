@@ -210,9 +210,9 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
         token_policies=astro_policy
     ```
 
-3. Run the following commands to retrieve the `secret-id` for your AppRole:
+3. Run the following command to retrieve the `secret-id` for your AppRole:
 
-    ```sh
+    ```bash
     vault write -f auth/approle/role/<your-approle>/secret-id
     ```
 
@@ -220,29 +220,31 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
   
 #### Create an Airflow variable or connection in Vault
 
-To start, create an Airflow variable or connection in Vault that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality in Step 4.
+To start, create an Airflow variable or connection in Vault that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality.
 
-To store an Airflow variable in Vault as a secret, run the following Vault CLI command with your own values:
-
-```bash
-vault secrets enable -path=<my-airflow-mount> -version=2 kv
-vault kv put -mount=<my-airflow-mount> <my-variables-path>/<my-variable-name> value=<my-value-value>
-```
-
-To store a connection in Vault as a secret in URI representation, run the following Vault CLI command with your own values:
+You can use an existing mount point or create a new one to store your Airflow connections and variables. For example, to create a new mount point called `airflow`, run the following Vault CLI command:
 
 ```bash
-vault secrets enable -path=<my-airflow-mount> -version=2 kv
-vault kv put -mount=<my-airflow-mount> <my-connections-path>/<my-connection-name> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:<connection-port>
+vault secrets enable -path=airflow -version=2 kv
 ```
 
-To import your connections in URI format, see [Import and export connections](import-export-connections-variables.md#using-the-astro-cli-local-environments-only).
+To store an Airflow variable in Vault as a secret at the path `variables`, run the following Vault CLI command with your own values:
 
-:::tip important
+```bash
+vault kv put -mount=airflow variables/<your-variable-name> value=<your-value-value>
+```
 
-Please note that even though Vault allows to create a custom key name for your secrets, Airflow requires the Key name to be `value` for Airflow variables and `conn_uri` for Airflow connections as shown in the commands above.
+To store an Airflow connection in Vault as a secret at the path `connections`, first format the connection as a URI. Then, run the following Vault CLI command with your own values:
 
-For example, `vault kv put -mount=my-mount my_secret foo=bar` is a valid Vault CLI command to store your secret, where `foo` is the Key and `bar` is the Value, but Airflow will not be able to parse it.
+```bash
+vault kv put -mount=airflow connections/<your-connection-name> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:<connection-port>
+```
+
+To format existing connections in URI format, see [Import and export connections](import-export-connections-variables.md#using-the-astro-cli-local-environments-only).
+
+:::caution
+
+Do not use custom key names for your secrets. Airflow requires the key name `value` for all Airflow variables and the key name `conn_uri` for all Airflow connections as shown in the previous commands.
 
 :::
 
@@ -250,25 +252,25 @@ To confirm that your secret was written to Vault successfully, run:
 
 ```bash
 # For variables
-$ vault kv get -mount=<my-airflow-mount> <my-variables-path>/<my-variable-name>
+$ vault kv get -mount=airflow variables/<your-variable-name>
 
 # For connections
-$ vault kv get -mount=<my-airflow-mount> <my-connections-path>/<my-connection-name>
+$ vault kv get -mount=airflow connections/<your-connection-name>
 ```
 
 #### Set up Vault locally
 
 In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
 
-```text
+```bash
 apache-airflow-providers-hashicorp
 ```
 
 Then, add the following environment variables to your `.env` file:
 
-```text
+```bash
 AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
-AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}
+AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables",  "mount_point": "airflow", "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}
 ```
 
 :::info 
@@ -280,7 +282,7 @@ If you run Vault on Hashicorp Cloud Platform (HCP):
 
 :::
 
-This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+This tells Airflow to look for variable and connection information at the `airflow/variables/*` and `airflow/connections/*` paths in your Vault server. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 
 For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
@@ -288,15 +290,15 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
   
 1. Run the following commands to export your environment variables to Astro:   
  
-    ```sh
-    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
+    ```bash
+    astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
   
-    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}' --secret
+    astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "mount_point": "airflow", "url": "<your-hashicorpvault-url>", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}' --secret
     ```
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
   
-    ```sh
+    ```bash
     astro deploy --deployment-id <your-deployment-id> 
     ```
 
