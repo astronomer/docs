@@ -20,6 +20,9 @@
     "text": "article p, article li, article td:last-child"
   },
   "strip_chars": " .,;:#",
+  "exclusionPatterns": [
+     "?(tab=)"
+  ],
   "custom_settings": {
     "separatorsToIndex": "_",
     "attributesForFaceting": [
