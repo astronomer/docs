@@ -17,7 +17,7 @@ Based on the [management strategy for your connections and variables](manage-con
 
 When you use the Airflow UI to store your Airflow connections and variables, they are stored in Airflow's metadata database. If your variables are stored in Airflow's metadata database, you can use the Airflow UI to import and export them in bulk.
 
-### Using Airflow UI
+### Using the Airflow UI
 
 To export variables from a local Airflow environment or Astro Deployment, go to **Admin** in the Airflow UI, click **Variables** and select the variables you want to export. Then, click **Export** in the **Actions** dropdown menu. This exports a file named `variables.json` to your local computer.
 
@@ -29,36 +29,27 @@ To import variables to a local Airflow environment or Astro Deployment from a `j
 
 For security reasons, you can't bulk import or export connections from the Airflow UI.
 
-### Using Astro CLI
+### Using the Astro CLI (Local environments only)
 
-You can also use Astro CLI to import or export connections and variables to STDOUT or a file in URI, JSON or YAML format. For example:
+Use [`astro dev object export`](cli/astro-dev-object-export.md), [`astro dev object import`](cli/astro-dev-object-import.md) and [`astro dev run`](cli/astro-dev-run.md) to import and export connections and variables from a local Airflow environment to various formats. For example:
 
-- Export all airflow objects including connections and variables to `.env` file in URI format
+- To export all Airflow objects including connections, variables, and pools to your Astro project `.env` file in a URI format, run:
+    
     ```bash 
     astro dev object export --env-export 
     ```
-- Print the connections in the default URI format to STDOUT.
-    ```bash
-    astro dev run connections export - --file-format=env
-    ```
-- Print the connections in JSON format to STDOUT
+
+- To print only your connections connections in JSON format to STDOUT, run:
+
     ```bash
     astro dev run connections export - --file-format=env --serialization-format=json
     ```
-- Export connections in JSON format to conns.json in your Astro project's include dir
-    ```bash
-    astro dev run connections export --file-format=json /usr/local/airflow/include/conns.json
-    ```
-- Export connections in YAML format to conns.yaml in your Astro project's include directory
-    ```bash
-    astro dev run connections export --file-format=yaml /usr/local/airflow/include/conns.yaml
-    ```
-- Import all Airflow objects from `myairflowobjects.yaml` to a locally running Airflow environment
+
+- To import all Airflow objects from a file named `myairflowobjects.yaml` to a locally running Airflow environment, run:
+    
     ```bash
     astro dev object import --settingsfile="myairflowobjects.yaml"
     ```
-
-See [`astro dev object export`](cli/astro-dev-object-export.md), [`astro dev object import`](cli/astro-dev-object-import.md) and [`astro dev run`](cli/astro-dev-run.md) for more details.
 
 ## From a secrets backend
 
