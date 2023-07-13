@@ -224,34 +224,37 @@ To start, create an Airflow variable or connection in Vault that you want to sto
 
 To store an Airflow variable in Vault as a secret, run the following Vault CLI command with your own values:
 
-```sh
-vault secrets enable -path=secret -version=2 kv
-vault kv put secret/variables/<your-variable-key> value=<your-variable-value>
+```bash
+vault secrets enable -path=<my-airflow-mount> -version=2 kv
+vault kv put -mount=<my-airflow-mount> <my-variables-path>/<my-variable-name> value=<my-value-value>
 ```
 
-To store a connection in Vault as a secret, run the following Vault CLI command with your own values:
+To store a connection in Vault as a secret in URI representation, run the following Vault CLI command with your own values:
 
-```sh
-vault secrets enable -path=secret -version=2 kv
-vault kv put secret/connections/<your-connection-id> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:5432
+```bash
+vault secrets enable -path=<my-airflow-mount> -version=2 kv
+vault kv put -mount=<my-airflow-mount> <my-connections-path>/<my-connection-name> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:<connection-port>
 ```
 
-To confirm that your secret was written to Vault successfully, run:
-
-```sh
-# For variables
-$ vault kv get secret/variables/<your-variable-key>
-# For connections
-$ vault kv get secret/connections/<your-connection-id>
-```
+To import your connections in URI format, see [Import and export connections](import-export-connections-variables.md#using-the-astro-cli-local-environments-only).
 
 :::tip important
 
-For Airflow variables, the name of the key for the Vault secret you create must be `value`. For example, if you are creating a secret called secret/variables/my-var, the **key** must be named `value` and **value** will be your variable's value.
+Please note that even though Vault allows to create a custom key name for your secrets, Airflow requires the Key name to be `value` for Airflow variables and `conn_uri` for Airflow connections as shown in the commands above.
 
-For Airflow connections, the name of the key for the Vault secret you create must be `conn_uri`. For example, if you are creating a secret called secret/connections/my-conn, the **key** must be named `conn_uri` and **value** will be your connection's URI. See [Import and export connections](import-export-connections-variables.md#using-astro-cli) to export your connection in URI format.
+For example, `vault kv put -mount=my-mount my_secret foo=bar` is a valid Vault CLI command to store your secret, where `foo` is the Key and `bar` is the Value, but Airflow will not be able to parse it.
 
 :::
+
+To confirm that your secret was written to Vault successfully, run:
+
+```bash
+# For variables
+$ vault kv get -mount=<my-airflow-mount> <my-variables-path>/<my-variable-name>
+
+# For connections
+$ vault kv get -mount=<my-airflow-mount> <my-connections-path>/<my-connection-name>
+```
 
 #### Set up Vault locally
 
