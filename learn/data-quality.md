@@ -74,7 +74,7 @@ The following DAG graph shows the typical locations for data quality checks:
 
 ![Different locations for data quality checks in an ETL pipeline](/img/guides/dq_checks_locations_example_graph.png)
 
-It's common to use downstream tasks of data quality checks (`post_check_action_1` and `post_check_action_2`) or [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals of data quality issues, for example as an email or a Slack message. It is also possible to create a downstream task that only runs when all data quality checks are successful. For example, the successful checking event for reporting purposes.
+It's common to use data quality checks (`post_check_action_1` and `post_check_action_2`) with [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals of data quality issues through channels like email and Slack. You can also create a downstream task that runs only when all data quality checks are successful, which can be useful for reporting purposes.
 
 When implementing data quality checks, consider how a check success or failure should influence downstream dependencies. [Trigger Rules](managing-dependencies.md#trigger-rules) are especially useful for managing operator dependencies.
 
@@ -130,9 +130,9 @@ SQL check operators execute a SQL statement that results in a set of booleans. A
 
 The SQL check operators work with any backend solution that accepts SQL queries and supports Airflow, and differ in what kind of data quality checks they can perform and how they are defined. All SQL check operators are part of the [Common SQL provider](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest).
 
-- [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcolumncheckoperator): Can quickly define checks on columns of a table using a Python dictionary.
-- [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqltablecheckoperator): Can run aggregated and non-aggregated statements involving several columns of a table.
-- [SQLCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcheckoperator): Can be used with any SQL statement that returns a single row of booleans.
+- [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcolumncheckoperator): Defines checks on columns of a table using a Python dictionary.
+- [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqltablecheckoperator): Runs aggregated and non-aggregated statements involving several columns of a table.
+- [SQLCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcheckoperator): Runs a SQL statement that returns a single row of booleans.
 - [SQLIntervalCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlintervalcheckoperator): Runs checks against historical data.
 
 Astronomer recommends using the SQLColumnCheckOperator and SQLTableCheckOperator over the older [SQLValueCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlvaluecheckoperator) and [SQLThresholdCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlthresholdcheckoperator).
