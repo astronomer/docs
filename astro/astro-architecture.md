@@ -28,7 +28,7 @@ To learn more about Astro Hybrid architecture and features, see [Astro Hybrid ov
 
 ## Role based access control (RBAC) architecture
 
-Astro implements role-based access control for Airflow environments. User roles are scoped to both a Workspace and an Organization:
+Astro implements role-based access control for Airflow environments.
 
 All users belong to an _Organization_, which is the highest level in the RBAC system. Each Organization contains a collection of Workspaces, clusters, and users. 
 
