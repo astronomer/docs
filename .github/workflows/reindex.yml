@@ -26,6 +26,9 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
       - name: Run Algolia
         run: |
+          sudo apt remove pipenv
+          pip3 install pipenv
+          python3 -m pipenv shell
           pipenv install
           pipenv run python -m src.index
         working-directory: /root
