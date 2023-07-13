@@ -30,11 +30,13 @@ To learn more about Astro Hybrid architecture and features, see [Astro Hybrid ov
 
 Astro implements role-based access control for Airflow environments. User roles are scoped to both a Workspace and an Organization:
 
-- A [_Workspace_](manage-workspaces.md) is a collection of Deployments that can be accessed by a specific group of users. Workspaces can be used to group Deployments that share a business use case or environment trait.
-- An _Organization_ is a collection of Workspaces. 
+All users belong to an _Organization_, which is the highest level in the RBAC system. Each Organization contains a collection of Workspaces, clusters, and users. 
+
+- A [_Workspace_](manage-workspaces.md) is a collection of Deployments that can be accessed by a specific group of users. You can use Workspaces to group Deployments that share a business use case or environment trait.
+- A _cluster_ is a Kubernetes cluster that hosts the infrastructure required to run Deployments. Clusters can host Deployments from multiple Workspaces. 
 
 Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](add-user.md#make-a-team), which apply the same role across a group of users. You can create API keys with specific roles to automate most actions on Astro, such as deploying code or managing users. 
 
-Use the following diagram as a reference for how all of these entities interact with each other in Astro.
+Use the following diagram as a reference for how all of these components interact with each other in Astro.
 
 ![A diagram showing how all Astro RBAC components fit together](/img/docs/rbac-overview.png)
