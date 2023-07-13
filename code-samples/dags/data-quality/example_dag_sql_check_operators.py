@@ -27,7 +27,7 @@ def example_dag_sql_check_operators():
     #   - MY_DATE_COL is checked to only contain unique values ("unique_check")
     #   - MY_TEXT_COL is checked to contain no NULL values
     #     and at least 10 distinct values
-    #   - MY_NUM_COL is checked to have a minimum value between 90 and 110
+    #   - MY_NUM_COL is checked to have a maximum value between 90 and 110
     column_checks = SQLColumnCheckOperator(
         task_id="column_checks",
         table=TABLE,

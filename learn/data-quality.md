@@ -19,7 +19,7 @@ This guide covers:
 - When to implement data quality checks.
 - How to choose a data quality check tool.
 - How data lineage is connected to data quality.
-- An in-depth look at two commonly used data quality check tools: SQL check operators and Great Expectations.
+- An in-depth look at two commonly used data quality check tools: [SQL check operators](#sql-check-operators) and [Great Expectations](#great-expectations).
 - An example comparing implementations of data quality checks using each of these tools.
 
 ## Assumed knowledge
@@ -37,9 +37,9 @@ What is considered good quality data is determined by the needs of your organiza
 
 The following is a typical data quality check process:
 
-- Assess where and in what formats relevant data is stored, and where it moves along your pipeline. A data lineage tool can assist with this process.
+- Assess where and in what formats relevant data is stored, and where it moves along your pipeline. A [data lineage](#data-lineage-and-data-quality) tool can assist with this process.
 - Gather the data quality criteria from data professionals using the data.
-- Determine the quality checks to run different components of the dataset.
+- Determine the quality checks to run on different components of the dataset.
 - Determine where those quality checks should occur in your pipeline.
 - Determine what happens when a check fails.
 - Choose a data quality tool.
@@ -62,21 +62,19 @@ It is also important to distinguish between the two types of control in data qua
 
 ### Where to run data quality checks
 
-Data quality checks can be run at different times within a data pipeline or an Airflow environment. It often makes sense to test them in a dedicated DAG before you incorporate them into your pipelines to make downstream behavior dependent on the outcome of selected data quality checks.
-
-For example, data quality checks can be placed in the following locations within an ETL pipeline:
+Data quality checks can be run in different locations within a data pipeline or an Airflow environment. For example, data quality checks can be placed in the following locations within an ETL pipeline:
 
 - Before the transform step (`data_quality_check_1`)
 - After the transform step (`data_quality_check_2`)
 - Branching off from a step (`data_quality_check_3`)
 
-The following DAG graph shows the typical locations for data quality checks:
+The following DAG graph shows typical locations for data quality checks:
 
 ![Different locations for data quality checks in an ETL pipeline](/img/guides/dq_checks_locations_example_graph.png)
 
 It's common to use data quality checks (`post_check_action_1` and `post_check_action_2`) with [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) to alert data professionals of data quality issues through channels like email and Slack. You can also create a downstream task that runs only when all data quality checks are successful, which can be useful for reporting purposes.
 
-When implementing data quality checks, consider how a check success or failure should influence downstream dependencies. [Trigger Rules](managing-dependencies.md#trigger-rules) are especially useful for managing operator dependencies.
+When implementing data quality checks, consider how a check success or failure should influence downstream dependencies. [Trigger Rules](managing-dependencies.md#trigger-rules) are especially useful for managing operator dependencies. It often makes sense to test your data quality checks in a dedicated DAG before you incorporate them into your pipelines.
 
 ## When to implement data quality checks
 
@@ -141,13 +139,17 @@ The logs from SQL check operators can be found in the regular Airflow task logs.
 
 ### Great Expectations
 
+:::info
+
+You can find more information on how to use Great Expectations with Airflow in the [Orchestrate Great Expectations with Airflow](airflow-great-expectations.md) tutorial.
+
+:::
+
 Great Expectations is an open source data validation framework that allows the user to define data quality checks in JSON. The checks, also known as Expectation Suites, can be run in a DAG using the GreatExpectationsOperator from the [Great Expectations provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest). All currently available Expectations can be viewed on the [Great Expectations website](https://greatexpectations.io/expectations) and creation of [Custom Expectations](https://docs.greatexpectations.io/docs/guides/expectations/custom_expectations_lp) is possible.
 
 The easiest way to use Great Expectations with Airflow is to initialize a Great Expectations project in a directory accessible to your Airflow environment and using the automatic creation of a [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and [Datasource](https://docs.greatexpectations.io/docs/terms/datasource) from an [Airflow connection](connections.md) by the GreatExpectationsOperator. This basic usage of the GreatExpectationsOperator does not need in-depth Great Expectations knowledge and full customization is possible. 
 
 When using Great Expectations, Airflow task logs show the results of the suite at the test-level in a JSON format. To get a [detailed report](https://docs.greatexpectations.io/docs/terms/data_docs/) on the checks that were run and their results, you can view the HTML files located in the `great_expectations/uncommitted/data_docs/local_site/validations` directory in any browser. These data docs can be generated to other backends as well as the local file.
-
-You can find more information on how to use Great Expectations with Airflow in the [Orchestrate Great Expectations with Airflow](airflow-great-expectations.md) tutorial.
 
 ## Data lineage and data quality
 
@@ -179,7 +181,7 @@ The checks performed for both tools are:
 - `MY_DATE_COL` has only values between 2017-01-01 and 2022-01-01.
 - `MY_TEXT_COL` has no null values.
 - `MY_TEXT_COL` has at least 10 distinct values.
-- `MY_NUM_COL` has a minimum value between 90 and 110.
+- `MY_NUM_COL` has a maximum value between 90 and 110.
 - `example_table` has at least 10 rows.
 - The value in each row of `MY_COL_1` plus the value of the same row in `MY_COL_2` is equal to 100.
 - The most common value in `MY_COL_3` is either `val1` or `val4`.
