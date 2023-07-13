@@ -26,7 +26,7 @@ Astro Deployments can securely connect to external data services so that you can
 
 To learn more about Astro Hybrid architecture and features, see [Astro Hybrid overview](hybrid-overview.md)
 
-## Role based access control (RBAC) architecture
+## Access control architecture
 
 Astro implements role-based access control for Airflow environments.
 
