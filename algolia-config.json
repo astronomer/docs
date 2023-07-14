@@ -4,9 +4,7 @@
     "https://docs.astronomer.io"
   ],
   "stop_urls": [
-    {
-    "url": "(?=tab=)"
-    }
+    "/(?:tab=)/gm"
   ],
   "selectors": {
     "lvl0": {
