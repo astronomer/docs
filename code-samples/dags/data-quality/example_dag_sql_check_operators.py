@@ -1,6 +1,5 @@
-from airflow import DAG
+from airflow.decorators import dag
 from pendulum import datetime
-
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.common.sql.operators.sql import (
     SQLColumnCheckOperator,
@@ -8,37 +7,32 @@ from airflow.providers.common.sql.operators.sql import (
     SQLCheckOperator,
 )
 
-example_connection = "my_db_conn"
-example_database = "my_db"
-example_schema = "my_schema"
-example_table = "my_table"
+DB_CONN = "snowflake_default"
+DB = "database_name"
+SCHEMA = "schema_name"
+TABLE = "example_table"
 
-with DAG(
-    dag_id="example_dag_sql_check_operators",
+
+@dag(
+    start_date=datetime(2023, 7, 1),
     schedule="@daily",
-    start_date=datetime(2022, 7, 15),
     catchup=False,
-    doc_md="""
-    Example DAG for SQL Check operators.
-    """,
-    default_args={"conn_id": example_connection},
-) as dag:
+    default_args={"conn_id": DB_CONN},
+)
+def example_dag_sql_check_operators():
     start = EmptyOperator(task_id="start")
     end = EmptyOperator(task_id="end")
 
     # SQLColumnCheckOperator example: runs checks on 3 columns:
     #   - MY_DATE_COL is checked to only contain unique values ("unique_check")
-    #     and to have dates greater than 2017-01-01 and lesser than 2022-01-01.
     #   - MY_TEXT_COL is checked to contain no NULL values
     #     and at least 10 distinct values
-    #   - MY_NUM_COL is checked to have a minimum value between 90 and 110
+    #   - MY_NUM_COL is checked to have a maximum value between 90 and 110
     column_checks = SQLColumnCheckOperator(
         task_id="column_checks",
-        table=example_table,
+        table=TABLE,
         column_mapping={
             "MY_DATE_COL": {
-                "min": {"greater_than": datetime.date(2017, 1, 1)},
-                "max": {"less_than": datetime.date(2022, 1, 1)},
                 "unique_check": {"equal_to": 0},
             },
             "MY_TEXT_COL": {
@@ -49,55 +43,50 @@ with DAG(
         },
     )
 
-    # SQLTableCheckOperator example: This operator performs one check:
-    #   - a row count check, making sure the table has >= 1000 rows
-    table_checks_aggregated = SQLTableCheckOperator(
-        task_id="table_checks_aggregated",
-        table=example_table,
-        checks={"my_row_count_check": {"check_statement": "COUNT(*) >= 1000"}},
-    )
-
-    # SQLTableCheckOperator example: This operator performs one check:
+    # SQLTableCheckOperator example: This operator performs three checks:
+    #   - a row count check, making sure the table has >= 10 rows
     #   - a columns comparison check to see that the value in MY_COL_1 plus
     #   the value in MY_COL_2 is 100
-    table_checks_not_aggregated = SQLTableCheckOperator(
-        task_id="table_checks_not_aggregated",
-        table=example_table,
+    #   - a date between check to see that the value in MY_DATE_COL is between
+    #   2017-01-01 and 2022-01-01.
+    table_checks = SQLTableCheckOperator(
+        task_id="table_checks",
+        table=TABLE,
         checks={
+            "my_row_count_check": {"check_statement": "COUNT(*) >= 10"},
             "my_column_comparison_check": {
                 "check_statement": "MY_COL_1 + MY_COL_2 = 100"
-            }
+            },
+            "date_between_check": {
+                "check_statement": "MY_DATE_COL BETWEEN '2017-01-01' AND '2022-01-01'"
+            },
         },
     )
 
-    # SQLCheckOperator example: ensure categorical values in MY_COL_3
-    # are one of a list of 4 options
-    check_val_in_list = SQLCheckOperator(
-        task_id="check_today_val_in_bounds",
-        conn_id=example_connection,
+    # SQLCheckOperator example: ensure the most common categorical value in MY_COL_3
+    # is one of a list of 2 options
+    check_most_common_val_in_list = SQLCheckOperator(
+        task_id="check_most_common_val_in_list",
         sql="""
-                WITH
-
-                not_in_list AS (
-
-                SELECT COUNT(*) as count_not_in_list
-                FROM {{ params.db_to_query }}.{{ params.schema }}.\
-                     {{ params.table }}
-                WHERE {{ params.col }} NOT IN {{ params.options_tuple }}
-                )
-
-                SELECT
-                    CASE WHEN count_not_in_list = 0 THEN 1
-                    ELSE 0
-                    END AS testresult
-                FROM not_in_list
+            SELECT CASE
+                WHEN (
+                    SELECT {{ params.col }}
+                    FROM {{ params.db_to_query }}.{{ params.schema }}.\
+                            {{ params.table }}
+                    GROUP BY {{ params.col }}
+                    ORDER BY COUNT(*) DESC
+                    LIMIT 1
+                ) IN {{ params.options_tuple }}
+                THEN 1
+                ELSE 0
+            END AS result;
             """,
         params={
-            "db_to_query": example_database,
-            "schema": example_schema,
-            "table": example_table,
+            "db_to_query": DB,
+            "schema": SCHEMA,
+            "table": TABLE,
             "col": "MY_COL_3",
-            "options_tuple": "('val1', 'val2', 'val3', 'val4')",
+            "options_tuple": "('val1', 'val4')",
         },
     )
 
@@ -105,9 +94,11 @@ with DAG(
         start
         >> [
             column_checks,
-            table_checks_aggregated,
-            table_checks_not_aggregated,
-            check_val_in_list,
+            table_checks,
+            check_most_common_val_in_list,
         ]
         >> end
     )
+
+
+example_dag_sql_check_operators()
