@@ -397,7 +397,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 
 #### Configure Secret Manager on Astro using Workload Identity (Recommended)
 
-1. Set up Workload Identity for your Airflow Deployment. See [Connect Astro to GCP data sources](connect-gcp.md?tab=Workload%20Identity#authentication-options).
+1. Set up Workload Identity for your Airflow Deployment. See [Connect Astro to GCP data sources](connect-gcp.md?tab=Workload%20Identity#authorization-options).
 
 2. Run the following commands to set the secrets backend for your Astro Deployment:
 

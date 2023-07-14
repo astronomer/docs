@@ -88,7 +88,7 @@ Authorization is the process of verifying a user or service's permissions before
 
 <Tabs
     defaultValue="Workload Identity"
-    groupId="authentication-options"
+    groupId="authorization-options"
     values={[
         {label: 'Workload Identity', value: 'Workload Identity'},
         {label: 'Service account keys', value: 'Service account keys'},
