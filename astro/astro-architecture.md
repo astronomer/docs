@@ -35,7 +35,7 @@ All users belong to an _Organization_, which is the highest level in the RBAC sy
 - A [_Workspace_](manage-workspaces.md) is a collection of Deployments that can be accessed by a specific group of users. You can use Workspaces to group Deployments that share a business use case or environment trait.
 - A _cluster_ is a Kubernetes cluster that hosts the infrastructure required to run Deployments. Clusters can host Deployments from multiple Workspaces. You either use pre-configured clusters on Astro or provision your own dedicated clusters with more specific configurations.
 
-Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](add-user.md#make-a-team), which apply the same role across a group of users. You can create API keys with specific roles to automate most actions on Astro, such as deploying code or managing users. 
+Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](manage-teams.md), which apply the same role across a group of users. You can create API keys with specific roles to automate most actions on Astro, such as deploying code or managing users. 
 
 Use the following diagram as a reference for how all of these components interact with each other in Astro.
 
