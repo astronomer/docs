@@ -17,6 +17,8 @@ Based on the [management strategy for your connections and variables](manage-con
 
 When you use the Airflow UI to store your Airflow connections and variables, they are stored in Airflow's metadata database. If your variables are stored in Airflow's metadata database, you can use the Airflow UI to import and export them in bulk.
 
+### Using the Airflow UI
+
 To export variables from a local Airflow environment or Astro Deployment, go to **Admin** in the Airflow UI, click **Variables** and select the variables you want to export. Then, click **Export** in the **Actions** dropdown menu. This exports a file named `variables.json` to your local computer.
 
 ![Export Variables](/img/docs/airflow-ui-export-vars.png)
@@ -26,6 +28,28 @@ To import variables to a local Airflow environment or Astro Deployment from a `j
 ![Import Variables](/img/docs/airflow-ui-import-vars.png)
 
 For security reasons, you can't bulk import or export connections from the Airflow UI.
+
+### Using the Astro CLI (Local environments only)
+
+Use [`astro dev object export`](cli/astro-dev-object-export.md), [`astro dev object import`](cli/astro-dev-object-import.md), and [`astro dev run`](cli/astro-dev-run.md) to import and export connections and variables from a local Airflow environment to various formats. For example:
+
+- To export all Airflow objects including connections, variables, and pools to your Astro project `.env` file in a URI format, run:
+    
+    ```bash 
+    astro dev object export --env-export 
+    ```
+
+- To print only your connections connections in JSON format to STDOUT, run:
+
+    ```bash
+    astro dev run connections export - --file-format=env --serialization-format=json
+    ```
+
+- To import all Airflow objects from a file named `myairflowobjects.yaml` to a locally running Airflow environment, run:
+    
+    ```bash
+    astro dev object import --settingsfile="myairflowobjects.yaml"
+    ```
 
 ## From a secrets backend
 
@@ -68,13 +92,13 @@ astro deployment variable list --deployment-id <deployment-id> --save
 ```
 See [Use environment variables on Astro](environment-variables.md#add-airflow-connections-and-variables-using-environment-variables) and refer to [`astro deployment variable create`](cli/astro-deployment-variable-create.md#examples) for more examples.
 
-## From Airflow REST API
+## From the Airflow REST API
 
-You can use [Airflow REST API with Astro](airflow-api.md) to setup import and export workflow for your connections and variables and easily replicate your Deployment settings. You can use REST API only if your connections and variables are stored in Airflow's metadata database.
+You can use the [Airflow REST API](airflow-api.md) to import and export connections and variables from a Deployment or local Airflow environment. Note that the Airflow REST API can only access connections and variables thar are stored in the Airflow metadata database.
 
 To export connections from any Airflow environment, you can use the [List Connections API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connections) and [Get Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connection).
 
-To export variables from any Airflow environment, you can use [List Variables API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variables) and [Get Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variable).
+To export variables from any Airflow environment, you can use the [List Variables API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variables) and [Get Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_variable).
 
 To import connections or variables to any Airflow environment, you can use the [Create Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_connection) and [Create Variable API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_variables) respectively.
 

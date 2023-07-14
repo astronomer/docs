@@ -17,6 +17,14 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.17.1
+
+Release date: July 12, 2023
+
+### Bug Fixes
+
+- Fixed an issue were some Astro Hosted Deployment updates triggered by the Astro CLI were not working.
+
 ## Astro CLI 1.17.0
 
 Release date: July 6, 2023

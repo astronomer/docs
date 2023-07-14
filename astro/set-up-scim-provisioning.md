@@ -32,9 +32,10 @@ Some user management features on Astro behave differently after you set up SCIM 
 
 ## Supported SSO identity providers
 
-Astro supports SCIM provisioning with [Okta](https://www.okta.com/). You can configure SCIM provisioning on Okta both with and without using the official Astro Okta integration.
+Astro supports SCIM provisioning with the following IdPs:
 
-Support for [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/) is coming soon.
+- [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Okta](https://www.okta.com/)
 
 ### Supported Okta features
 
@@ -57,6 +58,7 @@ Okta's Astro integration supports the following SCIM actions:
     values={[
         {label: 'Okta - Astro integration (Recommended)', value: 'Okta'},
         {label: 'Okta - Manual', value: 'OktaManual'},
+        {label: 'Azure AD', value: 'Azure'},
     ]}>
 <TabItem value= "Okta">
 
@@ -114,6 +116,36 @@ Complete the manual setup if you configured your existing Astro app without usin
     See [Okta documentation](https://developer.okta.com/docs/guides/scim-provisioning-integration-connect/main/#to-app) for more information on configuring these values.
 
 7. Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
+
+</TabItem>
+<TabItem value="Azure">
+
+1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
+2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
+3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
+4. Copy the **SCIM Integration URL** that appears.
+5. In the Azure AD management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application).
+6. In the menu for your new application, click **Provisioning** and configure the following values:
+
+    - **Provisioning mode**: Set to **Automatic**.
+    - **Admin Credentials** > **Tenant URL**: Enter the SCIM integration URL that you copied from the Cloud UI.
+    - **Secret Token**: Enter your Organization API token. 
+    - **Mappings**: Configure the following mappings:
+
+    | Azure Active Directory Attribute | Astro Attribute |
+    | -------------------------------- | --------------- |
+    | userPrincipalName                | userName        |
+    | displayName                      | displayName     |
+    | givenName                        | name.givenName  |
+    | surname                          | name.familyName |
+
+  :::caution
+
+  This setup assumes that `userPrincipalName` contains your users' email. If you use a field other than `userPrincipalName` to define your user email, replace `userPrincipalName` with the attribute you use.
+
+  ::: 
+
+7. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
 </TabItem>
 </Tabs>

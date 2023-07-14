@@ -4,12 +4,6 @@ title: "Manage DAG runs from the Cloud UI"
 id: manage-dags
 ---
 
-:::info
-
-Managing DAGs from the Cloud UI is currently available only on [Astro Hosted](overview.md). Support on Astro Hybrid is coming soon.
-
-:::
-
 You can perform some common Airflow UI actions from the Cloud UI, including:
 
 - Marking DAG and task runs as succeeded/failed.
