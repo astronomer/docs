@@ -65,7 +65,7 @@ yesterday = datetime.today() - timedelta(1)
 
 If this code is in a DAG file, these functions are executed on every Scheduler heartbeat, which may not be performant. Even more importantly, this doesn't produce an idempotent DAG. You can't rerun a previously failed DAG run for a past date because `datetime.today()` is relative to the current date, not the DAG execution date. 
 
-A better way of implementing this is by using an Airflow variable:
+A better way of implementing this is by using an Airflow variable: (How is this a better way? How it solves the problem of re-runing of failed DAGs?)
 
 ```python
 # Variables used by tasks
