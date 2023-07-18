@@ -23,7 +23,7 @@ Using a Kubernetes service account is the most secure method because it doesn't 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
 - A Google Cloud project with [BigQuery API](https://cloud.google.com/bigquery/docs/enable-transfer-service#enable-api) enabled.
-- Permissions to create an IAM Service Account or use an existing one. See [Google documentation](https://cloud.google.com/iam/docs/manage-access-service-accounts).
+- Permissions to create an IAM service account or use an existing one. See [Google documentation](https://cloud.google.com/iam/docs/manage-access-service-accounts).
 
 ## Get connection details
 
@@ -79,7 +79,7 @@ You can save your service account key file to any secrets backend. See [Configur
 6. [Create a secret](https://cloud.google.com/secret-manager/docs/create-secret-quickstart) in Google Secret Manager and upload the key file from Step 5 as a secret value. Then, copy the ID of your secret name.
 7. Follow Astronomer's documentation to [configure secrets backend](https://docs.astronomer.io/astro/secrets-backend) for your Astro project.
 
-You can now use this secret in multiple Airflow connections easily.
+You can now use this secret in your Airflow connections.
 
 </TabItem>
 
@@ -95,8 +95,8 @@ If you're running Airflow in a GKE cluster, complete the following steps:
 
 1. In your Google Cloud console, open the Google Cloud project where you're running BigQuery and copy its **ID**.
 2. [Enable Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) and [configure Airflow to use workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to). Copy the name for the Kubernetes service account that you create. 
-3. Go to **IAM**, then click **Service Accounts** tab, and search your Kubernetes service account. If you don't see your service account, click **+ ADD** to add your service account to your Google Cloud project.
-4. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account to access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for list of available roles and the permissions.
+3. Go to **IAM**, then click **Service Accounts** and search for your Kubernetes service account. If you don't see your service account, click **+ ADD** to add your service account to your Google Cloud project.
+4. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account to access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for a list of available roles and the permissions.
 
 </TabItem>
 
@@ -124,16 +124,16 @@ If you're running Airflow in a GKE cluster, complete the following steps:
 
     This installs the Google Cloud provider package, which makes the Google Cloud connection type available in Airflow.
 
-2. Restart or start your local Airflow using `astro dev restart` to apply the changes in `requirements.txt`.
+2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
-3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, select the connection type as **Google Cloud**.
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Google Cloud** connection type.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
     - **Connection Id**: Enter a name for the connection.
     - **Keyfile JSON**: Enter the contents of the key file.
 
-5. Click **Test connection**. When the connection test succeeds, click then **Save**.
+5. Click **Test connection**. When the connection test succeeds, click **Save**.
 
     ![gcp-connection-key-in-ui](/img/examples/connection-gcp-key-in-ui.png)
 
@@ -151,23 +151,22 @@ If you're running Airflow in a GKE cluster, complete the following steps:
 
 2. Add the key file to your `include` folder. This will make it available to Airflow at `/usr/local/airflow/include/<your-key-file>.json`.
 
-3. Restart or start your local Airflow using `astro dev restart` to apply the changes in `requirements.txt`.
+3. Restart or start your local Airflow using `astro dev restart` to apply your changes in `requirements.txt`.
 
-4. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, select the connection type as **Google Cloud**.
+4. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Google Cloud** connection type.
 
 5. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
     
     - **Connection Id**: Enter a name for the connection.
     - **Keyfile Path**: Enter the path of your key file.
 
-6. Click **Test connection**. When the connection test succeeds, click then **Save**.
+6. Click **Test connection**. When the connection test succeeds, click **Save**.
 
     ![gcp-connection-key-in-airflow-container](/img/examples/connection-gcp-key-in-airflow-container.png)
 
 </TabItem>
 
 <TabItem value="key-file-in-secrets-backend">
-
 
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
@@ -177,17 +176,17 @@ If you're running Airflow in a GKE cluster, complete the following steps:
 
     This will install the Google Cloud provider package, which makes the Google Cloud connection type available in Airflow.
 
-2. Restart or start your local Airflow using `astro dev restart` to apply the changes in `requirements.txt`.
+2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
-3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, select the connection type as **Google Cloud**.
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Google Cloud** connection type.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
     - **Connection Id**: Enter a name for the connection.
-    - **Keyfile Secret Project Id**: Enter the **ID** of the Google Cloud Project.
+    - **Keyfile Secret Project Id**: Enter the **ID** of the Google Cloud project.
     - **Keyfile Secret Name**: Enter the ID of your secret name.
 
-5. Click **Test connection**. When the connection test succeeds, click then **Save**.
+5. Click **Test connection**. When the connection test succeeds, click **Save**.
 
     ![gcp-connection-key-in-secret-manager](/img/examples/connection-gcp-key-in-secret-manager.png)
 
@@ -203,16 +202,16 @@ If you're running Airflow in a GKE cluster, complete the following steps:
 
     This will install the Google Cloud provider package, which makes the Google Cloud connection type available in Airflow.
 
-2. Restart or start your local Airflow using `astro dev restart` to apply the changes in `requirements.txt`.
+2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
 3. In your Airflow UI, go to **Admin** > **Connections**. Click the **+** sign to add a new connection, select the connection type as **Google Cloud**.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
     
     - **Connection Id**: Enter a name for the connection.
-    - **Project Id**: Enter the **ID** of the Google Cloud Project.
+    - **Project Id**: Enter the **ID** of the Google Cloud project.
 
-5. Click on **Save** to save your connection.
+5. Click **Test connection**. When the connection test succeeds, click **Save**.
 
     ![gcp-connection-using-workload-identity](/img/examples/connection-gcp-workload-identity.png)
 
@@ -223,10 +222,10 @@ If you're running Airflow in a GKE cluster, complete the following steps:
 
 ## How it works
 
-Airflow uses [`python-bigquery`](https://github.com/googleapis/python-bigquery) library to connect to GCP BigQuery using [BigQueryHook](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/_api/airflow/providers/google/cloud/hooks/bigquery/index.html). If you don't define any specific key credentials in the connection, Google defaults to using [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials). This means when you use Workload Identity to connect to BigQuery, Airflow relies on ADC to authenticate.
+Airflow uses the [`python-bigquery`](https://github.com/googleapis/python-bigquery) library to connect to GCP BigQuery through the [BigQueryHook](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/_api/airflow/providers/google/cloud/hooks/bigquery/index.html). If you don't define specific key credentials in the connection, Google defaults to using [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials). This means when you use Workload Identity to connect to BigQuery, Airflow relies on ADC to authenticate.
 
 ## See also
 
 - [Apache Airflow Google provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html)
-- [BigQuery Modules](https://registry.astronomer.io/modules?query=bigquery) and [Example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=bigquery) in Astronomer Registry
-- [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
+- [BigQuery Modules](https://registry.astronomer.io/modules?query=bigquery) and [Example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=bigquery) in the Astronomer Registry
+- [Import and export Airflow connections using the Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)

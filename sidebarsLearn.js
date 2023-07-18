@@ -185,11 +185,11 @@ module.exports = {
           'vscode-local-dev',
           {
             type: 'category',
-            label: 'Connections',
+            label: 'Airflow connection examples',
             link: {
               type: 'generated-index',
-              title: 'Connections',
-              description: 'Airflow Connections define an entry-point to the external systems that need to be integrated with Airflow. There are different ways to create and store a connection.',
+              title: 'Airflow connection examples',
+              description: 'Use the following guides to quickly set up Airflow connections to external systems.',
             },
             items: [
               'azure-data-factory',

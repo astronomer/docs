@@ -5,7 +5,7 @@ sidebar_label: Azure Data Factory
 description: Learn how to create an Azure Data Factory connection in Airflow.
 ---
 
-[Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/) (ADF) is a cloud-based data integration and transformation service used to build data pipelines and jobs. Integrating ADF with Airflow allows you to run ADF pipelines and check their status from an Airflow DAG. 
+[Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/) (ADF) is a cloud-based data integration and transformation service used to build data pipelines. Integrating ADF with Airflow allows you to run ADF pipelines and check their status from an Airflow DAG. 
 
 This guide provides the basic setup for creating an ADF connection. For a complete integration tutorial, see [Run Azure Data Factory pipelines in Airflow](airflow-azure-data-factory-integration.md).
 
@@ -13,7 +13,7 @@ This guide provides the basic setup for creating an ADF connection. For a comple
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
 - A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli)
-- Permissions to [access](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#roles-and-requirements) your Azure Data Factory
+- Permissions to [access your data factory](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#roles-and-requirements)
 - An [Azure AD application](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
 
 ## Get connection details
@@ -44,11 +44,11 @@ Complete the following steps to retrieve all of these values:
     apache-airflow-providers-microsoft-azure
     ```
 
-    This will install the Azure provider package, which makes the the Azure Data Factory connection type available in Airflow.
+    This will install the Azure provider package, which makes the Azure Data Factory connection type available in Airflow.
 
-2. Restart or start your local Airflow using `astro dev restart` to apply the changes in `requirements.txt`.
+2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
-3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, select the connection type as **Azure Data Factory**.
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose **Azure Data Factory** as the connection type.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
@@ -66,7 +66,7 @@ Complete the following steps to retrieve all of these values:
 
 :::tip
 
-To use the same connection for multiple data factories or multiple resource groups, you can skip the **Resource Group** and **Factory Name** fields in the connection configuration. Instead, you can pass these values to the `default_args` of a DAG or as parameters to the AzureDataFactoryOperator. For example:
+To use the same connection for multiple data factories or multiple resource groups, skip the **Resource Group** and **Factory Name** fields in the connection configuration. Instead, you can pass these values to the `default_args` of a DAG or as parameters to the AzureDataFactoryOperator. For example:
 
 ```python
   "azure_data_factory_conn_id": "adf",
@@ -84,5 +84,5 @@ Airflow uses the [`azure-mgmt-datafactory`](https://pypi.org/project/azure-mgmt-
 
 - [Apache Airflow Microsoft Azure provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/6.1.1/connections/adf.html)
 - [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
-- [Azure Data Factory modules](https://registry.astronomer.io/modules?query=azuredatafactory) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=azure+data+factory) in the Astronomer Registry.
+- [Azure Data Factory modules](https://registry.astronomer.io/modules?query=azuredatafactory) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=azure+data+factory) in the Astronomer Registry
 - [Run Azure Data Factory pipelines in Airflow](airflow-azure-data-factory-integration.md)
