@@ -39,13 +39,13 @@ See [Manage the Celery executor](celery-executor.md) to learn more about how to 
 
 ### Kubernetes executor
 
-The Kubernetes executor runs each task in an individual container. For each task that needs to run, the executor dynamically launches a Kubernetes Pod on your Astro Cluster for the task. When the task completes, the Pod terminates and its resources are released to the cluster. 
+The Kubernetes executor runs each task in an individual container. For each task that needs to run, the executor dynamically launches a Kubernetes Pod on your Astro cluster to run the task. When the task completes, the Pod terminates and its resources are released to the cluster. 
 
 On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
 The Kubernetes executor is a good option for some use cases. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
-- You have long-running tasks that may require more than 24 hours to execute.
+- You have long-running tasks that might require more than 24 hours to execute.
 - Your tasks are compute-intensive or you are processing large volumes of data within the task. Kubernetes executor tasks run separately in a dedicated Pod per task. 
 - Your tasks can tolerate some startup latency (often seconds)
 - Your tasks require task or dependency isolation.
@@ -57,6 +57,6 @@ If you're running a high task volume or cannot tolerate startup latency, Astrono
 
 :::tip
 
-If only some of your tasks need an isolated execution environment, consider using the [KubernetesPodOperator](kubernetespodoperator.md) with the Celery executor.
+The Kubernetes executor is primarily used for resource optimization. If you want more control over the environment and dependencies that your tasks run with, consider using the [KubernetesPodOperator](kubernetespodoperator.md) with either the Celery executor or Kubernetes executor.
 
 :::
