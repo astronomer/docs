@@ -59,7 +59,6 @@ You can host Astro Hybrid clusters in the following AWS regions:
 | `ap-south-1`     | Asia Pacific (Mumbai)     |
 | `ca-central-1`   | Canada (Central)          |
 | `eu-central-1`   | Europe (Frankfurt)        |
-| `eu-north-1`     | Europe (Stockholm)        |
 | `eu-south-1`     | Europe (Milan)            |
 | `eu-west-1`      | Europe (Ireland)          |
 | `eu-west-2`      | Europe (London)           |

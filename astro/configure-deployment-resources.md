@@ -149,11 +149,11 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
 3. Configure the following values:
 
     - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
-    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
+    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment.
+    - **Default Pod Size** > **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
+    - **Default Pod Size** > **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
 
 Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
-
-The Cloud UI also shows the **Default CPU** and **Default Memory** for your _default Pod_. If you don't configure CPU or memory for a task in your DAG code, the task runs in the default Pod with these default resources. 
 
 :::info Alternative Astro Hybrid setup
 

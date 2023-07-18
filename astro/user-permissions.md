@@ -26,6 +26,7 @@ An Organization role grants a user or API token some level of access to an Astro
 | ---------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
 | View Organization details and user membership                    | ✔️                       | ✔️                              | ✔️                      |
 | View lineage metadata in the **Lineage** tab                     | ✔️                       | ✔️                              | ✔️                      |
+| List all Workspaces in the Organization                          | ✔️                       | ✔️                              | ✔️                      |
 | Update Organization billing information and settings             |                         | ✔️                              | ✔️                      |
 | View usage for all Workspaces in the **Usage** tab               |                         | ✔️                              | ✔️                      |
 | Create a new Workspace                                           |                         |                                | ✔️                      |
@@ -33,9 +34,9 @@ An Organization role grants a user or API token some level of access to an Astro
 | Update roles and permissions of existing Organization users      |                         |                                | ✔️                      |
 | Invite a new user to an Organization                             |                         |                                | ✔️                      |
 | Remove a user from an Organization                               |                         |                                | ✔️                      |
-| Create, update, and delete Organization API tokens                                   |                         |                                | ✔️                      |
+| Create, update, and delete Organization API tokens               |                         |                                | ✔️                      |
 | Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                      |
-| Create, update, and delete a Team  |                         |                               | ✔️                      |
+| Create, update, and delete a Team                                |                         |                                | ✔️                      |
 
 To manage users in a organization, see [Manage users](add-user.md). To manage the Organization permissions of your API tokens, see [Organization API tokens](organization-api-tokens.md).
 
@@ -60,11 +61,11 @@ A Workspace role grants a user or API token some level of access to a specific W
 | Create, update, and delete Astro Cloud IDE projects |                      | ✔️                    | ✔️                   |
 | View Airflow connections and Variables              |                      |                      | ✔️                   |
 | Update Airflow connections and Variables            |                      |                      | ✔️                   |
-| Create, Update, and Delete API Keys                  |                      |                      | ✔️                   |
+| Create, Update, and Delete API Keys                 |                      |                      | ✔️                   |
 | Update user roles and permissions                   |                      |                      | ✔️                   |
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
-| Assign Teams to or remove from Workspaces    |                      |                      | ✔️                   |
-| Create, update and delete Workspace API tokens                         |                      |                      | ✔️                   |
+| Assign Teams to or remove from Workspaces           |                      |                      | ✔️                   |
+| Create, update and delete Workspace API tokens      |                      |                      | ✔️                   |
 
 To manage a user's Workspace permissions, see [Manage users](add-user.md#add-a-user-to-a-workspace).
 

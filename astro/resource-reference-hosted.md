@@ -91,14 +91,28 @@ Currently, dedicated clusters are available on the following clouds and regions:
     ]}>
 <TabItem value="aws">
 
-| Code             | Region                |
-| ---------------- | --------------------- |
-| `ap-northeast-1` | Asia Pacific (Tokyo)  |
-| `ap-southeast-2` | Asia Pacific (Sydney) |
-| `eu-central-1`   | Europe (Frankfurt)    |
-| `eu-west-1`      | Europe (Ireland)      |
-| `us-east-1`      | US East (N. Virginia) |
-| `us-west-2`      | US West (Oregon)      |
+| Code             | Name                      |
+| ---------------- | ------------------------- |
+| `af-south-1`     | Africa (Cape Town)        |
+| `ap-east-1`      | Asia Pacific (Hong Kong)  |
+| `ap-northeast-1` | Asia Pacific (Tokyo)      |
+| `ap-northeast-2` | Asia Pacific (Seoul)      |
+| `ap-northeast-3` | Asia Pacific (Osaka)      |
+| `ap-southeast-1` | Asia Pacific (Singapore)  |
+| `ap-southeast-2` | Asia Pacific (Sydney)     |
+| `ap-south-1`     | Asia Pacific (Mumbai)     |
+| `ca-central-1`   | Canada (Central)          |
+| `eu-central-1`   | Europe (Frankfurt)        |
+| `eu-south-1`     | Europe (Milan)            |
+| `eu-west-1`      | Europe (Ireland)          |
+| `eu-west-2`      | Europe (London)           |
+| `eu-west-3`      | Europe (Paris)            |
+| `me-south-1`     | Middle East (Bahrain)     |
+| `sa-east-1`      | South America (São Paulo) |
+| `us-east-1`      | US East (N. Virginia)     |
+| `us-east-2`      | US East (Ohio)            |
+| `us-west-1`      | US West (N. California)   |
+| `us-west-2`      | US West (Oregon)          |
 
 </TabItem>
 
@@ -116,15 +130,41 @@ Currently, dedicated clusters are available on the following clouds and regions:
 
 <TabItem value="gcp">
 
-| Code                   | Region                  |
-| ---------------------- | ----------------------- |
-| `asia-northeast1`      | Tokyo, Asia             |
-| `australia-southeast1` | Sydney, Australia       |
-| `europe-west1`         | Belgium, Europe         |
-| `europe-west2`         | England, Europe         |
-| `us-central1`          | Iowa, North America     |
-| `us-east4`             | Virginia, North America |
-| `us-west1`             | Oregon, North America   |
+| Code                      | Name                          |
+| ------------------------- | ----------------------------- |
+| `asia-east1`              | Taiwan, Asia                  |
+| `asia-northeast1`         | Tokyo, Asia                   |
+| `asia-northeast2`         | Osaka, Asia                   |
+| `asia-northeast3`         | Seoul, Asia                   |
+| `asia-south1`             | Mumbai, Asia                  |
+| `asia-south2`             | Delhi, Asia                   |
+| `asia-southeast1`         | Singapore, Asia               |
+| `asia-southeast2`         | Jakarta, Asia                 |
+| `australia-southeast1`    | Sydney, Australia             |
+| `australia-southeast2`    | Melbourne, Australia          |
+| `europe-central2`         | Warsaw, Europe                |
+| `europe-north1`           | Finland, Europe               |
+| `europe-southwest1`       | Madrid, Europe                |
+| `europe-west1`            | Belgium, Europe               |
+| `europe-west2`            | England, Europe               |
+| `europe-west3`            | Frankfurt, Europe             |
+| `europe-west4`            | Netherlands, Europe           |
+| `europe-west6`            | Zurich, Europe                |
+| `europe-west8`            | Milan, Europe                 |
+| `europe-west9`            | Paris, Europe                 |
+| `northamerica-northeast1` | Montreal, North America       |
+| `northamerica-northeast2` | Toronto, North America        |
+| `southamerica-east1`      | Sau Paolo, South America      |
+| `southamerica-west1`      | Santiago, South America       |
+| `us-central1`             | Iowa, North America           |
+| `us-east1`                | South Carolina, North America |
+| `us-east4`                | Virginia, North America       |
+| `us-east5`                | Columbus, North America       |
+| `us-south1`               | Dallas, North America         |
+| `us-west1`                | Oregon, North America         |
+| `us-west2`                | Los Angeles, North America    |
+| `us-west3`                | Salt Lake City, North America |
+| `us-west4`                | Nevada, North America         |
 
 </TabItem>
 
