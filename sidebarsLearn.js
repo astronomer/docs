@@ -192,9 +192,9 @@ module.exports = {
               description: 'Use the following guides to quickly set up Airflow connections to external systems.',
             },
             items: [
-              'azure-data-factory',
-              'bigquery',
-              'databricks'
+              'connections/azure-data-factory',
+              'connections/bigquery',
+              'connections/databricks'
             ],
           },
           {
