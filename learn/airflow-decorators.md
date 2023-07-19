@@ -11,9 +11,6 @@ import airflow_decorator_example from '!!raw-loader!../code-samples/dags/airflow
 import airflow_decorators_traditional_mixing from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorators_traditional_mixing.py';
 import airflow_decorators_sdk_example from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorators_sdk_example.py';
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 The _TaskFlow API_ is a functional API for using decorators to define DAGs and tasks, which simplifies the process for passing data between tasks and defining dependencies. You can use TaskFlow decorator functions (for example, `@task`) to pass data between tasks by providing the output of one task as an argument to another task. Decorators are a simpler, cleaner way to define your tasks and DAGs and can be used in combination with traditional operators.
 
 In this guide, you'll learn about the benefits of decorators and the decorators available in Airflow. You'll also review an example DAG and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
@@ -96,6 +93,7 @@ The decorated version of the DAG eliminates the need to explicitly instantiate t
 
 Here are some other things to keep in mind when using decorators:
 
+- You must call all decorated functions in your DAG file so that Airflow can register the task or DAG. For example, `taskflow()` is called at the end of the previous example to call the DAG function. 
 - When you define a task, the `task_id` defaults to the name of the function you decorated. If you want to change this behavior, you can pass a `task_id` to the decorator as shown in the `extract` task example. Similarly, other [BaseOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.BaseOperator) task-level parameters, such as retries or pools, can be defined within the decorator:
 
     ```python
@@ -117,7 +115,6 @@ Here are some other things to keep in mind when using decorators:
     taskflow_func.override(retries=5, pool="my_other_pool", task_id="greeting")()
     ```
 
-- You must call all decorated functions in your DAG file so that Airflow can register the task or DAG. For example, `taskflow()` is called at the end of the previous example to call the DAG function. 
 - If you call the same task multiple times and do not override the `task_id`, Airflow creates multiple unique task IDs by appending a number to the end of the original task ID (for example, `say_hello`, `say_hello__1`, `say_hello__2`, etc). You can see the result of this in the following example:
 
     ```python
@@ -174,7 +171,7 @@ Here are some other things to keep in mind when using decorators:
 
 View more examples on how to use Airflow task decorators in the [Astronomer webinars](https://www.astronomer.io/events/webinars/writing-functional-dags-with-decorators/) and the Apache Airflow [TaskFlow API tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html).
 
-### Mixing TaskFlow decorators with traditional operators
+## Mixing TaskFlow decorators with traditional operators
 
 If you have a DAG that uses `PythonOperator` and other operators that don't have decorators, you can easily combine decorated functions and traditional operators in the same DAG. For example, you can add an `EmailOperator` to the previous example by updating your code to the following:
 
@@ -184,17 +181,7 @@ Note that when adding traditional operators, dependencies are still defined usin
 
 You can pass information between decorated tasks and traditional operators using [XCom](airflow-passing-data-between-tasks.md). See the following tabs for examples.
 
-<Tabs
-    defaultValue="two-flow"
-    groupId="mixing-decorators-with-traditional-operators"
-    values={[
-        {label: 'TaskFlow to TaskFlow', value: 'two-flow'},
-        {label: 'TaskFlow to traditional operator', value: 'flow-traditional'},
-        {label: 'Traditional operator to TaskFlow', value: 'traditional-flow'},
-        {label: 'Traditional operator to traditional operator', value: 'two-traditional'},
-    ]}>
-
-<TabItem value="two-flow">
+### TaskFlow to TaskFlow
 
 If both tasks are defined using the TaskFlow API, you can pass information directly between them by providing the called task function as a positional argument to the downstream task. Airflow will infer the dependency between the two tasks.
 
@@ -210,8 +197,8 @@ def plus_10_TF(x):
 plus_10_TF(get_23_TF())  # plus_10_TF will return 33
 # or `plus_10_TF(x=get_23_TF())` if you want to use kwargs
 ```
-</TabItem>
-<TabItem value="flow-traditional">
+
+### TaskFlow to traditional operator
 
 You can access the returned value of a traditional operator using the `.output` attribute of the task object and pass it to a downstream task defined using Airflow decorators. Airflow will infer the dependency between the two tasks.
 
@@ -232,8 +219,7 @@ plus_10_TF(get_23_task.output)  # plus_10_TF will return 33
 # or `plus_10_TF(x=get_23_task.output)` if you want to use kwargs
 ```
 
-</TabItem>
-<TabItem value="traditional-flow">
+### Traditional operator to TaskFlow
 
 When using the result from an upstream TaskFlow task in a traditional task you can provide the called decorated task directly to a parameter in the traditional operator. Airflow will infer the dependency between the two tasks.
 
@@ -254,8 +240,7 @@ plus_10_task = PythonOperator(
 # plus_10_task will return 33
 ```
 
-</TabItem>
-<TabItem value="two-traditional">
+### Traditional operator to traditional operator
 
 For the sake of completeness the below example shows how to use the output of one traditional operator in another traditional operator by accessing the `.output` attribute of the upstream task. The dependency has to be defined explicitly using bit-shift operators.
 
@@ -282,9 +267,6 @@ plus_10_task = PythonOperator(
 # when only using traditional operators, define dependencies explicitly
 get_23_task >> plus_10_task
 ```
-
-</TabItem>
-</Tabs>
 
 :::info
 
