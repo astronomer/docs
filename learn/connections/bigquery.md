@@ -133,7 +133,7 @@ If you're running Airflow in a GKE cluster, complete the following steps:
     - **Connection Id**: Enter a name for the connection.
     - **Keyfile JSON**: Enter the contents of the key file.
 
-5. Click **Test connection**. When the connection test succeeds, click **Save**.
+5. Click **Test connection**. After the connection test succeeds, click **Save**.
 
     ![gcp-connection-key-in-ui](/img/examples/connection-gcp-key-in-ui.png)
 
@@ -160,7 +160,7 @@ If you're running Airflow in a GKE cluster, complete the following steps:
     - **Connection Id**: Enter a name for the connection.
     - **Keyfile Path**: Enter the path of your key file.
 
-6. Click **Test connection**. When the connection test succeeds, click **Save**.
+6. Click **Test connection**. After the connection test succeeds, click **Save**.
 
     ![gcp-connection-key-in-airflow-container](/img/examples/connection-gcp-key-in-airflow-container.png)
 
@@ -186,7 +186,7 @@ If you're running Airflow in a GKE cluster, complete the following steps:
     - **Keyfile Secret Project Id**: Enter the **ID** of the Google Cloud project.
     - **Keyfile Secret Name**: Enter the ID of your secret name.
 
-5. Click **Test connection**. When the connection test succeeds, click **Save**.
+5. Click **Test connection**. After the connection test succeeds, click **Save**.
 
     ![gcp-connection-key-in-secret-manager](/img/examples/connection-gcp-key-in-secret-manager.png)
 
@@ -211,7 +211,7 @@ If you're running Airflow in a GKE cluster, complete the following steps:
     - **Connection Id**: Enter a name for the connection.
     - **Project Id**: Enter the **ID** of the Google Cloud project.
 
-5. Click **Test connection**. When the connection test succeeds, click **Save**.
+5. Click **Test connection**. After the connection test succeeds, click **Save**.
 
     ![gcp-connection-using-workload-identity](/img/examples/connection-gcp-workload-identity.png)
 
