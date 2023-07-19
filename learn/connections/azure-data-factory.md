@@ -61,7 +61,7 @@ Complete the following steps to retrieve all of these values:
     - **Resource Group Name**: Enter your data factory **Resource group**.
     - **Factory Name**: Enter your data factory **Name**.
 
-5. Click **Test connection**. After the connection test succeeds, click **Save**.
+5. Click **Test**. After the connection test succeeds, click **Save**.
 
 ![azure-connection-data-factory](/img/examples/connection-azure-data-factory.png)
 

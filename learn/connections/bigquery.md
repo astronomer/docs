@@ -2,7 +2,7 @@
 title: "Create a BigQuery connection in Airflow"
 id: bigquery
 sidebar_label: BigQuery
-description: Learn how to create a BigQuery connection.
+description: Learn how to create a BigQuery connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/bigquery.png' }
 ---
 
@@ -134,7 +134,7 @@ If you're running Airflow in a GKE cluster, complete the following steps:
     - **Connection Id**: Enter a name for the connection.
     - **Keyfile JSON**: Enter the contents of the key file.
 
-5. Click **Test connection**. After the connection test succeeds, click **Save**.
+5. Click **Test**. After the connection test succeeds, click **Save**.
 
     ![gcp-connection-key-in-ui](/img/examples/connection-gcp-key-in-ui.png)
 
