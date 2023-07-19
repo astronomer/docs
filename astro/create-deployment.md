@@ -33,6 +33,8 @@ If you prefer, you can also run `astro deployment create` to create a Deployment
 
 2. On the **Deployments** page, click **+ Deployment**.
 
+    ![Deployment creation button](/img/docs/create-button.png)
+
 3. Complete the following fields:
     - **Basic**  
 
