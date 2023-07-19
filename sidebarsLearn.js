@@ -185,10 +185,10 @@ module.exports = {
           'vscode-local-dev',
           {
             type: 'category',
-            label: 'Airflow connection examples',
+            label: 'Airflow connections',
             link: {
               type: 'generated-index',
-              title: 'Airflow connection examples',
+              title: 'Airflow connections',
               description: 'Use the following guides to quickly set up Airflow connections to external systems.',
             },
             items: [

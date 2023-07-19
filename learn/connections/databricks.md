@@ -3,6 +3,7 @@ title: "Creating a Databricks Connection"
 id: databricks
 sidebar_label: Databricks
 description: Learn how to create a Databricks connection.
+sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
 
 [Databricks](https://www.databricks.com/) is a SaaS product for data processing using Apache Spark. Integrating Databricks with Airflow lets you manage Databricks clusters, as well as execute and monitor Databricks jobs from an Airflow DAG.

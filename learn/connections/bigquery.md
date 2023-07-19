@@ -3,6 +3,7 @@ title: "Create a BigQuery connection in Airflow"
 id: bigquery
 sidebar_label: BigQuery
 description: Learn how to create a BigQuery connection.
+sidebar_custom_props: { icon: 'img/integrations/bigquery.png' }
 ---
 
 import Tabs from '@theme/Tabs';

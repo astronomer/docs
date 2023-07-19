@@ -3,6 +3,7 @@ title: "Create an Azure Data Factory connection in Airflow"
 id: azure-data-factory
 sidebar_label: Azure Data Factory
 description: Learn how to create an Azure Data Factory connection in Airflow.
+sidebar_custom_props: { icon: 'img/integrations/azure-data-factory.png' }
 ---
 
 [Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/) (ADF) is a cloud-based data integration and transformation service used to build data pipelines. Integrating ADF with Airflow allows you to run ADF pipelines and check their status from an Airflow DAG. 
