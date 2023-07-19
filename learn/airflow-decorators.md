@@ -1,6 +1,6 @@
 ---
 title: "Introduction to the TaskFlow API and Airflow decorators"
-sidebar_label: "TaskFlow API & Decorators"
+sidebar_label: "TaskFlow API & decorators"
 description: "An overview of Airflow decorators and how they can improve the DAG authoring experience."
 id: airflow-decorators
 ---
@@ -14,7 +14,7 @@ import airflow_decorators_sdk_example from '!!raw-loader!../code-samples/dags/ai
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The TaskFlow API is a functional API that allows you to explicitly declare information being passed between tasks while inferring task dependencies. In a nutshell, when using the TaskFlow decorator functions (e.g. `@task`) you can pass data between tasks by providing the output of one task as an argument to another task. Additionally using Airflow decorators often reduces the amount of code needed to define Airflow tasks. Decorators are a simpler, cleaner way to define your tasks and DAGs and can be used in combination with traditional operators.
+The _TaskFlow API_ is a functional API for using decorators to define DAGs and tasks, which simplifies the process for passing data between tasks and defining dependencies. You can use TaskFlow decorator functions (for example, `@task`) to pass data between tasks by providing the output of one task as an argument to another task. Decorators are a simpler, cleaner way to define your tasks and DAGs and can be used in combination with traditional operators.
 
 In this guide, you'll learn about the benefits of decorators and the decorators available in Airflow. You'll also review an example DAG and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
 
@@ -27,9 +27,8 @@ To get the most out of this guide, you should have an understanding of:
 
 ## What is a decorator?
 
-In Python, [decorators](https://realpython.com/primer-on-python-decorators/) are functions that take another function as an argument and extend the behavior of that function. For example, the `@multiply_by_100_decorator` below takes in any function as the `decorated_function` argument and will return the result of that function multiplied by 100. 
+In Python, [decorators](https://realpython.com/primer-on-python-decorators/) are functions that take another function as an argument and extend the behavior of that function. For example, the `@multiply_by_100_decorator` takes any function as the `decorated_function` argument and returns the result of that function multiplied by 100. 
 
-In the context of Airflow, decorators contain much more functionality than this simple example, but the basic idea is the same: the Airflow decorator function extends the bevhavior of a normal Python function to turn it into an Airflow task, task group or DAG.
 
 ```python
 # definition of the decorator function
@@ -58,15 +57,17 @@ print(add(1, 9))  # prints 1000
 print(subtract(4, 2))  # prints 200
 ```
 
+In the context of Airflow, decorators contain more functionality than this simple example, but the basic idea is the same: the Airflow decorator function extends the behavior of a normal Python function to turn it into an Airflow task, task group or DAG.
+
 ## When to use the TaskFlow API
 
 The purpose of the TaskFlow API in Airflow is to simplify the DAG authoring experience by eliminating the boilerplate code required by traditional operators. The result can be cleaner DAG files that are more concise and easier to read.
 
-In general, whether to use the TAskFlow API is a matter of developer preference and style. In most cases, a TaskFlow decorator and the corresponding traditional operator will have the same functionality. You can also easily [mix decorators and traditional operators](#mixing-decorators-with-traditional-operators) within your DAG if your use case requires it.
+In general, whether you use the TAskFlow API is a matter of your own preference and style. In most cases, a TaskFlow decorator and the corresponding traditional operator will have the same functionality. You can also [mix decorators and traditional operators](#mixing-decorators-with-traditional-operators) within a single DAG.
 
 ## How to use the TaskFlow API
 
-The TaskFlow API allows you to write your Python tasks with decorators and handles passing data between tasks using XCom and inferring task dependencies automatically.
+The TaskFlow API allows you to write your Python tasks with decorators. It handles passing data between tasks using XCom and infers task dependencies automatically.
 
 Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. Under the **Traditional syntax** tab below, there is a basic ETL DAG with tasks to get data from an API, process the data, and store it. Click on the **Decorators** tab to see the same DAG written using Airflow decorators.
 
@@ -95,7 +96,7 @@ The decorated version of the DAG eliminates the need to explicitly instantiate t
 
 Here are some other things to keep in mind when using decorators:
 
-- When you define a task, the `task_id` will default to the name of the function you decorated. If you want to change this behavior, you can simply pass a `task_id` to the decorator as was done in the `extract` task above. Similarly, other [BaseOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.BaseOperator) task-level parameters such as retries or pools can be defined within the decorator:
+- When you define a task, the `task_id` defaults to the name of the function you decorated. If you want to change this behavior, you can pass a `task_id` to the decorator as shown in the `extract` task example. Similarly, other [BaseOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.BaseOperator) task-level parameters, such as retries or pools, can be defined within the decorator:
 
     ```python
     @task(
@@ -109,14 +110,15 @@ Here are some other things to keep in mind when using decorators:
     taskflow_func()  # this creates a task with the task_id `say_hello_world`
     ```
 
-- You can override task-level parameters when calling the task by using the `.override()` method. Note the `()` at the end of the line, which calls the task with the overridden parameters applied.
+- Override task-level parameters when you call the task by using the `.override()` method. The `()` at the end of the line calls the task with the overridden parameters applied.
 
     ```python
     # this creates a task with the task_id `greeting`
     taskflow_func.override(retries=5, pool="my_other_pool", task_id="greeting")()
     ```
 
-- For any decorated function in your DAG file, you must call them so that Airflow can register the task or DAG. For example `taskflow()` is called at the end of the DAG above to call the DAG function. Every task defined using decorators has to be called as shown in the code snippet below. If you call the same task multiple times and do not override the `task_id`, multiple tasks will be created in the DAG with automatically generated unique task IDs by appending a unique number to the end of the original task id (e.g. `say_hello`, `say_hello__1`, `say_hello__2` etc). 
+- You must call all decorated functions in your DAG file so that Airflow can register the task or DAG. For example, `taskflow()` is called at the end of the previous example to call the DAG function. 
+- If you call the same task multiple times and do not override the `task_id`, Airflow creates multiple unique task IDs by appending a number to the end of the original task ID (for example, `say_hello`, `say_hello__1`, `say_hello__2`, etc). You can see the result of this in the following example:
 
     ```python
     # task definition
@@ -135,7 +137,7 @@ Here are some other things to keep in mind when using decorators:
     say_hello("Butter")
     ```
 
-- You can decorate a function that is imported from another file as shown in the code snippet below:
+- You can decorate a function that is imported from another file as shown in the following code snippet:
 
     ```python
     from include.my_file import my_function
@@ -147,7 +149,7 @@ Here are some other things to keep in mind when using decorators:
     
     This is recommended in cases where you have lengthy Python functions since it will make your DAG file easier to read.
 
-- You can assign the output of a called decorated task to a Python object to be passed as an argument into another decorated task. This is helpful when the output of one decorated task is needed in several downstream functions and to make DAGs with complicated dependencies more legible. 
+- You can assign the output of a called decorated task to a Python object to be passed as an argument into another decorated task. This is helpful when the output of one decorated task is needed in several downstream functions, as it makes the DAG more legible. 
 
     ```python
     @task 
@@ -170,7 +172,7 @@ Here are some other things to keep in mind when using decorators:
     gift_a_fruit(my_fruits)
     ```
 
-Get more examples on how to use Airflow task decorators in this [Astronomer webinar](https://www.astronomer.io/events/webinars/writing-functional-dags-with-decorators/) and this Apache Airflow [TaskFlow API tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html).
+View more examples on how to use Airflow task decorators in the [Astronomer webinars](https://www.astronomer.io/events/webinars/writing-functional-dags-with-decorators/) and the Apache Airflow [TaskFlow API tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html).
 
 ### Mixing TaskFlow decorators with traditional operators
 
@@ -180,16 +182,16 @@ If you have a DAG that uses `PythonOperator` and other operators that don't have
 
 Note that when adding traditional operators, dependencies are still defined using bit-shift operators.
 
-You can pass information between decorated tasks and traditional operators using [XCom](airflow-passing-data-between-tasks.md). See the tabs below for examples.
+You can pass information between decorated tasks and traditional operators using [XCom](airflow-passing-data-between-tasks.md). See the following tabs for examples.
 
 <Tabs
     defaultValue="two-flow"
     groupId="mixing-decorators-with-traditional-operators"
     values={[
         {label: 'TaskFlow to TaskFlow', value: 'two-flow'},
-        {label: 'TaskFlow to Traditional operator', value: 'flow-traditional'},
+        {label: 'TaskFlow to traditional operator', value: 'flow-traditional'},
         {label: 'Traditional operator to TaskFlow', value: 'traditional-flow'},
-        {label: 'Traditional operator to Traditional operator', value: 'two-traditional'},
+        {label: 'Traditional operator to traditional operator', value: 'two-traditional'},
     ]}>
 
 <TabItem value="two-flow">
@@ -286,13 +288,13 @@ get_23_task >> plus_10_task
 
 :::info
 
-If you want to access any XCom that is not the returned value an operator, you can use the `xcom_pull` method inside a function, see [how to access ti / task_instance in the Airflow context guide](airflow-context.md#ti--task_instance) for an example. Traditional operators can also pull from XCom using [Jinja templates](templating.md) in templateable parameters.
+If you want to access any XCom that is not the returned value from an operator, you can use the `xcom_pull` method inside a function, see [how to access ti / task_instance in the Airflow context](airflow-context.md#ti--task_instance) for an example. Traditional operators can also pull from XCom using [Jinja templates](templating.md) in templateable parameters.
 
 :::
 
 ## Astro Python SDK decorators
 
-The [Astro Python SDK](https://github.com/astronomer/astro-sdk) provides decorators and modules that allow data engineers to think in terms of data transformations rather than Airflow concepts when writing DAGs. The goal is to allow DAG writers to focus on defining *execution* logic in SQL and Python without having to worry about orchestration logic or the specifics of underlying databases. 
+The [Astro Python SDK](https://github.com/astronomer/astro-sdk) provides decorators and modules that let you write data pipelines in terms of data transformations rather than Airflow concepts. You can focus on defining *execution* logic in SQL and Python without having to worry about orchestration logic or the specifics of underlying databases. 
 
 The code snippet below shows how to use the `@aql.transform` and `@aql.dataframe` decorators to create transformation tasks. 
 
