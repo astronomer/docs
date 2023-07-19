@@ -7,9 +7,10 @@ module.exports = {
       link: {
         type: 'generated-index',
         title: 'Get started',
-        description: 'Get started with Airflow.',
+        description: 'Get started with Apache Airflow.',
       },
       items: [
+        'intro-to-airflow',
         'airflow-quickstart',
         {
           type: 'category',
@@ -47,7 +48,6 @@ module.exports = {
             'connections',
             'dags',
             'what-is-a-hook',
-            'intro-to-airflow',
             'managing-airflow-code',
             'airflow-openlineage',
             'what-is-an-operator',
