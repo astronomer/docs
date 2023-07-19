@@ -46,12 +46,12 @@ Each virtualized instance of your worker type is a _worker_. Celery workers can 
 
 The following table lists all available worker types on Astro Deployments. 
 
-| Worker Type | vCPU | Memory |
-| ----------- | ---- | ------ |
-| A5          | 1    | 2G     |
-| A10         | 2    | 4G     |
-| A20         | 4    | 8G     |
-| A40         | 8    | 16G    |
+| Worker Type | vCPU | Memory | Max task concurrency |
+| ----------- | ---- | ------ | -------------------- |
+| A5          | 1    | 2G     | 15                   |
+| A10         | 2    | 4G     | 30                   |
+| A20         | 4    | 8G     | 60                   |
+| A40         | 8    | 16G    | 120                  |
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
 
