@@ -33,7 +33,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <HostedBadge/>
 
-You can now configure the default CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default resources to ensure that tasks always have enough CPU and memory to run successfully. See [Configure Deployment resources](https://docs.astronomer.io/astro/configure-deployment-resources#configure-kubernetes-pod-resources).
+You can now configure the default minimum CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default minimum resources to ensure that tasks always have enough CPU and memory to run successfully. See [Configure Deployment resources](https://docs.astronomer.io/astro/configure-deployment-resources#configure-kubernetes-pod-resources).
 
 ### New regions available on Astro Hosted
 
