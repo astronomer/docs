@@ -303,7 +303,7 @@ def transform_dataframe(df: pd.DataFrame):
 
 # the decorated functions can be used as tasks in a DAG, writing ELT/ETL logic in 
 # a functional style
-join_orders_customers(filter_orders(orders_data), customers_table)
+join_orders_customers(filter_orders(filtered_orders_table), customers_table)
 ```
 
 The Astro Python SDK offers much more functionality that greatly simplifies DAG authoring, for example a decorator to load files from object storage directly into a relational table while inferring its schema. To learn more about the Astro Python SDK, check out: 
