@@ -30,7 +30,7 @@ To complete this tutorial, you'll need to know:
 
 ## Prerequisites
 
-- The [Astro Cli](https://docs.astronomer.io/astro/cli/install-cli).
+- The [Astro ClI](https://docs.astronomer.io/astro/cli/install-cli).
 - A GitHub account with a personal access token and at least one repository. If you don’t have a GitHub repository you can follow the [steps in the GitHub documentation](https://docs.github.com/en/get-started/quickstart/create-a-repo) on how to create one.
 
 :::info
@@ -74,7 +74,7 @@ To run Airflow data pipelines locally and on Astro, you first need to create an 
 ## Step 2: Create your DAG
 
 1. Create a new Python file in the `dags` directory of your Astro project called `my_second_dag.py`.
-2. Copy the code by clicking on the **`</>`** tag in the middle of [this page on the Astronomer Registry](https://registry.astronomer.io/dags/my_second_dag/versions/latest).
+2. Open the Astronomer Registry page for [`my_second_dag`](https://registry.astronomer.io/dags/my_second_dag/versions/latest). Click **Code** and copy the DAG code that appears.
 
     ![Copy Code from the registry](/img/tutorials/get-started-with-airflow-part-2_registry_code_copy.png)
 
@@ -94,7 +94,7 @@ Your DAG uses operators from two Airflow provider packages: the [HTTP provider](
 
     ![GitHub Provider](/img/tutorials/get-started-with-airflow-part-2_GitHubProvider.png)
 
-3. Copy the provider name and version by clicking on **Use Provider** in the top right corner.
+3. Copy the provider name and version by clicking **Use Provider** in the top right corner.
 4. Paste the provider name and version into the `requirements.txt` file of your Astro project. Make sure to only add `apache-airflow-providers-github=<version>` without `pip install`.
 5. Restart your Airflow environment by running `astro dev restart`. Unlike DAG code changes, package dependency changes require a complete restart of Airflow.
 
@@ -188,7 +188,7 @@ Next, the DAG context is instantiated using the [`@dag` decorator](airflow-decor
 def my_second_dag():
 ```
 
-The DAG itself has two tasks. The first task uses the GithubTagSensor to check whether a tag named `my_awesome_tag` has been added to your GitHub repository. It utilizes the Airflow variable (`my_github_repo`) and connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The `Variable.get()` method uses `apache/airflow` as the default value, if it has not been defined by the user. The sensor checks for the tag every 30 seconds and will time out after one day. It is best practice to always set a `timeout` because the default value is quite long at 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
+The DAG itself has two tasks. The first task uses the GithubTagSensor to check whether a tag named `my_awesome_tag` has been added to your GitHub repository. It utilizes the Airflow variable (`my_github_repo`) and connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The `Variable.get()` method uses `apache/airflow` as the default value if it has not been defined by the user. The sensor checks for the tag every 30 seconds and will time out after one day. It is best practice to always set a `timeout` because the default value is quite long at 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
 
 ```python
     tag_sensor = GithubTagSensor(
