@@ -42,21 +42,21 @@ deployment:
         description: ""
         runtime_version: 7.1.0
         # 'cloud_provider' and 'region' are used only when deployment_type=standard.
-        # These values are replaced by 'cluster_name' when deployment_type=dedicated or when you are using Astro Hybrid.
+        # These values are replaced by 'cluster_name' when deployment_type=dedicated or when deployment_type=HYBRID
         deployment_type: standard
         cloud_provider: gcp
         region: us-central1
 
         dag_deploy_enabled: true
         executor: CeleryExecutor
-        scheduler_size: small  # this is scheduler_au for Hybrid
+        scheduler_size: small  # this is scheduler_au for deployment_type=HYBRID
         scheduler_count: 1
         workspace_name: Data Science Workspace
-        is_high_availability: false  # this does not exist for Hybrid
+        is_high_availability: false  # this does not exist for deployment_type=HYBRID
         ci_cd_enforcement: false
         pod_cpu: 1
         pod_memory: 2
-    worker_queues:
+    worker_queues:  # Remove this section for executor=KubernetesExecutor
         - name: default
           max_worker_count: 10
           min_worker_count: 1
@@ -93,6 +93,7 @@ Astro Hybrid template files have the following differences compared to Astro Hos
 - `scheduler_au` replaces `scheduler_size`.
 - `deployment_type`, `cloud_provider`, and `region` don't exist.
 - `is_high_availability` doesn't exist.
+- `deployment_type` is `HYBRID`
 
 :::
 
