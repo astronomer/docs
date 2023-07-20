@@ -4,6 +4,9 @@ title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <head>
   <meta name="description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
   <meta name="og:description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
