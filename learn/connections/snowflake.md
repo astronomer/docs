@@ -13,7 +13,7 @@ sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 - Run a SnowPark python function
 - Load and export data to/from Snowflake
 
-This guide provides the basic setup for creating a Snowflake connection. For a complete integration tutorial, see [Orchestrate Snowflake Queries with Airflow](connections/airflow-snowflake.md). To run Snowpark queries in Airflow, see [Run Snowpark queries with the ExternalPythonOperator in Apache Airflow](connections/external-python-operator.md).
+This guide provides the basic setup for creating a Snowflake connection. For a complete integration tutorial, see [Orchestrate Snowflake Queries with Airflow](airflow-snowflake.md). To run Snowpark queries in Airflow, see [Run Snowpark queries with the ExternalPythonOperator in Apache Airflow](external-python-operator.md).
 
 ## Prerequisites
 
