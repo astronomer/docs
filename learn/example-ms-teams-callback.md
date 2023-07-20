@@ -6,7 +6,7 @@ sidebar_label: "Teams notifications"
 sidebar_custom_props: { icon: 'img/examples/ms_teams_logo.png' }
 ---
 
-This example shows how to set up Airflow notifications in a [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) channel by using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks). Teams notifications about DAG runs and tasks let you to quickly inform many ream members about the status of your data pipelines.
+This example shows how to set up Airflow notifications in a [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software) channel by using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks). Teams notifications about DAG runs and tasks let you quickly inform many team members about the status of your data pipelines.
 
 ## Before you start
 
