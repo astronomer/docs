@@ -97,7 +97,7 @@ The decorated version of the DAG eliminates the need to explicitly instantiate t
 Here are some other things to keep in mind when using decorators:
 
 - You must call all decorated functions in your DAG file so that Airflow can register the task or DAG. For example, `taskflow()` is called at the end of the previous example to call the DAG function. 
-- When you define a task, the `task_id` defaults to the name of the function you decorated. If you want to change this behavior, you can pass a `task_id` to the decorator as shown in the `extract` task example. Similarly, other [BaseOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.BaseOperator) task-level parameters, such as retries or pools, can be defined within the decorator:
+- When you define a task, the `task_id` defaults to the name of the function you decorated. If you want to change this behavior, you can pass a `task_id` to the decorator as shown in the `extract` task example. Similarly, other [BaseOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.BaseOperator) task-level parameters, such as `retries` or `pool`, can be defined within the decorator:
 
     ```python
     @task(
