@@ -14,38 +14,9 @@ Specifically, you can:
 - Store a Deployment file that represents the configurations of an existing Deployment. You can make changes to this file to update a Deployment faster and more easily than doing so with the Cloud UI or individual Astro CLI commands.
 - Use a template file from an existing Deployment to create another Deployment with the same configurations. This is an alternative to creating a new Deployment in the Cloud UI and manually copying configurations.
 
-Astro supports updating a Deployment programmatically with [Deployment API keys](api-keys.md), but you can't  automate creating a Deployment as part of a CI/CD workflow.
+Astro supports updating a Deployment programmatically with [Deployment API keys](api-keys.md), or creating deployments with [Workspace Tokens](workspace-api-tokens.md)
 
-## Inspect a Deployment
-
-You can inspect an existing Deployment with the Astro CLI to create a template file of its configurations. A template file is created in YAML or JSON format and includes all information about a Deployment except for its name, description, and metadata. You can use template files to programmatically create new Deployments based on configurations from an existing Deployment.
-
-To create a template file, run the following command. Replace `<deployment-template-file-name>` with your preferred name for the new template file. For example, `dev-deployment.yaml` or `dev-deployment.json`.
-
-```sh
-# save the template to a YAML file
-astro deployment inspect <deployment-name>  --template  > <deployment-template-file-name>
-# save the template to a JSON file
-astro deployment inspect <deployment-name>  --template --output json > <deployment-template-file-name>
-# print the template to your terminal
-astro deployment inspect <deployment-name>  --template
-```
-
-For more information about inspecting a Deployment, see [Astro CLI command reference](/cli/astro-deployment-inspect.md).
-
-:::tip
-
-To see the complete configuration of a Deployment directly in your terminal and without creating a template file, run:
-
-```
-astro deployment inspect <deployment-name>
-```
-
-The output of this command includes the name, description, and metadata that is unique to the Deployment.
-
-:::
-
-### Template file reference
+## Template file reference
 
 When you inspect a Deployment, a template file is created with the following sections:
 
@@ -70,16 +41,18 @@ deployment:
         name: ""
         description: ""
         runtime_version: 7.1.0
+        # 'cloud_provider' and 'region' are used only when deployment_type=standard.
+        # These values are replaced by 'cluster_name' when deployment_type=dedicated or when you are using Astro Hybrid.
         deployment_type: standard
-        # 'cloud_provider' and 'region' are used only when deployment_type=standard. These values are replaced by 'cluster_name' when deployment_type=dedicated.
         cloud_provider: gcp
         region: us-central1
+
         dag_deploy_enabled: true
         executor: CeleryExecutor
-        scheduler_size: small
+        scheduler_size: small  # this is scheduler_au for Hybrid
         scheduler_count: 1
         workspace_name: Data Science Workspace
-        is_high_availability: false
+        is_high_availability: false  # this does not exist for Hybrid
         ci_cd_enforcement: false
         pod_cpu: 1
         pod_memory: 2
@@ -97,8 +70,9 @@ deployment:
     alert_emails:
         - paola@cosmicenergy.io
         - viraj@cosmicenergy.io
+
 # This section is only populated when inspecting a Deployment without creating a template. 
-# Do not configure metadata when you create a new Deployment from a template. 
+# You can remove this metadata section when you create a new Deployment from a template. 
     metadata:
         deployment_id: 
         workspace_id: 
@@ -143,6 +117,35 @@ The `configuration` section contains all basic settings that you can configure f
 The `worker_queues` section defines the worker queues for a Deployment. All Deployment files must include configuration for a `default` worker queue. If you don't enter specific values for the `default` worker queue, default values based on the worker types available on your cluster are applied.
 
 See [Worker queues](configure-worker-queues.md).
+
+## Inspect an existing Deployment
+
+You can inspect an existing Deployment with the Astro CLI to create a template file of its configurations. A template file is created in YAML or JSON format and includes all information about a Deployment except for its name, description, and metadata. You can use template files to programmatically create new Deployments based on configurations from an existing Deployment.
+
+To create a template file from an existing deployment, run the following command. Replace `<deployment-template-file-name>` with your preferred name for the new template file. For example, `dev-deployment.yaml` or `dev-deployment.json`.
+
+```sh
+# save the template to a YAML file
+astro deployment inspect <deployment-name>  --template  > <deployment-template-file-name>
+# save the template to a JSON file
+astro deployment inspect <deployment-name>  --template --output json > <deployment-template-file-name>
+# print the template to your terminal
+astro deployment inspect <deployment-name>  --template
+```
+
+For more information about inspecting a Deployment, see [Astro CLI command reference](/cli/astro-deployment-inspect.md).
+
+:::tip
+
+To see the complete configuration of a Deployment directly in your terminal and without creating a template file, run:
+
+```
+astro deployment inspect <deployment-name>
+```
+
+The output of this command includes the name, description, and metadata that is unique to the Deployment.
+
+:::
 
 ## Create a Deployment from a template file
 
@@ -218,5 +221,6 @@ To update a Deployment using a Deployment file:
 ## See also
 
 - [Manage Deployment API keys](api-keys.md)
+- [Manage Workspace Tokens](workspace-api-tokens.md)
 - [Deploy Code](deploy-code.md)
 - [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)
