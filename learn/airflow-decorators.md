@@ -149,7 +149,7 @@ Here are some other things to keep in mind when using decorators:
     
     This is recommended in cases where you have lengthy Python functions since it will make your DAG file easier to read.
 
-- You can assign the output of a called decorated task to a Python object to be passed as an argument into another decorated task. This is helpful when the output of one decorated task is needed in several downstream functions, as it makes the DAG more legible. 
+- You can assign the output of a called decorated task to a Python object to be passed as an argument into another decorated task. This is helpful when the output of one decorated task is needed in several downstream functions. 
 
     ```python
     @task 
