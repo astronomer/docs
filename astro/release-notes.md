@@ -101,9 +101,6 @@ You can now create Hosted dedicated clusters in the following regions:
 
 See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#dedicated-cluster-configurations) for all available configurations. 
 
-### Additional improvements
-
-- Organization members can now view a list all Workspaces in an Organization. 
 
 ### Bug fixes
 
