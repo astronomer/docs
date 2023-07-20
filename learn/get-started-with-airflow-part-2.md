@@ -14,8 +14,6 @@ After you complete this tutorial, you'll be able to:
 - Add an Airflow provider to your Airflow environment.
 - Create and use an [Airflow connection](connections.md).
 - Create and use an [Airflow variable](airflow-variables.md).
-- Use the [GithubTagSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubTagSensor) to wait for a tag to be added to a [GitHub repository](https://github.com/).
-- Use the [SimpleHTTPOperator](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest/modules/SimpleHttpOperator) to query an API.
 
 ## Time to complete
 
