@@ -11,6 +11,9 @@ import airflow_decorator_example from '!!raw-loader!../code-samples/dags/airflow
 import airflow_decorators_traditional_mixing from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorators_traditional_mixing.py';
 import airflow_decorators_sdk_example from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorators_sdk_example.py';
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 The _TaskFlow API_ is a functional API for using decorators to define DAGs and tasks, which simplifies the process for passing data between tasks and defining dependencies. You can use TaskFlow decorator functions (for example, `@task`) to pass data between tasks by providing the output of one task as an argument to another task. Decorators are a simpler, cleaner way to define your tasks and DAGs and can be used in combination with traditional operators.
 
 In this guide, you'll learn about the benefits of decorators and the decorators available in Airflow. You'll also review an example DAG and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
