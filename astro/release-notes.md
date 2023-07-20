@@ -98,7 +98,6 @@ You can now create Hosted dedicated clusters in the following regions:
     - `us-west3` - Salt Lake City, North America 
     - `us-west4` - Nevada, North America         
 
-
 See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#dedicated-cluster-configurations) for all available configurations. 
 
 ### Bug fixes
