@@ -182,7 +182,7 @@ If you have a DAG that uses `PythonOperator` and other operators that don't have
 
 Note that when adding traditional operators, dependencies are still defined using bit-shift operators.
 
-You can pass information between decorated tasks and traditional operators using [XCom](airflow-passing-data-between-tasks.md). See the following tabs for examples.
+You can pass information between decorated tasks and traditional operators using [XCom](airflow-passing-data-between-tasks.md). See the following sections for examples.
 
 ### TaskFlow to TaskFlow
 
