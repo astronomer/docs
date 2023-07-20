@@ -57,7 +57,7 @@ Follow these steps to receive notifications in MS Teams for failed tasks in an e
 
   :::
 
-4. Import the failure callback function from the `include` folder in your DAG file.
+4. Import the failure callback function at the top of your DAG file.
 
     ```python
     from include.ms_teams_callback_functions import failure_callback
