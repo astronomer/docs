@@ -26,7 +26,6 @@ An Organization role grants a user or API token some level of access to an Astro
 | ---------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
 | View Organization details and user membership                    | ✔️                       | ✔️                              | ✔️                      |
 | View lineage metadata in the **Lineage** tab                     | ✔️                       | ✔️                              | ✔️                      |
-| List all Workspaces in the Organization                          | ✔️                       | ✔️                              | ✔️                      |
 | Update Organization billing information and settings             |                         | ✔️                              | ✔️                      |
 | View usage for all Workspaces in the **Usage** tab               |                         | ✔️                              | ✔️                      |
 | Create a new Workspace                                           |                         |                                | ✔️                      |
