@@ -1,20 +1,20 @@
 ---
-title: "Create a dbt Cloud Connection in Airflow"
+title: "Create a dbt Cloud connection in Airflow"
 id: dbt-cloud
 sidebar_label: dbt Cloud
 description: Learn how to create a dbt Cloud connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
-[dbt Cloud](https://www.getdbt.com/product/what-is-dbt/) is a SaaS product that provides SQL-first transformation workflow. Integrating dbt Cloud with Airflow allows you to manage their dbt cloud jobs, enabling them to trigger jobs, check the status of the jobs, and obtain job artifacts, etc.
+[dbt Cloud](https://www.getdbt.com/product/what-is-dbt/) is a SaaS product that runs SQL-first transformation workflows. Integrating dbt Cloud with Airflow allows you to trigger dbt cloud jobs and check their status from an Airflow DAG.
 
-This guide provides the basic setup for creating a dbt Cloud connection. For a complete integration tutorial, see [Orchestrate dbt Cloud jobs with Airflow](../airflow-dbt-cloud.md). For running your dbt core jobs using Airflow, see [Orchestrate dbt-core Jobs with Airflow](../airflow-dbt.md).
+This guide provides the basic setup for creating a dbt Cloud Airflow connection. For a complete integration tutorial, see [Orchestrate dbt Cloud jobs with Airflow](connections/airflow-dbt-cloud.md). For running your dbt core jobs using Airflow, see [Orchestrate dbt-core Jobs with Airflow](connections/airflow-dbt.md).
 
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
-- A [dbt Cloud Account](https://cloud.getdbt.com/)
+- A [dbt Cloud account](https://cloud.getdbt.com/)
 
 ## Get connection details
 
@@ -26,11 +26,11 @@ A connection from Airflow to dbt Cloud requires the following information:
 
 Complete the following steps to retrieve these values:
 
-1. In your dbt Cloud UI, copy the URL of your dbt Cloud account. For example, it should be formatted as `https://cloud.getdbt.com`. Your URL might be different based on the hosted region of your dbt Cloud. See [dbt Cloud URIs](https://docs.getdbt.com/docs/cloud/manage-access/sso-overview#auth0-multi-tenant-uris) for more details.
+1. In the dbt Cloud UI, copy the URL of your dbt Cloud account. It should be formatted as `https://cloud.getdbt.com`. Your URL might be different based on the hosted region of your dbt Cloud. See [dbt Cloud URIs](https://docs.getdbt.com/docs/cloud/manage-access/sso-overview#auth0-multi-tenant-uris) for more details.
 
-2. If you are using a dbt Developer account, follow the [dbt documentation](https://docs.getdbt.com/docs/dbt-cloud-apis/user-tokens#user-api-tokens) to get the API token for your user. To generate a token for a service account, see [Generating service account tokens](https://docs.getdbt.com/docs/dbt-cloud-apis/service-tokens#generating-service-account-tokens).
+2. If you're using a dbt Developer account, follow the [dbt documentation](https://docs.getdbt.com/docs/dbt-cloud-apis/user-tokens#user-api-tokens) to copy the API token for your user account. To generate a token for a service account, see [Generating service account tokens](https://docs.getdbt.com/docs/dbt-cloud-apis/service-tokens#generating-service-account-tokens).
 
-3. To retrieve the Account ID of your dbt account, go to the settings page in dbt Cloud UI. Then, from the URL of the settings page, copy the account ID, which is an integer appearing after **accounts**. For example, in the URL https://cloud.getdbt.com/settings/accounts/88348, 88348 is your account ID. 
+3. To retrieve the Account ID of your dbt account, go to the settings page in dbt Cloud UI. Then, from the URL of the settings page, copy the account ID, which is an integer appearing after **Accounts**. For example, in the URL `https://cloud.getdbt.com/settings/accounts/88348`, the account ID is `88348`.
 
 ## Create your connection
 
@@ -57,9 +57,9 @@ Complete the following steps to retrieve these values:
 
     ![dbtcloud](/img/examples/connection-dbt-cloud.png)
 
-:::tip important
+:::info
 
-Note that only the **Tenant** and **API Token** fields will be used for connection test. It will not validate the **Account ID**.
+Note that the connection test only tests the **Tenant** and **API Token** fields. It will not validate your **Account ID**.
 
 :::
 
