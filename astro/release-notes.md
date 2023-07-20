@@ -33,7 +33,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <HostedBadge/>
 
-You can now configure the default CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default Pod configurations. Configure default resources to ensure that tasks always have enough CPU and memory to run successfully. See [Configure Deployment resources](https://docs.astronomer.io/astro/configure-deployment-resources#configure-kubernetes-pod-resources).
+You can now configure the default CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default resources to ensure that tasks always have enough CPU and memory to run successfully. See [Configure Deployment resources](https://docs.astronomer.io/astro/configure-deployment-resources#configure-kubernetes-pod-resources).
 
 ### New regions available on Astro Hosted
 
@@ -101,10 +101,9 @@ You can now create Hosted dedicated clusters in the following regions:
 
 See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#dedicated-cluster-configurations) for all available configurations. 
 
-
 ### Bug fixes
 
-- You can no longer created Hybrid GCP clusters in `eu-north-1`.
+- You can no longer create Hybrid GCP clusters in `eu-north-1`.
 
 ## July 11, 2023
 
