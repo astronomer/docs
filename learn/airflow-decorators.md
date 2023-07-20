@@ -306,7 +306,7 @@ def transform_dataframe(df: pd.DataFrame):
 join_orders_customers(filter_orders(filtered_orders_table), customers_table)
 ```
 
-The Astro Python SDK offers much more functionality that greatly simplifies DAG authoring, for example a decorator to load files from object storage directly into a relational table while inferring its schema. To learn more about the Astro Python SDK, check out: 
+The Astro Python SDK offers much more functionality that greatly simplifies DAG authoring, for example an operator to load files from object storage directly into a relational table while inferring its schema. To learn more about the Astro Python SDK, check out: 
 
 - [Write a DAG with the Astro Python SDK tutorial](https://docs.astronomer.io/learn/astro-python-sdk)
 - [The Astro Python SDK for ETL guide](https://docs.astronomer.io/learn/astro-python-sdk-etl)
@@ -325,6 +325,6 @@ There are several decorators available to use with Airflow. This list provides a
 - [Branch decorator](airflow-branch-operator.md#taskbranch-and-branchpythonoperator) (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
 - Kubernetes pod decorator (`@task.kubernetes()`), which runs a [KubernetesPodOperator](kubepod-operator.md) task
 - [Sensor decorator](what-is-a-sensor.md#sensor-decorator) (`@task.sensor()`), which turns a Python function into a sensor. This sensor was introduced in Airflow 2.5.
-- [Astro Python SDK decorators](https://github.com/astronomer/astro-sdk), which simplify writing ETL/ELT DAGs
+- [Astro Python SDK decorators](https://github.com/astronomer/astro-sdk), which simplify writing ETL/ELT DAGs.
 
 You can also [create your own custom task decorator](https://airflow.apache.org/docs/apache-airflow/stable/howto/create-custom-decorator.html).
