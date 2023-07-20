@@ -28,7 +28,7 @@ To complete this tutorial, you'll need to know:
 
 ## Prerequisites
 
-- The [Astro ClI](https://docs.astronomer.io/astro/cli/install-cli).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A GitHub account with a personal access token and at least one repository. If you don’t have a GitHub repository you can follow the [steps in the GitHub documentation](https://docs.github.com/en/get-started/quickstart/create-a-repo) on how to create one.
 
 :::info
