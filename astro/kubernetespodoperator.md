@@ -277,6 +277,7 @@ If your Docker image is hosted in Google Artifact Registry repository, add a per
     - Click on the copy icon next to the image in the top corner. This will copy a string in the format `<GCP Region>-docker.pkg.dev/<Project Name>/<Registry Name>/<Image Name>`
 
 </TabItem>
+</Tabs>
 
 ## Use secret environment variables with the KubernetesPodOperator
 
