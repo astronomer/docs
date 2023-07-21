@@ -151,7 +151,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 
 <Tabs
     defaultValue="Private Registry"
-    groupId="registry-options"
+    groupId="run-images-from-a-private-registry"
     values={[
         {label: 'Private Registry', value: 'PrivateRegistry'},
         {label: 'Amazon Elastic Container Registry (ECR)', value: 'AWSECR'},
