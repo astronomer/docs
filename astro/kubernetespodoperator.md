@@ -200,7 +200,7 @@ KubernetesPodOperator(
 
 </TabItem>
 
-<TabItem value="AWS ECR">
+<TabItem value="AWSECR">
 
 ### Docker images hosted in private Amazon ECR repositories
 
