@@ -153,9 +153,9 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
     defaultValue="Private Registry"
     groupId="registry-options"
     values={[
-        {label: 'Private Registry', value: 'Private Registry'},
-        {label: 'Amazon Elastic Container Registry (ECR)', value: 'AWS ECR'},
-        {label: 'Google Artifact Registry', value: 'Google Artifact Registry'},
+        {label: 'Private Registry', value: 'PrivateRegistry'},
+        {label: 'Amazon Elastic Container Registry (ECR)', value: 'AWSECR'},
+        {label: 'Google Artifact Registry', value: 'GoogleArtifactRegistry'},
     ]}>
 <TabItem value="Private Registry">
 
