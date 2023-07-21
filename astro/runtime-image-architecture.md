@@ -75,7 +75,7 @@ Because this DAG is essential to Astro's managed service, you are not charged fo
 The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with an asterisk (*) are installed only in Astro Runtime and not installed by default on Apache Airflow.
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)*
-- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/) *
+- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)*
 - Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/) *
 - Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
 - Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
