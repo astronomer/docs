@@ -30,7 +30,7 @@ Complete the following steps to retrieve these values:
 
 2. If you're using a dbt Developer account, follow the [dbt documentation](https://docs.getdbt.com/docs/dbt-cloud-apis/user-tokens#user-api-tokens) to copy the API token for your user account. To generate a token for a service account, see [Generating service account tokens](https://docs.getdbt.com/docs/dbt-cloud-apis/service-tokens#generating-service-account-tokens).
 
-3. To retrieve the Account ID of your dbt account, go to the settings page in dbt Cloud UI. Then, from the URL of the settings page, copy the account ID, which is an integer appearing after **Accounts**. For example, in the URL `https://cloud.getdbt.com/settings/accounts/88348`, the account ID is `88348`.
+3. To retrieve the Account ID of your dbt account, go to the settings page in dbt Cloud UI. Then, from the URL of the settings page, copy the account ID, which is an integer appearing after `accounts`. For example, in the URL `https://cloud.getdbt.com/settings/accounts/88348`, the account ID is `88348`.
 
 ## Create your connection
 

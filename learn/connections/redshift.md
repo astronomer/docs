@@ -46,11 +46,11 @@ Complete the following steps to retrieve these values:
 
 1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
    
-2. Open the **General information** tab, then copy the **Cluster identifier** and **Endpoint**.
+2. From the **General information** section, copy the **Cluster identifier** and **Endpoint**.
    
 3. Open the **Properties** tab and copy the **Database name** and **Port**.
    
-4. [Create a Redshift user](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html) and [grant a role](https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html) so that the Airflow can access Redshift through the user. Copy the username and password.
+4. [Create a Redshift user](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html) and [grant a role](https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html) so that Airflow can access Redshift through the user. Copy the username and password.
 
 </TabItem>
 
@@ -75,7 +75,7 @@ Complete the following steps to retrieve these values:
 
 3. Open the **Properties** tab and copy the **Database name** and **Port**.
 
-4. Open your IAM dashboard, go to **Users**, and select your user. Then, go to **Permissions** and follow the [AWS documentation](https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html) to ensure that the IAM user is authorized to connect to Redshift and perform SQL operations.
+4. Open your IAM dashboard, go to **Users** and select your user. Then, go to **Permissions** and follow the [AWS documentation](https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html) to ensure that the IAM user is authorized to connect to Redshift and perform SQL operations.
 
 5. [Generate a new access key ID and secret access key](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
 

@@ -1,5 +1,5 @@
 ---
-title: "Create a Databricks Connection in Airflow"
+title: "Create a Databricks connection in Airflow"
 id: databricks
 sidebar_label: Databricks
 description: Learn how to create a Databricks connection in Airflow.
