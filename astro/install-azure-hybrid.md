@@ -21,7 +21,7 @@ To get started on Astro Hosted, see [Start a trial](trial.md).
 
 To install Astro Hybrid on Azure, Astronomer will create an Astro cluster in a dedicated Azure account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 
-To complete the setup for the installation, you'll:
+To complete the installation, you'll:
 
 - Create an [Astronomer account](#access-astro).
 - Create a new Azure subscription with required [Azure resources](resource-reference-azure-hybrid.md).
