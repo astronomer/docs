@@ -98,7 +98,9 @@ Your DAG uses operators from two Airflow provider packages: the [HTTP provider](
 
 ## Step 4: Add an Airflow variable
 
-After restarting your Airflow instance, you should not see the same DAG import error from Step 2. Next, you will need to define your own GitHub repo as an Airflow variable, overriding the default value that was set in the DAG code. [Airflow variables](airflow-variables.md) are key value pairs that can be accessed from any DAG in your Airflow environment. You'll now define the missing Airflow variable in the Airflow UI:
+After restarting your Airflow instance, you should not see the DAG import error from Step 2. Next, you will need to add an Airflow variable to be used in the GithubTagSensor.
+
+[Airflow variables](airflow-variables.md) are key value pairs that can be accessed from any DAG in your Airflow environment. Because the variable `my_github_repo` is used in the DAG code with a default of `apache/airflow`, you'll need to create the variable and give it a value in the Airflow UI to wait for a tag in your own repository.
 
 1. Go to **Admin** > **Variables** to open the list of Airflow variables. It will be empty.
 
