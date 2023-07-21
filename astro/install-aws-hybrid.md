@@ -5,7 +5,7 @@ id: install-aws-hybrid
 sidebar_custom_props: { icon: 'img/aws.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2
-Use this document to complete the installation of Astro Hybrid in an Amazon Web Services (AWS) account.
+description: 'Use this document to complete the installation of Astro Hybrid in an Amazon Web Services (AWS) account.'
 ---
 
 import Tabs from '@theme/Tabs';

@@ -2,7 +2,7 @@
 sidebar_label: 'GCP'
 title: 'Install Astro on GCP'
 id: install-gcp-hybrid
-description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
+description: 'Use this document to complete the installation of Astro Hybrid in Google Cloud Project.'
 sidebar_custom_props: { icon: 'img/gcp.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2
@@ -21,24 +21,23 @@ To get started on Astro Hosted, see [Start a trial](trial.md).
 
 To install Astro Hybrid on GCP, Astronomer support creates a cluster in a dedicated GCP account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 
-To complete the setup for the installation, you'll:
+To complete the installation, you'll:
 
-- Create an [Astronomer account](#access-astro).
-- Create a new [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
-- Activate your Astro data plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
-- Share [the setup information](#provide-setup-information-to-astronomer) with Astronomer.
+- Create an Astronomer account.
+- Create a new Google Cloud project.
+- Enable Google Cloud APIs and add IAM service account that'll be used by Astro.
 
-When you've completed the setup process, Astronomer will create infrastructure within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
+Astronomer support will create infrastructure within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Prerequisites
 
-- A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
+- A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, Google Cloud project with existing infrastructure aren't supported.
 
 - A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
 
 - [Google Cloud Shell](https://cloud.google.com/shell).
 
-- CIDR blocks of ranges `/19`, `/20`, `/22`, and `/22` are required for the Astro Data Plane. If you do not have any preferred CIDR block, Astro will provision VPCs using a [default CIDR ranges](#vpc-peering-prerequisites-optional). See [GCP resource reference](resource-reference-azure-hybrid.md) for details.
+- CIDR blocks of with ranges `/19`, `/20`, `/22`, and `/22` are required for the Astro Data Plane. If you don't have any preferred CIDR block, Astro will provision VPCs using a [default CIDR ranges](#vpc-peering-prerequisites-optional). See [GCP resource reference](resource-reference-azure-hybrid.md) for details.
 
 - A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 48. To adjust your project's quota limits, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console). To view the quota limits for a project, run `gcloud services enable compute.googleapis.com` in the Google Cloud CLI.
 
@@ -48,15 +47,14 @@ When you've completed the setup process, Astronomer will create infrastructure w
 
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
     - `https://cloud.astronomer.io/`
-    - `https://astro-<your-org>.datakin.com/`
-    - `https://<your-org>.astronomer.run/`
     - `https://api.astronomer.io/`
     - `https://images.astronomer.cloud/`
     - `https://auth.astronomer.io/`
     - `https://updates.astronomer.io/`
     - `https://install.astronomer.io/`
+    - `https://astro-<your-org>.datakin.com/`
+    - `https://<your-org>.astronomer.run/`
 
-For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp-hybrid.md).
 
 ### VPC peering prerequisites (optional)
 
