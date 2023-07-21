@@ -32,6 +32,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 ### Early access Airflow bug fixes
 
 - Fix bad delete logic for DAG runs ([32684](https://github.com/apache/airflow/pull/32684)).
+
 ### Additional improvements
 
 - Upgraded a few built-in providers to new minor versions. 
