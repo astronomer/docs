@@ -262,18 +262,17 @@ If your Docker image is hosted in Google Artifact Registry repository, add a per
 ### Steps
 
 1. Contact [Astronomer support](https://support.astronomer.io) to request the Compute Engine default service account ID for your cluster.
-1. Log in to Google Artifact Registry.
-2. Click the checkbox next to the repository that you wish to use.
-3. In the properties pane that appears, click **ADD PRINCIPAL** on the **PERMISSIONS** tab.
-4. In the Add Principals text box, copy in the Compute Engine default service account ID that was supplied by Astronomer Support
-5. In the Assign Roles selector, type "Artifact Registry Reader" and then select that item from the filtered list.
-6. Click **Save** to grant read access to Astro.
-7. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator).
-8. Replace `<your-docker-image>` in the instantiation of the KubernetesPodOperator with the Google Artifact Registry image URI. To locate the URI:
+2. Log in to Google Artifact Registry.
+3. Click the checkbox next to the repository that you want to use.
+4. In the **Properties** pane that appears, click **ADD PRINCIPAL** in the **PERMISSIONS** tab.
+5. In the **Add Principals** text box, paste the Compute Engine default service account ID that was provided to you by Astronomer Support.
+6. In the **Assign Roles** selector, search for `Artifact Registry Reader` and select the role that appears. 
+7. Click **Save** to grant read access for the registry  to Astro.
+8. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator). When you configure an instantiation of the KubernetesPodOperator, replace `<your-docker-image>` with the Google Artifact Registry image URI. To retrieve the URI:
 
-    - In the Google Artifact Registry, click on the registry containing the image to open it.
-    - Click on the image you wish to use to open it.
-    - Click on the copy icon next to the image in the top corner. This will copy a string in the format `<GCP Region>-docker.pkg.dev/<Project Name>/<Registry Name>/<Image Name>`
+    - In the Google Artifact Registry, click the registry containing the image.
+    - Click the image you want to use.
+    - Click the copy icon next to the image in the top corner. The string you copy should be in the format `<GCP Region>-docker.pkg.dev/<Project Name>/<Registry Name>/<Image Name>`.
 
 </TabItem>
 </Tabs>
