@@ -47,7 +47,7 @@ To get the most out of this guide, you should have an understanding of:
 
 Basic dependencies between Airflow tasks can be set in the following ways:
 
-- Using bitshift operators (`<<` and `>>`)
+- Using bit-shift operators (`<<` and `>>`)
 - Using the `set_upstream` and `set_downstream` methods
 
 For example, if you have a DAG with four sequential tasks, the dependencies can be set in four ways:
@@ -84,7 +84,7 @@ All of these methods are equivalent and result in the DAG shown in the following
 
 ![Basic Dependencies](/img/guides/basic_dependencies.png)
 
-Astronomer recommends using a single method consistently. Using both bitshift operators and `set_upstream`/`set_downstream` in your DAGs can overly-complicate your code. 
+Astronomer recommends using a single method consistently. Using both bit-shift operators and `set_upstream`/`set_downstream` in your DAGs can overly-complicate your code. 
 
 To set a dependency where two downstream tasks are dependent on the same upstream task, use lists or tuples. For example:
 
@@ -100,15 +100,72 @@ These statements are equivalent and result in the DAG shown in the following ima
 
 ![List Dependencies](/img/guides/list_dependencies.png)
 
-Airflow can't parse dependencies between two lists. For example, `[t0, t1] >> [t2, t3]` returns an error. To set these dependencies, use the Airflow [`chain` function](https://github.com/apache/airflow/blob/main/airflow/models/baseoperator.py#L1650). For example:
+When using bit-shift operators and the `.set_upstream` and `.set_downstream` method, it is not possible to set dependencies between two lists. For example, `[t0, t1] >> [t2, t3]` returns an error. To set dependencies between lists, use the dependency functions described in the next section.
 
-<CodeBlock language="python">{dependencies_example_1}</CodeBlock>
+## Dependency functions
 
-This image shows the resulting DAG:
+Dependency functions are utilities that let you set dependencies between several tasks and lists of tasks. A common reason to use dependency functions over bit-shift operators is for example to create dependencies for tasks that were created in a loop and are stored in a list.
 
-![Chain Dependencies](/img/guides/chain.png)
+```python
+list_of_tasks = []
+for i in range(5):
+    if i % 3 == 0:
+        ta = EmptyOperator(task_id=f"ta_{i}")
+        list_of_tasks.append(ta)
+    else:
+        ta = EmptyOperator(task_id=f"ta_{i}")
+        tb = EmptyOperator(task_id=f"tb_{i}")
+        tc = EmptyOperator(task_id=f"tc_{i}")
+        list_of_tasks.append([ta, tb, tc])
 
-With the `chain` function, any lists or tuples you include must be of the same length.
+chain(*list_of_tasks)
+```
+
+This code creates the following DAG structure:
+
+![List Dependencies](/img/guides/chain_dependencies_1.png)
+
+### chain()
+
+To set parallel dependencies between tasks and lists of tasks of the same length, use the [`chain()` function](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.chain). For example:
+
+```python
+# from airflow.models.baseoperator import chain
+chain(t0, t1, [t2, t3, t4], [t5, t6, t7], t8)
+```
+
+This code creates the following DAG structure:
+
+![Chain Dependencies](/img/guides/chain_dependencies.png)
+
+When using the `chain` function, any lists or tuples that are set to depend directly on each other need to be of the same length.  
+
+```python
+chain([t0, t1], [t2, t3])  # this code will work
+chain([t0, t1], [t2, t3, t4])  # this code will cause an error
+chain([t0, t1], t2, [t3, t4, t5])  # this code will work
+```
+
+### chain_linear()
+
+To set interconnected dependencies between tasks and lists of tasks, use the `chain_linear()` function. This function is available in Airflow 2.7+, in older versions of Airflow you can set similar dependencies between two lists at a time using the [`cross_downstream()` function](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.cross_downstream). 
+
+Replacing `chain` with `chain_linear` in the previous example as shown in this code snippet will create a DAG structure where the dependency between lists is set in a pattern so that each element in the downstream list will depend on each element in the upstream list.
+
+```python
+# from airflow.models.baseoperator import chain_linear
+chain_linear(t0, t1, [t2, t3, t4], [t5, t6, t7], t8)
+```
+
+![Chain Linear Dependencies 2](/img/guides/chain_linear_dependencies_1.png)
+
+The `chain_linear()` function can take in lists of any length in any order. For example:
+
+```python
+chain_linear([t0, t1], [t2, t3, t4])
+```
+
+![Chain Linear Dependencies 1](/img/guides/chain_linear_dependencies_2.png)
 
 ## Dynamic dependencies
 
