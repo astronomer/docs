@@ -202,7 +202,6 @@ KubernetesPodOperator(
 
 <TabItem value="AWSECR">
 
-### Docker images hosted in private Amazon ECR repositories
 
 :::info
 
