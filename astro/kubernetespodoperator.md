@@ -157,7 +157,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
         {label: 'Amazon Elastic Container Registry (ECR)', value: 'AWSECR'},
         {label: 'Google Artifact Registry', value: 'GoogleArtifactRegistry'},
     ]}>
-<TabItem value="Private Registry">
+<TabItem value="PrivateRegistry">
 
 ### Prerequisites
 
