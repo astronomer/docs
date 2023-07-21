@@ -87,7 +87,7 @@ The latest version of the Astro Runtime image has the following open source prov
 - HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)
 - IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/) `*`
-- [OpenLineage](https://pypi.org/project/openlineage-airflow/) (this package installs an Airflow plugin) `*`
+- OpenLineage [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/) (this package installs an Airflow plugin) `*`
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/) `*`
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/) `*`
 - SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)
