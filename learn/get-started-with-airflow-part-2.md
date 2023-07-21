@@ -7,7 +7,7 @@ id: get-started-with-airflow-part-2
 
 Learn core Apache Airflow concepts in this hands-on tutorial using the Astro CLI.
 
-Use this tutorial after completing the [Get started with Apache Airflow](get-started-with-airflow.md) tutorial to learn about how to connect Airflow to external systems.
+Use this tutorial after completing [Part 1: Write your first DAG](get-started-with-airflow.md) to learn about how to connect Airflow to external systems.
 
 After you complete this tutorial, you'll be able to:
 
@@ -23,7 +23,7 @@ This tutorial takes approximately 30 minutes to complete.
 
 To complete this tutorial, you'll need to know:
 
-- How to write DAGs and run Airflow. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- How to write DAGs and run Airflow. See [Part 1: Write your first DAG](get-started-with-airflow.md).
 - The basics of git. See the [tutorial on Git’s official webpage](https://git-scm.com/docs/gittutorial).
 
 ## Prerequisites
@@ -39,7 +39,7 @@ If you do not have a GitHub account, you can create one for free on the [GitHub 
 
 ## Step 1: Create your Astro project
 
-To run Airflow data pipelines locally and on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally. For more information on the Astro project, see Part 1 of the [Get started with Apache Airflow tutorial](get-started-with-airflow.md).
+To run Airflow data pipelines locally and on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally. For more information on the Astro project, see [Part 1: Write your first DAG](get-started-with-airflow.md).
 
 1. Create a new directory for your Astro project:
 
@@ -72,7 +72,7 @@ To run Airflow data pipelines locally and on Astro, you first need to create an 
 ## Step 2: Create your DAG
 
 1. Create a new Python file in the `dags` directory of your Astro project called `my_second_dag.py`.
-2. Open the Astronomer Registry page for [`my_second_dag`](https://registry.astronomer.io/dags/my_second_dag/versions/latest). Click **Code** and copy the DAG code that appears.
+2. Open the Astronomer Registry page for [`my_second_dag`](https://registry.astronomer.io/dags/my_second_dag/versions/latest). Click `</>` and copy the DAG code that appears.
 
     ![Copy Code from the registry](/img/tutorials/get-started-with-airflow-part-2_registry_code_copy.png)
 
@@ -84,7 +84,7 @@ To run Airflow data pipelines locally and on Astro, you first need to create an 
 
     ![Import Error](/img/tutorials/get-started-with-airflow-part-2_ImportError.png)
 
-Provider packages are Python packages maintained separately from core Airflow that contain hooks and operators for interacting with external services. You can browse all available providers in the [Astronomer Registry](https://registry.astronomer.io/).
+This error is due to a missing provider package. Provider packages are Python packages maintained separately from core Airflow that contain hooks and operators for interacting with external services. You can browse all available providers in the [Astronomer Registry](https://registry.astronomer.io/).
 
 Your DAG uses operators from two Airflow provider packages: the [HTTP provider](https://registry.astronomer.io/providers/http) and the [GitHub provider](https://registry.astronomer.io/providers/github). While the HTTP provider is pre-installed in the Astro Runtime image, the GitHub provider is not, which causes the DAG import error.
 
@@ -127,7 +127,7 @@ In your example DAG, you used two operators that interact with two external syst
 
     ![GitHub Connection](/img/tutorials/get-started-with-airflow-part-2_GitHubConnection.png)
 
-Note that the option to test connections was added in Airflow 2.2. If you are running an older version of Airflow, you can skip this step.
+Note that the option to test connections was added in Airflow 2.2 and is not available for all types of connections. If you are running an older version of Airflow, you can skip this step.
 
 6. Save the connection by clicking the `Save` button.
 
