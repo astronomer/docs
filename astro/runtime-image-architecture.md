@@ -74,24 +74,23 @@ Because this DAG is essential to Astro's managed service, you are not charged fo
 
 The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with an asterisk (`*`) are installed only in Astro Runtime and not installed by default on Apache Airflow.
 
-- Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
-- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
-- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/)
-- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/) (pre-installed OSS)
-- Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/) (pre-installed OSS)
-- Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/) (pre-installed OSS)
-- Datadog [`apache-airflow-providers-datadog](https://pypi.org/project/apache-airflow-providers-datadog/)
-- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
-- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/) (pre-installed OSS)
-- Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
-- HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/) (pre-installed OSS)
-- IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/) (pre-installed OSS)
-- Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
-- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
-- Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
-- SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/) (pre-installed OSS)
-
-Additionally, the Astro Runtime image contains a plugin to interact with [OpenLineage](https://pypi.org/project/openlineage-airflow/). 
+- Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/) (`*`)
+- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/) (`*`)
+- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/) (`*`)
+- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
+- Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
+- Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)
+- Datadog [`apache-airflow-providers-datadog](https://pypi.org/project/apache-airflow-providers-datadog/) (`*`)
+- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/) (`*`)
+- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/) 
+- Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/) (`*`)
+- HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)
+- IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)
+- Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/) (`*`)
+- [OpenLineage](https://pypi.org/project/openlineage-airflow/) (this package installs an Airflow plugin) (`*`)
+- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/) (`*`)
+- Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/) (`*`)
+- SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)
 
 ### Provider package versioning
 
