@@ -126,6 +126,46 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Automation",
+      items: [
+        "automation-overview",
+        "automation-authentication",
+        {
+          type: "category",
+          label: "Manage Deployments as code",
+          items: [
+            "manage-deployments-as-code",
+            "deployments-as-code-examples", 
+            "deployment-file-reference"],
+        }, 
+        {
+          type: "category",
+          label: "CI/CD",
+          items: [
+            "set-up-ci-cd",
+            {
+              type: "category",
+              label: "CI/CD templates",
+              items: [
+                "ci-cd-templates/template-overview",
+                "ci-cd-templates/github-actions",
+                "ci-cd-templates/jenkins",
+                "ci-cd-templates/gitlab",
+                "ci-cd-templates/aws-s3",
+                "ci-cd-templates/aws-codebuild",
+                "ci-cd-templates/azure-devops",
+                "ci-cd-templates/gcs",
+                "ci-cd-templates/bitbucket",
+                "ci-cd-templates/circleci",
+                "ci-cd-templates/drone",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Observability",
       items: [
         "view-logs",
