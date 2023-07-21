@@ -72,7 +72,7 @@ Because this DAG is essential to Astro's managed service, you are not charged fo
 
 ## Provider packages
 
-The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with (pre-installed OSS) are pre-installed in open-source Airflow.
+The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with an asterisk (`*`) are installed only in Astro Runtime and not installed by default on Apache Airflow.
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
