@@ -155,10 +155,10 @@ module.exports = {
               type: "category",
               label: "User access",
               items: [
+                "add-organization-users",
                 "configure-idp",
                 "set-up-scim-provisioning",
                 "manage-domains",
-                "add-user", 
                 "manage-teams", 
                 "user-permissions",
               ],
@@ -170,7 +170,7 @@ module.exports = {
         {
           type: "category",
           label: "Manage Workspaces",
-          items: ["manage-workspaces", "workspace-api-tokens"],
+          items: ["manage-workspaces", "manage-workspace-users", "workspace-api-tokens"],
         },
         {
           type: "category",

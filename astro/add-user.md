@@ -15,66 +15,6 @@ As a Workspace Admin or Organization Owner, you can add new team members to Astr
 
 For more information on user roles, see [Manage user permissions on Astro](user-permissions.md). To manage groups of users, see [Manage Teams](manage-teams.md).
 
-## Add a user to an Organization
-
-If your Organization has a configured identity provider (IdP), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. To change this behavior, see [Disable just-in-time provisioning](configure-idp.md#disable-just-in-time-provisioning).
-
-If you want to invite a user to an Organization from a domain that you don't own, such as a third party consultant, or you want to invite someone from your company to Astro with a higher level role, follow these steps.
-
-1. In the Cloud UI, go to **Settings** > **Access Management**.
-
-2. Click **Invite member**:
-
-3. Enter the user's email.
-
-4. Set an Organization role for the user. See [Organization roles reference](user-permissions.md#organization-roles).
-
-5. Click **Add member**.
-
-    After you add the user, their information appears in **Access Management** as a new entry in the **Members** table. To access the Organization, the user needs to accept the invitation sent by email and then create an Astro account or log in.
-
-## Update or remove an Organization user
-
-See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
-
-1. In the Cloud UI, go to **Settings** > **Access Management**.
-   
-2. Find the user in the **Members** list and then click **Edit**.
-   
-3. Optional. Edit the user's role. See [Update Organization roles](user-permissions.md#update-organization-roles). 
-   
-4. If you updated the user's role, click **Update member**. To delete the user, click **Remove member**.
-
-## Add a user to a Workspace
-
-1. In the Cloud UI, select a Workspace.
-
-2. Click **Workspace Settings**.
-   
-3. In the **Access Management** tab, click **Add Member**.
-
-4. Select the user's name and email address in the **Organization Member** list.
-   
-5. Select a role for the user and then click **Add member**. See [Workspace roles reference](user-permissions.md#workspace-roles).
-
-6. Click **Add member**.
-
-    After you add the user, their information appears in the **Access Management** tab as a new entry in the **Members** list. To access the Workspace, the user needs to accept the invitation sent by email and log in.
-
-You can also add groups of users to a Workspace through Teams. See [Manage Teams](manage-teams.md).
-
-## Update or remove a Workspace user
-
-1. In the Cloud UI, select a Workspace.
-   
-2. Click **Workspace Settings**.
-
-3. Click **Edit** next to the user name:
-
-4. Optional. Edit the user's name and role. See [Update Workspace roles](user-permissions.md#update-workspace-roles).
-   
-5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
-
 ## Add a group of users to Astro using the Astro CLI
 
 You can use the Astro CLI and a shell script to add multiple users to an Organization or Workspace at a time using a shell script. The shell script reads from a text file that your team creates which contains user information. To automate adding users to Astro, generate the text file for each new batch of users that need to assigned to an Organization or Workspace and run the script with the Astro CLI.
