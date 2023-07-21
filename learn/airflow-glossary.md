@@ -10,8 +10,8 @@ Whether you're new to Airflow or not, use this glossary to quickly reference key
 | Term | Definition |
 |------|-------------|
 | Airflow Connection| An [Airflow connection](connections.md) is a set of configurations and credentials that allows Airflow to connect with other tools in the data ecosystem. For example, you need to create a Snowflake connection to access data in Snowflake. |
-| Airflow UI| The [Airflow UI](airflow-ui.md) is the primary interface for managing DAG and task runs. It contains pages for modifying, monitoring, and troubleshooting an Airflow environment. |
-| Airflow Variable| An [Airflow variable](airflow-variables.md) is a generic key value pair, such as an API key or file path, that's stored in the Airflow metadata database. |
+| Airflow UI| The [Airflow UI](airflow-ui.md) is the primary interface for managing DAG and task runs. You can open and use the Airflow UI in your web browser. It contains pages for modifying, monitoring, and troubleshooting an Airflow environment. |
+| Airflow Variable| An [Airflow variable](airflow-variables.md) is a generic key value pair, such as an API key or file path, that's stored in the Airflow metadata database and that you can reference in a DAG. |
 | Apache Airflow | Apache Airflow is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines written in Python. Airflow is scalable, configurable, and the industry standard for managing workflows across your ecosystem. |
 | Dataset| A [dataset](airflow-datasets.md) is a logical grouping of data consumed or produced by tasks in an Airflow DAG. It can be a table, a file, a blob, or a dataframe. Datasets can be used to schedule DAGs with dataset-driven scheduling. |
 | Decorator| In Python, decorators are functions that take another function as an argument and extend the behavior of that function. In Airflow, [decorators](airflow-decorators.md) provide a simpler way to define Airflow tasks and DAGs compared to traditional operators. |
