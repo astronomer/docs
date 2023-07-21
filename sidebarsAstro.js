@@ -101,17 +101,17 @@ module.exports = {
       items: [
         "create-deployment",
         "configure-deployment-resources",
-        "manage-dags",
         {
           type: "category",
-          label: "Configure executors",
+          label: "Executors",
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
-        "api-keys",
+        // "api-keys",
         "environment-variables",
         "secrets-backend",
-        "manage-deployments-as-code",
+        "manage-dags",
+        // "manage-deployments-as-code",
         {
           type: "category",
           label: "Connect to external resources",
@@ -126,7 +126,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Automation",
+      label: "Programmatic access",
       items: [
         "automation-overview",
         "automation-authentication",
@@ -134,7 +134,7 @@ module.exports = {
           type: "category",
           label: "Manage Deployments as code",
           items: [
-            "manage-deployments-as-code",
+            "deployments-as-code",
             "deployments-as-code-examples", 
             "deployment-file-reference"],
         }, 

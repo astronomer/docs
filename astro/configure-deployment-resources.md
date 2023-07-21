@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Configure a Deployment'
+sidebar_label: 'Deployment settings'
 title: 'Configure a Deployment'
 id: configure-deployment-resources
 ---
