@@ -249,7 +249,6 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 <TabItem value="Google Artifact Registry">
 
-### Docker images hosted in private Google Artifact Registry repositories
 
 :::info
 
