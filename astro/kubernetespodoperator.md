@@ -261,6 +261,7 @@ If your Docker image is hosted in Google Artifact Registry repository, add a per
 
 ### Steps
 
+1. Contact [Astronomer support](https://support.astronomer.io) to request the Compute Engine default service account ID for your cluster.
 1. Log in to Google Artifact Registry.
 2. Click the checkbox next to the repository that you wish to use.
 3. In the properties pane that appears, click **ADD PRINCIPAL** on the **PERMISSIONS** tab.
