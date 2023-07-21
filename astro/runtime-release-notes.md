@@ -24,6 +24,19 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 8.8.0
+
+- Release date: July 21, 2023
+- Airflow version: 2.6.3
+
+### Additional improvements
+
+- Upgraded a few built-in providers to new minor versions. 
+
+### Bug fixes
+
+- Fixed DAG deletion permissions in Astro for non-admin users.
+
 ## Astro Runtime 8.7.0
 
 - Release date: July 11, 2023
