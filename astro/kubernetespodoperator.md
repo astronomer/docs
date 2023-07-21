@@ -244,7 +244,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 8. Replace `<your-docker-image>` in the instantiation of the KubernetesPodOperator with the Amazon ECR repository URI that hosts the Docker image. To locate the URI:
 
     - In the Amazon ECR Dashboard, click **Repositories** in the left menu.
-    - Click the **Private** tab and then copy the URI of the repository that hosts the Docker image.
+    - Open the **Private** tab and then copy the URI of the repository that hosts the Docker image.
 
 </TabItem>
 
