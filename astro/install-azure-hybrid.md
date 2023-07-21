@@ -5,7 +5,7 @@ id: install-azure-hybrid
 sidebar_custom_props: { icon: 'img/azure.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2
-description: 'Instructions for completing an Astro installation on an existing Microsoft Azure instance. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources.'
+description: 'Use this document to complete the installation of Astro Hybrid in a Microsoft Azure subscription.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -34,7 +34,7 @@ When you've completed the setup process, Astronomer support create infrastructur
 
 ## Prerequisites
 
-- A new Azure subscription. For security reasons, Azure subscriptions with existing infrastructure aren't supported. Also, no [Azure policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) should be applicable to the [Azure management group](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview) that the subscription is a part of. 
+- A new Azure subscription. For security reasons, Azure subscriptions with existing infrastructure aren't supported. Also, no [Azure policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) should be applicable to the subscription's [Azure management group](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 
 - [Microsoft Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) or [Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
 
@@ -48,7 +48,7 @@ When you've completed the setup process, Astronomer support create infrastructur
     az vm list-skus --location centralus --size Standard_D --all --output table | grep -e 'Restrictions\|Standard_D4d_v5'
     ```  
   
-    If the VM types are unavailable, the output returns `Restrictions`. Please contact Microsoft Support to have these VMs enabled.
+    If the VM types are unavailable, the output returns `Restrictions`. Contact Microsoft Support to have these VMs enabled.
   
     ```
     ResourceType     Locations    Name                    Zones    Restrictions
@@ -203,7 +203,7 @@ After you've prepared your environment for data plane activation, provide Astron
 - Optional. Your preferred maximum node count. The default is 20.
 - Optional. Your custom CIDR ranges for Astronomer service connections. The default is `172.20.0.0/19`.
 
-See [Azure resource reference](resource-reference-azure-hybrid.md) for default and supported cluster configurations.
+See [Azure resource reference](resource-reference-azure-hybrid.md) for all supported cluster configurations.
 
 ## Astronomer support creates the cluster
 

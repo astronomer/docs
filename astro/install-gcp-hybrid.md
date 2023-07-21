@@ -19,7 +19,7 @@ To get started on Astro Hosted, see [Start a trial](trial.md).
 
 :::
 
-To install Astro Hybrid on GCP, Astronomer support creates a Astro cluster in a dedicated GCP account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
+To install Astro Hybrid on GCP, Astronomer support creates a cluster in a dedicated GCP account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 
 To complete the setup for the installation, you'll:
 
@@ -111,7 +111,7 @@ The script uses your owner role to complete following actions:
     - `servicenetworking.googleapis.com`
     - `dns.googleapis.com`
     - `servicedirectory.googleapis.com`
-- Create a service account `astronomer@astro-remote-mgmt.iam.gserviceaccount.com` that Astro uses to access the data plane.
+- Create a service account called `astronomer@astro-remote-mgmt.iam.gserviceaccount.com` that Astro uses to access the data plane.
 
 
 ## Provide setup information to Astronomer
