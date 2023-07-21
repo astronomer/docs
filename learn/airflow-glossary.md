@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Airflow Glossary'
+sidebar_label: 'Airflow glossary'
 title: 'Apache Airflow glossary'
 id: airflow-glossary
 description: A list of key Apache Airflow terms and definitions that can help you learn important concepts.
