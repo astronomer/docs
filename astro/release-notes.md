@@ -757,14 +757,6 @@ Most importantly, the Astro Cloud IDE was developed to make it easier for new Ai
 
 To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
 
-:::info
-
-<!-- id to make it easier to remove: cloud-ide-preview-banner -->
-
-The Cloud IDE is currently in [Public Preview](feature-previews.md).
-
-:::
-
 ### Additional improvements
 
 - In the Cloud UI, cluster selection menus are now alphabetized.
