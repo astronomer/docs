@@ -1,5 +1,5 @@
 ---
-title: "Manage DAG and task dependencies in Airflow"
+title: "Manage task and task group dependencies in Airflow"
 sidebar_label: "Task dependencies"
 id: managing-dependencies
 ---
@@ -28,6 +28,7 @@ Throughout this guide, the following terms are used to describe task dependencie
 In this guide you'll learn about the many ways you can implement dependencies in Airflow, including:
 
 - Basic task dependencies.
+- Dependency functions.
 - Dynamic dependencies.
 - Dependencies with task groups.
 - Dependencies with the TaskFlow API.
