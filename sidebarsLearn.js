@@ -197,9 +197,12 @@ module.exports = {
               'connections/azure-blob-storage',
               'connections/bigquery',
               'connections/databricks',
+              'connections/dbt-cloud',
               'connections/ms-sqlserver',
               'connections/odbc',
-              'connections/postgres'
+              'connections/postgres',
+              'connections/redshift',
+              'connections/snowflake'
             ],
           },
           {
