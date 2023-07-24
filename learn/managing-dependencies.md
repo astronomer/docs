@@ -337,17 +337,39 @@ The image below shows types of dependencies that can be set between tasks and ta
 
 ## TaskFlow API dependencies
 
-The [TaskFlow API](airflow-decorators.md) added decorators to Airflow, for example to allow you to turn Python functions into Airflow tasks using the `@task` decorator. 
+The [TaskFlow API](airflow-decorators.md) added decorators to Airflow, one of these decorators, `@task`, allows you to easily turn Python functions into Airflow tasks. 
 
-If your DAG has only Python functions that are all defined with the decorator, invoke Python functions to set dependencies. For example, in the following DAG there are two dependent tasks, `get_a_cat_fact` and `print_the_cat_fact`. To set the dependencies, you invoke the function `print_the_cat_fact(get_a_cat_fact())`:
+If your DAG has several tasks that are defined with the `@task` decorator and use each other's output, you can leverage inferred dependencies via the TaskFlow API. For example, in the following DAG there are two dependent tasks, `get_a_cat_fact` and `print_the_cat_fact`. To set the dependencies, you pass the called function of the upstream task as a positional argument to the downstream task (`print_the_cat_fact(get_a_cat_fact())`):
 
 <CodeBlock language="python">{dependencies_example_2_taskflow}</CodeBlock>
 
 This image shows the resulting DAG:
 
-![TaskFlow Dependencies](/img/guides/dependency_taskflow.png)
+![TaskFlow Dependencies](/img/guides/managing-dependencies_taskflow_1.png)
 
-If your DAG has a mix of Python function tasks defined with decorators and tasks defined with traditional operators, you can set the dependencies by assigning the decorated task invocation to a variable and then defining the dependencies normally. For example, in the DAG below the `upload_data_to_s3` task is defined by the `@task` decorator and invoked with `upload_data = upload_data_to_s3(s3_bucket, test_s3_key)`. The `upload_data` variable is used in the last line to define dependencies.
+Note that it is also possible to assign the called function to an object and then pass that object to the downstream task. This way of defining dependencies between `@task` decorated tasks is often easier to read and allows you to set the same task as an upstream dependency to multiple other tasks. 
+
+```python
+@task 
+def get_num():
+    return 42
+
+@task 
+def add_one(num):
+    return num + 1
+
+@task
+def add_two(num):
+    return num + 2
+
+num = get_num()
+add_one(num)
+add_two(num)
+```
+
+![TaskFlow Dependencies](/img/guides/managing-dependencies_taskflow_2.png)
+
+If your DAG contains a mix of Python function tasks defined with decorators and tasks defined with traditional operators, you can set the dependencies by assigning the decorated task invocation to a variable and then defining the dependencies normally. For example, in the DAG below the `upload_data_to_s3` task is defined by the `@task` decorator and invoked with `upload_data = upload_data_to_s3(s3_bucket, test_s3_key)`. The `upload_data` variable is used in the last line to define dependencies.
 
 ```python
 @dag(
