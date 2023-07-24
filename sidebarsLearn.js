@@ -202,7 +202,7 @@ module.exports = {
               'connections/odbc',
               'connections/postgres',
               'connections/redshift',
-              'connections/snowflake',
+              'connections/snowflake'
             ],
           },
           {

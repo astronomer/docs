@@ -73,10 +73,6 @@ Airflow uses [psycopg2](https://pypi.org/project/psycopg2/) python library to co
 
 ## See also
 
-<<<<<<< HEAD
 - [Apache Airflow Postgres provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/index.html)
-=======
-- [Apache Airflow Postgres provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/index.html)
->>>>>>> 6a2704bd (Postgres, MSSQL Server and Azure blob storage)
-- [Postgres modules](https://registry.astronomer.io/modules?limit=24&sorts=updatedAt%3Adesc&query=postgres) and [example DAGs](https://registry.astronomer.io/dags?query=postgres) in the Astronomer Registry.
+- [Postgres modules](https://registry.astronomer.io/modules?limit=24&sorts=updatedAt%3Adesc&query=postgres) and [example DAGs](https://registry.astronomer.io/dags?query=postgres) in the Astronomer Registry
 - [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
