@@ -69,5 +69,5 @@ Airflow uses Python's `requests` library to connect to dbt Cloud through the [db
 
 ## See also
 - [Apache Airflow dbt cloud provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-dbt-cloud/stable/connections.html)
-- [dbt Cloud modules](https://registry.astronomer.io/modules?limit=24&sorts=updatedAt%3Adesc&query=dbt) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=dbt+cloud) in Astronomer Registry
+- [dbt Cloud modules](https://registry.astronomer.io/modules?limit=24&sorts=updatedAt%3Adesc&query=dbt) and [example DAGs](https://registry.astronomer.io/dags?limit=24&sorts=updatedAt%3Adesc&query=dbt+cloud) in the Astronomer Registry
 - [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
