@@ -466,4 +466,4 @@ In the following example DAG there is a simple branch with a downstream task tha
 
 This image shows the resulting DAG:
 
-![Branch Dependencies](/img/guides/branch_2.png)
+![Branch Dependencies](/img/guides/managing-dependencies_branch.png)
