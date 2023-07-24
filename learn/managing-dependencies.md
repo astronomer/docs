@@ -83,7 +83,7 @@ For example, if you have a DAG with four sequential tasks, the dependencies can 
 
 All of these methods are equivalent and result in the DAG shown in the following image:
 
-![Basic Dependencies](/img/guides/basic_dependencies.png)
+![Basic Dependencies](/img/guides/managing_dependencies_basic_dependencies.png)
 
 Astronomer recommends using a single method consistently. Using both bit-shift operators and `set_upstream`/`set_downstream` in your DAGs can overly-complicate your code. 
 
@@ -99,7 +99,7 @@ t0 >> t1 >> (t2, t3)
 
 These statements are equivalent and result in the DAG shown in the following image: 
 
-![List Dependencies](/img/guides/list_dependencies.png)
+![List Dependencies](/img/guides/managing-dependencies_list_dependencies.png)
 
 When using bit-shift operators and the `.set_upstream` and `.set_downstream` method, it is not possible to set dependencies between two lists. For example, `[t0, t1] >> [t2, t3]` returns an error. To set dependencies between lists, use the dependency functions described in the next section.
 
@@ -124,7 +124,7 @@ chain(*list_of_tasks)
 
 This code creates the following DAG structure:
 
-![List Dependencies](/img/guides/chain_dependencies_1.png)
+![List Dependencies](/img/guides/managing-dependencies_chain_dependencies_1.png)
 
 ### chain()
 
@@ -137,7 +137,7 @@ chain(t0, t1, [t2, t3, t4], [t5, t6, t7], t8)
 
 This code creates the following DAG structure:
 
-![Chain Dependencies](/img/guides/chain_dependencies.png)
+![Chain Dependencies](/img/guides/managing-dependencies_chain_dependencies.png)
 
 When using the `chain` function, any lists or tuples that are set to depend directly on each other need to be of the same length.  
 
@@ -158,7 +158,7 @@ Replacing `chain` with `chain_linear` in the previous example as shown in this c
 chain_linear(t0, t1, [t2, t3, t4], [t5, t6, t7], t8)
 ```
 
-![Chain Linear Dependencies 2](/img/guides/chain_linear_dependencies_1.png)
+![Chain Linear Dependencies 2](/img/guides/managing-dependencies_chain_linear_dependencies_1.png)
 
 The `chain_linear()` function can take in lists of any length in any order. For example:
 
@@ -166,7 +166,7 @@ The `chain_linear()` function can take in lists of any length in any order. For 
 chain_linear([t0, t1], [t2, t3, t4])
 ```
 
-![Chain Linear Dependencies 1](/img/guides/chain_linear_dependencies_2.png)
+![Chain Linear Dependencies 1](/img/guides/managing-dependencies_chain_linear_dependencies_2.png)
 
 ## Loops and dependencies
 
@@ -198,7 +198,7 @@ for endpoint in endpoints:
 
 This image shows the resulting DAG:
 
-![Loop Dependencies](/img/guides/loop_dependencies.png)
+![Loop Dependencies](/img/guides/managing-dependencies_loop_dep.png)
 
 ## Dependencies in dynamic task mapping
 
@@ -225,11 +225,13 @@ start >> multiply_obj >> end
 
 ```
 
+![Dependencies dynamic tasks](/img/guides/managing-dependencies_dynamic_tasks.png)
+
 ## Task group dependencies
 
-[Task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a UI-based grouping concept available in Airflow 2.0 and later. For more information on task groups, including how to create them and when to use them, see [Using Task Groups in Airflow](task-groups.md).
+[Task groups](task-groups.md) are an Airflow concept allowing for grouping of tasks in the UI and for [dynamic mapping use cases](task-groups.md#generate-task-groups-dynamically-at-runtime). You can get more information on task groups in the respective guide. This section will explain how to set dependencies between task groups.
 
-When working with task groups, it is important to note that dependencies can be set both inside and outside of the group. For example, in the following DAG code there is a start task, a task group with two dependent tasks, and an end task that needs to happen sequentially. The dependencies between the two tasks in the task group are set within the task group's context (`t1 >> t2`). The dependencies between the task group and the start and end tasks are set within the DAG's context (`t0 >> tg1 >> t3`).
+Dependencies can be set both inside and outside of a task group. For example, in the following DAG code there is a start task, a task group with two dependent tasks, and an end task. All of these task need to happen sequentially. The dependencies between the two tasks in the task group are set within the task group's context (`t1 >> t2`). The dependencies between the task group and the start and end tasks are set within the DAG's context (`t0 >> tg1() >> t3`).
 
 <Tabs
     defaultValue="taskflow"
@@ -287,7 +289,7 @@ t0 >> tg1 >> t3
 
 This image shows the resulting DAG:
 
-![Task Group Dependencies](/img/guides/task_group.png)
+![Task Group Dependencies](/img/guides/managing-dependencies_tg_dependencies_1.png)
 
 ## TaskFlow API dependencies
 
