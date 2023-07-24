@@ -5,12 +5,8 @@ id: install-azure-hybrid
 sidebar_custom_props: { icon: 'img/azure.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2
+description: 'Use this document to complete the installation of Astro Hybrid in a Microsoft Azure subscription.'
 ---
-
-<head>
-  <meta name="description" content="Instructions for completing an Astro installation on an existing Microsoft Azure instance. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
-  <meta name="og:description" content="Instructions for completing an Astro installation on an existing Microsoft Azure instance. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -25,35 +21,39 @@ To get started on Astro Hosted, see [Start a trial](trial.md).
 
 To install Astro Hybrid on Azure, Astronomer will create an Astro cluster in a dedicated Azure account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 
-To complete the installation process, you'll:
+To complete the installation, you'll:
 
-- Add the Astronomer Service Principal to your Azure Active Directory (Azure AD) instance.
-- Assign the Astronomer Service Principal an Owner role to your subscription.
-- Register Microsoft Azure features.
+- Create an Astronomer account.
+- Create a new Azure subscription with the required Azure resources.
+- Add the IAM service principal to Azure AD that'll be used by Astro.
 
-When you've completed the installation process, Astronomer support creates a cluster within your Azure subscription to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
-
-For more information about managing Azure subscriptions with the Azure CLI, see [How to manage Azure subscriptions with the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli).
+Astronomer support will create infrastructure within your AWS account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Prerequisites
 
-- A clean Azure subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
+- A new [Azure subscription](https://learn.microsoft.com/en-us/dynamics-nav/how-to--sign-up-for-a-microsoft-azure-subscription). For security reasons, Azure subscriptions with existing infrastructure aren't supported. Also, no [Azure policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) should be applicable to the subscription's [Azure management group](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
+
 - An Azure AD user with the following role assignments:
 
     - `Application Administrator`. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+
     - `Owner` with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles).
 
     This Azure AD user is required for data plane activation. You can remove the user or modify their role assignments after the cluster is created.
 
-- Microsoft Azure CLI or Azure Az PowerShell module.  See [How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and [Install the Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
-- A minimum quota of 48 Standard Ddv5-series vCPUs in the deployment region. You can use Dv5-series vCPUs, but you'll need 96 total vCPUs composed of 48 Ddv5-series vCPUs and 48 Dv5-series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
-- Confirmation that the VM types are available in all Availability Zones in the selected region. For example, you run the following Azure Az PowerShell command to confirm that the Standard_D4d_v5 VMs (the default for Astro) are available in the Central US region: 
+- [Microsoft Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) or [Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
+
+- A CIDR block with a range of `/19`. If you don't have any preferred CIDR block, Astro will provision a VPC using a default of `172.20.0.0/19`. Astro uses this VPC for four subnets, one each for database, pods, nodes, and private endpoints. See [Azure resource reference](resource-reference-azure-hybrid.md) for details.
+
+- A minimum quota of 48 Standard Ddv5-series vCPUs in the selected region. You can use Dv5-series vCPUs, but you'll need 96 total vCPUs composed of 48 Ddv5-series vCPUs and 48 Dv5-series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
+
+    Confirm that the VM types are available in all Availability Zones in the selected region. For example, you can run the following Azure Az PowerShell command to confirm that the Standard_D4d_v5 VMs (the default for Astro) are available in the `CentralUS` region: 
 
     ```  
     az vm list-skus --location centralus --size Standard_D --all --output table | grep -e 'Restrictions\|Standard_D4d_v5'
     ```  
   
-    If the VM types are unavailable, the output returns `Restrictions`. Contact Microsoft Support and ask to have the VMs enabled.
+    If the VM types are unavailable, the output returns `Restrictions`. Contact Microsoft Support to have these VMs enabled.
   
     ```
     ResourceType     Locations    Name                    Zones    Restrictions
@@ -61,17 +61,16 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
     ```
 
 - A subscription to the [Astro status page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or when scheduled maintenance is planned.
+
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
     - `https://cloud.astronomer.io/`
-    - `https://astro-<your-org>.datakin.com/`
-    - `https://<your-org>.astronomer.run/`
     - `https://api.astronomer.io/`
     - `https://images.astronomer.cloud/`
     - `https://auth.astronomer.io/`
     - `https://updates.astronomer.io/`
     - `https://install.astronomer.io/`
-
-For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure-hybrid.md).
+    - `https://<your-org>.astronomer.run/`
+    - `https://astro-<your-org>.datakin.com/`
 
 ### VNet peering prerequisites (Optional)
 
@@ -204,24 +203,21 @@ After you've prepared your environment for data plane activation, provide Astron
 
 - Your preferred Astro cluster name.
 - Your Azure TenantID and SubscriptionID.
+- Your preferred region. The default is `centralus`.
 - Optional. Your preferred node instance type. The default is Standard_D4d_v5.
 - Optional. Your preferred Postgres Flexible Server instance type. The default is Standard_D4ds_v4.
-- Optional. Your preferred maximum node count.
+- Optional. Your preferred maximum node count. The default is 20.
 - Optional. Your custom CIDR ranges for Astronomer service connections. The default is `172.20.0.0/19`.
 
-If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `CentralUS` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure-hybrid.md).
+See [Azure resource reference](resource-reference-azure-hybrid.md) for all supported cluster configurations.
 
 ## Astronomer support creates the cluster
 
-After you provide Astronomer support with the setup information for your organization, Astronomer support creates your first cluster on Azure.
-
-Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
+After you provide Astronomer support with the setup information for your cluster, Astronomer support creates the cluster on Azure. Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
 
 ## Create a Deployment and confirm the install
 
-When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). 
-
-To confirm a successful installation, in the Cloud UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
+When Astronomer support confirms that your Astro cluster has been created, you can confirm it in the [Cloud UI](https://cloud.astronomer.io) by clicking on the Astronomer icon in the top left corner, then click on **Clusters** to see your cluster. You can then [create a Deployment](create-first-DAG#step-1-create-a-deployment) and start to [develop and deploy your DAGs](create-first-DAG#step-2-create-an-astro-project).
 
 ## Next steps
 
