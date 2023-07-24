@@ -159,6 +159,6 @@ Complete the manual setup if you configured your existing Astro app without usin
 
 ### What if an Okta user is out of sync with their Astro user account?
 
-If you removed an Okta user but their Astro account remains, [delete the account from Astro](add-user.md#update-or-remove-an-organization-user).
+If you removed an Okta user but their Astro account remains, [delete the account from Astro](manage-organization-users.md#update-or-remove-an-organization-user).
 
 If an Astro user is not appearing for an Okta user as expected, remove and re-assign the user in Okta.
