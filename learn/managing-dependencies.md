@@ -83,7 +83,7 @@ For example, if you have a DAG with four sequential tasks, the dependencies can 
 
 All of these methods are equivalent and result in the DAG shown in the following image:
 
-![Basic Dependencies](/img/guides/managing_dependencies_basic_dependencies.png)
+![Basic Dependencies](/img/guides/managing-dependencies_basic_dependencies.png)
 
 Astronomer recommends using a single method consistently. Using both bit-shift operators and `set_upstream`/`set_downstream` in your DAGs can overly-complicate your code. 
 
@@ -290,6 +290,12 @@ t0 >> tg1 >> t3
 This image shows the resulting DAG:
 
 ![Task Group Dependencies](/img/guides/managing-dependencies_tg_dependencies_1.png)
+
+You can also set dependencies between task groups, between tasks outside of a task group and tasks inside a task group and even between tasks in different (nested) task groups.
+
+The image below shows types of dependencies that can be set between tasks and task groups. You can find the code that created this DAG in a GitHub repository both for the [TaskFlow API](https://github.com/astronomer/webinar-task-groups/blob/main/dags/example_complex_dependencies_1.py) and [traditional version](https://github.com/astronomer/webinar-task-groups/blob/main/dags/example_complex_dependencies_2.py).
+
+![Task Group Dependencies](/img/guides/managing-dependencies_task_group_complex.png)
 
 ## TaskFlow API dependencies
 
