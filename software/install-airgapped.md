@@ -201,7 +201,7 @@ To complete this setup:
         spec:
           containers:
           - name: astronomer-releases
-            image: <use same image as es-ingress-controller>
+            image: ap-nginx-es
             resources:
               requests:
                 memory: "32Mi"
