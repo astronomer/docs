@@ -204,6 +204,16 @@ This image shows the resulting DAG:
 
 Tasks that utilize [dynamic task mapping](dynamic-tasks.md) can be set to be up- and downstream of other tasks as with regular tasks. Keep in mind that when using the default [trigger rule](#trigger-rules) `all_success`, all mapped task instances need to be successful for the downstream task to run. For the purpose of trigger rules, mapped task instances behave like a set of parallel upstream tasks.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "dependencies-in-dynamic-task-mapping"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
 start=EmptyOperator(task_id="start")
 
@@ -224,6 +234,34 @@ start >> multiply_obj >> end
 # chain(start, multiply_obj, end)
 
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+start=EmptyOperator(task_id="start")
+
+def multiply_func(x,y):
+    return x*y
+
+multiply_obj = PythonOperator.partial(
+    task_id="multiply",
+    python_callable=multiply_func,
+    op_args=[2]
+).expand(op_kwargs=[{"y": 1}, {"y": 2}, {"y": 3}])
+
+# end will only run if all mapped task instances of the multiply task are successful
+end = EmptyOperator(task_id="end")
+
+# all of the following ways of setting dependencies are valid
+# multiply_obj.set_downstream(end)
+# end.set_upstream(multiply_obj)
+# chain(start, multiply_obj, end)
+
+```
+</TabItem>
+</Tabs>
 
 ![Dependencies dynamic tasks](/img/guides/managing-dependencies_dynamic_tasks.png)
 
@@ -299,7 +337,7 @@ The image below shows types of dependencies that can be set between tasks and ta
 
 ## TaskFlow API dependencies
 
-The [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html), available in Airflow 2.0 and later, lets you turn Python functions into Airflow tasks using the `@task` decorator. 
+The [TaskFlow API](airflow-decorators.md) added decorators to Airflow, for example to allow you to turn Python functions into Airflow tasks using the `@task` decorator. 
 
 If your DAG has only Python functions that are all defined with the decorator, invoke Python functions to set dependencies. For example, in the following DAG there are two dependent tasks, `get_a_cat_fact` and `print_the_cat_fact`. To set the dependencies, you invoke the function `print_the_cat_fact(get_a_cat_fact())`:
 
