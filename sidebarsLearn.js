@@ -198,6 +198,7 @@ module.exports = {
               'connections/bigquery',
               'connections/databricks',
               'connections/ms-sqlserver',
+              'connections/odbc',
               'connections/postgres'
             ],
           },

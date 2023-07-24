@@ -89,6 +89,6 @@ Airflow uses [PyMSSQL](https://pypi.org/project/pymssql/) to connect to Microsof
 
 ## See also
 
-- [Apache Airflow Microsoft provider OSS docs](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-mssql/stable/index.html)
+- [Apache Airflow Microsoft provider package documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-mssql/stable/index.html)
 - [MS SQL Server Modules](https://registry.astronomer.io/modules?query=mssql) in the Astronomer Registry
 - [Import and export Airflow connections using Astro CLI](https://docs.astronomer.io/astro/import-export-connections-variables#using-the-astro-cli-local-environments-only)
