@@ -29,7 +29,7 @@ To complete the installation, you'll:
 
 - Create an Astronomer account.
 - Create a new AWS account with the required AWS resources.
-- Create the IAM policies used by Astro. This includes a cross-account IAM role that Astro can assume and [Permissions boundaries for IAM entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html).
+- Create the IAM policies used by Astro. This includes a cross-account IAM role that Astro can assume and [permissions boundaries for IAM entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html).
 
 Astronomer support will create infrastructure within your AWS account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
@@ -48,7 +48,7 @@ Astronomer support will create infrastructure within your AWS account to host th
 
 - A CIDR block with a range of `/20`. If you don't have a preferred CIDR block, Astro will provision a VPC using a default of `172.20.0.0/20`. Astro uses this VPC for 2 public subnets and 2 private subnets. See [AWS resource reference](resource-reference-aws-hybrid.md).
 
-- Admin access to create a stack using [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html).
+- Permissions to create a stack using [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html).
 
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
     - `https://cloud.astronomer.io/`
