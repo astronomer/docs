@@ -159,13 +159,13 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
     ]}>
 <TabItem value="PrivateRegistry">
 
-### Prerequisites
+#### Prerequisites
 
 - An [Astro project](develop-project.md#create-an-astro-project).
 - An [Astro Deployment](configure-deployment-resources.md).
 - Access to a private Docker registry.
 
-### Step 1: Create a Kubernetes Secret
+#### Step 1: Create a Kubernetes Secret
 
 To run Docker images from a private registry on Astro, a Kubernetes Secret that contains credentials to your registry must be created. Injecting this secret into your Deployment's namespace will give your tasks access to Docker images within your private registry.
 
@@ -176,7 +176,7 @@ To run Docker images from a private registry on Astro, a Kubernetes Secret that 
 
 Astronomer Support will give you instructions on how to securely send your credentials. Do not send this file by email, as it contains sensitive credentials to your registry. Astronomer will use these credentials to create a Kubernetes secret in your Deployment's namespace.
 
-### Step 2: Specify the Kubernetes Secret in your DAG
+#### Step 2: Specify the Kubernetes Secret in your DAG
 
 Once Astronomer has added the Kubernetes secret to your Deployment, you will be notified and provided with the name of the secret.
 
@@ -201,7 +201,6 @@ KubernetesPodOperator(
 </TabItem>
 
 <TabItem value="AWSECR">
-
 
 :::info
 
@@ -246,9 +245,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
     - Open the **Private** tab and then copy the URI of the repository that hosts the Docker image.
 
 </TabItem>
-
-<TabItem value="Google Artifact Registry">
-
+<TabItem value="GoogleArtifactRegistry">
 
 :::info
 
@@ -258,8 +255,7 @@ This setup is available only on Astro Hybrid.
 
 If your Docker image is hosted in Google Artifact Registry repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret or specify the Kubernetes secret in your DAG. Docker images hosted in Google Artifact Registry repositories can be pulled only to Deployments hosted on GCP clusters.
 
-
-### Steps
+#### Setup
 
 1. Contact [Astronomer support](https://support.astronomer.io) to request the Compute Engine default service account ID for your cluster.
 2. Log in to Google Artifact Registry.
