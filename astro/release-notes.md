@@ -78,7 +78,7 @@ See [Astro Hosted resource reference](resource-reference-hosted.md) for more inf
 ### Additional improvements
 
 - You can now add a new Astro user to Workspaces before the user has accepted their invite.
-- You can now add a user to a Workspace even if the user hasn't been added to your Organization. Users added to Workspaces this way are automatically added to your Organization as an Organization Member.
+- If you have Organization Owner permissions, you can now add a user to a Workspace even if the user hasn't been added to your Organization. Users added to Workspaces this way are automatically added to your Organization as an Organization Member.
 - The Cloud UI now shows your Team IDs in **Settings** > **Access Management** > **Teams**. Use Team IDs to add Teams to Workspaces using the Astro CLI.
 - A Team's **Updated At** and **Updated By** values are now updated when you change the Team's permissions in a Workspace or Organization.
 
