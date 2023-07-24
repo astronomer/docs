@@ -6,9 +6,7 @@ description: View example workflows and templates for managing Deployments as co
 ---
 
 
-## Example use-cases
-
-This section prvides examples in detail that you can implement using Astro CLI, your version-control system (VCS) and your CI/CD process. In these examples, we are using GitHub as the VCS and GitHub Actions as the CI/CD process.
+This page provides some example use-cases in detail that you can implement using Astro CLI, your version-control system (VCS) and your CI/CD process. In these examples, we are using GitHub as the VCS and GitHub Actions as the CI/CD process.
 
 ### Create ephemeral Deployments based on branch name
 
@@ -37,3 +35,7 @@ To auto-detect if you need DAG-based deploy or image-based deploy to staging, fo
 1. Create a GitHub action to copy all DAGs from the `dags` directory to a `astro_deploy` branch. This should get triggered when a Pull Request (PR) is created to `staging` branch from a `dev` prefixed branch.
 2. Create a GitHub action to check if only the files in `dags` directory have changed or other files have also changed. This should get triggered when changes are pushed to `astro deploy` branch. When changes are detected only in `dags` directory, then trigger DAG-based deploy. Otherwise, if there are changes to files outside the `dags` directory, then trigger an image-based deploy.
 3. Create a GitHub action to deploy changes from `astro_deploy` branch to `main` branch. This should get triggered when a PR is created to `main` from `astro_deploy`. This Github action will do an image-based deploy to your production environment.
+
+
+### i am not very happy with my diagram, wondering if we do this in Figma ?
+![Flow diagram for CI/CD with DAG-based and image-based deploys](/img/docs/ci_cd_dag_and_image.png)

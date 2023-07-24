@@ -126,7 +126,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Programmatic access",
+      label: "Automation & CI/CD",
       items: [
         "automation-overview",
         "automation-authentication",
