@@ -131,7 +131,7 @@ If you don't specify your organization's preferred configurations, Astronomer cr
 Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
 - VPC Name/ID and region for peering with Astronomer.
-- The IPs of your DNS servers.
+- Google Cloud project ID of the target VPC.
 
 ## Astronomer support creates the cluster
 
