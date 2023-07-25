@@ -1,44 +1,34 @@
 ---
 sidebar_label: 'Authentication'
-title: 'Authenticate to Astro using Astro CLI'
+title: 'Authenticate to Astro from an automation tool'
 id: automation-authentication
-description: Learn about all possible ways that you can authenticate the Astro CLI and automation tools for automated workflows.
+description: Learn about all possible ways that you can authenticate to Astro from the Astro CLI and automation tools.
 ---
 
-Authentication is a process that proves a user's identity in Astro. This process doesn't care what a user can do in Astro. 
+Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). Before you can use scripting or automation on Astro, you must prove to Astro that your automation tool is using the right identity to access specific Astro resources. You can do this using the Astro CLI.
 
-Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). To manage your users and Deployments on Astro using Astro CLI, you must first [log in to Astro](log-in-to-astro.md#log-in-to-the-astro-cli).
+For most automation tools, you complete the following actions to authenticate to Astro:
 
-You can use either of the following methods to authenticate to Astro from Astro CLI:
+- Create a credential in Astro.
+- Install the Astro CLI in the environment where you want to run automated actions, such as a GitHub action.
+- Make the credential accessible to the Astro CLI installed in your automation environment.
 
-- Your Astro user credentials, which generates a short-lived authentication token.
+## Create a credential
+
+You can use any of the following credentials to authenticate in an automated process:
+
 - A Deployment API key.
 - A Workspace API token.
 - An Organization API token.
 
-To access your Deployment manually from your local machine, or to deploy changes to your Deployment, you can use your Astro user credentials. For programmatic access, Astronomer recommends to use the API token or API key method. 
+You can create API tokens with granular access permissions, ensuring these tokens are not over-provisioned for their intended use.
 
-## Benefits of API tokens or API keys
+## Install the Astro CLI in your automation tool
 
-Team leaders and administrators can use Organization and Workspace permissions to give proper authorization to API tokens and keys just like to an Astro user. You can use an API token to complete the following actions without authenticating as a user:
+## Make credentials accessible to the Astro CLI
 
-- Deploy code to Astro through CI/CD with tools such as GitHub Actions or Circle CI.
-- Create ephemeral Deployments for testing your DAGs before Production deploy.
-- Enforce CI/CD for your Production Deployments allowing only API tokens to deploy changes.
-- Update Deployment resources, such as changing the executor, changing the number scheduler AUs, etc.
-- Fetch a short-lived access token to use Airflow REST API on Astro. This token assumes the permissions of a API token or an API key used in the request. See [Make requests to Airflow REST API](airflow-api.md) for details.
 
-## Astro user based access
-
-Your Astro user *authenticates* to the Astro platform and the permissions assigned to the user in Astro *authorizes* access to the Workspaces and Deployments in your Organization. For example, if your Astro user has permissions of Organization Member and Workspace Viewer for Workspace A, you will not be able to create any Deployments or push changes to any Deployments in Workspace A. Whereas, if your user has permissions of Workspace Editor in Workspace B, you will be able to create Deployments or push changes to Deployments in Workspace B.
-
-To login to the Astro platform using your user credentials, use Astro CLI command [`astro login`](log-in-to-astro.md#log-in-to-the-astro-cli). If you do not have access to a browser, you can use [browserless authentication](log-in-to-astro.md#browserless-authentication).
-
-## API based access
-
-Astronomer provides API based access to authorize to your Astro platform. Astro API tokens enables you to easily automate critical functions, at the Deployment, Workspace, and Organization level. You can create API tokens with granular access permissions, ensuring these tokens are not over-provisioned for their intended use.
-
-### A Deployment API key
+### Deployment API keys
 
 :::caution
 
@@ -65,7 +55,7 @@ When using a Deployment API key, keep the following in mind:
 - Any user or service with access to an API key and secret can access the corresponding Deployment. The only way to delete this access is to delete the API key or delete the Deployment.
 
 
-### A Workspace API token
+### Workspace API tokens
 
 A Workspace API token is strictly scoped to a Workspace. You can use Workspace API tokens to automate actions you perform on a Workspace or the Deployments in a Workspace. 
 
@@ -77,12 +67,12 @@ ASTRO_API_TOKEN=<your-api-token>
 
 ```
 
-### An Organization API token
+### Organization API tokens
 
-To use a Workspace API token as an authentication method, export the following environment variable in your local or CI/CD environment:
+To use an Organization API token as an authentication method, export the following environment variable in your local or CI/CD environment:
 
 ```bash
 
 ASTRO_API_TOKEN=<your-api-token>
-
+w
 ```
