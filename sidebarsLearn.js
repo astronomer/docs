@@ -199,7 +199,6 @@ module.exports = {
               'connections/databricks',
               'connections/dbt-cloud',
               'connections/ms-sqlserver',
-              'connections/odbc',
               'connections/postgres',
               'connections/redshift',
               'connections/snowflake'
