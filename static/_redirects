@@ -4,7 +4,7 @@
 /api/event https://plausible.io/api/event 200
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.32/* /software/:splat
+/software/0.33/* /software/:splat
 
 # redirect relative links for deprecated Software docs to archive page. Version-specific
 /software/0.16/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.16/:splat.md 301

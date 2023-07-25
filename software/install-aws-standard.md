@@ -356,10 +356,10 @@ helm repo update
 This ensures that you pull the latest image from the Astronomer Helm repository. Now, run:
 
 ```sh
-helm install -f config.yaml --version=0.32 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f config.yaml --version=0.33 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
-This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.32.x`.  For example, to install Astronomer Software v0.32.0, you specify `--version=0.32.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
+This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.33.x`.  For example, to install Astronomer Software v0.33.0, you specify `--version=0.32.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
 
 When you're defining `<your-platform-release-name>`, Astronomer recommends limiting the name to 12 characters to avoid operational issues.
 
