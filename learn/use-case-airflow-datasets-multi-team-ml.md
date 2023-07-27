@@ -136,7 +136,6 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 - Create an instance of S3FileSystem by specifying the access key, secret key, and the endpoint URL of the S3-compatible storage system.
 
-- The target variable is defined as 'MedHouseVal', which represents the column to be predicted.
 
 - Open the file containing the feature DataFrame created by the consumer DAG using the S3 file system (fs.open) and train a ridge regression model on the features.
 
