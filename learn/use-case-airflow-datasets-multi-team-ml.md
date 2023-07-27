@@ -67,7 +67,7 @@ The `extract_housing_data` task imports data from SciKit learn using the fetch_c
         return fetch_california_housing(download_if_missing=True, as_frame=True).frame
 ```
 
-The next task `build_features` uses the Astro SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator, which means that it operates on a DataFrame and returns a DataFrame as well, eliminating the need to manually convert the raw California Housing Data into a dataframe. It takes two parameters: raw_df, which represents the raw input DataFrame, and model_dir, which is a string representing the directory where the model artifacts will be stored. This is used to accomplish the following
+Then, the `build_features` task uses the Astro SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to implement a custom Python function that completes the following:
 
 - The necessary libraries are imported within the function, including `StandardScaler` from scikit-learn, `pandas` for DataFrame operations, dump from joblib for serialization, and `S3FileSystem` from s3fs for interacting with an S3-compatible object storage system.
 
