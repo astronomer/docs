@@ -140,7 +140,6 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 - Open the file containing the feature DataFrame created by the consumer DAG using the S3 file system (fs.open) and train a ridge regression model on the features.
 
 
-- An instance of RidgeCV is created for ridge regression. The alphas parameter specifies a range of alpha values for regularization.
 
 
 - The trained model is serialized and saved to the specified model_dir using the dump function from joblib. The file name for the model is set as 'ridgecv.joblib'.
