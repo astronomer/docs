@@ -116,14 +116,6 @@ Finally, the `save_data_to_s3` task uses the Astro SDK [@aql.export_file](https:
 
 We then use the Taskflow API to define the relationships between these tasks, starting the DAG with the `extract_housing_data` task to import the housing dataset and return it as a task output. Then, the `extract_housing_data` task output is passed to the `save_data_to_s3` task to be saved to the local S3FileSystem. In parallel, the same dataset is passed to the `build_features` task, where is used for feature engineering.
 
-```python
-    extract_df = extract_housing_data()
-    loaded_data = aql.export_file(task_id='save_data_to_s3', 
-                                     input_data=extract_df, 
-                                     output_file=File(os.path.join(data_bucket, 'housing.csv')), 
-                                     if_exists="replace")
-
-    feature_df = build_features(extract_df, model_dir)
 ```
 
 The second DAG, [astro_ml_consumer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py), consumes the normalized dataset created by the first DAG and uses it to train a model and execute a prediction on the median house value in California. 
