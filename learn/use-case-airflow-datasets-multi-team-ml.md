@@ -134,7 +134,7 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 - Import necessary libraries, including RidgeCV from scikit-learn for ridge regression, numpy for numerical operations, dump from joblib for serialization, and S3FileSystem from s3fs for interacting with an S3-compatible object storage system.
 
-- An instance of S3FileSystem is created, specifying the access key, secret key, and the endpoint URL of the S3-compatible storage system.
+- Create an instance of S3FileSystem by specifying the access key, secret key, and the endpoint URL of the S3-compatible storage system.
 
 - The target variable is defined as 'MedHouseVal', which represents the column to be predicted.
 
