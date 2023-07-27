@@ -114,7 +114,6 @@ Finally, the `save_data_to_s3` task uses the Astro SDK [@aql.export_file](https:
                                      if_exists="replace")
 ```
 
-We then use the Taskflow API to define the relationships between these tasks, starting the DAG with the `extract_housing_data` task to import the housing dataset and return it as a task output. Then, the `extract_housing_data` task output is passed to the `save_data_to_s3` task to be saved to the local S3FileSystem. In parallel, the same dataset is passed to the `build_features` task, where is used for feature engineering.
 
 ```
 
