@@ -34,6 +34,8 @@ A connection from Airflow to Google BigQuery requires the following information:
 - Service account key file
 - Google Cloud Project ID
 
+Complete one of the following sets of steps to retrieve these values:
+
 <Tabs
     defaultValue="key-file-value"
     groupId= "bigquery-connection"

@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/azure-blob-storage.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[Azure Storage Account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) provides the storage for all of your Azure Storage data objects - blobs, files, queues, tables. Integrating Azure storage with Airflow using blob storage connection will allow users to perform different kind of operations on blob objects stored in the cloud. For example, users can create or delete a container, upload or read a blob, download blobs etc.
+[Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) provides the storage for all of your Azure Storage data objects, including blobs, files, queues, and tables. Integrating your Azure storage account with Airflow lets you perform different kind of operations on blob objects stored in the cloud. For example, you can create or delete a container, upload or read a blob, or download blobs using Airflow.
 
 This guide explains how to set up an Azure Blob Storage connection using the **Azure Blob Storage** connection type. Astronomer recommends using this connection type because it utilizes the `wasb` protocol, which means you can connect with any Azure Storage account including Azure Data Lake Gen 1 and Azure Data Lake Gen 2.
 
@@ -17,13 +17,12 @@ This guide explains how to set up an Azure Blob Storage connection using the **A
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
-- An [Azure Storage Account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal).
+- An [Azure storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal).
 - [Permissions to access](https://learn.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal) blob data from your local Airflow environment.
-
 
 ## Get connection details
 
-To create an Azure blob storage connection in Airflow, you can use any of the following methods:
+To create an Azure Blob Storage connection in Airflow, you can use any of the following methods:
 
 <Tabs
     defaultValue="shared-access-key"
@@ -37,19 +36,20 @@ To create an Azure blob storage connection in Airflow, you can use any of the fo
 
 <TabItem value="shared-access-key">
 
-Microsoft generates two [Shared access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) by default for every storage account. They can be used to authorize access to the data in your storage account. 
+Microsoft generates two [shared access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal) by default for every storage account. You can use them to give Airflow access to the data in your storage account. 
 
 An Azure Blob Storage connection using a shared access key requires the following information:
 
 - Name of the storage account
 - Shared access key
 
-1. In your Azure portal, navigate to your Storage account view and select your subscription. 
+Complete the following steps to retrieve these values:
+
+1. In your Azure portal, open your storage account. 
 2. Copy the name of your storage account.
-3. Follow the [Microsoft documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to copy the account **Key**.
+3. Follow [Microsoft documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to copy the storage account **Key**.
 
 </TabItem>
-
 
 <TabItem value="connection-string">
 
@@ -60,9 +60,11 @@ An Azure blob storage connection using connection string requires the following 
 - Storage account name
 - Storage account connection string
 
-1. In your Azure portal, navigate to your Storage account view and select your subscription. 
+Complete the following steps to retrieve these values:
+
+1. In your Azure portal, open your storage account. 
 2. Copy the name of your storage account.
-3. Follow the [Microsoft documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-get-info?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=portal#get-a-connection-string-for-the-storage-account) to copy the **Connection string**. 
+3. Follow [Microsoft documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-get-info?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=portal#get-a-connection-string-for-the-storage-account) to copy the **Connection string**. 
 
 </TabItem>
 
@@ -74,6 +76,8 @@ An Azure blob storage connection using SAS token requires the following informat
 
 - Storage account name
 - SAS token
+
+Complete the following steps to retrieve these values:
 
 1. In your Azure portal, navigate to your Storage account view and select your subscription. 
 2. Copy the name of your storage account.
@@ -92,12 +96,13 @@ An Azure Blob Storage connection using a service principal requires the followin
 - Tenant ID
 - Client secret
 
-1. In your Azure portal, navigate to your Storage account view and select your subscription. 
+Complete the following steps to retrieve these values:
+
+1. In your Azure portal, open your storage account.
 2. Follow [Azure documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-get-info?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=portal#get-service-endpoints-for-the-storage-account) to copy your **Blob Service URL**. It should be in the format `https://mystorageaccount.blob.core.windows.net/`.
-3. Navigate to your Azure AD application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
+3. Open your Azure AD application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
 4. [Create a new client secret](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
 5. [Assign](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) role to your app so that Airflow can access blob objects in your storage account.
-
 
 </TabItem>
 </Tabs>
@@ -126,7 +131,7 @@ An Azure Blob Storage connection using a service principal requires the followin
 
 2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
-3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storaged** connection type.
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storage** connection type.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
@@ -142,7 +147,6 @@ An Azure Blob Storage connection using a service principal requires the followin
 
 <TabItem value="connection-string">
 
-
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
@@ -153,7 +157,7 @@ An Azure Blob Storage connection using a service principal requires the followin
 
 2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
-3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storaged** connection type.
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storage** connection type.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
@@ -166,7 +170,8 @@ An Azure Blob Storage connection using a service principal requires the followin
 
 :::tip
 
-You can also use this connection string method for SAS token. When you create SAS token to connect to Azure storage account, you can copy it's connection string and then paste its value to the **Blob Storage Connection String** field.
+If you want, you can replace the value in **Blob Storage Connection String** with the connection string for an SAS token.
+
 :::
 
 </TabItem>
@@ -183,7 +188,7 @@ You can also use this connection string method for SAS token. When you create SA
 
 2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
-3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storaged** connection type.
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storage** connection type.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
@@ -209,7 +214,7 @@ You can also use this connection string method for SAS token. When you create SA
 
 2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
-3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storaged** connection type.
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then choose the **Azure Blob Storage** connection type.
 
 4. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
@@ -219,7 +224,7 @@ You can also use this connection string method for SAS token. When you create SA
     - **Blob Storage Key**: Enter your client secret **Value**.
     - **Tenant Id**: Enter your **Directory (tenant) ID**. 
 
-6. Click on **Save** the connection.
+5. Click **Test**. After the connection test succeeds, click **Save**.
 
     ![azure-blob-storage-app-secret](/img/examples/connection-azure-blob-storage-app-secret.png)
 
@@ -228,7 +233,7 @@ You can also use this connection string method for SAS token. When you create SA
 
 ## How it works
 
-Airflow uses [Azure SDK for Python](https://github.com/Azure/azure-sdk-for-python) to connect to Azure services through the [WasbHook](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/_api/airflow/providers/microsoft/azure/hooks/wasb/index.html).
+Airflow uses the [Azure SDK for Python](https://github.com/Azure/azure-sdk-for-python) to connect to Azure services through the [WasbHook](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/_api/airflow/providers/microsoft/azure/hooks/wasb/index.html).
 
 ## See also
 
