@@ -73,7 +73,7 @@ Then, the `build_features` task uses the Astro SDK [@aql.dataframe](https://astr
 
 - Creates an instance of an `S3FileSystem` as FS by specifying the access key, secret key, and the endpoint URL of the S3-compatible local storage system. 
 
-- Next, this task performs feature engineering by normalizing the input features using a StandardScaler, calculates metrics based on the scaler mean values, saves the scaler object for later monitoring and evaluation, and returns the normalized feature DataFrame `X` with the target column included.
+- Performs feature engineering by normalizing the input features using a StandardScaler, calculates metrics based on the scaler mean values, saves the scaler object for later monitoring and evaluation, and returns the normalized feature DataFrame `X` with the target column included.
 
 - Finally, if you look at the task decorator, you'll notice an outlets field that references `Dataset(dataset_uri))`. This creates an Airflow Dataset object called `built_features` that references the normalized feature Dataframe `X` that we stored in the S3Filesystem and sets it as an output of this task. We will then use this Dataset in the scheduling parameter of our `astro_ml_consumer` DAG to trigger it to run once this task is complete
 
