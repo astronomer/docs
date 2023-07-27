@@ -142,7 +142,6 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 - An instance of RidgeCV is created for ridge regression. The alphas parameter specifies a range of alpha values for regularization.
 
-- The ridge regression model is trained (reg = model.fit(...)) using the features obtained from cleanpanda by dropping the target column and the target values from cleanpanda[target].
 
 - The trained model is serialized and saved to the specified model_dir using the dump function from joblib. The file name for the model is set as 'ridgecv.joblib'.
 
