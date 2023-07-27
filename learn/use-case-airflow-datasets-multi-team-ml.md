@@ -132,7 +132,7 @@ First, the `built_features` Dataset from the previous DAG is instantiated so tha
 
 Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to do the following: 
 
-- The necessary libraries are imported, including RidgeCV from scikit-learn for ridge regression, numpy for numerical operations, dump from joblib for serialization, and S3FileSystem from s3fs for interacting with an S3-compatible object storage system.
+- Import necessary libraries, including RidgeCV from scikit-learn for ridge regression, numpy for numerical operations, dump from joblib for serialization, and S3FileSystem from s3fs for interacting with an S3-compatible object storage system.
 
 - An instance of S3FileSystem is created, specifying the access key, secret key, and the endpoint URL of the S3-compatible storage system.
 
