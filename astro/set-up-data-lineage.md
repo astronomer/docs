@@ -257,6 +257,20 @@ In your Spark application, set the following properties to configure your lineag
 
 To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. Your recent Spark job run appears in the table of most recent runs.
 
+
+## Enable/Disable OpenLineage
+
+In Astro, OpenLineage is used to extract lineage metadata for your Airflow operators and to configure Astro Alerts. By default, OpenLineage is enabled for your Astro Deployment. 
+
+To disable it, add the following line to your `Dockerfile`:
+
+`ENV OPENLINEAGE_DISABLED = True`
+
+Then, restart your Astro project for the changes to take effect.
+
+To enable OpenLineage, you can either set `ENV OPENLINEAGE_DISABLED = False` or remove this line from your `Dockerfile`.
+
+
 ## View SQL source code
 
 The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](environment-variables.md) for each Astro Deployment:
