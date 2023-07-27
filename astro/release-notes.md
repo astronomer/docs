@@ -31,7 +31,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
-- The templates for Astro alert messages have been updated to include more information about the Deployment that the alert was triggered in, including a link to the DAG that triggered the alert. 
+- The templates for [Astro alert](https://docs.astronomer.io/astro/alerts) messages have been updated to include more information about the Deployment that the alert was triggered in, including a link to the DAG that triggered the alert. 
 
 ### Bug fixes
 
