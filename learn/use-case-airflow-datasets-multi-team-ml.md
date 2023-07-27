@@ -142,7 +142,7 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 
 
-- The trained model is serialized and saved to the specified model_dir using the dump function from joblib. The file name for the model is set as 'ridgecv.joblib'.
+- Serialize and save the trained model to the specified model_dir using the dump function from joblib. The file name for the model is set as 'ridgecv.joblib'. The function returns the URI of the saved model file (model_file_uri), which is the concatenation of model_dir and 'ridgecv.joblib'.
 
 - The function returns the URI of the saved model file (model_file_uri), which is the concatenation of model_dir and 'ridgecv.joblib'.
 
