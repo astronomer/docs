@@ -71,7 +71,7 @@ Then, the `build_features` task uses the Astro SDK [@aql.dataframe](https://astr
 
 - Imports necessary libraries including `StandardScaler` from scikit-learn, `pandas` for DataFrame operations, dump from joblib for serialization, and `S3FileSystem` from s3fs for interacting with an S3-compatible object storage system.
 
-- Then, An instance of an `S3FileSystem` as FS is created, specifying the access key, secret key, and the endpoint URL of the S3-compatible local storage system. 
+- Creates an instance of an `S3FileSystem` as FS by specifying the access key, secret key, and the endpoint URL of the S3-compatible local storage system. 
 
 - Next, this task performs feature engineering by normalizing the input features using a StandardScaler, calculates metrics based on the scaler mean values, saves the scaler object for later monitoring and evaluation, and returns the normalized feature DataFrame `X` with the target column included.
 
