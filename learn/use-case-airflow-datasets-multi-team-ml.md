@@ -6,8 +6,6 @@ sidebar_label: "Multi-Team ML Pipeline with Airflow Datasets"
 ---
 
 
-
-
 Airflow plays a pivotal role in machine learning workflows as it provides a robust and scalable platform for orchestrating and managing the entire data pipeline. It facilitates the management of complex ML workflows, handling data dependencies, and ensuring fault tolerance, making it easier for data engineers to handle data inconsistencies, reprocess failed tasks, and maintain the integrity of ML pipelines. 
 
 Many times, ML pipelines are run by two teams in a producer/consumer relationship, where one team produces the clean data for the ML team to consume and use for their models. Airflow datasets and data-driven scheduling can be used to implement this relationship by scheduling the consumer DAG to run only when the producer DAG has completed.
