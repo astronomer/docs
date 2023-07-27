@@ -51,7 +51,7 @@ This project uses a [Scikit learn dataset](https://scikit-learn.org/stable/modul
 
 ### Project code 
 
-This project consists of two DAG's. The [astro_ml_producer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_producer.py) extracts the California Housing dataset from Scikit Learn and builds its model features using the Astro Python SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator before saving the data to the local S3Filesystem. 
+This project consists of two DAGs. The [astro_ml_producer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_producer.py) is the producer DAG that provides the data. It extracts the California Housing dataset from Scikit Learn and builds a model. The [astro_ml_consumer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py) is the consumer DAG that takes the data from the first and uses it to train a model and generate predictions.
 
 
 #### Producer DAG
