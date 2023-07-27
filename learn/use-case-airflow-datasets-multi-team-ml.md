@@ -138,7 +138,7 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 - The target variable is defined as 'MedHouseVal', which represents the column to be predicted.
 
-- A file containing the feature DataFrame from the previous DAG is opened using the S3 file system (fs.open). The file is located at "s3://local-xcom/wgizkzybxwtzqffq9oo56ubb5nk1pjjwmp06ehcv2cyij7vte315r9apha22xvfd7.parquet".
+- Open the file containing the feature DataFrame created by the consumer DAG using the S3 file system (fs.open) and train a ridge regression model on the features.
 
 - The feature DataFrame is read from the opened file using pd.read_parquet and assigned to the variable cleanpanda.
 
