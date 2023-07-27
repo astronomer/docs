@@ -139,7 +139,6 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 - Open the file containing the feature DataFrame created by the consumer DAG using the S3 file system (fs.open) and train a ridge regression model on the features.
 
-- The feature DataFrame is read from the opened file using pd.read_parquet and assigned to the variable cleanpanda.
 
 - An instance of RidgeCV is created for ridge regression. The alphas parameter specifies a range of alpha values for regularization.
 
