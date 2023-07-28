@@ -269,9 +269,10 @@ To disable it, add the following line to your `Dockerfile`:
 Deploy your Astro project for the changes to take effect in your Deployment.
 
 To re-enable OpenLineage, you can either set `ENV OPENLINEAGE_DISABLED = False` or remove this line from your `Dockerfile`.
+
 :::tip Alternate setup
 
-If you choose to add environment variable to your `.env` file for local Airflow, remember to set it for your Astro Deployment using the [Cloud UI](environment-variables.md#set-environment-variables-in-the-cloud-ui) or [Astro CLI](cli/astro-deployment-variable-create.md). 
+If you choose to add `OPENLINEAGE_DISABLED = True` to your `.env` file for local Airflow to disable OpenLineage, remember to set it for your Astro Deployment using the [Cloud UI](environment-variables.md#set-environment-variables-in-the-cloud-ui) or [Astro CLI](cli/astro-deployment-variable-create.md).
 
 :::
 
