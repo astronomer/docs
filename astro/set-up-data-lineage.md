@@ -268,7 +268,7 @@ To disable it, add the following line to your `Dockerfile`:
 
 Deploy your Astro project for the changes to take effect in your Deployment.
 
-To enable OpenLineage, you can either set `ENV OPENLINEAGE_DISABLED = False` or remove this line from your `Dockerfile`.
+To re-enable OpenLineage, you can either set `ENV OPENLINEAGE_DISABLED = False` or remove this line from your `Dockerfile`.
 
 ## View SQL source code
 
