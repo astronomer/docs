@@ -287,6 +287,11 @@ module.exports = {
     },
     {
       type: "doc",
+      label: "Test an Upgrade",
+      id: "cli/upgrade-test",
+    },
+    {
+      type: "doc",
       label: "Authenticate to cloud services",
       id: "cli/authenticate-to-clouds",
     },
