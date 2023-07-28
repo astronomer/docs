@@ -1,8 +1,8 @@
 ---
-title: "ML Datasets"
+title: "ML Orchestration with Airflow datasets"
 description: "Using Airflow Datasets to create a Producer/Consumer ML pipeline in Airflow "
 id: use-case-airflow-ml-datasets
-sidebar_label: "Multi-Team ML Pipeline with Airflow Datasets"
+sidebar_label: "ML Orchestration with Airflow datasets"
 ---
 
 
