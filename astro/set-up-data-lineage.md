@@ -260,16 +260,15 @@ To confirm that your setup is successful, run a Spark job after you save your co
 
 ## Enable/Disable OpenLineage
 
-In Astro, OpenLineage is used to extract lineage metadata for your Airflow operators and to configure Astro Alerts. By default, OpenLineage is enabled for your Astro Deployment. 
+Astro uses OpenLineage to extract lineage metadata for your Airflow operators and to send Astro alerts. By default, OpenLineage is enabled for all Astro Deployments. 
 
 To disable it, add the following line to your `Dockerfile`:
 
 `ENV OPENLINEAGE_DISABLED = True`
 
-Then, restart your Astro project for the changes to take effect.
+Deploy your Astro project for the changes to take effect in your Deployment.
 
 To enable OpenLineage, you can either set `ENV OPENLINEAGE_DISABLED = False` or remove this line from your `Dockerfile`.
-
 
 ## View SQL source code
 

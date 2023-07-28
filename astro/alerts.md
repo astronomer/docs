@@ -13,9 +13,9 @@ Astro alerts provide an additional level of observability to Airflow's notificat
 
 Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. Follow this guide to set up your Slack, PagerDuty, or email to receive alerts from Astro and then configure your Deployment to send alerts.
 
-:::caution
+:::info
 
-To use Astro Alerts for a Deployment, Openlineage must be enabled. By default, every Astro Deployment has this enabled. If you have it disabled, see [Enable/Disable OpenLineage](./set-up-data-lineage.md/#enabledisable-openlineage) to turn it back on.
+Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLineage enabled. If you disabled OpenLineage in your Deployment, you need to enable it to use Astro alerts. See [Enable/Disable OpenLineage](set-up-data-lineage.md#enabledisable-openlineage).
 
 :::
 
@@ -24,8 +24,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 ## Prerequisites
 
 - An [Astro project](develop-project.md).
-- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts.
-- Your Astro Deployment should have Open Lineage enabled. 
+- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage). 
 - A Slack workspace, PagerDuty service, or email address.
 
 <!-- Sensitive header used in product - do not change without a redirect-->
