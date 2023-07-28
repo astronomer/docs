@@ -112,7 +112,6 @@ Finally, the `save_data_to_s3` task uses the Astro SDK [@aql.export_file](https:
 ```
 
 
-The second DAG, [astro_ml_consumer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py), consumes the normalized dataset created by the first DAG and uses it to train a model and execute a prediction on the median house value in California. 
 
 #### Consumer DAG
 
