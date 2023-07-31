@@ -55,7 +55,7 @@ Now, even if one of the worker tasks fails, the `tear_down_cluster` task will st
 
 You can turn any existing tasks into setup and teardown tasks and define relationships between them. If you are using the `@task` decorator you can use either the [.as_setup() and .as_teardown() methods](#setup-and-teardown-methods) or the [`@setup()` and `@teardown()` decorators](#setup-and-teardown-decorators). For traditional operators use the [`.as_setup()` and `.as_teardown()` methods](#setup-and-teardown-methods).
 
-### .as_setup() and .teardown() methods
+### .as_setup() and .as_teardown() methods
 
 Any individual tasks can be turned into setup or teardown task on its own.
 
