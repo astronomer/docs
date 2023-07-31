@@ -29,7 +29,7 @@ To get the most out of this guide, you should have an understanding of:
 
 In Airflow any task can be designated as a setup or a teardown task, irrespective of the operator used or the action performed by the task. It is on you to decide which tasks are setup tasks and which are teardown tasks. 
 
-You can turn any task in your Airflow DAG into a setup or teardown task by calling the [`.as_setup()` or `.as_teardown()` method](#setup-and-teardown-methods) on the task. If you are using the `@task` decorator you can also create a setup or teardown task by using the [`@setup()` or `@teardown()` decorators](#setup-and-teardown-decorators).
+You can turn any existing tasks into setup and teardown tasks and define relationships between them. If you are using the `@task` decorator you can use either the [.as_setup() and .as_teardown() methods](#setup-and-teardown-methods) or the [`@setup()` and `@teardown()` decorators](#setup-and-teardown-decorators). For traditional operators use the [`.as_setup()` and `.as_teardown()` methods](#setup-and-teardown-methods).
 
 ### Regular DAG vs using Setup/Teardown
 
@@ -51,11 +51,7 @@ Now, even if one of the worker tasks fails, the `tear_down_cluster` task will st
 
 ![DAG with Setup/Teardown - upstream failure](/img/guides/airflow-setup-teardown_syntax_dag_fail.png)
 
-## Setup/Teardown syntax
-
-You can turn any existing tasks into setup and teardown tasks and define relationships between them. If you are using the `@task` decorator you can use either the [.as_setup() and .as_teardown() methods](#setup-and-teardown-methods) or the [`@setup()` and `@teardown()` decorators](#setup-and-teardown-decorators). For traditional operators use the [`.as_setup()` and `.as_teardown()` methods](#setup-and-teardown-methods).
-
-### .as_setup() and .as_teardown() methods
+## .as_setup() and .as_teardown() methods
 
 Any individual tasks can be turned into setup or teardown task on its own.
 
@@ -164,7 +160,7 @@ worker_task_obj >> my_teardown_task_obj.as_teardown()
 
 You can define as many setup and teardown tasks in one DAG as you need. In order for Airflow to understand which setup and teardown tasks belong together (e.g. set up and spin down the same resources) you need to [define a relationship between them](#defining-relationships-between-setup-and-teardown-tasks). 
 
-### @setup() and @teardown() decorators
+## @setup() and @teardown() decorators
 
 When working with the TaskFlow API you can also use the `@setup()` and `@teardown()` decorators to turn any Python function into a setup or teardown task.
 
@@ -200,7 +196,7 @@ worker_task() >> my_teardown_task()
 
 After you have defined your setup and teardown tasks you need to [define a relationship between them](#defining-relationships-between-setup-and-teardown-tasks) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
 
-### Defining Setup/Teardown relationships
+## Defining Setup/Teardown relationships
 
 After designating tasks as setup or teardown tasks you need to define a relationship between them. There are two ways to do this:
 
@@ -209,7 +205,7 @@ After designating tasks as setup or teardown tasks you need to define a relation
 
 In most cases how to set Setup/Teardown relationship is a matter of personal preference. If you are using `@setup` and `@teardown` decorators you cannot use the `setups` argument.
 
-#### `setups` argument
+### `setups` argument
 
 You can tell Airflow that a task is a teardown task for a specific setup task by passing the setup task object to the `setups` argument of the `.as_teardown()` method. Note that if you do this, you do not need to call the `.as_setup()` method on the setup task anymore.
 
@@ -316,7 +312,7 @@ To define several teardown tasks for one setup task you have to provide the setu
 
 ![Setup/Teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_teardowns_decorators.png)
 
-#### Direct dependency
+### Direct dependency
 
 Instead of using the `setups` argument you can directly link the setup and teardown tasks with a traditional dependency. Whenever you define a direct dependency between a setup and a teardown task Airflow will interpret this as them belonging together, no matter what actions the tasks actually perform.
 
@@ -332,7 +328,7 @@ The following code snippet uses a direct dependency to define `my_setup_task` as
 my_setup_task_obj >> my_teardown_task_obj
 ```
 
-This code creates an identical DAG using `setups` argument.
+This code creates an identical DAG using the `setups` argument.
 
 ```python
 (
