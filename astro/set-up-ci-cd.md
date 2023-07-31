@@ -147,7 +147,7 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 
 One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes. 
 
-This strategy requires enabling [DAG-only deploys](deploy-code.md#enable-dag-only-deploys-on-a-deployment) on the target Deployment and setting up your CI/CD pipeline on both Git repositories.
+This strategy requires [DAG-only deploys](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment) on the target Deployment and setting up your CI/CD pipeline on both Git repositories.
 
 ### Store DAGs in storage bucket
 

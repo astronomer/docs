@@ -73,19 +73,29 @@ When the deploy completes, the **Docker Image** field in the Cloud UI are update
 To confirm a deploy was successful, verify that the running versions of your Docker image and DAG bundle have been updated.
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
-2. Review the information in the **Docker Image** field to determine the Deployment code version.
-
-:::info
-
-If your Deployment has [DAG-only deploys](deploy-dags.md) enabled, the **DAG bundle version** field will also update with a timestamp. For Deployments where this feature is enabled, the Astro CLI deploys DAGs separately from the project image.
-
-:::
+2. Review the information in the **Docker Image** and **DAG bundle version** field to determine the Deployment code version.
 
 ## What happens during a project deploy
 
-When you deploy a project to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running Apache Airflow on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `dags` directory is excluded from this Docker image and is pushed separately.
+A Deployment uses the following components to process your code deploy:
 
-![Deploy code](/img/docs/deploy-architecture.png)
+- An proprietary operator for deploying Docker images to your Airflow containers
+- A sidecar for downloading DAGs attached to each Airflow component container
+- Azure Blob Storage
+  
+When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your project as an image to an Astronomer-hosted Docker registry. The proprietary operator pulls the images from a Docker registry, then updates the running image for all Airflow containers in your Deployment. DAG changes are deployed through a separate and simultaneous process:
+
+- The Astro CLI builds an image of your Astro project excluding the `dags` folder.
+- The Astro CLI uploads your `dags` folder to the Deployment's Azure Blob Storage.
+- The DAG downloader sidecars download the new DAGs from Azure Blob Storage.
+
+:::info
+
+This process is different if your Deployment has DAG-deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable--disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
+
+:::
+
+### Downtime after a code deploy
 
 After Astro receives the deploy, it gracefully terminates all containers except for the Airflow webserver and Celery workers that are currently running tasks. All new containers will run your new code.
 
