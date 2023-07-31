@@ -29,7 +29,10 @@ To get the most out of this guide, you should have an understanding of:
 
 In Airflow any task can be designated as a setup or a teardown task, irrespective of the operator used or the action performed by the task. It is on you to decide which tasks are setup tasks and which are teardown tasks. 
 
-You can turn any existing tasks into setup and teardown tasks and define relationships between them. If you are using the `@task` decorator you can use either the [.as_setup() and .as_teardown() methods](#setup-and-teardown-methods) or the [`@setup()` and `@teardown()` decorators](#setup-and-teardown-decorators). For traditional operators use the [`.as_setup()` and `.as_teardown()` methods](#setup-and-teardown-methods).
+You can turn any existing tasks into setup and teardown tasks and define relationships between them, e.g. define which setup and teardown tasks should be connected. 
+If you are using the `@task` decorator you can use either the [.as_setup() and .as_teardown() methods](#setup-and-teardown-methods) or the [`@setup()` and `@teardown()` decorators](#setup-and-teardown-decorators). For traditional operators use the [`.as_setup()` and `.as_teardown()` methods](#setup-and-teardown-methods).
+
+Tasks that run after a setup task and before the associated teardown tasks are considered to be in _scope_ of this specific setup / teardown pair. Usually these tasks will use the resources set up by the setup task which the teardown task will dismantle.
 
 ### Regular DAG vs using Setup/Teardown
 
@@ -531,7 +534,27 @@ my_database_setup_obj = my_database_setup_task()
 
 ### Setup/Teardown context managers
 
+It is also possible to use a task with a called `.as_teardown()` method as a context manager to wrap a set of tasks that should be in scope of a setup/teardown pair. The code snippet below shows three tasks being in scope of the pair created by `my_cluster_setup_task` and `my_cluster_teardown_task`.
 
+```python
+with my_cluster_teardown_task_obj.as_teardown(setups=my_cluster_setup_task_obj):
+    worker_task_1() >> [worker_task_2(),  worker_task_3()]
+```
+
+![Setup/Teardown created using a context manager](/img/guides/airflow-setup-teardown_context_1.png)
+
+Note that if a task was already instantiated outside of the context manager it can still be added to the scope, but you have to do this explicitly using the `.add_task()` method on the context manager object.
+
+```python
+# task instantiation outside of the context manager
+worker_task_1_obj = worker_task_1()
+
+with my_cluster_teardown_task_obj.as_teardown(
+    setups=my_cluster_setup_task_obj
+) as my_scope:
+    # adding the task to the context manager
+    my_scope.add_task(worker_task_1_obj)
+```
 
 ### Example DAG
 
@@ -543,7 +566,23 @@ Brining it all together here is an example DAG with two sets of setup and teardo
 
 
 
-## Teardown and dependencies
+## Special behavior of teardown tasks
+
+Tasks that are marked as teardown have a few special behaviors that are worth noting.
+
+- Triggering a teardown task: Each teardown tasks has its trigger rule configured to run if all of its upstream tasks ran and at least one of its associated `setup` tasks have completed successfully (e.g. there is at least one resource that needs to be torn down). If all associated setup tasks fail or are skipped, the teardown task will be failed or skipped respectively.
+
+- When evaluating whether a DAG run was successful or not Airflow will ignore teardown tasks by default. This means if a teardown tasks that is a leaf task or final task in a DAG has failed, the DAG is still marked as having succeeded. In the example shown in the screenshot below, the success of the DAG run solely depends on whether `worker_task_3` completes successfully.
+
+    ![Successful DAG with failed teardown](/img/guides/airflow-setup-teardown_teardown_fail_dag_succeed.png)
+
+- When a teardown task is located within a task group and a dependency is set on this task group, the teardown task will be ignored, meaning the task `run_after_taskgroup` which is set to depend on the whole `work_in_the_cluster` task group will run even if the teardown task has failed or is still running.
+
+    ```python
+    work_in_the_cluster() >> run_after_taskgroup()
+    ```
+
+    ![Task group with teardown](/img/guides/airflow-setup-teardown-task_after_taskgroup.png)
 
 
 ## Nesting Setup/Teardown
