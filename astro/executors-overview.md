@@ -23,15 +23,14 @@ Read the following topics to learn about the benefits and limitations of each ex
 
 The Celery executor is the default for all new Deployments. It uses a group of workers, each of which can run multiple tasks at a time. Astronomer uses [worker autoscaling logic](celery-executor.md#celery-worker-autoscaling-logic) to determine how many workers run on your Deployment at a given time.
 
-The Celery executor is a good option for some use cases. Specifically, the Celery executor is a good fit for your Deployment if:
+The Celery executor is a good option for most use cases and is the default executor for new Deployments. Specifically, the Celery executor is a good fit for your Deployment if:
 
-- You do not have tasks that require more than 24 hours to execute
-    - Celery workers give their tasks 24 hours to finish so they can restart in the event of a code deployment, though this can be alleviated with [DAG Deploys](deploy-dags.md).
+- You don't have tasks that require more than 24 hours to execute. Celery workers give their tasks only 24 hours to finish so they can restart in the event of a code deploy.
 - You want to use different worker types based on the type of task you're running. See [Configure worker queues](configure-worker-queues.md).
-- You have a high number of short-running tasks
-- Your tasks require the shortest startup latency (often milliseconds)
-- You don't require task or dependency isolation
-- You can configure and fine-tune your Celery workers per deployment
+- You have many short-running tasks.
+- Your tasks require the shortest startup latency (often milliseconds).
+- You don't require task or dependency isolation.
+- You want to direct tasks to run in worker queues with varying resources. This is useful if you want to run a subset of tasks with priority for SLA reasons, or if your tasks have varied resource requirements.
 
 If you find that some tasks consume the resources of other tasks and cause them to fail, Astronomer recommends implementing worker queues or moving to the Kubernetes executor.
 
