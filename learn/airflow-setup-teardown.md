@@ -198,10 +198,11 @@ After you have defined your setup and teardown tasks you need to [define a relat
 
 ## Defining Setup/Teardown relationships
 
-After designating tasks as setup or teardown tasks you need to define a relationship between them. There are two ways to do this:
+After designating tasks as setup or teardown tasks you need to define a relationship between them. There are three ways to do this:
 
 - Use the `setups` argument in the `.as_teardown()` method  
 - Directly link the setup and teardown tasks with a traditional dependency, for example by using a bit-shift operator (`>>`)
+- When using `@setup` and `@teardown` decorators, Airflow can infer the setup/teardown relationship if you provide the called object of the setup task as an argument to the teardown task
 
 In most cases how to set Setup/Teardown relationship is a matter of personal preference. If you are using `@setup` and `@teardown` decorators you cannot use the `setups` argument.
 
@@ -289,13 +290,13 @@ my_teardown_task_obj = PythonOperator(
 To define several setup tasks for one teardown task you can pass a list of setup tasks to the `setups` argument. You do not need to call `.as_setup()` on any of the setup tasks.
 
 ```python
-    (
-        [my_setup_task_obj_1, my_setup_task_obj_2, my_setup_task_obj_3]
-        >> worker_task()
-        >> my_teardown_task().as_teardown(
-            setups=[my_setup_task_obj_1, my_setup_task_obj_2, my_setup_task_obj_3]
-        )
+(
+    [my_setup_task_obj_1, my_setup_task_obj_2, my_setup_task_obj_3]
+    >> worker_task()
+    >> my_teardown_task().as_teardown(
+        setups=[my_setup_task_obj_1, my_setup_task_obj_2, my_setup_task_obj_3]
     )
+)
 ```
 
 ![Setup/Teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_setups_decorators.png)
@@ -303,15 +304,15 @@ To define several setup tasks for one teardown task you can pass a list of setup
 To define several teardown tasks for one setup task you have to provide the setup task object to the `setups` argument of the `.as_teardown()` method of each teardown task.
 
 ```python
-    (
-        my_setup_task_obj
-        >> worker_task()
-        >> [
-            my_teardown_task_obj_1.as_teardown(setups=my_setup_task_obj),
-            my_teardown_task_obj_2.as_teardown(setups=my_setup_task_obj),
-            my_teardown_task_obj_3.as_teardown(setups=my_setup_task_obj),
-        ]
-    )
+(
+    my_setup_task_obj
+    >> worker_task()
+    >> [
+        my_teardown_task_obj_1.as_teardown(setups=my_setup_task_obj),
+        my_teardown_task_obj_2.as_teardown(setups=my_setup_task_obj),
+        my_teardown_task_obj_3.as_teardown(setups=my_setup_task_obj),
+    ]
+)
 ```
 
 ![Setup/Teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_teardowns_decorators.png)
@@ -467,7 +468,7 @@ my_database_setup_obj = my_database_setup_task()
 ```
 
 </TabItem>
-<TabItem value="traditional">
+<TabItem value="methods">
 
 ```python
 @task
