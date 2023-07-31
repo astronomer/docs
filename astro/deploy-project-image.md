@@ -46,11 +46,16 @@ This command returns a list of Deployments available in your Workspace and promp
 
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
-If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `dags` directory is excluded from this Docker image and pushed separately. 
+If your code passes the parse, the Astro CLI deploys your project in two separate processes:
+
+- The Astro CLI uploads your `dags` directory to Astronomer-hosted blob storage. Your Deployment downloads the DAGs from the blob storage and applies the code to all of its running Airflow containers.
+- The Astro CLI builds all other project files into a Docker image and deploys this to an Astronomer-hosted Docker registry. The Deployment then applies the image to all of its running Airflow containers.
+
+See [What happens during a project deploy](#what-happens-during-a-project-deploy) for a more detailed description of how the Astro CLI and Astro work together to deploy your code.
 
 :::info
 
-If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, set up [DAG only deploys](deploy-dags.md) so that you're only deploying DAGs over your connection. To deploy a complete project over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
+If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, trigger a [DAG only deploy](deploy-dags.md) so that you're only deploying DAGs over your connection. To deploy a complete project over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
 
 :::
 
@@ -77,11 +82,13 @@ To confirm a deploy was successful, verify that the running versions of your Doc
 
 ## What happens during a project deploy
 
-A Deployment uses the following components to process your code deploy:
+Read this section for a more detailed description of the project deploy process.
+
+Your Deployment uses the following components to process your code deploy:
 
 - An proprietary operator for deploying Docker images to your Airflow containers
 - A sidecar for downloading DAGs attached to each Airflow component container
-- Azure Blob Storage
+- A Blob Storage container hosted by Astronomer
   
 When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your project as an image to an Astronomer-hosted Docker registry. The proprietary operator pulls the images from a Docker registry, then updates the running image for all Airflow containers in your Deployment. DAG changes are deployed through a separate and simultaneous process:
 
