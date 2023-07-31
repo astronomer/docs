@@ -1,20 +1,19 @@
 ---
-title: "ML Orchestration with Airflow datasets"
+title: "Orchestrate machine learning pipelines with Airflow datasets"
 description: "Using Airflow Datasets to create a Producer/Consumer ML pipeline in Airflow "
 id: use-case-airflow-ml-datasets
-sidebar_label: "ML Orchestration with Airflow datasets"
+sidebar_label: "ML orchestration with Airflow datasets"
 ---
 
-
-Airflow plays a pivotal role in machine learning workflows as it provides a robust and scalable platform for orchestrating and managing the entire data pipeline. It facilitates the management of complex ML workflows, handling data dependencies, and ensuring fault tolerance, making it easier for data engineers to handle data inconsistencies, reprocess failed tasks, and maintain the integrity of ML pipelines. 
+Airflow can play a pivotal role in machine learning (ML) workflows. You can use Airflow DAGs to manage complex ML workflows, handle data dependencies, and ensure fault tolerance, making it easier for your data engineers to handle data inconsistencies, reprocess failed tasks, and maintain the integrity of your data pipelines. 
 
 Many times, ML pipelines are run by two teams in a producer/consumer relationship, where one team produces the clean data for the ML team to consume and use for their models. Airflow datasets and data-driven scheduling can be used to implement this relationship by scheduling the consumer DAG to run only when the producer DAG has completed.
 
 This example has two DAGs with a producer/consumer relationship. One DAG extracts and loads housing data into a local S3FileSystem. A dataset is defined on the load task, and the updating of that dataset triggers a second consumer DAG. The second DAG then takes that data and uses it to train and run a predictive model. This set up has two main advantages. One is that two teams can work independently on their specific sections of the pipeline without needing to coordinate with each other outside of the initial set up. The second is that because the consumer DAG will only trigger once the data arrives, you can avoid the situation where the producer DAG takes longer than expected to complete and leads to the consumer DAG running on incomplete data.
 
-![Figma graph screenshot](/img/examples/usecaseconsumerproducerfigma.png)
+![Diagram showing the relationship between the two DAGs](/img/examples/usecaseconsumerproducerfigma.png)
 
-The Airflow datasets and their relationships with the two DAGs can be seen in the Airflow datasets view:
+When you run the project locally, you can see the project's datasets and their relationships to each DAG in the Airflow UI **Datasets** page:
 
 ![Datasets View screenshot](/img/examples/datasetsview.png)
 
@@ -37,7 +36,9 @@ To run the example project, first make sure Docker Desktop is running. Then, ope
 astro dev start
 ```
 
-This command builds your project and spins up 6 Docker containers on your machine to run it, the 4 standard airflow components as well as a local minio S3Filesystem and an ML flow instance. After the command finishes, open the Airflow UI at `https://localhost:8080/`, turn on the `astro_ml_producer` and `astro_ml_consumer` DAG's. Then trigger the `astro_ml_producer` DAG using the play button, and the `astro_ml_consumer` DAG will start once the producer DAG has completed. 
+This command builds your Astro project into a Docker image and spins up Docker containers on your machine to run it. This project requires containers for your scheduler, webserver, executor, and workers, as well as a container for a local minio S3Filesystem and one for an ML flow instance. 
+
+After the command finishes, open the Airflow UI at `https://localhost:8080/` and toggle on the `astro_ml_producer` and `astro_ml_consumer` DAGs. Then trigger the `astro_ml_producer` DAG using the play button. You'll see that the `astro_ml_consumer` DAG starts after `astro_ml_producer` completes. 
 
 ![Airflow UI View screenshot](/img/examples/airflowuiview.png)
 
@@ -45,11 +46,11 @@ This command builds your project and spins up 6 Docker containers on your machin
 
 ### Data source
 
-This project uses a [Scikit learn dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html#sklearn.datasets.fetch_california_housing) that contains information on the California housing market. The data is automatically retrieved as part of the DAG, and does not need to be downloaded separately.
+This project uses a [Scikit learn dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_california_housing.html#sklearn.datasets.fetch_california_housing) that contains information on the California housing market. The data is automatically retrieved as part of the DAG and does not need to be downloaded separately.
 
 ### Project code 
 
-This project consists of two DAGs. The [astro_ml_producer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_producer.py) is the producer DAG that provides the data. It extracts the California Housing dataset from Scikit Learn and builds a model. The [astro_ml_consumer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py) is the consumer DAG that takes the data from the first and uses it to train a model and generate predictions.
+This project consists of two DAGs. The [astro_ml_producer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_producer.py) is the producer DAG that provides the data. It extracts the California Housing dataset from Scikit Learn and builds a model. The [astro_ml_consumer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py) is the consumer DAG that uses the data to train a model and generate predictions.
 
 
 #### Producer DAG
@@ -65,7 +66,7 @@ The `extract_housing_data` task imports data from SciKit learn using the fetch_c
         return fetch_california_housing(download_if_missing=True, as_frame=True).frame
 ```
 
-Then, the `build_features` task uses the Astro SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to implement a custom Python function that completes the following:
+Then, the `build_features` task uses the Astro SDK [`@aql.dataframe`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to implement a custom Python function that completes the following:
 
 - Imports necessary libraries including `StandardScaler` from scikit-learn, `pandas` for DataFrame operations, dump from joblib for serialization, and `S3FileSystem` from s3fs for interacting with an S3-compatible object storage system.
 
@@ -115,7 +116,7 @@ Finally, the `save_data_to_s3` task uses the Astro SDK [@aql.export_file](https:
 
 #### Consumer DAG
 
-The second [astro_ml_consumer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py) then takes this data from the local S3Filesystem, and uses it to train a Scikit linear model, before using the model to generate a prediction, which is then saved to the local S3Filesystem as well. 
+The [`astro_ml_consumer_DAG`](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py) takes data from the local S3Filesystem and uses it to train a Scikit linear model. It then uses this model to generate a prediction which is saved to the local S3Filesystem. 
 
 First, the `built_features` Dataset from the previous DAG is instantiated so that it can be used as a scheduling parameter. This DAG will start when the `built_features` Dataset is updated by the [astro_ml_producer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_producer.py). 
 
@@ -133,13 +134,9 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 - Create an instance of S3FileSystem by specifying the access key, secret key, and the endpoint URL of the S3-compatible storage system.
 
-
 - Open the file containing the feature DataFrame created by the consumer DAG using the S3 file system (fs.open) and train a ridge regression model on the features.
 
-
-
-
-- Serialize and save the trained model to the specified model_dir using the dump function from joblib. The file name for the model is set as 'ridgecv.joblib'. The function returns the URI of the saved model file (model_file_uri), which is the concatenation of model_dir and 'ridgecv.joblib'.
+- Serialize and save the trained model to the specified `model_dir` using the dump function from joblib. The file name for the model is set as 'ridgecv.joblib'. The function returns the URI of the saved model file `(model_file_uri)`, which is the concatenation of `model_dir` and 'ridgecv.joblib'.
 
 
 ```python
@@ -167,7 +164,7 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
         return model_file_uri
 ```
 
-Then, the `predict_housing` task uses the Astro SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to load the trained model and feature DataFrame from the local S3FileSystem, make predictions on the features DataFrame, add the predicted values to the feature DataFrame, and return the feature DataFrame with the predicted values included.
+Then, the `predict_housing` task uses the Astro SDK [`@aql.dataframe`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to load the trained model and feature DataFrame from the local S3FileSystem, make predictions on the features DataFrame, add the predicted values to the feature DataFrame, and return the feature DataFrame with the predicted values included.
 
 ```python
     @aql.dataframe(task_id='predict')
@@ -188,7 +185,7 @@ Then, the `predict_housing` task uses the Astro SDK [@aql.dataframe](https://ast
         return cleandf
 ```
 
-Finally, the `save_predictions` task uses the Astro SDK [@aql.export_file](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html) decorator to save the predictions dataframe in the local S3FileSystem. 
+Finally, the `save_predictions` task uses the Astro SDK [`@aql.export_file`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html) decorator to save the predictions dataframe in the local S3FileSystem. 
 
 ```python
     pred_file = aql.export_file(task_id='save_predictions', 
