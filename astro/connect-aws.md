@@ -88,7 +88,7 @@ AWS Transit Gateway doesn't provide built-in support for DNS resolution. If you 
 
 :::info
 
-If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support can create a new transit gateway in your AWS account for Astro and set up a cross-region peering connection with your existing transit gateway.
+If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support can create a new transit gateway in your AWS account for Astro and set up [a cross-region peering attachment](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) with your existing transit gateway.
 
 If Astronomer creates a new transit gateway in your AWS account for Astro, keep in mind that your organization will incur additional AWS charges for the new transit gateway as well as the inter-region transfer costs.
 
@@ -102,13 +102,21 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 #### Setup
 
-1. In the Cloud UI, click the **Clusters** tab and copy both the **ID** and the **Account ID** for your Astro cluster. **ID** is your cluster ID, while **Account ID** is your AWS account ID.
-2. Create a resource share in AWS RAM with the account ID from step 1. See [Creating a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html).
-3. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the cluster ID that you copied in Step 1, as well as the CIDR block of the target VPC or on-premises network that you want to connect your Astro cluster with. From here, Astronomer support approves the resource sharing request and creates a transit gateway peering attachment request to your network.
-4. Accept the transit gateway peering attachment request from your network. See [Accept or reject a peering attachment request](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject).
-5. Create a static route from your CIDR block to the transit gateway and a static route from the transit gateway to the Astro VPC. See [Add a route to the transit gateway route table](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route).
-6. Contact [Astronomer support](https://cloud.astronomer.io/support) to confirm that you have created the static route. Astronomer support will update the Astro VPC routing table to send traffic from your CIDR block through the transit gateway.
-7. Optional. Repeat the steps for each Astro cluster that you want to connect to your transit gateway.
+1. In the Cloud UI, click on the Astronomer icon in the top left corner, go to the **Clusters** tab and copy the **ID** for your Astro cluster.
+2. In your AWS console, [create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html). Then, copy the ID of your existing transit gateway.
+3. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following:
+
+    - Cluster **ID** from step 1
+    - Your transit gateway ID from step 2.
+    - Your CIDR block for the target VPC or on-premises network that you want to connect your Astro cluster with
+
+    Then, Astronomer support approves the resource sharing request, attaches the Astro private subnets to your transit gateway, and creates routes in the Astro route tables to your transit gateway for each of the CIDR provided.
+
+4. After you receive confirmation from Asronomer support with the Astro CIDR, you can [create back routes](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route) from the transit gateway to the Astro VPC.
+
+6. Contact [Astronomer support](https://cloud.astronomer.io/support) to confirm that you have created the static route. Astronomer support will then test the connection and confirm.
+
+7. (Optional) Repeat the steps for each Astro cluster that you want to connect to your transit gateway.
 
 </TabItem>
 
