@@ -28,9 +28,9 @@ astro deploy --dags
 
 ## Enable / disable DAG-only deploys on a Deployment
 
-On Astro Hosted, DAG-only deploys are enabled by default on for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
+On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
 
-If you have Workspace Admin permissions, you can turn on or off DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy: 
+If you have Workspace Admin permissions, you can enable or disable DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy: 
 
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
 - Your Deployment no longer includes Azure Blob Storage or DAG downloading sidecars.
@@ -38,7 +38,7 @@ If you have Workspace Admin permissions, you can turn on or off DAG-only deploys
 
 To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
 
-Before you disable DAG-only deploys on a Deployment, ensure the following:
+Before you enable or disable DAG-only deploys on a Deployment, ensure the following:
 
 - You have access to the latest version of your Deployment's Astro project.
 - You can update your Deployment using the Astro CLI. 
