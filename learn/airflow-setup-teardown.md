@@ -180,7 +180,7 @@ my_setup_task()
 
 ![Setup task decorator](/img/guides/airflow-setup-teardown_setup_task_decorator.png)
 
-As with the `.as_teardown()` method you cannot have a teardown task without at least one upstream worker task. The worker task can use the `@task` decorator or be a traditional operator.
+As with the `.as_teardown()` method you cannot have a `@teardown` task without at least one upstream worker task. The worker task can use the `@task` decorator or be defined with a traditional operator.
 
 ```python
 from airflow.decorators import task, teardown
@@ -200,12 +200,129 @@ worker_task() >> my_teardown_task()
 
 After you have defined your setup and teardown tasks you need to [define a relationship between them](#defining-relationships-between-setup-and-teardown-tasks) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
 
-### Defining relationships between setup and teardown tasks
+### Defining Setup/Teardown relationships
+
+After designating tasks as setup or teardown tasks you need to define a relationship between them. There are two ways to do this:
+
+- Use the `setups` argument in the `.as_teardown()` method  
+- Directly link the setup and teardown tasks with a traditional dependency, for example by using a bit-shift operator (`>>`)
+
+
+#### `setups` argument
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="defining-setup-teardown-relationships"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+@task
+def my_setup_task():
+    return "Setting up resources!"
+
+@task
+def worker_task():
+    return "Doing some work!"
+
+@task
+def my_teardown_task():
+    return "Tearing down resources!"
+
+my_setup_task_obj = my_setup_task()
+
+(
+    my_setup_task_obj
+    >> worker_task()
+    >> my_teardown_task().as_teardown(setups=my_setup_task_obj)
+)
+```
+
+![Setup/Teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+def my_setup_task_func():
+    return "Setting up resources!"
+
+def worker_task_func():
+    return "Doing some work!"
+
+def my_teardown_task_func():
+    return "Tearing down resources!"
+
+my_setup_task_obj = PythonOperator(
+    task_id="my_setup_task",
+    python_callable=my_setup_task_func,
+)
+
+worker_task_obj = PythonOperator(
+    task_id="worker_task",
+    python_callable=worker_task_func,
+)
+
+my_teardown_task_obj = PythonOperator(
+    task_id="my_teardown_task",
+    python_callable=my_teardown_task_func,
+)
+
+(
+    my_setup_task_obj
+    >> worker_task_obj
+    >> my_teardown_task_obj.as_teardown(setups=my_setup_task_obj)
+)
+```
+
+![Setup/Teardown relationships traditional](/img/guides/airflow-setup-teardown-relationships_traditional_1.png)
+
+</TabItem>
+</Tabs>
+
+To define several setup tasks for one teardown task you can pass a list of setup tasks to the `setups` argument.
+
+```python
+    (
+        [my_setup_task_obj_1, my_setup_task_obj_2, my_setup_task_obj_3]
+        >> worker_task()
+        >> my_teardown_task().as_teardown(
+            setups=[my_setup_task_obj_1, my_setup_task_obj_2, my_setup_task_obj_3]
+        )
+    )
+```
+
+![Setup/Teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_setups_decorators.png)
+
+To define several teardown tasks for one setup task you have to call provide the setup task object to the `setups` argument of the `.as_teardown()` method of each teardown task.
+
+```python
+    (
+        my_setup_task_obj
+        >> worker_task()
+        >> [
+            my_teardown_task_obj_1.as_teardown(setups=my_setup_task_obj),
+            my_teardown_task_obj_2.as_teardown(setups=my_setup_task_obj),
+            my_teardown_task_obj_3.as_teardown(setups=my_setup_task_obj),
+        ]
+    )
+```
+
+![Setup/Teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_teardowns_decorators.png)
+
 
 
 
 ### Example DAG
 
+Brining it all together here is an example DAG with two sets of setup and teardown tasks.
+
+```python
+
+```
 
 
 
