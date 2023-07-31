@@ -23,7 +23,7 @@ Read the following topics to learn about the benefits and limitations of each ex
 
 The Celery executor is the default for all new Deployments. It uses a group of workers, each of which can run multiple tasks at a time. Astronomer uses [worker autoscaling logic](celery-executor.md#celery-worker-autoscaling-logic) to determine how many workers run on your Deployment at a given time.
 
-The Celery executor is a good option for most use cases and is the default executor for new Deployments. Specifically, the Celery executor is a good fit for your Deployment if:
+The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your Deployment if:
 
 - You don't have tasks that require more than 24 hours to execute. Celery workers give their tasks only 24 hours to finish so they can restart in the event of a code deploy.
 - You want to use different worker types based on the type of task you're running. See [Configure worker queues](configure-worker-queues.md).
