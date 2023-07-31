@@ -205,6 +205,10 @@ After designating tasks as setup or teardown tasks you need to define a relation
 
 In most cases how to set Setup/Teardown relationship is a matter of personal preference. If you are using `@setup` and `@teardown` decorators you cannot use the `setups` argument.
 
+You can have as many setup and teardown tasks in one relationship as you need. For example, you could have one task that creates a cluster, a second task that modifies the environment within that cluster and a third task that tears down the cluster. In this case you could define the first two tasks as setup tasks and the last one as a teardown task, all belonging to the same resource.
+
+It is also possible to have several sets of setup/teardown tasks within the same DAG that work on different resources and are independent of each other. For example, you could have one set of setup/teardown tasks that spins up a cluster to train your ML model and a second set of setup/teardown tasks in the same DAG that creates and deletes a temporary table in your database.
+
 ### `setups` argument
 
 You can tell Airflow that a task is a teardown task for a specific setup task by passing the setup task object to the `setups` argument of the `.as_teardown()` method. Note that if you do this, you do not need to call the `.as_setup()` method on the setup task anymore.
@@ -340,7 +344,7 @@ This code creates an identical DAG using the `setups` argument.
 
 ![Setup/Teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
 
-If you have several setup and/or several teardown tasks belonging together, you can define the dependency between each of them.
+If you have several setup and/or several teardown tasks belonging together, you need to define the dependency between each pair of them when using direct dependencies to define the setup/teardown relationship.
 
 ```python
 (
@@ -374,9 +378,149 @@ This code creates an identical DAG using the `setups` argument.
 
 ![Multiple setups/teardowns](/img/guides/airflow-setup-teardown-multiple_setups_and_teardowns.png)
 
+### `@setup` and `@teardown` relationships
 
+When using the `@setup` and `@teardown` decorators you can define the setup/teardown relationship between two tasks either by defining [a direct dependency](#direct-dependency) or by providing the object of the called setup task as an argument to the teardown task.
 
-#### `@setup` and `@teardown` relationships
+The latter pattern is often used to pass information like a resource id from the setup task to the teardown task.
+
+```python
+from airflow.decorators import task, setup, teardown
+
+@setup
+def my_setup_task():
+    print("Setting up resources!")
+    my_cluster_id = "cluster-2319"
+    return my_cluster_id
+
+@task
+def worker_task():
+    return "Doing some work!"
+
+@teardown
+def my_teardown_task(my_cluster_id):
+    return f"Tearing down {my_cluster_id}!"
+
+my_setup_task_obj = my_setup_task()
+my_setup_task_obj >> worker_task() >> my_teardown_task(my_setup_task_obj)
+```
+
+![Setup/Teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
+
+### Independent sets of setup/teardown tasks
+
+You can have several independent sets of setup and teardown tasks in the same DAG. For example you might have a pair of tasks that sets up and tears down a cluster and another pair that sets up and tears down a temporary database.
+
+<Tabs
+    defaultValue="decorators"
+    groupId="independent-sets-of-setup-teardown-tasks"
+    values={[
+        {label: '@setup/@teardown', value: 'decorators'},
+        {label: '.as_teardown()', value: 'methods'},
+    ]}>
+<TabItem value="decorators">
+
+```python
+from airflow.decorators import task, setup, teardown
+
+@setup
+def my_cluster_setup_task():
+    print("Setting up resources!")
+    my_cluster_id = "cluster-2319"
+    return my_cluster_id
+
+@task
+def my_cluster_worker_task():
+    return "Doing some work!"
+
+@teardown
+def my_cluster_teardown_task(my_cluster_id):
+    return f"Tearing down {my_cluster_id}!"
+
+@setup
+def my_database_setup_task():
+    print("Setting up my database!")
+    my_database_name = "DWH"
+    return my_database_name
+
+@task
+def my_database_worker_task():
+    return "Doing some work!"
+
+@teardown
+def my_database_teardown_task(my_database_name):
+    return f"Tearing down {my_database_name}!"
+
+my_setup_task_obj = my_cluster_setup_task()
+(
+    my_setup_task_obj
+    >> my_cluster_worker_task()
+    >> my_cluster_teardown_task(my_setup_task_obj)
+)
+
+my_database_setup_obj = my_database_setup_task()
+(
+    my_database_setup_obj
+    >> my_database_worker_task()
+    >> my_database_teardown_task(my_database_setup_obj)
+)
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+@task
+def my_cluster_setup_task():
+    print("Setting up resources!")
+    my_cluster_id = "cluster-2319"
+    return my_cluster_id
+
+@task
+def my_cluster_worker_task():
+    return "Doing some work!"
+
+@task
+def my_cluster_teardown_task(my_cluster_id):
+    return f"Tearing down {my_cluster_id}!"
+
+@setup
+def my_database_setup_task():
+    print("Setting up my database!")
+    my_database_name = "DWH"
+    return my_database_name
+
+@task
+def my_database_worker_task():
+    return "Doing some work!"
+
+@task
+def my_database_teardown_task(my_database_name):
+    return f"Tearing down {my_database_name}!"
+
+my_setup_task_obj = my_cluster_setup_task()
+(
+    my_setup_task_obj
+    >> my_cluster_worker_task()
+    >> my_cluster_teardown_task(my_setup_task_obj).as_teardown(
+        setups=my_setup_task_obj
+    )
+)
+
+my_database_setup_obj = my_database_setup_task()
+(
+    my_database_setup_obj
+    >> my_database_worker_task()
+    >> my_database_teardown_task(my_database_setup_obj).as_teardown(
+        setups=my_database_setup_obj
+    )
+)
+```
+
+</TabItem>
+</Tabs>
+
+![Parallel groups of Setup/Teardown](/img/guides/airflow-setup-teardown-parallel_st.png)
 
 
 ### Setup/Teardown context managers
