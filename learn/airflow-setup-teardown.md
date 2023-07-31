@@ -51,6 +51,12 @@ Now, even if one of the worker tasks fails, the `tear_down_cluster` task will st
 
 ![DAG with Setup/Teardown - upstream failure](/img/guides/airflow-setup-teardown_syntax_dag_fail.png)
 
+Additionally, when clearing any of the worker tasks, both its setup and teardown tasks will be cleared and rerun. This is useful when you are recovering from a pipeline issue and need to one or more tasks that use a resource but not all of them. 
+
+For example, in the DAG above `worker_task_2` failed and `worker_task_3` was unable to run due to its upstream task having failed while `worker_task_1` was successful. When clearing the failed task `worker_task_2` by clicking on the **Clear task** button, both the setup task `provision_cluster` and the teardown task `tear_down_cluster` will be cleared and rerun in addition to the `worker_task_3`. This allows for complete recovery without needing to rerun `worker_task_1` or the need for manually rerunning individual tasks.
+
+![DAG with Setup/Teardown - recovery](/img/guides/airflow-setup-teardown_syntax_dag_fail.png)
+
 ## .as_setup() and .as_teardown() methods
 
 Any individual tasks can be turned into setup or teardown task on its own.
@@ -410,7 +416,7 @@ my_setup_task_obj >> worker_task() >> my_teardown_task(my_setup_task_obj)
 
 ### Independent sets of setup/teardown tasks
 
-You can have several independent sets of setup and teardown tasks in the same DAG. For example you might have a pair of tasks that sets up and tears down a cluster and another pair that sets up and tears down a temporary database.
+You can have several independent sets of setup and teardown tasks in the same DAG which can be connected using any of the relationship management methods described previously. For example you might have a pair of tasks that sets up and tears down a cluster and another pair that sets up and tears down a temporary database.
 
 <Tabs
     defaultValue="decorators"
@@ -485,7 +491,7 @@ def my_cluster_worker_task():
 def my_cluster_teardown_task(my_cluster_id):
     return f"Tearing down {my_cluster_id}!"
 
-@setup
+@task
 def my_database_setup_task():
     print("Setting up my database!")
     my_database_name = "DWH"
@@ -522,7 +528,6 @@ my_database_setup_obj = my_database_setup_task()
 </Tabs>
 
 ![Parallel groups of Setup/Teardown](/img/guides/airflow-setup-teardown-parallel_st.png)
-
 
 ### Setup/Teardown context managers
 
