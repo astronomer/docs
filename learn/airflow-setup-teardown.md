@@ -103,7 +103,6 @@ my_setup_task_obj.as_setup()
 ![Setup task traditional operator](/img/guides/airflow-setup-teardown_setup_task_traditional.png)
 
 </TabItem>
-
 </Tabs>
 
 To turn a task into a teardown task call the `.as_teardown()` method on the called task object. Note that you cannot have a teardown task without at least one upstream worker task.
@@ -167,8 +166,42 @@ You can define as many setup and teardown tasks in one DAG as you need. In order
 
 ### @setup() and @teardown() decorators
 
+When working with the TaskFlow API you can also use the `@setup()` and `@teardown()` decorators to turn any Python function into a setup or teardown task.
+
+```python
+from airflow.decorators import setup
+
+@setup 
+def my_setup_task():
+    return "Setting up resources!"
+
+my_setup_task()
+```
+
+![Setup task decorator](/img/guides/airflow-setup-teardown_setup_task_decorator.png)
+
+As with the `.as_teardown()` method you cannot have a teardown task without at least one upstream worker task. The worker task can use the `@task` decorator or be a traditional operator.
+
+```python
+from airflow.decorators import task, teardown
+
+@task 
+def worker_task():
+    return "Doing some work!"
+
+@teardown
+def my_teardown_task():
+    return "Tearing down resources!"
+
+worker_task() >> my_teardown_task()
+```
+
+![Teardown task decorator](/img/guides/airflow-setup-teardown_teardown_decorators.png)
+
+After you have defined your setup and teardown tasks you need to [define a relationship between them](#defining-relationships-between-setup-and-teardown-tasks) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
 
 ### Defining relationships between setup and teardown tasks
+
 
 
 ### Example DAG
