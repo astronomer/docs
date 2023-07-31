@@ -55,7 +55,7 @@ Additionally, when clearing any of the worker tasks, both its setup and teardown
 
 For example, in the DAG above `worker_task_2` failed and `worker_task_3` was unable to run due to its upstream task having failed while `worker_task_1` was successful. When clearing the failed task `worker_task_2` by clicking on the **Clear task** button, both the setup task `provision_cluster` and the teardown task `tear_down_cluster` will be cleared and rerun in addition to the `worker_task_3`. This allows for complete recovery without needing to rerun `worker_task_1` or the need for manually rerunning individual tasks.
 
-![DAG with Setup/Teardown - recovery](/img/guides/airflow-setup-teardown_syntax_dag_fail.png)
+![DAG with Setup/Teardown - recovery](/img/guides/airflow-setup-teardown-clear_task.png)
 
 ## .as_setup() and .as_teardown() methods
 
