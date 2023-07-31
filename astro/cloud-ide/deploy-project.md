@@ -5,14 +5,6 @@ id: deploy-project
 description: Learn how to use the Astro Cloud IDE's built-in GitHub support to manage your data pipelines and deploy them to Astro.
 ---
 
-:::caution
-
-<!-- id to make it easier to remove: cloud-ide-preview-banner -->
-
-The Cloud IDE is currently in [Public Preview](feature-previews.md).
-
-:::
-
 After you create a project in the Cloud IDE, you can deploy it to Astro and run tasks on a schedule using one of the following options:
 
 - Download your pipelines' Python files from the Cloud IDE, copy them to an existing Astro project, and deploy your project to Astro.
