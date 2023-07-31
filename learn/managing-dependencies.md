@@ -105,7 +105,7 @@ When using bit-shift operators and the `.set_upstream` and `.set_downstream` met
 
 ## Dependency functions
 
-Dependency functions are utilities that let you set dependencies between several tasks and lists of tasks. A common reason to use dependency functions over bit-shift operators is for example to create dependencies for tasks that were created in a loop and are stored in a list.
+Dependency functions are utilities that let you set dependencies between several tasks and lists of tasks. A common reason to use dependency functions over bit-shift operators is to create dependencies for tasks that were created in a loop and are stored in a list.
 
 ```python
 list_of_tasks = []
@@ -151,7 +151,7 @@ chain([t0, t1], t2, [t3, t4, t5])  # this code will work
 
 To set interconnected dependencies between tasks and lists of tasks, use the `chain_linear()` function. This function is available in Airflow 2.7+, in older versions of Airflow you can set similar dependencies between two lists at a time using the [`cross_downstream()` function](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.cross_downstream). 
 
-Replacing `chain` with `chain_linear` in the previous example as shown in this code snippet will create a DAG structure where the dependency between lists is set in a pattern so that each element in the downstream list will depend on each element in the upstream list.
+Replacing `chain` in the previous example with `chain_linear` will create dependencies such that each element in the downstream list will depend on each element in the upstream list.
 
 ```python
 # from airflow.models.baseoperator import chain_linear
@@ -202,7 +202,7 @@ This image shows the resulting DAG:
 
 ## Dependencies in dynamic task mapping
 
-Tasks that utilize [dynamic task mapping](dynamic-tasks.md) can be set to be up- and downstream of other tasks as with regular tasks. Keep in mind that when using the default [trigger rule](#trigger-rules) `all_success`, all mapped task instances need to be successful for the downstream task to run. For the purpose of trigger rules, mapped task instances behave like a set of parallel upstream tasks.
+Dependencies for [dynamically mapped tasks](dynamic-tasks.md) can be set in the same way as regular tasks. Keep in mind that when using the default [trigger rule](#trigger-rules) `all_success`, all mapped task instances need to be successful for the downstream task to run. For the purpose of trigger rules, mapped task instances behave like a set of parallel upstream tasks.
 
 <Tabs
     defaultValue="taskflow"
@@ -337,7 +337,7 @@ The image below shows types of dependencies that can be set between tasks and ta
 
 ## TaskFlow API dependencies
 
-The [TaskFlow API](airflow-decorators.md) added decorators to Airflow, one of these decorators, `@task`, allows you to easily turn Python functions into Airflow tasks. 
+The [TaskFlow API](airflow-decorators.md) `@task` decorator allows you to easily turn Python functions into Airflow tasks. 
 
 If your DAG has several tasks that are defined with the `@task` decorator and use each other's output, you can leverage inferred dependencies via the TaskFlow API. For example, in the following DAG there are two dependent tasks, `get_a_cat_fact` and `print_the_cat_fact`. To set the dependencies, you pass the called function of the upstream task as a positional argument to the downstream task (`print_the_cat_fact(get_a_cat_fact())`):
 
