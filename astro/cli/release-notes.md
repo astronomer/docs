@@ -73,7 +73,7 @@ Release date: June 13, 2023
 
 ### Manage Teams using the Astro CLI
 
-You can now manage [Astro Teams](add-user.md#make-a-team) using the following CLI commands:
+You can now manage [Astro Teams](manage-teams.md) using the following CLI commands:
 
 - [`astro workspace team add`](cli/astro-workspace-team-add.md)
 - [`astro workspace team list`](cli/astro-workspace-team-list.md)
