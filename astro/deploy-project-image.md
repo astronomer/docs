@@ -92,13 +92,12 @@ Your Deployment uses the following components to process your code deploy:
   
 When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your project as an image to an Astronomer-hosted Docker registry. The proprietary operator pulls the images from a Docker registry, then updates the running image for all Airflow containers in your Deployment. DAG changes are deployed through a separate and simultaneous process:
 
-- The Astro CLI builds an image of your Astro project excluding the `dags` folder.
 - The Astro CLI uploads your `dags` folder to the Deployment's Azure Blob Storage.
 - The DAG downloader sidecars download the new DAGs from Azure Blob Storage.
 
 :::info
 
-This process is different if your Deployment has DAG-deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable--disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
+This process is different if your Deployment has DAG-only deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable--disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
 
 :::
 
