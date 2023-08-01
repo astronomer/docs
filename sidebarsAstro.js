@@ -213,7 +213,7 @@ module.exports = {
             },
           ],
         },
-        "Billing",
+        "manage-billing",
       ],
     },
     {
