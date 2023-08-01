@@ -287,8 +287,8 @@ module.exports = {
     },
     {
       type: "doc",
-      label: "Test an Upgrade",
-      id: "cli/upgrade-test",
+      label: "Test your Astro project locally",
+      id: "cli/test-your-astro-project-locally",
     },
     {
       type: "doc",

@@ -25,27 +25,28 @@ By default, the command runs all three available tests on your project against t
 
 | Option              | Description                                                                                                                                                                               | Possible Values                                                                                        |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `--airflow-version` | The version of Airflow you want to upgrade to. The default is the latest available version. | Any valid [Airflow version](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html). |
+| `--airflow-version` | The equivalent of Airflow you want to upgrade to. The default is the latest available version. Note that the Astro CLI will still test against an Astro Runtime image based on the Airflow version you specify. | Any valid [Airflow version](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html). |
 | `--runtime-version` | The version of Astro Runtime you want to upgrade to. The default is the latest available version.                                                                                                               | Any valid [Astro runtime version](https://docs.astronomer.io/astro/runtime-release-notes).             |
 | `--conflict-test`   | Only run conflict tests. These tests check whether you will have dependency conflicts after you upgrade.                                                                                                | N/A                                                                                                    |
 | `--dag-test`        | Only run DAG tests. These tests check whether your DAGs will generate import errors after you upgrade.                                                                                                                            | None                                                                                                  |
+| `--deployment-id`        | Specify a Deployment ID to test with an image from an Astro Deployment instead of the image listed in your Astro project Dockerfile.                                                                                                                            | Any valid Deployment ID.                                                                                                  |
 | `--version-check`  | Only run version tests. These tests show you how your dependency versions will change after you upgrade.                                                                                                                                                         | None                                                                                                    |
 
 ## Examples
 
-To test your DAGs and `requirements.txt` against the latest version of Airflow:
+To test your DAGs and `requirements.txt` against the latest version of Astro Runtime:
 
 ```bash
 astro dev upgrade-test
 ```
 
-To test your DAGs and `requirements.txt` against a specific version of Airflow:
+To test your DAGs and `requirements.txt` against a version of Astro Runtime based on a specific Airflow version:
 
 ```bash
 astro dev upgrade-test --airflow-version 2.6.3
 ```
 
-To check for major dependency change from the current Airflow version to a specific version of Airflow:
+To check for a major dependency change from the current Airflow version to a specific version of Airflow:
 
 ```bash
 astro dev upgrade-test --airflow-version 2.6.3 --provider-check 
