@@ -86,7 +86,7 @@ Read this section for a more detailed description of the project deploy process.
 
 Your Deployment uses the following components to process your code deploy:
 
-- An proprietary operator for deploying Docker images to your Airflow containers
+- A proprietary operator for deploying Docker images to your Airflow containers
 - A sidecar for downloading DAGs attached to each Airflow component container
 - A Blob Storage container hosted by Astronomer
   
@@ -100,6 +100,52 @@ When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your pro
 This process is different if your Deployment has DAG-only deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable--disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
 
 :::
+
+Use the following diagram to understand the relationship between Astronomer, your local machine, and your Deployment.  
+
+```mermaid
+flowchart BT;
+classDef subgraph_padding fill:none,stroke:none
+classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
+    subgraph AstroCLI[Astro CLI]
+    subgraph subgraph_padding1 [ ]
+    id10
+    id1
+    end
+    end
+    subgraph ControlPlane[Astronomer-managed services]
+    id9[(Azure blob storage)]:::astro
+    id2[Astro API]:::astro
+    id4[(Docker registry)]:::astro
+    end
+    subgraph DataPlane ["Cluster"]
+    subgraph subgraph_padding3 [ ]
+    id5(("Image deploy operator")):::astro
+    subgraph Deployment ["Deployment"]
+    subgraph subgraph_padding2 [ ]
+    id6["Airflow webserver </br> with DAG downloader"]:::astro
+    id7["Airflow scheduler </br> with DAG downloader"]:::astro
+    id8["Airflow workers </br> with DAG downloader"]:::astro
+    end
+    end
+    end
+    end
+    id1["Project image </br> excluding 'dags'"]:::astro-->|API request to <br/>update Docker image| id2;
+    id10["'dags' folder"]:::astro-->|Upload DAGs|id9
+    id10-->|Retrieve Azure blob </br> storage URL and token|id2
+    id1-->|Docker push| id4
+    id4-->|Pull image|id5
+    id5-->id6 & id7 & id8
+    id5-->|Check for new images and </br> DAGs to download|id2
+    id9-->id6 & id7 & id8
+    class subgraph_padding3 subgraph_padding
+    class subgraph_padding2 subgraph_padding
+    class subgraph_padding1 subgraph_padding
+    style ControlPlane fill:#bfeaff,stroke:#333,stroke-width:2px
+    style DataPlane fill:#bfeaff,stroke:#333,stroke-width:2px
+    style AstroCLI fill:#bfeaff,stroke:#333,stroke-width:2px
+    style Deployment fill:#bfeaff,stroke:#333,stroke-width:2px
+```
 
 ### Downtime after a code deploy
 

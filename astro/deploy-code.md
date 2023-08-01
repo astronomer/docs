@@ -14,7 +14,6 @@ There are two options for deploying code to a Deployment:
 
 For each deploy option, you can either trigger the deploy manually or through CI/CD. CI/CD pipelines can include both image deploys and DAG-only deploys, and they can deploy to multiple different Deployments based on different branches in your git repository. See [CI/CD overview](set-up-ci-cd.md).
 
-
 ## See also
 
 - [Create an Astro project](develop-project.md#create-an-astro-project)
