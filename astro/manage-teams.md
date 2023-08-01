@@ -13,9 +13,15 @@ _Teams_ are a group of users in an Organization that you can grant the same Work
 
 2. Click **Teams**.
 
-3. Click **+ Team** to create a new team.
+3. Click **+ Team** to create a new Team.
 
-4. Enter a **Team Name** and then click **Add users** to choose the Organization users you want to add to the team. 
+4. Configure the following details about your Team:
+
+
+    - **Team Name**: The name for your Team.
+    - **Team description**: (Optional) The description for your Team.
+    - **Organization role**: The Organization role for your Team. 
+    - **Add users**: to choose the Organization users you want to add to the Team. 
 
     If you don't find the user you want to add, you might need to [add the user to your Organization](add-user.md#add-a-user-to-an-organization).
 

@@ -27,6 +27,24 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## August 1, 2023
+
+### Hosted Deployments have DAG-only deploys enabled by default 
+
+<HostedBadge/>
+
+### Teams now have Organization-level roles
+
+All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](user-permissions.md#organization-roles) role, which doesn't result in any additional automatic permissions.
+
+Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-provisioning), you can now manage your Organization Owners and Billing Admins from your identity provider. See [Manage teams](https://docs.astronomer.io/astro/manage-teams) for more information. 
+
+### Additional improvements
+
+- The Cloud UI now shows how many Workspaces, DAGs, clusters, and Astro Cloud IDE projects you have in the left sidebar.
+- You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+- You can now create Deployments in standard clusters hosted in `europe-west2` on GCP and `eu-central-1` on AWS.
+
 ## July 25, 2023
 
 ### Additional improvements

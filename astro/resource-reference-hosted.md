@@ -48,10 +48,11 @@ The following table lists all available worker types on Astro Deployments.
 
 | Worker Type | vCPU | Memory | Max task concurrency |
 | ----------- | ---- | ------ | -------------------- |
-| A5          | 1    | 2G     | 15                   |
-| A10         | 2    | 4G     | 30                   |
-| A20         | 4    | 8G     | 60                   |
-| A40         | 8    | 16G    | 120                  |
+| A5          | 1    | 2GiB   | 15                   |
+| A10         | 2    | 4GiB   | 30                   |
+| A20         | 4    | 8GiB   | 60                   |
+| A40         | 8    | 16GiB  | 120                  |
+| A50         | 12   | 24GiB  | 240                  |
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
 
@@ -63,17 +64,19 @@ Currently, standard clusters are available on the following clouds and regions:
 
 ### GCP
 
-| Code          | Region                  |
-| ------------- | ----------------------- |
-| `us-central1` | Iowa, North America     |
-| `us-east4`    | Virginia, North America |
+| Code           | Region                  |
+| -------------- | ----------------------- |
+| `europe-west4` | Netherlands, Europe     |
+| `us-central1`  | Iowa, North America     |
+| `us-east4`     | Virginia, North America |
 
 ### AWS
 
-| Code        | Region                |
-| ----------- | --------------------- |
-| `us-east-1` | US East (N. Virginia) |
-| `us-west-2` | US West (Oregon)      |
+| Code           | Region                |
+| -------------- | --------------------- |
+| `eu-central-1` | Europe (Frankfurt)    |
+| `us-east-1`    | US East (N. Virginia) |
+| `us-west-2`    | US West (Oregon)      |
 
 ## Dedicated cluster configurations
 
