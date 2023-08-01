@@ -20,15 +20,24 @@ To run these tests, open your Astro project and run:
 astro dev upgrade-test
 ```
 
-The results of your tests appear in a new folder called `upgrade-test-<current-version>--<new-version>`. Use the test results to fix any dependency conflicts or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and deploy your project to an Astro Deployment.
+The results of your tests appear in a new folder called `upgrade-test-<current-version>--<new-version>` that contains the following files:
 
-Use the following sections to learn more about the contents of each test report. For more information about the command's settings, see the [CLI reference guide](cli/astro-dev-upgrade-test.md).
+- `conflict-test-results.txt`: The result from the conflict test.
+- `pip_freeze_<old-version>`: The result of running `pip freeze` on your project with your current Astro Runtime version.
+- `pip_freeze_<new-version>`: This file results from running pip freeze on your project with the new Astro Runtime version.
+- `dependency_compare.txt`: The result of the dependency version test. 
+- `Dockerfile`: The upgraded `Dockerfile` used in the dependency version and DAG test.
+- `dag-test-results.html`: The results of the DAG test.
+
+Use the test results to fix any dependency conflicts or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and deploy your project to an Astro Deployment.
 
 :::tip
 
 If you're testing a local project before deploying to a Deployment on Astro Hosted or Hybrid, you test more accurately by adding  `--deployment-id` flag and specifying your Deployment ID. The Astro CLI uses the image currently running in your Deployment to test against the upgraded version. USe this flag to test a Deployment upgrade with local DAGs and dependencies.
 
 :::
+
+Read the following sections to learn more about the contents of each test report. For more information about the command's settings, see the [CLI reference guide](cli/astro-dev-upgrade-test.md).
 
 ### Conflict test
 
@@ -53,16 +62,3 @@ The DAG test produces a report of DAGs that have import errors after you upgrade
 Use the results of this test alongside the dependency change test to fix errors in your DAGs caused by the upgrade. You can also use this report to estimate the time you need to complete the upgrade.
 
 To run only the DAG test, run `astro dev upgrade-test --dag-test`
-
-### Test Results Overview
-
-The tests result in a folder that contains the results of the tests. The folder created by the tests will be called `upgrade-test-<old-version>--<new-version>` and will be in your Astro project folder. The version shown in the name is not the Airflow Version. They are either the Runtime or Certified version. The following files will be in the test result folder if all the tests run successfully:
-
-- `conflict-test-results.txt` - This file is the pip compile result from the conflict test.
-- `pip_freeze_<old-version>` - This file results from running pip freeze in the old(not upgraded) environment. Versions are either Runtime or Certified versions
-- `pip_freeze_<new-version>` - This file results from running pip freeze in the upgraded environment. Versions are either Runtime or Certified versions.
-- `dependency_compare.txt` - This file contains the result of the dependency version test. This file contains a list of pip packages that were added, removed, or changed after the upgrade.
-- `Dockerfile` - Upgraded `Dockerfile` used in the dependency version and DAG test.
-- `dag-test-results.html` - the HTML file containing the results of the DAG test. DAGs that have import errors after the upgrade will be shown here along with the first error encountered.
-
-Every time you rerun the test for the same upgrade all the files in the test results folder will be changed. If you’d like to keep results for a particular test run make sure to change the folder name.
