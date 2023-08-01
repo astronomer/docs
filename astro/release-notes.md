@@ -33,6 +33,8 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <HostedBadge/>
 
+New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different. For more information about what happens to code deploys when DAG-only deploys are enabled, see [What happens during a project deploy](https://docs.astronomer.io/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://docs.astronomer.io/astro/deploy-dags#enable-disable-dag-only-deploys-on-a-deployment).
+
 ### Teams now have Organization-level roles
 
 All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](user-permissions.md#organization-roles) role, which doesn't result in any additional automatic permissions.
