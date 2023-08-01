@@ -238,9 +238,9 @@ You can have as many setup and teardown tasks in one relationship as you need, w
 
 For example, you could have one task that creates a cluster, a second task that modifies the environment within that cluster and a third task that tears down the cluster. In this case you could define the first two tasks as setup tasks and the last one as a teardown task, all belonging to the same resource. In a second step you could add 10 tasks performing actions on that cluster to the scope of this setup / teardown grouping. 
 
-It is also possible to have [several sets of setup/teardown tasks](#independent-sets-of-setupteardown-tasks) within the same DAG that work on different resources and are independent of each other. For example, you could have one set of setup/teardown tasks that spins up a cluster to train your ML model and a second set of setup/teardown tasks in the same DAG that creates and deletes a temporary table in your database.
+It is also possible to have [several parallel groupings of setup/teardown tasks](#parallel-setupteardown-groupings) within the same DAG that work on different resources and are independent of each other. For example, you could have one set of setup/teardown tasks that spins up a cluster to train your ML model and a second set of setup/teardown tasks in the same DAG that creates and deletes a temporary table in your database.
 
-You can also [nest setup/teardown groupings](#nesting-setupteardown). 
+You can also [nest setup/teardown groupings](#nested-setupteardown-groupings). 
 
 ### `setups` argument
 
@@ -467,7 +467,7 @@ with my_cluster_teardown_task_obj.as_teardown(
 
 ## Multiple setup/teardown groupings in a DAG
 
-You can have as many groupings of setup/teardown tasks in a DAG as you need. Groupings can be run in parallel, independent of each other, or nested.
+You can have as many groupings of setup/teardown tasks in a DAG as you need. Groupings can be [run independent of each other in parallel](#parallel-setupteardown-groupings), or be [nested](#nested-setupteardown-groupings).
 
 ### Parallel setup/teardown groupings
 
@@ -647,13 +647,15 @@ my_setup_task >> [my_worker_task_1_obj >> my_worker_task_2_obj] >> my_worker_tas
 
 Tasks that are marked as teardown have a few special behaviors that are worth noting.
 
-- Triggering a teardown task: Each teardown tasks has its trigger rule configured to run if all of its upstream tasks ran and at least one of its associated `setup` tasks have completed successfully (e.g. there is at least one resource that needs to be torn down). If all associated setup tasks fail or are skipped, the teardown task will be failed or skipped respectively.
+- Triggering a teardown task: Each teardown tasks has its trigger rule configured to run if all of its upstream tasks have completed running, independently of whether they were successful or not and at least one of its associated `setup` tasks have completed successfully (e.g. there is at least one resource that needs to be torn down). If all associated setup tasks fail or are skipped, the teardown task will be failed or skipped respectively.
+
+- A teardown task without any associated setup tasks will always run once all upstream worker tasks have completed running, independently of whether they were successful or not.
 
 - When evaluating whether a DAG run was successful or not Airflow will ignore teardown tasks by default. This means if a teardown tasks that is a leaf task or final task in a DAG has failed, the DAG is still marked as having succeeded. In the example shown in the screenshot below, the success of the DAG run solely depends on whether `worker_task_3` completes successfully. You can change this behavior by setting `on_failure_fail_dagrun=True` in the teardown task.
 
     ![Successful DAG with failed teardown](/img/guides/airflow-setup-teardown_teardown_fail_dag_succeed.png)
 
-- When a teardown task is located within a task group and a dependency is set on this task group, the teardown task will be ignored, meaning the task `run_after_taskgroup` which is set to depend on the whole `work_in_the_cluster` task group will run even if the teardown task has failed or is still running.
+- When a teardown task is located within a [task group](task-groups.md) and a dependency is set on this task group, the teardown task will be ignored, meaning the task `run_after_taskgroup` which is set to depend on the whole `work_in_the_cluster` task group will run even if the teardown task has failed or is still running.
 
     ```python
     work_in_the_cluster() >> run_after_taskgroup()
@@ -669,7 +671,7 @@ The DAG shown in this example mimics a setup/teardown pattern that you can run l
 - The `delete_csv` task is the associated teardown task, deleting the resource of the CSV file.
 - The `fetch_data`, `write_to_csv` and `get_average_age_obj` tasks are in the scope of the setup/teardown pair. Any failure in these tasks would still need the resource "CSV file" to be deleted afterwards (we will pretend the CSV file is an expensive cluster). To recover from a failure, when rerunning any of these tasks, we always need the CSV file to be created again, which automatically happens by rerunning the `create_csv` task when any of the tasks in scope are cleared.
 
-This DAG comes with a convenience parameter to test setup/teardown functionality. When running the DAG toggle `fetch_bad_data` to cause bad data to get into the pipeline and the `get_average_age_obj` to fail.
+This DAG comes with a convenience parameter to test setup/teardown functionality. Toggle `fetch_bad_data` in the **Trigger DAG** view to cause bad data to get into the pipeline and the `get_average_age_obj` to fail, you will see that `delete_csv` will still run and delete the CSV file.
 
 <Tabs
     defaultValue="decorators"
