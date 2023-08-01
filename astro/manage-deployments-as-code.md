@@ -126,7 +126,7 @@ Astro Hybrid template files have the following differences compared to Astro Hos
 
 You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI.
 
-When you inspect a Deployment, the value of any environment variable that is set as secret in the Cloud UI will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. If you commit a template file to a GitHub repository, Astronomer recommends that you update the secret values manually in the Cloud UI and leave them blank in the file. This ensures that you do not commit secret values to a version control tool in plain-text.
+When you inspect a Deployment, the value of any environment variable set as secret in the Cloud UI will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. If you commit your deployment config file to source control, make sure you don't commit sensitive values in plain text. You can either remove those secrets manually before you commit or encrypt the file and commit the encrypted version to source control using a tool such as `gpg`.
 
 See [Environment variables](environment-variables.md).
 
