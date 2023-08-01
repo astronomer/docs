@@ -155,7 +155,7 @@ module.exports = {
               type: "category",
               label: "User access",
               items: [
-                "add-organization-users",
+                "manage-organization-users",
                 "configure-idp",
                 "set-up-scim-provisioning",
                 "manage-domains",
