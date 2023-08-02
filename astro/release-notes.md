@@ -37,7 +37,7 @@ New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer
 
 ### Teams now have Organization-level roles
 
-All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](user-permissions.md#organization-roles) role, which doesn't result in any additional automatic permissions.
+All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](https://docs.astronomer.io/astro/user-permissions#organization-roles) role, which doesn't result in any additional automatic permissions.
 
 Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-provisioning), you can now manage your Organization Owners and Billing Admins from your identity provider. See [Manage teams](https://docs.astronomer.io/astro/manage-teams) for more information. 
 
@@ -46,7 +46,20 @@ Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-pro
 - The Cloud UI now shows how many Workspaces, DAGs, clusters, and Astro Cloud IDE projects you have in the left sidebar.
 - You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
 - You can now create Deployments in standard clusters hosted in `europe-west2` on GCP and `eu-central-1` on AWS.
-- The default metadata database instance type for new Deployments on GCP clusters in Astro Hybrid has been reduced to `Small General Purpose` with 2 vCPUs and 8GiB. See [GCP Hybrid cluster settings](resource-reference-gcp-hybrid.md).
+- The default metadata database instance type for new Deployments on GCP clusters in Astro Hybrid has been reduced to `Small General Purpose` with 2 vCPUs and 8GiB. See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid).
+
+### Bug fixes
+
+- Because some regions don't support specific machine types that Astro Hosted uses, you can no longer create Hosted dedicated clusters in the following AWS regions:
+
+    - `af-south-1`
+    - `ap-east-1`
+    - `ap-northeast-2`
+    - `ap-northeast-3`
+    - `ca-central-1`
+    - `eu-south-1`
+    - `eu-west-3`
+    - `me-south-1`
 
 ## July 25, 2023
 
