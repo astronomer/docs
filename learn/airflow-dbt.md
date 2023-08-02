@@ -49,7 +49,7 @@ The benefits of using Airflow with dbt Core include:
 - Use Airflow's [data-aware scheduling](airflow-datasets.md) and [Airflow sensors](what-is-a-sensor.md) to run models depending on other events in your data ecosystem.
 - Turn each dbt model into a task, complete with Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [error notifications](error-notifications-in-airflow.md), as well as full observability into past runs directly in the Airflow UI.
 - Run `dbt test` on tables created by individual models immediately after a model has completed. Catch issues before moving downstream and integrate additional [data quality checks](data-quality.md) with your preferred tool to run alongside dbt tests.
-- Run dbt projects using [Airflow connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/secrets-backend/index.html).
+- Run dbt projects using [Airflow connections](connections.md) instead of dbt profiles. You can store all your connections in one place, directly within Airflow or by using a [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 - Leverage native support for installing and running dbt in a virtual environment to avoid dependency conflicts with Airflow.
 
 ## Time to complete
