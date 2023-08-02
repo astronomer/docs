@@ -5,7 +5,7 @@ id: deployment-file-reference
 description: View all possible values that you can include in a Deployment file when managing Deployments as code.
 ---
 
-After you create an Astro Deployment, you can create a file with the Astro CLI that contains its unique configurations represented as code. That includes worker queues, environment variables, and Astro Runtime version. You can use Deployment files to manage Deployments programmatically on Astro.
+After you create an Astro Deployment, you use the Astro CLI to create a file that contains its unique configurations represented as code. That includes worker queues, environment variables, Astro Runtime version, and more. You can use Deployment files to manage Deployments programmatically on Astro.
 
 When you [inspect a Deployment](cli/astro-deployment-inspect.md), its current configuration is generated as a YAML _Deployment file_. The file includes the name, description, and metadata that is unique to the Deployment.
 
