@@ -5,18 +5,25 @@ id: deployment-file-reference
 description: View all possible values that you can include in a Deployment file when managing Deployments as code.
 ---
 
-When you inspect a Deployment to generate a Deployment file, its current configuration is generated. The output of this command includes the name, description, and metadata that is unique to the Deployment. This configuration is also available in the Cloud UI. It incldues the the following sections:
+After you create an Astro Deployment, you can create a file with the Astro CLI that contains its unique configurations represented as code. That includes worker queues, environment variables, and Astro Runtime version. You can use Deployment files to manage Deployments programmatically on Astro.
 
-- `environment_variables`
-- `configuration`
-- `worker_queues`
-- `alert_emails`
-- `metadata`
+When you [inspect a Deployment](cli/astro-deployment-inspect.md), its current configuration is generated as a YAML _Deployment file_. The file includes the name, description, and metadata that is unique to the Deployment.
 
-A Deployment template file does not have the `metadata` section. You can remove the `metadata` section when using a deployment file as a template to create new Deployment.
+A _Deployment template file_ is different from the _Deployment file_. A template file does not have the `metadata` and `environment_variables` section, and the `name` and `description` fields are empty. Template files are used to create new Deployments or update Deployments based on an existing Deployment's configuration. To create a Deployment template file, run `astro deployment inspect --template`.
+
+Use this document as a reference for all fields in both Deployment files and Deployment template files. 
+
+## Deployment file example
+
+The following is an example Deployment file that includes all possible key-value pairs:
 
 ```yaml
 deployment:
+    environment_variables:
+        - is_secret: true
+          key: API_KEY
+          updated_at: "2023-06-22T14:02:27.892Z"
+          value: ""
     configuration:
         name: test
         description: ""
@@ -54,11 +61,19 @@ deployment:
         workload_identity: astro-native-magnify-8566@proj.iam.gserviceaccount.com
 ```
 
+See the following topics to learn about each section in the file
+
 ### `deployment.environment_variables`
 
 You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI.
 
 When you inspect a Deployment, the value of any environment variable that is set as secret in the Cloud UI will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. If you commit a template file to a GitHub repository, Astronomer recommends that you update the secret values manually in the Cloud UI and leave them blank in the file. This ensures that you do not commit secret values to a version control tool in plain-text.
+
+:::caution  
+
+When you add environment variables using a Deployment file, you must provide a `value` for your environment variable. Leaving this value blank will cause the `astro deployment create` command to fail.
+
+:::
 
 ### `deployment.configuration`
 
@@ -71,3 +86,10 @@ The `configuration` section contains all basic settings that you can configure f
 ### `deployment.worker_queues`
 
 The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment. If you don't enter specific values for the `default` worker queue for a Deployment with CeleryExecutor, default values based on the worker types available on your cluster are applied. This section is not applicable to Deployments running KubernetesExecutor. 
+
+### Other fields
+
+- `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid. 
+- `deployment_type` can be HOSTED_SHARED or HOSTED_DEDICATED for Astro Hosted depending on your [cluster_type](cli/astro-deployment-create.md#options). HOSTED_SHARED is another name for `standard` cluster_type and HOSTED_DEDICATED is another name for `dedicated` cluster_type. For Astro Hybrid, this will be `HYBRID`.
+- `cluster_name` will contain your region name for HOSTED_SHARED `deployment_type` because you are running on a shared or standard cluster.
+

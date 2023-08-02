@@ -5,7 +5,9 @@ id: automation-authentication
 description: Learn about all possible ways that you can authenticate to Astro from the Astro CLI and automation tools.
 ---
 
-Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). Before you can use scripting or automation on Astro, you must prove to Astro that your automation tool is using the right identity to access specific Astro resources. You can do this using the Astro CLI.
+Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). This process doesn't provide authorization and doesn't care what a user can do in Astro. 
+
+Before you can use scripting or automation on Astro, you must prove to Astro that your automation tool is using the right identity to access specific Astro resources. You can do this using the Astro CLI.
 
 For most automation tools, you complete the following actions to authenticate to Astro:
 
@@ -17,18 +19,11 @@ For most automation tools, you complete the following actions to authenticate to
 
 You can use any of the following credentials to authenticate in an automated process:
 
-- A Deployment API key.
-- A Workspace API token.
-- An Organization API token.
+- A Deployment API key. See [Create a Deployment API key](api-keys.md#create-an-api-key).
+- A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token).
+- An Organization API token. See [Create an Organization API token](organization-api-tokens.md#create-an-organization-api-token).
 
-You can create API tokens with granular access permissions, ensuring these tokens are not over-provisioned for their intended use.
-
-## Install the Astro CLI in your automation tool
-
-## Make credentials accessible to the Astro CLI
-
-
-### Deployment API keys
+You can create API tokens with role-based access permissions, ensuring that they are not over-provisioned for their intended use. When you chose a credential, you should grant it the least amount of permissions possible for the action it's used for. For example, instead of creating an Organization API token to automate actions in two separate Workspaces, you might be able to create two separate Workspace API tokens for each Workspace. 
 
 :::caution
 
@@ -36,43 +31,24 @@ Deployment API keys will soon be deprecated in favor of Deployment API tokens. I
 
 :::
 
-A Deployment API key, a unique key ID and secret pair, provides an alternative to manual user authentication. It is strictly scoped to a Deployment. You can use API keys to automate common actions on Astro that require manual inputs.
+## Install the Astro CLI in your automation tool
 
-To use a Deployment API key as an authentication method, export the following environment variables in your local or CI/CD environment:
+To authenticate to Astro and run actions programmatically, you must install the Astro CLI in the environment which will execute the actions. Generally, this requires running `brew install astro` or an equivalent installation command before your process starts. See [CI/CD templates](ci-cd-templates/template-overview.md) for examples of how to install the Astro CLI in different version management and workflow automation environments. 
+
+## Make credentials accessible to the Astro CLI
+
+The Astro CLI uses reserved environment variables to read your credential information and share it with Astro. To successfully authenticate your tool to Astro, you must set these environment variables in your automation environment. 
+
+To use a Deployment API key as an authentication credential, export the following environment variables in your automation environment.
 
 ```bash
-
 ASTRONOMER_KEY_ID=<your-api-key-id>
 ASTRONOMER_KEY_SECRET=<your-api-key-secret>
-
 ```
 
-When using a Deployment API key, keep the following in mind:
-
-- A Deployment API key ID and secret are permanently valid.
-- Deployment API keys are deleted permanently if their corresponding Deployment is deleted.
-- A Deployment API key is not bound to the user who creates it. When a user who created the API key is removed from the Workspace, or their permissions change, the Deployment and CI/CD workflows that use that API key are not affected.
-- Any user or service with access to an API key and secret can access the corresponding Deployment. The only way to delete this access is to delete the API key or delete the Deployment.
-
-
-### Workspace API tokens
-
-A Workspace API token is strictly scoped to a Workspace. You can use Workspace API tokens to automate actions you perform on a Workspace or the Deployments in a Workspace. 
-
-To use a Workspace API token as an authentication method, export the following environment variable in your local or CI/CD environment:
+To use a Workspace or Organization API token as an authentication credential, set the following environment variable in your automation environment. 
 
 ```bash
 
 ASTRO_API_TOKEN=<your-api-token>
-
-```
-
-### Organization API tokens
-
-To use an Organization API token as an authentication method, export the following environment variable in your local or CI/CD environment:
-
-```bash
-
-ASTRO_API_TOKEN=<your-api-token>
-w
 ```
