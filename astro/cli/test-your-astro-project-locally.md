@@ -29,7 +29,7 @@ The results of the tests appear in a new sub-folder in your Astro project, namel
 - `Dockerfile`: The updated file used in the upgrade test.
 - `dag-test-results.html`: The results of the DAG test.
 
-Use the test results to fix any dependency conflicts or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and deploy your project to an Astro Deployment.
+Use the test results to fix any dependency conflicts or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and [deploy your project](https://docs.astronomer.io/astro/deploy-dags) to an Astro Deployment.
 
 Every time you rerun the test for the same upgrade all the files in the test results folder will be changed. If you’d like to keep results for a particular test run make sure to change the folder name.
 
@@ -51,13 +51,13 @@ To run only the conflict test against the latest version of Astro Runtime, run t
 astro dev upgrade-test --conflict-test
 ```
 
-The test will get the dependencies of the upgrade version and your existing dependencies from `requirements.txt`, then use [`pip compile`](https://stackoverflow.com/questions/66751657/what-does-pip-compile-do-what-is-its-use-how-do-i-maintain-the-contents-of-my) to identify the conflicts. If the command identifies a conflict it will stop and display the stacktrace along with the error. You can resolve the dependency conflict and restart the test. 
+The test will get the dependencies of the upgrade version and your existing dependencies from `requirements.txt`, then use [`pip compile`](https://stackoverflow.com/questions/66751657/what-does-pip-compile-do-what-is-its-use-how-do-i-maintain-the-contents-of-my) to identify the conflicts. If the command identifies a conflict, it will stop and display the stacktrace along with the error. You can resolve the dependency conflict and restart the test. 
 
 Here is an example of the logs you may see if there is a conflict:
 
 ![Conflict error](../../static/img/docs/cli-upgrade-conflict-error.png)
 
-If no conflicts identified, a report for the test, namely, `conflict-test-results.txt` is generated and saved in the `upgrade-test-<old-version>--<new-version>` sub-directory within your Astro project.
+If no conflicts identified, a report for the test, namely, `conflict-test-results.txt` is generated and saved in the `upgrade-test-<current-version>--<upgrade-version>` sub-folder within your Astro project.
 
 ### Dependency test
 
@@ -69,7 +69,7 @@ To run only the version test against the latest version of Astro Runtime, run th
 astro dev upgrade-test --version-test
 ```
 
-The report for the version test, namely, `dependency_compare.txt` is generated and saved in the `upgrade-test-<old-version>--<new-version>` sub-folder within your Astro project. This report contains the following sections:
+The report for the version test, namely, `dependency_compare.txt` is generated and saved in the `upgrade-test-<current-version>--<upgrade-version>` sub-folder within your Astro project. This report contains the following sections:
 
 - Apache Airflow Update
 - Airflow Providers Major Updates
@@ -94,7 +94,7 @@ To run only the DAG test against the latest version of Astro Runtime, run the fo
 astro dev upgrade-test --dag-test
 ```
 
-This test will use the [`astro dev parse`](./astro-dev-parse.md) command against the upgrade version and produce a report, called `dag-test-report.html`. This HTML report lists the DAGs that will have import errors, along with the first error encountered if you perform an upgrade. You can use this report along with the dependency-test report to fix errors in your DAGs before you run an upgrade.
+This test uses the [`astro dev parse`](./astro-dev-parse.md) command against the upgrade version and produce a report, called `dag-test-report.html`. This HTML report lists the DAGs that will have import errors, along with the first error encountered if you perform an upgrade. You can use this report along with the dependency-test report to fix errors in your DAGs before you run an upgrade.
 
 ## Test before upgrading using a custom image
 
