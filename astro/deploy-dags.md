@@ -9,7 +9,7 @@ DAG-only deploys are the fastest way to deploy code to Astro. They are recommend
 
 DAG-only deploys are enabled by default on all Deployments on Astro Hosted. After it is enabled, you must still [deploy your project image](deploy-project-image.md) when you make a change to any file in your Astro project that is not in the `dags` directory.
 
-Enabling DAG-only deploys on Astro has a few benefits:
+DAG-only deploys have the following benefits:
 
 - DAG-only deploys are significantly faster than project deploys.
 - Deployments pick up DAG-only deploys without restarting. This results in a more efficient use of workers and no downtime for your Deployments.
