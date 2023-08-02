@@ -46,7 +46,7 @@ This command returns a list of Deployments available in your Workspace and promp
 
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
-If your code passes the parse, the Astro CLI deploys your project in two separate processes:
+If your code passes the parse, the Astro CLI deploys your project in two separate, simultaneous processes:
 
 - The Astro CLI uploads your `dags` directory to Astronomer-hosted blob storage. Your Deployment downloads the DAGs from the blob storage and applies the code to all of its running Airflow containers.
 - The Astro CLI builds all other project files into a Docker image and deploys this to an Astronomer-hosted Docker registry. The Deployment then applies the image to all of its running Airflow containers.
