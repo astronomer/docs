@@ -46,11 +46,16 @@ This command returns a list of Deployments available in your Workspace and promp
 
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
-If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `dags` directory is excluded from this Docker image and pushed separately. 
+If your code passes the parse, the Astro CLI deploys your project in two separate, simultaneous processes:
+
+- The Astro CLI uploads your `dags` directory to Astronomer-hosted blob storage. Your Deployment downloads the DAGs from the blob storage and applies the code to all of its running Airflow containers.
+- The Astro CLI builds all other project files into a Docker image and deploys this to an Astronomer-hosted Docker registry. The Deployment then applies the image to all of its running Airflow containers.
+
+See [What happens during a project deploy](#what-happens-during-a-project-deploy) for a more detailed description of how the Astro CLI and Astro work together to deploy your code.
 
 :::info
 
-If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, set up [DAG only deploys](deploy-dags.md) so that you're only deploying DAGs over your connection. To deploy a complete project over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
+If your internet connection has slow upload speeds, the deploy might fail with the error `error parsing HTTP 408 response body: unexpected end of JSON input`. If you're only deploying a change to your DAGs, trigger a [DAG only deploy](deploy-dags.md) so that you're only deploying DAGs over your connection. To deploy a complete project over a slow connection, you can [deploy with CI/CD](set-up-ci-cd.md).
 
 :::
 
@@ -73,19 +78,76 @@ When the deploy completes, the **Docker Image** field in the Cloud UI are update
 To confirm a deploy was successful, verify that the running versions of your Docker image and DAG bundle have been updated.
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
-2. Review the information in the **Docker Image** field to determine the Deployment code version.
-
-:::info
-
-If your Deployment has [DAG-only deploys](deploy-dags.md) enabled, the **DAG bundle version** field will also update with a timestamp. For Deployments where this feature is enabled, the Astro CLI deploys DAGs separately from the project image.
-
-:::
+2. Review the information in the **Docker Image** and **DAG bundle version** field to determine the Deployment code version.
 
 ## What happens during a project deploy
 
-When you deploy a project to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running Apache Airflow on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `dags` directory is excluded from this Docker image and is pushed separately.
+Read this section for a more detailed description of the project deploy process.
 
-![Deploy code](/img/docs/deploy-architecture.png)
+Your Deployment uses the following components to process your code deploy:
+
+- A proprietary operator for deploying Docker images to your Airflow containers
+- A sidecar for downloading DAGs attached to each Airflow component container
+- A Blob Storage container hosted by Astronomer
+  
+When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your project as an image to an Astronomer-hosted Docker registry. The proprietary operator pulls the images from a Docker registry, then updates the running image for all Airflow containers in your Deployment. DAG changes are deployed through a separate and simultaneous process:
+
+- The Astro CLI uploads your `dags` folder to the Deployment's Azure Blob Storage.
+- The DAG downloader sidecars download the new DAGs from Azure Blob Storage.
+
+:::info
+
+This process is different if your Deployment has DAG-only deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable--disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
+
+:::
+
+Use the following diagram to understand the relationship between Astronomer, your local machine, and your Deployment.  
+
+```mermaid
+flowchart BT;
+classDef subgraph_padding fill:none,stroke:none
+classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
+    subgraph AstroCLI[Astro CLI]
+    subgraph subgraph_padding1 [ ]
+    id10
+    id1
+    end
+    end
+    subgraph ControlPlane[Control plane]
+    id9[(Azure blob storage)]:::astro
+    id2[Astro API]:::astro
+    id4[(Docker registry)]:::astro
+    end
+    subgraph DataPlane ["Data plane"]
+    subgraph subgraph_padding3 [ ]
+    id5(("Image deploy operator")):::astro
+    subgraph Deployment ["Deployment"]
+    subgraph subgraph_padding2 [ ]
+    id6["Airflow webserver </br> with DAG downloader"]:::astro
+    id7["Airflow scheduler </br> with DAG downloader"]:::astro
+    id8["Airflow workers </br> with DAG downloader"]:::astro
+    end
+    end
+    end
+    end
+    id1["Project image </br> excluding 'dags'"]:::astro-->|API request to <br/>update Docker image| id2;
+    id10["'dags' folder"]:::astro-->|Upload DAGs|id9
+    id10-->|Retrieve Azure blob </br> storage URL and token|id2
+    id1-->|Docker push| id4
+    id4-->|Pull image|id5
+    id5-->id6 & id7 & id8
+    id5-->|Check for new images and </br> DAGs to download|id2
+    id9-->id6 & id7 & id8
+    class subgraph_padding3 subgraph_padding
+    class subgraph_padding2 subgraph_padding
+    class subgraph_padding1 subgraph_padding
+    style ControlPlane fill:#bfeaff,stroke:#333,stroke-width:2px
+    style DataPlane fill:#bfeaff,stroke:#333,stroke-width:2px
+    style AstroCLI fill:#bfeaff,stroke:#333,stroke-width:2px
+    style Deployment fill:#bfeaff,stroke:#333,stroke-width:2px
+```
+
+### Downtime after a code deploy
 
 After Astro receives the deploy, it gracefully terminates all containers except for the Airflow webserver and Celery workers that are currently running tasks. All new containers will run your new code.
 

@@ -265,6 +265,7 @@
 # redirect links to renamed files
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
+/astro/deploy-code.md#enable-dag-only-deploys-on-a-deployment /astro/deploy-dags.md#enable-disable-dag-deploys-for-a-deployment
 /astro/pipeline-alerts /astro/alerts 301
 /astro/executors /astro/executors-overview 301
 /astro/airflow-alerts /astro/airflow-email-notifications 301

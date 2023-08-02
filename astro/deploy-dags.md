@@ -7,46 +7,14 @@ description: Learn about the different ways you can deploy code to Astro.
 
 DAG-only deploys are the fastest way to deploy code to Astro. They are recommended if you only need to deploy changes made to the `dags` directory of your Astro project.
 
-To push only DAGs to Astro, you must enable the feature for each Deployment. You only need to enable the feature once. After it is enabled, you must still [deploy your project image](deploy-project-image.md) when you make a change to any file in your Astro project that is not in the `dags` directory.
+DAG-only deploys are enabled by default on all Deployments on Astro Hosted. After it is enabled, you must still [deploy your project image](deploy-project-image.md) when you make a change to any file in your Astro project that is not in the `dags` directory.
 
-Enabling DAG-only deploys on Astro has a few benefits:
+DAG-only deploys have the following benefits:
 
 - DAG-only deploys are significantly faster than project deploys.
 - Deployments pick up DAG-only deploys without restarting. This results in a more efficient use of workers and no downtime for your Deployments.
 - If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys. See [DAG-based templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-based-templates) for how you can set this up in your CI/CD pipelines.
 - You can use DAG deploys to update your DAGs when you have slow upload speed on your internet connection.
-
-## Enable DAG-only deploys on a Deployment
-
-Before you enable DAG-only deploys on a Deployment, ensure the following:
-
-- You have access to the latest version of your Deployment's Astro project.
-- You can update your Deployment using the Astro CLI. 
-- Your Deployment does not have [CI/CD enforcement](configure-deployment-resources.md#enforce-cicd-deploys) enabled. You can confirm this from the Cloud UI or by running [`astro deployment inspect`](cli/astro-deployment-inspect.md) command.
-
-:::warning
-
-Carefully read and complete all of the following steps to ensure that your Deployment is not disrupted by enabling this feature. Crucially, you must trigger a DAG-based deploy to your Astro Deployment using `astro deploy --dags` immediately after you enable the DAG-only deploy feature. If you don't complete this step, your DAGs will not be available in the Airflow UI until you update your Deployment. 
-
-:::
-
-1. Open your Deployment's Astro project.
-2. Run the following command to enable the feature on your Deployment:
-
-    ```sh
-    astro deployment update --dag-deploy enable
-    ```
-
-3. When the prompt appears in the Astro CLI, select the Deployment where you want to enable the feature. Running tasks will not be interrupted, but new tasks will not be scheduled until you trigger your first DAG-only deploy.
-4. Run the following command to finalize the setup and trigger a DAG-only deploy to your Deployment:  
-
-    ```sh
-    astro deploy --dags
-    ```
-
-    If you don't trigger a deploy after enabling the feature, your Deployment cannot schedule new tasks.
-
-5. (Optional) Open your Deployment in the Cloud UI. Confirm your deploy was successful by checking the Deployment's **DAG Bundle Version**. The version name should include the date and time that you triggered the deploy.
 
 ## Trigger a DAG-only deploy
 
@@ -58,25 +26,39 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
-## Disable DAG-only deploys on a Deployment
+## Enable / disable DAG-only deploys on a Deployment
 
-If you have Workspace Admin permissions, you can turn off DAG-only deploys for a Deployment at any time. To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
+On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
 
-Before you disable DAG-only deploys on a Deployment, ensure the following:
+If you have Workspace Admin permissions, you can enable or disable DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy: 
+
+- Any changes to your DAG code are deployed as part of your Astro project Docker image.
+- Your Deployment no longer includes Azure Blob Storage or DAG downloading sidecars.
+- In the Cloud UI, your Deployment **DAG bundle version** will not update when you deploy code. 
+
+To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
+
+Before you enable or disable DAG-only deploys on a Deployment, ensure the following:
 
 - You have access to the latest version of your Deployment's Astro project.
 - You can update your Deployment using the Astro CLI. 
 
 :::warning
 
-Carefully read and complete all of the following steps to ensure that your Deployment is not disrupted by disabling this feature. Crucially, you must trigger an image deploy to your Astro Deployment using `astro deploy` immediately after you disable the DAG-only deploy feature. If you don't, your DAGs will be not be available in the Airflow UI until you update your Deployment.
+Carefully read and complete all of the following steps to ensure that your Deployment is not disrupted by disabling or enabling DAG-only deploys. Crucially, you must trigger an image deploy to your Astro Deployment using `astro deploy` immediately after you apply the setting. If you don't, your DAGs will be not be available in the Airflow UI until you update your Deployment.
 
 :::
 
-1. Run the following command to turn off DAG-only deploys:
+1. To turn off DAG-only deploys, run the following command:
 
     ```sh
     astro deployment update --dag-deploy disable
+    ```
+
+    To turn on DAG-only deploys, run the following command:
+
+    ```sh
+    astro deployment update --dag-deploy enable
     ```
 
 2. Run the following command to deploy all of the files in your Astro project as a Docker image:
