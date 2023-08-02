@@ -113,12 +113,12 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
     id1
     end
     end
-    subgraph ControlPlane[Astronomer-managed services]
+    subgraph ControlPlane[Control plane]
     id9[(Azure blob storage)]:::astro
     id2[Astro API]:::astro
     id4[(Docker registry)]:::astro
     end
-    subgraph DataPlane ["Cluster"]
+    subgraph DataPlane ["Data plane"]
     subgraph subgraph_padding3 [ ]
     id5(("Image deploy operator")):::astro
     subgraph Deployment ["Deployment"]
