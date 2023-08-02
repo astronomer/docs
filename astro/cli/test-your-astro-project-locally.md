@@ -35,7 +35,7 @@ Every time you rerun the test for the same upgrade all the files in the test res
 
 :::tip
 
-If you're testing a local project before deploying to a Deployment on Astro Hosted or Hybrid, you test more accurately by adding  `--deployment-id` flag and specifying your Deployment ID. The Astro CLI uses the image currently running in your Deployment to test against the upgraded version. USe this flag to test a Deployment upgrade with local DAGs and dependencies.
+If you're testing a local project before deploying to a Deployment on Astro Hosted or Hybrid, you can test more accurately by adding  `--deployment-id` flag and specifying your Deployment ID. The Astro CLI uses the image currently running in your Deployment to test against the upgrade version. Note that this flag will use your local DAGs and dependencies against your Astro Deployment's image with the upgrade version of runtime specified. 
 
 :::
 
