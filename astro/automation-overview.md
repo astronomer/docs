@@ -1,15 +1,15 @@
 ---
 sidebar_label: 'Overview'
-title: 'Automate workflows on Astro'
+title: 'Automate operational workflows on Astro'
 id: automation-overview
 description: Learn how you can automate various actions on Astro to quickly build and manage your data ecosystem. 
 ---
 
-Astro has various components such as, Organization, Workpsace, Deployments, users, Teams, tokens, etc. You can manage these using Astronomer's [Cloud UI](log-in-to-astro.md#log-in-to-the-cloud-ui) or [Astro CLI](cli/overview.md). By default every Astro user can access Astro components programmatically using Astro CLI. This scope of this access is based on the [permissions](user-permissions.md) assigned to a user at the Organization and Worksapce level.
+Astro has various components such as, Organization, Workpsace, Deployments, users, Teams, tokens, etc. You can manage these using Astronomer's [Cloud UI](log-in-to-astro.md#log-in-to-the-cloud-ui) or [Astro CLI](cli/overview.md). By default every Astro user can access Astro components programmatically using Astro CLI. The scope of this access is based on the [permissions](user-permissions.md) assigned to a user at the Organization and Worksapce level.
 
-Though, Cloud UI is self-explanatory and easy to use, programmatic access to your Astro components is required for various use-cases. This typically includes, deploying your Astro project from local system, for automated deploys using CI/CD, or to automate common processes to manage your other Astro components. 
+Though, Cloud UI is self-explanatory and easy to use, programmatic access to your Astro components is required for various use-cases. This typically includes, [deploying your local Astro project](./deploy-code.md), for automated [deploys using CI/CD](./set-up-ci-cd.md), or to automate common processes to manage your other Astro components. 
 
-While your Astro user credentials can be used for programmatic access to Astro, API tokens are recommended to be used for CI/CD and other common processes for production-grade Deployments. Astronomer recommends not to give direct access to users for deploying code to your production Deployments. You can implement appropriate controls for users using Astro's heirarchical role-based access control (RBAC) for Astro Organization and Workspaces, and also enforce CI/CD deploys for your Deployments.
+While your [Astro user credentials](./log-in-to-astro.md#log-in-to-the-astro-cli) can be used for programmatic access to Astro, API tokens are recommended to be used for CI/CD and other common processes for production-grade Deployments. Astronomer recommends not to give direct access to users for deploying code to your production Deployments. You can implement appropriate controls for users using [Astro's heirarchical role-based access control (RBAC)](./astro-architecture.md#access-control-architecture) for Astro Organization and Workspaces, and also [enforce CI/CD deploys](./configure-deployment-resources.md#enforce-cicd-deploys) for your Deployments.
 
 ## Common use-cases to automate
 
@@ -21,8 +21,8 @@ While your Astro user credentials can be used for programmatic access to Astro, 
 
 ## Best Practices
 
-- Always use the least-privilege approach to automate your processes using the API keys or tokens. This provides fine-grained controls and security to your Deployments.
+- Always use the least-privilege approach to automate your processes using the API keys or tokens to ensure secure and fine-grained control over your Astro components.
 - Always set an expiration date for your API tokens.
 - Always rotate your API tokens for enhanced security.
 - Avoid giving direct access to individual users to production Deployments or Workspaces.
-- Enforce CI/CD deploys for your production Deployments to avoid accidental deploys.
+- Enforce CI/CD deploys for your production Deployments to avoid accidental deploys by users while testing.

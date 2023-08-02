@@ -5,11 +5,9 @@ id: automation-authentication
 description: Learn about all possible ways that you can authenticate the Astro CLI and automation tools for automated workflows.
 ---
 
-Authentication is a process that proves a user's identity in Astro. This process doesn't care what a user can do in Astro. 
+Authentication is a process that proves a user's identity in Astro. Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). This process doesn't provide authorization and doesn't care what a user can do in Astro. To manage authorization for a user in Astro, see [User permissions](./user-permissions.md). 
 
-Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). To manage your users and Deployments on Astro using Astro CLI, you must first [log in to Astro](log-in-to-astro.md#log-in-to-the-astro-cli).
-
-You can use either of the following methods to authenticate to Astro from Astro CLI:
+To manage your Astro components using Astro CLI, you must first [log in to Astro](log-in-to-astro.md#log-in-to-the-astro-cli). You can use either of the following methods to authenticate to Astro from Astro CLI:
 
 - Your Astro user credentials, which generates a short-lived authentication token.
 - A Deployment API key.
@@ -30,13 +28,13 @@ Team leaders and administrators can use Organization and Workspace permissions t
 
 ## Astro user based access
 
-Your Astro user *authenticates* to the Astro platform and the permissions assigned to the user in Astro *authorizes* access to the Workspaces and Deployments in your Organization. For example, if your Astro user has permissions of Organization Member and Workspace Viewer for Workspace A, you will not be able to create any Deployments or push changes to any Deployments in Workspace A. Whereas, if your user has permissions of Workspace Editor in Workspace B, you will be able to create Deployments or push changes to Deployments in Workspace B.
+Your Astro user *authenticates* to the Astro platform and the permissions assigned to you user in Astro *authorizes* access to the Workspaces and Deployments in your Organization. For example, if your Astro user has permissions of Organization Member and Workspace Viewer for Workspace A, you will not be able to create any Deployments or push changes to any Deployments in Workspace A. Whereas, if your user has permissions of Workspace Editor in Workspace B, you will be able to create Deployments or push changes to Deployments in Workspace B.
 
 To login to the Astro platform using your user credentials, use Astro CLI command [`astro login`](log-in-to-astro.md#log-in-to-the-astro-cli). If you do not have access to a browser, you can use [browserless authentication](log-in-to-astro.md#browserless-authentication).
 
 ## API based access
 
-Astronomer provides API based access to authorize to your Astro platform. Astro API tokens enables you to easily automate critical functions, at the Deployment, Workspace, and Organization level. You can create API tokens with granular access permissions, ensuring these tokens are not over-provisioned for their intended use.
+Astronomer provides API based access to authorize to your Astro platform. Astro API tokens enable you to easily automate critical functions, at the Deployment, Workspace, and Organization level. You can create API tokens with granular access permissions, ensuring these tokens are not over-provisioned for their intended use.
 
 ### A Deployment API key
 

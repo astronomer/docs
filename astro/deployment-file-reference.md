@@ -5,7 +5,7 @@ id: deployment-file-reference
 description: View all possible values that you can include in a Deployment file when managing Deployments as code.
 ---
 
-When you inspect a Deployment to generate a Deployment file, its current configuration is generated. The output of this command includes the name, description, and metadata that is unique to the Deployment. This configuration is also available in the Cloud UI. It incldues the the following sections:
+When you [inspect a Deployment](cli/astro-deployment-inspect.md) to generate a Deployment file, its current configuration is generated. The output of this command includes the name, description, and metadata that is unique to the Deployment. This configuration is also available in the Cloud UI. It incldues the the following sections:
 
 - `environment_variables`
 - `configuration`
@@ -13,10 +13,17 @@ When you inspect a Deployment to generate a Deployment file, its current configu
 - `alert_emails`
 - `metadata`
 
-A Deployment template file does not have the `metadata` section. You can remove the `metadata` section when using a deployment file as a template to create new Deployment.
+A _Deployment template file_ is different from the _Deployment file_ such that it does not have the `metadata` and `environment_variables` section, and the `name` and `description` fields are empty. If you wish to use a deployment file as a template, you can remove the `metadata` section and update the other sections as required.
+
+## Deployment file 
 
 ```yaml
 deployment:
+    environment_variables:
+        - is_secret: true
+          key: API_KEY
+          updated_at: "2023-06-22T14:02:27.892Z"
+          value: ""
     configuration:
         name: test
         description: ""
@@ -54,6 +61,12 @@ deployment:
         workload_identity: astro-native-magnify-8566@proj.iam.gserviceaccount.com
 ```
 
+:::caution  
+
+Note that when you add environment variables using deployment file, you must provide a value for the key `value` for your environment variable. Empty string ("") or leaving it blank will cause the `astro deployment create` command to fail.
+
+:::
+
 ### `deployment.environment_variables`
 
 You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI.
@@ -71,3 +84,10 @@ The `configuration` section contains all basic settings that you can configure f
 ### `deployment.worker_queues`
 
 The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment. If you don't enter specific values for the `default` worker queue for a Deployment with CeleryExecutor, default values based on the worker types available on your cluster are applied. This section is not applicable to Deployments running KubernetesExecutor. 
+
+### Other fields
+
+- `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid. 
+- `deployment_type` can be HOSTED_SHARED or HOSTED_DEDICATED for Astro Hosted depending on your [cluster_type](cli/astro-deployment-create.md#options). HOSTED_SHARED is another name for `standard` cluster_type and HOSTED_DEDICATED is another name for `dedicated` cluster_type. For Astro Hybrid, this will be `HYBRID`.
+- `cluster_name` will contain your region name for HOSTED_SHARED `deployment_type` because you are running on a shared or standard cluster.
+

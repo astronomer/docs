@@ -30,17 +30,13 @@ A Deployment template file is a special type of Deployment file which does not h
 To create a template file in `yaml` format, run the following command:
 
 ```bash
-
 astro deployment inspect <deployment-name> --template > <your-deployment-template-file-name>.yaml
-
 ```
 
 To create a template file in `json` format, run the following command:
 
 ```bash
-
 astro deployment inspect <deployment-name> --template --output json > <your-deployment-template-file-name>.json
-
 ```
 
 
@@ -60,49 +56,37 @@ To create a Deployment on Astro Hybrid, both `name` and `cluster_name` fields ar
 
 - When you create worker queues, the `name` and `worker_type` fields are required. Any unspecified fields are populated with smart defaults based on the worker types available in your cluster.
 
-- When you create environment variables, each variable must include a `key` and a `value`.
+- When you create environment variables, each variable must include a `key` and a `value` with values.
 
 
 To create a new Deployment from an existing template file:
 
 1. In your template file, provide a name for the new Deployment.
-2. Run:
+2. Run the following command:
 
     ```bash
-
     astro deployment create --deployment-file <deployment-template-file-name>
-
     ```
 
 3. (Optional) Confirm that your Deployment was successfully created by running the following command in your current Workspace:
 
    ```bash
-
    astro deployment list
-
    ```
    
-   You can also go to the Workspace page in the Cloud UI.
+   You can also go to the Workspace page in the Cloud UI to confirm.
 
-4. (Optional) Reconfigure any Airflow connections or variables from the Deployment that you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Airflow](https://docs.astronomer.io/learn/connections).
+4. (Optional) Reconfigure any Airflow connections or variables from the Deployment that you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Airflow](./manage-connections-variables.md).
 
 
 ## Update a Deployment using a Deployment file
-
-:::warning 
-
-You must push a complete Deployment file that lists all valid configurations whenever you update a Deployment with a Deployment file. If a configuration exists on Astro but doesn't exist in your Deployment file, such as a worker queue, that configuration is deleted when you push your Deployment file. 
-
-:::
 
 A Deployment file is a complete snapshot of an existing Deployment at the point you inspected it. It's similar to a template file, but also contains your Deployment's name, description, and metadata. In the same way you use a template file to create a new Deployment, you use a Deployment file to update an existing Deployment with a new set of configurations.
 
 You can create a Deployment file by running the following command:
 
 ```bash
-
 astro deployment inspect <deployment-name> --template > <your-deployment-template-file-name>.yaml
-
 ```
 
 When you update a Deployment with a Deployment file, keep in mind that:
@@ -111,14 +95,18 @@ When you update a Deployment with a Deployment file, keep in mind that:
 - You can't change the Astro Runtime version of the Deployment. To upgrade Astro Runtime, you must update the Dockerfile in your Astro project. See [Upgrade Astro Runtime](upgrade-runtime.md).
 - Environment variables marked as secret in the Cloud UI are not exported to your Deployment file. Hence, these will be deleted from your Deployment if you do not add them to your deployment file. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
 
+:::warning 
+
+You must push a complete Deployment file that lists all valid configurations whenever you update a Deployment with a Deployment file. If a configuration exists on Astro but doesn't exist in your Deployment file, such as a worker queue, that configuration is deleted when you push your Deployment file. 
+
+:::
+
 To update a Deployment using a Deployment file:
 
 1. Inspect an existing Deployment and create a Deployment file for its current configurations:
 
   ```bash
-  
   astro deployment inspect -n <deployment-name> > <your-deployment-file-name>
-
   ```
 
 2. Modify the Deployment file and save your changes. See [Deployment file reference](#deployment-file-reference) for fields that you can modify.
@@ -128,17 +116,13 @@ To update a Deployment using a Deployment file:
 3. Update your Deployment according to the configurations in the Deployment file:
 
   ```bash
-
   astro deployment update <deployment-name> --deployment-file <your-deployment-file>
-
   ```
 
 4. (Optional) Confirm that your Deployment was updated successfully by running the following command. You can also go to the Deployment page in the Cloud UI to confirm the new values.
 
   ```bash
-  
   astro deployment inspect -n <deployment-name>
-
   ```
 
 
