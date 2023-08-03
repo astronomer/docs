@@ -11,7 +11,7 @@ description: Astronomer Software release notes.
 
 ## 0.33.0
 
-Release date: July 26, 2023
+Release date: August 3, 2023
 
 ### Automatic PGBouncer connection scaling
 
@@ -19,6 +19,7 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 
 ### Additional improvements
 
+- Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
 - The Workspace **Deployments** page is now paginated in the Astronomer UI.
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`.
 - You can now set `deployments.canCreateDeploymentFromUI` to false to prevent all users from creating new Deployments through the Astronomer UI. 
