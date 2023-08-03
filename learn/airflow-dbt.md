@@ -23,8 +23,8 @@ profile_config = ProfileConfig(
     profile_name="default",
     target_name="dev",
     profile_mapping=PostgresUserPasswordProfileMapping(
-        conn_id="db_conn",
-        profile_args={"schema": "public"},
+        conn_id="my_db_conn",
+        profile_args={"schema": "my_schema"},
     ),
 )
 
@@ -202,14 +202,15 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
 
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
 
-    ![Cosmos DAG graph view](/img/guides/cosmos_dag_graph_view.png)
+    ![Cosmos DAG graph view](/img/integrations/airflow-dbt-cosmos_dag_graph_view.png)
+
+4. Check the [XCom](airflow-passing-data-between-tasks.md) returned by the `query_table` task to see your name in the `model2` table.
 
 :::info
 
 The DbtTaskGroup class populates an Airflow task group with Airflow tasks created from dbt models inside of a normal DAG. To directly define a full DAG containing only dbt models use the `DbtDag` class, as shown in the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/getting_started/astro.html).
 
 :::
-
 
 Congratulations! You've run a DAG using Cosmos to automatically create tasks from dbt models. You can learn more about how to configure Cosmos in the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/index.html).
 
