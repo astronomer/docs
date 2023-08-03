@@ -124,11 +124,12 @@ Complete the manual setup if you configured your existing Astro app without usin
 2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
-5. In the Azure AD management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application).
-6. In the menu for your new application, click **Provisioning** and configure the following values:
+5. Append the [Azure AD feature flag parameter](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior) `?aadOptscim062020` to your **SCIM Integration URL** and recopy it. For example, if your SCIM Integration URL is `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0`, your final URL would be `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0?aadOptscim062020`. The feature flag is required for fully compliant SCIM behavior in Azure AD.
+6. In the Azure AD management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application).
+7. In the menu for your new application, click **Provisioning** and configure the following values:
 
     - **Provisioning mode**: Set to **Automatic**.
-    - **Admin Credentials** > **Tenant URL**: Enter the SCIM integration URL that you copied from the Cloud UI.
+    - **Admin Credentials** > **Tenant URL**: Enter the **SCIM integration URL** including the Azure AD feature flag parameter.
     - **Secret Token**: Enter your Organization API token. 
     - **Mappings**: Configure the following mappings:
 
@@ -145,7 +146,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 
   ::: 
 
-7. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+1. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
 </TabItem>
 </Tabs>
