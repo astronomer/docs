@@ -24,6 +24,33 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 9.0.0
+
+- Release date: August 10, 2023
+- Airflow version: 2.7.0
+
+## New Python version distributions of Astro Runtime
+
+Each new version of Astro Runtime now has separate distributions for Python 3.8, 3.9. 3.10 and 3.11. Using a Python distribution of Astro Runtime is the easiest way to use a specific Python version in Airflow. Image tags for Python distributions are formatted as:
+
+```text
+quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
+```
+
+For example, to use Python 3.8 in Astro Runtime 9.0.0, you would replace the image tag in your Astro project Dockerfile with `quay.io/astronomer/astro-runtime:9.0.0-python-3.8`.
+
+As part of this change, the base image for a given Astro Runtime version now uses the same Python version as the Apache Airflow release it's bundled with. In Runtime 9.0.0, that version is Python 3.11. If you want to ensure that you keep using the same version of Python across multiple Astro Runtime upgrades, Astronomer recommends that you begin to use the Python distribution for your required Python version.
+
+## New slim distribution of Astro Runtime
+
+Astronomer now maintains a slimmed down distribution of Astro Runtime with only the packages necessary for running Airflow on Astro. To be able to continue sending task logs, this version also includes some proprietary logging tools to replace larger cloud provider packages. The image tags for slim distributions for Astro Runtime are formatted as:
+
+TBD
+
+## Upgrade to Python 3.11
+
+The base image for Astro Runtime now uses Python 3.11. If you want to use a different version of Python, replace your image with the appropriate Python distribution of Astro Runtime.
+
 ## Astro Runtime 8.8.0
 
 - Release date: July 21, 2023
