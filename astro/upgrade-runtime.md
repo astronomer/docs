@@ -14,12 +14,6 @@ import {siteVariables} from '@site/src/versions';
 
 New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
-:::tip
-
-You can test an upgrade locally without making changes to your local project with the `[astro dev upgrade-test](cli/upgrade-test.md)`command.
-
-:::
-
 ## Upgrade considerations
 
 Consider the following when you upgrade Astro Runtime:
