@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Authentication'
-title: 'Authenticate to Astro'
+title: 'Authenticate to Astro for automated workflows'
 id: automation-authentication
 description: Learn about all possible ways that you can authenticate to Astro from the Astro CLI and automation tools.
 ---
