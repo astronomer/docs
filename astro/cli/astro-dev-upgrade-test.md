@@ -8,7 +8,6 @@ hide_table_of_contents: true
 
 Test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. Specifically, this command will run the following tests:
 
-- Identify dependency conflicts for Python packages in your upgrade version.
 - Identify major and minor version changes of the Python packages in your upgrade version.
 - Identify DAG import errors that will appear after you upgrade.
 
@@ -31,7 +30,6 @@ By default, the command runs all three available tests on your project against t
 | Option                    | Description                                                                                                                                                                                                     | Possible Values                                                                                        |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `-a`, `--airflow-version` | The equivalent of Airflow you want to upgrade to. The default is the latest available version. Note that the Astro CLI will still test against an Astro Runtime image based on the Airflow version you specify. | Any valid [Airflow version](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html). |
-| `-c`, `--conflict-test`   | Only run conflict tests. These tests check whether you will have dependency conflicts after you upgrade.                                                                                                        | None                                                                                                   |
 | `-d`, `--dag-test`              | Only run DAG tests. These tests check whether your DAGs will generate import errors after you upgrade.                                                                                                          | None                                                                                                   |
 | `-i`, `--deployment-id`   | Specify a Deployment ID to test with an image from an Astro Deployment instead of the image listed in your Astro project Dockerfile.                                                                            | Any valid Deployment ID.                                                                               |
 | `-n`, `--image-name`      | Name of a custom upgraded image. Updates the FROM line in your Dockerfile to pull this image for the upgrade.                                                                                                        | None                                                                                                   |

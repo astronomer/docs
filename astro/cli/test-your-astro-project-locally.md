@@ -9,9 +9,8 @@ One of the Astro CLI's main features is the ability to run Astro projects in a l
 
 ## Test before upgrading your Astro project
 
-You can use [`astro dev upgrade-test`](astro-dev-upgrade-test.md) to test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. By default, the command runs the following three tests in order to create reports that can help you determine whether your upgrade will be successful:
+You can use [`astro dev upgrade-test`](astro-dev-upgrade-test.md) to test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. By default, the command runs the following tests in order to create reports that can help you determine whether your upgrade will be successful:
 
-- **Conflict test**: Identify dependency conflicts for Python packages between your current version and the upgrade version.
 - **Dependency test**: Identify the packages that have been added, removed, or changed in the upgrade version.
 - **DAG test**: Identify Python DAG `import` errors in the upgrade version.
 
@@ -23,14 +22,13 @@ astro dev upgrade-test
 
 If the tests are successful, the Astro CLI creates a folder in your Astro project called `upgrade-test-<your-current-version>--<your-upgrade-version>`. The folder will contain the following reports:
 
-- `conflict-test-results.txt`: The result of the conflict test.
 - `pip_freeze_<current-version>`: The output of the `pip freeze` with your current version.
 - `pip_freeze_<upgrade-version>`: The output of the `pip freeze` with your upgrade version.
 - `dependency_compare.txt`: The result of the dependency test.
 - `Dockerfile`: The updated file used in the upgrade test.
 - `dag-test-results.html`: The results of the DAG test.
 
-Use the test results to fix any dependency conflicts or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and [deploy your project](https://docs.astronomer.io/astro/deploy-dags) to an Astro Deployment.
+Use the test results to fix any major package changes or broken DAGs before you upgrade. Refer to the Airflow and Provider package release notes to assist in upgrading your DAGs. After you resolve all conflicts and DAG import errors, you can [upgrade Astro Runtime](upgrade-runtime.md) and [deploy your project](https://docs.astronomer.io/astro/deploy-dags) to an Astro Deployment.
 
 :::info
 
@@ -45,42 +43,6 @@ If you're testing a local project before deploying to Astro, you can test more a
 :::
 
 Read the following sections to learn more about the contents of each test report. For more information about the command's settings, see the [CLI reference guide](cli/astro-dev-upgrade-test.md).
-
-### Conflict test
-
-You install additional Python packages to your Astro project using the project's `requirements.txt` file. These additional packages can have version dependency conflicts with Astro Runtime's default packages, which can result in [build or DAG import errors](https://docs.astronomer.io/learn/debugging-dags.md#import-errors-due-to-dependency-conflicts). The conflict can help you identify these dependency conflicts before you do an upgrade by testing your `requirements.txt` against the dependencies of your upgrade version.
-
-The test uses [`pip compile`](https://stackoverflow.com/questions/66751657/what-does-pip-compile-do-what-is-its-use-how-do-i-maintain-the-contents-of-my) to identify the conflicts. If the command identifies a conflict, it will stop and display the stacktrace along with the error. If you have multiple dependency conflicts, you must resolve the first dependency conflict and restart the test to identify more conflicts.
-
-For example, the CLI would generate the following log to show a dependency conflict between `protobuf` and a few Google packages:
-
-```sh
-#15 78.06   ERROR: Cannot install -r req.txt (line 120), -r req.txt (line 121), -r req.txt (line 18) and protobuf==3.12.4 because these package versions have conflicting dependencies.
-#15 78.06   
-#15 78.06   The conflict is caused by:
-#15 78.06       The user requested protobuf==3.12.4
-#15 78.06       The user requested protobuf==3.12.4
-#15 78.06       apache-airflow-providers-google 10.0.0 depends on protobuf!=3.18.*, !=3.19.*, <=3.20.0 and >=3.12.0
-#15 78.06       google-ads 21.2.0 depends on protobuf!=3.18.*, !=3.19.*, <5.0.0dev and >=3.12.0
-#15 78.06       google-api-core 2.8.2 depends on protobuf<5.0.0dev and >=3.15.0
-#15 78.06   
-#15 78.06   To fix this you could try to:
-#15 78.06   1. loosen the range of package versions you've specified
-#15 78.06   2. remove package versions to allow pip attempt to solve the dependency conflict
-#15 78.06 
-#15 78.12 Traceback (most recent call last):
-#15 78.12   File "/usr/local/lib/python3.10/site-packages/pip/_vendor/resolvelib/resolvers.py", line 316, in _backjump
-#15 78.12     name, candidate = broken_state.mapping.popitem()
-#15 78.12 KeyError: 'dictionary is empty'
-```
-
-If no conflicts are identified, the CLI generates a report called `conflict-test-results.txt` and saves it in `upgrade-test-<current-version>--<upgrade-version>`.
-
-To run only the conflict test against the latest version of Astro Runtime, run the following command in your Astro project:
-
-```bash
-astro dev upgrade-test --conflict-test
-```
 
 ### Dependency test
 
