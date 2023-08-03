@@ -16,8 +16,6 @@ For more information, see [Run a DAG with Astro Run](test-and-troubleshoot-local
 astro run <dag-id>
 ```
 
- %Y-%m-%d, %Y-%m-%dT%H:%M:%S, %Y-%m-%d %H:%M:%S"
-
 ## Options
 
 | Option                  | Description                                                                                                                                 | Possible Values                            |
