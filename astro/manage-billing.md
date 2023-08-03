@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Manage billing'
+sidebar_label: 'Billing'
 title: 'Manage Astro billing'
 id: manage-billing
 description: "Change your billing details and view your current spend from the Cloud UI."
