@@ -17,6 +17,23 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.18.0
+
+Release date: August 3, 2023
+
+### New `dev upgrade-test` Command
+
+Test your Airflow upgrades locally without updating your local environment. Learn more [here](upgrade-test.md)
+
+### Additional improvements
+
+- New flags `--verbose` and `--execution-date` added to the `astro run` command.
+
+### Bug Fixes
+
+- Fixed an issue where deployment inspect was giving the wrong value for hosted deployment’s workload identity.
+- Fixed an issue were dev restart would occasionally not work.
+
 ## Astro CLI 1.17.1
 
 Release date: July 12, 2023
