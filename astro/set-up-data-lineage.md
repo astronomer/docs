@@ -291,4 +291,17 @@ Astronomer recommends enabling this feature only for Deployments with non-sensit
 
 You can configure both Airflow and external systems to generate custom facets that contain more specific information about job runs. Custom facets appear as **Custom Facets** in the **Info** tab of your data pipeline's lineage graph. To create a custom facet, see [OpenLineage Documentation](https://openlineage.io/docs/spec/facets/custom-facets).
 
+## Disable OpenLineage
 
+If you don't want your Deployment to collect or send lineage data, you can disable OpenLineage. To disable open lineage for a Deployment, set the following [environment variable](environment-variables.md):
+
+```text
+OPENLINEAGE_DISABLED=true
+```
+
+When you disable OpenLineage, keep the following in mind:
+
+- You can't use [Astro alerts](alerts.md) in a Deployment with OpenLineage disabled.
+- You can't use any features on the [**Lineage** page](data-lineage.md) in the Cloud UI.
+
+To reenable OpenLineage, either set `OPENLINEAGE_DISABLED=false` or delete the environment variable. 
