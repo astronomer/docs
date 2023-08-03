@@ -19,6 +19,9 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
 
 ```python
+from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
+from cosmos.profiles import PostgresUserPasswordProfileMapping
+
 profile_config = ProfileConfig(
     profile_name="default",
     target_name="dev",
