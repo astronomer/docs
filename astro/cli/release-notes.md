@@ -23,7 +23,7 @@ Release date: August 3, 2023
 
 ### New command to test Astro projects before you upgrade
 
-You can use the new `astro dev upgrade-test` command to anticipate and address problems before upgrading to a newer version of Astro Runtime. The command runs several test which let you determine whether an upgrade will result in dependency conflicts and import errors, allowing you to fix the problems before you upgrade. See [Test your Astro project locally](test-your-astro-project-locally.md) for more information.
+You can use the new `astro dev upgrade-test` command to anticipate and address problems before upgrading to a newer version of Astro Runtime. The command runs several test which let you determine whether an upgrade will result in major dependency changes and import errors, allowing you to fix the problems before you upgrade. See [Test your Astro project locally](test-your-astro-project-locally.md) for more information.
 
 ### Additional improvements
 
