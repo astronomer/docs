@@ -5,11 +5,11 @@ id: deployment-file-reference
 description: View all possible values that you can include in a Deployment file when managing Deployments as code.
 ---
 
-After you create an Astro Deployment, you use the Astro CLI to create a file that contains its unique configurations represented as code. That includes worker queues, environment variables, Astro Runtime version, and more. You can use Deployment files to manage Deployments programmatically on Astro.
+After you create an Astro Deployment, you can use the Astro CLI to create a file that contains its unique configurations represented as code. That includes worker queues, environment variables, Astro Runtime version, and more. You can use Deployment files to manage Deployments programmatically on Astro.
 
-When you [inspect a Deployment](cli/astro-deployment-inspect.md), its current configuration is generated as a YAML _Deployment file_. The file includes the name, description, and metadata that is unique to the Deployment.
+When you [inspect a Deployment](cli/astro-deployment-inspect.md) to generate a Deployment file, its current configuration is generated as a YAML _Deployment file_. The file includes the name, description, and metadata that is unique to the Deployment.
 
-A _Deployment template file_ is different from the _Deployment file_. A template file does not have the `metadata` and `environment_variables` section, and the `name` and `description` fields are empty. Template files are used to create new Deployments or update Deployments based on an existing Deployment's configuration. To create a Deployment template file, run `astro deployment inspect --template`.
+A _Deployment template file_ is different from the _Deployment file_. A template file does not have the `metadata` and `environment_variables` section, and the `name` and `description` fields are empty. Deployment template files are used to create new Deployments where as a Deployment file of an existing Deployment can be used to update its configuration. To create a Deployment template file in YAML format, run `astro deployment inspect <your-deployment-id> --template > your-deployment.yaml`.
 
 Use this document as a reference for all fields in both Deployment files and Deployment template files. 
 
@@ -20,6 +20,10 @@ The following is an example Deployment file that includes all possible key-value
 ```yaml
 deployment:
     environment_variables:
+        - is_secret: true
+          key: PROJECT_NAME
+          updated_at: "2023-06-22T14:02:26.281Z"
+          value: test_project
         - is_secret: true
           key: API_KEY
           updated_at: "2023-06-22T14:02:27.892Z"
@@ -67,11 +71,11 @@ See the following topics to learn about each section in the file
 
 You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI.
 
-When you inspect a Deployment, the value of any environment variable that is set as secret in the Cloud UI will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. If you commit a template file to a GitHub repository, Astronomer recommends that you update the secret values manually in the Cloud UI and leave them blank in the file. This ensures that you do not commit secret values to a version control tool in plain-text.
+When you inspect a Deployment, the value of any environment variable that is set as secret in the Cloud UI will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. If you commit a template file to a GitHub repository, Astronomer recommends not to add the secret environment variables in the file and add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
 :::caution  
 
-When you add environment variables using a Deployment file, you must provide a `value` for your environment variable. Leaving this value blank will cause the `astro deployment create` command to fail.
+When you add environment variables using a Deployment file, you must provide a `value` for your environment variable. Leaving this value blank or as empty string ("") will cause the `astro deployment create` command to fail.
 
 :::
 

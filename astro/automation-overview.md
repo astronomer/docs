@@ -5,29 +5,31 @@ id: automation-overview
 description: Learn how you can automate various actions on Astro to quickly build and manage your data ecosystem. 
 ---
 
-You can complete most actions available in Astro using the Astro CLI, including:
+You can manage different components of Astro using Astro CLI and automate most of the actions, including: 
 
 - Managing users
 - Deploying code
-- Creating Deployments
+- Creating Deployments, etc.
 
-If you use Astro CLI in scripts or automation tools, you can automate most workflows on Astro. This is helpful if you need to complete the same actions many times reliably, or you want to limit permissions for specific actions to a tightly controlled automation tool. 
+If you need to perform some actions repeatedly, it is beneficial to combine them into workflows and automate these workflows using a tool of your choice. This helps to make your repeated processes more reliable and also allows you to limit permissions for specific actions. One of the most common example is automating your CI/CD workflows.
 
-This section of documentation covers how to automate actions on Astro. Generally speaking, automation on Astro requires two steps:
+This section of documentation covers how to automate your common processes on Astro using Astro CLI. Generally speaking, this requires two steps:
 
-- Authenticate your automation tool to Astro. See [Authenticate to Astro from an automation tool](automation-authentication.md).
+- Authenticate to Astro. See [Authenticate to Astro](automation-authentication.md).
 - Write and run your script. See the following documents to learn how to write and run scripts for different use cases:
 
     - [Manage Deployments as code](manage-deployments-as-code.md)
     - [Configure a CI/CD workflow](set-up-ci-cd.md)
 
+By default every Astro user can access Astro components programmatically using Astro CLI. The scope of this access is based on the [permissions](user-permissions.md) assigned to a user at the Organization and Worksapce level. While your [Astro user credentials](./log-in-to-astro.md#log-in-to-the-astro-cli) can be used for programmatic access to Astro using Astro CLI, API tokens are recommended to automate your workslows. 
+
 ## Automation best practices
 
-- Always give your automation tool the lest permissions required to improve security for your Astro resources.
+- Always give your API token or key the minimum permissions required to perform an action. This ensures fine-grained control over your Astro components and hence, better security.
 - Always set an expiration date for your API tokens.
 - Always rotate your API tokens for enhanced security.
-- Avoid giving users direct access to production Deployments or Workspaces.
-- Enforce CI/CD deploys for your production Deployments to avoid accidental deploys by users while testing.
+- Avoid giving users direct access to production Deployments or Workspaces. See [Astro's heirarchical role-based access control (RBAC)](./astro-architecture.md#access-control-architecture) model.
+- [Enforce CI/CD deploys](./configure-deployment-resources.md#enforce-cicd-deploys) for your production Deployments to avoid accidental deploys by users while testing.
 
 ## Common automation use cases
 
