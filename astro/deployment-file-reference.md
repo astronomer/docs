@@ -20,7 +20,7 @@ The following is an example Deployment file that includes all possible key-value
 ```yaml
 deployment:
     environment_variables:
-        - is_secret: true
+        - is_secret: false
           key: PROJECT_NAME
           updated_at: "2023-06-22T14:02:26.281Z"
           value: test_project
