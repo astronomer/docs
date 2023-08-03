@@ -14,10 +14,10 @@ from cosmos.profiles import PostgresUserPasswordProfileMapping
 from pendulum import datetime
 import os
 
-YOUR_NAME = "Astro"
+YOUR_NAME = "<your_name>"
 CONNECTION_ID = "db_conn"
-DB_NAME = "postgres"
-SCHEMA_NAME = "public"
+DB_NAME = "<your_db_name>"
+SCHEMA_NAME = "<your_schema_name>"
 MODEL_TO_QUERY = "model2"
 # The path to the dbt project
 DBT_PROJECT_PATH = f"{os.environ['AIRFLOW_HOME']}/dags/dbt/my_simple_dbt_project"

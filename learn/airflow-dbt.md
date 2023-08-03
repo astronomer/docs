@@ -105,7 +105,7 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
 
 ## Step 2: Prepare your dbt project
 
-To integrate your dbt project with Airflow, you need to add the project folder to your Airflow environment. By default, Cosmos will expect your projects to be in the `/usr/local/airflow/dags/dbt/` folder. For this step you can either add your own project in a new `dbt` folder in your `dags` directory, or follow the steps below to create a simple project using two models.
+To integrate your dbt project with Airflow, you need to add the project folder to your Airflow environment. For this step you can either add your own project in a new `dbt` folder in your `dags` directory, or follow the steps below to create a simple project using two models.
 
 1. Create a folder called `dbt` in your `dags` folder. 
 
@@ -148,21 +148,6 @@ You should now have the following structure within your Astro project:
                └── model2.sql
 ```
 
-:::info
-
-To store dbt projects in a different folder you can pass the alternative folder path to the `ProjectConfig` class provided to the `project_config` argument of either the `DbtDag` or `DbtTaskGroup` class.
-
-```python
-DbtTaskGroup(
-    project_config=ProjectConfig(
-        dbt_project_path="/usr/local/airflow/dags/my_dbt_project",
-    ),
-    # ...,
-)
-```
-
-:::
-
 ## Step 3: Create an Airflow connection to your data warehouse
 
 Cosmos allows you to apply Airflow connections to your dbt project. 
@@ -197,7 +182,7 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
 
     <CodeBlock language="python">{cosmos_dag}</CodeBlock>
 
-    This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks.
+    This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. Make sure to add you own values for `YOU_NAME`, `DB_NAME`, and `SCHEMA_NAME`.
     Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
 
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
