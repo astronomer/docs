@@ -99,7 +99,7 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
 
     This code runs a bash command when the Docker image is built that creates a virtual environment called `dbt_venv` inside of the Astro CLI scheduler container. The `dbt-postgres` package, which also contains `dbt-core`, is installed in the virtual environment. If you are using a different data warehouse, replace `dbt-postgres` with the adapter package for your data warehouse.
 
-3. Add [Cosmos](https://github.com/astronomer/astronomer-cosmos) and the [Postgres provider](https://registry.astronomer.io/providers/apache-airflow-providers-postgres/versions/latest) to your Astro project `requirements.txt` file. If you are using a different data warehouse, replace `apache-airflow-providers-postgres` with the provider package for your data warehouse, to find provider packages see the [Astronomer registry](https://registry.astronomer.io/).
+3. Add [Cosmos](https://github.com/astronomer/astronomer-cosmos) and the [Postgres provider](https://registry.astronomer.io/providers/apache-airflow-providers-postgres/versions/latest) to your Astro project `requirements.txt` file. If you are using a different data warehouse, replace `apache-airflow-providers-postgres` with the provider package for your data warehouse. You can find information on all provider packages on the [Astronomer registry](https://registry.astronomer.io/).
 
     ```text
     astronomer-cosmos==1.0.4
