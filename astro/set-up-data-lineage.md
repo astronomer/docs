@@ -299,9 +299,9 @@ If you don't want your Deployment to collect or send lineage data, you can disab
 OPENLINEAGE_DISABLED=true
 ```
 
-When you disable OpenLineage, keep the following in mind:
+Before you disable OpenLineage, keep the following in mind:
 
 - You can't use [Astro alerts](alerts.md) in a Deployment with OpenLineage disabled.
-- You can't use any features on the [**Lineage** page](data-lineage.md) in the Cloud UI.
+- A Deployment with OpenLineage disabled will not send any data to the [**Lineage** page](data-lineage.md) in the Cloud UI.
 
 To reenable OpenLineage, either set `OPENLINEAGE_DISABLED=false` or delete the environment variable. 
