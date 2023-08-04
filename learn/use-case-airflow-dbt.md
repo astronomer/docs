@@ -6,9 +6,6 @@ sidebar_label: "ELT with Airflow + dbt"
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
-import CodeBlock from '@theme/CodeBlock';
-import cosmos_energy_dag from '!!raw-loader!../code-samples/dags/use-case-airflow-dbt/cosmos_energy_dag.py';
-
 [dbt Core](https://docs.getdbt.com/) is a popular open-source library for analytics engineering that helps users build interdependent SQL models. Thanks to the [Cosmos](https://astronomer.github.io/astronomer-cosmos/) provider package, you can integrate any dbt project into your DAG with only a few lines of code. The open-source [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) greatly simplifies common ELT tasks like loading data and allows users to easily use Pandas on data stored in a data warehouse. 
 
 This example uses a DAG to load data about changes in solar and renewable energy capacity in different European countries from a local CSV file into a data warehouse. Transformation steps in dbt Core filter the data for a country selected by the user and calculate the percentage of solar and renewable energy capacity for that country in different years. Depending on the trajectory of the percentage of solar and renewable energy capacity in the selected country, the DAG will print different messages to the logs.
@@ -35,7 +32,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/astro-dbt-provider-tutorial-example). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory and replace the connection details with your own.
+Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/cosmos-use-case). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory and replace the connection details with your own.
 
 ## Run the project
 
@@ -51,11 +48,11 @@ This command builds your project and spins up 4 Docker containers on your machin
 
 ### Data source
 
-This example analyzes changes in solar and renewable energy capacity in different European countries. The full source data provided by [Open Power System Data](https://doi.org/10.25832/national_generation_capacity/2020-10-01) includes information on many types of energy capacity. The subset of data used in this example can be found in the [GitHub repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example/blob/main/include/subset_energy_capacity.csv), and is read by the DAG from the `include` folder of the Astro project.
+This example analyzes changes in solar and renewable energy capacity in different European countries. The full source data provided by [Open Power System Data](https://doi.org/10.25832/national_generation_capacity/2020-10-01) includes information on many types of energy capacity. The subset of data used in this example can be found in the [GitHub repository](https://github.com/astronomer/cosmos-use-case/blob/main/include/subset_energy_capacity.csv), and is read by the DAG from the `include` folder of the Astro project.
 
 ### Project code
 
-This project consists of one DAG, [my_energy_dag](https://github.com/astronomer/astro-dbt-provider-tutorial-example/blob/main/dags/my_energy_dag.py), which performs an ELT process using two tasks defined with Astro Python SDK operators and one task group created through Cosmos that orchestrates a dbt project consisting of two models.
+This project consists of one DAG, [my_energy_dag](https://github.com/astronomer/cosmos-use-case/blob/main/dags/my_energy_dag.py), which performs an ELT process using two tasks defined with Astro Python SDK operators and one task group created through Cosmos that orchestrates a dbt project consisting of two models.
 
 First, the full dataset containing solar and renewable energy capacity data for several European cities is loaded into the data warehouse using the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html). Using the Astro Python SDK in this step allows you to easily switch between data warehouses, simply by changing the connection ID.
 
@@ -73,28 +70,38 @@ load_data = aql.load_file(
 )
 ```
 
-Then, the `transform_data` task group is created using the `DbtTaskGroup` class from Cosmos:
+Then, the `transform_data` task group is created using the `DbtTaskGroup` class from Cosmos with a simple [ProfileConfig](https://astronomer.github.io/astronomer-cosmos/profiles/index.html) and [ExecutionConfig](https://astronomer.github.io/astronomer-cosmos/getting_started/execution-modes.html):
 
 ```python
+profile_config = ProfileConfig(
+    profile_name="default",
+    target_name="dev",
+    profile_mapping=PostgresUserPasswordProfileMapping(
+        conn_id=CONNECTION_ID,
+        profile_args={"schema": SCHEMA_NAME},
+    ),
+)
+
+execution_config = ExecutionConfig(
+    dbt_executable_path=DBT_EXECUTABLE_PATH,
+)
+
+# ...
+
 dbt_tg = DbtTaskGroup(
     group_id="transform_data",
-    dbt_project_name=DBT_PROJECT_NAME,
-    conn_id=CONNECTION_ID,
-    dbt_root_path=DBT_ROOT_PATH,
-    dbt_args={
-        "dbt_executable_path": DBT_EXECUTABLE_PATH,
-        "schema": SCHEMA_NAME,
+    project_config=ProjectConfig(DBT_PROJECT_PATH),
+    profile_config=profile_config,
+    execution_config=execution_config,
+    operator_args={
         "vars": '{"country_code": "CH"}',
-    },
-    profile_args={
-        "schema": SCHEMA_NAME,
     },
 )
 ```
 
 The Airflow tasks within the task group are automatically inferred by Cosmos from the dependencies between the two dbt models: 
 
-- The first model, [`select_country`](https://github.com/astronomer/astro-dbt-provider-tutorial-example/blob/main/dags/dbt/my_energy_project/models/select_country.sql), queries the table created by the previous task and creates a subset of the data by only selecting rows for the country that was specified as the `country_code` variable in the `dbt_args` parameter of the `DbtTaskGroup`. See the [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) for all available country codes.
+- The first model, [`select_country`](https://github.com/astronomer/cosmos-use-case/blob/main/dags/dbt/my_energy_project/models/select_country.sql), queries the table created by the previous task and creates a subset of the data by only selecting rows for the country that was specified as the `country_code` variable in the `operator_args` parameter of the `DbtTaskGroup`. See the [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) for all available country codes.
 
     ```sql
     select 
@@ -103,7 +110,7 @@ The Airflow tasks within the task group are automatically inferred by Cosmos fro
     where "COUNTRY" = '{{ var("country_code") }}'
     ```
 
-- The second model, [`create_pct`](https://github.com/astronomer/astro-dbt-provider-tutorial-example/blob/main/dags/dbt/my_energy_project/models/create_pct.sql), divides both the solar and renewable energy capacity by the total energy capacity for each year calculating the fractions of these values. Note how the dbt `ref` function creates a dependency between this model and the upstream model `select_country`. Cosmos then automatically translates this into a dependency between Airflow tasks.
+- The second model, [`create_pct`](https://github.com/astronomer/cosmos-use-case/blob/main/dags/dbt/my_energy_project/models/create_pct.sql), divides both the solar and renewable energy capacity by the total energy capacity for each year calculating the fractions of these values. Note how the dbt `ref` function creates a dependency between this model and the upstream model `select_country`. Cosmos then automatically translates this into a dependency between Airflow tasks.
 
     ```sql
     select 
@@ -154,4 +161,4 @@ The files come together in the following project structure:
 
 - Tutorial: [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-dbt.md).
 - Documentation: [Astronomer Cosmos](https://astronomer.github.io/astronomer-cosmos/).
-- Webinar: [The easiest way to orchestrate your dbt workflows from Airflow](https://www.astronomer.io/events/webinars/the-easiest-way-to-orchestrate-your-dbt-workflows-from-airflow/).
+- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
