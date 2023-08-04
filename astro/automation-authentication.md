@@ -31,9 +31,15 @@ Deployment API keys will soon be deprecated in favor of Deployment API tokens. I
 
 ## Make credentials accessible to your automation environment
 
-The Astro CLI uses reserved environment variables to read your credential information to authenticate to Astro. You must set these environment variables in your automation environment. Astronomer recommends not to hardcode these sensitive variables in your script and to use your automation tool's feature to store these securely. 
+The Astro CLI uses reserved environment variables to read your credential information to authenticate to Astro. You must set these environment variables in your automation environment. 
 
-To use a Deployment API key as an authentication credential, export the following environment variables in your script:
+:::caution
+
+Because these environment variables store sensitive credentials, Astronomer recommends encrypting the variable values before using them in your script. You can do this either natively in your automation tool or in a secrets backend. 
+
+:::
+
+To use a Deployment API key as an authentication credential, set the following environment variables in your script:
 
 ```bash
 ASTRONOMER_KEY_ID=<your-api-key-id>

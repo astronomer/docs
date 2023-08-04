@@ -75,7 +75,7 @@ When you inspect a Deployment, the value of any environment variable that is set
 
 :::caution  
 
-When you add environment variables using a Deployment file, you must provide a `value` for your environment variable. Leaving this value blank or as empty string ("") will cause the `astro deployment create` command to fail.
+When you add environment variables using a Deployment file, you must provide a `value` for your environment variable. Leaving this value blank or as an empty string (`""`) will cause the `astro deployment create` command to fail.
 
 :::
 
