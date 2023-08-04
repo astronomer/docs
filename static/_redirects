@@ -266,6 +266,10 @@
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
 /astro/pipeline-alerts /astro/alerts 301
+/astro/add-user#add-a-user-to-an-organization /astro/manage-organization-users 301
+/astro/add-user#add-a-user-to-a-workspace /astro/manage-workspace-users 301
+/astro/add-user#update-or-remove-a-workspace-user /astro/manage-workspace-users 301
+/astro/add-user#update-or-remove-an-organization-user /astro/manage-organization-useers 301
 /astro/executors /astro/executors-overview 301
 /astro/airflow-alerts /astro/airflow-email-notifications 301
 /astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
