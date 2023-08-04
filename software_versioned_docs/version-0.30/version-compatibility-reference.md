@@ -17,7 +17,7 @@ While the tables below reference the minimum compatible versions, we typically r
 | ------------------- | -------------------------------------------------- | -------- | ---------------------------------------------- | -------------------- | ---- |
 | v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24, 1.25¹, 1.26¹ | 11+ | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
 | v0.32               | 1.21, 1.22, 1.23, 1.24 , 1.25, 1.26                | 11+  | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
-| v0.33               | 1.21, 1.22, 1.23, 1.24 , 1.25, 1.26, 1.27                | 11+  | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| v0.33               | 1.23, 1.24 , 1.25, 1.26, 1.27                | 11+  | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
 
 :::info
 
