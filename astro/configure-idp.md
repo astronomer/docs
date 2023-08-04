@@ -18,7 +18,7 @@ This guide provides the steps for integrating identity providers on Astro to ena
 - You can enforce multi-factor authentication (MFA) for users.
 - You can use services such as [Adaptive Authentication](https://www.okta.com/identity-101/adaptive-authentication/) and [Conditional Access](https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/overview) to create advanced access policies that enforce trusted IP ranges or limit access to authorized devices.
 
-To manage Organization users after you have configured SSO, see [Manage Astro users](add-user.md).
+To manage Organization users after you have configured SSO, see [Manage Organization users](manage-organization-users.md).
 
 In addition to SSO authorization, there are 3 ways that users can to authenticate to Astro:
 

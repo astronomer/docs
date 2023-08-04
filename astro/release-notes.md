@@ -1100,7 +1100,7 @@ For more information on Deployment configurations, see [Configure Deployment res
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
 - Organizations now need only a single AWS external ID for all clusters. Previously, each cluster required a unique external ID, which added complexity to the installation and cluster creation process.
-- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
+- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](manage-organization-users.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
 ## July 14, 2022
@@ -1255,7 +1255,7 @@ For more information about the installation process and supported configurations
 
 ### Support for Organization-Level user invites
 
-You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
+You can now [invite users to an Astro Organization](manage-organization-users.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
 
 ### Additional improvements
 
