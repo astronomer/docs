@@ -32,14 +32,14 @@ profile_config = ProfileConfig(
 )
 
 DbtTaskGroup(
-    project_config=ProjectConfig("my_project"),
+    project_config=ProjectConfig("path/to/my_project"),
     profile_config=profile_config,
 )
 ```
 
 :::info
 
-If you are already familiar with Airflow and dbt Core and just want to get a project running, clone [Astronomers Cosmos example repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example) and run it locally using the Astro CLI.
+If you are already familiar with Airflow and dbt Core and just want to get a project running, clone [this Cosmos use case example repository](https://github.com/astronomer/cosmos-use-case) and run it locally using the Astro CLI.
 
 :::
 
