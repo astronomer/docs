@@ -1,13 +1,9 @@
 ---
-sidebar_label: 'Configure a Deployment'
+sidebar_label: 'Deployment settings'
 title: 'Configure a Deployment'
 id: configure-deployment-resources
+description: "Manage the Deployment settings to customize your Deployment based on your use-case."
 ---
-
-<head>
-  <meta name="description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
-  <meta name="og:description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
-</head>
 
 After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI. Specifically you can:
 
