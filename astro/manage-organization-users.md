@@ -11,49 +11,59 @@ To manage users at the Workspace level, see [Manage Workspace users](manage-work
 
 ## Prerequisites
 
-- To add, edit, or remove Organization users, you need Organization Owner permissions.
-- To remove yourself from an Organization as an Organization Owner, one or more Organization Owners must be assigned to the Organization. If you're the only Organization Owner for your Organization, you'll need to assign another Organization Owner before removing yourself from the Organization.
+- Organization Owner permissions.
 
 For more information on user roles, see [Manage user permissions on Astro](user-permissions.md). 
 
 ## Add a user to an Organization
 
-If your Organization has a configured identity provider (IdP), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. To change this behavior, see [Disable just-in-time provisioning](configure-idp.md#disable-just-in-time-provisioning).
+If your Organization has [configured an identity provider (IdP) with Astro](configure-idp#configure-your-sso-identity-provider), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. To change this behavior, see [Disable just-in-time provisioning](configure-idp.md#disable-just-in-time-provisioning).
 
-If you want to invite a user to an Organization from a domain that you don't own, such as a third party consultant, or you want to invite someone from your company to Astro with a higher level role, follow these steps.
+You can also manually add users to an Organization. You must manually add users in the following circumstances:
 
-1. In the Cloud UI, go to **Settings** > **Access Management**.
+- You don't have an IdP configured.
+- You disabled just-in-time provisioning.
+- You want to invite a user to an Organization from a domain that you don't own, such as a third party consultant.
+- You want to invite someone from your company to Astro as a role other than Organization Member.
 
+1. In the Cloud UI, click the Astronomer logo in the upper left corner. Then, go to **Settings** > **Access Management**.
+   
 2. Click **Invite member**:
 
 3. Enter the user's email.
 
-4. Set an Organization role for the user. See [Organization roles reference](user-permissions.md#organization-roles).
+4. Select an Organization role for the user. See [Organization roles reference](user-permissions.md#organization-roles).
 
-5. Click **Add member**.
+5. Click **Invite member**.
 
-    After you add the user, their information appears in **Access Management** as a new entry in the **Members** table. To access the Organization, the user needs to accept the invitation sent by email and then create an Astro account or log in.
+    After you add the user, their information appears in the **Users** tab in **Access Management**. To access Astro, the user needs to accept the invitation sent by email and then create an Astro account.
 
 ## Update or remove an Organization user
 
 See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
 
-1. In the Cloud UI, go to **Settings** > **Access Management**.
+1. In the Cloud UI, click the Astronomer logo in the upper left corner. Then, go to **Settings** > **Access Management**.
+
+2. Find the user in the **Users** list and then click **Edit**.
    
-2. Find the user in the **Members** list and then click **Edit**.
-   
-3. Optional. Edit the user's role. See [Organization roles](user-permissions.md). 
+3. (Optional) Edit the user's role. See [Organization roles](user-permissions.md). 
    
 4. If you updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
+:::info
+
+To remove yourself from an Organization as an Organization Owner, one or more Organization Owners must be assigned to the Organization. If you're the only Organization Owner for your Organization, you'll need to assign another Organization Owner before removing yourself from the Organization.
+
+:::
+
 ## Add a group of users to Astro using the Astro CLI
 
-You can use the Astro CLI and a shell script to add multiple users to an Organization at a time using a shell script. The shell script reads from a text file that your team creates which contains user information. To automate adding users to Astro, generate the text file for each new batch of users that need to assigned to an Organization and run the script with the Astro CLI.
+You can use the Astro CLI and a shell script to add multiple users to an Organization at once. The shell script reads from a text file which contains user information. You can generate the text file for each new batch of users that need to assigned to an Organization and run the script using the Astro CLI.
 
 1. Create a text file named `users.txt`.
 2. Open the text file and add a list of user email addresses that you want to invite to your Organization. Every email address should include the user's assigned role. The following is an example of how you can write a list for inviting users to an Organization:
 
-    ```sh
+    ```text
     user1@astronomer.io ORGANIZATION_MEMBER
     user2@astronomer.io ORGANIZATION_OWNER
     user3@astronomer.io ORGANIZATION_BILLING_ADMIN
@@ -62,7 +72,7 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
 
 3. Create a file named `add-users.sh` and then add the following script to it:
 
-    ```sh
+    ```bash
     #!/bin/bash
 
     # Check if a file was provided as an argument
@@ -70,7 +80,7 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
         echo "Usage: $0 <file>"
         exit 1
     fi
-    
+    # Loop through the file to read each user email address and the role, and use Astro CLI to invite them  
     while read line; do
         email=$(echo "$line" | cut -d' ' -f1)
         role=$(echo "$line" | cut -d' ' -f2)
@@ -79,10 +89,10 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     done < "$1"
     ```
 
-4. Log in to the Astro CLI using `astro login`, and then run `astro organization list` to ensure that you're in the same Organization where you want to add the users. If you're not in the right context, run `astro organization switch`.
+4. Log in to the Astro CLI using `astro login`, and then run `astro organization list` to ensure that you're in the same Organization where you want to add the users. If you're not in the right Organization, run `astro organization switch`.
 5. Run the following command to execute the shell script:
 
-    ```sh
+    ```bash
     sh path/to/add-users.sh path/to/users.txt
     ```
 
