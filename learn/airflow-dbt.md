@@ -185,7 +185,8 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
 
     <CodeBlock language="python">{cosmos_dag}</CodeBlock>
 
-    This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. Make sure to add you own values for `YOU_NAME`, `DB_NAME`, and `SCHEMA_NAME`.
+    This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. Make sure to add your own values for `YOUR_NAME`, `DB_NAME`, and `SCHEMA_NAME`.
+    
     Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
 
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
