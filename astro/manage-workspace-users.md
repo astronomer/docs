@@ -31,7 +31,7 @@ You can also add groups of users to a Workspace through Teams. See [Manage Teams
 
 1. In the Cloud UI, go to **Workspace Settings** > **Access Management**.
 
-3. Click **Edit** next to the user's name.
+2. Click **Edit** next to the user's name.
 
 4. (Optional) Edit the user's name and role. See [Workspace roles](user-permissions.md).
    
