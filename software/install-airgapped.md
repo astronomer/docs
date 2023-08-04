@@ -201,7 +201,7 @@ To complete this setup:
         spec:
           containers:
           - name: astronomer-releases
-            image: 012345678910.dkr.ecr.us-east-1.amazonaws.com/nginx:stable # Replace with own image
+            image: ap-nginx-es
             resources:
               requests:
                 memory: "32Mi"
@@ -210,7 +210,7 @@ To complete this setup:
                 memory: "128Mi"
                 cpu: "500m"
             ports:
-            - containerPort: 80
+            - containerPort: 8080
             volumeMounts:
             - name: astronomer-certified
               mountPath: /usr/share/nginx/html/astronomer-certified
@@ -237,7 +237,25 @@ To complete this setup:
         app: astronomer-releases
       ports:
       - port: 80
-        targetPort: 80
+        targetPort: 8080
+    ---
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: astronomer-astronomer-releases-nginx-policy
+    spec:
+      ingress:
+      - from:
+        - namespaceSelector: {}
+          podSelector: {}
+        ports:
+        - port: 8080
+          protocol: TCP
+      podSelector:
+        matchLabels:
+          app: astronomer-releases
+      policyTypes:
+      - Ingress
     ```
 
     Note the Docker image in the deployment and ensure that this is also accessible from within your environment.

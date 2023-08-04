@@ -526,7 +526,7 @@ You can chain an arbitrary number of dynamically mapped tasks in this manner. It
 
 ## Mapping over task groups
 
-As of Airflow 2.5, you can dynamically map over a task group that uses the `@task_group` decorator. The syntax for dynamically mapping over a task group is the same as dynamically mapping over a single task.
+As of Airflow 2.5, you can dynamically map over a [task group](task-groups.md) that uses the `@task_group` decorator. The syntax for dynamically mapping over a task group is the same as dynamically mapping over a single task.
 
 ```python
 # creating a task group using the decorator with the dynamic input my_num

@@ -194,8 +194,14 @@ module.exports = {
             },
             items: [
               'connections/azure-data-factory',
+              'connections/azure-blob-storage',
               'connections/bigquery',
-              'connections/databricks'
+              'connections/databricks',
+              'connections/dbt-cloud',
+              'connections/ms-sqlserver',
+              'connections/postgres',
+              'connections/redshift',
+              'connections/snowflake'
             ],
           },
           {
@@ -203,7 +209,8 @@ module.exports = {
             label: 'Use cases',
             items: [
               'use-case-airflow-databricks',
-              'use-case-airflow-dbt'
+              'use-case-airflow-dbt',
+              'use-case-airflow-ml-datasets'
             ],
           },
       ],

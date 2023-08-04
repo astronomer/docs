@@ -5,12 +5,8 @@ id: install-aws-hybrid
 sidebar_custom_props: { icon: 'img/aws.png' }
 toc_min_heading_level: 2
 toc_max_heading_level: 2
+description: 'Use this document to complete the installation of Astro Hybrid in an Amazon Web Services (AWS) account.'
 ---
-
-<head>
-  <meta name="description" content="If you have an existing Amazon Web Services (AWS) instance, use these instructions to complete an Astro installation. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
-  <meta name="og:description" content="If you have an existing Amazon Web Services (AWS) instance, use these instructions to complete an Astro installation. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -29,39 +25,42 @@ To install Astro, Astronomer will create an Astro cluster in a dedicated AWS acc
 
 For a list of the AWS resources and configurations that Astronomer supports, see [AWS resource reference](resource-reference-aws-hybrid.md). For more information about the shared responsibility model, see [Shared responsibility model](shared-responsibility-model.md).
 
-To install Astro in a dedicated AWS account owned by your organization, you'll complete the following tasks:
+To complete the installation, you'll:
 
-- Create an account on Astro.
-- Share AWS account information with Astronomer support.
-- Create the IAM policies used by Astro. This includes a cross-account IAM role that Astro can assume and permissions boundaries for the Astro operational roles. For more information about permissions boundaries, see [Permissions boundaries for IAM entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html).
+- Create an Astronomer account.
+- Create a new AWS account with the required AWS resources.
+- Create the IAM policies used by Astro. This includes a cross-account IAM role that Astro can assume and [permissions boundaries for IAM entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html).
 
-A cluster will be created within your AWS account to host the resources and Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
+Astronomer support will create infrastructure within your AWS account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Prerequisites
 
-- A dedicated AWS account with the minimum EC2 service quotas.
-- A subscription to the [Astro Status Page](https://status.astronomer.io/). This ensures that you'll be notified when there are incidents or when maintenance is scheduled.
+- A [new AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) with the minimum EC2 service quotas. For security reasons, AWS accounts with existing infrastructure aren't supported.
+
+    The following table lists the required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
+
+    | QuotaCode  | QuotaName                                                        | Minimum Value  |
+    | -----------| ---------------------------------------------------------------- | ---------------|
+    | L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40             |
+    | L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40             |
+
+  These quotas are required to mitigate near term capacity risks and simplify the Astro onboarding experience. Refer to [AWS documentation](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html) to modify or increase a specific quota.
+
+- A CIDR block with a range of `/20`. If you don't have a preferred CIDR block, Astro will provision a VPC using a default of `172.20.0.0/20`. Astro uses this VPC for 2 public subnets and 2 private subnets. See [AWS resource reference](resource-reference-aws-hybrid.md).
+
+- Permissions to create a stack using [CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html).
+
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
-   
     - `https://cloud.astronomer.io/`
-    - `https://astro-<your-org>.datakin.com/`
-    - `https://<your-org>.astronomer.run/`
     - `https://api.astronomer.io/`
     - `https://images.astronomer.cloud/`
     - `https://auth.astronomer.io/`
     - `https://updates.astronomer.io/`
     - `https://install.astronomer.io/`
+    - `https://astro-<your-org>.datakin.com/`
+    - `https://<your-org>.astronomer.run/`
 
-Astro requires a dedicated AWS account with the minimum EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other resources running in it. For instructions on creating a new AWS account, see [How do I create and activate a new AWS account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
-
-The following table lists the required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
-
-| QuotaCode  | QuotaName                                                        | Minimum Value  |
-| -----------| ---------------------------------------------------------------- | ---------------|
-| L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40             |
-| L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40             |
-
-These quotas are required to mitigate near term capacity risks and simplify the Astro onboarding experience. If you need to modify or increase a specific quota, see [Request a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
+- A subscription to the [Astro Status Page](https://status.astronomer.io/). This ensures that you'll be notified when there are incidents or when maintenance is scheduled.
 
 :::tip
 

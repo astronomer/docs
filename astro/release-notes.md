@@ -23,9 +23,52 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest Astro Runtime Version**: 8.8 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.17.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.18.1 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## August 1, 2023
+
+### Hosted Deployments have DAG-only deploys enabled by default 
+
+<HostedBadge/>
+
+New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different. For more information about what happens to code deploys when DAG-only deploys are enabled, see [What happens during a project deploy](https://docs.astronomer.io/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://docs.astronomer.io/astro/deploy-dags#enable-disable-dag-only-deploys-on-a-deployment).
+
+### Teams now have Organization-level roles
+
+All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](https://docs.astronomer.io/astro/user-permissions#organization-roles) role, which doesn't result in any additional automatic permissions.
+
+Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-provisioning), you can now manage your Organization Owners and Billing Admins from your identity provider. See [Manage teams](https://docs.astronomer.io/astro/manage-teams) for more information. 
+
+### Additional improvements
+
+- The Cloud UI now shows how many Workspaces, DAGs, clusters, and Astro Cloud IDE projects you have in the left sidebar.
+- You can now create Deployments in standard clusters hosted in `europe-west2` on GCP and `eu-central-1` on AWS.
+- The default metadata database instance type for new Deployments on GCP clusters in Astro Hybrid has been reduced to `Small General Purpose` with 2 vCPUs and 8GiB. See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid).
+
+### Bug fixes
+
+- Because some regions don't support specific machine types that Astro Hosted uses, you can no longer create Hosted dedicated clusters in the following AWS regions:
+
+    - `af-south-1`
+    - `ap-east-1`
+    - `ap-northeast-2`
+    - `ap-northeast-3`
+    - `ca-central-1`
+    - `eu-south-1`
+    - `eu-west-3`
+    - `me-south-1`
+
+## July 25, 2023
+
+### Additional improvements
+
+- The templates for [Astro alert](https://docs.astronomer.io/astro/alerts) messages have been updated to include more information about the Deployment that the alert was triggered in, including a link to the DAG that triggered the alert. 
+
+### Bug fixes
+
+- Fixed an issue where Azure AD single sign-on (SSO) connections were incorrectly labeled as SAML connections in the Cloud UI.
 
 ## July 18, 2023
 
@@ -169,6 +212,7 @@ See [Astro Hosted resource reference](resource-reference-hosted.md) for more inf
 ### Additional improvements
 
 - You can now add a new Astro user to Workspaces before the user has accepted their invite.
+- If you have Organization Owner permissions, you can now add a user to a Workspace even if the user hasn't been added to your Organization. Users added to Workspaces this way are automatically added to your Organization as an Organization Member.
 - The Cloud UI now shows your Team IDs in **Settings** > **Access Management** > **Teams**. Use Team IDs to add Teams to Workspaces using the Astro CLI.
 - A Team's **Updated At** and **Updated By** values are now updated when you change the Team's permissions in a Workspace or Organization.
 
@@ -756,14 +800,6 @@ The Astro Cloud IDE was created with the following objectives:
 Most importantly, the Astro Cloud IDE was developed to make it easier for new Airflow users to get started and to provide experienced users with a robust development environment.
 
 To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
-
-:::info
-
-<!-- id to make it easier to remove: cloud-ide-preview-banner -->
-
-The Cloud IDE is currently in [Public Preview](feature-previews.md).
-
-:::
 
 ### Additional improvements
 

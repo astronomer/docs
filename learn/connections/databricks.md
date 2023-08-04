@@ -2,7 +2,7 @@
 title: "Create a Databricks connection in Airflow"
 id: databricks
 sidebar_label: Databricks
-description: Learn the basics of creating a Databricks Airflow connection.
+description: Learn how to create a Databricks connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
 
@@ -36,7 +36,7 @@ Complete the following steps to retrieve these values:
     apache-airflow-providers-microsoft-databricks
     ```
 
-    This will install the Databricks provider package, which makes the the Azure Data Factory connection type available in Airflow.
+    This will install the Databricks provider package, which makes the Databricks connection type available in Airflow.
 
 2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
 
@@ -48,7 +48,7 @@ Complete the following steps to retrieve these values:
     - **Host**: Enter the Databricks URL.
     - **Password**: Enter your personal access token.
 
-5. Click **Test connection**. After the connection test succeeds, click **Save**.
+5. Click **Test**. After the connection test succeeds, click **Save**.
 
     ![databricks-connection](/img/examples/connection-databricks.png)
 
