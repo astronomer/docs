@@ -36,7 +36,7 @@ You can also manually add users to an Organization. You must manually add users 
 
 5. Click **Invite member**.
 
-    After you add the user, their information appears in the **Users** tab in **Access Management**. To access Astro, the user needs to accept the invitation sent by email and then create an Astro account.
+After you add the user, their information appears in the **Users** tab in **Access Management**. To access Astro, the user needs to accept the invitation sent by email and then create an Astro account.
 
 ## Update or remove an Organization user
 
