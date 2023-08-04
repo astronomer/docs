@@ -33,9 +33,9 @@ You can also add groups of users to a Workspace through Teams. See [Manage Teams
 
 2. Click **Edit** next to the user's name.
 
-4. (Optional) Edit the user's name and role. See [Workspace roles](user-permissions.md).
+3. (Optional) Edit the user's name and role. See [Workspace roles](user-permissions.md).
    
-5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
+4. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
 ## Add a group of users to a Workspace using the Astro CLI
 
