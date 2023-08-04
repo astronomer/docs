@@ -93,7 +93,9 @@ If you want to continue with the second option, you'll additionally need:
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    If you're the first person in your Organization to authenticate, you'll be granted Organization owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Manage Workspace users](manage-workspace-users.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
+    If you're the first person in your Organization to authenticate, you'll be granted Organization Owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Manage Workspace users](manage-workspace-users.md). 
+    
+    To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
 ## Retrieve an external ID from the Cloud UI
 
