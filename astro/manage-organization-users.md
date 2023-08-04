@@ -61,7 +61,7 @@ To remove yourself from an Organization as an Organization Owner, one or more Or
 You can use the Astro CLI and a shell script to add multiple users to an Organization at once. The shell script reads from a text file which contains user information. You can generate the text file for each new batch of users that need to assigned to an Organization and run the script using the Astro CLI.
 
 1. Create a text file named `users.txt`.
-2. Open the text file and add a list of user email addresses that you want to invite to your Organization. Every email address should include the user's assigned role. The following is an example of how you can write a list for inviting users to an Organization:
+2. Open the text file. On each line, add a user's email and their role separated by a space. The following is an example of how you can write a list for inviting users to an Organization:
 
     ```text
     user1@astronomer.io ORGANIZATION_MEMBER

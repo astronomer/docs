@@ -5,7 +5,7 @@ id: manage-workspace-users
 description: Add, edit, or remove users in the Cloud UI.
 ---
 
-As a Workspace Admin or Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Workspace.
+As a Workspace Admin or an Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Workspace.
 
 To manage users at the Organization level, see [Manage Organization users](manage-organization-users.md). To manage groups of users, see [Manage Teams](manage-teams.md).
 
@@ -19,9 +19,9 @@ To add, edit, or remove Workspace users from a given Workspace, you need either 
    
 2. In the **Users** tab, click **+ Member**.
    
-5. Select the user's name and email address in the **Organization Member** list.
+3. Select the user's name and email address in the **Organization Member** list.
    
-6. Select a role for the user and then click **Add member**. See [Workspace roles reference](user-permissions.md#workspace-roles).
+4. Select a role for the user and then click **Add member**. See [Workspace roles reference](user-permissions.md#workspace-roles).
 
 After you add the user, their information appears in the **Users** tab as a new entry in the **Members** list. 
 
@@ -42,12 +42,12 @@ You can also add groups of users to a Workspace through Teams. See [Manage Teams
 You can use the Astro CLI and a shell script to add multiple users to a Workspace at once. The shell script reads from a text file which contains user information. You can generate a text file for each new batch of users that need to be assigned to a Workspace and run the script with the Astro CLI.
 
 1. Create a text file named `users.txt`.
-2. Open the text file and add a list of user email addresses that you want to invite to a Workspace. Every email address should include the user's assigned role. The following is an example of how you can write a list for inviting users to an Organization:
+2. Open the text file. On each line, add a user's email and their role separated by a space. The following is an example of how you can write a list for inviting users to an Organization:
 
     ```text
     user1@astronomer.io WORKSPACE_MEMBER
     user2@astronomer.io WORKSPACE_OWNER
-    user3@astronomer.io WORKSPACE_BILLING_ADMIN
+    user3@astronomer.io WORKSPACE_OPERATOR
     user4@astronomer.io WORKSPACE_OWNER
     ```
 
