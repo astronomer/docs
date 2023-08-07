@@ -134,7 +134,7 @@ module.exports = {
           type: "category",
           label: "Manage Deployments as code",
           items: [
-            "deployments-as-code",
+            "manage-deployments-as-code",
             "deployment-file-reference"],
         }, 
         {
