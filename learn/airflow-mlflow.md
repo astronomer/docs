@@ -13,7 +13,7 @@ import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflo
 
 :::info
 
-If you're already familiar with MLflow and Airflow and want to get a use case up and running, clone the [quickstart repository](https://github.com/astronomer/learn-airflow-mlflow-tutorial) to automatically start up Airflow and local MLflow and MinIO instances. After you clone the repository, configure the local MLflow connection as shown in [Step 2](#step-2-configure-your-airflow-connection) of this tutorial, and run the three example DAGs.
+If you're already familiar with MLflow and Airflow and want to get a use case up and running, clone the [quickstart repository](https://github.com/astronomer/use-case-mlflow) to automatically start up Airflow and local MLflow and MinIO instances. After you clone the repository, configure the local MLflow connection as shown in [Step 2](#step-2-configure-your-airflow-connection) of this tutorial, and run the three example DAGs.
 
 :::
 
