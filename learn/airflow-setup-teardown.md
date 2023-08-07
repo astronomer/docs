@@ -107,7 +107,7 @@ You can have multiple sets of setup and teardown tasks in a DAG, both in [parall
 Worker tasks can be added to the scope of a setup/teardown grouping in two ways:
 
 - By being between the setup and teardown tasks in the DAG dependency structure.
-- By using a [context manager](#setupteardown-context-managers) with the `.teardown()` method.
+- By using a context manager with the `.teardown()` method.
 
 Which method you choose to add worker tasks to a setup/teardown scope is a matter of personal preference.
 
@@ -270,10 +270,13 @@ You can tell Airflow that a task is a teardown task for a specific setup task by
     defaultValue="taskflow"
     groupId="defining-setup-teardown-relationships"
     values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
+        {label: 'TaskFlow API setups argument', value: 'taskflow_setups'},
+        {label: 'Traditional syntax setups argument', value: 'traditional_setups'},
+        {label: 'Direct dependencies', value: 'taskflow_direct'},
+        {label: 'Using @setup/@teardown decorators', value: 'decorators'},
+        {label: 'Using a context manager', value: 'context_manager'},
     ]}>
-<TabItem value="taskflow">
+<TabItem value="taskflow_setups">
 
 ```python
 @task
@@ -300,7 +303,7 @@ my_setup_task_obj = my_setup_task()
 ![Setup/teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
 
 </TabItem>
-<TabItem value="traditional">
+<TabItem value="traditional_setups">
 
 ```python
 def my_setup_task_func():
@@ -337,7 +340,92 @@ my_teardown_task_obj = PythonOperator(
 ![Setup/teardown relationships traditional](/img/guides/airflow-setup-teardown-relationships_traditional_1.png)
 
 </TabItem>
+<TabItem value="taskflow_direct">
+
+Instead of using the `setups` argument you can directly link the setup and teardown tasks with a traditional dependency. Whenever you define a direct dependency between a setup and a teardown task Airflow will interpret this as them belonging together, no matter what actions the tasks actually perform.
+
+```python
+(
+    my_setup_task_obj.as_setup()
+    >> worker_task()
+    >> my_teardown_task_obj.as_teardown()
+)
+
+my_setup_task_obj >> my_teardown_task_obj
+```
+
+This code creates an identical DAG using the `setups` argument.
+
+```python
+(
+    my_setup_task_obj#.as_setup() is not necessary
+    >> worker_task()
+    >> my_teardown_task_obj.as_teardown(setups=my_setup_task_obj)
+)
+```
+
+![Setup/teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
+
+</TabItem>
+<TabItem value="decorators">
+
+When using the `@setup` and `@teardown` decorators you can define the setup/teardown relationship between two tasks either by defining [a direct dependency](#direct-dependency) or by providing the object of the called setup task as an argument to the teardown task.
+
+The latter pattern is often used to pass information like a resource id from the setup task to the teardown task.
+
+```python
+from airflow.decorators import task, setup, teardown
+
+@setup
+def my_setup_task():
+    print("Setting up resources!")
+    my_cluster_id = "cluster-2319"
+    return my_cluster_id
+
+@task
+def worker_task():
+    return "Doing some work!"
+
+@teardown
+def my_teardown_task(my_cluster_id):
+    return f"Tearing down {my_cluster_id}!"
+
+my_setup_task_obj = my_setup_task()
+my_setup_task_obj >> worker_task() >> my_teardown_task(my_setup_task_obj)
+```
+
+![Setup/Teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
+
+</TabItem>
+<TabItem value="context_manager">
+
+It is also possible to use a task with a called `.as_teardown()` method as a context manager to wrap a set of tasks that should be in scope of a setup/teardown grouping. The code snippet below shows three tasks being in scope of the setup/teardown pair created by `my_cluster_setup_task` and `my_cluster_teardown_task`.
+
+```python
+with my_cluster_teardown_task_obj.as_teardown(setups=my_cluster_setup_task_obj):
+    worker_task_1() >> [worker_task_2(),  worker_task_3()]
+```
+
+![Setup/teardown created using a context manager](/img/guides/airflow-setup-teardown_context_1.png)
+
+Note that if a task was already instantiated outside of the context manager it can still be added to the scope, but you have to do this explicitly using the `.add_task()` method on the context manager object.
+
+```python
+# task instantiation outside of the context manager
+worker_task_1_obj = worker_task_1()
+
+with my_cluster_teardown_task_obj.as_teardown(
+    setups=my_cluster_setup_task_obj
+) as my_scope:
+    # adding the task to the context manager
+    my_scope.add_task(worker_task_1_obj)
+```
+
+</TabItem>
 </Tabs>
+
+
+#### Add multiple setup/teardown tasks to one grouping
 
 To define several setup tasks for one teardown task you can pass a list of setup tasks to the `setups` argument. You do not need to call `.as_setup()` on any of the setup tasks.
 
@@ -368,32 +456,6 @@ To define several teardown tasks for one setup task you have to provide the setu
 ```
 
 ![Setup/teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_teardowns_decorators.png)
-
-Instead of using the `setups` argument you can directly link the setup and teardown tasks with a traditional dependency. Whenever you define a direct dependency between a setup and a teardown task Airflow will interpret this as them belonging together, no matter what actions the tasks actually perform.
-
-The following code snippet uses a direct dependency to define `my_setup_task` as the setup task belonging to `my_teardown_task`.
-
-```python
-(
-    my_setup_task_obj.as_setup()
-    >> worker_task()
-    >> my_teardown_task_obj.as_teardown()
-)
-
-my_setup_task_obj >> my_teardown_task_obj
-```
-
-This code creates an identical DAG using the `setups` argument.
-
-```python
-(
-    my_setup_task_obj#.as_setup() is not necessary
-    >> worker_task()
-    >> my_teardown_task_obj.as_teardown(setups=my_setup_task_obj)
-)
-```
-
-![Setup/teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
 
 If you have several setup and/or several teardown tasks belonging together, you need to define the dependency between each setup and each teardown when using direct dependencies to define the setup/teardown relationship.
 
@@ -429,55 +491,6 @@ This code creates an identical DAG using the `setups` argument.
 ```
 
 ![Multiple setups/teardowns](/img/guides/airflow-setup-teardown-multiple_setups_and_teardowns.png)
-
-When using the `@setup` and `@teardown` decorators you can define the setup/teardown relationship between two tasks either by defining [a direct dependency](#direct-dependency) or by providing the object of the called setup task as an argument to the teardown task.
-
-The latter pattern is often used to pass information like a resource id from the setup task to the teardown task.
-
-```python
-from airflow.decorators import task, setup, teardown
-
-@setup
-def my_setup_task():
-    print("Setting up resources!")
-    my_cluster_id = "cluster-2319"
-    return my_cluster_id
-
-@task
-def worker_task():
-    return "Doing some work!"
-
-@teardown
-def my_teardown_task(my_cluster_id):
-    return f"Tearing down {my_cluster_id}!"
-
-my_setup_task_obj = my_setup_task()
-my_setup_task_obj >> worker_task() >> my_teardown_task(my_setup_task_obj)
-```
-
-![Setup/Teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
-
-It is also possible to use a task with a called `.as_teardown()` method as a context manager to wrap a set of tasks that should be in scope of a setup/teardown grouping. The code snippet below shows three tasks being in scope of the setup/teardown pair created by `my_cluster_setup_task` and `my_cluster_teardown_task`.
-
-```python
-with my_cluster_teardown_task_obj.as_teardown(setups=my_cluster_setup_task_obj):
-    worker_task_1() >> [worker_task_2(),  worker_task_3()]
-```
-
-![Setup/teardown created using a context manager](/img/guides/airflow-setup-teardown_context_1.png)
-
-Note that if a task was already instantiated outside of the context manager it can still be added to the scope, but you have to do this explicitly using the `.add_task()` method on the context manager object.
-
-```python
-# task instantiation outside of the context manager
-worker_task_1_obj = worker_task_1()
-
-with my_cluster_teardown_task_obj.as_teardown(
-    setups=my_cluster_setup_task_obj
-) as my_scope:
-    # adding the task to the context manager
-    my_scope.add_task(worker_task_1_obj)
-```
 
 ### Parallel setup/teardown groupings
 
