@@ -51,7 +51,7 @@ There are two ways to define task groups in your DAGs:
 - Using the `TaskGroup` class to create a task group context
 - Using the `@task_group` decorator on a Python function
 
-In most cases, it is a matter of personal preference which way you like to define your task groups. The only exception is when you want to [dynamically map](dynamic-tasks.md) over a task group, this is only possible using `@task_group`.
+In most cases, it is a matter of personal preference in which way you like to define your task groups. The only exception is when you want to [dynamically map](dynamic-tasks.md) over a task group, this is only possible using `@task_group`. See [Airflow decorators](airflow-decorators.md) for more information on decorators and the TaskFlow API.
 
 The following code shows how to instantiate a simple task group using containing two sequential tasks using either method. You can use dependency operators (`<<` and `>>`) both in and with task groups in the same way that you can with individual tasks.
 
@@ -118,33 +118,22 @@ In the **Grid View** of the Airflow UI, task groups have a note showing how many
 
 ![Task groups simple example](/img/guides/task-groups_grid_view.gif)
 
-## Task_id in task groups
+## `task_id` in task groups
 
-When your task is within a task group, your callable `task_id` is the `task_id` prefixed with the `group_id`. For example, `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks with XCOM passing or branching operator decisions.
+When your task is within a task group, your callable `task_id` is the `task_id` prefixed with the `group_id`. For example, `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks with [XCom](airflow-passing-data-between-tasks.md) passing or [branching](airflow-branch-operator.md) operator decisions.
+
+For example, the `task_1` task in the following DAG has a `task_id` of `my_outer_task_group.my_inner_task_group.task_1`.
+
+```python
+
+
+```
 
 ## Use the task group decorator
 
 Another way of defining task groups in your DAGs is by using the task group decorator. The task group decorator is available in Airflow 2.1 and later. The task group decorator functions like other [Airflow decorators](airflow-decorators.md) and allows you to define your task group with the TaskFlow API. Using task group decorators doesn't change the functionality of task groups, but they can make your code formatting more consistent if you're already using them in your DAGs.
 
-To use the decorator, add `@task_group` before a Python function which calls the functions of tasks that should go in the task group. For example:
 
-```python
-@task_group(group_id="tasks")
-def my_independent_tasks():
-    task_a()
-    task_b()
-    task_c()
-```
-
-This function creates a task group with three independent tasks that are defined elsewhere in the DAG.
-
-You can also create a task group of dependent tasks. For example:
-
-```python
-@task_group(group_id="tasks")
-def my_dependent_tasks():
-    return task_a(task_b(task_c()))
-```
 
 The following DAG shows a full example implementation of the task group decorator, including passing data between tasks before and after the task group:
 
