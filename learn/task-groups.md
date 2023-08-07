@@ -118,6 +118,10 @@ In the **Grid View** of the Airflow UI, task groups have a note showing how many
 
 ![Task groups simple example](/img/guides/task-groups_grid_view.gif)
 
+As of Airflow 2.7, task groups can be cleared and marked as successful/failed from the **Grid View** in the same way as individual tasks.
+
+![Task groups mark success/failed](/img/guides/task-groups_mark_success_failed.gif)
+
 ## `task_id` in task groups
 
 When your task is within a task group, your callable `task_id` is the `task_id` prefixed with the `group_id`. For example, `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks with [XCom](airflow-passing-data-between-tasks.md) passing or [branching](airflow-branch-operator.md) operator decisions.
@@ -145,7 +149,6 @@ def my_outer_task_group():
 
 my_outer_task_group()
 ```
-
 
 </TabItem>
 <TabItem value="context">
