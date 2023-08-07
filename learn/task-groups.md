@@ -378,3 +378,69 @@ The following image shows the expanded view of the nested task groups in the Air
 
 ![Nested task groups](/img/guides/task-groups_nested_tg.png)
 
+## Custom task group classes
+
+If you find yourself using the same patterns of tasks in several DAGs or even several Airflow instances it may be useful to create a custom task group class module. To do so you need to inherit from the `TaskGroup` class and then define your tasks within that custom class. The task definitions will be the same as if you were defining them in a DAG file, with the only added requirement that you'll need to use `self` to assign the task to the task group.
+
+```python
+from airflow.utils.task_group import TaskGroup
+from airflow.decorators import task
+
+
+class MyCustomMathTaskGroup(TaskGroup):
+    """A task group summing two numbers."""
+
+    # defining defaults of input arguments num1 and num2
+    def __init__(self, group_id, num1=0, num2=0, **kwargs):
+        """Instantiate a MyCustomMathTaskGroup."""
+        super().__init__(group_id=group_id, ui_color="#32CD32", **kwargs)
+
+        # assing the task to the task group by using `self`
+        @task(task_group=self)
+        def task_1(num1, num2):
+            """Adds two numbers."""
+            return num1 + num2
+
+        @task(task_group=self)
+        def task_2(num):
+            """Multiplies a number by 23."""
+            return num * 23
+
+        # define dependencies
+        task_2(task_1(num1, num2))
+```
+
+In the DAG you import your custom TaskGroup class and instantiate it with the values for your custom arguments:
+
+```python
+from airflow.decorators import dag, task
+from pendulum import datetime
+from include.custom_task_group import MyCustomMathTaskGroup
+
+
+@dag(
+    start_date=datetime(2023, 7, 1),
+    schedule=None,
+    catchup=False,
+    tags=["@task_group", "task_group"],
+)
+def custom_tg():
+    @task
+    def get_num_1():
+        return 5
+
+    tg1 = MyCustomMathTaskGroup(group_id="my_task_group", num1=get_num_1(), num2=19)
+
+    @task
+    def downstream_task():
+        return "hello"
+
+    tg1 >> downstream_task()
+
+
+custom_tg()
+```
+
+The resulting DAG shows the custom templated task group which can now be reused in other DAGs with different inputs for `num1` and `num2`.
+
+![Custom task group](/img/guides/task-groups_custom_tg.png)
