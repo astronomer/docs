@@ -55,5 +55,5 @@ ASTRO_API_TOKEN=<your-api-token>
 
 ## Install the Astro CLI in your automation tool
 
-To manage your Astro processes programmatically, you must install the Astro CLI in the environment which will execute the actions. Typically, this requires running `curl -sSL install.astronomer.io | sudo bash -s` or an equivalent installation command before your process starts. See [CI/CD templates](ci-cd-templates/template-overview.md) for examples of how to install the Astro CLI in different version management and workflow automation environments. 
+To manage your Astro workflows programmatically, you must install the Astro CLI in the environment which will run the workflows. Typically, this requires running `curl -sSL install.astronomer.io | sudo bash -s` or an equivalent installation command before your process starts. See [CI/CD templates](ci-cd-templates/template-overview.md) for examples of how to install the Astro CLI in different version management and workflow automation environments. 
 
