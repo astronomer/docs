@@ -16,15 +16,33 @@ import CodeBlock from '@theme/CodeBlock';
 import task_group_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_example.py';
 import task_group_mapping_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_mapping_example.py';
 
-Use [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) to organize tasks in the Airflow UI DAG graph view.
+Airflow [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a tool to organize tasks into groups within your DAGs. Using task groups allows you to:
 
-In this guide, you'll learn how to create task groups and review some example DAGs that demonstrate their scalability.
+- Organize complicated DAGs, visually grouping tasks that belong together in the Airflow UI **Grid View** and **Graph View**.
+- Apply `default_args` to sets of tasks, instead of at the [DAG level](dags.md#dag-parameters).
+- [Dynamically map](dynamic-tasks.md) over task patterns creating dynamically mapped complex sets of tasks.
+- Turn task patterns into modules that can be reused across DAGs and even Airflow instances.
+
+In this guide, you'll learn how to create and use task groups in your DAGs.
+
+![Task group intro gif](/img/guides/task-groups_intro_task_group_gif.gif)
 
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
+
+## When to use task groups
+
+There are many use cases for task groups in Airflow DAGs and often they are used to visually organize complicated DAGs. For example, you might use task groups to organize tasks:
+
+- In big ELT/ETL DAGs, where you could have a task group per table being modified, or per schema and leverage passing of different sets of `default_args` to each task group.
+- In MLOps DAGs, where you could have a task group per model being trained. 
+- In Situations where several teams work on parts of the same DAG and you want to visually separate the tasks that belong to each team. In this case you might also want to consider separating the DAG into multiple DAGs and using [Datasets](airflow-datasets.md) to connect them.
+- When you are using the same patterns of tasks in multiple DAGs and want to create a reusable module.
+
+Additionally when you have an input of unknown length, for example an unknown number of files in a directory, you can use task groups to [dynamically map](dynamic-tasks#mapping-over-task-groups) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
 
 ## Create task groups
 
