@@ -1,7 +1,7 @@
 ---
 sidebar_label: "Configure Deployments with Deployment files"
 title: "Configure Deployments programmatically using Deployment files"
-id: deployments-as-code
+id: manage-deployments-as-code
 description: "Manage an Astro Deployment using a Deployment file in YAML or JSON format"
 ---
 
