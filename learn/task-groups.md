@@ -251,17 +251,13 @@ for g_id in range(1,4):
 
 The following image shows how these task groups appear in the Airflow UI:
 
-![task group Dependencies](/img/guides/task_group_dependencies.png)
+![Task group Dependencies](/img/guides/task-groups_looped.png)
 
-### Task group conditioning
-
-In the previous example, you added an additional task to `group1` based on your `group_id`. This demonstrated that even though you're creating task groups in a loop to take advantage of patterns, you can still introduce variations to the pattern while avoiding code redundancies introduced by building each task group definition manually.
+This example also shows how to add an additional task to `group1` based on your `group_id`, demonstrating that even though you're creating task groups in a loop to take advantage of patterns, you can still introduce variations to the pattern while avoiding code redundancies introduced by building each task group definition manually.
 
 ## Nest task groups
 
-For additional complexity, you can nest task groups. Building on our previous ETL example, when calling API endpoints you may need to process new records for each endpoint before you can process updates to them.
-
-In the following code, your top-level task groups represent your new and updated record processing, while the nested task groups represent your API endpoint processing:
+For additional complexity, you can nest task groups by defining a task group indented within another task group. There is no limit to how many levels of nesting you can have.
 
 <Tabs
     defaultValue="taskflow"
@@ -328,5 +324,5 @@ groups[0] >> groups[1]
 
 The following image shows the expanded view of the nested task groups in the Airflow UI:
 
-![Nested task groups](/img/guides/nested_task_groups.png)
+![Nested task groups](/img/guides/task-groups_nested_tg.png)
 
