@@ -21,7 +21,7 @@ Refer to [Template overview](template-overview.md) to see generic templates expr
 - Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - A [CircleCI](https://circleci.com/vcs-authorize/) account.
 
-## Image-only templates
+## Image deploy templates
 
 [Image-only deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
 
@@ -246,13 +246,13 @@ If your Astro project requires additional build-time arguments to build an image
 </TabItem>
 </Tabs>
 
-## DAG-based templates
+## DAG deploy templates
 
-A [DAG-based template](template-overview#dag-based-templates) uses the `--dags` flag in the Astro CLI `astro depoy` command to push only DAGs to your Deployment. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified whereas it deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+A [DAG deploy template](template-overview#dag-based-templates) uses the `--dags` flag in the Astro CLI `astro depoy` command to push only DAGs to your Deployment. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified whereas it deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 ### Configuration requirements
 
-For each Deployment that you use with DAG-based templates, you must [enable DAG deploys](deploy-code.md#deploy-dags-only).
+For each Deployment that you use with DAG deploy templates, you must [enable DAG deploys](deploy-code.md#deploy-dags-only).
 
 ### Single branch implementation
 

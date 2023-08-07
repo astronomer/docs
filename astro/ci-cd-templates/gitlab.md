@@ -5,13 +5,16 @@ id: gitlab
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using GitLab.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Use the following CI/CD templates to automate deployment of your Astro project from a [GitLab](https://gitlab.com/) repository to Astro.
 
-The templates for GitLab use the [image-only deploy](template-overview.md#template-types) and smart deploys, which is a combination of image-based and [DAG-only deploy](astro/deploy-code).
+Read the following sections to choose the right template for your project. The templates for GitLab include the image deploy templates and DAG deploy templates.
 
-If you have one Deployment and one environment on Astro, use the [single branch implementation](#single-branch-implementation). If you have multiple Deployments that support development and production environments, use the [multiple branch implementation](#multiple-branch-implementation). If you want your CI/CD process to automatically decide which deploy strategy to choose, see [smart deploy templates](#smart-deploy-templates)
+If you have one Deployment and one environment on Astro, use the [single branch implementation](#single-branch-implementation). If you have multiple Deployments that support development and production environments, use the [multiple branch implementation](#multiple-branch-implementation). If you want your CI/CD process to automatically decide which deploy strategy to choose, see [DAG deploy templates](#smart-deploy-templates).
 
-To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
+For more information on available generic templates or to configure your own, see [Template overview](template-overview.md). To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
@@ -21,9 +24,17 @@ To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.m
 
 Each CI/CD template implementation might have additional requirements.
 
-## Image-only templates
+## Image deploy templates
 
-### Single branch implementation
+<Tabs
+    defaultValue="singlebranch"
+    groupId= "image-templates"
+    values={[
+        {label: 'Single branch', value: 'singlebranch'},
+        {label: 'Multiple branch', value: 'multibranch'},
+    ]}>
+
+<TabItem value="singlebranch">
 
 Use this template to push code to from a GitLab repository to Astro.
 
@@ -57,7 +68,9 @@ Use this template to push code to from a GitLab repository to Astro.
       - main
   ```
 
-### Multiple branch implementation
+</TabItem>
+
+<TabItem value="multibranch">
 
 Use this template to push code to a development and a production Deployment in Astro based on your GitLab project's branch name.
 
@@ -115,7 +128,10 @@ Use this template to push code to a development and a production Deployment in A
       - main
   ```
 
-## Smart deploy templates
+</TabItem>
+</Tabs>
+
+## DAG deploy templates
 
 The DAG-based template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](astro/deploy-code.md).
 
