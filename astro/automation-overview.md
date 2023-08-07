@@ -28,10 +28,8 @@ This section of documentation covers how to automate processes on Astro using As
 
 ### Deployment actions
 
-- Deploy code to your Deployment [using CI/CD tools](set-up-ci-cd.md).
-- Update your Deployment using the Deployment file.  
-- [Update your Deployment](cli/astro-deployment-update.md), such as changing the executor or number scheduler AUs, etc. 
-- [Enforce CI/CD](configure-deployment-resources.md#enforce-cicd-deploys) or [enable DAG-only deploys](deploy-dags.md#enable-dag-only-deploys-on-a-deployment) for your Deployment 
+- Deploy code to your Deployment using [CI/CD](set-up-ci-cd.md).
+- Update your Deployment using a Deployment file.  
 - Fetch a short-lived access token to use [Airflow REST API](airflow-api.md) for your Deployment. This assumes the same permissions as your API key.
 
 ### Workspace actions
