@@ -44,25 +44,59 @@ There are many use cases for task groups in Airflow DAGs and often they are used
 
 Additionally when you have an input of unknown length, for example an unknown number of files in a directory, you can use task groups to [dynamically map](dynamic-tasks#mapping-over-task-groups) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
 
-## Create task groups
+## Define task groups
 
-To use task groups, run the following import statement:
+There are two ways to define task groups in your DAGs:
 
-```python 
-from airflow.utils.task_group import TaskGroup
-```
+- Using the `TaskGroup` class to create a task group context
+- Using the `@task_group` decorator on a Python function
 
-For your first example, you'll instantiate a task group using a `with` statement and provide a `group_id`. Inside your task group, you'll define your two tasks, `t1` and `t2`, and their respective dependencies. 
+In most cases, it is a matter of personal preference which way you like to define your task groups. The only exception is when you want to [dynamically map](dynamic-tasks.md) over a task group, this is only possible using `@task_group`.
 
-You can use dependency operators (`<<` and `>>`) in task groups in the same way that you can with individual tasks. Dependencies applied to a task group are applied across its tasks. In the following code, you'll add additional dependencies to `t0` and `t3` to the task group, which automatically applies the same dependencies across `t1` and `t2`:  
+The following code shows how to instantiate a simple task group using containing two sequential tasks using either method. You can use dependency operators (`<<` and `>>`) both in and with task groups in the same way that you can with individual tasks.
+
+<Tabs
+    defaultValue="decorator"
+    groupId="define-task-groups"
+    values={[
+        {label: '@task_group', value: 'decorator'},
+        {label: 'TaskGroup', value: 'context'},
+    ]}>
+
+<TabItem value="decorator">
 
 ```python
+# from airflow.decorators import task_group
+
 t0 = EmptyOperator(task_id='start')
 
 # Start task group definition
-with TaskGroup(group_id='group1') as tg1:
-    t1 = EmptyOperator(task_id='task1')
-    t2 = EmptyOperator(task_id='task2')
+@task_group(group_id='my_task_group')
+def tg1():
+    t1 = EmptyOperator(task_id='task_1')
+    t2 = EmptyOperator(task_id='task_2')
+
+    t1 >> t2
+# End task group definition
+
+t3 = EmptyOperator(task_id='end')
+
+# Set task group's (tg1) dependencies
+t0 >> tg1() >> t3
+```
+
+</TabItem>
+<TabItem value="context">
+
+```python
+# from airflow.utils.task_group import TaskGroup
+
+t0 = EmptyOperator(task_id='start')
+
+# Start task group definition
+with TaskGroup(group_id='my_task_group') as tg1:
+    t1 = EmptyOperator(task_id='task_1')
+    t2 = EmptyOperator(task_id='task_2')
 
     t1 >> t2
 # End task group definition
@@ -71,12 +105,20 @@ t3 = EmptyOperator(task_id='end')
 
 # Set task group's (tg1) dependencies
 t0 >> tg1 >> t3
-
 ```
 
-In the Airflow UI, blue highlighting is used to identify tasks and task groups. When you click and expand `group1`, blue circles identify the task group dependencies. The task immediately to the right of the first blue circle (`t1`) gets the group's upstream dependencies and the task immediately to the left (`t2`) of the last blue circle gets the group's downstream dependencies. The task group dependencies are shown in the following animation: 
+</TabItem>
+</Tabs>
 
-![UI task group](https://assets2.astronomer.io/main/guides/task-groups/task_groups_ui.gif)
+In the **Graph View** of the Airflow UI, task groups are shown in cornflower blue by default. You can expand and collapse them by clicking anywhere on the task group. Expanded task groups will have blue circles when a dependency was defined up- or downstream the whole task group.
+
+![Task groups simple example](/img/guides/task-groups_simple_example.gif)
+
+In the **Grid View** of the Airflow UI, task groups have a note showing how many tasks they contain. Click on the note, for example `+ 2 tasks`, to expand the task group and on `- 2 tasks` to collapse it again. In this view you can also collapse and expand all task groups using the buttons on top of the task list or individual task groups by clicking on their downwards error as shown in the gif below.
+
+![Task groups simple example](/img/guides/task-groups_grid_view.gif)
+
+## Task_id in task groups
 
 When your task is within a task group, your callable `task_id` is the `task_id` prefixed with the `group_id`. For example, `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks with XCOM passing or branching operator decisions.
 
