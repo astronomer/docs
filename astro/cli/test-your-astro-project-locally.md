@@ -2,7 +2,7 @@
 sidebar_label: 'Test your Astro project locally'
 title: 'Test and troubleshoot your Astro project locally'
 id: test-your-astro-project-locally
-description: Check the upgrade readiness of your Astro project`
+description: Check your Astro project for errors before you run it locally or deploy to Astro.
 ---
 
 One of the Astro CLI's main features is the ability to run Astro projects in a local Airflow environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment. Use the following document to learn more about how you can test locally with the Astro CLI before deploying your code changes to a production environment.
