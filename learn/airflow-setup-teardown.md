@@ -35,15 +35,11 @@ There are many use cases for setup and teardown tasks. For example, you might wa
 - Setup the resources to run [data quality](data-quality.md) checks and tear them down afterwards, even if the checks failed.
 - Setup storage in your [custom XCom backend](custom-xcom-backends-tutorial.md) to hold data processed through Airflow tasks and tear the extra storage down afterwards, when the XCom data is no longer needed. 
 
-## Setup/teardown behaviors
+## Setup/teardown concepts
 
-In Airflow any task can be designated as a setup or a teardown task, irrespective of the operator used or the action performed by the task. You can freely decide which tasks are setup tasks and which are teardown tasks. 
-
-You can turn any existing tasks into setup and teardown tasks and define relationships between them to create setup/teardown groupings, i.e. define which setup and teardown tasks should be connected.
+In Airflow any task can be designated as a setup or a teardown task, irrespective of the operator used or the action performed by the task. You can freely decide which tasks are setup tasks and which are teardown tasks. Setup and teardown tasks can be connected to create setup/teardown groupings, i.e. (sets of) setup and teardown tasks that are connected.
 
 Tasks that run after a (set of) setup task(s) and before the associated teardown task(s) are considered to be in _scope_ of this specific setup / teardown grouping. Usually these tasks will use the resources set up by the setup task which the teardown task will dismantle.
-
-If you are using the `@task` decorator you can use either the [.as_setup() and .as_teardown() methods](#setup-and-teardown-methods) or the [`@setup()` and `@teardown()` decorators](#setup-and-teardown-decorators). For traditional operators use the [`.as_setup()` and `.as_teardown()` methods](#setup-and-teardown-methods).
 
 When using setup/teardown tasks, you can expect the following behaviors:
 
@@ -57,13 +53,9 @@ When using setup/teardown tasks, you can expect the following behaviors:
 
 - When a teardown task is located within a [task group](task-groups.md) and a dependency is set on this task group, the teardown task will be ignored, meaning the task `run_after_taskgroup` which is set to depend on the whole `work_in_the_cluster` task group will run even if the teardown task has failed or is still running.
 
-    ```python
-    work_in_the_cluster() >> run_after_taskgroup()
-    ```
-
     ![Task group with teardown](/img/guides/airflow-setup-teardown-task_after_taskgroup.png)
 
-- You can have a setup task without an associated teardown task and vice versa. If you define a setup task without a teardown task everything downstream of the setup task is considered in its scope and will cause the setup task to rerun when cleared. 
+- You can have a setup task without an associated teardown task and vice versa. If you define a setup task without a teardown task everything downstream of the setup task is considered in its scope and will cause the setup task to rerun when cleared.
 
 ### Regular DAG vs using setup/teardown
 
