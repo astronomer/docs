@@ -15,7 +15,7 @@ When using Airflow in production environments, you often need to set up resource
 
 In Airflow 2.7, setup and teardown functionality was added to offer intuitive tools to create and delete resources as part of a DAG with added observability in the DAG graph. In this guide you will learn all about setup and teardown tasks in Airflow. For an introduction to dependencies and trigger rules, see [Manage task and task group dependencies in Airflow](managing-dependencies.md).
 
-![DAG with setup/teardown - all successful](/img/guides/airflow-setup-teardown-syntax_dag_successful.png)
+![DAG with setup/teardown - all successful](/img/guides/airflow-setup-teardown_intro_dag.png)
 
 ## Assumed knowledge
 
