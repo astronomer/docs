@@ -132,13 +132,6 @@ module.exports = {
         "automation-authentication",
         {
           type: "category",
-          label: "Manage Deployments as code",
-          items: [
-            "deployments-as-code",
-            "deployment-file-reference"],
-        }, 
-        {
-          type: "category",
           label: "CI/CD",
           items: [
             "set-up-ci-cd",
@@ -161,6 +154,13 @@ module.exports = {
             },
           ],
         },
+        {
+          type: "category",
+          label: "Manage Deployments as code",
+          items: [
+            "deployments-as-code",
+            "deployment-file-reference"],
+        }, 
       ],
     },
     {
