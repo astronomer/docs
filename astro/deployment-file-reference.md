@@ -65,13 +65,15 @@ deployment:
         workload_identity: astro-native-magnify-8566@proj.iam.gserviceaccount.com
 ```
 
-See the following topics to learn about each section in the file
+See the following topics to learn about each section in the file.
 
 ### `deployment.environment_variables`
 
 You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI.
 
-When you inspect a Deployment, the value of any environment variable that is set as secret in the Cloud UI will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. If you commit a template file to a GitHub repository, Astronomer recommends not to add the secret environment variables in the file and add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
+When you inspect a Deployment, the value of any secret environment variables will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. 
+
+If you commit a template file to a GitHub repository, you should not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
 :::caution  
 
@@ -81,7 +83,7 @@ When you add environment variables using a Deployment file, you must provide a `
 
 ### `deployment.configuration`
 
-The `configuration` section contains all basic settings that you can configure from the Deployment **Details** page in the Cloud UI. See:
+The `configuration` section contains all of the basic settings that you can configure from the Deployment **Details** page in the Cloud UI. See:
 
 - [Create a Deployment](create-deployment.md#create-a-deployment).
 - [Update a Deployment name and description](configure-deployment-resources.md#update-a-deployment-name-and-description).
@@ -89,11 +91,10 @@ The `configuration` section contains all basic settings that you can configure f
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment. If you don't enter specific values for the `default` worker queue for a Deployment with CeleryExecutor, default values based on the worker types available on your cluster are applied. This section is not applicable to Deployments running KubernetesExecutor. 
+The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment. If you don't enter specific values for the `default` worker queue for a Deployment with CeleryExecutor, default values based on the worker types available on your cluster are applied. This section is not applicable to Deployments running with the Kubernetes executor. 
 
 ### Other fields
 
 - `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid. 
-- `deployment_type` can be HOSTED_SHARED or HOSTED_DEDICATED for Astro Hosted depending on your [cluster_type](cli/astro-deployment-create.md#options). HOSTED_SHARED is another name for `standard` cluster_type and HOSTED_DEDICATED is another name for `dedicated` cluster_type. For Astro Hybrid, this will be `HYBRID`.
-- `cluster_name` will contain your region name for HOSTED_SHARED `deployment_type` because you are running on a shared or standard cluster.
-
+- `deployment_type` can be `HOSTED_SHARED` or `HOSTED_DEDICATED` for Astro Hosted depending on your [cluster type](cli/astro-deployment-create.md#options). Use `HOSTED_SHARED` for standard clusters and `HOSTED_DEDICATED` for dedicated clusters. For Astro Hybrid, the only option is `HYBRID`.
+- `cluster_name` is be the region name for Hosted standard clusters. For Astro Hybrid and Astro Hosted dedicated clusters, it's the name for the cluster that appears in the Cloud UI. 
