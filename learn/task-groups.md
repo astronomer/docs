@@ -23,7 +23,7 @@ Airflow [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core
 - [Dynamically map](dynamic-tasks.md) over task patterns creating dynamically mapped complex sets of tasks.
 - Turn task patterns into modules that can be reused across DAGs and even Airflow instances.
 
-In this guide, you'll learn how to create and use task groups in your DAGs.
+In this guide, you'll learn how to create and use task groups in your DAGs. You can find many example DAGs using task groups in the [webinar task group repository](https://github.com/astronomer/webinar-task-groups).
 
 ![Task group intro gif](/img/guides/task-groups_intro_task_group_gif.gif)
 
@@ -122,9 +122,61 @@ As of Airflow 2.7, task groups can be cleared and marked as successful/failed fr
 
 ![Task groups mark success/failed](/img/guides/task-groups_mark_success_failed.gif)
 
+## Task group parameters
+
+When creating a task group there are a few parameters you can define, such as changing the UI color or adding a tooltip to your task group. The two most important parameters are the `group_id` which determines the name of your task group, as well as the `default_args` which will be passed to all tasks in the task group.
+
+<Tabs
+    defaultValue="decorator"
+    groupId="define-task-groups"
+    values={[
+        {label: '@task_group', value: 'decorator'},
+        {label: 'TaskGroup', value: 'context'},
+    ]}>
+
+<TabItem value="decorator">
+
+```python
+@task_group(
+    group_id="task_group_1",
+    default_args={"conn_id": "postgres_default"},
+    tooltip="This task group is very important!",
+    ui_color="#7352BA",  # Background color in graph view
+    ui_fgcolor="#FFFFFF",  # Font color for in graph view
+    prefix_group_id=True,
+    # parent_group=None,
+    # dag=None,
+)
+def tg1():
+    t1 = EmptyOperator(task_id="t1")
+
+tg1()
+```
+
+</TabItem>
+<TabItem value="context">
+
+```python
+with TaskGroup(
+    group_id="task_group_2",
+    default_args={"conn_id": "postgres_default"},
+    tooltip="This task group is also very important!",
+    ui_color="#7352BA",  # Background color in graph view
+    ui_fgcolor="#FFFFFF",  # Font color for in graph view
+    prefix_group_id=True,
+    # parent_group=None,
+    # dag=None,
+    # add_suffix_on_collision=True, # resolves group_id collisions by adding a suffix
+) as tg2:
+    t1 = EmptyOperator(task_id="t1")
+```
+
+</TabItem>
+</Tabs>
+
 ## `task_id` in task groups
 
-When your task is within a task group, your callable `task_id` is the `task_id` prefixed with the `group_id`. For example, `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks with [XCom](airflow-passing-data-between-tasks.md) passing or [branching](airflow-branch-operator.md) operator decisions.
+When your task is within a task group, your callable `task_id` is the `task_id` prefixed with the `group_id`. For example, `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks with [XCom](airflow-passing-data-between-tasks.md) passing or [branching](airflow-branch-operator.md) operator decisions. You can disable this behavior by setting the [task group parameter](#task-group-parameters) `prefix_group_id=False`.
 
 For example, the `task_1` task in the following DAG has a `task_id` of `my_outer_task_group.my_inner_task_group.task_1`.
 
