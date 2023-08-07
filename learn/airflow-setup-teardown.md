@@ -267,7 +267,7 @@ You can also have [parallel](#parallel-setupteardown-groupings) or [nested](#nes
 You can tell Airflow that a task is a teardown task for a specific setup task by passing the setup task object to the `setups` argument of the `.as_teardown()` method. Note that if you do this, you do not need to call the `.as_setup()` method on the setup task anymore.
 
 <Tabs
-    defaultValue="taskflow"
+    defaultValue="taskflow_setups"
     groupId="defining-setup-teardown-relationships"
     values={[
         {label: 'TaskFlow API setups argument', value: 'taskflow_setups'},
