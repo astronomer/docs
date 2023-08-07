@@ -18,17 +18,11 @@ Astro's authentication process is based on [Auth0 Identifier First Authenticatio
 
 You can use any of the following credentials to authenticate in an automated process:
 
-- A Deployment API key. See [Create a Deployment API key](api-keys.md#create-an-api-key).
-- A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token).
-- An Organization API token. See [Create an Organization API token](organization-api-tokens.md#create-an-organization-api-token).
+- A Deployment API key. See [Create a Deployment API key](api-keys.md).
+- A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md).
+- An Organization API token. See [Create an Organization API token](organization-api-tokens.md).
 
 You can create API tokens with role-based access permissions, ensuring that they are not over-provisioned for their intended use. When you chose a credential, you should grant it the least amount of permissions possible for the action it's used for. For example, instead of creating an Organization API token to automate actions in two separate Workspaces, you can create two separate Workspace API tokens for each Workspace.
-
-:::caution
-
-Deployment API keys will soon be deprecated in favor of Deployment API tokens. If you have strict Deployment-level security requirements, you can continue to use Deployment API keys, but you will have to complete a one-time migration to Deployment API tokens in the future. Otherwise, Astronomer recommends using either Workspace API tokens or Organization API tokens in place of Deployment API keys.
-
-:::
 
 ## Make credentials accessible to your automation environment
 
