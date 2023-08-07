@@ -35,8 +35,8 @@ This section of documentation covers how to automate processes on Astro using As
 ### Workspace actions
 
 - Create and update Deployments in your Workspace using a Deployment file. 
-- [Manage users, teams, and tokens](cli/astro-workspace-team.md) in your Workspace.
-- Create ephemeral Deployments in your Workspace using your CI/CD process. 
+- [Manage users, Teams, and tokens](cli/astro-workspace-team.md) in your Workspace.
+- Create ephemeral Deployments using CI/CD. 
 - Perform all Deployment-level actions in any Deployment in a Workspace. 
 
 ### Organization actions
