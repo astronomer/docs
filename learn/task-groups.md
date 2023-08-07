@@ -124,18 +124,43 @@ When your task is within a task group, your callable `task_id` is the `task_id` 
 
 For example, the `task_1` task in the following DAG has a `task_id` of `my_outer_task_group.my_inner_task_group.task_1`.
 
+<Tabs
+    defaultValue="decorator"
+    groupId="task_id-in-task-groups"
+    values={[
+        {label: '@task_group', value: 'decorator'},
+        {label: 'TaskGroup', value: 'context'},
+    ]}>
+
+<TabItem value="decorator">
+
 ```python
+@task_group(group_id="my_outer_task_group")
+def my_outer_task_group():
+    @task_group(group_id="my_inner_task_group")
+    def my_inner_task_group():
+        EmptyOperator(task_id="task_1")
 
+    my_inner_task_group()
 
+my_outer_task_group()
 ```
 
-## Use the task group decorator
 
-Another way of defining task groups in your DAGs is by using the task group decorator. The task group decorator is available in Airflow 2.1 and later. The task group decorator functions like other [Airflow decorators](airflow-decorators.md) and allows you to define your task group with the TaskFlow API. Using task group decorators doesn't change the functionality of task groups, but they can make your code formatting more consistent if you're already using them in your DAGs.
+</TabItem>
+<TabItem value="context">
 
+```python
+with TaskGroup(group_id="my_outer_task_group") as tg1:
+    with TaskGroup(group_id="my_inner_task_group") as tg2:
+        EmptyOperator(task_id="task_1")
+```
+</TabItem>
+</Tabs>
 
+## Passing data through task groups
 
-The following DAG shows a full example implementation of the task group decorator, including passing data between tasks before and after the task group:
+When using the `@task_group` decorator of the TaskFlow API you can pass data between before and after the task group as with regular `@task` decorators:
 
 <CodeBlock language="python">{task_group_example}</CodeBlock>
 
@@ -146,7 +171,7 @@ The resulting DAG looks similar to this image:
 There are a few things to consider when using the task group decorator:
 
 - If downstream tasks require the output of tasks that are in the task group decorator, then the task group function must return a result. In the previous example, a dictionary with two values was returned, one from each of the tasks in the task group, that are then passed to the downstream `load()` task.
-- If your task group function returns an output, you can call the function from your DAG with the TaskFlow API. If your task group function does not return any output, you must use the bitshift operators (`<<` or `>>`) to define dependencies to the task group.
+- If your task group function returns an output, you can call the function from your DAG with the TaskFlow API. If your task group function does not return any output, you must use the bit-shift operators (`<<` or `>>`) to define dependencies to the task group.
 
 ## Generate task groups dynamically at runtime
 
