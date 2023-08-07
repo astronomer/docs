@@ -262,9 +262,7 @@ You can have as many setup and teardown tasks in one relationship as you need, w
 
 For example, you could have one task that creates a cluster, a second task that modifies the environment within that cluster and a third task that tears down the cluster. In this case you could define the first two tasks as setup tasks and the last one as a teardown task, all belonging to the same resource. In a second step you could add 10 tasks performing actions on that cluster to the scope of this setup / teardown grouping. 
 
-It is also possible to have [several parallel groupings of setup/teardown tasks](#parallel-setupteardown-groupings) within the same DAG that work on different resources and are independent of each other. For example, you could have one set of setup/teardown tasks that spins up a cluster to train your ML model and a second set of setup/teardown tasks in the same DAG that creates and deletes a temporary table in your database.
-
-You can also [nest setup/teardown groupings](#nested-setupteardown-groupings). 
+You can also have [parallel](#parallel-setupteardown-groupings) or [nested](#nested-setupteardown-groupings) setup/teardown groupings in the same DAG. 
 
 You can tell Airflow that a task is a teardown task for a specific setup task by passing the setup task object to the `setups` argument of the `.as_teardown()` method. Note that if you do this, you do not need to call the `.as_setup()` method on the setup task anymore.
 
