@@ -33,7 +33,7 @@ astro deployment inspect <deployment-id> > <your-deployment-file-name>.yaml
 
 Alternatively, you can manually create a template file without using an existing Deployment. See [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment template file values.
 
-## Create a Deployment from a template file
+## Create a Deployment using a template file
 
 Before you create a Deployment from a template file, keep the following in mind:
 
@@ -66,12 +66,6 @@ To create a new Deployment from an existing template file:
 
 A Deployment file is a complete snapshot of an existing Deployment at the point you inspected it. It's similar to a template file, but also contains your Deployment's name, description, and metadata. In the same way you use a template file to create a new Deployment, you use a Deployment file to update an existing Deployment with a new set of configurations.
 
-You can create a Deployment file by running the following command:
-
-```bash
-astro deployment inspect <deployment-name> --template > <your-deployment-template-file-name>.yaml
-```
-
 When you update a Deployment with a Deployment file, keep the following in mind:
 
 - You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
@@ -80,7 +74,7 @@ When you update a Deployment with a Deployment file, keep the following in mind:
 
 :::warning 
 
-You must push a complete Deployment file that lists all valid configurations whenever you update a Deployment with a Deployment file. If a configuration exists on Astro but doesn't exist in your Deployment file, such as a worker queue, that configuration is deleted when you push your Deployment file. 
+When you update a Deployment with a Deployment file, you must push a complete Deployment file that lists all of your existing worker queues. If a worker queue exists on Astro but doesn't exist in your Deployment file, the worker queue is deleted when you push your Deployment file. 
 
 :::
 
