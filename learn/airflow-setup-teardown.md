@@ -273,7 +273,7 @@ You can tell Airflow that a task is a teardown task for a specific setup task by
         {label: 'TaskFlow API setups argument', value: 'taskflow_setups'},
         {label: 'Traditional syntax setups argument', value: 'traditional_setups'},
         {label: 'Direct dependencies', value: 'taskflow_direct'},
-        {label: 'Using @setup/@teardown decorators', value: 'decorators'},
+        {label: 'Using setup/teardown decorators', value: 'decorators'},
         {label: 'Using a context manager', value: 'context_manager'},
     ]}>
 <TabItem value="taskflow_setups">
