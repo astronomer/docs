@@ -18,7 +18,7 @@ When using Airflow in production environments, you often need to set up resource
 - Setup the resources to run [data quality](data-quality.md) checks and tear them down afterwards, even if the checks failed.
 - Setup storage in your [custom XCom backend](custom-xcom-backends-tutorial.md) to hold data processed through Airflow tasks and tear the extra storage down afterwards, when the XCom data is no longer needed. 
 
-In Airflow 2.7, setup and teardown functionality was added to serve these use cases with convenient decorators and methods. In this guide you will learn all about setup and teardown in Airflow. For an introduction to dependencies in general and trigger rules, see [Manage task and task group dependencies in Airflow](managing-dependencies.md).
+In Airflow 2.7, setup and teardown functionality was added to serve these use cases with convenient decorators and methods. In this guide you will learn all about setup and teardown tasks in Airflow. For an introduction to dependencies and trigger rules, see [Manage task and task group dependencies in Airflow](managing-dependencies.md).
 
 ## Assumed knowledge
 
