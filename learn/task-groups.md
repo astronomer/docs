@@ -42,7 +42,7 @@ There are many use cases for task groups in Airflow DAGs and often they are used
 - In Situations where several teams work on parts of the same DAG and you want to visually separate the tasks that belong to each team. In this case you might also want to consider separating the DAG into multiple DAGs and using [Datasets](airflow-datasets.md) to connect them.
 - When you are using the same patterns of tasks in multiple DAGs and want to create a reusable module.
 
-Additionally when you have an input of unknown length, for example an unknown number of files in a directory, you can use task groups to [dynamically map](dynamic-tasks#mapping-over-task-groups) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
+Additionally when you have an input of unknown length, for example an unknown number of files in a directory, you can use task groups to [dynamically map](#generate-task-groups-dynamically-at-runtime) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
 
 ## Define task groups
 
@@ -169,16 +169,16 @@ When using the `@task_group` decorator of the TaskFlow API you can pass data bet
 
 The resulting DAG looks similar to this image:
 
-![Decorated task group](/img/guides/decorated_task_group.png)
+![Decorated task group](/img/guides/task-groups_passing_data_dag.png)
 
-There are a few things to consider when using the task group decorator:
+There are a few things to consider when passing information into and out of task groups:
 
 - If downstream tasks require the output of tasks that are in the task group decorator, then the task group function must return a result. In the previous example, a dictionary with two values was returned, one from each of the tasks in the task group, that are then passed to the downstream `load()` task.
-- If your task group function returns an output, you can call the function from your DAG with the TaskFlow API. If your task group function does not return any output, you must use the bit-shift operators (`<<` or `>>`) to define dependencies to the task group.
+- If your task group function returns an output that another task takes as an input, Airflow can infer the task group and task dependency with the TaskFlow API. If your task group function does not return any output that is used as a task input, you must use the bit-shift operators (`<<` or `>>`) to define downstream dependencies to the task group.
 
 ## Generate task groups dynamically at runtime
 
-As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) with the `@task_group` decorator to dynamically map over task groups. The following DAG shows how you can dynamically maps over a task group with different inputs for a given parameter.
+As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) with the `@task_group` decorator to dynamically map over task groups. The following DAG shows how you can dynamically map over a task group with different inputs for a given parameter.
 
 <CodeBlock language="python">{task_group_mapping_example}</CodeBlock>
 
