@@ -41,8 +41,6 @@ This section of documentation covers how to automate processes on Astro using As
 
 ### Organization actions
 
-- [Manage Workspaces](cli/astro-workspace-create.md), such as creating, deleting, and switching Workspaces. 
-- [Manage users, teams, and tokens](cli/astro-organization-list.md), such as inviting new users, rotating existing tokens, etc.
-- [Export audit logs](audit-logs.md#export-audit-logs). 
-- Perform all Workspace-level actions in any Workspace in your Organization.
+- [Manage Organization users, Teams, and tokens](cli/astro-organization-list.md).
+- Export [audit logs](audit-logs.md#export-audit-logs). 
 
