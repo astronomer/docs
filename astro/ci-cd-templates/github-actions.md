@@ -4,21 +4,20 @@ title: Astro CI/CD templates for GitHub Actions
 id: github-actions
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using GitHub Actions.
 ---
-## TODO
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a GitHub repository using [GitHub Actions](https://github.com/features/actions).
+GitHub Action templates use the Astronomer-maintained [Deploy Action](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro) which is available in the GitHub Marketplace. This Astronomer-maintained action provides the following features:
 
-The following templates for GitHub Actions are available:
+- Use the same template for both [image-based](template-overview.md#image-only-templates) and [dag-based](template-overview.md#dag-based-templates) deploys. It can automatically detect and choose the type of deploy based on the files changed. 
+- Easily create [preview Deployment templates](template-overview.md#preview-deployment-templates) to test your code before deploying to production environment.
+- Change the default location of your DAGs directory.
+- Test DAGs with `pytest` by running all the tests included in your `tests` directory.
 
-- [Image-only deploy templates](template-overview.md#image-only-templates)
-- [DAG-based deploy templates](template-overview.md#dag-based-templates)
-- [Preview Deployment templates](template-overview.md#preview-deployment-templates)
+See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action. 
 
-Each template type supports multiple implementations. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
-
-GitHub Action templates use the Astronomer-maintained [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action. If you can't access public GitHub actions from your repository, see [Private network templates](#private-network-templates).
+If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
 
 For more information on each template or to configure your own, see [Template overview](template-overview.md). To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 

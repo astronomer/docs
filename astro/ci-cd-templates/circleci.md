@@ -201,40 +201,40 @@ If your Astro project requires additional build-time arguments to build an image
 
     # Define a job to be invoked later in a workflow.
     # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-  jobs:
+    jobs:
 
-    build_image_and_deploy:
-      docker:
-        - image: cimg/base:stable
-      # Add steps to the job
-      # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-      steps:
-        - setup_remote_docker:
-            version: 20.10.11
-        - checkout
-        - run:
-            name: "Build image and deploy"
-            command: |
-              set -e
-              echo "export image_tag=astro-$(date +%Y%m%d%H%M%S)" >> $BASH_ENV
-              source "$BASH_ENV"
-              docker build -t ${image_tag} --build-arg="<your-build-arg>=<your-build-arg-value>" .
-              curl -sSL install.astronomer.io | sudo bash -s
-              astro deploy --image-name ${image_tag} ${ASTRO_DEPLOYMENT_ID} -f
+      build_image_and_deploy:
+        docker:
+          - image: cimg/base:stable
+        # Add steps to the job
+        # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+          - checkout
+          - run:
+              name: "Build image and deploy"
+              command: |
+                set -e
+                echo "export image_tag=astro-$(date +%Y%m%d%H%M%S)" >> $BASH_ENV
+                source "$BASH_ENV"
+                docker build -t ${image_tag} --build-arg="<your-build-arg>=<your-build-arg-value>" .
+                curl -sSL install.astronomer.io | sudo bash -s
+                astro deploy --image-name ${image_tag} ${ASTRO_DEPLOYMENT_ID} -f
 
-    # Invoke jobs with workflows
-    # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-    workflows:
-      version: 2.1
-      build-and-deploy-prod:
-        jobs:
-          - build_image_and_deploy_prod:
-              context:
-                - <YOUR-CIRCLE-CI-CONTEXT>
-              filters:
-                branches:
-                  only:
-                    - <YOUR-BRANCH-NAME>
+      # Invoke jobs with workflows
+      # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+      workflows:
+        version: 2.1
+        build-and-deploy-prod:
+          jobs:
+            - build_image_and_deploy_prod:
+                context:
+                  - <YOUR-CIRCLE-CI-CONTEXT>
+                filters:
+                  branches:
+                    only:
+                      - <YOUR-BRANCH-NAME>
     ```
 
   :::info
