@@ -1,17 +1,18 @@
 ---
-sidebar_label: 'Authentication'
+sidebar_label: 'Authenticate an automated workflow'
 title: 'Authenticate to Astro for automated workflows'
 id: automation-authentication
 description: Learn about all possible ways that you can authenticate to Astro from the Astro CLI and automation tools.
 ---
 
-Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). This process doesn't provide authorization and doesn't care what a user can do in Astro. To manage authorization in Astro, see [User permissions](./user-permissions.md).
 
 Before you automate your workflows on Astro, you must prove to Astro that your automation tool is using the right identity and access to interact with specific Astro resources. You can do this using the Astro CLI and API tokens. You must complete the following actions to authenticate to Astro:
 
 - Create a credential in Astro.
 - Make the credentials accessible to the Astro CLI installed in your automation environment.
 - Install the Astro CLI in an environment from where you want to run automated processes, such as a GitHub Actions.
+
+Astro's authentication process is based on [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). This process doesn't provide authorization and doesn't care what a user can do in Astro. To manage authorization in Astro, see [User permissions](user-permissions.md).
 
 ## Create a credential
 
