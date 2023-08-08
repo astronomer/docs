@@ -97,6 +97,12 @@ Authorization is the process of verifying a user or service's permissions before
 
 To allow data pipelines running on GCP to access Google Cloud services in a secure and manageable way, Google recommends using [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity). All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Google service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
 
+:::note
+
+When connecting with Workload Identity from tasks using the Kubernetes Pod Operator (KPO), please first contact Astronomer support to enable the KPO service account binding.
+
+:::
+
 To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
 
 1. In the Cloud UI, select your Deployment, then click **Details**
