@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Troubleshoot your Airflow environment'
-title: 'Troubleshoot your Airflow environment'
-id: troubleshoot-local-airflow-environment
+title: 'Troubleshoot your local Airflow environment using the Astro CLI'
+id: troubleshoot-your-local-airflow-environment
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.
 ---
 
