@@ -1,11 +1,63 @@
 ---
-sidebar_label: 'Test your Astro project locally'
-title: 'Test and troubleshoot your Astro project locally'
+sidebar_label: 'Test your Astro project'
+title: 'Test your Astro project'
 id: test-your-astro-project-locally
-description: Check the upgrade readiness of your Astro project`
+description: Check your Astro project for errors before you run it locally or deploy to Astro.
 ---
 
 One of the Astro CLI's main features is the ability to run Astro projects in a local Airflow environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment. Use the following document to learn more about how you can test locally with the Astro CLI before deploying your code changes to a production environment.
+
+## Run a DAG with `astro run`
+
+Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can review task logs and whether a task succeeded or failed in your terminal without opening the Airflow UI. You can only run one DAG at a time. Running DAGs without a scheduler or webserver can help reduce the time required to develop and test data pipelines.
+
+To run a DAG located within your local `/dags` directory run:
+
+```sh
+astro run <dag-id>
+```
+
+All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line. For more information about this command, see the [CLI command reference](cli/astro-run.md).
+
+## Test DAGs with `astro dev parse` and `astro dev pytest`
+
+To enhance the development experience for data pipelines, Astro enables users to run DAG unit tests with two different Astro CLI commands:
+
+- `astro dev parse`
+- `astro dev pytest`
+
+### Parse DAGs
+
+To quickly parse your DAGs, you can run:
+
+```sh
+astro dev parse
+```
+
+This command parses your DAGs to ensure that they don't contain any basic syntax or import errors and that they can successfully render in the Airflow UI.
+
+The command `astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI command reference](cli/astro-dev-parse.md).
+
+### Run tests with pytest
+
+To perform unit tests on your Astro project, you can run:
+
+```sh
+astro dev pytest
+```
+
+This command runs all tests in your project's `tests` directory with [pytest](https://docs.pytest.org/en/7.0.x/index.html#), a testing framework for Python. With pytest, you can test custom Python code and operators locally without having to start a local Airflow environment.
+
+By default, the `tests` directory in your Astro project includes a default DAG integrity test called `test_dag_integrity.py`. This test checks that:
+
+- All Airflow tasks have required arguments.
+- DAG IDs are unique across the Astro project.
+- DAGs have no cycles.
+- There are no general import or syntax errors.
+
+`astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
+
+
 
 ## Test before upgrading your Astro project
 
