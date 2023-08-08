@@ -118,11 +118,11 @@ There are numerous benefits to using deferrable operators including:
 Some additional notes about using deferrable operators:
 
 - If you want to replace non-deferrable operators in an existing project with deferrable operators, Astronomer recommends importing the deferrable operator class as its non-deferrable class name. If you don't include this part of the import statement, you need to replace all instances of non-deferrable operators in your DAGs. In the above example, that would require replacing all instances of `TimeSensor` with `TimeSensorAsync`.
-- There are some use cases where it can be more appropriate to use a traditional sensor instead of a deferrable operator. For example, if your task needs to wait only a few seconds for a condition to be met, Astronomer recommends using a Sensor in [`reschedule` mode](https://github.com/apache/airflow/blob/1.10.2/airflow/sensors/base_sensor_operator.py#L46-L56) to avoid unnecessary resource overhead.
+- In situations where you cannot use a deferrable operator for a longer running sensor task, for example because your infrastructure does not support a triggerer, Astronomer recommends using a sensor in [`reschedule` mode](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) to reduce unnecessary resource overhead.
 
 ## Available deferrable operators
 
-The easiest way to check if an operator has a deferrable option and learn how to install it is to search the [Astronomer Registry](https://registry.astronomer.io/). 
+The easiest way to check if an operator has a `deferrable` parameter or an `-Async` version is to search the [Astronomer Registry](https://registry.astronomer.io/). 
 
 Some deferrable operators are installed by default in Airflow, including the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensorAsync)
 and [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator). 
@@ -142,7 +142,6 @@ In the following screenshot, running the DAG produces 16 running task instances,
 ![Standard sensor Grid View](/img/guides/standard_sensor_slot_taking.png)
 
 Because Airflow imposes default limits on the number of active runs of the same DAG or number of active tasks in a DAG across all runs, you'll have to scale up Airflow to concurrently run any other DAGs and tasks as described in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
-
 
 Switching out the `DateTimeSensor` for `DateTimeSensorAsync` will create 16 running DAG instances, but the tasks for these DAGs are in a deferred state which does not take up a worker slot. The only difference in the DAG code is using the deferrable operator `DateTimeSensorAsync` over `DateTimeSensor`:
 
