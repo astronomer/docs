@@ -39,6 +39,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Bug fixes
 
+- Upgraded `apache-airflow-providers-microsoft-azure` to 6.2.1. This fixes an issue where Deployments running Astro Runtime 8.7.0 on Azure clusters experienced failures with deferrable operators and task logs.
 - Fixed DAG deletion permissions in Astro for non-admin users.
 
 ## Astro Runtime 8.7.0
