@@ -56,7 +56,7 @@ With this method, you can configure a CI/CD pipeline that deploys code to Astro 
 
 - Create a new, temporary branch in your Git repository against the `main` branch.
 - Make a change to your Astro project and push those changes to the branch. 
-- Test all project changes locally with the Astro CLI. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+- Test all project changes locally with the Astro CLI. See [Test your Astro project locally](cli/test-your-astro-project-locally.md) and [Troubleshoot your local Airflow environment](cli/troubleshoot-your-local-airflow-environment.md).
 - Open a pull request for review.
 - When the pull request is approved and merged to the `main` branch, the change is automatically deployed to your Deployment on Astro and available in the Airflow UI.
 
@@ -185,6 +185,6 @@ When you use a CI/CD pipeline, all code pushes to your Deployment are tested, st
 
 ## Test and validate DAGs in your CI/CD pipeline
 
-Astronomer recommends that you pytest all Python code in your DAGs. The Astro CLI includes [pytests](test-and-troubleshoot-locally.md#test-dags-with-the-astro-cli) to validate that your DAGs do not have import or syntax errors. You can implement this parse test with the [Astro CLI](cli/astro-dev-parse.md) or the [Deploy Action](https://github.com/astronomer/deploy-action).
+Astronomer recommends that you pytest all Python code in your DAGs. The Astro CLI includes [pytests](cli/test-your-astro-project-locally.md#unit-test-dags) to validate that your DAGs do not have import or syntax errors. You can implement this parse test with the [Astro CLI](cli/astro-dev-parse.md) or the [Deploy Action](https://github.com/astronomer/deploy-action).
 
 The default test may not work on all DAGs, especially if they access the Airflow metadata database. In this case, you can write your own parse test using example pytests provided in the default Astro project.

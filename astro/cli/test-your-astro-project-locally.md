@@ -19,7 +19,7 @@ astro run <dag-id>
 
 You can only run one DAG at a time. All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line. For more information about this command, see the [CLI command reference](cli/astro-run.md).
 
-## Test DAGs 
+## Unit test DAGs 
 
 You can run DAG unit tests with the following Astro CLI commands to quickly test code:
 

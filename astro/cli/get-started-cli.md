@@ -66,7 +66,7 @@ Running your project locally allows you to test your DAGs before you deploy them
 
 :::info
 
-The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#ports-are-not-available).
+The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [FAQs](astro-faqs.md#ports-are-not-available-for-my-local-airflow-webserver).
 
 :::
 

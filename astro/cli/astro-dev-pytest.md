@@ -10,7 +10,8 @@ Run unit tests for your data pipelines on Astro with `pytest`, a testing framewo
 
 The command runs `pytest` in a container. If your test generates artifacts, such as code coverage reports, you can output the artifacts to the `include` folder of your Astro project so they can be accessed after the test has finished.
 
-For more information on this functionality, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+For more information on this functionality, see [Test your Astro project locally](cli/test-your-astro-project-locally.md).
+
 
 :::info
 

@@ -63,7 +63,7 @@ If your internet connection has slow upload speeds, the deploy might fail with t
 
 To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy also fails. This can help you prevent your team from deploying DAGs to Astro that contain errors.
 
-For more information about using Pytest, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
+For more information about using Pytest, see [Troubleshoot your local Airflow environment](cli/troubleshoot-your-local-airflow-environment.md) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
 :::
 

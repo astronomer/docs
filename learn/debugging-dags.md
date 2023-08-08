@@ -55,7 +55,7 @@ The most common issues related to the Astro CLI are:
 
 To troubleshoot infrastructure issues when running Airflow on other platforms, for example in Docker, on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or on managed services, please refer to the relevant documentation and customer support.
 
-You can learn more about [Test and troubleshooting locally](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#test-dags-with-the-astro-cli) with the Astro CLI in the Astro documentation.
+You can learn more about [testing and troubleshooting locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally.md) with the Astro CLI in the Astro documentation.
 
 ## Common DAG issues
 

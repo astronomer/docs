@@ -150,7 +150,7 @@ The Astro CLI includes two commands to run DAG validation tests. Airflow does no
 - [`astro dev parse`](https://docs.astronomer.io/astro/cli/astro-dev-parse): will quickly parse your DAGs to find any Python syntax or DAG import errors.
 - [`astro dev pytest`](https://docs.astronomer.io/astro/cli/astro-dev-pytest): will run all pytest test suites in the `test` directory of your current Airflow project.
 
-Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script defining several examples of using `pytest` with Airflow. For more information on the Astro CLI's testing capabilities, see [Test and troubleshoot locally](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#test-dags-with-the-astro-cli).
+Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script defining several examples of using `pytest` with Airflow. For more information on the Astro CLI's testing capabilities, see [Test your Astro project locally](https://docs.astronomer.io/astro/test-your-astro-project-locally).
 
 ### Airflow CLI 
 

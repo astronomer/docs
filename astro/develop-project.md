@@ -21,7 +21,7 @@ An Astro project contains all of the files necessary to test and run DAGs in a l
 - Applying changes
 - Running on-build commands
 
-For information about testing DAGs after you’ve added them to your Astro project, see [Test and troubleshoot locally](/astro/test-and-troubleshoot-locally.md).
+For information about testing DAGs after you’ve added them to your Astro project, see [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 
 :::tip
 
@@ -113,7 +113,7 @@ DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your
 
 :::tip
 
-Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Run and Debug DAGs with Astro Run](/astro/test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 
 :::
 
