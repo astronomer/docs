@@ -5,11 +5,21 @@ id: troubleshoot-local-airflow-environment
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.
 ---
 
-## View Airflow logs
+Some issues with a local Astro project can be solved only after running your local Airflow environment with `astro dev start`. For example, one of your DAGs might cause an error in your Airflow scheduler, which you can only know by triggering the task and checking your scheduler logs.
 
-You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change.
+This document explains how to use Astro CLI commands to interact with a locally running Airflow environment and troubleshoot issues. Astronomer recommends troubleshooting after after successfully testing your Astro project.
 
-See [View logs](view-logs.md).
+## View Airflow component logs
+
+You can use the Astro CLI to view logs for your local Airflow environment's webserver, scheduler, and triggerer. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change.
+
+To view component logs in a local Airflow environment, run:
+
+```sh
+astro dev logs
+```
+
+See the [Astro CLI reference guide](cli/astro-dev-logs.md) for more details and options.
 
 ## Run Airflow CLI commands
 
@@ -21,11 +31,11 @@ astro dev run <airflow-cli-command>
 
 For example, the Airflow CLI command for listing connections is `airflow connections list`. To run this command with the Astro CLI, you would run `astro dev run connections list` instead.
 
-Running `astro dev run` with the Astro CLI is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
+`astro dev run` is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
 
-:::tip
+:::info
 
-You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `airflow dags trigger` in the Airflow CLI.
+You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `astro dev run dags trigger` in the Astro CLI.
 
 :::
 
@@ -33,7 +43,7 @@ You can only use `astro dev run` in a local Airflow environment. To automate Air
 
 Make requests to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in a local Airflow environment with HTTP basic access authentication. This can be useful for testing and troubleshooting API calls before executing them in a Deployment on Astro.
 
-To make local requests with cURL or Python, you only need the username and password for your local user. Both of these values are `admin` by default. They are the same credentials that are listed when you run `astro dev start` with the Astro CLI and required by the Airflow UI in a local environment.
+To make local requests with cURL or Python, you only need the username and password for your local user. Both of these values are `admin` by default. They are the same credentials for logging into the Airflow UI, and they're listed when you run `astro dev start`.
 
 To make requests to the Airflow REST API in a Deployment on Astro, see [Airflow API](airflow-api.md).
 
@@ -56,8 +66,7 @@ response = requests.get(
 
 ## Troubleshoot KubernetesPodOperator issues
 
-View local Kubernetes logs to troubleshoot issues with Pods that are created by the operator. See [Test and Troubleshoot the KubernetesPodOperator Locally](https://docs.astronomer.io/learn/kubepod-operator#run-the-kubernetespodoperator-locally).
-
+View local Kubernetes logs to troubleshoot issues with Pods that are created by the KubernetesPodOPerator. See [Test and Troubleshoot the KubernetesPodOperator Locally](https://docs.astronomer.io/learn/kubepod-operator#run-the-kubernetespodoperator-locally).
 
 ## Hard reset your local environment
 
@@ -102,11 +111,11 @@ For example, if your `packages.txt` file contains the `openjdk-8-jdk`, `gcc`, `g
 
 5. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1 one by one until you find the package that is the source of the error.
 
-## Override the CLI Docker Compose file
+## Override the Astro CLI Docker Compose file
 
-The Astro CLI uses a default set of [Docker Compose](https://docs.docker.com/compose/) configurations to define and run local Airflow components. For advanced testing cases, you might need to override these default configurations. For example:
+The Astro CLI uses a default set of [Docker Compose](https://docs.docker.com/compose/) configurations to define and run local Airflow components. For advanced testing cases, you might need to override these default configurations. For example, you might need to:
 
-- Adding extra containers to mimic services that your Airflow environment needs to interact with locally, such as an SFTP server.
+- Add extra containers to mimic services that your Airflow environment needs to interact with locally, such as an SFTP server.
 - Change the volumes mounted to any of your local containers.
 
 :::info
