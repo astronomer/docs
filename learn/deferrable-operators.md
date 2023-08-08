@@ -54,9 +54,33 @@ If you are not using Astro, run `airflow triggerer` to start a triggerer process
 
 As tasks are raised into a deferred state, triggers are registered in the triggerer. You can set the number of concurrent triggers that can run in a single triggerer process with the [`default_capacity`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#triggerer) configuration setting in Airflow. This config can also be set with the `AIRFLOW__TRIGGERER__DEFAULT_CAPACITY` environment variable. The default value is `1,000`.
 
-### Update your DAGs
+### Enable deferrable mode
 
-To use a deferrable version of a core Airflow operator in your DAG, you only need to replace the import statement for the existing operator. For example, Airflow's `TimeSensorAsync` is a replacement of the non-deferrable `TimeSensor` ([source](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)). To use `TimeSensorAsync`, remove your existing `import` and replace it with the following:
+Many operators Airflow operators (e.g. the [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator) or the [WasbBlobSensor](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest/modules/WasbBlobSensor)) can be set to run in deferrable mode using the `deferrable` parameter. You can learn if the operator you want to use has a `deferrable` parameter by looking up the operator in the [Astronomer Registry](https://registry.astronomer.io/).
+
+To set all operators in an Airflow instance to use deferrable mode if they have a `deferrable` parameter, set the Airflow config `operators.default_deferrable` to `True`. You can do so by defining the following environment variable in your Airflow environment:
+
+```text
+AIRFLOW__OPERATORS__DEFAULT_DEFERRABLE=True
+```
+
+You can override the config setting at the operator level using the `deferrable` parameter directly:
+
+```python
+trigger_dag_run = TriggerDagRunOperator(
+   task_id="trigger_dag_run",
+   trigger_dag_id="helper_dag_wait_30_seconds",
+   wait_for_completion=True,
+   poke_interval=20,
+   deferrable=True,  # turns on deferrable mode just for this operator instance
+)
+```
+
+### Replace existing operators with deferrable versions
+
+If the operator you want to use does not have a `deferrable` parameter you can look for a deferrable version of the operator in the [Astronomer Registry](https://registry.astronomer.io/). These operators usually have the same name as the original operator, but with the word `Async` appended to the end. For example, the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensorAsync) is the deferrable version of the [TimeSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensor).
+
+To use a deferrable version of a core Airflow operator in your DAG, you only need to replace the import statement for the existing operator. For example, to use TimeSensorAsync instead of the TimeSensor, remove your existing `import` statement and replace it with an import of `TimeSensorAsync` that is aliased as `TimeSensor`:
 
 ```python
 # Remove this import:
@@ -65,7 +89,7 @@ To use a deferrable version of a core Airflow operator in your DAG, you only nee
 from airflow.sensors.time_sensor import TimeSensorAsync as TimeSensor
 ```
 
-If you are using a deferrable operator that is part of a provider package, you will also need to ensure that package is installed in your Airflow environment. For example, to use the Snowflake deferrable operator from the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package:
+If you are using a deferrable operator that is part of a provider package, you will also need to ensure that package is installed in your Airflow environment. For example, to use the deferrable Snowflake operator [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/SnowflakeOperatorAsync) from the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package:
 
 1. Add the following to your `requirements.txt` file:
 
@@ -100,8 +124,8 @@ Some additional notes about using deferrable operators:
 
 The easiest way to check if an operator has a deferrable option and learn how to install it is to search the [Astronomer Registry](https://registry.astronomer.io/). 
 
-Some deferrable operators are installed by default in Airflow, including the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/2.6.1/modules/TimeSensorAsync)
-and [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/2.6.1/modules/TriggerDagRunOperator). 
+Some deferrable operators are installed by default in Airflow, including the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensorAsync)
+and [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator). 
 
 Other deferrable operators are available in provider packages, including many built and maintained by Astronomer as part of the open source [Astronomer Providers](https://github.com/astronomer/astronomer-providers) Python package. For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html). 
 
