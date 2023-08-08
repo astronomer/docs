@@ -118,7 +118,7 @@ There are numerous benefits to using deferrable operators including:
 Some additional notes about using deferrable operators:
 
 - If you want to replace non-deferrable operators in an existing project with deferrable operators, Astronomer recommends importing the deferrable operator class as its non-deferrable class name. If you don't include this part of the import statement, you need to replace all instances of non-deferrable operators in your DAGs. In the above example, that would require replacing all instances of `TimeSensor` with `TimeSensorAsync`.
-- In situations where you cannot use a deferrable operator for a longer running sensor task, for example because your infrastructure does not support a triggerer, Astronomer recommends using a sensor in [`reschedule` mode](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) to reduce unnecessary resource overhead.
+- In situations where you cannot use a deferrable operator for a longer running sensor task, for example because your infrastructure does not support a triggerer, Astronomer recommends using a sensor in [`reschedule` mode](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) to reduce unnecessary resource overhead. See the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#difference-between-mode-reschedule-and-deferrable-true-in-sensors) for details about the differences between `reschedule` mode and deferrable operators.
 
 ## Available deferrable operators
 
