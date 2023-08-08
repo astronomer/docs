@@ -65,7 +65,6 @@ module.exports = {
         },
         "upgrade-runtime",
         "airflow-api",
-        "test-and-troubleshoot-locally",
       ],
     },
     {
@@ -295,6 +294,11 @@ module.exports = {
       type: "doc",
       label: "Test your Astro project locally",
       id: "cli/test-your-astro-project-locally",
+    },
+    {
+      type: "doc",
+      label: "Troubleshoot Airflow locally",
+      id: "cli/troubleshoot-your-local-airflow-environment",
     },
     {
       type: "doc",
