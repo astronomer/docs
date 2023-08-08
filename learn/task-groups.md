@@ -15,6 +15,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import task_group_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_example.py';
 import task_group_mapping_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_mapping_example.py';
+import custom_task_group_example from '!!raw-loader!../code-samples/dags/task-groups/custom_task_group_example.py';
 
 Airflow [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a tool to organize tasks into groups within your DAGs. Using task groups allows you to:
 
@@ -412,34 +413,7 @@ class MyCustomMathTaskGroup(TaskGroup):
 
 In the DAG you import your custom TaskGroup class and instantiate it with the values for your custom arguments:
 
-```python
-from airflow.decorators import dag, task
-from pendulum import datetime
-from include.custom_task_group import MyCustomMathTaskGroup
-
-
-@dag(
-    start_date=datetime(2023, 7, 1),
-    schedule=None,
-    catchup=False,
-    tags=["@task_group", "task_group"],
-)
-def custom_tg():
-    @task
-    def get_num_1():
-        return 5
-
-    tg1 = MyCustomMathTaskGroup(group_id="my_task_group", num1=get_num_1(), num2=19)
-
-    @task
-    def downstream_task():
-        return "hello"
-
-    tg1 >> downstream_task()
-
-
-custom_tg()
-```
+<CodeBlock language="python">{custom_task_group_example}</CodeBlock>
 
 The resulting DAG shows the custom templated task group which can now be reused in other DAGs with different inputs for `num1` and `num2`.
 
