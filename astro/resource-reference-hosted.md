@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 :::caution
 
-This document applies only to [Astro Hosted](astro-architecture.md). To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **General**. Your Astro product type is listed under **Product Type**.
 
 For Astro Hybrid resource reference material, see:
 

@@ -29,9 +29,18 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## August 8, 2023
 
+### New Hosted worker type
+
+<HostedBadge/>
+
+You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+
 ### Additional improvements
 
-- You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+- When you create a new Astro Cloud IDE project, you can now specify whether you want the project to include an example pipeline.
+- You can now access Organization-level settings in the Cloud UI only through the **Organization Settings** link. Additionally, some Organization settings have been moved to the top level of navigation so that there is no longer a **Settings** menu.
+- You can now use commas, apostrophes, and ampersands in Workspace and Organization names
+- The Workspace list view in the Cloud UI has been redesigned so that Organization Owners can now edit and delete Workspaces directly from the list.
 
 ## August 1, 2023
 
