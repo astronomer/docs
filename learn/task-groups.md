@@ -16,6 +16,7 @@ import CodeBlock from '@theme/CodeBlock';
 import task_group_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_example.py';
 import task_group_mapping_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_mapping_example.py';
 import custom_task_group_example from '!!raw-loader!../code-samples/dags/task-groups/custom_task_group_example.py';
+import custom_task_group_example_dag from '!!raw-loader!../code-samples/dags/task-groups/custom_task_group_example_dag.py';
 
 Airflow [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a tool to organize tasks into groups within your DAGs. Using task groups allows you to:
 
@@ -383,37 +384,11 @@ The following image shows the expanded view of the nested task groups in the Air
 
 If you use the same patterns of tasks in several DAGs or Airflow instances, it may be useful to create a custom task group class module. To do so, you need to inherit from the `TaskGroup` class and then define your tasks within that custom class. The task definitions will be the same as if you were defining them in a DAG file, with the only added requirement that you'll need to use `self` to assign the task to the task group.
 
-```python
-from airflow.utils.task_group import TaskGroup
-from airflow.decorators import task
-
-
-class MyCustomMathTaskGroup(TaskGroup):
-    """A task group summing two numbers."""
-
-    # defining defaults of input arguments num1 and num2
-    def __init__(self, group_id, num1=0, num2=0, **kwargs):
-        """Instantiate a MyCustomMathTaskGroup."""
-        super().__init__(group_id=group_id, ui_color="#32CD32", **kwargs)
-
-        # assing the task to the task group by using `self`
-        @task(task_group=self)
-        def task_1(num1, num2):
-            """Adds two numbers."""
-            return num1 + num2
-
-        @task(task_group=self)
-        def task_2(num):
-            """Multiplies a number by 23."""
-            return num * 23
-
-        # define dependencies
-        task_2(task_1(num1, num2))
-```
+<CodeBlock language="python">{custom_task_group_example}</CodeBlock>
 
 In the DAG you import your custom TaskGroup class and instantiate it with the values for your custom arguments:
 
-<CodeBlock language="python">{custom_task_group_example}</CodeBlock>
+<CodeBlock language="python">{custom_task_group_example_dag}</CodeBlock>
 
 The resulting DAG shows the custom templated task group which can now be reused in other DAGs with different inputs for `num1` and `num2`.
 

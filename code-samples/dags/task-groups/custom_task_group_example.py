@@ -1,26 +1,25 @@
-from airflow.decorators import dag, task
-from pendulum import datetime
-from include.custom_task_group import MyCustomMathTaskGroup
+from airflow.utils.task_group import TaskGroup
+from airflow.decorators import task
 
 
-@dag(
-    start_date=datetime(2023, 8, 1),
-    schedule=None,
-    catchup=False,
-    tags=["@task_group", "task_group"],
-)
-def custom_tg():
-    @task
-    def get_num_1():
-        return 5
+class MyCustomMathTaskGroup(TaskGroup):
+    """A task group summing two numbers."""
 
-    tg1 = MyCustomMathTaskGroup(group_id="my_task_group", num1=get_num_1(), num2=19)
+    # defining defaults of input arguments num1 and num2
+    def __init__(self, group_id, num1=0, num2=0, **kwargs):
+        """Instantiate a MyCustomMathTaskGroup."""
+        super().__init__(group_id=group_id, ui_color="#32CD32", **kwargs)
 
-    @task
-    def downstream_task():
-        return "hello"
+        # assing the task to the task group by using `self`
+        @task(task_group=self)
+        def task_1(num1, num2):
+            """Adds two numbers."""
+            return num1 + num2
 
-    tg1 >> downstream_task()
+        @task(task_group=self)
+        def task_2(num):
+            """Multiplies a number by 23."""
+            return num * 23
 
-
-custom_tg()
+        # define dependencies
+        task_2(task_1(num1, num2))
