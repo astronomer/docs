@@ -22,7 +22,7 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 - Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
 - The Workspace **Deployments** page is now paginated in the Astronomer UI.
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`.
-- You can now set `deployments.canCreateDeploymentFromUI` to false to prevent all users from creating new Deployments through the Astronomer UI. 
+- You can now set `deployments.canUpsertDeploymentFromUI: false` to prevent all users besides System Admins from updating Deployments and environment variables through the Astronomer UI. 
 
 ### Bug fixes
 
