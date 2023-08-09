@@ -202,7 +202,7 @@ Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/sta
 
 :::info
 
-You can find a full list of all pre-built notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html).
+You can find a full list of all pre-built notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html). And connect to [many more services](https://github.com/caronc/apprise/wiki) though the [AppriseNotifier](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/_api/airflow/providers/apprise/notifications/apprise/index.html).
 
 :::
 
