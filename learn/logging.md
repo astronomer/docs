@@ -94,7 +94,7 @@ If you run Airflow in Docker using the [Astro CLI](https://docs.astronomer.io/so
 - Triggerer: Logs appear in the console by default. You can access the logs by running `docker logs <triggerer_container_id>`. As of Airflow 2.6, individual triggers' log messages can be found in the logs of tasks that use deferrable operators.
 - Task: Logs appear in `/usr/local/airflow/logs/` within the scheduler Docker container. To access task logs in the Airflow UI click on the square of a task instance in the Grid views and then select the **Logs** tab.
 
-![Logs in Grid View](/img/guides/logs_second_s3_bucket.png)
+![Logs in Grid View](/img/guides/logging-task_logs_grid_view.gif)
 
 The Astro CLI includes a command to show webserver, scheduler, triggerer and Celery worker logs from the local Airflow environment. For more information, see [astro dev logs](https://docs.astronomer.io/astro/cli/astro-dev-logs).
 

@@ -229,6 +229,12 @@ The following are some debugging steps you can try:
 
     ![Test Connections](/img/guides/test_connections_2.png)
 
+    :::note
+
+    In Airflow 2.7+ testing connections is disabled by default. You can enable connection testing by setting the [`test_connection` core config](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#test-connection) to `Enabled` by defining the environment variable `AIRFLOW__CORE__TEST_CONNECTION=Enabled` in your Airflow environment.
+
+    :::
+
 To find information about what parameters are required for a specific connection:
 
 - Read provider documentation in the [Astronomer Registry](https://registry.astronomer.io/providers?page=1) to access the Apache Airflow documentation for the provider. Most commonly used providers will have documentation on each of their associated connection types. For example, you can find information on how to set up different connections to Azure in the Azure provider docs.
