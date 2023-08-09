@@ -10,7 +10,22 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the information provided here to learn how you can securely connect Astro to your existing Google Cloud Platform (GCP) instance. A connection to GCP allows Astro to access data stored on your GCP instance and is a necessary step to running pipelines in a production environment.
+Astro allows you to connect your Astro cluster to your external GCP resources using the external IPs of your Astro cluster. These external IPs are static and different for each Astro cluster. These need to be added to be whitelisted in your cloud account to allow access to your resources. 
+
+A cluster's IP addresses are the same for all Deployments running in that cluster. This is a one-time setup for each Astro cluster. 
+
+Use the following topics to learn aboud different available options to connect to your existing resources from Astro and how to configure them.
+
+## Prerequisites
+
+- External IP address of your Astro cluster
+- Permissions to access to your GCP cloud console
+
+## Retrieve external IP addresses for a cluster
+
+1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
+2. Click **Clusters**, then select a cluster.
+3. In the **Details** page, copy the IP addresses listed under **External IPs**.
 
 ## Connection options
 
@@ -26,12 +41,9 @@ The connection option that you choose is determined by the requirements of your 
     ]}>
 <TabItem value="Public endpoints">
 
-Publicly accessible endpoints allow you to quickly connect Astro to GCP. To configure these endpoints, you can use one of the following methods:
+Publicly accessible endpoints allow you to quickly connect Deployments in Astro to AWS using Airflow connections. This does not required any special configuration on Astro or AWS side. See [Manage connections and variables](manage-connections-variables.md) to learn about various strategies to create Airflow connections.
 
-- Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
-- Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
-
-When you use publicly accessible endpoints to connect Astro and GCP, traffic moves directly between your Astro clusters and the GCP API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
 
 </TabItem>
 
@@ -77,49 +89,6 @@ A list of Google services and their associated service names are provided in the
 ```sh
 gcloud services list --available --filter="name:googleapis.com"
 ```
-
-</TabItem>
-
-</Tabs>
-
-## Authorization options
-
-Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. Astro clusters must be authorized to access external resources from your cloud. Which authorization option that you choose is determined by the requirements of your organization and your existing infrastructure. Astronomer recommends that you review all of the available authorization options before selecting one for your organization.
-
-<Tabs
-    defaultValue="Workload Identity"
-    groupId="authorization-options"
-    values={[
-        {label: 'Workload Identity', value: 'Workload Identity'},
-        {label: 'Service account keys', value: 'Service account keys'},
-    ]}>
-<TabItem value="Workload Identity">
-
-To allow data pipelines running on GCP to access Google Cloud services in a secure and manageable way, Google recommends using [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity). All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Google service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
-
-To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
-
-1. In the Cloud UI, select your Deployment, then click **Details**
-
-2. Copy the service account shown under **Workload Identity**.
-
-3. Grant the Google service account for your Astro Deployment an IAM role that has access to your external data service. With the Google Cloud CLI, run:
-
-    ```text
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:<your-astro-service-account> --role=roles/viewer
-    ```
-
-    For instructions on how to grant your service account an IAM role in the Google Cloud console, see [Grant an IAM role](https://cloud.google.com/iam/docs/grant-role-console#grant_an_iam_role).
-
-4. Optional. Repeat these steps for every Astro Deployment that requires access to external data services on GCP.
-
-</TabItem>
-
-<TabItem value="Service account keys">
-
-When you create a connection from Astro to GCP, you can specify the service account key in JSON format, or you can create a secret to hold the service account key. For more information about creating and managing GCP service account keys, see [Create and manage service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) and [Creating and accessing secrets](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets).
-
-Astronomer recommends using Google Cloud Secret Manager to store your GCP service account keys and other secrets. See [Google Cloud Secret Manager](secrets-backend?tab=gcp#setup).
 
 </TabItem>
 

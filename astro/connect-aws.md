@@ -12,7 +12,22 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-You have a number of options for connecting Deployments on an AWS cluster to external data sources. Use the following topics to learn about each available connection option and how to configure them.
+Astro allows you to connect your Astro cluster to your external AWS resources using the external IPs of your Astro cluster. These external IPs are static and different for each Astro cluster. These need to be added to be whitelisted in your cloud account to allow access to your resources. 
+
+A cluster's IP addresses are the same for all Deployments running in that cluster. This is a one-time setup for each Astro cluster. 
+
+Use the following topics to learn aboud different available options to connect to your existing resources from Astro and how to configure them.
+
+## Prerequisites
+
+- External IP addresses of your Astro cluster
+- Permissions to access to your AWS console 
+
+## Retrieve IP addresses to whitelist
+
+1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
+2. Click **Clusters**, then select a cluster.
+3. In the **Details** page, copy the IP addresses listed under **External IPs**.
 
 ## Connection options
 
@@ -29,12 +44,9 @@ The connection option that you choose is determined by the requirements of your 
     ]}>
 <TabItem value="Public endpoints">
 
-Publicly accessible endpoints allow you to quickly connect Astro to AWS. To configure these endpoints, you can use one of the following methods:
+Publicly accessible endpoints allow you to quickly connect Deployments in Astro to AWS using Airflow connections. This does not required any special configuration on Astro or AWS side. See [Manage connections and variables](manage-connections-variables.md) to learn about various strategies to create Airflow connections.
 
-- Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
-- Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
-
-When you use publicly accessible endpoints to connect Astro and AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
 
 </TabItem>
 
@@ -137,62 +149,6 @@ You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpo
 
 </Tabs>
 
-## Authorization options
-
-Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. Astro clusters must be authorized to access external resources from your cloud. Which authorization option that you choose is determined by the requirements of your organization and your existing infrastructure. Astronomer recommends that you review all of the available authorization options before selecting one for your organization.
-
-<Tabs
-    defaultValue="AWS IAM roles"
-    groupId="authorization-options"
-    values={[
-        {label: 'AWS IAM roles', value: 'AWS IAM roles'},
-        {label: 'AWS access keys', value: 'AWS access keys'},
-    ]}>
-<TabItem value="AWS IAM roles">
-
-To grant an Astro Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
-
-1. In the Cloud UI, select your Deployment and then click **Details**. Copy the `arn` given under **Workload Identity**.
-2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
-3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
-4. Click **Roles** and in the **Role name** column, select the role you created in step 2.
-5. Click the **Trust relationships** tab.
-6. Click **Edit trust policy** and paste the `arn` you copied from Step 1 in the trust policy.
-
-    ```text {8}
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": [
-                        "<workload-identity-role>"
-                    ]
-                },
-                "Action": "sts:AssumeRole"
-            }
-        ]
-    }
-    ```
-    When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, specify the ARN of the role that you would like to assume (the role created in step 2) as the value for `aws_arn`.
-
-7. Click **Update policy**.
-8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
-9. Optional. Repeat these steps for each Astro Deployment that requires access to external data services on AWS.
-
-</TabItem>
-
-<TabItem value="AWS access keys">
-
-Astro supports all Airflow AWS connection types. For more information about the available AWS connection types, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html). When you create your Airflow AWS connection, you'll need your AWS access key ID and secret access key. 
-
-Astronomer recommends using an external secrets backend to store your AWS access key ID and secret access key. See [Configure an external secrets backend on Astro](secrets-backend.md).
-
-</TabItem>
-
-</Tabs>
-
 ## Hostname resolution options
 
 Securely connect Astro to resources running in other VPCs or on-premises through a resolving service. 
@@ -233,11 +189,11 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 7. Click **Create resource share**.
 
-### Contact Astronomer support for rule verification
+#### Contact Astronomer support for rule verification
 
 To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
-### Create a connection to confirm connectivity (optional)
+#### Create a connection to confirm connectivity (optional)
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
@@ -252,7 +208,7 @@ To use this solution, make sure Astro can connect to the DNS server using a VPC 
 - The domain name for forwarding requests
 - The IP address of the DNS server where requests are forwarded
 
-### Create an Airflow connection to confirm connectivity (optional)
+#### Create an Airflow connection to confirm connectivity (optional)
 
 When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 

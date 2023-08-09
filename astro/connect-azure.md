@@ -10,7 +10,23 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the information provided here to learn how you can securely connect Astro to your existing Azure instance. A connection to Azure allows Astro to access data stored on your Azure instance and is a necessary step to running pipelines in a production environment.
+
+Astro allows you to connect your Astro cluster to your external Azure resources using the external IPs of your Astro cluster. These external IPs are static and different for each Astro cluster. These need to be added to be whitelisted in your cloud account to allow access to your resources. 
+
+A cluster's IP addresses are the same for all Deployments running in that cluster. This is a one-time setup for each Astro cluster. 
+
+Use the following topics to learn aboud different available options to connect to your existing resources from Astro and how to configure them.
+
+## Prerequisites
+
+- External IP address of your Astro cluster
+- Permissions to access to your Azure cloud portal 
+
+## Retrieve external IP addresses for a cluster
+
+1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
+2. Click **Clusters**, then select a cluster.
+3. In the **Details** page, copy the IP addresses listed under **External IPs**.
 
 ## Connection options
 
@@ -26,12 +42,9 @@ The connection option that you choose is determined by the requirements of your 
     ]}>
 <TabItem value="Public endpoints">
 
-Publicly accessible endpoints allow you to quickly connect Astro to Azure. To configure these endpoints, you can use one of the following methods:
+Publicly accessible endpoints allow you to quickly connect Deployments in Astro to AWS using Airflow connections. This does not required any special configuration on Astro or AWS side. See [Manage connections and variables](manage-connections-variables.md) to learn about various strategies to create Airflow connections.
 
-- Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
-- Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
-
-When you use publicly accessible endpoints to connect Astro and Azure, traffic moves directly between your Astro clusters and the Azure API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
 
 </TabItem>
 
@@ -92,10 +105,3 @@ Note that you'll incur additional Azure infrastructure costs for every Azure pri
 
 </Tabs>
 
-## Authorization options
-
-Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. Astro clusters must be authorized to access external resources from your cloud.
-
-### Azure account access keys
-
-When you create an Azure storage account, two 512-bit storage account access keys are generated for the account. You can use these keys to authorize access to data in your storage account with Shared Key authorization.
