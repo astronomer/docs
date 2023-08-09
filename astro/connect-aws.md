@@ -111,7 +111,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
     - Your TGW ID from Step 2.
     - The CIDR block for the target VPC or on-premises network that you want to connect your Astro cluster with.
 
-    Then, Astronomer support approves the resource sharing request, attaches the Astro private subnets to your transit gateway, and creates routes in the Astro route tables to your transit gateway for each of the CIDR provided. Astronomer support notifies you about the process completion and provides you with the Astro CIDRs.
+    Astronomer support approves the resource sharing request, attaches the Astro private subnets to your transit gateway, and creates routes in the Astro route tables to your transit gateway for each of the CIDR provided. Astronomer support notifies you about the process completion and provides you with the Astro CIDRs.
 
 4. After you receive the confirmation from Astronomer support, you can [create back routes](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route) from the transit gateway to the Astro VPC.
 
