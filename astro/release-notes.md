@@ -42,6 +42,9 @@ You can now configure Deployments with the `A50` machine type, which has 12 vCPU
 - You can now use commas, apostrophes, and ampersands in Workspace and Organization names
 - The Workspace list view in the Cloud UI has been redesigned so that Organization Owners can now edit and delete Workspaces directly from the list.
 
+### Bug fixes
+
+- Fixed an issue where the Cloud UI showed incorrect CPU and memory limits in bar charts on the Deployments list and **Details** page.
 ## August 1, 2023
 
 ### Hosted Deployments have DAG-only deploys enabled by default 
