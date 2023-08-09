@@ -45,6 +45,7 @@ You can now configure Deployments with the `A50` machine type, which has 12 vCPU
 ### Bug fixes
 
 - Fixed an issue where the Cloud UI showed incorrect CPU and memory limits in bar charts on the Deployments list and **Details** page.
+
 ## August 1, 2023
 
 ### Hosted Deployments have DAG-only deploys enabled by default 
