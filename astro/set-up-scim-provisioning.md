@@ -63,8 +63,8 @@ Okta's Astro integration supports the following SCIM actions:
 <TabItem value= "Okta">
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
-2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **General**.
-3. Copy your **Organization ID** to use later in this setup.
+2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**.
+3. On the **General** page, copy your **Organization ID** to use later in this setup.
 4. Go to **Settings > Authentication**. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 5. In the Okta admin dashboard, open your Astro app integration and click **Provisioning**.
 6. Click **Configure API integration**, check **Enable API integration**, then configure the following values:
@@ -87,7 +87,7 @@ Okta's Astro integration supports the following SCIM actions:
 Complete the manual setup if you configured your existing Astro app without using the Okta app catalogue.
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
-2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
+2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
 5. In the Okta admin dashboard, add SCIM provisioning to your existing Astro app integration. Then, open your app in Okta and go to **Provisioning** > **Integration** to configure the following values: 
@@ -121,7 +121,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 <TabItem value="Azure">
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
-2. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Authentication**.
+2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
 5. Append the [Azure AD feature flag parameter](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior) `?aadOptscim062020` to your **SCIM Integration URL** and recopy it. For example, if your SCIM Integration URL is `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0`, your final URL would be `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0?aadOptscim062020`. The feature flag is required for fully compliant SCIM behavior in Azure AD.

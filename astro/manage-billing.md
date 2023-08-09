@@ -11,7 +11,7 @@ You can configure payment information and check your total Astro spend from the 
 
 ## View billing details
 
-In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Billing**. The **Billing** menu includes the following tabs for tracking your payments:
+In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. The **Billing** menu includes the following tabs for tracking your payments:
 
 - **Overview** shows your current payment information and your total spend for the current billing cycle.
 - **Invoices** shows a breakdown of charges for current and previous billing cycles.
@@ -19,12 +19,12 @@ In the Cloud UI, click Astronomer logo in the upper left corner to open your Org
 
 ## Update billing details
 
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Billing**. 
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
 2. If you have no payment method on file, click **Add Payment Method** and enter your payment details. To edit an existing payment method, click **Edit** next to the payment method.
 
 ## View total spend
 
-In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Billing**. 
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
 
 The **Overview** page contains high level information about your total Astro spend. 
 
@@ -33,7 +33,7 @@ The **Overview** page contains high level information about your total Astro spe
 
 ## View invoices
 
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Billing**. 
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
 2. Click **Invoices**. 
 
 By default, the Cloud UI shows a draft invoice for your current billing cycle. 
@@ -49,7 +49,7 @@ The **Billing** page updates every hour with your total spend in the previous co
 
 ## View component usage by date
 
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Billing**. 
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**. 
 2. Click **Usage**. 
 
 Each chart on this page shows your usage over the last 30, 60, or 90 days for each billable component type. Hover over nodes on the chart to see your total hour spend for a component on a given day. Use the dropdown menu in the upper right corner to change the timeframe for each chart.

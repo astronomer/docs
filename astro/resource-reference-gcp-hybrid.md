@@ -8,9 +8,9 @@ sidebar_custom_props: { icon: 'img/gcp.png' }
 
 :::caution
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
-To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
+To create a cluster on Astro Hosted, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
 :::
 
