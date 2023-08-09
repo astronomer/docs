@@ -150,7 +150,7 @@ Authorization is the process of verifying a user or service's permissions before
     ]}>
 <TabItem value="AWS IAM roles">
 
-To grant an Astro Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
+To grant an Astro Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend. The following method will allow all 
 
 1. In the Cloud UI, select your Deployment and then click **Details**. Copy the `arn` given under **Workload Identity**.
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
@@ -159,7 +159,7 @@ To grant an Astro Deployment access to a service that is running in an AWS accou
 5. Click the **Trust relationships** tab.
 6. Click **Edit trust policy** and paste the `arn` you copied from Step 1 in the trust policy.
 
-    ```text {8}
+    ```json
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -175,11 +175,10 @@ To grant an Astro Deployment access to a service that is running in an AWS accou
         ]
     }
     ```
-    When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, specify the ARN of the role that you would like to assume (the role created in step 2) as the value for `aws_arn`.
 
 7. Click **Update policy**.
-8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
-9. Optional. Repeat these steps for each Astro Deployment that requires access to external data services on AWS.
+8. In the Airflow UI, create an Airflow connection to access the resources you need to connect to. See the example on how to use Role ARN to [create an Airflow connection](https://docs.astronomer.io/learn/connections/redshift#get-connection-details).
+9. (Optional) Repeat these steps for each Astro Deployment that requires access to external data services on AWS.
 
 </TabItem>
 
