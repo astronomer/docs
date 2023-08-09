@@ -16,7 +16,7 @@ astro organization team delete <team-id>
 
 To find a Team ID using the Astro CLI, run `astro organization team list`.
 
-To find a Team ID In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings** > **Access Management** > **Teams** and open your Team. The Team ID is the string after the last slash in the page's URL. For example, the Team ID for `https://cloud.astronomer.io/settings/access/teams/clileesfx425o01kvybpzxcvxd5` is `clileesfx425o01kvybpzxcvxd5`.
+To find a Team ID in the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings** > **Access Management** > **Teams**. Search for your Team in the **Teams** table and copy its **ID**. The ID should look something like `clk17xqgm124q01hkrgilsr49`.
 
 ## Related Commands
 

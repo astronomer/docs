@@ -28,7 +28,7 @@ You can also manually add users to an Organization. You must manually add users 
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management**.
+2. Go to **Access Management**.
       
 3. Click **Invite member**:
 
@@ -46,7 +46,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management**.
+2. Go to **Access Management**.
 
 3. Find the user in the **Users** list and then click **Edit**.
    

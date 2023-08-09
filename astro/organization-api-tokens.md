@@ -18,7 +18,7 @@ Use Organization API tokens to automate across all Workspaces in your Organizati
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management** > **API Tokens**.
+2. Go to **Access Management** > **API Tokens**.
    
 3. Click **+ API Token**.
    
@@ -39,7 +39,7 @@ If you delete an Organization API token, make sure that no existing automation w
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management** > **API Tokens**.
+2. Go to **Access Management** > **API Tokens**.
 
 3. Click **Edit** next to your API token.
 
@@ -55,7 +55,7 @@ When you rotate an Organization API token, you receive a new valid token from As
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management** > **API Tokens**.
+2. Go to **Access Management** > **API Tokens**.
 
 3. Click **Edit** next to your API token.
 

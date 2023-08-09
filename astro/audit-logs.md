@@ -18,7 +18,7 @@ See [Reference: Astro audit log fields](audit-logs-reference.md) for a complete 
 
 Audit logs are retained for 90 days. Organization Owner permissions are required to export audit logs. 
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **General**.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**.
 
 2. In **Audit Logs**, select the number days of audit data to export and then click **Export**.
 
