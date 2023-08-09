@@ -131,14 +131,27 @@ Complete the manual setup if you configured your existing Astro app without usin
     - **Provisioning mode**: Set to **Automatic**.
     - **Admin Credentials** > **Tenant URL**: Enter the **SCIM integration URL** including the Azure AD feature flag parameter.
     - **Secret Token**: Enter your Organization API token. 
-    - **Mappings**: Configure the following mappings:
+
+8. In **Mappings**, open the **Groups** mapping configuration.
+9. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
+10. In the **Attribute Mappings** table, add the following mappings:
 
     | Azure Active Directory Attribute | Astro Attribute |
     | -------------------------------- | --------------- |
-    | userPrincipalName                | userName        |
     | displayName                      | displayName     |
-    | givenName                        | name.givenName  |
-    | surname                          | name.familyName |
+    | members                          | members         |
+
+11. Go back to the **Mappings** menu and open the **User** mapping configuration.
+12. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
+13. In the **Attribute Mappings** table, add the following mappings:
+
+    | Azure Active Directory Attribute                            | Astro Attribute |
+    | ----------------------------------------------------------- | --------------- |
+    | userPrincipalName                                           | userName        |
+    | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |
+    | displayName                                                 | displayName     |
+    | givenName                                                   | name.givenName  |
+    | surname                                                     | name.familyName |
 
   :::caution
 
