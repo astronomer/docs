@@ -65,7 +65,7 @@ Core settings control the number of processes running concurrently and how long 
 
 #### Scheduler settings
 
-Scheduler settings control how the scheduler parses DAG files and creates DAG runs. The associated environment variables for all parameters in this section are formatted as `AIRFLOW__SCHEDULER__PARAMETER_NAME`.
+[Scheduler config settings](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#scheduler) control how the scheduler parses DAG files and creates DAG runs. The associated environment variables for all parameters in this section are formatted as `AIRFLOW__SCHEDULER__PARAMETER_NAME`.
 
 - `min_file_process_interval`: The frequency that each DAG file is parsed, in seconds. Updates to DAGs are reflected after this interval. A low number increases scheduler CPU usage. If you have dynamic DAGs created by complex code, you can increase this value to improve scheduler performance. The default value is 30 seconds. 
 
@@ -87,7 +87,7 @@ Scheduler settings control how the scheduler parses DAG files and creates DAG ru
 
 - `max_dagruns_to_create_per_loop`: The maximum number of DAGs to create DAG runs for per scheduler loop. Decrease the value to free resources for scheduling tasks. The default value is 10. 
 
-- `max_tis_per_query`: Changes the batch size of queries to the metastore in the main scheduling loop. A higher value allows more `tis` to be processed per query, but your query may become too complex and cause performance issues. The default value is 512 queries. 
+- `max_tis_per_query`: Changes the batch size of queries to the metastore in the main scheduling loop. A higher value allows more `tis` to be processed per query, but your query may become too complex and cause performance issues. The default value is 16 queries in Airflow 2.7+. Note that the `scheduler.max_tis_per_query` value needs to be lower than the `core.parallelism` value.
 
 ### DAG-level Airflow settings
 
