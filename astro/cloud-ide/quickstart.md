@@ -30,7 +30,7 @@ If you don't provide a database, you can still complete the quickstart. However,
 The Cloud IDE is available to all Astro customers and can be accessed in the Cloud UI.
 
 1. Log in to the Cloud UI and select a Workspace.
-2. Click **Cloud IDE** in the left menu. If you are the first person in your Workspace to use the Astro Cloud IDE, the **Projects** page is empty.
+2. Click **Cloud IDE** in the left menu. If you are the first person in your Workspace to use the Astro Cloud IDE, the **My Projects** page is empty.
 
 ![Cloud IDE](/img/cloud-ide/project-list.png)
 

@@ -26,17 +26,15 @@ You can also manually add users to an Organization. You must manually add users 
 - You want to invite a user to an Organization from a domain that you don't own, such as a third party consultant.
 - You want to invite someone from your company to Astro as a role other than Organization Member.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+1. In the Cloud UI, click the Astronomer logo in the upper left corner. Then, go to **Settings** > **Access Management**.
    
-2. Go to **Access Management**.
-      
-3. Click **Invite member**:
+2. Click **Invite member**:
 
-4. Enter the user's email.
+3. Enter the user's email.
 
-5. Select an Organization role for the user. See [Organization roles reference](user-permissions.md#organization-roles).
+4. Select an Organization role for the user. See [Organization roles reference](user-permissions.md#organization-roles).
 
-6. Click **Invite member**.
+5. Click **Invite member**.
 
 After you add the user, their information appears in the **Users** tab in **Access Management**. To access Astro, the user needs to accept the invitation sent by email and then create an Astro account.
 
@@ -44,15 +42,13 @@ After you add the user, their information appears in the **Users** tab in **Acce
 
 See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
-   
-2. Go to **Access Management**.
+1. In the Cloud UI, click the Astronomer logo in the upper left corner. Then, go to **Settings** > **Access Management**.
 
-3. Find the user in the **Users** list and then click **Edit**.
+2. Find the user in the **Users** list and then click **Edit**.
    
-4. (Optional) Edit the user's role. See [Organization roles](user-permissions.md). 
+3. (Optional) Edit the user's role. See [Organization roles](user-permissions.md). 
    
-5. If you updated the user's role, click **Update member**. To delete the user, click **Remove member**.
+4. If you updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
 :::info
 

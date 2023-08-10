@@ -241,9 +241,7 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 5. On the **Associate permissions** page, accept the default settings and then click **Next**.
 
-6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field. 
-
-    To get the Astro AWS account ID, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings**. From the **General** page, copy the **AWS External ID**.
+6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field. To get the Astro AWS account ID, go to the Cloud UI, click **Settings**, and then copy the value in the **ID** column for the Astro AWS account you want to share the Resolver rule with.
 
 7. Click **Create resource share**.
 
