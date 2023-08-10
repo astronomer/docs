@@ -204,7 +204,7 @@ KubernetesPodOperator(
 
 :::info
 
-This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+This setup is available only on Astro Hybrid. 
 
 :::
 
@@ -249,7 +249,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 :::info
 
-This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+This setup is available only on Astro Hybrid. 
 
 :::
 
