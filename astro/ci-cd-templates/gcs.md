@@ -12,7 +12,7 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 - Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
-## DAG deploy templates
+## DAG deploy template
 
 This CI/CD template can be used to deploy DAGs from a single GCS bucket to a single Astro Deployment. When you create or modify a DAG in the GCS bucket, a Cloud function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
 
