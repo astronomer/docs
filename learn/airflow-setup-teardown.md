@@ -685,3 +685,5 @@ This DAG comes with a convenience parameter to test setup/teardown functionality
 
 </TabItem>
 </Tabs>
+
+![Setup/teardown example DAG](/img/guides/airflow-setup-teardown_example_dag.png)
