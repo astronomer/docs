@@ -23,7 +23,7 @@ _DAG-based templates_ use the `--dags` flag in the Astro CLI to push DAG changes
 
 CI/CD templates that use the DAG-based workflow:
 
-- Require that each Deployment have the DAG-only deploy feature enabled. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment).
+- Require that each Deployment have the DAG-only deploy feature enabled. See [Enable DAG-only deploys on a Deployment](/astro/deploy-code#enable-dag-only-deploys-on-a-deployment).
 - Use a [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
 - Trigger the following Astro CLI commands depending on which files were updated by the commit:
