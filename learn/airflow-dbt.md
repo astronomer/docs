@@ -16,30 +16,25 @@ import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
-The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
+The open-source provider package [Cosmos](https://astronomer.github.io/astronomer-cosmos/) allows you to integrate dbt jobs into your Airflow by automatically creating Airflow tasks from dbt models. You can turn your dbt Core projects into an Airflow task group with just a few lines of code:
 
 ```python
-from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, ExecutionConfig
-from cosmos.profiles import PostgresUserPasswordProfileMapping
-
-profile_config = ProfileConfig(
-    profile_name="default",
-    target_name="dev",
-    profile_mapping=PostgresUserPasswordProfileMapping(
-        conn_id="my_db_conn",
-        profile_args={"schema": "my_schema"},
-    ),
-)
-
 DbtTaskGroup(
-    project_config=ProjectConfig("path/to/my_project"),
-    profile_config=profile_config,
+    group_id="dbt_project_1",
+    dbt_project_name=DBT_PROJECT_NAME,
+    conn_id=CONNECTION_ID,
+    dbt_root_path=DBT_ROOT_PATH,
+    dbt_args={
+        "dbt_executable_path": DBT_EXECUTABLE_PATH,
+        "schema": SCHEMA_NAME,
+        "vars": '{"my_key": "my_value"}',
+    },
 )
 ```
 
 :::info
 
-If you are already familiar with Airflow and dbt Core and just want to get a project running, clone [this Cosmos use case example repository](https://github.com/astronomer/cosmos-use-case) and run it locally using the Astro CLI.
+If you are already familiar with Airflow and dbt Core and just want to get a project running, clone [Astronomers Cosmos example repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example) and run it locally using the Astro CLI.
 
 :::
 
@@ -94,21 +89,20 @@ To use dbt with Airflow install dbt Core in a virtual environment and Cosmos in 
     ```text
     # replace dbt-postgres with another supported adapter if you're using a different warehouse type
     RUN python -m venv dbt_venv && source dbt_venv/bin/activate && \
-        pip install --no-cache-dir dbt-postgres && deactivate
+    pip install --no-cache-dir dbt-postgres && deactivate
     ```
 
     This code runs a bash command when the Docker image is built that creates a virtual environment called `dbt_venv` inside of the Astro CLI scheduler container. The `dbt-postgres` package, which also contains `dbt-core`, is installed in the virtual environment. If you are using a different data warehouse, replace `dbt-postgres` with the adapter package for your data warehouse.
 
-3. Add [Cosmos](https://github.com/astronomer/astronomer-cosmos) and the [Postgres provider](https://registry.astronomer.io/providers/apache-airflow-providers-postgres/versions/latest) to your Astro project `requirements.txt` file. If you are using a different data warehouse, replace `apache-airflow-providers-postgres` with the provider package for your data warehouse. You can find information on all provider packages on the [Astronomer registry](https://registry.astronomer.io/).
+3. Add [Cosmos](https://github.com/astronomer/astronomer-cosmos) to your Astro project `requirements.txt` file.
 
     ```text
-    astronomer-cosmos==1.0.4
-    apache-airflow-providers-postgres==5.6.0
+    astronomer-cosmos==0.6.8
     ```
 
 ## Step 2: Prepare your dbt project
 
-To integrate your dbt project with Airflow, you need to add the project folder to your Airflow environment. For this step you can either add your own project in a new `dbt` folder in your `dags` directory, or follow the steps below to create a simple project using two models.
+To integrate your dbt project with Airflow, you need to add your dbt project to a subfolder called `dbt` within your `dags` folder. You can either add your own project, or follow the steps below to create a simple project using two models.
 
 1. Create a folder called `dbt` in your `dags` folder. 
 
@@ -177,7 +171,7 @@ If a connection type for your database isn't available, you might need to make i
 
 ## Step 4: Write your Airflow DAG
 
-The DAG you'll write uses Cosmos to create tasks from existing dbt models and the [PostgresOperator](https://registry.astronomer.io/providers/apache-airflow-providers-postgres/versions/latest/modules/PostgresOperator) to query a table that was created. You can add more upstream and downstream tasks to embed the dbt project within other actions in your data ecosystem.
+The DAG you'll write uses Cosmos to create tasks from existing dbt models. You can add upstream and downstream tasks to embed the dbt project within other actions in your data ecosystem.
 
 1. In your `dags` folder, create a file called `my_simple_dbt_dag.py`.
 
@@ -185,23 +179,21 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
 
     <CodeBlock language="python">{cosmos_dag}</CodeBlock>
 
-    This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. Make sure to add your own values for `YOUR_NAME`, `DB_NAME`, and `SCHEMA_NAME`.
-    
-    Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
+    This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks.
+    Using the `vars` keyword in the dictionary provided to the `dbt_args` parameter, you can inject variables into the dbt project. This DAG injects `Astro` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
 
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
 
-    ![Cosmos DAG graph view](/img/integrations/airflow-dbt-cosmos_dag_graph_view.png)
-
-4. Check the [XCom](airflow-passing-data-between-tasks.md) returned by the `query_table` task to see your name in the `model2` table.
+    ![Cosmos DAG graph view](/img/guides/cosmos_dag_graph_view.png)
 
 :::info
 
-The DbtTaskGroup class populates an Airflow task group with Airflow tasks created from dbt models inside of a normal DAG. To directly define a full DAG containing only dbt models use the `DbtDag` class, as shown in the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/getting_started/astro.html).
+The DbtTaskGroup class populates an Airflow task group with Airflow tasks created from dbt models inside of a normal DAG. To directly define a full DAG containing only dbt models use the `DbtDag` class, as shown in the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/dbt/usage.html#full-dag).
 
 :::
 
-Congratulations! You've run a DAG using Cosmos to automatically create tasks from dbt models. You can learn more about how to configure Cosmos in the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/index.html).
+
+Congratulations! You've run a DAG using Cosmos to automatically create tasks from dbt models. Cosmos is under active development. You can learn more about it in the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/index.html).
 
 ## Alternative ways to run dbt Core with Airflow
 
