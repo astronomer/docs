@@ -56,9 +56,9 @@ As tasks are raised into a deferred state, triggers are registered in the trigge
 
 ### Enable deferrable mode
 
-Many operators Airflow operators (e.g. the [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator) or the [WasbBlobSensor](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest/modules/WasbBlobSensor)) can be set to run in deferrable mode using the `deferrable` parameter. You can learn if the operator you want to use has a `deferrable` parameter by looking at the list of operator parameters in the [Astronomer Registry](https://registry.astronomer.io/).
+Many Airflow operators (e.g. the [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator) or the [WasbBlobSensor](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest/modules/WasbBlobSensor)) can be set to run in deferrable mode using the `deferrable` parameter. You can learn if the operator you want to use has a `deferrable` parameter by looking at the list of operator parameters in the [Astronomer Registry](https://registry.astronomer.io/).
 
-To set all tasks defined with an operator that has a `deferrable` parameter in your whole Airflow instance to use deferrable mode, set the Airflow config `operators.default_deferrable` to `True`. You can do so by defining the following environment variable in your Airflow environment:
+To set all tasks defined with an operator that has a `deferrable` parameter in your Airflow instance to use deferrable mode, set the Airflow config `operators.default_deferrable` to `True`. You can do so by defining the following environment variable in your Airflow environment:
 
 ```text
 AIRFLOW__OPERATORS__DEFAULT_DEFERRABLE=True
@@ -78,7 +78,7 @@ trigger_dag_run = TriggerDagRunOperator(
 
 ### Replace existing operators with deferrable versions
 
-If the operator you want to use does not have a `deferrable` parameter you can look for a deferrable version of the operator in the [Astronomer Registry](https://registry.astronomer.io/). These operators usually have the same name as the original operator, but with the word `Async` appended to the end. For example, the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensorAsync) is the deferrable version of the [TimeSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensor).
+If the operator you want to use does not have a `deferrable` parameter, you can look for a separate deferrable version of the operator in the [Astronomer Registry](https://registry.astronomer.io/). These operators usually have the same name as the original operator, but with the word `Async` appended to the end. For example, the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensorAsync) is the deferrable version of the [TimeSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensor).
 
 To use a deferrable version of a core Airflow operator in your DAG, you only need to replace the import statement for the existing operator. For example, to use TimeSensorAsync instead of the TimeSensor, remove your existing `import` statement and replace it with an import of `TimeSensorAsync` that is aliased as `TimeSensor`:
 
@@ -117,7 +117,6 @@ There are numerous benefits to using deferrable operators including:
 
 Some additional notes about using deferrable operators:
 
-- If you want to replace non-deferrable operators in an existing project with deferrable operators, Astronomer recommends importing the deferrable operator class as its non-deferrable class name. If you don't include this part of the import statement, you need to replace all instances of non-deferrable operators in your DAGs. In the above example, that would require replacing all instances of `TimeSensor` with `TimeSensorAsync`.
 - In situations where you cannot use a deferrable operator for a longer running sensor task, for example because your infrastructure does not support a triggerer, Astronomer recommends using a sensor in [`reschedule` mode](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) to reduce unnecessary resource overhead. See the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#difference-between-mode-reschedule-and-deferrable-true-in-sensors) for details about the differences between `reschedule` mode and deferrable operators.
 
 ## Available deferrable operators
