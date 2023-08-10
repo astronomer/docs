@@ -142,7 +142,7 @@ Use this template to push code to from a GitLab repository to Astro.
 1. Set the following [environment variables](https://docs.gitlab.com/ee/ci/variables/#for-a-project) in your GitLab project:
 
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
-    - `DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy this **ID** from your Deployment's home page in the Cloud UI.
+    - `DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy the **ID** from your Deployment's page in the Cloud UI.
 
     Astronomer recommends that you always [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) your API token to prevent it from being accessible in plain text. You can also set the API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
 
