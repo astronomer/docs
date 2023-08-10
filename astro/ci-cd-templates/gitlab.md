@@ -8,13 +8,13 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Use the following CI/CD templates to automate deployment of your Astro project from a [GitLab](https://gitlab.com/) repository to Astro.
+Use the following CI/CD templates to automate deploys to Astro from a [GitLab](https://gitlab.com/) repository.
 
 Read the following sections to choose the right template for your project. The templates for GitLab include the image deploy templates and DAG deploy templates.
 
-If you have one Deployment and one environment on Astro, use the [single branch implementation](#single-branch-implementation). If you have multiple Deployments that support development and production environments, use the [multiple branch implementation](#multiple-branch-implementation). If you want your CI/CD process to automatically decide which deploy strategy to choose, see [DAG deploy templates](#smart-deploy-templates).
+If you have one Deployment and one environment on Astro, use the [single branch implementation](#single-branch-implementation). If you have multiple Deployments that support development and production environments, use the [multiple branch implementation](#multiple-branch-implementation). If you want your CI/CD process to automatically decide which deploy strategy to choose, see [DAG deploy templates](#dag-deploy-templates).
 
-For more information on available generic templates or to configure your own, see [Template overview](template-overview.md). To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
+To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Each CI/CD template implementation might have additional requirements.
 
 <Tabs
     defaultValue="singlebranch"
-    groupId= "image-templates"
+    groupId= "image-deploy-templates"
     values={[
         {label: 'Single branch', value: 'singlebranch'},
         {label: 'Multiple branch', value: 'multibranch'},
@@ -38,14 +38,14 @@ Each CI/CD template implementation might have additional requirements.
 
 Use this template to push code to from a GitLab repository to Astro.
 
-1. In your GitLab project, [follow GitLab's documentation](https://docs.gitlab.com/ee/ci/variables/#for-a-project) to set the following environment variables for a project:
+1. Set the following [environment variables](https://docs.gitlab.com/ee/ci/variables/#for-a-project) in your GitLab project:
 
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
-    - `DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy this **ID** from your Deployment's home page in the Cloud UI.
+    - `DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy the **ID** from your Deployment's home page in the Cloud UI.
 
-    Astronomer recommends to always mask the value of your API token to prevent it from getting printed in plain-text in the logs. You can also set API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
+    Astronomer recommends that you always [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) your API token to prevent it from being accessible in plain text. You can also set the API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
 
-2. Go to **Build** > **Pipeline Editor**, paste and commit the following:
+2. Go to **Build** > **Pipeline Editor** and commit the following:
 
   ```yaml
   astro_deploy:
@@ -74,18 +74,18 @@ Use this template to push code to from a GitLab repository to Astro.
 
 Use this template to push code to a development and a production Deployment in Astro based on your GitLab project's branch name.
 
-1. In your GitLab project, [follow GitLab's documentation](https://docs.gitlab.com/ee/ci/variables/#for-a-project) to set the following environment variables for a project:
+1. Set the following [environment variables](https://docs.gitlab.com/ee/ci/variables/#for-a-project) in your GitLab project:
 
     - `PROD_ASTRO_API_TOKEN`: The value of your production Workspace or Organization API token.
-    - `PROD_DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy this **ID** from your production Deployment's home page in the Cloud UI.
+    - `PROD_DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy the **ID** from your production Deployment's page in the Cloud UI.
     - `DEV_ASTRO_API_TOKEN`: The value of your development Workspace or Organization API token.
-    - `DEV_DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy this **ID** from your development Deployment's home page in the Cloud UI.
+    - `DEV_DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy the **ID** from your development Deployment's page in the Cloud UI.
 
-    Astronomer recommends to always mask the value of your API token to prevent it from getting printed in plain-text in the logs. You can also set API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
+    Astronomer recommends that you always [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) your API token to prevent it from being accessible in plain text. You can also set the API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
 
   :::tip
 
-  When you create a CI/CD variable that will be used in multiple branches, you might want to protect where you use them. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. See GitLab's documentation on [protected branches](https://docs.gitlab.com/ee/user/project/protected_branches.html) and [protected tags](https://docs.gitlab.com/ee/user/project/protected_tags.html) for more details. 
+  When you create a CI/CD variable that will be used in multiple branches, you might want to [protect the variable](https://docs.gitlab.com/ee/ci/variables/#protect-a-cicd-variable) so that it can only be accessed from the relevant branches.
 
   :::
 
@@ -139,12 +139,12 @@ The DAG-based template uses the `--dags` flag in the Astro CLI to push DAG chang
 
 Use this template to push code to from a GitLab repository to Astro.
 
-1. In your GitLab project, [follow GitLab's documentation](https://docs.gitlab.com/ee/ci/variables/#for-a-project) to set the following environment variables for a project:
+1. Set the following [environment variables](https://docs.gitlab.com/ee/ci/variables/#for-a-project) in your GitLab project:
 
     - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
     - `DEPLOYMENT_ID`: The ID of your Astro Deployment. You can copy this **ID** from your Deployment's home page in the Cloud UI.
 
-    Astronomer recommends to always mask the value of your API token to prevent it from getting printed in plain-text in the logs. You can also set API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
+    Astronomer recommends that you always [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) your API token to prevent it from being accessible in plain text. You can also set the API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
 
 2. Go to the **Editor** option in your project's CI/CD section and commit the following:
    

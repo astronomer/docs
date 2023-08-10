@@ -8,24 +8,18 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-GitHub Action templates use the Astronomer-maintained `deploy-action` which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro). This action automates the common processes during a deploy process and additionally provides the following features:
+GitHub Action templates use the Astronomer-maintained `deploy-action`, which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro). This action automates the deploy process and includes additional features for more complex automation workflows. Specifically, the action can automatically:
 
-- Automatically detect and choose the type of deploy based on the files changed. This allows you to use the same template for image deploys and DAG deploys.
-- Ability to automatically test your DAGs as part of the deploy process using tests defined in the `tests` directory of your Astro project. 
-- Create or delete a Deployment Preview to test your code before deploying to production. A Deployment Preview is an Astro Deployment that mirrors the configuration of an existing Deployment.
-- Change the default location of your `dags` directory.
+- Choose a deploy type based on the files that were changed in a commit. This allows you to use the same template for DAG deploys and image deploys.
+- Test DAGs as part of the deploy process and prevent deploying if any of the tests fail. These tests are defined in the `tests` directory of your Astro project.
+- Create a preview Deployment to test your code before deploying to production. A Deployment preview is an Astro Deployment that mirrors the configuration of an existing Deployment.
 
 See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action. 
 
-Read the following sections to choose the right template. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation. If you do not have access to Astronomer's `deploy-action`, use the templates in [private network templates](#private-network-templates).
+Read the following sections to choose the right template for your use case. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation. If you do not have access to Astronomer's `deploy-action`, use the [private network templates](#private-network-templates).
 
-For more information on available generic templates or to configure your own, see [Template overview](template-overview.md). To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
+To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
-:::tip
-
-When you use the Astronomer-maintained GitHub Action `deploy-action`, you can use the same template for both image deploys and DAG deploys. This action will automatically detects the type of files changed and selects between image deploy or DAG deploy without requiring any customization.
-
-:::
 
 ## Prerequisites
 
@@ -37,6 +31,8 @@ When you use the Astronomer-maintained GitHub Action `deploy-action`, you can us
 Each CI/CD template implementation might have additional requirements.
 
 ## Deploy action templates
+
+Templates that use the Astronomer `deploy-action` trigger both image deploys and DAG deploys. If you committed changes only to DAG files, the action triggers a DAG deploy. If you committed changes to any other file, the action triggers an image deploy.
 
 <Tabs
     defaultValue="standard"
