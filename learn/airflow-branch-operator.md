@@ -323,6 +323,7 @@ Airflow offers a few other branching operators that work similarly to the Branch
 - [BranchSQLOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
 - [BranchDayOfWeekOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter.
 - [BranchDateTimeOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdatetimeoperator): Branches based on whether the current time is between `target_lower` and `target_upper` times.
+- [ExternalBranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.ExternalBranchPythonOperator): Branches based on a Python function like the [BranchPythonOperator](#taskbranch-branchpythonoperator) but runs in a virtual environment like the [ExternalPythonOperator](external-python-operator.md).
 
 All of these operators take `follow_task_ids_if_true` and `follow_task_ids_if_false` parameters which provide the list of task(s) to include in the branch based on the logic returned by the operator.
 

@@ -41,12 +41,12 @@ The following diagram illustrates component interaction:
 
 ## Executors
 
-You can use preconfigured Airflow executors, or you can create a [custom executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html). Each executor has a specific purpose:
+You can use pre-configured Airflow executors, or you can create a [custom executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html). Each executor has a specific purpose:
 
 - **[SequentialExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/sequential.html):** Executes tasks sequentially inside the scheduler process, with no parallelism or concurrency. This is the default in Airflow executor.
 - **[LocalExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html):** Executes tasks locally inside the scheduler process, but supports parallelism and hyperthreading. This executor is recommended for testing Airflow on a local computer or on a single node.
-- **[CeleryExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html):** Uses a Celery backend (such as Redis, RabbitMq, or another message queue system) to coordinate tasks between preconfigured workers. This executor is ideal for high volumes of shorter running tasks or in environments with consistent task loads.
-- **[KubernetesExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html):** Calls the Kubernetes API to create a separate pod for each task to run, enabling users to pass in custom configurations for each of their tasks and use resources efficiently. This executor is ideal in the following scenarios: 
+- **[CeleryExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html):** Uses a Celery backend (such as Redis, RabbitMq, or another message queue system) to coordinate tasks between preconfigured workers. This executor is ideal for high volumes of shorter running tasks or in environments with consistent task loads. The CeleryExecutor is available as part of the [Celery provider](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest).
+- **[KubernetesExecutor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html):** Calls the Kubernetes API to create a separate pod for each task to run, enabling users to pass in custom configurations for each of their tasks and use resources efficiently. The KubernetesExecutor is available as part of the [CNCF Kubernetes provider](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest). This executor is ideal in the following scenarios: 
 
     - You have long running tasks that you don't want to be interrupted by code deploys or Airflow updates.
     - Your tasks require very specific resource configurations.
