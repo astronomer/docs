@@ -78,7 +78,7 @@ trigger_dag_run = TriggerDagRunOperator(
    trigger_dag_id="helper_dag_wait_30_seconds",
    wait_for_completion=True,
    poke_interval=20,
-   deferrable=false,  # turns off deferrable mode just for this operator instance
+   deferrable=False,  # turns off deferrable mode just for this operator instance
 )
 ```
 
