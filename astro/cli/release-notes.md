@@ -23,7 +23,7 @@ Release date: August 10, 2023
 
 ### Bug fix
 
-- Fixed an issue where the CLI was creating hosted Deployments where DAG-Deploy was turned off by default.
+- Fixed an issue where running `astro deployment create` on Astro Hosted would create Deployments where DAG-only deploys were turned off by default.
 
 ## Astro CLI 1.18.1
 
