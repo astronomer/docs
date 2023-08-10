@@ -39,7 +39,7 @@ export DAG_FOLDER="<path to dag folder ie. dags/>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
 # Determine if only DAG files have changes
-files=$(git diff --name-only HEAD^..HEAD)
+files=$(git diff --name-only $(git rev-parse HEAD~1) -- .)
 dags_only=1
 for file in $files; do
   if [[ $file != "$DAG_FOLDER"* ]]; then
