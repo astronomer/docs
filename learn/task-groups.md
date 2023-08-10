@@ -21,11 +21,11 @@ import custom_task_group_example_dag from '!!raw-loader!../code-samples/dags/tas
 Airflow [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a tool to organize tasks into groups within your DAGs. Using task groups allows you to:
 
 - Organize complicated DAGs, visually grouping tasks that belong together in the Airflow UI **Grid View** and **Graph View**.
-- Apply `default_args` to sets of tasks, instead of at the [DAG level](dags.md#dag-parameters).
+- Apply `default_args` to sets of tasks, instead of at the DAG level using [DAG parameters](dags.md#dag-parameters).
 - [Dynamically map](dynamic-tasks.md) over groups of tasks, enabling complex dynamic patterns.
 - Turn task patterns into modules that can be reused across DAGs or Airflow instances.
 
-In this guide, you'll learn how to create and use task groups in your DAGs. You can find many example DAGs using task groups in [this repository](https://github.com/astronomer/webinar-task-groups).
+In this guide, you'll learn how to create and use task groups in your DAGs. You can find many example DAGs using task groups on the [Astronomer GitHub](https://github.com/astronomer/webinar-task-groups).
 
 ![Task group intro gif](/img/guides/task-groups_intro_task_group_gif.gif)
 
@@ -37,23 +37,23 @@ To get the most out of this guide, you should have an understanding of:
 
 ## When to use task groups
 
-There are many use cases for task groups in Airflow DAGs and often they are used to visually organize complicated DAGs. For example, you might use task groups to organize tasks:
+Task groups are most often used to visually organize complicated DAGs. For example, you might use task groups:
 
-- In big ELT/ETL DAGs, where you could have a task group per table being modified, or per schema and leverage passing of different sets of `default_args` to each task group.
-- In MLOps DAGs, where you could have a task group per model being trained. 
-- In situations where several teams work on parts of the same DAG and you want to visually separate the tasks that belong to each team. In this case you might also want to consider separating the DAG into multiple DAGs and using [Datasets](airflow-datasets.md) to connect them.
+- In big ELT/ETL DAGs, where you have a task group per table or schema.
+- In MLOps DAGs, where you have a task group per model being trained. 
+- In DAGs owned by several teams, where you have task groups to visually separate the tasks that belong to each team. Although this case, it might be better to separate the DAG into multiple DAGs and use [Datasets](airflow-datasets.md) to connect them.
 - When you are using the same patterns of tasks in multiple DAGs and want to create a reusable module.
 
-Additionally when you have an input of unknown length, for example an unknown number of files in a directory, you can use task groups to [dynamically map](#generate-task-groups-dynamically-at-runtime) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
+- When you have an input of unknown length, for example an unknown number of files in a directory. You can use task groups to [dynamically map](#generate-task-groups-dynamically-at-runtime) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
 
 ## Define task groups
 
 There are two ways to define task groups in your DAGs:
 
-- Using the `TaskGroup` class to create a task group context
-- Using the `@task_group` decorator on a Python function
+- Use the `TaskGroup` class to create a task group context.
+- Use the `@task_group` decorator on a Python function.
 
-In most cases, it is a matter of personal preference which method you use. The only exception is when you want to [dynamically map](dynamic-tasks.md) over a task group; this is only possible using `@task_group`. See [Airflow decorators](airflow-decorators.md) for more information on decorators and the TaskFlow API.
+In most cases, it is a matter of personal preference which method you use. The only exception is when you want to [dynamically map](dynamic-tasks.md) over a task group; this is possible only when using `@task_group`. 
 
 The following code shows how to instantiate a simple task group containing two sequential tasks. You can use dependency operators (`<<` and `>>`) both within and between task groups in the same way that you can with individual tasks.
 
@@ -116,17 +116,23 @@ In the **Graph View** of the Airflow UI, task groups are shown in cornflower blu
 
 ![Task groups simple example](/img/guides/task-groups_simple_example.gif)
 
-In the **Grid View** of the Airflow UI, task groups have a note showing how many tasks they contain. Click on the note, for example `+ 2 tasks`, to expand the task group and on `- 2 tasks` to collapse it again. In this view you can also collapse and expand all task groups using the buttons on top of the task list or individual task groups by clicking on their downwards error as shown in the gif below.
+In the **Grid View** of the Airflow UI, task groups have a note showing how many tasks they contain. There are three ways to expand or collapse task groups in this view:
+
+- Click on the note (for example **+2 tasks**).
+- Click the buttons on top of the task list.
+- Click the arrow next to names of task groups in the task list.
+
+See the following GIF for examples of each of these options:
 
 ![Task groups simple example](/img/guides/task-groups_grid_view.gif)
 
-As of Airflow 2.7, task groups can be cleared and marked as successful/failed from the **Grid View** in the same way as individual tasks.
+In Airflow 2.7, task groups can be cleared and marked as successful/failed from the **Grid View** just like individual tasks.
 
 ![Task groups mark success/failed](/img/guides/task-groups_mark_success_failed.gif)
 
 ## Task group parameters
 
-When creating a task group there are a few parameters you can define, such as changing the UI color or adding a tooltip to your task group. The two most important parameters are the `group_id` which determines the name of your task group, as well as the `default_args` which will be passed to all tasks in the task group.
+You use parameters to customize individual task groups, such as by changing their UI color or adding a tooltip. The two most important parameters are the `group_id` which determines the name of your task group, as well as the `default_args` which will be passed to all tasks in the task group. The following examples show task groups with some commonly configured parameters:
 
 <Tabs
     defaultValue="decorator"
@@ -217,7 +223,7 @@ with TaskGroup(group_id="my_outer_task_group") as tg1:
 
 ## Passing data through task groups
 
-When using the `@task_group` decorator of the TaskFlow API you can pass data through the task group as with regular `@task` decorators:
+When you use the `@task_group` decorator, you can pass data through the task group just like with regular `@task` decorators:
 
 <CodeBlock language="python">{task_group_example}</CodeBlock>
 
@@ -228,7 +234,7 @@ The resulting DAG looks similar to this image:
 There are a few things to consider when passing information into and out of task groups:
 
 - If downstream tasks require the output of tasks that are in the task group decorator, then the task group function must return a result. In the previous example, a dictionary with two values was returned, one from each of the tasks in the task group, that are then passed to the downstream `load()` task.
-- If your task group function returns an output that another task takes as an input, Airflow can infer the task group and task dependency with the TaskFlow API. If your task group function does not return any output that is used as a task input, you must use the bit-shift operators (`<<` or `>>`) to define downstream dependencies to the task group.
+- If your task group function returns an output that another task takes as an input, Airflow can infer the task group and task dependency with the TaskFlow API. If your task group function's output isn't used as a task input, you must use the bit-shift operators (`<<` or `>>`) to define downstream dependencies to the task group.
 
 ## Generate task groups dynamically at runtime
 
@@ -307,7 +313,7 @@ The following image shows how these task groups appear in the Airflow UI:
 
 ![Task group Dependencies](/img/guides/task-groups_looped.png)
 
-This example also shows how to add an additional task to `group1` based on your `group_id`, demonstrating that even though you're creating task groups in a loop to take advantage of patterns, you can still introduce variations to the pattern while avoiding code redundancies introduced by building each task group definition manually.
+This example also shows how to add an additional task to `group1` based on your `group_id`, Even when you're creating task groups in a loop to take advantage of patterns, you can still introduce variations to the pattern while avoiding code redundancies.
 
 ## Nest task groups
 
@@ -382,14 +388,14 @@ The following image shows the expanded view of the nested task groups in the Air
 
 ## Custom task group classes
 
-If you use the same patterns of tasks in several DAGs or Airflow instances, it may be useful to create a custom task group class module. To do so, you need to inherit from the `TaskGroup` class and then define your tasks within that custom class. The task definitions will be the same as if you were defining them in a DAG file, with the only added requirement that you'll need to use `self` to assign the task to the task group.
+If you use the same patterns of tasks in several DAGs or Airflow instances, it may be useful to create a custom task group class module. To do so, you need to inherit from the `TaskGroup` class and then define your tasks within that custom class. You also need to use `self` to assign the task to the task group. Other than that, the task definitions will be the same as if you were defining them in a DAG file. 
 
 <CodeBlock language="python">{custom_task_group_example}</CodeBlock>
 
-In the DAG you import your custom TaskGroup class and instantiate it with the values for your custom arguments:
+In the DAG, you import your custom TaskGroup class and instantiate it with the values for your custom arguments:
 
 <CodeBlock language="python">{custom_task_group_example_dag}</CodeBlock>
 
-The resulting DAG shows the custom templated task group which can now be reused in other DAGs with different inputs for `num1` and `num2`.
+The resulting image shows the custom templated task group which can now be reused in other DAGs with different inputs for `num1` and `num2`.
 
 ![Custom task group](/img/guides/task-groups_custom_tg.png)
