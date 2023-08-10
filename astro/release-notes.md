@@ -23,9 +23,61 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest Astro Runtime Version**: 8.8 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.17.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.18.1 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## August 8, 2023
+
+### New Hosted worker type
+
+<HostedBadge/>
+
+You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+
+### Additional improvements
+
+- When you create a new Astro Cloud IDE project, you can now specify whether you want the project to include an example pipeline.
+- You can now access Organization-level settings in the Cloud UI only through the **Organization Settings** link. Additionally, some Organization settings have been moved to the top level of navigation so that there is no longer a **Settings** menu.
+- You can now use commas, apostrophes, and ampersands in Workspace and Organization names.
+- The Workspace list view in the Cloud UI has been redesigned so that Organization Owners can now edit and delete Workspaces directly from the list.
+
+### Bug fixes
+
+- Fixed an issue where the Cloud UI showed incorrect CPU and memory limits in bar charts on the Deployments list and **Details** page.
+
+## August 1, 2023
+
+### Hosted Deployments have DAG-only deploys enabled by default 
+
+<HostedBadge/>
+
+New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different. For more information about what happens to code deploys when DAG-only deploys are enabled, see [What happens during a project deploy](https://docs.astronomer.io/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://docs.astronomer.io/astro/deploy-dags#enable-disable-dag-only-deploys-on-a-deployment).
+
+### Teams now have Organization-level roles
+
+All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](https://docs.astronomer.io/astro/user-permissions#organization-roles) role, which doesn't result in any additional automatic permissions.
+
+Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-provisioning), you can now manage your Organization Owners and Billing Admins from your identity provider. See [Manage teams](https://docs.astronomer.io/astro/manage-teams) for more information. 
+
+### Additional improvements
+
+- The Cloud UI now shows how many Workspaces, DAGs, clusters, and Astro Cloud IDE projects you have in the left sidebar.
+- You can now create Deployments in standard clusters hosted in `europe-west2` on GCP and `eu-central-1` on AWS.
+- The default metadata database instance type for new Deployments on GCP clusters in Astro Hybrid has been reduced to `Small General Purpose` with 2 vCPUs and 8GiB. See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid).
+
+### Bug fixes
+
+- Because some regions don't support specific machine types that Astro Hosted uses, you can no longer create Hosted dedicated clusters in the following AWS regions:
+
+    - `af-south-1`
+    - `ap-east-1`
+    - `ap-northeast-2`
+    - `ap-northeast-3`
+    - `ca-central-1`
+    - `eu-south-1`
+    - `eu-west-3`
+    - `me-south-1`
 
 ## July 25, 2023
 
@@ -238,7 +290,7 @@ You can now export audit logs from the Cloud UI to view all actions taken in you
 
 Configure Teams from the Cloud UI to manage the permissions for many users across Workspaces from a single page. _Teams_ are a group of users in an Organization that you grant the same Workspace permissions, without needing to define them individually. 
 
-See [Make a Team](https://docs.astronomer.io/astro/add-user#make-a-team) for setup steps.
+See [Make a Team](https://docs.astronomer.io/astro/manage-teams) for setup steps.
 
 ### Bug fixes
 
@@ -768,14 +820,6 @@ Most importantly, the Astro Cloud IDE was developed to make it easier for new Ai
 
 To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
 
-:::info
-
-<!-- id to make it easier to remove: cloud-ide-preview-banner -->
-
-The Cloud IDE is currently in [Public Preview](feature-previews.md).
-
-:::
-
 ### Additional improvements
 
 - In the Cloud UI, cluster selection menus are now alphabetized.
@@ -1075,7 +1119,7 @@ For more information on Deployment configurations, see [Configure Deployment res
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
 - Organizations now need only a single AWS external ID for all clusters. Previously, each cluster required a unique external ID, which added complexity to the installation and cluster creation process.
-- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
+- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](manage-organization-users.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
 ## July 14, 2022
@@ -1230,7 +1274,7 @@ For more information about the installation process and supported configurations
 
 ### Support for Organization-Level user invites
 
-You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
+You can now [invite users to an Astro Organization](manage-organization-users.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
 
 ### Additional improvements
 

@@ -149,32 +149,33 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Manage Organizations",
+          label: "User access",
           items: [
-            {
-              type: "category",
-              label: "User access",
-              items: [
-                "configure-idp",
-                "set-up-scim-provisioning",
-                "manage-domains",
-                "add-user", 
-                "manage-teams", 
-                "user-permissions",
-              ],
-            },
+            "manage-organization-users",
+            "manage-workspace-users",
+            "manage-teams",  
+            "configure-idp",
+            "set-up-scim-provisioning",
+            "manage-domains",
+            "user-permissions",
+          ],
+        },
+        {
+          type: "category",
+          label: "Organizations",
+          items: [
             "organization-api-tokens",
             "audit-logs",
           ],
         },
         {
           type: "category",
-          label: "Manage Workspaces",
+          label: "Workspaces",
           items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
-          label: "Manage clusters",
+          label: "Clusters",
           items: [
             "create-dedicated-cluster",
             "resource-reference-hosted",
@@ -182,7 +183,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Manage Astro Hybrid",
+          label: "Astro Hybrid",
           items: [
             "hybrid-overview",
             {
@@ -287,6 +288,11 @@ module.exports = {
     },
     {
       type: "doc",
+      label: "Test your Astro project locally",
+      id: "cli/test-your-astro-project-locally",
+    },
+    {
+      type: "doc",
       label: "Authenticate to cloud services",
       id: "cli/authenticate-to-clouds",
     },
@@ -386,6 +392,7 @@ module.exports = {
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
             'cli/astro-dev-restart',
+            'cli/astro-dev-upgrade-test',
           ],
         },
         'cli/astro-login',
