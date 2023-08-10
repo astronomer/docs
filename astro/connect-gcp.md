@@ -10,26 +10,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro allows you to connect your Astro cluster to your external GCP resources using the external IPs of your Astro cluster. These external IPs are static and different for each Astro cluster. These need to be added to be whitelisted in your cloud account to allow access to your resources. 
+To allow your Astro cluster to connect to your external data sources, you can either rely on public network or communicate using a private network. If you want to use a private network, there are multiple options to choose from. 
 
-A cluster's IP addresses are the same for all Deployments running in that cluster. This is a one-time setup for each Astro cluster. 
-
-Use the following topics to learn aboud different available options to connect to your existing resources from Astro and how to configure them.
-
-## Prerequisites
-
-- External IP address of your Astro cluster
-- Permissions to access to your GCP cloud console
-
-## Retrieve external IP addresses for a cluster
-
-1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
-2. Click **Clusters**, then select a cluster.
-3. In the **Details** page, copy the IP addresses listed under **External IPs**.
+Use the following topics to learn about configuring various options available for connecting to your existing resources from Astro.
 
 ## Connection options
 
-The connection option that you choose is determined by the requirements of your organization and your existing infrastructure. You can choose a straightforward implementation, or a more complex implementation that provides enhanced data security. Astronomer recommends that you review all of the available connection options before selecting one for your organization.
+The option that you choose is determined by the security requirements of your company and your existing infrastructure.
 
 <Tabs
     defaultValue="Public endpoints"
@@ -41,9 +28,25 @@ The connection option that you choose is determined by the requirements of your 
     ]}>
 <TabItem value="Public endpoints">
 
-Publicly accessible endpoints allow you to quickly connect Deployments in Astro to AWS using Airflow connections. This does not required any special configuration on Astro or AWS side. See [Manage connections and variables](manage-connections-variables.md) to learn about various strategies to create Airflow connections.
+Publicly accessible endpoints allow you to quickly connect your Astro Deployments to GCP. In certain cases, you might need to whitelist your Astro cluster or Deployment to facilitate communication with your external GCP resources. You can choose to whitelist either your Astro cluster or just your Deployment by retrieveing the external IPs from your Cloud UI.
 
-When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
+### Retrieve IP addresses for a cluster to whitelist
+
+1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
+2. Click **Clusters**, then select a cluster.
+3. In the **Details** page, copy the IP addresses listed under **External IPs**.
+
+A cluster's IP addresses are the same for all the Deployments running in that cluster. This is a one-time setup for each Astro cluster.
+
+### Retrieve external IP addresses for a Deployment to whitelist
+
+To allow to access to your external resource on per Deployment basis or if you are using a standard cluster, you need the external IPs of your Deployment.
+
+1. In the Cloud UI, select a Deployment, then click **Details**.
+2. Copy the IP addresses under **External IPs**.
+3. (Optional) Add the IP addresses to the allowlist of any external services that need to interact with Astro.
+
+When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
 
 </TabItem>
 
@@ -93,3 +96,8 @@ gcloud services list --available --filter="name:googleapis.com"
 </TabItem>
 
 </Tabs>
+
+## See Also
+
+- [Manage Airflow connections and variables](manage-connections-variables.md)
+- [Authorize your Deployment using workload identity](authorize-using-workload-identity.md#gcp)

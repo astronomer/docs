@@ -7,13 +7,15 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
-Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. Astro Deployments must be authorized to access external resources running in your cloud.
+Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. 
 
-A Kubernetes service account provides an identity to the processes running in a Pod. The process running inside a Pod can use this identity of its associated service account to authenticate cluster's API server. Astro refers to this service account as workload identity. 
+Astro Deployments can be authorized to access external resources running in your cloud to avoid storing your credentials on disk or in an Airflow connection. Astronomer recommends using this method for all your Deployments because this method is the most secure.
 
-Workload identity is enabled by default on all your Astro Deployments running on AWS and GCP. You can authorize the workload identity of your Deployment to access services running in your cloud. After this is enabled for a Deployment, you don't need to store secrets in your Airflow connection to access these services. 
+## What is workload identity?
 
-Astronomer recommends using this method for all your Deployments because this method is most secure and does not store any credentials on disk.
+A Kubernetes service account provides an identity to the processes running in a Pod. The process running inside a Pod can use this identity of its associated service account to authenticate cluster's API server. This identity can be used to authorize your Deployment. Astro refers to this service account as workload identity. 
+
+Workload identity is enabled by default on all your Astro Deployments running on AWS and GCP. You can authorize your Deployment's workload identity to access services running in your cloud. After this is enabled for a Deployment, you don't need to store secrets in your Airflow connection to access your services.
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -38,7 +40,7 @@ To create an IAM role that is assumed by the workload identity of your Deploymen
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 4. Click **Roles** and in the **Role name** column, select the role you created in step 2.
 5. Click the **Trust relationships** tab.
-6. Click **Edit trust policy** and paste the `arn` you copied from Step 1 in the trust policy.
+6. Click **Edit trust policy** and paste the `arn` you copied from Step 1 in the trust policy as your `<workload-identity-role>`.
 
     ```json
     {
