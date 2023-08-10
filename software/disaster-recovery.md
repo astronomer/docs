@@ -115,7 +115,7 @@ To run `pg_dump` successfully, someone with “read” access to the Astronomer 
 Run the following command to return the connection string with the username and password:
 
 ```
-kubectl -n astronomer get secret  astronomer-houston-backend -o jsonpath='{.data.connection}' | base64 -d
+kubectl -n astronomer get secret  astronomer-houston-backend -o jsonpath='{.data.connection}' | base64 -D
 ```
 
 ## Restore
