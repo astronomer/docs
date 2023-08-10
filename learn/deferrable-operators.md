@@ -40,6 +40,11 @@ With deferrable operators, worker slots are released when a task is polling for 
 
 ![Deferrable Worker](/img/guides/deferrable_operator_process.png)
 
+There are numerous benefits to using deferrable operators including:
+
+- Reduced resource consumption: Depending on the available resources and the workload of your triggers, you can run hundreds to thousands of deferred tasks in a single triggerer process. This can lead to a reduction in the number of workers needed to run tasks during periods of high concurrency. With less workers needed, you are able to scale down the underlying infrastructure of your Airflow environment.
+- Resiliency against restarts: Triggers are stateless by design. This means your deferred tasks are not set to a failure state if a triggerer needs to be restarted due to a deployment or infrastructure issue. When a triggerer is back up and running in your environment, your deferred tasks will resume.
+
 :::tip
 
 When you can't use a deferrable operator for a longer running sensor task, such as when you can't run a triggerer, Astronomer recommends using a sensor in [`reschedule` mode](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) to reduce unnecessary resource overhead. See the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#difference-between-mode-reschedule-and-deferrable-true-in-sensors) for details about the differences between deferrable operators and schedulers in `reschedule` mode.
@@ -113,11 +118,6 @@ If you are using a deferrable operator that is part of a provider package, you w
    ```
 
 Note that importing the asynchronous operator using the alias of the analogous traditional operator (e.g. `import SnowflakeOperatorAsync as SnowflakeOperator`) is simply to make updating existing DAGs easier. This is not required, and may not be preferable when authoring a new DAG.
-
-There are numerous benefits to using deferrable operators including:
-
-- Reduced resource consumption: Depending on the available resources and the workload of your triggers, you can run hundreds to thousands of deferred tasks in a single triggerer process. This can lead to a reduction in the number of workers needed to run tasks during periods of high concurrency. With less workers needed, you are able to scale down the underlying infrastructure of your Airflow environment.
-- Resiliency against restarts: Triggers are stateless by design. This means your deferred tasks are not set to a failure state if a triggerer needs to be restarted due to a deployment or infrastructure issue. When a triggerer is back up and running in your environment, your deferred tasks will resume.
 
 ## Available deferrable operators
 
