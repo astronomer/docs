@@ -5,8 +5,8 @@ id: task-groups
 ---
 
 <head>
-  <meta name="description" content="Follow Astronomer’s step-by-step guide to use task groups for organizing tasks within the graph view of the Airflow user interface." />
-  <meta name="og:description" content="Follow Astronomer’s step-by-step guide to to use task groups for organizing tasks within the graph view of the Airflow user interface." />
+  <meta name="description" content="Follow Astronomer’s step-by-step guide to use task groups for organizing tasks within the grid view of the Airflow user interface." />
+  <meta name="og:description" content="Follow Astronomer’s step-by-step guide to to use task groups for organizing tasks within the grid view of the Airflow user interface." />
 </head>
 
 import Tabs from '@theme/Tabs';
@@ -20,7 +20,7 @@ import custom_task_group_example_dag from '!!raw-loader!../code-samples/dags/tas
 
 Airflow [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a tool to organize tasks into groups within your DAGs. Using task groups allows you to:
 
-- Organize complicated DAGs, visually grouping tasks that belong together in the Airflow UI **Grid View** and **Graph View**.
+- Organize complicated DAGs, visually grouping tasks that belong together in the Airflow UI **Grid View**.
 - Apply `default_args` to sets of tasks, instead of at the DAG level using [DAG parameters](dags.md#dag-parameters).
 - [Dynamically map](dynamic-tasks.md) over groups of tasks, enabling complex dynamic patterns.
 - Turn task patterns into modules that can be reused across DAGs or Airflow instances.
@@ -111,11 +111,7 @@ t0 >> tg1 >> t3
 </TabItem>
 </Tabs>
 
-In the **Graph View** of the Airflow UI, task groups are shown in cornflower blue by default. You can expand and collapse them by clicking anywhere on the task group. Expanded task groups will have blue circles when a dependency was defined up- or downstream the whole task group.
-
-![Task groups simple example](/img/guides/task-groups_simple_example.gif)
-
-In the **Grid View** of the Airflow UI, task groups have a note showing how many tasks they contain. There are three ways to expand or collapse task groups in this view:
+In the **Grid View** of the Airflow UI, task groups have a note showing how many tasks they contain. There are three ways to expand or collapse task groups:
 
 - Click on the note (for example **+2 tasks**).
 - Click the buttons on top of the task list.
@@ -125,7 +121,7 @@ See the following GIF for examples of each of these options:
 
 ![Task groups simple example](/img/guides/task-groups_grid_view.gif)
 
-In Airflow 2.7, task groups can be cleared and marked as successful/failed from the **Grid View** just like individual tasks.
+In Airflow 2.7, task groups can be cleared and marked as successful/failed just like individual tasks.
 
 ![Task groups mark success/failed](/img/guides/task-groups_mark_success_failed.gif)
 
@@ -148,8 +144,6 @@ You use parameters to customize individual task groups, such as by changing thei
     group_id="task_group_1",
     default_args={"conn_id": "postgres_default"},
     tooltip="This task group is very important!",
-    ui_color="#7352BA",  # Background color in graph view
-    ui_fgcolor="#FFFFFF",  # Font color for in graph view
     prefix_group_id=True,
     # parent_group=None,
     # dag=None,
@@ -168,8 +162,6 @@ with TaskGroup(
     group_id="task_group_2",
     default_args={"conn_id": "postgres_default"},
     tooltip="This task group is also very important!",
-    ui_color="#7352BA",  # Background color in graph view
-    ui_fgcolor="#FFFFFF",  # Font color for in graph view
     prefix_group_id=True,
     # parent_group=None,
     # dag=None,
@@ -180,6 +172,8 @@ with TaskGroup(
 
 </TabItem>
 </Tabs>
+
+In older Airflow versions using the **Graph** view you can change the background and font color of the task group with the `ui_color` and `ui_fgcolor` parameters.
 
 ## `task_id` in task groups
 
