@@ -41,9 +41,8 @@ Task groups are most often used to visually organize complicated DAGs. For examp
 
 - In big ELT/ETL DAGs, where you have a task group per table or schema.
 - In MLOps DAGs, where you have a task group per model being trained. 
-- In DAGs owned by several teams, where you have task groups to visually separate the tasks that belong to each team. Although this case, it might be better to separate the DAG into multiple DAGs and use [Datasets](airflow-datasets.md) to connect them.
+- In DAGs owned by several teams, where you have task groups to visually separate the tasks that belong to each team. Although in this case, it might be better to separate the DAG into multiple DAGs and use [Datasets](airflow-datasets.md) to connect them.
 - When you are using the same patterns of tasks in multiple DAGs and want to create a reusable module.
-
 - When you have an input of unknown length, for example an unknown number of files in a directory. You can use task groups to [dynamically map](#generate-task-groups-dynamically-at-runtime) over the input and create a task group performing sets of actions for each file. This is the only way to dynamically map sequential tasks in Airflow.
 
 ## Define task groups
