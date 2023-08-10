@@ -245,6 +245,6 @@ On Astro you can also manually mark Airflow variables as secrets when creating t
 
 :::info
 
-If you need to access the same sensitive information in several Airflow instances, consider using a [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
+If you need to access the same sensitive information in several Airflow instances, consider using a [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/security/secrets/secrets-backend/index.html).
 
 :::
