@@ -14,8 +14,8 @@ This document applies only to [Astro Hosted](astro-architecture.md). To see whet
 
 For Astro Hybrid resource reference material, see:
 
-- [AWS Hybrid cluster settings](resource-reference-aws-hybrid.md)
-- [Azure Hybrid cluster settings](resource-reference-azure-hybrid.md)
+- [AWS Hybrid cluster settings](resource-reference-gcp-hybrid.md)
+- [Azure Hybrid cluster settings](resource-reference-gcp-hybrid.md)
 - [GCP Hybrid cluster settings](resource-reference-gcp-hybrid.md)
 
 :::
