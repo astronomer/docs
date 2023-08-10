@@ -108,6 +108,8 @@ When using bit-shift operators and the `.set_upstream` and `.set_downstream` met
 Dependency functions are utilities that let you set dependencies between several tasks and lists of tasks. A common reason to use dependency functions over bit-shift operators is to create dependencies for tasks that were created in a loop and are stored in a list.
 
 ```python
+from airflow.models.baseoperator import chain
+
 list_of_tasks = []
 for i in range(5):
     if i % 3 == 0:
@@ -203,6 +205,8 @@ start >> multiply_obj >> end
 
 ```
 
+![Dependencies dynamic tasks](/img/guides/managing-dependencies_dynamic_tasks_decorator.png)
+
 </TabItem>
 
 <TabItem value="traditional">
@@ -222,16 +226,19 @@ multiply_obj = PythonOperator.partial(
 # end will only run if all mapped task instances of the multiply task are successful
 end = EmptyOperator(task_id="end")
 
+start >> multiply_obj >> end
+
 # all of the following ways of setting dependencies are valid
 # multiply_obj.set_downstream(end)
 # end.set_upstream(multiply_obj)
 # chain(start, multiply_obj, end)
 
 ```
+
+![Dependencies dynamic tasks](/img/guides/managing-dependencies_dynamic_tasks_traditional.png)
+
 </TabItem>
 </Tabs>
-
-![Dependencies dynamic tasks](/img/guides/managing-dependencies_dynamic_tasks.png)
 
 ## Task group dependencies
 
@@ -423,15 +430,23 @@ In the following example DAG there is a simple branch with a downstream task tha
 
 <CodeBlock language="python">{dependencies_branch_example_taskflow}</CodeBlock>
 
+This image shows the resulting DAG:
+
+![Branch Dependencies](/img/guides/managing-dependencies_branch_decorator.png)
+
 </TabItem>
 
 <TabItem value="traditional">
 
 <CodeBlock language="python">{dependencies_branch_example_traditional}</CodeBlock>
 
+This image shows the resulting DAG:
+
+![Branch Dependencies](/img/guides/managing-dependencies_branch_traditional.png)
+
 </TabItem>
 </Tabs>
 
-This image shows the resulting DAG:
 
-![Branch Dependencies](/img/guides/managing-dependencies_branch.png)
+
+
