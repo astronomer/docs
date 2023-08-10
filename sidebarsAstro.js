@@ -287,11 +287,6 @@ module.exports = {
     },
     {
       type: "doc",
-      label: "Test your Astro project locally",
-      id: "cli/test-your-astro-project-locally",
-    },
-    {
-      type: "doc",
       label: "Authenticate to cloud services",
       id: "cli/authenticate-to-clouds",
     },
@@ -391,7 +386,6 @@ module.exports = {
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
             'cli/astro-dev-restart',
-            'cli/astro-dev-upgrade-test',
           ],
         },
         'cli/astro-login',
