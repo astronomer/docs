@@ -19,7 +19,7 @@ If you're interested in documentation for a CI/CD tool or template type that doe
 
 ## DAG deploy templates
 
-_DAG deploy templates_ provide the additional capability to check the changes in your Astro project and accordingly chooses DAG deploy or image deploy allowing faster deploys. This template deploys your DAGs only when the files in your `dags` folder are modified, and it deploys the rest of your Astro project as a Docker image when other files or directories are modified. To learn more about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only) or ["The New, Faster Way to Deploy Airflow DAGs to Astro"](https://www.astronomer.io/blog/the-new-faster-way-to-deploy-airflow-dags-to-astro/) on the Astronomer blog.
+_DAG deploy templates_ check the changes in your Astro project and trigger either a dag deploy or image deploy based on the files changed, allowing for faster deploys. This template deploys your DAGs when only the files in your `dags` folder are modified, and it deploys the rest of your Astro project as a Docker image when any other files or directories are modified. To learn more about the benefits of this workflow, see [Deploy DAGs](deploy-dags.md).
 
 CI/CD templates that use the DAG deploy workflow:
 
