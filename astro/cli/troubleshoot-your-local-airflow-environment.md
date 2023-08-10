@@ -5,9 +5,9 @@ id: troubleshoot-your-local-airflow-environment
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.
 ---
 
-Some issues with a local Astro project can be solved only after running your local Airflow environment with `astro dev start`. For example, one of your DAGs might cause an error in your Airflow scheduler, which you can only know by triggering the task and checking your scheduler logs.
+Some issues with a local Astro project can be solved only after running your local Airflow environment with `astro dev start`.
 
-This document explains how to use Astro CLI commands to interact with a locally running Airflow environment and troubleshoot issues. Astronomer recommends troubleshooting after after successfully testing your Astro project.
+This document explains how to use Astro CLI commands to interact with a locally running Airflow environment and troubleshoot issues.
 
 ## View Airflow component logs
 
@@ -49,7 +49,7 @@ To make requests to the Airflow REST API in a Deployment on Astro, see [Airflow 
 
 ### cURL
 
-```sh
+```bash
 curl -X GET localhost:8080/api/v1/<endpoint> --user "admin:admin"
 ```
 
@@ -82,9 +82,9 @@ This command forces your running containers to stop and deletes all data associa
 
 When dependency errors occur, the error message that is returned often doesn't contain enough information to help you resolve the error. To retrieve additional error information, you can review individual operating system or python package dependencies inside your local Docker containers.
 
-For example, if your `packages.txt` file contains the `openjdk-8-jdk`, `gcc`, `g++`, or `libsas12-dev` packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
+For example, if your `packages.txt` file contains several packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
 
-1. Open the `requirements.txt` and `packages.txt` files for your project and remove the references to the packages that are returning error messages.
+1. Open your Astro project `packages.txt` file and remove the references to the packages that are returning error messages.
 
 2. Run the following command to build your Astro project into a Docker image and start a local Docker container for each Airflow component:
 
@@ -109,7 +109,7 @@ For example, if your `packages.txt` file contains the `openjdk-8-jdk`, `gcc`, `g
     apt-get install gcc
     ```
 
-5. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1 one by one until you find the package that is the source of the error.
+5. Open your Astro project `packages.txt` file and add the package references you removed in Step 1 one-by-one until you find the package that is the source of the error.
 
 ## Override the Astro CLI Docker Compose file
 
@@ -125,7 +125,7 @@ The Astro CLI does not support overrides to environment variables that are requi
 :::
 
 1. Reference the Astro CLI's default [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.yml) (`composeyml.yml`) and determine one or more configurations to override.
-2. Add a `docker-compose.override.yml` file to your Astro project.
+2. Add a `docker-compose.override.yml` file at the top level of your Astro project.
 3. Specify your new configuration values in `docker-compose.override.yml` file using the same format as in `composeyml.yml`.
 
 For example, to add another volume mount for a directory named `custom_dependencies`, add the following to your `docker-compose.override.yml` file:
@@ -140,7 +140,7 @@ services:
 
 Make sure to specify `version: "3.1"` and follow the format of the source code file linked above.
 
-To see your override file live in your local Airflow environment, run the following command to see the file in your scheduler container:
+Run the following command to see the override file in your scheduler container:
 
 ```sh
 astro dev bash --scheduler "ls -al"

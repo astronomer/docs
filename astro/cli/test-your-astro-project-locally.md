@@ -13,7 +13,7 @@ Use the `astro run` command to run a DAG from the command line. When you run the
 
 To run a DAG located within your local `/dags` directory run:
 
-```sh
+```bash
 astro run <dag-id>
 ```
 
@@ -26,7 +26,7 @@ You can run DAG unit tests with the following Astro CLI commands to quickly test
 - `astro dev parse`
 - `astro dev pytest`
 
-These commands don't require a running Airflow environment, meaning you can test DAGs without deploying to Astro or starting up Docker. 
+These commands don't require a running Airflow environment, meaning you can test DAGs without deploying to Astro or running Airflow locally. However, these commands do require Docker.
 
 ### Parse DAGs
 
