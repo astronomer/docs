@@ -17,14 +17,6 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Astro CLI 1.18.1
-
-Release date: August 4, 2023
-
-### Bug fix
-
-- Fixed an issue where `astro run` didn't work properly.
-
 ## Astro CLI 1.18.0
 
 Release date: August 3, 2023
