@@ -29,7 +29,17 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Release date: August 10, 2023
 - Airflow version: 2.7.0
 
-## New Python version distributions of Astro Runtime
+### Airflow 2.7
+
+Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features and improvements. Most notably, Airflow 2.7 includes the following changes:
+
+- Setup and teardown tasks are new type of task that you can use to manage execution resources and configurations for a subset of tasks. See [Use setup and teardown tasks in Airflow] fo more information on how to use these tasks.
+- You can now task groups or mark them as successful/failed from the Airflow UI **Grid View** just like individual tasks.
+- You can now set `operators.default_deferrable` in your Airflow config to always use the deferrable version of an operator if one is available, meaning that you no longer have to update import statements in DAGs to replace traditional operators with deferrable ones. 
+
+To learn more, see the [Apache Airflow 2.7.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-0-2023-08-14).
+
+### New Python version distributions of Astro Runtime
 
 Each new version of Astro Runtime now has separate distributions for Python 3.8, 3.9. 3.10 and 3.11. Using a Python distribution of Astro Runtime is the easiest way to use a specific Python version in Airflow. Image tags for Python distributions are formatted as:
 
@@ -41,15 +51,24 @@ For example, to use Python 3.8 in Astro Runtime 9.0.0, you would replace the ima
 
 As part of this change, the base image for a given Astro Runtime version now uses the same Python version as the Apache Airflow release it's bundled with. In Runtime 9.0.0, that version is Python 3.11. If you want to ensure that you keep using the same version of Python across multiple Astro Runtime upgrades, Astronomer recommends that you begin to use the Python distribution for your required Python version.
 
-## New slim distribution of Astro Runtime
+### New slim distribution of Astro Runtime
 
 Astronomer now maintains a slimmed down distribution of Astro Runtime with only the packages necessary for running Airflow on Astro. To be able to continue sending task logs, this version also includes some proprietary logging tools to replace larger cloud provider packages. The image tags for slim distributions for Astro Runtime are formatted as:
 
 TBD
 
-## Upgrade to Python 3.11
+### Upgrade to Python 3.11
 
 The base image for Astro Runtime now uses Python 3.11. If you want to use a different version of Python, replace your image with the appropriate Python distribution of Astro Runtime.
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.17.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1173-2023-08-07) for a complete list of changes.
+- Upgraded `astro-sdk-python` to 1.6.2. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+
+### Bug fixes
+
+- Fixed an issue where you could not DAG or task documentation in the Airflow UI for environments running on Astro.
 
 ## Astro Runtime 8.8.0
 
