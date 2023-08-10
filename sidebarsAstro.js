@@ -149,7 +149,7 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Organizations",
+          label: "Manage Organizations",
           items: [
             {
               type: "category",
@@ -169,12 +169,12 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Workspaces",
+          label: "Manage Workspaces",
           items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
-          label: "Clusters",
+          label: "Manage clusters",
           items: [
             "create-dedicated-cluster",
             "resource-reference-hosted",
@@ -182,7 +182,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Astro Hybrid",
+          label: "Manage Astro Hybrid",
           items: [
             "hybrid-overview",
             {
