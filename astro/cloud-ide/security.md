@@ -4,6 +4,13 @@ title: Astro Cloud IDE security & data governance
 id: security
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+The Cloud IDE is currently in [Public Preview](feature-previews.md).
+
+:::
+
 ## Security
 
 The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. All infrastructure is managed by Astronomer. Infrastructure is tightly scoped to organizations, so your code and data is never exposed to other organizations.

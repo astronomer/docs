@@ -4,6 +4,14 @@ title: Astro Cloud IDE quickstart
 id: quickstart
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in [Public Preview](feature-previews.md).
+
+:::
+
 Use this quickstart to create and run your first project with the Cloud IDE.
 
 ## Time to complete
