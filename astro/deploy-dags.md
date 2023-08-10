@@ -13,7 +13,7 @@ Enabling DAG-only deploys on Astro has a few benefits:
 
 - DAG-only deploys are significantly faster than project deploys.
 - Deployments pick up DAG-only deploys without restarting. This results in a more efficient use of workers and no downtime for your Deployments.
-- If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys. See [DAG-based templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-based-templates) for how you can set this up in your CI/CD pipelines.
+- If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys. See [DAG deploy templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-deploy-templates) for how you can set this up in your CI/CD pipelines.
 - You can use DAG deploys to update your DAGs when you have slow upload speed on your internet connection.
 
 ## Enable DAG-only deploys on a Deployment
@@ -26,7 +26,7 @@ Before you enable DAG-only deploys on a Deployment, ensure the following:
 
 :::warning
 
-Carefully read and complete all of the following steps to ensure that your Deployment is not disrupted by enabling this feature. Crucially, you must trigger a DAG-based deploy to your Astro Deployment using `astro deploy --dags` immediately after you enable the DAG-only deploy feature. If you don't complete this step, your DAGs will not be available in the Airflow UI until you update your Deployment. 
+Carefully read and complete all of the following steps to ensure that your Deployment is not disrupted by enabling this feature. Crucially, you must trigger a DAG deploy to your Astro Deployment using `astro deploy --dags` immediately after you enable the DAG-only deploy feature. If you don't complete this step, your DAGs will not be available in the Airflow UI until you update your Deployment. 
 
 :::
 

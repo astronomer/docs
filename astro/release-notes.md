@@ -726,7 +726,7 @@ For more information about these worker types, see [N2 machine series](https://c
 
 Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
 
-For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-based-templates)).
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-deploy-templates).
 
 ### Improved data lineage interface
 

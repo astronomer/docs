@@ -14,13 +14,13 @@ Use the following CI/CD template to automate deploying Apache Airflow DAGs from 
 - Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
-### DAG-based deploy
+### DAG deploy templates
 
 This CI/CD template can be used to deploy DAGs from a single S3 bucket to a single Astro Deployment. When you create or modify a DAG in the S3 bucket, a Lambda function triggers and initializes an `astro` project to deploy your DAGs using Astro CLI.
 
 :::info
 
-To deploy any non-DAG code changes to Astro, you need to trigger a standard image-only deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your S3 bucket. If your Astro project `dags` folder isn't up to date with your S3 DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
+To deploy any non-DAG code changes to Astro, you need to trigger a standard image based deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your S3 bucket. If your Astro project `dags` folder isn't up to date with your S3 DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
 
 :::
 

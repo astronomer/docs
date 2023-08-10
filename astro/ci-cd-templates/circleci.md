@@ -23,11 +23,11 @@ Refer to [Template overview](template-overview.md) to see generic templates expr
 
 ## Image deploy templates
 
-[Image-only deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
+[Image deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
 
 <Tabs
     defaultValue="standard"
-    groupId= "image-only-templates"
+    groupId= "image-deploy-templates"
     values={[
         {label: 'Single branch', value: 'standard'},
         {label: 'Multiple branch', value: 'multibranch'},
@@ -321,5 +321,5 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
 
 This script checks the diff between your current commit and the HEAD of your branch to which you are pushing the changes to. If the changes are only in `dags` then it executes a `dag-only` deploy. Otherwise, it executes an image-based deploy. Make sure to customize the script to use your specific branch and context. 
 
-You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy template](circleci?tab=multibranch#image-only-templates) by creating separate `job` and `workflow` for each branch.
+You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy template](circleci?tab=multibranch#image-deploy-templates) by creating separate `job` and `workflow` for each branch.
 

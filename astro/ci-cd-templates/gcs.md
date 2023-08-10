@@ -12,13 +12,13 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 - Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
-## DAG-based deploy
+## DAG deploy templates
 
 This CI/CD template can be used to deploy DAGs from a single GCS bucket to a single Astro Deployment. When you create or modify a DAG in the GCS bucket, a Cloud function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
 
 :::info
 
-To deploy any non-DAG code changes to Astro, you need to trigger a standard image-only deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your GCS bucket. If your Astro project `dags` folder isn't up to date with your GCS DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
+To deploy any non-DAG code changes to Astro, you need to trigger a standard image deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your GCS bucket. If your Astro project `dags` folder isn't up to date with your GCS DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
 
 :::
 
