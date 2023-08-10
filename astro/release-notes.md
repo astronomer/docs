@@ -271,7 +271,7 @@ You can now export audit logs from the Cloud UI to view all actions taken in you
 
 Configure Teams from the Cloud UI to manage the permissions for many users across Workspaces from a single page. _Teams_ are a group of users in an Organization that you grant the same Workspace permissions, without needing to define them individually. 
 
-See [Make a Team](https://docs.astronomer.io/astro/manage-teams) for setup steps.
+See [Make a Team](https://docs.astronomer.io/astro/add-user#make-a-team) for setup steps.
 
 ### Bug fixes
 
