@@ -133,11 +133,11 @@ When using sensors, keep the following in mind to avoid potential performance is
 
 ## Deferrable operators
 
-[Deferrable operators](deferrable-operators.md) (sometimes referred to as asynchronous operators) were released with Airflow 2.2 and are designed to eliminate the problem of any operator or sensor taking up a full worker slot for the entire time they are running. Many operators have a `deferrable` parameter which can be set to `True` to make the operator deferrable. For many sensors where this parameter is not available, deferrable versions exist in open source Airflow and in the [Astronomer Providers package](https://github.com/astronomer/astronomer-providers) (often having `Async` appended to the operator name). Astronomer recommends using these in most cases to reduce resource costs.
+[Deferrable operators](deferrable-operators.md) (sometimes referred to as asynchronous operators) were released with Airflow 2.2 and are designed to eliminate the problem of any operator or sensor taking up a full worker slot for the entire time they are running. Many operators have a `deferrable` parameter which can be set to `True` to make the operator deferrable. For the sensors where this parameter is not available, deferrable versions exist in open source Airflow and in the [Astronomer Providers package](https://github.com/astronomer/astronomer-providers). Astronomer recommends using these in most cases to reduce resource costs.
 
 For DAG authors, using deferrable sensors is no different from using regular sensors. All you need is to do is run a `triggerer` process in Airflow and either:
 
-- Set the Airflow config `operators.default_deferrable` to `True` to set all sensors with a `deferrable` parameter to use deferrable mode by default.
+- Set the Airflow config `operators.default_deferrable` to `True` to set all sensors with a `deferrable` parameter to be deferrable by default.
 - Set the `deferrable` parameter to `True` on individual sensor instances you want to run in deferrable mode.
 - Replace the name of a sensor with its deferrable counterpart if no `deferrable` parameter is available.
 
