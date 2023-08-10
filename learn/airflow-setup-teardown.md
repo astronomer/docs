@@ -53,7 +53,7 @@ Setup/teardown tasks have different behavior from regular tasks:
 
     ![Successful DAG with failed teardown](/img/guides/airflow-setup-teardown_teardown_fail_dag_succeed.png)
 
-- When a teardown task is within a [task group](task-groups.md) and a dependency is set on the task group, the teardown task will be ignored when evaluating if a dependency has been met. For example, `run_after_taskgroup`, which dependent on the `work_in_the_cluster` task group, will run even if the teardown task has failed or is still running.
+- When a teardown task is within a [task group](task-groups.md) and a dependency is set on the task group, the teardown task will be ignored when evaluating if a dependency has been met. For example, `run_after_taskgroup`, which is dependent on the `work_in_the_cluster` task group, will run even if the teardown task has failed or is still running.
 
     ![Task group with teardown](/img/guides/airflow-setup-teardown-task_after_taskgroup.png)
 
@@ -71,9 +71,9 @@ The way this DAG is set up, a failure in any of the worker tasks will lead to th
 
 ![DAG without setup/teardown - upstream failure](/img/guides/airflow-setup-teardown_nosutd_dag_fail.png)
 
-In this example, you can turn the `provision_cluster` task into a setup task and the `tear_down_cluster` into a teardown task by using the code examples shown in [Basic setup/teardown syntax](#basic-setupteardown-syntax). 
+In this example, you can turn the `provision_cluster` task into a setup task and the `tear_down_cluster` into a teardown task by using the code examples shown in [setup/teardown implementation](#setupteardown-implementation). 
 
-After you convert the tasks, the **Grid** view shows your setup tasks with an upwards arrow and teardown tasks with a downwards arrow. After you configure the [setup/teardown relationship](#defining-setupteardown-relationships) between `provision_cluster` and `tear_down_cluster`, they turn into a setup/teardown grouping and are connected by a dotted line. The tasks `worker_task_1`, `worker_task_2` and `worker_task_3` are in the scope of this setup/teardown grouping.
+After you convert the tasks, the **Grid** view shows your setup tasks with an upwards arrow and teardown tasks with a downwards arrow. After you configure the [setup/teardown relationship](#creating-setupteardown-groupings) between `provision_cluster` and `tear_down_cluster`, they turn into a setup/teardown grouping and are connected by a dotted line. The tasks `worker_task_1`, `worker_task_2` and `worker_task_3` are in the scope of this setup/teardown grouping.
 
 ![DAG with setup/teardown - all successful](/img/guides/airflow-setup-teardown-syntax_dag_successful.png)
 
@@ -94,22 +94,14 @@ There are two ways to turn tasks into setup/teardown tasks:
 - Using the `.as_setup()` and `.as_teardown()` methods on TaskFlow API tasks or traditional operators.
 - Using the `@setup` and `@teardown` decorators on a Python function.
 
-Setup and teardown tasks can be combined into groupings by:
-
-- Providing the setup task object to the `setups` argument in the `.as_teardown()` method of a teardown task object.
-- Connecting a setup and a teardown task with a normal task dependency using the bit-shift operator (`>>`) or a dependency function like `chain()`.
-- Providing the called object of a task created using the `@setup` decorator as an argument to a task created using the `@teardown` decorator.
-
-Which method you use is a matter of personal preference. However, note that if you are using `@setup` and `@teardown` decorators, you cannot use the `setups` argument.
-
-You can have multiple sets of setup and teardown tasks in a DAG, both in [parallel](#parallel-setupteardown-groupings) and [nested](#nested-setupteardown-groupings).
-
 Worker tasks can be added to the scope of a setup/teardown grouping in two ways:
 
 - By being between the setup and teardown tasks in the DAG dependency relationship.
 - By using a context manager with the `.teardown()` method.
 
 Which method you choose to add worker tasks to a setup/teardown scope is a matter of personal preference.
+
+You can define as many setup and teardown tasks in one DAG as you need. In order for Airflow to understand which setup and teardown tasks belong together, you need to [create setup/teardown groupings](#creating-setupteardown-groupings).
 
 ### `.as_setup()` and `.as_teardown()` methods
 
@@ -218,7 +210,7 @@ worker_task_obj >> my_teardown_task_obj.as_teardown()
 </TabItem>
 </Tabs>
 
-You can define as many setup and teardown tasks in one DAG as you need. In order for Airflow to understand which setup and teardown tasks belong together, you need to [define setup/teardown groupings](#creating-setup-teardown-groupings). 
+After you have defined your setup and teardown tasks you need to [define their groupings](#creating-setupteardown-groupings) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
 
 ### `@setup` and `@teardown` decorators
 
@@ -254,9 +246,19 @@ worker_task() >> my_teardown_task()
 
 ![Teardown task decorator](/img/guides/airflow-setup-teardown_teardown_decorators.png)
 
-After you have defined your setup and teardown tasks you need to [define their groupings](#defining-setupteardown-groupings) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
+After you have defined your setup and teardown tasks you need to [define their groupings](#creating-setupteardown-groupings) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
 
 ### Creating setup/teardown groupings
+
+Setup and teardown tasks can be combined into groupings by:
+
+- Providing the setup task object to the `setups` argument in the `.as_teardown()` method of a teardown task object.
+- Connecting a setup and a teardown task with a normal task dependency using the bit-shift operator (`>>`) or a dependency function like `chain()`.
+- Providing the called object of a task created using the `@setup` decorator as an argument to a task created using the `@teardown` decorator.
+
+Which method you use is a matter of personal preference. However, note that if you are using `@setup` and `@teardown` decorators, you cannot use the `setups` argument.
+
+You can have multiple sets of setup and teardown tasks in a DAG, both in [parallel](#parallel-setupteardown-groupings) and [nested](#nested-setupteardown-groupings).
 
 There are no limits to how many setup and teardown tasks you can have, nor are there limits to how many worker tasks you include in a grouping.
 
@@ -458,7 +460,7 @@ To define several teardown tasks for one setup task, you have to provide the set
 
 ![Setup/teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_teardowns_decorators.png)
 
-If you have a DAG with several setup and teardown tasks belonging together, you need to define explicit dependencies between each setup and each teardown to define the setup/teardown relationship.
+If your setup/teardown grouping contains more than one setup and one teardown task, you need to define several dependencies, when not using the `setups` argument. Each setup task needs to be set as an upstream dependency to each teardown task. The example below shows a setup/teardown grouping of two setup tasks and two teardown tasks. To define the grouping four dependencies need to be set.
 
 ```python
 (
