@@ -149,21 +149,20 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "User access",
-          items: [
-            "manage-organization-users",
-            "manage-workspace-users",
-            "manage-teams",  
-            "configure-idp",
-            "set-up-scim-provisioning",
-            "manage-domains",
-            "user-permissions",
-          ],
-        },
-        {
-          type: "category",
           label: "Organizations",
           items: [
+            {
+              type: "category",
+              label: "User access",
+              items: [
+                "configure-idp",
+                "set-up-scim-provisioning",
+                "manage-domains",
+                "add-user", 
+                "manage-teams", 
+                "user-permissions",
+              ],
+            },
             "organization-api-tokens",
             "audit-logs",
           ],

@@ -147,7 +147,7 @@ Astronomer support sends you a notification when your cluster is created. After 
 
 ## View clusters
 
-1. In the **Cloud UI**, click the Astronomer logo in the upper left corner to open your Organization's home page. 
+1. In the **Cloud UI**, go click the Astronomer logo in the top left corner to go to your Organization's home page. 
 2. Click **Clusters** to view a list of the clusters that are available to your Organization. 
 3. Click a cluster to view its information. See the following table for more information about each available information page.
 
@@ -243,11 +243,11 @@ You can raise a request with [Astronomer Support](https://cloud.astronomer.io/su
 
 As an Organization Owner, you can keep teams, resources, and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over your cloud resources by ensuring that only authorized pipelines are running on specific clusters.
 
-1. In the Cloud UI, click the Astronomer logo in the upper left corner to open your Organization's home page.
+1. In the Cloud UI, go click the Astronomer logo in the top left corner to go to your Organization's home page.
 2. Click **Clusters** tab and then select a cluster.
-3. Click the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
-4. Click **Restricted** and select the Workspaces that you want to map to the cluster. 
-5. Click **Update**.
+2. Click the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
+3. Click **Restricted** and select the Workspaces that you want to map to the cluster. 
+4. Click **Update**.
 
 After you authorize Workspaces to a cluster, Astro treats the cluster as restricted. Restricted clusters appear as an option when creating a new Deployment only if the Deployment's Workspace is authorized to the cluster. 
 

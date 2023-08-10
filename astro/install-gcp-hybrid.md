@@ -83,8 +83,7 @@ The CIDR range sizes must be equal to or greater than the default range sizes fo
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See  [Manage Workspace users](manage-workspace-users.md).
-    To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
 ## Activate the data plane
 
@@ -159,4 +158,4 @@ To confirm a successful installation, in the Cloud UI select a Workspace and on 
 - [Install the Astro CLI](cli/overview.md)
 - [Configure Deployments](configure-deployment-resources.md)
 - [Deploy code](deploy-code.md)
-- [Manage Organization users](manage-organization-users.md)
+- [Add users](add-user.md)

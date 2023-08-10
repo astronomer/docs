@@ -8,7 +8,7 @@ description: Create and manage Organization API tokens to automate key actions a
 Use Organization API tokens to automate across all Workspaces in your Organization, such as creating Deployments and managing users as part of your CI/CD pipelines. Organization API keys are particularly helpful for automating:
 
 - Creating Workspaces.
-- Inviting users to an Organization or Workspace. See [Add a group of users to Astro using the Astro CLI](manage-workspace-users.md#add-a-group-of-users-to-a-workspace-using-the-astro-cli).
+- Inviting users to an Organization or Workspace. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md).
 - Exporting audit logs.
 - Gathering metadata about Deployments using the Airflow REST API.
