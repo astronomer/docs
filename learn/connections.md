@@ -132,7 +132,7 @@ Airflow offers several ways to test your connections by calling the `test_connec
 
 :::note
 
-In Airflow 2.7+ testing connections by any of the methods above is disabled by default. You can enable connection testing by setting the [`test_connection` core config](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#test-connection) to `Enabled` by defining the environment variable `AIRFLOW__CORE__TEST_CONNECTION=Enabled` in your Airflow environment. It is strongly advised to **not** enable the feature until you make sure that only highly trusted UI/API users have "edit connection" permissions.
+In Airflow 2.7+ testing connections by any of the methods above is disabled by default. You can enable connection testing by setting the [`test_connection` core config](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#test-connection) to `Enabled` by defining the environment variable `AIRFLOW__CORE__TEST_CONNECTION=Enabled` in your Airflow environment. Astronomer recommends not to enable this feature until you made sure that only highly trusted UI/API users have "edit connection" permissions.
 
 :::
 

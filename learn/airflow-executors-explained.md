@@ -100,7 +100,7 @@ At its core, the Celery executor is built for horizontal scaling.
 
 If a worker node is ever down or goes offline, the Celery executor quickly adapts and is able to assign that allocated task or tasks to another worker.
 
-If you're running native Airflow, adopting a Celery executor means you'll have to set up an underlying database to support it (RabbitMQ/Redis). The Celery executor as available as part of the [Celery provider](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest).
+If you're running native Airflow, adopting a Celery executor means you'll have to set up an underlying database to support it (RabbitMQ/Redis). The Celery executor is available as part of the [Celery provider](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest).
 
 :::info
 
@@ -139,7 +139,7 @@ This means a few things:
     - Service accounts
     - Airflow image
 
-The Kubernetes executor is available as part of the [Kubernetes provider](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest).
+The Kubernetes executor is available as part of the [CNCF Kubernetes provider](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest).
 
 #### Scale to near-zero
 
