@@ -91,7 +91,7 @@ For more information on Airflow 2.3, see ["Apache Airflow 2.3.0 is here"](https:
 
 ## Prerequisites
 
-- An [Astro project](develop-project.md#create-an-astro-project).
+- An [Astro project](cli/develop-project.md#create-an-astro-project).
 - An [Astro Deployment](create-deployment.md).
 - The [Astro CLI](cli/install-cli.md).
 

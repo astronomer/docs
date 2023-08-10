@@ -508,7 +508,7 @@ Astro Runtime images now support both AMD64 and ARM64 processor architectures fo
 
 If you run the Astro CLI on a Mac computer that uses an ARM-based [Apple M1 Silicon chip](https://www.apple.com/newsroom/2020/11/apple-unleashes-m1/), you will see a significant performance improvement when running Airflow locally. For example, the time it takes to run `astro dev start` on average has decreased from over 5 minutes to less than 2 minutes.
 
-For more information on developing locally with the Astro CLI, see [Develop a Project](develop-project.md).
+For more information on developing locally with the Astro CLI, see [Develop a Project](cli/develop-project.md).
 
 ### Airflow 2.4.3 
 

@@ -8,7 +8,7 @@ hide_table_of_contents: true
 
 Pause all Docker containers running your local Airflow environment. Unlike `astro dev kill`, this command does not prune mounted volumes and delete data associated with your local Postgres database. If you run this command, Airflow connections and task history will be preserved.
 
-This command can be used regularly with `astro dev start` to apply changes to your Astro project as you test and troubleshoot DAGs. For more information, read [Build and run a project locally](develop-project.md#build-and-run-a-project-locally).
+This command can be used regularly with `astro dev start` to apply changes to your Astro project as you test and troubleshoot DAGs. For more information, read [Build and run a project locally](cli/develop-project.md#build-and-run-a-project-locally).
 
 ## Usage
 

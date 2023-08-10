@@ -1,13 +1,13 @@
 ---
-sidebar_label: 'Troubleshoot your Airflow environment'
-title: 'Troubleshoot your local Airflow environment using the Astro CLI'
+sidebar_label: 'Run a local Airflow environment'
+title: 'Run a local Airflow environment using the Astro CLI'
 id: troubleshoot-your-local-airflow-environment
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.
 ---
 
-Some issues with a local Astro project can be solved only after running your local Airflow environment with `astro dev start`.
+Running your Astro project locally is an easy way to test your code changes. Additionally, some issues with a local Astro project can be solved only after running your local Airflow environment with `astro dev start`.
 
-This document explains how to use Astro CLI commands to interact with a locally running Airflow environment and troubleshoot issues.
+This document explains how to use Astro CLI commands to interact with a locally running Airflow environment.
 
 ## View Airflow component logs
 
@@ -70,7 +70,7 @@ View local Kubernetes logs to troubleshoot issues with Pods that are created by 
 
 ## Hard reset your local environment
 
-In most cases, [restarting your local project](develop-project.md#restart-your-local-environment) is sufficient for testing and making changes to your project. However, it is sometimes necessary to kill your Docker containers and metadata database for testing purposes. To do so, run the following command:
+In most cases, [restarting your local project](cli/develop-project.md#restart-your-local-environment) is sufficient for testing and making changes to your project. However, it is sometimes necessary to kill your Docker containers and metadata database for testing purposes. To do so, run the following command:
 
 ```sh
 astro dev kill

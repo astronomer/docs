@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Develop a project'
+sidebar_label: 'Develop your Astro project'
 title: 'Develop your Astro project'
 id: develop-project
 ---
