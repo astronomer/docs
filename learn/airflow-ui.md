@@ -12,11 +12,9 @@ id: airflow-ui
 
 A notable feature of Apache Airflow is the [user interface (UI)](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), which provides insights into your DAGs and DAG runs. The UI is a useful tool for understanding, monitoring, and troubleshooting your pipelines.
 
-This guide is an overview of some of the most useful features and visualizations in the Airflow UI. Each section of this guide corresponds to one of the tabs at the top of the Airflow UI. If you're not already using Airflow and want to get it up and running to follow along, see [Install the Astro CLI](https://docs.astronomer.io/astro/cli/get-started) to quickly run Airflow locally.
+This guide is an overview of some of the most useful features and visualizations in the Airflow UI. If you're not already using Airflow and want to get it up and running to follow along, see [Install the Astro CLI](https://docs.astronomer.io/astro/cli/get-started) to quickly run Airflow locally.
 
-This guide focuses on the Airflow 2 UI. If you're using an older version of the UI, see [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/upgrading-from-1-10/index.html).
-
-All images in this guide were taken from an [Astronomer Runtime](https://docs.astronomer.io/astro/runtime-release-notes) Airflow image. Other than some modified colors and an additional `Astronomer` tab, the UI is the same as that of OSS Airflow.
+All images in this guide were taken from an [Astronomer Runtime](https://docs.astronomer.io/astro/runtime-release-notes) Airflow image. Other than some modified colors and an additional **Astronomer** tab, the UI is the same as when using OSS Airflow. The images in this guide are from Airflow version 2.7, if you are using an older version of Airflow, some UI elements might be slightly different or missing.
 
 ## Assumed knowledge
 
@@ -36,8 +34,8 @@ In the DAGs view you can:
 - Pause/unpause a DAG with the toggle to the left of the DAG name.
 - Filter the list of DAGs to show active, paused, or all DAGs.
 - Filter the list of DAGs to show currently running DAGs or DAGs that failed their last DAG run.
-- Trigger or delete a DAG with the buttons in the Actions section.
-- Navigate quickly to other DAG-specific pages from the Links section.
+- Trigger or delete a DAG with the buttons in the `Actions` section.
+- Navigate quickly to other DAG-specific views from the `Links` section.
 
 To see more information about a specific DAG, click its name or use one of the links.
 
@@ -74,7 +72,7 @@ When you select a task instance in the **Grid** view, four additional options ap
 
 - **More Details:**  Shows the fully rendered task - an exact summary of what the task does (attributes, values, templates, etc.).
 - **Rendered Template:** Shows the task's metadata after it has been templated.
-- **XCom:** Shows XComs created by that particular `TaskInstance`.
+- **XCom:** Shows XComs created by that particular task instance.
 - **List Instances, all runs:** Shows a historical view of task instances and statuses for that particular task.
 
 ### Actions
