@@ -35,44 +35,7 @@ In a Python cell, click **Dependencies** and select a cell to make it an explici
 
 To make a Python cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your Python cell. 
 
-## Create data dependencies for a Python cell
-
-You can use the output of other cells in your project within a Python function. You define these dependencies in Python, and the Cloud IDE automatically renders the dependencies in your project code and in the **Pipeline** view of your project.
-
-### Pass a value from one Python cell to another Python cell 
-
-Use the value of a Python cell's `return` statement in another Python cell by calling the name of the Python cell containing the `return` statement. Doing this automatically creates a dependency between the cells.
-
-For example, consider two Python cells. One cell is named `hello_world` and includes the following code:
-
-```sh
-return "Hello, world!"
-```
-
-Another cell is named `data_dependency` and includes the following code:
-
-```sh
-my_string = hello_world
-return my_string
-```
-
-The **Pipeline** view in the Cloud IDE shows the newly created dependency between these two cells. 
-
-![New dependency graph](/img/cloud-ide/data-dependency.png)
-
-### Pass a value from a SQL cell to a Python cell 
-
-Use the results of a SQL cell in your Python cell by calling the name of the SQL cell. The SQL cell must contain a `SELECT` statement. 
-
-The table created by the `SELECT` statement is automatically converted to pandas DataFrame and passed to the Python cell.
-
-The following Python cell is dependent on a SQL cell named `my_sql_cell`.
-
-```python
-df = my_sql_cell # my_sql_cell is a SQL cell which gets converted to a pandas DataFrame by default
-df['col_a'] = df['col_a'] + 1
-return df
-```
+To create data dependencies between Python cells, see [Pass data between cells](pass-data-between-cells.md).
 
 ## View complete code for Python cells
 
