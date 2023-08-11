@@ -223,7 +223,7 @@ To resolve a port availability error, you have the following options:
 - Stop all running Docker containers and restart your local environment using `astro dev restart`.
 - Change the default ports for these components. For example, you can use `astro config set webserver.port 8081` for the webserver and `astro config set postgres.port 5433` for Postgres. See [Configure CLI](cli/configure-cli.md) for all available configurations.
 
-### Stop all running Docker containers
+#### Stop all running Docker containers
 
 1. Run `docker ps` to identify the Docker containers running on your computer.
 2. Copy the values in the `CONTAINER ID` column.
@@ -232,7 +232,7 @@ To resolve a port availability error, you have the following options:
     - Run `docker stop <container_id>` to stop a specific Docker container. Replace `<container_id>` with one of the values you copied in step 2.
     - Run `docker stop $(docker ps -q)` to stop all running Docker containers.
 
-### Change the default port assignment
+#### Change the default port assignment
 
 If port 8080 or 5432 are in use on your machine by other services, the Airflow webserver and metadata database won't be able to start. To run these components on different ports, run the following commands in your Astro project:
 
