@@ -163,7 +163,7 @@ To create a potential dependency to a Python cell, the upstream Python cell must
 
    ![New dependency graph](/img/cloud-ide/data-dependency.png)
 
-You can generate data dependencies between any two cell types. To learn more about data dependencies, see [Pass data between cells](pass-data-between-cells.md).
+You can generate data dependencies between any two cell types. To learn more about data dependencies, see [Pass data between cells](pass-data-to-cells.md).
 ## Step 9: Run your pipeline
 
 Now that you've completed your pipeline, click **Run** in the top right corner of your pipeline editing window to run it from beginning to end. Cells are executed in order based on their dependencies. During the run, the **Pipeline** page shows which cells have been executed and which are still pending.
