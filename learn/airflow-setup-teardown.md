@@ -663,19 +663,21 @@ my_setup_task >> [my_worker_task_1_obj >> my_worker_task_2_obj] >> my_worker_tas
 
 The DAG shown in this example mimics a setup/ teardown pattern that you can run locally. The setup/ teardown workflow consists of the following tasks: 
 
-- The `create_csv` task will create a CSV file in a directory specified as a [DAG param](airflow-params.md). This task has been turned into a setup task.
-- The `write_to_csv` task will write data to the CSV file. This task has been turned into a setup task.
-- The `fetch_data` task will fetch data from a remote source and write it to the CSV file.  This task has been turned into a setup task.
-- The `delete_csv` task is the associated teardown task, deleting the resource of the CSV file.
-- The `get_average_age_obj` task is in the scope of the setup/ teardown workflow. A failure of this task would still need the resource "CSV file" to be deleted afterwards (to make it more real, consider the CSV file to be an expensive cluster). To recover from a failure when rerunning the `get_average_age_obj` task, you always need the CSV file to be created again, as well as the data to be fetched again and written to the CSV file. This automatically happens by rerunning the `create_csv`, `write_to_csv` and `fetch_data` tasks when the task in the scope of this setup/teardown workflow `get_average_age_obj` is cleared.
+- The `create_csv` task is a setup task that creates a CSV file in a directory specified as a [DAG param](airflow-params.md).
+- The `write_to_csv` task is a setup task that writes data to the CSV file.
+- The `fetch_data` task is a setup task that fetches data from a remote source and writes it to the CSV file. 
+- The `delete_csv` task is the associated teardown task and deletes the resource of the CSV file.
+- The `get_average_age_obj` task is in scope of setup/ teardown workflow. If this task fails, the DAG still needs to delete the "CSV file" afterwards (to make it more real, consider the CSV file to be an expensive cluster). 
 
-The DAG contains 3 tasks which are not part of the setup/ teardown workflow:
+    To recover from a failure when rerunning the `get_average_age_obj` task, you always need the CSV file to be created again, as well as the data to be fetched again and written to the CSV file. Because the task is in scope of `create_csv`, `write_to_csv`, and `fetch_data`, these tasks will also rerun when you rerun `get_average_age_obj`.
+
+The DAG contains 3 tasks which are not in scope of the setup/ teardown workflow:
 
 - The `start` task is an empty task at the start of the DAG.
 - The `report_file_path` task is a task that prints the path of the CSV file to the logs.
 - The `end` task is an empty task at the end of the DAG.
 
-This DAG comes with a convenience parameter to test setup/ teardown functionality. Toggle `fetch_bad_data` in the **Trigger DAG** view to cause bad data to get into the pipeline and the `get_average_age_obj` to fail. You will see that `delete_csv` will still run and delete the CSV file. In a real-world scenario, after fixing the data issue you would clear the `get_average_age_obj` task and all tasks of the setup/ teardown workflow can rerun and complete successfully.
+This DAG comes with a convenience parameter to test setup/ teardown functionality. Toggle `fetch_bad_data` in the **Trigger DAG** view to cause bad data to get into the pipeline and the `get_average_age_obj` to fail. You will see that `delete_csv` will still run and delete the CSV file. In a real-world scenario, after fixing the data issue you would clear the `get_average_age_obj` task and all tasks of the setup/ teardown workflow would rerun and complete successfully.
 
 <Tabs
     defaultValue="decorators"
