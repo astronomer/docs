@@ -167,5 +167,5 @@ To limit resource usage, you might want to delete your Deployment after you fini
 Now that you've created and run your first DAG on Astro, the next step is to add your own DAGs, build out the rest of your Astro project, and start testing real data. See:
 
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, including the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
-- [Deploy code to Astro](/astro/deploy-code).
-- [Develop a project](/astro/develop-project).
+- [Deploy code to Astro](deploy-code.md).
+- [Develop a project](cli/develop-project.md).
