@@ -64,13 +64,13 @@ There are 4 tabs available within the **Grid** view:
 
 The **Details** tab displays information about the DAG, individual DAG runs and in-depth information about each task instance. In the **Details** tab you will for example find the total historic runs of a DAG, the data interval start of a DAG run or the duration of a task instance. 
 
-In order to access the details of a specific DAG run or task instance, you need to select it in the grid first ans shown in the following gif:
+In order to access the details of a specific DAG run or task instance, you need first need to select it in the grid, as shown in the following gif:
 
 ![Grid view details](/img/guides/airflow-ui_grid_details.gif)
 
-When selecting a specific task instance the additional views are available.
+When you select a task instance in the **Grid** view, four additional options appear underneath the tabs:
 
-[Grid view task instance](/img/guides/airflow-ui_grid_ti_options.png)
+![Grid view task instance](/img/guides/airflow-ui_grid_ti_options.png)
 
 - **More Details:**  Shows the fully rendered task - an exact summary of what the task does (attributes, values, templates, etc.).
 - **Rendered Template:** Shows the task's metadata after it has been templated.
