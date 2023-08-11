@@ -9,6 +9,7 @@ from airflow.decorators import dag, task, setup, teardown
 from airflow.models.baseoperator import chain
 from pendulum import datetime
 from airflow.models.param import Param
+from airflow.operators.empty import EmptyOperator
 import os
 import csv
 import time
@@ -33,7 +34,15 @@ def get_params_helper(**context):
     },
     tags=["@setup", "@teardown", "setup/teardown"],
 )
-def setup_teardown_basic_decorators():
+def setup_teardown_csv_decorators():
+    start = EmptyOperator(task_id="start")
+    end = EmptyOperator(task_id="end")
+
+    @task
+    def report_filepath(**context):
+        folder, filename, cols = get_params_helper(**context)
+        print(f"Filename: {folder}/{filename}")
+
     @setup
     def create_csv(**context):
         folder, filename, cols = get_params_helper(**context)
@@ -45,7 +54,7 @@ def setup_teardown_basic_decorators():
             writer = csv.writer(f)
             writer.writerows([cols])
 
-    @task
+    @setup
     def fetch_data(**context):
         bad_data = context["params"]["fetch_bad_data"]
 
@@ -62,7 +71,7 @@ def setup_teardown_basic_decorators():
                 [3, "Lea", 19],
             ]
 
-    @task
+    @setup
     def write_to_csv(data, **context):
         folder, filename, cols = get_params_helper(**context)
 
@@ -92,6 +101,8 @@ def setup_teardown_basic_decorators():
         if not os.listdir(f"{folder}"):
             os.rmdir(f"{folder}")
 
+    start >> report_filepath() >> end
+
     create_csv_obj = create_csv()
     fetch_data_obj = fetch_data()
     write_to_csv_obj = write_to_csv(fetch_data_obj)
@@ -99,15 +110,19 @@ def setup_teardown_basic_decorators():
     delete_csv_obj = delete_csv()
 
     chain(
+        start,
         create_csv_obj,
         write_to_csv_obj,
         get_average_age_obj,
         delete_csv_obj,
+        end,
     )
 
     # when using @setup and @teardown the tasks can be linked using normal dependency syntax
     # or by leveraging task flow (see the complex example)
     create_csv_obj >> delete_csv_obj
+    fetch_data_obj >> delete_csv_obj
+    write_to_csv_obj >> delete_csv_obj
 
 
-setup_teardown_basic_decorators()
+setup_teardown_csv_decorators()
