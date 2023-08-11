@@ -1,6 +1,6 @@
 ---
 title: "Use setup and teardown tasks in Airflow"
-sidebar_label: "Setup/teardown tasks"
+sidebar_label: "Setup/ teardown tasks"
 description: "Learn how to use setup and teardown tasks to manage task resources in Airflow."
 id: airflow-setup-teardown
 ---
@@ -15,7 +15,7 @@ In production Airflow environments, it's best practice to set up resources and c
 
 Starting in Airflow 2.7, you can use a special type of task to create and delete resources. In this guide, you will learn all about _setup_ and _teardown tasks_ in Airflow.
 
-![DAG with setup/teardown - all successful](/img/guides/airflow-setup-teardown_intro_dag.png)
+![DAG with setup/ teardown - all successful](/img/guides/airflow-setup-teardown_intro_dag.png)
 
 ## Assumed knowledge
 
@@ -24,11 +24,11 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators).
 - Managing dependencies in Airflow. See [Manage task and task group dependencies in Airflow](managing-dependencies.md).
 
-## When to use setup/teardown tasks
+## When to use setup/ teardown tasks
 
-Setup/teardown tasks ensure that the necessary resources to run an Airflow task are set up before a task is executed and that those resources are torn down after the task has completed, regardless of any task failures.
+Setup/ teardown tasks ensure that the necessary resources to run an Airflow task are set up before a task is executed and that those resources are torn down after the task has completed, regardless of any task failures.
 
-Any existing Airflow task can be designated as a setup or teardown task, with special behavior and added visibility of the setup/teardown relationship in the Airflow UI.
+Any existing Airflow task can be designated as a setup or teardown task, with special behavior and added visibility of the setup/ teardown relationship in the Airflow UI.
 
 There are many use cases for setup and teardown tasks. For example, you might want to:
 
@@ -37,15 +37,15 @@ There are many use cases for setup and teardown tasks. For example, you might wa
 - Manage the resources to run [data quality](data-quality.md) checks.
 - Set up storage in your [custom XCom backend](custom-xcom-backends-tutorial.md) to hold data processed through Airflow tasks, then tear the extra storage down afterwards when the XCom data is no longer needed. 
 
-## Setup/teardown concepts
+## Setup/ teardown concepts
 
-Any task can be designated as a setup or a teardown task. A setup task, its teardown task, and the tasks in between constitute a setup/teardown workflow.
+Any task can be designated as a setup or a teardown task. A setup task, its teardown task, and the tasks in between constitute a _setup/ teardown workflow_.
 
-Tasks that run after a setup task and before the associated teardown task are considered to be _in scope_ of the setup / teardown workflow. Usually these tasks will use the resources set up by the setup task and which the teardown task will dismantle.
+Tasks that run after a setup task and before the associated teardown task are considered to be _in scope_ of the setup/ teardown workflow. Usually these tasks will use the resources set up by the setup task and which the teardown task will dismantle.
 
-Setup/teardown tasks have different behavior from regular tasks:
+Setup/ teardown tasks have different behavior from regular tasks:
 
-- Clearing a task that is in scope of a setup / teardown workflow will also clear and rerun the associated setup and teardown tasks, ensuring that all resources the task needs are created again for the task rerun and torn down after the task has completed.
+- Clearing a task that is in scope of a setup/ teardown workflow will also clear and rerun the associated setup and teardown tasks, ensuring that all resources the task needs are created again for the task rerun and torn down after the task has completed.
 
 - A teardown task will run as long as at least one of its associated `setup` tasks have completed successfully and all of its upstream tasks have completed, regardless of whether they were successful or not. If all associated setup tasks fail or are skipped, the teardown task will be failed or skipped respectively.
 
@@ -67,43 +67,43 @@ Setup and teardown tasks can help you write more robust DAGs by making sure reso
 
 The following DAG is not using Airflow setup and teardown functionality. It sets up its resources using a standard task called `provision_cluster`, runs three worker tasks using those resources, and tears down the resources using the `tear_down_cluster` task.
 
-![DAG without Setup/teardown - all successful](/img/guides/airflow-setup-teardown_nosutd_dag.png)
+![DAG without Setup/ teardown - all successful](/img/guides/airflow-setup-teardown_nosutd_dag.png)
 
 The way this DAG is set up, a failure in any of the worker tasks will lead to the `tear_down_cluster` task not running. This means that the resources will not be torn down and will continue to incur costs. Additionally, any downstream tasks depending on `tear_down_cluster` will also fail to run unless they have [trigger rules](managing-dependencies.md#trigger-rules) to run independent of upstream failures.
 
-![DAG without setup/teardown - upstream failure](/img/guides/airflow-setup-teardown_nosutd_dag_fail.png)
+![DAG without setup/ teardown - upstream failure](/img/guides/airflow-setup-teardown_nosutd_dag_fail.png)
 
-In this example, you can turn the `provision_cluster` task into a setup task and the `tear_down_cluster` into a teardown task by using the code examples shown in [setup/teardown implementation](#setupteardown-implementation). 
+In this example, you can turn the `provision_cluster` task into a setup task and the `tear_down_cluster` into a teardown task by using the code examples shown in [setup/ teardown implementation](#setup-teardown-implementation). 
 
-After you convert the tasks, the **Grid** view shows your setup tasks with an upwards arrow and teardown tasks with a downwards arrow. After you configure the [setup/teardown workflow](#creating-setupteardown-workflows) between `provision_cluster` and `tear_down_cluster`, the tasks are connected by a dotted line. The tasks `worker_task_1`, `worker_task_2` and `worker_task_3` are in the scope of this setup/teardown workflow.
+After you convert the tasks, the **Grid** view shows your setup tasks with an upwards arrow and teardown tasks with a downwards arrow. After you configure the [setup/ teardown workflow](#creating-setup-teardown-workflows) between `provision_cluster` and `tear_down_cluster`, the tasks are connected by a dotted line. The tasks `worker_task_1`, `worker_task_2` and `worker_task_3` are in the scope of this setup/ teardown workflow.
 
-![DAG with setup/teardown - all successful](/img/guides/airflow-setup-teardown-syntax_dag_successful.png)
+![DAG with setup/ teardown - all successful](/img/guides/airflow-setup-teardown-syntax_dag_successful.png)
 
 Now, even if one of the worker tasks fails, like `worker_task_2` in the following screenshot, the `tear_down_cluster` task will still run, the resources will be torn down, and downstream tasks will run successfully.
 
-![DAG with setup/teardown - upstream failure](/img/guides/airflow-setup-teardown_syntax_dag_fail.png)
+![DAG with setup/ teardown - upstream failure](/img/guides/airflow-setup-teardown_syntax_dag_fail.png)
 
 Additionally, when you clear any of the worker tasks, both the setup and teardown tasks will also be cleared and rerun. This is useful when you are recovering from a pipeline issue and need to rerun one or more tasks that use a resource independent of the other tasks in the scope.
 
 For example, in the previous DAG, consider if `worker_task_2` failed and `worker_task_3` was unable to run due to its upstream task having failed. If you cleared `worker_task_2` by clicking **Clear task**, both the setup task `provision_cluster` and the teardown task `tear_down_cluster` will be cleared and rerun in addition to `worker_task_2` and `worker_task_3`. This lets you completely recover without needing to rerun `worker_task_1` or manually rerun individual tasks.
 
-![DAG with setup/teardown - recovery](/img/guides/airflow-setup-teardown-clear_task.png)
+![DAG with setup/ teardown - recovery](/img/guides/airflow-setup-teardown-clear_task.png)
 
-## Setup/teardown implementation
+## Setup/ teardown implementation
 
-There are two ways to turn tasks into setup/teardown tasks: 
+There are two ways to turn tasks into setup/ teardown tasks: 
 
 - Using the `.as_setup()` and `.as_teardown()` methods on TaskFlow API tasks or traditional operators.
 - Using the `@setup` and `@teardown` decorators on a Python function.
 
-Worker tasks can be added to the scope of a setup/teardown workflow in two ways:
+Worker tasks can be added to the scope of a setup/ teardown workflow in two ways:
 
 - By being between the setup and teardown tasks in the DAG dependency relationship.
 - By using a context manager with the `.teardown()` method.
 
-Which method you choose to add worker tasks to a setup/teardown scope is a matter of personal preference.
+Which method you choose to add worker tasks to a setup/ teardown scope is a matter of personal preference.
 
-You can define as many setup and teardown tasks in one DAG as you need. In order for Airflow to understand which setup and teardown tasks belong together, you need to [create setup/teardown workflows](#creating-setupteardown-workflows).
+You can define as many setup and teardown tasks in one DAG as you need. In order for Airflow to understand which setup and teardown tasks belong together, you need to [create setup/ teardown workflows](#creating-setup-teardown-workflows).
 
 ### `.as_setup()` and `.as_teardown()` methods
 
@@ -212,7 +212,7 @@ worker_task_obj >> my_teardown_task_obj.as_teardown()
 </TabItem>
 </Tabs>
 
-After you have defined your setup and teardown tasks you need to [define their workflow](#creating-setupteardown-workflows) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
+After you have defined your setup and teardown tasks you need to [define their workflow](#creating-setup-teardown-workflows) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
 
 ### `@setup` and `@teardown` decorators
 
@@ -248,9 +248,9 @@ worker_task() >> my_teardown_task()
 
 ![Teardown task decorator](/img/guides/airflow-setup-teardown_teardown_decorators.png)
 
-After you have defined your setup and teardown tasks you need to [create their workflows](#creating-setupteardown-workflows) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
+After you have defined your setup and teardown tasks you need to [create their workflows](#creating-setup-teardown-workflows) in order for Airflow to know which setup and teardown tasks perform actions on the same resources.
 
-### Creating setup/teardown workflows
+### Creating setup/ teardown workflows
 
 Airflow needs to know which setup and teardown tasks are related based on the resources they manage. Setup and teardown tasks can be defined in the same workflow by:
 
@@ -260,22 +260,22 @@ Airflow needs to know which setup and teardown tasks are related based on the re
 
 Which method you use is a matter of personal preference. However, note that if you are using `@setup` and `@teardown` decorators, you cannot use the `setups` argument.
 
-You can have multiple sets of setup and teardown tasks in a DAG, both in [parallel](#parallel-setupteardown-workflows) and [nested](#nested-setupteardown-workflows) workflows.
+You can have multiple sets of setup and teardown tasks in a DAG, both in [parallel](#parallel-setup-teardown-workflows) and [nested](#nested-setup-teardown-workflows) workflows.
 
 There are no limits to how many setup and teardown tasks you can have, nor are there limits to how many worker tasks you include in their scope.
 
-For example, you could have one task that creates a cluster, a second task that modifies the environment within that cluster, and a third task that tears down the cluster. In this case you could define the first two tasks as setup tasks and the last one as a teardown task, all belonging to the same resource. In a second step, you could add 10 tasks performing actions on that cluster to the scope of the setup / teardown workflow.
+For example, you could have one task that creates a cluster, a second task that modifies the environment within that cluster, and a third task that tears down the cluster. In this case you could define the first two tasks as setup tasks and the last one as a teardown task, all belonging to the same resource. In a second step, you could add 10 tasks performing actions on that cluster to the scope of the setup/ teardown workflow.
 
 There are multiple methods for linking setup and teardown tasks.
 
 <Tabs
     defaultValue="taskflow_setups"
-    groupId="creating-setupteardown-workflows"
+    groupId="creating-setup-teardown-workflows"
     values={[
         {label: 'Setups argument (TaskFlow API)', value: 'taskflow_setups'},
         {label: 'Setups argument (Traditional syntax)', value: 'traditional_setups'},
         {label: 'Direct dependencies', value: 'taskflow_direct'},
-        {label: 'Using setup/teardown decorators', value: 'decorators'},
+        {label: 'Using setup/ teardown decorators', value: 'decorators'},
         {label: 'Using a context manager', value: 'context_manager'},
     ]}>
 <TabItem value="taskflow_setups">
@@ -304,7 +304,7 @@ my_setup_task_obj = my_setup_task()
 )
 ```
 
-![Setup/teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
+![Setup/ teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
 
 </TabItem>
 <TabItem value="traditional_setups">
@@ -343,7 +343,7 @@ my_teardown_task_obj = PythonOperator(
 )
 ```
 
-![Setup/teardown relationships traditional](/img/guides/airflow-setup-teardown-relationships_traditional_1.png)
+![Setup/ teardown relationships traditional](/img/guides/airflow-setup-teardown-relationships_traditional_1.png)
 
 </TabItem>
 <TabItem value="taskflow_direct">
@@ -370,12 +370,12 @@ This code creates an identical DAG using the `setups` argument.
 )
 ```
 
-![Setup/teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
+![Setup/ teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
 
 </TabItem>
 <TabItem value="decorators">
 
-With the`@setup` and `@teardown` decorators, you can define the setup/teardown workflow between two tasks either by defining direct dependencies or by providing the object of the setup task as an argument to the teardown task.
+With the`@setup` and `@teardown` decorators, you can define the setup/ teardown workflow between two tasks either by defining direct dependencies or by providing the object of the setup task as an argument to the teardown task.
 
 The latter pattern is often used to pass information like a resource id from the setup task to the teardown task.
 
@@ -400,19 +400,19 @@ my_setup_task_obj = my_setup_task()
 my_setup_task_obj >> worker_task() >> my_teardown_task(my_setup_task_obj)
 ```
 
-![Setup/Teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
+![Setup/ teardown method decorator](/img/guides/airflow-setup-teardown-relationships_decorators_1.png)
 
 </TabItem>
 <TabItem value="context_manager">
 
-You can also use a task that calls the `.as_teardown()` method to wrap a set of tasks that should be in scope of a setup/teardown workflow. The code snippet below shows three tasks being in scope of the setup/teardown workflow created by `my_cluster_setup_task` and `my_cluster_teardown_task`.
+You can also use a task that calls the `.as_teardown()` method to wrap a set of tasks that should be in scope of a setup/ teardown workflow. The code snippet below shows three tasks being in scope of the setup/ teardown workflow created by `my_cluster_setup_task` and `my_cluster_teardown_task`.
 
 ```python
 with my_cluster_teardown_task_obj.as_teardown(setups=my_cluster_setup_task_obj):
     worker_task_1() >> [worker_task_2(),  worker_task_3()]
 ```
 
-![Setup/teardown created using a context manager](/img/guides/airflow-setup-teardown_context_1.png)
+![Setup/ teardown created using a context manager](/img/guides/airflow-setup-teardown_context_1.png)
 
 Note that a task that was already instantiated outside of the context manager can still be added to the scope, but you have to do this explicitly using the `.add_task()` method on the context manager object.
 
@@ -430,7 +430,7 @@ with my_cluster_teardown_task_obj.as_teardown(
 </TabItem>
 </Tabs>
 
-#### Using multiple setup/teardown tasks in one workflow
+#### Using multiple setup/ teardown tasks in one workflow
 
 To define several setup tasks for one teardown task, you can pass a list of setup tasks to the `setups` argument. You do not need to call `.as_setup()` on any of the setup tasks.
 
@@ -444,7 +444,7 @@ To define several setup tasks for one teardown task, you can pass a list of setu
 )
 ```
 
-![Setup/teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_setups_decorators.png)
+![Setup/ teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_setups_decorators.png)
 
 To define several teardown tasks for one setup task, you have to provide the setup task object to the `setups` argument of the `.as_teardown()` method of each teardown task.
 
@@ -460,9 +460,9 @@ To define several teardown tasks for one setup task, you have to provide the set
 )
 ```
 
-![Setup/teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_teardowns_decorators.png)
+![Setup/ teardown relationships multiple setup](/img/guides/airflow-setup-teardown-multiple_teardowns_decorators.png)
 
-If your setup/teardown workflow contains more than one setup and one teardown task, you need to define several dependencies, when not using the `setups` argument. Each setup task needs to be set as an upstream dependency to each teardown task. The example below shows a setup/teardown workflow of two setup tasks and two teardown tasks. To define the workflow, you need to set four dependencies.
+If your setup/ teardown workflow contains more than one setup and one teardown task, you need to define several dependencies, when not using the `setups` argument. Each setup task needs to be set as an upstream dependency to each teardown task. The example below shows a setup/ teardown workflow of two setup tasks and two teardown tasks. To define the workflow, you need to set four dependencies.
 
 ```python
 (
@@ -495,15 +495,15 @@ This code creates an identical DAG using the `setups` argument.
 )
 ```
 
-![Multiple setups/teardowns](/img/guides/airflow-setup-teardown-multiple_setups_and_teardowns.png)
+![Multiple setups/ teardowns](/img/guides/airflow-setup-teardown-multiple_setups_and_teardowns.png)
 
-#### Parallel setup/teardown workflows
+#### Parallel setup/ teardown workflows
 
 You can have several independent sets of setup and teardown tasks in the same DAG. For example, you might have a workflow of tasks that sets up and tears down a cluster and another workflow that sets up and tears down a temporary database.
 
 <Tabs
     defaultValue="decorators"
-    groupId="parallel-setupteardown-workflows"
+    groupId="parallel-setup-teardown-workflows"
     values={[
         {label: '@setup/@teardown', value: 'decorators'},
         {label: '.as_teardown()', value: 'methods'},
@@ -610,18 +610,18 @@ my_database_setup_obj = my_database_setup_task()
 </TabItem>
 </Tabs>
 
-![Parallel groups of Setup/teardown](/img/guides/airflow-setup-teardown-parallel_st.png)
+![Parallel groups of setup/ teardown](/img/guides/airflow-setup-teardown-parallel_st.png)
 
-#### Nested setup/teardown workflows
+#### Nested setup/ teardown workflows
 
 You can nest setup and teardown tasks to have an outer and inner scope. This is useful if you have basic resources, such as a cluster that you want to set up once and then tear down after all the work is done, but you also have resources running on that cluster that you want to set up and tear down for individual groups of tasks.
 
-The example below shows the dependency code for a simple structure with an outer and inner setup/teardown workflow:
+The example below shows the dependency code for a simple structure with an outer and inner setup/ teardown workflow:
 
 - `outer_setup` and `outer_teardown` are the outer setup and teardown tasks.
-- `inner_setup` and `inner_teardown` are the inner setup and teardown tasks and both are in scope of the outer setup/teardown workflow.
-- `inner_worker_1` and `inner_worker_2` are worker tasks that are in scope of the inner setup/teardown workflow. All tasks in scope of the inner setup/teardown workflow will also be in scope of the outer setup/teardown workflow.
-- `outer_worker_1`, `outer_worker_2`, `outer_worker_3` are worker tasks that are in scope of the outer setup/teardown workflow.
+- `inner_setup` and `inner_teardown` are the inner setup and teardown tasks and both are in scope of the outer setup/ teardown workflow.
+- `inner_worker_1` and `inner_worker_2` are worker tasks that are in scope of the inner setup/ teardown workflow. All tasks in scope of the inner setup/ teardown workflow will also be in scope of the outer setup/ teardown workflow.
+- `outer_worker_1`, `outer_worker_2`, `outer_worker_3` are worker tasks that are in scope of the outer setup/ teardown workflow.
 
 ```python
 outer_setup_obj = outer_setup()
@@ -640,7 +640,7 @@ outer_teardown_obj = outer_teardown()
 outer_setup_obj >> outer_worker_3() >> outer_teardown_obj
 ```
 
-![Setup/teardown nesting](/img/guides/airflow-setup-teardown_nesting.png)
+![Setup/ teardown nesting](/img/guides/airflow-setup-teardown_nesting.png)
 
 Clearing a task will clear all setups and teardowns the task is in scope of, in addition to all downstream tasks. For example:
 
@@ -661,13 +661,13 @@ my_setup_task >> [my_worker_task_1_obj >> my_worker_task_2_obj] >> my_worker_tas
 
 ## Example DAG
 
-The DAG shown in this example mimics a setup/teardown pattern that you can run locally: 
+The DAG shown in this example mimics a setup/ teardown pattern that you can run locally: 
 
 - The `create_csv` file will create a CSV file in a directory specified as a [DAG param](airflow-params.md). This task has been turned into a setup task.
 - The `delete_csv` task is the associated teardown task, deleting the resource of the CSV file.
-- The `fetch_data`, `write_to_csv` and `get_average_age_obj` tasks are in the scope of the setup/teardown workflow. Any failure in these tasks would still need the resource "CSV file" to be deleted afterwards (to make it more real, consider the CSV file to be an expensive cluster). To recover from a failure when rerunning any of these tasks, you always need the CSV file to be created again, which automatically happens by rerunning the `create_csv` task when any of the tasks in scope are cleared.
+- The `fetch_data`, `write_to_csv` and `get_average_age_obj` tasks are in the scope of the setup/ teardown workflow. Any failure in these tasks would still need the resource "CSV file" to be deleted afterwards (to make it more real, consider the CSV file to be an expensive cluster). To recover from a failure when rerunning any of these tasks, you always need the CSV file to be created again, which automatically happens by rerunning the `create_csv` task when any of the tasks in scope are cleared.
 
-This DAG comes with a convenience parameter to test setup/teardown functionality. Toggle `fetch_bad_data` in the **Trigger DAG** view to cause bad data to get into the pipeline and the `get_average_age_obj` to fail. You will see that `delete_csv` will still run and delete the CSV file.
+This DAG comes with a convenience parameter to test setup/ teardown functionality. Toggle `fetch_bad_data` in the **Trigger DAG** view to cause bad data to get into the pipeline and the `get_average_age_obj` to fail. You will see that `delete_csv` will still run and delete the CSV file.
 
 <Tabs
     defaultValue="decorators"
@@ -688,4 +688,4 @@ This DAG comes with a convenience parameter to test setup/teardown functionality
 </TabItem>
 </Tabs>
 
-![Setup/teardown example DAG](/img/guides/airflow-setup-teardown_example_dag.png)
+![Setup/ teardown example DAG](/img/guides/airflow-setup-teardown_example_dag.png)
