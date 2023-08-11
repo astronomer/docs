@@ -58,13 +58,6 @@ If you need to set one of these variables for a particular use case, contact [As
 | `OPENLINEAGE_URL`                            | The URL for your Astro lineage backend. The destination for lineage metadata sent from external systems to the OpenLineage API. | `https://astro-<your-astro-base-domain>.datakin.com`       |
 | `OPENLINEAGE_API_KEY`                        | Your OpenLineage API key                                                                                                        | `<your-lineage-api-key>`                                   |
 
-:::info 
-
-¹ The `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID` environment variables are required only for Deployments running on AWS. For any Deployment running on an AWS cluster, they should not be overridden.
-
-There are no restrictions with setting these values for Deployments running on GCP and Azure.
-
-:::
 
 ## Default Runtime environment variables
 
