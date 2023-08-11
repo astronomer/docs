@@ -101,11 +101,11 @@ These statements are equivalent and result in the DAG shown in the following ima
 
 ![List Dependencies](/img/guides/managing-dependencies_list_dependencies.png)
 
-When using bit-shift operators and the `.set_upstream` and `.set_downstream` method, it is not possible to set dependencies between two lists. For example, `[t0, t1] >> [t2, t3]` returns an error. To set dependencies between lists, use the dependency functions described in the next section.
+When you use bit-shift operators and the `.set_upstream` and `.set_downstream` method, you can't set dependencies between two lists. For example, `[t0, t1] >> [t2, t3]` returns an error. To set dependencies between lists, use the dependency functions described in the following section.
 
 ## Dependency functions
 
-Dependency functions are utilities that let you set dependencies between several tasks and lists of tasks. A common reason to use dependency functions over bit-shift operators is to create dependencies for tasks that were created in a loop and are stored in a list.
+Dependency functions are utilities that let you set dependencies between several tasks or lists of tasks. A common reason to use dependency functions over bit-shift operators is to create dependencies for tasks that were created in a loop and are stored in a list.
 
 ```python
 from airflow.models.baseoperator import chain
@@ -128,7 +128,7 @@ This code creates the following DAG structure:
 
 ![List Dependencies](/img/guides/managing-dependencies_chain_dependencies_1.png)
 
-### chain()
+### Using `chain()`
 
 To set parallel dependencies between tasks and lists of tasks of the same length, use the [`chain()` function](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.chain). For example:
 
@@ -141,7 +141,7 @@ This code creates the following DAG structure:
 
 ![Chain Dependencies](/img/guides/managing-dependencies_chain_dependencies.png)
 
-When using the `chain` function, any lists or tuples that are set to depend directly on each other need to be of the same length.  
+When you use the `chain` function, any lists or tuples that are set to depend directly on each other need to be the same length.  
 
 ```python
 chain([t0, t1], [t2, t3])  # this code will work
@@ -149,11 +149,11 @@ chain([t0, t1], [t2, t3, t4])  # this code will cause an error
 chain([t0, t1], t2, [t3, t4, t5])  # this code will work
 ```
 
-### chain_linear()
+### Using `chain_linear()`
 
 To set interconnected dependencies between tasks and lists of tasks, use the `chain_linear()` function. This function is available in Airflow 2.7+, in older versions of Airflow you can set similar dependencies between two lists at a time using the [`cross_downstream()` function](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html#airflow.models.baseoperator.cross_downstream). 
 
-Replacing `chain` in the previous example with `chain_linear` will create dependencies such that each element in the downstream list will depend on each element in the upstream list.
+Replacing `chain` in the previous example with `chain_linear` creates dependencies where each element in the downstream list will depend on each element in the upstream list.
 
 ```python
 # from airflow.models.baseoperator import chain_linear
@@ -162,7 +162,7 @@ chain_linear(t0, t1, [t2, t3, t4], [t5, t6, t7], t8)
 
 ![Chain Linear Dependencies 2](/img/guides/managing-dependencies_chain_linear_dependencies_1.png)
 
-The `chain_linear()` function can take in lists of any length in any order. For example:
+The `chain_linear()` function can accept lists of any length in any order. For example, the following arguments are valid:
 
 ```python
 chain_linear([t0, t1], [t2, t3, t4])
@@ -172,7 +172,7 @@ chain_linear([t0, t1], [t2, t3, t4])
 
 ## Dependencies in dynamic task mapping
 
-Dependencies for [dynamically mapped tasks](dynamic-tasks.md) can be set in the same way as regular tasks. Keep in mind that when using the default [trigger rule](#trigger-rules) `all_success`, all mapped task instances need to be successful for the downstream task to run. For the purpose of trigger rules, mapped task instances behave like a set of parallel upstream tasks.
+Dependencies for [dynamically mapped tasks](dynamic-tasks.md) can be set in the same way as regular tasks. Note that when using the default [trigger rule](#trigger-rules) `all_success`, all mapped task instances need to be successful for the downstream task to run. For the purpose of trigger rules, mapped task instances behave like a set of parallel upstream tasks.
 
 <Tabs
     defaultValue="taskflow"
@@ -242,9 +242,9 @@ start >> multiply_obj >> end
 
 ## Task group dependencies
 
-[Task groups](task-groups.md) are an Airflow concept allowing for grouping of tasks in the UI and for [dynamic mapping use cases](task-groups.md#generate-task-groups-dynamically-at-runtime). You can get more information on task groups in the respective guide. This section will explain how to set dependencies between task groups.
+[Task groups](task-groups.md) are tasks that are logically grouped in the Airflow UI and for [dynamic mapping use cases](task-groups.md#generate-task-groups-dynamically-at-runtime). This section will explain how to set dependencies between task groups.
 
-Dependencies can be set both inside and outside of a task group. For example, in the following DAG code there is a start task, a task group with two dependent tasks, and an end task. All of these task need to happen sequentially. The dependencies between the two tasks in the task group are set within the task group's context (`t1 >> t2`). The dependencies between the task group and the start and end tasks are set within the DAG's context (`t0 >> tg1() >> t3`).
+Dependencies can be set both inside and outside of a task group. For example, in the following DAG code there is a start task, a task group with two dependent tasks, and an end task. All of these tasks need to happen sequentially. The dependencies between the two tasks in the task group are set within the task group's context (`t1 >> t2`). The dependencies between the task group and the start and end tasks are set within the DAG's context (`t0 >> tg1() >> t3`).
 
 <Tabs
     defaultValue="taskflow"
@@ -304,7 +304,7 @@ This image shows the resulting DAG:
 
 ![Task Group Dependencies](/img/guides/managing-dependencies_tg_dependencies_1.png)
 
-You can also set dependencies between task groups, between tasks outside of a task group and tasks inside a task group and even between tasks in different (nested) task groups.
+You can also set dependencies between task groups, between tasks inside and out of task groups, and even between tasks in different (nested) task groups.
 
 The image below shows types of dependencies that can be set between tasks and task groups. You can find the code that created this DAG in a GitHub repository both for the [TaskFlow API](https://github.com/astronomer/webinar-task-groups/blob/main/dags/example_complex_dependencies_1.py) and [traditional version](https://github.com/astronomer/webinar-task-groups/blob/main/dags/example_complex_dependencies_2.py).
 
@@ -322,7 +322,7 @@ This image shows the resulting DAG:
 
 ![TaskFlow Dependencies](/img/guides/managing-dependencies_taskflow_1.png)
 
-Note that it is also possible to assign the called function to an object and then pass that object to the downstream task. This way of defining dependencies between `@task` decorated tasks is often easier to read and allows you to set the same task as an upstream dependency to multiple other tasks. 
+Note that you can also assign the called function to an object and then pass that object to the downstream task. This way of defining dependencies is often easier to read and allows you to set the same task as an upstream dependency to multiple other tasks. 
 
 ```python
 @task 
