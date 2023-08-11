@@ -43,7 +43,7 @@ To see more information about a specific DAG, click its name or use one of the l
 
 ## Grid view
 
-The **Grid** view is the main DAG view and gives you detailed insights into a specific DAG, its DAG runs and tasks. When running the DAG, toggle **Auto-refresh** to see the status of the tasks update in real time.
+The **Grid** view is the main DAG view and gives you detailed insights into a specific DAG, including its DAG runs and task instances. When running the DAG, toggle **Auto-refresh** to see the status of the tasks update in real time.
 
 On the left side the **Grid** view shows a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered via a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
 
@@ -91,7 +91,7 @@ The **Gantt** tab shows the duration of each task instance in a DAG run as a Gan
 
 ### Code
 
-Under the **Code** tab you can access the code generating the DAG you are viewing. While your code should live in source control, the **Code** tab provides a quick insight into what is going on in the DAG. DAG code can't be edited in the UI.
+Under the **Code** tab you can access the code that generates the DAG you are viewing. While your code should live in source control, the **Code** tab provides a quick insight into what is going on in the DAG. DAG code can't be edited in the UI.
 
 ![Grid code](/img/guides/airflow-ui_grid_code.png)
 
@@ -137,8 +137,8 @@ The following are the additional DAG views that are available, but not discussed
 
 ## Cluster activity tab
 
-The cluster activity tab was added in Airflow 2.7 and shows metrics aggregated about the entire Airflow cluster. There are live metrics available such as currently occupied slots in different [pools](airflow-pools.md), unpaused DAGs and scheduler health.
-The historical metrics shown include states of past DAG runs, task instances and through which trigger DAGs were run.
+The cluster activity tab was added in Airflow 2.7 and shows aggregated metrics for the entire Airflow cluster. There are live metrics available such as currently occupied slots in different [pools](airflow-pools.md), unpaused DAGs and scheduler health.
+The historical metrics shown include states of past DAG runs, task instances and how DAGs runs were triggered.
 
 ![Cluster activity](/img/guides/airflow-ui_cluster_activity.png)
 
