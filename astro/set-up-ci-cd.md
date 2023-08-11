@@ -56,7 +56,7 @@ With this method, you can configure a CI/CD pipeline that deploys code to Astro 
 
 - Create a new, temporary branch in your Git repository against the `main` branch.
 - Make a change to your Astro project and push those changes to the branch. 
-- Test all project changes locally with the Astro CLI. See [Test your Astro project locally](cli/test-your-astro-project-locally.md) and [Troubleshoot your local Airflow environment](cli/troubleshoot-your-local-airflow-environment.md).
+- Test all project changes locally with the Astro CLI. See [Test your Astro project locally](cli/test-your-astro-project-locally.md) and [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 - Open a pull request for review.
 - When the pull request is approved and merged to the `main` branch, the change is automatically deployed to your Deployment on Astro and available in the Airflow UI.
 

@@ -235,11 +235,6 @@ module.exports = {
       ],
     },
     {
-      type: "doc",
-      label: "FAQs",
-      id: "astro-faq",
-    },
-    {
       type: "category",
       label: "Reference",
       items: [
