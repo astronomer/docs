@@ -109,7 +109,7 @@ This tab shows code only from the file that generated the DAG. It does not show 
 
 To access the [logs](logging.md#log-locations) of a specific task instance, click on the **Logs** tab which appears in the **Grid** view, as soon as you select a task instance.
 
-![Grid logs](/img/guides/airflow-ui_grid_logs.png)
+![Grid logs](/img/guides/airflow-ui_grid_logs.gif)
 
 ### Actions
 
