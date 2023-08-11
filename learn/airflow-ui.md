@@ -113,7 +113,7 @@ To access the [logs](logging.md#log-locations) of a specific task instance, clic
 
 ### Actions
 
-When a DAG run, task instance or [task group](#task-groups.md) instance is selected in the **Grid** view several action buttons appear.
+When a DAG run, task instance or [task group](task-groups.md) instance is selected in the **Grid** view several action buttons appear.
 
 ![Grid actions](/img/guides/airflow-ui_grid_actions.png)
 
