@@ -121,7 +121,7 @@ When a DAG run, task instance or [task group](task-groups.md) instance is select
 - **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without actually running it. This option is often used when the root cause of a task failure was fixed manually in the target data tool and the pipeline should continue after that task without rerunning it. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
 - **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, by selecting **Filter downstream** only the tasks downstream of your selected task will show. 
 
-![Grid filter](/img/guides/airflow-ui_grid_filter.png)
+![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
 
 ## Additional DAG views
 
