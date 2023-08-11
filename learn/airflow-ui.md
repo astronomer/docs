@@ -53,20 +53,12 @@ On the right side you can see further details about the item (DAG, DAG run or ta
 
 ![Grid view right side](/img/guides/airflow-ui_grid_right_side.png)
 
-There are 4 tabs available:
+There are 4 tabs available within the **Grid** view:
 
 - **Details**: Shows more details about the DAG, DAG run or task instance.
 - **Graph**: Shows a graph representation of the DAG, with tasks as nodes and dependencies as edges.
 - **Gantt**: Shows the duration of each task instance in a DAG run as a Gantt chart.
 - **Code**: Shows the DAG code.
-
-:::tip
-
-In Airflow 2.7 keyboard shortcuts where added to the **Grid** view. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
-
-![Grid view shortcuts](/img/guides/airflow-ui_shortcuts.png)
-
-:::
 
 ### Details
 
@@ -122,6 +114,12 @@ When a DAG run, task instance or [task group](task-groups.md) instance is select
 - **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, by selecting **Filter downstream** only the tasks downstream of your selected task will show. 
 
 ![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
+
+### Keyboard shortcuts
+
+In Airflow 2.7 keyboard shortcuts where added to the **Grid** view. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
+
+![Grid view shortcuts](/img/guides/airflow-ui_shortcuts.png)
 
 ## Additional DAG views
 
