@@ -667,7 +667,7 @@ The DAG shown in this example mimics a setup/ teardown pattern that you can run 
 - The `write_to_csv` task is a setup task that writes data to the CSV file.
 - The `fetch_data` task is a setup task that fetches data from a remote source and writes it to the CSV file. 
 - The `delete_csv` task is the associated teardown task and deletes the resource of the CSV file.
-- The `get_average_age_obj` task is in scope of setup/ teardown workflow. If this task fails, the DAG still needs to delete the "CSV file" afterwards (to make it more real, consider the CSV file to be an expensive cluster). 
+- The `get_average_age_obj` task is in scope of the setup/ teardown workflow. If this task fails, the DAG still needs to delete the "CSV file" afterwards (to make it more real, consider the CSV file to be an expensive cluster). 
 
     To recover from a failure when rerunning the `get_average_age_obj` task, you always need the CSV file to be created again, as well as the data to be fetched again and written to the CSV file. Because the task is in scope of `create_csv`, `write_to_csv`, and `fetch_data`, these tasks will also rerun when you rerun `get_average_age_obj`.
 
