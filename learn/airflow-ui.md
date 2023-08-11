@@ -206,16 +206,6 @@ Other pages on the **Admin** tab include:
 - **Providers:** View all [Airflow providers](https://airflow.apache.org/docs/apache-airflow-providers/) included in your Airflow environment with their version number.
 - **Pools:** View and manage [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html).
 
-### Legacy: Graph view
-
-The old **Graph** view was replaced by the integrated **Graph** tab in the **Grid** view in Airflow 2.7. It shows a visualization of the tasks and dependencies in your DAG and their current status for a specific DAG run. 
-
-![Graph View](/img/guides/2_4_GraphView.png)
-
-Click a specific task in the graph to access additional views and actions for the task instance. In Airflow 2.7+ you will find these options after clicking on a task instance in the **Grid** view.
-
-![Graph Actions](/img/guides/2_4_GraphView_TaskInstance.png)
-
 ## Docs
 
 The Docs tab provides links to external Airflow resources including:
@@ -232,3 +222,13 @@ The Docs tab provides links to external Airflow resources including:
 This guide provided a basic overview of some of the most commonly used features of the Airflow UI. 
 
 The Airflow community is consistently working on improvements to the UI to provide a better user experience and additional functionality. Make sure you upgrade your Airflow environment frequently to ensure you are taking advantage of Airflow UI updates as they are released.
+
+## Legacy: Graph view
+
+The old **Graph** view was replaced by the integrated **Graph** tab in the **Grid** view in Airflow 2.7. It shows a visualization of the tasks and dependencies in your DAG and their current status for a specific DAG run. 
+
+![Graph View](/img/guides/2_4_GraphView.png)
+
+Click a specific task in the graph to access additional views and actions for the task instance. In Airflow 2.7+ you will find these options after clicking on a task instance in the **Grid** view.
+
+![Graph Actions](/img/guides/2_4_GraphView_TaskInstance.png)
