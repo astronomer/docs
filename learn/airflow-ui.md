@@ -77,17 +77,29 @@ When you select a task instance in the **Grid** view, four additional options ap
 - **XCom:** Shows XComs created by that particular `TaskInstance`.
 - **List Instances, all runs:** Shows a historical view of task instances and statuses for that particular task.
 
+### Actions
+
+When a DAG run, task instance or [task group](task-groups.md) instance is selected in the **Grid** view several action buttons appear.
+
+![Grid actions](/img/guides/airflow-ui_grid_actions.png)
+
+- **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
+- **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without actually running it. This option is often used when the root cause of a task failure was fixed manually in the target data tool and the pipeline should continue after that task without rerunning it. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
+- **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, by selecting **Filter downstream** only the tasks downstream of your selected task will show. 
+
+![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
+
 ### Graph
 
 In Airflow version 2.6 and later, the **Grid** view includes an integrated graph visualization of the tasks and dependencies in your DAG. If you select a task or task group instance in the **Grid** column, the graph highlights and zooms to the selected task. You can also navigate complex DAGs using **Filter Tasks** and the minimap. This view is useful to explore the DAG structure and task dependencies.
 
 ![Grid graph](/img/guides/airflow-ui_grid_graph.gif)
 
-### Gantt
+:::note
 
-The **Gantt** tab shows the duration of each task instance in a DAG run as a Gantt chart. This view is often used to quickly identify which tasks cause a DAG to run long and which tasks were running in parallel.
+Earlier Airflow versions had a different **Graph** view that was not integrated into the **Grid** view. See the [Airflow documentation of your version](https://airflow.apache.org/docs/apache-airflow/2.6.3/ui.html#graph-view) for more information.
 
-![Grid gantt](/img/guides/airflow-ui_grid_gantt.png)
+:::
 
 ### Code
 
@@ -102,18 +114,6 @@ This tab shows code only from the file that generated the DAG. It does not show 
 To access the [logs](logging.md#log-locations) of a specific task instance, click on the **Logs** tab which appears in the **Grid** view, as soon as you select a task instance.
 
 ![Grid logs](/img/guides/airflow-ui_grid_logs.gif)
-
-### Actions
-
-When a DAG run, task instance or [task group](task-groups.md) instance is selected in the **Grid** view several action buttons appear.
-
-![Grid actions](/img/guides/airflow-ui_grid_actions.png)
-
-- **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
-- **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without actually running it. This option is often used when the root cause of a task failure was fixed manually in the target data tool and the pipeline should continue after that task without rerunning it. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
-- **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, by selecting **Filter downstream** only the tasks downstream of your selected task will show. 
-
-![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
 
 ### Keyboard shortcuts
 
@@ -138,13 +138,13 @@ The following are the additional DAG views that are available, but not discussed
 ## Cluster activity tab
 
 The cluster activity tab was added in Airflow 2.7 and shows aggregated metrics for the entire Airflow cluster. There are live metrics available such as currently occupied slots in different [pools](airflow-pools.md), unpaused DAGs and scheduler health.
-The historical metrics shown include states of past DAG runs, task instances and how DAGs runs were triggered.
+The historical metrics shown include states of past DAG runs, task instances and how DAG runs were triggered.
 
 ![Cluster activity](/img/guides/airflow-ui_cluster_activity.png)
 
 ## Datasets tab
 
-The **Dataset** tab was introduced in Airflow 2.4 in support of the new [dataset driven scheduling](airflow-datasets.md) feature. The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, as well as all dependencies between datasets and DAGs in a graph.
+The **Dataset** tab was introduced in Airflow 2.4 in support of the new [dataset-driven scheduling](airflow-datasets.md) feature. The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, as well as all dependencies between datasets and DAGs in a graph.
 
 ![Datasets](/img/guides/2_5_Datasets.png)
 
@@ -220,13 +220,3 @@ The Docs tab provides links to external Airflow resources including:
 This guide provided a basic overview of some of the most commonly used features of the Airflow UI. 
 
 The Airflow community is consistently working on improvements to the UI to provide a better user experience and additional functionality. Make sure you upgrade your Airflow environment frequently to ensure you are taking advantage of Airflow UI updates as they are released.
-
-## Legacy: Graph view
-
-The old **Graph** view was replaced by the integrated **Graph** tab in the **Grid** view in Airflow 2.7. It shows a visualization of the tasks and dependencies in your DAG and their current status for a specific DAG run. 
-
-![Graph View](/img/guides/2_4_GraphView.png)
-
-Click a specific task in the graph to access additional views and actions for the task instance. In Airflow 2.7+ you will find these options after clicking on a task instance in the **Grid** view.
-
-![Graph Actions](/img/guides/2_4_GraphView_TaskInstance.png)
