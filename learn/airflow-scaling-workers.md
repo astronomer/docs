@@ -87,7 +87,7 @@ Core settings control the number of processes running concurrently and how long 
 
 - `max_dagruns_to_create_per_loop`: The maximum number of DAGs to create DAG runs for per scheduler loop. Decrease the value to free resources for scheduling tasks. The default value is 10. 
 
-- `max_tis_per_query`: Changes the batch size of queries to the metastore in the main scheduling loop. A higher value allows more `tis` to be processed per query, but your query may become too complex and cause performance issues. The default value is 16 queries in Airflow 2.7+. Note that the `scheduler.max_tis_per_query` value needs to be lower than the `core.parallelism` value.
+- `max_tis_per_query`: Changes the batch size of queries to the metastore in the main scheduling loop. A higher value allows more `tis` to be processed per query, but your query may become too complex and cause performance issues. The default value is 16 queries. Note that the `scheduler.max_tis_per_query` value needs to be lower than the `core.parallelism` value.
 
 ### DAG-level Airflow settings
 
