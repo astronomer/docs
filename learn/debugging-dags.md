@@ -229,11 +229,11 @@ The following are some debugging steps you can try:
 
     ![Test Connections](/img/guides/test_connections_2.png)
 
-    :::note
+:::note
 
-    Testing connections is disabled by default in Airflow 2.7+. You can enable connection testing by defining the environment variable `AIRFLOW__CORE__TEST_CONNECTION=Enabled` in your Airflow environment. Astronomer recommends not enabling this feature until you are sure that only highly trusted UI/API users have "edit connection" permissions.
+Testing connections is disabled by default in Airflow 2.7+. You can enable connection testing by defining the environment variable `AIRFLOW__CORE__TEST_CONNECTION=Enabled` in your Airflow environment. Astronomer recommends not enabling this feature until you are sure that only highly trusted UI/API users have "edit connection" permissions.
 
-    :::
+:::
 
 To find information about what parameters are required for a specific connection:
 
