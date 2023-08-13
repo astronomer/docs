@@ -3,12 +3,12 @@ from airflow.decorators import task
 
 
 class MyCustomMathTaskGroup(TaskGroup):
-    """A task group summing two numbers."""
+    """A task group summing two numbers and multiplying the result with 23."""
 
     # defining defaults of input arguments num1 and num2
-    def __init__(self, group_id, num1=0, num2=0, **kwargs):
+    def __init__(self, group_id, num1=0, num2=0, tooltip="Math!", **kwargs):
         """Instantiate a MyCustomMathTaskGroup."""
-        super().__init__(group_id=group_id, ui_color="#32CD32", **kwargs)
+        super().__init__(group_id=group_id, tooltip=tooltip, **kwargs)
 
         # assing the task to the task group by using `self`
         @task(task_group=self)

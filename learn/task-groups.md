@@ -121,13 +121,13 @@ See the following GIF for examples of each of these options:
 
 ![Task groups simple example](/img/guides/task-groups_grid_view.gif)
 
-In Airflow 2.7, task groups can be cleared and marked as successful/failed just like individual tasks.
+In Airflow 2.7, task groups can be cleared and marked as success/failed just like individual tasks.
 
 ![Task groups mark success/failed](/img/guides/task-groups_mark_success_failed.gif)
 
 ## Task group parameters
 
-You use parameters to customize individual task groups, such as by changing their UI color or adding a tooltip. The two most important parameters are the `group_id` which determines the name of your task group, as well as the `default_args` which will be passed to all tasks in the task group. The following examples show task groups with some commonly configured parameters:
+You can use parameters to customize individual task groups. The two most important parameters are the `group_id` which determines the name of your task group, as well as the `default_args` which will be passed to all tasks in the task group. The following examples show task groups with some commonly configured parameters:
 
 <Tabs
     defaultValue="decorator"
@@ -173,11 +173,11 @@ with TaskGroup(
 </TabItem>
 </Tabs>
 
-In older Airflow versions using the **Graph** view you can change the background and font color of the task group with the `ui_color` and `ui_fgcolor` parameters.
+In older Airflow versions using the old **Graph** view you can change the background and font color of the task group with the `ui_color` and `ui_fgcolor` parameters.
 
 ## `task_id` in task groups
 
-When your task is within a task group, your callable `task_id` will be `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks when working with [XComs](airflow-passing-data-between-tasks.md) or [branching](airflow-branch-operator.md). You can disable this behavior by setting the [task group parameter](#task-group-parameters) `prefix_group_id=False`.
+When your task is within a task group, your callable `task_id` will be `group_id.task_id`. This ensures the `task_id` is unique across the DAG. It is important that you use this format when referring to specific tasks when working with [XComs](airflow-passing-data-between-tasks.md) or [branching](airflow-branch-operator.md). You can disable this behavior by setting the [task group parameter](#task-group-parameters) `prefix_group_id=False`.
 
 For example, the `task_1` task in the following DAG has a `task_id` of `my_outer_task_group.my_inner_task_group.task_1`.
 
@@ -220,7 +220,7 @@ When you use the `@task_group` decorator, you can pass data through the task gro
 
 <CodeBlock language="python">{task_group_example}</CodeBlock>
 
-The resulting DAG looks similar to this image:
+The resulting DAG looks is shown in the following image:
 
 ![Decorated task group](/img/guides/task-groups_passing_data_dag.png)
 
@@ -243,7 +243,7 @@ For more information on dynamic task mapping, including how to map over multiple
 
 By default, using a loop to generate your task groups will put them in parallel. If your task groups are dependent on elements of another task group, you'll want to run them sequentially. For example, when loading tables with foreign keys, your primary table records need to exist before you can load your foreign table.
 
-In the following example, the third task group generated in the loop has a foreign key constraint on both previously generated task groups (first and second iteration of the loop), so you'll want to process it last. To do this, you'll create an empty list and append your task Group objects as they are generated. Using this list, you can reference the task groups and define their dependencies to each other:
+In the following example, the third task group generated in the loop has a foreign key constraint on both previously generated task groups (first and second iteration of the loop), so you'll want to process it last. To do this, you'll create an empty list and append your task group objects as they are generated. Using this list, you can reference the task groups and define their dependencies to each other:
 
 <Tabs
     defaultValue="taskflow"
