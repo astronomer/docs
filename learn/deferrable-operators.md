@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import sync_dag from '!!raw-loader!../code-samples/dags/deferrable-operators/sync_dag.py';
 import async_dag from '!!raw-loader!../code-samples/dags/deferrable-operators/async_dag.py';
 
-With Airflow 2.2 and later, you can use deferrable operators to run tasks in your Airflow environment. These operators leverage the Python [asyncio](https://docs.python.org/3/library/asyncio.html) library to efficiently run tasks waiting for an external resource to finish. This frees up your workers and allows you to utilize resources more effectively. In this guide, you'll review deferrable operator concepts and learn which operators are deferrable.
+With Airflow 2.2 and later, you can use deferrable operators to run tasks in your Airflow environment. These operators leverage the Python [asyncio](https://docs.python.org/3/library/asyncio.html) library to efficiently run tasks waiting for an external resource to finish. This frees up your workers and allows you to utilize resources more effectively. In this guide, you'll review deferrable operator concepts and learn how to use deferrable operators in your DAGs.
 
 ## Assumed knowledge
 
@@ -36,7 +36,7 @@ With traditional operators, a task submits a job to an external system such as a
 
 ![Classic Worker](/img/guides/classic_worker_process.png)
 
-With deferrable operators, worker slots are released when a task is polling for job status. When the task is deferred, the polling process is offloaded as a trigger to the triggerer, and the worker slot becomes available. The triggerer can run many asynchronous polling tasks concurrently, and this prevents polling tasks from occupying your worker resources. When the terminal status for the job is received, the task resumes, taking a worker slot while it finishes. The following image illustrates this process:
+With deferrable operators, worker slots are released when a task is polling for the job status. When the task is deferred, the polling process is offloaded as a trigger to the triggerer, and the worker slot becomes available. The triggerer can run many asynchronous polling tasks concurrently, and this prevents polling tasks from occupying your worker resources. When the terminal status for the job is received, the task resumes, taking a worker slot while it finishes. The following image illustrates this process:
 
 ![Deferrable Worker](/img/guides/deferrable_operator_process.png)
 
@@ -67,9 +67,9 @@ As tasks are raised into a deferred state, triggers are registered in the trigge
 
 ### Use deferrable versions of operators
 
-Many Airflow operators, such as the [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator) and the [WasbBlobSensor](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest/modules/WasbBlobSensor)), can be set to run in deferrable mode using the `deferrable` parameter. You can check if the operator you want to use has a `deferrable` parameter in the [Astronomer Registry](https://registry.astronomer.io/).
+Many Airflow operators, such as the [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator) and the [WasbBlobSensor](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest/modules/WasbBlobSensor), can be set to run in deferrable mode using the `deferrable` parameter. You can check if the operator you want to use has a `deferrable` parameter in the [Astronomer Registry](https://registry.astronomer.io/).
 
-To always use the deferrable version of an operator if it's available, set the Airflow config `operators.default_deferrable` to `True`. You can do so by defining the following environment variable in your Airflow environment:
+To always use the deferrable version of an operator if it's available in Airflow 2.7+, set the Airflow config `operators.default_deferrable` to `True`. You can do so by defining the following environment variable in your Airflow environment:
 
 ```text
 AIRFLOW__OPERATORS__DEFAULT_DEFERRABLE=True
@@ -79,8 +79,8 @@ After you set the variable, all operators with a `deferrable` parameter will run
 
 ```python
 trigger_dag_run = TriggerDagRunOperator(
-   task_id="trigger_dag_run",
-   trigger_dag_id="helper_dag_wait_30_seconds",
+   task_id="task_in_downstream_dag",
+   trigger_dag_id="downstream_dag",
    wait_for_completion=True,
    poke_interval=20,
    deferrable=False,  # turns off deferrable mode just for this operator instance
@@ -126,7 +126,7 @@ The easiest way to check if an operator has a `deferrable` parameter or an `-Asy
 Some deferrable operators are installed by default in Airflow, including the [TimeSensorAsync](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TimeSensorAsync)
 and [TriggerDagRunOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/TriggerDagRunOperator). 
 
-Other deferrable operators are available in provider packages, including many built and maintained by Astronomer as part of the open source [Astronomer Providers](https://github.com/astronomer/astronomer-providers) Python package. For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html). 
+Other deferrable operators are available in provider packages, including many built and maintained by Astronomer as part of the open source [Astronomer Providers](https://github.com/astronomer/astronomer-providers) Python package. For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see the [Astronomer providers documentation](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html). 
 
 ## Example workflow
 
