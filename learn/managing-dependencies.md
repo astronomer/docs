@@ -69,13 +69,13 @@ For example, if you have a DAG with four sequential tasks, the dependencies can 
     t1.set_upstream(t0)
     ```
 
-- Using `>>`
+- Using `>>`:
 
     ```python
     t0 >> t1 >> t2 >> t3
     ```
 
-- Using `<<`
+- Using `<<`:
 
     ```python
     t3 << t2 << t1 << t0
@@ -242,7 +242,7 @@ start >> multiply_obj >> end
 
 ## Task group dependencies
 
-[Task groups](task-groups.md) are tasks that are logically grouped in the Airflow UI and for [dynamic mapping use cases](task-groups.md#generate-task-groups-dynamically-at-runtime). This section will explain how to set dependencies between task groups.
+[Task groups](task-groups.md) logically group tasks in the Airflow UI and can be [mapped dynamically](task-groups.md#generate-task-groups-dynamically-at-runtime). This section will explain how to set dependencies between task groups.
 
 Dependencies can be set both inside and outside of a task group. For example, in the following DAG code there is a start task, a task group with two dependent tasks, and an end task. All of these tasks need to happen sequentially. The dependencies between the two tasks in the task group are set within the task group's context (`t1 >> t2`). The dependencies between the task group and the start and end tasks are set within the DAG's context (`t0 >> tg1() >> t3`).
 
@@ -259,7 +259,7 @@ Dependencies can be set both inside and outside of a task group. For example, in
 ```python
 t0 = EmptyOperator(task_id="start")
 
-# Start Task Group definition
+# Start task group definition
 @task_group(
     group_id="group1"
 )
@@ -268,11 +268,11 @@ def tg1():
     t2 = EmptyOperator(task_id="task2")
 
     t1 >> t2
-# End Task Group definition
+# End task group definition
 
 t3 = EmptyOperator(task_id="end")
 
-# Set Task Group's (tg1) dependencies
+# Set task group's (tg1) dependencies
 t0 >> tg1() >> t3
 ```
 
@@ -283,17 +283,17 @@ t0 >> tg1() >> t3
 ```python
 t0 = EmptyOperator(task_id="start")
 
-# Start Task Group definition
+# Start task group definition
 with TaskGroup(group_id="group1") as tg1:
     t1 = EmptyOperator(task_id="task1")
     t2 = EmptyOperator(task_id="task2")
 
     t1 >> t2
-# End Task Group definition
+# End task group definition
     
 t3 = EmptyOperator(task_id="end")
 
-# Set Task Group's (tg1) dependencies
+# Set task group's (tg1) dependencies
 t0 >> tg1 >> t3
 ```
 
@@ -393,6 +393,8 @@ def sagemaker_model():
 sagemaker_model()
 
 ```
+
+To learn how to pass information between TaskFlow decorators and traditional tasks, see [Mixing TaskFlow decorators with traditional operators](airflow-decorators.md#mixing-taskflow-decorators-with-traditional-operators).
 
 ## Trigger rules
 
