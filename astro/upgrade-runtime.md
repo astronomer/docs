@@ -29,14 +29,15 @@ This is where you'll find the upgrade considerations for specific Astro Runtime 
 
 #### Runtime 9 (Airflow 2.7)
 
-##### Connection testing disabled by default
+##### Connection testing in the Airflow UI disabled by default
 
 In Airflow 2.7, connection testing in the Airflow UI is disabled by default. Astronomer does not recommend enabling the feature unless you fully trust all users who can access your Deployment's Airflow UI.
 
-To reenable the feature, set the following [environment variable](environment-variable.md) on your Deployment:
+To reenable the feature, set the following environment variable in your Astro project Dockerfile:
 
-- **Key**: `AIRFLOW__CORE__TEST_CONNECTION`
-- **Value**: `Enabled`
+```dockerfile
+ENV AIRFLOW__CORE__TEST_CONNECTION=Enabled
+```
 
 ##### Upgrade to Python 3.11
 
