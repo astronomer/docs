@@ -1,13 +1,8 @@
 ---
-sidebar_label: 'Develop your Astro project'
+sidebar_label: 'Develop your project'
 title: 'Develop your Astro project'
 id: develop-project
 ---
-
-<head>
-  <meta name="description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
-  <meta name="og:description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -162,7 +157,7 @@ Most DAGs need additional OS or Python packages to run. There are two primary ki
 - Python libraries. If you’re using Airflow for a data science project, for example, you might use a data science library such as [pandas](https://pandas.pydata.org/) or [NumPy (`numpy`)](https://numpy.org/).
 - Airflow providers. Airflow providers are Python packages that contain all relevant Airflow modules for a third-party service. For example, `apache-airflow-providers-amazon` includes the hooks, operators, and integrations you need to access services on Amazon Web Services (AWS) with Airflow. See [Provider packages](https://airflow.apache.org/docs/apache-airflow-providers/).
 
-Adding the name of a package to the `packages.txt` or `requirements.txt` files of your Astro project installs the package to your Airflow environment or Deployment. Python packages are installed from your `requirements.txt` file using [pip](https://pypi.org/project/pip/).
+Adding the name of a package to the `packages.txt` or `requirements.txt` files of your Astro project installs the package to your Airflow environment. Python packages are installed from your `requirements.txt` file using [pip](https://pypi.org/project/pip/).
 
 1. Add the package name to your Astro project. If it’s a Python package, add it to `requirements.txt`. If it’s an OS-level package, add it to `packages.txt`. The latest version of the package that’s publicly available is installed by default.
 
@@ -541,7 +536,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     astro dev start --image-name $image_name
     ```
   
-4. Optional. Deploy the image to a Deployment on Astro using the Astro CLI:
+4. Optional. Deploy the image to a Deployment on Astro using the Astro CLI.
 
 Your Astro project can now utilize Python packages from your private PyPi index.
 

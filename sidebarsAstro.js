@@ -286,33 +286,31 @@ module.exports = {
     },
     {
       type: "doc",
-      label: "Configure the CLI",
-      id: "cli/configure-cli",
-    },
-    {
-      type: "doc",
-      label: "Develop your Astro project",
+      label: "Develop your project",
       id: "cli/develop-project",
     },
     {
       type: "doc",
-      label: "Test your Astro project",
-      id: "cli/test-your-astro-project-locally",
-    },
-    {
-      type: "doc",
-      label: "Run Airflow locally",
+      label: "Run your project locally",
       id: "cli/run-airflow-locally",
     },
     {
       type: "doc",
-      label: "Authenticate to cloud services",
-      id: "cli/authenticate-to-clouds",
+      label: "Test your project",
+      id: "cli/test-your-astro-project-locally",
     },
     {
       type: "doc",
       label: "Release notes",
       id: "cli/release-notes",
+    },
+    {
+      type: "category",
+      label: "Advanced configuration",
+      items: [
+        "cli/configure-cli",
+        "cli/authenticate-to-clouds",
+      ],
     },
     {
       type: 'category',

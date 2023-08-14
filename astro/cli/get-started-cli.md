@@ -72,11 +72,9 @@ The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the
 
 ## Step 3: Develop locally with the CLI
 
-The `astro dev` command options include a number of other useful subcommands that you can use while developing locally. 
+Now that you have a locally running project, you can start to develop your Astro project by adding DAGs, dependencies, environment variables, and more. See [Develop your project](develop-project.md) for more details on how to modify all aspects of your Astro project. 
 
-### `astro dev restart`
-
-You must restart your environment to apply changes from any of the following files in your Astro project:
+Most changes you make, including updates to your DAG code, are applied automatically to your running environment and don't require rebuilding your project. However, you must rebuild your project and restart your environment to apply changes from any of the following files in your Astro project:
 
 - `packages.txt`
 - `Dockerfile`
@@ -90,18 +88,6 @@ astro dev restart
 ```
 
 This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting your environment, then run `astro dev start` when you want to restart.
-
-### `astro dev stop`
-
-Run the following to pause all Docker containers running your local Airflow environment. 
-
-```sh
-astro dev stop
-```
-
-Unlike `astro dev kill`, this command does not prune mounted volumes and delete data associated with your local Postgres database. If you run this command, Airflow connections and task history will be preserved.
-
-This command can be used regularly with `astro dev start` and `astro dev restart` during local development.
 
 ### `astro dev kill`
 

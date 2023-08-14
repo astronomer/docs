@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Run a local Airflow environment'
-title: 'Run a local Airflow environment using the Astro CLI'
+sidebar_label: 'Run your project locally'
+title: 'Run your Astro project in a local Airflow environment'
 id: run-airflow-locally
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.
 ---
@@ -8,6 +8,38 @@ description: Run commands in your local Airflow environment to troubleshoot runn
 Running your Astro project locally is an easy way to test your code changes. Additionally, some issues with a local Astro project can be solved only after running your local Airflow environment with `astro dev start`.
 
 This document explains how to use Astro CLI commands to interact with a locally running Airflow environment.
+
+## Start a local Airflow environment
+
+To begin running your project in a local Airflow environment, run:
+
+```bash
+astro dev start
+```
+
+This command builds your project and spins up 4 containers on your machine, each for a different Airflow component. After the command completes, you can access your project's Airflow UI at `https://localhost:8080/`.
+
+## Restart a local Airflow environment 
+
+To restart your local Airflow environment, run:
+
+```sh
+astro dev restart
+```
+
+This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting your environment, then run `astro dev start` when you want to restart.
+
+## Stop a local Airflow environment 
+
+Run the following to pause all Docker containers running your local Airflow environment. 
+
+```sh
+astro dev stop
+```
+
+Unlike `astro dev kill`, this command does not prune mounted volumes and delete data associated with your local Postgres database. If you run this command, Airflow connections and task history will be preserved.
+
+This command can be used regularly with `astro dev start` and `astro dev restart` during local development.
 
 ## View Airflow component logs
 

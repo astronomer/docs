@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Test your Astro project'
+sidebar_label: 'Test your project'
 title: 'Test your Astro project'
 id: test-your-astro-project-locally
 description: Check your Astro project for errors before you run it locally or deploy to Astro.
