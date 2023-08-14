@@ -27,7 +27,16 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
 
-#### Runtime 9 (Airflow 2.8)
+#### Runtime 9 (Airflow 2.7)
+
+##### Connection testing disabled by default
+
+In Airflow 2.7, connection testing in the Airflow UI is disabled by default. Astronomer does not recommend enabling the feature unless you fully trust all users who can access your Deployment's Airflow UI.
+
+To reenable the feature, set the following [environment variable](environment-variable.md) on your Deployment:
+
+- **Key**: `AIRFLOW__CORE__TEST_CONNECTION`
+- **Value**: `Enabled`
 
 ##### Upgrade to Python 3.11
 
