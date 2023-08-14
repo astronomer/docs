@@ -38,7 +38,9 @@ This document explains how to create Deployments through the Cloud UI. To create
 
 5. Click **Create Deployment**.
 
-     A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
+     A confirmation message appears indicating that the Deployment is in progress. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
+     
+You can continue to access your other Deployments by selecting the **Deployments** link.
     
     For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
 
