@@ -41,9 +41,9 @@ To see more information about a specific DAG, click its name or use one of the l
 
 ## Grid view
 
-The **Grid** view is the main DAG view and gives you detailed insights into a specific DAG, including its DAG runs and task instances. When running the DAG, toggle **Auto-refresh** to see the status of the tasks update in real time.
+The **Grid** view is the main DAG view and gives you detailed insights into a specific DAG, including its DAG runs and task instances. 
 
-On the left side the **Grid** view shows a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered via a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
+On the left side the **Grid** view shows a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run, and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered by a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
 
 ![Grid view left side](/img/guides/airflow-ui_grid_left_side.png)
 
@@ -54,15 +54,15 @@ On the right side you can see further details about the item (DAG, DAG run or ta
 There are 4 tabs available within the **Grid** view:
 
 - **Details**: Shows more details about the DAG, DAG run or task instance.
-- **Graph**: Shows a graph representation of the DAG, with tasks as nodes and dependencies as edges.
+- **Graph**: Shows a graph representation of the DAG.
 - **Gantt**: Shows the duration of each task instance in a DAG run as a Gantt chart.
 - **Code**: Shows the DAG code.
 
 ### Details
 
-The **Details** tab displays information about the DAG, individual DAG runs and in-depth information about each task instance. In the **Details** tab you will for example find the total historic runs of a DAG, the data interval start of a DAG run or the duration of a task instance. 
+The **Details** tab displays information about the DAG, individual DAG runs, and in-depth information about each task instance. Here you can find information like total historic runs of a DAG, the data interval start of a DAG run, and the duration of a task instance. 
 
-In order to access the details of a specific DAG run or task instance, you need first need to select it in the grid, as shown in the following gif:
+To access the details of a specific DAG run or task instance, you need first need to select it in the grid as shown in the following gif:
 
 ![Grid view details](/img/guides/airflow-ui_grid_details.gif)
 
@@ -70,20 +70,20 @@ When you select a task instance in the **Grid** view, four additional options ap
 
 ![Grid view task instance](/img/guides/airflow-ui_grid_ti_options.png)
 
-- **More Details:**  Shows the fully rendered task - an exact summary of what the task does (attributes, values, templates, etc.).
+- **More Details:**  Shows all attributes of a task, including variables and templates.
 - **Rendered Template:** Shows the task's metadata after it has been templated.
 - **XCom:** Shows XComs created by that particular task instance.
 - **List Instances, all runs:** Shows a historical view of task instances and statuses for that particular task.
 
 ### Actions
 
-When a DAG run, task instance or [task group](task-groups.md) instance is selected in the **Grid** view several action buttons appear.
+When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the **Grid** view, several action buttons appear:
 
 ![Grid actions](/img/guides/airflow-ui_grid_actions.png)
 
-- **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
-- **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without actually running it. This option is often used when the root cause of a task failure was fixed manually in the target data tool and the pipeline should continue after that task without rerunning it. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
-- **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, by selecting **Filter downstream** only the tasks downstream of your selected task will show. 
+- **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance, or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
+- **Mark state as...**: This button allows you to mark the selected DAG run, task group instanc,e or task instance as successful or failed without running it. This option is often useful when the root cause of a task failure was fixed manually in the external data tool and there's no need to rerun the task. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
+- **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task. 
 
 ![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
 
@@ -121,11 +121,11 @@ In Airflow 2.7 keyboard shortcuts where added to the **Grid** view. You can see 
 
 ## Additional DAG views
 
-The following are the additional DAG views that are available, but not discussed in this guide:
+There are some additional DAG views that are available, but not discussed in this guide:
 
 - **Calendar** view: Shows the state of DAG runs overlaid on a calendar. States are represented by color. If there were multiple DAG runs on the same day with different states, the color is a gradient between green (success) and red (failure).
 
-![Calendar View](/img/guides/2_4_CalendarView.png)
+    ![Calendar View](/img/guides/2_4_CalendarView.png)
 
 - **Task Duration:** Shows a line graph of the duration of each task over time.
 - **Task Tries:** Shows a line graph of the number of tries for each task in a DAG run over time.
@@ -135,8 +135,8 @@ The following are the additional DAG views that are available, but not discussed
 
 ## Cluster activity tab
 
-The cluster activity tab was added in Airflow 2.7 and shows aggregated metrics for the entire Airflow cluster. There are live metrics available such as currently occupied slots in different [pools](airflow-pools.md), unpaused DAGs and scheduler health.
-The historical metrics shown include states of past DAG runs, task instances and how DAG runs were triggered.
+The cluster activity tab was added in Airflow 2.7 and shows aggregated metrics for the entire Airflow cluster. It includes live metrics, such as currently occupied slots in different [pools](airflow-pools.md), unpaused DAGs, and scheduler health.
+It also includes historical metrics like the states of past DAG runs and task instances, as well as how each DAG run was triggered.
 
 ![Cluster activity](/img/guides/airflow-ui_cluster_activity.png)
 
