@@ -51,12 +51,28 @@ On the right side you can see further details about the item (DAG, DAG run or ta
 
 ![Grid view right side](/img/guides/airflow-ui_grid_right_side.png)
 
+When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the **Grid** view, several action buttons appear:
+
+![Grid actions](/img/guides/airflow-ui_grid_actions.png)
+
+- **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance, or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
+- **Mark state as...**: This button allows you to mark the selected DAG run, task group instanc,e or task instance as successful or failed without running it. This option is often useful when the root cause of a task failure was fixed manually in the external data tool and there's no need to rerun the task. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
+- **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task. 
+
+![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
+
 There are 4 tabs available within the **Grid** view:
 
 - **Details**: Shows more details about the DAG, DAG run or task instance.
 - **Graph**: Shows a graph representation of the DAG.
 - **Gantt**: Shows the duration of each task instance in a DAG run as a Gantt chart.
 - **Code**: Shows the DAG code.
+
+:::tip
+
+In Airflow 2.7 keyboard shortcuts where added to the **Grid** view. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
+
+:::
 
 ### Details
 
@@ -74,18 +90,6 @@ When you select a task instance in the **Grid** view, four additional options ap
 - **Rendered Template:** Shows the task's metadata after it has been templated.
 - **XCom:** Shows XComs created by that particular task instance.
 - **List Instances, all runs:** Shows a historical view of task instances and statuses for that particular task.
-
-### Actions
-
-When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the **Grid** view, several action buttons appear:
-
-![Grid actions](/img/guides/airflow-ui_grid_actions.png)
-
-- **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance, or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
-- **Mark state as...**: This button allows you to mark the selected DAG run, task group instanc,e or task instance as successful or failed without running it. This option is often useful when the root cause of a task failure was fixed manually in the external data tool and there's no need to rerun the task. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
-- **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task. 
-
-![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
 
 ### Graph
 
@@ -112,12 +116,6 @@ This tab shows code only from the file that generated the DAG. It does not show 
 To access the [logs](logging.md#log-locations) of a specific task instance, click on the **Logs** tab which appears in the **Grid** view, as soon as you select a task instance.
 
 ![Grid logs](/img/guides/airflow-ui_grid_logs.gif)
-
-### Keyboard shortcuts
-
-In Airflow 2.7 keyboard shortcuts where added to the **Grid** view. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
-
-![Grid view shortcuts](/img/guides/airflow-ui_shortcuts.png)
 
 ## Additional DAG views
 
