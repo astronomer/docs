@@ -17,7 +17,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources,
 
 This document explains how to create Deployments through the Cloud UI. To create Deployments programmatically using the Astro CLI, see:
 
-- [Astro CLI reference guide](cli/astro-deployment-create.md)
+- [`astro deployment create`](cli/astro-deployment-create.md)
 - [Manage Deployments as code](manage-deployments-as-code.md)
 
 ## Prerequisites
