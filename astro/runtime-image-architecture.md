@@ -150,17 +150,12 @@ An Astro Runtime image must be specified in the `Dockerfile` of your Astro proje
 
 ### Python version distributions
 
-Starting with Astro Runtime 9, Astronomer maintains different distributions of each Astro Runtime version for Python 3.8, 3.9. 3.10 and 3.11. Python version distribution images have the following format:
+Starting with Astro Runtime 9, Astronomer maintains different distributions Astro Runtime for each supported Python version. Python version distribution images have the following format:
 
 ```text
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-### Slim version distributions
-
-Astronomer maintains a slim distribution of Astro Runtime with only the packages necessary for running Airflow on Astro. To be able to continue sending task logs, this version also includes some proprietary logging tools to replace larger cloud provider packages. The image tags for slim distributions for Astro Runtime are formatted as:
-
-TBD
 
 ## System distribution
 
