@@ -31,11 +31,11 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 
 - Fixed an issue where configurations in `astronomer.houston.config.deployments.components` applied only to Deployments that were created after the configuration was set. 
 - Fixed an issue where a Workspace-level service account would improperly inherit lesser permissions for Deployments it was added to.
-- Fixed an issue where the Astronomer UI would still show a **Delete** button for Teams for roles that did not have the `system.teams.remove` permission.
+- The Astronomer UI now shows an error if you click the **Delete** button for Teams and you don't have the `system.teams.remove` permission.
 - Fixed an issue where you couldn't upgrade a Deployment's Airflow version if the Deployment used git-sync deploys and had default resources.
 - Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG.
 - Fixed an issue where you couldn't set `properties.email` using the `upsertDeployment` mutation.
-- Fixed an issue where the Astronomer UI would freeze if a System Admin user viewed service accounts without the appropriate permissions. 
+- Fixed an issue where the Astronomer UI would not show the right error screen when a user without the appropriate permissions viewed service accounts. 
 - Fixed the following vulnerabilities:
 
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
