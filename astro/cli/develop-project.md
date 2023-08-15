@@ -163,14 +163,16 @@ Adding the name of a package to the `packages.txt` or `requirements.txt` files o
 
     To pin a version of a package, use the following syntax:
 
-      ```text
-      <package-name>==<version>
-      ```
+    ```text
+    <package-name>==<version>
+    ```
+
     For example, to install NumPy version 1.23.0, add the following to your `requirements.txt` file:
 
-      ```text
-      numpy==1.23.0
-      ```
+    ```text
+    numpy==1.23.0
+    ```
+
 2. [Restart your local environment](#restart-your-local-environment).
 3. Confirm that your package was installed:
 

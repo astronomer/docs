@@ -5,7 +5,7 @@ id: run-airflow-locally
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.
 ---
 
-Running your Astro project locally is an easy way to test your code changes. Additionally, some issues with a local Astro project can be solved only after running your local Airflow environment with `astro dev start`.
+Running your Astro project locally is an easy way to test your code changes. Additionally, you can only troubleshoot some issues in a project after running your local Airflow environment with `astro dev start`.
 
 This document explains how to use Astro CLI commands to interact with a locally running Airflow environment.
 
@@ -141,7 +141,7 @@ For example, if your `packages.txt` file contains several packages and you recei
     apt-get install gcc
     ```
 
-5. Open your Astro project `packages.txt` file and add the package references you removed in Step 1 one-by-one until you find the package that is the source of the error.
+5. Open your Astro project `packages.txt` file and add the package references you removed in Step 1 individually until you find the package that is the source of the error.
 
 ## Override the Astro CLI Docker Compose file
 
