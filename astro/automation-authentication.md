@@ -15,7 +15,7 @@ After you complete this setup, your automation environment is authenticated to A
 
 Astro's authentication process is based on the [Auth0 Identifier First Authentication flow](https://auth0.com/docs/authenticate/login/auth0-universal-login/identifier-first). This process doesn't provide authorization and isn't affected by what a user can do in Astro. To manage authorization in Astro, see [User permissions](user-permissions.md).
 
-## Create an API token or API key
+## Step 1: Create an API token or API key
 
 You can use any of the following credentials to authenticate in an automated process:
 
@@ -29,11 +29,11 @@ When you create an API token or key for your environment, keep the following bes
 - Always set an expiration date for your API tokens.
 - Always [rotate your API tokens](workspace-api-tokens.md#rotate-a-workspace-api-token) for enhanced security.
 
-## Install the Astro CLI in your automation tool
+## Step 2: Install the Astro CLI in your automation tool
 
 To manage your Astro workflows programmatically, you must install the Astro CLI in the environment which will run the workflows. Typically, this requires running `curl -sSL install.astronomer.io | sudo bash -s` or an equivalent installation command before your process starts. See [CI/CD templates](ci-cd-templates/template-overview.md) for examples of how to install the Astro CLI in different version management and workflow automation environments. 
 
-## Add your API token or API key to your environment
+## Step 3: Add your API token or API key to your environment
 
 To make your API key or token accessible to the Astro CLI, you need to set specific environment variables in your automation environment.
 
