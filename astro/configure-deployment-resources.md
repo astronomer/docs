@@ -2,7 +2,7 @@
 sidebar_label: 'Deployment settings'
 title: 'Configure a Deployment'
 id: configure-deployment-resources
-description: "Manage the Deployment settings to customize your Deployment based on your use-case."
+description: "Manage Deployment settings to customize your Deployment for your use case."
 ---
 
 After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI. Specifically you can:

@@ -5,11 +5,11 @@ id: deployment-file-reference
 description: View all possible values that you can include in a Deployment file when managing Deployments as code.
 ---
 
-After you create an Astro Deployment, you can use the Astro CLI to create a file that contains its unique configurations represented as code. That includes worker queues, environment variables, Astro Runtime version, and more. You can use Deployment files to manage Deployments programmatically on Astro.
+After you create an Astro Deployment, you can use the Astro CLI to create a Deployment file that contains its unique configurations represented as code. That includes worker queues, environment variables, Astro Runtime version, and more. You can use Deployment files to manage Deployments programmatically on Astro.
 
 When you [inspect a Deployment](cli/astro-deployment-inspect.md) to generate a Deployment file, its current configuration is generated as a YAML _Deployment file_. The file includes the name, description, and metadata that is unique to the Deployment.
 
-A _Deployment template file_ is different from the _Deployment file_. A template file does not have the `metadata` and `environment_variables` section, and the `name` and `description` fields are empty. Deployment template files are used to create new Deployments where as a Deployment file of an existing Deployment can be used to update its configuration. To create a Deployment template file in YAML format, run `astro deployment inspect <your-deployment-id> --template > your-deployment.yaml`.
+A _Deployment template file_ is different from the _Deployment file_. A template file does not have the `metadata` and `environment_variables` section, and the `name` and `description` fields are empty. Deployment template files are used to create new Deployments, while a Deployment file of an existing Deployment can be used to update its configuration. To create a Deployment template file in YAML format, run `astro deployment inspect <your-deployment-id> --template > your-deployment.yaml`.
 
 Use this document as a reference for all fields in both Deployment files and Deployment template files. 
 
@@ -65,7 +65,7 @@ deployment:
         workload_identity: astro-native-magnify-8566@proj.iam.gserviceaccount.com
 ```
 
-See the following topics to learn about each section in the file.
+The following sections describe each section in the file.
 
 ### `deployment.environment_variables`
 
@@ -73,7 +73,7 @@ You can create, update, or delete environment variables in the `environment_vari
 
 When you inspect a Deployment, the value of any secret environment variables will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. 
 
-If you commit a template file to a GitHub repository, you should not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
+If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
 :::caution  
 

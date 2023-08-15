@@ -1,23 +1,20 @@
 ---
-sidebar_label: "Configure Deployments with Deployment files"
-title: "Configure Deployments programmatically using Deployment files"
+sidebar_label: "Manage Deployments as code"
+title: "Manage Deployments programmatically using Deployment files"
 id: manage-deployments-as-code
 description: "Manage an Astro Deployment using a Deployment file in YAML or JSON format"
 ---
 
-You can configure Deployments using Deployment files and Deployment template files. _Deployment files_ are used to update the same Deployment programmatically, and _Deployment template files_ are used to create new Deployments based on a single template.
+You can configure Deployments programmatically using Deployment files and Deployment template files. _Deployment files_ are used to update the same Deployment programmatically, and _Deployment template files_ are used to create new Deployments based on a single template.
 
-Use this document to learn how to create and manage Deployment files and Deployment template files. See [Deployment file reference](./deployment-file-reference.md) for a list of all configurable Deployment file values. 
-
-Astro supports creating or updating a Deployment programmatically using [API keys or tokens](./automation-authentication.md).
-
-## Create a template file or Deployment file
-
-After you create an Astro Deployment, you can use the Astro CLI to generate a Deployment file or template file. These files can then be used to create or update Deployments programmatically on Astro. The following examples are some ways you can use Deployment files:
+Managing Deployments with files is essential to automating Deployment management at scale.  For example, you can:
 
 - Create a template file in a central GitHub repository and use it as a source of truth for new Deployments that fit a particular use case. For example, you can standardize your team's development Deployments by creating a template file with configurations for that type of Deployment.
-
 - Create a Deployment file that represents the configurations of an existing Deployment and store it in your GitHub repository. You can make changes to this file to update a Deployment  using CI/CD, which maintains the history of your changes.
+
+Use this document to learn how to create and manage Deployment files and Deployment template files. See the [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment file values. When you're ready to programmatically run Deployment file workflows, see [Authenticate your workflow](automation-authentiation.md).
+
+## Create a template file or Deployment file
 
 To create a template file based on an existing Deployment, run the following command:
 
@@ -54,7 +51,7 @@ To create a new Deployment from an existing template file:
     astro deployment create --deployment-file <deployment-template-file-name>
     ```
 
-3. (Optional) Either open the Cloud UI or run the following command to confirm that your Deployment was successfully created:
+3. (Optional) Either open the Cloud UI or run the following command to confirm that you successfully created your Deployment:
 
    ```bash
    astro deployment list
@@ -70,7 +67,7 @@ When you update a Deployment with a Deployment file, keep the following in mind:
 
 - You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
 - You can't change the Astro Runtime version of the Deployment. To upgrade Astro Runtime, you must update the Dockerfile in your Astro project. See [Upgrade Astro Runtime](upgrade-runtime.md).
-- Environment variables marked as secret in the Cloud UI will be exported with a blank `value` to your Deployment file. To redeploy using the Deployment file, you either need to provide the `value` again in the Deployment file or delete the object for the variable. Otherwise, the create command will fail. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
+- Environment variables marked as secret in the Cloud UI will be exported with a blank `value` to your Deployment file. To redeploy using the Deployment file, you either need to provide the `value` again in the Deployment file or delete the object for the variable. Otherwise, `astro deployment create` will fail. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
 
 :::warning 
 
