@@ -273,6 +273,7 @@
 /astro/add-user#update-or-remove-an-organization-user /astro/manage-organization-useers 301
 /astro/executors /astro/executors-overview 301
 /astro/airflow-alerts /astro/airflow-email-notifications 301
+/astro/audit-logs-reference /astro/audit-logs 301
 /astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-gcp#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301

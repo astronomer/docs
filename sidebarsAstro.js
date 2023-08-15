@@ -141,6 +141,8 @@ module.exports = {
         },
         "alerts",
         "airflow-email-notifications",
+        "audit-logs",
+        "audit-logs-reference",
       ],
     },
     {
@@ -165,7 +167,6 @@ module.exports = {
           label: "Organizations",
           items: [
             "organization-api-tokens",
-            "audit-logs",
           ],
         },
         {
@@ -245,7 +246,6 @@ module.exports = {
           ],
         },
         'platform-variables',
-        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",
