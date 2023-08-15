@@ -12,7 +12,7 @@ Managing Deployments with files is essential to automating Deployment management
 - Create a template file in a central GitHub repository and use it as a source of truth for new Deployments that fit a particular use case. For example, you can standardize your team's development Deployments by creating a template file with configurations for that type of Deployment.
 - Create a Deployment file that represents the configurations of an existing Deployment and store it in your GitHub repository. You can make changes to this file to update a Deployment  using CI/CD, which maintains the history of your changes.
 
-Use this document to learn how to create and manage Deployment files and Deployment template files. See the [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment file values. When you're ready to programmatically run Deployment file workflows, see [Authenticate your workflow](automation-authentiation.md).
+Use this document to learn how to create and manage Deployment files and Deployment template files. See the [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment file values. When you're ready to programmatically run Deployment file workflows, see [Authenticate your workflow](automation-authentication.md).
 
 ## Create a template file or Deployment file
 
