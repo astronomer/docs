@@ -20,15 +20,14 @@ This section of documentation covers how to automate processes on Astro using As
 ### Deployment actions
 
 - Deploy code to your Deployment using [CI/CD](set-up-ci-cd.md).
-- Update your Deployment using a Deployment file.  
+- Update your Deployment using a [Deployment file](manage-deployments-as-code.md).  
 - Use [Airflow REST API](airflow-api.md) for your Deployment. 
 
 ### Workspace actions
 
-- Create and update Deployments in your Workspace using a Deployment file. 
 - [Manage users, Teams, and tokens](cli/astro-workspace-team.md) in your Workspace.
 - Create ephemeral Deployments using CI/CD. 
-- Perform all Deployment-level actions in any Deployment in a Workspace. 
+- Perform all Deployment-level actions on any Deployment in a Workspace. 
 
 ### Organization actions
 
