@@ -23,7 +23,11 @@ You can use any of the following credentials to authenticate in an automated pro
 - A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md).
 - An Organization API token. See [Create an Organization API token](organization-api-tokens.md).
 
-When you create a credential, grant it the least amount of permissions possible for the action it's used for. For example, instead of creating an Organization API token to automate actions in two separate Workspaces, create two separate Workspace API tokens for each Workspace.
+When you create an API token or key for your environment, keep the following best practices in mind:
+
+- Always give your API token or key the minimum permissions required to perform an action. This improves control and security over your Astro components. For example, instead of creating an Organization API token to automate actions in two separate Workspaces, create two separate Workspace API tokens for each Workspace.
+- Always set an expiration date for your API tokens.
+- Always [rotate your API tokens](workspace-api-tokens.md#rotate-a-workspace-api-token) for enhanced security.
 
 ## Install the Astro CLI in your automation tool
 
