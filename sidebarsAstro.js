@@ -142,7 +142,6 @@ module.exports = {
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
-        "audit-logs-reference",
       ],
     },
     {
