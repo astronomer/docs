@@ -1,6 +1,6 @@
 name: New Feature
-description: Request documentation or a new or upcoming Astro, Astro CLI, or Astronomer Software feature.
-labels: ["kind/new-feature"]
+description: Request documentation or an upcoming Astro, Astro CLI, or Astronomer Software feature. Mainly for use by Astronomer product managers.
+labels: ["new-feature"]
 body:
   - type: markdown
     attributes:
@@ -28,12 +28,10 @@ body:
   - type: textarea
     id: deadline
     attributes:
-      label: Release date
+      label: Release Date
       description: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: textarea
     id: notes
     attributes:
       label: Additional Notes
       description: Add additional information here that can help the docs team understand the requirements.
-
-  

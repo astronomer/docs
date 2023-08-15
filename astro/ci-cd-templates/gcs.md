@@ -8,17 +8,17 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 ## Prerequisites
 
 - A Google cloud storage (GCS) bucket.
-- An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-code.md#enable-dag-only-deploys-on-a-deployment).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
-## DAG-based deploy
+## DAG deploy template
 
-This CI/CD template can be used to deploy DAGs from a single GCS bucket to a single Astro Deployment. When you create or modify a DAG in the GCS bucket, a Cloud function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
+This CI/CD template can be used to deploy DAGs from a single GCS bucket to a single Astro Deployment. When you create or modify a DAG in the GCS bucket, a Cloud function triggers and initializes an `astro` project to deploy your DAGs using Astro CLI.
 
 :::info
 
-To deploy any non-DAG code changes to Astro, you need to trigger a standard image-only deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your GCS bucket. If your Astro project `dags` folder isn't up to date with your GCS DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
+To deploy any non-DAG code changes to Astro, you need to trigger a standard image deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your GCS bucket. If your Astro project `dags` folder isn't up to date with your GCS DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
 
 :::
 
@@ -41,8 +41,10 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 7. Set the following [environment variables](https://cloud.google.com/functions/docs/configuring/env-var#setting_runtime_environment_variables) for your Cloud Function:
 
     - `ASTRO_HOME` = `\tmp`
-    - `ASTRONOMER_KEY_ID` = `<your-deployment-api-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-deployment-api-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: Your Deployment ID.
+
+    For production Deployments, ensure that you store the value for your API token in a secrets backend. See [Secret Manager overview](https://cloud.google.com/secret-manager/docs/overview).
 
 8. Add the dependency `google-cloud-storage` to the `requirements.txt` file for your Cloud Function. See [Specifying Dependencies in Python](https://cloud.google.com/functions/docs/writing/specifying-dependencies-python).
 
@@ -54,7 +56,8 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
     import subprocess
     from pathlib import Path
     from google.cloud import storage
-    BUCKET = os.getenv("BUCKET", "my-demo-bucket")
+    BUCKET = os.environ.get("BUCKET", "my-demo-bucket")
+    deploymentId = os.environ.get("ASTRO_DEPLOYMENT_ID", "missing-deployment-id")
 
     def untar(filename: str, destination: str) -> None:
         with tarfile.open(filename) as file:
@@ -109,7 +112,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         os.chdir(base_dir)
         untar('./astro_cli.tar.gz', '.')
         run_command('echo y | ./astro dev init')
-        run_command(f'./astro deploy --dags')
+        run_command(f'./astro deploy {deploymentId} --dags')
     ```
 
 10. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).

@@ -2,6 +2,7 @@
 title: "Orchestrate dbt Cloud jobs with Airflow"
 sidebar_label: "dbt Cloud"
 id: airflow-dbt-cloud
+sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
 <head>
@@ -18,7 +19,7 @@ The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/apache
 
 :::info
 
-For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with the Astro dbt provider](airflow-dbt.md).
+For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with Cosmos](airflow-dbt.md).
 
 :::
 

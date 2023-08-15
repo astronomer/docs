@@ -4,6 +4,10 @@ title: 'Astro release notes'
 id: release-notes
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
+
+
 <head>
   <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
@@ -17,9 +21,281 @@ id: release-notes
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 8.2 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 8.8 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.15.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.18.2 ([Release notes](cli/release-notes.md))
+
+<!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## August 8, 2023
+
+### New Hosted worker type
+
+<HostedBadge/>
+
+You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+
+### Additional improvements
+
+- When you create a new Astro Cloud IDE project, you can now specify whether you want the project to include an example pipeline.
+- You can now access Organization-level settings in the Cloud UI only through the **Organization Settings** link. Additionally, some Organization settings have been moved to the top level of navigation so that there is no longer a **Settings** menu.
+- You can now use commas, apostrophes, and ampersands in Workspace and Organization names.
+- The Workspace list view in the Cloud UI has been redesigned so that Organization Owners can now edit and delete Workspaces directly from the list.
+
+### Bug fixes
+
+- Fixed an issue where the Cloud UI showed incorrect CPU and memory limits in bar charts on the Deployments list and **Details** page.
+
+## August 1, 2023
+
+### Hosted Deployments have DAG-only deploys enabled by default 
+
+<HostedBadge/>
+
+New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different. For more information about what happens to code deploys when DAG-only deploys are enabled, see [What happens during a project deploy](https://docs.astronomer.io/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://docs.astronomer.io/astro/deploy-dags#enable-disable-dag-only-deploys-on-a-deployment).
+
+### Teams now have Organization-level roles
+
+All Teams on Astro now have an Organization role. Existing Teams have been given the [Organization Member](https://docs.astronomer.io/astro/user-permissions#organization-roles) role, which doesn't result in any additional automatic permissions.
+
+Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-provisioning), you can now manage your Organization Owners and Billing Admins from your identity provider. See [Manage teams](https://docs.astronomer.io/astro/manage-teams) for more information. 
+
+### Additional improvements
+
+- The Cloud UI now shows how many Workspaces, DAGs, clusters, and Astro Cloud IDE projects you have in the left sidebar.
+- You can now create Deployments in standard clusters hosted in `europe-west2` on GCP and `eu-central-1` on AWS.
+- The default metadata database instance type for new Deployments on GCP clusters in Astro Hybrid has been reduced to `Small General Purpose` with 2 vCPUs and 8GiB. See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid).
+
+### Bug fixes
+
+- Because some regions don't support specific machine types that Astro Hosted uses, you can no longer create Hosted dedicated clusters in the following AWS regions:
+
+    - `af-south-1`
+    - `ap-east-1`
+    - `ap-northeast-2`
+    - `ap-northeast-3`
+    - `ca-central-1`
+    - `eu-south-1`
+    - `eu-west-3`
+    - `me-south-1`
+
+## July 25, 2023
+
+### Additional improvements
+
+- The templates for [Astro alert](https://docs.astronomer.io/astro/alerts) messages have been updated to include more information about the Deployment that the alert was triggered in, including a link to the DAG that triggered the alert. 
+
+### Bug fixes
+
+- Fixed an issue where Azure AD single sign-on (SSO) connections were incorrectly labeled as SAML connections in the Cloud UI.
+
+## July 18, 2023
+
+### Configure default Pod sizes
+
+<HostedBadge/>
+
+You can now configure the default minimum CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default minimum resources to ensure that tasks always have enough CPU and memory to run successfully. See [Configure Deployment resources](https://docs.astronomer.io/astro/configure-deployment-resources#configure-kubernetes-pod-resources).
+
+### New regions available on Astro Hosted
+
+<HostedBadge/>
+
+You can now create Hosted dedicated clusters in the following regions:
+
+- AWS
+    - `af-south-1` - Africa (Cape Town)        
+    - `ap-east-1` - Asia Pacific (Hong Kong)  
+    - `ap-northeast-1` - Asia Pacific (Tokyo)      
+    - `ap-northeast-2` - Asia Pacific (Seoul)      
+    - `ap-northeast-3` - Asia Pacific (Osaka)      
+    - `ap-southeast-1` - Asia Pacific (Singapore)  
+    - `ap-southeast-2` - Asia Pacific (Sydney)     
+    - `ap-south-1` - Asia Pacific (Mumbai)     
+    - `ca-central-1` - Canada (Central)          
+    - `eu-central-1` - Europe (Frankfurt)        
+    - `eu-south-1` - Europe (Milan)            
+    - `eu-west-1` - Europe (Ireland)          
+    - `eu-west-2` - Europe (London)           
+    - `eu-west-3` - Europe (Paris)            
+    - `me-south-1` - Middle East (Bahrain)     
+    - `sa-east-1` - South America (São Paulo) 
+    - `us-east-1` - US East (N. Virginia)     
+    - `us-east-2` - US East (Ohio)            
+    - `us-west-1` - US West (N. California)   
+    - `us-west-2` - US West (Oregon)          
+
+- GCP
+    - `asia-east1` - Taiwan, Asia                  
+    - `asia-northeast1` - Tokyo, Asia                   
+    - `asia-northeast2` - Osaka, Asia                   
+    - `asia-northeast3` - Seoul, Asia                   
+    - `asia-south1` - Mumbai, Asia                  
+    - `asia-south2` - Delhi, Asia                   
+    - `asia-southeast1` - Singapore, Asia               
+    - `asia-southeast2` - Jakarta, Asia                 
+    - `australia-southeast1` - Sydney, Australia             
+    - `australia-southeast2` - Melbourne, Australia          
+    - `europe-central2` - Warsaw, Europe                
+    - `europe-north1` - Finland, Europe               
+    - `europe-southwest1` - Madrid, Europe                
+    - `europe-west1` - Belgium, Europe               
+    - `europe-west2` - England, Europe               
+    - `europe-west3` - Frankfurt, Europe             
+    - `europe-west4` - Netherlands, Europe           
+    - `europe-west6` - Zurich, Europe                
+    - `europe-west8` - Milan, Europe                 
+    - `europe-west9` - Paris, Europe                 
+    - `northamerica-northeast1` - Montreal, North America       
+    - `northamerica-northeast2` - Toronto, North America        
+    - `southamerica-east1` - Sau Paolo, South America      
+    - `southamerica-west1` - Santiago, South America       
+    - `us-central1` - Iowa, North America           
+    - `us-east1` - South Carolina, North America 
+    - `us-east4` - Virginia, North America       
+    - `us-east5` - Columbus, North America       
+    - `us-south1` - Dallas, North America         
+    - `us-west1` - Oregon, North America         
+    - `us-west2` - Los Angeles, North America    
+    - `us-west3` - Salt Lake City, North America 
+    - `us-west4` - Nevada, North America         
+
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#dedicated-cluster-configurations) for all available configurations. 
+
+### Bug fixes
+
+- You can no longer create Hybrid GCP clusters in `eu-north-1`.
+
+## July 11, 2023
+
+### Send Astro alerts to email
+
+You can now send Astro alerts to multiple email addresses. Sending Astro alerts to email requires no configuration outside of Astro, which makes it a quick option to improve your alerting infrastructure. See [Configure Astro alerts](https://docs.astronomer.io/astro/alerts?tab=Email#step-1-configure-your-communication-channel) for setup steps.
+
+### Configure SCIM provisioning for Azure AD
+
+If your Organization uses Azure for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://docs.astronomer.io/astro/set-up-scim-provisioning?tab=Azure#setup) for more information.
+
+### Additional improvements
+
+- On Astro Hosted deployments, the [`astronomer_monitoring_dag`](https://docs.astronomer.io/astro/runtime-image-architecture#astro-monitoring-dag-hybrid-only) has been paused for all image-based Deployments and removed entirely from all Deployments with DAG deploys enabled. It has been replaced with an implementation that allows workers on Deployments to fully scale to 0.
+
+## July 5, 2023
+
+### Configure SCIM provisioning for Okta
+
+If your Organization uses Okta for single sign-on (SSO), you can now set up SCIM provisioning for Astro. SCIM provisioning simplifies user management by allowing you to add and remove Astro users from Okta based on your existing user groups. See [Set up SCIM provisioning](https://docs.astronomer.io/astro/set-up-scim-provisioning?tab=Okta#setup) for more information.
+
+### See pricing estimate when creating a Deployment 
+
+<HostedBadge/>
+
+The Deployment creation page in the Cloud UI has been reorganized to make it easier to focus on specific configurations for your Deployment. Each configuration is now collapsible and includes guidance for different environment sizes. Additionally, the page now shows cost estimates for a Deployment before you create it.
+
+![Deployment creation screen with new pricing information](/img/release-notes/deployment-pricing.png)
+
+### Additional improvements
+
+- You can now configure Deployments with the `A40` machine type, which has 8 vCPU and 16 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+- You can now access your Organization settings from a Workspace by clicking the name of your Organization/ Workspace.
+- On Astro Hybrid, the default Azure DB instance is now `Standard D2ds_v4`.
+- The Deployment creation screen for Astro Hybrid has received several updates that were previously only available on Astro Hosted.
+
+### Bug fixes
+
+- Fixed an issue where DAGs that used the KubernetesPodOperator and had tasks with `in_cluster=False` could not be parsed.
+
+## June 27, 2023
+
+### Support for dedicated clusters on Azure
+
+<HostedBadge/>
+
+You can now create a dedicated cluster in the following Azure regions:
+
+- `australiaeast`
+- `eastus2`
+- `northeurope`
+- `westeurope`
+- `uswest2`
+
+See [Astro Hosted resource reference](resource-reference-hosted.md) for more information.
+
+### Additional improvements
+
+- The Cloud UI now shows how many Workspaces each Team belongs to in **Settings** > **Access Management** > **Teams**.
+- You can now create dedicated clusters in `us-west1` on GCP.
+
+## June 20, 2023
+
+### Additional improvements
+
+- You can now add a new Astro user to Workspaces before the user has accepted their invite.
+- If you have Organization Owner permissions, you can now add a user to a Workspace even if the user hasn't been added to your Organization. Users added to Workspaces this way are automatically added to your Organization as an Organization Member.
+- The Cloud UI now shows your Team IDs in **Settings** > **Access Management** > **Teams**. Use Team IDs to add Teams to Workspaces using the Astro CLI.
+- A Team's **Updated At** and **Updated By** values are now updated when you change the Team's permissions in a Workspace or Organization.
+
+### Bug fixes
+
+- Fixed an issue where a Workspace descriptions were incorrectly required when creating a new Workspace through the Astro CLI.
+
+## June 13, 2023
+
+### Manage billing and track usage for Astro Hosted
+
+Use the new **Billing** page in the Cloud UI to see both high-level and detailed metrics about your spend in Astro Hosted. You can also use this page to configure your billing details and view invoices. See [Manage billing](https://docs.astronomer.io/astro/manage-billing) for more details.
+
+### New cell type for using Airflow operators in the Astro Cloud IDE
+
+You can now use any Airflow operator available on the Astronomer Registry in your Astro Cloud IDE pipeline. Operator cells apply formatting and checks for parameter inputs, making it easy to configure operators as part of your pipeline. See [Use Airflow operators in the Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators).
+
+Additionally, you can configure custom cells to use your team's custom operators in a pipeline. See [Create custom operator cells](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators#create-custom-operator-cells).
+
+### IMDSv2 is now enforced on AWS clusters
+
+:::warning Breaking change
+
+If your DAGs assume IAM roles to directly access metadata on your cluster using IMDSv1, this change can result in DAG run failures. Upgrade your DAGs to use IMDSv2 for all cluster metadata requests.
+
+See [Use IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) for more information.
+
+:::
+
+Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources on your clusters are now session-based and muse include a token in the request body.
+
+### Additional improvements
+
+- Trial Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#deploy-dags-only) enabled by default.
+- The Cloud UI now shows your **Organization Short Name** and **Astro SAML Connection Name** in the Cloud UI.
+- You can now view mapped tasks from the **DAGs** page in the Cloud UI.
+
+### Bug fixes
+
+- Fixed an issue where worker node pools in Hosted dedicated clusters on Azure were not being updated correctly.
+- Fixed an issue the Cloud UI would reset a Deployment's **Min Worker Count** from 0 to 1 after you edited the Deployment in any way.
+
+## June 6, 2023
+
+### Track user actions and ensure compliance with audit logs
+
+You can now export audit logs from the Cloud UI to view all actions taken in your Organization over a given time period. See [Export audit logs](audit-logs.md) for setup steps, and see [Audit log fields](audit-logs-reference.md) for a reference of all available audit log fields.
+
+### Additional improvements 
+
+- You can now configure Hybrid GCP clusters with additional Memory Optimized and Compute Optimized Cloud SQL instance types. See [Supported Cloud SQL instance types](resource-reference-gcp-hybrid.md#supported-cloud-sql-instance-types).
+
+## May 30, 2023
+
+### Manage permissions for groups of users with Teams
+
+Configure Teams from the Cloud UI to manage the permissions for many users across Workspaces from a single page. _Teams_ are a group of users in an Organization that you grant the same Workspace permissions, without needing to define them individually. 
+
+See [Make a Team](https://docs.astronomer.io/astro/manage-teams) for setup steps.
+
+### Bug fixes
+
+- In Astro Hosted, an irrelevant **AWS external ID** info page has been removed from the Cloud UI.
+- Fixed an issue where DAG-only deploys could be unreliable due to the deploy process not requesting enough resources in the cluster. 
 
 ## May 23, 2023
 
@@ -34,6 +310,12 @@ If you're already an Astro user and your Deployments run in your company's own c
 To see whether you're an Astro Hybrid user, open your Organization in the Cloud UI and go to **Settings** > **General**. Your version of Astro is listed under **Product Type**. 
 
 See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-hybrid) to learn how the documentation has changed for current Astro Hybrid users.
+
+### Configure default Kubernetes Pods on Astro Hosted
+
+One of the biggest risks of running the Kubernetes executor or KubernetesPodOperator is that your tasks can accidentally request more resources than expected, which can drive up costs. To limit this risk, you can now configure default and maximum Pod resources from the Cloud UI. If a task tries to request Pod resources that are more than your configured limits, the task fails. 
+
+See [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources) for setup steps. 
 
 ### Documentation refactor for Astro Hybrid
 
@@ -102,7 +384,6 @@ You can now create preview Deployments from feature branches in your Git reposit
 - Delete the preview Deployment when you delete the branch.
 - Deploy your changes to your base Deployment after you merge your changes into your main branch.
 
-
 ### Additional improvements
 
 - Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Deployment API key or Workspace token.
@@ -116,6 +397,8 @@ You can now create preview Deployments from feature branches in your Git reposit
 ## March 28, 2023
 
 ### New GCP node instance types available
+
+<HybridBadge/>
 
 You can now use the following node instance types for worker nodes in GCP clusters:
 
@@ -175,7 +458,7 @@ You can now configure your Deployments to use the Kubernetes executor for execut
 
 The Kubernetes executor runs each task in its own Kubernetes Pod instead of in shared Celery workers. Astronomer fully manages the infrastructure required to run the executor and automatically spins Pods up and down for each of your task runs. This executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks.
 
-To learn whether the Kubernetes executor works for your use case, see [Choose an executor](executors.md#choose-an-executor). To configure the Kubernetes executor for a task or Deployment, see [Configure the Kubernetes executor](executors.md#configure-the-kubernetes-executor).
+To learn whether the Kubernetes executor works for your use case, see [Choose an executor](executors-overview.md#choose-an-executor). To configure the Kubernetes executor for a task or Deployment, see [Configure the Kubernetes executor](kubernetes-executor.md).
 
 ### Simplified Organization management in the Cloud UI
 
@@ -495,7 +778,7 @@ For more information about these worker types, see [N2 machine series](https://c
 
 Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
 
-For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-based-templates)).
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-deploy-templates).
 
 ### Improved data lineage interface
 
@@ -536,14 +819,6 @@ The Astro Cloud IDE was created with the following objectives:
 Most importantly, the Astro Cloud IDE was developed to make it easier for new Airflow users to get started and to provide experienced users with a robust development environment.
 
 To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
-
-:::info
-
-<!-- id to make it easier to remove: cloud-ide-preview-banner -->
-
-The Cloud IDE is currently in [Public Preview](feature-previews.md).
-
-:::
 
 ### Additional improvements
 
@@ -749,7 +1024,7 @@ A new **Maximum Tasks per Worker** configuration is now available in the Deploym
 
 Previously, maximum tasks per worker was permanently set to 16 and was not configurable on Astro. Now, you can set maximum tasks per worker anywhere between 1 and 64 based on the needs of your tasks. It can be set per worker queue on a Deployment.
 
-To learn more, see [Worker autoscaling logic](executors.md#celery-worker-autoscaling-logic).
+To learn more, see [Worker autoscaling logic](celery-executor.md#celery-worker-autoscaling-logic).
 
 ### New Worker Count (Min-Max) setting
 
@@ -844,7 +1119,7 @@ For more information on Deployment configurations, see [Configure Deployment res
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
 - Organizations now need only a single AWS external ID for all clusters. Previously, each cluster required a unique external ID, which added complexity to the installation and cluster creation process.
-- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
+- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](manage-organization-users.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
 ## July 14, 2022
@@ -917,7 +1192,7 @@ Support requests can now be created and submitted in the Cloud UI. You no longer
 
 To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
 
-A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](executors.md#celery-worker-autoscaling-logic) for more information.
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](celery-executor.md#celery-worker-autoscaling-logic) for more information.
 
 Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
 
@@ -999,7 +1274,7 @@ For more information about the installation process and supported configurations
 
 ### Support for Organization-Level user invites
 
-You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
+You can now [invite users to an Astro Organization](manage-organization-users.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
 
 ### Additional improvements
 

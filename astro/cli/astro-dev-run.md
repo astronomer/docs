@@ -19,6 +19,12 @@ astro dev run <airflow-command>
 ```sh
 $ astro dev run users create --role Admin --username admin --email <your-email-address> --firstname <your-first-name> --lastname <your-last-name> --password admin
 # Create a user in your local Airflow environment using the `airflow user create` Airflow CLI command
+
+$ astro dev run connections export - --file-format=env --serialization-format=json
+# Export connections in your local Airflow environment to STDOUT in a JSON format 
+
+$ astro dev run connections export - --file-format=env
+# Export connections in your local Airflow environment to STDOUT in the default URI format
 ```
 
 ## Related Commands

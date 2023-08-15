@@ -40,17 +40,27 @@ module.exports = {
         "kubernetespodoperator",
         {
           type: "category",
+          label: "Airflow connections and variables",
+          items: [
+            "manage-connections-variables",
+            "import-export-connections-variables",
+          ],
+        },
+        {
+          type: "category",
           label: "Cloud IDE",
           items: [
             "cloud-ide/overview",
             "cloud-ide/quickstart",
             "cloud-ide/run-python",
             "cloud-ide/run-sql",
+            "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
+            "cloud-ide/custom-cell-reference"
           ],
         },
         "upgrade-runtime",
@@ -60,9 +70,11 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Deploy",
+      label: "Deploy code",
       items: [
-        "deploy-code", 
+        "deploy-code",
+        "deploy-project-image",
+        "deploy-dags", 
         "set-up-ci-cd", 
         {
           type: "category",
@@ -89,7 +101,12 @@ module.exports = {
       items: [
         "create-deployment",
         "configure-deployment-resources",
-        "executors",
+        "manage-dags",
+        {
+          type: "category",
+          label: "Configure executors",
+          items: ["executors-overview","celery-executor", "kubernetes-executor"],
+        }, 
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
@@ -98,6 +115,11 @@ module.exports = {
         {
           type: "category",
           label: "Connect to external resources",
+          link: {
+            type: 'generated-index',
+            title: 'Connect Astro',
+            description: 'Connect Astro to your existing cloud resources.'
+          },
           items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
         },       
       ],
@@ -107,7 +129,11 @@ module.exports = {
       label: "Observability",
       items: [
         "view-logs",
-        "deployment-metrics",
+        {
+          type: "category",
+          label: "View metrics",
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+        },
         {
           type: "category",
           label: "Data lineage",
@@ -123,28 +149,33 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Manage Organizations",
+          label: "User access",
           items: [
-            {
-              type: "category",
-              label: "User access",
-              items: [
-                "configure-idp",
-                "add-user", 
-                "user-permissions", 
-                "manage-domains"],
-            },
-            "organization-api-tokens",
+            "manage-organization-users",
+            "manage-workspace-users",
+            "manage-teams",  
+            "configure-idp",
+            "set-up-scim-provisioning",
+            "manage-domains",
+            "user-permissions",
           ],
         },
         {
           type: "category",
-          label: "Manage Workspaces",
+          label: "Organizations",
+          items: [
+            "organization-api-tokens",
+            "audit-logs",
+          ],
+        },
+        {
+          type: "category",
+          label: "Workspaces",
           items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
-          label: "Manage clusters",
+          label: "Clusters",
           items: [
             "create-dedicated-cluster",
             "resource-reference-hosted",
@@ -152,7 +183,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Manage Astro Hybrid",
+          label: "Astro Hybrid",
           items: [
             "hybrid-overview",
             {
@@ -161,7 +192,7 @@ module.exports = {
               link: {
                 type: 'generated-index',
                 title: 'Install Astro Hybrid',
-                description: 'Install Astro Hybrid on the Astronomer-hosted cloud or your existing cloud instance.'
+                description: 'Install Astro Hybrid on your cloud.'
               },
               items: ["install-aws-hybrid", "install-azure-hybrid", "install-gcp-hybrid"],
             },
@@ -183,6 +214,7 @@ module.exports = {
             },
           ],
         },
+        "manage-billing",
       ],
     },
     {
@@ -213,6 +245,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",
@@ -228,6 +261,7 @@ module.exports = {
             "secrets-management",
           ],
         },
+        "astro-glossary"
       ],
     },
   ],
@@ -251,6 +285,11 @@ module.exports = {
       type: "doc",
       label: "Configure the CLI",
       id: "cli/configure-cli",
+    },
+    {
+      type: "doc",
+      label: "Test your Astro project locally",
+      id: "cli/test-your-astro-project-locally",
     },
     {
       type: "doc",
@@ -353,6 +392,7 @@ module.exports = {
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
             'cli/astro-dev-restart',
+            'cli/astro-dev-upgrade-test',
           ],
         },
         'cli/astro-login',
@@ -363,9 +403,29 @@ module.exports = {
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
+            "cli/astro-organization-team-create",
+            "cli/astro-organization-team-delete",
+            "cli/astro-organization-team-list",
+            "cli/astro-organization-team-update",
+            "cli/astro-organization-team-user",
+            "cli/astro-organization-token-create",
+            "cli/astro-organization-token-delete",
+            "cli/astro-organization-token-list",
+            "cli/astro-organization-token-roles",
+            "cli/astro-organization-token-rotate",
+            "cli/astro-organization-token-update",
             "cli/astro-organization-user-invite",
             "cli/astro-organization-user-list",
             "cli/astro-organization-user-update",
+            
+          ],
+        },
+        {
+          type: "category",
+          label: "astro registry",
+          items: [
+            "cli/astro-registry-dag-add",
+            "cli/astro-registry-provider-add"
           ],
         },
         'cli/astro-run',
@@ -387,6 +447,14 @@ module.exports = {
             "cli/astro-workspace-user-list",
             "cli/astro-workspace-user-remove",
             "cli/astro-workspace-user-update",
+            "cli/astro-workspace-team-add",
+            "cli/astro-workspace-team-list",
+            "cli/astro-workspace-team-remove",
+            "cli/astro-workspace-token-add",
+            "cli/astro-workspace-token-create",
+            "cli/astro-workspace-token-list",
+            "cli/astro-workspace-token-rotate",
+            "cli/astro-workspace-token-update",
           ],
         },
       ],

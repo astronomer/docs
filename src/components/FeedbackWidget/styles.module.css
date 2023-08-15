@@ -1,0 +1,44 @@
+.feedbackWidget,
+.feedbackWidget__buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.feedbackWidget {
+  margin: 3rem 0;
+}
+
+.feedbackWidget__buttons {
+  gap: 1rem;
+}
+
+.feedbackWidget__question {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.feedbackWidget__button {
+  background-color: var(--blue-700);
+  border: none;
+  color: var(--white);
+  padding: 0.5rem;
+  font-weight: bold;
+  border-radius: 4px;
+  min-width: 64px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75em;
+}
+
+.feedbackWidget__button:hover,
+.feedbackWidget__button:focus {
+  background-color: var(--blue-800);
+}
+
+.feedbackWidget__button svg {
+  fill: var(--white);
+}

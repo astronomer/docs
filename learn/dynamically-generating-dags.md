@@ -9,10 +9,16 @@ id: dynamically-generating-dags
   <meta name="og:description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import CodeBlock from '@theme/CodeBlock';
 import create_dag_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example.py';
+import create_dag_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example_traditional.py';
 import dags_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example.py';
 import dags_from_connections from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections.py';
+import dags_from_var_example_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example_traditional.py';
+import dags_from_connections_traditional from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections_traditional.py';
 
 In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
 
@@ -53,7 +59,37 @@ In the following examples, the single-file method is implemented differently bas
 
 ### Example: Use a `create_dag` function
 
-To dynamically create DAGs from a file, you need to define a Python function that will generate the DAGs based on an input parameter. In this case, you're going to define a DAG template within a `create_dag` function. The code here is very similar to what you would use when creating a single DAG, but it is wrapped in a method that allows for custom parameters to be passed in.
+To dynamically create DAGs from a file, you need to define a Python function that will generate the DAGs based on an input parameter. In this case, you're going to define a DAG template within a `create_dag` function. The code here is very similar to what you would use when creating a single DAG, but it is wrapped in a function that allows for custom parameters to be passed in.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-use-a-create_dag-function"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+from airflow.decorators import dag, task
+
+def create_dag(dag_id, schedule, dag_number, default_args):
+    @dag(dag_id=dag_id, schedule=schedule, default_args=default_args, catchup=False)
+    def hello_world_dag():
+        @task()
+        def hello_world():
+            print("Hello World")
+            print("This is DAG: {}".format(str(dag_number)))
+
+        hello_world()
+
+    generated_dag = hello_world_dag()
+
+    return generated_dag
+```
+
+</TabItem>
+<TabItem value="traditional">
 
 ```python
 from airflow import DAG
@@ -65,19 +101,39 @@ def create_dag(dag_id, schedule, dag_number, default_args):
         print("Hello World")
         print("This is DAG: {}".format(str(dag_number)))
 
-    dag = DAG(dag_id, schedule=schedule, default_args=default_args)
+    generated_dag = DAG(dag_id, schedule=schedule, default_args=default_args, catchup=False)
 
-    with dag:
+    with generated_dag:
         t1 = PythonOperator(
             task_id="hello_world", python_callable=hello_world_py
         )
 
-    return dag
+    return generated_dag
 ```
+
+</TabItem>
+</Tabs>
 
 In this example, the input parameters can come from any source that the Python script can access. You can then set a simple loop (`range(1, 4)`) to generate these unique parameters and pass them to the global scope, thereby registering them as valid DAGs with the Airflow scheduler:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-use-a-create_dag-function"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{create_dag_example}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{create_dag_example_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 The DAGs appear in the Airflow UI:
 
@@ -91,7 +147,24 @@ As mentioned previously, the input parameters don't have to exist in the DAG fil
 
 You can retrieve this value by importing the Variable class and passing it into your `range`. The `default_var` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-generate-dags-from-variables"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{dags_from_var_example}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{dags_from_var_example_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 The DAGs appear in the Airflow UI:
 
@@ -105,7 +178,24 @@ To implement this method, you pull the connections from your Airflow metadata da
 
 ![List of connections in the Airflow UI](/img/guides/connections.png)
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-generate-dags-from-connections"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 <CodeBlock language="python">{dags_from_connections}</CodeBlock>
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{dags_from_connections_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 You are accessing the Models library to bring in the `Connection` class (as you did previously with the `Variable` class). You are also accessing the `Session()` class from `settings`, which will allow us to query the current database session.
 
@@ -131,39 +221,46 @@ Some disadvantages of this method:
 
 ### Example: Generate DAGs from JSON config files
 
-One way of implementing a multiple-file method is using a Python script to generate DAG files based on a set of JSON configuration files. For this example, you'll assume that all DAGs have a single task that uses the `PostgresOperator` to execute a query. This use case might be relevant for a team of analysts who need to schedule SQL queries, where the DAG is largely the same, but the query and the schedule change.
+One way of implementing the multiple-file method is by using a Python script to generate DAG files based on a set of JSON configuration files. For this example, you'll assume that all DAGs have a single task that uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator) to run a Bash command. This use case might be relevant for a team of analysts who need to schedule Bash commands, where the DAG is largely the same, but the command, an environment variable and the schedule change.
 
-To start, you'll create a DAG 'template' file that defines the DAG's structure. This looks just like a regular DAG file, but specific variables have been added to define where the information is going to be dynamically generated, namely `dag_id`, `scheduletoreplace`, and `querytoreplace`. 
+To start, you'll create a DAG 'template' file that defines the DAG's structure. This looks just like a regular DAG file, but specific variables have been added where information is going to be dynamically generated, namely `dag_id_to_replace`, `schedule_to_replace`, `bash_command_to_replace`  and `env_var_to_replace`.
 
 ```python
+from airflow.decorators import dag
+from airflow.operators.bash import BashOperator
 from pendulum import datetime
 
-from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresOperator
 
-
-default_args = {"owner": "airflow", "start_date": datetime(2021, 1, 1)}
-
-with DAG(
-    dag_id, schedule=scheduletoreplace, default_args=default_args, catchup=False
-) as dag:
-
-    t1 = PostgresOperator(
-        task_id="postgres_query", postgres_conn_id=connection_id, sql=querytoreplace
+@dag(
+    dag_id=dag_id_to_replace,
+    start_date=datetime(2023, 7, 1),
+    schedule=schedule_to_replace,
+    catchup=False,
+)
+def dag_from_config():
+    BashOperator(
+        task_id="say_hello",
+        bash_command=bash_command_to_replace,
+        env={"ENVVAR": env_var_to_replace},
     )
+
+
+dag_from_config()
+
 ```
 
-Next, you create a `dag-config` folder that will contain a JSON config file for each DAG. The config file should define the parameters discussed previously, the DAG ID, schedule interval, and query to be executed.
+Next, you create a `dag-config` folder that will contain a JSON config file for each DAG. The config file should define the parameters discussed previously, the DAG ID, schedule, Bash command and environment variable to be used.
 
 ```json
 {
-    "DagId": "dag_file_1",
-    "Schedule": "'@daily'",
-    "Query":"'SELECT * FROM table1;'"
+    "dag_id": "dag_file_1",
+    "schedule": "'@daily'",
+    "bash_command": "'echo $ENVVAR'",
+    "env_var": "'Hello! :)'"
 }
 ```
 
-Finally, you create a Python script that will create the DAG files based on the template and the config files. The script loops through every config file in the `dag-config/` folder, makes a copy of the template in the `dags/` folder, and then overwrites the parameters in that file with the ones from the config file.
+Finally, you create a Python script that will create the DAG files based on the template and the config files. The script loops through every config file in the `dag-config` folder, makes a copy of the template in the `include` folder, and then overwrites the parameters in that file with the ones from the config file.
 
 ```python
 import json
@@ -171,41 +268,41 @@ import os
 import shutil
 import fileinput
 
+
 config_filepath = "include/dag-config/"
 dag_template_filename = "include/dag-template.py"
 
 for filename in os.listdir(config_filepath):
-    with open(config_filepath + filename) as f:
-        config = json.load(f)
-        new_filename = "dags/" + config["DagId"] + ".py"
-        shutil.copyfile(dag_template_filename, new_filename)
+    f = open(config_filepath + filename)
+    config = json.load(f)
 
-        with fileinput.input(new_filename, inplace=True) as file:
-            for line in file:
-                new_line = (
-                    line.replace("dag_id", "'" + config["DagId"] + "'")
-                    .replace("scheduletoreplace", config["Schedule"])
-                    .replace("querytoreplace", config["Query"])
-                )
-                print(new_line, end="")
+    new_filename = "dags/" + config["dag_id"] + ".py"
+    shutil.copyfile(dag_template_filename, new_filename)
+
+    for line in fileinput.input(new_filename, inplace=True):
+        line = line.replace("dag_id_to_replace", "'" + config["dag_id"] + "'")
+        line = line.replace("schedule_to_replace", config["schedule"])
+        line = line.replace("bash_command_to_replace", config["bash_command"])
+        line = line.replace("env_var_to_replace", config["env_var"])
+        print(line, end="")
 ```
 
-To generate your DAG files, you can either run this script on demand or as part of your CI/CD workflow. After running the script, your final directory will appear similar to the example below, where the `include/` directory contains the files from the previous example, and the `dags/` directory contains the two dynamically generated DAGs:
+To generate your DAG files, you can either run this script on demand or as part of your CI/CD workflow. After running the script, your project structure will be similar to the example below, where the `include` directory contains the files from which the DAGs are generated, and the `dags` directory contains the two dynamically generated DAGs:
 
-```bash
+```text
 .
 ├── dags
 │   ├── dag_file_1.py
 │   └── dag_file_2.py
 └── include
+    ├── dag-config
+    │   ├── dag1-config.json
+    │   └── dag2-config.json
     ├── dag-template.py
-    ├── generate-dag-files.py
-    └── dag-config
-        ├── dag1-config.json
-        └── dag2-config.json
+    └── generate-dag-files.py
 ```
 
-This is a straightforward example that works only if all of the DAGs follow the same pattern. However, it could be expanded upon to have dynamic inputs for tasks, dependencies, different operators, and so on.
+This is a straightforward example that works only if all of the DAGs follow the same pattern. However, it could be expanded to have dynamic inputs for tasks, dependencies, different operators, and so on.
 
 ## Tools for dynamically creating DAGs
 

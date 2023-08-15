@@ -30,7 +30,7 @@ The customer is responsible for managing certain security aspects of their Astro
 - Developing and maintaining data pipelines with security and quality coding best practices, inclusive of vulnerability management of plugins and dependencies.
 - Regularly [upgrading their Deployment(s)](upgrade-runtime.md) to the latest Astro Runtime version to take advantage of new functionality, as well as bug and security fixes.
 - [Configuring and managing Deployment resource settings](configure-deployment-resources.md) for data pipeline workloads.
-- [Securing the network communications](https://docs.astronomer.io/astro/category/connect-astro) between their data plane and sensitive data resources.
+- [Securing the network communications](https://docs.astronomer.io/astro/category/connect-to-external-resources) between their data plane and sensitive data resources.
 
 ## Cloud provider security responsibilities
 

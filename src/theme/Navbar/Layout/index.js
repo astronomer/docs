@@ -1,10 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useThemeConfig} from '@docusaurus/theme-common';
+import { useThemeConfig } from '@docusaurus/theme-common';
 import {
   useHideableNavbar,
   useNavbarMobileSidebar,
 } from '@docusaurus/theme-common/internal';
+import PromoBanner from '@site/src/components/PromoBanner';
 import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
 import styles from './styles.module.css';
 function NavbarBackdrop(props) {
@@ -16,31 +17,34 @@ function NavbarBackdrop(props) {
     />
   );
 }
-export default function NavbarLayout({children}) {
+export default function NavbarLayout({ children }) {
   const {
-    navbar: {hideOnScroll, style},
+    navbar: { hideOnScroll, style },
   } = useThemeConfig();
   const mobileSidebar = useNavbarMobileSidebar();
-  const {navbarRef, isNavbarVisible} = useHideableNavbar(hideOnScroll);
+  const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
   return (
-    <nav
-      ref={navbarRef}
-      className={clsx(
-        'navbar',
-        'navbar--fixed-top',
-        hideOnScroll && [
-          styles.navbarHideable,
-          !isNavbarVisible && styles.navbarHidden,
-        ],
-        {
-          'navbar--dark': style === 'dark',
-          'navbar--primary': style === 'primary',
-          'navbar-sidebar--show': mobileSidebar.shown,
-        },
-      )}>
-      {children}
-      <NavbarBackdrop onClick={mobileSidebar.toggle} />
-      <NavbarMobileSidebar />
-    </nav>
+    <>
+      <PromoBanner />
+      <nav
+        ref={navbarRef}
+        className={clsx(
+          'navbar',
+          'navbar--fixed-top',
+          hideOnScroll && [
+            styles.navbarHideable,
+            !isNavbarVisible && styles.navbarHidden,
+          ],
+          {
+            'navbar--dark': style === 'dark',
+            'navbar--primary': style === 'primary',
+            'navbar-sidebar--show': mobileSidebar.shown,
+          },
+        )}>
+        {children}
+        <NavbarBackdrop onClick={mobileSidebar.toggle} />
+        <NavbarMobileSidebar />
+      </nav>
+    </>
   );
 }

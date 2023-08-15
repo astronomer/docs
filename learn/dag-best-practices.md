@@ -104,7 +104,7 @@ In the **Bad practice** example the connection to the other database is made out
 The version shown under the **Good practice** DAG wraps the connection to the database into its own task, the `get_list_of_results` task. Now the connection is only made at when the DAG actually runs, preventing performance issues.
 
 <Tabs
-    defaultValue="bad-practice"
+    defaultValue="good-practice"
     groupId="avoid-top-level-code-in-your-dag-file"
     values={[
         {label: 'Bad practice', value: 'bad-practice'},
@@ -132,7 +132,7 @@ Including code that isn't part of your DAG or operator instantiations in your DA
 The following example DAGs demonstrate the difference between the bad and good practices of including code in your DAGs. In the **Bad practice** DAG, a SQL query is provided directly to the PostgresOperator, which unnecessarily exposes code in your DAG. In the **Good practice** DAG, the DAG-level configuration includes `template_searchpath` and the PostgresOperator specifies a `covid_state_query.sql` file that contains the query to execute.
 
 <Tabs
-    defaultValue="bad-practice"
+    defaultValue="good-practice"
     groupId="treat-your-dag-file-like-a-config-file"
     values={[
         {label: 'Bad practice', value: 'bad-practice'},

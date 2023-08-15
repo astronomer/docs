@@ -339,7 +339,7 @@ The graph view of the DAG should look similar to this:
 
 ![SageMaker DAG graph](/img/guides/sagemaker_pipeline.png)
 
-This DAG uses a decorated PythonOperator and several SageMaker operators to get data from an API endpoint, train a model, create a model in SageMaker, and test the model.  See [How it works](#how-it-works) for more information about each task in the DAG and how the different SageMaker operators work.
+This DAG uses the [@task decorator](airflow-decorators.md) and several SageMaker operators to get data from an API endpoint, train a model, create a model in SageMaker, and test the model.  See [How it works](#how-it-works) for more information about each task in the DAG and how the different SageMaker operators work.
 
 ## Step 7: Run your DAG to train the model
 

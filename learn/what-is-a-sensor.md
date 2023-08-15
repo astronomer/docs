@@ -14,6 +14,7 @@ import TabItem from '@theme/TabItem';
 
 import CodeBlock from '@theme/CodeBlock';
 import sensor_decorator_example from '!!raw-loader!../code-samples/dags/what-is-a-sensor/sensor_decorator_example.py';
+import pythonsensor_example from '!!raw-loader!../code-samples/dags/what-is-a-sensor/pythonsensor_example.py';
 import sql_sensor_example_taskflow from '!!raw-loader!../code-samples/dags/what-is-a-sensor/sql_sensor_example_taskflow.py';
 import sql_sensor_example_traditional from '!!raw-loader!../code-samples/dags/what-is-a-sensor/sql_sensor_example_traditional.py';
 
@@ -23,7 +24,7 @@ In this guide, you'll learn how sensors are used in Airflow, best practices for 
 
 :::info
 
-Sensors are one of several options to schedule your DAGs in an event-based manner. Learn more about sensors and how they compare to other Airflow features in [Video: Implementing Event-Based DAGs with Airflow](https://airflowsummit.org/sessions/2022/implementing-event-based-dags-with-airflow/). 
+For a video course on Airflow sensors, check out the [Astronomer Academy](https://academy.astronomer.io/sensors-course).
 
 :::
 
@@ -89,15 +90,37 @@ The following example DAG shows how you might use the `SqlSensor` sensor:
 
 This DAG waits for data to be available in a Postgres database before running validation and storing tasks. The `SqlSensor` runs a SQL query and is marked successful when that query returns data. Specifically, when the result is not in the set (0, '0', '', None). The `SqlSensor` task in the example DAG (`waiting_for_partner`) runs the `CHECK_PARTNER.sql` script every 20 seconds (the `poke_interval`) until the data is returned. The `mode` is set to `reschedule`, meaning between each 20 second interval the task will not take a worker slot. The `timeout` is set to 5 minutes, and the task fails if the data doesn't arrive within that time. When the `SqlSensor` criteria is met, the DAG moves to the downstream tasks. You can find the full code for this example in the [webinar-sensors repo](https://github.com/marclamberti/webinar-sensors).
 
-## Sensor decorator
+## Sensor decorator / PythonSensor
 
-Starting in Airflow 2.5, you can use the `@task.sensor` decorator from the TaskFlow API to use any Python function that returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The following DAG shows how to use the sensor decorator:
+If no sensor exists for your use case you can create your own using either the [`@task.sensor` decorator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/decorators/sensor/index.html) (added in Airflow 2.5) or the [PythonSensor](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonSensor). The `@task.sensor` decorator returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The PythonSensor takes a `python_callable` that returns `True` or `False`.
+
+The following DAG shows how to use either the sensor decorator or the PythonSensor to create the same custom sensor:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "sensor-decorator-pythonsensor"
+    values={[
+        {label: '@task.sensor', value: 'taskflow'},
+        {label: 'PythonSensor', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 <CodeBlock language="python">{sensor_decorator_example}</CodeBlock>
 
-Here, `@task.sensor` decorates the `check_shibe_availability()` function, which checks if a given API returns a 200 status code. If the API returns a 200 status code, the sensor task is marked as successful. If any other status code is returned, the sensor pokes again after the `poke_interval` has passed.
+Here, the `@task.sensor` decorates the `check_shibe_availability()` function, which checks if a given API returns a 200 status code. If the API returns a 200 status code, the sensor task is marked as successful. If any other status code is returned, the sensor pokes again after the `poke_interval` has passed.
 
-The optional `xcom_value` parameter in `PokeReturnValue` defines what data will be pushed to [XCom](airflow-passing-data-between-tasks.md) once the `is_done=true`. You can use this data in any downstream tasks.
+The optional `xcom_value` parameter in `PokeReturnValue` defines what data will be pushed to [XCom](airflow-passing-data-between-tasks.md) once `is_done=true`. You can use the data that was pushed to XCom in any downstream tasks.
+
+</TabItem>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{pythonsensor_example}</CodeBlock>
+
+Here, the PythonSensor uses the `check_shibe_availability_func` to check if a given API returns a 200 status code. If the API returns a 200 status code, the API response is pushed to [XCom](airflow-passing-data-between-tasks.md) and the function returns `True`, causing the sensor task to be marked as successful. If any other status code is returned the `check_shibe_availability_func` returns `False` and the sensor pokes again after the `poke_interval` has passed.
+
+</TabItem>
+</Tabs>
 
 ## Sensor best practices
 

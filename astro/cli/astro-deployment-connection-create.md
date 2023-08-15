@@ -6,12 +6,12 @@ description: Reference documentation for astro deployment connection create.
 hide_table_of_contents: true
 ---
 
-List the Airflow connections stored in a Deployment's metadata database. 
+Create an Airflow connection in a Deployment's metadata database. 
 
 ## Usage
 
 ```sh
-astro deployment connection list
+astro deployment connection create
 ```
 
 ## Options
@@ -43,5 +43,5 @@ astro deployment connection create --deployment-name="My Deployment" --conn-id m
 
 ## Related Commands
 
-- [`astro deployment connection create`](cli/astro-deployment-connection-create.md)
+- [`astro deployment connection list`](cli/astro-deployment-connection-list.md)
 - [`astro deployment connection update`](cli/astro-deployment-connection-update.md)

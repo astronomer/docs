@@ -25,27 +25,37 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 ## Prerequisites
 
 - A Deployment on Astro.
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- A [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - [cURL](https://curl.se/) or, if using Python, the [Requests library](https://docs.python-requests.org/en/latest/index.html).
 - The [Astro CLI](cli/overview.md).
 
-## Step 1: Retrieve an access token and Deployment URL
+## Step 1: Retrieve your access token
 
-Calling the Airflow REST API for a Deployment requires:
+<Tabs groupId="step-1-retrieve-your-access-token">
 
-- An Astro access token.
-- A Deployment URL.
+<TabItem value="workspace" label="Workspace token (Recommended)">
 
-### Retrieve an access token
+Follow the steps in [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
-<Tabs groupId="retrieve-an-access-token">
+</TabItem>
 
-<TabItem value="sh" label="Shell">
+<TabItem value="organization" label="Organization token">
 
-To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret using [cURL](https://curl.se/):
+Follow the steps in [Create a Orgaization API token](organization-api-tokens.md#create-an-organization-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
+</TabItem>
 
-```sh
+<TabItem value="deployment" label="Deployment API key">
+
+:::caution
+
+Deployment API keys will soon be deprecated in favor of Deployment API tokens, which is an upcoming Astro feature. If you have strict Deployment-level security requirements, you can continue to use Deployment API keys, but you will have to complete a one-time migration to Deployment API tokens in the future. Otherwise, Astronomer recommends using either [Workspace API tokens](workspace-api-tokens.md) or [Organization API tokens](organization-api-tokens.md) in place of Deployment API keys.
+
+:::
+
+To retrieve an access token using [cURL](https://curl.se/), run the following API request with your Deployment API key ID and secret:
+
+```bash
 curl --location --request POST "https://auth.astronomer.io/oauth/token" \
         --header "content-type: application/json" \
         --data-raw '{
@@ -54,10 +64,8 @@ curl --location --request POST "https://auth.astronomer.io/oauth/token" \
             "audience": "astronomer-ee",
             "grant_type": "client_credentials"}'
 ```
-</TabItem>
-<TabItem value="python" label="Python">
 
-To retrieve an Astro access token, use the [`requests`](https://docs.python-requests.org/en/latest/index.html) library to make your API request. For example, your code might look like the following:
+To retrieve an Astro access token using Python, use the [`requests`](https://docs.python-requests.org/en/latest/index.html) library to make your API request:
 
 ```python
 def get_api_token() -> str:
@@ -77,32 +85,26 @@ def get_api_token() -> str:
 </TabItem>
 </Tabs>
 
-:::info
-
-The token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
-
-If you've configured a [CI/CD process](set-up-ci-cd.md) and you want to avoid generating an access token manually, Astronomer recommends that you automate the API request to generate a new access token.
-
-:::
-
-### Retrieve the Deployment URL
+## Step 2: Retrieve the Deployment URL
 
 Run the following command to retrieve a Deployment URL:
 
-```sh
+```bash
 astro deployment inspect -n <deployment-name> -k metadata.webserver_url
 ```
 
-The Deployment URL includes the name of your Organization and a short Deployment ID. For example, the Deployment URL for an Organization named `mycompany` with the Deployment ID `dhbhijp0` is `https://mycompany.astronomer.run/dhbhijp0`.
+The Deployment URL is used to access your Astro Deployment's Airflow UI. It includes the name of your Organization and first 7 letters of your Deployment ID. 
 
-## Step 2: Make an Airflow API request
+For example, the Deployment URL for an Organization named `mycompany` with the Deployment ID `dhbhijp0vt68400dj40tmc8virf` is `mycompany.astronomer.run/dhbhijp0`.
+
+## Step 3: Make an Airflow API request
 
 You can execute requests against any endpoint that is listed in the [Airflow REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 To make a request based on Airflow documentation, make sure to:
 
 - Use the Astro access token from Step 1 for authentication.
-- Replace `https://airflow.apache.org` with your Deployment URL from Step 1.
+- Replace `airflow.apache.org` with your Deployment URL from Step 1.
 
 ## Example API Requests
 
@@ -115,7 +117,7 @@ To retrieve a list of all DAGs in a Deployment, you can run a `GET` request to t
 #### cURL
 
 ```sh
-curl -X GET <your-deployment-url>/api/v1/dags \
+curl -X GET https://<your-deployment-url>/api/v1/dags \
    -H 'Cache-Control: no-cache' \
    -H 'Authorization: Bearer <your-access-token>'
 ```
@@ -127,7 +129,7 @@ import requests
 token = "<your-access-token>"
 deployment_url = "<your-deployment-url>"
 response = requests.get(
-   url=f"{deployment_url}/api/v1/dags",
+   url=f"https://{deployment_url}/api/v1/dags",
    headers={"Authorization": f"Bearer {token}"}
 )
 print(response.json())
@@ -184,7 +186,7 @@ You can also specify a `logical_date` at the time in which you wish to trigger t
 #### cURL
 
 ```sh
-curl -v -X POST <your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
+curl -v -X POST https://<your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
    -H 'Authorization: Bearer <your-access-token>' \
    -H 'Cache-Control: no-cache' \
    -H 'content-type: application/json' \
@@ -200,7 +202,7 @@ token = "<your-access-token>"
 deployment_url = "<your-deployment-url>"
 dag_id = "<your-dag-id>"
 response = requests.post(
-    url=f"{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
+    url=f"https://{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
     headers={
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"
@@ -220,7 +222,7 @@ Replace `<your-dag-id>` with your own value.
 #### cURL
 
 ```sh
-curl -X PATCH <your-deployment-url>/api/v1/dags/<your-dag-id> \
+curl -X PATCH https://<your-deployment-url>/api/v1/dags/<your-dag-id> \
    -H 'Content-Type: application/json' \
    -H 'Cache-Control: no-cache' \
    -H 'Authorization: Bearer <your-access-token>' \
@@ -235,7 +237,7 @@ token = "<your-access-token>"
 deployment_url = "<your-deployment-url>"
 dag_id = "<your-dag-id>"
 response = requests.patch(
-    url=f"{deployment_url}/api/v1/dags/{dag_id}",
+    url=f"https://{deployment_url}/api/v1/dags/{dag_id}",
     headers={
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json"

@@ -9,17 +9,23 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a specified time. 
+Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or through email if you have a DAG run failure or if a task duration exceeds a specified time. 
 
-Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code and are designed to integrate with Slack and PagerDuty. Follow this guide to set up your Slack or PagerDuty to receive alerts from Astro and then configure your Deployment to send alerts.
+Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. Follow this guide to set up your Slack, PagerDuty, or email to receive alerts from Astro and then configure your Deployment to send alerts.
 
-To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow)
+:::info
+
+Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLineage enabled. If you disabled OpenLineage in your Deployment, you need to enable it to use Astro alerts. See [Enable/Disable OpenLineage](set-up-data-lineage.md#enabledisable-openlineage).
+
+:::
+
+To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 ## Prerequisites
 
 - An [Astro project](develop-project.md).
-- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts.
-- A Slack workspace and/or PagerDuty service.
+- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage). 
+- A Slack workspace, PagerDuty service, or email address.
 
 :::caution
 
@@ -27,6 +33,7 @@ You must use an Astro Runtime version 7.1.0 or greater to use Astro Alerts.
 
 :::
 
+<!-- Sensitive header used in product - do not change without a redirect-->
 ## Step 1: Configure your communication channel
 
 <Tabs
@@ -34,7 +41,8 @@ You must use an Astro Runtime version 7.1.0 or greater to use Astro Alerts.
     groupId= "step-1-configure-your-communication-channel"
     values={[
         {label: 'Slack', value: 'Slack'},
-        {label: 'PagerDuty', value: 'PagerDuty'}
+        {label: 'PagerDuty', value: 'PagerDuty'},
+        {label: 'Email', value: 'Email'}
     ]}>
 <TabItem value="Slack">
 
@@ -100,14 +108,19 @@ To set up an alert integration with PagerDuty, you need access to your organizat
   ![Copy your integration key](/img/docs/pagerduty_alerts_1.5.png)
 
 </TabItem>
+<TabItem value="Email">
+
+No external configuration is required for the email integration. Astronomer recommends allowlisting `astronomer.io` with your email provider to ensure that no alerts go to your spam folder. Alerts are sent from `no-reply@astronomer.io`.
+
+</TabItem>
 </Tabs>
 
-## Step 2: Create your workspace alert in the Cloud UI
+## Step 2: Create your Workspace alert in the Cloud UI
 
 In the Cloud UI, you can enable alerts from the **Workspace Settings** page. 
 
 
-1. In the Cloud UI, select the Astro workspace you want to create an alert for.
+1. In the Cloud UI, select the Astro Workspace you want to create an alert for.
 
 2. Click **Workspace Settings**, then click **Alerts**.
 
@@ -115,11 +128,18 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 4. Enter your **Alert Name** and choose the alert type, either **Pipeline Failure** or **Task Duration**. 
 
-5. Choose the **Communication Channel** where you want to send your alert. You can choose to send alerts to both Slack and PagerDuty.
+5. Choose the **Communication Channels** where you want to send your alert.
 
 6. Add your communication channel information.
 
-    <Tabs>
+    <Tabs
+        defaultValue="Slack"
+        groupId= "step-1-configure-your-communication-channel"
+        values={[
+            {label: 'Slack', value: 'Slack'},
+            {label: 'PagerDuty', value: 'PagerDuty'},
+            {label: 'Email', value: 'Email'}
+        ]}>
     <TabItem value="Slack">
     
     Paste the Webhook URL from your Slack workspace app. If you need to find a URL for an app you've already created, go to your [Slack Apps](https://api.slack.com/apps) page, select your app, and then choose the **Incoming Webhooks** page. 
@@ -134,6 +154,11 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     ![Paste the Integration Key](/img/docs/pagerduty_alerts_2.6.png)
 
 
+    
+    </TabItem>
+    <TabItem value="Email">
+
+    Enter the email addresses that should receive the alert. 
     
     </TabItem>
     </Tabs>

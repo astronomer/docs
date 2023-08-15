@@ -25,9 +25,10 @@ Astronomer will not be able to restore:
 
 - VPC Routes configured by customers with the AWS console.
 - VPC Security Group rules configured by customers with the AWS console.
-- DAG history and task logs.
-- XComs.
-- Airflow configurations (Variables, Connections, Pools) configured with the Airflow UI. Any configurations set with your deployed Astro project image can be recovered.
+- The Airflow metadata database for Deployments, including:
+    - DAG history and task logs.
+    - XComs.
+    - Airflow configurations (Variables, Connections, Pools) configured with the Airflow UI. Any configurations set with your deployed Astro Runtime image or environment variables can be recovered.
 
 Organization settings, Workspace settings, and user management configured in Astro's control plane will be unaffected by a region failure in the data plane.
 

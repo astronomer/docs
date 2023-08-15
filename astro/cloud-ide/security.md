@@ -4,13 +4,6 @@ title: Astro Cloud IDE security & data governance
 id: security
 ---
 
-:::caution
-
-<!-- id to make it easier to remove: cloud-ide-preview-banner -->
-The Cloud IDE is currently in [Public Preview](feature-previews.md).
-
-:::
-
 ## Security
 
 The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. All infrastructure is managed by Astronomer. Infrastructure is tightly scoped to organizations, so your code and data is never exposed to other organizations.
@@ -23,12 +16,11 @@ The Cloud IDE stores Python cell outputs in an encrypted S3 bucket. SQL cell out
 
 ## Networking
 
-Astro Cloud IDE requests can come from the following IP addresses:
+Astro Cloud IDE requests can come from the following IP address:
 
-- `20.237.27.58`
-- `40.76.151.37`
+- `20.232.242.54`
 
-Add these IP addresses to your allowlist to run the Astro Cloud IDE in a private network. These IP addresses are subject to change. 
+Add this IP address to your allowlist to run the Astro Cloud IDE in a private network. This address is subject to change. 
 
 ## Execution
 

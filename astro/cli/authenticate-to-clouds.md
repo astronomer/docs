@@ -73,13 +73,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:ro
         webserver:
             volumes:
-            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:ro
         triggerer:
             volumes:
-            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:ro
     ```
     
     </TabItem>
@@ -392,7 +392,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
     When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 
-2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-secrets-manager.html).
+2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-secrets-manager.html). Make sure to specify your `region_name`.
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
@@ -448,7 +448,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     
      For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow-variables-my_secret_var`.
 
-2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/secrets-backends/google-cloud-secret-manager-backend.html)):
+2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/secrets-backends/google-cloud-secret-manager-backend.html). Make sure to specify your `project_id`. 
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
@@ -513,7 +513,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     apache-airflow-providers-microsoft-azure
     ```
 
-3. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html): 
+3. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html). Make sure to specify your `vault_url`. 
   
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend

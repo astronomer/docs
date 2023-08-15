@@ -467,13 +467,9 @@ def add_10(num):
 def multiply_by_100(num):
     return num * 100
 
-multiply_by_100.expand(
-    num=add_10.expand(
-        num=multiply_by_2.expand(
-            num=[1, 2, 3]
-        )
-    )
-)
+multiplied_value_1 = multiply_by_2.expand(num=[1, 2, 3])
+summed_value = add_10.expand(num=multiplied_value_1)
+multiply_by_100.expand(num=summed_value)
 ```
 </TabItem>
 <TabItem value="traditional">
@@ -530,7 +526,7 @@ You can chain an arbitrary number of dynamically mapped tasks in this manner. It
 
 ## Mapping over task groups
 
-As of Airflow 2.5, you can dynamically map over a task group that uses the `@task_group` decorator. The syntax for dynamically mapping over a task group is the same as dynamically mapping over a single task.
+As of Airflow 2.5, you can dynamically map over a [task group](task-groups.md) that uses the `@task_group` decorator. The syntax for dynamically mapping over a task group is the same as dynamically mapping over a single task.
 
 ```python
 # creating a task group using the decorator with the dynamic input my_num

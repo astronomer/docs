@@ -13,9 +13,9 @@ sidebar_custom_props: { icon: "img/aws.png" }
 
 :::caution
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
-To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
+To create a cluster on Astro Hosted, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
 :::
 
@@ -25,23 +25,23 @@ Read the following document for a reference of our default resources as well as 
 
 ## Default cluster values
 
-| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable                                                                                         |
-| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [EKS Cluster](https://aws.amazon.com/eks)                                                           | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                                                            | 1x                                            |                                                                                                      |
-| Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | Yes. See [Manage worker node pools](manage-hybrid-clusters.md#about-worker-node-pools).                     |
-| Airflow node pool                                                                                   | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of m5.xlarge nodes                    |                                                                                                      |
-| Astro system node pool                                                                              | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all other system components required in Astro. The availability zone determines how many nodes are created.  This node pool is fully managed by Astronomer.                                                                                                         | 1x pool of m5.xlarge nodes                    |                                                                                                      |
-| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster. All RDS instances on Astro are multi-AZ.                                                                                                                                                                                                                      | 1x db.m6g.large                                | Yes. See [Configure your relational database](manage-hybrid-clusters.md#configure-a-database-instance-type). |
-| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)    | Required for connectivity with the Astro control plane and other public services.                                                                                                                                                                                                                                                                        | 2x                                            |                                                                                                      |
-| [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)                        | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes.                                        | 2x /26 (public) and 1x /21 + 1x /22 (private) | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                        |
-| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)      | Required for connectivity with the control plane and other public services.                                                                                                                                                                                                                                                                              | 1x                                            |                                                                                                      |
-| [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)               | NAT Gateways translate outbound traffic from private subnets to public subnets.                                                                                                                                                                                                                                                                          | 2x                                            |                                                                                                      |
-| [Routes](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-table-routes) | Routes are necessary to direct network traffic from the subnets and gateways.                                                                                                                                                                                                                                                                            | 2x                                            |                                                                                                      |
-| [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)              | Home for the routes.                                                                                                                                                                                                                                                                                                                                     | 2x                                            |                                                                                                      |
-| [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)                     | Virtual network for launching and hosting AWS resources.                                                                                                                                                                                                                                                                                                 | 1x /20                                        | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                        |
-| [VPC Interface Endpoint Services](https://docs.aws.amazon.com/whitepapers/latest/aws-privatelink/what-are-vpc-endpoints.html#interface-endpoints)                     | Enables AWS PrivateLink connectivity to Elastic Load Balancing (ELB), AWS Auto Scaling plans, AWS Security Token Service (AWS STS), and Amazon Elastic Container Registry (ECR) Docker and API services.                                                                                                                                                                         | 5x                                            |                                                                                                      |
-| [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)                    | Stores Airflow task logs.                                                                                                                                                                                                                                                                                                                                | 1x                                            |                                                                                                      |
-| [S3 Gateway Endpoint](https://docs.aws.amazon.com/whitepapers/latest/aws-privatelink/what-are-vpc-endpoints.html#gateway-endpoints)                    | IP routes for Amazon Simple Storage Service (Amazon S3)                                                                                                                                                                                                                     | 1x                                            |                                                                                                      |
+| Resource                                                                                                                                          | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| [EKS Cluster](https://aws.amazon.com/eks)                                                                                                         | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                                                            | 1x                                            |                                                                                                              |
+| Worker node pool                                                                                                                                  | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | Yes. See [Manage worker node pools](manage-hybrid-clusters.md#about-worker-node-pools).                      |
+| Airflow node pool                                                                                                                                 | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of m5.xlarge nodes                    |                                                                                                              |
+| Astro system node pool                                                                                                                            | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all other system components required in Astro. The availability zone determines how many nodes are created.  This node pool is fully managed by Astronomer.                                                                                                         | 1x pool of m5.xlarge nodes                    |                                                                                                              |
+| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                                                                        | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster. All RDS instances on Astro are multi-AZ.                                                                                                                                                                              | 1x db.m6g.large                               | Yes. See [Configure your relational database](manage-hybrid-clusters.md#configure-a-database-instance-type). |
+| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)                                                  | Required for connectivity with the Astro control plane and other public services.                                                                                                                                                                                                                                                                        | 2x                                            |                                                                                                              |
+| [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)                                                                      | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes.                                        | 2x /26 (public) and 1x /21 + 1x /22 (private) | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                                |
+| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)                                                    | Required for connectivity with the control plane and other public services.                                                                                                                                                                                                                                                                              | 1x                                            |                                                                                                              |
+| [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)                                                             | NAT Gateways translate outbound traffic from private subnets to public subnets.                                                                                                                                                                                                                                                                          | 2x                                            |                                                                                                              |
+| [Routes](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-table-routes)                                               | Routes are necessary to direct network traffic from the subnets and gateways.                                                                                                                                                                                                                                                                            | 2x                                            |                                                                                                              |
+| [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)                                                            | Home for the routes.                                                                                                                                                                                                                                                                                                                                     | 2x                                            |                                                                                                              |
+| [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)                                                                   | Virtual network for launching and hosting AWS resources.                                                                                                                                                                                                                                                                                                 | 1x /20                                        | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                                |
+| [VPC Interface Endpoint Services](https://docs.aws.amazon.com/whitepapers/latest/aws-privatelink/what-are-vpc-endpoints.html#interface-endpoints) | Enables AWS PrivateLink connectivity to Elastic Load Balancing (ELB), AWS Auto Scaling plans, AWS Security Token Service (AWS STS), and Amazon Elastic Container Registry (ECR) Docker and API services.                                                                                                                                                 | 5x                                            |                                                                                                              |
+| [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)                                                                  | Stores Airflow task logs.                                                                                                                                                                                                                                                                                                                                | 1x                                            |                                                                                                              |
+| [S3 Gateway Endpoint](https://docs.aws.amazon.com/whitepapers/latest/aws-privatelink/what-are-vpc-endpoints.html#gateway-endpoints)               | IP routes for Amazon Simple Storage Service (Amazon S3)                                                                                                                                                                                                                                                                                                  | 1x                                            |                                                                                                              |
 
 ## Supported cluster regions
 
@@ -59,7 +59,6 @@ You can host Astro Hybrid clusters in the following AWS regions:
 | `ap-south-1`     | Asia Pacific (Mumbai)     |
 | `ca-central-1`   | Canada (Central)          |
 | `eu-central-1`   | Europe (Frankfurt)        |
-| `eu-north-1`     | Europe (Stockholm)        |
 | `eu-south-1`     | Europe (Milan)            |
 | `eu-west-1`      | Europe (Ireland)          |
 | `eu-west-2`      | Europe (London)           |
@@ -123,63 +122,65 @@ For detailed information about each instance type, see [Amazon RDS Instance Type
 
 ## Supported worker node pool instance types
 
+<!-- For new node instance types, subtract 2 CPU and 1.5 GiB RAM from the listed  figures in the cloud provider's reference page-->
+
 Each worker in a worker node pool runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead.
 
 The following table lists all available instance types for worker node pools, as well as the Pod size that is supported for each instance type. As the system requirements of Astro change, these values can increase or decrease.
 
-| Worker Node Type | CPU     | Memory       |
-| ---------------- | ------- | ------------ |
-| m5.xlarge        | 3 CPUs  | 13 GiB MEM   |
-| m5.2xlarge       | 7 CPUs  | 29 GiB MEM   |
-| m5.4xlarge       | 15 CPUs | 61 GiB MEM   |
-| m5.8xlarge       | 31 CPUs | 125 GiB MEM  |
-| m5.12xlarge      | 47 CPUs | 189 GiB MEM  |
-| m5.16xlarge      | 63 CPUs | 253 GiB MEM  |
-| m5.24xlarge      | 95 CPUs | 381 GiB MEM  |
-| m5.metal         | 95 CPUs | 381 GiB MEM  |
-| m5d.xlarge       | 3 CPUs  | 13 GiB MEM   |
-| m5d.2xlarge      | 7 CPUs  | 29 GiB MEM   |
-| m5d.4xlarge      | 15 CPUs | 61 GiB MEM   |
-| m5d.8xlarge      | 31 CPUs | 125 GiB MEM  |
-| m5d.12xlarge     | 47 CPUs | 189 GiB MEM  |
-| m5d.16xlarge     | 63 CPUs | 253 GiB MEM  |
-| m5d.24xlarge     | 95 CPUs | 381 GiB MEM  |
-| m5d.metal        | 95 CPUs | 381 GiB MEM  |
-| m6i.xlarge       | 3 CPUs  | 13 GiB MEM   |
-| m6i.2xlarge      | 7 CPUs  | 29 GiB MEM   |
-| m6i.4xlarge      | 15 CPUs | 61 GiB MEM   |
-| m6i.8xlarge      | 31 CPUs | 125 GiB MEM  |
-| m6i.12xlarge     | 47 CPUs | 189 GiB MEM  |
-| m6i.16xlarge     | 63 CPUs | 253 GiB MEM  |
-| m6i.24xlarge     | 95 CPUs | 381 GiB MEM  |
-| m6i.metal        | 95 CPUs | 381 GiB MEM  |
-| m6id.xlarge      | 3 CPUs  | 13 GiB MEM   |
-| m6id.2xlarge     | 7 CPUs  | 29 GiB MEM   |
-| m6id.4xlarge     | 15 CPU  | 61 GiB MEM   |
-| m6id.8xlarge     | 31 CPU  | 125 GiB MEM  |
-| m6id.12xlarge    | 47 CPU  | 189 GiB MEM  |
-| m6id.16xlarge    | 63 CPU  | 253 GiB MEM  |
-| m6id.24xlarge    | 95 CPU  | 381 GiB MEM  |
-| m6id.metal       | 127 CPU | 509 GiB MEM  |
-| r6i.xlarge       | 3 CPUs  | 29 GiB MEM   |
-| r6i.2xlarge      | 7 CPUs  | 61 GiB MEM   |
-| r6i.4xlarge      | 15 CPUs | 125 GiB MEM  |
-| r6i.8xlarge      | 31 CPUs | 253 GiB MEM  |
-| r6i.12xlarge     | 47 CPUs | 381 GiB MEM  |
-| r6i.16xlarge     | 63 CPUs | 509 GiB MEM  |
-| r6i.24xlarge     | 95 CPUs | 765 GiB MEM  |
-| r6i.metal        | 95 CPUs | 1021 GiB MEM |
-| c6i.xlarge       | 3 CPUs  | 5 GiB MEM    |
-| c6i.2xlarge      | 7 CPUs  | 13 GiB MEM   |
-| c6i.4xlarge      | 15 CPUs | 29 GiB MEM   |
-| c6i.8xlarge      | 31 CPUs | 61 GiB MEM   |
-| c6i.12xlarge     | 47 CPUs | 93 GiB MEM   |
-| c6i.16xlarge     | 63 CPUs | 125 GiB MEM  |
-| c6i.24xlarge     | 95 CPUs | 189 GiB MEM  |
-| c6i.metal        | 95 CPUs | 189 GiB MEM  |
-| t2.xlarge        | 3 CPUs  | 13 GiB MEM   |
-| t3.xlarge        | 3 CPUs  | 13 GiB MEM   |
-| t3.2xlarge       | 7 CPUs  | 29 GiB MEM   |
+| Worker Node Type | CPU     | Memory         |
+| ---------------- | ------- | -------------- |
+| m5.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
+| m5.2xlarge       | 6 CPUs  | 30.5 GiB MEM   |
+| m5.4xlarge       | 14 CPUs | 62.5 GiB MEM   |
+| m5.8xlarge       | 30 CPUs | 126.5 GiB MEM  |
+| m5.12xlarge      | 46 CPUs | 190.5 GiB MEM  |
+| m5.16xlarge      | 62 CPUs | 254.5 GiB MEM  |
+| m5.24xlarge      | 94 CPUs | 382.5 GiB MEM  |
+| m5.metal         | 94 CPUs | 382.5 GiB MEM  |
+| m5d.xlarge       | 2 CPUs  | 14.5 GiB MEM   |
+| m5d.2xlarge      | 6 CPUs  | 30.5 GiB MEM   |
+| m5d.4xlarge      | 14 CPUs | 62.5 GiB MEM   |
+| m5d.8xlarge      | 30 CPUs | 126.5 GiB MEM  |
+| m5d.12xlarge     | 46 CPUs | 190.5 GiB MEM  |
+| m5d.16xlarge     | 62 CPUs | 254.5 GiB MEM  |
+| m5d.24xlarge     | 94 CPUs | 382.5 GiB MEM  |
+| m5d.metal        | 94 CPUs | 382.5 GiB MEM  |
+| m6i.xlarge       | 2 CPUs  | 14.5 GiB MEM   |
+| m6i.2xlarge      | 6 CPUs  | 30.5 GiB MEM   |
+| m6i.4xlarge      | 14 CPUs | 62.5 GiB MEM   |
+| m6i.8xlarge      | 30 CPUs | 126.5 GiB MEM  |
+| m6i.12xlarge     | 46 CPUs | 190.5 GiB MEM  |
+| m6i.16xlarge     | 62 CPUs | 254.5 GiB MEM  |
+| m6i.24xlarge     | 94 CPUs | 382.5 GiB MEM  |
+| m6i.metal        | 94 CPUs | 382.5 GiB MEM  |
+| m6id.xlarge      | 2 CPUs  | 14.5 GiB MEM   |
+| m6id.2xlarge     | 6 CPUs  | 30.5 GiB MEM   |
+| m6id.4xlarge     | 14 CPU  | 62.5 GiB MEM   |
+| m6id.8xlarge     | 30 CPU  | 126.5 GiB MEM  |
+| m6id.12xlarge    | 46 CPU  | 190.5 GiB MEM  |
+| m6id.16xlarge    | 62 CPU  | 254.5 GiB MEM  |
+| m6id.24xlarge    | 94 CPU  | 382.5 GiB MEM  |
+| m6id.metal       | 126 CPU | 510.5 GiB MEM  |
+| r6i.xlarge       | 2 CPUs  | 30.5 GiB MEM   |
+| r6i.2xlarge      | 6 CPUs  | 62.5 GiB MEM   |
+| r6i.4xlarge      | 14 CPUs | 126.5 GiB MEM  |
+| r6i.8xlarge      | 30 CPUs | 254.5 GiB MEM  |
+| r6i.12xlarge     | 46 CPUs | 382.5 GiB MEM  |
+| r6i.16xlarge     | 62 CPUs | 510.5 GiB MEM  |
+| r6i.24xlarge     | 94 CPUs | 766.5 GiB MEM  |
+| r6i.metal        | 94 CPUs | 1022.5 GiB MEM |
+| c6i.xlarge       | 2 CPUs  | 6.5 GiB MEM    |
+| c6i.2xlarge      | 6 CPUs  | 14.5 GiB MEM   |
+| c6i.4xlarge      | 14 CPUs | 30.5 GiB MEM   |
+| c6i.8xlarge      | 30 CPUs | 62.5 GiB MEM   |
+| c6i.12xlarge     | 46 CPUs | 94.5 GiB MEM   |
+| c6i.16xlarge     | 62 CPUs | 126.5 GiB MEM  |
+| c6i.24xlarge     | 94 CPUs | 190.5 GiB MEM  |
+| c6i.metal        | 126 CPUs |  254.5 GiB MEM  |
+| t2.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
+| t3.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
+| t3.2xlarge       | 6 CPUs  | 30.5 GiB MEM   |
 
 If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
 

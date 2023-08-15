@@ -10,17 +10,17 @@ Use the following CI/CD template to automate deploying Apache Airflow DAGs from 
 ## Prerequisites
 
 - An AWS S3 bucket
-- An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-code.md#enable-dag-only-deploys-on-a-deployment).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - An [Astro project](create-first-dag.md) containing your project configurations.
 
-### DAG-based deploy
+### DAG deploy template
 
-This CI/CD template can be used to deploy DAGs from a single S3 bucket to a single Astro Deployment. When you create or modify a DAG in the S3 bucket, a Lambda function triggers and initialises an `astro` project to deploy your DAGs using Astro CLI.
+This CI/CD template can be used to deploy DAGs from a single S3 bucket to a single Astro Deployment. When you create or modify a DAG in the S3 bucket, a Lambda function triggers and initializes an `astro` project to deploy your DAGs using Astro CLI.
 
 :::info
 
-To deploy any non-DAG code changes to Astro, you need to trigger a standard image-only deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your S3 bucket. If your Astro project `dags` folder isn't up to date with your S3 DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
+To deploy any non-DAG code changes to Astro, you need to trigger a standard image deploy with your Astro project. When you do this, your Astro project must include the latest version of your DAGs from your S3 bucket. If your Astro project `dags` folder isn't up to date with your S3 DAGs bucket when you trigger this deploy, you will revert your DAGs back to the version hosted in your Astro project.
 
 :::
 
@@ -76,9 +76,11 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 6. Configure the following [Lambda environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html) for your Lambda function:
 
-    `ASTRO_HOME` = `\tmp`
-    `ASTRONOMER_KEY_ID` = `<your-deployment-api-key-id>`
-    `ASTRONOMER_KEY_SECRET` = `<your-deployment-api-key-secret>`
+    - `ASTRO_HOME`: `\tmp`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
+    - `ASTRO_DEPLOYMENT_ID`: Your Deployment ID.
+
+    For production Deployments, Astronomer recommends storing your API credentials in AWS Secrets Manager and referencing them from Lambda. See [https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html](https://docs.aws.amazon.com/lambda/latest/dg/configuration-database.html)
 
 7. Add the following code to `lambda_function.py`
 
@@ -89,8 +91,9 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
     import os
     import tarfile
 
-    BUCKET = os.getenv("BUCKET", "astronomer-field-engineering-demo")
+    BUCKET = os.environ.get("BUCKET", "astronomer-field-engineering-demo")
     s3 = boto3.resource('s3')
+    deploymentId = os.environ.get('ASTRO_DEPLOYMENT_ID')
 
     def untar(filename: str, destination: str) -> None:
         with tarfile.open(filename) as file:
@@ -132,7 +135,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         untar('./astro_cli.tar.gz', '.')
         
         run_command('echo y | ./astro dev init')
-        run_command('./astro deploy --dags')
+        run_command(f"./astro deploy {deploymentId} --dags")
         
         return {"statusCode": 200}
     ```

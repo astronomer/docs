@@ -1,6 +1,6 @@
 ---
-title: 'Write and schedule a simple ML pipeline using the Astro Cloud IDE'
-sidebar_label: 'Astro Cloud IDE - Write an ML pipeline'
+title: 'ML pipelines with the Astro Cloud IDE'
+sidebar_label: 'ML with the Astro Cloud IDE'
 id: cloud-ide-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---

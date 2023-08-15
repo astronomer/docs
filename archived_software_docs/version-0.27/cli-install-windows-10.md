@@ -31,7 +31,7 @@ Follow the [Docker for Windows Install Guide](https://docs.docker.com/docker-for
 
 Once you finish this installation, open a new WSL session, using the distro shell or Windows Terminal. You can now run `docker run hello-world` through your WSL instance to ensure everything works as expected.
 
-**Last thing**: Whenever you run Docker-compose up, you'll want to make sure you navigate to the `/c/Users/name/dev/myapplication` first, otherwise your volume won't work. In other words, never access `/mnt/c` directly.
+**Last thing**: Whenever you run docker compose up, you'll want to make sure you navigate to the `/c/Users/name/dev/myapplication` first, otherwise your volume won't work. In other words, never access `/mnt/c` directly.
 
 ### Step 2. CLI Install
 

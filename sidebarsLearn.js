@@ -7,9 +7,10 @@ module.exports = {
       link: {
         type: 'generated-index',
         title: 'Get started',
-        description: 'Get started with Airflow.',
+        description: 'Get started with Apache Airflow.',
       },
       items: [
+        'intro-to-airflow',
         'airflow-quickstart',
         {
           type: 'category',
@@ -47,7 +48,6 @@ module.exports = {
             'connections',
             'dags',
             'what-is-a-hook',
-            'intro-to-airflow',
             'managing-airflow-code',
             'airflow-openlineage',
             'what-is-an-operator',
@@ -56,6 +56,7 @@ module.exports = {
             'what-is-a-sensor',
             'managing-dependencies',
             'airflow-ui',
+            'airflow-variables',
           ],
         },
         {
@@ -69,6 +70,7 @@ module.exports = {
           items: [
             'astro-python-sdk-etl',
             'airflow-branch-operator',
+            'airflow-context',
             'cross-dag-dependencies',
             'airflow-importing-custom-hooks-operators',
             'error-notifications-in-airflow',
@@ -76,6 +78,7 @@ module.exports = {
             'debugging-dags',
             'dynamic-tasks',
             'templating',
+            'airflow-params',
             'airflow-passing-data-between-tasks',
             'rerunning-dags',
             'subdags',
@@ -115,7 +118,6 @@ module.exports = {
             'kubepod-operator',
             'using-airflow-plugins',
             'airflow-pools',
-            'airflow-sql-data-quality',
             'testing-airflow',
           ],
         },
@@ -133,6 +135,7 @@ module.exports = {
         'cloud-ide-tutorial',
         'operator-extra-link-tutorial',
         'xcom-backend-tutorial',
+        'airflow-sql-data-quality',
         'astro-python-sdk',
         'external-python-operator',
         'custom-airflow-ui-docs-tutorial',
@@ -156,10 +159,12 @@ module.exports = {
         'airflow-databricks',
         'airflow-dbt-cloud',
         'airflow-dbt',
+        'airflow-duckdb',
         'airflow-fivetran',
         'airflow-great-expectations',
         'execute-notebooks',
         'marquez',
+        'airflow-mlflow',
         'airflow-mongodb',
         'airflow-snowflake',
         'soda-data-quality',
@@ -167,5 +172,49 @@ module.exports = {
         'airflow-weights-and-biases',
       ],
     },
+    {
+      type: 'category',
+      label: 'Examples',
+      link: {
+        type: 'generated-index',
+        title: 'Examples',
+        description: 'See examples of use cases and more with Apache Airflow.'
+      },
+      items: [
+          'pycharm-local-dev',
+          'vscode-local-dev',
+          'example-ms-teams-callback',
+          {
+            type: 'category',
+            label: 'Airflow connections',
+            link: {
+              type: 'generated-index',
+              title: 'Airflow connections',
+              description: 'Use the following guides to quickly set up Airflow connections to external systems.',
+            },
+            items: [
+              'connections/azure-data-factory',
+              'connections/azure-blob-storage',
+              'connections/bigquery',
+              'connections/databricks',
+              'connections/dbt-cloud',
+              'connections/ms-sqlserver',
+              'connections/postgres',
+              'connections/redshift',
+              'connections/snowflake'
+            ],
+          },
+          {
+            type: 'category',
+            label: 'Use cases',
+            items: [
+              'use-case-airflow-databricks',
+              'use-case-airflow-dbt',
+              'use-case-airflow-ml-datasets'
+            ],
+          },
+      ],
+    },
+    'airflow-glossary'
   ],
 };

@@ -5,6 +5,12 @@ id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
 
+:::caution
+
+Deployment API keys will soon be deprecated in favor of Deployment API tokens, which is an upcoming Astro feature. If you have strict Deployment-level security requirements, you can continue to use Deployment API keys, but you will have to complete a one-time migration to Deployment API tokens in the future. Otherwise, Astronomer recommends using either [Workspace API tokens](workspace-api-tokens.md) or [Organization API tokens](organization-api-tokens.md) in place of Deployment API keys.
+
+:::
+
 An API key is a unique key ID and secret pair that you can use as an alternative to manual user authentication for some Astro actions. You can also use API keys to automate common actions on Astro that require manual inputs.
 
 You can use Deployment API keys to complete the following actions without authenticating as a user:

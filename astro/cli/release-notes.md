@@ -17,7 +17,134 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Astro CLI 1.15.0
+## Astro CLI 1.18.2
+
+Release date: August 10, 2023
+
+### Bug fix
+
+- Fixed an issue where running `astro deployment create` on Astro Hosted would create Deployments where DAG-only deploys were turned off by default.
+
+## Astro CLI 1.18.1
+
+Release date: August 4, 2023
+
+### Bug fix
+
+- Fixed an issue where `astro run` didn't work properly.
+
+## Astro CLI 1.18.0
+
+Release date: August 3, 2023
+
+### New command to test Astro projects before you upgrade
+
+You can use the new `astro dev upgrade-test` command to anticipate and address problems before upgrading to a newer version of Astro Runtime. The command runs several test which let you determine whether an upgrade will result in major dependency changes and import errors, allowing you to fix the problems before you upgrade. See [Test your Astro project locally](test-your-astro-project-locally.md) for more information.
+
+### Additional improvements
+
+- You can now specify the `--role` flag with `astro organization team create/update` to update a Team's Organization-level role. 
+- You can now specify the `--execution-date` flag with `astro run` to trigger a DAG run for a specific execution date.
+- You can now specify the `--verbose` flag with `astro run` to stream all logs to your terminal after the DAG run triggers. 
+
+### Bug Fixes
+
+- Fixed an issue where `astro deployment inspect` was showing the wrong value for a Deployment’s workload identity on Astro Hosted.
+- Fixed an issue were `astro dev restart` would occasionally not work.
+
+## Astro CLI 1.17.1
+
+Release date: July 12, 2023
+
+### Bug Fixes
+
+- Fixed an issue were some Astro Hosted Deployment updates triggered by the Astro CLI were not working.
+
+## Astro CLI 1.17.0
+
+Release date: July 6, 2023
+
+### Manage Organization API tokens with the Astro CLI
+
+You can now manage [Organization API tokens](organization-api-tokens.md) using the following CLI commands:
+
+- [`astro organization token create`](cli/astro-organization-token-create.md)
+- [`astro organization token roles`](cli/astro-organization-token-roles.md)
+- [`astro organization token list`](cli/astro-organization-token-list.md)
+- [`astro organization token update`](cli/astro-organization-token-update.md)
+- [`astro organization token rotate`](cli/astro-organization-token-rotate.md)
+- [`astro organization token delete`](cli/astro-organization-token-delete.md)
+
+### Download resources from the Astronomer Registry to your Astro project
+
+You can now use the following commands to download resources from the Astronomer Registry:
+
+- [`astro registry dag add`](cli/astro-registry-dag-add.md)
+- [`astro registry provider add`](cli/astro-registry-provider-add.md)
+
+The Astro registry contains DAGs and provider packages that are ready to use out of the box. Use these commands to quickly add resources to an Astro project, which you can then run locally or on Astro.
+
+### Additional improvements
+
+- You can now create Deployments on AWS standard clusters. 
+- If you belong to only one Workspace, the Astro CLI now uses that Workspace by default for all commands. 
+
+### Bug fixes 
+
+- Fixed an issue where the Astro CLI could not retrieve the health status of a Deployment.
+- Fixed an issue where you could not set `worker_concurrency` to 0 in a Deployment file. 
+
+## Astro CLI 1.16.2
+
+Release date: June 30, 2023
+
+### Bug fixes 
+
+- Fixed an issue where the `isHighAvailability` and `CICDEnforcement` fields in Deployment files were not processed correctly.
+
+## Astro CLI 1.16.1
+
+Release date: June 13, 2023
+
+### Manage Teams using the Astro CLI
+
+You can now manage [Astro Teams](manage-teams.md) using the following CLI commands:
+
+- [`astro workspace team add`](cli/astro-workspace-team-add.md)
+- [`astro workspace team list`](cli/astro-workspace-team-list.md)
+- [`astro workspace team update`](cli/astro-workspace-team-update.md)
+- [`astro workspace team remove`](cli/astro-workspace-team-remove.md)
+- [`astro organization team create`](cli/astro-organization-team-create.md)
+- [`astro organization team list`](cli/astro-organization-team-list.md)
+- [`astro organization team update`](cli/astro-organization-team-update.md)
+- [`astro organization team delete`](cli/astro-organization-team-delete.md)
+- [`astro organization team user remove`](cli/astro-organization-team-user.md)
+- [`astro organization team user add`](cli/astro-organization-team-user.md)
+- [`astro organization team user list`](cli/astro-organization-team-user.md)
+
+You can use these commands in automated workflows with [Workspace API tokens](workspace-api-tokens.md) and [Organization API tokens](organization-api-tokens.md).
+
+### Manage Workspace API tokens with the Astro CLI
+
+You can now manage [Workspace API tokens](workspace-api-tokens.md) using the following CLI commands:
+
+- [`astro workspace token create`](cli/astro-workspace-token-create.md)
+- [`astro workspace token add`](cli/astro-workspace-token-add.md)
+- [`astro workspace token list`](cli/astro-workspace-token-list.md)
+- [`astro workspace token update`](cli/astro-workspace-token-update.md)
+- [`astro workspace token rotate`](cli/astro-workspace-token-rotate.md)
+- [`astro workspace token delete`](cli/astro-workspace-token-delete.md)
+  
+These commands can be used to manage API tokens as part of an automated workflow.
+
+### Additional improvements
+
+- You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
+- You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](configure-deployment-resources.md#enforce-ci-cd-deploys) on a given Deployment. 
+- You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted. 
+
+## Astro CLI 1.15.1
 
 Release date: May 19, 2023
 

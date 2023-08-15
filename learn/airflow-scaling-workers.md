@@ -9,6 +9,9 @@ id: airflow-scaling-workers
   <meta name="og:description" content="See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 One of the biggest strengths of Apache Airflow is its ability to scale to meet the changing demands of your organization. To make the most of Airflow, there are a few key settings that you should consider modifying as you scale up your data pipelines.
 
 Airflow exposes a number of parameters that are closely related to DAG and task-level performance. These include:
@@ -100,11 +103,32 @@ There are three primary DAG-level Airflow settings that you can define in code:
 
 You can define any DAG-level settings within your DAG definition. For example:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="dag-level-airflow-settings"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 ```python
 # Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
 @dag("my_dag_id", concurrency=10, max_active_runs=3)
 def my_dag():
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+# Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
+with DAG("my_dag_id", concurrency=10, max_active_runs=3):
+```
+
+</TabItem>
+</Tabs>
 
 ### Task-level Airflow settings
 
@@ -117,9 +141,43 @@ There are two primary task-level Airflow settings users can define in code:
 
 The parameters above are inherited from the `BaseOperator`, so you can set them in any operator definition. For example:
 
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="task-level-airflow-settings"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
 ```python
-t1 = PythonOperator(task_id="t1", pool="my_custom_pool", max_active_tis_per_dag=14)
+@task(
+    pool="my_custom_pool",
+    max_active_tis_per_dag=14
+) 
+def t1():
+    pass
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+def t1_func():
+    pass
+
+t1 = PythonOperator(
+    task_id="t1",
+    python_callable=t1_func,
+    pool="my_custom_pool",
+    max_active_tis_per_dag=14
+)
+```
+
+</TabItem>
+</Tabs>
 
 ## Executors and scaling
 

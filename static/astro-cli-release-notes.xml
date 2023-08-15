@@ -1,4 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-cli-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro CLI Release Notes</title><link>https://docs.astronomer.io/astro/cli/release-notes</link><pubDate>Wed, 24 May 2023 08:53:02 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro CLI.</description><language>en-US</language><item><title>Astro CLI 1.15.0</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1150</link><pubDate>Wed, 17 May 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1150</guid><description><![CDATA[<p>Release date: May 18, 2023</p><h3>New commands to manage Airflow resources on Deployments</h3><p>Use the following new Astro CLI commands to manage your Airflow variables, pools, connections, on Astro Deployments. These commands are particularly useful for automating the creation of new Deployments based on old ones, as you can now transfer all Airflow resources from a source Deployment to a target Deployment:</p><ul>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-cli-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro CLI Release Notes</title><link>https://docs.astronomer.io/astro/cli/release-notes</link><pubDate>Fri, 11 Aug 2023 08:55:25 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro CLI.</description><language>en-US</language><item><title>Astro CLI 1.18.2</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1182</link><pubDate>Wed, 09 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1182</guid><description><![CDATA[<p>Release date: August 10, 2023</p><h3>Bug fix</h3><ul>
+<li>Fixed an issue where running <code>astro deployment create</code> on Astro Hosted would create Deployments where DAG-only deploys were turned off by default.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.18.1</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1181</link><pubDate>Thu, 03 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1181</guid><description><![CDATA[<p>Release date: August 4, 2023</p><h3>Bug fix</h3><ul>
+<li>Fixed an issue where <code>astro run</code> didn't work properly.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.18.0</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1180</link><pubDate>Wed, 02 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1180</guid><description><![CDATA[<p>Release date: August 3, 2023</p><h3>New command to test Astro projects before you upgrade</h3><p>You can use the new <code>astro dev upgrade-test</code> command to anticipate and address problems before upgrading to a newer version of Astro Runtime. The command runs several test which let you determine whether an upgrade will result in major dependency changes and import errors, allowing you to fix the problems before you upgrade. See <a href="test-your-astro-project-locally.md">Test your Astro project locally</a> for more information.</p><h3>Additional improvements</h3><ul>
+<li>You can now specify the <code>--role</code> flag with <code>astro organization team create/update</code> to update a Team's Organization-level role.</li>
+<li>You can now specify the <code>--execution-date</code> flag with <code>astro run</code> to trigger a DAG run for a specific execution date.</li>
+<li>You can now specify the <code>--verbose</code> flag with <code>astro run</code> to stream all logs to your terminal after the DAG run triggers.</li>
+</ul><h3>Bug Fixes</h3><ul>
+<li>Fixed an issue where <code>astro deployment inspect</code> was showing the wrong value for a Deployment’s workload identity on Astro Hosted.</li>
+<li>Fixed an issue were <code>astro dev restart</code> would occasionally not work.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.17.1</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1171</link><pubDate>Tue, 11 Jul 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1171</guid><description><![CDATA[<p>Release date: July 12, 2023</p><h3>Bug Fixes</h3><ul>
+<li>Fixed an issue were some Astro Hosted Deployment updates triggered by the Astro CLI were not working.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.17.0</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1170</link><pubDate>Wed, 05 Jul 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1170</guid><description><![CDATA[<p>Release date: July 6, 2023</p><h3>Manage Organization API tokens with the Astro CLI</h3><p>You can now manage <a href="organization-api-tokens.md">Organization API tokens</a> using the following CLI commands:</p><ul>
+<li><a href="cli/astro-organization-token-create.md"><code>astro organization token create</code></a></li>
+<li><a href="cli/astro-organization-token-roles.md"><code>astro organization token roles</code></a></li>
+<li><a href="cli/astro-organization-token-list.md"><code>astro organization token list</code></a></li>
+<li><a href="cli/astro-organization-token-update.md"><code>astro organization token update</code></a></li>
+<li><a href="cli/astro-organization-token-rotate.md"><code>astro organization token rotate</code></a></li>
+<li><a href="cli/astro-organization-token-delete.md"><code>astro organization token delete</code></a></li>
+</ul><h3>Download resources from the Astronomer Registry to your Astro project</h3><p>You can now use the following commands to download resources from the Astronomer Registry:</p><ul>
+<li><a href="cli/astro-registry-dag-add.md"><code>astro registry dag add</code></a></li>
+<li><a href="cli/astro-registry-provider-add.md"><code>astro registry provider add</code></a></li>
+</ul><p>The Astro registry contains DAGs and provider packages that are ready to use out of the box. Use these commands to quickly add resources to an Astro project, which you can then run locally or on Astro.</p><h3>Additional improvements</h3><ul>
+<li>You can now create Deployments on AWS standard clusters.</li>
+<li>If you belong to only one Workspace, the Astro CLI now uses that Workspace by default for all commands.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where the Astro CLI could not retrieve the health status of a Deployment.</li>
+<li>Fixed an issue where you could not set <code>worker_concurrency</code> to 0 in a Deployment file.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.16.2</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1162</link><pubDate>Thu, 29 Jun 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1162</guid><description><![CDATA[<p>Release date: June 30, 2023</p><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where the <code>isHighAvailability</code> and <code>CICDEnforcement</code> fields in Deployment files were not processed correctly.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.16.1</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1161</link><pubDate>Mon, 12 Jun 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1161</guid><description><![CDATA[<p>Release date: June 13, 2023</p><h3>Manage Teams using the Astro CLI</h3><p>You can now manage <a href="manage-teams.md">Astro Teams</a> using the following CLI commands:</p><ul>
+<li><a href="cli/astro-workspace-team-add.md"><code>astro workspace team add</code></a></li>
+<li><a href="cli/astro-workspace-team-list.md"><code>astro workspace team list</code></a></li>
+<li><a href="cli/astro-workspace-team-update.md"><code>astro workspace team update</code></a></li>
+<li><a href="cli/astro-workspace-team-remove.md"><code>astro workspace team remove</code></a></li>
+<li><a href="cli/astro-organization-team-create.md"><code>astro organization team create</code></a></li>
+<li><a href="cli/astro-organization-team-list.md"><code>astro organization team list</code></a></li>
+<li><a href="cli/astro-organization-team-update.md"><code>astro organization team update</code></a></li>
+<li><a href="cli/astro-organization-team-delete.md"><code>astro organization team delete</code></a></li>
+<li><a href="cli/astro-organization-team-user.md"><code>astro organization team user remove</code></a></li>
+<li><a href="cli/astro-organization-team-user.md"><code>astro organization team user add</code></a></li>
+<li><a href="cli/astro-organization-team-user.md"><code>astro organization team user list</code></a></li>
+</ul><p>You can use these commands in automated workflows with <a href="workspace-api-tokens.md">Workspace API tokens</a> and <a href="organization-api-tokens.md">Organization API tokens</a>.</p><h3>Manage Workspace API tokens with the Astro CLI</h3><p>You can now manage <a href="workspace-api-tokens.md">Workspace API tokens</a> using the following CLI commands:</p><ul>
+<li><a href="cli/astro-workspace-token-create.md"><code>astro workspace token create</code></a></li>
+<li><a href="cli/astro-workspace-token-add.md"><code>astro workspace token add</code></a></li>
+<li><a href="cli/astro-workspace-token-list.md"><code>astro workspace token list</code></a></li>
+<li><a href="cli/astro-workspace-token-update.md"><code>astro workspace token update</code></a></li>
+<li><a href="cli/astro-workspace-token-rotate.md"><code>astro workspace token rotate</code></a></li>
+<li><a href="cli/astro-workspace-token-delete.md"><code>astro workspace token delete</code></a></li>
+</ul><p>These commands can be used to manage API tokens as part of an automated workflow.</p><h3>Additional improvements</h3><ul>
+<li>You can now specify the <code>--cluster-type "dedicated"</code> flag when using <code>astro deployment create</code> to create a Deployment on a dedicated cluster in Astro Hosted.</li>
+<li>You can now retrieve a Deployment's Workload Identity when using <code>astro deployment inspect</code>.</li>
+<li>You can now specify the <code>--enforce-cicd</code> flag with <code>astro deployment create</code> and <code>astro deployment update</code> to <a href="configure-deployment-resources.md#enforce-ci-cd-deploys">enforce CI/CD</a> on a given Deployment.</li>
+<li>You can now <a href="manage-deployments-as-code.md">manage Deployments as code</a> on Astro Hosted.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.15.1</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1151</link><pubDate>Thu, 18 May 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1151</guid><description><![CDATA[<p>Release date: May 19, 2023</p><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where you could not create a Deployment on a standard Hosted cluster.</li>
+</ul>]]></description></item><item><title>Astro CLI 1.15.0</title><link>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1150</link><pubDate>Wed, 17 May 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/cli/release-notes#astro-cli-1150</guid><description><![CDATA[<p>Release date: May 18, 2023</p><h3>New commands to manage Airflow resources on Deployments</h3><p>Use the following new Astro CLI commands to manage your Airflow variables, pools, connections, on Astro Deployments. These commands are particularly useful for automating the creation of new Deployments based on old ones, as you can now transfer all Airflow resources from a source Deployment to a target Deployment:</p><ul>
 <li><a href="cli/astro-deployment-connection-list.md"><code>astro deployment connection list</code></a></li>
 <li><a href="cli/astro-deployment-connection-create.md"><code>astro deployment connection create</code></a></li>
 <li><a href="cli/astro-deployment-connection-update.md"><code>astro deployment connection update</code></a></li>

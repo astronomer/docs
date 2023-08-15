@@ -6,6 +6,9 @@ id: "airflow-mongodb"
 sidebar_custom_props: { icon: 'img/integrations/mongodb.png' }
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import load_data_to_mongodb from '!!raw-loader!../code-samples/dags/airflow-mongodb/load_data_to_mongodb.py';
+
 [MongoDB](https://www.mongodb.com/) is an open-source general purpose database built by developers, for developers. MongoDB's popularity is driven by its use of flexible document schemas and horizontal scalability. By leveraging the [Mongo provider](https://registry.astronomer.io/providers/mongo), you can easily orchestrate many use cases with Airflow such as:
 
 - Machine learning pipelines.
@@ -84,7 +87,7 @@ The connections you configure will connect to MongoDB and the API providing samp
     - **Host:** Your MongoDB Atlas host name
     - **Login:** Your database user ID
     - **Password:** Your database user password
-    - **Extra:** {"srv": true}
+    - **Extra:** `{"srv": true}`
 
     Your connection should look something like this:
 
@@ -102,49 +105,7 @@ The connections you configure will connect to MongoDB and the API providing samp
 
 In your Astro project `dags` folder, create a new file called `mongo-pipeline.py`. Paste the following code into the file:
 
-```python
-import json
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.providers.http.operators.http import SimpleHttpOperator
-from airflow.providers.mongo.hooks.mongo import MongoHook
-from pendulum import datetime
-
-def uploadtomongo(ti, **context):
-    hook = MongoHook(mongo_conn_id='mongo_default')
-    client = hook.get_conn()
-    db = client.MyDB # Replace "MyDB" if you want to load data to a different database
-    currency_collection=db.currency_collection
-    print(f"Connected to MongoDB - {client.server_info()}")
-    d=json.loads(context["result"])
-    currency_collection.insert_one(d)
-
-with DAG(
-    dag_id="load_data_to_mongodb",
-    schedule=None,
-    start_date=datetime(2022, 10, 28),
-    catchup=False,
-    default_args={
-        "retries": 0,
-    }
-):
-
-    t1 = SimpleHttpOperator(
-        task_id='get_currency',
-        method='GET',
-        endpoint='2022-01-01..2022-06-30',
-        headers={"Content-Type": "application/json"},
-        do_xcom_push=True
-    )
-
-    t2 = PythonOperator(
-        task_id='upload-mongodb',
-        python_callable=uploadtomongo,
-        op_kwargs={"result": t1.output},
-    )
-
-    t1 >> t2
-```
+<CodeBlock language="python">{load_data_to_mongodb}</CodeBlock>
 
 This DAG gets currency data from an API using the SimpleHttpOperator and loads the data into MongoDB using the MongoHook and the PythonOperator. The data will be loaded as a new collection in a database called `MyDB`.
 

@@ -7,7 +7,7 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 
 Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Drone CI](https://www.drone.io/).
 
-The templates for DroneCI use the [image-only deploy](template-overview.md#template-types) process with a _single branch implementation_, which requires only one Astro Deployment.
+The template for DroneCI is based on the [image deploy template](template-overview.md#template-types) with a _single branch implementation_, which requires only one Astro Deployment.
 
 If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro or you're interested in a multiple-branch implementation, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
@@ -15,17 +15,16 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Drone can access.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Deployment API key ID and secret](api-keys.md), a [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
+- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - A functional Drone [server](https://docs.drone.io/server/overview/).
 - A user with admin privileges to your Drone server.
 - A [Docker runner](https://docs.drone.io/runner/docker/overview/).
 
 ## Single branch implementation
 
-1. Set the following environment variables as repository-level [secrets](https://docs.drone.io/secret/repository/) on Drone:
+1. Set the following environment variable as a repository-level [secret](https://docs.drone.io/secret/repository/) on Drone:
 
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
 2. In your Drone server, open your Astro project repository and go to **Settings** > **General**. Under **Project Settings**, turn on the **Trusted** setting.
 
@@ -57,15 +56,13 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
         - name: dockersock
           path: /var/run
         commands:
-        - astro deploy -f
+        - astro deploy <your-deployment-id> -f
         depends on:
         - wait
 
         environment:
-          ASTRONOMER_KEY_ID:
-            from_secret: ASTRONOMER_KEY_ID
-          ASTRONOMER_KEY_SECRET:
-            from_secret: ASTRONOMER_KEY_SECRET
+          ASTRO_API_TOKEN:
+            from_secret: ASTRO_API_TOKEN
 
     services:
     - name: docker

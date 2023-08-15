@@ -4,12 +4,17 @@ title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <head>
   <meta name="description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
   <meta name="og:description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
 </head>
 
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
+
+This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources).
 
 ## Benefits
 
@@ -34,21 +39,6 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 
 - An [Astro project](develop-project.md#create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
-
-## Configure the KubernetesPodOperator in the Cloud UI
-
-While you still need to configure the KubernetesPodOperator in your DAG code to define your task environment, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
-
-1. In the Cloud UI, select a Deployment.
-2. Click **Resource quotas**.
-3. Configure the following values:
-
-    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
-    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment. 
-
-Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
-
-The Cloud UI also shows the **Default CPU** and **Default Memory** for your _default Pod_. If you don't configure CPU or memory for a task in your DAG code, the task runs in the default Pod with these default resources. 
 
 ## Set up the KubernetesPodOperator
 
@@ -84,7 +74,7 @@ This is the minimum configuration required to run tasks with the KubernetesPodOp
 
 Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, which means that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
-To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `resources` argument of the KubernetesPodOperator. For example:
+To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `container_resources` argument of the KubernetesPodOperator. For example:
 
 ```python {20}
 from airflow.configuration import conf
@@ -105,7 +95,7 @@ KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    resources=compute_resources,
+    container_resources=compute_resources,
     task_id="<task-name>",
     get_logs=True,
 )
@@ -148,7 +138,6 @@ example_volume_test = KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    resources=compute_resources,
     task_id="<task-name>",
     get_logs=True,
     volume_mounts=volume_mounts,
@@ -158,27 +147,36 @@ example_volume_test = KubernetesPodOperator(
  
 ## Run images from a private registry
 
-By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories).
+By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If your images are hosted on the container registry native to your cloud provider, you can grant access to the images directly. Otherwise, if you are using any other private registry, you need to create a Kubernetes Secret containing credentials to the registry, then specify the Kubernetes Secret in your DAG.
 
-### Prerequisites
+<Tabs
+    defaultValue="PrivateRegistry"
+    groupId="run-images-from-a-private-registry"
+    values={[
+        {label: 'Private Registry', value: 'PrivateRegistry'},
+        {label: 'Amazon Elastic Container Registry (ECR)', value: 'AWSECR'},
+        {label: 'Google Artifact Registry', value: 'GoogleArtifactRegistry'},
+    ]}>
+<TabItem value="PrivateRegistry">
+
+#### Prerequisites
 
 - An [Astro project](develop-project.md#create-an-astro-project).
 - An [Astro Deployment](configure-deployment-resources.md).
 - Access to a private Docker registry.
-- [kubectl](https://kubernetes.io/docs/reference/kubectl/), the command line tool for Kubernetes.
 
-### Step 1: Create a Kubernetes Secret
+#### Step 1: Create a Kubernetes Secret
 
 To run Docker images from a private registry on Astro, a Kubernetes Secret that contains credentials to your registry must be created. Injecting this secret into your Deployment's namespace will give your tasks access to Docker images within your private registry.
 
-1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file.
+1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file. If the generated `/docker/config.json` does not contain any credentials, copy your registry URL, username, and password.
 2. In the Cloud UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
 3. Copy the value in the **NAMESPACE** field.
 4. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the namespace of the Deployment.
 
-Astronomer Support will give you instructions on how to securely send the output of your `/.docker/config.json` file. Do not send this file by email, as it contains sensitive credentials to your registry. Astronomer will use this file to create a Kubernetes secret and inject it into your Deployment's namespace.
+Astronomer Support will give you instructions on how to securely send your credentials. Do not send this file by email, as it contains sensitive credentials to your registry. Astronomer will use these credentials to create a Kubernetes secret in your Deployment's namespace.
 
-### Step 2: Specify the Kubernetes Secret in your DAG
+#### Step 2: Specify the Kubernetes Secret in your DAG
 
 Once Astronomer has added the Kubernetes secret to your Deployment, you will be notified and provided with the name of the secret.
 
@@ -199,15 +197,18 @@ KubernetesPodOperator(
     get_logs=True,
 )
 ```
-### Docker images hosted in private Amazon ECR repositories
+
+</TabItem>
+
+<TabItem value="AWSECR">
 
 :::info
 
-This setup is available only on Astro Hybrid. 
+This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
 
 :::
 
-If your Docker image is hosted in an Amazon ECR repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret, or specify the Kubernetes secret in your DAG. Docker images hosted on Amazon ECR repositories can only be pulled from AWS clusters.
+If your Docker image is hosted in an Amazon ECR repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret, or specify the Kubernetes secret in your DAG. Docker images hosted in Amazon ECR repositories can only be pulled from AWS clusters.
 
 1. Log in to the Amazon ECR Dashboard and then select **Menu** > **Repositories**.
 2. Click the **Private** tab and then click the name of the repository that hosts the Docker image. 
@@ -241,7 +242,36 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 8. Replace `<your-docker-image>` in the instantiation of the KubernetesPodOperator with the Amazon ECR repository URI that hosts the Docker image. To locate the URI:
 
     - In the Amazon ECR Dashboard, click **Repositories** in the left menu.
-    - Click the **Private** tab and then copy the URI of the repository that hosts the Docker image.
+    - Open the **Private** tab and then copy the URI of the repository that hosts the Docker image.
+
+</TabItem>
+<TabItem value="GoogleArtifactRegistry">
+
+:::info
+
+This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+
+:::
+
+If your Docker image is hosted in Google Artifact Registry repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret or specify the Kubernetes secret in your DAG. Docker images hosted in Google Artifact Registry repositories can be pulled only to Deployments hosted on GCP clusters.
+
+#### Setup
+
+1. Contact [Astronomer support](https://support.astronomer.io) to request the Compute Engine default service account ID for your cluster.
+2. Log in to Google Artifact Registry.
+3. Click the checkbox next to the repository that you want to use.
+4. In the **Properties** pane that appears, click **ADD PRINCIPAL** in the **PERMISSIONS** tab.
+5. In the **Add Principals** text box, paste the Compute Engine default service account ID that was provided to you by Astronomer Support.
+6. In the **Assign Roles** selector, search for `Artifact Registry Reader` and select the role that appears. 
+7. Click **Save** to grant read access for the registry  to Astro.
+8. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator). When you configure an instantiation of the KubernetesPodOperator, replace `<your-docker-image>` with the Google Artifact Registry image URI. To retrieve the URI:
+
+    - In the Google Artifact Registry, click the registry containing the image.
+    - Click the image you want to use.
+    - Click the copy icon next to the image in the top corner. The string you copy should be in the format `<GCP Region>-docker.pkg.dev/<Project Name>/<Registry Name>/<Image Name>`.
+
+</TabItem>
+</Tabs>
 
 ## Use secret environment variables with the KubernetesPodOperator
 

@@ -8,11 +8,10 @@ id: airflow-datasets
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
-import dataset_upstream1 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_upstream1.py';
-import dataset_downstream_1_2 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_downstream_1_2.py';
-import datasets_ml_example_consume from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_consume.py';
-import datasets_ml_example_publish_taskflow from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_publish_taskflow.py';
-import datasets_ml_example_publish_traditional from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_publish_traditional.py';
+import dataset_producer from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_producer.py';
+import dataset_producer_traditional from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_producer_traditional.py';
+import dataset_consumer from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_consumer.py';
+import dataset_consumer_traditional from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_consumer_traditional.py';
 import example_sdk_datasets from '!!raw-loader!../code-samples/dags/airflow-datasets/example_sdk_datasets.py';
 
 Datasets and data-aware scheduling were made available in [Airflow 2.4](https://airflow.apache.org/docs/apache-airflow/2.4.0/release_notes.html#airflow-2-4-0-2022-09-19). DAGs that access the same data now have explicit, visible relationships, and DAGs can be scheduled based on updates to these datasets. This feature helps make Airflow data-aware and expands Airflow scheduling capabilities beyond time-based methods such as cron.
@@ -39,15 +38,53 @@ The dataset URI is saved as plain text, so it is recommended that you hide sensi
 
 You can reference the dataset in a task by passing it to the task's `outlets` parameter. `outlets` is part of the `BaseOperator`, so it's available to every Airflow operator. 
 
-When you define a task's `outlets` parameter, Airflow labels the task as a producer task that updates the datasets. It is up to you to determine which tasks should be considered producer tasks for a dataset. As long as a task has an outlet dataset, Airflow considers it a producer task even if that task doesn't operate on the referenced dataset. In the following example, Airflow treats both `upstream_task_1` and `upstream_task_2` as producer tasks even though they only run `sleep` in a bash shell.
+When you define a task's `outlets` parameter, Airflow labels the task as a producer task that updates the datasets. It is up to you to determine which tasks should be considered producer tasks for a dataset. As long as a task has an outlet dataset, Airflow considers it a producer task even if that task doesn't operate on the referenced dataset. In the following example, the `write_instructions_to_file` and `write_info_to_file` are both producer tasks because they have defined outlets.
 
-<CodeBlock language="python">{dataset_upstream1}</CodeBlock>
+<Tabs
+    defaultValue="taskflow"
+    groupId="dataset-concepts"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
 
-After a dataset is defined in one or more producer tasks, consumer DAGs in your Airflow environment listen to the producer tasks and run whenever the task completes, rather than running on a time-based schedule. For example, if you have a DAG that should run when `dag1_dataset` and `dag2_dataset` are updated, you define the DAG's schedule using the names of the datasets.
+<CodeBlock language="python">{dataset_producer}</CodeBlock>
 
-Any task that is scheduled with a dataset is considered a consumer task even if that task doesn't consume the referenced dataset. In other words, it is up to you as the DAG author to correctly reference and use the dataset that the consumer DAG is scheduled on.
+</TabItem>
 
-<CodeBlock language="python">{dataset_downstream_1_2}</CodeBlock>
+<TabItem value="traditional">
+
+<CodeBlock language="python">{dataset_producer_traditional}</CodeBlock>
+
+</TabItem>
+
+</Tabs>
+
+A consumer DAG runs whenever the dataset(s) it is scheduled on is updated by a producer task, rather than running on a time-based schedule. For example, if you have a DAG that should run when the `INSTRUCTIONS` and `INFO` datasets are updated, you define the DAG's schedule using the names of those two datasets.
+
+Any DAG that is scheduled with a dataset is considered a consumer DAG even if that DAG doesn't actually access the referenced dataset. In other words, it's up to you as the DAG author to correctly reference and use datasets.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="dataset-concepts"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{dataset_consumer}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{dataset_consumer_traditional}</CodeBlock>
+
+</TabItem>
+
+</Tabs>
 
 Any number of datasets can be provided to the `schedule` parameter as a list. The DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully. 
 
@@ -78,49 +115,6 @@ Click one of the datasets to display a list of task instances that updated the d
 The **DAG Dependencies** view (found under the **Browse** tab) shows a graph of all dependencies between DAGs (in green) and datasets (in orange) in your Airflow environment.
 
 ![DAG Dependencies View](/img/guides/dag_dependencies.png)
-
-## Example implementation
-
-In this section you'll learn how datasets and data-aware scheduling can help with a classic ML Ops use case. In this example, it's assumed that two teams are responsible for DAGs that provide data, train a model, and publish the results. 
-
-In this example, a data engineering team has a DAG that sends data to an Amazon S3 bucket and a data science team has another DAG that uses the data to train a Sagemaker model and publish the results to Redshift. 
-
-Using datasets, the data science team can schedule their DAG to run only when the data engineering team's DAG has completed sending the data to the Amazon S3 bucket, ensuring that only the most recent data is used in the model.
-
-The following is an example of the data engineering team's DAG:
-
-<Tabs
-    defaultValue="taskflow"
-    groupId="example-implementation"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
-    ]}>
-
-<TabItem value="taskflow">
-
-<CodeBlock language="python">{datasets_ml_example_publish_taskflow}</CodeBlock>
-
-</TabItem>
-
-<TabItem value="traditional">
-
-<CodeBlock language="python">{datasets_ml_example_publish_traditional}</CodeBlock>
-
-</TabItem>
-</Tabs>
-
-
-
-This DAG has a single task, `upload_data_to_s3`, that publishes the data. An outlet dataset is defined in the `@task` decorator using `outlets=Dataset(dataset_uri)` where the dataset URI is defined at the top of the DAG script.
-
-The data science team can then provide that same dataset URI to the `schedule` parameter in their DAG:
-
-<CodeBlock language="python">{datasets_ml_example_consume}</CodeBlock>
- 
-The dependency between the two DAGs is straightforward to implement and can be viewed alongside the dataset in the Airflow UI.
-
-![ML Example Dependencies](/img/guides/ml_example_dependencies.png)
 
 ## Datasets with the Astro Python SDK
 

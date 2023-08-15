@@ -1,6 +1,6 @@
 ---
-title: 'Customize extra links for Apache Airflow operators'
-sidebar_label: 'Customize extra links for operators'
+title: 'Customize Operator Extra Links'
+sidebar_label: 'Customize Extra Links'
 id: operator-extra-link-tutorial
 description: 'Learn how to add operator extra links using the AirflowExtraLinkPlugin.'
 ---

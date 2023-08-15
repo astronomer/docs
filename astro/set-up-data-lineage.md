@@ -18,7 +18,7 @@ This guide provides information about how lineage metadata is automatically extr
 
 ## Extract lineage metadata from Airflow operators using supported extractors
 
-Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/extractors/default-extractors) for popular Airflow operators.
+Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/default-extractors) for popular Airflow operators.
 
 The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
 
@@ -272,4 +272,24 @@ Astronomer recommends enabling this feature only for Deployments with non-sensit
 
 You can configure both Airflow and external systems to generate custom facets that contain more specific information about job runs. Custom facets appear as **Custom Facets** in the **Info** tab of your data pipeline's lineage graph. To create a custom facet, see [OpenLineage Documentation](https://openlineage.io/docs/spec/facets/custom-facets).
 
+## Disable OpenLineage
 
+By default, OpenLineage is enabled for all Astro Deployments. If you don't want your Deployment to collect or send lineage data, you can disable OpenLineage. 
+
+Before you disable OpenLineage, keep the following in mind:
+
+- You can't use [Astro alerts](alerts.md) in a Deployment with OpenLineage disabled.
+- A Deployment with OpenLineage disabled will not send any data to the [**Lineage** page](data-lineage.md) in the Cloud UI.
+
+To disable OpenLIneage for a Deployment, set the following [environment variable](environment-variables.md):
+
+- **Key**: `OPENLINEAGE_DISABLED`
+- **Value**: `False`
+
+To re-enable OpenLineage, you can either set `OPENLINEAGE_DISABLED = False` or remove the environment variable.
+
+:::tip Disable OpenLineage locally
+
+If you also want to disable OpenLineage in your local environment, you can alternatively set `ENV OPENLINEAGE_DISABLED = True` in your Astro project Dockerfile. After you deploy the change to Astro, this ensures that OpenLineage is disabled both locally and on Astro.
+
+:::
