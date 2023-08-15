@@ -95,18 +95,15 @@ No external configuration is required for the email integration. Astronomer reco
 
 In the Cloud UI, you can enable alerts from the **Workspace Settings** page. 
 
+1. In the Cloud UI, click **Alerts**.
 
-1. In the Cloud UI, select the Astro Workspace you want to create an alert for.
+2. Click **Add Alert**. 
 
-2. Click **Workspace Settings**, then click **Alerts**.
+3. Enter your **Alert Name** and choose the alert type, either **Pipeline Failure** or **Task Duration**. 
 
-3. Click **Add Alert**. 
+4. Choose the **Communication Channels** where you want to send your alert.
 
-4. Enter your **Alert Name** and choose the alert type, either **Pipeline Failure** or **Task Duration**. 
-
-5. Choose the **Communication Channels** where you want to send your alert.
-
-6. Add your communication channel information.
+5. Add your communication channel information.
 
     <Tabs
         defaultValue="Slack"
@@ -133,7 +130,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     </TabItem>
     </Tabs>
 
-7. Add DAG or Tasks to your alert.
+6. Add DAG or Tasks to your alert.
 
      - **Pipeline failure**: Click **Pipeline** to choose the DAG that you want to send an alert about if it fails.
     
@@ -141,4 +138,4 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
      You can add more DAGs or tasks after you create your alert. 
 
-8. Click **Create alert**.
+7. Click **Create alert**.

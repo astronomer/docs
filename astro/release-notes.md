@@ -27,6 +27,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## August 15, 2023
+
+### Additional improvements
+
+- You can now see how many Astro alerts you've configured for a DAG in the **DAGs** page of the Cloud UI.
+
+### Bug fixes
+
+- Fixed an issue where you couldn't run Astro Cloud IDE pipelines that included a Markdown cell.
+- Fixed an issue where an Organization's SSO bypass link was formatted incorrectly in the Cloud UI.
+
 ## August 8, 2023
 
 ### New Hosted worker type
