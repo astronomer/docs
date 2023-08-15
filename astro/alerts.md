@@ -27,13 +27,8 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 - An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage). 
 - A Slack workspace, PagerDuty service, or email address.
 
-:::caution
-
-You must use an Astro Runtime version 7.1.0 or greater to use Astro Alerts.
-
-:::
-
 <!-- Sensitive header used in product - do not change without a redirect-->
+
 ## Step 1: Configure your communication channel
 
 <Tabs
@@ -60,13 +55,9 @@ To set up alerts in Slack, you need to create a Slack app in your Slack workspac
 
   ![Create your app in a Slack workspace](/img/docs/slack_alerts_1.3.png)
 
-
 4. Select **Incoming webhooks**.
 
-5. On the **Incoming webhooks** page, click to turn on **Activate Incoming Webhooks**.
-
-  ![Activate an incoming webhook](/img/docs/slack_alerts_1.5.png)
-
+5. On the [**Incoming webhooks** page](https://api.slack.com/messaging/webhooks), click to turn on **Activate Incoming Webhooks**.
 
 6. In the **Webhook URLs for your Workspace** section, click **Add new Webhook to Workspace**. 
 
@@ -76,7 +67,7 @@ To set up alerts in Slack, you need to create a Slack app in your Slack workspac
   
   :::
 
-  ![Add your webhook](/img/docs/slack_alerts_1.6.png)
+    ![Add your webhook](/img/docs/slack_alerts_1.6.png)
 
 7. Choose the channel where you want to send your Astro alerts and click **Allow**.
 
@@ -152,8 +143,6 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     Paste the Integration Key from your PagerDuty Integration and select the **Severity** of the alert.
 
     ![Paste the Integration Key](/img/docs/pagerduty_alerts_2.6.png)
-
-
     
     </TabItem>
     <TabItem value="Email">
@@ -175,7 +164,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 ## Step 3 (Optional): Test your DAG run failure alert
 
-Because manually stopping your DAG triggers Astro to send an alert, you can test your integration by manually testing your DAG.
+Astro alerts work whether your DAG run is manual or scheduled. So, you can easily test your configures Astro alert by failing your DAG manually.
 
 1. To test your alert, **Open Airflow** for the Deployment where you configured your alert.
 
@@ -183,10 +172,10 @@ Because manually stopping your DAG triggers Astro to send an alert, you can test
 
 3. Trigger a DAG run.
 
-4. Manually mark your DAG's state as **Failed** by clicking the DAG run in the Grid view, then clicking **Mark state as...** and choose **Failed**.
+4. Manually mark your DAG's state as **Failed** by clicking the DAG run in the Grid view, then clicking **Mark state as...** > **Failed**.
 
   ![Manually marking a successful DAG run as Failed.](/img/docs/slack_alerts_3.4.png)
 
 5. Check your Slack or PagerDuty alerts for your DAG failure alert.
 
-  ![Example of a Slack test alert.](/img/docs/slack_alerts_3.5.png)
+    ![Example of a Slack test alert.](/img/docs/slack_alerts_3.5.png)
