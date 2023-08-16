@@ -34,6 +34,13 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - Cross-account service accounts are not supported on Pods launched in an Astro cluster. To allow access to external data sources, you can provide credentials and secrets to tasks.
 - PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
 - (Hybrid only) You cannot run a KubernetesPodOperator task in a worker queue or node pool that is different than the worker queue of its parent worker. For example, a KubernetesPodOperator task that is triggered by an `m5.4xlarge` worker on AWS will also be run on an `m5.4xlarge` node. To run a task on a different node instance type, you must launch it in an external Kubernetes cluster. If you need assistance launching KubernetesPodOperator tasks in external Kubernetes clusters, contact [Astronomer support](https://support.astronomer.io).
+- ARM images are not supported in the KubernetesPodOperator. To build images using the AMD platform on your Mac with Apple chip, add the `--platform` flag in the `FROM` command of your `Dockerfile`. For example:
+
+    ```bash
+    FROM --platform=linux/amd64 postgres:latest
+    ```
+
+    If you use an ARM image, your KPO task will fail with the error: `base] exec /usr/bin/psql: exec format error`
 
 ## Prerequisites
 
