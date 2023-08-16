@@ -153,13 +153,13 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 Astro alerts work whether your DAG run is manual or scheduled. So, you can easily test your configures Astro alert by failing your DAG manually.
 
-1.  In the Cloud UI, open the Deployment where you configured your alert and click **Open Airflow**.
+1.  In the Cloud UI, open the DAGs page.
 
 2. Choose the DAG that has your alert configured.
 
 3. Trigger a DAG run.
 
-4. Manually mark your DAG's state as **Failed** by clicking the DAG run in the Grid view, then clicking **Mark state as...** > **Failed**.
+4. Select **Mark as** and choose **Failed** to trigger an alert for a pipeline failure. 
 
   ![Manually marking a successful DAG run as Failed.](/img/docs/astro_alerts_manual_fail.png)
 
