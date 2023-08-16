@@ -148,12 +148,18 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
 2. Click **Resource quotas**.
 3. Configure the following values:
 
-    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
-    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment.
-    - **Default Pod Size** > **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
-    - **Default Pod Size** > **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
+    - **Quota (CPU)**: The maximum amount of CPU for all currently running Pods on your Deployment. 
+    - **Quota (Memory)**: The maximum amount of memory for all currently running Pods on your Deployment.
+    - **Default Pod Size (CPU)**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
+    - **Default Pod Size (Memory)**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
 
-Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
+:::warning
+
+If the max pod size is equal to the deployment's quota, and a task requests the max pod size, only one task will run at a time, because that task is consuming the deployment's entire quota.
+
+:::
+
+The maximum quotas for CPU and memory are currently 400 vCPU and 800 GiB RAM, respectively. The CPU and memory quotas determine the **Max Pod Size**, which is the maximum amount of resources that a task can request for its pod. The maximum max pod size is currently allows for 27 vCPU and 54 GiB RAM for Standard Clusters and 12 vCPU and 24 GiB RAM for Dedicated Clusters.
 
 :::info Alternative Astro Hybrid setup
 
