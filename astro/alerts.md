@@ -98,17 +98,15 @@ No external configuration is required for the email integration. Astronomer reco
 
 In the Cloud UI, you can enable alerts from the **Workspace Settings** page. 
 
-1. In the Cloud UI, select the Astro Workspace you want to create an alert for.
+1. In the Cloud UI, click **Alerts**.
 
-2. Click **Workspace Settings**, then click **Alerts**.
+2. Click **Add Alert**. 
 
-3. Click **Add Alert**. 
+3. Enter your **Alert Name** and choose the alert type, either **Pipeline Failure** or **Task Duration**. 
 
-4. Enter your **Alert Name** and choose the alert type, either **Pipeline Failure** or **Task Duration**. 
+4. Choose the **Communication Channels** where you want to send your alert.
 
-5. Choose the **Communication Channels** where you want to send your alert.
-
-6. Add your communication channel information.
+5. Add your communication channel information.
 
     <Tabs
         defaultValue="Slack"
@@ -141,7 +139,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     </TabItem>
     </Tabs>
 
-7. Add DAG or Tasks to your alert.
+6. Add DAG or Tasks to your alert.
 
      - **Pipeline failure**: Click **Pipeline** to choose the DAG that you want to send an alert about if it fails.
     
@@ -149,7 +147,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
      You can add more DAGs or tasks after you create your alert. 
 
-8. Click **Create alert**.
+7. Click **Create alert**.
 
 ## Step 3 (Optional): Test your DAG run failure alert
 
@@ -168,3 +166,4 @@ Astro alerts work whether your DAG run is manual or scheduled. So, you can easil
 5. Check your Slack, PagerDuty, or Email alerts for your DAG failure alert.
 
     ![Example of a Slack test alert.](/img/docs/slack_alerts_example.png)
+
