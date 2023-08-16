@@ -31,7 +31,7 @@ This is where you'll find the upgrade considerations for specific Astro Runtime 
 
 ##### Connection testing in the Airflow UI disabled by default
 
-In Airflow 2.7, connection testing in the Airflow UI is disabled by default. Astronomer does not recommend enabling the feature unless you fully trust all users who can access your Deployment's Airflow UI.
+In Airflow 2.7, connection testing in the Airflow UI is disabled by default. Astronomer does not recommend reenabling the feature unless you fully trust all users with edit/ delete permissions for Airflow connections.
 
 To reenable the feature, set the following environment variable in your Astro project Dockerfile:
 
