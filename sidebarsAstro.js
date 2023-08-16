@@ -137,7 +137,7 @@ module.exports = {
         {
           type: "category",
           label: "Data lineage",
-          items: ["set-up-data-lineage", "data-lineage"],
+          items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
         "alerts",
         "airflow-email-notifications",
