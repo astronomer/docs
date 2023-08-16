@@ -92,11 +92,6 @@ The latest version of the Astro Runtime image has the following open source prov
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)*
 - SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)
 
-:::info
-
-Some of these packages are not included in the slim distribution of Astro Runtime. See [Distributions](#distribution).
-
-:::
 
 ### Provider package versioning
 
