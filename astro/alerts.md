@@ -149,9 +149,9 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 7. Click **Create alert**.
 
-## Step 3 (Optional): Test your DAG run failure alert
+## Step 3: (Optional) Test your DAG failure alert
 
-Astro alerts work whether your DAG run is manual or scheduled. So, you can easily test your configures Astro alert by failing your DAG manually.
+Astro alerts work whether your DAG run is manual or scheduled, so you can test your configured Astro alerts by failing your DAG manually.
 
 1.  In the Cloud UI, open the DAGs page.
 
@@ -159,11 +159,11 @@ Astro alerts work whether your DAG run is manual or scheduled. So, you can easil
 
 3. Trigger a DAG run.
 
-4. Select **Mark as** and choose **Failed** to trigger an alert for a pipeline failure. 
+4. Select **Mark as** and choose **Failed** to trigger an alert for a DAG failure. 
 
   ![Manually marking a successful DAG run as Failed.](/img/docs/astro_alerts_manual_fail.png)
 
-5. Check your Slack, PagerDuty, or Email alerts for your DAG failure alert.
+5. Check your Slack, PagerDuty, or Email alerts for your DAG failure alert. The alert includes information about the DAG, Workspace, Deployment, and data lineage associated with the failure as well as direct links to the Cloud UI.
 
     ![Example of a Slack test alert.](/img/docs/slack_alerts_example.png)
 
