@@ -141,9 +141,9 @@ Complete the manual setup if you configured your existing Astro app without usin
     | displayName                      | displayName     |
     | members                          | members         |
 
-    Delete any other user attributes not listed in the previous table. You should have exactly two attributes as shown in the following screenshot:
+    Delete any other group attributes not listed in the previous table. You should have exactly two attributes as shown in the following screenshot:
 
-    ![Azure group mappings with only the correct 2 attributes listed](/img/docs/azure-grop-mappings.png)
+    ![Azure group mappings with only the correct 2 attributes listed](/img/docs/azure-group-mappings.png)
 
 11. Go back to the **Mappings** menu and open the **User** mapping configuration.
 12. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
