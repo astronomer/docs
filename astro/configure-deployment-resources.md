@@ -159,7 +159,7 @@ If the max pod size is equal to the deployment's quota, and a task requests the 
 
 :::
 
-The maximum quotas for CPU and memory are currently 400 vCPU and 800 GiB RAM, respectively. The CPU and memory quotas determine the **Max Pod Size**, which is the maximum amount of resources that a task can request for its pod. The maximum max pod size is currently allows for 27 vCPU and 54 GiB RAM for Standard Clusters and 12 vCPU and 24 GiB RAM for Dedicated Clusters.
+The CPU and memory quotas determine the **Max Pod Size**, which is the maximum amount of resources that a task can request for its pod.
 
 :::info Alternative Astro Hybrid setup
 
