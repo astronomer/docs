@@ -10,7 +10,7 @@ id: airflow-ui
   <meta name="og:description" content="Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations." />
 </head>
 
-A notable feature of Apache Airflow is the [user interface (UI)](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), which provides insights into your DAGs and DAG runs. The UI is a useful tool for understanding, monitoring, and troubleshooting your pipelines.
+One of the main features of Airflow is its [user interface (UI)](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), which provides insights into your DAGs and DAG runs. The UI is essential for understanding, monitoring, and troubleshooting your pipelines.
 
 This guide is an overview of some of the most useful features and visualizations in the Airflow UI. If you're not already using Airflow and want to get it up and running to follow along, see [Install the Astro CLI](https://docs.astronomer.io/astro/cli/get-started) to quickly run Airflow locally.
 
@@ -70,7 +70,7 @@ There are 4 tabs available within the **Grid** view:
 
 :::tip
 
-In Airflow 2.7 keyboard shortcuts where added to the **Grid** view. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
+In Airflow 2.7 and later, the **Grid** view includes keyboard shortcuts. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
 
 :::
 
@@ -117,19 +117,18 @@ To access the [logs](logging.md#log-locations) of a specific task instance, clic
 
 ![Grid logs](/img/guides/airflow-ui_grid_logs.gif)
 
-## Additional DAG views
+:::info Additional DAG views
 
 There are some additional DAG views that are available, but not discussed in this guide:
 
 - **Calendar** view: Shows the state of DAG runs overlaid on a calendar. States are represented by color. If there were multiple DAG runs on the same day with different states, the color is a gradient between green (success) and red (failure).
-
-    ![Calendar View](/img/guides/2_4_CalendarView.png)
-
 - **Task Duration:** Shows a line graph of the duration of each task over time.
 - **Task Tries:** Shows a line graph of the number of tries for each task in a DAG run over time.
 - **Landing Times:** Shows a line graph of the time of day each task started over time.
 - **Details:** Shows details of the DAG configuration and DagModel debug information.
 - **Audit Log:** Shows selected events for all DAG runs.
+
+:::
 
 ## Cluster activity tab
 
