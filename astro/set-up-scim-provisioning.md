@@ -150,8 +150,6 @@ Complete the manual setup if you configured your existing Astro app without usin
     | userPrincipalName                                           | userName        |
     | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |
     | displayName                                                 | displayName     |
-    | givenName                                                   | name.givenName  |
-    | surname                                                     | name.familyName |
 
   :::caution
 
@@ -159,7 +157,11 @@ Complete the manual setup if you configured your existing Astro app without usin
 
   ::: 
 
-1. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+    Delete any other user attributes not listed in the previous table. You should have exactly three attributes as shown in the following screenshot:
+
+    ![Azure user mappings with only the correct 3 attributes listed](/img/docs/azure-mappings.png)
+
+1.  Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
 </TabItem>
 </Tabs>
