@@ -60,7 +60,7 @@ The base image for Astro Runtime now uses Python 3.11. If you want to use a diff
 
 - Upgraded `astronomer-providers` to 1.17.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1173-2023-08-07) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.6.2. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
-
+- Upgraded `openlineage-airflow` to 1.0.0. See the [OpenLineage blog](https://openlineage.io/blog/1.0-release/) for a summary of what's arrived in OpenLineage's first 1.x version.
 ### Bug fixes
 
 - Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.
