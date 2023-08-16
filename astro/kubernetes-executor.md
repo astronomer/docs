@@ -199,6 +199,7 @@ A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods 
 
 ## See also
 
+- [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources)
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
 - [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
 - [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)
