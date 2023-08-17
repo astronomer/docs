@@ -157,6 +157,7 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
 Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
 
 The CPU and memory quotas also determine the **Max Pod Size**, which is the maximum amount of resources that a task can request.
+
 :::caution
 
 The largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks can only run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**.
