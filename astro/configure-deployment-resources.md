@@ -153,13 +153,17 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
     - **Default Pod Size (CPU)**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
     - **Default Pod Size (Memory)**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
 
-:::warning
 
-If the max pod size is equal to the deployment's quota, and a task requests the max pod size, only one task will run at a time, because that task is consuming the deployment's entire quota.
+Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
+
+The CPU and memory quotas also determine the **Max Pod Size**, which is the maximum amount of resources that a task can request.
+:::caution
+
+The largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks can only run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**.
+
+For example, if your Deployment has a CPU quota of 150vCPU and a memory quota of 300GiB, your **Max Pod Size** might only be 12 vCPU and 24GiB RAM. If you try to run a task that requests 20vCPU, the task won't run even though it's within your quotas.
 
 :::
-
-The CPU and memory quotas determine the **Max Pod Size**, which is the maximum amount of resources that a task can request for its pod.
 
 :::info Alternative Astro Hybrid setup
 
