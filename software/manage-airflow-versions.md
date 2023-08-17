@@ -126,3 +126,17 @@ Airflow upgrade process has been successfully canceled. Your Deployment was not 
 ```
 
 Canceling the Airflow upgrade process does not interrupt or otherwise impact your Airflow Deployment or code that's running.
+
+:::info
+
+This operation can be done by user with `SystemAdmin` permissions only. 
+In case of message about "not supported Airflow version", please make sure `enableSystemAdminCanCreateDeprecatedAirflows` is set to `true`.
+```shell
+astronomer:
+  houston:
+    config:
+      deployments:
+        enableSystemAdminCanCreateDeprecatedAirflows: true
+```
+
+:::
