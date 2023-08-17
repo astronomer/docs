@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Concepts'
-title: "Data lineage concepts"
+sidebar_label: 'Overview'
+title: "Data lineage overview and concepts"
 id: data-lineage-concepts
 description: Learn about data lineage and how you can use it in Airflow.
 ---
