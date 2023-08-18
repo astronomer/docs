@@ -161,7 +161,7 @@ The CPU and memory quotas also determine the **Max Pod Size**, which is the maxi
 
 :::caution
 
-The largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks can only run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**.
+The largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**, even if your quota is larger.
 
 For example, if your Deployment has a CPU quota of 150vCPU and a memory quota of 300GiB, your **Max Pod Size** might only be 12 vCPU and 24GiB RAM. If you try to run a task that requests 20vCPU, the task won't run even though it's within your quotas.
 
