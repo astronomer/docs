@@ -15,7 +15,7 @@ Release date: August 3, 2023
 
 ### Automatic PGBouncer connection scaling
 
-Astronomer Software now automatically scales the size of PGBouncer connection pools based on the connection usage of your current Airflow components. This should result in improved performance, scalability, and utilization of database connections across all Deployments. 
+Astronomer Software now automatically scales the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This should result in improved performance, scalability, and utilization of database connections across all Deployments. 
 
 ### Additional improvements
 
