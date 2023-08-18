@@ -107,7 +107,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
 ## Cancel Airflow upgrade
 
-You can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer image in your `Dockerfile` and deployed it.
+As a System Admin, you can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer image in your `Dockerfile` and deployed it.
 
 In the Software UI, select **Cancel** next to **Airflow Version**.
 
