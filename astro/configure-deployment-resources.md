@@ -148,10 +148,11 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
 2. Click **Resource quotas**.
 3. Configure the following values:
 
-    - **Quota (CPU)**: The maximum amount of CPU for all currently running Pods on your Deployment. 
-    - **Quota (Memory)**: The maximum amount of memory for all currently running Pods on your Deployment.
-    - **Default Pod Size (CPU)**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
-    - **Default Pod Size (Memory)**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
+    - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment. 
+    - **Memory Quota**: The maximum combined memory usage across all running Pods on your Deployment.
+    - **Default Pod Size**:
+        - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
+        - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
 
 
 Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
