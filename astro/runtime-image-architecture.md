@@ -105,7 +105,6 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 
 ## Python versioning
 
-The base distributions of Astro Runtime use the same Python version as their associated Apache Airflow version. See the following table for specific Python versioning information:
 
 | Astro Runtime | Python version |
 | ------------- | -------------- |
