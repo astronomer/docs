@@ -19,6 +19,7 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 
 ### Additional improvements
 
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
 - Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
 - The Workspace **Deployments** page is now paginated in the Astronomer UI.
 - The **Extra Capacity** field in the Astronomer UI now shows up to 6 digits of AU.
