@@ -75,7 +75,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 ## Use an external Elasticsearch instance for Airflow task log management
 
-Add Airflow task logs from your Astronomer Deployment to an existing Elasticsearch instance on [Elastic Cloud](https://www.elastic.co/cloud/) to centralize log management and analysis. Centralized log management allows you to quickly identify, troubleshoot, and resolve task failure issues. Although these examples use Elastic Cloud, you can also use AWS Managed OpenSearch Service or any other elastic service (managed or hosted). With an external Elasticsearch instance configured for Astronomer Software, you can see the logs in your Elasticsearch instance and browse the logs from the Astronomer Software interface.
+Add Airflow task logs from your Astronomer Deployment to an existing Elasticsearch instance on [Elastic Cloud](https://www.elastic.co/cloud/) to centralize log management and analysis. Centralized log management allows you to quickly identify, troubleshoot, and resolve task failure issues. Although these examples use Elastic Cloud, you can also use AWS Managed OpenSearch Service or any other elastic service (managed or hosted). With an external Elasticsearch instance configured for Astronomer Software, you can see the logs in your Elasticsearch instance and browse the logs from the Software UI.
 
 ### Create an Elastic Deployment and endpoint
 
