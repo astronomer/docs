@@ -177,7 +177,7 @@ To grant an Astro Deployment access to a service that is running in an AWS accou
     ```
 
 7. Click **Update policy**.
-8. In the Airflow UI, create an Airflow connection to access the resources you need to connect to. See the example on how to use Role ARN to [create an Airflow connection](https://docs.astronomer.io/learn/connections/redshift#get-connection-details).
+8. In the Airflow UI, create an Airflow connection to access the resources you need to connect to. See the example on how to use Role ARN to [create an Airflow connection for a Redshift Database](https://docs.astronomer.io/learn/connections/redshift#get-connection-details).
 9. (Optional) Repeat these steps for each Astro Deployment that requires access to external data services on AWS.
 
 </TabItem>
