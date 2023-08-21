@@ -3,8 +3,8 @@ sidebar_label: 'AWS'
 title: 'Connect Astro to AWS data sources'
 id: connect-aws
 description: Connect Astro to AWS resources.
-toc_min_heading_level: 2
-toc_max_heading_level: 2
+# toc_min_heading_level: 2
+# toc_max_heading_level: 2
 sidebar_custom_props: { icon: 'img/aws.png' }
 ---
 
@@ -12,28 +12,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-To connect your cluster to your cloud, you can either connect through a public network or a private network. If you want to use a private network, there are multiple options to choose from. 
-
-Use the following topics to learn about each available option for connecting Astro clusters to your cloud.
+Based on the security considerations of your organization, your cloud resources might be accessible using public endpoints or from within a private network. Use the following topics to learn about different options available to access these resources from your Astro Deployment.
 
 ## Connection options
 
-Choose one of the following setups based on the security requirements of your company and your existing infrastructure.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through only an Airflow connection. If you have restrictions based on IP address, you can add the external IPs of your Deployment or cluster to your cloud resource's allowlist. Whereas, to connect to private networks from Astro, you can choose from the available options provided by AWS.
 
-<Tabs
-    defaultValue="Public endpoints"
-    groupId="connection-options"
-    values={[
-        {label: 'Public endpoints', value: 'Public endpoints'},
-        {label: 'VPC peering', value: 'VPC peering'},
-        {label: 'Transit Gateways', value: 'Transit Gateways'},
-        {label: 'AWS PrivateLink', value: 'AWS PrivateLink'},
-    ]}>
-<TabItem value="Public endpoints">
+### Public endpoints
 
-Publicly accessible endpoints allow you to quickly connect your Astro Deployments to AWS through only an Airflow connection. You might need to allowlist your Astro cluster or Deployment to facilitate communication with your external AWS resources. You can choose to allowlist either your Astro cluster or just your Deployment by retrieving their external IPs from the Cloud UI and allowlisting them on AWS.
+To facilitate communication between your Astro cluster or Deployment with your external AWS resources, you can choose to allowlist them by retrieving their external IPs from the Cloud UI.
 
-### Allowlist external IP addresses for a cluster
+#### Allowlist external IP addresses for a cluster
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
@@ -42,7 +31,7 @@ Publicly accessible endpoints allow you to quickly connect your Astro Deployment
 
 After you allowlist a cluster's IP address, all Deployments in that cluster are allowed to access your external resources.
 
-### Allowlist external IP addresses for a Deployment
+#### Allowlist external IP addresses for a Deployment
 
 To grant access to your external resources on per-Deployment basis, or if you are using a standard cluster, allowlist the IPs only for specific Deployments. For each Deployment that you want to allowlist:
 
@@ -52,7 +41,18 @@ To grant access to your external resources on per-Deployment basis, or if you ar
 
 When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
 
-</TabItem>
+### Private connections
+
+Choose one of the following setups based on the security requirements of your company and your existing infrastructure.
+
+<Tabs
+    defaultValue="VPC peering"
+    groupId="connection-options"
+    values={[
+        {label: 'VPC peering', value: 'VPC peering'},
+        {label: 'Transit Gateways', value: 'Transit Gateways'},
+        {label: 'AWS PrivateLink', value: 'AWS PrivateLink'},
+    ]}>
 
 <TabItem value="VPC peering">
 
@@ -224,4 +224,4 @@ When Astronomer support confirms that DNS forwarding was successfully implemente
 ## See Also
 
 - [Manage Airflow connections and variables](manage-connections-variables.md)
-- [Authorize your Deployment using workload identity](authorize-using-workload-identity.md#aws)
+- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#aws)

@@ -10,28 +10,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-
-To allow your Astro cluster to connect to your external data sources, you can either rely on public network or communicate using a private network. If you want to use a private network, there are multiple options to choose from. 
-
-Use the following topics to learn about configuring various options available for connecting to your existing resources from Astro.
+Based on the security considerations of your organization, your cloud resources might be accessible using public endpoints or from within a private network. Use the following topics to learn about different options available to access these resources from your Astro Deployment.
 
 ## Connection options
 
-The option that you choose is determined by the security requirements of your company and your existing infrastructure.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to Azure through only an Airflow connection. If you have restrictions based on IP address, you can add the external IPs of your Deployment or cluster to your cloud resource's allowlist. Whereas, to connect to private networks from Astro, you can choose from the available options provided by Azure.
 
-<Tabs
-    defaultValue="Public endpoints"
-    groupId="connection-options"
-    values={[
-        {label: 'Public endpoints', value: 'Public endpoints'},
-        {label: 'VNet peering', value: 'VNet peering'},
-        {label: 'Azure Private Link', value: 'Azure Private Link'},
-    ]}>
-<TabItem value="Public endpoints">
+### Public endpoints
 
-Publicly accessible endpoints allow you to quickly connect your Astro Deployments to Azure. In certain cases, you might need to whitelist your Astro cluster or Deployment to facilitate communication with your external Azure resources. You can choose to whitelist either your Astro cluster or just your Deployment by retrieveing the external IPs from your Cloud UI.
+To facilitate communication between your Astro cluster or Deployment with your external Azure resources, you can choose to allowlist them by retrieving their external IPs from the Cloud UI.
 
-### Retrieve IP addresses for a cluster to whitelist
+#### Allowlist external IP addresses for a cluster
 
 1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
 2. Click **Clusters**, then select a cluster.
@@ -39,7 +28,7 @@ Publicly accessible endpoints allow you to quickly connect your Astro Deployment
 
 A cluster's IP addresses are the same for all the Deployments running in that cluster. This is a one-time setup for each Astro cluster.
 
-### Retrieve external IP addresses for a Deployment to whitelist
+#### Allowlist external IP addresses for a Deployment
 
 To allow to access to your external resource on per Deployment basis or if you are using a standard cluster, you need the external IPs of your Deployment.
 
@@ -49,7 +38,18 @@ To allow to access to your external resource on per Deployment basis or if you a
 
 When you use publicly accessible endpoints to connect to Azure, traffic moves directly between your Astro cluster and the Azure API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
 
-</TabItem>
+
+### Private connections
+
+The option that you choose is determined by the security requirements of your company and your existing infrastructure.
+
+<Tabs
+    defaultValue="VNet peering"
+    groupId="connection-options"
+    values={[
+        {label: 'VNet peering', value: 'VNet peering'},
+        {label: 'Azure Private Link', value: 'Azure Private Link'},
+    ]}>
 
 <TabItem value="VNet peering">
 

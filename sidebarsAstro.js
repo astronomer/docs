@@ -112,7 +112,7 @@ module.exports = {
         "environment-variables",
         "secrets-backend",
         "manage-deployments-as-code",
-        "authorize-using-workload-identity"
+        "authorize-deployments-to-your-cloud"
       ],
     },
     {
