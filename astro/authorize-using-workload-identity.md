@@ -20,7 +20,7 @@ Astro Deployments can be authorized to access external resources running in your
 
 ## What is workload identity?
 
-A Kubernetes service account provides an identity to the processes running in a Pod. The process running inside a Pod can use this identity of its associated service account to authenticate cluster's API server. This identity can be used to authorize your Deployment. Astro refers to this service account as workload identity. 
+A workload identity is a Kubernetes service account that provides an identity to your Deployment. The Deployment can use this identity to authenticate to a cloud's API server, and the cloud can use the identity to authorize the Deployment to access different resources.
 
 
 
@@ -44,7 +44,7 @@ To authorize your Deployment, create an IAM role that is assumed by the Deployme
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 4. Click **Roles** and in the **Role name** column, select the role you created in Step 2.
-5. Click the **Trust relationships** tab.
+5. Click **Trust relationships**.
 6. Click **Edit trust policy** and paste the workload identity you copied from Step 1 in the trust policy. Your policy should look like the following:
 
     ```json
@@ -87,7 +87,7 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 3. Click **Save**. 
     
-    If you don't see **Amazon Web Services** as a connection type, ensure you have installed its package in your `requirements.txt`. See **Use Provider** in [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
+    If you don't see **Amazon Web Services** as a connection type, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
 
 
 </TabItem>
@@ -96,7 +96,6 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 #### Step 1: Authorize your Deployment
 
-To allow data pipelines running on GCP to access Google Cloud services in a secure and manageable way, Google recommends using [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity). All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Google service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
 
 To grant a Deployment on Astro access to data services on GCP, such as BigQuery:
 
