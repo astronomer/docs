@@ -75,7 +75,6 @@ To view task logs in the Airflow UI
 5. Click **Instance Details**.
 6. Click **Log**.
 
-
 ## View Airflow scheduler logs
 
 You can access the past 24 hours of scheduler logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-size).
@@ -119,10 +118,39 @@ To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag 
 
 ## Export task logs to Datadog (_AWS only_)
 
-Astro supports forwarding Airflow task logs to [Datadog](https://www.datadoghq.com/). You only need to enable Datadog once for each Astro cluster. After you enable Datadog, task logs from all Deployments in the cluster are exported.
+You can forward Airflow task logs from a Deployment to [Datadog](https://www.datadoghq.com/) using a Datadog API key. Complete the following setup to view Airflow task logs from your Datadog instance.
+
+#### Prerequisites
+
+- Your Deployment must be running Astro Runtime 9. See [Upgrade Astro Runtime](upgrade-runtime.md).
+
+#### Setup
 
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
-2. Identify the Astro cluster from which you want to forward task logs.
-3. Submit a request to [Astronomer support](https://cloud.astronomer.io/support) with your Datadog API key, the name of your Astro cluster, and the [Datadog Site](https://docs.datadoghq.com/getting_started/site/) where you want the logs forwarded.
+2. Set the following [environment variable](environment-variables.md) on your Deployment:
 
-Astro also supports exporting Airflow metrics to Datadog. See [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog).
+    - **Key 1**: `DATADOG_API_KEY`
+    - **Value 1**: Your Datadog API key.
+
+    - **Key 2**: `ASTRO_DATADOG_TASK_LOGS_ENABLED`
+    - **Value 2**: `true`
+
+    Select the **Secret?** checkbox for `DATADOG_API_KEY`. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
+
+  :::info
+
+  By default, the Astro Datadog integration also sends a Deployment's [Airflow metrics](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html) to Datadog. To send only task logs to Datadog, additionally set the following environment variable:
+
+  - **Key**: `ASTRO_DATADOG_METRICS_DISABLED`
+  - **Value**: `true`
+
+  :::
+
+3. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your metrics to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
+
+    - **Key**: `DATADOG_SITE`
+    - **Value**: Your Datadog site name. For example, `US3`.
+
+4. Click **Save variable**.
+
+Astro also supports exporting [Airflow metrics](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html) to Datadog. See [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog).

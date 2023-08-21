@@ -154,7 +154,9 @@ The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibili
 
 ## Export Airflow metrics to Datadog
 
-Export over 40 Airflow metrics related to the state and performance of your Astro Deployment to [Datadog](https://www.datadoghq.com/) by adding a Datadog API key to your Deployment. These metrics include most information that is available in the Cloud UI as well as additional metrics that Datadog automatically collects, including number of queued tasks, DAG processing time, frequency of import errors, and more. For a complete list of supported metrics, see [Data Collected](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) in Datadog documentation.
+Export over 40 Airflow metrics related to the state and performance of your Astro Deployment to [Datadog](https://www.datadoghq.com/) by adding a Datadog API key to your Deployment. These metrics include most information that is available in the Cloud UI, as well as additional metrics that Datadog automatically collects, including number of queued tasks, DAG processing time, and more. For a complete list of supported metrics, see [Data Collected](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) in Datadog documentation.
+
+You can also send task logs to Datadog. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog-aws-only).
 
 :::info
 
@@ -162,28 +164,33 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 
 :::
 
+#### Prerequisites
+
+- Your Deployment must be running Astro Runtime 9. See [Upgrade Astro Runtime](upgrade-runtime.md).
+
+#### Setup
+
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. In the Cloud UI, select a Workspace and then select an Astro Deployment for which you want to export metrics.
 3. Create a new [environment variable](environment-variables.md#set-environment-variables-in-the-cloud-ui) in your Deployment with the Datadog API key from step 1:
+   
    - **Key:** `DATADOG_API_KEY`
    - **Value:** `<Your-Datadog-API-key>`.
+  
    Select the **Secret?** checkbox. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
-4. Optional. Add the following environment variable if your organization doesn't use the default Datadog site datadoghq.com:
+
+4. (Optional) Add the following environment variable if your organization doesn't use the default Datadog site `datadoghq.com`:
+   
    - **Key:** `DATADOG_SITE`
    - **Value:** `<Your-Datadog-Site>`
-5. Optional. Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
-
-   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
-   - **Value** `True`
-
-   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
-   - **Value** `<key-1>:<value-1>,<key-2>:<value-2>`
-
-  :::info
   
-  If you're configuring custom Datadog tags for a Deployment using Astro Runtime 5 or earlier, you must additionally add `datadog` to your Astro project `requirements.txt` file.
-  
-  :::
+5. (Optional) Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
+
+   - **Key 1** `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
+   - **Value 1** `True`
+
+   - **Key 2** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
+   - **Value 2** `<key-1>:<value-1>,<key-2>:<value-2>`
    
 6. Click **Save variable**.
 
