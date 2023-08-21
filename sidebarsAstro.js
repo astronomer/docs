@@ -175,7 +175,7 @@ module.exports = {
               label: "Connect to external resources",
               link: {
                 type: 'generated-index',
-                title: 'Connect Astro',
+                title: 'Connect clusters',
                 description: 'Connect Astro to your existing cloud resources.'
               },
               items: ["connect-aws", "connect-azure", "connect-gcp"],

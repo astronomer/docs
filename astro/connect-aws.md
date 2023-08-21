@@ -12,13 +12,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-To allow your Astro cluster to connect to your external data sources, you can either rely on public network or communicate using a private network. If you want to use a private network, there are multiple options to choose from. 
+To connect your cluster to your cloud, you can either connect through a public network or a private network. If you want to use a private network, there are multiple options to choose from. 
 
-Use the following topics to learn about configuring various options available for connecting to your existing resources from Astro.
+Use the following topics to learn about each available option for connecting Astro clusters to your cloud.
 
 ## Connection options
 
-The option that you choose is determined by the security requirements of your company and your existing infrastructure.
+Choose one of the following setups based on the security requirements of your company and your existing infrastructure.
 
 <Tabs
     defaultValue="Public endpoints"
@@ -31,25 +31,26 @@ The option that you choose is determined by the security requirements of your co
     ]}>
 <TabItem value="Public endpoints">
 
-Publicly accessible endpoints allow you to quickly connect your Astro Deployments to AWS. In certain cases, you might need to whitelist your Astro cluster or Deployment to facilitate communication with your external AWS resources. You can choose to whitelist either your Astro cluster or just your Deployment by retrieveing the external IPs from your Cloud UI.
+Publicly accessible endpoints allow you to quickly connect your Astro Deployments to AWS through only an Airflow connection. You might need to allowlist your Astro cluster or Deployment to facilitate communication with your external AWS resources. You can choose to allowlist either your Astro cluster or just your Deployment by retrieving their external IPs from the Cloud UI and allowlisting them on AWS.
 
-### Retrieve IP addresses for a cluster to whitelist
+### Allowlist external IP addresses for a cluster
 
-1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
-3. In the **Details** page, copy the IP addresses listed under **External IPs**.
+3. In the Details page, copy the IP addresses listed under **External IPs**.
+4. Add the IP addresses to the allowlist of any external services that you want your cluster to access.
 
-A cluster's IP addresses are the same for all the Deployments running in that cluster. This is a one-time setup for each Astro cluster.
+After you allowlist a cluster's IP address, all Deployments in that cluster are allowed to access your external resources.
 
-### Retrieve external IP addresses for a Deployment to whitelist
+### Allowlist external IP addresses for a Deployment
 
-To allow to access to your external resource on per Deployment basis or if you are using a standard cluster, you need the external IPs of your Deployment.
+To grant access to your external resources on per-Deployment basis, or if you are using a standard cluster, allowlist the IPs only for specific Deployments. For each Deployment that you want to allowlist:
 
-1. In the Cloud UI, select a Deployment, then click **Details**.
-2. Copy the IP addresses under **External IPs**.
-3. (Optional) Add the IP addresses to the allowlist of any external services that need to interact with Astro.
+1. In the Cloud UI, select a Deployment, then click Details.
+2. Copy the IP addresses under External IPs.
+3. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
 
-When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
 
 </TabItem>
 
