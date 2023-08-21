@@ -134,7 +134,7 @@ Complete the following steps to retrieve these values:
     defaultValue="db-creds"
     groupId= "redshift-connection"
     values={[
-        {label: 'DB credendtials', value: 'db-creds'},
+        {label: 'DB credentials', value: 'db-creds'},
         {label: 'IAM credentials', value: 'iam-creds'},
         {label: 'Role ARN', value: 'role-arn'},
     ]}>
