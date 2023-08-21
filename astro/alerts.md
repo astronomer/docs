@@ -55,7 +55,7 @@ To set up alerts in Slack, you need to create a Slack app in your Slack workspac
 
 4. Select **Incoming webhooks**.
 
-5. On the [**Incoming webhooks** page](https://api.slack.com/messaging/webhooks), click to turn on **Activate Incoming Webhooks**.
+5. On the **Incoming webhooks** page, click the toggle to turn on **Activate Incoming Webhooks**. See [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks).
 
 6. In the **Webhook URLs for your Workspace** section, click **Add new Webhook to Workspace**. 
 
@@ -153,7 +153,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 Astro alerts work whether your DAG run is manual or scheduled, so you can test your configured Astro alerts by failing your DAG manually.
 
-1.  In the Cloud UI, open the DAGs page.
+1. In the Cloud UI, click **DAGs**.
 
 2. Choose the DAG that has your alert configured.
 
