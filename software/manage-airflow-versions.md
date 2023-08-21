@@ -130,6 +130,7 @@ Canceling the Airflow upgrade process does not interrupt or otherwise impact you
 :::info
 
 If you can't cancel your upgrade and receive an error message about using an unsupported Airflow version, set the following value in your `config.yaml` file and [apply the change](apply-platform-config.md) to successfully cancel your upgrade. This configuration allows you to roll back to your current version of Airflow, even if it's not supported. 
+
 ```yaml
 astronomer:
   houston:
