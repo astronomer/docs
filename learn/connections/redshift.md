@@ -144,7 +144,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-amazon
+    apache-airflow-providers-amazon
     ```
 
     This will install the Amazon provider package, which makes the Amazon Redshift connection type available in Airflow.
@@ -173,7 +173,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-amazon
+    apache-airflow-providers-amazon
     ```
 
     This will install the Amazon provider package, which makes the Amazon Redshift connection type available in Airflow.
@@ -220,7 +220,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-amazon
+    apache-airflow-providers-amazon
     ```
 
     This will install the Amazon provider package, which makes the Amazon Redshift connection type available in Airflow.
