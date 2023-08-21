@@ -205,7 +205,7 @@ Ensure that your testing environment has:
 
 - [Airflow 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html) or later. You can check your version by running `airflow version`.
 - All provider packages that your DAG uses.
-- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metadata database is created when Airflow is first run in an environment. You can check that it exists with `airflow db check` and initialize a new database with `airflow db init`.
+- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metadata database is created when Airflow is first run in an environment. You can check that it exists with `airflow db check` and initialize a new database with `airflow db migrate` (`airflow db init` in Airflow versions pre-2.7).
 
 You may wish to install these requirements and test your DAGs in a [virtualenv](https://virtualenv.pypa.io/en/latest/) to avoid dependency conflicts in your local environment.
 

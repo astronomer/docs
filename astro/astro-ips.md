@@ -20,6 +20,6 @@ Retrieve external IP addresses for an individual Deployment if you are using sta
 
 Retrieve external IP addresses for an individual Deployment if you are using standard clusters or otherwise don't have access to your Organization's **Clusters** page.
 
-1. In the Cloud UI, click the Astronomer logo in the upper left corner to open your Organization.
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the **Details** page, copy the IP addresses listed under **External IPs**.

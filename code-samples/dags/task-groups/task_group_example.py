@@ -1,18 +1,17 @@
-import json
 from airflow.decorators import dag, task, task_group
+from pendulum import datetime
+import json
 
-import pendulum
 
-
-@dag(schedule=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
+@dag(start_date=datetime(2023, 8, 1), schedule=None, catchup=False)
 def task_group_example():
-    @task(task_id="extract", retries=2)
+    @task
     def extract_data():
         data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
         order_data_dict = json.loads(data_string)
         return order_data_dict
 
-    @task()
+    @task
     def transform_sum(order_data_dict: dict):
         total_order_value = 0
         for value in order_data_dict.values():
@@ -20,7 +19,7 @@ def task_group_example():
 
         return {"total_order_value": total_order_value}
 
-    @task()
+    @task
     def transform_avg(order_data_dict: dict):
         total_order_value = 0
         for value in order_data_dict.values():
@@ -36,7 +35,7 @@ def task_group_example():
             "total": transform_sum(order_data_dict),
         }
 
-    @task()
+    @task
     def load(order_values: dict):
         print(
             f"""Total order value is: {order_values['total']['total_order_value']:.2f} 
@@ -46,4 +45,4 @@ def task_group_example():
     load(transform_values(extract_data()))
 
 
-task_group_example = task_group_example()
+task_group_example()

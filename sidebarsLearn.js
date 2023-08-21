@@ -118,6 +118,7 @@ module.exports = {
             'kubepod-operator',
             'using-airflow-plugins',
             'airflow-pools',
+            'airflow-setup-teardown',
             'testing-airflow',
           ],
         },

@@ -128,10 +128,11 @@ module.exports = {
         {
           type: "category",
           label: "Data lineage",
-          items: ["set-up-data-lineage", "data-lineage"],
+          items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
         "alerts",
         "airflow-email-notifications",
+        "audit-logs",
       ],
     },
     {
@@ -156,7 +157,6 @@ module.exports = {
           label: "Organizations",
           items: [
             "organization-api-tokens",
-            "audit-logs",
           ],
         },
         {
@@ -246,7 +246,6 @@ module.exports = {
           ],
         },
         'platform-variables',
-        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",

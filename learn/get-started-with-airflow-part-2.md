@@ -123,24 +123,16 @@ In your example DAG, you used two operators that interact with two external syst
 2. Click **+** to open the form for adding a new Airflow connection.
 3. Name the connection `my_github_connection` and set its **Connection Type** to `GitHub`. Note that you can only select connection types that are available from either core Airflow or an installed provider package. If you are missing the connection type `GitHub`, double check that you installed the `GitHub` provider correctly in [Step 3](#step-3-add-a-provider-package).
 4. Enter your **GitHub Access Token** in the GitHub Access Token field. If you need to create a token, you can follow the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-5. Test your connection by clicking **Test**. You should see a green banner indicating that your connection was successfully tested.
+5. Save the connection by clicking the **Save** button.
 
-    ![GitHub Connection](/img/tutorials/get-started-with-airflow-part-2_GitHubConnection.png)
-
-Note that the option to test connections was added in Airflow 2.2 and is not available for all types of connections. If you are running an older version of Airflow, you can skip this step.
-
-6. Save the connection by clicking the `Save` button.
+Note that the option to test connections is only available for selected connection types and disabled by default in Airflow 2.7+, see [Test a connection](connections.md#test-a-connection).
 
 ## Step 6: Create an HTTP connection
 
 1. In the **Connections** view, click **+** to create a new connection.
 2. Name the connection `my_http_connection` and select a **Connection Type** of `HTTP`.
 3. Enter the host URL for the API you want to query in the **Host** field. For this tutorial we use the Catfact API, which returns a random fact about cats for every `GET` request. The host for this API is `http://catfact.ninja/fact`.
-4. Test your connection by pressing the **Test** button.
-
-    ![HTTP Connection](/img/tutorials/get-started-with-airflow-part-2_HTTPConnection.png)
-
-5. Click **Save**.
+4. Click **Save**.
 
 You should now have two connections as shown in the following screenshot:
     

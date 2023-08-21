@@ -203,7 +203,7 @@ To give Airflow access to your S3 bucket you need to define an [Airflow connecti
 
     ![Airflow Connection to S3](/img/guides/xcom_backend_aws_connection.png)
 
-2. Test and save your connection.
+2. Save your connection.
 
 </TabItem>
 
@@ -215,7 +215,7 @@ To give Airflow access to your GCS bucket you need to define an [Airflow connect
 
     ![Airflow Connection to GCS bucket](/img/guides/xcom_backend_gcs_connection.png)
 
-2. Test and save your connection.
+2. Save your connection.
 
 </TabItem>
 <TabItem value="azure">
@@ -226,7 +226,7 @@ To give Airflow access to your Azure Blob Storage container you need to define a
 
     ![Airflow Connection to Azure Blob Storage container](/img/guides/xcom_backend_azure_connection.png)
 
-2. Test and save your connection.
+2. Save your connection.
 
 </TabItem>
 <TabItem value="local">
