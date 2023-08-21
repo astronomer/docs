@@ -340,7 +340,7 @@ astronomer:
           google:
             enabled: true # Lets users authenticate with Google
     secret:
-    - envName: "<smtp_uri_secret>"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
+    - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
       secretName: "astronomer-smtp"
       secretKey: "connection"
 ```

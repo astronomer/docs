@@ -157,7 +157,8 @@ For this command to work, Airflow needs access to a metadata database. To set up
 ```bash
 cd <your-project-directory>
 export AIRFLOW_HOME=$(pwd)
-airflow db init  # generates airflow.db, airflow.cfg, and webserver_config.py in your project dir
+airflow db migrate  # generates airflow.db, airflow.cfg, and webserver_config.py in your project dir
+                    # note that in Airflow versions pre-2.7 you'll need to use `airflow db init` instead
 
 # airflow tasks render [dag_id] [task_id] [execution_date]
 ```

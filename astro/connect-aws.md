@@ -48,15 +48,39 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
-To create a VPC peering connection between an Astro VPC and an AWS VPC, contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+To create a VPC peering connection between an Astro VPC and an AWS VPC, you must create a temporary assumable role. The Astro AWS account will assume this role to initiate a VPC peering connection.
 
-- Astro cluster ID and name
-- AWS Account ID of the target VPC
-- Region of the target VPC
-- VPC ID of the target VPC
-- Classless Inter-Domain Routing (CIDR) block of the target VPC
+1. Open the AWS console of the AWS account with the target VPC and copy the following:
 
-After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
+    - AWS account ID 
+    - AWS region
+    - VPC ID of the target VPC
+    - CIDR block of the target VPC
+    
+2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
+
+    - **Stack name**: Enter a meaningful name for your stack.
+    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/support). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+
+3. After the stack is created, go to the **Stack info** tab and copy the AssumeRole ARN from the **Stack ID** field.
+
+4. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, and copy the **ID** of the cluster.
+
+5. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following details:
+
+    - AWS region of the target VPC from Step 1
+    - VPC ID of the target VPC from Step 1
+    - AWS account ID of the target VPC from Step 1
+    - CIDR block of the target VPC from Step 1
+    - **Stack ID** from Step 3
+    - Astro cluster **ID** from Step 4
+    
+    Astronomer support will initiate a peering request and create the routing table entries in the Astro VPC.
+
+6. Wait for Astronomer support to send you the Astro VPC CIDR. Then, the owner of the target VPC needs to [accept the peering request](https://docs.aws.amazon.com/vpc/latest/peering/accept-vpc-peering-connection.html) and [create the routing table entries](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the target VPC.
+
+7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
+
 
 #### DNS considerations for VPC peering
 
@@ -88,7 +112,7 @@ AWS Transit Gateway doesn't provide built-in support for DNS resolution. If you 
 
 :::info
 
-If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support can create a new transit gateway in your AWS account for Astro and set up a cross-region peering connection with your existing transit gateway.
+If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support can create a new transit gateway in your AWS account for Astro and set up [a cross-region peering attachment](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) with your existing transit gateway.
 
 If Astronomer creates a new transit gateway in your AWS account for Astro, keep in mind that your organization will incur additional AWS charges for the new transit gateway as well as the inter-region transfer costs.
 
@@ -102,13 +126,25 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 #### Setup
 
-1. In the Cloud UI, click the **Clusters** tab and copy both the **ID** and the **Account ID** for your Astro cluster. **ID** is your cluster ID, while **Account ID** is your AWS account ID.
-2. Create a resource share in AWS RAM with the account ID from step 1. See [Creating a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html).
-3. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the cluster ID that you copied in Step 1, as well as the CIDR block of the target VPC or on-premises network that you want to connect your Astro cluster with. From here, Astronomer support approves the resource sharing request and creates a transit gateway peering attachment request to your network.
-4. Accept the transit gateway peering attachment request from your network. See [Accept or reject a peering attachment request](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject).
-5. Create a static route from your CIDR block to the transit gateway and a static route from the transit gateway to the Astro VPC. See [Add a route to the transit gateway route table](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route).
-6. Contact [Astronomer support](https://cloud.astronomer.io/support) to confirm that you have created the static route. Astronomer support will update the Astro VPC routing table to send traffic from your CIDR block through the transit gateway.
-7. Optional. Repeat the steps for each Astro cluster that you want to connect to your transit gateway.
+1. In the Cloud UI, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings** > **Clusters*. Open your cluster from the table that appears and copy its **ID**.
+2. In your AWS console, copy the ID of your existing transit gateway (TGW). 
+3. [Create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) and [share the TGW with your cluster's Astro AWS account](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-sharing). 
+
+    To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/support). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+    
+4. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+
+    - Your cluster **ID** from Step 1.
+    - Your TGW ID from Step 2.
+    - The CIDR block for the target VPC or on-premises network that you want to connect your Astro cluster with.
+
+    Astronomer support approves the resource sharing request, attaches the Astro private subnets to your transit gateway, and creates routes in the Astro route tables to your transit gateway for each of the CIDR provided. Astronomer support notifies you about the process completion and provides you with the Astro CIDRs.
+
+5. After you receive the confirmation from Astronomer support, use the Astro CIDRs to [create back routes](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route) from your transit gateway to the Astro VPC.
+
+6. Contact [Astronomer support](https://cloud.astronomer.io/support) to confirm that you have created the static route. Astronomer support then tests the connection and confirm.
+
+7. (Optional) Repeat the steps for each Astro cluster that you want to connect to your transit gateway.
 
 </TabItem>
 
@@ -229,7 +265,9 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 5. On the **Associate permissions** page, accept the default settings and then click **Next**.
 
-6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field. To get the Astro AWS account ID, go to the Cloud UI, click **Settings**, and then copy the value in the **ID** column for the Astro AWS account you want to share the Resolver rule with.
+6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field. 
+
+    To get the Astro AWS account ID, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings**. From the **General** page, copy the **AWS External ID**.
 
 7. Click **Create resource share**.
 

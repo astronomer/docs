@@ -10,12 +10,12 @@ import TabItem from '@theme/TabItem';
 
 :::caution
 
-This document applies only to [Astro Hosted](astro-architecture.md). To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
 
 For Astro Hybrid resource reference material, see:
 
-- [AWS Hybrid cluster settings](resource-reference-gcp-hybrid.md)
-- [Azure Hybrid cluster settings](resource-reference-gcp-hybrid.md)
+- [AWS Hybrid cluster settings](resource-reference-aws-hybrid.md)
+- [Azure Hybrid cluster settings](resource-reference-azure-hybrid.md)
 - [GCP Hybrid cluster settings](resource-reference-gcp-hybrid.md)
 
 :::
@@ -52,6 +52,7 @@ The following table lists all available worker types on Astro Deployments.
 | A10         | 2    | 4GiB   | 30                   |
 | A20         | 4    | 8GiB   | 60                   |
 | A40         | 8    | 16GiB  | 120                  |
+| A50         | 12   | 24GiB  | 240                  |
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
 
