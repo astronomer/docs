@@ -312,3 +312,4 @@
 # redirect for consolidated docs
 
 /astro/manage-organization /astro/configure-idp
+/astro/astro-ips /astro/connect-aws#public-endpoints 301
