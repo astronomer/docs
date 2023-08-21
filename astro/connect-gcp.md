@@ -10,45 +10,46 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-To allow your Astro cluster to connect to your external data sources, you can either rely on public network or communicate using a private network. If you want to use a private network, there are multiple options to choose from. 
-
-Use the following topics to learn about configuring various options available for connecting to your existing resources from Astro.
+Based on the security considerations of your organization, your cloud resources might be accessible using public endpoints or from within a private network. Use the following topics to learn about different options available to access these resources from your Astro Deployment.
 
 ## Connection options
 
-The option that you choose is determined by the security requirements of your company and your existing infrastructure.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to GCP through only an Airflow connection. If you have restrictions based on IP address, you can add the external IPs of your Deployment or cluster to your cloud resource's allowlist. Whereas, to connect to private networks from Astro, you can choose from the available options provided by GCP.
+
+### Public endpoints
+
+To facilitate communication between your Astro cluster or Deployment with your external GCP resources, you can choose to allowlist them by retrieving their external IPs from the Cloud UI.
+
+#### Allowlist external IP addresses for a cluster
+
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+2. Click **Clusters**, then select a cluster.
+3. In the Details page, copy the IP addresses listed under **External IPs**.
+4. Add the IP addresses to the allowlist of any external services that you want your cluster to access.
+
+After you allowlist a cluster's IP address, all Deployments in that cluster are allowed to access your external resources.
+
+#### Allowlist external IP addresses for a Deployment
+
+To grant access to your external resources on per-Deployment basis, or if you are using a standard cluster, allowlist the IPs only for specific Deployments. For each Deployment that you want to allowlist:
+
+1. In the Cloud UI, select a Deployment, then click Details.
+2. Copy the IP addresses under External IPs.
+3. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
+
+When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
+
+### Private connections
+
+Choose one of the following setups based on the security requirements of your company and your existing infrastructure.
 
 <Tabs
-    defaultValue="Public endpoints"
+    defaultValue="VPC peering"
     groupId="connection-options"
     values={[
-        {label: 'Public endpoints', value: 'Public endpoints'},
         {label: 'VPC peering', value: 'VPC peering'},
         {label: 'Private Service Connect', value: 'Private Service Connect'},
     ]}>
-<TabItem value="Public endpoints">
-
-Publicly accessible endpoints allow you to quickly connect your Astro Deployments to GCP. In certain cases, you might need to whitelist your Astro cluster or Deployment to facilitate communication with your external GCP resources. You can choose to whitelist either your Astro cluster or just your Deployment by retrieveing the external IPs from your Cloud UI.
-
-### Retrieve IP addresses for a cluster to whitelist
-
-1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
-2. Click **Clusters**, then select a cluster.
-3. In the **Details** page, copy the IP addresses listed under **External IPs**.
-
-A cluster's IP addresses are the same for all the Deployments running in that cluster. This is a one-time setup for each Astro cluster.
-
-### Retrieve external IP addresses for a Deployment to whitelist
-
-To allow to access to your external resource on per Deployment basis or if you are using a standard cluster, you need the external IPs of your Deployment.
-
-1. In the Cloud UI, select a Deployment, then click **Details**.
-2. Copy the IP addresses under **External IPs**.
-3. (Optional) Add the IP addresses to the allowlist of any external services that need to interact with Astro.
-
-When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
-
-</TabItem>
 
 <TabItem value="VPC peering">
 
@@ -73,7 +74,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC:
     
 2. Using the information provided by Astronomer support, [create a peering connection](https://cloud.google.com/vpc/docs/using-vpc-peering#creating_a_peering_configuration) from your target VPC to your Astro cluster VPC. For example, you can use the following gcloud CLI command to create the connection:
 
-   ```sh
+   ```bash
    gcloud compute networks peerings create <choose-any-name> --network=<your-target-vpc-network-name>  --peer-project=<your-cluster-project-id> --peer-network=<your-cluster-vpc-name>
    ```
 
@@ -89,7 +90,7 @@ Astro clusters are by default configured with a PSC endpoint with a target of [A
 
 A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
 
-```sh
+```bash
 gcloud services list --available --filter="name:googleapis.com"
 ```
 
@@ -100,4 +101,4 @@ gcloud services list --available --filter="name:googleapis.com"
 ## See Also
 
 - [Manage Airflow connections and variables](manage-connections-variables.md)
-- [Authorize your Deployment using workload identity](authorize-using-workload-identity.md#gcp)
+- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#gcp)
