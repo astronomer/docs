@@ -15,7 +15,7 @@ Astro operates on a model of shared responsibility, which means that both the As
 
 ## Architecture
 
-Astro provides a deployment model where the core components for managing Airflow are hosted in Astronomer's cloud, allowing you to run Airflow with as little friction as possible and securely connect to your data infrastructure. For more information, see [Architecture](astro-architecture.md).
+Astro utilizes a deployment model where the core components for managing Airflow are hosted in Astronomer's cloud, allowing you to run Airflow with as little friction as possible and securely connect to your data infrastructure. For more information, see [Architecture](astro-architecture.md).
 
 ## Resilience
 
