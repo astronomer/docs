@@ -8,7 +8,7 @@ Organization metrics help Organization Owners and Billing Admins track resource 
 
 ## Astro usage
 
-To access the **Usage** page, click the Astronomer logo in the upper left corner of the Cloud UI, then click **Usage**.
+To access the **Usage** page, click your Workspace name in the upper left corner of the Cloud UI and click **Organization Settings**. Then, click **Usage**.
 
 Use the **Usage** page to review the number of successful task runs across Deployments in your Organization.
 

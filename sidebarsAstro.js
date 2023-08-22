@@ -112,16 +112,7 @@ module.exports = {
         "environment-variables",
         "secrets-backend",
         "manage-deployments-as-code",
-        {
-          type: "category",
-          label: "Connect to external resources",
-          link: {
-            type: 'generated-index',
-            title: 'Connect Astro',
-            description: 'Connect Astro to your existing cloud resources.'
-          },
-          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
-        },       
+        "authorize-deployments-to-your-cloud"
       ],
     },
     {
@@ -137,10 +128,11 @@ module.exports = {
         {
           type: "category",
           label: "Data lineage",
-          items: ["set-up-data-lineage", "data-lineage"],
+          items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
         "alerts",
         "airflow-email-notifications",
+        "audit-logs",
       ],
     },
     {
@@ -165,7 +157,6 @@ module.exports = {
           label: "Organizations",
           items: [
             "organization-api-tokens",
-            "audit-logs",
           ],
         },
         {
@@ -179,6 +170,16 @@ module.exports = {
           items: [
             "create-dedicated-cluster",
             "resource-reference-hosted",
+            {
+              type: "category",
+              label: "Connect to external resources",
+              link: {
+                type: 'generated-index',
+                title: 'Connect clusters',
+                description: 'Connect Astro to your existing cloud resources.'
+              },
+              items: ["connect-aws", "connect-azure", "connect-gcp"],
+            },
           ],
         },
         {
@@ -245,7 +246,6 @@ module.exports = {
           ],
         },
         'platform-variables',
-        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",

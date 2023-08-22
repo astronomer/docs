@@ -21,11 +21,41 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 8.8 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 9.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.18.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.18.2 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## August 15, 2023
+
+### Additional improvements
+
+- You can now see how many Astro alerts you've configured for a DAG in the **DAGs** page of the Cloud UI.
+
+### Bug fixes
+
+- Fixed an issue where you couldn't run Astro Cloud IDE pipelines that included a Markdown cell.
+- Fixed an issue where an Organization's SSO bypass link was formatted incorrectly in the Cloud UI.
+
+## August 8, 2023
+
+### New Hosted worker type
+
+<HostedBadge/>
+
+You can now configure Deployments with the `A50` machine type, which has 12 vCPU and 24 GiB. See [Astro hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted).
+
+### Additional improvements
+
+- When you create a new Astro Cloud IDE project, you can now specify whether you want the project to include an example pipeline.
+- You can now access Organization-level settings in the Cloud UI only through the **Organization Settings** link. Additionally, some Organization settings have been moved to the top level of navigation so that there is no longer a **Settings** menu.
+- You can now use commas, apostrophes, and ampersands in Workspace and Organization names.
+- The Workspace list view in the Cloud UI has been redesigned so that Organization Owners can now edit and delete Workspaces directly from the list.
+
+### Bug fixes
+
+- Fixed an issue where the Cloud UI showed incorrect CPU and memory limits in bar charts on the Deployments list and **Details** page.
 
 ## August 1, 2023
 
@@ -259,7 +289,7 @@ Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources o
 
 ### Track user actions and ensure compliance with audit logs
 
-You can now export audit logs from the Cloud UI to view all actions taken in your Organization over a given time period. See [Export audit logs](audit-logs.md) for setup steps, and see [Audit log fields](audit-logs-reference.md) for a reference of all available audit log fields.
+You can now export audit logs from the Cloud UI to view all actions taken in your Organization over a given time period. See [Export audit logs](audit-logs.md) for setup steps.
 
 ### Additional improvements 
 
@@ -759,7 +789,7 @@ For more information about these worker types, see [N2 machine series](https://c
 
 Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
 
-For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-based-templates)).
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd-templates/template-overview#dag-deploy-templates).
 
 ### Improved data lineage interface
 

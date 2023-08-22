@@ -43,13 +43,21 @@ Airflow has a few options for notifying you on the status of your DAGs and tasks
 
 Most notifications can be set at the level of both a DAG and a task. Setting a parameter within a DAG's `default_args` dictionary will apply it to all tasks in the DAG. You can see examples of this in the [set DAG and task-level callbacks](#set-dag-and-task-level-callbacks) section.
 
+:::tip
+
+The OSS notification library [Apprise](https://github.com/caronc/apprise) contains modules to send notifications to many services. You can use Apprise with Airflow by installing the [Apprise Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-apprise/versions/latest) which contains the [AppriseNotifier](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/_api/airflow/providers/apprise/notifications/apprise/index.html). See the [Apprise Airflow provider documentation](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/notifications/apprise_notifier_howto_guide.html) for more information and examples.
+
+:::
+
 ## Choose a notification type
 
 It's best practice to use pre-built solutions whenever possible. This approach makes your DAGs more robust by reducing custom code and standardizing notifications across different Airflow environments.
 
 If you want to deliver alerts to email, use [email notifications](#email-notifications) for task failures or retries and the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for other events such as successful task runs. To receive alerts for tasks taking longer than expected, use [SLAs](#airflow-service-level-agreements).
 
-If a [notifier class](#notifiers) exists for your use case, you should always use it instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html). A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
+If a [notifier class](#notifiers) exists for your use case, you should always use these methods instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html) and the [Apprise wiki](https://github.com/caronc/apprise/wiki) for a list of services the Apprise notifier can connect to. 
+
+A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
 
 ## Email notifications
 
@@ -194,7 +202,7 @@ Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/sta
 
 :::info
 
-You can find a full list of all pre-built notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html).
+You can find a full list of all pre-built notifiers created for Airflow providers [here](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html) and connect to [many more services](https://github.com/caronc/apprise/wiki) through the [AppriseNotifier](https://airflow.apache.org/docs/apache-airflow-providers-apprise/stable/_api/airflow/providers/apprise/notifications/apprise/index.html).
 
 :::
 

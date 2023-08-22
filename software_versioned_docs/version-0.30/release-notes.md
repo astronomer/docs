@@ -26,6 +26,7 @@ Release date: May 26, 2023
 - You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `config.yaml` file.
 - The Software UI now shows a warning message for Deployments currently running an Astronomer Certified image. Only System Admins can create Deployments with deprecated Astronomer Certified images by setting `deployments.enableSystemAdminCanCreateDeprecatedAirflows` to `true`.
 - Grafana now includes an **Astronomer Houston Dashboard** that you can use to view Houston metrics. 
+- Improved signalling between primary Kubernetes containers and the logging sidecar so that you no longer have to set `global.loggingSidecar.terminationEndpoint` in your `config.yaml` file.
 
 ### Bug fixes
 

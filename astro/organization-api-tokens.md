@@ -16,9 +16,9 @@ Use Organization API tokens to automate across all Workspaces in your Organizati
 
 ## Create an Organization API token
 
-1. In the Cloud UI, click the Astronomer logo in the upper left corner to open your Organization.
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management** > **API Tokens**.
+2. Go to **Access Management** > **API Tokens**.
    
 3. Click **+ API Token**.
    
@@ -37,9 +37,9 @@ Use Organization API tokens to automate across all Workspaces in your Organizati
 
 If you delete an Organization API token, make sure that no existing automation workflows are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any automation workflows that used the deleted API token.
 
-1. In the Cloud UI, click the Astronomer logo in the upper left corner to open your Organization.
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management** > **API Tokens**.
+2. Go to **Access Management** > **API Tokens**.
 
 3. Click **Edit** next to your API token.
 
@@ -53,9 +53,9 @@ Rotating an Organization API token lets you renew a token without needing to rec
 
 When you rotate an Organization API token, you receive a new valid token from Astro that can be used in your existing workflows. The previous token value becomes invalid and any workflows using those previous values stop working. 
 
-1. In the Cloud UI, click the Astronomer logo in the upper left corner to open your Organization.
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
-2. Go to **Settings** > **Access Management** > **API Tokens**.
+2. Go to **Access Management** > **API Tokens**.
 
 3. Click **Edit** next to your API token.
 

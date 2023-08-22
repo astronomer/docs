@@ -87,7 +87,7 @@ To connect Airflow to your MLflow instance, you need to create a [connection in 
 :::info 
 
 If you are using a remote MLflow instance, enter your MLflow instance URL as the **Host** and your username and password as the **Login** and **Password** in the connection. If you are running your MLflow instance via Databricks, enter your Databricks URL as the **Host**, enter `token` as the **Login** and your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) as the **Password**.
-Please note that the **Test** button might return a 405 error message even if your credentials are correct. 
+When you test the connection from the Airflow UI, please note that the **Test** button might return a 405 error message even if your credentials are correct. 
 
 :::
 

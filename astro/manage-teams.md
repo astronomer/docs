@@ -9,7 +9,7 @@ _Teams_ are a group of users in an Organization that you can grant the same Orga
 
 ## Create a Team
 
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 
@@ -30,7 +30,7 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 
 ## Update existing Teams
 
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 

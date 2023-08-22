@@ -141,6 +141,7 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
     class subgraph_padding3 subgraph_padding
     class subgraph_padding2 subgraph_padding
     class subgraph_padding1 subgraph_padding
+    linkStyle 0,1,2,3,4,5,6,7,8,9,10,11 stroke:#7f7f7f,stroke-width:3px
     style ControlPlane fill:#bfeaff,stroke:#333,stroke-width:2px
     style DataPlane fill:#bfeaff,stroke:#333,stroke-width:2px
     style AstroCLI fill:#bfeaff,stroke:#333,stroke-width:2px
