@@ -57,7 +57,7 @@ Complete the following steps to retrieve these values:
 
 <TabItem value="iam-creds">
 
-You can use IAM credentials to connect Airflow to Redshift. This approach lets you use IAM credentials and limits Airflow's permissions. The limitation of this method is that you must mount a credentials file to your Docker containers. 
+You can use IAM credentials to connect Airflow to Redshift. This approach lets you use IAM credentials and limits Airflow's permissions. The limitation of this method is that you must include an AWS credentials file in your Airflow project.
 
 Following information is required:
 
