@@ -91,7 +91,9 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment. If you don't enter specific values for the `default` worker queue for a Deployment with CeleryExecutor, default values based on the worker types available on your cluster are applied. This section is not applicable to Deployments running with the Kubernetes executor. 
+The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment. If you don't enter specific values for the `default` worker queue for a Deployment with CeleryExecutor, default values based on the worker types available on your cluster are applied.
+
+This section is not applicable to Deployments running with the Kubernetes executor. 
 
 ### Other fields
 

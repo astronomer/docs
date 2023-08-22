@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Authenticate an automated workflow'
+sidebar_label: 'Authenticate your automation tool'
 title: 'Authenticate to Astro for automated workflows'
 id: automation-authentication
-description: Learn about all possible ways that you can authenticate to Astro from the Astro CLI and automation tools.
+description: Learn about all possible ways that you can authenticate your automation tool to Astro.
 ---
 
-Before you automate your workflows on Astro, you must prove to Astro that your automation tool has the correct identity and access to interact with specific Astro resources. Complete the following actions to authenticate to Astro using the Astro CLI and API tokens:
+Before you can automate actions on Astro, you must prove to Astro that your automation tool has the correct identity and access to interact with specific Astro resources. Complete the following actions to authenticate to Astro using the Astro CLI and API tokens:
 
 - Create an API key or token in Astro.
 - Install the Astro CLI in your automation environment, such as a GitHub Actions.
@@ -25,7 +25,8 @@ You can use any of the following credentials to authenticate in an automated pro
 
 When you create an API token or key for your environment, keep the following best practices in mind:
 
-- Always give your API token or key the minimum permissions required to perform an action. This improves control and security over your Astro components. For example, instead of creating an Organization API token to automate actions in two separate Workspaces, create two separate Workspace API tokens for each Workspace.
+- Always give your API token or key the minimum permissions required to perform an action. This improves control and security over your Astro components. For example, instead of creating an Organization API token to automate actions across two  Workspaces, create a separate Workspace API token for each Workspace.
+
 - Always set an expiration date for your API tokens.
 - Always [rotate your API tokens](workspace-api-tokens.md#rotate-a-workspace-api-token) for enhanced security.
 
@@ -35,7 +36,7 @@ To manage your Astro workflows programmatically, you must install the Astro CLI 
 
 ## Step 3: Add your API token or API key to your environment
 
-To make your API key or token accessible to the Astro CLI, you need to set specific environment variables in your automation environment.
+To make your API key or token accessible to the Astro CLI, you need to set specific environment variables in your CI/CD tool or automation environment.
 
 :::caution
 
