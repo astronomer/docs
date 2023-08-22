@@ -164,10 +164,6 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 
 :::
 
-#### Prerequisites
-
-- Your Deployment must be running Astro Runtime 9. See [Upgrade Astro Runtime](upgrade-runtime.md).
-
 #### Setup
 
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
@@ -190,7 +186,7 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
    - **Value 1** `True`
 
    - **Key 2** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
-   - **Value 2** `<key-1>:<value-1>,<key-2>:<value-2>`
+   - **Value 2** `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
    
 6. Click **Save variable**.
 
