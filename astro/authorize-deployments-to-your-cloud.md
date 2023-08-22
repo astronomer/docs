@@ -26,6 +26,7 @@ The Astro cluster running your Deployment must be connected to your cloud's netw
 A workload identity is a Kubernetes service account that provides an identity to your Deployment. The Deployment can use this identity to authenticate to a cloud's API server, and the cloud can use this identity to authorize the Deployment to access different resources.
 
 ## Setup 
+
 <Tabs
     defaultValue="aws"
     groupId="cloud-provider"

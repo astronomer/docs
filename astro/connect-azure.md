@@ -38,7 +38,6 @@ To allow to access to your external resource on per Deployment basis or if you a
 
 When you use publicly accessible endpoints to connect to Azure, traffic moves directly between your Astro cluster and the Azure API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
 
-
 ### Private connections
 
 The option that you choose is determined by the security requirements of your company and your existing infrastructure.
