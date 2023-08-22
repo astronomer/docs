@@ -10,15 +10,19 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Based on the security considerations of your organization, your cloud resources might be accessible using public endpoints or from within a private network. Use the following topics to learn about different options available to access these resources from your Astro Deployment.
+Use this document to learn how you can connect an Astro cluster and its Deployments to your external GCP resources.
 
 ## Connection options
 
-Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to GCP through only an Airflow connection. If you have restrictions based on IP address, you can add the external IPs of your Deployment or cluster to your cloud resource's allowlist. Whereas, to connect to private networks from Astro, you can choose from the available options provided by GCP.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to GCP through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an GCP resource's allowlist. 
 
-### Public endpoints
+If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-gcp) to GCP in a few different ways.
 
-To facilitate communication between your Astro cluster or Deployment with your external GCP resources, you can choose to allowlist them by retrieving their external IPs from the Cloud UI.
+After you crate a connection from your Deployment to GCP, you might also have to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#gcp).
+
+### Access a public GCP endpoint
+
+To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the  external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your GCP resources through a public endpoint using a valid Airflow Connection.
 
 #### Allowlist external IP addresses for a cluster
 
@@ -39,7 +43,7 @@ To grant access to your external resources on per-Deployment basis, or if you ar
 
 When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
 
-### Private connections
+### Create a private connection between Astro and GCP
 
 Choose one of the following setups based on the security requirements of your company and your existing infrastructure.
 

@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use this document to learn how you can connect an Astro cluster and its Deployments to your AWS resources.
+Use this document to learn how you can connect an Astro cluster and its Deployments to your external AWS resources.
 
 ## Connection options
 
@@ -22,7 +22,7 @@ After you crate a connection from your Deployment to AWS, you might also have to
 
 ### Access a public AWS endpoint
 
-To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the  external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your AWS resources trough a public endpoint.
+To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment in your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your AWS resources through a public endpoint using a valid Airflow Connection.
 
 #### Allowlist external IP addresses for a cluster
 
