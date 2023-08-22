@@ -265,9 +265,15 @@
 # redirect links to renamed files
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
+/astro/deploy-code.md#enable-dag-only-deploys-on-a-deployment /astro/deploy-dags.md#enable-disable-dag-deploys-for-a-deployment
 /astro/pipeline-alerts /astro/alerts 301
+/astro/add-user#add-a-user-to-an-organization /astro/manage-organization-users 301
+/astro/add-user#add-a-user-to-a-workspace /astro/manage-workspace-users 301
+/astro/add-user#update-or-remove-a-workspace-user /astro/manage-workspace-users 301
+/astro/add-user#update-or-remove-an-organization-user /astro/manage-organization-useers 301
 /astro/executors /astro/executors-overview 301
 /astro/airflow-alerts /astro/airflow-email-notifications 301
+/astro/audit-logs-reference /astro/audit-logs 301
 /astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-gcp#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
@@ -306,3 +312,4 @@
 # redirect for consolidated docs
 
 /astro/manage-organization /astro/configure-idp
+/astro/astro-ips /astro/connect-aws#public-endpoints 301

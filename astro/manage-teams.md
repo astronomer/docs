@@ -5,27 +5,32 @@ id: manage-teams
 description: Create, delete, and update Teams on Astro.
 ---
 
-_Teams_ are a group of users in an Organization that you can grant the same Workspace permissions, without needing to define them individually. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles).
+_Teams_ are a group of users in an Organization that you can grant the same Organization and Workspace permissions. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles). This is a quicker and more secure way to assign roles to a large amount of users. 
 
 ## Create a Team
 
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 
-3. Click **+ Team** to create a new team.
+3. Click **+ Team** to create a new Team.
 
-4. Enter a **Team Name** and then click **Add users** to choose the Organization users you want to add to the team. 
+4. Configure the following details about your Team:
 
-    If you don't find the user you want to add, you might need to [add the user to your Organization](add-user.md#add-a-user-to-an-organization).
+    - **Team Name**: The name for your Team.
+    - **Team description**: (Optional) The description for your Team.
+    - **Organization role**: The Organization role for your Team. 
+    - **Add users**: Choose the Organization users you want to add to the Team. 
+
+    If you don't find the user you want to add, you might need to [add the user to your Organization](manage-organization-users.md#add-a-user-to-an-organization).
 
 5. After you finish adding users to the Team, click **Add Team**.
 
-You can now [add your Team to a Workspace](add-user.md#add-a-team-to-a-workspace) and define the Team users' permissions in the Workspace.
+You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-workspace) and define the Team users' permissions in the Workspace.
 
 ## Update existing Teams
 
-1. In the Cloud UI, click Astronomer logo in the upper left corner to open your Organization page. Then, click **Settings** > **Access Management**.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 

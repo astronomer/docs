@@ -33,7 +33,7 @@ Complete the following steps to retrieve all of these values:
 1. In your Azure portal, open your [data factory](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.DataFactory%2FdataFactories) service and select the subscription that contains your data factory.
 2. Copy the **Name** of your data factory and the **Resource group**.
 3. Click on the subscription for your data factory, then copy the **Subscription ID** from the subscription window.
-4. Go to your [Azure AD application](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
+4. Open your Azure AD application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
 5. [Create a new client secret](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
 6. [Assign](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Data Factory Contributor](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#set-up-permissions) role to your app so that Airflow can access the data factory.
 
@@ -61,7 +61,7 @@ Complete the following steps to retrieve all of these values:
     - **Resource Group Name**: Enter your data factory **Resource group**.
     - **Factory Name**: Enter your data factory **Name**.
 
-5. Click **Test connection**. After the connection test succeeds, click **Save**.
+5. Click **Test**. After the connection test succeeds, click **Save**.
 
 ![azure-connection-data-factory](/img/examples/connection-azure-data-factory.png)
 

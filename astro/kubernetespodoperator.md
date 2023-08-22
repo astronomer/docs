@@ -4,6 +4,9 @@ title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <head>
   <meta name="description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
   <meta name="og:description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
@@ -31,6 +34,13 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - Cross-account service accounts are not supported on Pods launched in an Astro cluster. To allow access to external data sources, you can provide credentials and secrets to tasks.
 - PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
 - (Hybrid only) You cannot run a KubernetesPodOperator task in a worker queue or node pool that is different than the worker queue of its parent worker. For example, a KubernetesPodOperator task that is triggered by an `m5.4xlarge` worker on AWS will also be run on an `m5.4xlarge` node. To run a task on a different node instance type, you must launch it in an external Kubernetes cluster. If you need assistance launching KubernetesPodOperator tasks in external Kubernetes clusters, contact [Astronomer support](https://support.astronomer.io).
+- You can't use an image built for an ARM architecture in the KubernetesPodOperator. To build images using the x86 architecture on a Mac with an Apple chip, include the `--platform` flag in the `FROM` command of the `Dockerfile` that constructs your custom image. For example:
+
+    ```bash
+    FROM --platform=linux/amd64 postgres:latest
+    ```
+
+    If you use an ARM image, your KPO task will fail with the error: `base] exec /usr/bin/psql: exec format error`.
 
 ## Prerequisites
 
@@ -144,16 +154,25 @@ example_volume_test = KubernetesPodOperator(
  
 ## Run images from a private registry
 
-By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories).
+By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If your images are hosted on the container registry native to your cloud provider, you can grant access to the images directly. Otherwise, if you are using any other private registry, you need to create a Kubernetes Secret containing credentials to the registry, then specify the Kubernetes Secret in your DAG.
 
-### Prerequisites
+<Tabs
+    defaultValue="PrivateRegistry"
+    groupId="run-images-from-a-private-registry"
+    values={[
+        {label: 'Private Registry', value: 'PrivateRegistry'},
+        {label: 'Amazon Elastic Container Registry (ECR)', value: 'AWSECR'},
+        {label: 'Google Artifact Registry', value: 'GoogleArtifactRegistry'},
+    ]}>
+<TabItem value="PrivateRegistry">
+
+#### Prerequisites
 
 - An [Astro project](develop-project.md#create-an-astro-project).
 - An [Astro Deployment](configure-deployment-resources.md).
 - Access to a private Docker registry.
-- [kubectl](https://kubernetes.io/docs/reference/kubectl/), the command line tool for Kubernetes.
 
-### Step 1: Create a Kubernetes Secret
+#### Step 1: Create a Kubernetes Secret
 
 To run Docker images from a private registry on Astro, a Kubernetes Secret that contains credentials to your registry must be created. Injecting this secret into your Deployment's namespace will give your tasks access to Docker images within your private registry.
 
@@ -164,7 +183,7 @@ To run Docker images from a private registry on Astro, a Kubernetes Secret that 
 
 Astronomer Support will give you instructions on how to securely send your credentials. Do not send this file by email, as it contains sensitive credentials to your registry. Astronomer will use these credentials to create a Kubernetes secret in your Deployment's namespace.
 
-### Step 2: Specify the Kubernetes Secret in your DAG
+#### Step 2: Specify the Kubernetes Secret in your DAG
 
 Once Astronomer has added the Kubernetes secret to your Deployment, you will be notified and provided with the name of the secret.
 
@@ -185,15 +204,18 @@ KubernetesPodOperator(
     get_logs=True,
 )
 ```
-### Docker images hosted in private Amazon ECR repositories
+
+</TabItem>
+
+<TabItem value="AWSECR">
 
 :::info
 
-This setup is available only on Astro Hybrid. 
+This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
 
 :::
 
-If your Docker image is hosted in an Amazon ECR repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret, or specify the Kubernetes secret in your DAG. Docker images hosted on Amazon ECR repositories can only be pulled from AWS clusters.
+If your Docker image is hosted in an Amazon ECR repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret, or specify the Kubernetes secret in your DAG. Docker images hosted in Amazon ECR repositories can only be pulled from AWS clusters.
 
 1. Log in to the Amazon ECR Dashboard and then select **Menu** > **Repositories**.
 2. Click the **Private** tab and then click the name of the repository that hosts the Docker image. 
@@ -227,7 +249,36 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 8. Replace `<your-docker-image>` in the instantiation of the KubernetesPodOperator with the Amazon ECR repository URI that hosts the Docker image. To locate the URI:
 
     - In the Amazon ECR Dashboard, click **Repositories** in the left menu.
-    - Click the **Private** tab and then copy the URI of the repository that hosts the Docker image.
+    - Open the **Private** tab and then copy the URI of the repository that hosts the Docker image.
+
+</TabItem>
+<TabItem value="GoogleArtifactRegistry">
+
+:::info
+
+This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+
+:::
+
+If your Docker image is hosted in Google Artifact Registry repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret or specify the Kubernetes secret in your DAG. Docker images hosted in Google Artifact Registry repositories can be pulled only to Deployments hosted on GCP clusters.
+
+#### Setup
+
+1. Contact [Astronomer support](https://support.astronomer.io) to request the Compute Engine default service account ID for your cluster.
+2. Log in to Google Artifact Registry.
+3. Click the checkbox next to the repository that you want to use.
+4. In the **Properties** pane that appears, click **ADD PRINCIPAL** in the **PERMISSIONS** tab.
+5. In the **Add Principals** text box, paste the Compute Engine default service account ID that was provided to you by Astronomer Support.
+6. In the **Assign Roles** selector, search for `Artifact Registry Reader` and select the role that appears. 
+7. Click **Save** to grant read access for the registry  to Astro.
+8. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator). When you configure an instantiation of the KubernetesPodOperator, replace `<your-docker-image>` with the Google Artifact Registry image URI. To retrieve the URI:
+
+    - In the Google Artifact Registry, click the registry containing the image.
+    - Click the image you want to use.
+    - Click the copy icon next to the image in the top corner. The string you copy should be in the format `<GCP Region>-docker.pkg.dev/<Project Name>/<Registry Name>/<Image Name>`.
+
+</TabItem>
+</Tabs>
 
 ## Use secret environment variables with the KubernetesPodOperator
 

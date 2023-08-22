@@ -92,17 +92,8 @@ module.exports = {
         "api-keys",
         "environment-variables",
         "secrets-backend",
-        "manage-dags",
-        {
-          type: "category",
-          label: "Connect to external resources",
-          link: {
-            type: 'generated-index',
-            title: 'Connect Astro',
-            description: 'Connect Astro to your existing cloud resources.'
-          },
-          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
-        },       
+        "manage-dags",  
+        "authorize-deployments-to-your-cloud",
       ],
     },
     {
@@ -157,10 +148,11 @@ module.exports = {
         {
           type: "category",
           label: "Data lineage",
-          items: ["set-up-data-lineage", "data-lineage"],
+          items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
         "alerts",
         "airflow-email-notifications",
+        "audit-logs",
       ],
     },
     {
@@ -169,40 +161,50 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Manage Organizations",
+          label: "User access",
           items: [
-            {
-              type: "category",
-              label: "User access",
-              items: [
-                "configure-idp",
-                "set-up-scim-provisioning",
-                "manage-domains",
-                "add-user", 
-                "manage-teams", 
-                "user-permissions",
-              ],
-            },
-            "organization-api-tokens",
-            "audit-logs",
+            "manage-organization-users",
+            "manage-workspace-users",
+            "manage-teams",  
+            "configure-idp",
+            "set-up-scim-provisioning",
+            "manage-domains",
+            "user-permissions",
           ],
         },
         {
           type: "category",
-          label: "Manage Workspaces",
+          label: "Organizations",
+          items: [
+            "organization-api-tokens",
+          ],
+        },
+        {
+          type: "category",
+          label: "Workspaces",
           items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
-          label: "Manage clusters",
+          label: "Clusters",
           items: [
             "create-dedicated-cluster",
             "resource-reference-hosted",
+            {
+              type: "category",
+              label: "Connect to external resources",
+              link: {
+                type: 'generated-index',
+                title: 'Connect clusters',
+                description: 'Connect Astro to your existing cloud resources.'
+              },
+              items: ["connect-aws", "connect-azure", "connect-gcp"],
+            },
           ],
         },
         {
           type: "category",
-          label: "Manage Astro Hybrid",
+          label: "Astro Hybrid",
           items: [
             "hybrid-overview",
             {
@@ -264,7 +266,6 @@ module.exports = {
           ],
         },
         'platform-variables',
-        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",
@@ -304,6 +305,11 @@ module.exports = {
       type: "doc",
       label: "Configure the CLI",
       id: "cli/configure-cli",
+    },
+    {
+      type: "doc",
+      label: "Test your Astro project locally",
+      id: "cli/test-your-astro-project-locally",
     },
     {
       type: "doc",
@@ -406,6 +412,7 @@ module.exports = {
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
             'cli/astro-dev-restart',
+            'cli/astro-dev-upgrade-test',
           ],
         },
         'cli/astro-login',

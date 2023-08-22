@@ -30,6 +30,7 @@ The System Viewer has the following permissions by default:
 
 The System Editor has the same default permissions as the System Viewer, plus:
 
+- `system.adminCount.get`: View system admin users. 
 - `system.deployment.variables.update`: Modify [environment variables](environment-variables.md) for any Deployment
 - `system.iam.update`: Modify [IAM](integrate-iam.md) roles for any Deployment
 - `system.serviceAccounts.update`: Modify [service accounts](ci-cd.md#step-1-create-a-service-account) for any Workspace or Deployment
@@ -40,6 +41,7 @@ The System Editor has the same default permissions as the System Viewer, plus:
 
 The System Admin has the same default permissions as the System Viewer and System Editor for a given cluster, plus:
 
+- `system.cleanupAirflowDb.delete`: Clean Deployment task metadata
 - `system.deployments.create`: Create a Deployment on any Workspace
 - `system.deployments.update`: Modify any Deployment
 - `system.deployments.delete`: Delete any Deployment
@@ -84,6 +86,7 @@ The Workspace Viewer has the following default permissions for a given Workspace
 
 For a given Workspace, the Workspace Editor has the same default permissions as the Workspace Viewer, plus:
 
+- `workspace.adminCount.get`: View Workspace admin users. 
 - `workspace.config.update`: Modify the Workspace, including Workspace Name, Description, and user access
 - `workspace.deployments.create`: Create a Deployment in the Workspace
 - `workspace.serviceAccounts.create`: Create a Workspace-level service account
@@ -127,6 +130,7 @@ A Deployment Viewer can't push code to a Deployment or modify Deployment configu
 
 For a given Deployment, the Deployment Editor has the same default permissions as the Deployment Viewer, plus:
 
+- `deployment.adminCount.get`: View Deployment admin users. 
 - `deployment.airflow.user`: Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for all Deployments, including modifying task runs and DAG runs
 - `deployment.config.update`: Modify the Deployment's settings
 - `deployment.images.push`: Push code to the Deployment using the Astro CLI

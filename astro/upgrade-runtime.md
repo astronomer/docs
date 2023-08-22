@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Upgrade Runtime'
+sidebar_label: 'Upgrade Astro Runtime'
 title: 'Upgrade Astro Runtime'
 id: upgrade-runtime
 ---
@@ -10,7 +10,6 @@ id: upgrade-runtime
 </head>
 
 import {siteVariables} from '@site/src/versions';
-
 
 New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
@@ -27,6 +26,24 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 ### Version upgrade considerations
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
+
+#### Runtime 9 (Airflow 2.7)
+
+##### Connection testing in the Airflow UI disabled by default
+
+In Airflow 2.7, connection testing in the Airflow UI is disabled by default. Astronomer does not recommend reenabling the feature unless you fully trust all users with edit/ delete permissions for Airflow connections.
+
+To reenable the feature, set the following environment variable in your Astro project Dockerfile:
+
+```dockerfile
+ENV AIRFLOW__CORE__TEST_CONNECTION=Enabled
+```
+
+##### Upgrade to Python 3.11
+
+The base distribution of Astro Runtime 9 uses Python 3.11 by default. Some provider packages, such as `apache-airflow-providers-apache-hive`, aren't compatible with Python 3.11.
+
+To continue using these packages with a compatible version of Python, upgrade to the [Astro Runtime Python distribution](runtime-image-architecture.md#python-version-distributions) for your desired Python version.
 
 #### Runtime 8 (Airflow 2.6)
 

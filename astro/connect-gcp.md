@@ -10,30 +10,50 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the information provided here to learn how you can securely connect Astro to your existing Google Cloud Platform (GCP) instance. A connection to GCP allows Astro to access data stored on your GCP instance and is a necessary step to running pipelines in a production environment.
+Use this document to learn how you can connect an Astro cluster and its Deployments to your external GCP resources.
 
 ## Connection options
 
-The connection option that you choose is determined by the requirements of your organization and your existing infrastructure. You can choose a straightforward implementation, or a more complex implementation that provides enhanced data security. Astronomer recommends that you review all of the available connection options before selecting one for your organization.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to GCP through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an GCP resource's allowlist. 
+
+If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-gcp) to GCP in a few different ways.
+
+After you crate a connection from your Deployment to GCP, you might also have to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#gcp).
+
+### Access a public GCP endpoint
+
+To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your GCP resources through a valid Airflow Connection.
+
+#### Allowlist external IP addresses for a cluster
+
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+2. Click **Clusters**, then select a cluster.
+3. In the Details page, copy the IP addresses listed under **External IPs**.
+4. Add the IP addresses to the allowlist of any external services that you want your cluster to access.
+
+After you allowlist a cluster's IP address, all Deployments in that cluster are allowed to access your external resources.
+
+#### Allowlist external IP addresses for a Deployment
+
+To grant access to your external resources on per-Deployment basis, or if you are using a standard cluster, allowlist the IPs only for specific Deployments. For each Deployment that you want to allowlist:
+
+1. In the Cloud UI, select a Deployment, then click Details.
+2. Copy the IP addresses under External IPs.
+3. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
+
+When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
+
+### Create a private connection between Astro and GCP
+
+Choose one of the following setups based on the security requirements of your company and your existing infrastructure.
 
 <Tabs
-    defaultValue="Public endpoints"
+    defaultValue="VPC peering"
     groupId="connection-options"
     values={[
-        {label: 'Public endpoints', value: 'Public endpoints'},
         {label: 'VPC peering', value: 'VPC peering'},
         {label: 'Private Service Connect', value: 'Private Service Connect'},
     ]}>
-<TabItem value="Public endpoints">
-
-Publicly accessible endpoints allow you to quickly connect Astro to GCP. To configure these endpoints, you can use one of the following methods:
-
-- Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
-- Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
-
-When you use publicly accessible endpoints to connect Astro and GCP, traffic moves directly between your Astro clusters and the GCP API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
-
-</TabItem>
 
 <TabItem value="VPC peering">
 
@@ -58,7 +78,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC:
     
 2. Using the information provided by Astronomer support, [create a peering connection](https://cloud.google.com/vpc/docs/using-vpc-peering#creating_a_peering_configuration) from your target VPC to your Astro cluster VPC. For example, you can use the following gcloud CLI command to create the connection:
 
-   ```sh
+   ```bash
    gcloud compute networks peerings create <choose-any-name> --network=<your-target-vpc-network-name>  --peer-project=<your-cluster-project-id> --peer-network=<your-cluster-vpc-name>
    ```
 
@@ -74,7 +94,7 @@ Astro clusters are by default configured with a PSC endpoint with a target of [A
 
 A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
 
-```sh
+```bash
 gcloud services list --available --filter="name:googleapis.com"
 ```
 
@@ -82,45 +102,7 @@ gcloud services list --available --filter="name:googleapis.com"
 
 </Tabs>
 
-## Authorization options
+## See Also
 
-Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. Astro clusters must be authorized to access external resources from your cloud. Which authorization option that you choose is determined by the requirements of your organization and your existing infrastructure. Astronomer recommends that you review all of the available authorization options before selecting one for your organization.
-
-<Tabs
-    defaultValue="Workload Identity"
-    groupId="authorization-options"
-    values={[
-        {label: 'Workload Identity', value: 'Workload Identity'},
-        {label: 'Service account keys', value: 'Service account keys'},
-    ]}>
-<TabItem value="Workload Identity">
-
-To allow data pipelines running on GCP to access Google Cloud services in a secure and manageable way, Google recommends using [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity). All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Google service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
-
-To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
-
-1. In the Cloud UI, select your Deployment, then click **Details**
-
-2. Copy the service account shown under **Workload Identity**.
-
-3. Grant the Google service account for your Astro Deployment an IAM role that has access to your external data service. With the Google Cloud CLI, run:
-
-    ```text
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:<your-astro-service-account> --role=roles/viewer
-    ```
-
-    For instructions on how to grant your service account an IAM role in the Google Cloud console, see [Grant an IAM role](https://cloud.google.com/iam/docs/grant-role-console#grant_an_iam_role).
-
-4. Optional. Repeat these steps for every Astro Deployment that requires access to external data services on GCP.
-
-</TabItem>
-
-<TabItem value="Service account keys">
-
-When you create a connection from Astro to GCP, you can specify the service account key in JSON format, or you can create a secret to hold the service account key. For more information about creating and managing GCP service account keys, see [Create and manage service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) and [Creating and accessing secrets](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets).
-
-Astronomer recommends using Google Cloud Secret Manager to store your GCP service account keys and other secrets. See [Google Cloud Secret Manager](secrets-backend?tab=gcp#setup).
-
-</TabItem>
-
-</Tabs>
+- [Manage Airflow connections and variables](manage-connections-variables.md)
+- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#gcp)

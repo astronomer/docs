@@ -61,8 +61,6 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
       loggingSidecar:
         enabled: true
         name: sidecar-log-consumer
-        # needed to prevent zombie deployment worker pods when using KubernetesExecutor
-        terminationEndpoint: http://localhost:8000/quitquitquit
     ```
 
 3. Push the configuration change. See [Apply a config change](apply-platform-config.md).
@@ -75,7 +73,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 ## Use an external Elasticsearch instance for Airflow task log management
 
-Add Airflow task logs from your Astronomer Deployment to an existing Elasticsearch instance on [Elastic Cloud](https://www.elastic.co/cloud/) to centralize log management and analysis. Centralized log management allows you to quickly identify, troubleshoot, and resolve task failure issues. Although these examples use Elastic Cloud, you can also use AWS Managed OpenSearch Service.
+Add Airflow task logs from your Astronomer Deployment to an existing Elasticsearch instance on [Elastic Cloud](https://www.elastic.co/cloud/) to centralize log management and analysis. Centralized log management allows you to quickly identify, troubleshoot, and resolve task failure issues. Although these examples use Elastic Cloud, you can also use AWS Managed OpenSearch Service or any other elastic service (managed or hosted). With an external Elasticsearch instance configured for Astronomer Software, you can see the logs in your Elasticsearch instance and browse the logs from the Software UI.
 
 ### Create an Elastic Deployment and endpoint
 
