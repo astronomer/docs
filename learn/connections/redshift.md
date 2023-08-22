@@ -57,7 +57,7 @@ Complete the following steps to retrieve these values:
 
 <TabItem value="iam-creds">
 
-You can use IAM credentials to connect Airflow to Redshift. This approach gives you the option to use IAM credentials and also limit Airflow's permissions. The drawback is the credentials file needs to be mounted to your Docker container. 
+You can use IAM credentials to connect Airflow to Redshift. This approach lets you use IAM credentials and limits Airflow's permissions. The limitation of this method is that you must mount a credentials file to your Docker containers. 
 
 Following information is required:
 
@@ -84,7 +84,7 @@ Complete the following steps to retrieve these values:
 
 <TabItem value="role-arn">
 
-You can use AWS's [Assume Role](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) method to automatically generate temporary credentials to connect to Redshift. This is useful to grant temporary access to limited privilege AWS IAM users or roles without storing any credentials on disk. Following information is required to create a connection:
+You can use AWS's [Assume Role](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) method to automatically generate temporary credentials to connect to Redshift. This is useful to grant temporary access to limited-privilege IAM users or roles without storing any credentials on disk. The following information is required to create the connection:
 
 - Cluster identifier
 - Database name
@@ -102,7 +102,7 @@ Complete the following steps to retrieve these values:
 
 4. Open your IAM dashboard, and [follow the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html) to create an IAM role and attach an IAM Policy to access the required services, for example AWS Redshift. 
 
-5. Edit the trust relationship of the role created in step 4 to add a trust policy. For example, the following trust policy allows the IAM role to assume your new role.
+5. Edit the trust relationship of the role created in Step 4 to add a trust policy that allows the IAM role to assume your new role.
 
     ```json
 
@@ -231,7 +231,7 @@ Complete the following steps to retrieve these values:
 
 4. Enter a name for the connection in the **Connection Id** field.
 
-5. Fill out the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
+5. Complete the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
     - **Connection Id**: Enter a name for the connection.
     - **Host**: Enter the cluster **Endpoint**.

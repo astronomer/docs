@@ -59,7 +59,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     
 2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
 
-    - **Stack name**: Enter a meaningful name for your stack.
+    - **Stack name**: Enter a name for your stack.
     - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/support). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
 
 3. After the stack is created, go to the **Stack info** tab and copy the AssumeRole ARN from the **Stack ID** field.
