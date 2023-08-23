@@ -43,6 +43,12 @@ DB user credentials can be used to establish a connection to an Amazon Redshift 
 - User
 - Password
 
+:::tip
+
+On Astro, you can use your [Deployment's workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) to authorize connections to Redshift, thus avoiding the need to embed secrets in an Airflow connection.
+
+:::
+
 Complete the following steps to retrieve these values:
 
 1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
@@ -68,6 +74,12 @@ Following information is required:
 - IAM user
 - AWS credentials file
 
+:::tip
+
+On Astro, you can use your [Deployment's workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) to authorize connections to Redshift, thus avoiding the need to include credentials file in your Airflow project.
+
+:::
+
 Complete the following steps to retrieve these values:
 
 1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
@@ -91,6 +103,12 @@ You can use AWS's [Assume Role](https://docs.aws.amazon.com/STS/latest/APIRefere
 - Port
 - Region
 - IAM role ARN
+
+:::tip
+
+On Astro, you can use your [Deployment's workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) role authorize connections to Redshift, thus avoiding the need to create a new IAM role.
+
+:::
 
 Complete the following steps to retrieve these values:
 
@@ -229,9 +247,7 @@ Complete the following steps to retrieve these values:
 
 3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then select the connection type as **Amazon Redshift**.
 
-4. Enter a name for the connection in the **Connection Id** field.
-
-5. Complete the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
+4. Complete the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
 
     - **Connection Id**: Enter a name for the connection.
     - **Host**: Enter the cluster **Endpoint**.
@@ -247,7 +263,7 @@ Complete the following steps to retrieve these values:
 
         ```
 
-7. Click **Test**. After the connection test succeeds, click **Save**.
+5. Click **Test**. After the connection test succeeds, click **Save**.
 
 </TabItem>
 
