@@ -141,8 +141,8 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
   By default, the Astro Datadog integration also sends a Deployment's [Airflow metrics](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html) to Datadog. To send only task logs to Datadog, additionally set the following environment variable:
 
-  - **Key**: `ASTRO_DATADOG_METRICS_DISABLED`
-  - **Value**: `true`
+    - **Key**: `ASTRO_DATADOG_METRICS_DISABLED`
+    - **Value**: `true`
 
   :::
 
