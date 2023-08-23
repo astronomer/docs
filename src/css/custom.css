@@ -384,10 +384,6 @@ html .DocSearch-Button .DocSearch-Search-Icon {
   color: black !important;
 }
 
-.DocSearch-Button-Keys {
-  opacity: 0;
-}
-
 .DocSearch {
   --docsearch-searchbox-background: none;
   --docsearch-searchbox-focus-background: var(--ifm-color-white);
