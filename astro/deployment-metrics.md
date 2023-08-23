@@ -182,11 +182,12 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
   
 5. (Optional) Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
 
-   - **Key 1** `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
-   - **Value 1** `True`
+   - **Key 1**: `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
+   - **Value 1**: `True`
 
-   - **Key 2** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
-   - **Value 2** `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
+  
+    - **Key 2**: `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
+   - **Value 2**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
    
 6. Click **Save variable**.
 
