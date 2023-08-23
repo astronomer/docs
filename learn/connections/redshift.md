@@ -45,7 +45,7 @@ DB user credentials can be used to establish a connection to an Amazon Redshift 
 
 :::tip
 
-On Astro, you can use your [Deployment's workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) to authorize connections to Redshift, thus avoiding the need to embed secrets in an Airflow connection.
+If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to Redshift. This eliminates the need to specify secrets in your Airflow connections. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
 
 :::
 
