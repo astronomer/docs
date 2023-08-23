@@ -9,12 +9,19 @@ id: configure-deployment-resources
   <meta name="og:description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
 </head>
 
-After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI. Specifically you can:
+After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its behavior for your specific needs. 
 
+Manage Deployment resources
 - Allocate resources for your tasks.
+- Change Scheduler resources
+- Change the Deployment executor.
+- Configure Kubernetes Pod resources
+- Enable High Availability
+- Enforce CI/CD Deploys
+
+Manage Deployment information
 - Update a Deployment name and description.
 - Add or delete a Deployment alert email.
-- Change the Deployment executor.
 - Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
 
