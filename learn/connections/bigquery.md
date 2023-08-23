@@ -22,7 +22,7 @@ Using a Kubernetes service account is the most secure method because it doesn't 
 
 :::tip
 
-If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to BigQuery. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Astro project. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=gcp#cloud-provider).
+If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to BigQuery. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Astro project. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
 
 :::
 
