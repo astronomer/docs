@@ -15,6 +15,13 @@ This document covers two different methods to connect Airflow to Amazon Redshift
 
 - Using database (DB) user credentials
 - Using IAM credentials
+- Using IAM role
+
+:::tip
+
+If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to Redshift. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Airflow project. See [Authorize Deployments to your cloud]((https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=aws#cloud-provider)).
+
+:::
 
 ## Prerequisites
 
@@ -30,7 +37,7 @@ This document covers two different methods to connect Airflow to Amazon Redshift
     values={[
         {label: 'DB user credentials', value: 'db-creds'},
         {label: 'IAM credentials', value: 'iam-creds'},
-        {label: 'Role ARN', value: 'role-arn'},
+        {label: 'IAM role (Recommended)', value: 'iam-role'},
     ]}>
 
 <TabItem value="db-creds">
@@ -42,12 +49,6 @@ DB user credentials can be used to establish a connection to an Amazon Redshift 
 - Port
 - User
 - Password
-
-:::tip
-
-If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to Redshift. This eliminates the need to specify secrets in your Airflow connections. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
-
-:::
 
 Complete the following steps to retrieve these values:
 
@@ -74,12 +75,6 @@ Following information is required:
 - IAM user
 - AWS credentials file
 
-:::tip
-
-On Astro, you can use your [Deployment's workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) to authorize connections to Redshift, thus avoiding the need to include credentials file in your Airflow project.
-
-:::
-
 Complete the following steps to retrieve these values:
 
 1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
@@ -94,7 +89,7 @@ Complete the following steps to retrieve these values:
 
 </TabItem>
 
-<TabItem value="role-arn">
+<TabItem value="iam-role">
 
 You can use AWS's [Assume Role](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) method to automatically generate temporary credentials to connect to Redshift. This is useful to grant temporary access to limited-privilege IAM users or roles without storing any credentials on disk. The following information is required to create the connection:
 
@@ -103,12 +98,6 @@ You can use AWS's [Assume Role](https://docs.aws.amazon.com/STS/latest/APIRefere
 - Port
 - Region
 - IAM role ARN
-
-:::tip
-
-On Astro, you can use your [Deployment's workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) role authorize connections to Redshift, thus avoiding the need to create a new IAM role.
-
-:::
 
 Complete the following steps to retrieve these values:
 
@@ -154,7 +143,7 @@ Complete the following steps to retrieve these values:
     values={[
         {label: 'DB credentials', value: 'db-creds'},
         {label: 'IAM credentials', value: 'iam-creds'},
-        {label: 'Role ARN', value: 'role-arn'},
+        {label: 'IAM role (Recommended)', value: 'iam-role'},
     ]}>
 
 <TabItem value="db-creds">
@@ -233,7 +222,7 @@ Complete the following steps to retrieve these values:
 
 </TabItem>
 
-<TabItem value="role-arn">
+<TabItem value="iam-role">
 
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 

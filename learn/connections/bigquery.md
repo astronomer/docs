@@ -14,11 +14,17 @@ import TabItem from '@theme/TabItem';
 There are multiple ways to connect Airflow and BigQuery, all of which require a [GCP Service Account](https://cloud.google.com/docs/authentication#service-accounts):
 
 - Use the contents of a service account key file directly in an Airflow connection.
-- Mount the service account key file in Airflow containers.
+- Copy the service account key file to your Airflow project.
 - Store the contents of a service account key file in a secrets backend.
 - Use a Kubernetes service account to integrate Airflow and BigQuery. This is possible only if you run Airflow on Astro or Google Kubernetes Engine (GKE).
 
 Using a Kubernetes service account is the most secure method because it doesn't require storing a secret in Airflow's metadata database, on disk, or in a secrets backend. The next most secure connection method is to store the contents of your service account key file in a secrets backend.
+
+:::tip
+
+If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to BigQuery. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Astro project. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=gcp#cloud-provider).
+
+:::
 
 ## Prerequisites
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
@@ -90,9 +96,7 @@ You can now use this secret in your Airflow connections.
 
 A [Kubernetes service account](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) provides an identity to the processes running in a Pod. The process running inside a Pod can use this identity of its associated service account to authenticate cluster's API server. This is also referred to as Workload Identity in [GCP](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) and [Azure](https://learn.microsoft.com/en-us/azure/aks/learn/tutorial-kubernetes-workload-identity).
 
-This method cannot be used in local Airflow environment. It is available to use with Airflow on Astro or OSS Airflow running on Kubernetes clusters. 
-
-If you're running [Airflow on Astro](https://docs.astronomer.io/astro/trial), Workload Identity is enabled by default.  See [Connect to GCP](https://docs.astronomer.io/astro/connect-gcp?tab=Workload%20Identity#authorization-options) or [Connect to AWS](https://docs.astronomer.io/astro/connect-aws#authorization-options) to grant a Deployment access to BigQuery on Astro. After you complete these steps, any Google Cloud connection you create in the Deployment will use your workload identity by default to access BigQuery.
+This method cannot be used in a local Airflow environment. It is available to use with Airflow on Astro or OSS Airflow running on Kubernetes clusters. 
 
 If you're running Airflow in a GKE cluster, complete the following steps:
 
@@ -100,6 +104,8 @@ If you're running Airflow in a GKE cluster, complete the following steps:
 2. [Enable Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) and [configure Airflow to use workload identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to). Copy the name for the Kubernetes service account that you create. 
 3. Go to **IAM**, then click **Service Accounts** and search for your Kubernetes service account. If you don't see your service account, click **+ ADD** to add your service account to your Google Cloud project.
 4. [Grant roles](https://cloud.google.com/iam/docs/grant-role-console) to your service account to access BigQuery. See [BigQuery roles](https://cloud.google.com/bigquery/docs/access-control#bigquery) for a list of available roles and the permissions.
+
+After you complete these steps, any Google Cloud connection you create in the Deployment will use your workload identity by default to access BigQuery.
 
 </TabItem>
 
