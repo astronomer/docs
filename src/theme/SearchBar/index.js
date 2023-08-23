@@ -155,7 +155,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
   });
   const translatedSearchLabel = translate({
     id: 'theme.SearchBar.label',
-    message: 'Find what you\'re looking for',
+    message: 'Find what you\'re looking for (Ctrl/Cmd ⌘ + K)',
     description: 'The ARIA label and placeholder for search button',
   });
   return (
