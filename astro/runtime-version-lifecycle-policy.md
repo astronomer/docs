@@ -77,7 +77,7 @@ Occasionally, Astronomer might deviate from the defined response policy and back
 
 <!--- Version-specific -->
 
-The following table contains the exact lifecycle for each published version of Astro Runtime. These timelines are based on the LTS and Stable release channel maintenance policies.
+The following table contains the exact lifecycle for each published version of Astro Runtime. These timelines are based on the LTS and Stable [release channel maintenance policies](#release-channels).
 
 | Runtime Version                                 | Apache Airflow version | Release channel | Release date       | End of maintenance date |
 | ----------------------------------------------- | ---------------------- | --------------- | ------------------ | ----------------------- |
