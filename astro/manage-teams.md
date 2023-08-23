@@ -7,7 +7,7 @@ description: Create, delete, and update Teams on Astro.
 
 After adding users to an Astro Organization through [an SSO provider](astro/configure-idp) or by [manually adding users](/astro/manage-organization-users#add-a-user-to-an-organization), Organization Owners can use Teams to batch assign Organization and Workspace permissions to groups of users.
 
-A _Team_ is a user management group within Astro where members have the same Organization and Workspace permissions.
+A _Team_ is a user management group within Astro where members have the same Organization and Workspace permissions. Because a Workspace is a collection of Deployments, you can use Workspaces to group Deployments by business use case or environment trait. Then, you can make teams with permissions that correspond to how you've organized your Workspaces. 
 
 Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles). This is a quicker and more secure way to assign roles to a large amount of users compared to manually updating user permissions.
 
