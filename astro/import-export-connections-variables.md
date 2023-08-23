@@ -25,7 +25,7 @@ To export variables from a local Airflow environment or Astro Deployment, comple
 
 2. Select the variables you want to export, then click **Export** in the **Actions** dropdown menu. 
 
-    The selected variables are exported to to your local computer in a file named `variables.json`.
+    The selected variables are exported to your local machine in a file named `variables.json`.
 
     ![Export Variables](/img/docs/airflow-ui-export-vars.png)
 
