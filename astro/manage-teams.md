@@ -5,7 +5,11 @@ id: manage-teams
 description: Create, delete, and update Teams on Astro.
 ---
 
-_Teams_ are a group of users in an Organization that you can grant the same Organization and Workspace permissions. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles). This is a quicker and more secure way to assign roles to a large amount of users. 
+After adding users to an Astro Organization through [an SSO provider](astro/configure-idp) or by [manually adding users](/astro/manage-organization-users#add-a-user-to-an-organization), Organization Owners can use Teams to batch assign Organization and Workspace permissions to groups of users.
+
+A _Team_ is a user management group within Astro where members have the same Organization and Workspace permissions.
+
+Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles). This is a quicker and more secure way to assign roles to a large amount of users compared to manually updating user permissions.
 
 ## Create a Team
 
