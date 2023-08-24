@@ -23,7 +23,7 @@ The behavior and format of this command differs depending on which Astronomer pr
     ]}>
 <TabItem value="astro">
 
-Add an existing Organization user to your current Astronomer Workspace. You must be a Workspace Admin to perform this action.
+Add an existing Organization user to your current Astronomer Workspace. You must be a Workspace Owner to perform this action.
 
 You can use this command to invite multiple users to a Workspace at a time. See [Add a group of users to Astro using the Astro CLI](manage-organization-users.md#add-a-group-of-users-to-astro-using-the-astro-cli).
 

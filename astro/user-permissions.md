@@ -14,9 +14,9 @@ Astro has hierarchical RBAC. Within a given Workspace or Organization, senior ro
 The Astro role hierarchies in order of inheritance are: 
 
 - Organization Owner > Organization Billing Admin > Organization Member 
-- Workspace Admin > Workspace Editor > Workspace Member
+- Workspace Owner > Workspace Operator > Workspace Author > Workspace Member
 
-Additionally, Organization Owners inherit Workspace Admin permissions for all Workspaces in the Organization.
+Additionally, Organization Owners inherit Workspace Owner permissions for all Workspaces in the Organization.
 
 ## Organization roles
 
@@ -29,7 +29,7 @@ An Organization role grants a user or API token some level of access to an Astro
 | Update Organization billing information and settings             |                         | ✔️                              | ✔️                      |
 | View usage for all Workspaces in the **Usage** tab               |                         | ✔️                              | ✔️                      |
 | Create a new Workspace                                           |                         |                                | ✔️                      |
-| Workspace Admin permissions to all Workspaces                    |                         |                                | ✔️                      |
+| Workspace Owner permissions to all Workspaces                    |                         |                                | ✔️                      |
 | Update roles and permissions of existing Organization users      |                         |                                | ✔️                      |
 | Invite a new user to an Organization                             |                         |                                | ✔️                      |
 | Remove a user from an Organization                               |                         |                                | ✔️                      |
@@ -41,30 +41,38 @@ To manage users in an Organization, see [Manage Organization users](manage-organ
 
 ## Workspace roles
 
-A Workspace role grants a user or API token some level of access to a specific Workspace. All Deployments in a Workspace will be accessible to the user or API token based on it's Workspace role. The following table lists the available Workspace roles:
+A Workspace role grants a user or API token some level of access to a specific Workspace. If a user or API token has some level of access to a Workspace, that access applies to all Deployments in the Workspace. 
 
-| Permission                                          | **Workspace Member** | **Workspace Editor** | **Workspace Admin** |
-| --------------------------------------------------- | -------------------- | -------------------- | ------------------- |
-| View Workspace users                                | ✔️                    | ✔️                    | ✔️                   |
-| View all Deployments in the Cloud UI                | ✔️                    | ✔️                    | ✔️                   |
-| View DAGs in the Airflow UI                         | ✔️                    | ✔️                    | ✔️                   |
-| View Airflow task logs                              | ✔️                    | ✔️                    | ✔️                   |
-| View Astro Cloud IDE projects                       | ✔️                    | ✔️                    | ✔️                   |
-| Update Deployment configurations                    |                      | ✔️                    | ✔️                   |
-| Manually trigger DAG and task runs                  |                      | ✔️                    | ✔️                   |
-| Pause or unpause a DAG                              |                      | ✔️                    | ✔️                   |
-| Clear/mark a task instance or DAG run               |                      | ✔️                    | ✔️                   |
-| Push code to Deployments                            |                      | ✔️                    | ✔️                   |
-| Create and Delete Deployments                       |                      | ✔️                    | ✔️                   |
-| Create, Update and Delete Environment Variables     |                      | ✔️                    | ✔️                   |
-| Create, update, and delete Astro Cloud IDE projects |                      | ✔️                    | ✔️                   |
-| View Airflow connections and Variables              |                      |                      | ✔️                   |
-| Update Airflow connections and Variables            |                      |                      | ✔️                   |
-| Create, Update, and Delete API Keys                 |                      |                      | ✔️                   |
-| Update user roles and permissions                   |                      |                      | ✔️                   |
-| Invite users to a Workspace                         |                      |                      | ✔️                   |
-| Assign Teams to or remove from Workspaces           |                      |                      | ✔️                   |
-| Create, update and delete Workspace API tokens      |                      |                      | ✔️                   |
+- A **Workspace Member** has the least permissions in a Workspace and can only view the most basic details about Deployments and DAGs. Give a user this role if X
+- A **Workspace Author** has all of the same permissions as a Workspace Member, plus the ability to update DAG code and run DAGs in the Airflow UI, plus limited permissions to configure Deployment-level observability features such as Astro alerts. Give a user this role if they are primarily DAG developers and don't need to manage the environments their DAGs run in. 
+- A **Workspace Operator** has all the same permissions as a Workspace Author, plus the ability to manage Deployment-level configurations, such as environment variables. Give a user this role if they need to manage the environments that DAGs run in.
+- A **Workspace Owner** has all the same permissions as a Workspace Operator, plus the ability to manage user membership in the Workspace. Give a user this role if they need to administrate membership to the Workspace. 
+
+The following table lists the specific permissions that each Workspace role has:
+
+| Permission                                                                  | **Workspace Member** | **Workspace Author** | **Workspace Operator** | **Workspace Owner** |
+| --------------------------------------------------------------------------- | -------------------- | -------------------- | ---------------------- | ------------------- |
+| View Workspace users                                                        | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View all Deployments in the Cloud UI                                        | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View DAGs in the Airflow UI                                                 | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Airflow task logs                                                      | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Astro Cloud IDE projects                                               | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Astro alerts                                                           | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| Manually trigger DAG and task runs                                          |                      | ✔️                    | ✔️                      | ✔️                   |
+| Pause or unpause a DAG                                                      |                      | ✔️                    | ✔️                      | ✔️                   |
+| Clear/mark a task run or DAG run                                            |                      | ✔️                    | ✔️                      | ✔️                   |
+| Push code to Deployments or Astro Cloud IDE projects                        |                      | ✔️                    | ✔️                      | ✔️                   |
+| Create, update, and delete Astro Cloud IDE projects                         |                      | ✔️                    | ✔️                      | ✔️                   |
+| Create, update, and delete Astro alerts                                     |                      | ✔️                    | ✔️                      | ✔️                   |
+| View Airflow connections, variables, plugins, providers, pools, and XComs   |                      | ✔️                    | ✔️                      | ✔️                   |
+| Update Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                      | ✔️                   |
+| Update Deployment configurations                                            |                      |                      | ✔️                      | ✔️                   |
+| Create and Delete Deployments                                               |                      |                      | ✔️                      | ✔️                   |
+| Create, Update and Delete Environment Variables                             |                      |                      | ✔️                      | ✔️                   |
+| Update user roles and permissions                                           |                      |                      |                        | ✔️                   |
+| Invite users to a Workspace                                                 |                      |                      |                        | ✔️                   |
+| Assign Teams to or remove from Workspaces                                   |                      |                      |                        | ✔️                   |
+| Create, update and delete Deployment API keys and Workspace API tokens      |                      |                      |                        | ✔️                   |
 
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
 
@@ -77,4 +85,4 @@ There are two ways to define a user's role in a Workspace:
 
 If a user has permissions to a Workspace both as an individual and as a member of a Team, then Astronomer recognizes the more privileged role.
 
-For example, if a user belongs to a Workspace as a **Workspace Member**, but also belongs to a Team in the Workspace with **Workspace Admin** privileges, then the user has **Workspace Admin** privileges in the Workspace.
+For example, if a user belongs to a Workspace as a **Workspace Member**, but also belongs to a Team in the Workspace with **Workspace Owner** privileges, then the user has **Workspace Owner** privileges in the Workspace.
