@@ -73,6 +73,33 @@ In your SQL cell, click **Dependencies** and select a cell to be upstream of you
 
 To make your SQL cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your SQL cell. 
 
+## Create data dependencies for a SQL cell
+
+You can use the output of other cells in your project within a SQL function. You define these dependencies in SQL using jinja templating, and the Cloud IDE automatically renders the dependencies in your project code and in the **Pipeline** view of your project.
+
+For example, if you have a SQL cell using **In-memory SQL** to query a dataframe output of a Python cell, the Python cell is automatically marked as an upstream dependency for your SQL cell.
+
+### Pass a value from a Python cell to a SQL cell 
+
+If a Python cell returns a pandas DataFrame, you can pass the DataFrame to a SQL cell as a table by calling the name of the Python cell. Call the name of the Python cell using double curly braces, also known as jinja templating. Pandas DataFrames are automatically converted to SQL tables when they are passed to SQL cells.
+
+For example, a SQL cell containing the following query is dependent on a Python cell named `my_dataframe`.
+
+```sql
+select * from {{my_dataframe}} -- my_dataframe is a Python cell
+where col_a > 10
+```
+
+### Pass a value from a SQL cell to a SQL cell 
+
+You can pass the results of a `SELECT` statement to a SQL cell by calling the name of the SQL cell containing the `SELECT` statement. Call the name of the SQL cell using double curly braces, also known as jinja templating.
+
+For example, a SQL cell containing the following query is dependent on a SQL cell named `my_table`.
+
+```sql
+select * from {{my_table}} -- my_table is another SQL cell
+```
+
 ## View complete code for SQL cells
 
 To view your SQL cell within the context of an Airflow DAG, click **Code**. The Airflow DAG includes your SQL query as well as all of the code required to run it on Airflow.
