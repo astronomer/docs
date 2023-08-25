@@ -68,7 +68,7 @@ The following table lists the specific permissions that each Workspace role has:
 | Update Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                      | ✔️                   |
 | Update Deployment configurations                                            |                      |                      | ✔️                      | ✔️                   |
 | Create and Delete Deployments                                               |                      |                      | ✔️                      | ✔️                   |
-| Create, Update and Delete Environment Variables                             |                      |                      | ✔️                      | ✔️                   |
+| Create, Update and Delete Deployment Environment Variables                             |                      |                      | ✔️                      | ✔️                   |
 | Update user roles and permissions                                           |                      |                      |                        | ✔️                   |
 | Invite users to a Workspace                                                 |                      |                      |                        | ✔️                   |
 | Assign Teams to or remove from Workspaces                                   |                      |                      |                        | ✔️                   |
