@@ -251,7 +251,7 @@ As a next step, create a file named `config.yaml` in an empty directory.
 
 For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
 
-Copy and paste the following example into the `config.yaml` file. Replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, `astronomer.houston.secret`, and `ssl.enabled` with your own values. Additional example configurations are available in the [Astronomer GitHub configs repository](https://github.com/astronomer/astronomer/tree/master/configs).
+Copy and paste the following example into the `config.yaml` file. Replace `baseDomain`, `private-root-ca`, `/etc/containerd/certs.d`, `astronomer.houston.secret`, and `ssl.enabled` with your own values. Additional example configurations are available in the [Astronomer GitHub configs repository](https://github.com/astronomer/astronomer/tree/master/configs).
 
 ```yaml
 #################################
@@ -278,7 +278,7 @@ global:
   # and in that case 'enabled' should be false.
   privateCaCertsAddToHost:
     enabled: true
-    hostDirectory: /etc/docker/certs.d
+    hostDirectory: /etc/containerd/certs.d
   # For development or proof-of-concept, you can use an in-cluster database
   postgresqlEnabled: false
 
@@ -518,8 +518,8 @@ astro auth login <your-astronomer-base-domain>
 If you can log in, then your Docker client trusts the registry. If Docker does not trust the Astronomer registry, run the following and restart Docker:
 
 ```sh
-mkdir -p /etc/docker/certs.d
-cp privateCA.pem /etc/docker/certs.d/
+mkdir -p /etc/containerd/certs.d
+cp privateCA.pem /etc/containerd/certs.d/
 ```
 
 Finally, try running `$ astro deploy` on a test deployment. Create a deployment in the Software UI, then run:
@@ -533,7 +533,12 @@ astro deploy -f
 
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
 
-If you have Airflow pods in an `ImagePullBackoff` state, check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation.
+If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you have:
+
+- Configured containerd’s `config_path` to point to `/etc/containerd/certs.d` 
+- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
+
+If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `config.yaml`, please contact Astronomer for additional configuration assistance.
 
 ## What's next
 
