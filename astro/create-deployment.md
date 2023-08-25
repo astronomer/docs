@@ -13,9 +13,9 @@ An Astro Deployment is an Airflow environment that is powered by [Astro Runtime]
 
 There are three ways to create a Deployment: 
 
-- Using the Cloud UI. This is the most basic way to create a Deployment and is the focus of this document.
-- Using [`astro deployment create`](cli/astro-deployment-create.md).
-- Using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md).
+- Manually, using the Cloud UI. This is the most basic way to create a Deployment and is the focus of this document.
+- Programmatically, using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md).
+- Programmatically, using [`astro deployment create`](cli/astro-deployment-create.md).
 
 After you create a Deployment, you can deploy DAGs to it using the Astro CLI on your local machine or a continuous integration/continuous delivery (CI/CD) tool. All DAGs and tasks on Astro are executed within a Deployment.
 
