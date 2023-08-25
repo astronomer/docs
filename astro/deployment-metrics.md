@@ -15,9 +15,9 @@ To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md).
 
 ## Deployment analytics
 
-The **Analytics** page contains a suite of metrics for a given Deployment. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
+The **Overview** page contains a suite of metrics for a given Deployment. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
 
-To view metrics for a Deployment, open the Deployment in the Cloud UI, click **Analytics**, then click **Get Analytics**. The following topics contain information about each available metric.
+To view metrics for a Deployment, open the Deployment in the Cloud UI, click **Overview**, then click **Get Analytics**. The following topics contain information about each available metric.
 
 ### DAG and task runs
 
