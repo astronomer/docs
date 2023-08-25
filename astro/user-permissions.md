@@ -56,6 +56,7 @@ The following table lists the specific permissions that each Workspace role has:
 | View all Deployments in the Cloud UI                                        | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View DAGs in the Airflow UI                                                 | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Airflow task logs                                                      | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Airflow datasets                                                       | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Astro Cloud IDE projects                                               | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Astro alerts                                                           | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | Manually trigger DAG and task runs                                          |                      | ✔️                    | ✔️                      | ✔️                   |
