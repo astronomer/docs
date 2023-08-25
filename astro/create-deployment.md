@@ -11,14 +11,15 @@ id: create-deployment
 
 An Astro Deployment is an Airflow environment that is powered by [Astro Runtime](runtime-image-architecture.md). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
 
-The most basic way to create a Deployment is through the Cloud UI. After you create a Deployment, you can deploy DAGs to it using the Astro CLI on your local machine or a continuous integration/continuous delivery (CI/CD) tool. All DAGs and tasks on Astro are executed within a Deployment.
+There are three ways to create a Deployment: 
 
-Every Deployment is hosted on an Astro cluster with its own dedicated resources, which you can customize to fine-tune your resource usage. To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace. See [Deployment network isolation](data-protection.md#deployment-network-isolation).
+- Using the Cloud UI. This is the most basic way to create a Deployment and is the focus of this document.
+- Using [`astro deployment create`](cli/astro-deployment-create.md).
+- Using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md).
 
-This document explains how to create Deployments through the Cloud UI. To create Deployments programmatically using the Astro CLI, see:
+After you create a Deployment, you can deploy DAGs to it using the Astro CLI on your local machine or a continuous integration/continuous delivery (CI/CD) tool. All DAGs and tasks on Astro are executed within a Deployment.
 
-- [`astro deployment create`](cli/astro-deployment-create.md)
-- [Manage Deployments as code](manage-deployments-as-code.md)
+Every Deployment is hosted on an Astro cluster with its own dedicated resources that you can [customize](configure-deployment-resources.md) to fine-tune your resource usage. To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace. See [Deployment network isolation](data-protection.md#deployment-network-isolation).
 
 ## Prerequisites
 
