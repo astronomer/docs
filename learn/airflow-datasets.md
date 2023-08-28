@@ -28,6 +28,15 @@ To get the most out of this guide, you should have an existing knowledge of:
 - Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
 - The Astro Python SDK. See [Using the Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk).
 
+## Why use datasets?
+
+Datasets allow you to define explicit dependencies between DAGs and updates to your data. This helps you to:
+
+- Standardize communication between teams. Datasets can function like an API to communicate that data in a specific location has been updated and is ready for use.
+- Reduce the amount of code necessary to implement [cross-DAG dependencies](cross-dag-dependencies.md). Even if your DAGs do not depend on data being updated you can use a Dataset to trigger a DAG based on the completion of another DAG.
+- Get better visibility into how your DAGs are connected and how they depend on data. The **Datasets** tab in the Airflow UI shows a graph of all dependencies between DAGs and datasets in your Airflow environment.
+- Reduce costs because Datasets do not use a worker slot in contrast to other implementations of cross-DAG dependencies.
+
 ## Dataset concepts
 
 You can define datasets in your Airflow environment and use them to create dependencies between DAGs. To define a dataset, instantiate the `Dataset` class and provide a string to identify the location of the dataset. This string must be in the form of a valid Uniform Resource Identifier (URI). 
