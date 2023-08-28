@@ -9,21 +9,23 @@ id: configure-deployment-resources
   <meta name="og:description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
 </head>
 
-After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its behavior for your specific needs. 
+After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor. There's two categories of options for cconfiguring your Astro Deployment to best meet your business and technical needs. 
 
-Manage Deployment resources
-- Allocate resources for your tasks.
-- Change Scheduler resources
-- Change the Deployment executor.
-- Configure Kubernetes Pod resources
-- Enable High Availability
-- Enforce CI/CD Deploys
+You can manage the administration of your Deployment, which includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro and remove resources that you're not using: 
 
-Manage Deployment information
 - Update a Deployment name and description.
 - Add or delete a Deployment alert email.
 - Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
+
+You also have configuration options that allow you to customize the resource use, infrastructure, and performance of your Deployment. This means you can optimize how your deployment uses resources, so you can improve the efficeincy of your Deployment processing, optimize compute resources, or enable advanced use cases for workload and cost optimization. The following configuration options enable you to specialize your Deployment configuration to get the maximum performance out of your Astro resources:
+
+- Allocate resources for your tasks.
+- Change Scheduler resources.
+- Change the Deployment executor.
+- Configure Kubernetes Pod resources.
+- Enable High Availability.
+- Enforce CI/CD Deploys.
 
 For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.md).
 
