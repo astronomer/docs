@@ -31,7 +31,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
-- You can now configure [task log forwarding to Datadog](https://docs.astronomer.io/astro/view-logs.md#export-task-logs-to-datadog-aws-only) at the Deployment level.
+- You can now configure [task log forwarding to Datadog](https://docs.astronomer.io/astro/view-logs#export-task-logs-to-datadog-aws-only) at the Deployment level.
 - In the **DAGs** view of the Cloud UI, you can now double click a task run node in the graph view to view the task run's logs and mapped tasks.
 - The A50 worker type has been renamed to A60 to make it consistent in scale with other worker types.
 - The max possible **CPU quota** and **Memory quota** for a Deployment running in a Hosted dedicated cluster has increased to 1600 vCPU/ 3200 GiB respectively.
