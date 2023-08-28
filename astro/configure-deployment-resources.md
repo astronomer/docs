@@ -20,12 +20,12 @@ You can manage the administration of your Deployment, which includes actions lik
 
 You also have configuration options that allow you to customize the resource use, infrastructure, and performance of your Deployment. This means you can optimize how your deployment uses resources, so you can improve the efficeincy of your Deployment processing, optimize compute resources, or enable advanced use cases for workload and cost optimization. The following configuration options enable you to specialize your Deployment configuration to get the maximum performance out of your Astro resources:
 
-- Allocate resources for your tasks.
-- Change Scheduler resources.
 - Change the Deployment executor.
 - Configure Kubernetes Pod resources.
-- Enable High Availability.
+- Change Scheduler resources.
 - Enforce CI/CD Deploys.
+- Enable High Availability.
+- Update your Airflow configuration
 
 For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.md).
 
@@ -34,6 +34,61 @@ For advanced Deployment resource configurations, see [Manage Airflow executors o
 This document focuses on configuring Deployments through the Cloud UI. To configure Deployments as code using the Astro CLI, see [Manage Deployments as code](manage-deployments-as-code.md).
 
 :::
+
+## Update a Deployment name and description
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Details** tab.
+3. Click **Edit Details**.
+4. Update the Deployment name or description. 
+5. Click **Update**.
+
+## Configure Deployment email alerts
+
+Email alerts are used by Astronomer support to notify recipients in the case of an issue with a Deployment. This can include a problem with your scheduler or workers. 
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Details** tab.
+3. To add an alert email:
+    - Click **Edit Emails** in the **Alert Emails** area.
+    - Enter an email address and then click **Add**.
+4. To delete an alert email address:
+    - Click **Edit Emails** in the **Alert Emails** area.
+    - Click **Delete** next to the email you want to delete.
+    - Click **Yes, Continue**.
+
+In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.
+
+## Transfer a Deployment to another Workspace 
+
+Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.
+
+To transfer a Deployment from one Workspace to another, the Workspaces must be in the same Organization. Transferred Deployments cannot be transferred to a different cluster from the one in which they were created.
+
+Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu and select **Transfer Deployment**. 
+
+    ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
+
+3. Select the target Workspace where you want to transfer the Deployment. 
+4. Click **Transfer Deployment**.
+
+## Delete a Deployment
+
+When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
+
+    ![Delete Deployment in options menu](/img/docs/delete-deployment.png)
+
+3. Enter `Delete` and click **Yes, Continue**.
+
+## Update Airflow configurations
+
+To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](environment-variables.md#set-airflow-configurations-using-environment-variables).
 
 ## Deployment executor
 
@@ -53,6 +108,31 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 5. Click **Update**.
 
 See [Configure an executor](executors-overview.md) for more information about each available executor type, including how to optimize executor usage.
+
+## Configure Kubernetes Pod resources
+
+The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure Pods in your DAG code to define individual task environments, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. 
+
+Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
+
+1. In the Cloud UI, select a Deployment.
+2. Click **Resource quotas**.
+3. Configure the following values:
+
+    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
+    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment.
+    - **Default Pod Size** > **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
+    - **Default Pod Size** > **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
+
+Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
+
+:::info Alternative Astro Hybrid setup
+
+On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory. 
+
+To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
+
+:::
 
 ## Scheduler size
 
@@ -86,34 +166,6 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 :::
 
-## Update a Deployment name and description
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Details** tab.
-3. Click **Edit Details**.
-4. Update the Deployment name or description. 
-5. Click **Update**.
-
-## Configure Deployment email alerts
-
-Email alerts are used by Astronomer support to notify recipients in the case of an issue with a Deployment. This can include a problem with your scheduler or workers. 
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Details** tab.
-3. To add an alert email:
-    - Click **Edit Emails** in the **Alert Emails** area.
-    - Enter an email address and then click **Add**.
-4. To delete an alert email address:
-    - Click **Edit Emails** in the **Alert Emails** area.
-    - Click **Delete** next to the email you want to delete.
-    - Click **Yes, Continue**.
-
-In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.
-
-## Update Airflow configurations
-
-To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](environment-variables.md#set-airflow-configurations-using-environment-variables).
-
 ## Enforce CI/CD deploys
 
 By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
@@ -146,58 +198,6 @@ On Astro Hybrid, PgBouncer is highly available by default for all Deployments. S
 Every Deployment has two PgBouncer Pods assigned to two different nodes to prevent zombie tasks. If you configure your Deployment with two schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses three or four schedulers can assign all scheduler Pods across two nodes.
 
 :::
-
-## Configure Kubernetes Pod resources
-
-The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure Pods in your DAG code to define individual task environments, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. 
-
-Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
-
-1. In the Cloud UI, select a Deployment.
-2. Click **Resource quotas**.
-3. Configure the following values:
-
-    - **CPU quota**: The maximum amount of CPU for all currently running Pods on your Deployment. 
-    - **Memory Quota**: The maximum amount of memory for all currently running Pods on your Deployment.
-    - **Default Pod Size** > **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
-    - **Default Pod Size** > **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
-
-Your CPU quota and memory quota determine your **Max Pod Size**, which is the maximum amount of resources that a task can request for its Pod. If the CPU and memory quotas you specify exceed the limits of Astro's infrastructure, your **Max Pod Size** is determined by the size of the Astro-hosted infrastructure running your tasks.
-
-:::info Alternative Astro Hybrid setup
-
-On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory. 
-
-To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
-
-:::
-
-## Transfer a Deployment to another Workspace 
-
-Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.
-
-To transfer a Deployment from one Workspace to another, the Workspaces must be in the same Organization. Transferred Deployments cannot be transferred to a different cluster from the one in which they were created.
-
-Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu and select **Transfer Deployment**. 
-
-    ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
-
-3. Select the target Workspace where you want to transfer the Deployment. 
-4. Click **Transfer Deployment**.
-
-## Delete a Deployment
-
-When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
-
-    ![Delete Deployment in options menu](/img/docs/delete-deployment.png)
-
-3. Enter `Delete` and click **Yes, Continue**.
 
 ## See also
 
