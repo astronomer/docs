@@ -40,7 +40,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Bug fixes
 
-- Fixed Notes in Astro Cloud
+- Fixed an issue so that users can now add and edit DAG Notes or Task notes in Astro Cloud.
 - Fixed trigger logs on AWS
 
 ## Astro Runtime 9.0.0
