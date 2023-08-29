@@ -24,25 +24,6 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Astro Runtime 8.9.0
-
-- Release date: August 28, 2023
-- Airflow version: 2.6.3
-
-### Early access Airflow bug fixes
-
-- Fixed an issue where Airflow incorrectly used `urljoin`  to concatenate the string for `log_url`. ([#33063](https://github.com/apache/airflow/pull/33063)) 
-
-### Additional improvements
-
-- Upgraded `astronomer-providers` to 1.17.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1173-2023-08-07) for a complete list of changes.
-- Upgraded `astro-sdk-python` to 1.6.2. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
-
-### Bug fixes
-
-- Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.
-- Fixed an issue with trigger logs for Deployments running on AWS.
-
 ## Astro Runtime 9.0.0
 
 - Release date: August 18, 2023
@@ -85,6 +66,25 @@ The base image for Astro Runtime now uses Python 3.11. If you want to use a diff
 ### Bug fixes
 
 - Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.
+
+## Astro Runtime 8.9.0
+
+- Release date: August 28, 2023
+- Airflow version: 2.6.3
+
+### Early access Airflow bug fixes
+
+- Fixed an issue where Airflow incorrectly used `urljoin`  to concatenate the string for `log_url`. ([#33063](https://github.com/apache/airflow/pull/33063)) 
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.17.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1173-2023-08-07) for a complete list of changes.
+- Upgraded `astro-sdk-python` to 1.6.2. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+
+### Bug fixes
+
+- Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.
+- Fixed an issue with trigger logs for Deployments running on AWS.
 
 ## Astro Runtime 8.8.0
 
