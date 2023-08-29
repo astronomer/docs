@@ -20,7 +20,7 @@ astro organization team list
 | ------------- | ---------------------------------------------------------------------------- | ------------- |
 | `ID`          | The Team ID in the Organization.                                             | String        |
 | `NAME`        | Team name.                                                                   | String        |
-| `DESCRIPTION` | The description for the Workspace.                                           | Any string    |
+| `DESCRIPTION` | The description for the Workspace.                                           | String        |
 | `IDP MANAGED` | Wheather a Team's members have their access managed by an identity provider. | Boolean       |
 | `CREATE DATE` | The date and time that the Team was created in the Organization.             | Date          |
 
