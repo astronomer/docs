@@ -31,7 +31,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Changes to Workspace user roles
 
-:::caution Upgrade the Astro CLI
+:::info Upgrade the Astro CLI
 
 To take advantage of these new user roles programmatically, you must [upgrade the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to version 1.19 or later.
 
