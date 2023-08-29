@@ -74,7 +74,7 @@ The base image for Astro Runtime now uses Python 3.11. If you want to use a diff
 
 ### Early access Airflow bug fixes
 
-- Fixed an issue where Airflow incorrectly used `urljoin`  to concatenate the string for `log_url`. ([#33063](https://github.com/apache/airflow/pull/33063)) 
+- Fixed an issue where Airflow incorrectly used `urljoin` to generate the string for `log_url`. ([#33063](https://github.com/apache/airflow/pull/33063)) 
 
 ### Additional improvements
 
