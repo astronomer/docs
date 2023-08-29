@@ -27,6 +27,28 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## August 29, 2023
+
+### Changes to Workspace user roles
+
+To increase granularity and better serve each user persona on Astro, Workspace roles have been updated with new names and permissions:
+
+- The **Workspace Author** role is a new role for users who primarily write and deploy DAGs. Users with this role can push code changes, but they can't update Deployment or Airflow settings such as Airflow variables, Astro environment variables, or connections.
+- The Workspace Admin role has been renamed to **Workspace Owner**. Users with this role are responsible for administrating membership to the Workspace. 
+- The Workspace Editor role has been renamed to **Workspace Operator**. In addition to pushing code changes, Workspace Editors can now also edit Airflow objects such as variables, connections, and XComs. Users with this role are responsible for managing the environments that DAGs run in.
+- The Workspace Viewer role has been renamed to **Workspace Member**. Users with this role only need viewing permissions for a Deployment and don't have permissions to make any code or configuration changes.
+
+For more information about these role changes, see [User permissions reference](https://docs.astronomer.io/astro/user-permissions#workspace-roles) and [Enhanced Astro Workspace Roles for more granular permissions](https://www.astronomer.io/blog/introducing-updated-astro-workspace-roles-for-more-granular-permissions/)
+
+### Additional improvements
+
+- The Cloud UI now shows more detailed instructions for deploying code when you create a new Deployment.
+- The Deployment **Analytics** page in the Cloud UI has been renamed to **Overview**. 
+
+### Bug fixes
+
+- Fixed an issue where Deployments using the Kubernetes executor could not run DAGs with lower resource requests than the **Default Pod Size**. Minimum requests are now hard-coded and decoupled from default requests.
+
 ## August 21, 2023
 
 ### Additional improvements
