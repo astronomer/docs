@@ -67,11 +67,13 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
     ```sh
     astro login astronomer.io
     ```
+
 2. Choose the Workspace where you want to add a Team.
     
     ```sh
     astro workspace
     ```
+
     :::tip
 
     If you do not see the Workspace listed, confirm which Organization you're currently working in with `astro organization list`. You can switch to the correct Organization with `astro organization switch`.
@@ -83,6 +85,7 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
     ```sh
     astro organization team list
     ```
+
     This command returns the Team ID, team name, creation date, and Organization Role the Team has.
 
 4. Use the Team ID to assign the Team to a Workspace and optionally configure their [Workspace Role](/astro/user-permissions.md#workspace-roles).
@@ -90,6 +93,7 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
     ```sh
     astro workspace team add <team-id> --role
     ```
+    
     Available Role options include `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.
 
 5. You can test that your Team assigned correctly by listing all Teams in your current Workspace.
