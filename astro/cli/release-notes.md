@@ -29,7 +29,7 @@ Release date: August 29, 2023
 
 ### Bug fixes
 
-- Fixed an issue where some DAGS could be missed during `astro deploy` when DAG-only deploys are enabled.
+- Fixed an issue where some DAGs could be missed during `astro deploy` when DAG-only deploys are enabled.
 - Fixed an issue where `astro dev pytest` would incorrectly fail when testing an Astro project within a CI/CD process.
 - Fixed an issue where you couldn't update a Deployment on a standard cluster using a Deployment file.
 
