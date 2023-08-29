@@ -24,17 +24,15 @@ The following are the best practices for submitting support requests in the Astr
 
 To help Astronomer support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
 
-**P1:** Critical impact, service is unusable in production.
+**P1:** Critical impact, a deployment is completely unavailable or a DAG that was previously working in production is no longer working.
+
+Because P1 tickets are handled with the highest levels of urgency, if Astronomer Support responds on a P1 ticket and subsequently does not hear back for 2 hours, the ticket priority will be changed to P2.
+
+**P2:** High impact. Ability to use Astronomer Software is severely impaired but does not affect critical, previously working pipelines in production.
 
 Examples:
 
-- Your tasks are not running and restarting them didn't fix the issue.
-- Astronomer Software is experiencing an incident or downtime that is affecting your production data pipelines.
-
-**P2:** High impact. Ability to use Astronomer Software is severely impaired but does not affect critical production pipelines.
-
-Examples:
-
+- A newly deployed production DAG is not working, even though it was tested in a lower environment.
 - The Airflow UI is unavailable.
 - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
 - Task logs are missing in the Airflow UI.
@@ -43,6 +41,7 @@ Examples:
 
 Examples:
 
+- A DAG that has been deployed for the first time, or is on a local development environment, is unexpectedly not working.
 - There is a bug in the Software UI.
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.

@@ -25,17 +25,15 @@ The following are the best practices for submitting support requests in the Clou
 
 To help Astronomer support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
 
-**P1:** Critical impact, service is unusable in production.
+**P1:** Critical impact, a deployment is completely unavailable or a DAG that was previously working in production is no longer working.
+
+Because P1 tickets are handled with the highest levels of urgency, if Astronomer Support responds on a P1 ticket and subsequently does not hear back for 2 hours, the ticket priority will be changed to P2.
+
+**P2:** High impact. Ability to use Astro is severely impaired but does not affect critical, previously working pipelines in production.
 
 Examples:
 
-- Your tasks are not running and restarting them didn't fix the issue.
-- Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
-
-**P2:** High impact. Ability to use Astro is severely impaired but does not affect critical pipelines in production.
-
-Examples:
-
+- A newly deployed production DAG is not working, even though it was tested in a lower environment.
 - The Airflow UI is unavailable.
 - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
 - You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that is required for running tasks, such as adding a new worker instance type.
@@ -45,12 +43,12 @@ Examples:
 
 Examples:
 
-- There is a bug in the Software UI.
-- You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that affects your cluster's performance but isn't required to run task, such as changing the size of your cluster's database or adding a new VPC peering connection.
+- A DAG that has been deployed to an Astro deployment for the first time, or is on a local development environment, is unexpectedly not working.
+- You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that affects your cluster's performance but isn't required to run tasks, such as changing the size of your cluster's database or adding a new VPC peering connection.
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
-- You have lost use of a Public Preview feature that does not affect general services. 
+- You have lost use of a Public Preview feature that does not affect general services.
 
 **P4:** Low impact. Astro is fully usable but you have a question for our team.
 
