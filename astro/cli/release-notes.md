@@ -19,7 +19,7 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 ## Astro CLI 1.19.0
 
-Release date: August 10, 2023
+Release date: August 29, 2023
 
 ### Additional improvements
 
