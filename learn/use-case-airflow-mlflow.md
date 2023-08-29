@@ -1,14 +1,14 @@
 ---
-title: "Analyze possum data with MLflow and Airflow"
+title: "Predict possum tail length using linear regression with MLflow and Airflow"
 description: "Use Airflow and MLflow to conduct and track a regression model."
 id: use-case-airflow-mlflow
 sidebar_label: "Regression with Airflow + MLflow"
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
 
-[MLflow](https://mlflow.org/)  is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best. 
+[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best.
 
-This use case shows how to use MLflow with Airflow to engineer machine learning features, train a [sklearn Ridge regression model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html) and create predictions based on the trained model.
+This use case shows how to use MLflow with Airflow to engineer machine learning features, train a [scikit-learn Ridge linear regression model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html) and create predictions based on the trained model.
 
 :::info
 
@@ -17,19 +17,6 @@ For more detailed instructions on using MLflow with Airflow, see the [MLflow tut
 :::
 
 ![A line plot showing the output of the pipeline described in this use case: the actual and predicted lengths of possum tails plotted for each animal. There is a small cute possum next to the graph.](/img/examples/use-case-airflow-mlflow_possum_tails_linegraph.png)
-
-## Time to complete
-
-This tutorial takes approximately 1 hour to complete.
-
-## Assumed knowledge
-
-To get the most out of this tutorial, make sure you have an understanding of:
-
-- The basics of MLflow. See [MLFlow Concepts](https://mlflow.org/docs/latest/concepts.html).
-- Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
-- Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 
 ## Before you start
 
@@ -40,7 +27,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. The repository is configured to spin up and use a local MLflow and MinIO instance.
+Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. The repository is configured to spin up and use a local MLflow and MinIO instance without you needing to define any extra connections or have access to external tools.
 
 ## Run the project
 
@@ -53,151 +40,237 @@ astro dev start
 This command builds your project and spins up 6 Docker containers on your machine to run it:
 
 - The Airflow webserver, which runs the Airflow UI and can be accessed at `https://localhost:8080/`.
-- The Airflow scheduler.
-- The Airflow triggerer.
+- The Airflow scheduler, which is responsible for monitoring and triggering tasks.
+- The Airflow triggerer, an Airflow component used to run deferrable operators (not used in this use case).
 - The Airflow metadata database, a Postgres database which runs on port `5432`.
 - A local MinIO instance, which can be accessed at `https://localhost:9000/`.
 - A local MLflow instance, which can be accessed at `https://localhost:5000/`.
 
-## Step 1: Configure your Astro project
+## Project contents
 
-1. Create a new Astro project:
+### Data source
 
-    ```sh
-    $ mkdir astro-mlflow-tutorial && cd astro-mlflow-tutorial
-    $ astro dev init
-    ```
+This example uses the [Possum Regression dataset](https://www.kaggle.com/datasets/abrambeyer/openintro-possum) from Kaggle. It contains measurements of different attributes of 104 possums, such as total length, skull width or age collected in Australia. This data was originally published by Lindenmayer et al. (1995) in the Australian Journal of Zoology and is commonly used to teach linear regression.
 
-2. Add the following packages to your `packages.txt` file:
+### Project overview
 
-    ```text
-    git
-    gcc
-    gcc python3-dev
-    ```
+This project consists of three DAGs, which depend on each other using [Airflow datasets](airflow-datasets.md).
 
-3. Add the following packages to your `requirements.txt` file:
+![Datasets view of the use case project showing the DAG feature_eng updating the datasets astro+s://data/possum.csv and s3://data_possum.csv. The train DAG is scheduled to run as soon as the s3://data_possum.csv is updated and updates the model_trained dataset. The predict DAG is scheduled to run on updates to the model_trained dataset and updates the astro+s3://data/possum_tail_length.csv](/img/examples/use-case-airflow-mlflow_datasets_view.png)
 
-    ```text
-    airflow-provider-mlflow==1.1.0
-    apache-airflow-providers-amazon==8.0.0
-    mlflow-skinny==2.3.2
-    s3fs==2023.5.0
-    ```
+The [`feature_eng`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/feature_eng.py) DAG prepares the MLflow experiment and builds prediction features from the possum data.
 
-## Step 2: Configure your Airflow connections
+![Graph view of the feature_eng DAG showing a task creating the necessary MinIO buckets, a task group that prepares the MLflow experiment if it does not yet exist and data extraction and feature building tasks.](/img/examples/use-case-airflow-mlflow_feature_eng_dag_graph.png)
 
-To connect Airflow to your MLflow instance, you need to create a connection in Airflow. 
+The [`train`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/train.py) DAG trains a RidgeCV model on the features engineered in the previous DAG and then registers the model with MLflow using operators from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow).
 
-1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
+![Graph view of the train DAG showing tasks fetching data and experiment information and training the model. Afterwards a task group contains tasks to register the model with MLflow, create a model version and transition the model version.](/img/examples/use-case-airflow-mlflow_train_dag_graph.png)
 
-2. Create a new connection named `mlflow_default` and choose the `HTTP` connection type. Enter the following values to create a connection to a local MLflow instance:
+The [`predict`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/predict.py) DAG uses the trained model from the previous DAG to create predictions and plots them against the target values. 
 
-    - **Connection ID**: `mlflow_default`.
-    - **Connection Type**: `HTTP`.
-    - **Host**: `http://host.docker.internal`
-    - **Port**: `5000`
+![Graph view of the predict DAG showing the model and features being fetched. Afterwards the ModelLoadAndPredictOperator is used to run predictions with are plotted and saved as a file.](/img/examples/use-case-airflow-mlflow_predict_dag_graph.png)
 
-:::info 
+Note that the model is trained on the whole data and predictions are made on the same data, in a real world scenario with more data you'd want to split the data into a training, validation and test set.
 
-If you are using a remote MLflow instance, you need to enter the host MLflow instance (`https://mlflow.myhost.com`) and provide your username to the **Login** and your password to the **Password** field. To run your MLflow instance via Databricks provide your Databricks URL to the **Host** field, `token` to the **Login** field and your [Databricks personal access token](https://docs.databricks.com/dev-tools/auth.html#personal-access-tokens-for-users) to the **Password** field.
-Please note that the **Test** button might return a 405 error message even if your credentials are correct. 
+### Project code
 
-:::
+This use case shows many Airflow features and ways to interact with MLflow. The following sections will highlight a couple of relevant code snippets in each DAG and explain them in more detail.
 
-3. Create a connection to your blob storage. If you are using Minio or AWS S3 name the connection `aws_conn` and add the following credentials:
+#### Feature engineering DAG
 
-    - **Connection ID**: `aws_conn`.
-    - **Connection Type**: Amazon Web Services.
-    - **AWS Access Key ID**: Your [AWS Access Key ID](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html) or Minio login.
-    - **AWS Secret Access Key**: Your AWS Secret Access Key or Minio password.
+The feature engineering DAG starts with a task that creates the necessary object storage buckets in the resource provided as `AWS_CONN_ID` using the [S3CreateBucketOperator](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/S3CreateBucketOperator). By default the project uses a local MinIO instance which is created when starting the Astro project. If you want to use remote object storage, you can change the `AWS_CONN_ID` in the `.env` file and provide your AWS credentials credentials.
+The operator is [dynamically mapped](dynamic-tasks.md) over a list of bucket names to create all buckets in parallel.
 
-## Step 3: Get the data 
+```python
+create_buckets_if_not_exists = S3CreateBucketOperator.partial(
+    task_id="create_buckets_if_not_exists",
+    aws_conn_id=AWS_CONN_ID,
+).expand(bucket_name=[DATA_BUCKET_NAME, MLFLOW_ARTIFACT_BUCKET, XCOM_BUCKET])
+```
 
-In this tutorial we will predict the length of a possum's tail based on other attributes of the animal such as age, skull width, foot and head length. 
+The `prepare_mlflow_experiment` [task group](task-groups.md) contains a pattern that lists all existing experiments in the MLflow instance connected via the `MLFLOW_CONN_ID` and creates a new experiment with a specified name if it does not exist yet using the [@task.branch decorator](airflow-branch-operator.md). The [MLflowClientHook](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/hooks/client.py) contains the `run` method that creates the new experiment by making a call to the MLflow API.
 
-1. Download [the dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/possum.csv) and save it in your `include` folder as `possum.csv`.
-2. Add a picture of a possum in your `include` folder and name it `possum.jpeg`. If you don't have a possum picture ready you can use [this one from wikipedia](https://commons.wikimedia.org/wiki/File:Opossum_%2816701021016%29.jpg).
+```python
+@task
+def create_experiment(experiment_name, artifact_bucket):
+    """Create a new MLFlow experiment with a specified name.
+    Save artifacts to the specified S3 bucket."""
 
-## Step 4: Create a feature engineering DAG
+    mlflow_hook = MLflowClientHook(mlflow_conn_id=MLFLOW_CONN_ID)
+    new_experiment_information = mlflow_hook.run(
+        endpoint="api/2.0/mlflow/experiments/create",
+        request_params={
+            "name": experiment_name,
+            "artifact_location": f"s3://{artifact_bucket}/",
+        },
+    ).json()
 
-The Airflow pipeline presented in this tutorial consists of three DAGs. The first DAG will create the necessary object storage buckets, MLflow experiment and perform feature engineering on the possum dataset.
+    return new_experiment_information
+```
 
-1. In your `dags` folder, create a file called `feature_eng.py`.
+Feature engineering in the `build_features` task uses [Pandas for one hot encoding](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html) of categorical features and [scikit-learn to scale](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) numeric features.
+The [mlflow](https://pypi.org/project/mlflow/) package is used to [track](https://mlflow.org/docs/latest/python_api/mlflow.html?highlight=start_run#mlflow.start_run) the scaler run in MLflow.
+The task is defined using the [`@aql.dataframe`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator from the [Astro Python SDK](astro-python-sdk.md).
 
-2. Copy the following code into the file. 
+```python
+@aql.dataframe()
+def build_features(
+    raw_df: DataFrame,
+    experiment_id: str,
+    target_column: str,
+    categorical_columns: list,
+    numeric_columns: list,
+) -> DataFrame:
 
+    # ...
 
-    This DAG will first complete two setup tasks:
+    scaler = StandardScaler()
 
-    - The `create_buckets_if_not_exists` tasks creates the data bucket `DATA_BUCKET_NAME` which will store the features engineered from the possum dataset and the MLflow artifact bucket `MLFLOW_ARTIFACT_BUCKET_NAME` which will store the MLflow artifacts using the [S3CreateBucketOperator](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/S3CreateBucketOperator). Additionally, the task also create a bucket to use as a [custom XCom backend](custom-xcom-backends-tutorial.md) if you have one defined.
-    - The `prepare_mlflow_experiment` [task group](task-groups.md) checks all existing experiments in your MLflow instance for an experiment with the name `EXPERIMENT_NAME`. The `check_if_experiment_exists` task uses the [@task.branch decorator](airflow-decorators.md#list-of-available-airflow-decorators) to decide if creating the experiment is needed or not. In both cases the `get_current_experiment_id` task retrieves the correct experiment ID for `EXPERIMENT_NAME`. The tasks in this task group establish a connection to your MLflow instance using the [MLflowClientHook](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/hooks/client.py).
+    with mlflow.start_run(experiment_id=experiment_id, run_name="Scaler") as run:
+        X_encoded = pd.DataFrame(
+            scaler.fit_transform(X_encoded), columns=X_encoded.columns
+        )
+        mlflow.sklearn.log_model(scaler, artifact_path="scaler")
+        mlflow.log_metrics(
+            pd.DataFrame(scaler.mean_, index=X_encoded.columns)[0].to_dict()
+        )
 
-    After the setup is complete data processing takes place:
+    # ...
 
-    - The `extract_data` task retrieves the data from the local CSV file using the [aql.dataframe decorator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) from the Astro Python SDK.
-    - The `build_features` task uses methods from [pandas](https://pandas.pydata.org/docs/) and [scikit-learn](https://scikit-learn.org/stable/) to one-hot encode categorical features and scale all features. The [mlflow](https://pypi.org/project/mlflow/) package is used to track these feature engineering steps in MLflow.
+    return X_encoded  # return a pandas DataFrame
 
-    Lastly, `save_data_to_s3` task saves the dataframe containing the engineered features to the `DATA_BUCKET_NAME` S3 bucket using the [aql.export_file operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html) from the Astro Python SDK.
+```
 
-## Step 5: Create a model training DAG
+You can view the Scaler run in the MLflow UI at `localhost:5000`.
 
-The second DAG will train a linear regression model on the engineered features, keeping track of the model in MLflow. This DAG runs as soon as the `s3://data_possum.csv` [Dataset](airflow-datasets.md) is updated.
+![Experiments tab of the MLflow UI showing the Possum_tails experiment with the Scaler run.](/img/examples/use-case-airflow-mlflow_experiments_scaler.png)
 
-1. In your `dags` folder, create a file called `train.py`.
+#### Model training DAG
 
-2. Copy the following code into the file. 
+The model training DAG is scheduled to run as soon as the last task in the feature engineering DAG completes using a [dataset](airflow-datasets.md).
 
+```python
+@dag(
+    schedule=[Dataset("s3://" + DATA_BUCKET_NAME + "_" + FILE_PATH)],
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+)
+```
 
-    This DAG will train a [RidgeCV model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html#sklearn.linear_model.RidgeCV) on the features engineered in the previous DAG.
-
-    - The `fetch_feature_df` task pulls the feature dataframe from [XCom](airflow-passing-data-between-tasks.md#what-is-xcom). 
-    - The `fetch_experiment_id` task retrieves the experiment ID for the `EXPERIMENT_NAME` experiment from MLflow.
-    - In the `train_model` task the RidgeCV model trains on the feature dataframe. Note that you can provide additional hyperparameters to the model by passing them to the `hyper_parameters` keyword argument of the `train_model` task. The model is tracked in MLflow using the [mlflow.sklearn.autolog](https://mlflow.org/docs/latest/python_api/mlflow.sklearn.html#mlflow.sklearn.autolog) method.
-
-    After the model has been trained the `register_model` task group takes care of model registration and versioning. 
-    
-    - The `check_if_model_already_registered` task uses the @task.branch decorator to determine if a model of that name already exists in your MLflow registry.
-    - The `create_registered_model` task [registers the model](https://mlflow.org/docs/latest/registry.html?highlight=register%20model) within MLflow if it does not exist yet.
-    - The `create_model_version` task [creates a new version](https://mlflow.org/docs/latest/registry.html?highlight=register%20model#creating-a-new-version-of-a-registered-model) of the model in MLflow using the `CreateModelVersionOperator` of the MLflow Airflow provider. 
-    - Finally, the `transition_model` task will put the latest model version into the `Staging` stage. This is done using the `TransitionModelVersionStageOperator` of the MLflow Airflow provider.
-
-## Step 6: Create your prediction DAG
-
-The final step of this pipeline is to create predictions based on the trained model and plot predictions and target values next to each other to visually evaluate how well the RidgeCV model can be fitted to the data at hand. This DAG runs as soon as the last task in the previous DAG updates the `model_trained` [Dataset](airflow-datasets.md).
-
-1. In your `dags` folder, create a file called `predict.py`.
-
-2. Copy the following code into the file. 
-
-
-    - In a first step, the feature dataframe, target column and model ID are retrieved from XCom of the upstream DAGs.
-    - Next, the `add_line_to_file` task adds the packages [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) and pandas to the MLflow model artifact `requirements.txt` file in the `MLFLOW_ARTIFACT_BUCKET`. This is necessary because the model prediction happens in a virtual environment.
-    - The `run_prediction` task uses the ModelLoadAndPredictOperator of the MLFlow Airflow provider to create predictions using the latest model run on the full feature dataframe.
-    - The `plot_predictions` task uses [matplotlib](https://matplotlib.org/) to create a line graph visually comparing the predictions against the target values. And saves the resulting image to the `include` folder.
-    - Lastly, the predictions are also saved as a CSV file in the `data` bucket.
-
-## Step 7: Run your DAGs
-
-1. Run `astro dev start` in your Astro project to start up Airflow.
-
-2. Navigate to the Airflow UI at `localhost:8080` and unpause all three DAGs by clicking the toggle to the left of the DAG name.
-
-3. Manually run the `feature_eng` DAG by clicking the play button. All your DAGs will run in the correct order based on [data driven scheduling](airflow-datasets.md).
+The `fetch_feature_df` task pulls the feature dataframe that was pushed to [XCom](airflow-passing-data-between-tasks.md) in the previous DAG.
 
 
+```python
+@task
+def fetch_feature_df(**context):
+    "Fetch the feature dataframe from the feature engineering DAG."
 
-4. Navigate to the **Grid** view of each of the three DAGs and click on the **Graph** button to see a full DAG graph next in the Grid view.
+    feature_df = context["ti"].xcom_pull(
+        dag_id="feature_eng", task_ids="build_features", include_prior_dates=True
+    )
+    return feature_df
+```
 
+The ID number of the MLflow experiment is retrieved using the MLflowClientHook in the `fetch_experiment_id` task in order to track model training in the same experiment. 
 
-5. Open the MLflow UI (if you are running locally at `localhost:5000`) to see the data collected on your experiments and models.
+The `train_model` task, defined with the `@aql.dataframe` decorator shows how model training can be parameterized when using Airflow. In this example the hyperparameters, the `target_colum` and the model class are hardcoded but they could also be retrieved from upstream tasks via [XCom](airflow-passing-data-between-tasks.md) or passed into manual runs of the DAG via [DAG params](airflow-params.md).
 
+The project is set up to train the [scikit-learn RidgeCV model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html) to predict the tail length of possums using information such as their age, total length or skull width.
 
-6. Finally, open the `possum_tails.png` in `include/plots`.
+```python
+@aql.dataframe()
+def train_model(
+    feature_df: DataFrame,
+    experiment_id: str,
+    target_column: str,
+    model_class: callable,
+    hyper_parameters: dict,
+    run_name: str,
+) -> str:
+    "Train a model and log it to MLFlow."
 
+    # ...
 
-## Conclusion
+    with mlflow.start_run(experiment_id=experiment_id, run_name=run_name) as run:
+        model.fit(feature_df.drop(target, axis=1), feature_df[target])
+
+    run_id = run.info.run_id
+
+    return run_id
+
+# ...
+
+model_trained = train_model(
+    feature_df=fetched_feature_df,
+    experiment_id=fetched_experiment_id,
+    target_column=TARGET_COLUMN,
+    model_class=RidgeCV,
+    hyper_parameters={"alphas": np.logspace(-3, 1, num=30)},
+    run_name="RidgeCV",
+)
+```
+
+The run of the RidgeCV model can be viewed in the MLflow UI at `localhost:5000`.
+
+![Experiments tab of the MLflow UI showing the Possum_tails experiment with the RidgeCV run.](/img/examples/use-case-airflow-mlflow_experiments_ridgecv.png)
+
+Lastly the model training DAG registers the model and its version with MLflow using three operators from the MLflow Airflow provider. Note how information like the `run_id` or `version` of the model is pulled from XCom using [Jinja templates](templating.md).
+
+```python
+create_registered_model = CreateRegisteredModelOperator(
+    task_id="create_registered_model",
+    name=REGISTERED_MODEL_NAME,
+    tags=[
+        {"key": "model_type", "value": "regression"},
+        {"key": "data", "value": "possum"},
+    ],
+)
+
+create_model_version = CreateModelVersionOperator(
+    task_id="create_model_version",
+    name=REGISTERED_MODEL_NAME,
+    source="s3://"
+    + MLFLOW_ARTIFACT_BUCKET
+    + "/"
+    + "{{ ti.xcom_pull(task_ids='train_model') }}",
+    run_id="{{ ti.xcom_pull(task_ids='train_model') }}",
+    trigger_rule="none_failed",
+)
+
+transition_model = TransitionModelVersionStageOperator(
+    task_id="transition_model",
+    name=REGISTERED_MODEL_NAME,
+    version="{{ ti.xcom_pull(task_ids='register_model.create_model_version')['model_version']['version'] }}",
+    stage="Staging",
+    archive_existing_versions=True,
+)
+```
+
+You can view the registered models in the **Models** tab of the MLflow UI at `localhost:5000`.
+
+![Models tab of the MLflow UI showing the registered RidgeCV model having 3 Versions with the latest being in the Staging Stage.](/img/examples/use-case-airflow-mlflow_models_ridgecv.png)
+
+#### Prediction DAG
+
+After retrieving the feature dataframe, the target column and the `model_run_id` from XCom, the `run_prediction` task uses the [ModelLoadAndPredictOperator](https://github.com/astronomer/airflow-provider-mlflow/blob/main/mlflow_provider/operators/pyfunc.py) to run a prediction on the whole dataset using the latest version of the registered RidgeCV model. 
+
+```python
+run_prediction = ModelLoadAndPredictOperator(
+    mlflow_conn_id="mlflow_default",
+    task_id="run_prediction",
+    model_uri=f"s3://{MLFLOW_ARTIFACT_BUCKET}/"
+    + "{{ ti.xcom_pull(task_ids='fetch_model_run_id')}}"
+    + "/artifacts/model",
+    data=fetched_feature_df,
+)
+```
+
+The predicted possum tail length values are converted to a dataframe and then plotted against the true tail lengths using matplotlib. The resulting graph offers a visual representation of how much variation of possum tail length can be explained by a linear regression model using the features in the dataset in this specific possum population of 104 animals.
 
 Congratulations! You ran a ML flow pipeline tracking model parameters and versions in MLflow using the MLflow Airflow provider. You can now use this pipeline as a template for your own MLflow projects.
 
+## See also
 
+- Documentation: [MLflow](https://mlflow.org/docs).
+- Tutorial: [Use MLflow with Apache Airflow](airflow-mlflow.md).
+- Provider: [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow).
