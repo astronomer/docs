@@ -33,7 +33,7 @@ To get the most out of this guide, you should have an existing knowledge of:
 Datasets allow you to define explicit dependencies between DAGs and updates to your data. This helps you to:
 
 - Standardize communication between teams. Datasets can function like an API to communicate when data in a specific location has been updated and is ready for use.
-- Reduce the amount of code necessary to implement [cross-DAG dependencies](cross-dag-dependencies.md). Even if your DAGs don't depend on data updates, you can create a trigger that initiates a DAG after another DAG saves an update to a dataset.
+- Reduce the amount of code necessary to implement [cross-DAG dependencies](cross-dag-dependencies.md). Even if your DAGs don't depend on data updates, you can create a dependency that triggers a DAG after a task in another DAG updates a dataset.
 - Get better visibility into how your DAGs are connected and how they depend on data. The **Datasets** tab in the Airflow UI shows a graph of all dependencies between DAGs and datasets in your Airflow environment.
 - Reduce costs, because datasets do not use a worker slot in contrast to sensors or other implementations of cross-DAG dependencies.
 
