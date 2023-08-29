@@ -53,7 +53,7 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 
 ## Add Teams to Workspaces with Astro CLI
 
-You can add a Team to Workspaces programmatically with the Astro CLI instead of individually adding them with the Cloud UI. You must be logged into the correct Organization and Workspace 
+You can add a Team to Workspaces programmatically with the Astro CLI instead of individually adding them with the Cloud UI. You must be logged into the correct Organization to add a Team its Workspaces.
 
 ### Prerequisites
 
@@ -76,7 +76,7 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
 
     :::tip
 
-    If you do not see the Workspace listed, confirm which Organization you're currently working in with `astro organization list`. You can switch to the correct Organization with `astro organization switch`.
+    If you do not see the Workspace as a choice, confirm which Organization you're currently working in with `astro organization list`. You can switch to the correct Organization with `astro organization switch`. You can also change your current Organization in the Cloud UI.
 
     :::
 
@@ -88,15 +88,15 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
 
     This command returns the Team ID, team name, creation date, and Organization Role the Team has.
 
-4. Use the Team ID to assign the Team to a Workspace and optionally configure their [Workspace Role](/astro/user-permissions.md#workspace-roles).
+4. Use the Team ID to assign the Team to other Workspaces in your Organization and optionally configure their [Workspace Role](/astro/user-permissions.md#workspace-roles).
 
     ```sh
     astro workspace team add <team-id> --role
     ```
 
-    Available Role options include `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.
+    Available Role options include `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. By default, the Team is assigned to `WORKSPACE_MEMBER`.
 
-5. You can test that your Team assigned correctly by listing all Teams in your current Workspace.
+5. You can test that you assigned your Team successfully by listing all Teams in your current Workspace.
 
     ```sh
     astro workspace team list
