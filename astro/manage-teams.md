@@ -57,7 +57,7 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
 
 ### Prerequisites
 
-- Install the [Astro CLI](install-cli.md).
+- Install the [Astro CLI](cli/install-cli.md).
 - Create a [Team](#create-a-team)
 
 ### Add Teams to Workspaces
@@ -93,7 +93,7 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
     ```sh
     astro workspace team add <team-id> --role
     ```
-    
+
     Available Role options include `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.
 
 5. You can test that your Team assigned correctly by listing all Teams in your current Workspace.
