@@ -17,11 +17,27 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.19.0
+
+Release date: August 10, 2023
+
+### Additional improvements
+
+- You can now grant Astro users the `WORKSPACE_AUTHOR` role.
+- You can now run an Astro project from the same directory an Apache Airflow project.
+- `astro deployment inspect` now shows you a Deployment's workload identity.
+
+### Bug fixes
+
+- Fixed an issue where some DAGS could be missed during `astro deploy` when DAG-only deploys are enabled.
+- Fixed an issue where `astro dev pytest` would incorrectly fail when testing an Astro project within a CI/CD process.
+- Fixed an issue where you couldn't update a Deployment on a standard cluster using a Deployment file.
+
 ## Astro CLI 1.18.2
 
 Release date: August 10, 2023
 
-### Bug fix
+### Bug fixes
 
 - Fixed an issue where running `astro deployment create` on Astro Hosted would create Deployments where DAG-only deploys were turned off by default.
 
@@ -29,7 +45,7 @@ Release date: August 10, 2023
 
 Release date: August 4, 2023
 
-### Bug fix
+### Bug fixes
 
 - Fixed an issue where `astro run` didn't work properly.
 
@@ -47,7 +63,7 @@ You can use the new `astro dev upgrade-test` command to anticipate and address p
 - You can now specify the `--execution-date` flag with `astro run` to trigger a DAG run for a specific execution date.
 - You can now specify the `--verbose` flag with `astro run` to stream all logs to your terminal after the DAG run triggers. 
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where `astro deployment inspect` was showing the wrong value for a Deployment’s workload identity on Astro Hosted.
 - Fixed an issue were `astro dev restart` would occasionally not work.
@@ -56,7 +72,7 @@ You can use the new `astro dev upgrade-test` command to anticipate and address p
 
 Release date: July 12, 2023
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue were some Astro Hosted Deployment updates triggered by the Astro CLI were not working.
 

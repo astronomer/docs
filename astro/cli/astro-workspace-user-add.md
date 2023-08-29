@@ -38,7 +38,7 @@ astro workspace user add <email>
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `<email-address>` | The email address of the user that you want to add to the Workspace. | Any valid email address                                                                            |
-| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
 
@@ -63,7 +63,7 @@ astro workspace user add --email <user-email-address>
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `--email` (_Required_) | The user's email                                                                                                                                      | Any valid email address                                                                                                 |
 | `--workspace-id`       | The Workspace that the user is added to. Specify this flag if you want to create a user in a Workspace that is different than your current Workspace. | Any valid Workspace ID                                                                                                  |
-| `--role`               | The role assigned to the user.                                                                                                                        | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, and `WORKSPACE_ADMIN`. Default value is `WORKSPACE_VIEWER`. |
+| `--role`               | The role assigned to the user.                                                                                                                        | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, and `WORKSPACE_OWNER`. Default value is `WORKSPACE_MEMBER`. |
 
 ## Related documentation
 
