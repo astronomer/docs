@@ -70,7 +70,7 @@ The following table lists the specific permissions that each Workspace role has:
 | Update Deployment configurations                                            |                      |                      | ✔️                      | ✔️                   |
 | Create and Delete Deployments                                               |                      |                      | ✔️                      | ✔️                   |
 | Create, Update and Delete Deployment environment variables                  |                      |                      | ✔️                      | ✔️                   |
-| View the **Cluster Activity** tab in the Airflow UI                  |                      |                      | ✔️                      | ✔️                   |
+| View the **Cluster Activity** tab in the Airflow UI                       |                      |                      | ✔️                      | ✔️                   |
 | Update user roles and permissions                                           |                      |                      |                        | ✔️                   |
 | Invite users to a Workspace                                                 |                      |                      |                        | ✔️                   |
 | Assign Teams to or remove from Workspaces                                   |                      |                      |                        | ✔️                   |
