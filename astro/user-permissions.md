@@ -43,7 +43,7 @@ To manage users in an Organization, see [Manage Organization users](manage-organ
 
 A Workspace role grants a user or API token some level of access to a specific Workspace. If a user or API token has some level of access to a Workspace, that access applies to all Deployments in the Workspace. 
 
-- A **Workspace Member** has the least permissions in a Workspace and can only view the most basic details about Deployments and DAGs. Give a user this role if they need to be able to view a DAG's run status or Deployment health.
+- A **Workspace Member** has the least permissions in a Workspace and can only view the most basic details about Deployments and DAGs. Give a user this role if they need to be able to monitor a DAG run or view Deployment health, but they shouldn't make any changes to a Deployment themselves.
 - A **Workspace Author** has all of the same permissions as a Workspace Member, plus the ability to update DAG code and run DAGs in the Airflow UI, plus limited permissions to configure Deployment-level observability features such as Astro alerts. Give a user this role if they are primarily DAG developers and don't need to manage the environments their DAGs run in. 
 - A **Workspace Operator** has all the same permissions as a Workspace Author, plus the ability to manage Deployment-level configurations, such as environment variables. Give a user this role if they need to manage the environments that DAGs run in.
 - A **Workspace Owner** has all the same permissions as a Workspace Operator, plus the ability to manage user membership in the Workspace. Give a user this role if they need to administrate membership to the Workspace. 
