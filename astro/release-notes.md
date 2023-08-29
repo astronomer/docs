@@ -31,6 +31,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Changes to Workspace user roles
 
+:::caution Upgrade the Astro CLI
+
+To take advantage of these new user roles programmatically, you must [upgrade the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to version 1.19 or later.
+
+:::
+
 To increase granularity and better serve each user persona on Astro, Workspace roles have been updated with new names and permissions:
 
 - The **Workspace Author** role is a new role for users who primarily write and deploy DAGs. Users with this role can push code changes, but they can't update Deployment or Airflow settings such as Airflow variables, Astro environment variables, or connections.
