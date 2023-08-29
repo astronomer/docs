@@ -42,6 +42,7 @@ For more information about these role changes, see [User permissions reference](
 
 ### Additional improvements
 
+- The lifespan of the personal user access token you can retrieve from `cloud.astronomer.io/token` has been reduced from 24 hours to 1 hour.
 - The **DAGs** view of the Cloud UI now shows your configured dependency edge labels in the graph view. 
 - The Cloud UI now shows more detailed instructions for deploying code when you create a new Deployment.
 - The Deployment **Analytics** page in the Cloud UI has been renamed to **Overview**. 
