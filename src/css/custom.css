@@ -416,7 +416,8 @@ table tr:last-child td {
 }
 
 table td {
-  min-width: 225px;
+  min-width:50px;
+  max-width: 250px;
 }
 
 table::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><pubDate>Wed, 23 Aug 2023 12:08:58 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 9.0.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-900</link><pubDate>Thu, 17 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-900</guid><description><![CDATA[<ul>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><pubDate>Tue, 29 Aug 2023 16:57:58 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 9.0.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-900</link><pubDate>Thu, 17 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-900</guid><description><![CDATA[<ul>
 <li>Release date: August 18, 2023</li>
 <li>Airflow version: 2.7.0</li>
 </ul><h3>Airflow 2.7</h3><p>Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features and improvements. Most notably, Airflow 2.7 includes the following changes:</p><ul>
@@ -12,6 +12,17 @@
 <li>Upgraded <code>openlineage-airflow</code> to 1.0.0. See the <a href="https://openlineage.io/blog/1.0-release/">OpenLineage blog</a> for a summary of what's arrived in OpenLineage's first 1.x version.</li>
 </ul><h3>Bug fixes</h3><ul>
 <li>Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.</li>
+</ul>]]></description></item><item><title>Astro Runtime 8.9.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-890</link><pubDate>Sun, 27 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-890</guid><description><![CDATA[<ul>
+<li>Release date: August 28, 2023</li>
+<li>Airflow version: 2.6.3</li>
+</ul><h3>Early access Airflow bug fixes</h3><ul>
+<li>Fixed an issue where Airflow incorrectly used <code>urljoin</code> to generate the string for <code>log_url</code>. (<a href="https://github.com/apache/airflow/pull/33063">#33063</a>)</li>
+</ul><h3>Additional improvements</h3><ul>
+<li>Upgraded <code>astronomer-providers</code> to 1.17.3. See the <a href="https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1173-2023-08-07"><code>astronomer-providers</code> changelog</a> for a complete list of changes.</li>
+<li>Upgraded <code>astro-sdk-python</code> to 1.6.2. See the <a href="https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1">Astro Python SDK changelog</a> for a complete list of changes.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.</li>
+<li>Fixed an issue with trigger logs for Deployments running on AWS.</li>
 </ul>]]></description></item><item><title>Astro Runtime 8.8.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-880</link><pubDate>Thu, 20 Jul 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-880</guid><description><![CDATA[<ul>
 <li>Release date: July 21, 2023</li>
 <li>Airflow version: 2.6.3</li>

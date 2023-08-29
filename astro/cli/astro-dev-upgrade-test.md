@@ -11,12 +11,6 @@ Test your local Astro project against a new version of Astro Runtime to prepare 
 - Identify major and minor version changes of the Python packages in your upgrade version.
 - Identify DAG import errors that will appear after you upgrade.
 
-:::tip Using with Astronomer Software
-
-If you are authenticated to Astronomer Software, you can test an upgrade using an Astronomer Certified Image. For this, you must add the flag `--use-astronomer-certified` along with the `--airflow-version` you would like to upgrade to.
-
-:::
-
 ## Usage
 
 ```bash
