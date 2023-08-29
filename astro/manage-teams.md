@@ -66,7 +66,6 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
 
     ```sh
     astro login astronomer.io
-
     ```
 2. Choose the Workspace where you want to add a Team.
     
