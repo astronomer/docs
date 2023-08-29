@@ -15,6 +15,9 @@ This use case shows how to use MLflow with Airflow to engineer machine learning 
 For more detailed instructions on using MLflow with Airflow, see the [MLflow tutorial](airflow-mlflow.md).
 
 :::
+
+![A line plot showing the output of the pipeline described in this use case: the actual and predicted lengths of possum tails plotted for each animal. There is a small cute possum next to the graph.](/img/examples/use-case-airflow-mlflow_possum_tails_linegraph.png)
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.
@@ -124,7 +127,6 @@ The Airflow pipeline presented in this tutorial consists of three DAGs. The firs
 
 2. Copy the following code into the file. 
 
-    <CodeBlock language="python">{feature_eng}</CodeBlock>
 
     This DAG will first complete two setup tasks:
 
@@ -146,7 +148,6 @@ The second DAG will train a linear regression model on the engineered features, 
 
 2. Copy the following code into the file. 
 
-    <CodeBlock language="python">{train}</CodeBlock>
 
     This DAG will train a [RidgeCV model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html#sklearn.linear_model.RidgeCV) on the features engineered in the previous DAG.
 
@@ -169,7 +170,6 @@ The final step of this pipeline is to create predictions based on the trained mo
 
 2. Copy the following code into the file. 
 
-    <CodeBlock language="python">{predict}</CodeBlock>
 
     - In a first step, the feature dataframe, target column and model ID are retrieved from XCom of the upstream DAGs.
     - Next, the `add_line_to_file` task adds the packages [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html) and pandas to the MLflow model artifact `requirements.txt` file in the `MLFLOW_ARTIFACT_BUCKET`. This is necessary because the model prediction happens in a virtual environment.
@@ -185,25 +185,16 @@ The final step of this pipeline is to create predictions based on the trained mo
 
 3. Manually run the `feature_eng` DAG by clicking the play button. All your DAGs will run in the correct order based on [data driven scheduling](airflow-datasets.md).
 
-    ![DAGs overview](/img/guides/mlflow_dags.png)
+
 
 4. Navigate to the **Grid** view of each of the three DAGs and click on the **Graph** button to see a full DAG graph next in the Grid view.
 
-    ![Feature eng grid view](/img/guides/mlflow_feature_eng_grid.png)
-
-    ![Train grid view](/img/guides/mlflow_train_grid.png)
-
-    ![Predict grid view](/img/guides/mlflow_predict_grid.png)
 
 5. Open the MLflow UI (if you are running locally at `localhost:5000`) to see the data collected on your experiments and models.
 
-    ![MLflow UI experiments](/img/guides/mlflow_ui_experiments.png)
-
-    ![MLflow UI models](/img/guides/mlflow_ui_models.png)
 
 6. Finally, open the `possum_tails.png` in `include/plots`.
 
-    ![Possum tails](/img/guides/possum_tails.png)
 
 ## Conclusion
 
