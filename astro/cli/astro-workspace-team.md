@@ -80,7 +80,7 @@ Update a Team's permissions in a given Workspace.
 #### Usage
 
 ```sh
-astro workspace team update <team-id> --workspace-id <workspace-id> --role=<system-role>
+astro workspace team update <team-id> --role=<system-role>
 ```
 
 You can retrieve a Team's ID in one of two ways:
@@ -96,6 +96,5 @@ You can retrieve a Team's ID in one of two ways:
 
 | Option                        | Description                       | Possible Values                                                                   |
 | ----------------------------- | --------------------------------- | --------------------------------------------------------------------------------- |
-| `--workspace-id` (_Required_) | The Workspace for the Team        | Any valid Workspace ID                                                            |
 | `<team-id>` (_Required_)      | The Team's ID                     | None                                                                              |
 | `--role`                      | The Team's role in the Workspace. | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. |
