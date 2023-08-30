@@ -27,7 +27,7 @@ Add a Team to a Workspace.
 
 #### Usage
 
-`astro workspace team add --workspace-id=<workspace_id> --team-id=<team-id> --role=<workspace_level_role>`
+`astro workspace team add --team-id=<team-id> --role=<workspace_level_role>`
 
 You can retrieve a Team's ID in one of two ways:
 
@@ -38,9 +38,8 @@ You can retrieve a Team's ID in one of two ways:
 
 | Option                        | Description                       | Possible Values                                                                   |
 | ----------------------------- | --------------------------------- | --------------------------------------------------------------------------------- |
-| `--workspace-id` (_Required_) | The Workspace for the Team        | Any valid Workspace ID                                                            |
 | `--team-id` (_Required_)      | The Team's ID                     | Any valid team ID                                                                 |
-| `--role`                      | The Team's role in the Workspace. | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. |
+| `--role`                      | The Team's role in the Workspace. | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_MEMBER`. |
 
 ### astro workspace team list
 
@@ -80,7 +79,7 @@ Update a Team's permissions in a given Workspace.
 #### Usage
 
 ```sh
-astro workspace team update <team-id> --role=<system-role>
+astro workspace team update <team-id> --workspace-id <workspace-id> --role=<system-role>
 ```
 
 You can retrieve a Team's ID in one of two ways:
@@ -96,5 +95,6 @@ You can retrieve a Team's ID in one of two ways:
 
 | Option                        | Description                       | Possible Values                                                                   |
 | ----------------------------- | --------------------------------- | --------------------------------------------------------------------------------- |
+| `--workspace-id` (_Required_) | The Workspace for the Team        | Any valid Workspace ID                                                            |
 | `<team-id>` (_Required_)      | The Team's ID                     | None                                                                              |
 | `--role`                      | The Team's role in the Workspace. | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. |
