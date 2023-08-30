@@ -76,7 +76,6 @@ You can add a Team to Workspaces programmatically with the Astro CLI instead of 
 
     If you don't see the right Workspace as a choice, confirm which Organization you're currently working in using `astro organization list`. You can switch to the correct Organization using `astro organization switch`.
 
-    :::
 
 3. Run the following command to find the Team you want to add. Copy its `TEAM ID`:
 
