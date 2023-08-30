@@ -525,8 +525,8 @@ astro login <your-astronomer-base-domain>
 If you can log in, then your Docker client trusts the registry. If Docker does not trust the Astronomer registry, run the following and restart Docker:
 
 ```sh
-$ mkdir -p /etc/containerd/certs.d
-$ cp privateCA.pem /etc/containerd/certs.d/
+$ mkdir -p /etc/docker/certs.d
+$ cp privateCA.pem /etc/docker/certs.d/
 ```
 
 Finally, try running `$ astro deploy` on a test deployment. Create a deployment in the Software UI, then run:
