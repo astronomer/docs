@@ -17,6 +17,14 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.19.1
+
+Release date: August 30, 2023
+
+### Bug fixes
+
+- Fixed an issue where DAGs would fail to parse correctly when running `astro deploy`, causing the deploy to also fail.
+
 ## Astro CLI 1.19.0
 
 Release date: August 29, 2023
