@@ -538,7 +538,7 @@ If you have Airflow pods in the state `ImagePullBackoff`, check the pod descript
 - Configured containerd’s `config_path` to point to `/etc/containerd/certs.d`.
 - Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
 
-If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `config.yaml`, please contact Astronomer for additional configuration assistance.
+If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `config.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
 
 ## What's next
 
