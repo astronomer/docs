@@ -27,7 +27,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. The repository is configured to spin up and use a local MLflow and MinIO instance without you needing to define any extra connections or have access to external tools.
+Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. The repository is configured to spin up and use local MLflow and MinIO instances without you needing to define any extra connections or have access to external tools.
 
 ## Run the project
 
@@ -50,7 +50,7 @@ This command builds your project and spins up 6 Docker containers on your machin
 
 ### Data source
 
-This example uses the [Possum Regression dataset](https://www.kaggle.com/datasets/abrambeyer/openintro-possum) from Kaggle. It contains measurements of different attributes of 104 possums, such as total length, skull width or age collected in Australia. This data was originally published by Lindenmayer et al. (1995) in the Australian Journal of Zoology and is commonly used to teach linear regression.
+This example uses the [Possum Regression dataset](https://www.kaggle.com/datasets/abrambeyer/openintro-possum) from Kaggle. It contains measurements of different attributes of 104 possums, such as total length, skull width or age. This data was originally published by Lindenmayer et al. (1995) in the Australian Journal of Zoology and is commonly used to teach linear regression.
 
 ### Project overview
 
@@ -70,7 +70,7 @@ The [`predict`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/pre
 
 ![Graph view of the predict DAG showing the model and features being fetched. Afterwards the ModelLoadAndPredictOperator is used to run predictions with are plotted and saved as a file.](/img/examples/use-case-airflow-mlflow_predict_dag_graph.png)
 
-Note that the model is trained on the whole data and predictions are made on the same data, in a real world scenario with more data you'd want to split the data into a training, validation and test set.
+Note that the model is trained on the whole dataset and predictions are made on the same data. In a real world scenario you'd want to split the data into a training, validation and test set.
 
 ### Project code
 
