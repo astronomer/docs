@@ -25,9 +25,11 @@ The following are the best practices for submitting support requests in the Clou
 
 To help Astronomer support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
 
-**P1:** Critical impact, a deployment is completely unavailable or a DAG that was previously working in production is no longer working.
+**P1:** Critical impact. A deployment is completely unavailable or a DAG that was previously working in production is no longer working.
 
 Because P1 tickets are handled with the highest levels of urgency, if Astronomer Support responds on a P1 ticket and subsequently does not hear back for 2 hours, the ticket priority will be changed to P2.
+
+Additionally, if the immediate problem is solved but there are follow up investigations ongoing, those follow ups will be conducted in a separate ticket at a lower priority.
 
 **P2:** High impact. Ability to use Astro is severely impaired but does not affect critical, previously working pipelines in production.
 
