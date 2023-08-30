@@ -19,10 +19,10 @@ astro workspace team list
 | Output        | Description                                                                  | Data Type     |
 | ------------- | ---------------------------------------------------------------------------- | ------------- |
 | `ID`          | The Team ID.                                                                 | String        |
-| `Role`        | The type of user permissions all Team members have.                          | String        |
-| `Name       ` | Name of the Team.                                                            | String        |
-| `Description` | An optional description of the Team.                                         | Boolean       |
-| `Create Date` | The date and time that the Team was created in the Organization.             | Date          |
+| `Role`        | The Team's role in the Workspace.                       | String        |
+| `Name` | The name of the Team.                                                            | String        |
+| `Description` | The Team description.                                         | Boolean       |
+| `Create Date` |The date and time that the Team was created in the Organization.             | Date (`YYYY-MM-DDTHH:MM:SSZ`) |
 
 ## Related commands
 

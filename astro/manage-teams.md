@@ -51,52 +51,48 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 
 4. Select the **Team** you want to add and define their **Workspace Role**, which determines their [Workspace user permissions](/astro/user-permissions.md#workspace-roles).
 
-## Add Teams to Workspaces with Astro CLI
+## Add Teams to Workspaces using the Astro CLI
 
 You can add a Team to Workspaces programmatically with the Astro CLI instead of individually adding them with the Cloud UI. You must be logged into the correct Organization to add a Team its Workspaces.
 
 ### Prerequisites
 
-- Install the [Astro CLI](cli/install-cli.md).
-- Create a [Team](#create-a-team)
+- The [Astro CLI](cli/install-cli.md).
+- A [Team](#create-a-team)
 
 ### Add Teams to Workspaces
 
-1. Log in to Astro. 
+1. Run the following command to log in to Astro:
 
     ```sh
     astro login astronomer.io
     ```
 
-2. Choose the Workspace where you want to add a Team.
+2. Run the following command to identify the Workspace where you want to add the Team.
     
     ```sh
-    astro workspace
+    astro workspace list
     ```
 
-    :::tip
-
-    If you do not see the Workspace as a choice, confirm which Organization you're currently working in with `astro organization list`. You can switch to the correct Organization with `astro organization switch`. You can also change your current Organization in the Cloud UI.
+    If you don't see the right Workspace as a choice, confirm which Organization you're currently working in using `astro organization list`. You can switch to the correct Organization using `astro organization switch`.
 
     :::
 
-3. Retrieve the Team ID. 
+3. Run the following command to find the Team you want to add. Copy its `TEAM ID`:
 
     ```sh
     astro organization team list
     ```
 
-    This command returns the Team ID, team name, creation date, and Organization Role the Team has.
-
-4. Use the Team ID to assign the Team to other Workspaces in your Organization and optionally configure their [Workspace Role](/astro/user-permissions.md#workspace-roles).
+4. Run the following command to assign the Team to other Workspaces in your Organization.
 
     ```sh
     astro workspace team add <team-id> --role
     ```
 
-    Available Role options include `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. By default, the Team is assigned to `WORKSPACE_MEMBER`.
+    Available role options include `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. By default, the Team is assigned as a `WORKSPACE_MEMBER`.
 
-5. You can test that you assigned your Team successfully by listing all Teams in your current Workspace.
+5. Run the following command to confirm that the Team was successfully added to your current Workspace.
 
     ```sh
     astro workspace team list

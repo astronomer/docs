@@ -78,13 +78,12 @@ The following table lists the specific permissions that each Workspace role has:
 
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
 
-## User roles and Team roles
+## Relationship between user roles and Team roles
 
-You can assign Teams to Workspaces and configure their Workspace user roles in either the Cloud UI or programmatically with the Astro CLI:
+There are two ways to define a user's role in a Workspace:
 
 - Define the individual user role when you [add a user](manage-workspace-users.md#add-a-user-to-a-workspace) to a Workspace.
-- Assign a Workspace role to a [Team](manage-teams.md#add-a-team-to-a-workspace).
-- Assign Teams to Workspaces and define their user roles with the [Astro CLI](manage-teams.md#add-teams-to-workspaces-with-astro-cli).
+- Assign a Workspace role to a [Team](manage-teams.md#add-a-team-to-a-workspace) and add the user to the Team.
 
 If a user has permissions to a Workspace both as an individual and as a member of a Team, then Astronomer recognizes the more privileged role.
 
