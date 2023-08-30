@@ -19,7 +19,7 @@ astro workspace token add
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `--org-token-name`   | The name of the Organization API token you want to add to your Workspace.                                                                                                      | Any string enclosed in quotations    |
-| `--enforce-ci-cd` | The Workspace role to grant to the Organization API token. | One of `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` |
+| `--enforce-ci-cd` | The Workspace role to grant to the Organization API token. | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER`. |
 
 ## Related commands
 

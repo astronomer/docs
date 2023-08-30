@@ -23,7 +23,7 @@ astro workspace token update <flags>
 | `--expiration` | The expiration date for the token. By default there is no expiration date. | Any integer between 1 and 3650, used to represent days |
 | `--name` | The current name for the token. | Any string surrounded by quotations |
 | `--new-name` | The updated name for the token. | Any string surrounded by quotations |
-| `--role`  | The token's role in the Workspace.                | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`  | The token's role in the Workspace.                | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Examples
 

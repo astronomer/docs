@@ -22,7 +22,7 @@ After you crate a connection from your Deployment to GCP, you might also have to
 
 ### Access a public GCP endpoint
 
-To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your GCP resources through a valid Airflow Connection.
+To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your GCP resources through a valid Airflow connection.
 
 #### Allowlist external IP addresses for a cluster
 

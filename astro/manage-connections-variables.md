@@ -15,8 +15,8 @@ For in-depth information on creating and managing connections, see [Connection B
 
 ## Prerequisites
 
-- A locally hosted Astro project created with the Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
-- A Deployment on Astro. See [Create a Deployment](create-deployment.md).
+- A locally hosted Astro project created with the Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
+- A Deployment on Astro. See [Create a Deployment](create-deployment.md).
 
 ## Choose a connection and variable management strategy
 
@@ -98,7 +98,7 @@ You can use Airflow's system-level environment variables to store connections an
 #### Limitations
 
 - You can't view connections and variables from the Airflow UI. 
-- You must restart your local environment using `astro dev restart` whenever you make changes to your `.env` file.
+- You must restart your local environment using `astro dev restart` whenever you make changes to your `.env` file.
 - The environment variables are defined in plain text in your `.env` file.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are not as secure or centralized compared to a [secrets backend](secrets-backend.md).

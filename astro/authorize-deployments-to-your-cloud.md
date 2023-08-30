@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Authorize Deployments to your cloud'
-title: 'Authorize a Deployment to your cloud using workload identity'
+sidebar_label: 'Authorize Deployments to cloud resources'
+title: 'Authorize an Astro Deployment to cloud resources using workload identity'
 id: authorize-deployments-to-your-cloud
 description: Give Astro Deployments access to your cloud resources using a Kubernetes workload identity
 ---
@@ -8,11 +8,11 @@ description: Give Astro Deployments access to your cloud resources using a Kuber
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-When you create an Airflow connection from a Deployment to access your cloud services running in AWS or GCP, Airflow uses the connection details to access those services. Typically, you use a user and an associated credential in the form of a username/password, an API token or a service account key to authenticate using an Airflow connection. This user should be authorized to access your cloud services for the Airflow connection to succeed.
+When you create an Airflow connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords or API keys to your Airflow environment. 
 
-To avoid adding secrets like a password or an API token to your Airflow connection, you can directly authorize your Astro Deployment to access your cloud services using workload identity. Astronomer recommends using a workload identity in most cases to improve security and avoid managing credentials across your Deployments. You can still utilize any of the methods explained in the section [Manage your Airflow connections and variables](manage-connections-variables.md) to handle your connections. 
+To avoid adding secrets to your Airflow connection, you can directly authorize your Astro Deployment to access AWS or GCP cloud services using workload identity. Astronomer recommends using a workload identity in most cases to improve security and avoid managing credentials across your Deployments. If you have less strict security requirements, you can still use any of the methods described in [Airflow connection guides](https://docs.astronomer.io/learn/category/airflow-connections) to manage your connection authorization. 
 
-This guide explains how to authorize your Deployment to a cloud using workload identity. For each Deployment, you'll have to:
+This guide explains how to authorize your Deployment to a cloud using workload identity. For each Deployment, you will:
 
 - Authorize your Deployment to your cloud services.
 - Create an Airflow connection to access your cloud services.
@@ -38,7 +38,7 @@ A workload identity is a Kubernetes service account that provides an identity to
 
 #### Step 1: Authorize the Deployment in your cloud
 
-To grant a Deployment access to a service that is running in an AWS account not managed by Astronomer, use the AWS IAM roles to authorize your Deployment's workload identity. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource, such as Amazon S3 buckets, Redshift instances, and secrets backends.
+To grant a Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles to authorize your Deployment's workload identity. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource, such as Amazon S3 buckets, Redshift instances, and secrets backends.
 
 To authorize your Deployment, create an IAM role that is assumed by the Deployment's workload identity:
 

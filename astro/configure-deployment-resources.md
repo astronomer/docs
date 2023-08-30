@@ -199,6 +199,70 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 :::
 
+## Configure Kubernetes Pod resources
+
+The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure Pods in your DAG code to define individual task environments, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected. 
+
+Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
+
+1. In the Cloud UI, select a Deployment.
+2. Click **Resource quotas**.
+3. Configure the following values:
+
+    - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment. 
+    - **Memory Quota**: The maximum combined memory usage across all running Pods on your Deployment.
+    - **Default Pod Size**:
+        - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
+        - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
+
+
+Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
+
+The CPU and memory quotas also determine the **Max Pod Size**, which is the maximum amount of resources that a task can request.
+
+:::caution
+
+For Deployments running on dedicated clusters, the largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**, even if your quota is larger.
+
+For example, if your Deployment has a CPU quota of 150vCPU and a memory quota of 300GiB, your **Max Pod Size** might only be 12 vCPU and 24GiB RAM. If you try to run a task that requests 20vCPU, the task won't run even though it's within your quotas.
+
+:::
+
+:::info Alternative Astro Hybrid setup
+
+On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory. 
+
+To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
+
+:::
+
+## Transfer a Deployment to another Workspace 
+
+Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.
+
+To transfer a Deployment from one Workspace to another, the Workspaces must be in the same Organization. Transferred Deployments cannot be transferred to a different cluster from the one in which they were created.
+
+Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Owner or Operator in both the original Workspace and the target Workspace.
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu and select **Transfer Deployment**. 
+
+    ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
+
+3. Select the target Workspace where you want to transfer the Deployment. 
+4. Click **Transfer Deployment**.
+
+## Delete a Deployment
+
+When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
+
+    ![Delete Deployment in options menu](/img/docs/delete-deployment.png)
+
+3. Enter `Delete` and click **Yes, Continue**.
+
 ## See also
 
 - [Set environment variables on Astro](environment-variables.md).

@@ -14,7 +14,7 @@ This quickstart takes approximately 30 minutes to complete.
 
 To complete this quickstart, you need:
 
-- Workspace Editor permissions in an [Astro Workspace](manage-workspaces.md).
+- Workspace Operator permissions in an [Astro Workspace](manage-workspaces.md).
 - Optional. A database hosted in one of the following services:
   
   - GCP BigQuery

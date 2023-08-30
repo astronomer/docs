@@ -106,15 +106,7 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
 
     After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. The Cloud UI then automatically authenticates you to the CLI. The next time you log in, you can run `astro login` without specifying a domain. If you run into issues logging in, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
-2. Run the following command to enable DAG-only code deploys on your Deployment.
-   
-    ```sh
-    astro deployment update --dag-deploy enable
-    ```
-   
-    When the prompt appears in the Astro CLI, select the Deployment where you want to deploy your DAGs. 
-
-3. Run the following command to deploy your DAGs to Astro: 
+2. Run the following command to deploy your DAGs to Astro: 
    
     ```sh
     astro deploy --dags
@@ -148,7 +140,7 @@ Newly-deployed DAGs are paused by default and will not start running automatical
 
 The Cloud UI shows you information about the health of your Deployment, including analytics and logs for your DAG runs.
 
-Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Analytics** view for your Deployment.
+Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Analytics** page for your Deployment.
 
 ![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 
