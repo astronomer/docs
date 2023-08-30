@@ -43,7 +43,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
      
 You can continue to access your other Deployments by selecting the **Deployments** link.
     
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
+For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
 
 ## Next steps
 
