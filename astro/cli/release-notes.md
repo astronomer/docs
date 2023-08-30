@@ -23,7 +23,7 @@ Release date: August 30, 2023
 
 ### Bug fixes
 
-- Fixed an issue where DAGs would fail to parse correctly when running `astro deploy`, causing the deploy to also fail.
+- Fixed an issue where DAGs would fail to parse correctly when running `astro dev parse` or `astro deploy`, resulting in a command execution failure.
 
 ## Astro CLI 1.19.0
 
