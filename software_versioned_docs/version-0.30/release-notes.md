@@ -808,7 +808,7 @@ The flag prints out different levels of logs depending on the value that you pas
 
 ### Minor Improvements
 
-- You can now create a custom set of cluster-level permissions for the Astronomer Commander service by setting `astronomer.global.clusterRoles: false` in your `config.yaml` file and pushing a new [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to a [pre-created Kubernetes namespace](pre-create-namespaces.md).
+- You can now create a custom set of cluster-level permissions for the Astronomer Commander service by setting `astronomer.global.clusterRoles: false` in your `config.yaml` file and pushing a new [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to a pre-created Kubernetes namespace.
 - In the `astronomer.houston.config` section of your `config.yaml` file, you can now configure a list of `allowedSystemLevelDomains []`. If you configure this list, only users with emails from domains specified in the list (for example, `<company>.com`) can be granted System Admin privileges.
 - Greatly improved load times for the **System Admin** page in the UI.
 - You can now specify a node port for 3rd party ingress controllers with a service type of `nodePort`.
