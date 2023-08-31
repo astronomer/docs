@@ -15,10 +15,11 @@ Release date: August 31, 2023
 
 ### Additional improvements
 
-- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
-- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`.
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `Values.defaultAlerts.platform.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
+- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.global.loggingSidecar.indexPattern`.
 - You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
 - You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
+- Upgraded ElasticSearch to 8.x.
 
 ### Bug fixes
 
