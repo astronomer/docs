@@ -411,6 +411,10 @@ You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NA
 
 Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users and Teams based on templates for access and permissions. It also provides better observability through your identity provider for when users and Teams are created or modified across your organization.
 
+:::warning
+SCIM works by the IdP pushing updates to users & teams to Astronomer Software. For this to work, your Astronomer Software platform must be reachable from the internet. If you are running Astronomer Software without exposing it to the internet, there may be solutions for routing SCIM traffic depending on the combination of cloud provider and IdP. Please contact [Astronomer support](https://support.astronomer.io) for more information.
+:::
+
 <Tabs
     groupId="scim"
     defaultValue="okta"
