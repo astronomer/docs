@@ -19,6 +19,7 @@ Release date: August 31, 2023
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.global.loggingSidecar.indexPattern`.
 - You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
 - You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
+- You can now set `astronomer.houston.enableHoustonInternalAuthorization` in your `config.yaml` file to redirect all authentication requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.
 - Upgraded ElasticSearch to 8.x.
 
 ### Bug fixes
