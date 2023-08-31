@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 
 [MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best.
 
-This use case shows how to use MLflow with Airflow to engineer machine learning features, train a [scikit-learn Ridge linear regression model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html) and create predictions based on the trained model.
+This use case shows how to use MLflow with Airflow to engineer machine learning features, train a [scikit-learn Ridge linear regression model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html), and create predictions based on the trained model.
 
 :::info
 
