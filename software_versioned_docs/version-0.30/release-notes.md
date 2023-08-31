@@ -24,13 +24,13 @@ Release date: June 12, 2023
 
 ### Additional improvements
 
-- [Overprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
+- [Overprovisioning](https://docs.astronomer.io/software/cluster-resource-provisioning) now also applies to the following components:
 
     - PGBouncer
     - Statsd
     - Flower
   
-- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [overprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
+- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [overprovisioning](https://docs.astronomer.io/software/cluster-resource-provisioning) only to specific Airflow components.
 - Teams without any users are now automatically deleted when SCIM is disabled.
 - You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
 - You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
@@ -72,7 +72,7 @@ You can now programmatically create or update Deployments using the Houston API 
 
 ### Reduce resource requests for Airflow components in development environments
 
-You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
+You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](https://docs.astronomer.io/software/cluster-resource-provisioning) for configuration steps.
 
 ### New cron job to clean Deployment task data
 
