@@ -1,18 +1,308 @@
 ---
-title: 'Astronomer Software v0.30 release notes'
+title: 'Astronomer Software release notes'
 sidebar_label: 'Astronomer Software'
 id: release-notes
 description: Astronomer Software release notes.
 ---
 
-<!--- Version-specific -->
+This document contains release notes for each version of Astronomer Software.
 
-0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md). For more Astronomer Software release notes, see:
+0.32 is the latest long-term support (LTS) release for Astronomer Software. To upgrade to 0.32, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels and currently maintained versions of Astronomer Software, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
-- [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes)
-- [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes)
-- [Astronomer Software 0.31 release notes](https://docs.astronomer.io/software/release-notes)
-- [Astronomer Software documentation archive](documentation-archive.md)
+## 0.32.2
+
+Release date: June 23, 2023
+
+### Bug fixes
+
+- Reverted a change which prevented Workspace-level service accounts from accessing a Deployment when the service account didn't have specific permissions for that Deployment.
+- Fixed an issue where some screens of the Airflow UI would produce an HTTP 500 internal server error.
+
+## 0.32.1
+
+Release date: June 12, 2023
+
+### Additional improvements
+
+- [Overprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
+
+    - PGBouncer
+    - Statsd
+    - Flower
+  
+- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [overprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
+- Teams without any users are now automatically deleted when SCIM is disabled.
+- You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
+- You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
+- You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
+
+### Bug fixes
+
+- Fixed an issue where `git-sync-relay` containers wouldn't restart as expected after being terminated.
+- Fixed an issue where a service account with the Workspace Editor role could update a Deployment when it didn't have any Deployment-level permissions for the Deployment. 
+- Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana.
+- System Admins can no longer change a user's system role if the user is imported to Astronomer through an IdP group and `manageSystemPermissionsViaIdpGroups` is set to `true`.
+- Fixed an issue where you could not create a new Deployment from the Cloud UI if you updated its scheduler count using the text-based input field. 
+- Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
+- Fixed an issue where resource requests configured from the Software UI could get out of sync with the Houston database.
+- Fixed an issue where where updating a Deployment's resource configuration did not persist in the Houston database when that Deployment had overprovisioning enabled.
+- Reduced the number of redundant calls that Astronomer Software makes to your identity provider (IdP) when a user logs in.
+- Fixed a security vulnerability in logging.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491)
+    - [CVE-2023-1999](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1999)
+    - [CVE-2023-27561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27561)
+    - [CVE-2022-41727](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41727)
+    - [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840)
+    - [CVE-2023-2650](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650)
+
+## 0.32.0
+
+Release date: April 28, 2023
+
+### Clean Deployment task metadata
+
+You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of data Airflow stores in your Deployment metadata database by archiving data that you don't need to access on a regular basis. To configure this job, see [Clean Deployment task metadata](configure-deployment.md#clean-deployment-task-metadata).
+
+### Programmatically create and update Deployments with the Houston API
+
+You can now programmatically create or update Deployments using the Houston API `upsertDeployment` mutation. Unlike `createDeployment`, the `upsertDeployment` mutation includes keys for configuring Deployment resources such as environment variables. See [Create or update a Deployment with configurations](houston-api.md#create-or-update-a-deployment-with-configurations).
+
+### Reduce resource requests for Airflow components in development environments
+
+You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
+
+### New cron job to clean Deployment task data
+
+You can now clean task data from your Deployments by exporting it to an external storage service. This workflow reduces the amount of storage Astronomer Software uses by archiving data that you don't need to access on a regular basis. See [Configure a Deployment](configure-deployment.md#clean-deployment-task-metadata) for configuration steps.
+
+### Assign System-level permissions to Teams
+
+You can assign the System Admin, System Editor, and System Viewer permissions to teams by setting the following values in your `config.yaml` file:
+
+```sh
+# Auth configuration.
+auth:
+  openidConnect:
+    idpGroupsImportEnabled: true
+    # Optional configuration. Set to assign System-level permissions using Teams.
+    manageSystemPermissionsViaIdpGroups:
+      enabled: true
+      systemAdmin: ["<your-system-admin-groups>"] // Only these groups will be treated as SysAdmin Groups
+      systemEditor: ["<your-system-editor-groups>"]
+      systemViewer: ["<your-system-viewer-groups>"]
+```
+
+When coupled with [disabling individual user management](import-idp-groups.md#disable-individual-user-management), this feature allows you to control all user permissions on Astronomer Software exclusively through your identity provider. For more information, see [Import IdP groups](import-idp-groups.md).
+
+### PostgreSQL 15
+
+Astronomer Software version 0.32 upgrades PostgreSQL from 11.18.0-1 to 15. If you use in-cluster PostgreSQL for your workflows, upgrading to Software 0.32 without pinning your PostgreSQL version can impact your workflows. See the [Upgrade to Postgres 15](upgrade-astronomer.md#upgrade-to-postgres-15) for upgrade considerations and steps.
+
+### Additional improvements
+
+- Added support for using git-sync with a private image registry.
+- The root user feature introduced in Astronomer Software version 0.31 has been deprecated. System Admins now have the highest level of permissions on the platform.
+- Workspaces are now required to have unique names. If you have existing Workspaces with identical names, upon upgrade the duplicate names will be appended with an underscore and a number.
+- If you configured [git-sync deploys](deploy-git-sync.md) for a Deployment, you can now [view error logs](deployment-logs.md) emitted from the git-sync Kubernetes Pod in the Software UI.
+- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `config.yaml` file.
+- You can now configure custom environment variables for ElasticSearch-based custom logging using the `astronomer.customLogging.extraEnv` value in your `config.yaml` file.
+- The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` key has been replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled`  for improved performance across additional Software UI views.
+
+### Bug fixes
+
+- Fixed an issue where ElasticSearch Curator version 7 and later did not work as expected.
+- Fixed an issue where sidecar containers would sometimes not terminate properly after their primary container was terminated.
+- Fixed an issue in the Software UI where you could not view Deployment details for a Deployment that included "team" in its name.
+- Fixed an issue where a service account with Workspace Editor permissions could update Deployments. 
+- Fixed an issue where Prometheus was using more memory than expected due to a misconfiguration of statsd.
+Fixed an issue in the Software UI where a text search returned duplicate entries for a single Deployment name.
+- Fixed an issue where authentication tokens were visible in Nginx logs produced by the Software UI.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2022-46146](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46146)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2021-32149](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-32149)
+    - [CVE-2021-2625](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-2625)
+    - [CVE-2023-0286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0286)
+    - [CVE-2023-25881](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25881)
+    - [CVE-2023-27536](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27536)
+    - [CVE-2023-27533](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27533)
+    - [CVE-2023-27534](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27534)
+    - [CVE-2023-27535](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27535)
+    - [CVE-2023-0464](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0464)
+    - [CVE-2023-27561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27561)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-27664)
+    - [CVE-2022-41721](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41721)
+    - [CVE-2022-41723](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41723)
+    - [CVE-2022-32149](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32149)
+    - [CVE-2020-25649](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25649)
+    - [CVE-2020-36518](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-36518)
+    - [CVE-2022-42003](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42003)
+    - [CVE-2022-42004](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-022-42004)
+    - [CVE-2022-3171](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3171)
+    - [CVE-2022-3509](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3509)
+    - [CVE-2022-3510](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3510)
+    - [CVE-2022-25857](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25857)
+    - [CVE-2022-42898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42898)
+    - [CVE-2022-3970](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3970)  
+
+## 0.31.3
+
+Release date: February 24, 2023
+
+### Additional improvements
+
+- You can now configure `extraVolumes` and `extraVolumeMounts` in the Alertmanager Helm chart, which can be useful for storing secret credentials for services that read your alerts.
+- You can now use `astronomer.houston.ingress.annotation` in the Astronomer Helm chart to configure custom ingress annotations for Houston.
+- You can now upgrade the Airflow Helm chart for individual Deployments by running `yarn upgrade-deployments <deployment-id>` from within the Houston Pod.
+
+### Bug fixes 
+
+- Fixed an issue where you could not set `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER` in a Deployment if you were using an Astronomer Certified image.
+- Astronomer Software now filters orphaned Deployments and Workspaces owned by users who were removed from an identity provider (IdP) group with SCIM enabled.
+- Fixed a security vulnerability where you could query Elasticsearch logs for a Deployment from a different Deployment.
+- Fixed an issue where authentication tokens were visible in Nginx logs produced by the Software UI.
+- Fixed an issue where deploying an image with the `docker/build-push-action` GitHub action could produce errors in Houston that affected the entire Astronomer Software installation.
+- Fixed the following vulnerabilities:
+  
+    - [CVE-2023-24807](https://nvd.nist.gov/vuln/detail/CVE-2023-24807)
+    - [CVE-2022-25881](https://nvd.nist.gov/vuln/detail/CVE-2023-25881)
+    - [CVE-2023-8286](https://nvd.nist.gov/vuln/detail/CVE-2023-8286)
+
+## 0.31.2
+
+Release date: February 2, 2023
+
+### Additional improvements
+
+- Support for Kubernetes [1.25](https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/) and [1.26](https://kubernetes.io/blog/2022/12/09/kubernetes-v1-26-release/).
+- You can now configure custom annotations for Houston ingress by setting `astronomer.houston.ingress.annotation` in your `config.yaml` file. 
+- The System Admin **Deployments** list in the Software UI is now paginated. 
+- You can now use the following values in your `config.yaml` file to configure resource allocation for the git-sync relay service:
+  
+    - `astronomer.gitSyncRelay.gitSyncResources`
+    - `astronomer.gitSyncRelay.gitDaemonResources`
+    - `astronomer.gitSyncRelay.securityContext`
+
+- You can now set `timeoutSeconds` for `readinessProbe` and `livenessProbe` in the Prometheus Helm chart.
+- Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
+- Houston API now logs an installation's deployed image versions whenever a GraphQL mutation is completed.
+
+### Bug fixes 
+
+- To limit Out of Memory (OOM) errors when migrating large DAGs, Deployment database migrations now use the same resources as the Deployment's scheduler.
+- Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts returned an error.
+- Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
+- When you view a user through a Teams list as a System Admin and return to the list, you now return to the Teams list instead of the System Admin users list. 
+- Fixed the following vulnerabilities:
+  
+    - [CVE-2022-23529](https://nvd.nist.gov/vuln/detail/CVE-2022-23529)
+    - [CVE-2021-44906](https://nvd.nist.gov/vuln/detail/CVE-2021-44906)
+    - [CVE-2022-23540](https://nvd.nist.gov/vuln/detail/CVE-2022-23540)
+    - [CVE-2022-23541](https://nvd.nist.gov/vuln/detail/CVE-2022-23541)
+    - [CVE-2022-3996](https://nvd.nist.gov/vuln/detail/CVE-2022-3996)
+    - [CVE-2022-43551](https://nvd.nist.gov/vuln/detail/CVE-2022-43551)
+    - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
+    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698)
+    - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2021-43565](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43565)
+    - [CVE-2021-38561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561)
+
+## 0.31.1
+
+Release date: December 23, 2022
+
+### Additional improvements 
+
+- You can now configure `extraFlags` for the Prometheus startup command in the Prometheus Helm chart.
+
+### Bug fixes 
+
+- Fixed an issue where logging sidecars would occasionally fail to terminate.
+- Fixed the following vulnerabilities:
+    - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
+    - [CVE-2021-44716](https://nvd.nist.gov/vuln/detail/CVE-2021-44716)
+    - [CVE-2022-27191](https://nvd.nist.gov/vuln/detail/CVE-2022-27191)
+    - [CVE-2022-27664](https://nvd.nist.gov/vuln/detail/CVE-2022-27664)
+    - [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-41717)
+    - [CVE-2022-37454](https://nvd.nist.gov/vuln/detail/CVE-2022-37454)
+    - [CVE-2022-41717](https://nvd.nist.gov/vuln/detail/CVE-2022-41717)
+    - [CVE-2022-42919](https://nvd.nist.gov/vuln/detail/CVE-2022-42919)
+    - [CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061)
+    - [CVE-2022-46146](https://nvd.nist.gov/vuln/detail/CVE-2022-46146)
+
+## 0.31.0
+
+Release date: December 7, 2022
+
+### View and export task usage metrics
+
+You can now view task usage metrics from the Software UI.
+
+Task usage metrics provide an overview of your Airflow task runs and can help you quickly identify Deployments where more tasks are running or failing than expected. 
+
+To configure the feature, see [Set up task usage metrics](task-usage-metrics.md).
+
+### New root user role
+
+Astronomer Software's role-based access control (RBAC) system now supports a single root user for each installation. The root user has a non-configurable username and autogenerated password stored as a Kubernetes secret in your installation. 
+
+See [Manage the root user](https://docs.astronomer.io/software/0.31/manage-root-user#log-in-as-the-root-user).
+
+### Manage Astronomer users through a SCIM integration 
+
+Astronomer Software now supports managing users through System for Cross-domain Identity Management (SCIM), which allows you to automatically provision and deprovision users based on templates for access and permissions. See [Manage users with SCIM](integrate-auth-system.md#manage-users-and-teams-with-scim).
+
+### Invite users only through Teams
+
+Using the new root user feature, you can now configure Astronomer Software so that users are managed exclusively through Teams. This helps you better integrate with your identity provider (IdP) by ensuring that all users on your platform are authenticated and managed through the IdP. See [Disable individual user management](import-idp-groups.md#disable-individual-user-management).
+
+### New default resource limits and requests 
+
+Astronomer Software 0.31 includes new default resource limits and requests on the following resources: 
+
+- Alertmanager
+- Elasticsearch
+- NATS
+- PostrgeSQL
+- STAN
+- Nginx
+- Grafana
+- Blackbox exporter
+
+You might experience OOMKill errors or unexpected behavior after upgrading if you use resources beyond the new default limits. To minimize disruption, view resource usage for these components in [Grafana](grafana-metrics.md) prior to upgrade and compare this usage to the default resource limits in the [Astronomer Helm chart](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml). 
+
+If your current usage is expected and higher than the default resource limits, update the limits in your `config.yaml` file before upgrading to Astronomer Software 0.31.
+
+### Additional improvements 
+
+- You can now set a custom security context for `es-client` by setting `elasticsearch.client.securityContext.capabilities.add={}` in the ElasticSearch Helm chart.
+- The **Deployment users** page is now paginated in the Software UI.
+- You can now set `astronomer.registry.logLevel` to filter which types of logs appear in your Docker registry.
+- The default Git-sync interval is now 1 instead of 0.
+- You can now configure a Deployment to have 0 triggerer components.
+- You can now set `astronomer.houston.config.useAutoCompleteForSensativeFields=false` to disable autocomplete on sensitive fields in the Software UI.
+- You can now set `astronomer.houston.config.shouldLogUsername=true` to include user email addresses in audit logs for logins through the Houston API.
+- [Git sync-based Deployments](deploy-git-sync.md) now have a dedicated git-sync relay pod, service, and network policy.
+  
+### Bug fixes
+
+- The Software UI now stores user tokens with `httpOnly` and `secure` flags.
+- Fixed an issue where the Software UI would occasionally show an incorrect **Extra AU** number for Deployments. 
+- Fixed the following vulnerabilities:
+
+    - [CVE-2022-37601](https://security.snyk.io/vuln/SNYK-JS-LOADERUTILS-3043105)
+    - [CVE-2022-43680](https://nvd.nist.gov/vuln/detail/CVE-2022-43680)
+    - [CVE-2022-40674](https://nvd.nist.gov/vuln/detail/CVE-2022-40674)
+  
+- Fixed an issue where you could not access Astronomer Software's Docker registry if you had access to more than 100 Deployments. 
+- Fixed an issue where the Software UI did not show the correct last used dates for service accounts. 
+- Fixed an issue where NATS would send false Deployment alert emails.
+- Fixed an issue where the configuration in `astronomer.houston.updateRuntimeCheck.url` was ignored if not all supported Deployment image versions were present in the destination URL. 
 
 ## 0.30.7
 
@@ -239,3 +529,294 @@ As part of this change, you can now configure `jwt.authDuration` in your [Housto
 - Fixed an issue where updating the role of a user in a Team using the Astro CLI would not throw an error as expected.
 - Fixed an issue where JSON web tokens persisted after a user logged out if `idpGroupsRefreshEnabled` was set to `false`.
 - Users authenticating with Google Direct are no longer automatically logged out of Astronomer Software after 1 hour.
+
+## v0.28.8
+
+Release date: January 26, 2023
+
+### Bug fixes
+
+- Fixed the following vulnerabilities: 
+
+    - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2022-2625](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2625)
+    - [CVE-2022-37454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37454)
+    - [CVE-2022-42919](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42919)
+    - [CVE-2022-45061](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45061)
+    - [CVE-2022-46146](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46146)
+    - [CVE-2022-27191](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46146)
+    - [CVE-2022-32149](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32149)
+    - [CVE-2022-37601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37601)
+    - [CVE-2022-43680](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-43680)
+
+- Fixed an issue where service accounts with System Admin permissions couldn't create Deployments on deprecated Airflow versions.
+- Fixed an issue where you could not upgrade a Deployment from an unsupported version of Astronomer Certified (AC) to another unsupported version of AC.
+- Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
+- Fixed an issue in the Software UI where an error message appeared after refreshing pages listing Workspace or Deployment service accounts.
+- Fixed an issue where you could not view Deployment-level service accounts in the Software UI.
+
+## v0.28.7
+
+Release date: October 14, 2022
+
+### Bug fixes 
+
+- Fixed the following vulnerabilities:
+    - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
+    - [CVE-2022-3224](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3224)
+
+## v0.28.6
+
+Release date: September 21, 2022
+
+### Additional improvements
+
+- You can now specify `authUrlParams` for your identity provider (IdP) in `config.yaml`
+- Added support for Kubernetes 1.21, 1.22, and 1.23
+- Upgraded Prometheus to the LTS release of 2.37.0
+
+### Bug fixes
+
+- Fixed the following Common Vulnerabilities and Exposures (CVEs):
+    - [CVE-2022-1996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1996)
+    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698)
+    - [CVE-2022-0624](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-0624)
+    - [CVE-2022-31129](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31129)
+
+- Fixed several additional CVEs by upgrading images for system components
+- Fixed an issue where custom authentication methods did not appear in the Software UI
+
+## v0.28.5
+
+Release date: June 23, 2022
+
+### Bug fixes
+
+- Fixed several high level CVEs
+- User auth tokens for the Software UI are now stored in httpOnly cookies
+- Fixed an issue where Grafana dashboards were not accessible
+- Fixed an issue where a user could not log in through Azure AD SSO if the user belonged to a group without a `displayName`
+
+## v0.28.4
+
+Release date: April 8, 2022
+
+### Additional Improvements
+
+- Users added to Astronomer Software via an [IDP group](import-idp-groups.md) no longer need to be invited by email in order to join Astronomer.
+- Teams now support [Azure AD Connect sync](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts) for user groups.
+- System admins can no longer remove the last user from an active Workspace or Deployment. This ensures that a given Workspace or Deployment can always be deleted by an existing member. Similarly, Workspace Admins can no longer remove a Team if doing so results in a Workspace having zero Admins.
+- You can now map your IDP's groups claim to Astronomer's expected claim of `groups` via the `astronomer.houston.config.auth.openidConnect.<idp>.claimsMapping` setting in `config.yaml`.
+### Bug Fixes
+
+- Fixed an issue where deleted Teams did not disappear from the Software UI until you refreshed the page
+- Fixed an issue where Teams were still available in the Software UI even when their underlying IDP group had been deleted from the IDP
+- Fixed an issue where creating a Deployment with the default resource configuration would result in a Deployment having a **Scheduler Count** of 1 instead of the stated default of 2
+- Fixed an issue where you could not deploy code to a Deployment that shared the release name of a previous Deployment which was hard deleted
+- Fixed an issue where you could not create a Deployment with a numeric-only name in a pre-created namespace
+
+## v0.28.3
+
+Release date: March 17, 2022
+
+### Bug Fixes
+
+- Fixed an issue where airgapped upgrades and installations could fail due to a mismatched Airflow Helm chart between Astronomer components
+
+## v0.28.2
+
+Release date: March 14, 2022
+
+### Additional Improvements
+
+- System Admins can now update the name and description for any Workspace on their installation.
+- You can now specify `global.external_labels` and `remote_write` options for Prometheus through the Astronomer Helm chart.
+- You can now configure `nodeSelector`, `tolerations`, and `affinity` in the STAN and NATS Helm charts.
+
+### Bug Fixes
+
+- Fixed several CVEs
+- Fixed a few issues where some buttons in the Software UI did not link to the appropriate page
+- Fixed an issue where you could not install Astronomer Software 0.27 or 0.28 in an [airgapped environment](install-airgapped.md)
+- Fixed an issue where System and Workspace Admins were able to delete users that were part of an [IDP team](import-idp-groups.md)
+
+## v0.28.1
+
+Release date: February 22, 2022
+
+### Bug fixes
+
+- Fixed an issue where users could not successfully log in through Azure AD
+
+## v0.28.0
+
+Release date: February 15, 2022
+
+### Import Identity Provider User Groups as Teams
+
+You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.
+
+For more information about configuring this feature, read [Import IDP Groups](import-idp-groups.md). To learn more about adding and setting permissions for Teams via the Astronomer UI, read [User Permissions](workspace-permissions.md#via-teams).
+
+### Additional Improvements
+
+- Astronomer now supports `prefer` and `require` SSL modes for connecting to PGBouncer. You can set this SSL mode via the `global.ssl.mode` value in your `config.yaml` file. Note that in v0.28.0, this feature works only with AWS and Azure.
+- You can now set [Grafana environment variables](https://grafana.com/docs/grafana/latest/administration/configuration/#override-configuration-with-environment-variables) using the `grafana.extraEnvVars` setting in your `config.yaml` file.
+- Added a new **Ephemeral Storage Overwrite Gigabytes** slider to the Git Sync configuration screen. You can configure this slider to allocate more memory for syncing larger Git repos.
+- Added a new **Sync Timeout** slider to the Git Sync configuration screen. You can configure this slider to set a maximum allowed length of time for syncing a Git repo.
+
+### Bug Fixes
+
+- Removed root user permissions for authSidecar
+- Added AWS RDS certificates to list of trusted certificates
+- Removed support for Kubernetes 1.18
+- Fixed some confusing behavior with the Git-Sync **SSH Key** field in the UI  
+- Fixed an issue where the Astronomer platform and Airflow could not communicate in environments where inter-namespace communication is disabled
+- Fixed an issue where users would frequently get 502 errors when logging in to the Astronomer UI
+- Fixed an issue where users would get timeout issues when attempting to log in to an Astronomer installation on OpenShift
+
+## 0.27.4
+
+Release date: March 8, 2022
+
+### Bug Fixes
+
+- Fixed an issue where you could not install Astronomer Software 0.27 or 0.28 in an airgapped environment
+- Fixed an issue where new users without permissions to create Workspaces would be directed to the **New Workspace** page when they first log in
+- Fixed several CVEs
+
+## 0.27.3
+
+Release date: Feb 22, 2022
+
+### Limit Workspace Creation to System Admins
+
+To provide more control over resource usage across your organization, you can now limit the ability to create Workspaces only to users with System Admin permissions.
+
+For more information about each role's permissions, including instructions for how to modify a role's permissions, see [Platform User Management](manage-platform-users.md).
+
+### Additional improvements
+
+- Added the `houston.config.deployments.enableSystemAdminCanCreateDeprecatedAirflows` configuration which enables System Admins to create Deployments with deprecated versions of Astronomer Certified
+
+### Bug Fixes
+
+- Fixed documentation links in the Software UI
+
+## 0.27.1
+
+Release date: January 10, 2022
+
+### Bug Fixes
+
+- Fixed an issue where users could not create Deployments via an IAM role
+
+## 0.27.0
+
+Release date: December 21, 2021
+
+### Custom OAuth Flows
+
+You can now configure a custom OAuth flow as an alternative to Astronomer's default implicit flow. You can customize Astronomer's existing Okta, Google, and GitHub OAuth flows, or you can import an entirely custom OAuth flow. For more information, read [Configure a Custom OAuth Flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
+
+### Deploy DAGs via Git Sync
+
+You can now configure a Git repo to continually push DAGs to an Astronomer Deployment via git-sync. DAGs deployed via git-sync automatically appear in the Airflow UI without requiring additional action or causing downtime. For more information, read [Deploy DAGs via Git Sync](deploy-git-sync.md).
+
+### External ElasticSearch Logging
+
+Custom ElasticSearch logging tools are now supported via new values in your `config.yaml` file:
+
+```yaml
+# External ES logging
+global:
+  customLogging:
+    enabled: true
+    scheme: https
+    host: ""
+    port: ""
+    secret: ""
+    #secretName: ~
+    #awsSecretName: ~
+    #awsIAMRole: ~
+    #awsServiceAccountAnnotation: ~
+```
+
+### CLI Support for Podman
+
+By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
+
+### Bug Fixes
+
+- Dropped support for Kubernetes 1.17
+- Fixed an issue where redeployments could clobber existing annotations for namespaces
+- Fixed an issue where new Deployments could potentially generate invalid usernames for Celery and the metadata DB
+- Fixed an issue where scheduler, webserver, and worker logs were not accessible via the Astronomer CLI
+- Fixed an issue where where setting extra volumes via `config.yaml` did not work when NFS DAG deploys were enabled.
+
+## 0.26.7
+
+Release date: March 1, 2022
+
+### Additional improvements
+
+- Fixed several CVEs
+- Updated documentation links in the UI to point to Software documentation
+
+## 0.26.6
+
+Release date: January 10, 2022
+
+### Bug Fixes
+
+- Fixed an issue where users could not create Deployments via an IAM role
+
+## 0.26.5
+
+Release date: December 11, 2021
+
+### Bug Fixes
+
+- Remediated [CVE-2021-44228](https://github.com/advisories/GHSA-jfh8-c2jp-5v3q) related to Log4J by setting ES_JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true at runtime for all ElasticSearch containers
+
+## 0.26.4
+
+Release date: November 22, 2021
+
+### Support for Airflow 2.2.0
+
+[Apache Airflow 2.2.0](https://airflow.apache.org/blog/airflow-2.2.0/) is an exciting milestone in the open source project. Most notably, this release introduces custom timetables and deferrable operators.
+
+#### Custom Timetables
+
+Timetables are a powerful new framework that you can use to create custom schedules using Python. In an effort to provide more flexibility and address known limitations imposed by cron, timetables use an intuitive `data_interval` that, for example, allows you to schedule a DAG to run daily on Monday through Friday, but not on the weekend. Timetables can be easily plugged into existing DAGs, which means that it's easy to create your own or use community-developed timetables in your project.
+
+For more information on using timetables, read the [Apache Airflow Documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/timetable.html).
+
+#### Deferrable Operators
+
+Deferrable operators are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a Worker or Scheduler slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that Worker or Scheduler slot while they wait. This is made possible by a new, lightweight Airflow component called the Triggerer.
+
+As part of supporting deferrable operators, you can provision multiple Triggerers on your Astronomer Deployments. By provisioning multiple Triggerers, you can ensure that tasks using Deferrable Operators are run even when one Triggerer goes down. For more information about configuring Triggerers and other resources, see [Configure a Deployment](configure-deployment.md).
+
+### CLI Verbosity Flag
+
+You can now specify a `--verbosity` flag for all Astronomer CLI commands. When you specify this flag with a CLI command, the CLI prints out [Logrus](https://github.com/sirupsen/logrus) logs as the command runs. This is useful for debugging any errors that might result from a CLI command.
+
+The flag prints out different levels of logs depending on the value that you pass it. Each possible value (`debug`, `info`, `warn`, `error`, `fatal`, and `panic`) maps to a different Logrus logging level. For more information about these logging levels, read the [Logrus documentation](https://github.com/sirupsen/logrus#level-logging).
+
+### Minor Improvements
+
+- You can now create a custom set of cluster-level permissions for the Astronomer Commander service by setting `astronomer.global.clusterRoles: false` in your `config.yaml` file and pushing a new [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to a [pre-created Kubernetes namespace](pre-create-namespaces.md).
+- In the `astronomer.houston.config` section of your `config.yaml` file, you can now configure a list of `allowedSystemLevelDomains []`. If you configure this list, only users with emails from domains specified in the list (for example, `<company>.com`) can be granted System Admin privileges.
+- Greatly improved load times for the **System Admin** page in the UI.
+- You can now specify a node port for 3rd party ingress controllers with a service type of `nodePort`.
+- The naming format of service account pods has been changed from `<release-name>-dags-prod-worker-serviceaccount` to `release_name-dags-prod-airflow-worker`.
+
+### Bug Fixes
+
+- Fixed an issue where you could not update an existing Deployment's IAM role via the Astronomer CLI
+- Fixed an issue where Deployments would not work on clusters with custom domains
+- Fixed error handling when interacting with a Deployment that wasn't fully spun up
+- Added a new validation step for Airflow Helm chart values configured in the `astronomer.houston.config.deployments.helm.airflow` section of `config.yaml`
