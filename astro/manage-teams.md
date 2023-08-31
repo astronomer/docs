@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Configure Teams'
+sidebar_label: 'Teams'
 title: 'Configure Teams on Astro'
 id: manage-teams
 description: Create, delete, and update Teams on Astro.
