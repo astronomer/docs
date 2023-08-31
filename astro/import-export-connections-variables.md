@@ -1,8 +1,8 @@
 ---
-sidebar_label: 'Import and export connections and variables'
-title: 'Import and export connections and variables'
+sidebar_label: 'Import and export'
+title: 'Import and export Airflow connections and variables'
 id: import-export-connections-variables
-description: "Learn how to import and export Airflow objects between Airflow environments"
+description: "Learn how to import and export Apache Airflow objects between Airflow environments on Astro"
 ---
 
 After you create connections and variables in an Airflow environment, you might want to move export and import them between environments for any of the following reasons:
