@@ -50,7 +50,7 @@ Examples:
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
-- You have lost use of a Public Preview feature that does not affect general services.
+- You have lost the ability to use a [Public Preview](https://docs.astronomer.io/astro/feature-previews) feature that does not affect general services.
 
 **P4:** Low impact. Astro is fully usable but you have a question for our team.
 
