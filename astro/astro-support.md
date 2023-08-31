@@ -35,7 +35,7 @@ Additionally, if the immediate problem is solved but there are follow up investi
 
 Examples:
 
-- A newly deployed production DAG is not working, even though it was tested in another Astro Deployment (e.g. dev or test) beforehand.
+- A newly deployed production DAG is not working, even though it ran successfully in a development or test environment.
 - The Airflow UI is unavailable.
 - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
 - You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that is required for running tasks, such as adding a new worker instance type.
