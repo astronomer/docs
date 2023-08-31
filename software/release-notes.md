@@ -9,6 +9,33 @@ description: Astronomer Software release notes.
 
 0.32 is the latest long-term support (LTS) release for Astronomer Software. To upgrade to 0.32, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.32.3
+
+Release date: August 31, 2023
+
+### Additional improvements
+
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
+- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`.
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
+- You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
+
+### Bug fixes
+
+- Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments.
+- Fixed an issue where Grafana could not start up on an OpenShift cluster.
+- Fixed an issue where a Deployment using Runtime 8 or earlier with the Celery executor would show as healthy in the Software UI even when workers were unavailable.
+- Fixed an issue where a System Admin user that did not belong to a Team could delete the Team from the Software UI.
+- Fixed an issue where syncing an IdP group from Okta failed when SCIM was enabled and a user account was removed only from Astronomer Software.
+- Fixed an issue where you couldn't upgrade a Deployment's Airflow version if the Deployment used git-sync deploys and had default resources.
+- Fixed an issue where the user login process would be unresponsive if the Houston API failed to retrieve IdP group information from Azure.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+    - [CVE-2023-36665](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-36665)
+    - [CVE-2023-2650](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650)
+
 ## 0.32.2
 
 Release date: June 23, 2023
