@@ -45,7 +45,7 @@ Examples:
 
 Examples:
 
-- A DAG that has been deployed to an Astro deployment for the first time, or is on a local development environment, is unexpectedly not working.
+- A newly deployed DAG is not working in a development Deployment, even though it ran successfully in a local environment using the Astro CLI.
 - You need to [modify a Hybrid cluster setting](manage-hybrid-clusters.md) that affects your cluster's performance but isn't required to run tasks, such as changing the size of your cluster's database or adding a new VPC peering connection.
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
