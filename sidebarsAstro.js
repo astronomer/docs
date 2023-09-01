@@ -56,7 +56,7 @@ module.exports = {
             "cloud-ide/run-sql",
             "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
-            "cloud-ide/pass-data-to-cells",
+            "cloud-ide/pass-data-between-cells",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
