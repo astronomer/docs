@@ -269,7 +269,7 @@ t1 = PythonOperator(
 
 ### Example pre-built notifier: Slack
 
-An example of a community provided pre-built notifier is the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/latest/_api/airflow/providers/slack/notifications/slack_notifier/index.html). 
+An example of a community provided pre-built notifier is the [SlackNotifier](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/_api/airflow/providers/slack/notifications/slack/index.html#module-airflow.providers.slack.notifications.slack). 
 
 It can be imported from the Slack provider package and used with any `*_callback` function:
 
