@@ -335,4 +335,4 @@ There is much more to the BranchPythonOperator than simply choosing one task ove
 - What if you want to trigger a DAG Run only if the previous one succeeded?
 
 For more guidance and best practices on common use cases like the ones above, try out Astronomer's
-[Academy Course on Branching](https://academy.astronomer.io/branching-course) for free today.
+[Academy Course on Branching](https://academy.astronomer.io/astro-runtime-branching) for free today.
