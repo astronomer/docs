@@ -1,12 +1,12 @@
 ---
-title: "Predict possum tail length using linear regression with MLflow and Airflow"
+title: "Predict possum tail length using MLflow, Airflow, and linear regression"
 description: "Use Airflow and MLflow to conduct and track a regression model."
 id: use-case-airflow-mlflow
 sidebar_label: "Regression with Airflow + MLflow"
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
 
-[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best.
+[MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. When combined, Airflow and MLflow make a powerful platform for ML orchestration (MLOx).
 
 This use case shows how to use MLflow with Airflow to engineer machine learning features, train a [scikit-learn Ridge linear regression model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html), and create predictions based on the trained model.
 
@@ -27,11 +27,13 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from this [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). Make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. The repository is configured to spin up and use local MLflow and MinIO instances without you needing to define any extra connections or have access to external tools.
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+
+The repository is configured to spin up and use local MLflow and MinIO instances without you needing to define connections or access external tools.
 
 ## Run the project
 
-To run the example project, first make sure Docker Desktop is running. Then, navigate to your project directory and run:
+To run the example project, first make sure Docker Desktop is running. Then, open your project directory and run:
 
 ```sh
 astro dev start
@@ -41,8 +43,8 @@ This command builds your project and spins up 6 Docker containers on your machin
 
 - The Airflow webserver, which runs the Airflow UI and can be accessed at `https://localhost:8080/`.
 - The Airflow scheduler, which is responsible for monitoring and triggering tasks.
-- The Airflow triggerer, an Airflow component used to run deferrable operators (not used in this use case).
-- The Airflow metadata database, a Postgres database which runs on port `5432`.
+- The Airflow triggerer, which is an Airflow component used to run deferrable operators.
+- The Airflow metadata database, which is a Postgres database that runs on port `5432`.
 - A local MinIO instance, which can be accessed at `https://localhost:9000/`.
 - A local MLflow instance, which can be accessed at `https://localhost:5000/`.
 
@@ -50,11 +52,11 @@ This command builds your project and spins up 6 Docker containers on your machin
 
 ### Data source
 
-This example uses the [Possum Regression dataset](https://www.kaggle.com/datasets/abrambeyer/openintro-possum) from Kaggle. It contains measurements of different attributes of 104 possums, such as total length, skull width, or age. This data was originally published by Lindenmayer et al. (1995) in the Australian Journal of Zoology and is commonly used to teach linear regression.
+This example uses the [Possum Regression dataset](https://www.kaggle.com/datasets/abrambeyer/openintro-possum) from Kaggle. It contains measurements of different attributes, such as total length, skull width, or age, for 104 possums. This data was originally published by Lindenmayer et al. (1995) in the Australian Journal of Zoology and is commonly used to teach linear regression.
 
 ### Project overview
 
-This project consists of three DAGs, which depend on each other using [Airflow datasets](airflow-datasets.md).
+This project consists of three DAGs which have dependency relationships through [Airflow datasets](airflow-datasets.md).
 
 ![Datasets view of the use case project showing the DAG feature_eng updating the datasets astro+s://data/possum.csv and s3://data_possum.csv. The train DAG is scheduled to run as soon as the s3://data_possum.csv is updated and updates the model_trained dataset. The predict DAG is scheduled to run on updates to the model_trained dataset and updates the astro+s3://data/possum_tail_length.csv](/img/examples/use-case-airflow-mlflow_datasets_view.png)
 
@@ -62,11 +64,11 @@ The [`feature_eng`](https://github.com/astronomer/use-case-mlflow/blob/main/dags
 
 ![Graph view of the feature_eng DAG showing a task creating the necessary MinIO buckets, a task group that prepares the MLflow experiment if it does not yet exist and data extraction and feature building tasks.](/img/examples/use-case-airflow-mlflow_feature_eng_dag_graph.png)
 
-The [`train`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/train.py) DAG trains a RidgeCV model on the features engineered in the previous DAG and then registers the model with MLflow using operators from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow).
+The [`train`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/train.py) DAG trains a RidgeCV model on the engineered features from `feature_eng` and then registers the model with MLflow using operators from the [MLflow Airflow provider](https://github.com/astronomer/airflow-provider-mlflow).
 
 ![Graph view of the train DAG showing tasks fetching data and experiment information and training the model. Afterwards a task group contains tasks to register the model with MLflow, create a model version and transition the model version.](/img/examples/use-case-airflow-mlflow_train_dag_graph.png)
 
-The [`predict`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/predict.py) DAG uses the trained model from the previous DAG to create predictions and plots them against the target values. 
+The [`predict`](https://github.com/astronomer/use-case-mlflow/blob/main/dags/predict.py) DAG uses the trained model from `train` to create predictions and plot them against the target values. 
 
 ![Graph view of the predict DAG showing the model and features being fetched. Afterwards the ModelLoadAndPredictOperator is used to run predictions with are plotted and saved as a file.](/img/examples/use-case-airflow-mlflow_predict_dag_graph.png)
 
@@ -108,8 +110,10 @@ def create_experiment(experiment_name, artifact_bucket):
     return new_experiment_information
 ```
 
-Feature engineering in the `build_features` task uses [Pandas for one hot encoding](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html) of categorical features and [scikit-learn to scale](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) numeric features.
+The `build_features` task completes feature engineering using [Pandas](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html) to one-hot encode categorical features and [scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html) to scale numeric features.
+
 The [mlflow](https://pypi.org/project/mlflow/) package is used to [track](https://mlflow.org/docs/latest/python_api/mlflow.html?highlight=start_run#mlflow.start_run) the scaler run in MLflow.
+
 The task is defined using the [`@aql.dataframe`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator from the [Astro Python SDK](astro-python-sdk.md).
 
 ```python
@@ -147,7 +151,7 @@ You can view the Scaler run in the MLflow UI at `localhost:5000`.
 
 #### Model training DAG
 
-The model training DAG is scheduled to run as soon as the last task in the feature engineering DAG completes using a [dataset](airflow-datasets.md).
+Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the model training DAG is scheduled to run as soon as the last task in the feature engineering DAG completes.
 
 ```python
 @dag(
@@ -173,7 +177,7 @@ def fetch_feature_df(**context):
 
 The ID number of the MLflow experiment is retrieved using the MLflowClientHook in the `fetch_experiment_id` task in order to track model training in the same experiment. 
 
-The `train_model` task, defined with the `@aql.dataframe` decorator, shows how model training can be parameterized when using Airflow. In this example, the hyperparameters, the `target_colum`, and the model class are hardcoded, but they could also be retrieved from upstream tasks via [XCom](airflow-passing-data-between-tasks.md) or passed into manual runs of the DAG via [DAG params](airflow-params.md).
+The `train_model` task, defined with the `@aql.dataframe` decorator, shows how model training can be parameterized when using Airflow. In this example, the hyperparameters, the `target_colum`, and the model class are hardcoded, but they could also be retrieved from upstream tasks via [XCom](airflow-passing-data-between-tasks.md) or passed into manual runs of the DAG using [DAG params](airflow-params.md).
 
 The project is set up to train the [scikit-learn RidgeCV model](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html) to predict the tail length of possums using information such as their age, total length, or skull width.
 
@@ -210,7 +214,7 @@ model_trained = train_model(
 )
 ```
 
-The run of the RidgeCV model can be viewed in the MLflow UI at `localhost:5000`.
+You can view the run of the RidgeCV model in the MLflow UI at `localhost:5000`.
 
 ![Experiments tab of the MLflow UI showing the Possum_tails experiment with the RidgeCV run.](/img/examples/use-case-airflow-mlflow_experiments_ridgecv.png)
 
