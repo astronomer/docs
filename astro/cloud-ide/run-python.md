@@ -35,7 +35,7 @@ In a Python cell, click **Dependencies** and select a cell to make it an explici
 
 To make a Python cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your Python cell. 
 
-To create data dependencies between Python cells, see [Pass data between cells](pass-data-to-cells.md).
+To create data dependencies between Python cells, see [Pass data between cells](pass-data-between-cells.md).
 
 ## View complete code for Python cells
 
