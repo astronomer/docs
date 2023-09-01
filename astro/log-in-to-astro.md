@@ -51,7 +51,7 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
 
     Confirmation messages appear in the Cloud UI and in the Astro CLI indicating that your login was successful and that your computer is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, see [astro workspace switch](cli/astro-workspace-switch.md).
 
-## Browserless authentication
+## Log in from a browserless system
 
 The following options are available if you're unable to use a browser for authentication:
 
@@ -93,20 +93,15 @@ You can belong to more than one Astro Organization. Having a role in an Organiza
 3. Click **Switch Organization**.
 4. Select the Organization that you want to switch to.
 
-## Frequently asked questions
+## Reset your Astro password
 
-### Where is the option to log in using single sign-on (SSO)?
+If you log in to Astro with a text password, you can reset your password from the Cloud UI login screen.
 
-If SSO is enabled for your domain, then you can enter your email on the `https://cloud.astronomer.io` login page and click **Continue** to access Astro through your IdP login page.
+1. Go to `cloud.astronomer.io`. If you are logged in, log out.
+2. On the login screen, enter your email address, then click **Continue**.
+3. Click **Forgot password?**
 
-### I no longer see the option to log in with a username and password. Is this expected?
+    ![Button to reset password on the Cloud UI login page](/img/docs/reset-password.png)
 
-If SSO is enabled for your email domain, then authenticating with a username and password is no longer an option. This allows your team to manage users only through your IdP.
-
-### After I enter my email and click Continue, I am prompted for a password. Is this expected?
-
-It's likely that your Organization has not configured SSO for your email domain. If this is the case, you can authenticate using Google, GitHub, or username/password as long as you've been invited to the Organization.
-
-### Why do I see the error “User is not assigned to this application” when I log in through SSO?
-
-This error indicates that your Organization has not assigned you to Astro through your IdP. Contact your administrator to be added through your IdP.
+4. Confirm your user email address is correct, then click **Continue**. Astronomer sends an email with a password reset option to the user email address.
+5. Follow the instructions in the email sent by Astronomer to reset your password. 

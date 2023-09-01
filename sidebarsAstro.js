@@ -56,6 +56,7 @@ module.exports = {
             "cloud-ide/run-sql",
             "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
+            "cloud-ide/pass-data-between-cells",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
@@ -74,25 +75,7 @@ module.exports = {
       items: [
         "deploy-code",
         "deploy-project-image",
-        "deploy-dags", 
-        "set-up-ci-cd", 
-        {
-          type: "category",
-          label: "CI/CD templates",
-          items: [
-            "ci-cd-templates/template-overview",
-            "ci-cd-templates/github-actions",
-            "ci-cd-templates/jenkins",
-            "ci-cd-templates/gitlab",
-            "ci-cd-templates/aws-s3",
-            "ci-cd-templates/aws-codebuild",
-            "ci-cd-templates/azure-devops",
-            "ci-cd-templates/gcs",
-            "ci-cd-templates/bitbucket",
-            "ci-cd-templates/circleci",
-            "ci-cd-templates/drone",
-          ],
-        },
+        "deploy-dags",
       ],
     },
     {
@@ -101,18 +84,56 @@ module.exports = {
       items: [
         "create-deployment",
         "configure-deployment-resources",
-        "manage-dags",
         {
           type: "category",
-          label: "Configure executors",
+          label: "Executors",
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
         "secrets-backend",
-        "manage-deployments-as-code",
-        "authorize-deployments-to-your-cloud"
+        "manage-dags",  
+        "authorize-deployments-to-your-cloud",
+      ],
+    },
+    {
+      type: "category",
+      label: "Automation & CI/CD",
+      items: [
+        "automation-overview",
+        "automation-authentication",
+        {
+          type: "category",
+          label: "CI/CD",
+          items: [
+            "set-up-ci-cd",
+            {
+              type: "category",
+              label: "CI/CD templates",
+              items: [
+                "ci-cd-templates/template-overview",
+                "ci-cd-templates/github-actions",
+                "ci-cd-templates/jenkins",
+                "ci-cd-templates/gitlab",
+                "ci-cd-templates/aws-s3",
+                "ci-cd-templates/aws-codebuild",
+                "ci-cd-templates/azure-devops",
+                "ci-cd-templates/gcs",
+                "ci-cd-templates/bitbucket",
+                "ci-cd-templates/circleci",
+                "ci-cd-templates/drone",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manage Deployments as code",
+          items: [
+            "manage-deployments-as-code",
+            "deployment-file-reference"],
+        }, 
       ],
     },
     {

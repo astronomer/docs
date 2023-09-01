@@ -35,6 +35,21 @@ Although it's not required for this tutorial, Astronomer also recommends install
 
 If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md).
 
+:::info
+
+If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+
+- `https://cloud.astronomer.io/`
+- `https://api.astronomer.io/`
+- `https://images.astronomer.cloud/`
+- `https://auth.astronomer.io/`
+- `https://updates.astronomer.io/`
+- `https://install.astronomer.io/`
+- `https://astro-<your-org>.datakin.com/`
+- `https://<your-org>.astronomer.run/`
+
+:::
+
 ## Step 1: Create a Deployment
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
