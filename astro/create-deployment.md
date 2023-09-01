@@ -19,7 +19,7 @@ There are three ways to create a Deployment:
 
 After you create a Deployment, you can deploy DAGs to it using the Astro CLI on your local machine or a continuous integration/continuous delivery (CI/CD) tool. All DAGs and tasks on Astro are executed within a Deployment.
 
-Every Deployment is hosted on an Astro cluster with its own dedicated resources that you can [customize](configure-deployment-resources.md) to fine-tune your resource usage. To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace. See [Deployment network isolation](data-protection.md#deployment-network-isolation).
+Every Deployment is hosted on an Astro cluster with its own dedicated resources that you can [customize](deployment-settings.md) to fine-tune your resource usage. To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace. See [Deployment network isolation](data-protection.md#deployment-network-isolation).
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
 
 3. Enter a **Name** for the Deployment.
 
-4. (Optional) Configure other details for your Deployment, including cluster, executor, and worker resources. If you have no specific resource requirements for running Airflow, the default configurations should work in most cases. For all available Deployment options, see [Configure Deployment resources](configure-deployment-resources.md).
+4. (Optional) Configure other details for your Deployment, including cluster, executor, and worker resources. If you have no specific resource requirements for running Airflow, the default configurations should work in most cases. For all available Deployment options, see [Deployment settings](deployment-settings.md).
 
 5. Click **Create Deployment**.
 
@@ -47,6 +47,6 @@ For more information about possible Deployment health statuses, see [Deployment 
 
 ## Next steps
 
-- [Configure Deployment resources](configure-deployment-resources.md)
+- [Deployment settings](deployment-settings.md)
 - [Set environment variables on Astro](environment-variables.md)
 - [Manage Deployment API keys](api-keys.md)

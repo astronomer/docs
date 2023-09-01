@@ -165,7 +165,7 @@ These commands can be used to manage API tokens as part of an automated workflow
 
 - You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
-- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](configure-deployment-resources.md#enforce-ci-cd-deploys) on a given Deployment. 
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment. 
 - You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted. 
 
 ## Astro CLI 1.15.1
@@ -847,7 +847,7 @@ You can now use `astro deployment update` to update certain configurations for a
 - Scheduler replicas
 - Worker resources
 
-This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
+This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Deployment settings](deployment-settings.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
 
 ## 1.2.0 (`astrocloud`)
 
@@ -896,7 +896,7 @@ You can now use the Astro CLI to create and delete Deployments on Astro with two
 - `astro deployment create`
 - `astro deployment delete`
 
-These commands are functionally identical to the [Deployment configuration](configure-deployment-resources.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
+These commands are functionally identical to the [Deployment configuration](deployment-settings.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
 
 ## 1.1.0 (`astrocloud`)
 
