@@ -45,8 +45,8 @@ This command builds your project and spins up 6 Docker containers on your machin
 - The Airflow scheduler, which is responsible for monitoring and triggering tasks.
 - The Airflow triggerer, which is an Airflow component used to run deferrable operators.
 - The Airflow metadata database, which is a Postgres database that runs on port `5432`.
-- A local MinIO instance, which can be accessed at `https://localhost:9000/`.
-- A local MLflow instance, which can be accessed at `https://localhost:5000/`.
+- A local [MinIO](https://min.io/) instance, which can be accessed at `https://localhost:9000/`.
+- A local [MLflow](https://mlflow.org/) instance, which can be accessed at `https://localhost:5000/`.
 
 ## Project contents
 
