@@ -9,9 +9,9 @@ id: configure-deployment-resources
   <meta name="og:description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
 </head>
 
-After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There's two categories of options for configuring your Astro Deployment to best meet your business and technical needs. 
+After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There's two categories of options for configuring your Astro Deployment to best meet your needs: metadata configuration and resource configuration.
 
-You can manage the administration of your Deployment, which includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro and remove resources that you're not using: 
+Use metadata configurations to manage the administration of your Deployment. This includes includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro: 
 
 - Update a Deployment name and description.
 - Add or delete a Deployment alert email.
@@ -25,7 +25,7 @@ You also have configuration options that allow you to customize the resource use
 - Change Scheduler resources.
 - Enforce CI/CD Deploys.
 - Enable High Availability.
-- Update your Airflow configuration
+- Update your Airflow configuration.
 
 For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.md).
 
@@ -34,7 +34,7 @@ For advanced Deployment resource configurations, see [Manage Airflow executors o
 This document focuses on configuring Deployments through the Cloud UI. To configure Deployments as code using the Astro CLI, see [Manage Deployments as code](manage-deployments-as-code.md).
 
 :::
-## Configure Metadata
+## Configure metadata
 
 ### Update a Deployment name and description
 
@@ -87,7 +87,7 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 3. Enter `Delete` and click **Yes, Continue**.
 
-## Configure Deployment Infrastructure Resources
+## Configure Deployment resources
 
 ### Update Airflow configurations
 
