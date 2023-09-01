@@ -28,6 +28,7 @@
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
 /astro/connect-external-services https://docs.astronomer.io/astro/category/connect-to-external-resources 301
+/astro/configure-deployment-resources /astro/deployment-settings 301
 
 # tutorial redirects 
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
@@ -61,7 +62,7 @@
 /airflow-api /astro/airflow-api 301
 /ci-cd /astro/set-up-ci-cd 301
 /cli-release-notes /astro/cli-release-notes 301
-/configure-deployment /astro/configure-deployment 301
+/configure-deployment /astro/deployment-settings 301
 /create-cluster /astro/create-cluster 301
 /create-project /astro/create-first-dag#step-1-create-an-astro-project 301
 /data-protection /astro/data-protection 301
@@ -95,7 +96,7 @@
 /astro/ci-cd /astro/set-up-ci-cd 301
 /cloud/cli-reference /astro/cli-reference 301
 /cloud/cli-release-notes /astro/cli-release-notes 301
-/cloud/configure-deployment /astro/configure-deployment 301
+/cloud/configure-deployment /astro/deployment-settings 301
 /cloud/create-cluster /astro/create-cluster 301
 /cloud/create-project /astro/create-first-dag#step-1-create-an-astro-project 301
 /cloud/data-protection /astro/data-protection 301
@@ -278,7 +279,7 @@
 /astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-gcp#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/connect-aws#resolving-services /astro/connect-aws#hostname-resolution-options 301
-/astro/configure-deployment /astro/configure-deployment-resources 301
+/astro/configure-deployment /astro/deployment-settings 301
 /astro/scheduler-logs /astro/view-logs 301
 /astro/deployment-metrics#astro-usage /astro/organization-metrics 301
 /astro/cross-account-role-setup /astro/install-aws 301

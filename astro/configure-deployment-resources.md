@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Deployment settings'
-title: 'Configure a Deployment'
-id: configure-deployment-resources
+title: 'Deployment settings'
+id: deployment-settings
 description: "Manage Deployment settings to customize your Deployment for your use case."
 ---
 
