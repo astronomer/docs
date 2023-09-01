@@ -5,7 +5,7 @@ id: pass-data-to-cells
 description: Learn how to run Python code by creating and configuring Python cells in the Astro Cloud IDE.
 ---
 
-You can use the output of an Astro Cloud IDE cell as the input for another cell in your pipeline. When you pass data from one cell to another, you create a data dependency between those tasks. A cell that is downstream of a data dependency will not run until the upstream cell finishes and produces data. The Astro Cloud IDE automatically renders these dependencies in your project code and in the **Pipeline** view of your project.
+You can use the output of an Astro Cloud IDE cell as the input for another cell in your pipeline. When you pass data from one cell to another, you create a data dependency which defines the order in which the cells must be executed. A cell that is downstream of a data dependency will not run until the upstream cell finishes and produces data. The Astro Cloud IDE automatically renders these dependencies in your project code and orders them in the **Pipeline** view of your project.
 
 Use this document to understand how to pass data to different types of Astro Cloud IDE cells.
 
