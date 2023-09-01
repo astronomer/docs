@@ -58,6 +58,7 @@ deployment:
         airflow_version: 2.6.3
         current_tag: 8.7.0
         status: CREATING
+        workloadIdentity: astro-release-name@provider-account.iam.gserviceaccount.com
         created_at: 2023-07-21T08:40:02.531Z
         updated_at: 2023-07-21T08:40:02.532Z
         deployment_url: cloud.astronomer.io/clk7zoqbf00f901hka4c66q2d/deployments/clkcbz5d01458926ewbjzubt3fx/analytics
