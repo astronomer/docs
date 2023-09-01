@@ -95,7 +95,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     
     Astronomer support will initiate a peering request and create the routing table entries in the Astro VPC.
 
-6. Wait for Astronomer support to send you the Astro VPC CIDR. Then, the owner of the target VPC needs to [accept the peering request](https://docs.aws.amazon.com/vpc/latest/peering/accept-vpc-peering-connection.html) and [create the routing table entries](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the target VPC.
+6. Wait for Astronomer support to send you the Astro VPC CIDR and VPC Peering ID. Then, the owner of the accepter VPC needs to [create back routes entries](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in accepter VPC, with Astro VPC CIDR as Destination and provided VPC Peering ID as Target.
 
 7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
 
