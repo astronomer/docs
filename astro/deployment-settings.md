@@ -102,7 +102,7 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 ## Configure Deployment resources
 
-Update Deployment resource settings to optimize the performance and reduce the cost of running Airflow in the cloud.
+Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
 
 ### Update Airflow configurations
 
