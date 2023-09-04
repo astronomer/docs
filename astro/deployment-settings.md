@@ -30,7 +30,7 @@ For advanced Deployment resource configurations, see [Manage Airflow executors o
 This document focuses on configuring Deployments through the Cloud UI. To configure Deployments as code using the Astro CLI, see [Manage Deployments as code](manage-deployments-as-code.md).
 
 :::
-## Configure details
+## Configure Deployment details
 
 ### Update a Deployment name and description
 
