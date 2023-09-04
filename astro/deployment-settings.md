@@ -30,7 +30,10 @@ For advanced Deployment resource configurations, see [Manage Airflow executors o
 This document focuses on configuring Deployments through the Cloud UI. To configure Deployments as code using the Astro CLI, see [Manage Deployments as code](manage-deployments-as-code.md).
 
 :::
+
 ## Configure Deployment details
+
+Deployment details define how users can view and interact with your Deployment. They include metadata settings, observability settings, and user access settings.
 
 ### Update a Deployment name and description
 
@@ -72,6 +75,20 @@ Only the users who are members of the target Workspace can access the Deployment
 3. Select the target Workspace where you want to transfer the Deployment. 
 4. Click **Transfer Deployment**.
 
+### Enforce CI/CD deploys
+
+By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
+
+- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API key, Workspace API token, or Organization API token.
+- You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Details** tab.
+3. Click **Edit Details**.
+4. In **CI/CD Enforcement**, click the toggle to **On**.
+
+You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
+
 ### Delete a Deployment
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
@@ -84,6 +101,8 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 3. Enter `Delete` and click **Yes, Continue**.
 
 ## Configure Deployment resources
+
+Update Deployment resource settings to optimize the performance and reduce the cost of running Airflow in the cloud.
 
 ### Update Airflow configurations
 
@@ -123,7 +142,6 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
     - **Default Pod Size**:
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
-
 
 Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
 
@@ -176,20 +194,6 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
     - **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers. 
 
 :::
-
-### Enforce CI/CD deploys
-
-By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
-
-- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API key, Workspace API token, or Organization API token.
-- You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Details** tab.
-3. Click **Edit Details**.
-4. In **CI/CD Enforcement**, click the toggle to **On**.
-
-You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
 
 ### Enable high availability
 
