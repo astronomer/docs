@@ -238,23 +238,3 @@ You can request Astronomer Support to add [tags](https://docs.aws.amazon.com/emr
 Tags can help your team identify your Astro clusters and associate them with a particular purpose or owner within your cloud provider ecosystem. 
 
 You can raise a request with [Astronomer Support](https://cloud.astronomer.io/support) to add or remove tags. To view your current cluster tags, see [View clusters](#view-clusters).
-
-## Authorize Workspaces to a cluster
-
-As an Organization Owner, you can keep teams, resources, and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over your cloud resources by ensuring that only authorized pipelines are running on specific clusters.
-
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
-2. Click **Clusters** tab and then select a cluster.
-3. Click the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
-4. Click **Restricted** and select the Workspaces that you want to map to the cluster. 
-5. Click **Update**.
-
-After you authorize Workspaces to a cluster, Astro treats the cluster as restricted. Restricted clusters appear as an option when creating a new Deployment only if the Deployment's Workspace is authorized to the cluster. 
-
-:::info 
-
-A cluster with authorized Workspaces can't host Deployments from any Workspaces that aren't authorized to the cluster. To map Workspaces to a cluster, you must first transfer any existing Deployments on the cluster to one of these Workspace.
-
-Similarly, to unauthorize a Workspace but keep its Deployments in the cluster, you must transfer your Deployments to a Workspace which is still authorized to the cluster. See [Transfer a Deployment to another Workspace](deployment-settings.md#transfer-a-deployment-to-another-workspace).
-
-:::

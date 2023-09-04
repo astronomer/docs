@@ -190,6 +190,7 @@ module.exports = {
           label: "Clusters",
           items: [
             "create-dedicated-cluster",
+            "authorize-workspaces-to-a-cluster",
             "resource-reference-hosted",
             {
               type: "category",
