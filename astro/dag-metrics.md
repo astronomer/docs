@@ -38,7 +38,6 @@ The **DAGs** page shows the following summary information about the DAGs for all
 
 To view more detailed information about a specific DAG, you can either **Open in Airflow** or select the DAG to manage it from the Cloud UI. After you open the detailed view of a specific DAG, you can find both the same summary metrics visible on the DAGs overview page and detailed views of the DAG bar chart, graph, and code.
 
-See [Manage DAGs](manage-dags.md).
 
 ## See also 
 
