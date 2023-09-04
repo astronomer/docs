@@ -1,7 +1,7 @@
 ---
 title: 'Export Astro audit logs'
 id: audit-logs
-sidebar_label: Audit logs
+sidebar_label: Export Audit logs
 ---
 
 :::caution

@@ -1,6 +1,6 @@
 ---
 title: 'Configure an external secrets backend on Astro'
-sidebar_label: 'Secrets backend'
+sidebar_label: 'Secrets backends'
 id: secrets-backend
 ---
 

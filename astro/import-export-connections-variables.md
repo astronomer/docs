@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Import and export'
+sidebar_label: 'Import and export connections and variables'
 title: 'Import and export Airflow connections and variables'
 id: import-export-connections-variables
 description: "Learn how to import and export Apache Airflow objects between Airflow environments on Astro"

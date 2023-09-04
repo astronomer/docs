@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Upgrade Airflow'
-title: 'Upgrade Apache Airflow and Astro Runtime'
+sidebar_label: 'Upgrade Astro Runtime'
+title: 'Upgrade Astro Runtime'
 id: upgrade-runtime
 ---
 
