@@ -57,7 +57,6 @@ This project uses a [Scikit learn dataset](https://scikit-learn.org/stable/modul
 
 This project consists of two DAGs. The [astro_ml_producer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_producer.py) is the producer DAG that provides the data. It extracts the California Housing dataset from Scikit Learn and builds a model. The [astro_ml_consumer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_consumer.py) is the consumer DAG that uses the data to train a model and generate predictions.
 
-
 #### Producer DAG
 
 The producer DAG, `astro_ml_producer`, has three tasks.
@@ -65,10 +64,11 @@ The producer DAG, `astro_ml_producer`, has three tasks.
 The `extract_housing_data` task imports data from SciKit learn using the fetch_california_housing module, and returns it as a dataframe for the next tasks to use using the Astro SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator.
 
 ```python
-    @aql.dataframe(task_id='extract')
-    def extract_housing_data() -> DataFrame:
-        from sklearn.datasets import fetch_california_housing
-        return fetch_california_housing(download_if_missing=True, as_frame=True).frame
+@aql.dataframe(task_id="extract")
+def extract_housing_data() -> DataFrame:
+    from sklearn.datasets import fetch_california_housing
+
+    return fetch_california_housing(download_if_missing=True, as_frame=True).frame
 ```
 
 Then, the `build_features` task uses the Astro SDK [`@aql.dataframe`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to implement a custom Python function that completes the following:
@@ -82,42 +82,46 @@ Then, the `build_features` task uses the Astro SDK [`@aql.dataframe`](https://as
 - Creates an Airflow dataset object called `built_features` with `Dataset(dataset_uri))`. This tells Airflow that this dataset is produced by this task.
 
 ```python
-    @aql.dataframe(task_id='featurize', outlets=Dataset(dataset_uri))
-    def build_features(raw_df:DataFrame, model_dir:str) -> DataFrame:
-        from sklearn.preprocessing import StandardScaler
-        import pandas as pd
-        from joblib import dump
-        from s3fs import S3FileSystem
+@aql.dataframe(task_id="featurize", outlets=Dataset(dataset_uri))
+def build_features(raw_df: DataFrame, model_dir: str) -> DataFrame:
+    from sklearn.preprocessing import StandardScaler
+    import pandas as pd
+    from joblib import dump
+    from s3fs import S3FileSystem
 
-        fs = S3FileSystem(key='minioadmin', secret='minioadmin', client_kwargs={'endpoint_url': "http://host.docker.internal:9000/"})
+    fs = S3FileSystem(
+        key="minioadmin",
+        secret="minioadmin",
+        client_kwargs={"endpoint_url": "http://host.docker.internal:9000/"},
+    )
 
-        target = 'MedHouseVal'
-        X = raw_df.drop(target, axis=1)
-        y = raw_df[target]
+    target = "MedHouseVal"
+    X = raw_df.drop(target, axis=1)
+    y = raw_df[target]
 
-        scaler = StandardScaler()
-        X = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
-        metrics_df = pd.DataFrame(scaler.mean_, index=X.columns)[0].to_dict()
+    scaler = StandardScaler()
+    X = pd.DataFrame(scaler.fit_transform(X), columns=X.columns)
+    metrics_df = pd.DataFrame(scaler.mean_, index=X.columns)[0].to_dict()
 
-        #Save scalar for later monitoring and eval
-        with fs.open(model_dir+'/scalar.joblib', 'wb') as f:
-            dump([metrics_df, scaler], f)
+    # Save scalar for later monitoring and eval
+    with fs.open(model_dir + "/scalar.joblib", "wb") as f:
+        dump([metrics_df, scaler], f)
 
-        X[target]=y
+    X[target] = y
 
-        return X
+    return X
 ```
 
 Finally, the `save_data_to_s3` task uses the Astro SDK [@aql.export_file](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html) decorator to save the raw California Housing Dataset as `housing.csv` to the local S3Filesystem. It runs in parallel to the `build_features` task, both a clean dataset and a feature engineered dataset are saved. 
 
 ```python
-    loaded_data = aql.export_file(task_id='save_data_to_s3', 
-                                     input_data=extract_df, 
-                                     output_file=File(os.path.join(data_bucket, 'housing.csv')), 
-                                     if_exists="replace")
+loaded_data = aql.export_file(
+    task_id="save_data_to_s3",
+    input_data=extract_df,
+    output_file=File(os.path.join(data_bucket, "housing.csv")),
+    if_exists="replace",
+)
 ```
-
-
 
 #### Consumer DAG
 
@@ -126,11 +130,17 @@ The [`astro_ml_consumer_DAG`](https://github.com/astronomer/use-case-produce-con
 First, the `built_features` Dataset from the previous DAG is instantiated so that it can be used as a scheduling parameter. This DAG will start when the `built_features` Dataset is updated by the [astro_ml_producer_DAG](https://github.com/astronomer/use-case-produce-consume-ml/blob/main/astromlfinal/dags/astro_ml_producer.py). 
 
 ```python
-    dataset_uri = "built_features"
-    ingestion_dataset = Dataset(dataset_uri)
+dataset_uri = "built_features"
+ingestion_dataset = Dataset(dataset_uri)
 
-    @dag(dag_id='astro_ml_consumer', schedule=[Dataset(dataset_uri)], start_date=datetime(2023, 1, 1), catchup=False)
-    def astro_ml_consumer():
+
+@dag(
+    dag_id="astro_ml_consumer",
+    schedule=[Dataset(dataset_uri)],
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+)
+def astro_ml_consumer():
 ```
 
 Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to do the following: 
@@ -143,67 +153,77 @@ Then, the `train_model` task uses the Astro SDK [@aql.dataframe](https://astro-s
 
 - Serialize and save the trained model to the specified `model_dir` using the dump function from joblib. The file name for the model is set as 'ridgecv.joblib'. The function returns the URI of the saved model file `(model_file_uri)`, which is the concatenation of `model_dir` and 'ridgecv.joblib'.
 
-
 ```python
-    @aql.dataframe(task_id='train')
-    def train_model(feature_df:ingestion_dataset, model_dir:str) -> str:
-        from sklearn.linear_model import RidgeCV
-        import numpy as np
-        from joblib import dump
-        from s3fs import S3FileSystem
+@aql.dataframe(task_id="train")
+def train_model(feature_df: ingestion_dataset, model_dir: str) -> str:
+    from sklearn.linear_model import RidgeCV
+    import numpy as np
+    from joblib import dump
+    from s3fs import S3FileSystem
 
-        fs = S3FileSystem(key='minioadmin', secret='minioadmin', client_kwargs={'endpoint_url': "http://host.docker.internal:9000/"})
-        
-        target = 'MedHouseVal'
-        pandasfeature = fs.open("s3://local-xcom/wgizkzybxwtzqffq9oo56ubb5nk1pjjwmp06ehcv2cyij7vte315r9apha22xvfd7.parquet")
-        cleanpanda = pd.read_parquet(pandasfeature)
+    fs = S3FileSystem(
+        key="minioadmin",
+        secret="minioadmin",
+        client_kwargs={"endpoint_url": "http://host.docker.internal:9000/"},
+    )
 
-        model = RidgeCV(alphas=np.logspace(-3, 1, num=30))
+    target = "MedHouseVal"
+    pandasfeature = fs.open(
+        "s3://local-xcom/wgizkzybxwtzqffq9oo56ubb5nk1pjjwmp06ehcv2cyij7vte315r9apha22xvfd7.parquet"
+    )
+    cleanpanda = pd.read_parquet(pandasfeature)
 
-        reg = model.fit(cleanpanda.drop(target, axis=1), cleanpanda[target ])
-        model_file_uri = model_dir+'/ridgecv.joblib'
+    model = RidgeCV(alphas=np.logspace(-3, 1, num=30))
 
-        with fs.open(model_file_uri, 'wb') as f:
-            dump(model, f) 
+    reg = model.fit(cleanpanda.drop(target, axis=1), cleanpanda[target])
+    model_file_uri = model_dir + "/ridgecv.joblib"
 
-        return model_file_uri
+    with fs.open(model_file_uri, "wb") as f:
+        dump(model, f)
+
+    return model_file_uri
 ```
 
 Then, the `predict_housing` task uses the Astro SDK [`@aql.dataframe`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator to load the trained model and feature DataFrame from the local S3FileSystem, make predictions on the features DataFrame, add the predicted values to the feature DataFrame, and return the feature DataFrame with the predicted values included.
 
 ```python
-    @aql.dataframe(task_id='predict')
-    def predict_housing(feature_df:DataFrame, model_file_uri:str) -> DataFrame:
-        from joblib import load
-        from s3fs import S3FileSystem
+@aql.dataframe(task_id="predict")
+def predict_housing(feature_df: DataFrame, model_file_uri: str) -> DataFrame:
+    from joblib import load
+    from s3fs import S3FileSystem
 
-        fs = S3FileSystem(key='minioadmin', secret='minioadmin', client_kwargs={'endpoint_url': "http://host.docker.internal:9000/"})
-        with fs.open(model_file_uri, 'rb') as f:
-            loaded_model = load(f) 
-        featdf = fs.open("s3://local-xcom/wgizkzybxwtzqffq9oo56ubb5nk1pjjwmp06ehcv2cyij7vte315r9apha22xvfd7.parquet")
-        cleandf = pd.read_parquet(featdf)
+    fs = S3FileSystem(
+        key="minioadmin",
+        secret="minioadmin",
+        client_kwargs={"endpoint_url": "http://host.docker.internal:9000/"},
+    )
+    with fs.open(model_file_uri, "rb") as f:
+        loaded_model = load(f)
+    featdf = fs.open(
+        "s3://local-xcom/wgizkzybxwtzqffq9oo56ubb5nk1pjjwmp06ehcv2cyij7vte315r9apha22xvfd7.parquet"
+    )
+    cleandf = pd.read_parquet(featdf)
 
-        target = 'MedHouseVal'
+    target = "MedHouseVal"
 
-        cleandf['preds'] = loaded_model.predict(cleandf.drop(target, axis=1))
+    cleandf["preds"] = loaded_model.predict(cleandf.drop(target, axis=1))
 
-        return cleandf
+    return cleandf
 ```
 
 Finally, the `save_predictions` task uses the Astro SDK [`@aql.export_file`](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/export.html) decorator to save the predictions dataframe in the local S3FileSystem. 
 
 ```python
-    pred_file = aql.export_file(task_id='save_predictions', 
-                                     input_data=pred_df, 
-                                     output_file=File(os.path.join(data_bucket, 'housing_pred.csv')),
-                                     if_exists="replace")
+pred_file = aql.export_file(
+    task_id="save_predictions",
+    input_data=pred_df,
+    output_file=File(os.path.join(data_bucket, "housing_pred.csv")),
+    if_exists="replace",
+)
 ```
-
 
 ## See also
 
 - Tutorial: [How to Write a DAG with the Astro SDK](https://docs.astronomer.io/learn/astro-python-sdk).
 - Documentation: [Airflow Datasets Guide](https://docs.astronomer.io/learn/airflow-datasets).
 - Webinar: [How to Orchestrate Machine Learning Workflows With Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-machine-learning-workflows-with-airflow/).
-
-
