@@ -93,8 +93,6 @@ module.exports = {
         "api-keys",
         "environment-variables",
         "secrets-backend",
-        "manage-dags",  
-        "authorize-deployments-to-your-cloud",
       ],
     },
     {
@@ -140,6 +138,7 @@ module.exports = {
       type: "category",
       label: "Observability",
       items: [
+        "manage-dags",
         "view-logs",
         {
           type: "category",
@@ -184,6 +183,11 @@ module.exports = {
           type: "category",
           label: "Workspaces",
           items: ["manage-workspaces", "workspace-api-tokens"],
+        },
+        {
+          type: "category",
+          label: "Deployments",
+          items: ["authorize-deployments-to-your-cloud", "transfer-a-deployment"],
         },
         {
           type: "category",
