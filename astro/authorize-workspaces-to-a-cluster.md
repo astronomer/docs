@@ -16,8 +16,8 @@ Use this document to learn restrict a cluster so that only authorized Workspaces
 
 ## Authorize your workspace
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
-2. Click **Clusters** in the left pane and then select a cluster.
+1. In the Cloud UI, click your Workspace name to view more options, then click **Organization Settings**.
+2. Click **Clusters** and then select a cluster.
 3. Go to the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
 4. Click **Restricted** and select the Workspaces that you want to authorize to the cluster.
 5. Click **Update**.
@@ -28,6 +28,6 @@ After you authorize Workspaces to a cluster, Astro treats the cluster as restric
 
 A restricted cluster can't host Deployments from an unauthorized Workspace. To restrict a cluster that's currently running Deployments from unauthorized Workspaces, you must transfer the Deployments from these Workspaces to the Workspaces you want to authorize.
 
-Similarly, to unauthorize a Workspace but keep its Deployments in the cluster, you must transfer your Deployments to a Workspace which is still authorized to the cluster. See [Transfer a Deployment to another Workspace](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
+Similarly, to unauthorize a Workspace but still keep its Deployments in the cluster, you must transfer your Deployments to a Workspace that is still authorized to the cluster. See [Transfer a Deployment to another Workspace](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
 
 :::
