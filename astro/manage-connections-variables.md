@@ -108,7 +108,7 @@ You can use Airflow's system-level environment variables to store connections an
 
 While it's possible to manage Airflow connections and variables with these strategies, Astronomer doesn't recommend them at scale: 
 
-- You can use the Airflow REST API to programmatically create Airflow connections and variables for a Deployment. Airflow objects created with the API are stored in the Airflow metadata database and hence visible on the Airflow UI.
+- You can use the Airflow REST API to programmatically create Airflow connections and variables for a Deployment. Airflow objects created with the API are stored in the Airflow metadata database and visible in the Airflow UI.
 - For local Astro projects, you can use `airflow_settings.yaml` for defining your connections and variables. See [Configure `airflow_settings.yaml`](develop-project.md#configure-airflow_settingsyaml-local-development-only) for more details.
 
 ## See also

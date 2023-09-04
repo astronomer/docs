@@ -157,6 +157,6 @@ To confirm a successful installation, in the Cloud UI select a Workspace and on 
 
 - [Set up an identity provider](configure-idp.md)
 - [Install the Astro CLI](cli/overview.md)
-- [Configure Deployments](configure-deployment-resources.md)
+- [Deployment settings](deployment-settings.md)
 - [Deploy code](deploy-code.md)
 - [Manage Organization users](manage-organization-users.md)

@@ -9,7 +9,7 @@ View task and component logs for your DAGs to troubleshoot your data pipelines a
 
 ## Log and message types
 
-- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
+- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-resources).
 
 - _Triggerer logs_ describe the performance of the triggerer, the Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
@@ -77,7 +77,7 @@ To view task logs in the Airflow UI
 
 ## View Airflow scheduler logs
 
-You can access the past 24 hours of scheduler logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-size).
+You can access the past 24 hours of scheduler logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-size).
 
 1. In the Cloud UI, select a Workspace and then a Deployment.
 

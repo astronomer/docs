@@ -2,12 +2,8 @@
 title: 'Configure an external secrets backend on Astro'
 sidebar_label: 'Secrets backends'
 id: secrets-backend
+description: "Learn to configure a secrets backend on Astro to store Airflow connections and variables"
 ---
-
-<head>
-  <meta name="description" content="Learn how you can configure a secrets backend on Astro to store Airflow variables and connections in a secure, centralized location that complies with your organization's security requirements." />
-  <meta name="og:description" content="Learn how you can configure a secrets backend on Astro to store Airflow variables and connections in a secure, centralized location that complies with your organization's security requirements." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

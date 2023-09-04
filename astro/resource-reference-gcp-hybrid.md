@@ -134,7 +134,7 @@ The following table lists all available instance types for worker node pools, as
 | c2-standard-4      | 2 CPUs  | 14.5 GiB MEM  |
 | c2-standard-8      | 6 CPUs  | 30.5 GiB MEM  |
 
-If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
+If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
 
 ## Related documentation
 

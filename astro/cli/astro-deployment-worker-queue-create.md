@@ -5,7 +5,7 @@ id: astro-deployment-worker-queue-create
 description: Reference documentation for astro deployment worker-queue create.
 ---
 
-Create a [worker queue](configure-deployment-resources.md#worker-queues on) for a Deployment on Astro. This command is functionally identical to creating a worker queue in the Cloud UI.
+Create a [worker queue](deployment-settings.md#worker-queues on) for a Deployment on Astro. This command is functionally identical to creating a worker queue in the Cloud UI.
 
 ## Usage
 
