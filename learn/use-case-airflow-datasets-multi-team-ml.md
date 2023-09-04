@@ -16,11 +16,11 @@ This setup has two main advantages:
 - Two teams can work independently on their specific sections of the pipeline without needing to coordinate with each other outside of the initial set up. 
 - Because the consumer DAG only triggers after the data arrives, you can avoid situations where the producer DAG takes longer than expected to complete, or where the consumer DAG runs on incomplete data.
 
-![Diagram showing the relationship between the two DAGs](/img/examples/usecaseconsumerproducerfigma.png)
+![Diagram showing the relationship between the two DAGs](/img/examples/use-case-airflow-ml-datasets_usecaseconsumerproducerfigma.png)
 
 When you run the project locally, you can see the project's datasets and their relationships to each DAG in the Airflow UI **Datasets** page:
 
-![Datasets View screenshot](/img/examples/datasetsview.png)
+![Datasets View screenshot](/img/examples/use-case-airflow-ml-datasets_datasetsview.png)
 
 ## Before you start
 
@@ -45,7 +45,7 @@ This command builds your Astro project into a Docker image and spins up Docker c
 
 After the command finishes, open the Airflow UI at `https://localhost:8080/` and toggle on the `astro_ml_producer` and `astro_ml_consumer` DAGs. Then trigger the `astro_ml_producer` DAG using the play button. You'll see that the `astro_ml_consumer` DAG starts after `astro_ml_producer` completes. 
 
-![Airflow UI View screenshot](/img/examples/airflowuiview.png)
+![Airflow UI View screenshot](/img/examples/use-case-airflow-ml-datasets_airflowuiview.png)
 
 ## Project contents
 
