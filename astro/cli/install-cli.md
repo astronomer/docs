@@ -140,7 +140,7 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 
 2. Rename the file to `astro.exe`.
 
-3. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` is stored in `C:\Users\username\astro`, you add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html).
+3. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` is stored in `C:\Users\username\astro.exe`, you add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html).
 
 4. Restart your machine.
 
@@ -217,7 +217,7 @@ winget install -e --id Astronomer.Astro
 
 3. Rename the file to `astro.exe`.
 
-4. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astro`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
+4. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astro.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
 
 5. Restart your machine.
 
@@ -273,7 +273,7 @@ winget uninstall -e --id Astronomer.Astro
 To uninstall the Astro CLI on Windows:
 
 1. Delete the filepath for `astro` from your Windows PATH environment variable.
-2. Delete `astro`.
+2. Delete `astro.exe`.
 
 </TabItem>
 
