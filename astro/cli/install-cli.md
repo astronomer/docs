@@ -110,7 +110,7 @@ By default, the Astro CLI uses Docker as its container management engine for run
     
     From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
 
-3. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro`.
+3. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
 
 4. Run `astro version` to confirm the Astro CLI is installed properly.
 
@@ -274,7 +274,7 @@ winget uninstall -e --id Astronomer.Astro
 
 To uninstall the Astro CLI on Windows:
 
-1. Delete the filepath for `astro` from your Windows PATH environment variable.
+1. Delete the filepath for `astro.exe` from your Windows PATH environment variable.
 2. Delete `astro.exe`.
 
 </TabItem>
