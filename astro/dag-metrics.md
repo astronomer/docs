@@ -9,12 +9,6 @@ id: dag-metrics
   <meta name="og:description" content="Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting." />
 </head>
 
-:::info
-
-DAG metrics are currently available only on [Astro Hosted](overview.md). Support on Astro Hybrid is coming soon.
-
-:::
-
 The **DAGs** page in the Cloud UI lets you view and manage each DAG running on your Workspace, as well as find detailed information about your DAG and its code. These summary and detailed metrics allow you to see information such as the outcomes of your DAG runs and DAG's code. You can use this to check your DAG's performance, debug issues in your DAG code and schedule, and confirm your DAG alerts have been configured correctly.
 
 To access the **DAGs** page, you can either click **DAGs** on your sidebar or click **View DAGs** on a Deployment's information page.
