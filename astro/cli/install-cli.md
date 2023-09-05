@@ -110,7 +110,7 @@ By default, the Astro CLI uses Docker as its container management engine for run
     
     From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
 
-3. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
+3. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro`.
 
 4. Run `astro version` to confirm the Astro CLI is installed properly.
 
@@ -138,9 +138,9 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 
     For example, to install v1.18.2 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.18.2_windows_amd64.exe`.
 
-2. Rename the file to `astro`.
+2. Rename the file to `astro.exe`.
 
-3. Add the filepath for the directory containing the new `astro` as a PATH environment variable. For example, if `astro` is stored in `C:\Users\username\astro`, you add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html).
+3. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` is stored in `C:\Users\username\astro`, you add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html).
 
 4. Restart your machine.
 
@@ -209,15 +209,15 @@ winget install -e --id Astronomer.Astro
 
 <TabItem value="windows">
 
-1. Delete the existing `astro` file on your machine.
+1. Delete the existing `astro.exe` file on your machine.
 
 2. Go to the [Releases page](https://github.com/astronomer/astro-cli/releases) of the Astro CLI GitHub repository, scroll to a CLI version, and then download the `.exe` file that matches the CPU architecture of your machine.
 
      For example, to upgrade to v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, you download `astro_1.0.0-converged_windows_amd64.exe`.
 
-3. Rename the file to `astro`.
+3. Rename the file to `astro.exe`.
 
-4. Add the filepath for the directory containing the new `astro` as a PATH environment variable. For example, if `astro` was stored in `C:\Users\username\astro`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
+4. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astro`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
 
 5. Restart your machine.
 
