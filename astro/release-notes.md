@@ -41,7 +41,7 @@ You can also now use the Astro CLI to specify an optional description for your d
 
 Python cells that generate figures using [Matplotlib](https://matplotlib.org/), [Plotly](https://plotly.com/graphing-libraries/), or any libraries that extend these tools now show the figures they render in the Astro Cloud IDE. When you run a Python cell, any figures it generates appear in a new **Figures** tab.
 
-![A Python cell that renders a chart with plotly, and the rendered chart in the Figures tab](img/release-notes/ide-figures.md)
+![A Python cell that renders a chart with plotly, and the rendered chart in the Figures tab](/img/release-notes/ide-figures.md)
 
 ## August 29, 2023
 
