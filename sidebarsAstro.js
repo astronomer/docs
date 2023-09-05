@@ -93,6 +93,7 @@ module.exports = {
         "api-keys",
         "environment-variables",
         "secrets-backend",
+        "manage-dags", 
       ],
     },
     {
@@ -138,7 +139,6 @@ module.exports = {
       type: "category",
       label: "Observability",
       items: [
-        "manage-dags",
         "view-logs",
         {
           type: "category",
