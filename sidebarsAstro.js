@@ -174,20 +174,13 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Organizations",
-          items: [
-            "organization-api-tokens",
-          ],
+          label: "Deployments",
+          items: ["authorize-deployments-to-your-cloud", "transfer-a-deployment"],
         },
         {
           type: "category",
           label: "Workspaces",
           items: ["manage-workspaces", "workspace-api-tokens"],
-        },
-        {
-          type: "category",
-          label: "Deployments",
-          items: ["authorize-deployments-to-your-cloud", "transfer-a-deployment"],
         },
         {
           type: "category",
@@ -206,6 +199,13 @@ module.exports = {
               },
               items: ["connect-aws", "connect-azure", "connect-gcp"],
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Organizations",
+          items: [
+            "organization-api-tokens",
           ],
         },
         {
