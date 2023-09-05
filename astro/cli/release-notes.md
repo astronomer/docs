@@ -67,6 +67,7 @@ You can use the new `astro dev upgrade-test` command to anticipate and address p
 
 ### Additional improvements
 
+- You can now specify the `--description` flag with `astro deploy` to add a description for your deploy. You can use this description to let other users know why you made a deploy or what changes a deploy contains. 
 - You can now specify the `--role` flag with `astro organization team create/update` to update a Team's Organization-level role. 
 - You can now specify the `--execution-date` flag with `astro run` to trigger a DAG run for a specific execution date.
 - You can now specify the `--verbose` flag with `astro run` to stream all logs to your terminal after the DAG run triggers. 

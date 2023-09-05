@@ -76,6 +76,7 @@ module.exports = {
         "deploy-code",
         "deploy-project-image",
         "deploy-dags",
+        "view-deploy-history",
       ],
     },
     {

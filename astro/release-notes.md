@@ -27,6 +27,22 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## September 5, 2023
+
+### View deploy history in the Cloud UI
+
+<HostedBadge/>
+
+When you view a Deployment in the Cloud UI, you can now open the **Deploy History** tab to view a table of all code deploys. The table shows who made deploys, when they made the deploys, and what Astro Runtime image they used for the deploy. 
+
+You can also now use the Astro CLI to specify an optional description for your deploys using the `--description` flag. Deploy descriptions appear in the **Deploy History** table and are useful for telling other Workspace members why you made a deploy or what changes it contains.
+
+### View rendered data figures in the Astro Cloud IDE
+
+Python cells that generate figures using [Matplotlib](https://matplotlib.org/), [Plotly](https://plotly.com/graphing-libraries/), or any libraries that extend these tools now show the figures they render in the Astro Cloud IDE. When you run a Python cell, any figures it generates appear in a new **Figures** tab.
+
+![A Python cell that renders a chart with plotly, and the rendered chart in the Figures tab](img/release-notes/ide-figures.md)
+
 ## August 29, 2023
 
 ### Changes to Workspace user roles
