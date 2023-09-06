@@ -1,8 +1,8 @@
 ---
-sidebar_label: 'Manage Organization users'
+sidebar_label: 'Organization users'
 title: 'Manage users in an Astro Organization'
 id: manage-organization-users
-description: Add, edit, or remove users at the Organization level in the Cloud UI.
+description: Add, edit, or remove users within an Organization on Astro.
 ---
 
 As an Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Organization.

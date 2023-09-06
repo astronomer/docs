@@ -225,6 +225,6 @@ When Astronomer support confirms that your Astro cluster has been created, you c
 
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/overview.md)
-- [Configure Deployments](configure-deployment-resources.md)
+- [Deployment settings](deployment-settings.md)
 - [Deploy code](deploy-code.md)
 - [Manage Organization users](manage-organization-users.md)

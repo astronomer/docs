@@ -210,5 +210,4 @@ req = requests.delete(
 
 # print the API response
 print(req.text)
-
 ```

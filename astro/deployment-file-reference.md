@@ -86,8 +86,8 @@ When you add environment variables using a Deployment file, you must provide a `
 The `configuration` section contains all of the basic settings that you can configure from the Deployment **Details** page in the Cloud UI. See:
 
 - [Create a Deployment](create-deployment.md#create-a-deployment).
-- [Update a Deployment name and description](configure-deployment-resources.md#update-a-deployment-name-and-description).
-- [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
+- [Update a Deployment name and description](deployment-settings.md#update-a-deployment-name-and-description).
+- [Scheduler resources](deployment-settings.md#scheduler-resources).
 
 ### `deployment.worker_queues`
 

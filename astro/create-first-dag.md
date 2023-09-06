@@ -64,7 +64,7 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment are healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
     
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Configure a Deployment](configure-deployment-resources).
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Deployment settings](deployment-settings.md).
 
 ## Step 2: Create an Astro project
 

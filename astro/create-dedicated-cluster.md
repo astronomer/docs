@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Create a dedicated Astro cluster'
-title: 'Create a dedicated cluster'
+sidebar_label: 'Create a dedicated cluster'
+title: 'Create a dedicated Astro cluster'
 id: 'create-dedicated-cluster'
 ---
 

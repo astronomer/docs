@@ -1,8 +1,8 @@
 ---
-sidebar_label: 'Manage Workspace users'
+sidebar_label: 'Workspace users'
 title: 'Manage users in your Astro Workspace'
 id: manage-workspace-users
-description: Add, edit, or remove users in the Cloud UI.
+description: Add, edit, or remove users within a Workspace on Astro.
 ---
 
 As a Workspace Owner or an Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Workspace.

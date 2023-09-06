@@ -65,7 +65,7 @@ A Deployment file is a complete snapshot of an existing Deployment at the point 
 
 When you update a Deployment with a Deployment file, keep the following in mind:
 
-- You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
+- You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](deployment-settings.md#transfer-a-deployment-to-another-workspace).
 - You can't change the Astro Runtime version of the Deployment. To upgrade Astro Runtime, you must update the Dockerfile in your Astro project. See [Upgrade Astro Runtime](upgrade-runtime.md).
 - Environment variables marked as secret in the Cloud UI will be exported with a blank `value` to your Deployment file. To redeploy using the Deployment file, you either need to provide the `value` again in the Deployment file or delete the object for the variable. Otherwise, `astro deployment create` will fail. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
 

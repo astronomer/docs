@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Astro Runtime architecture"
+sidebar_label: "Architecture"
 title: "Astro Runtime architecture"
 id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.

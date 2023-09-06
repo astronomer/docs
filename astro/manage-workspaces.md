@@ -49,7 +49,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 
     - **Name**: The name of your Workspace
     - **Description**: The description of your Workspace
-    - **CI/CD Enforcement Default**: Determines whether new Deployments in the Workspace enforce CI/CD deploys by default. This default can be overridden at the Deployment level. See [Enforce CI/CD deploys](configure-deployment-resources.md#enforce-ci-cd-deploys).
+    - **CI/CD Enforcement Default**: Determines whether new Deployments in the Workspace enforce CI/CD deploys by default. This default can be overridden at the Deployment level. See [Enforce CI/CD deploys](deployment-settings.md#enforce-ci-cd-deploys).
 
 ## Delete a Workspace
 
