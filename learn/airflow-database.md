@@ -15,7 +15,7 @@ In this guide, you'll learn everything you need to know about the Airflow metada
 - Database specifications.
 - Important content stored in the database.
 - Best practices for using the metadata database.
-- Using the Airflow REST API to access the metadata database.
+- How to use the Airflow REST API to access the metadata database.
 
 ## Assumed knowledge
 
@@ -97,7 +97,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 - Memory in the Airflow metadata database can be limited depending on your setup, and running low on memory in your metadata database can cause performance issues in Airflow. This is one of the many reasons why Astronomer advises against moving large amounts of data with XCom, and recommends using a cleanup and archiving mechanism in any production deployments.
 
-- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/) with a built-in scalable and resilient best-practice metadata database.
+- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/) with a built-in scalable and resilient metadata database.
 
 - When configuring a database backend, make sure your version is fully supported by checking the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#choosing-database-backend).
 
@@ -105,7 +105,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 ## Use the Airflow REST API to access the metadata database
 
-The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [stable Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). 
+The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). 
 
 Between the UI and API, much of the metadata database can be viewed without the risk inherent in direct querying. In rare cases where neither the Airflow UI nor the REST API can provide sufficient data, it is possible to use SQLAlchemy with [Airflow models](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/index.html) to access data from the metadata database. Direct querying of the metadata database is not recommended since direct manipulation can result in corruption of your Airflow instance.
 
