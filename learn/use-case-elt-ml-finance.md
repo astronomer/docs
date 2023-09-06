@@ -41,6 +41,8 @@ This command builds your project and spins up 6 Docker containers on your machin
 - A local [MinIO](https://min.io/) instance, which can be accessed at `https://localhost:9000/`.
 - A local [Postgres](https://www.postgresql.org/) instance, that runs on port `5433`.
 
+To run the project, unpause all DAGs. The `in_finance_data` and `finance_elt` DAGs will start their first runs automatically. Note that the first two tasks of the `finance_elt` DAG are deferrable operators that wait for files to be created in the object storage, the operators are set to poke once per minute, you can change this behavior by setting their `poke_interval` to a different timespan.
+
 ## Project contents
 
 ### Data source
