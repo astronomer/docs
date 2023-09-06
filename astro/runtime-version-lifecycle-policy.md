@@ -1,6 +1,6 @@
 ---
 title: "Astro Runtime maintenance and lifecycle policy"
-sidebar_label: "Astro Runtime maintenance policy"
+sidebar_label: "Maintenance policy"
 id: runtime-version-lifecycle-policy
 ---
 

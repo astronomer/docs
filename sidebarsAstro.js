@@ -83,7 +83,7 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "create-deployment",
-        "configure-deployment-resources",
+        "deployment-settings",
         {
           type: "category",
           label: "Executors",

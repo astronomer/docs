@@ -17,7 +17,7 @@ The difference between executors is based on how tasks are distributed across wo
 - Celery executor
 - Kubernetes executor
 
-Read the following topics to learn about the benefits and limitations of each executor. For information about how to change the executor of an existing Deployment, see [Update the Deployment executor](configure-deployment-resources.md#update-the-deployment-executor).
+Read the following topics to learn about the benefits and limitations of each executor. For information about how to change the executor of an existing Deployment, see [Update the Deployment executor](deployment-settings.md#update-the-deployment-executor).
 
 ### Celery executor
 

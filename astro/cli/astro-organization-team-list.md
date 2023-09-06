@@ -14,6 +14,16 @@ List all Teams in your current Organization.
 astro organization team list
 ```
 
+## Output
+
+| Column        | Description                                                                  | Data type     |
+| ------------- | ---------------------------------------------------------------------------- | ------------- |
+| `ID`          | The Team ID in the Organization.                                             | String        |
+| `NAME`        | Team name.                                                                   | String        |
+| `DESCRIPTION` | The description for the Team.                                           | String        |
+| `IDP MANAGED` | Whether the Team is managed through an identity provider. | Boolean       |
+| `CREATE DATE` | The date and time that the Team was created in the Organization.             | Date (`YYYY-MM-DDTHH:MM:SSZ`)         |
+
 ## Related commands
 
 - [`astro workspace team add`](cli/astro-workspace-team-add.md)

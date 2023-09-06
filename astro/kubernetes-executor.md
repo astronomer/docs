@@ -11,7 +11,7 @@ On Astro, you can configure Kubernetes executor in the following ways:
 
 :::info
 
-This document describes how to configure individual task Pods for different use cases. To configure defaults for all Kubernetes executor task pods, see [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+This document describes how to configure individual task Pods for different use cases. To configure defaults for all Kubernetes executor task pods, see [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources).
 
 :::
 
@@ -38,7 +38,7 @@ See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests)
 
 ### Example: Set CPU or memory limits and requests
 
-You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](deployment-settings.md#configure-kubernetes-pod-resources).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
@@ -199,7 +199,7 @@ A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods 
 
 ## See also
 
-- [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources)
+- [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources)
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
 - [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
 - [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)

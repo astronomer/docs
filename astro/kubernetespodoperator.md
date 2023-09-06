@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Run the KubernetesPodOperator on Astro'
+sidebar_label: 'KubernetesPodOperator'
 title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
 
-This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources).
 
 ## Benefits
 
@@ -169,7 +169,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 #### Prerequisites
 
 - An [Astro project](develop-project.md#create-an-astro-project).
-- An [Astro Deployment](configure-deployment-resources.md).
+- An [Astro Deployment](deployment-settings.md).
 - Access to a private Docker registry.
 
 #### Step 1: Create a Kubernetes Secret

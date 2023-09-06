@@ -215,7 +215,7 @@ print(req.text)
 
 Cross-DAG dependencies are a powerful tool to take your data orchestration to the next level. Retrieving data about cross-DAG dependencies from the metadata database can be useful for programmatically implementing custom solutions, for example to make sure downstream DAGs are paused if an upstream DAG is paused. These dependencies can be visualized in the Airflow UI under **Browse** -> **DAG Dependencies**, but they are not accessible through the Airflow REST API.
 
-To programmatically access this information, you can use SQLAlchemy with [Airflow models](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/index.html) to access data from the metadata database. Note that if you are running Airflow in a Dockerized setting, you have to run the script below from within your scheduler container.
+To programmatically access this information, you can use SQLAlchemy with [Airflow models](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html) to access data from the metadata database. Note that if you are running Airflow in a Dockerized setting, you have to run the script below from within your scheduler container.
 
 ```python
 from sqlalchemy import create_engine
