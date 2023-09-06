@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'View deploy history'
 title: 'View the deploy history for an Astro Deployment'
-id: deploy-dags
+id: deploy-history
 description: See a historical record of code deploys to an Astro Deployment.
 ---
 
