@@ -20,7 +20,7 @@ Deploy history is currently available only for image deploys. DAG deploys do not
 1. In the Cloud UI, select a Deployment.
 2. Click **Deploy History**
 
-For each deploy, the **Deploy History** table shows who made the deploy, when they made the deploy, what image they used, and any descriptions they added to the deploy. 
+For each deploy, the **Deploy History** table shows the user that made the deploy, when they made the deploy, what image they used, and any descriptions they added to the deploy. 
 
 ## Add a description to a deploy
 
