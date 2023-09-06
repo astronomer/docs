@@ -1,5 +1,5 @@
 ---
-title: "Run an integrated ELT and ML pipeline on stripe data in Airflow"
+title: "Run an integrated ELT and ML pipeline on Stripe data in Airflow"
 description: "Use Airflow, the Astro Python SDK and Datasets in a data-driven way."
 id: use-case-elt-ml-finance
 sidebar_label: "Combined ELT and ML pipeline"
@@ -217,7 +217,7 @@ join_charge_satisfaction(
 )
 ```
 
-Additionally, a [cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/cleanup.html) runs in parallel to remove the temporary tables after they are no longer needed.
+Additionally, a [cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/cleanup.html) task runs in parallel to remove the temporary tables after they are no longer needed.
 
 #### ML DAG
 
