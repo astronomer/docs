@@ -125,14 +125,11 @@ The **DAG Dependencies** view (found under the **Browse** tab) shows a graph of 
 
 ![DAG Dependencies View](/img/guides/dag_dependencies.png)
 
-## Datasets relation with Triggering DAG
+:::note
 
-Any kind of operation which needs details from parent DAG triggering the Dataset can become a bit tricky. As of now, a dataset has `data_interval_start` and `data_interval_end`. These are populated by the triggering dag. However, dataset triggered dags has no concept of data interval. Therefore these parameters just show when was the first & last time the dataset was triggered (_If a datset is triggered twice then `data_interval_start` will be of the first time it was triggered and `data_interval_end` will be of the last time it was triggered._).
+DAGs that are triggered by datasets do not have the concept of a data interval. If you need information about the triggering event in your downstream DAG, you can use the parameter `triggering_dataset_events` from the context. This parameter provides a list of all the triggering dataset events with parameters `[timestamp, source_dag_id, source_task_id, source_run_id, source_map_index ]`.
 
-To properly link a dataset to it's parent task, we can use another parameter `triggering_dataset_events` from context. This parameter is a list of all the triggering dataset events.
-
-A `DatasetView` is a class that has parameters like `[timestamp, source_dag_id, source_task_id, source_run_id, source_map_index ]` Which can be levraged to link back to the triggering task.
-
+:::
 ## Datasets with the Astro Python SDK
 
 If you are using the [Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 
