@@ -203,7 +203,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Organizations",
+          label: "Organization",
           items: [
             "organization-api-tokens",
           ],
