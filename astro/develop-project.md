@@ -354,13 +354,13 @@ This is supported both on Astro and in the context of local development.
 
 Starting with Astro Runtime 9, each version of Astro Runtime has a separate distribution for each currently supported Python version. Use an alternative Python distribution if any of your dependencies require a Python version other than the [default Runtime Python version](runtime-image-architecture.md#python-versioning).
 
-To use a Python distribution, update the first line in your Astro project `Dockerfile` to reference the required distribution:
+To use a specific Python distribution, update the first line in your Astro project `Dockerfile` to reference the required distribution:
 
 ```text
 FROM quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-For example, to use Python 3.10 with Astro Runtime version 9.0.0, you would update the first line of your Dockerfile to the following:
+For example, to use Python 3.10 with Astro Runtime version 9.0.0, you update the first line of your Dockerfile to the following:
 
 ```text
 FROM quay.io/astronomer/astro-runtime:9.0.0-python-3.10
