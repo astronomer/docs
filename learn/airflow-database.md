@@ -97,7 +97,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 - Memory in the Airflow metadata database can be limited depending on your setup, and running low on memory in your metadata database can cause performance issues in Airflow. This is one of the many reasons why Astronomer advises against moving large amounts of data with XCom, and recommends using a cleanup and archiving mechanism in any production deployments.
 
-- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). 
+- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/) with a built-in scalable and resilient best-practice metadata database.
 
 - When configuring a database backend, make sure your version is fully supported by checking the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#choosing-database-backend).
 
