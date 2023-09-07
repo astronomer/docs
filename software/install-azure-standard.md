@@ -301,7 +301,7 @@ global:
   # For development or proof-of-concept, you can use an in-cluster database
   postgresqlEnabled: false # Keep True if deploying a database on your AKS cluster.
 
-# SSL support for using SSL connections to encrypt client/server communication between database and Astronomer platform. Enable SSL if provisioning Azure Database for PostgreSQL - Flexible Server as it enforces SSL. Change the setting with respect to the database provisioned.
+# SSL support for using SSL connections to encrypt client/server communication between database and Astronomer platform. Enable SSL if provisioning Azure Database for PostgreSQL - Flexible Server as it enforces SSL. Incluster postgres only supports sslmode.enabled = false. Change the setting with respect to the database provisioned. 
   ssl:
     enabled: true
     mode: "prefer"

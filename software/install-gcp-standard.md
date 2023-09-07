@@ -303,6 +303,7 @@ global:
   # Enables using SSL connections to
   # encrypt client/server communication
   # between databases and the Astronomer platform.
+  # Note that incluster postgres only supports sslmode.enabled = false
   # If your database enforces SSL for connections,
   # change this value to true
   ssl:
