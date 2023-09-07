@@ -286,7 +286,8 @@ global:
   # encrypt client/server communication
   # between databases and the Astronomer platform.
   # If your database enforces SSL for connections,
-  # change this value to true
+  # change this value to true. Incluster postgres only supports 
+  # sslmode.enabled = false.
   ssl:
     enabled: false
 #################################
