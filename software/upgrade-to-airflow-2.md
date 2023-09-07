@@ -82,14 +82,10 @@ If the upgrade check script didn't identify any issues with your existing DAGs a
 To upgrade to Airflow 2.3,
 
 1. Initialize the Airflow upgrade process via the Astronomer UI or CLI.
-2. Depending on what distribution of Airflow you want to use, add one of the following lines to your project's `Dockerfile`:
+2. Update your project's `Dockerfile` to use Astro Runtime:
 
     ```docker
     FROM quay.io/astronomer/astro-runtime:5.4.0
-    ```
-
-    ```docker
-    FROM quay.io/astronomer/ap-airflow:2.3.4-onbuild
     ```
 
 3. Modify all backport providers and replace them with fully supported [provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html). For example, if you were using the [Mongo backport provider](https://pypi.org/project/apache-airflow-backport-providers-mongo/), replace `apache-airflow-backport-providers-mongo` with `apache-airflow-providers-mongo` in your `requirements.txt` file. For more information, see [Airflow documentation on provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).
