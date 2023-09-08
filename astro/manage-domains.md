@@ -16,7 +16,8 @@ You can only configure a single domain for an SSO connection. However, if you ha
 3. In the **Domain** field, enter the domain that you want to map.
 4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
 5. In the entry for your domain, click **Verify**.
-6. After updating the DNS record, click **Verify** to notify Astro to check your DNS record.
+6. Please follow the process from pop-up message or contact administrator of your domain for assistance.
+7. After updating the DNS record, click **Verify** to notify Astro to check your DNS record.
 
 :::info
 
