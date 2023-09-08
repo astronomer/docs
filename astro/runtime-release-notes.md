@@ -54,7 +54,7 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features and improvements. Most notably, Airflow 2.7 includes the following changes:
 
-- In the Airflow UI, the **Trigger DAG w/ config** button now appears only when a DAG has configured [params](https://docs.astronomer.io/learn/airflow-params). Because some teams use this workflow without configuring DAG params, this change has been feature flagged. To revert the change, set the following environment variable in your Dockerfile or as an Astro environment variable:
+- In the Airflow UI, the **Trigger DAG w/ config** button now appears only when a DAG has configured [params](https://docs.astronomer.io/learn/airflow-params). Because some teams use this workflow without configuring DAG params, this change has been feature flagged. To revert the change, set the following environment variable in your Dockerfile or as an Astro [environment variable](environment-variables.md):
 
     - **Key**: `AIRFLOW__WEBSERVER__SHOW_TRIGGER_FORM_IF_NO_PARAMS`
     - **Value**: `True`
