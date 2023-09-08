@@ -5,7 +5,7 @@ id: use-case-elt-ml-finance
 sidebar_label: "Combined ELT and ML pipeline"
 ---
 
-ELT/ETL and ML orchestration are two of the most common use cases for Airflow. This project shows how to use Airflow, the [Astro Python SDK](astro-python-sdk.md), and [Airflow Datasets](airflow-datasets.md) to build a data-driven pipeline that combines ETL and ML. For this example, we use mock financial data modeled after the [Stripe API](https://stripe.com/docs/api/charges). You can adjust the model class and hyperparameters to improve model fit. What R2 can you achieve?
+ELT/ETL and ML orchestration are two of the most common use cases for Airflow. This project shows how to use Airflow, the [Astro Python SDK](astro-python-sdk.md), and [Airflow Datasets](airflow-datasets.md) to build a data-driven pipeline that combines ETL and ML. For this example, we use mock financial data modeled after the [Stripe API](https://stripe.com/docs/api/charges). Based on different customer satisfaction scores and product type we'll try to predict the total amount spent per customer, hoping to get some insight into which areas of customer satisfaction to focus on. You can adjust the model class and hyperparameters to improve model fit. What R2 can you achieve?
 
 ![Two plots side by side showing the results of the RandomForestRegressor model. The left plot shows the results of the train set with an R2 of 0.95. Three clusters are discernible, one around very low numbers for predicted and true values, one linear cluster around values of 500-1500 with a linear relationship and the biggest cluster with more noise in higher values. The test plot to the right shows a similar picture but with more noise and an R2 of 0.85.](/img/examples/use-case-elt-ml-finance_model_result_plot.png)
 
@@ -73,7 +73,7 @@ This use case shows many core Airflow features like [datasets](airflow-datasets.
 
 #### Ingestion DAG
 
-The ingestion DAG is a helper DAG to simulate data arriving in your object storage from other sources (e.g. from  manual uploads or via an [Kafka](airflow-kafka.md) S3 sink).  
+The ingestion DAG [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py) is a helper DAG to simulate data arriving in your object storage from other sources (e.g. from  manual uploads or via an [Kafka](airflow-kafka.md) S3 sink).  
 
 The [script to create mock data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) is located in the include folder and called inside a `@task` decorated function. Modularizing scripts is a common pattern to make them accessible to several DAGs and make your DAG files easier to read.
 
@@ -130,7 +130,7 @@ upload_mock_data = LocalFilesystemToS3Operator.partial(
 
 #### ELT DAG
 
-The ELT DAG waits for the file to be dropped in the object storage using the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator. [Deferrable operators](deferrable-operators.md) are operators that use the Triggerer component to release their worker slot while they are waiting for a condition in an external tool to be met. This allows you to utilize resources more efficiently and save costs.
+The ELT DAG [`finance_elt`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_elt.py) waits for the file to be dropped in the object storage using the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator. [Deferrable operators](deferrable-operators.md) are operators that use the Triggerer component to release their worker slot while they are waiting for a condition in an external tool to be met. This allows you to utilize resources more efficiently and save costs.
 
 The two `wait_for_ingest_*` tasks are grouped in a [task group](task-groups.md), which allows for the passing of arguments like `aws_conn_id` at the group level and visually groups the tasks in the Airflow UI.
 
@@ -223,7 +223,7 @@ Additionally, a [cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astr
 
 #### ML DAG
 
-Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG is scheduled to run as soon as the `model_satisfaction` table is updated by the ELT DAG. Since the Astro Python SDK is used to update the `model_satisfaction` table, the dataset is automatically created and updated, without explicit `outlets` arguments. 
+Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG [`finance_ml`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_ml.py) is scheduled to run as soon as the `model_satisfaction` table is updated by the ELT DAG. Since the Astro Python SDK is used to update the `model_satisfaction` table, the dataset is automatically created and updated, without explicit `outlets` arguments. 
 
 The `schedule` parameter of the ML DAG uses the same `Table` definition as a dataset.
 
