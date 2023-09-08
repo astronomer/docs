@@ -28,7 +28,7 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`.
 - When you create or update a Deployment and select a Runtime version, the Astronomer UI now shows only the latest supported Astro Runtime patch for each supported Astro Runtime major version.
 - You can now set `deployments.canUpsertDeploymentFromUI: false` to prevent all users besides System Admins from updating Deployments and environment variables through the Astronomer UI.
-- You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
+- You can now [overprovision](https://docs.astronomer.io/software/cluster-resource-provisioning) the `triggerer-log-groomer` component.
 
 ### Bug fixes
 
@@ -60,7 +60,7 @@ Release date: August 31, 2023
 - You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `Values.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.platform.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `global.loggingSidecar.indexPattern`.
 - You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
-- You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
+- You can now [overprovision](https://docs.astronomer.io/software/cluster-resource-provisioning) the `triggerer-log-groomer` component.
 - You can now set `astronomer.houston.enableHoustonInternalAuthorization` in your `config.yaml` file to redirect all authorization requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.
 - Upgraded ElasticSearch to 8.x.
 
@@ -95,13 +95,13 @@ Release date: June 12, 2023
 
 ### Additional improvements
 
-- [Overprovisioning](cluster-resource-provisioning.md) now also applies to the following components:
+- [Overprovisioning](https://docs.astronomer.io/software/cluster-resource-provisioningd) now also applies to the following components:
 
     - PGBouncer
     - Statsd
     - Flower
   
-- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [overprovisioning](cluster-resource-provisioning.md) only to specific Airflow components.
+- You can now configure `astronomer.houston.config.deployments.overProvisioningComponents` to limit the scope of [overprovisioning](https://docs.astronomer.io/software/cluster-resource-provisioning) only to specific Airflow components.
 - Teams without any users are now automatically deleted when SCIM is disabled.
 - You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
 - You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
@@ -143,7 +143,7 @@ You can now programmatically create or update Deployments using the Houston API 
 
 ### Reduce resource requests for Airflow components in development environments
 
-You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](cluster-resource-provisioning) for configuration steps.
+You can reduce the amount of CPU and memory that an Airflow component requests in development environments, allowing you to more efficiently provision resources based on the requirements for your development Deployments. See [Underprovision Airflow resources](https://docs.astronomer.io/software/cluster-resource-provisioning) for configuration steps.
 
 ### New cron job to clean Deployment task data
 
