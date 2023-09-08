@@ -15,7 +15,7 @@ Release date: August 3, 2023
 
 ### Automatic PGBouncer connection scaling
 
-Astronomer Software now automatically scales the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This should result in improved performance, scalability, and utilization of database connections across all Deployments. 
+Astronomer Software now automatically scales the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This improves performance, scalability, and utilization of database connections across all Deployments. 
 
 ### Additional improvements
 
@@ -30,6 +30,8 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 
 ### Bug fixes
 
+- Fixed an issue where a Deployment using Runtime 8 or earlier with the Celery executor would show as healthy in the Software UI even when workers were unavailable.
+- Fixed an issue where Grafana could not start up on an OpenShift cluster.
 - Fixed an issue where configurations in `astronomer.houston.config.deployments.components` applied only to Deployments that were created after the configuration was set. 
 - Fixed an issue where a Workspace-level service account would improperly inherit lesser permissions for Deployments it was added to.
 - The Astronomer UI now shows an error if you click the **Delete** button for Teams and you don't have the `system.teams.remove` permission.
