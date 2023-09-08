@@ -39,7 +39,7 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers-logging` to 1.2.1.
+- You can now forward logs to Datadog from Azure and GCP clusters.
 - Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 
