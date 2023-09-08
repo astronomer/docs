@@ -400,6 +400,9 @@ module.exports = {
             'cli/astro-deployment-variable-create',
             'cli/astro-deployment-variable-list',
             'cli/astro-deployment-variable-update',
+            'cli/astro-deployment-worker-queue-create',
+            'cli/astro-deployment-worker-queue-delete',
+            'cli/astro-deployment-worker-queue-update',
           ],
         },
         {
