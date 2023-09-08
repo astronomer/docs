@@ -109,7 +109,7 @@ prometheus:
 
 To push custom alerts to Astronomer, add them to the `AdditionalAlerts` section of your `config.yaml` file and push the file with Helm as described in [Apply a config change](apply-platform-config.md).
 
-Once you've pushed the alert to Astronomer, make sure that you've configured a receiver to subscribe to the alert. For more information, read [Subscribe to Alerts](platform-alerts.md#subscribe-to-alerts).
+After you've pushed the alert to Astronomer, make sure that you've configured a receiver to subscribe to the alert. For more information, read [Subscribe to Alerts](platform-alerts.md#subscribe-to-alerts).
 
 ## Reference: Deployment alerts
 
