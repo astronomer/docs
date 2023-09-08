@@ -1,5 +1,5 @@
 ---
-title: 'Astronomer Software v0.33 release notes'
+title: 'Astronomer Software release notes'
 sidebar_label: 'Astronomer Software'
 id: release-notes
 description: Astronomer Software release notes.
@@ -40,3 +40,10 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 - Fixed the following vulnerabilities:
 
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)
+    - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+    - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+  - 
