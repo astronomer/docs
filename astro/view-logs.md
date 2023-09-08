@@ -122,7 +122,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
 #### Prerequisites
 
-- Your Deployment must be running Astro Runtime 9. See [Upgrade Astro Runtime](upgrade-runtime.md).
+- Your Deployment must be running Astro Runtime 9 (AWS) or 9.1 (Azure and GCP). See [Upgrade Astro Runtime](upgrade-runtime.md).
 
 #### Setup
 
