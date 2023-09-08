@@ -21,7 +21,6 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 
 This feature is off by default. You can enable it by setting  `deployments.pgBouncerResourceCalculationStrategy: airflowStratV2` in your `config.yaml` file. To revert back to previous behavior, set this key to `auStratV1` instead.
 
-:::
 
 ### Additional improvements
 
