@@ -33,7 +33,9 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 Astro Runtime 9.1.0 includes same-day support for Apache Airflow 2.7.1. Airflow 2.7.1 contains a number of bug fixes including:
 
-[Key bug fixes here]
+- Treat dag-defined access_control as authoritative if defined ([#33632](https://github.com/apache/airflow/pull/33632))
+- Add limit 1 if required first value from query result ([#33632](https://github.com/apache/airflow/pull/33632))
+- Fix MappedTaskGroup tasks not respecting upstream dependency ([#33732](https://github.com/apache/airflow/pull/33732))
 
 To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-1-2023-09-07).
 
