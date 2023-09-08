@@ -54,6 +54,11 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features and improvements. Most notably, Airflow 2.7 includes the following changes:
 
+- In the Airflow UI, the **Trigger DAG w/ config** button now appears only when a DAG has configured [params](https://docs.astronomer.io/learn/airflow-params). Because some teams use this workflow without configuring DAG params, this change has been feature flagged. To revert the change, set the following environment variable in your Dockerfile or as an Astro environment variable:
+
+    - **Key**: `AIRFLOW__WEBSERVER__SHOW_TRIGGER_FORM_IF_NO_PARAMS`
+    - **Value**: `True`
+
 - Setup and teardown tasks are a new type of task that you can use to prepare resources and configurations for specific tasks, ensuring that they always have resources even when you retry failed tasks. See [Use setup and teardown tasks in Airflow](https://docs.astronomer.io/learn/airflow-setup-teardown) to learn how to use them.
 - You can now clear task groups or mark them as successful/failed from the Airflow UI **Grid View** just like individual tasks.
 - You can set `operators.default_deferrable` in your Airflow config to always use the deferrable version of an operator if one is available, which means that you no longer have to update import statements in DAGs to replace traditional operators with deferrable ones. 
