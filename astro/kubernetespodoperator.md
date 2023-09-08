@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Run the KubernetesPodOperator on Astro'
+sidebar_label: 'KubernetesPodOperator'
 title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
 
-This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources).
 
 ## Benefits
 
@@ -34,6 +34,13 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - Cross-account service accounts are not supported on Pods launched in an Astro cluster. To allow access to external data sources, you can provide credentials and secrets to tasks.
 - PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
 - (Hybrid only) You cannot run a KubernetesPodOperator task in a worker queue or node pool that is different than the worker queue of its parent worker. For example, a KubernetesPodOperator task that is triggered by an `m5.4xlarge` worker on AWS will also be run on an `m5.4xlarge` node. To run a task on a different node instance type, you must launch it in an external Kubernetes cluster. If you need assistance launching KubernetesPodOperator tasks in external Kubernetes clusters, contact [Astronomer support](https://support.astronomer.io).
+- You can't use an image built for an ARM architecture in the KubernetesPodOperator. To build images using the x86 architecture on a Mac with an Apple chip, include the `--platform` flag in the `FROM` command of the `Dockerfile` that constructs your custom image. For example:
+
+    ```bash
+    FROM --platform=linux/amd64 postgres:latest
+    ```
+
+    If you use an ARM image, your KPO task will fail with the error: `base] exec /usr/bin/psql: exec format error`.
 
 ## Prerequisites
 
@@ -162,7 +169,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 #### Prerequisites
 
 - An [Astro project](develop-project.md#create-an-astro-project).
-- An [Astro Deployment](configure-deployment-resources.md).
+- An [Astro Deployment](deployment-settings.md).
 - Access to a private Docker registry.
 
 #### Step 1: Create a Kubernetes Secret
@@ -204,7 +211,7 @@ KubernetesPodOperator(
 
 :::info
 
-This setup is available only on Astro Hybrid. 
+This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
 
 :::
 
@@ -249,7 +256,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 :::info
 
-This setup is available only on Astro Hybrid. 
+This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
 
 :::
 

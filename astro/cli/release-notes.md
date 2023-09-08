@@ -17,11 +17,71 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.19.1
+
+Release date: August 30, 2023
+
+### Bug fixes
+
+- Fixed an issue where DAGs would fail to parse correctly when running `astro dev parse` or `astro deploy`, resulting in a command execution failure.
+
+## Astro CLI 1.19.0
+
+Release date: August 29, 2023
+
+### Additional improvements
+
+- You can now grant Astro users the `WORKSPACE_AUTHOR` role.
+- You can now run an Astro project from the same directory an Apache Airflow project.
+- `astro deployment inspect` now shows you a Deployment's workload identity.
+
+### Bug fixes
+
+- Fixed an issue where some DAGs could be missed during `astro deploy` when DAG-only deploys are enabled.
+- Fixed an issue where `astro dev pytest` would incorrectly fail when testing an Astro project within a CI/CD process.
+- Fixed an issue where you couldn't update a Deployment on a standard cluster using a Deployment file.
+
+## Astro CLI 1.18.2
+
+Release date: August 10, 2023
+
+### Bug fixes
+
+- Fixed an issue where running `astro deployment create` on Astro Hosted would create Deployments where DAG-only deploys were turned off by default.
+
+## Astro CLI 1.18.1
+
+Release date: August 4, 2023
+
+### Bug fixes
+
+- Fixed an issue where `astro run` didn't work properly.
+
+## Astro CLI 1.18.0
+
+Release date: August 3, 2023
+
+### New command to test Astro projects before you upgrade
+
+You can use the new `astro dev upgrade-test` command to anticipate and address problems before upgrading to a newer version of Astro Runtime. The command runs several test which let you determine whether an upgrade will result in major dependency changes and import errors, allowing you to fix the problems before you upgrade. See [Test your Astro project locally](test-your-astro-project-locally.md) for more information.
+
+### Additional improvements
+
+- You can now specify the `--description` flag with `astro deploy` to add a description for your deploy. You can use this description to let other users know why you made a deploy or what changes a deploy contains. 
+- You can now specify the `--role` flag with `astro organization team create/update` to update a Team's Organization-level role. 
+- You can now specify the `--execution-date` flag with `astro run` to trigger a DAG run for a specific execution date.
+- You can now specify the `--verbose` flag with `astro run` to stream all logs to your terminal after the DAG run triggers. 
+
+### Bug fixes
+
+- Fixed an issue where `astro deployment inspect` was showing the wrong value for a Deployment’s workload identity on Astro Hosted.
+- Fixed an issue were `astro dev restart` would occasionally not work.
+
 ## Astro CLI 1.17.1
 
 Release date: July 12, 2023
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue were some Astro Hosted Deployment updates triggered by the Astro CLI were not working.
 
@@ -73,7 +133,7 @@ Release date: June 13, 2023
 
 ### Manage Teams using the Astro CLI
 
-You can now manage [Astro Teams](add-user.md#make-a-team) using the following CLI commands:
+You can now manage [Astro Teams](manage-teams.md) using the following CLI commands:
 
 - [`astro workspace team add`](cli/astro-workspace-team-add.md)
 - [`astro workspace team list`](cli/astro-workspace-team-list.md)
@@ -106,7 +166,7 @@ These commands can be used to manage API tokens as part of an automated workflow
 
 - You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
-- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](configure-deployment-resources.md#enforce-ci-cd-deploys) on a given Deployment. 
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment. 
 - You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted. 
 
 ## Astro CLI 1.15.1
@@ -788,7 +848,7 @@ You can now use `astro deployment update` to update certain configurations for a
 - Scheduler replicas
 - Worker resources
 
-This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
+This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Deployment settings](deployment-settings.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
 
 ## 1.2.0 (`astrocloud`)
 
@@ -837,7 +897,7 @@ You can now use the Astro CLI to create and delete Deployments on Astro with two
 - `astro deployment create`
 - `astro deployment delete`
 
-These commands are functionally identical to the [Deployment configuration](configure-deployment-resources.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
+These commands are functionally identical to the [Deployment configuration](deployment-settings.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
 
 ## 1.1.0 (`astrocloud`)
 

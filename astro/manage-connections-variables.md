@@ -15,8 +15,8 @@ For in-depth information on creating and managing connections, see [Connection B
 
 ## Prerequisites
 
-- A locally hosted Astro project created with the Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
-- A Deployment on Astro. See [Create a Deployment](create-deployment.md).
+- A locally hosted Astro project created with the Astro CLI. See [Create a project](develop-project.md#create-an-astro-project).
+- A Deployment on Astro. See [Create a Deployment](create-deployment.md).
 
 ## Choose a connection and variable management strategy
 
@@ -98,7 +98,7 @@ You can use Airflow's system-level environment variables to store connections an
 #### Limitations
 
 - You can't view connections and variables from the Airflow UI. 
-- You must restart your local environment using `astro dev restart` whenever you make changes to your `.env` file.
+- You must restart your local environment using `astro dev restart` whenever you make changes to your `.env` file.
 - The environment variables are defined in plain text in your `.env` file.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are not as secure or centralized compared to a [secrets backend](secrets-backend.md).
@@ -108,7 +108,7 @@ You can use Airflow's system-level environment variables to store connections an
 
 While it's possible to manage Airflow connections and variables with these strategies, Astronomer doesn't recommend them at scale: 
 
-- You can use the Airflow REST API to programmatically create Airflow connections and variables for a Deployment. Airflow objects created with the API are stored in the Airflow metadata database and hence visible on the Airflow UI.
+- You can use the Airflow REST API to programmatically create Airflow connections and variables for a Deployment. Airflow objects created with the API are stored in the Airflow metadata database and visible in the Airflow UI.
 - For local Astro projects, you can use `airflow_settings.yaml` for defining your connections and variables. See [Configure `airflow_settings.yaml`](develop-project.md#configure-airflow_settingsyaml-local-development-only) for more details.
 
 ## See also

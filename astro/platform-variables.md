@@ -27,6 +27,8 @@ If you need to set one of these variables for a particular use case, contact [As
 | `AIRFLOW__LOGGING__DAG_PROCESSOR_LOG_TARGET` | Routes scheduler logs to stdout                                                                                                 | `stdout`                                                   |
 | `AIRFLOW__LOGGING__REMOTE_LOGGING`           | Enables remote logging                                                                                                          | `True`                                                     |
 | `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`   | Location of remote logging storage                                                                                              | `baseLogFolder`                                            |
+| `AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID`       | ID of the connection that provides access to your remote logging location                                            | `<connection-name>`                                        |
+| `AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS`     | Class name that specifies the logging configuration                                                                         |`astronomer.runtime.logging.logging_config`                |
 | `AIRFLOW_CONN_ASTRO_S3_LOGGING`              | Connection URI for writing task logs to Astro's managed S3 bucket                                                               | `<Connection-URI>`                                         |
 | `AIRFLOW__LOGGING__ENCRYPT_S3_LOGS`          | Determines whether to use server-side encryption for S3 logs                                                                    | `False`                                                    |
 | `AIRFLOW__WEBSERVER__BASE_URL`               | The base URL of the Airflow UI                                                                                                  | `https://${fullIngressHostname}`                           |
@@ -45,6 +47,7 @@ If you need to set one of these variables for a particular use case, contact [As
 | `AIRFLOW__METRICS__STATSD_ON`                | Determines whether metrics are sent to Statsd                                                                                   | `True`                                                     |
 | `AIRFLOW__METRICS__STATSD_HOST`              | The hostname for sending metrics to Statsd                                                                                      | `statsd.Hostname`                                          |
 | `AIRFLOW__METRICS__STATSD_PORT`              | The port for sending metrics to Statsd                                                                                          | `<statsd-metrics-port>`                                    |
+| `AIRFLOW__METRICS__STATSD_PREFIX`            | The prefix for sending the metrics to Statsd                                                                                    | `airflow`                                                  |
 | `AIRFLOW__WEBSERVER__COOKIE_SECURE`          | Sets a `secure` flag on server cookies                                                                                          | `True`                                                     |
 | `AIRFLOW__WEBSERVER__INSTANCE_NAME`          | Shows the name of your Deployment in the Home view of the Airflow UI                                                            | `<Deployment-Name>`                                        |
 | `AIRFLOW__CELERY__WORKER_CONCURRENCY`        | Determines how many tasks each Celery worker can run at any given time and is the basis of worker auto-scaling logic            | `<Max-Tasks-Per-Worker>`                                   |
@@ -55,13 +58,6 @@ If you need to set one of these variables for a particular use case, contact [As
 | `OPENLINEAGE_URL`                            | The URL for your Astro lineage backend. The destination for lineage metadata sent from external systems to the OpenLineage API. | `https://astro-<your-astro-base-domain>.datakin.com`       |
 | `OPENLINEAGE_API_KEY`                        | Your OpenLineage API key                                                                                                        | `<your-lineage-api-key>`                                   |
 
-:::info 
-
-¹ The `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID` environment variables are required only for Deployments running on AWS. For any Deployment running on an AWS cluster, they should not be overridden.
-
-There are no restrictions with setting these values for Deployments running on GCP and Azure.
-
-:::
 
 ## Default Runtime environment variables
 

@@ -268,7 +268,7 @@ As a next step, create a file named `config.yaml` in an empty directory.
 
 For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
 
-In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, `ssl.enabled`, and `astronomer.houston.secret` with your own values. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
+In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/containerd/certs.d`, `ssl.enabled`, and `astronomer.houston.secret` with your own values. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
 
 
 ```yaml
@@ -296,13 +296,14 @@ global:
   # and in that case 'enabled' should be false.
   privateCaCertsAddToHost:
     enabled: true
-    hostDirectory: /etc/docker/certs.d
+    hostDirectory: /etc/containerd/certs.d
   # For development or proof-of-concept, you can use an in-cluster database
   postgresqlEnabled: false
 
   # Enables using SSL connections to
   # encrypt client/server communication
   # between databases and the Astronomer platform.
+  # Note that incluster postgres only supports sslmode.enabled = false
   # If your database enforces SSL for connections,
   # change this value to true
   ssl:
@@ -340,7 +341,7 @@ astronomer:
           google:
             enabled: true # Lets users authenticate with Google
     secret:
-    - envName: "<smtp_uri_secret>"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
+    - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
       secretName: "astronomer-smtp"
       secretKey: "connection"
 ```
@@ -524,7 +525,7 @@ astro login <your-astronomer-base-domain>
 
 If you can log in, then your Docker client trusts the registry. If Docker does not trust the Astronomer registry, run the following and restart Docker:
 
-```
+```sh
 $ mkdir -p /etc/docker/certs.d
 $ cp privateCA.pem /etc/docker/certs.d/
 ```
@@ -540,7 +541,13 @@ $ astro deploy -f
 
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
 
-If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation.
+If you have Airflow pods in the state `ImagePullBackoff`, check the pod description. If you see an x509 error, ensure that you have:
+
+- Configured containerd’s `config_path` to point to `/etc/containerd/certs.d`. 
+- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
+
+If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `config.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
+
 
 ## What's next
 

@@ -24,6 +24,94 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 9.1.0
+
+- Release date: September 7, 2023
+- Airflow version: 2.7.1
+
+### Airflow 2.7.1
+
+Astro Runtime 9.1.0 includes same-day support for Apache Airflow 2.7.1. Airflow 2.7.1 contains a number of bug fixes including:
+
+- Treat dag-defined access_control as authoritative if defined ([#33632](https://github.com/apache/airflow/pull/33632))
+- Add limit 1 if required first value from query result ([#33632](https://github.com/apache/airflow/pull/33632))
+- Fix MappedTaskGroup tasks not respecting upstream dependency ([#33732](https://github.com/apache/airflow/pull/33732))
+
+To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-1-2023-09-07).
+
+### Additional improvements
+
+- You can now [export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) from Azure and GCP clusters.
+- Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
+- Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+
+## Astro Runtime 9.0.0
+
+- Release date: August 18, 2023
+- Airflow version: 2.7.0
+
+### Airflow 2.7
+
+Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features and improvements. Most notably, Airflow 2.7 includes the following changes:
+
+- In the Airflow UI, the **Trigger DAG w/ config** button now appears only when a DAG has configured [params](https://docs.astronomer.io/learn/airflow-params). Because some teams use this workflow without configuring DAG params, this change has been feature flagged. To revert the change, set the following environment variable in your Dockerfile or as an Astro [environment variable](environment-variables.md):
+
+    - **Key**: `AIRFLOW__WEBSERVER__SHOW_TRIGGER_FORM_IF_NO_PARAMS`
+    - **Value**: `True`
+
+- Setup and teardown tasks are a new type of task that you can use to prepare resources and configurations for specific tasks, ensuring that they always have resources even when you retry failed tasks. See [Use setup and teardown tasks in Airflow](https://docs.astronomer.io/learn/airflow-setup-teardown) to learn how to use them.
+- You can now clear task groups or mark them as successful/failed from the Airflow UI **Grid View** just like individual tasks.
+- You can set `operators.default_deferrable` in your Airflow config to always use the deferrable version of an operator if one is available, which means that you no longer have to update import statements in DAGs to replace traditional operators with deferrable ones. 
+
+To learn more, see the [Apache Airflow 2.7.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-0-2023-08-14).
+
+### New Python version distributions of Astro Runtime
+
+Each new version of Astro Runtime now has separate distributions for Python 3.8, 3.9. 3.10 and 3.11. Using a Python distribution of Astro Runtime is the easiest way to use a specific Python version in Airflow. 
+
+Specify the Python version you want to use in your image tag, formatted as:
+
+```text
+quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
+```
+
+For example, to use Python 3.8 in Astro Runtime 9.0.0, you would replace the image tag in your Astro project Dockerfile with `quay.io/astronomer/astro-runtime:9.0.0-python-3.8`.
+
+To keep using the same version of Python across multiple Astro Runtime upgrades, Astronomer recommends that you begin to use the Python distribution for your required Python version.
+
+### Upgrade to Python 3.11
+
+The base image for Astro Runtime now uses Python 3.11. If you want to use a different version of Python, replace your image with the appropriate Python distribution of Astro Runtime.
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.17.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1173-2023-08-07) for a complete list of changes.
+- Upgraded `astro-sdk-python` to 1.6.2. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+- Upgraded `openlineage-airflow` to 1.0.0. See the [OpenLineage blog](https://openlineage.io/blog/1.0-release/) for a summary of what's arrived in OpenLineage's first 1.x version.
+
+### Bug fixes
+
+- Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.
+
+## Astro Runtime 8.9.0
+
+- Release date: August 28, 2023
+- Airflow version: 2.6.3
+
+### Early access Airflow bug fixes
+
+- Fixed an issue where Airflow incorrectly used `urljoin` to generate the string for `log_url`. ([#33063](https://github.com/apache/airflow/pull/33063)) 
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.17.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1173-2023-08-07) for a complete list of changes.
+- Upgraded `astro-sdk-python` to 1.6.2. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+
+### Bug fixes
+
+- Fixed an issue where you could not set DAG or task notes in the Airflow UI for environments running on Astro.
+- Fixed an issue with trigger logs for Deployments running on AWS.
+
 ## Astro Runtime 8.8.0
 
 - Release date: July 21, 2023
@@ -39,6 +127,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Bug fixes
 
+- Upgraded `apache-airflow-providers-microsoft-azure` to 6.2.1. This fixes an issue where Deployments running Astro Runtime 8.7.0 on Azure clusters experienced failures with deferrable operators and task logs.
 - Fixed DAG deletion permissions in Astro for non-admin users.
 
 ## Astro Runtime 8.7.0
@@ -427,7 +516,7 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 
 - Upgraded `astronomer-providers` to 1.15.1, which includes a collection of bug fixes and a new async sensor `SnowflakeSensorAsync`. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1151-2023-03-09) for a complete list of changes.. 
 - Upgraded `openlineage-airflow` to 0.21.1, which includes a collection of bug fixes. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.21.1) for a complete list of changes. 
-- When using Runtime in an Astronomer Software installation, OpenLineage and the Astronomer monitoring DAG are now disabled. OpenLineage can be re-enabled in your Deployment by setting the `OPENLINEAGE_URL` environment variable, or by setting the `OPENLINEAGE_DISABLE=False` environment variable.
+- When using Runtime in an Astronomer Software installation, OpenLineage and the Astronomer monitoring DAG are now disabled. OpenLineage can be re-enabled in your Deployment by setting the `OPENLINEAGE_URL` environment variable, or by setting the `OPENLINEAGE_DISABLED=False` environment variable.
 
 ## Astro Runtime 6.3.0
 

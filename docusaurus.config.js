@@ -43,6 +43,9 @@ module.exports = {
     colorMode: {
       disableSwitch: false,
     },
+    mermaid: {
+        theme: {dark: 'neutral'},
+    },
     navbar: {
       title: 'Docs',
       logo: {

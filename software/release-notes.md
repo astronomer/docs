@@ -5,7 +5,7 @@ id: release-notes
 description: Astronomer Software release notes.
 ---
 
-<!--- Version-specific -->
+This document contains release notes for each version of Astronomer Software.
 
 This page contains release notes for all recent Astronomer Software versions. 
 

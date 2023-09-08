@@ -10,12 +10,12 @@ import TabItem from '@theme/TabItem';
 
 :::caution
 
-This document applies only to [Astro Hosted](astro-architecture.md). To see whether you're an Astro Hosted user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
 
 For Astro Hybrid resource reference material, see:
 
-- [AWS Hybrid cluster settings](resource-reference-gcp-hybrid.md)
-- [Azure Hybrid cluster settings](resource-reference-gcp-hybrid.md)
+- [AWS Hybrid cluster settings](resource-reference-aws-hybrid.md)
+- [Azure Hybrid cluster settings](resource-reference-azure-hybrid.md)
 - [GCP Hybrid cluster settings](resource-reference-gcp-hybrid.md)
 
 :::
@@ -48,10 +48,11 @@ The following table lists all available worker types on Astro Deployments.
 
 | Worker Type | vCPU | Memory | Max task concurrency |
 | ----------- | ---- | ------ | -------------------- |
-| A5          | 1    | 2G     | 15                   |
-| A10         | 2    | 4G     | 30                   |
-| A20         | 4    | 8G     | 60                   |
-| A40         | 8    | 16G    | 120                  |
+| A5          | 1    | 2GiB   | 15                   |
+| A10         | 2    | 4GiB   | 30                   |
+| A20         | 4    | 8GiB   | 60                   |
+| A40         | 8    | 16GiB  | 120                  |
+| A60         | 12   | 24GiB  | 240                  |
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
 
@@ -63,17 +64,19 @@ Currently, standard clusters are available on the following clouds and regions:
 
 ### GCP
 
-| Code          | Region                  |
-| ------------- | ----------------------- |
-| `us-central1` | Iowa, North America     |
-| `us-east4`    | Virginia, North America |
+| Code           | Region                  |
+| -------------- | ----------------------- |
+| `europe-west4` | Netherlands, Europe     |
+| `us-central1`  | Iowa, North America     |
+| `us-east4`     | Virginia, North America |
 
 ### AWS
 
-| Code        | Region                |
-| ----------- | --------------------- |
-| `us-east-1` | US East (N. Virginia) |
-| `us-west-2` | US West (Oregon)      |
+| Code           | Region                |
+| -------------- | --------------------- |
+| `eu-central-1` | Europe (Frankfurt)    |
+| `us-east-1`    | US East (N. Virginia) |
+| `us-west-2`    | US West (Oregon)      |
 
 ## Dedicated cluster configurations
 
@@ -93,21 +96,13 @@ Currently, dedicated clusters are available on the following clouds and regions:
 
 | Code             | Name                      |
 | ---------------- | ------------------------- |
-| `af-south-1`     | Africa (Cape Town)        |
-| `ap-east-1`      | Asia Pacific (Hong Kong)  |
 | `ap-northeast-1` | Asia Pacific (Tokyo)      |
-| `ap-northeast-2` | Asia Pacific (Seoul)      |
-| `ap-northeast-3` | Asia Pacific (Osaka)      |
 | `ap-southeast-1` | Asia Pacific (Singapore)  |
 | `ap-southeast-2` | Asia Pacific (Sydney)     |
 | `ap-south-1`     | Asia Pacific (Mumbai)     |
-| `ca-central-1`   | Canada (Central)          |
 | `eu-central-1`   | Europe (Frankfurt)        |
-| `eu-south-1`     | Europe (Milan)            |
 | `eu-west-1`      | Europe (Ireland)          |
 | `eu-west-2`      | Europe (London)           |
-| `eu-west-3`      | Europe (Paris)            |
-| `me-south-1`     | Middle East (Bahrain)     |
 | `sa-east-1`      | South America (São Paulo) |
 | `us-east-1`      | US East (N. Virginia)     |
 | `us-east-2`      | US East (Ohio)            |

@@ -5,10 +5,10 @@ id: workspace-api-tokens
 description: Create and manage Workspace API tokens to automate key Workspace actions, like adding users and creating Deployments. 
 ---
 
-Use Workspace API tokens to automate Workspace actions such as creating Deployments and managing users as part of your CI/CD pipelines. You need to be a Workspace Admin to manage Workspace API tokens. Using Workspace API tokens, you can automate:
+Use Workspace API tokens to automate Workspace actions such as creating Deployments and managing users as part of your CI/CD pipelines. You need to be a Workspace Owner to manage Workspace API tokens. Using Workspace API tokens, you can automate:
 
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md)
-- Adding batches of users to a Workspace in a CI/CD pipeline. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
+- Adding batches of users to a Workspace in a CI/CD pipeline. See [Add a group of users to Astro using the Astro CLI](manage-workspace-users.md#add-a-group-of-users-to-a-workspace-using-the-astro-cli).
 - Creating preview Deployments whenever you create a feature branch in your Astro project Git repository. 
 - Performing Deployment-level actions on any Deployment in a Workspace, such as deploying code or making calls to the Airflow rest API. Workspace API tokens can complete the same actions as Deployment API keys for any Deployment in the Workspace. 
 
@@ -40,7 +40,7 @@ There are two ways to use API tokens to interact with a Workspace:
 
 
 ### Add an Organization API token to a Workspace
-You might want to add an Organization API token if your Organization API token only has Organization Member permissions, but you want to grant it Workspace Admin permissions for several Workspaces.
+You might want to add an Organization API token if your Organization API token only has Organization Member permissions, but you want to grant it Workspace Owner permissions for several Workspaces.
 
 1. In the Cloud UI, open your Workspace.
    

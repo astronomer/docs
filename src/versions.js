@@ -1,7 +1,7 @@
 export const siteVariables = {
   // version-specific
-  cliVersion: '1.17.1',
-  runtimeVersion: '8.8.0',
+  runtimeVersion: '9.1.0',
+  cliVersion: '1.19.1',
   jenkinsenv: '${env.GIT_BRANCH}',
   jenkinsenv1: '${files[*]}',
   jenkinsenv2: '${#files[@]}',

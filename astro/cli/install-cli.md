@@ -116,7 +116,9 @@ By default, the Astro CLI uses Docker as its container management engine for run
 
 #### Resolve installation issues
 
-If an error message appears indicating that the term winget is not recognized as an internal or external command when you attempt to run winget commands, see this [troubleshooting document](https://github.com/microsoft/winget-cli/tree/master/doc/troubleshooting#common-issues) provided by Microsoft. 
+If an error message appears indicating that the term winget is not recognized as an internal or external command when you attempt to run winget commands, see this [troubleshooting document](https://github.com/microsoft/winget-cli/tree/master/doc/troubleshooting#common-issues) provided by Microsoft.
+
+If you're still struggling to install the Astro CLI with winget, retry the install using the alternative instructions in [Windows (Manual)](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#install-the-astro-cli).
 
 </TabItem>
 
@@ -136,7 +138,7 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 
 1. Go to the [Releases page](https://github.com/astronomer/astro-cli/releases) of the Astro CLI GitHub repository, scroll to a CLI version, and then download the `.exe` file that matches the CPU architecture of your machine.
 
-    For example, to install v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.exe`.
+    For example, to install v1.18.2 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.18.2_windows_amd64.exe`.
 
 2. Rename the file to `astro.exe`.
 

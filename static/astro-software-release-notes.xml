@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Fri, 08 Sep 2023 15:58:41 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.33.0</title><link>https://docs.astronomer.io/software/release-notes#0330</link><pubDate>Wed, 02 Aug 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0330</guid><description><![CDATA[<p>Release date: August 3, 2023</p><h3>Automatic PGBouncer connection scaling</h3><p>Astronomer Software now automatically scales the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This improves performance, scalability, and utilization of database connections across all Deployments.</p><h3>Additional improvements</h3><ul>
 <li>You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting <code>prometheus.defaultAlerts.airflow.enabled</code> and <code>prometheus.defaultAlerts.airflow.enabled</code> to <code>false</code> in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using <code>prometheus.defaultAlerts.additionalAlerts</code>. See <a href="platform-alerts.md#create-custom-alerts">Create custom alerts</a>.</li>
 <li>Added support for <a href="https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/">Kubernetes 1.27</a>.</li>
@@ -86,6 +87,9 @@
 </ul>
 </li>
 </ul>]]></description></item><item><title>0.32.2</title><link>https://docs.astronomer.io/software/release-notes#0322</link><pubDate>Thu, 22 Jun 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0322</guid><description><![CDATA[<p>Release date: June 23, 2023</p><h3>Bug fixes</h3><ul>
+=======
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Tue, 29 Aug 2023 16:57:58 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.32.2</title><link>https://docs.astronomer.io/software/release-notes#0322</link><pubDate>Thu, 22 Jun 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0322</guid><description><![CDATA[<p>Release date: June 23, 2023</p><h3>Bug fixes</h3><ul>
+>>>>>>> 7445f7da6bea8a52d8659a1e93f8c74a4886dd1b
 <li>Reverted a change which prevented Workspace-level service accounts from accessing a Deployment when the service account didn't have specific permissions for that Deployment.</li>
 <li>Fixed an issue where some screens of the Airflow UI would produce an HTTP 500 internal server error.</li>
 </ul>]]></description></item><item><title>0.32.1</title><link>https://docs.astronomer.io/software/release-notes#0321</link><pubDate>Sun, 11 Jun 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0321</guid><description><![CDATA[<p>Release date: June 12, 2023</p><h3>Additional improvements</h3><ul>
@@ -226,6 +230,7 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3970">CVE-2022-3970</a></li>
 </ul>
 </li>
+<<<<<<< HEAD
 </ul>]]></description></item><item><title>0.31.3</title><link>https://docs.astronomer.io/software/release-notes#0313</link><pubDate>Fri, 24 Feb 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0313</guid><description><![CDATA[<p>Release date: February 24, 2023</p><h3>Additional improvements</h3><ul>
 <li>You can now configure <code>extraVolumes</code> and <code>extraVolumeMounts</code> in the Alertmanager Helm chart, which can be useful for storing secret credentials for services that read your alerts.</li>
 <li>You can now use <code>astronomer.houston.ingress.annotation</code> in the Astronomer Helm chart to configure custom ingress annotations for Houston.</li>
@@ -727,4 +732,6 @@ global:
 <li>Fixed an issue where Deployments would not work on clusters with custom domains</li>
 <li>Fixed error handling when interacting with a Deployment that wasn't fully spun up</li>
 <li>Added a new validation step for Airflow Helm chart values configured in the <code>astronomer.houston.config.deployments.helm.airflow</code> section of <code>config.yaml</code></li>
+=======
+>>>>>>> 7445f7da6bea8a52d8659a1e93f8c74a4886dd1b
 </ul>]]></description></item></channel></rss>

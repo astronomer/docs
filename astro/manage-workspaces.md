@@ -14,7 +14,7 @@ Some common ways to implement Workspaces are:
 - Using a **Workspace per team**. For example, you might have a Workspace for your Data Science team and a separate Workspace for your Data Engineer team, with each team's Workspace hosting both production and development pipelines.
 - Using a **Workspace per project**. For example, you might have a Workspace called "Sales Analytics Project" that hosts both production and development pipelines.
 
-This document explains how to configure Workspace details. To manage Workspace users, see [Manage Astro users](add-user.md).
+This document explains how to configure Workspace details. To manage Workspace users, see [Manage Workspace users](manage-workspace-users.md).
 
 ## Create a Workspace
 
@@ -49,7 +49,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 
     - **Name**: The name of your Workspace
     - **Description**: The description of your Workspace
-    - **CI/CD Enforcement Default**: Determines whether new Deployments in the Workspace enforce CI/CD deploys by default. This default can be overridden at the Deployment level. See [Enforce CI/CD deploys](configure-deployment-resources.md#enforce-ci-cd-deploys).
+    - **CI/CD Enforcement Default**: Determines whether new Deployments in the Workspace enforce CI/CD deploys by default. This default can be overridden at the Deployment level. See [Enforce CI/CD deploys](deployment-settings.md#enforce-ci-cd-deploys).
 
 ## Delete a Workspace
 

@@ -5,8 +5,9 @@ id: release-notes
 description: Astronomer Software release notes.
 ---
 
-<!--- Version-specific -->
+This document contains release notes for each version of Astronomer Software.
 
+<<<<<<< HEAD
 This page contains release notes for all recent Astronomer Software versions. 
 
 0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
@@ -80,6 +81,10 @@ Release date: August 31, 2023
     - [CVE-2023-36665](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-36665)
     - [CVE-2023-2650](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650)
 
+=======
+0.32 is the latest long-term support (LTS) release for Astronomer Software. To upgrade to 0.32, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels and currently maintained versions of Astronomer Software, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+
+>>>>>>> 7445f7da6bea8a52d8659a1e93f8c74a4886dd1b
 ## 0.32.2
 
 Release date: June 23, 2023
@@ -95,7 +100,11 @@ Release date: June 12, 2023
 
 ### Additional improvements
 
+<<<<<<< HEAD
 - [Overprovisioning](https://docs.astronomer.io/software/cluster-resource-provisioningd) now also applies to the following components:
+=======
+- [Overprovisioning](https://docs.astronomer.io/software/cluster-resource-provisioning) now also applies to the following components:
+>>>>>>> 7445f7da6bea8a52d8659a1e93f8c74a4886dd1b
 
     - PGBouncer
     - Statsd
@@ -890,4 +899,8 @@ The flag prints out different levels of logs depending on the value that you pas
 - Fixed an issue where you could not update an existing Deployment's IAM role via the Astronomer CLI
 - Fixed an issue where Deployments would not work on clusters with custom domains
 - Fixed error handling when interacting with a Deployment that wasn't fully spun up
+<<<<<<< HEAD
 - Added a new validation step for Airflow Helm chart values configured in the `astronomer.houston.config.deployments.helm.airflow` section of `config.yaml`
+=======
+- Added a new validation step for Airflow Helm chart values configured in the `astronomer.houston.config.deployments.helm.airflow` section of `config.yaml`
+>>>>>>> 7445f7da6bea8a52d8659a1e93f8c74a4886dd1b

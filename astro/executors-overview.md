@@ -17,7 +17,7 @@ The difference between executors is based on how tasks are distributed across wo
 - Celery executor
 - Kubernetes executor
 
-Read the following topics to learn about the benefits and limitations of each executor. For information about how to change the executor of an existing Deployment, see [Update the Deployment executor](configure-deployment-resources.md#update-the-deployment-executor).
+Read the following topics to learn about the benefits and limitations of each executor. For information about how to change the executor of an existing Deployment, see [Update the Deployment executor](deployment-settings.md#update-the-deployment-executor).
 
 ### Celery executor
 
@@ -26,31 +26,37 @@ The Celery executor is the default for all new Deployments. It uses a group of w
 The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your Deployment if:
 
 - You're just getting started with Airflow.
+- You don't have tasks that require more than 24 hours to execute. Celery workers give their tasks only 24 hours to finish so they can restart in the event of a code deploy.
 - You want to use different worker types based on the type of task you're running. See [Configure worker queues](configure-worker-queues.md).
-- You have a high number of short-running tasks and want to ensure low latency between tasks.
-- You don't often experience conflicts between Python or OS-level packages and don't require dependency isolation.
+- You have many short-running tasks.
+- Your tasks require the shortest startup latency (often milliseconds).
+- You don't require task or dependency isolation.
+- You want to direct tasks to run in worker queues with varying resources. This is useful if you want to run a subset of tasks with priority for SLA reasons, or if your tasks have varied resource requirements.
 
-If you regularly experience dependency conflicts or find that some tasks consume the resources of other tasks and cause them to fail, Astronomer recommends implementing worker queues or moving to the Kubernetes executor.
+If you find that some tasks consume the resources of other tasks and cause them to fail, Astronomer recommends implementing worker queues or moving to the Kubernetes executor.
 
 See [Manage the Celery executor](celery-executor.md) to learn more about how to configure the Celery executor.
 
 ### Kubernetes executor
 
-The Kubernetes executor runs each task in an individual Kubernetes Pod instead of in shared Celery workers. For each task that needs to run, the executor calls the Kubernetes API to dynamically launch a Pod for the task. You can specify the configuration of the task's Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg. When the task completes, the Pod terminates and its resources are restored to the cluster.
+The Kubernetes executor runs each task in an individual container. For each task that needs to run, the executor dynamically launches a Kubernetes Pod on your Astro cluster to run the task. When the task completes, the Pod terminates and its resources are released to the cluster. 
 
-On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer. The nodes running Kubernetes Pods are multi-tenant, meaning that Kubernetes Pods on Deployments belonging to different Workspaces can run on the same worker node. This reduces the amount of resources that are required to start up new Pods.
+On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
-The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment of each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
+The Kubernetes executor is a good option for some use cases. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
-- You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when you deploy code.
+- You have long-running tasks that might require more than 24 hours to execute.
 - Your tasks are compute-intensive or you are processing large volumes of data within the task. Kubernetes executor tasks run separately in a dedicated Pod per task. 
-- You have a strong understanding of the CPU and memory that your tasks require and would benefit from being able to allocate and optimize infrastructure resources at the task level.
+- Your tasks can tolerate some startup latency (often seconds)
+- Your tasks require task or dependency isolation.
 - You have had issues running certain tasks reliably with the Celery executor.
-  
-The primary limitation with the Kubernetes executor is that each task takes up to 1 minute to start running once scheduled. If you're running short-running tasks and cannot tolerate high latency, Astronomer recommends the Celery executor. To learn more about using the Kubernetes executor, see [Manage the Kubernetes executor](kubernetes-executor.md).
+
+You can specify the configuration of the task's Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg.
+
+If you're running a high task volume or cannot tolerate startup latency, Astronomer recommends the Celery executor. To learn more about using the Kubernetes executor, see [Manage the Kubernetes executor](kubernetes-executor.md).
 
 :::tip
 
-If only some of your tasks need an isolated execution environment, consider using the [KubernetesPodOperator](kubernetespodoperator.md) with the Celery executor.
+The Kubernetes executor is primarily used for resource optimization. If you want more control over the environment and dependencies that your tasks run with, consider using the [KubernetesPodOperator](kubernetespodoperator.md) with either the Celery executor or Kubernetes executor.
 
 :::

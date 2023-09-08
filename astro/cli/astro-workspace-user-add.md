@@ -23,9 +23,9 @@ The behavior and format of this command differs depending on which Astronomer pr
     ]}>
 <TabItem value="astro">
 
-Add an existing Organization user to your current Astronomer Workspace. You must be a Workspace Admin to perform this action.
+Add an existing Organization user to your current Astronomer Workspace. You must be a Workspace Owner to perform this action.
 
-You can use this command to invite multiple users to a Workspace at a time. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
+You can use this command to invite multiple users to a Workspace at a time. See [Add a group of users to Astro using the Astro CLI](manage-organization-users.md#add-a-group-of-users-to-astro-using-the-astro-cli).
 
 ## Usage
 
@@ -38,7 +38,7 @@ astro workspace user add <email>
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `<email-address>` | The email address of the user that you want to add to the Workspace. | Any valid email address                                                                            |
-| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
 
@@ -63,7 +63,7 @@ astro workspace user add --email <user-email-address>
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `--email` (_Required_) | The user's email                                                                                                                                      | Any valid email address                                                                                                 |
 | `--workspace-id`       | The Workspace that the user is added to. Specify this flag if you want to create a user in a Workspace that is different than your current Workspace. | Any valid Workspace ID                                                                                                  |
-| `--role`               | The role assigned to the user.                                                                                                                        | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, and `WORKSPACE_ADMIN`. Default value is `WORKSPACE_VIEWER`. |
+| `--role`               | The role assigned to the user.                                                                                                                        | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, and `WORKSPACE_OWNER`. Default value is `WORKSPACE_MEMBER`. |
 
 ## Related documentation
 

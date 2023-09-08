@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Astro Runtime architecture"
+sidebar_label: "Architecture"
 title: "Astro Runtime architecture"
 id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
@@ -92,6 +92,7 @@ The latest version of the Astro Runtime image has the following open source prov
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)*
 - SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)
 
+
 ### Provider package versioning
 
 If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](runtime-release-notes.md).
@@ -104,6 +105,7 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 
 ## Python versioning
 
+
 | Astro Runtime | Python version |
 | ------------- | -------------- |
 | 4             | 3.9            |
@@ -111,8 +113,11 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 | 6             | 3.9            |
 | 7             | 3.9            |
 | 8             | 3.10           |
+| 9             | 3.11           |
 
-If your data pipelines require an unsupported Python version and you're running Astro Runtime 6.0 (based on Airflow 2.4) or later, Astronomer recommends that you use the `ExternalPythonOperator`. See [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator).
+Starting with Astro Runtime 9, if you require a different version of Python than what's included in the base distribution, you can use a Python distribution of Astro Runtime. See [Distribution](#distribution).
+
+If you're running Astro Runtime 6.0 (based on Airflow 2.4) to Runtime 8, Astronomer recommends that you use the `ExternalPythonOperator` to run different Python versions in Airflow. See [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator).
 
 If you're currently using the `KubernetesPodOperator` or the `PythonVirtualenvOperator` in your DAGs, you can continue to use them to create virtual or isolated environments that can run tasks with different versions of Python.
 
@@ -126,14 +131,25 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 
 ## Distribution
 
-Astro Runtime is distributed as a Debian-based Docker image. Runtime Docker images have the following format:
+Astro Runtime is distributed as a Debian-based Docker image. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+
+### Base distributions
+
+The base Astro Runtime Docker images have the following format:
 
 - `quay.io/astronomer/astro-runtime:<version>`
 - `quay.io/astronomer/astro-runtime:<version>-base`
 
 An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
 
-For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+### Python version distributions
+
+Starting with Astro Runtime 9, Astronomer maintains different distributions Astro Runtime for each supported Python version. Python version distribution images have the following format:
+
+```text
+quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
+```
+
 
 ## System distribution
 

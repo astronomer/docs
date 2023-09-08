@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 :::caution
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
 To get started on Astro Hosted, see [Start a trial](trial.md).
 
@@ -83,7 +83,8 @@ The CIDR range sizes must be equal to or greater than the default range sizes fo
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Owner to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See  [Manage Workspace users](manage-workspace-users.md).
+    To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
 ## Activate the data plane
 
@@ -131,7 +132,7 @@ If you don't specify your organization's preferred configurations, Astronomer cr
 Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
 - VPC Name/ID and region for peering with Astronomer.
-- The IPs of your DNS servers.
+- Google Cloud project ID of the target VPC.
 
 ## Astronomer support creates the cluster
 
@@ -156,6 +157,6 @@ To confirm a successful installation, in the Cloud UI select a Workspace and on 
 
 - [Set up an identity provider](configure-idp.md)
 - [Install the Astro CLI](cli/overview.md)
-- [Configure Deployments](configure-deployment-resources.md)
+- [Deployment settings](deployment-settings.md)
 - [Deploy code](deploy-code.md)
-- [Add users](add-user.md)
+- [Manage Organization users](manage-organization-users.md)
