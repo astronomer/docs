@@ -18,7 +18,8 @@ Release date: August 3, 2023
 ### Automatic PGBouncer connection scaling
 
 Astronomer Software now automatically scales the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This improves performance, scalability, and utilization of database connections across all Deployments. 
-You can enable this by setting `deployments.pgBouncerResourceCalculationStrategy: airflowStratV2`
+
+This feature is off by default. You can enable it by setting  `deployments.pgBouncerResourceCalculationStrategy: airflowStratV2` in your `config.yaml` file. To revert back to previous behavior, set this key to `auStratV1` instead.
 
 :::info
 You can revert back to the AU based strategy by setting the value to `deployments.pgBouncerResourceCalculationStrategy: auStratV1`
