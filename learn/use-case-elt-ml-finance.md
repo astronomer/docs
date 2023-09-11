@@ -55,7 +55,7 @@ This project consists of three DAGs: one helper DAG to simulate an ingestion pro
 
 ![Datasets view of the use case project showing the DAG finance_elt DAG that produces to the dataset astro://postgres_default@?table=model_satisfaction which is consumed by the second DAG named finance_ml.](/img/examples/use-case-elt-ml-finance_datasets_view.png)
 
-The [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py) DAG is a helper that that runs the script to create mock data and the `finance-elt-ml-data` bucket in MinIO. After creating the assets, the data is loaded into the bucket using [dynamic task mapping](dynamic-tasks.md).
+The [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py) DAG is a helper that runs the script to create mock data and the `finance-elt-ml-data` bucket in MinIO. After creating the assets, the data is loaded into the bucket using [dynamic task mapping](dynamic-tasks.md).
 
 ![Graph view of the in_finance_data DAG showing a task generating the mock data and another one creating the object storage bucket. Afterwards, a task generates keyword arguments that are mapped over by a LocalFilesystemToS3Operator, the DAG run shown created 20 mapped task instances of the latter task.](/img/examples/use-case-elt-ml-finance_in_finance_data_dag_graph.png)
 
@@ -73,7 +73,7 @@ This use case shows many core Airflow features like [datasets](airflow-datasets.
 
 #### Ingestion DAG
 
-The ingestion DAG, [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py), is a helper DAG to simulate data arriving in your object storage from other sources, such as from  manual uploads or via an [Kafka](airflow-kafka.md) S3 sink.  
+The ingestion DAG, [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py), is a helper DAG to simulate data arriving in your object storage from other sources, such as from manual uploads or via an [Kafka](airflow-kafka.md) S3 sink.  
 
 The [script to create mock data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) is located in the include folder and called inside a `@task` decorated function. Modularizing scripts in this way is a common pattern to make them accessible to several DAGs and also make your DAG files easier to read.
 
