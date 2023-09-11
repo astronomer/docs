@@ -304,7 +304,7 @@ if ENVIRONMENT == "prod":
     namespace = conf.get("kubernetes", "NAMESPACE")
 
     @task.kubernetes(
-        image="python",
+        image="<YOUR MODEL IMAGE>",
         in_cluster=True,
         namespace=namespace,
         name="my_model_train_pod",
