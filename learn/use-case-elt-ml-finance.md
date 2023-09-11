@@ -18,7 +18,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use_case_elt_ml_finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-elt-ml-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
 
 The repository is configured to spin up and use local [Postgres](https://www.postgresql.org/) and [MinIO](https://min.io/) instances without you needing to define connections or access external tools. MinIO is local storage that mimics the S3 API and can be used with S3 specific Airflow operators.
 
@@ -47,7 +47,7 @@ To run the project, unpause all DAGs. The `in_finance_data` and `finance_elt` DA
 
 ### Data source
 
-The data in this example is generated using the [create_mock_data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) script. The script creates CSV files in `include/mock_data` that contain data resembling the payload of the [Stripe API](https://stripe.com/docs/api/charges) Charges endpoint and customer satisfaction scores. The data is generated to contain a linear relationship between two features and the target variable `amount_charged`.
+The data in this example is generated using the [create_mock_data](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/include/create_mock_data.py) script. The script creates CSV files in `include/mock_data` that contain data resembling the payload of the [Stripe API](https://stripe.com/docs/api/charges) Charges endpoint and customer satisfaction scores. The data is generated to contain a linear relationship between two features and the target variable `amount_charged`.
 
 ### Project overview
 
@@ -55,15 +55,15 @@ This project consists of three DAGs: one helper DAG to simulate an ingestion pro
 
 ![Datasets view of the use case project showing the DAG finance_elt DAG that produces to the dataset astro://postgres_default@?table=model_satisfaction which is consumed by the second DAG named finance_ml.](/img/examples/use-case-elt-ml-finance_datasets_view.png)
 
-The [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py) DAG is a helper that runs the script to create mock data and the `finance-elt-ml-data` bucket in MinIO. After creating the assets, the data is loaded into the bucket using [dynamic task mapping](dynamic-tasks.md).
+The [`in_finance_data`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/in_finance_data.py) DAG is a helper that runs the script to create mock data and the `finance-elt-ml-data` bucket in MinIO. After creating the assets, the data is loaded into the bucket using [dynamic task mapping](dynamic-tasks.md).
 
 ![Graph view of the in_finance_data DAG showing a task generating the mock data and another one creating the object storage bucket. Afterwards, a task generates keyword arguments that are mapped over by a LocalFilesystemToS3Operator, the DAG run shown created 20 mapped task instances of the latter task.](/img/examples/use-case-elt-ml-finance_in_finance_data_dag_graph.png)
 
-The [`finance_elt`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_elt.py) DAG waits for files to land in the object storage using the [deferrable operator](deferrable-operators.md) [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync). After the files are available, their contents are loaded to a Postgres database and transformed using operators from the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
+The [`finance_elt`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_elt.py) DAG waits for files to land in the object storage using the [deferrable operator](deferrable-operators.md) [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync). After the files are available, their contents are loaded to a Postgres database and transformed using operators from the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
 
 ![Graph view of the finance_elt DAG showing a task group containing two S3KeySensorAsync tasks waiting for files, afterwards the filepaths are retrieved and a LoadFileOperator from the Astro Python SDK is dynamically mapped to move the contents of the files to a RDBMS. Three transform tasks follow sequentially: select_successful_charges, avg_successful_per_customer, and join_charge_satisfaction. An Astro Python SDK cleanup task runs in parallel, removing temporary tables after they are no longer needed.](/img/examples/use-case-elt-ml-finance_finance_elt_dag_graph.png)
 
-The [`finance_ml`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_ml.py) DAG engineers machine learning features based on the last table created by the `finance_elt` DAG and then trains several models to predict the `amount_charged` column based on these features. The last task plots model results. Both model training and result plotting are mapped dynamically over a list of model classes and hyperparameters.
+The [`finance_ml`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_ml.py) DAG engineers machine learning features based on the last table created by the `finance_elt` DAG and then trains several models to predict the `amount_charged` column based on these features. The last task plots model results. Both model training and result plotting are mapped dynamically over a list of model classes and hyperparameters.
 
 ![Graph view of the finance_ml DAG showing three sequential tasks, feature_eng, train_model_task and plot_model_results. The DAG run shown had 4 mapped task instances for model training and plotting each.](/img/examples/use-case-elt-ml-finance_finance_ml_dag_graph.png)
 
@@ -73,9 +73,9 @@ This use case shows many core Airflow features like [datasets](airflow-datasets.
 
 #### Ingestion DAG
 
-The ingestion DAG, [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py), is a helper DAG to simulate data arriving in your object storage from other sources, such as from manual uploads or via an [Kafka](airflow-kafka.md) S3 sink.  
+The ingestion DAG, [`in_finance_data`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/in_finance_data.py), is a helper DAG to simulate data arriving in your object storage from other sources, such as from manual uploads or via an [Kafka](airflow-kafka.md) S3 sink.  
 
-The [script to create mock data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) is located in the include folder and called inside a `@task` decorated function. Modularizing scripts in this way is a common pattern to make them accessible to several DAGs and also make your DAG files easier to read.
+The [script to create mock data](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/include/create_mock_data.py) is located in the include folder and called inside a `@task` decorated function. Modularizing scripts in this way is a common pattern to make them accessible to several DAGs and also make your DAG files easier to read.
 
 ```python
 from include.create_mock_data import generate_mock_data
@@ -130,7 +130,7 @@ upload_mock_data = LocalFilesystemToS3Operator.partial(
 
 #### ELT DAG
 
-The ELT DAG, [`finance_elt`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_elt.py), waits for the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator to drop the file in the object storage. [Deferrable operators](deferrable-operators.md) are operators that use the Triggerer component to release their worker slot while they wait for a condition in an external tool to be met. This allows you to use resources more efficiently and save costs.
+The ELT DAG, [`finance_elt`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_elt.py), waits for the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator to drop the file in the object storage. [Deferrable operators](deferrable-operators.md) are operators that use the Triggerer component to release their worker slot while they wait for a condition in an external tool to be met. This allows you to use resources more efficiently and save costs.
 
 The two `wait_for_ingest_*` tasks are grouped in a [task group](task-groups.md), which visually groups the tasks in the Airflow UI and allows you to pass arguments like `aws_conn_id` at the group level.
 
@@ -223,7 +223,7 @@ Additionally, a [cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astr
 
 #### ML DAG
 
-Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG [`finance_ml`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_ml.py) is scheduled to run as soon as the `model_satisfaction` table is updated by the ELT DAG. Since the Astro Python SDK is used to update the `model_satisfaction` table, the dataset is automatically created and updated, without explicit `outlets` arguments. 
+Airflow [datasets](airflow-datasets.md) let you schedule DAGs based on when a specific file or database is updated in a separate DAG. In this example, the ML DAG [`finance_ml`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_ml.py) is scheduled to run as soon as the `model_satisfaction` table is updated by the ELT DAG. Since the Astro Python SDK is used to update the `model_satisfaction` table, the dataset is automatically created and updated, without explicit `outlets` arguments. 
 
 The `schedule` parameter of the ML DAG uses the same `Table` definition as a dataset.
 
