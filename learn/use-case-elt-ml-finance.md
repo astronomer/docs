@@ -2,7 +2,7 @@
 title: "Run an integrated ELT and ML pipeline on Stripe data in Airflow"
 description: "Use Airflow, the Astro Python SDK and Datasets in a data-driven way."
 id: use-case-elt-ml-finance
-sidebar_label: "Combined ELT and ML pipeline"
+sidebar_label: "Financial ELT and ML pipeline"
 ---
 
 ELT/ETL and ML orchestration are two of the most common use cases for Airflow. This project shows how to use Airflow, the [Astro Python SDK](astro-python-sdk.md), and [Airflow Datasets](airflow-datasets.md) to build a data-driven pipeline that combines ETL and ML. For this example, we use mock financial data modeled after the [Stripe API](https://stripe.com/docs/api/charges). Based on different customer satisfaction scores and product type we'll try to predict the total amount spent per customer, hoping to get some insight into which areas of customer satisfaction to focus on. You can adjust the model class and hyperparameters to improve model fit. What R2 can you achieve?
@@ -20,9 +20,9 @@ Before trying this example, make sure you have:
 
 Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use_case_elt_ml_finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
 
-The repository is configured to spin up and use local [Postgres](https://www.postgresql.org/) and [MinIO](https://min.io/) instances without you needing to define connections or access external tools. MinIO is a local storage that mimics the S3 API and can be used with S3 specific Airflow operators.
+The repository is configured to spin up and use local [Postgres](https://www.postgresql.org/) and [MinIO](https://min.io/) instances without you needing to define connections or access external tools. MinIO is local storage that mimics the S3 API and can be used with S3 specific Airflow operators.
 
-If you want to use S3 as your object storage, you can change the `AWS_CONN_ID` in the `.env` file and provide your AWS credentials credentials. To use a different relational database, [add an Airflow connection](connections.md) to a [database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html) to your Airflow instance and set `DB_CONN_ID` in the DAG files to your connection ID.
+If you want to use S3 as your object storage, you can change the `AWS_CONN_ID` in the `.env` file and provide your AWS credentials. To use a different relational database, [add an Airflow connection](connections.md) to a [database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html) to your Airflow instance and set `DB_CONN_ID` in the DAG files to your connection ID.
 
 ## Run the project
 
@@ -47,21 +47,21 @@ To run the project, unpause all DAGs. The `in_finance_data` and `finance_elt` DA
 
 ### Data source
 
-The Data in this example is generated using the [create_mock_data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) script. The script will create CSV files in `include/mock_data` that contain data resembling the payload of the [Stripe API](https://stripe.com/docs/api/charges) charges endpoint and customer satisfaction scores. The data is generated to contain a linear relationship between two features and the target variable `amount_charged`.
+The data in this example is generated using the [create_mock_data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) script. The script creates CSV files in `include/mock_data` that contain data resembling the payload of the [Stripe API](https://stripe.com/docs/api/charges) Charges endpoint and customer satisfaction scores. The data is generated to contain a linear relationship between two features and the target variable `amount_charged`.
 
 ### Project overview
 
-This project consists of three DAGs: one helper DAG to simulate an ingestion process, and two pipeline DAGs which have dependency relationships through [Airflow datasets](airflow-datasets.md).
+This project consists of three DAGs: one helper DAG to simulate an ingestion process and two pipeline DAGs which have dependency relationships through [Airflow datasets](airflow-datasets.md).
 
 ![Datasets view of the use case project showing the DAG finance_elt DAG that produces to the dataset astro://postgres_default@?table=model_satisfaction which is consumed by the second DAG named finance_ml.](/img/examples/use-case-elt-ml-finance_datasets_view.png)
 
-The [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py) DAG is a helper that that runs the script to create mock data and the `finance-elt-ml-data` bucket in MinIO. After the creation of the assets, the data is loaded into the bucket using [dynamic task mapping](dynamic-tasks.md).
+The [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py) DAG is a helper that that runs the script to create mock data and the `finance-elt-ml-data` bucket in MinIO. After creating the assets, the data is loaded into the bucket using [dynamic task mapping](dynamic-tasks.md).
 
-![Graph view of the in_finance_data DAG showing a task generating the mock data and another one creating the object storage bucket. Afterwards keyword arguments are generated by a task which are mapped over by a LocalFilesystemToS3Operator, the DAG run shown created 20 mapped task instances of the latter task.](/img/examples/use-case-elt-ml-finance_in_finance_data_dag_graph.png)
+![Graph view of the in_finance_data DAG showing a task generating the mock data and another one creating the object storage bucket. Afterwards, a task generates keyword arguments that are mapped over by a LocalFilesystemToS3Operator, the DAG run shown created 20 mapped task instances of the latter task.](/img/examples/use-case-elt-ml-finance_in_finance_data_dag_graph.png)
 
-The [`finance_elt`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_elt.py) DAG waits for files to land in the object storage using the [deferrable operator](deferrable-operators.md) [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync). Once the files are available, their contents are loaded to a Postgres database and transformed using operators from the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
+The [`finance_elt`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_elt.py) DAG waits for files to land in the object storage using the [deferrable operator](deferrable-operators.md) [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync). After the files are available, their contents are loaded to a Postgres database and transformed using operators from the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
 
-![Graph view of the finance_elt DAG showing a task group containing two S3KeySensorAsync tasks waiting for files, afterwards the filepaths are retrieved and a LoadFileOperator form the Astro Python SDK is dynamically mapped to move the contents of the files to a RDBMS. Three transform tasks follow sequentially: select_successful_charges, avg_successful_per_customer and join_charge_satisfaction. An Astro Python SDK cleanup task runs in parallel removing temporary tables after they are no longer needed.](/img/examples/use-case-elt-ml-finance_finance_elt_dag_graph.png)
+![Graph view of the finance_elt DAG showing a task group containing two S3KeySensorAsync tasks waiting for files, afterwards the filepaths are retrieved and a LoadFileOperator from the Astro Python SDK is dynamically mapped to move the contents of the files to a RDBMS. Three transform tasks follow sequentially: select_successful_charges, avg_successful_per_customer, and join_charge_satisfaction. An Astro Python SDK cleanup task runs in parallel, removing temporary tables after they are no longer needed.](/img/examples/use-case-elt-ml-finance_finance_elt_dag_graph.png)
 
 The [`finance_ml`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_ml.py) DAG engineers machine learning features based on the last table created by the `finance_elt` DAG and then trains several models to predict the `amount_charged` column based on these features. The last task plots model results. Both model training and result plotting are mapped dynamically over a list of model classes and hyperparameters.
 
@@ -69,13 +69,13 @@ The [`finance_ml`](https://github.com/astronomer/use_case_elt_ml_finance/blob/ma
 
 ### Project code
 
-This use case shows many core Airflow features like [datasets](airflow-datasets.md), [dynamic task mapping](dynamic-tasks.md) and [deferrable operators](deferrable-operators.md). It also heavily uses the [Astro Python SDK](astro-python-sdk.md), an open-source package created by Astronomer to simplify DAG writing with Python functions for both ELT and ML use cases.
+This use case shows many core Airflow features like [datasets](airflow-datasets.md), [dynamic task mapping](dynamic-tasks.md), and [deferrable operators](deferrable-operators.md). It also heavily uses the [Astro Python SDK](astro-python-sdk.md), an open-source package created by Astronomer to simplify DAG writing with Python functions for both ELT and ML use cases.
 
 #### Ingestion DAG
 
-The ingestion DAG [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py) is a helper DAG to simulate data arriving in your object storage from other sources (e.g. from  manual uploads or via an [Kafka](airflow-kafka.md) S3 sink).  
+The ingestion DAG, [`in_finance_data`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/in_finance_data.py), is a helper DAG to simulate data arriving in your object storage from other sources, such as from  manual uploads or via an [Kafka](airflow-kafka.md) S3 sink.  
 
-The [script to create mock data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) is located in the include folder and called inside a `@task` decorated function. Modularizing scripts is a common pattern to make them accessible to several DAGs and make your DAG files easier to read.
+The [script to create mock data](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/include/create_mock_data.py) is located in the include folder and called inside a `@task` decorated function. Modularizing scripts in this way is a common pattern to make them accessible to several DAGs and also make your DAG files easier to read.
 
 ```python
 from include.create_mock_data import generate_mock_data
@@ -91,7 +91,7 @@ def generate_mock_data_task():
 generate_mock_data_task()
 ```
 
-The data which will be created in `include/mock_data` is uploaded to the object storage using a dynamically mapped LocalFilesystemToS3Operator. Note how `.expand_kwargs` is used to map over pairs of `filename` and `dest_key` keyword arguments.
+The data created in `include/mock_data` is uploaded to the object storage using a dynamically mapped LocalFilesystemToS3Operator. Note how the following example uses `.expand_kwargs` to map pairs of `filename` and `dest_key` keyword arguments.
 
 ```python
 @task
@@ -130,9 +130,9 @@ upload_mock_data = LocalFilesystemToS3Operator.partial(
 
 #### ELT DAG
 
-The ELT DAG [`finance_elt`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_elt.py) waits for the file to be dropped in the object storage using the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator. [Deferrable operators](deferrable-operators.md) are operators that use the Triggerer component to release their worker slot while they are waiting for a condition in an external tool to be met. This allows you to utilize resources more efficiently and save costs.
+The ELT DAG, [`finance_elt`](https://github.com/astronomer/use_case_elt_ml_finance/blob/main/dags/finance_elt.py), waits for the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator to drop the file in the object storage. [Deferrable operators](deferrable-operators.md) are operators that use the Triggerer component to release their worker slot while they wait for a condition in an external tool to be met. This allows you to use resources more efficiently and save costs.
 
-The two `wait_for_ingest_*` tasks are grouped in a [task group](task-groups.md), which allows for the passing of arguments like `aws_conn_id` at the group level and visually groups the tasks in the Airflow UI.
+The two `wait_for_ingest_*` tasks are grouped in a [task group](task-groups.md), which visually groups the tasks in the Airflow UI and allows you to pass arguments like `aws_conn_id` at the group level.
 
 ```python 
 @task_group(
@@ -185,8 +185,8 @@ s3_to_db_glob = LoadFileOperator.partial(
 ).expand_kwargs(input_files)
 ```
 
-Finally the three transform tasks use the [@aql.transform](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/transform.html) decorator of the Astro Python SDK to directly use SQL on an input table to create a new output table. For example, the second transform task ingests the temporary table created by the upstream task `select_successful_charges` and calculates the average amount charged per customer using a SQL statement. 
-The resulting temporary table is directly passed into the next task `join_charge_satisfaction` which joins the average amount charged per customer with the customer satisfaction scores and creates a permanent output table called `model_satisfaction`.
+Finally, the three transform tasks use the [@aql.transform](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/transform.html) decorator of the Astro Python SDK to directly use SQL on an input table to create a new output table. For example, the second transform task ingests the temporary table created by the upstream task `select_successful_charges` and calculates the average amount charged per customer using a SQL statement. 
+The resulting temporary table is directly passed into the next task `join_charge_satisfaction`, which joins the average amount charged per customer with the customer satisfaction scores and creates a permanent output table called `model_satisfaction`.
 
 ```python
 @aql.transform()
@@ -235,7 +235,7 @@ The `schedule` parameter of the ML DAG uses the same `Table` definition as a dat
 )
 ```
 
-The first task of the ML DAG takes care of feature engineering. By using the [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator the `model_satisfaction` table is ingested directly as a [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html). 
+The first task of the ML DAG takes care of feature engineering. By using the [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator, the `model_satisfaction` table is ingested directly as a [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html). 
 The `feature_eng` task creates a train test split, scales the numeric features, and one-hot encodes the categorical feature `product_type` using functions from [scikit-learn](https://scikit-learn.org/stable/index.html). The resulting sets of features and targets are returned as a dictionary of pandas DataFrames.
 
 ```python
@@ -292,7 +292,7 @@ feature_eng_table = feature_eng(
 
 This DAG includes two possible paths for model training, based on whether the Airflow instance runs on [Kubernetes](https://kubernetes.io/). 
 
-Since Airflow DAGs are defined as Python code, different task definitions for different environments can be achieved by a simple if/else statement. If the environment is `prod`, the model training task is run using the [@task.kubernetes](kubepod-operator.md#use-the-taskkubernetes-decorator) decorator, which is the decorator version of the [KubernetesPodOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest/modules/KubernetesPodOperator). This allows you to run your model training in a dedicated Kubernetes pod gaining full control over the environment and resources used.
+Since Airflow DAGs are defined as Python code, different task definitions for different environments can be achieved by a simple if/else statement. If the environment is `prod`, the model training task runs using the [@task.kubernetes](kubepod-operator.md#use-the-taskkubernetes-decorator) decorator, which is the decorator version of the [KubernetesPodOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest/modules/KubernetesPodOperator). This allows you to run your model training in a dedicated Kubernetes pod, gaining full control over the environment and resources used.
 
 Additionally, Astro customers can use the `queue` parameter to run this task using a dedicated [worker queue](https://docs.astronomer.io/astro/configure-worker-queues) with more resources.
 
@@ -336,7 +336,7 @@ else:
     raise ValueError(f"Unknown environment: {ENVIRONMENT}")
 ```
 
-Both definitions of the `train_model_task` shown above call the same `train_model` function with takes in the engineered features as well as the model class and hyperparameters as arguments. To train several models in parallel the `train_model_task` is dynamically mapped over a list of model classes and hyperparameters. Tweak the hyperparameters to improve the model fit and add other [scikit-learn regression models](https://scikit-learn.org/stable/modules/classes.html) to the list to try them out!
+Both definitions of the `train_model_task` shown in the previous example call the same `train_model` function, which takes in the engineered features as well as the model class and hyperparameters as arguments. To train several models in parallel, the `train_model_task` is dynamically mapped over a list of model classes and hyperparameters. Tweak the hyperparameters to improve the model fit and add other [scikit-learn regression models](https://scikit-learn.org/stable/modules/classes.html) to the list to try them out!
 
 ```python
 def train_model(feature_eng_table, model_class, hyper_parameters):
