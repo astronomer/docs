@@ -62,7 +62,7 @@ astro deploy <options>
 | `-t`,`--test`             | The filepath to an alternative pytest file or directory                                                                                               | Valid filepath within your Astro project                         |
 | `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace                                                                     | Any valid Workspace ID                                           |
 | `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
-| `-w`, `--wait`            | Wait for the Deployment to become healthy before ending the command                                                                                   | None                                                             |
+| `-w`, `--wait`            | Wait for the Deployment to become healthy before completing the command                                                                                   | None                                                             |
 
 ## Examples
 
@@ -76,7 +76,7 @@ This command will prompt you to enter the Deployment number to which you wish to
 
 :::info
 
-If you have uncommitted changes in your working directory, you must use `-f` or `--force` flag with this command, or commit changes to your code repository.
+If you have uncommitted changes in your working directory, you must use the `-f` or `--force` flag with this command or commit changes to your code repository.
 
 :::
 
@@ -86,13 +86,13 @@ To deploy directly to a specific Deployment:
 astro deploy ckvvfp9tf509941drl4vela81n
 ```
 
-To configure Astro CLI to automatically use a given Deployment and current working directory combination for future deploys:
+To configure the Astro CLI to use a given Deployment and directory as a default for future deploys:
 
 ```bash
 astro deploy ckvvfp9tf509941drl4vela81n --save
 ```
 
-To use a Docker image from your local Docker registry to build your Astro project:
+To [use a custom Docker image](release-notes.md#deploy-a-custom-docker-image-with-new---image-name-flag) from your local Docker registry to build your Astro project:
 
 ```bash
 astro deploy --image-name your-custom-runtime-image
@@ -104,7 +104,6 @@ To deploy only DAGs from your Astro project to a specific Deployment:
 astro deploy ckvvfp9tf509941drl4vela81n --dags
 ```
 
-See [Deploy a custom Docker image](release-notes.md#deploy-a-custom-docker-image-with-new---image-name-flag) for more details.
 
 </TabItem>
 
