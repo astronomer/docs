@@ -45,6 +45,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 6             | 2.4                    |
 | 7             | 2.5                    |
 | 8             | 2.6                    |
+| 9             | 2.7                    |
 
 For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
@@ -63,7 +64,7 @@ The following table lists the Airflow environment variables that have different 
 
 Astro Runtime includes a monitoring DAG that is pre-installed in the Docker image and enabled for all Deployments on Astro Hybrid. In addition to generating Deployment health and metrics functionality, this DAG allows the Astronomer team to monitor the health of your data plane by enabling real-time visibility into whether your workers are healthy and tasks are running.
 
-The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot. The DAG runs and appears in the Airflow UI only on Astro Deployments. 
+The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot. The DAG runs and appears in the Airflow UI only on Astro Deployments.
 
 Because this DAG is essential to Astro's managed service, you are not charged for its task runs. For the same reasons, this DAG can't be modified or disabled through the Airflow UI. To modify when this DAG runs on a Deployment, set the following [Deployment environment variable](environment-variables.md):
 
@@ -72,26 +73,25 @@ Because this DAG is essential to Astro's managed service, you are not charged fo
 
 ## Provider packages
 
-The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with an asterisk (*) are installed only in Astro Runtime and not installed by default on Apache Airflow.
+The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with an asterisk (\*) are installed only in Astro Runtime and not installed by default on Apache Airflow.
 
-- Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)*
-- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)*
-- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/)*
+- Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)\*
+- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)\*
+- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/)\*
 - Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
 - Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
 - Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)
-- Datadog [`apache-airflow-providers-datadog](https://pypi.org/project/apache-airflow-providers-datadog/)*
-- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)*
-- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/) 
-- Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)*
+- Datadog [`apache-airflow-providers-datadog](https://pypi.org/project/apache-airflow-providers-datadog/)\*
+- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)\*
+- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)
+- Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)\*
 - HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)
 - IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)
-- Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)*
-- OpenLineage [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/) (Installs an Airflow plugin)*
-- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)*
-- Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)*
+- Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)\*
+- OpenLineage [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/) (Installs an Airflow plugin)\*
+- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)\*
+- Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)\*
 - SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)
-
 
 ### Provider package versioning
 
@@ -104,7 +104,6 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 ```
 
 ## Python versioning
-
 
 | Astro Runtime | Python version |
 | ------------- | -------------- |
@@ -149,7 +148,6 @@ Starting with Astro Runtime 9, Astronomer maintains different distributions Astr
 ```text
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
-
 
 ## System distribution
 
