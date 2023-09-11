@@ -82,7 +82,7 @@ If the upgrade check script didn't identify any issues with your existing DAGs a
 To upgrade to Airflow 2.3,
 
 1. Initialize the Airflow upgrade process via the Astronomer UI or CLI.
-2. Update your project's `Dockerfile` to use Astro Runtime:
+2. Update your project's `Dockerfile` to use Astro Runtime 5.4, which is Astronomer's distribution of Airflow 2.3:
 
     ```docker
     FROM quay.io/astronomer/astro-runtime:5.4.0
