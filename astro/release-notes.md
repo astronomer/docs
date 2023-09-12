@@ -27,6 +27,13 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## September 12, 2023
+
+### Additional improvements
+
+- When you create a Deployment through the Cloud UI and choose an Astro Runtime version, you can now select only the most recent supported patch for each major version of Astro Runtime.
+- You can now filter task logs by log level or source from the [**DAGs** page](https://docs.astronomer.io/astro/manage-dags) in the Cloud UI.
+
 ## September 6, 2023
 
 ### View deploy history in the Cloud UI
