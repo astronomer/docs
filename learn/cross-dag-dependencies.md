@@ -106,7 +106,7 @@ You can trigger a downstream DAG with the TriggerDagRunOperator from any point i
 
 A common use case for this implementation is when an upstream DAG fetches new testing data for a machine learning pipeline, runs and tests a model, and publishes the model's prediction. In case of the model underperforming, the TriggerDagRunOperator is used to start a separate DAG that retrains the model while the upstream DAG waits. Once the model is retrained and tested by the downstream DAG, the upstream DAG resumes and publishes the new model's results.
 
-The [schedule](scheduling-in-airflow.md) of the downstream DAG is independent of the runs triggered by the TriggerDagRunOperator. For a DAG to only run based on the TriggerDagRunOperator, set the `schedule` parameter to `None`. Note that the dependent DAG must be unpaused for it to be triggered by the TriggerDagRunOperator.
+The [schedule](scheduling-in-airflow.md) of the downstream DAG is independent of the runs triggered by the TriggerDagRunOperator. To run a DAG solely with the TriggerDagRunOperator, set the DAG's `schedule` parameter to `None`. Note that the dependent DAG must be unpaused to get triggered.
 
 The following example DAG implements the TriggerDagRunOperator to trigger a DAG with the `dag_id` `dependent_dag` between two other tasks. Since both the `wait_for_completion` and the `deferrable` parameters of the `trigger_dependent_dag` task in the `trigger_dagrun_dag` are set to `True`, the task is deferred until the `dependent_dag` has finished its run. Once the `trigger_dagrun_dag` task completes, the `end_task` will run.
 
