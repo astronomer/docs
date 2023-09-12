@@ -127,7 +127,7 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
     astro deploy --dags
     ```
 
-    This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code. After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI deploys your DAGs to Astro.
+    This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code. After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI deploys your DAGs to Astro. If you run into issues deploying your DAGs, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
 ## Step 4: Trigger your DAG on Astro
 
