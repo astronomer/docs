@@ -68,7 +68,7 @@ To migrate from using cluster workload identities to Deployment workload identit
     }
     ```
 
-2. For each trust policy, remove the cluster workload identity and add the workload identities for any Deployments that you want to access the related resource. To locate your Deployment workload identity, open the Deployment in the Cloud UI and copy the **Workload Identity** from the **Details** page. Your trust policy should now look like the following:
+2. For each trust policy, add the workload identities for any Deployments that you want to access the related resource. To locate your Deployment workload identity, open the Deployment in the Cloud UI and copy the **Workload Identity** from the **Details** page. Your trust policy should now look like the following:
 
     ```json
     {
