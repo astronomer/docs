@@ -211,6 +211,7 @@ module.exports = {
             items: [
               'use-case-airflow-databricks',
               'use-case-airflow-dbt',
+              'use-case-elt-ml-finance',
               'use-case-airflow-ml-datasets',
               'use-case-airflow-mlflow'
             ],

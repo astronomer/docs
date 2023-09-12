@@ -13,7 +13,7 @@ This page contains release notes for all recent Astronomer Software versions.
 
 ## 0.33.0
 
-Release date: August 3, 2023
+Release date: September 8, 2023
 
 ### Automatic PGBouncer connection scaling
 
