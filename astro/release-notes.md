@@ -79,7 +79,7 @@ To migrate from using cluster workload identities to Deployment workload identit
                 "Principal": {
                     "AWS": [
                         "arn:aws:iam::123456789876:role/AirflowS3Logs-cl6zcnlc641hr0voibivf21jh",
-                        "arn:aws:iam::987654321234:role/AirflowS3Logs-a33zcnlc491rc0eraplns73jl"
+                        "arn:aws:iam::<dataplane-AWS-account-ID>:role/astro-<namespace>"
                     ]
                 },
                 "Action": "sts:AssumeRole"
