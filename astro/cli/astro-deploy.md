@@ -66,20 +66,6 @@ astro deploy <options>
 
 ## Examples
 
-To view a list of available Deployments in your current Workspace, run the following command:
-
-```bash
-astro deploy
-```
-
-This command will prompt you to enter the Deployment number to which you wish to deploy. 
-
-:::info
-
-If you have uncommitted changes in your working directory, you must use the `-f` or `--force` flag with this command or commit changes to your code repository.
-
-:::
-
 To deploy directly to a specific Deployment:
 
 ```bash
@@ -104,6 +90,11 @@ To deploy only DAGs from your Astro project to a specific Deployment:
 astro deploy ckvvfp9tf509941drl4vela81n --dags
 ```
 
+:::info
+
+If you have uncommitted changes in your working directory, you must use the `-f` or `--force` flag with this command or commit changes to your code repository.
+
+:::
 
 </TabItem>
 
