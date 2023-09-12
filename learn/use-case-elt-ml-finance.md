@@ -20,13 +20,13 @@ Before trying this example, make sure you have:
 
 Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-elt-ml-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
 
-The repository is configured to spin up and use local [Postgres](https://www.postgresql.org/) and [MinIO](https://min.io/) instances without you needing to define connections or access external tools. MinIO is local storage that mimics the S3 API and can be used with S3 specific Airflow operators.
+The repository is configured to spin up and use local [Postgres](https://www.postgresql.org/) and [MinIO](https://min.io/) instances without you needing to define connections or access external tools. MinIO is a local storage solution that mimics the S3 API and can be used with S3 specific Airflow operators.
 
-If you want to use S3 as your object storage, you can change the `AWS_CONN_ID` in the `.env` file and provide your AWS credentials. To use a different relational database, [add an Airflow connection](connections.md) to a [database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html) to your Airflow instance and set `DB_CONN_ID` in the DAG files to your connection ID.
+If you want to use S3 as your object storage, you can change the `AIRFLOW_CONN_AWS_DEFAULT` in the `.env` file and provide your AWS credentials. To use a different relational database, [add an Airflow connection](connections.md) to a [database supported by the Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/supported_databases.html) to your Airflow instance and set `DB_CONN_ID` in the DAG files to your connection ID.
 
 ## Run the project
 
-To run the example project, first make sure Docker Desktop is running. Then, open your project directory and run:
+To run the example project, first make sure [Docker](https://docs.docker.com/) is running. Then, open your project directory and run:
 
 ```sh
 astro dev start
@@ -36,7 +36,7 @@ This command builds your project and spins up 6 Docker containers on your machin
 
 - The Airflow webserver, which runs the Airflow UI and can be accessed at `https://localhost:8080/`.
 - The Airflow scheduler, which is responsible for monitoring and triggering tasks.
-- The Airflow triggerer, which is an Airflow component used to run deferrable operators.
+- The Airflow triggerer, which is an Airflow component used to run [deferrable operators](deferrable-operators.md).
 - The Airflow metadata database, which is a Postgres database that runs on port `5432`.
 - A local [MinIO](https://min.io/) instance, which can be accessed at `https://localhost:9000/`.
 - A local [Postgres](https://www.postgresql.org/) instance, that runs on port `5433`.
@@ -47,11 +47,11 @@ To run the project, unpause all DAGs. The `in_finance_data` and `finance_elt` DA
 
 ### Data source
 
-The data in this example is generated using the [create_mock_data](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/include/create_mock_data.py) script. The script creates CSV files in `include/mock_data` that contain data resembling the payload of the [Stripe API](https://stripe.com/docs/api/charges) Charges endpoint and customer satisfaction scores. The data is generated to contain a linear relationship between two features and the target variable `amount_charged`.
+The data in this example is generated using the [create_mock_data](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/include/create_mock_data.py) script. The script creates CSV files in `include/mock_data` that contain data resembling the payload of the [Stripe API](https://stripe.com/docs/api/charges) Charges endpoint and customer satisfaction scores. The data is generated to contain a relationship between two features and the target variable `amount_charged`.
 
 ### Project overview
 
-This project consists of three DAGs: one helper DAG to simulate an ingestion process and two pipeline DAGs which have dependency relationships through [Airflow datasets](airflow-datasets.md).
+This project consists of three DAGs: one helper DAG to simulate an ingestion process and two pipeline DAGs which have a dependency relationship through [Airflow datasets](airflow-datasets.md).
 
 ![Datasets view of the use case project showing the DAG finance_elt DAG that produces to the dataset astro://postgres_default@?table=model_satisfaction which is consumed by the second DAG named finance_ml.](/img/examples/use-case-elt-ml-finance_datasets_view.png)
 
@@ -91,7 +91,7 @@ def generate_mock_data_task():
 generate_mock_data_task()
 ```
 
-The data created in `include/mock_data` is uploaded to the object storage using a dynamically mapped LocalFilesystemToS3Operator. Note how the following example uses `.expand_kwargs` to map pairs of `filename` and `dest_key` keyword arguments.
+The data created in `include/mock_data` is uploaded to the object storage using a dynamically mapped [LocalFilesystemToS3Operator](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest/modules/LocalFilesystemToS3Operator). Note how the following example uses [`.expand_kwargs`](dynamic-tasks.md#mapping-over-multiple-parameters) to map pairs of `filename` and `dest_key` keyword arguments.
 
 ```python
 @task
@@ -130,7 +130,7 @@ upload_mock_data = LocalFilesystemToS3Operator.partial(
 
 #### ELT DAG
 
-The ELT DAG, [`finance_elt`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_elt.py), waits for the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator to drop the file in the object storage. [Deferrable operators](deferrable-operators.md) are operators that use the Triggerer component to release their worker slot while they wait for a condition in an external tool to be met. This allows you to use resources more efficiently and save costs.
+The ELT DAG, [`finance_elt`](https://github.com/astronomer/use-case-elt-ml-finance/blob/main/dags/finance_elt.py), waits for the deferrable [S3KeySensorAsync](https://registry.astronomer.io/providers/astronomer-providers/versions/latest/modules/S3KeySensorAsync) operator to drop the file in the object storage. [Deferrable operators](deferrable-operators.md) are operators that use the triggerer component to release their worker slot while they wait for a condition in an external tool to be met. This allows you to use resources more efficiently and save costs.
 
 The two `wait_for_ingest_*` tasks are grouped in a [task group](task-groups.md), which visually groups the tasks in the Airflow UI and allows you to pass arguments like `aws_conn_id` at the group level.
 
@@ -236,7 +236,7 @@ The `schedule` parameter of the ML DAG uses the same `Table` definition as a dat
 ```
 
 The first task of the ML DAG takes care of feature engineering. By using the [@aql.dataframe](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) decorator, the `model_satisfaction` table is ingested directly as a [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html). 
-The `feature_eng` task creates a train test split, scales the numeric features, and one-hot encodes the categorical feature `product_type` using functions from [scikit-learn](https://scikit-learn.org/stable/index.html). The resulting sets of features and targets are returned as a dictionary of pandas DataFrames.
+The `feature_eng` task creates a train-test split, scales the numeric features, and one-hot encodes the categorical feature `product_type` using functions from [scikit-learn](https://scikit-learn.org/stable/index.html). The resulting sets of features and targets are returned as a dictionary of pandas DataFrames.
 
 ```python
 @aql.dataframe()
