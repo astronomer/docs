@@ -100,7 +100,7 @@ To migrate from using cluster workload identities to Deployment workload identit
 
 ### Additional improvements
 
-- The Cloud UI **Usage** page now shows task usage for deleted Deployments. If you're an Astro Hybrid Billing Admin, this means that task usage metrics now better reflect your billable usage.
+- The Cloud UI [**Usage** page](https://docs.astronomer.io/astro/organization-metrics#astro-usage) now shows task usage for deleted Deployments. If you're an Astro Hybrid Billing Admin, this means that task usage metrics now better reflect your billable usage.
 - When you create a Deployment through the Cloud UI and choose an Astro Runtime version, you can now select only the most recent supported patch for each major version of Astro Runtime.
 - You can now filter task logs by log level or source from the [**DAGs** page](https://docs.astronomer.io/astro/manage-dags) in the Cloud UI.
 
