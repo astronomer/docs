@@ -476,14 +476,18 @@ This example assumes that the name of each of your Python packages is identical 
 
     In order, these instructions:
 
+    - Switch to `root` user for SSH setup and installation from private repo
     - Add the fingerprint for GitHub to `known_hosts`
     - Copy your `private-requirements.txt` file into the image
     - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. This securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Switch back to `astro` user
     - Add the user bin directory to `PATH`
 
   :::info
 
-  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint.
+  See GitHub's documentation for all available [SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints). 
+  
+  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint. 
 
   :::
 
