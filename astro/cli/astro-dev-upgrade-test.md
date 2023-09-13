@@ -53,7 +53,7 @@ By default, the command runs all three available tests on your project against t
     astro dev upgrade-test --airflow-version 2.6.3 --provider-check
     ```
 
-- Test a custom image for an upgrade to an custom versioned distribution.
+- Test a custom image for an upgrade to a custom versioned distribution of Astro Runtime:
 
     ```bash
     astro dev upgrade-test --image-name quay.io/example-organization/new-example-organization-image:1.0.7
