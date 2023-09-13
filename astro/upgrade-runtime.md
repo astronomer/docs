@@ -118,7 +118,7 @@ If you're upgrading a local Airflow environment, you don't need an Astro Deploym
 
 :::
 
-## (Optional) Pin provider package versions
+## Step 1: (Optional) Pin provider package versions
 
 Major Astro Runtime upgrades can include major upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes. 
 
@@ -134,7 +134,17 @@ After reviewing this list, pin the version for each provider package in your Ast
 apache-airflow-providers-databricks==4.0.0
 ```
 
-## Update Your Dockerfile
+## Step 2: (Optional) Run upgrade tests with the Astro CLI
+
+You can use the Astro CLI to anticipate and address problems before upgrading to a newer version of Astro Runtime. Before you upgrade, run the following command to run tests against the version of Astro Runtime you're upgrading to:
+
+```bash 
+astro dev upgrade-test --runtime-version <upgraded-runtime-version>
+```
+
+The Astro CLI then generates test results in your Astro project that identify dependency conflicts and import errors that you would experience using the new Astro Runtime version. Review these results and make the recommended changes to reduce the risk of your project generating errors after you upgrade. For more information about using this command and the test results, see [Test before upgrade your Astro project](cli/test-your-astro-project-locally.md#test-before-upgrading-your-astro-project).
+
+## Step 3: Update Your Dockerfile
 
 1. In your Astro project, open your `Dockerfile`.
 2. Change the Docker image in the `FROM` statement of your `Dockerfile` to a new version of Astro Runtime.
@@ -145,7 +155,7 @@ apache-airflow-providers-databricks==4.0.0
 
     You must always specify the major, minor, and patch version of any given Astro Runtime version.
 
-## Test Astro Runtime locally
+## Step 4: Test Astro Runtime locally
 
 Astronomer recommends testing new versions of Astro Runtime locally before upgrading a Deployment on Astro.
 
@@ -158,11 +168,11 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 
 5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
-### (Optional) Upgrade and test provider packages
+### Step 5: (Optional) Upgrade and test provider packages
 
 If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test east provider package upgrade locally before deploying to Astro. 
 
-## Deploy to Astronomer
+## Step 6: Deploy to Astronomer
 
 To push your upgraded project to an Astro Deployment, run:
 
@@ -178,7 +188,7 @@ Once you upgrade to a Deployment on Astro to a new version of Astro Runtime, you
 
 :::
 
-## Confirm your upgrade on Astro
+## Step 7: Confirm your upgrade on Astro
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click **Open Airflow**.

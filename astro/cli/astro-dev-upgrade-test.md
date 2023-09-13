@@ -11,6 +11,8 @@ Test your local Astro project against a new version of Astro Runtime to prepare 
 - Identify major and minor version changes of the Python packages in your upgrade version.
 - Identify DAG import errors that will appear after you upgrade.
 
+See [Test before upgrading your Astro project](cli/test-your-astro-project-locally.md#test-before-upgrading-your-astro-project) for more detailed information about usage and test results.
+
 ## Usage
 
 ```bash

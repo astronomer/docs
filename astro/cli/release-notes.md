@@ -17,6 +17,21 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.19.2
+
+Release date: September 13, 2023
+
+### Additional improvements
+
+- When you run `astro dev upgrade-test`, the generated HTML report for DAG tests now shows how many DAGs passed and failed the test. 
+
+### Bug fixes 
+
+- Fixed an issue where you couldn't create a Deployment on a dedicated cluster using a Deployment file and API token. 
+- Fixed an issue where the Deployment URL that appears after you run `astro deploy` was not formatted properly.
+- Fixed an issue where `astro dev upgrade-test` would occasionally output that it was testing an upgrade to the latest version of Astro Runtime, even if it wasn't. 
+- Fixed an issue where `astro dev upgrade-test` didn't produce an HTML report for DAG tests. 
+
 ## Astro CLI 1.19.1
 
 Release date: August 30, 2023
