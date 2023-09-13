@@ -2,7 +2,7 @@
 sidebar_label: "astro dev logs"
 title: "astro dev logs"
 id: astro-dev-logs
-description: Reference documentation for astro dev logs.
+description: Show logs for Airflow components.
 hide_table_of_contents: true
 ---
 

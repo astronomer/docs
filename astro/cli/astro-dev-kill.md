@@ -2,7 +2,7 @@
 sidebar_label: "astro dev kill"
 title: "astro dev kill"
 id: astro-dev-kill
-description: Reference documentation for astro dev kill.
+description: Force-stop and remove all locally running Airflow containers.
 hide_table_of_contents: true
 ---
 

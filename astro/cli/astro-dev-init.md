@@ -2,7 +2,7 @@
 sidebar_label: "astro dev init"
 title: "astro dev init"
 id: astro-dev-init
-description: Reference documentation for astro dev init.
+description: Initialize an Astro project to run a local Airflow environment.
 hide_table_of_contents: true
 ---
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro dev bash"
 title: "astro dev bash"
 id: astro-dev-bash
-description: Reference documentation for astro dev bash.
+description: Run a bash command in an Airflow component's Docker container.
 hide_table_of_contents: true
 ---
 

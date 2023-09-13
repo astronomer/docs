@@ -2,7 +2,7 @@
 sidebar_label: "astro dev ps"
 title: "astro dev ps"
 id: astro-dev-ps
-description: Reference documentation for astro dev ps.
+description: List all running Docker containers in your local Astro project.
 hide_table_of_contents: true
 ---
 

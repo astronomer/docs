@@ -408,6 +408,14 @@ module.exports = {
         {
           type: "category",
           label: "astro dev",
+          link: {
+            type: 'generated-index',
+            title: 'Interact with local Airflow environment',
+            description: 'Commands to interact with your local Airflow environment using Astro CLI.'
+          },
+          "customProps": {
+            "description": "This description can be used in the swizzled DocCard"
+          },
           items: [
             'cli/astro-dev-bash',
             'cli/astro-dev-init',
@@ -418,10 +426,10 @@ module.exports = {
             'cli/astro-dev-parse',
             'cli/astro-dev-ps',
             'cli/astro-dev-pytest',
+            'cli/astro-dev-restart',
             'cli/astro-dev-run',
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
-            'cli/astro-dev-restart',
             'cli/astro-dev-upgrade-test',
           ],
         },

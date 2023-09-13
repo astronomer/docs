@@ -2,7 +2,7 @@
 sidebar_label: "astro dev restart"
 title: "astro dev restart"
 id: astro-dev-restart
-description: Reference documentation for astro dev restart.
+description: Restart a local Airflow environment.
 hide_table_of_contents: true
 ---
 

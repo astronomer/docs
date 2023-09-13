@@ -2,7 +2,7 @@
 sidebar_label: "astro dev run"
 title: "astro dev run"
 id: astro-dev-run
-description: Reference documentation for astro dev run.
+description: Run Airflow CLI commands in a local Airflow environment.
 hide_table_of_contents: true
 ---
 

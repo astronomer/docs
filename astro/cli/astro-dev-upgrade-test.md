@@ -2,7 +2,7 @@
 sidebar_label: "astro dev upgrade-test"
 title: "astro dev upgrade-test"
 id: astro-dev-upgrade-test
-description: Reference documentation for astro dev upgrade-test.
+description: Test local Airflow environment for upgrade to a new Airflow version.
 hide_table_of_contents: true
 ---
 
