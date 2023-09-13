@@ -92,6 +92,8 @@ To migrate from using cluster workload identities to Deployment workload identit
 
 4. [Upgrade](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to the latest Astro CLI release, which includes support for Per Deployment IAM Workload Identity.
 
+5. After you've tested the policies with your Deployment workload identities, remove the cluster workload identity from your trust policies. 
+
 ### Additional improvements
 
 - When you create a Deployment through the Cloud UI and choose an Astro Runtime version, you can now select only the most recent supported patch for each major version of Astro Runtime.
