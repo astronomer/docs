@@ -150,11 +150,6 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
     - **Key**: `DATADOG_SITE`
     - **Value**: Your Datadog site name. For example, `US3`.
-
-4. (Optional) Add the following environment variable to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
-
-   - **Key ** `ASTRO_DATADOG_TASK_LOGS_TAGS`
-   - **Value ** `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
    
 5. Click **Save variable**.
 
