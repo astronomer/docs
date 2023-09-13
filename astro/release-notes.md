@@ -92,10 +92,15 @@ To migrate from using cluster workload identities to Deployment workload identit
 
 4. [Upgrade](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to the latest Astro CLI release, which includes support for Per Deployment IAM Workload Identity.
 
-5. After you've tested the policies with your Deployment workload identities, remove the cluster workload identity from your trust policies. 
+5. After you've tested the policies with your Deployment workload identities, remove the cluster workload identity from your trust policies
+
+### Bug fixes 
+
+- Fixed an issue where Billing Admins could view task usage on the **Usage** page only for Workspaces that they belonged to. Now, Billing Admins can view usage for all Workspaces regardless of their Workspace role.
 
 ### Additional improvements
 
+- The Cloud UI **Usage** page now shows task usage for deleted Deployments. If you're an Astro Hybrid Billing Admin, this means that task usage metrics now better reflect your billable usage.
 - When you create a Deployment through the Cloud UI and choose an Astro Runtime version, you can now select only the most recent supported patch for each major version of Astro Runtime.
 - You can now filter task logs by log level or source from the [**DAGs** page](https://docs.astronomer.io/astro/manage-dags) in the Cloud UI.
 
