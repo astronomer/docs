@@ -453,16 +453,24 @@ This example assumes that the name of each of your Python packages is identical 
 
 1. Optional. Copy and save any existing build steps in your `Dockerfile`.
 
-2. Add `openssh-client` and `git` to your `packages.txt` file.
+2. Add the following to your `packages.txt` file:
+
+    ```bash
+    openssh-client
+    git
+    ```
 
 3. In your Dockerfile, add the following instructions:
 
     ```docker
+    USER root
     RUN mkdir -p -m 0700 ~/.ssh && \
         echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" >> ~/.ssh/known_hosts
 
     COPY private-requirements.txt .
     RUN --mount=type=ssh,id=github pip install --no-cache-dir --requirement private-requirements.txt
+    USER astro
+
     ENV PATH="/home/astro/.local/bin:$PATH"
     ```
 
