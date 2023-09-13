@@ -28,30 +28,39 @@ By default, the command runs all three available tests on your project against t
 | `-a`, `--airflow-version` | The equivalent of Airflow you want to upgrade to. The default is the latest available version. Note that the Astro CLI will still test against an Astro Runtime image based on the Airflow version you specify. | Any valid [Airflow version](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html). |
 | `-d`, `--dag-test`              | Only run DAG tests. These tests check whether your DAGs will generate import errors after you upgrade.                                                                                                          | None                                                                                                   |
 | `-i`, `--deployment-id`   | Specify a Deployment ID to test with an image from an Astro Deployment instead of the image listed in your Astro project Dockerfile.                                                                            | Any valid Deployment ID.                                                                               |
-| `-n`, `--image-name`      | Name of a custom upgraded image. Updates the FROM line in your Dockerfile to pull this image for the upgrade.                                                                                                        | None                                                                                                   |
+| `-n`, `--image-name`      | A custom image to test against. Replaces the FROM line in your Dockerfile with the image you specify.                                                                                                        | None                                                                                                   |
 | `-v`, `--runtime-version` | The version of Astro Runtime you want to upgrade to. The default is the latest available version.                                                                                                               | Any valid [Astro runtime version](https://docs.astronomer.io/astro/runtime-release-notes).             |
 |  `--use-astronomer-certified` | Test against an Astronomer Certified distribution of Airflow. Must be used with `--airflow-version`. | None |
 | `--version-test`          | Only run version tests. These tests show you how the versions of your dependencies will change after you upgrade.                                                                                               | None                                                                                                   |
 
 ## Examples
 
-Run all tests before upgrading to Astro Runtime 8:
+- Run all tests before upgrading to the latest version of Astro Runtime:
 
-```bash
-astro dev upgrade-test
-```
+    ```bash
+    astro dev upgrade-test
+    ```
 
-Test an Astro project file against a the Astro Runtime distribution of a Airflow 2.6.3:
+- Test an Astro project file against a the Astro Runtime distribution of a Airflow 2.6.3:
 
-```bash
-astro dev upgrade-test --airflow-version 2.6.3
-```
+    ```bash
+    astro dev upgrade-test --airflow-version 2.6.3
+    ```
 
-Test only dependency version changes against the Astro Runtime distribution for Airflow 2.6.3:
+- Test only dependency version changes against the Astro Runtime distribution for Airflow 2.6.3:
 
-```bash
-astro dev upgrade-test --airflow-version 2.6.3 --provider-check
-```
+    ```bash
+    astro dev upgrade-test --airflow-version 2.6.3 --provider-check
+    ```
+
+- Test a custom image for an upgrade to an custom versioned distribution.
+
+    ```bash
+    astro dev upgrade-test --image-name quay.io/example-organization/new-example-organization-image:1.0.7
+    ```
+
+    When you run the command, the Astro CLI automatically updates the `FROM` line of your Dockerfile to reference `quay.io/example-organization/new-example-organization-image:1.0.7`. To use your original version after testing, you must update the Dockerfile to reference the original image tag.
+
 
 ## Related Commands
 
