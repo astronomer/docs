@@ -27,7 +27,7 @@ If you're only upgrading a local Airflow environment, you don't need an Astro De
 
 ## Step 1: Review upgrade considerations
 
-Astro upgrades can include breaking changes, especially when you're upgrading to a new major version. Check the [upgrade considerations](#upgrade-considerations) for your upgrade version to anticipate any breaking changes or upgrade-specific instructions.
+Astro upgrades can include breaking changes, especially when you're upgrading to a new major version. Check the [upgrade considerations](#upgrade-considerations) for your upgrade version to anticipate any breaking changes or upgrade-specific instructions before you proceed.
 
 ## Step 2: (Optional) Pin provider package versions
 
