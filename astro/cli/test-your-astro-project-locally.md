@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Test your project'
+sidebar_label: 'Test your DAGs'
 title: 'Test your Astro project'
 id: test-your-astro-project-locally
 description: Check your Airflow DAGs for errors before you run it locally or deploy to Astro.
