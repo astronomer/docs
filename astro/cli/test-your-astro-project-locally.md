@@ -13,7 +13,7 @@ Use the following document to learn more about how you can test locally with the
 
 Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can review task logs and task status in your terminal without opening the Airflow UI. Running DAGs without a scheduler or webserver can help reduce the time required to develop and test data pipelines.
 
-To run a DAG located within your local `/dags` directory run:
+To run a DAG located within your local `/dags` directory, run:
 
 ```bash
 astro run <dag-id>
@@ -40,7 +40,7 @@ astro dev parse
 
 This command parses your DAGs to ensure that they don't contain any basic syntax or import errors and that they can successfully render in the Airflow UI.
 
-The command `astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI command reference](cli/astro-dev-parse.md).
+`astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI command reference](cli/astro-dev-parse.md).
 
 ### Run tests with pytest
 
