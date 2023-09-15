@@ -5,7 +5,7 @@ id: get-started-cli
 description: Create an Airflow project and run it locally on your computer in just a few minutes. 
 ---
 
-One of the Astro CLI's main features is its ability to run Airflow on your local computer. After you install the Astro CLI and Docker Desktop, follow these steps to quickly build a project and run Airflow locally. 
+One of the Astro CLI's main features is its ability to run Airflow on your local machine. After you install the Astro CLI and Docker Desktop, follow these steps to build an Airflow project and run it in a local Airflow environment using just a few commands.
 
 ## Prerequisites
 
@@ -88,16 +88,6 @@ astro dev restart
 ```
 
 This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting your environment, then run `astro dev start` when you want to restart.
-
-### `astro dev kill`
-
-When you want to force-stop all four Docker containers for your local Airflow environment, use the following command. 
-
-```sh
-astro dev kill
-```
-
-`astro dev kill` also deletes all data associated with your local `Postgres` database which includes Airflow connections, logs, and task history.
 
 ## Next Steps
 
