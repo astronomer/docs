@@ -379,7 +379,7 @@ If your current usage is expected and higher than the default resource limits, u
 
 ## 0.30.8
 
-Release date: September 14, 2023
+Release date: September 15, 2023
 
 ### Additional improvements
 
@@ -396,6 +396,7 @@ Release date: September 14, 2023
 - Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments. <!-- https://github.com/astronomer/issues/issues/5647-->
 - Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana. <!-- https://github.com/astronomer/issues/issues/5660-->
 - Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG. <!-- https://github.com/astronomer/issues/issues/5683-->
+- Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
 - Removed support for Kubernetes 1.22.
 - Fixed an issue where querying for a Deployment that didn't exist using the Houston API returned an error instead of an empty set.  <!-- https://github.com/astronomer/issues/issues/5723 --> 
 - Fixed an issue where you couldn't create registry service accounts on Openshift clusters. <!-- https://github.com/astronomer/issues/issues/5765 --> 
