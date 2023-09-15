@@ -5,7 +5,7 @@ id: get-started-cli
 description: Create an Airflow project and run it locally on your computer in just a few minutes. 
 ---
 
-One of the Astro CLI's main features is its ability to run Airflow on your local machine. After you install the Astro CLI and Docker Desktop, follow this quickstart to build an Airflow project and run it in a local Airflow environment using just a few commands. At the end, you'll have all of the files and components you need to develop Airflow locally.
+One of the Astro CLI's main features is its ability to run Airflow on your local machine. After you install the Astro CLI and Docker Desktop, follow this quickstart to build an Airflow project and run it in a local Airflow environment using just a few commands. At the end of the tutorial, you'll have all of the files and components you need to develop and test Airflow DAGs locally.
 
 ## Prerequisites
 
