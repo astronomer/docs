@@ -245,7 +245,9 @@ my_project
 
 ## Apply changes to a running project
 
-If you're running your Astro project in a local Airflow environment, you must restart your environment to apply changes for any of the following files in your Astro project:
+If you're running your Astro project in a local Airflow environment, you must restart your environment when you make changes to certain files and want to apply them locally.
+
+Specifically, you must restart your environment to apply changes for any of the following files:
 
 - `packages.txt`
 - `Dockerfile`

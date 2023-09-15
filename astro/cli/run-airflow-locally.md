@@ -5,9 +5,10 @@ id: run-airflow-locally
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.
 ---
 
-Running your Astro project locally is an easy way to test your code changes. Additionally, you can only troubleshoot some issues in a project after running your local Airflow environment with `astro dev start`.
+Running Airflow locally with the Astro CLI can be an easy way to preview and debug DAG changes quickly before deploying your code to Astro. By locally running your DAGs, you can fix issues with your DAGs without consuming infrastructure resources or waiting on code deploy processes.
 
-This document explains how to use Astro CLI commands to interact with a locally running Airflow environment.
+This document explains how to use the Astro CLI to start a local Airflow environment on your computer and interact with your Astro project. To learn more about unit testing for your DAGs or testing project dependencies when changing Python or Astro Runtime versions, see [Test your project locally](test-your-astro-project-locally.md).
+
 
 ## Start a local Airflow environment
 
@@ -21,29 +22,31 @@ This command builds your project and spins up 4 containers on your machine, each
 
 ## Restart a local Airflow environment 
 
+Restarting your Airflow environment rebuilds your image and restarts the Docker containers running on your local machine with the new image. Restart your environment to apply changes from specific files in your project, or to troubleshoot issues that occur when your project is running. 
+
 To restart your local Airflow environment, run:
 
 ```sh
 astro dev restart
 ```
 
-This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting your environment, then run `astro dev start` when you want to restart.
+Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting your environment, then run `astro dev start` when you want to restart.
 
 ## Stop a local Airflow environment 
 
-Run the following to pause all Docker containers running your local Airflow environment. 
+Run the following command to pause all Docker containers and stop running your local Airflow environment. 
 
 ```sh
 astro dev stop
 ```
 
-Unlike `astro dev kill`, this command does not prune mounted volumes and delete data associated with your local Postgres database. If you run this command, Airflow connections and task history will be preserved.
+Unlike [`astro dev kill`](#hard-reset-your-airflow-environment), this command does not prune mounted volumes and delete data associated with your local Postgres database. If you run this command, Airflow connections and task history will be preserved.
 
-This command can be used regularly with `astro dev start` and `astro dev restart` during local development.
+Use this command when you're finished testing Airflow and you want to stop running its components locally.
 
 ## View Airflow component logs
 
-You can use the Astro CLI to view logs for your local Airflow environment's webserver, scheduler, and triggerer. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change.
+You can use the Astro CLI to view logs for your local Airflow environment's webserver, scheduler, and triggerer. This is useful if you want to troubleshoot a specific task instance, or if your local environment does not run properly after a code change.
 
 To view component logs in a local Airflow environment, run:
 

@@ -306,7 +306,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Advanced configuration",
+      label: "Advanced",
       items: [
         "cli/configure-cli",
         "cli/authenticate-to-clouds",

@@ -2,10 +2,12 @@
 sidebar_label: 'Test your project'
 title: 'Test your Astro project'
 id: test-your-astro-project-locally
-description: Check your Astro project for errors before you run it locally or deploy to Astro.
+description: Check your Airflow DAGs for errors before you run it locally or deploy to Astro.
 ---
 
-One of the Astro CLI's main features is the ability to run Astro projects in a local Airflow environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment. Use the following document to learn more about how you can test locally with the Astro CLI before deploying your code changes to a production environment.
+One of the Astro CLI's main features is the ability to run Astro projects in a local Airflow environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment.
+
+Use the following document to learn more about how you can test locally with the Astro CLI before deploying your code changes to a production environment.
 
 ## Run a DAG with `astro run`
 
@@ -59,7 +61,7 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 
 `astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
 
-## Test before upgrading your Astro project
+## Test before an Astro Runtime upgrade
 
 You can use [`astro dev upgrade-test`](astro-dev-upgrade-test.md) to test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. By default, the command runs the following tests in order to create reports that can help you determine whether your upgrade will be successful:
 
