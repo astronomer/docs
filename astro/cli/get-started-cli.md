@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Get started with the CLI'
+sidebar_label: 'Quickstart'
 title: 'Get started with Airflow using the Astro CLI'
 id: get-started-cli
 description: Create an Airflow project and run it locally on your computer in just a few minutes. 
