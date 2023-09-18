@@ -20,7 +20,7 @@ To get the most out of this guide, you should have an understanding of:
 
 Don't use SubDAGs. Use one of the following alternatives instead:
 
-- [Task Groups](task-groups.md): Task Groups can be used to organize tasks in the DAG's Graph View. Task Groups simplify the organization, viewing, and monitoring of complex DAGs. To view a video overview of Task Groups, see [Grouping](https://academy.astronomer.io/airflow-grouping).
+- [Task Groups](task-groups.md): Task Groups can be used to organize tasks in the DAG's Graph View. Task Groups simplify the organization, viewing, and monitoring of complex DAGs. To view a video overview of Task Groups, see [Grouping](https://academy.astronomer.io/astro-runtime-task-groups).
 - [Cross-DAG dependencies](cross-dag-dependencies.md): Cross-DAG dependencies can be implemented between different DAGs in the same Airflow environment or across separate environments. Cross-DAG dependencies are ideal if you have task dependencies that cannot be implemented within a single DAG. There are multiple methods available to implement cross-DAG dependencies.
 
 ## SubDAG issues

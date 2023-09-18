@@ -11,12 +11,13 @@ You can only configure a single domain for an SSO connection. However, if you ha
 
 ## Create a domain
 
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 2. In the **Managed Domains** menu, click **Managed Domain**.
 3. In the **Domain** field, enter the domain that you want to map.
 4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
-5. In the entry for your domain, click **Verify**.
-6. After updating the DNS record, click **Verify** to notify Astro to check your DNS record.
+5. In the entry for your domain, click **Verify**. A new window appears with steps to verify your domain.
+6. Follow the steps to verify your domain. If you can't complete the steps yourself, contact the administrator for your domain and ask them to complete the steps instead.
+7. Click **Verify** to notify Astro to check your DNS record.
 
 :::info
 
@@ -28,7 +29,7 @@ After your domain is verified, you can map the domain to an SSO connection. Mapp
 
 ## Delete a domain
 
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 2. In the **Managed Domains** menu, click the trash bin next to the domain you want to delete. 
 3. Follow the prompts to confirm the deletion.
 

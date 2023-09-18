@@ -67,6 +67,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of dbt Core. See [What is dbt?](https://docs.getdbt.com/docs/introduction).
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
+- How Airflow and dbt concepts relate to each other. See [Similar dbt & Airflow concepts](https://astronomer.github.io/astronomer-cosmos/getting_started/dbt-airflow-concepts.html).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow task groups. See [Airflow task groups](task-groups.md).
 - Airflow connections. See [Manage connections in Apache Airflow](connections.md).

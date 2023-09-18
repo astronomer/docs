@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Create a dedicated Astro cluster'
-title: 'Create a dedicated cluster'
+sidebar_label: 'Create a dedicated cluster'
+title: 'Create a dedicated Astro cluster'
 id: 'create-dedicated-cluster'
 ---
 
@@ -28,7 +28,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 <TabItem value="aws">
 
-1. In the Cloud UI, open your Organization page by clicking the Astronomer logo in the upper left corner.
+1. In the Cloud UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
    
 2. Click **Cluster** > **+ Cluster**.
   
@@ -45,7 +45,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 <TabItem value="gcp">
 
-1. In the Cloud UI, open your Organization page by clicking the Astronomer logo in the upper left corner.
+1. In the Cloud UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
    
 2. Click **Cluster** > **+ Cluster**.
    
@@ -65,7 +65,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 <TabItem value="azure">
 
-1. In the Cloud UI, open your Organization page by clicking the Astronomer logo in the upper left corner.
+1. In the Cloud UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
    
 2. Click **Cluster** > **+ Cluster**.
    

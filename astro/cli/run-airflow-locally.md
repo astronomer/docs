@@ -94,7 +94,7 @@ curl -X GET localhost:8080/api/v1/<endpoint> --user "admin:admin"
 import requests
 
 response = requests.get(
-   url="localhost:8080/api/v1/<endpoint>",
+   url="http://localhost:8080/api/v1/<endpoint>",
    auth=("admin", "admin")
 )
 ```

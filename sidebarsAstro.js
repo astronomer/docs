@@ -60,6 +60,7 @@ module.exports = {
             "cloud-ide/run-sql",
             "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
+            "cloud-ide/pass-data-between-cells",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
@@ -77,25 +78,8 @@ module.exports = {
       items: [
         "deploy-code",
         "deploy-project-image",
-        "deploy-dags", 
-        "set-up-ci-cd", 
-        {
-          type: "category",
-          label: "CI/CD templates",
-          items: [
-            "ci-cd-templates/template-overview",
-            "ci-cd-templates/github-actions",
-            "ci-cd-templates/jenkins",
-            "ci-cd-templates/gitlab",
-            "ci-cd-templates/aws-s3",
-            "ci-cd-templates/aws-codebuild",
-            "ci-cd-templates/azure-devops",
-            "ci-cd-templates/gcs",
-            "ci-cd-templates/bitbucket",
-            "ci-cd-templates/circleci",
-            "ci-cd-templates/drone",
-          ],
-        },
+        "deploy-dags",
+        "deploy-history",
       ],
     },
     {
@@ -103,28 +87,56 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "create-deployment",
-        "configure-deployment-resources",
-        "manage-dags",
+        "deployment-settings",
         {
           type: "category",
-          label: "Configure executors",
+          label: "Executors",
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
         "secrets-backend",
-        "manage-deployments-as-code",
+        "manage-dags", 
+      ],
+    },
+    {
+      type: "category",
+      label: "Automation & CI/CD",
+      items: [
+        "automation-overview",
+        "automation-authentication",
         {
           type: "category",
-          label: "Connect to external resources",
-          link: {
-            type: 'generated-index',
-            title: 'Connect Astro',
-            description: 'Connect Astro to your existing cloud resources.'
-          },
-          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
-        },       
+          label: "CI/CD",
+          items: [
+            "set-up-ci-cd",
+            {
+              type: "category",
+              label: "CI/CD templates",
+              items: [
+                "ci-cd-templates/template-overview",
+                "ci-cd-templates/github-actions",
+                "ci-cd-templates/jenkins",
+                "ci-cd-templates/gitlab",
+                "ci-cd-templates/aws-s3",
+                "ci-cd-templates/aws-codebuild",
+                "ci-cd-templates/azure-devops",
+                "ci-cd-templates/gcs",
+                "ci-cd-templates/bitbucket",
+                "ci-cd-templates/circleci",
+                "ci-cd-templates/drone",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manage Deployments as code",
+          items: [
+            "manage-deployments-as-code",
+            "deployment-file-reference"],
+        }, 
       ],
     },
     {
@@ -140,10 +152,11 @@ module.exports = {
         {
           type: "category",
           label: "Data lineage",
-          items: ["set-up-data-lineage", "data-lineage"],
+          items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
         "alerts",
         "airflow-email-notifications",
+        "audit-logs",
       ],
     },
     {
@@ -165,11 +178,8 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Organizations",
-          items: [
-            "organization-api-tokens",
-            "audit-logs",
-          ],
+          label: "Deployments",
+          items: ["authorize-deployments-to-your-cloud", "transfer-a-deployment"],
         },
         {
           type: "category",
@@ -181,7 +191,25 @@ module.exports = {
           label: "Clusters",
           items: [
             "create-dedicated-cluster",
+            "authorize-workspaces-to-a-cluster",
             "resource-reference-hosted",
+            {
+              type: "category",
+              label: "Connect to external resources",
+              link: {
+                type: 'generated-index',
+                title: 'Connect clusters',
+                description: 'Connect Astro to your existing cloud resources.'
+              },
+              items: ["connect-aws", "connect-azure", "connect-gcp"],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Organization",
+          items: [
+            "organization-api-tokens",
           ],
         },
         {
@@ -248,7 +276,6 @@ module.exports = {
           ],
         },
         'platform-variables',
-        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",
@@ -384,6 +411,9 @@ module.exports = {
             'cli/astro-deployment-variable-create',
             'cli/astro-deployment-variable-list',
             'cli/astro-deployment-variable-update',
+            'cli/astro-deployment-worker-queue-create',
+            'cli/astro-deployment-worker-queue-delete',
+            'cli/astro-deployment-worker-queue-update',
           ],
         },
         {
@@ -453,19 +483,20 @@ module.exports = {
             "cli/astro-workspace-service-account",
             "cli/astro-workspace-switch",
             "cli/astro-workspace-team",
-            "cli/astro-workspace-update",
-            "cli/astro-workspace-user-add",
-            "cli/astro-workspace-user-list",
-            "cli/astro-workspace-user-remove",
-            "cli/astro-workspace-user-update",
             "cli/astro-workspace-team-add",
             "cli/astro-workspace-team-list",
             "cli/astro-workspace-team-remove",
+            "cli/astro-workspace-team-update",
             "cli/astro-workspace-token-add",
             "cli/astro-workspace-token-create",
             "cli/astro-workspace-token-list",
             "cli/astro-workspace-token-rotate",
             "cli/astro-workspace-token-update",
+            "cli/astro-workspace-update",
+            "cli/astro-workspace-user-add",
+            "cli/astro-workspace-user-list",
+            "cli/astro-workspace-user-remove",
+            "cli/astro-workspace-user-update",
           ],
         },
       ],

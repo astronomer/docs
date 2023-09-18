@@ -115,7 +115,7 @@ To connect Airflow to Fivetran, create a Fivetran API key.
 
 3. Name your connection `fivetran_conn` and select the **Fivetran** connection type. Provide your Fivetran API key and Fivetran API secret. If the Fivetran connection type isn't available, try restarting your Airflow instance with `astro dev restart` to ensure the contents of `requirements.txt` have been installed.
 
-4. Click **Test** to test your connection. Once you see `Connection tested successfully`, click **Save**.
+4. Click **Save**.
 
 ## Step 7: Create your Airflow DAG
 

@@ -94,7 +94,7 @@ To access the Airflow UI, open `http://localhost:8080/` in a browser and log in 
 
 The default page in the Airflow UI is the **DAGs** page, which shows an overview of all DAGs in your Airflow environment:
 
-![View of starter DAGs in the Airflow UI](/img/docs/tutorial-airflow-ui.png)
+![View of starter DAGs in the Airflow UI](/img/tutorials/get-started-with-airflow_ui_with_starter_dags.png)
 
 Each DAG is listed with a few of its properties, including tags, owner, previous runs, schedule, timestamp of the last and next run, and the states of recent tasks. Because you haven't run any DAGs yet, the **Runs** and **Recent Tasks** sections are empty. Let's fix that!
 
@@ -106,13 +106,13 @@ To provide a basic demonstration of an ETL pipeline, this DAG creates an example
 
 1. Before you can run any DAG in Airflow, you have to unpause it. To unpause `example-dag-basic`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
 
-    ![Pause DAG slider in the Airflow UI](/img/docs/tutorial-unpause-dag.png)
+    ![Unpause DAG slider in the Airflow UI](/img/tutorials/get-started-with-airflow_unpause_dag.png)
 
 2. While all DAGs can run on a schedule defined in their code, you can manually trigger a DAG run at any time from the Airflow UI. Manually trigger `example-dag-basic` by clicking the play button under the **Actions** column. During development, running DAGs on demand can help you identify and resolve issues.
 
 After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG start to populate with data.
 
-![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
+![DAG running in the Airflow UI](/img/tutorials/get-started-with-airflow_dag_running.png)
 
 These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
 
@@ -124,19 +124,21 @@ Let's explore the available views in the **DAGs** page. To access different DAG 
 
 1. Click the name of the DAG.
 
-    The default DAG view is the **Grid** view, which shows the state of completed and currently running tasks. Each column in the grid represents a complete DAG run, and each block in the column represents a specific task instance. This view is useful for seeing DAG runs over time and troubleshooting previously failed  task instances.
+    The default DAG view is the **Grid** view, which shows the state of completed and currently running tasks. Each column in the grid represents a complete DAG run, and each block in the column represents a specific task instance. This view is useful for seeing DAG runs over time and troubleshooting previously failed task instances.
 
-    ![Grid view](/img/docs/tutorial-grid-view.png)
+    ![Grid view](/img/tutorials/get-started-with-airflow_grid_view.png)
 
     Click on a green square to display additional information about the related task instance on the right side of the Airflow UI. The task instance view includes tabs with additional information for the task instance, such as its logs and historic runs. This is one of many available views that show details about your DAG.
 
-2. In the **Grid** tab, click **Graph**. This view shows task dependencies and relationships and can help you troubleshoot dependency issues. The border colors of each task indicate the task run state.
+    ![Access task logs](/img/tutorials/get-started-with-airflow_access_task_instance.gif)
 
-    ![Graph view](/img/docs/tutorial-graph-view.png)
+2. In the **Grid** view, click the **Graph** tab. This view shows task dependencies and relationships and can help you troubleshoot dependency issues. When you select a DAG run in the Grid view, the Graph tab shows the last state of each task instance in this DAG run.
 
-3. In the **Graph** tab, click **Code** to display your DAG source code. Viewing code in the Airflow UI helps you confirm which version of your code is currently running on Airflow.
+    ![Graph view](/img/tutorials/get-started-with-airflow_graph_view_dagrun.gif)
 
-    ![Code view](/img/docs/tutorial-code-view.png)
+3. In the **Grid** view, click the **Code** tab to display your DAG source code. Viewing code in the Airflow UI helps you confirm which version of your code is currently running on Airflow.
+
+    ![Code view](/img/tutorials/get-started-with-airflow_code_view.png)
 
   :::info
 
@@ -253,9 +255,9 @@ When your new DAG appears in the Airflow UI, you can run it to test it.
 
 When you tell Airflow to print something to the terminal, the output appears in Airflow task logs. Task logs are an important feature for unit testing or otherwise troubleshooting DAGs. If a task in your DAG fails, task logs are the best place to investigate why.
 
-1. In the Airflow UI, open either the **Grid** or the **Graph** view.  
-2. Click the `say_my_name` task to make the task instance view appear.
-3. Click **Log**.
+1. In the Airflow UI, open the **Grid** view.  
+2. Click the `say_my_name` task to access details of the task instance.
+3. Click the **Logs** tab.
 
 In the log output, you should see the string you set for the `MY_NAME` constant:
 

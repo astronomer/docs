@@ -13,7 +13,7 @@ DAG-only deploys have the following benefits:
 
 - DAG-only deploys are significantly faster than project deploys.
 - Deployments pick up DAG-only deploys without restarting. This results in a more efficient use of workers and no downtime for your Deployments.
-- If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys. See [DAG-based templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-based-templates) for how you can set this up in your CI/CD pipelines.
+- If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys. See [DAG deploy templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview#dag-deploy-templates) for how you can set this up in your CI/CD pipelines.
 - You can use DAG deploys to update your DAGs when you have slow upload speed on your internet connection.
 
 ## Trigger a DAG-only deploy
@@ -30,7 +30,7 @@ astro deploy --dags
 
 On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
 
-If you have Workspace Admin permissions, you can enable or disable DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy: 
+If you have Workspace Owner permissions, you can enable or disable DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy: 
 
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
 - Your Deployment no longer includes Azure Blob Storage or DAG downloading sidecars.

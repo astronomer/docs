@@ -21,13 +21,13 @@ Refer to [Template overview](template-overview.md) to see generic templates expr
 - Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
 - A [CircleCI](https://circleci.com/vcs-authorize/) account.
 
-## Image-only templates
+## Image deploy templates
 
-[Image-only deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
+[Image deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
 
 <Tabs
     defaultValue="standard"
-    groupId= "image-only-templates"
+    groupId= "image-deploy-templates"
     values={[
         {label: 'Single branch', value: 'standard'},
         {label: 'Multiple branch', value: 'multibranch'},
@@ -201,40 +201,40 @@ If your Astro project requires additional build-time arguments to build an image
 
     # Define a job to be invoked later in a workflow.
     # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-  jobs:
+    jobs:
 
-    build_image_and_deploy:
-      docker:
-        - image: cimg/base:stable
-      # Add steps to the job
-      # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-      steps:
-        - setup_remote_docker:
-            version: 20.10.11
-        - checkout
-        - run:
-            name: "Build image and deploy"
-            command: |
-              set -e
-              echo "export image_tag=astro-$(date +%Y%m%d%H%M%S)" >> $BASH_ENV
-              source "$BASH_ENV"
-              docker build -t ${image_tag} --build-arg="<your-build-arg>=<your-build-arg-value>" .
-              curl -sSL install.astronomer.io | sudo bash -s
-              astro deploy --image-name ${image_tag} ${ASTRO_DEPLOYMENT_ID} -f
+      build_image_and_deploy:
+        docker:
+          - image: cimg/base:stable
+        # Add steps to the job
+        # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+          - checkout
+          - run:
+              name: "Build image and deploy"
+              command: |
+                set -e
+                echo "export image_tag=astro-$(date +%Y%m%d%H%M%S)" >> $BASH_ENV
+                source "$BASH_ENV"
+                docker build -t ${image_tag} --build-arg="<your-build-arg>=<your-build-arg-value>" .
+                curl -sSL install.astronomer.io | sudo bash -s
+                astro deploy --image-name ${image_tag} ${ASTRO_DEPLOYMENT_ID} -f
 
-    # Invoke jobs with workflows
-    # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-    workflows:
-      version: 2.1
-      build-and-deploy-prod:
-        jobs:
-          - build_image_and_deploy_prod:
-              context:
-                - <YOUR-CIRCLE-CI-CONTEXT>
-              filters:
-                branches:
-                  only:
-                    - <YOUR-BRANCH-NAME>
+      # Invoke jobs with workflows
+      # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+      workflows:
+        version: 2.1
+        build-and-deploy-prod:
+          jobs:
+            - build_image_and_deploy_prod:
+                context:
+                  - <YOUR-CIRCLE-CI-CONTEXT>
+                filters:
+                  branches:
+                    only:
+                      - <YOUR-BRANCH-NAME>
     ```
 
   :::info
@@ -246,13 +246,15 @@ If your Astro project requires additional build-time arguments to build an image
 </TabItem>
 </Tabs>
 
-## DAG-based templates
+## DAG deploy templates
 
-A [DAG-based template](template-overview#dag-based-templates) uses the `--dags` flag in the Astro CLI `astro depoy` command to push only DAGs to your Deployment. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified whereas it deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+A [DAG deploy template](template-overview#dag-deploy-templates) uses the `--dags` flag in the `astro deploy` command in the Astro CLI  to push only DAGs to your Deployment.
+
+This CI/CD pipeline deploys your DAGs to Astro when one or more files in your `dags` folder are modified. It deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 ### Configuration requirements
 
-For each Deployment that you use with DAG-based templates, you must [enable DAG deploys](deploy-code.md#deploy-dags-only).
+For each Deployment that you use with DAG deploy templates, you must [enable DAG deploys](deploy-code.md#deploy-dags-only).
 
 ### Single branch implementation
 
@@ -319,5 +321,5 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
 
 This script checks the diff between your current commit and the HEAD of your branch to which you are pushing the changes to. If the changes are only in `dags` then it executes a `dag-only` deploy. Otherwise, it executes an image-based deploy. Make sure to customize the script to use your specific branch and context. 
 
-You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy template](circleci?tab=multibranch#image-only-templates) by creating separate `job` and `workflow` for each branch.
+You can customize this script to work for multiple branches as shown in the [image-based multi-branch deploy template](circleci?tab=multibranch#image-deploy-templates) by creating separate `job` and `workflow` for each branch.
 

@@ -118,6 +118,7 @@ module.exports = {
             'kubepod-operator',
             'using-airflow-plugins',
             'airflow-pools',
+            'airflow-setup-teardown',
             'testing-airflow',
           ],
         },
@@ -210,7 +211,9 @@ module.exports = {
             items: [
               'use-case-airflow-databricks',
               'use-case-airflow-dbt',
-              'use-case-airflow-ml-datasets'
+              'use-case-elt-ml-finance',
+              'use-case-airflow-ml-datasets',
+              'use-case-airflow-mlflow'
             ],
           },
       ],

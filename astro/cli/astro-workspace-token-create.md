@@ -22,7 +22,7 @@ astro workspace token create
 | `--description` |The description for the token | Any string surrounded by quotations |
 | `--expiration` | The expiration date for the token. By default there is no expiration date. | Any integer between 1 and 3650, used to represent days |
 | `--name` | The name for the token. | Any string surrounded by quotations |
-| `--role`  | The token's role in the Workspace.                | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`  | The token's role in the Workspace.                | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Examples
 

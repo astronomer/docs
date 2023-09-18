@@ -9,19 +9,19 @@ Astronomer CI/CD templates are customizable, pre-built code samples that help yo
 
 Template types differ based on the deploy method they use and how many branches or environments they require. This document contains information about the following template types:
 
-- _DAG-based templates_ that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) in Astro and either deploy DAGs or your entire Astro project depending on the files that you update.
-- _Image-only templates_ that build a Docker image and push it to Astro whenever you update any file in your Astro project, including your DAG directory.
+- _DAG deploy templates_ that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) in Astro and either deploy DAGs or your entire Astro project depending on the files that you update.
+- _Image deploy templates_ that build a Docker image and push it to Astro whenever you update any file in your Astro project, including your DAG directory.
 - _Preview Deployment templates_ that automatically create and delete Deployments when you create or delete a feature branch from your main Astro project branch.
 
-Astronomer maintains a dedicated guide with templates for select CI/CD tools. Most guides include image-only templates for a single-branch implementation. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes.
+Astronomer maintains a dedicated guide with templates for select CI/CD tools. Most guides include image based templates for a single-branch implementation. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes.
 
 If you're interested in documentation for a CI/CD tool or template type that does not exist, configure your own or [contact Astronomer support](https://cloud.astronomer.io/support). To learn more about single-branch and multiple-branch implementations and decide which template is right for you, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
-## DAG-based templates
+## DAG deploy templates
 
-_DAG-based templates_ use the `--dags` flag in the Astro CLI to push DAG changes to Astro for faster deploys. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. To learn more about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only) or ["The New, Faster Way to Deploy Airflow DAGs to Astro"](https://www.astronomer.io/blog/the-new-faster-way-to-deploy-airflow-dags-to-astro/) on the Astronomer blog.
+_DAG deploy templates_ check the changes in your Astro project and trigger either a dag deploy or image deploy based on the files changed, allowing for faster deploys. This template deploys your DAGs when only the files in your `dags` folder are modified, and it deploys the rest of your Astro project as a Docker image when any other files or directories are modified. To learn more about the benefits of this workflow, see [Deploy DAGs](deploy-dags.md).
 
-CI/CD templates that use the DAG-based workflow:
+CI/CD templates that use the DAG deploy workflow:
 
 - Require that each Deployment have the DAG-only deploy feature enabled. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment).
 - Use a [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
@@ -32,14 +32,14 @@ CI/CD templates that use the DAG-based workflow:
 
 This process is equivalent to the following shell script: 
 
-```sh
+```bash
 # Set Deployment API key credentials as environment variables
 export ASTRO_API_TOKEN="<your-api-token>"
 export DAG_FOLDER="<path to dag folder ie. dags/>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
 # Determine if only DAG files have changes
-files=$(git diff --name-only HEAD^..HEAD)
+files=$(git diff --name-only $(git rev-parse HEAD~1) -- .)
 dags_only=1
 for file in $files; do
   if [[ $file != "$DAG_FOLDER"* ]]; then
@@ -60,11 +60,11 @@ then
 fi
 ```
 
-## Image-only templates  
+## Image deploy templates  
 
-_Image-only templates_ build a Docker image and push it to Astro whenever you update any file in your Astro project. This type of template works well for development workflows that include complex Docker customization or logic.
+_Image based templates_ build a Docker image and push it to Astro whenever you update any file in your Astro project. This type of template works well for development workflows that include complex Docker customization or logic.
 
-CI/CD templates that use image-only workflows:
+CI/CD templates that use image based workflows:
 
 - Use a [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
@@ -72,7 +72,7 @@ CI/CD templates that use image-only workflows:
 
 This is equivalent to running the following shell script:
 
-```sh
+```bash
 # Set Deployment API key credentials as environment variables
 export ASTRO_API_TOKEN="<your-api-token>"
 # Install the latest version of Astro CLI

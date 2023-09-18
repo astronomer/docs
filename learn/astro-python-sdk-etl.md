@@ -60,7 +60,7 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
     AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
     ```
 
-3. Optional. Create an [Airflow connection](connections.md) to the database where you want to store the temporary tables created by the Astro SDK. After you have successfully tested your connection, set the following environment variables to configure your database as an Astro SDK storage backend. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
+3. Optional. Create an [Airflow connection](connections.md) to the database where you want to store the temporary tables created by the Astro SDK. Set the following environment variables to configure your database as an Astro SDK storage backend. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
 
     ```text
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID='<your-database-connection-id>'

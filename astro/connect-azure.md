@@ -10,30 +10,49 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the information provided here to learn how you can securely connect Astro to your existing Azure instance. A connection to Azure allows Astro to access data stored on your Azure instance and is a necessary step to running pipelines in a production environment.
+Use this document to learn how you can connect an Astro cluster and its Deployments to your external Azure resources.
 
 ## Connection options
 
-The connection option that you choose is determined by the requirements of your organization and your existing infrastructure. You can choose a straightforward implementation, or a more complex implementation that provides enhanced data security. Astronomer recommends that you review all of the available connection options before selecting one for your organization.
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to Azure through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an Azure resource's allowlist. 
+
+If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-azure) to Azure in a few different ways.
+
+After you crate a connection from your Deployment to Azure, you might also have to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#azure).
+
+### Access a public Azure endpoint
+
+To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your Azure resources through a valid Airflow connection.
+
+#### Allowlist external IP addresses for a cluster
+
+1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
+2. Click **Clusters**, then select a cluster.
+3. In the **Details** page, copy the IP addresses listed under **External IPs**.
+
+A cluster's IP addresses are the same for all the Deployments running in that cluster. This is a one-time setup for each Astro cluster.
+
+#### Allowlist external IP addresses for a Deployment
+
+To allow to access to your external resource on per Deployment basis or if you are using a standard cluster, you need the external IPs of your Deployment.
+
+1. In the Cloud UI, select a Deployment, then click **Details**.
+2. Copy the IP addresses under **External IPs**.
+3. (Optional) Add the IP addresses to the allowlist of any external services that need to interact with Astro.
+
+When you use publicly accessible endpoints to connect to Azure, traffic moves directly between your Astro cluster and the Azure API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
+
+### Create a private connection between Astro and Azure
+
+The option that you choose is determined by the security requirements of your company and your existing infrastructure.
 
 <Tabs
-    defaultValue="Public endpoints"
+    defaultValue="VNet peering"
     groupId="connection-options"
     values={[
-        {label: 'Public endpoints', value: 'Public endpoints'},
         {label: 'VNet peering', value: 'VNet peering'},
         {label: 'Azure Private Link', value: 'Azure Private Link'},
     ]}>
-<TabItem value="Public endpoints">
-
-Publicly accessible endpoints allow you to quickly connect Astro to Azure. To configure these endpoints, you can use one of the following methods:
-
-- Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
-- Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
-
-When you use publicly accessible endpoints to connect Astro and Azure, traffic moves directly between your Astro clusters and the Azure API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
-
-</TabItem>
 
 <TabItem value="VNet peering">
 
@@ -92,10 +111,6 @@ Note that you'll incur additional Azure infrastructure costs for every Azure pri
 
 </Tabs>
 
-## Authorization options
+## See Also
 
-Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. Astro clusters must be authorized to access external resources from your cloud.
-
-### Azure account access keys
-
-When you create an Azure storage account, two 512-bit storage account access keys are generated for the account. You can use these keys to authorize access to data in your storage account with Shared Key authorization.
+- [Manage Airflow connections and variables](manage-connections-variables.md)

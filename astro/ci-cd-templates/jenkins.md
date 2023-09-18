@@ -13,8 +13,8 @@ Use the following CI/CD templates to automate deploying Apache Airflow DAGs from
 
 The following templates for Jenkins are available:
 
-- [Image-only deploy templates](template-overview.md#image-only-templates)
-- [DAG-based deploy templates](template-overview.md#dag-based-templates)
+- [Image deploy templates](template-overview.md#image-deploy-templates)
+- [DAG deploy templates](template-overview.md#dag-deploy-templates)
 
 Each template type supports multiple implementations. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
 
@@ -29,11 +29,11 @@ For more information on each template or to configure your own, see [Template ov
 
 Each CI/CD template implementation might have additional requirements.
 
-## Image-only templates
+## Image deploy templates
  
 <Tabs
     defaultValue="standard"
-    groupId= "image-only-templates"
+    groupId= "image-deploy-templates"
     values={[
         {label: 'Single branch', value: 'standard'},
         {label: 'Multiple branch', value: 'multibranch'},
@@ -196,9 +196,9 @@ This `Jenkinsfile` triggers a code push to Astro every time a commit or pull req
 
 </Tabs>
 
-## DAG-based templates
+## DAG deploy templates
 
-The DAG-based template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+The DAG deploy template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 ### Single branch implementation
 

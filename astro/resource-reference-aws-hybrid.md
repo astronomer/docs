@@ -13,9 +13,9 @@ sidebar_custom_props: { icon: "img/aws.png" }
 
 :::caution
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click the Astronomer logo in the upper left corner of the Cloud UI and go to **Settings** > **General**. Your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
-To create a Deployment on Astro Hosted, see [Astro resource reference](resource-reference-hosted.md).
+To create a cluster on Astro Hosted, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
 :::
 
@@ -182,7 +182,7 @@ The following table lists all available instance types for worker node pools, as
 | t3.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
 | t3.2xlarge       | 6 CPUs  | 30.5 GiB MEM   |
 
-If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
+If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
 
 :::caution
 

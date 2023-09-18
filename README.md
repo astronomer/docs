@@ -1,6 +1,6 @@
 # Astronomer Documentation
 
-This repository contains all of the code and content that powers Astro and Astronomer Software [documentation](http://docs.astronomer.io).
+This repository contains all of the code and content that powers [documentation](http://docs.astronomer.io) for Astro, Astronomer Software, and the Astro CLI as well as our open-source learning guides.
 
 ## Suggest a Change
 
@@ -19,34 +19,40 @@ If you'd like to contribute to Astronomer Docs directly, you are welcome to crea
 
 1. Fork or clone this repository
 2. Create a branch off of `main`
-3. Make your changes in that branch.
-4. Submit a PR for review.
+3. Make your changes in that branch
+4. Submit a PR for review
 
 Once you have submitted a PR for your changes, Netlify will add a comment to your PR that includes a link to a staging website with your changes.
 
-Small edits and typo fixes don't need to be linked to an issue and should be merged quickly. To get a timely review on a larger contribution, we recommend first creating a detailed GitHub issue describing the problem and linking that within your PR.
+Small edits and typo fixes don't need to be linked to an issue and should be merged quickly. To get a timely review on a larger contribution, we recommend first creating a GitHub issue describing the problem and linking that within your PR.
 
 Every update to the `main` branch of this repository will trigger a rebuild of our production documentation page at https://www.docs.astronomer.io. It might take a few moments for your merged changes to appear.
 
 ### Docs Structure
 
-There are two core documentation folders: `astro` and `software`. These folders contain the primary Astronomer docsets that you see by default on Astronomer's documentation site. More specifically, `software `is equivalent **Latest** version of the Astronomer Software docset, which is the docset that users see by default when accesssing `docs.astronomer.io/software`.
+There are 3 core documentation folders in this repository:
+
+- `astro`
+- `software`
+- `learn`
+
+These folders contain the primary Astronomer docsets that you see by default on Astronomer's documentation site. Docs for the Astro CLI live within the `astro` folder.
+
+The `software` directory is equivalent to the **Latest** version of the Astronomer Software docset, which is the docset that users see by default when accesssing `docs.astronomer.io/software`. An additional `software_versioned_docs` folder contains docsets for previous versions of Software. Whenever there's a new release of Astronomer Software, a new versioned docset is copied from `software` and added to this folder, with all links and sidebars updated automatically by Docusuaurs.
 
 ![Screen Shot 2022-01-04 at 11 22 19 AM](https://user-images.githubusercontent.com/74574233/148051957-b739ba42-2fc7-4344-b0a0-4f78881fd68c.png)
 
-An additional `software_versioned_docs` folder contains docsets for previous versions of Software. Whenever there's a new release of Astronomer Software, a new versioned docset is copied from `software` and added to this folder, with all links and sidebars updated automatically by Docusuaurs.
-
-If you're working on a change in Software docs, you should work primarily in `software`. Make changes to `software_versioned_docs` only if your change is version-specific or a critical fix (e.g. incorrect/ out-of-date information).
+If you're working on a change in Software docs, you should work primarily in `software`. Make changes to `software_versioned_docs` only if your change is version-specific or a critical fix (e.g. incorrect or out-of-date information).
 
 ### Build Astronomer Docs Locally
 
-If you want to submit a screenshot, GIF, or a new documentation file, we recommend building and testing your documentation change locally. Astronomer docs are built with [Docusaurus](https://docusaurus.io/), which is our static site generator. Read the following sections for instructions on how to build and test your documentation changes locally with Docusaurus.
+If you want to submit a change to the Astronomer docs site itself, or test a screenshot, GIF, or a new documentation file, you may want to build and test your documentation change locally. Astronomer docs are built with [Docusaurus](https://docusaurus.io/), which is an open-source documentation framework and our static site generator. The Astronomer docs site is built on [Netlify](https://www.netlify.com/). Read the following sections for instructions on how to build and test your documentation changes locally with Docusaurus and Yarn.
 
 #### Installation
+
 To build docs locally, you need to install both Node and Yarn. While Yarn is included in Node, starting in 2020, the Yarn binaries are bundled within [Corepack](https://nodejs.org/api/corepack.html). If you're installing Node for the first time, you need to manually enable Corepacks before you can use Yarn.
 
 1.  Follow the instructions on [Nodejs](https://nodejs.org/en/download/) to install Node, then confirm that you successfully installed Node by running the following command:
-
 
     ```sh
     node -version
@@ -79,8 +85,7 @@ If you used an alternative package manager to install Node, such as `npm` or `ho
     ```sh
     corepack enable
     ```
-
-
+    
 #### Local Development
 
 To serve a local version of the docs site with your changes, run:
