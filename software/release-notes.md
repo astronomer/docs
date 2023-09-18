@@ -398,7 +398,7 @@ Release date: September 15, 2023
 - Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG. <!-- https://github.com/astronomer/issues/issues/5683-->
 - Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
 - Removed support for Kubernetes 1.22.
-- Fixed an issue where querying for a Deployment that didn't exist using the Houston API returned an error instead of an empty set.  <!-- https://github.com/astronomer/issues/issues/5723 --> 
+- Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned an error instead of an empty set.  <!-- https://github.com/astronomer/issues/issues/5723 --> 
 - Fixed an issue where you couldn't create registry service accounts on Openshift clusters. <!-- https://github.com/astronomer/issues/issues/5765 --> 
 - Fixed the following vulnerabilities:
 
