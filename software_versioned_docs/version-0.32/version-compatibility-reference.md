@@ -15,16 +15,18 @@ While the tables below reference the minimum compatible versions, we typically r
 
 | Astronomer Platform | Kubernetes                                         | Postgres | Python                                         | Astro Runtime        | Helm |
 | ------------------- | -------------------------------------------------- | -------- | ---------------------------------------------- | -------------------- | ---- |
-| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24, 1.25¹, 1.26¹ | 11+ | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
-| v0.32               | 1.21, 1.22, 1.23, 1.24 , 1.25, 1.26                | 11+  | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
-| v0.33               | 1.23, 1.24 , 1.25, 1.26, 1.27                | 11+  | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22¹, 1.23, 1.24, 1.25¹, 1.26¹, 1.27¹ | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| v0.32               | 1.21, 1.22¹, 1.23, 1.24 , 1.25, 1.26, 1.27¹        | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| v0.33               | 1.21, 1.22, 1.23, 1.24 , 1.25, 1.26                | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
 
 :::info
 
 ¹: Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
 
-- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software 0.30.4.
+- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software version 0.30.4.
+- Support for Kubernetes 1.22 ends with Astronomer Software version 0.30.8 and 0.32.3.
 - Support for Kubernetes 1.25 and 1.26 starts in Astronomer Software version 0.30.6.
+- Support for Kubernetes 1.27 starts in Astronomer Software version 0.30.8 and 0.32.3.
 
 :::
 

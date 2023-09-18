@@ -373,6 +373,56 @@ If your current usage is expected and higher than the default resource limits, u
 - Fixed an issue where NATS would send false Deployment alert emails.
 - Fixed an issue where the configuration in `astronomer.houston.updateRuntimeCheck.url` was ignored if not all supported Deployment image versions were present in the destination URL. 
 
+## 0.30.8
+
+Release date: September 15, 2023
+
+### Additional improvements
+
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
+- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`. 
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file. 
+- The Kibana logging dashboard now includes a default index. 
+- Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
+
+### Bug fixes
+
+- Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API would retrieve the wrong Deployment. 
+- Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments. 
+- Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana. 
+- Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG. 
+- Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
+- Removed support for Kubernetes 1.22.
+- Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned an error instead of an empty set.  
+- Fixed an issue where you couldn't create registry service accounts on Openshift clusters. 
+- Fixed the following vulnerabilities:
+
+    - [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2022-48174)
+    - [CVE-2023-38325](https://nvd.nist.gov/vuln/detail/CVE-2023-38325)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2022-48174)
+    - [CVE-2022-41723](https://nvd.nist.gov/vuln/detail/CVE-2022-41723)
+    - [CVE-2022-29458](https://nvd.nist.gov/vuln/detail/CVE-2022-29458)
+    - [CVE-2023-0464](https://nvd.nist.gov/vuln/detail/CVE-2023-0464)
+    - [CVE-2023-2650](https://nvd.nist.gov/vuln/detail/CVE-2023-2650)
+    - [CVE-2022-29458](https://nvd.nist.gov/vuln/detail/CVE-2022-29458)
+    - [CVE-2023-27561](https://nvd.nist.gov/vuln/detail/CVE-2023-27561)
+    - [CVE-2017-11468](https://nvd.nist.gov/vuln/detail/CVE-2017-11468)
+    - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-28840](https://nvd.nist.gov/vuln/detail/CVE-2023-28840)
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)
+    - [CVE-2023-28319](https://nvd.nist.gov/vuln/detail/CVE-2023-28319)
+    - [CVE-2023-29491](https://nvd.nist.gov/vuln/detail/CVE-2023-29491)
+    - [CVE-2023-35945](https://nvd.nist.gov/vuln/detail/CVE-2023-35945)
+    - [CVE-2023-37920](https://nvd.nist.gov/vuln/detail/CVE-2023-37920)
+    - [CVE-2022-41721](https://nvd.nist.gov/vuln/detail/CVE-2022-41721)
+    - [CVE-2023-39417](https://nvd.nist.gov/vuln/detail/CVE-2023-39417)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
+    - [CVE-2023-40577](https://nvd.nist.gov/vuln/detail/CVE-2023-40577)
+    - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
+
 ## 0.30.7
 
 Release date: May 26, 2023
