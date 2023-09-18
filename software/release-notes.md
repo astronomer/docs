@@ -379,7 +379,7 @@ If your current usage is expected and higher than the default resource limits, u
 
 ## 0.30.8
 
-Release date: September 15, 2023
+Release date: September 16, 2023
 
 ### Additional improvements
 
@@ -392,13 +392,13 @@ Release date: September 15, 2023
 
 ### Bug fixes
 
-- Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API would retrieve the wrong Deployment. 
+- Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API might retrieve the unintended Deployment. 
 - Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments. 
 - Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana. 
 - Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG. 
 - Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
 - Removed support for Kubernetes 1.22.
-- Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned an error instead of an empty set.  
+- Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.
 - Fixed an issue where you couldn't create registry service accounts on Openshift clusters. 
 - Fixed the following vulnerabilities:
 
