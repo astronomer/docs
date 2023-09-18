@@ -383,22 +383,22 @@ Release date: September 14, 2023
 
 ### Additional improvements
 
-- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md). <!--https://github.com/astronomer/issues/issues/4559-->
-- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts). <!-- https://github.com/astronomer/issues/issues/4915-->
-- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`. <!-- https://github.com/astronomer/issues/issues/5594-->
-- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file. <!-- https://github.com/astronomer/issues/issues/5692 -->
-- The Kibana logging dashboard now includes a default index. <!-- https://github.com/astronomer/issues/issues/3253-->
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md). 
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
+- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`. 
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file. 
+- The Kibana logging dashboard now includes a default index. 
 - Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
 
 ### Bug fixes
 
-- Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API would retrieve the wrong Deployment. <!-- https://github.com/astronomer/issues/issues/5134--> 
-- Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments. <!-- https://github.com/astronomer/issues/issues/5647-->
-- Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana. <!-- https://github.com/astronomer/issues/issues/5660-->
-- Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG. <!-- https://github.com/astronomer/issues/issues/5683-->
+- Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API would retrieve the wrong Deployment. 
+- Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments. 
+- Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana. 
+- Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG.
 - Removed support for Kubernetes 1.22.
-- Fixed an issue where querying for a Deployment that didn't exist using the Houston API returned an error instead of an empty set.  <!-- https://github.com/astronomer/issues/issues/5723 --> 
-- Fixed an issue where you couldn't create registry service accounts on Openshift clusters. <!-- https://github.com/astronomer/issues/issues/5765 --> 
+- Fixed an issue where querying for a Deployment that didn't exist using the Houston API returned an error instead of an empty set.  
+- Fixed an issue where you couldn't create registry service accounts on Openshift clusters. 
 - Fixed the following vulnerabilities:
 
     - [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2022-48174)
