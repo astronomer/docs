@@ -183,6 +183,8 @@ astro dev bash --scheduler "ls -al"
 
 ## Common issues 
 
+Use the following topics to resolve common issues with running an Astro project in a local environment.
+
 ### Why aren't my new DAGs visible in the Airflow UI?
 
 Make sure that no DAGs have duplicate `dag_ids`. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
