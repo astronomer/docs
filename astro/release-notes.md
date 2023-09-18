@@ -27,6 +27,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## September 18, 2023
+
+### Additional improvements
+
+- You can now retrieve a Workspace's ID from the Cloud UI. To find a Workspace's ID, open the Workspace in the Cloud UI and go to **Workspace Settings** > **General**.
+
 ## September 12, 2023
 
 ### Per-Deployment IAM workload identities on AWS 
