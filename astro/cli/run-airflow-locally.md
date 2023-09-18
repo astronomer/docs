@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Run your project locally'
+sidebar_label: 'Run Airflow locally'
 title: 'Run your Astro project in a local Airflow environment'
 id: run-airflow-locally
 description: Run commands in your local Airflow environment to troubleshoot running DAGs and tasks.

@@ -318,7 +318,7 @@ module.exports = {
     },
     {
       type: "doc",
-      label: "Run your project locally",
+      label: "Run Airflow locally",
       id: "cli/run-airflow-locally",
     },
     {
