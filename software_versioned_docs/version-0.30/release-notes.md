@@ -375,7 +375,7 @@ If your current usage is expected and higher than the default resource limits, u
 
 ## 0.30.8
 
-Release date: September 16, 2023
+Release date: September 15, 2023
 
 ### Additional improvements
 
