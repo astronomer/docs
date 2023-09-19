@@ -24,7 +24,7 @@ _DAG deploy templates_ check the changes in your Astro project and trigger eithe
 CI/CD templates that use the DAG deploy workflow:
 
 - Require that each Deployment have the DAG-only deploy feature enabled. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment).
-- Use a [Deployment API token](deployment-api-tokens.m), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
+- Use a [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
 - Trigger the following Astro CLI commands depending on which files were updated by the commit:
     - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment.
