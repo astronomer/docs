@@ -55,6 +55,7 @@ When your Deployment has no API keys, the **API Keys** tab disappears from the C
 
 ### Additional improvements
 
+- When you create a new Deployment, the Cloud UI now presents new options and suggestions for running your first DAG.
 - You can now retrieve a Workspace's ID from the Cloud UI. To find a Workspace's ID, open the Workspace in the Cloud UI and go to **Workspace Settings** > **General**.
 
 ## September 12, 2023
