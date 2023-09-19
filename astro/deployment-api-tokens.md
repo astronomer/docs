@@ -44,7 +44,7 @@ Unlike Workspace API tokens and Organization API tokens, Deployment API tokens a
 
 ## Update or delete a Deployment API token
 
-If you delete a Deployment API token, make sure that no existing CI/CD pipelines are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
+If you delete a Deployment API token, make sure that no existing CI/CD workflows are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
 1. In the Cloud UI, open your Workspace, then open the Deployment that the API token belongs to.
    
