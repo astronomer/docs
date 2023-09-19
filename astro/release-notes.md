@@ -31,6 +31,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Manage Deployments programmatically using Deployment API tokens
 
+:::caution
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
 Deployment API tokens replace Deployment API keys as the most secure and customizable way to manage Deployments programmatically. You can use Deployment API tokens to perform all of the same actions as a Deployment API key, including:
 
 - [Pushing code](https://docs.astronomer.io/astro/deploy-code) to a Deployment.
