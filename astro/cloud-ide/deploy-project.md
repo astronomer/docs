@@ -98,7 +98,7 @@ The default workflow provided by the Astro Cloud IDE will:
 These actions are not dependent on each other, meaning that you can modify the following steps to deploy only a single production or development Deployment. 
 
 1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page.
-2. Create a [Deployment API token](deplopyment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md). Copy the API token.
+2. Create a [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md). Copy the API token.
 3. Set the following environment variables in your Git repository as secrets:
    
     - `PROD_ASTRO_API_TOKEN`: The value for your production API token.
