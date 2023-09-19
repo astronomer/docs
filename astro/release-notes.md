@@ -27,7 +27,25 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## September 18, 2023
+## September 19, 2023
+
+### Manage Deployments programmatically using Deployment API tokens
+
+Deployment API tokens replace Deployment API keys as the most secure and customizable way to manage Deployments programmatically. You can use Deployment API tokens to perform all of the same actions as a Deployment API key, including:
+
+- [Pushing code](https://docs.astronomer.io/astro/deploy-code) to a Deployment.
+- Updating the Deployment's [environment variables](https://docs.astronomer.io/astro/environment-variables).
+- Making requests to update your Deployment's Airflow environment using the [Airflow REST API](https://docs.astronomer.io/astro/airflow-api).
+
+Unlike Deployment API keys, you can set an expiration date for Deployment API tokens and rotate them to better manage access to your Deployment. See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
+
+:::caution
+
+Deployment API tokens are a direct replacement for Deployment API keys. Therefore, Astronomer recommends always using Deployment API tokens over API keys. Although you can still continue to use and manage existing Deployment API keys, Astronomer will soon require you to migrate to using Deployment API tokens. 
+
+When your Deployment has no API keys, the **API Keys** tab disappears from the Cloud UI and you can no longer create Deployment API keys. If you want to continue using API keys, ensure that you always have at least one API key configured for the Deployment. 
+
+:::
 
 ### Additional improvements
 
