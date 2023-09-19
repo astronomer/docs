@@ -176,7 +176,7 @@ module.exports = {
         {
           type: "category",
           label: "Deployments",
-          items: ["authorize-deployments-to-your-cloud", "transfer-a-deployment"],
+          items: ["deployment-api-tokens", "authorize-deployments-to-your-cloud", "transfer-a-deployment"],
         },
         {
           type: "category",
