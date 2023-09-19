@@ -47,7 +47,7 @@ Unlike Deployment API keys, you can set an expiration date for Deployment API to
 
 :::caution
 
-Deployment API tokens are a direct replacement for Deployment API keys. Therefore, Astronomer recommends always using Deployment API tokens over API keys. Although you can still continue to use and manage existing Deployment API keys, Astronomer will soon require you to migrate to using Deployment API tokens. 
+Deployment API tokens are a direct replacement for Deployment API keys. Therefore, Astronomer recommends always using Deployment API tokens over API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens. 
 
 When your Deployment has no API keys, the **API Keys** tab disappears from the Cloud UI and you can no longer create Deployment API keys. If you want to continue using API keys, ensure that you always have at least one API key configured for the Deployment. 
 
