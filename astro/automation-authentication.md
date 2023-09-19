@@ -20,6 +20,7 @@ Astro's authentication process is based on the [Auth0 Identifier First Authentic
 You can use any of the following credentials to authenticate in an automated process:
 
 - A Deployment API key. See [Create a Deployment API key](api-keys.md).
+- A Deployment API token. See [Deployment API tokens](deployment-api-tokens.md).
 - A Workspace API token. See [Create a Workspace API token](workspace-api-tokens.md).
 - An Organization API token. See [Create an Organization API token](organization-api-tokens.md).
 
@@ -44,17 +45,17 @@ Because these environment variables store sensitive credentials, Astronomer reco
 
 :::
 
+To use a Deployment, Workspace, or Organization API token as an authentication credential, set the following environment variable in your script: 
+
+```bash
+ASTRO_API_TOKEN=<your-api-token>
+```
+
 To use a Deployment API key as an authentication credential, set the following environment variables in your script:
 
 ```bash
 ASTRONOMER_KEY_ID=<your-api-key-id>
 ASTRONOMER_KEY_SECRET=<your-api-key-secret>
-```
-
-To use a Workspace or Organization API token as an authentication credential, set the following environment variable in your script: 
-
-```bash
-ASTRO_API_TOKEN=<your-api-token>
 ```
 
 ## See also

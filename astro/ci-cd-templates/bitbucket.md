@@ -15,7 +15,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Bitbucket can access.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
+- A [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md).
 - Access to [Bitbucket](https://bitbucket.org/product).
 
 ## Single branch implementation

@@ -25,7 +25,7 @@ To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.m
 
 - An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitHub repository.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
+- A [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md).
 - Access to [GitHub Actions](https://github.com/features/actions).
 
 Each CI/CD template implementation might have additional requirements.
