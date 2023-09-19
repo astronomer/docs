@@ -58,7 +58,7 @@ If you delete a Deployment API token, make sure that no existing CI/CD pipelines
 
 Rotating a Deployment API token lets you renew a token without needing to reconfigure its name, description, and permissions. You can also rotate a token if you lose your current token value and need it for additional workflows. 
 
-When you rotate a Workspace API token, you receive a new valid token from Astro that can be used in your existing workflows. The previous token value becomes invalid and any workflows using those previous values stop working. 
+When you rotate a Deployment API token, you receive a new valid token from Astro that can be used in your existing workflows. The previous token value becomes invalid and any workflows using those previous values stop working. 
 
 1. In the Cloud UI, open your Workspace, then open the Deployment that the API token belongs to.
    
