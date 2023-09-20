@@ -529,11 +529,17 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     ARG PIP_EXTRA_INDEX_URL
     ENV PIP_EXTRA_INDEX_URL=${PIP_EXTRA_INDEX_URL}
     COPY requirements.txt .
+    USER root
     RUN pip install --no-cache-dir -q -r requirements.txt
+    USER astro
 
     FROM stage1 AS stage3
     # Copy requirements directory
+    USER root
+    # Remove existing packages else you might be left with multiple versions of provider packages
+    RUN rm -rf /usr/local/lib/python3.9/site-packages/
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+    USER astro
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
     ENV PATH="/home/astro/.local/bin:$PATH"
 
