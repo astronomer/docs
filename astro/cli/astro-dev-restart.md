@@ -4,6 +4,7 @@ title: "astro dev restart"
 id: astro-dev-restart
 description: Restart a local Airflow environment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/docs/term-icon.png' }
 ---
 
 Stop your Airflow environment, rebuild your Astro project into a Docker image, and restart your Airflow environment with the new Docker image.

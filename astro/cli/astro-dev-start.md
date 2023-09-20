@@ -4,6 +4,7 @@ title: "astro dev start"
 id: astro-dev-start
 description: Build your Astro project to start a local Airflow environment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/docs/term-icon.png' }
 ---
 
 Build your Astro project into a Docker image and spin up a local Docker container for each Airflow component.
