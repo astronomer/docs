@@ -410,11 +410,8 @@ module.exports = {
           label: "astro dev",
           link: {
             type: 'generated-index',
-            title: 'Interact with local Airflow environment',
-            description: 'Commands to interact with your local Airflow environment using Astro CLI.'
-          },
-          "customProps": {
-            "description": "This description can be used in the swizzled DocCard"
+            title: '`astro dev` command reference',
+            description: 'Use `astro dev` commands to manage your Astro project and interact with your local Airflow environment.'
           },
           items: [
             'cli/astro-dev-bash',
