@@ -3,7 +3,7 @@ sidebar_label: "astro dev object export"
 title: "astro dev object export"
 id: astro-dev-object-export
 description: Export Airflow objects from local Airflow environment.
-sidebar_custom_props: { icon: 'img/docs/term-icon.png' }
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Export Airflow variables, connections, and pools from a locally running environment to a local file and format of your choice. By default, the command exports all Airflow objects to the `airflow_settings.yaml` file in your Astro project.

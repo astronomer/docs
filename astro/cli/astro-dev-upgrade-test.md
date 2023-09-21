@@ -4,7 +4,7 @@ title: "astro dev upgrade-test"
 id: astro-dev-upgrade-test
 description: Test local Airflow environment for upgrade to a new Airflow version.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/docs/term-icon.png' }
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. Specifically, this command will run the following tests:

@@ -4,7 +4,7 @@ title: "astro dev init"
 id: astro-dev-init
 description: Initialize an Astro project to run a local Airflow environment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/docs/term-icon.png' }
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Initialize an [Astro project](develop-project.md#create-an-astro-project) in an empty local directory. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. An Astro project can be either run locally with `astro dev start` or pushed to Astronomer with `astro deploy`.

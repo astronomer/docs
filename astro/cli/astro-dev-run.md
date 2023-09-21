@@ -4,7 +4,7 @@ title: "astro dev run"
 id: astro-dev-run
 description: Run Airflow CLI commands in a local Airflow environment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/docs/term-icon.png' }
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Run [Airflow CLI commands](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) in your local Airflow environment. This command is for local development only and cannot be applied to Deployments running on Astro.

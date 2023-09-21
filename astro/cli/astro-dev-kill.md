@@ -4,7 +4,7 @@ title: "astro dev kill"
 id: astro-dev-kill
 description: Force-stop and remove all locally running Airflow containers.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/docs/term-icon.png' }
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Force-stop and remove all running containers for your local Airflow environment. Unlike [`astro dev stop`](astro-dev-stop.md), which only pauses running containers, `astro dev kill` deletes all data associated with your local Postgres database. This includes Airflow connections, logs, and task history.
