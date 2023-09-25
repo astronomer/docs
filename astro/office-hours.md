@@ -26,7 +26,7 @@ During an office hours meeting, you can:
 
 ## Book an office hours appointment 
 
-Before booking an office hour appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question. 
+Before you book an office hour appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question. 
 
 To book office hours, click **Help** > **Book Office Hours** in the [Cloud UI](https://cloud.astronomer.io). Alternatively, you can click **Book office hours** in the left sidebar of this page.
 
