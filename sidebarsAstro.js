@@ -267,6 +267,7 @@ module.exports = {
       label: "Reference",
       items: [
         "astro-support",
+        "astro-office-hours",
         {
           type: "category",
           label: "Astro Runtime",
