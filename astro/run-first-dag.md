@@ -11,7 +11,7 @@ id: "run-first-DAG"
 
 Astro is the industry's leading managed service for Apache Airflow.
 
-You can quickly learn how Astro works by running an Apache Airflow DAG with either [the Astro CLI](first-DAG-CLI.md) or by using [GitHub Actions](first-DAG-github-actions.md).
+You can quickly learn how Astro works by running an Apache Airflow DAG with either [the Astro CLI](first-DAG-cli.md) or by using [GitHub Actions](first-DAG-github-actions.md).
 
 Either tutorial takes about 15 minutes. They each showcase different paths available for DAG development, CI/CD workflows, and code deployment options. You'll learn how to:
 

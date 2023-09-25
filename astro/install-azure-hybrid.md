@@ -219,7 +219,7 @@ After you provide Astronomer support with the setup information for your cluster
 
 ## Create a Deployment and confirm the install
 
-When Astronomer support confirms that your Astro cluster has been created, you can confirm it in the [Cloud UI](https://cloud.astronomer.io) by clicking on the Astronomer icon in the top left corner, then click on **Clusters** to see your cluster. You can then [create a Deployment](create-first-DAG#step-1-create-a-deployment) and start to [develop and deploy your DAGs](create-first-DAG#step-2-create-an-astro-project).
+When Astronomer support confirms that your Astro cluster has been created, you can confirm it in the [Cloud UI](https://cloud.astronomer.io) by clicking on the Astronomer icon in the top left corner, then click on **Clusters** to see your cluster. You can then [create a Deployment](first-DAG-cli.md#step-1-create-a-deployment) and start to [develop and deploy your DAGs](first-DAG-cli.md#step-2-create-an-astro-project).
 
 ## Next steps
 

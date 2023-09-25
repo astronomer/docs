@@ -22,7 +22,7 @@ Specifically, you will:
 - Deploy DAGs to Astro in the Cloud UI.
 - Trigger a run of an example DAG in the Airflow UI. 
 
-This tutorial takes about 15 minutes. You can also create and run your first DAG [from the Astro CLI](create-first-dag.md) in about 15 minutes. However, if you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
+This tutorial takes about 15 minutes. You can also create and run your first DAG [from the Astro CLI](first-DAG-cli.md) in about 15 minutes. However, if you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
 ## Prerequisites
 
@@ -72,7 +72,7 @@ In this tutorial, you'll be deploying these example DAGs to your Deployment on A
 
   :::info
   
-  This repository contains an example Astro project that's similar to the project that `astro dev init` creates when you run your first DAG [with the CLI](create-first-dag.md).
+  This repository contains an example Astro project that's similar to the project that `astro dev init` creates when you run your first DAG [with the CLI](first-DAG-cli.md).
 
   :::
 
