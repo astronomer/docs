@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Run a DAG with GitHub Actions'
+sidebar_label: 'Run your first DAG with GitHub Actions'
 title: 'Run your first DAG with GitHub Actions'
 id: 'first-DAG-ga'
 ---
@@ -11,16 +11,13 @@ id: 'first-DAG-ga'
 
 import {siteVariables} from '@site/src/versions';
 
-Astro is the industry's leading managed service for Apache Airflow. Without writing any custom code or installing any prerequisites, you can run an Apache Airflow DAG using Github Actions in the Cloud UI. 
-
-This quickstart explains the steps required to deploy an example DAG to Astro and trigger a DAG run with Github Actions.
+Astro is the industry's leading managed service for Apache Airflow. You can quickly learn how Astro works by running an Apache Airflow DAG with GitHub Actions. This quickstart explains the steps required to deploy an example DAG to Astro and trigger a DAG run with Github Actions.
 
 Specifically, you will:
 
 - Start an Astro trial
 - Authenticate and log in to Astro. 
 - Create a Deployment. 
-- Create an Astro project.
 - Configure GitHub Actions.
 - Deploy DAGs to Astro in the Cloud UI.
 - Trigger a run of an example DAG in the Airflow UI. 

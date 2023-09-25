@@ -13,9 +13,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-This is where you'll find information about installing, upgrading, and uninstalling the Astro CLI.
+You can find information about installing, upgrading, and uninstalling the Astro CLI.
 
 ## Install the Astro CLI
+
+:::info
+
+If you want to run your first DAG, but don't want to install any software locally, you can instead use a no-code process and run an example DAG using [GitHub Actions](astro-no-code-onboarding.md).
+
+:::
 
 <Tabs
     defaultValue="mac"
@@ -81,12 +87,6 @@ Starting with Astro CLI version 1.6, you can use the Windows Package Manager win
 
 The winget command line tool is supported on Windows 10 1709 (build 16299) or later, and is bundled with Windows 11 and modern versions of Windows 10 by default as the App Installer. If you're running an earlier version of Windows 10 and you don't have the App Installer installed, you can download it from the [Microsoft Store](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca). If you've installed the App Installer previously, make sure you're using the latest version before running commands.
 
-:::info
-
-If you want to run your first DAG, but the CLI installation with WinGet is not working, you can use a no-code process and run an example DAG in the Cloud UI using [GitHub Actions](astro-no-code-onboarding.md).
-
-:::
-
 #### Prerequisites
 
 - Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
@@ -132,12 +132,6 @@ If you're still struggling to install the Astro CLI with winget, retry the insta
 
 This is where you'll find information about installing the Astro CLI on a Windows operating system. Starting with Astro CLI version 1.6, you can use the Windows Package Manager winget command-line tool to install the Astro CLI. See [Windows with winget](install-cli.md?tab=windows%20with%20winget#install-the-astro-cli).
 
-:::info
-
-If you want to run your first DAG, but the CLI installation is not working, you can use a no-code process and run an example DAG in the Cloud UI using [GitHub Actions](astro-no-code-onboarding.md).
-
-:::
-
 #### Prerequisites
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/).
@@ -163,12 +157,6 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 <TabItem value="linux">
 
 This is where you'll find information about installing the Astro CLI on Linux.
-
-:::info
-
-If you want to run your first DAG, but the CLI installation is not working, you can use a no-code process and run an example DAG in the Cloud UI using [GitHub Actions](astro-no-code-onboarding.md).
-
-:::
 
 #### Prerequisites
 
