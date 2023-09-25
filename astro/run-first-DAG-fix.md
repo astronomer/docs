@@ -33,5 +33,5 @@ If you're new to Airflow and want a more in-depth tutorial, see [Write your Firs
 ## Next Steps
 
 - [Run your first DAG with GitHub Actions](first-DAG-github-actions.md)
-- [Run your first DAG with the Astro CLI](first-dag-cli.md)
+- [Run your first DAG with the Astro CLI](first-DAG-cli.md)
 - [Install the CLI](astro/cli/install-cli.md)
