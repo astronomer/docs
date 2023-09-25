@@ -62,19 +62,7 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
 You can now complete the remaining steps to deploy a DAG using GitHub actions by either using this document or by following the instructions in the Cloud UI. On your Deployment page, click **Deploy your first DAG ... with GitHub Actions** to view the remaining instructions on the Deployment details page in the Cloud UI.
 
-## Step 2: Retrieve credentials
-
-When you use GitHub Actions to deploy DAGs to Astro, you need to provide GitHub with your **Deployment ID** and an **API Token** so that the workflow has a Deployment destination to send the DAG to and an API Token for authentication.
-
-1. Copy your **Deployment ID** from the Deployment information on the **Deployment** page. 
-
-2. Go to **Workspace settings > Access management** and then click **Workspace API Token**.
-
-3. Enter the API Token name and choose the credentials permissions level. Then generate your token.
-
-4. Leave this browser window open, so you can quickly access your API token in a later step.
-
-## Step 3: Fork the example DAGs Repository
+## Step 2: Fork the example DAGs Repository
 
 The example DAGs repository contains an _Astro Project_ which contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. 
 
@@ -88,29 +76,53 @@ In this tutorial, you'll be deploying these example DAGs to your Deployment on A
 
   :::
 
-## Step 4: Manually trigger the GitHub Actions
+## Step 3: Set up the GitHub Actions Workflow
 
-1. In GitHub, choose **Actions** from the repository menu.
+To enable GitHub to Deploy DAGs to your Astro workspace, you need to connect your Astro account with the workflow on GitHub. This means you need to have two browser windows open at the same time - one with the Cloud UI and one to your GitHub account.
 
-2. Click **I understand my workflows, go ahead and enable them.**
+1. Open the [Cloud UI](https://cloud.astronomer.io) to your Deployments page. Choose the Deployment where you want to deploy DAGs to. 
+
+2. Open a new tab to the GitHub repository where you forked the example DAGs Repository.
+
+3. In GitHub, choose **Actions** from the repository menu.
+
+4. Click **I understand my workflows, go ahead and enable them.**
 
   The [workflow](https://github.com/astronomer/astro-example-dags/blob/c2c63ced1923488d797ce0eba6b37f5658e92570/.github/workflows/deploy-to-astro.yaml) is a script that uses API tokens to deploy DAGs from a GitHub repository to your Deployment, without requiring any local development.
 
-3. Choose **Astronomer CI - Deploy Code** workflow. 
+5. Choose **Astronomer CI - Deploy Code** workflow. 
 
-4. Click **Run workflow**
+6. Click **Run workflow**. This opens a modal to enter your Astro Deployment information.
 
-4. Paste your **Deployment ID** from Step 1.
+7. In the Cloud UI, copy your **Deployment ID** from the Deployment information. 
 
-  You can also retrieve your Deployment ID from the Deployment page in the [Cloud UI](https://cloud.astronomer.io).
+8. In GitHub, paste your **Deployment ID**.
 
-5. In the [Cloud UI](https://cloud.astronomer.io), Go to **Workspace settings > Access management** and then click **Workspace API Token**.
+9. On your **Deployment** page in the Cloud UI, click **API Tokens**.
 
-6. Copy the API Token and paste in the **API Token** field on your GitHub Actions workflow page.
+10. Click **API Token** to create a new API Token, and then enter a **Name** and choose the **Expiration**.
 
-7. Then click, **Run workflow**. 
+11. Click **Create API Token** to make your new token.
 
-This automatically deploys the DAGs in your forked repository to your Deployment worker queue. 
+  :::danger
+
+  For security reasons, this is the only opportunity you have to copy your API token. After you exit the modal window, you cannot copy it again. Be sure to save your token in a safe place or paste it immediately.
+
+  :::
+
+12. Copy the API Token and paste in the **API Token** field on your GitHub Actions workflow page.
+
+13. Then click, **Run workflow**. 
+
+This automatically deploys the example DAGs to your Deployment.
+
+## Step 4: Run your DAG in Airflow
+
+1. On your **Deployments** page the Cloud UI, choose the Deployment where you deployed your DAGs. Then, click **Open in Airflow**.
+
+2. **Unpause** the **S3** DAG and click **Run**. 
+
+Congratulations! You deployed a DAG to your Astro Workspace using GitHub Actions!
 
 ## Next Steps
 
