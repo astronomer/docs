@@ -15,7 +15,6 @@ If you have questions about your Astronomer account or billing, email `success@a
 
 :::
 
-Before an office hour appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that cover what you'd like to discuss. 
 
 During an office hours meeting, you can:
 
@@ -26,6 +25,8 @@ During an office hours meeting, you can:
 - Conduct a code review for a DAG.
 
 ## Book an office hours appointment 
+
+Before booking an office hour appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question. 
 
 To book office hours, click **Help** > **Book Office Hours** in the [Cloud UI](https://cloud.astronomer.io). Alternatively, you can click **Book office hours** in the left sidebar of this page.
 
