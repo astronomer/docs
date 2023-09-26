@@ -3598,11 +3598,13 @@ paths:
 servers:
 - url: https://api.astronomer.io/platform/v1beta1
 tags:
-- description: Cluster related APIs
+- description: A `cluster` object represents an Astro cluster, which is a Kubernetes cluster that hosts the infrastructure required to run Deployments. Make requests to `cluster` endpoints to manage your standard and dedicated clusters.
   name: Cluster
-- description: Organization related APIs
+- description: The `organization` object contains the metadata and configurations of an Astro Organization. It does not include objects within the Organization, such as users and clusters. Make requests to `organization` endpoints to view and update high level settings for your Organization, including settings related to authentication and billing. To manage resources within an Organization, make requests to the endpoints related to those resources, such as `users`.
   name: Organization
-- description: Options related APIs
+- description: The `options` object represents all possible configurations for a given component Astro component. Make requests to the `options` object to get the configuration constraints for creating or updating a given Astro component.
   name: Options
-- description: Workspace related APIs
+- description: The `workspace` object represents an Astro Workspace, which is a collection of Deployments that can be accessed by a specific group of users. It contains metadata about a Workspace, but does not contain objects within the Workspace such as users and Deployments. Make requests to `workspace` endpoints to manage high level details about your Workspace. To manage resources within a Workspace, make requests to the endpoints related to those resources, such as `users`, and use the `workspaceIds` parameter to filter results by Workspace.
   name: Workspace
+- description: The `deployment` object represents an Astro Deployment. Make requests to `deployment` endpoints to create, update, and delete Deployments and Deployment resources.
+  name: Deployment
