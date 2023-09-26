@@ -92,7 +92,7 @@ In the same section where you configured your database connection, open the **Re
 2. In the "Package name" field, type `scikit-learn`. The Astro Cloud IDE produces a list of packages to choose from.
 3. Select the version `1.3.1` and click **Add**.
 
-    ![Add scikit-learn](/img/guides/cloud-ide-tutorial_new_req.png)
+    ![Requirements dialogue showing scikit-learn added.](/img/tutorials/cloud-ide-tutorial_new_req.png)
 
 ## Step 5: Import a dataset into your database
 
