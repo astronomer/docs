@@ -5,7 +5,7 @@ import {
   useHideableNavbar,
   useNavbarMobileSidebar,
 } from '@docusaurus/theme-common/internal';
-import PromoBanner from '@site/src/components/PromoBanner';
+// import PromoBanner from '@site/src/components/PromoBanner';
 import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar';
 import styles from './styles.module.css';
 function NavbarBackdrop(props) {
@@ -25,7 +25,7 @@ export default function NavbarLayout({ children }) {
   const { navbarRef, isNavbarVisible } = useHideableNavbar(hideOnScroll);
   return (
     <>
-      <PromoBanner />
+      {/* <PromoBanner /> */}
       <nav
         ref={navbarRef}
         className={clsx(
