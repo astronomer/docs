@@ -37,7 +37,7 @@ The Astro API is currently in beta. See [Astro API versioning and support](https
 
 :::
 
-You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and programs that interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
+You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and scripts to programmatically interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
 
 Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://docs.astronomer.io/astro/api/get-started).
 
