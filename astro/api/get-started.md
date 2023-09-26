@@ -65,11 +65,8 @@ curl https://api.astronomer.io/platform/v1beta1/organizations/<your-organization
 
 If the command succeeds, the API returns a list of Workspaces similar to the following:
 
-```json{18}
+```json {18}
 {
-  "limit": 0,
-  "offset": 0,
-  "totalCount": 0,
   "workspaces": [
     {
       "cicdEnforcedDefault": true,
