@@ -264,6 +264,17 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Astro API",
+      items: [
+        "api/overview",
+        "api/get-started",
+        "api/versioning-and-support",
+        "api/iam-api-reference",
+        "api/platform-api-reference",
+      ],
+    },
+    {
+      type: "category",
       label: "Reference",
       items: [
         "astro-support",
