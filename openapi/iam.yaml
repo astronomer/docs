@@ -2127,7 +2127,7 @@ paths:
       tags:
       - User
 servers:
-- url: https://api.astronomer-dev.io/iam/v1beta1
+- url: https://api.astronomer.io/iam/v1beta1
 tags:
 - description: User related APIs
   name: User

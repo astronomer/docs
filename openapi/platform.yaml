@@ -1024,7 +1024,7 @@ components:
           type: integer
         webServerUrl:
           description: The Deployment's webserver's url.
-          example: myorganization.astronomer-dev.run/d8fe2wmv?orgId=org_edxLzpFcLrgEfpD5
+          example: myorganization.astronomer.run/d8fe2wmv?orgId=org_edxLzpFcLrgEfpD5
           type: string
         workerQueues:
           description: A list of the Deployment's worker queues.
@@ -3596,7 +3596,7 @@ paths:
       x-permission:
       - action: workspace.settings.update
 servers:
-- url: https://api.astronomer-dev.io/platform/v1beta1
+- url: https://api.astronomer.io/platform/v1beta1
 tags:
 - description: Cluster related APIs
   name: Cluster
