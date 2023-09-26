@@ -4,12 +4,12 @@ sidebar_label: Overview
 id: overview
 ---
 
-The Astro API is a standard REST API that you can use to develop applications for interacting with Astro components.
+The Astro API is a standard REST API that you can use to develop applications and scripts for interacting with Astro components.
 
-The API contains multiple schemas, with each schema representing a different part of Astro:
+The API contains multiple schemas. Each schema covers a different part of Astro management:
 
-- **Platform API schema**: Includes endpoints for updating your Astro infrastructure and resources, such as clusters, Deployments, and Workspaces.
-- **Identity and access management (IAM) API schema**: Includes endpoints for managing role-based access control (RBAC) components, such as users and Teams.
+- [**Platform API schema**](api/platform-api-reference.mdx): Includes endpoints for updating your Astro infrastructure and resources, such as clusters, Deployments, and Workspaces.
+- [**Identity and access management (IAM) API schema**](api/iam-api-reference.mdx): Includes endpoints for managing role-based access control (RBAC) components, such as users and Teams.
 
 To make your first request using the Astro API, see [Get started with the Astro API](api/get-started.md).
 
