@@ -26,10 +26,8 @@ curl https://api.astronomer.io/platform/v1beta1/organizations \
 
 If the command was successful, then you receive a response that begins similarly to the following:
 
-```json {16}
+```json {14}
 {
-  "limit": 10,
-  "offset": 0,
   "organizations": [
     {
       "billingEmail": "billing@company.com",
@@ -100,19 +98,6 @@ If the command succeeds, the API returns a list of Workspaces similar to the fol
 
 In the response for your specific Workspace, the top-level `id`. This is your Workspace ID.
 
-:::tip
-
-If the API returned many Workspaces, try sending the following request instead to limit your search: 
-
-```bash
-curl https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces?search="<your-workspace-name>" \
--H 'Authorization: Bearer <your-organization-api-token>' 
-```
-
-Query parameters like `search` are useful for limiting the results that the API returns for `GET` requests.
-
-:::
-
 ## Step 3: Update your token description using the API
 
 Now that you have both an Organization ID and a Workspace ID, you can create a Workspace API token using the Astro API.
@@ -120,9 +105,9 @@ Now that you have both an Organization ID and a Workspace ID, you can create a W
 1. Run the following command to create a new Workspace API token:
 
     ```bash
-    curl -X POST https://api.astronomer.io/iam/v1beta1/organizations/<your-organization-id>/tokens/<your-token-id> \
-    --H 'Authorization: Bearer <your-organization-api-token>' \
-    -D Copy { "description": "I wrote this description using the Astro API!", "name": "My new API token", "role": "WORKSPACE_MEMBER" }
+    curl -X POST https://api.astronomer.io/iam/v1beta1/organizations/<your-organization-id>/tokens \
+    -H 'Authorization: Bearer <your-organization-api-token>' \
+    -D '{ "description": "I wrote this description using the Astro API!", "entityId": "<your-workspace-id>", "name": "My new API token", "role": "WORKSPACE_MEMBER", "type": "WORKSPACE" }'
     ```
 
     If the request was successful, the API will return a response with all of your new token's details.
