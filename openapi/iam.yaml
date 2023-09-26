@@ -16,7 +16,7 @@ components:
     ApiToken:
       properties:
         createdAt:
-          description: The time when the API token is created in UTC, formatted as
+          description: The time when the API token was created in UTC, formatted as
             `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
@@ -70,14 +70,14 @@ components:
           example: token
           type: string
         type:
-          description: 'The type of the API token. Can be one of: `WORKSPACE` or `ORGANIZATION`.'
+          description: The type of the API token.
           enum:
           - WORKSPACE
           - ORGANIZATION
           example: WORKSPACE
           type: string
         updatedAt:
-          description: The time when the API token is last updated in UTC, formatted
+          description: The time when the API token was last updated in UTC, formatted
             as `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
@@ -102,15 +102,14 @@ components:
           example: clm8sgvai000008l794psbkdv
           type: string
         entityType:
-          description: 'The type of the entity to which the API token is scoped for.
-            Can be one of: `WORKSPACE` or `ORGANIZATION`.'
+          description: The type of the entity to which the API token is scoped for.
           enum:
           - WORKSPACE
           - ORGANIZATION
           example: WORKSPACE
           type: string
         role:
-          description: 'The role of the API token. Can be one of: `WORKSPACE_OWNER`,`WORKSPACE_OPERATOR`,`WORKSPACE_AUTHOR`,`WORKSPACE_MEMBER`,`ORGANIZATION_OWNER`,`ORGANIZATION_BILLING_ADMIN`,`ORGANIZATION_MEMBER`.'
+          description: The role of the API token.
           enum:
           - WORKSPACE_OWNER
           - WORKSPACE_OPERATOR
@@ -172,7 +171,7 @@ components:
           example: clm8qv74h000008mlf08scq7k
           type: string
         subjectType:
-          description: 'The subject type. Can be one of: `USER`, `SERVICEKEY`.'
+          description: The subject type.
           enum:
           - USER
           - SERVICEKEY
@@ -202,7 +201,7 @@ components:
           example: My token
           type: string
         role:
-          description: 'The role of the API token. Can be one of: `WORKSPACE_OWNER`,`WORKSPACE_OPERATOR`,`WORKSPACE_AUTHOR`,`WORKSPACE_MEMBER`,`ORGANIZATION_OWNER`,`ORGANIZATION_BILLING_ADMIN`,`ORGANIZATION_MEMBER`.'
+          description: The role of the API token.
           enum:
           - WORKSPACE_OWNER
           - WORKSPACE_OPERATOR
@@ -221,8 +220,7 @@ components:
           minimum: 1
           type: integer
         type:
-          description: 'The scope of the API token. Can be one of: `WORKSPACE` or
-            `ORGANIZATION`.'
+          description: The scope of the API token.
           enum:
           - WORKSPACE
           - ORGANIZATION
@@ -251,8 +249,7 @@ components:
           example: My Team
           type: string
         organizationRole:
-          description: 'Team''s Organization role. Can be one of: `ORGANIZATION_OWNER`,
-            `ORGANIZATION_BILLING_ADMIN`, `ORGANIZATION_MEMBER`.'
+          description: The Team's Organization role.
           enum:
           - ORGANIZATION_OWNER
           - ORGANIZATION_BILLING_ADMIN
@@ -269,8 +266,7 @@ components:
           example: user1@company.com
           type: string
         role:
-          description: 'The user''s Organization role. Can be one of: `ORGANIZATION_OWNER`,
-            `ORGANIZATION_BILLING_ADMIN`, `ORGANIZATION_MEMBER`.'
+          description: The user's Organization role.
           enum:
           - ORGANIZATION_OWNER
           - ORGANIZATION_BILLING_ADMIN
@@ -332,8 +328,7 @@ components:
     SubjectRoles:
       properties:
         organizationRole:
-          description: 'The subject''s Organization role. Can be one of: `ORGANIZATION_OWNER`,
-            `ORGANIZATION_BILLING_ADMIN`, `ORGANIZATION_MEMBER`.'
+          description: The subject's Organization role.
           enum:
           - ORGANIZATION_OWNER
           - ORGANIZATION_BILLING_ADMIN
@@ -349,8 +344,7 @@ components:
     Team:
       properties:
         createdAt:
-          description: The time at which the Team is created in UTC, formatted as
-            `YYYY-MM-DDTHH:MM:SSZ`.
+          description: The time when the Team was created in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
           type: string
@@ -377,8 +371,7 @@ components:
           example: clma5g8q6000108mh88g27k1y
           type: string
         organizationRole:
-          description: 'The Team''s Organization role. Can be one of: `ORGANIZATION_OWNER`,
-            `ORGANIZATION_BILLING_ADMIN`, `ORGANIZATION_MEMBER`.'
+          description: The Team's Organization role.
           enum:
           - ORGANIZATION_OWNER
           - ORGANIZATION_BILLING_ADMIN
@@ -395,7 +388,7 @@ components:
           example: 1
           type: integer
         updatedAt:
-          description: The time at which the Team is updated in UTC, formatted as
+          description: The time when the Team was last updated in UTC, formatted as
             `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
@@ -551,8 +544,7 @@ components:
     UpdateTeamRolesRequest:
       properties:
         organizationRole:
-          description: 'Team''s Organization roles. Can be one of: `ORGANIZATION_OWNER`,
-            `ORGANIZATION_BILLING_ADMIN`, `ORGANIZATION_MEMBER`.'
+          description: The Team's Organization roles.
           enum:
           - ORGANIZATION_OWNER
           - ORGANIZATION_BILLING_ADMIN
@@ -560,8 +552,8 @@ components:
           example: ORGANIZATION_MEMBER
           type: string
         workspaceRoles:
-          description: The Team's updated Workspace roles. Workspaces provided must
-            belong to the Team's Organization.
+          description: The Team's updated Workspace roles. The Workspaces you specify
+            must belong to the Team's Organization.
           items:
             $ref: '#/components/schemas/WorkspaceRole'
           type: array
@@ -571,8 +563,7 @@ components:
     UpdateUserRolesRequest:
       properties:
         organizationRole:
-          description: 'The user''s updated Organization role. Can be one of: `ORGANIZATION_OWNER`,
-            `ORGANIZATION_BILLING_ADMIN`, `ORGANIZATION_MEMBER`.'
+          description: The user's updated Organization role.
           enum:
           - ORGANIZATION_OWNER
           - ORGANIZATION_BILLING_ADMIN
@@ -593,7 +584,7 @@ components:
           example: https://avatar.url
           type: string
         createdAt:
-          description: The time when the user is created in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
+          description: The time when the user was created in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
           type: string
@@ -606,8 +597,7 @@ components:
           example: clm9sq6s0000008kz7uvl7yz7
           type: string
         organizationRole:
-          description: 'The user''s Organization role. Can be one of: `ORGANIZATION_OWNER`,
-            `ORGANIZATION_BILLING_ADMIN`, `ORGANIZATION_MEMBER`.'
+          description: The user's Organization role.
           enum:
           - ORGANIZATION_OWNER
           - ORGANIZATION_BILLING_ADMIN
@@ -615,8 +605,7 @@ components:
           example: ORGANIZATION_MEMBER
           type: string
         status:
-          description: 'The user''s status. Can be one of: `active`, `inactive`, `pending`,
-            `banned`'
+          description: The user's status.
           enum:
           - ACTIVE
           - INACTIVE
@@ -625,7 +614,7 @@ components:
           example: ACTIVE
           type: string
         updatedAt:
-          description: The time when the user is updated in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
+          description: The time when the user was updated in UTC, formatted as `YYYY-MM-DDTHH:MM:SSZ`.
           example: "2022-11-22T04:37:12Z"
           format: date-time
           type: string
@@ -675,8 +664,7 @@ components:
     WorkspaceRole:
       properties:
         role:
-          description: 'The role of the subject in the Workspace. Can be one of: `WORKSPACE_OWNER`,
-            `WORKSPACE_OPERATOR`, `WORKSPACE_AUTHOR`, `WORKSPACE_MEMBER`.'
+          description: The role of the subject in the Workspace.
           enum:
           - WORKSPACE_OWNER
           - WORKSPACE_OPERATOR
@@ -772,7 +760,7 @@ paths:
       description: Delete an existing user invite.
       operationId: DeleteUserInvite
       parameters:
-      - description: The ID of the Organization where the user was invited to.
+      - description: The ID of the Organization to which the user was invited.
         in: path
         name: organizationId
         required: true
@@ -835,14 +823,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Offset for pagination
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
@@ -850,8 +838,8 @@ paths:
           maximum: 1000
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`.
         in: query
         name: sorts
         schema:
@@ -916,7 +904,7 @@ paths:
         have the same set of permissions in an Organization or Workspace.
       operationId: CreateTeam
       parameters:
-      - description: The ID of the Organization where the Team is created.
+      - description: The ID of the Organization to which the Team will belong.
         in: path
         name: organizationId
         required: true
@@ -987,7 +975,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: The ID of the Team to delete.
+      - description: The Team's ID.
         in: path
         name: teamId
         required: true
@@ -1043,7 +1031,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: The ID of the Team to retrieve data for.
+      - description: The Team's ID.
         in: path
         name: teamId
         required: true
@@ -1103,7 +1091,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: The ID of the Team to update.
+      - description: The Team's ID.
         in: path
         name: teamId
         required: true
@@ -1172,28 +1160,28 @@ paths:
         required: true
         schema:
           type: string
-      - description: The ID of the Team to retrieve member information for.
+      - description: The Team's ID.
         in: path
         name: teamId
         required: true
         schema:
           type: string
-      - description: Offset for pagination
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
           default: 20
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`.
         in: query
         name: sorts
         schema:
@@ -1254,16 +1242,17 @@ paths:
       x-permission:
       - action: organization.teams.get
     post:
-      description: Add members to a team
+      description: Add users to an existing Team. Users must belong to the Team's
+        Organization before you can add them to the Team.
       operationId: AddTeamMembers
       parameters:
-      - description: organization ID
+      - description: The ID of the Organization to which the Team belongs.
         in: path
         name: organizationId
         required: true
         schema:
           type: string
-      - description: team ID
+      - description: The Team's ID.
         in: path
         name: teamId
         required: true
@@ -1274,7 +1263,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AddTeamMembersRequest'
-        description: request body for adding members to a team
+        description: Request body for adding users to a Team
         required: true
         x-originalParamName: body
       responses:
@@ -1312,7 +1301,7 @@ paths:
           description: Internal Server Error
       security:
       - JWT: []
-      summary: Add members to a team
+      summary: Add members to a Team
       tags:
       - Team
       x-permission:
@@ -1323,7 +1312,7 @@ paths:
         with the Team.
       operationId: RemoveTeamMember
       parameters:
-      - description: The ID of the Organization to which the user belongs.
+      - description: The ID of the Organization to which the Team belongs.
         in: path
         name: organizationId
         required: true
@@ -1335,7 +1324,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: The ID of the user to remove.
+      - description: The Team member's ID.
         in: path
         name: memberId
         required: true
@@ -1383,7 +1372,7 @@ paths:
       - action: organization.teams.update
   /organizations/{organizationId}/teams/{teamId}/roles:
     post:
-      description: Update Organization and Workspace roles for a Team.
+      description: Update a Team's Workspace and Organization roles.
       operationId: UpdateTeamRoles
       parameters:
       - description: The ID of the Organization to which the Team belongs.
@@ -1392,7 +1381,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: The ID of the Team to update roles for.
+      - description: The Team's ID.
         in: path
         name: teamId
         required: true
@@ -1473,14 +1462,14 @@ paths:
         name: includeOnlyOrganizationTokens
         schema:
           type: boolean
-      - description: Offset for pagination
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
@@ -1488,8 +1477,8 @@ paths:
           maximum: 1000
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`.
         in: query
         name: sorts
         schema:
@@ -1925,26 +1914,26 @@ paths:
         Organization.
       operationId: ListUsers
       parameters:
-      - description: The ID of the Organization to list users for.
+      - description: The Organization's ID.
         in: path
         name: organizationId
         required: true
         schema:
           type: string
-      - description: The ID of the Workspace to filter the list of users for. When
-          specified, the API returns only users belonging to the specified Workspace.
+      - description: The Workspace to list users for. When specified, the API returns
+          only users belonging to the specified Workspace.
         in: query
         name: workspaceId
         schema:
           type: string
-      - description: Offset for pagination
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
@@ -1952,8 +1941,8 @@ paths:
           maximum: 1000
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`.
         in: query
         name: sorts
         schema:

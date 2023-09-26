@@ -21,7 +21,7 @@ components:
           example: clm8qv74h000008mlf08scq7k
           type: string
         subjectType:
-          description: 'The subject type. Can be one of: `USER`, `SERVICEKEY`.'
+          description: The subject type.
           enum:
           - USER
           - SERVICEKEY
@@ -38,8 +38,7 @@ components:
     Cluster:
       properties:
         cloudProvider:
-          description: 'The name of the cluster''s cloud provider. Can be one of:
-            `AWS`, `AZURE`, `GCP`.'
+          description: The name of the cluster's cloud provider.
           enum:
           - AWS
           - AZURE
@@ -54,7 +53,7 @@ components:
           type: string
         dbInstanceType:
           description: The type of database instance that is used for the cluster.
-            For `HYBRID` cluster only.
+            For Hybrid clusters only.
           example: db.t3.medium
           type: string
         id:
@@ -101,8 +100,7 @@ components:
           example: 172.22.0.0/22
           type: string
         status:
-          description: 'The status of the cluster. Can be one of: `CREATING`, `CREATED`,
-            `CREATE_FAILED`, `UPDATING`.'
+          description: The status of the cluster.
           enum:
           - CREATING
           - CREATED
@@ -111,7 +109,7 @@ components:
           example: CREATED
           type: string
         tags:
-          description: The Kubernetes tags in the cluster. For `AWS`, `HYBRID` cluster
+          description: The Kubernetes tags in the cluster. For AWS Hybrid clusters
             only.
           items:
             $ref: '#/components/schemas/ClusterK8sTag'
@@ -121,7 +119,7 @@ components:
           example: your-tenant-id
           type: string
         type:
-          description: 'The type of the cluster. Can be one of: `DEDICATED`, `HYBRID`.'
+          description: The type of the cluster.
           enum:
           - DEDICATED
           - HYBRID
@@ -225,7 +223,7 @@ components:
             $ref: '#/components/schemas/ProviderInstanceType'
           type: array
         provider:
-          description: 'The cloud provider. Can be one of: `AWS`, `AZURE`, or `GCP`.'
+          description: The cloud provider.
           enum:
           - AWS
           - AZURE
@@ -278,8 +276,7 @@ components:
     CreateAwsClusterRequest:
       properties:
         cloudProvider:
-          description: 'The cluster''s cloud provider. Can be one of: `AWS`, `AZURE`,
-            `GCP`.'
+          description: The cluster's cloud provider.
           enum:
           - AWS
           - AZURE
@@ -306,7 +303,8 @@ components:
             $ref: '#/components/schemas/CreateNodePoolRequest'
           type: array
         providerAccount:
-          description: The provider account ID. For GCP clusters only.
+          description: The provider account ID. Required and applicable only for Hybrid
+            clusters.
           example: provider-account
           type: string
         region:
@@ -314,7 +312,7 @@ components:
           example: us-east-1
           type: string
         type:
-          description: 'The cluster''s type. Can be one of: `DEDICATED`, `HYBRID`.'
+          description: The cluster's type.
           enum:
           - DEDICATED
           - HYBRID
@@ -335,8 +333,7 @@ components:
     CreateAzureClusterRequest:
       properties:
         cloudProvider:
-          description: 'The cluster''s cloud provider. Can be one of: `AWS`, `AZURE`,
-            `GCP`.'
+          description: The cluster's cloud provider.
           enum:
           - AWS
           - AZURE
@@ -363,7 +360,8 @@ components:
             $ref: '#/components/schemas/CreateNodePoolRequest'
           type: array
         providerAccount:
-          description: The provider account ID. For GCP clusters only.
+          description: The provider account ID. Required and applicable only for Hybrid
+            clusters.
           example: provider-account
           type: string
         region:
@@ -375,7 +373,7 @@ components:
           example: 82ab587e-33f8-47a2-8909-b9269551d45c
           type: string
         type:
-          description: 'The cluster''s type. Can be one of: `DEDICATED`, `HYBRID`.'
+          description: The cluster's type.
           enum:
           - DEDICATED
           - HYBRID
@@ -427,8 +425,7 @@ components:
           maxLength: 1000
           type: string
         executor:
-          description: 'The Deployment''s executor type. Can be one of: `CELERY`,
-            `KUBERNETES`.'
+          description: The Deployment's executor type.
           enum:
           - CELERY
           - KUBERNETES
@@ -468,8 +465,7 @@ components:
           example: 320Gi
           type: string
         schedulerSize:
-          description: 'The size of the scheduler pod. Can be one of: `SMALL`, `MEDIUM`,
-            `LARGE`.'
+          description: The size of the scheduler pod.
           enum:
           - SMALL
           - MEDIUM
@@ -477,8 +473,7 @@ components:
           example: MEDIUM
           type: string
         type:
-          description: 'The type of the Deployment. Can be one of: DEDICATED, HYBRID,
-            STANDARD'
+          description: The type of the Deployment.
           enum:
           - DEDICATED
           - HYBRID
@@ -522,8 +517,7 @@ components:
     CreateGcpClusterRequest:
       properties:
         cloudProvider:
-          description: 'The cluster''s cloud provider. Can be one of: `AWS`, `AZURE`,
-            `GCP`.'
+          description: The cluster's cloud provider.
           enum:
           - AWS
           - AZURE
@@ -554,7 +548,8 @@ components:
           example: 172.21.0.0/19
           type: string
         providerAccount:
-          description: The provider account ID. For GCP clusters only.
+          description: The provider account ID. Required and applicable only for Hybrid
+            clusters.
           example: provider-account
           type: string
         region:
@@ -570,7 +565,7 @@ components:
           example: 172.22.0.0/22
           type: string
         type:
-          description: 'The cluster''s type. Can be one of: `DEDICATED`, `HYBRID`.'
+          description: The cluster's type.
           enum:
           - DEDICATED
           - HYBRID
@@ -607,8 +602,7 @@ components:
           maxLength: 1000
           type: string
         executor:
-          description: 'The Deployment''s executor type. Can be one of: `CELERY`,
-            `KUBERNETES`.'
+          description: The Deployment's executor type.
           enum:
           - CELERY
           - KUBERNETES
@@ -636,8 +630,7 @@ components:
           example: clmh9hbjb000008m9eutqg68h
           type: string
         type:
-          description: 'The type of the Deployment. Can be one of: DEDICATED, HYBRID,
-            STANDARD'
+          description: The type of the Deployment.
           enum:
           - DEDICATED
           - HYBRID
@@ -698,8 +691,8 @@ components:
           example: 9.1.0
           type: string
         cloudProvider:
-          description: 'The cloud provider for the Deployment''s cluster. Can be one
-            of: `AWS`, `AZURE`, `GCP`. Optional if `ClusterId` is specified.'
+          description: The cloud provider for the Deployment's cluster. Optional if
+            `ClusterId` is specified.
           enum:
           - AWS
           - AZURE
@@ -729,8 +722,7 @@ components:
           maxLength: 1000
           type: string
         executor:
-          description: 'The Deployment''s executor type. Can be one of: `CELERY`,
-            `KUBERNETES`.'
+          description: The Deployment's executor type.
           enum:
           - CELERY
           - KUBERNETES
@@ -775,8 +767,7 @@ components:
           example: 320Gi
           type: string
         schedulerSize:
-          description: 'The size of the scheduler pod. Can be one of: `SMALL`, `MEDIUM`,
-            `LARGE`.'
+          description: The size of the scheduler pod.
           enum:
           - SMALL
           - MEDIUM
@@ -784,8 +775,7 @@ components:
           example: MEDIUM
           type: string
         type:
-          description: 'The type of the Deployment. Can be one of: DEDICATED, HYBRID,
-            STANDARD'
+          description: The type of the Deployment.
           enum:
           - DEDICATED
           - HYBRID
@@ -889,8 +879,7 @@ components:
             $ref: '#/components/schemas/DeploymentEnvironmentVariable'
           type: array
         executor:
-          description: 'The Deployment''s executor type. Can be one of: `CELERY`,
-            `KUBERNETES`.'
+          description: The Deployment's executor type.
           enum:
           - CELERY
           - KUBERNETES
@@ -976,8 +965,7 @@ components:
           example: 1
           type: integer
         schedulerSize:
-          description: 'The Deployment''s scheduler size. Can be one of: `SMALL`,
-            `MEDIUM`, `LARGE`.'
+          description: The Deployment's scheduler size.
           enum:
           - SMALL
           - MEDIUM
@@ -985,8 +973,7 @@ components:
           example: MEDIUM
           type: string
         status:
-          description: 'The status of the Deployment. Can be one of: `CREATING`, `DEPLOYING`,
-            `HEALTHY`, `UNHEALTHY`, `UNKNOWN`.'
+          description: The status of the Deployment.
           enum:
           - CREATING
           - DEPLOYING
@@ -1004,8 +991,7 @@ components:
           example: clmh5mash000008mia6lnbs0f
           type: string
         type:
-          description: 'The type of cluster that the Deployment runs on. Can be one
-            of: `DEDICATED`, `HYBRID`, `STANDARD`.'
+          description: The type of cluster that the Deployment runs on.
           enum:
           - DEDICATED
           - HYBRID
@@ -1271,9 +1257,8 @@ components:
     MutateWorkerQueueRequest:
       properties:
         astroMachine:
-          description: 'The Astro machine for each worker in the queue. Can be one
-            of: `A5`, `A10`, `A20`, `A40`, or `A60`. For `STANDARD` and `DEDICATED`
-            Deployments only.'
+          description: The Astro machine for each worker in the queue. For Astro Hosted
+            only.
           enum:
           - A5
           - A10
@@ -1292,12 +1277,11 @@ components:
           example: true
           type: boolean
         maxWorkerCount:
-          description: The maximum number of workers that can run at once. At least
-            1.
+          description: The maximum number of workers that can run at once.
           minimum: 1
           type: integer
         minWorkerCount:
-          description: The minimum number of workers running at once. At least 0.
+          description: The minimum number of workers running at once.
           minimum: 0
           type: integer
         name:
@@ -1306,12 +1290,12 @@ components:
           maxLength: 63
           type: string
         nodePoolId:
-          description: The node pool ID associated with the worker queue. For `HYBRID`
-            Deployments only.
+          description: The node pool ID associated with the worker queue. For Astro
+            Hybrid only.
           type: string
         workerConcurrency:
           description: The maximum number of concurrent tasks that a worker Pod can
-            run at a time. At least 1.
+            run at a time.
           minimum: 1
           type: integer
       required:
@@ -1324,8 +1308,7 @@ components:
     NodePool:
       properties:
         cloudProvider:
-          description: 'The name of the cloud provider. Can be one of: `AWS`, `AZURE`,
-            `GCP`.'
+          description: The name of the cloud provider.
           enum:
           - AWS
           - AZURE
@@ -1396,7 +1379,7 @@ components:
           example: billing@company.com
           type: string
         createdAt:
-          description: The time when the Organization is created in UTC, formatted
+          description: The time when the Organization was created in UTC, formatted
             as `YYYY-MM-DDTHH:MM:SSZ`.
           example: 2022-11-22T04:37:12T
           format: date-time
@@ -1421,8 +1404,7 @@ components:
           example: My organization
           type: string
         paymentMethod:
-          description: 'The Organization''s payment method. Can be one of: `CREDIT_CARD`,
-            `INVOICE`, `AWS_MARKETPLACE`, `AZURE_MARKETPLACE`, `GCP_MARKETPLACE`.'
+          description: The Organization's payment method.
           enum:
           - CREDIT_CARD
           - INVOICE
@@ -1432,19 +1414,19 @@ components:
           example: CREDIT_CARD
           type: string
         product:
-          description: The Organization's product.
+          description: The Organization's product type.
           enum:
           - HOSTED
           - HYBRID
           example: HOSTED
           type: string
         status:
-          description: 'The Organization''s status. Can be one of: `ACTIVE`, `INACTIVE`,
-            `SUSPENDED`.'
+          description: The Organization's status.
           enum:
           - ACTIVE
           - INACTIVE
           - SUSPENDED
+          example: ACTIVE
           type: string
         supportPlan:
           description: The Organization's support plan.
@@ -1464,7 +1446,7 @@ components:
           format: date-time
           type: string
         updatedAt:
-          description: The time when the Organization is updated in UTC, formatted
+          description: The time when the Organization was last updated in UTC, formatted
             as `YYYY-MM-DDTHH:MM:SSZ`.
           example: 2022-11-22T04:37:12T
           format: date-time
@@ -1666,7 +1648,8 @@ components:
           example: My cluster
           type: string
         nodePools:
-          description: A list of node pools to add to the cluster.
+          description: A list of node pools to add to the cluster. For Hybrid clusters
+            only.
           items:
             $ref: '#/components/schemas/UpdateNodePoolRequest'
           type: array
@@ -1707,8 +1690,7 @@ components:
             $ref: '#/components/schemas/DeploymentEnvironmentVariableRequest'
           type: array
         executor:
-          description: 'The executor Deployment''s executor. Can be one of: `CELERY`,
-            `KUBERNETES`.'
+          description: The executor Deployment's executor.
           enum:
           - CELERY
           - KUBERNETES
@@ -1748,8 +1730,7 @@ components:
           example: 320Gi
           type: string
         schedulerSize:
-          description: 'The size of the scheduler pod. Can be one of: `SMALL`, `MEDIUM`,
-            `LARGE`.'
+          description: The size of the scheduler pod.
           enum:
           - SMALL
           - MEDIUM
@@ -1757,8 +1738,7 @@ components:
           example: MEDIUM
           type: string
         type:
-          description: 'The type of the Deployment. Can be one of: `DEDICATED`, `HYBRID`,
-            `STANDARD`.'
+          description: The type of the Deployment.
           enum:
           - DEDICATED
           - HYBRID
@@ -1822,8 +1802,7 @@ components:
             $ref: '#/components/schemas/DeploymentEnvironmentVariableRequest'
           type: array
         executor:
-          description: 'The Deployment''s executor type. Can be one of: `CELERY`,
-            `KUBERNETES`.'
+          description: The Deployment's executor type.
           enum:
           - CELERY
           - KUBERNETES
@@ -1851,8 +1830,7 @@ components:
           example: clmh87air000008mgfkgrg9fy
           type: string
         type:
-          description: 'The type of the Deployment. Can be one of: `DEDICATED`, `HYBRID`,
-            `STANDARD`.'
+          description: The type of the Deployment.
           enum:
           - DEDICATED
           - HYBRID
@@ -1916,16 +1894,16 @@ components:
     UpdateOrganizationRequest:
       properties:
         billingEmail:
-          description: The Organization's billing email
+          description: The Organization's billing email.
           example: billing@company.com
           type: string
         isScimEnabled:
-          description: Whether SCIM is enabled for the Organization
+          description: Whether SCIM is enabled for the Organization.
           example: false
           type: boolean
         name:
-          description: The name of the Organization
-          example: My organization
+          description: The name of the Organization.
+          example: My Organization
           maxLength: 50
           type: string
       required:
@@ -1965,8 +1943,7 @@ components:
             $ref: '#/components/schemas/DeploymentEnvironmentVariableRequest'
           type: array
         executor:
-          description: 'The executor Deployment''s executor. Can be one of: `CELERY`,
-            `KUBERNETES`.'
+          description: The executor Deployment's executor.
           enum:
           - CELERY
           - KUBERNETES
@@ -2006,8 +1983,7 @@ components:
           example: 320Gi
           type: string
         schedulerSize:
-          description: 'The size of the scheduler pod. Can be one of: `SMALL`, `MEDIUM`,
-            `LARGE`.'
+          description: The size of the scheduler pod.
           enum:
           - SMALL
           - MEDIUM
@@ -2015,8 +1991,7 @@ components:
           example: MEDIUM
           type: string
         type:
-          description: 'The type of the Deployment. Can be one of: `DEDICATED`, `HYBRID`,
-            `STANDARD`.'
+          description: The type of the Deployment.
           enum:
           - DEDICATED
           - HYBRID
@@ -2092,7 +2067,7 @@ components:
       properties:
         astroMachine:
           description: The Astro machine size for each worker node in the queue. For
-            `STANDARD` and `DEDICATED` Deployments only.
+            Deployments on Hosted clusters only.
           example: A5
           type: string
         id:
@@ -2116,8 +2091,8 @@ components:
           example: My worker queue
           type: string
         nodePoolId:
-          description: The node pool ID associated with the worker queue. For `HYBRID`
-            Deployments only.
+          description: The node pool ID associated with the worker queue. For Deployments
+            on Hybrid clusters only.
           example: clmh9yjcn000a08mi8dsgbno9
           type: string
         podCpu:
@@ -2127,7 +2102,7 @@ components:
           type: string
         podMemory:
           description: The maximum amount of memory available for a worker node. Units
-            in Gibibytes or `Gi`.
+            are in Gibibytes or `Gi`.
           example: 2Gi
           type: string
         workerConcurrency:
@@ -2267,8 +2242,7 @@ paths:
         Requires using a personal access token (PAT) for authentication.
       operationId: ListOrganizations
       parameters:
-      - description: 'Filters the Organization list by support plan. Can be one of:
-          TRIAL, BASIC, STANDARD, PREMIUM, BUSINESS_CRITICAL'
+      - description: Filters the Organization list by support plan.
         in: query
         name: supportPlan
         schema:
@@ -2287,14 +2261,14 @@ paths:
           - HOSTED
           - HYBRID
           type: string
-      - description: Offset for pagination
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
@@ -2302,8 +2276,8 @@ paths:
           maximum: 1000
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`.
         in: query
         name: sorts
         schema:
@@ -2358,7 +2332,7 @@ paths:
       description: Retrieve information about a specific Organization.
       operationId: GetOrganization
       parameters:
-      - description: Organization's ID
+      - description: The Organization's ID.
         in: path
         name: organizationId
         required: true
@@ -2417,7 +2391,7 @@ paths:
       description: Update an Organization's details.
       operationId: UpdateOrganization
       parameters:
-      - description: The ID of the Organization to update.
+      - description: The Organization's ID.
         in: path
         name: organizationId
         required: true
@@ -2486,7 +2460,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: The cluster's cloud provider. Can be one of:`AWS`, `AZURE`,`GCP`.
+      - description: The cluster's cloud provider.
         in: query
         name: provider
         schema:
@@ -2495,7 +2469,7 @@ paths:
           - AZURE
           - GCP
           type: string
-      - description: 'The cluster type. Can be one of: `DEDICATED`, `HYBRID`.'
+      - description: The cluster type.
         in: query
         name: type
         required: true
@@ -2550,18 +2524,17 @@ paths:
       - Options
   /organizations/{organizationId}/clusters:
     get:
-      description: List clusters in the Organization.
+      description: List clusters in an Organization.
       operationId: ListClusters
       parameters:
-      - description: The ID of the Organization to list clusters for.
+      - description: The Organization's unique ID.
         in: path
         name: organizationId
         required: true
         schema:
           type: string
-      - description: 'The cloud provider to list clusters for. Can be one of: `AWS`,
-          `AZURE`, or `GCP`. Clusters from other providers will be filtered out of
-          the results.'
+      - description: The cloud provider to list clusters for. Clusters from other
+          providers will be filtered out of the results.
         in: query
         name: provider
         schema:
@@ -2570,14 +2543,14 @@ paths:
           - AZURE
           - GCP
           type: string
-      - description: Offset for pagination
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
@@ -2585,8 +2558,8 @@ paths:
           maximum: 1000
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`.
         in: query
         name: sorts
         schema:
@@ -2709,17 +2682,16 @@ paths:
       - action: organization.clusters.create
   /organizations/{organizationId}/clusters/{clusterId}:
     delete:
-      description: Delete a cluster from an Organization.
+      description: Delete a cluster.
       operationId: DeleteCluster
       parameters:
-      - description: The ID of the Organization where you want to delete the cluster
-          from.
+      - description: The ID of the Organization to which the cluster belongs.
         in: path
         name: organizationId
         required: true
         schema:
           type: string
-      - description: The ID of the cluster you want to delete.
+      - description: The cluster's ID.
         in: path
         name: clusterId
         required: true
@@ -2904,14 +2876,13 @@ paths:
       description: Get the options available for configuring a Deployment.
       operationId: GetDeploymentOptions
       parameters:
-      - description: The ID of the Organization to which to retrieve Deployment options
-          for.
+      - description: The ID of the Organization to retrieve Deployment options for.
         in: path
         name: organizationId
         required: true
         schema:
           type: string
-      - description: The ID of the Deployment to retrieve options for.
+      - description: The ID of a Deployment to retrieve options for.
         in: query
         name: deploymentId
         schema:
@@ -2981,22 +2952,22 @@ paths:
           items:
             type: string
           type: array
-      - description: Offset for pagination.
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination.
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
           default: 20
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'.
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`..
         in: query
         name: sorts
         schema:
@@ -3309,14 +3280,14 @@ paths:
           items:
             type: string
           type: array
-      - description: Offset for pagination.
+      - description: The number of results to skip before returning values.
         in: query
         name: offset
         schema:
           default: 0
           minimum: 0
           type: integer
-      - description: Limit for pagination.
+      - description: The maximum number of results to return.
         in: query
         name: limit
         schema:
@@ -3324,8 +3295,8 @@ paths:
           maximum: 1000
           minimum: 0
           type: integer
-      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
-          or 'fieldName:desc'
+      - description: A list of field names to sort by, and whether to show results
+          as ascending or descending. Formatted as `<fieldName>:asc` or `<fieldName>:desc`.
         in: query
         name: sorts
         schema:
