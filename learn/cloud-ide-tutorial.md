@@ -48,7 +48,7 @@ If you do not already have an Astro account, [sign up for a free trial](https://
 
 1. In the Cloud UI, select a Workspace, and click **Cloud IDE** in the left menu.
 
-    ![Cloud IDE](/img/tutorial/cloud-ide-tutorial_cloud_ide_button.png)
+    ![Cloud IDE](/img/tutorials/cloud-ide-tutorial_cloud_ide_button.png)
 
 2. Click **+ Project** and give your Astro Cloud IDE project a name and a description.
 
