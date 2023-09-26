@@ -36,7 +36,7 @@ astro workspace service-account create --workspace-id=<your-workspace> --label=<
 | `--workspace-id` (Required) | The Workspace you're creating a service account for.            | Any valid Workspace ID                                                                                                     |
 | `--label` (Required)        | A label for the service account.                                | Any string                                                                                                                 |
 | `--category`                | The Category for the service account. The default is `Not set`. | Any string                                                                                                                 |
-| `role`                      | The User Role for the service account.                          | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. The default value is `WORKSPACE_VIEWER`. |
+| `role`                      | The User Role for the service account.                          | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, `WORKSPACE_ADMIN`. The default value is `WORKSPACE_VIEWER`. |
 
 #### Related documentation
 

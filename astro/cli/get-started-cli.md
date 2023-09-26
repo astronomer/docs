@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Get started with the CLI'
+sidebar_label: 'Quickstart'
 title: 'Get started with Airflow using the Astro CLI'
 id: get-started-cli
 description: Create an Airflow project and run it locally on your computer in just a few minutes. 
 ---
 
-One of the Astro CLI's main features is its ability to run Airflow on your local computer. After you install the Astro CLI and Docker Desktop, follow these steps to quickly build a project and run Airflow locally. 
+One of the Astro CLI's main features is its ability to run Airflow on your local machine. After you install the Astro CLI and Docker Desktop, follow this quickstart to build an Airflow project and run it in a local Airflow environment using just a few commands. At the end of the tutorial, you'll have all of the files and components you need to develop and test Airflow DAGs locally.
 
 ## Prerequisites
 
@@ -66,17 +66,15 @@ Running your project locally allows you to test your DAGs before you deploy them
 
 :::info
 
-The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#ports-are-not-available).
+The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Run Airflow locally](cli/run-airflow-locally.md#ports-are-not-available-for-my-local-airflow-webserver).
 
 :::
 
 ## Step 3: Develop locally with the CLI
 
-The `astro dev` command options include a number of other useful subcommands that you can use while developing locally. 
+Now that you have a locally running project, you can start to develop your Astro project by adding DAGs, dependencies, environment variables, and more. See [Develop your project](cli/develop-project.md) for more details on how to modify all aspects of your Astro project. 
 
-### `astro dev restart`
-
-You must restart your environment to apply changes from any of the following files in your Astro project:
+Most changes you make, including updates to your DAG code, are applied automatically to your running environment and don't require rebuilding your project. However, you must rebuild your project and restart your environment to apply changes from any of the following files in your Astro project:
 
 - `packages.txt`
 - `Dockerfile`
@@ -91,32 +89,10 @@ astro dev restart
 
 This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting your environment, then run `astro dev start` when you want to restart.
 
-### `astro dev stop`
-
-Run the following to pause all Docker containers running your local Airflow environment. 
-
-```sh
-astro dev stop
-```
-
-Unlike `astro dev kill`, this command does not prune mounted volumes and delete data associated with your local Postgres database. If you run this command, Airflow connections and task history will be preserved.
-
-This command can be used regularly with `astro dev start` and `astro dev restart` during local development.
-
-### `astro dev kill`
-
-When you want to force-stop all four Docker containers for your local Airflow environment, use the following command. 
-
-```sh
-astro dev kill
-```
-
-`astro dev kill` also deletes all data associated with your local `Postgres` database which includes Airflow connections, logs, and task history.
-
 ## Next Steps
 
 After you have finished Getting Started with the CLI, you can configure your CLI to locally debug your Airflow environment, authenticate to cloud services to test your DAGs with data stored on the cloud, or you can learn more about developing DAGs with Astro.
 
 - [Configure the CLI](configure-cli.md)
 - [Authenticate to cloud services](authenticate-to-clouds.md)
-- [Build and run a project locally](develop-project.md#build-and-run-a-project-locally)
+- [Build and run a project locally](cli/develop-project.md#build-and-run-a-project-locally)

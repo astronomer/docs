@@ -15,9 +15,9 @@ To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md).
 
 ## Deployment analytics
 
-The **Analytics** page contains a suite of metrics for a given Deployment. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
+The **Overview** page contains a suite of metrics for a given Deployment. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
 
-To view metrics for a Deployment, open the Deployment in the Cloud UI, click **Analytics**, then click **Get Analytics**. The following topics contain information about each available metric.
+To view metrics for a Deployment, open the Deployment in the Cloud UI, click **Overview**, then click **Get Analytics**. The following topics contain information about each available metric.
 
 ### DAG and task runs
 
@@ -107,7 +107,7 @@ If your Deployment is unhealthy or the status can't be determined, check the sta
 
 ## Deployment overview
 
-Each Deployment includes four high-level performance charts about the `default` worker queue which you can view from both the **Deployments** menu and a Deployment's **Analytics** page. They include:
+Each Deployment includes four high-level performance charts about the `default` worker queue which you can view from both the **Deployments** menu and a Deployment's **Overview** page. They include:
 
 - DAG runs
 - Task Instances
@@ -154,7 +154,9 @@ The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibili
 
 ## Export Airflow metrics to Datadog
 
-Export over 40 Airflow metrics related to the state and performance of your Astro Deployment to [Datadog](https://www.datadoghq.com/) by adding a Datadog API key to your Deployment. These metrics include most information that is available in the Cloud UI as well as additional metrics that Datadog automatically collects, including number of queued tasks, DAG processing time, frequency of import errors, and more. For a complete list of supported metrics, see [Data Collected](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) in Datadog documentation.
+Export over 40 Airflow metrics related to the state and performance of your Astro Deployment to [Datadog](https://www.datadoghq.com/) by adding a Datadog API key to your Deployment. These metrics include most information that is available in the Cloud UI, as well as additional metrics that Datadog automatically collects, including number of queued tasks, DAG processing time, and more. For a complete list of supported metrics, see [Data Collected](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) in Datadog documentation.
+
+You can also send task logs to Datadog. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog-aws-only).
 
 :::info
 
@@ -162,28 +164,30 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 
 :::
 
+#### Setup
+
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. In the Cloud UI, select a Workspace and then select an Astro Deployment for which you want to export metrics.
 3. Create a new [environment variable](environment-variables.md#set-environment-variables-in-the-cloud-ui) in your Deployment with the Datadog API key from step 1:
+   
    - **Key:** `DATADOG_API_KEY`
    - **Value:** `<Your-Datadog-API-key>`.
+  
    Select the **Secret?** checkbox. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
-4. Optional. Add the following environment variable if your organization doesn't use the default Datadog site datadoghq.com:
+
+4. (Optional) Add the following environment variable if your organization doesn't use the default Datadog site `datadoghq.com`:
+   
    - **Key:** `DATADOG_SITE`
    - **Value:** `<Your-Datadog-Site>`
-5. Optional. Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
-
-   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
-   - **Value** `True`
-
-   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
-   - **Value** `<key-1>:<value-1>,<key-2>:<value-2>`
-
-  :::info
   
-  If you're configuring custom Datadog tags for a Deployment using Astro Runtime 5 or earlier, you must additionally add `datadog` to your Astro project `requirements.txt` file.
+5. (Optional) Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
+
+   - **Key 1**: `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
+   - **Value 1**: `True`
+
   
-  :::
+    - **Key 2**: `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
+   - **Value 2**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
    
 6. Click **Save variable**.
 
@@ -196,18 +200,6 @@ After you complete this setup, Astro automatically launches a sidecar container 
 3. In the **Tags** table, check the values for the `namespace` tag key. The namespaces of the Deployments you configured to export logs should appear as tag values.
 
 To check the health of a Deployment's DogStatsD container, open the `datadog.dogstatsd.running` metric in the Datadog UI. If the Deployment's namespace appears under the metric's `host` tag key, its DogStatsD container is healthy and exporting metrics to Datadog.
-
-## Astro usage
-
-Use the **Usage** tab in the Cloud UI to review the number of successful task runs across Deployments in your Organization. Astro is priced based on successful task runs, so this view can help you monitor both Astro cost as well as Airflow usage in aggregate.
-
-![Usage tab in the Cloud UI](/img/docs/usage.png)
-
-The bar chart on the left shows your Organization's total task runs per day for the past 31 days, with each day's volume sorted by Deployment. Each color in the bar chart represents a different Deployment. To see each Deployment's number of successful task runs for a given day, you can hover over the bar chart for that day with your mouse.
-
-The legend on the right side of the menu shows the colors used for each Deployment. This legend shows each Deployment's total sum of successful task runs over the last 31 days. The daily numbers on the left bar chart add up to the monthly total per Deployment on the right.
-
-To export this data as a `.csv` file, click the **Export** button above the legend.
 
 ## See also
 

@@ -2,8 +2,9 @@
 sidebar_label: "astro dev ps"
 title: "astro dev ps"
 id: astro-dev-ps
-description: Reference documentation for astro dev ps.
+description: List all running Docker containers in your local Airflow environment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 List all Docker containers running in your local Airflow environment, including the Airflow Webserver, Scheduler, and Postgres database. It outputs metadata for each running container, including `Container ID`, `Created`, `Status`, and `Ports`.

@@ -79,7 +79,7 @@ This process occurs every time you update the environment variable's key or valu
 
 :::caution
 
-Environment variables marked as secret are stored securely by Astronomer and are not shown in the Cloud UI. However, it's possible for a user in your organization to create or configure a DAG that exposes secret values in Airflow task logs. Airflow task logs are visible to all Workspace members in the Airflow UI and accessible in your Astro cluster's storage.
+Environment variables marked as secret are stored securely by Astronomer and are not shown in the Cloud UI. However, it's possible for a user in your organization to create or configure a DAG that exposes secret values in Airflow task logs. Airflow task logs are visible to all Workspace users in the Airflow UI and accessible in your Astro cluster's storage.
 
 To avoid exposing secret values in task logs, instruct users to not log environment variables in DAG code.
 
@@ -113,7 +113,7 @@ After you add your environment variables, use one of the following options to de
 On Astro, environment variables are applied and overridden in the following order:
 
 - Cloud UI
-- [.env (local development only)](develop-project.md#set-environment-variables-locally)
+- [.env (local development only)](cli/develop-project.md#set-environment-variables-locally)
 - Dockerfile
 
 For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.

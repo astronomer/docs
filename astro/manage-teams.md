@@ -1,11 +1,15 @@
 ---
-sidebar_label: 'Configure Teams'
+sidebar_label: 'Teams'
 title: 'Configure Teams on Astro'
 id: manage-teams
 description: Create, delete, and update Teams on Astro.
 ---
 
-_Teams_ are a group of users in an Organization that you can grant the same Organization and Workspace permissions. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Admins can assign Teams to different Workspaces and define their [Workspace permissions](astro/user-permissions.md#workspace-roles). This is a quicker and more secure way to assign roles to a large amount of users. 
+As an Organization Owner or Workspace Owner, you can use Teams to batch assign Organization and Workspace roles to groups of users. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Owners can assign Teams to different Workspaces and define their [Workspace permissions](user-permissions.md#workspace-roles).
+
+A _Team_ is a group of users in an Organization that share the same Organization and Workspace permissions. You can use Teams to securely assign permissions for a large group of users across multiple Workspaces. For example, you can create a Team of DAG authors, then assign that Team to each of your development Workspaces as a Workspace author.
+
+You can also assign different roles for each Workspace. For example, you can have a group of DAG authors that has full Workspace Owner permissions for development Workspaces, and that same Team can have only Workspace Member permissions for production Workspaces.
 
 ## Create a Team
 
@@ -50,6 +54,12 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 3. Click **+ Team**.
 
 4. Select the **Team** you want to add and define their **Workspace Role**, which determines their [Workspace user permissions](/astro/user-permissions.md#workspace-roles).
+
+:::cli
+
+You can add a Team to multiple Workspaces programmatically using the Astro CLI. See [`astro workspace team add`](cli/astro-workspace-team-add.md) for example output and commands.
+
+:::
 
 ## Teams and SCIM provisioning
 

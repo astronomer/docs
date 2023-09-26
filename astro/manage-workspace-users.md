@@ -1,17 +1,17 @@
 ---
-sidebar_label: 'Manage Workspace users'
+sidebar_label: 'Workspace users'
 title: 'Manage users in your Astro Workspace'
 id: manage-workspace-users
-description: Add, edit, or remove users in the Cloud UI.
+description: Add, edit, or remove users within a Workspace on Astro.
 ---
 
-As a Workspace Admin or an Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Workspace.
+As a Workspace Owner or an Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Workspace.
 
 To manage users at the Organization level, see [Manage Organization users](manage-organization-users.md). To manage groups of users, see [Manage Teams](manage-teams.md).
 
 ## Prerequisites
 
-To add, edit, or remove Workspace users from a given Workspace, you need either Organization Owner permissions or Workspace Admin permissions for the Workspace.
+To add, edit, or remove Workspace users from a given Workspace, you need either Organization Owner permissions or Workspace Owner permissions for the Workspace.
 
 ## Add a user to a Workspace
 

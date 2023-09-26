@@ -36,7 +36,11 @@ module.exports = {
       type: "category",
       label: "Develop",
       items: [
-        "develop-project",
+        {
+          type: 'link',
+          label: 'Develop your Astro project',
+          href: 'https://docs.astronomer.io/astro/cli/develop-project',
+        },
         "kubernetespodoperator",
         {
           type: "category",
@@ -56,6 +60,7 @@ module.exports = {
             "cloud-ide/run-sql",
             "cloud-ide/use-airflow-operators",
             "cloud-ide/document-pipeline",
+            "cloud-ide/pass-data-between-cells",
             "cloud-ide/run-cells",
             "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
@@ -65,7 +70,6 @@ module.exports = {
         },
         "upgrade-runtime",
         "airflow-api",
-        "test-and-troubleshoot-locally",
       ],
     },
     {
@@ -74,25 +78,8 @@ module.exports = {
       items: [
         "deploy-code",
         "deploy-project-image",
-        "deploy-dags", 
-        "set-up-ci-cd", 
-        {
-          type: "category",
-          label: "CI/CD templates",
-          items: [
-            "ci-cd-templates/template-overview",
-            "ci-cd-templates/github-actions",
-            "ci-cd-templates/jenkins",
-            "ci-cd-templates/gitlab",
-            "ci-cd-templates/aws-s3",
-            "ci-cd-templates/aws-codebuild",
-            "ci-cd-templates/azure-devops",
-            "ci-cd-templates/gcs",
-            "ci-cd-templates/bitbucket",
-            "ci-cd-templates/circleci",
-            "ci-cd-templates/drone",
-          ],
-        },
+        "deploy-dags",
+        "deploy-history",
       ],
     },
     {
@@ -100,28 +87,56 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "create-deployment",
-        "configure-deployment-resources",
-        "manage-dags",
+        "deployment-settings",
         {
           type: "category",
-          label: "Configure executors",
+          label: "Executors",
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
         "secrets-backend",
-        "manage-deployments-as-code",
+        "manage-dags", 
+      ],
+    },
+    {
+      type: "category",
+      label: "Automation & CI/CD",
+      items: [
+        "automation-overview",
+        "automation-authentication",
         {
           type: "category",
-          label: "Connect to external resources",
-          link: {
-            type: 'generated-index',
-            title: 'Connect Astro',
-            description: 'Connect Astro to your existing cloud resources.'
-          },
-          items: ["astro-ips","connect-aws", "connect-azure", "connect-gcp"],
-        },       
+          label: "CI/CD",
+          items: [
+            "set-up-ci-cd",
+            {
+              type: "category",
+              label: "CI/CD templates",
+              items: [
+                "ci-cd-templates/template-overview",
+                "ci-cd-templates/github-actions",
+                "ci-cd-templates/jenkins",
+                "ci-cd-templates/gitlab",
+                "ci-cd-templates/aws-s3",
+                "ci-cd-templates/aws-codebuild",
+                "ci-cd-templates/azure-devops",
+                "ci-cd-templates/gcs",
+                "ci-cd-templates/bitbucket",
+                "ci-cd-templates/circleci",
+                "ci-cd-templates/drone",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manage Deployments as code",
+          items: [
+            "manage-deployments-as-code",
+            "deployment-file-reference"],
+        }, 
       ],
     },
     {
@@ -137,10 +152,11 @@ module.exports = {
         {
           type: "category",
           label: "Data lineage",
-          items: ["set-up-data-lineage", "data-lineage"],
+          items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
         "alerts",
         "airflow-email-notifications",
+        "audit-logs",
       ],
     },
     {
@@ -162,11 +178,8 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Organizations",
-          items: [
-            "organization-api-tokens",
-            "audit-logs",
-          ],
+          label: "Deployments",
+          items: ["deployment-api-tokens", "authorize-deployments-to-your-cloud", "transfer-a-deployment"],
         },
         {
           type: "category",
@@ -178,7 +191,25 @@ module.exports = {
           label: "Clusters",
           items: [
             "create-dedicated-cluster",
+            "authorize-workspaces-to-a-cluster",
             "resource-reference-hosted",
+            {
+              type: "category",
+              label: "Connect to external resources",
+              link: {
+                type: 'generated-index',
+                title: 'Connect clusters',
+                description: 'Connect Astro to your existing cloud resources.'
+              },
+              items: ["connect-aws", "connect-azure", "connect-gcp"],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Organization",
+          items: [
+            "organization-api-tokens",
           ],
         },
         {
@@ -244,6 +275,7 @@ module.exports = {
       label: "Reference",
       items: [
         "astro-support",
+        "astro-office-hours",
         {
           type: "category",
           label: "Astro Runtime",
@@ -253,7 +285,6 @@ module.exports = {
           ],
         },
         'platform-variables',
-        "audit-logs-reference",
         "feature-previews",
         {
           type: "category",
@@ -291,23 +322,31 @@ module.exports = {
     },
     {
       type: "doc",
-      label: "Configure the CLI",
-      id: "cli/configure-cli",
+      label: "Develop your project",
+      id: "cli/develop-project",
     },
     {
       type: "doc",
-      label: "Test your Astro project locally",
+      label: "Run Airflow locally",
+      id: "cli/run-airflow-locally",
+    },
+    {
+      type: "doc",
+      label: "Test your project",
       id: "cli/test-your-astro-project-locally",
-    },
-    {
-      type: "doc",
-      label: "Authenticate to cloud services",
-      id: "cli/authenticate-to-clouds",
     },
     {
       type: "doc",
       label: "Release notes",
       id: "cli/release-notes",
+    },
+    {
+      type: "category",
+      label: "Advanced",
+      items: [
+        "cli/configure-cli",
+        "cli/authenticate-to-clouds",
+      ],
     },
     {
       type: 'category',
@@ -381,11 +420,19 @@ module.exports = {
             'cli/astro-deployment-variable-create',
             'cli/astro-deployment-variable-list',
             'cli/astro-deployment-variable-update',
+            'cli/astro-deployment-worker-queue-create',
+            'cli/astro-deployment-worker-queue-delete',
+            'cli/astro-deployment-worker-queue-update',
           ],
         },
         {
           type: "category",
           label: "astro dev",
+          link: {
+            type: 'generated-index',
+            title: "astro dev command reference",
+            description: 'Use `astro dev` commands to manage your Astro project and interact with your local Airflow environment.'
+          },
           items: [
             'cli/astro-dev-bash',
             'cli/astro-dev-init',
@@ -396,10 +443,10 @@ module.exports = {
             'cli/astro-dev-parse',
             'cli/astro-dev-ps',
             'cli/astro-dev-pytest',
+            'cli/astro-dev-restart',
             'cli/astro-dev-run',
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
-            'cli/astro-dev-restart',
             'cli/astro-dev-upgrade-test',
           ],
         },
@@ -450,19 +497,20 @@ module.exports = {
             "cli/astro-workspace-service-account",
             "cli/astro-workspace-switch",
             "cli/astro-workspace-team",
-            "cli/astro-workspace-update",
-            "cli/astro-workspace-user-add",
-            "cli/astro-workspace-user-list",
-            "cli/astro-workspace-user-remove",
-            "cli/astro-workspace-user-update",
             "cli/astro-workspace-team-add",
             "cli/astro-workspace-team-list",
             "cli/astro-workspace-team-remove",
+            "cli/astro-workspace-team-update",
             "cli/astro-workspace-token-add",
             "cli/astro-workspace-token-create",
             "cli/astro-workspace-token-list",
             "cli/astro-workspace-token-rotate",
             "cli/astro-workspace-token-update",
+            "cli/astro-workspace-update",
+            "cli/astro-workspace-user-add",
+            "cli/astro-workspace-user-list",
+            "cli/astro-workspace-user-remove",
+            "cli/astro-workspace-user-update",
           ],
         },
       ],

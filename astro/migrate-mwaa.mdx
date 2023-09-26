@@ -1,6 +1,6 @@
 ---
-sidebar_label: "From MWAA"
-title: "Migrate to Astro Hosted from MWAA"
+sidebar_label: "From Amazon MWAA"
+title: "Migrate to Astro from Amazon MWAA"
 id: migrate-mwaa
 description: Get started on Astro Hosted by migrating your Airflow code from Amazon Managed Workflows for Apache Airflow (MWAA).
 ---
@@ -71,11 +71,11 @@ To complete this setup from the command line:
     ```
 :::
 
-## Step 2: Create an Astro Workspace
+## Step 2: Create an Astro Workspace (Optional)
 
 <Workspaces />
 
-## Step 3: Create an Astro Deployment
+## Step 3: Create an Astro Deployment (Optional)
 
 <Deployments />
 
@@ -188,7 +188,7 @@ Depending on how thoroughly you want to test your Airflow environment, you can t
 
 - In your Astro project directory, run `astro dev parse` to check for any parsing errors in your DAGs.
 - Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
-- Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+- Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 
 :::info
 

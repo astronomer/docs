@@ -15,6 +15,13 @@ This document covers two different methods to connect Airflow to Amazon Redshift
 
 - Using database (DB) user credentials
 - Using IAM credentials
+- Using IAM role
+
+:::tip
+
+If you're an Astro user, Astronomer recommends using workload identity to authorize to your Deployments to Redshift. This eliminates the need to specify secrets in your Airflow connections or copying credentials file to your Airflow project. See [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
+
+:::
 
 ## Prerequisites
 
@@ -30,6 +37,7 @@ This document covers two different methods to connect Airflow to Amazon Redshift
     values={[
         {label: 'DB user credentials', value: 'db-creds'},
         {label: 'IAM credentials', value: 'iam-creds'},
+        {label: 'IAM role (Recommended)', value: 'iam-role'},
     ]}>
 
 <TabItem value="db-creds">
@@ -56,7 +64,7 @@ Complete the following steps to retrieve these values:
 
 <TabItem value="iam-creds">
 
-You can use IAM credentials to connect Airflow to Redshift. This approach gives you the option to use temporary credentials and limit the permissions Alirfow's permissions. 
+You can use IAM credentials to connect Airflow to Redshift. This approach lets you use IAM credentials and limits Airflow's permissions. The limitation of this method is that you must include an AWS credentials file in your Airflow project.
 
 Following information is required:
 
@@ -80,6 +88,51 @@ Complete the following steps to retrieve these values:
 5. [Generate a new access key ID and secret access key](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html).
 
 </TabItem>
+
+<TabItem value="iam-role">
+
+You can use AWS's [Assume Role](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) method to automatically generate temporary credentials to connect to Redshift. This is useful to grant temporary access to limited-privilege IAM users or roles without storing any credentials on disk. The following information is required to create the connection:
+
+- Cluster identifier
+- Database name
+- Port
+- Region
+- IAM role ARN
+
+Complete the following steps to retrieve these values:
+
+1. In your AWS console, select the region that contains your Redshift cluster, open the Redshift cluster dashboard, then open your cluster. 
+
+2. Open the **General information** tab, then copy the **Cluster identifier** and **Endpoint**.
+
+3. Open the **Properties** tab and copy the **Database name** and **Port**.
+
+4. Open your IAM dashboard, and [follow the AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html) to create an IAM role and attach an IAM Policy to access the required services, for example AWS Redshift. 
+
+5. Edit the trust relationship of the role created in Step 4 to add a trust policy that allows the IAM role to assume your new role.
+
+    ```json
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "arn:aws:iam::<your-aws-account>:role/<your-role-name>"
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    }
+
+    ```
+
+6. Copy the **ARN** of the role.
+
+
+</TabItem>
+
 </Tabs>
 
 ## Create your connection
@@ -88,8 +141,9 @@ Complete the following steps to retrieve these values:
     defaultValue="db-creds"
     groupId= "redshift-connection"
     values={[
-        {label: 'DB credendtials', value: 'db-creds'},
+        {label: 'DB credentials', value: 'db-creds'},
         {label: 'IAM credentials', value: 'iam-creds'},
+        {label: 'IAM role (Recommended)', value: 'iam-role'},
     ]}>
 
 <TabItem value="db-creds">
@@ -97,7 +151,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-amazon
+    apache-airflow-providers-amazon
     ```
 
     This will install the Amazon provider package, which makes the Amazon Redshift connection type available in Airflow.
@@ -126,7 +180,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-amazon
+    apache-airflow-providers-amazon
     ```
 
     This will install the Amazon provider package, which makes the Amazon Redshift connection type available in Airflow.
@@ -167,6 +221,41 @@ Complete the following steps to retrieve these values:
     ![aws-connection-iam-creds](/img/examples/connection-aws-redshift-iam.png)
 
 </TabItem>
+
+<TabItem value="iam-role">
+
+1. Open your Astro project and add the following line to your `requirements.txt` file:
+
+    ```
+    apache-airflow-providers-amazon
+    ```
+
+    This will install the Amazon provider package, which makes the Amazon Redshift connection type available in Airflow.
+
+2. Run `astro dev restart` to restart your local Airflow environment and apply your changes in `requirements.txt`.
+
+3. In the Airflow UI for your local Airflow environment, go to **Admin** > **Connections**. Click **+** to add a new connection, then select the connection type as **Amazon Redshift**.
+
+4. Complete the following connection fields using the information you retrieved from [Get connection details](#get-connection-details):
+
+    - **Connection Id**: Enter a name for the connection.
+    - **Host**: Enter the cluster **Endpoint**.
+    - **Database**: Enter the **Database name**.
+    - **Port**: Enter the **Port**.
+    - **Extra**: 
+        ```json
+
+            {
+            "role_arn": "<your-role-arn>",
+            "region_name": "<your-region>"
+            }
+
+        ```
+
+5. Click **Test**. After the connection test succeeds, click **Save**.
+
+</TabItem>
+
 </Tabs>
 
 ## How it works

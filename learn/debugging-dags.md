@@ -55,7 +55,7 @@ The most common issues related to the Astro CLI are:
 
 To troubleshoot infrastructure issues when running Airflow on other platforms, for example in Docker, on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or on managed services, please refer to the relevant documentation and customer support.
 
-You can learn more about [Test and troubleshooting locally](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#test-dags-with-the-astro-cli) with the Astro CLI in the Astro documentation.
+You can learn more about [testing and troubleshooting locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally.md) with the Astro CLI in the Astro documentation.
 
 ## Common DAG issues
 
@@ -228,6 +228,12 @@ The following are some debugging steps you can try:
 - Test your connections using the Airflow UI or the Airflow CLI. See [Testing connections](connections.md#testing-connections).
 
     ![Test Connections](/img/guides/test_connections_2.png)
+
+:::note
+
+Testing connections is disabled by default in Airflow 2.7+. You can enable connection testing by defining the environment variable `AIRFLOW__CORE__TEST_CONNECTION=Enabled` in your Airflow environment. Astronomer recommends not enabling this feature until you are sure that only highly trusted UI/API users have "edit connection" permissions.
+
+:::
 
 To find information about what parameters are required for a specific connection:
 

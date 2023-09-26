@@ -3,8 +3,6 @@ sidebar_label: 'AWS'
 title: 'Connect Astro to AWS data sources'
 id: connect-aws
 description: Connect Astro to AWS resources.
-toc_min_heading_level: 2
-toc_max_heading_level: 2
 sidebar_custom_props: { icon: 'img/aws.png' }
 ---
 
@@ -12,31 +10,51 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-You have a number of options for connecting Deployments on an AWS cluster to external data sources. Use the following topics to learn about each available connection option and how to configure them.
+Use this document to learn how you can connect an Astro cluster and its Deployments to your external AWS resources.
 
 ## Connection options
 
-The connection option that you choose is determined by the requirements of your company and your existing infrastructure. You can choose a straightforward implementation, or a more complex implementation that provides enhanced data security. 
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an AWS resource's allowlist. 
+
+If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-aws) to AWS in a few different ways.
+
+After you crate a connection from your Deployment to AWS, you might also have to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#aws).
+
+### Access a public AWS endpoint
+
+To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment in your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
+
+#### Allowlist external IP addresses for a cluster
+
+1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+2. Click **Clusters**, then select a cluster.
+3. In the Details page, copy the IP addresses listed under **External IPs**.
+4. Add the IP addresses to the allowlist of any external services that you want your cluster to access.
+
+After you allowlist a cluster's IP address, all Deployments in that cluster are allowed to access your AWS resources.
+
+#### Allowlist external IP addresses for a Deployment
+
+To grant access to your external resources on per-Deployment basis, or if you are using a standard cluster, allowlist the IPs only for specific Deployments. For each Deployment that you want to allowlist:
+
+1. In the Cloud UI, select a Deployment, then click Details.
+2. Copy the IP addresses under External IPs.
+3. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
+
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
+
+### Create a private connection between Astro and AWS
+
+Choose one of the following setups based on the security requirements of your company and your existing infrastructure.
 
 <Tabs
-    defaultValue="Public endpoints"
+    defaultValue="VPC peering"
     groupId="connection-options"
     values={[
-        {label: 'Public endpoints', value: 'Public endpoints'},
         {label: 'VPC peering', value: 'VPC peering'},
         {label: 'Transit Gateways', value: 'Transit Gateways'},
         {label: 'AWS PrivateLink', value: 'AWS PrivateLink'},
     ]}>
-<TabItem value="Public endpoints">
-
-Publicly accessible endpoints allow you to quickly connect Astro to AWS. To configure these endpoints, you can use one of the following methods:
-
-- Set environment variables on Astro with your endpoint information. See [Set environment variables on Astro](environment-variables.md).
-- Create an Airflow connection with your endpoint information. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
-
-When you use publicly accessible endpoints to connect Astro and AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the control plane, which is managed by Astronomer.
-
-</TabItem>
 
 <TabItem value="VPC peering">
 
@@ -50,12 +68,12 @@ To set up a private connection between an Astro VPC and an AWS VPC, you can crea
 
 To create a VPC peering connection between an Astro VPC and an AWS VPC, you must create a temporary assumable role. The Astro AWS account will assume this role to initiate a VPC peering connection.
 
-1. Open the AWS console of the AWS account with the target VPC and copy the following:
+1. Open the AWS console of the AWS account with the external VPC and copy the following:
 
     - AWS account ID 
     - AWS region
-    - VPC ID of the target VPC
-    - CIDR block of the target VPC
+    - VPC ID of the external VPC
+    - CIDR block of the external VPC
     
 2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
 
@@ -68,27 +86,27 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 
 5. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following details:
 
-    - AWS region of the target VPC from Step 1
-    - VPC ID of the target VPC from Step 1
-    - AWS account ID of the target VPC from Step 1
-    - CIDR block of the target VPC from Step 1
+    - AWS region of the external VPC from Step 1
+    - VPC ID of the external VPC from Step 1
+    - AWS account ID of the external VPC from Step 1
+    - CIDR block of the external VPC from Step 1
     - **Stack ID** from Step 3
     - Astro cluster **ID** from Step 4
     
     Astronomer support will initiate a peering request and create the routing table entries in the Astro VPC.
 
-6. Wait for Astronomer support to send you the Astro VPC CIDR. Then, the owner of the target VPC needs to [accept the peering request](https://docs.aws.amazon.com/vpc/latest/peering/accept-vpc-peering-connection.html) and [create the routing table entries](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the target VPC.
+6. Wait for Astronomer support to send you the Astro VPC CIDR and VPC peering ID. Then, the owner of the external VPC needs to [add a route](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the external VPC, using the Astro VPC CIDR as the **Destination** and the VPC peering ID as the **Target**.
 
 7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
 
 
 #### DNS considerations for VPC peering
 
-To resolve DNS hostnames from your target VPC, every Astro VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+To resolve DNS hostnames from your external VPC, every Astro VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
-If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows Astro clusters to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If your external VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows Astro clusters to resolve the public DNS hostnames of the external VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
-If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astro VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/).
+If your external VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astro VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/).
 
 To retrieve the ID of any Astro VPC, contact [Astronomer support](https://cloud.astronomer.io/support). If you have more than one Astro cluster, request the VPC ID of each cluster.
 
@@ -136,7 +154,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
     - Your cluster **ID** from Step 1.
     - Your TGW ID from Step 2.
-    - The CIDR block for the target VPC or on-premises network that you want to connect your Astro cluster with.
+    - The CIDR block for the external VPC or on-premises network that you want to connect your Astro cluster with.
 
     Astronomer support approves the resource sharing request, attaches the Astro private subnets to your transit gateway, and creates routes in the Astro route tables to your transit gateway for each of the CIDR provided. Astronomer support notifies you about the process completion and provides you with the Astro CIDRs.
 
@@ -150,10 +168,15 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 <TabItem value="AWS PrivateLink">
 
+:::info 
+
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+
+:::
 
 Use AWS PrivateLink to create private connections from Astro to your AWS services without exposing your data to the public internet. If your AWS services are located in a different region than Astro, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-Astro clusters are pre-configured with the following AWS PrivateLink endpoint services:
+All Astro clusters are pre-configured with the following AWS PrivateLink endpoint services:
 
 - Amazon S3 - Gateway Endpoint
 - Amazon Elastic Compute Cloud (Amazon EC2) Autoscaling - Interface Endpoint
@@ -168,62 +191,6 @@ To access a service in a different region using PrivateLink endpoints, you must 
 By default, Astronomer support activates the **Enable DNS Name** option on supported AWS PrivateLink endpoint services.  With this option enabled, you can make requests to the default public DNS service name instead of the public DNS name that is automatically generated by the VPC endpoint service. For example, `*.notebook.us-east-1.sagemaker.aws` instead of `vpce-xxx.notebook.us-east-1.vpce.sagemaker.aws`. For more information about AWS DNS hostnames, see [DNS hostnames](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#:~:text=recursive%20DNS%20queries.-,DNS%20hostnames,-When%20you%20launch).
 
 You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpoint service that you use.  See [AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/).
-
-</TabItem>
-
-</Tabs>
-
-## Authorization options
-
-Authorization is the process of verifying a user or service's permissions before allowing them access to organizational applications and resources. Astro clusters must be authorized to access external resources from your cloud. Which authorization option that you choose is determined by the requirements of your organization and your existing infrastructure. Astronomer recommends that you review all of the available authorization options before selecting one for your organization.
-
-<Tabs
-    defaultValue="AWS IAM roles"
-    groupId="authorization-options"
-    values={[
-        {label: 'AWS IAM roles', value: 'AWS IAM roles'},
-        {label: 'AWS access keys', value: 'AWS access keys'},
-    ]}>
-<TabItem value="AWS IAM roles">
-
-To grant an Astro Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
-
-1. In the Cloud UI, select your Deployment and then click **Details**. Copy the `arn` given under **Workload Identity**.
-2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
-3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
-4. Click **Roles** and in the **Role name** column, select the role you created in step 2.
-5. Click the **Trust relationships** tab.
-6. Click **Edit trust policy** and paste the `arn` you copied from Step 1 in the trust policy.
-
-    ```text {8}
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": [
-                        "<workload-identity-role>"
-                    ]
-                },
-                "Action": "sts:AssumeRole"
-            }
-        ]
-    }
-    ```
-    When you configure an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) for a Deployment, specify the ARN of the role that you would like to assume (the role created in step 2) as the value for `aws_arn`.
-
-7. Click **Update policy**.
-8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
-9. Optional. Repeat these steps for each Astro Deployment that requires access to external data services on AWS.
-
-</TabItem>
-
-<TabItem value="AWS access keys">
-
-Astro supports all Airflow AWS connection types. For more information about the available AWS connection types, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html). When you create your Airflow AWS connection, you'll need your AWS access key ID and secret access key. 
-
-Astronomer recommends using an external secrets backend to store your AWS access key ID and secret access key. See [Configure an external secrets backend on Astro](secrets-backend.md).
 
 </TabItem>
 
@@ -271,11 +238,11 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 7. Click **Create resource share**.
 
-### Contact Astronomer support for rule verification
+#### Contact Astronomer support for rule verification
 
 To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
-### Create a connection to confirm connectivity (optional)
+#### Create a connection to confirm connectivity (optional)
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
@@ -290,10 +257,16 @@ To use this solution, make sure Astro can connect to the DNS server using a VPC 
 - The domain name for forwarding requests
 - The IP address of the DNS server where requests are forwarded
 
-### Create an Airflow connection to confirm connectivity (optional)
+#### Create an Airflow connection to confirm connectivity (optional)
 
 When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
 </TabItem>
 
 </Tabs>
+
+
+## See Also
+
+- [Manage Airflow connections and variables](manage-connections-variables.md)
+- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#aws)

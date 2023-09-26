@@ -3,6 +3,8 @@ import TabItem from "@theme/TabItem";
 
 A _Deployment_ is an Astro Runtime environment that is powered by the core components of Apache Airflow. In a Deployment, you can deploy and run DAGs, configure worker resources, and view metrics.
 
+You can choose to use an existing Deployment, or create a new one. However, you must have at least one Deployment to complete your migration.
+
 Before you create your Deployment, copy the following information from your source Airflow environment:
 
 - Environment name
@@ -20,7 +22,7 @@ Before you create your Deployment, copy the following information from your sour
 
 :::info Alternative setup for Astro Hybrid
 
-This setup varies slightly for Astro Hybrid users. See [Configure Deployment resources](configure-deployment-resources.md) for all configurations related to Astro Hybrid Deployments.
+This setup varies slightly for Astro Hybrid users. See [Deployment settings](deployment-settings.md) for all configurations related to Astro Hybrid Deployments.
 
 :::
 
@@ -61,7 +63,7 @@ This setup varies slightly for Astro Hybrid users. See [Configure Deployment res
 
   :::info
 
-  ²Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource use on Astro. See [Configure Deployment](/astro/configure-deployment-resources.md)
+  ²Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource use on Astro. See [Deployment settings](/astro/deployment-settings.md)
 
   :::
 
@@ -71,7 +73,7 @@ This setup varies slightly for Astro Hybrid users. See [Configure Deployment res
 
 4. Click **Create Deployment**.
 5. Specify any system-level environment variables as Astro environment variables. See [Environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui).
-6. Set an email to receive alerts from Astronomer support about your Deployments. See [Add Or Delete A Deployment Alert Email](configure-deployment-resources.md#configure-deployment-email-alerts).
+6. Set an email to receive alerts from Astronomer support about your Deployments. See [Add Or Delete A Deployment Alert Email](deployment-settings.md#configure-deployment-email-alerts).
 
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
@@ -153,7 +155,7 @@ This option is available only on [Astro Hybrid](hybrid-overview.md).
     | --------- | ------------- | --------------- |
     | M5.XLARGE | E2-STANDARD-4 | STANDARD_D4D_V5 |
 
-    - `<alert-email>`: Set an email to receive alerts from Astronomer support about your Deployments. See [Add Or Delete A Deployment Alert Email](configure-deployment-resources.md#configure-deployment-email-alerts).
+    - `<alert-email>`: Set an email to receive alerts from Astronomer support about your Deployments. See [Add Or Delete A Deployment Alert Email](deployment-settings.md#configure-deployment-email-alerts).
 
     After you finish entering these values, your `config.yaml` file should look something like the following:
 

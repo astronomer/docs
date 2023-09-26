@@ -125,7 +125,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
 5. Append the [Azure AD feature flag parameter](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior) `?aadOptscim062020` to your **SCIM Integration URL** and recopy it. For example, if your SCIM Integration URL is `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0`, your final URL would be `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0?aadOptscim062020`. The feature flag is required for fully compliant SCIM behavior in Azure AD.
-6. In the Azure AD management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application).
+6. In the Azure AD management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application) with the third option, **Integrate any other application you don't find in the gallery**.
 7. In the menu for your new application, click **Provisioning** and configure the following values:
 
     - **Provisioning mode**: Set to **Automatic**.
@@ -141,6 +141,10 @@ Complete the manual setup if you configured your existing Astro app without usin
     | displayName                      | displayName     |
     | members                          | members         |
 
+    Delete any other group attributes not listed in the previous table. You should have exactly two attributes as shown in the following screenshot:
+
+    ![Azure group mappings with only the correct 2 attributes listed](/img/docs/azure-group-mappings.png)
+
 11. Go back to the **Mappings** menu and open the **User** mapping configuration.
 12. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
 13. In the **Attribute Mappings** table, add the following mappings:
@@ -150,8 +154,6 @@ Complete the manual setup if you configured your existing Astro app without usin
     | userPrincipalName                                           | userName        |
     | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |
     | displayName                                                 | displayName     |
-    | givenName                                                   | name.givenName  |
-    | surname                                                     | name.familyName |
 
   :::caution
 
@@ -159,7 +161,11 @@ Complete the manual setup if you configured your existing Astro app without usin
 
   ::: 
 
-1. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+    Delete any other user attributes not listed in the previous table. You should have exactly three attributes as shown in the following screenshot:
+
+    ![Azure user mappings with only the correct 3 attributes listed](/img/docs/azure-mappings.png)
+
+1.  Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
 </TabItem>
 </Tabs>
