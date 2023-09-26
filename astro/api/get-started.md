@@ -120,7 +120,7 @@ Now that you have both an Organization ID and a Workspace ID, you can create a W
 1. Run the following command to create a new Workspace API token:
 
     ```bash
-    curl -X POST https://api.astronomer-dev.io/iam/v1beta1/organizations/<your-organization-id>/tokens/<your-token-id> \
+    curl -X POST https://api.astronomer.io/iam/v1beta1/organizations/<your-organization-id>/tokens/<your-token-id> \
     --H 'Authorization: Bearer <your-organization-api-token>' \
     -D Copy { "description": "I wrote this description using the Astro API!", "name": "My new API token", "role": "WORKSPACE_MEMBER" }
     ```
