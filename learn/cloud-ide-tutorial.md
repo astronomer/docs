@@ -372,6 +372,12 @@ Note that if you used the `In-memory SQL` connection in your Astro Cloud IDE pro
 
     ![Screenshot of the Airflow UI of an Astro deployment showing a successful run of the DAG.](/img/tutorials/cloud-ide-tutorial_dag_on_astro.png)
 
+:::tip
+
+Click the `Open in Cloud IDE` Owner tag to open the DAG in the Astro Cloud IDE.
+
+:::
+
 ## Conclusion
 
 You now know how to use the Astro Cloud IDE to write a simple ML pipeline! More specifically, you can now:
