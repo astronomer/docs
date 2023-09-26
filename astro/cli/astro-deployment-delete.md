@@ -29,7 +29,7 @@ When you run `astro deployment delete`, you are prompted to select from a list o
 
 :::info
 
-To complete this action, [Workspace Admin](user-permissions.md#workspace-roles) permissions are required.
+To complete this action, [Workspace Owner](user-permissions.md#workspace-roles) permissions are required.
 
 :::
 

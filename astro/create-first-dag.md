@@ -35,6 +35,21 @@ Although it's not required for this tutorial, Astronomer also recommends install
 
 If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md).
 
+:::info
+
+If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+
+- `https://cloud.astronomer.io/`
+- `https://api.astronomer.io/`
+- `https://images.astronomer.cloud/`
+- `https://auth.astronomer.io/`
+- `https://updates.astronomer.io/`
+- `https://install.astronomer.io/`
+- `https://astro-<your-org>.datakin.com/`
+- `https://<your-org>.astronomer.run/`
+
+:::
+
 ## Step 1: Create a Deployment
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
@@ -49,7 +64,7 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment are healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
     
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Configure a Deployment](configure-deployment-resources).
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Deployment settings](deployment-settings.md).
 
 ## Step 2: Create an Astro project
 
@@ -106,21 +121,13 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
 
     After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. The Cloud UI then automatically authenticates you to the CLI. The next time you log in, you can run `astro login` without specifying a domain. If you run into issues logging in, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
-2. Run the following command to enable DAG-only code deploys on your Deployment.
-   
-    ```sh
-    astro deployment update --dag-deploy enable
-    ```
-   
-    When the prompt appears in the Astro CLI, select the Deployment where you want to deploy your DAGs. 
-
-3. Run the following command to deploy your DAGs to Astro: 
+2. Run the following command to deploy your DAGs to Astro: 
    
     ```sh
     astro deploy --dags
     ```
 
-    This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code. After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI deploys your DAGs to Astro.
+    This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code. After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI deploys your DAGs to Astro. If you run into issues deploying your DAGs, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
 ## Step 4: Trigger your DAG on Astro
 
@@ -148,7 +155,7 @@ Newly-deployed DAGs are paused by default and will not start running automatical
 
 The Cloud UI shows you information about the health of your Deployment, including analytics and logs for your DAG runs.
 
-Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Analytics** view for your Deployment.
+Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Overview** page for your Deployment.
 
 ![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 
@@ -167,5 +174,5 @@ To limit resource usage, you might want to delete your Deployment after you fini
 Now that you've created and run your first DAG on Astro, the next step is to add your own DAGs, build out the rest of your Astro project, and start testing real data. See:
 
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, including the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
-- [Deploy code to Astro](/astro/deploy-code).
-- [Develop a project](/astro/develop-project).
+- [Deploy code to Astro](deploy-code.md).
+- [Develop a project](cli/develop-project.md).

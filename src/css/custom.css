@@ -384,10 +384,6 @@ html .DocSearch-Button .DocSearch-Search-Icon {
   color: black !important;
 }
 
-.DocSearch-Button-Keys {
-  opacity: 0;
-}
-
 .DocSearch {
   --docsearch-searchbox-background: none;
   --docsearch-searchbox-focus-background: var(--ifm-color-white);
@@ -420,7 +416,8 @@ table tr:last-child td {
 }
 
 table td {
-  min-width: 225px;
+  min-width: 50px;
+  max-width: 300px;
 }
 
 table::-webkit-scrollbar {

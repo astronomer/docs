@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 You can use the Airflow [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
 
-To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#make-requests-to-the-airflow-rest-api).
+To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 
 :::info
 
@@ -47,9 +47,9 @@ Follow the steps in [Create a Orgaization API token](organization-api-tokens.md#
 
 <TabItem value="deployment" label="Deployment API key">
 
-:::caution
+:::warning
 
-Deployment API keys will soon be deprecated in favor of Deployment API tokens, which is an upcoming Astro feature. If you have strict Deployment-level security requirements, you can continue to use Deployment API keys, but you will have to complete a one-time migration to Deployment API tokens in the future. Otherwise, Astronomer recommends using either [Workspace API tokens](workspace-api-tokens.md) or [Organization API tokens](organization-api-tokens.md) in place of Deployment API keys.
+Deployment API keys will soon be deprecated in favor of [Deployment API tokens](deployment-api-tokens.md). You can continue to use existing Deployment API keys for now, but you will have to complete a one-time migration to Deployment API tokens in the future.
 
 :::
 

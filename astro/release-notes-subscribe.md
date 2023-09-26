@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Subscribe to Astro release notes'
+sidebar_label: 'Subscribe to release notes'
 title: 'Subscribe to Astro release notes'
 id: release-notes-subscribe
 description: Subscribe to Astronomer Release Notes RSS feeds, or have updates sent to your email or Slack account.

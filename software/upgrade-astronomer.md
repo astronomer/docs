@@ -110,7 +110,7 @@ Make sure to substitute the following 3 variables with your own values:
 - `<astronomer-platform-namespace>`
 - `<astronomer-patch-version>`
 
-To upgrade to Astronomer Software v0.27.0, for example, set `ASTRO_VERSION=0.27.0`.
+To upgrade to Astronomer Software v0.33.0, for example, set `ASTRO_VERSION=0.33.0`.
 
 :::tip
 

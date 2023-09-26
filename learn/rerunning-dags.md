@@ -61,8 +61,6 @@ Check which task instances will be cleared with the current settings by expandin
 
 ![Task Instance Summary](/img/guides/task_instance_confirmation.png)
 
-You can also clear task statuses fromm the Graph view. 
-
 If you want to use the Airflow CLI to clear task statuses, you can use the following command:
 
 

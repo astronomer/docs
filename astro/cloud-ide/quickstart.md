@@ -14,7 +14,7 @@ This quickstart takes approximately 30 minutes to complete.
 
 To complete this quickstart, you need:
 
-- Workspace Editor permissions in an [Astro Workspace](manage-workspaces.md).
+- Workspace Operator permissions in an [Astro Workspace](manage-workspaces.md).
 - Optional. A database hosted in one of the following services:
   
   - GCP BigQuery
@@ -163,12 +163,7 @@ To create a potential dependency to a Python cell, the upstream Python cell must
 
    ![New dependency graph](/img/cloud-ide/data-dependency.png)
 
-You can generate data dependencies between any two cell types. To learn more about data dependencies, see the following documentation:
-
-- [Pass a value from a Python cell to another Python cell](cloud-ide/run-python.md#pass-a-value-from-a-python-cell-to-another-python-cell)
-- [Pass a value from a SQL cell to a Python cell](cloud-ide/run-python.md#pass-a-value-from-a-SQL-cell-to-a-python-cell)
-- [Pass a value from a SQL cell to another SQL cell](cloud-ide/run-sql.md#pass-a-value-from-a-sql-cell-to-another-sql-cell)
-- [Pass a value from a Python cell to a SQL cell](cloud-ide/run-sql.md#pass-a-value-from-a-python-cell-to-a-sql-cell)
+You can generate data dependencies between any two cell types. To learn more about data dependencies, see [Pass data between cells](pass-data-between-cells.md).
 
 ## Step 9: Run your pipeline
 

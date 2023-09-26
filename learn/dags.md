@@ -171,5 +171,6 @@ Every DAG requires a `dag_id` and a `schedule`. All other parameters are optiona
 - `max_active_runs`: The number of active DAG runs allowed to run concurrently.
 - `default_view`: The default view of the DAG in the Airflow UI (grid, graph, duration, gantt, or landing_times). 
 - `tags`: A list of tags shown in the Airflow UI to help with filtering DAGs.
+- `fail_stop`: In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`.
 
 For a list of all DAG parameters, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/DAG).
