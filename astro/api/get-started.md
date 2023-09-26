@@ -20,8 +20,8 @@ To access most endpoints, you need to provide an Organization ID to the API as a
 To retrieve the Organization ID through the API, run the following command:
 
 ```bash
-curl https://api.astronomer.io/platform/v1beta1/organizations \
--H 'Authorization: Bearer <your-organization-api-token>' 
+curl --location 'https://api.astronomer.io/platform/v1beta1/organizations' \
+--header 'Authorization: Bearer <your-organization-api-token>' 
 ```
 
 If the command was successful, then you receive a response that begins similarly to the following:
@@ -57,8 +57,8 @@ Using the Organization ID you copied, you can now find the ID for the Workspace 
 Run the following command to list all Workspaces in your Organization:
 
 ```bash
-curl https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces \
--H 'Authorization: Bearer <your-api-token>' 
+curl --location 'https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces' \
+--header 'Authorization: Bearer <your-api-token>' 
 ```
 
 If the command succeeds, the API returns a list of Workspaces similar to the following:
@@ -98,6 +98,17 @@ If the command succeeds, the API returns a list of Workspaces similar to the fol
 
 In the response for your specific Workspace, the top-level `id`. This is your Workspace ID.
 
+:::tip
+
+If the API returns too many Workspaces, add some pagination parameters to your URL. For example, to limit your results to only the 20 most recently updated Workspaces, you would run:
+
+```bash
+curl --location 'https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces?limit=20&sorts=updatedAt:asc' \
+--header 'Authorization: Bearer <your-organization-api-token>'
+```
+
+:::
+
 ## Step 3: Update your token description using the API
 
 Now that you have both an Organization ID and a Workspace ID, you can create a Workspace API token using the Astro API.
@@ -105,12 +116,19 @@ Now that you have both an Organization ID and a Workspace ID, you can create a W
 1. Run the following command to create a new Workspace API token:
 
     ```bash
-    curl -X POST https://api.astronomer.io/iam/v1beta1/organizations/<your-organization-id>/tokens \
-    -H 'Authorization: Bearer <your-organization-api-token>' \
-    -D '{ "description": "I wrote this description using the Astro API!", "entityId": "<your-workspace-id>", "name": "My new API token", "role": "WORKSPACE_MEMBER", "type": "WORKSPACE" }'
+    curl --location 'https://api.astronomer.io/iam/v1beta1/organizations/<your-organization-id>/tokens' \                                            
+    --header 'Content-Type: application/json' \
+    --header 'Authorization: Bearer <your-organization-api-token>' \                                                                                                                  
+    --data '{
+        "description": "I wrote this description using the Astro API!",
+        "entityId": "<your-workspace-id>",
+        "name": "My new API token",
+        "role": "WORKSPACE_MEMBER",
+        "type": "WORKSPACE"
+    }'
     ```
 
-    If the request was successful, the API will return a response with all of your new token's details.
+    If the request was successful, the API will return a response with your new token's details.
 
 2. In the Cloud UI, go to **Workspace Settings** > **Access Management** > **API Tokens** and find your Workspace API token. You should see your updated description under **Description**.
 
