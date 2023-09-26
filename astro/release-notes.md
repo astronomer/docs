@@ -21,9 +21,9 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 8.8 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 9.1 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.18.2 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.19.2 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
@@ -40,6 +40,7 @@ The Astro API is currently in beta. See [Astro API versioning and support](https
 You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and programs that interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
 
 Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://docs.astronomer.io/astro/api/get-started).
+
 
 ## September 19, 2023
 
@@ -283,7 +284,7 @@ Coupled with [SCIM user groups](https://docs.astronomer.io/astro/set-up-scim-pro
 
 <HostedBadge/>
 
-You can now configure the default minimum CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default minimum resources to ensure that tasks always have enough CPU and memory to run successfully. See [Configure Deployment resources](https://docs.astronomer.io/astro/configure-deployment-resources#configure-kubernetes-pod-resources).
+You can now configure the default minimum CPU and memory for tasks that you run with the Kubernetes executor or KubernetesPodOperator. If you don't specify CPU or memory in a task definition, Astro runs the task in a Pod that uses your default resource configurations. Configure default minimum resources to ensure that tasks always have enough CPU and memory to run successfully. See [Deployment settings](https://docs.astronomer.io/astro/deployment-settings#configure-kubernetes-pod-resources).
 
 ### New regions available on Astro Hosted
 
@@ -466,7 +467,7 @@ Astronomer now enforces IMDSv2 on all AWS clusters. Any requests for resources o
 
 ### Track user actions and ensure compliance with audit logs
 
-You can now export audit logs from the Cloud UI to view all actions taken in your Organization over a given time period. See [Export audit logs](audit-logs.md) for setup steps, and see [Audit log fields](audit-logs-reference.md) for a reference of all available audit log fields.
+You can now export audit logs from the Cloud UI to view all actions taken in your Organization over a given time period. See [Export audit logs](audit-logs.md) for setup steps.
 
 ### Additional improvements 
 
@@ -503,7 +504,7 @@ See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-
 
 One of the biggest risks of running the Kubernetes executor or KubernetesPodOperator is that your tasks can accidentally request more resources than expected, which can drive up costs. To limit this risk, you can now configure default and maximum Pod resources from the Cloud UI. If a task tries to request Pod resources that are more than your configured limits, the task fails. 
 
-See [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources) for setup steps. 
+See [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources) for setup steps. 
 
 ### Documentation refactor for Astro Hybrid
 
@@ -984,7 +985,7 @@ Specifically, the tab includes the following improvements:
 
 You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace.
 
-See [Transfer a Deployment to another Workspace](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
+See [Transfer a Deployment to another Workspace](deployment-settings.md#transfer-a-deployment-to-another-workspace).
 
 ### Additional improvements
 
@@ -1154,7 +1155,7 @@ To learn more, see [Export Airflow metrics to Datadog](deployment-metrics.md#exp
 
 - The Cloud UI now automatically ensures that worker queue names are valid as you type in real time.
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
-- You can now configure [worker queues](configure-deployment-resources.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
+- You can now configure [worker queues](deployment-settings.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
 ### Bug fixes
 
@@ -1191,7 +1192,7 @@ This feature enables the ability to:
 
 For example, if you have a task that requires significantly more CPU than memory, you can assign it to a queue that's configured with workers that are optimized for compute usage.
 
-To learn more about configuring worker queues, see [Configure Deployment resources](configure-deployment-resources.md#worker-queues).
+To learn more about configuring worker queues, see [Configure Deployment resources](deployment-settings.md#worker-queues).
 
 ### New worker sizing
 
@@ -1204,7 +1205,7 @@ Astro's worker sizing enables a few benefits:
 - A higher level of reliability. This worker sizing model results in less volatility and a lower frequency of cluster autoscaling events, which lowers the frequency of errors such as zombie tasks and missing task logs.
 - The legacy **AU** unit is no longer applicable in the context of the worker. You only have to think about CPU, memory, and worker type.
 
-Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-deployment-resources.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#worker-node-types), [GCP](resource-reference-gcp-hybrid.md#worker-node-types), and [Azure](resource-reference-azure-hybrid.md#worker-node-types) resource references.
+Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](deployment-settings.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#worker-node-types), [GCP](resource-reference-gcp-hybrid.md#worker-node-types), and [Azure](resource-reference-azure-hybrid.md#worker-node-types) resource references.
 
 ### New Maximum Tasks per Worker setting
 
@@ -1220,7 +1221,7 @@ A new **Worker Count (Min-Max)** configuration is now available in the Deploymen
 
 Use this setting to fine-tune worker autoscaling behavior in your Deployment. By default, the minimum number of workers is 1 and the maximum is 10.
 
-To learn more, see [Worker queue settings](configure-deployment-resources.md#worker-queue-settings).
+To learn more, see [Worker queue settings](deployment-settings.md#worker-queue-settings).
 
 ### Support for multiple Organizations
 
@@ -1295,7 +1296,7 @@ This release introduces two changes that ensure a higher level of reliability fo
 
 - The Airflow scheduler is now configured with an [anti-affinity policy](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to limit the possibility of all schedulers for a single Deployment being impacted by an incident within a single node on an Astro cluster. For users who set **Scheduler Count** in the Cloud UI to 2, this means that those 2 scheduler Pods cannot be assigned to the same node and instead require a minimum of 2 nodes total. To avoid significant increases in cost, 3 or 4 schedulers can share the same 2 nodes and will not necessarily result in a higher node count minimum.
 
-For more information on Deployment configurations, see [Configure Deployment resources](configure-deployment-resources.md).
+For more information on Deployment configurations, see [Deployment settings](deployment-settings.md).
 
 ### Additional improvements
 
