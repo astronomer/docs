@@ -21,7 +21,7 @@ To retrieve the Organization ID through the API, run the following command:
 
 ```bash
 curl https://api.astronomer.io/platform/v1beta1/organizations \
---H 'Authorization: Bearer <your-organization-api-token>' \
+-H 'Authorization: Bearer <your-organization-api-token>' 
 ```
 
 If the command was successful, then you receive a response that begins similarly to the following:
@@ -60,7 +60,7 @@ Run the following command to list all Workspaces in your Organization:
 
 ```bash
 curl https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces \
---H 'Authorization: Bearer <your-api-token>' \
+-H 'Authorization: Bearer <your-api-token>' 
 ```
 
 If the command succeeds, the API returns a list of Workspaces similar to the following:
@@ -106,7 +106,7 @@ If the API returned many Workspaces, try sending the following request instead t
 
 ```bash
 curl https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces?search="<your-workspace-name>" \
---H 'Authorization: Bearer <your-organization-api-token>' \
+-H 'Authorization: Bearer <your-organization-api-token>' 
 ```
 
 Query parameters like `search` are useful for limiting the results that the API returns for `GET` requests.
