@@ -24,7 +24,7 @@ The Astro API is currently in beta. See [Support](versioning-and-support.md) for
 All requests to the API must be authenticated. You can use [bearer authentication](https://swagger.io/docs/specification/authentication/bearer-authentication/) to authenticate with a [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). The following example shows how you can add a token to a curl request:
 
 ```curl
-curl https://api.astronomer.io/platform/v1beta1/organizations/{organizationId}/clusters \
+curl --location 'https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/clusters' \
 --header 'Authorization: Bearer <your-api-token>'
 ```
 
