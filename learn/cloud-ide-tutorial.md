@@ -7,7 +7,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Developing data pipelines has never been easier than when using the Astro Cloud IDE.
 
-The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python and SQL cells, cells based on existing [Airflow operators](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers) and [custom cells](https://docs.astronomer.io/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code. 
+The Astro Cloud IDE automatically generates DAGs based on configurations you set in its notebook-style visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline using Python, SQL, existing [Airflow operators](https://docs.astronomer.io/astro/cloud-ide/use-airflow-operators) from [over 100 providers](https://registry.astronomer.io/providers), or [custom cells](https://docs.astronomer.io/astro/cloud-ide/custom-cell-reference) without setting dependencies or connections in code. 
 
 This tutorial is for Astro customers who want to create their first simple ML pipeline in the Astro Cloud IDE using Python and SQL. To explore Astro Cloud IDE functionality, you will create a pipeline that runs a random forest model to predict dog breed intelligence, then schedule and deploy the pipeline to Astro.
 
@@ -38,11 +38,11 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) 
 - A Personal Access Token for your GitHub account. To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-- Optional. An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in memory database and skipping [Step 3](#step-3-optional-configure-a-connection), as well as [Step 13](#step-13-optional-deploy-your-dag-to-astro) and [Step 14](#step-14-optional-run-your-dag-on-astro).
+- Optional. An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in memory database and skipping Steps [3](#step-3-optional-configure-a-connection), [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro).
 
 ## Step 0: Create an Astro account
 
-If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization, Workspace and Deployment. The Deployment will only be needed for the optional steps at the end of this tutorial.
+If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization, Workspace and Deployment. Note the Deployment is only needed for the optional Steps X-Y at the end of this tutorial.
 
 ## Step 1: Create your Astro Cloud IDE project
 
@@ -304,7 +304,7 @@ Through this tutorial, the Astro Cloud IDE was building a DAG based on the confi
 
 ## Step 11: Connect your GitHub to the Astro Cloud IDE
 
-Now that you have finished creating pipeline, you can connect GitHub to the Astro Cloud IDE to commit your pipeline as a DAG to any Airflow project.
+Now that you have finished creating a pipeline, you can connect GitHub to the Astro Cloud IDE to convert your pipelines to a DAG and deploy it to any Airflow project.
 
 1. Click **Commit** to connect your Astro Cloud IDE Project to your GitHub account. If this is your first time connection this Cloud IDE project to GitHub you will be prompted to configure your GitHub connection. If you've already connected your Astro Cloud IDE project to GitHub, you can skip to [Step 12](#step-12-commit-your-dag-to-github).
 
@@ -356,7 +356,7 @@ If GitHub Actions is already configured for your chosen branch and repository th
 
 :::info
 
-Note that if you used the `In-memory SQL` connection in your Astro Cloud IDE project you will have to change your pipeline to use a database connection instead in order to be able to run your DAG on Astro. See [Step 3](#step-3-optional-configure-a-connection) for instructions on how to configure a connection in the Astro Cloud IDE.
+Note that if you used the `In-memory SQL` connection in your Astro Cloud IDE project, you will have to change your pipeline to use a database connection in order to be able to run your DAG on Astro. See [Step 3](#step-3-optional-configure-a-connection) for instructions on how to configure a connection in the Astro Cloud IDE.
 
 :::
 
