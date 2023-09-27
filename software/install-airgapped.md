@@ -15,10 +15,6 @@ If you cannot use public repositories and networks for your installation, you ca
 
 This guide explains how to configure your system to install Astronomer without access to the public internet by moving Astronomer images to an accessible registry in your airgapped environment. After completing this setup, follow Steps 1 to 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) installation guide to finish your installation.
 
-:::info
-
-
-:::
 
 ## Prerequisites
 
