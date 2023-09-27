@@ -117,41 +117,37 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
     id9[(Blob storage)]:::astro
     id4[(Docker registry)]:::astro
     end
-    subgraph DataPlane ["Hypervisor"]
+    subgraph DataPlane ["Data plante"]
     subgraph subgraph_padding3 [ ]
-    id5(("Image deploy operator")):::astro
     subgraph Deployment ["Deployment"]
     subgraph subgraph_padding2 [ ]
-    id6["Airflow webserver"]:::astro
-    id7["Airflow scheduler"]:::astro
-    id8["Airflow workers"]:::astro
+    id6["Airflow components </br> (Webserver, scheduler, and workers)"]:::astro
     end
     end
     end
     end
     id10["'dags' folder"]:::astro-->|Upload DAGs|id9
     id1["Project image </br> excluding 'dags'"]:::astro-->|Docker push| id4
-    id4-->|Pull image|id5
-    id5-->id6 & id7 & id8
-    id9-->id6 & id7 & id8
+    id4-->id6 
+    id9-->id6
     class subgraph_padding3 subgraph_padding
     class subgraph_padding2 subgraph_padding
     class subgraph_padding1 subgraph_padding
-    linkStyle 0,1,2,3,4,5,6,7,8 stroke:#7f7f7f,stroke-width:3px
+    linkStyle 0,1,2,3 stroke:#7f7f7f,stroke-width:3px
     style ControlPlane fill:#bfeaff,stroke:#333,stroke-width:2px
     style DataPlane fill:#bfeaff,stroke:#333,stroke-width:2px
     style AstroCLI fill:#bfeaff,stroke:#333,stroke-width:2px
     style Deployment fill:#bfeaff,stroke:#333,stroke-width:2px
 ```
 
-### Downtime after a code deploy
+### How Deployments handle code deploys
 
-After Astro receives the deploy, it gracefully terminates all containers except for the Airflow webserver and Celery workers that are currently running tasks. All new containers will run your new code.
+After a Deployment receives the deploy, Astro gracefully terminates all of its containers except for the Airflow webserver and Celery workers or Kubernetes worker Pods that are currently running tasks. All new workers will run your new code.
 
 If you deploy code to a Deployment that is running a previous version of your code, then the following happens:
 
-- Tasks that are `running` will continue to execute on existing Celery workers and will not be interrupted unless the task does not complete within 24 hours of the code deploy.
-- One or more new worker(s) will be created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
+- Tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the code deploy.
+- One or more new workers are created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
 
     These new workers will execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` will continue to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they will both be scheduled on new Celery workers running your latest code.
 
