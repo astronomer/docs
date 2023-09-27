@@ -75,7 +75,8 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
         steps:
         - name: Deploy to Astro
           uses: astronomer/deploy-action@v0.2
-          deployment-id: <your-deployment-id>
+          with:
+            deployment-id: <your-deployment-id>
     ```
 
 </TabItem>
