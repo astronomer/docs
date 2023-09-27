@@ -1,7 +1,7 @@
 ---
 title: "Create an Azure Data Factory connection in Airflow"
 id: azure-data-factory
-sidebar_label: Azure Data Factory
+sidebar_label: "Connection"
 description: Learn how to create an Azure Data Factory connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/azure-data-factory.png' }
 ---
