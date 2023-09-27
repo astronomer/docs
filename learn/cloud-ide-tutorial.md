@@ -36,13 +36,14 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) 
+- An Astro account. If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization and Workspace.
+
+To complete the optional steps [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
+
+- An Astro Deployment in your Workspace. See [Create a Deployment](https://docs.astronomer.io/astro/create-first-DAG#step-1-create-a-deployment).
+- A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A Personal Access Token for your GitHub account. To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-- Optional. An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in memory database and skipping Steps [3](#step-3-optional-configure-a-connection), [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro).
-
-## Step 0: Create an Astro account
-
-If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization, Workspace and Deployment. Note the Deployment is only needed for the optional Steps X-Y at the end of this tutorial.
+- An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in memory database and skipping Steps [3](#step-3-optional-configure-a-connection), [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro).
 
 ## Step 1: Create your Astro Cloud IDE project
 
