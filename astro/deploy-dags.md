@@ -30,7 +30,7 @@ astro deploy --dags
 
 As a Workspace Owner, you can enable or disable DAG-only deploys for a Deployment. On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
   
-To determine if disabling DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
+To determine if DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
 
 ### Prerequisites
 
