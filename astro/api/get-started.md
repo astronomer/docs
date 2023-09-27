@@ -96,11 +96,11 @@ If the command succeeds, the API returns a list of Workspaces similar to the fol
 }
 ```
 
-In the response for your specific Workspace, the top-level `id`. This is your Workspace ID.
+In the response for your specific Workspace, copy the top-level `id`. This is your Workspace ID.
 
 :::tip
 
-If the API returns too many Workspaces, add some pagination parameters to your URL. For example, to limit your results to only the 20 most recently updated Workspaces, you would run:
+If the API returns too many Workspaces, add some pagination parameters to your URL. For example, to limit your results to only the 20 most recently updated Workspaces, you can run:
 
 ```bash
 curl --location 'https://api.astronomer.io/platform/v1beta1/organizations/<your-organization-id>/workspaces?limit=20&sorts=updatedAt:asc' \
