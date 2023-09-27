@@ -209,6 +209,7 @@ module.exports = {
             type: 'category',
             label: 'Use cases',
             items: [
+              'use-case-setup-teardown-data-quality',
               'use-case-airflow-databricks',
               'use-case-airflow-dbt',
               'use-case-elt-ml-finance',
