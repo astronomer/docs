@@ -1,7 +1,7 @@
 ---
 title: "Create a Snowflake Connection in Airflow"
 id: snowflake
-sidebar_label: Snowflake
+sidebar_label: Connection
 description: Learn how to create a Snowflake connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---

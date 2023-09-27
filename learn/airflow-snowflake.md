@@ -2,7 +2,7 @@
 title: "Orchestrate Snowflake Queries with Airflow"
 description: "Get enhanced observability and compute savings while orchestrating Snowflake jobs from your Airflow DAGs."
 id: airflow-snowflake
-sidebar_label: Snowflake
+sidebar_label: Tutorial
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
 

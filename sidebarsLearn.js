@@ -171,8 +171,34 @@ module.exports = {
           ],
         },
         'connections/bigquery',
-        'airflow-databricks',
-        'airflow-dbt-cloud',
+        {
+          type: 'category',
+          label: 'Databricks',
+          link: {
+              type: 'generated-index',
+              title: 'Databricks',
+              description: 'Integrate Airflow with Databricks',
+              image: '/img/integrations/databricks.png'
+          },
+          items: [
+            'airflow-databricks',
+            'connections/databricks',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'dbt Cloud',
+          link: {
+              type: 'generated-index',
+              title: 'dbt Cloud',
+              description: 'Integrate Airflow with dbt Cloud',
+              image: '/img/integrations/dbt.png'
+          },
+          items: [
+            'airflow-dbt-cloud',
+            'connections/dbt-cloud',
+          ],
+        },
         'airflow-dbt',
         'airflow-duckdb',
         'airflow-fivetran',
@@ -181,6 +207,7 @@ module.exports = {
         'marquez',
         'airflow-mlflow',
         'airflow-mongodb',
+        'connections/ms-sqlserver',
         {
           type: 'category',
           label: 'Redshift',
@@ -195,7 +222,21 @@ module.exports = {
             'connections/redshift'
           ],
         },
-        'airflow-snowflake',
+        'connections/postgres',
+        {
+          type: 'category',
+          label: 'Snowflake',
+          link: {
+              type: 'generated-index',
+              title: 'Snowflake',
+              description: 'Orchestrate Snowflake queries from your Airflow DAGs.',
+              image: '/img/integrations/snowflake.png'
+          },
+          items: [
+            'airflow-snowflake',
+            'connections/snowflake'
+          ],
+        },
         'soda-data-quality',
         'airflow-talend-integration',
         'airflow-weights-and-biases',
@@ -213,23 +254,6 @@ module.exports = {
           'pycharm-local-dev',
           'vscode-local-dev',
           'example-ms-teams-callback',
-          {
-            type: 'category',
-            label: 'Airflow connections',
-            link: {
-              type: 'generated-index',
-              title: 'Airflow connections',
-              description: 'Use the following guides to quickly set up Airflow connections to external systems.',
-            },
-            items: [
-              'connections/azure-data-factory',
-              'connections/databricks',
-              'connections/dbt-cloud',
-              'connections/ms-sqlserver',
-              'connections/postgres',
-              'connections/snowflake'
-            ],
-          },
           {
             type: 'category',
             label: 'Use cases',
