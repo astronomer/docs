@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Run your first DAG with Astro CLI'
+sidebar_label: 'With Astro CLI'
 title: 'Run your first DAG with the Astro CLI'
 id: 'first-DAG-cli'
 ---
@@ -30,7 +30,7 @@ If you just want to run Airflow on your local machine without deploying to Astro
 - An Astro account. To start an Astro trial, see [Start a trial](trial.md). 
 - The latest version of the [the Astro CLI](cli/overview.md). 
 
-Although it's not required for this tutorial, Astronomer also recommends installing a supported container engine for testing your DAGs locally and deploying more complex project changes to Astro. The following container engines are supported with the Astro CLI:
+Although it's not required for this tutorial, the following container engines are supported with the Astro CLI and required to run Airflow locally:
 
 - [Docker Desktop](https://docs.docker.com/get-docker/) (Recommended).
 - [Podman](https://podman.io/). See [Run the Astro CLI using Podman](cli/configure-cli.md#run-the-astro-cli-using-podman).
@@ -54,7 +54,7 @@ If you're on your organization's network and can't access Astro, make a request 
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
 
-1. Log in to the [Cloud UI](https://cloud.astronomer.io)
+1. Log in to the [Cloud UI](https://cloud.astronomer.io).
 
 2. On the **Deployments** page, click **+ Deployment**.
 
@@ -173,6 +173,6 @@ To limit resource usage, you might want to delete your Deployment after you fini
 
 Now that you've created and run your first DAG on Astro, the next step is to add your own DAGs, build out the rest of your Astro project, and start testing real data. See:
 
-- [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, including the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
+- [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, such as the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
 - [Deploy code to Astro](deploy-code.md).
 - [Develop a project](cli/develop-project.md).
