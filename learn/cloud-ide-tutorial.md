@@ -38,7 +38,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - An Astro account. If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization and Workspace.
 
-To complete the optional steps [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
+[Optional] To complete steps [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
 
 - An Astro Deployment in your Workspace. See [Create a Deployment](https://docs.astronomer.io/astro/create-first-DAG#step-1-create-a-deployment).
 - A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
