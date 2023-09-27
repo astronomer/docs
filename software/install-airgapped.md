@@ -17,7 +17,6 @@ This guide explains how to configure your system to install Astronomer without a
 
 :::info
 
-If you have some means to allow traffic to the public internet, e.g. a proxy that allows a list of accepted destinations/sources, that will make the airgapped installation much easier. This page assumes an environment without any possibility of accessing the public internet.
 
 :::
 
