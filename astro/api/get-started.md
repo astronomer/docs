@@ -63,7 +63,7 @@ curl --location 'https://api.astronomer.io/platform/v1beta1/organizations/<your-
 
 If the command succeeds, the API returns a list of Workspaces similar to the following:
 
-```json {18}
+```json {15}
 {
   "workspaces": [
     {
