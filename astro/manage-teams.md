@@ -63,10 +63,10 @@ You can add a Team to multiple Workspaces programmatically using the Astro CLI. 
 
 ## Add a Team to multiple Workspaces using the Astro CLI
 
-You can use the Astro CLI and a shell script to add a Team to multiple Workspaces at once. The shell script reads from a text file which contains Team information. You can generate a text file for each Team that needs to be assigned to Workspaces and run the script with the Astro CLI. You must have Organization Owner or Workspace Owner level user access to add Teams to Workspaces.
+You can use the Astro CLI and a shell script to add a Team to multiple Workspaces at once. The shell script reads from a text file which contains Team information. You can generate a text file for each Team that needs to be assigned to Workspaces and run a script to process the file. You must have Organization Owner or Workspace Owner level permissions to add Teams to Workspaces.
 
 1. Create a text file named `teams.txt`.
-2. Open the text file. On each line, add a Team ID, the role, and the Workspace ID. The following is an example of how you can write a list for assigning Teams to multiple Workspaces:
+2. Open the text file. On each line, add a Team ID, the Team's role, and the Workspace ID delimited by spaces. Your text file should look similar to the following:
 
     ```text
     uclk17xqgm124q01hkrgilsr49 WORKSPACE_MEMBER tbkj96wpfl913p90glqfgkrq398

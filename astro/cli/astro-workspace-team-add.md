@@ -16,11 +16,12 @@ The behavior and format of this command differs depending on what Astronomer pro
 Add a Team to your current Workspace and grant it a Workspace role.
 
 <Tabs
-    defaultValue="astro"
-    values={[
-        {label: 'Astro', value: 'astro'},
-        {label: 'Software', value: 'software'},
-    ]}>
+defaultValue="astro"
+values={[
+{label: 'Astro', value: 'astro'},
+{label: 'Software', value: 'software'},
+]}>
+
 <TabItem value="astro">
 
 ## Usage
@@ -29,22 +30,17 @@ Add a Team to your current Workspace and grant it a Workspace role.
 astro workspace team add <options>
 ```
 
-If you want to add a team to the current Workspace with the default role of Workspace Member, you can also run `astro workspace team add`. This command lists the available Teams in your Orgranization and prompts you to enter the serial number for team you want to add.
+If you run the command with no options specified, the CLI lists Teams in your Organization and prompts you to select one. It then adds the Team to your cuurent Workspace with the Workspace Member role.
 
-If you want to add a team to a specific Workspace, you can use the `--workspace-id` flag. To find a Workspace ID, run `astro workspace list`.
+To add a Team to a specific Workspace, specify the Workspace using the `--workspace-id` flag. To find a Workspace ID, run `astro workspace list`.
 
 ## Options
 
-| Option           | Description                                                                         | Valid Values                                                                                                                           |
-| ---------------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `--team-id`      | Specifies the Team ID to add to a Workspace and bypasses the Team selection prompt. | Any valid Team ID.                                                                                                                     |
-| `-r`, `--role`   | The Team's role in the Workspace.                                                   | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_MEMBER`. |
-| `--workspace-id` | The Workspace ID where you want to add the Team.                                    | Any valid Workspace ID. Default is the current Workspace context you are working in.                                                  |
-
-You can retrieve a Team's ID in one of two ways:
-
-- To find a Team ID using the Astro CLI, run `astro organization team list`.
-- To find a Team ID in the Cloud UI, click your Workspace name, then click **Organization Settings** > **Access Management** > **Teams**. Search for your Team in the **Teams** table and copy its **ID**. The ID should look something like `clk17xqgm124q01hkrgilsr49`.
+| Option           | Description                                                               | Valid Values                                                                                                                           |
+| ---------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `--team-id`      | The ID for the Team to add to a Workspace. Bypasses the selection prompt. | Any valid Team ID. You can find available Team ID's by running `astro organization team list`.                                         |
+| `-r`, `--role`   | The Team's role in the Workspace.                                         | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_MEMBER`. |
+| `--workspace-id` | The ID for the Workspace where you want to add the Team.                  | Any valid Workspace ID. Default is the current Workspace context you are working in.                                                   |
 
 </TabItem>
 
@@ -54,10 +50,10 @@ Manage Astronomer Software [Teams](https://docs.astronomer.io/software/import-id
 
 #### Usage
 
-If you want to add a team to the current Workspace with the default role of Workspace Member, you can also run `astro workspace team add`. This command lists the available Teams in your Orgranization and prompts you to enter the serial number for team you want to add. 
+If you want to add a team to the current Workspace with the default role of Workspace Member, you can run `astro workspace team add <team-id>`, with the team ID that you want to add.
 
 ```sh
-astro workspace team <options>
+astro workspace team add <team-id>
 ```
 
 You can retrieve a Team's ID in one of two ways:
@@ -67,10 +63,10 @@ You can retrieve a Team's ID in one of two ways:
 
 #### Options
 
-| Option                   | Description                                      | Possible Values                                                                                                                        |
-| ------------------------ | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `--team-id` (_Required_) | The Team's ID                                    | Any valid Team ID                                                                                                                      |
-| `--role`                 | The Team's role in the Workspace.                | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_MEMBER`. |
+| Option                   | Description                       | Possible Values                                                                                                                        |
+| ------------------------ | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `<team-id>` (_Required_) | The Team's ID                     | Any valid Team ID                                                                                                                      |
+| `--role`                 | The Team's role in the Workspace. | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_MEMBER`. |
 
 </TabItem>
 </Tabs>
