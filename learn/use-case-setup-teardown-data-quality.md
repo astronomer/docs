@@ -1,12 +1,12 @@
 ---
-title: "Use setup/ teardown to run data quality checks before running a rose classification model"
-description: "Use setup/ teardown to run data quality checks in an MLOps pipeline."
+title: "Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline"
+description: "Use setup/ teardown to run data quality checks before running a classification model on roses."
 id: use-case-setup-teardown-data-quality
-sidebar_label: "Classification with data quality + setup/ teardown"
+sidebar_label: "Data quality checks with setup/ teardown tasks"
 ---
 
-To get valuable insight from machine learning models, you need to make sure that the data you use to train them is of high quality. This project shows a best-practice pattern using [setup/ teardown tasks](airflow-setup-teardown.md), [SQL check operators](airflow-sql-data-quality.md), [task groups](task-groups.md), [Airflow datasets](airflow-datasets.md) and the [Astro Python SDK](astro-python-sdk.md) to run integrated [data quality](data-quality.md) checks on a newly created relational table before training a classification model. The table creation pattern shown is modeled after our internal Astronomer ETL pipelines.
-For this example, we use synthetic data about roses, trying to predict to which one of three cultivars a rose belongs based on their stem length, month of blooming, as wells as petal and leaf size.
+To get valuable insight from machine learning models, you need to make sure that the data you use to train them is high quality. This project demonstrates a best-practice pattern using [setup/ teardown tasks](airflow-setup-teardown.md), [SQL check operators](airflow-sql-data-quality.md), [task groups](task-groups.md), [Airflow datasets](airflow-datasets.md) and the [Astro Python SDK](astro-python-sdk.md) to run integrated [data quality](data-quality.md) checks on a relational table before training a classification model. The table creation pattern shown is modeled after Astronomer's internal ETL pipelines.
+This example uses synthetic data about roses and tries to predict each rose's cultivar based on its stem length, month of blooming, petal size, and leaf size.
 
 ![Two plots side by side showing the results of the RandomForestClassification model. The left plot shows a Confusion matrix contrasting the predicted vs the true values for the three cultivars of roses in a heatmap with a large majority of the roses classified correctly. The right plot shows an ROC (receiver operating characteristic) curve with a ROC curve area of 0.93. The legend also contains the accuracy (0.76) as well as the F1 Score (0.76). In the lower right corner of the plot there is a little red rose <3.](/img/examples/use-case-setup-teardown-data-quality_result_plots.png)
 
@@ -19,7 +19,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-setup-teardown-data-quality.git). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-setup-teardown-data-quality.git). To keep your credentials secure when you deploy this project to your own git repository, create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
 
 The repository is configured to create and use a local [Postgres](https://www.postgresql.org/) instance, accessible on port `5433`. You do not need to define connections or access external tools.
 
@@ -46,7 +46,8 @@ To run the project, unpause both DAGs. The `create_rose_table` DAG will start it
 ### Data source
 
 The data in this example is generated using the [generate_rose_data](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/include/generate_rose_data.py) script. The script creates a CSV file in `include` that contains synthetic data about three cultivars of roses: [Damask Rose (Rosa damascena)](https://en.wikipedia.org/wiki/Rosa_%C3%97_damascena), [Tea Rose (Rosa odorata)](https://en.wikipedia.org/wiki/Rosa_%C3%97_odorata), and [Moss Rose (Rosa centifolia)](https://en.wikipedia.org/wiki/Rosa_%C3%97_centifolia).
-The data is generated to allow for a classification model to predict the cultivar of a rose based on the given features with an accuracy of around 70-80%. Adjust the parameters in the script and rerun it to generate different data.
+
+You can use a classification model with the generated data to predict the cultivar of a rose with an accuracy of around 70-80%. Adjust the parameters in the script and rerun it to generate different data.
 
 ### Project overview
 
@@ -54,9 +55,14 @@ This project consists of two DAGs, `create_rose_table` and `rose_classification`
 
 ![Datasets view of the use case project showing the create_rose_table DAG that produces to the dataset postgres://public/roses which is consumed by the second DAG named rose_classification.](/img/examples/use-case-setup-teardown-data-quality_datasets_view.png)
 
-The [`create_rose_table`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/create_rose_table.py) DAG contains a create table [task group](task-groups.md) with a table creation pattern that includes two types of data quality checks: those that stop the pipeline if data does not pass the checks and those which only log a warning but do not stop the pipeline. The first type of checks are run on a temporary table that is created and dropped using [setup/ teardown tasks](airflow-setup-teardown.md) to efficiently handle data quality check failures.
+The [`create_rose_table`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/create_rose_table.py) DAG contains a [task group](task-groups.md) with a table creation pattern that includes two types of data quality checks:  
 
-![Graph view of the create_rose_table DAG showing a task group called create_table containing 2 nested task groups and 6 individual tasks. The first two tasks of the DAG graph are setup tasks that create the temporary table (create_tmp) and load data into the temporary table (load_data_into_tmp) using the PostgresOperator. Afterwards the test_temp task group run halting data quality checks on the temporary table using a SQLTableCheckOperator and SQLColumnCheckOperator. If the data passes these checks the swap task (PostgresOperator) swaps the temporary for the permanent table, creating a backup table in the process (for this reason the swap task is a setup task in its own right). After the swap both the temporary (drop_tmp) and backup table (drop_backup) tables are dropped, with those two tasks being teardown tasks. After the last teardown task an empty task (done) runs, this task exists to allow for different trigger rules in case the pipeline should not be stopped if a new table has not been swapped in. In parallel the validate task group runs non-halting data quality checks using the same two SQL check operators. After these checks complete there is an empty task called sql_check_done which will always be successful (its trigger_rule is all_done) so that data quality failures in the validation group will never halt the pipeline. After the create table task group the table_ready_for_model task runs and produces to the postgres://public/roses dataset.](/img/examples/use-case-setup-teardown-data-quality_create_rose_table_dag_graph.png)
+- Checks that stop the pipeline if data does not pass the checks
+- Checks that log a warning but do not stop the pipeline. 
+
+The first type of checks are run on a temporary table that is created and dropped using [setup/ teardown tasks](airflow-setup-teardown.md), which is an efficient way to handle data quality check failures.
+
+![Graph view of the create_rose_table DAG showing a task group called create_table containing 2 nested task groups and 6 individual tasks. ](/img/examples/use-case-setup-teardown-data-quality_create_rose_table_dag_graph.png)
 
 The [`rose_classification`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/rose_classification.py) DAG engineers machine learning features based on the table created by the `create_rose_table` DAG and then trains a classification model to predict the `rose_type` column based on these features. The last task plots model results.
 
@@ -64,18 +70,18 @@ The [`rose_classification`](https://github.com/astronomer/use-case-setup-teardow
 
 ### Project code
 
-This use case shows the Airflow 2.7 features [setup/ teardown tasks](airflow-setup-teardown.md) in a data quality use case, as well as how to leverage [Airflow datasets](airflow-datasets.md) and the the [Astro Python SDK](astro-python-sdk.md), an open-source package created by Astronomer to simplify DAG writing with Python functions, for a combined ELT and ML use case.
+This use case showcases [setup/ teardown tasks](airflow-setup-teardown.md) in a data quality use case, as well as how to leverage [Airflow datasets](airflow-datasets.md) and the [Astro Python SDK](astro-python-sdk.md), an open-source package created by Astronomer to simplify DAG writing with Python functions. The result is a complete ELT and ML pipeline example.
 
 #### Create table DAG
 
-The [`create_rose_table`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/create_rose_table.py) DAG is organized using nested [task groups](task-groups.md). Two advantages of this pattern are easier navigation of the DAG graph and the ability to [template the task group pattern](task-groups.md#custom-task-group-classes) and turn it into a reusable module inside your DAGs.
+The [`create_rose_table`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/create_rose_table.py) DAG is organized using nested [task groups](task-groups.md). This pattern has two advantages: It makes it easier to navigate the DAG graph, and it gives you the ability to [template the task group pattern](task-groups.md#custom-task-group-classes) and turn it into a reusable module.
 
-The create table pattern shown in this example starts with creating and populating a temporary table. This is especially prudent in production, when the target table is currently under use, for example serving a dashboard or machine learning model. Both table creation (`create_tmp`) and loading data into the table (`load_data_into_tmp`) are defined as setup tasks. The task which drops the temporary table `drop_tmp` is the corresponding teardown task.
-The full setup/ teardown workflow includes all tasks shown in the DAG graph below.
+The create table pattern shown in this example starts with creating and populating a temporary table. This is especially helpful in production when the target table is already in use use, for example when serving a dashboard or machine learning model. Both creating the table (`create_tmp`) and loading data into the table (`load_data_into_tmp`) are defined as setup tasks. The task which drops the temporary table (`drop_tmp`) is the corresponding teardown task.
+The full setup/ teardown workflow includes all tasks shown in the following DAG graph:
 
 ![Graph view of the create_table task group showing the 5 tasks that make up the setup/ teardown workflow.](/img/examples/use-case-setup-teardown-data-quality_setup_teardown_workflow.png)
 
-The code snippet below shows how the setup/ teardown workflow is created by calling the `.as_teardown` method on a regular Airflow task object and supplying all associated setup tasks to the `setups` parameter. The `test_tmp` task group and the `swap` task are automatically determined to be in scope of the setup/teardown workflow because they lie in between the setup and teardown tasks in the dependency structure.
+In the following code snippet, the setup/ teardown workflow is created by calling the `.as_teardown` method on a regular Airflow task object and supplying all associated setup tasks to the `setups` parameter. The `test_tmp` task group and the `swap` task are automatically determined to be in scope of the setup/teardown workflow because they lie in between the setup and teardown tasks in the dependency structure.
 
 ```python
 create_tmp = PostgresOperator(
@@ -120,7 +126,7 @@ drop_tmp.as_teardown(setups=[create_tmp, load_data_into_tmp])
 
 Data quality checks are defined using the two [SQL check operators](airflow-sql-data-quality.md): [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLColumnCheckOperator) and [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLTableCheckOperator). 
 
-The `test_cols` task runs a checks on individual columns of the temporary table, in this case to check that the `petal_size_cm`, `stem_length_cm` and `leaf_size_cm` columns contain values in a reasonable range for these rose cultivars. To learn more about defining data quality check statements in the SQLColumnCheckOperator and SQLTableCheckOperator, see the [How it works](airflow-sql-data-quality.md#how-it-works) section of the related tutorial.
+The `test_cols` task runs a checks on individual columns of the temporary table, in this case to check that the `petal_size_cm`, `stem_length_cm` and `leaf_size_cm` columns contain values in a reasonable range for the rose cultivars. To see more more examples of defining data quality check statements in the SQLColumnCheckOperator and SQLTableCheckOperator, see the [Run data quality checks using SQL check operators](airflow-sql-data-quality.md).
 
 ```python
 SQLColumnCheckOperator(
@@ -136,7 +142,7 @@ SQLColumnCheckOperator(
 )
 ```
 
-The `test_table` task runs checks on the whole table to make sure we have enough rows for our downstream model to be trained (over 500 rows) and that the `rose_type` column only contains the three cultivars we are interested in.
+The `test_table` task runs checks on the table to make sure that there's enough rows for the downstream model to be trained, and that the `rose_type` column only contains three cultivars.
 
 ```python
 SQLTableCheckOperator(
@@ -152,7 +158,7 @@ SQLTableCheckOperator(
 )
 ```
 
-If the new data passes the data quality checks contained in the `test_tmp` task group, the temporary table is swapped with the target table. The SQL statement that swaps the table is wrapped in a `DO` block that checks if the target table already exists and creates a backup table if it does.
+If the new data passes the data quality checks, the temporary table is swapped with the target table. The SQL statement that swaps the table is wrapped in a `DO` block that checks if the target table already exists and creates a backup table if it does.
 
 ```python
 swap = PostgresOperator(
@@ -175,9 +181,9 @@ swap = PostgresOperator(
 )
 ```
 
-In our demo pipeline, the backup table will be dropped after the swap and dropping of the temporary table is successful. In a production pipeline, you might consider delaying dropping the backup table for longer to allow for a rollback in case the new table contains errors that were not anticipated by the existing data quality checks.
+In this demo pipeline, the backup table will be dropped after the swap and drop of the temporary table is successful. In a production pipeline, you might consider delaying dropping the backup table to allow for a rollback in case the new table contains errors that were not anticipated by the existing data quality checks.
 
-The `swap` task creates the backup table, which is why we define it as a setup task as well. The associated teardown task is `drop_backup`, the task that drops the backup table. There is only one task in the scope of this setup/ teardown workflow in this DAG, the `drop_tmp` task. Defining this second setup/ teardown workflow ensures that the backup table is dropped even if the dropping of the temporary table is not successful, ensuring idempotency of the DAG.
+The `swap` task creates the backup table, which is why it's defined as a setup task. The associated teardown task is `drop_backup`, the task that drops the backup table. Defining this second setup/ teardown workflow ensures that the backup table is dropped even if the dropping of the temporary table is not successful, ensuring idempotency of the DAG.
 
 ```python
 swap = PostgresOperator(
@@ -207,11 +213,11 @@ chain(
 drop_backup.as_teardown(setups=[swap])
 ```
 
-In the second half of the create table task group, the nested `validate` task group runs non-halting data quality checks on the target table. These checks are defined using the same two SQL check operators as the halting checks on the temporary table. If the data fails the checks in this second task group, the pipeline will not be stopped, but the check failures are printed to the logs. It is common to set up [notifications](error-notifications-in-airflow.md) to alert relevant data stakeholders of these check failures.
+In the second half of the task group, the nested `validate` task group runs non-halting data quality checks on the target table. These checks are defined using the same two SQL check operators as the halting checks on the temporary table. If the data fails the checks in this second task group, the pipeline will not be stopped, but the check failures are printed to the logs. It is common to set up [notifications](error-notifications-in-airflow.md) to alert relevant data stakeholders of these check failures.
 
 ![Graph view of the second half of the create table task group showing the nested validate task group with two data quality check tasks, as well as the downstream `sql_check_done` task.](/img/examples/use-case-setup-teardown-data-quality_validate_taskgroup.png)
 
-Validation level checks often contain more stringent checks than the halting checks, for example to make sure that the data is not only in a reasonable range, but also within the expected range. The code snippet below shows the `test_cols` task checks, containing more strict ranges for the numerical columns of the dataset. The `test_table` task checks that the table contains at least 800 rows and at least 20 rows for the `tea` cultivar. The `month_check` task checks that the `blooming_month` column only contains the months in which we expect these roses to bloom.
+Validation level checks often contain more stringent checks than the halting checks, for example to make sure that the data is not only in a reasonable range, but also within the expected range. The following checks ensure that [fill in the blank]
 
 ```python
 @task_group
@@ -253,7 +259,7 @@ def sql_check_done():
     return "Additional data quality checks are done!"
 ```
 
-By changing the trigger rule of the `sql_check_done` task and the `done` task running after the `drop_backup` task you can change the impact failures in the `create_table` task group have on the continuation of the larger pipeline. For example you may want to set the trigger rule of the `sql_check_done` task to `all_success` during development to only continue the pipeline if the data passes validation checks or set the trigger rule of the `done` task to `all_done` to allow the pipeline to continue using the old table if the swapping in of the new table fails.
+If you change the trigger rule of the `sql_check_done` task and the `done` task running after the `drop_backup` task, you can change the impact that failures have on the larger pipeline. For example, you might want to set the trigger rule of the `sql_check_done` task to `all_success` during development to only continue the pipeline if the data passes validation checks, or you might set the trigger rule of the `done` task to `all_done` to allow the pipeline to continue using the old table if the swapping in of the new table fails.
 
 Lastly, the `table_ready_for_the_model` task produces to the [Airflow dataset](airflow-datasets.md) `postgres://public/roses` to trigger the downstream `rose_classification` DAG.
 
@@ -262,7 +268,7 @@ Lastly, the `table_ready_for_the_model` task produces to the [Airflow dataset](a
     outlets=[Dataset(f"postgres://{SCHEMA_NAME}/{TABLE_NAME}")],
 )
 def table_ready_for_the_model():
-    return "The table is ready, modelling can begin!"
+    return "The table is ready, modeling can begin!"
 ```
 
 #### ML DAG
@@ -329,7 +335,9 @@ roses_features = feature_engineering(
 )
 ```
 
-The `train_model` task ingests the dictionary returned by the `feature_engineering` task and trains a [RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) on the training data. The fitted model is then used to predict the `rose_type` of the test data. The `train_model` task prints the [accuracy](https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score), [f1-score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score) and a classification report to the logs and returns a dictionary of model results for the downstream plotting task.
+The `train_model` task ingests the dictionary and trains a [RandomForestClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier) on the training data. The fitted model is then used to predict the `rose_type` of the test data. 
+
+The `train_model` task prints the [accuracy](https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score), [f1-score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html#sklearn.metrics.f1_score), and a classification report to the logs and returns a dictionary of model results for the downstream plotting task.
 
 ```python
 @task
@@ -381,7 +389,7 @@ def train_model(input_data):
     }
 ```
 
-Lastly, the model results are plotted using [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) in the `plot_results` task. The plot is saved in the `include` directory of the local Astro project, if you are running this pipeline in production make sure to save it to persistent storage. 
+Lastly, the model results are plotted using [matplotlib](https://matplotlib.org/) and [seaborn](https://seaborn.pydata.org/) in the `plot_results` task. The plot is saved in the `include` directory of the local Astro project. If you are running this pipeline in production, make sure to save this file to persistent storage. 
 
 ```python
 @task
@@ -450,7 +458,7 @@ def plot_results(input):
     plt.savefig("include/results.png")
 ```
 
-The [aql.cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/cleanup.html) task is run in parallel to the rest of the DAG and cleans up any temporary tables that were created as soon as they are no longer needed.
+The [aql.cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/cleanup.html) task is run in parallel to the rest of the DAG and cleans up any temporary tables after they're no longer needed.
 
 Congratulations! You ran an end to end pipeline from creating a table in a best practice pattern including two sets of efficient data quality checks to model training and plotting! Use this project as a blueprint to build your own data-driven pipelines.
 
