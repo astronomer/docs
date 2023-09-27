@@ -30,14 +30,14 @@ $ astro deployment list --all
 
 ## Output
 
-| Output               | Description                                                                                        | Data Type                                  |
-| -------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `NAME`               | The name of the Deployment.                                                                        | String                                     |
-| `NAMESPACE`          | A unique, auto-generated label for your Deployment.                                                | String                                     |
-| `CLUSTER`            | The name of the Astro cluster where the Deployment runs.                                           | String                                     |
-| `DEPLOYMENT ID`      | The Deployment ID                                                                                  | String                                     |
-| `RUNTIME VERSION`    | Which version of the Astro Runtime the Deployment uses, and the Airflow version it corresponds to. | String. (`X.X.X (based on Airflow X.X.X)`) |
-| `DAG DEPLOY ENABLED` | Whether the deployment method is DAG only or a full image deployment.                              | Boolean                                    |
+| Output               | Description                                                                   | Data Type                                  |
+| -------------------- | ----------------------------------------------------------------------------- | ------------------------------------------ |
+| `NAME`               | The name of the Deployment.                                                   | String                                     |
+| `NAMESPACE`          | The Deployment's Kubernetes namespace.                                        | String                                     |
+| `CLUSTER`            | The name of the Astro cluster where the Deployment runs.                      | String                                     |
+| `DEPLOYMENT ID`      | The Deployment ID                                                             | String                                     |
+| `RUNTIME VERSION`    | The Deployment's Astro Runtime version and its corresponding Airflow version. | String. (`X.X.X (based on Airflow X.X.X)`) |
+| `DAG DEPLOY ENABLED` | Whether the Deployment supports DAG deploys.                                  | Boolean                                    |
 
 ## Related Commands
 

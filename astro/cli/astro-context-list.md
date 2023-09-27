@@ -18,9 +18,9 @@ astro context list
 
 ## Output
 
-| Output | Description                                                    | Data Type |
-| ------ | -------------------------------------------------------------- | --------- |
-| `NAME` | the names of the domain where you have logged in from the CLI. | String    |
+| Output | Description                                                      | Data Type |
+| ------ | ---------------------------------------------------------------- | --------- |
+| `NAME` | The names of the domains that you have logged into from the CLI. | String    |
 
 ## Related Commands
 

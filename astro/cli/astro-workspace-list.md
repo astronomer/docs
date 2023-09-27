@@ -16,7 +16,7 @@ Run `astro workspace list` to see the name and Workspace ID for each Workspace t
 
 | Output | Description                                                              | Data Type |
 | ------ | ------------------------------------------------------------------------ | --------- |
-| `NAME` | The name of the Workspaces that you have access to in your Organization. | String    |
+| `NAME` | The name of the Workspaces in your Organization that you have access to. | String    |
 | `ID`   | The Workspace ID.                                                        | String    |
 
 ## Related commands
