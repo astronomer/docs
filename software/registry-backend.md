@@ -15,7 +15,11 @@ The following are the registry backend tools supported by Astronomer:
 - [AWS S3](https://aws.amazon.com/s3/)
 - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
-Note that this doc explains only how to set up a registry for hosting Astronomer's system images. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md).
+:::info
+
+This document explains only how to set up a registry for hosting Astronomer's system images. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md). Or, to host all images in a high-security environment with no connections to public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
+
+:::
 
 ## Google Cloud Storage
 
