@@ -298,6 +298,20 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 </Tabs>
 
+### Troubleshoot your Podman configuration
+
+The following error can sometimes occur when the CLI tries to build your Astro Runtime image using Podman:
+
+```bash
+WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format 
+```
+
+To resolve this issue, run the following command to set the `BUILDAH_FORMAT` environment variable on your machine:
+
+```dockerfile
+export BUILDAH_FORMAT=docker
+```
+
 ## Switch between Docker and Podman
 
 After you set up the Astro CLI to use Podman on your local machine, the CLI automatically runs Podman containers whenever you run a command that requires them. To revert to the default behavior and run CLI commands in Docker containers, run the following command:
@@ -311,3 +325,5 @@ If you need to switch back to using Podman again, run the following command:
 ```sh
 astro config set container.binary podman
 ```
+
+

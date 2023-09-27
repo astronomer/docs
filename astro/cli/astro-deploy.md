@@ -129,9 +129,22 @@ $ astro deploy ckvvfp9tf509941drl4vela81n
 # The CLI automatically selects this Deployment for your Astro project
 $ astro deploy ckvvfp9tf509941drl4vela81n --save
 ```
-
 </TabItem>
 </Tabs>
+
+:::info
+
+The following error can sometimes occur when the CLI tries to build your Astro Runtime image using Podman:
+
+```bash
+WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format 
+```
+You can resolve this issue by exporting the `BUILDAH_FORMAT` [environment variable](astro/environment-variables.md) to Podman:
+
+```dockerfile
+export BUILDAH_FORMAT=docker
+```
+:::
 
 ## Related commands
 
