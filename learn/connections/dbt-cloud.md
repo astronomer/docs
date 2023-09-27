@@ -1,7 +1,7 @@
 ---
 title: "Create a dbt Cloud connection in Airflow"
 id: dbt-cloud
-sidebar_label: dbt Cloud
+sidebar_label: Connection
 description: Learn how to create a dbt Cloud connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---

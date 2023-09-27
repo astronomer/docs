@@ -1,7 +1,7 @@
 ---
 title: "Create an Amazon Redshift Connection in Airflow"
 id: redshift
-sidebar_label: Redshift
+sidebar_label: Connection 
 description: Learn how to create an Amazon Redshift connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/redshift.png' }
 ---
