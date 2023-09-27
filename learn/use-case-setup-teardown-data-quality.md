@@ -41,6 +41,8 @@ This command builds your project and spins up 5 Docker containers on your machin
 
 To run the project, unpause both DAGs. The `create_rose_table` DAG will start its first run automatically. The `rose_classification` DAG is scheduled on a [dataset](airflow-datasets.md) and will start as soon as the last task in the `create_rose_table` DAG finishes successfully.
 
+Congratulations! You ran an end to end pipeline from creating a table in a best practice pattern including two sets of efficient data quality checks to model training and plotting! Use this project as a blueprint to build your own data-driven pipelines.
+
 ## Project contents
 
 ### Data source
@@ -57,7 +59,7 @@ This project consists of two DAGs, `create_rose_table` and `rose_classification`
 
 The [`create_rose_table`](https://github.com/astronomer/use-case-setup-teardown-data-quality/blob/main/dags/create_rose_table.py) DAG contains a [task group](task-groups.md) with a table creation pattern that includes two types of data quality checks:  
 
-- Checks that stop the pipeline if data does not pass the checks
+- Checks that stop the pipeline if data does not pass the checks.
 - Checks that log a warning but do not stop the pipeline. 
 
 The first type of checks are run on a temporary table that is created and dropped using [setup/ teardown tasks](airflow-setup-teardown.md), which is an efficient way to handle data quality check failures.
@@ -81,7 +83,7 @@ The full setup/ teardown workflow includes all tasks shown in the following DAG 
 
 ![Graph view of the create_table task group showing the 5 tasks that make up the setup/ teardown workflow.](/img/examples/use-case-setup-teardown-data-quality_setup_teardown_workflow.png)
 
-In the following code snippet, the setup/ teardown workflow is created by calling the `.as_teardown` method on a regular Airflow task object and supplying all associated setup tasks to the `setups` parameter. The `test_tmp` task group and the `swap` task are automatically determined to be in scope of the setup/teardown workflow because they lie in between the setup and teardown tasks in the dependency structure.
+In the following code snippet, the setup/ teardown workflow is created by calling the `.as_teardown` method on a regular Airflow task object and supplying all associated setup tasks to the `setups` parameter. The `test_tmp` task group and the `swap` task are automatically determined to be in scope of the setup/ teardown workflow because they lie in between the setup and teardown tasks in the dependency structure.
 
 ```python
 create_tmp = PostgresOperator(
@@ -126,7 +128,7 @@ drop_tmp.as_teardown(setups=[create_tmp, load_data_into_tmp])
 
 Data quality checks are defined using the two [SQL check operators](airflow-sql-data-quality.md): [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLColumnCheckOperator) and [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/versions/latest/modules/SQLTableCheckOperator). 
 
-The `test_cols` task runs a checks on individual columns of the temporary table, in this case to check that the `petal_size_cm`, `stem_length_cm` and `leaf_size_cm` columns contain values in a reasonable range for the rose cultivars. To see more more examples of defining data quality check statements in the SQLColumnCheckOperator and SQLTableCheckOperator, see the [Run data quality checks using SQL check operators](airflow-sql-data-quality.md).
+The `test_cols` task runs checks on individual columns of the temporary table, in this case to check that the `petal_size_cm`, `stem_length_cm` and `leaf_size_cm` columns contain values in a reasonable range for the rose cultivars. To see more more examples of defining data quality check statements in the SQLColumnCheckOperator and SQLTableCheckOperator, see the [Run data quality checks using SQL check operators](airflow-sql-data-quality.md).
 
 ```python
 SQLColumnCheckOperator(
@@ -217,7 +219,7 @@ In the second half of the task group, the nested `validate` task group runs non-
 
 ![Graph view of the second half of the create table task group showing the nested validate task group with two data quality check tasks, as well as the downstream `sql_check_done` task.](/img/examples/use-case-setup-teardown-data-quality_validate_taskgroup.png)
 
-Validation level checks often contain more stringent checks than the halting checks, for example to make sure that the data is not only in a reasonable range, but also within the expected range. The following checks ensure that [fill in the blank]
+Validation level checks often contain more stringent checks than the halting checks, for example to make sure that the data is not only in a reasonable range, but also within the expected range. The following checks test our data against more narrow ranges than the checks in the `test_cols` task and ensured the `blooming_month` information matches our expectations.
 
 ```python
 @task_group
@@ -259,7 +261,11 @@ def sql_check_done():
     return "Additional data quality checks are done!"
 ```
 
+:::tip
+
 If you change the trigger rule of the `sql_check_done` task and the `done` task running after the `drop_backup` task, you can change the impact that failures have on the larger pipeline. For example, you might want to set the trigger rule of the `sql_check_done` task to `all_success` during development to only continue the pipeline if the data passes validation checks, or you might set the trigger rule of the `done` task to `all_done` to allow the pipeline to continue using the old table if the swapping in of the new table fails.
+
+:::
 
 Lastly, the `table_ready_for_the_model` task produces to the [Airflow dataset](airflow-datasets.md) `postgres://public/roses` to trigger the downstream `rose_classification` DAG.
 
@@ -459,8 +465,6 @@ def plot_results(input):
 ```
 
 The [aql.cleanup](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/cleanup.html) task is run in parallel to the rest of the DAG and cleans up any temporary tables after they're no longer needed.
-
-Congratulations! You ran an end to end pipeline from creating a table in a best practice pattern including two sets of efficient data quality checks to model training and plotting! Use this project as a blueprint to build your own data-driven pipelines.
 
 ## See also
 
