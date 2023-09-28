@@ -38,12 +38,12 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - An Astro account. If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization and Workspace.
 
-[Optional] To complete steps [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
+(Optional) To complete steps [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
 
 - An Astro Deployment in your Workspace. See [Create a Deployment](https://docs.astronomer.io/astro/create-first-DAG#step-1-create-a-deployment).
 - A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A Personal Access Token for your GitHub account. To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-- An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in memory database and skipping Steps [3](#step-3-optional-configure-a-connection), [13](#step-13-optional-deploy-your-dag-to-astro) and [14](#step-14-optional-run-your-dag-on-astro).
+- An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in-memory database and skipping Steps [3](#step-3-optional-configure-a-connection) and [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro).
 
 ## Step 1: Create your Astro Cloud IDE project
 
@@ -69,7 +69,7 @@ The name you give your pipeline will be the name of the DAG which the Astro Clou
 
 ## Step 3: (Optional) Configure a connection
 
-To run your ML model on data, you need to connect to your database. Thankfully, the Astro Cloud IDE handles connection configuration for you!
+To run your ML model on data, you need to connect to your database. Thankfully, the Astro Cloud IDE handles connection configuration for you! If you are using the in-memory database for developing purposes, you can skip this step.
 
 1. Click **Environment** to add connections, variables, and dependencies to your Astro Cloud IDE project. 
 
@@ -89,8 +89,8 @@ To run your ML model on data, you need to connect to your database. Thankfully, 
 
 In the same section where you configured your database connection, open the **Requirements** tab. Here you can add any Python packages that you need for your project. To create the simple ML model, you need to add the `scikit-learn` package. 
 
-1. Click **+ Requirements**
-2. In the "Package name" field, type `scikit-learn`. The Astro Cloud IDE produces a list of packages to choose from.
+1. Click **+ Requirements**.
+2. In the **PACKAGE NAME** field, type `scikit-learn`. The Astro Cloud IDE produces a list of packages to choose from.
 3. Select the version `1.3.1` and click **Add**.
 
     ![Requirements dialogue showing scikit-learn added.](/img/tutorials/cloud-ide-tutorial_new_req.png)
@@ -293,7 +293,7 @@ Setting a schedule for your pipeline will determine how this pipeline will be sc
 
 4. Click **Update Settings** to save your schedule.
 
-## Step 10: View your DAG code (Optional)
+## Step 10: View your DAG code 
 
 Through this tutorial, the Astro Cloud IDE was building a DAG based on the configurations you set in the Cloud UI. Export your pipeline as DAG code to see the results of your work.
 
@@ -303,7 +303,7 @@ Through this tutorial, the Astro Cloud IDE was building a DAG based on the confi
 
 2. Click **Download** to download the DAG file.
 
-## Step 11: Connect your GitHub to the Astro Cloud IDE
+## Step 11: (Optional) Connect your GitHub to the Astro Cloud IDE
 
 Now that you have finished creating a pipeline, you can connect GitHub to the Astro Cloud IDE to convert your pipelines to a DAG and deploy it to any Airflow project.
 
@@ -321,7 +321,7 @@ If you are writing pipelines that need access to additional files from your `inc
 
 :::
 
-## Step 12: Commit your DAG to GitHub
+## Step 12: (Optional) Commit your DAG to GitHub
 
 Export your pipeline by committing it to your connected GitHub repository. 
 
