@@ -528,13 +528,6 @@ If your Astro project requires additional build-time arguments to build an image
             astro deploy <your-deployment-id> --image-name ${{ steps.image_tag.outputs.image_tag }}
     ```
 
-</TabItem>
-
-</Tabs>
-
-
-### Example
-
 For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](cli/develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
 
   ```yaml
@@ -584,3 +577,6 @@ If you need guidance configuring a CI/CD pipeline for a more complex use case in
 :::
 
 
+</TabItem>
+
+</Tabs>
