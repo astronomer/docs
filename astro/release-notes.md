@@ -1940,7 +1940,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 ## September 28, 2021
 
-:::danger
+:::warning
 
 This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](set-up-ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 

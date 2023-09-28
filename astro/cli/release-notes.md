@@ -846,7 +846,7 @@ To better protect your Deployments from unexpected errors, `astro deploy` now au
 
 For more information about `astro deploy`, see [CLI command reference](cli/astro-deploy.md).
 
-:::danger Breaking Change
+:::warning Breaking Change
 
 For Deployments running Astro Runtime 4.1.0+, `astro deploy` will no longer complete the code push to your Deployment if your DAGs contain basic errors. If any files in your Astro project contain these errors, then certain deploys might stop working after you upgrade the Astro CLI to 1.3.0.
 
