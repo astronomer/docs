@@ -102,11 +102,11 @@ To configure code deploys from your GitHub repository to Astro, you must have tw
 
 11. Click **Create API Token**, then copy the token that appears.
 
-:::danger
+    :::warning
 
-For security reasons, this is the only opportunity you have to copy your API token. After you exit the modal window, you cannot copy it again. Be sure to save your token in a safe place or paste it immediately.
+    For security reasons, this is the only opportunity you have to copy your API token. After you exit the modal window, you cannot copy it again. Be sure to save your token in a safe place or paste it immediately.
 
-:::
+    :::
 
 12. In GitHub, paste the API Token in the **API Token** field on your GitHub Actions workflow page.
 
