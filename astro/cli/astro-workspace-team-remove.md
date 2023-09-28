@@ -41,7 +41,7 @@ You can retrieve a Team's ID in one of two ways:
 | `<team-id>` | The ID for the Team. Use to override CLI prompts. | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`. |
 | `--workspace-id` | The Workspace for the Team Use to override CLI prompts. | Any valid Workspace ID |
 
-</TabITem>
+</TabItem>
 <TabItem value="software">
 
 ## Usage
