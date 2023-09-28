@@ -262,13 +262,14 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
     - **Connection Type**: HTTP
     - **Host**: `<your-deployment-url>`
     - **Schema**: `https`
-    - **Extras**: 
-        ```json
-        {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer <your-deployment-api-token>"
-        }
-        ```
+    - **Extras**:
+      
+    ```json
+    {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer <your-deployment-api-token>"
+    }
+    ```
 
     See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections).
 
