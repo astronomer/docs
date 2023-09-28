@@ -305,9 +305,9 @@ Through this tutorial, the Astro Cloud IDE was building a DAG based on the confi
 
 ## Step 11: (Optional) Connect your GitHub to the Astro Cloud IDE
 
-Now that you have finished creating a pipeline, you can connect GitHub to the Astro Cloud IDE to convert your pipelines to a DAG and deploy it to any Airflow project.
+Now that you have finished creating a pipeline, you can connect GitHub to the Astro Cloud IDE to deploy your DAG to any Airflow project.
 
-1. Click **Commit** to connect your Astro Cloud IDE Project to your GitHub account. If this is your first time connection this Cloud IDE project to GitHub you will be prompted to configure your GitHub connection. If you've already connected your Astro Cloud IDE project to GitHub, you can skip to [Step 12](#step-12-commit-your-dag-to-github).
+1. Click **Commit** to connect your Astro Cloud IDE Project to your GitHub account. If this is your first time connecting this Cloud IDE project to GitHub you will be prompted to configure your GitHub connection. If you've already connected your Astro Cloud IDE project to GitHub, you can skip to [Step 12](#step-12-commit-your-dag-to-github).
 
     ![Dialogue to configure the GitHub connection of the Cloud IDE.](/img/tutorials/cloud-ide-tutorial_configure_github.png)
 
@@ -327,7 +327,7 @@ Export your pipeline by committing it to your connected GitHub repository.
 
 1. Click **Commit** to open the commit dialogue.
 
-2. Select the `BRANCH TYPE` `New Branch` to create a new branch in your GitHub repository to commit the Cloud IDE DAG to. Specify which existing branch to branch off of in the `FROM BRANCH` field and give your new branch a name (e.g. `cloud-ide-branch`).
+2. Select the **BRANCH TYPE** `New Branch` to create a new branch in your GitHub repository to commit the Cloud IDE DAG to. Specify which existing branch to branch off of in the **FROM BRANCH** field and give your new branch a name (e.g. `cloud-ide-branch`).
 
     ![Commit to GitHub dialogue showing a new branch called cloud-ide-branch being created from the main branch with the commit message 'Woof!'.](/img/tutorials/cloud-ide-tutorial_new_branch.png)
 
