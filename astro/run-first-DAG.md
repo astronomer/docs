@@ -24,11 +24,15 @@ If you're new to Airflow and want a more in-depth tutorial, see [Write your Firs
 
 ## Compare your options
 
-| ----------------------------------- | Astro CLI                                           | GitHub Actions                                                                 |
-| ----------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Local software installs required    | Yes, you need to install the Astro CLI.             | No, you do not need to install anything.                                       |
-| Explore how to develop locally      | Yes, the Astro CLI creates a local Airflow project. | No, GitHub Actions follows remote deployment workflows.                        |
-| Try a CI/CD workflow                | No, this uses DAG only deploys.                     | Yes, you can use GitHub Actions for automated DAG deploys in a CI/CD pipeline. |
+If you prefer to develop on your local machine and use command line tools, follow the steps in [Run your first DAG with the Astro CLI](first-DAG-cli.md).
+
+If you can't install additional tools on your current machine or you prefer a no-code workflow, follow the steps in [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+
+| Scenario                               | Recommendation |
+| -------------------------------------- | -------------- |
+| Explore local development              | Astro CLI      |
+| Don't want to install software locally | GitHub Actions |
+| Try a CI/CD workflow                   | GitHub Actions |
 
 ## Next Steps
 
