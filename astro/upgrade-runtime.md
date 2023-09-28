@@ -174,12 +174,12 @@ Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet su
 
 ##### Provider incompatibilities
 
-There is an incompatibility between Astro Runtime 8 and the following provider packages:
+There is an incompatibility between Astro Runtime 8 and the following provider packages installed together:
 
 - `apache-airflow-providers-cncf-kubernetes==6.1.0`
 - `apache-airflow-providers-google==10.0.0`
 
-That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt`file.
+That can be resolved by pinning `apache-airflow-providers-google==10.9.0` or greater in your `requirements.txt` file.
 
 This incompatibility results in breaking the GKEStartPodOperator. This operator inherits from the KubernetesPodOperator, but then overrides the hook attribute with the GKEPodHook. In the included version of the `cncf-kubernetes` providers package, the KubernetesPodOperator uses a new method, `get_xcom_sidecar_container_resources`. This method is present in the KubernetesHook, but not the GKEPodHook. Therefore, when it is called it causes the task execution to break. 
 
