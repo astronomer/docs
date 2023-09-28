@@ -251,6 +251,6 @@ It is sometimes necessary to implement cross-DAG dependencies where the DAGs do 
 
 ### Cross-deployment dependencies on Astro
 
-To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the steps for triggering a DAG using the Airflow API. Before you get started, you should review [Make requests to the Airflow REST API](https://docs.astronomer.io/astro/airflow-api). When you're ready to implement a cross-deployment dependency, use the example provided [here](https://docs.astronomer.io/astro/airflow-api#trigger-dag-runs-across-deployments)
+To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the steps for triggering a DAG using the Airflow API. Before you get started, review [Make requests to the Airflow REST API](https://docs.astronomer.io/astro/airflow-api). Then, follow the steps in [Trigger DAG runs across Deployments](https://docs.astronomer.io/astro/airflow-api#trigger-dag-runs-across-deployments).
 
 You can follow similar steps to implement cross-deployment dependencies on Astronomer Software. See [Make requests to the Airflow REST API](https://docs.astronomer.io/software/airflow-api) for Software-specific instructions on accessing the Airflow API.
