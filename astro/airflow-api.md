@@ -247,7 +247,7 @@ response = requests.patch(
 print(response.json())
 # Prints data about the DAG with id <dag-id>
 ```
-## Trigger DAG runs across Deployments
+### Trigger DAG runs across Deployments
 
 You can use the Airflow REST API to make a request in one Deployment that triggers a DAG run in a different Deployment. This is sometimes necessary when you have interdependent workflows across multiple Deployments. On Astro, you can do this for any Deployment in any Workspace or cluster. 
 
