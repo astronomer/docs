@@ -262,7 +262,8 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
     - **Connection Type**: HTTP
     - **Host**: `<your-deployment-url>`
     - **Schema**: `https`
-    - **Extras**: 
+    - **Extras**:
+      
         ```json
         {
             "Content-Type": "application/json",
