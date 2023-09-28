@@ -37,9 +37,10 @@ You can retrieve a Team's ID in one of two ways:
 
 #### Options
 
-| ----------------------------- | -------------------------- | ---------------------- |
-| `<team-id>` | The ID for the Team. Use to override CLI prompts. | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`. |
-| `--workspace-id` | The Workspace for the Team Use to override CLI prompts. | Any valid Workspace ID |
+| Option           | Description                                             | Possible Values                                                            |
+| ---------------- | ------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `<team-id>`      | The ID for the Team. Use to override CLI prompts.       | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`. |
+| `--workspace-id` | The Workspace for the Team Use to override CLI prompts. | Any valid Workspace ID                                                     |
 
 </TabItem>
 <TabItem value="software">
@@ -57,9 +58,10 @@ You can retrieve a Team's ID in one of two ways:
 
 #### Options
 
-| ----------------------------- | -------------------------- | ---------------------- |
-| `<team-id>` | The ID for the Team. | Any valid Team ID. To retrieve a Team ID, run `astro workspace list`. |
-| `--workspace-id` (_Required_) | The Workspace for the Team. | Any valid Workspace ID |
+| Option                        | Description                 | Possible Values                                                       |
+| ----------------------------- | --------------------------- | --------------------------------------------------------------------- |
+| `<team-id>`                   | The ID for the Team.        | Any valid Team ID. To retrieve a Team ID, run `astro workspace list`. |
+| `--workspace-id` (_Required_) | The Workspace for the Team. | Any valid Workspace ID                                                |
 
 </TabItem>
 </Tabs>
