@@ -34,7 +34,7 @@ If you run the command with no options specified, the CLI lists Teams in your Or
 
 To add a Team to a specific Workspace, specify the Workspace using the `--workspace-id` flag. To find a Workspace ID, run `astro workspace list`.
 
-## Options
+#### Options
 
 | Option           | Description                                                               | Valid Values                                                                                                                           |
 | ---------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -48,7 +48,7 @@ To add a Team to a specific Workspace, specify the Workspace using the `--worksp
 
 Manage Astronomer Software [Teams](https://docs.astronomer.io/software/import-idp-groups).
 
-#### Usage
+## Usage
 
 If you want to add a team to the current Workspace with the default role of Workspace Member, you can run `astro workspace team add <team-id>`, with the team ID that you want to add.
 

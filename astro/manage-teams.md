@@ -103,7 +103,10 @@ You can use the Astro CLI and a shell script to add a Team to multiple Workspace
     sh path/to/add-teams.sh path/to/teams.txt
     ```
 
-6. (Optional) To use this script as part of a CI/CD pipeline, create an [Organization API token](organization-api-tokens.md) and specify the environment variable `ASTRO_API_TOKEN=<your-token>` in your CI/CD environment.
+6. (Optional) To use this script as part of a CI/CD pipeline, create an [Organization API token](organization-api-tokens.md) and specify the following environment variable in your CI/CD environment:
+
+    - **Key**:  `ASTRO_API_TOKEN`
+    - **Value**: `<your-api-token>`
 
 ## Teams and SCIM provisioning
 
