@@ -35,7 +35,7 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
 
 - Add `ASTRO_API_TOKEN` to your repository and include a check in your GitHub workflow to verify that it exists. 
 - Use Deployment API tokens, which are scoped only to one Deployment, instead of Workspace or Organization API tokens.
-- Specify `deployment-id` or `deplyment-name` in your action as shown in the following templates.
+- Specify `deployment-id` or `deployment-name` in your action. For example, `astro deploy <deployment-id> or `astro deploy -n <deployment-name>`.
 - Add the command `astro logout` at the end of your workflow to ensure that your authentication token is cleared from the `config.yaml` file.
 
 :::
