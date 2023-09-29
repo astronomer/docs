@@ -12,7 +12,7 @@ For more information about Airflow and AWS connections, see [Amazon Web Services
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](develop-project.md#create-an-astro-project) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
+- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](cli/develop-project.md#add-python-and-os-level-packages).
 - An IAM role with the `SecretsManagerReadWrite` policy that your Astro cluster can assume. See [AWS IAM roles](https://docs.astronomer.io/astro/connect-aws?tab=AWS%20IAM%20roles#authorization-options).
 
 ## Step 1: Add Airflow secrets to Secrets Manager

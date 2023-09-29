@@ -17,7 +17,7 @@ This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.i
 - A [Deployment](create-deployment.md) on Astro.
 - [The Astro CLI](cli/overview.md).
 - A local or hosted Vault server. See [Starting the Server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) or [Create a Vault Cluster on HCP](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault).
-- An [Astro project](develop-project.md#create-an-astro-project).
+- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project).
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
 - Your Vault Server's URL. If you're using a local server, this should be `http://127.0.0.1:8200/`.
 

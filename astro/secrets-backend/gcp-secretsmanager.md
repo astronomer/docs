@@ -10,7 +10,7 @@ This topic provides setup steps for configuring [Google Cloud Secret Manager](ht
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](develop-project.md#create-an-astro-project).
+- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project).
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
@@ -59,7 +59,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 
 3. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
-To ensure the security of secrets, the `.env` variable is only available in your local environment and not in the Cloud UI . See [Set Environment Variables Locally](https://docs.astronomer.io/astro/develop-project#set-environment-variables-locally).
+To ensure the security of secrets, the `.env` variable is only available in your local environment and not in the Cloud UI . See [Set Environment Variables Locally](cli/develop-project.md#set-environment-variables-locally).
 
 ## Step 4: Configure Secret Manager on Astro using a service account JSON key file
 

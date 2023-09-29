@@ -10,7 +10,7 @@ This topic provides setup steps for configuring [Azure Key Vault](https://azure.
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](develop-project.md#create-an-astro-project).
+- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project).
 - An existing Azure Key Vault linked to a resource group.
 - Your Key Vault URL. To find this, go to your Key Vault overview page > **Vault URI**.
 
