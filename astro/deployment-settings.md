@@ -143,7 +143,8 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
     
-    The max possible CPU quota and Memory quota for a Deployment running in a Hosted dedicated or shared cluster is 1600 vCPU/ 3200 GiB respectively.
+     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
+     
 4. After you change the Pod size, wait for a couple of minutes before running your tasks. This is to allow the changes to be applied to the config map of your cluster. 
 
 Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
