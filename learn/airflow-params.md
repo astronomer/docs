@@ -61,6 +61,12 @@ This button opens a UI in which you can specify details for the DAG run:
 
 ![Trigger DAG UI](/img/guides/airflow-params_trigger_dag_ui_500.png)
 
+:::info
+
+In Airflow 2.7+, you need to explicitly set the environment variable `AIRFLOW__WEBSERVER__SHOW_TRIGGER_FORM_IF_NO_PARAMS=True` for the **Trigger DAG w/ config** button to appear in the Airflow UI.
+
+:::
+
 - You can set the **Logical date** of the DAG run to any date that is in between the `start_date` and the `end_date` of the DAG to create DAG runs in the past or future.
 - You can set the **Run id** to any string. If no run ID is specified, Airflow generates one based on the type of run (`scheduled`, `dataset_triggered`, `manual` or `backfill`) and the logical date (for example: `manual__2023-06-16T08:03:45+00:00`). 
 - You can select configurations from recent DAG runs in the **Select Recent Configurations** dropdown menu.

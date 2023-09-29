@@ -5,9 +5,78 @@ id: release-notes
 description: Astronomer Software release notes.
 ---
 
-This document contains release notes for each version of Astronomer Software.
+This page contains release notes for all recent Astronomer Software versions. 
 
-0.32 is the latest long-term support (LTS) release for Astronomer Software. To upgrade to 0.32, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels and currently maintained versions of Astronomer Software, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+
+## 0.33.0
+
+Release date: August 3, 2023
+
+### Automatic PGBouncer connection scaling
+
+Astronomer Software now automatically scales the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This improves performance, scalability, and utilization of database connections across all Deployments. 
+
+### Additional improvements
+
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
+- Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
+- The Workspace **Deployments** page is now paginated in the Astronomer UI.
+- The **Extra Capacity** field in the Astronomer UI now shows up to 6 digits of AU.
+- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`.
+- When you create or update a Deployment and select a Runtime version, the Astronomer UI now shows only the latest supported Astro Runtime patch for each supported Astro Runtime major version.
+- You can now set `deployments.canUpsertDeploymentFromUI: false` to prevent all users besides System Admins from updating Deployments and environment variables through the Astronomer UI.
+- You can now [overprovision](https://docs.astronomer.io/software/cluster-resource-provisioning) the `triggerer-log-groomer` component.
+
+### Bug fixes
+
+- Fixed an issue where a Deployment using Runtime 8 or earlier with the Celery executor would show as healthy in the Software UI even when workers were unavailable.
+- Fixed an issue where Grafana could not start up on an OpenShift cluster.
+- Fixed an issue where configurations in `astronomer.houston.config.deployments.components` applied only to Deployments that were created after the configuration was set. 
+- Fixed an issue where a Workspace-level service account would improperly inherit lesser permissions for Deployments it was added to.
+- The Astronomer UI now shows an error if you click the **Delete** button for Teams and you don't have the `system.teams.remove` permission.
+- Fixed an issue where you couldn't upgrade a Deployment's Airflow version if the Deployment used git-sync deploys and had default resources.
+- Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG.
+- Fixed an issue where you couldn't set `properties.email` using the `upsertDeployment` mutation.
+- Fixed an issue where the Astronomer UI would not show the right error screen when a user without the appropriate permissions viewed service accounts. 
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)
+    - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+    - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+
+## 0.32.3
+
+Release date: August 31, 2023
+
+### Additional improvements
+
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `Values.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.platform.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
+- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `global.loggingSidecar.indexPattern`.
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
+- You can now [overprovision](https://docs.astronomer.io/software/cluster-resource-provisioning) the `triggerer-log-groomer` component.
+- You can now set `astronomer.houston.enableHoustonInternalAuthorization` in your `config.yaml` file to redirect all authorization requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.
+- Upgraded ElasticSearch to 8.x.
+
+### Bug fixes
+
+- Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments.
+- Fixed an issue where Grafana could not start up on an OpenShift cluster.
+- Fixed an issue where a Deployment using Runtime 8 or earlier with the Celery executor would show as healthy in the Software UI even when workers were unavailable.
+- Fixed an issue where a System Admin user that did not belong to a Team could delete the Team from the Software UI.
+- Fixed an issue where syncing an IdP group from Okta failed when SCIM was enabled and a user account was removed only from Astronomer Software.
+- Fixed an issue where you couldn't upgrade a Deployment's Airflow version if the Deployment used git-sync deploys and had default resources.
+- Fixed an issue where the user login process would be unresponsive if the Houston API failed to retrieve IdP group information from Azure.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+    - [CVE-2023-36665](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-36665)
+    - [CVE-2023-2650](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650)
 
 ## 0.32.2
 
@@ -304,6 +373,56 @@ If your current usage is expected and higher than the default resource limits, u
 - Fixed an issue where NATS would send false Deployment alert emails.
 - Fixed an issue where the configuration in `astronomer.houston.updateRuntimeCheck.url` was ignored if not all supported Deployment image versions were present in the destination URL. 
 
+## 0.30.8
+
+Release date: September 15, 2023
+
+### Additional improvements
+
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
+- You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
+- You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`. 
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file. 
+- The Kibana logging dashboard now includes a default index. 
+- Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
+
+### Bug fixes
+
+- Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API might retrieve the unintended Deployment. 
+- Fixed an issue where Helm changes to statsd Pod resources would apply only to new Deployments. 
+- Fixed an issue where data for **Disk Usage** and **Platform Overview** did not appear in Grafana. 
+- Fixed an issue where you could get a 500 internal server error from the Airflow UI when switching between pages for a DAG. 
+- Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
+- Removed support for Kubernetes 1.22.
+- Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.
+- Fixed an issue where you couldn't create registry service accounts on Openshift clusters. 
+- Fixed the following vulnerabilities:
+
+    - [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2022-48174)
+    - [CVE-2023-38325](https://nvd.nist.gov/vuln/detail/CVE-2023-38325)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2022-48174)
+    - [CVE-2022-41723](https://nvd.nist.gov/vuln/detail/CVE-2022-41723)
+    - [CVE-2022-29458](https://nvd.nist.gov/vuln/detail/CVE-2022-29458)
+    - [CVE-2023-0464](https://nvd.nist.gov/vuln/detail/CVE-2023-0464)
+    - [CVE-2023-2650](https://nvd.nist.gov/vuln/detail/CVE-2023-2650)
+    - [CVE-2022-29458](https://nvd.nist.gov/vuln/detail/CVE-2022-29458)
+    - [CVE-2023-27561](https://nvd.nist.gov/vuln/detail/CVE-2023-27561)
+    - [CVE-2017-11468](https://nvd.nist.gov/vuln/detail/CVE-2017-11468)
+    - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-28840](https://nvd.nist.gov/vuln/detail/CVE-2023-28840)
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)
+    - [CVE-2023-28319](https://nvd.nist.gov/vuln/detail/CVE-2023-28319)
+    - [CVE-2023-29491](https://nvd.nist.gov/vuln/detail/CVE-2023-29491)
+    - [CVE-2023-35945](https://nvd.nist.gov/vuln/detail/CVE-2023-35945)
+    - [CVE-2023-37920](https://nvd.nist.gov/vuln/detail/CVE-2023-37920)
+    - [CVE-2022-41721](https://nvd.nist.gov/vuln/detail/CVE-2022-41721)
+    - [CVE-2023-39417](https://nvd.nist.gov/vuln/detail/CVE-2023-39417)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
+    - [CVE-2023-40577](https://nvd.nist.gov/vuln/detail/CVE-2023-40577)
+    - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
+
 ## 0.30.7
 
 Release date: May 26, 2023
@@ -495,7 +614,7 @@ Release date: September 12, 2022
 
 Release date: August 29, 2022
 
-:::danger Breaking Change for Azure Database for PostgreSQL
+:::warning Breaking Change for Azure Database for PostgreSQL
 
 A change in 0.30 enabled the `trgm` extension for PostgreSQL. If you use Azure Database for PostgreSQL as your database backend, you need to enable the `pg_trgm` extension before upgrading to Software 0.30 using either Azure portal or the Azure CLI. See [Azure documentation](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions) for configuration steps.
 

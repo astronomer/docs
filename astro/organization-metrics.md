@@ -8,9 +8,7 @@ Organization metrics help Organization Owners and Billing Admins track resource 
 
 ## Astro usage
 
-To access the **Usage** page, click your Workspace name in the upper left corner of the Cloud UI and click **Organization Settings**. Then, click **Usage**.
-
-Use the **Usage** page to review the number of successful task runs across Deployments in your Organization.
+The **Usage** page shows the total number of successful task runs across all Deployments in your Organization. To access the **Usage** page, click your Workspace name in the upper left corner of the Cloud UI and click **Organization Settings**. Then, click **Usage**.
 
 ![Usage tab in the Cloud UI](/img/docs/usage.png)
 

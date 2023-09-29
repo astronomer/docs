@@ -44,7 +44,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 
 ## Prerequisites
 
-- An [Astro project](develop-project.md#create-an-astro-project).
+- An [Astro project](cli/develop-project.md#create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
 
 ## Set up the KubernetesPodOperator
@@ -168,7 +168,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 
 #### Prerequisites
 
-- An [Astro project](develop-project.md#create-an-astro-project).
+- An [Astro project](cli/get-started-cli.md).
 - An [Astro Deployment](deployment-settings.md).
 - Access to a private Docker registry.
 

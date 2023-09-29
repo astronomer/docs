@@ -49,7 +49,7 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    Confirmation messages appear in the Cloud UI and in the Astro CLI indicating that your login was successful and that your computer is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, see [astro workspace switch](cli/astro-workspace-switch.md).
+    Confirmation messages appear in the Cloud UI and in the Astro CLI indicating that your login was successful and that your computer is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, run [astro workspace switch](cli/astro-workspace-switch.md).
 
 ## Log in from a browserless system
 

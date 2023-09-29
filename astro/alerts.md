@@ -23,7 +23,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 ## Prerequisites
 
-- An [Astro project](develop-project.md).
+- An [Astro project](cli/develop-project.md).
 - An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage). 
 - A Slack workspace, PagerDuty service, or email address.
 

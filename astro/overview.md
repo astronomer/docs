@@ -33,7 +33,7 @@ import AstroCard from '@site/src/components/AstroCard';
 ## Featured Astro docs
 
 <LinkCardGrid>
-  <LinkCard truncate label="Develop your Astro project" description="Add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." href="/astro/develop-project" />
+  <LinkCard truncate label="Get started with the Astro CLI" description="Create an Astro project and run it locally to start developing your DAGs." href="/astro/cli/get-started-cli" />
   <LinkCard truncate label="Automate code deploys with CI/CD" description="Configure your Airflow environments to run faster and cost less." href="/astro/set-up-ci-cd" />
   <LinkCard truncate label="Deploy code to Astro" description="Use the Astro CLI to push your Astro project to a Deployment" href="/astro/deploy-code" />
 </LinkCardGrid>

@@ -25,7 +25,7 @@ This section of documentation covers how to automate processes on Astro using As
 
 ### Workspace actions
 
-- [Manage users, Teams, and tokens](cli/astro-workspace-team.md) in your Workspace.
+- [Manage users, Teams, and tokens](cli/astro-workspace-list.md) in your Workspace.
 - Create [preview Deployments](ci-cd-templates/github-actions.md#deployment-preview-templates) using CI/CD. 
 - Perform all Deployment-level actions on any Deployment in a Workspace. 
 

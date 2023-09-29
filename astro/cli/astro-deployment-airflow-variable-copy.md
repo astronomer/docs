@@ -18,7 +18,7 @@ This command only copies Airflow variables that were configured through the Airf
 
 :::tip
 
-This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate Workspace API Token and set the following OS-level environment variable in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate a Deployment or Workspace API Token and set the following OS-level environment variable in a way that the Astro CLI can access them:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
