@@ -49,7 +49,7 @@ To find a Team ID in the Cloud UI, click your Workspace name in the upper left c
 </TabItem>
 <TabItem value="software">
 
-#### Usage
+## Usage
 
 ```sh
 astro workspace team update <team-id> --workspace-id <workspace-id> --role=<system-role>
