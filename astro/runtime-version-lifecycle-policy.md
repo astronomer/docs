@@ -81,7 +81,6 @@ The following table contains the exact lifecycle for each published version of A
 
 | Runtime version  | Airflow version | Release date | End of maintenance date |
 | ---- | ----- | - | ---- | 
-| [4](runtime-release-notes.md#astro-runtime-420) (LTS)   | 2.2 | March 10, 2022       | September 2023   |
 | [5](runtime-release-notes.md#astro-runtime-500) (LTS)   | 2.3 | April 30, 2022       | April 2024       |
 | [6](runtime-release-notes.md#astro-runtime-600) (LTS)   | 2.4 | September 19, 2022   | March 2024       |
 | [7](runtime-release-notes.md#astro-runtime-700)         | 2.5 | December 3, 2022     | July 2023        |
