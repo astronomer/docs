@@ -33,8 +33,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 - Added a new Pipeline Alert option, **DAG Success** to the Cloud UI so you can now add set up an alert for completion events, instead of just for failures and timeouts.
 
-- Improved the suggestions when using **Write with AI** in the Cloud IDE. 
-
 ### Bug Fixes
 
 - Fixed a problem in the Cloud UI where a warning about Deployment Health was displayed when a Workspace had zero Deployments.
