@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or through email if you have a DAG run failure or if a task duration exceeds a specified time. 
+Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or through email when a DAG completes, if you have a DAG run failure, or if a task duration exceeds a specified time. 
 
 Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. Follow this guide to set up your Slack, PagerDuty, or email to receive alerts from Astro and then configure your Deployment to send alerts.
 
@@ -102,7 +102,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 2. Click **Add Alert**. 
 
-3. Enter your **Alert Name** and choose the alert type, either **Pipeline Failure** or **Task Duration**. 
+3. Enter your **Alert Name** and choose the alert type, **DAG Success**, **DAG Failure**, or **Task Duration**. 
 
 4. Choose the **Communication Channels** where you want to send your alert.
 
@@ -141,7 +141,9 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 6. Add DAG or Tasks to your alert.
 
-     - **Pipeline failure**: Click **Pipeline** to choose the DAG that you want to send an alert about if it fails.
+     - **DAG failure**: Click **DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
+
+    - **DAG success**: Click **DAG** and choose the Deployment and the DAG that you want to send an alert about when it completes.
     
     - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
 
