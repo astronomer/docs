@@ -59,11 +59,11 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
 
 :::
 
-## Step 2: Create an Astro Workspace
+## Step 2: Create an Astro Workspace (Optional)
 
 <Workspaces />
 
-## Step 3: Create an Astro Deployment
+## Step 3: Create an Astro Deployment (Optional)
 
 <Deployments />
 
@@ -96,12 +96,11 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
 
 2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your source Airflow environment. 
 
-  :::caution 
+    :::caution 
 
-  To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on Cloud composer, you would add `apache-airflow-providers-snowflake
-==3.3.0` to your Astro `requirements.txt` file.
+    To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on Cloud composer, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 
-  :::
+    :::
 
 3. Open your Astro project `dags` folder. Copy your DAG files to `dags` from either your source control platform or GCS Bucket.
 
@@ -128,12 +127,11 @@ gcloud composer environments update [GCC_ENVIRONMENT_NAME] \
 
     Review the output in `requirements.txt` after running this command to ensure that all packages were imported on their own line of text.
 
-  :::caution 
+    :::caution 
 
-  To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on Cloud composer, you would add `apache-airflow-providers-snowflake
-==3.3.0` to your Astro `requirements.txt` file.
+    To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on Cloud composer, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 
-  :::
+    :::
 
 3. Run the following command to copy your DAGs from Cloud Composer to your `dags` folder:
 
@@ -190,7 +188,7 @@ Depending on how thoroughly you want to test your Airflow environment, you have 
 
 - In your Astro project directory, run `astro dev parse` to check for any parsing errors in your DAGs.
 - Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
-- Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+- Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 
 Note that your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 
 

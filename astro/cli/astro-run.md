@@ -8,7 +8,8 @@ hide_table_of_contents: true
 
 Trigger a single DAG run in a local Airflow environment and see task success or failure in your terminal. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
 
-For more information, see [Run a DAG with Astro Run](test-and-troubleshoot-locally.md#run-a-dag-with-astro-run).
+For more information, see [Test your Astro project locally](cli/test-your-astro-project-locally.md).
+
 
 ## Usage
 

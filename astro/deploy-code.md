@@ -16,5 +16,5 @@ For each deploy option, you can either trigger the deploy manually or through CI
 
 ## See also
 
-- [Create an Astro project](develop-project.md#create-an-astro-project)
-- [Develop your Astro project](develop-project.md)
+- [Create an Astro project](cli/develop-project.md#create-an-astro-project)
+- [Develop your Astro project](cli/develop-project.md)

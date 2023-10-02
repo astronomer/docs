@@ -14,7 +14,7 @@ Update an Astro Workspace.
 astro workspace update <workspace-id> <options>
 ```
 
-You can find a Workspace's ID by running `astro workspace list`. If you do not provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization. 
+You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. If you do not provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization. 
 
 ## Options
 

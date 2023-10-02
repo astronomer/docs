@@ -22,9 +22,9 @@ For more information on each template or to configure your own, see [Template ov
 
 ## Prerequisites
 
-- An [Astro project](develop-project.md#create-an-astro-project) hosted in a Git repository that Jenkins can access.
+- An [Astro project](cli/develop-project.md#create-an-astro-project) hosted in a Git repository that Jenkins can access.
 - An [Astro Deployment](create-deployment.md).
-- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
+- A [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md).
 - Access to [Jenkins](https://www.jenkins.io/).
 
 Each CI/CD template implementation might have additional requirements.

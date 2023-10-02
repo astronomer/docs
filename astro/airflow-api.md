@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 You can use the Airflow [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
 
-To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#make-requests-to-the-airflow-rest-api).
+To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 
 :::info
 
@@ -47,9 +47,9 @@ Follow the steps in [Create a Orgaization API token](organization-api-tokens.md#
 
 <TabItem value="deployment" label="Deployment API key">
 
-:::caution
+:::warning
 
-Deployment API keys will soon be deprecated in favor of Deployment API tokens, which is an upcoming Astro feature. If you have strict Deployment-level security requirements, you can continue to use Deployment API keys, but you will have to complete a one-time migration to Deployment API tokens in the future. Otherwise, Astronomer recommends using either [Workspace API tokens](workspace-api-tokens.md) or [Organization API tokens](organization-api-tokens.md) in place of Deployment API keys.
+Deployment API keys will soon be deprecated in favor of [Deployment API tokens](deployment-api-tokens.md). You can continue to use existing Deployment API keys for now, but you will have to complete a one-time migration to Deployment API tokens in the future.
 
 :::
 
@@ -247,50 +247,59 @@ response = requests.patch(
 print(response.json())
 # Prints data about the DAG with id <dag-id>
 ```
-## Trigger DAG runs across Deployments
+### Trigger DAG runs across Deployments
 
 You can use the Airflow REST API to make a request in one Deployment that triggers a DAG run in a different Deployment. This is sometimes necessary when you have interdependent workflows across multiple Deployments. On Astro, you can do this for any Deployment in any Workspace or cluster. 
 
 This topic has guidelines on how to trigger a DAG run, but you can modify the example DAG provided to trigger any request that's supported in the Airflow REST API.
 
-1. On the target Deployment, create an API key ID and API key secret. See [Create an API key](api-keys.md#create-an-api-key).
+1. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment that contains the DAG you want to trigger.
 
-2. On the triggering Deployment, set the API key ID and API key secret from the target Deployment as `KEY_ID` and `KEY_SECRET` environment variables in the Cloud UI. Make `KEY_SECRET` secret. See [Set environment variables on Astro](environment-variables.md).
 
-3. In your DAG, write a task called `get-token` that uses your Deployment API key ID and secret to make a request to the Astronomer API that retrieves the access token that's required for authentication to the Airflow API. In another task called `trigger_external_dag`, use the access token to make a request to the `dagRuns` endpoint of the Airflow REST API. Make sure to replace `<target-deployment-url>` with your own value. For example:
+2. In the Deployment that contains the triggering DAG, create an [Airflow HTTP connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) with the following values: 
 
-    ````python
-    import requests
+    - **Connection Id**: `http_conn`
+    - **Connection Type**: HTTP
+    - **Host**: `<your-deployment-url>`
+    - **Schema**: `https`
+    - **Extras**:
+      
+    ```json
+    {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer <your-deployment-api-token>"
+    }
+    ```
+
+    See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections).
+
+  :::info
+
+  If the `HTTP` connection type is not available, double check that the [HTTP provider](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest) is installed in your Airflow environment. If it's not, add `apache-airflow-providers-http` to the `requirements.txt` file of our Astro project and redeploy it to Astro. 
+
+  :::
+
+
+3. In your triggering DAG, add the following task. It uses the [SimpleHttpOperator](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest/modules/SimpleHttpOperator) to make a request to the `dagRuns` endpoint of the Deployment that contains the DAG to trigger.
+
+    ```python
     from datetime import datetime
-    import os
-    from airflow.decorators import dag, task
-    KEY_ID = os.environ.get("KEY_ID")
-    KEY_SECRET = os.environ.get("KEY_SECRET")
-    AIRFLOW_URL = "<target-deployment-url>"
-    @dag(schedule="@daily",
-        start_date=datetime(2022, 1, 1),
-        catchup=False)
-    def triggering_dag():
-        @task
-        def get_token():
-            response = requests.post("https://auth.astronomer.io/oauth/token",
-                                    json={"audience": "astronomer-ee",
-                                        "grant_type": "client_credentials",
-                                        "client_id": {KEY_ID},
-                                        "client_secret": {KEY_SECRET})
-            return response.json()<"access_token">
-        @task
-        def trigger_external_dag(token):
-            dag_id = "target"
-            response = requests.post(
-                url=f"{AIRFLOW_URL}/api/v1/dags/{dag_id}/dagRuns",
-                headers={
-                    "Authorization": f"Bearer {token}",
-                    "Content-Type": "application/json"
-                },
-                data='{"logical_date": "' + datetime.utcnow().isoformat().split(".")[0] + 'Z"}'
-            )
-            print(response.json())
-        trigger_external_dag(get_token())
-    a = triggering_dag()
+    from airflow import DAG
+    from airflow.providers.http.operators.http import SimpleHttpOperator
+
+    with DAG(dag_id="triggering_dag", schedule=None, start_date=datetime(2023, 1, 1)):
+        SimpleHttpOperator(
+            task_id="trigger_external_dag",
+            log_response=True,
+            method="POST",
+                # Change this to the DAG_ID of the DAG you are triggering
+            endpoint=f"api/v1/dags/<triggered_dag>/dagRuns",
+            http_conn_id="http_conn",
+            data={
+                "logical_date": "{{ logical_date }}",
+                
+                # if you want to add parameters:
+                # params: '{"foo": "bar"}'
+            }
+        )
     ```

@@ -5,7 +5,7 @@ id: astro-deployment-worker-queue-update
 description: Reference documentation for astro deployment worker-queue update.
 ---
 
-Update the settings for an existing [worker queue](deployment-settings.md#worker-queues) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Cloud UI.
+Update the settings for an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Cloud UI.
 
 ## Usage
 

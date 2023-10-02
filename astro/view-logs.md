@@ -57,7 +57,7 @@ Airflow task logs for both local Airflow environments and Deployments on Astro a
 
 On Astro, Airflow task logs are stored in your cluster. On Amazon Web Services (AWS), they are stored in S3. On Google Cloud Platform (GCP), they are stored in Cloud Storage. On Azure, they are stored in Azure Blob Storage. 
 
-On clusters hosted in your own cloud, task logs are stored indefinitely. On clusters hosted in Astronomer's cloud, task logs are hosted for 90 days. The task log retention policy is not currently configurable.
+On clusters hosted in your own cloud, task logs are stored indefinitely. On clusters hosted in Astronomer's cloud, task logs are retained for 90 days. The task log retention policy is not currently configurable.
 
 To access task logs from the Cloud UI:
 
@@ -116,13 +116,13 @@ By default, running `astro dev logs` shows logs for all Airflow components. To s
 
 To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md).
 
-## Export task logs to Datadog (_AWS only_)
+## Export task logs to Datadog
 
 You can forward Airflow task logs from a Deployment to [Datadog](https://www.datadoghq.com/) using a Datadog API key. Complete the following setup to view Airflow task logs from your Datadog instance.
 
 #### Prerequisites
 
-- Your Deployment must be running Astro Runtime 9. See [Upgrade Astro Runtime](upgrade-runtime.md).
+- Your Deployment must be running Astro Runtime 9 (AWS) or 9.1 (Azure and GCP). See [Upgrade Astro Runtime](upgrade-runtime.md).
 
 #### Setup
 
@@ -150,11 +150,6 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
     - **Key**: `DATADOG_SITE`
     - **Value**: Your Datadog site name. For example, `US3`.
-
-4. (Optional) Add the following environment variable to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
-
-   - **Key ** `ASTRO_DATADOG_TASK_LOGS_TAGS`
-   - **Value ** `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
    
 5. Click **Save variable**.
 

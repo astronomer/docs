@@ -198,9 +198,9 @@ Because it requires less code and fewer pieces, it can be tempting to write your
 
 Depending on your data retention policy, you could modify the load logic and rerun the entire historical pipeline without having to rerun the extracts. This is also useful in situations where you no longer have access to the source system such as hitting an API limit.
 
-### Use an ELT framework
+### Use the right tool for the job
 
-Whenever possible, look to implement an ELT (extract, load, transform) data pipeline pattern with your DAGs. This means that you should look to offload as much of the transformation logic to the source systems or the destination systems as possible, to leverage the strength of all tools in your data ecosystem. Many modern data warehouse tools, such as [Snowflake](https://www.snowflake.com/), give you easy access to the ELT framework, and are easily used in conjunction with Airflow.
+Airflow excels at course-grain parallellism. If you need to do large scale transformations or fine-grain parallelism, consider using Airflow to trigger other data processing frameworks.
 
 ## Other best practices
 

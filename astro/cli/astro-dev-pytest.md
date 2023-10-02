@@ -2,15 +2,17 @@
 sidebar_label: "astro dev pytest"
 title: "astro dev pytest"
 id: astro-dev-pytest
-description: Reference documentation for astro dev pytest.
+description: Run unit tests with pytest for DAGs in a local Airflow environment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Run unit tests for your data pipelines on Astro with `pytest`, a testing framework for Python. When you run this command, the Astro CLI creates a local Python environment that includes your DAG code, dependencies, and Astro Runtime Docker image. The CLI then runs any pytests in the `tests` directory of your Astro project and shows you the results of those tests in your terminal.
 
 The command runs `pytest` in a container. If your test generates artifacts, such as code coverage reports, you can output the artifacts to the `include` folder of your Astro project so they can be accessed after the test has finished.
 
-For more information on this functionality, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+For more information on this functionality, see [Test your Astro project locally](cli/test-your-astro-project-locally.md).
+
 
 :::info
 

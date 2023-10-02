@@ -113,7 +113,7 @@ After you add your environment variables, use one of the following options to de
 On Astro, environment variables are applied and overridden in the following order:
 
 - Cloud UI
-- [.env (local development only)](develop-project.md#set-environment-variables-locally)
+- [.env (local development only)](cli/develop-project.md#set-environment-variables-locally)
 - Dockerfile
 
 For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.
