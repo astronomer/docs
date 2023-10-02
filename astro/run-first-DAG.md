@@ -1,13 +1,9 @@
 ---
 sidebar_label: "Run your first DAG"
-title: "Choose how to run your first DAG on Astro"
+title: "Run your first DAG on Astro"
 id: "run-first-DAG"
 ---
 
-<head>
-  <meta name="description" content="Learn how to run your first Apache Airflow DAG on Astro with the Astro CLI or through GitHub Actions." />
-  <meta name="og:description" content="Learn how to run your first Apache Airflow DAG on Astro with the Astro CLI or through GitHub Actions." />
-</head>
 
 Astro is the industry's leading managed service for Apache Airflow.
 
@@ -22,7 +18,7 @@ Either tutorial takes about 15 minutes. They each showcase different paths avail
 
 If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
-## Compare your options
+## Choose a tutorial
 
 If you prefer to develop on your local machine and use command line tools, follow the steps in [Run your first DAG with the Astro CLI](first-DAG-cli.md).
 

@@ -23,7 +23,7 @@ Specifically, you will:
 
 This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
-If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md). Also, if you want to deploy your first DAG without installing any software to a local machine, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md). If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
 
 ## Prerequisites
 

@@ -48,7 +48,7 @@ If you're on your organization's network and can't access Astro, make a request 
 
 ## Step 1: Create a Deployment
 
-An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
+An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within your Workspace.
 
 1. Log in to the [Cloud UI](https://cloud.astronomer.io).
 
@@ -70,12 +70,12 @@ Astro contains an in-product tutorial that guides you through Steps 2-4 of this 
 
 ## Step 2: Fork the example project repository
 
-
 Open a new tab or browser window and [make a fork of the example project repository](https://github.com/astronomer/astro-example-dags/fork) on GitHub.
 
 This repository contains an _Astro project_, which is a collection of files required for running Airflow on Astro. An Astro project includes folders for DAG files, plugins, dependencies, and more.
 
 Specifically, this Astro project includes an example DAG which, when you run it, retrieves a list of countries from an Astro S3 data store and filters the list through a data transform. The repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action). In the next step, you'll configure this action to deploy code from your forked repository to Astro.
+
 ## Step 3: Set up the GitHub Actions Workflow
 
 To configure code deploys from your GitHub repository to Astro, you must have two browser windows open at the same time: one with the [Cloud UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
