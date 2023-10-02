@@ -38,13 +38,13 @@ For more information about the Playground features applicable to the wider Graph
 
 The URL at which you can reach Houston's GraphQL playground depends on the platform you're running. For your installation of Astronomer, it will be `https://houston.BASEDOMAIN/v1/`.
 
-For example, if you're a Software customer and your basedomain is `Astronomer`, you would navigate to https://houston.astronomer/v1/.
+For example, if you're a Software customer and your basedomain is `Astronomer`, you would navigate to `https://houston.astronomer/v1/`.
 
 ### Authenticate
 
 To query the Astronomer Houston API, you must first authenticate as an Astronomer user.
 
-1. Go to https://app.BASEDOMAIN/token and copy the API token. Alternatively, note the **API Key** of a [service account](ci-cd.md#step-1-create-a-service-account).
+1. Go to `https://app.BASEDOMAIN/token` and copy the API token. Alternatively, note the **API Key** of a [service account](ci-cd.md#step-1-create-a-service-account).
 2. Open Astronomer's Houston API GraphQL Playground at `https://houston.BASEDOMAIN/v1`.
 3. Expand the `HTTP Headers` section on the bottom left of the page.
 4. Paste the API token you acquired from Step 1 in the following format: `{"authorization": "<api-token>"}`
