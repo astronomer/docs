@@ -298,7 +298,7 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
 
 1. Run `astro dev start` in your Astro project to start up Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, run the `query_movie_vectors` DAG by clicking the play button. You will be prompted to provider [Airflow params](airflow-params.md) for `movie_concepts` and the `certainty_threshold_percent`.
+2. In the Airflow UI, run the `query_movie_vectors` DAG by clicking the play button. You will be prompted to provide [Airflow params](airflow-params.md) for `movie_concepts` and the `certainty_threshold_percent`.
 
     Note that if you are running the project locally on a larger dataset, the `import_data` task might take a longer time to complete because Weaviate generates the vector embeddings in this task.
 
