@@ -15,7 +15,7 @@ In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, 
 
 :::caution
 
-The provider used in this tutorial is currently in beta and subject to change. Once the provider is released this tutorial will be updated the provider source code will be available.
+The provider used in this tutorial is currently in beta and subject to change. Once the provider is released this tutorial will be updated the provider source code will be available. The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-weaviate-tutorial). 
 
 :::
 

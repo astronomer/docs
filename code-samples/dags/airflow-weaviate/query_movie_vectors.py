@@ -1,3 +1,11 @@
+"""
+## Use the Airflow Weaviate Provider to generate and query vectors for movie descriptions
+
+This DAG runs a simple MLOps pipeline that uses the Weaviate Provider to import 
+movie descriptions, generate vectors for them, and query the vectors for movies based on
+concept descriptions.
+"""
+
 from airflow.decorators import dag, task
 from pendulum import datetime
 from pathlib import Path
@@ -102,6 +110,8 @@ def query_movie_vectors():
         movie_concepts = context["params"]["movie_concepts"]
         certainty_threshold = context["params"]["certainty_threshold_percent"] / 100
 
+        # instead of GraphQL you can also use the Weaviate Python client
+        # https://weaviate.io/developers/weaviate/client-libraries/python
         query = (
             """
             {
