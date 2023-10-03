@@ -15,7 +15,7 @@ In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, 
 
 :::caution
 
-The provider used in this tutorial is currently in beta and subject to change. Once the provider is released, this tutorial will be updated and the provider source code will be available. The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-weaviate-tutorial). 
+The provider used in this tutorial is currently in beta and subject to change. Once the provider is released, this tutorial will be updated and the provider source code will be available.
 
 :::
 
@@ -49,6 +49,12 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 This tutorial uses a local Weaviate instance created as a Docker container. You do not need to install the Weaviate client locally.
 
+:::info
+
+The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-weaviate-tutorial). 
+
+:::
+
 ## Step 1: Configure your Astro project
 
 1. Create a new Astro project:
@@ -61,7 +67,7 @@ This tutorial uses a local Weaviate instance created as a Docker container. You 
 2. Download the `whl` file for the Airflow Weaviate provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/airflow_provider_weaviate-0.0.1-py3-none-any.whl) and save it in your Astro project's `include` directory.
 
 
-3. Change the content of the `Dockerfile` of your Astro project to the following statement importing the`whl` file:
+3. Change the content of the `Dockerfile` of your Astro project to the following statement importing the `whl` file:
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
@@ -94,21 +100,21 @@ The Airflow Weaviate provider is currently in beta and not yet available on PyPI
       ports:
         - 8081:8081
       environment:
-      QUERY_DEFAULTS_LIMIT: 25
-      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
-      DEFAULT_VECTORIZER_MODULE: 'text2vec-transformers'
-      ENABLE_MODULES: 'text2vec-transformers'
-      CLUSTER_HOSTNAME: 'node1'
-      AUTHENTICATION_APIKEY_ENABLED: 'true'
-      AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'readonlykey,adminkey'
-      AUTHENTICATION_APIKEY_USERS: 'jane@doe.com,john@doe.com'
-      TRANSFORMERS_INFERENCE_API: 'http://t2v-transformers:8080'
+        QUERY_DEFAULTS_LIMIT: 25
+        PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+        DEFAULT_VECTORIZER_MODULE: 'text2vec-transformers'
+        ENABLE_MODULES: 'text2vec-transformers'
+        CLUSTER_HOSTNAME: 'node1'
+        AUTHENTICATION_APIKEY_ENABLED: 'true'
+        AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'readonlykey,adminkey'
+        AUTHENTICATION_APIKEY_USERS: 'jane@doe.com,john@doe.com'
+        TRANSFORMERS_INFERENCE_API: 'http://t2v-transformers:8080'
       networks:
         - airflow
     t2v-transformers:
       image: semitechnologies/transformers-inference:sentence-transformers-multi-qa-MiniLM-L6-cos-v1
       environment:
-      ENABLE_CUDA: 0 # set to 1 to enable
+        ENABLE_CUDA: 0 # set to 1 to enable
       ports:
         - 8082:8080
       networks:
@@ -260,33 +266,33 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
 
     This DAG consists of seven tasks comprising a simple ML orchestration pipeline.
 
-    - The `check_schema` task uses the [WeaviateCheckSchemaOperator](https://registry.astronomer.io/) to check if the schema defined in `movie_schema.json` already exists in Weaviate.
+    - The `check_schema` task uses the WeaviateCheckSchemaOperator to check if the schema defined in `movie_schema.json` already exists in Weaviate.
     - The `branch_create_schema` is defined with a `@task.branch` operator to decide whether the `create_schema` task should be run based on the result of the `check_schema` task. If the schema already exists, the empty `schema_exists` task is run instead.
-    - The `create_schema` task uses the [WeaviateCreateSchemaOperator](https://registry.astronomer.io/) to create the schema defined in `movie_schema.json` in Weaviate. 
+    - The `create_schema` task uses the WeaviateCreateSchemaOperator to create the schema defined in `movie_schema.json` in Weaviate. 
     - The `create_parquet_file` task runs the function defined in the `text_to_parquet_script.py` file to create a parquet file from the `movie_data.txt` file.
-    - The `ingest_data` task defined using the [@task.weaviate_import](https://registry.astronomer.io/) decorator ingests the data into Weaviate. Note that you can run any Python code on the data before ingesting it into Weaviate, making it possible to create your own embeddings or complete other transformations before it is ingested. To import your own vectors, specify the column containing vectors in the dictionary that is returned by the task with the key `embedding_column`:
+    - The `ingest_data` task defined using the @task.weaviate_import decorator ingests the data into Weaviate. Note that you can run any Python code on the data before ingesting it into Weaviate, making it possible to create your own embeddings or complete other transformations before it is ingested. To import your own vectors, specify the column containing vectors in the dictionary that is returned by the task with the key `embedding_column`:
 
-    ```python
-    @task.weaviate_import(
-        weaviate_conn_id=WEAVIATE_ADMIN_CONN_ID, trigger_rule="none_failed"
-    )
-    def import_data(class_name):
-        """Import the movie data into Weaviate using automatic weaviate embeddings."""
-        import pandas as pd
+        ```python
+        @task.weaviate_import(
+            weaviate_conn_id=WEAVIATE_ADMIN_CONN_ID, trigger_rule="none_failed"
+        )
+        def import_data(class_name):
+            """Import the movie data into Weaviate using automatic weaviate embeddings."""
+            import pandas as pd
 
-        df = pd.read_parquet(PARQUET_FILE_PATH)
+            df = pd.read_parquet(PARQUET_FILE_PATH)
 
-        df["vectors"] = # code generating vectors
+            df["vectors"] = # code generating vectors
 
-        return {
-            "data": df,
-            "class_name": class_name,
-            "uuid_column": "movie_id",
-            "embedding_column": "vectors",
-        }
-    ```
+            return {
+                "data": df,
+                "class_name": class_name,
+                "uuid_column": "movie_id",
+                "embedding_column": "vectors",
+            }
+        ```
 
-    - The `query_embeddings` task uses the [WeaviateHook](https://registry.astronomer.io/) to connect to the Weaviate instance and run a GraphQL query on the vector embeddings created by Weaviate using the `text2vec-transformers` module running in the `t2v-transformers` container. The query returns the most similar movies to the concepts provided by the user when running the DAG in the next step.
+    - The `query_embeddings` task uses the WeaviateHook to connect to the Weaviate instance and run a GraphQL query on the vector embeddings created by Weaviate using the `text2vec-transformers` module running in the `t2v-transformers` container. The query returns the most similar movies to the concepts provided by the user when running the DAG in the next step.
 
 ## Step 5: Run your DAG
 
