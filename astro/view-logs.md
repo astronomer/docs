@@ -156,7 +156,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
     - **Key**: `ASTRO_DATADOG_TASK_LOGS_TAGS`
     - **Value**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
 
-By default, the tags `source=astronomer` and `service=astronomer-task-logs` will be used.
+By default, Astro uses the tags `source=astronomer` and `service=astronomer-task-logs`.
 
 5. Click **Save variable**.
 
