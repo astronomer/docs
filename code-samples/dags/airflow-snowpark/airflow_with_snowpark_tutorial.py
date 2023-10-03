@@ -20,7 +20,7 @@ MY_SNOWFLAKE_XCOM_SCHEMA = "SNOWPARK_XCOM_SCHEMA"
 MY_SNOWFLAKE_XCOM_STAGE = "XCOM_STAGE"
 MY_SNOWFLAKE_XCOM_TABLE = "XCOM_TABLE"
 
-# provide your Snowflake database name, schema name, connection ID 
+# provide your Snowflake database name, schema name, connection ID
 # and path to the Snowpark environment binary
 MY_SNOWFLAKE_DATABASE = "TJF_TEST"  # an existing database
 MY_SNOWFLAKE_SCHEMA = "TJF_TEST_SCHEMA"  # an existing schema
@@ -34,6 +34,7 @@ SNOWPARK_BIN = "/home/astro/.venv/snowpark/bin/python"
 USE_SNOWPARK_WAREHOUSE = False
 MY_SNOWPARK_WAREHOUSE = "SNOWPARK_WH"
 MY_SNOWFLAKE_REGULAR_WAREHOUSE = "HUMANS"
+
 
 @dag(
     start_date=datetime(2023, 9, 1),
