@@ -15,7 +15,7 @@ In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, 
 
 :::caution
 
-The provider used in this tutorial is currently in beta and subject to change. Once the provider is released this tutorial will be updated the provider source code will be available. The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-weaviate-tutorial). 
+The provider used in this tutorial is currently in beta and subject to change. Once the provider is released, this tutorial will be updated and the provider source code will be available. The example code from this tutorial is also available on [GitHub](https://github.com/astronomer/airflow-weaviate-tutorial). 
 
 :::
 
@@ -61,7 +61,7 @@ This tutorial uses a local Weaviate instance created as a Docker container. You 
 2. Download the `whl` file for the Airflow Weaviate provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/airflow_provider_weaviate-0.0.1-py3-none-any.whl) and save it in your Astro project's `include` directory.
 
 
-3. Change the content of the `Dockerfile` of your Astro project to the following statement importing the wheel file:
+3. Change the content of the `Dockerfile` of your Astro project to the following statement importing the`whl` file:
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
@@ -79,11 +79,11 @@ This tutorial uses a local Weaviate instance created as a Docker container. You 
 
 :::caution
 
-The Airflow Weaviate provider is currently in beta and not yet available on PyPI. The provider will be available on PyPI once it is out of beta and Steps 1.2 to 1.4 will be updated in this tutorial.
+The Airflow Weaviate provider is currently in beta and not yet available on PyPI.
 
 :::
 
-3. This tutorial uses a local Weaviate instance and a text2vec-transformer model, each running in a Docker container. To add additional containers to your Astro project, create a new file in your project's root directory called `docker-compose.yaml` and add the following:
+5. This tutorial uses a local Weaviate instance and a text2vec-transformer model, each running in a Docker container. To add additional containers to your Astro project, create a new file in your project's root directory called `docker-compose.override.yml` and add the following:
 
     ```yaml
     version: '3.1'
@@ -121,7 +121,7 @@ Note that it is possible to use a remote transformer model by changing the `TRAN
 
 :::
 
-4. To create an [Airflow connection](connections.md) to Weaviate, add the following to your `.env` file:
+6. To create an [Airflow connection](connections.md) to Weaviate, add the following to your `.env` file:
 
     ```text
     AIRFLOW_CONN_WEAVIATE_ADMIN='{"conn_type": "weaviate", "host": "http://weaviate:8081/", "extra": {"token": "adminkey"}}'
@@ -264,7 +264,7 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
     - The `branch_create_schema` is defined with a `@task.branch` operator to decide whether the `create_schema` task should be run based on the result of the `check_schema` task. If the schema already exists, the empty `schema_exists` task is run instead.
     - The `create_schema` task uses the [WeaviateCreateSchemaOperator](https://registry.astronomer.io/) to create the schema defined in `movie_schema.json` in Weaviate. 
     - The `create_parquet_file` task runs the function defined in the `text_to_parquet_script.py` file to create a parquet file from the `movie_data.txt` file.
-    - The `ingest_data` defined using the [@task.weaviate_import](https://registry.astronomer.io/) decorator ingests the data into Weaviate. Note that you can run any Python code on the data before ingesting it into Weaviate, making it possible to transform the data including to create your own embeddings, before it is ingested. To import your own vectors specify the column containing vectors in the dictionary that is returned by the task with the key `embedding_column`:
+    - The `ingest_data` task defined using the [@task.weaviate_import](https://registry.astronomer.io/) decorator ingests the data into Weaviate. Note that you can run any Python code on the data before ingesting it into Weaviate, making it possible to create your own embeddings or complete other transformations before it is ingested. To import your own vectors, specify the column containing vectors in the dictionary that is returned by the task with the key `embedding_column`:
 
     ```python
     @task.weaviate_import(
