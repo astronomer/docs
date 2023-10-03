@@ -145,7 +145,7 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
     
      For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
      
-4. After you change the Pod size, wait for a couple of minutes before running your tasks. This is to allow the changes to be applied to the config map of your cluster. 
+4. After you change the Pod size, wait for a couple of minutes before running your tasks to allow Astro to apply the changes to your Pod's ConfigMap. 
 
 Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
 
