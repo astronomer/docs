@@ -9,20 +9,20 @@ sidebar_custom_props: { icon: 'img/integrations/weaviate.png' }
 import CodeBlock from '@theme/CodeBlock';
 import query_movie_vectors from '!!raw-loader!../code-samples/dags/airflow-weaviate/query_movie_vectors.py';
 
-[Weaviate](https://weaviate.io/developers/weaviate) is an open source vector database that stores objects with its vectors. Vector databases are powerful tools to store high-dimensional embeddings of objects like text, images, audio or video. The [Weaviate Airflow provider](https://github.com/astronomer/airflow-provider-weaviate) offers operators and decorators to easily integrate Weaviate with Airflow.
+[Weaviate](https://weaviate.io/developers/weaviate) is an open source vector database. Vector databases are powerful tools to store high-dimensional embeddings of objects like text, images, audio or video. The [Weaviate Airflow provider](https://github.com/astronomer/airflow-provider-weaviate) offers operators and decorators to easily integrate Weaviate with Airflow.
 
 In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, use Weaviate's automatic vectorization to create vectors for the descriptions, and query Weaviate for movies that are thematically close to user-provided concepts.
 
 :::info
 
 This tutorial is a step-by-step guide on how to create a simple pipeline using Weaviate with Airflow.
-For a more complicated example see the [Weaviate Airflow provider dev sandbox DAG](https://github.com/astronomer/airflow-provider-weaviate/tree/main/dev).
+For a more complicated example, see the [Weaviate Airflow provider dev sandbox DAG](https://github.com/astronomer/airflow-provider-weaviate/tree/main/dev).
 
 :::
 
 ## Why use Airflow with Weaviate?
 
-Weaviate allows you to store and search for objects with vectors based on object-similarity. Many modern machine learning models use vector embeddings, such as many [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or [ResNet](https://arxiv.org/abs/1512.03385).
+Weaviate allows you to store and search for objects with vectors based on object-similarity. Many modern machine learning models use vector embeddings, such as [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or [ResNet](https://arxiv.org/abs/1512.03385).
 
 Integrating Weaviate with Airflow into one end-to-end machine learning pipeline allows you to:
 
@@ -48,7 +48,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
-This tutorial uses a local Weaviate instance created as a Docker container, you do not need to install the Weaviate client locally.
+This tutorial uses a local Weaviate instance created as a Docker container. You do not need to install the Weaviate client locally.
 
 
 ## Step 1: Configure your Astro project
@@ -107,13 +107,13 @@ This tutorial uses a local Weaviate instance created as a Docker container, you 
 
 :::tip
 
-See the Weaviate documentation on [environment variables](https://weaviate.io/developers/weaviate/config-refs/env-vars) and [modules](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for more information on configuring a Weaviate instance, for example to run models using [Open AI](https://openai.com/) or [HuggingFace](https://huggingface.co/).
+See the Weaviate documentation on [environment variables](https://weaviate.io/developers/weaviate/config-refs/env-vars) and [modules](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for more information on configuring a Weaviate instance.
 
 :::
 
 ## Step 2: Add your data
 
-The DAG in this tutorial runs a query on vectorized movie descriptions from [IMDB](https://www.imdb.com/). If you are running the project locally, we recommend to test the pipeline with the small subset of the data. If you are running the project on a remote server, you can use the [full dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/movie_descriptions.txt).
+The DAG in this tutorial runs a query on vectorized movie descriptions from [IMDB](https://www.imdb.com/). If you are running the project locally, we recommend testing the pipeline with a small subset of the data. If you are running the project on a remote server, you can use the [full dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/movie_descriptions.txt).
 
 1. To make the data available to your Astro project, create a new folder called `movie_data` in your project's `include` directory.
 
@@ -175,7 +175,7 @@ The DAG in this tutorial runs a query on vectorized movie descriptions from [IMD
 
 In order to prepare Weaviate to ingest your data, you need to define a [schema](https://weaviate.io/developers/weaviate/tutorials/schema). The [WeaviateCreateSchemaOperator](https://registry.astronomer.io/) allows you to do so based on a JSON file. Vector embeddings will later be added to the schema by Weaviate.
 
-1. In your `include/movie_data` folder create a new file called `movie_schema.json`.
+1. In your `include/movie_data` folder, create a new file called `movie_schema.json`.
 
 2. Add the following schema definition to the file:
 
@@ -242,20 +242,20 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
     - The `create_schema` task uses the [WeaviateCreateSchemaOperator](https://registry.astronomer.io/) to create the schema defined in `movie_schema.json` in Weaviate. 
     - The `create_parquet_file` task runs the function defined in the `text_to_parquet_script.py` file to create a parquet file from the `movie_data.txt` file.
     - The `ingest_data` defined using the [@task.weaviate_import](https://registry.astronomer.io/) decorator ingests the data into Weaviate. Note that you can run any Python code on the data before ingesting it into Weaviate, making it possible to transform the data including to create your own embeddings, before it is ingested.
-    - The `query_embeddings` task uses the [WeaviateHook](https://registry.astronomer.io/) to connect to the Weaviate instance and run a GraphQL query on the vector embeddings created by Weaviate using the `text2vec-transformers` module running in the `t2v-transformers` container. The query returns the most similar movies to the user-provided concepts.
+    - The `query_embeddings` task uses the [WeaviateHook](https://registry.astronomer.io/) to connect to the Weaviate instance and run a GraphQL query on the vector embeddings created by Weaviate using the `text2vec-transformers` module running in the `t2v-transformers` container. The query returns the most similar movies to the concepts provided by the user when running the DAG in the next step.
 
 ## Step 5: Run your DAG
 
 1. Run `astro dev start` in your Astro project to start up Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI run the `query_movie_vectors` DAG by clicking the play button. You will be prompted to provider [Airflow params](airflow-params.md) for `movie_concepts` and the `certainty_threshold_percent`.
+2. In the Airflow UI, run the `query_movie_vectors` DAG by clicking the play button. You will be prompted to provider [Airflow params](airflow-params.md) for `movie_concepts` and the `certainty_threshold_percent`.
 
-3. Wait for the DAG run to finish. Note that if you are running the project locally on a larger dataset the `import_data` task might take a longer time to complete because Weaviate will generate the vector embeddings when running this task.
+Note that if you are running the project locally on a larger dataset, the `import_data` task might take a longer time to complete because Weaviate generates the vector embeddings in this task.
 
     ![Screenshot of the Airflow UI showing the `query_movie_vectors` DAG having completed successfully in the Grid view with the Graph tab selected. Since this was the first run of the DAG the schema had to be newly created which was enabled by the branching task `branch_create_schema` selecting the downstream `create_schema` task to run.](/img/tutorials/airflow-weaviate_successful_dag.png)
 
 
-4. View your movie suggestion in the task logs of the `query_embeddings` task:
+3. View your movie suggestion in the task logs of the `query_embeddings` task:
 
     ```text
     [2023-09-21, 11:45:30 UTC] {logging_mixin.py:151} INFO - The top result for the concept(s) ['innovation', 'ensemble'] is:
@@ -266,5 +266,5 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
 
 ## Conclusion
 
-Congratulations! You used Airflow and Weaviate to get your next movie suggestion! This tutorial showed the use of three different Weaviate operators and decorators and the WeaviateHook, for more information on other modules see the [Weaviate Airflow provider readme](https://github.com/astronomer/airflow-provider-weaviate).
+Congratulations! You used Airflow and Weaviate to get your next movie suggestion! This tutorial showed the use of three different Weaviate operators and decorators and the WeaviateHook. For more information on other modules see the [Weaviate Airflow provider readme](https://github.com/astronomer/airflow-provider-weaviate).
 
