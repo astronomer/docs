@@ -1,5 +1,5 @@
 ---
-title: "Orchestrate Weaviate with Apache Airflow"
+title: "Orchestrate Weaviate operations with Apache Airflow"
 sidebar_label: "Weaviate"
 description: "Learn how to integrate Weaviate and Airflow."
 id: airflow-weaviate
@@ -9,14 +9,13 @@ sidebar_custom_props: { icon: 'img/integrations/weaviate.png' }
 import CodeBlock from '@theme/CodeBlock';
 import query_movie_vectors from '!!raw-loader!../code-samples/dags/airflow-weaviate/query_movie_vectors.py';
 
-[Weaviate](https://weaviate.io/developers/weaviate) is an open source vector database. Vector databases are powerful tools to store high-dimensional embeddings of objects like text, images, audio or video. The [Weaviate Airflow provider](https://github.com/astronomer/airflow-provider-weaviate) offers operators and decorators to easily integrate Weaviate with Airflow.
+[Weaviate](https://weaviate.io/developers/weaviate) is an open source vector database. Vector databases are powerful tools to store high-dimensional embeddings of objects like text, images, audio or video. The Weaviate Airflow provider offers operators and decorators to easily integrate Weaviate with Airflow.
 
 In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, use Weaviate's automatic vectorization to create vectors for the descriptions, and query Weaviate for movies that are thematically close to user-provided concepts.
 
-:::info
+:::warning
 
-This tutorial is a step-by-step guide on how to create a simple pipeline using Weaviate with Airflow.
-For a more complicated example, see the [Weaviate Airflow provider dev sandbox DAG](https://github.com/astronomer/airflow-provider-weaviate/tree/main/dev).
+The provider used in this tutorial is currently in beta and subject to change. Once the provider is released this tutorial will be updated the provider source code will be available.
 
 :::
 
@@ -50,7 +49,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 This tutorial uses a local Weaviate instance created as a Docker container. You do not need to install the Weaviate client locally.
 
-
 ## Step 1: Configure your Astro project
 
 1. Create a new Astro project:
@@ -60,11 +58,30 @@ This tutorial uses a local Weaviate instance created as a Docker container. You 
     $ astro dev init
     ```
 
-2. Add the following packages to your `requirements.txt` file:
+2. Download the `whl` file for the Airflow Weaviate provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/airflow_provider_weaviate-0.0.1-py3-none-any.whl) and save it in your Astro project's `include` directory.
+
+
+3. Change the content of the `Dockerfile` of your Astro project to the following statement importing the wheel file:
+
+    ```dockerfile
+    # syntax=quay.io/astronomer/airflow-extensions:latest
+
+    FROM quay.io/astronomer/astro-runtime:9.1.0-base
+
+    COPY include/airflow_provider_weaviate-0.0.1-py3-none-any.whl /tmp
+    ```
+
+4. Add the following install statement to your `requirements.txt` file to install the Airflow Weaviate provider from the `whl` file:
 
     ```text
-    airflow-provider-weaviate==1.0.0
+    /tmp/airflow_provider_weaviate-0.0.1-py3-none-any.whl
     ```
+
+:::warning
+
+The Airflow Weaviate provider is currently in beta and not yet available on PyPI. The provider will be available on PyPI once it is out of beta and Steps 1.2 to 1.4 will be updated in this tutorial.
+
+:::
 
 3. This tutorial uses a local Weaviate instance and a text2vec-transformer model, each running in a Docker container. To add additional containers to your Astro project, create a new file in your project's root directory called `docker-compose.yaml` and add the following:
 
@@ -97,6 +114,12 @@ This tutorial uses a local Weaviate instance created as a Docker container. You 
       networks:
         - airflow
     ```
+
+:::info
+
+Note that it is possible to use a remote transformer model by changing the `TRANSFORMERS_INFERENCE_API` value in the `docker-compose.override.yml` file. See the Weaviate documentation on [modules](https://weaviate.io/developers/weaviate/modules) for more information. When a remote model is used the `t2v-transformers` container can be removed from the `docker-compose.yaml` file.
+
+:::
 
 4. To create an [Airflow connection](connections.md) to Weaviate, add the following to your `.env` file:
 
@@ -173,7 +196,7 @@ The DAG in this tutorial runs a query on vectorized movie descriptions from [IMD
 
 ## Step 3: Define your vector schema
 
-In order to prepare Weaviate to ingest your data, you need to define a [schema](https://weaviate.io/developers/weaviate/tutorials/schema). The [WeaviateCreateSchemaOperator](https://registry.astronomer.io/) allows you to do so based on a JSON file. Vector embeddings will later be added to the schema by Weaviate.
+In order to prepare Weaviate to ingest your data, you need to define a [schema](https://weaviate.io/developers/weaviate/tutorials/schema). The WeaviateCreateSchemaOperator allows you to do so based on a JSON file. Vector embeddings will later be added to the schema by Weaviate.
 
 1. In your `include/movie_data` folder, create a new file called `movie_schema.json`.
 
@@ -241,7 +264,28 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
     - The `branch_create_schema` is defined with a `@task.branch` operator to decide whether the `create_schema` task should be run based on the result of the `check_schema` task. If the schema already exists, the empty `schema_exists` task is run instead.
     - The `create_schema` task uses the [WeaviateCreateSchemaOperator](https://registry.astronomer.io/) to create the schema defined in `movie_schema.json` in Weaviate. 
     - The `create_parquet_file` task runs the function defined in the `text_to_parquet_script.py` file to create a parquet file from the `movie_data.txt` file.
-    - The `ingest_data` defined using the [@task.weaviate_import](https://registry.astronomer.io/) decorator ingests the data into Weaviate. Note that you can run any Python code on the data before ingesting it into Weaviate, making it possible to transform the data including to create your own embeddings, before it is ingested.
+    - The `ingest_data` defined using the [@task.weaviate_import](https://registry.astronomer.io/) decorator ingests the data into Weaviate. Note that you can run any Python code on the data before ingesting it into Weaviate, making it possible to transform the data including to create your own embeddings, before it is ingested. To import your own vectors specify the column containing vectors in the dictionary that is returned by the task with the key `embedding_column`:
+
+    ```python
+    @task.weaviate_import(
+        weaviate_conn_id=WEAVIATE_ADMIN_CONN_ID, trigger_rule="none_failed"
+    )
+    def import_data(class_name):
+        """Import the movie data into Weaviate using automatic weaviate embeddings."""
+        import pandas as pd
+
+        df = pd.read_parquet(PARQUET_FILE_PATH)
+
+        df["vectors"] = # code generating vectors
+
+        return {
+            "data": df,
+            "class_name": class_name,
+            "uuid_column": "movie_id",
+            "embedding_column": "vectors",
+        }
+    ```
+
     - The `query_embeddings` task uses the [WeaviateHook](https://registry.astronomer.io/) to connect to the Weaviate instance and run a GraphQL query on the vector embeddings created by Weaviate using the `text2vec-transformers` module running in the `t2v-transformers` container. The query returns the most similar movies to the concepts provided by the user when running the DAG in the next step.
 
 ## Step 5: Run your DAG
@@ -250,7 +294,7 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
 
 2. In the Airflow UI, run the `query_movie_vectors` DAG by clicking the play button. You will be prompted to provider [Airflow params](airflow-params.md) for `movie_concepts` and the `certainty_threshold_percent`.
 
-Note that if you are running the project locally on a larger dataset, the `import_data` task might take a longer time to complete because Weaviate generates the vector embeddings in this task.
+    Note that if you are running the project locally on a larger dataset, the `import_data` task might take a longer time to complete because Weaviate generates the vector embeddings in this task.
 
     ![Screenshot of the Airflow UI showing the `query_movie_vectors` DAG having completed successfully in the Grid view with the Graph tab selected. Since this was the first run of the DAG the schema had to be newly created which was enabled by the branching task `branch_create_schema` selecting the downstream `create_schema` task to run.](/img/tutorials/airflow-weaviate_successful_dag.png)
 
@@ -266,5 +310,5 @@ Note that if you are running the project locally on a larger dataset, the `impor
 
 ## Conclusion
 
-Congratulations! You used Airflow and Weaviate to get your next movie suggestion! This tutorial showed the use of three different Weaviate operators and decorators and the WeaviateHook. For more information on other modules see the [Weaviate Airflow provider readme](https://github.com/astronomer/airflow-provider-weaviate).
+Congratulations! You used Airflow and Weaviate to get your next movie suggestion! This beta tutorial showed the use of three different Weaviate operators and decorators and the WeaviateHook, more operators and decorators will be available upon the release of the provider.
 
