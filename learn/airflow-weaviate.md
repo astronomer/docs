@@ -13,7 +13,7 @@ import query_movie_vectors from '!!raw-loader!../code-samples/dags/airflow-weavi
 
 In this tutorial you'll use Airflow to ingest movie descriptions into Weaviate, use Weaviate's automatic vectorization to create vectors for the descriptions, and query Weaviate for movies that are thematically close to user-provided concepts.
 
-:::warning
+:::caution
 
 The provider used in this tutorial is currently in beta and subject to change. Once the provider is released this tutorial will be updated the provider source code will be available.
 
@@ -77,7 +77,7 @@ This tutorial uses a local Weaviate instance created as a Docker container. You 
     /tmp/airflow_provider_weaviate-0.0.1-py3-none-any.whl
     ```
 
-:::warning
+:::caution
 
 The Airflow Weaviate provider is currently in beta and not yet available on PyPI. The provider will be available on PyPI once it is out of beta and Steps 1.2 to 1.4 will be updated in this tutorial.
 
