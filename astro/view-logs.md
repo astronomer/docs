@@ -149,7 +149,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 3. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your metrics to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
 
     - **Key**: `DATADOG_SITE`
-    - **Value**: Your Datadog site name. For example, `US3`.
+    - **Value**: Your Datadog **Site Parameter**. For example, `datadoghq.com`.
    
 5. Click **Save variable**.
 
