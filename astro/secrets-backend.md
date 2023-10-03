@@ -17,11 +17,11 @@ Using secrets to set Airflow connections requires knowledge of how to generate A
 
 Astro integrates with the following secrets backend tools:
 
-- [Hashicorp Vault](secrets-backend/hashicorp-vault.md)
-- [AWS Systems Manager Parameter Store](secrets-backend/aws-paramstore.md)
 - [AWS Secrets Manager](secrets-backend/aws-secretsmanager.md)
-- [Google Cloud Secret Manager](secrets-backend/gcp-secretsmanager.md)
+- [AWS Systems Manager Parameter Store](secrets-backend/aws-paramstore.md)
 - [Azure Key Vault](secrets-backend/azure-key-vault.md)
+- [Google Cloud Secret Manager](secrets-backend/gcp-secretsmanager.md)
+- [Hashicorp Vault](secrets-backend/hashicorp-vault.md)
 
 ## How Airflow finds an Airflow connection or variable
 
