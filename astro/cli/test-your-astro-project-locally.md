@@ -52,14 +52,14 @@ astro dev pytest
 
 This command runs all tests in your project's `tests` directory with [pytest](https://docs.pytest.org/en/7.0.x/index.html#), a testing framework for Python. With pytest, you can test custom Python code and operators locally without having to start a local Airflow environment.
 
-By default, the `tests` directory in your Astro project includes a default DAG integrity test called `test_dag_integrity.py`. This test checks that:
+The `tests` directory in your Astro project includes an example DAG test called `test_dag_example.py`. This test checks that:
 
 - All Airflow tasks have required arguments.
 - DAG IDs are unique across the Astro project.
 - DAGs have no cycles.
 - There are no general import or syntax errors.
 
-`astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
+This test is just an example of the kinds of pytests one could run to test thier DAGs. You may want to alter this test or create new ones that better fit the context of your DAGs. `astro dev pytest` will run any pytest file that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
 
 ## Test before an Astro Runtime upgrade
 
