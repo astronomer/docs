@@ -2,7 +2,7 @@
 title: "Orchestrate Machine Learning in Snowpark with Apache Airflow"
 sidebar_label: "Snowpark"
 description: "Learn how to integrate Snowpark and Airflow."
-id: airflow-weaviate
+id: airflow-snowpark
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
 
