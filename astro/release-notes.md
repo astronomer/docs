@@ -27,6 +27,16 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## October 3, 2023
+
+### Additional Improvements
+
+- Added a **DAG Success** alert so you can now set up an alert for successful completion events. See how to set up [Astro alerts](alerts.md). 
+
+### Bug Fixes
+
+- Fixed a problem in the Cloud UI where a warning about Deployment Health was displayed when a Workspace had zero Deployments.
+
 ## September 26, 2023
 
 ### Introducing the Astro API
