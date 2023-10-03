@@ -141,7 +141,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 6. Add DAG or Tasks to your alert.
 
-     - **DAG failure**: Click **DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
+    - **DAG failure**: Click **DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
 
     - **DAG success**: Click **DAG** and choose the Deployment and the DAG that you want to send an alert about when it completes.
     

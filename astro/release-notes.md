@@ -31,7 +31,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional Improvements
 
-- Added a new Pipeline Alert option, **DAG Success** to the Cloud UI so you can now add set up an alert for completion events, instead of just for failures and timeouts.
+- Added a **DAG Success** alert so you can now set up an alert for successful completion events. See how to set up [Astro alerts](alerts.md). 
 
 ### Bug Fixes
 
