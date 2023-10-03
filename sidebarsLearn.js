@@ -237,6 +237,7 @@ module.exports = {
             'connections/snowflake'
           ],
         },
+        'airflow-snowpark',
         'soda-data-quality',
         'airflow-talend-integration',
         'airflow-weights-and-biases',
