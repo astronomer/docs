@@ -5,7 +5,7 @@ id: cluster-resource-provisioning
 description: Configure your Astronomer cluster to overprovision Deployments.
 ---
 
-:::danger Development workloads only
+:::warning Development workloads only
 
 Changing cluster resource provisioning is only recommended for development clusters and can result in task failures. Astronomer can't provide support or troubleshoot issues related to overprovisioning Deployments through this configuration.
 

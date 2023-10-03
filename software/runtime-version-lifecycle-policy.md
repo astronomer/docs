@@ -81,11 +81,10 @@ The following table contains the exact lifecycle for each published version of A
 
 | Runtime version                                       | Airflow version | Release date       | End of maintenance date |
 | ----------------------------------------------------- | --------------- | ------------------ | ----------------------- |
-| [4](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-420) (LTS) | 2.2             | March 10, 2022     | September 2023          |
 | [5](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-500) (LTS) | 2.3             | April 30, 2022     | April 2024              |
 | [6](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-600) (LTS) | 2.4             | September 19, 2022 | March 2024              |
 | [7](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-700)       | 2.5             | December 3, 2022   | July 2023               |
-| [8](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-800)       | 2.6             | April 30, 2023     | October 2023            |
+| [8](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-800)       | 2.6             | April 30, 2023     | November 2023           |
 | [9](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-900) (LTS) | 2.7             | August 18, 2023    | January 2025            |
 
 If you have any questions or concerns, contact [Astronomer support](https://cloud.astronomer.io/support).

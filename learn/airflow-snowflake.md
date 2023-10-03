@@ -64,8 +64,9 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 
 1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
-2. Create a new connection named `snowflake_default` and choose the `Snowflake` connection type. Enter the following information:
+2. Create a new connection and choose the `Snowflake` connection type. Enter the following information:
 
+    - Connection ID: `snowflake_default`
     - [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html): Your Snowflake schema.
     - Login: Your Snowflake login username.
     - Password: Your Snowflake password.
