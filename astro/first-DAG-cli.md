@@ -62,7 +62,9 @@ If you're on your organization's network and can't access Astro, make a request 
         {label: 'Windows with winget', value: 'windowswithwinget'},
         {label: 'Linux', value: 'linux'},
     ]}>
+
 <TabItem value="mac">
+
 :::tip
 
 If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
@@ -74,7 +76,9 @@ Use [Homebrew](https://brew.sh/) to install the latest version of the [the Astro
 ```sh
 brew install astro
 ```
+
 </TabItem>
+
 <TabItem value="windowswithwinget">
 
 :::tip
@@ -106,7 +110,9 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
     From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
 
 4. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
+
 </TabItem>
+
 <TabItem value="linux">
 
 :::tip
