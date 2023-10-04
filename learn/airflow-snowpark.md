@@ -190,7 +190,7 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
     This DAG consists of eight tasks in a simple ML orchestration pipeline.
 
-    - `create_snowflake_objects`: Creates the Snowflake objects required for the Snowflake custom XCom backend. This task uses the `@task.snowflake_python` decorator to run code within Snowpark, automatically instantiating a Snowpark session called `snowpark_session` from the connection ID provided to the `snowflake_conn_id` parameter. This task is a [setup task](airflow-setup-teardown.md). Note that this task will not be shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `False`.
+    - `create_snowflake_objects`: Creates the Snowflake objects required for the Snowflake custom XCom backend. This task uses the `@task.snowflake_python` decorator to run code within Snowpark, automatically instantiating a Snowpark session called `snowpark_session` from the connection ID provided to the `snowflake_conn_id` parameter. This task is a [setup task](airflow-setup-teardown.md) and will not be shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `False`.
 
     - `load_file`: Loads the data from the `ski_dataset.csv` file into the Snowflake table `MY_SNOWFLAKE_TABLE` using the [load_file operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) from the Astro Python SDK. 
 
@@ -223,8 +223,8 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
 ## Conclusion
 
-Congratulations! You trained a classification model in Snowpark using Airflow. This pipeline is meant as a simple example showcasing the three main options to run code in different Snowpark environments:
+Congratulations! You trained a classification model in Snowpark using Airflow. This pipeline is meant as a simple example showcasing the three main options to run code in different Snowpark using Airflow decorators:
 
-- `@task.snowpark_python` runs your code in a standard Snowpark environment. Use this decorator if you need to run code in Snowpark that does not require any additional packages, not preinstalled in a standard Snowpark environment. The corresponding traditional operator is the SnowparkPythonOperator.
+- `@task.snowpark_python` runs your code in a standard Snowpark environment. Use this decorator if you need to run code in Snowpark that does not require any additional packages, which are not preinstalled in a standard Snowpark environment. The corresponding traditional operator is the SnowparkPythonOperator.
 - `@task.snowpark_ext_python` runs your code in a pre-existing virtual environment within Snowpark. Use this decorator when you want to reuse virtual environments in different tasks in the same Airflow instances, or your virtual environment takes a long time to be built. The corresponding traditional operator is the SnowparkExternalPythonOperator.
 - `@task.snowpark_virtualenv` runs your code in a virtual environment within Snowpark that is created on the fly just for a specific task. Use this decorator when you want to tailor a virtual environment to a task and don't need to reuse it. The corresponding traditional operator is the SnowparkVirtualenvOperator.
