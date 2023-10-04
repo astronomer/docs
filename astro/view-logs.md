@@ -29,7 +29,7 @@ Logs and messages might also be associated with one of the following _log levels
 - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
 - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent and can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
 
-## View Airflow component logs in the Cloud UI
+### View Airflow component logs in the Cloud UI
 
 You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. 
 
@@ -45,7 +45,7 @@ No matching events have been recorded in the past 24 hours.
 
 Typically, this indicates that the Deployment you selected does not currently have any DAGs running.
 
-### Filter options
+#### Filter options
 
 You can use the following options to specify the types of logs or messages that you want to view. 
 
@@ -55,7 +55,7 @@ You can use the following options to specify the types of logs or messages that 
 
 - **Log type**: Filter based on whether the log message is from a scheduler, worker, webserver, or trigger. 
 
-## View Airflow component logs locally
+### View Airflow component logs locally
 
 To show logs for your Airflow scheduler, webserver, or triggerer locally, run the following Astro CLI command:
 
@@ -99,7 +99,7 @@ To access task logs from the Cloud UI:
 4. Click a task run in the DAG run grid.
 5. Click the **Logs** tab to switch from **Graph** view.
 
-## View task logs in the Airflow UI
+### View task logs in the Airflow UI
 
 1.  Access the Airflow UI. 
   * To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**. 
