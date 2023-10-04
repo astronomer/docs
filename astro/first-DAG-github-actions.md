@@ -4,11 +4,6 @@ title: 'Run your first DAG with GitHub Actions'
 id: 'first-DAG-github-actions'
 ---
 
-<head>
-  <meta name="description" content="Learn how to run your first Apache Airflow DAG on Astro using the Cloud UI." />
-  <meta name="og:description" content="Learn how to run your first Apache Airflow DAG on Astro using the Cloud UI." />
-</head>
-
 import {siteVariables} from '@site/src/versions';
 
 This quickstart explains the steps required to deploy an example DAG to Astro and trigger a DAG run with Github Actions.
@@ -102,7 +97,7 @@ To configure code deploys from your GitHub repository to Astro, you must have tw
 
 11. Click **Create API Token**, then copy the token that appears.
 
-    :::warning
+    :::caution
 
     For security reasons, this is the only opportunity you have to copy your API token. After you exit the modal window, you cannot copy it again. Be sure to save your token in a safe place or paste it immediately.
 
@@ -117,6 +112,8 @@ This automatically deploys the example DAGs to your Deployment.
 ## Step 4: Run your DAG in Airflow
 
 Open your Deployment in the Cloud UI and click **DAGs** in the left sidebar, then click **S3**. From this page, you can see that the `s3` DAG has run exactly once. 
+
+![Detailed view of the S3 DAG run outcome.](/img/docs/s3-complete.png)
 
 The **DAGs** page compiles the most commonly used information and actions from the Airflow UI in one place. If you prefer to view your DAG run in the Airflow UI, click **Open Airflow** in the upper right corner of the page.
 

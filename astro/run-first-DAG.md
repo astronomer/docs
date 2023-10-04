@@ -22,16 +22,5 @@ If you're new to Airflow and want a more in-depth tutorial, see [Write your Firs
 
 If you prefer to develop on your local machine and use command line tools, follow the steps in [Run your first DAG with the Astro CLI](first-DAG-cli.md).
 
-If you can't install additional tools on your current machine or you prefer a no-code workflow, follow the steps in [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+If you can't install additional tools on your current machine or you prefer a no-code workflow, follow the steps in [Run your first DAG with GitHub Actions](first-DAG-github-actions.md), where you can see an example of a CI/CD workflow.
 
-| Scenario                               | Recommendation |
-| -------------------------------------- | -------------- |
-| Explore local development              | Astro CLI      |
-| Don't want to install software locally | GitHub Actions |
-| Try a CI/CD workflow                   | GitHub Actions |
-
-## Next Steps
-
-- [Run your first DAG with GitHub Actions](first-DAG-github-actions.md)
-- [Run your first DAG with the Astro CLI](first-DAG-cli.md)
-- [Install the CLI](astro/cli/install-cli.md)
