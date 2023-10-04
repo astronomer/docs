@@ -10,7 +10,7 @@ This quickstart explains the steps required to deploy an example DAG to Astro an
 
 Specifically, you will:
 
-- Start an Astro trial
+- Start an Astro trial.
 - Authenticate and log in to Astro. 
 - Create a Deployment. 
 - Configure GitHub Actions.

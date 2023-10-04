@@ -13,8 +13,8 @@ Either tutorial takes about 15 minutes. They each showcase different paths avail
 
 - Authenticate and log in to Astro.
 - Create a Deployment.
-- Deploy DAGs to Astro with the Astro CLI.
-- Trigger a run of an example DAG in the Airflow UI.
+- Deploy DAGs to Astro with either the Astro CLI or GitHub Actions.
+- Trigger a run of an example DAG.
 
 If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
