@@ -196,7 +196,6 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
     - `create_model_registry`: Creates a model registry in Snowpark using the [Snowpark ML package](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index). Since the task is defined using the `@task.snowflake_python` decorator, the snowpark session is automatically instantiated from provided connection ID.
 
-
     - `transform_table_step_one`: Transforms the data in the Snowflake table using Snowpark syntax to filter to only include rows of skiers that ordered the beverages we are interested in. Computation of this task runs within Snowpark. The resulting table is written to [XCom](airflow-passing-data-between-tasks.md) as a pandas DataFrame. 
 
     - `transform_table_step_two`: Transforms the pandas dataframe created by the upstream task to filter only for serious skiers (those who skied at least one hour that day).
