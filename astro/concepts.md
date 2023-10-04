@@ -11,7 +11,7 @@ Use this document to learn about key Astro concepts and how they work together o
 
 ## Astro CLI
 
-The [Astro CLI](cli/overview.md) is the primary interface for creating new Airflow projects and deploying them to Astro. It is fully open source, and you can use it to run Airflow on your local machine with or without an Astro account.
+The [Astro CLI](cli/overview.md) is the primary interface for running Airflow locally and deploying Airflow files to Astro from a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool.
 
 An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. See [Run your first DAG](create-first-dag.md) to create your first Astro project.
 
@@ -27,7 +27,7 @@ The Cloud UI, hosted at `https://cloud.astronomer.io`, is the visual interface f
 
 - Access the Airflow UI for your hosted Airflow environments.
 - Customize Airflow resources without editing configuration files.
-- Manage security using role-based access control (RBAC).
+- Manage users and teams with role-based access control (RBAC).
 - Create and edit DAGs in the Astro Cloud IDE.
 - View data lineage for your data pipelines.
 
@@ -35,23 +35,23 @@ The Cloud UI, hosted at `https://cloud.astronomer.io`, is the visual interface f
 
 An Astro _Deployment_ is an Airflow environment hosted on Astro. It encompasses all core Airflow components, including the Airflow webserver, scheduler, and workers, along with additional tools for reliability and observability. It runs in an isolated Kubernetes namespace in an [Astro cluster](#cluster) and has a set of attached resources to run your Airflow tasks.
 
-Compared to an open source Airflow environment, an Astro Deployment provides you more flexibility to [fine-tune your Airflow settings](deployment-settings.md) directly from the Cloud UI. Deployments also make your Airflow experience more reliable by providing your tasks with a 24-hour grace period to complete in case of any restarts.
+Compared to an open source Airflow environment, an Astro Deployment is easy to create, delete, and modify. You can [fine-tune resources and settings](deployment-settings.md) directly from the Cloud UI, see metrics and analytics for your DAGs, review your deploy history, and more. The infrastructure required to run a Deployment is managed by Astronomer.
 
-To run DAGs in a Deployment, you first deploy them manually using Astro CLI from your local machine or automatically from your code repository using the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and run your deployed DAGs. See [Run your first DAG](create-first-dag.md) to get started.
+To run DAGs in a Deployment, you must either deploy an Astro project manually from your local machine or configure an automated deploy process using a third-party CI/CD tool with the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and view your DAGs. See [Run your first DAG](create-first-dag.md) to get started.
 
 ## Workspace
 
-A _Workspace_ is a collection of Deployments that can be accessed by a specific group of users. You can use a Workspace to group Deployments that share a business use case or environment trait. Although you can access Deployments through Workspaces, they don't require any resources to run. Rather, they are a management tool for grouping Deployments and configuring access to them. All Deployments must belong to a Workspace. 
+A _Workspace_ is a collection of Deployments that can be accessed by a specific group of users. You can use a Workspace to group Deployments that share a business use case or environment trait. For example, your data science team might have a dedicated Workspace with two Deployments within it. Workspaces don't require any resources to run and are only an abstraction for grouping Deployments and configuring user access to them. All Deployments must belong to a Workspace.
 
 When more users from your company join Astro, you can assign them [Workspace roles](user-permissions.md#workspace-roles) that include varying levels of access to your Deployments.
 
 ### Cluster
 
-A _cluster_ on Astro is a Kubernetes cluster that hosts the infrastructure required to run your Airflow environment, also known as [Deployment](#deployment) in Astro. You can either use a pre-configured multi-tenant cluster, known as a standard cluster, or create a cluster for exclusive use by your team, known as a [dedicated cluster](create-dedicated-cluster.md). For both cluster types, Astro creates and manages the clusters, including all necessary infrastructure required to run your Astro Deployments. 
+A _cluster_ on Astro is a Kubernetes cluster that hosts the infrastructure required to run Airflow environments, also known as [Deployments](#deployment) in Astro. You can either use a pre-configured cluster, known as a standard cluster, or create a cluster for exclusive use by your team, known as a [dedicated cluster](create-dedicated-cluster.md). For both cluster types, Astro manages all underlying infrastructure and provides secure connectivity options to all data services in your ecosystem.
 
 ## Organization
 
-An Astro _Organization_ is the highest level entity in Astro and is automatically created when you sign up. An Organization lets you manage all of your users, Deployments, Workspaces, and clusters from a single place in the Cloud UI. To increase security for your company, you can [integrate your Organization with an identity provider (IdP)](configure-idp.md) and [set up SCIM provisioning](set-up-scim-provisioning.md) to have new users automatically join Astro with the correct permissions. 
+An Astro _Organization_ is the highest level entity in Astro and represents a shared space for your company on Astro. An Organization is automatically created when you first sign up for Astronomer. At the Organization level, you can manage all of your users, Deployments, Workspaces, and clusters from a single place in the Cloud UI. To securely manage user access, you can [integrate your Organization with an identity provider (IdP)](configure-idp.md) and [set up SCIM provisioning](set-up-scim-provisioning.md) to have new users automatically join Astro with the correct permissions. 
 
 ## See also
 
