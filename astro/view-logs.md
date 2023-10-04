@@ -7,9 +7,13 @@ description: View logs for your Deployments both locally and on Astro.
 
 View task and component logs for your DAGs to troubleshoot your data pipelines and better understand the behavior of your tasks and their execution environment.
 
-## Log and message types
+Airflow has two different log types. _Component logs_, which record the performance of your Airflow components, and _Task logs_, which records events emitted by your DAG as each task executes.
 
-- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-resources).
+## Airflow Component Logs
+
+Airflow has four different components, the scheduler, triggerer, worker, and webserver, each of which records the performance in component logs.
+
+- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. You can access the past 24 hours of scheduler logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-size).
 
 - _Triggerer logs_ describe the performance of the triggerer, the Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
@@ -17,7 +21,7 @@ View task and component logs for your DAGs to troubleshoot your data pipelines a
 
 - _Webserver logs_ relate to the health and performance of [the Airflow UI](https://docs.astronomer.io/learn/intro-to-airflow#airflow-components).
 
-### Log Levels 
+### Airflow component log levels 
 
 Logs and messages might also be associated with one of the following _log levels_: 
 
@@ -25,7 +29,7 @@ Logs and messages might also be associated with one of the following _log levels
 - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
 - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent and can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
 
-## View logs in the Cloud UI
+## View Airflow component logs in the Cloud UI
 
 You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. 
 
@@ -33,7 +37,7 @@ You can access scheduler, triggerer, and task logs in the Cloud UI to find the p
 
 2. Click the **Logs** tab.
 
-The maximum number of lines returned is 10,000, with 25 results displayed per page. If there are no logs available for a given Deployment, the following message appears:
+The maximum number of lines returned is 10,000, with 50 results displayed per page. If there are no logs available for a given Deployment, the following message appears:
 
 ```text
 No matching events have been recorded in the past 24 hours.
@@ -51,54 +55,7 @@ You can use the following options to specify the types of logs or messages that 
 
 - **Log type**: Filter based on whether the log message is from a scheduler, worker, webserver, or trigger. 
 
-## View Airflow task logs on Astro
-
-Airflow task logs for both local Airflow environments and Deployments on Astro are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
-
-On Astro, Airflow task logs are stored in your cluster. On Amazon Web Services (AWS), they are stored in S3. On Google Cloud Platform (GCP), they are stored in Cloud Storage. On Azure, they are stored in Azure Blob Storage. 
-
-On clusters hosted in your own cloud, task logs are stored indefinitely. On clusters hosted in Astronomer's cloud, task logs are retained for 90 days. The task log retention policy is not currently configurable.
-
-To access task logs from the Cloud UI:
-
-1. In the Cloud UI, select a Workspace.
-2. Click **DAGs**.
-3. Click the DAG you want to view task logs for. 
-4. Click a task run in the DAG run grid. The task run's logs appear in the blue window.
-
-To view task logs in the Airflow UI
-
-1.  Access the Airflow UI. To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**. To access the Airflow UI in a local environment, open a browser and go to `http://localhost:8080`.
-2. Click a DAG.
-3. Click **Graph**.
-4. Click a task run.
-5. Click **Instance Details**.
-6. Click **Log**.
-
-## View Airflow scheduler logs
-
-You can access the past 24 hours of scheduler logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-size).
-
-1. In the Cloud UI, select a Workspace and then a Deployment.
-
-2. Click the **Logs** tab.
-
-3. Optional. Select one or more options in the **Log Level** menu and click **Apply**. These are the available options:
-
-    - **Error**: Emitted when a process fails or does not complete. For example, these logs might indicate a missing DAG file, an issue with your scheduler's connection to the Airflow database, or an irregularity with your scheduler's heartbeat.
-    - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
-    - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent and can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
-
-When a Deployment generates more than 500 lines of logs in 24 hours, only the most recent 500 lines are shown. If there are no scheduler logs available for a given Deployment, the following message appears:
-
-```  
-No matching events have been recorded in the past 24 hours.
-```
-
-Typically, this indicates that the Deployment you selected does not currently have any DAGs running.
-
-
-## Access Airflow component logs locally
+## View Airflow component logs locally
 
 To show logs for your Airflow scheduler, webserver, or triggerer locally, run the following Astro CLI command:
 
@@ -106,7 +63,7 @@ To show logs for your Airflow scheduler, webserver, or triggerer locally, run th
 astro dev logs
 ```
 
-Once you run this command, the most recent logs for these components appear in your terminal window.
+After you run this command, the most recent logs for these components appear in your terminal window.
 
 By default, running `astro dev logs` shows logs for all Airflow components. To see logs only for a specific component, add any of the following flags to your command:
 
@@ -116,15 +73,52 @@ By default, running `astro dev logs` shows logs for all Airflow components. To s
 
 To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md).
 
+## Airflow task logs
+
+Airflow task logs for both local Airflow environments and Deployments on Astro are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
+
+Task logs are retained for 90 days. The task log retention policy is not currently configurable.
+
+### Airflow task log levels 
+
+Similar to the Airflow component log levels, task logs might also be associated with one of the following log levels, that you can search or filter with: 
+
+- **Error**
+- **Warn**
+- **Info**
+- **Debug**
+- **Critical**
+
+### View task logs on the Cloud UI
+
+To access task logs from the Cloud UI:
+
+1. In the Cloud UI, select a Workspace.
+2. Click **DAGs**.
+3. Click the DAG you want to view task logs for. 
+4. Click a task run in the DAG run grid.
+5. Click the **Logs** tab to switch from **Graph** view.
+
+## View task logs in the Airflow UI
+
+1.  Access the Airflow UI. 
+  * To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**. 
+  * To access the Airflow UI in a local environment, open a browser and go to `http://localhost:8080`.
+2. Click a DAG.
+3. Click **Graph**.
+4. Click a task run.
+5. Click **Instance Details**.
+6. Click **Log**.
+
 ## Export task logs to Datadog
 
 You can forward Airflow task logs from a Deployment to [Datadog](https://www.datadoghq.com/) using a Datadog API key. Complete the following setup to view Airflow task logs from your Datadog instance.
 
-#### Prerequisites
+### Prerequisites
 
 - Your Deployment must be running Astro Runtime 9 (AWS) or 9.1 (Azure and GCP). See [Upgrade Astro Runtime](upgrade-runtime.md).
 
-#### Setup
+### Setup
 
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. Set the following [environment variable](environment-variables.md) on your Deployment:
