@@ -7,7 +7,7 @@ description: Learn about each of the components you can interact with in Astro.
 
 Astro is a SaaS application that provides fully managed Airflow environments for teams of all sizes. Astro provides you a true serverless Airflow experience making it more reliable, scalable and easy to use. The Astro platform includes a few concepts and components that don't exist in open source Apache Airflow. 
 
-Use this document to learn about key Astro concepts and how they work together on the platform.
+Use this document to learn about key Astro concepts and how they relate to one another to enable a great product experience for your team. To learn more about the benefits of Astro, see [Features](features.md), [Architecture](astro-architecture.md), or the [Astro product page](https://www.astronomer.io/product/).
 
 ## Astro CLI
 
