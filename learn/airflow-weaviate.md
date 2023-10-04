@@ -21,7 +21,7 @@ The provider used in this tutorial is currently in beta and subject to change. A
 
 ## Why use Airflow with Weaviate?
 
-Weaviate allows you to store and search for objects with vectors based on object-similarity. Many modern machine learning models use vector embeddings, such as [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or [ResNet](https://arxiv.org/abs/1512.03385).
+Weaviate allows you to store objects alongside their vector embeddings and to query these objects based on their similarity in n-dimensional vector space. Vector embeddings are key components of many modern machine learning models such as [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or [ResNet](https://arxiv.org/abs/1512.03385).
 
 Integrating Weaviate with Airflow into one end-to-end machine learning pipeline allows you to:
 
