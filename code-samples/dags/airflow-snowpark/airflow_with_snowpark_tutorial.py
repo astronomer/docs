@@ -2,6 +2,10 @@
 ### Orchestrate data transformation and model training in Snowflake using Snowpark
 
 This DAG shows how to use specialized decorators to run Snowpark code in Airflow.
+Note that it uses the Airflow 2.7 feature of setup/ teardown tasks to create
+and clean up a Snowflake custom XCom backend.
+If you want to use regular XCom or are running on an older version set
+`SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `False`.
 """
 
 from datetime import datetime
