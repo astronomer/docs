@@ -10,7 +10,6 @@ This quickstart explains the steps required to deploy an example DAG to Astro an
 
 Specifically, you will:
 
-- Start an Astro trial.
 - Authenticate and log in to Astro. 
 - Create a Deployment. 
 - Configure GitHub Actions.
@@ -23,7 +22,7 @@ This tutorial assumes that you know some basic Airflow concepts. If you're new t
 
 ## Prerequisites
 
-- An Astro account. To start an Astro trial, see [Start a trial](trial.md).
+- An Astro account. To start an Astro trial and create your free trial account, see [Start a trial](trial.md).
 - A [GitHub](https://docs.github.com/en/get-started/signing-up-for-github) account.
 
 :::info
@@ -122,5 +121,6 @@ Congratulations! You deployed and ran a DAG to your Astro Deployment using GitHu
 ## Next Steps
 
 - Install [the CLI](/astro/cli/install-cli.md)
+- [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 - Develop your [Astro project](/astro/cli/run-airflow-locally)
 - Read more about [Developing CI/CD workflows](set-up-ci-cd.md).

@@ -30,7 +30,7 @@ If you just want to run Airflow on your local machine without deploying to Astro
 
 ## Prerequisites
 
-- An Astro account. To start an Astro trial, see [Start a trial](trial.md). 
+- An Astro account. To start an Astro trial and create your free trial account, see [Start a trial](trial.md).
 
 Although it's not required for this tutorial, the following container engines are supported with the Astro CLI and required to run Airflow locally:
 
@@ -247,5 +247,6 @@ To limit resource usage, you might want to delete your Deployment after you fini
 Now that you've created and run your first DAG on Astro, the next step is to add your own DAGs, build out the rest of your Astro project, and start testing real data. See:
 
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, such as the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
+- [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).)
 - [Deploy code to Astro](deploy-code.md).
 - [Develop a project](cli/develop-project.md).
