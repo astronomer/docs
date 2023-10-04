@@ -9,12 +9,15 @@ id: 'first-DAG-cli'
   <meta name="og:description" content="Learn how to run your first Apache Airflow DAG on Astro with the Astro CLI." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
 Astro is the industry's leading managed service for Apache Airflow. You can quickly learn how Astro works by running an Apache Airflow DAG with the Astro CLI. In this quickstart, follow the steps required to deploy an example DAG to Astro and trigger a DAG run from the Astro CLI.
 
 Specifically, you will:
 
+- Install the CLI
 - Authenticate and log in to Astro. 
 - Create a Deployment. 
 - Create an Astro project. 
@@ -23,12 +26,11 @@ Specifically, you will:
 
 This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
-If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md). If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md). 
 
 ## Prerequisites
 
 - An Astro account. To start an Astro trial, see [Start a trial](trial.md). 
-- The latest version of the [the Astro CLI](cli/overview.md). 
 
 Although it's not required for this tutorial, the following container engines are supported with the Astro CLI and required to run Airflow locally:
 
@@ -50,7 +52,78 @@ If you're on your organization's network and can't access Astro, make a request 
 
 :::
 
-## Step 1: Create a Deployment
+## Step 1: Install the Astro CLI
+
+<Tabs
+    defaultValue="mac"
+    groupId= "install-the-astro-cli"
+    values={[
+        {label: 'Mac', value: 'mac'},
+        {label: 'Windows with winget', value: 'windowswithwinget'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="mac">
+:::tip
+
+If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+
+:::
+
+Use [Homebrew](https://brew.sh/) to install the latest version of the [the Astro CLI](cli/overview.md).
+
+```sh
+brew install astro
+```
+</TabItem>
+</TabItem value="windowswithwinget">
+
+:::tip
+
+If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+
+:::
+
+The winget command line tool is supported on Windows 10 1709 (build 16299) or later, and is bundled with Windows 11 and modern versions of Windows 10 by default as the App Installer. If you don't have winget, you can [Install the CLI on Windows](/cli/install-cli.md#install-the-astro-cli) instead.
+
+1. Make sure you have the following:
+
+    - Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
+    - The latest version of the Windows [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca).
+    - Windows 10 1709 (build 16299) or later or Windows 11.
+
+2. Open Windows PowerShell as an administrator and then run the following command:
+
+    ```sh
+    winget install -e --id Astronomer.Astro
+    ```
+
+3. Run the following command to access the location of the CLI executable:
+
+    ```sh
+    $env:path.split(";")
+    ```
+    
+    From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
+
+4. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
+</TabItem>
+<TabItem value="linux">
+
+:::tip
+
+If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+
+:::
+
+Run the following command to install the latest version of the Astro CLI directly to `PATH`:
+
+```sh
+curl -sSL install.astronomer.io | sudo bash -s
+```
+
+</TabItem>
+
+## Step 2: Create a Deployment
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
 
@@ -66,7 +139,7 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
     
     For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Deployment settings](deployment-settings.md).
 
-## Step 2: Create an Astro project
+## Step 3: Create an Astro project
 
 An _Astro project_ contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. All new Astro projects contain two example DAGs. In this tutorial, you'll be deploying these example DAGs to your Deployment on Astro.
 
@@ -109,7 +182,7 @@ An _Astro project_ contains the set of files necessary to run Airflow, including
     └── requirements.txt # For Python packages
     ```
 
-## Step 3: Deploy example DAGs to your Astro Deployment
+## Step 4: Deploy example DAGs to your Astro Deployment
 
 DAG-only deploys are an Astro feature that you can use to quickly update your Astro Deployment by only deploying the `dags` folder of your Astro project. You'll now trigger a DAG-only deploy to push your example DAGs to Astro.
 
@@ -129,7 +202,7 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
 
     This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code. After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI deploys your DAGs to Astro. If you run into issues deploying your DAGs, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
-## Step 4: Trigger your DAG on Astro
+## Step 5: Trigger your DAG on Astro
 
 Newly-deployed DAGs are paused by default and will not start running automatically. To run one of the example DAGs in your Astro project according to its schedule, you must unpause it from the Airflow UI hosted on your Deployment.
 
@@ -151,7 +224,7 @@ Newly-deployed DAGs are paused by default and will not start running automatical
 
 5. Pause your DAG by clicking the slider button next to `example-dag-basic`. This prevents your example DAG from running automatically and consuming your Deployment resources.
 
-## Step 5: View your DAG status in the Cloud UI
+## Step 6: View your DAG status in the Cloud UI
 
 The Cloud UI shows you information about the health of your Deployment, including analytics and logs for your DAG runs.
 
@@ -159,7 +232,7 @@ Go back to your Deployment page in the Cloud UI. Because you ran your example DA
 
 ![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 
-## Step 6: (Optional) Delete your Deployment
+## Step 7: (Optional) Delete your Deployment
 
 To limit resource usage, you might want to delete your Deployment after you finish triggering your DAG test runs.
 
