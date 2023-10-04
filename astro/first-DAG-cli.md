@@ -75,7 +75,7 @@ Use [Homebrew](https://brew.sh/) to install the latest version of the [the Astro
 brew install astro
 ```
 </TabItem>
-</TabItem value="windowswithwinget">
+<TabItem value="windowswithwinget">
 
 :::tip
 
