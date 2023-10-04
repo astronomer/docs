@@ -2,8 +2,9 @@
 sidebar_label: "astro dev parse"
 title: "astro dev parse"
 id: astro-dev-parse
-description: Reference documentation for astro dev parse.
+description: Parse the DAGs to check for errors in a local Airflow environment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Parse the DAGs in a locally hosted Astro project to quickly check them for errors. For more information about testing DAGs locally, read [Test your Astro project locally](cli/test-your-astro-project-locally.md#run-tests-with-the-astro-cli).

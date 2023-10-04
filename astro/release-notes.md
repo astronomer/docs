@@ -27,6 +27,31 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## October 3, 2023
+
+### Additional Improvements
+
+- Added a **DAG Success** alert so you can now set up an alert for successful completion events. See how to set up [Astro alerts](alerts.md). 
+
+### Bug Fixes
+
+- Fixed a problem in the Cloud UI where a warning about Deployment Health was displayed when a Workspace had zero Deployments.
+
+## September 26, 2023
+
+### Introducing the Astro API
+
+:::info
+
+The Astro API is currently in beta. See [Astro API versioning and support](https://docs.astronomer.io/astro/api/versioning-and-support).
+
+:::
+
+You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and scripts to programmatically interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
+
+Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://docs.astronomer.io/astro/api/get-started).
+
+
 ## September 19, 2023
 
 ### Manage Deployments programmatically using Deployment API tokens
@@ -49,7 +74,7 @@ Unlike Deployment API keys, you can set an expiration date for Deployment API to
 
 Deployment API tokens are a direct replacement for Deployment API keys. Therefore, Astronomer recommends always using Deployment API tokens over API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens. 
 
-When your Deployment has no API keys, the **API Keys** tab disappears from the Cloud UI and you can no longer create Deployment API keys. If you want to continue using API keys, ensure that you always have at least one API key configured for the Deployment. 
+After API tokens are generally available, Deployments with zero API keys will not show the **API Keys** tab and you will no longer be able to create Deployment API keys. If you want to continue using API keys, ensure that you always have at least one API key configured for the Deployment. 
 
 :::
 
@@ -1925,7 +1950,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 ## September 28, 2021
 
-:::danger
+:::warning
 
 This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](set-up-ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 

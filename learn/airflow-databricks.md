@@ -1,6 +1,6 @@
 ---
 title: "Orchestrate Databricks jobs with Airflow"
-sidebar_label: "Databricks"
+sidebar_label: "Tutorial"
 description: "Orchestrate Databricks jobs with your Airflow DAGs."
 id: airflow-databricks
 tags: [Integrations, DAGs]

@@ -151,14 +151,54 @@ module.exports = {
         description: 'Integrate Airflow with commonly used data engineering tools.',
       },
       items: [
-        'airflow-redshift',
         'airflow-sagemaker',
         'airflow-kafka',
+        'connections/azure-blob-storage',
         'airflow-azure-container-instances',
         'airflow-azure-data-explorer',
-        'airflow-azure-data-factory-integration',
-        'airflow-databricks',
-        'airflow-dbt-cloud',
+        {
+          type: 'category',
+          label: 'Azure Data Factory',
+          link: {
+              type: 'generated-index',
+              title: 'Azure Data Factory',
+              description: 'Integrate Airflow with Azure Data Factory',
+              image: '/img/integrations/azure-data-factory.png'
+          },
+          items: [
+            'airflow-azure-data-factory-integration',
+            'connections/azure-data-factory'
+          ],
+        },
+        'connections/bigquery',
+        {
+          type: 'category',
+          label: 'Databricks',
+          link: {
+              type: 'generated-index',
+              title: 'Databricks',
+              description: 'Integrate Airflow with Databricks',
+              image: '/img/integrations/databricks.png'
+          },
+          items: [
+            'airflow-databricks',
+            'connections/databricks',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'dbt Cloud',
+          link: {
+              type: 'generated-index',
+              title: 'dbt Cloud',
+              description: 'Integrate Airflow with dbt Cloud',
+              image: '/img/integrations/dbt.png'
+          },
+          items: [
+            'airflow-dbt-cloud',
+            'connections/dbt-cloud',
+          ],
+        },
         'airflow-dbt',
         'airflow-duckdb',
         'airflow-fivetran',
@@ -167,7 +207,36 @@ module.exports = {
         'marquez',
         'airflow-mlflow',
         'airflow-mongodb',
-        'airflow-snowflake',
+        'connections/ms-sqlserver',
+        {
+          type: 'category',
+          label: 'Redshift',
+          link: {
+              type: 'generated-index',
+              title: 'Redshift',
+              description: 'Orchestrate Redshift queries from your Airflow DAGs.',
+              image: '/img/integrations/redshift.png'
+          },
+          items: [
+            'airflow-redshift',
+            'connections/redshift'
+          ],
+        },
+        'connections/postgres',
+        {
+          type: 'category',
+          label: 'Snowflake',
+          link: {
+              type: 'generated-index',
+              title: 'Snowflake',
+              description: 'Orchestrate Snowflake queries from your Airflow DAGs.',
+              image: '/img/integrations/snowflake.png'
+          },
+          items: [
+            'airflow-snowflake',
+            'connections/snowflake'
+          ],
+        },
         'soda-data-quality',
         'airflow-talend-integration',
         'airflow-weights-and-biases',
@@ -187,28 +256,9 @@ module.exports = {
           'example-ms-teams-callback',
           {
             type: 'category',
-            label: 'Airflow connections',
-            link: {
-              type: 'generated-index',
-              title: 'Airflow connections',
-              description: 'Use the following guides to quickly set up Airflow connections to external systems.',
-            },
-            items: [
-              'connections/azure-data-factory',
-              'connections/azure-blob-storage',
-              'connections/bigquery',
-              'connections/databricks',
-              'connections/dbt-cloud',
-              'connections/ms-sqlserver',
-              'connections/postgres',
-              'connections/redshift',
-              'connections/snowflake'
-            ],
-          },
-          {
-            type: 'category',
             label: 'Use cases',
             items: [
+              'use-case-setup-teardown-data-quality',
               'use-case-airflow-databricks',
               'use-case-airflow-dbt',
               'use-case-elt-ml-finance',

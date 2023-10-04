@@ -48,7 +48,7 @@ Complete the following setup in an Azure repository that hosts an Astro project:
             curl -sSL install.astronomer.io | sudo bash -s
             astro deploy ${ASTRO_DEPLOYMENT_ID} -f
           env:
-            ASTRO_API_TOKEN_: $(ASTRO_API_TOKEN)
+            ASTRO_API_TOKEN: $(ASTRO_API_TOKEN)
             ASTRO_DEPLOYMENT_ID: $(ASTRO_DEPLOYMENT_ID)
     ```
 

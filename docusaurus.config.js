@@ -225,6 +225,27 @@ module.exports = {
         },
       },
     ],
+    [
+      'redocusaurus',
+        {
+          // Plugin Options for loading OpenAPI files
+          specs: [
+            {
+              id: 'platform',
+              spec: './openapi/platform.yaml',
+            },
+            {
+              id: 'iam',
+              spec: './openapi/iam.yaml',
+            },
+         ],
+          // Theme Options for modifying how redoc renders them
+          theme: {
+           // Change with your site colors
+            primaryColor: '#7352ba',
+          },
+        },
+    ],
   ],
   plugins: [
     [

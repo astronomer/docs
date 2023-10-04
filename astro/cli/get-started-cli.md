@@ -33,7 +33,7 @@ This command generates the following files in the directory:
 ├── plugins # For any custom or community Airflow plugins
 │   └── example-plugin.py
 ├── tests # For any DAG unit test files to be run with pytest
-│   └── test_dag_integrity.py # Test that checks for basic errors in your DAGs
+│   └── test_dag_example.py # Test that checks for basic errors in your DAGs
 ├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
 ├── packages.txt # For OS-level packages
 └── requirements.txt # For Python packages

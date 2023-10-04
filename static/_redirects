@@ -173,6 +173,7 @@
 /astro/cli/astro-workspace /astro/cli/reference 301
 /astro/cli/astro-organization /astro/cli/reference 301
 /astro/cli/astro-user-invite /astro/cli/astro-organization-user-invite 301
+/astro/cli/astro-workspace-team /astro/cli/astro-workspace-team-list 301
 
 
 # redirect enterprise paths to software

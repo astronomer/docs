@@ -2,8 +2,9 @@
 sidebar_label: "astro dev start"
 title: "astro dev start"
 id: astro-dev-start
-description: Reference documentation for astro dev start.
+description: Build your Astro project and start a local Airflow environment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Build your Astro project into a Docker image and spin up a local Docker container for each Airflow component.
@@ -34,6 +35,20 @@ astro dev start
 ```sh
 $ astro dev start --env=/users/username/documents/myfile.env
 ```
+
+:::info
+
+The following error can sometimes occur when the CLI tries to build your Astro Runtime image using Podman:
+
+```bash
+WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format 
+```
+You can resolve this issue by exporting the `BUILDAH_FORMAT` [environment variable](astro/environment-variables.md) to Podman:
+
+```dockerfile
+export BUILDAH_FORMAT=docker
+```
+:::
 
 ## Related Commands
 

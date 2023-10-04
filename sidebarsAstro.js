@@ -270,9 +270,21 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Astro API",
+      items: [
+        "api/overview",
+        "api/get-started",
+        "api/versioning-and-support",
+        "api/iam-api-reference",
+        "api/platform-api-reference",
+      ],
+    },
+    {
+      type: "category",
       label: "Reference",
       items: [
         "astro-support",
+        "astro-office-hours",
         {
           type: "category",
           label: "Astro Runtime",
@@ -425,6 +437,11 @@ module.exports = {
         {
           type: "category",
           label: "astro dev",
+          link: {
+            type: 'generated-index',
+            title: "astro dev command reference",
+            description: 'Use `astro dev` commands to manage your Astro project and interact with your local Airflow environment.'
+          },
           items: [
             'cli/astro-dev-bash',
             'cli/astro-dev-init',
@@ -435,10 +452,10 @@ module.exports = {
             'cli/astro-dev-parse',
             'cli/astro-dev-ps',
             'cli/astro-dev-pytest',
+            'cli/astro-dev-restart',
             'cli/astro-dev-run',
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
-            'cli/astro-dev-restart',
             'cli/astro-dev-upgrade-test',
           ],
         },
@@ -488,7 +505,6 @@ module.exports = {
             "cli/astro-workspace-list",
             "cli/astro-workspace-service-account",
             "cli/astro-workspace-switch",
-            "cli/astro-workspace-team",
             "cli/astro-workspace-team-add",
             "cli/astro-workspace-team-list",
             "cli/astro-workspace-team-remove",
