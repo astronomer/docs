@@ -13,7 +13,8 @@ from airflow.models.baseoperator import chain
 from astronomer.providers.snowflake.utils.snowpark_helpers import SnowparkTable
 
 
-# toggle this to False if you are NOT using the Snowflake XCOM backend
+# toggle this to False if you are NOT using the Snowflake XCOM backend or
+# had the necessary objects created already
 SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND = True
 MY_SNOWFLAKE_XCOM_DATABASE = "SNOWPARK_XCOM_DB"
 MY_SNOWFLAKE_XCOM_SCHEMA = "SNOWPARK_XCOM_SCHEMA"
@@ -22,16 +23,16 @@ MY_SNOWFLAKE_XCOM_TABLE = "XCOM_TABLE"
 
 # provide your Snowflake database name, schema name, connection ID
 # and path to the Snowpark environment binary
-MY_SNOWFLAKE_DATABASE = "TJF_TEST"  # an existing database
-MY_SNOWFLAKE_SCHEMA = "TJF_TEST_SCHEMA"  # an existing schema
-MY_SNOWFLAKE_TABLE = "SKI_DATA"
+MY_SNOWFLAKE_DATABASE = "MY_SKI_DATA_DATABASE"  # an existing database
+MY_SNOWFLAKE_SCHEMA = "MY_SKI_DATA_SCHEMA"  # an existing schema
+MY_SNOWFLAKE_TABLE = "MY_SKI_DATA_TABLE"
 SNOWFLAKE_CONN_ID = "snowflake_default"
 SNOWPARK_BIN = "/home/astro/.venv/snowpark/bin/python"
 
 # while this tutorial will run with the default Snowflake warehouse, larger
 # datasets may require a Snowpark optimized warehouse. Set the following toggle to true to
 # use such a warehouse. And provide your Snowpark and regular warehouses' names.
-USE_SNOWPARK_WAREHOUSE = False
+USE_SNOWPARK_WAREHOUSE = True
 MY_SNOWPARK_WAREHOUSE = "SNOWPARK_WH"
 MY_SNOWFLAKE_REGULAR_WAREHOUSE = "HUMANS"
 
@@ -39,11 +40,14 @@ MY_SNOWFLAKE_REGULAR_WAREHOUSE = "HUMANS"
 @dag(
     start_date=datetime(2023, 9, 1),
     schedule=None,
+    catchup=False,
 )
 def airflow_with_snowpark_tutorial():
     if SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND:
 
-        @task.snowpark_python()
+        @task.snowpark_python(
+            snowflake_conn_id=SNOWFLAKE_CONN_ID,
+        )
         def create_snowflake_objects(
             snowflake_xcom_database,
             snowflake_xcom_schema,
@@ -131,9 +135,9 @@ def airflow_with_snowpark_tutorial():
         )
 
     # use the Astro Python SDK to load data from a CSV file into Snowflake
-    load_file = aql.load_file(
-        task_id=f"load_from_file",
-        input_file=File(f"include/data/ski_dataset.csv"),
+    load_file_obj = aql.load_file(
+        task_id="load_file",
+        input_file=File("include/data/ski_dataset.csv"),
         output_table=Table(
             metadata={
                 "database": MY_SNOWFLAKE_DATABASE,
@@ -146,7 +150,9 @@ def airflow_with_snowpark_tutorial():
     )
 
     # create a model registry in Snowflake
-    @task.snowpark_python
+    @task.snowpark_python(
+        snowflake_conn_id=SNOWFLAKE_CONN_ID,
+    )
     def create_model_registry(demo_database, demo_schema):
         from snowflake.ml.registry import model_registry
 
@@ -158,7 +164,9 @@ def airflow_with_snowpark_tutorial():
 
     # Tasks using the @task.snowpark_python decorator run in
     # the regular Snowpark Python environment
-    @task.snowpark_python
+    @task.snowpark_python(
+        snowflake_conn_id=SNOWFLAKE_CONN_ID,
+    )
     def transform_table_step_one(df: SnowparkTable):
         from snowflake.snowpark.functions import col
         import pandas as pd
@@ -176,7 +184,7 @@ def airflow_with_snowpark_tutorial():
 
     # Tasks using the @task.snowpark_ext_python decorator can use an
     # existing python environment
-    @task.snowpark_ext_python(conn_id=SNOWFLAKE_CONN_ID, python=SNOWPARK_BIN)
+    @task.snowpark_ext_python(snowflake_conn_id=SNOWFLAKE_CONN_ID, python=SNOWPARK_BIN)
     def transform_table_step_two(df):
         df_serious_skiers = df[df["HOURS_SKIED"] >= 1]
 
@@ -185,7 +193,7 @@ def airflow_with_snowpark_tutorial():
     # Tasks using the @task.snowpark_virtualenv decorator run in a virtual
     # environment created on the spot using the requirements specified
     @task.snowpark_virtualenv(
-        conn_id=SNOWFLAKE_CONN_ID,
+        snowflake_conn_id=SNOWFLAKE_CONN_ID,
         requirements=["pandas", "scikit-learn"],
     )
     def train_beverage_classifier(
@@ -198,7 +206,6 @@ def airflow_with_snowpark_tutorial():
     ):
         from sklearn.model_selection import train_test_split
         import pandas as pd
-        import numpy as np
         from snowflake.ml.registry import model_registry
         from snowflake.ml.modeling.linear_model import LogisticRegression
         from uuid import uuid4
@@ -362,12 +369,17 @@ def airflow_with_snowpark_tutorial():
         ax[1].set_title(f"ROC Curve")
         ax[1].legend(loc="lower right")
 
+        fig.suptitle("Predicting afternoon beverage based on skiing data")
+
         plt.tight_layout()
         plt.savefig(f"include/metrics.png")
 
     if SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND:
         # clean up the XCOM table
-        @task.snowpark_ext_python(python="/home/astro/.venv/snowpark/bin/python")
+        @task.snowpark_ext_python(
+            snowflake_conn_id=SNOWFLAKE_CONN_ID,
+            python="/home/astro/.venv/snowpark/bin/python",
+        )
         def cleanup_xcom_table(
             snowflake_xcom_database,
             snowflake_xcom_schema,
@@ -404,7 +416,7 @@ def airflow_with_snowpark_tutorial():
     )
 
     train_beverage_classifier_obj = train_beverage_classifier(
-        transform_table_step_two(transform_table_step_one(load_file)),
+        transform_table_step_two(transform_table_step_one(load_file_obj)),
         database_name=MY_SNOWFLAKE_DATABASE,
         schema_name=MY_SNOWFLAKE_SCHEMA,
         use_snowpark_warehouse=USE_SNOWPARK_WAREHOUSE,
@@ -416,8 +428,8 @@ def airflow_with_snowpark_tutorial():
 
     plot_results_obj = plot_results(train_beverage_classifier_obj)
 
-    if USE_SNOWFLAKE_XCOM_BACKEND:
-        chain(create_snowflake_objects_obj, load_file)
+    if SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND:
+        chain(create_snowflake_objects_obj, load_file_obj)
         chain(
             plot_results_obj,
             cleanup_xcom_table_obj.as_teardown(setups=create_snowflake_objects_obj),
