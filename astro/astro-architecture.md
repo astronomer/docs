@@ -11,39 +11,24 @@ Astro is a fully-managed SaaS application for data orchestration that helps team
 
 There are two ways to run Astro:
 
-- _Astro Hosted_ is a version of Astro that's hosted and managed on Astronomer's Cloud. This version of Astro is ideal if you want to run Airflow with as little friction as possible.
-- _Astro Hybrid_ is a version of Astro that's managed by Astronomer, but your Airflow infrastructure is hosted in your company's cloud. This version of Astro is ideal for companies that want more control over their cloud infrastructure. 
+- With a multi-tenant standard cluster, which is the default.
+- With a single-tenant dedicated cluster.
 
-Astro Hosted consists of three core components for managing Airflow, all hosted on Astronomer's cloud:
-
-- The _Astro control plane_ is Astronomer's interface for managing your Airflow environments in the cloud. It includes the Cloud UI, the Astro CLI, and Cloud API.
-- An _Astro cluster_ comprises all the components necessary to host multiple Airflow Deployments, including the network, database, and compute resources.
-- A _Deployment_ is an Airflow environment running on Astro. Each Deployment includes all of the core Airflow components, plus additional Astronomer tooling that help you optimize resource usage, observability, and security.
-
-Astro Deployments can securely connect to external data services so that you can place Airflow at the heart of your data ecosystem. 
+You can interact with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli) or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), can securely connect to external data services so that you can place Airflow at the heart of your data ecosystem.
 
 ![Astro Hosted architecture overview](/img/docs/architecture-overview.png)
-<!-- ![Astro Hosted architecture overview](/img/docs/astro_architecture_new.png) -->
 
 To learn more about Astro Hybrid architecture and features, see [Astro Hybrid overview](hybrid-overview.md)
 
 ## Astro concepts and components
 
-While many concepts in Astro will be familiar to users of open source Airflow, there are some Astro concepts that are specific to the platform. 
+While many concepts in Astro will be familiar to users of open source Airflow, there are some Astro concepts that are specific to the platform. The Astro ecosystem also consists of tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools.
 
 ### Astro CLI
 
 The [Astro CLI](cli/overview.md) is the primary interface for running Airflow locally and deploying Airflow files to Astro from a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool.
 
 An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. See [Run your first DAG](create-first-dag.md) to create your first Astro project.
-
-### Astro Runtime
-
-_Astro Runtime_ is a [debian-based Docker image](https://quay.io/repository/astronomer/astro-runtime) that bundles Apache Airflow with optimized configurations and add-ons that make your Airflow experience reliable, fast, and scalable. Astronomer releases an Astro Runtime distribution for each version of Apache airflow.
-
-Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.md) to Astro Runtime versions so that you can keep your DAGs running for longer without disruption.
-
-See [Astro Runtime Architecture and features](runtime-image-architecture.md) for a complete feature list.
 
 ### Cloud UI
 
@@ -63,6 +48,13 @@ Compared to an open source Airflow environment, an Astro Deployment is easy to c
 
 To run DAGs in a Deployment, you must either deploy an Astro project manually from your local machine or configure an automated deploy process using a third-party CI/CD tool with the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and view your DAGs. See [Run your first DAG](create-first-dag.md) to get started.
 
+### Astro Runtime
+
+_Astro Runtime_ is a [debian-based Docker image](https://quay.io/repository/astronomer/astro-runtime) that bundles Apache Airflow with optimized configurations and add-ons that make your Airflow experience reliable, fast, and scalable. Astronomer releases an Astro Runtime distribution for each version of Apache airflow.
+
+Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.md) to Astro Runtime versions so that you can keep your DAGs running for longer without disruption.
+
+See [Astro Runtime Architecture and features](runtime-image-architecture.md) for a complete feature list.
 
 ### Workspace
 
@@ -70,7 +62,7 @@ A _Workspace_ is a collection of Deployments that can be accessed by a specific 
 
 When more users from your company join Astro, you can assign them [Workspace roles](user-permissions.md#workspace-roles) that include varying levels of access to your Deployments.
 
-#### Cluster
+### Cluster
 
 A _cluster_ on Astro is a Kubernetes cluster that hosts the infrastructure required to run Airflow environments, also known as [Deployments](#deployment) in Astro. You can either use a pre-configured cluster, known as a standard cluster, or create a cluster for exclusive use by your team, known as a [dedicated cluster](create-dedicated-cluster.md). For both cluster types, Astro manages all underlying infrastructure and provides secure connectivity options to all data services in your ecosystem.
 
