@@ -105,7 +105,7 @@ By default, all tasks run in the default worker queue. To run tasks on a differe
 
 In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
 
-Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
+Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](lhttps://docs.astronomer.io/learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
 
 <Tabs
     defaultValue="classicoperator"
