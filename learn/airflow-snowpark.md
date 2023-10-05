@@ -57,18 +57,13 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 - A Snowflake account. A [30-day free trial](https://signup.snowflake.com/) is available. You will need to have at least one database and one schema created to store the data and models used in this tutorial.
 
-- Optional. There are two optional parts of this tutorial that require additional Snowflake objects to be created.
-    - A **Snowflake custom XCom backend**. If you want to use a Snowflake custom XCom backend you will need to either:
-        - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowflake custom XCom backend is created and cleaned up by the [setup/ teardown](airflow-setup-teardown.md) tasks (`create_snowflake_objects` and `cleanup_xcom_table`) at the beginning and end of the tutorial DAG. The free trial account does have the required privileges.
-        - Ask your Snowflake administrator to create the following for you:
-            - A database called `SNOWPARK_XCOM_DB`.
-            - A schema called `SNOWPARK_XCOM_SCHEMA`.
-            - A table called `XCOM_TABLE`.
-            - A stage called `XCOM_STAGE`.
-
-    - A [**Snowpark-optimized warehouse**](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training. While the tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark warehouse for model training in production. If you want to use a Snowpark warehouse for model training you will need to either:
-        - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowpark-optimized warehouse is created by the [setup](airflow-setup-teardown.md) task (`create_snowflake_objects`) at the beginning of the tutorial DAG. The free trial account does have the required privileges.
-        - Ask your Snowflake administrator to create a Snowpark-optimized warehouse (`SNOWPARK_WH`) for you.
+- Optional. This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-xcom-backends-tutorial.md) included in the provider. If you want to this custom XCom backend you will need to either:
+    - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowflake custom XCom backend is created and cleaned up by the [setup/ teardown](airflow-setup-teardown.md) tasks (`create_snowflake_objects` and `cleanup_xcom_table`) at the beginning and end of the tutorial DAG. The free trial account does have the required privileges.
+    - Ask your Snowflake administrator to create the following for you:
+        - A database called `SNOWPARK_XCOM_DB`.
+        - A schema called `SNOWPARK_XCOM_SCHEMA`.
+        - A table called `XCOM_TABLE`.
+        - A stage called `XCOM_STAGE`.
 
 :::info
 
@@ -96,7 +91,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
     ```
 
-3. Change the content of the `Dockerfile` of your Astro project to the following, importing the `whl` file and creating a virtual environment using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv), in which the requirements added in the previous step will be installed.
+4. Change the content of the `Dockerfile` of your Astro project to the following, importing the `whl` file and creating a virtual environment using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv), in which the requirements added in the previous step will be installed.
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
@@ -114,13 +109,13 @@ The example code from this tutorial is also available on [GitHub](https://github
     RUN python3.8 -m pip install -r /tmp/requirements-snowpark.txt
     ```
 
-4. Add the following package to your `packages.txt` file:
+5. Add the following package to your `packages.txt` file:
 
     ```text
     build-essential
     ```
 
-5. Add the following packages to your `requirements.txt` file. The Astro Snowflake provider is installed from the `whl` file.
+6. Add the following packages to your `requirements.txt` file. The Astro Snowflake provider is installed from the `whl` file.
 
     ```text
     apache-airflow-providers-snowflake==4.1.0
@@ -136,7 +131,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
 :::
 
-6. To create an [Airflow connection](connections.md) to Snowflake and [allow serialization of Astro Python SDK objects](https://astro-sdk-python.readthedocs.io/en/stable/guides/xcom_backend.html#airflow-s-xcom-backend), add the following to your `.env` file. Make sure to enter your own Snowflake credentials as well as the name of an existing database and schema.
+7. To create an [Airflow connection](connections.md) to Snowflake and [allow serialization of Astro Python SDK objects](https://astro-sdk-python.readthedocs.io/en/stable/guides/xcom_backend.html#airflow-s-xcom-backend), add the following to your `.env` file. Make sure to enter your own Snowflake credentials as well as the name of an existing database and schema.
 
     ```text
     AIRFLOW__CORE__ALLOWED_DESERIALIZATION_CLASSES=airflow\.* astro\.*
@@ -160,7 +155,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
         }'
     ```
 
-7. Optional. If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
+8. Optional. If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
 
     ```text
     AIRFLOW__CORE__XCOM_BACKEND='astronomer.providers.snowflake.xcom_backends.snowflake.SnowflakeXComBackend'
@@ -181,6 +176,11 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 1. In your `dags` folder, create a file called `airflow_with_snowpark_tutorial.py`.
 
 2. Copy the following code into the file. Make sure to provide your Snowflake database and schema names to `MY_SNOWFLAKE_DATABASE` and `MY_SNOWFLAKE_SCHEMA`. 
+
+
+    - A [**Snowpark-optimized warehouse**](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training. While the tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark warehouse for model training in production. If you want to use a Snowpark warehouse for model training you will need to either:
+        - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowpark-optimized warehouse is created by the [setup](airflow-setup-teardown.md) task (`create_snowflake_objects`) at the beginning of the tutorial DAG. The free trial account does have the required privileges.
+        - Ask your Snowflake administrator to create a Snowpark-optimized warehouse (`SNOWPARK_WH`) for you.
 
     If you do not want the DAG to automatically setup and clean up the Snowflake custom XCom backend, set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `False` to remove the `create_snowflake_objects` and `cleanup_xcom_table` tasks from your DAG. 
     
