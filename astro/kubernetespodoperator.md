@@ -282,7 +282,7 @@ If your Docker image is hosted in Google Artifact Registry repository, add a per
 
 ## Use secret environment variables with the KubernetesPodOperator
 
-Astro [environment variables](env-vars-overview.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
+Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
 
 1. Add the following import to your DAG file:
    

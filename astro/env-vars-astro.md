@@ -15,7 +15,7 @@ On Astro, you can add, edit, update, or delete environment variables in three di
     - Your Astro project's `.env` file
     - Using Astro CLI commands `astro deployment variable create` and `astro deployment variable update`
 
-The method you choose depends on your [specific use case](env-vars-overview.md#choose-the-strategy-to-manage-environment-variables). 
+The method you choose depends on your [specific use case](environment-variables.md#choose-the-strategy-to-manage-environment-variables). 
 
 Use this document to understand how to use these methods to create environment variables on Astro.
 
@@ -94,7 +94,7 @@ You can either use `.env` file to update environment variables on your local Air
 
 ### In your local Airflow environment
 
-If your environment variables contain sensitive information or credentials that you don’t want to expose in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your code repository.
+If your environment variables contain sensitive information or credentials that you don’t want to expose in plain-text, ensure that your `.env` file is part of `.gitignore` when you deploy these changes to your code repository.
 
 1. Go to your Astro project and open the `.env` file.
 

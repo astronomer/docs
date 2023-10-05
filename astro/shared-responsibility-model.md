@@ -25,7 +25,7 @@ Astronomer is responsible for providing a secure and reliable managed service of
 The customer is responsible for managing certain security aspects of their Astro Organization and Deployments, including:
 
 - Managing roles and permissions of users and API keys within their organization and Workspace(s).
-- Storing and retrieving [API keys](api-keys.md), connections, and [environment variables](env-vars-overview.md) for data pipelines.
+- Storing and retrieving [API keys](api-keys.md), connections, and [environment variables](environment-variables.md) for data pipelines.
 - Integrating with their federated identity management platform for secure single sign-on (SSO) authentication with multi-factor authentication (MFA) and customer managed credentials.
 - Developing and maintaining data pipelines with security and quality coding best practices, inclusive of vulnerability management of plugins and dependencies.
 - Regularly [upgrading their Deployment(s)](upgrade-runtime.md) to the latest Astro Runtime version to take advantage of new functionality, as well as bug and security fixes.

@@ -100,9 +100,9 @@ module.exports = {
           label: "Environment variables",
           link: {
             type: 'doc',
-            id: 'env-vars-overview'
+            id: 'environment-variables'
           },
-          items: ["env-vars-overview", "env-vars-astro"],
+          items: ["environment-variables", "env-vars-astro"],
         },
         "secrets-backend",
         "manage-dags", 

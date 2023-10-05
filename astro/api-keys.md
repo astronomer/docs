@@ -18,7 +18,7 @@ An API key is a unique key ID and secret pair that you can use as an alternative
 You can use Deployment API keys to complete the following actions without authenticating as a user:
 
 - Deploy code to Astro [through CI/CD](set-up-ci-cd.md) with tools such as GitHub Actions or Circle CI.
-- Update Deployment [environment variables](env-vars-overview.md).
+- Update Deployment [environment variables](environment-variables.md).
 - Update Deployment resources. See [Manage Deployments as code](manage-deployments-as-code.md).
 - Fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
 
