@@ -21,11 +21,160 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 9.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 9.1 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.19.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.19.2 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## October 3, 2023
+
+### Additional Improvements
+
+- Added a **DAG Success** alert so you can now set up an alert for successful completion events. See how to set up [Astro alerts](alerts.md). 
+
+### Bug Fixes
+
+- Fixed a problem in the Cloud UI where a warning about Deployment Health was displayed when a Workspace had zero Deployments.
+
+## September 26, 2023
+
+### Introducing the Astro API
+
+:::info
+
+The Astro API is currently in beta. See [Astro API versioning and support](https://docs.astronomer.io/astro/api/versioning-and-support).
+
+:::
+
+You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and scripts to programmatically interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
+
+Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://docs.astronomer.io/astro/api/get-started).
+
+
+## September 19, 2023
+
+### Manage Deployments programmatically using Deployment API tokens
+
+:::caution
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+Deployment API tokens replace Deployment API keys as the most secure and customizable way to manage Deployments programmatically. You can use Deployment API tokens to perform all of the same actions as a Deployment API key, including:
+
+- [Pushing code](https://docs.astronomer.io/astro/deploy-code) to a Deployment.
+- Updating a Deployment's [environment variables](https://docs.astronomer.io/astro/environment-variables).
+- Making requests to update your Deployment's Airflow environment using the [Airflow REST API](https://docs.astronomer.io/astro/airflow-api).
+
+Unlike Deployment API keys, you can set an expiration date for Deployment API tokens and rotate them to better manage access to your Deployment. See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
+
+:::caution
+
+Deployment API tokens are a direct replacement for Deployment API keys. Therefore, Astronomer recommends always using Deployment API tokens over API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens. 
+
+After API tokens are generally available, Deployments with zero API keys will not show the **API Keys** tab and you will no longer be able to create Deployment API keys. If you want to continue using API keys, ensure that you always have at least one API key configured for the Deployment. 
+
+:::
+
+### Additional improvements
+
+- When you create a new Deployment, the Cloud UI now presents new options and suggestions for running your first DAG.
+- You can now retrieve a Workspace's ID from the Cloud UI. To find a Workspace's ID, open the Workspace in the Cloud UI and go to **Workspace Settings** > **General**.
+
+## September 12, 2023
+
+### Per-Deployment IAM workload identities on AWS 
+
+<HybridBadge/>
+
+Astro Hybrid clusters on AWS now support per-Deployment IAM workload identities, meaning that you can now limit your trust policies to authorize only specific Deployments to your cloud resources. 
+
+:::info
+
+This change required an automatic update to the cross-account role that Astro uses to manage clusters in your cloud. In addition to enabling per-Deployment IAM workload identities, this update also adds the following permissions to reduce the risk of partial deletions in your cloud: 
+
+```json
+{ "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:DeleteLoadBalancer" }
+```
+
+For more information about this change, see [Automatic updates coming to cross-account roles for Astro Hybrid on AWS](https://support.astronomer.io/hc/en-us/articles/19833616584723). 
+
+:::
+
+To migrate from using cluster workload identities to Deployment workload identities:
+
+1. In the AWS Management Console, go to the **Identity and Access Management (IAM) dashboard**. Identify all of your trust policies that specify your cluster workload identity. They should look similar to the following trust policy:
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": [
+                        "arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"
+                    ]
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    }
+    ```
+
+2. For each trust policy, add the workload identities for any Deployments that you want to access the related resource. To locate your Deployment workload identity, open the Deployment in the Cloud UI and copy the **Workload Identity** from the **Details** page. Your trust policy should now look like the following:
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": [
+                        "arn:aws:iam::123456789876:role/AirflowS3Logs-cl6zcnlc641hr0voibivf21jh",
+                        "arn:aws:iam::<dataplane-AWS-account-ID>:role/astro-<namespace>"
+                    ]
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    }
+    ```
+
+3. For each Deployment that you specified in your trust policies, open the Deployment in the Cloud UI and click **Details**, then click **Edit Details**. In the **Workload Identity** section, select the new Deployment identity from the dropdown list, then click **Update**. To avoid disruption to tasks, do not complete this step until you have added the Deployment workload identity to all of the trust policies it needs for access.
+
+4. [Upgrade](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to the latest Astro CLI release, which includes support for Per Deployment IAM Workload Identity.
+
+5. After you've tested the policies with your Deployment workload identities, remove the cluster workload identity from your trust policies
+
+### Bug fixes 
+
+- Fixed an issue where Billing Admins could view task usage on the **Usage** page only for Workspaces that they belonged to. Now, Billing Admins can view usage for all Workspaces regardless of their Workspace role.
+
+### Additional improvements
+
+- The Cloud UI [**Usage** page](https://docs.astronomer.io/astro/organization-metrics#astro-usage) now shows task usage for deleted Deployments. If you're an Astro Hybrid Billing Admin, this means that task usage metrics now better reflect your billable usage.
+- When you create a Deployment through the Cloud UI and choose an Astro Runtime version, you can now select only the most recent supported patch for each major version of Astro Runtime.
+- You can now filter task logs by log level or source from the [**DAGs** page](https://docs.astronomer.io/astro/manage-dags) in the Cloud UI.
+
+## September 6, 2023
+
+### View deploy history in the Cloud UI
+
+<HostedBadge/>
+
+When you view a Deployment in the Cloud UI, you can now open the **Deploy History** tab to view a table of all code deploys. The table shows who made deploys, when they made the deploys, and what Astro Runtime image they used for the deploy. 
+
+You can also now use the Astro CLI to specify an optional description for your deploys using the `--description` flag. Deploy descriptions appear in the **Deploy History** table and are useful for telling other Workspace members why you made a deploy or what changes it contains. For more information, see [View deploy history](https://docs.astronomer.io/astro/deploy-history).
+
+### View rendered data figures in the Astro Cloud IDE
+
+Python cells that generate figures using [Matplotlib](https://matplotlib.org/), [Plotly](https://plotly.com/graphing-libraries/), or any libraries that extend these tools now show the figures they render in the Astro Cloud IDE. When you run a Python cell, any figures it generates appear in a new **Figures** tab.
+
+![A Python cell that renders a chart with plotly, and the rendered chart in the Figures tab](/img/release-notes/ide-figures.png)
 
 ## August 29, 2023
 
@@ -1801,7 +1950,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 ## September 28, 2021
 
-:::danger
+:::warning
 
 This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](set-up-ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 

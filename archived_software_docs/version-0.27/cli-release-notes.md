@@ -36,7 +36,7 @@ Release date: January 21, 2022
 
 ### Improvements to the Local Development Experience
 
-:::danger Breaking Change
+:::warning Breaking Change
 
 The latest version of the Astronomer CLI uses Docker engine `1.13.1` to run Airflow locally via `astro dev`. If you haven't done so already, ensure that your version of Docker Engine is at least `1.13.1` before upgrading the Astronomer CLI to v0.27.2. If your Docker Engine version is `<1.13.1`, then `astro dev` commands will not work on your local machine.
 

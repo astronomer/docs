@@ -61,8 +61,10 @@ The Astronomer product you're using determines the format and behavior of the co
 | `cloud.api.protocol`    | The type of protocol to use when calling the Airflow API in a local Airflow environment.                                                                                                                                                           | `https`          | `http`, `https`                                    |
 | `cloud.api.port`        | The port to use when calling the Airflow API in a local environment.                                                                                                                                                                               | `443`            | Any available port                                 |
 | `cloud.api.ws_protocol` | The type of WebSocket (ws) protocol to use when calling the Airflow API in a local Airflow environment.                                                                                                                                            | `wss`            | `ws`, `wss`                                        |
+| `container.binary`               | The name of the container engine.                                                                                                                                                                                                                 | `docker`     | `docker` or `podman` |
 | `context`               | The context for your Astro project.                                                                                                                                                                                                                | Empty string     | Any available [context](cli/astro-context-list.md) |
 | `disable_astro_run`     | Determines whether to disable `astro run` commands and exclude `astro-run-dag` from any images built by the CLI.                                                                                                                                    | `false`          | `true`, `false`                                    |
+| `duplicate_volumes`        | Determines if the Astro CLI creates duplicate volumes when running Airflow locally.                                                                                                                                                                                      | `true` | `true` or `false`                                 |
 | `local.registry`        | The location of your local Docker container running Airflow.                                                                                                                                                                                       | `localhost:5555` | Any available port                                 |
 | `postgres.user`         | The username for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`       | Any string                                         |
 | `postgres.password`     | The password for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`       | Any string                                         |
@@ -298,6 +300,20 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 </Tabs>
 
+### Troubleshoot your Podman configuration
+
+The following error can sometimes occur when the CLI tries to build your Astro Runtime image using Podman:
+
+```bash
+WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format 
+```
+
+To resolve this issue, run the following command to set the `BUILDAH_FORMAT` environment variable on your machine:
+
+```dockerfile
+export BUILDAH_FORMAT=docker
+```
+
 ## Switch between Docker and Podman
 
 After you set up the Astro CLI to use Podman on your local machine, the CLI automatically runs Podman containers whenever you run a command that requires them. To revert to the default behavior and run CLI commands in Docker containers, run the following command:
@@ -311,3 +327,5 @@ If you need to switch back to using Podman again, run the following command:
 ```sh
 astro config set container.binary podman
 ```
+
+

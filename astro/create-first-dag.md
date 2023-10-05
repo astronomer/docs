@@ -103,7 +103,7 @@ An _Astro project_ contains the set of files necessary to run Airflow, including
     ├── plugins # For any custom or community Airflow plugins
     │   └── example-plugin.py
     ├── tests # For any DAG unit test files to be run with pytest
-    │   └── test_dag_integrity.py # Test that checks for basic errors in your DAGs
+    │   └── test_dag_example.py # Example test that checks for basic errors in your DAGs
     ├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
     ├── packages.txt # For OS-level packages
     └── requirements.txt # For Python packages
@@ -127,7 +127,7 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
     astro deploy --dags
     ```
 
-    This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code. After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI deploys your DAGs to Astro.
+    This command returns a list of Deployments available in your Workspace and prompts you to confirm where you want to deploy your DAG code. After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. If your code passes the parse, the Astro CLI deploys your DAGs to Astro. If you run into issues deploying your DAGs, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
 ## Step 4: Trigger your DAG on Astro
 
@@ -174,5 +174,5 @@ To limit resource usage, you might want to delete your Deployment after you fini
 Now that you've created and run your first DAG on Astro, the next step is to add your own DAGs, build out the rest of your Astro project, and start testing real data. See:
 
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, including the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
-- [Deploy code to Astro](/astro/deploy-code).
-- [Develop a project](/astro/develop-project).
+- [Deploy code to Astro](deploy-code.md).
+- [Develop a project](cli/develop-project.md).

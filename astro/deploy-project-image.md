@@ -15,7 +15,7 @@ Use this document to learn how image deploys work and how to manually push your 
 
 - The [Astro CLI](cli/overview.md) is installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for local development, you must install Astro CLI 1.4.0 or later to deploy to Astro.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
-- An [Astro project](develop-project.md#create-an-astro-project).
+- An [Astro project](cli/develop-project.md#create-an-astro-project).
 - [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
 
 ## Step 1: Authenticate to Astro
@@ -63,7 +63,7 @@ If your internet connection has slow upload speeds, the deploy might fail with t
 
 To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy also fails. This can help you prevent your team from deploying DAGs to Astro that contain errors.
 
-For more information about using Pytest, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
+For more information about using Pytest, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
 :::
 
@@ -177,7 +177,7 @@ Deploying a prebuilt Docker image allows you to:
 
 - Test a single Docker image across Deployments instead of rebuilding it each time.
 - Reduce the time it takes to deploy. If your Astro project has a number of packages that take a long time to install, it can be more efficient to build it separately.
-- Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+- Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
 
 To deploy your Astro project as a prebuilt Docker image:
 
@@ -207,5 +207,5 @@ WARNING: The requested image's platform (linux/amd64) does not match the detecte
 ## Related documentation
 
 - [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)
-- [Develop your project](develop-project.md)
-- [Set environment variables](env-vars-overview.md)
+- [Develop your project](cli/develop-project.md)
+- [Set environment variables](environment-variables.md)

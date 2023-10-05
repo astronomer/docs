@@ -125,6 +125,11 @@ The **DAG Dependencies** view (found under the **Browse** tab) shows a graph of 
 
 ![DAG Dependencies View](/img/guides/dag_dependencies.png)
 
+:::note
+
+DAGs that are triggered by datasets do not have the concept of a data interval. If you need information about the triggering event in your downstream DAG, you can use the parameter `triggering_dataset_events` from the context. This parameter provides a list of all the triggering dataset events with parameters `[timestamp, source_dag_id, source_task_id, source_run_id, source_map_index ]`.
+
+:::
 ## Datasets with the Astro Python SDK
 
 If you are using the [Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 

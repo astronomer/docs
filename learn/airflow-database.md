@@ -15,7 +15,7 @@ In this guide, you'll learn everything you need to know about the Airflow metada
 - Database specifications.
 - Important content stored in the database.
 - Best practices for using the metadata database.
-- Different methods for accessing data of interest.
+- How to use the Airflow REST API to access the metadata database.
 
 ## Assumed knowledge
 
@@ -97,17 +97,19 @@ There are additional tables in the metadata database storing data ranging from D
 
 - Memory in the Airflow metadata database can be limited depending on your setup, and running low on memory in your metadata database can cause performance issues in Airflow. This is one of the many reasons why Astronomer advises against moving large amounts of data with XCom, and recommends using a cleanup and archiving mechanism in any production deployments.
 
-- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql).
+- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/) with a built-in scalable and resilient metadata database.
 
 - When configuring a database backend, make sure your version is fully supported by checking the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#choosing-database-backend).
 
 - Never directly modifying the metadata database except in extremely rare circumstances, as this can cause dependency issues and corrupt your Airflow instance.
 
-## Examples for programmatically accessing the metadata database
+## Use the Airflow REST API to access the metadata database
 
-When possible, the best methods for retrieving data from the metadata database are using the Airflow UI or making a GET request to the [stable Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). Between the UI and API, much of the metadata database can be viewed without the risk inherent in direct querying. For use cases where neither the Airflow UI nor the REST API can provide sufficient data, Astronomer recommends using SQLAlchemy to query the metadata database. This provides an additional layer of abstraction on top of the tables, which makes your code less sensitive to minor schema changes.
+The best method for retrieving data from the metadata database is using the Airflow UI or making a GET request to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). 
 
-In this section of the guide you'll learn how you can retrieve specific information from the metadata database.
+Between the UI and API, much of the metadata database can be viewed without the risk inherent in direct querying. In rare cases where neither the Airflow UI nor the REST API can provide sufficient data, it is possible to use SQLAlchemy with Airflow models to access data from the metadata database. Direct querying of the metadata database is not recommended since direct manipulation can result in corruption of your Airflow instance.
+
+This section shows three examples of how to use the Airflow REST API to interact with the Airflow metadata database.
 
 ### Retrieve the number of successfully completed tasks
 
@@ -208,60 +210,4 @@ req = requests.delete(
 
 # print the API response
 print(req.text)
-
-```
-
-### Retrieve all DAG dependencies
-
-Cross-DAG dependencies are a powerful tool to take your data orchestration to the next level. Retrieving data about cross-DAG dependencies from the metadata database can be useful for programmatically implementing custom solutions, for example to make sure downstream DAGs are paused if an upstream DAG is paused. These dependencies can be visualized in the Airflow UI under **Browse** -> **DAG Dependencies**, but they are not accessible through the Airflow REST API.
-
-To programmatically access this information, you can use SQLAlchemy with [Airflow models](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html) to access data from the metadata database. Note that if you are running Airflow in a Dockerized setting, you have to run the script below from within your scheduler container.
-
-```python
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from airflow.models.serialized_dag import SerializedDagModel
-import os
-
-# retrieving your SQL Alchemy connection
-# if you are using Astro CLI this env variable will be set up automatically
-sql_alchemy_conn = os.environ["AIRFLOW__CORE__SQL_ALCHEMY_CONN"]
-
-conn_url = f"{sql_alchemy_conn}/postgres"
-
-engine = create_engine(conn_url)
-
-with Session(engine) as session:
-    result = session.query(SerializedDagModel).first()
-    print(result.get_dag_dependencies())
-
-```
-
-### Retrieve alembic version
-
-In very rare cases, you might need a value from the metadata database which is not accessible through any of the methods you've reviewed. In this case, you can query the metadata database directly. Before you do so, remember that you can corrupt your Airflow instance by directly manipulating the metadata database, especially if the schema changes between upgrades.
-
-The query below retrieves the current [alembic version ID](https://alembic.sqlalchemy.org/en/latest/), which is not accessible through any of the recommended ways of interacting with the metadata database. Database administrators might need the version ID for complex data migration operations.
-
-```python
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-import os
-
-# retrieving your SQL Alchemy connection
-# if you are using Astro CLI this env variable will be set up automatically
-sql_alchemy_conn = os.environ["AIRFLOW__CORE__SQL_ALCHEMY_CONN"]
-
-conn_url = f"{sql_alchemy_conn}/postgres"
-
-engine = create_engine(conn_url)
-
-# this is a direct query to the metadata database: use at your own risk!
-stmt = """SELECT version_num
-        FROM alembic_version;"""
-
-with Session(engine) as session:
-    result = session.execute(stmt)
-    print(result.all()[0][0])
-
 ```

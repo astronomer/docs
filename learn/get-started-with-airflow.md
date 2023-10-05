@@ -316,5 +316,5 @@ Astronomer offers a variety of resources like this tutorial to learn more about 
 Don't know where to start? For beginners, the next resources we recommend are:
 
 - [Managing connections in Airflow](connections.md): Learn how to connect Airflow to third party products and services.
-- [Develop a project](https://docs.astronomer.io/astro/develop-project): Learn about all of the ways you can configure your Astro project and local Airflow environment.
+- [Develop a project](https://docs.astronomer.io/astro/cli/develop-project): Learn about all of the ways you can configure your Astro project and local Airflow environment.
 - [DAG Writing Best Practices](dag-best-practices.md): Learn how to write efficient, secure, and scalable DAGs.

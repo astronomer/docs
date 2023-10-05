@@ -12,6 +12,13 @@ View a list of Organizations that you can access on Astro and their IDs.
 
 Run `astro organization list` to view a list of Organizations that you can access on Astro and their IDs. Only the Organizations you have been invited to by an Organization Owner appear on this list.
 
+## Output
+
+| Output | Description                                            | Data Type |
+| ------ | ------------------------------------------------------ | --------- |
+| `NAME` | The name of the Organizations that you have access to. | String    |
+| `ID`   | The Organization ID.                                   | String    |
+
 ## Related Commands
 
 - [`astro login`](cli/astro-login.md)

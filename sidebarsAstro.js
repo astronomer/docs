@@ -36,7 +36,11 @@ module.exports = {
       type: "category",
       label: "Develop",
       items: [
-        "develop-project",
+        {
+          type: 'link',
+          label: 'Develop your Astro project',
+          href: 'https://docs.astronomer.io/astro/cli/develop-project',
+        },
         "kubernetespodoperator",
         {
           type: "category",
@@ -66,7 +70,6 @@ module.exports = {
         },
         "upgrade-runtime",
         "airflow-api",
-        "test-and-troubleshoot-locally",
       ],
     },
     {
@@ -76,6 +79,7 @@ module.exports = {
         "deploy-code",
         "deploy-project-image",
         "deploy-dags",
+        "deploy-history",
       ],
     },
     {
@@ -183,7 +187,7 @@ module.exports = {
         {
           type: "category",
           label: "Deployments",
-          items: ["authorize-deployments-to-your-cloud", "transfer-a-deployment"],
+          items: ["deployment-api-tokens", "authorize-deployments-to-your-cloud", "transfer-a-deployment"],
         },
         {
           type: "category",
@@ -268,9 +272,21 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Astro API",
+      items: [
+        "api/overview",
+        "api/get-started",
+        "api/versioning-and-support",
+        "api/iam-api-reference",
+        "api/platform-api-reference",
+      ],
+    },
+    {
+      type: "category",
       label: "Reference",
       items: [
         "astro-support",
+        "astro-office-hours",
         {
           type: "category",
           label: "Astro Runtime",
@@ -317,23 +333,31 @@ module.exports = {
     },
     {
       type: "doc",
-      label: "Configure the CLI",
-      id: "cli/configure-cli",
+      label: "Develop your project",
+      id: "cli/develop-project",
     },
     {
       type: "doc",
-      label: "Test your Astro project locally",
+      label: "Run Airflow locally",
+      id: "cli/run-airflow-locally",
+    },
+    {
+      type: "doc",
+      label: "Test your project",
       id: "cli/test-your-astro-project-locally",
-    },
-    {
-      type: "doc",
-      label: "Authenticate to cloud services",
-      id: "cli/authenticate-to-clouds",
     },
     {
       type: "doc",
       label: "Release notes",
       id: "cli/release-notes",
+    },
+    {
+      type: "category",
+      label: "Advanced",
+      items: [
+        "cli/configure-cli",
+        "cli/authenticate-to-clouds",
+      ],
     },
     {
       type: 'category',
@@ -407,11 +431,19 @@ module.exports = {
             'cli/astro-deployment-variable-create',
             'cli/astro-deployment-variable-list',
             'cli/astro-deployment-variable-update',
+            'cli/astro-deployment-worker-queue-create',
+            'cli/astro-deployment-worker-queue-delete',
+            'cli/astro-deployment-worker-queue-update',
           ],
         },
         {
           type: "category",
           label: "astro dev",
+          link: {
+            type: 'generated-index',
+            title: "astro dev command reference",
+            description: 'Use `astro dev` commands to manage your Astro project and interact with your local Airflow environment.'
+          },
           items: [
             'cli/astro-dev-bash',
             'cli/astro-dev-init',
@@ -422,10 +454,10 @@ module.exports = {
             'cli/astro-dev-parse',
             'cli/astro-dev-ps',
             'cli/astro-dev-pytest',
+            'cli/astro-dev-restart',
             'cli/astro-dev-run',
             'cli/astro-dev-start',
             'cli/astro-dev-stop',
-            'cli/astro-dev-restart',
             'cli/astro-dev-upgrade-test',
           ],
         },
@@ -475,7 +507,6 @@ module.exports = {
             "cli/astro-workspace-list",
             "cli/astro-workspace-service-account",
             "cli/astro-workspace-switch",
-            "cli/astro-workspace-team",
             "cli/astro-workspace-team-add",
             "cli/astro-workspace-team-list",
             "cli/astro-workspace-team-remove",

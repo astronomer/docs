@@ -2,7 +2,8 @@
 sidebar_label: "astro dev object import"
 title: "astro dev object import"
 id: astro-dev-object-import
-description: Reference documentation for astro dev object import
+description: Import Airflow objects from a configuration file.
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 Import Airflow variables, connections, and pools from a configuration file to a locally running Airflow environment. 

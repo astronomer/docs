@@ -15,13 +15,15 @@ The following are the registry backend tools supported by Astronomer:
 - [AWS S3](https://aws.amazon.com/s3/)
 - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
-Note that this doc explains only how to set up a registry for hosting Astronomer's system images. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md).
+:::info
+
+This document explains only how to set up a registry for hosting Astronomer's system images. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md). Or, to host all images in a high-security environment with no connections to public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
+
+:::
 
 ## Google Cloud Storage
 
 If you're running Astronomer Software on Google Cloud Platform (GCP) Google Kubernetes Engine (GKE), Astronomer recommends using Google Cloud Storage (GCS) as a registry backend solution.
-
-To read more about the Google Cloud Storage driver, see [Google Cloud Storage driver](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/gcs.md).
 
 ### Prerequisites
 
@@ -92,8 +94,6 @@ astronomer:
 ## AWS S3
 
 If you're running Astronomer Software on the Amazon Elastic Kubernetes Service (EKS), Astronomer recommends using AWS S3 as a registry backend solution.
-
-To read more about the AWS S3 storage driver, [S3 storage driver](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/s3.md).
 
 ### Prerequisites
 
@@ -231,9 +231,6 @@ astronomer:
 ## Azure Blob Storage
 
 If you're running Astronomer Software on Azure Kubernetes Service (AKS), Astronomer recommends using Azure Blob Storage as a registry backend solution.
-
-To read more about the Azure Blog Storage driver, see [Microsoft Azure storage driver](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/azure.md).
-
 
 ### Prerequisites
 
