@@ -33,7 +33,7 @@ The package requirement appears in the **Requirements** list. To edit the Python
 
 ## Configure environment variables
 
-The process for configuring environment variables in the Astro Cloud IDE and in Deployments is similar, and Astro Cloud IDE environment variables are stored and retrieved in the same way as Deployment environment variables. See [How environment variables are stored on Astro](environment-variables.md#how-astro-prioritizes-environment-variables).
+The process for configuring environment variables in the Astro Cloud IDE and in Deployments is similar, and Astro Cloud IDE environment variables are stored and retrieved in the same way as Deployment environment variables. See [How environment variables are stored on Astro](environment-variables.md#how-astro-stores-your-environment-variables).
 
 In the Astro Cloud IDE, you can additionally specify whether an environment variable should be used as an Airflow variable or a system level environment variable.
 

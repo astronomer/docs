@@ -51,9 +51,15 @@ For version compatibility information, see the [Runtime release notes](runtime-r
 
 ## Default environment variables
 
-Airflow environment variables are used to set different default values for Astro Runtime for enhanced performance. You can override the values of these variables for specific use cases. To view a list of these variables and their default values, refer to [Astro Runtime environment variables](platform-variables.md#default-runtime-environment-variables).
+The following table lists the Airflow environment variables that have different default values on Astro Runtime. Unlike [global environment variables](platform-variables.md) set on the data plane, you can override the values of these variables for specific use cases. To edit the values of the default Airflow environment variables, see [Set environment variables on Astro](env-vars-astro.md).
 
-To edit the values of the Airflow environment variables, see [Set environment variables on Astro](environment-variables.md).
+| Environment Variable                                            | Description                                                                                                                                                                                 | Value                                                                        |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL`                     | The time in seconds that Airflow waits before re-scanning the `dags` directory for new files. Note that this environment variable is set for all Deployments regardless of Runtime version. | `30`                                                                         |
+| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                         | The maximum time in seconds that tasks running with the Celery executor can remain in a `queued` state before they are automatically rescheduled.                                           | `600`                                                                        |
+| `AIRFLOW_CORE_PARALLELISM`                                      | The maximum number of task instances that can run concurrently for each scheduler in your Deployment.                                                                                       | `[number-of-running-workers-for-all-worker-queues] * [max-tasks-per-worker]` |
+| `AIRFLOW__KUBERNETES_EXECUTOR__WORKER_PODS_CREATION_BATCH_SIZE` | The number of worker Pods that can be created each time the scheduler parses DAGs. This setting limits the number of tasks that can be scheduled at one time.                               | `16`                                                                         |
+
 
 ## Astro monitoring DAG (Hybrid only)
 

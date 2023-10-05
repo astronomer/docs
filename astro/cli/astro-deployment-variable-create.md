@@ -10,7 +10,7 @@ For a given Deployment on Astro, create environment variables in the Astro CLI b
 
 ## Usage
 
-```shz
+```sh
 astro deployment variable create <key>=<value>
 ```
 
