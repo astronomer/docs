@@ -172,6 +172,14 @@ If you need to change the worker type of an existing worker queue, Astronomer re
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
+:::tip Update Airflow Pool
+
+When the corresponding Airflow Pool does not align with the configured worker queue, you may see tasks getting stuck. Make sure to update Airflow Pools accordingly to the changes in potential maximum task concurrency. 
+
+For more information on limited parallelism, see [Airflow Pools](learn/airflow-pools).
+
+:::
+
 ## Delete a worker queue
 
 :::cli
