@@ -35,4 +35,4 @@ After your trial ends, all Deployments are automatically deleted. If you created
 
 - Contact [sales](https://astronomer.io/contact/) to request a trial extension.
 - Run `astro deployment inspect` with the Astro CLI to save your existing Deployment configuration as a JSON or YAML file. See [Astro CLI command reference](cli/astro-deployment-inspect.md).
-- Open the Cloud UI and schedule office hours with an Astronomer engineer.
+- Open the Cloud UI and [schedule office hours](office-hours.md) with an Astronomer engineer.
