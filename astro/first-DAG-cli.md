@@ -129,6 +129,8 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 </TabItem>
 
+</Tabs>
+
 ## Step 2: Create a Deployment
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within a Workspace.
