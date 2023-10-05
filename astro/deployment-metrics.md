@@ -103,7 +103,7 @@ The following are the possible Deployment health statuses:
 - **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
 - **Unknown** (Grey): The Deployment status can't be determined.
 
-If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, [review the scheduler logs](view-logs.md#view-airflow-scheduler-logs) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/support).
+If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the scheduler logs in the [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Deployment overview
 
@@ -156,7 +156,7 @@ The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibili
 
 Export over 40 Airflow metrics related to the state and performance of your Astro Deployment to [Datadog](https://www.datadoghq.com/) by adding a Datadog API key to your Deployment. These metrics include most information that is available in the Cloud UI, as well as additional metrics that Datadog automatically collects, including number of queued tasks, DAG processing time, and more. For a complete list of supported metrics, see [Data Collected](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) in Datadog documentation.
 
-You can also send task logs to Datadog. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog-aws-only).
+You can also send task logs to Datadog. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog).
 
 :::info
 

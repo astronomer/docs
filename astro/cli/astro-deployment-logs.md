@@ -23,7 +23,7 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-Show [scheduler logs](view-logs.md#view-airflow-scheduler-logs) over the last 24 hours for a given Deployment on Astro. These scheduler logs are the same logs that appear in the **Logs** tab of the Cloud UI.
+Show [scheduler logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) over the last 24 hours for a given Deployment on Astro. These scheduler logs are the same logs that appear in the **Logs** tab of the Cloud UI.
 
 ## Usage
 
