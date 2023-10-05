@@ -204,11 +204,11 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
     - If you want to use [setup/ teardown tasks](airflow-setup-teardown.md) to create and clean up a Snowflake custom XCom backend for this DAG, set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. This will add the `create_snowflake_objects` and `cleanup_xcom_table` tasks to your DAG and create a setup/ teardown workflow. Note that your Snowflake account needs to have `ACCOUNTADMIN` privileges to perform the operations in the `create_snowflake_objects` task and you will need to define the environment variables described in [Step 1.8](#step-1-configure-your-astro-project) to enable the custom XCom backend.
 
-    - If you want to use a [**Snowpark-optimized warehouse**](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training set the `USE_SNOWPARK_WH` variable to `True` and provide your warehouse names to `MY_SNOWPARK_WAREHOUSE` and `MY_SNOWFLAKE_REGULAR_WAREHOUSE`. The `MY_SNOWPARK_WAREHOUSE` warehouse will be created by the `create_snowflake_objects` task if it is enabled, otherwise you will need to create the warehouse manually before running the DAG.
+    - If you want to use a [Snowpark-optimized warehouse](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training, set the `USE_SNOWPARK_WH` variable to `True` and provide your warehouse names to `MY_SNOWPARK_WAREHOUSE` and `MY_SNOWFLAKE_REGULAR_WAREHOUSE`. The `MY_SNOWPARK_WAREHOUSE` warehouse will be created by the `create_snowflake_objects` task if it is enabled, otherwise you will need to create the warehouse manually before running the DAG.
 
 :::info
 
-While this tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark warehouse for model training in production.
+While this tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark-optimized warehouse for model training in production.
 
 :::
 

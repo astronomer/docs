@@ -17,8 +17,9 @@ from airflow.models.baseoperator import chain
 from astronomer.providers.snowflake.utils.snowpark_helpers import SnowparkTable
 
 
-# toggle this to False if you are NOT using the Snowflake XCOM backend or
-# had the necessary objects created already
+# toggle this to True if you are using the Snowflake XCOM backend and want to
+# use setup/ teardown tasks to create all necessary objects and clean up the XCOM table
+# after the DAG has run
 SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND = False
 MY_SNOWFLAKE_XCOM_DATABASE = "SNOWPARK_XCOM_DB"
 MY_SNOWFLAKE_XCOM_SCHEMA = "SNOWPARK_XCOM_SCHEMA"
