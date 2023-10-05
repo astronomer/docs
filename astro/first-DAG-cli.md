@@ -67,7 +67,7 @@ If you're on your organization's network and can't access Astro, make a request 
 
 :::tip
 
-If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
 
 :::
 
@@ -87,7 +87,7 @@ If you want to deploy your first DAG without installing any software to your loc
 
 :::
 
-The winget command line tool is supported on Windows 10 1709 (build 16299) or later, and is bundled with Windows 11 and modern versions of Windows 10 by default as the App Installer. If you don't have winget, you can [Install the CLI on Windows](/cli/install-cli.md#install-the-astro-cli) instead.
+The winget command line tool is supported on Windows 10 1709 (build 16299) or later, and is bundled with Windows 11 and modern versions of Windows 10 by default as the App Installer. If you don't have winget, you can [Install the CLI on Windows manually](/cli/install-cli.md#install-the-astro-cli) instead.
 
 1. Make sure you have the following:
 
