@@ -1,6 +1,6 @@
 ---
-title: "Orchestrate Machine Learning in Snowpark with Apache Airflow"
-sidebar_label: "Snowpark"
+title: "Orchestrate Snowpark Machine Learning Workflows with Apache Airflow"
+sidebar_label: "Snowpark Tutorial"
 description: "Learn how to integrate Snowpark and Airflow."
 id: airflow-snowpark
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
@@ -11,7 +11,7 @@ import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/ai
 
 [Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is a framework containing runtimes and libraries to run non-SQL code in [Snowflake](https://www.snowflake.com/en/). Snowpark comes with a [comprehensive machine learning library](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) optimized for Snowflake. 
 
-In this tutorial you'll learn how to: 
+In this tutorial, you'll learn how to: 
 
 - Create a [custom XCom backend](custom-xcom-backends-tutorial.md) in Snowflake.
 - Create and use a model registry in Snowflake.
@@ -27,7 +27,7 @@ The provider used in this tutorial is currently in beta and its contents as well
 
 ## Why use Airflow with Snowpark?
 
-Snowpark allows you to use Python to perform transformations as well as machine learning operations on data stored in Snowflake.
+Snowpark allows you to use Python to perform transformations and machine learning operations on data stored in Snowflake.
 
 Integrating Snowpark with Airflow offers the benefits of:
 
@@ -36,7 +36,7 @@ Integrating Snowpark with Airflow offers the benefits of:
 - Store and version your machine learning models in a model registry inside Snowflake.
 - Use Snowpark's compute resources instead of the resources of your Airflow cluster for machine learning.
 
-Additionally this tutorial shows how to use Snowflake as a custom XCom backend, this is especially useful for organizations with strict compliance requirements who want to keep all their data in Snowflake but still leverage [Airflow XCom](airflow-passing-data-between-tasks.md) to pass data between tasks.
+Additionally, this tutorial shows how to use Snowflake as a custom XCom backend. This is especially useful for organizations with strict compliance requirements who want to keep all their data in Snowflake but still leverage [Airflow XCom](airflow-passing-data-between-tasks.md) to pass data between tasks.
 
 ## Time to complete
 
@@ -56,7 +56,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 - A Snowflake account. A [30-day free trial](https://signup.snowflake.com/) is available. You will need to have at least one database and one schema created to store the data and models used in this tutorial.
 
-If you want to run this tutorial using the Snowflake custom XCom backend you will need to either:
+If you want to run this tutorial using the Snowflake custom XCom backend, you will need to either:
 
 - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowflake custom XCom backend is created and cleaned up by the [setup/ teardown](airflow-setup-teardown.md) tasks (`create_snowflake_objects` and `cleanup_xcom_table`) at the beginning and end of the tutorial DAG. The free trial account does have the required privileges.
 - Ask your Snowflake administrator to create the following for you:
@@ -160,7 +160,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
         }'
     ```
 
-7. Optional. If you want to use a Snowflake custom XCom backend add the following variables to your `.env` as well. Make sure to replace the values with the name of your own database, schema, table and stage if you are not using the suggested values.
+7. Optional. If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
 
     ```text
     AIRFLOW__CORE__XCOM_BACKEND='astronomer.providers.snowflake.xcom_backends.snowflake.SnowflakeXComBackend'
@@ -170,7 +170,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
 ## Step 2: Add your data
 
-The DAG in this tutorial runs a classification model on synthetic data to predict with afternoon beverage a skier will choose based on attributes like ski color, ski resort and amount of new snow. The data is being generated using [this script](https://github.com/astronomer/airflow-snowpark-tutorial/blob/main/include/data/create_ski_dataset.py). 
+The DAG in this tutorial runs a classification model on synthetic data to predict which afternoon beverage a skier will choose based on attributes like ski color, ski resort, and amount of new snow. The data is generated using [this script](https://github.com/astronomer/airflow-snowpark-tutorial/blob/main/include/data/create_ski_dataset.py). 
 
 1. Create a new directory in your Astro project's `include` directory called `data`.
 
@@ -223,8 +223,8 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
 ## Conclusion
 
-Congratulations! You trained a classification model in Snowpark using Airflow. This pipeline is meant as a simple example showcasing the three main options to run code in different Snowpark using Airflow decorators:
+Congratulations! You trained a classification model in Snowpark using Airflow. This pipeline is meant as a simple example showcasing the three main options to run code in Snowpark using Airflow decorators:
 
 - `@task.snowpark_python` runs your code in a standard Snowpark environment. Use this decorator if you need to run code in Snowpark that does not require any additional packages, which are not preinstalled in a standard Snowpark environment. The corresponding traditional operator is the SnowparkPythonOperator.
 - `@task.snowpark_ext_python` runs your code in a pre-existing virtual environment within Snowpark. Use this decorator when you want to reuse virtual environments in different tasks in the same Airflow instances, or your virtual environment takes a long time to be built. The corresponding traditional operator is the SnowparkExternalPythonOperator.
-- `@task.snowpark_virtualenv` runs your code in a virtual environment within Snowpark that is created on the fly just for a specific task. Use this decorator when you want to tailor a virtual environment to a task and don't need to reuse it. The corresponding traditional operator is the SnowparkVirtualenvOperator.
+- `@task.snowpark_virtualenv` runs your code in a virtual environment within Snowpark that is created at runtime for that specific task. Use this decorator when you want to tailor a virtual environment to a task and don't need to reuse it. The corresponding traditional operator is the SnowparkVirtualenvOperator.
