@@ -16,6 +16,7 @@ In this tutorial, you'll learn how to:
 - Create a [custom XCom backend](custom-xcom-backends-tutorial.md) in Snowflake.
 - Create and use a model registry in Snowflake.
 - Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
+- Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset describing skiers to predict their afternoon beverage choice.
 
 :::caution
 
@@ -56,19 +57,18 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 - A Snowflake account. A [30-day free trial](https://signup.snowflake.com/) is available. You will need to have at least one database and one schema created to store the data and models used in this tutorial.
 
-If you want to run this tutorial using the Snowflake custom XCom backend, you will need to either:
+- Optional. There are two optional parts of this tutorial that require additional Snowflake objects to be created.
+    - A **Snowflake custom XCom backend**. If you want to use a Snowflake custom XCom backend you will need to either:
+        - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowflake custom XCom backend is created and cleaned up by the [setup/ teardown](airflow-setup-teardown.md) tasks (`create_snowflake_objects` and `cleanup_xcom_table`) at the beginning and end of the tutorial DAG. The free trial account does have the required privileges.
+        - Ask your Snowflake administrator to create the following for you:
+            - A database called `SNOWPARK_XCOM_DB`.
+            - A schema called `SNOWPARK_XCOM_SCHEMA`.
+            - A table called `XCOM_TABLE`.
+            - A stage called `XCOM_STAGE`.
 
-- Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowflake custom XCom backend is created and cleaned up by the [setup/ teardown](airflow-setup-teardown.md) tasks (`create_snowflake_objects` and `cleanup_xcom_table`) at the beginning and end of the tutorial DAG. The free trial account does have the required privileges.
-- Ask your Snowflake administrator to create the following for you:
-    - A database called `SNOWPARK_XCOM_DB`.
-    - A schema called `SNOWPARK_XCOM_SCHEMA`.
-    - A table called `XCOM_TABLE`.
-    - A stage called `XCOM_STAGE`.
-
-Similarly, the tutorial DAG includes a toggle to use a [Snowpark-optimized warehouse](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training. While the tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark warehouse for model training in production. If you want to use a Snowpark warehouse for model training you will need to either:
-
-- Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowpark-optimized warehouse is created by the [setup](airflow-setup-teardown.md) task (`create_snowflake_objects`) at the beginning of the tutorial DAG. The free trial account does have the required privileges.
-- Ask your Snowflake administrator to create a Snowpark-optimized warehouse (`SNOWPARK_WH`) for you.
+    - A [**Snowpark-optimized warehouse**](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training. While the tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark warehouse for model training in production. If you want to use a Snowpark warehouse for model training you will need to either:
+        - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowpark-optimized warehouse is created by the [setup](airflow-setup-teardown.md) task (`create_snowflake_objects`) at the beginning of the tutorial DAG. The free trial account does have the required privileges.
+        - Ask your Snowflake administrator to create a Snowpark-optimized warehouse (`SNOWPARK_WH`) for you.
 
 :::info
 
