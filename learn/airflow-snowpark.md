@@ -6,6 +6,8 @@ id: airflow-snowpark
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/airflow-snowpark/airflow_with_snowpark_tutorial.py';
 
@@ -177,20 +179,11 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
 2. Copy the following code into the file. Make sure to provide your Snowflake database and schema names to `MY_SNOWFLAKE_DATABASE` and `MY_SNOWFLAKE_SCHEMA`. 
 
-
-    - A [**Snowpark-optimized warehouse**](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training. While the tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark warehouse for model training in production. If you want to use a Snowpark warehouse for model training you will need to either:
-        - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowpark-optimized warehouse is created by the [setup](airflow-setup-teardown.md) task (`create_snowflake_objects`) at the beginning of the tutorial DAG. The free trial account does have the required privileges.
-        - Ask your Snowflake administrator to create a Snowpark-optimized warehouse (`SNOWPARK_WH`) for you.
-
-    If you do not want the DAG to automatically setup and clean up the Snowflake custom XCom backend, set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `False` to remove the `create_snowflake_objects` and `cleanup_xcom_table` tasks from your DAG. 
-    
-    If you want to use a Snowpark-optimized warehouse for model training, set `USE_SNOWPARK_WH` to `True` and provide your warehouse names to `MY_SNOWPARK_WAREHOUSE` and `MY_SNOWFLAKE_REGULAR_WAREHOUSE`.
-
     <CodeBlock language="python">{airflow_with_snowpark_tutorial}</CodeBlock>
 
     This DAG consists of eight tasks in a simple ML orchestration pipeline.
 
-    - `create_snowflake_objects`: Creates the Snowflake objects required for the Snowflake custom XCom backend. This task uses the `@task.snowflake_python` decorator to run code within Snowpark, automatically instantiating a Snowpark session called `snowpark_session` from the connection ID provided to the `snowflake_conn_id` parameter. This task is a [setup task](airflow-setup-teardown.md) and will not be shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `False`.
+    - Optional. `create_snowflake_objects`: Creates the Snowflake objects required for the Snowflake custom XCom backend. This task uses the `@task.snowflake_python` decorator to run code within Snowpark, automatically instantiating a Snowpark session called `snowpark_session` from the connection ID provided to the `snowflake_conn_id` parameter. This task is a [setup task](airflow-setup-teardown.md) and will only be shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. See also Step 3.3.
 
     - `load_file`: Loads the data from the `ski_dataset.csv` file into the Snowflake table `MY_SNOWFLAKE_TABLE` using the [load_file operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) from the Astro Python SDK. 
 
@@ -205,7 +198,19 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
     - `plot_metrics`: Creates a plot of the model performance metrics and saves it to the `include` directory. This task runs in the Airflow environment using the `@task` decorator.
 
-    - `cleanup_xcom_table`: Cleans up the Snowflake custom XCom backend by dropping the `XCOM_TABLE` and `XCOM_STAGE`. This task is a [teardown task](airflow-setup-teardown.md).
+    - Optional. `cleanup_xcom_table`: Cleans up the Snowflake custom XCom backend by dropping the `XCOM_TABLE` and `XCOM_STAGE`. This task is a [teardown task](airflow-setup-teardown.md) and will only be shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. See also Step 3.3.
+
+3. Optional. This DAG has two optional features you can enable.
+
+    - If you want to use [setup/ teardown tasks](airflow-setup-teardown.md) to create and clean up a Snowflake custom XCom backend for this DAG, set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. This will add the `create_snowflake_objects` and `cleanup_xcom_table` tasks to your DAG and create a setup/ teardown workflow.  Note that your Snowflake account needs to have `ACCOUNTADMIN` privileges to perform the operations in the `create_snowflake_objects` task.
+
+    - If you want to use a [**Snowpark-optimized warehouse**](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training set the `USE_SNOWPARK_WH` variable to `True` and provide your warehouse names to `MY_SNOWPARK_WAREHOUSE` and `MY_SNOWFLAKE_REGULAR_WAREHOUSE`. The `MY_SNOWPARK_WAREHOUSE` warehouse will be created by the `create_snowflake_objects` task if it is enabled, otherwise you will need to create the warehouse manually before running the DAG.
+
+:::info
+
+While this tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark warehouse for model training in production.
+
+:::
 
 ## Step 4: Run your DAG
 
@@ -213,7 +218,24 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
 2. In the Airflow UI, run the `airflow_with_snowpark_tutorial` DAG by clicking the play button.
 
-    ![Screenshot of the Airflow UI showing the `airflow_with_snowpark_tutorial` DAG having completed successfully in the Grid view with the Graph tab selected.](/img/tutorials/airflow-snowpark_dag_graph.png)
+<Tabs
+    defaultValue="standard"
+    groupId="step-4-run-your-dag"
+    values={[
+        {label: 'Basic DAG', value: 'standard'},
+        {label: 'DAG with setup/ teardown enabled', value: 'setup-teardown'},
+    ]}>
+<TabItem value="standard">
+
+![Screenshot of the Airflow UI showing the `airflow_with_snowpark_tutorial` DAG having completed successfully in the Grid view with the Graph tab selected.](/img/tutorials/airflow-snowpark_dag_graph_basic.png)
+
+</TabItem>
+<TabItem value="setup-teardown">
+
+![Screenshot of the Airflow UI showing the `airflow_with_snowpark_tutorial` DAG having completed successfully in the Grid view with the Graph tab selected. This screenshot shows the version of the DAG where SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND is set to true, creating an additional setup/ teardown workflow.](/img/tutorials/airflow-snowpark_dag_graph.png)
+
+</TabItem>
+</Tabs>
 
 3. In the Snowflake UI, view the model registry to see the model that was created by the DAG. In a production context, you could pull a specific model from the registry to run predictions on new data.
 
