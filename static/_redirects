@@ -304,7 +304,6 @@
 /enterprise/0.16/* /software/0.16/overview
 
 # redirects for getting started restructure
-/astro/create-project /astro/first-dag-cli#step-1-create-an-astro-project 301
 /astro/create-first-DAG /astro/run-first-dag
 
 # redirect .rss to .xml

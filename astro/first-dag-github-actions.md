@@ -80,7 +80,7 @@ Specifically, this Astro project includes an example DAG which, when you run it,
 
 ## Step 3: Set up the GitHub Actions Workflow
 
-This example repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action), that you can use to set up a CI/CD deployment pipeline. In this step, you'll configure this action to deploy code from your forked repository to Astro.
+This example repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action), which you can use to set up a CI/CD deployment pipeline. In this step, you'll configure this action to deploy code from your forked repository to Astro.
 
 1. Open two browser windows: one with the [Cloud UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
 
