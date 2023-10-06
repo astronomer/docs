@@ -33,6 +33,7 @@ A workload identity is a Kubernetes service account that provides an identity to
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
+        {label: 'Azure', value 'azure'},
     ]}>
 <TabItem value="aws">
 
@@ -129,6 +130,53 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
     
     If you don't see **Google Cloud** as a connection type, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Google/versions/latest) for the latest package.
     
+</TabItem>
+<TabItem value="azure">
+
+#### Step 1: Retrieve your Azure access credentials
+
+To grant a Deployment access to a service that is running in an Azure account not managed by Astronomer, use the `AZURE_TENANT_ID` and `AZURE_CLOUD_ID` Airflow environment variables to specify your Azure AD Workload Identity access token. Airflow uses this information to authorize your Deployment's workload identity on Azure. 
+
+1. Log in to your Azure account.
+
+2. **Retrieve your credentials**
+    - Find the tenant ID, client ID, and any other information that needs to be saved as environment variables
+
+#### Step 2: Configure your environment variables
+
+Because these environment variables define your access credentials, instead of storing them in a plain text file, use either the Cloud UI or a [secrets backend](secrets-backend.md). The following steps describe how to use the Cloud UI to store your credentials and mark them secret.
+
+1. In the Astro Cloud UI for your Deployment, go to **Variables**.
+
+2. Click **Edit Variables**. 
+
+3. Add `AZURE_TENANT_ID` as the **Key** and paste the Azure tenant ID you retrieved.
+
+4. Check the box to mark this variable as **Secret**.
+
+5. Click **Add**.
+
+6. Repeat the previous steps to add `AZURE_CLOUD_ID` as secret. 
+
+
+#### Step 3: Create an Airflow connection
+
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection.
+
+1. In the Airflow UI for your Deployment, go to **Admin** > **Connections**. Click **+** to add a new connection, then select the connection type as **Azure**. 
+
+2. Fill out the following fields:
+
+    - **Connection Id**: Enter a name for the connection.
+    - **Azure Client ID**: 
+    - **Azure Tenant ID**:
+
+
+3. Click **Save**. 
+    
+    If you don't see **Azure** as a connection type, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Google/versions/latest) for the latest package.
+    
+
 </TabItem>
 </Tabs>
 
