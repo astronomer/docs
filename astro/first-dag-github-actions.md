@@ -66,9 +66,7 @@ Astro contains an in-product tutorial that guides you through Steps 2-4 of this 
 
 ## Step 2: Fork the example project repository
 
-This repository contains an _Astro project_, which is a collection of files required for running Airflow on Astro. An Astro project includes folders for DAG files, plugins, dependencies, and more.
-
-Specifically, this Astro project includes an example DAG which, when you run it, retrieves a list of countries from an Astro S3 data store and filters the list through a data transform.  
+This repository contains an _Astro project_, which is a collection of files required for running Airflow on Astro. An Astro project includes folders for DAG files, plugins, dependencies, and more. Specifically, this Astro project includes an example DAG which, when you run it, retrieves a list of countries from an Astro S3 data store and filters the list through a data transform.  
 
 1. Open [the example project repository](https://github.com/astronomer/astro-example-dags/fork) in a new tab or browser window.
 
@@ -80,7 +78,7 @@ Specifically, this Astro project includes an example DAG which, when you run it,
 
 ## Step 3: Set up the GitHub Actions Workflow
 
-This example repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action), which you can use to set up a CI/CD deployment pipeline. In this step, you'll configure this action to deploy code from your forked repository to Astro.
+This example repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action), which you can use to set up a CI/CD deployment pipeline. In this step, you'll configure the GitHub action to deploy code from your forked repository to Astro and run the workflow.
 
 1. Open two browser windows: one with the [Cloud UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
 
@@ -118,7 +116,7 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
 This automatically deploys the example DAGs in your Astro project to your Deployment.
 
-## Step 4: Run your DAG in Airflow
+## Step 4: View your DAG run results
 
 Open your Deployment in the Cloud UI and click **DAGs** in the left sidebar, then click **S3**. From this page, you can see that the `s3` DAG has run exactly once. 
 
