@@ -19,7 +19,7 @@ You can find information about installing, upgrading, and uninstalling the Astro
 
 :::info
 
-If you want to run your first DAG on Astro but don't want to install any software locally, you can instead deploy DAGs with [GitHub Actions](first-DAG-github-actions.md). Astronomer recommends this option if your organization restricts the use of Docker or if you have trouble installing the Astro CLI on Windows.
+If you want to run your first DAG on Astro but don't want to install any software locally, you can instead deploy DAGs with [GitHub Actions](first-dag-github-actions.md). Astronomer recommends this option if your organization restricts the use of Docker or if you have trouble installing the Astro CLI on Windows.
 
 :::
 
