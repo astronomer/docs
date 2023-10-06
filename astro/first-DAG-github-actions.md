@@ -6,24 +6,26 @@ id: 'first-dag-github-actions'
 
 import {siteVariables} from '@site/src/versions';
 
-This quickstart explains the steps required to deploy an example DAG to Astro and trigger a DAG run with Github Actions.
+Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
 
 Specifically, you will:
 
 - Authenticate and log in to Astro. 
 - Create a Deployment. 
+- Fork an example GitHub repository with a new Astro project.
 - Configure GitHub Actions.
-- Deploy DAGs to Astro in the Cloud UI.
-- Trigger a run of an example DAG in the Airflow UI. 
+- Trigger the GitHub Action to deploy an example DAG to Astro.
+- Trigger a run of the example DAG in the Airflow UI. 
 
 The steps take about 15 minutes. If you prefer to use a CLI, you can alternatively create and run your first DAG [using the Astro CLI](first-dag-cli.md) in the same amount of time.
 
-This tutorial assumes that you know some basic Airflow concepts. If you're new to Airflow and want a more general introduction, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
+This tutorial assumes that you're familiar with basic Apache Airflow concepts. If you're new to Airflow and want a more general introduction, see the [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
 
 ## Prerequisites
 
 - An Astro account. To start an Astro trial and create your free trial account, see [Start a trial](trial.md).
-- A [GitHub](https://docs.github.com/en/get-started/signing-up-for-github) account.
+- A [GitHub account](https://docs.github.com/en/get-started/signing-up-for-github).
+
 
 :::info
 
@@ -64,21 +66,29 @@ Astro contains an in-product tutorial that guides you through Steps 2-4 of this 
 
 ## Step 2: Fork the example project repository
 
-Open a new tab or browser window and [make a fork of the example project repository](https://github.com/astronomer/astro-example-dags/fork) on GitHub.
-
 This repository contains an _Astro project_, which is a collection of files required for running Airflow on Astro. An Astro project includes folders for DAG files, plugins, dependencies, and more.
 
-Specifically, this Astro project includes an example DAG which, when you run it, retrieves a list of countries from an Astro S3 data store and filters the list through a data transform. The repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action). In the next step, you'll configure this action to deploy code from your forked repository to Astro.
+Specifically, this Astro project includes an example DAG which, when you run it, retrieves a list of countries from an Astro S3 data store and filters the list through a data transform.  
+
+1. Open [the example project repository](https://github.com/astronomer/astro-example-dags/fork) in a new tab or browser window.
+
+2. **Choose an owner** from your available options.
+
+3. Keep the selection to **Copy the `main` branch only**. 
+
+4. Click **Create fork**.
 
 ## Step 3: Set up the GitHub Actions Workflow
 
-To configure code deploys from your GitHub repository to Astro, you must have two browser windows open at the same time: one with the [Cloud UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
+This example repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action), that you can use to set up a CI/CD deployment pipeline. In this step, you'll configure this action to deploy code from your forked repository to Astro.
 
-1. In the Cloud UI, choose the Deployment where you want to deploy your repository. 
+1. Open two browser windows: one with the [Cloud UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
 
-2. In GitHub, open your forked repository and click **Actions**.
+2. In the Cloud UI, choose the Deployment where you want to deploy your Astro project. 
 
-3. Click **I understand my workflows, go ahead and enable them.**
+3. In GitHub, open your forked repository and click **Actions**.
+
+4. Click **I understand my workflows, go ahead and enable them.**
 
   The [workflow](https://github.com/astronomer/astro-example-dags/blob/main/.github/workflows/deploy-to-astro.yaml) is a script that uses API tokens to deploy DAGs from a GitHub repository to your Deployment, without requiring any local development.
 
@@ -106,7 +116,7 @@ To configure code deploys from your GitHub repository to Astro, you must have tw
 
 13. Click **Run workflow**. 
 
-This automatically deploys the example DAGs to your Deployment.
+This automatically deploys the example DAGs in your Astro project to your Deployment.
 
 ## Step 4: Run your DAG in Airflow
 
@@ -114,13 +124,13 @@ Open your Deployment in the Cloud UI and click **DAGs** in the left sidebar, the
 
 ![Detailed view of the S3 DAG run outcome.](/img/docs/s3-complete.png)
 
-The **DAGs** page compiles the most commonly used information and actions from the Airflow UI in one place. If you prefer to view your DAG run in the Airflow UI, click **Open Airflow** in the upper right corner of the page.
+The **DAGs** page of the Cloud UI includes the most commonly used information and actions from the Airflow UI in one place. If you prefer to view your DAG run in the Airflow UI, click **Open Airflow** in the upper right corner of the page.
 
-Congratulations! You deployed and ran a DAG to your Astro Deployment using GitHub Actions!
+Congratulations! You deployed and ran your first DAG on Astro with GitHub Actions.
 
 ## Next Steps
 
-- Install [the CLI](/astro/cli/install-cli.md)
-- [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
-- Develop your [Astro project](/astro/cli/run-airflow-locally)
+- Develop your [Astro project](/astro/cli/run-airflow-locally).
 - Read more about [Developing CI/CD workflows](set-up-ci-cd.md).
+- Install [the CLI](/astro/cli/install-cli.md) to test DAGs or run Airflow locally.
+- [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).

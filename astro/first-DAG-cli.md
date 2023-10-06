@@ -13,29 +13,25 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro is the industry's leading managed service for Apache Airflow. You can quickly learn how Astro works by running an Apache Airflow DAG with the Astro CLI. In this quickstart, follow the steps required to deploy an example DAG to Astro and trigger a DAG run from the Astro CLI.
+Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with the Astro CLI.
 
 Specifically, you will:
 
-- Install the CLI
+- Install the CLI.
 - Authenticate and log in to Astro. 
 - Create a Deployment. 
 - Create an Astro project. 
 - Deploy DAGs to Astro with the Astro CLI.
 - Trigger a run of an example DAG in the Airflow UI. 
 
-This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
+This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+.
 
-If you just want to run Airflow on your local machine without deploying to Astro, see [Get started with Airflow using the Astro CLI](cli/get-started-cli.md). 
+If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
 ## Prerequisites
 
 - An Astro account. To start an Astro trial and create your free trial account, see [Start a trial](trial.md).
-
-Although it's not required for this tutorial, the following container engines are supported with the Astro CLI and required to run Airflow locally:
-
-- [Docker Desktop](https://docs.docker.com/get-docker/) (Recommended).
-- [Podman](https://podman.io/). See [Run the Astro CLI using Podman](cli/configure-cli.md#run-the-astro-cli-using-podman).
 
 :::info
 
@@ -67,7 +63,7 @@ If you're on your organization's network and can't access Astro, make a request 
 
 :::tip
 
-If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
+If you're encountering problems with installing the CLI or don't want to install software locally, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
 :::
 
@@ -240,20 +236,13 @@ Go back to your Deployment page in the Cloud UI. Because you ran your example DA
 
 ![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-dag-data.png)
 
-## Step 7: (Optional) Delete your Deployment
-
-To limit resource usage, you might want to delete your Deployment after you finish triggering your DAG test runs.
-
-1. In the Cloud UI, open your Workspace, then open your Deployment.
-
-2. Select the ellipses to see more options, then click **Delete**.
-
-3. When prompted, confirm the deletion by typing **DELETE**.
+When you're done exploring, you can delete your Deployment from the **More Options** menu on your **Deployments** page.
 
 ## Next Steps
 
 Now that you've created and run your first DAG on Astro, the next step is to add your own DAGs, build out the rest of your Astro project, and start testing real data. See:
 
+- [Develop a project](cli/develop-project.md).
 - [Install Docker](https://www.docker.com/products/docker-desktop/) to use the full capabilities of the Astro CLI, such as the ability to run Airflow locally and deploy the rest of your Astro project to Astro, including Python packages.
 - [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 - [Deploy code to Astro](deploy-code.md).
