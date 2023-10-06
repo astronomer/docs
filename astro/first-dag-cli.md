@@ -234,7 +234,7 @@ The Cloud UI shows you information about the health of your Deployment, includin
 
 Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Overview** page for your Deployment.
 
-![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-dag-data.png)
+![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 
 When you're done exploring, you can delete your Deployment from the **More Options** menu on your **Deployments** page.
 
