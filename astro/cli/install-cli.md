@@ -19,7 +19,7 @@ You can find information about installing, upgrading, and uninstalling the Astro
 
 :::info
 
-If you want to run your first DAG, but don't want to install any software locally, you can instead use a no-code process using [GitHub Actions](first-DAG-github-actions.md).
+If you want to run your first DAG, but don't want to install any software locally, you can instead use a no-code process using [GitHub Actions](first-dag-github-actions.md).
 
 :::
 

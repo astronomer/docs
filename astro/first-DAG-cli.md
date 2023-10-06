@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'With Astro CLI'
 title: 'Run your first DAG with the Astro CLI'
-id: 'first-DAG-cli'
+id: 'first-dag-cli'
 ---
 
 <head>
@@ -67,7 +67,7 @@ If you're on your organization's network and can't access Astro, make a request 
 
 :::tip
 
-If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
 :::
 
@@ -83,7 +83,7 @@ brew install astro
 
 :::tip
 
-If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
 :::
 
@@ -117,7 +117,7 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 
 :::tip
 
-If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-DAG-github-actions.md).
+If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
 :::
 
@@ -238,7 +238,7 @@ The Cloud UI shows you information about the health of your Deployment, includin
 
 Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Overview** page for your Deployment.
 
-![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
+![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-dag-data.png)
 
 ## Step 7: (Optional) Delete your Deployment
 

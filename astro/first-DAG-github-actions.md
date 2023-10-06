@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'With GitHub Actions'
 title: 'Run your first DAG with GitHub Actions'
-id: 'first-DAG-github-actions'
+id: 'first-dag-github-actions'
 ---
 
 import {siteVariables} from '@site/src/versions';
@@ -16,7 +16,7 @@ Specifically, you will:
 - Deploy DAGs to Astro in the Cloud UI.
 - Trigger a run of an example DAG in the Airflow UI. 
 
-The steps take about 15 minutes. If you prefer to use a CLI, you can alternatively create and run your first DAG [using the Astro CLI](first-DAG-cli.md) in the same amount of time.
+The steps take about 15 minutes. If you prefer to use a CLI, you can alternatively create and run your first DAG [using the Astro CLI](first-dag-cli.md) in the same amount of time.
 
 This tutorial assumes that you know some basic Airflow concepts. If you're new to Airflow and want a more general introduction, see [Write your First DAG](https://docs.astronomer.io/learn/get-started-with-airflow).
 
