@@ -29,6 +29,7 @@
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
 /astro/connect-external-services https://docs.astronomer.io/astro/category/connect-to-external-resources 301
 /astro/configure-deployment-resources /astro/deployment-settings 301
+/astro/view-logs#export-task-logs-to-datadog-aws-only /astro/view-logs#export-task-logs-to-datadog 301
 
 # tutorial redirects 
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
