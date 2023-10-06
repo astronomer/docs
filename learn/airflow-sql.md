@@ -163,21 +163,44 @@ If you need a parameter that is not available as a built-in variable or a macro,
 ```python
 opr_param_query = SQLExecuteQueryOperator(
     task_id="param_query",
-    snowflake_conn_id="snowflake",
+    conn_id="snowflake",
     sql="param-query.sql",
-    params={"date":mydatevariable}
+    parameters={"my_date": mydatevariable}
 )
 ```
 
-And then reference that param in your SQL file (note that above you're passing a dictionary to `parameters`, but in your query below you reference `params` to access the values of `parameters`):
+And then reference that param in your SQL file:
 
 ```sql
 SELECT *
 FROM STATE_DATA
-WHERE date = {{ params.date }}
+WHERE date = %(my_date)s
 ```
 
-N.b. If you run your DAG with user-defined parameters (by running your DAG via the 'Trigger DAG w/config' option), these user-defined parameters will overwrite any value you pass into the `parameters` argument for the task run.
+An alternative option is to use [Jinja](templating.md) templates in your SQL statements and pass the relevant values using the `params` parameter.
+
+```python
+    opr_param_query = SQLExecuteQueryOperator(
+        task_id="param_query",
+        conn_id="snowflake_default",
+        sql="param-query.sql",
+        params={"my_date": "2022-09-01"},
+    )
+```
+
+The value can be referenced using Jinja syntax in the SQL statement:
+
+```sql
+SELECT *
+FROM STATE_DATA
+WHERE date = '{{ params.date }}'
+```
+
+:::tip
+
+Airflow params can also be defined at the DAG-level and passed to a DAG at runtime. Params passed at runtime will override param defaults defined at the DAG or the task level. For more information on params see the [Create and use params in Airflow](airflow-params.md) guide.
+
+:::
 
 ### Example 3: Load data
 
