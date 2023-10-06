@@ -25,7 +25,6 @@ Specifically, you will:
 - Trigger a run of an example DAG in the Airflow UI. 
 
 This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
-.
 
 If you want to deploy your first DAG without installing any software to your local machine, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
@@ -79,7 +78,7 @@ brew install astro
 
 :::tip
 
-If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
+If you're encountering problems with installing the CLI or don't want to install software locally, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
 :::
 
@@ -113,7 +112,7 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 
 :::tip
 
-If you want to deploy your first DAG without installing any software to your local machine, or if you're encountering problems with installing the CLI, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
+If you're encountering problems with installing the CLI or don't want to install software locally, see [Run your first DAG with GitHub Actions](first-dag-github-actions.md).
 
 :::
 
