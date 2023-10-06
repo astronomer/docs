@@ -64,7 +64,7 @@
 /cli-release-notes /astro/cli-release-notes 301
 /configure-deployment /astro/deployment-settings 301
 /create-cluster /astro/create-cluster 301
-/create-project /astro/create-first-dag#step-1-create-an-astro-project 301
+/create-project /astro/first-dag-cli#step-1-create-an-astro-project 301
 /data-protection /astro/data-protection 301
 /deferrable-operators /astro/deferrable-operators 301
 /deploy-code /astro/deploy-code 301
@@ -98,7 +98,7 @@
 /cloud/cli-release-notes /astro/cli-release-notes 301
 /cloud/configure-deployment /astro/deployment-settings 301
 /cloud/create-cluster /astro/create-cluster 301
-/cloud/create-project /astro/create-first-dag#step-1-create-an-astro-project 301
+/cloud/create-project /astro/first-dag-cli#step-1-create-an-astro-project 301
 /cloud/data-protection /astro/data-protection 301
 /cloud/deferrable-operators /astro/deferrable-operators 301
 /cloud/deploy-code /astro/deploy-code 301
@@ -304,7 +304,7 @@
 /enterprise/0.16/* /software/0.16/overview
 
 # redirects for getting started restructure
-/astro/create-project /astro/create-first-dag#step-1-create-an-astro-project 301
+/astro/create-first-DAG /astro/run-first-dag
 
 # redirect .rss to .xml
 /astro-runtime-release-notes.rss /astro-runtime-release-notes.xml 301
