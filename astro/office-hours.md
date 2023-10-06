@@ -18,7 +18,7 @@ If you have questions about your Astronomer account or billing, email `success@a
 
 During an office hours meeting, you can:
 
-- Ask questions about Airflow features.
+- Ask questions about Airflow features and best practices.
 - Discuss new Astro features or provide feedback.
 - Get insight on integrating Airflow with new systems.
 - Do an architecture review or discuss scaling Airflow and Astro Deployments .
@@ -28,6 +28,8 @@ During an office hours meeting, you can:
 
 Before you book an office hour appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question. 
 
-To book office hours, click **Help** > **Book Office Hours** in the [Cloud UI](https://cloud.astronomer.io). Alternatively, you can click **Book office hours** in the left sidebar of the Astronomer documentation site.
+To book office hours, click **Book office hours** in the left sidebar of the Astronomer documentation site. This will take you to a Calendly form to schedule a 30-minute virtual meeting. In the form, provide details about any issues and questions that you want to discuss during the meeting.
 
-![A screenshot showing the menu in cloud.astronomer.io which contains a Book Office Hours entry](/img/docs/office_hours.jpg)
+Alternatively, you can click **Help** > **Book Office Hours** in the [Cloud UI](https://cloud.astronomer.io). 
+
+![A screenshot showing the menu in cloud.astronomer.io which contains a Book Office Hours entry](/img/docs/office-hours-location.png)
