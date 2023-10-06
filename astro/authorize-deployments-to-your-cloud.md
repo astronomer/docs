@@ -33,7 +33,7 @@ A workload identity is a Kubernetes service account that provides an identity to
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value 'azure'},
+        {label: 'Azure', value: 'azure'},
     ]}>
 <TabItem value="aws">
 
