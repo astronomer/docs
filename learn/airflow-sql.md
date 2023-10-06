@@ -144,7 +144,7 @@ The DAG is essentially the same that you used in Example 1. The difference is in
 ```sql
 SELECT *
 FROM STATE_DATA
-WHERE date = {{ yesterday_ds_nodash }}f
+WHERE date = '{{ yesterday_ds_nodash }}'
 ```
 
 In this example, the query has been parameterized to dynamically select data for yesterday's date using a built-in Airflow variable with double curly brackets. The rendered template in the Airflow UI looks like this:
