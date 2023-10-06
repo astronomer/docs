@@ -110,4 +110,4 @@ To add a teammate to an existing support request, cc them when replying on the s
 
 If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines. 
 
-For more information about booking an office hour meeting, see [Book an office hours appointment](office-hours.md).
+For more information about booking an office hour meeting, see [Book an office hours appointment](office-hours.md#book-an-office-hours-appointment).
