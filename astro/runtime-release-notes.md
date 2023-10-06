@@ -24,6 +24,15 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 9.2.0
+
+- Release date: October 9, 2023
+- Airflow version: 2.7.1
+
+### Azure workload identity
+
+You can now set the `AZURE_TENANT_ID` and `AZURE_CLIENT_ID` environment variables in Astro to specify which cloud resources your Astro Deployments use.
+
 ## Astro Runtime 9.1.0
 
 - Release date: September 7, 2023
