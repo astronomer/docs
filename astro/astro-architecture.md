@@ -18,8 +18,6 @@ You can interact with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#as
 
 ![Astro Hosted architecture overview](/img/docs/architecture-overview.png)
 
-To learn more about Astro Hybrid architecture and features, see [Astro Hybrid overview](hybrid-overview.md)
-
 ## Astro concepts and components
 
 While many concepts in Astro will be familiar to users of open source Airflow, there are some Astro concepts that are specific to the platform. The Astro ecosystem also consists of tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools.
