@@ -11,7 +11,7 @@ The **Deploy History** tab in the Cloud UI shows you a record of all code deploy
 
 :::caution
 
-Deploy history is currently available only for image deploys. DAG deploys do not appear in the **Deploy History** tab.
+Deploy history is currently available only for image deploys and Astro Hosted users. DAG deploys do not appear in the **Deploy History** tab.
 
 :::
 
