@@ -33,15 +33,9 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 Astro Runtime 9.2.0 includes same-day support for Apache Airflow 2.7.2. Airflow 2.7.2 contains a number of bug fixes including:
 
-- Added an `airflow db migrate` command to `migrateDatabaseJob` to account for schema changes in the Airflow version you migrate to [(#34178)](https://github.com/apache/airflow/pull/34178)
-- Pass `workers.terminationGracePeriodSeconds` into KubeExecutor pod template to specify the timeout duration [(#33514)](https://github.com/apache/airflow/pull/33514)
-- Fixed a bug so that the Airflow version now defines the correct `CeleryExecutor` namespace to import [(#32753)](https://github.com/apache/airflow/pull/32753)
-- `dagProcessor` now includes the `webserver config` volume [(#32644)](https://github.com/apache/airflow/pull/32644)
-- Dag processor liveness probe include `--local` and `--job-type` arguments [(#32426)](https://github.com/apache/airflow/pull/32426)
-- Fixed `flower_url_prefix` [(#33134)](https://github.com/apache/airflow/pull/33134)
+- Fixed a bug where manually-triggered DAG runs were causing the recalculation of when the scheduler would trigger the next DAG run [#34027](https://github.com/apache/airflow/pull/34027)
 
-To learn more, see the [Apache Airflow 2.7.2 release notes].
-
+To learn more, see the [Apache Airflow 2.7.2 release notes]().
 
 ## Astro Runtime 9.1.0
 
