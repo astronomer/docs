@@ -29,10 +29,6 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Release date: October 9, 2023
 - Airflow version: 2.7.1
 
-### Azure workload identity
-
-You can now set the `AZURE_TENANT_ID` and `AZURE_CLIENT_ID` environment variables in Astro to specify which cloud resources your Astro Deployments use.
-
 ## Astro Runtime 9.1.0
 
 - Release date: September 7, 2023
