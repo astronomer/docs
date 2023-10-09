@@ -20,7 +20,7 @@ You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-
 
 ## Astro concepts and components
 
-While many concepts in Astro are similar to open source Airflow, some Astro concepts are specific to the platform. The Astro ecosystem also includes of tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools:
+While many concepts in Astro are similar to open source Airflow, some Astro concepts are specific to the platform. The Astro ecosystem also includes tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools:
 
 ### Astro CLI
 
@@ -30,7 +30,7 @@ An Airflow project created with the Astro CLI is also known as an _Astro project
 
 ### Cloud UI
 
-The Cloud UI, hosted at `https://cloud.astronomer.io`, is the visual interface for accessing and managing Astro. It provides you a serverless Airflow experience from a single screen. You can use the Cloud UI to:
+The Cloud UI, hosted at `https://cloud.astronomer.io`, is the primary interface for accessing and managing Astro from your web browser. It provides you a serverless Airflow experience from a single screen. You can use the Cloud UI to:
 
 - Access the Airflow UI for your hosted Airflow environments.
 - Customize Airflow resources without editing configuration files.
