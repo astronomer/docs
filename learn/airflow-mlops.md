@@ -43,7 +43,7 @@ All ML models need data to be trained and perform predictions on. You need a rob
     - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can for example be an object storage solution, a relational database management system (RDBMS) or a vector database. 
     - Model artifacts. Model artifacts include model parameters, hyperparameters and other metadata. They are often stored in a specialisied version control system like [MLFlow](airflow-mlflow.md) or [Weights & Biases](airflow-weights-and-biases.md).
 
-Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](aiflow-openlineage.md) and data cataloging as well as monitoring of data drift.
+Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](airflow-openlineage.md) and data cataloging as well as monitoring of data drift.
 
 ### Model operations
 
