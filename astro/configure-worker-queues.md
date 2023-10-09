@@ -67,7 +67,7 @@ Each Deployment requires a worker queue named `default` to run tasks. Tasks that
 
 You can change all settings of the default worker queue except for its name.
 
-## Create a worker queue
+## Create or edit a worker queue
 
 :::cli
 
@@ -76,14 +76,18 @@ If you prefer, you can also run the `astro deployment worker-queue create` comma
 :::
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. Expand the **Execution** section if it is not already expanded.
-4. Configure the worker queue’s settings. You can't change the name of a worker queue after you create it.
-5. Click **Add Queue**.
-6. Configure the worker queue settings, and then click **Update Deployment**.
+3. In the **Execution** section, configure the worker queue’s settings:
+
+    * Edit the **Worker Type**, **Concurrency**, or **Min # Workers / Max # Workers** of an existing queue. You can't change the name of a worker queue after you create it.
+    
+    * Click **Add Queue** to create a new worker queue, and then configure its related attributes.
+
+6. When you're done editing worker queues, click **Update Deployment** to save your changes.
 
 :::tip
 
