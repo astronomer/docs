@@ -27,27 +27,31 @@ MLOps is an umbrella term which is used to describe different patterns in how or
 
 ### DevOps for MLOps
 
-DevOps best practices are based on all aspects of your data and machine learning pipeline being expressed as code and a set of best practices. This includes:
+DevOps best practices are based on all aspects of your data and machine learning pipeline being expressed as code and a set of behaviors when interacting with your code base. These behaviors include:
 
-- Version control. All code and configuration should be stored in a version control system like [Git](https://git-scm.com/). Version control allows you to track all changes of your ML model and environment over time and roll back to - previous versions if needed.
-- Continuous integration/ continuous delivery ([CI/CD](https://resources.github.com/ci-cd/)). All code undergoes automatic testing, linting and deployment. This ensures that your code is always in a working state and that any changes are automatically deployed to production.
-- Infrastructure as code ([IaC](https://en.wikipedia.org/wiki/Infrastructure_as_code)). All infrastructure is defined as code and follows the same CI/CD process as your pipeline and model code. This allows you to control and if necessary roll back environment changes as well as quickly deploy new instances of your model. 
+- **Version control**. All code and configuration should be stored in a version control system like [Git](https://git-scm.com/). Version control allows you to track all changes of your ML model and environment over time and roll back to previous versions if needed.
+- **Continuous integration/ continuous delivery** ([CI/CD](https://resources.github.com/ci-cd/)). All code undergoes automatic testing, linting and deployment. This ensures that your code is always in a working state and that any changes are automatically deployed to production.
+- **Infrastructure as code** ([IaC](https://en.wikipedia.org/wiki/Infrastructure_as_code)). All infrastructure is defined as code and follows the same CI/CD process as your pipeline and model code. This allows you to control and if necessary roll back environment changes as well as quickly deploy new instances of your model. 
 
 ### Data Engineering for MLOps
 
 All ML models need data to be trained and perform predictions on. You need a robust data engineering workflows in place in order to confidently train and deploy ML models in production. Special considerations should be given to:
 
-- [Data quality](data-quality.md) and data cleaning. Remember the old saying "Garbage in, garbage out"? This is especially true for ML models. If your data is of bad quality, your model predictions will be too. Astronomer recommends to incorporate data quality checks and data cleaning steps into your data pipelines to define and monitor the requirements your data has to fulfill in order for downstream ML operations to be successful. Second day data quality operations in MLOps often include data governance, data lineage and data cataloging as well as monitoring of data drift.
-- Data preprocessing and feature engineering. It is common for data to undergo several transformation steps before it is ready to be used as input for an ML model. These steps can include simple [preprocessing steps](https://scikit-learn.org/stable/modules/preprocessing.html) like scaling, one-hot-encoding or imputation of missing values. It can also include more complex steps like [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction) or [feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html). 
-- Optimal data storage. The best way to store your data highly depends on your data and type of ML. Data engineering includes moving data from original ingestion to the ideal platform for your ML model to access the data. This can for example be an object storage, a relational database management system (RDBMS) or a vector database. 
+- [**Data quality**](data-quality.md) and data cleaning. Remember the old saying "Garbage in, garbage out"? This is especially true for ML models. If your data is of bad quality, your model predictions will be too. Astronomer recommends to incorporate data quality checks and data cleaning steps into your data pipelines to define and monitor the requirements your data has to fulfill in order for downstream ML operations to be successful.
+- **Data preprocessing and feature engineering**. It is common for data to undergo several transformation steps before it is ready to be used as input for an ML model. These steps can include simple [preprocessing steps](https://scikit-learn.org/stable/modules/preprocessing.html) like scaling, one-hot-encoding or imputation of missing values. It can also include more complex steps like [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction) or [feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html). 
+- **Data storage**. 
+    - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can for example be an object storage solution, a relational database management system (RDBMS) or a vector database. 
+    - Model artifacts. Model artifacts include model parameters, hyperparameters and other metadata. They are often stored in a specialisied version control system like [MLFlow](airflow-mlflow.md) or [Weights & Biases](airflow-weights-and-biases.md).
 
-### Models
+Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](aiflow-openlineage.md) and data cataloging as well as monitoring of data drift.
 
-![Graph showing different ML operations and how they interrelate.](/img/guides/airflow-mlops_modelling_components.png) 
+### Model operations
 
 Once strong DevOps and data engineering foundations are in place you can start to implement the actual ML operations. These include:
 
-- **Model selection**: Decide which model to use. Often this task is performed as part of local testing with a subset of the data by a data scientist.
+![Graph showing different ML operations and how they interrelate.](/img/guides/airflow-mlops_modelling_components.png) 
+
+- Model selection: Decide which model to use. Often this task is performed as part of local testing with a subset of the data by a data scientist.
 - **Model training**: Training a machine learning model is the process of using data as input to adjust the parameters of an ML model in order to optimize its performance according to a selected metric, for example accuracy in classification tasks.  
 - **Model fine-tuning**: In the age of transfer learning, it is common to use pre-trained models and fine-tune them to your specific use case. Fine-tuning is the process of adjusting the parameters of a pre-trained model to optimize its performance according to a selected metric. You can find many pre-trained models on [HuggingFace](https://huggingface.co/models) or [OpenAI](https://platform.openai.com/docs/models).
 - **Model testing**: Before the deploying a model to production you usually want to know how it performs on unseen data. This is called model testing and includes creating predictions on never before seen data and then scoring a model based on chosen metrics.
@@ -111,7 +115,7 @@ with code examples
 
 To learn more about using Airflow for MLOps, check out the following resources:
 
-- References implementations:
+- Reference implementations:
     - [Ask Astro a reference LLM implementation](https://github.com/astronomer/ask-astro).
     - [Airflow MLOps customer analytics application: Sissy-G Toys](https://github.com/astronomer/airflow-llm-demo).
 - Webinars:
