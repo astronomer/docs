@@ -87,7 +87,7 @@ There is a set of specific Airflow features that can help you implement MLOps be
 
     ![DAG with a branching task deciding whether or not a model is retrained and redeployed.](/img/guides/airflow-mlops_branching.png)
 
-- [Data driven scheduling](airflow-datasets): With Airflow datasets, DAGs can be scheduled to run once a specific dataset has been updated by any task in the DAG. For example, you can schedule your model training DAG to run once the training dataset has been updated by the data engineering DAG. See also [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-ml-datasets.md).
+- [Data driven scheduling](airflow-datasets): With Airflow datasets, DAGs can be scheduled to run once a specific dataset has been updated by any task in the DAG. For example, you can schedule your model training DAG to run once the training dataset has been updated by the data engineering DAG. See also [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).
 
     ![Screenshot of the Datasets view showing the dataset_de_dag as the producing DAG to the postgres://prodserver:2319/trainset dataset. The dataset_ml_dag is the consuming DAG.](/img/guides/airflow-mlops_datasets.png) 
 
@@ -134,6 +134,6 @@ To learn more about using Airflow for MLOps, check out the following resources:
     - [Run an integrated ELT and ML pipeline on Stripe data in Airflow](use-case-elt-ml-finance.md).
     - [Predict possum tail length using MLflow, Airflow, and linear regression](use-case-airflow-mlflow.md)
     - [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md)
-    - [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-ml-datasets.md).
+    - [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).
 
 At Astronomer our goal is to help you succeed with Airflow. We continuously create resources on how to use Airflow for MLOps. If you have any questions or suggestions for additional topics to cover, please reach out to us in the `#airflow-astronomer` channel in the [Apache Airflow Slack](https://apache-airflow-slack.herokuapp.com/).
