@@ -45,10 +45,6 @@ Deployment API tokens are a direct replacement for Deployment API keys. You will
 
 You can now edit Deployments, including editing the Deployment name, worker queue settings, and Airflow component configurations, in the Cloud UI. See [Deployment Settings](deployment-settings.md) for a detailed description of how to create, update, and configure your Deployment options.
 
-### Additional improvements
-
-- Fixed a bug where some Kubernetes Executor and Kubernetes Pod Operator DAGs for Astro Hosted users would not run because of how resource limits and requests were configured.
-
 ## October 3, 2023
 
 ### Additional Improvements
