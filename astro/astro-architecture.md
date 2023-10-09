@@ -11,22 +11,22 @@ Astro is a fully-managed SaaS application for data orchestration that helps team
 
 There are two ways to run Astro:
 
-- With a multi-tenant standard cluster, which is the default.
+- With a multi-tenant standard cluster. (Default)
 - With a single-tenant dedicated cluster.
 
-You can interact with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli) or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), can securely connect to external data services so that you can place Airflow at the heart of your data ecosystem.
+You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli), or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), securely connect to external data services, so that you can place Airflow at the core of your data ecosystem.
 
 ![Astro Hosted architecture overview](/img/docs/architecture-overview.png)
 
 ## Astro concepts and components
 
-While many concepts in Astro will be familiar to users of open source Airflow, there are some Astro concepts that are specific to the platform. The Astro ecosystem also consists of tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools.
+While many concepts in Astro are similar to open source Airflow, some Astro concepts are specific to the platform. The Astro ecosystem also includes of tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools:
 
 ### Astro CLI
 
-The [Astro CLI](cli/overview.md) is the primary interface for running Airflow locally and deploying Airflow files to Astro from a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool.
+The [Astro CLI](cli/overview.md) is the primary interface for running Airflow locally and deploying Airflow files to Astro from either a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool, like Podman.
 
-An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. See [Run your first DAG](create-first-dag.md) to create your first Astro project.
+An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. See [Run your first DAG with the Astro CLI](first-dag-cli.md) to create your first Astro project locally.
 
 ### Cloud UI
 
@@ -42,7 +42,7 @@ The Cloud UI, hosted at `https://cloud.astronomer.io`, is the visual interface f
 
 An Astro _Deployment_ is an Airflow environment hosted on Astro. It encompasses all core Airflow components, including the Airflow webserver, scheduler, and workers, along with additional tools for reliability and observability. It runs in an isolated Kubernetes namespace in an [Astro cluster](#cluster) and has a set of attached resources to run your Airflow tasks.
 
-Compared to an open source Airflow environment, an Astro Deployment is easy to create, delete, and modify. You can [fine-tune resources and settings](deployment-settings.md) directly from the Cloud UI, see metrics and analytics for your DAGs, review your deploy history, and more. The infrastructure required to run a Deployment is managed by Astronomer.
+Compared to an open source Airflow environment, an Astro Deployment is easy to create, delete, and modify through the Cloud UI or with the Astro CLI. You can [fine-tune resources and settings](deployment-settings.md) directly from the Cloud UI, see metrics and analytics for your DAGs, review your deploy history, and more. The infrastructure required to run a Deployment is managed by Astronomer.
 
 To run DAGs in a Deployment, you must either deploy an Astro project manually from your local machine or configure an automated deploy process using a third-party CI/CD tool with the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and view your DAGs. See [Run your first DAG](create-first-dag.md) to get started.
 
@@ -50,7 +50,7 @@ To run DAGs in a Deployment, you must either deploy an Astro project manually fr
 
 _Astro Runtime_ is a [debian-based Docker image](https://quay.io/repository/astronomer/astro-runtime) that bundles Apache Airflow with optimized configurations and add-ons that make your Airflow experience reliable, fast, and scalable. Astronomer releases an Astro Runtime distribution for each version of Apache airflow.
 
-Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.md) to Astro Runtime versions so that you can keep your DAGs running for longer without disruption.
+Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.md) to Astro Runtime versions, so that you can keep your DAGs running for longer without disruption.
 
 See [Astro Runtime Architecture and features](runtime-image-architecture.md) for a complete feature list.
 
@@ -58,11 +58,11 @@ See [Astro Runtime Architecture and features](runtime-image-architecture.md) for
 
 A _Workspace_ is a collection of Deployments that can be accessed by a specific group of users. You can use a Workspace to group Deployments that share a business use case or environment trait. For example, your data science team might have a dedicated Workspace with two Deployments within it. Workspaces don't require any resources to run and are only an abstraction for grouping Deployments and configuring user access to them. All Deployments must belong to a Workspace.
 
-When more users from your company join Astro, you can assign them [Workspace roles](user-permissions.md#workspace-roles) that include varying levels of access to your Deployments.
+You can assign new users [Workspace roles](user-permissions.md#workspace-roles) that include varying levels of access to your Deployments.
 
 ### Cluster
 
-A _cluster_ on Astro is a Kubernetes cluster that hosts the infrastructure required to run Airflow environments, also known as [Deployments](#deployment) in Astro. You can either use a pre-configured cluster, known as a standard cluster, or create a cluster for exclusive use by your team, known as a [dedicated cluster](create-dedicated-cluster.md). For both cluster types, Astro manages all underlying infrastructure and provides secure connectivity options to all data services in your ecosystem.
+A _cluster_ on Astro is a Kubernetes cluster that hosts the infrastructure required to run Airflow environments, also known as [Deployments](#deployment) in Astro. You can either use a pre-configured cluster, called a standard cluster, or create a cluster for exclusive use by your team, called a [dedicated cluster](create-dedicated-cluster.md). For both cluster types, Astro manages all underlying infrastructure and provides secure connectivity options to all data services in your ecosystem.
 
 ### Organization
 
