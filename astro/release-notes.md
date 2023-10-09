@@ -27,6 +27,28 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## October 10, 2023
+
+### Deployment API tokens now generally available
+
+Deployment API tokens replace Deployment API keys as the most secure and customizable way to manage Deployments programmatically including using them to [Push code](https://docs.astronomer.io/astro/deploy-code) and update [environment variables](https://docs.astronomer.io/astro/environment-variables).
+
+See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
+
+:::caution
+
+Deployment API tokens are a direct replacement for Deployment API keys. You will not be able to make new API Keys after October 31, 2023. Therefore, Astronomer recommends always using Deployment API tokens over API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens. 
+
+:::
+
+### New Edit Deployments in the Cloud UI
+
+You can now edit Deployments, including editing the Deployment name, worker queue settings, and Airflow component configurations, in the Cloud UI. See [Deployment Settings](deployment-settings.md) for a detailed description of how to create, update, and configure your Deployment options.
+
+### Additional improvements
+
+- Fixed a bug where some Kubernetes Executor and Kubernetes Pod Operator DAGs for Astro Hosted users would not run because of how resource limits and requests were configured.
+
 ## October 3, 2023
 
 ### Additional Improvements
