@@ -9,7 +9,7 @@ description: Create Deployment API keys to make requests to Airflow's REST API a
 
 Deployment API keys are deprecated in favor of [Deployment API tokens](deployment-api-tokens.md). You can continue to use existing Deployment API keys for now, but you will have to complete a one-time migration to Deployment API tokens in the future.
 
-Deployments with zero API keys do not appear in the **API Keys** tab and you can't create new Deployment API keys after October 31, 2023. If you want to continue using API keys before October 31, ensure that you always have at least one API key configured for the Deployment.
+After October 31, 2023, Deployments with zero API keys will no longer display the **API Keys** tab and you won't be able to create new Deployment API keys. If you want to continue using API keys after October 31, ensure that you always have at least one API key configured for the Deployment prior to October 31.
 
 :::
 
