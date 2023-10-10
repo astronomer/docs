@@ -60,7 +60,9 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
 :::tip
 
-Astro contains an in-product tutorial that guides you through Steps 2-4 of this document and includes shortcut buttons for some key Astro actions. If you prefer to finish the quickstart this way, open your Deployment page in the Cloud UI. In the **Deploy your first DAG** window, click **With GitHub Actions** and follow the steps in the window that appears. 
+Astro contains an in-product tutorial that guides you through Steps 2-4 of this document and includes shortcut buttons for some key Astro actions. If you prefer to finish the quickstart this way, open your **Deployments** page in the Cloud UI and choose your Deployment. In the **Deploy your first DAG** section, click **With GitHub Actions** and follow the steps in the window that appears.
+
+If you don't see the **Deploy your first DAG** option your Deployment page, click the **Deploy DAGs ?** to open it.
 
 :::
 
