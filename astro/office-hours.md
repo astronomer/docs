@@ -26,7 +26,7 @@ During an office hours meeting, you can:
 
 ## Book an office hours appointment 
 
-Before you book an office hour appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question. 
+Before you book an office hours appointment, please browse the documentation, [Astronomer Academy](https://academy.astronomer.io/), [Airflow Guides](https://docs.astronomer.io/learn/), or discussion on the [Astronomer Forum](https://forum.astronomer.io) to see if there are existing guides or resources that answer your question. 
 
 To book office hours, click **Book office hours** in the documentation sidebar navigation. Then, schedule a 30-minute virtual meeting on the Calendly form. In the form, provide details about any issues and questions that you want to discuss during the meeting.
 
