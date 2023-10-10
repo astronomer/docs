@@ -18,7 +18,7 @@ Release date: October 13, 2023
 ### Additional improvements
 
 - You can now set `astronomer.auth.microsoft.useExternalProxy: false` in your `config.yaml` file to bypass proxy support for Azure logins.
-- You can now list System-level Service Accounts using the Houston API. <!--https://github.com/astronomer/issues/issues/5691-->
+- You can now list System-level Service Accounts using the Houston API.
 - You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
 - The Kibana logging dashboard now includes a default index. 
 
