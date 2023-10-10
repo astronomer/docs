@@ -43,7 +43,7 @@ Deployment API tokens are a direct replacement for Deployment API keys. You will
 
 ### New Edit Deployments in the Cloud UI
 
-You can now edit Deployments, including editing the Deployment name, worker queue settings, and Airflow component configurations, in the Cloud UI. See [Deployment Settings](deployment-settings.md) for a detailed description of how to create, update, and configure your Deployment options.
+Editing Deployments in the Cloud UI has a new, consolidated flow. All of the configuration options are now editable in a single form, similar to Deployment creation, instead of spread across multiple forms. See [Deployment Settings](deployment-settings.md) for a detailed description of how to create, update, and configure your Deployment options.
 
 ## October 3, 2023
 
