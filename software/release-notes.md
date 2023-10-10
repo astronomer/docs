@@ -13,7 +13,7 @@ This page contains release notes for all recent Astronomer Software versions.
 
 ## 0.33.1
 
-Release date: October 6, 2023
+Release date: October 13, 2023
 
 ### Additional improvements
 
@@ -25,20 +25,19 @@ Release date: October 6, 2023
 ### Bug fixes
 
 - Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API might retrieve the unintended Deployment. 
-- Fixed an issue where you could create users with the Houston API when SCIM was enabled and `userManagement.enable` was `false`. <!-- https://github.com/astronomer/issues/issues/5249-->
-- Fixed an issue where Astronomer's postgres server couldn't accept usernames with an `@` character. <!--https://github.com/astronomer/issues/issues/5292-->
-- Fixed an issue where some dashboards on Grafana didn't load properly. <!-- https://github.com/astronomer/issues/issues/5727-->
-- Fixed an issue where the Houston API `CreateDeployment` request would return a successful response even though no Deployment was created due to no specified Airflow version. <!-- https://github.com/astronomer/issues/issues/5736-->
+- Fixed an issue where you could create users with the Houston API when SCIM was enabled and `userManagement.enable` was `false`.
+- Fixed an issue where some dashboards on Grafana didn't load properly.
+- Fixed an issue where the Houston API `CreateDeployment` request would return a successful response even though no Deployment was created due to no specified Airflow version.
 - Fixed an issue where a System Admin user that did not belong to a Team could delete the Team from the Software UI.
 - Fixed an issue where syncing an IdP group from Okta failed when SCIM was enabled and a user account was removed only from Astronomer Software.
-- Fixed an issue where adding a user through SCIM provisioning that already exists on an Astronomer Software Azure cluster would throw an error instead of updating the existing user. <!-- https://github.com/astronomer/houston-api/pull/1560-->
+- Fixed an issue where adding a user through SCIM provisioning that already exists on an Astronomer Software Azure cluster would throw an error instead of updating the existing user.
 - Fixed an issue where the user login process would be unresponsive if the Houston API failed to retrieve IdP group information from Azure.
-- Fixed an issue where the Software UI would show Deployments as healthy even when triggerer Pods were failing. <!-- https://github.com/astronomer/issues/issues/5722-->
-- Fixed an issue where a user who was deleted from Astronomer Software would not appear when they were reinvited through a Team. <!-- https://github.com/astronomer/issues/issues/5771-->
-- Fixed an issue where the System Admin page in the Software UI had entries that didn't fit the page. <!--https://github.com/astronomer/issues/issues/5801-->
+- Fixed an issue where the Software UI would show Deployments as healthy even when triggerer Pods were failing.
+- Fixed an issue where a user who was deleted from Astronomer Software would not appear when they were reinvited through a Team.
+- Fixed an issue where the System Admin page in the Software UI had entries that didn't fit the page.
 - Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
 - Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.
-- Fixed an issue where `ap-blackbox-exporter` did not respect global network policies. <!-- https://github.com/astronomer/astronomer/pull/1999-->
+- Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.
 - Fixed the following vulnerabilities:
 
     - [CVE-2023-38325](https://nvd.nist.gov/vuln/detail/CVE-2023-38325)
