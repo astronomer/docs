@@ -190,4 +190,4 @@ All scheduled tasks that are assigned to a worker queue after the worker queue i
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. Expand the **Execution** section if it is not already expanded.
-4. Click the trash can icon for the worker queue that you want to delete, and then click **Update Deployment**.
+4. Click **Remove queue** to delete the worker queue, and then click **Update Deployment**.
