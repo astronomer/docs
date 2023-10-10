@@ -72,6 +72,8 @@ Use [Homebrew](https://brew.sh/) to install the latest version of the [the Astro
 brew install astro
 ```
 
+For more information about Astro CLI install options and troubleshooting, see [Install the Astro CLI](cli/install-cli).
+
 </TabItem>
 
 <TabItem value="windowswithwinget">
@@ -106,6 +108,8 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 
 4. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
 
+For more information about Astro CLI install options and troubleshooting, see [Install the Astro CLI](cli/install-cli).
+
 </TabItem>
 
 <TabItem value="linux">
@@ -121,6 +125,8 @@ Run the following command to install the latest version of the Astro CLI directl
 ```sh
 curl -sSL install.astronomer.io | sudo bash -s
 ```
+
+For more information about Astro CLI install options and troubleshooting, see [Install the Astro CLI](cli/install-cli).
 
 </TabItem>
 
