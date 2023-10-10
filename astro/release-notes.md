@@ -29,15 +29,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## October 10, 2023
 
-### Deployment API tokens now generally available
+### Deployment API tokens
 
-Deployment API tokens replace Deployment API keys as the most secure and customizable way to manage Deployments programmatically including using them to [Push code](https://docs.astronomer.io/astro/deploy-code) and update [environment variables](https://docs.astronomer.io/astro/environment-variables).
+Deployment API tokens are now generally available and replace Deployment API keys as the most secure and customizable way to programmatically update Deployments. This includes using them to [deploy code](https://docs.astronomer.io/astro/deploy-code) and update [environment variables](https://docs.astronomer.io/astro/environment-variables).
 
 See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
 
 :::caution
 
-Deployment API tokens are a direct replacement for Deployment API keys. You will not be able to make new API Keys after October 31, 2023. Therefore, Astronomer recommends always using Deployment API tokens over API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens. 
+Deployment API tokens are a direct replacement for Deployment API keys, which are now supported only on a limited basis on Astro.
+
+After October 31, 2023, you will not be able to create new API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens.
 
 :::
 
