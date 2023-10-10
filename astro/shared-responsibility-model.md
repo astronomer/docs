@@ -19,6 +19,7 @@ Astronomer is responsible for providing a secure and reliable managed service of
 - Completing ongoing maintenance (currency, hardening, patching) and uptime monitoring of Astro resources in the data plane. For example, Kubernetes cluster upgrades.
 - Maintaining data encryption (at rest/in flight) of Astro managed components (control and data planes).
 - Consistently releasing production-ready and supported distributions of [Astro Runtime](upgrade-runtime.md) for net-new and to-be-upgraded Deployments.
+- Upon customer request, execute [Disaster Recovery](disaster-recovery.md) procedure for dedicated Hybrid or Hosted clusters.
 
 ## Customer's responsibilities  
 
