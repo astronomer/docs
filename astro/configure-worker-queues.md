@@ -81,11 +81,11 @@ If you prefer, you can also run the `astro deployment worker-queue create` comma
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. In the **Execution** section, configure the worker queue’s settings:
+3. In the **Execution** section, you can create new queues and  update existing queues:
 
-    * Edit the **Worker Type**, **Concurrency**, or **Min # Workers / Max # Workers** of an existing queue. You can't change the name of a worker queue after you create it.
+    * **Create a new queue**: Click **Add Queue** to create a new worker queue, and then configure its related attributes.
+    *  **Existing queues**: Edit the **Worker Type**, **Concurrency**, or **Min # Workers / Max # Workers** of an existing queue. Note that you can't change the name of a worker queue after you create it.
     
-    * Click **Add Queue** to create a new worker queue, and then configure its related attributes.
 
 6. When you're done editing worker queues, click **Update Deployment** to save your changes.
 
@@ -190,4 +190,5 @@ All scheduled tasks that are assigned to a worker queue after the worker queue i
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. Expand the **Execution** section if it is not already expanded.
+
 4. Click **Remove queue** to delete the worker queue, and then click **Update Deployment**.
