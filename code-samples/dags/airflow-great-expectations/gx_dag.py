@@ -7,7 +7,7 @@ from great_expectations_provider.operators.great_expectations import (
 
 POSTGRES_CONN_ID = "postgres_default"
 MY_POSTGRES_SCHEMA = "sweet_treats"
-MY_GX_DATA_CONTEXT = "include/gx"
+MY_GX_DATA_CONTEXT = "include/great_expectations"
 
 
 @dag(
