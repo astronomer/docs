@@ -166,7 +166,7 @@ module.exports = {
               image: '/img/integrations/azure-data-factory.png'
           },
           items: [
-            'connections/azure-data-factory'
+            'connections/azure-data-factory',
             'airflow-azure-data-factory-integration',
           ],
         },
@@ -218,7 +218,7 @@ module.exports = {
               image: '/img/integrations/redshift.png'
           },
           items: [
-            'connections/redshift'
+            'connections/redshift',
             'airflow-redshift',
           ],
         },
