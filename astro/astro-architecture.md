@@ -18,7 +18,7 @@ To run Airflow on Astro, you need to create a [Deployment](#deployment) using ei
     - You want to use a specific cloud provider or region.
     - You need to run Airflow environments in separate clusters for business or security reasons.
 
-You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli), or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), securely connect to external data services, so that you can place Airflow at the core of your data ecosystem.
+You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli), or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), securely connect to external data services, so that you can place Airflow at the core of your data ecosystem. The _Astro Hypervisor_ is an Astronomer-managed component that facilitates operating and optimizing your Deployments. 
 
 ![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.png)
 
@@ -28,7 +28,7 @@ While many concepts in Astro are similar to open source Airflow, some Astro conc
 
 ### Astro CLI
 
-The [Astro CLI](cli/overview.md) is the primary interface for running Airflow locally and deploying Airflow files to Astro from either a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool, like Podman.
+The [Astro CLI](cli/overview.md) provides an interface to run Airflow locally and deploy Airflow files to Astro from either a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool, like Podman.
 
 An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. See [Run your first DAG with the Astro CLI](create-first-dag.md) to create your first Astro project locally.
 
@@ -46,9 +46,9 @@ The Cloud UI, hosted at `https://cloud.astronomer.io`, is the primary interface 
 
 An Astro _Deployment_ is an Airflow environment hosted on Astro. It encompasses all core Airflow components, including the Airflow webserver, scheduler, and workers, along with additional tools for reliability and observability. It runs in an isolated Kubernetes namespace in an [Astro cluster](#cluster) and has a set of attached resources to run your Airflow tasks.
 
-Compared to an open source Airflow environment, an Astro Deployment is easy to create, delete, and modify through the Cloud UI or with the Astro CLI. You can [fine-tune resources and settings](deployment-settings.md) directly from the Cloud UI, see metrics and analytics for your DAGs, review your deploy history, and more. The infrastructure required to run a Deployment is managed by Astronomer.
+Compared to an open source Airflow environment, an Astro Deployment is easy to create, delete, and modify through either the Cloud UI or with the Astro CLI. You can [fine-tune resources and settings](deployment-settings.md) directly from the Cloud UI, see metrics and analytics for your DAGs, review your deploy history, and more. The infrastructure required to run a Deployment is managed by Astronomer.
 
-To run DAGs in a Deployment, you must either deploy an Astro project manually from your local machine or configure an automated deploy process using a third-party CI/CD tool with the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and view your DAGs. See [Run your first DAG](create-first-dag.md) to get started.
+To run DAGs in a Deployment, you must either deploy an Astro project manually from your local machine or configure an automated deploy process using a third-party CI/CD tool with the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and view your DAGs. See [Run your first DAG](create-first-dag.md) to get started with examples of either workflow.
 
 ### Astro Runtime
 
@@ -84,7 +84,7 @@ To securely manage user access, you can [integrate your Organization with an ide
 
 Astro implements role-based access control (RBAC) for Airflow environments.
 
-Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](manage-teams.md), which apply the same role across a group of users. You can create API tokens with specific roles to automate most actions on Astro, such as deploying code or managing users. 
+Each Astro user has a Workspace role in every Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](manage-teams.md), which apply the same role across a group of users. You can create API tokens with specific roles to automate most actions on Astro, such as deploying code or managing users. 
 
 Use the following diagram as a reference for how all of these components interact with each other in Astro.
 
