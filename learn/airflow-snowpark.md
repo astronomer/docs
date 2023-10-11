@@ -38,6 +38,15 @@ Integrating Snowpark with Airflow offers the benefits of:
 - Express data transformations in Snowflake in Python instead of SQL.
 - Store and version your machine learning models in a model registry inside Snowflake.
 - Use Snowpark's compute resources instead of the resources of your Airflow cluster for machine learning.
+- Using Airflow for Snowpark python orchestration enables not only automation but also auditing, logging, retry and complex triggering for powerful workflows.
+
+The Snowpark provider for Airflow simplifies interacting with Snowpark by:
+
+- Connecting to Snowflake using an [Airflow connection](connections/snowflake.md), removing the need to directly pass credentials in your DAG.
+- Automatically instantiating a Snowpark session.
+- Automatically serializing and deserializing Snowpark dataframes passed using [Airflow XCom](airflow-passing-data-between-tasks.md).
+- Integrating with [OpenLineage](airflow-openlineage.md).
+- Providing a pre-built custom XCom backend for Snowflake.
 
 Additionally, this tutorial shows how to use Snowflake as a custom XCom backend. This is especially useful for organizations with strict compliance requirements who want to keep all their data in Snowflake but still leverage [Airflow XCom](airflow-passing-data-between-tasks.md) to pass data between tasks.
 
