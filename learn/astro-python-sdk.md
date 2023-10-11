@@ -38,7 +38,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 To complete this tutorial, you need:
 
 - An AWS S3 account with a [storage bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). If you don't already have an account, Amazon offers 5GB of free storage in S3 for 12 months. This should be more than enough for this tutorial.
-- A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://signup.snowflake.com/) for 30 days.
+- A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://trial.snowflake.com/?owner=SPN-PID-365384) for 30 days.
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
 ## Step 1: Set up your data stores

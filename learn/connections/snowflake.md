@@ -19,7 +19,7 @@ This guide provides the basic setup for creating a Snowflake connection. For a c
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
-- A [Snowflake account](https://signup.snowflake.com/).
+- A [Snowflake account](https://trial.snowflake.com/?owner=SPN-PID-365384).
 
 ## Get Connection details
 

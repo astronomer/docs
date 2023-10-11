@@ -172,7 +172,7 @@ Follow [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-d
 
 #### Step 2: Create a client secret
 
-Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 5.
+Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 4.
 
 :::caution
 
@@ -207,9 +207,9 @@ If your Azure Active Directory is configured to require admin approval on API pe
     - **Automatic Membership**: Set the default role for users who join your Organization through Azure AD and without an explicit invite from Astro.
     - **Microsoft Azure AD Domain**: Retrieve this value from your Azure AD directory's overview page in the Microsoft Azure portal.
     - **Application (client) ID**: Retrieve this from the **Overview** page of your Azure AD application.
-    - **Client ID and Client secret**: Enter the values you coped from [Step 3: Create a client secret](#step-3-create-a-client-secret)
+    - **Client ID and Client secret**: Enter the values you coped from [Step 2: Create a client secret](#step-2-create-a-client-secret)
 
-5. If you already completed [Step 2: Register Astro as an application on Azure](#step-2-register-astro-as-an-application-on-azure), skip the Cloud UI instructions to configure a Redirect URI.
+5. If you already completed [Step 1: Register Astro as an application on Azure](#step-1-register-astro-as-an-application-on-azure), skip the Cloud UI instructions to configure a Redirect URI.
 6. Click **Create**. Your Azure AD integration appears as an entry in **SSO Configuration**.
 7. In **SSO Configuration**, click **Activate**. You are redirected to Azure AD to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 8. Click **Activate SSO**.

@@ -57,7 +57,6 @@ To avoid exposing secret values in task logs, instruct users to not log environm
 
 :::
 
-
 ### Choose a method or methods to manage environment variables
 
 The Cloud UI provides you the following benefits to manage your environment variables:
@@ -79,3 +78,4 @@ However, there are scenarios based on your specific use case when you might want
 | You locally develop a couple of DAGs with a new source system and want to use a secret or credential in these DAGs. | [Use `.env` file](env-vars-astro.md#using-astro-cli). This will allow you to avoid accidentally checking in credentials to the code repository because `.env` is part of `.gitignore`. This `.env` file can be easily applied to your Deployment using Astro CLI.  | 
 | You use environment variables to store your Airflow connections and variables, and have to configure these from one Deployment to another based on the environment type | [Cloud UI](env-vars-astro.md#using-the-cloud-ui) for visibility. | 
 | You want the visibility and ability to edit environment variables from the Cloud UI, and you also want to keep track of the non-secret environment variables in your code repository. | Use [Astro CLI](env-vars-astro.md#in-your-astro-deployment) to write an automation script to add or update the environment variables. | 
+
