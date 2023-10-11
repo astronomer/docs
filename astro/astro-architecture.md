@@ -22,7 +22,7 @@ You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-
 
 ![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.png)
 
-## Astro concepts and components
+## Key concepts
 
 While many concepts in Astro are similar to open source Airflow, some Astro concepts are specific to the platform. The Astro ecosystem also includes tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools:
 
