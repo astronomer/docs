@@ -103,9 +103,9 @@ AIRFLOW_VAR_MYJSONVAR='{"hello":"world"}'
 
 To fetch the Airflow variable in the DAG, you can then use the following methods:
 
-- `Variable.get('<VAR_NAME>', '<default-value>')`: This method is more secure for fetching secret values. However, this method can affect performance because it makes a request to the Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. See [DAG writing best practices](dag-best-practices.md#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
+- `Variable.get('<VAR_NAME>', '<default-value>')`: This method is recommended and the most secure for fetching secret values. However, if used in top-level DAG code, this method can affect the performance because it makes a request to the Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. See [DAG writing best practices](dag-best-practices.md#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
 
-- `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because calling these values with the function can print them to your logs.
+- `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because retrieving environment variables with this method can print them to your logs.
 
 Replace `<default_value>` with a default value to use if Airflow can't find the environment variable.
 
