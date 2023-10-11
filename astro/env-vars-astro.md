@@ -27,11 +27,9 @@ Use this document to understand how to use these methods to create environment v
 
 3. Click **Edit Variables**.
 
-4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This permanently hides the variable's value from all users in your Workspace.
+4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
 
-5. Click **Add**.
-
-6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
+5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
 ### Edit or delete existing values
 
@@ -43,13 +41,11 @@ After you set an environment variable key, only the environment variable value c
 
 3. Click **Edit Variables**. 
 
-4. Click the pencil icon next to the value you want to edit, modify the variable's value, then click on the tick-mark to complete editing.
+4. Modify the value of the variable you wish to edit.
 
-    ![Edit value location](/img/docs/variable-pencil.png)
+    ![Edit value location](/img/docs/variables-edit.png)
 
-5. (Optional) To delete a variable, click on the bin icon next to the variable.
-
-6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
+5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
 
 ## Using your Dockerfile
 
