@@ -34,6 +34,7 @@ profile_config = ProfileConfig(
 DbtTaskGroup(
     project_config=ProjectConfig("path/to/my_project"),
     profile_config=profile_config,
+    default_args={"retries": 2},
 )
 ```
 
@@ -188,7 +189,7 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
 
     This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. Make sure to add your own values for `YOUR_NAME`, `DB_NAME`, and `SCHEMA_NAME`.
     
-    Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
+    Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed. Note that it is a best practice to set `retries` to at least 2 for all tasks that run dbt models.
 
 :::tip
 
