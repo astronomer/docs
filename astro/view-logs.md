@@ -16,7 +16,7 @@ Airflow has two different log types:
 
 Airflow has four core components: the scheduler, triggerer, worker, and webserver. Each component records its process in component logs. These logs can be used to monitor overall performance, troubleshoot errors, and optimize resources.
 
-- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-size).
+- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. These logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-size).
 
 - _Triggerer logs_ describe the performance of the triggerer, the Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
@@ -78,9 +78,11 @@ To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag 
 
 ## Airflow task logs
 
-Airflow task logs for both [local Airflow environments](https://docs.astronomer.io/learn/logging#log-locations) and Deployments on Astro are available in the Airflow UI and Cloud UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
+Airflow task logs can help you troubleshoot a specific task instance that failed or retried. Based on your preference, you can choose to use to access task logs in the Cloud UI or the Airflow UI. Both provide filters, search, and download options for task logs and share other information about your DAG performance on the same page.
 
 Task logs for Astro Deployments are retained for 90 days. The task log retention policy is not currently configurable.
+
+You can also access local Airflow task logs in your local [Airflow UI](https://docs.astronomer.io/learn/airflow-ui#logs) or [printed to the terminal](https://docs.astronomer.io/learn/logging#log-locations).
 
 ### Airflow task log levels 
 
