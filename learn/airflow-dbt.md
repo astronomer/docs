@@ -193,7 +193,9 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
 
 :::tip
 
-In some cases, especially in Astro projects containing a large number of DAGs, you might run into an error saying `<> is not a valid ResourceType`. This error can be resolved by increasing the value of the Airflow configuration [`AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
+In some cases, especially in Astro projects containing a large number of DAGs, you might run into an error saying `<> is not a valid ResourceType`. 
+The recommended solution is to use the Cosmos manifest parsing method `dbt_manifest`, see the [Cosmos documentation](https://astronomer.github.io/astronomer-cosmos/configuration/parsing-methods.html#dbt-manifest) for more information.
+Alternatively, the error can be resolved by increasing the value of the Airflow configuration []`core.dagbag_import_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
 
 :::
 
