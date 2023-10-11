@@ -66,15 +66,23 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
-- A Snowflake account. A [30-day free trial](https://signup.snowflake.com/) is available. You will need to have at least one database and one schema created to store the data and models used in this tutorial.
+- A Snowflake account. A [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. You will need to have at least one database and one schema created to store the data and models used in this tutorial.
 
 - Optional. This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-xcom-backends-tutorial.md) included in the provider. If you want to this custom XCom backend you will need to either:
-    - Use a Snowflake account with `ACCOUNTADMIN` privileges. In this case the Snowflake custom XCom backend can be created and cleaned up by tasks in the DAG itself. See [Step 3.3](#step-3-create-your-dag) for more instructions. The free trial account does have the required privileges.
-    - Ask your Snowflake administrator to create the following for you:
-        - A database called `SNOWPARK_XCOM_DB`.
-        - A schema called `SNOWPARK_XCOM_SCHEMA`.
-        - A table called `XCOM_TABLE`.
-        - A stage called `XCOM_STAGE`.
+    - Run the DAG using a Snowflake account with `ACCOUNTADMIN` privileges to let the first task of the DAG create the required database, schema, stage and table. See [Step 3.3](#step-3-create-your-dag) for more instructions. The free trial account does have the required privileges.
+    - Ask your Snowflake administrator to: 
+        - Provider you with the name of an existing database, schema and stage. You will need to use these names in [Step 1.8](#step-1-configure-your-astro-project) for the `AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE` and `AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE` environment variables. 
+        - Create an `XCOM_TABLE` with the following schema:
+
+        ```sql
+        dag_id varchar NOT NULL, 
+        task_id varchar NOT NULL, 
+        run_id varchar NOT NULL,
+        multi_index integer NOT NULL,
+        key varchar NOT NULL,
+        value_type varchar NOT NULL,
+        value varchar NOT NULL
+        ```
 
 :::info
 
