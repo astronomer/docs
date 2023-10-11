@@ -24,11 +24,13 @@ You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-
 
 ## Key concepts
 
-While many concepts in Astro are similar to open source Airflow, some Astro concepts are specific to the platform. The Astro ecosystem also includes tools that enable you to interact with Astro and enrich your development and maintenance experience. The following topics explain these concepts and introduce the tools:
+The Astro ecosystem includes tools that enable you to both interact with Astro and enrich your development and maintenance experience. Some of these tools and functionality are not available in open source Airflow, and have Astro-specific terminology. 
+
+The following sections explain key Astro tools and concepts that you use extend the functionality of Airflow.
 
 ### Astro CLI
 
-The [Astro CLI](cli/overview.md) provides an interface to run Airflow locally and deploy Airflow files to Astro from either a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool, like Podman.
+The [Astro CLI](cli/overview.md) tool provides an interface to run Airflow locally and deploy Airflow files to Astro from either a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool, like Podman.
 
 An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. See [Run your first DAG with the Astro CLI](create-first-dag.md) to create your first Astro project locally.
 
