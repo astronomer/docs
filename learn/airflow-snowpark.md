@@ -18,7 +18,7 @@ In this tutorial, you'll learn how to:
 - Create a [custom XCom backend](custom-xcom-backends-tutorial.md) in Snowflake.
 - Create and use a model registry in Snowflake.
 - Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
-- Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset describing skiers to predict their afternoon beverage choice.
+- Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset to predict skiers' afternoon beverage choice.
 
 :::caution
 
@@ -208,7 +208,7 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
 :::info
 
-While this tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends to use a Snowpark-optimized warehouse for model training in production.
+While this tutorial DAG uses a small dataset where model training can be accomplished using the standard Snowflake warehouse, Astronomer recommends using a Snowpark-optimized warehouse for model training in production.
 
 :::
 
