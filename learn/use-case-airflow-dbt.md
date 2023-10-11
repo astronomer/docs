@@ -157,6 +157,12 @@ The files come together in the following project structure:
 └── requirements.txt
 ```
 
+:::tip
+
+In some cases, especially in Astro projects containing a large number of DAGs, you might run into an error saying `<> is not a valid ResourceType`. This error can be resolved by increasing the value of the Airflow configuration [`AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
+
+:::
+
 ## See also
 
 - Tutorial: [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-dbt.md).

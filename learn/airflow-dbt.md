@@ -190,6 +190,12 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
     
     Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
 
+:::tip
+
+In some cases, especially in Astro projects containing a large number of DAGs, you might run into an error saying `<> is not a valid ResourceType`. This error can be resolved by increasing the value of the Airflow configuration [`AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
+
+:::
+
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
 
     ![Cosmos DAG graph view](/img/integrations/airflow-dbt-cosmos_dag_graph_view.png)
