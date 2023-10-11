@@ -38,7 +38,7 @@ Integrating Snowpark with Airflow offers the benefits of:
 - Express data transformations in Snowflake in Python instead of SQL.
 - Store and version your machine learning models in a model registry inside Snowflake.
 - Use Snowpark's compute resources instead of the resources of your Airflow cluster for machine learning.
-- Using Airflow for Snowpark python orchestration enables not only automation but also auditing, logging, retry and complex triggering for powerful workflows.
+- Use Airflow for Snowpark Python orchestration to enable automation, auditing, logging, and retry and complex triggering for powerful workflows.
 
 The Snowpark provider for Airflow simplifies interacting with Snowpark by:
 
