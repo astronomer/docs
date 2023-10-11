@@ -67,13 +67,14 @@ The Great Expectations Airflow Provider requires a GX project to be present in y
     context = context.convert_to_file_context()
     ```
 
-2. Run the `gx_init_script.py` file to instantiate a [Data Context](https://docs.greatexpectations.io/docs/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context) at `include/gx`.
+2. Enter your include folder and run the `gx_init_script.py` file to instantiate a [Data Context](https://docs.greatexpectations.io/docs/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context) at `include/great_expectations`.
 
     ```sh
-    $ python include/gx_init_script.py
+    $ cd include
+    $ python gx_init_script.py
     ```
 
-2. Create a new file in your `include/gx/expectations` folder called `strawberry_suite.json` and copy and paste the following code into the file:
+3. Create a new file in your `include/great_expectations/expectations` folder called `strawberry_suite.json` and copy and paste the following code into the file:
 
     ```json
     {
@@ -118,11 +119,13 @@ The Great Expectations Airflow Provider requires a GX project to be present in y
         └── gx_init_script.py
     ```
 
+4. Run `astro dev start` to start your Astro project.
+
 ## Step 3: Create a database connection
 
 The easiest way to use GX with Airflow is to let the GreatExpectationsOperator create a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and [Datasource](https://docs.greatexpectations.io/docs/terms/datasource) based on an Airflow connection. To set up a connection to a Postgres database complete the following steps:
 
-1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
+1. In the Airflow UI at `localhost:8080`, go to **Admin** -> **Connections** and click **+**. 
 
 2. Create a new connection named `postgres_default` using the following information:
 
