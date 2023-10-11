@@ -174,7 +174,7 @@ If you need to change the worker type of an existing worker queue, Astronomer re
 
 :::tip Update Airflow Pool
 
-When the corresponding Airflow Pool does not align with the configured worker queue, you may see tasks getting stuck. Make sure to update Airflow Pools accordingly to the changes in potential maximum task concurrency. 
+If you see tasks getting stuck, it might be because the worker queue configuration doesn't align with the Airflow Pools, a component that allows you to control execution parallelism. Make sure to update your Airflow Pools to match the changes in potential maximum task parallelism caused by changes to the worker queue.
 
 For more information on limited parallelism, see [Airflow Pools](https://docs.astronomer.io/learn/airflow-pools).
 
