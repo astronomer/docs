@@ -6,7 +6,9 @@ id: azure-key-vault
 
 This topic provides setup steps for configuring [Azure Key Vault](https://azure.microsoft.com/en-gb/services/key-vault/#getting-started) as a secrets backend on Astro.
 
-### Prerequisites
+If you use a different secrets backend tool or want to learn the general approach on how to integrate one, see [Configure a Secrets Backend](secrets-backend.md).
+
+## Prerequisites
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
@@ -16,7 +18,7 @@ This topic provides setup steps for configuring [Azure Key Vault](https://azure.
 
 If you do not already have Key Vault configured, read [Microsoft Azure documentation](https://docs.microsoft.com/en-us/azure/key-vault/general/quick-create-portal).
 
-### Register Astro as an app on Azure
+## Step 1: Register Astro as an app on Azure
 
 Follow the [Microsoft Azure documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to register a new application for Astro.
 
@@ -24,14 +26,14 @@ At a minimum, you need to add a [secret](https://docs.microsoft.com/en-us/azure/
 
 Note the value of the application's client ID and secret for Step 3.
 
-### Create an access policy
+## Step 2: Create an access policy
 
 Follow the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a new access policy for the application that you just registered. The settings you need to configure for your policy are:
 
 - **Configure from template**: Select `Key, Secret, & Certificate Management`.
 - **Select principal**: Select the name of the application that you registered in Step 1.
 
-### Set up Key Vault locally
+## Step 3: Set up Key Vault locally
 
 In your Astro project, add the following line to your `requirements.txt` file:
 
@@ -53,7 +55,7 @@ This tells Airflow to look for variable information at the `airflow/variables/*`
 
 By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `sep`, `"connections_prefix"`, and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
-### Deploy to Astro
+## Step 4: Deploy to Astro
 
 1. Run the following commands to export your environment variables to Astro.
  
@@ -69,4 +71,4 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
     astro deploy --deployment-id <your-deployment-id> 
     ```
     
-3. Optional. Remove the environment variables from your `.env` file, or store your `.env` file so that your credentials are hidden, for example with GitHub secrets.
+3. (Optional) Remove the environment variables from your `.env` file, or store your `.env` file so that your credentials are hidden, for example with GitHub secrets.

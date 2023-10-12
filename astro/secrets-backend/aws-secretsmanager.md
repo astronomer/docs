@@ -8,6 +8,8 @@ This topic provides setup steps for configuring [AWS Secrets Manager](https://aw
 
 For more information about Airflow and AWS connections, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
 
+If you use a different secrets backend tool or want to learn the general approach on how to integrate one, see [Configure a Secrets Backend](secrets-backend.md).
+
 ## Prerequisites
 
 - A [Deployment](create-deployment.md).
@@ -77,7 +79,7 @@ After you configure an Airflow connection to AWS, can run a DAG locally to check
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}' --secret
     ```
 
-2. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials. 
+2. (Optional) Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials. 
 
   :::info
     

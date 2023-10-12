@@ -4,13 +4,16 @@ sidebar_label: 'Hashicorp Vault'
 id: hashicorp-vault
 ---
 
-This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.io/) as a secrets backend for both local development and on Astro. To do this, you will:
+This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.io/) as a secrets backend for both local development and on Astro. 
 
+To do this, you will:
 - Create an AppRole in Vault which grants Astro minimal required permissions.
 - Write a test Airflow variable or connection as a secret to your Vault server.
 - Configure your Astro project to pull the secret from Vault.
 - Test the backend in a local environment.
 - Deploy your changes to Astro.
+
+If you use a different secrets backend tool or want to learn the general approach on how to integrate one, see [Configure a Secrets Backend](secrets-backend.md).
 
 ## Prerequisites
 
@@ -147,6 +150,6 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
     astro deploy --deployment-id <your-deployment-id> 
     ```
 
-3. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
+3. (Optional) Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
   
 Now, any Airflow variable or connection that you write to your Vault server can be successfully accessed and pulled by any DAG in your Deployment on Astro.

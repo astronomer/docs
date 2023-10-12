@@ -1,10 +1,12 @@
 ---
-title: 'Set up AWS Systems Manager (SSM) Parameter Store as your secrets backend'
+title: 'Set up AWS Systems Manager (SSM) Parameter Store'
 sidebar_label: 'AWS Systems Manager (SSM) Parameter Store'
 id: aws-paramstore
 ---
 
 In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) as a secrets backend on Astro.
+
+If you use a different secrets backend tool or want to learn the general approach on how to integrate one, see [Configure a Secrets Backend](secrets-backend.md).
 
 ## Prerequisites
 
@@ -42,4 +44,4 @@ You can now run a DAG locally to check that your variables are accessible using 
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}' --secret
     ```
 
-2. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
+2. (Optional) Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
