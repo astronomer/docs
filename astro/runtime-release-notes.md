@@ -497,10 +497,11 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 ### Airflow bug fixes
 
 - Fix bug when updating dagrun state for paused DAGs
+- Fix permissons for triggerer, datasets, and deleting DAGs on Astro with a non-Admin user
 
 ### Additional Improvements
 
-- Upgraded `openlineage-airflow` to 1.4.1. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.27.2) for a complete list of changes.
+- Upgraded `openlineage-airflow` to 1.4.1. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/1.4.1) for a complete list of changes.
 - Upgraded many OSS provider to newer minor and patch versions.
 
 ## Astro Runtime 6.6.0
