@@ -502,7 +502,7 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 ### Additional Improvements
 
 - Upgraded `openlineage-airflow` to 1.4.1. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/1.4.1) for a complete list of changes.
-- Upgraded many OSS provider to newer minor and patch versions.
+- Upgraded many OSS providers to newer minor and patch versions.
 
 ## Astro Runtime 6.6.0
 
