@@ -119,7 +119,7 @@ The base image for Astro Runtime now uses Python 3.11. If you want to use a diff
 - Upgraded `astronomer-providers` to 1.18.0. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1180-2023-09-25) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.7.0. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 - Upgraded `openlineage-airflow` to 1.4.1. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/1.4.1) for a complete list of changes. 
-- Upgraded many OSS provider to newer minor and patch versions.
+- Upgraded many OSS providers to newer minor and patch versions.
 
 ## Astro Runtime 8.9.0
 
