@@ -102,7 +102,18 @@ module.exports = {
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
-        "secrets-backend",
+        {
+          type: "category",
+          label: "Secrets backend",
+          link: { type: 'doc', id: 'secrets-backend' },
+          items: ["secrets-backend", 
+          "secrets-backend/aws-secretsmanager",
+          "secrets-backend/aws-paramstore",
+          "secrets-backend/azure-key-vault" ,
+          "secrets-backend/hashicorp-vault", 
+          "secrets-backend/gcp-secretsmanager", 
+          ],
+        },
         "manage-dags", 
       ],
     },
@@ -185,7 +196,11 @@ module.exports = {
         {
           type: "category",
           label: "Deployments",
-          items: ["deployment-api-tokens", "authorize-deployments-to-your-cloud", "transfer-a-deployment"],
+          items: [
+          "deployment-api-tokens",  
+          "authorize-deployments-to-your-cloud", 
+          "transfer-a-deployment",
+          ],
         },
         {
           type: "category",
