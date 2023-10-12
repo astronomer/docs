@@ -149,12 +149,12 @@ You can also send Airflow metrics to Datadog. See [Export Airflow metrics to Dat
 
   :::
 
-3. (Optional) **Astro Runtime 9.2.0 and greater**: Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
+3. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
 
     - **Key**: `DATADOG_SITE`
     - **Value**: Your Datadog **Site Parameter**. For example, `datadoghq.com`.
    
-4. (Optional) **Astro Runtime 9.2.0 and greater**: Set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
+4. (Optional) For Astro Runtime 9.2.0 and greater, set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
 
     - **Key**: `ASTRO_DATADOG_TASK_LOGS_TAGS`
     - **Value**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
