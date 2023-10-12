@@ -54,7 +54,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-snowflake
+    apache-airflow-providers-snowflake
     ```
 
     This will install the Snowflake provider package, which makes the Snowflake connection type available in Airflow.
