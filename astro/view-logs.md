@@ -145,8 +145,6 @@ You can also send Airflow metrics to Datadog. See [Export Airflow metrics to Dat
     - **Key**: `ASTRO_DATADOG_METRICS_DISABLED`
     - **Value**: `true`
 
-  See 
-
   :::
 
 3. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
@@ -159,7 +157,7 @@ You can also send Airflow metrics to Datadog. See [Export Airflow metrics to Dat
     - **Key**: `ASTRO_DATADOG_TASK_LOGS_TAGS`
     - **Value**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
 
-By default, Astro uses the tags `source=astronomer` and `service=astronomer-task-logs`.
+  By default, Astro uses the tags `source=astronomer` and `service=astronomer-task-logs`.
 
 5. Click **Save variable**.
 
