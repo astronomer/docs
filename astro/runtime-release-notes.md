@@ -38,7 +38,7 @@ Astro Runtime 9.2.0 includes same-day support for Apache Airflow 2.7.2. Airflow 
 - Fix the required permissions to clear a TI from the UI [(#34123)](https://github.com/apache/airflow/pull/34123)
 - Fixed a bug where manually-triggered DAG runs were causing the recalculation of when the scheduler would trigger the next DAG run [#34027](https://github.com/apache/airflow/pull/34027)
 
-To learn more, see the [Apache Airflow 2.7.2 release notes](https://github.com/apache/airflow/blob/v2-7-stable/RELEASE_NOTES.rst#airflow-2-7-2-2023-10-12).
+To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-2-2023-10-12).
 
 ## Astro Runtime 9.1.0
 
