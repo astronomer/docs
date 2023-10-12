@@ -33,10 +33,10 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 Astro Runtime 9.2.0 includes same-day support for Apache Airflow 2.7.2. Airflow 2.7.2 contains a number of bug fixes including:
 
-- Check if the lower of provided values are sensitives in config endpoint [(#34712)](https://github.com/apache/airflow/pull/34712)
-- Add missing audit logs for Flask actions add, edit and delete [(#34090)](https://github.com/apache/airflow/pull/34090)
-- Fix the required permissions to clear a TI from the UI [(#34123)](https://github.com/apache/airflow/pull/34123)
-- Fixed a bug where manually-triggered DAG runs were causing the recalculation of when the scheduler would trigger the next DAG run [(#34027)](https://github.com/apache/airflow/pull/34027)
+- Check if the lower of provided values are sensitives in config endpoint ([#34712](https://github.com/apache/airflow/pull/34712))
+- Add missing audit logs for Flask actions add, edit and delete ([#34090](https://github.com/apache/airflow/pull/34090))
+- Fix the required permissions to clear a TI from the UI ([#34123)](https://github.com/apache/airflow/pull/34123))
+- Fixed a bug where manually-triggered DAG runs were causing the recalculation of when the scheduler would trigger the next DAG run ([#34027](https://github.com/apache/airflow/pull/34027))
 
 To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-2-2023-10-12).
 
