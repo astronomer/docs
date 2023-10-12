@@ -496,8 +496,8 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 
 ### Airflow bug fixes
 
-- Fix bug when updating dagrun state for paused DAGs
-- Fix permissons for triggerer, datasets, and deleting DAGs on Astro with a non-Admin user
+- Fixed bug when updating DagRun state for paused DAGs
+- Fixed permissions for triggerer, datasets, and deleting DAGs on Astro with a non-Admin user
 
 ### Additional Improvements
 
