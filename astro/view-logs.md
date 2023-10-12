@@ -117,7 +117,9 @@ To access task logs from the Cloud UI:
 
 ## Export task logs to Datadog
 
-If your organization uses data dog as a centralized observability plane, you might want to forward Airflow task logs from a Deployment to [Datadog](https://www.datadoghq.com/) using a Datadog API key. Complete the following setup to view Airflow task logs from your Datadog instance.
+If your organization uses datadog as a centralized observability plane, you might want to forward Airflow task logs from a Deployment to [Datadog](https://www.datadoghq.com/) using a Datadog API key. Complete the following setup to view Airflow task logs from your Datadog instance.
+
+You can also send Airflow metrics to Datadog. See [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog).
 
 ### Prerequisites
 
@@ -138,19 +140,21 @@ If your organization uses data dog as a centralized observability plane, you mig
 
   :::info
 
-  By default, the Astro Datadog integration also sends a Deployment's [Airflow metrics](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html) to Datadog. To send only task logs to Datadog, additionally set the following environment variable:
+  By default, the Astro Datadog integration also sends a Deployment's [Airflow metrics](deployment-metrics.md#export-airflow-metrics-to-datadog) to Datadog. To send only task logs to Datadog, additionally set the following environment variable:
 
     - **Key**: `ASTRO_DATADOG_METRICS_DISABLED`
     - **Value**: `true`
 
+  See 
+
   :::
 
-3. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
+3. (Optional) **Astro Runtime 9.2.0 and greater**: Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
 
     - **Key**: `DATADOG_SITE`
     - **Value**: Your Datadog **Site Parameter**. For example, `datadoghq.com`.
    
-4. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
+4. (Optional) **Astro Runtime 9.2.0 and greater**: Set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
 
     - **Key**: `ASTRO_DATADOG_TASK_LOGS_TAGS`
     - **Value**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
@@ -159,4 +163,6 @@ By default, Astro uses the tags `source=astronomer` and `service=astronomer-task
 
 5. Click **Save variable**.
 
-Astro also supports exporting [Airflow metrics](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html) to Datadog. See [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog).
+### See also
+- [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog)
+- Learn more about [Airflow metrics](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html)
