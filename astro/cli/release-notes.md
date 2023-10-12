@@ -29,7 +29,7 @@ Release date: October 12, 2023
 
 - Fixed an issue where CI/CD pipelines were unable to use Deployments as Code to create Deployment Previews for Deployments using the Kubernetes executor.
 - Fixed an issue where the CLI was asking users to select from the wrong regions when creating a Deployment on an AWS cluster.
-- Fixed an issue where secret variables values were being printed to local logs
+- Fixed an issue where secret variables values were being printed to local logs.
 
 
 ## Astro CLI 1.19.2
