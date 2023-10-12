@@ -161,6 +161,6 @@ You can also send Airflow metrics to Datadog. See [Export Airflow metrics to Dat
 
 5. Click **Save variable**.
 
-### See also
+#### See also
 - [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog)
 - Learn more about [Airflow metrics](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/metrics.html)
