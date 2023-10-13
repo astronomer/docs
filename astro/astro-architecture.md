@@ -1,13 +1,13 @@
 ---
-sidebar_label: 'Architecture'
-title: 'Astro architecture'
+sidebar_label: 'About Astro'
+title: 'About Astro'
 id: astro-architecture
 description: Learn about how Astro is structured to maximize the power of Apache Airflow.
 ---
 
 Astro is a fully-managed SaaS application for data orchestration that helps teams run data pipelines with Apache Airflow at any level of scale. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
 
-## General architecture
+## Architecture
 
 To run Airflow on Astro, you need to create a [Deployment](#deployment) using either of these two options:
 
@@ -18,15 +18,16 @@ To run Airflow on Astro, you need to create a [Deployment](#deployment) using ei
     - You want to use a specific cloud provider or region.
     - You need to run Airflow environments in separate clusters for business or security reasons.
 
-You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli), or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), securely connect to external data services, so that you can place Airflow at the core of your data ecosystem. The _Astro Hypervisor_ is an Astronomer-managed component that facilitates operating and optimizing your Deployments. 
+You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli), or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), securely connect to external data services, so that you can place Airflow at the core of your data ecosystem. The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that facilitates operating and optimizing your Deployments. 
 
 ![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.png)
 
 ## Key concepts
 
-The Astro ecosystem includes tools that enable you to both interact with Astro and enrich your development and maintenance experience. Some of these tools and functionality are not available in open source Airflow, and have Astro-specific terminology. 
+Astro includes tools and features that enable you to enrich your Airflow development and maintenance experience beyond the functionality that open source Airflow provides. 
 
-The following sections explain key Astro tools and concepts that you use extend the functionality of Airflow.
+The following sections give a detailed explaination of Astro tools and features as well as key concepts that you need to understand in order to use Astro to work with Airflow and manage your Astro environment. You can find definitions for additional Astro-specific terminology in the [Astro glossary](astro-glossary.md). 
+
 
 ### Astro CLI
 
@@ -84,10 +85,10 @@ To securely manage user access, you can [integrate your Organization with an ide
 
 ## Access control architecture
 
-Astro implements role-based access control (RBAC) for Airflow environments.
+Astro uses role-based access control (RBAC) to define which users are permitted to take certain actions or access certain resources. For example, you can assign a user or automation tool permission to deploy DAGs, but not to delete a Deployment. Roles in Astro are defined at the Workspace and Organization levels. 
 
-Each Astro user has a Workspace role in every Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](manage-teams.md), which apply the same role across a group of users. You can create API tokens with specific roles to automate most actions on Astro, such as deploying code or managing users. 
+Each Astro user has a Workspace role in every Workspace they belong to, plus a single Organization role. Users can also belong to [Teams](manage-teams.md), which apply the same role across a group of users. To automate managing user roles or deploying code, you can create API tokens with specific roles to automate most actions on Astro. 
 
-Use the following diagram as a reference for how all of these components interact with each other in Astro.
+Use the following diagram as a reference for how these components interact with each other in Astro.
 
 ![A diagram showing how all Astro RBAC components fit together](/img/docs/rbac-overview.png)
