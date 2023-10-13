@@ -87,7 +87,6 @@ You can use Astro CLI to set environment variables on Astro and your local Airfl
 
 You can either use `.env` file to update environment variables on your local Airflow and Astro Deployment or manually add environment variables to your Deployment using Astro CLI commands `astro deployment variable create` and `astro deployment variable update`.
 
-
 ### In your local Airflow environment
 
 If your environment variables contain sensitive information or credentials that you don’t want to expose in plain-text, ensure that your `.env` file is part of `.gitignore` when you deploy these changes to your code repository.
