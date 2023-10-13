@@ -26,7 +26,7 @@ You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-
 
 Astro includes tools and features that enable you to enrich your Airflow development and maintenance experience beyond the functionality that open source Airflow provides. 
 
-The following sections give a detailed explaination of Astro tools and features as well as key concepts that you need to understand in order to use Astro to work with Airflow and manage your Astro environment. You can find definitions for additional Astro-specific terminology in the [Astro glossary](astro-glossary.md). 
+The following sections give a detailed explaination of key concepts that you need to understand in order to work with Airflow on Astro. You can find definitions for additional Astro-specific terminology in the [Astro glossary](astro-glossary.md). 
 
 
 ### Astro CLI
