@@ -79,7 +79,9 @@ Astronomer recommends using the Cloud UI to store your environment variables bec
 - Visibility into your Airflow environment, without having to print environment variables in your task
 - Ability to export using Astro CLI
 
-There are scenarios based on your specific use case when you might want to follow a different strategy or a mix of strategies. The following table describes recommended methods for particular scenarios.
+However, there are scenarios based on your specific use case when you might want to use a mix of methods or strategies other than the Cloud UI. 
+
+The following table describes recommended methods for different scenarios.
 
 | Scenario                                                                                                                                                                                                                                                                     | Recommended method                                                                                                                                                                                                                                                |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
