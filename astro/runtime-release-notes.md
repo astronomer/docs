@@ -40,6 +40,10 @@ Astro Runtime 9.2.0 includes same-day support for Apache Airflow 2.7.2. Airflow 
 
 To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-2-2023-10-12).
 
+### Additional Improvements
+
+- Upgraded `astronomer-providers-logging` to 1.3.0. This upgrade added the ability to create custom tags for exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
+
 ## Astro Runtime 9.1.0
 
 - Release date: September 7, 2023
