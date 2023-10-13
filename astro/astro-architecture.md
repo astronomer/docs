@@ -28,7 +28,6 @@ Astro includes tools and features that enable you to enrich your Airflow develop
 
 The following sections give a detailed explaination of key concepts that you need to understand in order to work with Airflow on Astro. You can find definitions for additional Astro-specific terminology in the [Astro glossary](astro-glossary.md). 
 
-
 ### Astro CLI
 
 The [Astro CLI](cli/overview.md) tool provides an interface to run Airflow locally and deploy Airflow files to Astro from either a local machine or a CI/CD process. The Astro CLI is open source and requires either Docker or an alternative container management tool, like Podman.
