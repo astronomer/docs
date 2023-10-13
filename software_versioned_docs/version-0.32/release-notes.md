@@ -11,6 +11,61 @@ This page contains release notes for all recent Astronomer Software versions.
 
 0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.33.1
+
+Release date: October 13, 2023
+
+### Additional improvements
+
+- You can now set `astronomer.auth.microsoft.useExternalProxy: false` in your `config.yaml` file to bypass proxy support for Azure logins.
+- You can now list System-level Service Accounts using the Houston API. 
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
+- The Kibana logging dashboard now includes a default index. 
+
+### Bug fixes
+
+- Fixed an issue where if you queried a Deployment name that belonged to two different Deployments in two different Workspaces, the Houston API might retrieve the unintended Deployment. 
+- Fixed an issue where you could create users with the Houston API when SCIM was enabled and `userManagement.enable` was `false`.
+- Fixed an issue where some dashboards on Grafana didn't load properly.
+- Fixed an issue where the Houston API `CreateDeployment` request would return a successful response even though no Deployment was created due to no specified Airflow version.
+- Fixed an issue where a System Admin user that did not belong to a Team could delete the Team from the Software UI.
+- Fixed an issue where syncing an IdP group from Okta failed when SCIM was enabled and a user account was removed only from Astronomer Software.
+- Fixed an issue where adding a user through SCIM provisioning that already exists on an Astronomer Software Azure cluster would throw an error instead of updating the existing user.
+- Fixed an issue where the user login process would be unresponsive if the Houston API failed to retrieve IdP group information from Azure.
+- Fixed an issue where the Software UI would show Deployments as healthy even when triggerer Pods were failing.
+- Fixed an issue where a user who was deleted from Astronomer Software would not appear when they were reinvited through a Team.
+- Fixed an issue where the System Admin page in the Software UI had entries that didn't fit the page.
+- Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
+- Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.
+- Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-38325](https://nvd.nist.gov/vuln/detail/CVE-2023-38325)
+    - [CVE-2023-4863](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4863)
+    - [CVE-2023-37788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37788)
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-36665](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-36665)
+    - [CVE-2023-26115](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-26115)
+    - [CVE-2023-29526](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29526)
+    - [CVE-2022-48174](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-48174)
+    - [CVE-2022-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2253)
+    - [CVE-2017-11468](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11468)
+    - [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840)
+    - [CVE-2023-2976](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2976)
+    - [CVE-2023-1370](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1370)
+    - [CVE-2021-40690](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-40690)
+    - [CVE-2023-40577](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-40577)
+    - [CVE-2022-41721](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41721)
+    - [CVE-2023-25653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25653)
+    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698)
+    - [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194)
+    - [CVE-2021-38561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561)
+    - [CVE-2023-25653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25653)
+    - [CVE-2023-25653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25653)
+    - [CVE-2023-25653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25653)
+    - [CVE-2023-25653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25653)
+    - [CVE-2023-25653](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25653)
+
 ## 0.33.0
 
 Release date: August 3, 2023
