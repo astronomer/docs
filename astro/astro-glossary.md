@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Glossary"
-title: "Astro glossary"
+sidebar_label: 'Glossary'
+title: 'Astro glossary'
 id: astro-glossary
 description: A quick reference for terms you'll encounter on Astro.
 ---
