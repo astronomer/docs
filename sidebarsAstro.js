@@ -106,9 +106,9 @@ module.exports = {
           label: "Environment variables",
           link: {
             type: 'doc',
-            id: 'environment-variables'
+            id: 'env-vars-overview'
           },
-          items: ["environment-variables", "env-vars-astro"],
+          items: ["env-vars-overview", "env-vars-astro"],
         },
         {
           type: "category",

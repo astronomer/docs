@@ -165,5 +165,5 @@ To mark an environment variable as a secret using Astro CLI use the `--secret` f
 ## See also
 
 - [Set Airflow connections](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables) using environment variables.
-- [Set Airflow variables](http://localhost:3000/learn/airflow-variables#using-environment-variables) using environment variables.
+- [Set Airflow variables](http://docs.astronomer.io/learn/airflow-variables#using-environment-variables) using environment variables.
 - [Import and export environment variables](import-export-connections-variables.md#from-environment-variables)
