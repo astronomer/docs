@@ -42,7 +42,7 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 ### Additional Improvements
 
-- Upgraded `astronomer-providers-logging` to 1.3.0. This upgrade added the ability to create custom tags for exporting Airflow task logs to Datadog, which allow you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
+- Upgraded `astronomer-providers-logging` to 1.3.0. This upgrade added the ability to create custom tags for exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
 
 ## Astro Runtime 9.1.0
 
