@@ -7,7 +7,11 @@ description: Learn about how Astro is structured to maximize the power of Apache
 
 Astro is a fully-managed SaaS application for data orchestration that helps teams run data pipelines with Apache Airflow at any level of scale. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data. 
 
+This document provides an overview of the Astro architecture, key concepts, and features that you use to maximize your work with Airflow.
+
 ## Architecture
+
+You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli), or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), securely connect to external data services, so that you can place Airflow at the core of your data ecosystem. The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that facilitates operating and optimizing your Deployments. 
 
 To run Airflow on Astro, you need to create a [Deployment](#deployment) using either of these two options:
 
@@ -17,8 +21,6 @@ To run Airflow on Astro, you need to create a [Deployment](#deployment) using ei
     - You need private networking support.
     - You want to use a specific cloud provider or region.
     - You need to run Airflow environments in separate clusters for business or security reasons.
-
-You can work with Astro using the [Cloud UI](#cloud-ui), the [Astro CLI](#astro-cli), or the Astro API. Your Airflow environments on Astro, called [Deployments](#deployment), securely connect to external data services, so that you can place Airflow at the core of your data ecosystem. The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that facilitates operating and optimizing your Deployments. 
 
 ![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.png)
 
