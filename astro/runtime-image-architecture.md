@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Astro Runtime architecture"
+sidebar_label: "Architecture"
 title: "Astro Runtime architecture"
 id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
@@ -45,6 +45,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 6             | 2.4                    |
 | 7             | 2.5                    |
 | 8             | 2.6                    |
+| 9             | 2.7                    |
 
 For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
@@ -63,7 +64,7 @@ The following table lists the Airflow environment variables that have different 
 
 Astro Runtime includes a monitoring DAG that is pre-installed in the Docker image and enabled for all Deployments on Astro Hybrid. In addition to generating Deployment health and metrics functionality, this DAG allows the Astronomer team to monitor the health of your data plane by enabling real-time visibility into whether your workers are healthy and tasks are running.
 
-The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot. The DAG runs and appears in the Airflow UI only on Astro Deployments. 
+The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot. The DAG runs and appears in the Airflow UI only on Astro Deployments.
 
 Because this DAG is essential to Astro's managed service, you are not charged for its task runs. For the same reasons, this DAG can't be modified or disabled through the Airflow UI. To modify when this DAG runs on a Deployment, set the following [Deployment environment variable](environment-variables.md):
 
@@ -72,7 +73,7 @@ Because this DAG is essential to Astro's managed service, you are not charged fo
 
 ## Provider packages
 
-The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with an asterisk (*) are installed only in Astro Runtime and not installed by default on Apache Airflow.
+The latest version of the Astro Runtime image has the following open source provider packages pre-installed. Providers marked with an asterisk (\*) are installed only in Astro Runtime and not installed by default on Apache Airflow.
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)*
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)*
@@ -82,7 +83,7 @@ The latest version of the Astro Runtime image has the following open source prov
 - Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)
 - Datadog [`apache-airflow-providers-datadog](https://pypi.org/project/apache-airflow-providers-datadog/)*
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)*
-- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/) 
+- FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)*
 - HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)
 - IMAP [`apache-airflow-providers-imap`](https://pypi.org/project/apache-airflow-providers-imap/)
@@ -91,7 +92,6 @@ The latest version of the Astro Runtime image has the following open source prov
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)*
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)*
 - SQLite [`apache-airflow-providers-sqlite`](https://pypi.org/project/apache-airflow-providers-sqlite/)
-
 
 ### Provider package versioning
 
@@ -104,7 +104,6 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 ```
 
 ## Python versioning
-
 
 | Astro Runtime | Python version |
 | ------------- | -------------- |
@@ -140,7 +139,7 @@ The base Astro Runtime Docker images have the following format:
 - `quay.io/astronomer/astro-runtime:<version>`
 - `quay.io/astronomer/astro-runtime:<version>-base`
 
-An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
 
 ### Python version distributions
 
@@ -149,7 +148,6 @@ Starting with Astro Runtime 9, Astronomer maintains different distributions Astr
 ```text
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
-
 
 ## System distribution
 
@@ -162,6 +160,7 @@ The following table lists the operating systems and architectures supported by e
 | 6             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
 | 7             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
 | 8             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 9             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 

@@ -17,6 +17,36 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.19.3
+
+Release date: October 12, 2023
+
+### Additional improvements
+
+- Sample test `test/dags/test_dag_integrity.py` was renamed to `test/dags/test_dag_example.py` to highlight that this test is an example.
+
+### Bug fixes
+
+- Fixed an issue where CI/CD pipelines were unable to use Deployments as Code to create Deployment Previews for Deployments using the Kubernetes executor.
+- Fixed an issue where the CLI was asking users to select from the wrong regions when creating a Deployment on an AWS cluster.
+- Fixed an issue where secret variables values were being printed to local logs.
+
+
+## Astro CLI 1.19.2
+
+Release date: September 14, 2023
+
+### Additional improvements
+
+- When you run `astro dev upgrade-test`, the generated HTML report for DAG tests now shows how many DAGs passed and failed the test. 
+
+### Bug fixes 
+
+- Fixed an issue where you couldn't create a Deployment on a dedicated cluster using a Deployment file and API token. 
+- Fixed an issue where the Deployment URL that appears after you run `astro deploy` was not formatted properly.
+- Fixed an issue where `astro dev upgrade-test` would occasionally output that it was testing an upgrade to the latest version of Astro Runtime, even if it wasn't. 
+- Fixed an issue where `astro dev upgrade-test` didn't produce an HTML report for DAG tests. 
+
 ## Astro CLI 1.19.1
 
 Release date: August 30, 2023
@@ -67,6 +97,7 @@ You can use the new `astro dev upgrade-test` command to anticipate and address p
 
 ### Additional improvements
 
+- You can now specify the `--description` flag with `astro deploy` to add a description for your deploy. You can use this description to let other users know why you made a deploy or what changes a deploy contains. 
 - You can now specify the `--role` flag with `astro organization team create/update` to update a Team's Organization-level role. 
 - You can now specify the `--execution-date` flag with `astro run` to trigger a DAG run for a specific execution date.
 - You can now specify the `--verbose` flag with `astro run` to stream all logs to your terminal after the DAG run triggers. 
@@ -165,7 +196,7 @@ These commands can be used to manage API tokens as part of an automated workflow
 
 - You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
-- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](configure-deployment-resources.md#enforce-ci-cd-deploys) on a given Deployment. 
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment. 
 - You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted. 
 
 ## Astro CLI 1.15.1
@@ -416,7 +447,7 @@ You can now use the `astro run` command to run and debug a DAG from the command 
 
 This command is an alternative to running `astro dev restart` every time you make a change to your DAG. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
 
-To learn more, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+To learn more, see [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 
 ### Additional improvements
 
@@ -572,7 +603,7 @@ Release date: July 19, 2022
 
 ### Deploy a custom Docker image with new `--image-name` flag
 
-You can now deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`, as long as the image is based on Astro Runtime and is available in a local Docker registry. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+You can now deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`, as long as the image is based on Astro Runtime and is available in a local Docker registry. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
 
 Using this flag, you can automate deploying custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows in different pipelines.
 
@@ -600,7 +631,8 @@ By default, `astro deploy` automatically parses the DAGs in your Astro project f
 - Add `skip_parse: true` to your `.astro/config.yaml` file.
 - Add `ASTRONOMER_SKIP_PARSE=true` as an environment variable to your local environment or CI/CD pipeline.
 
-For more information on parsing DAGs, see [Parse DAGs](test-and-troubleshoot-locally.md#parse-dags). For more information about deploying to Astro, see [Deploy code](deploy-code.md).
+For more information on parsing DAGs, see [Test your Astro project locally](cli/test-your-astro-project-locally.md). For more information about deploying to Astro, see [Deploy code](deploy-code.md).
+
 ### Additional improvements
 
 - Upgraded the CLI to Go version 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
@@ -748,7 +780,7 @@ Release date: April 14, 2022
 
 ### New command to create and update environment variables
 
-`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
+`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](cli/develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
 
 For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
@@ -821,7 +853,7 @@ Release date: March 3, 2022
 
 This command was built to replace the need to constantly run `astro dev restart` during troubleshooting to see if your DAGs render in the Airflow UI. Now, you can quickly run `astro dev parse` and see import and syntax errors directly in your terminal without having to restart all Airflow services locally. For more complex testing, we still recommend using `astro dev pytest`, which allows you to run other custom tests in your project.
 
-For more information about `astro dev parse`, see the [CLI command reference](cli/astro-dev-parse.md). For more guidance on testing DAGs locally, see [Test DAGs locally](test-and-troubleshoot-locally.md#test-dags-locally).
+For more information about `astro dev parse`, see the [CLI command reference](cli/astro-dev-parse.md). For more guidance on testing DAGs locally, see [Test DAGs locally](cli/test-your-astro-project-locally.md#unit-test-dags).
 
 ### `astro deploy` parses DAGs by default
 
@@ -829,7 +861,7 @@ To better protect your Deployments from unexpected errors, `astro deploy` now au
 
 For more information about `astro deploy`, see [CLI command reference](cli/astro-deploy.md).
 
-:::danger Breaking Change
+:::warning Breaking Change
 
 For Deployments running Astro Runtime 4.1.0+, `astro deploy` will no longer complete the code push to your Deployment if your DAGs contain basic errors. If any files in your Astro project contain these errors, then certain deploys might stop working after you upgrade the Astro CLI to 1.3.0.
 
@@ -847,7 +879,7 @@ You can now use `astro deployment update` to update certain configurations for a
 - Scheduler replicas
 - Worker resources
 
-This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
+This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Deployment settings](deployment-settings.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
 
 ## 1.2.0 (`astrocloud`)
 
@@ -881,7 +913,7 @@ For example, you can use this command to run tests that check for:
 
 These tests don't require a fully functional Airflow environment in order to execute, which makes this Astro CLI command the fastest and easiest way to test DAGs locally.
 
-In addition to running tests locally, you can also run pytest as part of the Astro deploy process. To do so, specify the `--pytest` flag when running `astro deploy`. This ensures that your code push to Astro automatically fails if any DAGs do not pass all pytests specified in the `tests` directory of your Astro project. For more information, see [Test DAGs locally with pytest](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
+In addition to running tests locally, you can also run pytest as part of the Astro deploy process. To do so, specify the `--pytest` flag when running `astro deploy`. This ensures that your code push to Astro automatically fails if any DAGs do not pass all pytests specified in the `tests` directory of your Astro project. For more information, see [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 
 ### New command to view Deployment scheduler Logs
 
@@ -896,7 +928,7 @@ You can now use the Astro CLI to create and delete Deployments on Astro with two
 - `astro deployment create`
 - `astro deployment delete`
 
-These commands are functionally identical to the [Deployment configuration](configure-deployment-resources.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
+These commands are functionally identical to the [Deployment configuration](deployment-settings.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
 
 ## 1.1.0 (`astrocloud`)
 

@@ -1,6 +1,6 @@
 ---
 title: "Run Azure Data Factory pipelines with Airflow"
-sidebar_label: "Azure Data Factory"
+sidebar_label: "Tutorial"
 description: "Learn how to orchestrate remote jobs in Azure Data Factory with your Apache Airflow DAGs."
 id: airflow-azure-data-factory-integration
 sidebar_custom_props: { icon: 'img/integrations/azure-data-factory.png' }

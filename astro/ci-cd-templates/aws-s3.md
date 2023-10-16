@@ -11,8 +11,8 @@ Use the following CI/CD template to automate deploying Apache Airflow DAGs from 
 
 - An AWS S3 bucket
 - An [Astro Deployment](create-deployment.md) with [DAG-only deploys enabled](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment).
-- Either a [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
-- An [Astro project](create-first-dag.md) containing your project configurations.
+- A [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md).
+- An [Astro project](cli/develop-project.md#create-an-astro-project) containing your project configurations.
 
 ### DAG deploy template
 

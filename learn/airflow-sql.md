@@ -82,10 +82,9 @@ In Airflow 2+, provider packages are separate from the core of Airflow. If you'r
 
 In Airflow, action operators execute a function. You can use action operators (or hooks if no operator is available) to execute a SQL query against a database. Commonly used SQL-related action operators include:
 
-- [PostgresOperator](https://registry.astronomer.io/providers/postgres/modules/postgresoperator)
+- [SQLExecuteQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/SQLExecuteQueryOperator)
 - [MssqlHook](https://registry.astronomer.io/providers/mssql/modules/mssqlhook)
 - [MysqlOperator](https://registry.astronomer.io/providers/mysql/modules/mysqloperator)
-- [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator)
 - [BigQueryOperator](https://registry.astronomer.io/providers/google/modules/bigqueryexecutequeryoperator)
 
 ### Transfer operators
@@ -105,13 +104,13 @@ Now that you've learned about the most commonly used Airflow SQL operators, you'
 
 ### Example 1: Execute a query
 
-In this first example, a DAG executes two simple interdependent queries using [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator).
+In this first example, a DAG executes two simple interdependent queries using [SQLExecuteQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/SQLExecuteQueryOperator).
 
 First you need to define your DAG:
 
 <CodeBlock language="python">{call_snowflake_sprocs}</CodeBlock>
 
-The `template_searchpath` argument in the DAG definition tells the DAG to look in the given folder for scripts, so you can now add two SQL scripts to your project. In this example, those scripts are `call-sproc1.sql` and c`all-sproc2.sql`, which contain the following SQL code respectively:
+The `template_searchpath` argument in the DAG definition tells the DAG to look in the given folder for scripts, so you can now add two SQL scripts to your project. In this example, those scripts are `call-sproc1.sql` and `call-sproc2.sql`, which contain the following SQL code respectively:
 
 ```sql
 -- call-sproc1
@@ -144,7 +143,7 @@ The DAG is essentially the same that you used in Example 1. The difference is in
 ```sql
 SELECT *
 FROM STATE_DATA
-WHERE date = {{ yesterday_ds_nodash }}f
+WHERE date = '{{ yesterday_ds_nodash }}'
 ```
 
 In this example, the query has been parameterized to dynamically select data for yesterday's date using a built-in Airflow variable with double curly brackets. The rendered template in the Airflow UI looks like this:
@@ -162,11 +161,11 @@ WHERE state = {{ conf['state_variable'] }}
 If you need a parameter that is not available as a built-in variable or a macro, such as a value from another task in your DAG, you can also pass that parameter into your query using the operator:
 
 ```python
-opr_param_query = SnowflakeOperator(
+opr_param_query = SQLExecuteQueryOperator(
     task_id="param_query",
-    snowflake_conn_id="snowflake",
+    conn_id="snowflake",
     sql="param-query.sql",
-	params={"date":mydatevariable}
+    parameters={"my_date": mydatevariable}
 )
 ```
 
@@ -175,8 +174,33 @@ And then reference that param in your SQL file:
 ```sql
 SELECT *
 FROM STATE_DATA
-WHERE date = {{ params.date }}
+WHERE date = %(my_date)s
 ```
+
+An alternative option is to use [Jinja](templating.md) templates in your SQL statements and pass the relevant values using the `params` parameter.
+
+```python
+    opr_param_query = SQLExecuteQueryOperator(
+        task_id="param_query",
+        conn_id="snowflake_default",
+        sql="param-query.sql",
+        params={"my_date": "2022-09-01"},
+    )
+```
+
+The value can be referenced using Jinja syntax in the SQL statement:
+
+```sql
+SELECT *
+FROM STATE_DATA
+WHERE date = '{{ params.date }}'
+```
+
+:::tip
+
+Airflow params can also be defined at the DAG-level and passed to a DAG at runtime. Params passed at runtime will override param defaults defined at the DAG or the task level. For more information on params see the [Create and use params in Airflow](airflow-params.md) guide.
+
+:::
 
 ### Example 3: Load data
 
@@ -276,4 +300,4 @@ You've learned how to interact with your SQL database from Airflow. There are so
 - What if you want to retrieve data with the PostgresOperator?
 - Is it scalable?
 
-Find out more on Astronomer's [Academy Course on Airflow SQL](https://academy.astronomer.io/airflow-sql) for free today.
+Find out more on Astronomer's [Airflow: Branching](https://academy.astronomer.io/astro-runtime-branching) course for free today.

@@ -42,7 +42,7 @@ This document references the Astro control and data planes, which are core parts
 - Use [supported and compatible versions](https://github.com/apache/airflow/blob/main/README.md#release-process-for-providers) of [Airflow providers](https://registry.astronomer.io/providers/?page=1), to take advantage of the most recent security features and fixes.
 - Create a [secrets backend](https://docs.astronomer.io/astro/secrets-backend) to access sensitive information and secrets from your data pipelines that will be used to access PHI. If you do not have a secrets backend, you must [store your environment variables as secrets](environment-variables.md).
 - Ensure all PHI data that is orchestrated or processed by the data plane is encrypted at rest and in transit at all times using modern cryptographic protocols and ciphers, and at no point can be read in clear text. For example, when reading data from an RDS instance, transforming it in the data plane, and writing it out to an S3 bucket.
-- Do not output PHI to [scheduler](view-logs.md#view-airflow-scheduler-logs) and/or [task](view-logs.md#view-airflow-task-logs) logs, especially in clear text.
+- Do not output PHI to scheduler and/or task logs, especially in clear text. See [View Logs](view-logs.md) for more information.
 - Do not store PHI as part of your DAG image or code.
 - Do not store unencrypted PHI in [XComs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html). Ensure encrypted PHI stored in XComs for task execution is purged following task execution.
 - Ensure your [lineage metadata](set-up-data-lineage.md) does not contain any PHI.

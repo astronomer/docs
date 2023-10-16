@@ -2,7 +2,7 @@
 title: "Orchestrate Snowflake Queries with Airflow"
 description: "Get enhanced observability and compute savings while orchestrating Snowflake jobs from your Airflow DAGs."
 id: airflow-snowflake
-sidebar_label: Snowflake
+sidebar_label: Tutorial
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
 
@@ -41,7 +41,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
-- A Snowflake account. A [30-day free trial](https://signup.snowflake.com/) is available. You need to have at least one schema in one database available for which you have permissions to create and write to tables.
+- A Snowflake account. A [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. You need to have at least one schema in one database available for which you have permissions to create and write to tables.
 
 ## Step 1: Configure your Astro project
 
@@ -64,8 +64,9 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 
 1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
-2. Create a new connection named `snowflake_default` and choose the `Snowflake` connection type. Enter the following information:
+2. Create a new connection and choose the `Snowflake` connection type. Enter the following information:
 
+    - Connection ID: `snowflake_default`
     - [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html): Your Snowflake schema.
     - Login: Your Snowflake login username.
     - Password: Your Snowflake password.

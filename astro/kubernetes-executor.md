@@ -11,7 +11,7 @@ On Astro, you can configure Kubernetes executor in the following ways:
 
 :::info
 
-This document describes how to configure individual task Pods for different use cases. To configure defaults for all Kubernetes executor task pods, see [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+This document describes how to configure individual task Pods for different use cases. To configure defaults for all Kubernetes executor task pods, see [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources).
 
 :::
 
@@ -38,7 +38,7 @@ See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests)
 
 ### Example: Set CPU or memory limits and requests
 
-You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](configure-deployment-resources.md#configure-kubernetes-pod-resources).
+You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](deployment-settings.md#configure-kubernetes-pod-resources).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
@@ -92,11 +92,11 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your Deployment. After the task finishes, the Pod terminates gracefully.
 
-## Mount secret environment variables to worker Pods
+## Use secret environment variables in worker Pods
 
-<!-- Same content in other products -->
+In Astro, [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. These environment variables are already available to your worker Pods and can be accessed in your tasks just like any other environment variable. For example, you can use `os.environ[<your-secret-env-var>]` or `os.getenv(<your-secret-env-var>, None)` in your Python code. 
 
-Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
+However, if you can’t use Python or are using a pre-defined code that expects specific keys for environment variables, you need to mount the secret environment variables by pulling the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
 
 1. Add the following import to your DAG file:
    
@@ -199,7 +199,7 @@ A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods 
 
 ## See also
 
-- [Configure Kubernetes Pod resources](configure-deployment-resources.md#configure-kubernetes-pod-resources)
+- [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources)
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
 - [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
 - [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)

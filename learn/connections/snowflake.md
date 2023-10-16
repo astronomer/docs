@@ -1,7 +1,7 @@
 ---
 title: "Create a Snowflake Connection in Airflow"
 id: snowflake
-sidebar_label: Snowflake
+sidebar_label: Connection
 description: Learn how to create a Snowflake connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
@@ -19,7 +19,7 @@ This guide provides the basic setup for creating a Snowflake connection. For a c
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli).
-- A [Snowflake account](https://signup.snowflake.com/).
+- A [Snowflake account](https://trial.snowflake.com/?owner=SPN-PID-365384).
 
 ## Get Connection details
 
@@ -54,7 +54,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-snowflake
+    apache-airflow-providers-snowflake
     ```
 
     This will install the Snowflake provider package, which makes the Snowflake connection type available in Airflow.

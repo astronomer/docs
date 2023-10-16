@@ -13,9 +13,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-This is where you'll find information about installing, upgrading, and uninstalling the Astro CLI.
+You can find information about installing, upgrading, and uninstalling the Astro CLI.
 
 ## Install the Astro CLI
+
+:::info
+
+If you want to run your first DAG on Astro but don't want to install any software locally, you can instead deploy DAGs with [GitHub Actions](first-dag-github-actions.md). Astronomer recommends this option if your organization restricts the use of Docker or if you have trouble installing the Astro CLI on Windows.
+
+:::
 
 <Tabs
     defaultValue="mac"
@@ -122,7 +128,9 @@ By default, the Astro CLI uses Docker as its container management engine for run
 
 #### Resolve installation issues
 
-If an error message appears indicating that the term winget is not recognized as an internal or external command when you attempt to run winget commands, see this [troubleshooting document](https://github.com/microsoft/winget-cli/tree/master/doc/troubleshooting#common-issues) provided by Microsoft. 
+If an error message appears indicating that the term winget is not recognized as an internal or external command when you attempt to run winget commands, see this [troubleshooting document](https://github.com/microsoft/winget-cli/tree/master/doc/troubleshooting#common-issues) provided by Microsoft.
+
+If you're still struggling to install the Astro CLI with winget, retry the install using the alternative instructions in [Windows (Manual)](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#install-the-astro-cli).
 
 </TabItem>
 

@@ -1,7 +1,7 @@
 ---
 title: "Create a Databricks connection in Airflow"
 id: databricks
-sidebar_label: Databricks
+sidebar_label: Connection
 description: Learn how to create a Databricks connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---

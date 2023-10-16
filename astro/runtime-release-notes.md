@@ -24,6 +24,47 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 9.2.0
+
+- Release date: October 12, 2023
+- Airflow version: 2.7.2
+
+### Airflow 2.7.2
+
+Astro Runtime 9.2.0 includes same-day support for Apache Airflow 2.7.2. Airflow 2.7.2 contains a number of bug fixes including:
+
+- Check if the lower of provided values are sensitives in config endpoint ([#34712](https://github.com/apache/airflow/pull/34712))
+- Add missing audit logs for Flask actions add, edit and delete ([#34090](https://github.com/apache/airflow/pull/34090))
+- Fix the required permissions to clear a TI from the UI ([#34123](https://github.com/apache/airflow/pull/34123))
+- Fixed a bug where manually-triggered DAG runs were causing the recalculation of when the scheduler would trigger the next DAG run ([#34027](https://github.com/apache/airflow/pull/34027))
+
+To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-2-2023-10-12).
+
+### Additional Improvements
+
+- Upgraded `astronomer-providers-logging` to 1.3.0. This upgrade added the ability to create custom tags for exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
+
+## Astro Runtime 9.1.0
+
+- Release date: September 7, 2023
+- Airflow version: 2.7.1
+
+### Airflow 2.7.1
+
+Astro Runtime 9.1.0 includes same-day support for Apache Airflow 2.7.1. Airflow 2.7.1 contains a number of bug fixes including:
+
+- Treat dag-defined access_control as authoritative if defined ([#33632](https://github.com/apache/airflow/pull/33632))
+- Add limit 1 if required first value from query result ([#33632](https://github.com/apache/airflow/pull/33632))
+- Fix MappedTaskGroup tasks not respecting upstream dependency ([#33732](https://github.com/apache/airflow/pull/33732))
+
+To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-1-2023-09-07).
+
+### Additional improvements
+
+- You can now [export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) from Azure and GCP clusters.
+- Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
+- Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+
 ## Astro Runtime 9.0.0
 
 - Release date: August 18, 2023
@@ -32,6 +73,11 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 ### Airflow 2.7
 
 Astro Runtime 9 is based on Airflow 2.7, which includes a number of new features and improvements. Most notably, Airflow 2.7 includes the following changes:
+
+- In the Airflow UI, the **Trigger DAG w/ config** button now appears only when a DAG has configured [params](https://docs.astronomer.io/learn/airflow-params). Because some teams use this workflow without configuring DAG params, this change has been feature flagged. To revert the change, set the following environment variable in your Dockerfile or as an Astro [environment variable](environment-variables.md):
+
+    - **Key**: `AIRFLOW__WEBSERVER__SHOW_TRIGGER_FORM_IF_NO_PARAMS`
+    - **Value**: `True`
 
 - Setup and teardown tasks are a new type of task that you can use to prepare resources and configurations for specific tasks, ensuring that they always have resources even when you retry failed tasks. See [Use setup and teardown tasks in Airflow](https://docs.astronomer.io/learn/airflow-setup-teardown) to learn how to use them.
 - You can now clear task groups or mark them as successful/failed from the Airflow UI **Grid View** just like individual tasks.
@@ -571,7 +617,7 @@ Astro Runtime images now support both AMD64 and ARM64 processor architectures fo
 
 If you run the Astro CLI on a Mac computer that uses an ARM-based [Apple M1 Silicon chip](https://www.apple.com/newsroom/2020/11/apple-unleashes-m1/), you will see a significant performance improvement when running Airflow locally. For example, the time it takes to run `astro dev start` on average has decreased from over 5 minutes to less than 2 minutes.
 
-For more information on developing locally with the Astro CLI, see [Develop a Project](develop-project.md).
+For more information on developing locally with the Astro CLI, see [Develop a Project](cli/develop-project.md).
 
 ### Airflow 2.4.3 
 

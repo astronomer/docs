@@ -14,6 +14,12 @@ Using the Astronomer registry is recommended when you're getting started and you
 
 If your organization can't support the Astronomer default internal registry, you can configure a custom container image registry. This option is best suited for organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and unapproved Python and OS-level packages contained in Docker images.
 
+:::info
+
+A custom registry can still connect to public networks or internet. Therefore, this procedure is different if you're installing Astronomer in an airgapped environment. If you need to create a custom registry for a system that can't connect to the public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
+
+:::
+
 ## Implementation considerations
 
 Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes using continuous integration and continuous delivery (CI/CD) pipelines. In this implementation, you use your CI/CD tool to:

@@ -17,7 +17,7 @@ Create a new user profile on Astronomer Software.
 ## Usage 
 
 ```sh
-astro user invite
+astro user create
 ```
 
 ## Options 

@@ -1,13 +1,67 @@
 ---
-sidebar_label: 'Test your Astro project locally'
-title: 'Test and troubleshoot your Astro project locally'
+sidebar_label: 'Test your DAGs'
+title: 'Test your Astro project'
 id: test-your-astro-project-locally
-description: Check your Astro project for errors before you run it locally or deploy to Astro.
+description: Check your Airflow DAGs for errors before you run them locally or deploy to Astro.
 ---
 
-One of the Astro CLI's main features is the ability to run Astro projects in a local Airflow environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment. Use the following document to learn more about how you can test locally with the Astro CLI before deploying your code changes to a production environment.
+One of the Astro CLI's main features is the ability to run Astro projects in a local Airflow environment. It additionally includes commands that you can use to test and debug DAGs both inside and outside of a locally running Airflow environment.
 
-## Test before upgrading your Astro project
+Use the following document to learn more about how you can test locally with the Astro CLI before deploying your code changes to a production environment.
+
+## Run a DAG with `astro run`
+
+Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can review task logs and task status in your terminal without opening the Airflow UI. Running DAGs without a scheduler or webserver can help reduce the time required to develop and test data pipelines.
+
+To run a DAG located within your local `/dags` directory, run:
+
+```bash
+astro run <dag-id>
+```
+
+You can only run one DAG at a time. All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line. For more information about this command, see the [CLI command reference](cli/astro-run.md).
+
+## Unit test DAGs 
+
+You can run DAG unit tests with the following Astro CLI commands to quickly test code:
+
+- `astro dev parse`
+- `astro dev pytest`
+
+These commands don't require a running Airflow environment, meaning you can test DAGs without deploying to Astro or running Airflow locally. However, these commands do require Docker.
+
+### Parse DAGs
+
+To quickly parse your DAGs, run:
+
+```sh
+astro dev parse
+```
+
+This command parses your DAGs to ensure that they don't contain any basic syntax or import errors and that they can successfully render in the Airflow UI.
+
+`astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI command reference](cli/astro-dev-parse.md).
+
+### Run tests with pytest
+
+To run unit tests on your Astro project, run:
+
+```sh
+astro dev pytest
+```
+
+This command runs all tests in your project's `tests` directory with [pytest](https://docs.pytest.org/en/7.0.x/index.html#), a testing framework for Python. With pytest, you can test custom Python code and operators locally without having to start a local Airflow environment.
+
+The `tests` directory in your Astro project includes an example DAG test called `test_dag_example.py`. This test checks that:
+
+- All Airflow tasks have required arguments.
+- DAG IDs are unique across the Astro project.
+- DAGs have no cycles.
+- There are no general import or syntax errors.
+
+This test is just an example of the kinds of pytests one could run to test thier DAGs. You may want to alter this test or create new ones that better fit the context of your DAGs. `astro dev pytest` will run any pytest file that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
+
+## Test before an Astro Runtime upgrade
 
 You can use [`astro dev upgrade-test`](astro-dev-upgrade-test.md) to test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. By default, the command runs the following tests in order to create reports that can help you determine whether your upgrade will be successful:
 

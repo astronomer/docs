@@ -62,7 +62,7 @@ export default function NavbarContent() {
               <NavbarItems items={rightItems} />
               <NavbarColorModeToggle className={styles.colorModeToggle} />
               <a className={cn(styles.button, styles.button__outline)} href="https://www.astronomer.io/?referral=docs-nav-button" target="_blank">Learn About Astronomer</a>
-              <a className={styles.button} href="https://www.astronomer.io/try-astro/?referral=docs-nav-button" target="_blank">Try Astro</a>
+              <a className={styles.button} href="https://www.astronomer.io/try-astro/?referral=docs-nav-button" target="_blank">Get Started Free</a>
             </>
           }
         />

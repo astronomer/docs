@@ -106,6 +106,8 @@ You can trigger a downstream DAG with the TriggerDagRunOperator from any point i
 
 A common use case for this implementation is when an upstream DAG fetches new testing data for a machine learning pipeline, runs and tests a model, and publishes the model's prediction. In case of the model underperforming, the TriggerDagRunOperator is used to start a separate DAG that retrains the model while the upstream DAG waits. Once the model is retrained and tested by the downstream DAG, the upstream DAG resumes and publishes the new model's results.
 
+The [schedule](scheduling-in-airflow.md) of the downstream DAG is independent of the runs triggered by the TriggerDagRunOperator. To run a DAG solely with the TriggerDagRunOperator, set the DAG's `schedule` parameter to `None`. Note that the dependent DAG must be unpaused to get triggered.
+
 The following example DAG implements the TriggerDagRunOperator to trigger a DAG with the `dag_id` `dependent_dag` between two other tasks. Since both the `wait_for_completion` and the `deferrable` parameters of the `trigger_dependent_dag` task in the `trigger_dagrun_dag` are set to `True`, the task is deferred until the `dependent_dag` has finished its run. Once the `trigger_dagrun_dag` task completes, the `end_task` will run.
 
 <Tabs
@@ -249,11 +251,6 @@ It is sometimes necessary to implement cross-DAG dependencies where the DAGs do 
 
 ### Cross-deployment dependencies on Astro
 
-To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the steps for triggering a DAG using the Airflow API. Before you get started, you should review [Make requests to the Airflow REST API](https://docs.astronomer.io/astro/airflow-api). When you're ready to implement a cross-deployment dependency, follow these steps:
-
-1. In the upstream DAG, create a SimpleHttpOperator task that will trigger the downstream DAG. Refer to the section above for details on configuring the operator.
-2. In the Deployment running the downstream DAG, [create an API key](https://docs.astronomer.io/astro/api-keys) and copy it.
-3. In the upstream DAG Airflow environment, create an Airflow connection as shown in the Airflow API section above. The Host should be `https://<your-base-domain>/<deployment-release-name>/airflow` where the base domain and deployment release name are from your downstream DAG's Airflow deployment. In the **Extras** field, enter `{"Authorization": "api-token"}` where `api-token` is the API key you copied in step 2.
-4. Ensure the downstream DAG is turned on, then run the upstream DAG.
+To implement cross-DAG dependencies on two different Airflow environments on Astro, follow the steps for triggering a DAG using the Airflow API. Before you get started, review [Make requests to the Airflow REST API](https://docs.astronomer.io/astro/airflow-api). Then, follow the steps in [Trigger DAG runs across Deployments](https://docs.astronomer.io/astro/airflow-api#trigger-dag-runs-across-deployments).
 
 You can follow similar steps to implement cross-deployment dependencies on Astronomer Software. See [Make requests to the Airflow REST API](https://docs.astronomer.io/software/airflow-api) for Software-specific instructions on accessing the Airflow API.
