@@ -31,7 +31,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
-- You can now view deploy history for both Hosted and Hybrid Astro Deployments in the Cloud UI. For more information, see [View deploy history](https://docs.astronomer.io/astro/deploy-history)
+- You can now view deploy history for both Hosted and Hybrid Astro Deployments in the Cloud UI. For more information, see [View deploy history](https://docs.astronomer.io/astro/deploy-history).
 
 ### Bug fixes
 
