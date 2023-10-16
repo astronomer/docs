@@ -51,6 +51,12 @@ To install a specific version of the Astro CLI, specify the version you want to 
 brew install astro@<major.minor.patch-version>
 ```
 
+If installing the cli for the first time, then you can the tap for installing specific version of the Astro CLI with the following command and try brew install again:
+
+```sh
+brew tap astronomer/tap
+```
+
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](/astro/cli/release-notes.md).
 
 #### Confirmation
