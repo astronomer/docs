@@ -29,6 +29,10 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## October 17, 2023
 
+### Additional improvements
+
+- You can now view deploy history for both Hosted and Hybrid Astro Deployments in the Cloud UI. For more information, see [View deploy history](https://docs.astronomer.io/astro/deploy-history)
+
 ### Bug fixes
 
 - Modified behavior for Astro Hosted so that KubernetesExecutor and KubernetesPodOperator pods running in-cluster have equivalent resource requests and limits. If you do not configure them to have equivalent resource requests and limits, Astro modifies them to the become the limits. Previously, the DAG deploy would fail if `resources` did not equal `limits`.
