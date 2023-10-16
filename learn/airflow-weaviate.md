@@ -256,6 +256,12 @@ In order to prepare Weaviate to ingest your data, you need to define a [schema](
     }
     ```
 
+:::tip
+
+It is best practice to capitalize the first letter of the `class` name in the schema definition. Weaviate will capitalize the first letter of the `class` name in the schema definition if it is not capitalized.
+
+:::
+
 ## Step 4: Create your DAG
 
 1. In your `dags` folder, create a file called `query_movie_vectors.py`.
