@@ -708,6 +708,14 @@ As part of this change, you can now configure `jwt.authDuration` in your [Housto
 
 Release date: January 26, 2023
 
+:::warning Breaking change
+
+There is an [unresolved Kubernetes bug](https://github.com/kubernetes/kubernetes/issues/65106) that occurs when upgrading Helm charts that include duplicate keys in an `env` array. If you have a Helm chart with duplicate keys and upgrade to Astronomer Software 0.29.3+, all key-value pairs with the duplicate key are removed from your environment.
+
+To preserve duplicate keys in your Helm chart, you can either reapply the values after upgrading, or you can use the `--reset-values` flag when running the upgrade script as described in [Upgrade Astronomer](upgrade-astronomer.md).
+
+:::
+
 ### Bug fixes
 
 - Fixed the following vulnerabilities: 
