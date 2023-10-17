@@ -92,6 +92,13 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your Deployment. After the task finishes, the Pod terminates gracefully.
 
+:::caution Astro Hosted
+
+For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
+
+:::
+
+
 ## Use secret environment variables in worker Pods
 
 In Astro, [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. These environment variables are already available to your worker Pods and can be accessed in your tasks just like any other environment variable. For example, you can use `os.environ[<your-secret-env-var>]` or `os.getenv(<your-secret-env-var>, None)` in your Python code. 
