@@ -38,7 +38,7 @@ The [Astro CLI](cli/overview.md) provides an interface to test Airflow DAGs loca
 
 An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, Python packages, utility files, and more. Astronomer recommends that you create a dedicated Git repository for each Astro project. To run a DAG, you add the DAG to your Astro project and deploy your Astro project to Astro.
 
-See [Run your first DAG with the Astro CLI](create-first-dag.md) to create your first Astro project.
+See [Run your first DAG with the Astro CLI](first-dag-cli.md) to create your first Astro project.
 
 ### Cloud UI
 
@@ -57,7 +57,7 @@ An Astro _Deployment_ is an Airflow environment hosted on Astro. It encompasses 
 
 Compared to an open source Airflow environment, an Astro Deployment is easy to create, delete, and modify through either the Cloud UI or with the Astro CLI. You can [fine-tune resources and settings](deployment-settings.md) directly from the Cloud UI, see metrics and analytics for your DAGs, review your deploy history, and more. The infrastructure required to run a Deployment is managed by Astronomer.
 
-To run DAGs in a Deployment, you must either deploy an Astro project manually from your local machine or configure an automated deploy process using a third-party CI/CD tool with the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and view your DAGs. See [Run your first DAG](create-first-dag.md) to get started with examples of either workflow.
+To run DAGs in a Deployment, you must either deploy an Astro project manually from your local machine or configure an automated deploy process using a third-party CI/CD tool with the Astro CLI. Then, you can open the Airflow UI from the Cloud UI and view your DAGs. See [Run your first DAG](run-first-dag.md) to get started with examples of either workflow.
 
 ### Astro Runtime
 
