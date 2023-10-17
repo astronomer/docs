@@ -276,7 +276,7 @@ It is best practice to capitalize the first letter of the `class` name in the sc
     - The `branch_create_schema` is defined with a `@task.branch` operator to decide whether to run the `create_schema` task based on the result of the `check_schema` task. If the schema already exists, the DAG runs the empty `schema_exists` task instead.
     - The `create_schema` task uses the WeaviateCreateSchemaOperator to create the schema defined by `movie_schema.json` in Weaviate. 
     - The `create_parquet_file` task runs the function defined in the `text_to_parquet_script.py` file to create a parquet file from the `movie_data.txt` file.
-    - The `ingest_data` task is defined by the @task.weaviate_import decorator, which ingests the data into Weaviate. You can run any Python code on the data before ingesting it into Weaviate, which makes it possible to create your own embeddings or complete other transformations before ingesting the data. In the dictionary that is returned by the `ingest_data` task, use the key `embedding_column` to specify the column that contains the vectors you want to use:
+    - The `import_data` task is defined by the @task.weaviate_import decorator, which ingests the data into Weaviate. You can run any Python code on the data before ingesting it into Weaviate, which makes it possible to create your own embeddings or complete other transformations before ingesting the data. In the dictionary that is returned by the `import_data` task, use the key `embedding_column` to specify the column that contains the vectors you want to use:
 
         ```python
         @task.weaviate_import(
