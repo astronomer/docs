@@ -92,7 +92,7 @@ Follow this procedure when Homebrew fails to install the latest Astro CLI versio
 4. Install the Astronomer CLI. You can choose to specify the major and minor version, if you want a particular version by adding the `astro@<major.minor.patch-version>` flag to the following command:
 
    ```sh
-   brew install astro
+   brew install astro@<major.minor.patch-version>
    ```
 
 </TabItem>
