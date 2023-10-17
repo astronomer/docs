@@ -39,8 +39,8 @@ If you prefer to work with the Astro CLI, you can create and update environment 
 3. Click **Edit Variables**.
 
 4. Enter an environment variable key and value. 
-  - For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
-  - Each key-value pair must be unique.
+  - For sensitive credentials that should be treated with an additional layer of security, enable the **Secret** toggle. This will permanently hide the variable's value from all users in your Workspace.
+  - Each key must be unique.
 
 5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
