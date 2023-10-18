@@ -115,19 +115,25 @@ Release date: October 18, 2023
 
 ### Bug fixes
 
-- Fixed an issue where when `global.networkPolicy.enabled` is set to `false` and `blackbox-exporter`is enabled, it prevented components from communicating with Commander and other Software components because it set `blackbox-exporter` as the only network policy. Now, when `global.networkPolicy.enabled` is set to `false`, `blackbox-exporter` policies are removed. <!--https://github.com/astronomer/issues/issues/5843 -->
+- Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.<!--https://github.com/astronomer/issues/issues/5843 -->
+
 - Fixed the following vulnerabilities:
-    - [CVE-2023-45133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45133) <!--https://github.com/astronomer/issues/issues/5922-->
-    - [CVE-2023-4911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911)<!--https://github.com/astronomer/issues/issues/5917-->
-    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491)<!--https://github.com/astronomer/issues/issues/5917-->
-    - [CVE-2023-38039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38039)<!--https://github.com/astronomer/issues/issues/5916-->
-    - [CVE-2023-38545](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38545)<!--https://github.com/astronomer/issues/issues/5916-->
-    - [CVE-2023-44487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487)<!--https://github.com/astronomer/issues/issues/5916-->
-    - [CVE-2023-4863](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4863)<!--https://github.com/astronomer/issues/issues/5877-->
-    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)<!--https://github.com/astronomer/issues/issues/5777-->
-    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)<!--https://github.com/astronomer/issues/issues/5777-->
-    - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)<!--https://github.com/astronomer/issues/issues/5777-->
-    - ap-registry https://github.com/astronomer/issues/issues/5772
+    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)
+    - [CVE-2023-4863](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4863)
+    - [CVE-2023-4911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911)
+    - [CVE-2023-11468](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-11468)
+    - [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840)
+    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491)
+    - [CVE-2023-37788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37788)
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-38039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38039)
+    - [CVE-2023-38325](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38325)
+    - [CVE-2023-38545](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38545)
+    - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)
+    - [CVE-2023-41721](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41721)
+    - [CVE-2023-44487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487)
+    - [CVE-2023-45133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45133)
+    - [CVE-2023-48174](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-48174)
 
 ## 0.32.3
 
