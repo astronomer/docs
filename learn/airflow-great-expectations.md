@@ -30,7 +30,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - Access to a SQL database. This tutorial uses a local Postgres instance.
-- Optional. Local installation of the [`great_expectations` package](https://pypi.org/project/great-expectations/).
+- (Optional) Local installation of the [`great_expectations` package](https://pypi.org/project/great-expectations/).
 
 ## Step 1: Configure your Astro project
 
