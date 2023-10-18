@@ -110,11 +110,11 @@ This feature is off by default. You can enable it by setting  `deployments.pgBou
 
 ## 0.32.4
 
-Release date: October 18, 2023
+Release date: October 19, 2023
 
 ### Bug fixes
 
-- Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.<!--https://github.com/astronomer/issues/issues/5843 -->
+- Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.
 
 - Fixed the following vulnerabilities:
     - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)

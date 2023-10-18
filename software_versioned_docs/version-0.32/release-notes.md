@@ -106,6 +106,32 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
 
+## 0.32.4
+
+Release date: October 19, 2023
+
+### Bug fixes
+
+- Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.
+
+- Fixed the following vulnerabilities:
+    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)
+    - [CVE-2023-4863](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4863)
+    - [CVE-2023-4911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911)
+    - [CVE-2023-11468](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-11468)
+    - [CVE-2023-28840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28840)
+    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491)
+    - [CVE-2023-37788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37788)
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
+    - [CVE-2023-38039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38039)
+    - [CVE-2023-38325](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38325)
+    - [CVE-2023-38545](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38545)
+    - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)
+    - [CVE-2023-41721](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-41721)
+    - [CVE-2023-44487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487)
+    - [CVE-2023-45133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45133)
+    - [CVE-2023-48174](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-48174)
+
 ## 0.32.3
 
 Release date: August 31, 2023
