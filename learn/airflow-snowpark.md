@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/airflow-snowpark/airflow_with_snowpark_tutorial.py';
 
-[Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is a framework containing runtimes and libraries to run non-SQL code in [Snowflake](https://www.snowflake.com/en/). Snowpark comes with a [comprehensive machine learning library](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) optimized for Snowflake. 
+[Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is a framework that contains runtimes and libraries to run non-SQL code in [Snowflake](https://www.snowflake.com/en/). Snowpark comes with a [comprehensive machine learning library](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) optimized for Snowflake. 
 
 In this tutorial, you'll learn how to: 
 
@@ -22,11 +22,11 @@ In this tutorial, you'll learn how to:
 
 :::caution
 
-The provider used in this tutorial is currently in beta and its contents as well as the decorators used are subject to change. After the official release, this tutorial will be updated.
+The provider used in this tutorial is currently in beta and both its contents and decorators are subject to change. After the official release, this tutorial will be updated.
 
 :::
 
-![A plot showing a confusion matrix and ROC curve with a high AUC for hot_chocolate, a medium AUC for snow_mocha and tea and low predictive power for wine and coffee.](/img/tutorials/airflow-snowpark_plot_metrics.png)
+![A plot showing a confusion matrix and ROC curve with a high AUC for hot_chocolate, a medium AUC for snow_mocha and tea, and low predictive power for wine and coffee.](/img/tutorials/airflow-snowpark_plot_metrics.png)
 
 ## Why use Airflow with Snowpark?
 
@@ -35,10 +35,10 @@ Snowpark allows you to use Python to perform transformations and machine learnin
 Integrating Snowpark with Airflow offers the benefits of:
 
 - Running machine learning models directly in Snowflake, without having to move data out of your Snowflake database.
-- Express data transformations in Snowflake in Python instead of SQL.
-- Store and version your machine learning models in a model registry inside Snowflake.
-- Use Snowpark's compute resources instead of the resources of your Airflow cluster for machine learning.
-- Use Airflow for Snowpark Python orchestration to enable automation, auditing, logging, and retry and complex triggering for powerful workflows.
+- Expressing data transformations in Snowflake in Python instead of SQL.
+- Storing and versioning your machine learning models in a model registry inside Snowflake.
+- Using Snowpark's compute resources instead of your Airflow cluster resources for machine learning.
+- Using Airflow for Snowpark Python orchestration to enable automation, auditing, logging, retry, and complex triggering for powerful workflows.
 
 The Snowpark provider for Airflow simplifies interacting with Snowpark by:
 
@@ -48,7 +48,7 @@ The Snowpark provider for Airflow simplifies interacting with Snowpark by:
 - Integrating with [OpenLineage](airflow-openlineage.md).
 - Providing a pre-built custom XCom backend for Snowflake.
 
-Additionally, this tutorial shows how to use Snowflake as a custom XCom backend. This is especially useful for organizations with strict compliance requirements who want to keep all their data in Snowflake but still leverage [Airflow XCom](airflow-passing-data-between-tasks.md) to pass data between tasks.
+Additionally, this tutorial shows how to use Snowflake as a custom XCom backend. This is especially useful for organizations with strict compliance requirements who want to keep all their data in Snowflake, but still leverage [Airflow XCom](airflow-passing-data-between-tasks.md) to pass data between tasks.
 
 ## Time to complete
 
@@ -59,19 +59,19 @@ This tutorial takes approximately 45 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of Snowflake and Snowpark. See [Introduction to Snowflake](https://docs.snowflake.com/en/user-guide-intro.html) and the [Snowpark API documentation](https://docs.snowflake.com/en/developer-guide/snowpark/index).
-- Airflow decorators. [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
+- Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 - Setup/ teardown tasks in Airflow. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md).
 
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
-- A Snowflake account. A [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. You will need to have at least one database and one schema created to store the data and models used in this tutorial.
+- A Snowflake account. A [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. You need to have at least one database and one schema created to store the data and models used in this tutorial.
 
-- Optional. This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-xcom-backends-tutorial.md) included in the provider. If you want to this custom XCom backend you will need to either:
-    - Run the DAG using a Snowflake account with `ACCOUNTADMIN` privileges to let the first task of the DAG create the required database, schema, stage and table. See [Step 3.3](#step-3-create-your-dag) for more instructions. The free trial account does have the required privileges.
+- (Optional) This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-xcom-backends-tutorial.md) included in the provider. If you want to this custom XCom backend you will need to either:
+    - Run the DAG using a Snowflake account with `ACCOUNTADMIN` privileges to allow the DAG's first task create the required database, schema, stage and table. See [Step 3.3](#step-3-create-your-dag) for more instructions. The free trial account has the required privileges.
     - Ask your Snowflake administrator to: 
-        - Provider you with the name of an existing database, schema and stage. You will need to use these names in [Step 1.8](#step-1-configure-your-astro-project) for the `AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE` and `AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE` environment variables. 
+        - Provide you with the name of an existing database, schema, and stage. You need to use these names in [Step 1.8](#step-1-configure-your-astro-project) for the `AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE` and `AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE` environment variables. 
         - Create an `XCOM_TABLE` with the following schema:
 
         ```sql
@@ -101,7 +101,7 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 2. Download the `whl` file for the Astro Snowflake provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/astro_provider_snowflake-0.0.0-py3-none-any.whl) and save it in your Astro project's `include` directory.
 
-3. Create a new file in your Astro project's root directory called `requirements-snowpark.txt`. This file contains all Python packages that you will install in your reuseable Snowpark environment.
+3. Create a new file in your Astro project's root directory called `requirements-snowpark.txt`. This file contains all Python packages that you install in your reuseable Snowpark environment.
 
     ```text
     psycopg2-binary
@@ -110,7 +110,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
     ```
 
-4. Change the content of the `Dockerfile` of your Astro project to the following, importing the `whl` file and creating a virtual environment using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv), in which the requirements added in the previous step will be installed. This tutorial includes Snowpark Python tasks that are running in virtual environment, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
+4. Change the content of the `Dockerfile` of your Astro project to the following, which imports the `whl` file and creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environment, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
@@ -174,7 +174,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
         }'
     ```
 
-8. Optional. If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
+8. (Optional) If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
 
     ```text
     AIRFLOW__CORE__XCOM_BACKEND='astronomer.providers.snowflake.xcom_backends.snowflake.SnowflakeXComBackend'
