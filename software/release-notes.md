@@ -109,6 +109,22 @@ This feature is off by default. You can enable it by setting  `deployments.pgBou
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
 
+## 0.33.4
+
+Release date: October 18, 2023
+
+### Bug fixes
+
+- Fixed an issue where when `global.networkPolicy.enabled` is set to `false` and `blackbox-exporter`is enabled, it prevented components from communicating with Commander and other Software components because it set `blackbox-exporter` as the only network policy. Now, when `global.networkPolicy.enabled` is set to `false`, `blackbox-exporter` policies are removed. <!--https://github.com/astronomer/issues/issues/5843 -->
+- Fixed the following vulnerabilities:
+    - [CVE-2023-45133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45133) <!--https://github.com/astronomer/issues/issues/5922-->
+    - [CVE-2023-4911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911)<!--https://github.com/astronomer/issues/issues/5917-->
+    - [CVE-2023-29491](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29491)<!--https://github.com/astronomer/issues/issues/5917-->
+    - [CVE-2023-38039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38039)<!--https://github.com/astronomer/issues/issues/5916-->
+    - [CVE-2023-38545](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38545)<!--https://github.com/astronomer/issues/issues/5916-->
+    - [CVE-2023-44487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487)<!--https://github.com/astronomer/issues/issues/5916-->
+    - https://github.com/astronomer/issues/issues/5772
+
 ## 0.32.3
 
 Release date: August 31, 2023
