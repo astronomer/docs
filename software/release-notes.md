@@ -123,7 +123,11 @@ Release date: October 18, 2023
     - [CVE-2023-38039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38039)<!--https://github.com/astronomer/issues/issues/5916-->
     - [CVE-2023-38545](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-38545)<!--https://github.com/astronomer/issues/issues/5916-->
     - [CVE-2023-44487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487)<!--https://github.com/astronomer/issues/issues/5916-->
-    - https://github.com/astronomer/issues/issues/5772
+    - [CVE-2023-4863](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4863)<!--https://github.com/astronomer/issues/issues/5877-->
+    - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)<!--https://github.com/astronomer/issues/issues/5777-->
+    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)<!--https://github.com/astronomer/issues/issues/5777-->
+    - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)<!--https://github.com/astronomer/issues/issues/5777-->
+    - ap-registry https://github.com/astronomer/issues/issues/5772
 
 ## 0.32.3
 
