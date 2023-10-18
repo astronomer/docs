@@ -140,8 +140,8 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
 2. Update the `<certificate-authority-data>`, `<client-authority-data>`, and `<client-key-data>` values in the `config` file with the values for your organization.
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
-4. Optional. Add the `.kube` folder to `.gitignore` if your Astro project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool.
-5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
+4. (Optional) Add the `.kube` folder to `.gitignore` if your Astro project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool.
+5. (Optional) Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
 
 </TabItem>
 <TabItem value="linux">
@@ -166,7 +166,7 @@ Once you've updated the definition of KubernetesPodOperator tasks in your Astro 
 
 #### Step 4: View Kubernetes logs
 
-Optional. Use the `kubectl` command line tool to review the logs for any Pods that were created by the operator for issues and help with troubleshooting. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
+(Optional) Use the `kubectl` command line tool to review the logs for any Pods that were created by the operator for issues and help with troubleshooting. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
 
 <Tabs
     defaultValue="windows and mac"
