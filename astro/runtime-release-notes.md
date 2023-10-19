@@ -24,6 +24,15 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 9.3.0
+
+- Release date: October 19, 2023
+- Airflow version: 2.7.2
+
+### Additional improvements
+
+- Added support for `get_plugin_info` for class based listeners, such as OpenLineageListener and ClassBasedListener. Previously, support was limited to module based listeners. 
+
 ## Astro Runtime 9.2.0
 
 - Release date: October 12, 2023
