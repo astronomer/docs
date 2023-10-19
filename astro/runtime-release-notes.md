@@ -31,7 +31,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Additional improvements
 
-- Added support for `get_plugin_info` for class based listeners, such as OpenLineageListener and ClassBasedListener. Previously, support was limited to module based listeners.  ([#35022](https://github.com/apache/airflow/pull/35022))
+- Added support for `get_plugin_info` for class based listeners, such as OpenLineageListener and ClassBasedListener. Previously, support was limited to module based listeners ([#35022](https://github.com/apache/airflow/pull/35022))
 - Fixed `/plugin` endpoint in the REST API ([#34858](https://github.com/apache/airflow/pull/34858))
 - Upgraded many OSS providers to newer minor and patch versions.
 
