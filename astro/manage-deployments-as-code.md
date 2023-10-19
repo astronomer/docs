@@ -5,6 +5,9 @@ id: manage-deployments-as-code
 description: "Manage an Astro Deployment using a Deployment file in YAML or JSON format"
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 You can configure Deployments programmatically using Deployment files and Deployment template files. _Deployment files_ are used to update the same Deployment programmatically, and _Deployment template files_ are used to create new Deployments based on a single template.
 
 Managing Deployments with files is essential to automating Deployment management at scale.  For example, you can:
@@ -28,27 +31,81 @@ To create a Deployment file based on an existing Deployment, run the following c
 astro deployment inspect <deployment-id> > <your-deployment-file-name>.yaml
 ```
 
-Alternatively, you can manually create a template file without using an existing Deployment. See [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment template file values.
+Alternatively, you can manually create a template file without using an existing Deployment as explained in [Create a Deployment using a template file](#create-a-deployment-using-a-template-file).
 
 ## Create a Deployment using a template file
 
-Before you create a Deployment from a template file, keep the following in mind:
+1. To create a new Deployment you can either copy and save the following template to a `yaml` file, or follow the steps in [Create a template file for a Deployment](#create-a-template-file-or-deployment-file). 
 
-- The `name` field must include a unique name for the Deployment in the Workspace. 
+  <Tabs
+      defaultValue="hosted-shared"
+      groupId= "create-a-cluster"
+      values={[
+          {label: 'Hosted Standard', value: 'hosted-shared'},
+          {label: 'Hosted Dedicated', value: 'hosted-dedicated'},
+      ]}>
 
-- The `name` field is the only required field in a Deployment template file for Astro Hosted. For Astro Hybrid, you must also specify the `cluster_name`. The Astro CLI will use default values for any other unspecified fields. These default values are the same default values when you create a Deployment in the Cloud UI.
+  <TabItem value="hosted-shared">
 
-- When you create worker queues, each worker queue must include a `name` and `worker_type`. The Astro CLI will use default values for any other unspecified fields.
+  ```bash
+  deployment:
+      configuration:
+          name: <your-deployment-name>
+          deployment_type: HOSTED_SHARED
+          cloud_provider: aws
+          description: <deployment-description>
+          runtime_version: 9.1.0
+          dag_deploy_enabled: true
+          executor: KubernetesExecutor
+          cluster_name: us-east-1
+          region: us-east-1
+          workspace_name: <your-workspace-name>
+          scheduler_size: small
+  ```
+  Note that for a Deployment on a Standard cluster, both the `region` and `cluster-name` parameters contain the region name as per your cloud provider. See [Available regions for your cloud provider](resource-reference-hosted.md#standard-cluster-configurations). 
 
-- When you create environment variables, each variable must include a `key` and a `value`.
+  </TabItem>
 
-To create a new Deployment from an existing template file:
+  <TabItem value="hosted-dedicated">
 
-1. In your template file, provide a name for the new Deployment.
+  ```bash
+  deployment:
+      configuration:
+          name: <your-deployment-name>
+          deployment_type: HOSTED_DEDICATED
+          cloud_provider: aws
+          description: <deployment-description>
+          runtime_version: 9.1.0
+          dag_deploy_enabled: true
+          executor: KubernetesExecutor
+          cluster_name: <your-cluster-name>
+          region: us-east-1
+          workspace_name: <your-workspace-name>
+          scheduler_size: small
+  ```
+  The `cluster_name` field must include the name of the dedicatd cluster that exists in your Astro Organization. For possible values of `region`, see [Available regions for your cloud provider](resource-reference-hosted.md#standard-cluster-configurations). 
+
+  </TabItem>
+
+  </Tabs>
+  
+  Before you use this template file to create a Deployment, keep the following in mind:
+
+    - The `name` field must include a unique name for the Deployment in the Workspace. 
+
+    - The `workspace_name` field must include a valid Workspace name that exists in your Astro Organization.
+    
+    - For possible values of `cloud_provider`, `executor` and `scheduler_size`, see [Options for `astro deployment create`](cli/astro-deployment-create.md#options). 
+
+    - For choosing the correct `runtime_version`, refer to [Airflow and Astro Runtime version parity](runtime-image-architecture.md#astro-runtime-and-apache-airflow-parity) and [Astro Runtime release notes](runtime-release-notes.md).
+
+  See [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment template file values.
+  
+
 2. Run the following command to create the Deployment:
 
     ```bash
-    astro deployment create --deployment-file <deployment-template-file-name>
+    astro deployment create --deployment-file <your-deployment-file-name>
     ```
 
 3. (Optional) Either open the Cloud UI or run the following command to confirm that you successfully created your Deployment:

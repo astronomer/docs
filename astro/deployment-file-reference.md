@@ -69,9 +69,13 @@ The following sections describe each section in the file.
 
 ### `deployment.environment_variables`
 
-You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI.
+You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI. When you create or update a variable, each variable in this section must include a `key` and a `value`. By default, each variable is created as a non-secret variable.
 
-When you inspect a Deployment, the value of any secret environment variables will not appear in the template file. To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value. 
+To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value.
+
+To delete an environment variable, remove the lines that contain its key, its value, and other associated fields.
+
+When you inspect a Deployment, the value of any secret environment variables will not appear in the template file.  
 
 If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
@@ -91,9 +95,10 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment. If you don't enter specific values for the `default` worker queue for a Deployment with CeleryExecutor, default values based on the worker types available on your cluster are applied.
+The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment with CeleryExecutor. This section is not applicable to Deployments running with the Kubernetes executor. 
 
-This section is not applicable to Deployments running with the Kubernetes executor. 
+If you don't enter specific values for the `default` worker queue for a Deployment, default values based on the worker types available on your cluster are applied. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI will use default values for any other unspecified fields.
+
 
 ### Other fields
 
