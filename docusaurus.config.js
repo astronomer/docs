@@ -232,11 +232,11 @@ module.exports = {
           specs: [
             {
               id: 'platform',
-              spec: 'https://api.astronomer.io/spec/iam/v1beta1',
+              spec: 'https://api.astronomer.io/spec/platform/v1beta1',
             },
             {
               id: 'iam',
-              spec: 'https://api.astronomer.io/spec/platform/v1beta1',
+              spec: 'https://api.astronomer.io/spec/iam/v1beta1',
             },
          ],
           // Theme Options for modifying how redoc renders them
