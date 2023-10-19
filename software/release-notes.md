@@ -117,7 +117,6 @@ Release date: October 19, 2023
 - Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.
 
 - Fixed the following vulnerabilities:
-    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)
     - [CVE-2023-4863](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4863)
     - [CVE-2023-4911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911)
     - [CVE-2023-11468](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-11468)
@@ -133,7 +132,6 @@ Release date: October 19, 2023
     - [CVE-2023-44487](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487)
     - [CVE-2023-45133](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45133)
     - [CVE-2023-48174](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-48174)
-    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698)
     - [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194)
     - [CVE-2021-38561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561)
     - [CVE-2023-40577](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-40577)
