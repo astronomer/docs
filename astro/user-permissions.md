@@ -74,7 +74,7 @@ The following table lists the specific permissions that each Workspace role has:
 | Update user roles and permissions                                           |                      |                      |                        | ✔️                   |
 | Invite users to a Workspace                                                 |                      |                      |                        | ✔️                   |
 | Assign Teams to or remove from Workspaces                                   |                      |                      |                        | ✔️                   |
-| Create, update and delete Deployment API keys and Workspace API tokens      |                      |                      |                        | ✔️                   |
+| Create, update and delete Deployment and Workspace API keys and tokens      |                      |                      |                        | ✔️                   |
 
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
 
