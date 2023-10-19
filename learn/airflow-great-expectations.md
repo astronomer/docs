@@ -59,7 +59,7 @@ To use GX with Airflow, install the [Great Expectations Airflow Provider](https:
 
 The Great Expectations Airflow Provider requires a GX project to be present in your Airflow environment. The easiest way to create a GX project is by using the [`great_expectations` package](https://pypi.org/project/great-expectations/) and following the steps below. If you cannot install the GX package locally, you can copy the [`great_expectations` folder from this GitHub repository](https://github.com/astronomer/gx-tutorial/tree/main/include/great_expectations) into your Astro project `include` folder instead and continue this tutorial at [Step 3](#step-3-create-a-database-connection).
 
-1. In your `include` folder, create a new file called `gx_init_script.py` and copy and paste the following code into the file:
+1. In your `include` folder, create a new file called `gx_init_script.py`. Then, copy and paste the following code into the file:
 
     ```python
     import great_expectations as gx
@@ -67,14 +67,14 @@ The Great Expectations Airflow Provider requires a GX project to be present in y
     context = context.convert_to_file_context()
     ```
 
-2. Enter your include folder and run the `gx_init_script.py` file to instantiate a [Data Context](https://docs.greatexpectations.io/docs/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context) at `include/great_expectations`.
+2. Go to your `include` folder and run the `gx_init_script.py` file to instantiate a [Data Context](https://docs.greatexpectations.io/docs/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context) at `include/great_expectations`.
 
     ```sh
     $ cd include
     $ python gx_init_script.py
     ```
 
-3. Create a new file in your `include/great_expectations/expectations` folder called `strawberry_suite.json` and copy and paste the following code into the file:
+3. Create a new file in your `include/great_expectations/expectations` folder called `strawberry_suite.json`. Then, copy and paste the following code into the file:
 
     ```json
     {
@@ -149,7 +149,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
 
     This DAG will create a table in your Postgres database, run a GX validation on the table, and then drop the table.
 
-    The data in the table is validated using the GreatExpectationsOperator (GXO). The operator will automatically create a default Checkpoint and Datasource based on the `postgres_default` connection and run the Expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that instead of using the `schema` parameter of the GXO you can also provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
+    The data in the table is validated using the GreatExpectationsOperator (GXO). The operator automatically creates a default Checkpoint and Datasource based on the `postgres_default` connection and runs the Expectations defined in the `strawberry_suite.json` file on the `strawberries` table. Note that instead of using the `schema` parameter of the GXO, you can also provide the schema name to the `data_asset_name` parameter in the form of `my_schema_name.my_table_name`. 
 
 3. Open Airflow at `http://localhost:8080/`. Run the DAG manually by clicking the play button.
 
