@@ -229,59 +229,7 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 :::
 
-## Update a Deployment name and description
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-
-2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
-
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
-
-3. In the **Basic** section, update the Deployment **Name** or **Description**. 
-
-4. Click **Update Deployment**.
-
-## Configure Deployment email alerts
-
-Email alerts are used by Astronomer support to notify recipients in the case of an issue with a Deployment. This can include a problem with your scheduler or workers. 
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-
-2. Click the **Details** tab.
-
-3. To add an alert email:
-    - Click **Edit Emails** in the **Other** area.
-    - Enter an email address and then click **Add**.
-    
-4. To delete an alert email address:
-    - Click **Edit Emails** in the **Other** area.
-    - Click **Delete** next to the email you want to delete.
-    - Click **Yes, Continue**.
-
-In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.
-
-## Update Airflow configurations
-
-To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](environment-variables.md#set-airflow-configurations-using-environment-variables).
-
-## Enforce CI/CD deploys
-
-By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
-
-- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API key, Workspace API token, or Organization API token.
-- You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-
-2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
-
-    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
-
-3. In the **Advanced** sectionn, find **CI/CD Enforcement** and click the toggle to **On**.
-
-You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
-
-## Enable high availability
+### Enable high availability
 
 By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of its scheduler across different nodes. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Note that PGBouncer Pods are guaranteed to run across multiple availability zones, but scheduler Pods are not. 
 
