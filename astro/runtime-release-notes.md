@@ -32,6 +32,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 ### Additional improvements
 
 - Added support for `get_plugin_info` for class based listeners, such as OpenLineageListener and ClassBasedListener. Previously, support was limited to module based listeners. 
+- Upgraded many OSS providers to newer minor and patch versions.
 
 ## Astro Runtime 9.2.0
 
