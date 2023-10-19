@@ -704,7 +704,7 @@ As part of this change, you can now configure `jwt.authDuration` in your [Housto
 - Fixed an issue where JSON web tokens persisted after a user logged out if `idpGroupsRefreshEnabled` was set to `false`.
 - Users authenticating with Google Direct are no longer automatically logged out of Astronomer Software after 1 hour.
 
-## v0.29.5
+## 0.29.5
 
 Release date: October 11, 2022
 
@@ -723,7 +723,7 @@ Release date: October 11, 2022
     - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
     - [CVE-2022-3224](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3224)
 
-## v0.29.4
+## 0.29.4
 
 Release date: September 13, 2022
 
@@ -763,7 +763,7 @@ To preserve duplicate keys in your Helm chart, you can either reapply the values
 
 - API requests to query the AUs allocated to **Extra Capacity** are now returning results for all Deployments in a Workspace. Previously, queries were only returning partial results.
 
-## v0.29.2
+## 0.29.2
 
 Release date: July 18, 2022
 
@@ -784,7 +784,7 @@ Release date: July 18, 2022
 - Fixed an issue where you could not open Celery from the Software UI.
 - Improved the reliability of upgrading Astronomer Software with 30+ Deployments when `upgradeDeployments=true`.
 
-## v0.29.1
+## 0.29.1
 
 Release date: June 3, 2022
 
@@ -793,7 +793,7 @@ Release date: June 3, 2022
 - Fixed an issue where you couldn't run Houston API queries for Deployments using `releaseName` and `label`
 - Fixed an issue where a user could not log in through Azure AD SSO if the user belonged to a group without a `displayName`
 
-## v0.29.0
+## 0.29.0
 
 Release date: June 1, 2022
 
