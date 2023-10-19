@@ -200,28 +200,28 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
 
     This DAG consists of eight tasks in a simple ML orchestration pipeline.
 
-    - Optional. `create_snowflake_objects`: Creates the Snowflake objects required for the Snowflake custom XCom backend. This task uses the `@task.snowflake_python` decorator to run code within Snowpark, automatically instantiating a Snowpark session called `snowpark_session` from the connection ID provided to the `snowflake_conn_id` parameter. This task is a [setup task](airflow-setup-teardown.md) and will only be shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. See also Step 3.3.
+    - (Optional) `create_snowflake_objects`: Creates the Snowflake objects required for the Snowflake custom XCom backend. This task uses the `@task.snowflake_python` decorator to run code within Snowpark, automatically instantiating a Snowpark session called `snowpark_session` from the connection ID provided to the `snowflake_conn_id` parameter. This task is a [setup task](airflow-setup-teardown.md) and is only shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. See also Step 3.3.
 
     - `load_file`: Loads the data from the `ski_dataset.csv` file into the Snowflake table `MY_SNOWFLAKE_TABLE` using the [load_file operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) from the Astro Python SDK. 
 
-    - `create_model_registry`: Creates a model registry in Snowpark using the [Snowpark ML package](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index). Since the task is defined using the `@task.snowflake_python` decorator, the snowpark session is automatically instantiated from provided connection ID.
+    - `create_model_registry`: Creates a model registry in Snowpark using the [Snowpark ML package](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index). Since the task is defined by the `@task.snowflake_python` decorator, the snowpark session is automatically instantiated from provided connection ID.
 
     - `transform_table_step_one`: Transforms the data in the Snowflake table using Snowpark syntax to filter to only include rows of skiers that ordered the beverages we are interested in. Computation of this task runs within Snowpark. The resulting table is written to [XCom](airflow-passing-data-between-tasks.md) as a pandas DataFrame. 
 
     - `transform_table_step_two`: Transforms the pandas dataframe created by the upstream task to filter only for serious skiers (those who skied at least one hour that day).
-    This task uses the `@task.snowpark_ext_python` decorator, running the code in the Snowpark virtual environment created in Step 1. Which virtual environment to run a task in is determined by the binary provided to the `python` parameter of the decorator. The `@task.snowpark_ext_python` decorator works analogously to the [@task.external_python decorator](external-python-operator.md) with the difference being that the code is executed within Snowpark's compute.
+    This task uses the `@task.snowpark_ext_python` decorator, running the code in the Snowpark virtual environment created in Step 1. The binary provided to the `python` parameter of the decorator determines which virtual environment to run a task in. The `@task.snowpark_ext_python` decorator works analogously to the [@task.external_python decorator](external-python-operator.md), except the code is executed within Snowpark's compute.
 
-    - `train_beverage_classifier`: Trains a [Snowpark Logistic Regression model](https://docs.snowflake.com/en/developer-guide/snowpark-ml/reference/latest/api/modeling/snowflake.ml.modeling.linear_model.LogisticRegression) on the dataset, saves the model to the model registry and creates predictions from a test dataset. This task uses the `@task.snowpark_virtualenv` decorator to run the code in a newly created virtual environment within Snowpark's compute. The packages to be installed within the virtual environment are specified to the `requirements` parameter of the decorator. The model predictions are saved to XCom as a pandas DataFrame.
+    - `train_beverage_classifier`: Trains a [Snowpark Logistic Regression model](https://docs.snowflake.com/en/developer-guide/snowpark-ml/reference/latest/api/modeling/snowflake.ml.modeling.linear_model.LogisticRegression) on the dataset, saves the model to the model registry, and creates predictions from a test dataset. This task uses the `@task.snowpark_virtualenv` decorator to run the code in a newly created virtual environment within Snowpark's compute. The `requirements` parameter of the decorator specifies the packages to install in the virtual environment. The model predictions are saved to XCom as a pandas DataFrame.
 
     - `plot_metrics`: Creates a plot of the model performance metrics and saves it to the `include` directory. This task runs in the Airflow environment using the `@task` decorator.
 
-    - Optional. `cleanup_xcom_table`: Cleans up the Snowflake custom XCom backend by dropping the `XCOM_TABLE` and `XCOM_STAGE`. This task is a [teardown task](airflow-setup-teardown.md) and will only be shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. See also Step 3.3.
+    - (Optional) `cleanup_xcom_table`: Cleans up the Snowflake custom XCom backend by dropping the `XCOM_TABLE` and `XCOM_STAGE`. This task is a [teardown task](airflow-setup-teardown.md) and is only shown in the DAG graph if you set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. See also Step 3.3.
 
-3. Optional. This DAG has two optional features you can enable.
+3. (Optional) This DAG has two optional features you can enable.
 
-    - If you want to use [setup/ teardown tasks](airflow-setup-teardown.md) to create and clean up a Snowflake custom XCom backend for this DAG, set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. This will add the `create_snowflake_objects` and `cleanup_xcom_table` tasks to your DAG and create a setup/ teardown workflow. Note that your Snowflake account needs to have `ACCOUNTADMIN` privileges to perform the operations in the `create_snowflake_objects` task and you will need to define the environment variables described in [Step 1.8](#step-1-configure-your-astro-project) to enable the custom XCom backend.
+    - If you want to use [setup/ teardown tasks](airflow-setup-teardown.md) to create and clean up a Snowflake custom XCom backend for this DAG, set `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `True`. This setting adds the `create_snowflake_objects` and `cleanup_xcom_table` tasks to your DAG and creates a setup/ teardown workflow. Note that your Snowflake account needs to have `ACCOUNTADMIN` privileges to perform the operations in the `create_snowflake_objects` task and you need to define the environment variables described in [Step 1.8](#step-1-configure-your-astro-project) to enable the custom XCom backend.
 
-    - If you want to use a [Snowpark-optimized warehouse](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training, set the `USE_SNOWPARK_WH` variable to `True` and provide your warehouse names to `MY_SNOWPARK_WAREHOUSE` and `MY_SNOWFLAKE_REGULAR_WAREHOUSE`. The `MY_SNOWPARK_WAREHOUSE` warehouse will be created by the `create_snowflake_objects` task if it is enabled, otherwise you will need to create the warehouse manually before running the DAG.
+    - If you want to use a [Snowpark-optimized warehouse](https://docs.snowflake.com/en/user-guide/warehouses-snowpark-optimized) for model training, set the `USE_SNOWPARK_WH` variable to `True` and provide your warehouse names to `MY_SNOWPARK_WAREHOUSE` and `MY_SNOWFLAKE_REGULAR_WAREHOUSE`. If the `create_snowflake_objects` task is enabled, it creates the `MY_SNOWPARK_WAREHOUSE` warehouse. Otherwise, you need to create the warehouse manually before running the DAG.
 
 :::info
 
@@ -249,21 +249,21 @@ While this tutorial DAG uses a small dataset where model training can be accompl
 </TabItem>
 <TabItem value="setup-teardown">
 
-![Screenshot of the Airflow UI showing the `airflow_with_snowpark_tutorial` DAG having completed successfully in the Grid view with the Graph tab selected. This screenshot shows the version of the DAG where SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND is set to true, creating an additional setup/ teardown workflow.](/img/tutorials/airflow-snowpark_dag_graph.png)
+![Screenshot of the Airflow UI in the Grid view with the Graph tab selected, showing the successfully completed `airflow_with_snowpark_tutorial` DAG. This screenshot displays the version of the DAG where SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND is set to true, creating an additional setup/ teardown workflow.](/img/tutorials/airflow-snowpark_dag_graph.png)
 
 </TabItem>
 </Tabs>
 
-3. In the Snowflake UI, view the model registry to see the model that was created by the DAG. In a production context, you could pull a specific model from the registry to run predictions on new data.
+3. In the Snowflake UI, view the model registry to see the model that was created by the DAG. In a production context, you can pull a specific model from the registry to run predictions on new data.
 
     ![Screenshot of the Snowflake UI showing the model registry containing one model.](/img/tutorials/airflow-snowpark_model_registry.png)
 
-4. Navigate to your `include` directory to view the `metrics.png` image that contains the model performance metrics shown at the start of this tutorial.
+4. Navigate to your `include` directory to view the `metrics.png` image, which contains the model performance metrics shown at the start of this tutorial.
 
 ## Conclusion
 
-Congratulations! You trained a classification model in Snowpark using Airflow. This pipeline is meant as a simple example showcasing the three main options to run code in Snowpark using Airflow decorators:
+Congratulations! You trained a classification model in Snowpark using Airflow. This pipeline shows the three main options to run code in Snowpark using Airflow decorators:
 
-- `@task.snowpark_python` runs your code in a standard Snowpark environment. Use this decorator if you need to run code in Snowpark that does not require any additional packages, which are not preinstalled in a standard Snowpark environment. The corresponding traditional operator is the SnowparkPythonOperator.
-- `@task.snowpark_ext_python` runs your code in a pre-existing virtual environment within Snowpark. Use this decorator when you want to reuse virtual environments in different tasks in the same Airflow instances, or your virtual environment takes a long time to be built. The corresponding traditional operator is the SnowparkExternalPythonOperator.
-- `@task.snowpark_virtualenv` runs your code in a virtual environment within Snowpark that is created at runtime for that specific task. Use this decorator when you want to tailor a virtual environment to a task and don't need to reuse it. The corresponding traditional operator is the SnowparkVirtualenvOperator.
+- `@task.snowpark_python` runs your code in a standard Snowpark environment. Use this decorator if you need to run code in Snowpark that does not require any additional packages that aren't preinstalled in a standard Snowpark environment. The corresponding traditional operator is the SnowparkPythonOperator.
+- `@task.snowpark_ext_python` runs your code in a pre-existing virtual environment within Snowpark. Use this decorator when you want to reuse virtual environments in different tasks in the same Airflow instances, or your virtual environment takes a long time to build. The corresponding traditional operator is the SnowparkExternalPythonOperator.
+- `@task.snowpark_virtualenv` runs your code in a virtual environment in Snowpark that is created at runtime for that specific task. Use this decorator when you want to tailor a virtual environment to a task and don't need to reuse it. The corresponding traditional operator is the SnowparkVirtualenvOperator.
