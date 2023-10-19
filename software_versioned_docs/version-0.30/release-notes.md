@@ -108,6 +108,10 @@ Astronomer Software now automatically scales the size of PGBouncer connection po
 
 Release date: October 19, 2023
 
+### Additional improvements
+
+You can now create a default Kibana index when installing Software. 
+
 ### Bug fixes
 
 - Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.

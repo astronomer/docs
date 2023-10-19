@@ -112,6 +112,10 @@ This feature is off by default. You can enable it by setting  `deployments.pgBou
 
 Release date: October 19, 2023
 
+### Additional improvements
+
+You can now create a default Kibana index when installing Software. 
+
 ### Bug fixes
 
 - Fixed an issue where `ap-blackbox-exporter` did not respect global network policies.
