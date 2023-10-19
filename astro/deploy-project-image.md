@@ -117,7 +117,7 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
     id9[(Blob storage)]:::astro
     id4[(Docker registry)]:::astro
     end
-    subgraph DataPlane ["Data plante"]
+    subgraph DataPlane ["Data plane"]
     subgraph subgraph_padding3 [ ]
     subgraph Deployment ["Deployment"]
     subgraph subgraph_padding2 [ ]
@@ -142,18 +142,18 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 
 ### How Deployments handle code deploys
 
-After a Deployment receives the deploy, Astro gracefully terminates all of its containers except for the Airflow webserver and Celery workers or Kubernetes worker Pods that are currently running tasks. All new workers will run your new code.
+After a Deployment receives the deploy, Astro gracefully terminates all of its containers except for the Airflow webserver and Celery workers or Kubernetes worker Pods that are currently running tasks. All new workers run your new code.
 
 If you deploy code to a Deployment that is running a previous version of your code, then the following happens:
 
 - Tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the code deploy.
 - One or more new workers are created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
 
-    These new workers will execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` will continue to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they will both be scheduled on new Celery workers running your latest code.
+    These new workers execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` continues to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they are both scheduled on new Celery workers running your latest code.
 
     This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
 
-Astronomer sets a grace period of 24 hours for all workers to allow running tasks to continue executing. This grace period is not configurable. If a task does not complete within 24 hours, its worker will be terminated. Airflow will mark the task as a [zombie](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks) and it will retry according to the task's retry policy. This is to ensure that our team can reliably upgrade and maintain Astro as a service.
+Astronomer sets a grace period of 24 hours for all workers to allow running tasks to continue executing. This grace period is not configurable. If a task does not complete within 24 hours, its worker is terminated. Airflow marks the task as a [zombie](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks) and it retries according to the task's retry policy. This is to ensure that our team can reliably upgrade and maintain Astro as a service.
 
 :::tip
 

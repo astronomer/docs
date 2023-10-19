@@ -26,11 +26,17 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
-## Toggle DAG-only deploys on a Deployment
+## Enable/ disable DAG-only deploys on a Deployment
 
 As a Workspace Owner, you can enable or disable DAG-only deploys for a Deployment. On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
   
 To determine if DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
+
+:::warning
+
+Carefully read and complete all of the following steps to ensure that disabling or enabling DAG-only deploys doesn't disrupt your Deployment. **Immediately after you update the setting, you must trigger an image deploy to your Astro Deployment using `astro deploy`.** If you don't complete this step, you can't access your DAGs in the Airflow UI.
+
+:::
 
 ### Prerequisites
 
@@ -42,16 +48,10 @@ Before you enable or disable DAG-only deploys on a Deployment, ensure the follow
 
 ### Enable DAG-only deploys
 
-:::warning
-
-Carefully read and complete all of the following steps to ensure that your Deployment is not disrupted by disabling or enabling DAG-only deploys. Crucially, you must trigger an image deploy to your Astro Deployment using `astro deploy` immediately after you apply the setting. If you don't, your DAGs will be not be available in the Airflow UI until you update your Deployment.
-
-:::
-
-When you enable DAG-only deploys and trigger a code deploy: 
+After you enable DAG-only deploys:
 
 - You can run `astro deploy --dags` to deploy only DAGs to your Deployment.
-- In the Cloud UI, your Deployment **DAG bundle version** updates when you trigger both image deploys and DAG-only deploys. 
+- In the Cloud UI, your Deployment **DAG bundle version** updates when you trigger an image deploy or a DAG-only deploy. 
 - Your Deployment includes infrastructure for deploying your DAGs separately from your project image. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 1. Run the following command to enable DAG-only deploys:
@@ -68,13 +68,7 @@ When you enable DAG-only deploys and trigger a code deploy:
 
 ### Disable DAG-only deploys 
 
-:::warning
-
-Carefully read and complete all of the following steps to ensure that your Deployment is not disrupted by disabling or enabling DAG-only deploys. Crucially, you must trigger an image deploy to your Astro Deployment using `astro deploy` immediately after you apply the setting. If you don't, your DAGs will be not be available in the Airflow UI until you update your Deployment.
-
-:::
-
-When you disable DAG-only deploys and trigger a code deploy: 
+After you disable DAG-only deploys:
 
 - You can no longer run `astro deploy --dags` to trigger a DAG-only deploy to your Deployment.
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
