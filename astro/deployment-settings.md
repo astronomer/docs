@@ -38,11 +38,12 @@ Deployment details define how users can view and interact with your Deployment. 
 ### Update a Deployment name and description
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu and select **Edit Deployment**. 
+
+2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. In the **Basic** section, update the Deployment **Name** or **Description**.
+3. In the **Basic** section, update the Deployment **Name** or **Description**. 
 
 4. Click **Update Deployment**.
 
@@ -51,48 +52,38 @@ Deployment details define how users can view and interact with your Deployment. 
 Email alerts are used by Astronomer support to notify recipients in the case of an issue with a Deployment. This can include a problem with your scheduler or workers. 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+
 2. Click the **Details** tab.
+
 3. To add an alert email:
-    - Click **Edit Emails** in the **Alert Emails** area.
+    - Click **Edit Emails** in the **Other** area.
     - Enter an email address and then click **Add**.
+
 4. To delete an alert email address:
-    - Click **Edit Emails** in the **Alert Emails** area.
+    - Click **Edit Emails** in the **Other** area.
     - Click **Delete** next to the email you want to delete.
     - Click **Yes, Continue**.
 
 In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.
 
-### Transfer a Deployment to another Workspace 
+### Update Airflow configurations
 
-Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.
-
-To transfer a Deployment from one Workspace to another, the Workspaces must be in the same Organization. Transferred Deployments cannot be transferred to a different cluster from the one in which they were created.
-
-Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu and select **Transfer Deployment**. 
-
-    ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
-
-3. Select the target Workspace where you want to transfer the Deployment. 
-4. Click **Transfer Deployment**.
+To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](environment-variables.md#set-airflow-configurations-using-environment-variables).
 
 ### Enforce CI/CD deploys
 
 By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
 
-- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API token/key, Workspace API token, or Organization API token.
+- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API key, Workspace API token, or Organization API token.
 - You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu and select **Edit Deployment**. 
+
+2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. In the **Advanced** section, click the **CI/CD Enforcement** toggle to **On**.
-
-4. Click **Update Deployment**.
+3. In the **Advanced** section, find **CI/CD Enforcement** and click the toggle to **On**.
 
 You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
 
