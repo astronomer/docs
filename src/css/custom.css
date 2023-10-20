@@ -508,9 +508,9 @@ html[data-theme='light'] .alert--relatedcontent {
     var(--purple-200),
     var(15%),
     );
-  --ifm-alert-background-color: hsl(89, 65%, 141%);
-  --ifm-alert-foreground-color: rgb(88, 64, 142);
-  --ifm-alert-border-color: hsl(89, 65%, 141%);
+  --ifm-alert-background-color: var( --ifm-color-cli-contrast-background );
+  --ifm-alert-foreground-color: var( --ifm-color-cli-contrast-foreground );
+  --ifm-alert-border-color: var(--ifm-color-cli-dark);
 }
 
 html[data-theme='dark'] .alert--relatedcontent {
@@ -518,9 +518,9 @@ html[data-theme='dark'] .alert--relatedcontent {
     var(--ifm-color-cli-dark);
     var(15%),
     );
-  --ifm-alert-background-color: hsl(89, 65%, 50%); 
-  --ifm-alert-foreground-color: rgb(88, 64, 142); 
-  --ifm-alert-border-color: hsl(89, 65%, 141%);
+  --ifm-alert-background-color: var( --purple-800 );
+  --ifm-alert-foreground-color: var( --ifm-color-cli-contrast-background );
+  --ifm-alert-border-color: var(--ifm-color-cli-dark);
 }
 
 
