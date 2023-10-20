@@ -503,6 +503,27 @@ html[data-theme='dark'] .alert--cli {
   --ifm-alert-border-color: var(--ifm-color-cli-dark);
 }
 
+html[data-theme='light'] .alert--related {
+  --ifm-alert-background-color-highlight: hsl(
+    var(--purple-200),
+    var(15%),
+    );
+  --ifm-alert-background-color: hsl(89, 65%, 141%);
+  --ifm-alert-foreground-color: rgb(88, 64, 142);
+  --ifm-alert-border-color: hsl(89, 65%, 141%);
+}
+
+html[data-theme='dark'] .alert--related {
+  --ifm-alert-background-color-highlight: hsl(
+    var(--ifm-color-cli-dark);
+    var(15%),
+    );
+  --ifm-alert-background-color: hsl(89, 65%, 50%); 
+  --ifm-alert-foreground-color: rgb(88, 64, 142); 
+  --ifm-alert-border-color: hsl(89, 65%, 141%);
+}
+
+
 .dropdown--right {
   margin-right: var(--ifm-navbar-item-padding-horizontal);
   padding: calc(var(--ifm-navbar-item-padding-vertical) * 0.5) var(--ifm-navbar-item-padding-horizontal);
