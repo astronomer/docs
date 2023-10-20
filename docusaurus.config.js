@@ -211,7 +211,7 @@ module.exports = {
               'tip',
               'cli',
               'highlight',
-              'related'
+              'relatedcontent'
             ],
           },
         },

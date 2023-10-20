@@ -503,7 +503,7 @@ html[data-theme='dark'] .alert--cli {
   --ifm-alert-border-color: var(--ifm-color-cli-dark);
 }
 
-html[data-theme='light'] .alert--related {
+html[data-theme='light'] .alert--relatedcontent {
   --ifm-alert-background-color-highlight: hsl(
     var(--purple-200),
     var(15%),
@@ -513,7 +513,7 @@ html[data-theme='light'] .alert--related {
   --ifm-alert-border-color: hsl(89, 65%, 141%);
 }
 
-html[data-theme='dark'] .alert--related {
+html[data-theme='dark'] .alert--relatedcontent {
   --ifm-alert-background-color-highlight: hsl(
     var(--ifm-color-cli-dark);
     var(15%),

@@ -145,14 +145,14 @@ const AdmonitionConfigs = {
     iconComponent: HighlightIcon,
     label: '',
   },
-  related: {
-    infimaClassName: 'related',
+  relatedconent: {
+    infimaClassName: 'relatedconent',
     iconComponent: RelatedIcon,
     label: (
       <Translate
-        id="theme.admonition.related"
-        description="The default label used for the Related admonition (:::related)">
-        related
+        id="theme.admonition.relatedconent"
+        description="The default label used for the Related admonition (:::relatedconent)">
+        related content
       </Translate>
     ),
   },
