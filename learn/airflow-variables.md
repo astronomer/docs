@@ -94,7 +94,7 @@ airflow variables set -j my_json_var '{"key": "value"}'
 
 ### Using environment variables
 
-To set Airflow variables via an environment variable create an environment variable with the prefix `AIRFLOW_VAR_` + the name of the Airflow variable you want to set.
+To set Airflow variables using an environment variable, create an environment variable with the prefix `AIRFLOW_VAR_` and the name of the Airflow variable you want to set. For example:
 
 ```text
 AIRFLOW_VAR_MYREGULARVAR='my_value'
@@ -107,7 +107,7 @@ To fetch the Airflow variable in the DAG, you can then use the following methods
 
 - `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because retrieving environment variables with this method can print them to your logs.
 
-Replace `<default_value>` with a default value to use if Airflow can't find the environment variable.
+If Airflow can't find the environment variable, replace `<default_value>` with a default value.
 
 To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/env-vars-astro.md).
 

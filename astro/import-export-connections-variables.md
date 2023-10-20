@@ -126,7 +126,7 @@ If your connections and variables are defined as environment variables on an Ast
 
     This command exports your variables to a local file named `.env`. The values of secret environment variables will be redacted.
 
-See [Set environment variables on Astro](http://localhost:3000/astro/category/env-vars-astro.md)
+See [Set environment variables on Astro](https://docs.astronomer.io/astro/env-vars-astro).
 
 ## From the Airflow REST API
 

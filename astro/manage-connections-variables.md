@@ -81,7 +81,11 @@ A secrets backend is the most secure way to store connections and variables. You
 
 ### Environment variables
 
-You can use Airflow's system-level environment variables to store connections and variables. This strategy is recommended when you don't have a secrets backend, but you still want to take advantage of security and RBAC features to limit access to connections and variables. You can configure system-level environment variables both locally and on Astro. For setup steps, see:
+You can use Airflow's system-level environment variables to store connections and variables. This strategy is recommended when you don't have a secrets backend, but you still want to take advantage of security and RBAC features to limit access to connections and variables. 
+
+Airflow connections and variables are stored in the Airflow metadata database. Calling them outside of task definitions and operators requires an additional connection to the Airflow metadata database which is used every time the scheduler parses a DAG. By adding connections and variables as environment variables, you can lower the amount of open connections and improve the performance of your database and resources.
+
+You can configure system-level environment variables both locally and on Astro. For setup steps, see:
 
 - [Set environment variables locally](cli/develop-project.md#set-environment-variables-locally)
 - [Set environment variables on Astro](environment-variables.md#add-airflow-connections-and-variables-using-environment-variables)

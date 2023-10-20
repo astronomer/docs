@@ -84,13 +84,13 @@ Utility files in the `/dags` directory will not be parsed by Airflow, so you don
 
 ## Add Airflow connections, pools, variables
 
-When you initialize an Astro project, `airflow_settings.yaml` file is automatically created to set Airflow connections, variables and pools. This values set in this file can used for your local Airflow only. When you deploy your project to an Astro Deployment, the values in this file are not included. 
+When you initialize an Astro project, the `airflow_settings.yaml` file is automatically created for you to set Airflow connections, variables, and pools. The values set in this file can only be used for your local Airflow. When you deploy your project to an Astro Deployment, the values in this file are not included. 
 
-This file saves your values in plain-text. To prevent from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
+The `airflow_settings.yaml` file saves your values in plain-text. To prevent sharing sensitive credentials or passwords by committing them to your version control tool, Astronomer recommends adding this file to `.gitignore`.
 
-Astronomer recommends using the document [Manage connections and variables in Astro](manage-connections-variables.md) to choose the correct strategy to store your Airflow connections and variables.
+Astronomer also recommends using the document [Manage connections and variables in Astro](manage-connections-variables.md) to choose the correct strategy to store your Airflow connections and variables.
 
-See [Configure airflow_settings.yaml](#configure-airflow_settingsyaml-local-development-only) for details on how to use this file for local Airflow.
+See [Configure airflow_settings.yaml](#configure-airflow_settingsyaml-local-development-only) for details about how to use this file for local Airflow.
 
 ## Add test data or files for local testing
 

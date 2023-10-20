@@ -34,7 +34,7 @@ Environment variables are fundamentally used to customize your Airflow environme
 On Astro, you can manage environment variables on Astro in four different ways for your Deployment:
 
 - Your Deployment's **Variable** tab [in the Cloud UI](env-vars-astro.md#using-the-cloud-ui)
-- Your Astro project's []`Dockerfile`](env-vars-astro.md#using-your-dockerfile) during the Astro build and deploy process
+- Your Astro project's [`Dockerfile`](env-vars-astro.md#using-your-dockerfile) during the Astro build and deploy process
 - Using the [Astro CLI](env-vars-astro.md#using-astro-cli)
   - Your Astro project's `.env` file
   - Using Astro CLI commands `astro deployment variable create` and `astro deployment variable update`
