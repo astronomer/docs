@@ -210,7 +210,8 @@ module.exports = {
               'info',
               'tip',
               'cli',
-              'highlight'
+              'highlight',
+              'related'
             ],
           },
         },

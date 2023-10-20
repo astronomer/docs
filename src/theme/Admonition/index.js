@@ -69,6 +69,9 @@ function CautionIcon() {
 function HighlightIcon() {
   return null;
 }
+function RelatedIcon() {
+  return null;
+}
 // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 const AdmonitionConfigs = {
   note: {
@@ -141,6 +144,17 @@ const AdmonitionConfigs = {
     infimaClassName: 'highlight',
     iconComponent: HighlightIcon,
     label: '',
+  },
+  related: {
+    infimaClassName: 'related',
+    iconComponent: RelatedIcon,
+    label: (
+      <Translate
+        id="theme.admonition.related"
+        description="The default label used for the Related admonition (:::related)">
+        caution
+      </Translate>
+    ),
   },
 };
 // Legacy aliases, undocumented but kept for retro-compatibility
