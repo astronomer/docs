@@ -26,7 +26,7 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
-## Enable/ disable DAG-only deploys on a Deployment
+## Enable or disable DAG-only deploys on a Deployment
 
 As a Workspace Owner, you can enable or disable DAG-only deploys for a Deployment. On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
   
