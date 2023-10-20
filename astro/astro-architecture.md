@@ -27,7 +27,7 @@ The following sections give a detailed explanation of key concepts that you need
 
 ### Astro CLI
 
-The [Astro CLI](cli/overview.md) provides an interface to test Airflow DAGs locally, deploy code to Astro, and automate key actions as part of a CI/CD process. The Astro CLI is fully open source.
+The [Astro CLI](cli/overview.md) is an open source interface you can use to test Airflow DAGs locally, deploy code to Astro, and automate key Astro actions as part of a CI/CD process. Using the Astro CLI to run Airflow locally requires Docker or an alternative container management tool, like Podman.
 
 An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, Python packages, utility files, and more. Astronomer recommends that you create a dedicated Git repository for each Astro project. To run a DAG, you add the DAG to your Astro project and deploy your Astro project to Astro.
 
