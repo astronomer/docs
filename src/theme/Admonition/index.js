@@ -204,6 +204,7 @@ export default function Admonition(props) {
   const titleLabel = title ?? typeConfig.label;
   const { iconComponent: IconComponent } = typeConfig;
   const icon = iconProp ?? <IconComponent />;
+  const isRelatedAdmonition = type == 'related';
   return (
     <div
       className={clsx(
@@ -212,6 +213,9 @@ export default function Admonition(props) {
         'alert',
         `alert--${typeConfig.infimaClassName}`,
         styles.admonition,
+        {
+          [styles.relatedAdmonition]: isRelatedAdmonition,
+        },
       )}>
       <div className={styles.admonitionHeading}>
         <span className={styles.admonitionIcon}>{icon}</span>
