@@ -31,6 +31,12 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow core components. See [Airflow's components](airflow-components.md).
 - Airflow executors. See [Airflow executors explained](airflow-executors-explained.md).
 
+:::tip Related Content
+
+- Webinar: [Scaling Out Airflow](https://www.astronomer.io/events/webinars/scaling-out-airflow/).
+
+:::
+
 ## Parameter tuning
 
 Airflow has many parameters that impact its performance. Tuning these settings can impact DAG parsing and task scheduling performance, parallelism in your Airflow environment, and more. 

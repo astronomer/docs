@@ -43,6 +43,12 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 
+:::tip Related Content
+
+- Webinar: [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/).
+
+:::
+
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).

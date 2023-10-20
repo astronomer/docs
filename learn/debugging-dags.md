@@ -21,6 +21,12 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Airflow concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
 - Basic knowledge of Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 
+:::tip Related Content
+
+- Webinar: [Debugging your Airflow DAGs](https://www.astronomer.io/events/webinars/debugging-your-airflow-dags/).
+
+:::
+
 ## General Airflow debugging approach
 
 To give yourself the best possible chance of fixing a bug in Airflow, contextualize the issue by asking yourself the following questions:

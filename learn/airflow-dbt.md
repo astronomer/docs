@@ -73,6 +73,14 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow task groups. See [Airflow task groups](task-groups.md).
 - Airflow connections. See [Manage connections in Apache Airflow](connections.md).
 
+:::tip Related Content
+
+- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
+- Blog post: [Introducing Cosmos 1.0: the best way to run dbt Core in Airflow](https://www.astronomer.io/blog/introducing-cosmos-1-0/).
+- Use case: [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
+
+:::
+
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).

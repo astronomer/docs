@@ -28,6 +28,14 @@ To get the most out of this guide, you should have an existing knowledge of:
 - Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
 - The Astro Python SDK. See [Using the Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Datasets](https://academy.astronomer.io/astro-runtime-datasets) module.
+- Webinar: [Data Driven Scheduling](https://www.astronomer.io/events/webinars/data-driven-scheduling/).
+- Use case: [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).
+
+:::
+
 ## Why use datasets?
 
 Datasets allow you to define explicit dependencies between DAGs and updates to your data. This helps you to:

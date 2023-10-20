@@ -32,6 +32,12 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 - Task dependencies. See [Managing dependencies in Apache Airflow](managing-dependencies.md).
 
+:::tip Related Content
+
+- Webinar: [How to monitor your pipelines with Airflow and Astro alerts](https://www.astronomer.io/events/webinars/how-to-monitor-your-pipelines-with-airflow-and-astro-alerts/).
+
+:::
+
 ## Airflow notification types
 
 Airflow has a few options for notifying you on the status of your DAGs and tasks:

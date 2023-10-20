@@ -31,6 +31,14 @@ To get the most out of this tutorial, you should have an understanding of:
 - How to design a data quality process. See [Data quality and Airflow](data-quality.md).
 - Running SQL from Airflow. See [Using Airflow to execute SQL](airflow-sql.md).
 
+:::tip Related Content
+
+- Webinar: [Implementing Data Quality Checks in Airflow](https://www.astronomer.io/events/webinars/implementing-data-quality-checks-in-airflow/).
+- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+
+:::
+
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).

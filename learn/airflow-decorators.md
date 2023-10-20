@@ -25,6 +25,13 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Taskflow API](https://academy.astronomer.io/astro-runtime-taskflow) module.
+- Webinar: [Writing Functional DAGs with Decorators](https://www.astronomer.io/events/webinars/writing-functional-dags-with-decorators/).
+
+:::
+
 ## What is a decorator?
 
 In Python, [decorators](https://realpython.com/primer-on-python-decorators/) are functions that take another function as an argument and extend the behavior of that function. For example, the `@multiply_by_100_decorator` takes any function as the `decorated_function` argument and returns the result of that function multiplied by 100. 

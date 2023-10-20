@@ -29,6 +29,12 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Connections 101](https://academy.astronomer.io/connections-101) module.
+
+:::
+
 ## Airflow connection basics
 
 An Airflow connection is a set of configurations that send requests to the API of an external tool. In most cases, a connection requires login credentials or a private key to authenticate Airflow to the external tool.

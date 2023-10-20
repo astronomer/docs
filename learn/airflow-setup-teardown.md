@@ -24,6 +24,14 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators).
 - Managing dependencies in Airflow. See [Manage task and task group dependencies in Airflow](managing-dependencies.md).
 
+:::tip Related Content
+
+- Webinar: [What’s New in Airflow 2.7](https://www.astronomer.io/events/webinars/whats-new-in-airflow-2-7/).
+- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+
+:::
+
 ## When to use setup/ teardown tasks
 
 Setup/ teardown tasks ensure that the necessary resources to run an Airflow task are set up before a task is executed and that those resources are torn down after the task has completed, regardless of any task failures.

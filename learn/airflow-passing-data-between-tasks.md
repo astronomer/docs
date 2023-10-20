@@ -35,6 +35,13 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - DAG writing best practices. See [DAG writing best practices in Apache Airflow](dag-best-practices.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: XComs 101](https://academy.astronomer.io/astro-runtime-xcoms-101) module.
+- Webinar: [How to pass data between your Airflow tasks](https://www.astronomer.io/events/webinars/how-to-pass-data-between-your-airflow-tasks/).
+
+:::
+
 ## Best practices
 
 Before you dive into the specifics, there are a couple of important concepts to understand before you write DAGs that pass data between tasks.

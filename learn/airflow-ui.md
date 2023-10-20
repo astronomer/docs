@@ -25,7 +25,7 @@ To get the most out of this guide, you should have an understanding of:
 
 :::tip Related Content
 
-- Astronomer Academy: [Airflow UI](https://academy.astronomer.io/astro-runtime-airflow-ui) module.
+- Astronomer Academy: [Airflow: UI](https://academy.astronomer.io/astro-runtime-airflow-ui) module.
 - Webinar: [A Deep Dive into the Airflow UI](https://www.astronomer.io/events/webinars/a-deep-dive-into-the-airflow-ui/).
 
 :::

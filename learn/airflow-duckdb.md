@@ -43,6 +43,13 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow decorators. See [Introduction to Airflow decorators](airflow-decorators.md).
 - Airflow connections. See [Manage connections in Apache Airflow](connections.md).
 
+:::tip Related Content
+
+- Webinar: [How to use DuckDB with Airflow](https://www.astronomer.io/events/webinars/how-to-use-duckdb-with-airflow/).
+- Blog post: [Three ways to use Airflow with MotherDuck and DuckDB](https://www.astronomer.io/blog/three-ways-to-use-airflow-with-motherduck-and-duckdb/).
+
+:::
+
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).

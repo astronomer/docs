@@ -23,6 +23,13 @@ To get the most out of this guide, you should have an existing knowledge of:
 - Configuring Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 - Date and time modules in Python3. See the [Python documentation on the `datetime` package](https://docs.python.org/3/library/datetime.html).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: DAG Scheduling](https://academy.astronomer.io/astro-runtime-scheduling) module.
+- Webinar: [Scheduling in Airflow: A Comprehensive Introduction](https://www.astronomer.io/events/webinars/scheduling-in-airflow-comprehensive-intro/).
+
+:::
+
 ## Scheduling concepts
 
 To gain a better understanding of DAG scheduling, it's important that you become familiar with the following terms and parameters:

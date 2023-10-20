@@ -21,6 +21,13 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow sensors. See [Sensors 101](what-is-a-sensor.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Deferrable Operators](https://academy.astronomer.io/astro-runtime-deferrable-operators).
+- Webinar: [Astronomer Providers](https://www.astronomer.io/events/webinars/astronomer-providers/).
+
+:::
+
 ## Terms and concepts
 
 Review the following terms and concepts to gain a better understanding of deferrable operator functionality:

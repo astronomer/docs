@@ -26,6 +26,13 @@ To get the most out of this guide, you should have an understanding of:
 - How to use Airflow decorators to define tasks. See [Introduction to Airflow Decorators](airflow-decorators.md).
 - XComs in Airflow. See [Passing Data Between Airflow Tasks](airflow-passing-data-between-tasks.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping).
+- Webinar: [Dynamic Tasks in Airflow](https://www.astronomer.io/events/webinars/dynamic-tasks-in-airflow/).
+
+:::
+
 ## Dynamic task concepts
 
 The Airflow dynamic task mapping feature is based on the [MapReduce](https://en.wikipedia.org/wiki/MapReduce) programming model. Dynamic task mapping creates a single task for each input. The reduce procedure, which is optional, allows a task to operate on the collected output of a mapped task. In practice, this means that your DAG can create an arbitrary number of parallel tasks at runtime based on some input parameter (the map), and then if needed, have a single task downstream of your parallel mapped tasks that depends on their output (the reduce).

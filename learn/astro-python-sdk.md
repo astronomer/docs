@@ -33,6 +33,13 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Basic knowledge of [Amazon S3](https://aws.amazon.com/s3/getting-started/) and [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html).
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Astro: SDK](https://academy.astronomer.io/astro-runtime-sdk) module.
+- Webinar: [Simplified DAG authoring with the Astro SDK](https://www.astronomer.io/events/webinars/simplified-dag-authoring-with-the-astro-sdk/).
+
+:::
+
 ## Prerequisites
 
 To complete this tutorial, you need:

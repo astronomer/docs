@@ -39,6 +39,12 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Jinja templating. See [Jinja basics](https://jinja.palletsprojects.com/en/3.1.x/api/#basics). 
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Templating](https://academy.astronomer.io/astro-runtime-templating) module.
+
+:::
+
 ## Templating variables in Airflow
 
 Templating in Airflow works the same as Jinja templating in Python. You enclose the code you want evaluated between double curly braces, and the expression is evaluated at runtime. 

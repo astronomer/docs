@@ -35,6 +35,13 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Kubernetes basics. See the [Kubernetes Documentation](https://kubernetes.io/docs/home/).  
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: The KubernetesPodOperator](https://academy.astronomer.io/astro-runtime-the-kubernetespodoperator-1) module.
+- Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
+
+:::
+
 ## Requirements
 
 To use the KubernetesPodOperator you need to install the Kubernetes provider package. To install it with pip, run:

@@ -29,6 +29,12 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: DAGs 101](https://academy.astronomer.io/dag-101-1) module.
+
+:::
+
 ## What is a DAG?
 
 In Airflow, a directed acyclic graph (DAG) is a data pipeline defined in Python code. Each DAG represents a collection of tasks you want to run and is organized to show relationships between tasks in the Airflow UI. The mathematical properties of DAGs make them useful for building data pipelines:

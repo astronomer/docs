@@ -74,6 +74,14 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 
+:::tip Related Content
+
+- Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
+- Blog post: [Comparing Data Orchestration: Databricks Workflows vs. Apache Airflow, Part 1](https://www.astronomer.io/blog/comparing-data-orchestration-databricks-workflows-vs-apache-airflow-part-1/).
+- Use case: [ELT with Airflow and Databricks](use-case-airflow-databricks.md).
+
+:::
+
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).

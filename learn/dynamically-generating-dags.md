@@ -40,6 +40,12 @@ To get the most out of this guide, you should have an understanding of:
 
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Dynamic DAGs](https://academy.astronomer.io/astro-runtime-dynamic-dags).
+
+:::
+
 ## Single-file methods
 
 One method for dynamically generating DAGs is to have a single Python file which generates DAGs based on some input parameter(s). For example, a list of APIs or tables. A common use case for this is an ETL or ELT-type pipeline where there are many data sources or destinations. This requires creating many DAGs that all follow a similar pattern.

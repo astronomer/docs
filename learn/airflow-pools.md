@@ -26,6 +26,12 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - The basics of scaling Airflow. See [Scaling out Airflow](airflow-scaling-workers.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Pools](https://academy.astronomer.io/astro-runtime-pools) module.
+
+:::
+
 ## Create a pool
 
 There are three ways you can create and manage pools in Airflow:

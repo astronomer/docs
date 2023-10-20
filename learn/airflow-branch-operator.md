@@ -24,6 +24,12 @@ To get the most out of this guide, you should have an understanding of:
 - Dependencies in Airflow. See [Managing Dependencies in Apache Airflow](managing-dependencies.md).
 - Using Airflow decorators. See [Introduction to Airflow decorators](airflow-decorators.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Branching](https://academy.astronomer.io/astro-runtime-branching) module.
+
+:::
+
 ## `@task.branch` (BranchPythonOperator)
 
 One of the simplest ways to implement branching in Airflow is to use the `@task.branch` decorator, which is a decorated version of the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). `@task.branch` accepts any Python function as an input as long as the function returns a list of valid IDs for Airflow tasks that the DAG should run after the function completes. 

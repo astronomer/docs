@@ -23,6 +23,12 @@ To get the most out of this guide, you should have an understanding of:
 - CI/CD for Python scripts. See [Continuous Integration with Python: An Introduction](https://realpython.com/python-continuous-integration/).
 - Basic Airflow and [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) concepts. See [Get started with Airflow](get-started-with-airflow.md).
 
+:::tip Related Content
+
+- Webinar: [How to easily test your Airflow DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
+
+:::
+
 ## Write DAG validation tests
 
 DAG validation tests ensure that your DAGs fulfill a list of criteria. Using validation tests can help you:

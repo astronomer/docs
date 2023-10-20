@@ -28,6 +28,13 @@ This guide is based on the latest version of the Astro SDK. If you're using an e
 
 To get the most out of this guide, you should have an understanding of Airflow decorators. See [Introduction to Airflow Decorators guide](airflow-decorators.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Astro: SDK](https://academy.astronomer.io/astro-runtime-sdk) module.
+- Webinar: [Simplified DAG authoring with the Astro SDK](https://www.astronomer.io/events/webinars/simplified-dag-authoring-with-the-astro-sdk/).
+
+:::
+
 ## Python SDK functions
 
 The Astro Python SDK makes implementing ELT use cases easier by allowing you to seamlessly transition between Python and SQL for each step in your process. Details like creating dataframes, storing intermediate results, passing context and data between tasks, and creating task dependencies are all managed automatically.

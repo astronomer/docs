@@ -21,6 +21,12 @@ To get the most out of this guide, make sure you have an understanding of:
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
+:::tip Related Content
+
+- Webinar: [OpenLineage and Airflow: A Deeper Dive](https://www.astronomer.io/events/webinars/openlineage-and-airflow-deeper-dive/).
+
+:::
+
 ## What is data lineage
 
 Data lineage is a way of tracing the complex set of relationships that exist among datasets within an ecosystem.  The concept of data lineage encompasses:

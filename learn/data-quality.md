@@ -31,6 +31,13 @@ To get the most out of this guide, you should have knowledge of:
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 - Relational databases. See [Relational database on Wikipedia](https://en.wikipedia.org/wiki/Relational_database).
 
+:::tip Related Content
+
+- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+
+:::
+
 ## Data quality essentials
 
 What is considered good quality data is determined by the needs of your organization. Defining quality criteria for a given collection of datasets is often a task requiring collaboration with all data professionals involved in each step of the pipeline.

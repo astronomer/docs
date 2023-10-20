@@ -26,6 +26,12 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 
+:::tip Related Content
+
+- Webinar: [Hands-on Workshop: automate your data ingestion with Fivetran and Astronomer](https://www.astronomer.io/events/webinars/workshop-automate-data-ingestion-fivetran-astronomer/).
+
+:::
+
 ## Prerequisites
 
 - A Fivetran account. Fivetran offers a [14-day free trial](https://fivetran.com/signup) for new customers.

@@ -23,6 +23,12 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 
+:::tip Related Content
+
+- Webinar: [Batch Inference with Airflow and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).
+
+:::
+
 ## Prerequisites
 
 To complete this tutorial, you need:
