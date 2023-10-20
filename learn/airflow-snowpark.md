@@ -110,7 +110,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
     ```
 
-4. Change the content of the `Dockerfile` of your Astro project to the following, which imports the `whl` file and creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environment, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
+4. Change the content of the `Dockerfile` of your Astro project to the following, which imports the `whl` file and creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest

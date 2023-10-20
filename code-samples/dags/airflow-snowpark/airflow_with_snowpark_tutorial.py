@@ -4,7 +4,7 @@
 This DAG shows how to use specialized decorators to run Snowpark code in Airflow.
 Note that it uses the Airflow 2.7 feature of setup/ teardown tasks to create
 and clean up a Snowflake custom XCom backend.
-If you want to use regular XCom or are running on an older version set
+If you want to use regular XCom set
 `SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND` to `False`.
 """
 
@@ -17,10 +17,11 @@ from airflow.models.baseoperator import chain
 from astronomer.providers.snowflake.utils.snowpark_helpers import SnowparkTable
 
 
-# toggle this to True if you are using the Snowflake XCOM backend and want to
+# toggle to True if you are using the Snowflake XCOM backend and want to
 # use setup/ teardown tasks to create all necessary objects and clean up the XCOM table
 # after the DAG has run
 SETUP_TEARDOWN_SNOWFLAKE_CUSTOM_XCOM_BACKEND = False
+# provide your Snowflake XCOM database, schema, stage and table names
 MY_SNOWFLAKE_XCOM_DATABASE = "SNOWPARK_XCOM_DB"
 MY_SNOWFLAKE_XCOM_SCHEMA = "SNOWPARK_XCOM_SCHEMA"
 MY_SNOWFLAKE_XCOM_STAGE = "XCOM_STAGE"
@@ -36,7 +37,7 @@ SNOWPARK_BIN = "/home/astro/.venv/snowpark/bin/python"
 
 # while this tutorial will run with the default Snowflake warehouse, larger
 # datasets may require a Snowpark optimized warehouse. Set the following toggle to true to
-# use such a warehouse. And provide your Snowpark and regular warehouses' names.
+# use such a warehouse and provide your Snowpark and regular warehouses' names.
 USE_SNOWPARK_WAREHOUSE = False
 MY_SNOWPARK_WAREHOUSE = "SNOWPARK_WH"
 MY_SNOWFLAKE_REGULAR_WAREHOUSE = "HUMANS"
