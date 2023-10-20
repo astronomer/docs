@@ -23,7 +23,7 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 
-:::related Related Content
+:::related
 
 - Academy: [Airflow UI](https://academy.astronomer.io/astro-runtime-airflow-ui) module.
 - Webinar: [A Deep Dive into the Airflow UI](https://www.astronomer.io/events/webinars/a-deep-dive-into-the-airflow-ui/).
