@@ -70,10 +70,10 @@ After you enable DAG-only deploys:
 
 After you disable DAG-only deploys:
 
-- You can no longer run `astro deploy --dags` to trigger a DAG-only deploy to your Deployment.
+- You can't run `astro deploy --dags` to trigger a DAG-only deploy to your Deployment.
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
 - In the Cloud UI, your Deployment **DAG bundle version** doesn't update when you deploy code. 
-- Your Deployment no longer includes infrastructure for deploying your DAGs separately from your project image. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
+- Your Deployment doesn't include infrastructure for deploying your DAGs separately from your project image. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 1. Run the following command to disable DAG-only deploys:
 
