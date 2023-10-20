@@ -48,7 +48,7 @@ Before you enable or disable DAG-only deploys on a Deployment, ensure the follow
 
 ### Enable DAG-only deploys
 
-After you enable DAG-only deploys:
+DAG-only deploys are enabled by default on Astro Hosted. You have the option to enable DAG-only deploys only if you're on Astro Hybrid or if you've previously disabled them on a Hosted Deployment. After you enable DAG-only deploys:
 
 - You can run `astro deploy --dags` to deploy only DAGs to your Deployment.
 - In the Cloud UI, your Deployment **DAG bundle version** updates when you trigger an image deploy or a DAG-only deploy. 

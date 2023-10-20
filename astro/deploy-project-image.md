@@ -142,7 +142,7 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 
 ### How Deployments handle code deploys
 
-After a Deployment receives the deploy, Astro gracefully terminates all of its containers except for the Airflow webserver and Celery workers or Kubernetes worker Pods that are currently running tasks. All new workers run your new code.
+After a Deployment receives the deploy, Astro gracefully terminates all of its containers except for the Airflow webserver and any Celery workers or Kubernetes worker Pods that are currently running tasks. All new workers run your new code.
 
 If you deploy code to a Deployment that is running a previous version of your code, then the following happens:
 
