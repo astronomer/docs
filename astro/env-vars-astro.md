@@ -7,19 +7,19 @@ description: Learn how to manage environment variables on Astro
 
 import {siteVariables} from '@site/src/versions';
 
-On Astro, you can add, edit, update, or delete environment variables in three different ways for your Deployment:
+On Astro, you can add, edit, update, or delete environment variables in the following different ways for your Deployment:
 
 - Your Deployment's **Variable** tab in the Cloud UI
-- Your Astro project's `Dockerfile` during deploy
-- Using Astro CLI
+- Your Astro project's `Dockerfile` when deploying code
+- With the Astro CLI
     - Your Astro project's `.env` file
     - Using Astro CLI commands `astro deployment variable create` and `astro deployment variable update`
 
 The method you choose depends on your [specific use case](environment-variables.md#choose-the-strategy-to-manage-environment-variables). 
 
-Use this document to understand how to use these methods to create environment variables on Astro.
+Use this document to create environment variables on Astro.
 
-## Using the Cloud UI
+## With the Cloud UI
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -27,13 +27,13 @@ Use this document to understand how to use these methods to create environment v
 
 3. Click **Edit Variables**.
 
-4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
+4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This permanently hides the variable's value from all users in your Workspace.
 
 5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
 ### Edit or delete existing values
 
-After you set an environment variable key, only the environment variable value can be modified. While you can modify environment variables that are set as secret, however, the secret variable value is never shown. When you modify a secret environment variable, you'll be prompted to enter a new value.
+After you set an environment variable key, only the environment variable value can be modified. While you can modify environment variables that are set as **Secret**, however, the secret variable value is never shown. When you modify a secret environment variable, you are prompted to enter a new value.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -41,13 +41,13 @@ After you set an environment variable key, only the environment variable value c
 
 3. Click **Edit Variables**. 
 
-4. Modify the value of the variable you wish to edit.
+4. Modify the value of the variable you want to edit.
 
     ![Edit value location](/img/docs/variables-edit.png)
 
 5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
 
-## Using your Dockerfile
+## With your Dockerfile
 
 If you want to store environment variables with an external version control tool, Astronomer recommends setting them in your `Dockerfile`. This file is automatically created when you first initialize an Astro project using `astro dev init`.
 
@@ -73,7 +73,7 @@ Environment variables set in your `Dockerfile` are stored in plain text. For thi
 
     To view a list of all the environment variables set in your local Airflow environment, refer to the Step 4 of [Using Astro CLI in local Airflow environment](#in-your-local-airflow-environment)
 
-To delete an environment variable from your Astro Runtime image, just remove or comment the line in your `Dockerfile` that defines it.
+To delete an environment variable from your Astro Runtime image, remove or comment the line in your `Dockerfile` that defines it.
 
 :::info
 
@@ -81,7 +81,7 @@ Environment variables set in your Dockerfile are not visible in the Cloud UI.
 
 :::
 
-## Using Astro CLI
+## With Astro CLI
 
 You can use Astro CLI to set environment variables on Astro and your local Airflow environment. 
 
@@ -111,7 +111,7 @@ If your environment variables contain sensitive information or credentials that 
     2. Run `printenv | grep <your-env-variable>` in the container to print the environment variables and find your environment variable.
     3. Run `exit` to exit the container.
 
-#### Using multiple .env files
+#### With multiple .env files
 
 The Astro CLI looks for `.env` by default, but if you want to specify multiple files, make `.env` a top-level directory and create sub-files within that folder.
 
@@ -148,11 +148,11 @@ To update an existing environment variable to your Astro Deployment, use [`astro
 
 :::caution
 
-Note that when you use `.env` file to add or update environment variables, it will overwrite all the variables in your Astro Deployment from your `.env` file. 
+When you use `.env` file to add or update environment variables, it will overwrite all the variables in your Astro Deployment from your `.env` file. 
 
 :::
 
-When you use Astro CLI commands to add or update environment variabes to your Deployment, your Deployment is automatically restarted to apply the environment variables. To verify if the environment varibles were applied correctly to your Deployment, go to the **Variables** tab of your Deployment in the Cloud UI. 
+After using Astro CLI commands to add or update environment variabes to your Deployment, your Deployment automatically restarts to apply the environment variables. To verify if the environment varibles were applied correctly to your Deployment, go to the **Variables** tab of your Deployment in the Cloud UI. 
 
 You cannot delete an environment variable using the Astro CLI. You either need to use the Cloud UI or use the `.env` file to only include the required environment variables.
 
