@@ -238,3 +238,66 @@ You can request Astronomer Support to add [tags](https://docs.aws.amazon.com/emr
 Tags can help your team identify your Astro clusters and associate them with a particular purpose or owner within your cloud provider ecosystem. 
 
 You can raise a request with [Astronomer Support](https://cloud.astronomer.io/support) to add or remove tags. To view your current cluster tags, see [View clusters](#view-clusters).
+
+## Per-Deployment IAM workload identities on AWS
+
+Astro Hybrid clusters on AWS support per-Deployment IAM workload identities, meaning that you can now limit your trust policies to authorize only specific Deployments to your cloud resources. If you're 
+
+:::info
+
+This requires an automatic update to the cross-account role that Astro uses to manage clusters in your cloud. In addition to enabling per-Deployment IAM workload identities, this also adds the following permissions to reduce the risk of partial deletions in your cloud: 
+
+```json
+{ "elasticloadbalancing:DescribeLoadBalancers", "elasticloadbalancing:DeleteLoadBalancer" }
+```
+
+For more information about this change, see [Automatic updates coming to cross-account roles for Astro Hybrid on AWS](https://support.astronomer.io/hc/en-us/articles/19833616584723). 
+
+:::
+
+To migrate from using cluster workload identities to Deployment workload identities on AWS:
+
+1. In the AWS Management Console, go to the **Identity and Access Management (IAM) dashboard**. Identify all of your trust policies that specify your cluster workload identity. They should look similar to the following trust policy:
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": [
+                        "arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"
+                    ]
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    }
+    ```
+
+2. For each trust policy, add the workload identities for any Deployments that you want to access the related resource. To locate your Deployment workload identity, open the Deployment in the Cloud UI and copy the **Workload Identity** from the **Details** page. Your trust policy should now look like the following:
+
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": [
+                        "arn:aws:iam::123456789876:role/AirflowS3Logs-cl6zcnlc641hr0voibivf21jh",
+                        "arn:aws:iam::<dataplane-AWS-account-ID>:role/astro-<namespace>"
+                    ]
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    }
+    ```
+
+3. For each Deployment that you specified in your trust policies, open the Deployment in the Cloud UI and click **Details**, then click **Edit Details**. In the **Workload Identity** section, select the new Deployment identity from the dropdown list, then click **Update**. To avoid disruption to tasks, do not complete this step until you have added the Deployment workload identity to all of the trust policies it needs for access.
+
+4. [Upgrade](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli) to the latest Astro CLI release, which includes support for Per Deployment IAM Workload Identity.
+
+5. After you've tested the policies with your Deployment workload identities, remove the cluster workload identity from your trust policies
