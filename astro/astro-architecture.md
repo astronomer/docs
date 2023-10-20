@@ -13,7 +13,11 @@ This document provides an overview of the architecture and key concepts in Astro
 
 Astro is built to both simplify and optimize Airflow so you can customize the parts of your environment that matter most to you, with Astro taking care of the rest. Whether you use Astro to power internal analytics or to train machine learning models, learning how Astro works can help you decide which deployment and connectivity model work best for you and enable your team to start running DAGs.
 
-You can work with Astro using the [Cloud UI](#cloud-ui) in your web browser, the [Astro CLI](#astro-cli) in your terminal or as part of a CI/CD process, or the Astro API. Astro makes it easy for Airflow environments, called [Deployments](#deployment), to securely connect to external data services. The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that scales and optimizes the infrastructure that powers your Deployments. The following diagram shows how these components work together to help you manage Airflow on Astro.
+You can work with Astro using the [Cloud UI](#cloud-ui) in your web browser, the [Astro CLI](#astro-cli) in your terminal or as part of a CI/CD process, or the Astro API. Astro makes it easy for Airflow environments, called [Deployments](#deployment), to securely connect to external data services. 
+
+The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that scales and optimizes your Deployments and the [clusters](#cluster) they're hosted on.
+
+The following diagram shows how these components work together to help you manage Airflow on Astro.
 
 ![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.png)
 
