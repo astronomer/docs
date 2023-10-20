@@ -2,7 +2,7 @@
 
 If you'd like to contribute to Astronomer docs directly, you are welcome to create a Pull Request (PR) to this repository with your suggested changes. To do so:
 
-1. Fork or clone this repository
+1. Clone this repository
 2. Create a branch off of `main`
 3. Make your changes in that branch
 4. Submit a PR for review

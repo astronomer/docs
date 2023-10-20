@@ -165,7 +165,7 @@ Navigate back to your Astro Cloud IDE on Astro.
     WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
     ```
 
-5. Optional. If you want to use your external database, add your connection to the cell as shown in the following screenshot. If you are using the in memory database, you can skip this step.
+5. (Optional) If you want to use your external database, add your connection to the cell as shown in the following screenshot. If you are using the in memory database, you can skip this step.
 
     ![Cloud IDE screenshot showing the dialogue that opens when one clicks on the connection field of a cell, which by default says In-memory SQL. The option is shown to select the snowflake_conn that was defined in Step 3.](/img/tutorials/cloud-ide-tutorial_snowflake_conn.png)
 
