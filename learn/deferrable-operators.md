@@ -23,7 +23,7 @@ To get the most out of this guide, you should have an understanding of:
 
 :::tip Related Content
 
-- Astronomer Academy: [Airflow: Deferrable Operators](https://academy.astronomer.io/astro-runtime-deferrable-operators).
+- Astronomer Academy: [Airflow: Deferrable Operators](https://academy.astronomer.io/astro-runtime-deferrable-operators) module.
 - Webinar: [Astronomer Providers](https://www.astronomer.io/events/webinars/astronomer-providers/).
 
 :::
