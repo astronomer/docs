@@ -23,6 +23,13 @@ To get the most out of this guide, you should have an understanding of:
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow UI](https://academy.astronomer.io/astro-runtime-airflow-ui) module.
+- Webinar: [A Deep Dive into the Airflow UI](https://www.astronomer.io/events/webinars/a-deep-dive-into-the-airflow-ui/).
+
+:::
+
 ## DAGs
 
 The **DAGs** view is the landing page when you sign in to Airflow. It shows a list of all your DAGs, the status of recent DAG runs and tasks, the time of the last DAG run, and basic metadata about the DAG like the owner and the schedule. To see the status of the DAGs update in real time, toggle **Auto-refresh**.
