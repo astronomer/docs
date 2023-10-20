@@ -412,7 +412,7 @@ You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NA
 Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users and Teams based on templates for access and permissions. It also provides better observability through your identity provider for when users and Teams are created or modified across your organization.
 
 :::info
-SCIM works because the IdP pushes updates about users and teams to Astronomer Software. This means your Astronomer Software platform must be connected to the internet to receive those updates. If you are running Astronomer Software without exposing it to the internet, there might be solutions for routing SCIM traffic depending on your combination of cloud provider and IdP. Please contact [Astronomer support](https://support.astronomer.io) for more information.
+SCIM works because the IdP pushes updates about users and teams to Astronomer Software. This means your Astronomer Software platform must be connected to the internet to receive those updates. If you are running Astronomer Software without exposing it to the internet, there might be solutions for routing SCIM traffic depending on your combination of cloud provider and IdP. Contact [Astronomer support](https://support.astronomer.io) for more information.
 :::
 
 <Tabs
@@ -424,39 +424,55 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
     ]}>
 <TabItem value="okta">
 
-This setup assumes that you have already created a web app for Astronomer Software in Okta. See [Okta](#okta).
+1. In Okta Admin dashboard, go to **Applications** > **Applications**.
 
-1. In your Astronomer integration's settings page on Okta, open the **General** tab.
+2. Click **Browse App catalog**
 
-2. Click **Edit**.
+3. Search for `SCIM 2.0`, then select the option that includes **Basic Auth**. The configuration page for the SCIM integration appears.
 
-3. In the **Provisioning** section, select **SCIM**.
+4. Click **Provisioning**, then click **Configure API integration**.
+5. Tick the **Enable API integration** checkbox, then configure the following values.
 
-4. Click **Save**.
-
-5. In your Astronomer integration's settings page, open the **Provisioning** tab.
-
-6. Configure the following values for your SCIM integration.
-
-    - **SCIM connector base URL**: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`
+    - **SCIM connector base URL**: `https://astro-software-host/v1/scim/v2/okta`
     - **Authentication mode**: Basic Auth
         - Username: `<your-provisioning-account-username>`
         - Password: `<your-provisioning-account-password>`
+    - **To App**: Enable **Provisioning to App** for **Create Users**, **Update User Attributes**, and **Deactivate Users**.
 
-7. Go to **Configure API Integration** and select the **Enable API Integration** checkbox.
+6. Click **General**, then click **Edit**. Give your application a name and configure any other required general settings. 
 
-8. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
+7. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
 
-9. On the Assignments tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
+8.  On the **Assignments** tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
+
+9. Follow the steps in [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets) to store your provisioning account credentials as a Kubernetes secret. Your secret configuration should look similar to the following:
+
+    ```yaml
+    # Required configuration for all secrets
+    kind: Secret
+    apiVersion: v1
+    metadata:
+         name: okta-provisioning-secret
+         labels:
+            release: {{ .Release.Name }}
+            chart: {{ .Chart.Name }}
+            heritage: {{ .Release.Service }}
+            component: {{ template "houston.backendSecret" . }}
+    type: Opaque
+    # Specify a key and value for the data you want to encrypt
+    data:
+        okta_provisioning_account_secret: {{ "<your-provisioning-account-username>:<your-provisioning-account-password>" | b64enc | quote }}
+    ```
 
 10. Add the following lines to your `config.yaml` file:
 
     ```yaml
     astronomer:
-      houston:
-        config:
-          okta:
-            scimAuthCode: <your-provisioning-account-username>:<your-provisioning-account-password>
+        houston:
+            secret:
+             - envName: "SCIM_AUTH_CODE_OKTA"
+               secretName: "okta-provisioning-secret"
+               secretKey: "okta_provisioning_account_secret"
     ```
 
 11. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
@@ -518,9 +534,9 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 You can prevent your identity provider passwords, authorization tokens, and security keys from being exposed as plain text by encrypting them in Kubernetes secrets.
 
-This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow).
+This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow), but can also be used to encrypt any secrets used in your Helm configuration. 
  
-1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
+1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). For example, the following configuration encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
 
     ```yaml
     # Required configuration for all secrets
