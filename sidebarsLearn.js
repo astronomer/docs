@@ -166,8 +166,8 @@ module.exports = {
               image: '/img/integrations/azure-data-factory.png'
           },
           items: [
+            'connections/azure-data-factory',
             'airflow-azure-data-factory-integration',
-            'connections/azure-data-factory'
           ],
         },
         'connections/bigquery',
@@ -181,8 +181,8 @@ module.exports = {
               image: '/img/integrations/databricks.png'
           },
           items: [
-            'airflow-databricks',
             'connections/databricks',
+            'airflow-databricks',
           ],
         },
         {
@@ -195,8 +195,8 @@ module.exports = {
               image: '/img/integrations/dbt.png'
           },
           items: [
-            'airflow-dbt-cloud',
             'connections/dbt-cloud',
+            'airflow-dbt-cloud',
           ],
         },
         'airflow-dbt',
@@ -218,8 +218,8 @@ module.exports = {
               image: '/img/integrations/redshift.png'
           },
           items: [
+            'connections/redshift',
             'airflow-redshift',
-            'connections/redshift'
           ],
         },
         'connections/postgres',
@@ -233,8 +233,9 @@ module.exports = {
               image: '/img/integrations/snowflake.png'
           },
           items: [
+            'connections/snowflake',
             'airflow-snowflake',
-            'connections/snowflake'
+            'airflow-snowpark',
           ],
         },
         'soda-data-quality',
