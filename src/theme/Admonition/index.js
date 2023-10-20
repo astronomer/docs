@@ -152,7 +152,7 @@ const AdmonitionConfigs = {
       <Translate
         id="theme.admonition.related"
         description="The default label used for the Related admonition (:::related)">
-        caution
+        related
       </Translate>
     ),
   },
