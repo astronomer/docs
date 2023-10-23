@@ -17,15 +17,17 @@ There are three ways to create a Deployment:
 - Programmatically, using [`astro deployment create`](cli/astro-deployment-create.md).
 - Programmatically, using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md#create-a-deployment-from-a-template-file).
 
-When you make your Deployment, you can choose 
+To create a Deployment, you must choose a cluster type to host the Deployment:
 
-**Use a Standard cluster**: This is the default and the quickest way to get an Airflow environment up and running on Astro. A standard cluster is a multi-tenant cluster managed by Astronomer where you can create Deployments with minimal configuration needed. Astro supports standard clusters on Amazon Web Services (AWS) and Google Cloud Platform (GCP). Support for Microsoft Azure is coming soon.
+- A **standard cluster** is the default cluster type and the quickest way to get an Airflow environment up and running on Astro. A standard cluster is a multi-tenant cluster managed by Astronomer where each Deployment exists in its own dedicated Kubernetes namespace. To run a Deployment in a standard cluster, you select a cloud provider and region when you create the Deployment. Then, Astro automatically creates your Deployment in an existing standard cluster based on your configuration.
 
-**Use a Dedicated cluster**: It is a single-tenant Kubernetes cluster dedicated to your team or organization. Choose this option if:
+- A **dedicated cluster** is a single-tenant Kubernetes cluster that's used exclusively by your team. Choose this option if:
 
-  - You need private networking support.
-  - You want to use a specific cloud provider or region that is not supported on standard clusters.
-  - You need to run Airflow environments in separate clusters for business or security reasons.
+    - You need private networking support.
+    - You want to use a specific cloud provider or region that is not supported on standard clusters.
+    - You need to run Airflow environments in separate clusters for business or security reasons.
+    
+    Note that due to expanded resource usage, dedicated clusters cost more than standard clusters. If no dedicated clusters are available to select, see [Create a Dedicated cluster](create-dedicated-cluster.md) to create a new one.
 
 After you create a Deployment, you can deploy DAGs to it using the Astro CLI on your local machine or a continuous integration/continuous delivery (CI/CD) tool. All DAGs and tasks on Astro are executed within a Deployment.
 
