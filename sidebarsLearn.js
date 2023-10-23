@@ -249,10 +249,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Use Cases',
+      label: 'Use cases',
       link: {
         type: 'generated-index',
-        title: 'Use Cases',
+        title: 'Use cases',
         description: 'Example use cases and implementations with Apache Airflow.'
       },
       items: [
