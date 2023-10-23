@@ -21,6 +21,13 @@ After you complete this tutorial, you'll be able to:
 - Export a DAG from the Astro Cloud IDE to GitHub.
 - Configure GitHub Secrets to deploy your DAG to Astro.
 
+:::tip Related Content
+
+- Astronomer Academy: [Astro: Cloud IDE](https://academy.astronomer.io/astro-runtime-cloud-ide) module.
+- Webinar: [Develop ML Pipelines with the Astro Cloud IDE](https://www.astronomer.io/events/webinars/develop-ml-pipelines-with-the-astro-cloud-ide/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.
@@ -33,13 +40,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/).
 - The Astro Cloud IDE. See [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide).
-
-:::tip Related Content
-
-- Astronomer Academy: [Astro: Cloud IDE](https://academy.astronomer.io/astro-runtime-cloud-ide) module.
-- Webinar: [Develop ML Pipelines with the Astro Cloud IDE](https://www.astronomer.io/events/webinars/develop-ml-pipelines-with-the-astro-cloud-ide/).
-
-:::
 
 ## Prerequisites
 

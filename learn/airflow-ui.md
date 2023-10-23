@@ -23,7 +23,6 @@ All images in this guide were taken from an [Astronomer Runtime](https://docs.as
 
 :::
 
-
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:

@@ -24,9 +24,10 @@ Airflow can interact with DuckDB in three key ways:
 
 In this tutorial we will cover the first two ways. To learn more about how to connect to DuckDB (and other data warehouses) with the Astro Python SDK, see [Write a DAG with the Astro Python SDK](astro-python-sdk.md).
 
-:::info
+:::tip Related Content
 
-If you are already familiar with DuckDB and Airflow, you can clone [Astronomer's DuckDB example repository](https://github.com/astronomer/airflow-duckdb-examples) and run it locally using the Astro CLI to explore different ways of using DuckDB with Airflow.
+- Webinar: [How to use DuckDB with Airflow](https://www.astronomer.io/events/webinars/how-to-use-duckdb-with-airflow/).
+- Example repository: [Astronomer's DuckDB example repository](https://github.com/astronomer/airflow-duckdb-examples).
 
 :::
 
@@ -42,13 +43,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow decorators. See [Introduction to Airflow decorators](airflow-decorators.md).
 - Airflow connections. See [Manage connections in Apache Airflow](connections.md).
-
-:::tip Related Content
-
-- Webinar: [How to use DuckDB with Airflow](https://www.astronomer.io/events/webinars/how-to-use-duckdb-with-airflow/).
-- Blog post: [Three ways to use Airflow with MotherDuck and DuckDB](https://www.astronomer.io/blog/three-ways-to-use-airflow-with-motherduck-and-duckdb/).
-
-:::
 
 ## Prerequisites
 

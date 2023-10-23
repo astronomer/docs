@@ -10,6 +10,12 @@ sidebar_custom_props: { icon: 'img/integrations/sagemaker.png' }
 
 This tutorial demonstrates how to orchestrate a full ML pipeline including creating, training, and testing a new SageMaker model. This use case is relevant if you want to automate the model training, testing, and deployment components of your ML pipeline.
 
+:::tip Related Content
+
+- Webinar: [Batch Inference with Airflow and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 60 minutes to complete.
@@ -22,12 +28,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
-
-:::tip Related Content
-
-- Webinar: [Batch Inference with Airflow and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).
-
-:::
 
 ## Prerequisites
 

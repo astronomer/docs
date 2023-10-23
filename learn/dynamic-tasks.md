@@ -18,6 +18,13 @@ Prior to Airflow 2.3, tasks could only be generated dynamically at the time that
 
 In this guide, you'll learn about dynamic task mapping and complete an example implementation for a common use case.
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping).
+- Webinar: [Dynamic Tasks in Airflow](https://www.astronomer.io/events/webinars/dynamic-tasks-in-airflow/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -25,13 +32,6 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow Operators. See [Operators 101](what-is-an-operator.md).
 - How to use Airflow decorators to define tasks. See [Introduction to Airflow Decorators](airflow-decorators.md).
 - XComs in Airflow. See [Passing Data Between Airflow Tasks](airflow-passing-data-between-tasks.md).
-
-:::tip Related Content
-
-- Astronomer Academy: [Airflow: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping).
-- Webinar: [Dynamic Tasks in Airflow](https://www.astronomer.io/events/webinars/dynamic-tasks-in-airflow/).
-
-:::
 
 ## Dynamic task concepts
 

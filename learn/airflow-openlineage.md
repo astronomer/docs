@@ -14,18 +14,18 @@ In this guide, you’ll learn about core data lineage concepts and understand ho
 
 Astro offers robust support for extracting and visualizing data lineage. To learn more, see [Data lineage on Astro](https://docs.astronomer.io/astro/data-lineage).
 
+:::tip Related Content
+
+- Webinar: [OpenLineage and Airflow: A Deeper Dive](https://www.astronomer.io/events/webinars/openlineage-and-airflow-deeper-dive/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, make sure you have an understanding of:
 
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-
-:::tip Related Content
-
-- Webinar: [OpenLineage and Airflow: A Deeper Dive](https://www.astronomer.io/events/webinars/openlineage-and-airflow-deeper-dive/).
-
-:::
 
 ## What is data lineage
 

@@ -14,18 +14,18 @@ Consider implementing systematic testing of your DAGs to prevent common issues. 
 
 :::
 
+:::tip Related Content
+
+- Webinar: [Debugging your Airflow DAGs](https://www.astronomer.io/events/webinars/debugging-your-airflow-dags/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
 
 - Basic Airflow concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
 - Basic knowledge of Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
-
-:::tip Related Content
-
-- Webinar: [Debugging your Airflow DAGs](https://www.astronomer.io/events/webinars/debugging-your-airflow-dags/).
-
-:::
 
 ## General Airflow debugging approach
 

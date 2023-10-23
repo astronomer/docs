@@ -20,14 +20,6 @@ Datasets can help resolve common issues. For example, consider a data engineerin
 
 In this guide, you'll learn about datasets in Airflow and how to use them to implement triggering of DAGs based on dataset updates. You'll also learn how datasets work with the Astro Python SDK.
 
-## Assumed knowledge
-
-To get the most out of this guide, you should have an existing knowledge of:
-
-- Airflow scheduling concepts. See [Scheduling and Timetables in Airflow](scheduling-in-airflow.md).
-- Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
-- The Astro Python SDK. See [Using the Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk).
-
 :::tip Related Content
 
 - Astronomer Academy: [Airflow: Datasets](https://academy.astronomer.io/astro-runtime-datasets) module.
@@ -35,6 +27,14 @@ To get the most out of this guide, you should have an existing knowledge of:
 - Use case: [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).
 
 :::
+
+## Assumed knowledge
+
+To get the most out of this guide, you should have an existing knowledge of:
+
+- Airflow scheduling concepts. See [Scheduling and Timetables in Airflow](scheduling-in-airflow.md).
+- Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
+- The Astro Python SDK. See [Using the Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk).
 
 ## Why use datasets?
 

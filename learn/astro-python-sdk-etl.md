@@ -24,16 +24,16 @@ This guide is based on the latest version of the Astro SDK. If you're using an e
 
 :::
 
-## Assumed knowledge
-
-To get the most out of this guide, you should have an understanding of Airflow decorators. See [Introduction to Airflow Decorators guide](airflow-decorators.md).
-
 :::tip Related Content
 
 - Astronomer Academy: [Astro: SDK](https://academy.astronomer.io/astro-runtime-sdk) module.
 - Webinar: [Simplified DAG authoring with the Astro SDK](https://www.astronomer.io/events/webinars/simplified-dag-authoring-with-the-astro-sdk/).
 
 :::
+
+## Assumed knowledge
+
+To get the most out of this guide, you should have an understanding of Airflow decorators. See [Introduction to Airflow Decorators guide](airflow-decorators.md).
 
 ## Python SDK functions
 
