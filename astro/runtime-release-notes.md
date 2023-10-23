@@ -24,6 +24,22 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 9.4.0
+
+- Release date: October 23, 2023
+- Airflow version: 2.7.2
+
+### Additional improvements
+
+- Upgraded `astronomer-providers-logging` to `1.4.1`. This upgrade adds the ability to export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). 
+- Upgraded `google-cloud-aiplatform` to 1.35.0. 
+- Upgraded [Shapely](https://shapely.readthedocs.io/en/stable/manual.html) to 2.0.2.
+- Added a link for Astronomer Academy to the **Astronomer** menu in the Airflow UI.
+
+### Bug fixes 
+
+- Fixed an issue where the Airflow UI showed an incorrect count for the total number of DAGs.
+
 ## Astro Runtime 9.3.0
 
 - Release date: October 19, 2023
