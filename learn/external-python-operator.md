@@ -17,6 +17,13 @@ In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://a
 
 Snowpark requires Python 3.8, while the [Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator can run your Snowpark query in a Python 3.8 virtual environment, allowing you to use a different Python version for your task than in the Airflow environment. You can use these same general steps for any use case for running a task in a reusable Python virtual environment.
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: The ExternalPythonOperator](https://academy.astronomer.io/astro-runtime-the-externalpythonoperator) module.
+- Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately one hour to complete.
@@ -27,13 +34,6 @@ To get the most out of this tutorial, you should be familiar with:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Python virtual environments. See [Python Virtual Environments: A Primer](https://realpython.com/python-virtual-environments-a-primer/).
-
-:::tip Related Content
-
-- Astronomer Academy: [Airflow: The ExternalPythonOperator](https://academy.astronomer.io/astro-runtime-the-externalpythonoperator) module.
-- Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
-
-:::
 
 ## Prerequisites
 

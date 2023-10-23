@@ -14,6 +14,12 @@ import TabItem from '@theme/TabItem';
 
 Effectively testing DAGs requires an understanding of their structure and their relationship to other code and data in your environment. In this guide, you'll learn about various types of DAG validation testing, unit testing, and where to find further information on data quality checks.
 
+:::tip Related Content
+
+- Webinar: [How to easily test your Airflow DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -22,12 +28,6 @@ To get the most out of this guide, you should have an understanding of:
 - At least one Python test runner. This guide mostly uses [`pytest`](https://docs.pytest.org/en/stable/index.html), but you can use others including [`nose2`](https://docs.nose2.io/en/latest/getting_started.html) and [`unittest`](https://docs.python.org/3/library/unittest.html).
 - CI/CD for Python scripts. See [Continuous Integration with Python: An Introduction](https://realpython.com/python-continuous-integration/).
 - Basic Airflow and [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) concepts. See [Get started with Airflow](get-started-with-airflow.md).
-
-:::tip Related Content
-
-- Webinar: [How to easily test your Airflow DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
-
-:::
 
 ## Write DAG validation tests
 

@@ -19,12 +19,6 @@ This guide offers an introduction to Apache Airflow and its core concepts. You'l
 - When you should use Airflow.
 - Core Airflow concepts.
 
-## Assumed knowledge
-
-To get the most out of this guide, you should have an understanding of:
-
-- Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
-
 :::tip Related Content
 
 - Hands-on tutorial: [Get started with Apache Airflow](get-started-with-airflow.md).
@@ -32,6 +26,12 @@ To get the most out of this guide, you should have an understanding of:
 - Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
 
 :::
+
+## Assumed knowledge
+
+To get the most out of this guide, you should have an understanding of:
+
+- Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 
 ## History
 

@@ -9,8 +9,6 @@ import CodeBlock from '@theme/CodeBlock';
 import example_dag_sql_check_operators from '!!raw-loader!../code-samples/dags/data-quality/example_dag_sql_check_operators.py';
 import gx_example_dag from '!!raw-loader!../code-samples/dags/data-quality/gx_example_dag.py';
 
-## Overview
-
 Checking the quality of your data is essential to getting actionable insights from your data pipelines. Airflow offers many ways to orchestrate data quality checks directly from your DAGs.
 
 This guide covers:
@@ -22,6 +20,13 @@ This guide covers:
 - An in-depth look at two commonly used data quality check tools: [SQL check operators](#sql-check-operators) and [Great Expectations](#great-expectations).
 - An example comparing implementations of data quality checks using each of these tools.
 
+:::tip Related Content
+
+- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have knowledge of:
@@ -30,13 +35,6 @@ To get the most out of this guide, you should have knowledge of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
 - Relational databases. See [Relational database on Wikipedia](https://en.wikipedia.org/wiki/Relational_database).
-
-:::tip Related Content
-
-- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
-- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
-
-:::
 
 ## Data quality essentials
 

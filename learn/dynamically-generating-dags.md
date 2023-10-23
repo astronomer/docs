@@ -34,17 +34,17 @@ As of Airflow 2.3, you can use [dynamic task mapping](dynamic-tasks.md) to write
 
 :::
 
-## Assumed knowledge
-
-To get the most out of this guide, you should have an understanding of:
-
-- Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
-
 :::tip Related Content
 
 - Astronomer Academy: [Airflow: Dynamic DAGs](https://academy.astronomer.io/astro-runtime-dynamic-dags).
 
 :::
+
+## Assumed knowledge
+
+To get the most out of this guide, you should have an understanding of:
+
+- Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 
 ## Single-file methods
 

@@ -38,13 +38,14 @@ DbtTaskGroup(
 )
 ```
 
-:::info
+:::tip Related Content
 
-If you are already familiar with Airflow and dbt Core and just want to get a project running, clone [this Cosmos use case example repository](https://github.com/astronomer/cosmos-use-case) and run it locally using the Astro CLI.
-
-:::
+- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
+- Use case: [ELT with Airflow and dbt Core](use-case-airflow-dbt.md) including a a ready-to-use [example Cosmos project repository](https://github.com/astronomer/cosmos-use-case).
 
 For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
+
+:::
 
 ## Why use Airflow with dbt Core?
 
@@ -72,14 +73,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow task groups. See [Airflow task groups](task-groups.md).
 - Airflow connections. See [Manage connections in Apache Airflow](connections.md).
-
-:::tip Related Content
-
-- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
-- Blog post: [Introducing Cosmos 1.0: the best way to run dbt Core in Airflow](https://www.astronomer.io/blog/introducing-cosmos-1-0/).
-- Use case: [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
-
-:::
 
 ## Prerequisites
 

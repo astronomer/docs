@@ -13,6 +13,13 @@ One of the fundamental features of Apache Airflow is the ability to schedule job
 
 In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG with a focus on timetables. All code used in this guide is available in the [airflow-scheduling-tutorial repository](https://github.com/astronomer/airflow-scheduling-tutorial).
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow: DAG Scheduling](https://academy.astronomer.io/astro-runtime-scheduling) module.
+- Webinar: [Scheduling in Airflow: A Comprehensive Introduction](https://www.astronomer.io/events/webinars/scheduling-in-airflow-comprehensive-intro/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an existing knowledge of:
@@ -20,13 +27,6 @@ To get the most out of this guide, you should have an existing knowledge of:
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Configuring Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 - Date and time modules in Python3. See the [Python documentation on the `datetime` package](https://docs.python.org/3/library/datetime.html).
-
-:::tip Related Content
-
-- Astronomer Academy: [Airflow: DAG Scheduling](https://academy.astronomer.io/astro-runtime-scheduling) module.
-- Webinar: [Scheduling in Airflow: A Comprehensive Introduction](https://www.astronomer.io/events/webinars/scheduling-in-airflow-comprehensive-intro/).
-
-:::
 
 ## Scheduling concepts
 

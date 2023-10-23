@@ -44,9 +44,10 @@ with task_group:
 
 This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you don't use Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
 
-:::info 
+:::tip Related Content
 
-If you are already familiar with Airflow and Databricks and just want to get a project running, clone the [example project repository](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md) and run it locally using the Astro CLI.
+- Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
+- Use case: [ELT with Airflow and Databricks](use-case-airflow-databricks.md) including a ready-to-use [example project repository](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md).
 
 :::
 
@@ -73,14 +74,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
-
-:::tip Related Content
-
-- Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
-- Blog post: [Comparing Data Orchestration: Databricks Workflows vs. Apache Airflow, Part 1](https://www.astronomer.io/blog/comparing-data-orchestration-databricks-workflows-vs-apache-airflow-part-1/).
-- Use case: [ELT with Airflow and Databricks](use-case-airflow-databricks.md).
-
-:::
 
 ## Prerequisites
 

@@ -14,6 +14,12 @@ Using Airflow with Fivetran allows you to schedule your Fivetran syncs based on 
 
 In this tutorial, you'll learn how to install and use the Airflow Fivetran provider to submit and monitor Fivetran syncs.
 
+:::tip Related Content
+
+- Webinar: [Hands-on Workshop: automate your data ingestion with Fivetran and Astronomer](https://www.astronomer.io/events/webinars/workshop-automate-data-ingestion-fivetran-astronomer/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.
@@ -25,12 +31,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - The basics of Fivetran. See Fivetran's [Getting started](https://fivetran.com/docs/getting-started) documentation.
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-
-:::tip Related Content
-
-- Webinar: [Hands-on Workshop: automate your data ingestion with Fivetran and Astronomer](https://www.astronomer.io/events/webinars/workshop-automate-data-ingestion-fivetran-astronomer/).
-
-:::
 
 ## Prerequisites
 

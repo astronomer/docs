@@ -17,6 +17,13 @@ After you complete this tutorial, you'll be able to:
 - Navigate the Airflow UI.
 - Use code from the Astronomer Registry.
 
+:::tip Related Content
+
+- Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.
@@ -27,13 +34,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
-
-:::tip Related Content
-
-- Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
-- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
-
-:::
 
 ## Prerequisites
 

@@ -29,18 +29,18 @@ In this guide, you'll learn how to create and use task groups in your DAGs. You 
 
 ![Task group intro gif](/img/guides/task-groups_intro_task_group_gif.gif)
 
-## Assumed knowledge
-
-To get the most out of this guide, you should have an understanding of:
-
-- Airflow operators. See [Operators 101](what-is-an-operator.md).
-
 :::tip Related Content
 
 - Astronomer Academy: [Airflow: Task Groups](https://academy.astronomer.io/astro-runtime-task-groups) module.
 - Webinar: [How to expertly organize your DAGs with task groups](https://www.astronomer.io/events/webinars/how-to-expertly-organize-your-dags-with-task-groups/).
 
 :::
+
+## Assumed knowledge
+
+To get the most out of this guide, you should have an understanding of:
+
+- Airflow operators. See [Operators 101](what-is-an-operator.md).
 
 ## When to use task groups
 

@@ -19,6 +19,12 @@ The provider used in this tutorial is currently in beta and subject to change. A
 
 :::
 
+:::tip Related Content
+
+- Webinar: [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/).
+
+:::
+
 ## Why use Airflow with Weaviate?
 
 Weaviate allows you to store objects alongside their vector embeddings and to query these objects based on their similarity. Vector embeddings are key components of many modern machine learning models such as [LLMs](https://en.wikipedia.org/wiki/Large_language_model) or [ResNet](https://arxiv.org/abs/1512.03385).
@@ -42,12 +48,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Airflow decorators. [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
-
-:::tip Related Content
-
-- Webinar: [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/).
-
-:::
 
 ## Prerequisites
 
