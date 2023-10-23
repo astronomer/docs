@@ -23,8 +23,14 @@ module.exports = {
       label: "Get started",
       items: [
         "trial",
-        "create-first-DAG",
-        'log-in-to-astro', 
+        {
+          type: "category",
+          label: "Run your first DAG",
+          link: { type: 'doc', id: 'run-first-dag' },
+          items: ["first-dag-github-actions", "first-dag-cli"],
+        
+        },
+        "log-in-to-astro", 
         {
           type: "category",
           label: "Migrate to Astro",
@@ -96,7 +102,18 @@ module.exports = {
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
-        "secrets-backend",
+        {
+          type: "category",
+          label: "Secrets backend",
+          link: { type: 'doc', id: 'secrets-backend' },
+          items: ["secrets-backend", 
+          "secrets-backend/aws-secretsmanager",
+          "secrets-backend/aws-paramstore",
+          "secrets-backend/azure-key-vault" ,
+          "secrets-backend/hashicorp-vault", 
+          "secrets-backend/gcp-secretsmanager", 
+          ],
+        },
         "manage-dags", 
       ],
     },
@@ -179,7 +196,11 @@ module.exports = {
         {
           type: "category",
           label: "Deployments",
-          items: ["deployment-api-tokens", "authorize-deployments-to-your-cloud", "transfer-a-deployment"],
+          items: [
+          "deployment-api-tokens",  
+          "authorize-deployments-to-your-cloud", 
+          "transfer-a-deployment",
+          ],
         },
         {
           type: "category",

@@ -38,11 +38,11 @@ If you prefer to work with the Astro CLI, you can create and update environment 
 
 3. Click **Edit Variables**.
 
-4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
+4. Enter an environment variable key and value. 
+  - For sensitive credentials that should be treated with an additional layer of security, enable the **Secret** toggle. This will permanently hide the variable's value from all users in your Workspace.
+  - Each key must be unique.
 
-5. Click **Add**.
-
-6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
+5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
 ### Edit existing values
 
@@ -54,28 +54,20 @@ After you set an environment variable key, only the environment variable value c
 
 3. Click **Edit Variables**.
 
-4. Click **Edit value** next to the value you want to edit.
+4. Modify the value of the variable you wish to edit.
 
-    ![Edit value location](/img/docs/variable-pencil.png)
+    ![Edit value location](/img/docs/variables-edit.png)
 
-5. Modify the variable's value, then click **Done editing**.
-
-    ![Done editing location](/img/docs/variable-checkmark.png)
-
-6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
+5. Click **Update Environment Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
 
 ### How environment variables are stored on Astro
 
-Non-secret environment variables set in the Cloud UI are stored in a database that is managed by Astronomer and hosted in the Astro control plane. When you configure a secret environment variable in the Cloud UI, the following methodology is used:
+Non-secret environment variables set in the Cloud UI are stored in a Hashicorp Vault secrets manager hosted in Astro control plane. These environment variables are available to your Astro Deployment’s Kubernetes namespace as a Kubernetes secret.
 
-- Astro generates a manifest that defines a Kubernetes secret, named `env-secrets`, that contains your variable's key and value.
-- Astro applies this manifest to your Deployment's namespace.
-- After the manifest is applied, the key and value of your environment variable are stored in a managed [etcd cluster](https://etcd.io/) at rest within Astro.
-
-This process occurs every time you update the environment variable's key or value. To use a secret environment variable value in a task running on the Kubernetes executor or the KubernetesPodOperator, you need to mount the value from the Astro kubernetes secret to your Kubernetes Pod. See:
-
-- [Mount secret environment variables to worker pods](kubernetes-executor.md#mount-secret-environment-variables-to-worker-pods)
-- [Use secret environment variables with the KubernetesPodOperator](kubernetespodoperator.md#use-secret-environment-variables-with-the-kubernetespodoperator)
+To use these environment variables in an Astro Deployment:
+- In a regular PythonOperator or Python code, you can use `os.environ` method.
+- If you can’t use Python or are using a pre-defined code that expects specific keys for environment variables, you need to mount the secret environment variables using BaseOperator’s `executor_config` by providing a `pod_override`. See [Use secret environment variables in worker Pods](kubernetes-executor.md#use-secret-environment-variables-in-worker-pods).
+- If you need to use these secret environment variables in a KubernetesPodOperator, see [Use secret environment variables with KubernetesPodOperator](kubernetespodoperator.md#use-secret-environment-variables-with-the-kubernetespodoperator).
 
 :::caution
 
@@ -182,4 +174,3 @@ For example, to set `AIRFLOW__CORE__PARALLELISM` in your Deployment, you would c
 - **Value**: `64`
 
 See the [ Airflow Configurations Reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) for a list of all possible configurations.
-

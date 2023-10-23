@@ -12,7 +12,7 @@ On Astro, you can configure Celery executor in the following ways:
 
 You can set these configurations per [worker queue](configure-worker-queues.md). With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
-The following document explains basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Create a worker queue](configure-worker-queues.md#create-a-worker-queue).
+The following document explains basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Create a worker queue](configure-worker-queues.md#create-or-edit-a-worker-queue).
 
 :::tip
 

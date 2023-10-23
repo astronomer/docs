@@ -92,11 +92,18 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your Deployment. After the task finishes, the Pod terminates gracefully.
 
-## Mount secret environment variables to worker Pods
+:::caution Astro Hosted
 
-<!-- Same content in other products -->
+For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 
-Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
+:::
+
+
+## Use secret environment variables in worker Pods
+
+In Astro, [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. These environment variables are already available to your worker Pods and can be accessed in your tasks just like any other environment variable. For example, you can use `os.environ[<your-secret-env-var>]` or `os.getenv(<your-secret-env-var>, None)` in your Python code. 
+
+However, if you can’t use Python or are using a pre-defined code that expects specific keys for environment variables, you need to mount the secret environment variables by pulling the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
 
 1. Add the following import to your DAG file:
    

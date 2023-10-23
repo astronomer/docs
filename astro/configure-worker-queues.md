@@ -67,7 +67,7 @@ Each Deployment requires a worker queue named `default` to run tasks. Tasks that
 
 You can change all settings of the default worker queue except for its name.
 
-## Create a worker queue
+## Create or edit a worker queue
 
 :::cli
 
@@ -77,11 +77,17 @@ If you prefer, you can also run the `astro deployment worker-queue create` comma
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Worker Queues** tab and then click **Worker Queue**.
+2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-3. Configure the worker queue’s settings. You can't change the name of a worker queue after you create it.
+    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-4. Click **Create Queue**.
+3. In the **Execution** section, you can create new queues and  update existing queues:
+
+    * **Create a new queue**: Click **Add Queue** to create a new worker queue, and then configure its related attributes.
+    *  **Existing queues**: Edit the **Worker Type**, **Concurrency**, or **Min # Workers / Max # Workers** of an existing queue. Note that you can't change the name of a worker queue after you create it.
+    
+
+6. When you're done editing worker queues, click **Update Deployment** to save your changes.
 
 :::tip
 
@@ -96,16 +102,14 @@ By default, all tasks run in the default worker queue. To run tasks on a differe
 ### Step 1: Copy the name of the worker queue
 
 1. In the Cloud UI, select a Workspace and select a Deployment.
-
 2. Click the **Worker Queues** tab.
-
 3. Copy the name of the worker queue name you want to assign a task to.
 
 ### Step 2: Assign the task in your DAG code
 
 In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
 
-Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
+Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](lhttps://docs.astronomer.io/learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
 
 <Tabs
     defaultValue="classicoperator"
@@ -163,14 +167,22 @@ You can update worker queue configurations at any time. The worker queue name ca
 If you need to change the worker type of an existing worker queue, Astronomer recommends making the change at a time when it will not affect production pipelines. After you've changed a worker type, Astronomer recommends waiting a minimum of five minutes before pushing new code to your Deployment.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-2. Click the **Worker Queues** tab.
+    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. Click **Edit** for the worker queue that you want to update.
-
-4. Update the worker queue settings, and then click **Update Queue**.
+3. Expand the **Execution** section if it is not already expanded.
+4. Update the worker queue settings, and then click **Update Deployment**.
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
+:::tip Update Airflow Pool
+
+If you see tasks getting stuck, it might be because the worker queue configuration doesn't align with the Airflow Pools, a component that allows you to control execution parallelism. Make sure to update your Airflow Pools to match the changes in potential maximum task parallelism caused by changes to the worker queue.
+
+For more information on limited parallelism, see [Airflow Pools](https://docs.astronomer.io/learn/airflow-pools).
+
+:::
 
 ## Delete a worker queue
 
@@ -181,9 +193,10 @@ If you prefer, you can also run the `astro deployment worker-queue delete` comma
 All scheduled tasks that are assigned to a worker queue after the worker queue is deleted remain in a `queued` state indefinitely and won't execute. To avoid stalled task runs, ensure that you reassign all tasks from a worker queue before deleting it. You can either remove the worker queue argument or assign the task to a different queue.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-2. Click the **Worker Queues** tab.
+    ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. Click **Delete** for the worker queue that you want to delete.
+3. Expand the **Execution** section if it is not already expanded.
 
-4. Enter `Delete <worker-queue-name>` and then click **Yes, Continue**.
+4. Click **Remove queue** to delete the worker queue, and then click **Update Deployment**.

@@ -21,11 +21,51 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 9.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 9.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.19.2 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.19.3 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## October 17, 2023
+
+### Additional improvements
+
+- You can now view deploy history for both Hosted and Hybrid Astro Deployments in the Cloud UI. For more information, see [View deploy history](https://docs.astronomer.io/astro/deploy-history).
+
+### Bug fixes
+
+- Modified behavior for Astro Hosted so that KubernetesExecutor and KubernetesPodOperator pods running in-cluster have equivalent resource requests and limits. If you do not configure them to have equivalent resource requests and limits, Astro modifies them to the become the limits. Previously, the DAG deploy would fail if `resources` did not equal `limits`.
+
+## October 10, 2023
+
+### Deployment API tokens
+
+Deployment API tokens are now generally available and replace Deployment API keys as the most secure and customizable way to programmatically update Deployments. This includes using them to [deploy code](https://docs.astronomer.io/astro/deploy-code) and update [environment variables](https://docs.astronomer.io/astro/environment-variables).
+
+See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
+
+:::caution
+
+Deployment API tokens are a direct replacement for Deployment API keys, which are now supported only on a limited basis on Astro.
+
+After October 31, 2023, you will not be able to create new API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens.
+
+:::
+
+### New Edit Deployments in the Cloud UI
+
+Editing Deployments in the Cloud UI has a new, consolidated flow. All of the configuration options are now editable in a single form, similar to Deployment creation, instead of spread across multiple forms. See [Deployment Settings](https://docs.astronomer.io/astro/deployment-settings) for a detailed description of how to create, update, and configure your Deployment options.
+
+## October 3, 2023
+
+### Additional Improvements
+
+- Added a **DAG Success** alert so you can now set up an alert for successful completion events. See how to set up [Astro alerts](https://docs.astronomer.io/astro/alerts). 
+
+### Bug Fixes
+
+- Fixed a problem in the Cloud UI where a warning about Deployment Health was displayed when a Workspace had zero Deployments.
 
 ## September 26, 2023
 

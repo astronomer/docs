@@ -31,7 +31,7 @@ To get the most out of this tutorial, you should be familiar with:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://signup.snowflake.com/) for 30 days. 
+- A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://trial.snowflake.com/?owner=SPN-PID-365384) for 30 days. 
 
 ## Step 1: Set up your data stores
 

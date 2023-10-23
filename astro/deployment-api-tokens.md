@@ -5,12 +5,6 @@ id: deployment-api-tokens
 description: Use Deployment API tokens to automate code deploys and configuration changes to a Deployment.
 ---
 
-:::caution
-
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
-
-:::
-
 A Deployment API token is a credential that you can use to programmatically access a specific Deployment. They are a direct replacement for [Deployment API keys](api-keys.md), which will soon be deprecated. Using a Deployment API token, you can:
 
 - [Push code](deploy-code.md) to a Deployment.
@@ -22,7 +16,7 @@ Use this document to learn how to create and manage API tokens. To use your API 
 
 ## Deployment API token permissions
 
-Unlike Workspace API tokens and Organization API tokens, Deployment API tokens are are not scoped to a specific [user role](user-permissions.md). Generally speaking, Deployment API tokens have the same permissions as the Workspace Operator role, but only for Deployment-level operations. For example, an API token can create a Deployment [environment variable](environment-variables.md) but, unlike a Workspace Operator, it can't create an [Astro alert](alerts.md) because alerts apply to the whole Workspace.
+Unlike Workspace API tokens and Organization API tokens, Deployment API tokens are not scoped to a specific [user role](user-permissions.md). Deployment API tokens have the same permissions as the [Workspace Operator](user-permissions.md#workspace-roles) role, but only for Deployment-level operations. For example, an API token can create a Deployment [environment variable](environment-variables.md) but, unlike a Workspace Operator, it can't create an [Astro alert](alerts.md) because alerts apply to the whole Workspace.
 
 ## Create a Deployment API token
 

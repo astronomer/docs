@@ -1,5 +1,5 @@
 from airflow.decorators import dag
-from airflow.contrib.operators.snowflake_operator import SnowflakeOperator
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from pendulum import datetime, duration
 
 default_args = {
@@ -21,8 +21,8 @@ default_args = {
     catchup=False,
 )
 def parameterized_query():
-    opr_param_query = SnowflakeOperator(
-        task_id="param_query", snowflake_conn_id="snowflake", sql="param-query.sql"
+    opr_param_query = SQLExecuteQueryOperator(
+        task_id="param_query", conn_id="snowflake", sql="param-query.sql"
     )
 
     opr_param_query
