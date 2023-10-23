@@ -2,7 +2,7 @@
 title: "Microsoft Teams notifications"
 description: "Configure notifications in Microsoft teams for DAG runs and tasks using Airflow callbacks."
 id: example-ms-teams-callback
-sidebar_label: "Teams notifications"
+sidebar_label: "Send notifications to Teams"
 sidebar_custom_props: { icon: 'img/examples/ms_teams_logo.png' }
 ---
 
