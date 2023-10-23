@@ -20,7 +20,7 @@ In this guide, you'll learn about dynamic task mapping and complete an example i
 
 :::tip Related Content
 
-- Astronomer Academy: [Airflow: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping).
+- Astronomer Academy: [Airflow: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping) module.
 - Webinar: [Dynamic Tasks in Airflow](https://www.astronomer.io/events/webinars/dynamic-tasks-in-airflow/).
 
 :::
