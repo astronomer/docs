@@ -16,7 +16,6 @@ This tutorial shows how to use the [`GreatExpectationsOperator`](https://registr
 :::tip Related Content
 
 - Webinar: [How to Improve Data Quality with Airflow's Great Expectations Operator](https://www.astronomer.io/events/webinars/how-to-improve-data-quality-with-airflows-great-expectations-operator/).
-- Blog post: [Get Improved Data Quality Checks in Airflow with the Updated Great Expectations Operator](https://www.astronomer.io/blog/improved-data-quality-checks-in-airflow-with-great-expectations-operator/).
 
 :::
 
