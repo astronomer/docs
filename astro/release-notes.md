@@ -27,6 +27,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## October 24, 2023
+
+### Bug fixes
+
+- Fixed an issue where Deployment API tokens weren't deleted after the Deployment was deleted.
+
 ## October 17, 2023
 
 ### Additional improvements
