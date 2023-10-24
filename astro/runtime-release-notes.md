@@ -31,7 +31,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers-logging` to `1.4.1`. This upgrade adds the ability to export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). 
+- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/).
 - Upgraded `google-cloud-aiplatform` to 1.35.0. 
 - Upgraded [Shapely](https://shapely.readthedocs.io/en/stable/manual.html) to 2.0.2.
 - Added a link for Astronomer Academy to the **Astronomer** menu in the Airflow UI.
@@ -39,6 +39,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 ### Bug fixes 
 
 - Fixed an issue where the Airflow UI showed an incorrect count for the total number of DAGs.
+- Fixed an issue on Astro when exporting Airflow task logs to Datadog, which can result in workers not shutting down properly after new deployments or scale down events.
 
 ## Astro Runtime 9.3.0
 
@@ -69,7 +70,7 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 ### Additional Improvements
 
-- Upgraded `astronomer-providers-logging` to 1.3.0. This upgrade added the ability to create custom tags for exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
+- On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
 
 ## Astro Runtime 9.1.0
 
