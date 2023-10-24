@@ -20,7 +20,7 @@ This guide covers:
 - An in-depth look at two commonly used data quality check tools: [SQL check operators](#sql-check-operators) and [Great Expectations](#great-expectations).
 - An example comparing implementations of data quality checks using each of these tools.
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

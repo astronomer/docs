@@ -10,7 +10,7 @@ sidebar_custom_props: { icon: 'img/integrations/sagemaker.png' }
 
 This tutorial demonstrates how to orchestrate a full ML pipeline including creating, training, and testing a new SageMaker model. This use case is relevant if you want to automate the model training, testing, and deployment components of your ML pipeline.
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

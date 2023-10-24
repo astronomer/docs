@@ -24,7 +24,7 @@ This guide is based on the latest version of the Astro SDK. If you're using an e
 
 :::
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

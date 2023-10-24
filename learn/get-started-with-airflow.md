@@ -17,7 +17,7 @@ After you complete this tutorial, you'll be able to:
 - Navigate the Airflow UI.
 - Use code from the Astronomer Registry.
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

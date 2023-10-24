@@ -34,7 +34,7 @@ As of Airflow 2.3, you can use [dynamic task mapping](dynamic-tasks.md) to write
 
 :::
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

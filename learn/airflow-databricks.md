@@ -44,7 +44,7 @@ with task_group:
 
 This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you don't use Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

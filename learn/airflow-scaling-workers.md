@@ -24,7 +24,7 @@ In this guide, you'll learn about the key parameters that you can use to modify 
 
 This guide references the parameters available in Airflow version 2.0 and later. If you're using an earlier version of Airflow, some of the parameter names might be different.
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

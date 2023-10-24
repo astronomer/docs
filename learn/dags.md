@@ -22,7 +22,7 @@ In Airflow, data pipelines are defined in Python code as directed acyclic graphs
 
 In this guide, you'll learn DAG basics and about DAG parameters and how to define a DAG in Python.
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

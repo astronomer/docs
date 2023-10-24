@@ -14,7 +14,7 @@ Consider implementing systematic testing of your DAGs to prevent common issues. 
 
 :::
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 

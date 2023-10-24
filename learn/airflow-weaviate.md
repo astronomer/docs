@@ -19,7 +19,7 @@ The provider used in this tutorial is currently in beta and subject to change. A
 
 :::
 
-:::tip Related Content
+:::tip Related content
 
 There are multiple resources for learning about this topic. See also:
 
