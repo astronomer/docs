@@ -18,6 +18,8 @@ In this guide, you'll learn how you can use `@task.branch` (BranchPythonOperator
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Airflow: Branching](https://academy.astronomer.io/astro-runtime-branching) module.
 
 :::

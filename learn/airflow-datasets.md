@@ -22,6 +22,8 @@ In this guide, you'll learn about datasets in Airflow and how to use them to imp
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Airflow: Datasets](https://academy.astronomer.io/astro-runtime-datasets) module.
 - Webinar: [Data Driven Scheduling](https://www.astronomer.io/events/webinars/data-driven-scheduling/).
 - Use case: [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).

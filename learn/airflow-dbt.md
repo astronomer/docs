@@ -40,6 +40,8 @@ DbtTaskGroup(
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
 - Use case: [ELT with Airflow and dbt Core](use-case-airflow-dbt.md) including a a ready-to-use [example Cosmos project repository](https://github.com/astronomer/cosmos-use-case).
 

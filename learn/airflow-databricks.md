@@ -46,6 +46,8 @@ This tutorial shows how to use the Astro Databricks provider to run two Databric
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
 - Use case: [ELT with Airflow and Databricks](use-case-airflow-databricks.md) including a ready-to-use [example project repository](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md).
 

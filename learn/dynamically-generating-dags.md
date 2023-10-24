@@ -36,6 +36,8 @@ As of Airflow 2.3, you can use [dynamic task mapping](dynamic-tasks.md) to write
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Airflow: Dynamic DAGs](https://academy.astronomer.io/astro-runtime-dynamic-dags).
 
 :::

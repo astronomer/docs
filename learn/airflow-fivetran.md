@@ -16,6 +16,8 @@ In this tutorial, you'll learn how to install and use the Airflow Fivetran provi
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [Hands-on Workshop: automate your data ingestion with Fivetran and Astronomer](https://www.astronomer.io/events/webinars/workshop-automate-data-ingestion-fivetran-astronomer/).
 
 :::

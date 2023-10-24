@@ -23,6 +23,8 @@ After you complete this tutorial, you'll be able to:
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Astro: Cloud IDE](https://academy.astronomer.io/astro-runtime-cloud-ide) module.
 - Webinar: [Develop ML Pipelines with the Astro Cloud IDE](https://www.astronomer.io/events/webinars/develop-ml-pipelines-with-the-astro-cloud-ide/).
 

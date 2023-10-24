@@ -19,6 +19,8 @@ After you complete this tutorial, you'll be able to:
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
 - Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
 

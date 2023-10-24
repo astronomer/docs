@@ -20,6 +20,8 @@ In this guide, you'll learn about the benefits of decorators and the decorators 
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Airflow: Taskflow API](https://academy.astronomer.io/astro-runtime-taskflow) module.
 - Webinar: [Writing Functional DAGs with Decorators](https://www.astronomer.io/events/webinars/writing-functional-dags-with-decorators/).
 

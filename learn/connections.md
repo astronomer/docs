@@ -23,6 +23,8 @@ In this guide you'll:
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Airflow: Connections 101](https://academy.astronomer.io/connections-101) module.
 
 :::

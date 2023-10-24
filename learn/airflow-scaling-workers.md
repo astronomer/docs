@@ -26,6 +26,8 @@ This guide references the parameters available in Airflow version 2.0 and later.
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [Scaling Out Airflow](https://www.astronomer.io/events/webinars/scaling-out-airflow/).
 
 :::

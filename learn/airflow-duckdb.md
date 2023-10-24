@@ -26,6 +26,8 @@ In this tutorial we will cover the first two ways. To learn more about how to co
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [How to use DuckDB with Airflow](https://www.astronomer.io/events/webinars/how-to-use-duckdb-with-airflow/).
 - Example repository: [Astronomer's DuckDB example repository](https://github.com/astronomer/airflow-duckdb-examples).
 

@@ -27,6 +27,8 @@ In this guide, you'll learn the basics of Airflow notifications and how to set u
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [How to monitor your pipelines with Airflow and Astro alerts](https://www.astronomer.io/events/webinars/how-to-monitor-your-pipelines-with-airflow-and-astro-alerts/).
 
 :::

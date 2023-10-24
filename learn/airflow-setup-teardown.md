@@ -19,6 +19,8 @@ Starting in Airflow 2.7, you can use a special type of task to create and delete
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [What’s New in Airflow 2.7](https://www.astronomer.io/events/webinars/whats-new-in-airflow-2-7/).
 - Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
 - Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).

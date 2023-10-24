@@ -16,6 +16,8 @@ Consider implementing systematic testing of your DAGs to prevent common issues. 
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [Debugging your Airflow DAGs](https://www.astronomer.io/events/webinars/debugging-your-airflow-dags/).
 
 :::

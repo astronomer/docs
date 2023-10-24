@@ -18,6 +18,8 @@ This concept guide covers how to create Airflow variables and access them progra
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Astronomer Academy: [Airflow: Variables 101](https://academy.astronomer.io/astro-runtime-variables-101) module.
 
 :::

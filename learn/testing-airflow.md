@@ -16,6 +16,8 @@ Effectively testing DAGs requires an understanding of their structure and their 
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Webinar: [How to easily test your Airflow DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
 
 :::

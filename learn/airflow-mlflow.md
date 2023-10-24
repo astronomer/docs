@@ -13,6 +13,8 @@ import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflo
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Use case: [Predict possum tail length using MLflow, Airflow, and linear regression](use-case-airflow-mlflow.md) including a ready-to-use [example repository](https://github.com/astronomer/use-case-mlflow). 
 
 :::

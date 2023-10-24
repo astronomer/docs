@@ -21,6 +21,8 @@ This guide offers an introduction to Apache Airflow and its core concepts. You'l
 
 :::tip Related Content
 
+There are multiple resources for learning about this topic. See also:
+
 - Hands-on tutorial: [Get started with Apache Airflow](get-started-with-airflow.md).
 - Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
 - Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
