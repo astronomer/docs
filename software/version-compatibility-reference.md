@@ -13,22 +13,13 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-| Astronomer Platform | Kubernetes                                         | Postgres | Python                                         | Astro Runtime        | Helm |
-| ------------------- | -------------------------------------------------- | -------- | ---------------------------------------------- | -------------------- | ---- |
-| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22¹, 1.23, 1.24, 1.25¹, 1.26¹, 1.27¹ | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
-| v0.32               | 1.21, 1.22¹, 1.23, 1.24 , 1.25, 1.26, 1.27¹        | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
-| v0.33               | 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28                | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| Astronomer Platform | Postgres | Python                                         | Astro Runtime        | Helm |
+| ------------------- | -------- | ---------------------------------------------- | -------------------- | ---- |
+| v0.30               | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| v0.32               | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| v0.33               | 11+      | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions | 3.6  |
 
-:::info
-
-¹: Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
-
-- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software version 0.30.4.
-- Support for Kubernetes 1.22 ends with Astronomer Software version 0.30.8 and 0.32.3.
-- Support for Kubernetes 1.25 and 1.26 starts in Astronomer Software version 0.30.6.
-- Support for Kubernetes 1.27 starts in Astronomer Software version 0.30.8 and 0.32.3.
-
-:::
+See [Kubernetes version support table and policy](#kubernetes-version-support-table-and-policy) for Astronomer platform compatibility with Kubernetes.
 
 Astronomer recommends using the latest available version of the Astro CLI for all Software versions in most cases. To upgrade from an earlier version of the CLI to the latest, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
 
@@ -43,9 +34,19 @@ Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/doc
 
 :::
 
-### Kubernetes version support policy
+### Kubernetes version support table and policy
 
 In general, Astronomer Software will support a given version of Kubernetes through its End of Life. This includes Kubernetes upstream and cloud-managed variants like GKE, AKS, and EKS. When a version of Kubernetes reaches End of Life, support will be removed in the next major or minor release of Astronomer Software. For more information on Kubernetes versioning and release policies, refer to [Kubernetes Release History](https://kubernetes.io/releases/) or your cloud provider.
+
+See the following table for all supported Kubernetes versions in each maintained version of Astronomer Software.
+
+| Astronomer platform | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 | Kubernetes 1.26 | Kubernetes 1.27 |
+| :-----------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+|   0.30.0- 0.30.7    |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
+|       0.30.8        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
+|   0.32.0- 0.32.2    |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
+|    0.32.3-0.32.4    |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
+|   0.33.0 - 0.33.1   |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 
