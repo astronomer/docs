@@ -753,3 +753,15 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
   top: 0;
   right: 0;
 }
+
+/** Remix Redocly Styles **/
+
+/** hide all the error responses **/
+.redocusaurus .response-200-ok ~ div,
+.redocusaurus .tab-error {
+  display: none;
+}
+
+.redocusaurus .menu-content {
+  top: 10rem !important;
+}
