@@ -39,7 +39,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 ### Bug fixes 
 
 - Fixed an issue where the Airflow UI showed an incorrect count for the total number of DAGs.
-- Fixed an issue on Astro when exporting Airflow task logs to Datadog, which can result in workers not shutting down properly after new deployments or scale down events.
+- Fixed an issue where exporting Airflow task logs from Astro to Datadog could result in workers not shutting down properly after new deploys or scale down events.
 
 ## Astro Runtime 9.3.0
 
