@@ -93,7 +93,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 5. For any existing Deployments, run the following command to sync the registry credentials.
 
     ```bash
-    kubectl create job -n <astronomer-platform-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
+    kubectl create job -n <astronomer-platform-namespace> --from=cronjob/<platform-release-name>-config-syncer upgrade-config-synchronization
     ```
 
     :::info
