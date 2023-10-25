@@ -40,13 +40,15 @@ In general, Astronomer Software will support a given version of Kubernetes throu
 
 See the following table for all supported Kubernetes versions in each maintained version of Astronomer Software.
 
-| Astronomer platform | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 | Kubernetes 1.26 | Kubernetes 1.27 |
-| :-----------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
-|   0.30.0- 0.30.7    |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-|       0.30.8        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
-|   0.32.0- 0.32.2    |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
-|    0.32.3-0.32.4    |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
-|   0.33.0 - 0.33.1   |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
+| Astronomer platform | Kubernetes 1.22 | Kubernetes 1.23 | Kubernetes 1.24 | Kubernetes 1.25 | Kubernetes 1.26 | Kubernetes 1.27 | Kubernetes 1.28 |
+| :-----------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+|   0.30.0 - 0.30.7   |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |                 |
+|       0.30.8        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
+|   0.32.0 - 0.32.2   |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
+|       0.32.3        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
+|       0.32.4        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
+|       0.33.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
+|       0.33.1        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 
