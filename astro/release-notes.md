@@ -32,6 +32,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 ### Bug fixes
 
 - Fixed an issue where Deployment API tokens weren't deleted after their associated Deployment was deleted.
+- Fixed an issue where you could not create a Deployment with some available Runtime versions using the Astro Platform API.
 
 ## October 17, 2023
 
