@@ -4,7 +4,7 @@ sidebar_label: 'AWS Secrets Manager'
 id: aws-secretsmanager
 ---
 
-This topic provides setup steps for configuring [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secrets backend on Astro.
+Configure [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secrets backend on Astro.
 
 For more information about Airflow and AWS connections, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
 
@@ -25,7 +25,7 @@ Create directories for Airflow variables and connections in AWS Secrets Manager 
 - If creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 - The secret name is assigned after providing the plaintext value and clicking `Next`.
 
-Secret names must correspond with the `connections_prefix` and `variables_prefix` set below in step 2. Specifically:
+Secret names must correspond with the `connections_prefix` and `variables_prefix` that you set in the next step. Specifically:
 
 - If you use `"variables_prefix": "airflow/variables"`, you must set Airflow variable names as:
 
