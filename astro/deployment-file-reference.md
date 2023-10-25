@@ -69,13 +69,20 @@ The following sections describe each section in the file.
 
 ### `deployment.environment_variables`
 
-You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI. When you create or update a variable, each variable in this section must include a `key` and a `value`. By default, each variable is created as a non-secret variable.
+You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI. Each variable in this section must include a `key` and a `value`.
 
-To set any new or existing environment variables as secret in the file, specify `is_secret: true` next to the key and value.
+By default, each variable is created as a non-secret variable. To set any new or existing environment variables as secret in, specify `is_secret: true` in the same section as the key and value. For example: 
 
-To delete an environment variable, remove the lines that contain its key, its value, and other associated fields.
+```yaml
+ - is_secret: true
+    key: PROJECT_NAME
+    value: test_project
+```
 
-When you inspect a Deployment, the value of any secret environment variables will not appear in the template file.  
+When you inspect a Deployment, the value of secret environment variables do not appear in the Deployment file.  
+
+
+To delete an environment variable, remove the lines that contain its key, its value, and other associated fields, then reapply the file to the Deployment. Any variables which exist on the Deployment but are not included in the most recently applied Deployment file are deleted. 
 
 If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
@@ -95,7 +102,7 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for a Deployment with CeleryExecutor. This section is not applicable to Deployments running with the Kubernetes executor. 
+The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use celery executor. This section is not applicable to a Deployment that uses Kubernetes executor.
 
 If you don't enter specific values for the `default` worker queue for a Deployment, default values based on the worker types available on your cluster are applied. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI will use default values for any other unspecified fields.
 
