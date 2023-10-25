@@ -17,11 +17,15 @@ If you use a different secrets backend tool or want to learn the general approac
 
 ## Step 1: Create Airflow secrets directories in Parameter Store
 
-Create directories for Airflow variables and connections in Parameter Store that you want to store as secrets.
+Follow the provider instructions [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or the [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html) documentation to create Airflow secrets directories in Parameter Store.
 
-Variables and connections should be stored in `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should be stored in the `/airflow/connections/` directory. If you modify the directory paths, make sure you change the values for `variables_prefix` and `connections_prefix` in Step 2.
+Make two directores, `/airflow/variables` and `/airflow/connections`, to store Airflow variables and connections, respectively. For example, if you're setting a secret variable with the key `my_secret`, store it in the `/airflow/connections/` directory. 
 
-For instructions, see the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or the [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html) documentation.
+:::tip
+
+You use the `/airflow/variables` and `/airflow/connections` directory paths again in Step 2. So, if you change them, make sure you also change the values for `variables_prefix` and `connections_prefix` in the net step.
+
+:::
   
 ## Step 2: Set up Parameter Store locally
 
