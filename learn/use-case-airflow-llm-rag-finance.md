@@ -32,7 +32,7 @@ Before trying this example, make sure you have:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
-- An [Alph Vantage API key](https://www.alphavantage.co/support/#api-key). A free tier is available.
+- An [Alpha Vantage API key](https://www.alphavantage.co/support/#api-key). A free tier is available.
 - An [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction). You will need to have an OpenAI account with credits to use the API.
 
 ## Clone the project
@@ -83,16 +83,6 @@ The code for the Streamlit application can be found in [`include/streamlit/strea
 ![Screenshot of the streamlit app showing an example answer of the application.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_2.png)
 
 ![Screenshot of the streamlit app showing the sources that were incorporated in the augmented prompt displayed below the answer.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_3.png)
-
-#### Development DAGs
-
-The [`finbuddy_load_pre_embedded`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_pre_embedded.py) DAG loads a set of pre-computed embeddings of news articles retrieved from a local `.parquet` file into Weaviate as an easy way to test and adapt the pipeline.
-
-![Graph view of the finbuddy_load_pre_embedded DAG showing Weaviate schema handling and one task to ingest pre-calculated embeddings of news articles.](/img/examples/use-case-airflow-llm-rag-finance_pre_embedd_dag.png)
-
-The [`create_schema`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/create_schema.py) DAG is designed for development environments to delete all data from Weaviate and create a new schema. 
-
-![Graph view of the create_schema DAG showing two tasks, one to delete all existing schemas in a Weaviate database, another to create a news schema.](/img/examples/use-case-airflow-llm-rag-finance_create_schema_dag.png)
 
 ### Project code
 
@@ -568,6 +558,20 @@ if st.button("Search"):
         st.write(f"URL: {article['url']}")
         st.write("---")
 ```
+
+#### Development DAGs
+
+This project also contains two DAGs for development purposes.
+
+The [`finbuddy_load_pre_embedded`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_pre_embedded.py) DAG loads a set of pre-computed embeddings of news articles retrieved from a local `.parquet` file into Weaviate as an easy way to test and adapt the pipeline.
+
+![Graph view of the finbuddy_load_pre_embedded DAG showing Weaviate schema handling and one task to ingest pre-calculated embeddings of news articles.](/img/examples/use-case-airflow-llm-rag-finance_pre_embedd_dag.png)
+
+The [`create_schema`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/create_schema.py) DAG is designed for development environments to delete all data from Weaviate and create a new schema. 
+
+![Graph view of the create_schema DAG showing two tasks, one to delete all existing schemas in a Weaviate database, another to create a news schema.](/img/examples/use-case-airflow-llm-rag-finance_create_schema_dag.png)
+
+## Conclusion
 
 Congratulations! You have successfully adapted a RAG pipeline using Airflow and Weaviate. You can now use this project as a blueprint to create your LLMOps pipelines! 
 
