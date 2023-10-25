@@ -68,6 +68,7 @@ Currently, standard clusters are available on the following clouds and regions:
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
+        {label: 'Azure', value: 'azure'},
     ]}>
 <TabItem value="aws">
 
@@ -86,6 +87,16 @@ Currently, standard clusters are available on the following clouds and regions:
 | `europe-west4` | Netherlands, Europe     |
 | `us-central1`  | Iowa, North America     |
 | `us-east4`     | Virginia, North America |
+
+</TabItem>
+
+<TabItem value="azure">
+
+| Code           | Region                  |
+| -------------- | ----------------------- |
+| `eastus2`      | Virginia, North America |
+| `westus2`      | Washington, North America |
+| `westeurope`   | Netherlands, Europe     |
 
 </TabItem>
 
