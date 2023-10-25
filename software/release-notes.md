@@ -152,6 +152,7 @@ Release date: August 31, 2023
 - You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
 - You can now set `astronomer.houston.enableHoustonInternalAuthorization` in your `config.yaml` file to redirect all authorization requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.
 - Upgraded ElasticSearch to 8.x.
+- Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
 
 ### Bug fixes
 
