@@ -132,6 +132,12 @@ Complete the manual setup if you configured your existing Astro app without usin
     - **Admin Credentials** > **Tenant URL**: Enter the **SCIM integration URL** including the Azure AD feature flag parameter.
     - **Secret Token**: Enter your Organization API token. 
 
+  :::info Only provision users
+
+  If you prefer to only provision users with SCIM, and you don't want to provision Teams, you can skip Steps 8-10.
+
+  :::
+
 8. In **Mappings**, open the **Groups** mapping configuration.
 9. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
 10. In the **Attribute Mappings** table, add the following mappings:
