@@ -134,7 +134,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 
   :::info Only provision users
 
-  If you prefer to only provision users with SCIM, and you don't want to provision Teams, you can skip Steps 8-10.
+  If you prefer to only provision users with SCIM, and you don't want to provision Teams, skip Steps 8-10.
 
   :::
 
