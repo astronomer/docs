@@ -169,7 +169,8 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
 
 ### Setup
 
-1. Create an IAM role that assumes your Deployment's workload identity. The Deployment will assume this role to write logs to Cloudwatch. Ensure that you include the permissions for accessing Cloudwatch in the policy. Your complete policy file should look similar to the following:
+1. Create an IAM role and a trust policy that allows your Deployment to write logs to Cloudwatch. See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud).
+2. Create a permissions policy with the following configuration: 
 
     ```json
     {
@@ -185,23 +186,14 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
                     "logs:DescribeLogStreams"
                 ],
                 "Resource": "*"
-            },
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": [
-                        "<workload-identity-role>"
-                    ]
-                },
-                "Action": "sts:AssumeRole"
             }
         ]
     }
     ```
 
-    See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud) for more setup steps.
+    Attach this policy to your IAM role. See [Creating policies using the JSON editor](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-json-editor) and [Adding IAM identity permissions (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#add-policies-console)   
 
-2. Set the following [environment variables](environment-variables.md) in your Deployment:
+3. Set the following [environment variables](environment-variables.md) in your Deployment:
 
     - **Key 1**: `ASTRO_CLOUDWATCH_TASK_LOGS_ENABLED`
     - **Value 1**: `True`
