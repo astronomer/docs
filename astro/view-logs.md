@@ -187,13 +187,13 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
                 "Resource": "*"
             },
             {
-                    "Effect": "Allow",
-                    "Principal": {
-                        "AWS": [
-                            "<workload-identity-role>"
-                        ]
-                    },
-                    "Action": "sts:AssumeRole"
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": [
+                        "<workload-identity-role>"
+                    ]
+                },
+                "Action": "sts:AssumeRole"
             }
         ]
     }
