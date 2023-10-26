@@ -169,14 +169,15 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
 
 ### Setup
 
-1. Create an IAM role that assumes your Deployment's workload identity. The Deployment will assume this role to write logs to Cloudwatch. Ensure that you include the permissions for accessing Cloudwatch in the policy. Your complete policy file should look similar to the following:
+1. Create an IAM role that assumes your Deployment's workload identity. The Deployment will assume this role to write logs to Cloudwatch. Ensure that you include the permissions for accessing Cloudwatch in the policy.
+
+Your permissions policy file should look similar to the following:
 
     ```json
     {
         "Version": "2012-10-17",
         "Statement": [
             {
-                "Sid": "VisualEditor0",
                 "Effect": "Allow",
                 "Action": [
                     "logs:CreateLogGroup",
@@ -185,23 +186,14 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
                     "logs:DescribeLogStreams"
                 ],
                 "Resource": "*"
-            },
-            {
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": [
-                        "<workload-identity-role>"
-                    ]
-                },
-                "Action": "sts:AssumeRole"
             }
         ]
     }
     ```
 
-    See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud) for more setup steps.
+    See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud) for steps for setting up the trust policy.
 
-2. Set the following [environment variables](environment-variables.md) in your Deployment:
+3. Set the following [environment variables](environment-variables.md) in your Deployment:
 
     - **Key 1**: `ASTRO_CLOUDWATCH_TASK_LOGS_ENABLED`
     - **Value 1**: `True`
