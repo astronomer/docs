@@ -31,7 +31,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Additional improvements
 
-- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/).
+- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). See [Export logs to AWS cloudwatch](view-logs.md#export-task-logs-to-aws-cloudwatch).
 - Upgraded `google-cloud-aiplatform` to 1.35.0. 
 - Upgraded [Shapely](https://shapely.readthedocs.io/en/stable/manual.html) to 2.0.2.
 - Added a link for Astronomer Academy to the **Astronomer** menu in the Airflow UI.
