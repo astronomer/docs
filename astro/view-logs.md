@@ -199,7 +199,6 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
     }
     ```
 
-
     See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud) for more setup steps.
 
 2. Set the following [environment variables](environment-variables.md) in your Deployment:
