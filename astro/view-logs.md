@@ -215,6 +215,6 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
   If your CloudWatch instance is not in the same region as your Deployment, you must also set the following variable:
 
   - **Key**: `ASTRO_CLOUDWATCH_AWS_REGION`
-  - **Value**: `<your-cloudwatch-region`
+  - **Value**: `<your-cloudwatch-region>`
 
   :::
