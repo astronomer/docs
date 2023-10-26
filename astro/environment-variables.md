@@ -64,7 +64,7 @@ After you set an environment variable key, only the environment variable value c
 
 Non-secret environment variables set in the Cloud UI are stored in a Hashicorp Vault secrets manager hosted in the Astro control plane. These environment variables are available in your Deployment’s Kubernetes namespace as a Kubernetes secret.
 
-To use retrieve environment variable values from a DAG, you have the following options:
+To retrieve environment variable values from a DAG, you have the following options:
 
 - Use the `os.environ` method. This works for most uses of the PythonOperator or Python functions.
 - If you can’t use Python or are using code that expects specific keys for environment variables, you must mount the secret environment variables using BaseOperator’s `executor_config` by providing a `pod_override`. See [Use secret environment variables in worker Pods](kubernetes-executor.md#use-secret-environment-variables-in-worker-pods).
