@@ -14,6 +14,14 @@ import TabItem from '@theme/TabItem';
 
 Effectively testing DAGs requires an understanding of their structure and their relationship to other code and data in your environment. In this guide, you'll learn about various types of DAG validation testing, unit testing, and where to find further information on data quality checks.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [How to easily test your Airflow DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:

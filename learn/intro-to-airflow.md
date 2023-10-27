@@ -19,7 +19,15 @@ This guide offers an introduction to Apache Airflow and its core concepts. You'l
 - When you should use Airflow.
 - Core Airflow concepts.
 
-For a hands-on introduction to Airflow using the Astro CLI, see [Get started with Apache Airflow](get-started-with-airflow.md).
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Hands-on tutorial: [Get started with Apache Airflow](get-started-with-airflow.md).
+- Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
+
+:::
 
 ## Assumed knowledge
 

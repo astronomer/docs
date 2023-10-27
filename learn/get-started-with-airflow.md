@@ -17,6 +17,15 @@ After you complete this tutorial, you'll be able to:
 - Navigate the Airflow UI.
 - Use code from the Astronomer Registry.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.

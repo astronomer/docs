@@ -16,6 +16,15 @@ This guide is an overview of some of the most useful features and visualizations
 
 All images in this guide were taken from an [Astronomer Runtime](https://docs.astronomer.io/astro/runtime-release-notes) Airflow image. Other than some modified colors and an additional **Astronomer** tab, the UI is the same as when using OSS Airflow. The images in this guide are from Airflow version 2.7, if you are using an older version of Airflow, some UI elements might be slightly different or missing.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: UI](https://academy.astronomer.io/astro-runtime-airflow-ui) module.
+- Webinar: [A Deep Dive into the Airflow UI](https://www.astronomer.io/events/webinars/a-deep-dive-into-the-airflow-ui/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:

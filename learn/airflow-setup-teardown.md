@@ -17,6 +17,16 @@ Starting in Airflow 2.7, you can use a special type of task to create and delete
 
 ![DAG with setup/ teardown - all successful](/img/guides/airflow-setup-teardown_intro_dag.png)
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [What’s New in Airflow 2.7](https://www.astronomer.io/events/webinars/whats-new-in-airflow-2-7/).
+- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:

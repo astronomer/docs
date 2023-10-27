@@ -13,6 +13,14 @@ import gx_dag from '!!raw-loader!../code-samples/dags/airflow-great-expectations
 
 This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [How to Improve Data Quality with Airflow's Great Expectations Operator](https://www.astronomer.io/events/webinars/how-to-improve-data-quality-with-airflows-great-expectations-operator/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 20 minutes to complete.
