@@ -56,7 +56,7 @@ Alternatively, you can manually create a template file without using an existing
           description: <deployment-description>
           runtime_version: 9.1.0
           dag_deploy_enabled: true
-          executor: KubernetesExecutor
+          executor: CeleryExecutor
           cluster_name: us-east-1
           region: us-east-1
           workspace_name: <your-workspace-name>
