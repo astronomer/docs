@@ -200,11 +200,11 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
     - **Key 2**: `ASTRO_CLOUDWATCH_ROLE_ARN`
     - **Value 2**: The ARN for your IAM role. It should look similar to `arn:aws:iam::123456789012:role/rolename`
 
-  :::info
+    :::info
 
-  If your CloudWatch instance is not in the same region as your Deployment, you must also set the following variable:
+    If your CloudWatch instance is not in the same region as your Deployment, you must also set the following variable:
 
-  - **Key**: `ASTRO_CLOUDWATCH_AWS_REGION`
-  - **Value**: `<your-cloudwatch-region>`
+    - **Key**: `ASTRO_CLOUDWATCH_AWS_REGION`
+    - **Value**: `<your-cloudwatch-region>`
 
-  :::
+    :::
