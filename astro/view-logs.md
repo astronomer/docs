@@ -193,7 +193,7 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
 
     See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud) for steps for setting up the trust policy.
 
-3. Set the following [environment variables](environment-variables.md) in your Deployment:
+2. Set the following [environment variables](environment-variables.md) in your Deployment:
 
     - **Key 1**: `ASTRO_CLOUDWATCH_TASK_LOGS_ENABLED`
     - **Value 1**: `True`
