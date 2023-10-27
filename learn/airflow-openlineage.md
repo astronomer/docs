@@ -14,7 +14,7 @@ In this guide, you’ll learn about core data lineage concepts and understand ho
 
 Astro offers robust support for extracting and visualizing data lineage. To learn more, see [Data lineage on Astro](https://docs.astronomer.io/astro/data-lineage).
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

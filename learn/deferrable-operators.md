@@ -14,7 +14,7 @@ import async_dag from '!!raw-loader!../code-samples/dags/deferrable-operators/as
 
 With Airflow 2.2 and later, you can use deferrable operators to run tasks in your Airflow environment. These operators leverage the Python [asyncio](https://docs.python.org/3/library/asyncio.html) library to efficiently run tasks waiting for an external resource to finish. This frees up your workers and allows you to utilize resources more effectively. In this guide, you'll review deferrable operator concepts and learn how to use deferrable operators in your DAGs.
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

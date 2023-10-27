@@ -19,7 +19,7 @@ This guide offers an introduction to Apache Airflow and its core concepts. You'l
 - When you should use Airflow.
 - Core Airflow concepts.
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

@@ -14,7 +14,7 @@ The SQL check operators in the [Common SQL provider](https://registry.astronomer
 
 This tutorial shows how to use three SQL check operators (SQLColumnCheckOperator, SQLTableCheckOperator, and SQLCheckOperator) to build a robust data quality suite for your DAGs.
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

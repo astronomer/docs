@@ -20,7 +20,7 @@ Datasets can help resolve common issues. For example, consider a data engineerin
 
 In this guide, you'll learn about datasets in Airflow and how to use them to implement triggering of DAGs based on dataset updates. You'll also learn how datasets work with the Astro Python SDK.
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

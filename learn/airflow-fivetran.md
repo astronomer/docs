@@ -14,7 +14,7 @@ Using Airflow with Fivetran allows you to schedule your Fivetran syncs based on 
 
 In this tutorial, you'll learn how to install and use the Airflow Fivetran provider to submit and monitor Fivetran syncs.
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

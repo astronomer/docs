@@ -29,7 +29,7 @@ In this guide, you'll learn how to create and use task groups in your DAGs. You 
 
 ![Task group intro gif](/img/guides/task-groups_intro_task_group_gif.gif)
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

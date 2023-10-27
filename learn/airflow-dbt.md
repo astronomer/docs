@@ -38,7 +38,7 @@ DbtTaskGroup(
 )
 ```
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

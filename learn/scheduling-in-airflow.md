@@ -13,7 +13,7 @@ One of the fundamental features of Apache Airflow is the ability to schedule job
 
 In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG with a focus on timetables. All code used in this guide is available in the [airflow-scheduling-tutorial repository](https://github.com/astronomer/airflow-scheduling-tutorial).
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

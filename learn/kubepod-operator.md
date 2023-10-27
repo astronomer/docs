@@ -28,7 +28,7 @@ You'll also learn how to use the KubernetesPodOperator to run a task in a langua
 
 For more information about running the KubernetesPodOperator on a hosted cloud, see [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 

@@ -18,7 +18,7 @@ Prior to Airflow 2.3, tasks could only be generated dynamically at the time that
 
 In this guide, you'll learn about dynamic task mapping and complete an example implementation for a common use case.
 
-:::tip Other ways to learn:
+:::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
 
