@@ -177,7 +177,6 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
         "Version": "2012-10-17",
         "Statement": [
             {
-                "Sid": "VisualEditor0",
                 "Effect": "Allow",
                 "Action": [
                     "logs:CreateLogGroup",
