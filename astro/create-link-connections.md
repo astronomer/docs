@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Create Astro connections'
 title: 'Create connections in the Cloud UI'
-id: create-connections
+id: create-link-connections
 description: "Create Airflow connections that can be applied across multiple Deployments in the Cloud UI."
 ---
 
