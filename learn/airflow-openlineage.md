@@ -16,7 +16,7 @@ Astro offers robust support for extracting and visualizing data lineage. To lear
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Webinar: [OpenLineage and Airflow: A Deeper Dive](https://www.astronomer.io/events/webinars/openlineage-and-airflow-deeper-dive/).
 

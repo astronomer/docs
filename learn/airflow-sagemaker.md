@@ -12,7 +12,7 @@ This tutorial demonstrates how to orchestrate a full ML pipeline including creat
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Webinar: [Batch Inference with Airflow and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).
 

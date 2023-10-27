@@ -24,7 +24,7 @@ In this guide, you'll learn DAG basics and about DAG parameters and how to defin
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Astronomer Academy: [Airflow: DAGs 101](https://academy.astronomer.io/dag-101-1) module.
 

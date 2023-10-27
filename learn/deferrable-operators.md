@@ -16,7 +16,7 @@ With Airflow 2.2 and later, you can use deferrable operators to run tasks in you
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Astronomer Academy: [Airflow: Deferrable Operators](https://academy.astronomer.io/astro-runtime-deferrable-operators) module.
 - Webinar: [Astronomer Providers](https://www.astronomer.io/events/webinars/astronomer-providers/).

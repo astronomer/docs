@@ -24,7 +24,7 @@ There are a few methods you can use to implement data sharing between your Airfl
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Astronomer Academy: [Airflow: XComs 101](https://academy.astronomer.io/astro-runtime-xcoms-101) module.
 - Webinar: [How to pass data between your Airflow tasks](https://www.astronomer.io/events/webinars/how-to-pass-data-between-your-airflow-tasks/).

@@ -24,7 +24,7 @@ In this guide, you'll learn how sensors are used in Airflow, best practices for 
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Astronomer Academy: [Airflow: Sensors](https://academy.astronomer.io/sensors-course) module.
 

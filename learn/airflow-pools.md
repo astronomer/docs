@@ -21,7 +21,7 @@ In this guide, you'll learn basic Airflow pool concepts, how to create and assig
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Astronomer Academy: [Airflow: Pools](https://academy.astronomer.io/astro-runtime-pools) module.
 

@@ -21,7 +21,7 @@ This guide offers an introduction to Apache Airflow and its core concepts. You'l
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Hands-on tutorial: [Get started with Apache Airflow](get-started-with-airflow.md).
 - Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).

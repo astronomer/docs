@@ -34,7 +34,7 @@ Airflow leverages [Jinja](https://jinja.palletsprojects.com), a Python templatin
 
 :::tip Related content
 
-There are multiple resources for learning about this topic. See also:
+Other ways to learn:
 
 - Astronomer Academy: [Airflow: Templating](https://academy.astronomer.io/astro-runtime-templating) module.
 
