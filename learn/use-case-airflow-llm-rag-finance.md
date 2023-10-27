@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 In the emerging field of Large Language Model Operations (LLMOps), retrieval-augmented generation (RAG) has quickly become a key way to tailor large langage model (LLM) applications to domain specific queries. 
 
-This use case shows how to use Weaviate and Airflow to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles .([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) are used as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline structure follows Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
+This use case shows how to use Weaviate and Airflow to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles. ([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) are used as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline structure follows Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
 
 :::info Disclaimer
 
@@ -64,7 +64,7 @@ Log into the Airflow UI at `https://localhost:8080/` with the username `admin` a
 
 ### Data source
 
-This example collects URLs of news articles from two API sources, [Alpha Vantage](https://www.alphavantage.co/) for financial news articles and [Spaceflight news](https://www.spaceflightnewsapi.net/) for the latest developments in space. The full texts of these articles is scraped and stored in Weaviate. 
+This example collects URLs of news articles from two API sources, [Alpha Vantage](https://www.alphavantage.co/) for financial news articles and [Spaceflight news](https://www.spaceflightnewsapi.net/) for the latest developments in space. A downstream task scapes the full texts of these articles and a third task imports the data to Weaviate. 
 
 A [file containing pre-embedded articles](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/pre_computed_embeddings/pre_embedded.parquet) as well as a separate DAG ([`finbuddy_load_pre_embedded`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_pre_embedded.py)) to load these pre-defined embeddings are available for developing purposes. 
 
@@ -406,8 +406,7 @@ def import_data_local_embed(
 
 <TabItem value="cloudembedd">
 
-If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings are to be computed by Weaviate using 
-the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
+If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings are to be computed by Weaviate using the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
 
 ```python
 def import_data(
