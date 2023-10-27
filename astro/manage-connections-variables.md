@@ -55,7 +55,7 @@ The following sections explain the benefits, limitations, and implementations of
 
 ### Cloud UI connections
 
-Astro provides connection management capabilities that behave like an Astro-managed secrets backend. It gives you the quickest way to create connections through the Cloud UI, in the **Environment** tab. After you make a connection, you can choose to restrict it to specific Deployments or share it with multiple Deployments in the Workspace.
+Astro provides connection management capabilities that behave like you are using an Astro-managed secrets backend. It gives you the quickest way to create connections through the Cloud UI, in the **Environment** tab. After you make a connection, you can choose to restrict it to specific Deployments or share it with multiple Deployments in the Workspace.
 
 #### Benefits
 

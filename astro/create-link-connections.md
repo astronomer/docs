@@ -5,7 +5,7 @@ id: create-link-connections
 description: "Create Airflow connections that can be applied across multiple Deployments in the Cloud UI."
 ---
 
-You can create and manage connections across Deployments in the Cloud UI. This strategy of connection management behaves as if it is an Astro-managed secrets backend. Astro stores your connection configurations and authentication information in Hashicorp Vault and Kubernetes Secrets instead of requiring you to manage it in your own secrets backend, environment variables, the Airflow UI, or in your project. This means you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend or handle multiple sets of credentials for making connections to the same resource in multiple Deployments.
+You can create and manage connections across Deployments in the Cloud UI. This strategy of connection management behaves as if it is an Astro-managed secrets backend. Astro stores your connection configurations and authentication information in Hashicorp Vault and Kubernetes Secrets instead of requiring you to manage it in your own secrets backend. This means you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend or handle multiple sets of credentials for making connections to the same resource in multiple Deployments.
 
 When you use the Cloud UI to create and manage connections, you can also :
 
