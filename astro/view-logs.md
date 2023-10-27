@@ -171,7 +171,7 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
 
 1. Create an IAM role that assumes your Deployment's workload identity. The Deployment will assume this role to write logs to Cloudwatch. Ensure that you include the permissions for accessing Cloudwatch in the policy.
 
-Your permissions policy file should look similar to the following:
+    Your permissions policy file should look similar to the following:
 
     ```json
     {
