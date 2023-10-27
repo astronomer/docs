@@ -686,12 +686,12 @@ This DAG comes with a convenience parameter to test setup/ teardown functionalit
         {label: '@setup/@teardown', value: 'decorators'},
         {label: '.as_teardown()', value: 'methods'},
     ]}>
-<TabItem value="decorators">
+<TabItem value="methods">
 
 <CodeBlock language="python">{setup_teardown_example_methods}</CodeBlock>
 
 </TabItem>
-<TabItem value="methods">
+<TabItem value="decorators">
 
 <CodeBlock language="python">{setup_teardown_example_decorators}</CodeBlock>
 
