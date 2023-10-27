@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 In the emerging field of Large Language Model Operations (LLMOps), retrieval-augmented generation (RAG) has quickly become a key way to tailor large langage model (LLM) applications to domain specific queries. 
 
-This use case shows how to use Weaviate and Airflow to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles ([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) to be used as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline is structured following Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
+This use case shows how to use Weaviate and Airflow to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles .([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) are used as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline structure follows Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
 
 :::info Disclaimer
 
@@ -37,7 +37,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You will need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_TEST` connection and as `OPENAI_API_KEY`.
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_TEST` connection and as `OPENAI_API_KEY`.
 
 The repository is configured to spin up and use a local Weaviate instance. If you'd like to use an existing Weaviate instance, change the `host` parameter in the `AIRFLOW_CONN_WEAVIATE_TEST` connection in the `.env` file.
 
@@ -58,7 +58,7 @@ This command builds your project and spins up 6 Docker containers on your machin
 - A local [Weaviate](https://weaviate.io/) instance, which can be accessed at `http://localhost:8081`.
 - A local [Streamlit](https://streamlit.io/) application, which can be accessed at `http://localhost:8501`.
 
-Log into the Airflow UI at `https://localhost:8080/` with the username `admin` and the password `admin`. Run the `finbuddy_load_news` DAG to start the ingestion pipeline. Once the DAG has completed, use the Streamlit application, accessible at `http://localhost:8501` to ask for current financial insights.
+Log into the Airflow UI at `https://localhost:8080/` with the username `admin` and the password `admin`. Run the `finbuddy_load_news` DAG to start the ingestion pipeline. After the DAG completes, use the Streamlit application at `http://localhost:8501` to ask for current financial insights.
 
 ## Project contents
 
@@ -72,11 +72,11 @@ A [file containing pre-embedded articles](https://github.com/astronomer/use-case
 
 This project consists of an automated incremental ingestion pipeline defined in an Airflow DAG and a Streamlit application.
 
-The [`finbuddy_load_news`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_news.py) DAG ensures that the correct Weaviate schema is created and subsequently ingests news articles from Alpha Vantage and Spaceflight news in parallel sequences of tasks. The ingestion pipeline consists of tasks querying an API, scraping the text of the news articles, chunking the content, creating embeddings and loading the data into Weaviate.
+The [`finbuddy_load_news`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_news.py) DAG ensures that the correct Weaviate schema is created and subsequently ingests news articles from Alpha Vantage and Spaceflight news in parallel sequences of tasks. The ingestion pipeline consists of tasks querying an API, scraping the text of the news articles, chunking the content, creating embeddings, and loading the data into Weaviate.
 
 ![Graph view of the finbuddy_load_news DAG showing Weaviate schema handling and two parallel ingesting pipelines, one for financial news from Alpha Vantage, the other for space news from Spaceflight news.](/img/examples/use-case-airflow-llm-rag-finance_incremental_dag.png)
 
-The code for the Streamlit application can be found in [`include/streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py). This app prompts the user to ask a question about the current financial outlook and uses the question to find relevant news articles for an augmented prompt to GPT-4. The resulting answer is displayed to the user alongside the sources used. 
+You can find the code for the Streamlit application in [`include/streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py). This app prompts the user to ask a question about the current financial outlook and then uses the question to find relevant news articles for an augmented prompt to GPT-4. The app displays the resulting answer to the user along with the sources used. 
 
 ![Screenshot of the streamlit app showing the prompt field and two sliders, one for number of relevant article chunks retrieved, one to adjust the certainity.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_1.png)
 
@@ -86,15 +86,15 @@ The code for the Streamlit application can be found in [`include/streamlit/strea
 
 ### Project code
 
-This use case shows a pattern for retrieval-augmented generation LLMOps. Note that the repository is modularized with functions defining most Airflow tasks being stored in the [`include/tasks` directory](https://github.com/astronomer/use-case-airflow-llm-rag-finance/tree/main/include/tasks). The following sections will highlight a couple of relevant code snippets in the `finbuddy_load_news` DAG and the [Streamlit application](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) and explain them in more detail.
+This use case shows a pattern for retrieval-augmented generation LLMOps. Note that the repository is modularized and stores functions defining most Airflow tasks in the [`include/tasks` directory](https://github.com/astronomer/use-case-airflow-llm-rag-finance/tree/main/include/tasks). The following sections highlight a couple of relevant code snippets in the `finbuddy_load_news` DAG and the [Streamlit application](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) and explain them in more detail.
 
 #### `finbuddy_load_news` DAG
 
 The [`finbuddy_load_news`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_news.py) DAG contains all tasks necessary to automatically and continually ingest new news articles into Weaviate. It is scheduled to run everyday at midnight UTC.
 
-The first task of the DAG will check if the Weaviate instance from the `WEAVIATE_CONN_ID` connection ID contains a schema with the same definition as the schema provided to `class_object_data` parameter. The schema for the news articles contains fields for metadata such as the `url`, `title` or `source`. You can find the full schema at [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json). 
+The first task of the DAG checks if the Weaviate instance from the `WEAVIATE_CONN_ID` connection ID contains a schema with the same definition as the schema provided to `class_object_data` parameter. The schema for the news articles contains fields for metadata such as the `url`, `title`, or `source`. You can find the full schema at [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json). 
 
-The WeaviateCheckSchemaBranchOperator [branches](airflow-branch-operator.md) the DAG into two paths depending on whether the schema already exists. If the schema already exists, the DAG will continue with the `schema_already_exists` task, skipping schema creation. If the schema does not exist, the DAG will continue with the `create_schema` task, creating the schema before continuing with the ingestion pipeline.
+The WeaviateCheckSchemaBranchOperator [branches](airflow-branch-operator.md) the DAG into two paths depending on whether or not the schema already exists. If the schema already exists, the DAG continues with the `schema_already_exists` task, skipping schema creation. If the schema does not exist, the DAG continues with the `create_schema` task, creating the schema before continuing with the ingestion pipeline.
 
 ```python
 check_schema = WeaviateCheckSchemaBranchOperator(
@@ -108,7 +108,7 @@ check_schema = WeaviateCheckSchemaBranchOperator(
 
 ![Start of the graph view of the finbuddy_load_news DAG showing the branching between `schema_already_exists` and `create_schema`.](/img/examples/use-case-airflow-llm-rag-finance_schema_part.png)
 
-The task creating the schema is defined using the WeaviateCreateSchemaOperator with the schema definition being retrieved from [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json).
+The WeaviateCreateSchemaOperator defines the task that creates the schema and retrieves the schema definition from [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json).
 
 ```python
 create_schema = WeaviateCreateSchemaOperator(
@@ -118,15 +118,15 @@ create_schema = WeaviateCreateSchemaOperator(
 )
 ```
 
-After the schema is ready to take in new embeddings the tasks defining ingestion paths for different news sources are created in a loop from a list of dictionaries containing task parameters for each news source. This structure allows you to easily add more sources without needing to change the code of the DAG itself. 
+After the schema is ready to take in new embeddings, the tasks defining ingestion paths for different news sources are created in a loop from a list of dictionaries that contain task parameters for each news source. This structure allows you to easily add more sources without needing to change the code of the DAG itself. 
 
 Each news source is given a `name` and a set of `extract_parameters`:
 
-- The function needed to extract information from the news source `extract_function`.
-- The `start_time` which determines how fresh we require news articles to be.
-- The `limit` which is the maximum amount of articles to be fetched in a DAG run.
+- The function needed to extract information from the news source, `extract_function`.
+- The `start_time` which, determines how fresh we require news articles to be.
+- The `limit` which, is the maximum amount of articles to be fetched in a DAG run.
 
-Since this ingestion pipeline is meant to run incrementally, the `start_time` is set to the `data_interval_start` timestamp of the DAG run, which results in each DAG run processing the articles published in the time since the last scheduled DAG run. This date can be conveniently accessed in a [Jinja template](templating.md) in the format of a timestamp without dashes by using `{{ data_interval_start | ts_nodash }}`. 
+Since this ingestion pipeline runs incrementally, the `start_time` is set to the `data_interval_start` timestamp of the DAG run, which results in each DAG run processing the articles published in the time since the last scheduled DAG run. This date can be conveniently accessed in a [Jinja template](templating.md) in the format of a timestamp without dashes by using `{{ data_interval_start | ts_nodash }}`. 
 
 :::info
 
@@ -181,7 +181,7 @@ urls = task(
 )
 ```
 
-All extract functions for different APIs are located in [`include/tasks/extract.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/extract.py). They follow the general structure shown in the `extract_spaceflight_api` function below. A GET request is posted to the API endpoint for article metadata after the provided start time and the response is transformed into a list of dictionaries, each containing the information for one news article.
+All extract functions for different APIs are located in [`include/tasks/extract.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/extract.py). They follow the general structure shown in the following `extract_spaceflight_api` function. A GET request is posted to the API endpoint for article metadata after the provided start time and the response is transformed into a list of dictionaries, each containing the information for one news article.
 
 ```python
 def extract_spaceflight_api(published_at_gte, limit=10, skip_on_error=False):
@@ -257,7 +257,7 @@ def scrape_from_url(news_dict, skip_on_error=False):
     return news_dict
 ```
 
-After all news articles have been scraped the article texts get split up into smaller chunks of information using [LangChain](https://python.langchain.com/docs/get_started/introduction). Splitting the raw information will allow for more fine-grained retrieval of relevant information in the Streamlit application. 
+After all news articles have been scraped, the article texts get split up into smaller chunks of information using [LangChain](https://python.langchain.com/docs/get_started/introduction). Splitting the raw information allows for more fine-grained retrieval of relevant information in the Streamlit application. 
 
 
 ```python
@@ -309,7 +309,7 @@ if EMBEDD_LOCALLY:
     ).expand(record=split_texts)
 ```
 
-If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that local embedding will be much slower than embedding via a cloud based vectorizer. 
+If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that local embedding is much slower than embedding via a cloud based vectorizer. 
 
 ```python
 from transformers import BertTokenizer, BertModel
@@ -407,7 +407,7 @@ def import_data_local_embed(
 <TabItem value="cloudembedd">
 
 If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings are to be computed by Weaviate using 
-the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
+the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
 
 ```python
 def import_data(
@@ -447,7 +447,7 @@ With each scheduled run, the `finbuddy_load_news` DAG ingests more news article 
 
 #### Streamlit app
 
-The [`streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) is configured to automatically run in its own container with a port exposed to the host machine. The app is accessible at `http://localhost:8501` after running `astro dev start`.
+The [`streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) is configured to automatically run in its own container with a port exposed to the host machine. The app is accessible at `http://localhost:8501` after you run `astro dev start`.
 
 The streamlit app is structured to perform three main tasks, which are separated out into functions:
 
@@ -455,7 +455,7 @@ The streamlit app is structured to perform three main tasks, which are separated
 - `get_relevant_articles`: Performs a Weaviate query to retrieve the most relevant article chunks from Weaviate to be added to the augmented prompt.
 - `get_response`: Uses the retrieved article chunks to create an augmented prompt for GPT-4.
 
-You can experiment with parameters such as the `certainity` threshold in the Weaviate query to allow for more or less relevant article chunks to be retrieved or change the number of article chunks that are included in the augmented prompt. Lastly, you can make changes to the GPT-4 prompt, for example to instruct the model to be more optimistic or pessimistic in its answer.
+You can experiment with parameters, such as the `certainity` threshold, in the Weaviate query to allow for more or less relevant article chunks to be retrieved or to change the number of article chunks that are included in the augmented prompt. Finally, you can make changes to the GPT-4 prompt. For example, to instruct the model to be more optimistic or pessimistic in its answer.
 
 ```python
 def get_embedding(text):
@@ -531,7 +531,7 @@ def get_response(articles, query):
     return chat_completion
 ```
 
-The calls to the functions in the previous code snippet are wrapped in the code creating the Streamlit app. A call to the GPT-4 API is only made after the user has entered a question and clicked the search button.
+The calls to the functions in the previous code snippet are wrapped in the code that creates the Streamlit app. A call to the GPT-4 API is only made after the user has entered a question and clicked the **Search** button.
 
 ```python
 st.title("Last night in the finance world...")
@@ -563,7 +563,7 @@ if st.button("Search"):
 
 This project also contains two DAGs for development purposes.
 
-The [`finbuddy_load_pre_embedded`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_pre_embedded.py) DAG loads a set of pre-computed embeddings of news articles retrieved from a local `.parquet` file into Weaviate as an easy way to test and adapt the pipeline.
+The [`finbuddy_load_pre_embedded`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_pre_embedded.py) DAG loads a set of pre-computed embeddings of news articles retrieved from a local `.parquet` file into Weaviate, as an easy way to test and adapt the pipeline.
 
 ![Graph view of the finbuddy_load_pre_embedded DAG showing Weaviate schema handling and one task to ingest pre-calculated embeddings of news articles.](/img/examples/use-case-airflow-llm-rag-finance_pre_embedd_dag.png)
 
@@ -573,7 +573,7 @@ The [`create_schema`](https://github.com/astronomer/use-case-airflow-llm-rag-fin
 
 ## Conclusion
 
-Congratulations! You have successfully adapted a RAG pipeline using Airflow and Weaviate. You can now use this project as a blueprint to create your LLMOps pipelines! 
+Congratulations! You successfully adapted a RAG pipeline using Airflow and Weaviate. You can now use this project as a blueprint to create your LLMOps pipelines! 
 
 ## See also
 
