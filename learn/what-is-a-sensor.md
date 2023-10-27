@@ -22,9 +22,9 @@ import sql_sensor_example_traditional from '!!raw-loader!../code-samples/dags/wh
 
 In this guide, you'll learn how sensors are used in Airflow, best practices for implementing sensors in production, and how to use deferrable versions of sensors.
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Astronomer Academy: [Airflow: Sensors](https://academy.astronomer.io/sensors-course) module.
 

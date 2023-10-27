@@ -16,9 +16,9 @@ When designing your data pipelines, you may encounter use cases that require mor
 
 In this guide, you'll learn how you can use `@task.branch` (BranchPythonOperator) and `@task.short_circuit` (ShortCircuitOperator), other available branching operators, and additional resources to implement conditional logic in your Airflow DAGs.
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Astronomer Academy: [Airflow: Branching](https://academy.astronomer.io/astro-runtime-branching) module.
 

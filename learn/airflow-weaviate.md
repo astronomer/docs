@@ -19,9 +19,9 @@ The provider used in this tutorial is currently in beta and subject to change. A
 
 :::
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Webinar: [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/).
 

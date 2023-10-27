@@ -16,9 +16,9 @@ There are two distinct types of Airflow variables: regular values and JSON seria
 
 This concept guide covers how to create Airflow variables and access them programmatically.
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Astronomer Academy: [Airflow: Variables 101](https://academy.astronomer.io/astro-runtime-variables-101) module.
 

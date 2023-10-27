@@ -18,9 +18,9 @@ Prior to Airflow 2.3, tasks could only be generated dynamically at the time that
 
 In this guide, you'll learn about dynamic task mapping and complete an example implementation for a common use case.
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Astronomer Academy: [Airflow: Dynamic Task Mapping](https://academy.astronomer.io/astro-runtime-dynamic-task-mapping) module.
 - Webinar: [Dynamic Tasks in Airflow](https://www.astronomer.io/events/webinars/dynamic-tasks-in-airflow/).

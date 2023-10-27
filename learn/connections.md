@@ -21,9 +21,9 @@ In this guide you'll:
 - Learn how to define connections using environment variables.
 - Add sample Snowflake and Slack Webhook connections to a DAG.
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Astronomer Academy: [Airflow: Connections 101](https://academy.astronomer.io/connections-101) module.
 

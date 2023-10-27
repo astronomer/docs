@@ -22,9 +22,9 @@ Sharing data between tasks is a very common use case in Airflow. If you've been 
 
 There are a few methods you can use to implement data sharing between your Airflow tasks. In this guide, you'll walk through the two most commonly used methods, learn when to use them, and use some example DAGs to understand how they can be implemented.
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Astronomer Academy: [Airflow: XComs 101](https://academy.astronomer.io/astro-runtime-xcoms-101) module.
 - Webinar: [How to pass data between your Airflow tasks](https://www.astronomer.io/events/webinars/how-to-pass-data-between-your-airflow-tasks/).

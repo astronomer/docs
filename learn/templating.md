@@ -32,9 +32,9 @@ Airflow leverages [Jinja](https://jinja.palletsprojects.com), a Python templatin
 - How to apply custom variables and functions when templating.
 - How to render templates to strings and native Python code.
 
-:::tip Related content
+:::tip Other ways to learn:
 
-Other ways to learn:
+There are multiple resources for learning about this topic. See also:
 
 - Astronomer Academy: [Airflow: Templating](https://academy.astronomer.io/astro-runtime-templating) module.
 
