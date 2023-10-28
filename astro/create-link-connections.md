@@ -16,8 +16,7 @@ When you use the Cloud UI to create and manage connections, you can also :
 
 ## Create a connection
 
-You can view the **Environment** 
-
+There are two ways to access the **Environment** page where you can create and manage your connections.
 - In your Deployment, go to the **Environment** tab. This view shows you all Cloud UI connections for your Deployment.
 <!-- If a connection is configured here, is it restricted by default to the Deployment it was created in? -->
 - From the main navigation, select **Environment**. This view shows you all the Cloud UI connections for your workspace. 
@@ -35,7 +34,8 @@ You can view the **Environment**
 - Generic
 
 ### Prerequisites
-- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
+
+To make changes to connections, you need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
 
 ### Setup
 
@@ -52,7 +52,7 @@ Now you can add connections to Deployments and override particular fields to cus
 
 ## Link connections to Deployments
 
-After you create connections, then you can link them to Deployments.
+After you create a connection, then you can link them to Deployments.
 
 ### Prerequisites
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
