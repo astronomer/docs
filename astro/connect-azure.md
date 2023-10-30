@@ -26,8 +26,8 @@ To facilitate communication between your Astro cluster or Deployment and your cl
 
 #### Allowlist external IP addresses for a cluster
 
-1. In the Cloud UI, click the Astronomer logo in the top left corner to open your Organization.
-2. Click **Clusters**, then select a cluster.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Clusters**.
+2. Select a cluster.
 3. In the **Details** page, copy the IP addresses listed under **External IPs**.
 
 A cluster's IP addresses are the same for all the Deployments running in that cluster. This is a one-time setup for each Astro cluster.
