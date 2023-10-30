@@ -39,6 +39,8 @@ Before trying this example, make sure you have:
 
 Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_TEST` connection and as `OPENAI_API_KEY`.
 
+Note that you either need to have an OpenAI API key of [at least tier 1](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) or switch the DAG to use local embeddings by setting `EMBEDD_LOCALLY` to `True`. 
+
 The repository is configured to spin up and use a local Weaviate instance. If you'd like to use an existing Weaviate instance, change the `host` parameter in the `AIRFLOW_CONN_WEAVIATE_TEST` connection in the `.env` file.
 
 ## Run the project
@@ -309,7 +311,13 @@ if EMBEDD_LOCALLY:
     ).expand(record=split_texts)
 ```
 
-If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that local embedding is much slower than embedding via a cloud based vectorizer. 
+If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). 
+
+:::info
+
+Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
+
+:::
 
 ```python
 from transformers import BertTokenizer, BertModel
@@ -344,7 +352,6 @@ def get_embeddings(record):
     record["vectors"] = embeddings.tolist()
     return record
 ```
-
 
 The import task ingesting the vector embeddings into Weaviate uses the `@task.weaviate_import` decorator with an import function stored in [`include/tasks/ingest.py](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/ingest.py). One mapped task instance is created for each news article chunk.
 
