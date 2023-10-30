@@ -100,7 +100,6 @@ module.exports = {
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
-        "api-keys",
         "environment-variables",
         {
           type: "category",
@@ -122,7 +121,12 @@ module.exports = {
       label: "Automation & CI/CD",
       items: [
         "automation-overview",
-        "automation-authentication",
+        {
+        type: "category",
+        label: "Secrets backend",
+        link: { type: 'doc', id: 'automation-authentication' },
+        items: ["automation-authentication", "api-keys"],
+        },
         {
           type: "category",
           label: "CI/CD",

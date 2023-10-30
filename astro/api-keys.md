@@ -1,6 +1,6 @@
 ---
-title: 'Manage Deployment API keys'
-sidebar_label: 'Deployment API keys'
+title: 'Manage Deployment API keys (Deprecated)'
+sidebar_label: 'Deployment API keys (Deprecated)'
 id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
