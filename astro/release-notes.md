@@ -669,7 +669,7 @@ For a list of all instance types available for GCP, see [Supported worker node p
 
 ### Automate Workspace and Deployment actions using Workspace API tokens
 
-Use Workspace API tokens to automate Workspace actions, such as adding users to a Workspace and creating new Deployments, or for processes that a [Deployment API key](api-keys.md) can automate. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes.
+Use Workspace API tokens to automate Workspace actions, such as adding users to a Workspace and creating new Deployments, or for processes that a Deployment API key can automate. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes.
 
 To create and use Workspace API tokens, see [Workspace API tokens](workspace-api-tokens.md).
 
@@ -2009,7 +2009,7 @@ This release introduces a breaking change to code deploys via the Astro CLI. Sta
 
 ### Support for Deployment API keys
 
-Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](set-up-ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
+Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see Deployment API keys. For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](set-up-ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
 
 ## September 3, 2021
 
