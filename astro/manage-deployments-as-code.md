@@ -99,6 +99,6 @@ To update a Deployment using a Deployment file:
 
 ## See also
 
-- [Manage Deployment API keys](api-keys.md)
+- [Authenticate an automation tool to Astro](automation-authentication.md)
 - [Deploy Code](deploy-code.md)
 - [Choose a CI/CD Strategy for deploying code to Astro](set-up-ci-cd.md)
