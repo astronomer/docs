@@ -48,11 +48,9 @@ Complete the following steps to retrieve these values:
     ]}>
 <TabItem value="snowsight">
 
-1. Open [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight). Follow the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs#using-snowsight) to open the account selector at the end of the left nav. Hover over your account to see more details, then click the **Copy URL** icon to copy the account URL. The URL has a similar format to`https://<account-identifier>.<region>.snowflakecomputing.com/`.
+1. Open [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight). Follow the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs#using-snowsight) to open the account selector at the end of the left nav. Hover over your account to see more details, then click the **Copy URL** icon to copy the account URL. The URL has a similar format to`https://<account-identifier>.<region>.snowflakecomputing.com/`. Copy `<account-identifier>` and `<region>` from the URL.
 
     ![Screenshot of the bottom of the left nav in Snowsight showing how to copy the account URL.](/img/tutorials/connections-snowflake_snowsight_url.png)
-
-2. Copy `<account-identifier>` and `<region>` from the URL.
 
   :::info
 
@@ -60,11 +58,11 @@ Complete the following steps to retrieve these values:
 
   :::
 
-3. Click the user menu in the top of the left sidebar and copy the role you want Airflow to have in Snowflake. You can click **Switch Role** to see all the available roles.
+2. Click the user menu at the beginning of the left sidebar and copy the role you want Airflow to have in Snowflake. You can click **Switch Role** to see all the available roles.
 
     ![Screenshot of the user menu in Snowsight showing how to copy the role.](/img/tutorials/connections-snowflake_snowsight_role.png)
 
-4. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and click on the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) in the content pane. 
+3. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and open the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) in the content pane. 
 
     ![Screenshot of the context selector menu in Snowsight showing how to copy the warehouse.](/img/tutorials/connections-snowflake_snowsight_warehouse.png)
 
