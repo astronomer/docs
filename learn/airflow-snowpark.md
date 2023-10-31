@@ -176,7 +176,7 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
 :::info
 
-For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](snowflake.md).
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](/connections/snowflake.md).
 
 :::
 
