@@ -200,7 +200,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
         inputs:
           - transform_task_log
         site: us1.datadoghq.com
-        default_api_key: 3a52b4271600d6a012b6789f00794d62
+        default_api_key: <your-api-key>
         encoding:
           codec: json
     ```
@@ -232,7 +232,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
         type: honeycomb
         inputs:
           - transform_syslog
-        api_key: nXZwLyMssQZuam9qeMpQiE
+        api_key: <your-api-key>
         dataset: my-honeycomb-dataset
     
     ```
@@ -244,7 +244,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
 4. Run the following command to add the configuration file to your cluster as a Kubernetes secret:
 
     ```sh
-    kubectl create secret generic sidecar-config --from-file=<your-vector-config>.yaml=<your-vector-config>.yaml
+    kubectl create secret generic sidecar-config --from-file=vector-config.yaml=vector-config.yaml
     ```
 
 5. Run the following command to annotate the secret so that it's automatically applied to all new Deployments:
