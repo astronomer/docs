@@ -135,7 +135,7 @@ You can use any remote transformer model by changing the `TRANSFORMERS_INFERENCE
 
 If you have a [tier 1 or tier 2 OpenAI API Key](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) you can use the [OpenAI API](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai) for vectorization. To do so, set `DEFAULT_VECTORIZER_MODULE` and `ENABLE_MODULES` to `text2vec-openai` in the `docker-compose.override.yml` file. Astronomer recommends using a remote model for production use or if you don't have enough memory on your local machine.
 
-After you use a remote model, you can remove the `t2v-transformers` container from your `docker-compose.yaml` file. 
+After you've defined a remote model, you can remove the `t2v-transformers` container from your `docker-compose.yaml` file. 
 
 :::
 
