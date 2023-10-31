@@ -246,6 +246,6 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 ## See also
 
-- [Set environment variables on Astro](environment-variables.md).
+- [Set environment variables on Astro](environment-variables.md)
 - [Authenticate an automation tool to Astro](automation-authentication.md)
 - [Manage Deployments as Code](manage-deployments-as-code.md)
