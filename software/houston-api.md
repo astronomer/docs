@@ -569,3 +569,18 @@ Unlike the `label` and `createdAt` fields, notice that the `users` type field re
 To know which fields you can or must specify, reference the "Schema" on the righthand side of the page. As is the case here, custom types are often composed of other custom types.
 
 ![Custom Type](/img/software/deployments_custom_typeschema.png)
+
+
+### Delete a Workspace
+
+```graphql
+mutation deleteWorkspace(
+    $workspaceUuid: Uuid = "<workspace-id>"
+  ) {
+    deleteWorkspace(
+      workspaceUuid: $workspaceUuid
+    ) {
+        id
+    }
+  }
+```
