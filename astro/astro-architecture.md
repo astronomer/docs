@@ -19,7 +19,7 @@ The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform 
 
 The following diagram shows how these components work together to help you manage Airflow on Astro.
 
-![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.png)
+![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.jpeg)
 
 ## Key concepts
 
