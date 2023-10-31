@@ -48,7 +48,7 @@ Complete the following steps to retrieve these values:
     ]}>
 <TabItem value="snowsight">
 
-1. Open [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight). Follow the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs#using-snowsight) to open the account selector at the bottom of the left nav. Hover over your account to see more details, then click the **Copy URL** icon to copy the account URL. The URL should be in the format `https://<account-identifier>.<region>.snowflakecomputing.com/`.
+1. Open [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight). Follow the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs#using-snowsight) to open the account selector at the end of the left nav. Hover over your account to see more details, then click the **Copy URL** icon to copy the account URL. The URL has a similar format to`https://<account-identifier>.<region>.snowflakecomputing.com/`.
 
     ![Screenshot of the bottom of the left nav in Snowsight showing how to copy the account URL.](/img/tutorials/connections-snowflake_snowsight_url.png)
 
@@ -60,11 +60,11 @@ Complete the following steps to retrieve these values:
 
   :::
 
-3. Click on the user menu at the top of the left nav to see your current `role`. You can click on **Switch Role** to see all the available roles.
+3. Click the user menu in the top of the left sidebar and copy the role you want Airflow to have in Snowflake. You can click **Switch Role** to see all the available roles.
 
     ![Screenshot of the user menu in Snowsight showing how to copy the role.](/img/tutorials/connections-snowflake_snowsight_role.png)
 
-4. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and click on the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) on the right side of the screen. 
+4. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and click on the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) in the content pane. 
 
     ![Screenshot of the context selector menu in Snowsight showing how to copy the warehouse.](/img/tutorials/connections-snowflake_snowsight_warehouse.png)
 
@@ -72,8 +72,7 @@ Complete the following steps to retrieve these values:
 
 <TabItem value="classic">
 
-1. Open the [Snowflake classic console](https://docs.snowflake.com/en/user-guide/ui-using) and locate the URL for the page. The URL should be in the format `https://<account-identifier>.<region>.snowflakecomputing.com/`.
-2. Copy `<account-identifier>` and `<region>` from the URL.
+1. Open the [Snowflake classic console](https://docs.snowflake.com/en/user-guide/ui-using) and locate the URL for the page. The URL should be in the format `https://<account-identifier>.<region>.snowflakecomputing.com/`. Copy `<account-identifier>` and `<region>` from the URL.
 
   :::info
 
@@ -81,18 +80,18 @@ Complete the following steps to retrieve these values:
 
   :::
 
-3. Click on your account name in the top right corner and hover over **Switch Role** to see a list of all available roles. Copy your **Role**.
+2. Click on your account name in the top right corner and hover over **Switch Role** to see a list of all available roles. Copy your **Role**.
 
     ![Screenshot roles in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_role.png)
 
-4. Copy your **Warehouse** from the **Warehouses** tab.
+3. Copy your **Warehouse** from the **Warehouses** tab.
 
     ![Screenshot warehouses tab in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_warehouse_tab.png)
 
 </TabItem>
 </Tabs>
 
-4. Copy the names for your **Database**, and **Schema**.
+4. Copy the names for your **Database** and **Schema**.
 5. [Create a new user](https://docs.snowflake.com/en/sql-reference/sql/create-user) that Airflow can use to access Snowflake. Copy the username and password.
 
 ## Create your connection
