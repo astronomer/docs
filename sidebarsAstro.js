@@ -174,6 +174,11 @@ module.exports = {
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
+        {
+          type: "category",
+          label: "Integrations",
+          items: ["export-datadog", "export-cloudwatch"],
+        },
       ],
     },
     {
