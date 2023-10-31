@@ -121,12 +121,7 @@ module.exports = {
       label: "Automation & CI/CD",
       items: [
         "automation-overview",
-        {
-        type: "category",
-        label: "Secrets backend",
-        link: { type: 'doc', id: 'automation-authentication' },
-        items: ["automation-authentication", "api-keys"],
-        },
+        "automation-authentication",
         {
           type: "category",
           label: "CI/CD",
@@ -157,7 +152,8 @@ module.exports = {
           items: [
             "manage-deployments-as-code",
             "deployment-file-reference"],
-        }, 
+        },
+        "api-keys", 
       ],
     },
     {
