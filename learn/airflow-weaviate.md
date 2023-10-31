@@ -133,9 +133,9 @@ The Airflow Weaviate provider is currently in beta and not yet available on PyPI
 
 You can use any remote transformer model by changing the `TRANSFORMERS_INFERENCE_API` value in the `docker-compose.override.yml` file. See the Weaviate documentation on [modules](https://weaviate.io/developers/weaviate/modules) for more information. 
 
-If you have a [tier 1 or tier 2 OpenAI API Key](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) you can use the [OpenAI API](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai) for vectorization. Set `DEFAULT_VECTORIZER_MODULE` and `ENABLE_MODULES` to `text2vec-openai` in the `docker-compose.override.yml` file to use the OpenAI API. Astronomer recommends using a remote model if you run into memory issues when using a local model and for production use cases.
+If you have a [tier 1 or tier 2 OpenAI API Key](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) you can use the [OpenAI API](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai) for vectorization. To do so, set `DEFAULT_VECTORIZER_MODULE` and `ENABLE_MODULES` to `text2vec-openai` in the `docker-compose.override.yml` file. Astronomer recommends using a remote model for production use or if you don't have enough memory on your local machine.
 
-When a remote model is used, the `t2v-transformers` container can be removed from the `docker-compose.yaml` file. 
+After you use a remote model, you can remove the `t2v-transformers` container from your `docker-compose.yaml` file. 
 
 :::
 
