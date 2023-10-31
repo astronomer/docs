@@ -160,7 +160,7 @@ Click a dataset to open the history of all updates to the dataset that were reco
 
 :::info Astro does not support the Security tab
 
-Because role-based acceess control is managed at the Astro platform level, the Security tab is not useful for Airflow when running on Astro. As a result, this tab does not exist in Airflow on Astro.
+On Astro, role-based access control is managed at the platform level. As a result, the Security tab is not needed and is not available on Airflow deployments on Astro.
 
 :::
 
