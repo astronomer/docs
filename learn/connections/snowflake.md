@@ -6,6 +6,9 @@ description: Learn how to create a Snowflake connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [Snowflake](https://www.snowflake.com/en/) is a cloud data warehouse where you can store and analyze your data. Integrating Snowflake with Airflow allows you to do all of the following and more from a DAG:
 
 - Run SQL
@@ -36,8 +39,18 @@ A connection from Airflow to Snowflake requires the following information:
 
 Complete the following steps to retrieve these values:
 
-1. Open the [Snowflake classic console](https://docs.snowflake.com/en/user-guide/ui-using) and locate the URL for the page. The URL should be in the format `https://<account-identifier>.<region>.snowflakecomputing.com/`. If you're using the new Snowsight console (`https://app.snowflake.com`), follow the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/admin-account-identifier#finding-the-organization-and-account-name-for-an-account) to retrieve your URL.
-2. Copy `<account-identifier>` and `<region>` from the URL.
+<Tabs
+    defaultValue="snowsight"
+    groupId="get-connection-details"
+    values={[
+        {label: 'Snowsight', value: 'snowsight'},
+        {label: 'Snowflake classic console', value: 'classic'},
+    ]}>
+<TabItem value="snowsight">
+
+1. Open [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight). Follow the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs#using-snowsight) to open the account selector at the end of the left nav. Hover over your account to see more details, then click the **Copy URL** icon to copy the account URL. The URL has a similar format to`https://<account-identifier>.<region>.snowflakecomputing.com/`. Copy `<account-identifier>` and `<region>` from the URL.
+
+    ![Screenshot of the bottom of the left nav in Snowsight showing how to copy the account URL.](/img/tutorials/connections-snowflake_snowsight_url.png)
 
   :::info
 
@@ -45,8 +58,38 @@ Complete the following steps to retrieve these values:
 
   :::
 
-3. Follow the [Snowflake documentation](https://community.snowflake.com/s/article/How-to-Capture-Snowflake-Users-Roles-and-Grants-Into-a-Table#:~:text=Snowflake%20Users%20and%20Roles%20via,Roles%20tab%2C%20as%20shown%20below) to copy your **Role**.
-4. Copy the names for your **Warehouse**, **Database**, and **Schema**.
+2. Click the user menu at the beginning of the left sidebar and copy the role you want Airflow to have in Snowflake. You can click **Switch Role** to see all the available roles.
+
+    ![Screenshot of the user menu in Snowsight showing how to copy the role.](/img/tutorials/connections-snowflake_snowsight_role.png)
+
+3. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and open the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) in the content pane. 
+
+    ![Screenshot of the context selector menu in Snowsight showing how to copy the warehouse.](/img/tutorials/connections-snowflake_snowsight_warehouse.png)
+
+</TabItem>
+
+<TabItem value="classic">
+
+1. Open the [Snowflake classic console](https://docs.snowflake.com/en/user-guide/ui-using) and locate the URL for the page. The URL should be in the format `https://<account-identifier>.<region>.snowflakecomputing.com/`. Copy `<account-identifier>` and `<region>` from the URL.
+
+  :::info
+
+  When you copy your `region`, you might have to additionally copy the cloud provider identifier after the region name for some GCP and some AWS regions. For example, if your account URL is `https://ZS86751.europe-west4.gcp.snowflakecomputing.com`, then your `region` will be `europe-west4.gcp`. See [Account identifiers](https://docs.snowflake.com/en/user-guide/admin-account-identifier) to learn more about Snowflake's account types and their identifiers.
+
+  :::
+
+2. Click on your account name in the top right corner and hover over **Switch Role** to see a list of all available roles. Copy your **Role**.
+
+    ![Screenshot roles in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_role.png)
+
+3. Copy your **Warehouse** from the **Warehouses** tab.
+
+    ![Screenshot warehouses tab in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_warehouse_tab.png)
+
+</TabItem>
+</Tabs>
+
+4. Copy the names for your **Database** and **Schema**.
 5. [Create a new user](https://docs.snowflake.com/en/sql-reference/sql/create-user) that Airflow can use to access Snowflake. Copy the username and password.
 
 ## Create your connection
