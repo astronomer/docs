@@ -64,6 +64,10 @@ Complete the following steps to retrieve these values:
 
     ![Screenshot of the user menu in Snowsight showing how to copy the role.](/img/tutorials/connections-snowflake_snowsight_role.png)
 
+4. Copy the name of your **Warehouse**. To see all available warehouses, open a new **Worksheet** and click on the [context selector menu](https://docs.snowflake.com/en/user-guide/ui-snowsight-worksheets#change-the-session-context-for-a-worksheet) on the right side of the screen. 
+
+    ![Screenshot of the context selector menu in Snowsight showing how to copy the warehouse.](/img/tutorials/connections-snowflake_snowsight_warehouse.png)
+
 </TabItem>
 
 <TabItem value="classic">
@@ -78,11 +82,14 @@ Complete the following steps to retrieve these values:
   :::
 
 3. Follow the [Snowflake documentation](https://community.snowflake.com/s/article/How-to-Capture-Snowflake-Users-Roles-and-Grants-Into-a-Table#:~:text=Snowflake%20Users%20and%20Roles%20via,Roles%20tab%2C%20as%20shown%20below) to copy your **Role**.
+4. Copy your **Warehouse** from the **Warehouses** tab.
+
+    ![Screenshot warehouses tab in Snowflake.](/img/tutorials/connections-snowflake_classic_warehouse_tab.png)
 
 </TabItem>
 </Tabs>
 
-4. Copy the names for your **Warehouse**, **Database**, and **Schema**.
+4. Copy the names for your **Database**, and **Schema**.
 5. [Create a new user](https://docs.snowflake.com/en/sql-reference/sql/create-user) that Airflow can use to access Snowflake. Copy the username and password.
 
 ## Create your connection

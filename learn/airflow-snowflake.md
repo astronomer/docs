@@ -80,7 +80,7 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 
 :::info
 
-For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](/connections/snowflake.md).
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://docs.astronomer.io/learn/connections/snowflake).
 
 :::
 
