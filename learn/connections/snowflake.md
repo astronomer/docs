@@ -40,8 +40,8 @@ A connection from Airflow to Snowflake requires the following information:
 Complete the following steps to retrieve these values:
 
 <Tabs
-    defaultValue="taskflow"
-    groupId="dataset-concepts"
+    defaultValue="snowsight"
+    groupId="get-connection-details"
     values={[
         {label: 'Snowsight', value: 'snowsight'},
         {label: 'Snowflake classic console syntax', value: 'classic'},
