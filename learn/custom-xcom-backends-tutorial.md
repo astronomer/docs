@@ -19,7 +19,7 @@ Common reasons to use a custom XCom backend include:
 
 - Needing more storage space for XCom than the metadata database can offer.
 - Running a production environment where you require custom retention, deletion, and backup policies for XComs. With a custom XCom backend, you don't need to worry about periodically cleaning up the metadata database.
-- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization and Airflow 2.6 added support for `pyarrow` serialization of pandas DataFrames. This limits the types of data you can pass through XComs. You can serialize other types of data using [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling), however this method is not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). A custom XCom backend allows you to implement your own serialization and deserialization methods that are suitable for production workflows.
+- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization or `pyarrow` serialization of pandas DataFrames. This limits the types of data you can pass through XComs. You can serialize other types of data using [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling), however this method is not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). A custom XCom backend allows you to implement your own serialization and deserialization methods that are suitable for production workflows.
 - Accessing XCom without accessing the metadata database.
 
 After you complete this tutorial, you'll be able to:
