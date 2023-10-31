@@ -44,7 +44,7 @@ Complete the following steps to retrieve these values:
     groupId="get-connection-details"
     values={[
         {label: 'Snowsight', value: 'snowsight'},
-        {label: 'Snowflake classic console syntax', value: 'classic'},
+        {label: 'Snowflake classic console', value: 'classic'},
     ]}>
 <TabItem value="snowsight">
 
@@ -81,10 +81,13 @@ Complete the following steps to retrieve these values:
 
   :::
 
-3. Follow the [Snowflake documentation](https://community.snowflake.com/s/article/How-to-Capture-Snowflake-Users-Roles-and-Grants-Into-a-Table#:~:text=Snowflake%20Users%20and%20Roles%20via,Roles%20tab%2C%20as%20shown%20below) to copy your **Role**.
+3. Click on your account name in the top right corner and hover over **Switch Role** to see a list of all available roles. Copy your **Role**.
+
+    ![Screenshot roles in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_role.png)
+
 4. Copy your **Warehouse** from the **Warehouses** tab.
 
-    ![Screenshot warehouses tab in Snowflake.](/img/tutorials/connections-snowflake_classic_warehouse_tab.png)
+    ![Screenshot warehouses tab in Snowflake classic console.](/img/tutorials/connections-snowflake_classic_warehouse_tab.png)
 
 </TabItem>
 </Tabs>
