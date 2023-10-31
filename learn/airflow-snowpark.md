@@ -174,6 +174,12 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
         }'
     ```
 
+:::info
+
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](snowflake.md).
+
+:::
+
 8. (Optional) If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
 
     ```text
