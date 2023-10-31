@@ -158,6 +158,12 @@ Click a dataset to open the history of all updates to the dataset that were reco
 
 ## Security tab
 
+:::info Astro does not support the Security tab
+
+Because role-based acceess control is managed at the Astro platform level, the Security tab is not useful for Airflow when running on Astro. As a result, this tab does not exist in Airflow on Astro.
+
+:::
+
 The **Security** tab links to multiple pages, including **List Users** and **List Roles**, that you can use to review and manage Airflow role-based access control (RBAC). For more information on working with RBAC, see [Security](https://airflow.apache.org/docs/apache-airflow/stable/security/index.html).
 
 ![Security](/img/guides/2_4_SecurityTab.png)
