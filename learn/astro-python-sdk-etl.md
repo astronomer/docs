@@ -182,7 +182,7 @@ Since there is no way to pass results from the [`SnowflakeOperator`](https://reg
 
 ### Transform data
 
-The third step in the pipeline is transforming the data. The transformations required for this pipeline are easier to implement in Python than in SQL. With the Astro Python SDK, you can run a transformation in Python with the `dataframe` function, meaning that you don't need to explicitly convert the results of your previous task to a Pandas DataFrame. You can then write output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you don't have to worry about storing the data in XCom.
+The third step in the pipeline is transforming the data. The transformations required for this pipeline are easier to implement in Python than in SQL. With the Astro Python SDK, you can run a transformation in Python with the `dataframe` function, meaning that you don't need to explicitly convert the results of your previous task to a pandas DataFrame. You can then write output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you don't have to worry about storing the data in XCom.
 
 ```python
 @aql.dataframe
@@ -231,7 +231,7 @@ load_transformed_data = S3ToSnowflakeOperator(
 )
 ```
 
-Transitioning between Python to complete the transformation and SQL to load the results back to Snowflake requires extra boilerplate code to explicitly make the conversions. You also have to use a S3 as intermediary storage for the results and implement another `S3ToSnowflakeOperator` to load them, because there is no traditional operator to load data from a Pandas dataframe directly to Snowflake.
+Transitioning between Python to complete the transformation and SQL to load the results back to Snowflake requires extra boilerplate code to explicitly make the conversions. You also have to use a S3 as intermediary storage for the results and implement another `S3ToSnowflakeOperator` to load them, because there is no traditional operator to load data from a pandas DataFrame directly to Snowflake.
 
 Overall, your DAG with the Astro Python SDK is shorter, simpler to implement, and easier to read. This allows you to implement even more complicated use cases easily while focusing on the movement of your data.
 
