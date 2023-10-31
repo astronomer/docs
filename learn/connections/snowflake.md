@@ -50,7 +50,7 @@ Complete the following steps to retrieve these values:
 
 1. Open [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight). Follow the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/ui-snowsight-gs#using-snowsight) to open the account selector at the bottom of the left nav. Hover over your account to see more details, then click the **Copy URL** icon to copy the account URL. The URL should be in the format `https://<account-identifier>.<region>.snowflakecomputing.com/`.
 
-    ![Screenshot of the bottom of the left nav in Snowsight showing how to copy the account URL.](/img/tutorials/snowflake_snowsight_url.png)
+    ![Screenshot of the bottom of the left nav in Snowsight showing how to copy the account URL.](/img/tutorials/connections-snowflake_snowsight_url.png)
 
 2. Copy `<account-identifier>` and `<region>` from the URL.
 
