@@ -87,7 +87,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
 
 2. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
-3. Create a custom [vector configuration `yaml` file](https://vector.dev/docs/reference/configuration/) to change how and where sidecars forward your logs. The following examples are template configurations for each commonly used sink:
+3. Create a custom [vector configuration `yaml` file](https://vector.dev/docs/reference/configuration/) to change how and where sidecars forward your logs. The following examples are template configurations for each commonly used sink. For the complete default logging sidecar configmap, see the [Astronomer GitHub](https://github.com/astronomer/airflow-chart/blob/master/templates/logging-sidecar-configmap.yaml).
 
   <Tabs
       defaultValue="elasticsearch"
