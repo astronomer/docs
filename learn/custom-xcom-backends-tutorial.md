@@ -19,14 +19,14 @@ Common reasons to use a custom XCom backend include:
 
 - Needing more storage space for XCom than the metadata database can offer.
 - Running a production environment where you require custom retention, deletion, and backup policies for XComs. With a custom XCom backend, you don't need to worry about periodically cleaning up the metadata database.
-- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization, which limits the types of data you can pass through XComs. You can serialize other types of data using [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling), however this method is not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). A custom XCom backend allows you to implement your own serialization and deserialization methods that are suitable for production workflows.
+- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization and Airflow 2.6 added support for `pyarrow` serialization of pandas DataFrames. This limits the types of data you can pass through XComs. You can serialize other types of data using [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling), however this method is not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). A custom XCom backend allows you to implement your own serialization and deserialization methods that are suitable for production workflows.
 - Accessing XCom without accessing the metadata database.
 
 After you complete this tutorial, you'll be able to:
 
 - Create a custom XCom backend using cloud-based or local object storage.
 - Use JSON serialization and deserialization in a custom XCom backend.
-- Add custom logic to the serialization and deserialization methods to store Pandas dataframes as CSVs in your custom XCom backend.
+- Add custom logic to the serialization and deserialization methods to store pandas DataFrames as CSVs in your custom XCom backend.
 - Explain best practices of using custom XCom backends.
 - Explain the possibility of customizing other BaseXCom methods for extended functionality.
 
@@ -692,15 +692,15 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 </TabItem>
 </Tabs>
 
-## Step 6: Create a custom serialization method to handle Pandas dataframes
+## Step 6: Create a custom serialization method to handle pandas DataFrames
 
 A powerful feature of custom XCom backends is the possibility to create custom serialization and deserialization methods. This is particularly useful for handling objects that cannot be JSON-serialized. In this step, you will create a new custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file. When you serialize your data as a CSV file, you can query it with tools like [csvq](https://mithrandie.github.io/csvq/).
 
-Note that as of Airflow 2.6, Pandas dataframes can be serialized by the standard XCom backend using `pyarrow`. This step is still useful if you are using an older version of Airflow.
+Note that as of Airflow 2.6, pandas DataFrames can be serialized by the standard XCom backend using `pyarrow`. This step is still useful if you are using an older version of Airflow.
 
 :::info
 
-The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage with added serialization methods for Pandas dataframes and datetime date objects. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. 
+The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage with added serialization methods for pandas DataFrames and datetime date objects. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. 
 When using a pre-built XCom backend you do not have to create any new files in the `include` folder and you can skip [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) and Step 6 of this tutorial.
 
 :::
@@ -745,7 +745,7 @@ class CustomXComBackendPandas(BaseXCom):
 
         hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
         
-        # added serialization method if the value passed is a Pandas dataframe
+        # added serialization method if the value passed is a pandas DataFrame
         # the contents are written to a local temporary csv file
         if isinstance(value, pd.DataFrame):
             filename = "data_" + str(uuid.uuid4()) + ".csv"
@@ -753,7 +753,7 @@ class CustomXComBackendPandas(BaseXCom):
 
             value.to_csv(filename)
 
-        # if the value passed is not a Pandas dataframe, attempt to use
+        # if the value passed is not a pandas DataFrame, attempt to use
         # JSON serialization
         else:
             filename = "data_" + str(uuid.uuid4()) + ".json"
@@ -830,7 +830,7 @@ class CustomXComBackendPandas(BaseXCom):
 
         hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
         
-        # added serialization method if the value passed is a Pandas dataframe
+        # added serialization method if the value passed is a pandas DataFrame
         # the contents are written to a local temporary csv file
         if isinstance(value, pd.DataFrame):
             filename = "data_" + str(uuid.uuid4()) + ".csv"
@@ -838,7 +838,7 @@ class CustomXComBackendPandas(BaseXCom):
 
             value.to_csv(filename)
 
-        # if the value passed is not a Pandas dataframe, attempt to use
+        # if the value passed is not a pandas DataFrame, attempt to use
         # JSON serialization
         else:
             filename = "data_" + str(uuid.uuid4()) + ".json"
@@ -915,7 +915,7 @@ class CustomXComBackendPandas(BaseXCom):
 
         hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
         
-        # added serialization method if the value passed is a Pandas dataframe
+        # added serialization method if the value passed is a pandas DataFrame
         # the contents are written to a local temporary csv file
         if isinstance(value, pd.DataFrame):
             filename = "data_" + str(uuid.uuid4()) + ".csv"
@@ -923,7 +923,7 @@ class CustomXComBackendPandas(BaseXCom):
 
             value.to_csv(filename)
 
-        # if the value passed is not a Pandas dataframe, attempt to use
+        # if the value passed is not a pandas DataFrame, attempt to use
         # JSON serialization
         else:
             filename = "data_" + str(uuid.uuid4()) + ".json"
@@ -1008,7 +1008,7 @@ class CustomXComBackendPandas(BaseXCom):
             secure=False
         )
 
-        # added serialization method if the value passed is a Pandas dataframe
+        # added serialization method if the value passed is a pandas DataFrame
         # the contents are written to a local temporary csv file
         if isinstance(value, pd.DataFrame):
             filename = "data_" + str(uuid.uuid4()) + ".csv"
@@ -1023,7 +1023,7 @@ class CustomXComBackendPandas(BaseXCom):
             # remove the local temporary file
             os.remove(filename)
 
-        # if the value passed is not a Pandas dataframe, attempt to use
+        # if the value passed is not a pandas DataFrame, attempt to use
         # JSON serialization
         else:
             filename = "data_" + str(uuid.uuid4()) + ".json"
@@ -1080,7 +1080,7 @@ class CustomXComBackendPandas(BaseXCom):
 </TabItem>
 </Tabs>
 
-3. Review the copied code. It creates a custom XCom backend called `CustomXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to object storage and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
+3. Review the copied code. It creates a custom XCom backend called `CustomXComBackendPandas` with added logic to convert a pandas DataFrame to a CSV file, which gets written to object storage and converted back to a pandas DataFrame upon retrieval. If the value passed is not a pandas DataFrame, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
 
 4. In the `.env` file of your Astro project, replace the XCom backend variable to use the newly created `CustomXComBackendPandas`.
 
@@ -1096,9 +1096,9 @@ You can add custom logic inside your `.serialize()` and `.deserialize()` methods
 
 :::
 
-## Step 7: Run a DAG passing Pandas dataframes via XCom
+## Step 7: Run a DAG passing pandas DataFrames via XCom
 
-Test the new custom XCom backend by running a DAG that passes a Pandas dataframe between tasks.
+Test the new custom XCom backend by running a DAG that passes a pandas DataFrame between tasks.
 
 1. Create a new file called `fetch_pokemon_data_dag.py` in the `dags` folder of your Astro project.
 
@@ -1135,7 +1135,7 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
 
         @task
         def calculate_xp_per_height(pokemon_data_dict):
-            """Calculates base XP per height and returns a pandas dataframe."""
+            """Calculates base XP per height and returns a pandas DataFrame."""
 
             df = pd.DataFrame(pokemon_data_dict)
 
@@ -1145,7 +1145,7 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
 
         @task 
         def print_xp_per_height(pokemon_data_df):
-            """Retrieves information from a pandas dataframe in the custom XCom
+            """Retrieves information from a pandas DataFrame in the custom XCom
             backend. Prints out Pokémon information."""
 
             for i in pokemon_data_df.index:
@@ -1158,7 +1158,7 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
     fetch_pokemon_data_dag()
     ```
 
-    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XCom, which is only possible when using a custom XCom backend with a serialization method for this type of object. The last task, `print_xp_per_height`, retrieves the CSV and recreates the Pandas dataframe before printing out the Pokémon and their base experience to height ratio.
+    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a pandas DataFrame to XCom, which is only possible when using a custom XCom backend with a serialization method for this type of object. The last task, `print_xp_per_height`, retrieves the CSV and recreates the pandas DataFrame before printing out the Pokémon and their base experience to height ratio.
 
 3. View the information about your favorite Pokémon in the task log of the `print_xp_per_height` task.
 
