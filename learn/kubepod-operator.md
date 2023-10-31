@@ -152,7 +152,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     client-key-data: <client-key-data>
     ```
 
-2. If facing issues connecting, check the server configuration in the `kubeconfig` file. If `server: https://localhost:6445` is present, change to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
+2. If you have issues connecting, check the server configuration in the `kubeconfig` file. If `server: https://localhost:6445` is present, change to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
 3. (Optional) Add the `.kube` folder to `.gitignore` if your Astro project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool.
 4. (Optional) Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
 
