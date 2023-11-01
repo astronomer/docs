@@ -27,7 +27,7 @@ Release date: November 1, 2023
 
 ### Bug fixes
 
-- Fixed an issue where `astro deployment create` was somtimes giving an invalid runtime version error in cases where the runtime version was valid.
+- Fixed an issue where `astro deployment create` was sometimes giving an invalid runtime version error in cases where the runtime version was valid.
 
 ## Astro CLI 1.19.3
 
