@@ -54,6 +54,19 @@ Each connection type requires different configurations and values based on the s
 - Check the documentation of the external tool you are connecting to and see if it offers guidance on how to authenticate.
 - Refer to the source code of the hook that is being used by your operator.
 
+:::tip
+
+If you use a mix of strategies for managing connections, it's important to understand that when Airflow searches for connections, it uses the following order:
+
+1. Secrets Backend
+2. Cloud UI connections
+3. Environment Variables
+4. Airflow's metadata database (Airflow UI)
+
+See [How Airflow finds connections](https://docs.astronomer.io/astro/manage-connections-variables#how-airflow-finds-connections) for more information.
+
+:::
+
 ## Defining connections in the Airflow UI
 
 The most common way of defining a connection is using the Airflow UI. Go to **Admin** > **Connections**.

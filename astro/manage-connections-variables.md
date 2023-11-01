@@ -39,7 +39,7 @@ If you use a mix of strategies for managing connections, it's important to under
 1. Secrets Backend
 2. Cloud UI connections
 3. Environment Variables
-4. Airflow's metadata database (Airflow UI )
+4. Airflow's metadata database (Airflow UI)
 
 This means that Astro first checks secrets backends, then the Cloud UI, followed by environment variables, and finally checks for connections defined in the Airflow UI.
 
