@@ -52,29 +52,29 @@ The following table lists the specific permissions that each Workspace role has:
 
 | Permission                                                                  | **Workspace Member** | **Workspace Author** | **Workspace Operator** | **Workspace Owner** |
 | --------------------------------------------------------------------------- | -------------------- | -------------------- | ---------------------- | ------------------- |
-| View Workspace users                                                        | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
-| View all Deployments in the Cloud UI                                        | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
-| View DAGs in the Airflow UI                                                 | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
-| View Airflow task logs                                                      | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
-| View Airflow datasets                                                       | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
-| View Astro Cloud IDE projects                                               | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
-| View Astro alerts                                                           | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
-| Manually trigger DAG and task runs                                          |                      | ✔️                   | ✔️                     | ✔️                  |
-| Pause or unpause a DAG                                                      |                      | ✔️                   | ✔️                     | ✔️                  |
-| Clear/mark a task run or DAG run                                            |                      | ✔️                   | ✔️                     | ✔️                  |
-| Push code to Deployments or Astro Cloud IDE projects                        |                      | ✔️                   | ✔️                     | ✔️                  |
-| Create, update, and delete Astro Cloud IDE projects                         |                      | ✔️                   | ✔️                     | ✔️                  |
-| Create, update, and delete Astro alerts                                     |                      | ✔️                   | ✔️                     | ✔️                  |
-| View Airflow connections, variables, plugins, providers, pools, and XComs   |                      | ✔️                   | ✔️                     | ✔️                  |
-| Update Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                     | ✔️                  |
-| Update Deployment configurations                                            |                      |                      | ✔️                     | ✔️                  |
-| Create and Delete Deployments                                               |                      |                      | ✔️                     | ✔️                  |
-| Create, Update and Delete Deployment environment variables                  |                      |                      | ✔️                     | ✔️                  |
-| View the **Cluster Activity** tab in the Airflow UI                         |                      |                      |                        | ✔️                  |
-| Update user roles and permissions                                           |                      |                      |                        | ✔️                  |
-| Invite users to a Workspace                                                 |                      |                      |                        | ✔️                  |
-| Assign Teams to or remove from Workspaces                                   |                      |                      |                        | ✔️                  |
-| Create, update, and delete Deployment and Workspace API tokens              |                      |                      |                        | ✔️                  |
+| View Workspace users                                                        | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View all Deployments in the Cloud UI                                        | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View DAGs in the Airflow UI                                                 | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Airflow task logs                                                      | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Airflow datasets                                                       | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Astro Cloud IDE projects                                               | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View Astro alerts                                                           | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| Manually trigger DAG and task runs                                          |                      | ✔️                    | ✔️                      | ✔️                   |
+| Pause or unpause a DAG                                                      |                      | ✔️                    | ✔️                      | ✔️                   |
+| Clear/mark a task run or DAG run                                            |                      | ✔️                    | ✔️                      | ✔️                   |
+| Push code to Deployments or Astro Cloud IDE projects                        |                      | ✔️                    | ✔️                      | ✔️                   |
+| Create, update, and delete Astro Cloud IDE projects                         |                      | ✔️                    | ✔️                      | ✔️                   |
+| Create, update, and delete Astro alerts                                     |                      | ✔️                    | ✔️                      | ✔️                   |
+| View Airflow connections, variables, plugins, providers, pools, and XComs   |                      | ✔️                    | ✔️                      | ✔️                   |
+| Update Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                      | ✔️                   |
+| Update Deployment configurations                                            |                      |                      | ✔️                      | ✔️                   |
+| Create and Delete Deployments                                               |                      |                      | ✔️                      | ✔️                   |
+| Create, Update and Delete Deployment environment variables                  |                      |                      | ✔️                      | ✔️                   |
+| Create, update, and delete Deployment and Workspace API tokens              |                      |                      | ✔️                      | ✔️                   |
+| View the **Cluster Activity** tab in the Airflow UI                         |                      |                      |                        | ✔️                   |
+| Update user roles and permissions                                           |                      |                      |                        | ✔️                   |
+| Invite users to a Workspace                                                 |                      |                      |                        | ✔️                   |
+| Assign Teams to or remove from Workspaces                                   |                      |                      |                        | ✔️                   |
 
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
 

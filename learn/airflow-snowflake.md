@@ -78,6 +78,12 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 
     ![Snowflake connection](/img/guides/snowflake_tutorial_connection.png)
 
+:::info
+
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://docs.astronomer.io/learn/connections/snowflake).
+
+:::
+
 ## Step 3: Add your SQL statements
 
 The DAG you will create in Step 4 runs multiple SQL statements against your Snowflake data warehouse. While it is possible to add SQL statements directly in your DAG file it is common practice to store them in separate files. When initializing your Astro project with the Astro CLI, an `include` folder was created. The contents of this folder will automatically be mounted into the Dockerfile, which makes it the standard location in which supporting files are stored.
