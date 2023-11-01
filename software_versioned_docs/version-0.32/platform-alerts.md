@@ -69,7 +69,7 @@ By default, the Alertmanager Helm chart includes alert objects for platform, cri
 ```yaml
 alertmanager:
   customRoutes:
-  - name: deployment-high-receiver
+  - receiver: deployment-high-receiver
     match_re:
       tier: airflow
       severity: high

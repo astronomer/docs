@@ -124,5 +124,5 @@ astro dev upgrade-test --dag-test
 
 ## See also
 
-- [Debug DAGs](https://docs.astronomer.io/learn/debugging-dags.md)
+- [Debug DAGs](https://docs.astronomer.io/learn/debugging-dags)
 - [`astro dev pytest`](./astro-dev-pytest.md)

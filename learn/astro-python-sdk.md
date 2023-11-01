@@ -24,6 +24,14 @@ This guide is based on the latest version of the Astro SDK. If you're using an e
 
 :::
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Astro: SDK](https://academy.astronomer.io/astro-runtime-sdk) module.
+- Webinar: [Simplified DAG authoring with the Astro SDK](https://www.astronomer.io/events/webinars/simplified-dag-authoring-with-the-astro-sdk/).
+
+:::
 
 ## Assumed knowledge
 

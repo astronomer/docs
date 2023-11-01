@@ -140,6 +140,9 @@ module.exports = {
         'astro-python-sdk',
         'external-python-operator',
         'custom-airflow-ui-docs-tutorial',
+        'pycharm-local-dev',
+        'vscode-local-dev',
+        'example-ms-teams-callback',
       ],
     },
     {
@@ -166,8 +169,8 @@ module.exports = {
               image: '/img/integrations/azure-data-factory.png'
           },
           items: [
+            'connections/azure-data-factory',
             'airflow-azure-data-factory-integration',
-            'connections/azure-data-factory'
           ],
         },
         'connections/bigquery',
@@ -181,8 +184,8 @@ module.exports = {
               image: '/img/integrations/databricks.png'
           },
           items: [
-            'airflow-databricks',
             'connections/databricks',
+            'airflow-databricks',
           ],
         },
         {
@@ -195,8 +198,8 @@ module.exports = {
               image: '/img/integrations/dbt.png'
           },
           items: [
-            'airflow-dbt-cloud',
             'connections/dbt-cloud',
+            'airflow-dbt-cloud',
           ],
         },
         'airflow-dbt',
@@ -218,8 +221,8 @@ module.exports = {
               image: '/img/integrations/redshift.png'
           },
           items: [
+            'connections/redshift',
             'airflow-redshift',
-            'connections/redshift'
           ],
         },
         'connections/postgres',
@@ -233,8 +236,9 @@ module.exports = {
               image: '/img/integrations/snowflake.png'
           },
           items: [
+            'connections/snowflake',
             'airflow-snowflake',
-            'connections/snowflake'
+            'airflow-snowpark',
           ],
         },
         'soda-data-quality',
@@ -245,28 +249,20 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Examples',
+      label: 'Use cases',
       link: {
         type: 'generated-index',
-        title: 'Examples',
-        description: 'See examples of use cases and more with Apache Airflow.'
+        title: 'Use cases',
+        description: 'Example use cases and implementations with Apache Airflow.'
       },
       items: [
-          'pycharm-local-dev',
-          'vscode-local-dev',
-          'example-ms-teams-callback',
-          {
-            type: 'category',
-            label: 'Use cases',
-            items: [
-              'use-case-setup-teardown-data-quality',
-              'use-case-airflow-databricks',
-              'use-case-airflow-dbt',
-              'use-case-elt-ml-finance',
-              'use-case-airflow-ml-datasets',
-              'use-case-airflow-mlflow'
-            ],
-          },
+          'use-case-setup-teardown-data-quality',
+          'use-case-airflow-databricks',
+          'use-case-airflow-dbt',
+          'use-case-elt-ml-finance',
+          'use-case-airflow-llm-rag-finance',
+          'use-case-airflow-ml-datasets',
+          'use-case-airflow-mlflow'
       ],
     },
     'airflow-glossary'

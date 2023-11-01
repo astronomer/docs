@@ -2,7 +2,7 @@
 title: "Orchestrate Snowflake Queries with Airflow"
 description: "Get enhanced observability and compute savings while orchestrating Snowflake jobs from your Airflow DAGs."
 id: airflow-snowflake
-sidebar_label: Tutorial
+sidebar_label: Snowflake Tutorial
 sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
 
@@ -77,6 +77,12 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
     Your connection should look something like the screenshot below.
 
     ![Snowflake connection](/img/guides/snowflake_tutorial_connection.png)
+
+:::info
+
+For more information on creating a Snowflake connection, see [Create a Snowflake connection in Airflow](https://docs.astronomer.io/learn/connections/snowflake).
+
+:::
 
 ## Step 3: Add your SQL statements
 

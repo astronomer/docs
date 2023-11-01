@@ -56,7 +56,7 @@ The following table lists all available worker types on Astro Deployments.
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
 
-## Standard cluster configurations
+## Standard cluster regions
 
 A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astronomer. Astronomer maintains standard clusters in a limited regions and clouds, with support for more regions and clouds coming soon.
 
@@ -68,6 +68,7 @@ Currently, standard clusters are available on the following clouds and regions:
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
+        {label: 'Azure', value: 'azure'},
     ]}>
 <TabItem value="aws">
 
@@ -89,10 +90,20 @@ Currently, standard clusters are available on the following clouds and regions:
 
 </TabItem>
 
+<TabItem value="azure">
+
+| Code           | Region                  |
+| -------------- | ----------------------- |
+| `eastus2`      | Virginia, North America |
+| `westus2`      | Washington, North America |
+| `westeurope`   | Netherlands, Europe     |
+
+</TabItem>
+
 </Tabs>
 
 
-## Dedicated cluster configurations
+## Dedicated cluster regions
 
 A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Cloud UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
 

@@ -11,9 +11,11 @@ import mlflow_tutorial_dag from '!!raw-loader!../code-samples/dags/airflow-mlflo
 
 [MLflow](https://mlflow.org/) is a popular tool for tracking and managing machine learning models. It can be used together with Airflow for ML orchestration (MLOx), leveraging both tools for what they do best. In this tutorial, you’ll learn about three different ways you can use MLflow with Airflow.
 
-:::info
+:::tip Other ways to learn
 
-If you're already familiar with MLflow and Airflow and want to get a use case up and running, clone the [quickstart repository](https://github.com/astronomer/use-case-mlflow) to automatically start up Airflow and local MLflow and MinIO instances. After you clone the repository, configure the local MLflow connection as shown in [Step 2](#step-2-configure-your-airflow-connection) of this tutorial, and run the three example DAGs.
+There are multiple resources for learning about this topic. See also:
+
+- Use case: [Predict possum tail length using MLflow, Airflow, and linear regression](use-case-airflow-mlflow.md) including a ready-to-use [example repository](https://github.com/astronomer/use-case-mlflow). 
 
 :::
 

@@ -11,30 +11,23 @@ This document provides an overview of the architecture and key concepts in Astro
 
 ## Architecture
 
-Astro is built to both simplify and optimize Airflow so you can customize the parts of your environment that matter most to you, with Astro taking care of the rest. Whether you use Astro to power internal analytics or to train machine learning models, becoming familiar with how Astro works can help you decide which deployment and connectivity model work best for you and enable your team to start running DAGs.
+Astro is built to both simplify and optimize Airflow so you can customize the parts of your environment that matter most to you, with Astro taking care of the rest. Whether you use Astro to power internal analytics or to train machine learning models, learning how Astro works can help you decide which deployment and connectivity model works best for you and enables your team to start running DAGs.
 
-You can work with Astro using the [Cloud UI](#cloud-ui) in your web browser, the [Astro CLI](#astro-cli) in your terminal or as part of a CI/CD process, or the Astro API. Astro makes it easy for Airflow environments, called [Deployments](#deployment), to securely connect to external data services. The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that facilitates scaling and optimizing the infrastructure that powers your Deployments. 
+You can work with Astro using the [Cloud UI](#cloud-ui) in your web browser, the [Astro CLI](#astro-cli) in your terminal or as part of a CI/CD process, or the Astro API. Astro makes it easy for Airflow environments, called [Deployments](#deployment), to securely connect to external data services. 
 
-To run Airflow on Astro, you need to create a [Deployment](#deployment) using either of these two options:
+The _Astro Hypervisor_ is an Astronomer-managed component of the Astro platform that scales and optimizes your Deployments and the [clusters](#cluster) they're hosted on.
 
-- **Use a Standard cluster**: This is the default and the quickest way to get an Airflow environment up and running on Astro. A standard cluster is a multi-tenant cluster managed by Astronomer where you can create Deployments with minimal configuration needed. Astro supports standard clusters on Amazon Web Services (AWS) and Google Cloud Platform (GCP). Support for Microsoft Azure is coming soon.
+The following diagram shows how these components work together to help you manage Airflow on Astro.
 
-- **Use a Dedicated cluster**: It is a single-tenant Kubernetes cluster dedicated to your team or organization. Choose this option if:
-    - You need private networking support.
-    - You want to use a specific cloud provider or region that is not supported on standard clusters.
-    - You need to run Airflow environments in separate clusters for business or security reasons.
-
-![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.png)
+![Astro Hosted architecture overview](/img/docs/astro-architecture-lightmode.jpg)
 
 ## Key concepts
-
-Astro includes tools and features that enrich your Airflow experience beyond the functionality that open source Airflow provides.
 
 The following sections give a detailed explanation of key concepts that you need to understand in order to work with Astro. You can find definitions for additional Astro-specific terminology in the [Astro glossary](astro-glossary.md). 
 
 ### Astro CLI
 
-The [Astro CLI](cli/overview.md) provides an interface to test Airflow DAGs locally, deploy code to Astro, and automate key actions as part of CI/CD processes. The Astro CLI is open source and requires either Docker or an alternative container management tool, like Podman.
+The [Astro CLI](cli/overview.md) is an open source interface you can use to test Airflow DAGs locally, deploy code to Astro, and automate key Astro actions as part of a CI/CD process. Using the Astro CLI to run Airflow locally requires Docker or an alternative container management tool, like Podman.
 
 An Airflow project created with the Astro CLI is also known as an _Astro project_. It contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, Python packages, utility files, and more. Astronomer recommends that you create a dedicated Git repository for each Astro project. To run a DAG, you add the DAG to your Astro project and deploy your Astro project to Astro.
 
@@ -77,9 +70,9 @@ You can assign new users [Workspace roles](user-permissions.md#workspace-roles) 
 
 A _cluster_ in Astro is a Kubernetes cluster that hosts the infrastructure required to run your Airflow environments, also known as [Deployments](#deployment) in Astro. There are two types of clusters in Astro:
 
-- *Standard cluster*: It is a multi-tenant pre-configured cluster. Astro allows you to choose a standard cluster, from a supported cloud provider and region, to host your Deployments in isolated Kubernetes namespaces. See [available cloud providers and regions for Standard cluster](resource-reference-hosted.md#standard-cluster-configurations).
+- A _standard cluster_ is a multi-tenant cluster that's pre-configured by Astronomer. It's the default cluster type and the quickest way to get an Airflow environment up and running on Astro. Each Deployment in a standard cluster exists in its own isolated Kubernetes namespace. To run a Deployment in a standard cluster, you select a cloud provider and region when you create the Deployment. Then, Astro automatically creates your Deployment in an existing standard cluster based on your configuration. See [Standard cluster configurations](https://docs.astronomer.io/astro/resource-reference-hosted#standard-cluster-configurations) for a list of all cloud providers and regions where you can use standard clusters.
 
-- *Dedicated cluster*: It is a single-tenant cluster for exlcusive use by your organization or team. Dedicated clusters provide more configuration options for [cloud providers, regions](resource-reference-hosted.md#dedicated-cluster-configurations), [private network connectivity](https://docs.astronomer.io/astro/category/connect-to-external-resources), and [security](authorize-workspaces-to-a-cluster.md) than standard clusters. To use a Dedicated cluster in your Astro Deployment, you must create it first by selecting the cloud provider and region of your choice. See [Create a Dedicated cluster](create-dedicated-cluster.md). Dedicated cluster has an additional charge.
+- A _dedicated cluster_ is a single-tenant cluster that's used exclusively by Organizations with additional security and networking requirements. Compared to standard clusters, dedicated clusters provide more configuration options for [cloud providers and regions](resource-reference-hosted.md#dedicated-cluster-configurations), as well as [private network connectivity](https://docs.astronomer.io/astro/category/connect-to-external-resources) and [security](authorize-workspaces-to-a-cluster.md). Note that due to expanded resource usage, dedicated clusters cost more than standard clusters. See [Create a Dedicated cluster](create-dedicated-cluster.md) to get started with dedicated clusters.
 
 For both cluster types, Astro manages all underlying infrastructure and provides secure connectivity options to all data services in your ecosystem.
 

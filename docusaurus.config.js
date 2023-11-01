@@ -44,7 +44,7 @@ module.exports = {
       disableSwitch: false,
     },
     mermaid: {
-        theme: {dark: 'neutral'},
+      theme: { dark: 'neutral' },
     },
     navbar: {
       title: 'Docs',
@@ -227,24 +227,24 @@ module.exports = {
     ],
     [
       'redocusaurus',
-        {
-          // Plugin Options for loading OpenAPI files
-          specs: [
-            {
-              id: 'platform',
-              spec: 'https://api.astronomer.io/spec/platform/v1beta1',
-            },
-            {
-              id: 'iam',
-              spec: 'https://api.astronomer.io/spec/iam/v1beta1',
-            },
-         ],
-          // Theme Options for modifying how redoc renders them
-          theme: {
-           // Change with your site colors
-            primaryColor: '#7352ba',
+      {
+        // Plugin Options for loading OpenAPI files
+        specs: [
+          {
+            id: 'platform',
+            spec: 'https://api.astronomer.io/spec/platform/v1beta1',
           },
+          {
+            id: 'iam',
+            spec: 'https://api.astronomer.io/spec/iam/v1beta1',
+          },
+        ],
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#7352ba',
         },
+      },
     ],
   ],
   plugins: [
@@ -311,7 +311,12 @@ module.exports = {
       src: 'https://docs.astronomer.io/js/script.outbound-links.js',
       "data-domain": 'docs.astronomer.io',
       defer: true,
-    }
+    },
+    {
+      src: './scripts/remix-redocly.js',
+      async: true,
+      defer: true,
+    },
   ],
   clientModules: [
     require.resolve('./segment-page.mjs'),
