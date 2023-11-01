@@ -555,7 +555,7 @@ if st.button("Search"):
 
 #### Development DAGs
 
-This project also contains two DAGs for development purposes.
+This project also contains three DAGs for development purposes.
 
 The [`finbuddy_load_pre_embedded`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_pre_embedded.py) DAG loads a set of pre-computed embeddings of news articles retrieved from a local `.parquet` file into Weaviate, as an easy way to test and adapt the pipeline.
 
