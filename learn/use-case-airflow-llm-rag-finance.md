@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 In the emerging field of Large Language Model Operations (LLMOps), retrieval-augmented generation (RAG) has quickly become a key way to tailor large langage model (LLM) applications to domain specific queries. 
 
-This use case shows how to use Weaviate and Airflow to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles. ([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) are used as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline structure follows Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
+This use case shows how to use Weaviate and Airflow to create an automatic RAG pipeline ingesting and embedding data from two sources of news articles ([Alpha Vantage](https://www.alphavantage.co/) and [Spaceflight News](https://www.spaceflightnewsapi.net/)) as a knowledge base for a [GPT-4](https://openai.com/gpt-4) powered [Streamlit](https://streamlit.io/) application giving trading advice. The pipeline structure follows Astronomers' RAG reference architecture, [Ask Astro](https://github.com/astronomer/ask-astro).
 
 :::info Disclaimer
 
@@ -33,13 +33,11 @@ Before trying this example, make sure you have:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
 - An [Alpha Vantage API key](https://www.alphavantage.co/support/#api-key). A free tier is available.
-- An [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction). You will need to have an OpenAI account with credits to use the API.
+- An [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction). Note that you either need to have an OpenAI API key of [at least tier 1](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) or switch the DAG to use local embeddings by setting `EMBEDD_LOCALLY` to `True`. 
 
 ## Clone the project
 
 Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_TEST` connection and as `OPENAI_API_KEY`.
-
-Note that you either need to have an OpenAI API key of [at least tier 1](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) or switch the DAG to use local embeddings by setting `EMBEDD_LOCALLY` to `True`. 
 
 The repository is configured to spin up and use a local Weaviate instance. If you'd like to use an existing Weaviate instance, change the `host` parameter in the `AIRFLOW_CONN_WEAVIATE_TEST` connection in the `.env` file.
 
@@ -294,9 +292,9 @@ def split_text(records):
     return df.to_dict(orient="records")
 ```
 
-After creating chunks of text, the last step of the pipeline is to ingest the data into Weaviate. You can either compute the vector embeddings locally using the `get_embeddings` function at [`include/tasks/embedd_locally.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/embedd_locally.py), or let Weaviate create the embeddings for you using [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). This behavior can be toggled by setting `EMBEDD_LOCALLY` to `True` or `False` at the top of the DAG file. 
+After creating chunks of text, the last step of the pipeline is to ingest the data into Weaviate. You can either compute the vector embeddings locally using the `import_data_local_embed` function, or use the `import_data` function and let Weaviate create the embeddings for you using [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). Both functions are located in [`include/tasks/ingest.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/ingest.py). This behavior can be toggled by setting `EMBEDD_LOCALLY` to `True` or `False` at the top of the DAG file. 
 
-The embedding task is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries of news article chunks, creating one mapped task instance per chunk.
+The ingest task uses the `@task.weaviate_import` decorator and is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries of news article chunks, creating one mapped task instance per chunk.
 
 ```python
 
@@ -305,26 +303,49 @@ EMBEDD_LOCALLY = True
 # ...
 
 if EMBEDD_LOCALLY:
-    embeddings = task(
-        embedd_locally.get_embeddings,
-        task_id=f"get_embeddings_{news_source['name']}",
-    ).expand(record=split_texts)
+    task.weaviate_import(
+        ingest.import_data_local_embed,
+        task_id=f"weaviate_import_{news_source['name']}",
+        weaviate_conn_id=WEAVIATE_CONN_ID,
+        retries=3,
+        retry_delay=30,
+        trigger_rule="all_done",
+    ).partial(class_name="NEWS").expand(record=split_texts)
+else:
+    task.weaviate_import(
+        ingest.import_data,
+        task_id=f"weaviate_import_{news_source['name']}",
+        weaviate_conn_id=WEAVIATE_CONN_ID,
+        retries=3,
+        retry_delay=30,
+    ).partial(class_name="NEWS").expand(record=split_texts)
 ```
 
-If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). 
+The ingestion function passed to the `@task.weaviate_import` decorator differs depending on whether the embeddings are pre-computed locally or not.
 
-:::info
+<Tabs
+    defaultValue="localembedd"
+    groupId= "project-code"
+    values={[
+        {label: 'Local embedding', value: 'localembedd'},
+        {label: 'Cloud-base embedding during ingest', value: 'cloudembedd'},
+    ]}>
 
-Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
+<TabItem value="localembedd">
 
-:::
+If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that for existing embeddings, the `embedding_column` parameter of the dictionary returned by the ingestion function needs to be set to the name of the column containing the embeddings (`vectors` in this example).  
 
 ```python
-from transformers import BertTokenizer, BertModel
-from torch import cuda, no_grad
-
-
-def get_embeddings(record):
+def import_data_local_embed(
+    record,
+    class_name: str,
+    upsert=False,
+    embedding_column="vector",
+    uuid_source_column="url",
+    error_threshold=0,
+    verbose=False,
+):
+    print("Embedding locally.")
     text = record["full_text"]
     tokenizer = BertTokenizer.from_pretrained("ProsusAI/finbert")
     model = BertModel.from_pretrained("ProsusAI/finbert")
@@ -350,50 +371,11 @@ def get_embeddings(record):
         embeddings = mean_tensor.numpy()
 
     record["vectors"] = embeddings.tolist()
-    return record
-```
 
-The import task ingesting the vector embeddings into Weaviate uses the `@task.weaviate_import` decorator with an import function stored in [`include/tasks/ingest.py](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/ingest.py). One mapped task instance is created for each news article chunk.
-
-```python
-task.weaviate_import(
-    ingest.import_data_local_embed,
-    task_id=f"weaviate_import_{news_source['name']}",
-    weaviate_conn_id=WEAVIATE_CONN_ID,
-    retries=3,
-    retry_delay=30,
-    trigger_rule="all_done",
-).partial(class_name="NEWS").expand(record=embeddings)
-```
-
-The ingestion function passed to the `@task.weaviate_import` decorator differs depending on whether the embeddings were pre-computed locally or not.
-
-<Tabs
-    defaultValue="localembedd"
-    groupId= "project-code"
-    values={[
-        {label: 'Ingest existing embeddings', value: 'localembedd'},
-        {label: 'Embedding during ingest', value: 'cloudembedd'},
-    ]}>
-
-<TabItem value="localembedd">
-
-For existing embeddings, the `embedding_column` parameter of the dictionary returned by the ingestion function needs to be set to the name of the column containing the embeddings (`vectors` in this example).  
-
-```python
-def import_data_local_embed(
-    record,
-    class_name: str,
-    upsert=False,
-    embedding_column="vector",
-    uuid_source_column="url",
-    error_threshold=0,
-    verbose=False,
-):
     df = pd.DataFrame(record, index=[0])
 
-    df["uuid"] = df[uuid_source_column].apply(
-        lambda x: str(uuid.uuid5(uuid.NAMESPACE_URL, x))
+    df["uuid"] = df.apply(
+        lambda x: generate_uuid5(identifier=x.to_dict(), namespace=class_name), axis=1
     )
 
     print(f"Passing {len(df)} pre-embedded objects for import.")
@@ -408,6 +390,12 @@ def import_data_local_embed(
         "verbose": verbose,
     }
 ```
+
+:::info
+
+Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
+
+:::
 
 </TabItem>
 
@@ -428,8 +416,8 @@ def import_data(
 ):
     df = pd.DataFrame(record, index=[0])
 
-    df["uuid"] = df[uuid_source_column].apply(
-        lambda x: str(uuid.uuid5(uuid.NAMESPACE_URL, x))
+    df["uuid"] = df.apply(
+        lambda x: generate_uuid5(identifier=x.to_dict(), namespace=class_name), axis=1
     )
 
     print(f"Passing {len(df)} objects for embedding and import.")
