@@ -37,9 +37,9 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_TEST` connection and as `OPENAI_API_KEY`.
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` connection and as `OPENAI_API_KEY`.
 
-The repository is configured to spin up and use a local Weaviate instance. If you'd like to use an existing Weaviate instance, change the `host` parameter in the `AIRFLOW_CONN_WEAVIATE_TEST` connection in the `.env` file.
+The repository is configured to spin up and use a local Weaviate instance. If you'd like to use an existing Weaviate instance, change the `host` parameter in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` connection in the `.env` file.
 
 ## Run the project
 
@@ -167,7 +167,7 @@ You can add more news sources by adding a dictionary to the `news_sources` list 
 
 :::
 
-For each `news_source` in `news_sources`, five tasks are instantiated.
+For each `news_source` in `news_sources`, four tasks are instantiated.
 
 The first task makes a call to the respective news API to collect the article metadata in a dictionary and pass it to [XCom](airflow-passing-data-between-tasks.md). The function used in this task varies between news sources and is retrieved from the `extract_function` parameter of the `news_source` dictionary. Both, the `start_time` and `limit` for the API call are given to the extract function as positional arguments.
 
@@ -328,7 +328,7 @@ The ingestion function passed to the `@task.weaviate_import` decorator differs d
     groupId= "project-code"
     values={[
         {label: 'Local embedding', value: 'localembedd'},
-        {label: 'Cloud-base embedding during ingest', value: 'cloudembedd'},
+        {label: 'Cloud-based embedding', value: 'cloudembedd'},
     ]}>
 
 <TabItem value="localembedd">
@@ -561,9 +561,15 @@ The [`finbuddy_load_pre_embedded`](https://github.com/astronomer/use-case-airflo
 
 ![Graph view of the finbuddy_load_pre_embedded DAG showing Weaviate schema handling and one task to ingest pre-calculated embeddings of news articles.](/img/examples/use-case-airflow-llm-rag-finance_pre_embedd_dag.png)
 
+The [`finbuddy_load_documents`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_documents.py) DAG loads information from local markdown files.
+
+![Graph view of the finbuddy_load_documents DAG showing Weaviate schema handling and a pipeline to ingest information from local markdown files.](/img/examples/use-case-airflow-llm-rag-finance_document_ingest.png)
+
 The [`create_schema`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/create_schema.py) DAG is designed for development environments to delete all data from Weaviate and create a new schema. 
 
 ![Graph view of the create_schema DAG showing two tasks, one to delete all existing schemas in a Weaviate database, another to create a news schema.](/img/examples/use-case-airflow-llm-rag-finance_create_schema_dag.png)
+
+
 
 ## Conclusion
 
