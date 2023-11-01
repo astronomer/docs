@@ -104,7 +104,7 @@ The `.env` file is not pushed to your Deployment when you run `astro deploy`. Ho
 
 If your connections and variables are stored in a local Airflow metadata database, you can also export these to a `.env` file and then import them to an Astro Deployment as environment variables.
 
-- To export all Airflow objects from your local Airflow, including connections and variables, to an `.env` file in URI format, run:
+- To export all Airflow objects from your local Airflow environment, including connections and variables, to an `.env` file in URI format, run:
 
     ```bash
     astro dev object export --env-export 
