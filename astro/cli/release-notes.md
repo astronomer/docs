@@ -17,6 +17,18 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.19.4
+
+Release date: November 1, 2023
+
+### Additional improvements
+
+- The CLI will now warn users when they are about to push an empty DAG folder. Users can remove this warning by setting the `show_warnings` config to false.
+
+### Bug fixes
+
+- Fixed an issue where `astro deployment create` was somtimes giving an invalid runtime version error in cases where the runtime version was valid.
+
 ## Astro CLI 1.19.3
 
 Release date: October 12, 2023
