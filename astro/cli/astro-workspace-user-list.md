@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace user list"
 title: "astro workspace user list"
 id: astro-workspace-user-list
-description: Reference documentation for astro workspace user list.
+description: List Workspace users.
 hide_table_of_contents: true
 ---
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment airflow-variable create"
 title: "astro deployment airflow-variable create"
 id: astro-deployment-airflow-variable-create
-description: Reference documentation for astro deployment airflow-variable create.
+description: Create an Airflow variable in a Deployment.
 hide_table_of_contents: true
 ---
 

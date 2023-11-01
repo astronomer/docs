@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace team list"
 title: "astro workspace team list"
 id: astro-workspace-team-list
-description: Reference documentation for astro workspace team list.
+description: List Teams in a Workspace.
 hide_table_of_contents: true
 ---
 

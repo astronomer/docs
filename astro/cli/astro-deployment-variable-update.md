@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment variable update"
 title: "astro deployment variable update"
 id: astro-deployment-variable-update
-description: Reference documentation for astro deployment variable update.
+description: Update Deployment environment variables.
 hide_table_of_contents: true
 ---
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace delete"
 title: "astro workspace delete"
 id: astro-workspace-delete
-description: Reference documentation for astro workspace delete.
+description: Delete an Astro Workspace.
 hide_table_of_contents: true
 ---
 

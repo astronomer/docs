@@ -2,7 +2,7 @@
 sidebar_label: "astro context switch"
 title: "astro context switch"
 id: astro-context-switch
-description: Reference documentation for astro context switch.
+description: Switch to an Astronomer product context.
 hide_table_of_contents: true
 ---
 

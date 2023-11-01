@@ -2,7 +2,7 @@
 sidebar_label: "astro organization switch"
 title: "astro organization switch"
 id: astro-organization-switch
-description: Reference documentation for astro organization switch command.
+description: Switch your current Organization.
 hide_table_of_contents: true
 ---
 

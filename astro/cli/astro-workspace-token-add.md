@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace token add"
 title: "astro workspace token add"
 id: astro-workspace-token-add
-description: Reference documentation for astro workspace token add.
+description: Add an Organization API token to your current Workspace.
 hide_table_of_contents: true
 ---
 

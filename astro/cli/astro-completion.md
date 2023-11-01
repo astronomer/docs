@@ -2,7 +2,7 @@
 sidebar_label: "astro completion"
 title: "astro completion"
 id: astro-completion
-description: Reference documentation for astro completion.
+description: Generate completion scripts. 
 hide_table_of_contents: true
 ---
 

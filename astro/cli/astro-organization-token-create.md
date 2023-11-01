@@ -2,7 +2,7 @@
 sidebar_label: "astro organization token create"
 title: "astro organization token create"
 id: astro-organization-token-create
-description: Reference documentation for astro organization token create.
+description: Create an Organization API token.
 hide_table_of_contents: true
 ---
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro context list"
 title: "astro context list"
 id: astro-context-list
-description: Reference documentation for astro context list.
+description: List available Astronomer product contexts.
 hide_table_of_contents: true
 ---
 

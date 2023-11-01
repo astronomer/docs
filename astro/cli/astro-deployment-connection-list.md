@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment connection list"
 title: "astro deployment connection list"
 id: astro-deployment-connection-list
-description: Reference documentation for astro deployment connection list.
+description: List Airflow connections in a Deployment.
 hide_table_of_contents: true
 ---
 

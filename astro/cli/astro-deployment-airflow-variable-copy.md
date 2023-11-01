@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment airflow-variable copy"
 title: "astro deployment airflow-variable copy"
 id: astro-deployment-airflow-variable-copy
-description: Reference documentation for astro deployment airflow-variable copy.
+description: Copy an Airflow variable from a Deployment.
 hide_table_of_contents: true
 ---
 

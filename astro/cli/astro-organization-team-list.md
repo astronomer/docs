@@ -2,7 +2,7 @@
 sidebar_label: "astro organization team list"
 title: "astro organization team list"
 id: astro-organization-team-list
-description: Reference documentation for astro organization team list.
+description: List all Teams in your current Organization. 
 hide_table_of_contents: true
 ---
 

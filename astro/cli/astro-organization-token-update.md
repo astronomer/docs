@@ -2,7 +2,7 @@
 sidebar_label: "astro organization token update"
 title: "astro organization token update"
 id: astro-organization-token-update
-description: Reference documentation for astro organization token update.
+description: Update an Organization API token.
 hide_table_of_contents: true
 ---
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment pool update"
 title: "astro deployment pool update"
 id: astro-deployment-pool-update
-description: Reference documentation for astro deployment pool update.
+description: Update a Deployment's Airflow pool. 
 hide_table_of_contents: true
 ---
 

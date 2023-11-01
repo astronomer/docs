@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment team"
 title: "astro deployment team"
 id: astro-deployment-team
-description: Reference documentation for astro deployment team
+description: Manage Deployment Teams (Software only)
 hide_table_of_contents: true
 ---
 

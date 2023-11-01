@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace token create"
 title: "astro workspace token create"
 id: astro-workspace-token-create
-description: Reference documentation for astro workspace token create.
+description: Create a Workspace API token.
 hide_table_of_contents: true
 ---
 

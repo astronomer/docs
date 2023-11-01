@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment inspect"
 title: "astro deployment inspect"
 id: astro-deployment-inspect
-description: Reference documentation for astro deployment inspect.
+description: Inspect a Deployment.
 hide_table_of_contents: true
 ---
 

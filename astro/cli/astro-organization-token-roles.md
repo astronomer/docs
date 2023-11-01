@@ -2,7 +2,7 @@
 sidebar_label: "astro organization token roles"
 title: "astro organization token roles"
 id: astro-organization-token-roles
-description: Reference documentation for astro organization token roles.
+description: List an Organization API token's roles.
 hide_table_of_contents: true
 ---
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro organization team create"
 title: "astro organization team create"
 id: astro-organization-team-create
-description: Reference documentation for astro organization team create command.
+description: Create a new Team in your Organization.
 hide_table_of_contents: true
 ---
 

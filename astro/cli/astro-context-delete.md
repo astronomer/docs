@@ -2,7 +2,7 @@
 sidebar_label: "astro context delete"
 title: "astro context delete"
 id: astro-context-delete
-description: Reference documentation for astro context delete.
+description: Delete an Astronomer product context.
 hide_table_of_contents: true
 ---
 

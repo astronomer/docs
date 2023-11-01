@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment delete"
 title: "astro deployment delete"
 id: astro-deployment-delete
-description: Reference documentation for astro deployment delete.
+description: Delete a Deployment.
 hide_table_of_contents: true
 ---
 

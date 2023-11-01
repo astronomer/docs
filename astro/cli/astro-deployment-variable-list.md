@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment variable list"
 title: "astro deployment variable list"
 id: astro-deployment-variable-list
-description: Reference documentation for astro deployment variable list.
+description: List Deployment environment variables.
 hide_table_of_contents: true
 ---
 

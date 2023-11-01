@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment airflow-variable list"
 title: "astro deployment airflow variable list"
 id: astro-deployment-airflow-variable-list
-description: Reference documentation for astro deployment airflow-variable list.
+description: List variables in an Airflow Deployment.
 hide_table_of_contents: true
 ---
 

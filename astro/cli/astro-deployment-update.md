@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment update"
 title: "astro deployment update"
 id: astro-deployment-update
-description: Reference documentation for astro deployment update.
+description: Update a Deployment.
 hide_table_of_contents: true
 ---
 

@@ -2,7 +2,7 @@
 sidebar_label: "astro organization team user"
 title: "astro organization team user"
 id: astro-organization-team-user
-description: Reference documentation for astro organization team user commands.
+description: Manage users in an Astro Team. 
 hide_table_of_contents: true
 ---
 

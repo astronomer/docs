@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace token rotate"
 title: "astro workspace token rotate"
 id: astro-workspace-token-rotate
-description: Reference documentation for astro workspace token rotate.
+description: Rotate a Workspace API token.
 hide_table_of_contents: true
 ---
 

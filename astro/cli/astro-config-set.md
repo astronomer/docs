@@ -2,7 +2,7 @@
 sidebar_label: "astro config set"
 title: "astro config set"
 id: astro-config-set
-description: Reference documentation for astro config set.
+description: Update Astro CLI configurations.
 hide_table_of_contents: true
 ---
 

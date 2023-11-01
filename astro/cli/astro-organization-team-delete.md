@@ -2,7 +2,7 @@
 sidebar_label: "astro organization team delete"
 title: "astro organization team delete"
 id: astro-organization-team-delete
-description: Reference documentation for astro organization team delete command.
+description: Delete a Team from your Organization.
 hide_table_of_contents: true
 ---
 

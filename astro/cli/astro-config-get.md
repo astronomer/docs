@@ -2,7 +2,7 @@
 sidebar_label: "astro config get"
 title: "astro config get"
 id: astro-config-get
-description: Reference documentation for astro config get.
+description: View current Astro CLI configurations.
 hide_table_of_contents: true
 ---
 

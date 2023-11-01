@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace update"
 title: "astro workspace update"
 id: astro-workspace-update
-description: Reference documentation for astro workspace update.
+description: Update an Astro Workspace. 
 hide_table_of_contents: true
 ---
 

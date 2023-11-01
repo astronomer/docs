@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment logs"
 title: "astro deployment logs"
 id: astro-deployment-logs
-description: Reference documentation for astro deployment logs.
+description: Show Airflow component logs for a Deployment.
 hide_table_of_contents: true
 ---
 

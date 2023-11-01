@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment runtime migrate"
 title: "astro deployment runtime migrate"
 id: astro-deployment-runtime-migrate
-description: Reference documentation for astro deployment runtime migrate.
+description: Migrate a Software Deployment to Astro Runtime.
 hide_table_of_contents: true
 ---
 

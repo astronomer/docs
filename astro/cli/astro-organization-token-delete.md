@@ -2,7 +2,7 @@
 sidebar_label: "astro organization token delete"
 title: "astro organization token delete"
 id: astro-organization-token-delete
-description: Reference documentation for astro organization token delete.
+description: Delete an Organization API token.
 hide_table_of_contents: true
 ---
 

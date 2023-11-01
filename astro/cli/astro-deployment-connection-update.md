@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment connection update"
 title: "astro deployment connection update"
 id: astro-deployment-connection-update
-description: Reference documentation for astro deployment connection update.
+description: Update an Airflow connection in a Deployment.
 hide_table_of_contents: true
 ---
 

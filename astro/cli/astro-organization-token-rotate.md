@@ -2,7 +2,7 @@
 sidebar_label: "astro organization token rotate"
 title: "astro organization token rotate"
 id: astro-organization-token-rotate
-description: Reference documentation for astro organization token rotate.
+description: Rotate an Organization API token.
 hide_table_of_contents: true
 ---
 

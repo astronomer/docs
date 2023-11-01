@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment connection copy"
 title: "astro deployment connection copy"
 id: astro-deployment-connection-copy
-description: Reference documentation for astro deployment connection copy.
+description: Copy an Airflow connection from a Deployment.
 hide_table_of_contents: true
 ---
 
