@@ -18,20 +18,7 @@ When you use the Cloud UI to create and manage connections, you can also :
 
 There are two ways to access the **Environment** page where you can create and manage your connections.
 - In your Deployment, go to the **Environment** tab. This view shows you all Cloud UI connections for your Deployment.
-<!-- If a connection is configured here, is it restricted by default to the Deployment it was created in? -->
 - From the main navigation, select **Environment**. This view shows you all the Cloud UI connections for your workspace. 
-
-### Available connections
-
-- AWS Redshift
-- Databricks
-- Fivetran
-- Postgres
-- BigQuery
-- Snowflake
-    - using private key
-    - using username and password
-- Generic
 
 ### Prerequisites
 
@@ -45,7 +32,13 @@ To make changes to connections, you need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNE
 2. Click **+ Connection** to add a new connection.
 3. Find the service you want to connect from the list of available options.
 4. Enter your information in the required fields.
-    - If you want to include more specific information, such as **schema** or another field name, that might not be needed for all your Deployments, you can later choose [to override fields](#override-connection-fields) when adding connections to Deployments.
+
+    :::tip
+
+    You can configure your connection with the credentials for a sandbox or development environment. Then, you can later configure your connection to be applied to all Deployments in the workspace by default. This means that when you create new Deployments, they automatically have access to your development environment. Later, you can edit the connection to point to your production resources by using [field overrides](#override-connection-fields).
+
+    :::
+
 5. Click **Create Connection** to make your new connection.
 
 Now you can add connections to Deployments and override particular fields to customize behavior
@@ -77,6 +70,24 @@ If you only added the connection in the Cloud UI and did not include the provide
 2. Add the provider package name to your project's `requirements.txt` file includes the provider package for the resource you connected to. Save your changes.
 3. Run `astro deploy` to rebuild your containers and push the changes to your Deployment.
 
+## Deployment sharing
+
+You can configure whether Astro links connections to all Deployments in the workspace, or if you need to manually assign a connection to each individual Deployments. This means that you can configure a connection with default values for your sandbox or development environment and set the configuration so that all Deployments in a Workspace use the development environment by default. Then, when you create new Deployments, they automatically have a default connection to your development environment.
+
+When you're ready for your Deployments to connect to your production environment, you can either replace the connection or [override the connection field](#override-connection-fields) values with your production resource information.
+
+If you change the setting from **Restricted** to **Linked to all Deployments**, Astro respects any Connection Field Overrides that you might have configured for existing linked Deployments.
+
+### Setup
+
+1. Click **Environment** in the main menu to open the **Connections** page.
+2. Click the Connection that you want to add per-Deployment field overrides to.
+3. Click **Deployment Sharing** and toggle the setting to choose either:
+    - **Restricted** - Only share connection individually to Deployments.
+    - **Linked to all Deployments** - Link to all current and future workspaces in this Deployment.
+4. (Optional) You can also change the default connection field values.
+5. Click **Update connection** to save.
+
 ## Override connection fields
 
 If you create a connection and link it to a Deployment, you can later edit the connection to specify field overrides. When you override a field, you specify particular values that you want to use for a specific Deployment, but not for others. This way, you can configure the connection and authentication a single time, but still have the flexibility to customize connection at the Deployment level.
@@ -93,7 +104,8 @@ For example, you might have created a connection to a Snowflake account, and the
 
 1. Click **Environment** in the main menu to open the **Connections** page.
 2. Click the Connection that you want to add per-Deployment field overrides to.
-3. Click **Edit** to open the connection configurations for a specific linked Deployment.
-4. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
-5. Click **Update connection link**.
+3. (Optional) Click **Deployment Sharing** and choose if you want to **Restrict** or **Link to all Deployments**. You can also change the default connection field values.Click **Update connection** to save.
+4. Click **Edit** to open the connection configurations for a specific linked Deployment.
+5. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
+6. Click **Update connection link**.
 
