@@ -569,8 +569,6 @@ The [`create_schema`](https://github.com/astronomer/use-case-airflow-llm-rag-fin
 
 ![Graph view of the create_schema DAG showing two tasks, one to delete all existing schemas in a Weaviate database, another to create a news schema.](/img/examples/use-case-airflow-llm-rag-finance_create_schema_dag.png)
 
-
-
 ## Conclusion
 
 Congratulations! You successfully adapted a RAG pipeline using Airflow and Weaviate. You can now use this project as a blueprint to create your LLMOps pipelines! 
