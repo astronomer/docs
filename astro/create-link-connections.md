@@ -16,6 +16,8 @@ When you use the Cloud UI to create and manage connections, you can also:
 - Share connections with local development environments when running `astro dev start`
 - Use connections in branch-based deploys and PR previews
 
+    ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
+
 ## Create a connection
 
 There are two ways to access the **Environment** page where you can create and manage your connections.
@@ -28,12 +30,13 @@ To make changes to connections, you need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNE
 
 ### Setup
 
-1. Open the **Connections** page by either
+1. Open the **Environment Manager** page by either
     - Clicking **Environment** in the main menu to open the **Connections** page.
-    - Opening the Deployment where you want to link your new connection. Click the **Environment** tab. Creating the connection from the Deployment automatically links the connection to the Deployment.
-2. Click **+ Connection** to add a new connection.
-3. Find the service you want to connect from the list of available options.
-4. Enter your information in the required fields.
+    - Opening the Deployment where you want to link your new connection. Click the **Environment** tab. Creating the connection from the Deployment automatically links the connection to the Deployment
+2. Click the **Connection** tab.
+3. Click **+ Connection** to add a new connection.
+4. Find the service you want to connect from the list of available options.
+5. Enter your information in the required fields.
 
     :::tip
 
@@ -41,7 +44,7 @@ To make changes to connections, you need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNE
 
     :::
 
-5. Click **Create Connection** to make your new connection.
+6. Click **Create Connection** to make your new connection.
 
 Now you can add connections to Deployments and override particular fields to customize behavior depending on the Deployment it's linked to.
 
@@ -80,6 +83,14 @@ When you're ready for your Deployments to connect to your production environment
 
 If you change the setting from **Restricted** to **Linked to all Deployments**, Astro respects any Connection Field Overrides that you might have configured for existing linked Deployments.
 
+    ![Edit Deployment Sharing settings in the Environment Manager view](/img/docs/connection-restrict-link-all.png)
+
+### Prerequisites
+- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
+- A Deployment on Astro. See [Create a Deployment](create-deployment.md)
+- A connection linked to a Deployment
+- Astro Runtime 9.3.0 or greater
+
 ### Setup
 
 1. Click **Environment** in the main menu to open the **Connections** page.
@@ -99,7 +110,7 @@ For example, you might have created a connection to a Snowflake account, and the
 ### Prerequisites
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md)
-- A connection linked to a Deployment.
+- A connection linked to a Deployment
 - Astro Runtime 9.3.0 or greater
 
 ### Setup
