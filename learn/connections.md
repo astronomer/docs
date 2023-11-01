@@ -59,7 +59,7 @@ Each connection type requires different configurations and values based on the s
 If you use a mix of strategies for managing connections, it's important to understand that when Airflow searches for connections, it uses the following order:
 
 1. Secrets Backend
-2. Cloud UI connections
+2. Astro Environment Manager
 3. Environment Variables
 4. Airflow's metadata database (Airflow UI)
 

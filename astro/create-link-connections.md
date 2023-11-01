@@ -1,13 +1,15 @@
 ---
 sidebar_label: 'Create Astro connections'
-title: 'Create connections in the Cloud UI'
+title: 'Create connections in the Environment Manager'
 id: create-link-connections
-description: "Create Airflow connections that can be applied across multiple Deployments in the Cloud UI."
+description: "Create Airflow connections for multiple Deployments in the Astro Environment Manager."
 ---
 
-You can create and manage connections across Deployments in the Cloud UI. This strategy of connection management behaves as if it is an Astro-managed secrets backend. Astro stores your connection configurations and authentication information in Hashicorp Vault and Kubernetes Secrets instead of requiring you to manage it in your own secrets backend. This means you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend or handle multiple sets of credentials for making connections to the same resource in multiple Deployments.
+You can create and manage connections across Deployments with the Astro Environment Manager in the Cloud UI. This strategy of connection management behaves as if it is an Astro-managed secrets backend, which improves authentication management if you don't use a secrets backend and provides you with method to create a connection once and share it with multiple Airflow Deployments. 
 
-When you use the Cloud UI to create and manage connections, you can also :
+Astro stores your connection configurations and authentication information in Hashicorp Vault and Kubernetes Secrets instead of requiring you to manage it in your own secrets backend. This means you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend or handle multiple sets of credentials for making connections to the same resource in multiple Deployments.
+
+When you use the Cloud UI to create and manage connections, you can also:
 
 - Share that connection with all or specific deployments within the workspace
 - Choose to override certain fields in the connection at the Deployment level
@@ -26,9 +28,9 @@ To make changes to connections, you need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNE
 
 ### Setup
 
-1. Open the **Connections** page
-    - Click **Environment** in the main menu to open the **Connections** page.
-    - Open the Deployment where you want to link your new connection. Click the **Environment** tab. Creating the connection from the Deployment automatically links the connection to the Deployment.
+1. Open the **Connections** page by either
+    - Clicking **Environment** in the main menu to open the **Connections** page.
+    - Opening the Deployment where you want to link your new connection. Click the **Environment** tab. Creating the connection from the Deployment automatically links the connection to the Deployment.
 2. Click **+ Connection** to add a new connection.
 3. Find the service you want to connect from the list of available options.
 4. Enter your information in the required fields.
@@ -41,16 +43,16 @@ To make changes to connections, you need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNE
 
 5. Click **Create Connection** to make your new connection.
 
-Now you can add connections to Deployments and override particular fields to customize behavior
+Now you can add connections to Deployments and override particular fields to customize behavior depending on the Deployment it's linked to.
 
 ## Link connections to Deployments
 
-After you create a connection, then you can link them to Deployments.
+After you create a connection, then you can link it to Deployments.
 
 ### Prerequisites
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md)
-- A local Astro project created with [the Astro CLI](cli/get-started-cli.md) or  
+- A local Astro project created with [the Astro CLI](cli/get-started-cli.md)
 - Astro Runtime 9.3.0 or greater
 
 ### Step 1: Add link to connection

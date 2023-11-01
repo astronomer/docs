@@ -27,8 +27,8 @@ The following table suggests possible management strategies for specific use cas
 | I'm getting started and want to quickly create Airflow objects | [Airflow UI](#airflow-ui) |
 | I prefer to manage my Airflow variables in a Git repository and to upload directly to Airflow | [Airflow UI](#airflow-ui) |
 | I need to keep my connections and variables stored in a centralized and secure location. | [Secrets backend](#secrets-backend) |
-| I want to create Connections once and then apply them to multiple Deployments or Workspaces. | [Connection Manager](#cloud-ui-connections) |
-| I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Connection Manager](#cloud-ui-connections) or [Environment variables](#environment-variables) |
+| I want to create Connections once and then apply them to multiple Deployments or Workspaces. | [Astro Environment Manager](#cloud-ui-connections) |
+| I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Astro Environment Manager](#cloud-ui-connections) or [Environment variables](#environment-variables) |
 
 ### How Airflow finds connections
 
@@ -37,11 +37,11 @@ Because variables and connections serve different purposes in Airflow, you might
 If you use a mix of strategies for managing connections, it's important to understand that when Airflow searches for connections, it uses the following order:
 
 1. Secrets Backend
-2. Cloud UI connections
+2. Astro Environment Manager
 3. Environment Variables
 4. Airflow's metadata database (Airflow UI)
 
-This means that Astro first checks secrets backends, then the Cloud UI, followed by environment variables, and finally checks for connections defined in the Airflow UI.
+This means that Astro first checks secrets backends, then the Environment Manager, followed by environment variables, and finally checks for connections defined in the Airflow UI.
 
 If you use the same `Connection ID` in these resources with different credentials, Airflow ignores any duplicates and applies the highest priority configuration.
 
@@ -53,7 +53,7 @@ If you only want to test connections or export connections in  a JSON or URI for
 
 The following sections explain the benefits, limitations, and implementations of each strategy in more detail.
 
-### Cloud UI connections
+### Astro Environment Manager
 
 Astro provides connection management capabilities that behave like you are using an Astro-managed secrets backend. It gives you the quickest way to create connections through the Cloud UI, in the **Environment** tab. After you make a connection, you can choose to restrict it to specific Deployments or share it with multiple Deployments in the Workspace.
 
