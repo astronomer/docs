@@ -123,6 +123,12 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
 
+:::info
+
+If an Astro Runtime version isn't included in this section, then there are no specific upgrade considerations for that version.
+
+:::
+
 #### Runtime 9 (Airflow 2.7)
 
 ##### Connection testing in the Airflow UI disabled by default
