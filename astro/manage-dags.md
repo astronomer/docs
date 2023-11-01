@@ -34,5 +34,6 @@ The actions and views on this page are functionally identical to certain actions
 | [Retry a DAG run](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dag-run.html#re-run-dag).                   | Click the DAG run in the DAG run grid, then click **Retry**.      | Click the DAG name on the **DAGs** page, click the DAG run in the **Grid** view, then click **Clear existing tasks**.      |
 | [Retry a task run](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dag-run.html#re-run-tasks).                   | Click the task run in the DAG run grid, click **Retry**, then select additional options for retrying your task(s).   | Click the DAG name on the **DAGs** page, click the task run in the **Grid** view, then click **Clear**.      |
 | [Mark a DAG/ task run](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dag-run.html#dag-run-status) as success/ failed. | Click the DAG/task run in the DAG run grid, then click **Mark as...**. | Click the DAG name on the **DAGs** page, click the DAG/task run in the **Grid** view, then click **Mark Success/ Mark Failed**. |
+| View dataset DAG dependencies | Hover over a dataset node in the DAGs graph. | Go to **Datasets**, then click the dataset. |
 
 

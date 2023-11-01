@@ -7,12 +7,6 @@ id: release-notes
 import HostedBadge from '@site/src/components/HostedBadge';
 import HybridBadge from '@site/src/components/HybridBadge';
 
-
-<head>
-  <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
-  <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
-</head>
-
 <p class="rssButton">
   <a href="/astro-release-notes.xml" target="_blank">
     <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
@@ -26,6 +20,27 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 **Latest CLI Version**: 1.19.3 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## October 31, 2023
+
+### Deployment API keys are now deprecated
+
+Deployment API keys have been officially deprecated in favor of [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens). This means:
+
+- You can't create new Deployment API keys.
+- If a Deployment has no configured Deployment API keys, the **API keys** tab will not appear.
+- You can continue using existing Deployment API keys until a future end-of-support date.
+
+### Additional improvements
+
+- Workspace Operators can now create, update, and delete Deployment API tokens.
+- The **DAGs** page now shows [datasets](https://docs.astronomer.io/learn/airflow-datasets) for consuming and producing DAGs. When you hover over a dataset node, the Cloud UI shows you which DAGs the dataset triggers when it's updated.
+
+    ![Dataset node in the DAGs page of the Cloud UI. The node is highlighted so that it shows dependent DAGs](/img/release-notes/dataset-node.png)
+
+### Bug fixes
+
+- Fixed an issue where a Deployment's **Updated By** field was not updated if you transferred the Deployment. 
 
 ## October 24, 2023
 
@@ -87,7 +102,6 @@ The Astro API is currently in beta. See [Astro API versioning and support](https
 You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and scripts to programmatically interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
 
 Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://docs.astronomer.io/astro/api/get-started).
-
 
 ## September 19, 2023
 
