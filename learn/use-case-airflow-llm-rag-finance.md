@@ -445,11 +445,17 @@ The [`streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflo
 
 The streamlit app is structured to perform three main tasks, which are separated out into functions:
 
-- `get_embedding`: Takes the user input and computes the embeddings of the input text using [FinBERT](https://huggingface.co/ProsusAI/finbert).
+- `get_embedding`: Takes the user input and computes the embeddings of the input text using [OpenAI embeddings](https://platform.openai.com/docs/guides/embeddings) or [FinBERT](https://huggingface.co/ProsusAI/finbert).
 - `get_relevant_articles`: Performs a Weaviate query to retrieve the most relevant article chunks from Weaviate to be added to the augmented prompt.
 - `get_response`: Uses the retrieved article chunks to create an augmented prompt for GPT-4.
 
 You can experiment with parameters, such as the `certainty` threshold, in the Weaviate query to allow for more or less relevant article chunks to be retrieved or to change the number of article chunks that are included in the augmented prompt. Finally, you can make changes to the GPT-4 prompt. For example, to instruct the model to be more optimistic or pessimistic in its answer.
+
+:::info
+
+Remeber to make sure that you are using the same model to embed the user input and the news articles. If you are using local embeddings in your DAG, you will need to set `EMBEDD_LOCALLY` to `True` at the start of the streamlit application file as well.
+
+:::
 
 ```python
 EMBEDD_LOCALLY = False
