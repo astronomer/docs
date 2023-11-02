@@ -5,7 +5,7 @@ Consequently, each version of Airflow incorporates different versions of Airflow
 
 Astro Runtime packages specific versions of Airflow Providers with each of its releases.
 
-You will find below the list of Airflow Providers packaged with each Astro Runtime version.
+You will find below the list of Airflow Providers and corresponding versions packaged with each Astro Runtime version.
 
 
 ## Runtime version 9.4.0
