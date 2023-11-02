@@ -298,7 +298,7 @@ The ingest task uses the `@task.weaviate_import` decorator and is [dynamically m
 
 ```python
 
-EMBEDD_LOCALLY = True
+EMBEDD_LOCALLY = False
 
 # ...
 
@@ -324,13 +324,49 @@ else:
 The ingestion function passed to the `@task.weaviate_import` decorator differs depending on whether the embeddings are pre-computed locally or not.
 
 <Tabs
-    defaultValue="localembedd"
+    defaultValue="cloudembedd"
     groupId= "project-code"
     values={[
         {label: 'Local embedding', value: 'localembedd'},
         {label: 'Cloud-based embedding', value: 'cloudembedd'},
     ]}>
 
+<TabItem value="cloudembedd">
+
+If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings are to be computed by Weaviate using the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
+
+```python
+def import_data(
+    record,
+    class_name: str,
+    upsert=False,
+    uuid_source_column="url",
+    batch_size=1000,
+    error_threshold=0,
+    batched_mode=True,
+    verbose=False,
+):
+    df = pd.DataFrame(record, index=[0])
+
+    df["uuid"] = df.apply(
+        lambda x: generate_uuid5(identifier=x.to_dict(), namespace=class_name), axis=1
+    )
+
+    print(f"Passing {len(df)} objects for embedding and import.")
+
+    return {
+        "data": df,
+        "class_name": class_name,
+        "upsert": upsert,
+        "uuid_column": "uuid",
+        "error_threshold": error_threshold,
+        "batched_mode": batched_mode,
+        "batch_size": batch_size,
+        "verbose": verbose,
+    }
+```
+
+</TabItem>
 <TabItem value="localembedd">
 
 If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that for existing embeddings, the `embedding_column` parameter of the dictionary returned by the ingestion function needs to be set to the name of the column containing the embeddings (`vectors` in this example).  
@@ -396,43 +432,6 @@ def import_data_local_embed(
 Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
 
 :::
-
-</TabItem>
-
-<TabItem value="cloudembedd">
-
-If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings are to be computed by Weaviate using the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
-
-```python
-def import_data(
-    record,
-    class_name: str,
-    upsert=False,
-    uuid_source_column="url",
-    batch_size=1000,
-    error_threshold=0,
-    batched_mode=True,
-    verbose=False,
-):
-    df = pd.DataFrame(record, index=[0])
-
-    df["uuid"] = df.apply(
-        lambda x: generate_uuid5(identifier=x.to_dict(), namespace=class_name), axis=1
-    )
-
-    print(f"Passing {len(df)} objects for embedding and import.")
-
-    return {
-        "data": df,
-        "class_name": class_name,
-        "upsert": upsert,
-        "uuid_column": "uuid",
-        "error_threshold": error_threshold,
-        "batched_mode": batched_mode,
-        "batch_size": batch_size,
-        "verbose": verbose,
-    }
-```
 
 </TabItem>
 </Tabs>
