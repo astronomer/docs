@@ -333,7 +333,7 @@ The ingestion function passed to the `@task.weaviate_import` decorator differs d
 
 <TabItem value="cloudembedd">
 
-If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings are to be computed by Weaviate using the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
+If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings will be computed by Weaviate using the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
 
 ```python
 def import_data(
@@ -430,7 +430,7 @@ def import_data_local_embed(
 :::info
 
 Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
-Note that if you use local embeddings you will also need to set `EMBEDD_LOCALLY` to `True` at the start of the [streamlit app](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) file in match the models used for embedding between the news articles and the user input in the app.
+Note that if you use local embeddings you will also need to set `EMBEDD_LOCALLY` to `True` at the start of the [streamlit app](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) file and match the models used for embedding between the news articles and the user input in the app.
 
 :::
 
@@ -453,7 +453,7 @@ You can experiment with parameters, such as the `certainty` threshold, in the We
 
 :::info
 
-Remeber to make sure that you are using the same model to embed the user input and the news articles. If you are using local embeddings in your DAG, you will need to set `EMBEDD_LOCALLY` to `True` at the start of the streamlit application file as well.
+Make sure that you are using the same model to embed the user input and the news articles. If you are using local embeddings in your DAG, you will need to set `EMBEDD_LOCALLY` to `True` at the start of the streamlit application file as well.
 
 :::
 
