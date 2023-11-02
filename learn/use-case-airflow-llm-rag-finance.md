@@ -78,7 +78,7 @@ The [`finbuddy_load_news`](https://github.com/astronomer/use-case-airflow-llm-ra
 
 You can find the code for the Streamlit application in [`include/streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py). This app prompts the user to ask a question about the current financial outlook and then uses the question to find relevant news articles for an augmented prompt to GPT-4. The app displays the resulting answer to the user along with the sources used. 
 
-![Screenshot of the streamlit app showing the prompt field and two sliders, one for number of relevant article chunks retrieved, one to adjust the certainity.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_1.png)
+![Screenshot of the streamlit app showing the prompt field and two sliders, one for number of relevant article chunks retrieved, one to adjust the certainty.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_1.png)
 
 ![Screenshot of the streamlit app showing an example answer of the application.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_2.png)
 
@@ -449,7 +449,7 @@ The streamlit app is structured to perform three main tasks, which are separated
 - `get_relevant_articles`: Performs a Weaviate query to retrieve the most relevant article chunks from Weaviate to be added to the augmented prompt.
 - `get_response`: Uses the retrieved article chunks to create an augmented prompt for GPT-4.
 
-You can experiment with parameters, such as the `certainity` threshold, in the Weaviate query to allow for more or less relevant article chunks to be retrieved or to change the number of article chunks that are included in the augmented prompt. Finally, you can make changes to the GPT-4 prompt. For example, to instruct the model to be more optimistic or pessimistic in its answer.
+You can experiment with parameters, such as the `certainty` threshold, in the Weaviate query to allow for more or less relevant article chunks to be retrieved or to change the number of article chunks that are included in the augmented prompt. Finally, you can make changes to the GPT-4 prompt. For example, to instruct the model to be more optimistic or pessimistic in its answer.
 
 ```python
 EMBEDD_LOCALLY = False
