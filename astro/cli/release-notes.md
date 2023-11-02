@@ -679,7 +679,7 @@ You can now run the following commands with a Deployment API key:
 - `astro deployment variable create`
 - `astro deployment variable update`
 
-Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys, see [Manage Deployment API keys](api-keys.md).
+Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys.
 
 ### Easier way to determine Deployment ID on Deployment commands
 
@@ -899,7 +899,7 @@ Release date: February 25, 2022
 
 ### Deploy to Astro with Deployment API keys for simpler CI/CD
 
-You can now use [Deployment API keys](api-keys.md) to run `astro deploy` either from the CLI directly or via a CI/CD script. This update simplifies deploying code to Astro via CI/CD.
+You can now use Deployment API keys to run `astro deploy` either from the CLI directly or via a CI/CD script. This update simplifies deploying code to Astro via CI/CD.
 
 With an existing Deployment API key, you can set `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET` as OS-level environment variables. From there, you can now configure a CI/CD pipeline that:
 
