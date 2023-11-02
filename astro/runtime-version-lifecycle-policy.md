@@ -95,7 +95,7 @@ The following table contains all major Runtime releases which are out of support
 | Runtime version                                 | Airflow version | Release date     | End of maintenance date |
 | ----------------------------------------------- | --------------- | ---------------- | ----------------------- |
 | [3](runtime-release-notes.md#astro-runtime-300) | 2.1.1           | August 12, 2021  | February 2022           |
-| [4](runtime-release-notes.md#astro-runtime-400) | 2.2             | March 10, 2022   | September 2023          |
+| [4](runtime-release-notes.md#astro-runtime-400) (LTS)  | 2.2             | March 10, 2022   | September 2023          |
 | [7](runtime-release-notes.md#astro-runtime-700) | 2.5             | December 3, 2022 | July 2023               |
 
 ## Related documentation
