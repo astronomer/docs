@@ -107,7 +107,7 @@ module.exports = {
             type: 'doc',
             id: 'environment-variables'
           },
-          items: ["environment-variables", "env-vars-astro"],
+          items: ["environment-variables", "manage-env-vars"],
         },
         {
           type: "category",

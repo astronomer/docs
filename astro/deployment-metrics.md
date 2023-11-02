@@ -168,7 +168,7 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. In the Cloud UI, select a Workspace and then select an Astro Deployment for which you want to export metrics.
-3. Create a new [environment variable](env-vars-astro.md) in your Deployment with the Datadog API key from step 1:
+3. Create a new [environment variable](manage-env-vars.md) in your Deployment with the Datadog API key from step 1:
    
    - **Key:** `DATADOG_API_KEY`
    - **Value:** `<Your-Datadog-API-key>`.

@@ -1896,7 +1896,7 @@ You can now set secret environment variables via the Cloud UI. The values of sec
 
 ![Secrets checkbox available in the Cloud UI](/img/release-notes/secrets-feature.png)
 
-For more information, read [Set environment variables via the Cloud UI](env-vars-astro.md#using-the-cloud-ui).
+For more information, read [Set environment variables via the Cloud UI](manage-env-vars.md#using-the-cloud-ui).
 
 ### Additional improvements
 

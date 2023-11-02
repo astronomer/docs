@@ -117,7 +117,7 @@ To fetch the Airflow variable in the DAG, you can then use the following methods
 
 If Airflow can't find the environment variable, replace `<default_value>` with a default value.
 
-To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/env-vars-astro.md).
+To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/manage-env-vars).
 
 ### Programmatically from a DAG or task
 

@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Manage environment variables'
 title: 'Manage environment variables on Astro'
-id: env-vars-astro
+id: manage-env-vars
 description: Learn how to manage environment variables on Astro
 ---
 
