@@ -61,4 +61,4 @@ For more information about possible Deployment health statuses, see [Deployment 
 
 - [Deployment settings](deployment-settings.md)
 - [Set environment variables on Astro](environment-variables.md)
-- [Manage Deployment API keys](api-keys.md)
+- [Authenticate an automation tool to Astro](automation-authentication.md)

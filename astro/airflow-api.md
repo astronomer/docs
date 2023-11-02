@@ -25,7 +25,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 ## Prerequisites
 
 - A Deployment on Astro.
-- A [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
+- A [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
 - [cURL](https://curl.se/) or, if using Python, the [Requests library](https://docs.python-requests.org/en/latest/index.html).
 - The [Astro CLI](cli/overview.md).
 
@@ -33,7 +33,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 
 <Tabs groupId="step-1-retrieve-your-access-token">
 
-<TabItem value="workspace" label="Workspace token (Recommended)">
+<TabItem value="workspace" label="Workspace token">
 
 Follow the steps in [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
@@ -45,42 +45,9 @@ Follow the steps in [Create a Orgaization API token](organization-api-tokens.md#
 
 </TabItem>
 
-<TabItem value="deployment" label="Deployment API key">
+<TabItem value="deployment" label="Deployment API token">
 
-:::warning
-
-Deployment API keys will soon be deprecated in favor of [Deployment API tokens](deployment-api-tokens.md). You can continue to use existing Deployment API keys for now, but you will have to complete a one-time migration to Deployment API tokens in the future.
-
-:::
-
-To retrieve an access token using [cURL](https://curl.se/), run the following API request with your Deployment API key ID and secret:
-
-```bash
-curl --location --request POST "https://auth.astronomer.io/oauth/token" \
-        --header "content-type: application/json" \
-        --data-raw '{
-            "client_id": "<api-key-id>",
-            "client_secret": "<api-key-secret>",
-            "audience": "astronomer-ee",
-            "grant_type": "client_credentials"}'
-```
-
-To retrieve an Astro access token using Python, use the [`requests`](https://docs.python-requests.org/en/latest/index.html) library to make your API request:
-
-```python
-def get_api_token() -> str:
-  r = requests.post(
-      "https://auth.astronomer.io/oauth/token",
-      json={
-          "client_id": "<api-key-id>",
-          "client_secret": "<api-key-secret>",
-          "audience": "astronomer-ee",
-          "grant_type": "client_credentials"
-      }
-  )
-  r.raise_for_status()
-  return r.json()
-```
+Follow the steps in [Create a Deployment API token](deployment-api-tokens.md#create-a-deployment-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
 </TabItem>
 </Tabs>

@@ -57,7 +57,6 @@ The following options are available if you're unable to use a browser for authen
 
 - Run `astro login -t` to log in with an authentication token. To obtain an authentication token on a separate machine, go to `https://cloud.astronomer.io/token`.
 - Run `astro login -l` to retrieve a Cloud UI log in URL and then copy the URL. In a separate terminal session, run `curl -u <user-email>:<password> <returned-url>`. This option doesn't work if you're using an identity provider (IdP) for account authentication.
-- [Use a Deployment API key](api-keys.md#using-deployment-api-keys).
 
 ## Access a different base domain
 

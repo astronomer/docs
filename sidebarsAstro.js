@@ -100,7 +100,6 @@ module.exports = {
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
-        "api-keys",
         {
           type: "category",
           label: "Environment variables",
@@ -161,7 +160,8 @@ module.exports = {
           items: [
             "manage-deployments-as-code",
             "deployment-file-reference"],
-        }, 
+        },
+        "api-keys", 
       ],
     },
     {

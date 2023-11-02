@@ -74,7 +74,7 @@ To update a Deployment's [Airflow configurations](https://airflow.apache.org/doc
 
 By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
 
-- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API key, Workspace API token, or Organization API token.
+- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API token, Workspace API token, or Organization API token.
 - You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
@@ -222,7 +222,7 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 ### Enable high availability
 
-By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of its scheduler across different nodes. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node. Note that PGBouncer Pods are guaranteed to run across multiple availability zones, but scheduler Pods are not. 
+By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of the Airflow Scheduler across different nodes. However, Astro makes a best effort to use different availability zones for your PGBouncer and Scheduler, which means it is possible but unlikely that they are both located in the same availability zone. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone. 
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
@@ -246,6 +246,6 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 ## See also
 
-- [Set environment variables on Astro](environment-variables.md).
-- [Manage Deployment API keys](api-keys.md).
+- [Set environment variables on Astro](environment-variables.md)
+- [Authenticate an automation tool to Astro](automation-authentication.md)
 - [Manage Deployments as Code](manage-deployments-as-code.md)
