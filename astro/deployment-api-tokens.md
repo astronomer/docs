@@ -5,7 +5,7 @@ id: deployment-api-tokens
 description: Use Deployment API tokens to automate code deploys and configuration changes to a Deployment.
 ---
 
-A Deployment API token is a credential that you can use to programmatically access a specific Deployment. They are a direct replacement for [Deployment API keys](api-keys.md), which will soon be deprecated. Using a Deployment API token, you can:
+A Deployment API token is a credential that you can use to programmatically access a specific Deployment. They are a direct replacement for [Deployment API keys](api-keys.md), which are deprecated. Using a Deployment API token, you can:
 
 - [Push code](deploy-code.md) to a Deployment.
 - Update the Deployment's [environment variables](environment-variables.md).
