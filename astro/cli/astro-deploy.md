@@ -29,7 +29,7 @@ This command bundles all files in your Astro project and pushes them to Astro. B
 
 When you run `astro deploy`, you'll be prompted to select from a list of all Deployments that you can access across Workspaces. To bypass this prompt, you can also specify a Deployment ID in the command. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
 
-For teams operating at scale, this command can be automated with a [CI/CD pipeline](set-up-ci-cd.md) by using [Deployment API keys](api-keys.md) in the request. When `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET` are specified as OS-level environment variables on your local machine or in a CI tool, `astro deploy <deployment-id>` can be run without requiring user authentication.
+For teams operating at scale, this command can be automated with a [CI/CD pipeline](set-up-ci-cd.md) by using [Deployment API tokens](deployment-api-tokens.md) in the request. When `ASTRO_API_TOKEN` is specified as OS-level environment variables on your local machine or in a CI tool, `astro deploy <deployment-id>` can be run without requiring user authentication.
 
 :::tip
 

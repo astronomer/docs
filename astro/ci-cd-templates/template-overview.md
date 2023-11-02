@@ -28,12 +28,12 @@ CI/CD templates that use the DAG deploy workflow:
 - Install the latest version of the Astro CLI.
 - Trigger the following Astro CLI commands depending on which files were updated by the commit:
     - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment.
-    - If any file not in the `dags` folder has changed, run `astro deploy`. This triggers two subprocesses. One that creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image to your Deployment. A second that pushes your `dags` folder to your Deployment.
+    - If any file not in the `dags` folder has changed, run `astro deploy`. This triggers two subprocesses. One that creates a Docker image for your Astro project, authenticates to Astro using your Deployment API token, and pushes the image to your Deployment. A second that pushes your `dags` folder to your Deployment.
 
 This process is equivalent to the following shell script: 
 
 ```bash
-# Set Deployment API key credentials as environment variables
+# Set Deployment API token credentials as environment variables
 export ASTRO_API_TOKEN="<your-api-token>"
 export DAG_FOLDER="<path to dag folder ie. dags/>"
 # Install the latest version of Astro CLI
@@ -68,12 +68,12 @@ CI/CD templates that use image based workflows:
 
 - Use a [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
-- Run the `astro deploy` command. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image to your Deployment.
+- Run the `astro deploy` command. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API token, and pushes the image to your Deployment.
 
 This is equivalent to running the following shell script:
 
 ```bash
-# Set Deployment API key credentials as environment variables
+# Set Deployment API token credentials as environment variables
 export ASTRO_API_TOKEN="<your-api-token>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
