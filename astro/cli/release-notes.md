@@ -23,11 +23,11 @@ Release date: November 1, 2023
 
 ### Additional improvements
 
-- The CLI will now warn users when they are about to push an empty DAG folder. Users can remove this warning by setting the `show_warnings` config to false.
+- The Astro CLI now shows a warning if you attempt to deploy a project with an empty `dags` folder to Astro. To remove this warning along with all other CLI warnings, run `astro config set show_warnings false`.
 
 ### Bug fixes
 
-- Fixed an issue where `astro deployment create` was sometimes giving an invalid runtime version error in cases where the runtime version was valid.
+- Fixed an issue where `astro deployment create` sometimes showed an invalid Runtime version error for valid Runtime versions.
 
 ## Astro CLI 1.19.3
 
