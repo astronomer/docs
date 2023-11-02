@@ -81,8 +81,7 @@ By default, each variable is created as a non-secret variable. To set any new or
 
 When you inspect a Deployment, the value of secret environment variables do not appear in the Deployment file.  
 
-
-To delete an environment variable, remove the lines that contain its key, its value, and other associated fields, then reapply the file to the Deployment. Any variables which exist on the Deployment but are not included in the most recently applied Deployment file are deleted. 
+To delete an environment variable, remove the lines that contain its key, its value, and other associated fields. Then, reapply the file to the Deployment. Any variables that exist on the Deployment, but are not included in the most recently applied Deployment file, are deleted. 
 
 If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
@@ -102,9 +101,9 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use celery executor. This section is not applicable to a Deployment that uses Kubernetes executor.
+The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use celery executor. This section is not applicable to Deployments that use Kubernetes executor.
 
-If you don't enter specific values for the `default` worker queue for a Deployment, default values based on the worker types available on your cluster are applied. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI will use default values for any other unspecified fields.
+If you don't enter specific values for the `default` worker queue for a Deployment, Astro uses default values based on the worker types available on your cluster. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI uses default values for any other unspecified fields.
 
 
 ### Other fields

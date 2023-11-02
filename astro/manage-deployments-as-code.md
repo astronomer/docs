@@ -35,7 +35,7 @@ Alternatively, you can manually create a template file without using an existing
 
 ## Create a Deployment using a template file
 
-1. To create a new Deployment you can either copy and save the following template to a `yaml` file, or follow the steps in [Create a template file for a Deployment](#create-a-template-file-or-deployment-file). 
+1. Copy one of the following templates to a local `yaml` file:
 
   <Tabs
       defaultValue="standard"
@@ -84,12 +84,15 @@ Alternatively, you can manually create a template file without using an existing
           workspace_name: <your-workspace-name>
           scheduler_size: small
   ```
-  The `cluster_name` field must include the name of the dedicatd cluster that exists in your Astro Organization. For possible values of `region`, see [Available regions for your cloud provider](resource-reference-hosted.md#standard-cluster-configurations). 
+  
+  The `cluster_name` field must include the name of the dedicated cluster that exists in your Astro Organization.
 
   </TabItem>
 
   </Tabs>
   
+    These are the minimum values required to create a Deployment using a template file. Any configurations not specified are set to default values. To add more configurations, see [Deployment file reference](deployment-file-reference.md).
+
 2.  Adjust the template file values for the Deployment you want to create. When working with template files, keep the following in mind:
 
     - The `name` field must include a unique name within the Workspace. 
