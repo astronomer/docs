@@ -452,23 +452,34 @@ The streamlit app is structured to perform three main tasks, which are separated
 You can experiment with parameters, such as the `certainity` threshold, in the Weaviate query to allow for more or less relevant article chunks to be retrieved or to change the number of article chunks that are included in the augmented prompt. Finally, you can make changes to the GPT-4 prompt. For example, to instruct the model to be more optimistic or pessimistic in its answer.
 
 ```python
+EMBEDD_LOCALLY = False
+
+
 def get_embedding(text):
-    tokenizer = BertTokenizer.from_pretrained("ProsusAI/finbert")
-    model = BertModel.from_pretrained("ProsusAI/finbert")
+    if EMBEDD_LOCALLY:
+        tokenizer = BertTokenizer.from_pretrained("ProsusAI/finbert")
+        model = BertModel.from_pretrained("ProsusAI/finbert")
 
-    if torch.cuda.is_available():
-        model = model.to("cuda")
+        if torch.cuda.is_available():
+            model = model.to("cuda")
+        else:
+            model = model.to("cpu")
+
+        model.eval()
+
+        tokens = tokenizer(
+            text, return_tensors="pt", truncation=True, padding=True, max_length=512
+        )
+        with torch.no_grad():
+            outputs = model(**tokens)
+            last_hidden_state = outputs.last_hidden_state
+            mean_tensor = last_hidden_state.mean(dim=1)
+            embeddings = mean_tensor.numpy()
     else:
-        model = model.to("cpu")
-
-    model.eval()
-
-    tokens = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
-    with torch.no_grad():
-        outputs = model(**tokens)
-        last_hidden_state = outputs.last_hidden_state
-        mean_tensor = last_hidden_state.mean(dim=1)
-        embeddings = mean_tensor.numpy()
+        model = "text-embedding-ada-002"
+        embeddings = openai.Embedding.create(input=[text], model=model)["data"][0][
+            "embedding"
+        ]
 
     return embeddings
 
