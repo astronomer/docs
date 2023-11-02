@@ -327,8 +327,8 @@ The ingestion function passed to the `@task.weaviate_import` decorator differs d
     defaultValue="cloudembedd"
     groupId= "project-code"
     values={[
-        {label: 'Local embedding', value: 'localembedd'},
         {label: 'Cloud-based embedding', value: 'cloudembedd'},
+        {label: 'Local embedding', value: 'localembedd'},
     ]}>
 
 <TabItem value="cloudembedd">
