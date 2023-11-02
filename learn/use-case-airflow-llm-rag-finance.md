@@ -430,6 +430,7 @@ def import_data_local_embed(
 :::info
 
 Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
+Note that if you use local embeddings you will also need to set `EMBEDD_LOCALLY` to `True` at the start of the [streamlit app](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) file in match the models used for embedding between the news articles and the user input in the app.
 
 :::
 
