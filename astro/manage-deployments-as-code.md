@@ -101,7 +101,7 @@ Alternatively, you can manually create a template file without using an existing
     
     - The possible values for `cloud_provider`, `executor`, and `scheduler_size` are the same possible values when you create a Deployment with [`astro deployment create`](cli/astro-deployment-create.md#options). 
 
-    - See to [Airflow and Astro Runtime version parity](runtime-image-architecture.md#astro-runtime-and-apache-airflow-parity) to choose your Astro Runtime version.
+    - See [Airflow and Astro Runtime version parity](runtime-image-architecture.md#astro-runtime-and-apache-airflow-parity) to choose your Astro Runtime version.
 
   See [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment template file values.
   
