@@ -2,7 +2,7 @@
 sidebar_label: "astro deployment team"
 title: "astro deployment team"
 id: astro-deployment-team
-description: Manage Deployment Teams (Software only)
+description: Manage Deployment Teams (Software only).
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
