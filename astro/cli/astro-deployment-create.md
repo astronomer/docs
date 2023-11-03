@@ -39,7 +39,7 @@ Some Deployment configurations, including worker queue and worker type, can be s
 
 | Option | Description | Possible Values |
 | ----- | --- | ------ |
-| `-p`, `--cloud-provider` | The Cloud Provider to use for your Deployment. The default is `gcp` | N/A |
+| `-p`, `--cloud-provider` | The Cloud Provider to use for your Deployment. The default is `gcp` | For standard clusters, possible values are `aws` and `gcp`. For dedicated clusters, possible values are `aws`, `azure`, and `gcp`. |
 | `-c`, `--cluster-id` | (Astro Hybrid and Astro Hosted dedicated clusters only) The cluster in which you want to create a Deployment | A valid [cluster ID](manage-hybrid-clusters.md#view-clusters).|
 | `--cluster-type` | (Astro Hosted only) The type of cluster you want to run the Deployment on. The default is `standard`. | Either `dedicated` or `standard`. |
 | `--dag-deploy` | Enables DAG-only deploys for the Deployment. The default is `disable` | Either `enable` or `disable`. |
