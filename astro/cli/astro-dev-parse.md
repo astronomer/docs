@@ -4,7 +4,6 @@ title: "astro dev parse"
 id: astro-dev-parse
 description: Parse the DAGs to check for errors in a local Airflow environment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 

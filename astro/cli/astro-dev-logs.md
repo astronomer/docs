@@ -4,7 +4,6 @@ title: "astro dev logs"
 id: astro-dev-logs
 description: Show logs for Airflow components.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 

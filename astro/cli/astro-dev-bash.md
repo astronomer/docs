@@ -4,7 +4,6 @@ title: "astro dev bash"
 id: astro-dev-bash
 description: Run a bash command in an Airflow component's Docker container.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 

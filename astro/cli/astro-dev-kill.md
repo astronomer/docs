@@ -4,7 +4,6 @@ title: "astro dev kill"
 id: astro-dev-kill
 description: Force-stop and remove all locally running Airflow containers.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
