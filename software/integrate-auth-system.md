@@ -429,23 +429,24 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
 2. Click **Browse App catalog**
 
 3. Search for `SCIM 2.0`, then select the option that includes **Basic Auth**. The configuration page for the SCIM integration appears.
-
-4. Click **Provisioning**, then click **Configure API integration**.
-5. Tick the **Enable API integration** checkbox, then configure the following values.
+4. Complete the **General Settings** page, then click **Next**.
+5. Complete the **Sign-On Options** page and click **Done**.
+6. Return to the **Applications** menu and search for the integration you just created. Click the integration to open its settings.
+7. Click **Provisioning**, then click **Configure API integration**.
+8. Tick the **Enable API integration** checkbox, then configure the following values:
 
     - **SCIM connector base URL**: `https://astro-software-host/v1/scim/v2/okta`
     - **Authentication mode**: Basic Auth
         - Username: `<your-provisioning-account-username>`
         - Password: `<your-provisioning-account-password>`
-    - **To App**: Enable **Provisioning to App** for **Create Users**, **Update User Attributes**, and **Deactivate Users**.
 
-6. Click **General**, then click **Edit**. Give your application a name and configure any other required general settings. 
+9. Click **General**, then click **Edit**. Give your application a name and configure any other required general settings. 
 
-7. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
+10. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
 
-8.  On the **Assignments** tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
+11. On the **Assignments** tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
 
-9. Follow the steps in [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets) to store your provisioning account credentials as a Kubernetes secret. Your secret configuration should look similar to the following:
+12. Follow the steps in [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets) to store your provisioning account credentials as a Kubernetes secret. Your secret configuration should look similar to the following:
 
     ```yaml
     # Required configuration for all secrets
@@ -464,7 +465,7 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
         okta_provisioning_account_secret: {{ "<your-provisioning-account-username>:<your-provisioning-account-password>" | b64enc | quote }}
     ```
 
-10. Add the following lines to your `config.yaml` file:
+13. Add the following lines to your `config.yaml` file:
 
     ```yaml
     astronomer:
@@ -475,7 +476,7 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
                secretKey: "okta_provisioning_account_secret"
     ```
 
-11. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+14. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
 See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm?cshid=ext_Apps_App_Integration_Wizard-scim) for more information about configuring SCIM within Okta.
 
