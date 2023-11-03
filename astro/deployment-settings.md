@@ -104,7 +104,7 @@ To update a Deployment's [Airflow configurations](https://airflow.apache.org/doc
 
 ### Update environment options
 
-You can add, update, and delete Airflow connections that were added through the Cloud UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#cloud-ui-connections), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Cloud UI](create-link-connections.md) for more options.
+You can add, update, and delete Airflow connections that were added through the Cloud UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#cloud-ui-connections), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Cloud UI](create-and-link-connections.md) for more options.
 
 ### Deployment executor
 
