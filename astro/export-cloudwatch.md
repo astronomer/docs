@@ -17,7 +17,7 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
 
 ### Prerequisites
 
-- Your Deployment must be running Astro Runtime 9.4+. See [Upgrade Astro Runtime](upgrade-runtime.md).
+- Your Deployment must run Astro Runtime 9.4+. See [Upgrade Astro Runtime](upgrade-runtime.md).
 
 ### Setup
 
@@ -42,7 +42,7 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
     }
     ```
 
-    Attach this policy to your IAM role. See [Creating policies using the JSON editor](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-json-editor) and [Adding IAM identity permissions (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#add-policies-console)   
+    Attach this policy to your IAM role. See [Creating policies using the JSON editor](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-json-editor) and [Adding IAM identity permissions (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html#add-policies-console).
 
 3. Set the following [environment variables](environment-variables.md) in your Deployment:
 
