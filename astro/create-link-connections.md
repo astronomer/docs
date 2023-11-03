@@ -71,7 +71,7 @@ For the most flexibility, you can set default connections and override the conne
 5. (Optional) Click **More options** and then add any field overrides for this Deployment. For example, if your connection requests access to a development database by default, you can override its details to instead request access to a production database.
 6. Click **Link connection**.
 
-### Step 2: (Optional) Add provider package
+### Step 2: (Optional) Add provider packages to your Deployment
 
 Some connection types require installing dependencies on your Deployment through provider packages. If your connection type requires a provider package and the provider package is neither [included in Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture#provider-packages) nor included in the `requirements.txt` file of your Astro project, Airflow won't be able to use your connection. 
 
