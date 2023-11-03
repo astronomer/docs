@@ -4,6 +4,7 @@ title: "astro registry provider add"
 id: astro-registry-provider-add
 description: Add a provider package to your project.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Download a provider package from the [Astronomer Registry](https://registry.astronomer.io/) to the `requirements.txt` file of your Astro project. 

@@ -4,6 +4,7 @@ title: "astro dev init"
 id: astro-dev-init
 description: Initialize an Astro project.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 

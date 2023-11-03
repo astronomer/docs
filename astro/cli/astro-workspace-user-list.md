@@ -4,6 +4,7 @@ title: "astro workspace user list"
 id: astro-workspace-user-list
 description: List Workspace users.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

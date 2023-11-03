@@ -4,6 +4,7 @@ title: "astro dev stop"
 id: astro-dev-stop
 description: Pause all local Airflow Docker containers.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 

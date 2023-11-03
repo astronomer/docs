@@ -4,6 +4,7 @@ title: "astro deployment airflow variable list"
 id: astro-deployment-airflow-variable-list
 description: List variables in an Airflow Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List the Airflow variables stored in a Deployment's metadata database. 

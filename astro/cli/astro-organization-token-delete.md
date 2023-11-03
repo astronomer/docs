@@ -4,6 +4,7 @@ title: "astro organization token delete"
 id: astro-organization-token-delete
 description: Delete an Organization API token.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Delete an Organization API token.

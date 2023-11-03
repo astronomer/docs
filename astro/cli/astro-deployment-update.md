@@ -4,6 +4,7 @@ title: "astro deployment update"
 id: astro-deployment-update
 description: Update a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

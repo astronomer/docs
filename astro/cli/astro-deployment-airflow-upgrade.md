@@ -4,6 +4,7 @@ title: "astro deployment airflow upgrade"
 id: astro-deployment-airflow-upgrade
 description: Upgrade Airflow (Software only).
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 :::info 

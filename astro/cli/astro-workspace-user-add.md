@@ -4,6 +4,7 @@ title: "astro workspace user add"
 id: astro-workspace-user-add
 description: Add a user to a Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

@@ -4,6 +4,7 @@ title: "astro registry dag add"
 id: astro-registry-dag-add
 description: Download a DAG from the Astronomer registry to your project. 
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Download a DAG from the [Astronomer Registry](https://registry.astronomer.io/) to your Astro project. 

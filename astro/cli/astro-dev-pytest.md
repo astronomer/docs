@@ -4,6 +4,7 @@ title: "astro dev pytest"
 id: astro-dev-pytest
 description: Run unit tests with pytest for DAGs in a local Airflow environment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 

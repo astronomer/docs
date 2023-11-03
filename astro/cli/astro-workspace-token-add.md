@@ -4,6 +4,7 @@ title: "astro workspace token add"
 id: astro-workspace-token-add
 description: Add an Organization API token to your current Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Add an Organization API token to your current Workspace and grant it Workspace permissions.

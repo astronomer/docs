@@ -4,6 +4,7 @@ title: "astro deployment list"
 id: astro-deployment-list
 description: List all Deployments in a Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List all Deployments within your current Workspace.

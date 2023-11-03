@@ -4,6 +4,7 @@ title: "astro deployment connection update"
 id: astro-deployment-connection-update
 description: Update an Airflow connection in a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update the value for a Deployment's Airflow variable. 

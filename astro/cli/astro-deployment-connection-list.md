@@ -4,6 +4,7 @@ title: "astro deployment connection list"
 id: astro-deployment-connection-list
 description: List Airflow connections in a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List the Airflow connections stored in a Deployment's metadata database. 

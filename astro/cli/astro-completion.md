@@ -4,6 +4,7 @@ title: "astro completion"
 id: astro-completion
 description: Generate completion scripts. 
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Generate completion scripts for Astro CLI commands. You can modify the generated scripts and add them to the appropriate directory to customize your command line autocompletion behavior.

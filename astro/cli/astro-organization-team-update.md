@@ -4,6 +4,7 @@ title: "astro organization team update"
 id: astro-organization-team-update
 description: Update a Team in your Organization.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update a Team in your Organization.

@@ -4,6 +4,7 @@ title: "astro deployment pool copy"
 id: astro-deployment-pool-copy
 description: Copy an Airflow pool from a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 

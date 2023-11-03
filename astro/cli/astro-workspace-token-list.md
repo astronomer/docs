@@ -4,6 +4,7 @@ title: "astro organization team list"
 id: astro-workspace-token-list
 description: List Workspace API tokens.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List all Workspace API tokens in your current Workspace. 

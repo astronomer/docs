@@ -4,6 +4,7 @@ title: "astro workspace team update"
 id: astro-workspace-team-update
 description: Update a Team in a Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

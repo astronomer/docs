@@ -4,6 +4,7 @@ title: "astro organization user list"
 id: astro-organization-user-list
 description: Manage users in your Organization.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Manage users in your current Astro Organization.

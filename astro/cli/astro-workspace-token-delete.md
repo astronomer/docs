@@ -4,6 +4,7 @@ title: "astro workspace token delete"
 id: astro-workspace-token-delete
 description: Delete a Workspace API token.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Delete a Workspace API token or remove an Organization API token in your current Workspace.

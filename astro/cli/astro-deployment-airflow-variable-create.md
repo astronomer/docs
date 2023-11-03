@@ -4,6 +4,7 @@ title: "astro deployment airflow-variable create"
 id: astro-deployment-airflow-variable-create
 description: Create an Airflow variable in a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Create Airflow variables on a Deployment. Airflow variables are stored in the Deployment's metadata database and appear in the Airflow UI.  

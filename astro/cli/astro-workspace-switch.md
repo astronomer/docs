@@ -4,6 +4,7 @@ title: "astro workspace switch"
 id: astro-workspace-switch
 description: Switch between Workspaces.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

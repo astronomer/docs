@@ -4,6 +4,7 @@ title: "astro organization team user"
 id: astro-organization-team-user
 description: Manage users in an Astro Team. 
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Manage users in an Astro Team. 

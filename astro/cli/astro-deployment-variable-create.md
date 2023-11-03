@@ -4,6 +4,7 @@ title: "astro deployment variable create"
 id: astro-deployment-variable-create
 description: Reference documentation for astro deployment variable create.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 :::info

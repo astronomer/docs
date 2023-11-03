@@ -4,6 +4,7 @@ title: "astro deployment connection copy"
 id: astro-deployment-connection-copy
 description: Copy an Airflow connection from a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Copy Airflow connections from one Astro Deployment to another. Airflow connections are stored in the target Deployment's metadata database and appear in the Airflow UI.  

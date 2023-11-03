@@ -4,6 +4,7 @@ title: "astro deploy"
 id: astro-deploy
 description: Deploy a local project to an Astro Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

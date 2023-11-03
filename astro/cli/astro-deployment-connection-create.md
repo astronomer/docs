@@ -4,6 +4,7 @@ title: "astro deployment connection create"
 id: astro-deployment-connection-create
 description: Create an Airflow connection in a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Create an Airflow connection in a Deployment's metadata database. 

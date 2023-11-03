@@ -4,6 +4,7 @@ title: "astro organization token create"
 id: astro-organization-token-create
 description: Create an Organization API token.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Create an Organization API token.

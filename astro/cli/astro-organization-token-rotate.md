@@ -4,6 +4,7 @@ title: "astro organization token rotate"
 id: astro-organization-token-rotate
 description: Rotate an Organization API token.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Rotate an Organization API token.

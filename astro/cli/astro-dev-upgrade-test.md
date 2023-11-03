@@ -4,6 +4,7 @@ title: "astro dev upgrade-test"
 id: astro-dev-upgrade-test
 description: Test your Astro project before upgrading to a new Astro Runtime version.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 

@@ -4,6 +4,7 @@ title: "astro organization token update"
 id: astro-organization-token-update
 description: Update an Organization API token.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update an Organization API token.

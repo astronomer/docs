@@ -4,6 +4,7 @@ title: "astro workspace user update"
 id: astro-workspace-user-update
 description: Update a Workspace user.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

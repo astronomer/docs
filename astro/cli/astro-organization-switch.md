@@ -4,6 +4,7 @@ title: "astro organization switch"
 id: astro-organization-switch
 description: Switch your current Organization.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Switch the Astro Organization where you're currently working.
