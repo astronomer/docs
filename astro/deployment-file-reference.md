@@ -71,7 +71,7 @@ The following sections describe each section in the file.
 
 You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI. Each variable in this section must include a `key` and a `value`.
 
-By default, each variable is created as a non-secret variable. To set any new or existing environment variables as secret in, specify `is_secret: true` in the same section as the key and value. For example: 
+By default, each variable is created as a non-secret variable. To set any new or existing environment variables as secret, specify `is_secret: true` in the same section as the key and value. For example: 
 
 ```yaml
  - is_secret: true
