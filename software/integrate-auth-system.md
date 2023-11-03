@@ -484,49 +484,66 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 <TabItem value="azuread">
 
-1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string. 
+1. Generate a random string to use as an authentication secret. See [random.org](https://www.random.org/strings/) for accessible randomization tools.
+2. Follow the steps in [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets) to store your string as a Kubernetes secret. Your secret configuration should look similar to the following:
+
+    ```yaml
+    # Required configuration for all secrets
+    kind: Secret
+    apiVersion: v1
+    metadata:
+         name: azure-provisioning-secret
+         labels:
+            release: {{ .Release.Name }}
+            chart: {{ .Chart.Name }}
+            heritage: {{ .Release.Service }}
+            component: {{ template "houston.backendSecret" . }}
+    type: Opaque
+    # Specify a key and value for the data you want to encrypt
+    data:
+        azure_provisioning_secret: {{ "<your-generated-string>" | b64enc | quote }}
+    ```
+
+2. In your `config.yaml` file, add the following configuration:
 
     ```yaml
     astronomer:
-      houston: 
-        config:
-          auth:
-            openidConnect:
-              microsoft:
-                scimAuthCode: <your-generated-secret-code>
+        houston:
+            secret:
+             - envName: "SCIM_AUTH_CODE_MICROSOFT"
+               secretName: "azure-provisioning-secret"
+               secretKey: "azure_provisioning_secret"
     ```
-   
-    **Note**: If you have already configured Open ID Connect with Azure AD, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
-2. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+3. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
-3. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
+4. Log in to the [Azure AD portal](https://aad.portal.azure.com/). 
    
-4. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
+5. In the left menu, select **Enterprise applications**, then click **New application** > **Create your own application**.
    
-5. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
+6. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
   
-6. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
+7. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
   
-7. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
+8. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
 
-8. Click **Provisioning Mode** > **Automatic**.
+9.  Click **Provisioning Mode** > **Automatic**.
 
-9. In the **Tenant URL** field, enter `https://houston.BASEDOMAIN/v1/scim/v2/microsoft`. This is the Astronomer SCIM endpoint URL.
+10. In the **Tenant URL** field, enter `https://BASEDOMAIN/v1/scim/v2/microsoft`. This is the Astronomer SCIM endpoint URL.
 
-10. Paste the `scimAuthCode` generated at step 1 above into the **Secret Token** field.
+11. Paste the `scimAuthCode` that you generated in Step 1 into the **Secret Token** field.
 
-11. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+12. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
-12. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+13. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
 
-13. Click **Manage** > **Provisioning** > **Settings**.
+14. Click **Manage** > **Provisioning** > **Settings**.
 
-14. In the **Scope** setting list, select **Sync only assigned users and groups**.
+15. In the **Scope** setting list, select **Sync only assigned users and groups**.
    
-15. Click the **Provisioning status** toggle to turn provisioning status on.
+16. Click the **Provisioning status** toggle to turn provisioning status on.
 
-16. Click **Save**.
+17. Click **Save**.
 
 </TabItem>
 </Tabs>
