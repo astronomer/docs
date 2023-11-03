@@ -68,7 +68,7 @@ The following table shows version compatibility information for all versions of 
 | v0.26               | 1.17, 1.18, 1.19, 1.20, 1.21              | 9.6+                                      | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_)      | All Astronomer Certified versions | 3.6  |
 | v0.27               | 1.18, 1.19, 1.20, 1.21                    | 9.6+                                      | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_)      | All Astronomer Certified versions | 3.6  |
 | v0.28               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24      | 9.6+                                      | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_)      | All Astronomer Certified versions | 3.6  |
-| v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 9.6+ | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions   | 3.6                               |
+| v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+ | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions   | 3.6                               |
 | v0.31               | 1.21, 1.22, 1.23, 1.24 , 1.25¹, 1.26¹     | 11.19+                                    | 3.6, 3.7, 3.8, 3.9 (_requires Airflow 2.2.0+_) | All Runtime versions              | 3.6  |
 
 :::info
