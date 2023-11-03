@@ -1,83 +1,89 @@
 ---
-sidebar_label: 'Create Astro connections'
-title: 'Create connections in the Environment Manager'
-id: create-link-connections
-description: "Create Airflow connections for multiple Deployments in the Astro Environment Manager."
+sidebar_label: 'Create connections in Astro'
+title: 'Create Airflow connections in the Astro Cloud UI'
+id: create-and-link-connections
+description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
 
-You can create and manage connections across Deployments with the Astro Environment Manager in the Cloud UI. This strategy of connection management behaves as if it is an Astro-managed secrets backend, which improves authentication management if you don't use a secrets backend and provides you with method to create a connection once and share it with multiple Airflow Deployments. 
+You can create and manage connections across Deployments with the Astro Environment Manager in the Cloud UI. This strategy of connection management uses an Astro-managed secrets backend to store connection configurations in Hashicorp Vault as Kubernetes Secrets.
 
-Astro stores your connection configurations and authentication information in Hashicorp Vault and Kubernetes Secrets instead of requiring you to manage it in your own secrets backend. This means you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend or handle multiple sets of credentials for making connections to the same resource in multiple Deployments.
+Using the Environment Manager, you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend. You can also create a connection once and use it across multiple Airflow Deployments. 
 
-When you use the Cloud UI to create and manage connections, you can also:
+When you create a connection in the Cloud UI, you can:
 
-- Share that connection with all or specific deployments within the workspace
-- Choose to override certain fields in the connection at the Deployment level
-- Share connections with local development environments when running `astro dev start`
-- Use connections in branch-based deploys and PR previews
+- Share the connection with multiple Deployments within the Workspace.
+- Override certain fields in the connection for individual Deployments.
+- Share connections with local Airflow environments.
+- Use connections in branch-based deploys and PR previews.
 
-    ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
+For example, you can configure a connection with the credentials for a sandbox or development environment. Then, you can later configure your connection to be applied to all Deployments in the workspace by default. This means that when you create new Deployments, they automatically have access to your development environment. Later, you can edit the connection to point to your production resources by using [field overrides](#override-connection-fields).
+
+![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
 ## Create a connection
 
-There are two ways to access the **Environment** page where you can create and manage your connections.
-- In your Deployment, go to the **Environment** tab. This view shows you all Cloud UI connections for your Deployment.
-- From the main navigation, select **Environment**. This view shows you all the Cloud UI connections for your workspace. 
+You can create connections both at the Deployment and Workspace level. When you create a connection at the Deployment level, the connection details are available only to that specific Deployment. When you create a connection at the Workspace level, you can apply the connection to several Deployments and override specific fields as needed for each Deployment. 
 
 ### Prerequisites
 
-To make changes to connections, you need `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
+To make changes to connections, you need `WORKSPACE_OPERATOR` [user permissions](user-permissions.md).
 
 ### Setup
 
-1. Open the **Environment Manager** page by either
-    - Clicking **Environment** in the main menu to open the **Connections** page.
-    - Opening the Deployment where you want to link your new connection. Click the **Environment** tab. Creating the connection from the Deployment automatically links the connection to the Deployment
-2. Click the **Connection** tab.
+To create a connection at the Workspace level:
+
+1. In the Cloud UI, click **Environment** in the left menu to open the **Connections** page.
+2. Click **+ Connection** to add a new connection.
+3. Find the service you want to connect from the list of available options.
+5. Enter the information for your connection in the listed fields.
+6. Click **Create Connection**.
+7. Make your connection accessible to Deployments. See [Link connections to Deployments](#link-connections-to-deployments).
+
+To create a connection at the Deployment level:
+
+1. In the Cloud UI, select a Deployment, then click the **Environment** tab within the Deployment menu.
 3. Click **+ Connection** to add a new connection.
 4. Find the service you want to connect from the list of available options.
 5. Enter your information in the required fields.
-
-    :::tip
-
-    You can configure your connection with the credentials for a sandbox or development environment. Then, you can later configure your connection to be applied to all Deployments in the workspace by default. This means that when you create new Deployments, they automatically have access to your development environment. Later, you can edit the connection to point to your production resources by using [field overrides](#override-connection-fields).
-
-    :::
-
 6. Click **Create Connection** to make your new connection.
 
-Now you can add connections to Deployments and override particular fields to customize behavior depending on the Deployment it's linked to.
+After you create a connection, you can reference its **Connection ID** from DAG code like you would with any Airflow connection created through the Airflow UI.
 
 ## Link connections to Deployments
 
-After you create a connection, then you can link it to Deployments.
+After you create a connection at the Workspace level, you can link it to multiple Deployments. Linking connections is useful for standardizing external resource usage across your entire team. 
+
+For the most flexibility, you can set default connections and override the connection details per-Deployment based on details like the Deployment's usage and environment type (production or development).
 
 ### Prerequisites
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md)
+- A connection created at the Workspace level
 - A local Astro project created with [the Astro CLI](cli/get-started-cli.md)
 - Astro Runtime 9.3.0 or greater
 
-### Step 1: Add link to connection
+### Step 1: Link the connection
 
-1. Click **Environment** in the main menu to open the **Connections** page.
-2. Click the Connection you want to link to a Deployment.
+1. In the Cloud UI, click **Environment** in the left menu to open the **Connections** page.
+2. Click the connection you want to link to a Deployment.
 3. Click **+ Link Deployment**.
-4. Choose a Deployment from the list.
-5. (Optional) Click **More options** and then add any field overrides for this Deployment. For example, you can specify a default schema to use.
+4. Choose a Deployment from the list that appears.
+5. (Optional) Click **More options** and then add any field overrides for this Deployment. For example, if your connection requests access to a development database by default, you can override its details to instead request access to a production database.
 6. Click **Link connection**.
 
 ### Step 2: (Optional) Add provider package
 
-If you only added the connection in the Cloud UI and did not include the provider package name in your `requirements.txt` file in your project, you won't be able to use your connection. 
+Some connection types require installing dependencies on your Deployment through provider packages. If your connection type requires a provider package and the provider package is neither [included in Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture#provider-packages) nor included in the `requirements.txt` file of your Astro project, Airflow won't be able to use your connection. 
 
-1. Open your project locally.
-2. Add the provider package name to your project's `requirements.txt` file includes the provider package for the resource you connected to. Save your changes.
-3. Run `astro deploy` to rebuild your containers and push the changes to your Deployment.
+1. Open the local Astro project for your Deployment.
+2. Add the required provider package name to your project's `requirements.txt`. Save your changes.
+3. Run `astro deploy` to rebuild your project image and push the changes to your Deployment.
 
-## Deployment sharing
+## Configure connection sharing for a Workspace
 
-You can configure whether Astro links connections to all Deployments in the workspace, or if you need to manually assign a connection to each individual Deployments. This means that you can configure a connection with default values for your sandbox or development environment and set the configuration so that all Deployments in a Workspace use the development environment by default. Then, when you create new Deployments, they automatically have a default connection to your development environment.
+You can configure Astro to link Workspace-level connections to all Deployments in the Workspace by default. 
+
+This is useful, for example, when you need to configure a connection for development environments that all Deployments in a Workspace should start out with. Then, when you create new Deployments, they automatically have a default connection to your development resources.
 
 When you're ready for your Deployments to connect to your production environment, you can either replace the connection or [override the connection field](#override-connection-fields) values with your production resource information.
 
@@ -103,7 +109,7 @@ If you change the setting from **Restricted** to **Linked to all Deployments**, 
 
 ## Override connection fields
 
-If you create a connection and link it to a Deployment, you can later edit the connection to specify field overrides. When you override a field, you specify particular values that you want to use for a specific Deployment, but not for others. This way, you can configure the connection and authentication a single time, but still have the flexibility to customize connection at the Deployment level.
+If you create a connection at the Workspace level and link it to a Deployment, you can later edit the connection within the Deployment to specify field overrides. When you override a field, you specify particular values that you want to use for a specific Deployment, but not for others. This way, you can configure the connection and authentication a single time, but still have the flexibility to customize connection at the Deployment level.
 
 For example, you might have created a connection to a Snowflake account, and then add field overrides to specify the default schemas or databases you want each Deployment to use. 
 

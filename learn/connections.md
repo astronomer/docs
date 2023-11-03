@@ -56,7 +56,7 @@ Each connection type requires different configurations and values based on the s
 
 :::tip
 
-If you use a mix of strategies for managing connections, it's important to understand that when Airflow searches for connections, it uses the following order:
+If you use a mix of strategies for managing connections, it's important to understand that if the same connection is defined in multiple ways, Airflow uses the following order or precedence:
 
 1. Secrets Backend
 2. Astro Environment Manager
