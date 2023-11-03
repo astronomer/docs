@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use this document to learn how you can connect an Astro cluster and its Deployments to your external Azure resources.
+Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Azure resources.
 
 ## Connection options
 
