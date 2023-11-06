@@ -90,7 +90,7 @@ If you have any questions or concerns, contact [Astronomer support](https://clou
 
 ## Legacy Astro Runtime versions
 
-The following table contains all major Runtime releases which are out of support. Astronomer is not obligated to answer support questions regarding these versions.
+The following table contains all major Runtime releases that are no longer supported. Astronomer is not obligated to answer support questions regarding these versions.
 
 | Runtime version                                 | Airflow version | Release date     | End of maintenance date |
 | ----------------------------------------------- | --------------- | ---------------- | ----------------------- |
