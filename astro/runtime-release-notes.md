@@ -35,7 +35,7 @@ Astro Runtime 9.5.0 includes same-day support for Apache Airflow 2.7.3. Airflow 
 
 - Fix Scheduler crash looping when DAG run creation fails ([#35135](https://github.com/apache/airflow/pull/35135))
 - Fix pre-mature evaluation of tasks in mapped task group ([#34337](https://github.com/apache/airflow/pull/34337))
-- Add TriggerRule missing value in rest API ([#35194](https://github.com/apache/airflow/pull/35194))
+- Add TriggerRule missing value in REST API ([#35194](https://github.com/apache/airflow/pull/35194))
 
 To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-3-2023-11-04).
 
