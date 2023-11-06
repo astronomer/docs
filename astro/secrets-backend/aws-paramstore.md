@@ -17,15 +17,18 @@ If you use a different secrets backend tool or want to learn the general approac
 
 ## Step 1: Create Airflow secrets directories in Parameter Store
 
-Follow the provider instructions [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or the [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html) documentation to create Airflow secrets directories in Parameter Store.
+1. Follow the provider instructions in the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or the [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html) documentation to create Airflow secrets directories in Parameter Store.
 
-Make two directores, `/airflow/variables` and `/airflow/connections`, to store Airflow variables and connections, respectively. For example, if you're setting a secret variable with the key `my_secret`, store it in the `/airflow/connections/` directory. 
+2. Make two directores to store Airflow variables and connections:
 
-:::tip
+    * `/airflow/variables`
+    * `/airflow/connections` 
 
-You use the `/airflow/variables` and `/airflow/connections` directory paths again in Step 2. So, if you change them, make sure you also change the values for `variables_prefix` and `connections_prefix` in the net step.
+    :::tip
 
-:::
+    You use the `/airflow/variables` and `/airflow/connections` directory paths again in Step 2. So, if you change the names from the default, make sure you also change the values for `variables_prefix` and `connections_prefix` in the net step.
+
+    :::
   
 ## Step 2: Set up Parameter Store locally
 
@@ -36,7 +39,7 @@ AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.systems_manager.S
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}
 ```
 
-You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+You can now run a DAG locally to check that your variables are accessible by using `Variable.get("<your-variable-key>")`.
 
 ## Step 3: Deploy environment variables to Astro 
   
