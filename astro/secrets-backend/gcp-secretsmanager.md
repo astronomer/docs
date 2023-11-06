@@ -20,25 +20,23 @@ If you use a different secrets backend tool or want to learn the general approac
 
 ## Step 1: Create an Airflow variable or connection in Google Cloud Secret Manager
 
-To start, create an Airflow variable or connection in Google Cloud Secret Manager that you want to store as a secret. You can use the Cloud Console or the gcloud CLI.
+1. Follow the [Google Cloud documentation](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) to create an Airflow variable or connection that you want to store as a secret. You can use either the Cloud Console or the gcloud CLI.
 
-Secrets must be formatted such that:
-- Airflow variables are set as `airflow-variables-<variable-key>`.
-- Airflow connections are set as `airflow-connections-<connection-id>`.
+    Secrets must be formatted like:
+    - Airflow variables are set as `airflow-variables-<variable-key>`.
+    - Airflow connections are set as `airflow-connections-<connection-id>`.
 
-For example, to add an Airflow variable with a key `my-secret-variable`, you run the following gcloud CLI command:
+    For example, to add an Airflow variable with a key `my-secret-variable`, you run the following gcloud CLI command:
 
-```sh
-gcloud secrets create airflow-variables-<my-secret-variable> \
-    --replication-policy="automatic"
-```
-
-For more information on creating secrets in Google Cloud Secret Manager, read the [Google Cloud documentation](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create).
+    ```sh
+    gcloud secrets create airflow-variables-<my-secret-variable> \
+        --replication-policy="automatic"
+    ```
 
 ## Step 2: Set up GCP Secret Manager locally
 
 1. Copy the complete JSON service account key for the service account that you want to use to access Secret Manager. 
-2. Add the following environment variables to your Astro project's `.env` file, replacing `<your-service-account-key>` with the key you copied in Step 1:
+2. Add the following environment variables to your Astro project's `.env` file, replacing `<your-service-account-key>` with the JSON service account key you copied:
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
