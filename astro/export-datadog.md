@@ -5,12 +5,12 @@ id: export-datadog
 description: "Configure your Deployment to forward observability data to your Datadog instance."
 ---
 
-Using Datadog with Astro allows you to observe your Deployments using Datadog's extensive cloud monitoring tools. Currently, Astro supports sending the following information to Datadog:
+By forwarding Astro data to Datadog, you can integrate Astro into your existing Datadog practices by observing Deployments using Datadog cloud monitoring tools. Currently, you can send the following data to Datadog:
 
-- Airflow task logs
-- Supported Datadog [Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected)
+- Airflow task logs.
+- Supported Datadog [Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected).
 
-Complete the following setup to authenticate your Deployments to Astro and forward their observability data to your Datadog instance.
+Complete the following setup to authenticate your Deployments to Datadog and forward your observability data to your Datadog instance.
 
 ## Export task logs to Datadog
 
@@ -18,7 +18,7 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
 ### Prerequisites
 
-- Your Deployment must run Astro Runtime 9 (AWS) or 9.1 (Azure and GCP). See [Upgrade Astro Runtime](upgrade-runtime.md).
+- Your Deployment must run Astro Runtime 9 (AWS) or 9.1 (Azure and GCP) or later. See [Upgrade Astro Runtime](upgrade-runtime.md).
 
 ### Setup
 
@@ -64,8 +64,6 @@ Export over 40 Airflow metrics related to the state and performance of your Astr
 Astro does not export any [service checks](https://docs.datadoghq.com/integrations/airflow/?tab=host#service-checks) to Datadog. Information about the general health of your Deployment is available only as part of the Cloud UI's [Deployment health](#deployment-health) metric.
 
 :::
-
-### Setup
 
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. In the Cloud UI, select a Workspace and then select an Astro Deployment for which you want to export metrics.

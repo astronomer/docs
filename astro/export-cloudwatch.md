@@ -5,11 +5,11 @@ id: export-cloudwatch
 description: "Configure your Deployment to forward observability data to your AWS Cloudwatch instance."
 ---
 
-Using AWS Cloudwatch with Astro allows you to observe your Deployments directly from your AWS console. Currently, Astro supports sending the following information to Cloudwatch:
+By forwarding Astro data to AWS Cloudwatch, you can integrate Astro into your existing observability practices by observing Deployments using Cloudwatch monitoring tools. Currently, you can send the following data to AWS Cloudwatch:
 
 - Airflow task logs
 
-Complete the following setup to authenticate your Deployments to Astro and forward their observability data to your AWS Cloudwatch instance.
+Complete the following setup to authenticate your Deployments to AWS Cloudwatch and forward your observability data to your AWS Cloudwatch instance.
 
 ## Export task logs to AWS CloudWatch 
 
