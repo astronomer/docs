@@ -24,6 +24,25 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 9.5.0
+
+- Release date: November 6, 2023
+- Airflow version: 2.7.2
+
+### Airflow 2.7.3
+
+Astro Runtime 9.5.0 includes same-day support for Apache Airflow 2.7.3. Airflow 2.7.3 contains a number of bug fixes including:
+
+- Fix Scheduler crash looping when DAG run creation fails ([#35135](https://github.com/apache/airflow/pull/35135))
+- Fix pre-mature evaluation of tasks in mapped task group ([#34337](https://github.com/apache/airflow/pull/34337))
+- Add TriggerRule missing value in rest API ([#35194](https://github.com/apache/airflow/pull/35194))
+
+To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-7-3-2023-11-04).
+
+### Additional improvements
+
+- You can now customize the color of the Airflow UI navigation bar by setting the `AIRFLOW__WEBSERVER__NAVBAR_COLOR` environment variable.
+
 ## Astro Runtime 9.4.0
 
 - Release date: October 23, 2023
