@@ -217,7 +217,7 @@ KubernetesPodOperator(
 
 :::info
 
-This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+Passwordless setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. For Astro Hosted standard clusters, please follow the steps in [Private Registry](https://docs.astronomer.io/astro/kubernetespodoperator?tab=PrivateRegistry#step-1-create-a-kubernetes-secret) to create a Kubernetes secret containing your registry credentials.
 
 :::
 
@@ -262,7 +262,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 :::info
 
-This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+Passwordless setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. For Astro Hosted standard clusters, please follow the steps in [Private Registry](https://docs.astronomer.io/astro/kubernetespodoperator?tab=PrivateRegistry#step-1-create-a-kubernetes-secret) to create a Kubernetes secret containing your registry credentials.
 
 :::
 
