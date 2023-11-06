@@ -22,7 +22,7 @@ If you use a different secrets backend tool or want to learn the general approac
 - A local or hosted Vault server. See [Starting the Server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) or [Create a Vault Cluster on HCP](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault).
 - An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project).
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
-- Your Vault Server's URL. If you're using a local server, this should be `http://127.0.0.1:8200/`.
+- Your Vault Server's URL. If you're using a local server, this is `http://127.0.0.1:8200/`.
 
 If you do not already have a Vault server deployed but would like to test this feature, Astronomer recommends that you either:
 
@@ -68,53 +68,55 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
   
 ## Step 2: Create an Airflow variable or connection in Vault
 
-To start, create an Airflow variable or connection in Vault that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality.
+Create an Airflow variable or connection in Vault that you want to store as a secret. It can either be a real or test value. You use this secret to test your backend's functionality.
 
-You can use an existing mount point or create a new one to store your Airflow connections and variables. For example, to create a new mount point called `airflow`, run the following Vault CLI command:
+1. Use an existing mount point or create a new one to store your Airflow connections and variables. 
 
-```bash
-vault secrets enable -path=airflow -version=2 kv
-```
+    - To create a new mount point called `airflow`, run the following Vault CLI command:
 
-To store an Airflow variable in Vault as a secret at the path `variables`, run the following Vault CLI command with your own values:
+    ```bash
+    vault secrets enable -path=airflow -version=2 kv
+    ```
 
-```bash
-vault kv put -mount=airflow variables/<your-variable-name> value=<your-value-value>
-```
+    - To store an Airflow variable in Vault as a secret at the path `variables`, run the following Vault CLI command with your own values:
 
-To store an Airflow connection in Vault as a secret at the path `connections`, first format the connection as a URI. Then, run the following Vault CLI command with your own values:
+    ```bash
+    vault kv put -mount=airflow variables/<your-variable-name> value=<your-value-value>
+    ```
 
-```bash
-vault kv put -mount=airflow connections/<your-connection-name> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:<connection-port>
-```
+    - To store an Airflow connection in Vault as a secret at the path `connections`, first format the connection as a URI. Then, run the following Vault CLI command with your own values:
 
-To format existing connections in URI format, see [Import and export connections](import-export-connections-variables.md#using-the-astro-cli-local-environments-only).
+    ```bash
+    vault kv put -mount=airflow connections/<your-connection-name> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:<connection-port>
+    ```
 
-:::caution
+    - To format existing connections in URI format, see [Import and export connections](import-export-connections-variables.md#using-the-astro-cli-local-environments-only).
 
-Do not use custom key names for your secrets. Airflow requires the key name `value` for all Airflow variables and the key name `conn_uri` for all Airflow connections as shown in the previous commands.
+    :::caution
 
-:::
+    Do not use custom key names for your secrets. Airflow requires the key name `value` for all Airflow variables and the key name `conn_uri` for all Airflow connections as shown in the previous commands.
 
-To confirm that your secret was written to Vault successfully, run:
+    :::
 
-```bash
-# For variables
-$ vault kv get -mount=airflow variables/<your-variable-name>
+3. To confirm that your secret was written to Vault successfully, run:
 
-# For connections
-$ vault kv get -mount=airflow connections/<your-connection-name>
-```
+    ```bash
+    # For variables
+    $ vault kv get -mount=airflow variables/<your-variable-name>
+
+    # For connections
+    $ vault kv get -mount=airflow connections/<your-connection-name>
+    ```
 
 ## Step 3: Set up Vault locally
 
-In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
+1. In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
 
 ```bash
 apache-airflow-providers-hashicorp
 ```
 
-Then, add the following environment variables to your `.env` file:
+2. Add the following environment variables to your `.env` file:
 
 ```bash
 AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
