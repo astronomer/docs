@@ -36,6 +36,7 @@ module.exports = {
           label: "Migrate to Astro",
           items: ["migrate-mwaa", "migrate-gcc"],
         },
+        "install-azure",
       ],
     },
     {
