@@ -2,7 +2,7 @@
 sidebar_label: "astro workspace service-account"
 title: "astro workspace service-account"
 id: astro-workspace-service-account
-description: Manage Workspace service accounts (Software only)
+description: Manage Workspace service accounts (Software only).
 hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
