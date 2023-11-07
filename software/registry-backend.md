@@ -228,24 +228,25 @@ astronomer:
 
 3. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
-### Method to use IAM roles  
+### Authorize Astronomer to a registry backend using IAM roles (Optional)
 
-Add the following values to your `config.yaml`to use IAM roles:
+To avoid hardcoding credentials for your registry backend, add the following configuration to your `config.yaml` file:
 
-```
+```yaml
 registry: 
     serviceAccount: 
       # Specifies whether a service account should be created 
       create: true 
       # Annotations to add to the service account 
       annotations: 
-        eks.amazonaws.com/role-arn: arn:aws:iam::xxxxxxxxxxxxxx:role/srecluster100-registry-backend-role 
+        eks.amazonaws.com/role-arn: arn:aws:iam::xxxxxxxxxxxxxx:role/<your-iam-role>
     s3: 
       enabled: true 
-      region: us-east-2 
-      bucket: srecluster100-registry-backend
+      region: <your-region>
+      bucket: <your-registry-backend>
 ```
 
+Then, push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 ## Azure Blob Storage
 
 If you're running Astronomer Software on Azure Kubernetes Service (AKS), Astronomer recommends using Azure Blob Storage as a registry backend solution.
