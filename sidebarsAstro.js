@@ -217,12 +217,11 @@ module.exports = {
             {
               type: "category",
               label: "Networking",
-              link: {
-                type: 'generated-index',
-                title: 'Networking',
-                description: 'Connect Astro to your existing cloud resources.'
-              },
-              items: ["connect-aws", "connect-azure", "connect-gcp"],
+              items: [
+                "connect-aws", 
+              "connect-azure", 
+              "connect-gcp"
+            ],
             },
           ],
         },

@@ -1,8 +1,8 @@
 ---
 sidebar_label: 'Azure'
-title: 'Connect Astro to Azure data sources'
+title: 'Create a network connection between Astro and Azure'
 id: connect-azure
-description: Connect Astro to Microsoft Azure.
+description: Create network connection to Microsoft Azure.
 sidebar_custom_props: { icon: 'img/azure.png' }
 ---
 

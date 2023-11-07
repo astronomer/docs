@@ -1,8 +1,8 @@
 ---
 sidebar_label: 'GCP'
-title: 'Connect Astro to GCP data sources'
+title: 'Create a network connection between Astro and GCP'
 id: connect-gcp
-description: Connect Astro to GCP.
+description: Create network connection to Google Cloud Platform.
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 
@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use this document to learn how you can grant an Astro cluster and its Deployments access to your external GCP resources.
+Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Google Cloud Platform (GCP) resources.
 
 ## Connection options
 
