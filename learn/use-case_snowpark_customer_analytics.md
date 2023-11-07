@@ -10,7 +10,7 @@ sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 
 This guide demonstrates how to use Apache Airflow to orchestrate a machine learning pipeline leveraging the Snowpark provider and Snowpark ML for feature engineering and model tracking. While Snowpark ML has its own support for models similar to scikit-learn this code demonstrates a "bring-your-own" model approach showing the use of open-source scikit-learn along with Snowpark ML model registry and model serving in an Airflow task rather than Snowpark user-defined function (UDF).  
 
-This demonstration shows how to build a customer analytics dashboard.  Sissy-G Toys is a fictitious online retailer for toys and games.  The GroundTruth customer analytics application provides marketing, sales and product managers with a one-stop-shop for analytics.  The application uses machine learning models for audio transcription, natural language embeddings and sentiment analysis on structured, semi-structured and unstructured data. 
+This demonstration shows how to build a customer analytics dashboard.  Sissy-G Toys is a fictitious online retailer for toys and games.  The GroundTruth customer analytics application provides marketing, sales and product managers with a one-stop-shop for analytics.  The application uses machine learning models for audio transcription, natural language embeddings and sentiment analysis on structured, semi-structured and unstructured data. All of the processing and prediction work is managed by Airflow, leveraging Snowparks compute and proximity to Snowflake data
 
 This demo also shows the use of the Snowflake XCOM backend which supports security and governance by serializing all task in/output to Snowflake tables and stages while storing in the Airflow XCOM table a URI pointer to the data.
 
@@ -35,7 +35,37 @@ Before trying this example, make sure you have:
 - A [Snowflake](https://www.snowflake.com/en/) Account with AccountAdmin permissions
 - (Optional) OpenAI account or [Trial Account](https://platform.openai.com/signup)
 
-## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-mlflow). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
+## Set-up the project
+
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/airflow-snowparkml-demo/tree/main).
+
+```bash
+git clone https://github.com/astronomer/airflow-snowparkml-demo
+cd airflow-snowparkml-demo 
+```
+
+Open the `.env` file in an editor and update the following variables with you account information. You only need to update the Snowflake Connection details to be able to run the Customer Analytics DAG. However, if you'd like to enable chat capabilities in the final streamlit application, please add an OpenAI API key where designated in the .env file as well. 
+
+This demo assumes the use of a new Snowflake trial account with admin privileges.  A database named 'DEMO' and schema named 'DEMO' will be created in the DAG.  Running this demo without admin privileges or with existing database/schema will require further updates to the `.env` file.
+  
+- AIRFLOW_CONN_SNOWFLAKE_DEFAULT  
+  -- login  
+  -- password  
+  -- account **  
+- OPENAI_APIKEY  
+  
+** The Snowflake `account` field of the connection should use the new `ORG_NAME-ACCOUNT_NAME` format as per [Snowflake Account Identifier policies](https://docs.snowflake.com/en/user-guide/admin-account-identifier).  The ORG and ACCOUNT names can be found in the confirmation email or in the Snowflake login link (ie. `https://xxxxxxx-yyy11111.snowflakecomputing.com/console/login`)
+Do not specify a `region` when using this format for accounts.
+  
+NOTE: Database and Schema names should be CAPITALIZED due to a bug in Snowpark ML.
+
+## Run the project
+
+To run the example project, first make sure Docker Desktop is running. Then, open your project directory and run:
+
+```sh
+astro dev start
+```
+
 
