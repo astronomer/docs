@@ -68,4 +68,30 @@ To run the example project, first make sure Docker Desktop is running. Then, ope
 astro dev start
 ```
 
+This command builds your project and spins up 5 Docker containers on your machine to run it. In addition to the 4 standard Airflow containers, a Weaviate container is spun up as well. This allows us to run a fully local Weaviate environment for local development, giving every developer their own dedicated testing environment.
+
+After the command finishes, open the the [Airflow UI](http://localhost:8080/) and press trigger the `customer_analytics` DAG using the play button. Then, monitor its status as it completes via the graph view!
+
+## View Results in Streamlit
+
+Once the DAG has completed, you can look at the results in a Streamlit customer analytics dashboard. 
+Streamlit has been installed alongside the Airflow UI in the webserver container, and there's a script in the include directory called `streamlit_app.py` that you'll use to create the dashboard.
+
+To do so, first go to your projects root directory and connect to the webserver container with the Astro CLI
+```bash
+astro dev bash -w
+``` 
+
+Start Streamlit
+```bash
+cd include/streamlit/src
+python -m streamlit run ./streamlit_app.py
+```
+## Project Code
+
+This project consists of one DAG, [customer_analytics](https://github.com/astronomer/airflow-snowparkml-demo/blob/main/dags/customer_analytics.py) which demonstrates an end-to-end ML application workflow using OpenAI embeddings with a Weaviate vector database as well as Snowpark decorators, the Snowflake XCOM backend and the Snowpark ML model registry. The Astro CLI can easily be adapted to include additionalDocker-based services, in this use case we used  Weaviate and streamlit.
+
+
+
+
 
