@@ -19,6 +19,15 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 ## Astro CLI 1.19.4
 
+Release date: November 7, 2023
+
+### Bug fixes
+
+- Fixed an issue where `astro workspace users list` occasionally failed to return a table.
+- Fixed an issue introduced in version 1.19.4 where you could not deploy a custom image to Astro.
+
+## Astro CLI 1.19.4
+
 Release date: November 1, 2023
 
 ### Additional improvements
