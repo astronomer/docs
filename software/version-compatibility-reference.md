@@ -17,9 +17,9 @@ The following table shows version compatibility information for all currently su
 
 | Astronomer Platform | Postgres | Python                                         | Astro Runtime        | Helm |
 | ------------------- | -------- | ---------------------------------------------- | -------------------- | ---- |
-| v0.30               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions | 3.6  |
-| v0.32               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions | 3.6  |
-| v0.33               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions | 3.6  |
+| v0.30               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions | 3.13  |
+| v0.32               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions | 3.13 |
+| v0.33               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions | 3.13  |
 
 See [Kubernetes version support table and policy](#kubernetes-version-support-table-and-policy) for Astronomer platform compatibility with Kubernetes.
 
