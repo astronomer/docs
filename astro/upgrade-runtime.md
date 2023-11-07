@@ -95,7 +95,7 @@ For more information about deploying to Astro, see [Deploy code](deploy-code.md)
 
 :::caution
 
-After you upgrade to a Deployment on Astro to a new version of Astro Runtime, the only way to downgrade is to [roll back to a previous deploy](deploy-history.md). If you attempt downgrade a Deployment by updating your Dockerfile, the Astro CLI produces an error and your request to deploy does not succeed.
+After you upgrade a Deployment on Astro to a new version of Astro Runtime, the only way to downgrade is to [roll back to a previous deploy](deploy-history.md). If you attempt to downgrade a Deployment by updating your Dockerfile, the Astro CLI produces an error and your request to deploy does not succeed.
 
 Generally speaking, Deployment rollbacks to lower Runtime versions are recommended only when your current code isn't working as expected. This is because rollbacks to lower Runtime versions can result in your Deployment losing data from the metadata database. For more information, see [What happens during a deploy rollback](deploy-history.md#what-happens-during-a-deploy-rollback).
 
