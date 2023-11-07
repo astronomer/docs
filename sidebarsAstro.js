@@ -176,7 +176,7 @@ module.exports = {
         "audit-logs",
         {
           type: "category",
-          label: "Integrations",
+          label: "Integrate with data tools",
           items: ["export-datadog", "export-cloudwatch"],
         },
       ],
