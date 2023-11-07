@@ -241,7 +241,9 @@ You can raise a request with [Astronomer Support](https://cloud.astronomer.io/su
 
 ## Per-Deployment IAM workload identities on AWS
 
-Astro Hybrid clusters on AWS support per-Deployment IAM workload identities, meaning that you can now limit your trust policies to authorize only specific Deployments to your cloud resources. If you're 
+Astro Hybrid clusters on AWS support per-Deployment IAM workload identities, meaning that you can limit your trust policies to authorize only specific Deployments to your cloud resources.
+
+This functionality is included by default after September 14, 2023 and for Astro CLI versions greater than 1.19.0. However, if you're using an older version of Astro or Astro CLI, you need to complete the following migration steps.
 
 :::info
 
