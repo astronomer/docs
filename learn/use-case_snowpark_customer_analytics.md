@@ -1,8 +1,8 @@
 ---
-title: "Predict possum tail length using MLflow, Airflow, and linear regression"
-description: "Use Airflow and MLflow to conduct and track a regression model."
+title: "Production-ready ML with Airflow, Snowpark, and Weaviate"
+description: "Use Airflow, Snowpark and Weaviate to use Customer sentiment to predict LTV"
 id: use-case-airflow-mlflow
-sidebar_label: "Regression with Airflow + MLflow"
+sidebar_label: "ML with Snowpark and Airflow"
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
 
