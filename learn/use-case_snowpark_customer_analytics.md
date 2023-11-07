@@ -1,7 +1,7 @@
 ---
 title: "Production-ready ML with Airflow, Snowpark, and Weaviate"
 description: "Use Airflow, Snowpark and Weaviate to use Customer sentiment to predict LTV"
-id: use-case-airflow-mlflow
+id: use-case-ml-airflow-snowpark-weaviate
 sidebar_label: "ML with Snowpark and Airflow"
 sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
 ---
@@ -242,22 +242,9 @@ This task checks if a Snowpark model registry exists in the specified database a
 ```python
     @task_group()
     def structured_data():
-        """
-        This demo shows the ability to build with structured, semi-strcutured and unstructured data 
-        in Snowflake.  
-
-        This section extracts, transforms and load structured data from an S3 bucket.
-        """
 
         @task_group()
         def load_structured_data():
-            """
-            The [Astro Python SDK](https://docs.astronomer.io/learn/astro-python-sdk-etl)
-            is a good way to easily load data to a database with very few lines of code.
-
-            Here we use dynamically generated tasks in a task group.  A task will be created 
-            to load each file in the `data_sources` list.
-            """
             for source in data_sources:
                 aql.load_file(task_id=f'load_{source}',
                     input_file = File(f"{restore_data_uri}/{source}.csv"), 
@@ -270,38 +257,6 @@ This task checks if a Snowpark model registry exists in the specified database a
 
             @task.snowpark_python()
             def jaffle_shop(customers_df:SnowparkTable, orders_df:SnowparkTable, payments_df:SnowparkTable):
-                """
-                Historically users must write SQL code for data transformations in Snowflake.  
-                For example, the SQL code in the `include/sql/jaffle_shop.sql` file can be 
-                [orchestrated as a task](https://docs.astronomer.io/learn/airflow-snowflake) 
-                in Airflow with something like the following:  
-  
-                _customers = SnowflakeOperator(task_id="jaffle_shop",
-                                               sql=Path('include/sql/jaffle_shop.sql).read_text(),
-                                               params={"table_name": CUSTOMERS})
-                
-                Alternatively, users can use the Snowpark Dataframe API for simplicity, 
-                readability and extensibility.
-
-                Best practices for pipeline orchestration dictate the need to build 'atomic' 
-                and 'idempotent' tasks.  However, Snowpark sessions and session-residenct objects, 
-                such as Snowpark DataFrames, are not serializable and cannot easily be passed between 
-                tasks. 
-                
-                The Astronomer provider for Snowpark includes a `SnowparkTable` dataclass which 
-                can be serialized and deserialized.
-
-                Any SnowparkTable objects passed as arguments are automatically instantiated as 
-                Snowpark dataframes.
-
-                Any Snowpark dataframe objects returned from the task are automatically serialized as tables 
-                based on the decorator parameters `temp_data_output`, `temp_data_schema`, `temp_data_overwrite`, 
-                and `temp_data_table_prefix`.  For this demo these parameters are set as `default_args` at the 
-                top of this file.  Alternatively, these can be set for each task or overriden per-task.
-
-                The Snowpark `Functions` and `Types` have been automatically imported as `F` and 
-                `T` respectively.
-                """
                 
                 customer_orders_df = orders_df.group_by('customer_id').agg(F.min('order_date').alias('first_order'),
                                                                            F.max('order_date').alias('most_recent_order'),
@@ -331,22 +286,7 @@ This task checks if a Snowpark model registry exists in the specified database a
 
             @task.snowpark_virtualenv(python_version='3.8', requirements=['snowflake-snowpark-python>=1.8'])
             def mrr_playbook(subscription_df:SnowparkTable):
-                """
-                Snowpark Python currently supports Python 3.8, 3.9, and 3.10.  If the version of 
-                Python used to run Airflow is different it may be necessary to use a Python virtual 
-                environment for Snowpark tasks.  
-                  
-                The `snowpark_virtualenv` decorator and `SnowparkVirtualenvOperator` allow users 
-                to specify a different python version similar to the 
-                [PythonVirtualenvOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/pythonvirtualenvoperator).  
-                Python executables for the specified version must be installed on the executor.  
-                Additional packages can be installed in the virtual environment by specifying a
-                `requirements` parameter as a list of strings.
-                  
-                Astronomer has created a [Docker Buildkit](https://github.com/astronomer/astro-provider-venv) 
-                to simplify building virtual environments with Astro CLI.  See the `Dockerfile` for 
-                details.
-                """
+
                 from snowflake.snowpark import Window
                 from datetime import date
 
@@ -418,19 +358,7 @@ This task checks if a Snowpark model registry exists in the specified database a
             
             @task.snowpark_ext_python(python='/home/astro/.venv/snowpark/bin/python')
             def attribution_playbook(customer_conversions_df:SnowparkTable, sessions_df:SnowparkTable):
-                """
-                Snowpark Python currently supports Python 3.8, 3.9, and 3.10.  If the version of 
-                Python used to run Airflow is different it may be necessary to use a Python virtual 
-                environment for Snowpark tasks.  
-                  
-                The `snowpark_ext_python` decorator and `SnowparkExternalPythonOperator` allow users 
-                to specify a different python executable similar to the 
-                [ExternalPythonOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/externalpythonoperator).  
-                  
-                Astronomer has created a [Docker Buildkit](https://github.com/astronomer/astro-provider-venv) 
-                to simplify building virtual environments with Astro CLI.  See the `Dockerfile` for 
-                details.
-                """
+
                 from snowflake.snowpark import Window
 
                 customer_window = Window.partition_by('customer_id')
@@ -483,4 +411,488 @@ This task checks if a Snowpark model registry exists in the specified database a
 
         return _attribution_touches, _mrr, _customers
 ```
+
+The second task group, “structured_data”, uses several dynamically generated task groups to load many structured datasets into our Snowflake database, before transforming them using snowpark, all in parallel. 
+
+Task Group load_structured_data:
+This task group creates parallel tasks to upload many structured datasets from an Astronomer hosted S3 bucket into our Snowflake database. 
+
+Task Group transform_structured: 
+This task group uses Snowpark python to transform the structured data to get them in the proper format for the presentation layer and joining with prediction on the unstructured data and the sentiment classifier. 
+
+```python
+    @task_group()
+    def unstructured_data():
+        
+        @task_group()
+        def load_unstructured_data():
+            
+            @task.snowpark_python()
+            def load_support_calls_to_stage(restore_data_uri:str, calls_directory_stage:str) -> str:
+                import zipfile
+                import io
+                import tempfile
+                import requests
+
+                with tempfile.TemporaryDirectory() as td:
+                    calls_zipfile = requests.get(f'{restore_data_uri}/customer_calls.zip').content 
+                    buffer = io.BytesIO(calls_zipfile)
+                    z = zipfile.ZipFile(buffer)
+                    z.extractall(td)
+
+                    snowpark_session.file.put(local_file_name=f"file://{td}/customer_calls/*",
+                                              stage_location=f"@{calls_directory_stage}",
+                                              source_compression=None,
+                                              auto_compress=False,
+                                              overwrite=True)
+
+                snowpark_session.sql(f"ALTER STAGE {calls_directory_stage} REFRESH;").collect()
+
+                return calls_directory_stage
+
+            _calls_directory_stage = load_support_calls_to_stage(restore_data_uri=restore_data_uri, 
+                                                                 calls_directory_stage=calls_directory_stage)
+            
+            _stg_comment_table = aql.load_file(task_id='load_twitter_comments',
+                                               input_file = File(f'{restore_data_uri}/twitter_comments.parquet'),
+                                               output_table = Table(name='STG_TWITTER_COMMENTS', 
+                                                                    conn_id=_SNOWFLAKE_CONN_ID),
+                                               use_native_support=False)
+
+            _stg_training_table = aql.load_file(task_id='load_comment_training',
+                                                input_file = File(f'{restore_data_uri}/comment_training.parquet'), 
+                                                output_table = Table(name='STG_COMMENT_TRAINING', 
+                                                                     conn_id=_SNOWFLAKE_CONN_ID),
+                                                use_native_support=False)
+
+            return _calls_directory_stage, _stg_comment_table, _stg_training_table
+        
+        _calls_directory_stage, _stg_comment_table, _stg_training_table = load_unstructured_data()
+        
+        whisper_requirements = [
+            'numpy',
+            'torch==2.0.0',
+            'tqdm',
+            'more-itertools==9.1.0',
+            'transformers==4.27.4',
+            'ffmpeg-python==0.2.0',
+            'openai-whisper==v20230314']
+        
+        @task.snowpark_virtualenv(requirements=whisper_requirements)
+        def transcribe_calls(calls_directory_stage:str):
+            import requests
+            import tempfile
+            from pathlib import Path            
+            import os
+            import whisper
+
+            model = whisper.load_model('tiny.en', download_root=os.getcwd())
+            
+            calls_df = snowpark_session.sql(f"""SELECT *, 
+                                                       get_presigned_url(@{calls_directory_stage}, 
+                                                            LIST_DIR_TABLE.RELATIVE_PATH) as presigned_url 
+                                                FROM DIRECTORY( @{calls_directory_stage})""")
+            calls_df = calls_df.to_pandas()
+
+            #Extract customer_id from file name
+            calls_df['CUSTOMER_ID']= calls_df['RELATIVE_PATH'].apply(lambda x: x.split('-')[0])
+
+            with tempfile.TemporaryDirectory() as tmpdirname:
+                
+                calls_df.apply(lambda x: Path(tmpdirname)\
+                                        .joinpath(x.RELATIVE_PATH)\
+                                        .write_bytes(requests.get(x.PRESIGNED_URL).content), axis=1)
+                
+                calls_df['TRANSCRIPT'] = calls_df.apply(lambda x: model.transcribe(Path(tmpdirname)
+                                                                            .joinpath(x.RELATIVE_PATH).as_posix())['text'], axis=1)
+
+            return snowpark_session.create_dataframe(calls_df[['CUSTOMER_ID', 'RELATIVE_PATH', 'TRANSCRIPT']])
+
+        _stg_calls_table = transcribe_calls(calls_directory_stage=_calls_directory_stage)
+
+        @task_group()
+        def generate_embeddings(): 
+
+            @task.snowpark_python()
+            def get_training_pandas(stg_training_table:SnowparkTable):
+                
+                return stg_training_table.to_pandas()
+            
+            @task.snowpark_python()
+            def get_comment_pandas(stg_comment_table:SnowparkTable):
+                return stg_comment_table.to_pandas()
+            
+            @task.snowpark_python()
+            def get_calls_pandas(stg_calls_table:SnowparkTable):
+                return stg_calls_table.to_pandas()
+            
+            @task.weaviate_import()
+            def generate_training_embeddings(stg_training_table:pd.DataFrame):
+
+                df = stg_training_table
+                df.rename({'REVIEW_TEXT': 'rEVIEW_TEXT', 'LABEL': 'lABEL'}, axis=1, inplace=True)
+
+                df['lABEL'] = df['lABEL'].apply(str)
+
+                #openai works best without empty lines or new lines
+                df = df.replace(r'^\s*$', np.nan, regex=True).dropna()
+                df['rEVIEW_TEXT'] = df['rEVIEW_TEXT'].apply(lambda x: x.replace("\n",""))
+                df['UUID'] = df.apply(lambda x: generate_uuid5(x.to_dict(), 'CommentTraining'), axis=1)
+
+                return {"data": df, 
+                        "class_name": 'CommentTraining', 
+                        "uuid_column": "UUID", 
+                        "batch_size": 1000, 
+                        "error_threshold": 0}
+            
+            @task.weaviate_import()
+            def generate_twitter_embeddings(stg_comment_table:pd.DataFrame):
+
+                df = stg_comment_table
+                df.rename({'CUSTOMER_ID': 'cUSTOMER_ID', 'REVIEW_TEXT': 'rEVIEW_TEXT', 'DATE': 'dATE'}, axis=1, inplace=True)
+
+                df['cUSTOMER_ID'] = df['cUSTOMER_ID'].apply(str)
+                df['dATE'] = pd.to_datetime(df['dATE']).dt.strftime("%Y-%m-%dT%H:%M:%S-00:00")
+
+                #openai works best without empty lines or new lines
+                df = df.replace(r'^\s*$', np.nan, regex=True).dropna()
+                df['rEVIEW_TEXT'] = df['rEVIEW_TEXT'].apply(lambda x: x.replace("\n",""))
+
+                df['UUID'] = df.apply(lambda x: generate_uuid5(x.to_dict(), 'CustomerComment'), axis=1)
+
+                return {"data": df, 
+                        "class_name": 'CustomerComment', 
+                        "uuid_column": "UUID", 
+                        "batch_size": 1000, 
+                        "error_threshold": 0}
+
+            @task.weaviate_import()
+            def generate_call_embeddings(stg_calls_table:pd.DataFrame):
+                
+                df = stg_calls_table
+                df.rename({'CUSTOMER_ID': 'cUSTOMER_ID', 'TRANSCRIPT': 'tRANSCRIPT', 'RELATIVE_PATH': 'rELATIVE_PATH'}, axis=1, inplace=True)
+
+                df['cUSTOMER_ID'] = df['cUSTOMER_ID'].apply(str)
+
+                #openai works best without empty lines or new lines
+                df = df.replace(r'^\s*$', np.nan, regex=True).dropna()
+                df['tRANSCRIPT'] = df['tRANSCRIPT'].apply(lambda x: x.replace("\n",""))
+
+                df['UUID'] = df.apply(lambda x: generate_uuid5(x.to_dict(), 'CustomerCall'), axis=1)
+
+                return {"data": df, 
+                        "class_name": 'CustomerCall', 
+                        "uuid_column": "UUID", 
+                        "batch_size": 1000, 
+                        "error_threshold": 0}
+
+            _training_table = get_training_pandas(stg_training_table=_stg_training_table)
+            _training_table = generate_training_embeddings(stg_training_table=_training_table)
+            
+            _comment_table = get_comment_pandas(stg_comment_table=_stg_comment_table)
+            _comment_table = generate_twitter_embeddings(stg_comment_table=_comment_table)
+            
+            _calls_table = get_calls_pandas(stg_calls_table=_stg_calls_table)
+            _calls_table = generate_call_embeddings(stg_calls_table=_calls_table)
+
+            return _training_table, _comment_table, _calls_table
+        
+        _training_table, _comment_table, _calls_table = generate_embeddings()
+
+        return _training_table, _comment_table, _calls_table
+```
+
+This task creates or replaces staging table within Snowflake, and then uses Snowpark python to extract call data and load it into that staging table. This stage is a directory table which means that we can query the structure like any other table.
+
+Task load_twitter_comments: 
+This task uses the Astro SDK Load File operator to load a parquet file of twitter comments into a table called STG_TWITTER_COMMENTS. 
+
+Task load_comment_training: 
+This task loads a comment training parquet file into a Snowflake table called STG_COMMENT_TRAINING
+
+Task transcribe_calls: 
+This task uses Snowpark to transcribe the raw support calls we uploaded to the directory table previously. We will query the file location (URI) and use that to read the file and transcribe the audio with OpenAI Whipser
+
+Task Group generate_embeddings:
+This task group generates embeddings for our training comment data, twitter comment data, and for our transcribed support call data. These embeddings are generated as part of importing them into the Weaviate vector database. 
+
+```python
+@task.snowpark_virtualenv(requirements=['lightgbm==3.3.5', 'scikit-learn==1.2.2', 'astro_provider_snowflake'])
+    def train_sentiment_classifier(class_name:str, snowpark_model_registry:dict):
+        
+        from snowflake.ml.registry import model_registry
+        import numpy as np
+        import pandas as pd
+        from sklearn.model_selection import train_test_split 
+        from lightgbm import LGBMClassifier
+        from uuid import uuid1
+        from weaviate_provider.hooks.weaviate import WeaviateHook
+
+        registry = model_registry.ModelRegistry(session=snowpark_session, 
+                                                database_name=snowpark_model_registry['database'], 
+                                                schema_name=snowpark_model_registry['schema'])
+        
+        weaviate_client = WeaviateHook('weaviate_default').get_conn()
+
+        df = pd.DataFrame(weaviate_client.data_object.get(with_vector=True, class_name=class_name)['objects'])
+        df = pd.concat([pd.json_normalize(df['properties']), df['vector']], axis=1)
+
+        model_version = uuid1().urn
+        model_name='sentiment_classifier'
+
+        X_train, X_test, y_train, y_test = train_test_split(df['vector'], df['lABEL'], test_size=.3, random_state=1883)
+        X_train = np.array(X_train.values.tolist())
+        y_train = np.array(y_train.values.tolist())
+        X_test = np.array(X_test.values.tolist())
+        y_test = np.array(y_test.values.tolist())
+        
+        model = LGBMClassifier(random_state=42)
+        model.fit(X=X_train, y=y_train, eval_set=(X_test, y_test))
+
+        model_id = registry.log_model(
+            model=model, 
+            model_name=model_name, 
+            model_version=model_version, 
+            sample_input_data=X_test[0].reshape(1,-1),
+            tags={'stage': 'dev', 'model_type': 'lightgbm.LGBMClassifier'})
+        
+        return {'name': model_id.get_name(), 'version':model_id.get_version()}
+```
+
+Task Train Sentiment Classifier:
+After all our structured and unstructured data has been extracted, transformed/transcribed, and loaded, we then use it to train our sentiment classifier model in Snowpark.  The embedding vectors in Weaviate along with a sentiment-labeled dataset allow us to train a very simple classifier.  While model tuning and optimization are outside the scope of this demo those steps could also be performed in parallel tasks. After we’ve trained our model, we’ll then register it into our Snowflake model registry so that we can use it to generate sentiment predictions. One of the biggest advantages of this approach is that we can run our model on the data within Snowpark. It is not necessary to extract the data to cloud object storage for inference, instead we can read directly from Snowflake during inference.  
+
+```python
+@task_group()
+    def score_sentiment():
+
+        @task.snowpark_virtualenv(requirements=['lightgbm==3.3.5', 'astro_provider_snowflake'], retries=2, retry_delay=datetime.timedelta(seconds=5))
+        def call_sentiment(class_name:str, snowpark_model_registry:dict, model:dict) -> SnowparkTable:
+
+            from snowflake.ml.registry import model_registry
+            import numpy as np
+            import pandas as pd
+            from weaviate_provider.hooks.weaviate import WeaviateHook
+            weaviate_client = WeaviateHook('weaviate_default').get_conn()
+
+            df = pd.DataFrame(weaviate_client.data_object.get(with_vector=True, class_name=class_name)['objects'])
+            df = pd.concat([pd.json_normalize(df['properties']), df['vector']], axis=1)
+
+            registry = model_registry.ModelRegistry(session=snowpark_session, 
+                                                    database_name=snowpark_model_registry['database'], 
+                                                    schema_name=snowpark_model_registry['schema'])
+            
+            metrics = registry.get_metrics(model_name=model['name'], model_version=model['version'])
+            model = registry.load_model(model_name=model['name'], model_version=model['version'])
+            
+            df['sentiment'] = model.predict_proba(np.stack(df['vector'].values))[:,1]
+
+
+            return snowpark_session.create_dataframe(df.rename(columns=str.upper))
+
+        @task.snowpark_virtualenv(requirements=['lightgbm==3.3.5', 'astro_provider_snowflake'], retries=2, retry_delay=datetime.timedelta(seconds=5))
+        def twitter_sentiment(class_name:str, snowpark_model_registry:dict, model:dict) -> SnowparkTable:
+
+            from snowflake.ml.registry import model_registry
+            import numpy as np
+            import pandas as pd
+            from weaviate_provider.hooks.weaviate import WeaviateHook
+            weaviate_client = WeaviateHook('weaviate_default').get_conn()
+
+            df = pd.DataFrame(weaviate_client.data_object.get(with_vector=True, class_name=class_name)['objects'])
+            df = pd.concat([pd.json_normalize(df['properties']), df['vector']], axis=1)
+            
+            registry = model_registry.ModelRegistry(session=snowpark_session, 
+                                                    database_name=snowpark_model_registry['database'], 
+                                                    schema_name=snowpark_model_registry['schema'])
+            
+            metrics = registry.get_metrics(model_name=model['name'], model_version=model['version'])
+            model = registry.load_model(model_name=model['name'], model_version=model['version'])
+            
+            df['sentiment'] = model.predict_proba(np.stack(df['vector'].values))[:,1]
+
+            return snowpark_session.create_dataframe(df.rename(columns=str.upper))
+        
+        _pred_calls_table = call_sentiment(class_name='CustomerCall',
+                                           snowpark_model_registry=_snowpark_model_registry, 
+                                           model=_model)
+        
+        _pred_comment_table = twitter_sentiment(class_name='CustomerComment',
+                                                snowpark_model_registry=_snowpark_model_registry, 
+                                                model=_model)
+
+        return _pred_calls_table, _pred_comment_table
+```
+
+Task Group Score Sentiment:
+After we’ve trained our sentiment classifier, we can then use it to evaluate the sentiment of our twitter comments and transcribed support calls. Again, we’ll do this within Snowpark so we can run this model on our Snowflake data without needing to make a copy in cloud storage. We’ll then save the prediction results and return them as tables so that we can use them to generate visual reports next. 
+
+
+```python
+@task.snowpark_python()
+        def create_presentation_tables(attribution_df:SnowparkTable, 
+                                       mrr_df:SnowparkTable, 
+                                       customers_df:SnowparkTable,
+                                       pred_calls_table:SnowparkTable, 
+                                       pred_comment_table:SnowparkTable):
+            """
+            This task consolidates all of the structured and unstructured data results to create
+            tables for the presentation layer running in the Streamlit app.
+            
+            Because the app needs to know the name for tables we write them specifically here 
+            with `save_as_table` rather than passing through xcom or using the Snowpark return 
+            processing.
+            """
+            customers_df = customers_df.with_column('CLV', 
+                                                    F.round(F.col('CUSTOMER_LIFETIME_VALUE'), 2))
+
+            sentiment_df =  pred_calls_table.group_by(F.col('CUSTOMER_ID'))\
+                                            .agg(F.avg('SENTIMENT').alias('CALLS_SENTIMENT'))\
+                                            .join(pred_comment_table.group_by(F.col('CUSTOMER_ID'))\
+                                                    .agg(F.avg('SENTIMENT').alias('COMMENTS_SENTIMENT')), 
+                                                on='cUSTOMER_ID',
+                                                how='right')\
+                                            .fillna(0, subset=['CALLS_SENTIMENT'])\
+                                            .with_column('SENTIMENT_SCORE', 
+                                                         F.round((F.col('CALLS_SENTIMENT') \
+                                                                  + F.col('COMMENTS_SENTIMENT'))/2, 4))\
+                                            .with_column('SENTIMENT_BUCKET', 
+                                                         F.call_builtin('WIDTH_BUCKET',
+                                                                         F.col('SENTIMENT_SCORE'), 0, 1, 10))
+                                    
+            sentiment_df.write.save_as_table('PRES_SENTIMENT', mode='overwrite')
+            
+            ad_spend_df = attribution_df.select(['UTM_MEDIUM', 'REVENUE'])\
+                                        .dropna()\
+                                        .group_by(F.col('UTM_MEDIUM'))\
+                                        .sum(F.col('REVENUE'))\
+                                        .rename('SUM(REVENUE)', 'Revenue')\
+                                        .rename('UTM_MEDIUM', 'Medium')\
+                                        .write.save_as_table('PRES_AD_SPEND', mode='overwrite')
+            
+            clv_df = customers_df.dropna(subset=['CLV'])\
+                                 .join(sentiment_df, 'CUSTOMER_ID', how='left')\
+                                 .sort(F.col('CLV'), ascending=False)\
+                                 .with_column('NAME', 
+                                              F.concat(F.col('FIRST_NAME'), 
+                                                       F.lit(' '), 
+                                                       F.col('LAST_NAME')))\
+                                 .select(['CUSTOMER_ID', 
+                                          'NAME', 
+                                          'FIRST_ORDER', 
+                                          'MOST_RECENT_ORDER', 
+                                          'NUMBER_OF_ORDERS', 
+                                          'CLV', 
+                                          'SENTIMENT_SCORE'])\
+                                 .write.save_as_table('PRES_CLV', mode='overwrite')
+            
+            churn_df = customers_df.select(['CUSTOMER_ID', 'FIRST_NAME', 'LAST_NAME', 'CLV'])\
+                                   .join(mrr_df.select(['CUSTOMER_ID', 
+                                                        'FIRST_ACTIVE_MONTH', 
+                                                        'LAST_ACTIVE_MONTH', 
+                                                        'CHANGE_CATEGORY']), 
+                                        on='CUSTOMER_ID', 
+                                        how='right')\
+                                   .join(sentiment_df, 'CUSTOMER_ID', how='left')\
+                                   .dropna(subset=['CLV'])\
+                                   .filter(F.col('CHANGE_CATEGORY') == 'churn')\
+                                   .sort(F.col('LAST_ACTIVE_MONTH'), ascending=False)\
+                                   .with_column('NAME', 
+                                                F.concat(F.col('FIRST_NAME'), 
+                                                         F.lit(' '), 
+                                                         F.col('LAST_NAME')))\
+                                   .select(['CUSTOMER_ID', 
+                                            'NAME', 
+                                            'CLV', 
+                                            'LAST_ACTIVE_MONTH', 
+                                            'SENTIMENT_SCORE'])\
+                                   .write.save_as_table('PRES_CHURN', mode='overwrite')
+            
+            pred_calls_table.write.save_as_table('PRED_CUSTOMER_CALLS', mode='overwrite')
+            pred_comment_table.write.save_as_table('PRED_TWITTER_COMMENTS', mode='overwrite')
+            attribution_df.write.save_as_table('ATTRIBUTION_TOUCHES', mode='overwrite')
+        
+        create_presentation_tables(attribution_df=_attribution_touches, 
+                                   mrr_df=_mrr, 
+                                   customers_df=_customers,
+                                   pred_calls_table=_pred_calls_table, 
+                                   pred_comment_table=_pred_comment_table)
+```
+Task Create Presentation Tables: 
+Now that we’ve got our sentiment analysis model predictions generated, this task uses Snowpark to take those raw predictions and organize them into a human readable table for reporting. 
+
+
+```python
+    @task.snowpark_python()
+    def cleanup_temp_tables(snowflake_objects:dict, **context):
+        """
+        This task will be run as an Airflow 2.7 teardown task.  The task deletes 
+        the intermediate, temporary data passed between Snowpark tasks. In production 
+        it may be best to keep intermediate tables as they provide useful 
+        audting data.  For dev/test it may be beneficial to reduce objects and noise.
+
+        The `temp_data_dict` is instantiated by default in the task namespace based
+        on the decorator args or `default_args`.  Likewise, all of the variables 
+        needed to construct the temporary data URI (e.g. `dag_id`, `ts_nodash`, etc.)
+        are also instantiated.  This allows us to cleanup temporary data after the 
+        DAG run.  
+
+        In the future this may be added as another operator for the Snowpark provider.  
+        Here it shows a good use of teardown tasks.
+        """
+        
+        snowpark_session.database = temp_data_dict['temp_data_db'] \
+                                        or snowflake_objects['demo_database']
+        snowpark_session.schema = temp_data_dict['temp_data_schema'] \
+                                        or snowflake_objects['demo_schema']
+
+        if temp_data_dict['temp_data_output'] == 'table':
+            xcom_table_string=f"{temp_data_dict['temp_data_table_prefix']}{dag_id}__%__{ts_nodash}__%".upper()
+
+            xcom_table_list = snowpark_session.table('information_schema.tables')\
+                                        .select('table_name')\
+                                        .where(F.col('table_name').like(xcom_table_string))\
+                                        .to_pandas()['TABLE_NAME'].to_list()
+
+            print(f'Removing tables {xcom_table_list}')
+
+            for table in xcom_table_list:
+                    try:
+                        snowpark_session.table(table).drop_table()
+                    except:
+                        pass
+        elif temp_data_dict['temp_data_output'] == 'stage':
+            
+            xcom_stage_string = f"{dag_id.lower()}/.*/{run_id.split('+')[0]}.*/"
+
+            print(f'Removing files based on {xcom_stage_string}')
+            
+            xcom_file_list = snowpark_session.sql(f"""REMOVE @{temp_data_dict['temp_data_stage']} 
+                                                      PATTERN='{xcom_stage_string}'""").collect()
+    
+    _create_snowflake_objects = create_snowflake_objects(snowflake_objects, calls_directory_stage).as_setup() 
+
+    with cleanup_temp_tables(snowflake_objects).as_teardown(setups=_create_snowflake_objects):
+        _snowpark_model_registry, _restore_weaviate = enter()
+
+        _attribution_touches, _mrr, _customers = structured_data()
+        
+        _training_table, _comment_table, _calls_table = unstructured_data()
+
+        _model = train_sentiment_classifier(class_name='CommentTraining',
+                                            snowpark_model_registry=_snowpark_model_registry)
+        
+        _pred_calls_table, _pred_comment_table = score_sentiment()
+        
+        _exit = exit()
+        
+        _restore_weaviate >> [_training_table, _comment_table, _calls_table] >> _model
+```
+
+Task Clean-up Temp Tables:
+Our final task will be run as an Airflow 2.7 [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
+
+
+
+
 
