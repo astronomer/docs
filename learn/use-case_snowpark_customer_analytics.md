@@ -3,7 +3,7 @@ title: "Production-ready ML with Airflow, Snowpark, and Weaviate"
 description: "Use Airflow, Snowpark and Weaviate to use Customer sentiment to predict LTV"
 id: use-case-ml-airflow-snowpark-weaviate
 sidebar_label: "ML with Snowpark and Airflow"
-sidebar_custom_props: { icon: 'img/integrations/mlflow.png' }
+sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 ---
 
 [Snowpark ML](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) (in public preview) is a python framework for Machine Learning workloads with [Snowpark](https://docs.snowflake.com/en/developer-guide/snowpark/python/index.html).  Currently Snowpark ML provides a model registry (storing ML tracking data and models in Snowflake tables and stages), feature engineering primitives similar to scikit-learn (ie. LabelEncoder, OneHotEncoder, etc.) and support for training and deploying [certain model types](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling#snowpark-ml-modeling-classes) as well as deployments as user-defined functions (UDFs).
