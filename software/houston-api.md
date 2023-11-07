@@ -573,6 +573,10 @@ To know which fields you can or must specify, reference the "Schema" on the righ
 
 ### Delete a Workspace
 
+To delete a Workspace, you'll need the ID of the Workspace you want to delete. You can find this by running `astro workspace list`.
+
+Using the Workspace ID, run the following query to delete the Workspace:
+
 ```graphql
 mutation deleteWorkspace(
     $workspaceUuid: Uuid = "<workspace-id>"
