@@ -125,7 +125,7 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
 
-If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/support). 
+If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
 
 #### Prerequisites
 

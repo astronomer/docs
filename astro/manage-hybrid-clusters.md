@@ -189,7 +189,7 @@ Each worker type on Astro is configured with a node instance type that is define
 
 How your Airflow tasks use the capacity of a worker node depends on which executor is selected for your Deployment. With the Celery executor, each worker node runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead. With the Kubernetes executor, each worker node can run an unlimited number of Pods (one Pod per Airflow task) as long as the sum of all requests from each Pod doesn't exceed the total capacity of the node minus Astro's system overhead.
 
-To add a new node instance type, contact [Astronomer Support](https://cloud.astronomer.io/support). For the list of worker node pool instance types available on Astro, see [AWS supported worker node pool instance types](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [Azure supported worker node pool instance types](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types), or [GCP supported worker node pool instance types](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types).
+To add a new node instance type, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request). For the list of worker node pool instance types available on Astro, see [AWS supported worker node pool instance types](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [Azure supported worker node pool instance types](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types), or [GCP supported worker node pool instance types](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types).
 
 ### Configure maximum node count
 
@@ -207,7 +207,7 @@ In this scenario, the maximum node count for the `m5.2xlarge` node pool in your 
 
 Astronomer regularly monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and recommend that you increase or decrease your maximum node count to limit infrastructure cost or ensure that you can support a growing number of tasks and Deployments. If your maximum node count is reached, you will be contacted.
 
-To change the maximum node count for a node pool, contact [Astronomer Support](https://cloud.astronomer.io/support).
+To change the maximum node count for a node pool, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
 ## Configure a Database instance type
 
@@ -224,7 +224,7 @@ Astro uses the following databases:
 | Azure          | [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/) | [Supported Azure Database for PostgreSQL instance types](resource-reference-azure-hybrid.md#supported-azure-database-for-postgresql-instance-types) |
 
 
-To request support for a different database instance type or to modify the database instance type after cluster creation, contact [Astronomer support](https://cloud.astronomer.io/support).
+To request support for a different database instance type or to modify the database instance type after cluster creation, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Add tags to your cluster (AWS only)
 
@@ -237,4 +237,4 @@ You can request Astronomer Support to add [tags](https://docs.aws.amazon.com/emr
   
 Tags can help your team identify your Astro clusters and associate them with a particular purpose or owner within your cloud provider ecosystem. 
 
-You can raise a request with [Astronomer Support](https://cloud.astronomer.io/support) to add or remove tags. To view your current cluster tags, see [View clusters](#view-clusters).
+You can raise a request with [Astronomer Support](https://cloud.astronomer.io/open-support-request) to add or remove tags. To view your current cluster tags, see [View clusters](#view-clusters).

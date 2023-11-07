@@ -15,7 +15,7 @@ The control plane and data plane are managed by Astronomer and require no operat
 
 ![Astro Hybrid architecture overview](/img/docs/hybrid-architecture-overview.png)
 
-For more information about Astro architecture, contact [Astronomer support](https://cloud.astronomer.io/support).
+For more information about Astro architecture, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Related documentation
 

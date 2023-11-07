@@ -87,4 +87,4 @@ The following table contains the exact lifecycle for each published version of A
 | [8](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-800)       | 2.6             | April 30, 2023     | November 2023           |
 | [9](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-900) (LTS) | 2.7             | August 18, 2023    | January 2025            |
 
-If you have any questions or concerns, contact [Astronomer support](https://cloud.astronomer.io/support).
+If you have any questions or concerns, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
