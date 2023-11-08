@@ -64,7 +64,7 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 To set up a private connection between an Astro Virtual Network (VNet) and an Azure VNet, you can create a VNet peering connection. VNet peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
-To create a VNet peering connection between an Astro VNet and an Azure VNet, contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+To create a VNet peering connection between an Astro VNet and an Azure VNet, contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
 - Astro cluster ID and name
 - Azure TenantID and Subscription ID of the target VNet
@@ -88,7 +88,7 @@ Use Azure Private Link to create private connections from Astro to your Azure se
 
 Astro clusters are pre-configured with the Azure blob private endpoint.
 
-To request additional endpoints, or assistance connecting to other Azure services, provide [Astronomer support](https://cloud.astronomer.io/support) with the following information for the resource you want to connect to using Private Link:
+To request additional endpoints, or assistance connecting to other Azure services, provide [Astronomer support](https://cloud.astronomer.io/open-support-request) with the following information for the resource you want to connect to using Private Link:
 
 - Resource name
 - Resource ID
@@ -99,7 +99,7 @@ For example, to connect with Azure Container Registry:
 1. Follow the [Azure documentation](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal?tabs=azure-cli) to create the [container registry](https://portal.azure.com/#create/Microsoft.ContainerRegistry). Copy the name of container registry.
 2. Follow the [Azure documentation](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-private-link#create-a-private-endpoint---new-registry) to create a private endpoint for your container registry. Then, copy the name of the **Data endpoint**.
 3. Then, from the left panel, go to **Overview** menu, and click on JSON view in **Essentials**, to copy the resource ID. You can also run Azure CLI command `az acr show -n myRegistry` to get the resource ID.
-4. Contact [Astronomer Support](https://cloud.astronomer.io/support) with your request to connect. Provide the resource name, data endpoint name, and resource ID.
+4. Contact [Astronomer Support](https://cloud.astronomer.io/open-support-request) with your request to connect. Provide the resource name, data endpoint name, and resource ID.
 5. When Astronomer support adds an Azure private endpoint, corresponding private DNS zone and Canonical Name (CNAME) records are created to allow you to address the service by its private link name. Astronomer support will send the connection request in Azure Portal's [Private Link Center](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/pendingconnections). 
 6. Approve the connection requests from your Azure portal, then confirm that you've completed this in your support ticket. Astronomer support will then test whether the DNS resolves the endpoint correctly.
 
