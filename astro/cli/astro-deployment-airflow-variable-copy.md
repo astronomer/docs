@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment airflow-variable copy"
 title: "astro deployment airflow-variable copy"
 id: astro-deployment-airflow-variable-copy
-description: Reference documentation for astro deployment airflow-variable copy.
+description: Copy an Airflow variable from a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Copy Airflow variables from one Astro Deployment to another. Airflow variables are stored in the target Deployment's metadata database and appear in the Airflow UI.  

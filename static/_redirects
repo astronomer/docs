@@ -293,6 +293,9 @@
 /software/manage-platform-users#reference-system-permissions /software/role-permission-reference 301
 /software/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
 /software/*/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
+/astro/view-logs#export-task-logs-to-datadog /astro/export-datadog
+/astro/deployment-metrics#export-airflow-metrics-to-datadog /astro/export-task-logs-to-datadog
+/astro/view-logs#export-task-logs-to-aws-cloudwatch /astro/export-cloudwatch
 
 
 

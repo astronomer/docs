@@ -2,8 +2,9 @@
 sidebar_label: "astro organization team update"
 title: "astro organization team update"
 id: astro-organization-team-update
-description: Reference documentation for astro organization team create command.
+description: Update a Team in your Organization.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update a Team in your Organization.

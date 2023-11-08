@@ -174,6 +174,11 @@ module.exports = {
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
+        {
+          type: "category",
+          label: "Integrate with data tools",
+          items: ["export-datadog", "export-cloudwatch"],
+        },
       ],
     },
     {
@@ -381,6 +386,11 @@ module.exports = {
         {
           type: "category",
           label: "astro config",
+          link: {
+            type: 'generated-index',
+            title: "astro config command reference",
+            description: 'Use `astro config` commands to configure how the Astro CLI behaves in your local environment.'
+          },
           items: [
             'cli/astro-config-get',
             'cli/astro-config-set',
@@ -389,6 +399,11 @@ module.exports = {
         {
           type: "category",
           label: "astro context",
+          link: {
+            type: 'generated-index',
+            title: "astro context command reference",
+            description: 'Use `astro context` commands to switch between Astronomer product types.'
+          },
           items: [
             'cli/astro-context-delete',
             'cli/astro-context-list',
@@ -399,6 +414,11 @@ module.exports = {
         {
           type: "category",
           label: "astro deployment",
+          link: {
+            type: 'generated-index',
+            title: "astro workspace command reference",
+            description: 'Use `astro deployment` commands to manage all details about Deployments, including Deployment resources, Airflow objects, and Astro Runtime versioning.'
+          },
           items: [
             'cli/astro-deployment-airflow-upgrade',
             {
@@ -479,6 +499,11 @@ module.exports = {
         {
           type: "category",
           label: "astro organization",
+          link: {
+            type: 'generated-index',
+            title: "astro organization command reference",
+            description: 'Use `astro organization` commands to manage users and their Organization-level permissions.'
+          },
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
@@ -502,6 +527,11 @@ module.exports = {
         {
           type: "category",
           label: "astro registry",
+          link: {
+            type: 'generated-index',
+            title: "astro registry command reference",
+            description: 'Use `astro registry` commands to pull resources from the Astronomer Registry into your Astro project.'
+          },
           items: [
             "cli/astro-registry-dag-add",
             "cli/astro-registry-provider-add"
@@ -514,6 +544,11 @@ module.exports = {
         {
           type: "category",
           label: "astro workspace",
+          link: {
+            type: 'generated-index',
+            title: "astro workspace command reference",
+            description: 'Use `astro workspace` commands to manage Workspaces and Workspace-level user permissions.'
+          },
           items: [
             "cli/astro-workspace-create",
             "cli/astro-workspace-delete",

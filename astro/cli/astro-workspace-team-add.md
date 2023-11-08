@@ -2,8 +2,9 @@
 sidebar_label: "astro workspace team add"
 title: "astro workspace team add"
 id: astro-workspace-team-add
-description: Reference documentation for astro workspace team add.
+description: Add a Team to your Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

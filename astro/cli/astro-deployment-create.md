@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment create"
 title: "astro deployment create"
 id: astro-deployment-create
-description: Reference documentation for astro deployment create.
+description: Create a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

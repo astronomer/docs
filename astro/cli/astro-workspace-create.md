@@ -2,8 +2,9 @@
 sidebar_label: "astro workspace create"
 title: "astro workspace create"
 id: astro-workspace-create
-description: Reference documentation for astro workspace create.
+description: Create an Astro Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Create an Astro Workspace. 
