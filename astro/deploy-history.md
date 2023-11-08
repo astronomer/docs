@@ -52,7 +52,7 @@ Astronomer recommends triggering Deployment rollbacks only as a last resort for 
 
 1. In the Cloud UI, select a Deployment.
 2. Click **Deploy History**.
-3. Locate the deploy you want to roll back to. In the **Rollback to** column for the deploy, click **Deploy***. 
+3. Locate the deploy you want to roll back to. In the **Rollback to** column for the deploy, click **Deploy**. 
 4. Provide a description for your rollback, then complete the confirmation to trigger the rollback.
 
 After the deploy completes, the **Deploy History** table shows your rollback deploy at the beginning of the table as the most recent deploy and includes both your rollback description and rollback deploy time. Your Docker image tag and DAG bundle names are the same as the previous version you rolled back to. The historic deploy that you rolled back to still appears in chronological order in the table. 
