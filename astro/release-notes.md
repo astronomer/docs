@@ -23,6 +23,18 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## November 7, 2023
 
+### Roll back Deployments to previous versions of your code
+
+:::caution
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+Astro now maintains snapshots of your past deploys, including your Deployment image and DAG code, for the previous three months. If you need to quickly revert a Deployment back to a working version of your code, you can roll back to a past deploy from the **Deploy History** page in the Cloud UI. 
+
+Deploy rollbacks are a powerful safety mechanism to ensure that your production pipelines continue to run when something unexpected happens after a deploy. See [Roll back to a past deploy](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy) for more information and configuration steps.
+
 ### Bug fixes
 
 - Fixed an issue where, you could inadvertently open the support request window if you opened a DAG that included "Support" in its name from the **DAGs** view. As a result of this change, the support request window URL has been updated from `https://cloud.astronomer.io/support` to `https://cloud.astronomer.io/open-support-request`.
