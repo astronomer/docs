@@ -5,6 +5,12 @@ id: create-and-link-connections
 description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
 
+:::caution
+
+This feature is in [Public Preview](feature-previews.md).
+
+:::
+
 You can create and manage connections across Deployments with the Astro Environment Manager in the Cloud UI. This strategy of connection management uses an Astro-managed secrets backend to store connection configurations in Hashicorp Vault as Kubernetes Secrets.
 
 Using the Environment Manager, you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend. You can also create a connection once and use it across multiple Airflow Deployments. 
