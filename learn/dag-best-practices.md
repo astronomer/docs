@@ -95,7 +95,7 @@ When a last modified date is unavailable, a sequence or incrementing ID can be u
 
 In the context of Airflow, top-level code refers to any code that is run at the time the DAG is parsed, as opposed to the time the task is run.
 
-Code that is part of an operator or a decorated task is run by Airflow only when the tasks runs, not  when the DAG is parsed. For example, in the following code, `call_external_systems()` is considered top-level code because it runs when the DAG is parsed. `x + y` is not top-level code, because it is part of the task definition and only runs when the task runs.
+Code that is part of an operator or a decorated task is run by Airflow only when the task runs, not when the DAG is parsed. For example, in the following code, `call_external_systems()` is considered top-level code because it runs when the DAG is parsed. `x + y` is not top-level code, because it is part of the task definition and only runs when the task runs.
 
 ```python
 @dag(...)
@@ -110,7 +110,7 @@ def the_dag():
     
     chain(do_thing() for _ in range(num_of_things))
 
-my_dag = the_dag()
+the_dag()
 
 ```
 
