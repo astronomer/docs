@@ -12,7 +12,7 @@ sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 
 This guide demonstrates how to use Apache Airflow to orchestrate a machine learning pipeline leveraging the Snowpark provider and Snowpark ML for feature engineering and model tracking. While Snowpark ML has its own support for models similar to scikit-learn this code demonstrates a "bring-your-own" model approach showing the use of open-source scikit-learn along with Snowpark ML model registry and model serving in an Airflow task rather than Snowpark user-defined function (UDF).  
 
-
+![A screenshot of the Customer Analytics DAG](static/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_ca_dag_2.png)
 
 This demonstration shows how to build a customer analytics dashboard.  Sissy-G Toys is a fictitious online retailer for toys and games.  The GroundTruth customer analytics application provides marketing, sales and product managers with a one-stop-shop for analytics.  The application uses machine learning models for audio transcription, natural language embeddings and sentiment analysis on structured, semi-structured and unstructured data. All of the processing and prediction work is managed by Airflow, leveraging Snowparks compute and proximity to Snowflake data
 
@@ -48,6 +48,7 @@ Clone the example project from the [Astronomer GitHub](https://github.com/astron
 git clone https://github.com/astronomer/airflow-snowparkml-demo
 cd airflow-snowparkml-demo 
 ```
+![A screenshot of the environment file structure](static/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_filestructure_3.png)
 
 Open the `.env` file in an editor and update the following variables with you account information. You only need to update the Snowflake Connection details to be able to run the Customer Analytics DAG. However, if you'd like to enable chat capabilities in the final streamlit application, please add an OpenAI API key where designated in the .env file as well. 
 
@@ -71,6 +72,7 @@ To run the example project, first make sure Docker Desktop is running. Then, ope
 ```sh
 astro dev start
 ```
+![A screenshot of the Airflow UI with active Customer Analytics DAG](static/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_activeplaybutton_4.png)
 
 This command builds your project and spins up 5 Docker containers on your machine to run it. In addition to the 4 standard Airflow containers, a Weaviate container is spun up as well. This allows us to run a fully local Weaviate environment for local development, giving every developer their own dedicated testing environment.
 
@@ -92,7 +94,9 @@ cd include/streamlit/src
 python -m streamlit run ./streamlit_app.py
 ```
 
-You can then open the [streamlit application](http://localhost:8501) in a browser.
+You can then open the [streamlit application](http://localhost:8501) in a browser. All of the customer analytics produced by your DAG will be visualized here, and if you've added an Open-AI key to your .env file, you'll be able to leverage the chatbot functionality to search for customer reviews by keyword as depicted below: 
+
+
 
 ## Project Code
 
