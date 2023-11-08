@@ -66,7 +66,7 @@ For example, consider a user who, on November 8, 2023 at 13:00, rolled back to a
 
 ### What happens during a deploy rollback
 
-A deploy rollback is a new deploy of a previous version of your code. This means that the rollback deploy appears as a new deploy in **Deploy History**, and the records for any deploys between your current version and rollback version are still preserved. In Git terms, this is the equivalent of `git revert`.
+A deploy rollback is a new deploy of a previous version of your code. This means that the rollback deploy appears as a new deploy in **Deploy History**, and the records for any deploys between your current version and rollback version are still preserved. In Git terms, this is equivalent to `git revert`.
 
 When you trigger a rollback, the following information is rolled back:
 - All project code, including DAGs.
