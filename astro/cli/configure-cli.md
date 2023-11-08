@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Configure the CLI'
-title: 'Configure the Astro CLI'
+sidebar_label: "Configure the CLI"
+title: "Configure the Astro CLI"
 id: configure-cli
 toc_min_heading_level: 2
 toc_max_heading_level: 2
@@ -41,42 +41,43 @@ astro config set webserver.port 8081
 
 ## Available CLI configurations
 
-:::info 
+:::info
 
 The Astronomer product you're using determines the format and behavior of the configuration commands. Select one of the following tabs to change product contexts.
 
 :::
 
 <Tabs
-    defaultValue="astro"
-    values={[
-        {label: 'Astro', value: 'astro'},
-        {label: 'Software', value: 'software'},
-    ]}>
+defaultValue="astro"
+values={[
+{label: 'Astro', value: 'astro'},
+{label: 'Software', value: 'software'},
+]}>
 <TabItem value="astro">
 
-| Option                  | Description                                                                                                                                                                                                                                        | Default value    | Valid values                                       |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------------------------------------------- |
-| `airflow.expose_port`   | Determines whether to expose the webserver and postgres database of a local Airflow environment to all connected networks.                                                                                                                         | `false`          | `true`, `false`                                    |
-| `cloud.api.protocol`    | The type of protocol to use when calling the Airflow API in a local Airflow environment.                                                                                                                                                           | `https`          | `http`, `https`                                    |
-| `cloud.api.port`        | The port to use when calling the Airflow API in a local environment.                                                                                                                                                                               | `443`            | Any available port                                 |
-| `cloud.api.ws_protocol` | The type of WebSocket (ws) protocol to use when calling the Airflow API in a local Airflow environment.                                                                                                                                            | `wss`            | `ws`, `wss`                                        |
-| `container.binary`               | The name of the container engine.                                                                                                                                                                                                                 | `docker`     | `docker` or `podman` |
-| `context`               | The context for your Astro project.                                                                                                                                                                                                                | Empty string     | Any available [context](cli/astro-context-list.md) |
-| `disable_astro_run`     | Determines whether to disable `astro run` commands and exclude `astro-run-dag` from any images built by the CLI.                                                                                                                                    | `false`          | `true`, `false`                                    |
-| `duplicate_volumes`        | Determines if the Astro CLI creates duplicate volumes when running Airflow locally.                                                                                                                                                                                      | `true` | `true` or `false`                                 |
-| `local.registry`        | The location of your local Docker container running Airflow.                                                                                                                                                                                       | `localhost:5555` | Any available port                                 |
-| `postgres.user`         | The username for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`       | Any string                                         |
-| `postgres.password`     | The password for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`       | Any string                                         |
-| `postgres.host`         | The hostname for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`       | Any string                                         |
-| `postgres.port`         | The port for the Postgres metadata database.                                                                                                                                                                                                       | `5432`           | Any available port                                 |
-| `postgres.repository`         | Image repository to pull the Postgres image from                                                                                                                                                                                                    | `docker.io/postgres`           | Any Postgres image in a repository                                 |
-| `postgres.tag`         | The tag for your Postgres image                                                                                                                                                                                                    | `12.6`           | Any valid image tag                                |
-| `project.name`          | The name of your Astro project.                                                                                                                                                                                                                    | Empty string     | Any string                                         |
-| `show_warnings`         | Determines whether warning messages appear when starting a local Airflow environment. For example, when set to `true`, you'll receive warnings when a new version of Astro Runtime is available and when your Astro project doesn't have any DAGs. | `true`           | `true`, `false`                                    |
-| `skip_parse`            | Determines whether the CLI parses DAGs before pushing code to a Deployment.                                                                                                                                                                        | `false`          | `true`, `false`                                    |
-| `upgrade_message`       | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI.                                                                                                                                     | `true`           | `true`, `false`                                    |
-| `webserver.port`        | The port for the webserver in your local Airflow environment.                                                                                                                                                                                      | `8080`           | Any available port                                 |
+| Option                  | Description                                                                                                                                                                                                                                        | Default value        | Valid values                                       |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | -------------------------------------------------- |
+| `airflow.expose_port`   | Determines whether to expose the webserver and postgres database of a local Airflow environment to all connected networks.                                                                                                                         | `false`              | `true`, `false`                                    |
+| `cloud.api.protocol`    | The type of protocol to use when calling the Airflow API in a local Airflow environment.                                                                                                                                                           | `https`              | `http`, `https`                                    |
+| `cloud.api.port`        | The port to use when calling the Airflow API in a local environment.                                                                                                                                                                               | `443`                | Any available port                                 |
+| `cloud.api.ws_protocol` | The type of WebSocket (ws) protocol to use when calling the Airflow API in a local Airflow environment.                                                                                                                                            | `wss`                | `ws`, `wss`                                        |
+| `container.binary`      | The name of the container engine.                                                                                                                                                                                                                  | `docker`             | `docker` or `podman`                               |
+| `context`               | The context for your Astro project.                                                                                                                                                                                                                | Empty string         | Any available [context](cli/astro-context-list.md) |
+| `disable_astro_run`     | Determines whether to disable `astro run` commands and exclude `astro-run-dag` from any images built by the CLI.                                                                                                                                   | `false`              | `true`, `false`                                    |
+| `disable_env_objects`   | Determines whether to use environment objects set by the local `.env` file, and instead uses environment objects set in the Cloud UI. Can be set globally with the `-g` flag.                                                                      | `true`               | `true`, `false`                                    |
+| `duplicate_volumes`     | Determines if the Astro CLI creates duplicate volumes when running Airflow locally.                                                                                                                                                                | `true`               | `true` or `false`                                  |
+| `local.registry`        | The location of your local Docker container running Airflow.                                                                                                                                                                                       | `localhost:5555`     | Any available port                                 |
+| `postgres.user`         | The username for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`           | Any string                                         |
+| `postgres.password`     | The password for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`           | Any string                                         |
+| `postgres.host`         | The hostname for the Postgres metadata database.                                                                                                                                                                                                   | `postgres`           | Any string                                         |
+| `postgres.port`         | The port for the Postgres metadata database.                                                                                                                                                                                                       | `5432`               | Any available port                                 |
+| `postgres.repository`   | Image repository to pull the Postgres image from                                                                                                                                                                                                   | `docker.io/postgres` | Any Postgres image in a repository                 |
+| `postgres.tag`          | The tag for your Postgres image                                                                                                                                                                                                                    | `12.6`               | Any valid image tag                                |
+| `project.name`          | The name of your Astro project.                                                                                                                                                                                                                    | Empty string         | Any string                                         |
+| `show_warnings`         | Determines whether warning messages appear when starting a local Airflow environment. For example, when set to `true`, you'll receive warnings when a new version of Astro Runtime is available and when your Astro project doesn't have any DAGs. | `true`               | `true`, `false`                                    |
+| `skip_parse`            | Determines whether the CLI parses DAGs before pushing code to a Deployment.                                                                                                                                                                        | `false`              | `true`, `false`                                    |
+| `upgrade_message`       | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI.                                                                                                                                     | `true`               | `true`, `false`                                    |
+| `webserver.port`        | The port for the webserver in your local Airflow environment.                                                                                                                                                                                      | `8080`               | Any available port                                 |
 
 </TabItem>
 
@@ -101,7 +102,6 @@ The Astronomer product you're using determines the format and behavior of the co
 </TabItem>
 </Tabs>
 
-
 ## Run the Astro CLI using Podman
 
 The Astro CLI requires a container management engine to run Apache Airflow components on your local machine and deploy to Astro. For example, the `astro dev start` and `astro deploy` commands both require containers.
@@ -109,13 +109,13 @@ The Astro CLI requires a container management engine to run Apache Airflow compo
 By default, the Astro CLI uses [Docker](https://www.docker.com/) as its container management engine. However, if your organization uses [Podman](https://podman.io/) to run and manage containers, you can configure the Astro CLI to use it instead. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
 <Tabs
-    defaultValue="mac"
-    groupId= "cli-podman"
-    values={[
-        {label: 'Mac', value: 'mac'},
-        {label: 'WSL2 on Windows', value: 'windows'},
-        {label: 'Linux', value: 'linux'},
-    ]}>
+defaultValue="mac"
+groupId= "cli-podman"
+values={[
+{label: 'Mac', value: 'mac'},
+{label: 'WSL2 on Windows', value: 'windows'},
+{label: 'Linux', value: 'linux'},
+]}>
 <TabItem value="mac">
 
 Set up Podman on a Mac operating system so you can run Apache Airflow locally and deploy to Astro with Podman containers.
@@ -132,17 +132,17 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 1. Run the following command to identify the connection URI for `podman-machine-default`:
 
-    ```sh
-    podman system connection ls
-    ```
-    
-    The output should look like the following:
-    
-    ```text
-    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
-    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
-    ```
-    
+   ```sh
+   podman system connection ls
+   ```
+
+   The output should look like the following:
+
+   ```text
+   podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
+   podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
+   ```
+
 2. Copy the value in the `URI` column from `podman-machine-default*`. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
 3. Set your `DOCKER_HOST` environment variable to the value of the URI.
@@ -153,23 +153,23 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 1. Run the following command to confirm that Podman has access to Astro images at `docker.io`:
 
-    ```sh
-    podman run --rm -it postgres:12.6 whoami
-    ```
+   ```sh
+   podman run --rm -it postgres:12.6 whoami
+   ```
 
-    If this command fails, use [Podman Desktop](https://podman-desktop.io/) to change Podman's default image registry location to `docker.io`. See [Provide pre-defined registries](https://podman-desktop.io/blog/podman-desktop-release-0.11#provide-pre-defined-registries-1201).
+   If this command fails, use [Podman Desktop](https://podman-desktop.io/) to change Podman's default image registry location to `docker.io`. See [Provide pre-defined registries](https://podman-desktop.io/blog/podman-desktop-release-0.11#provide-pre-defined-registries-1201).
 
 2. Run the following command to set Podman as your container management engine for the Astro CLI:
 
-    ```sh
-    astro config set -g container.binary podman
-    ```
+   ```sh
+   astro config set -g container.binary podman
+   ```
 
-    If you're using Podman 3, additionally run the following command:
+   If you're using Podman 3, additionally run the following command:
 
-    ```sh
-    astro config set -g duplicate_volumes false
-    ```
+   ```sh
+   astro config set -g duplicate_volumes false
+   ```
 
 </TabItem>
 
@@ -180,7 +180,7 @@ Set up Podman on Windows so you can run Apache Airflow locally and deploy to Ast
 ### Prerequisites
 
 - Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/get-started/).
-- A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps` in your Linux terminal. 
+- A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps` in your Linux terminal.
 - The Astro CLI Linux distribution installed on WSL 2. See [Install the Astro CLI on Linux](https://docs.astronomer.io/astro/cli/install-cli?tab=linux#install-the-astro-cli).
 
 :::tip
@@ -189,17 +189,17 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 1. In a WSL 2 terminal, run the following command to identify the connection URI for `podman-machine-default`:
 
-    ```sh
-    podman system connection ls
-    ```
-    
-    The output should look like the following:
-    
-    ```text
-    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
-    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
-    ```
-    
+   ```sh
+   podman system connection ls
+   ```
+
+   The output should look like the following:
+
+   ```text
+   podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
+   podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
+   ```
+
 2. Copy the value in the `URI` column from `podman-machine-default*`. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
 3. Set your `DOCKER_HOST` environment variable to the value of the URI.
@@ -210,29 +210,29 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 1. In a WSL 2 terminal, run the following command to confirm that Podman has access to Astro images at `docker.io`:
 
-    ```sh
-    podman run --rm -it postgres:12.6 whoami
-    ```
+   ```sh
+   podman run --rm -it postgres:12.6 whoami
+   ```
 
-    If this command fails, run the following command to change Podman's default image registry location to `docker.io`:
+   If this command fails, run the following command to change Podman's default image registry location to `docker.io`:
 
-    ```sh
-    cat << EOF | sudo tee -a /etc/containers/registries.conf.d/shortnames.conf
-    "postgres" = "docker.io/postgres"
-    EOF
-    ```
+   ```sh
+   cat << EOF | sudo tee -a /etc/containers/registries.conf.d/shortnames.conf
+   "postgres" = "docker.io/postgres"
+   EOF
+   ```
 
 2. Run the following command to set Podman as your container management engine for the Astro CLI:
 
-    ```sh
-    astro config set -g container.binary podman
-    ```
+   ```sh
+   astro config set -g container.binary podman
+   ```
 
-    If you're using Podman 3, additionally run the following command:
+   If you're using Podman 3, additionally run the following command:
 
-    ```sh
-    astro config set -g duplicate_volumes false
-    ```
+   ```sh
+   astro config set -g duplicate_volumes false
+   ```
 
 </TabItem>
 
@@ -243,7 +243,7 @@ Set up Podman on Linux so you can run Apache Airflow locally and deploy to Astro
 ### Prerequisites
 
 - Podman 3 or later. See [Getting started with Podman](https://podman.io/get-started/).
-- A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`. 
+- A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`.
 
 :::tip
 
@@ -251,17 +251,17 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 1. Run the following command to identify the connection URI for `podman-machine-default`:
 
-    ```sh
-    podman system connection ls
-    ```
-    
-    The output should look like the following:
-    
-    ```text
-    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
-    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
-    ```
-    
+   ```sh
+   podman system connection ls
+   ```
+
+   The output should look like the following:
+
+   ```text
+   podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
+   podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
+   ```
+
 2. Copy the value in the `URI` column from `podman-machine-default*`. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
 3. Set your `DOCKER_HOST` environment variable to the value of the URI.
@@ -272,29 +272,29 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 
 1. Run the following command to confirm that Podman has access to Astro images at `docker.io`:
 
-    ```sh
-    podman run --rm -it postgres:12.6 whoami
-    ```
+   ```sh
+   podman run --rm -it postgres:12.6 whoami
+   ```
 
-    If this command fails, run the following command to change Podman's default image registry location to `docker.io`:
+   If this command fails, run the following command to change Podman's default image registry location to `docker.io`:
 
-    ```sh
-    cat << EOF | sudo tee -a /etc/containers/registries.conf.d/shortnames.conf
-    "postgres" = "docker.io/postgres"
-    EOF
-    ```
+   ```sh
+   cat << EOF | sudo tee -a /etc/containers/registries.conf.d/shortnames.conf
+   "postgres" = "docker.io/postgres"
+   EOF
+   ```
 
 2. Run the following command to set Podman as your container management engine for the Astro CLI:
 
-    ```sh
-    astro config set -g container.binary podman
-    ```
+   ```sh
+   astro config set -g container.binary podman
+   ```
 
-    If you're using Podman 3, additionally run the following command:
+   If you're using Podman 3, additionally run the following command:
 
-    ```sh
-    astro config set -g duplicate_volumes false
-    ```
+   ```sh
+   astro config set -g duplicate_volumes false
+   ```
 
 </TabItem>
 
@@ -305,7 +305,7 @@ If you receive an error after running `podman ps`, there is likely a problem wit
 The following error can sometimes occur when the CLI tries to build your Astro Runtime image using Podman:
 
 ```bash
-WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format 
+WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format
 ```
 
 To resolve this issue, run the following command to set the `BUILDAH_FORMAT` environment variable on your machine:
@@ -327,5 +327,3 @@ If you need to switch back to using Podman again, run the following command:
 ```sh
 astro config set container.binary podman
 ```
-
-
