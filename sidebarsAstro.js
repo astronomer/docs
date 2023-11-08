@@ -327,6 +327,18 @@ module.exports = {
         "astro-glossary"
       ],
     },
+    {
+      type: 'category',
+      label: 'Use cases',
+      link: {
+        type: 'generated-index',
+        title: 'Use cases',
+        description: 'Example use cases and implementations on Astro.'
+      },
+      items: [
+          'astro-use-case-large-file-transfer',
+      ],
+    },
   ],
   cli: [
     {
