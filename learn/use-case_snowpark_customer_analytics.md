@@ -6,7 +6,7 @@ sidebar_label: "ML with Snowpark and Airflow"
 sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 ---
 
-![A screenshot of the streamlit application created in this use case that shows the customer analytics dashboard](static/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_streamlitdashboardss1.png)
+![A screenshot of the streamlit application created in this use case that shows the customer analytics dashboard](https://github.com/astronautyates/snowparkcustomeranalyticsusecase/blob/3cb887001775b1b437abd2be62df1d85ed6ed48c/static/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_streamlitdashboardss1.png)
 
 [Snowpark ML](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) (in public preview) is a python framework for Machine Learning workloads with [Snowpark](https://docs.snowflake.com/en/developer-guide/snowpark/python/index.html).  Currently Snowpark ML provides a model registry (storing ML tracking data and models in Snowflake tables and stages), feature engineering primitives similar to scikit-learn (ie. LabelEncoder, OneHotEncoder, etc.) and support for training and deploying [certain model types](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling#snowpark-ml-modeling-classes) as well as deployments as user-defined functions (UDFs).
 
