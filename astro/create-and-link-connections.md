@@ -128,3 +128,55 @@ For example, you might have created a connection to a Snowflake account, and the
 5. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
 6. Click **Update connection link**.
 
+## Sync connections to work locally
+
+When you create connections in the Cloud UI, you can configure your project to use these connections locally with the Astro CLI.
+
+You can choose to work with a connection depending on whetehr they are [linked to all Deployments](#configure-connection-sharing-for-a-workspace) in your Workspace, or working with just one Deployment by specifying the `workspace-id` or `deployment-id` when starting your local project.
+
+When you start your project with these settings, the Astro CLI will first fetch the necessary connections from Astro. Then, after the local Airflow containers start, Astro populates the metadata database with those connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
+
+### Prerequisites
+- Install or update the latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
+- A connection linked to a Deployment
+- A local [Astro Project](https://docs.astronomer.io/astro/cli/get-started-cli#step-1-create-an-astro-project)
+- Astro Runtime 9.3.0 or greater
+
+### Setup 
+
+1. Enable local development access to connections created in the Cloud UI.
+
+    ```zsh
+    # -g sets this config globally
+    astro config set -g disable_env_objects false
+    ```
+
+2. Log in to Astro and choose your Organization and Deployment when prompted.
+
+    ```zsh
+
+    astro login <domain name>
+    ```
+
+3. Retrieve your Workspace ID or Deployment ID, depending on which 
+
+    - **Using connections linked to all Deployments in a workspace** 
+    ```zsh
+    astro workspace list
+    ```
+    - **Deployment ID**
+    ```zsh
+    astro deployment list
+    ```
+
+3. Start your project locally.
+
+    - **Using connections linked to all Deployments in a workspace** 
+    ```zsh
+    astro dev start --workspace-id [workspace-id]
+    ```
+
+    - **Using connections in one Deployment**
+    ```zsh
+    astro dev start --deployment-id [deployment-id]
+    ```
