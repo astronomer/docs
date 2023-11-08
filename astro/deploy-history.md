@@ -57,9 +57,8 @@ Astronomer recommends triggering Deployment rollbacks only as a last resort for 
 
 After the deploy completes, the **Deploy History** table shows your rollback deploy at the beginning of the table as the most recent deploy and includes both your rollback description and rollback deploy time. Your Docker image tag and DAG bundle names are the same as the previous version you rolled back to. The historic deploy that you rolled back to still appears in chronological order in the table. 
 
-For example, consider a user who, on November 8, 2023 at 13:00, rolled back to a deploy from November 6, 2023 at 14:00:
+For example, consider a user who, on November 8, 2023 at 13:00, rolled back to a deploy from November 6, 2023 at 14:00. At the top of the **Deploy History** table, an entry for the rollback deploy would have the following information:
 
-- At the top of the **Deploy History** table, an entry for the rollback deploy would have the following information:
     - **Time**: **14:00 11/8/2023**
     - **Docker image**: **deploy-2023-11-6T14-00** (Or the custom name of your historical image tag)
     - **DAG bundle version**: **2023-11-16T14:00:00.0000000Z**
