@@ -2,8 +2,9 @@
 sidebar_label: "astro workspace team list"
 title: "astro workspace team list"
 id: astro-workspace-team-list
-description: Reference documentation for astro workspace team list.
+description: List Teams in a Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List all Teams in your current Workspace as well as their level of [user permissions](https://docs.astronomer.io/astro/user-permissions) within the Workspace.

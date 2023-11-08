@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment airflow-variable update"
 title: "astro deployment airflow-variable update"
 id: astro-deployment-airflow-variable-update
-description: Reference documentation for astro deployment airflow-variable update.
+description: Update an existing Deployment Airflow variable.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update the value for a Deployment's Airflow variable. 

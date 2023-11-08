@@ -4,6 +4,7 @@ title: "astro run"
 id: astro-run
 description: Reference documentation for astro run.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Trigger a single DAG run in a local Airflow environment and see task success or failure in your terminal. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
