@@ -59,10 +59,10 @@ After the deploy completes, the **Deploy History** table shows your rollback dep
 
 For example, consider a user who, on November 8, 2023 at 13:00, rolled back to a deploy from November 6, 2023 at 14:00. At the top of the **Deploy History** table, an entry for the rollback deploy would have the following information:
 
-    - **Time**: **14:00 11/8/2023**
-    - **Docker image**: **deploy-2023-11-6T14-00** (Or the custom name of your historical image tag)
-    - **DAG bundle version**: **2023-11-16T14:00:00.0000000Z**
-    - **Deploy description**: Your rollback description.
+- **Time**: **14:00 11/8/2023**
+- **Docker image**: **deploy-2023-11-6T14-00** (Or the custom name of your historical image tag)
+- **DAG bundle version**: **2023-11-16T14:00:00.0000000Z**
+- **Deploy description**: Your rollback description.
 
 ## What happens during a deploy rollback
 
