@@ -1,8 +1,8 @@
 ---
-title: 'Move large files between object storages leveraging horizontal scaling'
-navTitle: 'Parallelized large file transfer'
+title: "Move large files between object storages with dynamic task mapping"
+navTitle: "Parallelized large file transfer"
 id: astro-use-case-large-file-transfer
-description: Parallelized large file transfer.
+sidebar_label: "Parallelized large file transfer"
 ---
 
 Moving large files is a common ETL/ELT operation that necessitates a parallelized approach and appropriate scaling of your Astro deployment. This use case shows a custom templated task group that moves any number of large files from one S3 bucket to another and can be adjusted to work with other object storage providers. Additionally relevant scaling parameters are discussed.
