@@ -2,7 +2,7 @@
 sidebar_label: 'GCP'
 title: 'Create a network connection between Astro and GCP'
 id: connect-gcp
-description: Create network connection to Google Cloud Platform.
+description: Create a network connection to Google Cloud Platform.
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 

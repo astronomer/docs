@@ -219,8 +219,8 @@ module.exports = {
               label: "Networking",
               items: [
                 "connect-aws", 
-              "connect-azure", 
-              "connect-gcp"
+                "connect-azure", 
+                "connect-gcp"
             ],
             },
           ],

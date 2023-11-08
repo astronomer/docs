@@ -2,7 +2,7 @@
 sidebar_label: 'AWS'
 title: 'Create a network connection between Astro and AWS'
 id: connect-aws
-description: Create network connection to AWS.
+description: Create a network connection to AWS.
 sidebar_custom_props: { icon: 'img/aws.png' }
 ---
 
