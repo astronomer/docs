@@ -2,8 +2,9 @@
 sidebar_label: "astro workspace token update"
 title: "astro workspace token update"
 id: astro-workspace-token-update
-description: Reference documentation for astro workspace token update.
+description: Update a Workspace API token.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update a Workspace API token in your current Workspace.

@@ -78,7 +78,7 @@ The [`finbuddy_load_news`](https://github.com/astronomer/use-case-airflow-llm-ra
 
 You can find the code for the Streamlit application in [`include/streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py). This app prompts the user to ask a question about the current financial outlook and then uses the question to find relevant news articles for an augmented prompt to GPT-4. The app displays the resulting answer to the user along with the sources used. 
 
-![Screenshot of the streamlit app showing the prompt field and two sliders, one for number of relevant article chunks retrieved, one to adjust the certainity.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_1.png)
+![Screenshot of the streamlit app showing the prompt field and two sliders, one for number of relevant article chunks retrieved, one to adjust the certainty.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_1.png)
 
 ![Screenshot of the streamlit app showing an example answer of the application.](/img/examples/use-case-airflow-llm-rag-finance_streamlit_part_2.png)
 
@@ -298,7 +298,7 @@ The ingest task uses the `@task.weaviate_import` decorator and is [dynamically m
 
 ```python
 
-EMBEDD_LOCALLY = True
+EMBEDD_LOCALLY = False
 
 # ...
 
@@ -324,13 +324,49 @@ else:
 The ingestion function passed to the `@task.weaviate_import` decorator differs depending on whether the embeddings are pre-computed locally or not.
 
 <Tabs
-    defaultValue="localembedd"
+    defaultValue="cloudembedd"
     groupId= "project-code"
     values={[
-        {label: 'Local embedding', value: 'localembedd'},
         {label: 'Cloud-based embedding', value: 'cloudembedd'},
+        {label: 'Local embedding', value: 'localembedd'},
     ]}>
 
+<TabItem value="cloudembedd">
+
+If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator assumes that Weaviate computes the embeddings using the vectorizer you provided in the `DEFAULT_VECTORIZER_MODULE` environment variable in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
+
+```python
+def import_data(
+    record,
+    class_name: str,
+    upsert=False,
+    uuid_source_column="url",
+    batch_size=1000,
+    error_threshold=0,
+    batched_mode=True,
+    verbose=False,
+):
+    df = pd.DataFrame(record, index=[0])
+
+    df["uuid"] = df.apply(
+        lambda x: generate_uuid5(identifier=x.to_dict(), namespace=class_name), axis=1
+    )
+
+    print(f"Passing {len(df)} objects for embedding and import.")
+
+    return {
+        "data": df,
+        "class_name": class_name,
+        "upsert": upsert,
+        "uuid_column": "uuid",
+        "error_threshold": error_threshold,
+        "batched_mode": batched_mode,
+        "batch_size": batch_size,
+        "verbose": verbose,
+    }
+```
+
+</TabItem>
 <TabItem value="localembedd">
 
 If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that for existing embeddings, the `embedding_column` parameter of the dictionary returned by the ingestion function needs to be set to the name of the column containing the embeddings (`vectors` in this example).  
@@ -394,45 +430,9 @@ def import_data_local_embed(
 :::info
 
 Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
+If you use local embeddings, you also need to set `EMBEDD_LOCALLY` to `True` at the start of the [streamlit app](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) file and match the models used for embedding between the news articles and the user input in the app.
 
 :::
-
-</TabItem>
-
-<TabItem value="cloudembedd">
-
-If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator will assume that the embeddings are to be computed by Weaviate using the vectorizer provided to the environment variable `DEFAULT_VECTORIZER_MODULE` in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
-
-```python
-def import_data(
-    record,
-    class_name: str,
-    upsert=False,
-    uuid_source_column="url",
-    batch_size=1000,
-    error_threshold=0,
-    batched_mode=True,
-    verbose=False,
-):
-    df = pd.DataFrame(record, index=[0])
-
-    df["uuid"] = df.apply(
-        lambda x: generate_uuid5(identifier=x.to_dict(), namespace=class_name), axis=1
-    )
-
-    print(f"Passing {len(df)} objects for embedding and import.")
-
-    return {
-        "data": df,
-        "class_name": class_name,
-        "upsert": upsert,
-        "uuid_column": "uuid",
-        "error_threshold": error_threshold,
-        "batched_mode": batched_mode,
-        "batch_size": batch_size,
-        "verbose": verbose,
-    }
-```
 
 </TabItem>
 </Tabs>
@@ -445,30 +445,47 @@ The [`streamlit/streamlit_app.py`](https://github.com/astronomer/use-case-airflo
 
 The streamlit app is structured to perform three main tasks, which are separated out into functions:
 
-- `get_embedding`: Takes the user input and computes the embeddings of the input text using [FinBERT](https://huggingface.co/ProsusAI/finbert).
+- `get_embedding`: Takes the user input and computes the embeddings of the input text using [OpenAI embeddings](https://platform.openai.com/docs/guides/embeddings) or [FinBERT](https://huggingface.co/ProsusAI/finbert).
 - `get_relevant_articles`: Performs a Weaviate query to retrieve the most relevant article chunks from Weaviate to be added to the augmented prompt.
 - `get_response`: Uses the retrieved article chunks to create an augmented prompt for GPT-4.
 
-You can experiment with parameters, such as the `certainity` threshold, in the Weaviate query to allow for more or less relevant article chunks to be retrieved or to change the number of article chunks that are included in the augmented prompt. Finally, you can make changes to the GPT-4 prompt. For example, to instruct the model to be more optimistic or pessimistic in its answer.
+You can experiment with parameters, such as the `certainty` threshold, in the Weaviate query to allow for more or less relevant article chunks to be retrieved or to change the number of article chunks that are included in the augmented prompt. Finally, you can make changes to the GPT-4 prompt. For example, to instruct the model to be more optimistic or pessimistic in its answer.
+
+:::info
+
+Make sure that you are using the same model to embed the user input and the news articles. If you are using local embeddings in your DAG, you need to set `EMBEDD_LOCALLY` to `True` at the start of the streamlit application file as well.
+
+:::
 
 ```python
+EMBEDD_LOCALLY = False
+
+
 def get_embedding(text):
-    tokenizer = BertTokenizer.from_pretrained("ProsusAI/finbert")
-    model = BertModel.from_pretrained("ProsusAI/finbert")
+    if EMBEDD_LOCALLY:
+        tokenizer = BertTokenizer.from_pretrained("ProsusAI/finbert")
+        model = BertModel.from_pretrained("ProsusAI/finbert")
 
-    if torch.cuda.is_available():
-        model = model.to("cuda")
+        if torch.cuda.is_available():
+            model = model.to("cuda")
+        else:
+            model = model.to("cpu")
+
+        model.eval()
+
+        tokens = tokenizer(
+            text, return_tensors="pt", truncation=True, padding=True, max_length=512
+        )
+        with torch.no_grad():
+            outputs = model(**tokens)
+            last_hidden_state = outputs.last_hidden_state
+            mean_tensor = last_hidden_state.mean(dim=1)
+            embeddings = mean_tensor.numpy()
     else:
-        model = model.to("cpu")
-
-    model.eval()
-
-    tokens = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512)
-    with torch.no_grad():
-        outputs = model(**tokens)
-        last_hidden_state = outputs.last_hidden_state
-        mean_tensor = last_hidden_state.mean(dim=1)
-        embeddings = mean_tensor.numpy()
+        model = "text-embedding-ada-002"
+        embeddings = openai.Embedding.create(input=[text], model=model)["data"][0][
+            "embedding"
+        ]
 
     return embeddings
 

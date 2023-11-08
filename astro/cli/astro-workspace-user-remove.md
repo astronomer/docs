@@ -2,8 +2,9 @@
 sidebar_label: "astro workspace user remove"
 title: "astro workspace user remove"
 id: astro-workspace-user-remove
-description: Reference documentation for astro workspace.
+description: Remove a Workspace user.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

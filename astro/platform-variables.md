@@ -17,7 +17,7 @@ On Astro, certain environment variables have preset values that are required and
 
 The Cloud UI does not currently prevent you from setting these environment variables, but attempting to set them can result in unexpected behavior that can include access problems, missing task logs, and failed tasks.
 
-If you need to set one of these variables for a particular use case, contact [Astronomer support](https://cloud.astronomer.io/support).
+If you need to set one of these variables for a particular use case, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 :::
 

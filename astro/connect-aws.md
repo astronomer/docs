@@ -78,13 +78,13 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
 
     - **Stack name**: Enter a meaningful name for your stack.
-    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/support). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
 
 3. After the stack is created, go to the **Outputs** tab and copy the value from the **PeerRole ARN** field.
 
 4. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, and copy the **ID** of the cluster.
 
-5. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following details:
+5. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following details:
 
     - AWS region of the external VPC from Step 1
     - VPC ID of the external VPC from Step 1
@@ -108,7 +108,7 @@ If your external VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Re
 
 If your external VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astro VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/).
 
-To retrieve the ID of any Astro VPC, contact [Astronomer support](https://cloud.astronomer.io/support). If you have more than one Astro cluster, request the VPC ID of each cluster.
+To retrieve the ID of any Astro VPC, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). If you have more than one Astro cluster, request the VPC ID of each cluster.
 
 </TabItem>
 
@@ -126,11 +126,11 @@ AWS Transit Gateway is an alternative to VPC Peering on AWS. Instead of having t
 
 While it can be more costly, AWS Transit Gateway requires less configuration and is often recommended for organizations connecting a larger number of VPCs. For more information, see [AWS Transit Gateway](https://aws.amazon.com/transit-gateway/).
 
-AWS Transit Gateway doesn't provide built-in support for DNS resolution. If you need DNS integration, Astronomer recommends that you use the Route 53 Resolver service. For assistance integrating the Route 53 Resolver service with your Astronomer VPC, contact [Astronomer support](https://cloud.astronomer.io/support).
+AWS Transit Gateway doesn't provide built-in support for DNS resolution. If you need DNS integration, Astronomer recommends that you use the Route 53 Resolver service. For assistance integrating the Route 53 Resolver service with your Astronomer VPC, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 :::info
 
-If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support can create a new transit gateway in your AWS account for Astro and set up [a cross-region peering attachment](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) with your existing transit gateway.
+If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). Astronomer support can create a new transit gateway in your AWS account for Astro and set up [a cross-region peering attachment](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html) with your existing transit gateway.
 
 If Astronomer creates a new transit gateway in your AWS account for Astro, keep in mind that your organization will incur additional AWS charges for the new transit gateway as well as the inter-region transfer costs.
 
@@ -148,9 +148,9 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 2. In your AWS console, copy the ID of your existing transit gateway (TGW). 
 3. [Create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) and [share the TGW with your cluster's Astro AWS account](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-sharing). 
 
-    To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/support). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+    To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
     
-4. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
     - Your cluster **ID** from Step 1.
     - Your TGW ID from Step 2.
@@ -160,7 +160,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 5. After you receive the confirmation from Astronomer support, use the Astro CIDRs to [create back routes](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route) from your transit gateway to the Astro VPC.
 
-6. Contact [Astronomer support](https://cloud.astronomer.io/support) to confirm that you have created the static route. Astronomer support then tests the connection and confirm.
+6. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to confirm that you have created the static route. Astronomer support then tests the connection and confirm.
 
 7. (Optional) Repeat the steps for each Astro cluster that you want to connect to your transit gateway.
 
@@ -174,7 +174,7 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 :::
 
-Use AWS PrivateLink to create private connections from Astro to your AWS services without exposing your data to the public internet. If your AWS services are located in a different region than Astro, contact [Astronomer support](https://cloud.astronomer.io/support).
+Use AWS PrivateLink to create private connections from Astro to your AWS services without exposing your data to the public internet. If your AWS services are located in a different region than Astro, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 All Astro clusters are pre-configured with the following AWS PrivateLink endpoint services:
 
@@ -184,7 +184,7 @@ All Astro clusters are pre-configured with the following AWS PrivateLink endpoin
 - Elastic Load Balancing (ELB)  - Interface Endpoint
 - AWS Security Token Service (AWS STS) - Interface Endpoint
 
-To request additional endpoints, or assistance connecting to other AWS services, contact [Astronomer support](https://cloud.astronomer.io/support).
+To request additional endpoints, or assistance connecting to other AWS services, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 To access a service in a different region using PrivateLink endpoints, you must use an inter-Region VPC peering connection. You create an intermediate PrivateLink endpoint in the same region as the targeted service, then connect to that endpoint through an inter-Region VPC peering connection.
     
@@ -240,7 +240,7 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 #### Contact Astronomer support for rule verification
 
-To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
+To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/open-support-request). With your request, include the Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
 #### Create a connection to confirm connectivity (optional)
 
@@ -252,7 +252,7 @@ When Astronomer support confirms that the Amazon Route 53 Resolver rule was succ
 
 Use Domain Name System (DNS) forwarding to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. Unlike Route 53, you don't need to share sensitive configuration data with your Astro account. To learn more about DNS forwarding, see [Forwarding outbound DNS queries to your network](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-forwarding-outbound-queries.html).
 
-To use this solution, make sure Astro can connect to the DNS server using a VPC peering or transit gateway connection and then submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the following information:
+To use this solution, make sure Astro can connect to the DNS server using a VPC peering or transit gateway connection and then submit a request to [Astronomer support](https://cloud.astronomer.io/open-support-request). With your request, include the following information:
 
 - The domain name for forwarding requests
 - The IP address of the DNS server where requests are forwarded

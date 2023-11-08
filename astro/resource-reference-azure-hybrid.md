@@ -62,9 +62,9 @@ You can host Astro Hybrid clusters in the following Azure regions:
 | `westus2`          | West US 2          |
 | `westus3`          | West US 3          |
 
-Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-¹ If you want to host Astro in a dedicated account owned by your Organization in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/support). 
+¹ If you want to host Astro in a dedicated account owned by your Organization in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
 
 ## Supported Azure Database for PostgreSQL instance types
 
@@ -75,7 +75,7 @@ The following Azure Database for PostgreSQL instance types are supported on Astr
 - Standard_E2ds_v4 (2 CPU, 16 GiB MEM)
 - Standard_E4ds_v4 (4 CPU, 32 GiB MEM)
 
-For detailed information about each instance type, see the [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/). If you're interested in an Azure Database for PostgreSQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
+For detailed information about each instance type, see the [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/). If you're interested in an Azure Database for PostgreSQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported worker node pool instance types
 

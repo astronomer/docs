@@ -2,8 +2,9 @@
 sidebar_label: "astro organization token roles"
 title: "astro organization token roles"
 id: astro-organization-token-roles
-description: Reference documentation for astro organization token roles.
+description: List an Organization API token's roles.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List the roles that an Organization API token has throughout the Organization, including Workspace roles.

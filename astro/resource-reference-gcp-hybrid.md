@@ -74,7 +74,7 @@ You can host Astro Hybrid clusters in the following GCP regions:
 | `us-west3`                | Salt Lake City, North America |
 | `us-west4`                | Nevada, North America         |
 
-Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported Cloud SQL instance types
 
@@ -90,7 +90,7 @@ The following Cloud SQL instance types are supported on Astro:
 - Medium Compute Optimized (8 CPU, 16 GiB MEM)
 - Large Compute Optimized (16 CPU, 32 GiB MEM)
 
-For detailed information about each instance type, see the [Cloud SQL documentation](https://cloud.google.com/sql). If you're interested in an Cloud SQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
+For detailed information about each instance type, see the [Cloud SQL documentation](https://cloud.google.com/sql). If you're interested in an Cloud SQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported worker node pool instance types
 
@@ -134,7 +134,7 @@ The following table lists all available instance types for worker node pools, as
 | c2-standard-4      | 2 CPUs  | 14.5 GiB MEM  |
 | c2-standard-8      | 6 CPUs  | 30.5 GiB MEM  |
 
-If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
+If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
 
 ## Related documentation
 

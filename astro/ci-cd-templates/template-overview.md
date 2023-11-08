@@ -15,7 +15,7 @@ Template types differ based on the deploy method they use and how many branches 
 
 Astronomer maintains a dedicated guide with templates for select CI/CD tools. Most guides include image based templates for a single-branch implementation. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes.
 
-If you're interested in documentation for a CI/CD tool or template type that does not exist, configure your own or [contact Astronomer support](https://cloud.astronomer.io/support). To learn more about single-branch and multiple-branch implementations and decide which template is right for you, see [Choose a CI/CD strategy](set-up-ci-cd.md).
+If you're interested in documentation for a CI/CD tool or template type that does not exist, configure your own or [contact Astronomer support](https://cloud.astronomer.io/open-support-request). To learn more about single-branch and multiple-branch implementations and decide which template is right for you, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## DAG deploy templates
 

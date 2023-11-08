@@ -36,7 +36,7 @@ If you have Workspace Owner permissions, you can enable or disable DAG-only depl
 - Your Deployment no longer includes Azure Blob Storage or DAG downloading sidecars.
 - In the Cloud UI, your Deployment **DAG bundle version** will not update when you deploy code. 
 
-To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
+To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
 
 Before you enable or disable DAG-only deploys on a Deployment, ensure the following:
 

@@ -22,7 +22,7 @@ For Astro Hybrid resource reference material, see:
 
 This page contains reference information for all supported Astro Hosted Deployment and cluster resource configurations. Use this information to determine whether Astro supports the type of Airflow environment you want to run. 
 
-If you're interested in a cloud region or resource size that's not mentioned here, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+If you're interested in a cloud region or resource size that's not mentioned here, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Deployment resources
 

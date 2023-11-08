@@ -67,7 +67,7 @@ VPC peering ensures private and secure connectivity, reduces network transit cos
 
 To create a VPC peering connection between an Astro VPC and a GCP VPC: 
  
-1. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+1. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
     - Astro cluster ID and name.
     - Google Cloud project ID of the target VPC.

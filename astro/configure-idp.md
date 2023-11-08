@@ -451,7 +451,7 @@ To enable or disable just-in-time provisioning:
 
 By default, users can choose any of the [available authentication methods](#supported-sso-identity-providers) when logging into Astro. You can remove specific authentication options, such as GitHub or Google, so that users can use only the methods that your Organization wants to support, like your third party identity provider.
 
-To restrict available authentication options on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).
+To restrict available authentication options on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ### Regenerate an SSO bypass link
 

@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment variable update"
 title: "astro deployment variable update"
 id: astro-deployment-variable-update
-description: Reference documentation for astro deployment variable update.
+description: Update Deployment environment variables.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 For a given Deployment on Astro, use `astro deployment variable update` to update the value of an existing environment variable with the Astro CLI. To do so, you can either:
