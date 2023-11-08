@@ -412,7 +412,7 @@ You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NA
 Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users and Teams based on templates for access and permissions. It also provides better observability through your identity provider for when users and Teams are created or modified across your organization.
 
 :::info
-SCIM works because the IdP pushes updates about users and teams to Astronomer Software. This means your Astronomer Software platform must be connected to the internet to receive those updates. If you are running Astronomer Software without exposing it to the internet, there might be solutions for routing SCIM traffic depending on your combination of cloud provider and IdP. Please contact [Astronomer support](https://support.astronomer.io) for more information.
+SCIM works because the IdP pushes updates about users and teams to Astronomer Software. This means your Astronomer Software platform must be connected to the internet to receive those updates. If you are running Astronomer Software without exposing it to the internet, there might be solutions for routing SCIM traffic depending on your combination of cloud provider and IdP. Contact [Astronomer support](https://support.astronomer.io) for more information.
 :::
 
 <Tabs
@@ -424,42 +424,59 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
     ]}>
 <TabItem value="okta">
 
-This setup assumes that you have already created a web app for Astronomer Software in Okta. See [Okta](#okta).
+1. In Okta Admin dashboard, go to **Applications** > **Applications**.
 
-1. In your Astronomer integration's settings page on Okta, open the **General** tab.
+2. Click **Browse App catalog**
 
-2. Click **Edit**.
+3. Search for `SCIM 2.0`, then select the option that includes **Basic Auth**. The configuration page for the SCIM integration appears.
+4. Complete the **General Settings** page, then click **Next**.
+5. Complete the **Sign-On Options** page and click **Done**.
+6. Return to the **Applications** menu and search for the integration you just created. Click the integration to open its settings.
+7. Click **Provisioning**, then click **Configure API integration**.
+8. Tick the **Enable API integration** checkbox, then configure the following values:
 
-3. In the **Provisioning** section, select **SCIM**.
-
-4. Click **Save**.
-
-5. In your Astronomer integration's settings page, open the **Provisioning** tab.
-
-6. Configure the following values for your SCIM integration.
-
-    - **SCIM connector base URL**: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`
+    - **SCIM connector base URL**: `https://astro-software-host/v1/scim/v2/okta`
     - **Authentication mode**: Basic Auth
         - Username: `<your-provisioning-account-username>`
         - Password: `<your-provisioning-account-password>`
 
-7. Go to **Configure API Integration** and select the **Enable API Integration** checkbox.
+9. Click **General**, then click **Edit**. Give your application a name and configure any other required general settings. 
 
-8. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
+10. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
 
-9. On the Assignments tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
+11. On the **Assignments** tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
 
-10. Add the following lines to your `config.yaml` file:
+12. Follow the steps in [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets) to store your provisioning account credentials as a Kubernetes secret. Your secret configuration should look similar to the following:
+
+    ```yaml
+    # Required configuration for all secrets
+    kind: Secret
+    apiVersion: v1
+    metadata:
+         name: okta-provisioning-secret
+         labels:
+            release: {{ .Release.Name }}
+            chart: {{ .Chart.Name }}
+            heritage: {{ .Release.Service }}
+            component: {{ template "houston.backendSecret" . }}
+    type: Opaque
+    # Specify a key and value for the data you want to encrypt
+    data:
+        okta_provisioning_account_secret: {{ "<your-provisioning-account-username>:<your-provisioning-account-password>" | b64enc | quote }}
+    ```
+
+13. Add the following lines to your `config.yaml` file:
 
     ```yaml
     astronomer:
-      houston:
-        config:
-          okta:
-            scimAuthCode: <your-provisioning-account-username>:<your-provisioning-account-password>
+        houston:
+            secret:
+             - envName: "SCIM_AUTH_CODE_OKTA"
+               secretName: "okta-provisioning-secret"
+               secretKey: "okta_provisioning_account_secret"
     ```
 
-11. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+14. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
 See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm?cshid=ext_Apps_App_Integration_Wizard-scim) for more information about configuring SCIM within Okta.
 
@@ -467,49 +484,66 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 <TabItem value="azuread">
 
-1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string. 
+1. Generate a random string to use as an authentication secret. See [random.org](https://www.random.org/strings/) for accessible randomization tools.
+2. Follow the steps in [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets) to store your string as a Kubernetes secret. Your secret configuration should look similar to the following:
+
+    ```yaml
+    # Required configuration for all secrets
+    kind: Secret
+    apiVersion: v1
+    metadata:
+         name: azure-provisioning-secret
+         labels:
+            release: {{ .Release.Name }}
+            chart: {{ .Chart.Name }}
+            heritage: {{ .Release.Service }}
+            component: {{ template "houston.backendSecret" . }}
+    type: Opaque
+    # Specify a key and value for the data you want to encrypt
+    data:
+        azure_provisioning_secret: {{ "<your-generated-string>" | b64enc | quote }}
+    ```
+
+2. In your `config.yaml` file, add the following configuration:
 
     ```yaml
     astronomer:
-      houston: 
-        config:
-          auth:
-            openidConnect:
-              microsoft:
-                scimAuthCode: <your-generated-secret-code>
+        houston:
+            secret:
+             - envName: "SCIM_AUTH_CODE_MICROSOFT"
+               secretName: "azure-provisioning-secret"
+               secretKey: "azure_provisioning_secret"
     ```
-   
-    **Note**: If you have already configured Open ID Connect with Azure AD, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
-2. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+3. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
-3. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
+4. Log in to the [Azure AD portal](https://aad.portal.azure.com/). 
    
-4. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
+5. In the left menu, select **Enterprise applications**, then click **New application** > **Create your own application**.
    
-5. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
+6. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
   
-6. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
+7. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
   
-7. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
+8. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
 
-8. Click **Provisioning Mode** > **Automatic**.
+9.  Click **Provisioning Mode** > **Automatic**.
 
-9. In the **Tenant URL** field, enter `https://houston.BASEDOMAIN/v1/scim/v2/microsoft`. This is the Astronomer SCIM endpoint URL.
+10. In the **Tenant URL** field, enter `https://BASEDOMAIN/v1/scim/v2/microsoft`. This is the Astronomer SCIM endpoint URL.
 
-10. Paste the `scimAuthCode` generated at step 1 above into the **Secret Token** field.
+11. Paste the `scimAuthCode` that you generated in Step 1 into the **Secret Token** field.
 
-11. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+12. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
-12. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+13. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
 
-13. Click **Manage** > **Provisioning** > **Settings**.
+14. Click **Manage** > **Provisioning** > **Settings**.
 
-14. In the **Scope** setting list, select **Sync only assigned users and groups**.
+15. In the **Scope** setting list, select **Sync only assigned users and groups**.
    
-15. Click the **Provisioning status** toggle to turn provisioning status on.
+16. Click the **Provisioning status** toggle to turn provisioning status on.
 
-16. Click **Save**.
+17. Click **Save**.
 
 </TabItem>
 </Tabs>
@@ -518,9 +552,9 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 You can prevent your identity provider passwords, authorization tokens, and security keys from being exposed as plain text by encrypting them in Kubernetes secrets.
 
-This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow).
+This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow), but can also be used to encrypt any secrets used in your Helm configuration. 
  
-1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
+1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). For example, the following configuration encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
 
     ```yaml
     # Required configuration for all secrets

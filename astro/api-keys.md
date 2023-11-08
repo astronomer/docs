@@ -1,6 +1,6 @@
 ---
-title: 'Manage Deployment API keys'
-sidebar_label: 'Deployment API keys'
+title: 'Manage Deployment API keys (Deprecated)'
+sidebar_label: 'Deployment API keys (Deprecated)'
 id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
@@ -13,7 +13,7 @@ You can continue to use existing Deployment API keys but you cannot create new A
 
 You will have to convert existing API keys into Deployment API tokens in the future when API Keys are no longer supported, however, the deadline for converting API keys has not yet been determined.
 
-If you have any questions, contact [Astronomer Support](https://cloud.astronomer.io/support).
+If you have any questions, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
 :::
 

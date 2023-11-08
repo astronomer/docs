@@ -123,6 +123,12 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
 
+:::info
+
+If an Astro Runtime version isn't included in this section, then there are no specific upgrade considerations for that version.
+
+:::
+
 #### Runtime 9 (Airflow 2.7)
 
 ##### Connection testing in the Airflow UI disabled by default
@@ -198,6 +204,6 @@ Astro Runtime 5.0.0, based on Airflow 2.3, includes changes to the schema of the
     Airflow found incompatible data in the `dangling_rendered_task_instance_fields` table in your metadata database, and moved...
     ```
 
-    These warnings have no impact on your tasks or DAGs and can be ignored. If you want to remove these warning messages from the Airflow UI, reach out to [Astronomer support](https://cloud.astronomer.io/support). If requested, Astronomer can drop incompatible tables from your metadata database.
+    These warnings have no impact on your tasks or DAGs and can be ignored. If you want to remove these warning messages from the Airflow UI, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request). If requested, Astronomer can drop incompatible tables from your metadata database.
 
 For more information on Airflow 2.3, see ["Apache Airflow 2.3.0 is here"](https://airflow.apache.org/blog/airflow-2.3.0/) or the [Airflow 2.3.0 changelog](https://airflow.apache.org/docs/apache-airflow/2.3.0/release_notes.html#airflow-2-3-0-2022-04-30).

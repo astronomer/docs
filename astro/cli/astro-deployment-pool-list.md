@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment pool list"
 title: "astro deployment pool list"
 id: astro-deployment-pool-list
-description: Reference documentation for astro deployment pool list.
+description: List Airflow pools in a Deployment. 
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List the Airflow pools stored in a Deployment's metadata database. 

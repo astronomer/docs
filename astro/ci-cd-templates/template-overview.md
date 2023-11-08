@@ -15,7 +15,7 @@ Template types differ based on the deploy method they use and how many branches 
 
 Astronomer maintains a dedicated guide with templates for select CI/CD tools. Most guides include image based templates for a single-branch implementation. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes.
 
-If you're interested in documentation for a CI/CD tool or template type that does not exist, configure your own or [contact Astronomer support](https://cloud.astronomer.io/support). To learn more about single-branch and multiple-branch implementations and decide which template is right for you, see [Choose a CI/CD strategy](set-up-ci-cd.md).
+If you're interested in documentation for a CI/CD tool or template type that does not exist, configure your own or [contact Astronomer support](https://cloud.astronomer.io/open-support-request). To learn more about single-branch and multiple-branch implementations and decide which template is right for you, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## DAG deploy templates
 
@@ -28,12 +28,12 @@ CI/CD templates that use the DAG deploy workflow:
 - Install the latest version of the Astro CLI.
 - Trigger the following Astro CLI commands depending on which files were updated by the commit:
     - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment.
-    - If any file not in the `dags` folder has changed, run `astro deploy`. This triggers two subprocesses. One that creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image to your Deployment. A second that pushes your `dags` folder to your Deployment.
+    - If any file not in the `dags` folder has changed, run `astro deploy`. This triggers two subprocesses. One that creates a Docker image for your Astro project, authenticates to Astro using your Deployment API token, and pushes the image to your Deployment. A second that pushes your `dags` folder to your Deployment.
 
 This process is equivalent to the following shell script: 
 
 ```bash
-# Set Deployment API key credentials as environment variables
+# Set Deployment API token credentials as environment variables
 export ASTRO_API_TOKEN="<your-api-token>"
 export DAG_FOLDER="<path to dag folder ie. dags/>"
 # Install the latest version of Astro CLI
@@ -68,12 +68,12 @@ CI/CD templates that use image based workflows:
 
 - Use a [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md) or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
-- Run the `astro deploy` command. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image to your Deployment.
+- Run the `astro deploy` command. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API token, and pushes the image to your Deployment.
 
 This is equivalent to running the following shell script:
 
 ```bash
-# Set Deployment API key credentials as environment variables
+# Set Deployment API token credentials as environment variables
 export ASTRO_API_TOKEN="<your-api-token>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s

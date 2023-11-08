@@ -52,4 +52,4 @@ You can use the Astro Cloud IDE GitHub integration to run your code with additio
 
 ## Troubleshoot cell runs
 
-If the error message `Could not connect to cell execution environment` appears after running a cell, check the [Astro status page](https://status.astronomer.io/) to determine the operational status of the Astro control plane. If the control plane is operational, contact [Astronomer support](https://cloud.astronomer.io/support) and share the error. To enable cell runs, Astronomer support might need to set up additional cloud infrastructure for the IDE.
+If the error message `Could not connect to cell execution environment` appears after running a cell, check the [Astro status page](https://status.astronomer.io/) to determine the operational status of the Astro control plane. If the control plane is operational, contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and share the error. To enable cell runs, Astronomer support might need to set up additional cloud infrastructure for the IDE.

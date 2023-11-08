@@ -15,7 +15,7 @@ When you're ready to implement your CI/CD strategy, see [CI/CD templates](ci-cd-
 
 ## Benefits of CI/CD on Astro
 
-On Astro, you can use [Deployment API keys](api-keys.md) to automate your code deploys. Astronomer recommends hosting your Astro project source code in a version control tool, such as [GitHub](https://github.com/) or [GitLab](https://about.gitlab.com/), and setting up a CI/CD workflow for all production environments.
+On Astro, you can use [Deployment API tokens](deployment-api-tokens.md) to automate your code deploys. Astronomer recommends hosting your Astro project source code in a version control tool, such as [GitHub](https://github.com/) or [GitLab](https://about.gitlab.com/), and setting up a CI/CD workflow for all production environments.
 
 There are many benefits to configuring a CI/CD workflow on Astro. Specifically, you can:
 
@@ -178,7 +178,7 @@ If you use GitHub, Astronomer recommends using the [`deploy-action` GitHub actio
 
 ## Enforce CI/CD
 
-When you use a CI/CD pipeline, all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment API key or Workspace token. See:
+When you use a CI/CD pipeline, all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment or Workspace token. See:
 
 - [Enforce CI/CD deploys](deployment-settings.md#enforce-cicd-deploys)
 - [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings)

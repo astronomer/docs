@@ -7,12 +7,6 @@ id: release-notes
 import HostedBadge from '@site/src/components/HostedBadge';
 import HybridBadge from '@site/src/components/HybridBadge';
 
-
-<head>
-  <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
-  <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
-</head>
-
 <p class="rssButton">
   <a href="/astro-release-notes.xml" target="_blank">
     <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
@@ -21,11 +15,40 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 9.4 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 9.5 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.19.3 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.20.0 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## November 7, 2023
+
+### Bug fixes
+
+- Fixed an issue where, you could inadvertently open the support request window if you opened a DAG that included "Support" in its name from the **DAGs** view. As a result of this change, the support request window URL has been updated from `https://cloud.astronomer.io/support` to `https://cloud.astronomer.io/open-support-request`.
+- Fixed an issue where the Deployment configuration menu in the Cloud UI didn't always show your Deployment's current configuration.
+- Fixed an issue where you could not create a Deployment with some stable Runtime versions using the Astro Platform API.
+
+## October 31, 2023
+
+### Deployment API keys are now deprecated
+
+Deployment API keys have been officially deprecated in favor of [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens). This means:
+
+- You can't create new Deployment API keys.
+- If a Deployment has no configured Deployment API keys, the **API keys** tab will not appear.
+- You can continue using existing Deployment API keys until a future end-of-support date.
+
+### Additional improvements
+
+- Workspace Operators can now create, update, and delete Deployment API tokens.
+- The **DAGs** page now shows [datasets](https://docs.astronomer.io/learn/airflow-datasets) for consuming and producing DAGs. When you hover over a dataset node, the Cloud UI shows you which DAGs the dataset triggers when it's updated.
+
+    ![Dataset node in the DAGs page of the Cloud UI. The node is highlighted so that it shows dependent DAGs](/img/release-notes/dataset-node.png)
+
+### Bug fixes
+
+- Fixed an issue where a Deployment's **Updated By** field was not updated if you transferred the Deployment. 
 
 ## October 24, 2023
 
@@ -87,7 +110,6 @@ The Astro API is currently in beta. See [Astro API versioning and support](https
 You can now use the [Astro API](https://docs.astronomer.io/astro/api/overview) to create applications and scripts to programmatically interact with Astro. The Astro API is a standard REST API that includes endpoints for interacting with all key resources and components on Astro.
 
 Using the Astro API, you can create robust and secure applications for managing Deployment resources, updating user permissions, and performing many other key Astro operations. To make your first API call, see [Get started with the Astro API](https://docs.astronomer.io/astro/api/get-started).
-
 
 ## September 19, 2023
 
@@ -657,7 +679,7 @@ For a list of all instance types available for GCP, see [Supported worker node p
 - You can now use `db.m6g` and `db.r6g` RDS instance types on AWS clusters.
 - The default RDS instance type for new AWS clusters has been reduced from `db.r5.large` to `db.m6g.large`
 - The default CIDR range for new AWS clusters has been reduced from /19 to /20.
-- You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/support). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
+- You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/open-support-request). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
 - You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace.
 - Organization role permissions have changed so that only Organization Owners can create Workspaces.
 
@@ -669,7 +691,7 @@ For a list of all instance types available for GCP, see [Supported worker node p
 
 ### Automate Workspace and Deployment actions using Workspace API tokens
 
-Use Workspace API tokens to automate Workspace actions, such as adding users to a Workspace and creating new Deployments, or for processes that a [Deployment API key](api-keys.md) can automate. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes.
+Use Workspace API tokens to automate Workspace actions, such as adding users to a Workspace and creating new Deployments, or for processes that a Deployment API key can automate. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes.
 
 To create and use Workspace API tokens, see [Workspace API tokens](workspace-api-tokens.md).
 
@@ -901,7 +923,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 ### Additional improvements
 
 - Ingress to the Airflow UI and API on Astro clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
-- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](manage-hybrid-clusters.md##view-clusters).
+- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/open-support-request). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](manage-hybrid-clusters.md##view-clusters).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 
@@ -1498,7 +1520,7 @@ To learn more about data lineage and how you can configure it on Astro, see:
 
 :::info
 
-This functionality is still early access and under active development. If you have any questions or feedback about this feature, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+This functionality is still early access and under active development. If you have any questions or feedback about this feature, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 :::
 
@@ -1611,7 +1633,7 @@ As of this release, **Maximum Node Count** is now a configurable setting for new
 
 Previously, maximum node count was a fixed, global setting that applied to all customers on Astro and could not be configured per cluster. Now, your organization can modify this setting as your workloads evolve and more Deployments are created. Once the limit is reached, your cluster will not be able to auto-scale and worker pods may fail to schedule.
 
-To update this setting for an existing cluster, reach out to [Astronomer support](https://cloud.astronomer.io/support) and provide the name of your cluster and the desired maximum node count.
+To update this setting for an existing cluster, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the name of your cluster and the desired maximum node count.
 
 ### Additional improvements
 
@@ -1649,7 +1671,7 @@ While it is a good proxy, the tag shown in the Airflow UI does not forcibly repr
 
 This value is also distinct from the **Docker Image** that is shown in the Deployment view of the Cloud UI, which displays the image tag as specified in the Cloud API request that is triggered on `astro deploy`. The image tag in the Airflow UI can be interpreted to be a more accurate proxy to what is running on all components of your Deployment.
 
-If you ever have trouble verifying a code push to a Deployment on Astro, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+If you ever have trouble verifying a code push to a Deployment on Astro, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 :::
 
@@ -1756,7 +1778,7 @@ This also means that all Organizations now have GitHub, Google, and username/pas
 
 ### Additional improvements
 
-- Changed the default RDS instance type for new clusters from `db.r5.xlarge` to `db.r5.large`, which represents a monthly cost reduction of ~50% for newly provisioned clusters. Customers with existing clusters will need to request a downscale via [Astronomer support](https://cloud.astronomer.io/support)
+- Changed the default RDS instance type for new clusters from `db.r5.xlarge` to `db.r5.large`, which represents a monthly cost reduction of ~50% for newly provisioned clusters. Customers with existing clusters will need to request a downscale via [Astronomer support](https://cloud.astronomer.io/open-support-request)
 
 ## January 13, 2022
 
@@ -1856,7 +1878,7 @@ For a full list of AWS regions supported on Astro, see [Resources required for A
 
 ### Additional improvements
 
-- You can now see your Deployment's **Namespace** in the **Deployments** menu and on the Deployment information screen in the Cloud UI. Namespace is a required argument to run tasks with the KubernetesPodOperator. It is also required to submit an issue to [Astronomer support](https://cloud.astronomer.io/support).
+- You can now see your Deployment's **Namespace** in the **Deployments** menu and on the Deployment information screen in the Cloud UI. Namespace is a required argument to run tasks with the KubernetesPodOperator. It is also required to submit an issue to [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
     ![Deployment namespace available on a Deployment's information page](/img/docs/namespace.png)
 
@@ -2009,7 +2031,7 @@ This release introduces a breaking change to code deploys via the Astro CLI. Sta
 
 ### Support for Deployment API keys
 
-Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](set-up-ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
+Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see Deployment API keys. For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](set-up-ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
 
 ## September 3, 2021
 

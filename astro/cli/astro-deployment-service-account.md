@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment service-account"
 title: "astro deployment service-account"
 id: astro-deployment-service-account
-description: Reference documentation for astro deployment service-account
+description: Manage service accounts (Software only).
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 :::info 

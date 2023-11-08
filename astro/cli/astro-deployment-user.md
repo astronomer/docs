@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment user"
 title: "astro deployment user"
 id: astro-deployment-user
-description: Reference documentation for astro deployment user.
+description: Manage Deployment users (Software only).
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 :::info 

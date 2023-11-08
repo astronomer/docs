@@ -27,7 +27,7 @@ To complete the installation, you'll:
 - Create a new Azure subscription with the required Azure resources.
 - Add the IAM service principal to Azure AD that'll be used by Astro.
 
-Astronomer support will create infrastructure within your AWS account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
+Astronomer support will create infrastructure within your AWS account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Prerequisites
 

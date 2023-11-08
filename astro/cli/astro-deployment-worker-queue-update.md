@@ -2,7 +2,8 @@
 sidebar_label: "astro deployment worker-queue update"
 title: "astro deployment worker-queue update"
 id: astro-deployment-worker-queue-update
-description: Reference documentation for astro deployment worker-queue update.
+description: Update a Deployment worker queue.
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update the settings for an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Cloud UI.
