@@ -25,7 +25,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Bug fixes
 
-- Fixed an issue where, you could inadvertently the support request window if you opened a DAG that included "Support" in its name from the **DAGs** view. As a result of this change, the support request window URL has been updated from `https://cloud.astronomer.io/support` to `https://cloud.astronomer.io/open-support-request`.
+- Fixed an issue where, you could inadvertently open the support request window if you opened a DAG that included "Support" in its name from the **DAGs** view. As a result of this change, the support request window URL has been updated from `https://cloud.astronomer.io/support` to `https://cloud.astronomer.io/open-support-request`.
 - Fixed an issue where the Deployment configuration menu in the Cloud UI didn't always show your Deployment's current configuration.
 - Fixed an issue where you could not create a Deployment with some stable Runtime versions using the Astro Platform API.
 
