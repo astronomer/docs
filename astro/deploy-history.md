@@ -32,7 +32,7 @@ astro deploy --description "Added a new 'monitor_weather' DAG"
 
 :::tip
 
-If you deploy to Astro through CI/CD, Astronomer recommends adding the Git commit ID as the description for your deploy. This serves as a reference if you roll back your Deployment and also need to roll back your Git repository.
+If you deploy to Astro through CI/CD, Astronomer recommends adding the Git commit ID or equivalent version ID as the description for your deploy. This serves as a reference if you need to roll back your Git repository when you roll back your Deployment.
 
 :::
 
