@@ -84,8 +84,7 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
    - **Key 1**: `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
    - **Value 1**: `True`
 
-  
-    - **Key 2**: `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
+   - **Key 2**: `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
    - **Value 2**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
    
 6. Click **Save variable**.
