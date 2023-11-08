@@ -221,13 +221,12 @@ module.exports = {
             "resource-reference-hosted",
             {
               type: "category",
-              label: "Connect to external resources",
-              link: {
-                type: 'generated-index',
-                title: 'Connect clusters',
-                description: 'Connect Astro to your existing cloud resources.'
-              },
-              items: ["connect-aws", "connect-azure", "connect-gcp"],
+              label: "Networking",
+              items: [
+                "connect-aws", 
+                "connect-azure", 
+                "connect-gcp"
+            ],
             },
           ],
         },

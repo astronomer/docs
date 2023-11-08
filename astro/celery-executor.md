@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Configure the Celery executor'
+sidebar_label: 'Celery executor'
 title: 'Configure the Celery executor'
 id: 'celery-executor'
 ---
