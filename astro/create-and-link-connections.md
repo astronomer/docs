@@ -21,6 +21,7 @@ When you create a connection in the Cloud UI, you can:
 - Override certain fields in the connection for individual Deployments.
 - Share connections with local Airflow environments.
 - Use connections in branch-based deploys and PR previews.
+- [Import connections](import-export-connections-variables.md) to a local environment.
 
 For example, you can configure a connection with the credentials for a sandbox or development environment. Then, you can later configure your connection to be applied to all Deployments in the workspace by default. This means that when you create new Deployments, they automatically have access to your development environment. Later, you can edit the connection to point to your production resources by using [field overrides](#override-connection-fields).
 
