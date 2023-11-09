@@ -26,15 +26,15 @@ For example, you can configure a connection with the credentials for a sandbox o
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
+## Requirements
+
+- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
+- A Deployment on Astro. See [Create a Deployment](create-deployment.md)
+- Astro Runtime 9.3.0 or greater
+
 ## Create a connection
 
 You can create connections both at the Deployment and Workspace level. When you create a connection at the Deployment level, the connection details are available only to that specific Deployment. When you create a connection at the Workspace level, you can apply the connection to several Deployments and override specific fields as needed for each Deployment. 
-
-### Prerequisites
-
-To make changes to connections, you need `WORKSPACE_OPERATOR` [user permissions](user-permissions.md).
-
-### Setup
 
 To create a connection at the Workspace level:
 
@@ -60,13 +60,6 @@ After you create a connection, you can reference its **Connection ID** from DAG 
 After you create a connection at the Workspace level, you can link it to multiple Deployments. Linking connections is useful for standardizing external resource usage across your entire team. 
 
 For the most flexibility, you can set default connections and override the connection details per-Deployment based on details like the Deployment's usage and environment type (production or development).
-
-### Prerequisites
-- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
-- A Deployment on Astro. See [Create a Deployment](create-deployment.md)
-- A connection created at the Workspace level
-- A local Astro project created with [the Astro CLI](cli/get-started-cli.md)
-- Astro Runtime 9.3.0 or greater
 
 ### Step 1: Link the connection
 
@@ -97,14 +90,6 @@ If you change the setting from **Restricted** to **Linked to all Deployments**, 
 
 ![Edit Deployment Sharing settings in the Environment Manager view](/img/docs/connection-restrict-link-all.png)
 
-### Prerequisites
-- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
-- A Deployment on Astro. See [Create a Deployment](create-deployment.md)
-- A connection linked to a Deployment
-- Astro Runtime 9.3.0 or greater
-
-### Setup
-
 1. Click **Environment** in the main menu to open the **Connections** page.
 2. Click the Connection that you want to add per-Deployment field overrides to.
 3. Click **Deployment Sharing** and toggle the setting to choose either:
@@ -119,70 +104,9 @@ If you create a connection at the Workspace level and link it to a Deployment, y
 
 For example, you might have created a connection to a Snowflake account, and then add field overrides to specify the default schemas or databases you want each Deployment to use. 
 
-### Prerequisites
-- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
-- A Deployment on Astro. See [Create a Deployment](create-deployment.md)
-- A connection linked to a Deployment
-- Astro Runtime 9.3.0 or greater
-
-### Setup
-
 1. Click **Environment** in the main menu to open the **Connections** page.
 2. Click the Connection that you want to add per-Deployment field overrides to.
 3. (Optional) Click **Deployment Sharing** and choose if you want to **Restrict** or **Link to all Deployments**. You can also change the default connection field values.Click **Update connection** to save.
 4. Click **Edit** to open the connection configurations for a specific linked Deployment.
 5. Add the override values to the fields you want to edit. You might need to open **More options** to find the full list of available fields.
 6. Click **Update connection link**.
-
-## Sync connections to work locally
-
-When you create connections in the Cloud UI, you can configure your project to use these connections locally with the Astro CLI.
-
-You can choose to work with a connection depending on whetehr they are [linked to all Deployments](#configure-connection-sharing-for-a-workspace) in your Workspace, or working with just one Deployment by specifying the `workspace-id` or `deployment-id` when starting your local project.
-
-When you start your project with these settings, the Astro CLI will first fetch the necessary connections from Astro. Then, after the local Airflow containers start, Astro populates the metadata database with those connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
-
-### Prerequisites
-- Install or update the latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
-- A connection linked to a Deployment
-- A local [Astro Project](https://docs.astronomer.io/astro/cli/get-started-cli#step-1-create-an-astro-project)
-- Astro Runtime 9.3.0 or greater
-
-### Setup 
-
-1. Enable local development access to connections created in the Cloud UI.
-
-    ```zsh
-    # -g sets this config globally
-    astro config set -g disable_env_objects false
-    ```
-
-2. Log in to Astro and choose your Organization and Deployment when prompted.
-
-    ```zsh
-
-    astro login <domain name>
-    ```
-
-3. Retrieve the ID of either the Workspace or Deployment that you want to import connections from. 
-
-    - **Import Workspace-level connections:** 
-    ```zsh
-    astro workspace list
-    ```
-    - **Import Deployment-level connections:**
-    ```zsh
-    astro deployment list
-    ```
-
-3. Start your project locally.
-
-    - **Using connections linked to all Deployments in a workspace** 
-    ```zsh
-    astro dev start --workspace-id [workspace-id]
-    ```
-
-    - **Using connections in one Deployment**
-    ```zsh
-    astro dev start --deployment-id [deployment-id]
-    ```
