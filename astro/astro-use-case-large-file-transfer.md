@@ -14,7 +14,7 @@ Moving large files is a common ETL/ELT operation that necessitates a parallelize
 Before trying this example, make sure you have:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- [Docker Desktop](https://www.docker.com/products/docker-desktop).
+- An [Astro account](https://www.astronomer.io/try-astro/) with at least one [Astro Deployment](create-deployment.md).
 
 ## Clone the project
 
@@ -109,23 +109,6 @@ This use case shows how to move large files from one S3 bucket to another. To ad
 - `complete_multipart_upload_func`: completes a multipart upload.
 
 :::
-
-## Run the project locally
-
-To run the example project locally, first make sure [Docker](https://docs.docker.com/) is running. Then, open your project directory and run:
-
-```sh
-astro dev start
-```
-
-This command builds your project and spins up 6 Docker containers on your machine to run it:
-
-- The Airflow webserver, which runs the Airflow UI and can be accessed at `https://localhost:8080/`.
-- The Airflow scheduler, which is responsible for monitoring and triggering tasks.
-- The Airflow triggerer, which is an Airflow component used to run [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
-- The Airflow metadata database, which is a Postgres database that runs on port `5432`.
-
-To run the project, provide your own mapping of source and destination connections, buckets and keys in the `load_files_in_chunks.py` file.
 
 ## Project contents
 
