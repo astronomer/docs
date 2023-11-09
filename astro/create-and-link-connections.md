@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Create connections in Astro'
-title: 'Create Airflow connections in the Astro Cloud UI'
+title: 'Create Airflow connections in the Cloud UI'
 id: create-and-link-connections
 description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
@@ -95,7 +95,7 @@ When you're ready for your Deployments to connect to your production environment
 
 If you change the setting from **Restricted** to **Linked to all Deployments**, Astro respects any Connection Field Overrides that you might have configured for existing linked Deployments.
 
-    ![Edit Deployment Sharing settings in the Environment Manager view](/img/docs/connection-restrict-link-all.png)
+![Edit Deployment Sharing settings in the Environment Manager view](/img/docs/connection-restrict-link-all.png)
 
 ### Prerequisites
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
@@ -164,13 +164,13 @@ When you start your project with these settings, the Astro CLI will first fetch 
     astro login <domain name>
     ```
 
-3. Retrieve your Workspace ID or Deployment ID, depending on which 
+3. Retrieve the ID of either the Workspace or Deployment that you want to import connections from. 
 
-    - **Using connections linked to all Deployments in a workspace** 
+    - **Import Workspace-level connections:** 
     ```zsh
     astro workspace list
     ```
-    - **Deployment ID**
+    - **Import Deployment-level connections:**
     ```zsh
     astro deployment list
     ```
