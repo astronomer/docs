@@ -110,7 +110,6 @@ module.exports = {
         label: 'Security and compliance',
         items: [
           'secrets-backend',
-          'integrate-auth-system',
           'custom-image-registry',
           'third-party-ingress-controllers',
           'self-signed-certificate',
@@ -121,8 +120,9 @@ module.exports = {
         type: 'category',
         label: 'User access and management',
         items: [
-        'manage-workspaces',
+        'integrate-auth-system',
         'import-idp-groups',
+        'manage-workspaces',
         'workspace-permissions',
         'manage-platform-users',
         'integrate-iam',

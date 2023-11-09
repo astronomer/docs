@@ -1,25 +1,33 @@
 ---
 sidebar_label: 'Integrate an auth system'
-title: 'Integrate an auth system on Astronomer Software'
+title: 'Configure authentication and configure an identity provider on Astronomer Software'
 id: integrate-auth-system
-description: Integrate your internal authentication server with Astronomer Software.
+description: Integrate your authentication system with Astronomer Software.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-By default, Astronomer Software allows users to create an account and authenticate using one of the following methods:
+An auth system determines how users can log in to Astronomer Software. By default, Astronomer Software allows users to create an account and authenticate using one of the following methods:
 
 - Google OAuth
 - GitHub OAuth
 - Local username/password
 
-Authentication methods are entirely customizable. In addition to the default methods, Astronomer provides the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
+Integrating an external identity provider (IdP) greatly increases the security of your platform. When you integrate your IdP into Astronomer Software:
+
+- Users will no longer have to repeatedly login and remember credentials for their account.
+- You will have complete ownership over credential configuration and management on Astro.
+- You can enforce multi-factor authentication (MFA) for users.
+
+In addition to the default methods, Astronomer provides the option to integrate any IdP that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
 
 - [Microsoft Azure Active Directory (AD)](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc)
 - [Okta](https://www.okta.com)
-- [Auth0](https://auth0.com/)
+- IdPs managed through [Auth0](https://auth0.com/)
 - [Amazon Cognito](https://aws.amazon.com/cognito/)
+
+After you integrate your an IdP, you can invite users that already have an account on your IdP to Astronomer Software. For a more advanced integration, you can configure [SCIM](#manage-users-and-teams-with-scim) so that you can manage users directly from your IdP and import batches of users to Astronomer Software as [Teams](import-idp-groups.md).
 
 :::info
 
@@ -159,55 +167,41 @@ astronomer:
             discoveryUrl: "https://<okta-base-domain>/.well-known/openid-configuration"
 ```
 
-Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+Then, push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
-> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
+> **Note:** `okta-base-domain` will be different from the base domain of your Software installation.See [Okta documentation for finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
 
 </TabItem>
 <TabItem value="autho">
 
-#### Create an Auth0 account
+If you manage your identity provider through Auth0, follow these steps to configure the identity provider for Astro.
 
-You'll need an Auth0 account in order to set up connections with the identity management provider of your choice. [Sign up for an Auth0 account](https://auth0.com/signup) if you need to.
+#### Step 1: Create an Auth0 tenant domain
 
-#### Create Auth0 tenant domain
-
-When you log into Auth0 you'll be prompted to create a tenant domain. You can use the default or your own unique `tenant-name`. Your full tenant domain will look something like `astronomer.auth0.com`.
+Follow the Auth0 documentation to [create a tenant](https://auth0.com/docs/get-started/auth0-overview/create-tenants). You can use the default domain name or your own unique `tenant-name`. Your full tenant domain will look something like `astronomer.auth0.com`.
 
 > **Note:** Your full tenant domain may differ if you've created it outside of the United States.
 
-#### Create a connection between Auth0 and your identity management provider
+#### Step 2: Create a connection between Auth0 and your identity management provider
 
-Depending on the Identity Management Provider you'd like to use, the steps required to establish a connection will vary.
+Follow steps in the the Auth0 [connection guide](https://auth0.com/docs/identityproviders) for your identity provider to create an integration between your tenant and identity provider. 
 
-For instructions, navigate to Auth0's [connection guides](https://auth0.com/docs/identityproviders) and select the identity provider of your choice. Once your connection is established, read below.
+#### Step 3: Configure Auth0 application settings
 
-#### Configure Auth0 application settings
+1. Go to `https://manage.auth0.com/dashboard/us/<tenant-name>/applications`.
+2. Under **Applications**, select **Default App**.
+3. Open the **Connections** tab. You should see your new connection here. Enable your new connection, and disable any connections that you won't be using.
+4. Open the **Settings** tab.
+5. Under **Allowed Callback URLs**, add `https://houston.<your-astronomer-base-domain>/v1/oauth/redirect/`.
+6. Under **Allowed Logout URLs**, add `https://app.<your-astronomer-base-domain>/logout`.
+7. Under **Allowed Origins (CORS)**, add `https://*.<your-astronomer-base-domain>`.
+8. Go to `https://manage.auth0.com/dashboard/us/<tenant-name>/apis`.
+9. Click `+ Create API`.
+10. Under **Name**, enter `astronomer-ee`.
+11. Under **Identifier**, enter `astronomer-ee`.
+12. Leave the value under **Signing Algorithm** as `RS256`.
 
-**Enable / disable desired connections:**
-
-* Navigate to `https://manage.auth0.com/dashboard/us/<tenant-name>/applications`.
-* Under `Applications`, select `Default App`.
-* Click the `Connections` tab. You should see your connection created in Step 3 listed here. Enable your new connection, and disable any connections that you won't be using.
-
-**Edit the Default App settings:**
-
-* Navigate to `https://manage.auth0.com/dashboard/us/<tenant-name>/applications`.
-* Under `Applications`, select `Default App`.
-* Click the `Settings` tab.
-* Under `Allowed Callback URLs`, add `https://houston.<your-astronomer-base-domain>/v1/oauth/redirect/`.
-* Under `Allowed Logout URLs`, add `https://app.<your-astronomer-base-domain>/logout`.
-* Under `Allowed Origins (CORS)`, add `https://*.<your-astronomer-base-domain>`.
-
-**Create Auth0 API:**
-
-* Navigate to `https://manage.auth0.com/dashboard/us/<tenant-name>/apis`.
-* Click `+ Create API`.
-* Under `Name`, enter `astronomer-ee`.
-* Under `Identifier`, enter `astronomer-ee`.
-* Leave the value under `Signing Algorithm` as `RS256`.
-
-#### Enable Auth0 in your config.yaml file
+#### Step 4: Enable Auth0 in your config.yaml file
 
 Add the following to your `config.yaml` file in your `astronomer` directory:
 
@@ -235,7 +229,7 @@ Start by creating a user pool in Cognito. You can either review the default sett
 
 Make sure that you create an `App client`, which is the OpenID client configuration that we will use to authenticate against. You do not need to generate a client secret, as Astronomer is a public client that uses implicit flow.
 
-Once the pool and app client are created, head over to the `App integration` >`App client settings` tab and configure these settings:
+Once the pool and app client are created, open `App integration` >`App client settings` and configure the following settings:
 
 - Select an identity provider to use (either the built-in cognito user pool or a federated identity provider).
 - Set the callback URL parameter to `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
@@ -272,16 +266,17 @@ Once you've saved your `config.yaml` file with these values, push it to your pla
 To let users authenticate to Astronomer with a local username and password, follow the steps below.
 
 1. Enable Local Auth in your `config.yaml` file:
-```yaml
-astronomer:
-  houston:
-    config:
-      auth:
-        local:
-          enabled: true
-```
+  
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          auth:
+            local:
+              enabled: true
+    ```
 
-2. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
+1. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
 </TabItem>
 <TabItem value="oidc">
@@ -424,10 +419,12 @@ You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NA
 
 ## Manage users and Teams with SCIM
 
-Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users and Teams based on templates for access and permissions. It also provides better observability through your identity provider for when users and Teams are created or modified across your organization.
+Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users and Teams based on templates that define permission and accesses. It also centralizes user management so that you can configure Astronomer user permissions directly from your identity provider (IdP).
 
 :::info
+
 SCIM works because the IdP pushes updates about users and teams to Astronomer Software. This means your Astronomer Software platform must be connected to the internet to receive those updates. If you are running Astronomer Software without exposing it to the internet, there might be solutions for routing SCIM traffic depending on your combination of cloud provider and IdP. Contact [Astronomer support](https://support.astronomer.io) for more information.
+
 :::
 
 <Tabs
@@ -606,3 +603,7 @@ This setup is primarily used for encrypting the required secrets for [configurin
     ```
 
 4. Save and push your changes. See [Apply a config change](apply-platform-config.md).
+
+## Next steps
+
+After
