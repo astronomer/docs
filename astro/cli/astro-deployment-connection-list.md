@@ -25,6 +25,13 @@ This command only lists Airflow connections that were configured through the Air
 | `--deployment-name` | The name of the Deployment for which to list connections. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
 | `-w`,`--workspace-id`          | List connections for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed           | Any valid Workspace ID                                                         |
 
+## Output
+
+| Output  | Description                                       | Data Type |
+| ------- | ------------------------------------------------- | --------- |
+| `CONNECTION ID`  | The ID you assigned to the connection.                     | String    |
+| `CONN TYPE` | The type of resource your connection connects to. | String    |
+
 ## Examples
 
 ```bash

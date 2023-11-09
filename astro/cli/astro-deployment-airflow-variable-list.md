@@ -25,6 +25,13 @@ This command only lists Airflow variables that were configured through the Airfl
 | `--deployment-name` | The name of the Deployment to list Airflow variables for. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
 | `-w`,`--workspace-id`          | List Airflow variables for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed.           | Any valid Workspace ID                                                         |
 
+## Output
+
+| Output  | Description                                       | Data Type |
+| ------- | ------------------------------------------------- | --------- |
+| `KEY`  | The `key` of the variable's key:value pair.                    | String    |
+| `DESCRIPTION` | The optional description of the variable. | String    |
+
 ## Examples
 
 ```bash
