@@ -19,7 +19,7 @@ This guide explains how to authorize your Deployment to a cloud using workload i
 
 ## Prerequisites
 
-The Astro cluster running your Deployment must be connected to your cloud's network. See [Connect clusters](https://docs.astronomer.io/astro/category/connect-to-external-resources).
+The Astro cluster running your Deployment must be connected to your cloud's network.
 
 ## What is workload identity?
 
