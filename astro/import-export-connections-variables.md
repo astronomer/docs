@@ -130,7 +130,7 @@ See [Use environment variables on Astro](environment-variables.md#add-airflow-co
 
 ## From the Airflow REST API
 
-You can use the [Airflow REST API](airflow-api.md) to import and export connections and variables from a Deployment or local Airflow environment. Note that the Airflow REST API can only access connections and variables thar are stored in the Airflow metadata database.
+You can use the [Airflow REST API](airflow-api.md) to import and export connections and variables from a Deployment or local Airflow environment. Note that the Airflow REST API can only access connections and variables that are stored in the Airflow metadata database.
 
 To export connections from any Airflow environment, you can use the [List Connections API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connections) and [Get Connection API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_connection).
 
