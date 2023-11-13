@@ -40,9 +40,9 @@ astro deployment pool list --deployment-id cl03oiq7d80402nwn7fsl3dmv
 
 # List pools stored in the Deployment "My Deployment"
 astro deployment pool list --deployment-name="My Deployment"
+```
 
 ## Related Commands
 
 - [`astro deployment pool create`](cli/astro-deployment-pool-create.md)
 - [`astro deployment pool update`](cli/astro-deployment-pool-update.md)
-```
