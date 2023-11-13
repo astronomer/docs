@@ -19,8 +19,6 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     
     ![The Azure marketplace search bar. The text 'astro' is entered and the search bar returns the Astro Azure Native ISC Service as a result.](/static/img/docs/azure-search.png)
     
-    After you complete this setup, you can also access Astro from your regular Azure portal URL by going to **Marketplace** > **Private Plans.**
-    
 2. Click **Create**.
     
     ![The create button in the Azure resource configuration page is highlighted](/static/img/docs/azure-create.png)
@@ -35,12 +33,12 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     - **Workspace name:** Enter the name for the Workspace where you will manage and run Deployments.
 
 4. (Optional) Click **Next: Tabs.** Add an Azure tag to the Astro resource to track your resource usage. 
-5. Click **Review + create,**  then click **Create.**
+5. Click **Review + create**, then click **Create.**
 6. Wait for the resource to be created. Currently, this process takes about 2 minutes.
 
 ## Step 2: Access Astro and get started
 
-1. After the resource is created, click **Go to resource.** On the **Overview** page, copy the **SSO Url**. It should look similar to the following:
+1. After the resource is created, click **Go to resource**. On the **Overview** page, copy the **SSO Url**. It should look similar to the following:
     
     ![The Azure SSO URL and the 'copy to clipboard' button](/static/img/docs/azure-sso.png)
     
