@@ -17,11 +17,11 @@ An _Organization_ is the highest management level on Astro. An Organization cont
 
 1. In the search bar for Azure Portal, search `astro` or `airflow`. Then, select **Apache Airflow™ on Astro - An Azure Native ISV Service.**
     
-    ![The Azure marketplace search bar. The text 'astro' is entered and the search bar returns the Astro Azure Native ISC Service as a result.](/static/img/docs/azure-search.png)
+    ![The Azure marketplace search bar. The text 'astro' is entered and the search bar returns the Astro Azure Native ISC Service as a result.](/img/docs/azure-search.png)
     
 2. Click **Create**.
     
-    ![The create button in the Azure resource configuration page is highlighted](/static/img/docs/azure-create.png)
+    ![The create button in the Azure resource configuration page is highlighted](/img/docs/azure-create.png)
     
 3. In the **Basics** tab for your resource, configure the following details:
    
@@ -40,7 +40,7 @@ An _Organization_ is the highest management level on Astro. An Organization cont
 
 1. After the resource is created, click **Go to resource**. On the **Overview** page, copy the **SSO Url**. It should look similar to the following:
     
-    ![The Azure SSO URL and the 'copy to clipboard' button](/static/img/docs/azure-sso.png)
+    ![The Azure SSO URL and the 'copy to clipboard' button](/img/docs/azure-sso.png)
     
     Share this URL with anyone at your company who needs to access your newly created Organization. Any users that access Astro with this URL will automatically be added to your Organization as an Organization Member. You can add them to your Workspace from Astro’s Cloud UI so they can start deploying code and running DAGs. See [Manage users in your Astro Workspace](https://docs.astronomer.io/astro/manage-workspace-users).
     
