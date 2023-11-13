@@ -30,7 +30,7 @@ This command only lists Airflow connections that were configured through the Air
 | Output  | Description                                       | Data Type |
 | ------- | ------------------------------------------------- | --------- |
 | `CONNECTION ID`  | The ID you assigned to the connection.                     | String    |
-| `CONN TYPE` | The type of resource your connection connects to. | String    |
+| `CONN TYPE` | The Airflow connection type. | String    |
 
 ## Examples
 

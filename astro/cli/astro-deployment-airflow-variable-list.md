@@ -29,7 +29,7 @@ This command only lists Airflow variables that were configured through the Airfl
 
 | Output  | Description                                       | Data Type |
 | ------- | ------------------------------------------------- | --------- |
-| `KEY`  | The `key` of the variable's key:value pair.                    | String    |
+| `KEY`  | The `key` of the variable's `key:value` pair.                    | String    |
 | `DESCRIPTION` | The optional description of the variable. | String    |
 
 ## Examples

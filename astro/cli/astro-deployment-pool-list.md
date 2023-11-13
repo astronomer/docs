@@ -29,8 +29,8 @@ This command only lists Airflow pools that were configured through the Airflow U
 
 | Output  | Description                                       | Data Type |
 | ------- | ------------------------------------------------- | --------- |
-| `NAME`  | The name of the Airflow pools                     | String    |
-| `SLOTS` | The number of available worker slots  in the pool to assign tasks. | String    |
+| `NAME`  | The name of the Airflow pool                    | String    |
+| `SLOTS` | The total number of worker slots in the pool | String    |
 
 ## Examples
 
