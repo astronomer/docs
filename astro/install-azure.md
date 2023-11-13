@@ -1,6 +1,7 @@
 ---
-sidebar_label: "Install from the Azure Marketplace"
-title: "Install Astro as an Azure Native ISV service"
+sidebar_label: "Install Astro from Azure Marketplace"
+title: "Install Astro from the Azure Marketplace as an Azure Native ISV service"
+description: "Learn how to install Astro from the Azure marketplace, which is recommended for all Azure-based teams."
 id: install-azure
 ---
 
@@ -16,35 +17,40 @@ An _Organization_ is the highest management level on Astro. An Organization cont
 
 1. In the search bar for Azure Portal, search `astro` or `airflow`. Then, select **Apache Airflow™ on Astro - An Azure Native ISV Service.**
     
-    ![Azure](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/fcb4122e-35a5-47ad-94a1-e143d4916ef9/Screenshot_2023-08-24_at_9.51.54_AM.png)
-        
+    ![The Azure marketplace search bar. The text 'astro' is entered and the search bar returns the Astro Azure Native ISC Service as a result.](/static/img/docs/azure-search.png)
+    
+    After you complete this setup, you can also access Astro from your regular Azure portal URL by going to **Marketplace** > **Private Plans.**
+    
 2. Click **Create**.
     
-    ![Screenshot 2023-08-24 at 9.52.32 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/731a6de7-8a8e-41e6-aaaf-19d38d8edd45/Screenshot_2023-08-24_at_9.52.32_AM.png)
+    ![The create button in the Azure resource configuration page is highlighted](/static/img/docs/azure-create.png)
     
 3. In the **Basics** tab for your resource, configure the following details:
-    - **Subscription** Select the subscription you provided to Astronomer.
-    - **Resource group** Either create or select a resource group. Astronomer recommends creating a new resource group for Astro.
-    - **Resource name** Enter a name for the Astro resource, such as `astro-airflow`.
+   
+    - **Subscription:** Select the subscription you provided to Astronomer.
+    - **Resource group:** Either create or select a resource group. Astronomer recommends creating a new resource group for Astro.
+    - **Resource name:** Enter a name for the Astro resource, such as `astro-airflow`.
     - **Region:** Select a region to host a placeholder Astro Azure resource. This should always be `EASTUS`. Note that this region has no effect on your Astro Hosted Airflow environments. You can still create Airflow environments in any supported Azure region.
     - **Astro Organization name:** Enter a name for your Astro Organization. Astronomer recommends using the name of your company or organization.
-    - **Workspace name** Enter the name for the Workspace where you will manage and run Deployments.
+    - **Workspace name:** Enter the name for the Workspace where you will manage and run Deployments.
+
 4. (Optional) Click **Next: Tabs.** Add an Azure tag to the Astro resource to track your resource usage. 
-5. Click **Review + create**,  then click **Create**.
+5. Click **Review + create,**  then click **Create.**
 6. Wait for the resource to be created. Currently, this process takes about 2 minutes.
 
 ## Step 2: Access Astro and get started
 
-1. After the resource is created, click **Go to resource**. On the **Overview** page, copy the **SSO Url**. It should look similar to the following:
+1. After the resource is created, click **Go to resource.** On the **Overview** page, copy the **SSO Url**. It should look similar to the following:
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cdc90429-fe4e-4183-a516-bdbc148dfc59/Untitled.png)
+    ![The Azure SSO URL and the 'copy to clipboard' button](/static/img/docs/azure-sso.png)
     
     Share this URL with anyone at your company who needs to access your newly created Organization. Any users that access Astro with this URL will automatically be added to your Organization as an Organization Member. You can add them to your Workspace from Astro’s Cloud UI so they can start deploying code and running DAGs. See [Manage users in your Astro Workspace](https://docs.astronomer.io/astro/manage-workspace-users).
     
-    <aside>
-    💡 If a user belongs to the same Azure organization where your created your Astro resource, they can log in without using the SSO URL by entering their email at `cloud.astronomer.io`. Astro will automatically identify their email address as belonging to your organization and log them into Astro as an Organization Member.
+    :::tip
     
-    </aside>
+    If a user belongs to the same Azure organization where your created your Astro resource, they can log in without using the SSO URL by entering their email at `cloud.astronomer.io`. Astro will automatically identify their email address as belonging to your organization and log them into Astro as an Organization Member.
+    
+    :::
     
 2. Click **Go to Astro**. You will be redirected and logged in to the Cloud UI, which is Astro’s primary interface for managing your Airflow environments. 
 3. Follow the [Astro quickstart](https://docs.astronomer.io/astro/first-dag-cli) to run your first DAG on Astro.
