@@ -106,7 +106,7 @@ The example code from this tutorial is also available on [GitHub](https://github
           - airflow
     ```
 
-4. To create an [Airflow connection](connections.md) to Weaviate, add the following environment variable to your `.env` file. You only need to provide an `X-OpenAI-Api-Key` if you plan on using the OpenAI API for vectorization.
+4. To create an [Airflow connection](connections.md) to the local Weaviate instance, add the following environment variable to your `.env` file. You only need to provide an `X-OpenAI-Api-Key` if you plan on using the OpenAI API for vectorization.
 
     ```text
     AIRFLOW_CONN_WEAVIATE_DEFAULT='{
@@ -147,70 +147,15 @@ Create a new file called `movie_data.txt` in the `include` directory, then copy 
 
 1. In your `dags` folder, create a file called `query_movie_vectors.py`.
 
-2. Copy the following code into the file.
+2. Copy the following code into the file. If you want to use `text2vec-openai` for vectorization, change the `VECTORIZER` variable to `text2vec-openai` and make sure you provide an OpenAI API key in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` in your `.env` file. 
 
     <CodeBlock language="python">{query_movie_vectors}</CodeBlock>
 
     This DAG consists of five tasks to make a simple ML orchestration pipeline.
 
-    - The `check_for_class` task uses the [WeaviateHook](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/_api/airflow/providers/weaviate/hooks/weaviate/index.html) to check if a class of the name `CLASS_NAME` already exists in your Weaviate instance. The task is defined using the [`@task.branch` decorator](airflow-branch-operator.md#taskbranch-branchpythonoperator) and returns the the id of the task to run next based on whether the class of interest exists. If the class exists, the DAG runs the empty `schema_exists` task. If the class does not exist, the DAG runs the `create_schema` task.
-    - The `create_schema` task uses the WeaviateHook to create the schema defined by `movie_schema.json` in Weaviate. 
+    - The `check_for_class` task uses the [WeaviateHook](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/_api/airflow/providers/weaviate/hooks/weaviate/index.html) to check if a class of the name `CLASS_NAME` already exists in your Weaviate instance. The task is defined using the [`@task.branch` decorator](airflow-branch-operator.md#taskbranch-branchpythonoperator) and returns the the id of the task to run next based on whether the class of interest exists. If the class exists, the DAG runs the empty `class_exists` task. If the class does not exist, the DAG runs the `create_class` task.
+    - The `create_class` task uses the WeaviateHook to create a class with the `CLASS_NAME` and specified `VECTORIZER` in your Weaviate instance.
     - The `import_data` task is defined using the [WeaviateIngestOperator](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/operators/weaviate.html) and ingests the data into Weaviate. You can run any Python code on the data before ingesting it into Weaviate by providing a callable to the `input_json` parameter. This makes it possible to create your own embeddings or complete other transformations before ingesting the data. In this example we use automatic schema inference and vector creation by Weaviate.
-
-        ```python
-        def import_data_func(text_file_path: str, class_name: str):
-            "Read the text file and create a list of dicts for ingestion to Weaviate."
-            with open(text_file_path, "r") as f:
-                lines = f.readlines()
-
-                num_skipped_lines = 0
-                data = []
-                for line in lines:
-                    parts = line.split(":::")
-                    title_year = parts[1].strip()
-                    match = re.match(r"(.+) \((\d{4})\)", title_year)
-                    try:
-                        title, year = match.groups()
-                        year = int(year)
-                    # skip malformed lines
-                    except:
-                        num_skipped_lines += 1
-                        continue
-
-                    genre = parts[2].strip()
-                    description = parts[3].strip()
-
-                    data.append(
-                        {
-                            "movie_id": generate_uuid5(
-                                identifier=[title, year, genre, description],
-                                namespace=class_name,
-                            ),
-                            "title": title,
-                            "year": year,
-                            "genre": genre,
-                            "description": description,
-                        }
-                    )
-                    # note that to import pre-computed vectors you would add them to the dict
-                    # with the key `Vector`
-
-                print(
-                    f"Created a list with {len(data)} elements while skipping {num_skipped_lines} lines."
-                )
-                return data
-
-        import_data = WeaviateIngestOperator(
-            task_id="import_data",
-            conn_id=WEAVIATE_USER_CONN_ID,
-            class_name=CLASS_NAME,
-            input_json=import_data_func(
-                text_file_path=TEXT_FILE_PATH, class_name=CLASS_NAME
-            ),
-            trigger_rule="none_failed",
-        )
-        ```
-
     - The `query_embeddings` task uses the WeaviateHook to connect to the Weaviate instance and run a query. The query returns the most similar movie to the concepts provided by the user when running the DAG in the next step.
 
 ## Step 4: Run your DAG
