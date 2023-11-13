@@ -13,7 +13,7 @@ After you create connections and variables in an Airflow environment, you might 
 
 Based on the [management strategy for your connections and variables](manage-connections-variables.md), their storage location will vary. Use this document to learn how to export and import them from one environment to another. 
 
-## From the Astro Cloud UI
+## From the Cloud UI
 
 :::caution
 
@@ -21,15 +21,13 @@ This feature is in [Public Preview](feature-previews.md).
 
 :::
 
-When you [create connections in the Cloud UI](create-and-link-connections.md) to share across Deployments in a Workspace, you can also configure your project to use these connections locally with the Astro CLI. These connections are not visible from the Airflow UI
+You can share Airflow connections created through the [Environment Manager in the Cloud UI](create-and-link-connections.md) with local Airflow projects. These connections are not visible from the Airflow UI when you run your project locally.
 
-You can choose to work with a connection depending on whetehr they are [linked to all Deployments](#configure-connection-sharing-for-a-workspace) in your Workspace, or working with just one Deployment by specifying the `workspace-id` or `deployment-id` when starting your local project.
-
-When you start your project with these settings, the Astro CLI will first fetch the necessary connections from Astro. Then, after the local Airflow containers start, Astro populates the metadata database with those connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
+When you start a local project using `astro dev start`, you specify either the Workspace or Deployment that you want to import connections from. When you start your project with these settings, the Astro CLI fetches the necessary connections from Astro. Then, after the local Airflow containers start, the Astro CLI populates the metadata database with the connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
 
 ### Prerequisites
-- Install or update the latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
-- A connection linked to a Deployment
+- The latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
+- Either a Workspace or Deployment with at least one connection [configured through the Cloud UI](create-and-link-connections.md).
 - A local [Astro Project](https://docs.astronomer.io/astro/cli/get-started-cli#step-1-create-an-astro-project)
 - Astro Runtime 9.3.0 or greater
 - An internet connection
@@ -43,21 +41,18 @@ When you start your project with these settings, the Astro CLI will first fetch 
     astro config set -g disable_env_objects false
     ```
 
-2. Log in to Astro and choose your Organization and Deployment when prompted.
+2. Log in to Astro.
 
     ```zsh
-
     astro login <domain name>
     ```
 
 3. Retrieve the ID of either the Workspace or Deployment that you want to import connections from. 
 
-    - **Import Workspace-level connections:** 
     ```zsh
+    # Retrieve Workspace IDs
     astro workspace list
-    ```
-    - **Import Deployment-level connections:**
-    ```zsh
+    # Retrieve Deployment IDs
     astro deployment list
     ```
 

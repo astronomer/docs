@@ -55,14 +55,14 @@ The following sections explain the benefits, limitations, and implementations of
 
 ### Astro Cloud UI Environment Manager
 
-Astro provides connection management capabilities that behave like you are using an Astro-managed secrets backend. It gives you the quickest way to create connections through the Cloud UI, in the **Environment** tab. After you make a connection, you can choose to restrict it to specific Deployments or share it with multiple Deployments in the Workspace.
+Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Cloud UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis.
 
 #### Benefits
 
 - It securely stores your connection configuration and authentication information on Astro, without a secrets backend.
 - You can create a connection once for a Deployment and then add it to multiple Deployments.
 - Authenticate connections using credentials other than what the Airflow UI supports.
-- After you configure a connection, the authentication information is securely stored in Astro using Hashicorp vault.
+- After you configure a connection, the authentication information is securely stored in an Astro-managed secrets backend.
 - Control whether connections can be used in a single Deployment or shared across Deployments in a Workspace.
 - Override certain fields in the connection per Deployment, so you can create a general connection and then customize its behavior.
 
@@ -71,7 +71,8 @@ Astro provides connection management capabilities that behave like you are using
 - If you create a connection in the Cloud UI, you also need to add its related provider package to the `requirements.txt` file in your Astro project.
 - Only available with Astro Runtime 9.3.0 and greater.
 - You can't see connections defined in the Cloud UI in the Airflow UI.
-- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` user permissions.
+- You need`WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` user permissions.
+- You can't programmatically import connections to the Environment Manager from your local environment. 
 
 ### Airflow UI
 
