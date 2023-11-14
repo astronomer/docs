@@ -33,7 +33,7 @@ Astronomer support will create infrastructure within your AWS account to host th
 
 - A new [Azure subscription](https://learn.microsoft.com/en-us/dynamics-nav/how-to--sign-up-for-a-microsoft-azure-subscription). For security reasons, Azure subscriptions with existing infrastructure aren't supported. Also, no [Azure policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) should be applicable to the subscription's [Azure management group](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 
-- An Microsoft Entra ID user with the following role assignments:
+- A Microsoft Entra ID user with the following role assignments:
 
     - `Application Administrator`. See [Understand roles in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/concept-understand-roles).
 

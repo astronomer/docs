@@ -159,7 +159,7 @@ This section provides setup steps for setting up Microsoft Entra ID as your IdP 
 To integrate Azure as your IdP for Astro you must have:
 
 - An Azure subscription.
-- An [Microsoft Entra ID tenant](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-create-new-tenant) with `Global Administrator` privileges.
+- A [Microsoft Entra ID tenant](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-create-new-tenant) with `Global Administrator` privileges.
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - At least one [verified domain](manage-domains.md).
 
