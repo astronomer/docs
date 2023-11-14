@@ -426,7 +426,7 @@ This task checks if a Snowpark model registry exists in the specified database a
         return _attribution_touches, _mrr, _customers
 ```
 
-The second task group, “structured_data”, uses several dynamically generated task groups to load many structured datasets into our Snowflake database, before transforming them using snowpark, all in parallel. 
+The second task group, “structured_data”, uses several dynamically generated task groups to load many structured datasets into the Snowflake database, before transforming them using Snowpark, all in parallel. 
 
 Task Group load_structured_data:
 This task group creates parallel tasks to upload structured datasets from a public S3 bucket into the Snowflake database. 
