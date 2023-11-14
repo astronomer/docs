@@ -432,7 +432,7 @@ Task Group load_structured_data:
 This task group creates parallel tasks to upload many structured datasets from an Astronomer hosted S3 bucket into our Snowflake database. 
 
 Task Group transform_structured: 
-This task group uses Snowpark python to transform the structured data to get them in the proper format for the presentation layer and joining with prediction on the unstructured data and the sentiment classifier. 
+This task group uses Snowpark Python to transform the structured data into the proper format for the presentation layer and joining with prediction on the unstructured data and the sentiment classifier. 
 
 ```python
     @task_group()
