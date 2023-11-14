@@ -245,7 +245,7 @@ running any tasks, since we are assuming you are starting with a fresh trial acc
 The DAG then runs the “enter” task group, which includes 3 tasks to set up a Weaviate database, and create a Snowpark model registry if none exists already:
 
 Task download_weaviate_backup: 
-In order to speed up the demo process the data has already been ingested into Weaviate and vectorized.  The data was then backed up and stored in the cloud for easy restore. This task will download the backup.zip and make it available in a docker mounted filesystem for the restore_weaviate task.
+In order to speed up the demo process, the data has already been ingested into Weaviate and vectorized.  The data was then backed up and stored in the cloud for easy restore. This task will download the backup.zip and make it available in a docker mounted filesystem for the `restore_weaviate` task.
 
 Task restore_weaviate: 
 This task exists only to speedup the demo in subsequent runs. By restoring prefetched embeddings to Weaviate the later tasks will skip embeddings and only make calls to OpenAI for data it hasn't yet embedded.
