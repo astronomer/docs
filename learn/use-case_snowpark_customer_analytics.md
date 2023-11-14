@@ -40,7 +40,7 @@ Before trying this example, make sure you have:
 - (Optional) OpenAI account or [Trial Account](https://platform.openai.com/signup)
 
 
-## Set-up the project
+## Clone the project
 
 Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/airflow-snowparkml-demo/tree/main).
 
