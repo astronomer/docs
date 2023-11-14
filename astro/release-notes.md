@@ -23,11 +23,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## November 14, 2023
 
-### Share connections between Deployments using the new Environment Manager
-
-The Environment Manager is a new feature in the Cloud UI that lets manage Airflow connections across Deployments in a Workspace. It lets you create Airflow connections directly from the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments.
-
-See [Create connections in Astro](https://docs.astronomer.io/astro/create-and-link-connections) for configuration steps. 
 
 ### Install Astro from the Azure Marketplace
 
