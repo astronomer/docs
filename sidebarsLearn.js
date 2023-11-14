@@ -262,7 +262,8 @@ module.exports = {
           'use-case-elt-ml-finance',
           'use-case-airflow-llm-rag-finance',
           'use-case-airflow-ml-datasets',
-          'use-case-airflow-mlflow'
+          'use-case-airflow-mlflow',
+          'use-case-ml-airflow-snowpark-weaviate
       ],
     },
     'airflow-glossary'
