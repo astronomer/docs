@@ -99,6 +99,18 @@ Deployment API keys have been officially deprecated in favor of [Deployment API 
 
 ## October 24, 2023
 
+### New Azure regions available on Astro Hosted
+
+<HostedBadge/>
+
+You can now create Deployments in standard clusters in the following Azure regions:
+
+- `eastus2`  
+- `westus2`
+- `westeurope` 
+
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+
 ### Bug fixes
 
 - Fixed an issue where Deployment API tokens weren't deleted after their associated Deployment was deleted.
