@@ -98,7 +98,7 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 #### Step 1: Authorize the Deployment in your cloud
 
-To grant a Deployment access to a service that is running in a GCP account not managed by Astronomer, use your Deployment's workload identity. Workload identity is basically a service account in GCP that's used to manage the level of access for a specific user, object, or group of users to a resource, such as Google BigQuery, GCS bucket, etc.
+To grant a Deployment access to a service that is running in a GCP account not managed by Astronomer, use your Deployment's workload identity. Workload identity is a service account in GCP that's used to manage the level of access for a specific user, object, or group of users to a resource, such as Google BigQuery or a GCS bucket.
 
 To authorize your Deployment, grant the required access to your Deployment's workload identity:
 
@@ -128,7 +128,25 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 3. Click **Save**. 
     
     If you don't see **Google Cloud** as a connection type, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Google/versions/latest) for the latest package.
-    
+
+#### Alternative setup: Use GCP Service Account Impersonation
+
+[GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) allows your Deployment workload identity to assume an existing service account on your GCP project. Complete this setup if you want your Deployment to only use short-lived credentials to connect to your cloud, rather than a dedicated IAM role. 
+
+1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the Google project that you want your Deployment to access. Copy the service account ID to user later in this setup.
+2. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
+3. Grant the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) IAM role to the principal account, also known as your Deployment's workload identity. See [Grant a single role.](https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role).
+4. Complete one of the following options for your Deployment to access your cloud resources:
+
+    - Create a **Google Cloud** connection type in Airflow and configure the following values:
+        - **Connection Id**: Enter a name for the connection.
+        - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
+    - Run the following command to create an environment variable that connects your Deployment to your GCP secrets backend:
+
+    ```zsh
+    astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
+    ```
+
 </TabItem>
 </Tabs>
 
