@@ -429,7 +429,7 @@ This task checks if a Snowpark model registry exists in the specified database a
 The second task group, “structured_data”, uses several dynamically generated task groups to load many structured datasets into our Snowflake database, before transforming them using snowpark, all in parallel. 
 
 Task Group load_structured_data:
-This task group creates parallel tasks to upload many structured datasets from an Astronomer hosted S3 bucket into our Snowflake database. 
+This task group creates parallel tasks to upload structured datasets from an Astronomer hosted S3 bucket into the Snowflake database. 
 
 Task Group transform_structured: 
 This task group uses Snowpark Python to transform the structured data into the proper format for the presentation layer and joining with prediction on the unstructured data and the sentiment classifier. 
