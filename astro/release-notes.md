@@ -21,6 +21,41 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## November 14, 2023
+
+### Share connections between Deployments using the new Environment Manager
+
+The Environment Manager is a new feature in the Cloud UI that lets manage Airflow connections across Deployments in a Workspace. It lets you create Airflow connections directly from the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments.
+
+See [Create connections in Astro](https://docs.astronomer.io/astro/create-and-link-connections) for configuration steps. 
+
+### Install Astro from the Azure Marketplace
+
+Astro is now available as an Azure Native ISV Service. If your team is considering Astro and you use Azure, Astronomer recommends installing Astro from the Azure Marketplace so that you can manage it alongside your other Azure services. See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure).
+
+### Trigger a DAG from an Astro alert
+
+You can now configure [Astro alerts](https://docs.astronomer.io/astro/alerts) to trigger any DAG in your Workspace through the Airflow REST API. You can configure the triggered DAG to complete any action, such as sending an alert through a custom communication channel or writing data about the incident to a table.
+
+### New Azure regions available on Astro Hosted
+
+<HostedBadge/>
+
+You can now create Hosted dedicated clusters in the following Azure regions:
+
+- `eastus`  
+- `canadacentral`
+- `uksouth` 
+- `brazilsouth`     
+- `centralindia`
+- `francecentral`
+
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+
+### Bug fixes
+
+- Fixed an issue where you could not create worker queues with specific instance types on Hosted dedicated clusters.
+
 ## November 7, 2023
 
 ### Roll back Deployments to previous versions of your code
