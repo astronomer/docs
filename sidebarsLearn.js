@@ -211,6 +211,7 @@ module.exports = {
         'airflow-mlflow',
         'airflow-mongodb',
         'connections/ms-sqlserver',
+        'airflow-openai',
         {
           type: 'category',
           label: 'Redshift',
