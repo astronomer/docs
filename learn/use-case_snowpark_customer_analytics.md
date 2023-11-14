@@ -89,7 +89,7 @@ After the command finishes, open the the [Airflow UI](http://localhost:8080/) an
 Once the DAG has completed, you can view the results in a Streamlit customer analytics dashboard. 
 Streamlit has been installed alongside the Airflow UI in the webserver container, and there's a script in the include directory called `streamlit_app.py` that you'll use to create the dashboard.
 
-To do so, first go to your projects root directory and connect to the webserver container with the Astro CLI
+To do so, first go to your project's root directory and connect to the webserver container with the Astro CLI
 ```bash
 astro dev bash -w
 ``` 
