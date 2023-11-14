@@ -123,7 +123,7 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 :::tip
 
-See the Weaviate documentation on [environment variables](https://weaviate.io/developers/weaviate/config-refs/env-vars), [modules](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) and [client instantiation](https://weaviate.io/developers/academy/zero_to_mvp/hello_weaviate/hands_on#-client-instantiation) for more information on configuring a Weaviate instance and connection.
+See the Weaviate documentation on [environment variables](https://weaviate.io/developers/weaviate/config-refs/env-vars), [modules](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules), and [client instantiation](https://weaviate.io/developers/academy/zero_to_mvp/hello_weaviate/hands_on#-client-instantiation) for more information on configuring a Weaviate instance and connection.
 
 :::
 
