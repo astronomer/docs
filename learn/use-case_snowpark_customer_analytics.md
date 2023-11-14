@@ -16,7 +16,7 @@ This [use case](https://docs.astronomer.io/learn/airflow-snowpark) demonstrates 
 
 This demonstration shows how to build a customer analytics dashboard.  Sissy-G Toys is a fictitious online retailer for toys and games.  The GroundTruth customer analytics application provides marketing, sales and product managers with a one-stop-shop for analytics.  The application uses machine learning models for audio transcription, natural language embeddings and sentiment analysis on structured, semi-structured and unstructured data. All of the processing and prediction work is managed by Airflow, leveraging Snowparks compute and proximity to Snowflake data
 
-This demo also shows the use of the Snowflake XCOM backend which supports security and governance by serializing all task in/output to Snowflake tables and stages while storing in the Airflow XCOM table a URI pointer to the data.
+This demo also shows the use of the Snowflake XCom backend which supports security and governance by serializing all task in/output to Snowflake tables and stages while storing in the Airflow XCom table a URI pointer to the data.
 
 This workflow includes:
 - sourcing structured, unstructured and semistructured data from different systems
