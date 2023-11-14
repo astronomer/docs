@@ -94,7 +94,7 @@ To do so, first go to your project's root directory and connect to the webserver
 astro dev bash -w
 ``` 
 
-Then, run the following command to start Streamlit
+Then, run the following command to start Streamlit.
 ```bash
 cd include/streamlit/src
 python -m streamlit run ./streamlit_app.py
