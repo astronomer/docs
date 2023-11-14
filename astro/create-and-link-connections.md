@@ -11,14 +11,14 @@ This feature is in [Public Preview](feature-previews.md).
 
 :::
 
-You can create and manage connections across Deployments with the Astro Environment Manager in the Cloud UI. This strategy of connection management uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
+You can create and manage Airflow connections for Deployments with the Astro Environment Manager in the Cloud UI. The Environment Manager uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
 
 Using the Environment Manager, you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend. You can also create a connection once and use it across multiple Airflow Deployments. 
 
 Compared to creating a connection in the Airflow UI, when you create a connection in the Cloud UI, you can:
 
 - Share the connection with multiple Deployments within the Workspace.
-- Override certain fields in the connection for individual Deployments.
+- Override fields in the connection for individual Deployments.
 - Share connections with local Airflow environments. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
 - Use connections in branch-based deploys and PR previews.
 - [Import connections](import-export-connections-variables.md) to a local environment.

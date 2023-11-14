@@ -63,7 +63,7 @@ When you start a local project using `astro dev start`, you specify either the W
     astro dev start --workspace-id [workspace-id]
     ```
 
-    - **Using connections in one Deployment**
+    - **Using Deployment-level connections**
     ```zsh
     astro dev start --deployment-id [deployment-id]
     ```
