@@ -34,7 +34,7 @@ Some user management features on Astro behave differently after you set up SCIM 
 
 Astro supports SCIM provisioning with the following IdPs:
 
-- [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Microsoft Entra ID](https://www.microsoft.com/en-us/security/business/microsoft-entra)
 - [Okta](https://www.okta.com/)
 
 ### Supported Okta features
@@ -142,7 +142,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 9. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
 10. In the **Attribute Mappings** table, add the following mappings:
 
-    | Azure Active Directory Attribute | Astro Attribute |
+    | Microsoft Entra ID Attribute | Astro Attribute |
     | -------------------------------- | --------------- |
     | displayName                      | displayName     |
     | members                          | members         |
@@ -155,7 +155,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 12. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
 13. In the **Attribute Mappings** table, add the following mappings:
 
-    | Azure Active Directory Attribute                            | Astro Attribute |
+    | Microsoft Entra ID Attribute                            | Astro Attribute |
     | ----------------------------------------------------------- | --------------- |
     | userPrincipalName                                           | userName        |
     | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |

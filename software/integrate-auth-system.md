@@ -16,7 +16,7 @@ Astronomer Software by default allows users to create an account with and authen
 
 Authentication methods are entirely customizable. In addition to the default methods, Astronomer provides the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
 
-- [Microsoft Azure Active Directory (AD)](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc)
+- [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols-oidc)
 - [Okta](https://www.okta.com)
 - [Auth0](https://auth0.com/)
 
@@ -109,7 +109,7 @@ Follow these steps to configure Microsoft Entra ID as your OIDC provider.
 
 #### Register the Application using `App Registrations` on Azure
 
-1. In Azure Active Directory, click **App registrations** > **New registration**. 
+1. In Microsoft Entra ID, click **App registrations** > **New registration**. 
 2. Complete the following sections:
   
     - **Name**: Any
@@ -535,7 +535,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 12. Click **Test connection** in the Microsoft Entra ID application management menu to confirm your connection to the SCIM endpoint.
 
-13. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes).
+13. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes).
 
 14. Click **Manage** > **Provisioning** > **Settings**.
 

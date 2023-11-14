@@ -16,7 +16,7 @@ Astronomer Software by default allows users to create an account with and authen
 
 Authentication methods are entirely customizable. In addition to the default methods, Astronomer provides the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
 
-- [Microsoft Azure Active Directory (AD)](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc)
+- [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols-oidc)
 - [Okta](https://www.okta.com)
 - [Auth0](https://auth0.com/)
 

@@ -38,7 +38,7 @@ To complete this tutorial, you need:
 
 ## Step 1: Configure your ADX cluster to work with Airflow
 
-To allow Airflow to communicate with your ADX database, you need to configure service principal authentication. To do this, create and register an Microsoft Entra ID service principal, then give that principal permission to access your ADX database. See [Create an Azure Active Directory application registration in Azure Data Explorer](https://docs.microsoft.com/en-us/azure/data-explorer/provision-azure-ad-app) for more details.
+To allow Airflow to communicate with your ADX database, you need to configure service principal authentication. To do this, create and register an Microsoft Entra ID service principal, then give that principal permission to access your ADX database. See [Create an Microsoft Entra ID application registration in Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/provision-entra-id-app) for more details.
 
 ## Step 2: Populate your ADX database
 

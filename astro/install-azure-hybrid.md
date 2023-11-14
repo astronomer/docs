@@ -35,7 +35,7 @@ Astronomer support will create infrastructure within your AWS account to host th
 
 - An Microsoft Entra ID user with the following role assignments:
 
-    - `Application Administrator`. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+    - `Application Administrator`. See [Understand roles in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/concept-understand-roles).
 
     - `Owner` with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles).
 

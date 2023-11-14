@@ -32,7 +32,7 @@ To limit users to only a subset of these options, see [Restrict authentication o
 
 Single Sign On (SSO) authorization allows users to log in using their company credentials, managed through an IdP. This provides a streamlined login experience for your Astro users, as they are able to leverage the same credentials across multiple applications. In addition, this provides improved security and control for organizations to manage access from a single source. Astro supports integrations with the following IdPs:
 
-- [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Microsoft Entra ID)](https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing)
 - [Okta](https://www.okta.com/)
 - [OneLogin](https://www.onelogin.com/)
 - [Ping Identity](https://www.pingidentity.com/en.html)
