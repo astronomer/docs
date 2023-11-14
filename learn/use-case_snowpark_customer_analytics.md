@@ -48,7 +48,7 @@ Clone the example project from the [Astronomer GitHub](https://github.com/astron
 git clone https://github.com/astronomer/airflow-snowparkml-demo
 cd airflow-snowparkml-demo 
 ```
-:::Note
+::: Note
 Open the `.env` file in an editor and update the following variables with you account information. You only need to update the Snowflake Connection details to be able to run the Customer Analytics DAG. However, if you'd like to enable chat capabilities in the final streamlit application, please add an OpenAI API key where designated in the .env file as well. 
 
 This demo assumes the use of a new Snowflake trial account with admin privileges.  A database named 'DEMO' and schema named 'DEMO' will be created in the DAG.  Running this demo without admin privileges or with existing database/schema will require further updates to the `.env` file.
