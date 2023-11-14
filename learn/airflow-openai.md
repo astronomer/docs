@@ -11,7 +11,7 @@ import captains_dag from '!!raw-loader!../code-samples/dags/airflow-openai/capta
 
 [OpenAI](https://openai.com/) is an AI research and deployment company that provides an API for accessing state of the art models like [GPT-4](https://openai.com/gpt-4) or [DALL·E 3](https://openai.com/dall-e-3). The [OpenAI Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-openai/stable/index.html) offers modules to easily integrate OpenAI with Airflow.
 
-In this tutorial you'll use Airflow and the OpenAI Airflow provider to make a call to the [OpenAI API](https://platform.openai.com/docs/api-reference) to generated answers to a question you provide, create embeddings of those answers and plot them in two dimensions. 
+In this tutorial you'll use Airflow and the OpenAI Airflow provider to make a call to the [OpenAI API](https://platform.openai.com/docs/api-reference) to generate answers to a question you provide, create embeddings of those answers, and plot them in two dimensions. 
 
 ## Why use Airflow with OpenAI?
 
@@ -51,7 +51,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     $ astro dev init
     ```
 
-2. Add the following install statement to your `requirements.txt` file to install the OpenAI Airflow provider and other supporting packages:
+2. Add the following packages to your `requirements.txt` file to install the OpenAI Airflow provider and other supporting packages:
 
     ```text
     apache-airflow-providers-openai==1.0.0
