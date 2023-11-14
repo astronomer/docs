@@ -56,7 +56,7 @@ At a high level, to configure an SSO identity provider (IdP) you will:
     groupId= "configure-your-identity-provider"
     values={[
         {label: 'Okta', value: 'Okta'},
-        {label: 'Microsoft Entra ID', value: ME-ID'},
+        {label: 'Microsoft Entra ID', value: 'ME-ID'},
         {label: 'OneLogin', value: 'OneLogin'},
         {label: 'Ping Identity', value: 'Ping Identity'},
     ]}>
