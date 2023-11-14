@@ -76,9 +76,11 @@ To run the example project, first make sure Docker Desktop is running. Then, ope
 ```sh
 astro dev start
 ```
-![A screenshot of the Airflow UI with active Customer Analytics DAG](/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_activeplaybutton_4.png)
+
 
 This command builds your project and spins up 5 Docker containers on your machine to run it. In addition to the 4 standard Airflow containers, a Weaviate container is spun up as well. This allows us to run a fully local Weaviate environment for local development, giving every developer their own dedicated testing environment.
+
+![A screenshot of the Airflow UI with active Customer Analytics DAG](/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_activeplaybutton_4.png)
 
 After the command finishes, open the the [Airflow UI](http://localhost:8080/) and trigger the `customer_analytics` DAG using the play button. Then, monitor its status as it completes via the graph view.
 
