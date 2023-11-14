@@ -7,7 +7,9 @@ id: install-azure
 
 [Astro](https://docs.astronomer.io/astro) is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data.
 
-If your company uses Azure or already manages applications using Azure Native ISV Services, Astronomer recommends installing and accessing Astro through the Azure Marketplace. After you install Astro as an Azure Native ISV Service, you can manage resource usage and billing alongside your existing Azure applications. The installation template hosted in the Azure Marketplace guides you to configure all of the essential resources you need to quickly start running your DAGs in Airflow.
+If your company uses Azure or already manages applications using Azure Native ISV Services, Astronomer recommends installing and accessing Astro through the Azure Marketplace. When you install Astro as an Azure Native ISV Service, you can manage resource usage and billing alongside your existing Azure applications. Additionally, the Azure Native ISV Service is already integrated with Azure AD, so any you can add users from your team to Astro without any additional single sign-on (SSO) configuration. 
+
+The installation template hosted in the Azure Marketplace guides you to configure all of the essential resources you need to quickly start running your DAGs in Airflow.
 
 ## Step 1: Set up Astro on Azure
 
