@@ -84,7 +84,7 @@ This command builds your project and spins up 5 Docker containers on your machin
 
 After the command finishes, open the the [Airflow UI](http://localhost:8080/) and trigger the `customer_analytics` DAG using the play button. Then, monitor its status as it completes via the graph view.
 
-## View Results in Streamlit
+### View Results in Streamlit
 
 Once the DAG has completed, you can look at the results in a Streamlit customer analytics dashboard. 
 Streamlit has been installed alongside the Airflow UI in the webserver container, and there's a script in the include directory called `streamlit_app.py` that you'll use to create the dashboard.
