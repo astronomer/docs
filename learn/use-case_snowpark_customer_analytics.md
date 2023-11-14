@@ -63,7 +63,11 @@ This demo assumes the use of a new Snowflake trial account with admin privileges
 ** The Snowflake `account` field of the connection should use the new `ORG_NAME-ACCOUNT_NAME` format as per [Snowflake Account Identifier policies](https://docs.snowflake.com/en/user-guide/admin-account-identifier).  The ORG and ACCOUNT names can be found in the confirmation email or in the Snowflake login link (ie. `https://xxxxxxx-yyy11111.snowflakecomputing.com/console/login`)
 Do not specify a `region` when using this format for accounts.
   
-NOTE: Database and Schema names should be CAPITALIZED due to a bug in Snowpark ML.
+:::note
+
+Database and Schema names should be CAPITALIZED due to a bug in Snowpark ML.
+
+:::
 
 ## Run the project
 
