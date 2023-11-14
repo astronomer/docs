@@ -248,7 +248,7 @@ Task download_weaviate_backup:
 In order to speed up the demo process, the data has already been ingested into Weaviate and vectorized.  The data was then backed up and stored in the cloud for easy restore. This task will download the backup.zip and make it available in a docker mounted filesystem for the `restore_weaviate` task.
 
 Task restore_weaviate: 
-This task exists only to speedup the demo in subsequent runs. By restoring prefetched embeddings to Weaviate the later tasks will skip embeddings and only make calls to OpenAI for data it hasn't yet embedded.
+This task exists speeds up the demo for subsequent runs. By restoring prefetched embeddings to Weaviate, the later tasks will skip embeddings and only make calls to OpenAI for data it hasn't yet embedded.
 
 Task check_model_registry:
 This task checks if a Snowpark model registry exists in the specified database and schema. If not, it creates one and returns a dictionary containing the database and schema information.
