@@ -96,7 +96,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     - `Question to ask the captain`: The question you want to ask the captains.
     - `captains_to_ask`: A list of captains you want to ask the question to. Make sure to create one line per captain and to provide at least two names.
     - `max_tokens_answer`: The maximum number of tokens available for the answer. 
-    - `randomness_of_answer`: The randomness of the answer. The value provided is given to the `temperature` parameter of the [chat completion endpoint](https://platform.openai.com/docs/guides/text-generation/reproducible-outputs). The scale ranges from 0 to 2, with 0 being the most deterministic and 2 being the most random.
+    - `randomness_of_answer`: The randomness of the answer. The value provided is divided by 10 and given to the `temperature` parameter of the [chat completion endpoint](https://platform.openai.com/docs/guides/text-generation/reproducible-outputs). The scale for the param ranges from 0 to 20, with 0 being the most deterministic and 20 being the most random.
 
     ![Screenshot of the Airflow UI showing the successful completion of the `captains_dag` DAG in the Grid view with the Graph tab selected. All 8 captains available were selected to be asked the question, which led to 8 mapped task instances of both the `ask_a_captain` and `get_embeddings` task.](/img/tutorials/airflow-openai_dag_completed.png)
 
