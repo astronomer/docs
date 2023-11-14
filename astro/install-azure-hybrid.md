@@ -25,7 +25,7 @@ To complete the installation, you'll:
 
 - Create an Astronomer account.
 - Create a new Azure subscription with the required Azure resources.
-- Add the IAM service principal to Azure AD that'll be used by Astro.
+- Add the IAM service principal to Microsoft Entra ID that'll be used by Astro.
 
 Astronomer support will create infrastructure within your AWS account to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
@@ -33,13 +33,13 @@ Astronomer support will create infrastructure within your AWS account to host th
 
 - A new [Azure subscription](https://learn.microsoft.com/en-us/dynamics-nav/how-to--sign-up-for-a-microsoft-azure-subscription). For security reasons, Azure subscriptions with existing infrastructure aren't supported. Also, no [Azure policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview) should be applicable to the subscription's [Azure management group](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 
-- An Azure AD user with the following role assignments:
+- An Microsoft Entra ID user with the following role assignments:
 
     - `Application Administrator`. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
 
     - `Owner` with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles).
 
-    This Azure AD user is required for data plane activation. You can remove the user or modify their role assignments after the cluster is created.
+    This Microsoft Entra ID user is required for data plane activation. You can remove the user or modify their role assignments after the cluster is created.
 
 - [Microsoft Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) or [Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
 
@@ -86,7 +86,7 @@ To create a VNet peering connection, contact [Astronomer Support](https://suppor
 - A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. This CIDR block can't overlap with any Azure VNet(s) that you will peer with later. The default CIDR range is `172.20.0.0/19`.
 - ResourceID, for example: `/subscriptions/<Subscription Id>/resourceGroups/myResourceGroupA/providers/Microsoft.Network/virtualNetworks/myVnetA`. You can find the resource ID in the Azure portal by following step 7 in [Create peering - Azure portal](https://docs.microsoft.com/en-us/azure/virtual-network/create-peering-different-subscriptions#portal).
 
-Additionally, ensure that your Azure AD user has at least one of the following role assignments: 
+Additionally, ensure that your Microsoft Entra ID user has at least one of the following role assignments: 
 
 -  Network Contributor: This permission is required for any VNet deployed through Resource Manager.
 -  Classic Network Contributor: This permission is required for any VNet deployed through the classic deployment model.
@@ -131,7 +131,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
     ```sh
     az account set -s <subscription-id>
     ```
-3. Run the following command to add the Astronomer Service Principal to Azure AD:
+3. Run the following command to add the Astronomer Service Principal to Microsoft Entra ID:
 
     ```sh
     az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0

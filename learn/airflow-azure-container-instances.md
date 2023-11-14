@@ -36,7 +36,7 @@ To complete this tutorial, you need:
 
 ## Step 1: Create an Azure service principal
 
-An Azure service principal is required for external tools like Airflow to connect to your Azure resources. Identify the Azure resource group you want to create your ACI in (or create a new one), then create service principal with write access over that resource group. For more information, see [Use the portal to create an Azure AD application and service principal that can access resources](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
+An Azure service principal is required for external tools like Airflow to connect to your Azure resources. Identify the Azure resource group you want to create your ACI in (or create a new one), then create service principal with write access over that resource group. For more information, see [Use the portal to create an Microsoft Entra ID application and service principal that can access resources](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal).
 
 ## Step 2: Configure your Astro project
 

@@ -58,7 +58,7 @@ Okta's Astro integration supports the following SCIM actions:
     values={[
         {label: 'Okta - Astro integration (Recommended)', value: 'Okta'},
         {label: 'Okta - Manual', value: 'OktaManual'},
-        {label: 'Azure AD', value: 'Azure'},
+        {label: 'Microsoft Entra ID', value: 'ME-ID'},
     ]}>
 <TabItem value= "Okta">
 
@@ -118,18 +118,18 @@ Complete the manual setup if you configured your existing Astro app without usin
 7. Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
 
 </TabItem>
-<TabItem value="Azure">
+<TabItem value="ME-ID">
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
 2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
-5. Append the [Azure AD feature flag parameter](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior) `?aadOptscim062020` to your **SCIM Integration URL** and recopy it. For example, if your SCIM Integration URL is `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0`, your final URL would be `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0?aadOptscim062020`. The feature flag is required for fully compliant SCIM behavior in Azure AD.
-6. In the Azure AD management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application) with the third option, **Integrate any other application you don't find in the gallery**.
+5. Append the [Microsoft Entra ID feature flag parameter](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior) `?aadOptscim062020` to your **SCIM Integration URL** and recopy it. For example, if your SCIM Integration URL is `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0`, your final URL would be `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0?aadOptscim062020`. The feature flag is required for fully compliant SCIM behavior in Microsoft Entra ID.
+6. In the Microsoft Entra ID management dashboard, [create a new enterprise application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal#add-an-enterprise-application) with the third option, **Integrate any other application you don't find in the gallery**.
 7. In the menu for your new application, click **Provisioning** and configure the following values:
 
     - **Provisioning mode**: Set to **Automatic**.
-    - **Admin Credentials** > **Tenant URL**: Enter the **SCIM integration URL** including the Azure AD feature flag parameter.
+    - **Admin Credentials** > **Tenant URL**: Enter the **SCIM integration URL** including the Microsoft Entra ID feature flag parameter.
     - **Secret Token**: Enter your Organization API token. 
 
   :::info Only provision users
@@ -171,7 +171,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 
     ![Azure user mappings with only the correct 3 attributes listed](/img/docs/azure-mappings.png)
 
-1.  Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+1.  Click **Test connection** in the Microsoft Entra ID application management menu to confirm your connection to the SCIM endpoint.
 
 </TabItem>
 </Tabs>

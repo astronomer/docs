@@ -61,7 +61,7 @@ astronomer:
             authUrlParams: # Additional required params set on case-by-case basis
 ```
 
-Replace the values above with those of the provider of your choice. If you want to configure Azure AD, Okta or Auth0 read below for specific guidelines.
+Replace the values above with those of the provider of your choice. If you want to configure Microsoft Entra ID, Okta or Auth0 read below for specific guidelines.
 
 ## AWS Cognito
 
@@ -104,7 +104,7 @@ Your Cognito pool ID can be found in the `General settings` tab of the Cognito p
 
 Once you've saved your `config.yaml` file with these values, push it to your platform as described in [Apply a config change](apply-platform-config.md).
 
-## Azure AD
+## Microsoft Entra ID
 
 ### Register the Application using `App Registrations` on Azure
 
@@ -125,7 +125,7 @@ Example:
 
 ![authentication.png](/img/software/azure-authentication.png)
 
-### Enable Azure AD in your config.yaml file
+### Enable Microsoft Entra ID in your config.yaml file
 
 Make sure the `config.yaml` file in your `astronomer` directory is updated with the proper values:
 
