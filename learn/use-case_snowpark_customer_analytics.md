@@ -920,10 +920,12 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
         _restore_weaviate >> [_training_table, _comment_table, _calls_table] >> _model
 ```
 
-Task Clean-up Temp Tables:
-Our final task will be run as an Airflow 2.7 [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
+`cleanup_temp_tables` Task: Our final task will be run as an Airflow 2.7 [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
 
+# See Also
 
-
-
+- https://docs.astronomer.io/learn/airflow-snowpark
+- https://docs.astronomer.io/learn/airflow-setup-teardown
+- https://docs.astronomer.io/learn/airflow-weaviate
+- https://docs.astronomer.io/learn/xcom-backend-tutorial
 
