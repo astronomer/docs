@@ -95,9 +95,9 @@ No external configuration is required for the email integration. Astronomer reco
 </TabItem>
 <TabItem value="DAG">
 
-**With DAG trigger** works differently from other Astro alert types. Instead of sending a pre-formatted alert message, it sends a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending an alert through a custom communication channel or writing data about the incident to a table.
+**With DAG trigger** works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro sends a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message through a custom communication channel or writing data about an incident to a table.
 
-1. In the Workspace where you want to configure the Astro alert, create and deploy the DAG that you want to trigger. You can deploy the DAG to any Deployment in the Workspace even if the alert is not applied to that Deployment.
+1. In the Workspace where you want to configure the communication channel, create and deploy the DAG that you want to trigger. You can deploy the DAG to any Deployment in the Workspace even if the alert is not applied to that Deployment.
 2. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment where you deployed the DAG. Copy the token to use in the next step.
 
 </TabItem>
