@@ -23,10 +23,21 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## November 14, 2023
 
-
 ### Install Astro from the Azure Marketplace
 
 Astro is now available as an Azure Native ISV Service. If your team is considering Astro and you use Azure, Astronomer recommends installing Astro from the Azure Marketplace so that you can manage it alongside your other Azure services. See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure).
+
+### Create Airflow connections in the Cloud UI and link them to Deployments 
+
+:::caution
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
+
+Note that this feature is currently available only for Deployments running the Celery executor.
 
 ### Trigger a DAG from an Astro alert
 
@@ -47,10 +58,6 @@ You can now create Hosted dedicated clusters in the following Azure regions:
 - `japaneast`
 
 See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
-
-### Bug fixes
-
-- Fixed an issue where you could not create worker queues with specific instance types on Hosted dedicated clusters.
 
 ## November 7, 2023
 
