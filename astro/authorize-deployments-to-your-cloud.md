@@ -133,7 +133,7 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 [GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) allows your Deployment workload identity to assume an existing service account on your GCP project. Complete this setup if you want your Deployment to only use generated, short-lived credentials for a service account, rather than a persistent and static service account key. 
 
-1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the Google project that you want your Deployment to access. Copy the service account ID to user later in this setup.
+1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to user later in this setup.
 2. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
 3. Grant the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) IAM role to the principal account, also known as your Deployment's workload identity, so that your Deployment can impersonate your service account. See [Grant a single role](https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role).
 4. Complete one of the following options for your Deployment to access your cloud resources:
