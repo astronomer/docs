@@ -74,15 +74,15 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create your DAG
 
-1. In your `dags` folder, create a file called `recipe_suggestion.py`.
+1. In your `dags` folder, create a file called `recipe_suggestions.py`.
 
 2. Copy the following code into the file.
 
-    <CodeBlock language="python">{recipe_suggestion}</CodeBlock>
+    <CodeBlock language="python">{recipe_suggestions}</CodeBlock>
 
     This DAG consists of five tasks to make a simple MLOps pipeline.
 
-    ![Screenshot of the Airflow UI showing the successful completion of the `recipe_suggestion` DAG in the Grid view with the Graph tab selected. 6 countries were provided to get recipes suggestions from, which led to 8 mapped task instances of both the `get_a_recipe` and `get_embeddings` task.](/img/tutorials/airflow-cohere_dag_graph.png)
+    ![Screenshot of the Airflow UI showing the successful completion of the `recipe_suggestions` DAG in the Grid view with the Graph tab selected. 6 countries were provided to get recipes suggestions from, which led to 8 mapped task instances of both the `get_a_recipe` and `get_embeddings` task.](/img/tutorials/airflow-cohere_dag_graph.png)
 
     - The `get_ingredients` task fetches the list of ingredients that the user found in their pantry and wants to use in their recipe. The input `pantry_ingredients` is provided via [Airflow params](airflow-params.md).
     - The `get_countries` task retrieves the list of user-provided countries to get recipes from via [Airflow params](airflow-params.md).
@@ -94,7 +94,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, run the `recipe_suggestion` DAG by clicking the play button. Then, provide [Airflow params](airflow-params.md) for:
+2. In the Airflow UI, run the `recipe_suggestions` DAG by clicking the play button. Then, provide [Airflow params](airflow-params.md) for:
 
     - `Countries of recipe origin`: A list of the countries you want to get recipe suggestions from. Make sure to create one line per country and to provide at least two countries.
     - `pantry_ingredients`: A list of the ingredients you have in your pantry and want to use in the recipe. Make sure to create one line per ingredient.
@@ -102,7 +102,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     - `max_tokens_recipe`: The maximum number of tokens available for the recipe. 
     - `randomness_of_recipe`: The randomness of the recipe. The value provided is divided by 10 and given to the [`temperature` parameter](https://docs.cohere.com/docs/temperature) of the of the Cohere API. The scale for the param ranges from 0 to 50, with 0 being the most deterministic and 50 being the most random.
 
-    ![Screenshot of the Airflow UI showing the params available for the `recipe_suggestion` DAG with the default choices.](/img/tutorials/airflow-cohere_params.png)
+    ![Screenshot of the Airflow UI showing the params available for the `recipe_suggestions` DAG with the default choices.](/img/tutorials/airflow-cohere_params.png)
 
 3. Go to the `include` folder to view the image file created by the `plot_embeddings` task. The image should look similar to the one below.
 
