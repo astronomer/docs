@@ -26,7 +26,8 @@ IMAGE_PATH = "include/recipe_plot.png"
             ["Switzerland", "Norway", "New Zealand", "Cameroon", "Bhutan", "Chile"],
             type="array",
             title="Countries of recipe origin",
-            description="Enter from which countries you would like to get recipes. List at least two countries.",
+            description="Enter from which countries you would like to get recipes."
+            + "List at least two countries.",
         ),
         "pantry_ingredients": Param(
             ["gruyere", "olives", "potatoes", "onions", "pineapple"],
