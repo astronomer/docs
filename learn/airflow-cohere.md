@@ -108,7 +108,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
     ![Screenshot of the image created by the `plot_embeddings` task showing the two dimensional representation of the closeness of recipes associated with different countries.](/img/tutorials/airflow-cohere_recipe_plot.png)
 
-## (Optional) Step 4: Cook your recipe
+## Step 4: (Optional) Cook your recipe
 
 1. Choose one of the recipes in the `include` folder.
 2. Navigate to your kitchen and cook the recipe you generated using Cohere with Airflow.
