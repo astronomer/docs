@@ -16,7 +16,7 @@ Astronomer Software by default allows users to create an account with and authen
 
 Authentication methods are entirely customizable. In addition to the default methods, Astronomer provides the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
 
-- [Microsoft Azure Active Directory (AD)](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc)
+- [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols-oidc)
 - [Okta](https://www.okta.com)
 - [Auth0](https://auth0.com/)
 
@@ -61,8 +61,9 @@ astronomer:
             clientId: <provider-client-id>
             authUrlParams: # Additional required params set on case-by-case basis
 ```
+### Microsoft Entra ID
 
-Replace the values above with those of the provider of your choice. If you want to configure Azure AD, Okta or Auth0 read below for specific guidelines.
+Replace the values above with those of the provider of your choice. If you want to configure Microsoft Entra ID, Okta or Auth0 read below for specific guidelines.
 
 ### AWS Cognito
 
@@ -103,13 +104,13 @@ Your Cognito pool ID can be found in the `General settings` tab of the Cognito p
 
 Once you've saved your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
 
-### Azure AD
+### Microsoft Entra ID
 
-Follow these steps to configure Azure AD as your OIDC provider. 
+Follow these steps to configure Microsoft Entra ID as your OIDC provider. 
 
 #### Register the Application using `App Registrations` on Azure
 
-1. In Azure Active Directory, click **App registrations** > **New registration**. 
+1. In Microsoft Entra ID, click **App registrations** > **New registration**. 
 2. Complete the following sections:
   
     - **Name**: Any
@@ -133,9 +134,9 @@ Follow these steps to configure Azure AD as your OIDC provider.
 
 #### Create a client secret (Optional)
 
-Complete this setup only if you want to import Azure AD groups to Astronomer Software as [Teams](import-idp-groups.md).
+Complete this setup only if you want to import Microsoft Entra ID groups to Astronomer Software as [Teams](import-idp-groups.md).
 
-1. In your Azure AD application management left menu, click **Certificates & secrets**.
+1. In your Microsoft Entra ID application management left menu, click **Certificates & secrets**.
 2. Click **New client secret**.
 3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list. 
 4. Click **Add**.
@@ -163,7 +164,7 @@ Complete this setup only if you want to import Azure AD groups to Astronomer Sof
 10. Click **Add**.
 11. Encrypt the secret value you copied as a Kubernetes Secret on your Astronomer installation. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
 
-#### Enable Azure AD in your config.yaml file
+#### Enable Microsoft Entra ID in your config.yaml file
 
 Add the following values to the `config.yaml` file in your `astronomer` directory:
 
@@ -180,7 +181,7 @@ astronomer:
             enabled: true
             clientId: <your-client-id>
             discoveryUrl: https://login.microsoftonline.com/<tenant-id>/v2.0/.well-known/openid-configuration
-            # Configure a secret only if you're importing Azure AD user groups as Teams
+            # Configure a secret only if you're importing Microsoft Entra ID user groups as Teams
             clientSecret: <your-client-secret>
             baseDomain: login.microsoftonline.com
             authUrlParams:
@@ -415,7 +416,7 @@ Astronomer Software supports integration with the open standard System for Cross
     groupId="scim"
     defaultValue="okta"
     values={[
-        {label: 'Azure AD', value: 'azuread'},
+        {label: 'Microsoft Entra ID', value: 'ME-ID'},
         {label: 'Okta', value: 'okta'},
     ]}>
 <TabItem value="okta">
@@ -461,7 +462,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 </TabItem>
 
-<TabItem value="azuread">
+<TabItem value="ME-ID">
 
 1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string. 
 
@@ -475,17 +476,17 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
                 scimAuthCode: <your-generated-secret-code>
     ```
    
-    **Note**: If you have already configured Open ID Connect with Azure AD, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
+    **Note**: If you have already configured Open ID Connect with Microsoft Entra ID, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
 2. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
-3. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
+3. Sign in to the [Microsoft Entra ID portal](https://aad.portal.azure.com/). 
    
 4. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
    
 5. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
   
-6. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
+6. Click **Create** to create an app object. Microsoft Entra ID opens the application management menu for your new application.
   
 7. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
 
@@ -495,9 +496,9 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 10. Paste the `scimAuthCode` generated at step 1 above into the **Secret Token** field.
 
-11. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+11. Click **Test connection** in the Microsoft Entra ID application management menu to confirm your connection to the SCIM endpoint.
 
-12. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+12. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes).
 
 13. Click **Manage** > **Provisioning** > **Settings**.
 
