@@ -106,7 +106,7 @@ You can then open the [streamlit application](http://localhost:8501) in a browse
 
 ## Project Code
 
-This project consists of one DAG, [customer_analytics](https://github.com/astronomer/airflow-snowparkml-demo/blob/main/dags/customer_analytics.py) which demonstrates an end-to-end ML application workflow using OpenAI embeddings with a Weaviate vector database as well as Snowpark decorators, the Snowflake XCOM backend and the Snowpark ML model registry. The Astro CLI can easily be adapted to include additionalDocker-based services, in this use case we used  Weaviate and streamlit.
+This project consists of one DAG, [customer_analytics](https://github.com/astronomer/airflow-snowparkml-demo/blob/main/dags/customer_analytics.py) which demonstrates an end-to-end ML application workflow using OpenAI embeddings with a Weaviate vector database as well as Snowpark decorators, the Snowflake XCom backend, and the Snowpark ML model registry. The Astro CLI is adapted to include additional Docker-based services for Weaviate and Streamlit.
 
 ```python
     @task.snowpark_python()
