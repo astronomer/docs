@@ -48,9 +48,18 @@ You can now create Hosted dedicated clusters in the following Azure regions:
 
 See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
 
-### Bug fixes
+### Create connections in the Cloud UI and link them to Deployments 
 
-- Fixed an issue where you could not create worker queues with specific instance types on Hosted dedicated clusters.
+:::caution
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
+
+Note that this feature is currently available only for Deployments running the Celery executor.
+
 
 ## November 7, 2023
 
