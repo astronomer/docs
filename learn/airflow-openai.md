@@ -109,5 +109,5 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Conclusion
 
-Congratulations! You used Airflow and OpenAI to get answers from your favorite Star Trek captains and compare them visually. You can now use Airflow to orchestrate OpenAI operations in your own machine learning pipelines. :vulcan_salute:
+Congratulations! You used Airflow and OpenAI to get answers from your favorite Star Trek captains and compare them visually. You can now use Airflow to orchestrate OpenAI operations in your own machine learning pipelines. 🖖
 
