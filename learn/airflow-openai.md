@@ -15,13 +15,13 @@ In this tutorial you'll use Airflow and the OpenAI Airflow provider to make a ca
 
 ## Why use Airflow with OpenAI?
 
-OpenAI offers a variety of powerful model endpoints for different tasks like text or image generation, vector embeddings or translation tasks. These models are used in countless applications, both user-facing, such as chatbots and internal for example providing insight into internal knowledge base content.
+OpenAI offers a variety of powerful model endpoints for different tasks like text or image generation, vector embeddings or translation tasks. These models are used in countless applications, both user-facing, such as chatbots, and internal, for example providing insight into internal knowledge base content.
 
 Integrating OpenAI with Airflow into one end-to-end machine learning pipeline allows you to:
 
 - Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations using OpenAI model endpoints based on upstream events in your data ecosystem, such as when new user input is ingested or a new dataset is available.
 - Send several requests to a model endpoint in parallel based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md).
-- Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your OpenAI operations.
+- Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your OpenAI operations. For example for handling or monitoring service outages.
 - Use Airflow to orchestrate the creation of vector embeddings using OpenAI models, which is especially useful for very large datasets that cannot be processed automatically by vector databases.
 
 ## Time to complete
