@@ -739,7 +739,7 @@ After all our structured and unstructured data has been extracted, transformed/t
 ```
 
 Task Group Score Sentiment:
-After we’ve trained our sentiment classifier, we can then use it to evaluate the sentiment of our twitter comments and transcribed support calls. Again, we’ll do this within Snowpark so we can run this model on our Snowflake data without needing to make a copy in cloud storage. We’ll then save the prediction results and return them as tables so that we can use them to generate visual reports next. 
+After the sentiment classifier has been trained, it is used to evaluate the sentiment of the twitter comments and transcribed support calls. Again, this is done within Snowpark so you can run the model on your Snowflake data without needing to make a copy in cloud storage. Then the prediction results are saved and returned as tables to be used to generate visual reports. 
 
 
 ```python
