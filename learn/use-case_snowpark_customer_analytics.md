@@ -20,12 +20,12 @@ This demo also shows the use of the Snowflake XCom backend which supports securi
 
 This workflow includes:
 - Sourcing structured, unstructured and semistructured data from different systems.
-- extract, transform and load with [Snowpark Python provider for Airflow](https://github.com/astronomer/astro-provider-snowflake)
-- ingest with Astronomer's [python SDK for Airflow](https://github.com/astronomer/astro-sdk)
-- audio file transcription with [OpenAI Whisper](https://github.com/openai/whisper)
-- natural language embeddings with [OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings) and the [Weaviate provider for Airflow](https://github.com/astronomer/airflow-provider-weaviate)
-- vector search with [Weaviate](https://weaviate.io/)
-- sentiment classification with [LightGBM](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html)  
+- Extract, transform and load with [Snowpark Python provider for Airflow](https://github.com/astronomer/astro-provider-snowflake)
+- Ingest with Astronomer's [python SDK for Airflow](https://github.com/astronomer/astro-sdk)
+- Audio file transcription with [OpenAI Whisper](https://github.com/openai/whisper)
+- Natural language embeddings with [OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings) and the [Weaviate provider for Airflow](https://github.com/astronomer/airflow-provider-weaviate)
+- Vector search with [Weaviate](https://weaviate.io/)
+- Sentiment classification with [LightGBM](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html)  
 - ML model management with [Snowflake ML](https://docs.snowflake.com/LIMITEDACCESS/snowflake-ml-modeling)
   
 All of the above are presented in a [Streamlit](http://www.streamlit.io) application.  
@@ -48,18 +48,17 @@ Clone the example project from the [Astronomer GitHub](https://github.com/astron
 git clone https://github.com/astronomer/airflow-snowparkml-demo
 cd airflow-snowparkml-demo 
 ```
+
 :::note
 Open the `.env` file in an editor and update the following variables with you account information. You only need to update the Snowflake Connection details to be able to run the Customer Analytics DAG. However, if you'd like to enable chat capabilities in the final streamlit application, please add an OpenAI API key where designated in the .env file as well. 
 
 This demo assumes the use of a new Snowflake trial account with admin privileges.  A database named 'DEMO' and schema named 'DEMO' will be created in the DAG.  Running this demo without admin privileges or with existing database/schema will require further updates to the `.env` file.
 :::
 
-- AIRFLOW_CONN_SNOWFLAKE_DEFAULT  
-  -- login  
-  -- password  
-  -- account **  
-- OPENAI_APIKEY  
-  
+```text
+AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{"conn_type": "snowflake", "login": "<USER_NAME>", "password": "<PASSWORD>", "schema": "DEMO", "extra": {"account": "<ORG_NAME>-<ACCOUNT_NAME>", "warehouse": "COMPUTE_WH", "database": "DEMO", "region": "", "role": "ACCOUNTADMIN", "authenticator": "snowflake", "session_parameters": null, "application": "AIRFLOW"}}'
+OPENAI_APIKEY='sk-xxxxxxxxxxxxxxxxxxxxx' 
+``` 
 ** The Snowflake `account` field of the connection should use the new `ORG_NAME-ACCOUNT_NAME` format as per [Snowflake Account Identifier policies](https://docs.snowflake.com/en/user-guide/admin-account-identifier).  The ORG and ACCOUNT names can be found in the confirmation email or in the Snowflake login link (ie. `https://xxxxxxx-yyy11111.snowflakecomputing.com/console/login`)
 Do not specify a `region` when using this format for accounts.
   
