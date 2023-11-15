@@ -135,13 +135,14 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the Google project that you want your Deployment to access. Copy the service account ID to user later in this setup.
 2. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
-3. Grant the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) IAM role to the principal account, also known as your Deployment's workload identity. See [Grant a single role.](https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role).
+3. Grant the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) IAM role to the principal account, also known as your Deployment's workload identity, so that your Deployment can impersonate your service account. See [Grant a single role](https://cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role).
 4. Complete one of the following options for your Deployment to access your cloud resources:
 
     - Create a **Google Cloud** connection type in Airflow and configure the following values:
         - **Connection Id**: Enter a name for the connection.
         - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
-    - Run the following command to create an environment variable that connects your Deployment to your GCP secrets backend:
+   - Specify the impersonation chain at the operator level. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html#direct-impersonation-of-a-service-account). Note that if you configure both a connection type and an operator, the operator-level configuration takes precedence.
+    - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
 
     ```zsh
     astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
