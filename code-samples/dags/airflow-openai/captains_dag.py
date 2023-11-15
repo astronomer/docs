@@ -47,7 +47,7 @@ star_trek_captains_list = [
             "Which is your favorite ship?",
             type="string",
             title="Question to ask the captains",
-            description="Enter what you would like to ask the captain.",
+            description="Enter what you would like to ask the captains.",
             min_length=1,
             max_length=500,
         ),
