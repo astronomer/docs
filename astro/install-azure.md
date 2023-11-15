@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Install Astro from Azure Marketplace"
+sidebar_label: "Install from Azure Marketplace"
 title: "Install Astro from the Azure Marketplace as an Azure Native ISV service"
 description: "Learn how to install Astro from the Azure marketplace, which is recommended for all Azure-based teams."
 id: install-azure
@@ -7,7 +7,7 @@ id: install-azure
 
 [Astro](https://docs.astronomer.io/astro) is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data.
 
-If your company uses Azure or already manages applications using Azure Native ISV Services, Astronomer recommends installing and accessing Astro through the Azure Marketplace. When you install Astro as an Azure Native ISV Service, you can manage resource usage and billing alongside your existing Azure applications. Additionally, the Azure Native ISV Service is already integrated with Azure AD, so you can add users from your team to Astro without any additional single sign-on (SSO) configuration. 
+If your company uses Azure or already manages applications using [Azure Native ISV Services](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), Astronomer recommends installing and accessing Astro through the Azure Marketplace. When you install Astro as an Azure Native ISV Service, you can manage resource usage and billing alongside your existing Azure applications. Additionally, the Azure Native ISV Service is already integrated with Microsoft Entra ID, so you can add users from your team to Astro without any additional single sign-on (SSO) configuration.
 
 The installation template hosted in the Azure Marketplace guides you to configure all of the essential resources you need to start running your DAGs in Airflow.
 
@@ -32,7 +32,7 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     - **Resource name:** Enter a name for the Astro resource, such as `astro-airflow`.
     - **Region:** Select a region to host a placeholder Astro Azure resource. This should always be `EASTUS`. Note that this region has no effect on your Astro Hosted Airflow environments. You can still create Airflow environments in any supported Azure region.
     - **Astro Organization name:** Enter a name for your Astro Organization. Astronomer recommends using the name of your company or organization.
-    - **Workspace name:** Enter the name for the Workspace where you will manage and run Deployments.
+    - **Workspace name:** Enter the name for the Workspace where you will manage and run Deployments. Astronomer recommends using the name of your team or project.
 
 4. (Optional) Click **Next: Tabs.** Add an Azure tag to the Astro resource to track your resource usage. 
 5. Click **Review + create**, then click **Create.**
