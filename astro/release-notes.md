@@ -23,7 +23,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## November 14, 2023
 
-
 ### Install Astro from the Azure Marketplace
 
 Astro is now available as an Azure Native ISV Service. If your team is considering Astro and you use Azure, Astronomer recommends installing Astro from the Azure Marketplace so that you can manage it alongside your other Azure services. See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure).
