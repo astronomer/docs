@@ -55,6 +55,12 @@ The following sections explain the benefits, limitations, and implementations of
 
 ### Astro Cloud UI Environment Manager
 
+:::caution
+
+This feature is in [Public Preview](feature-previews.md).
+
+:::
+
 Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Cloud UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis.
 
 #### Benefits
@@ -68,6 +74,7 @@ Astro includes connection management system that behaves like you are using an A
 
 #### Limitations
 
+- Currently, it only works with the Celery Executor. Kubernetes Executor support is coming soon.
 - If you create a connection in the Cloud UI, you also need to add its related provider package to the `requirements.txt` file in your Astro project.
 - Only available with Astro Runtime 9.3.0 and greater.
 - You can't see connections defined in the Cloud UI in the Airflow UI.

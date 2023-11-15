@@ -30,7 +30,14 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md)
+- Celery executors
 - Astro Runtime 9.3.0 or greater
+
+:::caution
+
+At this time, you can only create connections with the Celery Executor in the Cloud UI with the Astro Environment Manager. Kuberentes Executor support is coming soon.
+
+:::
 
 ## Create a connection
 
