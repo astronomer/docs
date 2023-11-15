@@ -85,7 +85,7 @@ def recipe_suggestions():
             + "if you can't find a recipe that uses all of them, suggest an additional desert."
             + "Bonus points if it's a traditional recipe from that country, "
             + "you can name the city or region it's from and you can provide "
-            + "vegan alternatives for the ingredients." 
+            + "vegan alternatives for the ingredients."
             + "Provide the full recipe with all steps and ingredients.",
             max_tokens=max_tokens_answer,
             temperature=randomness_of_answer / 10,
@@ -97,7 +97,7 @@ def recipe_suggestions():
         print(f"for the ingredients {', '.join(ingredients_list)} is:")
         print(recipe)
 
-        with open(f"include/{country}_recipe.txt", 'w') as f:
+        with open(f"include/{country}_recipe.txt", "w") as f:
             f.write(recipe)
 
         return recipe
