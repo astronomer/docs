@@ -33,6 +33,7 @@ This tutorial takes approximately 15 minutes to complete.
 To get the most out of this tutorial, make sure you have an understanding of:
 
 - The basics of the OpenAI API. See [OpenAI Introduction](https://platform.openai.com/docs/introduction).
+- The basics of vector embeddings. See the [OpenAI Embeddings guide](https://platform.openai.com/docs/guides/embeddings).
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
