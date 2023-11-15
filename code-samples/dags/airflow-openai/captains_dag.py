@@ -54,8 +54,8 @@ star_trek_captains_list = [
         "captains_to_ask": Param(
             star_trek_captains_list,
             type="array",
-            description="Select the captains whose answers you would like to compare. "
-            + "Choose from "
+            description="List the captains whose answers you would like to compare. "
+            + "Suggestions: "
             + ", ".join(star_trek_captains_list),
         ),
         "max_tokens_answer": Param(
