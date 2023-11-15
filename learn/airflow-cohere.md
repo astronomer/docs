@@ -52,7 +52,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     $ astro dev init
     ```
 
-2. Add the following packages to your `requirements.txt` file to install the Cohere Airflow provider and other supporting packages:
+2. Add the following lines to your `requirements.txt` file to install the Cohere Airflow provider and other supporting packages:
 
     ```text
     apache-airflow-providers-cohere==1.0.0
