@@ -1,3 +1,12 @@
+"""
+## Ask questions to Star Trek captains using OpenAI's LLMs, embed and visualize the results
+
+This DAG shows how to use the OpenAI Airflow provider to interact with the OpenAI API.
+The DAG asks a question to a list of Star Trek captains given using Airflow params,
+embeds the responses using the OpenAI text-embedding-ada-002 model, and visualizes the
+embeddings in 2 dimensions using PCA, matplotlib and seaborn.
+"""
+
 from airflow.decorators import dag, task
 from airflow.models.param import Param
 from airflow.models.baseoperator import chain
