@@ -174,6 +174,7 @@ module.exports = {
           ],
         },
         'connections/bigquery',
+        'airflow-cohere',
         {
           type: 'category',
           label: 'Databricks',
