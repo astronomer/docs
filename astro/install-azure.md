@@ -11,7 +11,7 @@ If your company uses Azure or already manages applications using [Azure Native I
 
 The installation template hosted in the Azure Marketplace guides you to configure all of the essential resources you need to start running your DAGs in Airflow.
 
-## Step 1: Set up Astro on Azure
+## Step 1: Create an Azure resource for Astro
 
 To run and manage Astro from Azure, you need to create an Astro Azure resource. The resource lets you control your Astro spend directly from Azure. It also contains the configuration for your first Organization and Workspace.
 
