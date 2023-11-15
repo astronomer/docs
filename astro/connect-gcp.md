@@ -49,9 +49,9 @@ Choose one of the following setups based on the security requirements of your co
 
 <Tabs
     defaultValue="VPC peering"
-    groupId="connection-options"
+    groupId="create-a-private-connection-between-astro-and-gcp"
     values={[
-        {label: 'VPC peering', value: 'VPC peering'},
+        {label: 'VPC peering', value: 'vpc'},
         {label: 'Private Service Connect', value: 'Private Service Connect'},
     ]}>
 
