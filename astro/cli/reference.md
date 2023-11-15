@@ -25,7 +25,13 @@ The Astronomer product you're using determines the behavior and format of comman
 
 ## Global Options
 
+### Global flags
+
 The Astro CLI has the following global flags that can be used with any command:
 
 - `-h`, `--help`: Output more information about a given command to the CLI.
 - `--verbosity <string>`: Specify the log level to expose for each CLI command. Possible values are `debug`, `info`, `warn`, `error`, `fatal`, and `panic`.
+
+### Global configuration options
+
+- `g`, `--global`: You can globally configure certain properties for your Astro CLI by using this flag with the `astro config` command. See [Configure the CLI](configure-cli.md#global-configuration-options) for more information.

@@ -39,6 +39,16 @@ For example, to update the port of your local Airflow webserver to 8081 from the
 astro config set webserver.port 8081
 ```
 
+### Global configuration options
+
+You can view or modify the `astro/config.yaml` file for your current astro projects by using the `--global` flag with `astro config set [option] --global` and `astro config get`. Normally setting a configuration applies the configuration to your current Astro project. Setting a configuration globally applies it across projects.
+
+For example, to set a port for your local Airflow webserver to 8081 from the default of 8080 for all your Astro projects, run:
+
+```sh
+astro config set -g webserver.port 8081
+```
+
 ## Available CLI configurations
 
 :::info 
