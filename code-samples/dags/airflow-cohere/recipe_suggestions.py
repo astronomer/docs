@@ -1,3 +1,12 @@
+"""
+## Get recipe suggestions using Cohere's LLMs, embed and visualize the results
+
+This DAG shows how to use the Cohere Airflow provider to interact with the Cohere API.
+The DAG generates recipes based on user input via Airflow params, embeds the 
+responses using Cohere embeddings, and visualizes them in 2 dimensions using PCA, 
+matplotlib and seaborn.
+"""
+
 from airflow.decorators import dag, task
 from airflow.models.param import Param
 from airflow.models.baseoperator import chain
