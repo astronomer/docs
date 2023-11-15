@@ -155,7 +155,7 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 
 
 
-```
+```python
 @task_group()
     def enter():
         """
