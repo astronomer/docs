@@ -60,6 +60,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     seaborn==0.13.0
     scikit-learn==1.3.2
     pandas==1.5.3
+    numpy==1.26.2
     adjustText==0.8
     ```
 
@@ -68,7 +69,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     ```text
     AIRFLOW_CONN_OPENAI_DEFAULT='{
         "conn_type": "openai",
-        "password": "YOUR OPEN AI API KEY",
+        "password": "YOUR OPENAI API KEY",
     }'
     ```
 
@@ -81,6 +82,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
     <CodeBlock language="python">{captains_dag}</CodeBlock>
 
     This DAG consists of four tasks to make a simple MLOps pipeline.
+
+    ![Screenshot of the Airflow UI showing the successful completion of the `captains_dag` DAG in the Grid view with the Graph tab selected. All 8 captains available were selected to be asked the question, which led to 8 mapped task instances of both the `ask_a_captain` and `get_embeddings` task.](/img/tutorials/airflow-openai_dag_completed.png)
 
     - The `get_captains_list` task fetches the list of captains that the user wants to ask their question to from the input given via [Airflow params](airflow-params.md).
     - The `ask_a_captain` task uses the [OpenAIHook](https://airflow.apache.org/docs/apache-airflow-providers-openai/stable/_api/airflow/providers/openai/hooks/openai/index.html) to connect to the OpenAI API and use the [chat completion endpoint](https://platform.openai.com/docs/guides/text-generation/chat-completions-api) to leverage the `gpt-3-turbo` model to generate answers to the question provided by the user. This task is [dynamically mapped](dynamic-tasks.md) over the list of captains to generate one dynamically mapped task instance per captain.
@@ -98,8 +101,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     - `max_tokens_answer`: The maximum number of tokens available for the answer. 
     - `randomness_of_answer`: The randomness of the answer. The value provided is divided by 10 and given to the `temperature` parameter of the [chat completion endpoint](https://platform.openai.com/docs/guides/text-generation/reproducible-outputs). The scale for the param ranges from 0 to 20, with 0 being the most deterministic and 20 being the most random.
 
-    ![Screenshot of the Airflow UI showing the successful completion of the `captains_dag` DAG in the Grid view with the Graph tab selected. All 8 captains available were selected to be asked the question, which led to 8 mapped task instances of both the `ask_a_captain` and `get_embeddings` task.](/img/tutorials/airflow-openai_dag_completed.png)
-
+    ![Screenshot of the Airflow UI showing the params available for the `captains_dag` DAG with the default choices.](/img/tutorials/airflow-openai_params.png)
 
 3. Go to the `include` folder to view the image file created by the `plot_embeddings` task. The image should look similar to the one below.
 
