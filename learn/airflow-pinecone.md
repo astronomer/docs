@@ -227,6 +227,8 @@ This DAG consists of six Tasks and one function
 
 2. In the Airflow UI, go to the connections managment UI and create a new pinecone connection following the example in the screenshot below:
 
+![Pinecone Connection Example](/img/examples/pinecone_learn_connection_example.png)
+
 3. In the Airflow UI, run the `pinecone_example_dag` DAG by clicking the play button.
 
 4. View your movie suggestion in the task logs of the `query_embeddings` task:
