@@ -54,6 +54,7 @@ module.exports = {
           label: "Airflow connections and variables",
           items: [
             "manage-connections-variables",
+            "create-and-link-connections",
             "import-export-connections-variables",
           ],
         },
