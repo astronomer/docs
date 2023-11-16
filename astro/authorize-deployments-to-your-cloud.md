@@ -121,7 +121,7 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 #### Alternative setup: Grant an IAM role to your Deployment workload identity
 
-Complete this alternative setup if you want a more simple setup and can tolerate your Deployment having long-lasting credentials to your Google Cloud project.
+Complete this alternative, simpler setup if you can tolerate your Deployment having long-lasting credentials to your Google Cloud project.
 
 ##### Step 1: Authorize the Deployment in your cloud
 
