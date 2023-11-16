@@ -21,11 +21,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## November 14, 2023
+## November 16, 2023
 
 ### Install Astro from the Azure Marketplace
 
-Astro is now available as an Azure Native ISV Service. If your team is considering Astro and you use Azure, Astronomer recommends installing Astro from the Azure Marketplace so that you can manage it alongside your other Azure services. See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure).
+Astro is now available as an Azure Native ISV Service. If your team is considering Astro and you use Azure, Astronomer recommends installing Astro from the Azure Marketplace because:
+
+- You can manage billing from the Azure Portal.
+- Microsoft Entra ID is pre-configured for all Organizations.
+- It's easier to create Astro resources and get started directly from Azure.
+
+See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
 ### Create Airflow connections in the Cloud UI and link them to Deployments 
 
@@ -92,9 +98,6 @@ Deployment API keys have been officially deprecated in favor of [Deployment API 
 ### Additional improvements
 
 - Workspace Operators can now create, update, and delete Deployment API tokens.
-- The **DAGs** page now shows [datasets](https://docs.astronomer.io/learn/airflow-datasets) for consuming and producing DAGs. When you hover over a dataset node, the Cloud UI shows you which DAGs the dataset triggers when it's updated.
-
-    ![Dataset node in the DAGs page of the Cloud UI. The node is highlighted so that it shows dependent DAGs](/img/release-notes/dataset-node.png)
 
 ### Bug fixes
 
