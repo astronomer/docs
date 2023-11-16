@@ -21,6 +21,50 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## November 16, 2023
+
+### Install Astro from the Azure Marketplace
+
+Astro is now available as an Azure Native ISV Service. If your team is considering Astro and you use Azure, Astronomer recommends installing Astro from the Azure Marketplace because:
+
+- You can manage billing from the Azure Portal.
+- Microsoft Entra ID is pre-configured for all Organizations.
+- It's easier to create Astro resources and get started directly from Azure.
+
+See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
+
+### Create Airflow connections in the Cloud UI and link them to Deployments 
+
+:::caution
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
+
+Note that this feature is currently available only for Deployments running the Celery executor.
+
+### Trigger a DAG from an Astro alert
+
+You can now configure [Astro alerts](https://docs.astronomer.io/astro/alerts) to trigger any DAG in your Workspace through the Airflow REST API. You can configure the triggered DAG to complete any action, such as sending an alert through a custom communication channel or writing data about the incident to a table.
+
+### New Azure regions available on Astro Hosted
+
+<HostedBadge/>
+
+You can now create Hosted dedicated clusters in the following Azure regions:
+
+- `eastus`  
+- `canadacentral`
+- `uksouth` 
+- `brazilsouth`     
+- `centralindia`
+- `francecentral`
+- `japaneast`
+
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+
 ## November 7, 2023
 
 ### Roll back Deployments to previous versions of your code
@@ -54,15 +98,24 @@ Deployment API keys have been officially deprecated in favor of [Deployment API 
 ### Additional improvements
 
 - Workspace Operators can now create, update, and delete Deployment API tokens.
-- The **DAGs** page now shows [datasets](https://docs.astronomer.io/learn/airflow-datasets) for consuming and producing DAGs. When you hover over a dataset node, the Cloud UI shows you which DAGs the dataset triggers when it's updated.
-
-    ![Dataset node in the DAGs page of the Cloud UI. The node is highlighted so that it shows dependent DAGs](/img/release-notes/dataset-node.png)
 
 ### Bug fixes
 
 - Fixed an issue where a Deployment's **Updated By** field was not updated if you transferred the Deployment. 
 
 ## October 24, 2023
+
+### New Azure regions available on Astro Hosted
+
+<HostedBadge/>
+
+You can now create Deployments in standard clusters in the following Azure regions:
+
+- `eastus2`  
+- `westus2`
+- `westeurope` 
+
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
 
 ### Bug fixes
 
