@@ -225,8 +225,20 @@ This DAG consists of six Tasks and one function
 
 1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, go to the connections managment UI and create 
+2. In the Airflow UI, go to the connections managment UI and create a new pinecone connection following the example in the screenshot below:
 
+3. In the Airflow UI, run the `pinecone_example_dag` DAG by clicking the play button.
+
+4. View your movie suggestion in the task logs of the `query_embeddings` task:
+
+```text
+    [2023-11-16, 18:42:32 UTC] {base.py:73} INFO - Using connection ID 'pinecone' for task execution.
+    [2023-11-16, 18:42:32 UTC] {logging_mixin.py:154} INFO - {'matches': [], 'namespace': ''}
+```
+
+## Conclusion
+
+Congrats! You've now successfully integrated Airflow and Pinecone! 
 
 
 
