@@ -40,6 +40,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Configure your Astro project 
 
+If you don't want to set up your project manually, you can clone this [repo](https://github.com/astronomer/PineconeIntegrationExample) to your computer and skip to Step 4. 
+
 1. Create a new Astro project:
 
     ```sh
