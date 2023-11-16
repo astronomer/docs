@@ -49,6 +49,8 @@ See the following table for all supported Kubernetes versions in each maintained
 |       0.32.4        |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
 |       0.33.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
 |       0.33.1        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
+|       0.33.2        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
+
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 
