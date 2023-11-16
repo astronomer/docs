@@ -27,7 +27,7 @@ In most cases, you only need to modify these settings in the case of debugging a
 
 You can set Astro configureations at two different scopes: globally or by project.
 
-For project-specific configurations, Astro stores the settings in a file named `/...//.astro/config.yaml` in your project directory. This file is generated when you run `astro dev init` in your project folder. Global configurations, however, are stored in a central location. 
+For project-specific configurations, Astro stores the settings in a file named `.astro/config.yaml` in your project directory. This file is generated when you run `astro dev init` in your project folder. Global configurations, however, are stored in a central location with the Astro executable.  
 
 ### Set project configurations
 
@@ -49,7 +49,7 @@ astro config set webserver.port 8081
 
 You can view or modify the `astro/config.yaml` file for your current astro projects by using the `--global` flag with `astro config set [option] --global` and `astro config get`. Setting a configuration globally applies it across projects, and the configuration is saved in a central location. For example, the configurations are stored in `~/.astro/config.yaml` on Mac OS and `/home//.astro/config.yaml` on Linux.
 
-The following example shows how to set a port for your local Airflow webserver to `8081` from the default of `8080` for all your Astro projects:
+The following example shows how to set the local Airflow webserver port to `8081` for all Astro projects on your local machine:
 
 ```sh
 astro config set -g webserver.port 8081
