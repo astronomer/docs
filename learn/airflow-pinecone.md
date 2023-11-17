@@ -54,6 +54,7 @@ If you don't want to set up your project manually, you can clone this [repo](htt
     ```text
     apache-airflow-providers-pinecone
     scikit-learn
+    openai
     ```
 
 ## Step 2: Add your data
@@ -78,38 +79,39 @@ Create a new file called `movie_data.txt` in the `include` directory, then copy 
 2. Copy the following code into the file.
 
 ```python
-import json
 from pendulum import datetime
-from airflow.operators.empty import EmptyOperator
 from airflow.decorators import (
     dag,
     task,
-)  
+)
 from airflow.providers.pinecone.operators.pinecone import PineconeIngestOperator
 from airflow.providers.pinecone.hooks.pinecone import PineconeHook
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 import uuid
+import openai
+import os
+from airflow.models.param import Param
 
-name_for_index = "testindex"
+PINECONE_INDEX_NAME = "airflow-integration-test"
+DATA_FILE_PATH = "include/moviedata.txt"
+PINECONE_CONN_ID = "pinecone_default"
 
 
-@dag(schedule="@daily",
+def generate_uuid5(identifier):
+    return str(uuid.uuid5(uuid.NAMESPACE_DNS, "/".join([str(i) for i in identifier])))
+
+
+@dag(
+    schedule="@daily",
     start_date=datetime(2023, 1, 1),
     catchup=False,
     tags=["pinecone"],
-)  # If set, this tag is shown in the DAG view of the Airflow UI
+    params={"movie_mood": Param("Recommend me a movie about love.", type="string")},
+)
 def pinecone_example_dag():
-    file_path = "include/moviedata.txt"
-
-    start = EmptyOperator(task_id="start")
-
-    def generate_uuid5(identifier):
-        return str(uuid.uuid5(uuid.NAMESPACE_DNS, '/'.join([str(i) for i in identifier])))
-    
-    def get_vector_dimensions(data):
-        return len(data[0]['vector'][0])
-
+    @task
     def import_data_func(text_file_path: str):
         with open(text_file_path, "r") as f:
             lines = f.readlines()
@@ -126,87 +128,106 @@ def pinecone_example_dag():
                 except:
                     num_skipped_lines += 1
                     continue
-                
+
                 genre = parts[2].strip()
                 description = parts[3].strip()
                 descriptions.append(description)
                 data.append(
                     {
-                        "movie_id": generate_uuid5(
+                        "id": generate_uuid5(
                             identifier=[title, year, genre, description]
-                            ),
+                        ),
+                        "metadata": {
                             "title": title,
                             "year": year,
                             "genre": genre,
                             "description": description,
-                        }
-                    )
-        vectorizer = TfidfVectorizer()
-        vectors = vectorizer.fit_transform(descriptions)
-        for i, item in enumerate(data):
-            item['vector'] = vectors[i].toarray().tolist()
-        
+                        },
+                    }
+                )
+
+        print(data)
+
         return data
-        
-    vector_data = import_data_func('include/moviedata.txt')
-    vector_dims = get_vector_dimensions(vector_data)
+
+    movie_data = import_data_func("include/moviedata.txt")
 
     @task
-    def createindex(vector_size: int):
-        hook = PineconeHook(conn_id="pinecone")
-        newindex = hook.create_index(index_name=name_for_index,
-                                     dimension=vector_size)
-        return newindex
+    def vectorize(movie_data: dict):
+        response = openai.Embedding.create(
+            input=movie_data["metadata"]["description"], model="text-embedding-ada-002"
+        )
 
-    
-    indexcreator = createindex(vector_size=vector_dims)
+        movie_data["values"] = response["data"][0]["embedding"]
+
+        return movie_data
+
+    vectorized_data = vectorize.expand(movie_data=movie_data)
 
     @task
-    def convert_to_pinecone_format(data):
-        pinecone_data = []
-        for item in data:
-            if 'vector' in item and item['vector']:
-                pinecone_data.append({
-                    'id': item['movie_id'],
-                    'values': item['vector'][0]
-                    })
-        return pinecone_data
-    
-    data_conversion = convert_to_pinecone_format(vector_data)
+    def get_vector_dimensions(data):
+        print(data)
+        return len(data[0]["values"])
 
+    vector_dims = get_vector_dimensions(vectorized_data)
 
-    ingestion = PineconeIngestOperator(task_id="pinecone_vector_ingest",
-                                       conn_id="pinecone",
-                                       index_name=name_for_index,
-                                       input_vectors=data_conversion,)
-    
     @task
-    def query_pinecone(vector_data: list):
-        hook = PineconeHook(conn_id="pinecone")
+    def create_index_if_not_exists(
+        index_name: str, vector_size: int, pinecone_conn_id: str
+    ):
+        hook = PineconeHook(conn_id=pinecone_conn_id)
+        existing_indexes = hook.list_indexes()
+        if index_name not in existing_indexes:
+            newindex = hook.create_index(index_name=index_name, dimension=vector_size)
+            return newindex
+        else:
+            print(f"Index {index_name} already exists")
 
-        query_vector = vector_data[0]['values']
+    indexcreator = create_index_if_not_exists(
+        vector_size=vector_dims,
+        index_name=PINECONE_INDEX_NAME,
+        pinecone_conn_id=PINECONE_CONN_ID,
+    )
+
+    ingestion = PineconeIngestOperator(
+        task_id="pinecone_vector_ingest",
+        conn_id=PINECONE_CONN_ID,
+        index_name=PINECONE_INDEX_NAME,
+        input_vectors=vectorized_data,
+    )
+
+    @task
+    def query_pinecone(
+        vector_data: list, index_name: str, pinecone_conn_id: str, **context
+    ):
+        movie_mood = context["params"]["movie_mood"]
+
+        response = openai.Embedding.create(
+            input=movie_mood, model="text-embedding-ada-002"
+        )
+
+        question_embedded = response["data"][0]["embedding"]
+
+        hook = PineconeHook(conn_id=pinecone_conn_id)
+
         query_response = hook.query_vector(
-            index_name=name_for_index,
-            top_k=10,
+            index_name=index_name,
+            top_k=1,
             include_values=True,
             include_metadata=True,
-            vector=query_vector
-            )
-        print(query_response)
-    
-    querytask = query_pinecone(vector_data=data_conversion)
+            vector=question_embedded,
+        )
 
-    @task
-    def delete_pinecone_index():
-        hook = PineconeHook(conn_id="pinecone")
-        deletion = hook.delete_index(index_name=name_for_index)
+        print("You should watch: " + query_response["matches"][0]["metadata"]["title"])
+        print("Description: " + query_response["matches"][0]["metadata"]["description"])
 
-    clean_up_task = delete_pinecone_index()
-    clean_up_task.as_teardown(setups=[indexcreator])
+    querytask = query_pinecone(
+        vector_data=vectorized_data,
+        index_name=PINECONE_INDEX_NAME,
+        pinecone_conn_id=PINECONE_CONN_ID,
+    )
 
-    
-    start >> indexcreator >> data_conversion >> ingestion >> querytask >> clean_up_task
-
+    indexcreator >> ingestion >> querytask
 
 
 pinecone_example_dag()
