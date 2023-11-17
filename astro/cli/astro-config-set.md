@@ -21,7 +21,7 @@ astro config set <configuration> <value>
 
 | Option           | Description                               | Possible Values |
 | ---------------- | ----------------------------------------- | --------------- |
-| `-g`, `--global` | Modify global CLI configuration settings. | None            |
+| `-g`, `--global` | Modify global CLI configuration settings. See [Set global configurations](configure-cli.md#set-global-configurations). | None            |
 
 For a list of available configurations, see [Configure the CLI](configure-cli.md).
 
