@@ -3,7 +3,7 @@ sidebar_label: 'Authorize Deployments to cloud resources'
 title: 'Authorize an Astro Deployment to cloud resources using workload identity'
 id: authorize-deployments-to-your-cloud
 description: Give Astro Deployments access to your cloud resources using a Kubernetes workload identity
-toc_max_heading_level: 3
+toc_max_heading_level: 2
 ---
 
 import Tabs from '@theme/Tabs';
