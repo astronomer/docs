@@ -3,6 +3,7 @@ sidebar_label: 'Authorize Deployments to cloud resources'
 title: 'Authorize an Astro Deployment to cloud resources using workload identity'
 id: authorize-deployments-to-your-cloud
 description: Give Astro Deployments access to your cloud resources using a Kubernetes workload identity
+toc_max_heading_level: 3
 ---
 
 import Tabs from '@theme/Tabs';
@@ -36,7 +37,7 @@ A workload identity is a Kubernetes service account that provides an identity to
     ]}>
 <TabItem value="aws">
 
-#### Step 1: Authorize the Deployment in your cloud
+### Step 1: Authorize the Deployment in your cloud
 
 To grant a Deployment access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles to authorize your Deployment's workload identity. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource, such as Amazon S3 buckets, Redshift instances, and secrets backends.
 
@@ -70,7 +71,7 @@ To authorize your Deployment, create an IAM role that is assumed by the Deployme
 
 Repeat these steps for each Astro Deployment that needs to access your AWS resources.
 
-#### Step 2: Create an Airflow connection
+### Step 2: Create an Airflow connection
 
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection.
 
@@ -96,7 +97,7 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 <TabItem value="gcp">
 
-#### Authorize your Deployment through GCP Service Account Impersonation
+### Authorize your Deployment through GCP Service Account Impersonation
 
 [GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) allows your Deployment workload identity to assume an existing service account on your GCP project. This is the most secure authorization setup because your Deployment only uses generated, short-lived credentials for a service account, rather than a persistent and static service account key. 
 
@@ -119,11 +120,11 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
     astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
     ```
 
-#### Alternative setup: Grant an IAM role to your Deployment workload identity
+### Alternative setup: Grant an IAM role to your Deployment workload identity
 
 Complete this alternative, simpler setup if you can tolerate your Deployment having long-lasting credentials to your Google Cloud project.
 
-##### Step 1: Authorize the Deployment in your cloud
+#### Step 1: Authorize the Deployment in your cloud
 
 To grant a Deployment access to a service that is running in a GCP account not managed by Astronomer, use your Deployment's workload identity. Workload identity is a service account in GCP that's used to manage the level of access for a specific user, object, or group of users to a resource, such as Google BigQuery or a GCS bucket.
 
@@ -141,7 +142,7 @@ To authorize your Deployment, grant the required access to your Deployment's wor
 
 Repeat these steps for each Deployment that needs to access your GCP resources.
 
-##### Step 2: Create an Airflow connection
+#### Step 2: Create an Airflow connection
 
 Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection.
 
