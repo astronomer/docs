@@ -9,20 +9,20 @@ sidebar_custom_props: { icon: 'img/integrations/cohere.png' }
 import CodeBlock from '@theme/CodeBlock';
 import recipe_suggestions from '!!raw-loader!../code-samples/dags/airflow-cohere/recipe_suggestions.py';
 
-[Cohere](https://cohere.com/) is a platform geared towards implementation of language AI that provides an API for accessing cutting edge large language models (LLMs). The [Cohere Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
+[Cohere](https://cohere.com/) is a platform where you can implement language AI that provides an API to access cutting-edge large language models (LLMs). The [Cohere Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
 
-In this tutorial you'll use Airflow and the Cohere Airflow provider to generate recipe suggestions based on a list of ingredients and countries of recipe origin. You'll use Cohere to create embeddings of the recipes and dimensionality reduction to plot recipe similarity in two dimensions.
+In this tutorial, you use Airflow and the Cohere Airflow provider to generate recipe suggestions based on a list of ingredients and countries of recipe origin. You create embeddings of the recipes and dimensionality reduction to plot recipe similarity in two dimensions with Cohere's tools.
 
 ## Why use Airflow with Cohere?
 
-Cohere provides highly specialized out-of-the box and custom LLMs. These models are used in countless applications, both user-facing, such as to moderate user-generated content, and internal, for example providing insight into customer support tickets.
+Cohere provides highly specialized out-of-the box and custom LLMs.  Countless applications use these models for both user-facing needs, such as to moderate user-generated content, and internal purposes, like providing insight into customer support tickets.
 
 Integrating Cohere with Airflow into one end-to-end machine learning pipeline allows you to:
 
-- Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations using Cohere LLM endpoints based on upstream events in your data ecosystem, such as when new user input is ingested or a new dataset is available.
-- Send several requests to a model endpoint in parallel based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md).
-- Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your Cohere operations. This is critical for day 2 MLOps operations, for example to handle model service outages.
-- Use Airflow to orchestrate the creation of vector embeddings using Cohere models, which is especially useful for very large datasets that cannot be processed automatically by vector databases.
+- Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations with Cohere LLM endpoints based on upstream events in your data ecosystem, like when new user input is ingested or a new dataset is available.
+- Send several requests to a model endpoint in parallel based on upstream events in your data ecosystem or user input with [Airflow params](airflow-params.md).
+- Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your Cohere operations. This is critical for day 2 MLOps operations, for example, to handle model service outages.
+- Use Airflow to orchestrate the creation of vector embeddings with Cohere models, which is especially useful for very large datasets that cannot be processed automatically by vector databases.
 
 ## Time to complete
 
@@ -83,8 +83,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
     This DAG consists of five tasks to make a simple MLOps pipeline.
 
-    - The `get_ingredients` task fetches the list of ingredients that the user found in their pantry and wants to use in their recipe. The input `pantry_ingredients` param is provided via [Airflow params](airflow-params.md) when you run the DAG.
-    - The `get_countries` task retrieves the list of user-provided countries to get recipes from via [Airflow params](airflow-params.md).
+    - The `get_ingredients` task fetches the list of ingredients that the user found in their pantry and wants to use in their recipe. The input `pantry_ingredients` param is provided by [Airflow params](airflow-params.md) when you run the DAG.
+    - The `get_countries` task uses [Airflow params](airflow-params.md) to retrieve the list of user-provided countries to get recipes from.
     - The `get_a_recipe` task uses the [CohereHook](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/_api/airflow/providers/cohere/hooks/cohere/index.html) to connect to the Cohere API and use the [`/generate` endpoint](https://docs.cohere.com/reference/generate) to get a tasty recipe suggestion based on the user's pantry ingredients and one of the countries they provided. This task is [dynamically mapped](dynamic-tasks.md) over the list of countries to generate one task instance per country. The recipes are saved as `.txt` files in the `include` folder.
     - The `get_embeddings` task is defined using the [CohereEmbeddingOperator](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/operators/embedding.html) to generate vector embeddings of the recipes generated by the upstream `get_a_recipe` task. This task is dynamically mapped over the list of recipes to retrieve one set of embeddings per recipe. This pattern allows for efficient parallelization of the vector embedding generation.
     - The `plot_embeddings` task takes the embeddings created by the upstream task and performs dimensionality reduction using [PCA](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html) to plot the embeddings in two dimensions. 
