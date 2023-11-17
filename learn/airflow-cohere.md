@@ -9,9 +9,9 @@ sidebar_custom_props: { icon: 'img/integrations/cohere.png' }
 import CodeBlock from '@theme/CodeBlock';
 import recipe_suggestions from '!!raw-loader!../code-samples/dags/airflow-cohere/recipe_suggestions.py';
 
-[Cohere](https://cohere.com/) is a platform where you can implement language AI that provides an API to access cutting-edge large language models (LLMs). The [Cohere Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
+[Cohere](https://cohere.com/) is a natural language processing (NLP) platform that provides to access cutting-edge large language models (LLMs). The [Cohere Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
 
-In this tutorial, you use Airflow and the Cohere Airflow provider to generate recipe suggestions based on a list of ingredients and countries of recipe origin. You create embeddings of the recipes and dimensionality reduction to plot recipe similarity in two dimensions with Cohere's tools.
+In this tutorial, you use Airflow and the Cohere Airflow provider to generate recipe suggestions based on a list of ingredients and countries of recipe origin. Additionally, you create embeddings of the recipes and perform dimensionality reduction using principal component analysis (PCA) to plot recipe similarity in two dimensions.
 
 ## Why use Airflow with Cohere?
 
