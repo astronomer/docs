@@ -104,7 +104,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
     ![Screenshot of the Airflow UI showing the params available for the `captains_dag` DAG with the default choices.](/img/tutorials/airflow-openai_params.png)
 
-3. Go to the `include` folder to view the image file created by the `plot_embeddings` task. The image should look similar to the one below.
+3. After the DAG run completed, go to the `include` folder to view the image file created by the `plot_embeddings` task. The image should look similar to the one below.
 
     ![Screenshot of the image created by the `plot_embeddings` task showing the two dimensional representation of the closeness of answers associated with different Star Trek captains.](/img/tutorials/airflow-openai_plot.png)
 
