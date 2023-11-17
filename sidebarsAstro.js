@@ -306,7 +306,7 @@ module.exports = {
           items: [
             "runtime-image-architecture",
             "runtime-version-lifecycle-policy",
-            "runtime-providers-versions"
+            "runtime-providers-reference"
           ],
         },
         'platform-variables',

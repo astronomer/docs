@@ -1,22 +1,28 @@
 ---
-sidebar_label: "Provider packages"
-title: "Astro Runtime Provider packages"
-id: runtime-providers-versions
-description: Airflow Provider packages distributed with each version of Astro Runtime.
+sidebar_label: "Provider package reference"
+title: "Astro Runtime provider package reference"
+id: runtime-providers-reference
+description: A reference for all Airflow provider packages and versions distributed in each version of Astro Runtime.
 ---
 
-Airflow Providers are Python packages that provide various operators, sensors, hooks, and other components for specific services and technologies, allowing users to seamlessly integrate and interact with a wide range of systems. 
+An [Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers/) is a Python package that can be added to Airflow to extend its functionality. A provider package typically contains modules such as operators, hooks, and sensors to interact with an external service. 
 
-As Airflow continues to grow, providers constantly get updated to stay current with the latest technologies and services.
-Consequently, each version of Airflow incorporates different versions of Airflow providers. 
+Astro Runtime is bundled with a set of provider packages, some of which aren't installed by default in Apache Airflow. These providers are included to support key parts of Astro and to enhance the DAG development experience. 
 
-Astro Runtime packages specific versions of Airflow Providers with each of its releases.
+Use this document to review the included provider packages and their versions for each Astro Runtime version. For more information about Astro Runtime, see [Astro Runtime image architecture](runtime-image-architecture.md)
 
-You will find below the list of Airflow Providers and corresponding versions packaged with each Astro Runtime version.
+:::tip
 
+To determine the version of any provider package installed in your current Astro Runtime image, you can run:
+
+```
+docker run --rm <runtime-image> pip freeze | grep <provider>
+```
+
+:::
 
 ## Astro Runtime 9.4.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.7.1   |
 | apache-airflow-providers-celery          | 3.4.0   |
@@ -39,7 +45,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 9.3.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.7.1   |
 | apache-airflow-providers-celery          | 3.4.0   |
@@ -62,7 +68,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 9.2.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.7.1   |
 | apache-airflow-providers-celery          | 3.3.4   |
@@ -85,7 +91,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 9.1.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.6.0   |
 | apache-airflow-providers-celery          | 3.3.3   |
@@ -107,7 +113,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 9.0.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.5.1   |
 | apache-airflow-providers-celery          | 3.3.2   |
@@ -129,7 +135,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.10.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.7.1   |
 | apache-airflow-providers-celery          | 3.3.4   |
@@ -150,7 +156,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.9.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.3.1   |
 | apache-airflow-providers-celery          | 3.2.1   |
@@ -171,7 +177,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.8.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.3.1   |
 | apache-airflow-providers-celery          | 3.2.1   |
@@ -192,7 +198,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.7.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.3.0   |
 | apache-airflow-providers-celery          | 3.2.1   |
@@ -213,7 +219,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.6.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.2.0   |
 | apache-airflow-providers-celery          | 3.2.1   |
@@ -234,7 +240,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.5.0
-| Providers package name                   | Version       |
+| Provider package name                   | Version       |
 | :--------------------------------------- | :------------ |
 | apache-airflow-providers-amazon          | 8.1.0         |
 | apache-airflow-providers-celery          | 3.2.0         |
@@ -255,7 +261,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.4.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.1.0   |
 | apache-airflow-providers-celery          | 3.2.0   |
@@ -276,7 +282,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.3.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.0.0   |
 | apache-airflow-providers-celery          | 3.1.0   |
@@ -297,7 +303,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.2.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.0.0   |
 | apache-airflow-providers-celery          | 3.1.0   |
@@ -317,7 +323,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.1.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.0.0   |
 | apache-airflow-providers-celery          | 3.1.0   |
@@ -337,7 +343,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 8.0.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 8.0.0   |
 | apache-airflow-providers-celery          | 3.1.0   |
@@ -357,7 +363,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.6.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | airflow-provider-duckdb                  | 0.1.0   |
 | apache-airflow-providers-amazon          | 6.2.0   |
@@ -386,7 +392,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.5.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | airflow-provider-duckdb                  | 0.1.0   |
 | apache-airflow-providers-amazon          | 6.2.0   |
@@ -415,7 +421,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.4.3
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | airflow-provider-duckdb                  | 0.0.2   |
 | apache-airflow-providers-amazon          | 6.2.0   |
@@ -444,7 +450,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.4.2
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | airflow-provider-duckdb                  | 0.0.2   |
 | apache-airflow-providers-amazon          | 6.2.0   |
@@ -473,7 +479,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.4.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | airflow-provider-duckdb                  | 0.0.2   |
 | apache-airflow-providers-amazon          | 6.2.0   |
@@ -502,7 +508,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.4.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | airflow-provider-duckdb                  | 0.0.2   |
 | apache-airflow-providers-amazon          | 6.2.0   |
@@ -531,7 +537,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.3.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | airflow-provider-duckdb                  | 0.0.2   |
 | apache-airflow-providers-amazon          | 6.2.0   |
@@ -560,7 +566,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.2.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.2.0   |
 | apache-airflow-providers-apache-hive     | 5.1.1   |
@@ -587,7 +593,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.1.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.2.0   |
 | apache-airflow-providers-apache-hive     | 5.0.0   |
@@ -613,7 +619,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 7.0.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.2.0   |
 | apache-airflow-providers-apache-hive     | 4.1.1   |
@@ -639,7 +645,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.7.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.2.0   |
 | apache-airflow-providers-apache-hive     | 6.1.6   |
@@ -665,7 +671,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.6.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 6.1.0   |
@@ -691,7 +697,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.5.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 6.1.0   |
@@ -717,7 +723,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.4.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.3   |
@@ -743,7 +749,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.3.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.2   |
@@ -769,7 +775,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.2.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.1   |
@@ -795,7 +801,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.2.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.1   |
@@ -821,7 +827,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.1.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 5.0.0   |
@@ -847,7 +853,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.0.4
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 4.0.1   |
@@ -873,7 +879,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.0.3
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 6.0.0   |
 | apache-airflow-providers-apache-hive     | 4.0.1   |
@@ -899,7 +905,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.0.2
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.1.0   |
 | apache-airflow-providers-apache-hive     | 4.0.0   |
@@ -925,7 +931,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.0.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.1.0   |
 | apache-airflow-providers-apache-hive     | 4.0.0   |
@@ -949,7 +955,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 6.0.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 4.0.0   |
@@ -973,7 +979,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.4.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.3   |
@@ -999,7 +1005,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.3.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.2   |
@@ -1025,7 +1031,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.2.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.1   |
@@ -1051,7 +1057,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.2.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 5.1.1   |
@@ -1077,7 +1083,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.1.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 5.0.0   |
@@ -1103,7 +1109,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.13
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 4.1.1   |
@@ -1129,7 +1135,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.10
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 4.0.1   |
@@ -1155,7 +1161,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.9
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 4.0.0   |
@@ -1177,7 +1183,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.8
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 5.0.0   |
 | apache-airflow-providers-apache-hive     | 4.0.0   |
@@ -1199,7 +1205,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.7
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 4.1.0   |
 | apache-airflow-providers-apache-hive     | 4.0.0   |
@@ -1221,7 +1227,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.6
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 4.0.0   |
 | apache-airflow-providers-apache-hive     | 3.0.0   |
@@ -1242,7 +1248,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.5
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.4.0   |
 | apache-airflow-providers-apache-hive     | 3.0.0   |
@@ -1263,7 +1269,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.4
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.4.0   |
 | apache-airflow-providers-apache-hive     | 3.0.0   |
@@ -1284,7 +1290,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.3
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.4.0   |
 | apache-airflow-providers-apache-hive     | 2.3.3   |
@@ -1305,7 +1311,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.2
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.4.0   |
 | apache-airflow-providers-apache-hive     | 2.3.3   |
@@ -1326,7 +1332,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.3.0   |
 | apache-airflow-providers-apache-livy     | 2.2.3   |
@@ -1345,7 +1351,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 5.0.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.3.0   |
 | apache-airflow-providers-celery          | 2.1.4   |
@@ -1363,7 +1369,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.9
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.2.0   |
 | apache-airflow-providers-celery          | 2.1.3   |
@@ -1382,7 +1388,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.7
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.2.0   |
 | apache-airflow-providers-celery          | 2.1.3   |
@@ -1401,7 +1407,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.6
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.2.0   |
 | apache-airflow-providers-celery          | 2.1.3   |
@@ -1419,7 +1425,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.5
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.2.0   |
 | apache-airflow-providers-celery          | 2.1.3   |
@@ -1437,7 +1443,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.4
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.2.0   |
 | apache-airflow-providers-celery          | 2.1.3   |
@@ -1455,7 +1461,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.3
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.2.0   |
 | apache-airflow-providers-celery          | 2.1.3   |
@@ -1473,7 +1479,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.2
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.2.0   |
 | apache-airflow-providers-celery          | 2.1.3   |
@@ -1491,7 +1497,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.0.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1509,7 +1515,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.2.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.0.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1527,7 +1533,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.1.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 3.0.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1544,7 +1550,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.11
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1561,7 +1567,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.10
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1578,7 +1584,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.9
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1592,7 +1598,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.8
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1606,7 +1612,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.7
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1620,7 +1626,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.6
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1634,7 +1640,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.5
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1648,7 +1654,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.4
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.4.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1662,7 +1668,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.3
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.3.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1676,7 +1682,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.2
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.3.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1690,7 +1696,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.3.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1704,7 +1710,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 4.0.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 2.3.0   |
 | apache-airflow-providers-celery          | 2.1.0   |
@@ -1718,7 +1724,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 3.0.4
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 1!2.0.0 |
 | apache-airflow-providers-celery          | 1!2.0.0 |
@@ -1731,7 +1737,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 3.0.3
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 1!2.0.0 |
 | apache-airflow-providers-celery          | 1!2.0.0 |
@@ -1744,7 +1750,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 3.0.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 1!2.0.0 |
 | apache-airflow-providers-celery          | 1!2.0.0 |
@@ -1757,7 +1763,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 3.0.0
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 1!2.0.0 |
 | apache-airflow-providers-celery          | 1!2.0.0 |
@@ -1770,7 +1776,7 @@ You will find below the list of Airflow Providers and corresponding versions pac
 
 
 ## Astro Runtime 2.1.1
-| Providers package name                   | Version |
+| Provider package name                   | Version |
 | :--------------------------------------- | :------ |
 | apache-airflow-providers-amazon          | 1!2.0.0 |
 | apache-airflow-providers-celery          | 1!2.0.0 |
