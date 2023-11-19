@@ -226,7 +226,7 @@ module.exports = {
           ],
         },
         'connections/postgres',
-        'Pinecone'
+        'Pinecone',
         {
           type: 'category',
           label: 'Snowflake',
