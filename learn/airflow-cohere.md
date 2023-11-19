@@ -15,7 +15,7 @@ In this tutorial, you use Airflow and the Cohere Airflow provider to generate re
 
 ## Why use Airflow with Cohere?
 
-Cohere provides highly specialized out-of-the box and custom LLMs.  Countless applications use these models for both user-facing needs, such as to moderate user-generated content, and internal purposes, like providing insight into customer support tickets.
+Cohere provides highly specialized out-of-the box and custom LLMs. Countless applications use these models for both user-facing needs, such as to moderate user-generated content, and internal purposes, like providing insight into customer support tickets.
 
 Integrating Cohere with Airflow into one end-to-end machine learning pipeline allows you to:
 
