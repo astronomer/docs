@@ -25,7 +25,7 @@ Specifically, when a release is in the stable channel, the following is true:
 
 When a release is in the deprecated channel, the following is true:
 
-- All Astro, Astronomer Software, and local use cases are not supported.
+- All Astro, Astronomer Software, and local use cases are not supported. Some features might still be functional, but functionality is not guaranteed.
 - If you're an Astronomer customer and reach out to support while using a deprecated version of the Astro CLI, Astronomer support will recommend that you upgrade the CLI as a first step.
 - The release includes `deprecated` metadata in `https://updates.astronomer.io/astro-cli`.
 - The release's binary is available on GitHub.
