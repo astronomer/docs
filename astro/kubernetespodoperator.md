@@ -217,7 +217,7 @@ KubernetesPodOperator(
 
 :::info
 
-Passwordless setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. For Astro Hosted standard clusters, please follow the steps in [Private Registry](https://docs.astronomer.io/astro/kubernetespodoperator?tab=PrivateRegistry#step-1-create-a-kubernetes-secret) to create a Kubernetes secret containing your registry credentials.
+Policy-based setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. To run images from a private registry on Astro Hosted standard clusters, follow the steps in [Private Registry](kubernetespodoperator.md?tab=PrivateRegistry#step-1-create-a-kubernetes-secret).
 
 :::
 
