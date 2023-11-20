@@ -38,7 +38,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
         {label: 'Slack', value: 'Slack'},
         {label: 'PagerDuty', value: 'PagerDuty'},
         {label: 'Email', value: 'Email'},
-        {label: 'With DAG trigger', value: 'DAG'}
+        {label: 'DAG Trigger', value: 'DAG'}
     ]}>
 <TabItem value="Slack">
 
@@ -95,10 +95,41 @@ No external configuration is required for the email integration. Astronomer reco
 </TabItem>
 <TabItem value="DAG">
 
-**With DAG trigger** works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro sends a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message through a custom communication channel or writing data about an incident to a table.
+The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
 
-1. In the Workspace where you want to configure the communication channel, create and deploy the DAG that you want to trigger. You can deploy the DAG to any Deployment in the Workspace even if the alert is not applied to that Deployment.
-2. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment where you deployed the DAG. Copy the token to use in the next step.
+1. Create the DAG that you want to trigger on an alert. Here's an example of the payload and DAG implementation:
+
+  ```python
+  import datetime
+
+  from airflow import DAG
+  from airflow.models import DagRun
+  from airflow.operators.python import PythonOperator
+  
+  with DAG(
+      dag_id="register_incident",
+      start_date=datetime.datetime(2023, 1, 1),
+      schedule=None,
+  ):
+  
+      def _register_incident(dag_run: DagRun):
+          # Here you can run arbitrary Python code. Example DAG run conf payload:
+          # {
+          #     "dagName": "fail_dag",
+          #     "alertType": "PIPELINE_FAILURE",
+          #     "alertId": "d75e7517-88cc-4bab-b40f-660dd79df216",
+          #     "message": "[Astro Alerts] Pipeline failure detected on DAG fail_dag. \\nStart time: 2023-11-17 17:32:54 UTC. \\nFailed at: 2023-11-17 17:40:10 UTC. \\nAlert notification time: 2023-11-17 17:40:10 UTC. \\nClick link to investigate in Astro UI: https://cloud.astronomer.io/clkya6zgv000401k8zafabcde/dags/clncyz42l6957401bvfuxn8zyxw/fail_dag/c6fbe201-a3f1-39ad-9c5c-817cbf99d123?utm_source=alert\"\\n"
+          # }
+  
+          # Example:
+          failed_dag = dag_run.conf["dagName"]
+          print(f"Register an incident in my system for DAG {failed_dag}.")
+  
+      PythonOperator(task_id="register_incident", python_callable=_register_incident)
+  ```
+
+2. Deploy the DAG to any Deployment in the same Workspace as the alert will be triggered it. The DAG to alert on, and the DAG to be triggered by the alert, can be deployed in different Deployments, but must be deployed within the same Workspace.
+3. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment where you deployed the DAG that will be triggered. Copy the token to use in the next step.
 
 </TabItem>
 </Tabs>
@@ -124,7 +155,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
             {label: 'Slack', value: 'Slack'},
             {label: 'PagerDuty', value: 'PagerDuty'},
             {label: 'Email', value: 'Email'},
-            {label: 'With DAG trigger', value: 'DAG'}
+            {label: 'DAG Trigger', value: 'DAG'}
         ]}>
     <TabItem value="Slack">
     
