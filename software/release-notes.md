@@ -30,7 +30,6 @@ astronomer:
 ### Additional improvements
 
 - Deprecated Kubernetes 1.23
-- The Houston API `runtimeReleases` query now specifies whether a given Runtime release is supported or deprecated. <!-- https://github.com/astronomer/issues/issues/5983-->
 - If you're migrating an index from Fluentd to Vector, you can now specify an index pattern in your `config.yaml` file to simplify the migration process:
 
     ```yaml
