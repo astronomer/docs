@@ -101,9 +101,9 @@ The **DAG Trigger** communication channel works differently from other communica
 
   ```python
   import datetime
+  from typing import Any
 
   from airflow import DAG
-  from airflow.models import DagRun
   from airflow.operators.python import PythonOperator
   
   with DAG(
@@ -112,7 +112,7 @@ The **DAG Trigger** communication channel works differently from other communica
       schedule=None,
   ):
   
-      def _register_incident(dag_run: DagRun):
+      def _register_incident(params: dict[str, Any]):
           # Here you can run arbitrary Python code. Example DAG run conf payload:
           # {
           #     "dagName": "fail_dag",
@@ -122,10 +122,11 @@ The **DAG Trigger** communication channel works differently from other communica
           # }
   
           # Example:
-          failed_dag = dag_run.conf["dagName"]
+          failed_dag = params["dagName"]
           print(f"Register an incident in my system for DAG {failed_dag}.")
   
       PythonOperator(task_id="register_incident", python_callable=_register_incident)
+
   ```
 
 2. Deploy the DAG to any Deployment in the same Workspace as the alert will be triggered it. The DAG to alert on, and the DAG to be triggered by the alert, can be deployed in different Deployments, but must be deployed within the same Workspace.
