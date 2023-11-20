@@ -101,7 +101,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```
 
 
-4. To create an [Airflow connection](connections.md) to the PostgreSQL database, add the following to your `.env` file. If you are using the OpenAI API for embeddings you will need to update the `OPENAI_API_KEY` variable.
+4. To create an [Airflow connection](connections.md) to the PostgreSQL database, add the following to your `.env` file. If you are using the OpenAI API for embeddings you will need to update the `OPENAI_API_KEY` environment variable.
 
     ```text
     AIRFLOW_CONN_POSTGRES_DEFAULT='{
