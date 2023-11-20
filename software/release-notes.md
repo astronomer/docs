@@ -40,11 +40,11 @@ astronomer:
 
 ### Bug fixes
 
-- Fixed an issue where deploys were failing for Deployments that used older versions of the Airflow Helm chart. <!-- https://github.com/astronomer/issues/issues/5825-->
-- Fixed an issue where some dashboards in Grafana were not visible if you didn't manually log in to Grafana as an admin. <!-- https://github.com/astronomer/issues/issues/5759-- >
-- Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down. <!-- https://github.com/astronomer/issues/issues/5722-->
-- Fixed an issue where you couldn't search for a user in the Software UI by their user ID. <!-- https://github.com/astronomer/issues/issues/5942-->
-- Fixed an issue where the `invites` query returned an error instead of an empty array when no users invites were found. <!-- https://github.com/astronomer/issues/issues/5966-->
+- Fixed an issue where deploys were failing for Deployments that used older versions of the Airflow Helm chart.
+- Fixed an issue where some dashboards in Grafana were not visible if you didn't manually log in to Grafana as an admin.
+- Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down.
+- Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
+- Fixed an issue where the `invites` query returned an error instead of an empty array when no users invites were found.
 - Fixed the following vulnerabilities:
 
     - [CVE-2023-43787](https://nvd.nist.gov/vuln/detail/CVE-2023-43787)
