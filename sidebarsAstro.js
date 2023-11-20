@@ -376,6 +376,7 @@ module.exports = {
       items: [
         "cli/configure-cli",
         "cli/authenticate-to-clouds",
+        "cli/release-lifecycle-policy"
       ],
     },
     {
