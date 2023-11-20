@@ -95,6 +95,12 @@ No external configuration is required for the email integration. Astronomer reco
 </TabItem>
 <TabItem value="DAG">
 
+:::caution
+
+This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
 The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
 
 1. Create the DAG that you want to trigger on an alert. Here's an example of the payload and DAG implementation:
