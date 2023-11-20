@@ -97,7 +97,7 @@ No external configuration is required for the email integration. Astronomer reco
 
 :::caution
 
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews).
+This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
 
 :::
 
