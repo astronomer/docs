@@ -26,7 +26,7 @@ Integrating PostgreSQL with pgvector and Airflow into one end-to-end machine lea
 
 ## Time to complete
 
-This tutorial takes approximately 30 minutes to complete.
+This tutorial takes approximately 30 minutes to complete (reading your suggested book not included).
 
 ## Assumed knowledge
 
