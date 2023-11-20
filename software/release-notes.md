@@ -17,14 +17,14 @@ Release date: November 20, 2023
 
 ### Change to behavior for interacting with deprecated Runtime versions
 
-In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the `enableSystemAdminCanUseNonSupportedRuntime` key has been replaced with `enableSystemAdminCanCreateAllRuntimes`. To set the new flag, add the following configuration to your `config.yaml` file:
+In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the `enableSystemAdminCanUseNonSupportedRuntime` key has been replaced with `enableSystemAdminCanUseAllRuntimes`. To set the new flag, add the following configuration to your `config.yaml` file:
 
 ```yaml
 astronomer:
    houston:
       config:
          deployments:
-            enableSystemAdminCanCreateAllRuntimes: true   
+            enableSystemAdminCanUseAllRuntimes: true   
 ```
 
 ### Additional improvements
