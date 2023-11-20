@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/cohere.png' }
 import CodeBlock from '@theme/CodeBlock';
 import recipe_suggestions from '!!raw-loader!../code-samples/dags/airflow-cohere/recipe_suggestions.py';
 
-[Cohere](https://cohere.com/) is a natural language processing (NLP) platform that provides to access cutting-edge large language models (LLMs). The [Cohere Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
+[Cohere](https://cohere.com/) is a natural language processing (NLP) platform that provides an API to access cutting-edge large language models (LLMs). The [Cohere Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-cohere/stable/index.html) offers modules to easily integrate Cohere with Airflow.
 
 In this tutorial, you use Airflow and the Cohere Airflow provider to generate recipe suggestions based on a list of ingredients and countries of recipe origin. Additionally, you create embeddings of the recipes and perform dimensionality reduction using principal component analysis (PCA) to plot recipe similarity in two dimensions.
 
@@ -64,12 +64,12 @@ To get the most out of this tutorial, make sure you have an understanding of:
     adjustText==0.8
     ```
 
-3. To create an [Airflow connection](connections.md) to Cohere, add the following environment variables to your `.env` file. Make sure to provide you own Cohere API key.
+3. To create an [Airflow connection](connections.md) to Cohere, add the following environment variables to your `.env` file. Make sure to provide `<your-cohere-api-key>`.
 
     ```text
     AIRFLOW_CONN_COHERE_DEFAULT='{
         "conn_type": "cohere",
-        "password": "YOUR COHERE API KEY",
+        "password": "<your-cohere-api-key>",
     }'
     ```
 
