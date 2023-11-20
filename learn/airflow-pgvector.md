@@ -61,7 +61,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two packages to your `requirements.txt` file to install the [pgvector Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-pgvector/stable/index.html) and the [OpenAI Python client]() in your Astro project:
+2. Add the following two packages to your `requirements.txt` file to install the [pgvector Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-pgvector/stable/index.html) and the [OpenAI Python client](https://platform.openai.com/docs/libraries) in your Astro project:
 
     ```text
     apache-airflow-providers-pgvector==1.0.0
