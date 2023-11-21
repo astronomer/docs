@@ -27,16 +27,23 @@ astronomer:
             enableSystemAdminCanUseAllRuntimes: true   
 ```
 
+### changes to behaviour for configuring default index prefix
+
+Until 0.33.1 we supported only hardcoded index prefix for both fluentd and sidecar based logging by defaulting to fluentd.* and vector.* , with new configuration change users can now configure global index name prefix to be used with both fluend and sidecar based logging
+
+```yaml
+    global:
+       logging:
+          indexNamePrefix: <your-index-prefix>
+```
+
+Note: currently we dont migrate data from existing indexes users need to take care of data migration. 
+
 ### Additional improvements
 
 - Deprecated Kubernetes 1.23
 - If you're migrating an index from Fluentd to Vector, you can now specify an index pattern in your `config.yaml` file to simplify the migration process:
 
-    ```yaml
-    astronomer:
-       loggingSidecar:
-          indexNamePrefix: <your-index-prefix>
-    ```
 
 ### Bug fixes
 
