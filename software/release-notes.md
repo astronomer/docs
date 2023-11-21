@@ -36,8 +36,6 @@ astronomer:
        logging:
           indexNamePrefix: <your-index-prefix>
     ```
-
-Note: currently we don't support data migration. if a existing user migrates from fluentd to sidecar based logging he can utilize this feature by setting ```global.logging.indexNamePrefix: fluentd``` allowing platform to use common index to retain old task logs.
 - Deprecated Kubernetes 1.23
 ### Bug fixes
 
