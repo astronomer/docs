@@ -11,6 +11,57 @@ This page contains release notes for all recent Astronomer Software versions.
 
 0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.33.2 
+
+Release date: November 20, 2023
+
+### Change to behavior for interacting with deprecated Runtime versions
+
+In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the `enableSystemAdminCanUseNonSupportedRuntime` key has been replaced with `enableSystemAdminCanUseAllRuntimes`. To set the new flag, add the following configuration to your `config.yaml` file:
+
+```yaml
+astronomer:
+   houston:
+      config:
+         deployments:
+            enableSystemAdminCanUseAllRuntimes: true   
+```
+
+### Additional improvements
+
+- Deprecated Kubernetes 1.23
+- If you're migrating an index from Fluentd to Vector, you can now specify an index pattern in your `config.yaml` file to simplify the migration process:
+
+    ```yaml
+    astronomer:
+       loggingSidecar:
+          indexNamePrefix: <your-index-prefix>
+    ```
+
+### Bug fixes
+
+- Fixed an issue where deploys were failing for Deployments that used older versions of the Airflow Helm chart.
+- Fixed an issue where some dashboards in Grafana were not visible if you didn't manually log in to Grafana as an admin.
+- Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down.
+- Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
+- Fixed an issue where the `invites` query returned an error instead of an empty array when no users invites were found.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-43787](https://nvd.nist.gov/vuln/detail/CVE-2023-43787)
+    - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g)
+    - [CVE-2023-32002](https://nvd.nist.gov/vuln/detail/CVE-2023-32002)
+    - [CVE-2023-32006](https://nvd.nist.gov/vuln/detail/CVE-2023-32006)
+    - [CVE-2023-32559](https://nvd.nist.gov/vuln/detail/CVE-2023-32559)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2023-24540](https://nvd.nist.gov/vuln/detail/CVE-2023-24540)
+    - [CVE-2023-24538](https://nvd.nist.gov/vuln/detail/CVE-2023-24538)
+    - [CVE-2023-45133](https://nvd.nist.gov/vuln/detail/CVE-2023-45133)
+    - [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2023-48174)
+    - [CVE-2023-39320](https://nvd.nist.gov/vuln/detail/CVE-2023-39320)
+    - [CVE-2023-29402](https://nvd.nist.gov/vuln/detail/CVE-2023-29402)
+    - [CVE-2023-29404](https://nvd.nist.gov/vuln/detail/CVE-2023-29404)
+    - [CVE-2023-29405](https://nvd.nist.gov/vuln/detail/CVE-2023-29405)
+
 ## 0.33.1
 
 Release date: October 13, 2023
