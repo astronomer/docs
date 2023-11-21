@@ -69,7 +69,7 @@ If you don't have an email address with a unique domain, such as one provided to
 
 1. If you haven't already done so, create an account on `portal.azure.com` using your personal email address.
 2. In the Azure portal search bar, search for the **Subscriptions** service.
-3. Click **Add**, then create a new Azure subscription. You can create a trial subscription to try Astro.
+3. Click **Add**, then create a new Azure subscription.
 4. In the Azure portal search bar, search for the **Users** service.
 5. Click **New User** > **Create New User**.
 6. In the **Basics** tab, fill out all required fields for your user. This is the account you can use to install Astro. Copy the full email address and password for the user.
