@@ -40,6 +40,6 @@ The stable release channel contains only the latest patches of the three most re
 For example, consider a circumstance where the three most recent minor versions of the Astro CLI are 1.18, 1.19, and 1.20. Based on this maintenance policy:
 
 - The latest patch versions for 1.18, 1.19, and 1.20 are all stable. These would be the only available stable releases for the Astro CLI.
-- Say 1.20.1 is the current stable version and Astronomer releases version 1.20.2. This means 1.20.2 becomes the new stable version and version 1.20.1 becomes deprecated. This release has no impact on the stable 1.18 and 1.19 releases.
+- Say 1.20.1 is the current stable version and Astronomer releases version 1.20.2. This means 1.20.2 becomes the new stable version and version 1.20.1 becomes deprecated. This release has no impact on the channels for the 1.18 and 1.19 releases.
 - If 1.21 releases, all versions of 1.18 are marked as deprecated. This release would have no impact on the channels of 1.19 and 1.20 releases. 
 
