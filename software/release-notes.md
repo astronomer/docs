@@ -37,6 +37,7 @@ astronomer:
           indexNamePrefix: <your-index-prefix>
     ```
 - Deprecated Kubernetes 1.23
+
 ### Bug fixes
 
 - Fixed an issue where deploys were failing for Deployments that used older versions of the Airflow Helm chart.
