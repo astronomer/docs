@@ -27,7 +27,7 @@ astronomer:
             enableSystemAdminCanUseAllRuntimes: true   
 ```
 
-### changes to behaviour for configuring default index name prefix
+### Additional improvements
 
 Until 0.33.1 we supported only hardcoded index prefix for both fluentd and sidecar based logging by defaulting to ```fluentd.*``` and ```vector.*```, this new configuration change allows users to configure global index name prefix to be used with both fluend and sidecar based logging
 
