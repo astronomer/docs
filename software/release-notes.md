@@ -35,7 +35,7 @@ Until 0.33.1 we supported only hardcoded index prefix for both fluentd and sidec
     global:
        logging:
           indexNamePrefix: <your-index-prefix>
-```
+    ```
 
 Note: currently we don't support data migration. if a existing user migrates from fluentd to sidecar based logging he can utilize this feature by setting ```global.logging.indexNamePrefix: fluentd``` allowing platform to use common index to retain old task logs.
 
