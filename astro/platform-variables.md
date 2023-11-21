@@ -5,7 +5,7 @@ id: platform-variables
 description: A list of environment variables that are set globally on Astro and should not be modified.
 ---
 
-This document is a reference for all environment variables on Astronomer with different default values than open source Apache Airflow. You can override [default Runtime environment variables](#default-runtime-environment-variables), but you can't override [system environment variables](#system-environment-variables).
+This document is a reference for all environment variables on Astronomer with different default values than open source Apache Airflow. You can override [default Runtime environment variables](runtime-image-architecture.md#default-environment-variables), but you can't override [system environment variables](#system-environment-variables).
 
 For information on setting your own environment variables, see [Environment variables](manage-env-vars.md).
 

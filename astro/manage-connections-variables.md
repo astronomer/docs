@@ -130,15 +130,15 @@ Airflow connections and variables are stored in the Airflow metadata database. C
 You can configure system-level environment variables both locally and on Astro. For setup steps, see:
 
 - [Set environment variables locally](cli/develop-project.md#set-environment-variables-locally)
-- [Set environment variables on Astro](environment-variables.md#add-airflow-connections-and-variables-using-environment-variables)
+- [Set environment variables on Astro](manage-env-vars.md)
 
 #### Benefits
 
 - If you use an `.env` file for your local Airflow environment and your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables.
 - You can export environment variables from a local Airflow environment to Astro using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#environment-variables).
-- You can override Airflow variables set in the Airflow UI. See [Environment variable priority](environment-variables.md#ways-to-manage-environment-variables-on-astro)
+- You can override Airflow variables set in the Airflow UI. See [Environment variable priority](environment-variables.md#environment-variable-priority)
 - You can create your connections and variables as environment variables from the Cloud UI. See [Use environment variables](manage-env-vars.md#using-the-cloud-ui). 
-- Environment variables marked as **Secret** are encrypted in the Astronomer control plane. See [How environment variables are stored on Astro](environment-variables.md#how-astro-stores-your-environment-variables) for details.
+- Environment variables marked as **Secret** are encrypted in the Astronomer control plane. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-in-the-cloud-ui) for details.
 - This approach limits the number of open connections to your metadata database, especially if you are using your connections and variables outside of task definitions.
 
 #### Limitations
