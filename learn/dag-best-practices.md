@@ -93,13 +93,32 @@ When a last modified date is unavailable, a sequence or incrementing ID can be u
 
 ### Avoid top-level code in your DAG file
 
-In the context of Airflow, top-level code refers to any code that isn't part of your DAG or operator instantiations, particularly code making requests to external systems.
+In the context of Airflow, top-level code refers to any code that is run at the time the DAG is parsed, as opposed to the time the task is run.
 
-Airflow executes all code in the `dags_folder` on every `min_file_process_interval`, which defaults to 30 seconds. You can read more about this parameter in the [Airflow docs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#min-file-process-interval)). Because of this, top-level code that makes requests to external systems, like an API or a database, or makes function calls outside of your tasks can cause performance issues since these requests and connections are being made every 30 seconds rather than only when the DAG is scheduled to run. 
+Code that is part of an operator or a decorated task is run by Airflow only when the task runs, not when the DAG is parsed. For example, in the following code, `call_external_systems()` is considered top-level code because it runs when the DAG is parsed. `x + y` is not top-level code, because it is part of the task definition and only runs when the task runs.
 
-The following DAG example dynamically generates tasks using the PostgresOperator based on records pulled from a different database. 
+```python
+@dag(...)
+def the_dag():
+    
+    @task
+    def do_thing():
+        x + y
 
-In the **Bad practice** example the connection to the other database is made outside of an operator instantiation as top-level code. When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table. This query is run on every Scheduler heartbeat, which can cause performance issues. 
+    num_of_things = call_external_system()    # this is "top level code"
+    
+    
+    chain(do_thing() for _ in range(num_of_things))
+
+the_dag()
+
+```
+
+Generally, any code that isn't part of your DAG or operator instantiations and that makes requests to external systems is of concern. Airflow executes all code in the `dags_folder` on every [`min_file_process_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#min-file-process-interval), which defaults to 30 seconds. Therefore, any code that is run when the DAG is parsed and makes requests to external systems, like an API or a database, or makes function calls outside of your tasks can cause performance issues since these requests and connections are being made every 30 seconds rather than only when the DAG is scheduled to run. 
+
+To see another example, the following DAG example dynamically generates tasks using the PostgresOperator based on records pulled from a different database. 
+
+In the **Bad practice** example the connection to the other database is made outside of an operator instantiation as top-level code. When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table. This query is run every time the DAG is parsed, which can cause performance issues. 
 
 The version shown under the **Good practice** DAG wraps the connection to the database into its own task, the `get_list_of_results` task. Now the connection is only made at when the DAG actually runs, preventing performance issues.
 
