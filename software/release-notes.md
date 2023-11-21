@@ -29,14 +29,14 @@ astronomer:
 
 ### Additional improvements
 
-- Deprecated Kubernetes 1.23
-- If you're migrating an index from Fluentd to Vector, you can now specify an index pattern in your `config.yaml` file to simplify the migration process:
+- You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
 
     ```yaml
-    astronomer:
-       loggingSidecar:
+    global:
+       logging:
           indexNamePrefix: <your-index-prefix>
     ```
+- Deprecated Kubernetes 1.23
 
 ### Bug fixes
 
