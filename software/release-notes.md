@@ -29,7 +29,7 @@ astronomer:
 
 ### changes to behaviour for configuring default index prefix
 
-Until 0.33.1 we supported only hardcoded index prefix for both fluentd and sidecar based logging by defaulting to fluentd.* and vector.* , with new configuration change users can now configure global index name prefix to be used with both fluend and sidecar based logging
+Until 0.33.1 we supported only hardcoded index prefix for both fluentd and sidecar based logging by defaulting to fluentd.* and vector.* , this new configuration change allows users to configure global index name prefix to be used with both fluend and sidecar based logging
 
 ```yaml
     global:
