@@ -37,14 +37,11 @@ Until 0.33.1 we supported only hardcoded index prefix for both fluentd and sidec
           indexNamePrefix: <your-index-prefix>
 ```
 
-Note: currently we dont migrate data from existing indexes users need to take care of data migration. 
+Note: currently we don't support data migration. if a existing user migrates from fluentd to sidecar based logging he can utilize this feature by setting ```global.logging.indexNamePrefix: fluentd``` allowing to retain old task logs and common setting common index format
 
 ### Additional improvements
 
 - Deprecated Kubernetes 1.23
-- If you're migrating an index from Fluentd to Vector, you can now specify an index pattern in your `config.yaml` file to simplify the migration process:
-
-
 ### Bug fixes
 
 - Fixed an issue where deploys were failing for Deployments that used older versions of the Airflow Helm chart.
