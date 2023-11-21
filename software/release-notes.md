@@ -29,7 +29,7 @@ astronomer:
 
 ### Additional improvements
 
-Until 0.33.1 we supported only hardcoded index prefix for both fluentd and sidecar based logging by defaulting to ```fluentd.*``` and ```vector.*```, this new configuration change allows users to configure global index name prefix to be used with both fluend and sidecar based logging
+- You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
 
     ```yaml
     global:
