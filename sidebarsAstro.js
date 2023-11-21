@@ -36,6 +36,7 @@ module.exports = {
           label: "Migrate to Astro",
           items: ["migrate-mwaa", "migrate-gcc"],
         },
+        "install-azure",
       ],
     },
     {
@@ -53,6 +54,7 @@ module.exports = {
           label: "Airflow connections and variables",
           items: [
             "manage-connections-variables",
+            "create-and-link-connections",
             "import-export-connections-variables",
           ],
         },
@@ -229,13 +231,12 @@ module.exports = {
             "resource-reference-hosted",
             {
               type: "category",
-              label: "Connect to external resources",
-              link: {
-                type: 'generated-index',
-                title: 'Connect clusters',
-                description: 'Connect Astro to your existing cloud resources.'
-              },
-              items: ["connect-aws", "connect-azure", "connect-gcp"],
+              label: "Networking",
+              items: [
+                "connect-aws", 
+                "connect-azure", 
+                "connect-gcp"
+            ],
             },
           ],
         },

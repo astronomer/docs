@@ -13,7 +13,7 @@ Airflow supports several different methods for managing connections and variable
 
 For in-depth information on managing connections and variables, see [Connection Basics](https://docs.astronomer.io/learn/connections) and [Variable Basics](https://docs.astronomer.io/learn/airflow-variables).
 
-## Prerequisites
+## Requirements
 
 - A locally hosted Astro project created with the Astro CLI. See [Create a project](cli/get-started-cli.md).
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md).
@@ -27,21 +27,63 @@ The following table suggests possible management strategies for specific use cas
 | I'm getting started and want to quickly create Airflow objects | [Airflow UI](#airflow-ui) |
 | I prefer to manage my Airflow variables in a Git repository and to upload directly to Airflow | [Airflow UI](#airflow-ui) |
 | I need to keep my connections and variables stored in a centralized and secure location. | [Secrets backend](#secrets-backend) |
-| I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Environment variables](#environment-variables) |
+| I want to create Connections once and then apply them to multiple Deployments or Workspaces. | [Astro Environment Manager](#cloud-ui-connections) |
+| I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Astro Environment Manager](#cloud-ui-connections) or [Environment variables](#environment-variables) |
+
+### How Airflow finds connections
 
 Because variables and connections serve different purposes in Airflow, you might want to use a different strategy for each object type. For example, you can use a secrets backend for connections and use combination of a `json` files and the Airflow UI for variables.
+
+If you use a mix of strategies for managing connections, it's important to understand that when Airflow searches for connections, it uses the following order:
+
+1. Secrets Backend
+2. Astro Environment Manager
+3. Environment Variables
+4. Airflow's metadata database (Airflow UI)
+
+This means that Astro first checks secrets backends, then the Environment Manager, followed by environment variables, and finally checks for connections defined in the Airflow UI.
+
+If you use the same `Connection ID` in these resources with different credentials, Airflow ignores any duplicates and applies the highest priority configuration.
 
 :::tip
 If you only want to test connections or export connections in  a JSON or URI format, use the Airflow UI to [manage your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui).  You can then use the Astro CLI commands to export the connections in a URI or JSON format. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-metadata-database).
 :::
 
-## Compare connection and variable management strategies 
+## Compare strategies 
 
 The following sections explain the benefits, limitations, and implementations of each strategy in more detail.
 
+### Astro Cloud UI Environment Manager
+
+:::caution
+
+This feature is in [Public Preview](feature-previews.md).
+
+:::
+
+Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Cloud UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis.
+
+#### Benefits
+
+- It securely stores your connection configuration and authentication information on Astro, without a secrets backend.
+- You can create a connection once for a Deployment and then add it to multiple Deployments.
+- Authenticate connections using credentials other than what the Airflow UI supports.
+- After you configure a connection, the authentication information is securely stored in an Astro-managed secrets backend.
+- Control whether connections can be used in a single Deployment or shared across Deployments in a Workspace.
+- Override certain fields in the connection per Deployment, so you can create a general connection and then customize its behavior.
+
+#### Limitations
+
+- Currently, it only works with the Celery Executor. Kubernetes Executor support is coming soon.
+- If you create a connection in the Cloud UI, you also need to add its related provider package to the `requirements.txt` file in your Astro project.
+- Only available with Astro Runtime 9.3.0 and greater.
+- You can't see connections defined in the Cloud UI in the Airflow UI.
+- You need`WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` user permissions.
+- You can't programmatically import connections to the Environment Manager from your local environment. 
+
 ### Airflow UI
 
-The quickest way to create Airflow connections and variables is through the Airflow UI. This experience is the same for both local Airflow environments and Astro Deployments. Astronomer recommends this method if you're just getting started with Airflow, you want to get your DAGs running quickly, or if you want to export connections in a URI/JSON format.
+You can create Airflow connections and variables is through the Airflow UI. This experience is the same for both local Airflow environments and Astro Deployments. Astronomer recommends this method if you're just getting started with Airflow, you want to get your DAGs running quickly, or if you want to export connections in a URI/JSON format.
 
 #### Benefits
 

@@ -66,10 +66,6 @@ Email alerts are used by Astronomer support to notify recipients in the case of 
 
 In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.
 
-### Update Airflow configurations
-
-To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](environment-variables.md#set-airflow-configurations-using-environment-variables).
-
 ### Enforce CI/CD deploys
 
 By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
@@ -105,6 +101,10 @@ Update Deployment resource settings to optimize performance and reduce the cost 
 ### Update Airflow configurations
 
 To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](manage-env-vars.md).
+
+### Update environment objects
+
+You can add, update, and delete Airflow connections that were added through the Cloud UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#cloud-ui-connections), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Cloud UI](create-and-link-connections.md) for more options.
 
 ### Deployment executor
 

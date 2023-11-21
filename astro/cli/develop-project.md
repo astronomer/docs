@@ -84,13 +84,18 @@ Utility files in the `/dags` directory will not be parsed by Airflow, so you don
 
 ## Add Airflow connections, pools, variables
 
-When you initialize an Astro project, the `airflow_settings.yaml` file is automatically created for you to set Airflow connections, variables, and pools. The values set in this file can only be used for your local Airflow. When you deploy your project to an Astro Deployment, the values in this file are not included. 
+Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-The `airflow_settings.yaml` file saves your values in plain-text. To prevent sharing sensitive credentials or passwords by committing them to your version control tool, Astronomer recommends adding this file to `.gitignore`.
+To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you have the following options:
 
-Astronomer also recommends using the document [Manage connections and variables in Astro](manage-connections-variables.md) to choose the correct strategy to store your Airflow connections and variables.
+- Use the Airflow UI. In **Admin**, click **Connections**, **Variables** or **Pools**, and then add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](/astro/cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
+- Modify the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
+- Use the Cloud UI to create connections that can be shared across Deployments in a Workspace. These connections are not visible in the Airflow UI. See [Create Airflow connections in the Astro Cloud UI](/astro/create-and-link-connections.md).
+- Use a secret backend, such as AWS Secrets Manager, and access the secret backend locally. See [Configure an external secrets backend on Astro](/astro/secrets-backend.md).
 
-See [Configure airflow_settings.yaml](#configure-airflow_settingsyaml-local-development-only) for details about how to use this file for local Airflow.
+When you add Airflow objects to the Airflow UI of a local environment or to your `airflow_settings.yaml` file, your values can only be used locally. When you deploy your project to a Deployment on Astro, the values in this file are not included.
+
+Astronomer recommends using the `airflow_settings.yaml` file so that you don’t have to manually redefine these values in the Airflow UI every time you restart your project. To ensure the security of your data, Astronomer recommends [configuring a secrets backend](/astro/secrets-backend.md).
 
 ## Add test data or files for local testing
 

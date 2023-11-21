@@ -37,7 +37,8 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
     values={[
         {label: 'Slack', value: 'Slack'},
         {label: 'PagerDuty', value: 'PagerDuty'},
-        {label: 'Email', value: 'Email'}
+        {label: 'Email', value: 'Email'},
+        {label: 'With DAG trigger', value: 'DAG'}
     ]}>
 <TabItem value="Slack">
 
@@ -92,6 +93,14 @@ To set up an alert integration with PagerDuty, you need access to your organizat
 No external configuration is required for the email integration. Astronomer recommends allowlisting `astronomer.io` with your email provider to ensure that no alerts go to your spam folder. Alerts are sent from `no-reply@astronomer.io`.
 
 </TabItem>
+<TabItem value="DAG">
+
+**With DAG trigger** works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro sends a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message through a custom communication channel or writing data about an incident to a table.
+
+1. In the Workspace where you want to configure the communication channel, create and deploy the DAG that you want to trigger. You can deploy the DAG to any Deployment in the Workspace even if the alert is not applied to that Deployment.
+2. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment where you deployed the DAG. Copy the token to use in the next step.
+
+</TabItem>
 </Tabs>
 
 ## Step 2: Create your Workspace alert in the Cloud UI
@@ -114,7 +123,8 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
         values={[
             {label: 'Slack', value: 'Slack'},
             {label: 'PagerDuty', value: 'PagerDuty'},
-            {label: 'Email', value: 'Email'}
+            {label: 'Email', value: 'Email'},
+            {label: 'With DAG trigger', value: 'DAG'}
         ]}>
     <TabItem value="Slack">
     
@@ -137,9 +147,16 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     ![Add an email address](/img/docs/astro_alerts_email.png)
     
     </TabItem>
+    <TabItem value="DAG">
+
+    Select the Deployment where your DAG is deployed, then select the DAG. Enter the Deployment API token that you created in Step 1.
+
+    ![Add an email address](/img/docs/astro_alerts_dag.png)
+    
+    </TabItem>
     </Tabs>
 
-6. Add DAG or Tasks to your alert.
+6. Add DAGs or tasks that your alert applies to.
 
     - **DAG failure**: Click **DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
 

@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Configure the Kubernetes executor'
+sidebar_label: 'Kubernetes executor'
 title: 'Configure the Kubernetes executor'
 id: 'kubernetes-executor'
 ---

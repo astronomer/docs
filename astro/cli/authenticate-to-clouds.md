@@ -268,7 +268,7 @@ Run the following command to obtain your user credentials locally:
 az login
 ```
 
-The CLI provides you with a link to a webpage where you authenticate to your Azure account. Once you complete the login, the CLI stores your user credentials in your local Azure configuration folder. The developer account credentials are used in place of the credentials associated with the Registered Application (Service Principal) in Azure AD.
+The CLI provides you with a link to a webpage where you authenticate to your Azure account. Once you complete the login, the CLI stores your user credentials in your local Azure configuration folder. The developer account credentials are used in place of the credentials associated with the Registered Application (Service Principal) in Microsoft Entra ID.
     
 The default location of the Azure configuration folder depends on your operating system:
 

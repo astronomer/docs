@@ -174,6 +174,7 @@ module.exports = {
           ],
         },
         'connections/bigquery',
+        'airflow-cohere',
         {
           type: 'category',
           label: 'Databricks',
@@ -211,6 +212,7 @@ module.exports = {
         'airflow-mlflow',
         'airflow-mongodb',
         'connections/ms-sqlserver',
+        'airflow-openai',
         {
           type: 'category',
           label: 'Redshift',

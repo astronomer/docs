@@ -17,6 +17,14 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+## Astro CLI 1.20.1
+
+Release date: November 8, 2023
+
+### Bug fixes
+
+- Fixed an issue where `astro deployment airflow-variable`, `astro deployment connection`, and `astro deployment pool` commands were returning the error `failed to decode response from API`.
+
 ## Astro CLI 1.20.0
 
 Release date: November 7, 2023
