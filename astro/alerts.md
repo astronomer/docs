@@ -111,7 +111,13 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 2. Click **Add Alert**. 
 
-3. Enter your **Alert Name** and choose the alert type, **DAG Success**, **DAG Failure**, or **Task Duration**. 
+3. Enter your **Alert Name** and choose the alert type, **DAG Success**, **DAG Failure**, or **Task Duration**.
+
+  :::tip
+
+  You can only use Task Duration alerts with Task Instances, not Task Groups.
+
+  :::
 
 4. Choose the **Communication Channels** where you want to send your alert.
 
@@ -162,7 +168,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
     - **DAG success**: Click **DAG** and choose the Deployment and the DAG that you want to send an alert about when it completes.
     
-    - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
+    - **Task duration**: Click **Task** and choose the Deployment, DAG, and task instance name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
 
      You can add more DAGs or tasks after you create your alert. 
 
