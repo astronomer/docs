@@ -11,11 +11,11 @@ import query_series_vectors from '!!raw-loader!../code-samples/dags/airflow-pine
 
 [Pinecone](https://www.pinecone.io/) is a proprietary vector database platform designed for handling large-scale vector based AI applications. The [Pinecone Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-pinecone/stable/index.html) offers modules to easily integrate Pinecone with Airflow.
 
-In this tutorial you'll use Airflow to create vectors embeddings of series descriptions, create an index in your Pinecone project, ingest the vector embeddings into that index, and query Pinecone to get a series suggestion for your next binge-watching session based on a user-provided mood.
+In this tutorial you'll use Airflow to create vectors embeddings of series descriptions, create an index in your Pinecone project, ingest the vector embeddings into that index, and query Pinecone to get a suggestion for your next binge-watchable series based on your current mood.
 
 ## Why use Airflow with Pinecone?
 
-Integrating Pinecone with Airflow provides a robust solution for managing large-scale vector search workflows in your AI applications. Pinecone specializes in efficient vector storage and similarity search, essential for leveraging advanced models like language transformers or deep neural networks.
+Integrating Pinecone with Airflow provides a robust solution for managing large-scale vector search workflows in your AI applications. Pinecone specializes in efficient vector storage and similarity search, which is essential for leveraging advanced models like language transformers or deep neural networks.
 
 By combining Pinecone with Airflow, you can:
 
@@ -59,14 +59,14 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two packages to your `requirements.txt` file to install the [Pinecone Airflow Provider](https://airflow.apache.org/docs/apache-airflow-providers-pinecone/stable/index.html) and the [OpenAI Python client](https://platform.openai.com/docs/libraries) in your Astro project:
+2. Add the following two lines to your `requirements.txt` file to install the [Pinecone Airflow Provider](https://airflow.apache.org/docs/apache-airflow-providers-pinecone/stable/index.html) and [OpenAI Python client](https://platform.openai.com/docs/libraries) in your Astro project:
 
     ```text
     apache-airflow-providers-pinecone==1.0.0
     openai==1.3.2
     ```
 
-3. To create an [Airflow connection](connections.md) to your Pinecone account and be able to use the OpenAI API, add the following environment variables to your `.env` file. Provide your own values for `<your-pinecone-environment>`, `<your-pinecone-api-key>` and `<your-openai-api-key>`:
+3. Add the following environment variables to your Astro project `.env` file. These variables store the configuration for an [Airflow connection](connections.md) to your Pinecone account and allow you to use the OpenAI API. Provide your own values for `<your-pinecone-environment>`, `<your-pinecone-api-key>` and `<your-openai-api-key>`:
 
     ```text
     AIRFLOW_CONN_PINECONE_DEFAULT='{
@@ -81,24 +81,25 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 The DAG in this tutorial runs a query on vectorized series descriptions, which were mostly retrieved from [IMDB](https://www.imdb.com/) with added domain expert inputs. 
 
-Create a new file called `series_data.txt` in the `include` directory, then copy and paste the following information into the file:
+1. In your Astro project `include` directory, create a file called `series_data.txt`. 
+2. Copy and paste the following text into the file:
 
-```text
-1 ::: Star Trek: Discovery (2017) ::: sci-fi ::: Ten years before Kirk, Spock, and the Enterprise, the USS Discovery discovers new worlds and lifeforms using a new innovative mushroom based propulsion system. 
-2 ::: Feel Good (2020) ::: romance ::: The series follows recovering addict and comedian Mae, who is trying to control the addictive behaviors and intense romanticism that permeate every facet of their life.
-3 ::: For All Mankind (2019) ::: sci-fi ::: The series dramatizes an alternate history depicting "what would have happened if the global space race had never ended" after the Soviet Union succeeds in the first crewed Moon landing ahead of the United States.
-4 ::: The Legend of Korra (2012) ::: anime ::: Avatar Korra fights to keep Republic City safe from the evil forces of both the physical and spiritual worlds.
-5 ::: Mindhunter (2017) ::: crime ::: In the late 1970s, two FBI agents broaden the realm of criminal science by investigating the psychology behind murder and end up getting too close to real-life monsters.
-6 ::: The Umbrella Academy (2019) ::: adventure ::: A family of former child heroes, now grown apart, must reunite to continue to protect the world.
-7 ::: Star Trek: Picard (2020) ::: sci-fi ::: Follow-up series to Star Trek: The Next Generation (1987) and Star Trek: Nemesis (2002) that centers on Jean-Luc Picard in the next chapter of his life.
-8 ::: Invasion (2021) ::: sci-fi ::: Earth is visited by an alien species that threatens humanity's existence. Events unfold in real time through the eyes of five ordinary people across the globe as they struggle to make sense of the chaos unraveling around them.
-```
+    ```text
+    1 ::: Star Trek: Discovery (2017) ::: sci-fi ::: Ten years before Kirk, Spock, and the Enterprise, the USS Discovery discovers new worlds and lifeforms using a new innovative mushroom based propulsion system. 
+    2 ::: Feel Good (2020) ::: romance ::: The series follows recovering addict and comedian Mae, who is trying to control the addictive behaviors and intense romanticism that permeate every facet of their life.
+    3 ::: For All Mankind (2019) ::: sci-fi ::: The series dramatizes an alternate history depicting "what would have happened if the global space race had never ended" after the Soviet Union succeeds in the first crewed Moon landing ahead of the United States.
+    4 ::: The Legend of Korra (2012) ::: anime ::: Avatar Korra fights to keep Republic City safe from the evil forces of both the physical and spiritual worlds.
+    5 ::: Mindhunter (2017) ::: crime ::: In the late 1970s, two FBI agents broaden the realm of criminal science by investigating the psychology behind murder and end up getting too close to real-life monsters.
+    6 ::: The Umbrella Academy (2019) ::: adventure ::: A family of former child heroes, now grown apart, must reunite to continue to protect the world.
+    7 ::: Star Trek: Picard (2020) ::: sci-fi ::: Follow-up series to Star Trek: The Next Generation (1987) and Star Trek: Nemesis (2002) that centers on Jean-Luc Picard in the next chapter of his life.
+    8 ::: Invasion (2021) ::: sci-fi ::: Earth is visited by an alien species that threatens humanity's existence. Events unfold in real time through the eyes of five ordinary people across the globe as they struggle to make sense of the chaos unraveling around them.
+    ```
 
-## Step 3 Create your DAG
+## Step 3: Create your DAG
 
-1. In your `dags` folder, create a file called `query_series_vectors.py`.
+1. In your Astro project `dags` folder, create a file called `query_series_vectors.py`.
 
-2. Copy the following code into the file.
+2. Copy the following code into the file:
 
     <CodeBlock language="python">{query_series_vectors}</CodeBlock>
 
@@ -115,22 +116,22 @@ Create a new file called `series_data.txt` in the `include` directory, then copy
 
 ## Step 4: Run your DAG
 
-1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
+1. Open your Astro project, then run `astro dev start` to run Airflow locally.
 
-2. In the Airflow UI, run the `query_series_vectors` DAG by clicking the play button. Then, provide your input to the [Airflow param](airflow-params.md) for `series_mood`.
+2. Open the Airflow UI at `localhost:8080`, then run the `query_series_vectors` DAG by clicking the play button. Provide your input to the [Airflow param](airflow-params.md) for `series_mood`.
 
     ![A screenshot of the Trigger DAG view in the Airflow UI showing the mood `A series about Astronauts` being provided to the `series_mood` param.](/img/tutorials/airflow-pinecone_params.png)
 
 3. View your series suggestion in the task logs of the `query_pinecone` task:
 
-```text
-[2023-11-20, 14:03:48 UTC] {logging_mixin.py:154} INFO - You should watch: For All Mankind
-[2023-11-20, 14:03:48 UTC] {logging_mixin.py:154} INFO - Description: The series dramatizes an alternate history depicting "what would have happened if the global space race had never ended" after the Soviet Union succeeds in the first crewed Moon landing ahead of the United States.
-```
+    ```text
+    [2023-11-20, 14:03:48 UTC] {logging_mixin.py:154} INFO - You should watch: For All Mankind
+    [2023-11-20, 14:03:48 UTC] {logging_mixin.py:154} INFO - Description: The series dramatizes an alternate history depicting "what would have happened if the global space race had never ended" after the Soviet Union succeeds in the first crewed Moon landing ahead of the United States.
+    ```
 
 :::tip
 
-When watching `For All Mankind` make sure to have a tab with [Wikipedia](https://en.wikipedia.org) open to compare the alternate timeline with ours. Also don't forget to hydrate and move around every once in a while!
+When watching `For All Mankind`, make sure to have a tab with [Wikipedia](https://en.wikipedia.org) open to compare the alternate timeline with ours. And don't forget to hydrate and move around every once in a while!
 
 :::
 
