@@ -25,7 +25,13 @@ In most cases, you only need to modify these settings in the case of debugging a
 
 ## Set a configuration
 
-Run the following command in an Astro project:
+You can set Astro configurations at two different scopes: global and project.
+
+For project-specific configurations, Astro stores the settings in a file named `.astro/config.yaml` in your project directory. This file is generated when you run `astro dev init` in your project folder. Global configurations, however, are stored in a central location with the Astro executable. If a configuration is set in a project configuration file, it always overrides any of the same configuration in the global configuration file.
+
+### Set project configurations
+
+Run the following command in an Astro project to set a configuration for that project:
 
 ```sh
 astro config set <configuration-option> <value>
@@ -37,6 +43,18 @@ For example, to update the port of your local Airflow webserver to 8081 from the
 
 ```sh
 astro config set webserver.port 8081
+```
+
+### Set global configurations
+
+Use the `--global` flag with `astro config set [option] --global` to set a configuration for all current and new Astro projects on your machine. Your global Astro CLI configuration is saved in a central location on your machine. For example, the configurations are stored in `~/.astro/config.yaml` on Mac OS and `/home//.astro/config.yaml` on Linux.
+
+Note that you can override global configurations by setting a [project-level configuration](#set-project-configuration). If an Astro project contains an `.astro/config.yaml` file, any configuration values in that file take precedence over the same global configuration values.
+
+The following example shows how to set the local Airflow webserver port to `8081` for all Astro projects on your local machine:
+
+```sh
+astro config set -g webserver.port 8081
 ```
 
 ## Available CLI configurations
