@@ -70,35 +70,35 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```yaml
     version: '3.1'
     services:
-    opensearch:
+      opensearch:
         image: opensearchproject/opensearch:2
         ports:
-        - "9200:9200"  # OpenSearch REST API
-        - "9300:9300"  # OpenSearch Node-to-Node communication
+          - "9200:9200"  # OpenSearch REST API
+          - "9300:9300"  # OpenSearch Node-to-Node communication
         environment:
-        - discovery.type=single-node
-        - plugins.security.ssl.http.enabled=false
+          - discovery.type=single-node
+          - plugins.security.ssl.http.enabled=false
         volumes:
-        - opensearch-data:/usr/share/opensearch/data
+          - opensearch-data:/usr/share/opensearch/data
         networks:
-        - airflow
+          - airflow
     # Airflow containers
-    scheduler:
+      scheduler:
         networks:
-        - airflow
-    webserver:
+          - airflow
+      webserver:
         networks:
-        - airflow
-    triggerer:
+          - airflow
+      triggerer:
         networks:
-        - airflow
-    postgres:
+          - airflow
+      postgres:
         networks:
-        - airflow
+          - airflow
 
     # volume for OpenSearch
     volumes:
-    opensearch-data:
+      opensearch-data:
     ```
 
 
