@@ -170,7 +170,7 @@ For information on more advanced search techniques in OpenSearch, see the [OpenS
           Burn                                     3
     ```
 
-4. (Optional) Listen to the [song](https://open.spotify.com/track/7qfoq1JFKBUEIvhqOHzuqX?si=49a2e7c259ad43e2) that mentions your keyword the most. Astronomer recommends to listen to the full Hamilton musical for production purposes.
+4. (Optional) Listen to the [song](https://open.spotify.com/track/7qfoq1JFKBUEIvhqOHzuqX?si=49a2e7c259ad43e2) that mentions your keyword the most. Astronomer recommends to listen to the full Hamilton musical while writing Airflow pipelines.
 
 ## Conclusion
 
