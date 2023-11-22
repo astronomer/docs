@@ -132,6 +132,7 @@ def query_book_vectors():
     def create_embeddings_book_data(
         book_data: dict, model: str, already_imported_books: list
     ) -> dict:
+        "Create embeddings for a book description and add them to the book data."
         already_imported_books_ids = [x[0] for x in already_imported_books]
         if book_data["book_id"] in already_imported_books_ids:
             raise AirflowSkipException("Book already imported.")
@@ -141,6 +142,7 @@ def query_book_vectors():
 
     @task
     def create_embeddings_query(model: str, **context) -> list:
+        "Create embeddings for the user provided book mood."
         query = context["params"]["book_mood"]
         embeddings = create_embeddings(text=query, model=model)
         return embeddings
@@ -180,6 +182,7 @@ def query_book_vectors():
 
     @task
     def print_suggestion(query_result, **context):
+        "Print the book suggestion."
         query = context["params"]["book_mood"]
         book_title = query_result[0][0]
         book_year = query_result[0][1]

@@ -22,7 +22,7 @@ Integrating PostgreSQL with pgvector and Airflow into one end-to-end machine lea
 - Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations involving vectors stored in PostgreSQL based on upstream events in your data ecosystem, such as when a new model is trained or a new dataset is available.
 - Run dynamic queries based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md) on vectors stored in PostgreSQL to retrieve similar objects.
 - Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your pgvector operations.
-- Check your vector database for existence of a unique key before running potentially costly embedding operations on your data.
+- Check your vector database for the existence of a unique key before running potentially costly embedding operations on your data.
 
 ## Time to complete
 
@@ -167,7 +167,7 @@ For information on more advanced search techniques in pgvector, see the [pgvecto
 
 1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, run the `query_book_vectors` DAG by clicking the play button. Then, provide [Airflow params](airflow-params.md) for `book_mood`.
+2. In the Airflow UI, run the `query_book_vectors` DAG by clicking the play button. Then, provide the [Airflow param](airflow-params.md) for the desired `book_mood`.
 
     ![Screenshot of the Airflow UI showing the input form for the book_mood param.](/img/tutorials/airflow-pgvector_params.png)
 
@@ -187,4 +187,4 @@ For information on more advanced search techniques in pgvector, see the [pgvecto
 
 ## Conclusion
 
-Congratulations! You used Airflow and pgvector to get get a book suggestion! You can now use Airflow to orchestrate pgvector operations in your own machine learning pipelines. Additionally, you remembered the satisfaction and joy of spending hours reading a good book and supported your local library.
+Congratulations! You used Airflow and pgvector to get a book suggestion! You can now use Airflow to orchestrate pgvector operations in your own machine learning pipelines. Additionally, you remembered the satisfaction and joy of spending hours reading a good book and supported your local library.
