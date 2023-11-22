@@ -65,7 +65,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 All GCP dedicated clusters are subscribed to the [GKE regular release channel](https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels), meaning that Google automatically upgrades the cluster and its nodes whenever an upgrade is available.
 
-After you create a GCP cluster, you can control when these upgrades happen by requesting a [maintenance window](https://cloud.google.com/kubernetes-engine/docs/how-to/maintenance-windows-and-exclusions#maintenance-window) for the cluster. Maintenance windows determine when and how Google updates our cluster. You can use maintenance windows to ensure that upgrades don't happen while critical DAGs are running on your cluster. 
+After you create a GCP cluster, you can control when these upgrades happen by requesting a [maintenance window](https://cloud.google.com/kubernetes-engine/docs/how-to/maintenance-windows-and-exclusions#maintenance-window) for the cluster. Maintenance windows determine when and how Google updates your cluster. You can use maintenance windows to ensure that upgrades don't happen while critical DAGs are running on your cluster. 
 
 To configure a maintenance window, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request) and provide your cluster ID and desired support window configuration.
 
