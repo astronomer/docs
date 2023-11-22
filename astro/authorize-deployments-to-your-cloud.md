@@ -99,11 +99,11 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
 ### Authorize your Deployment through GCP Service Account Impersonation
 
-[GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) allows your Deployment workload identity to assume an existing service account on your GCP project. This is the most secure authorization setup because your Deployment only uses generated, short-lived credentials for a service account, rather than a persistent and static service account key. 
+[GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) allows your Deployment's workload identity to assume an existing service account in your GCP project. This is the most secure authorization setup because your Deployment only uses generated, short-lived credentials for a service account, rather than a persistent and static service account key. 
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
 2. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
-3. In the Google Cloud Console, open the **IAM & admin** menu, then open the service account you just created. 
+3. In the Google Cloud Console, open the **IAM & Admin > Service Accounts** menu, then open the service account you just created. 
 4. In the **Actions** column, click **Manage Permissions**, then click **Grant Access**. In the modal that appears, enter your Deployment's workload identity service account in the **Add Principals** field and select the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) in the **Assign Roles** field.
 5. Complete one of the following options for your Deployment to access your cloud resources:
 
