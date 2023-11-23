@@ -100,7 +100,7 @@ Update Deployment resource settings to optimize performance and reduce the cost 
 
 ### Update Airflow configurations
 
-To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](environment-variables.md#set-airflow-configurations-using-environment-variables).
+To update a Deployment's [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html), you set the configurations as environment variables on Astro. See [Set Airflow configurations using environment variables](manage-env-vars.md).
 
 ### Update environment objects
 
