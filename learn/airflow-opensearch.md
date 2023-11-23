@@ -15,7 +15,7 @@ In this tutorial you'll use Airflow to orchestrate the creation of an index in O
 
 ## Why use Airflow with OpenSearch?
 
-OpenSearch allows you to perform complex search queries on indexed text documents. Additionally, the tool comes with a variety of plugins for use cases such as security analytics, semantic search and neural search. 
+OpenSearch allows you to perform complex search queries on indexed text documents. Additionally, the tool comes with a variety of plugins for use cases such as security analytics, semantic search, and neural search. 
 
 Integrating OpenSearch with Airflow allows you to:
 
@@ -41,7 +41,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
-This tutorial uses a OpenSearch instance created as a [Docker container](https://hub.docker.com/r/opensearchproject/opensearch) you do not need to install OpenSearch on your machine.
+This tutorial uses an OpenSearch instance created as a [Docker container](https://hub.docker.com/r/opensearchproject/opensearch). You do not need to install OpenSearch on your machine.
 
 :::info
 
@@ -153,7 +153,7 @@ For information on more advanced search techniques in OpenSearch, see the [OpenS
 
 2. In the Airflow UI, run the `search_hamilton` DAG by clicking the play button. By default the DAG will search the lyrics for the word `write`, you can adjust the keyword by changing the `KEYWORD_TO_SEARCH` variable in the DAG file.
 
-3. View your book suggestion in the task logs of the `print_query_result` task:
+3. View your song results in the task logs of the `print_query_result` task:
 
     ```text
     [2023-11-22, 14:01:58 UTC] {logging_mixin.py:154} INFO - 
