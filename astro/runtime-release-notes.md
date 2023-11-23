@@ -26,6 +26,9 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ## Astro Runtime 9.6.0
 
+- Release date: November 24, 2023
+- Airflow version: 2.7.3
+
 ### Additional improvements
 
 - Upgraded `astronomer-providers` to 1.18.2. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/releases) for a complete list of changes.
