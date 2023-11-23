@@ -264,6 +264,7 @@ module.exports = {
           'use-case-airflow-dbt',
           'use-case-elt-ml-finance',
           'use-case-airflow-llm-rag-finance',
+          'use-case-airflow-cohere-opensearch',
           'use-case-airflow-ml-datasets',
           'use-case-airflow-mlflow'
       ],
