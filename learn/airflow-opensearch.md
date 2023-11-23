@@ -102,7 +102,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```
 
 
-4. To create an [Airflow connection](connections.md) to the OpenSearch instance, add the following to your `.env` file. If you are using a different OpenSearch instance, adjust the values accordingly.
+4. To create an [Airflow connection](connections.md) to the OpenSearch instance, add the following to your `.env` file. If you already have a cloud-based OpenSearch instance, you can connect to it instead of the local instance by adjusting the values in the connection accordingly.
 
     ```text
     AIRFLOW_CONN_OPENSEARCH_DEFAULT='{
