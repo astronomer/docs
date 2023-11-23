@@ -11,7 +11,7 @@ import query_series_vectors from '!!raw-loader!../code-samples/dags/airflow-pine
 
 [Pinecone](https://www.pinecone.io/) is a proprietary vector database platform designed for handling large-scale vector based AI applications. The [Pinecone Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-pinecone/stable/index.html) offers modules to easily integrate Pinecone with Airflow.
 
-In this tutorial you'll use Airflow to create vectors embeddings of series descriptions, create an index in your Pinecone project, ingest the vector embeddings into that index, and query Pinecone to get a suggestion for your next binge-watchable series based on your current mood.
+In this tutorial you'll use Airflow to create vector embeddings of series descriptions, create an index in your Pinecone project, ingest the vector embeddings into that index, and query Pinecone to get a suggestion for your next binge-watchable series based on your current mood.
 
 ## Why use Airflow with Pinecone?
 
@@ -106,9 +106,9 @@ The DAG in this tutorial runs a query on vectorized series descriptions, which w
     This DAG consists of six tasks to make a simple ML orchestration pipeline.
 
     - The `import_data_func` task defined with the [`@task` decorator](airflow-decorators.md) reads the data from the `series_data.txt` file and returns a list of dictionaries containing the series title, year, genre, and description. Note that the task will create a UUID for each series using the `create_uuid` function and add it to the `id` key. Having a unique ID for each series is required for the Pinecone ingestion task.
-    - The `vectorize_series_data` task is a [dynamic task](dynamic-tasks.md) that creates one mapped task instance for each series in the list returned by the `import_data_func` task. The task uses the `create_embeddings` function to generate vector embeddings for each series' description. Note that if you want to use a different vectorizer than OpenAI's `text-embedding-ada-002` you can adjust this function to return your preferred vectors and the `EMBEDDING_MODEL_DIMENSIONS` parameter in the DAG to the vector size of your model.
+    - The `vectorize_series_data` task is a [dynamic task](dynamic-tasks.md) that creates one mapped task instance for each series in the list returned by the `import_data_func` task. The task uses the `create_embeddings` function to generate vector embeddings for each series' description. Note that if you want to use a different vectorizer than OpenAI's `text-embedding-ada-002` you can adjust this function to return your preferred vectors and set the `EMBEDDING_MODEL_DIMENSIONS` parameter in the DAG to the vector size of your model.
     - The `vectorize_user_mood` task calls the `create_embeddings` function to generate vector embeddings for the mood the user can provide as an [Airflow param](airflow-params.md).
-    - The `create_index_if_not_exists` task uses the [PineconeHook](https://registry.astronomer.io/providers/apache-airflow-providers-pinecone/versions/latest/modules/PineconeHook) to connect to your Pinecone instance and retrieve the current list of indexes in your Pinecone environment. No index of the name `PINECONE_INDEX_NAME` exists yet, the task will create it. Note that with a free tier Pinecone account you can have one index.
+    - The `create_index_if_not_exists` task uses the [PineconeHook](https://registry.astronomer.io/providers/apache-airflow-providers-pinecone/versions/latest/modules/PineconeHook) to connect to your Pinecone instance and retrieve the current list of indexes in your Pinecone environment. If no index of the name `PINECONE_INDEX_NAME` exists yet, the task will create it. Note that with a free tier Pinecone account you can only have one index.
     - The `pinecone_vector_ingest` task uses the [PineconeIngestOperator](https://registry.astronomer.io/providers/apache-airflow-providers-pinecone/versions/latest/modules/PineconeIngestOperator) to ingest the vectorized series data into the index created by the `create_index_if_not_exists` task.
     - The `query_pinecone` task performs a vector search in Pinecone to get the series most closely matching the user-provided mood and prints the result to the task logs.
 
@@ -137,4 +137,4 @@ When watching `For All Mankind`, make sure to have a tab with [Wikipedia](https:
 
 ## Conclusion
 
-Congrats! You've now successfully integrated Airflow and Pinecone! You can now use this tutorial as a starting point to build you own AI applications with Airflow and Pinecone.
+Congrats! You've successfully integrated Airflow and Pinecone! You can now use this tutorial as a starting point to build you own AI applications with Airflow and Pinecone.
