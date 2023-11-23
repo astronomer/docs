@@ -131,7 +131,7 @@ The DAG in this tutorial runs a query on vectorized series descriptions, which w
 
 :::tip
 
-When watching `For All Mankind`, make sure to have a tab with [Wikipedia](https://en.wikipedia.org) open to compare the alternate timeline with ours. And don't forget to hydrate and move around every once in a while!
+When watching `For All Mankind`, make sure to have a tab with [Wikipedia](https://en.wikipedia.org) open to compare the alternate timeline with ours and remember, flying spacecraft isn’t like driving a car. It doesn’t just go where you point it.
 
 :::
 
