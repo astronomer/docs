@@ -24,6 +24,17 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+## Astro Runtime 9.6.0
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.18.2. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/releases) for a complete list of changes.
+
+### Bug fixes
+
+- Fixed an issue where the Celery executor could stop working when writing logs to Datadog.
+- Fixed an issue where some task logs would occasionally not appear in the Airflow UI for Astro Deployments on AWS clusters. 
+
 ## Astro Runtime 9.5.0
 
 - Release date: November 6, 2023
