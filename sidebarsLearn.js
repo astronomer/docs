@@ -214,6 +214,7 @@ module.exports = {
         'connections/ms-sqlserver',
         'airflow-openai',
         'airflow-pgvector',
+        'airflow-pinecone',
         'connections/postgres',
         {
           type: 'category',
