@@ -139,7 +139,7 @@ To create a new Astro cluster on Google Cloud Platform (GCP) for your Organizati
 - Your preferred maximum node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md). 
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-standard-4` nodes, one Small General Purpose CloudSQL instance (2vCPU, 8GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md). 
 
 :::info Configure cluster maintenance windows
 
