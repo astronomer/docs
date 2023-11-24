@@ -103,7 +103,7 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
 
-1. Create the DAG that you want to trigger on an alert. Here's an example of the payload and DAG implementation:
+1. Create a DAG that you want to run when the alert is triggered. For example, you can use the following DAG to run arbitrary Python code when the alert is triggered:
 
   ```python
   import datetime
@@ -135,8 +135,8 @@ The **DAG Trigger** communication channel works differently from other communica
 
   ```
 
-2. Deploy the DAG to any Deployment in the same Workspace as the alert will be triggered it. The DAG to alert on, and the DAG to be triggered by the alert, can be deployed in different Deployments, but must be deployed within the same Workspace.
-3. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment where you deployed the DAG that will be triggered. Copy the token to use in the next step.
+2. Deploy the DAG to any Deployment in the Workspace where you want to create the alert. The DAG that triggers the alert and the DAG that the alert runs can be in different Deployments, but they must be deployed in the same Workspace.
+3. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment where you deployed the DAG that the alert will run. Copy the token to use in the next step.
 
 </TabItem>
 </Tabs>
