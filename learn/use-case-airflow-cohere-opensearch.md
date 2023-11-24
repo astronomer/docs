@@ -7,7 +7,7 @@ sidebar_label: "LLMOps with Cohere + OpenSearch"
 
 With recent advances in the field of Large Language Model Operations (LLMOps), it is now possible to combine the power of different language models to more efficiently get an answer to a query. This use case shows how to analyze synthetic customer feedback data, combining embeddings and text classification by [Cohere](https://cohere.com/) LLMs with the [OpenSearch](https://opensearch.org/) search engine in an MLOps pipeline.
 
-![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag)
+![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
 ## Before you start
 
@@ -57,7 +57,7 @@ This project contains two DAGs, one for the MLOps pipeline and one DAG to delete
 
 The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/analyze_customer_feedback.py) ingests data from the mock API and loads it into OpenSearch. The DAG then uses the Cohere API to get sentiment and embeddings for a subset of the customer feedback returned by a keyword OpenSearch query. The embeddings and sentiment analysis scores are ingested back into OpenSearch and a final query is performed to get the positive feedback most similar to a target testimonial. The DAG ends by printing the retrieved testimonial to the logs.
 
-![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag)
+![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
 The [`delete_opensearch_index` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/delete_opensearch_index.py) deletes the `INDEX_TO_DELETE` in OpenSearch. This DAG is used during development to allow the the `analyze_customer_feedback` DAG to create the index from scratch.
 
