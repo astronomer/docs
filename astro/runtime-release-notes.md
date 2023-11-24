@@ -801,7 +801,7 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 ### Early access Airflow bug fixes
 
 - Listener: Set task on sqlalchemy taskinstance object ([27167](https://github.com/apache/airflow/pull/27167))
-- Listener: simplify API by replacing SQLAlchemy event-listening by direct calls ([29289](https://github.com/apache/airflow/pull/29289))
+- Listener: Simplify API by replacing SQLAlchemy event-listening by direct calls ([29289](https://github.com/apache/airflow/pull/29289))
 - Use pyarrow-hotfix to mitigate CVE-2023-47248 ([35650](https://github.com/apache/airflow/pull/35650))
 - Fix Scheduler crash looping when dagrun creation fails ([35135](https://github.com/apache/airflow/pull/35135))
 
