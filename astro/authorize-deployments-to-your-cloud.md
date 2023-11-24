@@ -33,6 +33,7 @@ A workload identity is a Kubernetes service account that provides an identity to
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
+        {label: 'Azure', value: 'azure'},
     ]}>
 <TabItem value="aws">
 
@@ -129,6 +130,47 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
     
     If you don't see **Google Cloud** as a connection type, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Google/versions/latest) for the latest package.
     
+</TabItem>
+
+<TabItem value="azure">
+
+In this setup, you'll authorize an existing user-assigned managed identity to a resource on Azure, then give permissions to your Deployment to assume that managed identity. 
+
+#### Prerequisites
+
+- A user-assigned managed identity on Azure. See [Azure documentation](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?source=recommendations&pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity).
+- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+#### Step 1: Authorize the managed identity in Azure
+
+1. In your Azure portal, open the resource that your managed identity should have access to. Then, select **Access control (IAM)**.
+2. Click **Add** > **Add role assignment**.
+3. Select the role for your managed identity, then click **Next**.
+4. In the **Assign access to** section, select **Managed identity**. Click **+ Select Members** and choose your managed identity. After you add your managed identity, click **Next**.
+5. Review and finalize the assignment.
+
+#### Step 2: Configure your Deployment
+
+1. In your Azure portal, open the **Managed Identities** menu.
+2. Search for your managed identity, then copy its **Object (principal) ID**, **Client ID**, and **Resource group**.
+3. Open the left menu, then select **Microsoft Entra ID**. In the **Overview** section, copy the **Tenant ID**.
+4. In the Cloud UI, select your Deployment, click **Details**, then click **Workload Identity**.
+5. In **Managed Identity**, enter the ID of the managed identity you assigned to the resource. 
+6. In **Resource Group**, enter the ID of the resource group that your managed identity belongs to.
+7. Using the Azure CLI, copy and run the provided command in your local terminal.
+8. After the command completes, click **Close** on the modal in the Cloud UI.
+9. (Optional) repeat Steps 4 - 8 for any other Deployments that need to be authorized to Azure.
+
+#### Step 3: Create an Airflow connection
+
+1. In the Cloud UI, click **Environment** in the left menu to open the **Connections** page.
+2. Click **+ Connection** to add a new connection.
+3. Search for **Azure**, then select the **Managed identity** option.
+4. Configure your Airflow connection with the information you copied in the previous steps.
+5. Link the connection to the Deployment(s) where you configured your managed identity.
+   
+Any DAG that uses your connection will now be authorized to Azure through your managed identity.
+
 </TabItem>
 </Tabs>
 
