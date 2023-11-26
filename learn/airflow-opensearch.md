@@ -11,7 +11,7 @@ import search_hamilton from '!!raw-loader!../code-samples/dags/airflow-opensearc
 
 [OpenSearch](https://opensearch.org/) is an open source distributed search and analytics engine based on [Apache Lucene](https://lucene.apache.org/). It offers advanced search capabilities on large bodies of text alongside powerful machine learning plugins. The [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) offers modules to easily integrate OpenSearch with Airflow.
 
-In this tutorial you'll use Airflow to orchestrate the creation of an index in OpenSearch, ingestion of the lyrics of the musical Hamilton into the index, and a search query on the index to find out which character and song mention a user-provided keyword the most.
+In this tutorial you'll use Airflow to create an index in OpenSearch, ingest the lyrics of the musical Hamilton into the index, and run a search query on the index to see which character most often sings a specific word.
 
 ## Why use Airflow with OpenSearch?
 
@@ -58,14 +58,14 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two packages to your `requirements.txt` file to install the [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) and pin the [pandas](https://pandas.pydata.org/) version in your Astro project:
+2. Add the following two lines to your Astro project `requirements.txt` file to install the [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) and pin the [pandas](https://pandas.pydata.org/) version in your Astro project:
 
     ```text
     apache-airflow-providers-opensearch==1.0.0
     pandas==1.5.3
     ```
 
-3. This tutorial uses a local OpenSearch instance running in a Docker container. To add the OpenSearch container to your Astro project, create a new file in your project's root directory called `docker-compose.override.yml` and copy and paste the following:
+3. This tutorial uses a local OpenSearch instance running in a Docker container. To run an OpenSearch container as part of your Airflow environment, create a new file in your Astro project root directory called `docker-compose.override.yml` and copy and paste the following into it:
 
     ```yaml
     version: '3.1'
@@ -102,7 +102,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```
 
 
-4. To create an [Airflow connection](connections.md) to the OpenSearch instance, add the following to your `.env` file. If you already have a cloud-based OpenSearch instance, you can connect to it instead of the local instance by adjusting the values in the connection accordingly.
+4. Add the following configuration to your `.env` file to create an [Airflow connection](connections.md) between Astro and your OpenSearch instance. If you already have a cloud-based OpenSearch instance, you can connect to that instead of the local instance by adjusting the values in the connection.
 
     ```text
     AIRFLOW_CONN_OPENSEARCH_DEFAULT='{
@@ -116,11 +116,11 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 ## Step 2: Add your data
 
-The DAG in this tutorial uses the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/) as a dataset ([Kaggle](https://www.kaggle.com/datasets/lbalter/hamilton-lyrics)). 
+The DAG in this tutorial uses a  [Kaggle](https://www.kaggle.com/datasets/lbalter/hamilton-lyrics) dataset that contains the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/). 
 
 1. Download the [hamilton_lyrics.csv](https://github.com/astronomer/airflow-opensearch-tutorial/blob/main/include/hamilton_lyrics.csv) from Astronomer's GitHub.
 
-2. Save the file in your Astro project's `include` folder.
+2. Save the file in your Astro project `include` folder.
 
 ## Step 3: Create your DAG
 
@@ -151,7 +151,7 @@ For information on more advanced search techniques in OpenSearch, see the [OpenS
 
 1. Run `astro dev start` in your Astro project to start Airflow and open the Airflow UI at `localhost:8080`.
 
-2. In the Airflow UI, run the `search_hamilton` DAG by clicking the play button. By default the DAG will search the lyrics for the word `write`, you can adjust the keyword by changing the `KEYWORD_TO_SEARCH` variable in the DAG file.
+2. In the Airflow UI, run the `search_hamilton` DAG by clicking the play button. By default the DAG will search the lyrics for the word `write`, but you can change the search term by updating the `KEYWORD_TO_SEARCH` variable in your DAG file.
 
 3. View your song results in the task logs of the `print_query_result` task:
 
@@ -170,7 +170,7 @@ For information on more advanced search techniques in OpenSearch, see the [OpenS
           Burn                                     3
     ```
 
-4. (Optional) Listen to the [song](https://open.spotify.com/track/7qfoq1JFKBUEIvhqOHzuqX?si=49a2e7c259ad43e2) that mentions your keyword the most. Astronomer recommends to listen to the full Hamilton musical while writing Airflow pipelines.
+4. (Optional) Listen to the [song](https://open.spotify.com/track/7qfoq1JFKBUEIvhqOHzuqX?si=49a2e7c259ad43e2) that mentions your keyword the most.
 
 ## Conclusion
 
