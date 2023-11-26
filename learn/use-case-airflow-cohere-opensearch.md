@@ -20,7 +20,7 @@ Before trying this example, make sure you have:
 
 Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-llm-customer-feedback.git). To keep your credentials secure when you deploy this project to your own git repository, create a file called `.env` with the contents of the `.env_example` file in the project root directory. 
 
-The repository is configured to create and use a local [OpenSearch](https://opensearch.org/docs/latest/) instance, accessible on port `9200`. If you already have a cloud based OpenSearch instance, you can adjust the `AIRFLOW_CONN_OPENSEARCH_DEFAULT` connection string in the `.env` file to point to your instance.
+The repository is configured to create and use a local [OpenSearch](https://opensearch.org/docs/latest/) instance, accessible on port `9200`. If you already have a cloud-based OpenSearch instance, you can adjust the `AIRFLOW_CONN_OPENSEARCH_DEFAULT` connection string in the `.env` file to point to your instance.
 
 To use the Cohere API, you need to [create an account](https://dashboard.cohere.com/welcome/register) and get an [API key](https://dashboard.cohere.com/api-keys). A free tier key is sufficient for this example. Add the key to the `.env` file replacing the `<your-cohere-api-key>` placeholder.
 
@@ -32,7 +32,7 @@ To run the example project, first make sure [Docker](https://docs.docker.com/) i
 astro dev start
 ```
 
-This command builds your project and spins up 5 Docker containers on your machine to run it:
+This command builds your project and spins up 6 Docker containers on your machine to run it:
 
 - The Airflow webserver, which runs the Airflow UI and can be accessed at `https://localhost:8080/`.
 - The Airflow scheduler, which is responsible for monitoring and triggering tasks.
@@ -43,7 +43,6 @@ This command builds your project and spins up 5 Docker containers on your machin
 
 To run the project, manually run the `analyze_customer_feedback` DAG by clicking the **Play** button. Note that the `get_sentiment` and `get_embeddings` tasks can take a few minutes to complete, to allow for the Cohere API to process the text. If you want to quickly test the DAG, set the `NUM_CUSTOMERS` variable at the beginning of the DAG to a lower number.
 
-Congratulations! You've successfully run a full MLOps pipeline with Airflow, Cohere, and OpenSearch which efficiently finds a customer feedback testimonial based on a set of parameters, including its sentiment and similarity to a target testimonial.
 
 ## Project contents
 
@@ -83,7 +82,7 @@ The tasks in this DAG can be grouped into four sections:
 
     ![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using KNN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
 
-Several parameters of this DAG are set at the beginning of the DAG. You can adjust the number of customer feedbacks returned by the mock API by changing the `NUM_CUSTOMERS` variable. 
+Several parameters are set at the beginning of the DAG. You can adjust the number of pieces of customer feedback returned by the mock API by changing the `NUM_CUSTOMERS` variable. 
 
 #### Ingest customer feedback data into OpenSearch
 
@@ -243,7 +242,7 @@ add_lines_as_documents = OpenSearchAddDocumentOperator.partial(
 
 #### Query customer feedback data from OpenSearch
 
-In the second part of the DAG OpenSearch is queried to get the subset of customer feedback data we are interested in. In the use case example, this is feedback from Swiss customers in the `A` test group using `cloud service A` who mentioned the user experience in their feedback.
+In the second part of the DAG, OpenSearch is queried to get the subset of customer feedback data we are interested in. For this example, we chose feedback from Swiss customers in the `A` test group using `cloud service A` who mentioned the user experience in their feedback.
 
 ![Graph view of the query section of the analyze_customer_feedback DAG.](/img/examples/use-case-airflow-cohere-opensearch_query_section.png)
 
@@ -379,7 +378,7 @@ Sentiment scores are returned in the format of:
 {'prediction': 'negative', 'confidence': 0.9305259}
 ```
 
-In parallel, the [CohereEmbeddingOperator] defines the `get_embeddings` task which uses the [embedding endpoint](https://docs.cohere.com/reference/embed) of the Cohere API to get vector embeddings for customer feedback. As the `get_sentiment` task, the `get_embeddings` task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be embedded in parallel. 
+In parallel, the [CohereEmbeddingOperator] defines the `get_embeddings` task which uses the [embedding endpoint](https://docs.cohere.com/reference/embed) of the Cohere API to get vector embeddings for customer feedback. Similar to the `get_sentiment` task, the `get_embeddings` task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be embedded in parallel. 
 
 
 ```python
@@ -506,7 +505,7 @@ For more information on using KNN search in OpenSearch, see the [OpenSearch docu
 
 :::
 
-Lastly, the `print_testimonial_candidates` task prints the positive customer feedbacks that are closest to the target testimonial feedback and mention the user experience of the `cloud A service` to the logs.
+Lastly, the `print_testimonial_candidates` task prints positive customer feedback that is closest to the target testimonial feedback and mentions the user experience of the `cloud A service` to the logs.
 
 ```python
 @task
