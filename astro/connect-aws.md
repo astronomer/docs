@@ -90,7 +90,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     - VPC ID of the external VPC from Step 1
     - AWS account ID of the external VPC from Step 1
     - CIDR block of the external VPC from Step 1
-    - **Stack ID** from Step 3
+    - **PeerRole ARN** from Step 3
     - Astro cluster **ID** from Step 4
     
     Astronomer support will initiate a peering request and create the routing table entries in the Astro VPC.

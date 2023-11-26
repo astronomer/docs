@@ -214,6 +214,9 @@ module.exports = {
         'connections/ms-sqlserver',
         'airflow-openai',
         'airflow-opensearch',
+        'airflow-pgvector',
+        'airflow-pinecone',
+        'connections/postgres',
         {
           type: 'category',
           label: 'Redshift',
@@ -228,7 +231,6 @@ module.exports = {
             'airflow-redshift',
           ],
         },
-        'connections/postgres',
         {
           type: 'category',
           label: 'Snowflake',

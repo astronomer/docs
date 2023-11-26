@@ -102,7 +102,15 @@ module.exports = {
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
-        "environment-variables",
+        {
+          type: "category",
+          label: "Environment variables",
+          link: {
+            type: 'doc',
+            id: 'environment-variables'
+          },
+          items: ["environment-variables", "manage-env-vars"],
+        },
         {
           type: "category",
           label: "Secrets backend",

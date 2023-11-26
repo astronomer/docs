@@ -552,6 +552,16 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
 
+## Astro Runtime 6.8.0
+
+- Release date: November 24, 2023
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Use pyarrow-hotfix to mitigate CVE-2023-47248 ([35650](https://github.com/apache/airflow/pull/35650))
+- Fix Scheduler crash looping when dagrun creation fails ([35135](https://github.com/apache/airflow/pull/35135))
+
 ## Astro Runtime 6.7.0
 
 - Release date: October 12, 2023
