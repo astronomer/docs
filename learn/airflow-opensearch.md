@@ -102,7 +102,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```
 
 
-4. Add the following configuration to your `.env` file to create an [Airflow connection](connections.md) between Astro and your OpenSearch instance. If you already have a cloud-based OpenSearch instance, you can connect to that instead of the local instance by adjusting the values in the connection.
+4. Add the following configuration to your `.env` file to create an [Airflow connection](connections.md) between Airflow and your OpenSearch instance. If you already have a cloud-based OpenSearch instance, you can connect to that instead of the local instance by adjusting the values in the connection.
 
     ```text
     AIRFLOW_CONN_OPENSEARCH_DEFAULT='{
@@ -116,7 +116,7 @@ The example code from this tutorial is also available on [GitHub](https://github
 
 ## Step 2: Add your data
 
-The DAG in this tutorial uses a  [Kaggle](https://www.kaggle.com/datasets/lbalter/hamilton-lyrics) dataset that contains the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/). 
+The DAG in this tutorial uses a [Kaggle](https://www.kaggle.com/datasets/lbalter/hamilton-lyrics) dataset that contains the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/). 
 
 1. Download the [hamilton_lyrics.csv](https://github.com/astronomer/airflow-opensearch-tutorial/blob/main/include/hamilton_lyrics.csv) from Astronomer's GitHub.
 
@@ -130,16 +130,16 @@ The DAG in this tutorial uses a  [Kaggle](https://www.kaggle.com/datasets/lbalte
 
     <CodeBlock language="python">{search_hamilton}</CodeBlock>
 
-    This DAG consists of seven tasks to make a simple ML orchestration pipeline.
+This DAG consists of seven tasks to make a simple ML orchestration pipeline.
 
-    - The `check_if_index_exists` task uses a [`@task.branch`](airflow-branch-operator.md#taskbranch-branchpythonoperator) decorator to check if the index `OPENSEARCH_INDEX_NAME` exists in your OpenSearch instance. If it does not exist, the task returns the string `create_index` causing the downstream `create_index` task to run. If the index exists, the task causes the empty `index_exists` task to run instead.
-    - The `create_index` task defined with the [OpenSearchCreateIndexOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchCreateIndexOperator) creates the index `OPENSEARCH_INDEX_NAME` in your OpenSearch instance with the three properties `title`, `speaker` and `lines`.
-    - The `csv_to_dict_list` task uses the [`@task`](airflow-decorators.md) decorator to ingest the lyrics of the musical Hamilton from the `hamilton_lyrics.csv` file into a list of Python dictionaries. Each dictionary represents a line of the musical and will be one document in the OpenSearch index.
-    - The `add_lines_as_documents` task is a [dynamically mapped task](dynamic-tasks.md) using the [OpenSearchAddDocumentOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchAddDocumentOperator) to create one mapped task instance for each document to ingest.
-    - The `search_for_keyword` is defined with the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) and performs a [fuzzy query](https://opensearch.org/docs/latest/query-dsl/term/fuzzy/) on the OpenSearch index to find the character and song that mention the `KEYWORD_TO_SEARCH` the most.
-    - The `print_query_result` prints the query results to the task logs.
+- The `check_if_index_exists` task uses a [`@task.branch`](airflow-branch-operator.md#taskbranch-branchpythonoperator) decorator to check if the index `OPENSEARCH_INDEX_NAME` exists in your OpenSearch instance. If it does not exist, the task returns the string `create_index` causing the downstream `create_index` task to run. If the index exists, the task causes the empty `index_exists` task to run instead.
+- The `create_index` task defined with the [OpenSearchCreateIndexOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchCreateIndexOperator) creates the index `OPENSEARCH_INDEX_NAME` in your OpenSearch instance with the three properties `title`, `speaker` and `lines`.
+- The `csv_to_dict_list` task uses the [`@task`](airflow-decorators.md) decorator to ingest the lyrics of the musical Hamilton from the `hamilton_lyrics.csv` file into a list of Python dictionaries. Each dictionary represents a line of the musical and will be one document in the OpenSearch index.
+- The `add_lines_as_documents` task is a [dynamically mapped task](dynamic-tasks.md) using the [OpenSearchAddDocumentOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchAddDocumentOperator) to create one mapped task instance for each document to ingest.
+- The `search_for_keyword` is defined with the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) and performs a [fuzzy query](https://opensearch.org/docs/latest/query-dsl/term/fuzzy/) on the OpenSearch index to find the character and song that mention the `KEYWORD_TO_SEARCH` the most.
+- The `print_query_result` prints the query results to the task logs.
 
-    ![Screenshot of the Airflow UI showing the successful completion of the `search_hamilton` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-opensearch_dag.png)
+![Screenshot of the Airflow UI showing the successful completion of the `search_hamilton` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-opensearch_dag.png)
 
 :::tip
 
