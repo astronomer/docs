@@ -43,6 +43,7 @@ This command builds your project and spins up 6 Docker containers on your machin
 
 To run the project, manually run the `analyze_customer_feedback` DAG by clicking the **Play** button. Note that the `get_sentiment` and `get_embeddings` tasks can take a few minutes to complete, to allow for the Cohere API to process the text. If you want to quickly test the DAG, set the `NUM_CUSTOMERS` variable at the beginning of the DAG to a lower number.
 
+The other parameters at the beginning of the DAG, such as `TESTIMONIAL_SEARCH_TERM` or `FEEDBACK_SEARCH_TERMS` can be adjusted as well to change parts of the OpenSearch queries in the DAG. If you adjust these parameters make sure to also change the `feedback_options` in the [app.py](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/mock_api/app.py) file of the mock API to create customer feedback that matches the search terms.
 
 ## Project contents
 
@@ -58,7 +59,7 @@ The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm
 
 ![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
-The [`delete_opensearch_index` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/delete_opensearch_index.py) deletes the `INDEX_TO_DELETE` in OpenSearch. This DAG is used during development to allow the the `analyze_customer_feedback` DAG to create the index from scratch.
+The [`delete_opensearch_index` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/delete_opensearch_index.py) deletes the `INDEX_TO_DELETE` in OpenSearch. This DAG is used during development to allow the the `analyze_customer_feedback` DAG to create the index from scratch. Run this DAG if you would like to start from a clean slate, for example when making changes to the index schema to adapt the project to your own use case.
 
 ### Project code
 
@@ -78,9 +79,9 @@ The tasks in this DAG can be grouped into four sections:
 
     ![Graph view of the section in the analyze_customer_feedback DAG that performs sentiment analysis, vector embeddings with the Cohere API and loads the results back into OpenSearch.](/img/examples/use-case-airflow-cohere-opensearch_sentiment_embedding_section.png)
 
-- Query OpenSearch for the most similar testimonial using KNN on the embeddings and filter for positive sentiment
+- Query OpenSearch for the most similar testimonial using a k-nearest neighbors (k-NN) algorithm on the embeddings and filter for positive sentiment
 
-    ![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using KNN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
+    ![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using k-NN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
 
 Several parameters are set at the beginning of the DAG. You can adjust the number of pieces of customer feedback returned by the mock API by changing the `NUM_CUSTOMERS` variable. 
 
@@ -341,7 +342,7 @@ feedback_texts = get_feedback_texts.expand(review_of_interest=relevant_reviews)
 
 #### Perform sentiment analysis on relevant customer feedback and get embeddings using the Cohere API
 
-The third section of the DAG consists of one task that performs sentiment analysis on the relevant customer feedback data using the Cohere API.
+The third section of the DAG consists of four tasks that perform sentiment analysis, get vector embeddings and load the results back into OpenSearch.
 
 ![Graph view of the section in the analyze_customer_feedback DAG that performs sentiment analysis, vector embeddings with the Cohere API and loads the results back into OpenSearch.](/img/examples/use-case-airflow-cohere-opensearch_sentiment_embedding_section.png)
 
@@ -378,7 +379,7 @@ Sentiment scores are returned in the format of:
 {'prediction': 'negative', 'confidence': 0.9305259}
 ```
 
-In parallel, the [CohereEmbeddingOperator] defines the `get_embeddings` task which uses the [embedding endpoint](https://docs.cohere.com/reference/embed) of the Cohere API to get vector embeddings for customer feedback. Similar to the `get_sentiment` task, the `get_embeddings` task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be embedded in parallel. 
+In parallel, the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cohere/versions/latest/modules/CohereEmbeddingOperator) defines the `get_embeddings` task which uses the [embedding endpoint](https://docs.cohere.com/reference/embed) of the Cohere API to get vector embeddings for customer feedback. Similar to the `get_sentiment` task, the `get_embeddings` task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be embedded in parallel. 
 
 
 ```python
@@ -439,11 +440,11 @@ load_embeddings_obj = load_embeddings_into_opensearch.partial(
 ).expand(full_data=full_data)
 ```
 
-#### Query OpenSearch for the most similar testimonial using KNN on the embeddings and filter for positive sentiment
+#### Query OpenSearch for the most similar testimonial using k-NN on the embeddings and filter for positive sentiment
 
-The final section of the DAG queries OpenSearch using both KNN on the embeddings and a filter on the sentiment scores to get the most similar positive customer feedback to a target testimonial.
+The final section of the DAG queries OpenSearch using both k-NN on the embeddings and a filter on the sentiment scores to get the most similar positive customer feedback to a target testimonial.
 
-![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using KNN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
+![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using k-NN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
 
 
 First, the `get_embeddings_testimonial_search_term` task converts the target testimonial to vector embeddings using the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereEmbeddingOperator). 
@@ -469,7 +470,7 @@ search_term_embeddings = prep_search_term_embeddings_for_query(
 )
 ```
 
-The `search_for_testimonial_candidates` task uses the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) to query OpenSearch for the most similar customer feedback to the target testimonial using a k-nearest neighbors (k-NN) algorithm on the embeddings and filter for positive sentiment. Note that k-NN search requires the `knn` plugin to be installed in OpenSearch.
+The `search_for_testimonial_candidates` task uses the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) to query OpenSearch for the most similar customer feedback to the target testimonial using a k-NN algorithm on the embeddings and filter for positive sentiment. Note that k-NN search requires the `knn` plugin to be installed in OpenSearch.
 
 ```python
 search_for_testimonial_candidates = OpenSearchQueryOperator(
@@ -501,7 +502,7 @@ search_for_testimonial_candidates = OpenSearchQueryOperator(
 
 :::note
 
-For more information on using KNN search in OpenSearch, see the [OpenSearch documentation on KNN search](https://opensearch.org/docs/latest/search-plugins/knn/filter-search-knn/).
+For more information on using k-NN search in OpenSearch, see the [OpenSearch documentation on k-NN search](https://opensearch.org/docs/latest/search-plugins/knn/filter-search-knn/).
 
 :::
 
@@ -533,6 +534,8 @@ You can review the output of the task in the task logs, they should look similar
 [2023-11-24, 11:25:48 UTC] {logging_mixin.py:154} INFO - Customer sentiment:  positive
 [2023-11-24, 11:25:48 UTC] {logging_mixin.py:154} INFO - Customer sentiment confidence:  0.99412733
 ```
+
+Congratulations! You've successfully run a full MLOps pipeline with Airflow, Cohere, and OpenSearch which efficiently finds a customer feedback testimonial based on a set of parameters, including its sentiment and similarity to a target testimonial.
 
 ## See also
 
