@@ -213,6 +213,7 @@ module.exports = {
         'airflow-mongodb',
         'connections/ms-sqlserver',
         'airflow-openai',
+        'airflow-opensearch',
         'airflow-pgvector',
         'airflow-pinecone',
         'connections/postgres',
