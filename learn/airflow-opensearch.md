@@ -11,7 +11,7 @@ import search_hamilton from '!!raw-loader!../code-samples/dags/airflow-opensearc
 
 [OpenSearch](https://opensearch.org/) is an open source distributed search and analytics engine based on [Apache Lucene](https://lucene.apache.org/). It offers advanced search capabilities on large bodies of text alongside powerful machine learning plugins. The [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) offers modules to easily integrate OpenSearch with Airflow.
 
-In this tutorial you'll use Airflow to create an index in OpenSearch, ingest the lyrics of the musical Hamilton into the index, and run a search query on the index to see which character most often sings a specific word.
+In this tutorial you'll use Airflow to create an index in OpenSearch, ingest the lyrics of the musical [Hamilton](https://hamiltonmusical.com/new-york/) into the index, and run a search query on the index to see which character most often sings a specific word.
 
 ## Why use Airflow with OpenSearch?
 
@@ -20,7 +20,7 @@ OpenSearch allows you to perform complex search queries on indexed text document
 Integrating OpenSearch with Airflow allows you to:
 
 - Use Airflow's [data-driven scheduling](airflow-datasets.md) to run operations involving documents stored in OpenSearch based on upstream events in your data ecosystem, such as when a new model is trained or a new dataset is available.
-- Run dynamic queries based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md) on documents and vectors OpenSearch to retrieve relevant objects.
+- Run dynamic queries based on upstream events in your data ecosystem or user input via [Airflow params](airflow-params.md) on documents and vectors stored in OpenSearch to retrieve relevant objects.
 - Add Airflow features like [retries](rerunning-dags.md#automatically-retry-tasks) and [alerts](error-notifications-in-airflow.md) to your OpenSearch operations.
 
 ## Time to complete
@@ -41,7 +41,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
-This tutorial uses an OpenSearch instance created as a [Docker container](https://hub.docker.com/r/opensearchproject/opensearch). You do not need to install OpenSearch on your machine.
+This tutorial uses a local OpenSearch instance created as a [Docker container](https://hub.docker.com/r/opensearchproject/opensearch). You do not need to install OpenSearch on your machine.
 
 :::info
 
@@ -58,7 +58,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two lines to your Astro project `requirements.txt` file to install the [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) and pin the [pandas](https://pandas.pydata.org/) version in your Astro project:
+2. Add the following two lines to your Astro project `requirements.txt` file to install the [OpenSearch Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-opensearch/stable/index.html) and the [pandas](https://pandas.pydata.org/) package in your Astro project:
 
     ```text
     apache-airflow-providers-opensearch==1.0.0
@@ -136,7 +136,7 @@ This DAG consists of seven tasks to make a simple ML orchestration pipeline.
 - The `create_index` task defined with the [OpenSearchCreateIndexOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchCreateIndexOperator) creates the index `OPENSEARCH_INDEX_NAME` in your OpenSearch instance with the three properties `title`, `speaker` and `lines`.
 - The `csv_to_dict_list` task uses the [`@task`](airflow-decorators.md) decorator to ingest the lyrics of the musical Hamilton from the `hamilton_lyrics.csv` file into a list of Python dictionaries. Each dictionary represents a line of the musical and will be one document in the OpenSearch index.
 - The `add_lines_as_documents` task is a [dynamically mapped task](dynamic-tasks.md) using the [OpenSearchAddDocumentOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchAddDocumentOperator) to create one mapped task instance for each document to ingest.
-- The `search_for_keyword` is defined with the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) and performs a [fuzzy query](https://opensearch.org/docs/latest/query-dsl/term/fuzzy/) on the OpenSearch index to find the character and song that mention the `KEYWORD_TO_SEARCH` the most.
+- The `search_for_keyword` task is defined with the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) and performs a [fuzzy query](https://opensearch.org/docs/latest/query-dsl/term/fuzzy/) on the OpenSearch index to find the character and song that mention the `KEYWORD_TO_SEARCH` the most.
 - The `print_query_result` prints the query results to the task logs.
 
 ![Screenshot of the Airflow UI showing the successful completion of the `search_hamilton` DAG in the Grid view with the Graph tab selected.](/img/tutorials/airflow-opensearch_dag.png)
