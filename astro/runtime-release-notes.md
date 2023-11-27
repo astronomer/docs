@@ -430,6 +430,7 @@ For a complete list of the changes, see the [Apache Airflow 2.5.3 release notes]
 
 ### Additional improvements 
 
+- When using Runtime in an Astronomer Software installation, OpenLineage and the Astronomer monitoring DAG are now disabled. OpenLineage can be re-enabled in your Deployment by setting the `OPENLINEAGE_URL` environment variable, or by setting the `OPENLINEAGE_DISABLED=False` environment variable.
 - Upgraded `astronomer-providers` to 1.15.2, which includes several bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/releases/tag/1.15.2) for a complete list of changes. 
 
 ## Astro Runtime 7.4.1
