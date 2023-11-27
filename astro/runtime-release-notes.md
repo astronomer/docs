@@ -796,7 +796,7 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 
 ## Astro Runtime 5.5.0
 
-- Release date: November 24, 2023
+- Release date: November 27, 2023
 - Airflow version: 2.3.4
 - 
 ### Early access Airflow bug fixes
