@@ -638,7 +638,7 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
     
   - `generate_call_embeddings` Task: Processes the transcribed call data to generate embeddings. These embeddings provide insights into overall sentiment expressed during the calls.
 
-# Model Training
+### Model training
 
 ```python
 @task.snowpark_virtualenv(requirements=['lightgbm==3.3.5', 'scikit-learn==1.2.2', 'astro_provider_snowflake'])
