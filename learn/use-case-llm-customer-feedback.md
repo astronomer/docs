@@ -43,7 +43,7 @@ This command builds your project and spins up 6 Docker containers on your machin
 
 To run the pipeline, run the `analyze_customer_feedback` DAG by clicking the **Play** button. Note that the `get_sentiment` and `get_embeddings` tasks can take a few minutes to complete while the Cohere API processes the text. If you want to quickly test the DAG, set the `NUM_CUSTOMERS` variable at the beginning of the DAG to a lower number.
 
-The other parameters at the beginning of the DAG, such as `TESTIMONIAL_SEARCH_TERM` or `FEEDBACK_SEARCH_TERMS` can be adjusted as well to change parts of the OpenSearch queries in the DAG. If you adjust these parameters, make sure to also change the `feedback_options` in the [app.py](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/mock_api/app.py) file of the mock API to create customer feedback that matches your updated search terms.
+The other parameters at the beginning of the DAG, such as `TESTIMONIAL_SEARCH_TERM` or `FEEDBACK_SEARCH_TERMS` can be adjusted as well to change parts of the OpenSearch queries in the DAG. If you adjust these parameters, make sure to also change the `feedback_options` in the [`app.py`](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/mock_api/app.py) file of the mock API to create customer feedback that matches your updated search terms.
 
 ## Project contents
 
@@ -55,7 +55,7 @@ The data in this example is generated using the [`app.py`](https://github.com/as
 
 This project contains two DAGs, one for the MLOps pipeline and one DAG to delete the index in OpenSearch for testing purposes. 
 
-The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/analyze_customer_feedback.py) ingests data from the mock API and loads it into OpenSearch. The DAG then uses the Cohere API to get sentiment and embeddings for a subset of the customer feedback returned by a keyword OpenSearch query. The embeddings and sentiment analysis scores are ingested back into OpenSearch and a final query is performed to get the positive feedback most similar to a target testimonial. The DAG ends by printing the retrieved testimonial to the logs.
+The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/analyze_customer_feedback.py) ingests data from the mock API and loads it into an [OpenSearch index](https://opensearch.org/docs/latest/im-plugin/index/). The DAG then uses the Cohere API to get sentiment and embeddings for a subset of the customer feedback returned by a keyword OpenSearch query. The embeddings and sentiment analysis scores are ingested back into OpenSearch and a final query is performed to get the positive feedback most similar to a target testimonial. The DAG ends by printing the retrieved testimonial to the logs.
 
 ![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
@@ -79,7 +79,7 @@ The tasks in the `analyze_customer_feedback` DAG can be grouped into four sectio
 
     ![Graph view of the section in the analyze_customer_feedback DAG that performs sentiment analysis, vector embeddings with the Cohere API and loads the results back into OpenSearch.](/img/examples/use-case-airflow-cohere-opensearch_sentiment_embedding_section.png)
 
-- Query OpenSearch for the most similar testimonial using a k-nearest neighbors (k-NN) algorithm on the embeddings and filter for positive sentiment
+- Query OpenSearch for the most similar testimonial using a [k-nearest neighbors (k-NN) algorithm](https://opensearch.org/docs/latest/search-plugins/knn/filter-search-knn/) on the embeddings and filter for positive sentiment
 
     ![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using k-NN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
 
@@ -91,7 +91,7 @@ The first six tasks in the `analyze_customer_feedback` DAG perform the necessary
 
 ![Graph view of the first six task in the analyze_customer_feedback DAG dealing with data ingestion.](/img/examples/use-case-airflow-cohere-opensearch_ingest_section.png)
 
-First, the `check_if_index_exists` task uses the [OpenSearchHook](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchHook) to check if an index of the name `OPEN_SEARCH_INDEX` already exists in your OpenSearch instance. The task is defined using the [`@task.branch`](airflow-branch-operator.md#taskbranch-branchpythonoperator) decorator and returns a different `task_id` depending on the result of the check. If the index already exists, the empty `index_exists` task will be executed. If the index does not exist, the `create_index` task will be executed. 
+First, the `check_if_index_exists` task uses the [OpenSearchHook](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchHook) to check if an [index](https://opensearch.org/docs/latest/im-plugin/index/) of the name `OPEN_SEARCH_INDEX` already exists in your OpenSearch instance. The task is defined using the [`@task.branch`](airflow-branch-operator.md#taskbranch-branchpythonoperator) decorator and returns a different `task_id` depending on the result of the check. If the index already exists, the empty `index_exists` task will be executed. If the index does not exist, the `create_index` task will be executed. 
 
 ```python
 @task.branch
@@ -144,12 +144,6 @@ create_index = OpenSearchCreateIndexOperator(
     },
 )
 ```
-
-:::info
-
-For more information on OpenSearch indexes, see the [OpenSearch documentation on Managing indexes](https://opensearch.org/docs/latest/im-plugin/index/).
-
-:::
 
 Running in parallel, the `get_customer_feedback` task makes a call to the mock API exposed at `customer_ticket_api:5000`. 
 
@@ -247,7 +241,7 @@ In the second part of the DAG, OpenSearch is queried to get the subset of custom
 
 ![Graph view of the query section of the analyze_customer_feedback DAG.](/img/examples/use-case-airflow-cohere-opensearch_query_section.png)
 
-The `search_for_relevant_feedback` task uses the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) to query OpenSearch for the relevant customer feedback data. The query is defined as a dictionary and passed to the `query` parameter of the operator. OpenSearch fuzzy matches the terms provided in the `FEEDBACK_SEARCH_TERMS` variable while filtering for the `CUSTOMER_LOCATION`, `AB_TEST_GROUP`, and `PRODUCT_TYPE` variables.
+The `search_for_relevant_feedback` task uses the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) to query OpenSearch for the relevant customer feedback data. The query is defined using [query domain-specific language (DSL)](https://opensearch.org/docs/latest/query-dsl/index/) and passed to the `query` parameter of the operator. OpenSearch fuzzy matches the terms provided in the `FEEDBACK_SEARCH_TERMS` variable while filtering for the `CUSTOMER_LOCATION`, `AB_TEST_GROUP`, and `PRODUCT_TYPE` variables.
 
 ```python
 search_for_relevant_feedback = OpenSearchQueryOperator(
@@ -279,12 +273,6 @@ search_for_relevant_feedback = OpenSearchQueryOperator(
     },
 )
 ```
-
-:::info
-
-For more information about OpenSearch queries written in query domain-specific language (DSL), see the [OpenSearch documentation on Query DSL](https://opensearch.org/docs/latest/query-dsl/index/).
-
-:::
 
 The returned customer feedback data is then transformed using the `reformat_relevant_reviews` task to get a list of dictionaries.
 
@@ -446,7 +434,6 @@ The final section of the DAG queries OpenSearch using both k-NN on the embedding
 
 ![Graph view of the final section of the analyze_customer_feedback DAG that queries OpenSearch for the most similar testimonial using k-NN on the embeddings and filter for positive sentiment.](/img/examples/use-case-airflow-cohere-opensearch_final_section.png)
 
-
 First, the `get_embeddings_testimonial_search_term` task converts the target testimonial to vector embeddings using the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereEmbeddingOperator). 
 
 ```python
@@ -470,7 +457,7 @@ search_term_embeddings = prep_search_term_embeddings_for_query(
 )
 ```
 
-The `search_for_testimonial_candidates` task uses the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) to query OpenSearch for the most similar customer feedback to the target testimonial using a [k-NN](https://opensearch.org/docs/latest/search-plugins/knn/filter-search-knn/)) algorithm on the embeddings and filter for positive sentiment. Note that k-NN search requires the `knn` plugin to be installed in OpenSearch.
+The `search_for_testimonial_candidates` task uses the [OpenSearchQueryOperator](https://registry.astronomer.io/providers/apache-airflow-providers-opensearch/versions/latest/modules/OpenSearchQueryOperator) to query OpenSearch for the most similar customer feedback to the target testimonial using a [k-NN](https://opensearch.org/docs/latest/search-plugins/knn/filter-search-knn/) algorithm on the embeddings and filter for positive sentiment. Note that k-NN search requires the `knn` plugin to be installed in OpenSearch.
 
 ```python
 search_for_testimonial_candidates = OpenSearchQueryOperator(
@@ -499,12 +486,6 @@ search_for_testimonial_candidates = OpenSearchQueryOperator(
     },
 )
 ```
-
-:::info
-
-For more information on using k-NN search in OpenSearch, see the [OpenSearch documentation on k-NN search](https://opensearch.org/docs/latest/search-plugins/knn/filter-search-knn/).
-
-:::
 
 Lastly, the `print_testimonial_candidates` task prints positive customer feedback that is closest to the target testimonial feedback and mentions the user experience of the `cloud A service` to the logs.
 
