@@ -55,7 +55,7 @@ The data in this example is generated using the [`app.py`](https://github.com/as
 
 This project contains two DAGs, one for the MLOps pipeline and one DAG to delete the index in OpenSearch for testing purposes. 
 
-The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/analyze_customer_feedback.py) ingests data from the mock API and loads it into an [OpenSearch index](https://opensearch.org/docs/latest/im-plugin/index/). The DAG then uses the Cohere API to get sentiment and embeddings for a subset of the customer feedback returned by a keyword OpenSearch query. The embeddings and sentiment analysis scores are ingested back into OpenSearch and a final query is performed to get the positive feedback most similar to a target testimonial. The DAG ends by printing the retrieved testimonial to the logs.
+The [`analyze_customer_feedback` DAG](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/dags/analyze_customer_feedback.py) ingests data from the mock API and loads it into an [OpenSearch index](https://opensearch.org/docs/latest/im-plugin/index/). The DAG then uses the Cohere API to get sentiment scores and embeddings for a subset of the customer feedback returned by a keyword OpenSearch query. The embeddings and sentiment analysis scores are ingested back into OpenSearch and a final query is performed to get the positive feedback most similar to a target testimonial. The DAG ends by printing the retrieved testimonial to the logs.
 
 ![Screenshot of the Airflow UI Grid view with the Graph view selected showing a successful run of the full use case DAG with 17 tasks.](/img/examples/use-case-airflow-cohere-opensearch_full_dag.png)
 
@@ -155,7 +155,6 @@ def get_customer_feedback(num_customers: int) -> list:
         f"http://customer_ticket_api:5000/api/data?num_reviews={num_customers}"
     )
     return r.json()
-
 ```
 
 The payload of the mock API is in the format of:
@@ -316,7 +315,7 @@ The dictionaries returned contain a flattened version of the verbose output from
 ]
 ```
 
-A second task, the `get_feedback_texts` is dynamically mapped over the list of dictionaries returned by the `reformat_relevant_reviews` task to extract the `customer_feedback` field from each dictionary. 
+A second task, `get_feedback_texts`, is dynamically mapped over the list of dictionaries returned by the `reformat_relevant_reviews` task to extract the `customer_feedback` field from each dictionary. 
 
 ```python
 @task
@@ -334,7 +333,7 @@ The third section of the DAG consists of four tasks that perform sentiment analy
 
 ![Graph view of the section in the analyze_customer_feedback DAG that performs sentiment analysis, vector embeddings with the Cohere API and loads the results back into OpenSearch.](/img/examples/use-case-airflow-cohere-opensearch_sentiment_embedding_section.png)
 
-The first task in this section, `get_sentiment`, uses the [CohereHook](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereHook) to get the sentiment of the customer feedback using the Cohere API [Text classification endpoint](https://docs.cohere.com/reference/classify). The task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be analyzed in parallel. Sentiment examples are stored in the [`classification_examples` file](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/classification_examples.py) in the `include` folder. 
+The first task in this section, `get_sentiment`, uses the [CohereHook](https://registry.astronomer.io/providers/cohere/versions/latest/modules/CohereHook) to get the sentiment of the customer feedback using the Cohere API [text classification endpoint](https://docs.cohere.com/reference/classify). The task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be analyzed in parallel. Sentiment examples are stored in the [`classification_examples` file](https://github.com/astronomer/use-case-llm-customer-feedback/blob/main/include/classification_examples.py) in the `include` folder. 
 
 ```python
 @task
@@ -364,7 +363,7 @@ sentiment_scores = get_sentiment.partial(
 Sentiment scores are returned in the format of:
 
 ```python
-{'prediction': 'negative', 'confidence': 0.9305259}
+{'prediction': 'positive', 'confidence': 0.9305259}
 ```
 
 In parallel, the [CohereEmbeddingOperator](https://registry.astronomer.io/providers/apache-airflow-providers-cohere/versions/latest/modules/CohereEmbeddingOperator) defines the `get_embeddings` task which uses the [embedding endpoint](https://docs.cohere.com/reference/embed) of the Cohere API to get vector embeddings for customer feedback. Similar to the `get_sentiment` task, the `get_embeddings` task is dynamically mapped over the list of feedback texts returned by the `get_feedback_texts` task to create one mapped task instance per customer feedback to be embedded in parallel. 
