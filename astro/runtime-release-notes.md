@@ -806,6 +806,7 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 - Listener: move success hook to after SQLAlchemy commit ([32988](https://github.com/apache/airflow/pull/32988))
 - Use pyarrow-hotfix to mitigate CVE-2023-47248 ([35650](https://github.com/apache/airflow/pull/35650))
 - Fix Scheduler crash looping when dagrun creation fails ([35135](https://github.com/apache/airflow/pull/35135))
+
 ### Bug fixes
 
 - Blocked the ability to pause the Monitoring DAG with the Airflow API. The Monitoring DAG is used by Astronomer to operate your Deployments and should not be paused.
