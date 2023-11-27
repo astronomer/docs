@@ -138,6 +138,7 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 
 #### Prerequisites
 
+- A [Microsoft Entra ID tenant](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-create-new-tenant) with Global Administrator or Application Administrator privileges.
 - A user-assigned managed identity on Azure. See [Azure documentation](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?source=recommendations&pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity).
 - The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 
@@ -152,11 +153,10 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 #### Step 2: Configure your Deployment
 
 1. In your Azure portal, open the **Managed Identities** menu.
-2. Search for your managed identity, then copy its **Object (principal) ID**, **Client ID**, and **Resource group**.
-3. Open the left menu, then select **Microsoft Entra ID**. In the **Overview** section, copy the **Tenant ID**.
-4. In the Cloud UI, select your Deployment, click **Details**, then click **Workload Identity**.
+2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID** and **Resource group** name. 
+4. In the Cloud UI, select your Deployment, click **Details**, then click **How to Configure...** under **Workload Identity**
 5. In **Managed Identity**, enter the ID of the managed identity you assigned to the resource. 
-6. In **Resource Group**, enter the ID of the resource group that your managed identity belongs to.
+6. In **Resource Group**, enter the **Resource group** name that your managed identity belongs to.
 7. Using the Azure CLI, copy and run the provided command in your local terminal.
 8. After the command completes, click **Close** on the modal in the Cloud UI.
 9. (Optional) repeat Steps 4 - 8 for any other Deployments that need to be authorized to Azure.
