@@ -48,10 +48,9 @@ Clone the example project from the [Astronomer GitHub](https://github.com/astron
 git clone https://github.com/astronomer/airflow-snowparkml-demo
 cd airflow-snowparkml-demo 
 ```
-
-:::note
 Open the `.env` file in an editor and update the following variables with you account information. You only need to update the Snowflake Connection details to be able to run the Customer Analytics DAG. However, if you'd like to enable chat capabilities in the final streamlit application, please add an OpenAI API key where designated in the .env file as well. 
 
+:::note
 This demo assumes the use of a new Snowflake trial account with admin privileges.  A database named 'DEMO' and schema named 'DEMO' will be created in the DAG.  Running this demo without admin privileges or with existing database/schema will require further updates to the `.env` file.
 :::
 
@@ -105,7 +104,7 @@ You can then open the [streamlit application](http://localhost:8501) in a browse
 
 ## Project Code
 
-This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a much more complex [customer_analytics DAG.](https://github.com/astronomer/airflow-snowparkml-demo/blob/main/dags/customer_analytics.py) This guide will solely focus on the `customer_analytics` DAG which demonstrates an end-to-end ML application workflow using OpenAI embeddings with a Weaviate vector database as well as Snowpark decorators, the Snowflake XCom backend, and the Snowpark ML model registry. The Astro CLI is adapted to include additional Docker-based services for Weaviate and Streamlit. 
+This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a much more complex [customer_analytics DAG.](https://github.com/astronomer/airflow-snowparkml-demo/blob/main/dags/customer_analytics.py) This guide will solely focus on the `customer_analytics` DAG which demonstrates an end-to-end ML application workflow using OpenAI embeddings with a Weaviate vector database as well as Snowpark decorators, the Snowflake XCom backend, and the Snowpark ML model registry. The Astro CLI is adapted to include additional Docker-based services for Weaviate and Streamlit. The first tasks in the the set-up task group create all the resources necessary to run the pipeline, including creating the necessary Snowflake tables, restoring Weaviate data from prior runs, and creating a Snowpark model registry if none exists already. Then, the unstructured data and structured data task groups run in parallel to ingest customer data to use to train the model. The unstructured data task group extracts twitter comments, reviews, and customer support calls, before transcribing the calls and converting all the unstructured data into Weaviate vector embeddings. The structured data contains various data points about customers, their purchasing histories, and lifetime value, all of which are transformed using Snowpark to be easily joinable with the unstructured data. Then, the prepared data is split into testing and training datasets, before being used to train a sentiment-classifier model to predict customer life time value based on their sentiment. Finally, the trained model is used to generate predictions for customers life time value based on their sentiment. Then, those results are cleaned and organized into presentation tables for viewing via a streamlit application. 
 
 ### Setup Tasks
 
