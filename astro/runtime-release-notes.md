@@ -794,6 +794,23 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 - Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of the operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
 - Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 
+## Astro Runtime 5.5.0
+
+- Release date: November 27, 2023
+- Airflow version: 2.3.4
+  
+### Early access Airflow bug fixes
+
+- Listener: Set task on sqlalchemy taskinstance object ([27167](https://github.com/apache/airflow/pull/27167))
+- Listener: Simplify API by replacing SQLAlchemy event-listening by direct calls ([29289](https://github.com/apache/airflow/pull/29289))
+- Listener: move success hook to after SQLAlchemy commit ([32988](https://github.com/apache/airflow/pull/32988))
+- Use pyarrow-hotfix to mitigate CVE-2023-47248 ([35650](https://github.com/apache/airflow/pull/35650))
+- Fix Scheduler crash looping when dagrun creation fails ([35135](https://github.com/apache/airflow/pull/35135))
+
+### Bug fixes
+
+- Blocked the ability to pause the Monitoring DAG with the Airflow API. The Monitoring DAG is used by Astronomer to operate your Deployments and should not be paused.
+
 ## Astro Runtime 5.4.0
 
 - Release date: March 23, 2023
