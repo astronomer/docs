@@ -924,8 +924,8 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 
 # See also
 
-- https://docs.astronomer.io/learn/airflow-snowpark
-- https://docs.astronomer.io/learn/airflow-setup-teardown
-- https://docs.astronomer.io/learn/airflow-weaviate
-- https://docs.astronomer.io/learn/xcom-backend-tutorial
+- [Airflow-Snowpark Integration guide](https://docs.astronomer.io/learn/airflow-snowpark)
+- [Set-up/Tear-down guide](https://docs.astronomer.io/learn/airflow-setup-teardown)
+- [Airflow-Weaviate Integration guide](https://docs.astronomer.io/learn/airflow-weaviate)
+- [Custom XCom Backend Guide](https://docs.astronomer.io/learn/xcom-backend-tutorial)
 
