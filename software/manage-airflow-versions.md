@@ -14,7 +14,7 @@ Regularly upgrading your Software Deployments ensures that your Deployments cont
 To upgrade your Airflow Deployment to a later version of Airflow:
 
 - Select a new Airflow version with the Software UI or CLI to start the upgrade.
-- Change the FROM statement in your project's `Dockerfile` to reference an Astronomer Certified (AC) or Astro Runtime image that corresponds to your current Airflow version. See [Customize Your Image](customize-image.md).
+- Change the FROM statement in your project's `Dockerfile` to reference an Astro Runtime image that corresponds to your current Airflow version. See [Customize Your Image](customize-image.md).
 - Deploy to Astronomer.
 
 ## Available Astronomer image versions
