@@ -435,7 +435,7 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 
 - Task `attribution_playbook`: This task tackles the complex challenge of marketing attribution, aiming to understand how different marketing efforts contribute to customer conversions. It does this by linking customer conversion data with their session data. The task then applies various attribution models, such as first touch, last touch, and linear, to assign credit to different marketing touchpoints. It calculates the revenue attributed to each touchpoint based on the chosen model, providing insights into which marketing channels are most effective in driving customer conversions.
 
-# Unstructured Data Ingestion and Transformation
+### Unstructured data ingestion and transformation
 
 ```python
     @task_group()
