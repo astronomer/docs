@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or through email when a DAG completes, if you have a DAG run failure, or if a task duration exceeds a specified time. 
+Astro alerts provide an additional level of observability to Airflow's notification systems. You can configure an alert to notify you in Slack, PagerDuty, or through email when a DAG completes, if you have a DAG run failure, or if a task duration exceeds a specified time.
 
 Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. Follow this guide to set up your Slack, PagerDuty, or email to receive alerts from Astro and then configure your Deployment to send alerts.
 
@@ -24,7 +24,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 ## Prerequisites
 
 - An [Astro project](cli/develop-project.md).
-- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage). 
+- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage).
 - A Slack workspace, PagerDuty service, or email address.
 
 <!-- Sensitive header used in product - do not change without a redirect-->
@@ -42,7 +42,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
     ]}>
 <TabItem value="Slack">
 
-To set up alerts in Slack, you need to create a Slack app in your Slack workspace. After you've created your app, you can generate a webhook URL in Slack where Astro will send Astro alerts. 
+To set up alerts in Slack, you need to create a Slack app in your Slack workspace. After you've created your app, you can generate a webhook URL in Slack where Astro will send Astro alerts.
 
 1. Go to [Slack API: Applications](https://api.slack.com/apps/new) to create a new app in your organization's Slack workspace.
 
@@ -58,12 +58,12 @@ To set up alerts in Slack, you need to create a Slack app in your Slack workspac
 
 5. On the **Incoming webhooks** page, click the toggle to turn on **Activate Incoming Webhooks**. See [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks).
 
-6. In the **Webhook URLs for your Workspace** section, click **Add new Webhook to Workspace**. 
+6. In the **Webhook URLs for your Workspace** section, click **Add new Webhook to Workspace**.
 
   :::info
 
   If you do not have permission to install apps in your Slack workspace, click **Request to Add New Webhook** to send a request to your organization administrator.
-  
+
   :::
 
 7. Choose the channel where you want to send your Astro alerts and click **Allow**.
@@ -143,13 +143,19 @@ The **DAG Trigger** communication channel works differently from other communica
 
 ## Step 2: Create your Workspace alert in the Cloud UI
 
-In the Cloud UI, you can enable alerts from the **Workspace Settings** page. 
+In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 1. In the Cloud UI, click **Alerts**.
 
-2. Click **Add Alert**. 
+2. Click **Add Alert**.
 
-3. Enter your **Alert Name** and choose the alert type, **DAG Success**, **DAG Failure**, or **Task Duration**. 
+3. Enter your **Alert Name** and choose the alert type, **DAG Success**, **DAG Failure**, or **Task Duration**.
+
+  :::info
+
+  You can only use Task Duration alerts with individual tasks. Alerting on task group duration is not supported.
+
+  :::
 
 4. Choose the **Communication Channels** where you want to send your alert.
 
@@ -165,32 +171,32 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
             {label: 'DAG Trigger', value: 'DAG'}
         ]}>
     <TabItem value="Slack">
-    
-    Paste the Webhook URL from your Slack workspace app. If you need to find a URL for an app you've already created, go to your [Slack Apps](https://api.slack.com/apps) page, select your app, and then choose the **Incoming Webhooks** page. 
+
+    Paste the Webhook URL from your Slack workspace app. If you need to find a URL for an app you've already created, go to your [Slack Apps](https://api.slack.com/apps) page, select your app, and then choose the **Incoming Webhooks** page.
 
     ![Add your Slack Webhook URL](/img/docs/astro_alerts_slack.png)
-    
+
     </TabItem>
     <TabItem value="PagerDuty">
 
     Paste the Integration Key from your PagerDuty Integration and select the **Severity** of the alert.
 
     ![Paste the Integration Key](/img/docs/astro_alerts_pagerduty.png)
-    
+
     </TabItem>
     <TabItem value="Email">
 
-    Enter the email addresses that should receive the alert. 
+    Enter the email addresses that should receive the alert.
 
     ![Add an email address](/img/docs/astro_alerts_email.png)
-    
+
     </TabItem>
     <TabItem value="DAG">
 
     Select the Deployment where your DAG is deployed, then select the DAG. Enter the Deployment API token that you created in Step 1.
 
     ![Add an email address](/img/docs/astro_alerts_dag.png)
-    
+
     </TabItem>
     </Tabs>
 
@@ -199,10 +205,10 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
     - **DAG failure**: Click **DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
 
     - **DAG success**: Click **DAG** and choose the Deployment and the DAG that you want to send an alert about when it completes.
-    
+
     - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
 
-     You can add more DAGs or tasks after you create your alert. 
+     You can add more DAGs or tasks after you create your alert.
 
 7. Click **Create alert**.
 
@@ -216,7 +222,7 @@ Astro alerts work whether your DAG run is manual or scheduled, so you can test y
 
 3. Trigger a DAG run.
 
-4. Select **Mark as** and choose **Failed** to trigger an alert for a DAG failure. 
+4. Select **Mark as** and choose **Failed** to trigger an alert for a DAG failure.
 
   ![Manually marking a successful DAG run as Failed.](/img/docs/astro_alerts_manual_fail.png)
 
