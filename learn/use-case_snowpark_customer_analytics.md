@@ -751,7 +751,7 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 
 - `twitter_sentiment` Task: Similar in structure to the call_sentiment task, this task also retrieves vectors and properties from Weaviate for the class CustomerComment. It processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
 
-# Creating Reporting Tables
+### Create reporting tables
 
 ```python
 @task.snowpark_python()
