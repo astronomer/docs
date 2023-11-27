@@ -249,7 +249,7 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 
 - Task `check_model_registry`: This task checks if a Snowpark model registry exists in the specified database and schema. If not, it creates one and returns a dictionary containing the database and schema information.
 
-# Structured Data Ingestion and Transformation
+### Structured data ingestion and transformation
 
 ```python
     @task_group()
