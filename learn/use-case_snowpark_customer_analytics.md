@@ -923,7 +923,7 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 
 `cleanup_temp_tables` Task: The final task is a [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
 
-# See Also
+# See also
 
 - https://docs.astronomer.io/learn/airflow-snowpark
 - https://docs.astronomer.io/learn/airflow-setup-teardown
