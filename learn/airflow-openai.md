@@ -70,7 +70,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     ```text
     AIRFLOW_CONN_OPENAI_DEFAULT='{
         "conn_type": "openai",
-        "password": "<your-openai-api-key>",
+        "password": "<your-openai-api-key>"
     }'
     ```
 

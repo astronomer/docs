@@ -66,12 +66,12 @@ The example code from this tutorial is also available on [GitHub](https://github
     openai==1.3.2
     ```
 
-3. Add the following environment variables to your Astro project `.env` file. These variables store the configuration for an [Airflow connection](connections.md) to your Pinecone account and allow you to use the OpenAI API. Provide your own values for `<your-pinecone-environment>`, `<your-pinecone-api-key>` and `<your-openai-api-key>`:
+3. Add the following environment variables to your Astro project `.env` file. These variables store the configuration for an [Airflow connection](connections.md) to your Pinecone account and allow you to use the OpenAI API. Provide your own values for `<your-pinecone-environment>` (for example `gcp-starter`), `<your-pinecone-api-key>` and `<your-openai-api-key>`:
 
     ```text
     AIRFLOW_CONN_PINECONE_DEFAULT='{
         "conn_type": "pinecone",
-        "login": "<your-pinecone-environment>",  # for example `gcp-starter`
+        "login": "<your-pinecone-environment>",
         "password": "<your-pinecone-api-key>"
     }'
     OPENAI_API_KEY="<your-openai-api-key>"
