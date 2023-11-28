@@ -284,7 +284,7 @@ Before you disable OpenLineage, keep the following in mind:
 To disable OpenLIneage for a Deployment, set the following [environment variable](manage-env-vars.md):
 
 - **Key**: `OPENLINEAGE_DISABLED`
-- **Value**: `False`
+- **Value**: `True`
 
 To re-enable OpenLineage, you can either set `OPENLINEAGE_DISABLED = False` or remove the environment variable.
 
