@@ -144,7 +144,7 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 
 #### Step 1: Authorize the managed identity in Azure
 
-1. In your Azure portal, open the resource that your managed identity should have access to. Then, select **Access control (IAM)**.
+1. In your Azure portal, open the resource that your managed identity needs access to. Then, select **Access control (IAM)**.
 2. Click **Add** > **Add role assignment**.
 3. Select the role for your managed identity, then click **Next**.
 4. In the **Assign access to** section, select **Managed identity**. Click **+ Select Members** and choose your managed identity. After you add your managed identity, click **Next**.
@@ -153,7 +153,7 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 #### Step 2: Configure your Deployment
 
 1. In your Azure portal, open the **Managed Identities** menu.
-2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID** and **Resource group** name. 
+2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID**, and **Resource group** name. 
 4. In the Cloud UI, select your Deployment, click **Details**, then click **How to Configure...** under **Workload Identity**
 5. In **Managed Identity**, enter the Name of the managed identity you assigned to the resource. 
 6. In **Resource Group**, enter the **Resource group** name that your managed identity belongs to.
@@ -163,8 +163,8 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 
 #### Step 3: Create an Airflow connection
 
-1. In the Cloud UI, click **Environment** in the left menu to open the **Connections** page.
-2. Click **+ Connection** to add a new connection.
+1. In the Cloud UI, click **Environment** in the main menu to open the **Connections** page.
+2. Click **+ Connection** to add a new connection for your Workspace.
 3. Search for **Azure**, then select the **Managed identity** option.
 4. Configure your Airflow connection with the information you copied in the previous steps.
 5. Link the connection to the Deployment(s) where you configured your managed identity.
