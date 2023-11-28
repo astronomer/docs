@@ -149,7 +149,7 @@ One limitation of this strategy is that you must keep any local copies of the As
 
 :::warning
 
-When you do a full image deploy of your Admin repo, like to upgrade a Deployment runtime, it also updates DAGs by default. This means that if the Admin repository has an empty DAG folder, your Deployment DAGs are erased by the image deploy.
+When you do a full image deploy of a repository, it also updates DAGs by default. This means that if you deploy your project configurations and it doesn't have your most recent DAG code, your Deployment's current DAGs are erased or reverted by the image deploy. Therefore, Astronomer recommends ensuring that any DAG changes are simultaneously updated in the repository where you manage project configurations.
 
 :::
 
