@@ -12,19 +12,34 @@ import {siteVariables} from '@site/src/versions';
 
 Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Azure resources.
 
-## Connection options
-
 Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to Azure through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an Azure resource's allowlist. 
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-azure) to Azure in a few different ways.
 
-After you crate a connection from your Deployment to Azure, you might also have to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#azure).
+After you crate a connection from your cluster to Azure, you might also have to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#azure).
 
-### Access a public Azure endpoint
+## Standard and dedicated cluster support for Azure networking
+
+Standard clusters have different connection options than dedicated clusters.
+
+Standard clusters can connect to Azure in the following ways:
+
+- Using [static external IP addresses](#allowlist-external-ip-addresses-for-a-cluster).
+
+Dedicated clusters can also connect to Azure using static IP addresses. Additionally, they support a number of private connectivity options including:
+
+- VNet peering
+- Azure Private Link
+- S2S VPN
+- vHub
+
+If you require a private connection between Astro and Azure, Astronomer recommends configuring a dedicated cluster. See [Create a dedicated cluster](create-dedicated-cluster.md).
+
+## Access a public Azure endpoint
 
 To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your Azure resources through a valid Airflow connection.
 
-#### Allowlist external IP addresses for a cluster
+### Allowlist external IP addresses for a cluster
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Clusters**.
 2. Select a cluster.
@@ -32,7 +47,7 @@ To facilitate communication between your Astro cluster or Deployment and your cl
 
 A cluster's IP addresses are the same for all the Deployments running in that cluster. This is a one-time setup for each Astro cluster.
 
-#### Allowlist external IP addresses for a Deployment
+### Allowlist external IP addresses for a Deployment
 
 To allow to access to your external resource on per Deployment basis or if you are using a standard cluster, you need the external IPs of your Deployment.
 
@@ -42,7 +57,7 @@ To allow to access to your external resource on per Deployment basis or if you a
 
 When you use publicly accessible endpoints to connect to Azure, traffic moves directly between your Astro cluster and the Azure API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
 
-### Create a private connection between Astro and Azure
+## Create a private connection between Astro and Azure
 
 The option that you choose is determined by the security requirements of your company and your existing infrastructure.
 
