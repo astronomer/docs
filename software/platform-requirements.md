@@ -5,7 +5,9 @@ id: platform-requirements
 description: Learn about the requirements and optional features for configuring Astronomer Software as an administrator
 ---
 
-## Base requirements
+## Base platform requirements
+
+The following topics contain high level information about what system components and resources are required by Astronomer Software. Note that you might encounter additional requirements based on your system and security requirements. [What should a user do if they have more questions about this?]
 
 ### Kubernetes
 
@@ -21,7 +23,7 @@ If you're installing Astronomer Software onto an existing cluster that also runs
 
 ### Database
 
-You must provide your own Postgres database server instance for each Astronomer Software cluster you create. The database server instance has the following requirements:
+You must provide your own Postgres database server instance for each Astronomer Software cluster you create. The Postgres database stores all data related to Astronomer, including task logs and metadata from your Airflow Deployments. The database server instance has the following requirements:
 
 - It is Postgres version 11+
 - It can run on one of the following platforms:
@@ -37,7 +39,7 @@ You must provide your own Postgres database server instance for each Astronomer 
 
 Adequate IP addresses must be available for Kubernetes nodes, Kubernetes Pods, cluster-internal services, and cluster-external load-balancers.
 
-Generally speaking Astronomer Software cluster requires the following IP availability:
+Generally speaking, your Astronomer Software cluster requires the following IP availability:
 
 - 35 IP addresses within the cluster service-address space.
 - 50 IP addresses within the Pod address space.
@@ -51,61 +53,69 @@ Each Airflow Deployment within a cluster requires the following additional IP av
 
 Note that these numbers can vary based on whether your Kubernetes Container Network Interface (CNI) assigns each Pod a cluster-external IP address or whether the IP addresses assigned to Pods exist exclusively within a Kubernetes-internal cluster-overlay network provided by your CNI.
 
-#### DNS Requirements
+Network communication between Astronomer Platform Pods and Deployment namespaces cannot be restricted in any way, such as through a network policy. 
 
-- Kubernetes pods in the Astronomer platform namespace and astronomer-managed airflow namespaces must be able to resolve dns entries associated with:
-    - the astronomer baseDomain
-    - postgres server
-    - platform registry
-    - Kubernetes worker nodes must be able to resolve the dns entries associated with your Astronomer installation
-- A DNS entry (or entries) must be created that points to the ingress controller providing service to astronomer. The following must be able to resolve this address:
-    - kubernetes-external load-balancer
-    - astro-cli users
-    - web users Astronomer Software (including Airflow)
-    - kubernetes worker nodes
-    - pods in the astronomer platform namespace
-    - pods in namespaces created by the astronomer platform
-    - CICD systems deploying to astronomer
-- See Kubernetes Requirements Section for additional requirements related to DNS resolution.
+### Docker registry access
 
-#### Exposing the Astronomer Software Cluster Outside Kubernetes
+The Astronomer Software cluster needs to be able to access Docker images both for Astronomer platform functionality and for individual Airflow Deployments. 
+
+For platform images, Kubernetes worker nodes must be able to pull images directly from Astronomer’s public quay.io repository without restriction. Otherwise, you must provide and populate a registry or pull-through caching proxy accessible to the cluster. See [Configure a custom registry for Deployment images](custom-image-registry.md) to learn how to implement your own registry.
+
+Note that if you're using a custom registry that requires authentication, your must store an `imagePullSecret` with sufficient pull privileges in the Astronomer platform namespace.
+
+### Certificates and certificate authorities
+
+Astronomer Software has different requirements based on how you manage your SSL certificates.
+
+Astronomer Software includes a built-in ingress controller that manages public access to your Software cluster. If you use the built-in ingress controller, you must generate and maintain a valid certificate for the ingress that covers your company's base domain and its subsidiaries. This can be either a a wildcard cert or a cert that explicitly lists each of the required domain names. This certificate must be signed by either a public or private CA. See [Generate self-signed TLS certificates](self-signed-certificate.md) and [Renew a TLS certificate](renew-tls-cert.md).
+
+If you use a private CA, Kubernetes nodes (kubelet) must be configured to trust the private CA. Please note this is explicitly prohibited by most current versions of AKS and all versions of AWS EKS on Fargate.
+
+Your pem file must contain the complete certificate chain, including the root and all intermediate certificates. If a user looks at the file, they should see at least two certificate sections. Most modern browsers will work around broken certificate chains, so the Software UI might still be available if only the leaf certificate is provided, but the platform will be non-functional.
+
+#### Exposing the Astronomer Software cluster outside of Kubernetes
 
 The Astronomer Software cluster must be exposed outside Kubernetes through one of the following three methods:
   
-- Using Astronomer’s integrated ingress controller with service through a LoadBalancer provisioned via LoadBalancerController. Such load-balancers must be layer 2 or 3 and not terminate SSL.
-- Using Astronomer’s integrated ingress controller with service through a NodePort in conjunction with external customer-provided load-balancing solution exposing the Astronomer Software service outside Kubernetes on ports 80 and 443. Running the NodePort directly on ports below 1000 is explicitly unsupported. Such load-balancing solution must be layer 2 or 3 and not terminate SSL.
-- Service through a customer-provided ingress controller configured to meet all requirements set forth at https://docs.astronomer.io/software/third-party-ingress-controllers and explicitly listed as supported therein.
-
-#### Ingress, Egress, and Routing Requirements
-
-Kubernetes egress traffic from pods in the Astronomer platform namespace and astronomer-managed airflow namespaces must be able to communicate with the kubernetes-external IP address of the load balancer associated with the ingress associated with Astronomer.
-
-Kubernetes worker nodes must be able to communicate with the kubernetes-external IP address of the load balancer associated with the ingress associated with Astronomer.
-
-Kubernetes egress traffic from pods in the Astronomer platform namespaces must be able to communicate with the postgres server(s).
-
-If using a customer-provided load-balancing solution in conjunction with a NodePort, the load-balancer must be able to connect to the NodePorts.
-
-The kubernetes-external load-balancer address must be routable and accessible to all the following: astro-cli users, kubernetes worker nodes, pods in the astronomer platform namespace, pods in namespaces created by the astronomer platform, astro-cli users, houston-api users, CICD systems deploying to astronomer.
-
-If email notifications are enabled, pods running within the kubernetes platform namespace must be able to communicate with the configured email server(s) via SMTP.
-
-When airgapped mode is disabled, outbound https access to [astronomer.io](http://astronomer.io) and other domains is required from pods in the airflow and astronomer namespace.
-
-Outbound https access to [quay.io](http://quay.io) from kubernetes worker nodes is required unless using a private platform registry or pull-through caching proxy.
-
-When OIDC Authentication is enabled, pods in the astronomer platform namespace and airflow namespaces must be able to resolve and connect to the the OIDC server host(s).
-
-### Credentials and permissions
+- Using Astronomer’s built-in ingress controller with service through a LoadBalancer provisioned via LoadBalancerController. LoadBalancers must be layer 2 or 3 and not terminate SSL.
+- Using Astronomer’s built-in ingress controller with service through a NodePort in conjunction with external customer-provided load-balancing solution exposing the Astronomer Software service outside Kubernetes on ports 80 and 443. Running the NodePort directly on ports below 1000 is explicitly unsupported. LoadBalancers must be layer 2 or 3 and not terminate SSL.
+- Using a custom ingress controller configured to meet all requirements as described in [Third-party ingress controllers](https://docs.astronomer.io/software/third-party-ingress-controllers).
 
 ## Recommended configurations
 
+Though not explicitly required, Astronomer strongly recommends setting up the following tools and integrations to get the most out of Astronomer Software. 
+
 ### Single sign-on
+
+Astronomer Software includes tools to integrate with popular identity providers (IdPs) such as Okta, Microsoft Entra ID, and Auth0. Astronomer strongly recommends integrating your current SSO provider to allow teammates to quickly onboard to the platform. Using an identity provider provides the following benefits:
+
+- You can manage Astronomer Software users directly from your IdP using SCIM.
+- You can create templates of permissions to apply when onboarding new users.
+- Users can log in to Astronomer Software directly from your IdP.
+
+See [Integrate an auth system](integrate-auth-system.md) for setup steps for each supported IdP.
 
 ### SCIM 
 
+Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users and Teams based on templates for access and permissions. It also provides better observability through your identity provider for when users and Teams are created or modified across your organization.
+
+After you configure your identity provider, follow the steps in [Manage users and Teams with SCIM](integrate-auth-system.md#manage-users-and-teams-with-scim) to set up SCIM for Astronomer Software. 
+
 ### SMTP 
+
+Astronomer requires access to a SMTP server to:
+
+- Send automated notifications about Airflow Deployments.
+- Invite new users to the platform. Note that SMTP is not required for inviting users through an IdP.
+
+See [Airflow alerts](airflow-alerts.md) for steps to integrate a couple of the most common SMTP servers with Astronomer Software. 
 
 ### CI/CD 
 
+Astronomer recommends developing a CI/CD pipeline for your data engineers to push DAGs and other code-level configurations to Astronomer Software. You can use service accounts to authorize CI/CD tools, such as GitHub Actions, to access Astronomer Software and deploy code you your Deployments.
+
+See [CI/CD](ci-cd.md) for steps to set up a service account, as well as CI/CD templates for popular CI/CD tools.
+
 ### Astro CLI
+
+All users on Astronomer Software should install and have access to the Astro CLI. This open source command line tool includes functionality for managing Astronomer Software, as well as testing Airflow code locally before your push code. See the [Astro CLI documentation](https://docs.astronomer.io/astro/cli/overview) for installation steps and command references. 

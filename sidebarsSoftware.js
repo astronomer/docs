@@ -21,6 +21,7 @@ module.exports = {
       'documentation-overview',
       'log-in-to-software',
       'create-project',
+      'platform-requirements',
       ],
     },
     {
