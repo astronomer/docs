@@ -7,7 +7,7 @@ description: Learn about the different ways you can deploy code to Astro.
 
 DAG-only deploys are the fastest way to deploy code to Astro. They are recommended if you only need to deploy changes made to the `dags` directory of your Astro project.
 
-DAG-only deploys are enabled by default on all Deployments on Astro Hosted. After it is enabled, you must still [deploy your project image](deploy-project-image.md) when you make a change to any file in your Astro project that is not in the `dags` directory.
+DAG-only deploys are enabled by default on all Deployments on Astro Hosted. After it is enabled, you must still [deploy your project image](deploy-project-image.md) when you make a change to any file in your Astro project that is not in the `dags` directory and for [runtime upgrades](upgrade-runtime.md).
 
 DAG-only deploys have the following benefits:
 
@@ -28,9 +28,9 @@ astro deploy --dags
 
 ## Enable or disable DAG-only deploys on a Deployment
 
-As a Workspace Owner, you can enable or disable DAG-only deploys for a Deployment. On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment. 
-  
-To determine if DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
+As a Workspace Owner, you can enable or disable DAG-only deploys for a Deployment. On Astro Hosted, DAG-only deploys are enabled by default for all Deployments. On Astro Hybrid, you must enable them manually for each Deployment.
+
+To determine if DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 :::warning
 
@@ -42,16 +42,17 @@ Carefully read and complete all of the following steps to ensure that disabling 
 
 Before you enable or disable DAG-only deploys on a Deployment, ensure the following:
 
-- You have Workspace Owner permissions for the Workspace that hosts the Deployment. 
+- You have Workspace Owner permissions for the Workspace that hosts the Deployment.
 - You have access to the latest version of your Deployment's Astro project.
-- You can update your Deployment using the Astro CLI. 
+- You can update your Deployment using the Astro CLI.
 
 ### Enable DAG-only deploys
 
 DAG-only deploys are enabled by default on Astro Hosted. You have the option to enable DAG-only deploys only if you're on Astro Hybrid or if you've previously disabled them on a Hosted Deployment. After you enable DAG-only deploys:
 
 - You can run `astro deploy --dags` to deploy only DAGs to your Deployment.
-- In the Cloud UI, your Deployment **DAG bundle version** updates when you trigger an image deploy or a DAG-only deploy. 
+- In the Cloud UI, your Deployment **DAG bundle version** updates when you trigger an image deploy or a DAG-only deploy.
+- When you only deploy DAGs, it does not automatically upgrade your Runtime version. You must periodically complete a full image deploy to [upgrade the Runtime version](upgrade-runtime.md).
 - Your Deployment includes infrastructure for deploying your DAGs separately from your project image. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 1. Run the following command to enable DAG-only deploys:
@@ -66,13 +67,13 @@ DAG-only deploys are enabled by default on Astro Hosted. You have the option to 
     astro deploy
     ```
 
-### Disable DAG-only deploys 
+### Disable DAG-only deploys
 
 After you disable DAG-only deploys:
 
 - You can't run `astro deploy --dags` to trigger a DAG-only deploy to your Deployment.
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
-- In the Cloud UI, your Deployment **DAG bundle version** doesn't update when you deploy code. 
+- In the Cloud UI, your Deployment **DAG bundle version** doesn't update when you deploy code.
 - Your Deployment doesn't include infrastructure for deploying your DAGs separately from your project image. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 1. Run the following command to disable DAG-only deploys:
