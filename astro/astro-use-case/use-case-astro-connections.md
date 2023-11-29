@@ -10,7 +10,7 @@ Data and machine learning pipelines often interact with a multitude of external 
 
 Astro offers first-class support for [branch-based development](https://docs.astronomer.io/astro/automation-overview) and central and [secure management of connections](https://docs.astronomer.io/astro/manage-connections-variables). 
 
-This use case walks you through setting up a branch-based development and deployment workflow with [GitHub Actions](https://docs.github.com/en/actions) and Airflow connections managed in Astro.
+This use case walks you through setting up a branch-based deployment workflow with [GitHub Actions](https://docs.github.com/en/actions) and Airflow connections managed in Astro for a small example project that ingests cookie recipes from S3 into Snowflake. 
 
 ## Before you start
 
