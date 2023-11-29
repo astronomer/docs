@@ -104,9 +104,11 @@ You can then open the [streamlit application](http://localhost:8501) in a browse
 
 ## Project Code
 
-This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a much more complex [customer_analytics DAG.](https://github.com/astronomer/airflow-snowparkml-demo/blob/main/dags/customer_analytics.py) This guide will solely focus on the `customer_analytics` DAG which demonstrates an end-to-end ML application workflow using OpenAI embeddings with a Weaviate vector database as well as Snowpark decorators, the Snowflake XCom backend, and the Snowpark ML model registry. The Astro CLI is adapted to include additional Docker-based services for Weaviate and Streamlit. The first tasks in the the set-up task group create all the resources necessary to run the pipeline, including creating the necessary Snowflake tables, restoring Weaviate data from prior runs, and creating a Snowpark model registry if none exists already. Then, the unstructured data and structured data task groups run in parallel to ingest customer data to use to train the model. The unstructured data task group extracts twitter comments, reviews, and customer support calls, before transcribing the calls and converting all the unstructured data into Weaviate vector embeddings. The structured data contains various data points about customers, their purchasing histories, and lifetime value, all of which are transformed using Snowpark to be easily joinable with the unstructured data. Then, the prepared data is split into testing and training datasets, before being used to train a sentiment-classifier model to predict customer life time value based on their sentiment. Finally, the trained model is used to generate predictions for customers life time value based on their sentiment. Then, those results are cleaned and organized into presentation tables for viewing via a streamlit application. 
+This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a much more complex [customer_analytics DAG.](https://github.com/astronomer/airflow-snowparkml-demo/blob/main/dags/customer_analytics.py) This guide will solely focus on the `customer_analytics` DAG which demonstrates an end-to-end ML application workflow using OpenAI embeddings with a Weaviate vector database as well as Snowpark decorators, the Snowflake XCom backend, and the Snowpark ML model registry. The Astro CLI is adapted to include additional Docker-based services for Weaviate and Streamlit.
 
 ### Setup Tasks
+
+The first tasks in the the set-up task group create all the resources necessary to run the pipeline, including creating the necessary Snowflake tables, restoring Weaviate data from prior runs, and creating a Snowpark model registry if none exists already.
 
 ```python
     @task.snowpark_python()
@@ -249,6 +251,8 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 - Task `check_model_registry`: This task checks if a Snowpark model registry exists in the specified database and schema. If not, it creates one and returns a dictionary containing the database and schema information.
 
 ### Structured data ingestion and transformation
+
+The structured data contains various data points about customers, their purchasing histories, and lifetime value, all of which are transformed using Snowpark to be easily joinable with the unstructured data.
 
 ```python
     @task_group()
@@ -435,6 +439,8 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 - Task `attribution_playbook`: This task tackles the complex challenge of marketing attribution, aiming to understand how different marketing efforts contribute to customer conversions. It does this by linking customer conversion data with their session data. The task then applies various attribution models, such as first touch, last touch, and linear, to assign credit to different marketing touchpoints. It calculates the revenue attributed to each touchpoint based on the chosen model, providing insights into which marketing channels are most effective in driving customer conversions.
 
 ### Unstructured data ingestion and transformation
+
+The unstructured data task group extracts twitter comments, reviews, and customer support calls, before transcribing the calls and converting all the unstructured data into Weaviate vector embeddings.
 
 ```python
     @task_group()
@@ -639,6 +645,8 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 
 ### Model training
 
+After the data has been prepared, it is split into testing and training datasets, before being used to train a sentiment-classifier model to predict customer life time value based on their sentiment. Finally, the trained model is used to generate predictions for customers life time value based on their sentiment. 
+
 ```python
 @task.snowpark_virtualenv(requirements=['lightgbm==3.3.5', 'scikit-learn==1.2.2', 'astro_provider_snowflake'])
     def train_sentiment_classifier(class_name:str, snowpark_model_registry:dict):
@@ -751,6 +759,8 @@ This project consists of two DAGs, a basic example `snowpark_ml_dag` DAG, and a 
 - `twitter_sentiment` Task: Similar in structure to the call_sentiment task, this task also retrieves vectors and properties from Weaviate for the class CustomerComment. It processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
 
 ### Create reporting tables
+
+After the model has genereated its predictions, the results are cleaned and organized into presentation tables for viewing via a streamlit application. 
 
 ```python
 @task.snowpark_python()
