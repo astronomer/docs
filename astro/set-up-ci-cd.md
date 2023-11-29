@@ -145,7 +145,13 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
     id2-->|DAG-only deploy| id3[Astro Deployment]
 ```
 
-One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes. 
+One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally and ensure that updates from your Admin repo doesn't erase your DAGs. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes.
+
+:::warning
+
+When you do a full image deploy of a repository, it also updates DAGs by default. This means that if you deploy your project configurations and it doesn't have your most recent DAG code, your Deployment's current DAGs are erased or reverted by the image deploy. Therefore, Astronomer recommends ensuring that any DAG changes are simultaneously updated in the repository where you manage project configurations.
+
+:::
 
 This strategy requires [DAG-only deploys](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment) on the target Deployment and setting up your CI/CD pipeline on both Git repositories.
 
