@@ -29,7 +29,7 @@ A workload identity is a Kubernetes service account that provides an identity to
 
 <Tabs
     defaultValue="aws"
-    groupId="cloud-provider"
+    groupId="setup"
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
