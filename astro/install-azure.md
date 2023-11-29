@@ -54,7 +54,9 @@ An _Organization_ is the highest management level on Astro. An Organization cont
 
     :::info 
 
-    Microsoft Entra ID is automatically configured only for the email domain you used to create your Astro Organization. If you need to invite users with emails from other domains to Astro, contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide your Organization ID and the email domain you want to manage through Microsoft Entra ID.
+    Microsoft Entra ID is automatically configured only for the email domain you used to create your Astro Organization. By default, you can invite users from other domains to Astro using passwords, GitHub auth, or Google auth.
+    
+    If you need to invite users with emails from other domains to Astro using Entra ID, contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide your Organization ID and the email domain you want to manage through Entra ID. 
 
     :::
     
