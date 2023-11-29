@@ -54,7 +54,7 @@ Currently the `snowflake_conn_management_demo` connection points to the developm
 
     ![Screenshot of the connection details view with the **Edit** button for the conn-management-demo-prod deployment highlighted.](/img/docs/use-case-astro-connections_conn_override_one.png)
 
-2. Change the `DATABASE` field to your production database. The new value overrides the default you defined for the connection in Step 1.3.
+2. Change the `DATABASE` field to your production database. The new value overrides the default you defined for the connection in [Step 1](#step-1-create-your-data-warehouse-connection-in-the-astro-environment-manager).
 
     ![Screenshot of the connection details view with the DATABASE field highlighted.](/img/docs/use-case-astro-connections_conn_override_two.png)
 
@@ -82,7 +82,7 @@ Next, we create an Airflow connection to AWS in the Astro Environment Manager.
 
 ### Step 4: Link the AWS connection to your Deployments
 
-Now that we have created the AWS connection, we link it to the `conn-management-demo-dev` and `conn-management-demo-prod` deployments. Remember that we set the connection to **Restricted** in Step 3.3, so it is not available to any deployments by default.
+Now that we have created the AWS connection, we link it to the `conn-management-demo-dev` and `conn-management-demo-prod` deployments. Remember that we set the connection to **Restricted** in [Step 3](#step-3-create-your-aws-connection-in-the-astro-environment-manager), so it is not available to any deployments by default.
 
 1. In the Astro Environment Manager, click on the `aws_conn_management_demo` connection to open the connection details. You see a list of all Deployments this connection is available to. Since we set the connection to **Restricted**, you should see no Deployments listed. Click on the **+ Link Deployment** button to link the connection to a Deployment.
 
@@ -98,11 +98,11 @@ Now that we have created the AWS connection, we link it to the `conn-management-
 
 ## Part 2: Set up branch-based deploys with GitHub Actions
 
-After setting up the connections, we create an automated two branch CI/CD workflow for a small sample project that uses both connections defined in Step 1.
+After setting up the connections, we create an automated two branch CI/CD workflow for a small sample project that uses both connections defined in [Part 1](#part-1-set-up-airflow-connections-on-astro).
 
 ### Step 5: Create your GitHub repository
 
-1. Go to the [Astronomer GitHub](https://github.com/astronomer/ce-conn-management-demo) and [fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your own GitHub account. This repository contains a small sample project ingesting data from S3 into Snowflake, using the connections defined in [Step 1](#step-1-set-up-airflow-connections-on-astro).
+1. Go to the [Astronomer GitHub](https://github.com/astronomer/ce-conn-management-demo) and [fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo) to your own GitHub account. This repository contains a small sample project ingesting data from S3 into Snowflake, using the connections defined in [Part 1](#part-1-set-up-airflow-connections-on-astro).
 
 2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) the forked repository to your local machine.
 
@@ -163,13 +163,13 @@ Now that the workflow is configured, you can trigger it by pushing changes to th
 
 ## Part 3: Run the DAGs on Astro
 
-The GitHub Actions workflow triggered in [Step 2](#step-2-set-up-branch-based-deploys-with-github-actions) deploys the Astro project to the `conn-management-demo-dev` and `conn-management-demo-prod` Deployments. Now you can run the DAGs on Astro.
+The GitHub Actions workflow triggered in [Step 7](#step-7-trigger-the-branch-based-deploy-workflow) deploys the Astro project to the `conn-management-demo-dev` and `conn-management-demo-prod` Deployments. Now you can run the DAGs on Astro.
 
-1. Navigate to the Astro UI and open the `conn-management-demo-dev` Deployment. Run the `upload_cookie_recipes` helper DAG to upload the sample data from [`include/recipes.json`](https://github.com/astronomer/ce-conn-management-demo/blob/main/include/recipes.json) to S3. The DAG uses the `aws_conn_management_demo` connection defined in [Step 1](#step-1-set-up-airflow-connections-on-astro) to access S3.
+1. Navigate to the Astro UI and open the `conn-management-demo-dev` Deployment. Run the `upload_cookie_recipes` helper DAG to upload the sample data from [`include/recipes.json`](https://github.com/astronomer/ce-conn-management-demo/blob/main/include/recipes.json) to S3. The DAG uses the `aws_conn_management_demo` connection defined in [Step 1](#step-1-create-your-data-warehouse-connection-in-the-astro-environment-manager) to access S3.
 
     ![Screenshot of the Astro UI showing the DAG run for the upload_cookie_recipes DAG.](/img/docs/use-case-astro-connections_upload_dag.png)
 
-2. Run the `collect_cookie_recipes` DAG to ingest the data from S3 into Snowflake. The `conn-management-demo-dev` Deployment uses the `snowflake_conn_management_demo` connection defined in [Step 1](#step-1-set-up-airflow-connections-on-astro) to access Snowflake. Without any overrides this connection points to the `CONN_DEMO_DEV` database in Snowflake.
+2. Run the `collect_cookie_recipes` DAG to ingest the data from S3 into Snowflake. The `conn-management-demo-dev` Deployment uses the `snowflake_conn_management_demo` connection defined in [Step 1](#step-1-create-your-data-warehouse-connection-in-the-astro-environment-manager) to access Snowflake. Without any overrides this connection points to the `CONN_DEMO_DEV` database in Snowflake.
 
     ![Screenshot of the Astro UI showing the DAG run for the collect_cookie_recipes DAG.](/img/docs/use-case-astro-connections_collect_dag.png)
 
@@ -177,7 +177,7 @@ The GitHub Actions workflow triggered in [Step 2](#step-2-set-up-branch-based-de
 
     ![Screenshot of the Snowflake UI showing the COOKIES_RECIPE table in the CONN_DEMO_DEV database.](/img/docs/use-case-astro-connections_snowflake.png)
 
-4. Repeat the steps above for the `conn-management-demo-prod` deployment. Due to the override defined in [Step 1.2](#step-12-override-a-connection-field-for-a-specific-deployment), the `snowflake_conn_management_demo` connection points to the `CONN_DEMO_PROD` database in Snowflake, where you can view the `COOKIES_RECIPES` table with the ingested data.
+4. Repeat the steps above for the `conn-management-demo-prod` deployment. Due to the override defined in [Step 2](#step-2-override-a-connection-field-for-a-specific-deployment), the `snowflake_conn_management_demo` connection points to the `CONN_DEMO_PROD` database in Snowflake, where you can view the `COOKIES_RECIPES` table with the ingested data.
 
 Congratulations! You have successfully set up Airflow connections on Astro and created a branch-based CI/CD workflow with GitHub Actions. You can now use this workflow as a template for your own projects.
 
