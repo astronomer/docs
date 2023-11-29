@@ -21,6 +21,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## November 29, 2023
+
+### Support for Microsoft Entra Workload ID
+
+You can now use [Microsoft Entra Workload ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-workload-id) to authorize Deployments to resources in Azure. Workload identity is a simple and secure way to authorize access external resources, as it doesn't require creating or storing long-term credentials. To set up Microsoft Entra Workload ID, see [Authorize Deployments to cloud resources](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=azure#setup).
+
 ## November 16, 2023
 
 ### Install Astro from the Azure Marketplace
