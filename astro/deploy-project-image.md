@@ -103,42 +103,7 @@ This process is different if your Deployment has DAG-only deploys disabled, whic
 
 Use the following diagram to understand the relationship between Astronomer, your local machine, and your Deployment.  
 
-```mermaid
-flowchart TB;
-classDef subgraph_padding fill:none,stroke:none
-classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
-    subgraph AstroCLI[Astro CLI]
-    subgraph subgraph_padding1 [ ]
-    id10
-    id1
-    end
-    end
-    subgraph ControlPlane[Control plane]
-    id9[(Blob storage)]:::astro
-    id4[(Docker registry)]:::astro
-    end
-    subgraph DataPlane ["Data plane"]
-    subgraph subgraph_padding3 [ ]
-    subgraph Deployment ["Deployment"]
-    subgraph subgraph_padding2 [ ]
-    id6["Airflow components </br> (Webserver, scheduler, and workers)"]:::astro
-    end
-    end
-    end
-    end
-    id10["'dags' folder"]:::astro-->|Upload DAGs|id9
-    id1["Project image </br> excluding 'dags'"]:::astro-->|Docker push| id4
-    id4-->id6 
-    id9-->id6
-    class subgraph_padding3 subgraph_padding
-    class subgraph_padding2 subgraph_padding
-    class subgraph_padding1 subgraph_padding
-    linkStyle 0,1,2,3 stroke:#7f7f7f,stroke-width:3px
-    style ControlPlane fill:#bfeaff,stroke:#333,stroke-width:2px
-    style DataPlane fill:#bfeaff,stroke:#333,stroke-width:2px
-    style AstroCLI fill:#bfeaff,stroke:#333,stroke-width:2px
-    style Deployment fill:#bfeaff,stroke:#333,stroke-width:2px
-```
+![A diagram showing how different Astro CLI commands move your files from your local machine to a Deployment on Astro](/img/docs/deploy-diagram.png)
 
 ### How Deployments handle code deploys
 
