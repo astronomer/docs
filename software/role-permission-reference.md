@@ -7,9 +7,98 @@ description: A list of all default permissions for each role on Astronomer Softw
 
 This is where you'll find information about Astronomer Software default user role permissions. To modify these default permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
 
-## System roles
+## Default role permissions reference tables
 
-System roles apply to all Workspaces, users, and Deployments within a single Astronomer Software installation.
+The following tables show high level comparisons of permissions between different user roles.
+
+### Default Deployment user permissions
+
+| Permission                                                                                                                                                                         | **Deployment Viewer** | **Deployment Editor** | **Deployment Admin** |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | --------------------- | -------------------- |
+| View the Airflow UI                                                                                                                                                                | ✔️                     | ✔️                     | ✔️                    |
+| View the Deployment's settings                                                                                                                                                     | ✔️                     | ✔️                     | ✔️                    |
+| View the Deployment's logs                                                                                                                                                         | ✔️                     | ✔️                     | ✔️                    |
+| Access the Deployment's running Docker image                                                                                                                                       | ✔️                     | ✔️                     | ✔️                    |
+| View the Deployment's **Metrics** tab in the Software UI                                                                                                                           | ✔️                     | ✔️                     | ✔️                    |
+| View any [service account](ci-cd.md#step-1-create-a-service-account) for the Deployment                                                                                            | ✔️                     | ✔️                     | ✔️                    |
+| View the Deployment's [environment variables](environment-variables.md)                                                                                                            | ✔️                     | ✔️                     | ✔️                    |
+| View the list of users with access to the Deployment                                                                                                                               | ✔️                     | ✔️                     | ✔️                    |
+| View all Teams belonging to the Deployment                                                                                                                                         | ✔️                     | ✔️                     | ✔️                    |
+| View task usage information for the Deployment                                                                                                                                     | ✔️                     | ✔️                     | ✔️                    |
+| View Deployment Admin users                                                                                                                                                        |                       | ✔️                     | ✔️                    |
+| Modify the Deployment's settings                                                                                                                                                   |                       | ✔️                     | ✔️                    |
+| Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for the Deployment, including modifying task runs and DAG runs |                       | ✔️                     | ✔️                    |
+| Push code to the Deployment using the Astro CLI                                                                                                                                    |                       | ✔️                     | ✔️                    |
+| Create, update, and delete a Deployment-level service account                                                                                                                      |                       | ✔️                     | ✔️                    |
+| Update the Deployment's [environment variables](environment-variables.md)                                                                                                          |                       | ✔️                     | ✔️                    |
+| Airflow [admin permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#admin) for the Deployment                                           |                       |                       | ✔️                    |
+| Delete the Deployment                                                                                                                                                              |                       |                       | ✔️                    |
+| Update Deployment-level permissions for users within the Deployment                                                                                                                |                       |                       | ✔️                    |
+| Update Deployment-level permissions for Teams within the Deployment                                                                                                                |                       |                       | ✔️                    |
+
+### Default Workspace user permissions
+
+| Permission                                                                                         | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
+| -------------------------------------------------------------------------------------------------- | -------------------- | -------------------- | ------------------- |
+| Deployment viewer permissions for all Deployments                                                  | ✔️                    | ✔️                    | ✔️                   |
+| View the Workspace                                                                                 | ✔️                    | ✔️                    | ✔️                   |
+| View all settings and configuration pages of any Deployment                                        | ✔️                    | ✔️                    | ✔️                   |
+| View any Deployment or Workspace-level [service account](ci-cd.md#step-1-create-a-service-account) | ✔️                    | ✔️                    | ✔️                   |
+| View information for all users with access to the Workspace                                        | ✔️                    | ✔️                    | ✔️                   |
+| View Teams belonging to the Workspace                                                              | ✔️                    | ✔️                    | ✔️                   |
+| View any [service account](ci-cd.md#step-1-create-a-service-account) for the Deployment            | ✔️                    | ✔️                    | ✔️                   |
+| View task usage in the Workspace                                                                   | ✔️                    | ✔️                    | ✔️                   |
+| Deployment Editor permissions for all Deployments                                                  |                      | ✔️                    | ✔️                   |
+| View Workspace admin users.                                                                        |                      | ✔️                    | ✔️                   |
+| Modify the Workspace, including Workspace Name, Description, and user access                       |                      | ✔️                    | ✔️                   |
+| Create a Deployment in the Workspace                                                               |                      | ✔️                    | ✔️                   |
+| Create, modify, and delete Workspace-level service accounts                                        |                      | ✔️                    | ✔️                   |
+| Deployment Admin permissions for all Deployments in the Workspace                                  |                      |                      | ✔️                   |
+| View pending user invites for the Workspace                                                        |                      |                      | ✔️                   |
+| Delete the Workspace                                                                               |                      |                      | ✔️                   |
+| Update [IAM](integrate-iam.md) for the Workspace                                                   |                      |                      | ✔️                   |
+| View all users in Teams belonging to the Workspace                                                 |                      |                      | ✔️                   |
+| View all users in the Workspace                                                                    |                      |                      | ✔️                   |
+
+
+### Default System user permissions
+
+| Permission                                                                                                                                        | **System Viewer** | **System Editor** | **System Admin** |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ----------------- | ---------------- |
+| Deployment Admin permissions for all Deployments                                                                                                  | ✔️                 | ✔️                 | ✔️                |
+| View [environment variables](environment-variables.md) for any Deployment                                                                         | ✔️                 | ✔️                 | ✔️                |
+| View any setting for any Deployment in the Software UI                                                                                            | ✔️                 | ✔️                 | ✔️                |
+| View all pending user invites in the **System Admin** tab of the Software UI                                                                      | ✔️                 | ✔️                 | ✔️                |
+| View information for any pending user invite                                                                                                      | ✔️                 | ✔️                 | ✔️                |
+| Access to [Grafana](grafana-metrics.md) and [Kibana](kibana-logging.md) for system-level monitoring                                               | ✔️                 | ✔️                 | ✔️                |
+| View [service accounts](ci-cd.md#step-1-create-a-service-account) for any Deployment or Workspace                                                 | ✔️                 | ✔️                 | ✔️                |
+| View the newest platform release version number                                                                                                   | ✔️                 | ✔️                 | ✔️                |
+| View information for any user on the platform, including their email address, the list of Workspaces that user has access to, and their user role | ✔️                 | ✔️                 | ✔️                |
+| View system admin users.                                                                                                                          | ✔️                 | ✔️                 | ✔️                |
+| Modify [environment variables](environment-variables.md) for any Deployment                                                                       |                   | ✔️                 | ✔️                |
+| Modify [IAM](integrate-iam.md) roles for any Deployment                                                                                           |                   | ✔️                 | ✔️                |
+| Modify [service accounts](ci-cd.md#step-1-create-a-service-account) for any Workspace or Deployment                                               |                   | ✔️                 | ✔️                |
+| Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for all Deployments           |                   | ✔️                 | ✔️                |
+| Modify base layer Docker images for Deployments                                                                                                   |                   | ✔️                 | ✔️                |
+| Clean Deployment task metadata                                                                                                                    |                   |                   | ✔️                |
+| Create, update, or delete a Deployment on any Workspace                                                                                           |                   |                   | ✔️                |
+| Deploy code to any Deployment                                                                                                                     |                   |                   | ✔️                |
+| View logs for any Deployment                                                                                                                      |                   |                   | ✔️                |
+| View metrics for any Deployment                                                                                                                   |                   |                   | ✔️                |
+| View pending user invites in all Workspaces                                                                                                       |                   |                   | ✔️                |
+| Create, update, or delete a service account at any level                                                                                          |                   |                   | ✔️                |
+| Create, update, or delete any Team                                                                                                                |                   |                   | ✔️                |
+| Invite, update, or delete any user                                                                                                                |                   |                   | ✔️                |
+| Bypass email verification for any user                                                                                                            |                   |                   | ✔️                |
+| Create, update, or delete a Workspace                                                                                                             |                   |                   | ✔️                |
+| Airflow [admin permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#admin) for all Deployments         |                   |                   | ✔️                |
+
+
+
+
+## Default role permissions
+
+The following topics list the exact permission values that each role has by default. You can update these lists in your `config.yaml` file. Note that this list is also published in YAML form on the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.33/default.yaml).
 
 ### System Viewer
 
@@ -67,9 +156,6 @@ The System Admin has the same default permissions as the System Viewer and Syste
     - Variables
     - XComs
 
-## Workspace roles
-
-Workspace roles apply to a single Workspace within a single Astronomer Software installation.
 
 ### Workspace Viewer
 
@@ -105,10 +191,6 @@ For a given Workspace, the Workspace Admin has the same default permissions as t
 
 In addition, Workspace Admins have Deployment Admin permissions for all Deployments within the Workspace.
 
-## Deployment roles
-
-Deployment roles apply to a single Deployment within a single Astronomer Software installation.
-
 ### Deployment Viewer
 
 For a given Deployment, a Deployment Viewer has the following permissions:
@@ -124,8 +206,6 @@ For a given Deployment, a Deployment Viewer has the following permissions:
 - `deployment.teams.get`: View all Teams belonging to the Deployment
 - `deployment.taskUsage.get`: View task usage information for the Deployment
 
-A Deployment Viewer can't push code to a Deployment or modify Deployment configurations. These actions can be completed only by a Deployment Editor or a Deployment Admin.
-
 ### Deployment Editor
 
 For a given Deployment, the Deployment Editor has the same default permissions as the Deployment Viewer, plus:
@@ -139,8 +219,6 @@ For a given Deployment, the Deployment Editor has the same default permissions a
 - `deployment.serviceAccounts.update`: Modify a Deployment-level service account
 - `deployment.serviceAccounts.delete`: Delete a Deployment-level service account
 - `deployment.variables.update`: Update the Deployment's [environment variables](environment-variables.md)
-
-A Deployment Editor cannot make changes to certain configurations in the Airflow UI, such as connections and variables. These actions can only be completed by a Deployment Admin.
 
 ### Deployment Admin
 
