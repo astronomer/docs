@@ -19,4 +19,4 @@ GitHub issues are triaged by the Astronomer team and addressed promptly. Once yo
 
 See [CONTRIBUTING.MD](https://github.com/astronomer/docs/blob/main/contributing.md) for guidance on how to contribute to Astronomer documentation.
 
-You can also review the [Doc templates](https://github.com/astronomer/docs/blob/main/doc-templates) to see our standards for how to structure the content you want to contribute.
+Do you have an idea for a new doc to contribute, but don't know where to start? Review the [Doc templates](https://github.com/astronomer/docs/blob/main/doc-templates) to see our standards for how to structure the content you want to contribute.

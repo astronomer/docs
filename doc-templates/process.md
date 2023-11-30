@@ -19,9 +19,12 @@ id: 'process-template'
 - If there are insufficent sections to have steps as sub-headings, consider using a different ## header like `## Setup` instead of `## Step 1:`
 
 ## Step 2:
-...
+You can nest steps within topics in the following way:
 
-## Step Final:
+1. Substep 1
+2. Substep 2
+
+## Step [Final]:
 - After the user completes the final step, how can they test or ensure that the process was successful and the changes are behaving as expected?
 
 ## Related Links or Next steps
