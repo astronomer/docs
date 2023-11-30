@@ -7,7 +7,7 @@ description: A list of all default permissions for each role on Astronomer Softw
 
 This is where you'll find information about Astronomer Software default user role permissions. To modify these default permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
 
-## Default role permissions reference tables
+## Default role permissions tables
 
 The following tables show high level comparisons of permissions between different user roles.
 
@@ -40,7 +40,6 @@ The following tables show high level comparisons of permissions between differen
 
 | Permission                                                                                         | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
 | -------------------------------------------------------------------------------------------------- | -------------------- | -------------------- | ------------------- |
-| Deployment viewer permissions for all Deployments                                                  | ✔️                    | ✔️                    | ✔️                   |
 | View the Workspace                                                                                 | ✔️                    | ✔️                    | ✔️                   |
 | View all settings and configuration pages of any Deployment                                        | ✔️                    | ✔️                    | ✔️                   |
 | View any Deployment or Workspace-level [service account](ci-cd.md#step-1-create-a-service-account) | ✔️                    | ✔️                    | ✔️                   |
@@ -48,12 +47,10 @@ The following tables show high level comparisons of permissions between differen
 | View Teams belonging to the Workspace                                                              | ✔️                    | ✔️                    | ✔️                   |
 | View any [service account](ci-cd.md#step-1-create-a-service-account) for the Deployment            | ✔️                    | ✔️                    | ✔️                   |
 | View task usage in the Workspace                                                                   | ✔️                    | ✔️                    | ✔️                   |
-| Deployment Editor permissions for all Deployments                                                  |                      | ✔️                    | ✔️                   |
 | View Workspace admin users.                                                                        |                      | ✔️                    | ✔️                   |
 | Modify the Workspace, including Workspace Name, Description, and user access                       |                      | ✔️                    | ✔️                   |
 | Create a Deployment in the Workspace                                                               |                      | ✔️                    | ✔️                   |
 | Create, modify, and delete Workspace-level service accounts                                        |                      | ✔️                    | ✔️                   |
-| Deployment Admin permissions for all Deployments in the Workspace                                  |                      |                      | ✔️                   |
 | View pending user invites for the Workspace                                                        |                      |                      | ✔️                   |
 | Delete the Workspace                                                                               |                      |                      | ✔️                   |
 | Update [IAM](integrate-iam.md) for the Workspace                                                   |                      |                      | ✔️                   |
@@ -70,6 +67,7 @@ The following tables show high level comparisons of permissions between differen
 | View any setting for any Deployment in the Software UI                                                                                            | ✔️                 | ✔️                 | ✔️                |
 | View all pending user invites in the **System Admin** tab of the Software UI                                                                      | ✔️                 | ✔️                 | ✔️                |
 | View information for any pending user invite                                                                                                      | ✔️                 | ✔️                 | ✔️                |
+
 | Access to [Grafana](grafana-metrics.md) and [Kibana](kibana-logging.md) for system-level monitoring                                               | ✔️                 | ✔️                 | ✔️                |
 | View [service accounts](ci-cd.md#step-1-create-a-service-account) for any Deployment or Workspace                                                 | ✔️                 | ✔️                 | ✔️                |
 | View the newest platform release version number                                                                                                   | ✔️                 | ✔️                 | ✔️                |
@@ -93,12 +91,11 @@ The following tables show high level comparisons of permissions between differen
 | Create, update, or delete a Workspace                                                                                                             |                   |                   | ✔️                |
 | Airflow [admin permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#admin) for all Deployments         |                   |                   | ✔️                |
 
+## Default role permissions lists
 
+The following topics list the permission values that each role has by default as defined in the Astronomer Helm chart. You can update these permissions in your `config.yaml` file if you want to change the permissions that each role has. See [Customize role permissions](manage-platform-users.md#customize-role-permissions). 
 
-
-## Default role permissions
-
-The following topics list the exact permission values that each role has by default. You can update these lists in your `config.yaml` file. Note that this list is also published in YAML form on the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.33/default.yaml).
+Note that these lists are also published in YAML form on the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.33/default.yaml).
 
 ### System Viewer
 
