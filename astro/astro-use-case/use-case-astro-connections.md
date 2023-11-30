@@ -4,9 +4,9 @@ sidebar_label: 'Connections + Branch-based deploys'
 id: use-case-astro-connections
 ---
 
-Branch-based development is ubiquitous in all modern software development, including data and machine learning engineering. It allows for multiple developers to work on the same codebase at the same time, without interfering with each other's work and rigorous testing of changes before they are merged into production.
+Branch-based development is ubiquitous in all modern software development, including data engineering and machine learning operations. It allows for multiple developers to work on the same codebase at the same time without interfering with each other's work, and for applying rigorous testing of changes before they are merged into production.
 
-Data and machine learning pipelines often interact with a multitude of external systems, such as data warehouses and APIs. When using Airflow, these systems are accessed via [Airflow connections](https://docs.astronomer.io/learn/connections). In a best practice workflow, different connections are used for different environments, such as development and production.  
+Data pipelines often interact with a multitude of external systems, such as data warehouses and APIs. When using Airflow, these systems are accessed via [Airflow connections](https://docs.astronomer.io/learn/connections). In a best practice workflow, different connections are used for different environments, such as development and production.  
 
 Astro offers first-class support for [branch-based development](https://docs.astronomer.io/astro/automation-overview) and central and [secure management of connections](https://docs.astronomer.io/astro/manage-connections-variables). 
 
@@ -17,7 +17,7 @@ This use case walks you through setting up a branch-based deployment workflow wi
 Before trying this example, make sure you have:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- An [Astro account](https://www.astronomer.io/try-astro/) with two [Astro Deployments](https://docs.astronomer.io/astro/create-deployment), one for development (`conn-management-demo-dev`) and one for production (`conn-management-demo-prod`).
+- An [Astro account](https://www.astronomer.io/try-astro/) with two [Astro Deployments](https://docs.astronomer.io/astro/create-deployment).
 - A [GitHub account](https://github.com/).
 - An account in a SQL-based data warehouse with two distinct databases: one for development (`CONN_DEMO_DEV`), one for production data (`CONN_DEMO_PROD`), each containing an empty schema called `COOKIES`. This example uses a Snowflake account for which a [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available.
 - An [AWS account](https://aws.amazon.com/). A [free tier](https://aws.amazon.com/free/) is available and sufficient for this project.
@@ -34,7 +34,7 @@ First, we create 2 Airflow connections in the Astro Environment Manager for both
 
     ![Screenshot of the Astro UI showing the Astro Environment Manager and the + Connection button.](/img/docs/use-case-astro-connections_conn_one.png)
 
-2. Create a new connection to your data warehouse. We use Snowflake for this example but you can use any SQL-based data warehouse. If no connection type is available for your data warehouse, you can select the type **Generic**.
+2. Create a new connection to your data warehouse. We use Snowflake for this example, but you can use any SQL-based data warehouse. If no connection type is available for your data warehouse, you can select the type **Generic**.
 
 3. Give the new connection the name `snowflake_conn_management_demo` and fill the connection form with your connection credentials. Make sure to provide the _development_ database to the `DATABASE` field in the connection form, we override this field later for the production deployment. To make sure this connection is available to all existing and future Deployments in this workspace, toggle switch at the start of the form to **Linked to all**. 
 
@@ -181,7 +181,7 @@ The GitHub Actions workflow triggered in [Step 7](#step-7-trigger-the-branch-bas
 
 Congratulations! You have successfully set up Airflow connections on Astro and created a branch-based CI/CD workflow with GitHub Actions. You can now use this workflow as a template for your own projects.
 
-## Resources
+## See also
 
 - Documentation: [Manage Airflow connections and variables](https://docs.astronomer.io/astro/manage-connections-variables) on Astro.
 - Documentations: [Automate actions on Astro](https://docs.astronomer.io/astro/automation-overview)
