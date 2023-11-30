@@ -14,6 +14,14 @@ import TabItem from '@theme/TabItem';
 
 Effectively testing DAGs requires an understanding of their structure and their relationship to other code and data in your environment. In this guide, you'll learn about various types of DAG validation testing, unit testing, and where to find further information on data quality checks.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [How to easily test your Airflow DAGs with the new dag.test() function](https://www.astronomer.io/events/webinars/how-to-easily-test-your-airflow-dags-with-the-new-dag-test-function/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -150,7 +158,7 @@ The Astro CLI includes two commands to run DAG validation tests. Airflow does no
 - [`astro dev parse`](https://docs.astronomer.io/astro/cli/astro-dev-parse): will quickly parse your DAGs to find any Python syntax or DAG import errors.
 - [`astro dev pytest`](https://docs.astronomer.io/astro/cli/astro-dev-pytest): will run all pytest test suites in the `test` directory of your current Airflow project.
 
-Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script defining several examples of using `pytest` with Airflow. For more information on the Astro CLI's testing capabilities, see [Test your Astro project locally](https://docs.astronomer.io/astro/test-your-astro-project-locally).
+Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_example.py` script defining several examples of using `pytest` with Airflow. For more information on the Astro CLI's testing capabilities, see [Test your Astro project locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally).
 
 ### Airflow CLI 
 
@@ -414,7 +422,7 @@ Data quality checks differ from code-related testing because the data is not sta
 There are many ways you can integrate data quality checks into your DAG:
 
 - [SQL check operators](airflow-sql-data-quality.md): Airflow-native operators that run highly customizable data quality checks on a wide variety of relational databases.
-- [Great Expectations](airflow-great-expectations.md): A data quality testing suite with an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) offering the ability to define data quality checks in JSON to run on relational databases, Spark and Pandas dataframes.
+- [Great Expectations](airflow-great-expectations.md): A data quality testing suite with an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) offering the ability to define data quality checks in JSON to run on relational databases, Spark and pandas DataFrames.
 - [Soda Core](https://docs.astronomer.io/learn/soda-data-quality): A framework to check data quality using YAML configuration to define data quality checks to run on relational databases and Spark dataframes.
 
 Data quality checks work better at scale if you design your DAGs to load or process data incrementally. To learn more about incremental loading, see [DAG Writing Best Practices in Apache Airflow](dag-best-practices.md). Processing smaller, incremental chunks of data in each DAG Run ensures that any data quality issues have a limited effect.

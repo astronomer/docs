@@ -1,8 +1,8 @@
 ---
 sidebar_label: 'GCP'
-title: 'Connect Astro to GCP data sources'
+title: 'Create a network connection between Astro and GCP'
 id: connect-gcp
-description: Connect Astro to GCP.
+description: Create a network connection to Google Cloud Platform.
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 
@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use this document to learn how you can connect an Astro cluster and its Deployments to your external GCP resources.
+Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Google Cloud Platform (GCP) resources.
 
 ## Connection options
 
@@ -67,7 +67,7 @@ VPC peering ensures private and secure connectivity, reduces network transit cos
 
 To create a VPC peering connection between an Astro VPC and a GCP VPC: 
  
-1. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the following information:
+1. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
     - Astro cluster ID and name.
     - Google Cloud project ID of the target VPC.

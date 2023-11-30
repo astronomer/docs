@@ -5,9 +5,9 @@ id: platform-variables
 description: A list of environment variables that are set globally on Astro and should not be modified.
 ---
 
-This document is a reference for all environment variables on Astronomer with different default values than open source Apache Airflow. You can override [default Runtime environment variables](#default-runtime-environment-variables), but you can't override [system environment variables](#system-environment-variables).
+This document is a reference for all environment variables on Astronomer with different default values than open source Apache Airflow. You can override [default Runtime environment variables](runtime-image-architecture.md#default-environment-variables), but you can't override [system environment variables](#system-environment-variables).
 
-For information on setting your own environment variables, see [Environment variables](environment-variables.md).
+For information on setting your own environment variables, see [Environment variables](manage-env-vars.md).
 
 ## System environment variables
 
@@ -17,7 +17,7 @@ On Astro, certain environment variables have preset values that are required and
 
 The Cloud UI does not currently prevent you from setting these environment variables, but attempting to set them can result in unexpected behavior that can include access problems, missing task logs, and failed tasks.
 
-If you need to set one of these variables for a particular use case, contact [Astronomer support](https://cloud.astronomer.io/support).
+If you need to set one of these variables for a particular use case, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 :::
 
@@ -37,7 +37,7 @@ If you need to set one of these variables for a particular use case, contact [As
 | `AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX`       | Determines whether to enable werkzeug ProxyFix middleware for reverse proxy                                                     | `True`                                                     |
 | `AIRFLOW_CONN_AIRFLOW_DB`                    | The connection ID for accessing the Airflow metadata database                                                                   | `dbConnSecret`                                             |
 | `AIRFLOW__CORE__FERNET_KEY`                  | The secret key for saving connection passwords in the metadata database                                                         | `fernetKeySecret`                                          |
-| `AIRFLOW__CORE__EXECUTOR`                    | The executor class that Airflow uses. Astro exclusively supports the Celery executor                                            | `executor`                                                 |
+| `AIRFLOW__CORE__EXECUTOR`                    | The executor class that Airflow uses. Astro supports the Celery and Kubernetes executor.                                        | `executor`                                                 |
 | `AIRFLOW_HOME`                               | The home directory for an Astro project                                                                                         | `usr/local/airflow`                                        |
 | `AIRFLOW__KUBERNETES__NAMESPACE`             | The Kubernetes namespace where Airflow workers are created                                                                      | `namespace`                                                |
 | `AIRFLOW__CORE__HOSTNAME_CALLABLE`           | Path to a callable, which resolves to the hostname                                                                              | `airflow.utils.net.get_host_ip_address`                    |
@@ -57,8 +57,3 @@ If you need to set one of these variables for a particular use case, contact [As
 | `INSTANCE_TYPE`                              | Provides the instance size of the node the DAG is scheduled on.                                                                 | `(v1:metadata.labels['beta.kubernetes.io/instance-type'])` |
 | `OPENLINEAGE_URL`                            | The URL for your Astro lineage backend. The destination for lineage metadata sent from external systems to the OpenLineage API. | `https://astro-<your-astro-base-domain>.datakin.com`       |
 | `OPENLINEAGE_API_KEY`                        | Your OpenLineage API key                                                                                                        | `<your-lineage-api-key>`                                   |
-
-
-## Default Runtime environment variables
-
-Astro Runtime images include baked-in environment variables that have different default values than on Apache Airflow. See [Astro Runtime image architecture](runtime-image-architecture.md) for a complete list of variables and values.

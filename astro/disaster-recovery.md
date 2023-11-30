@@ -18,7 +18,6 @@ In the case of a full region outage, Astronomer can re-provision your Cluster(s)
 - VPC peering. Customers will need to re-accept peering request.
 - Deployments and data pipelines.
 - Environment variables.
-- API keys.
 - Alert emails.
 
 Astronomer will not be able to restore:

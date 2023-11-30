@@ -22,9 +22,12 @@ Sharing data between tasks is a very common use case in Airflow. If you've been 
 
 There are a few methods you can use to implement data sharing between your Airflow tasks. In this guide, you'll walk through the two most commonly used methods, learn when to use them, and use some example DAGs to understand how they can be implemented.
 
-:::info
+:::tip Other ways to learn
 
-All code in this guide can be found in [the Github repo](https://github.com/astronomer/airflow-guide-passing-data-between-tasks).
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: XComs 101](https://academy.astronomer.io/astro-runtime-xcoms-101) module.
+- Webinar: [How to pass data between your Airflow tasks](https://www.astronomer.io/events/webinars/how-to-pass-data-between-your-airflow-tasks/).
 
 :::
 
@@ -77,7 +80,7 @@ When you use the standard XCom backend, the size-limit for an XCom is determined
 
 You can see that these limits aren't very big. If you think your data passed via XCom might exceed the size of your metadata database, either use a custom XCom backend or [intermediary data storage](#intermediary-data-storage).
 
-The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as Pandas dataframe serialization in version 2.6 and later. If you need to serialize other data types you can do so using a [custom XCom backend](custom-xcom-backends-tutorial.md).
+The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as pandas DataFrame serialization in version 2.6 and later. If you need to serialize other data types you can do so using a [custom XCom backend](custom-xcom-backends-tutorial.md).
 
 ### Custom XCom backends
 

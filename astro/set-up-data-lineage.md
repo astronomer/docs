@@ -32,7 +32,7 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
 
 1. Add your custom extractor files to the `include` folder of your local Astro project.
 2. Deploy your project. See [Deploy code](deploy-code.md).
-3. Set the following [environment variable](environment-variables.md) in your Astro Deployment:
+3. Set the following [environment variable](manage-env-vars.md) in your Astro Deployment:
 
     ```text
     OPENLINEAGE_EXTRACTORS='<path-to-extractor-class-1>;<path-to-extractor-class-2>;<path-to-extractor-class-x>'
@@ -125,7 +125,7 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
 
-If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/support). 
+If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
 
 #### Prerequisites
 
@@ -259,7 +259,7 @@ To confirm that your setup is successful, run a Spark job after you save your co
 
 ## View SQL source code
 
-The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](environment-variables.md) for each Astro Deployment:
+The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](manage-env-vars.md) for each Astro Deployment:
 
 - Key: `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE`
 - Value: `False`
@@ -281,10 +281,10 @@ Before you disable OpenLineage, keep the following in mind:
 - You can't use [Astro alerts](alerts.md) in a Deployment with OpenLineage disabled.
 - A Deployment with OpenLineage disabled will not send any data to the [**Lineage** page](data-lineage.md) in the Cloud UI.
 
-To disable OpenLIneage for a Deployment, set the following [environment variable](environment-variables.md):
+To disable OpenLIneage for a Deployment, set the following [environment variable](manage-env-vars.md):
 
 - **Key**: `OPENLINEAGE_DISABLED`
-- **Value**: `False`
+- **Value**: `True`
 
 To re-enable OpenLineage, you can either set `OPENLINEAGE_DISABLED = False` or remove the environment variable.
 

@@ -16,6 +16,14 @@ There are two distinct types of Airflow variables: regular values and JSON seria
 
 This concept guide covers how to create Airflow variables and access them programmatically.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Variables 101](https://academy.astronomer.io/astro-runtime-variables-101) module.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -32,7 +40,7 @@ There are some best practices to keep in mind when using Airflow variables:
 - Airflow variables should be used for information that is runtime dependent but doesn't change too frequently.
 - You should avoid using Airflow variables outside of tasks in top-level DAG code, as they will create a connection to the Airflow metastore every time the DAG is parsed, which can lead to performance issues. See [DAG writing best practices in Apache Airflow](dag-best-practices.md#avoid-top-level-code-in-your-dag-file).
 - If you do use Airflow variables in top-level DAG code, use the [Jinja template](templating.md) syntax so that your Airflow variables are only rendered when a task executes.
-- Airflow variables are encrypted with [Fernet](https://github.com/fernet/spec/) when they are written to the Airflow metastore. To mask Airflow variables in the UI and logs, include a substring indicating a sensitive value in your Airflow variable name. See [Hiding sensitive information](#hiding-sensitive-information).
+- Airflow variables are encrypted with [Fernet](https://github.com/fernet/spec/) when they are written to the Airflow metastore. To mask Airflow variables in the UI and logs, include a substring indicating a sensitive value in your Airflow variable name. See [Hiding sensitive information](#hide-sensitive-information-in-airflow-variables).
 
 See the Airflow documentation for examples of code showing [good and bad practices for accessing Airflow variables in a DAG](https://airflow.apache.org/docs/apache-airflow/stable/best-practices.html#airflow-variables).
 
@@ -52,9 +60,13 @@ There are several ways to create Airflow variables:
 - Using an environment variable.
 - Programmatically from within an Airflow task.
 
+### Using the Airflow UI
+
 To create an Airflow variable in the UI, click on the **Admin** tab and select **Variables**. Then click on the **+** button and enter a key, value and an optional description for your Airflow variable. You also have the option to **Import Variables** from a file.
 
 ![UI](/img/guides/airflow-variables_UI_600.png) 
+
+### Using the Airflow CLI
 
 The Airflow CLI contains options to set, get and delete [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#variables). To create an Airflow variable via the CLI use the following command:
 
@@ -88,14 +100,26 @@ airflow variables set -j my_json_var '{"key": "value"}'
 
 </Tabs>
 
-To set Airflow variables via an environment variable create an environment variable with the prefix `AIRFLOW_VAR_` + the name of the Airflow variable you want to set
+### Using environment variables
+
+To set Airflow variables using an environment variable, create an environment variable with the prefix `AIRFLOW_VAR_` and the name of the Airflow variable you want to set. For example:
 
 ```text
 AIRFLOW_VAR_MYREGULARVAR='my_value'
 AIRFLOW_VAR_MYJSONVAR='{"hello":"world"}'
 ```
 
-To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/environment-variables).
+To fetch the Airflow variable in the DAG, you can then use the following methods:
+
+- `Variable.get('<VAR_NAME>', '<default-value>')`: This method is recommended and the most secure for fetching secret values. However, if used in top-level DAG code, this method can affect the performance because it makes a request to the Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. See [DAG writing best practices](dag-best-practices.md#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
+
+- `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because retrieving environment variables with this method can print them to your logs.
+
+If Airflow can't find the environment variable, replace `<default_value>` with a default value.
+
+To learn more about how to set environment variables on Astro, see [Environment Variables](https://docs.astronomer.io/astro/manage-env-vars).
+
+### Programmatically from a DAG or task
 
 Lastly, you can programmatically set Airflow variables within your Airflow tasks via the [`Variable` model](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/variable/index.html#module-airflow.models.variable). If you want to serialize a JSON value, make sure to set `serialize_json=True`.
 

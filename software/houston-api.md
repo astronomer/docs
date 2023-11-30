@@ -28,7 +28,7 @@ If you're using the Astronomer Houston API and you're migrating from Astronomer 
 
 ## Getting started
 
-The Astronomer Houston API is available in a [GraphQL Playground](https://www.apollogplatformraphql.com/docs/apollo-server/testing/graphql-playground/), "a graphical, interactive, in-browser GraphQL IDE, created by [Prisma](https://www.prisma.io/) and based on GraphQL." [GraphQL](https://graphql.org/) itself is an open source query language for APIs that makes for an easy and simple way to manage data.
+The Astronomer Houston API is available in a [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/v2/testing/graphql-playground/), "a graphical, interactive, in-browser GraphQL IDE, created by [Prisma](https://www.prisma.io/) and based on GraphQL." [GraphQL](https://graphql.org/) itself is an open source query language for APIs that makes for an easy and simple way to manage data.
 
 In short, the Playground is a portal that allows you to write GraphQL queries directly against the API within your browser.
 
@@ -38,13 +38,13 @@ For more information about the Playground features applicable to the wider Graph
 
 The URL at which you can reach Houston's GraphQL playground depends on the platform you're running. For your installation of Astronomer, it will be `https://houston.BASEDOMAIN/v1/`.
 
-For example, if you're a Software customer and your basedomain is `Astronomer`, you would navigate to https://houston.astronomer/v1/.
+For example, if you're a Software customer and your basedomain is `Astronomer`, you would navigate to `https://houston.astronomer/v1/`.
 
 ### Authenticate
 
 To query the Astronomer Houston API, you must first authenticate as an Astronomer user.
 
-1. Go to https://app.BASEDOMAIN/token and copy the API token. Alternatively, note the **API Key** of a [service account](ci-cd.md#step-1-create-a-service-account).
+1. Go to `https://app.BASEDOMAIN/token` and copy the API token. Alternatively, note the **API Key** of a [service account](ci-cd.md#step-1-create-a-service-account).
 2. Open Astronomer's Houston API GraphQL Playground at `https://houston.BASEDOMAIN/v1`.
 3. Expand the `HTTP Headers` section on the bottom left of the page.
 4. Paste the API token you acquired from Step 1 in the following format: `{"authorization": "<api-token>"}`
@@ -569,3 +569,22 @@ Unlike the `label` and `createdAt` fields, notice that the `users` type field re
 To know which fields you can or must specify, reference the "Schema" on the righthand side of the page. As is the case here, custom types are often composed of other custom types.
 
 ![Custom Type](/img/software/deployments_custom_typeschema.png)
+
+
+### Delete a Workspace
+
+To delete a Workspace, you'll need the ID of the Workspace you want to delete. You can find this by running `astro workspace list`.
+
+Using the Workspace ID, run the following query to delete the Workspace:
+
+```graphql
+mutation deleteWorkspace(
+    $workspaceUuid: Uuid = "<workspace-id>"
+  ) {
+    deleteWorkspace(
+      workspaceUuid: $workspaceUuid
+    ) {
+        id
+    }
+  }
+```

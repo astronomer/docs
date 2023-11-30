@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment list"
 title: "astro deployment list"
 id: astro-deployment-list
-description: Reference documentation for astro deployment list.
+description: List all Deployments in a Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List all Deployments within your current Workspace.
@@ -27,6 +28,17 @@ astro deployment list
 $ astro deployment list --all
 # Shows Deployments from all Workspaces that you're authenticated to
 ```
+
+## Output
+
+| Output               | Description                                                                   | Data Type                                  |
+| -------------------- | ----------------------------------------------------------------------------- | ------------------------------------------ |
+| `NAME`               | The name of the Deployment.                                                   | String                                     |
+| `NAMESPACE`          | The Deployment's Kubernetes namespace.                                        | String                                     |
+| `CLUSTER`            | The name of the Astro cluster where the Deployment runs.                      | String                                     |
+| `DEPLOYMENT ID`      | The Deployment ID                                                             | String                                     |
+| `RUNTIME VERSION`    | The Deployment's Astro Runtime version and its corresponding Airflow version. | String. (`X.X.X (based on Airflow X.X.X)`) |
+| `DAG DEPLOY ENABLED` | Whether the Deployment supports DAG deploys.                                  | Boolean                                    |
 
 ## Related Commands
 

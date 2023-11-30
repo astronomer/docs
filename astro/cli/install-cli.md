@@ -13,9 +13,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-This is where you'll find information about installing, upgrading, and uninstalling the Astro CLI.
+You can find information about installing, upgrading, and uninstalling the Astro CLI.
 
 ## Install the Astro CLI
+
+:::info
+
+If you want to run your first DAG on Astro but don't want to install any software locally, you can instead deploy DAGs with [GitHub Actions](first-dag-github-actions.md). Astronomer recommends this option if your organization restricts the use of Docker or if you have trouble installing the Astro CLI on Windows.
+
+:::
 
 <Tabs
     defaultValue="mac"
@@ -65,13 +71,30 @@ astro version
 
 Follow this procedure when Homebrew fails to install the latest Astro CLI version or the error `No formulae or casks found for astro@<major.minor.patch-version>` appears. To troubleshoot other Homebrew issues, see [Common Issues](https://docs.brew.sh/Common-Issues) in the Homebrew documentation.
 
-1. Run the following command to update Homebrew and all package definitions (formulae):
+1. If the install process is not working, run the following command to update Homebrew and all package definitions (formulae):
 
     ```sh
     brew update
     ```
+    
+2. Re-run the installation again:
+   
+   ```sh
+   brew install astro
+   ```
+   If this is not the first time you're installing the CLI, see [Common Issues](https://docs.brew.sh/Common-Issues) in the Homebrew documentation. If this is the first time you're installing the CLI, continue with the following steps.
 
-2. Install the Astro CLI. See [Installation](cli/install-cli.md?tab=mac#installation). 
+3. If this is the first time you're installing the CLI and updating Homebrew doesn't work, check to see if `astronomer/tap` is in your [Homebrew Tap](https://docs.brew.sh/Taps) list: 
+
+  ```sh
+  brew tap astronomer/tap
+  ```
+
+4. Install the Astronomer CLI. You can choose to specify the major and minor version by adding the `astro@<major.minor.patch-version>` flag to the `brew install` command:
+
+   ```sh
+   brew install astro@<major.minor.patch-version>
+   ``` 
 
 </TabItem>
 

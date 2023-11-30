@@ -15,7 +15,7 @@ When you're ready to implement your CI/CD strategy, see [CI/CD templates](ci-cd-
 
 ## Benefits of CI/CD on Astro
 
-On Astro, you can use [Deployment API keys](api-keys.md) to automate your code deploys. Astronomer recommends hosting your Astro project source code in a version control tool, such as [GitHub](https://github.com/) or [GitLab](https://about.gitlab.com/), and setting up a CI/CD workflow for all production environments.
+On Astro, you can use [Deployment API tokens](deployment-api-tokens.md) to automate your code deploys. Astronomer recommends hosting your Astro project source code in a version control tool, such as [GitHub](https://github.com/) or [GitLab](https://about.gitlab.com/), and setting up a CI/CD workflow for all production environments.
 
 There are many benefits to configuring a CI/CD workflow on Astro. Specifically, you can:
 
@@ -145,7 +145,13 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
     id2-->|DAG-only deploy| id3[Astro Deployment]
 ```
 
-One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes. 
+One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally and ensure that updates from your Admin repo doesn't erase your DAGs. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes.
+
+:::warning
+
+When you do a full image deploy of a repository, it also updates DAGs by default. This means that if you deploy your project configurations and it doesn't have your most recent DAG code, your Deployment's current DAGs are erased or reverted by the image deploy. Therefore, Astronomer recommends ensuring that any DAG changes are simultaneously updated in the repository where you manage project configurations.
+
+:::
 
 This strategy requires [DAG-only deploys](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment) on the target Deployment and setting up your CI/CD pipeline on both Git repositories.
 
@@ -178,7 +184,7 @@ If you use GitHub, Astronomer recommends using the [`deploy-action` GitHub actio
 
 ## Enforce CI/CD
 
-When you use a CI/CD pipeline, all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment API key or Workspace token. See:
+When you use a CI/CD pipeline, all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment or Workspace token. See:
 
 - [Enforce CI/CD deploys](deployment-settings.md#enforce-cicd-deploys)
 - [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings)

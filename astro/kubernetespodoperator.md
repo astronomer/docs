@@ -110,6 +110,12 @@ KubernetesPodOperator(
 
 Applying the previous code example ensures that when this DAG runs, it launches a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your Deployment. After the task finishes, the Pod will terminate gracefully.
 
+:::caution
+
+For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
+
+:::
+
 ### Mount a temporary directory
 
 :::info Alternative Astro Hybrid setup
@@ -179,7 +185,7 @@ To run Docker images from a private registry on Astro, a Kubernetes Secret that 
 1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file. If the generated `/docker/config.json` does not contain any credentials, copy your registry URL, username, and password.
 2. In the Cloud UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
 3. Copy the value in the **NAMESPACE** field.
-4. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the namespace of the Deployment.
+4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the namespace of the Deployment.
 
 Astronomer Support will give you instructions on how to securely send your credentials. Do not send this file by email, as it contains sensitive credentials to your registry. Astronomer will use these credentials to create a Kubernetes secret in your Deployment's namespace.
 
@@ -211,7 +217,7 @@ KubernetesPodOperator(
 
 :::info
 
-This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+Policy-based setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. To run images from a private registry on Astro Hosted standard clusters, follow the steps in [Private Registry](kubernetespodoperator.md?tab=PrivateRegistry#step-1-create-a-kubernetes-secret).
 
 :::
 
@@ -256,7 +262,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 :::info
 
-This setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. It is not available on Astro Hosted standard clusters.
+Passwordless setup is available only on Astro Hosted dedicated clusters and Astro Hybrid. For Astro Hosted standard clusters, please follow the steps in [Private Registry](https://docs.astronomer.io/astro/kubernetespodoperator?tab=PrivateRegistry#step-1-create-a-kubernetes-secret) to create a Kubernetes secret containing your registry credentials.
 
 :::
 

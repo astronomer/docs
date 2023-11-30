@@ -1,9 +1,10 @@
 ---
 sidebar_label: "astro workspace token list"
-title: "astro organization team list"
+title: "astro workspace token list"
 id: astro-workspace-token-list
-description: Reference documentation for astro workspace token list.
+description: List Workspace API tokens.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List all Workspace API tokens in your current Workspace. 

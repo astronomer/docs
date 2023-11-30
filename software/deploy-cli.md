@@ -12,7 +12,11 @@ For guidance on automating this process, refer to [Deploy to Astronomer via CI/C
 
 Alternatively, you can configure an external NFS volume for DAG deploys. For more information, read [Deploy DAGs to an NFS volume](deploy-nfs.md).
 
-> **Note:** Astronomer recommends that all users use the Astro CLI to test their code locally before pushing it to an Airflow Deployment on Astronomer. For guidelines on developing locally, see [CLI Quickstart](https://docs.astronomer.io/astro/cli/install-cli).
+:::info
+
+Astronomer recommends that all users use the Astro CLI to test their code locally before pushing it to an Airflow Deployment on Astronomer. For guidelines on developing locally, see [CLI Quickstart](https://docs.astronomer.io/astro/cli/install-cli).
+
+:::
 
 ## Prerequisites
 
@@ -67,6 +71,12 @@ astro deploy
 ```
 
 This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. Once this command is executed, all files in your Astro project directory are built into a new Docker image and Docker containers for all Airflow components are restarted.
+
+:::info
+
+If your code deploy fails and you configured your CLI to use Podman, you might need to set an additional environment variable. See [Troubleshoot your Podman configuration](https://docs.astronomer.io/astro/cli/configure-cli#troubleshoot-your-configuration). 
+
+:::
 
 ## Step 4: Validate Your Changes
 

@@ -2,11 +2,12 @@
 sidebar_label: "astro deployment pool create"
 title: "astro deployment pool create"
 id: astro-deployment-pool-create
-description: Reference documentation for astro deployment pool create.
+description: Create Airflow pools in a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
-Create Airflow pools on a Deployment. Airflow pools are stored in the Deployment's metadata database and appear in the Airflow UI.  
+Create Airflow pools in a Deployment. Airflow pools are stored in the Deployment's metadata database and appear in the Airflow UI.  
 
 ## Usage
 

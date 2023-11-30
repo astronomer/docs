@@ -16,6 +16,15 @@ This guide is an overview of some of the most useful features and visualizations
 
 All images in this guide were taken from an [Astronomer Runtime](https://docs.astronomer.io/astro/runtime-release-notes) Airflow image. Other than some modified colors and an additional **Astronomer** tab, the UI is the same as when using OSS Airflow. The images in this guide are from Airflow version 2.7, if you are using an older version of Airflow, some UI elements might be slightly different or missing.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: UI](https://academy.astronomer.io/astro-runtime-airflow-ui) module.
+- Webinar: [A Deep Dive into the Airflow UI](https://www.astronomer.io/events/webinars/a-deep-dive-into-the-airflow-ui/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -148,6 +157,12 @@ Click a dataset to open the history of all updates to the dataset that were reco
 ![Dataset History](/img/guides/2_5_DatasetsDetails.png)
 
 ## Security tab
+
+:::info Astro does not support the Security tab
+
+On Astro, role-based access control is managed at the platform level. As a result, the Security tab is not needed and is not available on Airflow deployments on Astro.
+
+:::
 
 The **Security** tab links to multiple pages, including **List Users** and **List Roles**, that you can use to review and manage Airflow role-based access control (RBAC). For more information on working with RBAC, see [Security](https://airflow.apache.org/docs/apache-airflow/stable/security/index.html).
 

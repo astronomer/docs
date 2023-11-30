@@ -1,7 +1,7 @@
 ---
 title: "Create a Databricks connection in Airflow"
 id: databricks
-sidebar_label: Databricks
+sidebar_label: Connection
 description: Learn how to create a Databricks connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
@@ -33,7 +33,7 @@ Complete the following steps to retrieve these values:
 1. Open your Astro project and add the following line to your `requirements.txt` file:
 
     ```
-    apache-airflow-providers-microsoft-databricks
+    apache-airflow-providers-databricks
     ```
 
     This will install the Databricks provider package, which makes the Databricks connection type available in Airflow.

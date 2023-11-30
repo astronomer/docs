@@ -14,6 +14,14 @@ Consider implementing systematic testing of your DAGs to prevent common issues. 
 
 :::
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [Debugging your Airflow DAGs](https://www.astronomer.io/events/webinars/debugging-your-airflow-dags/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -55,7 +63,7 @@ The most common issues related to the Astro CLI are:
 
 To troubleshoot infrastructure issues when running Airflow on other platforms, for example in Docker, on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or on managed services, please refer to the relevant documentation and customer support.
 
-You can learn more about [testing and troubleshooting locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally.md) with the Astro CLI in the Astro documentation.
+You can learn more about [testing and troubleshooting locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally) with the Astro CLI in the Astro documentation.
 
 ## Common DAG issues
 

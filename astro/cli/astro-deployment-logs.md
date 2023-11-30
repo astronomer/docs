@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment logs"
 title: "astro deployment logs"
 id: astro-deployment-logs
-description: Reference documentation for astro deployment logs.
+description: Show Airflow component logs for a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';
@@ -23,7 +24,7 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-Show [scheduler logs](view-logs.md#view-airflow-scheduler-logs) over the last 24 hours for a given Deployment on Astro. These scheduler logs are the same logs that appear in the **Logs** tab of the Cloud UI.
+Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) over the last 24 hours for a given Deployment on Astro. These are the same logs that appear in the **Logs** tab of the Cloud UI.
 
 ## Usage
 

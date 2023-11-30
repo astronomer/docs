@@ -25,7 +25,7 @@ Read the following document for a reference of our default resources as well as 
 | [GKE Cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview)   | A GKE cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks. Workload Identity is enabled on this cluster.                                                                                                                | 1x, IP Ranges are `172.21.0.0/19` for cluster IPs and `172.22.0.0/22` for cluster services |                                                                                                              |
 | Worker node pool                                                                                     | A node pool that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of e2-standard-4 nodes                                                             | Yes. See [Manage worker node pools](manage-hybrid-clusters.md##about-worker-node-pools).                     |
 | Airflow node pool                                                                                    | A node pool that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of e2-standard-4 nodes                                                             |                                                                                                              |
-| Astro system node pool                                                                               | A node pool that runs all other system components required in Astro. The availability zone determines how many nodes are created. This node pool is fully managed by Astronomer.                                                                                                          | 1x pool of n2-standard-2 nodes                                                             |                                                                                                              |
+| Astro system node pool                                                                               | A node pool that runs all other system components required in Astro. The availability zone determines how many nodes are created. This node pool is fully managed by Astronomer.                                                                                                          | 1x pool of e2-standard-4 nodes                                                             |                                                                                                              |
 | [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)                               | The Cloud SQL instance is the primary database for the Astro data plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster. All Cloud SQL instances are multi-AZ.                                                                                      | 1x regional instance with 2 vCPUs, 8GiB memory                                             | Yes. See [Configure your relational database](manage-hybrid-clusters.md#configure-a-database-instance-type). |
 | [VPC](https://cloud.google.com/vpc/docs/vpc)                                                         | Virtual private network for hosting GCP resources                                                                                                                                                                                                                                         | 1x /19                                                                                     | Yes. See [Connect Astro to GCP data sources](connect-gcp.md).                                                |
 | [Subnet](https://cloud.google.com/vpc/docs/subnets)                                                  | A single subnet is provisioned in the VPC.                                                                                                                                                                                                                                                | 1, IP Range is `172.20.0.0/22`                                                             |                                                                                                              |
@@ -74,7 +74,7 @@ You can host Astro Hybrid clusters in the following GCP regions:
 | `us-west3`                | Salt Lake City, North America |
 | `us-west4`                | Nevada, North America         |
 
-Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported Cloud SQL instance types
 
@@ -90,7 +90,7 @@ The following Cloud SQL instance types are supported on Astro:
 - Medium Compute Optimized (8 CPU, 16 GiB MEM)
 - Large Compute Optimized (16 CPU, 32 GiB MEM)
 
-For detailed information about each instance type, see the [Cloud SQL documentation](https://cloud.google.com/sql). If you're interested in an Cloud SQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
+For detailed information about each instance type, see the [Cloud SQL documentation](https://cloud.google.com/sql). If you're interested in an Cloud SQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported worker node pool instance types
 
@@ -134,7 +134,7 @@ The following table lists all available instance types for worker node pools, as
 | c2-standard-4      | 2 CPUs  | 14.5 GiB MEM  |
 | c2-standard-8      | 6 CPUs  | 30.5 GiB MEM  |
 
-If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
+If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
 
 ## Related documentation
 

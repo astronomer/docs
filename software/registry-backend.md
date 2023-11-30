@@ -15,7 +15,11 @@ The following are the registry backend tools supported by Astronomer:
 - [AWS S3](https://aws.amazon.com/s3/)
 - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 
-Note that this doc explains only how to set up a registry for hosting Astronomer's system images. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md).
+:::info
+
+This document explains only how to set up a registry for hosting Astronomer's system images. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md). Or, to host all images in a high-security environment with no connections to public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
+
+:::
 
 ## Google Cloud Storage
 
@@ -224,6 +228,25 @@ astronomer:
 
 3. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
+### Authorize Astronomer to a registry backend using IAM roles (Optional)
+
+To avoid hardcoding credentials for your registry backend, add the following configuration to your `config.yaml` file:
+
+```yaml
+registry: 
+    serviceAccount: 
+      # Specifies whether a service account should be created 
+      create: true 
+      # Annotations to add to the service account 
+      annotations: 
+        eks.amazonaws.com/role-arn: arn:aws:iam::xxxxxxxxxxxxxx:role/<your-iam-role>
+    s3: 
+      enabled: true 
+      region: <your-region>
+      bucket: <your-registry-backend>
+```
+
+Then, push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 ## Azure Blob Storage
 
 If you're running Astronomer Software on Azure Kubernetes Service (AKS), Astronomer recommends using Azure Blob Storage as a registry backend solution.

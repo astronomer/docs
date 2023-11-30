@@ -19,18 +19,19 @@ Astronomer is responsible for providing a secure and reliable managed service of
 - Completing ongoing maintenance (currency, hardening, patching) and uptime monitoring of Astro resources in the data plane. For example, Kubernetes cluster upgrades.
 - Maintaining data encryption (at rest/in flight) of Astro managed components (control and data planes).
 - Consistently releasing production-ready and supported distributions of [Astro Runtime](upgrade-runtime.md) for net-new and to-be-upgraded Deployments.
+- Upon customer request, execute [Disaster Recovery](disaster-recovery.md) procedure for dedicated Hybrid or Hosted clusters.
 
 ## Customer's responsibilities  
 
 The customer is responsible for managing certain security aspects of their Astro Organization and Deployments, including:
 
-- Managing roles and permissions of users and API keys within their organization and Workspace(s).
-- Storing and retrieving [API keys](api-keys.md), connections, and [environment variables](environment-variables.md) for data pipelines.
+- Managing roles and permissions of users and API tokens within their organization and Workspace(s).
+- Storing and retrieving [authentication tokens](automation-authentication.md), connections, and [environment variables](environment-variables.md) for data pipelines.
 - Integrating with their federated identity management platform for secure single sign-on (SSO) authentication with multi-factor authentication (MFA) and customer managed credentials.
 - Developing and maintaining data pipelines with security and quality coding best practices, inclusive of vulnerability management of plugins and dependencies.
 - Regularly [upgrading their Deployment(s)](upgrade-runtime.md) to the latest Astro Runtime version to take advantage of new functionality, as well as bug and security fixes.
 - [Configuring and managing Deployment resource settings](deployment-settings.md) for data pipeline workloads.
-- [Securing the network communications](https://docs.astronomer.io/astro/category/connect-to-external-resources) between their data plane and sensitive data resources.
+- Securing the network communications between their data plane and sensitive data resources.
 
 ## Cloud provider security responsibilities
 

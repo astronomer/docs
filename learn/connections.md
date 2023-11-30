@@ -21,6 +21,14 @@ In this guide you'll:
 - Learn how to define connections using environment variables.
 - Add sample Snowflake and Slack Webhook connections to a DAG.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Connections 101](https://academy.astronomer.io/connections-101) module.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -53,6 +61,19 @@ Each connection type requires different configurations and values based on the s
 - Open the relevant provider page in the [Astronomer Registry](https://registry.astronomer.io/providers/) and go to the first link under **Helpful Links** to access the Apache Airflow documentation for the provider. Most commonly used providers will have documentation on each of their associated connection types. For example, you can find information on how to set up different connections to Azure in the [Azure provider docs](https://registry.astronomer.io/providers/microsoft-azure).
 - Check the documentation of the external tool you are connecting to and see if it offers guidance on how to authenticate.
 - Refer to the source code of the hook that is being used by your operator.
+
+:::tip
+
+If you use a mix of strategies for managing connections, it's important to understand that if the same connection is defined in multiple ways, Airflow uses the following order or precedence:
+
+1. Secrets Backend
+2. Astro Environment Manager
+3. Environment Variables
+4. Airflow's metadata database (Airflow UI)
+
+See [How Airflow finds connections](https://docs.astronomer.io/astro/manage-connections-variables#how-airflow-finds-connections) for more information.
+
+:::
 
 ## Defining connections in the Airflow UI
 

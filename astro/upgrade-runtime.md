@@ -95,7 +95,9 @@ For more information about deploying to Astro, see [Deploy code](deploy-code.md)
 
 :::caution
 
-Once you upgrade to a Deployment on Astro to a new version of Astro Runtime, you cannot roll back or downgrade to a lower version. If you attempt to do so, you will see an error in the Astro CLI and your request to deploy will not succeed.
+After you upgrade a Deployment on Astro to a new version of Astro Runtime, the only way to downgrade is to [roll back to a previous deploy](deploy-history.md). If you attempt to downgrade a Deployment by updating your Dockerfile, the Astro CLI produces an error and your request to deploy does not succeed.
+
+Generally speaking, Deployment rollbacks to lower Runtime versions are recommended only when your current code isn't working as expected. This is because rollbacks to lower Runtime versions can result in your Deployment losing data from the metadata database. For more information, see [What happens during a deploy rollback](deploy-history.md#what-happens-during-a-deploy-rollback).
 
 :::
 
@@ -122,6 +124,12 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 ### Version upgrade considerations
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
+
+:::info
+
+If an Astro Runtime version isn't included in this section, then there are no specific upgrade considerations for that version.
+
+:::
 
 #### Runtime 9 (Airflow 2.7)
 
@@ -174,12 +182,12 @@ Astro Runtime 8 uses Python 3.10. If you use provider packages that don't yet su
 
 ##### Provider incompatibilities
 
-There is an incompatibility between Astro Runtime 8 and the following provider packages:
+There is an incompatibility between Astro Runtime 8 and the following provider packages installed together:
 
 - `apache-airflow-providers-cncf-kubernetes==6.1.0`
 - `apache-airflow-providers-google==10.0.0`
 
-That can be resolved by pinning `apache-airflow-providers-cncf-kubernetes==5.2.2` in your `requirements.txt`file.
+That can be resolved by pinning `apache-airflow-providers-google==10.9.0` or greater in your `requirements.txt` file.
 
 This incompatibility results in breaking the GKEStartPodOperator. This operator inherits from the KubernetesPodOperator, but then overrides the hook attribute with the GKEPodHook. In the included version of the `cncf-kubernetes` providers package, the KubernetesPodOperator uses a new method, `get_xcom_sidecar_container_resources`. This method is present in the KubernetesHook, but not the GKEPodHook. Therefore, when it is called it causes the task execution to break. 
 
@@ -198,6 +206,6 @@ Astro Runtime 5.0.0, based on Airflow 2.3, includes changes to the schema of the
     Airflow found incompatible data in the `dangling_rendered_task_instance_fields` table in your metadata database, and moved...
     ```
 
-    These warnings have no impact on your tasks or DAGs and can be ignored. If you want to remove these warning messages from the Airflow UI, reach out to [Astronomer support](https://cloud.astronomer.io/support). If requested, Astronomer can drop incompatible tables from your metadata database.
+    These warnings have no impact on your tasks or DAGs and can be ignored. If you want to remove these warning messages from the Airflow UI, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request). If requested, Astronomer can drop incompatible tables from your metadata database.
 
 For more information on Airflow 2.3, see ["Apache Airflow 2.3.0 is here"](https://airflow.apache.org/blog/airflow-2.3.0/) or the [Airflow 2.3.0 changelog](https://airflow.apache.org/docs/apache-airflow/2.3.0/release_notes.html#airflow-2-3-0-2022-04-30).

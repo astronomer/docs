@@ -25,7 +25,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 ## Prerequisites
 
 - A Deployment on Astro.
-- A [Workspace API token](workspace-api-tokens.md) or an [Organization API token](organization-api-tokens.md).
+- A [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or an [Organization API token](organization-api-tokens.md).
 - [cURL](https://curl.se/) or, if using Python, the [Requests library](https://docs.python-requests.org/en/latest/index.html).
 - The [Astro CLI](cli/overview.md).
 
@@ -33,7 +33,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 
 <Tabs groupId="step-1-retrieve-your-access-token">
 
-<TabItem value="workspace" label="Workspace token (Recommended)">
+<TabItem value="workspace" label="Workspace token">
 
 Follow the steps in [Create a Workspace API token](workspace-api-tokens.md#create-a-workspace-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
@@ -45,42 +45,9 @@ Follow the steps in [Create a Orgaization API token](organization-api-tokens.md#
 
 </TabItem>
 
-<TabItem value="deployment" label="Deployment API key">
+<TabItem value="deployment" label="Deployment API token">
 
-:::warning
-
-Deployment API keys will soon be deprecated in favor of [Deployment API tokens](deployment-api-tokens.md). You can continue to use existing Deployment API keys for now, but you will have to complete a one-time migration to Deployment API tokens in the future.
-
-:::
-
-To retrieve an access token using [cURL](https://curl.se/), run the following API request with your Deployment API key ID and secret:
-
-```bash
-curl --location --request POST "https://auth.astronomer.io/oauth/token" \
-        --header "content-type: application/json" \
-        --data-raw '{
-            "client_id": "<api-key-id>",
-            "client_secret": "<api-key-secret>",
-            "audience": "astronomer-ee",
-            "grant_type": "client_credentials"}'
-```
-
-To retrieve an Astro access token using Python, use the [`requests`](https://docs.python-requests.org/en/latest/index.html) library to make your API request:
-
-```python
-def get_api_token() -> str:
-  r = requests.post(
-      "https://auth.astronomer.io/oauth/token",
-      json={
-          "client_id": "<api-key-id>",
-          "client_secret": "<api-key-secret>",
-          "audience": "astronomer-ee",
-          "grant_type": "client_credentials"
-      }
-  )
-  r.raise_for_status()
-  return r.json()
-```
+Follow the steps in [Create a Deployment API token](deployment-api-tokens.md#create-a-deployment-api-token) to create your token. Make sure to save the token on creation in order to use it later in this setup.
 
 </TabItem>
 </Tabs>
@@ -247,50 +214,58 @@ response = requests.patch(
 print(response.json())
 # Prints data about the DAG with id <dag-id>
 ```
-## Trigger DAG runs across Deployments
+### Trigger DAG runs across Deployments
 
 You can use the Airflow REST API to make a request in one Deployment that triggers a DAG run in a different Deployment. This is sometimes necessary when you have interdependent workflows across multiple Deployments. On Astro, you can do this for any Deployment in any Workspace or cluster. 
 
 This topic has guidelines on how to trigger a DAG run, but you can modify the example DAG provided to trigger any request that's supported in the Airflow REST API.
 
-1. On the target Deployment, create an API key ID and API key secret. See [Create an API key](api-keys.md#create-an-api-key).
+1. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment that contains the DAG you want to trigger.
 
-2. On the triggering Deployment, set the API key ID and API key secret from the target Deployment as `KEY_ID` and `KEY_SECRET` environment variables in the Cloud UI. Make `KEY_SECRET` secret. See [Set environment variables on Astro](environment-variables.md).
+2. In the Deployment that contains the triggering DAG, create an [Airflow HTTP connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) with the following values: 
 
-3. In your DAG, write a task called `get-token` that uses your Deployment API key ID and secret to make a request to the Astronomer API that retrieves the access token that's required for authentication to the Airflow API. In another task called `trigger_external_dag`, use the access token to make a request to the `dagRuns` endpoint of the Airflow REST API. Make sure to replace `<target-deployment-url>` with your own value. For example:
+    - **Connection Id**: `http_conn`
+    - **Connection Type**: HTTP
+    - **Host**: `<your-deployment-url>`
+    - **Schema**: `https`
+    - **Extras**:
+      
+    ```json
+    {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer <your-deployment-api-token>"
+    }
+    ```
 
-    ````python
-    import requests
+    See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections).
+
+  :::info
+
+  If the `HTTP` connection type is not available, double check that the [HTTP provider](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest) is installed in your Airflow environment. If it's not, add `apache-airflow-providers-http` to the `requirements.txt` file of our Astro project and redeploy it to Astro. 
+
+  :::
+
+
+3. In your triggering DAG, add the following task. It uses the [SimpleHttpOperator](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest/modules/SimpleHttpOperator) to make a request to the `dagRuns` endpoint of the Deployment that contains the DAG to trigger.
+
+    ```python
     from datetime import datetime
-    import os
-    from airflow.decorators import dag, task
-    KEY_ID = os.environ.get("KEY_ID")
-    KEY_SECRET = os.environ.get("KEY_SECRET")
-    AIRFLOW_URL = "<target-deployment-url>"
-    @dag(schedule="@daily",
-        start_date=datetime(2022, 1, 1),
-        catchup=False)
-    def triggering_dag():
-        @task
-        def get_token():
-            response = requests.post("https://auth.astronomer.io/oauth/token",
-                                    json={"audience": "astronomer-ee",
-                                        "grant_type": "client_credentials",
-                                        "client_id": {KEY_ID},
-                                        "client_secret": {KEY_SECRET})
-            return response.json()<"access_token">
-        @task
-        def trigger_external_dag(token):
-            dag_id = "target"
-            response = requests.post(
-                url=f"{AIRFLOW_URL}/api/v1/dags/{dag_id}/dagRuns",
-                headers={
-                    "Authorization": f"Bearer {token}",
-                    "Content-Type": "application/json"
-                },
-                data='{"logical_date": "' + datetime.utcnow().isoformat().split(".")[0] + 'Z"}'
-            )
-            print(response.json())
-        trigger_external_dag(get_token())
-    a = triggering_dag()
+    from airflow import DAG
+    from airflow.providers.http.operators.http import SimpleHttpOperator
+
+    with DAG(dag_id="triggering_dag", schedule=None, start_date=datetime(2023, 1, 1)):
+        SimpleHttpOperator(
+            task_id="trigger_external_dag",
+            log_response=True,
+            method="POST",
+                # Change this to the DAG_ID of the DAG you are triggering
+            endpoint=f"api/v1/dags/<triggered_dag>/dagRuns",
+            http_conn_id="http_conn",
+            data={
+                "logical_date": "{{ logical_date }}",
+                
+                # if you want to add parameters:
+                # params: '{"foo": "bar"}'
+            }
+        )
     ```

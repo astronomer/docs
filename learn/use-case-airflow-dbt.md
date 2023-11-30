@@ -157,6 +157,13 @@ The files come together in the following project structure:
 └── requirements.txt
 ```
 
+:::tip
+
+In some cases, especially in larger dbt projects, you might run into a `DagBag import timeout` error. 
+This error can be resolved by increasing the value of the Airflow configuration [core.dagbag_import_timeout](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
+
+:::
+
 ## See also
 
 - Tutorial: [Orchestrate dbt Core jobs with Airflow and Cosmos](airflow-dbt.md).

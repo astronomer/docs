@@ -21,9 +21,11 @@ def check_before_running_dbt_cloud_job():
         """
         hook = DbtCloudHook(DBT_CLOUD_CONN_ID)
         runs = hook.list_job_runs(job_definition_id=job_id, order_by="-id")
-        latest_run = runs[0].json()["data"][0]
-
-        return DbtCloudJobRunStatus.is_terminal(latest_run["status"])
+        if not runs[0].json().get("data"):
+            return True
+        else:
+            latest_run = runs[0].json()["data"][0]
+            return DbtCloudJobRunStatus.is_terminal(latest_run["status"])
 
     trigger_job = DbtCloudRunJobOperator(
         task_id="trigger_dbt_cloud_job",

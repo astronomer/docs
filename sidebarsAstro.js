@@ -23,13 +23,20 @@ module.exports = {
       label: "Get started",
       items: [
         "trial",
-        "create-first-DAG",
-        'log-in-to-astro', 
+        {
+          type: "category",
+          label: "Run your first DAG",
+          link: { type: 'doc', id: 'run-first-dag' },
+          items: ["first-dag-github-actions", "first-dag-cli"],
+        
+        },
+        "log-in-to-astro", 
         {
           type: "category",
           label: "Migrate to Astro",
           items: ["migrate-mwaa", "migrate-gcc"],
         },
+        "install-azure",
       ],
     },
     {
@@ -47,6 +54,7 @@ module.exports = {
           label: "Airflow connections and variables",
           items: [
             "manage-connections-variables",
+            "create-and-link-connections",
             "import-export-connections-variables",
           ],
         },
@@ -94,9 +102,27 @@ module.exports = {
           items: ["executors-overview","celery-executor", "kubernetes-executor"],
         }, 
         "configure-worker-queues",
-        "api-keys",
-        "environment-variables",
-        "secrets-backend",
+        {
+          type: "category",
+          label: "Environment variables",
+          link: {
+            type: 'doc',
+            id: 'environment-variables'
+          },
+          items: ["environment-variables", "manage-env-vars"],
+        },
+        {
+          type: "category",
+          label: "Secrets backend",
+          link: { type: 'doc', id: 'secrets-backend' },
+          items: ["secrets-backend", 
+          "secrets-backend/aws-secretsmanager",
+          "secrets-backend/aws-paramstore",
+          "secrets-backend/azure-key-vault" ,
+          "secrets-backend/hashicorp-vault", 
+          "secrets-backend/gcp-secretsmanager", 
+          ],
+        },
         "manage-dags", 
       ],
     },
@@ -136,7 +162,8 @@ module.exports = {
           items: [
             "manage-deployments-as-code",
             "deployment-file-reference"],
-        }, 
+        },
+        "api-keys", 
       ],
     },
     {
@@ -157,6 +184,11 @@ module.exports = {
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
+        {
+          type: "category",
+          label: "Integrate with data tools",
+          items: ["export-datadog", "export-cloudwatch"],
+        },
       ],
     },
     {
@@ -179,7 +211,11 @@ module.exports = {
         {
           type: "category",
           label: "Deployments",
-          items: ["deployment-api-tokens", "authorize-deployments-to-your-cloud", "transfer-a-deployment"],
+          items: [
+          "deployment-api-tokens",  
+          "authorize-deployments-to-your-cloud", 
+          "transfer-a-deployment",
+          ],
         },
         {
           type: "category",
@@ -195,13 +231,12 @@ module.exports = {
             "resource-reference-hosted",
             {
               type: "category",
-              label: "Connect to external resources",
-              link: {
-                type: 'generated-index',
-                title: 'Connect clusters',
-                description: 'Connect Astro to your existing cloud resources.'
-              },
-              items: ["connect-aws", "connect-azure", "connect-gcp"],
+              label: "Networking",
+              items: [
+                "connect-aws", 
+                "connect-azure", 
+                "connect-gcp"
+            ],
             },
           ],
         },
@@ -264,9 +299,21 @@ module.exports = {
     },
     {
       type: "category",
+      label: "Astro API",
+      items: [
+        "api/overview",
+        "api/get-started",
+        "api/versioning-and-support",
+        "api/iam-api-reference",
+        "api/platform-api-reference",
+      ],
+    },
+    {
+      type: "category",
       label: "Reference",
       items: [
         "astro-support",
+        "astro-office-hours",
         {
           type: "category",
           label: "Astro Runtime",
@@ -348,6 +395,11 @@ module.exports = {
         {
           type: "category",
           label: "astro config",
+          link: {
+            type: 'generated-index',
+            title: "astro config command reference",
+            description: 'Use `astro config` commands to configure how the Astro CLI behaves in your local environment.'
+          },
           items: [
             'cli/astro-config-get',
             'cli/astro-config-set',
@@ -356,6 +408,11 @@ module.exports = {
         {
           type: "category",
           label: "astro context",
+          link: {
+            type: 'generated-index',
+            title: "astro context command reference",
+            description: 'Use `astro context` commands to switch between Astronomer product types.'
+          },
           items: [
             'cli/astro-context-delete',
             'cli/astro-context-list',
@@ -366,6 +423,11 @@ module.exports = {
         {
           type: "category",
           label: "astro deployment",
+          link: {
+            type: 'generated-index',
+            title: "astro workspace command reference",
+            description: 'Use `astro deployment` commands to manage all details about Deployments, including Deployment resources, Airflow objects, and Astro Runtime versioning.'
+          },
           items: [
             'cli/astro-deployment-airflow-upgrade',
             {
@@ -446,6 +508,11 @@ module.exports = {
         {
           type: "category",
           label: "astro organization",
+          link: {
+            type: 'generated-index',
+            title: "astro organization command reference",
+            description: 'Use `astro organization` commands to manage users and their Organization-level permissions.'
+          },
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
@@ -469,6 +536,11 @@ module.exports = {
         {
           type: "category",
           label: "astro registry",
+          link: {
+            type: 'generated-index',
+            title: "astro registry command reference",
+            description: 'Use `astro registry` commands to pull resources from the Astronomer Registry into your Astro project.'
+          },
           items: [
             "cli/astro-registry-dag-add",
             "cli/astro-registry-provider-add"
@@ -481,13 +553,17 @@ module.exports = {
         {
           type: "category",
           label: "astro workspace",
+          link: {
+            type: 'generated-index',
+            title: "astro workspace command reference",
+            description: 'Use `astro workspace` commands to manage Workspaces and Workspace-level user permissions.'
+          },
           items: [
             "cli/astro-workspace-create",
             "cli/astro-workspace-delete",
             "cli/astro-workspace-list",
             "cli/astro-workspace-service-account",
             "cli/astro-workspace-switch",
-            "cli/astro-workspace-team",
             "cli/astro-workspace-team-add",
             "cli/astro-workspace-team-list",
             "cli/astro-workspace-team-remove",

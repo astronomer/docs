@@ -3,6 +3,7 @@ sidebar_label: 'Overview'
 title: 'Astro CLI'
 id: overview
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 <head>

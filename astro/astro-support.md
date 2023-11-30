@@ -12,7 +12,7 @@ In addition to product documentation, the following resources are available to h
 
 If you're experiencing an issue or have a question that requires Astronomer expertise, use one of the following methods to contact Astronomer support:
 
-- Submit a support request in the [Cloud UI](https://cloud.astronomer.io/support).
+- Submit a support request in the [Cloud UI](https://cloud.astronomer.io/open-support-request).
 - Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us).
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io).
 - Call +1 (831) 777-2768.
@@ -77,7 +77,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
     ![Submit Support Request menu location](/img/docs/support-request-location.png)
 
-    Alternatively, you can directly access the support form by going to `https://cloud.astronomer.io/support`.
+    Alternatively, you can directly access the support form by going to `https://cloud.astronomer.io/open-support-request`.
 
 2. Select a **Request Type**. Your request type determines which other fields appear in the support request.
 3. Complete the rest of the support request. 
@@ -106,11 +106,8 @@ To add a teammate to an existing support request, cc them when replying on the s
 
 :::
 
-## Book office hours in the Cloud UI
+## Book office hours
 
-If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines. Office hours are recommended if:
+If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hours meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines. 
 
-- You have questions about best practices for an action in Airflow or on Astro.
-- You have a feature request related to Astro or Airflow.
-
-To book an office hour meeting, open the Cloud UI and click **Help** > **Book Office Hours**. Use the provided Calendly form to schedule a 30-minute office hour meeting. In the form, provide details about the new issues and questions that you want to discuss during the meeting.
+For more information about booking an office hour meeting, see [Book an office hours appointment](office-hours.md#book-an-office-hours-appointment).

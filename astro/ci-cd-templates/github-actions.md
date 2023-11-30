@@ -29,9 +29,14 @@ To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.m
 
 Each CI/CD template implementation might have additional requirements.
 
-:::info
+:::caution
 
-If you use a self-hosted runner for GitHub Actions and you're using a Workspace or Organization API token that has access to more than one Deployment, ensure that you specify `deployment-id` in your action as shown in the following templates. This reduces the risk of accidentally deploying to the wrong Deployment.
+If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) to execute jobs from GitHub Actions, the Astro CLI's `config.yaml` file, which stores default deploy details, might be shared across your organization and hence multiple CI/CD pipelines. To reduce the risk of accidentally deploying to the wrong Deployment, ensure the following:
+
+- Add `ASTRO_API_TOKEN` to your repository and include a check in your GitHub workflow to verify that it exists. 
+- Use Deployment API tokens, which are scoped only to one Deployment, instead of Workspace or Organization API tokens.
+- Specify `deployment-id` or `deployment-name` in your action. For example, `astro deploy <deployment-id>` or `astro deploy -n <deployment-name>`.
+- Add the command `astro logout` at the end of your workflow to ensure that your authentication token is cleared from the `config.yaml` file.
 
 :::
 
@@ -75,7 +80,8 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
         steps:
         - name: Deploy to Astro
           uses: astronomer/deploy-action@v0.2
-          deployment-id: <your-deployment-id>
+          with:
+            deployment-id: <your-deployment-id>
     ```
 
 </TabItem>
@@ -571,8 +577,7 @@ If you need guidance configuring a CI/CD pipeline for a more complex use case in
 
 :::
 
+
 </TabItem>
 
 </Tabs>
-
-

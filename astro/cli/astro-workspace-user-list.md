@@ -2,25 +2,26 @@
 sidebar_label: "astro workspace user list"
 title: "astro workspace user list"
 id: astro-workspace-user-list
-description: Reference documentation for astro workspace user list.
+description: List Workspace users.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::info  
+:::info
 
-The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts. 
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts.
 
 :::
 
 <Tabs
-    defaultValue="astro"
-    values={[
-        {label: 'Astro', value: 'astro'},
-        {label: 'Software', value: 'software'},
-    ]}>
+defaultValue="astro"
+values={[
+{label: 'Astro', value: 'astro'},
+{label: 'Software', value: 'software'},
+]}>
 <TabItem value="astro">
 
 List all users with access to your current Workspace.
@@ -30,6 +31,16 @@ List all users with access to your current Workspace.
 ```sh
 astro workspace user list
 ```
+
+## Output
+
+| Output           | Description                                                                                                                                                                | Data Type                     |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `FULLNAME`       | The full name of the user.                                                                                                                                                 | String                        |
+| `EMAIL`          | The email address associated with the user account.                                                                                                                        | String                        |
+| `ID`             | The user ID.                                                                                                                                                               | String                        |
+| `WORKSPACE ROLE` | The level of permissions granted to the user in this Workspace. Possible values can be `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. | String                        |
+| `CREATE DATE`    | The date the user profile was created.                                                                                                                                     | Date (`YYYY-MM-DDTHH:MM:SSZ`) |
 
 ## Related commands
 
@@ -50,14 +61,13 @@ astro workspace user list
 
 ## Options
 
-| Option           | Description                                                                                                                                             | Possible Values        |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| Option           | Description                                                                                                                                                     | Possible Values        |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
 | `--workspace-id` | The Workspace for which you want to list users. Specify this flag if you want to search for users in a Workspace that is different than your current Workspace. | Any valid Workspace ID |
 | `--email`        | The email address for the user you're searching for.                                                                                                            | Any string             |
-| `--name`         | The name of the user to search for.                                                                                                                     | Any string             |
-| `--paginated `   | Paginate the list of users. If `--page-size` is not specified, the default page size is 20.                                                             | None                   |
-| `--page-size`    | The page size for paginated lists.                                                                                                                      | Any integer            |
-
+| `--name`         | The name of the user to search for.                                                                                                                             | Any string             |
+| `--paginated `   | Paginate the list of users. If `--page-size` is not specified, the default page size is 20.                                                                     | None                   |
+| `--page-size`    | The page size for paginated lists.                                                                                                                              | Any integer            |
 
 ## Related documentation
 
