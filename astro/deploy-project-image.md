@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Deploy an image'
+sidebar_label: 'Deploy a project image'
 title: 'Deploy an Astro project as an image'
 id: deploy-project-image
 description: Deploy a complete Astro project to a Deployment as a Docker image.
@@ -88,12 +88,12 @@ Your Deployment uses the following components to process your code deploy:
 
 - A proprietary operator for deploying Docker images to your Airflow containers
 - A sidecar for downloading DAGs attached to each Airflow component container
-- A Blob Storage container hosted by Astronomer
+- A blob storage container hosted by Astronomer
   
 When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your project as an image to an Astronomer-hosted Docker registry. The proprietary operator pulls the images from a Docker registry, then updates the running image for all Airflow containers in your Deployment. DAG changes are deployed through a separate and simultaneous process:
 
-- The Astro CLI uploads your `dags` folder to the Deployment's Azure Blob Storage.
-- The DAG downloader sidecars download the new DAGs from Azure Blob Storage.
+- The Astro CLI uploads your `dags` folder to the Deployment's blob storage.
+- The DAG downloader sidecars download the new DAGs from blob storage.
 
 :::info
 
@@ -103,65 +103,22 @@ This process is different if your Deployment has DAG-only deploys disabled, whic
 
 Use the following diagram to understand the relationship between Astronomer, your local machine, and your Deployment.  
 
-```mermaid
-flowchart BT;
-classDef subgraph_padding fill:none,stroke:none
-classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
-    subgraph AstroCLI[Astro CLI]
-    subgraph subgraph_padding1 [ ]
-    id10
-    id1
-    end
-    end
-    subgraph ControlPlane[Control plane]
-    id9[(Azure blob storage)]:::astro
-    id2[Astro API]:::astro
-    id4[(Docker registry)]:::astro
-    end
-    subgraph DataPlane ["Data plane"]
-    subgraph subgraph_padding3 [ ]
-    id5(("Image deploy operator")):::astro
-    subgraph Deployment ["Deployment"]
-    subgraph subgraph_padding2 [ ]
-    id6["Airflow webserver </br> with DAG downloader"]:::astro
-    id7["Airflow scheduler </br> with DAG downloader"]:::astro
-    id8["Airflow workers </br> with DAG downloader"]:::astro
-    end
-    end
-    end
-    end
-    id1["Project image </br> excluding 'dags'"]:::astro-->|API request to <br/>update Docker image| id2;
-    id10["'dags' folder"]:::astro-->|Upload DAGs|id9
-    id10-->|Retrieve Azure blob </br> storage URL and token|id2
-    id1-->|Docker push| id4
-    id4-->|Pull image|id5
-    id5-->id6 & id7 & id8
-    id5-->|Check for new images and </br> DAGs to download|id2
-    id9-->id6 & id7 & id8
-    class subgraph_padding3 subgraph_padding
-    class subgraph_padding2 subgraph_padding
-    class subgraph_padding1 subgraph_padding
-    linkStyle 0,1,2,3,4,5,6,7,8,9,10,11 stroke:#7f7f7f,stroke-width:3px
-    style ControlPlane fill:#bfeaff,stroke:#333,stroke-width:2px
-    style DataPlane fill:#bfeaff,stroke:#333,stroke-width:2px
-    style AstroCLI fill:#bfeaff,stroke:#333,stroke-width:2px
-    style Deployment fill:#bfeaff,stroke:#333,stroke-width:2px
-```
+![A diagram showing how different Astro CLI commands move your files from your local machine to a Deployment on Astro](/img/docs/deploy-diagram.png)
 
-### Downtime after a code deploy
+### How Deployments handle code deploys
 
-After Astro receives the deploy, it gracefully terminates all containers except for the Airflow webserver and Celery workers that are currently running tasks. All new containers will run your new code.
+After a Deployment receives the deploy, Astro gracefully terminates all of its containers except for the Airflow webserver and any Celery workers or Kubernetes worker Pods that are currently running tasks. All new workers run your new code.
 
 If you deploy code to a Deployment that is running a previous version of your code, then the following happens:
 
-- Tasks that are `running` will continue to execute on existing Celery workers and will not be interrupted unless the task does not complete within 24 hours of the code deploy.
-- One or more new worker(s) will be created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
+- Tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the code deploy.
+- One or more new workers are created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
 
-    These new workers will execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` will continue to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they will both be scheduled on new Celery workers running your latest code.
+    These new workers execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` continues to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they are both scheduled on new Celery workers running your latest code.
 
     This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
 
-Astronomer sets a grace period of 24 hours for all workers to allow running tasks to continue executing. This grace period is not configurable. If a task does not complete within 24 hours, its worker will be terminated. Airflow will mark the task as a [zombie](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks) and it will retry according to the task's retry policy. This is to ensure that our team can reliably upgrade and maintain Astro as a service.
+Astronomer sets a grace period of 24 hours for all workers to allow running tasks to continue executing. This grace period is not configurable. If a task does not complete within 24 hours, its worker is terminated. Airflow marks the task as a [zombie](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks) and it retries according to the task's retry policy. This is to ensure that our team can reliably upgrade and maintain Astro as a service.
 
 :::tip
 
