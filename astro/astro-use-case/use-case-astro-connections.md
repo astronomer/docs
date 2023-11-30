@@ -17,10 +17,24 @@ This use case walks you through setting up a branch-based deployment workflow wi
 Before trying this example, make sure you have:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- An [Astro account](https://www.astronomer.io/try-astro/) with two [Astro Deployments](https://docs.astronomer.io/astro/create-deployment).
+- An [Astro account](https://www.astronomer.io/try-astro/) with two [Astro Deployments](https://docs.astronomer.io/astro/create-deployment). 
 - A [GitHub account](https://github.com/).
-- An account in a SQL-based data warehouse with two distinct databases: one for development (`CONN_DEMO_DEV`), one for production data (`CONN_DEMO_PROD`), each containing an empty schema called `COOKIES`. This example uses a Snowflake account for which a [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available.
-- An [AWS account](https://aws.amazon.com/). A [free tier](https://aws.amazon.com/free/) is available and sufficient for this project.
+- An account in a SQL-based data warehouse. This example uses a Snowflake account for which a [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. 
+- An account in an object storage solution. This example uses an [AWS account](https://aws.amazon.com/). A [free tier](https://aws.amazon.com/free/) is available and sufficient for this project.
+
+If you want to use other data warehouse or object storage solutions than Snowflake and AWS, you will need to adapt the example code accordingly and add the relevant [Airflow provider](https://registry.astronomer.io/providers) packages to the `requirements.txt` file of the Astro project.
+
+:::info
+
+In this example we used the following names for the Deployments and databases. You can use different names, but make sure to update the example code accordingly.
+
+- `conn-management-demo-dev`: The development Astro Deployment.
+- `conn-management-demo-prod`: The production Astro Deployment.
+- `CONN_DEMO_DEV`: The development Snowflake database.
+- `CONN_DEMO_PROD`: The production Snowflake database.
+- `COOKIES`: An empty schema present in the both Snowflake databases.
+
+:::
 
 ## Part 1: Set up Airflow connections on Astro
 
@@ -46,9 +60,15 @@ First, we create 2 Airflow connections in the Astro Environment Manager for both
 
     ![Screenshot of the Astro Environment Manager with the `snowflake_conn_management_demo`](/img/docs/use-case-astro-connections_conn_all_deployments.png)
 
+:::info
+
+Note that to be able to use a connection defined in the Astro Environment manager in a Deployment, the relevant [Airflow provider](https://registry.astronomer.io/providers) package needs to be installed in that deployment.
+
+:::
+
 ### Step 2: Override a connection field for a specific deployment
 
-Currently the `snowflake_conn_management_demo` connection points to the development database for all Deployments in your workspace. In this step, we override the `DATABASE` field for the production deployment to point to the production database.
+Currently the `snowflake_conn_management_demo` connection points to the development database for all Deployments in your workspace. In this step, we override the `DATABASE` field for the production deployment to point to the production database. This feature allow you to define a single connection with one connection ID that is available to multiple Deployments, but optionally with different connection fields. Enabling you to use the same connection ID in your DAGs without having to change the code when deploying to different environments.
 
 1. In the Astro Environment Manager, click on the `snowflake_conn_management_demo` connection to open the connection details. You see a list of all Deployments this connection is available to. Since we linked this connection to all Deployments in the workspace, you should see all Deployments of this workspace listed. Click on the **Edit** button for the `conn-management-demo-prod` deployment to override fields for this deployment.
 
@@ -161,7 +181,11 @@ Now that the workflow is configured, you can trigger it by pushing changes to th
 
 4. Create a [pull request](https://docs.github.com/en/pull-requests) from your `dev` to your `main` branch and merge it. This triggers the workflow to deploy the code to the `conn-management-demo-prod` Deployment.
 
-## Part 3: Run the DAGs on Astro
+## Part 3: Run the DAGs
+
+Lastly we run the DAGs without needing to change any code or set up any connections in the Airflow UI.
+
+### Step 8: Run the DAGs on Astro
 
 The GitHub Actions workflow triggered in [Step 7](#step-7-trigger-the-branch-based-deploy-workflow) deploys the Astro project to the `conn-management-demo-dev` and `conn-management-demo-prod` Deployments. Now you can run the DAGs on Astro.
 
@@ -178,6 +202,55 @@ The GitHub Actions workflow triggered in [Step 7](#step-7-trigger-the-branch-bas
     ![Screenshot of the Snowflake UI showing the COOKIES_RECIPE table in the CONN_DEMO_DEV database.](/img/docs/use-case-astro-connections_snowflake.png)
 
 4. Repeat the steps above for the `conn-management-demo-prod` deployment. Due to the override defined in [Step 2](#step-2-override-a-connection-field-for-a-specific-deployment), the `snowflake_conn_management_demo` connection points to the `CONN_DEMO_PROD` database in Snowflake, where you can view the `COOKIES_RECIPES` table with the ingested data.
+
+### Step 9: (Optional) Run the DAGs locally
+
+You can use the connections defined in the Astro Environment Manager when running the DAGs locally with the Astro CLI. This feature allows you to enable data professionals in your organization to use default connections without having to share connection configuration details or secrets. See also [Import and export Airflow connections and variables](https://docs.astronomer.io/astro/import-export-connections-variables).
+
+1. In the Astro UI navigate to the `ORGANIZATION SETTINGS` of your organization and click **Edit Details**. Click the toggle to enable `ENVIRONMENT SECRETS FETCHING` and **Update Organization** so save your changes.
+
+    ![Screenshot of the Astro UI showing the organization settings Edit Details button.](/img/docs/use-case-astro-connections_organization_edit_2.png)
+
+2. Make sure you are logged into your Astro account with the Astro CLI by running the following command and authenticating with your Astro credentials:
+
+    ```sh
+    astro login
+    ```
+
+3. Enable local development access to connections created in the Astro Environment Manager by running the following command:
+
+    ```sh
+    astro config set -g disable_env_objects false
+    ```
+
+4. Find your workspace id by running:
+
+    ```sh 
+    astro workspace list
+    ```
+
+5. Start a local Airflow instance with the set of the connections defined for your workspace by running the following command:
+
+    ```sh
+    astro dev start --workspace-id [workspace-id]
+    ```
+
+    You can view which connections were fetched from the Cloud in the console logs.
+
+    ```text
+    Airflow is starting up!
+    Added Connection: snowflake_conn_management_demo
+    Added Connection: aws_conn_management_demo
+
+    Project is running! All components are now available.
+
+    Airflow Webserver: http://localhost:8080
+    Postgres Database: localhost:5432/postgres
+    The default Airflow UI credentials are: admin:admin
+    The default Postgres DB credentials are: postgres:postgres
+    ```
+
+5. Run the `collect_cookie_recipes` DAG locally to confirm the connections were imported correctly.
 
 Congratulations! You have successfully set up Airflow connections on Astro and created a branch-based CI/CD workflow with GitHub Actions. You can now use this workflow as a template for your own projects.
 

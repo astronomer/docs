@@ -359,7 +359,7 @@ module.exports = {
             description: 'Learn about defining connections on Astro.'
           },
           items: [
-            'astro-use-case/best-practices-astro-connections',
+            'manage-connections-variables',
             'astro-use-case/use-case-astro-connections',
           ],
         }

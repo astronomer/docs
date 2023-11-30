@@ -81,6 +81,12 @@ Astro includes connection management system that behaves like you are using an A
 - You need`WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` user permissions.
 - You can't programmatically import connections to the Environment Manager from your local environment. 
 
+:::info
+
+To see how you can use connections set in the Astro Cloud UI Environment Manager in a best practice branch-based Deployment set up, see the [Manage Astro connections in branch-based deploy workflows](astro-use-case/use-case-astro-connections) use case.
+
+:::
+
 ### Airflow UI
 
 You can create Airflow connections and variables is through the Airflow UI. This experience is the same for both local Airflow environments and Astro Deployments. Astronomer recommends this method if you're just getting started with Airflow, you want to get your DAGs running quickly, or if you want to export connections in a URI/JSON format.
