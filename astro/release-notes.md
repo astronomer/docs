@@ -21,7 +21,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## November 29, 2023
+## November 30, 2023
 
 ### Support for Microsoft Entra Workload ID
 
