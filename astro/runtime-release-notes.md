@@ -32,6 +32,8 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 ### Bug fixes
 
 - Upgraded `astronomer-providers` to 1.18.3. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1183-2023-11-29) for a complete list of changes.
+- Fixed an issue where logging defaulted to `latin-1` encoding, causing a `UnicodeEncodeError`. The default encoding is now set to `utf-8`.
+- Fixed S3 logging read issues to now use regional endpoint instead of the legacy global endpoint, resolving compatibility problems with 2.x AWS clusters in Astro.
 
 ## Astro Runtime 9.5.0
 
