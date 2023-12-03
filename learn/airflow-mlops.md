@@ -85,7 +85,7 @@ There is a set of specific Airflow features that can help you implement MLOps be
 
 - [Dynamic task mapping](dynamic-tasks.md): In Airflow tasks and task groups can be mapped dynamically at runtime. This allows you to run similar operations in parallel without knowing in advance how many operations will be run in any given DAGrun. For example you could dynamically run a set of model training tasks in parallel, each with different hyperparameters.
 
-    ![DAG with a dynamically mapped task group training and evaluating a model with different dynamically changing sets of hyperparameters, then selecting and deploying hte best model.](/img/guides/airflow-mlops_dynamic_task.png)
+    ![DAG with a dynamically mapped task group training and evaluating a model with different dynamically changing sets of hyperparameters, then selecting and deploying the best model.](/img/guides/airflow-mlops_dynamic_task.png)
 
 - [Branching](airflow-branch-operator.md): Airflow allows you to branch your DAG based on the outcome of a task. This allows you to create different paths in your DAG based on the outcome of a task. For example you could branch your DAG based on the performance of a model on a test set and only deploy the model if it performs above a certain threshold.
 
