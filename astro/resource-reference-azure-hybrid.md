@@ -72,8 +72,18 @@ The following Azure Database for PostgreSQL instance types are supported on Astr
 
 - Standard_D2ds_v4 (2 CPU, 8 GiB MEM)
 - Standard_D4ds_v4 (4 CPU, 16 GiB MEM)
+- Standard_D8ds_v4 (8 CPU, 32 GiB MEM)
+- Standard_D16ds_v4 (16 CPU, 64 GiB MEM)
+- Standard_D32ds_v4 (32 CPU, 128 GiB MEM)
+- Standard_D48ds_v4 (48 CPU, 192 GiB MEM)
+- Standard_D64ds_v4 (64 CPU, 256 GiB MEM)
 - Standard_E2ds_v4 (2 CPU, 16 GiB MEM)
 - Standard_E4ds_v4 (4 CPU, 32 GiB MEM)
+- Standard_E8ds_v4 (8 CPU, 64 GiB MEM)
+- Standard_E16ds_v4 (16 CPU, 128 GiB MEM)
+- Standard_E20ds_v4 (20 CPU, 160 GiB MEM)
+- Standard_E32ds_v4 (32 CPU, 256 GiB MEM)
+- Standard_E48ds_v4 (48 CPU, 384 GiB MEM)
 
 For detailed information about each instance type, see the [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/). If you're interested in an Azure Database for PostgreSQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
