@@ -621,29 +621,29 @@ The unstructured data task group extracts twitter comments, reviews, and custome
 
         return _training_table, _comment_table, _calls_table
 ```
-- Task Group `Unstructured_data` : The unstructured_data task group is designed to process various forms of unstructured data, including customer call recordings, Twitter comments, and training data for sentiment analysis. This task group is divided into three main task subgroups: load_unstructured_data, transcribe_calls, and generate_embeddings.
+- Task Group `unstructured_data` : The `unstructured_data` task group processes various forms of unstructured data, including customer call recordings, Twitter comments, and training data for sentiment analysis. This task group is divided into three main task subgroups: `load_unstructured_data`, `transcribe_calls`, and `generate_embeddings`.
 
-- Task Group `load_unstructured_data`: This subgroup focuses on loading unstructured data from different sources.
+  - Task Group `load_unstructured_data`: This subgroup focuses on loading unstructured data from different sources.
 
 - Task `load_support_calls_to_stage`: This task downloads and extracts a ZIP file containing customer call recordings from a specified URI. The task then uploads the extracted files to a specified Snowflake stage for additional processing.
 
-  - Task `load_twitter_comments`: Loads Twitter comments from a given URI in Parquet format and stores them in a Snowflake table named STG_TWITTER_COMMENTS.
+  - Task `load_twitter_comments`: Loads Twitter comments from a given URI in Parquet format and stores them in a Snowflake table named `STG_TWITTER_COMMENTS`.
 
-  - Task `load_comment_training`: Similar to the previous task, this one loads training data for comment analysis from a Parquet file located at a specified URI. The data is stored in a Snowflake table named STG_COMMENT_TRAINING.
+  - Task `load_comment_training`: Similar to the `load_twitter_comments` task, this one loads training data for comment analysis from a Parquet file located at a specified URI. The data is stored in a Snowflake table named `STG_COMMENT_TRAINING`.
 
   - Task `transcribe_calls`: After loading the call recordings, this task transcribes them using the Whisper model. It extracts audio files from the specified Snowflake stage, processes each file through the OpenAI Whisper model to generate transcripts, and then returns a dataframe containing customer IDs, relative paths of the recordings, and their transcriptions.
 
 - Task Group `generate_embeddings`: The final subgroup focuses on generating embeddings for different data types using OpenAI's models before importing them into the Weaviate vector database.
 
-  - Task `generate_training_embeddings`: Processes the training data loaded earlier to create embeddings using an OpenAI model. The embeddings are then used for sentiment analysis.
+  - Task `generate_training_embeddings`: Processes the training data loaded earlier in the `load_comment_training` task to create embeddings using an OpenAI model. The embeddings are then used for sentiment analysis.
     
-  - Task `generate_twitter_embeddings`: Similar to the previous task, but focuses on Twitter comments. It transforms the loaded Twitter data and generates embeddings for analyzing customer sentiment.
+  - Task `generate_twitter_embeddings`: Similar to the `generate_training_embeddings` task, but focuses on Twitter comments. It transforms the loaded Twitter data and generates embeddings for analyzing customer sentiment.
     
   - Task `generate_call_embeddings`: Processes the transcribed call data to generate embeddings. These embeddings provide insights into overall sentiment expressed during the calls.
 
 ### Model training
 
-After the data has been prepared, it is split into testing and training datasets, before being used to train a sentiment-classifier model to predict customer life time value based on their sentiment. Finally, the trained model is used to generate predictions for customers life time value based on their sentiment. 
+After you prepared the structured and unstructured data, split it into testing and training datasets, before using it to train a sentiment-classifier model that predicts customer life time value based on their sentiment. Finally, you can use the trained model to generate predictions for customers life time value based on their sentiment. 
 
 ```python
 @task.snowpark_virtualenv(requirements=['lightgbm==3.3.5', 'scikit-learn==1.2.2', 'astro_provider_snowflake'])
@@ -688,7 +688,7 @@ After the data has been prepared, it is split into testing and training datasets
         return {'name': model_id.get_name(), 'version':model_id.get_version()}
 ```
 
-- Task `train_sentiment_classifier`: After the structured and unstructured data has been extracted, transformed/transcribed, and loaded, it is used to train a sentiment classifier model in Snowpark.  The embedding vectors in Weaviate along with a sentiment-labeled dataset allow you to train a very simple classifier.  While model tuning and optimization are outside the scope of this demo, those steps could also be performed in parallel tasks. After the model has been trained, it is registered into the Snowflake model registry so that it can be used to generate sentiment predictions. One of the biggest advantages of this approach is that you can run your model on the data within Snowpark. It is not necessary to extract the data to cloud object storage for inference.  
+- Task `train_sentiment_classifier`: After the structured and unstructured data has been extracted, transformed/transcribed, and loaded in the previous`unstructured_data` and `structured_data` task groups, it is used in this task to train a sentiment classifier model within Snowpark. The embedding vectors in Weaviate combined with a sentiment-labeled dataset allow the DAG to train a very simple classifier model. After training the model, the DAG registers it into the Snowflake model registry so that it can be used to generate sentiment predictions later in the DAG. One of the biggest advantages of this approach is that you can run your model on the data within Snowpark, without needing to extract data to cloud object storage for inference.  
 
 ```python
     @task_group()
