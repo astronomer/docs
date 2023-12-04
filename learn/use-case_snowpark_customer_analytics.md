@@ -13,7 +13,7 @@ sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 * feature engineering primitives similar to scikit-learn, such as LabelEncoder, OneHotEncoder, and support for training and deploying [certain model types](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling#snowpark-ml-modeling-classes)
 * deployments as user-defined functions (UDFs)
 
-This [use case](https://docs.astronomer.io/learn/airflow-snowpark) demonstrates how to use Apache Airflow to orchestrate a machine learning pipeline leveraging the Snowpark provider and Snowpark ML for feature engineering and model tracking. While Snowpark ML has its own support for models similar to scikit-learn this code demonstrates a "bring-your-own" model approach showing the use of open-source scikit-learn along with Snowpark ML model registry and model serving in an Airflow task rather than Snowpark user-defined function (UDF).  
+This [use case](https://docs.astronomer.io/learn/airflow-snowpark) demonstrates how to use Apache Airflow to orchestrate a machine learning pipeline with the Snowpark provider and Snowpark ML for feature engineering and model tracking. While Snowpark ML has its own support for models similar to scikit-learn, this code demonstrates a "bring-your-own" model approach. Instead of working with a Snowpark user-defined function (UDF),  this code shows how to use open-source scikit-learn along with both the Snowpark ML model registry and model serving in an Airflow task.  
 
 ![A screenshot of the Customer Analytics DAG](/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_ca_dag_2.png)
 
