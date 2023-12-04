@@ -26,20 +26,38 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
+## Trigger an image-only deploy
+
+Even if you primarily use DAG-only deploys, you still need to occasionally make image deploys to update your Astro runtime version or install dependencies. However, depending on your CI/CD strategy, triggering a full project deploy with `astro deploy` might affect your existing DAGs.
+
+When you trigger an image-only deploy, it builds every non-DAG file in your Astro project as a Docker image and deploys the image to all Airflow components in a Deployment. This includes your `Dockerfile`, plugins, and all Python and OS-level packages. DAGs are not deployed, and your Deployment DAG folder and DAG bundle version are not affected. Image-only deploys are only available when you have DAGs-only deploys enabled.
+
+Run the following command to build and deploy only your non-DAG files to a Deployment:
+
+```sh
+astro deploy --image
+```
+
+:::tip
+
+If you use [prebuilt Docker images](deploy-project-image.md#deploy-a-prebuilt-docker-image) for your image deploys, you can use both the `--image-name` and `--image` flags to update your image without updating your `dags` folder.
+
+:::
+
 ## Enable or disable DAG-only deploys on a Deployment
 
-If you have Workspace Owner permissions, you can enable or disable DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy: 
+If you have Workspace Owner permissions, you can enable or disable DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy:
 
 - Any changes to your DAG code are deployed as part of your Astro project Docker image.
 - Your Deployment no longer includes Azure Blob Storage or DAG downloading sidecars.
-- In the Cloud UI, your Deployment **DAG bundle version** will not update when you deploy code. 
+- In the Cloud UI, your Deployment **DAG bundle version** will not update when you deploy code.
 
-To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
+To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 Before you enable or disable DAG-only deploys on a Deployment, ensure the following:
 
 - You have access to the latest version of your Deployment's Astro project.
-- You can update your Deployment using the Astro CLI. 
+- You can update your Deployment using the Astro CLI.
 
 :::warning
 
