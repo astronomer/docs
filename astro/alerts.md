@@ -19,8 +19,6 @@ Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLi
 
 :::
 
-To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
-
 ## Prerequisites
 
 - An [Astro project](cli/develop-project.md).
@@ -30,6 +28,12 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 <!-- Sensitive header used in product - do not change without a redirect-->
 
 ## Step 1: Configure your communication channel
+
+:::info
+
+To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
+
+:::
 
 <Tabs
     defaultValue="Slack"
