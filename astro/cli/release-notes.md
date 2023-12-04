@@ -23,7 +23,7 @@ Release date: December 4, 2023
 
 ### New command to deploy only images
 
-You can use the new `astro deploy --image` command to deploy only the image to you Deployment. Previously, you could either complete a full code deploy with `astro deploy` or only update your DAGs with a DAGs-only deploy. See [Deploy an image]() for more information.
+You can use the new `astro deploy --image` command to deploy only the image to you Deployment. Previously, you could either complete a full code deploy with `astro deploy` or only update your DAGs with a DAGs-only deploy. See [Trigger an image-only deploy](https://docs.astronomer.io/astro/deploy-dags#trigger-an-image-only-deploy) for more information.
 
 ### Bug fixes
 
