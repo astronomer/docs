@@ -257,7 +257,7 @@ The first tasks in the the set-up task group create all the resources necessary 
 
 ### Structured data ingestion and transformation
 
-The structured data contains various data points about customers, their purchasing histories, and lifetime value, all of which are transformed using Snowpark to be easily joinable with the unstructured data.
+The structured data contains various data points about customers, such as their purchasing histories and lifetime value, all of which are transformed using Snowpark so you can easily join it with the unstructured data.
 
 ```python
     @task_group()
