@@ -1,6 +1,6 @@
 ---
 title: "ML for Customer Analytics with Airflow, Snowpark, and Weaviate"
-description: "Use Airflow, Snowpark and Weaviate to use Customer sentiment to predict LTV"
+description: "Use Airflow, Snowpark, and Weaviate to use Customer sentiment to predict LTV"
 id: use-case-ml-airflow-snowpark-weaviate
 sidebar_label: "ML with Snowpark and Airflow"
 sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
