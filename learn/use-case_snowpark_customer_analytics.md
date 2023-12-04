@@ -247,7 +247,7 @@ The first tasks in the the set-up task group create all the resources necessary 
         return _snowpark_model_registry, _restore_weaviate
 ```
 
-- Task `create_snowflake_objects`: Our first task creates Snowflake objects (databases, schemas, stages, etc.) prior to running any tasks, since we are assuming you are starting with a fresh trial account. This is implemented using the new setup/teardown task feature, and has a corresponding clean up task at the end of the DAG. This means that no matter what, temp tables used for this project will be deleted after usage to prevent unnecessary consumption, mimicking how you might use them in a production setting! 
+- Task `create_snowflake_objects`: The first task creates Snowflake objects (like databases, schemas, and stages) prior to running any tasks, since this demonstrations assumes you started with a fresh trial account. The task creation uses the Airflow setup/teardown task feature, and has a corresponding clean up task at the end of the DAG. This means that no matter what, Airflow deletes temp tables used for this project after usage to prevent unnecessary consumption, mimicking how you might use them in a production setting! 
 
 - Task `download_weaviate_backup`: In order to speed up the demo process, the data has already been ingested into Weaviate and vectorized.  The data was then backed up and stored in the cloud for easy restore. This task will download the backup.zip and make it available in a docker mounted filesystem for the `restore_weaviate` task.
 
