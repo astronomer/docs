@@ -47,7 +47,6 @@ You can host Astro Hybrid clusters in the following Azure regions:
 | `canadacentral`    | Canada Central     |
 | `centralindia`     | Central India      |
 | `centralus`        | Central US         |
-| `eastasia`         | East Asia          |
 | `eastus`           | East US            |
 | `eastus2`          | East US 2          |
 | `francecentral`    | France Central     |
