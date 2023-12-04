@@ -31,14 +31,15 @@ The following setups assume that you are using the default Astronomer [implicit 
 To let users authenticate to Astronomer with a local username and password, follow the steps below.
 
 1. Enable Local Auth in your `config.yaml` file:
-```yaml
-astronomer:
-  houston:
-    config:
-      auth:
-        local:
-          enabled: true
-```
+  
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          auth:
+            local:
+              enabled: true
+    ```
 
 2. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
@@ -188,6 +189,7 @@ astronomer:
         github:
           enabled: false
 ```
+
 Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
 ### Okta
@@ -334,17 +336,20 @@ This setup must be completed only during a scheduled maintenance window. There s
 
 To use a custom Oauth authorization code flow:
 
-1. In your `config.yaml` file, set the `astronomer.houston.auth.openidConnect.flow` value to `"code"`:
+1. In your `config.yaml` file, set the `astronomer.houston.config.auth.openidConnect.flow` value to `"code"`:
 
     ```yaml
-    auth:
-      # Local database (user/pass) configuration.
-      local:
-        enabled: true
+    astronomer:
+      houston:
+        config:
+          auth:
+          # Local database (user/pass) configuration.
+            local:
+              enabled: true
 
-      openidConnect:
-        # Valid values are "code" and "implicit"
-        flow: "code"
+          openidConnect:
+          # Valid values are "code" and "implicit"
+          flow: "code"
     ```
 
 2. Configure the section of your `config.yaml` file specific to your identity provider with each of the following values:
@@ -357,15 +362,19 @@ To use a custom Oauth authorization code flow:
     For example, a custom configuration of Okta might look like the following.
 
     ```yaml
-        okta:
-          enabled: true
-          clientId: ffhsdf78f734h2fsd
-          clientSecret: FSDFSLDFJELLGJLSDFGJL42353425
-          # URL works only when IdP group imports are disabled. To import IdP groups from Okta to Software,
-          # use "https://<MYIdP>.okta.com/oauth2/default/.well-known/openid-configuration" instead
-          discoveryUrl: "https://<MYIdP>.okta.com/.well-known/openid-configuration"
-          authUrlParams:
-            audience: "GYHWEYHTHR443fFEW"
+    astronomer:
+      houston:
+        config:
+          auth:
+            okta:
+              enabled: true
+              clientId: ffhsdf78f734h2fsd
+              clientSecret: FSDFSLDFJELLGJLSDFGJL42353425
+              # URL works only when IdP group imports are disabled. To import IdP groups from Okta to Software,
+              # use "https://<MYIdP>.okta.com/oauth2/default/.well-known/openid-configuration" instead
+              discoveryUrl: "https://<MYIdP>.okta.com/.well-known/openid-configuration"
+              authUrlParams:
+                audience: "GYHWEYHTHR443fFEW"
     ```
 
     3. Push your configuration changes to your platform as described in [Apply a config change](apply-platform-config.md).
@@ -469,11 +478,12 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
 
     ```yaml
     astronomer:
-        houston:
-            secret:
-             - envName: "SCIM_AUTH_CODE_OKTA"
-               secretName: "okta-provisioning-secret"
-               secretKey: "okta_provisioning_account_secret"
+      houston:
+        config:
+          secret:
+            - envName: "SCIM_AUTH_CODE_OKTA"
+              secretName: "okta-provisioning-secret"
+              secretKey: "okta_provisioning_account_secret"
     ```
 
 14. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
@@ -508,11 +518,12 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
     ```yaml
     astronomer:
-        houston:
-            secret:
-             - envName: "SCIM_AUTH_CODE_MICROSOFT"
-               secretName: "azure-provisioning-secret"
-               secretKey: "azure_provisioning_secret"
+      houston:
+        config:
+          secret:
+            - envName: "SCIM_AUTH_CODE_MICROSOFT"
+              secretName: "azure-provisioning-secret"
+              secretKey: "azure_provisioning_secret"
     ```
 
 3. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
@@ -583,11 +594,12 @@ This setup is primarily used for encrypting the required secrets for [configurin
 
     ```yaml
     astronomer:
-        houston:
-            secret:
-             - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
-               secretName: "okta-secret"
-               secretKey: "okta_client_secret"
+      houston:
+        config:
+          secret:
+            - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
+              secretName: "okta-secret"
+              secretKey: "okta_client_secret"
     ```
 
 4. Save and push your changes. See [Apply a config change](apply-platform-config.md).
