@@ -29,7 +29,7 @@ You can now use [Microsoft Entra Workload ID](https://www.microsoft.com/en-us/se
 
 ### Bug fixes
 
-- Removed the ability to create Hybrid Azure clusters in `eastasia` due to a lack of support for workload identity features.
+- Removed the ability to create Hybrid Azure clusters in `eastasia` because some workload identity features aren't supported in this region.
 
 ## November 16, 2023
 
