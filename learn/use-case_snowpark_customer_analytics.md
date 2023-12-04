@@ -30,8 +30,6 @@ This workflow includes:
 - Vector search with [Weaviate](https://weaviate.io/)
 - Sentiment classification with [LightGBM](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html)  
 - ML model management with [Snowflake ML](https://docs.snowflake.com/LIMITEDACCESS/snowflake-ml-modeling)
-  
-All of the above are presented in a [Streamlit](http://www.streamlit.io) application.  
 
 ## Before you start
 
