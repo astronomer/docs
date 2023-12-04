@@ -17,6 +17,18 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+## Astro CLI 1.20.2
+
+Release date: December 4, 2023
+
+### New command to deploy only images
+
+You can use the new `astro deploy --image` command to deploy only the image to you Deployment. Previously, you could either complete a full code deploy with `astro deploy` or only update your DAGs with a DAGs-only deploy. See [Deploy an image]() for more information.
+
+### Bug fixes
+
+- Fixed a bug so you can now use a deployment file to create a Kubernetes deployment with a custom worker queue.
+
 ## Astro CLI 1.20.1
 
 Release date: November 8, 2023
@@ -66,14 +78,14 @@ Release date: September 14, 2023
 
 ### Additional improvements
 
-- When you run `astro dev upgrade-test`, the generated HTML report for DAG tests now shows how many DAGs passed and failed the test. 
+- When you run `astro dev upgrade-test`, the generated HTML report for DAG tests now shows how many DAGs passed and failed the test.
 
-### Bug fixes 
+### Bug fixes
 
-- Fixed an issue where you couldn't create a Deployment on a dedicated cluster using a Deployment file and API token. 
+- Fixed an issue where you couldn't create a Deployment on a dedicated cluster using a Deployment file and API token.
 - Fixed an issue where the Deployment URL that appears after you run `astro deploy` was not formatted properly.
-- Fixed an issue where `astro dev upgrade-test` would occasionally output that it was testing an upgrade to the latest version of Astro Runtime, even if it wasn't. 
-- Fixed an issue where `astro dev upgrade-test` didn't produce an HTML report for DAG tests. 
+- Fixed an issue where `astro dev upgrade-test` would occasionally output that it was testing an upgrade to the latest version of Astro Runtime, even if it wasn't.
+- Fixed an issue where `astro dev upgrade-test` didn't produce an HTML report for DAG tests.
 
 ## Astro CLI 1.19.1
 
@@ -125,10 +137,10 @@ You can use the new `astro dev upgrade-test` command to anticipate and address p
 
 ### Additional improvements
 
-- You can now specify the `--description` flag with `astro deploy` to add a description for your deploy. You can use this description to let other users know why you made a deploy or what changes a deploy contains. 
-- You can now specify the `--role` flag with `astro organization team create/update` to update a Team's Organization-level role. 
+- You can now specify the `--description` flag with `astro deploy` to add a description for your deploy. You can use this description to let other users know why you made a deploy or what changes a deploy contains.
+- You can now specify the `--role` flag with `astro organization team create/update` to update a Team's Organization-level role.
 - You can now specify the `--execution-date` flag with `astro run` to trigger a DAG run for a specific execution date.
-- You can now specify the `--verbose` flag with `astro run` to stream all logs to your terminal after the DAG run triggers. 
+- You can now specify the `--verbose` flag with `astro run` to stream all logs to your terminal after the DAG run triggers.
 
 ### Bug fixes
 
@@ -169,19 +181,19 @@ The Astro registry contains DAGs and provider packages that are ready to use out
 
 ### Additional improvements
 
-- You can now create Deployments on AWS standard clusters. 
-- If you belong to only one Workspace, the Astro CLI now uses that Workspace by default for all commands. 
+- You can now create Deployments on AWS standard clusters.
+- If you belong to only one Workspace, the Astro CLI now uses that Workspace by default for all commands.
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where the Astro CLI could not retrieve the health status of a Deployment.
-- Fixed an issue where you could not set `worker_concurrency` to 0 in a Deployment file. 
+- Fixed an issue where you could not set `worker_concurrency` to 0 in a Deployment file.
 
 ## Astro CLI 1.16.2
 
 Release date: June 30, 2023
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where the `isHighAvailability` and `CICDEnforcement` fields in Deployment files were not processed correctly.
 
@@ -217,21 +229,21 @@ You can now manage [Workspace API tokens](workspace-api-tokens.md) using the fol
 - [`astro workspace token update`](cli/astro-workspace-token-update.md)
 - [`astro workspace token rotate`](cli/astro-workspace-token-rotate.md)
 - [`astro workspace token delete`](cli/astro-workspace-token-delete.md)
-  
+
 These commands can be used to manage API tokens as part of an automated workflow.
 
 ### Additional improvements
 
 - You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
-- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment. 
-- You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted. 
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment.
+- You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted.
 
 ## Astro CLI 1.15.1
 
 Release date: May 19, 2023
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where you could not create a Deployment on a standard Hosted cluster.
 
@@ -241,7 +253,7 @@ Release date: May 18, 2023
 
 ### New commands to manage Airflow resources on Deployments
 
-Use the following new Astro CLI commands to manage your Airflow variables, pools, connections, on Astro Deployments. These commands are particularly useful for automating the creation of new Deployments based on old ones, as you can now transfer all Airflow resources from a source Deployment to a target Deployment: 
+Use the following new Astro CLI commands to manage your Airflow variables, pools, connections, on Astro Deployments. These commands are particularly useful for automating the creation of new Deployments based on old ones, as you can now transfer all Airflow resources from a source Deployment to a target Deployment:
 
 - [`astro deployment connection list`](cli/astro-deployment-connection-list.md)
 - [`astro deployment connection create`](cli/astro-deployment-connection-create.md)
@@ -259,7 +271,7 @@ Use the following new Astro CLI commands to manage your Airflow variables, pools
 ### Additional improvements
 
 - You can now use the `--args` flag to specify pytest arguments to run with `astro dev pytest`. For example, you can run `astro dev pytest --args "-p pytest_cov"` to plugin the `pytest_cov` plugin with your pyests.
-- You can now use Organization API tokens to automate Astro CLI tokens. Specify the Organization API token using the environment variable `ASTRO_API_TOKEN` in the environment where you run the Astro CLI. 
+- You can now use Organization API tokens to automate Astro CLI tokens. Specify the Organization API token using the environment variable `ASTRO_API_TOKEN` in the environment where you run the Astro CLI.
 - You can now create a custom Docker/Podman compose file for your Astro project with the command `astro dev object export --compose`. After you modify the file, you can use it to start your project with `astro dev start --compose-file <compose-file-location>`.
 - You can now set `postgres.repository` and `postgres.tag` with `astro config set`. You can use these configurations to customize the postgres database used in your local Airflow environments.
 - The Astro CLI now automatically trims quotation marks from the beginning and end of environment variables being pushed to Astro.
@@ -268,7 +280,7 @@ Use the following new Astro CLI commands to manage your Airflow variables, pools
 ### Bug fixes
 
 - Fixed an issue were `astro deployment variable create/update` was not producing error when it failed to create an environment variable.
-- Fixed an issue were Podman deploys were failing if the user didn't have the Docker CLI installed. 
+- Fixed an issue were Podman deploys were failing if the user didn't have the Docker CLI installed.
 
 ## Astro CLI 1.14.1
 
@@ -312,7 +324,7 @@ The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use
 
 ### New flag `--clean-output` for Deployment commands
 
-You can now use the `-—clean-output` flag with the following commands to make sure that any output comes only from the command itself. 
+You can now use the `-—clean-output` flag with the following commands to make sure that any output comes only from the command itself.
 - `astro deployment inspect`
 - `astro deployment create`
 - `astro deployment update`
@@ -332,7 +344,7 @@ The new environment variable `ASTRO_HOME` allows you to change the directory whe
 
 Release date: March 22, 2023
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where you couldn't authenticate to the Astro from the Astro CLI using single sign-on (SSO).
 
@@ -349,14 +361,14 @@ Release date: March 22, 2023
     ```
 
 - When you trigger a DAG deploy to Astro, the CLI now includes the name of the DAG bundle version that it pushed. You can use this name to verify that your Deployment uses the correct version of your DAGs after a deploy.
-- If you add the environment variable `ASTRO_API_TOKEN=<workspace-api-token>` to your environment, the Astro CLI will use the specified Workspace API token to perform Workspace and Deployment actions without requiring you to log in. 
+- If you add the environment variable `ASTRO_API_TOKEN=<workspace-api-token>` to your environment, the Astro CLI will use the specified Workspace API token to perform Workspace and Deployment actions without requiring you to log in.
 - You can now disable [`astro run`](cli/astro-run.md) commands and exclude `astro-run-dag` from any images built by the CLI using the following command:
 
     ```sh
     astro config set disable_astro_run true
     ```
-  
-- In new Astro projects, `requirements.txt` now includes a commented list of the pre-installed provider packages on Astro Runtime. 
+
+- In new Astro projects, `requirements.txt` now includes a commented list of the pre-installed provider packages on Astro Runtime.
 
 ### Bug fixes
 
@@ -373,7 +385,7 @@ You can now configure the Astro CLI to run Airflow locally and deploy to Astro u
 
 To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](configure-cli.md#run-the-astro-cli-using-podman).
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where you couldn't run Astro CLI commands with a Deployment API key if you logged out of your personal account using `astro logout`.
 - Fixed an issue where you couldn't set the minimum worker count for a worker queue to zero.
@@ -388,7 +400,7 @@ Release date: February 2, 2023
 
 To help you manage users in your Organization, Astro CLI 1.10.0 includes the following new commands:
 
-- `astro organization user invite`: Invite a new user to your Astronomer Organization. 
+- `astro organization user invite`: Invite a new user to your Astronomer Organization.
 - `astro organization user update`: Update a user's Organization role.
 - `astro organization user list`: List all users in your Organization.
 - `astro workspace user add`: Add a user to a Workspace.
@@ -454,7 +466,7 @@ Release date: November 28, 2022
 
 ### Bug fixes
 
-- Fixed an issue where `astro run` could not locate `airflow_settings.yaml` when running a local Airflow environment. 
+- Fixed an issue where `astro run` could not locate `airflow_settings.yaml` when running a local Airflow environment.
 - Fixed an issue were the Airflow settings file created by `astro dev object export` was not compatible with `astro run`.
 
 ## Astro CLI 1.8.1
@@ -484,12 +496,12 @@ To learn more, see [Test your Astro project locally](cli/test-your-astro-project
 
 ### Bug fixes
 
-- Fixed an issue where configurations specified in the `docker-compose.override.yaml` file of an Astro project were not properly applied. 
+- Fixed an issue where configurations specified in the `docker-compose.override.yaml` file of an Astro project were not properly applied.
 - Fixed an issue where `astro login` didn’t recognize some valid domains.
 
 ## Astro CLI 1.7.0
 
-Release date: November 9, 2022 
+Release date: November 9, 2022
 
 ### Deploy only DAGs with `astro deploy -—dags`
 
@@ -522,55 +534,55 @@ For more information, see the [CLI command reference](cli/astro-deployment-inspe
 
 - Fixed an issue where `astro deploy` with `colima` was failing due to an issue with registry authentication
 - Fixed an issue where `astro deployment list` didn't display the Workspace ID for a Deployment
-  
+
 ## Astro CLI 1.6.1
 
-Release date: November 3, 2022 
+Release date: November 3, 2022
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where authenticating to Astronomer Software with `interactive=true` in your CLI configuration resulted in a 502 error.
 
-## Astro CLI 1.6.0 
+## Astro CLI 1.6.0
 
-Release date: September 28, 2022 
+Release date: September 28, 2022
 
-### New commands to manage Airflow objects 
+### New commands to manage Airflow objects
 
-You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
+You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments.
 
 - `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment.
-- `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing. specify the `--env-export` flag to export Airflow connections and variables to your `.env` file as Astro environment variables. 
+- `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing. specify the `--env-export` flag to export Airflow connections and variables to your `.env` file as Astro environment variables.
 
 These commands enable you to:
 
 - Update objects in a locally running Airflow environment without restarting it.
-- Quickly move Airflow objects from a local testing environment to an Astro Deployment. 
+- Quickly move Airflow objects from a local testing environment to an Astro Deployment.
 
 ### New commands to configure worker queues on Astro
 
 You can now mange create, delete, and update worker queues on an Astro Deployment with the following new commands:
 
-- `astro deployment worker-queue create` creates a new worker queue in a Deployment. 
-- `astro deployment worker-queue update` updates an existing worker queue. 
-- `astro deployment worker-queue delete` deletes an existing worker queue. 
+- `astro deployment worker-queue create` creates a new worker queue in a Deployment.
+- `astro deployment worker-queue update` updates an existing worker queue.
+- `astro deployment worker-queue delete` deletes an existing worker queue.
 
 ### New commands to manage Organization
 
-If you belong to multiple Astro Organizations, you can now use the CLI to switch between your Organizations: 
+If you belong to multiple Astro Organizations, you can now use the CLI to switch between your Organizations:
 
 - `astro organization list` lists all Organizations you belong to
 - `astro organization switch` allows you to switch between Organizations
 
-To use these commands, you must be authenticated to your primary Organization through the CLI. 
+To use these commands, you must be authenticated to your primary Organization through the CLI.
 
-### Additional improvements 
+### Additional improvements
 
 - The Astro CLI for Windows is now distributed as an `.exe` file.
-- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects. 
-- You can now use the `--settings-file` flag with `astro dev start` to load and update Airflow objects in your environment from the configuration file of your choosing. 
+- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects.
+- You can now use the `--settings-file` flag with `astro dev start` to load and update Airflow objects in your environment from the configuration file of your choosing.
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where the Astro CLI generated incorrect URLs for the Deployment dashboard
 - Improved error handling and messaging when the Astro CLI doesn't recognize the image in a project's Dockerfile
