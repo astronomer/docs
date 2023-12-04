@@ -34,7 +34,7 @@ In cases where SMTP credentials are difficult to acquire, enabling this flag mig
 
 To enable public signups, add the following yaml snippet to your `config.yaml` file:
 
-```
+```yaml
 astronomer:
   houston:
     config:
@@ -44,7 +44,7 @@ astronomer:
 
 An example `config.yaml` file would look like:
 
-```
+```yaml
 global:
   baseDomain: mybasedomain
   tlsSecret: astronomer-tls
