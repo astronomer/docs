@@ -132,12 +132,6 @@ Deploying a prebuilt Docker image allows you to:
 - Reduce the time it takes to deploy. If your Astro project has a number of packages that take a long time to install, it can be more efficient to build it separately.
 - Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
 
-:::info
-
-This process is currently unsupported with [image-only deploys](deploy-dags.md#trigger-an-image-only-deploy).
-
-:::
-
 To deploy your Astro project as a prebuilt Docker image:
 
 1. Run `docker build` from an Astro project directory or specify the command in a CI/CD pipeline. This Docker image must be based on Astro Runtime and be available in a local Docker registry. If you run this command on an Apple M1 computer or on a computer with an ARM64 processor, you must specify `--platform=linux/amd64` or else the deploy will fail. Astro Deployments require an AMD64-based image and do not support ARM64 architecture.
@@ -150,7 +144,9 @@ To deploy your Astro project as a prebuilt Docker image:
 
 3. Run `astro deploy --image-name <image-name>` or specify the command in a CI/CD pipeline.
 
-For more information about this command, see the [CLI command reference](cli/astro-deploy.md).
+If you have DAG-only deploys enabled, you can also use the `--image` flag to deploy a prebuilt image without also deploying your DAGs folder. Use `astro deploy --image-name <image-name> --image`.
+
+For more information about the `--image-name` option, see the [CLI command reference](cli/astro-deploy.md).
 
 :::info
 
