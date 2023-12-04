@@ -38,6 +38,12 @@ Run the following command to build and deploy only your non-DAG files to a Deplo
 astro deploy --image
 ```
 
+:::tip
+
+If you use [prebuilt Docker images](deploy-project-image.md#deploy-a-prebuilt-docker-image) for your image deploys, you can use both the `--image-name` and `--image` flags to update your image without updating your `dags` folder.
+
+:::
+
 ## Enable or disable DAG-only deploys on a Deployment
 
 If you have Workspace Owner permissions, you can enable or disable DAG-only deploys for a Deployment at any time. After you disable DAG-only deploys and trigger a code deploy:
