@@ -628,25 +628,25 @@ The unstructured data task group extracts twitter comments, reviews, and custome
 
         return _training_table, _comment_table, _calls_table
 ```
-- `Unstructured_data` Task Group: The unstructured_data task group is designed to process various forms of unstructured data, including customer call recordings, Twitter comments, and training data for sentiment analysis. This task group is divided into three main task subgroups: load_unstructured_data, transcribe_calls, and generate_embeddings.
+- Task Group `Unstructured_data` : The unstructured_data task group is designed to process various forms of unstructured data, including customer call recordings, Twitter comments, and training data for sentiment analysis. This task group is divided into three main task subgroups: load_unstructured_data, transcribe_calls, and generate_embeddings.
 
-- `load_unstructured_data` Task Group: This subgroup focuses on loading unstructured data from different sources.
+- Task Group `load_unstructured_data`: This subgroup focuses on loading unstructured data from different sources.
 
-  - `load_support_calls_to_stage` Task: This task downloads and extracts a ZIP file containing customer call recordings from a specified URI. The task then uploads the extracted files to a specified Snowflake stage for additional processing.
+- Task `load_support_calls_to_stage`: This task downloads and extracts a ZIP file containing customer call recordings from a specified URI. The task then uploads the extracted files to a specified Snowflake stage for additional processing.
 
-  - `load_twitter_comments` Task: Loads Twitter comments from a given URI in Parquet format and stores them in a Snowflake table named STG_TWITTER_COMMENTS.
+  - Task `load_twitter_comments`: Loads Twitter comments from a given URI in Parquet format and stores them in a Snowflake table named STG_TWITTER_COMMENTS.
 
-  - `load_comment_training` Task: Similar to the previous task, this one loads training data for comment analysis from a Parquet file located at a specified URI. The data is stored in a Snowflake table named STG_COMMENT_TRAINING.
+  - Task `load_comment_training`: Similar to the previous task, this one loads training data for comment analysis from a Parquet file located at a specified URI. The data is stored in a Snowflake table named STG_COMMENT_TRAINING.
 
-- `transcribe_calls` Task: After loading the call recordings, this task transcribes them using the Whisper model. It extracts audio files from the specified Snowflake stage, processes each file through the OpenAI Whisper model to generate transcripts, and then returns a dataframe containing customer IDs, relative paths of the recordings, and their transcriptions.
+- Task `transcribe_calls`: After loading the call recordings, this task transcribes them using the Whisper model. It extracts audio files from the specified Snowflake stage, processes each file through the OpenAI Whisper model to generate transcripts, and then returns a dataframe containing customer IDs, relative paths of the recordings, and their transcriptions.
 
-- `generate_embeddings` Task Group: The final subgroup focuses on generating embeddings for different data types using OpenAI's models before importing them into the Weaviate vector database.
+- Task Group `generate_embeddings`: The final subgroup focuses on generating embeddings for different data types using OpenAI's models before importing them into the Weaviate vector database.
 
-  - `generate_training_embeddings` Task: Processes the training data loaded earlier to create embeddings using an OpenAI model. The embeddings are then used for sentiment analysis.
+  - Task `generate_training_embeddings`: Processes the training data loaded earlier to create embeddings using an OpenAI model. The embeddings are then used for sentiment analysis.
     
-  - `generate_twitter_embeddings` Task: Similar to the previous task, but focuses on Twitter comments. It transforms the loaded Twitter data and generates embeddings for analyzing customer sentiment.
+  - Task `generate_twitter_embeddings`: Similar to the previous task, but focuses on Twitter comments. It transforms the loaded Twitter data and generates embeddings for analyzing customer sentiment.
     
-  - `generate_call_embeddings` Task: Processes the transcribed call data to generate embeddings. These embeddings provide insights into overall sentiment expressed during the calls.
+  - Task `generate_call_embeddings`: Processes the transcribed call data to generate embeddings. These embeddings provide insights into overall sentiment expressed during the calls.
 
 ### Model training
 
@@ -695,7 +695,7 @@ After the data has been prepared, it is split into testing and training datasets
         return {'name': model_id.get_name(), 'version':model_id.get_version()}
 ```
 
-- `train_sentiment_classifier` Task: After the structured and unstructured data has been extracted, transformed/transcribed, and loaded, it is used to train a sentiment classifier model in Snowpark.  The embedding vectors in Weaviate along with a sentiment-labeled dataset allow you to train a very simple classifier.  While model tuning and optimization are outside the scope of this demo, those steps could also be performed in parallel tasks. After the model has been trained, it is registered into the Snowflake model registry so that it can be used to generate sentiment predictions. One of the biggest advantages of this approach is that you can run your model on the data within Snowpark. It is not necessary to extract the data to cloud object storage for inference.  
+- Task `train_sentiment_classifier`: After the structured and unstructured data has been extracted, transformed/transcribed, and loaded, it is used to train a sentiment classifier model in Snowpark.  The embedding vectors in Weaviate along with a sentiment-labeled dataset allow you to train a very simple classifier.  While model tuning and optimization are outside the scope of this demo, those steps could also be performed in parallel tasks. After the model has been trained, it is registered into the Snowflake model registry so that it can be used to generate sentiment predictions. One of the biggest advantages of this approach is that you can run your model on the data within Snowpark. It is not necessary to extract the data to cloud object storage for inference.  
 
 ```python
     @task_group()
@@ -759,9 +759,9 @@ After the data has been prepared, it is split into testing and training datasets
         return _pred_calls_table, _pred_comment_table
 ```
 
-- `call_sentiment` Task: This task retrieves vectors and properties of data objects from Weaviate, a vector search engine, for the class CustomerCall. It then normalizes the properties and uses the vectors as features for a sentiment analysis model loaded from Snowflake's Model Registry. The sentiment scores are predicted using the predict_proba method of the model, focusing on the probability associated with one of the classes. It outputs a Snowpark dataframe containing the original data enhanced with sentiment scores.
+- Task `call_sentiment`: This task retrieves vectors and properties of data objects from Weaviate, a vector search engine, for the class CustomerCall. It then normalizes the properties and uses the vectors as features for a sentiment analysis model loaded from Snowflake's Model Registry. The sentiment scores are predicted using the predict_proba method of the model, focusing on the probability associated with one of the classes. It outputs a Snowpark dataframe containing the original data enhanced with sentiment scores.
 
-- `twitter_sentiment` Task: Similar in structure to the call_sentiment task, this task also retrieves vectors and properties from Weaviate for the class CustomerComment. It processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
+- Task `twitter_sentiment`: Similar in structure to the call_sentiment task, this task also retrieves vectors and properties from Weaviate for the class CustomerComment. It processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
 
 ### Create reporting tables
 
@@ -857,7 +857,7 @@ After the model has genereated its predictions, the results are cleaned and orga
                                    pred_calls_table=_pred_calls_table, 
                                    pred_comment_table=_pred_comment_table)
 ```
-- `Create_Presentation_Tables` Task: The `create_presentation_tables` task is designed to consolidate and process various data sources to create tables specifically for presentation in a Streamlit app. This function takes in five Snowpark tables as input: `attribution_df`, `mrr_df`, `customers_df`, `pred_calls_table`, and `pred_comment_table`. Each of these tables is processed to generate new tables suited for visual presentation and analysis. Here's a summary of each step:
+- Task `Create_Presentation_Tables`: The `create_presentation_tables` task is designed to consolidate and process various data sources to create tables specifically for presentation in a Streamlit app. This function takes in five Snowpark tables as input: `attribution_df`, `mrr_df`, `customers_df`, `pred_calls_table`, and `pred_comment_table`. Each of these tables is processed to generate new tables suited for visual presentation and analysis. Here's a summary of each step:
   
   - Customer Data Processing: Enhances the customers_df table by adding a rounded 'Customer Lifetime Value' (CLV) column.
   - Sentiment Analysis: Combines sentiment data from call and comment tables. It calculates the average sentiment score for each customer based on call and comment data. The final sentiment score is the average of these two scores, and customers are bucketed into sentiment categories. This processed data is saved as the PRES_SENTIMENT table.
@@ -935,7 +935,7 @@ After the model has genereated its predictions, the results are cleaned and orga
         _restore_weaviate >> [_training_table, _comment_table, _calls_table] >> _model
 ```
 
-`cleanup_temp_tables` Task: The final task is a [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
+Task `cleanup_temp_tables`: The final task is a [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
 
 # See also
 
