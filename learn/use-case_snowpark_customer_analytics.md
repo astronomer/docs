@@ -63,7 +63,7 @@ Do not specify a `region` when using this format for accounts.
   
 :::note
 
-Database and Schema names should be CAPITALIZED due to a bug in Snowpark ML.
+Capitalize `database` and `schema` names due to a bug in Snowpark ML.
 
 :::
 
