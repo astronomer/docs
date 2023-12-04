@@ -860,7 +860,7 @@ After the model has genereated its predictions, the results are cleaned and orga
   - Customer Lifetime Value (CLV) Analysis: Creates a comprehensive view of customer lifetime value by joining `customers_df` with sentiment data. It sorts the data by CLV and includes various customer details. This table, named `PRES_CLV`, is valuable for understanding the high-value customers and their sentiment scores.
   - Churn Analysis: Analyzes churn by joining customer data with MRR data and sentiment scores. It filters for customers who have churned and sorts them by their last active month. This table, `PRES_CHURN`, is critical for identifying recently churned customers and understanding their value and sentiment.
   - Saving Raw Sentiment Data: The raw sentiment data for customer calls (`pred_calls_table`) and Twitter comments (`pred_comment_table`) are saved as `PRED_CUSTOMER_CALLS` and `PRED_TWITTER_COMMENTS`, respectively.
-  - Saving Attribution Touches: The attribution_df table is saved as ATTRIBUTION_TOUCHES, which holds detailed data on customer interactions and their revenue attribution.
+  - Saving Attribution Touches: The `attribution_df` table is saved as `ATTRIBUTION_TOUCHES`, which holds detailed data on customer interactions and their revenue attribution.
     
 
 ```python
