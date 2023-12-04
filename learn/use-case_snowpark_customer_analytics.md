@@ -19,7 +19,7 @@ This [use case](https://docs.astronomer.io/learn/airflow-snowpark) demonstrates 
 
 This demonstration shows how to build a customer analytics dashboard for a fictitious online retailer for toys and games. The application uses machine learning models for audio transcription, natural language embeddings, and sentiment analysis on structured, semi-structured, and unstructured data.
 
-This demo also shows the use of the Snowflake XCom backend which supports security and governance by serializing all task in/output to Snowflake tables and stages while storing in the Airflow XCom table a URI pointer to the data.
+This demo also shows how to use the Snowflake XCom backend, which supports security and governance by serializing all task input and output to Snowflake tables and stages while also storing a URI pointer to the data in the Airflow XCom table.
 
 This workflow includes:
 - Sourcing structured, unstructured and semistructured data from different systems.
