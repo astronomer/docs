@@ -21,6 +21,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## November 30, 2023
+
+### Support for Microsoft Entra Workload ID
+
+You can now use [Microsoft Entra Workload ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-workload-id) to authorize Deployments to resources in Azure. Workload identity is a simple and secure way to authorize access external resources, as it doesn't require creating or storing long-term credentials. To set up Microsoft Entra Workload ID, see [Authorize Deployments to cloud resources](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=azure#setup).
+
 ## November 16, 2023
 
 ### Install Astro from the Azure Marketplace
@@ -375,7 +381,7 @@ You can now configure Deployments with the `A50` machine type, which has 12 vCPU
 
 <HostedBadge/>
 
-New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different. For more information about what happens to code deploys when DAG-only deploys are enabled, see [What happens during a project deploy](https://docs.astronomer.io/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://docs.astronomer.io/astro/deploy-dags#enable-disable-dag-only-deploys-on-a-deployment).
+New Astro Hosted Deployments now have [DAG-only deploys](https://docs.astronomer.io/astro/deploy-dags) enabled by default. When DAG-only deploys are enabled, some workflows for your Deployment, including image-based deploys, are different compared to when DAG-only deploys are disabled. For more information about how code and image deploys work when DAG-only deploys are enabled, see [What happens during a project deploy](https://docs.astronomer.io/astro/deploy-project-image#what-happens-during-a-project-deploy). To disable DAG-only deploys, see [Enable/ disable DAG-only deploys on a Deployment](https://docs.astronomer.io/astro/deploy-dags#enable-disable-dag-only-deploys-on-a-deployment).
 
 ### Teams now have Organization-level roles
 

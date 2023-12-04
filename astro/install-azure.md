@@ -51,6 +51,14 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     ![The Azure SSO URL and the 'copy to clipboard' button](/img/docs/azure-sso.png)
     
     Share this URL with anyone at your company who needs to access your newly created Organization. Any users that access Astro with this URL will automatically be added to your Organization as an Organization Member. You can add them to your Workspace from Astro’s Cloud UI so they can start deploying code and running DAGs. See [Manage users in your Astro Workspace](https://docs.astronomer.io/astro/manage-workspace-users).
+
+    :::info 
+
+    Microsoft Entra ID is automatically configured only for the email domain you used to create your Astro Organization. By default, you can invite users from other domains to Astro using passwords, GitHub auth, or Google auth.
+    
+    If you need to invite users with emails from other domains to Astro using Entra ID, contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide your Organization ID and the email domain you want to manage through Entra ID. 
+
+    :::
     
     :::tip
     
