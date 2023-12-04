@@ -28,9 +28,9 @@ astro deploy --dags
 
 ## Trigger an image-only deploy
 
-If you primarily use DAG-only deploys to work with your Deployments, you still need to occasionally make image deploys to update the Astro runtime version. However, depending on your CI/CD strategy, using a full image deploy with `astro deploy`, might affect your existing DAGs.
+Even if you primarily use DAG-only deploys, you still need to occasionally make image deploys to update your Astro runtime version or install dependencies. However, depending on your CI/CD strategy, triggering a full project deploy with `astro deploy` might affect your existing DAGs.
 
-When you trigger an image-only deploy, it builds every non-DAG file in your Astro project as a Docker image and deploy the image to all Airflow components in a Deployment. This includes your `Dockerfile`, plugins, and all Python and OS-level packages. DAGs are not deployed, and the DAG folder is not affected. Image-only deploys are only available when you have DAGs-only deploys enabled.
+When you trigger an image-only deploy, it builds every non-DAG file in your Astro project as a Docker image and deploys the image to all Airflow components in a Deployment. This includes your `Dockerfile`, plugins, and all Python and OS-level packages. DAGs are not deployed, and your Deployment DAG folder and DAG bundle version are not affected. Image-only deploys are only available when you have DAGs-only deploys enabled.
 
 Run the following command to build and deploy only your non-DAG files to a Deployment:
 

@@ -7,7 +7,7 @@ description: Deploy a complete Astro project to a Deployment as a Docker image.
 
 import {siteVariables} from '@site/src/versions';
 
-In a full image deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
+In a full deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
 
 Use this document to learn how full deploys work and how to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
 
@@ -134,7 +134,7 @@ Deploying a prebuilt Docker image allows you to:
 
 :::info
 
-When you have DAGs-only deploys enabled, you can choose to deploy only your DAGs, with the `--dags` flag, or to deploy just your project image by using `--image`. Using `astro deploy --image` does not update your DAG folder. However, deploying a prebuilt Docker image using the following process also deploys your project image.
+This process is currently unsupported with [image-only deploys](deploy-dags.md#trigger-an-image-only-deploy).
 
 :::
 
