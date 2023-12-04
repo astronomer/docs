@@ -33,12 +33,12 @@ This workflow includes the following processes and presents them in a [Streamlit
 
 ## Before you start
 
-Before trying this example, make sure you have:
+Before starting this example, make sure you have:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - [Docker Desktop](https://www.docker.com/products/docker-desktop).
-- A [Snowflake](https://www.snowflake.com/en/) Account with AccountAdmin permissions
-- (Optional) OpenAI account or [Trial Account](https://platform.openai.com/signup)
+- A [Snowflake](https://www.snowflake.com/en/) Account with AccountAdmin permissions.
+- (Optional) OpenAI account or [Trial Account](https://platform.openai.com/signup).
 
 
 ## Clone the project
