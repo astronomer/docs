@@ -58,7 +58,7 @@ This demo assumes the use of a new Snowflake trial account with admin privileges
 AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{"conn_type": "snowflake", "login": "<USER_NAME>", "password": "<PASSWORD>", "schema": "DEMO", "extra": {"account": "<ORG_NAME>-<ACCOUNT_NAME>", "warehouse": "COMPUTE_WH", "database": "DEMO", "region": "", "role": "ACCOUNTADMIN", "authenticator": "snowflake", "session_parameters": null, "application": "AIRFLOW"}}'
 OPENAI_APIKEY='sk-xxxxxxxxxxxxxxxxxxxxx' 
 ``` 
-The Snowflake `account` field of the connection should use the new `ORG_NAME-ACCOUNT_NAME` format as per [Snowflake Account Identifier policies](https://docs.snowflake.com/en/user-guide/admin-account-identifier).  The ORG and ACCOUNT names can be found in your Snowflake trial confirmation email or in the Snowflake login link (ie. `https://xxxxxxx-yyy11111.snowflakecomputing.com/console/login`).
+Use the the new `ORG_NAME-ACCOUNT_NAME` format for the Snowflake `account` field of the connection as explained in the [Snowflake Account Identifier policies](https://docs.snowflake.com/en/user-guide/admin-account-identifier).  You can find the `ORG` and `ACCOUNT` names in your Snowflake trial confirmation email or in the Snowflake login link, for example, `https://xxxxxxx-yyy11111.snowflakecomputing.com/console/login`.
 Do not specify a `region` when using this format for accounts.
   
 :::note
@@ -69,7 +69,9 @@ Capitalize `database` and `schema` names due to a bug in Snowpark ML.
 
 ## Run the project
 
-To run the example project, first make sure Docker Desktop is running. Then, open your project directory and run:
+1. To run the example project, first make sure Docker Desktop is running.
+  
+2. Then, open your project directory in terminal and run:
 
 ```sh
 astro dev start
@@ -80,25 +82,27 @@ This command builds your project and spins up 5 Docker containers on your machin
 
 ![A screenshot of the Airflow UI with active Customer Analytics DAG](/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_activeplaybutton_4.png)
 
-After the command finishes, open the the [Airflow UI](http://localhost:8080/) and trigger the `customer_analytics` DAG using the play button. Then, monitor its status as it completes via the graph view.
+3. After the command finishes, open the the [Airflow UI](http://localhost:8080/) and trigger the `customer_analytics` DAG by clicking the play button. Then, monitor its status as it completes via the graph view.
 
 ### View Results in Streamlit
 
-Once the DAG has completed, you can view the results in a Streamlit customer analytics dashboard. 
-Streamlit has been installed alongside the Airflow UI in the webserver container, and there's a script in the include directory called `streamlit_app.py` that you'll use to create the dashboard.
+After the DAG completes, you can view the results in a Streamlit customer analytics dashboard. 
+Streamlit is installed alongside the Airflow UI in the webserver container, and there's a script in the `include` directory called `streamlit_app.py` that you use to create the dashboard.
 
-To do so, first go to your project's root directory and connect to the webserver container with the Astro CLI
+1.  Go to your project's root directory and connect to the webserver container with the Astro CLI by running the following command.
+
 ```bash
 astro dev bash -w
 ``` 
 
-Then, run the following command to start Streamlit.
+2. Run the following command to start Streamlit.
+   
 ```bash
 cd include/streamlit/src
 python -m streamlit run ./streamlit_app.py
 ```
 
-You can then open the [streamlit application](http://localhost:8501) in a browser. All of the customer analytics produced by your DAG will be visualized here, and if you've added an Open-AI key to your .env file, you'll be able to leverage the chatbot functionality to search for customer reviews by keyword as depicted below: 
+3. Open the [streamlit application](http://localhost:8501) in a browser to see a visualization of all the customer analytics that your DAG produces. If you added an Open-AI key to your `.env` file, you can use the chatbot functionality to search for customer reviews by keyword.
 
 ![A screenshot of the Airflow UI with active Customer Analytics DAG](/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_chatinteraction_streamlit_5.png.png)
 
