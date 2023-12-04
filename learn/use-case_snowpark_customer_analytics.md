@@ -249,7 +249,7 @@ The first tasks in the the set-up task group create all the resources necessary 
 
 - Task `create_snowflake_objects`: The first task creates Snowflake objects (like databases, schemas, and stages) prior to running any tasks, since this demonstrations assumes you started with a fresh trial account. The task creation uses the Airflow setup/teardown task feature, and has a corresponding clean up task at the end of the DAG. This means that no matter what, Airflow deletes temp tables used for this project after usage to prevent unnecessary consumption, mimicking how you might use them in a production setting! 
 
-- Task `download_weaviate_backup`: In order to speed up the demo process, the data has already been ingested into Weaviate and vectorized.  The data was then backed up and stored in the cloud for easy restore. This task will download the backup.zip and make it available in a docker mounted filesystem for the `restore_weaviate` task.
+- Task `download_weaviate_backup`: To speed up the demonstration process, the data you use has been ingested  into Weaviate and vectorized in advance.  The data was then backed up and stored in the cloud for easy restore. This task downloads the `backup.zip` and makes it available in a Docker mounted filesystem for the `restore_weaviate` task.
 
 - Task `restore_weaviate`: This task exists speeds up the demo for subsequent runs. By restoring prefetched embeddings to Weaviate, the later tasks will skip embeddings and only make calls to OpenAI for data it hasn't yet embedded.
 
