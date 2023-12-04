@@ -7,9 +7,11 @@ description: Deploy a complete Astro project to a Deployment as a Docker image.
 
 import {siteVariables} from '@site/src/versions';
 
-In an image deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
+In a full image deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
 
-Use this document to learn how image deploys work and how to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
+Use this document to learn how full deploys work and how to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
+
+See [DAGs-only Deploys](deploy-dags.md) to learn more about how to deploy your DAGs and images separately.
 
 ## Prerequisites
 
@@ -129,6 +131,12 @@ Deploying a prebuilt Docker image allows you to:
 - Test a single Docker image across Deployments instead of rebuilding it each time.
 - Reduce the time it takes to deploy. If your Astro project has a number of packages that take a long time to install, it can be more efficient to build it separately.
 - Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
+
+:::info
+
+When you have DAGs-only deploys enabled, you can choose to deploy only your DAGs, with the `--dags` flag, or to deploy just your project image by using `--image`. Using `astro deploy --image` does not update your DAG folder. However, deploying a prebuilt Docker image using the following process also deploys your project image.
+
+:::
 
 To deploy your Astro project as a prebuilt Docker image:
 
