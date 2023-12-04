@@ -21,7 +21,7 @@ This demonstration shows how to build a customer analytics dashboard for a ficti
 
 This demo also shows how to use the Snowflake XCom backend, which supports security and governance by serializing all task input and output to Snowflake tables and stages while also storing a URI pointer to the data in the Airflow XCom table.
 
-This workflow includes:
+This workflow includes the following processes and presents them in a [Streamlit](http://www.streamlit.io) application:
 - Sourcing structured, unstructured, and semistructured data from different systems.
 - Extract, transform, and load with [Snowpark Python provider for Airflow](https://github.com/astronomer/astro-provider-snowflake)
 - Ingest with Astronomer's [python SDK for Airflow](https://github.com/astronomer/astro-sdk)
