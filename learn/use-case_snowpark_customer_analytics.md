@@ -752,13 +752,13 @@ After you prepared the structured and unstructured data, split it into testing a
         return _pred_calls_table, _pred_comment_table
 ```
 
-- Task `call_sentiment`: This task retrieves vectors and properties of data objects from Weaviate, a vector search engine, for the class CustomerCall. It then normalizes the properties and uses the vectors as features for a sentiment analysis model loaded from Snowflake's Model Registry. The sentiment scores are predicted using the predict_proba method of the model, focusing on the probability associated with one of the classes. It outputs a Snowpark dataframe containing the original data enhanced with sentiment scores.
+- Task `call_sentiment`: This task retrieves vectors and properties of data objects from Weaviate, a vector search engine, for the class `CustomerCall`. The task then normalizes the properties and uses the vectors as features for a sentiment analysis model loaded from Snowflake's Model Registry. The sentiment scores are predicted using the `predict_proba` method of the model, focusing on the probability associated with one of the classes. It outputs a Snowpark dataframe containing the original data enhanced with sentiment scores.
 
-- Task `twitter_sentiment`: Similar in structure to the call_sentiment task, this task also retrieves vectors and properties from Weaviate for the class CustomerComment. It processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
+- Task `twitter_sentiment`: Similar in structure to the `call_sentiment` task, this task also retrieves vectors and properties from Weaviate for the class `CustomerComment`. The task processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
 
 ### Create reporting tables
 
-After the model has genereated its predictions, the results are cleaned and organized into presentation tables for viewing via a streamlit application. 
+After the model has generated its predictions, the next tasks cleans and organizes the results into presentation tables for viewing using a Streamlit application. 
 
 ```python
 @task.snowpark_python()
@@ -850,10 +850,10 @@ After the model has genereated its predictions, the results are cleaned and orga
                                    pred_calls_table=_pred_calls_table, 
                                    pred_comment_table=_pred_comment_table)
 ```
-- Task `Create_Presentation_Tables`: The `create_presentation_tables` task is designed to consolidate and process various data sources to create tables specifically for presentation in a Streamlit app. This function takes in five Snowpark tables as input: `attribution_df`, `mrr_df`, `customers_df`, `pred_calls_table`, and `pred_comment_table`. Each of these tables is processed to generate new tables suited for visual presentation and analysis. Here's a summary of each step:
+- Task `Create_Presentation_Tables`: The `create_presentation_tables` task consolidates and processes various data sources to create tables specifically for presentation in a Streamlit app. This function takes five Snowpark tables as input: `attribution_df`, `mrr_df`, `customers_df`, `pred_calls_table`, and `pred_comment_table`. The task processes each of these tables to generate new tables suited for visual presentation and analysis. The following shares a summary of each step:
   
-  - Customer Data Processing: Enhances the customers_df table by adding a rounded 'Customer Lifetime Value' (CLV) column.
-  - Sentiment Analysis: Combines sentiment data from call and comment tables. It calculates the average sentiment score for each customer based on call and comment data. The final sentiment score is the average of these two scores, and customers are bucketed into sentiment categories. This processed data is saved as the PRES_SENTIMENT table.
+  - Customer Data Processing: Enhances the `customers_df` table by adding a rounded 'Customer Lifetime Value' (CLV) column.
+  - Sentiment Analysis: Combines sentiment data from `pred_calls_table` and `pred_comment_table` tables. It calculates the average sentiment score for each customer based on call and comment data. The final sentiment score is the average of these two scores, and customers are bucketed into sentiment categories. This processed data is saved as the `PRES_SENTIMENT` table.
   - Advertising Spend Analysis: Processes the `attribution_df` table to understand the revenue generated from different advertising mediums. The data is grouped by the medium, and the revenue is summed up for each group. The task saves the table as `PRES_AD_SPEND`.
   - Customer Lifetime Value (CLV) Analysis: Creates a comprehensive view of customer lifetime value by joining `customers_df` with sentiment data. It sorts the data by CLV and includes various customer details. This table, named `PRES_CLV`, is valuable for understanding the high-value customers and their sentiment scores.
   - Churn Analysis: Analyzes churn by joining customer data with MRR data and sentiment scores. It filters for customers who have churned and sorts them by their last active month. This table, `PRES_CHURN`, is critical for identifying recently churned customers and understanding their value and sentiment.
