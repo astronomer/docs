@@ -433,7 +433,7 @@ The structured data contains various data points about customers, such as their 
 ```
 
 
-- Task Group `load_structured_data`: This task group uses a for loop to dynamically create tasks to upload structured datasets containing customer information from various data sources bucket into a Snowflake database. For each source in `data_sources`, this task loads a CSV file (named source.csv) from a specified URI (`restore_data_uri`).
+- Task Group `load_structured_data`: This task group uses a `for` loop to dynamically create tasks to upload structured datasets containing customer information from various data sources into a Snowflake database. For each source in `data_sources`, this task loads a CSV file, named `source.csv`, from a specified URI, `restore_data_uri`.
 
 - Task Group `transform_structured`: This task group encompasses three different tasks that transform the structured data into reporting-ready format. The tasks are as follows: 
 
