@@ -632,7 +632,7 @@ The unstructured data task group extracts twitter comments, reviews, and custome
 
 - `load_unstructured_data` Task Group: This subgroup focuses on loading unstructured data from different sources.
 
-  - `load_support_calls_to_stage` Task: This task downloads and extracts a ZIP file containing customer call recordings from a specified URI. The extracted files are then uploaded to a specified Snowflake stage for further processing.
+  - `load_support_calls_to_stage` Task: This task downloads and extracts a ZIP file containing customer call recordings from a specified URI. The task then uploads the extracted files to a specified Snowflake stage for additional processing.
 
   - `load_twitter_comments` Task: Loads Twitter comments from a given URI in Parquet format and stores them in a Snowflake table named STG_TWITTER_COMMENTS.
 
