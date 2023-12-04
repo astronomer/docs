@@ -113,7 +113,7 @@ The Astro CLI commands include additional Docker-based services for Weaviate and
 
 ### Setup Tasks
 
-The first tasks in the the set-up task group create all the resources necessary to run the pipeline, including creating the necessary Snowflake tables, restoring Weaviate data from prior runs, and creating a Snowpark model registry if none exists already.
+The first tasks in the the set-up task group create all the resources necessary to run the pipeline, including creating the necessary Snowflake tables, restoring Weaviate data from prior runs, and creating a Snowpark model registry if none exists already. Using an `enter()` task group allows us to group together tasks that should be run to setup state for the rest of the DAG.  Functionally this is very similar to setup tasks but allows some additional flexibility in dependency mapping.
 
 ```python
     @task.snowpark_python()
@@ -164,11 +164,6 @@ The first tasks in the the set-up task group create all the resources necessary 
 ```python
 @task_group()
     def enter():
-        """
-        Using an `enter()` task group allows us to group together tasks that should be run to setup 
-        state for the rest of the DAG.  Functionally this is very similar to setup tasks but allows 
-        some additional flexibility in dependency mapping.
-        """
 
         @task()
         def download_weaviate_backup() -> str:
@@ -437,11 +432,11 @@ The structured data contains various data points about customers, such as their 
 
 - Task Group `transform_structured`: This task group encompasses three different tasks that transform the structured data into reporting-ready format. The tasks are as follows: 
 
-- Task `jaffle_shop`: This task begins by aggregating orders to calculate each customer's first and most recent order dates, as well as their total number of orders. Next, it joins the payments data with the orders, grouping by customer ID to sum up the total payment amounts.  This results in a comprehensive view of each customer's transaction history.
+  - Task `jaffle_shop`: This task begins by aggregating orders to calculate each customer's first and most recent order dates, as well as their total number of orders. Next, it joins the payments data with the orders, grouping by customer ID to sum up the total payment amounts.  This results in a comprehensive view of each customer's transaction history.
 
-    - Task `mrr_playbook`: This task computes the Monthly Recurring Revenue (MRR), a crucial metric for subscription-based businesses. It starts by constructing a timeline of months since a specific start date and then matches this timeline with subscription data to determine the active subscription periods for each customer. The task then performs detailed calculations to determine the MRR for each customer in each month. 
+  - Task `mrr_playbook`: This task computes the Monthly Recurring Revenue (MRR), a crucial metric for subscription-based businesses. It starts by constructing a timeline of months since a specific start date and then matches this timeline with subscription data to determine the active subscription periods for each customer. The task then performs detailed calculations to determine the MRR for each customer in each month. 
 
-- Task `attribution_playbook`: This task tackles the complex challenge of marketing attribution, aiming to understand how different marketing efforts contribute to customer conversions. It does this by linking customer conversion data with their session data. The task then applies various attribution models, such as first touch, last touch, and linear, to assign credit to different marketing touchpoints. It calculates the revenue attributed to each touchpoint based on the chosen model, providing insights into which marketing channels are most effective in driving customer conversions.
+  - Task `attribution_playbook`: This task tackles the complex challenge of marketing attribution, aiming to understand how different marketing efforts contribute to customer conversions. It does this by linking customer conversion data with their session data. The task then applies various attribution models, such as first touch, last touch, and linear, to assign credit to different marketing touchpoints. It calculates the revenue attributed to each touchpoint based on the chosen model, providing insights into which marketing channels are most effective in driving customer conversions.
 
 ### Unstructured data ingestion and transformation
 
@@ -638,7 +633,7 @@ The unstructured data task group extracts twitter comments, reviews, and custome
 
   - Task `load_comment_training`: Similar to the previous task, this one loads training data for comment analysis from a Parquet file located at a specified URI. The data is stored in a Snowflake table named STG_COMMENT_TRAINING.
 
-- Task `transcribe_calls`: After loading the call recordings, this task transcribes them using the Whisper model. It extracts audio files from the specified Snowflake stage, processes each file through the OpenAI Whisper model to generate transcripts, and then returns a dataframe containing customer IDs, relative paths of the recordings, and their transcriptions.
+  - Task `transcribe_calls`: After loading the call recordings, this task transcribes them using the Whisper model. It extracts audio files from the specified Snowflake stage, processes each file through the OpenAI Whisper model to generate transcripts, and then returns a dataframe containing customer IDs, relative paths of the recordings, and their transcriptions.
 
 - Task Group `generate_embeddings`: The final subgroup focuses on generating embeddings for different data types using OpenAI's models before importing them into the Weaviate vector database.
 
