@@ -21,6 +21,18 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## December 5, 2023
+
+### Additional improvements
+
+- The [Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections) is now generally available.
+
+### Bug fixes
+
+- Fixed an issue where DAG code that appeared in the Airflow UI did not roll back when you rolled back a Deployment, even though the running code was successfully rolled back.
+- Fixed an issue where you could not view billing information from the Cloud UI when you installed Astro through the Azure Marketplace.
+- Fixed an issue where the Cloud UI would produce a console error when a user accessed their Workspace list.
+
 ## November 30, 2023
 
 ### Support for Microsoft Entra Workload ID
