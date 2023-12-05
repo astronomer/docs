@@ -150,7 +150,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variab
 
 This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. In the next step, you'll test this configuration in a local Airflow environment.
 
-:::warning
+:::danger
 
 If you want to deploy your project to a hosted Git repository before deploying to Astronomer Software, be sure to save `<your-approle-id>` and `<your-approle-secret>` securely. Astronomer recommends adding them to your project's [`.env` file](customize-image.md#add-environment-variables-locally) and specifying this file in `.gitignore`.
 
@@ -250,7 +250,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections
 
 In the next step, you'll test that this configuration is valid locally.
 
-:::warning
+:::danger
 
 If you want to deploy your project to a hosted Git repository before deploying to Astronomer Software, be sure to save `<your-aws-key>` and `<your-aws-secret-key>` in a secure manner. When you deploy to Astronomer Software, use the Software UI to set these values as secrets.
 
@@ -353,7 +353,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "/airflow/connection
 
 In the next step, you'll test that this configuration is valid locally.
 
-:::warning
+:::danger
 
 If you want to deploy your project to a hosted Git repository before deploying to Astronomer Software, be sure to save `<your-aws-key>` and `<your-aws-secret-key>` in a secure manner. When you deploy to Astronomer Software, use the Software UI to set these values as secrets.
 
@@ -467,7 +467,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections
 
 Make sure to paste your entire JSON service account key in place of `<your-key-file>`. In the next step, you'll test that this configuration is valid locally.
 
-:::warning
+:::danger
 
 If you want to deploy your project to a hosted Git repository before deploying to Astronomer, be sure to save `<your-key-file>` securely. Astronomer recommends adding it to your project's [`.env` file](customize-image.md#add-environment-variables-locally) and specifying this file in `.gitignore`. When you deploy to Astronomer, you should set these values as secrets in the Software UI.
 
@@ -576,7 +576,7 @@ This tells Airflow to look for variable information at the `airflow-variables-*`
 :::tip
 By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `sep`, `"connections_prefix"`, and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
-:::warning
+:::danger
 
 If you want to deploy your project to a hosted Git repository before deploying to Astronomer, be sure to save `<your-client-id>`, `<your-tenant-id>`, and `<your-client-secret>`  in a secure manner. When you deploy to Astronomer, you should set these values as secrets with the Software UI.
 

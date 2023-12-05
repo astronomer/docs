@@ -179,7 +179,7 @@ If you don't complete this setup before your upgrade, the upgrade will fail.
 
 ### Upgrade to Astronomer Software 0.29
 
-:::caution
+:::warning
 
 If you are currently on Astronomer Software 0.25, 0.26, or 0.27, you must upgrade to version 0.28 before upgrading to 0.29. A direct upgrade to 0.29 from a version lower than 0.28 is not possible.
 

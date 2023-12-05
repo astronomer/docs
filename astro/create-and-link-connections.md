@@ -5,7 +5,7 @@ id: create-and-link-connections
 description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
 
-:::caution
+:::warning
 
 This feature is in [Public Preview](feature-previews.md).
 
@@ -33,7 +33,7 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 - Celery executors
 - Astro Runtime 9.3.0 or greater
 
-:::caution
+:::warning
 
 At this time, you can only create connections with the Celery Executor in the Cloud UI with the Astro Environment Manager. Kuberentes Executor support is coming soon.
 

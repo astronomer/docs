@@ -340,7 +340,7 @@ Export your pipeline by committing it to your connected GitHub repository.
 
     ![Commit to GitHub dialogue showing a new branch called cloud-ide-branch being created from the main branch with the commit message 'Woof!'.](/img/tutorials/cloud-ide-tutorial_new_branch.png)
 
-  :::caution
+  :::warning
 
   If a file with the same name as your Astro Cloud IDE pipeline already exists in your GitHub repository, the Astro Cloud IDE will overwrite the existing file. For this reason, Astronomer recommends using a separate branch for commits from your Astro Cloud IDE environment than for commits from other sources to the same repository.
 

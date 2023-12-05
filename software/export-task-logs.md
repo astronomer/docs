@@ -44,7 +44,7 @@ This implementation is recommended for organizations that:
 - Run Astronomer Software in a multi-tenant cluster, where security is a concern.
 - Use the KubernetesExecutor to run many short-lived tasks, which requires improved reliability.
 
-:::caution
+:::warning
 
 With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi memory. More compute and memory resources are used for exporting logs with sidecars than when using a Fluentd Daemonset.
 

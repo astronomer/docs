@@ -57,7 +57,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
 
     For a list of currently supported versions of Astro Runtime, see [Astro Runtime Lifecycle Schedule](/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
-  :::warning
+  :::danger
 
   Astronomer does not support Airflow downgrades. After you upgrade your Airflow version, you can't revert to an earlier version.
 

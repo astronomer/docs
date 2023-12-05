@@ -11,7 +11,7 @@ description: 'Use this document to complete the installation of Astro Hybrid in 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::caution
+:::warning
 
 This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
@@ -158,7 +158,7 @@ If you do not specify configuration preferences, Astronomer creates a cluster wi
 
 To provision additional clusters after completing your initial installation, see [Create a cluster](manage-hybrid-clusters.md#create-a-cluster).
 
-:::caution
+:::warning
 
 Some AWS regions that Astronomer supports are disabled by default on AWS, including:
 - `ap-east-1` - Asia Pacific (Hong Kong)

@@ -141,7 +141,7 @@ As of Airflow 2.6, you can run a DAG continuously with a pre-defined timetable. 
 
 This schedule will create one continuous DAG run, with a new run starting as soon as the previous run has completed, regardless of whether the previous run succeeded or failed. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
 
-:::caution
+:::warning
 
 Airflow is designed to handle orchestration of data pipelines in batches, and this feature is not intended for streaming or low-latency processes. If you need to run pipelines more frequently than every minute, consider using Airflow in combination with tools designed specifically for that purpose like [Apache Kafka](airflow-kafka.md).
 

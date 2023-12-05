@@ -106,7 +106,7 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
 11. Click **Create API Token**, then copy the token that appears.
 
-    :::caution
+    :::warning
 
     For security reasons, this is the only opportunity you have to copy your API token. After you exit the modal window, you cannot copy it again. Be sure to save your token in a safe place or paste it immediately.
 

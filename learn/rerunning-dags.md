@@ -76,7 +76,7 @@ To clear a full DAG run, go to the Grid View in the Airflow UI, click on the DAG
 
 ![Clear DAG Status](/img/guides/clear_dag_ui.png)
 
-:::caution
+:::warning
 
 Don't clear or change task statuses directly in the Airflow metastore. This can cause unexpected behavior in Airflow.
 

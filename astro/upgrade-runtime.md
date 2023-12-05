@@ -93,7 +93,7 @@ astro deploy
 
 For more information about deploying to Astro, see [Deploy code](deploy-code.md).
 
-:::caution
+:::warning
 
 After you upgrade a Deployment on Astro to a new version of Astro Runtime, the only way to downgrade is to [roll back to a previous deploy](deploy-history.md). If you attempt to downgrade a Deployment by updating your Dockerfile, the Astro CLI produces an error and your request to deploy does not succeed.
 

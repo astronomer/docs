@@ -6,7 +6,7 @@ description: Reference of all supported configurations for new Astro clusters on
 sidebar_custom_props: { icon: 'img/azure.png' }
 ---
 
-:::caution
+:::warning
 
 This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 

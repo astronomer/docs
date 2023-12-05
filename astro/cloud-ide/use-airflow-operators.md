@@ -17,7 +17,7 @@ You can import any Airflow operator available on the Astronomer Registry and run
 
 4. Click **Add Cell** and search for the name of the operator you want to use. When you find it, click its entry in the search box. The cell is added to your pipeline.
 
-  :::caution
+  :::warning
 
   You can add sensors and async operators to your pipeline, but these will not work when testing your pipeline from the Cloud IDE. To test a pipeline with these operators, export your project as a DAG and run it locally or on an Astro Deployment.
 

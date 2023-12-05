@@ -342,7 +342,7 @@ For a complete list of the changes, see the [Apache Airflow 2.6.1 release notes]
 - Release date: April 30, 2023
 - Airflow version: 2.6.0
 
-:::warning Breaking change
+:::danger Breaking change
 
 Runtime 8 includes changes that can result in DAGs running differently after upgrading. It also includes a major bug that was subsequently fixed in Runtime 8.1. To use Airflow 2.6, Astronomer recommends upgrading directly to Runtime 8.1. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) for more information.
 
@@ -703,7 +703,7 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 
 ### ARM64-based images for faster local development with Apple M1
 
-:::caution
+:::warning
 
 To deploy a project using Astro Runtime 6.0.4 or later from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the Astro CLI](cli/install-cli.md).
 

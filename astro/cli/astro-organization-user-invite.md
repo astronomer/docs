@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/term-icon.png' }
 
 Invite users to your current Astro Organization.
 
-:::caution
+:::warning
 
 This command will replace `astro user invite` in Astro CLI v1.15.0. Any instances in your projects or automation where you use `astro user invite` needs to be updated to `astro organization user invite` before the release of Astro CLI v1.15.0.
 

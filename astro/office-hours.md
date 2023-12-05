@@ -7,7 +7,7 @@ description: Attend office hours with Astronomer data engineers to ask non-suppo
 
 Office hours are a way for you to meet with Astronomer data engineers and ask about Astro and Airflow features and best practices . Office hours are available weekly on a first-come, first-served basis. An office hour session is typically 30 minutes long. 
 
-:::caution
+:::warning
 
 Office hours are not a replacement for support. [Submit a support request](astro-support.md) if you have any urgent issue, bug, or something that needs fixing. Astronomer data engineers will not be able to answer support requests during office hour sessions.
 

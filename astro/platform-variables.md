@@ -13,7 +13,7 @@ For information on setting your own environment variables, see [Environment vari
 
 On Astro, certain environment variables have preset values that are required and should not be overridden by your team. The following table provides information about each global environment variable set by Astronomer.
 
-:::warning 
+:::danger 
 
 The Cloud UI does not currently prevent you from setting these environment variables, but attempting to set them can result in unexpected behavior that can include access problems, missing task logs, and failed tasks.
 

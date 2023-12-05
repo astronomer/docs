@@ -25,7 +25,7 @@ Release date: June 2, 2022
 
 ### A Shared CLI for All Astronomer Users
 
-:::warning Breaking Change
+:::danger Breaking Change
 
 Astro CLI v1.0.0 includes breaking changes that might effect your existing CI/CD pipelines. Before upgrading the CLI, carefully read through [Upgrade to Astro CLI v1.0](upgrade-astro-cli.md) to learn more about these breaking changes and how they can affect your pipelines.
 

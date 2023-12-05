@@ -50,7 +50,7 @@ When set a secret environment variable in the Cloud UI, the following happens:
 
 This process occurs every time you update the environment variable's key or value.
 
-:::caution
+:::warning
 
 Environment variables marked as secret are stored securely by Astronomer and are not shown in the Cloud UI. However, it's possible for a user in your organization to create or configure a DAG that exposes secret values in Airflow task logs. Airflow task logs are visible to all Workspace members in the Airflow UI and accessible in your Astro cluster's storage.
 

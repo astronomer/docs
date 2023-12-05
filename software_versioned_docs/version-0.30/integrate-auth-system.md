@@ -285,7 +285,7 @@ Then, push the configuration change to your platform as described in [Apply a co
 
 Starting with Astronomer v0.27, you can set up a custom OAuth authorization flow as an alternative to Astronomer's default [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2). You can customize Astronomer's existing Okta, Google, and GitHub OAuth flows or import an entirely custom OAuth flow.
 
-:::warning
+:::danger
 This setup must be completed only during a scheduled maintenance window. There should be no active users on your installation until the setup has been finalized.
 :::
 

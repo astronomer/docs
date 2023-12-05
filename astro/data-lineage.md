@@ -25,7 +25,7 @@ You can use these pages to diagnose issues that may be difficult to troubleshoot
 
 For more information on data lineage and related concepts, see [Data lineage concepts](data-lineage-concepts.md).
 
-:::caution
+:::warning
 
 All members of your Astro Organization can view the **Lineage** tab regardless of their Workspace permissions. The **Lineage** tab could contain plain-text SQL and Python code from any system that emits lineage metadata to Astro. If this is a security concern for your organization, reach out to [Astronomer support](https://support.astronomer.io/).
 

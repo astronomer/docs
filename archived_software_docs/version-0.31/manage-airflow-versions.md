@@ -69,7 +69,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
     For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
-  :::warning
+  :::danger
 
   After you upgrade your Airflow version, you can't revert to an earlier version.
 
@@ -93,7 +93,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
     astro deploy
     ```
 
-  :::caution
+  :::warning
 
   Due to a schema change in the Airflow metadata database, upgrading a Software Deployment to [AC 2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md) can take significant time. Depending on the size of your metadata database, upgrades can take 10 minutes to an hour or longer depending on the number of task instances that have been recorded in the Airflow metadata database. During this time, scheduled tasks continue to execute but new tasks are not scheduled.
 

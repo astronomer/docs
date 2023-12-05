@@ -8,7 +8,7 @@ description: Reference of all supported infrastructure for new Astro Hosted clus
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::caution
+:::warning
 
 This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
 

@@ -15,7 +15,7 @@ Based on the [management strategy for your connections and variables](manage-con
 
 ## From the Cloud UI
 
-:::caution
+:::warning
 
 This feature is in [Public Preview](feature-previews.md).
 

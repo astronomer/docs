@@ -132,7 +132,7 @@ const AdmonitionConfigs = {
     label: (
       <Translate
         id="theme.admonition.caution"
-        description="The default label used for the Caution admonition (:::caution)">
+        description="The default label used for the Caution admonition (:::warning)">
         caution
       </Translate>
     ),

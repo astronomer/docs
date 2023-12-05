@@ -21,7 +21,7 @@ This guide provides setup steps for importing IDP groups as Teams on Astronomer.
 - Teams are based solely on the IDP group they were configured from, meaning that you cannot configure Team membership from Astronomer.
 - If a user is added or removed from your original IDP group, that change applies to the related Astronomer Team only after the user logs back in to Astronomer.
 
-:::caution "Most Permissive" Role Priority
+:::warning "Most Permissive" Role Priority
 
 Astronomer user roles function on a "most permissive" policy: If a user has roles defined at both the Workspace and the Team level, then that user will continue to have the most permissive role between the two contexts. This policy has a few implications for implementing Team:
 

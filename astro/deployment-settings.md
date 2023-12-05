@@ -152,7 +152,7 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
     
      For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
      
-     :::caution Astro Hosted
+     :::warning Astro Hosted
 
      For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 
@@ -166,7 +166,7 @@ Your CPU and memory quotas determine how many tasks can run at once on your Depl
 
 The CPU and memory quotas also determine the **Max Pod Size**, which is the maximum amount of resources that a task can request.
 
-:::caution
+:::warning
 
 For Deployments running on dedicated clusters, the largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**, even if your quota is larger.
 

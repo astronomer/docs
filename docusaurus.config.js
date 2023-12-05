@@ -203,15 +203,15 @@ module.exports = {
           routeBasePath: 'astro',
           path: 'astro',
           admonitions: {
-            tag: ':::',
             keywords: [
               'caution',
-              'warning',
+              'danger',
               'info',
               'tip',
               'cli',
               'highlight'
             ],
+            extendDefaults: true,
           },
         },
         sitemap: {

@@ -30,7 +30,7 @@ To complete this setup, you need:
     podman system service -t 0 &
     ```
 
-    :::warning
+    :::danger
     Avoid running this command from a directory containing a Dockerfile.
     :::
 

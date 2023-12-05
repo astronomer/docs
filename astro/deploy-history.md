@@ -38,13 +38,13 @@ If you deploy to Astro through CI/CD, Astronomer recommends adding the Git commi
 
 ## Roll back to a past deploy
 
-:::caution
+:::warning
 
 This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
 :::
 
-:::warning
+:::danger
 
 Astronomer recommends triggering Deployment rollbacks only as a last resort for recent deploys that aren't working as expected. Deployment rollbacks can be disruptive, especially if you triggered multiple deploys between your current version and the rollback version. See [What happens during a deploy rollback](#what-happens-during-a-deploy-rollback) before you trigger a rollback to anticipate any unexpected effects.
 

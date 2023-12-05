@@ -304,7 +304,7 @@ Release date: April 11, 2023
 
 Release date: March 30, 2023
 
-:::caution
+:::warning
 
 The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to [`astro organization user invite`](/cli/astro-organization-user-invite.md) before Astro CLI v1.15.0 is released.
 
@@ -754,7 +754,7 @@ astro login
 
 For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade. For instructions, see [Migrate from `astrocloud` to `astro`](cli/install-cli.md#migrate-from-astrocloud-to-astro).
 
-:::caution Possible Breaking Change
+:::warning Possible Breaking Change
 
 If you currently have CI/CD pipelines that install the `astrocloud` executable of the Astro CLI, we encourage you to update them to use the latest version of `astro` to ensure reliability. All `astrocloud` commands will continue to work for some time but will be deprecated by Astronomer soon.
 
@@ -889,7 +889,7 @@ To better protect your Deployments from unexpected errors, `astro deploy` now au
 
 For more information about `astro deploy`, see [CLI command reference](cli/astro-deploy.md).
 
-:::warning Breaking Change
+:::danger Breaking Change
 
 For Deployments running Astro Runtime 4.1.0+, `astro deploy` will no longer complete the code push to your Deployment if your DAGs contain basic errors. If any files in your Astro project contain these errors, then certain deploys might stop working after you upgrade the Astro CLI to 1.3.0.
 

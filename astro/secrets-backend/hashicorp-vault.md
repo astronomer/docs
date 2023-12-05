@@ -90,7 +90,7 @@ vault kv put -mount=airflow connections/<your-connection-name> conn_uri=<connect
 
 To format existing connections in URI format, see [Import and export connections](import-export-connections-variables.md#using-the-astro-cli-local-environments-only).
 
-:::caution
+:::warning
 
 Do not use custom key names for your secrets. Airflow requires the key name `value` for all Airflow variables and the key name `conn_uri` for all Airflow connections as shown in the previous commands.
 

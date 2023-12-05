@@ -85,7 +85,7 @@ To delete an environment variable, remove the lines that contain its key, its va
 
 If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
-:::caution  
+:::warning  
 
 When you add environment variables using a Deployment file, you must provide a `value` for your environment variable. Leaving this value blank or as an empty string (`""`) will cause the `astro deployment create` command to fail.
 

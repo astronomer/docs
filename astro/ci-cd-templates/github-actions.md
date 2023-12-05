@@ -29,7 +29,7 @@ To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.m
 
 Each CI/CD template implementation might have additional requirements.
 
-:::caution
+:::warning
 
 If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) to execute jobs from GitHub Actions, the Astro CLI's `config.yaml` file, which stores default deploy details, might be shared across your organization and hence multiple CI/CD pipelines. To reduce the risk of accidentally deploying to the wrong Deployment, ensure the following:
 

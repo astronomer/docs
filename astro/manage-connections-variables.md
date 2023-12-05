@@ -55,7 +55,7 @@ The following sections explain the benefits, limitations, and implementations of
 
 ### Astro Cloud UI Environment Manager
 
-:::caution
+:::warning
 
 This feature is in [Public Preview](feature-previews.md).
 

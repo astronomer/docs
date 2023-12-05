@@ -9,7 +9,7 @@ Starting with Astronomer v0.27, you can deploy DAGs to an Astronomer Deployment 
 
 This guide provides setup steps for configuring git-sync as a DAG deploy option.
 
-:::warning
+:::danger
 This is currently an experimental feature because it relies on very frequent syncs with remote Git servers. If you have conservative rate limits on your Git repos, then we do not recommend using this feature until a more stable git-sync architecture has been implemented. For more information, reach out to [Astronomer support](https://support.astronomer.io/).
 :::
 

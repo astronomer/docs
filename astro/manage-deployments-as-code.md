@@ -130,7 +130,7 @@ When you update a Deployment with a Deployment file, keep the following in mind:
 - You can't change the Astro Runtime version of the Deployment. To upgrade Astro Runtime, you must update the Dockerfile in your Astro project. See [Upgrade Astro Runtime](upgrade-runtime.md).
 - Environment variables marked as secret in the Cloud UI will be exported with a blank `value` to your Deployment file. To redeploy using the Deployment file, you either need to provide the `value` again in the Deployment file or delete the object for the variable. Otherwise, `astro deployment create` will fail. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
 
-:::warning 
+:::danger 
 
 When you update a Deployment with a Deployment file, you must push a complete Deployment file that lists all of your existing worker queues. If a worker queue exists on Astro but doesn't exist in your Deployment file, the worker queue is deleted when you push your Deployment file. 
 

@@ -409,7 +409,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
-5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id> from the secrets backend and print it to the terminal:
+5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id>` from the secrets backend and print it to the terminal:
 
     ```python
     from airflow import DAG
