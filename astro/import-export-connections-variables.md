@@ -27,7 +27,7 @@ When you start a local project using `astro dev start`, you specify either the W
 
 ### Prerequisites
 - The latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
-- Either a Workspace or Deployment with at least one connection [configured through the Cloud UI](create-and-link-connections.md).
+- Either a Workspace or Deployment with at least one connection [configured through the Cloud UI](create-and-link-connections.md)
 - A local [Astro Project](https://docs.astronomer.io/astro/cli/get-started-cli#step-1-create-an-astro-project)
 - Astro Runtime 9.3.0 or greater
 - `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER` user permissions
@@ -69,9 +69,9 @@ When you start a local project using `astro dev start`, you specify either the W
     astro dev start --deployment-id [deployment-id]
     ```
 
-    :::tip
+    :::info
 
-    If you see the error, `Error: showSecrets on organization with id is not allowed`, your [Organization Owner](user-permissions.md#organization-roles) needs to enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally.
+    If you see the error `Error: showSecrets on organization with id is not allowed`, your [Organization Owner](user-permissions.md#organization-roles) needs to enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally.
 
     :::
 
