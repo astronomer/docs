@@ -236,7 +236,7 @@ module.exports = {
           },
           {
             id: 'iam',
-            spec: 'https://api.astronomer.io/spec/iam/v1beta1',
+            spec: './openapi/iam.yaml',
           },
         ],
         // Theme Options for modifying how redoc renders them
