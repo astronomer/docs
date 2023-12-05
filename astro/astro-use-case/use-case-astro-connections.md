@@ -1,10 +1,10 @@
 ---
 title: 'Manage Astro connections in branch-based deploy workflows'
-sidebar_label: 'Connections + Branch-based deploys'
+sidebar_label: 'Use connections with branch-based deploys'
 id: use-case-astro-connections
 ---
 
-Data pipelines often interact with a multitude of external systems, such as data warehouses and APIs. When using Airflow, these systems are accessed via [Airflow connections](https://docs.astronomer.io/astro/manage-connections-variables). In a best practice workflow, use different connections for different environments, such as development and production. Astro's first-class support for [branch-based development](https://docs.astronomer.io/astro/automation-overview) and central, [secure management of connections](https://docs.astronomer.io/astro/manage-connections-variables) allow you to create default settings for Connections in the Astro Cloud UI, then share them with Deployments.
+Data pipelines often interact with a multitude of external systems, such as data warehouses and APIs. When using Airflow, these systems are accessed via [Airflow connections](https://docs.astronomer.io/astro/manage-connections-variables). In a best practice workflow, use different connections for different environments, such as development and production. Astro's first-class support for [branch-based development](https://docs.astronomer.io/astro/automation-overview) and central, [secure management of connections](https://docs.astronomer.io/astro/manage-connections-variables) allow you to create default settings for connections in the Astro Cloud UI, then share them with Deployments.
 
 Branch-based development is ubiquitous in all modern software development, including data engineering and machine learning operations. It allows for multiple developers to work on the same codebase at the same time without interfering with each other's work, and for applying rigorous testing of changes before merging them into production. Combined with sharing connections across Deployments, it means you can create Deployments with connections to your sandbox or preview environments by default.  
 
@@ -12,13 +12,13 @@ When you create connections on the Astro Cloud UI, you can share default connect
 
 This use case shows you the steps for setting up a branch-based deployment workflow with [GitHub Actions](https://docs.github.com/en/actions) and Airflow connections managed in Astro using a small example project that ingests cookie recipes from S3 into Snowflake. 
 
-## Overview
+## Feature Overview
 
-This use case combines the following features to create a CI/CD pipeline that uses 
+This use case combines the following features to create a CI/CD pipeline that takes advantage of how you can create Airflow connections for multiple Deployments in the Environment Manger: 
 
-* In Part 1, you [create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/manage-connections-variables)
-* Part 2 covers [setting up multi-environment Deployments](https://docs.astronomer.io/astro/set-up-ci-cd.md#multiple-environments)
-* Part 3 describes how to run your DAGs in this environment and the required steps to pull connections from the Cloud UI to [develop locally](https://docs.astronomer.io/astro/import-export-connections-variables.md#from-the-cloud-ui).
+* Part 1, you [create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/manage-connections-variables) that can be shared to multiple Deployments.
+* Part 2 covers [setting up multi-environment Deployments](https://docs.astronomer.io/astro/set-up-ci-cd.md#multiple-environments), so you can separate your development and production environments by branches, and configure your CI/CD pipeline to deploy code when making commits to those branches.
+* Part 3 describes how to run your DAGs with a dev and prod environment. It also shares the required steps to pull connections from the Cloud UI to [develop locally](https://docs.astronomer.io/astro/import-export-connections-variables.md#from-the-cloud-ui).
 
 ## Prerequisites
 
