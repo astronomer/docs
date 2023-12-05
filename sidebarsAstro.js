@@ -350,19 +350,8 @@ module.exports = {
         description: 'Best practices and example use cases on Astro.'
       },
       items: [
-        {
-          type: 'category',
-          label: 'Connections',
-          link: {
-            type: 'generated-index',
-            title: 'Connections',
-            description: 'Learn about defining connections on Astro.'
-          },
-          items: [
-            'astro-use-case/use-case-astro-connections',
-          ],
-        }
-      ]
+        'astro-use-case/use-case-astro-connections',
+      ],
     },
   ],
   cli: [
