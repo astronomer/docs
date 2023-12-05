@@ -46,7 +46,7 @@ To run Airflow locally, you first need to create an Astro project.
     astro dev init
     ```
 
-3. To enable raw HTML in your Markdown DAG descriptions, add the following [Airflow config environment variable]((https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#allow-raw-html-descriptions)) to your `.env` file. This will allow you to use HTML in your DAG descriptions. If you don't want to enable this setting due to security concerns you will still be able to use Markdown in your DAG descriptions and the HTML show in this tutorial will be displayed as raw content.
+3. To enable raw HTML in your Markdown DAG descriptions, add the following Airflow config environment variable to your `.env` file. This will allow you to use HTML in your DAG descriptions. If you don't want to enable this setting due to security concerns you will still be able to use Markdown in your DAG descriptions and the HTML show in this tutorial will be displayed as raw content.
 
     ```text
     AIRFLOW__WEBSERVER__ALLOW_RAW_HTML_DESCRIPTIONS=True
