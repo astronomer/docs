@@ -4,13 +4,21 @@ sidebar_label: 'Connections + Branch-based deploys'
 id: use-case-astro-connections
 ---
 
-Branch-based development is ubiquitous in all modern software development, including data engineering and machine learning operations. It allows for multiple developers to work on the same codebase at the same time without interfering with each other's work, and for applying rigorous testing of changes before merging them into production.
+Data pipelines often interact with a multitude of external systems, such as data warehouses and APIs. When using Airflow, these systems are accessed via [Airflow connections](manage-connections-variables.md). In a best practice workflow, use different connections for different environments, such as development and production. Astro's first-class support for [branch-based development](https://docs.astronomer.io/astro/automation-overview) and central, [secure management of connections](https://docs.astronomer.io/astro/manage-connections-variables) allow you create default settings for Connections in the Astro Cloud UI, then share them with Deployments.
 
-Data pipelines often interact with a multitude of external systems, such as data warehouses and APIs. When using Airflow, these systems are accessed via [Airflow connections](https://docs.astronomer.io/learn/connections). In a best practice workflow, use different connections for different environments, such as development and production.  
+Branch-based development is ubiquitous in all modern software development, including data engineering and machine learning operations. It allows for multiple developers to work on the same codebase at the same time without interfering with each other's work, and for applying rigorous testing of changes before merging them into production. Combined with sharing connections across Deployments, it means you can create Deployments with connections to your sandbox or preview environments by default.  
 
-Astro offers first-class support for [branch-based development](https://docs.astronomer.io/astro/automation-overview) and central, [secure management of connections](https://docs.astronomer.io/astro/manage-connections-variables). 
+When you create connections on the Astro Cloud UI, you can share default connection settings to all Deployments in your Workspace. While this adds convenience to creating new Deployments, you can take advantage of this functionality to optimize workflows that trigger creating or updating new Deployments, so that Astro creates all new Deployments with Airflow connections to sandbox or development environments by default. When you're ready to work in production, you can easily update the Deployment connection configurations without affecting your other Deployments.
 
 This use case shows you the steps for setting up a branch-based deployment workflow with [GitHub Actions](https://docs.github.com/en/actions) and Airflow connections managed in Astro using a small example project that ingests cookie recipes from S3 into Snowflake. 
+
+## Overview
+
+This use case combines the following features to create a CI/CD pipeline that uses 
+
+* In Part 1, you [create Airflow connections in the Cloud UI](manage-connections-and-variables.md)
+* Part 2 covers [setting up multi-environment Deployments](set-up-ci-cd.md#multiple-environments)
+* Part 3 describes how to run your DAGs in this environment and the required steps to pull connections from the Cloud UI to [develop locally](import-export-connections-variables.md#from-the-cloud-ui).
 
 ## Prerequisites
 
@@ -42,7 +50,7 @@ The first part of this example shows how to set up Airflow connections on Astro 
 
 ### Step 1: Create your data warehouse connection in the Astro Environment Manager
 
-First, create 2 Airflow connections in the Astro Environment Manager for both deployments to inherit.
+First, create two Airflow connections in the Astro Environment Manager for both deployments to inherit.
 
 1. Log into your Astro account and navigate to the Astro Environment Manager. Click the **+ Connection** button to create a new connection.
 
