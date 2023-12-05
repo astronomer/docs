@@ -11,7 +11,7 @@ Astronomer Software uses [Helm](https://helm.sh/) to manage platform-level setti
 - [Registry backends](registry-backend.md)
 - [Resource allocation limits](configure-platform-resources.md)
 
-All Astronomer Software platform customizations require setting key-value pairs in a file named `config.yaml` and applying the file to your cluster. `config.yaml` contains settings for both the Astronomer Helm chart, as well Helm charts for system components like [ElasticSearch](https://github.com/astronomer/astronomer/blob/master/charts/elasticsearch/values.yaml) and [nginx](https://github.com/astronomer/astronomer/blob/master/charts/nginx/values.yaml). Using Helm allows you to keep all of your configurations in a single file that you can version and store securely. Use this document to learn how retrieve your existing Helm configuration, modify configurations, and apply your changes to your Astronomer Software cluster.
+All Astronomer Software platform customizations require setting key-value pairs in a file named `config.yaml` and applying the file to your cluster. `config.yaml` contains settings for both the Astronomer Helm chart, as well Helm charts for system components like [ElasticSearch](https://github.com/astronomer/astronomer/blob/master/charts/elasticsearch/values.yaml) and [nginx](https://github.com/astronomer/astronomer/blob/master/charts/nginx/values.yaml). Using Helm allows you to keep all of your configurations in a single file that you can version and store securely. Use this document to learn how to retrieve your existing Helm configuration, modify configurations, and apply your changes to your Astronomer Software cluster.
 
 ## Step 1: Retrieve your current cluster configuration
 
