@@ -36,7 +36,7 @@ An Organization role grants a user or API token some level of access to an Astro
 | Create, update, and delete Organization API tokens                                                      |                         |                                | ✔️                     |
 | Access, regenerate, and delete single sign-on (SSO) bypass links                                        |                         |                                | ✔️                     |
 | Create, update, and delete a Team                                                                       |                         |                                | ✔️                     |
-| Allow Environment Secrets Fetching for users to export secrets from the Cloud UI for local development. |                         |                                | ✔️                     |
+| Configure Environment Secrets Fetching for users to fetch environment secrets from the Cloud UI for local development. |                         |                                | ✔️                     |
 
 To manage users in an Organization, see [Manage Organization users](manage-organization-users.md). To manage the Organization permissions of your API tokens, see [Organization API tokens](organization-api-tokens.md).
 
