@@ -16,9 +16,9 @@ This use case shows you the steps for setting up a branch-based deployment workf
 
 This use case combines the following features to create a CI/CD pipeline that uses 
 
-* In Part 1, you [create Airflow connections in the Cloud UI](manage-connections-and-variables.md)
-* Part 2 covers [setting up multi-environment Deployments](set-up-ci-cd.md#multiple-environments)
-* Part 3 describes how to run your DAGs in this environment and the required steps to pull connections from the Cloud UI to [develop locally](import-export-connections-variables.md#from-the-cloud-ui).
+* In Part 1, you [create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/manage-connections-variables)
+* Part 2 covers [setting up multi-environment Deployments](https://docs.astronomer.io/astro/set-up-ci-cd.md#multiple-environments)
+* Part 3 describes how to run your DAGs in this environment and the required steps to pull connections from the Cloud UI to [develop locally](https://docs.astronomer.io/astro/import-export-connections-variables.md#from-the-cloud-ui).
 
 ## Prerequisites
 
