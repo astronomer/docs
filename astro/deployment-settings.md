@@ -246,6 +246,12 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 ### Configure Hibernation for scale down
 
+:::caution
+
+This feature is in [Private Preview](feature-previews.md). To access this feature or learn more, contact [Astronomer Support](https://cloud.astronomer.io/support). All customers are eligible to use this feature upon request.
+
+:::
+
 When you create a Deployment on Astro, you pay for the infrastructure resources that are required to run that Deployment for the duration of its lifetime. To avoid this fixed cost in a development or testing environment, however, Astro supports the ability to _hibernate_, or temporarily scale down, all Deployment resources when you know that you don't need those resources to run tasks. You can do this for development environments only by creating a **Hibernation Schedule** in the Cloud UI that allows you to define the start and end time of your hibernation. When you hibernate a Deployment, all Deployment configurations are preserved.
 
 For example, you might need to test a DAG during working hours on Monday and Tuesday, but you promote that DAG to production at the end of your testing and do not need to use your development environment for any other testing until the following week. In this scenario, you would create a hibernation schedule with a start time of Wednesday at 9am and an end time of Monday at 9am. During this time, your Deployment settings are preserved and your cost on Astro for the Deployment is $0. When the hibernation schedule ends, you can resume using the Deployment.
