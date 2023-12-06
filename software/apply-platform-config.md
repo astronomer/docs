@@ -30,7 +30,7 @@ Alternatively, your team might use version management to store your existing Hel
 1. Create a copy of your `config.yaml` file so that you can compare your existing configuration to your new configuration. 
 2. In your copied file, update the values for the configurations you want to change. To update a configuration you haven't already specified, copy the corresponding default values from the relevant [default Helm chart](https://github.com/astronomer/astronomer/tree/master/charts) into your `config.yaml` file and modify the value from there.
 
-When you have finished updating the configuration, ensure that they have the same relative order and indentation as they do in the [default configuration file](https://github.com/astronomer/astronomer/blob/master/values.yaml). If they don't, your changes might not be properly applied. The name of the Helm charts you're modifying should be the first keys in the file, such as in the following example:
+When you have finished updating the configuration, ensure that they have the same relative order and indentation as they do in the [default configuration file](https://github.com/astronomer/astronomer/blob/master/values.yaml). If they don't, your changes might not be properly applied. The name of the Helm charts you're modifying should be the first items in the file, such as in the following example:
  
 ```yaml
 global:
