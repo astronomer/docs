@@ -28,9 +28,9 @@ module.exports = {
           label: "Run your first DAG",
           link: { type: 'doc', id: 'run-first-dag' },
           items: ["first-dag-github-actions", "first-dag-cli"],
-        
+
         },
-        "log-in-to-astro", 
+        "log-in-to-astro",
         {
           type: "category",
           label: "Migrate to Astro",
@@ -99,23 +99,31 @@ module.exports = {
         {
           type: "category",
           label: "Executors",
-          items: ["executors-overview","celery-executor", "kubernetes-executor"],
-        }, 
+          items: ["executors-overview", "celery-executor", "kubernetes-executor"],
+        },
         "configure-worker-queues",
-        "environment-variables",
+        {
+          type: "category",
+          label: "Environment variables",
+          link: {
+            type: 'doc',
+            id: 'environment-variables'
+          },
+          items: ["environment-variables", "manage-env-vars"],
+        },
         {
           type: "category",
           label: "Secrets backend",
           link: { type: 'doc', id: 'secrets-backend' },
-          items: ["secrets-backend", 
-          "secrets-backend/aws-secretsmanager",
-          "secrets-backend/aws-paramstore",
-          "secrets-backend/azure-key-vault" ,
-          "secrets-backend/hashicorp-vault", 
-          "secrets-backend/gcp-secretsmanager", 
+          items: ["secrets-backend",
+            "secrets-backend/aws-secretsmanager",
+            "secrets-backend/aws-paramstore",
+            "secrets-backend/azure-key-vault",
+            "secrets-backend/hashicorp-vault",
+            "secrets-backend/gcp-secretsmanager",
           ],
         },
-        "manage-dags", 
+        "manage-dags",
       ],
     },
     {
@@ -155,7 +163,7 @@ module.exports = {
             "manage-deployments-as-code",
             "deployment-file-reference"],
         },
-        "api-keys", 
+        "api-keys",
       ],
     },
     {
@@ -193,7 +201,7 @@ module.exports = {
           items: [
             "manage-organization-users",
             "manage-workspace-users",
-            "manage-teams",  
+            "manage-teams",
             "configure-idp",
             "set-up-scim-provisioning",
             "manage-domains",
@@ -204,9 +212,9 @@ module.exports = {
           type: "category",
           label: "Deployments",
           items: [
-          "deployment-api-tokens",  
-          "authorize-deployments-to-your-cloud", 
-          "transfer-a-deployment",
+            "deployment-api-tokens",
+            "authorize-deployments-to-your-cloud",
+            "transfer-a-deployment",
           ],
         },
         {
@@ -225,10 +233,10 @@ module.exports = {
               type: "category",
               label: "Networking",
               items: [
-                "connect-aws", 
-                "connect-azure", 
+                "connect-aws",
+                "connect-azure",
                 "connect-gcp"
-            ],
+              ],
             },
           ],
         },
@@ -331,6 +339,18 @@ module.exports = {
           ],
         },
         "astro-glossary"
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Use cases',
+      link: {
+        type: 'generated-index',
+        title: 'Use cases',
+        description: 'Best practices and example use cases on Astro.'
+      },
+      items: [
+        'astro-use-case/use-case-astro-connections',
       ],
     },
   ],
@@ -523,7 +543,7 @@ module.exports = {
             "cli/astro-organization-user-invite",
             "cli/astro-organization-user-list",
             "cli/astro-organization-user-update",
-            
+
           ],
         },
         {

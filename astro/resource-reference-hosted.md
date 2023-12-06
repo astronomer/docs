@@ -92,11 +92,11 @@ Currently, standard clusters are available on the following clouds and regions:
 
 <TabItem value="azure">
 
-| Code           | Region                  |
-| -------------- | ----------------------- |
-| `eastus2`      | Virginia, North America |
-| `westus2`      | Washington, North America |
-| `westeurope`   | Netherlands, Europe     |
+| Code         | Region                    |
+| ------------ | ------------------------- |
+| `eastus2`    | Virginia, North America   |
+| `westus2`    | Washington, North America |
+| `westeurope` | Netherlands, Europe       |
 
 </TabItem>
 
@@ -141,8 +141,15 @@ Currently, dedicated clusters are available on the following clouds and regions:
 | Code            | Region         |
 | --------------- | -------------- |
 | `australiaeast` | Australia East |
+| `brazilsouth`   | Brazil South   |
+| `canadacentral` | Canada Central |
+| `centralindia`  | Central India  |
+| `eastus2`       | East US        |
 | `eastus2`       | East US 2      |
+| `francecentral` | France Central |
+| `japaneast`     | Japan East     |
 | `northeurope`   | North Europe   |
+| `uksouth`       | UK South       |
 | `westeurope`    | West Europe    |
 | `westus2`       | West US 2      |
 

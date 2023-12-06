@@ -11,7 +11,7 @@ import captains_dag from '!!raw-loader!../code-samples/dags/airflow-openai/capta
 
 [OpenAI](https://openai.com/) is an AI research and deployment company that provides an API for accessing state of the art models like [GPT-4](https://openai.com/gpt-4) and [DALL·E 3](https://openai.com/dall-e-3). The [OpenAI Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-openai/stable/index.html) offers modules to easily integrate OpenAI with Airflow.
 
-In this tutorial you'll use Airflow and the OpenAI Airflow provider to generate answers to any question you want to ask Star Trek captains, create embeddings of the answers, and plot them in two dimensions. 
+In this tutorial you'll use Airflow and the OpenAI Airflow provider to ask a question to Star Trek captains, create embeddings of the answers from each captain, and plot them in two dimensions. 
 
 ## Why use Airflow with OpenAI?
 
@@ -70,7 +70,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     ```text
     AIRFLOW_CONN_OPENAI_DEFAULT='{
         "conn_type": "openai",
-        "password": "<your-openai-api-key>",
+        "password": "<your-openai-api-key>"
     }'
     ```
 

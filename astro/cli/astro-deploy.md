@@ -4,7 +4,7 @@ title: "astro deploy"
 id: astro-deploy
 description: Deploy a local project to an Astro Deployment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
 import Tabs from '@theme/Tabs';
@@ -28,7 +28,7 @@ values={[
 
 This command bundles all files in your Astro project and pushes them to Astro. Before completing the process, it tests your DAGs in your Astro project for errors. If this test fails, the deploy to Astro will also fail. This is the same test which runs locally with `astro dev parse`.
 
-When you run `astro deploy`, you'll be prompted to select from a list of all Deployments that you can access across Workspaces. To bypass this prompt, you can also specify a Deployment ID in the command. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
+When you run `astro deploy`, the CLI prompts you to select from a list of all Deployments that you can access across Workspaces. To bypass this prompt, you can also specify a Deployment ID in the command. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
 
 For teams operating at scale, this command can be automated with a [CI/CD pipeline](set-up-ci-cd.md) by using [Deployment API tokens](deployment-api-tokens.md) in the request. When `ASTRO_API_TOKEN` is specified as OS-level environment variables on your local machine or in a CI tool, `astro deploy <deployment-id>` can be run without requiring user authentication.
 
@@ -49,21 +49,22 @@ astro deploy <options>
 
 ## Options
 
-| Option                    | Description                                                                                                                                           | Possible Values                                                  |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt                                                                    | Any valid Deployment ID                                          |
-| `-d`, `--dags`            | Deploy only your `dags` directory. See [DAG-only deploys](deploy-code.md#dag-only-deploys)                                                            | None                                                             |
-| `-n`, `--deployment-name` | The name of the Deployment to deploy to. Use as an alternative to `<deployment-id>`                                                                   | Any valid Deployment name                                        |
-| `--description`           | A description for your code deploy. Descriptions appear in the Cloud UI in your Deployment's **Deploy History**                                       | None                                                             |
-| `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`.                                                        | Any valid filepath to an `.env` file                             |
-| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                                                                              | None                                                             |
-| `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified                                                                            | None                                                             |
-| `--pytest`                | Deploy code to Astro only if the specified pytests are passed                                                                                         | None                                                             |
-| `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys                                                                      | None                                                             |
-| `-t`,`--test`             | The filepath to an alternative pytest file or directory                                                                                               | Valid filepath within your Astro project                         |
-| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace                                                                     | Any valid Workspace ID                                           |
-| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
-| `-w`, `--wait`            | Wait for the Deployment to become healthy before completing the command                                                                                   | None                                                             |
+| Option                    | Description                                                                                                                                                      | Possible Values                                                  |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt                                                                               | Any valid Deployment ID                                          |
+| `-d`, `--dags`            | Deploy only your `dags` directory. See [DAG-only deploys](deploy-code.md#dag-only-deploys)                                                                       | None                                                             |
+| `-n`, `--deployment-name` | The name of the Deployment to deploy to. Use as an alternative to `<deployment-id>`                                                                              | Any valid Deployment name                                        |
+| `--description`           | A description for your code deploy. Descriptions appear in the Cloud UI in your Deployment's **Deploy History**                                                  | None                                                             |
+| `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`.                                                                   | Any valid filepath to an `.env` file                             |
+| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                                                                                         | None                                                             |
+| `--image`                 | If you have DAGs-only deploys enabled, use this flag to deploy only your Astro project image. When you use this option, your `dags` folder is not deployed to Astro | None                                                             |
+| `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified                                                                                       | None                                                             |
+| `--pytest`                | Deploy code to Astro only if the specified pytests are passed                                                                                                    | None                                                             |
+| `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys                                                                                 | None                                                             |
+| `-t`,`--test`             | The filepath to an alternative pytest file or directory                                                                                                          | Valid filepath within your Astro project                         |
+| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace                                                                                | Any valid Workspace ID                                           |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine            | A valid name for a pre-built Docker image based on Astro Runtime |
+| `-w`, `--wait`            | Wait for the Deployment to become healthy before completing the command                                                                                          | None                                                             |
 
 ## Examples
 
@@ -130,6 +131,7 @@ $ astro deploy ckvvfp9tf509941drl4vela81n
 # The CLI automatically selects this Deployment for your Astro project
 $ astro deploy ckvvfp9tf509941drl4vela81n --save
 ```
+
 </TabItem>
 </Tabs>
 
@@ -138,13 +140,15 @@ $ astro deploy ckvvfp9tf509941drl4vela81n --save
 The following error can sometimes occur when the CLI tries to build your Astro Runtime image using Podman:
 
 ```bash
-WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format 
+WARN[0010] SHELL is not supported for OCI image format, [/bin/bash -o pipefail -e -u -x -c] will be ignored. Must use `docker` format
 ```
+
 You can resolve this issue by exporting the `BUILDAH_FORMAT` [environment variable](astro/environment-variables.md) to Podman:
 
 ```dockerfile
 export BUILDAH_FORMAT=docker
 ```
+
 :::
 
 ## Related commands

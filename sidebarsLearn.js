@@ -213,6 +213,10 @@ module.exports = {
         'airflow-mongodb',
         'connections/ms-sqlserver',
         'airflow-openai',
+        'airflow-opensearch',
+        'airflow-pgvector',
+        'airflow-pinecone',
+        'connections/postgres',
         {
           type: 'category',
           label: 'Redshift',
@@ -227,7 +231,6 @@ module.exports = {
             'airflow-redshift',
           ],
         },
-        'connections/postgres',
         {
           type: 'category',
           label: 'Snowflake',
@@ -263,6 +266,7 @@ module.exports = {
           'use-case-airflow-dbt',
           'use-case-elt-ml-finance',
           'use-case-airflow-llm-rag-finance',
+          'use-case-llm-customer-feedback',
           'use-case-airflow-ml-datasets',
           'use-case-airflow-mlflow'
       ],
