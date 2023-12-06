@@ -13,7 +13,7 @@ Astro Runtime includes the following features for Astronomer Software:
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html)
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
 
-For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](runtime-release-notes.md).
+For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
 
 ## Runtime versioning
 
@@ -23,7 +23,7 @@ Astro Runtime versions are released regularly and use [semantic versioning](http
 - **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backward compatible, which might include new minor versions of `astronomer-providers` and `openlineage-airflow`.
 - **Patch** versions are released for bug and security fixes that resolve unwanted behavior. This includes new patch versions of Apache Airflow, `astronomer-providers`, and `openlineage-airflow`.
 
-Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace. See [Create a Deployment](create-deployment.md#create-a-deployment).
+Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given Workspace. 
 
 For a list of supported Astro Runtime versions and more information on the Astro Runtime maintenance policy, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md).
 
@@ -41,8 +41,6 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 7             | 2.5                    |
 | 8             | 2.6                    |
 | 9             | 2.7                    |
-
-For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
 ## Default environment variables
 
@@ -79,7 +77,7 @@ The latest version of the Astro Runtime image has the following open source prov
 
 ### Provider package versioning
 
-If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](runtime-release-notes.md).
+If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
 
 To determine the version of any provider package installed in your current Astro Runtime image, run:
 
