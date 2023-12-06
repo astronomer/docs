@@ -256,7 +256,10 @@ When you create a Deployment on Astro, you pay for the infrastructure resources 
 
 For example, if you only need to test a DAG during working hours, you can set a hibernation schedule for 5:00 PM until 9:00 AM on Monday through Friday. During this time, your Deployment settings are preserved and your cost on Astro for the Deployment is $0. When the hibernation schedule ends, you can resume using the Deployment.
 
-Use Deployment Hibernation to ensure that:
+
+![Example of setting a hibernation schedule in the Cloud UI. There are two schedules being set, one for weekdays and one for weekends.](/img/docs/hibernating-schedule.png)
+
+Use Deployment hibernation to ensure that:
 
 - You only pay for the resources that you need, when you need them.
 - You don't have to delete a Deployment in order to avoid the cost of the Deployment.
