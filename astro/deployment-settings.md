@@ -244,56 +244,61 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 :::
 
-### Hibernate a Deployment
+### Hibernate a development Deployment
 
 :::caution
 
-This feature is in [Private Preview](feature-previews.md). To access this feature or learn more, contact [Astronomer Support](https://cloud.astronomer.io/support). All customers are eligible to use this feature upon request.
+This feature is in [Private Preview](feature-previews.md). To access this feature or learn more, [contact Astronomer](https://www.astronomer.io/contact/). All customers are eligible to use this feature upon request.
 
 :::
 
-When you create a Deployment on Astro, you pay for the infrastructure resources that are required to run that Deployment for the duration of its lifetime. To avoid this fixed cost in a development or testing environment, however, Astro supports the ability to _hibernate_, or temporarily scale down, all Deployment resources when you know that you don't need those resources to run tasks. You can do this for development environments only by creating a **Hibernation Schedule** in the Cloud UI that allows you to define the start and end time of your hibernation. When you hibernate a Deployment, all Deployment configurations are preserved.
+When you create a Deployment on Astro, you pay for the infrastructure resources that are required to run the Deployment for the duration that it's active. In development environments when you aren't always running tasks, you can _hibernate_, or scale down, all Deployment resources on a specified schedule. When you hibernate a Deployment, all Deployment configurations are preserved, but computing resources are scaled to zero.
 
-For example, you might need to test a DAG during working hours on Monday and Tuesday, but you promote that DAG to production at the end of your testing and do not need to use your development environment for any other testing until the following week. In this scenario, you would create a hibernation schedule with a start time of Wednesday at 9am and an end time of Monday at 9am. During this time, your Deployment settings are preserved and your cost on Astro for the Deployment is $0. When the hibernation schedule ends, you can resume using the Deployment.
+For example, if you only need to test a DAG during working hours, you can set a hibernation schedule for 5:00 PM until 9:00 AM on Monday through Friday. During this time, your Deployment settings are preserved and your cost on Astro for the Deployment is $0. When the hibernation schedule ends, you can resume using the Deployment.
 
-The ability to scale down resources for development environments is a great way to minimize the cost of testing DAGs. Specifically:
+Use Deployment Hibernation to ensure that:
 
-- You can ensure that you only pay for the resources that you need, when you need them.
+- You only pay for the resources that you need, when you need them.
 - You don't have to delete a Deployment in order to avoid the cost of the Deployment.
-- You don't need to regularly recreate development environments and re-enter Deployment configurations.
+- You don't have to recreate development environments and re-enter Deployment configurations.
 
-#### Create a Hibernation Schedule
-
-To scale down resources for a development environment, set a hibernation schedule for the Deployment. You can configure multiple hibernation schedules for a single Deployment. Each hibernation schedule is defined by a **Start Schedule** and **End Schedule**. For example, "Every week at midnight on Friday" or "Every week at midnight on Sunday."
+#### Create a hibernation schedule
 
 Before you create a hibernation schedule for a Deployment, consider the following constraints:
 
-- The Deployment must have the **Is Development?** seting turned on. This feature is only available for development environments.
+- The Deployment must have the **Is Development?** setting turned on.
 - The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
-- The **Small Scheduler** (1v CPU, 2 Gib RAM) is the only scheduler size supported. You cannot configure a larger scheduler size.
-
-Between the start and end time of the hibernation schedule:
-
-- Any task that was previously running will be killed and marked as failed.
-- Tasks and DAGs will not run. Scheduled tasks will fail.
-- No Deployment resources are available. This includes the scheduler, webserver, and all workers.
-- You cannot access the Airflow UI for the Deployment.
-- The status of the Deployment will be `HIBERNATING` instead of `HEALTHY`.
+- The **Small Scheduler** (1v CPU, 2 Gib RAM) is the only scheduler size supported. 
+- Deployments with hibernation schedules are not required to meet the uptime SLAs of standard production Deployments.
 
 To create a hibernation schedule:
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
-3. In the **Advanced** section, go to the **Scheduler** sub-section and click the toggle to **On** for **Is Development?**.
-4. Configure the following values:
-     - **Start Schedule**. At this time, your Deployment's resources will scale to zero.
-     - **End Schedule**. At this time, Astro will automatically recreate the Deployment's resources as they are configured.
-     - **Description** (Optional). Give your hibernation schedule a description.
+1. In the Cloud UI, select a Workspace, click **Deployments**, then select a Deployment.
+2. Click **Details**. In the **Advanced** section of your Deployment configuration, click **Edit**.
+3. In **Scheduler** sub-section and, click the toggle to **On** for **Is Development?**. A **Hibernation schedules** section appears.
+4. Configure the following values in **Hibernation schedules**:
+     - **Start Schedule**: Specify the time that your Deployment resources scale to zero.
+     - **End Schedule**: Specify the time that Astro restarts your configured resources.
+     - **Description**: (Optional) Give your hibernation schedule a description.
+     - **Enabled**: Tick this checkbox if you want to activate the schedule after configuring it.
+
+5. (Optional) Specify additional hibernation schedules for your Deployment.
 5. Select **Update Deployment** to save your changes.
 
-#### Wake up from Hibernation
+When your hibernation schedule starts:
 
-If you need to run a task or DAG on a Deployment that is in hibernation, you can choose to wake up the Deployment from hibernation. When you do this, the infrastructure resources for the Deployment become available.
+- Your Deployment shows a **Hibernating** status in the Cloud UI:
+
+    ![A Deployment with a Hibernating status on the Deployments page of the Cloud UI](/img/docs/hibernating-status.png)
+
+- Any task that was previously running will be killed and marked as failed.
+- Tasks and DAGs do not run. Scheduled tasks will fail.
+- No Deployment resources are available. This includes the scheduler, webserver, and all workers.
+- You cannot access the Airflow UI for the Deployment.
+
+#### Wake up from hibernation
+
+If you need to run a task or DAG on a Deployment that is currently in hibernation, you cna manually wake up the Deployment from hibernation before the end of its schedule.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to update, and select **Wake up from hibernation**.
