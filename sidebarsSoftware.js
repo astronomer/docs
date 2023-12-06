@@ -28,7 +28,6 @@ module.exports = {
       label: 'Develop',
       items: [
       'customize-image',
-      'manage-airflow-versions',
       'upgrade-to-airflow-2',
       'access-airflow-database',
       'airflow-api',
@@ -142,6 +141,7 @@ module.exports = {
       type: 'category',
       label: 'Astro Runtime',
       items: [
+      'manage-airflow-versions',
       'runtime-image-architecture',
       'migrate-to-runtime',
       'runtime-version-lifecycle-policy',

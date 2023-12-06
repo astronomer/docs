@@ -1,6 +1,6 @@
 ---
-title: "Upgrade Airflow/ Astro Runtime on Astronomer Software"
-sidebar_label: "Upgrade Airflow/ Astro Runtime"
+title: "Upgrade Astro Runtime/ Airflow on Astronomer Software"
+sidebar_label: "Upgrade Astro Runtime/ Airflow"
 id: manage-airflow-versions
 description: Adjust and upgrade Airflow versions on Astronomer Software.
 ---
@@ -14,8 +14,8 @@ Regularly upgrading your Software Deployments ensures that your Deployments cont
 To upgrade your Airflow Deployment to a later version of Airflow:
 
 - Select a new Airflow version with the Software UI or CLI to start the upgrade.
-- Change the FROM statement in your project's `Dockerfile` to reference an Astronomer Certified (AC) or Astro Runtime image that corresponds to your current Airflow version. See [Customize Your Image](customize-image.md).
-- Deploy to Astronomer.
+- Change the FROM statement in your project's `Dockerfile` to reference an Astro Runtime image that corresponds to your current Airflow version.
+- Deploy your upgrade to Astronomer.
 
 ## Available Astronomer image versions
 
@@ -31,7 +31,7 @@ If you get a message indicating that a job already exists, delete the job and re
 
 ## Step 1: Review upgrade considerations
 
-Astro upgrades can include breaking changes, especially when you're upgrading to a new major version. Check the [upgrade considerations](#upgrade-considerations) for your upgrade version to anticipate any breaking changes or upgrade-specific instructions before you proceed.
+Astro Runtime upgrades can include breaking changes, especially when you're upgrading to a new major version. Check the [upgrade considerations](#upgrade-considerations) for your upgrade version to anticipate any breaking changes or upgrade-specific instructions before you proceed.
 
 ## Step 2: Start the upgrade process
 
@@ -104,15 +104,19 @@ The Astro CLI then generates test results in your Astro project that identify de
 
   :::
 
-3. (Optional) Test your upgrade on your local machine by running:
+3. Save the changes to your `Dockerfile`.
 
-    ```sh
-    astro dev restart
-    ```
+## Step 6: Test Astro Runtime locally
 
-    All 4 Airflow Docker containers restart and begin running your new image.
+Astronomer recommends testing new versions of Astro Runtime locally to ensure that Airflow starts as expected before upgrading your Deployment on Astro.
 
-    To confirm that your migration was successful, open the Airflow UI at `localhost:8080` and scroll to the bottom of any page. You should see your new Runtime version in the footer.
+1. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
+2. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
+3. Confirm that your local upgrade was successful by scrolling to the bottom of any page. You should see your new Astro Runtime version in the footer as well as the version of Airflow it is based on.
+
+    ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
+
+4. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
 ## Step 6: Deploy to Astronomer
 
@@ -127,21 +131,19 @@ The Astro CLI then generates test results in your Astro project that identify de
 
 ## Cancel Airflow upgrade
 
-As a System Admin, you can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer image in your `Dockerfile` and deployed it.
+As a System Admin, you can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer Runtime image in your `Dockerfile` and deployed it.
 
 In the Software UI, select **Cancel** next to **Airflow Version**.
 
 Using the Astro CLI, run:
 
-```
+```sh
 astro deployment airflow upgrade --cancel --deployment-id=<deployment-id>
 ```
 
 For example, if you cancel an upgrade from Airflow 2.1.0 to Airflow 2.2.0 in the CLI, the following message appears:
 
-```bash
-astro deployment airflow upgrade --cancel --deployment-id=ckguogf6x0685ewxtebr4v04x
-
+```sh
 Airflow upgrade process has been successfully canceled. Your Deployment was not interrupted and you are still running Airflow 2.1.0.
 ```
 
@@ -161,16 +163,15 @@ astronomer:
 
 :::
 
-
 ## Upgrade considerations
 
 Consider the following when you upgrade Astro Runtime:
 
 - Astronomer does not support downgrading a Deployment on Astronomer Software to a lower version of Astro Runtime.
 - All versions of the Astro CLI support all versions of Astro Runtime. There are no dependencies between the two products.
-- Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Version-specific upgrade considerations](upgrade-runtime.md#version-upgrade-considerations).
+- Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Version-specific upgrade considerations](#version-upgrade-considerations).
 
-To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](runtime-release-notes.md). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
 ### Version upgrade considerations
 
