@@ -21,11 +21,11 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## December 5, 2023
+## December 6, 2023
 
 ### Additional improvements
 
-- The [Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections) is now generally available.
+- The [Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections) is now generally available. This feature allows you to create and manage Airflow connections in the Cloud UI.
 
 ### Bug fixes
 
