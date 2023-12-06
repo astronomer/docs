@@ -301,7 +301,7 @@ When your hibernation schedule starts:
 
 #### Wake up from hibernation
 
-If you need to run a task or DAG on a Deployment that is currently in hibernation, you cna manually wake up the Deployment from hibernation before the end of its schedule.
+If you need to run a task or DAG on a Deployment that is currently in hibernation, you can manually wake up the Deployment from hibernation before the end of its schedule.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to update, and select **Wake up from hibernation**.
