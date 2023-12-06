@@ -5,7 +5,7 @@ id: deployment-settings
 description: "Manage Deployment settings to customize your Deployment for your use case."
 ---
 
-After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There's two categories of options for configuring your Astro Deployment to best meet your needs: Deployment details and resource configuration.
+After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There are two categories of options for configuring your Astro Deployment to best meet your needs: Deployment details and resource configuration.
 
 Use Deployment details to manage the administration of your Deployment. This includes includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro: 
 
@@ -14,7 +14,7 @@ Use Deployment details to manage the administration of your Deployment. This inc
 - Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
 
-You also have configuration options that allow you to customize the resource use, infrastructure, and performance of your Deployment. This means you can optimize how your deployment uses resources, so you can improve the efficeincy of your Deployment processing, optimize compute resources, or enable advanced use cases for workload and cost optimization. The following configuration options enable you to specialize your Deployment configuration to get the maximum performance out of your Astro resources:
+You also have configuration options that allow you to customize the resource use, infrastructure, and performance of your Deployment. This means you can optimize how your Deployment uses resources, so you can improve the efficiency of your Deployment processing, optimize compute resources and cost, or enable advanced use cases with intensive workloads. The following configuration options enable you to customize your Deployment to get the most out of your resources on Astro:
 
 - Change the Deployment executor.
 - Configure Kubernetes Pod resources.
@@ -243,6 +243,55 @@ On Astro Hybrid, PgBouncer is highly available by default for all Deployments. S
 Every Deployment has two PgBouncer Pods assigned to two different nodes to prevent zombie tasks. If you configure your Deployment with two schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses three or four schedulers can assign all scheduler Pods across two nodes.
 
 :::
+
+### Configure Hibernation for scale down
+
+When you create a Deployment on Astro, you pay for the infrastructure resources that are required to run that Deployment for the duration of its lifetime. To avoid this fixed cost in a development or testing environment, however, Astro supports the ability to _hibernate_, or temporarily scale down, all Deployment resources when you know that you don't need those resources to run tasks. You can do this for development environments only by creating a **Hibernation Schedule** in the Cloud UI that allows you to define the start and end time of your hibernation. When you hibernate a Deployment, all Deployment configurations are preserved.
+
+For example, you might need to test a DAG during working hours on Monday and Tuesday, but you promote that DAG to production at the end of your testing and do not need to use your development environment for any other testing until the following week. In this scenario, you would create a hibernation schedule with a start time of Wednesday at 9am and an end time of Monday at 9am. During this time, your Deployment settings are preserved and your cost on Astro for the Deployment is $0. When the hibernation schedule ends, you can resume using the Deployment.
+
+The ability to scale down resources for development environments is a great way to minimize the cost of testing DAGs. Specifically:
+
+- You can ensure that you only pay for the resources that you need, when you need them.
+- You don't have to delete a Deployment in order to avoid the cost of the Deployment.
+- You don't need to regularly recreate development environments and re-enter Deployment configurations.
+
+#### Create a Hibernation Schedule
+
+To scale down resources for a development environment, set a hibernation schedule for the Deployment. You can configure multiple hibernation schedules for a single Deployment. Each hibernation schedule is defined by a **Start Schedule** and **End Schedule**. For example, "Every week at midnight on Friday" or "Every week at midnight on Sunday."
+
+Before you create a hibernation schedule for a Deployment, consider the following constraints:
+
+- The Deployment must have the **Is Development?** seting turned on. This feature is only available for development environments.
+- The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
+- The **Small Scheduler** (1v CPU, 2 Gib RAM) is the only scheduler size supported. You cannot configure a larger scheduler size.
+
+Between the start and end time of the hibernation schedule:
+
+- Any task that was previously running will be killed and marked as failed.
+- Tasks and DAGs will not run. Scheduled tasks will fail.
+- No Deployment resources are available. This includes the scheduler, webserver, and all workers.
+- You cannot access the Airflow UI for the Deployment.
+- The status of the Deployment will be `HIBERNATING` instead of `HEALTHY`.
+
+To create a hibernation schedule:
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
+3. In the **Advanced** section, go to the **Scheduler** sub-section and click the toggle to **On** for **Is Development?**.
+4. Configure the following values:
+     - **Start Schedule**. At this time, your Deployment's resources will scale to zero.
+     - **End Schedule**. At this time, Astro will automatically recreate the Deployment's resources as they are configured.
+     - **Description** (Optional). Give your hibernation schedule a description.
+5. Select **Update Deployment** to save your changes.
+
+#### Wake up from Hibernation
+
+If you need to run a task or DAG on a Deployment that is in hibernation, you can choose to wake up the Deployment from hibernation. When you do this, the infrastructure resources for the Deployment become available.
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Options** menu of the Deployment you want to update, and select **Wake up from hibernation**.
+3. Wait for the Deployment status to turn `HEALTHY`. Then, you can access the Airflow UI and resume running tasks.
 
 ## See also
 
