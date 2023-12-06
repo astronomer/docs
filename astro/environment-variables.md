@@ -33,16 +33,16 @@ Environment variables can be used in many different contexts on Airflow. To choo
 On Astro, you can manage environment variables from two different locations:
 
 - Your Deployment's **Variables** tab in the Cloud UI. This is the fastest and easiest way to set an environment variable. See [Using the Cloud UI](manage-env-vars.md#using-the-cloud-ui) for setup steps.
-- Your Astro project `Dockerfile`. Storing environment variables in your Dockerfile allows you to manage them as code in a version control tool like GitHub. However, environment variables stored in the Dockerfile do not appear in the Cloud UI and might be harder to reference from DAG code.  Using the Dockerfile is recommended for more complex production use cases, such as implementing a secrets backend. See [Using your Dockerfile](manage-env-vars.md#using-your-dockerfile) for setup steps. 
+- Your Astro project `Dockerfile`. Storing environment variables in your Dockerfile allows you to manage them as code in a version control tool like GitHub. However, environment variables stored in the Dockerfile do not appear in the Cloud UI and might be harder to reference from DAG code.  Using the Dockerfile is recommended for more complex production use cases, such as implementing a secrets backend. See [Using your Dockerfile](manage-env-vars.md#using-your-dockerfile) for setup steps.
 
-At the local development level, you can use your Astro project `.env` file to set and test environment variables. When you're ready to push these environment variables to a Deployment, you can use the Astro CLI to export and store them in the Cloud UI for your Deployment. 
+At the local development level, you can use your Astro project `.env` file to set and test environment variables. When you're ready to push these environment variables to a Deployment, you can use the Astro CLI to export and store them in the Cloud UI for your Deployment.
 
 
 ### How environment variables are stored in the Cloud UI
 
-When you set a non-secret environment variable in the Cloud UI, Astronomer stores the variable in a database that is hosted and managed by Astronomer. 
+When you set a non-secret environment variable in the Cloud UI, Astronomer stores the variable in a database that is hosted and managed by Astronomer.
 
-When set a secret environment variable in the Cloud UI, the following happens:
+When you set a secret environment variable in the Cloud UI, the following happens:
 
 1. Astro generates a manifest that defines a Kubernetes secret, named `env-secrets`, that contains your variable's key and value.
 2. Astro applies this manifest to your Deployment's namespace.
@@ -62,7 +62,7 @@ To avoid exposing secret values in task logs, instruct users to not log environm
 
 On Astro, environment variables set in the Cloud UI take precedence over environment variables set in your Dockerfile.
 
-For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence. 
+For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.
 
 Similarly, in local development, environment variables set in your `.env` file take precedence over environment variables set in your Dockerfile.
 
