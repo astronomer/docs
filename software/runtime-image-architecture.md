@@ -7,16 +7,11 @@ description: Reference documentation for Astro Runtime, a differentiated distrib
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance.
 
-Deploying Astro Runtime is a requirement if your organization is using Astro. Astro Runtime includes the following features:
+Astro Runtime includes the following features for Astronomer Software:
 
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
-- Exclusive features to enrich the task execution experience, including smart task concurrency defaults and high availability configurations.
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html)
-- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
-- A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
-- A custom security manager that enforces user roles and permissions as defined by Astro. See [User permissions](user-permissions.md).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
-- A monitoring DAG that the Astronomer team uses to monitor the health of Astro Deployments.
 
 For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](runtime-release-notes.md).
 
@@ -113,7 +108,7 @@ If you're currently using the `KubernetesPodOperator` or the `PythonVirtualenvOp
 
 In Airflow, the executor is responsible for determining how and where a task is completed.
 
-In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astro, you have a choice of the [Celery and Kubernetes Executors](executors-overview.md).
+In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astronomer Software, you have a choice of the Celery and Kubernetes executors.
 
 ## Distribution
 
@@ -126,7 +121,7 @@ The base Astro Runtime Docker images have the following format:
 - `quay.io/astronomer/astro-runtime:<version>`
 - `quay.io/astronomer/astro-runtime:<version>-base`
 
-An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
+An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/develop-project#install-python-packages-from-private-sources).
 
 ### Python version distributions
 
@@ -153,6 +148,6 @@ Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 
 
 ## Related documentation
 
-- [Astro Runtime release notes](runtime-release-notes.md)
+- [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes)
 - [Upgrade Runtime](https://docs.astronomer.io/astro/upgrade-runtime)
 - [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md)
