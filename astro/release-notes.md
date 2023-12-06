@@ -57,12 +57,6 @@ See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/
 
 ### Create Airflow connections in the Cloud UI and link them to Deployments
 
-:::caution
-
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
-
-:::
-
 You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
 
 Note that this feature is currently available only for Deployments running the Celery executor.
