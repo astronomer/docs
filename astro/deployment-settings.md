@@ -244,7 +244,7 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 :::
 
-### Configure Hibernation for scale down
+### Hibernate a Deployment
 
 :::caution
 
