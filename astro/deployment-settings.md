@@ -269,7 +269,7 @@ Use Deployment hibernation to ensure that:
 
 Before you create a hibernation schedule for a Deployment, consider the following constraints:
 
-- The Deployment must have the **Is Development?** setting turned on.
+- The Deployment must have the **Is Development?** setting turned on. This setting can only be configured when you create a Deployment.
 - The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
 - The **Small Scheduler** (1v CPU, 2 Gib RAM) is the only scheduler size supported. 
 - Deployments with hibernation schedules are not required to meet the uptime SLAs of standard production Deployments.
@@ -278,14 +278,13 @@ To create a hibernation schedule:
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, then select a Deployment.
 2. Click **Details**. In the **Advanced** section of your Deployment configuration, click **Edit**.
-3. In **Scheduler** sub-section and, click the toggle to **On** for **Is Development?**. A **Hibernation schedules** section appears.
-4. Configure the following values in **Hibernation schedules**:
+3. Configure the following values in **Hibernation schedules**:
      - **Start Schedule**: Specify the time that your Deployment resources scale to zero.
      - **End Schedule**: Specify the time that Astro restarts your configured resources.
      - **Description**: (Optional) Give your hibernation schedule a description.
      - **Enabled**: Tick this checkbox if you want to activate the schedule after configuring it.
 
-5. (Optional) Specify additional hibernation schedules for your Deployment.
+4. (Optional) Specify additional hibernation schedules for your Deployment.
 5. Select **Update Deployment** to save your changes.
 
 When your hibernation schedule starts:
@@ -297,7 +296,8 @@ When your hibernation schedule starts:
 - Any task that was previously running will be killed and marked as failed.
 - Tasks and DAGs do not run. Scheduled tasks will fail.
 - No Deployment resources are available. This includes the scheduler, webserver, and all workers.
-- You cannot access the Airflow UI for the Deployment.
+- You can't access the Airflow UI for the Deployment.
+- You can't deploy project images or DAGs to the Deployment.
 
 #### Wake up from hibernation
 
