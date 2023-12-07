@@ -63,6 +63,18 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         name: sidecar-log-consumer
     ```
 
+    :::tip 
+
+    If you're migrating from Fluentd, additionally set the following configuration so that Astronomer Software can retain logs:
+
+    ```yaml
+    global:
+      logging:
+        indexNamePrefix: <your-index-prefix>
+    ```
+
+    :::
+
 3. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
 :::info

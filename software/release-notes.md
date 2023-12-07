@@ -176,13 +176,14 @@ Release date: December 8, 2023
 
 ### Additional improvements
 
-- You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
+- You can now configure a global index name prefix to use for both [Fluentd and sidecar-based logging](export-task-logs.md), which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
 
     ```yaml
     global:
       logging:
         indexNamePrefix: <your-index-prefix>
     ```
+    
 - Deprecated Kubernetes 1.23.
 - Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
 - You can now set the following configuration to bypass proxy support when Astronomer Software redirects to Azure login. This might be required in some circumstances when importing identity provider groups as Teams: <!-- https://github.com/astronomer/issues/issues/5844 -->
