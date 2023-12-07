@@ -4,6 +4,11 @@ title: 'Customize your Dockerfile'
 id: customize-dockerfile
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
+
 By default, the Astro project Dockerfile only includes a `FROM` statement that specifies your Astro Runtime version. However, you can extend your Dockerfile to use a different distribution or run additional buildtime arguments. Use this document to learn which Dockerfile customizations are supported both locally and on Astro.
 
 ## Prerequisites
