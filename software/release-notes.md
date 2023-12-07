@@ -199,6 +199,9 @@ Release date: December 8, 2023
 
 ### Bug fixes
 
+- Fixed an issue where deleting a user from Astronomer Software without deleting the user from an Idp Team could result in the user not being active if they're re-added.
+- Fixed an issue where you could create users with the Houston API when SCIM was enabled and `userManagement.enable` was `false`.
+- Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down.
 - Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.
 - Fixed an issue where you couldn't update the value for an existing secret environment variable.
 - Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
