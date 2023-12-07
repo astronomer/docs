@@ -395,7 +395,10 @@ module.exports = {
       label: "Advanced",
       items: [
         "cli/configure-cli",
+        "cli/customize-dockerfile",
+        "cli/private-python-packages",
         "cli/authenticate-to-clouds",
+        "cli/airflowignore"
         "cli/release-lifecycle-policy"
       ],
     },

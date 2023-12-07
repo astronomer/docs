@@ -9,7 +9,6 @@ Running Airflow locally with the Astro CLI can be an easy way to preview and deb
 
 This document explains how to use the Astro CLI to start a local Airflow environment on your computer and interact with your Astro project. To learn more about unit testing for your DAGs or testing project dependencies when changing Python or Astro Runtime versions, see [Test your project locally](test-your-astro-project-locally.md).
 
-
 ## Start a local Airflow environment
 
 To begin running your project in a local Airflow environment, run:
@@ -55,6 +54,23 @@ astro dev logs
 ```
 
 See the [Astro CLI reference guide](cli/astro-dev-logs.md) for more details and options.
+
+## Apply changes to a running project
+
+If you update DAG code for an Astro project that's currently running locally, the Astro CLI automatically applies your changes to your environment. However, to update other files, you must restart your environment to apply your changes. 
+
+Specifically, you must restart your environment to apply changes for any of the following files:
+
+- `packages.txt`
+- `Dockerfile`
+- `requirements.txt`
+- `airflow_settings.yaml`
+
+To restart your local Airflow environment, run:
+
+```sh
+astro dev restart
+```
 
 ## Run Airflow CLI commands
 

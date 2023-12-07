@@ -20,24 +20,7 @@ An _Astro project_ contains the set of files necessary to run Airflow, including
 astro dev init
 ```
 
-This command generates the following files in the directory:
-
-```
-.
-├── .env # Local environment variables
-├── dags # Where your DAGs go
-│   ├── example-dag-basic.py # Example DAG that showcases a simple ETL data pipeline
-│   └── example-dag-advanced.py # Example DAG that showcases more advanced Airflow features, such as the TaskFlow API
-├── Dockerfile # For the Astro Runtime Docker image, environment variables, and overrides
-├── include # For any other files you'd like to include
-├── plugins # For any custom or community Airflow plugins
-│   └── example-plugin.py
-├── tests # For any DAG unit test files to be run with pytest
-│   └── test_dag_example.py # Test that checks for basic errors in your DAGs
-├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
-├── packages.txt # For OS-level packages
-└── requirements.txt # For Python packages
-```
+This command generates all of the project files you need to run Airflow locally, including example DAGs that you can run out of the box.
 
 ## Step 2: Run Airflow locally
 
