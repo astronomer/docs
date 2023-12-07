@@ -7,7 +7,7 @@ description: View a historical record of code deploys to an Astro Deployment and
 
 The **Deploy History** tab in the Cloud UI shows you a record of all code deploys to your Deployment. Use this page to track the development of a Deployment and to pinpoint when your team made key changes to code.
 
-In addition to maintaining a history of all deploys, Astronomer stores the image and DAGs for all deploys made in the last three months. You can trigger a rollback to any of these deploys so that your Deployment starts running a previous version of your code.
+Astronomer stores the image and DAGs for all deploys made in the last 90 days. You can trigger a rollback to any of these deploys so that your Deployment starts running a previous version of your code.
 
 Deploy rollbacks are an emergency option if a Deployment unexpectedly stops working after a recent deploy. For example, if one of your DAGs worked in development but suddenly fails in a mission-critical production Deployment, you can roll back to your previous deploy to quickly get your pipeline running again. This allows you to troubleshoot the issue more thoroughly in development before redeploying to production. You can roll back to any deploy in the last three months regardless of your Runtime version, DAG code, or Deployment settings.
 
