@@ -72,11 +72,11 @@ To use a Deployment API token with Astro CLI, specify the `ASTRO_API_TOKEN` envi
 export ASTRO_API_TOKEN=<your-token>
 ```
 
-After you configure the `ASTRO_API_TOKEN` environment variable, you can run Astro CLI commands related to the deployment for which the Deployment API token was created. For example, `astro deployment inspect` or `astro deployment logs`.
+After you configure the `ASTRO_API_TOKEN` environment variable, you can run Astro CLI commands related to the Deployment for which the Deployment API token was created. For example, `astro deployment inspect` or `astro deployment logs`.
 
 :::info
 
-If you have configured both a Deployment API token via `ASTRO_API_TOKEN` and Deployment API keys (deprecated) via `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET`, the Deployment API token takes precedence. 
+If you have configured both a Deployment API token using `ASTRO_API_TOKEN` and Deployment API keys (deprecated) with `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET`, the Deployment API token takes precedence. 
 
 :::
 
