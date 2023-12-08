@@ -138,7 +138,7 @@ Use [`astro dev object export`](cli/astro-dev-object-export.md), [`astro dev obj
 - To import all Airflow objects from a file named `myairflowobjects.yaml` to a locally running Airflow environment, run:
 
     ```bash
-    astro dev object import --settingsfile="myairflowobjects.yaml"
+    astro dev object import --settings-file="myairflowobjects.yaml"
     ```
 
 ## From a secrets backend
