@@ -186,7 +186,7 @@ Release date: December 8, 2023
     
 - Deprecated Kubernetes 1.23.
 - Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
-- You can now set the following configuration to bypass proxy support when Astronomer Software redirects to Azure login. This might be required in some circumstances when importing identity provider groups as Teams: <!-- https://github.com/astronomer/issues/issues/5844 -->
+- You can now set the following configuration to bypass proxy support when Astronomer Software redirects to Azure login. This might be required in some circumstances when importing identity provider groups as Teams: 
 
     ```yaml
     astronomer:
@@ -200,12 +200,12 @@ Release date: December 8, 2023
 ### Bug fixes
 
 - Fixed an issue where deleting a user from Astronomer Software without deleting the user from an Idp Team could result in the user not being active if they're re-added.
-- Fixed an issue where you could create users with the Houston API when SCIM was enabled and `userManagement.enable` was `false`.
+- Fixed an issue that allowed user creation with the Houston API when SCIM was enabled and `userManagement.enable` was `false`.
 - Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down.
 - Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.
 - Fixed an issue where you couldn't update the value for an existing secret environment variable.
 - Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
-- Fixed an issue where you couldn't access Grafana or Kibana on GKE V2 clusters <!-- https://github.com/astronomer/issues/issues/5963-- >
+- Fixed an issue where you couldn't access Grafana or Kibana on GKE V2 clusters.
 - Fixed an issue where the `invites` query returned an error instead of an empty array when no users invites were found.
 - Fixed the following vulnerabilities:
     - [CVE-2023-39325](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325)
