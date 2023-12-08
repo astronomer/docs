@@ -62,4 +62,34 @@ When you rotate a Deployment API token, you receive a new valid token from Astro
 
 4. Copy the new token value and store it in a safe place. You will not be able to retrieve this value from Astro again. 
 
-5. In any workflows using the token, replace the old token value with the new value you copied. 
+5. In any workflows using the token, replace the old token value with the new value you copied.
+
+## Use a Deployment API token with the Astro CLI
+
+To use a Deployment API token with Astro CLI, specify the `ASTRO_API_TOKEN` environment variable in the system running the Astro CLI:
+
+```sh
+export ASTRO_API_TOKEN=<your-token>
+```
+
+After you configure the `ASTRO_API_TOKEN` environment variable, you can run Astro CLI commands related to the deployment for which the Deployment API token was created. For example, `astro deployment inspect` or `astro deployment logs`.
+
+:::info
+
+If you have configured both a Deployment API token via `ASTRO_API_TOKEN` and Deployment API keys (deprecated) via `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET`, the Deployment API token takes precedence. 
+
+:::
+
+When using a Deployment API token for automation, Astronomer recommends storing `ASTRO_API_TOKEN` as a secret.
+
+### Use a Deployment API token for CI/CD
+
+You can use Deployment API tokens and the Astro CLI to automate various Deployment management actions in CI/CD. 
+
+For all use cases, you must make the following environment variable available to your CI/CD environment:
+
+```text
+ASTRO_API_TOKEN=<your-token>
+```
+
+After you set this environment variable, you can run Astro CLI commands from CI/CD pipelines without needing to manually authenticate to Astro. For more information and examples, see [Automate code deploys with CI/CD](set-up-ci-cd.md).
