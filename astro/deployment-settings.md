@@ -271,7 +271,7 @@ Before you create a hibernation schedule for a Deployment, consider the followin
 
 - The Deployment must have the **Is Development?** setting turned on. This setting can only be configured when you create a Deployment.
 - The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
-- The **Small Scheduler** (1v CPU, 2 Gib RAM) is the only scheduler size supported. 
+- The **Small Scheduler** (1 vCPU, 2 GiB RAM) is the only scheduler size supported.
 - Deployments with hibernation schedules are not required to meet the uptime SLAs of standard production Deployments.
 
 To create a hibernation schedule:
