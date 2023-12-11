@@ -100,7 +100,7 @@ To configure your own automated workflow for preview Deployments with another CI
 
 In a Deployment preview CI/CD pipeline, you run this script when you create a feature branch off of the main branch of your Astro project. 
 
-```sh
+```bash
 # Install the Astro CLI
 curl -sSL https://install.astronomer.io | sudo bash -s
 
@@ -126,7 +126,7 @@ astro deploy -n $BRANCH_DEPLOYMENT_NAME
 
 In a Deployment preview CI/CD pipeline, you run this script whenever you make changes in your feature branch.
 
-```sh
+```bash
 # Install the Astro CLI
 curl -sSL https://install.astronomer.io | sudo bash -s
 
@@ -143,7 +143,7 @@ astro deploy -n $BRANCH_DEPLOYMENT_NAME
 
 In a Deployment preview CI/CD pipeline, you run this script when you delete your feature branch.
 
-```sh
+```bash
 # Install the Astro CLI
 curl -sSL https://install.astronomer.io | sudo bash -s
 
@@ -159,7 +159,7 @@ astro deployment delete -n $BRANCH_DEPLOYMENT_NAME -f
 
 In a Deployment preview CI/CD pipeline, you run this script when you merge your feature branch into your main branch.
 
-```sh
+```bash
 # Install the Astro CLI
 curl -sSL https://install.astronomer.io | sudo bash -s
 
