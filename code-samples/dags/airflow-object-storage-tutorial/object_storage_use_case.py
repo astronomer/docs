@@ -138,7 +138,7 @@ def object_storage_use_case():
 
         predictions = model.predict([my_quote])
 
-        print(f"The quote: '{my_quote}'") 
+        print(f"The quote: '{my_quote}'")
         print(f"sounds like it could have been said by {predictions[0].capitalize()}")
 
     @task
