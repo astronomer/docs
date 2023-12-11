@@ -17,13 +17,13 @@ astro deployment connection update
 
 :::tip
 
-This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate a Deployment or Workspace API Token, then specify the `ASTRO_API_TOKEN` environment variable in the system running the Astro CLI:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate an API token, then specify the `ASTRO_API_TOKEN` environment variable in the system running the Astro CLI:
 
 ```bash
 export ASTRO_API_TOKEN=<your-token>
 ```
 
-See [Deployment API Tokens](deployment-api-tokens.md) and [Workspace API Tokens](workspace-api-tokens.md) for more details about ways to use tokens.
+See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens.md), and [Deployment](deployment-api-tokens.md) API token documentation for more details about ways to use API tokens.
 
 :::
 
