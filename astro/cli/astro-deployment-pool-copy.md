@@ -4,11 +4,11 @@ title: "astro deployment pool copy"
 id: astro-deployment-pool-copy
 description: Copy an Airflow pool from a Deployment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 
-Copy Airflow pools from one Astro Deployment to another. Airflow pools are stored in the target Deployment's metadata database and appear in the Airflow UI.  
+Copy Airflow pools from one Astro Deployment to another. Airflow pools are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
 
@@ -16,16 +16,17 @@ Copy Airflow pools from one Astro Deployment to another. Airflow pools are store
 astro deployment pool copy
 ```
 
-This command only copies Airflow pools that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
+This command only copies Airflow pools that were configured through the Airflow UI or otherwise stored in the Airflow metadata database.
 
 :::tip
 
-This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment pools in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate a Deployment or Workspace API Token, then specify the `ASTRO_API_TOKEN` environment variable in the system running the Astro CLI:
 
-- `ASTRONOMER_KEY_ID`
-- `ASTRONOMER_KEY_SECRET`
+```bash
+export ASTRO_API_TOKEN=<your-token>
+```
 
-After setting the pools, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
+See [Deployment API Tokens](deployment-api-tokens.md) and [Workspace API Tokens](workspace-api-tokens.md) for more details about ways to use tokens.
 
 :::
 
