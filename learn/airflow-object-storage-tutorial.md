@@ -12,7 +12,7 @@ Airflow 2.8 introduced the [Airflow Object Storage](http://apache-airflow-docs.s
 
 This tutorial walks you through how to use the Object Storage to interact with files in cloud and local storage in a simple machine learning pipeline training a classifier to predict whether a sentence is more likely to have been said by Captain Kirk or Captain Picard.
 
-:::warning
+:::caution
 
 The Airflow Object Storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565).
 
