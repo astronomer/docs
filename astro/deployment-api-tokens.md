@@ -76,7 +76,7 @@ After you configure the `ASTRO_API_TOKEN` environment variable, you can run Astr
 
 :::info
 
-If you have configured both a Deployment API token using `ASTRO_API_TOKEN` and Deployment API keys (deprecated) with `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET`, the Deployment API token takes precedence.
+If you have configured both a Deployment API token using `ASTRO_API_TOKEN` and Deployment API keys (deprecated) with `ASTRONOMER_KEY_ID` or `ASTRONOMER_KEY_SECRET`, the Deployment API token takes precedence.
 
 :::
 
