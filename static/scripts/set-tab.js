@@ -25,4 +25,4 @@ function scrollToHeading() {
   heading.scrollIntoView();
 }
 
-window.onload = () => window.location.hash && scrollToHeading();
+// window.onload = () => window.location.hash && scrollToHeading();
