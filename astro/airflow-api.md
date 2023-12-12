@@ -222,7 +222,6 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
 
 1. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment that contains the DAG you want to trigger.
 
-
 2. In the Deployment that contains the triggering DAG, create an [Airflow HTTP connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) with the following values: 
 
     - **Connection Id**: `http_conn`

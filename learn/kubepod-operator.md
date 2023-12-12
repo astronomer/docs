@@ -42,7 +42,7 @@ There are multiple resources for learning about this topic. See also:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Kubernetes basics. See the [Kubernetes Documentation](https://kubernetes.io/docs/home/).  
+- Kubernetes basics. See the [Kubernetes Documentation](https://kubernetes.io/docs/home/).
 
 ## Requirements
 
@@ -69,7 +69,7 @@ You don't need to use the Kubernetes executor to use the KubernetesPodOperator. 
 - Kubernetes executor
 - CeleryKubernetes executor
 
-On Astro, the infrastructure needed to run the KubernetesPodOperator with the Celery executor is included with all clusters by default.  For more information, see [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).  
+On Astro, the infrastructure needed to run the KubernetesPodOperator with the Celery executor is included with all clusters by default.  For more information, see [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
 
 ### Run the KubernetesPodOperator locally
 
@@ -125,7 +125,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 1. Copy the `docker-desktop` context from the Kubernetes configuration file and save it as a separate file in the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster.
 
     ```bash
-    kubectl set-config docker-desktop
+    kubectl config set-context docker-desktop
     kubectl config view -- minify --raw > <Astro project directory>/include/.kube
     ```
 
@@ -316,7 +316,7 @@ After making the Docker image available, it can be run from the KubernetesPodOpe
 
 [XCom](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html) is a commonly used Airflow feature for passing small amounts of data between tasks. You can use the KubernetesPodOperator to both receive values stored in XCom and push values to XCom.
 
-The following example DAG shows an ETL pipeline with an `extract_data` task that runs a query on a database and returns a value. The [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html#tutorial-on-the-taskflow-api) automatically pushes the return value to XComs.  
+The following example DAG shows an ETL pipeline with an `extract_data` task that runs a query on a database and returns a value. The [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html#tutorial-on-the-taskflow-api) automatically pushes the return value to XComs.
 
 The `transform` task is a KubernetesPodOperator which requires that the XCom data is pushed from the upstream task before it, and then launches an image created with the following Dockerfile:
 
@@ -326,7 +326,7 @@ FROM python
 WORKDIR /
 
 # creating the file to write XComs to
-RUN mkdir -p airflow/xcom         
+RUN mkdir -p airflow/xcom
 RUN echo "" > airflow/xcom/return.json
 
 COPY multiply_by_23.py ./
@@ -334,7 +334,7 @@ COPY multiply_by_23.py ./
 CMD ["python", "./multiply_by_23.py"]
 ```
 
-When using XComs with the KubernetesPodOperator, you must create the file `airflow/xcom/return.json` in your Docker container (ideally from within your Dockerfile), because Airflow can only look for XComs to pull at that specific location. IN the following example, the Docker image contains a simple Python script to multiply an environment variable by 23, package the result into JSON, and then write that JSON to the correct file to be retrieved as an XCom. The XComs from the KubernetesPodOperator are pushed only if the task is marked successful.  
+When using XComs with the KubernetesPodOperator, you must create the file `airflow/xcom/return.json` in your Docker container (ideally from within your Dockerfile), because Airflow can only look for XComs to pull at that specific location. IN the following example, the Docker image contains a simple Python script to multiply an environment variable by 23, package the result into JSON, and then write that JSON to the correct file to be retrieved as an XCom. The XComs from the KubernetesPodOperator are pushed only if the task is marked successful.
 
 ```python
 import os
@@ -379,9 +379,9 @@ The full DAG code is provided in the following example. To avoid task failure, t
 
 ## Example: Use KubernetesPodOperator to run a Pod in a separate cluster
 
-If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. In setups where both clusters are used by the same AWS or GCP account, this can be managed with roles and permissions. There is also the possibility to use a CI account and enable [cross-account access to AWS EKS cluster resources](https://aws.amazon.com/blogs/containers/enabling-cross-account-access-to-amazon-eks-cluster-resources/).  
+If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. In setups where both clusters are used by the same AWS or GCP account, this can be managed with roles and permissions. There is also the possibility to use a CI account and enable [cross-account access to AWS EKS cluster resources](https://aws.amazon.com/blogs/containers/enabling-cross-account-access-to-amazon-eks-cluster-resources/).
 
-This example shows how to set up an EKS cluster on AWS and run a Pod on it from an Airflow instance where cross-account access is not available.The same process applicable to other Kubernetes services such as GKE.  
+This example shows how to set up an EKS cluster on AWS and run a Pod on it from an Airflow instance where cross-account access is not available.The same process applicable to other Kubernetes services such as GKE.
 
 Some platforms which can host Kubernetes clusters have their own specialised operators. For excample, the [GKEStartPodOperator](https://registry.astronomer.io/providers/google/modules/gkestartPodoperator) and the [EksPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/operators/eks/index.html#module-airflow.providers.amazon.aws.operators.eks).
 
@@ -481,7 +481,7 @@ Some platforms which can host Kubernetes clusters have their own specialised ope
 
 ### Step 3: Add a new namespace to the EKS cluster
 
-It is best practice to use a new namespace for the Pods that Airflow spins up in your cluster. To create a namespace for your Pods, access the EKS cluster and run:  
+It is best practice to use a new namespace for the Pods that Airflow spins up in your cluster. To create a namespace for your Pods, access the EKS cluster and run:
 
 ```bash
 # create a new namespace on the EKS cluster

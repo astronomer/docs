@@ -22,20 +22,23 @@ Additionally, Organization Owners inherit Workspace Owner permissions for all Wo
 
 An Organization role grants a user or API token some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace whereas an API token's access is based on it's scope. The following table lists the available Organization roles:
 
-| Permission                                                       | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
-| ---------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
-| View Organization details and user membership                    | ✔️                      | ✔️                             | ✔️                     |
-| View lineage metadata in the **Lineage** tab                     | ✔️                      | ✔️                             | ✔️                     |
-| Update Organization billing information and settings             |                         | ✔️                             | ✔️                     |
-| View usage for all Workspaces in the **Usage** tab               |                         | ✔️                             | ✔️                     |
-| Create a new Workspace                                           |                         |                                | ✔️                     |
-| Workspace Owner permissions to all Workspaces                    |                         |                                | ✔️                     |
-| Update roles and permissions of existing Organization users      |                         |                                | ✔️                     |
-| Invite a new user to an Organization                             |                         |                                | ✔️                     |
-| Remove a user from an Organization                               |                         |                                | ✔️                     |
-| Create, update, and delete Organization API tokens               |                         |                                | ✔️                     |
-| Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                     |
-| Create, update, and delete a Team                                |                         |                                | ✔️                     |
+| Permission                                                                                                             | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
+| ---------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
+| View Organization details and user membership                                                                          | ✔️                      | ✔️                             | ✔️                     |
+| View lineage metadata in the **Lineage** tab                                                                           | ✔️                      | ✔️                             | ✔️                     |
+| View clusters                                                                           | ✔️                      | ✔️                             | ✔️                     |
+| Update Organization billing information and settings                                                                   |                         | ✔️                             | ✔️                     |
+| View usage for all Workspaces in the **Usage** tab                                                                     |                         | ✔️                             | ✔️                     |
+| Create, update, and delete clusters                                                                                    |                         |                                | ✔️                     |
+| Create a new Workspace                                                                                                 |                         |                                | ✔️                     |
+| Workspace Owner permissions to all Workspaces                                                                          |                         |                                | ✔️                     |
+| Update roles and permissions of existing Organization users                                                            |                         |                                | ✔️                     |
+| Invite a new user to an Organization                                                                                   |                         |                                | ✔️                     |
+| Remove a user from an Organization                                                                                     |                         |                                | ✔️                     |
+| Create, update, and delete Organization API tokens                                                                     |                         |                                | ✔️                     |
+| Access, regenerate, and delete single sign-on (SSO) bypass links                                                       |                         |                                | ✔️                     |
+| Create, update, and delete a Team                                                                                      |                         |                                | ✔️                     |
+| Configure Environment Secrets Fetching for users to fetch environment secrets from the Cloud UI for local development. |                         |                                | ✔️                     |
 
 To manage users in an Organization, see [Manage Organization users](manage-organization-users.md). To manage the Organization permissions of your API tokens, see [Organization API tokens](organization-api-tokens.md).
 
@@ -50,31 +53,31 @@ A Workspace role grants a user or API token some level of access to a specific W
 
 The following table lists the specific permissions that each Workspace role has:
 
-| Permission                                                                  | **Workspace Member** | **Workspace Author** | **Workspace Operator** | **Workspace Owner** |
-| --------------------------------------------------------------------------- | -------------------- | -------------------- | ---------------------- | ------------------- |
-| View Workspace users                                                        | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| View all Deployments in the Cloud UI                                        | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| View DAGs in the Airflow UI                                                 | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| View Airflow task logs                                                      | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| View Airflow datasets                                                       | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| View Astro Cloud IDE projects                                               | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| View Astro alerts                                                           | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| Manually trigger DAG and task runs                                          |                      | ✔️                    | ✔️                      | ✔️                   |
-| Pause or unpause a DAG                                                      |                      | ✔️                    | ✔️                      | ✔️                   |
-| Clear/mark a task run or DAG run                                            |                      | ✔️                    | ✔️                      | ✔️                   |
-| Push code to Deployments or Astro Cloud IDE projects                        |                      | ✔️                    | ✔️                      | ✔️                   |
-| Create, update, and delete Astro Cloud IDE projects                         |                      | ✔️                    | ✔️                      | ✔️                   |
-| Create, update, and delete Astro alerts                                     |                      | ✔️                    | ✔️                      | ✔️                   |
-| View Airflow connections, variables, plugins, providers, pools, and XComs   |                      | ✔️                    | ✔️                      | ✔️                   |
-| Update Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                      | ✔️                   |
-| Update Deployment configurations                                            |                      |                      | ✔️                      | ✔️                   |
-| Create and Delete Deployments                                               |                      |                      | ✔️                      | ✔️                   |
-| Create, Update and Delete Deployment environment variables                  |                      |                      | ✔️                      | ✔️                   |
-| Create, update, and delete Deployment and Workspace API tokens              |                      |                      | ✔️                      | ✔️                   |
-| View the **Cluster Activity** tab in the Airflow UI                         |                      |                      |                        | ✔️                   |
-| Update user roles and permissions                                           |                      |                      |                        | ✔️                   |
-| Invite users to a Workspace                                                 |                      |                      |                        | ✔️                   |
-| Assign Teams to or remove from Workspaces                                   |                      |                      |                        | ✔️                   |
+| Permission                                                                                      | **Workspace Member** | **Workspace Author** | **Workspace Operator** | **Workspace Owner** |
+| ----------------------------------------------------------------------------------------------- | -------------------- | -------------------- | ---------------------- | ------------------- |
+| View Workspace users                                                                            | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
+| View all Deployments in the Cloud UI                                                            | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
+| View DAGs in the Airflow UI                                                                     | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
+| View Airflow task logs                                                                          | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
+| View Airflow datasets                                                                           | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
+| View Astro Cloud IDE projects                                                                   | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
+| View Astro alerts                                                                               | ✔️                   | ✔️                   | ✔️                     | ✔️                  |
+| Manually trigger DAG and task runs                                                              |                      | ✔️                   | ✔️                     | ✔️                  |
+| Pause or unpause a DAG                                                                          |                      | ✔️                   | ✔️                     | ✔️                  |
+| Clear/mark a task run or DAG run                                                                |                      | ✔️                   | ✔️                     | ✔️                  |
+| Push code to Deployments or Astro Cloud IDE projects                                            |                      | ✔️                   | ✔️                     | ✔️                  |
+| Create, update, and delete Astro Cloud IDE projects                                             |                      | ✔️                   | ✔️                     | ✔️                  |
+| Create, update, and delete Astro alerts                                                         |                      | ✔️                   | ✔️                     | ✔️                  |
+| View Airflow connections, variables, plugins, providers, pools, and XComs                       |                      | ✔️                   | ✔️                     | ✔️                  |
+| Create, update, and delete Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                     | ✔️                  |
+| Update Deployment configurations                                                                |                      |                      | ✔️                     | ✔️                  |
+| Create and delete Deployments                                                                   |                      |                      | ✔️                     | ✔️                  |
+| Create, update, and delete Deployment environment variables                                     |                      |                      | ✔️                     | ✔️                  |
+| Create, update, and delete Deployment and Workspace API tokens                                  |                      |                      | ✔️                     | ✔️                  |
+| View the **Cluster Activity** tab in the Airflow UI                                             |                      |                      |                        | ✔️                  |
+| Update user roles and permissions                                                               |                      |                      |                        | ✔️                  |
+| Invite users to a Workspace                                                                     |                      |                      |                        | ✔️                  |
+| Assign Teams to or remove from Workspaces                                                       |                      |                      |                        | ✔️                  |
 
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
 

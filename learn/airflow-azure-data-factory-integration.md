@@ -36,9 +36,9 @@ To complete this tutorial, you need:
 
 ## Step 1: Make your ADF pipelines runnable
 
-Before you can orchestrate your ADF pipelines with Airflow, you have to make the pipelines runnable by an external service. There are multiple ways to do this depending on how you manage authentication within your Azure account. This tutorial shows how to register an App with Azure Active Directory to get a **Client ID** and **Client Secret** (API Key) for your Data Factory.
+Before you can orchestrate your ADF pipelines with Airflow, you have to make the pipelines runnable by an external service. There are multiple ways to do this depending on how you manage authentication within your Azure account. This tutorial shows how to register an App with Microsoft Entra to get a **Client ID** and **Client Secret** (API Key) for your Data Factory.
 
-1. Go to Azure Active Directory and click **App registrations** to see a list of registered apps. If you created a Resource group, you should already have an app registered with the same name. Otherwise you can create a new one.
+1. Go to Microsoft Entra ID and click **App registrations** to see a list of registered apps. If you created a Resource group, you should already have an app registered with the same name. Otherwise you can create a new one.
 
     ![ADF App Registration](/img/integrations/airflow_azure_data_factory_integration_app_registration.png)
 
@@ -59,7 +59,7 @@ Before you can orchestrate your ADF pipelines with Airflow, you have to make the
 
 :::info
 
-Additional detail on requirements for interacting with Azure Data Factory using the REST API can be found [here](https://docs.microsoft.com/en-us/azure/data-factory/quickstart-create-data-factory-rest-api). You can also see [this link](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#register-an-application-with-azure-ad-and-create-a-service-principal) for more information on creating a registered application in Azure Active Directory.
+Find additional detail on requirements for interacting with Azure Data Factory using the REST API in the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/data-factory/quickstart-create-data-factory-rest-api). You can also reference [the documentation](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#register-an-application-with-azure-ad-and-create-a-service-principal) for more information on creating a registered application in Microsoft Entra ID.
 
 :::
 

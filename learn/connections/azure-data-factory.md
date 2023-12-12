@@ -15,7 +15,7 @@ This guide provides the basic setup for creating an ADF connection. For a comple
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
 - A locally running [Astro project](https://docs.astronomer.io/astro/cli/get-started-cli)
 - Permissions to [access your data factory](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#roles-and-requirements)
-- An [Azure AD application](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
+- A [Microsoft Entra ID application](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
 
 ## Get connection details
 
@@ -33,9 +33,9 @@ Complete the following steps to retrieve all of these values:
 1. In your Azure portal, open your [data factory](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.DataFactory%2FdataFactories) service and select the subscription that contains your data factory.
 2. Copy the **Name** of your data factory and the **Resource group**.
 3. Click on the subscription for your data factory, then copy the **Subscription ID** from the subscription window.
-4. Open your Azure AD application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
-5. [Create a new client secret](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
-6. [Assign](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Data Factory Contributor](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#set-up-permissions) role to your app so that Airflow can access the data factory.
+4. Open your Microsoft Entra ID application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
+5. [Create a new client secret](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
+6. [Assign](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Data Factory Contributor](https://learn.microsoft.com/en-us/azure/data-factory/concepts-roles-permissions#set-up-permissions) role to your app so that Airflow can access the data factory.
 
 ## Create your connection
 
