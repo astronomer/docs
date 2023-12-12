@@ -69,7 +69,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     ```text
     AIRFLOW_CONN_COHERE_DEFAULT='{
         "conn_type": "cohere",
-        "password": "<your-cohere-api-key>",
+        "password": "<your-cohere-api-key>"
     }'
     ```
 
