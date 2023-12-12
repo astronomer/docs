@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import useSpecData from '@theme/useSpecData';
-import '../ApiSchema/styles.css';
 import clsx from 'clsx';
 import { ThemeProvider } from 'styled-components';
 import '../../global';

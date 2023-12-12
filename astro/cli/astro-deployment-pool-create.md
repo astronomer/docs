@@ -45,6 +45,7 @@ astro deployment pool create --deployment-id cl03oiq7d80402nwn7fsl3dmv --name my
 
 # create pool stored in the Deployment "My Deployment"
 astro deployment pool create --deployment-name="My Deployment" --name my-pool --slots 10
+```
 
 ## Related Commands
 

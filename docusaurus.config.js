@@ -89,6 +89,12 @@ module.exports = {
           position: 'left',
           activeClassName: 'navbar__link--active',
         },
+        {
+          label: 'Using Remote URL',
+          to: '/examples/using-remote-url/',
+          position: 'left',
+          activeClassName: 'navbar__link--active',
+        }
       ],
     },
     astroCard: {
@@ -237,6 +243,12 @@ module.exports = {
           {
             id: 'iam',
             spec: './openapi/iam.yaml',
+          },
+          {
+            id: 'using-remote-url',
+            // Remote File
+            spec: 'https://redocly.github.io/redoc/openapi.yaml',
+            route: '/examples/using-remote-url/',
           },
         ],
         // Theme Options for modifying how redoc renders them
