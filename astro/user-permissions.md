@@ -26,7 +26,7 @@ An Organization role grants a user or API token some level of access to an Astro
 | ---------------------------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
 | View Organization details and user membership                                                                          | ✔️                      | ✔️                             | ✔️                     |
 | View lineage metadata in the **Lineage** tab                                                                           | ✔️                      | ✔️                             | ✔️                     |
-| View clusters                                                                           | ✔️                      | ✔️                             | ✔️                     |
+| View clusters                                                                                                          | ✔️                      | ✔️                             | ✔️                     |
 | Update Organization billing information and settings                                                                   |                         | ✔️                             | ✔️                     |
 | View usage for all Workspaces in the **Usage** tab                                                                     |                         | ✔️                             | ✔️                     |
 | Create, update, and delete clusters                                                                                    |                         |                                | ✔️                     |
@@ -70,6 +70,7 @@ The following table lists the specific permissions that each Workspace role has:
 | Create, update, and delete Astro alerts                                                         |                      | ✔️                   | ✔️                     | ✔️                  |
 | View Airflow connections, variables, plugins, providers, pools, and XComs                       |                      | ✔️                   | ✔️                     | ✔️                  |
 | Create, update, and delete Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                     | ✔️                  |
+| Create, update, delete, and assign connections to Deployments in the Astro Environment Manager  |                      |                      | ✔️                     | ✔️                  |
 | Update Deployment configurations                                                                |                      |                      | ✔️                     | ✔️                  |
 | Create and delete Deployments                                                                   |                      |                      | ✔️                     | ✔️                  |
 | Create, update, and delete Deployment environment variables                                     |                      |                      | ✔️                     | ✔️                  |
