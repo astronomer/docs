@@ -757,16 +757,16 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
 /** Remix Redocly Styles **/
 
 /** hide all the error responses **/
-/* .redocusaurus .response-200-ok ~ div,
+.redocusaurus .response-200-ok ~ div,
 .redocusaurus .tab-error {
   display: none;
 }
 
 .redocusaurus .menu-content {
   top: 10rem !important;
-} */
+}
 
 /** Add anchor scroll to top padding/margin */
-/* [data-section-id] {
+[data-section-id] {
   scroll-margin-top: 120px;
-} */
+}
