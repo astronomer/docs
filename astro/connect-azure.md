@@ -16,7 +16,7 @@ Publicly accessible endpoints allow you to quickly connect your Astro clusters o
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-azure) to Azure in a few different ways.
 
-After you crate a connection from your cluster to Azure, you might also have to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#azure).
+After you create a connection from your cluster to Azure, you might also need to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#azure).
 
 ## Standard and dedicated cluster support for Azure networking
 
