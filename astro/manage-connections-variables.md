@@ -13,7 +13,7 @@ Airflow supports several different methods for managing connections and variable
 
 For in-depth information on managing connections and variables, see [Connection Basics](https://docs.astronomer.io/learn/connections) and [Variable Basics](https://docs.astronomer.io/learn/airflow-variables).
 
-## Requirements
+## Prerequisites
 
 - A locally hosted Astro project created with the Astro CLI. See [Create a project](cli/get-started-cli.md).
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md).

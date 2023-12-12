@@ -20,11 +20,10 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
-## Requirements
+## Prerequisites
 
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md)
-- Celery executors
 - Astro Runtime 9.3.0 or greater
 
 ## Create a connection
