@@ -48,7 +48,7 @@ The option that you choose is determined by the security requirements of your co
 
 <Tabs
     defaultValue="VNet peering"
-    groupId="connection-options"
+    groupId="create-a-private-connection-between-astro-and-azures"
     values={[
         {label: 'VNet peering', value: 'VNet peering'},
         {label: 'Azure Private Link', value: 'Azure Private Link'},

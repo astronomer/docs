@@ -49,7 +49,7 @@ Choose one of the following setups based on the security requirements of your co
 
 <Tabs
     defaultValue="VPC peering"
-    groupId="connection-options"
+    groupId="create-a-private-connection-between-astro-and-aws"
     values={[
         {label: 'VPC peering', value: 'VPC peering'},
         {label: 'Transit Gateways', value: 'Transit Gateways'},
