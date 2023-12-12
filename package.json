@@ -37,7 +37,7 @@
     "raw-loader": "^4.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "redocusaurus": "^1.6.3",
+    "redocusaurus": "^2.0.0",
     "stable": "^0.1.8",
     "url-loader": "^4.1.1",
     "xml": "^1.0.1"
