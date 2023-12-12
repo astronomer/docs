@@ -28,6 +28,7 @@ An Organization role grants a user or API token some level of access to an Astro
 | View lineage metadata in the **Lineage** tab                                                                           | ✔️                      | ✔️                             | ✔️                     |
 | Update Organization billing information and settings                                                                   |                         | ✔️                             | ✔️                     |
 | View usage for all Workspaces in the **Usage** tab                                                                     |                         | ✔️                             | ✔️                     |
+| Create, update, and delete Clusters                                                                                    |                         |                                | ✔️                     |
 | Create a new Workspace                                                                                                 |                         |                                | ✔️                     |
 | Workspace Owner permissions to all Workspaces                                                                          |                         |                                | ✔️                     |
 | Update roles and permissions of existing Organization users                                                            |                         |                                | ✔️                     |
