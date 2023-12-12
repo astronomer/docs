@@ -18,6 +18,8 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 - Share connections with local Airflow environments using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
 - Use connections in branch-based deploys and PR previews.
 
+Additionally, while creating connections requires Workspace Owner or Workspace Operator permissions, Workspace Authors can view and import/export Connections to a local development environment. When the Organization Owner enables **Environment Secrets fetching** in the **Organization Settings**, this includes the ability to view, import, and export Connections with secret values. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui) for more details about using connections locally or [user permissions](user-permissions.md) to understand different Workspace user access levels.
+
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
 ## Prerequisites
