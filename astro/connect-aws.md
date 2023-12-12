@@ -36,13 +36,12 @@ Dedicated clusters can connect to AWS in the same ways as standard clusters. Add
 
 - VPC peering
 - Transit Gateways
-- S2S VPN
 
 If you require a private connection between Astro and AWS, Astronomer recommends configuring a dedicated cluster. See [Create a dedicated cluster](create-dedicated-cluster.md).
 
 ## Access a public AWS endpoint
 
-To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment in your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
+All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
 
 ### Allowlist external IP addresses for a cluster
 
@@ -187,6 +186,12 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 </TabItem>
 
 <TabItem value="AWS PrivateLink">
+
+:::
+
+This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+
+:::
 
 Use AWS PrivateLink to create private connections from Astro to your AWS services without exposing your data to the public internet. If your AWS services are located in a different region than Astro, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 

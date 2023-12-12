@@ -23,7 +23,7 @@ To create a Deployment, you must choose a cluster type to host the Deployment:
 
 - A **dedicated cluster** is a single-tenant Kubernetes cluster that's used exclusively by your team. Choose this option if:
 
-    - You need private networking support between Astro and your cloud.
+    - You need private networking support between Astro and your cloud or on-premise data services.
     - You want to use a specific cloud provider or region that is not supported on standard clusters.
     - You need to run Airflow environments in separate clusters for business or security reasons.
     

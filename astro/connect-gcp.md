@@ -30,14 +30,12 @@ Standard clusters can connect to GCP in the following ways:
 Dedicated clusters can use all of the same connection options as standard clusters. Additionally, they support a number of private connectivity options including:
 
 - VPC peering
-- Transit Gateways
-- S2S VPN
 
 If you require a private connection between Astro and GCP, Astronomer recommends configuring a dedicated cluster. See [Create a dedicated cluster](create-dedicated-cluster.md).
 
 ## Access a public GCP endpoint
 
-To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your GCP resources through a valid Airflow connection.
+All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your GCP resources through a valid Airflow connection.
 
 ### Allowlist external IP addresses for a cluster
 

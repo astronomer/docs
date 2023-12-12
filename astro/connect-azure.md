@@ -30,14 +30,12 @@ Dedicated clusters can also connect to Azure using static IP addresses. Addition
 
 - VNet peering
 - Azure Private Link
-- S2S VPN
-- vHub
 
 If you require a private connection between Astro and Azure, Astronomer recommends configuring a dedicated cluster. See [Create a dedicated cluster](create-dedicated-cluster.md).
 
 ## Access a public Azure endpoint
 
-To facilitate communication between your Astro cluster or Deployment and your cloud, you can allowlist the external IPs for your cluster or Deployment on your cloud. If you have no other security restrictions, this means that any Deployment or cluster with an allowlisted external IP address can access your Azure resources through a valid Airflow connection.
+All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your Azure resources through a valid Airflow connection.
 
 ### Allowlist external IP addresses for a cluster
 
