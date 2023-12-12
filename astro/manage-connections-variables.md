@@ -27,8 +27,8 @@ The following table suggests possible management strategies for specific use cas
 | I'm getting started and want to quickly create Airflow objects | [Airflow UI](#airflow-ui) |
 | I prefer to manage my Airflow variables in a Git repository and to upload directly to Airflow | [Airflow UI](#airflow-ui) |
 | I need to keep my connections and variables stored in a centralized and secure location. | [Secrets backend](#secrets-backend) |
-| I want to create Connections once and then apply them to multiple Deployments or Workspaces. | [Astro Environment Manager](#cloud-ui-connections) |
-| I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Astro Environment Manager](#cloud-ui-connections) or [Environment variables](#environment-variables) |
+| I want to create Connections once and then apply them to multiple Deployments or Workspaces. | [Astro Environment Manager](#astro-cloud-ui-environment-manager) |
+| I don't have a secrets backend, but I still want some security and permissions attached to Airflow objects. | [Astro Environment Manager](#astro-cloud-ui-environment-manager) or [Environment variables](#environment-variables) |
 
 ### How Airflow finds connections
 

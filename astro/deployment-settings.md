@@ -7,7 +7,7 @@ description: "Manage Deployment settings to customize your Deployment for your u
 
 After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There are two categories of options for configuring your Astro Deployment to best meet your needs: Deployment details and resource configuration.
 
-Use Deployment details to manage the administration of your Deployment. This includes includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro: 
+Use Deployment details to manage the administration of your Deployment. This includes includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro:
 
 - Update a Deployment name and description.
 - Add or delete a Deployment alert email.
@@ -43,13 +43,13 @@ Deployment details define how users can view and interact with your Deployment. 
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. In the **Basic** section, update the Deployment **Name** or **Description**. 
+3. In the **Basic** section, update the Deployment **Name** or **Description**.
 
 4. Click **Update Deployment**.
 
 ### Configure Deployment email alerts
 
-Email alerts are used by Astronomer support to notify recipients in the case of an issue with a Deployment. This can include a problem with your scheduler or workers. 
+Email alerts are used by Astronomer support to notify recipients in the case of an issue with a Deployment. This can include a problem with your scheduler or workers.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -104,7 +104,7 @@ To update a Deployment's [Airflow configurations](https://airflow.apache.org/doc
 
 ### Update environment objects
 
-You can add, update, and delete Airflow connections that were added through the Cloud UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#cloud-ui-connections), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Cloud UI](create-and-link-connections.md) for more options.
+You can add, update, and delete Airflow connections that were added through the Cloud UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#astro-cloud-ui-environment-manager), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Cloud UI](create-and-link-connections.md) for more options.
 
 ### Deployment executor
 
@@ -123,8 +123,8 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
-3. In the **Execution** section, select **Celery** or **Kubernetes** in the **Executor** list. 
-    
+3. In the **Execution** section, select **Celery** or **Kubernetes** in the **Executor** list.
+
     If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
 
 4. Click **Update Deployment**.
@@ -139,28 +139,28 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Options** menu and select **Edit Deployment**. 
+2. Click the **Options** menu and select **Edit Deployment**.
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
 
 3. In the **Execution** section, configure the following values:
-    - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment. 
+    - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment.
     - **Memory Quota**: The maximum combined memory usage across all running Pods on your Deployment.
     - **Default Pod Size**:
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
-    
+
      For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
-     
+
      :::caution Astro Hosted
 
      For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 
      :::
-     
+
 4. Click **Update Deployment**.
 
-After you change the Pod size, wait for a couple of minutes before running your tasks to allow Astro to apply the changes to your Pod's ConfigMap. 
+After you change the Pod size, wait for a couple of minutes before running your tasks to allow Astro to apply the changes to your Pod's ConfigMap.
 
 Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
 
@@ -176,7 +176,7 @@ For example, if your Deployment has a CPU quota of 150vCPU and a memory quota of
 
 :::info Alternative Astro Hybrid setup
 
-On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory. 
+On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory.
 
 To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
 
@@ -184,13 +184,13 @@ To give your tasks more or less resources, change the worker type in the task's 
 
 ### Scheduler size
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. 
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 
 Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory.
 
 Unlike workers, schedulers do not autoscale. The resources you set for them are the resources you have regardless of usage. For more information about how scheduler configuration affects resources usage, see [Pricing](https://astronomer.io/pricing).
 
-#### Update scheduler size 
+#### Update scheduler size
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
@@ -214,7 +214,7 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 3. In the **Advanced** section, configure the following values:
 
     - **Scheduler Resources**: Determine the total CPU and memory allocated to each scheduler in your Deployment, defined as Astronomer Units (AU). One AU is equivalent to 0.1 CPU and 0.375 GiB of memory. The default scheduler size is 5 AU, or .5 CPU and 1.88 GiB memory. The number of schedulers running in your Deployment is determined by **Scheduler Count**, but all schedulers are created with the same CPU and memory allocations.
-    - **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers. 
+    - **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers.
 
 4. Click **Update Deployment**.
 
@@ -222,7 +222,7 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 ### Enable high availability
 
-By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of the Airflow Scheduler across different nodes. However, Astro makes a best effort to use different availability zones for your PGBouncer and Scheduler, which means it is possible but unlikely that they are both located in the same availability zone. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone. 
+By default, the Pods running your Deployment's Airflow components are distributed across multiple nodes. When you enable high availability, your Deployment runs two instances of [PgBouncer](https://www.pgbouncer.org/) and two instances of the Airflow Scheduler across different nodes. However, Astro makes a best effort to use different availability zones for your PGBouncer and Scheduler, which means it is possible but unlikely that they are both located in the same availability zone. This ensures that your DAGs can continue to run if there's an issue with one of your Airflow components in a specific node or availability zone.
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
@@ -238,7 +238,7 @@ Because this setting results in more resource usage, it can increase the cost of
 
 :::info Alternative Astro Hybrid Setup
 
-On Astro Hybrid, PgBouncer is highly available by default for all Deployments. Schedulers are highly available if a Deployment uses two or more schedulers. 
+On Astro Hybrid, PgBouncer is highly available by default for all Deployments. Schedulers are highly available if a Deployment uses two or more schedulers.
 
 Every Deployment has two PgBouncer Pods assigned to two different nodes to prevent zombie tasks. If you configure your Deployment with two schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses three or four schedulers can assign all scheduler Pods across two nodes.
 
