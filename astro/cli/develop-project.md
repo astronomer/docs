@@ -90,6 +90,7 @@ To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stab
 
 - Use the Airflow UI. In **Admin**, click **Connections**, **Variables** or **Pools**, and then add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](/astro/cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
 - Modify the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
+- Use the Cloud UI to create connections that can be shared across Deployments in a Workspace. These connections are not visible in the Airflow UI. See [Create Airflow connections in the Astro Cloud UI](/astro/create-and-link-connections.md).
 - Use a secret backend, such as AWS Secrets Manager, and access the secret backend locally. See [Configure an external secrets backend on Astro](/astro/secrets-backend.md).
 
 When you add Airflow objects to the Airflow UI of a local environment or to your `airflow_settings.yaml` file, your values can only be used locally. When you deploy your project to a Deployment on Astro, the values in this file are not included.
