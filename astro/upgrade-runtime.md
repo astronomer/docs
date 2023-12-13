@@ -74,7 +74,7 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 
 1. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
 2. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
-3. Confirm that your local upgrade was successful by scrolling to the bottom of any page. You should see your new Astro Runtime version in the footer as well as the version of Airflow it is based on.
+3. Confirm that your local upgrade was successful by scrolling to the end of any page. The new Astro Runtime version is listed in the footer as well as the version of Airflow it is based on.
 
     ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
 

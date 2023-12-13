@@ -1,6 +1,6 @@
 ---
-title: "Upgrade Astro Runtime/ Airflow on Astronomer Software"
-sidebar_label: "Upgrade Astro Runtime/ Airflow"
+title: "Upgrade Astro Runtime (Airflow version) on Astronomer Software"
+sidebar_label: "Upgrade Astro Runtime (Airflow version)"
 id: manage-airflow-versions
 description: Adjust and upgrade Airflow versions on Astronomer Software.
 ---
@@ -14,7 +14,7 @@ Regularly upgrading your Software Deployments ensures that your Deployments cont
 To upgrade your Airflow Deployment to a later version of Airflow:
 
 - Select a new Airflow version with the Software UI or CLI to start the upgrade.
-- Change the FROM statement in your project's `Dockerfile` to reference an Astro Runtime image that corresponds to your current Airflow version.
+- Change the `FROM` statement in your project's `Dockerfile` to reference an Astro Runtime image that corresponds to your current Airflow version.
 - Deploy your upgrade to Astronomer.
 
 ## Available Astronomer image versions
@@ -65,7 +65,7 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 ## Step 3: (Optional) Pin provider package versions
 
-Major Astro Runtime upgrades can include major upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes. 
+Major Astro Runtime upgrades can include significant upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes. 
 
 For the most stable upgrade path, Astronomer recommends pinning all provider package versions from your current Runtime version before upgrading. To check the version of all provider packages installed in your Runtime version, run:
 
@@ -118,7 +118,7 @@ Astronomer recommends testing new versions of Astro Runtime locally to ensure th
 
 4. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
-## Step 6: Deploy to Astronomer
+## Step 7: Deploy to Astronomer
 
 1. Run the following command to push your upgraded Astro project to your Deployment:
 
@@ -175,7 +175,7 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 ### Version upgrade considerations
 
-This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
+Each specific Astro Runtime versions has upgrade considerations that you need to be aware of and account for when you upgrade. These include breaking changes, database migrations, and other considerations.
 
 :::info
 
