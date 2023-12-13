@@ -110,40 +110,84 @@ You can customize the default Astronomer Vector logging sidecar to have differen
           - "${SIDECAR_LOGS}/*.log"
         read_from: beginning
     transforms:
-      transform_syslog:
-        type: add_fields
+      transform_airflow_logs:
+        type: remap
         inputs:
           - airflow_log_files
-        fields:
-          component: "${COMPONENT:--}"
-          workspace: "${WORKSPACE:--}"
-          release: "${RELEASE:--}"
-    
+        source: |
+          .component = "${COMPONENT:--}"
+          .workspace = "${WORKSPACE:--}"
+          .release = "${RELEASE:--}"
+          .date_nano = parse_timestamp!(.@timestamp, format: "%Y-%m-%dT%H:%M:%S.%f%Z")
+
+      filter_common_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: '!includes(["worker","scheduler"], .component)'
+
+      filter_scheduler_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: 'includes(["scheduler"], .component)'
+
+      filter_worker_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: 'includes(["worker"], .component)'
+
+      filter_gitsyncrelay_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: 'includes(["git-sync-relay"], .component)'
+
       transform_task_log:
         type: remap
         inputs:
-          - transform_syslog
+          - filter_worker_logs
+          - filter_scheduler_logs
         source: |-
-          # Parse Syslog input. The "!" means that the script should abort on error.
-          . = parse_json!(.message)
+          . = parse_json(.message) ?? .
           .@timestamp = parse_timestamp(.timestamp, "%Y-%m-%dT%H:%M:%S%Z") ?? now()
-          .@date_nano = parse_timestamp(.timestamp, "%Y-%m-%dT%H:%M:%S%Z") ?? now()
           .check_log_id = exists(.log_id)
           if .check_log_id != true {
-          .log_id = join!([.dag_id, .task_id, .execution_date, .try_number], "_")
+          .log_id = join!([to_string!(.dag_id), to_string!(.task_id), to_string!(.execution_date), to_string!(.try_number)], "_")
           }
           .offset = to_int(now()) * 1000000000 + to_unix_timestamp(now()) * 1000000
-    
-      transform_remove_fields:
-        type: remove_fields
+
+      final_task_log:
+        type: remap
         inputs:
           - transform_task_log
-        fields:
-          - host
-          - file
-    
-    sinks:
-      out:
+        source: |
+          .component = "${COMPONENT:--}"
+          .workspace = "${WORKSPACE:--}"
+          .release = "${RELEASE:--}"
+          .date_nano = parse_timestamp!(.@timestamp, format: "%Y-%m-%dT%H:%M:%S.%f%Z")
+
+      transform_remove_fields:
+        type: remap
+        inputs:
+          - final_task_log
+          - filter_common_logs
+          - filter_gitsyncrelay_logs
+        source: |
+          del(.host)
+          del(.file)
+    # Configuration for ElasticSearch sinks
+    sinks:  
+      out: 
         type: elasticsearch
         inputs:
           - transform_remove_fields
@@ -194,6 +238,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
           .log_id = join!([.dag_id, .task_id, .execution_date, .try_number], "_")
           }
           .offset = to_int(now()) * 1000000000 + to_unix_timestamp(now()) * 1000000
+    # Configuration for Datadog sinks
     sinks:
       my_sink_id:
         type: datadog_logs
@@ -227,6 +272,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
           component: "${COMPONENT:--}"
           workspace: "${WORKSPACE:--}"
           release: "${RELEASE:--}"
+    # Configuration for Honeycomb sinks      
     sinks:
       my_sink_id:
         type: honeycomb
