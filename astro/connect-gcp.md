@@ -12,7 +12,7 @@ import {siteVariables} from '@site/src/versions';
 
 Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Google Cloud Platform (GCP) resources.
 
-Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to GCP through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an GCP resource's allowlist. 
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to GCP through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an GCP resource's allowlist.
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-gcp) to GCP in a few different ways.
 
@@ -65,12 +65,12 @@ Choose one of the following setups based on the security requirements of your co
     groupId="create-a-private-connection-between-astro-and-gcp"
     values={[
         {label: 'VPC peering', value: 'vpc'},
-        {label: 'Private Service Connect', value: 'Private Service Connect'},
+        {label: 'Private Service Connect', value: 'Private-Service-Connect'},
     ]}>
 
-<TabItem value="VPC peering">
+<TabItem value="vpc">
 
-:::info 
+:::info
 
 This connection option is available only for dedicated Astro Hosted clusters and Astro Hybrid.
 
@@ -78,8 +78,8 @@ This connection option is available only for dedicated Astro Hosted clusters and
 
 VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
-To create a VPC peering connection between an Astro VPC and a GCP VPC: 
- 
+To create a VPC peering connection between an Astro VPC and a GCP VPC:
+
 1. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
     - Astro cluster ID and name.
@@ -88,7 +88,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC:
     - Classless Inter-Domain Routing (CIDR) block of the target VPC.
 
     After receiving your request, Astronomer support will create a VPC peering connection from your Astro VPC to your target VPC. The support team will then provide you with your Astro cluster GCP project ID and VPC name.
-    
+
 2. Using the information provided by Astronomer support, [create a peering connection](https://cloud.google.com/vpc/docs/using-vpc-peering#creating_a_peering_configuration) from your target VPC to your Astro cluster VPC. For example, you can use the following gcloud CLI command to create the connection:
 
    ```bash
@@ -99,7 +99,7 @@ After both VPC peering connections have been created, the connection becomes act
 
 </TabItem>
 
-<TabItem value="Private Service Connect">
+<TabItem value="Private-Service-Connect">
 
 Use Private Service Connect (PSC) to create private connections from Astro to GCP services without connecting over the public internet. See [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) to learn more.
 
