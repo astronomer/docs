@@ -73,7 +73,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 #### Customize Vector logging sidecars
 
-You can customize the default Astronomer Vector logging sidecar to have different transformations and sinks based on your team's requirements.
+You can customize the default Astronomer Vector logging sidecar to have different transformations and sinks based on your team's requirements. This is useful if you want to annotate or otherwise customize or filter your logs before they're sent to your logging platform.
 
 1. Add the following line to your `config.yaml` file:
 
@@ -87,7 +87,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
 
 2. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
-3. Create a custom [vector configuration `yaml` file](https://vector.dev/docs/reference/configuration/) to change how and where sidecars forward your logs. The following examples are template configurations for each commonly used sink. For the complete default logging sidecar configmap, see the [Astronomer GitHub](https://github.com/astronomer/airflow-chart/blob/master/templates/logging-sidecar-configmap.yaml).
+3. Create a custom [vector configuration `yaml` file](https://vector.dev/docs/reference/configuration/) to change how and where sidecars forward your logs. The following examples are template configurations for each commonly used external logging service. For the complete default logging sidecar configmap, see the [Astronomer GitHub](https://github.com/astronomer/airflow-chart/blob/master/templates/logging-sidecar-configmap.yaml).
 
   <Tabs
       defaultValue="elasticsearch"
@@ -185,10 +185,11 @@ You can customize the default Astronomer Vector logging sidecar to have differen
         source: |
           del(.host)
           del(.file)
-    # Configuration for ElasticSearch sinks
+    # Configuration for ElasticSearch sink.
     sinks:  
       out: 
         type: elasticsearch
+        # Specify the transforms you want to run before your logs are exported.
         inputs:
           - transform_remove_fields
         mode: bulk
@@ -242,6 +243,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
     sinks:
       my_sink_id:
         type: datadog_logs
+        # Specify the transforms you want to run before your logs are exported.
         inputs:
           - transform_task_log
         site: us1.datadoghq.com
@@ -276,6 +278,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
     sinks:
       my_sink_id:
         type: honeycomb
+        # Specify the transforms you want to run before your logs are exported.
         inputs:
           - transform_syslog
         api_key: <your-api-key>
