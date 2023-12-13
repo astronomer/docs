@@ -20,6 +20,24 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
+## How connections are stored
+
+When you set a non-secret connection in the Environment Manager, Astronomer stores the connection information in a database that is hosted and managed by Astronomer.
+
+When you set a secret connection in the Environment Manager, the following happens:
+
+- Astro generates a manifest that defines a Kubernetes secret, named <?>, that contains your connection information as (environment variables?).
+- Astro applies this manifest to your Deployment's namespace.
+- After the manifest is applied, the key and value of your environment variable are stored in a managed secrets backend(?) in Astro.
+
+This process occurs every time you update the connection.
+
+### Fetching environment secrets
+
+The [Organization Owner](astro/user-permissions.md#organization-roles) can enable or disable whether Connections saved as **Secret** can be exported. This controls whether or not users can export connections to work on them locally, for security.
+
+By default, connections saved as secret can't be exported. However,  **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally.
+
 ## Requirements
 
 - `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
