@@ -36,7 +36,7 @@ This process occurs every time you update the connection.
 
 The [Organization Owner](astro/user-permissions.md#organization-roles) can enable or disable whether Connections saved as **Secret** can be exported. This controls whether or not users can export connections to work on them locally, for security.
 
-By default, connections saved as secret can't be exported. However,  **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally.
+By default, connections saved as secret can't be exported. However, if you want to work with Connections saved as secret. The organization owner can enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI.
 
 ## Requirements
 
