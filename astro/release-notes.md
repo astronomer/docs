@@ -25,7 +25,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
-- The Cloud UI Environment Manager now shows a status for whether a connection was successfully synced to Deployments.
+- The Cloud UI Environment Manager now shows a status for whether a connection has been successfully synced to Deployments.
 
 ### Bug fixes
 
