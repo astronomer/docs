@@ -12,7 +12,7 @@ import {siteVariables} from '@site/src/versions';
 
 Use this document to learn how you can grant Astro cluster and its Deployments access to your external AWS resources.
 
-Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an AWS resource's allowlist. 
+Publicly accessible endpoints allow you to quickly connect your Astro clusters or Deployments to AWS through an Airflow connection. If your cloud restricts IP addresses, you can add the external IPs of your Deployment or cluster to an AWS resource's allowlist.
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-aws) to AWS in a few different ways.
 
@@ -77,7 +77,7 @@ Choose one of the following setups based on the security requirements of your co
 
 <TabItem value="VPC peering">
 
-:::info 
+:::info
 
 This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
 
@@ -89,11 +89,11 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 
 1. Open the AWS console of the AWS account with the external VPC and copy the following:
 
-    - AWS account ID 
+    - AWS account ID
     - AWS region
     - VPC ID of the external VPC
     - CIDR block of the external VPC
-    
+
 2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
 
     - **Stack name**: Enter a meaningful name for your stack.
@@ -111,7 +111,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     - CIDR block of the external VPC from Step 1
     - **PeerRole ARN** from Step 3
     - Astro cluster **ID** from Step 4
-    
+
     Astronomer support will initiate a peering request and create the routing table entries in the Astro VPC.
 
 6. Wait for Astronomer support to send you the Astro VPC CIDR and VPC peering ID. Then, the owner of the external VPC needs to [add a route](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the external VPC, using the Astro VPC CIDR as the **Destination** and the VPC peering ID as the **Target**.
@@ -133,7 +133,7 @@ To retrieve the ID of any Astro VPC, contact [Astronomer support](https://cloud.
 
 <TabItem value="Transit Gateways">
 
-:::info 
+:::info
 
 This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
 
@@ -164,11 +164,11 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 #### Setup
 
 1. In the Cloud UI, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings** > **Clusters*. Open your cluster from the table that appears and copy its **ID**.
-2. In your AWS console, copy the ID of your existing transit gateway (TGW). 
-3. [Create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) and [share the TGW with your cluster's Astro AWS account](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-sharing). 
+2. In your AWS console, copy the ID of your existing transit gateway (TGW).
+3. [Create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) and [share the TGW with your cluster's Astro AWS account](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-sharing).
 
     To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
-    
+
 4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
     - Your cluster **ID** from Step 1.
@@ -187,7 +187,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 <TabItem value="AWS PrivateLink">
 
-:::
+:::info
 
 This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
 
@@ -206,7 +206,7 @@ All Astro clusters are pre-configured with the following AWS PrivateLink endpoin
 To request additional endpoints, or assistance connecting to other AWS services, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 To access a service in a different region using PrivateLink endpoints, you must use an inter-Region VPC peering connection. You create an intermediate PrivateLink endpoint in the same region as the targeted service, then connect to that endpoint through an inter-Region VPC peering connection.
-    
+
 By default, Astronomer support activates the **Enable DNS Name** option on supported AWS PrivateLink endpoint services.  With this option enabled, you can make requests to the default public DNS service name instead of the public DNS name that is automatically generated by the VPC endpoint service. For example, `*.notebook.us-east-1.sagemaker.aws` instead of `vpce-xxx.notebook.us-east-1.vpce.sagemaker.aws`. For more information about AWS DNS hostnames, see [DNS hostnames](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#:~:text=recursive%20DNS%20queries.-,DNS%20hostnames,-When%20you%20launch).
 
 You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpoint service that you use.  See [AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/).
@@ -217,7 +217,7 @@ You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpo
 
 ## Hostname resolution options
 
-Securely connect Astro to resources running in other VPCs or on-premises through a resolving service. 
+Securely connect Astro to resources running in other VPCs or on-premises through a resolving service.
 
 Using Route 53 requires sharing a resolver rule with your Astro account. If this is a security concern, Astronomer recommends using Domain Name System (DNS) forwarding.
 
@@ -251,7 +251,7 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 5. On the **Associate permissions** page, accept the default settings and then click **Next**.
 
-6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field. 
+6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field.
 
     To get the Astro AWS account ID, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings**. From the **General** page, copy the **AWS External ID**.
 
