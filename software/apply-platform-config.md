@@ -5,7 +5,7 @@ id: apply-platform-config
 description: Apply platform-wide configuration changes to Astronomer via Helm.
 ---
 
-Astronomer Software uses [Helm](https://helm.sh/) to manage platform-level settings that apply to all users and Deployments. The [Astronomer Helm chart](https://github.com/astronomer/astronomer/blob/master/values.yaml) includes configurations for areas such as:
+Astronomer Software uses [Helm](https://helm.sh/) to install and manage some platform-level settings that apply to all users and Deployments. The [Astronomer Helm chart](https://github.com/astronomer/astronomer/blob/master/values.yaml) includes configurations for areas such as:
 
 - [Identity provider integrations](integrate-auth-system.md)
 - [Registry backends](registry-backend.md)
