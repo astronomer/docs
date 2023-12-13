@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Install Python packages from private sources'
-title: 'Private python packages'
+sidebar_label: 'Private python packages'
+title: 'Install Python packages from private sources'
 id: private-python-packages
 ---
 
@@ -33,7 +33,7 @@ Although GitHub is used in this example, you should be able to complete the proc
 
 :::info
 
-The following setup has been validated only with a single SSH key. You might need to modify this setup when using more than one SSH key per Docker image.
+The following setup has been validated with only a single SSH key. You might need to modify this setup when using more than one SSH key per Docker image.
 
 :::
 
@@ -72,7 +72,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 #### Step 2: Update Dockerfile
 
-1. Optional. Copy and save any existing build steps in your `Dockerfile`.
+1. (Optional) Copy and save any existing build steps in your `Dockerfile`.
 
 2. Add the following to your `packages.txt` file:
 
@@ -126,7 +126,7 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
-3. Optional. Test your DAGs locally. See [Restart your local environment](cli/develop-project.md#restart-your-local-environment).
+3. (Optional) Test your DAGs locally. See [Restart your local environment](cli/develop-project.md#restart-your-local-environment).
 
 4. Deploy the image to Astro using the Astro CLI:
 
@@ -163,7 +163,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
 #### Step 2: Update Dockerfile
 
-1. Optional. Copy and save any existing build steps in your `Dockerfile`.
+1. (Optional) Copy and save any existing build steps in your `Dockerfile`.
 
 2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
@@ -219,7 +219,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     - Add `PIP_EXTRA_INDEX_URL` as an environment variable that contains authentication information for your private PyPI index.
     - Install public and private Python-level packages from your `requirements.txt` file.
 
-4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
+4. (Optional) If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
 #### Step 3: Build a custom Docker image
 
@@ -235,15 +235,15 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t $image_name .
     ```
 
-3. Optional. Test your DAGs locally or deploy your image to Astro. See [Build and Run a Project Locally](#build-and-run-a-project-locally) or [Deploy Code to Astro](/astro/deploy-code.md).
+3. (Optional) Test your DAGs locally or deploy your image to Astro. See [Build and Run a Project Locally](#build-and-run-a-project-locally) or [Deploy Code to Astro](/astro/deploy-code.md).
 
     ```sh
     astro dev start --image-name $image_name
     ```
   
-4. Optional. Deploy the image to a Deployment on Astro using the Astro CLI.
+4. (Optional) Deploy the image to a Deployment on Astro using the Astro CLI.
 
-Your Astro project can now utilize Python packages from your private PyPi index.
+Your Astro project can now use Python packages from your private PyPi index.
 
 </TabItem>
 </Tabs>

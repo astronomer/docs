@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Customize your Astro project Dockerfile'
-title: 'Customize your Dockerfile'
+sidebar_label: 'Customize your Dockerfile'
+title: 'Customize your Astro project Dockerfile'
 id: customize-dockerfile
 ---
 
