@@ -67,7 +67,6 @@ The following tables show high level comparisons of permissions between differen
 | View any setting for any Deployment in the Software UI                                                                                            | ✔️                 | ✔️                 | ✔️                |
 | View all pending user invites in the **System Admin** tab of the Software UI                                                                      | ✔️                 | ✔️                 | ✔️                |
 | View information for any pending user invite                                                                                                      | ✔️                 | ✔️                 | ✔️                |
-
 | Access to [Grafana](grafana-metrics.md) and [Kibana](kibana-logging.md) for system-level monitoring                                               | ✔️                 | ✔️                 | ✔️                |
 | View [service accounts](ci-cd.md#step-1-create-a-service-account) for any Deployment or Workspace                                                 | ✔️                 | ✔️                 | ✔️                |
 | View the newest platform release version number                                                                                                   | ✔️                 | ✔️                 | ✔️                |
