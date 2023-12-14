@@ -1,4 +1,4 @@
----
+3---
 title: "Create an Azure Workload Identity connection in Airflow"
 id: azure-workload-identity
 sidebar_label: "Azure Workload Identity"
@@ -27,15 +27,14 @@ In order to create a workload identity for your deployment that leverages your E
 If you plan to use the same workload identity for multiple deployments, you'll need to run this command for each individual deployment. However, all deployments will use the same credentials for their connection, allowing you to share the same connection to multiple deployments at the same time via the [Astro Connection Management System](https://www.astronomer.io/solutions/connection-management/). Currently because of limits Azure has set on the number of resources allowed to leverage the same Workload Identity, the same connection can be shared across 5 deployments last. 
 :::
 
-~~
-Screenshot 1 and 2
-~~
+
+![details-screen](/img/examples/connection-azure-workload-identity-1.png)
+![command_creation_popup](/img/examples/connection-azure-workload-identity-2.png)
+
 
 The two credentials it requires, Managed Identity Name and Resource Group, are both available from the Managed Identity resource overview screen, as shown in the screenshot below: 
 
-~~
-ss3
-~~
+![identity-details-screen](/img/examples/connection-azure-workload-identity-3.png)
 
 After you've entered those credentials into the pop up menu, copy the code block from under `Run in terminal:` and either open the Azure CLI directly from the web portal, or from a local terminal window that has the Azure CLI installed. Then, paste the code block and run it to create your Workload Identity. After the Workload Identity has been created and authenticated to the deployments Scheduler, Triggerer, and Worker, you'll be returned a json package that contains all the necessary details for adding the connection to Airflow. Specifically, you'll need to copy the `clientId` and `tenantId` fields. 
 
@@ -59,11 +58,11 @@ After you've entered those credentials into the pop up menu, copy the code block
 
 To create your connection in Astro, open up the Environment tab and use the `+ connection` button to create a new connection. 
 
-SS4
+![create_connectionmenu](/img/examples/connection-azure-workload-identity-4.png)
 
 Then, select the Azure workload identity option from the grid menu, where you'll be presented with the following screen to enter the `clientId` and `tenantId` fields from before. If you need to specify a `subscriptionId` for a specific service, you can open up the more options drop down menu to do so. 
 
-SS5
+![example_conn](/img/examples/connection-azure-workload-identity-5.png)
 
 ## Adding Connection via the Airflow UI
 
