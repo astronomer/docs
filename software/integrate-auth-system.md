@@ -16,8 +16,8 @@ An auth system determines how users can log in to Astronomer Software. By defaul
 
 Integrating an external identity provider (IdP) greatly increases the security of your platform. When you integrate your IdP into Astronomer Software:
 
-- Users will no longer have to repeatedly login and remember credentials for their account.
-- You will have complete ownership over credential configuration and management on Astro.
+- Users no longer need to repeatedly login and remember credentials for their account.
+- You have complete ownership over credential configuration and management on Astro.
 - You can enforce multi-factor authentication (MFA) for users.
 
 In addition to the default methods, Astronomer provides the option to integrate any IdP that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
@@ -27,7 +27,7 @@ In addition to the default methods, Astronomer provides the option to integrate 
 - IdPs managed through [Auth0](https://auth0.com/)
 - [Amazon Cognito](https://aws.amazon.com/cognito/)
 
-After you integrate your an IdP, you can invite users that already have an account on your IdP to Astronomer Software. For a more advanced integration, you can configure [SCIM](#manage-users-and-teams-with-scim) so that you can manage users directly from your IdP and import batches of users to Astronomer Software as [Teams](import-idp-groups.md).
+After you integrate your IdP, you can invite users that already have an account on your IdP to Astronomer Software. For a more advanced integration, you can configure [SCIM](#manage-users-and-teams-with-scim) so that you can manage users directly from your IdP and import batches of users into Astronomer Software as [Teams](import-idp-groups.md).
 
 :::info
 
@@ -169,7 +169,11 @@ astronomer:
 
 Then, push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
-> **Note:** `okta-base-domain` will be different from the base domain of your Software installation.See [Okta documentation for finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
+:::info
+
+`okta-base-domain` is different from the base domain of your Software installation. See [Okta documentation for finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
+
+:::
 
 </TabItem>
 <TabItem value="autho">
@@ -178,9 +182,13 @@ If you manage your identity provider through Auth0, follow these steps to config
 
 #### Step 1: Create an Auth0 tenant domain
 
-Follow the Auth0 documentation to [create a tenant](https://auth0.com/docs/get-started/auth0-overview/create-tenants). You can use the default domain name or your own unique `tenant-name`. Your full tenant domain will look something like `astronomer.auth0.com`.
+Follow the Auth0 documentation to [create a tenant](https://auth0.com/docs/get-started/auth0-overview/create-tenants). You can use the default domain name or your own unique `tenant-name`. Your full tenant domain looks something like `astronomer.auth0.com`.
 
-> **Note:** Your full tenant domain may differ if you've created it outside of the United States.
+:::info
+
+Your full tenant domain may differ if you've created it outside of the United States.
+
+:::
 
 #### Step 2: Create a connection between Auth0 and your identity management provider
 
@@ -218,7 +226,9 @@ astronomer:
 ```
 Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
-> **Note:** You can find your `clientID` value at `https://manage.auth0.com/dashboard/us/<tenant-name>/applications` listed next to 'Default App'.
+:::info 
+You can find your `clientID` value at `https://manage.auth0.com/dashboard/us/<tenant-name>/applications` listed next to 'Default App'.
+:::
 
 </TabItem>
 <TabItem value="awscognito">
@@ -227,16 +237,16 @@ Then, push the configuration change to your platform as described in [Apply a co
 
 Start by creating a user pool in Cognito. You can either review the default settings or step through them to customize.
 
-Make sure that you create an `App client`, which is the OpenID client configuration that we will use to authenticate against. You do not need to generate a client secret, as Astronomer is a public client that uses implicit flow.
+Make sure that you create an `App client`, which is the OpenID client configuration that Astronomer uses to authenticate against. You do not need to generate a client secret, as Astronomer is a public client that uses implicit flow.
 
-Once the pool and app client are created, open `App integration` >`App client settings` and configure the following settings:
+After Auth0 creates the pool and app client, open `App integration` >`App client settings` and configure the following settings:
 
 - Select an identity provider to use (either the built-in cognito user pool or a federated identity provider).
 - Set the callback URL parameter to `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
 - Enable `Implicit grant` in `Allowed OAuth Flows`. Leave the other settings disabled.
 - Enable `email`, `openid`, and `profile` in `Allowed OAuth Scopes`.
 
-Then switch over to the `Domain name` tab and select a unique domain name to use for your hosted Cognito components.
+Then, switch to the **Domain name** tab and select a unique domain name to use for your hosted Cognito components.
 
 #### Step 2: Edit your Astronomer configuration
 
@@ -258,14 +268,14 @@ astronomer:
 
 Your Cognito pool ID can be found in the `General settings` tab of the Cognito portal. Your client ID is found in the `App clients` tab.
 
-Once you've saved your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
+After you save your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
 
 </TabItem>
 <TabItem value="localauth">
 
 To let users authenticate to Astronomer with a local username and password, follow the steps below.
 
-1. Enable Local Auth in your `config.yaml` file:
+1. Enable `local auth` in your `config.yaml` file:
   
     ```yaml
     astronomer:
@@ -603,7 +613,3 @@ This setup is primarily used for encrypting the required secrets for [configurin
     ```
 
 4. Save and push your changes. See [Apply a config change](apply-platform-config.md).
-
-## Next steps
-
-After
