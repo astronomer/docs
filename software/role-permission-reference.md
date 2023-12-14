@@ -9,7 +9,7 @@ This is where you'll find information about Astronomer Software default user rol
 
 ## Default role permissions tables
 
-The following tables show high level comparisons of permissions between different user roles.
+The following tables show high level comparisons of the different permitted actions between different user roles.
 
 ### Default Deployment user permissions
 
@@ -92,9 +92,9 @@ The following tables show high level comparisons of permissions between differen
 
 ## Default role permissions lists
 
-The following topics list the permission values that each role has by default as defined in the Astronomer Helm chart. You can update these permissions in your `config.yaml` file if you want to change the permissions that each role has. See [Customize role permissions](manage-platform-users.md#customize-role-permissions). 
+The following sections list the permission values that each role has by default as defined in the Astronomer Helm chart. You can update these permissions in your `config.yaml` file if you want to change the permissions that each role has. See [Customize role permissions](manage-platform-users.md#customize-role-permissions). 
 
-Note that these lists are also published in YAML form on the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.33/default.yaml).
+These lists are also published in YAML form in the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.33/default.yaml).
 
 ### System Viewer
 
