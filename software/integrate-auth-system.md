@@ -39,7 +39,7 @@ The following setups assume that you are using the default Astronomer [implicit 
 
 <Tabs
     groupId="setup"
-    defaultValue="azuread"
+    defaultValue="entraid"
     values={[
         {label: 'Microsoft Entra ID', value: 'entraid'},
         {label: 'Okta', value: 'okta'},
