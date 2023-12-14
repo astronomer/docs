@@ -17,7 +17,7 @@ All Astronomer Software platform customizations can be applied to your cluster u
 
 The best way to add or modify configurations is to start with your existing `config.yaml` file. To retrieve the current `config.yaml` file of an existing Software cluster, run the following command:
 
-```sh
+```bash
 helm get values -o yaml <your-installation-release-name> -n <your-installation-namespace> > config.yaml
 ```
 
