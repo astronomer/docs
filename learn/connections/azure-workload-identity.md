@@ -24,7 +24,7 @@ This guide explains how to set up an Azure Workload Identity connection using th
 In order to create a workload identity for your deployment that leverages your Entra ID managed identity, you'll need to execute an Azure CLI command that links your Airflow deployment and managed identity. To simplify this process, we have created a command generator, located in a pop up menu under the details tab of your deployment screen. 
 
 :::Note
-If you plan to use the same workload identity for multiple deployments, you'll need to run this command for each individual deployment. However, all deployments will use the same credentials for their connection, allowing you to share the same connection to multiple deployments at the same time via the [Astro Connection Management System](https://www.astronomer.io/solutions/connection-management/). 
+If you plan to use the same workload identity for multiple deployments, you'll need to run this command for each individual deployment. However, all deployments will use the same credentials for their connection, allowing you to share the same connection to multiple deployments at the same time via the [Astro Connection Management System](https://www.astronomer.io/solutions/connection-management/). Currently because of limits Azure has set on the number of resources allowed to leverage the same Workload Identity, the same connection can be shared across 5 deployments last. 
 :::
 
 ~~
