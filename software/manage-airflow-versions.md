@@ -23,7 +23,7 @@ A cron job automatically pulls new Astronomer image versions from the Astronomer
 
 If you don't want to wait for new Astronomer image versions, you can manually trigger the cron job with the following Kubernetes command:
 
-```sh
+```bash
 kubectl create job --namespace astronomer --from=cronjob/astronomer-houston-update-airflow-check airflow-update-check-first-run
 ```
 
@@ -49,7 +49,7 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 2. Run the following command to list your current Deployments. 
    
-    ```zsh
+    ```bash
     astro deployment list
     ```
 
@@ -57,7 +57,7 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 3. Run the following command to list the available Airflow versions:
 
-    ```zsh
+    ```bash
     astro deployment airflow upgrade --deployment-id=<deployment-id>
     ```
 
@@ -71,7 +71,7 @@ For the most stable upgrade path, Astronomer recommends pinning all provider pac
 
 1. Run the following command to check the version of all provider packages installed in your Astro Runtime version:
 
-    ```sh
+    ```bash
     docker run --rm quay.io/astronomer/astro-runtime:<current-runtime-version> pip freeze | grep apache-airflow-providers
     ```
 
@@ -125,7 +125,7 @@ Astronomer recommends testing new versions of Astro Runtime locally to ensure th
 
 1. Run the following command to push your upgraded Astro project to your Deployment:
 
-    ```sh
+    ```bash
     astro deploy
     ```
 
@@ -140,13 +140,13 @@ In the Software UI, select **Cancel** next to **Airflow Version**.
 
 Using the Astro CLI, run:
 
-```sh
+```bash
 astro deployment airflow upgrade --cancel --deployment-id=<deployment-id>
 ```
 
 For example, if you cancel an upgrade from Airflow 2.1.0 to Airflow 2.2.0 in the CLI, the following message appears:
 
-```sh
+```bash
 Airflow upgrade process has been successfully canceled. Your Deployment was not interrupted and you are still running Airflow 2.1.0.
 ```
 
