@@ -58,19 +58,19 @@ A number of configurations, including those for user permissions and identity pr
 
 1. Copy your platform namespace and release name. These are both likely to be `astronomer`. Your platform release name can be found in your list of active namespaces, which you can view by running the following command:
 
-    ```sh
+    ```bash
     kubectl get ns
     ```
 
     To locate your platform release name, run:
 
-    ```sh
+    ```bash
     helm ls -n <your-platform-namespace>
     ```
 
 2. Save your updated `config.yaml` file and run the following command to apply it as a Helm upgrade:
 
-    ```sh
+    ```bash
     helm upgrade <your-platform-release-name> astronomer/astronomer -f <your-updated-config-yaml-file> -n <your-platform-namespace> --set astronomer.houston.upgradeDeployments.enabled=false
     ```
 
@@ -78,6 +78,6 @@ A number of configurations, including those for user permissions and identity pr
 
 3. Run the following command to confirm that your configuration was applied:
 
-    ```sh
+    ```bash
     helm get values <your-platform-release-name> -n <your-platform-namespace>
     ```
