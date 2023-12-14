@@ -1,9 +1,9 @@
 ---
 title: "Create an Azure Workload Identity connection in Airflow"
-id: azure-blob-storage
+id: azure-workload-identity
 sidebar_label: "Azure Workload Identity"
 description: Learn how to create an Azure Workload Identity connection in Airflow.
-sidebar_custom_props: { icon: 'img/integrations/azure-blob-storage.png' }
+sidebar_custom_props: { icon: 'img/integrations/azure.png' }
 ---
 
 import Tabs from '@theme/Tabs';
