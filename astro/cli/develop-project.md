@@ -22,12 +22,6 @@ For information about running your Astro project in a local Airflow, see [Run Ai
 
 As you add to your Astro project, Astronomer recommends reviewing the [Astronomer Registry](https://registry.astronomer.io/), a library of Airflow modules, providers, and DAGs that serve as the building blocks for data pipelines.
 
-The Astronomer Registry includes:
-
-- Example DAGs for many data sources and destinations. For example, you can create a data quality use case with Snowflake and Great Expectations using the [Great Expectations Snowflake Example DAG](https://legacy.registry.astronomer.io/dags/great-expectations-snowflake).
-- Documentation for Airflow providers, such as [Databricks](https://registry.astronomer.io/providers/databricks), [Snowflake](https://registry.astronomer.io/providers/snowflake), and [Postgres](https://registry.astronomer.io/providers/postgres). This documentation is comprehensive and based on Airflow source code.
-- Documentation for Airflow modules, such as the [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator), [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator), and [S3ToRedshiftOperator](https://registry.astronomer.io/providers/amazon/modules/s3toredshiftoperator). These modules provide guidance on setting Airflow connections and their parameters.
-
 :::
 
 ## Prerequisites
