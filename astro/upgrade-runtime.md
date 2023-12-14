@@ -66,18 +66,19 @@ The Astro CLI then generates test results in your Astro project that identify de
 
     You must always specify the major, minor, and patch version of any given Astro Runtime version.
 
+3. Save the changes to your `Dockerfile`.
+
 ## Step 5: Test Astro Runtime locally
 
 Astronomer recommends testing new versions of Astro Runtime locally before upgrading a Deployment on Astro.
 
-1. Save the changes to your `Dockerfile`.
-2. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
-3. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
-4. Confirm that your local upgrade was successful by scrolling to the bottom of any page. You should see your new Astro Runtime version in the footer as well as the version of Airflow it is based on.
+1. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
+2. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
+3. Confirm that your local upgrade was successful by scrolling to the end of any page. The new Astro Runtime version is listed in the footer as well as the version of Airflow it is based on.
 
     ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
 
-5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
+4. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
 ### Step 6: (Optional) Upgrade and test provider packages
 
