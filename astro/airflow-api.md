@@ -66,7 +66,7 @@ Your Deployment URL is the [host](https://swagger.io/docs/specification/2-0/api-
 
     For example, if the Astro CLI returns `clq52ag32000108i8e3v3acml.astronomer.run/dz3uu847?orgId=org_clq52a121000008i8d`, your Deployment URL is `clq52ag32000108i8e3v3acml.astronomer.run/dz3uu847`.
 
-Alternatively you can retrieve your Deployment URL by opening the Airflow UI for your Deployment on Astro and copying the URL of the page up to `/home`. For example, if the home page of your Deployment Airflow UI is hosted at `clq52c95r000208i8c7wahwxt.astronomer.run/dz3uu847/home`, your Deployment URL would be `clq52c95r000208i8c7wahwxt.astronomer.run/dz3uu847`.
+Alternatively, you can retrieve your Deployment URL by opening the Airflow UI for your Deployment on Astro and copying the URL of the page up to `/home`. For example, if the home page of your Deployment Airflow UI is hosted at `clq52c95r000208i8c7wahwxt.astronomer.run/dz3uu847/home`, your Deployment URL is `clq52c95r000208i8c7wahwxt.astronomer.run/dz3uu847`.
 
 ## Step 3: Make an Airflow API request
 
