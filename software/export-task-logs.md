@@ -51,7 +51,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 :::
 
 ### Configure logging sidecars
-
+ 
 1. Retrieve your `config.yaml` file. See [Apply a config change](apply-platform-config.md).
 2. Add the following entry to your `config.yaml` file:
 
@@ -79,9 +79,246 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 
 :::info
 
-To revert to the default behavior and export task logs using a Fluentd Daemonset, remove this configuration from your `config.yaml` file.
+To revert to the default behavior and export task logs using a Fluentd Daemonset, remove this configuration from your `config.yaml` file and reapply it.
 
 :::
+
+#### Customize Vector logging sidecars
+
+You can customize the default Astronomer Vector logging sidecar to have different transformations and sinks based on your team's requirements. This is useful if you want to annotate, otherwise customize, or filter your logs before sending them to your logging platform.
+
+1. Add the following line to your `config.yaml` file:
+
+    ```yaml {5}
+    global:
+      loggingSidecar:
+        enabled: true
+        name: sidecar-log-consumer
+        customConfig: true
+    ```
+
+2. Push the configuration change to your cluster. See [Apply a config change](apply-platform-config.md).
+
+3. Create a custom [vector configuration `yaml` file](https://vector.dev/docs/reference/configuration/) to change how and where sidecars forward your logs. The following examples are template configurations for each commonly used external logging service. For the complete default logging sidecar configmap, see the [Astronomer GitHub](https://github.com/astronomer/airflow-chart/blob/master/templates/logging-sidecar-configmap.yaml).
+
+  <Tabs
+      defaultValue="elasticsearch"
+      groupId= "customize-vector-logging-sidecars"
+      values={[
+          {label: 'Elasticsearch', value: 'elasticsearch'},
+          {label: 'Honeycomb', value: 'honeycomb'},
+          {label: 'Datadog', value: 'datadog'},
+      ]}>
+  <TabItem value="elasticsearch">
+
+    ```yaml 
+    log_schema:
+      timestamp_key : "@timestamp"
+    data_dir: "${SIDECAR_LOGS}"
+    sources:
+      airflow_log_files:
+        type: file
+        include:
+          - "${SIDECAR_LOGS}/*.log"
+        read_from: beginning
+    transforms:
+      transform_airflow_logs:
+        type: remap
+        inputs:
+          - airflow_log_files
+        source: |
+          .component = "${COMPONENT:--}"
+          .workspace = "${WORKSPACE:--}"
+          .release = "${RELEASE:--}"
+          .date_nano = parse_timestamp!(.@timestamp, format: "%Y-%m-%dT%H:%M:%S.%f%Z")
+
+      filter_common_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: '!includes(["worker","scheduler"], .component)'
+
+      filter_scheduler_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: 'includes(["scheduler"], .component)'
+
+      filter_worker_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: 'includes(["worker"], .component)'
+
+      filter_gitsyncrelay_logs:
+        type: filter
+        inputs:
+          - transform_airflow_logs
+        condition:
+          type: "vrl"
+          source: 'includes(["git-sync-relay"], .component)'
+
+      transform_task_log:
+        type: remap
+        inputs:
+          - filter_worker_logs
+          - filter_scheduler_logs
+        source: |-
+          . = parse_json(.message) ?? .
+          .@timestamp = parse_timestamp(.timestamp, "%Y-%m-%dT%H:%M:%S%Z") ?? now()
+          .check_log_id = exists(.log_id)
+          if .check_log_id != true {
+          .log_id = join!([to_string!(.dag_id), to_string!(.task_id), to_string!(.execution_date), to_string!(.try_number)], "_")
+          }
+          .offset = to_int(now()) * 1000000000 + to_unix_timestamp(now()) * 1000000
+
+      final_task_log:
+        type: remap
+        inputs:
+          - transform_task_log
+        source: |
+          .component = "${COMPONENT:--}"
+          .workspace = "${WORKSPACE:--}"
+          .release = "${RELEASE:--}"
+          .date_nano = parse_timestamp!(.@timestamp, format: "%Y-%m-%dT%H:%M:%S.%f%Z")
+
+      transform_remove_fields:
+        type: remap
+        inputs:
+          - final_task_log
+          - filter_common_logs
+          - filter_gitsyncrelay_logs
+        source: |
+          del(.host)
+          del(.file)
+    # Configuration for ElasticSearch sink.
+    sinks:  
+      out: 
+        type: elasticsearch
+        # Specify the transforms you want to run before your logs are exported.
+        inputs:
+          - transform_remove_fields
+        mode: bulk
+        compression: none
+        endpoint: "http://example-host:<example-port>"
+        auth:
+          strategy: "basic"
+          user: "example-user"
+          password : "example-pass"
+        bulk:
+          index: "vector.${RELEASE:--}.%Y.%m.%d"
+          action: create
+    ```
+
+  </TabItem>
+  <TabItem value="datadog">
+
+    ```yaml 
+    log_schema:
+      timestamp_key : "@timestamp"
+    data_dir: "${SIDECAR_LOGS}"
+    sources:
+      airflow_log_files:
+        type: file
+        include:
+          - "${SIDECAR_LOGS}/*.log"
+        read_from: beginning
+    transforms:
+      transform_syslog:
+        type: add_fields
+        inputs:
+          - generate_syslog
+        fields:
+          component: "${COMPONENT:--}"
+          workspace: "${WORKSPACE:--}"
+          release: "${RELEASE:--}"
+      transform_task_log:
+        type: remap
+        inputs:
+          - transform_syslog
+        source: |-
+          # Parse Syslog input. The "!" means that the script should abort on error.
+          . = parse_json!(.message)
+          .@timestamp = parse_timestamp(.timestamp, "%Y-%m-%dT%H:%M:%S%Z") ?? now()
+          .check_log_id = exists(.log_id)
+          if .check_log_id != true {
+          .log_id = join!([.dag_id, .task_id, .execution_date, .try_number], "_")
+          }
+          .offset = to_int(now()) * 1000000000 + to_unix_timestamp(now()) * 1000000
+    # Configuration for Datadog sinks
+    sinks:
+      my_sink_id:
+        type: datadog_logs
+        # Specify the transforms you want to run before your logs are exported.
+        inputs:
+          - transform_task_log
+        site: us1.datadoghq.com
+        default_api_key: <your-api-key>
+        encoding:
+          codec: json
+    ```
+
+  </TabItem>
+  <TabItem value="honeycomb">
+
+    ```yaml
+    log_schema:
+      timestamp_key : "@timestamp"
+    data_dir: "${SIDECAR_LOGS}"
+    sources:
+      airflow_log_files:
+        type: file
+        include:
+          - "${SIDECAR_LOGS}/*.log"
+        read_from: beginning
+    transforms:
+      transform_syslog:
+        type: add_fields
+        inputs:
+          - generate_syslog
+        fields:
+          component: "${COMPONENT:--}"
+          workspace: "${WORKSPACE:--}"
+          release: "${RELEASE:--}"
+    # Configuration for Honeycomb sinks      
+    sinks:
+      my_sink_id:
+        type: honeycomb
+        # Specify the transforms you want to run before your logs are exported.
+        inputs:
+          - transform_syslog
+        api_key: <your-api-key>
+        dataset: my-honeycomb-dataset
+    
+    ```
+
+  </TabItem>
+
+  </Tabs>
+
+4. Run the following command to add the configuration file to your cluster as a Kubernetes secret:
+
+    ```sh
+    kubectl create secret generic sidecar-config --from-file=vector-config.yaml=vector-config.yaml
+    ```
+
+5. Run the following command to annotate the secret so that it's automatically applied to all new Deployments:
+
+    ```sh
+    kubectl annotate secret secret-name astronomer.io/commander-sync="platform-release=astronomer"
+    ```
+
+6. Run the following command to sync existing Deployments with the new configuration:
+
+    ```sh
+    kubectl create job --from=cronjob/astronomer-config-syncer sync-secrets -n astronomer
+    ```
 
 ## Use an external Elasticsearch instance for Airflow task log management
 
@@ -194,7 +431,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
 
   ```bash
   helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
- ```
+  ```
 
 </TabItem>
 </Tabs>
