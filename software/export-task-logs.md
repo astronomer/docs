@@ -73,7 +73,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 #### Customize Vector logging sidecars
 
-You can customize the default Astronomer Vector logging sidecar to have different transformations and sinks based on your team's requirements. This is useful if you want to annotate or otherwise customize or filter your logs before they're sent to your logging platform.
+You can customize the default Astronomer Vector logging sidecar to have different transformations and sinks based on your team's requirements. This is useful if you want to annotate, otherwise customize, or filter your logs before sending them to your logging platform.
 
 1. Add the following line to your `config.yaml` file:
 
@@ -85,7 +85,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
         customConfig: true
     ```
 
-2. Push the configuration change. See [Apply a config change](apply-platform-config.md).
+2. Push the configuration change to your cluster. See [Apply a config change](apply-platform-config.md).
 
 3. Create a custom [vector configuration `yaml` file](https://vector.dev/docs/reference/configuration/) to change how and where sidecars forward your logs. The following examples are template configurations for each commonly used external logging service. For the complete default logging sidecar configmap, see the [Astronomer GitHub](https://github.com/astronomer/airflow-chart/blob/master/templates/logging-sidecar-configmap.yaml).
 
@@ -212,7 +212,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
       timestamp_key : "@timestamp"
     data_dir: "${SIDECAR_LOGS}"
     sources:
-      generate_syslog:
+      airflow_log_files:
         type: file
         include:
           - "${SIDECAR_LOGS}/*.log"
@@ -260,7 +260,7 @@ You can customize the default Astronomer Vector logging sidecar to have differen
       timestamp_key : "@timestamp"
     data_dir: "${SIDECAR_LOGS}"
     sources:
-      generate_syslog:
+      airflow_log_files:
         type: file
         include:
           - "${SIDECAR_LOGS}/*.log"
