@@ -18,7 +18,6 @@ Secrets backend integrations can be configured individually with each Astro Depl
 Using secrets to set Airflow connections requires knowledge of how to generate Airflow connections in URI or JSON format. See [Import and export Airflow connections and variables](import-export-connections-variables.md) for guidance on how to export your connections and variables based on where they are stored.
 
 Astro integrates with the following secrets backend tools:
-
 - [AWS Secrets Manager](secrets-backend/aws-secretsmanager.md)
 - [AWS Systems Manager Parameter Store](secrets-backend/aws-paramstore.md)
 - [Azure Key Vault](secrets-backend/azure-key-vault.md)

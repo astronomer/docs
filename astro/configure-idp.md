@@ -32,7 +32,7 @@ To limit users to only a subset of these options, see [Restrict authentication o
 
 Single Sign On (SSO) authorization allows users to log in using their company credentials, managed through an IdP. This provides a streamlined login experience for your Astro users, as they are able to leverage the same credentials across multiple applications. In addition, this provides improved security and control for organizations to manage access from a single source. Astro supports integrations with the following IdPs:
 
-- [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Microsoft Entra ID)](https://www.microsoft.com/en-us/security/business/microsoft-entra-pricing)
 - [Okta](https://www.okta.com/)
 - [OneLogin](https://www.onelogin.com/)
 - [Ping Identity](https://www.pingidentity.com/en.html)
@@ -56,7 +56,7 @@ At a high level, to configure an SSO identity provider (IdP) you will:
     groupId= "configure-your-identity-provider"
     values={[
         {label: 'Okta', value: 'Okta'},
-        {label: 'Azure AD', value: 'Azure AD'},
+        {label: 'Microsoft Entra ID', value: 'ME-ID'},
         {label: 'OneLogin', value: 'OneLogin'},
         {label: 'Ping Identity', value: 'Ping Identity'},
     ]}>
@@ -150,29 +150,29 @@ SCIM provisioning allows you to manage Astro users from your identity provider p
 
 </TabItem>
 
-<TabItem value="Azure AD">
+<TabItem value="ME-ID">
 
-This section provides setup steps for setting up Azure AD as your IdP on Astro. After completing this setup, your organization's users can use Azure AD to log in to Astro.
+This section provides setup steps for setting up Microsoft Entra ID as your IdP on Astro. After completing this setup, your organization's users can use Microsoft Entra ID to log in to Astro.
 
 #### Prerequisites
 
 To integrate Azure as your IdP for Astro you must have:
 
 - An Azure subscription.
-- An [Azure AD tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant) with `Global Administrator` privileges.
+- A [Microsoft Entra ID tenant](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-create-new-tenant) with `Global Administrator` privileges.
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - At least one [verified domain](manage-domains.md).
 
 #### Step 1: Register Astro as an application on Azure
 
-Follow [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register a new app. When configuring the application, set the following values:
+Follow [Microsoft Documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) to register a new app. When configuring the application, set the following values:
 
 - **Name** and **Supported account types**: Set these according to your organization's needs.
 - **Redirect URI**: Select **Web** and specify `https://auth.astronomer.io/login/callback`.
 
 #### Step 2: Create a client secret
 
-Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 4.
+Follow [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 4.
 
 :::caution
 
@@ -182,7 +182,7 @@ If you configure an expiring secret, make sure to record the expiration date and
 
 #### Step 3: Configure API permissions
 
-Follow [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-access-web-apis#add-permissions-to-access-web-apis) to add the following **Delegated** permissions to **Microsoft Graph**:
+Follow [Microsoft's documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis#add-permissions-to-access-web-apis) to add the following **Delegated** permissions to **Microsoft Graph**:
 
 - `OpenId.email`
 - `OpenId.openid`
@@ -191,27 +191,27 @@ Follow [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/active
 
 :::info
 
-If your Azure Active Directory is configured to require admin approval on API permissions, make sure to also click the **Grant admin consent** button at the top of your permissions list.
+If your Microsoft Entra ID is configured to require admin approval on API permissions, make sure to also click the **Grant admin consent** button at the top of your permissions list.
 
 :::
 
-#### Step 4: Create an SSO connection to Azure AD
+#### Step 4: Create an SSO connection to Microsoft Entra ID
 
-1. Assign yourself to Astro from Azure AD. See [Assign users and groups to an Application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal?pivots=portal).
+1. Assign yourself to Astro from Microsoft Entra ID. See [Assign users and groups to an Application](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal?pivots=portal).
 2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 3. In the **SSO Configuration** menu, click **Configure SSO**.
 4. Configure the following values for your connection:
 
-    - **Connection type**: Select **Azure AD**.
-    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Azure AD.
-    - **Automatic Membership**: Set the default role for users who join your Organization through Azure AD and without an explicit invite from Astro.
-    - **Microsoft Azure AD Domain**: Retrieve this value from your Azure AD directory's overview page in the Microsoft Azure portal.
-    - **Application (client) ID**: Retrieve this from the **Overview** page of your Azure AD application.
+    - **Connection type**: Select **Microsoft Entra ID**.
+    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Microsoft Entra ID.
+    - **Automatic Membership**: Set the default role for users who join your Organization through Microsoft Entra ID and without an explicit invite from Astro.
+    - **Microsoft Entra ID Domain**: Retrieve this value from your Microsoft Entra ID directory's overview page in the Microsoft Azure portal.
+    - **Application (client) ID**: Retrieve this from the **Overview** page of your Microsoft Entra ID application.
     - **Client ID and Client secret**: Enter the values you coped from [Step 2: Create a client secret](#step-2-create-a-client-secret)
 
 5. If you already completed [Step 1: Register Astro as an application on Azure](#step-1-register-astro-as-an-application-on-azure), skip the Cloud UI instructions to configure a Redirect URI.
-6. Click **Create**. Your Azure AD integration appears as an entry in **SSO Configuration**.
-7. In **SSO Configuration**, click **Activate**. You are redirected to Azure AD to test your configuration. After you have successfully authenticated, you are redirected to Astro.
+6. Click **Create**. Your Microsoft Entra ID integration appears as an entry in **SSO Configuration**.
+7. In **SSO Configuration**, click **Activate**. You are redirected to Microsoft Entra ID to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 8. Click **Activate SSO**.
 
 #### Step 5: Copy your SSO bypass link
@@ -231,11 +231,11 @@ An SSO bypass link allows you to authenticate to your Organization without using
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
 
 
-#### Step 6: Assign users to your Azure AD application
+#### Step 6: Assign users to your Microsoft Entra ID application
 
-Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
+Follow [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal?pivots=portal) to assign users from your organization to your new application.
 
-When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
+When a user assigned to the application accesses Astro, they will be brought automatically to Microsoft Entra ID after entering their email in the Cloud UI.
 
 </TabItem>
 

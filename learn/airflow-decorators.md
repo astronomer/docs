@@ -72,7 +72,7 @@ In the context of Airflow, decorators contain more functionality than this simpl
 
 The purpose of the TaskFlow API in Airflow is to simplify the DAG authoring experience by eliminating the boilerplate code required by traditional operators. The result can be cleaner DAG files that are more concise and easier to read.
 
-In general, whether you use the TAskFlow API is a matter of your own preference and style. In most cases, a TaskFlow decorator and the corresponding traditional operator will have the same functionality. You can also [mix decorators and traditional operators](#mixing-taskflow-decorators-with-traditional-operators) within a single DAG.
+In general, whether you use the TaskFlow API is a matter of your own preference and style. In most cases, a TaskFlow decorator and the corresponding traditional operator will have the same functionality. You can also [mix decorators and traditional operators](#mixing-taskflow-decorators-with-traditional-operators) within a single DAG.
 
 ## How to use the TaskFlow API
 

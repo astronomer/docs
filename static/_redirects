@@ -31,20 +31,20 @@
 /astro/configure-deployment-resources /astro/deployment-settings 301
 /astro/view-logs#export-task-logs-to-datadog-aws-only /astro/view-logs#export-task-logs-to-datadog 301
 
-# tutorial redirects 
+# tutorial redirects
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
 /tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2 301
 /tutorials/astro-python-sdk /learn/astro-python-sdk 301
 /learn/category/tutorials /learn/category/airflow-tutorials 301
 
 
-# CLI migration redirects 
+# CLI migration redirects
 /software/cli-reference /astro/cli/reference 301
 /software/cli-release-notes /astro/cli/release-notes 301
 /software/cli-reference* /astro/cli/reference 301
 /software/install-cli /astro/cli/install-cli 301
 
-# Docs with redundant Learn guides 
+# Docs with redundant Learn guides
 /astro/deferrable-operators /learn/deferrable-operators 301
 /astro/astro-python-sdk /learn/astro-python-sdk-etl 301
 /astro/data-lineage-concepts /learn/airflow-openlineage 301
@@ -268,7 +268,7 @@
 # redirect links to renamed files
 /astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
-/astro/deploy-code.md#enable-dag-only-deploys-on-a-deployment /astro/deploy-dags.md#enable-disable-dag-deploys-for-a-deployment
+/astro/deploy-code.md#enable-dag-only-deploys-on-a-deployment /astro/deploy-dags.md#enable-or-disable-dag-deploys-for-a-deployment
 /astro/pipeline-alerts /astro/alerts 301
 /astro/add-user#add-a-user-to-an-organization /astro/manage-organization-users 301
 /astro/add-user#add-a-user-to-a-workspace /astro/manage-workspace-users 301
@@ -296,6 +296,7 @@
 /astro/view-logs#export-task-logs-to-datadog /astro/export-datadog
 /astro/deployment-metrics#export-airflow-metrics-to-datadog /astro/export-task-logs-to-datadog
 /astro/view-logs#export-task-logs-to-aws-cloudwatch /astro/export-cloudwatch
+/astro/manage-connections-variables#cloud-ui-connections /astro/manage-connections-variables#astro-cloud-ui-environment-manager 301
 
 
 
@@ -323,3 +324,4 @@
 /astro/astro-ips /astro/connect-aws#public-endpoints 301
 /astro/manage-hybrid-clusters#authorize-workspaces-to-a-cluster /astro/authorize-workspaces-to-a-cluster 301
 /astro/deployment-settings#transfer-a-deployment-to-another-workspace /astro/transfer-a-deployment 301
+runtime-image-architecture#default-environment-variables /astro/platform-variables.md#default-runtime-environment-variables
