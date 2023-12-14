@@ -61,7 +61,7 @@ To add a Python package from a private repository to your Astro project, specify
 git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git
 ```
 
-For example, to install `mypackage1` and `mypackage2` from `myorganization`, you would add the following to your `private-requirements.txt` file:
+For example, to install `mypackage1` and `mypackage2` from `myorganization`, add the following to your `private-requirements.txt` file:
 
 ```
 git+ssh://git@github.com/myorganization/mypackage1.git

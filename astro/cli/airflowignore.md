@@ -1,5 +1,5 @@
 ---
-title: 'Use `.airflowignore` to ignorre files in your Astro project'
+title: 'Use `.airflowignore` to ignore files in your Astro project'
 sidebar_label: 'Ignore project files'
 id: airflowignore
 ---
