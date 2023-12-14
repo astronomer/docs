@@ -51,15 +51,19 @@ After you've entered those credentials into the pop up menu, copy the code block
 
 ```
 
-## Adding Connection to Astro
+## Adding Connection via the Astro UI
 
 To create your connection in Astro, open up the Environment tab and use the `+ connection` button to create a new connection. 
 
 SS4
 
-Then, select the Azure workload identity option from the grid menu, where you'll be presented with the following screen to enter the `clientId` and `tenantId` fields from before. 
+Then, select the Azure workload identity option from the grid menu, where you'll be presented with the following screen to enter the `clientId` and `tenantId` fields from before. If you need to specify a `subscriptionId` for a specific service, you can open up the more options drop down menu to do so. 
 
 SS5
+
+## Adding Connection via the Airflow UI
+
+To create your connection in Airflow, open up the Connections menu and create a new connection, then select `Azure` as the connection type. Then, enter the `clientId` and `tenantId` fields from before. You can also specify a `subscriptionId` for a specific service if you need to do so. 
 
 
 
