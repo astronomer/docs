@@ -345,13 +345,8 @@ module.exports = {
     {
       type: 'category',
       label: 'Use cases',
-      link: {
-        type: 'generated-index',
-        title: 'Use cases',
-        description: 'Best practices and example use cases on Astro.'
-      },
       items: [
-        'astro-use-case/use-case-astro-connections',
+        'use-cases/connections-branch-deploys',
       ],
     },
   ],
