@@ -31,10 +31,9 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Airflow 2.8
 
-Astro Runtime 9.2.0 includes same-day support for Apache Airflow 2.8, which includes a number of new features and improvements. Most notably, Airflow 2.8 includes the following changes:
+Astro Runtime 10.0.0 includes same-day support for Apache Airflow 2.8, which includes a number of new features and improvements. Most notably, Airflow 2.8 includes the following changes:
 
 - The new object storage features make it easier to work with popular object storage systems like S3 and GCS. You can use new  abstract object types to work with files in multiple different object storage systems without writing system-specific code.
-- You can now document your DAGs using HTML to provide richer web-based content for understanding and interacting with DAGs in the Airflow UI. This feature replaces `custom_html_form` attribute.
 
 ### Additional improvements
 
