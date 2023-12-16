@@ -140,6 +140,21 @@ with DAG(..., template_searchpath="/tmp") as dag:
 </TabItem>
 </Tabs>
 
+### Disabling templating
+
+As of Airflow 2.8 it is possible to use a wrapper class to disable templating for the input to a templatable field without needing to modify the operator itself. This is useful when you want to pass a string that contains Jinja syntax to an operator without it being rendered. For example, you may want to pass a Jinja template to a `BashOperator` that will not be rendered. This can be achieved by wrapping the string into the `literal` function:
+
+```python
+from airflow.utils.template import literal
+
+BashOperator(
+    task_id="use_literal_wrapper_to_ignore_jinja_template",
+    bash_command=literal("echo {{ params.the_best_number }}"),
+)
+```
+
+The code above will print `echo {{ params.the_best_number }}` to the logs instead of showing the rendered value of `params.the_best_number`.
+
 ## Validate templates
 
 The output of templates can be checked in both the Airflow UI and Airflow CLI. One advantage of the Airflow CLI is that you don't need to run any tasks before seeing the result.
