@@ -98,6 +98,13 @@ If you run Airflow in Docker using the [Astro CLI](https://docs.astronomer.io/so
 
 The Astro CLI includes a command to show webserver, scheduler, triggerer and Celery worker logs from the local Airflow environment. For more information, see [astro dev logs](https://docs.astronomer.io/astro/cli/astro-dev-logs).
 
+
+:::note
+
+As of Airflow 2.8, logs from other Airflow components, such as the scheduler or executor will be forwarded to the task logs if an error in the component causes the task to fail. For example if a task runs out of memory, causing a [zombie process](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks), information about the zombie will be printed to the task logs. You can disable this behavior by setting [`AIRFLOW__LOGGING__ENABLE_TASK_CONTEXT_LOGGER=False`](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/configurations-ref.html#enable-task-context-logger).
+
+:::
+
 ## Add custom task logs from a DAG
 
 All hooks and operators in Airflow generate logs when a task is run. You can't modify logs from within other operators or in the top-level code, but you can add custom logging statements from within your Python functions by accessing the `airflow.task` logger.
