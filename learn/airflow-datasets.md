@@ -30,6 +30,12 @@ There are multiple resources for learning about this topic. See also:
 
 :::
 
+:::note
+
+Datasets are not to be confused with the Airflow 2.8 feature of Object Storage, which allow you to interact with files in cloud and local object storage systems using an abstraction implemented as a [Path API](https://docs.python.org/3/library/pathlib.html). For more information, see [Use Airflow Object Storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an existing knowledge of:

@@ -70,12 +70,14 @@ When a DAG run, task instance, or [task group](task-groups.md) instance is selec
 
 ![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
 
-There are 4 tabs available within the **Grid** view:
+There are several tabs available within the **Grid** view:
 
 - **Details**: Shows more details about the DAG, DAG run or task instance.
 - **Graph**: Shows a graph representation of the DAG.
 - **Gantt**: Shows the duration of each task instance in a DAG run as a Gantt chart.
 - **Code**: Shows the DAG code.
+- **Logs**: (only available when a task instance is selected) Shows the logs of a task instance.
+- **XCom**: (only available when a task instance is selected) Shows the XCom pushed by a task instance.
 
 :::tip
 

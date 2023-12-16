@@ -58,7 +58,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 2. Add the following line to your `requirements.txt` file to install the Amazon provider with the `s3fs` extension, as well as the [scikit-learn](https://scikit-learn.org/stable/) package. If you are using Google Cloud Storage or Azure Blob Storage, install the [Google provider](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) or [Azure provider](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) instead.
 
     ```text
-    apache-airflow-providers-amazon[s3fs]==8.12.0
+    apache-airflow-providers-amazon[s3fs]==8.13.0
     scikit-learn==1.3.2
     ```
 
