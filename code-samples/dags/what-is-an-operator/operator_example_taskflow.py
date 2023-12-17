@@ -1,7 +1,7 @@
 import hashlib
 import json
 
-from airflow import AirflowException
+from airflow.exceptions import AirflowException
 from airflow.decorators import dag, task
 from airflow.models import Variable
 from airflow.models.baseoperator import chain

@@ -70,7 +70,7 @@ In this tutorial you will create a listener that sends a Slack notification when
 2. Copy the following code into the file:
 
 ```python
-from airflow import Dataset
+from airflow.datasets import Dataset
 from airflow.listeners import hookimpl
 from airflow.models.taskinstance import TaskInstance
 from airflow.utils.state import TaskInstanceState

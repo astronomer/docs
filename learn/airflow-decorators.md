@@ -333,7 +333,7 @@ There are several decorators available to use with Airflow. This list provides a
 - [Short circuit decorator](airflow-branch-operator.md#taskshortcircuit-and-shortcircuitoperator) (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False.
 - [Branch decorator](airflow-branch-operator.md#taskbranch-and-branchpythonoperator) (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition.
 - [BranchExternalPython decorator](airflow-branch-operator.md#other-branch-operators) (`@task.branch_external_python`), which creates a branch in your DAG running Python code in a pre-existing virtual environment.
-- [BranchPythonVirtualenvOperator](airflow-branch-operator.md#other-branch-operators) (`@task.branch_virtualenv`), which creates a branch in your DAG running Python code in a newly created virtual environment.
+- [BranchPythonVirtualenvOperator](airflow-branch-operator.md#other-branch-operators) (`@task.branch_virtualenv`), which creates a branch in your DAG running Python code in a newly created virtual environment. The environment can be cached by providing a `venv_cache_path`.
 - Kubernetes pod decorator (`@task.kubernetes()`), which runs a [KubernetesPodOperator](kubepod-operator.md) task.
 - [Sensor decorator](what-is-a-sensor.md#sensor-decorator) (`@task.sensor()`), which turns a Python function into a sensor. This sensor was introduced in Airflow 2.5.
 - [Astro Python SDK decorators](https://github.com/astronomer/astro-sdk), which simplify writing ETL/ELT DAGs.
