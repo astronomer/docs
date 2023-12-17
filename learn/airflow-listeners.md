@@ -62,29 +62,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create your listener
 
-Airflow listeners are defined using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code. 
-
-For example, the [@hookspec of the `on_task_instance_failed` function](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/taskinstance.py) is:
-
-```python
-@hookspec
-def on_task_instance_failed(
-    previous_state: TaskInstanceState | None, task_instance: TaskInstance, session: Session | None
-):
-    """Execute when task state changes to FAIL. previous_state can be None."""
-```
-
-In order to create a listener that executes whenever any task instance fails in your whole Airflow environment, you need to define a function called `on_task_instance_failed` that takes three parameters: `previous_state`, `task_instance` and `session` and decorate it with `@hookimpl`.
-
-```python
-from airflow.listeners import hookimpl
-
-@hookimpl
-def on_task_instance_failed(
-    previous_state: TaskInstanceState | None, task_instance: TaskInstance, session: Session | None
-):
-    # Your code here
-```
+Airflow listeners are defined using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code.  
 
 In this tutorial you will create a listener that sends a Slack notification whenever a Dataset is updated.
 

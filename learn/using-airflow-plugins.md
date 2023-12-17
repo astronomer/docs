@@ -290,4 +290,44 @@ use_plugin_macro = BashOperator(
 )
 ```
 
+### Airflow listeners
 
+[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to a Dataset is detected. 
+
+You can create a listener using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code. 
+
+For example, the [@hookspec of the `on_task_instance_failed` function](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/taskinstance.py) is:
+
+```python
+@hookspec
+def on_task_instance_failed(
+    previous_state: TaskInstanceState | None, task_instance: TaskInstance, session: Session | None
+):
+    """Execute when task state changes to FAIL. previous_state can be None."""
+```
+
+In order to create a listener that executes whenever any task instance fails in your whole Airflow environment, you need to define a function called `on_task_instance_failed` that takes three parameters: `previous_state`, `task_instance` and `session` and decorate it with `@hookimpl`.
+
+```python
+from airflow.listeners import hookimpl
+
+@hookimpl
+def on_task_instance_failed(
+    previous_state: TaskInstanceState | None, task_instance: TaskInstance, session: Session | None
+):
+    # Your code here
+```
+
+The listener file can then be registered as a plugin by adding it to the `listeners` component of the plugin class. 
+
+```python
+from airflow.plugins_manager import AirflowPlugin
+from plugins import listener_code
+
+
+class MyListenerPlugin(AirflowPlugin):
+    name = "my_listener_plugin"
+    listeners = [listener_code]
+```
+
+To see a full example of how to create and register a listener, check out the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial.
