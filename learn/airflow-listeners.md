@@ -69,36 +69,36 @@ In this tutorial you will create a listener that sends a Slack notification when
 1. Create a new file called `listeners_code.py` in your `plugins` folder.
 2. Copy the following code into the file:
 
-    ```python
-    from airflow import Dataset
-    from airflow.listeners import hookimpl
-    from airflow.models.taskinstance import TaskInstance
-    from airflow.utils.state import TaskInstanceState
-    from airflow.providers.slack.hooks.slack_webhook import SlackWebhookHook
-    from sqlalchemy.orm.session import Session
-    from datetime import datetime
+```python
+from airflow import Dataset
+from airflow.listeners import hookimpl
+from airflow.models.taskinstance import TaskInstance
+from airflow.utils.state import TaskInstanceState
+from airflow.providers.slack.hooks.slack_webhook import SlackWebhookHook
+from sqlalchemy.orm.session import Session
+from datetime import datetime
 
-    SLACK_CONN_ID = "slack_webhook_conn"
+SLACK_CONN_ID = "slack_webhook_conn"
 
 
-    @hookimpl
-    def on_dataset_changed(dataset: Dataset):
-        """Execute if a dataset is updated."""
-        print("I am always listening for any Dataset changes and I heard that!")
-        print("Posting to Slack...")
-        hook = SlackWebhookHook(slack_webhook_conn_id=SLACK_CONN_ID)
-        hook.send(text=f"A dataset was changed!")
-        print("Done!")
-        if dataset.uri == "file://include/bears":
-            print("Oh! This is the bears dataset!")
-            print("Bears are great :)")
-            start_date = datetime.now().date()
-            end_date = datetime(2024, 10, 4).date()
-            days_until = (end_date - start_date).days
-            print(f"Only approximately {days_until} days until fat bear week!")
-    ```
+@hookimpl
+def on_dataset_changed(dataset: Dataset):
+    """Execute if a dataset is updated."""
+    print("I am always listening for any Dataset changes and I heard that!")
+    print("Posting to Slack...")
+    hook = SlackWebhookHook(slack_webhook_conn_id=SLACK_CONN_ID)
+    hook.send(text=f"A dataset was changed!")
+    print("Done!")
+    if dataset.uri == "file://include/bears":
+        print("Oh! This is the bears dataset!")
+        print("Bears are great :)")
+        start_date = datetime.now().date()
+        end_date = datetime(2024, 10, 4).date()
+        days_until = (end_date - start_date).days
+        print(f"Only approximately {days_until} days until fat bear week!")
+```
 
-    This listener is defined using the [`on_dataset_changed` hookspec](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/dataset.py). It posts a message to Slack whenever a Dataset is updated and executes additional code printing messages to the logs if the dataset that is being updated has the URI `file://include/bears`.
+This listener is defined using the [`on_dataset_changed` hookspec](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/dataset.py). It posts a message to Slack whenever a Dataset is updated and executes additional code printing messages to the logs if the dataset that is being updated has the URI `file://include/bears`.
 
 
 ## Step 3: Create the listener plugin
@@ -108,15 +108,15 @@ For Airflow to recognize your listener, you need to create a plugin that registe
 1. Create a new file called `listener_plugin.py` in your `plugins` folder.
 2. Copy the following code into the file:
 
-    ```python
-    from airflow.plugins_manager import AirflowPlugin
-    from plugins import listener_code
+```python
+from airflow.plugins_manager import AirflowPlugin
+from plugins import listener_code
 
 
-    class MyListenerPlugin(AirflowPlugin):
-        name = "my_listener_plugin"
-        listeners = [listener_code]
-    ```
+class MyListenerPlugin(AirflowPlugin):
+    name = "my_listener_plugin"
+    listeners = [listener_code]
+```
 
 :::info
 
