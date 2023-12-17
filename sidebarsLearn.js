@@ -133,14 +133,15 @@ module.exports = {
         description: 'Step-by-step guides for writing DAGs and running Airflow.'
       },
       items: [
+        'airflow-listeners',
         'operator-extra-link-tutorial',
         'xcom-backend-tutorial',
         'pycharm-local-dev',
         'vscode-local-dev',
         'example-ms-teams-callback',
         'cloud-ide-tutorial',
-        'airflow-object-storage-tutorial',
         'airflow-sql-data-quality',
+        'airflow-object-storage-tutorial',
         'astro-python-sdk',
         'external-python-operator',
         'custom-airflow-ui-docs-tutorial',

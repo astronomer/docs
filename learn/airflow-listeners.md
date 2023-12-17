@@ -1,7 +1,7 @@
 ---
 title: "Use a listener to send a Slack notification when a Dataset is updated"
-sidebar_label: "Listeners"
-description: "Learn how to use Airflow Listeners."
+sidebar_label: "Create Airflow listeners"
+description: "Learn how to use Airflow listeners."
 id: airflow-listeners
 ---
 

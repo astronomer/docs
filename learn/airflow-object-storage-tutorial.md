@@ -1,6 +1,6 @@
 ---
 title: "Use Airflow Object Storage to interact with cloud storage in an ML pipeline"
-sidebar_label: "Object Storage"
+sidebar_label: "Use the Airflow Object Storage"
 description: "Learn how to use Airflow Object Storage."
 id: airflow-object-storage-tutorial
 ---
