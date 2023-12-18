@@ -47,9 +47,9 @@ Datasets allow you to define explicit dependencies between DAGs and updates to y
 - Get better visibility into how your DAGs are connected and how they depend on data. The **Datasets** tab in the Airflow UI shows a graph of all dependencies between DAGs and datasets in your Airflow environment.
 - Reduce costs, because datasets do not use a worker slot in contrast to sensors or other implementations of cross-DAG dependencies.
 
-:::note Listener Hooks
+:::note Listening for dataset changes
 
-As of Airflow 2.8, you can use [Listeners](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain Dataset events occur. These events are: 
+As of Airflow 2.8, you can use [Listeners](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two Listener hooks for the following events: 
 
 - on_dataset_created
 - on_dataset_changed
