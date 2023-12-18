@@ -22,9 +22,7 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 ## How connections are stored
 
-When you set a non-secret connection in the Environment Manager, Astronomer stores the connection information in a database that is hosted and managed by Astronomer.
-
-When you set a secret connection in the Environment Manager, the following happens:
+When you create an Airflow connection in the Environment Manager, the following happens:
 
 - Astro generates a manifest that defines a Kubernetes secret, named <?>, that contains your connection information as (environment variables?).
 - Astro applies this manifest to your Deployment's namespace.
@@ -34,9 +32,13 @@ This process occurs every time you update the connection.
 
 ### Fetching environment secrets
 
-The [Organization Owner](astro/user-permissions.md#organization-roles) can enable or disable whether Connections saved as **Secret** can be exported. This controls whether or not users can export connections to work on them locally, for security.
+You can export Airflow Connections from the Cloud UI to test your DAGs locally, which means you can use your connection details without needing to manage credentials both locally and on the cloud. However, because Connection details are saved in a secrets manager, the [Organization Owner](astro/user-permissions.md#organization-roles) can enable or disable whether connections can be exported using the **Environment Secrets Fetching** setting.
 
-By default, connections saved as secret can't be exported. However, if you want to work with Connections saved as secret. The organization owner can enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI.
+:::tip
+
+By default, connections can't be exported locally. However, if you want to work with Connections locally, the organization owner can enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI. See [Import and export Airflow connections from the Cloud UI](import-export-connections-variables.md#from-the-cloud-ui).
+
+:::
 
 ## Requirements
 
