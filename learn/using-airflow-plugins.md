@@ -70,12 +70,12 @@ Functionality is added to a plugin by adding components to the class which defin
 - `flask_blueprints` and `appbuilder_views` offer the possibility to build a Flask project on top of Airflow.
 - `operator_extra_links` and `global_operator_extra_links` are ways to add links to Airflow task instances.
 - `macros` expand upon existing Jinja templates using custom functions.
+- `listeners` are an experimental feature to define custom code to execute whenever certain events happen anywhere in your Airflow instance.
 
 Other types of plugin components not covered in this guide include:
 
 - `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG scheduling and timetables in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
 - `executors` add the possibility to use a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) in your Airflow instance.
-- `listeners` are an experimental feature to add notifications for events happening in Airflow. Learn more in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/listeners.html).
 
 :::info
 
@@ -290,4 +290,47 @@ use_plugin_macro = BashOperator(
 )
 ```
 
+### Airflow listeners
 
+[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to any dataset is detected. 
+
+Listeners execute based on the event they are waiting for and are not attached to a task or DAG. This is in contrast to [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) which are attached to a specific DAG or (set of) task(s) or [Airflow dataset](airflow-datasets.md) consumer DAGs that only execute when a specific (set of) dataset(s) is updated.
+While the listener itself will execute any time its event occurs, you can use conditional logic to determine whether or not to execute the code within the listener. For example, you can use a listener to send a Slack notification when a DAG run fails, but only if the DAG run was not manually triggered.
+
+You can create a listener using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code. 
+
+For example, the [@hookspec of the `on_task_instance_failed` function](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/taskinstance.py) is:
+
+```python
+@hookspec
+def on_task_instance_failed(
+    previous_state: TaskInstanceState | None, task_instance: TaskInstance, session: Session | None
+):
+    """Execute when task state changes to FAIL. previous_state can be None."""
+```
+
+In order to create a listener that executes whenever any task instance fails in your whole Airflow environment, you need to define a function called `on_task_instance_failed` that takes three parameters: `previous_state`, `task_instance` and `session`. Then, you decorate it with `@hookimpl`.
+
+```python
+from airflow.listeners import hookimpl
+
+@hookimpl
+def on_task_instance_failed(
+    previous_state: TaskInstanceState | None, task_instance: TaskInstance, session: Session | None
+):
+    # Your code here
+```
+
+The listener file can then be registered as a plugin by adding it to the `listeners` component of the plugin class. 
+
+```python
+from airflow.plugins_manager import AirflowPlugin
+from plugins import listener_code
+
+
+class MyListenerPlugin(AirflowPlugin):
+    name = "my_listener_plugin"
+    listeners = [listener_code]
+```
+
+To see a full example of how to create and register a listener, check out the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial. This feature is currently experimental.

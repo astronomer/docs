@@ -1,7 +1,8 @@
 import hashlib
 import json
 
-from airflow import DAG, AirflowException
+from airflow import DAG
+from airflow.exceptions import AirflowException
 from airflow.models import Variable
 from airflow.models.baseoperator import chain
 from airflow.operators.empty import EmptyOperator
