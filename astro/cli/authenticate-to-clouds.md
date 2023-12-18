@@ -412,7 +412,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id> from the secrets backend and print it to the terminal:
 
     ```python
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.hooks.base import BaseHook
     from airflow.models import Variable
     from airflow.decorators import task
@@ -468,7 +468,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id>` from the secrets backend and print it to the terminal:
 
     ```python
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.hooks.base import BaseHook
     from airflow.models import Variable
     from airflow.decorators import task
@@ -535,7 +535,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 6. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve a value from `airflow/variables` and print it to the terminal:
 
     ```python
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.hooks.base import BaseHook
     from airflow.models import Variable
     from airflow.decorators import task

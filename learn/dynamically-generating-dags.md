@@ -100,7 +100,7 @@ def create_dag(dag_id, schedule, dag_number, default_args):
 <TabItem value="traditional">
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.operators.python import PythonOperator
 
 

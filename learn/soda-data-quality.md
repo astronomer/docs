@@ -128,7 +128,7 @@ Save the YAML instructions in a file named `checks.yml` and place the file in th
 In your Astro project `dags/` folder, create a new file called `soda-pipeline.py`. Paste the following code into the file:
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from datetime import datetime
 
 from airflow.operators.bash import BashOperator

@@ -85,7 +85,7 @@ Create your DAG with the `PapermillOperator` to execute your notebook. Use your 
 ```python
 from datetime import datetime, timedelta
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.providers.papermill.operators.papermill import PapermillOperator
 
 
