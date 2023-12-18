@@ -30,9 +30,9 @@ There are multiple resources for learning about this topic. See also:
 
 :::
 
-:::note
+:::info
 
-Datasets are not to be confused with the Airflow 2.8 feature of Object Storage, which allow you to interact with files in cloud and local object storage systems using an abstraction implemented as a [Path API](https://docs.python.org/3/library/pathlib.html). For more information, see [Use Airflow Object Storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
+Datasets are a separate feature from object storage, which allows you to interact with files in cloud and local object storage systems. To learn more about using Airflow to interact with files, see [Use Airflow Object Storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
 
 :::
 

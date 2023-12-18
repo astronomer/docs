@@ -8,13 +8,13 @@ id: airflow-listeners
 import CodeBlock from '@theme/CodeBlock';
 import producer_dag from '!!raw-loader!../code-samples/dags/airflow-listeners/producer_dag.py';
 
-[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to a Dataset is detected. 
+[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example when a DAG run fails or a dataset is updated.
 
-Listeners are implemented as an [Airflow plugin](using-airflow-plugins.md) and can contain any code you like. In this tutorial you will learn how to use a listener to send a Slack notification whenever a Dataset is updated.
+Listeners are implemented as an [Airflow plugin](using-airflow-plugins.md) and can contain any code. In this tutorial, you'll use a listener to send a Slack notification whenever a dataset is updated.
 
 :::info
 
-If you are looking to implement notifications for specific DAGs and tasks, consider using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) instead.
+If you only need to implement notifications for specific DAGs and tasks, consider using [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) instead.
 
 :::
 
@@ -32,7 +32,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started) using the [Astro Runtime image](https://docs.astronomer.io/astro/runtime-release-notes) version 10.0.0 or higher (Airflow 2.8+).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started) using [Astro Runtime](https://docs.astronomer.io/astro/runtime-release-notes) 10+ (Airflow 2.8+).
 - A Slack workspace with an [Incoming Webhook](https://api.slack.com/messaging/webhooks) configured.
 
 ## Step 1: Configure your Astro project
@@ -44,13 +44,13 @@ To get the most out of this tutorial, make sure you have an understanding of:
     $ astro dev init
     ```
 
-2. Add the following line to your `requirements.txt` file to install the Slack Airflow provider.
+2. Add the following line to your Astro project `requirements.txt` file to install the Slack Airflow provider.
 
     ```text
     apache-airflow-providers-slack==8.4.0
     ```
 
-3. To create an [Airflow connection](connections.md) to Slack, add the following environment variable to your `.env` file. Make sure to replace `<your-slack-webhook-token>` with your own Slack webhook token in the format of `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
+3. Add the following environment variable to your Astro project `.env` file to create an [Airflow connection](connections.md) to Slack. Make sure to replace `<your-slack-webhook-token>` with your own Slack webhook token in the format of `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`.
 
     ```text
     AIRFLOW_CONN_SLACK_WEBHOOK_CONN='{
@@ -62,9 +62,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create your listener
 
-Airflow listeners are defined using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code.  
-
-In this tutorial you will create a listener that sends a Slack notification whenever a Dataset is updated.
+To define an Airflow listener, you add the code you want to execute to a relevant `@hookimpl`-decorated  [listener function](https://github.com/apache/airflow/tree/main/airflow/listeners/spec). In this example, to run your code  whenever a dataset is updated, you define it in the `on_dataset_changed` function.
 
 1. Create a new file called `listeners_code.py` in your `plugins` folder.
 2. Copy the following code into the file:
@@ -103,7 +101,7 @@ This listener is defined using the [`on_dataset_changed` hookspec](https://githu
 
 ## Step 3: Create the listener plugin
 
-For Airflow to recognize your listener, you need to create a plugin that registers it.
+For Airflow to recognize your listener, you need to create a [plugin](using-airflow-plugins.md) that registers it.
 
 1. Create a new file called `listener_plugin.py` in your `plugins` folder.
 2. Copy the following code into the file:
@@ -118,11 +116,7 @@ class MyListenerPlugin(AirflowPlugin):
     listeners = [listener_code]
 ```
 
-:::info
-
-Remember to restart your Airflow instance after making any changes to your plugins. For more information on Airflow plugins, see [Airflow plugins](using-airflow-plugins.md).
-
-:::
+3. If your local Airflow environment is already running, restart it to apply the changes to your plugins.
 
 ## Step 4: Create your DAG
 
@@ -150,14 +144,14 @@ Remember to restart your Airflow instance after making any changes to your plugi
     [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - Done!
     [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - Oh! This is the bears dataset!
     [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - Bears are great :)
-    [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - Only approximately 292 days until fat bear wee
+    [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - Only approximately 292 days until fat bear week
     ```
 
-4. In your Slack workspace, you can see a new message from your webhook.
+4. Open your Slack workspace to see a new message from your webhook.
 
     ![Screenshot of a Slack message sent by the webhook, saying "A dataset was changed!".](/img/tutorials/airflow-listeners_slack_message.png)
 
-5. (Optional). View your complimentary bear picture at `include/bears/bear.png`.
+5. (Optional) View your complimentary bear picture at `include/bears/bear.png`.
 
 ## Conclusion
 

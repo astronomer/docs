@@ -69,7 +69,7 @@ A notifier can be provided to any callback parameter (`*callback`). Only use cus
 
 :::tip
 
-If you are looking to execute custom code based on events happening anywhere in your Airflow environment, for example whenever a Dataset is updated or any task instance fails, you can use [Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners), see the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial for an example.
+To execute custom code based on events happening anywhere in your Airflow environment, for example whenever a Dataset is updated or any task instance fails, you can use [Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners). See the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial for an example.
 
 :::
 

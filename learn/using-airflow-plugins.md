@@ -306,7 +306,7 @@ def on_task_instance_failed(
     """Execute when task state changes to FAIL. previous_state can be None."""
 ```
 
-In order to create a listener that executes whenever any task instance fails in your whole Airflow environment, you need to define a function called `on_task_instance_failed` that takes three parameters: `previous_state`, `task_instance` and `session` and decorate it with `@hookimpl`.
+In order to create a listener that executes whenever any task instance fails in your whole Airflow environment, you need to define a function called `on_task_instance_failed` that takes three parameters: `previous_state`, `task_instance` and `session`. Then, you decorate it with `@hookimpl`.
 
 ```python
 from airflow.listeners import hookimpl

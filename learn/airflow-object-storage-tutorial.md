@@ -1,33 +1,33 @@
 ---
-title: "Use Airflow Object Storage to interact with cloud storage in an ML pipeline"
-sidebar_label: "Use the Airflow Object Storage"
-description: "Learn how to use Airflow Object Storage."
+title: "Use Airflow object storage to interact with cloud storage in an ML pipeline"
+sidebar_label: "Object storage"
+description: "Learn how to use Airflow object storage."
 id: airflow-object-storage-tutorial
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 import object_storage_use_case from '!!raw-loader!../code-samples/dags/airflow-object-storage-tutorial/object_storage_use_case.py';
 
-Airflow 2.8 introduced the [Airflow Object Storage](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#object-storage) feature to simplify interaction with different remote and local object storage systems from within your DAGs. 
+Airflow 2.8 introduced the [Airflow Object Storage](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#object-storage) feature to simplify how you interact with remote and local object storage systems.
 
-This tutorial walks you through how to use the Object Storage to interact with files in cloud and local storage in a simple machine learning pipeline training a classifier to predict whether a sentence is more likely to have been said by Captain Kirk or Captain Picard.
+This tutorial demonstrates the object storage feature using a simple machine learning pipeline. The pipeline trains a classifier to predict whether a sentence is more likely to have been said by Star Trek's Captain Kirk or Captain Picard.
 
 :::caution
 
-The Airflow Object Storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565).
+Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565).
 
 :::
 
 ## Why use Airflow Object Storage?
 
-Object stores are ubiquitous in modern data pipelines. They are used to store raw data, model-artifacts, image, video, text and audio files, and more. 
+Object stores are ubiquitous in modern data pipelines. They are used to store raw data, model-artifacts, image, video, text and audio files, and more. Because each object storage system has different file naming and path conventions, it can be challenging to work with data across many different objet stores.
 
-The Airflow Object Storage feature allows you to: 
+Airflow's object storage features allow you to: 
 
-- Interact with object stores in a simple and consistent way from within your DAGs with an abstraction implemented as a [Path API](https://docs.python.org/3/library/pathlib.html). Note that some limitations apply due to the nature of different remote object storage systems, see [Cloud Object Stores are not real file systems](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#cloud-object-stores-are-not-real-file-systems).
-- Easily switch between different object storage systems without having to change your DAG code.
-- Transfer files between different object storage systems without having to reply on XToYTransferOperator operators.
-- Transfer large files efficiently, as the Airflow Object Storage feature uses [shutil.copyfileobj()](https://docs.python.org/3/library/shutil.html#shutil.copyfileobj) to stream files in chunks instead of loading them into memory in their entirety.
+- Abstract your interactions with object stores using a [Path API](https://docs.python.org/3/library/pathlib.html). Note that some limitations apply due to the nature of different remote object storage systems. See [Cloud Object Stores are not real file systems](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#cloud-object-stores-are-not-real-file-systems).
+- Switch between different object storage systems without having to change your DAG code.
+- Transfer files between different object storage systems without needing to use XToYTransferOperator operators.
+- Transfer large files efficiently. For object storage, Airflow uses [shutil.copyfileobj()](https://docs.python.org/3/library/shutil.html#shutil.copyfileobj) to stream files in chunks instead of loading them into memory in their entirety.
 
 ## Time to complete
 
@@ -39,7 +39,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Task Flow API. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
-- The Basics of [pathlib](https://docs.python.org/3/library/pathlib.html).
+- The basics of [pathlib](https://docs.python.org/3/library/pathlib.html).
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     $ astro dev init
     ```
 
-2. Add the following lines to your `requirements.txt` file to install the Amazon provider with the `s3fs` extension, as well as the [scikit-learn](https://scikit-learn.org/stable/) package. If you are using Google Cloud Storage or Azure Blob Storage, install the [Google provider](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) or [Azure provider](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) instead.
+2. Add the following lines to your Astro project `requirements.txt` file to install the Amazon provider with the `s3fs` extension, as well as the [scikit-learn](https://scikit-learn.org/stable/) package. If you are using Google Cloud Storage or Azure Blob Storage, install the [Google provider](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) or [Azure provider](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) instead.
 
     ```text
     apache-airflow-providers-amazon[s3fs]==8.13.0
@@ -88,7 +88,7 @@ In this example pipeline you will train a classifier to predict whether a senten
 
     <CodeBlock language="python">{object_storage_use_case}</CodeBlock>
 
-    This DAG uses three different Object Storage locations, which can be aimed at different object storage systems simply by changing the `OBJECT_STORAGE_X`, `PATH_X` and `CONN_ID_X` for each location.
+    This DAG uses three different object storage locations, which can be aimed at different object storage systems by changing the `OBJECT_STORAGE_X`, `PATH_X` and `CONN_ID_X` for each location.
 
     - `base_path_ingest`: The base path for the ingestion data. This is the path to the training quotes you uploaded in [Step 2](#step-2-prepare-your-data). 
     - `base_path_train`: The base path for the training data, this is the location from which data for training the model will be read.
@@ -97,7 +97,7 @@ In this example pipeline you will train a classifier to predict whether a senten
     The DAG consists of eight tasks to make a simple MLOps pipeline.
 
     - The `list_files_ingest` task takes the `base_path_ingest` as an input and iterates through the subfolders `kirk_quotes` and `picard_quotes` to return all files in the folders as individual `ObjectStoragePath` objects.
-    - The `copy_files_ingest_to_train` task is [dynamically mapped](dynamic-tasks.md) over the list of files returned by the `list_files_ingest` task. It takes the `base_path_train` as an input and copies the files from the `base_path_ingest` to the `base_path_train` location, providing an example of using Object Storage to transfer files between different object storage systems.
+    - The `copy_files_ingest_to_train` task is [dynamically mapped](dynamic-tasks.md) over the list of files returned by the `list_files_ingest` task. It takes the `base_path_train` as an input and copies the files from the `base_path_ingest` to the `base_path_train` location, providing an example of transferring files between different object storage systems.
     - The `list_files_train` task lists all files in the `base_path_train` location.
     - The `get_text_from_file` task is dynamically mapped over the list of files returned by the `list_files_train` task to read the text from each file using the `.read_blocks()` method of the `ObjectStoragePath` object. The file name provides the label for the text and both, label and full quote are returned as a dictionary to be passed via [XCom](airflow-passing-data-between-tasks.md) to the next task. 
     - The `train_model` task trains a [Naive Bayes classifier](https://scikit-learn.org/stable/modules/naive_bayes.html) on the data returned by the `get_text_from_file` task. The fitted model is serialized as a base64 encoded string and passed via XCom to the next task.
@@ -113,13 +113,13 @@ In this example pipeline you will train a classifier to predict whether a senten
 
 2. In the Airflow UI, run the `object_storage_use_case` DAG by clicking the play button. Provide any quote you like to the `my_quote` [Airflow param](airflow-params.md).
 
-3. After the DAG run completed, go to the task logs of the `use_model` task to see the prediction made by the model.
+3. After the DAG run completes, go to the task logs of the `use_model` task to see the prediction made by the model.
 
-```text
-[2023-12-11, 00:19:22 UTC] {logging_mixin.py:188} INFO - The quote: 'Time and space are creations of the human mind.'
-[2023-12-11, 00:19:22 UTC] {logging_mixin.py:188} INFO - sounds like it could have been said by Picard
-```
+    ```text
+    [2023-12-11, 00:19:22 UTC] {logging_mixin.py:188} INFO - The quote: 'Time and space are creations of the human mind.'
+    [2023-12-11, 00:19:22 UTC] {logging_mixin.py:188} INFO - sounds like it could have been said by Picard
+    ```
 
 ## Conclusion
 
-Congratulations! You got your first experience using the Airflow Object Storage to interact with files in different locations. To learn more about other methods and capabilities of this feature see the [OSS Airflow documentation](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#basic-use).
+Congratulations! You just used Airflow's object storage features to interact with files in different locations. To learn more about other methods and capabilities of this feature, see the [OSS Airflow documentation](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#basic-use).

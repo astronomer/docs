@@ -140,7 +140,7 @@ with DAG(..., template_searchpath="/tmp") as dag:
 </TabItem>
 </Tabs>
 
-### Disabling templating
+### Disable templating
 
 As of Airflow 2.8 it is possible to use a wrapper class to disable templating for the input to a templatable field without needing to modify the operator itself. This is useful when you want to pass a string that contains Jinja syntax to an operator without it being rendered. For example, you may want to pass a Jinja template to a `BashOperator` that will not be rendered. This can be achieved by wrapping the string into the `literal` function:
 
