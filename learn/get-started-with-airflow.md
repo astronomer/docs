@@ -163,7 +163,7 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
 2. Open `my-dag.py` in your IDE. Add the required imports for Python packages:
 
     ```python
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.operators.python import PythonOperator
     from airflow.operators.bash import BashOperator
 

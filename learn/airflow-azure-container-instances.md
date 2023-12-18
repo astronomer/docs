@@ -82,7 +82,7 @@ Choose a Docker image that you want to run. The `AzureContainerInstancesOperator
 In your Astro project `dags/` folder, create a new file called `aci-pipeline.py`. Paste the following code into the file:
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.providers.microsoft.azure.operators.container_instances import AzureContainerInstancesOperator
 from datetime import datetime, timedelta
 

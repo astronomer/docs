@@ -69,7 +69,7 @@ To run Airflow locally, you first need to create an Astro project.
 <TabItem value="TaskFlowAPI">
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.decorators import task, dag
 from pendulum import datetime
 import requests
@@ -96,7 +96,7 @@ docs_example_dag()
 <TabItem value="traditional">
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.operators.python import PythonOperator
 from pendulum import datetime
 import requests

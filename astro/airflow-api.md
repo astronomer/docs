@@ -250,7 +250,7 @@ This topic has guidelines on how to trigger a DAG run, but you can modify the ex
 
     ```python
     from datetime import datetime
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.providers.http.operators.http import SimpleHttpOperator
 
     with DAG(dag_id="triggering_dag", schedule=None, start_date=datetime(2023, 1, 1)):
