@@ -18,6 +18,12 @@ If you only need to implement notifications for specific DAGs and tasks, conside
 
 :::
 
+:::caution
+
+Listeners are currently considered experimental and might be subject to breaking changes in future releases.
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 15 minutes to complete.
@@ -62,7 +68,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create your listener
 
-To define an Airflow listener, you add the code you want to execute to a relevant `@hookimpl`-decorated  [listener function](https://github.com/apache/airflow/tree/main/airflow/listeners/spec). In this example, you define your function in the `on_dataset_changed` function to run whenever any dataset is updated,.
+To define an Airflow listener, you add the code you want to execute to a relevant `@hookimpl`-decorated [listener function](https://github.com/apache/airflow/tree/main/airflow/listeners/spec). In this example, you define your code in the `on_dataset_changed` function to run whenever any dataset is updated.
 
 1. Create a new file called `listeners_code.py` in your `plugins` folder.
 2. Copy the following code into the file:
@@ -154,4 +160,4 @@ For Airflow to recognize your listener, you need to create a [plugin](using-airf
 
 ## Conclusion
 
-Congratulations! You now know how to create an Airflow listener to run custom code whenever a specific event occurs in your whole Airflow environment.
+Congratulations! You now know how to create an Airflow listener to run custom code whenever any dataset is updated in your whole Airflow environment. Following the same pattern you can implement listeners for [other events](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners), such as when any task has failed, any DAG starts running or a lifecycle event occurs.

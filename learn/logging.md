@@ -100,7 +100,7 @@ The Astro CLI includes a command to show webserver, scheduler, triggerer and Cel
 
 :::info
 
-As of Airflow 2.8, logs from other Airflow components, such as the scheduler or executor will be forwarded to the task logs if an error in the component causes the task to fail. For example if a task runs out of memory, causing a [zombie process](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks), information about the zombie is printed to the task logs. You can disable this behavior by setting [`AIRFLOW__LOGGING__ENABLE_TASK_CONTEXT_LOGGER=False`](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/configurations-ref.html#enable-task-context-logger).
+As of Airflow 2.8, logs from other Airflow components, such as the scheduler or executor will be forwarded to the task logs if an error in the component causes the task to fail. For example if a task runs out of memory, causing a [zombie process](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks), information about the zombie is printed to the task logs. You can disable this behavior by setting [`AIRFLOW__LOGGING__ENABLE_TASK_CONTEXT_LOGGER=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-task-context-logger).
 
 :::
 

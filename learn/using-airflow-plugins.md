@@ -70,12 +70,12 @@ Functionality is added to a plugin by adding components to the class which defin
 - `flask_blueprints` and `appbuilder_views` offer the possibility to build a Flask project on top of Airflow.
 - `operator_extra_links` and `global_operator_extra_links` are ways to add links to Airflow task instances.
 - `macros` expand upon existing Jinja templates using custom functions.
+- `listeners` are an experimental feature to add notifications for events happening in Airflow.
 
 Other types of plugin components not covered in this guide include:
 
 - `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG scheduling and timetables in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
 - `executors` add the possibility to use a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) in your Airflow instance.
-- `listeners` are an experimental feature to add notifications for events happening in Airflow. Learn more in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/listeners.html).
 
 :::info
 
@@ -333,4 +333,4 @@ class MyListenerPlugin(AirflowPlugin):
     listeners = [listener_code]
 ```
 
-To see a full example of how to create and register a listener, check out the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial.
+To see a full example of how to create and register a listener, check out the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial. This feature is currently experimental.
