@@ -21,6 +21,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## December 12, 2023
+
+### Bug fixes
+
+- Fixed an issue where the Cloud UI would produce an error if you updated an environment variable on an Astro Hybrid Deployment running the Kubernetes Executor.
+
 ## December 6, 2023
 
 ### Additional improvements
