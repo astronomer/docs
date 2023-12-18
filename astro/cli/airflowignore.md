@@ -6,7 +6,7 @@ id: airflowignore
 
 You can create an `.airflowignore` file in the `dags` directory of your Astro project to identify the files to ignore when you deploy to Astro or develop locally. This can be helpful if your team has a single Git repository that contains DAGs for multiple projects.
 
-The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. Files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler and the DAGs listed in the file don't appear in the Airflow UI.
+The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. The Airflow scheduler does not parse the files or directories listed in `.airflowignore` and the Airflow UI does not show DAGs listed in the file.
 
 For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#airflowignore). To learn more about the code deploy process, see [What happens during a code deploy](/astro/deploy-code.md#what-happens-during-a-code-deploy).
 

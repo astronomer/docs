@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Private python packages'
+sidebar_label: 'Private Python packages'
 title: 'Install Python packages from private sources'
 id: private-python-packages
 ---
