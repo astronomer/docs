@@ -20,6 +20,12 @@ Datasets can help resolve common issues. For example, consider a data engineerin
 
 In this guide, you'll learn about datasets in Airflow and how to use them to implement triggering of DAGs based on dataset updates. You'll also learn how datasets work with the Astro Python SDK.
 
+:::info
+
+Datasets are a separate feature from object storage, which allows you to interact with files in cloud and local object storage systems. To learn more about using Airflow to interact with files, see [Use Airflow object storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
+
+:::
+
 :::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
@@ -27,12 +33,6 @@ There are multiple resources for learning about this topic. See also:
 - Astronomer Academy: [Airflow: Datasets](https://academy.astronomer.io/astro-runtime-datasets) module.
 - Webinar: [Data Driven Scheduling](https://www.astronomer.io/events/webinars/data-driven-scheduling/).
 - Use case: [Orchestrate machine learning pipelines with Airflow datasets](use-case-airflow-datasets-multi-team-ml.md).
-
-:::
-
-:::info
-
-Datasets are a separate feature from object storage, which allows you to interact with files in cloud and local object storage systems. To learn more about using Airflow to interact with files, see [Use Airflow Object Storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
 
 :::
 

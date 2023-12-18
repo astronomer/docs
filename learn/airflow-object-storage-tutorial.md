@@ -8,7 +8,7 @@ id: airflow-object-storage-tutorial
 import CodeBlock from '@theme/CodeBlock';
 import object_storage_use_case from '!!raw-loader!../code-samples/dags/airflow-object-storage-tutorial/object_storage_use_case.py';
 
-Airflow 2.8 introduced the [Airflow Object Storage](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#object-storage) feature to simplify how you interact with remote and local object storage systems.
+Airflow 2.8 introduced the [Airflow object storage](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#object-storage) feature to simplify how you interact with remote and local object storage systems.
 
 This tutorial demonstrates the object storage feature using a simple machine learning pipeline. The pipeline trains a classifier to predict whether a sentence is more likely to have been said by Star Trek's Captain Kirk or Captain Picard.
 
@@ -18,11 +18,11 @@ Object storage is currently considered experimental and might be subject to brea
 
 :::
 
-## Why use Airflow Object Storage?
+## Why use Airflow object storage?
 
-Object stores are ubiquitous in modern data pipelines. They are used to store raw data, model-artifacts, image, video, text and audio files, and more. Because each object storage system has different file naming and path conventions, it can be challenging to work with data across many different objet stores.
+Object stores are ubiquitous in modern data pipelines. They are used to store raw data, model-artifacts, image, video, text and audio files, and more. Because each object storage system has different file naming and path conventions, it can be challenging to work with data across many different object stores.
 
-Airflow's object storage features allow you to: 
+Airflow's object storage feature allow you to: 
 
 - Abstract your interactions with object stores using a [Path API](https://docs.python.org/3/library/pathlib.html). Note that some limitations apply due to the nature of different remote object storage systems. See [Cloud Object Stores are not real file systems](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#cloud-object-stores-are-not-real-file-systems).
 - Switch between different object storage systems without having to change your DAG code.
@@ -122,4 +122,4 @@ In this example pipeline you will train a classifier to predict whether a senten
 
 ## Conclusion
 
-Congratulations! You just used Airflow's object storage features to interact with files in different locations. To learn more about other methods and capabilities of this feature, see the [OSS Airflow documentation](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#basic-use).
+Congratulations! You just used Airflow's object storage feature to interact with files in different locations. To learn more about other methods and capabilities of this feature, see the [OSS Airflow documentation](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/core-concepts/objectstorage.html#basic-use).

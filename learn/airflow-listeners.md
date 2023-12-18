@@ -1,5 +1,5 @@
 ---
-title: "Use a listener to send a Slack notification when a Dataset is updated"
+title: "Use a listener to send a Slack notification when a dataset is updated"
 sidebar_label: "Create Airflow listeners"
 description: "Learn how to use Airflow listeners."
 id: airflow-listeners
@@ -8,9 +8,9 @@ id: airflow-listeners
 import CodeBlock from '@theme/CodeBlock';
 import producer_dag from '!!raw-loader!../code-samples/dags/airflow-listeners/producer_dag.py';
 
-[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example when a DAG run fails or a dataset is updated.
+[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example when a DAG run fails or any dataset is updated.
 
-Listeners are implemented as an [Airflow plugin](using-airflow-plugins.md) and can contain any code. In this tutorial, you'll use a listener to send a Slack notification whenever a dataset is updated.
+Listeners are implemented as an [Airflow plugin](using-airflow-plugins.md) and can contain any code. In this tutorial, you'll use a listener to send a Slack notification whenever any dataset is updated.
 
 :::info
 
@@ -62,7 +62,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create your listener
 
-To define an Airflow listener, you add the code you want to execute to a relevant `@hookimpl`-decorated  [listener function](https://github.com/apache/airflow/tree/main/airflow/listeners/spec). In this example, to run your code  whenever a dataset is updated, you define it in the `on_dataset_changed` function.
+To define an Airflow listener, you add the code you want to execute to a relevant `@hookimpl`-decorated  [listener function](https://github.com/apache/airflow/tree/main/airflow/listeners/spec). In this example, to run your code  whenever any dataset is updated, you define it in the `on_dataset_changed` function.
 
 1. Create a new file called `listeners_code.py` in your `plugins` folder.
 2. Copy the following code into the file:
@@ -96,7 +96,7 @@ def on_dataset_changed(dataset: Dataset):
         print(f"Only approximately {days_until} days until fat bear week!")
 ```
 
-This listener is defined using the [`on_dataset_changed` hookspec](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/dataset.py). It posts a message to Slack whenever a Dataset is updated and executes additional code printing messages to the logs if the dataset that is being updated has the URI `file://include/bears`.
+This listener is defined using the [`on_dataset_changed` hookspec](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/dataset.py). It posts a message to Slack whenever any dataset is updated and executes additional code printing messages to the logs if the dataset that is being updated has the URI `file://include/bears`.
 
 
 ## Step 3: Create the listener plugin
@@ -106,15 +106,14 @@ For Airflow to recognize your listener, you need to create a [plugin](using-airf
 1. Create a new file called `listener_plugin.py` in your `plugins` folder.
 2. Copy the following code into the file:
 
-```python
-from airflow.plugins_manager import AirflowPlugin
-from plugins import listener_code
+    ```python
+    from airflow.plugins_manager import AirflowPlugin
+    from plugins import listener_code
 
-
-class MyListenerPlugin(AirflowPlugin):
-    name = "my_listener_plugin"
-    listeners = [listener_code]
-```
+    class MyListenerPlugin(AirflowPlugin):
+        name = "my_listener_plugin"
+        listeners = [listener_code]
+    ```
 
 3. If your local Airflow environment is already running, restart it to apply the changes to your plugins.
 
@@ -126,8 +125,8 @@ class MyListenerPlugin(AirflowPlugin):
 
     <CodeBlock language="python">{producer_dag}</CodeBlock>
 
-    This simple DAG contains one task that queries the [placebear](https://placebear.com/) API and writes the image retrieved to a local `.png` file in the `include folder using the [Airflow Object Storage](airflow-object-storage-tutorial.md) feature.
-    The task produces an update to the `file://include/bears` Dataset, which triggers the listener you created in [Step 2](#step-2-create-your-listener).
+    This simple DAG contains one task that queries the [placebear](https://placebear.com/) API and writes the image retrieved to a local `.png` file in the `include folder using the [Airflow object storage](airflow-object-storage-tutorial.md) feature.
+    The task produces an update to the `file://include/bears` dataset, which triggers the listener you created in [Step 2](#step-2-create-your-listener).
 
 ## Step 5: Run your DAG
 
@@ -138,7 +137,7 @@ class MyListenerPlugin(AirflowPlugin):
 3. After the DAG run completed, go to the task logs of the `get_bear` task to see print statements from your listener plugin.
 
     ```text
-    [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - I am always listening for any Dataset changes and I heard that!
+    [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - I am always listening for any dataset changes and I heard that!
     [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - Posting to Slack...
     [2023-12-17, 14:46:51 UTC] {base.py:83} INFO - Using connection ID 'slack_webhook_conn' for task execution.
     [2023-12-17, 14:46:51 UTC] {logging_mixin.py:188} INFO - Done!
