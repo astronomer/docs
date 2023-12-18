@@ -55,6 +55,19 @@ If your code passes the parse, the Astro CLI deploys your project in two separat
 
 See [What happens during a project deploy](#what-happens-during-a-project-deploy) for a more detailed description of how the Astro CLI and Astro work together to deploy your code.
 
+:::info
+
+If you use Docker Desktop, ensure that the [**Use containerd for pulling and storing images**](https://docs.docker.com/desktop/containerd/#turn-on-the-containerd-image-store-feature) setting is turned off. Otherwise, you might receive errors when you run `astro deploy` such as:
+
+```text
+Push access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+# or 
+Unable to find image 'barren-ionization-0185/airflow:latest' locally
+Error response from daemon: pull access denied for barren-ionization-0185/airflow, repository does not exist or may require 'docker login'
+```
+
+:::
+
 :::tip
 
 To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy also fails. This can help you prevent your team from deploying DAGs to Astro that contain errors.
