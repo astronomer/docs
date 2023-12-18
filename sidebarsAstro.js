@@ -51,7 +51,7 @@ module.exports = {
         "kubernetespodoperator",
         {
           type: "category",
-          label: "Airflow connections and variables",
+          label: "Connections and variables",
           items: [
             "manage-connections-variables",
             "create-and-link-connections",
@@ -229,16 +229,17 @@ module.exports = {
             "create-dedicated-cluster",
             "authorize-workspaces-to-a-cluster",
             "resource-reference-hosted",
-            {
-              type: "category",
-              label: "Networking",
-              items: [
-                "connect-aws",
-                "connect-azure",
-                "connect-gcp"
-              ],
-            },
           ],
+        },
+        {
+          type: "category",
+          label: "Networking",
+          items: [
+            "networking-overview",
+            "connect-aws",
+            "connect-azure",
+            "connect-gcp"
+        ],
         },
         {
           type: "category",

@@ -31,20 +31,20 @@
 /astro/configure-deployment-resources /astro/deployment-settings 301
 /astro/view-logs#export-task-logs-to-datadog-aws-only /astro/view-logs#export-task-logs-to-datadog 301
 
-# tutorial redirects 
+# tutorial redirects
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
 /tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2 301
 /tutorials/astro-python-sdk /learn/astro-python-sdk 301
 /learn/category/tutorials /learn/category/airflow-tutorials 301
 
 
-# CLI migration redirects 
+# CLI migration redirects
 /software/cli-reference /astro/cli/reference 301
 /software/cli-release-notes /astro/cli/release-notes 301
 /software/cli-reference* /astro/cli/reference 301
 /software/install-cli /astro/cli/install-cli 301
 
-# Docs with redundant Learn guides 
+# Docs with redundant Learn guides
 /astro/deferrable-operators /learn/deferrable-operators 301
 /astro/astro-python-sdk /learn/astro-python-sdk-etl 301
 /astro/data-lineage-concepts /learn/airflow-openlineage 301
@@ -303,6 +303,10 @@
 /astro/cli/develop-project#run-commands-on-build /astro/cli/customize-dockerfile 301
 /astro/cli/develop-project#use-airflowignore /astro/cli/airflowignore 301
 /astro/cli/develop-project#apply-changes-to-a-running-project /astro/cli/run-airlfow-locally#apply-changes-to-a-running-project 301
+/astro/view-logs#export-task-logs-to-datadog /astro/export-datadog
+/astro/deployment-metrics#export-airflow-metrics-to-datadog /astro/export-task-logs-to-datadog
+/astro/view-logs#export-task-logs-to-aws-cloudwatch /astro/export-cloudwatch
+/astro/manage-connections-variables#cloud-ui-connections /astro/manage-connections-variables#astro-cloud-ui-environment-manager 301
 
 
 # redirect links out in the wild (beyond our control)
