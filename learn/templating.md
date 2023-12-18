@@ -153,7 +153,7 @@ BashOperator(
 )
 ```
 
-The code above will print `echo {{ params.the_best_number }}` to the logs instead of showing the rendered value of `params.the_best_number`.
+The code above will print `{{ params.the_best_number }}` to the logs instead of showing the rendered value of `params.the_best_number`.
 
 ## Validate templates
 

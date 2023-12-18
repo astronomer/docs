@@ -77,7 +77,7 @@ There are several tabs available within the **Grid** view:
 - **Gantt**: Shows the duration of each task instance in a DAG run as a Gantt chart.
 - **Code**: Shows the DAG code.
 - **Logs**: (only available when a task instance is selected) Shows the logs of a task instance.
-- **XCom**: (only available when a task instance is selected) Shows the XCom pushed by a task instance.
+- **XCom**: (only available when a task instance is selected) Shows the XComs pushed by a task instance.
 
 :::tip
 
