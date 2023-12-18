@@ -53,6 +53,16 @@ Datasets allow you to define explicit dependencies between DAGs and updates to y
 - Get better visibility into how your DAGs are connected and how they depend on data. The **Datasets** tab in the Airflow UI shows a graph of all dependencies between DAGs and datasets in your Airflow environment.
 - Reduce costs, because datasets do not use a worker slot in contrast to sensors or other implementations of cross-DAG dependencies.
 
+:::note Listening for dataset changes
+
+As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two listener hooks for the following events: 
+
+- on_dataset_created
+- on_dataset_changed
+
+For examples, refer to our [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners).
+:::
+
 ## Dataset concepts
 
 You can define datasets in your Airflow environment and use them to create dependencies between DAGs. To define a dataset, instantiate the `Dataset` class and provide a string to identify the location of the dataset. This string must be in the form of a valid Uniform Resource Identifier (URI). 
