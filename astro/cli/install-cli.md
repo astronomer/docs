@@ -43,20 +43,6 @@ Install the Astro CLI on a Mac operating system with a single command.
 
 By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
 
-:::info
-
-When using Docker Desktop make sure that the setting "Use containerd for pulling and storing images" is turned off. Otherwise, you might run into issues when executing the `astro deploy` command, such as:
-```
-push access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
-```
-or:
-```
-Unable to find image 'barren-ionization-0185/airflow:latest' locally
-Error response from daemon: pull access denied for barren-ionization-0185/airflow, repository does not exist or may require 'docker login'
-```
-
-:::
-
 #### Installation
 
 To install the latest version of the Astro CLI, run the following command:
