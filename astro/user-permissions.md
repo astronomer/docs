@@ -68,7 +68,7 @@ The following table lists the specific permissions that each Workspace role has:
 | Push code to Deployments or Astro Cloud IDE projects                                            |                      | ✔️                   | ✔️                     | ✔️                  |
 | Create, update, and delete Astro Cloud IDE projects                                             |                      | ✔️                   | ✔️                     | ✔️                  |
 | Create, update, and delete Astro alerts                                                         |                      | ✔️                   | ✔️                     | ✔️                  |
-| View Airflow connections, variables, plugins, providers, pools, and XComs                       |                      | ✔️                   | ✔️                     | ✔️                  |
+| View Airflow connections, variables, plugins, providers, pools, and XComs that were created in the Airflow UI                       |                      | ✔️                   | ✔️                     | ✔️                  |
 | Create, update, and delete Airflow connections, variables, plugins, providers, pools, and XComs |                      |                      | ✔️                     | ✔️                  |
 | Create, update, delete, and assign connections to Deployments in the Astro Environment Manager  |                      |                      | ✔️                     | ✔️                  |
 | Update Deployment configurations                                                                |                      |                      | ✔️                     | ✔️                  |

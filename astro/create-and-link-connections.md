@@ -15,16 +15,16 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 - Share the connection with multiple Deployments within the Workspace.
 - Override fields in the connection for individual Deployments.
-- Share connections with local Airflow environments using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
+- Use configured connections in local Airflow environments. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
 - Use connections in branch-based deploys and PR previews.
 
-Additionally, while creating connections requires Workspace Owner or Workspace Operator permissions, Workspace Authors can view and import/export Connections to a local development environment. When the Organization Owner enables **Environment Secrets fetching** in the **Organization Settings**, this includes the ability to view, import, and export Connections with secret values. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui) for more details about using connections locally or [user permissions](user-permissions.md) to understand different Workspace user access levels.
+Workspace Owners and Operators can create and assign connections, while Workspace Authors can view configured connections and use them in Deployments. If your Organization has **Environment Secrets Fetching** enabled, you can additionally use configured connections, including ones that contain secrets, in local development environments. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
 ## Prerequisites
 
-- `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` [user permissions](user-permissions.md)
+- Workspace Operator or Workspace Owner [user permissions](user-permissions.md)
 - A Deployment on Astro. See [Create a Deployment](create-deployment.md)
 - Astro Runtime 9.3.0 or greater
 
