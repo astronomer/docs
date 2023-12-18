@@ -292,7 +292,10 @@ use_plugin_macro = BashOperator(
 
 ### Airflow listeners
 
-[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to a Dataset is detected. 
+[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example whenever any DAG run fails or an update to a dataset is detected. 
+
+Listeners execute based on the event they are waiting for and are not attached to a task or DAG. This is in contrast to [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) which are attached to a specific DAG or (set of) task(s) or [Airflow dataset](airflow-datasets.md) consumer DAGs that only execute when a specific (set of) dataset(s) is updated.
+While the listener itself will execute any time its event occurs, you can use conditional logic to determine whether or not to execute the code within the listener. For example, you can use a listener to send a Slack notification when a DAG run fails, but only if the DAG run was not manually triggered.
 
 You can create a listener using the `@hookimpl` decorator on functions defined with the same name and parameters as listed in the [listeners spec](https://github.com/apache/airflow/tree/main/airflow/listeners/spec) source code. 
 
