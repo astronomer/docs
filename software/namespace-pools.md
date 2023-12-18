@@ -290,7 +290,7 @@ astronomer:
         value: true
 ```
 
-## Troubleshooting
+## Troubleshooting namespace pools
 
 ### My Deployment is in an unknown state
 
@@ -312,3 +312,7 @@ This error shows that the service accounts couldn't be created in the pre-create
 ### My namespace is not returning to the pool
 
 If you're not using hard deletion, it can take several days for pre-created namespaces to become available after the associated Deployment is deleted. To enable hard deletes, see [Delete a Deployment](configure-deployment.md#delete-a-deployment).
+
+### My Deployments using NFS deploys stopped working
+
+[NFS deploys](deploy-nfs.md) don't work if you both use namespace pools and set `global.clusterRoles` to `false` in your `config.yaml` file.

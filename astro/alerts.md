@@ -113,7 +113,7 @@ The **DAG Trigger** communication channel works differently from other communica
   import datetime
   from typing import Any
 
-  from airflow import DAG
+  from airflow.models.dag import DAG
   from airflow.operators.python import PythonOperator
   
   with DAG(
@@ -206,15 +206,19 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 6. Add DAGs or tasks that your alert applies to.
 
-    - **DAG failure**: Click **DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
+    - **DAG failure**: Click **+ DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
 
     - **DAG success**: Click **DAG** and choose the Deployment and the DAG that you want to send an alert about when it completes.
 
     - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
 
-     You can add more DAGs or tasks after you create your alert.
+    - **Absolute Time**: This alert triggers when a given DAG does not have a successful DAG run within a defined time window. Click **+ DAG** and choose the Deployment and the DAG that you want the alert to assess. Then, select the **Days of Week** the alert should observe, the **Verification Time** when it should look for a DAG success, and the **Lookback Period** for how long it should look back for a verification time.
 
-7. Click **Create alert**.
+    For example, if an alert has a **Verification Time** of 3:00 PM and a **Lookback Period** of 60 minutes, it will trigger whenever the given DAG does not produce a successful DAG run from 2:00 to 3:00 PM. Astro applies the times you specify based on the time zone of your current web browser session, then translates them to UTC in your Airflow environment.
+
+7. (Optional) Repeat Step 6 for additional DAGs or tasks that you want to alert on.
+
+8. Click **Create alert**.
 
 ## Step 3: (Optional) Test your DAG failure alert
 

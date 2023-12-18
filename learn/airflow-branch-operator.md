@@ -156,7 +156,7 @@ branch_python_operator_decorator_example()
 ```python
 """Example DAG demonstrating the usage of the BranchPythonOperator."""
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.utils.edgemodifier import Label
@@ -280,7 +280,7 @@ short_circuit_operator_decorator_example()
 ```python
 """Example DAG demonstrating the usage of the ShortCircuitOperator."""
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.models.baseoperator import chain
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import ShortCircuitOperator

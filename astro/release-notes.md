@@ -15,11 +15,29 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 9.6 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 10.0.0 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.21.0 ([Release notes](cli/release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## December 12, 2023
+
+### Bug fixes
+
+- Fixed an issue where the Cloud UI would produce an error if you updated an environment variable on an Astro Hybrid Deployment running the Kubernetes Executor.
+
+## December 6, 2023
+
+### Additional improvements
+
+- The [Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections) is now generally available. This feature allows you to create and manage Airflow connections in the Cloud UI.
+
+### Bug fixes
+
+- Fixed an issue where DAG code that appeared in the Airflow UI did not roll back when you rolled back a Deployment, even though the running code was successfully rolled back.
+- Fixed an issue where you could not view billing information from the Cloud UI when you installed Astro through the Azure Marketplace.
+- Fixed an issue where the Cloud UI would produce a console error when a user accessed their Workspace list.
 
 ## November 30, 2023
 
@@ -44,12 +62,6 @@ Astro is now available as an Azure Native ISV Service. If your team is consideri
 See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
 ### Create Airflow connections in the Cloud UI and link them to Deployments
-
-:::caution
-
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
-
-:::
 
 You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
 
@@ -189,12 +201,6 @@ Using the Astro API, you can create robust and secure applications for managing 
 ## September 19, 2023
 
 ### Manage Deployments programmatically using Deployment API tokens
-
-:::caution
-
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
-
-:::
 
 Deployment API tokens replace Deployment API keys as the most secure and customizable way to manage Deployments programmatically. You can use Deployment API tokens to perform all of the same actions as a Deployment API key, including:
 
