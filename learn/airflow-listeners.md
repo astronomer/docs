@@ -62,7 +62,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Create your listener
 
-To define an Airflow listener, you add the code you want to execute to a relevant `@hookimpl`-decorated  [listener function](https://github.com/apache/airflow/tree/main/airflow/listeners/spec). In this example, to run your code  whenever any dataset is updated, you define it in the `on_dataset_changed` function.
+To define an Airflow listener, you add the code you want to execute to a relevant `@hookimpl`-decorated  [listener function](https://github.com/apache/airflow/tree/main/airflow/listeners/spec). In this example, you define your function in the `on_dataset_changed` function to run whenever any dataset is updated,.
 
 1. Create a new file called `listeners_code.py` in your `plugins` folder.
 2. Copy the following code into the file:
@@ -96,7 +96,7 @@ def on_dataset_changed(dataset: Dataset):
         print(f"Only approximately {days_until} days until fat bear week!")
 ```
 
-This listener is defined using the [`on_dataset_changed` hookspec](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/dataset.py). It posts a message to Slack whenever any dataset is updated and executes additional code printing messages to the logs if the dataset that is being updated has the URI `file://include/bears`.
+This listener is defined using the [`on_dataset_changed` hookspec](https://github.com/apache/airflow/blob/main/airflow/listeners/spec/dataset.py). It posts a message to Slack whenever any dataset is updated and executes an additional print statement if the dataset that is being updated has the URI `file://include/bears`.
 
 
 ## Step 3: Create the listener plugin
@@ -154,4 +154,4 @@ For Airflow to recognize your listener, you need to create a [plugin](using-airf
 
 ## Conclusion
 
-Congratulations! You now know how to create an Airflow listener to custom code whenever a specific event occurs in your whole Airflow environment.
+Congratulations! You now know how to create an Airflow listener to run custom code whenever a specific event occurs in your whole Airflow environment.

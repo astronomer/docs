@@ -154,7 +154,6 @@ def object_storage_use_case():
         for file in base.iterdir():
             file.unlink()
 
-    # call tasks
     files_ingest = list_files_ingest(base=base_path_ingest)
     files_copied = copy_files_ingest_to_train.partial(dst=base_path_train).expand(
         src=files_ingest
