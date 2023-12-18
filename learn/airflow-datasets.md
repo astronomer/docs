@@ -49,12 +49,12 @@ Datasets allow you to define explicit dependencies between DAGs and updates to y
 
 :::note Listening for dataset changes
 
-As of Airflow 2.8, you can use [Listeners](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two Listener hooks for the following events: 
+As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two listener hooks for the following events: 
 
 - on_dataset_created
 - on_dataset_changed
 
-For examples, please refer to the following document: [Listener Plugin of Airflow](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/howto/listener-plugin.html)
+For examples, refer to our [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners).
 :::
 
 ## Dataset concepts
