@@ -26,7 +26,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ## Astro Runtime 10.0.0
 
-- Release date: December 15, 2023
+- Release date: December 18, 2023
 - Airflow version: 2.8.0
 
 ### Airflow 2.8
@@ -45,6 +45,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Bug fixes
 
+- Fixed an issue where you could not set `AIRFLOW__WEBSERVER__NAVBAR_TEXT_COLOR` to customize the color of text in the Airflow UI.
 - Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_TENANT_ID` as an environment variable.
 
