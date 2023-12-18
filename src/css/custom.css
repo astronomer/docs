@@ -765,3 +765,8 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
 .redocusaurus .menu-content {
   top: 10rem !important;
 }
+
+/** Add anchor scroll to top padding/margin */
+[data-section-id] {
+  scroll-margin-top: 120px;
+}
