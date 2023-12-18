@@ -20,7 +20,7 @@ An _Astro project_ contains the set of files necessary to run Airflow, including
 astro dev init
 ```
 
-This command generates all of the project files you need to run Airflow locally, including example DAGs that you can run out of the box.
+This command generates all of the project files you need to run Airflow locally, including example DAGs that you can run out of the box. See [Create an Astro project](develop-project.md#create-an-astro-project) for more information about the default project structure.
 
 ## Step 2: Run Airflow locally
 

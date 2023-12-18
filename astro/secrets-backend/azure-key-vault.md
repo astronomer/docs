@@ -12,7 +12,7 @@ If you use a different secrets backend tool or want to learn the general approac
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project).
+- An [Astro project](cli/develop-project.md#create-an-astro-project).
 - An existing Azure Key Vault linked to a resource group.
 - Your Key Vault URL. To find this, go to your Key Vault overview page > **Vault URI**.
 

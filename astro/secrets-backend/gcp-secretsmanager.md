@@ -12,7 +12,7 @@ If you use a different secrets backend tool or want to learn the general approac
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project).
+- An [Astro project](cli/develop-project.md#create-an-astro-project).
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.

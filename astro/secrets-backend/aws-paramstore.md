@@ -12,7 +12,7 @@ If you use a different secrets backend tool or want to learn the general approac
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](cli/develop-project.md#add-python-and-os-level-packages).
+- An [Astro project](cli/develop-project.md#create-an-astro-project) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](cli/develop-project.md#add-python-and-os-level-packages).
 - An IAM role with access to the [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html) that your Astro cluster can assume. See [AWS IAM roles](connect-aws.md#AWS-IAM-roles).
 
 ## Step 1: Create Airflow secrets directories in Parameter Store
