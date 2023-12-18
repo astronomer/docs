@@ -8,7 +8,7 @@ id: airflow-listeners
 import CodeBlock from '@theme/CodeBlock';
 import producer_dag from '!!raw-loader!../code-samples/dags/airflow-listeners/producer_dag.py';
 
-[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example when a DAG run fails or any dataset is updated.
+[Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) allow you to execute custom code when certain events occur anywhere in your Airflow instance, for example when any DAG run fails or any dataset is updated.
 
 Listeners are implemented as an [Airflow plugin](using-airflow-plugins.md) and can contain any code. In this tutorial, you'll use a listener to send a Slack notification whenever any dataset is updated.
 
@@ -131,7 +131,7 @@ For Airflow to recognize your listener, you need to create a [plugin](using-airf
 
     <CodeBlock language="python">{producer_dag}</CodeBlock>
 
-    This simple DAG contains one task that queries the [placebear](https://placebear.com/) API and writes the image retrieved to a local `.png` file in the `include folder using the [Airflow object storage](airflow-object-storage-tutorial.md) feature.
+    This simple DAG contains one task that queries the [placebear](https://placebear.com/) API and writes the image retrieved to a local `.png` file in the `include` folder using the [Airflow object storage](airflow-object-storage-tutorial.md) feature.
     The task produces an update to the `file://include/bears` dataset, which triggers the listener you created in [Step 2](#step-2-create-your-listener).
 
 ## Step 5: Run your DAG

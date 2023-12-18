@@ -55,14 +55,14 @@ To get the most out of this tutorial, make sure you have an understanding of:
     $ astro dev init
     ```
 
-2. Add the following lines to your Astro project `requirements.txt` file to install the Amazon provider with the `s3fs` extension, as well as the [scikit-learn](https://scikit-learn.org/stable/) package. If you are using Google Cloud Storage or Azure Blob Storage, install the [Google provider](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) or [Azure provider](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) instead.
+2. Add the following lines to your Astro project `requirements.txt` file to install the Amazon provider with the `s3fs` extra, as well as the [scikit-learn](https://scikit-learn.org/stable/) package. If you are using Google Cloud Storage or Azure Blob Storage, install the [Google provider](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) or [Azure provider](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) instead.
 
     ```text
     apache-airflow-providers-amazon[s3fs]==8.13.0
     scikit-learn==1.3.2
     ```
 
-3. To create an [Airflow connection](connections.md) to AWS S3, add the following environment variable to your `.env` file. Make sure to replace `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` with your own AWS credentials.
+3. To create an [Airflow connection](connections.md) to AWS S3, add the following environment variable to your `.env` file. Make sure to replace `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` with your own AWS credentials. Adjust the connection type and parameters if you are using a different object storage system.
 
     ```text
     AIRFLOW_CONN_MY_AWS_CONN='{
@@ -92,12 +92,12 @@ In this example pipeline you will train a classifier to predict whether a senten
 
     - `base_path_ingest`: The base path for the ingestion data. This is the path to the training quotes you uploaded in [Step 2](#step-2-prepare-your-data). 
     - `base_path_train`: The base path for the training data, this is the location from which data for training the model will be read.
-    - `base_path_archive`: The base path for the archive location where data that has been previously been used for training will be moved to.
+    - `base_path_archive`: The base path for the archive location where data that has previously been used for training will be moved to.
 
     The DAG consists of eight tasks to make a simple MLOps pipeline.
 
     - The `list_files_ingest` task takes the `base_path_ingest` as an input and iterates through the subfolders `kirk_quotes` and `picard_quotes` to return all files in the folders as individual `ObjectStoragePath` objects. Using the object storage feature enables you to use the `.iterdir()`, `.is_dir()` and `.is_file()` methods to list and evaluate object storage contents no matter which object storage system they are stored in.
-    - The `copy_files_ingest_to_train` task is [dynamically mapped](dynamic-tasks.md) over the list of files returned by the `list_files_ingest` task. It takes the `base_path_train` as an input and copies the files from the `base_path_ingest` to the `base_path_train` location, providing an example of transferring files between different object storage systems using the `.copy()` method of the `ObjectStoragePath` object. Under the hood, this method uses the `shutil.copyfileobj()` method to stream files in chunks instead of loading them into memory in their entirety.
+    - The `copy_files_ingest_to_train` task is [dynamically mapped](dynamic-tasks.md) over the list of files returned by the `list_files_ingest` task. It takes the `base_path_train` as an input and copies the files from the `base_path_ingest` to the `base_path_train` location, providing an example of transferring files between different object storage systems using the `.copy()` method of the `ObjectStoragePath` object. Under the hood, this method uses `shutil.copyfileobj()` to stream files in chunks instead of loading them into memory in their entirety.
     - The `list_files_train` task lists all files in the `base_path_train` location.
     - The `get_text_from_file` task is dynamically mapped over the list of files returned by the `list_files_train` task to read the text from each file using the `.read_blocks()` method of the `ObjectStoragePath` object. Using the object storage feature enables you to switch the object storage system, for example to Azure Blob storage, without needing to change the code. The file name provides the label for the text and both, label and full quote are returned as a dictionary to be passed via [XCom](airflow-passing-data-between-tasks.md) to the next task. 
     - The `train_model` task trains a [Naive Bayes classifier](https://scikit-learn.org/stable/modules/naive_bayes.html) on the data returned by the `get_text_from_file` task. The fitted model is serialized as a base64 encoded string and passed via XCom to the next task.
