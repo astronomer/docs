@@ -65,7 +65,7 @@ When you start a local project using `astro dev start`, you specify either the W
 
     :::info
 
-    If you see the error `Error: showSecrets on organization with id is not allowed`, your [Organization Owner](user-permissions.md#organization-roles) needs to enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally.
+    If you see the error `Error: showSecrets on organization with id is not allowed`, your [Organization Owner](user-permissions.md#organization-roles) needs to enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally. See [Configure environment secrets fetching for the Astro Environment Manager](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager).
 
     :::
 
