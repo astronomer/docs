@@ -268,7 +268,8 @@ module.exports = {
           'use-case-airflow-llm-rag-finance',
           'use-case-llm-customer-feedback',
           'use-case-airflow-ml-datasets',
-          'use-case-airflow-mlflow'
+          'use-case-airflow-mlflow',
+          'sharing-code-multiple-projects'
       ],
     },
     'airflow-glossary'
