@@ -42,7 +42,7 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
     PythonOperator(task_id="get_purchases", python_callable=_get_purchases)
 ```
 
-# Shared Python code in same file
+## Shared Python code in same file
 Starting with the simplest option for reusing code: the code above performs the same business logic twice. Both functions instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If we continue copy-pasting these functions for running more queries, we would end up having X copies of the same business logic, which also requires X code changes when you want to modify the database connection logic. To reduce this maintenance burden, and have only one way of querying the database, extract the code into a single function:
 
 ```python
@@ -74,7 +74,7 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
 
 This solution is technically simple; you define one single function and reference that function in multiple Airflow tasks, in the same script. This improves the code because a change to the database connection logic requires only a single change instead of two. However, this solution is limited to a single script. You cannot reuse the function in another script (without importing). Let's look at a solution in the next section.
 
-# Shared Python code in `/include` folder
+## Shared Python code in `/include` folder
 To reuse a piece of code across multiple scripts it needs to be accessible in a shared location. The Astro Runtime Docker image provides a convenient mechanism for that, the `/include` folder:
 
 Store the function in a separate file, for example `/include/db.py`:
@@ -103,7 +103,7 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
 
 The benefit of this solution is that the `query_db` function can be imported from multiple scripts (within the same Git repository).
 
-# Shared Python code in Python package in separate project
+## Shared Python code in Python package in separate project
 
 Now let's say you're onboarding multiple teams to the Astronomer platform, and each team has their own code repository. This means you can't reuse the code in the `/include` folder, because it resides in a different Git repository.
 
@@ -152,6 +152,6 @@ The steps above describe roughly how to set up a Python package. Since the numbe
 - Set developments standards from the beginning (e.g. Flake8 linting and Black formatting).
 - Ensure the end-to-end CI/CD pipeline works first, then start developing application code.
 
-# Planning for the future
+## Planning for the future
 
 We demonstrated several solutions for sharing code, from code in a single file to code across multiple Git repositories. If you're currently only deploying from a single Git repository to the Astronomer platform but plan for multiple teams in the future, we advise to start with shared code in a separate Git repository from the start. Setting standards and best practices from the beginning is easier than introducing changes in hindsight.
