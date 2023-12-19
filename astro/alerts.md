@@ -113,7 +113,7 @@ The **DAG Trigger** communication channel works differently from other communica
   import datetime
   from typing import Any
 
-  from airflow import DAG
+  from airflow.models.dag import DAG
   from airflow.operators.python import PythonOperator
   
   with DAG(

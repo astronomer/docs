@@ -222,12 +222,12 @@ Aside from the `type` attribute, the `Param` class has several other attributes 
 
 - `title`: The title of the param that appears in the **Trigger DAG** UI.
 - `description`: A description of the param.
-- `description_html`: A description defined in HTML that can contain links and other HTML elements. Note that adding invalid HTML might lead to the UI not rendering correctly.
+- `description_md`: A description defined in Markdown that can contain links and other Markdown elements. In Airflow 2.8+, if you want to use HTML in the description, you need to set the Airflow configuration `webserver.allow_raw_html_descriptions` to `True` (`AIRFLOW__WEBSERVER__ALLOW_RAW_HTML_DESCRIPTIONS=True`). Note that HTML can introduce vulnerabilities and that adding invalid HTML might lead to the UI not rendering correctly.
 - `section`: Creates a section under which the param will appear in the **Trigger DAG** UI. All params with no specified section will appear under the default section **DAG conf Parameters**.
 - `format`: A [JSON format](https://json-schema.org/draft/2020-12/json-schema-validation.html#name-dates-times-and-duration) that Airflow will validate a user's input against.
 - `enum`: A list of valid values for a param. Setting this attribute creates a dropdown menu in the UI.
 - `const`: Defines a permanent default value and hides the param from the **Trigger DAG** UI. Note that you still need to provide a `default` value for the param.
-- `custom_html_form`: Allows you to create custom HTML on top of the provided features.
+- `custom_html_form`: Allows you to create custom HTML on top of the provided features. As of Airflow 2.8 this feature is deprecated and will be replaced by a new implementation in the future.
 
 All `Param` attributes are optional to set. For string type params, you can additionally set `min_length` and `max_length` to define the minimum and maximum length of the input. Similarly, integer and number type params can have a `minimum` and `maximum` value.
 
@@ -281,7 +281,7 @@ A boolean type param will create a toggle in the **Trigger DAG** UI.
 
 ![Bool param example](/img/guides/airflow-params_bool.png)
 
-If you provide custom HTML to the `custom_html_form` attribute, you can create more complex UI elements like a color picker. For sample code, see [this example DAG in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html).
+If you provide custom HTML to the `custom_html_form` attribute, you can create more complex UI elements like a color picker. For sample code, see [this example DAG in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/example_dags/example_params_ui_tutorial.html). Note that this feature is deprecated as of Airflow 2.8 and its implementation will change in the future.
 
 ![Color picker example](/img/guides/airflow-params_color_picker.png)
 

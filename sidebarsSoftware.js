@@ -28,7 +28,6 @@ module.exports = {
       label: 'Develop',
       items: [
       'customize-image',
-      'manage-airflow-versions',
       'upgrade-to-airflow-2',
       'access-airflow-database',
       'airflow-api',
@@ -110,7 +109,6 @@ module.exports = {
         label: 'Security and compliance',
         items: [
           'secrets-backend',
-          'integrate-auth-system',
           'custom-image-registry',
           'third-party-ingress-controllers',
           'self-signed-certificate',
@@ -121,8 +119,9 @@ module.exports = {
         type: 'category',
         label: 'User access and management',
         items: [
-        'manage-workspaces',
+        'integrate-auth-system',
         'import-idp-groups',
+        'manage-workspaces',
         'workspace-permissions',
         'manage-platform-users',
         'integrate-iam',
@@ -142,6 +141,7 @@ module.exports = {
       type: 'category',
       label: 'Astro Runtime',
       items: [
+      'manage-airflow-versions',
       'runtime-image-architecture',
       'migrate-to-runtime',
       'runtime-version-lifecycle-policy',

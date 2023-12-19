@@ -20,6 +20,12 @@ Datasets can help resolve common issues. For example, consider a data engineerin
 
 In this guide, you'll learn about datasets in Airflow and how to use them to implement triggering of DAGs based on dataset updates. You'll also learn how datasets work with the Astro Python SDK.
 
+:::info
+
+Datasets are a separate feature from object storage, which allows you to interact with files in cloud and local object storage systems. To learn more about using Airflow to interact with files, see [Use Airflow object storage to interact with cloud storage in an ML pipeline](airflow-object-storage-tutorial.md).
+
+:::
+
 :::tip Other ways to learn
 
 There are multiple resources for learning about this topic. See also:
@@ -46,6 +52,16 @@ Datasets allow you to define explicit dependencies between DAGs and updates to y
 - Reduce the amount of code necessary to implement [cross-DAG dependencies](cross-dag-dependencies.md). Even if your DAGs don't depend on data updates, you can create a dependency that triggers a DAG after a task in another DAG updates a dataset.
 - Get better visibility into how your DAGs are connected and how they depend on data. The **Datasets** tab in the Airflow UI shows a graph of all dependencies between DAGs and datasets in your Airflow environment.
 - Reduce costs, because datasets do not use a worker slot in contrast to sensors or other implementations of cross-DAG dependencies.
+
+:::note Listening for dataset changes
+
+As of Airflow 2.8, you can use [listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners) to enable Airflow to notify you when certain dataset events occur. There are two listener hooks for the following events: 
+
+- on_dataset_created
+- on_dataset_changed
+
+For examples, refer to our [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners).
+:::
 
 ## Dataset concepts
 

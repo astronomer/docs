@@ -24,6 +24,31 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+## Astro Runtime 10.0.0
+
+- Release date: December 18, 2023
+- Airflow version: 2.8.0
+
+### Airflow 2.8
+
+Astro Runtime 10.0.0 includes same-day support for Apache Airflow 2.8, which includes a number of new features and improvements. Most notably, Airflow 2.8 includes the following changes:
+
+- The new object storage features make it easier to work with popular object storage systems like S3 and GCS. You can use new  abstract object types to work with files in multiple different object storage systems without writing system-specific code.
+- You can now specify extra index URLs in the PythonVirtualEnvOperator, which makes it easier to spin up virtual environments that include private Python packages. 
+- The Airflow UI **Grid** view now supports filtering on multiple run states at once so that you can compare runs across states.
+
+For more information about the major changes in this release, see the [Airflow blog](https://airflow.apache.org/blog/airflow-2.8.0/).
+
+### Additional improvements
+
+- When you export logs to Datadog from Astro, you can now filter the logs in Datadog by log type.
+
+### Bug fixes
+
+- Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
+- Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
+- Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
 ## Astro Runtime 9.6.0
 
 - Release date: November 30, 2023

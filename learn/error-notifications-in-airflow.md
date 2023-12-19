@@ -67,6 +67,12 @@ If a [notifier class](#notifiers) exists for your use case, you should always us
 
 A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
 
+:::tip
+
+To execute custom code based on events happening anywhere in your Airflow environment, for example whenever any dataset is updated or any task instance fails, you can use [Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners). See the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial for an example.
+
+:::
+
 ## Email notifications
 
 If you have an SMTP connection configured in Airflow, you can use the `email`, `email_on_failure`, and `email_on_retry` task parameters to send notification emails from Airflow.

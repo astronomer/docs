@@ -16,9 +16,9 @@ const ApiDocMdx = ({ id }) => {
         /** Then add the response-200-ok class so they're much easier to target */
         res200OK.forEach((item) => {
             item.classList.add('response-200-ok');
-            setTimeout(() => {
-                item.querySelector('button').click()
-            }, 100)
+            // setTimeout(() => {
+            //     item.querySelector('button').click()
+            // }, 100)
         });
     }, [])
     const specProps = useSpecData(id);

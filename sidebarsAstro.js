@@ -51,7 +51,7 @@ module.exports = {
         "kubernetespodoperator",
         {
           type: "category",
-          label: "Airflow connections and variables",
+          label: "Connections and variables",
           items: [
             "manage-connections-variables",
             "create-and-link-connections",
@@ -236,8 +236,8 @@ module.exports = {
           label: "Networking",
           items: [
             "networking-overview",
-            "connect-aws", 
-            "connect-azure", 
+            "connect-aws",
+            "connect-azure",
             "connect-gcp"
         ],
         },
@@ -245,6 +245,7 @@ module.exports = {
           type: "category",
           label: "Organization",
           items: [
+            "organization-settings",
             "organization-api-tokens",
           ],
         },
@@ -396,7 +397,10 @@ module.exports = {
       label: "Advanced",
       items: [
         "cli/configure-cli",
+        "cli/customize-dockerfile",
+        "cli/private-python-packages",
         "cli/authenticate-to-clouds",
+        "cli/airflowignore",
         "cli/release-lifecycle-policy"
       ],
     },

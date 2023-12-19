@@ -46,7 +46,13 @@ To run Airflow locally, you first need to create an Astro project.
     astro dev init
     ```
 
-3. Start your Airflow instance by running:
+3. To enable raw HTML in your Markdown DAG descriptions, add the following Airflow config environment variable to your `.env` file. This will allow you to use HTML in your DAG descriptions. If you don't want to enable this setting due to security concerns you will still be able to use Markdown in your DAG descriptions and the HTML shown in this tutorial will be displayed as raw content.
+
+    ```text
+    AIRFLOW__WEBSERVER__ALLOW_RAW_HTML_DESCRIPTIONS=True
+    ```
+
+4. Start your Airflow instance by running:
 
     ```sh
     astro dev start
@@ -69,7 +75,6 @@ To run Airflow locally, you first need to create an Astro project.
 <TabItem value="TaskFlowAPI">
 
 ```python
-from airflow import DAG
 from airflow.decorators import task, dag
 from pendulum import datetime
 import requests
@@ -81,7 +86,7 @@ import requests
 )
 def docs_example_dag():
 
-    @task()
+    @task
     def tell_me_what_to_do():
         response = requests.get("https://www.boredapi.com/api/activity")
         return response.json()["activity"]
@@ -96,7 +101,7 @@ docs_example_dag()
 <TabItem value="traditional">
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.operators.python import PythonOperator
 from pendulum import datetime
 import requests

@@ -50,6 +50,12 @@ Airflow connections can be created by using one of the following methods:
 - The [`airflow.cfg` file](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html)
 - The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli)
 
+:::info
+
+Astro users can additionally take advantage of the [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Airflow environments. See [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
+
+:::
+
 This guide focuses on adding connections using the Airflow UI and environment variables. For more in-depth information on configuring connections using other methods, see the [REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection), [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) and [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 
 Each connection has a unique `conn_id` which can be provided to operators and [hooks](what-is-a-hook.md) that require a connection.

@@ -44,7 +44,7 @@ To get the most out of this guide, you should have an understanding of:
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Kubernetes basics. See the [Kubernetes Documentation](https://kubernetes.io/docs/home/).
 
-## Requirements
+## Prerequisites
 
 To use the KubernetesPodOperator you need to install the Kubernetes provider package. To install it with pip, run:
 
