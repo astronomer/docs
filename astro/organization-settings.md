@@ -20,7 +20,7 @@ This document includes instructions to configure high-level Organization setting
 
 ## Update your Organization name
 
-Your Organization name is human-readable name that appears in the Cloud UI and in the Astro CLI. Updating your Organization name is a cosmetic change that has no affect on any technical Organization data, such as your Organization ID or short name, which don't change for lifetime of the Organization. 
+Your Organization name is a human-readable name that appears in the Cloud UI and in the Astro CLI. Updating your Organization name is a cosmetic change that has no affect on any unique Organization information, such as your Organization ID or short name, which persists for the lifetime of the Organization. 
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. This opens the **General** Organization page.
 2. In the **Organization Detail** section, click **Edit Details**.
