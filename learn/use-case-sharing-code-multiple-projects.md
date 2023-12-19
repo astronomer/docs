@@ -85,7 +85,7 @@ def query_db(query):
 ```
 
 And then import the function from your DAG in `/dags/example.py`:
-```python
+```python {6}
 import datetime
 
 from airflow import DAG
@@ -106,7 +106,7 @@ Now let's say you're onboarding multiple teams to the Astronomer platform, and e
 
 To reuse code over multiple projects, we need to store it in a separate Git repository which can be reused by multiple projects. This takes a bit more work to set up, but enables multiple teams using multiple Git repositories to maintain a single source of code. Take a look at https://github.com/astronomer/custom-package-demo for an example Python package. 
 
-The number of options for developing, building, and releasing a Python package are limitless. Therefore, we can't describe every detail. Creating a custom Python package requires roughly the following steps:
+The number of options for developing, building, and releasing a Python package are limitless. Therefore, we can't describe every detail. Setting up a custom Python package requires roughly the following steps:
 
 1. First, create a separate Git repository for your shared code.
 2. Write a `pyproject.toml` file. This is a configuration file which contains the build requirements of your Python project. Take a look at https://github.com/astronomer/custom-package-demo/blob/main/pyproject.toml as an example.
@@ -114,13 +114,38 @@ The number of options for developing, building, and releasing a Python package a
 4. Create a folder for tests, e.g. `tests`.
 5. Create a CI/CD pipeline to test, build, and release your package. Take a look at https://github.com/astronomer/custom-package-demo/tree/main/.github/workflows as an example (GitHub Actions).
 6. Ensure your setup works correctly by building and releasing a first version of the package.
-7. After steps 1-6 validate that you can automatically build and release your package, start adding application code.
+7. Validate the package by installing it in a project via the `requirements.txt` file.
+8. After steps 1-7 validate that you can automatically build and release your package, start adding application code.
 
-After completing these steps, ensure development teams can install the package in their `requirements.txt` file.
+Following the code example above, this means adding the code in a module in your Python package, for example `my_company_airflow/db.py`:
+
+```python
+def query_db(query):
+    # Pseudocode:
+    client = db.client()
+    result = client.execute(query)
+    return result
+```
+
+And after installing the package, developers can import the function in their DAGs as:
+
+```python {6}
+import datetime
+
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+
+from my_company_airflow.db import query_db
+
+with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 1)):
+    PythonOperator(task_id="get_locations", python_callable=query_db, op_kwargs={"query": "SELECT store_id, city FROM stores"})
+    PythonOperator(task_id="get_purchases", python_callable=query_db, op_kwargs={"query": "SELECT customer_id, string_agg(store_id, ',') FROM customers GROUP BY customer_id"})
+```
 
 The steps above describe roughly how to set up a Python package. Since the number of options here are limitless, we can't explain every step in detail. However, these are some key pointers/considerations for setting up a custom Python package:
 
-- Do you require/have an internal repository for storing Python packages such as [Artifactory](https://jfrog.com/artifactory) or [devpi](https://www.devpi.net)?
+- How will you distribute the Python package? Do you require/have an internal repository for storing Python packages such as [Artifactory](https://jfrog.com/artifactory) or [devpi](https://www.devpi.net)?
+- Who is responsible for maintaining the shared Git repository?
 - Set developments standards from the beginning (e.g. Flake8 linting and Black formatting).
 - Ensure the end-to-end CI/CD pipeline works first, then start developing application code.
 
