@@ -41,7 +41,7 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
 ```
 
 # Shared Python code in same file
-Let's start with the simplest option for reusing code: the code above performs the same business logic twice. Both functions instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If we continue copy-pasting these functions for running more queries, we would end up having X copies of the same business logic, which also requires X code changes when you want to modify the database connection logic. To reduce this maintenance burden, and have only one way of querying the database, let's extract code into a single function:
+Starting with the simplest option for reusing code: the code above performs the same business logic twice. Both functions instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If we continue copy-pasting these functions for running more queries, we would end up having X copies of the same business logic, which also requires X code changes when you want to modify the database connection logic. To reduce this maintenance burden, and have only one way of querying the database, extract the code into a single function:
 
 ```python
 def query_db(query):
@@ -73,7 +73,7 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
 This solution is technically simple; you define one single function and reference that function in multiple Airflow tasks, in the same script. This improves the code because a change to the database connection logic requires only a single change instead of two. However, this solution is limited to a single script. You cannot reuse the function in another script (without importing). Let's look at a solution in the next section.
 
 # Shared Python code in `/include` folder
-To reuse a piece of code across scripts it needs to be accessible in a shared location. The Astro Runtime Docker image provides a convenient mechanism for that, the `/include` folder:
+To reuse a piece of code across multiple scripts it needs to be accessible in a shared location. The Astro Runtime Docker image provides a convenient mechanism for that, the `/include` folder:
 
 Store the function in a separate file, for example `/include/db.py`:
 ```python
@@ -98,7 +98,7 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
     PythonOperator(task_id="get_purchases", python_callable=query_db, op_kwargs={"query": "SELECT customer_id, string_agg(store_id, ',') FROM customers GROUP BY customer_id"})
 ```
 
-The benefit of this solution is that the `query_db` function can be imported from multiple scripts (in the same Git repository).
+The benefit of this solution is that the `query_db` function can be imported from multiple scripts (within the same Git repository).
 
 # Shared Python code in Python package in separate project
 
@@ -153,10 +153,10 @@ The steps above describe roughly how to set up a Python package. Since the numbe
 
 The solutions above can be applied in the following situations:
 
-| Solution                     | When to use                                                            |
-|------------------------------|------------------------------------------------------------------------|
-| Code in DAG script           | When reusing code only within a single script                          |
-| Code in `/include` folder    | When reusing code in multiple scripts, but within the same Git project |
-| Code in separate Git project | When reusing code in multiple Git projects                             |
+| Solution                     | When to use                                                               |
+|------------------------------|---------------------------------------------------------------------------|
+| Code in DAG script           | When reusing code only within a single script                             |
+| Code in `/include` folder    | When reusing code in multiple scripts, but within the same Git repository |
+| Code in separate Git project | When reusing code in multiple Git projects                                |
 
 If you're currently only deploying from a single Git repository to the Astronomer platform but plan for multiple teams in the future, we advise to start with shared code in a separate Git repository from the start. Setting standards from the beginning is easier than introducing changes in hindsight.
