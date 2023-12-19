@@ -245,6 +245,7 @@ module.exports = {
           type: "category",
           label: "Organization",
           items: [
+            "organization-settings",
             "organization-api-tokens",
           ],
         },
