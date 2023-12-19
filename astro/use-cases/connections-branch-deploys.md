@@ -27,7 +27,7 @@ This use case assumes you have:
 
 - At least two Astro Deployments, one for development and one for production.
 - A Git-based repository where you manage an Astro project.
-- A configured multi-branch CI/CD pipeline. See [CI/CD templates](ci-cd-templates.md)
+- A configured multi-branch CI/CD pipeline. See [CI/CD templates](ci-cd-templates/overview.md)
 
 However, you can extend this use case to encompass multiple development or production environments.
 
