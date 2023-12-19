@@ -24,11 +24,11 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 When you create an Airflow connection in the Environment Manager, the following happens:
 
-- Astro generates a manifest that defines a Kubernetes secret, named <?>, that contains your connection information as (environment variables?).
-- Astro applies this manifest to your Deployment's namespace.
-- After the manifest is applied, the key and value of your environment variable are stored in a managed secrets backend(?) in Astro.
+- Astro stores Airflow connections in an Astronomer-hosted secrets backend, and then applies connections to Deployments as a Kubernetes secret.
+- Instead of connection details being visible, like Environment Variables, these connections are mounted as files on the Deployment.
+- When you export connections to work locally, the Astro CLI configures Airflow’s provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html) so that Airflow reads the secrets to look up connections.
 
-This process occurs every time you update the connection.
+This process occurs every time you create or update a connection.
 
 ### Fetching environment secrets
 
