@@ -195,7 +195,7 @@ Adding the name of a package to the `packages.txt` or `requirements.txt` files o
     numpy==1.23.0
     ```
 
-2. [Restart your local environment](#restart-your-local-environment).
+2. [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 3. Confirm that your package was installed:
 
     ```sh
@@ -221,7 +221,7 @@ If your environment variables contain sensitive information or credentials that 
 
     Environment variables should be in all-caps and not include spaces.
 
-3. [Restart your local environment](cli/develop-project.md#restart-your-local-environment).
+3. [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 4. Run the following command to confirm that your environment variables were applied locally:
    
     ```sh
@@ -267,7 +267,7 @@ my_project
 
 ## Add Airflow plugins 
 
-If you need to build a custom view in the Airflow UI or build an application on top of the Airflow metadata database, you can use Airflow plugins. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. To apply changes from this folder to a local Airflow environment, [restart your local environment](cli/develop-project.md#restart-your-local-environment).
+If you need to build a custom view in the Airflow UI or build an application on top of the Airflow metadata database, you can use Airflow plugins. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. To apply changes from this folder to a local Airflow environment, [restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 
 To learn more about Airflow plugins and how to build them, see [Airflow Plugins](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/plugins.html) in Airflow documentation or the Astronomer [Airflow plugins](https://docs.astronomer.io/learn/using-airflow-plugins) guide.
 
@@ -276,3 +276,10 @@ To learn more about Airflow plugins and how to build them, see [Airflow Plugins]
 You can't use `airflow.cfg` or `airflow_local_settings.py` files in an Astro project. `airflow_local_settings.py` has no effect on Astro Deployments, and `airflow.cfg` has no effect on local environments and Astro Deployments. 
 
 An alternative to using `airflow.cfg` is to set Airflow environment variables in your `.env` file. See [Set environment variables locally](#set-environment-variables-locally).
+
+## See also
+
+For more advanced project configurations, see:
+
+- [Customize your Astro project Dockerfile](cli/customize-your-astro-project-dockerfile.md)
+- [Install Python packages from private sources](cli/private-python-packages.md)
