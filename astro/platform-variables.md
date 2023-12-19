@@ -52,7 +52,7 @@ If you need to set one of these variables for a particular use case, contact [As
 | `AIRFLOW__CELERY__WORKER_CONCURRENCY`        | Determines how many tasks each Celery worker can run at any given time and is the basis of worker auto-scaling logic | `<Max-Tasks-Per-Worker>`                      |
 | `AIRFLOW__WEBSERVER__NAVBAR_COLOR`           | (Only Astro Runtime version 9.4.0 and older) The color of the main navigation bar in the Airflow UI                  | `#4a4466`                                     |
 | `AIRFLOW__WEBSERVER__EXPOSE_CONFIG`          | Exposes the **Configuration** tab of the Airflow UI and hides sensitive values                                       | `NON-SENSITIVE-ONLY`                          |
-| `AWS_DEFAULT_REGION`                         | For AWS clusters only, the region where your cluster is located.                                                     | The region where you configured your cluster. |
+| `AWS_DEFAULT_REGION`                         | (AWS clusters only) The region where your cluster is located.                                                     | The region where you configured your cluster. |
 | `AWS_SECRET_ACCESS_KEY` | The key secret for accessing Astro's managed S3 bucket¹ | `<s3-aws-access-key-secret>` |
 | `INSTANCE_TYPE` | Provides the instance size of the node the DAG is scheduled on. | `(v1:metadata.labels['beta.kubernetes.io/instance-type'])` |
 | `OPENLINEAGE_URL` | The URL for your Astro lineage backend. The destination for lineage metadata sent from external systems to the OpenLineage API. | `https://astro-<your-astro-base-domain>.datakin.com` |
