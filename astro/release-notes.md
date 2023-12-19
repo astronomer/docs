@@ -21,6 +21,15 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## December 19, 2023
+
+### Bug fixes 
+
+- Fixed an issue where creating an alert for a DAG through the Astro API would apply the alert to the incorrect Deployment.
+- Fixed an issue where Deployment worker Pods could crash when running the Kubernetes executor.
+- Fixed an issue where Deployment API key expiration dates were not applied correctly if you configured multiple API keys at once. 
+- Fixed an issue where logging features could be disrupted if you set `AZURE_CLIENT_ID `as an environment variable. Note that this fix applies only to Astro Runtime 10 and later.
+
 ## December 12, 2023
 
 ### Bug fixes

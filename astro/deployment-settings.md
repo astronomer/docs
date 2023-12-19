@@ -269,7 +269,7 @@ Use Deployment hibernation to ensure that:
 
 Before you create a hibernation schedule for a Deployment, consider the following constraints:
 
-- The Deployment must have the **Is Development?** setting turned on. This setting can only be configured when you create a Deployment.
+- The Deployment must have the **Development Mode** setting turned on. This setting can only be configured when you create a Deployment.
 - The **High Availability** feature is not supported. A Deployment with a hibernation schedule cannot be highly available.
 - The **Small Scheduler** (1 vCPU, 2 GiB RAM) is the only scheduler size supported.
 - Deployments with hibernation schedules are not required to meet the uptime SLAs of standard production Deployments.
@@ -299,13 +299,20 @@ When your hibernation schedule starts:
 - You can't access the Airflow UI for the Deployment.
 - You can't deploy project images or DAGs to the Deployment.
 
-#### Wake up from hibernation
+#### Manually hibernate a Deployment
 
-If you need to run a task or DAG on a Deployment that is currently in hibernation, you can manually wake up the Deployment from hibernation before the end of its schedule.
+Instead of creating a regular hibernation schedule. You can manually hibernate a development Deployment from the Cloud UI. This is recommended if you're not sure when you'll need to use the Deployment again after hibernating it. 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu of the Deployment you want to update, and select **Wake up from hibernation**.
-3. Wait for the Deployment status to turn `HEALTHY`. Then, you can access the Airflow UI and resume running tasks.
+2. Click the **More Options** menu of the Deployment you want to update, then select **Hibernate Deployment**.
+3. Configure the manual hibernation period, then click **Confirm**.
+
+If you need to run a task or DAG on a Deployment that is currently in hibernation, you can also manually wake up a Deployment from hibernation before the end of its schedule. 
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **More Options** menu of the Deployment you want to update, then select **Wake up from Hibernation**.
+3. Select **Remove override and return to normal schedule**, then click **Confirm**. Alternatively, you can adjust the existing manual hibernation period if you don't immediately need to wake up the Deployment.
+
 
 ## See also
 
