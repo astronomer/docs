@@ -28,7 +28,7 @@ Your Organization name is human-readable name that appears in the Cloud UI and i
 
 ## Configure environment secrets fetching for the Astro Environment Manager
 
-When members of your Organization test an Astro project using the Astro CLI, they can pull connections configured in the Astro Environment manager to their local Airflow environment based on their Workspace credentials. See [Import and export Airflow connections and variables](import-export-connections-variables.md#from-the-cloud-ui) for more details. 
+When members of your Organization test an Astro project using the Astro CLI, they can pull connections configured in the [Astro Environment Manager](#create-and-link-connections) to their local Airflow environment based on their Workspace credentials. See [Import and export Airflow connections and variables](import-export-connections-variables.md#from-the-cloud-ui) for more details. 
 
 You can enable or disable this feature based on whether you want Organization members to access Astro-configured connection details from their local machines.
 
