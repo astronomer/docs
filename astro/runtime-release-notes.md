@@ -47,7 +47,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 - Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
-- Fixed an issue where Astro audit logs listed a user's name for trigger events instead of their IDs.
+- Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
 ## Astro Runtime 9.6.0
 
