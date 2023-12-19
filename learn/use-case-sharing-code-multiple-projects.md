@@ -1,6 +1,6 @@
 ---
 title: "How to share code between multiple projects"
-description: "In this page we elaborate on various ways to reuse and share code between multiple project, and explain the pros and cons of each solution."
+description: "In this page we elaborate on various ways to reuse and share code between multiple projects, and explain the pros and cons of each solution."
 id: sharing-code-multiple-projects
 sidebar_label: "Sharing code between multiple projects"
 ---
