@@ -5,7 +5,7 @@ id: sharing-code-multiple-projects
 sidebar_label: "Sharing code between multiple projects"
 ---
 
-Imagine you've [set up an Astro project](cli/develop-project.md), you're getting into the flow of implementing some pipelines, you're extracting several Python functions for reusability, and things are scaling up. You've now got multiple Airflow deployments, but how do you reuse code between your projects? This is a common question and in this page we'll lay out various options for reusing code and their pros and cons.
+Imagine you've [set up an Astro project](https://docs.astronomer.io/astro/cli/develop-project), you're getting into the flow of implementing some pipelines, you're extracting several Python functions for reusability, and things are scaling up. You've now got multiple Airflow deployments, but how do you reuse code between your projects? This is a common question and in this page we'll lay out various options for reusing code and their pros and cons.
 
 Specifically, we'll demonstrate three options, sorted from simple implementation but poor reusability to detailed implementation but excellent reusability:
 
