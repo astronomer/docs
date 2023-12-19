@@ -7,13 +7,15 @@ sidebar_label: "Sharing code between multiple projects"
 
 Imagine you've [set up an Astro project](https://docs.astronomer.io/astro/cli/develop-project), you're getting into the flow of implementing some pipelines, you're extracting several Python functions for reusability, and things are scaling up. You've now got multiple Airflow deployments, but how do you reuse code between your projects? This is a common question and in this page we'll lay out various options for reusing code and their pros and cons.
 
-Specifically, we'll demonstrate three options, sorted from simple implementation but poor reusability to detailed implementation but excellent reusability:
+Specifically, we'll demonstrate three options, sorted from simple implementation but poor reusability to comprehensive implementation but excellent reusability:
 
-1. Shared Python code in same file
-2. Shared Python code in `/include` folder
-3. Shared Python code in Python package in separate project
+| Solution                                                 | When to use                                                               |
+|----------------------------------------------------------|---------------------------------------------------------------------------|
+| Shared Python code in same file                          | When reusing code only within a single script                             |
+| Shared Python code in `/include` folder                  | When reusing code in multiple scripts, but within the same Git repository |
+| Shared Python code in Python package in separate project | When reusing code in multiple Git projects                                |
 
-Let's assume we have multiple tasks querying a database and returning results:
+Say we have the following Airflow tasks querying a database and returning results:
 
 ```python
 import datetime
@@ -84,7 +86,8 @@ def query_db(query):
     return result
 ```
 
-And then import the function from your DAG in `/dags/example.py`:
+And then import the function from your DAG:
+
 ```python {6}
 import datetime
 
@@ -149,14 +152,6 @@ The steps above describe roughly how to set up a Python package. Since the numbe
 - Set developments standards from the beginning (e.g. Flake8 linting and Black formatting).
 - Ensure the end-to-end CI/CD pipeline works first, then start developing application code.
 
-# Summary
+# Planning for the future
 
-The solutions above can be applied in the following situations:
-
-| Solution                     | When to use                                                               |
-|------------------------------|---------------------------------------------------------------------------|
-| Code in DAG script           | When reusing code only within a single script                             |
-| Code in `/include` folder    | When reusing code in multiple scripts, but within the same Git repository |
-| Code in separate Git project | When reusing code in multiple Git projects                                |
-
-If you're currently only deploying from a single Git repository to the Astronomer platform but plan for multiple teams in the future, we advise to start with shared code in a separate Git repository from the start. Setting standards from the beginning is easier than introducing changes in hindsight.
+We demonstrated several solutions for sharing code, from code in a single file to code across multiple Git repositories. If you're currently only deploying from a single Git repository to the Astronomer platform but plan for multiple teams in the future, we advise to start with shared code in a separate Git repository from the start. Setting standards and best practices from the beginning is easier than introducing changes in hindsight.
