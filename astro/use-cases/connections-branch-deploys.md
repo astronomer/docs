@@ -9,6 +9,7 @@ Airflow DAGs often interact with a multitude of external systems, such as data w
 Astro's [branch-based development](https://docs.astronomer.io/astro/automation-overview) and [connection management](https://docs.astronomer.io/astro/manage-connections-variables) features allow you to automatically share specific Airflow connections with Astro Deployments based on their development context. 
 
 When you combine branch-based deploys and connection management, you can:
+
 - Automatically create Deployments for development branches with a set of development Airflow connections.
 - Override preset Airflow connections on a per-Deployment basis to troubleshoot or customize your development environment.
 - Promote a Deployment to production as an admin by updating its Airflow connections to access production resources.
@@ -19,26 +20,36 @@ This use case depends on three key Astro features to create a fully integrated C
 
 - Configuring Airflow connections in the [Astro Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables).
 - Branch-based, or multi-branch Deployments using [CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd.md#multiple-environments).
-- Pulling connections into local development branches using [environment secrets fetching](https://docs.astronomer.io/astro/import-export-connections-variables.md#from-the-cloud-ui).
 
 ## Prerequisites
 
 This use case assumes you have:
 
-- Two Astro Deployments, one for development and one for production.
-- A Git-based repository where you store your Astro project code.
+- At least two Astro Deployments, one for development and one for production.
+- A Git-based repository where you manage an Astro project.
 - A configured multi-branch CI/CD pipeline. See [CI/CD templates](ci-cd-templates.md)
 
 However, you can extend this use case to encompass multiple development or production environments.
 
-## Use case
+## Implementation
 
-The following workflow is an example of how you can manage Airflow connections between Deployment types using the Astro Environment Manager.
+To implement this use case:
+
+1. As a Workspace Operator or Admin, create connections in the Astro Environment manager to your development-level resources. See [Create a connection](create-and-link-connections.md#create-a-connection).
+2. Set these connections to be available to all Deployments in the Workspace by default. See [Configure connection sharing for a Workspace](create-and-link-connections.md#configure-connection-sharing-for-a-workspace). Your DAG authors can now access external development and testing resources across all Deployments.
+3. Choose a Deployment in your Workspace that you want to run your production workflows. In the Deployment, override the connections you configured to instead connect to your production resources. See [Override connection fields](create-and-link-connections.md#override-connection-fields).
+4. In the Git repository for your Astro project, define a multi-branch CI/CD pipeline for deploying to Astro. For an example of how to do this in GitHub, see [CI/CD templates](/ci-cd-temploates/github-actions.md?tab=multibranch#deploy-action-templates).
+
+Now, when a DAG author deploys to either a production or development Deployment through CI/CD, they can run their DAGs in Astro without needing to configure connections. Additionally, because your override production connection shares the same connection ID as your default development connection, DAG authors don't have to update their code to point towards different connections when promoting their code to production.
+
+## Explanation
+
+Using branch-based Deployments with the Astro Environment Manager allows your team to focus on the parts of Astro that matter most for their roles. For example, using the Astro Environment Manager means that you only need one administrative user to manage connections across multiple Deployments:  
 
 - A Workspace Owner [creates an Airflow connection](https://docs.astronomer.io/astro/create-and-link-connections#create-a-connection) in the Astro Environment Manager that connects to external development resources. They share this connection to all Deployments by default by turning on the [**Linked to all Deployments** setting](https://docs.astronomer.io/astro/create-and-link-connections#configure-connection-sharing-for-a-workspace).
 - In the production Deployment, the Workspace Owner [overrides the linked connection](https://docs.astronomer.io/astro/create-and-link-connections#override-connection-fields) to instead connect to production resources on the same external system. Because the connection ID and code are the same, this override requires no updates at the DAG level. 
 
-After the connection is created, DAG authors can develop DAGs without needing to reconfigure connections between development and production.
+After a Workspace Owner creates connections, DAG authors can develop DAGs without needing to reconfigure connections between development and production:
 
 - A DAG author creates a new development branch of an Astro project. The CI/CD pipeline for the repository deploys their branch to the development Deployment on Astro. This is known as a [multi-branch CI/CD pipeline](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments).
 - While the DAG author is testing in Astro, they have access to the development resources because the Workspace Author configured a default Airflow connection for the Deployment. The author can [pull this connection onto their local machine](https://docs.astronomer.io/astro/import-export-connections-variables.md#from-the-cloud-ui) for testing purposes, or test by deploying to the development Deployment on Astro.
@@ -53,6 +64,5 @@ This use case provides several benefits for both Workspace managers and DAG auth
 
 ## See also
 
-- Documentation: [Manage Airflow connections and variables](https://docs.astronomer.io/astro/manage-connections-variables) on Astro.
-- Documentation: [Automate actions on Astro](https://docs.astronomer.io/astro/automation-overview).
-- Guide: [Manage Airflow connections](https://docs.astronomer.io/learn/connections).
+- [Manage Airflow connections and variables](https://docs.astronomer.io/astro/manage-connections-variables)
+- [Automate actions on Astro](https://docs.astronomer.io/astro/automation-overview)
