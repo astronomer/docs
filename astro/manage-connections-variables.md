@@ -77,7 +77,7 @@ Astro includes connection management system that behaves like you are using an A
 
 :::info
 
-To see how you can use connections set in the Astro Cloud UI Environment Manager in a best practice branch-based Deployment set up, see the [Manage Astro connections in branch-based deploy workflows](astro-use-case/use-case-astro-connections) use case.
+To see how you can use connections set in the Astro Cloud UI Environment Manager in a best practice branch-based Deployment set up, see the [Manage Astro connections in branch-based deploy workflows](use-cases/connections-branch-deploys.md) use case.
 
 :::
 
