@@ -32,11 +32,11 @@ This process occurs every time you create or update a connection.
 
 ### Fetching environment secrets
 
-You can export Airflow Connections from the Cloud UI to test your DAGs locally, which means you can use your connection details without needing to manage credentials both locally and on the cloud. However, because Connection details are saved in a secrets manager, the [Organization Owner](astro/user-permissions.md#organization-roles) can enable or disable whether connections can be exported using the **Environment Secrets Fetching** setting.
+You can export Airflow connections from the Cloud UI to test your DAGs locally, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
 
 :::tip
 
-By default, connections can't be exported locally. However, if you want to work with Connections locally, the organization owner can enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI. See [Import and export Airflow connections from the Cloud UI](import-export-connections-variables.md#from-the-cloud-ui).
+By default, connections can't be exported locally. However, if you want to work with connections locally, the Organization Owner can enable **Environment Secrets Fetching** in the Cloud UI. See [Import and export Airflow connections from the Cloud UI](import-export-connections-variables.md#from-the-cloud-ui).
 
 :::
 
