@@ -117,7 +117,7 @@ The number of options for developing, building, and releasing a Python package a
 7. Validate the package by installing it in a project via the `requirements.txt` file.
 8. After steps 1-7 validate that you can automatically build and release your package, start adding application code.
 
-Following the code example above, this means adding the code in a module in your Python package, for example `my_company_airflow/db.py`:
+The code example must now be added in a module in your Python package, for example `my_company_airflow/db.py`:
 
 ```python
 def query_db(query):
@@ -127,7 +127,7 @@ def query_db(query):
     return result
 ```
 
-And after installing the package, developers can import the function in their DAGs as:
+After installing the package, developers can then import the function in their DAGs as:
 
 ```python {6}
 import datetime
@@ -155,8 +155,8 @@ The solutions above can be applied in the following situations:
 
 | Solution                     | When to use                                                            |
 |------------------------------|------------------------------------------------------------------------|
-| Code in DAG script           | When reusing code only within the same script                          |
+| Code in DAG script           | When reusing code only within a single script                          |
 | Code in `/include` folder    | When reusing code in multiple scripts, but within the same Git project |
-| Code in separate Git project | When reusing code over multiple Git projects                           |
+| Code in separate Git project | When reusing code in multiple Git projects                             |
 
-Also, if you're currently only deploying from a single Git repository to the Astronomer platform but plan for multiple teams in the future, we advise to start with shared code in a separate Git repository since setting standards from the beginning is easier than introducing changes in hindsight.
+If you're currently only deploying from a single Git repository to the Astronomer platform but plan for multiple teams in the future, we advise to start with shared code in a separate Git repository from the start. Setting standards from the beginning is easier than introducing changes in hindsight.
