@@ -50,9 +50,9 @@ Airflow connections can be created by using one of the following methods:
 - The [`airflow.cfg` file](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html)
 - The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli)
 
-:::note
+:::info
 
-Astro customers can use the [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store their connections in an Astro-managed secrets backend and share them with multiple Deployments and local environments. See, [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
+Astro users can additionally take advantage of the [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Airflow environments. See [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
 
 :::
 
