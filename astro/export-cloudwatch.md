@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'AWS Cloudwatch'
-title: 'Export metrics and logs to AWS Cloudwatch'
+title: 'Export logs to AWS Cloudwatch'
 id: export-cloudwatch
 description: "Configure your Deployment to forward observability data to your AWS Cloudwatch instance."
 ---
@@ -11,7 +11,13 @@ By forwarding Astro data to AWS Cloudwatch, you can integrate Astro into your ex
 
 Complete the following setup to authenticate your Deployments to AWS Cloudwatch and forward your observability data to your AWS Cloudwatch instance.
 
-## Export task logs to AWS CloudWatch 
+:::info
+
+At this time, you can only export Airflow task logs from Astro to Cloudwatch. If you need to export both task logs and metrics, see how to set up [forwarding data to Datadog](export-datadog.md)
+
+:::
+
+## Export task logs to AWS CloudWatch
 
 You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/) using an IAM role or user. This allows you to view and manage task logs across all Deployments from a centralized observability plane.
 
@@ -22,7 +28,7 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
 ### Setup
 
 1. On AWS, create an IAM role and a trust policy that allows your Deployment to write logs to Cloudwatch. See [Authorize Deployments to your cloud](authorize-deployments-to-your-cloud.md?tab=aws#step-1-authorize-the-deployment-in-your-cloud).
-2. Create a permissions policy with the following configuration: 
+2. Create a permissions policy with the following configuration:
 
     ```json
     {
