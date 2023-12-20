@@ -1,7 +1,6 @@
 ---
 title: "Introduction to Airflow DAGs"
 sidebar_label: "DAGs"
-description: "How to write your first DAG in Apache Airflow"
 id: dags
 description: "Learn how to write DAGs and get tips on how to define an Airflow DAG in Python. Learn all about DAG parameters and their settings."
 ---
