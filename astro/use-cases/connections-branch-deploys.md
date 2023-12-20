@@ -1,6 +1,6 @@
 ---
 title: 'Manage Astro connections in branch-based deploy workflows'
-sidebar_label: 'Connections + branch-based deploys'
+sidebar_label: 'Connections and branch-based deploys'
 id: connections-branch-deploys
 ---
 
@@ -16,7 +16,7 @@ When you combine branch-based deploys and connection management, you can:
 
 ## Feature overview
 
-This use case depends on three key Astro features to create a fully integrated CI/CD pipeline:
+This use case depends on the following Astro features to create a fully integrated CI/CD pipeline:
 
 - Configuring Airflow connections in the [Astro Environment Manager](manage-connections-variables.md).
 - Branch-based, or multi-branch Deployments using [CI/CD](set-up-ci-cd.md#multiple-environments).
@@ -40,7 +40,7 @@ To implement this use case:
 3. Choose a Deployment in your Workspace that you want to run your production workflows. In the Deployment, override the connections you configured to instead connect to your production resources. See [Override connection fields](create-and-link-connections.md#override-connection-fields).
 4. In the Git repository for your Astro project, define a multi-branch CI/CD pipeline for deploying to Astro. For an example of how to do this in GitHub, see [CI/CD templates](/ci-cd-templates/github-actions.md?tab=multibranch#deploy-action-templates).
 
-Now, when a DAG author deploys to either a production or development Deployment through CI/CD, they can run their DAGs in Astro without needing to configure connections. Additionally, because your override production connection shares the same connection ID as your default development connection, DAG authors don't have to update their code to point towards different connections when promoting their code to production.
+Now, when a DAG author deploys to either a production or development Deployment through CI/CD, they can run their DAGs in Astro without needing to configure connections. Additionally, because your production connection shares the same connection ID as your default development connection, DAG authors don't have to update their code to point towards different connections when promoting their code to production.
 
 ## Explanation
 
