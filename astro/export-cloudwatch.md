@@ -13,7 +13,7 @@ Complete the following setup to authenticate your Deployments to AWS Cloudwatch 
 
 :::info
 
-At this time, you can only export Airflow task logs from Astro to Cloudwatch. If you need to export both task logs and metrics, see how to set up [forwarding data to Datadog](export-datadog.md)
+At this time, you can only export Airflow task logs from Astro to Cloudwatch. Metrics exporting is supported only on [Datadog](export-datadog.md)
 
 :::
 
