@@ -111,7 +111,7 @@ In some cases you may have code that needs to be shared across different Airflow
 
 To reuse code over multiple projects, you need to store it in a separate Git repository which can be reused by multiple projects. The best way to do this is to create your own Python package from the repository you want to be available to multiple projects. This takes a bit more work to set up, but enables multiple teams using multiple Git repositories to maintain a single source of code. You can see an example Python package in [this repo](https://github.com/astronomer/custom-package-demo). 
 
-The number of options for developing, building, and releasing a Python package are limitless. Therefore, we can't describe every detail. Setting up a custom Python package requires roughly the following steps:
+The number of options for developing, building, and releasing a Python package are limitless and this guide only provides general guidance. See https://docs.python-guide.org/writing/structure and https://packaging.python.org/en/latest/tutorials/packaging-projects for more information on Python packaging. Setting up a custom Python package requires roughly the following steps:
 
 1. First, create a separate Git repository for your shared code.
 2. Write a `pyproject.toml` file. This is a configuration file which contains the build requirements of your Python project. You can find an example [here](https://github.com/astronomer/custom-package-demo/blob/main/pyproject.toml).
