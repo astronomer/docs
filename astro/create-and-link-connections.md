@@ -26,11 +26,12 @@ Workspace Owners and Operators can create and assign connections, while Workspac
 
 When you create an Airflow connection in the Environment Manager, the following happens:
 
-- Astro stores Airflow connections in an Astronomer-hosted secrets backend, and then applies connections to Deployments as a Kubernetes secret.
-- Instead of connection details being visible, like environment variables, these connections are mounted as files on the Deployment.
-- When you export connections to work locally, the Astro CLI uses Airflow’s provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html) so that Airflow reads the secrets to look up connections.
+- Astro stores Airflow connections in an Astronomer-hosted secrets backend, and then applies connections to Deployments as Kubernetes secrets.
+- Instead of connection details being visible, like environment variables, these connections are mounted as Kubernetes Secrets on the Deployment using Airflow’s provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html). This means that Airflow reads the secrets to look up connection details.
 
 This process occurs every time you create or update a connection.
+
+When you export connections to work locally, the Astro CLI reads the connections from the Astro API and injects them into the local Airflow instance's metadata database.
 
 ### Fetching environment secrets
 
