@@ -120,6 +120,7 @@ module.exports = {
             'airflow-pools',
             'airflow-setup-teardown',
             'testing-airflow',
+            'sharing-code-multiple-projects'
           ],
         },
       ],
@@ -268,8 +269,7 @@ module.exports = {
           'use-case-airflow-llm-rag-finance',
           'use-case-llm-customer-feedback',
           'use-case-airflow-ml-datasets',
-          'use-case-airflow-mlflow',
-          'sharing-code-multiple-projects'
+          'use-case-airflow-mlflow'
       ],
     },
     'airflow-glossary'
