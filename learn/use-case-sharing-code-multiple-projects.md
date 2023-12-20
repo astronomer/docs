@@ -120,9 +120,8 @@ The number of options for developing, building, and releasing a Python package a
 5. Create a CI/CD pipeline to test, build, and release your package. You can see an example GitHub Actions workflow [here](https://github.com/astronomer/custom-package-demo/tree/main/.github/workflows).
 6. Ensure your setup works correctly by building and releasing a first version of the package.
 7. Validate the package by installing it in a project via the `requirements.txt` file.
-8. After steps 1-7 validate that you can automatically build and release your package, start adding application code.
 
-The code example must now be added in a module in your Python package, for example `my_company_airflow/db.py`:
+After completing the above steps, you can now add shared code to the Python package so that other projects can use it. The code example must be added in a module in your Python package, for example `my_company_airflow/db.py`:
 
 ```python
 def query_db(query):
