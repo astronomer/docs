@@ -60,9 +60,9 @@ Occasionally, some use cases require DAGs from multiple projects to be deployed 
 
 ## Reusing code
 
-Code such as custom hooks, operators, or DAG templates that are reused between projects should be stored in a repository that's separate from your individual project repositories. This ensures that any changes to the re-used code only need to be made once and are applied across all projects where that code is used.
+Code such as custom hooks, operators, or DAG templates that are reused between projects should be stored in a repository that's separate from your individual project repositories. This ensures that any changes to the re-used code only need to be made once and are applied across all projects where that code is used. Read [Sharing code across projects](https://docs.astronomer.io/learn/sharing-code-multiple-projects) about how to structure and set up a project for shared code.
 
-You can pull code from separate repositories into one of your Airflow projects. If you are working with Astronomer, see [Customize your image on Astronomer Software](https://docs.astronomer.io/software/customize-image#build-from-a-private-repository). Depending on your repository setup, it may also be possible to manage this with your CI/CD tool.
+You can pull code from separate repositories into your Airflow projects. If you are working with Astronomer, see [Customize your image on Astronomer Software](https://docs.astronomer.io/software/customize-image#build-from-a-private-repository). Depending on your repository setup, it may also be possible to manage this with your CI/CD tool.
 
 ## Development flow
 
