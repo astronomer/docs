@@ -5,7 +5,7 @@ id: transfer-a-deployment
 description: "Transfer a Deployment to another Workspace in the same cluster."
 ---
 
-Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations to another Workspace. This process does not affect your task scheduling or any currently running tasks.
+Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, and other Astro configurations to another Workspace. This process does not affect your task scheduling or any currently running tasks.
 
 ## Prerequisites
 

@@ -2,7 +2,7 @@
 
 If you'd like to contribute to Astronomer docs directly, you are welcome to create a Pull Request (PR) to this repository with your suggested changes. To do so:
 
-1. Fork or clone this repository
+1. Clone this repository
 2. Create a branch off of `main`
 3. Make your changes in that branch
 4. Submit a PR for review
@@ -13,7 +13,7 @@ Small edits and typo fixes don't need to be linked to an issue and should be mer
 
 Every update to the `main` branch of this repository will trigger a rebuild of our production documentation page at https://www.docs.astronomer.io. It might take a few moments for your merged changes to appear.
 
-> For more detailed instructions and workflows when contributing to docs as an Astronomer team member, see the [Astronomer Notion](https://www.notion.so/astronomerio/Contribute-a-Docs-Pull-Request-a3ca9018fdbc4206b120a6d530a8401b).
+> For more detailed instructions and workflows when contributing to docs as an Astronomer team member, see the [Astronomer Docs Contribution Notion](https://www.notion.so/astronomerio/Contribute-a-Docs-Pull-Request-a3ca9018fdbc4206b120a6d530a8401b), [Astronomer Doc Types Overview](https://www.notion.so/astronomerio/Doc-Types-Overview-1015aeb5fb74457eb366bcc0bcbb63d0?pvs=4), and [Astronomer Docs Spec](https://www.notion.so/astronomerio/Doc-Types-Spec-2a6d3e0332574ddaa5e4d89f99fff5ca?pvs=4).
 
 ### Docs Structure
 
@@ -30,6 +30,21 @@ The `software` directory is equivalent to the **Latest** version of the Astronom
 ![Screen Shot 2022-01-04 at 11 22 19 AM](https://user-images.githubusercontent.com/74574233/148051957-b739ba42-2fc7-4344-b0a0-4f78881fd68c.png)
 
 If you're working on a change in Software docs, you should work primarily in `software`. Make changes to `software_versioned_docs` only if your change is version-specific or a critical fix (e.g. incorrect or out-of-date information).
+
+### Doc templates
+
+If you want to contribute new docs to the Astro, Software, or Astro CLI docs, you can get started by copying one of the standard [Doc templates](https://github.com/astronomer/docs/blob/main/doc-templates) when you make your initial PR. These templates include links to examples of similar docs as well as guiding questions that your new content should answer.
+
+There are four standard templates:
+
+* **Overview** -  Gives a detailed explanation about what something is, how it functions as a part of Astronomer products or in an implementation, and why someone should use it. All docs should have at least one sentence explaining why a feature is important to a user.
+* **Decision** - Provides a summary of available implementation options, explains the benefits and trade-offs of each, shares recommended and best practices, and makes recommendations for pairing implementation options with use cases.
+* **Process** -  Docs that share a series of actions to complete an objective. They should be introduced with a short paragraph about what the end state of the procedure is and why someone should complete it.
+* **CLI Reference** - The Astro CLI command reference docs are highly structured to ensure the docs adequately answer the question “What is it?” and provide definitions, defaults, examples, and explanations of what a feature, term, or concept is.
+
+Pick the template that best fits the type of content you want to make, make a copy, and replace the template content with your own information that addresses the questions the template prompt you to answer.
+
+> For Astronomer team members, you can find additional information about the Doc Templates and standards in our internal documentation. See [Astronomer Doc Types Overview](https://www.notion.so/astronomerio/Doc-Types-Overview-1015aeb5fb74457eb366bcc0bcbb63d0?pvs=4), and [Astronomer Docs Spec](https://www.notion.so/astronomerio/Doc-Types-Spec-2a6d3e0332574ddaa5e4d89f99fff5ca?pvs=4).
 
 ### Build Astronomer Docs Locally
 
@@ -50,7 +65,7 @@ To build docs locally, you need to install both Node and Yarn. While Yarn is inc
     ```sh
     corepack enable
     ```
-After you install Node and enable Yarn with Corepacks, Docusaurus commands are available when you open the `docs` directory from your terminal. 
+After you install Node and enable Yarn with Corepacks, Docusaurus commands are available when you open the `docs` directory from your terminal.
 
 Please read the [Docusaurus documentation](https://docusaurus.io/docs/installation#requirements) for information on installing other tools you'll need to work with Docusaurus locally.
 
@@ -63,8 +78,8 @@ If you used an alternative package manager to install Node, such as `npm` or `ho
     ```sh
     node --version
     ```
-    
-2. Adjust your installation based on the output of the command: 
+
+2. Adjust your installation based on the output of the command:
 
     - **Node and yarn are installed, but need to be updated**: Use a package manager like [npm or nvm](https://www.freecodecamp.org/news/how-to-update-node-and-npm-to-the-latest-version/) to update your version, or download the installer from the [Node.js](https://nodejs.org/en/) site.
     - **Node is installed, but you cannot enable Corepack**: If you installed Node using a package manager, and it's above version 16.10, but Corepack isn't available, follow the instructions for installing [Corepack with npm](https://github.com/nodejs/corepack#manual-installs) or installing [Corepack with Homebrew or nvm](https://stackoverflow.com/questions/70082424/command-not-found-corepack-when-installing-yarn-on-node-v17-0-1), then run the following command to enable Corepack:
@@ -72,7 +87,7 @@ If you used an alternative package manager to install Node, such as `npm` or `ho
     ```sh
     corepack enable
     ```
-    
+
 #### Local Development
 
 To serve a local version of the docs site with your changes, run:

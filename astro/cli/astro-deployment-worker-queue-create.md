@@ -2,7 +2,8 @@
 sidebar_label: "astro deployment worker-queue create"
 title: "astro deployment worker-queue create"
 id: astro-deployment-worker-queue-create
-description: Reference documentation for astro deployment worker-queue create.
+description: Create a Deployment worker queue.
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Create a [worker queue](configure-worker-queues.md) in a Deployment on Astro. This command is functionally identical to creating a worker queue in the Cloud UI.

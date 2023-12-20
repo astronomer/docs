@@ -6,6 +6,8 @@ from great_expectations_provider.operators.great_expectations import (
 )
 
 POSTGRES_CONN_ID = "postgres_default"
+MY_POSTGRES_SCHEMA = "sweet_treats"
+MY_GX_DATA_CONTEXT = "include/great_expectations"
 
 
 @dag(
@@ -17,14 +19,15 @@ def gx_tutorial():
     create_table_pg = PostgresOperator(
         task_id="create_table_pg",
         postgres_conn_id=POSTGRES_CONN_ID,
-        sql="""
-            CREATE TABLE strawberries (
+        sql=f"""
+            CREATE SCHEMA IF NOT EXISTS {MY_POSTGRES_SCHEMA};
+            CREATE TABLE {MY_POSTGRES_SCHEMA}.strawberries (
                 id VARCHAR(10) PRIMARY KEY,
                 name VARCHAR(100),
                 amount INT
             );
 
-            INSERT INTO strawberries (id, name, amount)
+            INSERT INTO {MY_POSTGRES_SCHEMA}.strawberries (id, name, amount)
             VALUES ('001', 'Strawberry Order 1', 10),
                 ('002', 'Strawberry Order 2', 5),
                 ('003', 'Strawberry Order 3', 8),
@@ -36,7 +39,8 @@ def gx_tutorial():
     gx_validate_pg = GreatExpectationsOperator(
         task_id="gx_validate_pg",
         conn_id=POSTGRES_CONN_ID,
-        data_context_root_dir="include/great_expectations",
+        data_context_root_dir=MY_GX_DATA_CONTEXT,
+        schema=MY_POSTGRES_SCHEMA,
         data_asset_name="strawberries",
         expectation_suite_name="strawberry_suite",
         return_json_dict=True,
@@ -45,8 +49,8 @@ def gx_tutorial():
     drop_table_pg = PostgresOperator(
         task_id="drop_table_pg",
         postgres_conn_id=POSTGRES_CONN_ID,
-        sql="""
-            DROP TABLE strawberries;
+        sql=f"""
+            DROP TABLE {MY_POSTGRES_SCHEMA}.strawberries;
             """,
     )
 

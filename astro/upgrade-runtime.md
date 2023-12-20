@@ -66,18 +66,19 @@ The Astro CLI then generates test results in your Astro project that identify de
 
     You must always specify the major, minor, and patch version of any given Astro Runtime version.
 
+3. Save the changes to your `Dockerfile`.
+
 ## Step 5: Test Astro Runtime locally
 
 Astronomer recommends testing new versions of Astro Runtime locally before upgrading a Deployment on Astro.
 
-1. Save the changes to your `Dockerfile`.
-2. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
-3. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
-4. Confirm that your local upgrade was successful by scrolling to the bottom of any page. You should see your new Astro Runtime version in the footer as well as the version of Airflow it is based on.
+1. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
+2. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
+3. Confirm that your local upgrade was successful by scrolling to the end of any page. The new Astro Runtime version is listed in the footer as well as the version of Airflow it is based on.
 
     ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
 
-5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
+4. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
 ### Step 6: (Optional) Upgrade and test provider packages
 
@@ -95,7 +96,9 @@ For more information about deploying to Astro, see [Deploy code](deploy-code.md)
 
 :::caution
 
-Once you upgrade to a Deployment on Astro to a new version of Astro Runtime, you cannot roll back or downgrade to a lower version. If you attempt to do so, you will see an error in the Astro CLI and your request to deploy will not succeed.
+After you upgrade a Deployment on Astro to a new version of Astro Runtime, the only way to downgrade is to [roll back to a previous deploy](deploy-history.md). If you attempt to downgrade a Deployment by updating your Dockerfile, the Astro CLI produces an error and your request to deploy does not succeed.
+
+Generally speaking, Deployment rollbacks to lower Runtime versions are recommended only when your current code isn't working as expected. This is because rollbacks to lower Runtime versions can result in your Deployment losing data from the metadata database. For more information, see [What happens during a deploy rollback](deploy-history.md#what-happens-during-a-deploy-rollback).
 
 :::
 
@@ -122,6 +125,12 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 ### Version upgrade considerations
 
 This is where you'll find the upgrade considerations for specific Astro Runtime versions. This includes breaking changes, database migrations, and other considerations.
+
+:::info
+
+If an Astro Runtime version isn't included in this section, then there are no specific upgrade considerations for that version.
+
+:::
 
 #### Runtime 9 (Airflow 2.7)
 
@@ -198,6 +207,6 @@ Astro Runtime 5.0.0, based on Airflow 2.3, includes changes to the schema of the
     Airflow found incompatible data in the `dangling_rendered_task_instance_fields` table in your metadata database, and moved...
     ```
 
-    These warnings have no impact on your tasks or DAGs and can be ignored. If you want to remove these warning messages from the Airflow UI, reach out to [Astronomer support](https://cloud.astronomer.io/support). If requested, Astronomer can drop incompatible tables from your metadata database.
+    These warnings have no impact on your tasks or DAGs and can be ignored. If you want to remove these warning messages from the Airflow UI, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request). If requested, Astronomer can drop incompatible tables from your metadata database.
 
 For more information on Airflow 2.3, see ["Apache Airflow 2.3.0 is here"](https://airflow.apache.org/blog/airflow-2.3.0/) or the [Airflow 2.3.0 changelog](https://airflow.apache.org/docs/apache-airflow/2.3.0/release_notes.html#airflow-2-3-0-2022-04-30).

@@ -2,8 +2,9 @@
 sidebar_label: "astro organization user invite"
 title: "astro organization user invite"
 id: astro-organization-user-invite
-description: Reference documentation for astro organization user invite command.
+description: Invite users to your Organization.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Invite users to your current Astro Organization.

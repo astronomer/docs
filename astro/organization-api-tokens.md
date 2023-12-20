@@ -5,14 +5,14 @@ id: organization-api-tokens
 description: Create and manage Organization API tokens to automate key actions across all Workspaces in your Organization, like adding users and creating Deployments. 
 ---
 
-Use Organization API tokens to automate across all Workspaces in your Organization, such as creating Deployments and managing users as part of your CI/CD pipelines. Organization API keys are particularly helpful for automating:
+Use Organization API tokens to automate across all Workspaces in your Organization, such as creating Deployments and managing users as part of your CI/CD pipelines. Organization API tokens are particularly helpful for automating:
 
 - Creating Workspaces.
 - Inviting users to an Organization or Workspace. See [Add a group of users to Astro using the Astro CLI](manage-workspace-users.md#add-a-group-of-users-to-a-workspace-using-the-astro-cli).
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md).
 - Exporting audit logs.
 - Gathering metadata about Deployments using the Airflow REST API.
-- Completing any of the actions you can complete with a Workspace API token or Deployment API key across all Deployments in your Organization.
+- Completing any of the actions you can complete with a Workspace API token or Deployment API token across all Deployments in your Organization.
 
 ## Create an Organization API token
 
@@ -76,12 +76,6 @@ export ASTRO_API_TOKEN=<your-token>
 ```
 
 After you set the variable, you can run `astro deployment`, `astro workspace`, and `astro organization` commands for your Workspace without authenticating yourself to Astronomer. Astronomer recommends storing `ASTRO_API_TOKEN` as a secret before using it to automate the Astro CLI for production workflows.
-
-:::info
-
-If you have both `ASTRO_API_TOKEN` and `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET` set in an environment, your Astro Workspace token takes precedence and is used for all Deployment actions in that Workspace. 
-
-:::
 
 ### Use an Organization API token for CI/CD
 

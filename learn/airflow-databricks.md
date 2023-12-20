@@ -44,9 +44,12 @@ with task_group:
 
 This tutorial shows how to use the Astro Databricks provider to run two Databricks notebooks as a Databricks Workflow. If you don't use Databricks Workflows, see [Alternative ways to run Databricks with Airflow](#alternative-ways-to-run-databricks-with-airflow).
 
-:::info 
+:::tip Other ways to learn
 
-If you are already familiar with Airflow and Databricks and just want to get a project running, clone the [example project repository](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md) and run it locally using the Astro CLI.
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [How to Orchestrate Databricks Jobs Using Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-databricks-jobs-using-airflow/).
+- Use case: [ELT with Airflow and Databricks](use-case-airflow-databricks.md) including a ready-to-use [example project repository](https://github.com/astronomer/astro-provider-databricks/blob/main/quickstart/astro-cli.md).
 
 :::
 

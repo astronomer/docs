@@ -4,6 +4,7 @@ title: 'astro team'
 id: astro-team
 description: Reference documentation for astro team.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 :::info 

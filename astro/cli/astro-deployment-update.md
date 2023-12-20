@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment update"
 title: "astro deployment update"
 id: astro-deployment-update
-description: Reference documentation for astro deployment update.
+description: Update a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';
@@ -53,7 +54,7 @@ After setting the variables, this command works for a Deployment and you don't n
 
 | Option                         | Description                                                                                                                                                                                                                             | Possible Values                                                                                                                                |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--dag-deploy`                 | Enable or disable DAG-only deploys for the Deployment.                                                                                                                                                                                  | Either `enable` or `disable`. Contact [Astronomer support](https://cloud.astronomer.io/support) before using `disable` to disable the feature. |
+| `--dag-deploy`                 | Enable or disable DAG-only deploys for the Deployment.                                                                                                                                                                                  | Either `enable` or `disable`. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) before using `disable` to disable the feature. |
 | `--deployment-file`            | Location of the Deployment file to update the Deployment with. The file format can be JSON or YAML. See [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment). | A valid file path to any YAML or JSON Deployment file                                                                                          |
 | `<deployment-id>` (_Required_) | The ID of the Deployment to update                                                                                                                                                                                                      | Any valid Deployment ID                                                                                                                        |
 | `--deployment-name`            | The name of the Deployment to update. Use as an alternative to `<deployment-id>`.                                                                                                                                                       | Any valid Deployment name                                                                                                                      |

@@ -22,7 +22,7 @@ For Astro Hybrid resource reference material, see:
 
 This page contains reference information for all supported Astro Hosted Deployment and cluster resource configurations. Use this information to determine whether Astro supports the type of Airflow environment you want to run. 
 
-If you're interested in a cloud region or resource size that's not mentioned here, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+If you're interested in a cloud region or resource size that's not mentioned here, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Deployment resources
 
@@ -56,21 +56,21 @@ The following table lists all available worker types on Astro Deployments.
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
 
-## Standard cluster configurations
+## Standard cluster regions
 
 A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astronomer. Astronomer maintains standard clusters in a limited regions and clouds, with support for more regions and clouds coming soon.
 
 Currently, standard clusters are available on the following clouds and regions:
 
-### GCP
-
-| Code           | Region                  |
-| -------------- | ----------------------- |
-| `europe-west4` | Netherlands, Europe     |
-| `us-central1`  | Iowa, North America     |
-| `us-east4`     | Virginia, North America |
-
-### AWS
+<Tabs
+    defaultValue="aws"
+    groupId= "dedicated-cluster-configurations"
+    values={[
+        {label: 'AWS', value: 'aws'},
+        {label: 'GCP', value: 'gcp'},
+        {label: 'Azure', value: 'azure'},
+    ]}>
+<TabItem value="aws">
 
 | Code           | Region                |
 | -------------- | --------------------- |
@@ -78,7 +78,32 @@ Currently, standard clusters are available on the following clouds and regions:
 | `us-east-1`    | US East (N. Virginia) |
 | `us-west-2`    | US West (Oregon)      |
 
-## Dedicated cluster configurations
+</TabItem>
+
+<TabItem value="gcp">
+
+| Code           | Region                  |
+| -------------- | ----------------------- |
+| `europe-west4` | Netherlands, Europe     |
+| `us-central1`  | Iowa, North America     |
+| `us-east4`     | Virginia, North America |
+
+</TabItem>
+
+<TabItem value="azure">
+
+| Code         | Region                    |
+| ------------ | ------------------------- |
+| `eastus2`    | Virginia, North America   |
+| `westus2`    | Washington, North America |
+| `westeurope` | Netherlands, Europe       |
+
+</TabItem>
+
+</Tabs>
+
+
+## Dedicated cluster regions
 
 A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Cloud UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
@@ -116,8 +141,15 @@ Currently, dedicated clusters are available on the following clouds and regions:
 | Code            | Region         |
 | --------------- | -------------- |
 | `australiaeast` | Australia East |
+| `brazilsouth`   | Brazil South   |
+| `canadacentral` | Canada Central |
+| `centralindia`  | Central India  |
+| `eastus2`       | East US        |
 | `eastus2`       | East US 2      |
+| `francecentral` | France Central |
+| `japaneast`     | Japan East     |
 | `northeurope`   | North Europe   |
+| `uksouth`       | UK South       |
 | `westeurope`    | West Europe    |
 | `westus2`       | West US 2      |
 

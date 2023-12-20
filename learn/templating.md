@@ -32,6 +32,14 @@ Airflow leverages [Jinja](https://jinja.palletsprojects.com), a Python templatin
 - How to apply custom variables and functions when templating.
 - How to render templates to strings and native Python code.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Templating](https://academy.astronomer.io/astro-runtime-templating) module.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -131,6 +139,21 @@ with DAG(..., template_searchpath="/tmp") as dag:
 
 </TabItem>
 </Tabs>
+
+### Disable templating
+
+As of Airflow 2.8 it is possible to use a wrapper class to disable templating for the input to a templatable field without needing to modify the operator itself. This is useful when you want to pass a string that contains Jinja syntax to an operator without it being rendered. For example, you may want to pass a Jinja template to a `BashOperator` that will not be rendered. This can be achieved by wrapping the string into the `literal` function:
+
+```python
+from airflow.utils.template import literal
+
+BashOperator(
+    task_id="use_literal_wrapper_to_ignore_jinja_template",
+    bash_command=literal("echo {{ params.the_best_number }}"),
+)
+```
+
+The code above will print `{{ params.the_best_number }}` to the logs instead of showing the rendered value of `params.the_best_number`.
 
 ## Validate templates
 

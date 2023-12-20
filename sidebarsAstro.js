@@ -28,14 +28,15 @@ module.exports = {
           label: "Run your first DAG",
           link: { type: 'doc', id: 'run-first-dag' },
           items: ["first-dag-github-actions", "first-dag-cli"],
-        
+
         },
-        "log-in-to-astro", 
+        "log-in-to-astro",
         {
           type: "category",
           label: "Migrate to Astro",
           items: ["migrate-mwaa", "migrate-gcc"],
         },
+        "install-azure",
       ],
     },
     {
@@ -50,9 +51,10 @@ module.exports = {
         "kubernetespodoperator",
         {
           type: "category",
-          label: "Airflow connections and variables",
+          label: "Connections and variables",
           items: [
             "manage-connections-variables",
+            "create-and-link-connections",
             "import-export-connections-variables",
           ],
         },
@@ -97,13 +99,31 @@ module.exports = {
         {
           type: "category",
           label: "Executors",
-          items: ["executors-overview","celery-executor", "kubernetes-executor"],
-        }, 
+          items: ["executors-overview", "celery-executor", "kubernetes-executor"],
+        },
         "configure-worker-queues",
-        "api-keys",
-        "environment-variables",
-        "secrets-backend",
-        "manage-dags", 
+        {
+          type: "category",
+          label: "Environment variables",
+          link: {
+            type: 'doc',
+            id: 'environment-variables'
+          },
+          items: ["environment-variables", "manage-env-vars"],
+        },
+        {
+          type: "category",
+          label: "Secrets backend",
+          link: { type: 'doc', id: 'secrets-backend' },
+          items: ["secrets-backend",
+            "secrets-backend/aws-secretsmanager",
+            "secrets-backend/aws-paramstore",
+            "secrets-backend/azure-key-vault",
+            "secrets-backend/hashicorp-vault",
+            "secrets-backend/gcp-secretsmanager",
+          ],
+        },
+        "manage-dags",
       ],
     },
     {
@@ -142,7 +162,8 @@ module.exports = {
           items: [
             "manage-deployments-as-code",
             "deployment-file-reference"],
-        }, 
+        },
+        "api-keys",
       ],
     },
     {
@@ -163,6 +184,11 @@ module.exports = {
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
+        {
+          type: "category",
+          label: "Integrate with data tools",
+          items: ["export-datadog", "export-cloudwatch"],
+        },
       ],
     },
     {
@@ -175,7 +201,7 @@ module.exports = {
           items: [
             "manage-organization-users",
             "manage-workspace-users",
-            "manage-teams",  
+            "manage-teams",
             "configure-idp",
             "set-up-scim-provisioning",
             "manage-domains",
@@ -185,7 +211,11 @@ module.exports = {
         {
           type: "category",
           label: "Deployments",
-          items: ["deployment-api-tokens", "authorize-deployments-to-your-cloud", "transfer-a-deployment"],
+          items: [
+            "deployment-api-tokens",
+            "authorize-deployments-to-your-cloud",
+            "transfer-a-deployment",
+          ],
         },
         {
           type: "category",
@@ -199,22 +229,23 @@ module.exports = {
             "create-dedicated-cluster",
             "authorize-workspaces-to-a-cluster",
             "resource-reference-hosted",
-            {
-              type: "category",
-              label: "Connect to external resources",
-              link: {
-                type: 'generated-index',
-                title: 'Connect clusters',
-                description: 'Connect Astro to your existing cloud resources.'
-              },
-              items: ["connect-aws", "connect-azure", "connect-gcp"],
-            },
           ],
+        },
+        {
+          type: "category",
+          label: "Networking",
+          items: [
+            "networking-overview",
+            "connect-aws",
+            "connect-azure",
+            "connect-gcp"
+        ],
         },
         {
           type: "category",
           label: "Organization",
           items: [
+            "organization-settings",
             "organization-api-tokens",
           ],
         },
@@ -312,6 +343,18 @@ module.exports = {
         "astro-glossary"
       ],
     },
+    {
+      type: 'category',
+      label: 'Use cases',
+      link: {
+        type: 'generated-index',
+        title: 'Use cases',
+        description: 'Best practices and example use cases on Astro.'
+      },
+      items: [
+        'astro-use-case/use-case-astro-connections',
+      ],
+    },
   ],
   cli: [
     {
@@ -354,7 +397,11 @@ module.exports = {
       label: "Advanced",
       items: [
         "cli/configure-cli",
+        "cli/customize-dockerfile",
+        "cli/private-python-packages",
         "cli/authenticate-to-clouds",
+        "cli/airflowignore",
+        "cli/release-lifecycle-policy"
       ],
     },
     {
@@ -366,6 +413,11 @@ module.exports = {
         {
           type: "category",
           label: "astro config",
+          link: {
+            type: 'generated-index',
+            title: "astro config command reference",
+            description: 'Use `astro config` commands to configure how the Astro CLI behaves in your local environment.'
+          },
           items: [
             'cli/astro-config-get',
             'cli/astro-config-set',
@@ -374,6 +426,11 @@ module.exports = {
         {
           type: "category",
           label: "astro context",
+          link: {
+            type: 'generated-index',
+            title: "astro context command reference",
+            description: 'Use `astro context` commands to switch between Astronomer product types.'
+          },
           items: [
             'cli/astro-context-delete',
             'cli/astro-context-list',
@@ -384,6 +441,11 @@ module.exports = {
         {
           type: "category",
           label: "astro deployment",
+          link: {
+            type: 'generated-index',
+            title: "astro workspace command reference",
+            description: 'Use `astro deployment` commands to manage all details about Deployments, including Deployment resources, Airflow objects, and Astro Runtime versioning.'
+          },
           items: [
             'cli/astro-deployment-airflow-upgrade',
             {
@@ -464,6 +526,11 @@ module.exports = {
         {
           type: "category",
           label: "astro organization",
+          link: {
+            type: 'generated-index',
+            title: "astro organization command reference",
+            description: 'Use `astro organization` commands to manage users and their Organization-level permissions.'
+          },
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
@@ -481,12 +548,17 @@ module.exports = {
             "cli/astro-organization-user-invite",
             "cli/astro-organization-user-list",
             "cli/astro-organization-user-update",
-            
+
           ],
         },
         {
           type: "category",
           label: "astro registry",
+          link: {
+            type: 'generated-index',
+            title: "astro registry command reference",
+            description: 'Use `astro registry` commands to pull resources from the Astronomer Registry into your Astro project.'
+          },
           items: [
             "cli/astro-registry-dag-add",
             "cli/astro-registry-provider-add"
@@ -499,6 +571,11 @@ module.exports = {
         {
           type: "category",
           label: "astro workspace",
+          link: {
+            type: 'generated-index',
+            title: "astro workspace command reference",
+            description: 'Use `astro workspace` commands to manage Workspaces and Workspace-level user permissions.'
+          },
           items: [
             "cli/astro-workspace-create",
             "cli/astro-workspace-delete",

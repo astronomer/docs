@@ -24,6 +24,15 @@ This guide is based on the latest version of the Astro SDK. If you're using an e
 
 :::
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Astro: SDK](https://academy.astronomer.io/astro-runtime-sdk) module.
+- Webinar: [Simplified DAG authoring with the Astro SDK](https://www.astronomer.io/events/webinars/simplified-dag-authoring-with-the-astro-sdk/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of Airflow decorators. See [Introduction to Airflow Decorators guide](airflow-decorators.md).
@@ -60,7 +69,7 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
     AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
     ```
 
-3. Optional. Create an [Airflow connection](connections.md) to the database where you want to store the temporary tables created by the Astro SDK. Set the following environment variables to configure your database as an Astro SDK storage backend. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
+3. (Optional) Create an [Airflow connection](connections.md) to the database where you want to store the temporary tables created by the Astro SDK. Set the following environment variables to configure your database as an Astro SDK storage backend. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
 
     ```text
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID='<your-database-connection-id>'
@@ -173,7 +182,7 @@ Since there is no way to pass results from the [`SnowflakeOperator`](https://reg
 
 ### Transform data
 
-The third step in the pipeline is transforming the data. The transformations required for this pipeline are easier to implement in Python than in SQL. With the Astro Python SDK, you can run a transformation in Python with the `dataframe` function, meaning that you don't need to explicitly convert the results of your previous task to a Pandas DataFrame. You can then write output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you don't have to worry about storing the data in XCom.
+The third step in the pipeline is transforming the data. The transformations required for this pipeline are easier to implement in Python than in SQL. With the Astro Python SDK, you can run a transformation in Python with the `dataframe` function, meaning that you don't need to explicitly convert the results of your previous task to a pandas DataFrame. You can then write output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you don't have to worry about storing the data in XCom.
 
 ```python
 @aql.dataframe
@@ -222,7 +231,7 @@ load_transformed_data = S3ToSnowflakeOperator(
 )
 ```
 
-Transitioning between Python to complete the transformation and SQL to load the results back to Snowflake requires extra boilerplate code to explicitly make the conversions. You also have to use a S3 as intermediary storage for the results and implement another `S3ToSnowflakeOperator` to load them, because there is no traditional operator to load data from a Pandas dataframe directly to Snowflake.
+Transitioning between Python to complete the transformation and SQL to load the results back to Snowflake requires extra boilerplate code to explicitly make the conversions. You also have to use a S3 as intermediary storage for the results and implement another `S3ToSnowflakeOperator` to load them, because there is no traditional operator to load data from a pandas DataFrame directly to Snowflake.
 
 Overall, your DAG with the Astro Python SDK is shorter, simpler to implement, and easier to read. This allows you to implement even more complicated use cases easily while focusing on the movement of your data.
 

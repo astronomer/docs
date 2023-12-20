@@ -10,7 +10,7 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md)
 - Adding batches of users to a Workspace in a CI/CD pipeline. See [Add a group of users to Astro using the Astro CLI](manage-workspace-users.md#add-a-group-of-users-to-a-workspace-using-the-astro-cli).
 - Creating preview Deployments whenever you create a feature branch in your Astro project Git repository. 
-- Performing Deployment-level actions on any Deployment in a Workspace, such as deploying code or making calls to the Airflow rest API. Workspace API tokens can complete the same actions as Deployment API keys for any Deployment in the Workspace. 
+- Performing Deployment-level actions on any Deployment in a Workspace, such as deploying code or making calls to the Airflow rest API. Workspace API tokens can complete the same actions as Deployment API tokens for any Deployment in the Workspace. 
 
 ## Workspace API token types
 

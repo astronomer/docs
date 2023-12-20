@@ -17,6 +17,15 @@ In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://a
 
 Snowpark requires Python 3.8, while the [Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator can run your Snowpark query in a Python 3.8 virtual environment, allowing you to use a different Python version for your task than in the Airflow environment. You can use these same general steps for any use case for running a task in a reusable Python virtual environment.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: The ExternalPythonOperator](https://academy.astronomer.io/astro-runtime-the-externalpythonoperator) module.
+- Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately one hour to complete.
@@ -31,7 +40,7 @@ To get the most out of this tutorial, you should be familiar with:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://signup.snowflake.com/) for 30 days. 
+- A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://trial.snowflake.com/?owner=SPN-PID-365384) for 30 days. 
 
 ## Step 1: Set up your data stores
 
@@ -198,5 +207,5 @@ Go to the Airflow UI, unpause your `py_virtual_env` DAG, and trigger it to run y
 Airflow has several other options for running tasks in isolated environments:
 
 - [The KubernetesPodOperator](https://docs.astronomer.io/learn/kubepod-operator). This operator is ideal for users who are running Airflow on Kubernetes and want more control over the resources and infrastructure used to run the task in addition to package management. Downsides include more complex setup and higher task latency.
-- [The PythonVirtualenvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator). This operator works similarly to the ExternalPythonOperator, but it creates and destroys a new virtual environment for each task. This operator is ideal if you don't want to persist your virtual environment. Downsides include higher task latency since the environment must be created each time the task is run.
+- [The PythonVirtualenvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator). This operator works similarly to the ExternalPythonOperator, but it can create new virtual environments for each task. By default, the virtual environments are destroyed after the task succeeds unless a `venv_cache_path` is specified. This operator is ideal if you need to create your virtual environment on an ad-hoc basis or do not need your environment to persist. Downsides include higher task latency when the environment is created from scratch each time the task is run.
 - [The ExternalBranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.ExternalBranchPythonOperator) (available in Airflow 2.7+). This operator is an extension of the ExternalPythonOperator and allows you to run a [branching](airflow-branch-operator.md) task in a virtual environment.

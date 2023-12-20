@@ -68,7 +68,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
                     sh '''
                     curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
                     tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
-                    ./astro deploy
+                    ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID
                     '''
                 }
             }
@@ -109,11 +109,11 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
                     script {
                         if (env.GIT_BRANCH == 'main') {
                             echo "The git branch is ${siteVariables.jenkinsenv}";
-                            env.ASTRONOMER_API_TOKEN = env.PROD_ASTRONOMER_API_TOKEN;
+                            env.ASTRO_API_TOKEN = env.PROD_ASTRO_API_TOKEN;
                             env.ASTRONOMER_DEPLOYMENT_ID = env.PROD_DEPLOYMENT_ID;
                         } else if (env.GIT_BRANCH == 'dev') {
                             echo "The git branch is ${siteVariables.jenkinsenv}";
-                            env.ASTRONOMER_API_TOKEN = env.DEV_ASTRONOMER_API_TOKEN;
+                            env.ASTRO_API_TOKEN = env.DEV_ASTRO_API_TOKEN;
                             env.ASTRONOMER_DEPLOYMENT_ID = env.DEV_DEPLOYMENT_ID;
                         } else {
                             echo "This git branch ${siteVariables.jenkinsenv} is not configured in this pipeline."
@@ -127,7 +127,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
                     sh '''
                     curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
                     tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
-                    ./astro deploy
+                    ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID
                     '''
                 }
             }
@@ -178,7 +178,7 @@ If your Astro project requires additional build-time arguments to build an image
                     docker build -f Dockerfile --progress=plain --build-arg <your-build-arguments> -t ${siteVariables.jenkinsenv4} .
                     curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
                     tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
-                    ./astro deploy --image-name ${siteVariables.jenkinsenv4}
+                    ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID --image-name ${siteVariables.jenkinsenv4}
                     '''
                 }
             }
@@ -230,9 +230,9 @@ Use the following template to implement DAG-only deploys to a single Deployment 
                     files=($(git diff-tree HEAD --name-only --no-commit-id))
                     find="dags"
                     if [[ ${siteVariables.jenkinsenv1} =~ (^|[[:space:]])"$find"($|[[:space:]]) && ${siteVariables.jenkinsenv2} -eq 1 ]]; then
-                    ./astro deploy --dags;
+                    ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID --dags;
                     else
-                    ./astro deploy;
+                    ./astro deploy env.ASTRONOMER_DEPLOYMENT_ID;
                     fi
                     '''
                 }

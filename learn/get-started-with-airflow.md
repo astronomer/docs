@@ -17,6 +17,15 @@ After you complete this tutorial, you'll be able to:
 - Navigate the Airflow UI.
 - Use code from the Astronomer Registry.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
+- Webinar: [Airflow 101: How to get started writing data pipelines with Apache Airflow](https://www.astronomer.io/events/webinars/airflow-101-how-to-get-started-writing-data-pipelines-with-apache-airflow/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.
@@ -34,7 +43,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - An integrated development environment (IDE) for Python development, such as [VSCode](https://code.visualstudio.com/).
-- Optional. A local installation of [Python 3](https://www.python.org/downloads/) to improve your Python developer experience.
+- (Optional) A local installation of [Python 3](https://www.python.org/downloads/) to improve your Python developer experience.
 
 ## Step 1: Create an Astro project
 
@@ -154,7 +163,7 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
 2. Open `my-dag.py` in your IDE. Add the required imports for Python packages:
 
     ```python
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.operators.python import PythonOperator
     from airflow.operators.bash import BashOperator
 

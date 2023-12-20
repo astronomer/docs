@@ -55,7 +55,7 @@ You'll first add a static link to the SimpleHttpOperator which goes to the [Mozi
 2. Copy and paste the following DAG code into your file:
 
     ```python
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.providers.http.operators.http import SimpleHttpOperator
     from pendulum import datetime
 

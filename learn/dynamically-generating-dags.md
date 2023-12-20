@@ -34,6 +34,14 @@ As of Airflow 2.3, you can use [dynamic task mapping](dynamic-tasks.md) to write
 
 :::
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Dynamic DAGs](https://academy.astronomer.io/astro-runtime-dynamic-dags).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -92,7 +100,7 @@ def create_dag(dag_id, schedule, dag_number, default_args):
 <TabItem value="traditional">
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.operators.python import PythonOperator
 
 

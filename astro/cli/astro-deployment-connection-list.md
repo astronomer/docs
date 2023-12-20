@@ -2,8 +2,9 @@
 sidebar_label: "astro deployment connection list"
 title: "astro deployment connection list"
 id: astro-deployment-connection-list
-description: Reference documentation for astro deployment connection list.
+description: List Airflow connections in a Deployment.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 List the Airflow connections stored in a Deployment's metadata database. 
@@ -23,6 +24,13 @@ This command only lists Airflow connections that were configured through the Air
 | `-d`,`--deployment-id`           |    The ID of the Deployment for which to list connections                                                | Any valid Deployment ID |
 | `--deployment-name` | The name of the Deployment for which to list connections. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
 | `-w`,`--workspace-id`          | List connections for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed           | Any valid Workspace ID                                                         |
+
+## Output
+
+| Output  | Description                                       | Data Type |
+| ------- | ------------------------------------------------- | --------- |
+| `CONNECTION ID`  | The ID you assigned to the connection.                     | String    |
+| `CONN TYPE` | The Airflow connection type. | String    |
 
 ## Examples
 

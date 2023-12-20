@@ -18,6 +18,15 @@ The _TaskFlow API_ is a functional API for using decorators to define DAGs and t
 
 In this guide, you'll learn about the benefits of decorators and the decorators available in Airflow. You'll also review an example DAG and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Taskflow API](https://academy.astronomer.io/astro-runtime-taskflow) module.
+- Webinar: [Writing Functional DAGs with Decorators](https://www.astronomer.io/events/webinars/writing-functional-dags-with-decorators/).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -63,7 +72,7 @@ In the context of Airflow, decorators contain more functionality than this simpl
 
 The purpose of the TaskFlow API in Airflow is to simplify the DAG authoring experience by eliminating the boilerplate code required by traditional operators. The result can be cleaner DAG files that are more concise and easier to read.
 
-In general, whether you use the TAskFlow API is a matter of your own preference and style. In most cases, a TaskFlow decorator and the corresponding traditional operator will have the same functionality. You can also [mix decorators and traditional operators](#mixing-taskflow-decorators-with-traditional-operators) within a single DAG.
+In general, whether you use the TaskFlow API is a matter of your own preference and style. In most cases, a TaskFlow decorator and the corresponding traditional operator will have the same functionality. You can also [mix decorators and traditional operators](#mixing-taskflow-decorators-with-traditional-operators) within a single DAG.
 
 ## How to use the TaskFlow API
 
@@ -316,15 +325,18 @@ The Astro Python SDK offers much more functionality that greatly simplifies DAG 
 
 There are several decorators available to use with Airflow. This list provides a reference of currently available decorators:
 
-- DAG decorator (`@dag()`), which creates a DAG
-- TaskGroup decorator (`@task_group()`), which creates a [TaskGroup](task-groups.md)
-- Task decorator (`@task()`), which creates a Python task
-- Python Virtual Env decorator (`@task.virtualenv()`), which runs your Python task in a [virtual environment](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/)
-- Docker decorator (`@task.docker()`), which creates a [DockerOperator](https://registry.astronomer.io/providers/apache-airflow-providers-docker/versions/latest/modules/DockerOperator) task
-- [Short circuit decorator](airflow-branch-operator.md#taskshortcircuit-and-shortcircuitoperator) (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False
-- [Branch decorator](airflow-branch-operator.md#taskbranch-and-branchpythonoperator) (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
-- Kubernetes pod decorator (`@task.kubernetes()`), which runs a [KubernetesPodOperator](kubepod-operator.md) task
+- DAG decorator (`@dag()`), which creates a DAG.
+- TaskGroup decorator (`@task_group()`), which creates a [TaskGroup](task-groups.md).
+- Task decorator (`@task()`), which creates a Python task.
+- Python Virtual Env decorator (`@task.virtualenv()`), which runs your Python task in a [virtual environment](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
+- Docker decorator (`@task.docker()`), which creates a [DockerOperator](https://registry.astronomer.io/providers/apache-airflow-providers-docker/versions/latest/modules/DockerOperator) task.
+- [Short circuit decorator](airflow-branch-operator.md#taskshortcircuit-and-shortcircuitoperator) (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False.
+- [Branch decorator](airflow-branch-operator.md#taskbranch-and-branchpythonoperator) (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition.
+- [BranchExternalPython decorator](airflow-branch-operator.md#other-branch-operators) (`@task.branch_external_python`), which creates a branch in your DAG running Python code in a pre-existing virtual environment.
+- [BranchPythonVirtualenvOperator](airflow-branch-operator.md#other-branch-operators) (`@task.branch_virtualenv`), which creates a branch in your DAG running Python code in a newly created virtual environment. The environment can be cached by providing a `venv_cache_path`.
+- Kubernetes pod decorator (`@task.kubernetes()`), which runs a [KubernetesPodOperator](kubepod-operator.md) task.
 - [Sensor decorator](what-is-a-sensor.md#sensor-decorator) (`@task.sensor()`), which turns a Python function into a sensor. This sensor was introduced in Airflow 2.5.
 - [Astro Python SDK decorators](https://github.com/astronomer/astro-sdk), which simplify writing ETL/ELT DAGs.
+- [PySpark decorator](https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/decorators/pyspark.html) (`@task.pyspark()`), which is injected with a SparkSession and SparkContext object if available.
 
 You can also [create your own custom task decorator](https://airflow.apache.org/docs/apache-airflow/stable/howto/create-custom-decorator.html).

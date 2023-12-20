@@ -34,16 +34,20 @@ profile_config = ProfileConfig(
 DbtTaskGroup(
     project_config=ProjectConfig("path/to/my_project"),
     profile_config=profile_config,
+    default_args={"retries": 2},
 )
 ```
 
-:::info
+:::tip Other ways to learn
 
-If you are already familiar with Airflow and dbt Core and just want to get a project running, clone [this Cosmos use case example repository](https://github.com/astronomer/cosmos-use-case) and run it locally using the Astro CLI.
+There are multiple resources for learning about this topic. See also:
 
-:::
+- Webinar: [Introducing Cosmos: The Easy Way to Run dbt Models in Airflow](https://www.astronomer.io/events/webinars/introducing-cosmos-the-east-way-to-run-dbt-models-in-airflow/).
+- Use case: [ELT with Airflow and dbt Core](use-case-airflow-dbt.md) including a a ready-to-use [example Cosmos project repository](https://github.com/astronomer/cosmos-use-case).
 
 For a tutorial on how to use dbt Cloud with Airflow, see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
+
+:::
 
 ## Why use Airflow with dbt Core?
 
@@ -188,7 +192,14 @@ The DAG you'll write uses Cosmos to create tasks from existing dbt models and th
 
     This DAG uses the `DbtTaskGroup` class from the Cosmos package to create a task group from the models in your dbt project. Dependencies between your dbt models are automatically turned into dependencies between Airflow tasks. Make sure to add your own values for `YOUR_NAME`, `DB_NAME`, and `SCHEMA_NAME`.
     
-    Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed.
+    Using the `vars` keyword in the dictionary provided to the `operator_args` parameter, you can inject variables into the dbt project. This DAG injects `YOUR_NAME` for the `my_name` variable. If your dbt project contains dbt tests, they will be run directly after a model has completed. Note that it is a best practice to set `retries` to at least 2 for all tasks that run dbt models.
+
+:::tip
+
+In some cases, especially in larger dbt projects, you might run into a `DagBag import timeout` error. 
+This error can be resolved by increasing the value of the Airflow configuration [core.dagbag_import_timeout](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dagbag-import-timeout).
+
+:::
 
 3. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
 

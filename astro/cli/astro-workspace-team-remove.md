@@ -2,8 +2,9 @@
 sidebar_label: "astro workspace team remove"
 title: "astro workspace team remove"
 id: astro-workspace-team-remove
-description: Reference documentation for astro workspace team remove.
+description: Remove Teams from a Workspace.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

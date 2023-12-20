@@ -70,7 +70,7 @@ You can host Astro Hybrid clusters in the following AWS regions:
 | `us-west-1`      | US West (N. California)   |
 | `us-west-2`      | US West (Oregon)          |
 
-Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported RDS instance types
 
@@ -118,7 +118,7 @@ The following AWS RDS instance types are supported on Astro:
 - db.m5.16xlarge
 - db.m5.24xlarge
 
-For detailed information about each instance type, see [Amazon RDS Instance Types](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
+For detailed information about each instance type, see [Amazon RDS Instance Types](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported worker node pool instance types
 
@@ -182,7 +182,7 @@ The following table lists all available instance types for worker node pools, as
 | t3.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
 | t3.2xlarge       | 6 CPUs  | 30.5 GiB MEM   |
 
-If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
+If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
 
 :::caution
 

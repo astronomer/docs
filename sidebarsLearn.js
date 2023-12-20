@@ -134,9 +134,14 @@ module.exports = {
         description: 'Step-by-step guides for writing DAGs and running Airflow.'
       },
       items: [
-        'cloud-ide-tutorial',
+        'airflow-listeners',
         'operator-extra-link-tutorial',
         'xcom-backend-tutorial',
+        'pycharm-local-dev',
+        'vscode-local-dev',
+        'example-ms-teams-callback',
+        'cloud-ide-tutorial',
+        'airflow-object-storage-tutorial',
         'airflow-sql-data-quality',
         'astro-python-sdk',
         'external-python-operator',
@@ -167,11 +172,12 @@ module.exports = {
               image: '/img/integrations/azure-data-factory.png'
           },
           items: [
+            'connections/azure-data-factory',
             'airflow-azure-data-factory-integration',
-            'connections/azure-data-factory'
           ],
         },
         'connections/bigquery',
+        'airflow-cohere',
         {
           type: 'category',
           label: 'Databricks',
@@ -182,8 +188,8 @@ module.exports = {
               image: '/img/integrations/databricks.png'
           },
           items: [
-            'airflow-databricks',
             'connections/databricks',
+            'airflow-databricks',
           ],
         },
         {
@@ -196,8 +202,8 @@ module.exports = {
               image: '/img/integrations/dbt.png'
           },
           items: [
-            'airflow-dbt-cloud',
             'connections/dbt-cloud',
+            'airflow-dbt-cloud',
           ],
         },
         'airflow-dbt',
@@ -209,6 +215,11 @@ module.exports = {
         'airflow-mlflow',
         'airflow-mongodb',
         'connections/ms-sqlserver',
+        'airflow-openai',
+        'airflow-opensearch',
+        'airflow-pgvector',
+        'airflow-pinecone',
+        'connections/postgres',
         {
           type: 'category',
           label: 'Redshift',
@@ -219,11 +230,10 @@ module.exports = {
               image: '/img/integrations/redshift.png'
           },
           items: [
+            'connections/redshift',
             'airflow-redshift',
-            'connections/redshift'
           ],
         },
-        'connections/postgres',
         {
           type: 'category',
           label: 'Snowflake',
@@ -234,8 +244,9 @@ module.exports = {
               image: '/img/integrations/snowflake.png'
           },
           items: [
+            'connections/snowflake',
             'airflow-snowflake',
-            'connections/snowflake'
+            'airflow-snowpark',
           ],
         },
         'soda-data-quality',
@@ -246,28 +257,21 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Examples',
+      label: 'Use cases',
       link: {
         type: 'generated-index',
-        title: 'Examples',
-        description: 'See examples of use cases and more with Apache Airflow.'
+        title: 'Use cases',
+        description: 'Example use cases and implementations with Apache Airflow.'
       },
       items: [
-          'pycharm-local-dev',
-          'vscode-local-dev',
-          'example-ms-teams-callback',
-          {
-            type: 'category',
-            label: 'Use cases',
-            items: [
-              'use-case-setup-teardown-data-quality',
-              'use-case-airflow-databricks',
-              'use-case-airflow-dbt',
-              'use-case-elt-ml-finance',
-              'use-case-airflow-ml-datasets',
-              'use-case-airflow-mlflow'
-            ],
-          },
+          'use-case-setup-teardown-data-quality',
+          'use-case-airflow-databricks',
+          'use-case-airflow-dbt',
+          'use-case-elt-ml-finance',
+          'use-case-airflow-llm-rag-finance',
+          'use-case-llm-customer-feedback',
+          'use-case-airflow-ml-datasets',
+          'use-case-airflow-mlflow'
       ],
     },
     'airflow-glossary'

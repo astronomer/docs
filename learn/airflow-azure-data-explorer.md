@@ -38,7 +38,7 @@ To complete this tutorial, you need:
 
 ## Step 1: Configure your ADX cluster to work with Airflow
 
-To allow Airflow to communicate with your ADX database, you need to configure service principal authentication. To do this, create and register an Azure AD service principal, then give that principal permission to access your ADX database. See [Create an Azure Active Directory application registration in Azure Data Explorer](https://docs.microsoft.com/en-us/azure/data-explorer/provision-azure-ad-app) for more details.
+To allow Airflow to communicate with your ADX database, you need to configure service principal authentication. To do this, create and register a Microsoft Entra ID service principal, then give that principal permission to access your ADX database. See [Create a Microsoft Entra ID application registration in Azure Data Explorer](https://learn.microsoft.com/en-us/azure/data-explorer/provision-entra-id-app) for more details.
 
 ## Step 2: Populate your ADX database
 
@@ -91,7 +91,7 @@ Your connection should look similar to this:
 In your Astro project `dags/` folder, create a new file called `adx-pipeline.py`. Paste the following code into the file:
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.providers.microsoft.azure.operators.adx import AzureDataExplorerQueryOperator
 from datetime import datetime, timedelta
 

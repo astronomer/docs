@@ -27,7 +27,7 @@ To complete the installation, you'll:
 - Create a new Google Cloud project.
 - Enable Google Cloud APIs and add an IAM service account that will be used by Astro.
 
-Astronomer support will create infrastructure within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
+Astronomer support will create infrastructure within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Prerequisites
 

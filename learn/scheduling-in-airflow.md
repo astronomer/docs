@@ -11,9 +11,16 @@ id: scheduling-in-airflow
 
 One of the fundamental features of Apache Airflow is the ability to schedule jobs. Historically, Airflow users scheduled their DAGs by specifying a `schedule` with a cron expression, a timedelta object, or a preset Airflow schedule. Timetables, released in Airflow 2.2, allow users to create their own custom schedules using Python, effectively eliminating the limitations of cron. With timetables, you can now schedule DAGs to run at any time. Datasets, introduced in Airflow 2.4, let you schedule your DAGs on updates to a dataset rather than a time-based schedule. For more information about datasets, see [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md).
 
-In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG with a focus on timetables. For a video overview of these concepts, see [Scheduling in Airflow webinar](https://www.astronomer.io/events/webinars/trigger-dags-any-schedule).  
+In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG with a focus on timetables. All code used in this guide is available in the [airflow-scheduling-tutorial repository](https://github.com/astronomer/airflow-scheduling-tutorial).
 
-All code used in this guide is available in the [airflow-scheduling-tutorial repository](https://github.com/astronomer/airflow-scheduling-tutorial).
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: DAG Scheduling](https://academy.astronomer.io/astro-runtime-scheduling) module.
+- Webinar: [Scheduling in Airflow: A Comprehensive Introduction](https://www.astronomer.io/events/webinars/scheduling-in-airflow-comprehensive-intro/).
+
+:::
 
 ## Assumed knowledge
 

@@ -14,9 +14,14 @@ The SQL check operators in the [Common SQL provider](https://registry.astronomer
 
 This tutorial shows how to use three SQL check operators (SQLColumnCheckOperator, SQLTableCheckOperator, and SQLCheckOperator) to build a robust data quality suite for your DAGs.
 
-:::info
+:::tip Other ways to learn
 
-You can find more examples of data quality checks in pipelines in the [data quality demo repository](https://github.com/astronomer/airflow-data-quality-demo/).
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [Implementing Data Quality Checks in Airflow](https://www.astronomer.io/events/webinars/implementing-data-quality-checks-in-airflow/).
+- Webinar: [Efficient data quality checks with Airflow 2.7](https://www.astronomer.io/events/webinars/efficient-data-quality-checks-with-airflow-2-7/).
+- Use case: [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+- Example repository: [data quality demo](https://github.com/astronomer/airflow-data-quality-demo/).
 
 :::
 

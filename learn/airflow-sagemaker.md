@@ -10,6 +10,14 @@ sidebar_custom_props: { icon: 'img/integrations/sagemaker.png' }
 
 This tutorial demonstrates how to orchestrate a full ML pipeline including creating, training, and testing a new SageMaker model. This use case is relevant if you want to automate the model training, testing, and deployment components of your ML pipeline.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Webinar: [Batch Inference with Airflow and SageMaker](https://www.astronomer.io/events/webinars/batch-inference-with-airflow-and-sagemaker/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 60 minutes to complete.
@@ -152,7 +160,7 @@ predictions on the Iris dataset. To use the DAG, add Airflow variables for `role
 then fill in the information directly below with the target AWS S3 locations, and model and training job names.
 """
 import textwrap
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.decorators import task
 from airflow.providers.amazon.aws.operators.sagemaker import SageMakerModelOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook

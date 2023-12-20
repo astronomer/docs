@@ -4,6 +4,7 @@ title: 'astro user create'
 id: astro-user-create
 description: Reference documentation for astro user create.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 :::info 

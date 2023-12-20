@@ -54,6 +54,7 @@ def my_simple_dbt_dag():
         operator_args={
             "vars": '{"my_name": {{ params.my_name }} }',
         },
+        default_args={"retries": 2},
     )
 
     query_table = PostgresOperator(

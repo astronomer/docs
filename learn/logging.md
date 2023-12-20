@@ -98,6 +98,12 @@ If you run Airflow in Docker using the [Astro CLI](https://docs.astronomer.io/so
 
 The Astro CLI includes a command to show webserver, scheduler, triggerer and Celery worker logs from the local Airflow environment. For more information, see [astro dev logs](https://docs.astronomer.io/astro/cli/astro-dev-logs).
 
+:::info
+
+As of Airflow 2.8, logs from other Airflow components, such as the scheduler or executor will be forwarded to the task logs if an error in the component causes the task to fail. For example if a task runs out of memory, causing a [zombie process](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks), information about the zombie is printed to the task logs. You can disable this behavior by setting [`AIRFLOW__LOGGING__ENABLE_TASK_CONTEXT_LOGGER=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-task-context-logger).
+
+:::
+
 ## Add custom task logs from a DAG
 
 All hooks and operators in Airflow generate logs when a task is run. You can't modify logs from within other operators or in the top-level code, but you can add custom logging statements from within your Python functions by accessing the `airflow.task` logger.
@@ -105,7 +111,6 @@ All hooks and operators in Airflow generate logs when a task is run. You can't m
 The advantage of using a logger over print statements is that you can log at different levels and control which logs are emitted to a specific location. For example, by default the `airflow.task` logger is set at the level of `INFO`, which means that logs at the level of `DEBUG` aren't logged. To see `DEBUG` logs when debugging your Python tasks, you  need to set `AIRFLOW__LOGGING__LOGGING_LEVEL=DEBUG` or change the value of `logging_level` in `airflow.cfg`. After debugging, you can change the `logging_level` back to `INFO` without modifying your DAG code.
 
 The following example DAG shows how to instantiate an object using the existing `airflow.task` logger, add logging statements of different severity levels from within a Python function, and what the log output would be with default Airflow logging settings. There are many use cases for adding additional logging statements from within DAGs ranging from logging warnings when a specific set of conditions appear over additional debugging messages to catching exceptions but still keeping a record of them having occurred.
-
 
 <Tabs
     defaultValue="taskflow"
@@ -162,7 +167,7 @@ A full list parameters relating to logging that can be configured in `airflow.cf
 
 For example, to change your logging level from the default `INFO` to `LogRecords` with a level of `ERROR` or above, you set `logging_level = ERROR` in `airflow.cfg` or define an environment variable `AIRFLOW__LOGGING__LOGGING_LEVEL=ERROR`.
 
-Advanced configuration might necessitate the logging config class to be overwritten. To enable custom logging, you need to create the configuration file `~/airflow/config/log_config.py` and specify your modifications to `DEFAULT_LOGGING_CONFIG`. You might need to do this to add a custom handler.
+[Advanced configuration](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/advanced-logging-configuration.html#custom-logger-for-operators-hooks-and-tasks) might necessitate the logging config class to be overwritten. To enable custom logging, you need to create the configuration file `~/airflow/config/log_config.py` and specify your modifications to `DEFAULT_LOGGING_CONFIG`. You might need to do this to add a custom handler.
 
 ## Remote logging
 

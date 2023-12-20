@@ -2,8 +2,9 @@
 sidebar_label: "astro organization user update"
 title: "astro organization user update"
 id: astro-organization-user-update
-description: Reference documentation for astro organization user update.
+description: Update users in your Organization.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 Update user Organization roles in your current Astro Organization.

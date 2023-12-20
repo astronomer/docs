@@ -4,6 +4,7 @@ title: 'astro login'
 id: astro-login
 description: Reference documentation for astro login.
 hide_table_of_contents: true
+sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
 import Tabs from '@theme/Tabs';

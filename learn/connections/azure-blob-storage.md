@@ -100,9 +100,9 @@ Complete the following steps to retrieve these values:
 
 1. In your Azure portal, open your storage account.
 2. Follow [Azure documentation](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-get-info?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json&tabs=portal#get-service-endpoints-for-the-storage-account) to copy your **Blob Service URL**. It should be in the format `https://mystorageaccount.blob.core.windows.net/`.
-3. Open your Azure AD application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
-4. [Create a new client secret](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
-5. [Assign](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) role to your app so that Airflow can access blob objects in your storage account.
+3. Open your Microsoft Entra ID application. Then, from the **Overview** tab, copy the **Application (client) ID** and **Directory (tenant) ID**.
+4. [Create a new client secret](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#option-3-create-a-new-application-secret) for your application to be used in the Airflow connection. Copy the **VALUE** of the client secret that appears.
+5. [Assign](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal#assign-a-role-to-the-application) the [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) role to your app so that Airflow can access blob objects in your storage account.
 
 </TabItem>
 </Tabs>

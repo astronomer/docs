@@ -13,6 +13,12 @@ Use this guide to get started with Astro, the best place to run Apache Airflow.
 
 Go to [Try Astro](https://www.astronomer.io/try-astro/) to activate your free 14-day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
 
+:::tip
+
+If your company uses Azure, Astronomer recommends installing Astro through the Azure marketplace. The Astro Azure Native ISV service includes the same 14-day trial, and you can automatically invite users from your team through the built-in Azure AD integration. See [Install Astro from the Azure Marketplace](install-azure.md).
+
+:::
+
 ## Create an Organization and Workspace
 
 After you've created your Astro user account, you'll be asked to create an Organization and your first Workspace. 
