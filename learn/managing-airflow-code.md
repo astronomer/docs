@@ -2,12 +2,8 @@
 title: "Manage Airflow code"
 sidebar_label: "Manage Airflow code"
 id: managing-airflow-code
+description: "Learn best practices for Airflow project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects."
 ---
-
-<head>
-  <meta name="description" content="Learn best practices for Airflow project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects." />
-  <meta name="og:description" content="Learn best practices for Airflow project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects." />
-</head>
 
 One of the tenets of Apache Airflow is that pipelines are defined as code. This allows you to treat your pipelines as you would any other piece of software and use best practices such as version control and CI/CD. As you scale the use of Airflow within your organization, it becomes important to manage your Airflow code in a way that is organized and sustainable.
 

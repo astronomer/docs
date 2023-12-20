@@ -3,12 +3,8 @@ title: "An introduction to the Airflow UI"
 sidebar_label: "The Airflow UI"
 description: "An overview of the Airflow UI"
 id: airflow-ui
+description: "Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations."
 ---
-
-<head>
-  <meta name="description" content="Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations." />
-  <meta name="og:description" content="Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations." />
-</head>
 
 One of the main features of Airflow is its [user interface (UI)](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), which provides insights into your DAGs and DAG runs. The UI is essential for understanding, monitoring, and troubleshooting your pipelines.
 

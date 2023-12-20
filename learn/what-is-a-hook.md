@@ -2,12 +2,8 @@
 title: "Airflow hooks"
 sidebar_label: "Hooks"
 id: what-is-a-hook
+description: "Learn about hooks and how they should be used in Apache Airflow. See an example of implementing two different hooks in a DAG."
 ---
-
-<head>
-  <meta name="description" content="Learn about hooks and how they should be used in Apache Airflow. See an example of implementing two different hooks in a DAG." />
-  <meta name="og:description" content="Learn about hooks and how they should be used in Apache Airflow. See an example of implementing two different hooks in a DAG." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

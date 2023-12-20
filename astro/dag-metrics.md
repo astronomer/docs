@@ -2,12 +2,8 @@
 sidebar_label: 'DAGs'
 title: 'View metrics for DAGs'
 id: dag-metrics
+description: "Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting."
 ---
-
-<head>
-  <meta name="description" content="Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting." />
-  <meta name="og:description" content="Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting." />
-</head>
 
 The **DAGs** page in the Cloud UI lets you view and manage each DAG running on your Workspace, as well as find detailed information about your DAG and its code. These summary and detailed metrics allow you to see information such as the outcomes of your DAG runs and DAG's code. You can use this to check your DAG's performance, debug issues in your DAG code and schedule, and confirm your DAG alerts have been configured correctly.
 

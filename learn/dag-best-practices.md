@@ -2,12 +2,8 @@
 title: "DAG writing best practices in Apache Airflow"
 sidebar_label: "DAG writing best practices"
 id: dag-best-practices
+description: "Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration."
 ---
-
-<head>
-  <meta name="description" content="Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration." />
-  <meta name="og:description" content="Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

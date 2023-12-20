@@ -3,12 +3,8 @@ title: "Orchestrate dbt Cloud jobs with Airflow"
 sidebar_label: "Tutorial"
 id: airflow-dbt-cloud
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
+description: "Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Airflow."
 ---
-
-<head>
-  <meta name="description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Airflow." />
-  <meta name="og:description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Airflow." />
-</head>
 
 import CodeBlock from '@theme/CodeBlock';
 import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cloud/airflow_dbt_simple.py';

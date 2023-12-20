@@ -2,12 +2,8 @@
 sidebar_label: 'Release notes'
 title: 'Astro CLI release notes'
 id: release-notes
+description: "A record of the latest Astro command-line interface (CLI) features and bug fixes."
 ---
-
-<head>
-  <meta name="description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
-  <meta name="og:description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
-</head>
 
 <p>
     <a href="/astro-cli-release-notes.xml" target="_blank">

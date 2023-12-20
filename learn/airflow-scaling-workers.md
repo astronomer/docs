@@ -2,12 +2,8 @@
 title: "Scaling Airflow to optimize performance"
 sidebar_label: "Scaling Airflow"
 id: airflow-scaling-workers
+description: "See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings."
 ---
-
-<head>
-  <meta name="description" content="See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings." />
-  <meta name="og:description" content="See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

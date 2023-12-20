@@ -2,12 +2,8 @@
 title: "Manage Airflow DAG notifications"
 sidebar_label: "DAG notifications"
 id: error-notifications-in-airflow
+description: Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs.
 ---
-
-<head>
-  <meta name="description" content="Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs." />
-  <meta name="og:description" content="Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

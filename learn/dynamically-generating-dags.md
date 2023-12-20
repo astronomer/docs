@@ -2,12 +2,8 @@
 title: "Dynamically generate DAGs in Airflow"
 sidebar_label: "Dynamically generate DAGs"
 id: dynamically-generating-dags
+description: "Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods."
 ---
-
-<head>
-  <meta name="description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
-  <meta name="og:description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

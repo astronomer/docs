@@ -2,12 +2,8 @@
 title: "Airflow task groups"
 sidebar_label: "Task groups"
 id: task-groups
+description: "Follow Astronomer’s step-by-step guide to use task groups for organizing tasks within the grid view of the Airflow user interface."
 ---
-
-<head>
-  <meta name="description" content="Follow Astronomer’s step-by-step guide to use task groups for organizing tasks within the grid view of the Airflow user interface." />
-  <meta name="og:description" content="Follow Astronomer’s step-by-step guide to to use task groups for organizing tasks within the grid view of the Airflow user interface." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

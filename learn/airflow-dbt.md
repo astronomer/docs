@@ -3,12 +3,8 @@ title: "Orchestrate dbt Core jobs with Airflow and Cosmos"
 sidebar_label: "dbt Core"
 id: airflow-dbt
 sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
+descriptions: "Learn how to use Cosmos to orchestrate dbt Core jobs with Airflow."
 ---
-
-<head>
-  <meta name="description" content="Learn how to use Cosmos to orchestrate dbt Core jobs with Airflow." />
-  <meta name="og:description" content="Learn how to use Cosmos to orchestrate dbt Core jobs with Airflow." />
-</head>
 
 import CodeBlock from '@theme/CodeBlock';
 import cosmos_dag from '!!raw-loader!../code-samples/dags/airflow-dbt/cosmos_dag.py';

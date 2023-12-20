@@ -2,12 +2,8 @@
 sidebar_label: 'Upgrade Astro Runtime'
 title: 'Upgrade Astro Runtime'
 id: upgrade-runtime
+description: "Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available."
 ---
-
-<head>
-  <meta name="description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
-  <meta name="og:description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
-</head>
 
 import {siteVariables} from '@site/src/versions';
 

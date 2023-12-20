@@ -2,12 +2,8 @@
 title: "Test Airflow DAGs"
 sidebar_label: "Test DAGs"
 id: testing-airflow
+description: "Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing."
 ---
-
-<head>
-  <meta name="description" content="Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing." />
-  <meta name="og:description" content="Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

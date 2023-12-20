@@ -2,12 +2,8 @@
 sidebar_label: 'Install the CLI'
 title: 'Install the Astro CLI'
 id: install-cli
+description: "Instructions for installing, upgrading, and uninstalling the Astro command-line interface (CLI)."
 ---
-
-<head>
-  <meta name="description" content="Instructions for installing, upgrading, and uninstalling the Astro command-line interface (CLI). The Astro CLI lets you get started with Apache Airflow quickly and it can be used with all Astronomer products." />
-  <meta name="og:description" content="The Astro CLI helps you get started with writing DAGs and running Apache Airflow on your local machine. Learn how to install, upgrade, and uninstall the Astro CLI. " />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
