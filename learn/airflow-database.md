@@ -30,7 +30,6 @@ Airflow uses SQLAlchemy and Object Relational Mapping (ORM) in Python to connect
 
 - Postgres
 - MySQL
-- MSSQL
 - SQLite
 
 While SQLite is the default on Apache Airflow, Postgres is by far the most common choice and is recommended for most use cases by the Airflow community. Astronomer uses Postgres for all of its Airflow environments, including local environments running with the Astro CLI and deployed environments on the cloud.
