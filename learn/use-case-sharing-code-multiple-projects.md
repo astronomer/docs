@@ -1,13 +1,13 @@
 ---
 title: "How to share code between multiple Airflow projects"
-description: "In this page we elaborate on various ways to reuse and share code between multiple projects, and explain the pros and cons of each solution."
+description: "A description of the various ways to reuse and share code between multiple projects, with pros and cons of each solution."
 id: sharing-code-multiple-projects
 sidebar_label: "Sharing code between multiple projects"
 ---
 
 Imagine you've [set up an Astro project](https://docs.astronomer.io/astro/cli/develop-project), you're getting into the flow of implementing some pipelines, you're extracting several Python functions for reusability, and things are scaling up. You've now got multiple Airflow deployments, but how do you reuse code between your projects? In this guide, you'll learn about various options for reusing code and their pros and cons.
 
-Specifically, this guide demonstrates three options, sorted from simple implementation but poor reusability to comprehensive implementation but excellent reusability:
+Specifically, this guide demonstrates three options, ordered from simple implementation, but poor reusability, to comprehensive implementation, but excellent reusability:
 
 | Solution                                                 | When to use                                                               |
 |----------------------------------------------------------|---------------------------------------------------------------------------|
@@ -43,7 +43,7 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
 ```
 
 ## Shared Python code in same file
-The example code above performs the same business logic twice. Both functions instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If you continue copy-pasting these functions for running more queries, you would end up having X copies of the same business logic, which also requires X code changes when you want to modify the database connection logic. 
+The previous code example performs the same business logic twice. Both functions instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If you continue copy-pasting these functions for running more queries, you have multiple copies of the same business logic, which also requires multiple code changes when you want to modify the database connection logic. 
 
 To reduce this maintenance burden, and have only one way of querying the database, you can extract the code into a single function within the same DAG file:
 
@@ -55,7 +55,7 @@ def query_db(query):
     return result
 ```
 
-This function takes an argument `query`, and the database connection logic is only defined once regardless what query is given. This way you don't have to maintain the same business logic in multiple places anymore. To use this function, you reference it in your DAG script:
+This function takes an argument `query`, and the database connection logic is only defined once, regardless what query is given. This way you don't have to maintain the same business logic in multiple places anymore. To use this function, reference it in your DAG script:
 
 ```python
 import datetime
@@ -107,21 +107,23 @@ The benefit of this solution is that the `query_db` function can be imported fro
 
 ## Shared Python code in Python package in separate project
 
-In some cases you may have code that needs to be shared across different Airflow deployments, like if you're onboarding multiple teams to the Astronomer platform and each team has their own code repository. This means you can't reuse the code in the `/include` folder, because it resides in a different Git repository.
+In some cases, you might have code that needs to be shared across different Airflow deployments. For example, if you're onboarding multiple teams to the Astronomer platform and each team has their own code repository. This means you can't reuse the code in the `/include` folder, because it resides in a different Git repository.
 
 To reuse code over multiple projects, you need to store it in a separate Git repository which can be reused by multiple projects. The best way to do this is to create your own Python package from the repository you want to be available to multiple projects. This takes a bit more work to set up, but enables multiple teams using multiple Git repositories to maintain a single source of code. You can see an example Python package in [this repo](https://github.com/astronomer/custom-package-demo). 
 
-The number of options for developing, building, and releasing a Python package are limitless and this guide only provides general guidance. See https://docs.python-guide.org/writing/structure and https://packaging.python.org/en/latest/tutorials/packaging-projects for more information on Python packaging. Setting up a custom Python package requires roughly the following steps:
+The number of options for developing, building, and releasing a Python package are limitless and this guide only provides general guidance. See [**Structuring your project**](https://docs.python-guide.org/writing/structure) and [**Packaging Python projects**](https://packaging.python.org/en/latest/tutorials/packaging-projects) for more information on Python packaging. 
 
-1. First, create a separate Git repository for your shared code.
+Setting up a custom Python package requires roughly the following steps:
+
+1. Create a separate Git repository for your shared code.
 2. Write a `pyproject.toml` file. This is a configuration file which contains the build requirements of your Python project. You can find an example [here](https://github.com/astronomer/custom-package-demo/blob/main/pyproject.toml).
 3. Create a folder for your code, e.g. `my_company_airflow`.
 4. Create a folder for tests, e.g. `tests`.
-5. Create a CI/CD pipeline to test, build, and release your package. You can see an example GitHub Actions workflow [here](https://github.com/astronomer/custom-package-demo/tree/main/.github/workflows).
+5. Create a CI/CD pipeline to test, build, and release your package. You can see an example GitHub Actions workflow in the [custom package demo](https://github.com/astronomer/custom-package-demo/tree/main/.github/workflows).
 6. Ensure your setup works correctly by building and releasing a first version of the package.
 7. Validate the package by installing it in a project via the `requirements.txt` file.
 
-After completing the above steps, you can now add shared code to the Python package so that other projects can use it. The code example must be added in a module in your Python package, for example `my_company_airflow/db.py`:
+After completing the preceding steps, you can now add shared code to the Python package so that other projects can use it. The code example must be added in a module in your Python package, for example `my_company_airflow/db.py`:
 
 ```python
 def query_db(query):
@@ -146,13 +148,13 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
     PythonOperator(task_id="get_purchases", python_callable=query_db, op_kwargs={"query": "SELECT customer_id, string_agg(store_id, ',') FROM customers GROUP BY customer_id"})
 ```
 
-The steps above describe roughly how to set up a Python package, but your process may differ depending on your setup and how your organization manages code. In general, these are some key pointers/considerations for setting up a custom Python package:
+The previous steps describe roughly how to set up a Python package, but your process might differ depending on your setup and how your organization manages code. In general, these are some key pointers and considerations for setting up a custom Python package:
 
-- Think about how you will distribute the Python package. Do you require/have an internal repository for storing Python packages such as [Artifactory](https://jfrog.com/artifactory) or [devpi](https://www.devpi.net)?
+- Think about how you distribute the Python package. Do you require/have an internal repository for storing Python packages such as [Artifactory](https://jfrog.com/artifactory) or [devpi](https://www.devpi.net)?
 - Determine who is responsible for maintaining the shared Git repository.
-- Set developments standards from the beginning (e.g. Flake8 linting and Black formatting).
+- Set developments standards from the beginning, such as Flake8 linting and Black formatting.
 - Ensure the end-to-end CI/CD pipeline works first, then start developing application code.
 
 ## Planning for the future
 
-This guide demonstrates several solutions for sharing code, from code in a single file to code across multiple Git repositories. If you're currently only deploying from a single Git repository to the Astronomer platform, but plan for multiple teams in the future, we advise you start with shared code in a separate Git repository from the start. Setting standards and best practices from the beginning is easier than introducing changes in hindsight.
+This guide demonstrates several solutions for sharing code, from code in a single file to code across multiple Git repositories. If you're currently only deploying from a single Git repository to the Astronomer platform, but plan for multiple teams in the future, we advise you start with shared code in a separate Git repository. Setting standards and best practices from the beginning is easier than introducing changes in hindsight.
