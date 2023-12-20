@@ -1,7 +1,6 @@
 ---
 title: "An introduction to the Airflow UI"
 sidebar_label: "The Airflow UI"
-description: "An overview of the Airflow UI"
 id: airflow-ui
 description: "Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations."
 ---
