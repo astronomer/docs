@@ -281,5 +281,5 @@ An alternative to using `airflow.cfg` is to set Airflow environment variables in
 
 For more advanced project configurations, see:
 
-- [Customize your Astro project Dockerfile](cli/customize-your-astro-project-dockerfile.md)
+- [Customize your Astro project Dockerfile](cli/customize-dockerfile.md)
 - [Install Python packages from private sources](cli/private-python-packages.md)
