@@ -8,18 +8,18 @@ sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 
 ![A screenshot of the streamlit application created in this use case that shows the customer analytics dashboard](/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_streamlitdashboardss1.png)
 
-[Snowpark ML](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) (in public preview) is a Python framework for creating Machine Learning workloads with [Snowpark](https://docs.snowflake.com/en/developer-guide/snowpark/python/index.html). Currently Snowpark ML provides a model registry that 
-* stores ML tracking data and models in Snowflake tables and stages
-* feature engineering primitives similar to scikit-learn, such as LabelEncoder, OneHotEncoder, and support for training and deploying [certain model types](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling#snowpark-ml-modeling-classes)
-* deployments as user-defined functions (UDFs)
+[Snowpark ML](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index), a Snowflake Public Preview feature, is a Python framework for creating Machine Learning workloads with [Snowpark](https://docs.snowflake.com/en/developer-guide/snowpark/python/index.html). Currently Snowpark ML provides a model registry that 
+* Stores ML tracking data and models in Snowflake tables and stages
+* Feature engineering primitives similar to scikit-learn, such as LabelEncoder, OneHotEncoder, and support for training and deploying [certain model types](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling#snowpark-ml-modeling-classes)
+* Deployments as user-defined functions (UDFs)
 
-This [use case](https://docs.astronomer.io/learn/airflow-snowpark) demonstrates how to use Apache Airflow to orchestrate a machine learning pipeline with the Snowpark provider and Snowpark ML for feature engineering and model tracking. While Snowpark ML has its own support for models similar to scikit-learn, this code demonstrates a "bring-your-own" model approach. Instead of working with a Snowpark user-defined function (UDF),  this code shows how to use open-source scikit-learn along with both the Snowpark ML model registry and model serving in an Airflow task.  
+This [use case](https://docs.astronomer.io/learn/airflow-snowpark) demonstrates how to use Apache Airflow to orchestrate a machine learning pipeline with the Snowpark provider and Snowpark ML for feature engineering and model tracking. While Snowpark ML has its own support for models similar to [Scikit-Learn](https://scikit-learn.org/stable/), this code demonstrates a "bring-your-own" model approach. Instead of working with a Snowpark user-defined function (UDF),  this code shows how to use open-source Scikit-Learn along with both the Snowpark ML model registry and model serving in an Airflow task.  
 
 ![A screenshot of the Customer Analytics DAG](/img/use_case_images/snowpark_weaviate_use_case/use-case-snowpark_weaviate_ca_dag_2.png)
 
 This demonstration shows how to build a customer analytics dashboard for a fictitious online retailer for toys and games. The application uses machine learning models for audio transcription, natural language embeddings, and sentiment analysis on structured, semi-structured, and unstructured data.
 
-This demo also shows how to use the Snowflake XCom backend, which supports security and governance by serializing all task input and output to Snowflake tables and stages while also storing a URI pointer to the data in the Airflow XCom table.
+This demo also shows how to use the Snowflake XCom backend, which supports security and governance by serializing all task input and output to Snowflake tables and stages, while also storing a URI pointer to the data in the Airflow XCom table.
 
 This workflow includes the following processes and presents them in a [Streamlit](http://www.streamlit.io) application:
 - Sourcing structured, unstructured, and semistructured data from different systems.
@@ -114,7 +114,7 @@ The Astro CLI commands include additional Docker-based services for Weaviate and
 
 ### Setup Tasks
 
-The first tasks in the the set-up task group create all the resources necessary to run the pipeline, including creating the necessary Snowflake tables, restoring Weaviate data from prior runs, and creating a Snowpark model registry if none exists already. Using an `enter()` task group allows us to group together tasks that should be run to setup state for the rest of the DAG.  Functionally this is very similar to setup tasks but allows some additional flexibility in dependency mapping.
+The first tasks in the the set-up task group create all the resources necessary to run the pipeline, including creating the necessary Snowflake tables, restoring Weaviate data from prior runs, and creating a Snowpark model registry if none exists already. Using an `enter()` task group allows you to group together tasks that should be run to setup state for the rest of the DAG. Functionally this is very similar to setup tasks but allows some additional flexibility in dependency mapping.
 
 ```python
     @task.snowpark_python()
