@@ -47,7 +47,9 @@ Before starting this example, make sure you have:
 
 ```bash
 git clone https://github.com/astronomer/airflow-snowparkml-demo
-cd airflow-snowparkml-demo 
+cd airflow-snowparkml-demo
+```
+
 2. Open the `.env` file in an editor and update the following variables with you account information. You only need to update the Snowflake Connection details to be able to run the Customer Analytics DAG. However, if you'd like to enable chat capabilities in the final Streamlit application, add an OpenAI API key where designated in the `.env` file as well. 
 
 :::note
@@ -57,7 +59,8 @@ This demo assumes the use of a new Snowflake trial account with admin privileges
 ```text
 AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{"conn_type": "snowflake", "login": "<USER_NAME>", "password": "<PASSWORD>", "schema": "DEMO", "extra": {"account": "<ORG_NAME>-<ACCOUNT_NAME>", "warehouse": "COMPUTE_WH", "database": "DEMO", "region": "", "role": "ACCOUNTADMIN", "authenticator": "snowflake", "session_parameters": null, "application": "AIRFLOW"}}'
 OPENAI_APIKEY='sk-xxxxxxxxxxxxxxxxxxxxx' 
-``` 
+```
+
 Use the the new `ORG_NAME-ACCOUNT_NAME` format for the Snowflake `account` field of the connection as explained in the [Snowflake Account Identifier policies](https://docs.snowflake.com/en/user-guide/admin-account-identifier).  You can find the `ORG` and `ACCOUNT` names in your Snowflake trial confirmation email or in the Snowflake login link, for example, `https://xxxxxxx-yyy11111.snowflakecomputing.com/console/login`.
 Do not specify a `region` when using this format for accounts.
   
@@ -160,6 +163,13 @@ The first tasks in the the set-up task group create all the resources necessary 
                                 """).collect()
 ```
 
+- Task `create_snowflake_objects`: The first task creates Snowflake objects (like databases, schemas, and stages) prior to running any tasks, since this demonstrations assumes you started with a fresh trial account. The task creation uses the Airflow setup/teardown task feature, and has a corresponding clean up task at the end of the DAG. This means that no matter what, Airflow deletes temp tables used for this project after usage to prevent unnecessary consumption, mimicking how you might use them in a production setting! 
+
+- Task `download_weaviate_backup`: To speed up the demonstration process, the data you use has been ingested  into Weaviate and vectorized in advance.  The data was then backed up and stored in the cloud for easy restore. This task downloads the `backup.zip` and makes it available in a Docker mounted filesystem for the `restore_weaviate` task.
+
+- Task `restore_weaviate`: This task speeds up the demo for subsequent runs. By restoring prefetched embeddings to Weaviate, later tasks skip embeddings and only make calls to OpenAI for data it hasn't yet embedded.
+
+- Task `check_model_registry`: This task checks if a Snowpark model registry exists in the specified database and schema. If not, it creates one and returns a dictionary containing the database and schema information.
 
 
 ```python
@@ -243,17 +253,21 @@ The first tasks in the the set-up task group create all the resources necessary 
         return _snowpark_model_registry, _restore_weaviate
 ```
 
-- Task `create_snowflake_objects`: The first task creates Snowflake objects (like databases, schemas, and stages) prior to running any tasks, since this demonstrations assumes you started with a fresh trial account. The task creation uses the Airflow setup/teardown task feature, and has a corresponding clean up task at the end of the DAG. This means that no matter what, Airflow deletes temp tables used for this project after usage to prevent unnecessary consumption, mimicking how you might use them in a production setting! 
-
-- Task `download_weaviate_backup`: To speed up the demonstration process, the data you use has been ingested  into Weaviate and vectorized in advance.  The data was then backed up and stored in the cloud for easy restore. This task downloads the `backup.zip` and makes it available in a Docker mounted filesystem for the `restore_weaviate` task.
-
-- Task `restore_weaviate`: This task speeds up the demo for subsequent runs. By restoring prefetched embeddings to Weaviate, later tasks skip embeddings and only make calls to OpenAI for data it hasn't yet embedded.
-
-- Task `check_model_registry`: This task checks if a Snowpark model registry exists in the specified database and schema. If not, it creates one and returns a dictionary containing the database and schema information.
 
 ### Structured data ingestion and transformation
 
 The structured data contains various data points about customers, such as their purchasing histories and lifetime value, all of which are transformed using Snowpark so you can easily join it with the unstructured data.
+
+- Task Group `load_structured_data`: This task group uses a `for` loop to dynamically create tasks to upload structured datasets containing customer information from various data sources into a Snowflake database. For each source in `data_sources`, this task loads a CSV file, named `source.csv`, from a specified URI, `restore_data_uri`.
+
+- Task Group `transform_structured`: This task group encompasses three different tasks that transform the structured data into reporting-ready format. The tasks are as follows: 
+
+  - Task `jaffle_shop`: This task begins by aggregating orders to calculate each customer's first and most recent order dates, as well as their total number of orders. Next, it joins the payments data with the orders, grouping by customer ID to sum up the total payment amounts.  This results in a comprehensive view of each customer's transaction history.
+
+  - Task `mrr_playbook`: This task computes the Monthly Recurring Revenue (MRR), a crucial metric for subscription-based businesses. It starts by constructing a timeline of months since a specific start date and then matches this timeline with subscription data to determine the active subscription periods for each customer. The task then performs detailed calculations to determine the MRR for each customer in each month. 
+
+  - Task `attribution_playbook`: This task tackles the complex challenge of marketing attribution, aiming to understand how different marketing efforts contribute to customer conversions. It does this by linking customer conversion data with their session data. The task then applies various attribution models, such as first touch, last touch, and linear, to assign credit to different marketing touchpoints. It calculates the revenue attributed to each touchpoint based on the chosen model, providing insights into which marketing channels are most effective in driving customer conversions.
+
 
 ```python
     @task_group()
@@ -429,19 +443,29 @@ The structured data contains various data points about customers, such as their 
 ```
 
 
-- Task Group `load_structured_data`: This task group uses a `for` loop to dynamically create tasks to upload structured datasets containing customer information from various data sources into a Snowflake database. For each source in `data_sources`, this task loads a CSV file, named `source.csv`, from a specified URI, `restore_data_uri`.
-
-- Task Group `transform_structured`: This task group encompasses three different tasks that transform the structured data into reporting-ready format. The tasks are as follows: 
-
-  - Task `jaffle_shop`: This task begins by aggregating orders to calculate each customer's first and most recent order dates, as well as their total number of orders. Next, it joins the payments data with the orders, grouping by customer ID to sum up the total payment amounts.  This results in a comprehensive view of each customer's transaction history.
-
-  - Task `mrr_playbook`: This task computes the Monthly Recurring Revenue (MRR), a crucial metric for subscription-based businesses. It starts by constructing a timeline of months since a specific start date and then matches this timeline with subscription data to determine the active subscription periods for each customer. The task then performs detailed calculations to determine the MRR for each customer in each month. 
-
-  - Task `attribution_playbook`: This task tackles the complex challenge of marketing attribution, aiming to understand how different marketing efforts contribute to customer conversions. It does this by linking customer conversion data with their session data. The task then applies various attribution models, such as first touch, last touch, and linear, to assign credit to different marketing touchpoints. It calculates the revenue attributed to each touchpoint based on the chosen model, providing insights into which marketing channels are most effective in driving customer conversions.
-
 ### Unstructured data ingestion and transformation
 
 The unstructured data task group extracts twitter comments, reviews, and customer support calls, before transcribing the calls and converting all the unstructured data into Weaviate vector embeddings.
+
+- Task Group `unstructured_data` : The `unstructured_data` task group processes various forms of unstructured data, including customer call recordings, Twitter comments, and training data for sentiment analysis. This task group is divided into three main task subgroups: `load_unstructured_data`, `transcribe_calls`, and `generate_embeddings`.
+
+  - Task Group `load_unstructured_data`: This subgroup focuses on loading unstructured data from different sources.
+
+- Task `load_support_calls_to_stage`: This task downloads and extracts a ZIP file containing customer call recordings from a specified URI. The task then uploads the extracted files to a specified Snowflake stage for additional processing.
+
+  - Task `load_twitter_comments`: Loads Twitter comments from a given URI in Parquet format and stores them in a Snowflake table named `STG_TWITTER_COMMENTS`.
+
+  - Task `load_comment_training`: Similar to the `load_twitter_comments` task, this one loads training data for comment analysis from a Parquet file located at a specified URI. The data is stored in a Snowflake table named `STG_COMMENT_TRAINING`.
+
+  - Task `transcribe_calls`: After loading the call recordings, this task transcribes them using the Whisper model. It extracts audio files from the specified Snowflake stage, processes each file through the OpenAI Whisper model to generate transcripts, and then returns a dataframe containing customer IDs, relative paths of the recordings, and their transcriptions.
+
+- Task Group `generate_embeddings`: The final subgroup focuses on generating embeddings for different data types using OpenAI's models before importing them into the Weaviate vector database.
+
+  - Task `generate_training_embeddings`: Processes the training data loaded earlier in the `load_comment_training` task to create embeddings using an OpenAI model. The embeddings are then used for sentiment analysis.
+    
+  - Task `generate_twitter_embeddings`: Similar to the `generate_training_embeddings` task, but focuses on Twitter comments. It transforms the loaded Twitter data and generates embeddings for analyzing customer sentiment.
+    
+  - Task `generate_call_embeddings`: Processes the transcribed call data to generate embeddings. These embeddings provide insights into overall sentiment expressed during the calls.
 
 ```python
     @task_group()
@@ -624,29 +648,13 @@ The unstructured data task group extracts twitter comments, reviews, and custome
 
         return _training_table, _comment_table, _calls_table
 ```
-- Task Group `unstructured_data` : The `unstructured_data` task group processes various forms of unstructured data, including customer call recordings, Twitter comments, and training data for sentiment analysis. This task group is divided into three main task subgroups: `load_unstructured_data`, `transcribe_calls`, and `generate_embeddings`.
 
-  - Task Group `load_unstructured_data`: This subgroup focuses on loading unstructured data from different sources.
-
-- Task `load_support_calls_to_stage`: This task downloads and extracts a ZIP file containing customer call recordings from a specified URI. The task then uploads the extracted files to a specified Snowflake stage for additional processing.
-
-  - Task `load_twitter_comments`: Loads Twitter comments from a given URI in Parquet format and stores them in a Snowflake table named `STG_TWITTER_COMMENTS`.
-
-  - Task `load_comment_training`: Similar to the `load_twitter_comments` task, this one loads training data for comment analysis from a Parquet file located at a specified URI. The data is stored in a Snowflake table named `STG_COMMENT_TRAINING`.
-
-  - Task `transcribe_calls`: After loading the call recordings, this task transcribes them using the Whisper model. It extracts audio files from the specified Snowflake stage, processes each file through the OpenAI Whisper model to generate transcripts, and then returns a dataframe containing customer IDs, relative paths of the recordings, and their transcriptions.
-
-- Task Group `generate_embeddings`: The final subgroup focuses on generating embeddings for different data types using OpenAI's models before importing them into the Weaviate vector database.
-
-  - Task `generate_training_embeddings`: Processes the training data loaded earlier in the `load_comment_training` task to create embeddings using an OpenAI model. The embeddings are then used for sentiment analysis.
-    
-  - Task `generate_twitter_embeddings`: Similar to the `generate_training_embeddings` task, but focuses on Twitter comments. It transforms the loaded Twitter data and generates embeddings for analyzing customer sentiment.
-    
-  - Task `generate_call_embeddings`: Processes the transcribed call data to generate embeddings. These embeddings provide insights into overall sentiment expressed during the calls.
 
 ### Model training
 
 After you prepared the structured and unstructured data, split it into testing and training datasets, before using it to train a sentiment-classifier model that predicts customer life time value based on their sentiment. Finally, you can use the trained model to generate predictions for customers life time value based on their sentiment. 
+
+- Task `train_sentiment_classifier`: After the structured and unstructured data has been extracted, transformed/transcribed, and loaded in the previous`unstructured_data` and `structured_data` task groups, it is used in this task to train a sentiment classifier model within Snowpark. The embedding vectors in Weaviate combined with a sentiment-labeled dataset allow the DAG to train a very simple classifier model. After training the model, the DAG registers it into the Snowflake model registry so that it can be used to generate sentiment predictions later in the DAG. One of the biggest advantages of this approach is that you can run your model on the data within Snowpark, without needing to extract data to cloud object storage for inference.  
 
 ```python
 @task.snowpark_virtualenv(requirements=['lightgbm==3.3.5', 'scikit-learn==1.2.2', 'astro_provider_snowflake'])
@@ -691,7 +699,9 @@ After you prepared the structured and unstructured data, split it into testing a
         return {'name': model_id.get_name(), 'version':model_id.get_version()}
 ```
 
-- Task `train_sentiment_classifier`: After the structured and unstructured data has been extracted, transformed/transcribed, and loaded in the previous`unstructured_data` and `structured_data` task groups, it is used in this task to train a sentiment classifier model within Snowpark. The embedding vectors in Weaviate combined with a sentiment-labeled dataset allow the DAG to train a very simple classifier model. After training the model, the DAG registers it into the Snowflake model registry so that it can be used to generate sentiment predictions later in the DAG. One of the biggest advantages of this approach is that you can run your model on the data within Snowpark, without needing to extract data to cloud object storage for inference.  
+- Task `call_sentiment`: This task retrieves vectors and properties of data objects from Weaviate, a vector search engine, for the class `CustomerCall`. The task then normalizes the properties and uses the vectors as features for a sentiment analysis model loaded from Snowflake's Model Registry. The sentiment scores are predicted using the `predict_proba` method of the model, focusing on the probability associated with one of the classes. It outputs a Snowpark dataframe containing the original data enhanced with sentiment scores.
+
+- Task `twitter_sentiment`: Similar in structure to the `call_sentiment` task, this task also retrieves vectors and properties from Weaviate for the class `CustomerComment`. The task processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
 
 ```python
     @task_group()
@@ -755,13 +765,21 @@ After you prepared the structured and unstructured data, split it into testing a
         return _pred_calls_table, _pred_comment_table
 ```
 
-- Task `call_sentiment`: This task retrieves vectors and properties of data objects from Weaviate, a vector search engine, for the class `CustomerCall`. The task then normalizes the properties and uses the vectors as features for a sentiment analysis model loaded from Snowflake's Model Registry. The sentiment scores are predicted using the `predict_proba` method of the model, focusing on the probability associated with one of the classes. It outputs a Snowpark dataframe containing the original data enhanced with sentiment scores.
 
-- Task `twitter_sentiment`: Similar in structure to the `call_sentiment` task, this task also retrieves vectors and properties from Weaviate for the class `CustomerComment`. The task processes the data in the same way, using a model from Snowflake's Model Registry to predict sentiment scores. It outputs a Snowpark dataframe that includes Twitter comment data augmented with their respective sentiment scores.
 
 ### Create reporting tables
 
 After the model has generated its predictions, the next tasks cleans and organizes the results into presentation tables for viewing using a Streamlit application. 
+
+- Task `Create_Presentation_Tables`: The `create_presentation_tables` task consolidates and processes various data sources to create tables specifically for presentation in a Streamlit app. This function takes five Snowpark tables as input: `attribution_df`, `mrr_df`, `customers_df`, `pred_calls_table`, and `pred_comment_table`. The task processes each of these tables to generate new tables suited for visual presentation and analysis. The following shares a summary of each step:
+  
+  - Customer Data Processing: Enhances the `customers_df` table by adding a rounded 'Customer Lifetime Value' (CLV) column.
+  - Sentiment Analysis: Combines sentiment data from `pred_calls_table` and `pred_comment_table` tables. It calculates the average sentiment score for each customer based on call and comment data. The final sentiment score is the average of these two scores, and customers are bucketed into sentiment categories. This processed data is saved as the `PRES_SENTIMENT` table.
+  - Advertising Spend Analysis: Processes the `attribution_df` table to understand the revenue generated from different advertising mediums. The data is grouped by the medium, and the revenue is summed up for each group. The task saves the table as `PRES_AD_SPEND`.
+  - Customer Lifetime Value (CLV) Analysis: Creates a comprehensive view of customer lifetime value by joining `customers_df` with sentiment data. It sorts the data by CLV and includes various customer details. This table, named `PRES_CLV`, is valuable for understanding the high-value customers and their sentiment scores.
+  - Churn Analysis: Analyzes churn by joining customer data with MRR data and sentiment scores. It filters for customers who have churned and sorts them by their last active month. This table, `PRES_CHURN`, is critical for identifying recently churned customers and understanding their value and sentiment.
+  - Saving Raw Sentiment Data: The raw sentiment data for customer calls (`pred_calls_table`) and Twitter comments (`pred_comment_table`) are saved as `PRED_CUSTOMER_CALLS` and `PRED_TWITTER_COMMENTS`, respectively.
+  - Saving Attribution Touches: The `attribution_df` table is saved as `ATTRIBUTION_TOUCHES`, which holds detailed data on customer interactions and their revenue attribution.
 
 ```python
 @task.snowpark_python()
@@ -853,16 +871,8 @@ After the model has generated its predictions, the next tasks cleans and organiz
                                    pred_calls_table=_pred_calls_table, 
                                    pred_comment_table=_pred_comment_table)
 ```
-- Task `Create_Presentation_Tables`: The `create_presentation_tables` task consolidates and processes various data sources to create tables specifically for presentation in a Streamlit app. This function takes five Snowpark tables as input: `attribution_df`, `mrr_df`, `customers_df`, `pred_calls_table`, and `pred_comment_table`. The task processes each of these tables to generate new tables suited for visual presentation and analysis. The following shares a summary of each step:
-  
-  - Customer Data Processing: Enhances the `customers_df` table by adding a rounded 'Customer Lifetime Value' (CLV) column.
-  - Sentiment Analysis: Combines sentiment data from `pred_calls_table` and `pred_comment_table` tables. It calculates the average sentiment score for each customer based on call and comment data. The final sentiment score is the average of these two scores, and customers are bucketed into sentiment categories. This processed data is saved as the `PRES_SENTIMENT` table.
-  - Advertising Spend Analysis: Processes the `attribution_df` table to understand the revenue generated from different advertising mediums. The data is grouped by the medium, and the revenue is summed up for each group. The task saves the table as `PRES_AD_SPEND`.
-  - Customer Lifetime Value (CLV) Analysis: Creates a comprehensive view of customer lifetime value by joining `customers_df` with sentiment data. It sorts the data by CLV and includes various customer details. This table, named `PRES_CLV`, is valuable for understanding the high-value customers and their sentiment scores.
-  - Churn Analysis: Analyzes churn by joining customer data with MRR data and sentiment scores. It filters for customers who have churned and sorts them by their last active month. This table, `PRES_CHURN`, is critical for identifying recently churned customers and understanding their value and sentiment.
-  - Saving Raw Sentiment Data: The raw sentiment data for customer calls (`pred_calls_table`) and Twitter comments (`pred_comment_table`) are saved as `PRED_CUSTOMER_CALLS` and `PRED_TWITTER_COMMENTS`, respectively.
-  - Saving Attribution Touches: The `attribution_df` table is saved as `ATTRIBUTION_TOUCHES`, which holds detailed data on customer interactions and their revenue attribution.
-    
+
+Task `cleanup_temp_tables`: The final task is a [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
 
 ```python
     @task.snowpark_python()
@@ -931,7 +941,6 @@ After the model has generated its predictions, the next tasks cleans and organiz
         _restore_weaviate >> [_training_table, _comment_table, _calls_table] >> _model
 ```
 
-Task `cleanup_temp_tables`: The final task is a [teardown task](https://docs.astronomer.io/learn/airflow-setup-teardown).  The task deletes the intermediate, temporary data passed between Snowpark tasks for resource optimization. 
 
 # See also
 
