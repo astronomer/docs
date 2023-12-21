@@ -24,18 +24,19 @@ Workspace Owners and Operators can create and assign connections, while Workspac
 
 ## How connections are stored
 
-When you create an Airflow connection in the Environment Manager, the following happens:
+When you create an Airflow connection in the Environment Manager, Astro stores Airflow connection details in an Astronomer-hosted secrets backend, and then applies connections to Deployments as Kubernetes secrets. Specifically the following steps occur:
 
-- Astro stores Airflow connections in an Astronomer-hosted secrets backend, and then applies connections to Deployments as Kubernetes secrets.
-- Instead of connection details being visible, like environment variables, these connections are mounted as Kubernetes Secrets on the Deployment using Airflow’s provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html). This means that Airflow reads the secrets to look up connection details.
+- Astro stores the connection details as Kubernetes Secrets in an Astronomer-hosted secrets backend.
+- When you assign connections to Deployments, Astro uses Airflow's provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html) to mount the Kubernetes Secrets as files to the Deployment.
+- When your DAGs use your connections, Airflow reads the connection details from the Kubernetes Secrets.
 
 This process occurs every time you create or update a connection.
 
-When you export connections to work locally, the Astro CLI reads the connections from the Astro API and injects them into the local Airflow instance's metadata database.
+When you use connections for local development, the Astro CLI reads the connections from the Astro API and injects them into the local Airflow instance's metadata database.
 
 ### Fetching environment secrets
 
-You can export Airflow connections from the Cloud UI to test your DAGs locally, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
+The Astro CLI can automatically retrieve connections from the Cloud UI when you start your local airflow instnce, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
 
 :::tip
 
