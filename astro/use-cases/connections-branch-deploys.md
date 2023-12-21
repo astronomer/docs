@@ -4,7 +4,7 @@ sidebar_label: 'Connections and branch-based deploys'
 id: connections-branch-deploys
 ---
 
-Airflow DAGs often interact with a multitude of external systems, such as data warehouses and APIs. DAGs access these systems using [Airflow connections](manage-connections-variables.md). A common logistical consideration when running Airflow at scale is deciding how to manage connections between development and production environments. Different environment types require different levels access to external resources. 
+Airflow DAGs often interact with a multitude of external systems, such as data warehouses and APIs. DAGs access these systems using [Airflow connections](manage-connections-variables.md). A common logistical consideration when running Airflow at scale is deciding how to manage connections between development and production environments. Different environment types require different levels of access to external resources. 
 
 Astro's [branch-based development](automation-overview.md) and [connection management](manage-connections-variables.md) features allow you to automatically share specific Airflow connections with Astro Deployments based on their development context. 
 
@@ -27,7 +27,7 @@ This use case assumes you have:
 
 - At least two Astro Deployments, one for development and one for production.
 - A Git-based repository where you manage an Astro project.
-- A configured multi-branch CI/CD pipeline. See [CI/CD templates](ci-cd-templates/template-overview.md)
+- A configured multi-branch CI/CD pipeline. See [CI/CD templates](ci-cd-templates/template-overview.md).
 
 However, you can extend this use case to encompass multiple development or production environments.
 
@@ -60,7 +60,7 @@ This use case provides several benefits for both Workspace managers and DAG auth
 
 - Workspace Operators and Owners can manage connections without needing access to DAG code.
 - DAG authors only need a connection ID to connect their DAGs, meaning they can focus on data engineering instead of connection configuration.
-- Connection IDs don't need to be updated when you promote code to Deployment, reducing development timelines and reducing the number of resources to manage. 
+- Connection IDs don't need to be updated when you promote code to production, reducing development timelines and reducing the number of resources to manage. 
 
 ## See also
 
