@@ -89,12 +89,6 @@ module.exports = {
           position: 'left',
           activeClassName: 'navbar__link--active',
         },
-        {
-          label: 'Using Remote URL',
-          to: '/examples/using-remote-url/',
-          position: 'left',
-          activeClassName: 'navbar__link--active',
-        }
       ],
     },
     astroCard: {
@@ -242,7 +236,7 @@ module.exports = {
           },
           {
             id: 'iam',
-            spec: './openapi/iam.yaml',
+            spec: 'https://api.astronomer.io/spec/iam/v1beta1',
           },
           {
             id: 'using-remote-url',
