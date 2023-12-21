@@ -15,9 +15,9 @@ Specifically, this guide demonstrates three options, ordered from simple impleme
 | Shared Python code in `/include` folder                  | When reusing code in multiple scripts, but within the same Git repository |
 | Shared Python code in Python package in separate project | When reusing code in multiple Git projects                                |
 
-The following DAG, which queries a database and returns results, is used in each section below to highlight the different options. The tasks in this DAG perform the same business logic twice. Both functions (`_get_locations()` and `_get_purchases()`) instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If you continue copy-pasting these functions for running more queries, you have multiple copies of the same business logic, which also requires multiple code changes when you want to modify the database connection logic.
+The following DAG, which queries a database and returns results, is used in each section below to highlight the different solutions. The tasks in this DAG perform the same business logic twice. Both functions (`_get_locations()` and `_get_purchases()`) instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If you continue copy-pasting these functions for running more queries, you have multiple copies of the same business logic, which also requires multiple code changes when you want to modify the database connection logic.
 
-```python {7-9,11-12,14-16,17-18}
+```python {7-9,11-12,14-16,18-19}
 import datetime
 
 from airflow import DAG
