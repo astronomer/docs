@@ -770,3 +770,8 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
 [data-section-id] {
   scroll-margin-top: 120px;
 }
+
+img {
+  width: auto;
+  height: auto;
+}
