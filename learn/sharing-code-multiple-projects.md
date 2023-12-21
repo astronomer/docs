@@ -15,9 +15,9 @@ Specifically, this guide demonstrates three options, ordered from simple impleme
 | Shared Python code in `/include` folder                  | When reusing code in multiple scripts, but within the same Git repository |
 | Shared Python code in Python package in separate project | When reusing code in multiple Git projects                                |
 
-The following DAG, which queries a database and returns results, is used in each section below to highlight the different options:
+The following DAG, which queries a database and returns results, is used in each section below to highlight the different options. The tasks in this DAG perform the same business logic twice. Both functions (`_get_locations()` and `_get_purchases()`) instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If you continue copy-pasting these functions for running more queries, you have multiple copies of the same business logic, which also requires multiple code changes when you want to modify the database connection logic.
 
-```python
+```python {7-9,11-12,14-16,17-18}
 import datetime
 
 from airflow import DAG
@@ -43,9 +43,8 @@ with DAG(dag_id="example", schedule=None, start_date=datetime.datetime(2023, 1, 
 ```
 
 ## Shared Python code in same file
-The previous code example performs the same business logic twice. Both functions instantiate a database client, execute a query, and return the result. The only difference is the query being executed. Any change to the database connection logic now requires two changes. If you continue copy-pasting these functions for running more queries, you have multiple copies of the same business logic, which also requires multiple code changes when you want to modify the database connection logic. 
 
-To reduce this maintenance burden, and have only one way of querying the database, you can extract the code into a single function within the same DAG file:
+To reduce the burden of maintaining the same business logic multiple times, and have only one way of querying the database, you can extract the code into a single function within the same DAG file:
 
 ```python
 def query_db(query):
