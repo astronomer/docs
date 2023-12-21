@@ -754,6 +754,11 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
   right: 0;
 }
 
+img {
+  width: auto;
+  height: auto;
+}
+
 /** Remix Redocly Styles **/
 
 /** hide all the error responses **/
@@ -769,9 +774,4 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
 /** Add anchor scroll to top padding/margin */
 [data-section-id] {
   scroll-margin-top: 120px;
-}
-
-img {
-  width: auto;
-  height: auto;
 }
