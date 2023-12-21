@@ -12,7 +12,7 @@ When you combine branch-based deploys and connection management, you can:
 
 - Automatically create Deployments for development branches with a set of development Airflow connections.
 - Override preset Airflow connections on a per-Deployment basis to troubleshoot or customize your development environment.
-- Promote a Deployment to production as an admin by updating its Airflow connections to access production resources.
+- Run a development and production Deployment for the same project without changing Airflow connection names between the two contexts.
 
 ## Feature overview
 
