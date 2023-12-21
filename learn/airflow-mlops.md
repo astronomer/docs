@@ -19,11 +19,8 @@ In this guide you will learn:
 Ready to get started? Check out our recommended resources showcasing ML implementations with Airflow:
 
 - [Ask Astro](https://github.com/astronomer/ask-astro) LLM Retrieval Augmented Generation pipeline reference architecture ([Blog post deep dive](https://www.astronomer.io/blog/ask-astro-operationalizing-data-ingest-for-retrieval-augmented-generation-with-llms-part-3/)).
-- [Run LLMOps in production with Apache Airflow](https://www.astronomer.io/events/webinars/run-llmops-in-production-with-apache-airflow/) webinar.
 - [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping/) webinar.
-- [Airflow at Faire: Democratizing Machine Learning at Scale](https://www.astronomer.io/events/webinars/airflow-at-faire-democratizing-machine-learning-at-scale/) webinar.
-- [Airflow MLOps customer analytics application: Sissy-G Toys](https://github.com/astronomer/airflow-llm-demo) example repository.
-- [Anomaly detection MLOps pipeline: Snowstorm](https://github.com/astronomer/snowstorm) example repository.
+- [Run an integrated ELT and ML pipeline on Stripe data in Airflow](use-case-elt-ml-finance.md) use case.
 
 :::
 
@@ -67,6 +64,14 @@ DevOps best practices are based on all aspects of your data and machine learning
 - **Continuous integration/ continuous delivery** ([CI/CD](https://resources.github.com/ci-cd/)). It is a standard Software best practice for all code to undergo automatic testing, linting and deployment. This ensures that your code is always in a working state and that any changes are automatically deployed to production. Airflow integrates with all major CI/CD tools, see [CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) for popular templates.
 - **Infrastructure as code** ([IaC](https://en.wikipedia.org/wiki/Infrastructure_as_code)). Ideally, all infrastructure is defined as code and follows the same CI/CD process as your pipeline and model code. This allows you to control and if necessary roll back environment changes as well as quickly deploy new instances of your model.
 
+In practice, following modern DevOps patterns when using Airflow for MLOps means:
+
+- Storing all Airflow code and configuration in a version control system like Git. 
+- Setting up development, staging and production branches in your version control system and connecting them to different Airflow environments. For Astro customers, see [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
+- Use automatic testing and linting for all Airflow code before deployment.
+- Define all infrastructure as code and use the same CI/CD process for infrastructure as for your Airflow code.
+- Store model artifacts in a versioned system. This can be a dedicated tool like MLFlow or an object storage solution.
+
 ### Data Engineering for MLOps
 
 There is no MLOps without data. You need to have robust data engineering workflows in place in order to confidently train, test and deploy ML models in production. Apache Airflow has been used by millions of data engineers to create reliable best practice data pipelines, providing a strong foundation for you MLOps workflows.
@@ -81,6 +86,14 @@ Special considerations should be given to:
 
 Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](airflow-openlineage.md) and data cataloging as well as monitoring of data drift.
 
+In practice, following modern data engineering patterns when using Airflow for MLOps means:
+
+- Following general [Airflow best practices](dag-best-practices.md) for DAG writing, such as keeping tasks atomic and idempotent.
+- Using Airflow to orchestrate data ingestion from sources such as APIs, source databases and object storage into a working location for your ML model. This might be a vector database, a relational database or an object storage solution depending on your use case.
+- Incorporating data quality checks into your Airflow pipelines, with critical data quality checks halting the pipeline or alerting you if they fail.
+- Using Airflow to orchestrate data preprocessing and feature engineering steps.
+- Moving data to permanent cold storage after it has been used for training and testing.
+
 ### Model operations and compute considerations
 
 Once strong DevOps and data engineering foundations are in place you can start to implement model operations. Again, Airflow shines by giving you free choice over your tooling. 
@@ -88,6 +101,11 @@ Once strong DevOps and data engineering foundations are in place you can start t
 Additionally, Airflow gives you full flexibility to decide where you want to leverage compute. Some organizations choose to use external compute for all of their heavy workloads, for example by leveraging the [KubernetesPodOperator](kubepod-operator.md) (and its decorator version `@task.kubernetes`) to execute tasks on any Kubernetes cluster. 
 
 Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airflow infrastructure with larger worker nodes for compute intensive tasks. Astro customers can leverage the [worker queues](https://docs.astronomer.io/astro/configure-worker-queues) feature, which lets you decide the exact specifications for the workers each task can run on, which means large workers are only used for your biggest workloads, saving compute and cost.
+
+In practice, following modern model operations patterns when using Airflow for MLOps means:
+
+- Using Airflow to orchestrate model training, fine-tuning, testing and deployment. 
+- Having Airflow tasks monitor the performance of your model and preform automated actions such as re-training, re-deploying or alerting if the performance drops below a certain threshold.
 
 ### Business
 
@@ -146,7 +164,13 @@ With Airflow you can orchestrate actions in any MLOps tool that has an API. For 
 
 To learn more about using Airflow for MLOps, check out the following resources:
 
+- Reference architectures: 
+    - [Ask Astro](https://github.com/astronomer/ask-astro) LLM Retrieval Augmented Generation pipeline.
+    - [Anomaly detection MLOps pipeline: Snowstorm](https://github.com/astronomer/snowstorm).
 - Webinars:
+    - [Orchestrate next-generation AI tools: Explore six new Airflow providers](https://www.astronomer.io/events/webinars/orchestrate-next-generation-ai-tools-explore-six-new-airflow-providers/).
+    - [Airflow at Faire: Democratizing Machine Learning at Scale](https://www.astronomer.io/events/webinars/airflow-at-faire-democratizing-machine-learning-at-scale/).
+    - [Run LLMOps in production with Apache Airflow](https://www.astronomer.io/events/webinars/run-llmops-in-production-with-apache-airflow/).
     - [Power your LLMOps with Airflow’s Weaviate Provider](https://www.astronomer.io/events/webinars/power-your-llmops-with-airflows-weaviate-provider/). 
     - [How to use Snowpark with Airflow](https://www.astronomer.io/events/webinars/how-to-use-snowpark-with-airflow/).
     - [How to Orchestrate Machine Learning Workflows with Airflow](https://www.astronomer.io/events/webinars/how-to-orchestrate-machine-learning-workflows-with-airflow/).
