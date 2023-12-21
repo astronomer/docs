@@ -58,6 +58,7 @@ After a Workspace Owner creates connections, DAG authors can develop DAGs withou
 
 This use case provides several benefits for both Workspace managers and DAG authors:
 
+- When you use branch-based deploys, your CI/CD pipeline automatically deploys your branches to development Deployments. This saves resources and reduces the complexity of development for DAG authors.
 - Workspace Operators and Owners can manage connections without needing access to DAG code.
 - DAG authors only need a connection ID to connect their DAGs, meaning they can focus on data engineering instead of connection configuration.
 - Connection IDs don't need to be updated when you promote code to production, reducing development timelines and reducing the number of resources to manage. 
