@@ -119,7 +119,8 @@ module.exports = {
             'using-airflow-plugins',
             'airflow-pools',
             'airflow-setup-teardown',
-            'testing-airflow',
+            'sharing-code-multiple-projects',
+            'testing-airflow'
           ],
         },
       ],
