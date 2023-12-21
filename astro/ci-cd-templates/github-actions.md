@@ -398,7 +398,8 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
-2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration. the following template sets your Deployment API credentials as environment variables, makes sure it uses the most recent Astro CLI version, checks to see if only DAG files have changes, and then either completes a full code deploy or a DAG-only code deploy.
+
 
     ```yaml
     name: Astronomer CI - Deploy code
@@ -409,26 +410,50 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           - main
 
     env:
-      ## Sets API token as an environment variable
+      ## Sets Deployment API credentials as environment variables
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:
       build:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest # add the appropriate image
         steps:
-        - name: checkout repo
-          uses: actions/checkout@v3
-        - name: Deploy to Astro
-          run: |
-            curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy <your-deployment-id>
+            # Install the Astro CLI (current version)
+            - name: checkout repo
+              uses: actions/checkout@v3
+              with:
+                fetch-depth: 2
+                clean: false
+            - name: Install the CLI
+              run: curl -sSL install.astronomer.io | sudo bash -s
+            # Determine if only DAG files have changes
+            - name: Deploy to Astronomer
+              run: |
+                files=$(git diff --name-only $(git rev-parse HEAD~1) -- .)
+                dags_only=1
+                for file in $files; do
+                if [[ $file != dags/* ]]; then
+                    echo "$file is not a dag, triggering a full image build"
+                    dags_only=0
+                    break
+                fi
+                done
+                ### If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
+                if [ $dags_only == 1 ]
+                then
+                    astro deploy --dags
+                fi
+                ### If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
+                if [ $dags_only == 0 ]
+                then
+                    astro deploy
+                fi
     ```
 
 </TabItem>
 
 <TabItem value="multibranch">
 
-The following setup can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment.
+The following setup can be used to create a multiple branch CI/CD pipeline using GitHub Actions to push a [full image deploy](deploy-project-image.md) to Astro. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment.
 
 #### Prerequisites
 
@@ -489,7 +514,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
 
 <TabItem value="custom">
 
-If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action). This template pushes a [full image deploy](deploy-project-image.md) to Astro.
 
 #### Prerequisites
 
@@ -592,69 +617,3 @@ If you need guidance configuring a CI/CD pipeline for a more complex use case in
 </TabItem>
 
 </Tabs>
-
-### DAG-only deploys private network template
-
-If you want to [deploy only DAGs](deploy-dags.md) using Github actions, the following template sets your Deployment API credentials as environment variables, makes sure it uses the most recent Astro CLI version, checks to see if only DAG files have changes, and then either completes a full code deploy or a DAG-only code deploy.
-
-#### Prerequisites
-
-- Use a standard single-branch deployment strategy
-
-#### Setup
-
-To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
-
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
-
-   - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
-
-2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
-
-```yaml
-name: Astronomer CI - Deploy DAGs or Full Image
-
-on:
-  push:
-    branches:
-      - main
-
-env:
-  ## Sets Deployment API credentials as environment variables
-  ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
-
-jobs:
-  build:
-    runs-on: ubuntu-latest # add the appropriate image
-    steps:
-        # Install the Astro CLI (current version)
-        - name: checkout repo
-          uses: actions/checkout@v3
-          with:
-            fetch-depth: 2
-            clean: false
-        - name: Install the CLI
-          run: curl -sSL install.astronomer.io | sudo bash -s
-        # Determine if only DAG files have changes
-        - name: Deploy to Astronomer
-          run: |
-            files=$(git diff --name-only $(git rev-parse HEAD~1) -- .)
-            dags_only=1
-            for file in $files; do
-            if [[ $file != dags/* ]]; then
-                echo "$file is not a dag, triggering a full image build"
-                dags_only=0
-                break
-            fi
-            done
-            ### If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
-            if [ $dags_only == 1 ]
-            then
-                astro deploy --dags
-            fi
-            ### If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
-            if [ $dags_only == 0 ]
-            then
-                astro deploy
-            fi
-```
