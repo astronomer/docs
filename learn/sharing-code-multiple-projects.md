@@ -56,7 +56,7 @@ def query_db(query):
 
 This function takes an argument `query`, and the database connection logic is only defined once, regardless what query is given. This way you don't have to maintain the same business logic in multiple places anymore. To use this function, reference it in your DAG script:
 
-```python
+```python {6-10}
 import datetime
 
 from airflow import DAG
