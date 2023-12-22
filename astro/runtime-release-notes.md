@@ -613,6 +613,17 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
 
+## Astro Runtime 6.9.0
+
+- Release date: December 22, 2023
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Check for DAG ID in query param from url as well as kwargs ([32014](https://github.com/apache/airflow/pull/32014))
+- Check that dag_ids passed in request are consistent ([34366](https://github.com/apache/airflow/pull/34366))
+- Fix updating variables during variable imports ([33932](https://github.com/apache/airflow/pull/33932))
+
 ## Astro Runtime 6.8.0
 
 - Release date: November 24, 2023
