@@ -156,7 +156,7 @@ module.exports = {
       items: [
         'airflow-sagemaker',
         'airflow-kafka',
-        'azure-workload-identity',
+        'connections/azure-workload-identity',
         'connections/azure-blob-storage',
         'airflow-azure-container-instances',
         'airflow-azure-data-explorer',
