@@ -25,17 +25,17 @@ You can also use the Azure workload identity connection option when running Open
 
 ## Get connection details
 
-In order to create a workload identity for your deployment that leverages your Entra ID managed identity, you'll need to execute an Azure CLI command that links your Airflow deployment and managed identity. To simplify this process, Astro has command generator located in a pop up menu under the **Details** tab of your Deployment overview. 
-
-:::note
-
-If you plan to use the same workload identity for multiple deployments, you'll need to run this command for each individual deployment. However, all deployments will use the same credentials for their connection, allowing you to share the same connection to multiple deployments at the same time via the [Astro Connection Management System](https://www.astronomer.io/solutions/connection-management/). Currently because of limits Azure has set on the number of resources allowed to leverage the same Workload Identity, the same connection can be shared across 5 deployments last. 
-
-:::
+In order to create a workload identity for your deployment that leverages your Entra ID managed identity, you'll need to execute an Azure CLI command that links your Airflow deployment and managed identity. To simplify this process, Astro has command generator located in a pop up menu under the **Details** tab of your Deployment overview. If you plan to use the same workload identity for multiple deployments, you'll need to run this command for each individual deployment. However, all deployments will use the same credentials for their connection, allowing you to share the same connection to multiple deployments at the same time via the [Astro Connection Management System](https://www.astronomer.io/solutions/connection-management/).
 
 
 ![details-screen](/img/examples/connection-azure-workload-identity-1.png)
 ![command_creation_popup](/img/examples/connection-azure-workload-identity-2.png)
+
+:::note
+
+ Currently because of limits Azure has set on the number of resources allowed to leverage the same Workload Identity, the same connection can only be shared across 5 deployments. 
+
+:::
 
 
 The two required credentials, Managed Identity Name and Resource Group, are both available from the Azure Managed Identity resource overview screen: 
