@@ -465,6 +465,7 @@ Ensure that the name of the package on the private repository does not clash wit
     ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
+    USER astro
     ```
 
     In order, these commands:
