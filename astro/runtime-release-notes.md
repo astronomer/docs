@@ -49,6 +49,30 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
+## Astro Runtime 9.7.0
+
+- Release date: December 22, 2023
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Account for change in UTC offset when calculating next schedule ([#35887](https://github.com/apache/airflow/pull/35887))
+- Fix for infinite recursion due to secrets_masker ([#35048](https://github.com/apache/airflow/pull/35048))
+- Fix updating variables during variable imports ([#33932](https://github.com/apache/airflow/pull/33932))
+- Allow 'airflow variables export' to print to stdout ([#33279](https://github.com/apache/airflow/pull/33279))
+- Check that dag_ids passed in request are consistent ([#34366](https://github.com/apache/airflow/pull/34366))
+- Make raw HTML descriptions configurable ([#35460](https://github.com/apache/airflow/pull/35460))
+- Change Trigger UI to use HTTP POST in web UI ([#36026](https://github.com/apache/airflow/pull/36026))
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.18.4. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1184-2023-12-07) for a complete list of changes.
+- You can now customize the color of the Airflow UI navigation bar text by setting the `AIRFLOW__NAVBAR_TEXT_COLOR` environment variable.
+
+### Bug fixes
+
+- Fixed an issue where task logs on Astro Azure clusters were not encoded properly, resulting in authentication errors.
+
 ## Astro Runtime 9.6.0
 
 - Release date: November 30, 2023
