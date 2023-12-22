@@ -310,6 +310,13 @@ module.exports = {
       ],
     },
     {
+      type: 'category',
+      label: 'Use cases',
+      items: [
+        'use-cases/connections-branch-deploys',
+      ],
+    },
+    {
       type: "category",
       label: "Reference",
       items: [
@@ -340,13 +347,6 @@ module.exports = {
           ],
         },
         "astro-glossary"
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Use cases',
-      items: [
-        'use-cases/connections-branch-deploys',
       ],
     },
   ],
