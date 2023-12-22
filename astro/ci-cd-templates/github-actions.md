@@ -377,9 +377,8 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
 
 If you use GitHub Enterprise and can't use the public Astronomer [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace, use the following templates to implement CI/CD.
 
-You can configure your CI/CD pipelines to deploy a full image or
+You can configure your CI/CD pipelines to deploy a full project image or your `dags` directory.
 
-### Full image deploy templates
 
 
 <Tabs
@@ -398,7 +397,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
-2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration. the following template sets your Deployment API credentials as environment variables, makes sure it uses the most recent Astro CLI version, checks to see if only DAG files have changes, and then either completes a full code deploy or a DAG-only code deploy.
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration. When you make a commit to a specified branch, this workflow sets your Deployment API credentials as environment variables, installs the latest version of the Astro CLI, checks to see if your `dags` folder has changes, and then either completes a full code deploy or a DAG-only code deploy.
 
 
     ```yaml
@@ -514,7 +513,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
 
 <TabItem value="custom">
 
-If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action). This template pushes a [full image deploy](deploy-project-image.md) to Astro.
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action). This template always pushes your entire project [as an image](deploy-project-image.md) to Astro.
 
 #### Prerequisites
 
