@@ -307,7 +307,7 @@
 /astro/deployment-metrics#export-airflow-metrics-to-datadog /astro/export-task-logs-to-datadog
 /astro/view-logs#export-task-logs-to-aws-cloudwatch /astro/export-cloudwatch
 /astro/manage-connections-variables#cloud-ui-connections /astro/manage-connections-variables#astro-cloud-ui-environment-manager 301
-
+/astro/astro-use-case/use-case-astro-connections /astro/use-cases/connections-branch-deploys 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301

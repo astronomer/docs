@@ -311,6 +311,13 @@ module.exports = {
       ],
     },
     {
+      type: 'category',
+      label: 'Use cases',
+      items: [
+        'use-cases/connections-branch-deploys',
+      ],
+    },
+    {
       type: "category",
       label: "Reference",
       items: [
@@ -341,18 +348,6 @@ module.exports = {
           ],
         },
         "astro-glossary"
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Use cases',
-      link: {
-        type: 'generated-index',
-        title: 'Use cases',
-        description: 'Best practices and example use cases on Astro.'
-      },
-      items: [
-        'astro-use-case/use-case-astro-connections',
       ],
     },
   ],
