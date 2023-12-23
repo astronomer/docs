@@ -45,13 +45,12 @@ Add the following environment variables to your `.env` file:
   
 ```text
 AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
-# Locate your client ID in Azure Portal under App Registration page > 'Application (Client) ID'
-# Locate your tenant ID in Azure Portal under App Registration page > 'Directory (tenant) ID'
-# Locate your client secret in Azure Portal under App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>", "tenant_id": "<your-tenant-id>", "client_id": "<your-client-id>", "client_secret": "<your-client-secret>"}
 ```
 
-This tells Airflow to look for variable information at the `airflow/variables/*` path in Azure Key Vault and connection information at the `airflow/connections/*` path. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+To find your your client ID in Azure Portal, go to **App Registration page** > **Application (Client) ID**. To find your tenant ID, go to **App Registration page** > **Directory (tenant) ID**. To find your client secret, go to **App Registration Page** > **Certificates and Secrets** > **Client Secrets** > **Value**.
+
+This configuration tells Airflow to look for variable information at the `airflow/variables/*` path in Azure Key Vault and connection information at the `airflow/connections/*` path. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 
 By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `sep`, `"connections_prefix"`, and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
