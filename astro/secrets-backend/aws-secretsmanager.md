@@ -61,10 +61,8 @@ Add the following environment variables to your Astro project's `.env` file:
 
 ```text 
 AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
-AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables"}
+AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables", "role_arn": "<your-role-arn>"}
 AWS_DEFAULT_REGION=<region>
-AWS_ACCESS_KEY_ID=<Access Key> # Make sure the user has the permission to access secret manager
-AWS_SECRET_ACCESS_KEY=<secret key>
 ```
 
 After you configure an Airflow connection to AWS, can run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
