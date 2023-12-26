@@ -22,7 +22,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 ## Prerequisites
 
 - An [Astro project](cli/develop-project.md).
-- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage).
+- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#disable-openlineage).
 - A Slack workspace, PagerDuty service, or email address.
 
 :::info
@@ -115,13 +115,13 @@ The **DAG Trigger** communication channel works differently from other communica
 
   from airflow.models.dag import DAG
   from airflow.operators.python import PythonOperator
-  
+
   with DAG(
       dag_id="register_incident",
       start_date=datetime.datetime(2023, 1, 1),
       schedule=None,
   ):
-  
+
       def _register_incident(params: dict[str, Any]):
           # Here you can run arbitrary Python code. Example DAG run conf payload:
           # {
@@ -130,11 +130,11 @@ The **DAG Trigger** communication channel works differently from other communica
           #     "alertId": "d75e7517-88cc-4bab-b40f-660dd79df216",
           #     "message": "[Astro Alerts] Pipeline failure detected on DAG fail_dag. \\nStart time: 2023-11-17 17:32:54 UTC. \\nFailed at: 2023-11-17 17:40:10 UTC. \\nAlert notification time: 2023-11-17 17:40:10 UTC. \\nClick link to investigate in Astro UI: https://cloud.astronomer.io/clkya6zgv000401k8zafabcde/dags/clncyz42l6957401bvfuxn8zyxw/fail_dag/c6fbe201-a3f1-39ad-9c5c-817cbf99d123?utm_source=alert\"\\n"
           # }
-  
+
           # Example:
           failed_dag = params["dagName"]
           print(f"Register an incident in my system for DAG {failed_dag}.")
-  
+
       PythonOperator(task_id="register_incident", python_callable=_register_incident)
 
   ```
