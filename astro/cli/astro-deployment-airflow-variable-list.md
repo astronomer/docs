@@ -4,10 +4,16 @@ title: "astro deployment airflow-variable list"
 id: astro-deployment-airflow-variable-list
 description: List variables in an Airflow Deployment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-List the Airflow variables stored in a Deployment's metadata database. 
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
+
+List the Airflow variables stored in a Deployment's metadata database.
 
 ## Usage
 
@@ -15,7 +21,7 @@ List the Airflow variables stored in a Deployment's metadata database.
 astro deployment airflow-variable list
 ```
 
-This command only lists Airflow variables that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
+This command only lists Airflow variables that were configured through the Airflow UI or otherwise stored in the Airflow metadata database.
 
 ## Options
 
