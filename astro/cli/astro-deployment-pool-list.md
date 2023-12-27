@@ -7,6 +7,12 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
+
 List the Airflow pools stored in a Deployment's metadata database.
 
 ## Usage

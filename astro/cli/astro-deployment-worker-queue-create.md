@@ -3,8 +3,14 @@ sidebar_label: "astro deployment worker-queue create"
 title: "astro deployment worker-queue create"
 id: astro-deployment-worker-queue-create
 description: Create a Deployment worker queue.
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
 
 Create a [worker queue](configure-worker-queues.md) in a Deployment on Astro. This command is functionally identical to creating a worker queue in the Cloud UI.
 
@@ -27,7 +33,7 @@ astro deployment worker-queue create
 | `-t`,`--worker-type`          | The worker type of the worker queue          | Any worker type enabled on the cluster in which the Deployment exists |
 
 
-## Examples 
+## Examples
 
 ```sh
 astro deployment worker-queue create --deployment-id cl03oiq7d80402nwn7fsl3dmv
@@ -37,7 +43,7 @@ astro deployment worker-queue create --concurrency 20 --max-count 10 --min-count
 # Creates a new worker queue with specified configurations. The Astro CLI prompts you for Deployment information.
 ```
 
-## Related commands 
+## Related commands
 
 - [`astro deployment worker-queue update`](cli/astro-deployment-worker-queue-update.md)
 - [`astro deployment worker-queue delete`](cli/astro-deployment-worker-queue-delete.md)

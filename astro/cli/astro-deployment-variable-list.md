@@ -4,8 +4,14 @@ title: "astro deployment variable list"
 id: astro-deployment-variable-list
 description: List Deployment environment variables.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
 
 For a given Deployment on Astro, list its running environment variables in your terminal. To test these environment variables locally without having to manually copy them, you can also use this command to save them in a local `.env` file.
 

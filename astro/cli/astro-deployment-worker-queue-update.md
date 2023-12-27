@@ -3,8 +3,14 @@ sidebar_label: "astro deployment worker-queue update"
 title: "astro deployment worker-queue update"
 id: astro-deployment-worker-queue-update
 description: Update a Deployment worker queue.
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
 
 Update the settings for an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Cloud UI.
 
@@ -37,7 +43,7 @@ astro deployment worker-queue update --concurrency 20 --max-count 10 --min-count
 # Update a new worker queue in a Deployment. The CLI prompts you to specify a Deployment and worker queue to update
 ```
 
-## Related commands 
+## Related commands
 
 - [`astro deployment worker-queue create`](cli/astro-deployment-worker-queue-create.md)
 - [`astro deployment worker-queue delete`](cli/astro-deployment-worker-queue-delete.md)
