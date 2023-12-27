@@ -38,9 +38,13 @@ astro workspace switch <workspace_id>
 | ------------------------- | -------------------------------------------------------------------------------------------- | ---------------------- |
 | `workspace_id` (Optional) | The ID of the workspace you want to switch to. Otherwise, the CLI prompts you to choose one. | Any valid Workspace ID |
 
-## Usage
+## Example
 
 Run `astro workspace switch <workspace-id>` to switch between Workspaces.
+
+```sh
+astro workspace switch [ADD EXAMPLE ID]
+```
 
 You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. On Astro, if you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
 
@@ -65,7 +69,7 @@ astro workspace switch <workspace_id> <options>
 | `-p`, `--paginated` | Choose whether or not to paginate the list of available Workspaces to choose from.           | `TRUE` or `FALSE`      |
 | `-s`, `--page-size` | The length of the list per page when paginate is set to `TRUE`.                              | Any integer            |
 
-## Usage
+## Example
 
 Run `astro workspace switch <workspace-id>` to switch between Workspaces.
 
