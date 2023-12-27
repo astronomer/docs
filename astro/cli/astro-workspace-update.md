@@ -2,12 +2,18 @@
 sidebar_label: "astro workspace update"
 title: "astro workspace update"
 id: astro-workspace-update
-description: Update an Astro Workspace. 
+description: Update an Astro Workspace.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Update an Astro Workspace. 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
+Update an Astro Workspace.
 
 ## Usage
 
@@ -15,7 +21,7 @@ Update an Astro Workspace.
 astro workspace update <workspace-id> <options>
 ```
 
-You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. If you do not provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization. 
+You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. If you do not provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
 
 ## Options
 

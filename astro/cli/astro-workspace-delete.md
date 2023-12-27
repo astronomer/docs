@@ -4,10 +4,16 @@ title: "astro workspace delete"
 id: astro-workspace-delete
 description: Delete an Astro Workspace.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Delete an Astro Workspace. 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
+Delete an Astro Workspace.
 
 ## Usage
 
@@ -15,7 +21,7 @@ Delete an Astro Workspace.
 astro workspace delete <workspace-id>
 ```
 
-You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. If you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization. 
+You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. If you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
 
 ## Related commands
 
