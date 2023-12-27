@@ -2,12 +2,18 @@
 sidebar_label: "astro organization token list"
 title: "astro organization token list"
 id: astro-organization-token-list
-description: List all Organization API tokens. 
+description: List all Organization API tokens.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-List all Organization API tokens. 
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
+
+List all Organization API tokens.
 
 ## Usage
 

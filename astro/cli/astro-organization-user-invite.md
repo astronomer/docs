@@ -4,8 +4,14 @@ title: "astro organization user invite"
 id: astro-organization-user-invite
 description: Invite users to your Organization.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
 
 Invite users to your current Astro Organization.
 
@@ -17,11 +23,11 @@ This command will replace `astro user invite` in Astro CLI v1.15.0. Any instance
 
 ## Usage
 
-Run `astro organization user invite` to invite a new user to your Astronomer Organization. You can use `astro organization user invite` to invite multiple users to an Organization at a time. By default, new users are added as an `ORGANIZATION_MEMBER`. See [Add a group of users to Astro using the Astro CLI](manage-organization-users.md#add-a-group-of-users-to-astro-using-the-astro-cli). 
+Run `astro organization user invite` to invite a new user to your Astronomer Organization. You can use `astro organization user invite` to invite multiple users to an Organization at a time. By default, new users are added as an `ORGANIZATION_MEMBER`. See [Add a group of users to Astro using the Astro CLI](manage-organization-users.md#add-a-group-of-users-to-astro-using-the-astro-cli).
 
-You must add new users to an Astro Organization before you can add them to specific Astro Workspaces. See [`astro workspace user add`](cli/astro-workspace-user-add.md). 
+You must add new users to an Astro Organization before you can add them to specific Astro Workspaces. See [`astro workspace user add`](cli/astro-workspace-user-add.md).
 
-## Options 
+## Options
 
 | Option    | Description                                                                                                                                       | Valid Values                                                                                                                             |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -4,8 +4,14 @@ title: "astro organization token roles"
 id: astro-organization-token-roles
 description: List an Organization API token's roles.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available for Deployments on Astro.
+
+:::
 
 List the roles that an Organization API token has throughout the Organization, including Workspace roles.
 
