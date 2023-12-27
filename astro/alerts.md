@@ -27,7 +27,7 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 :::info
 
-Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLineage enabled. If you disabled OpenLineage in your Deployment, you need to enable it to use Astro alerts. See [Enable/Disable OpenLineage](set-up-data-lineage.md#enabledisable-openlineage).
+Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLineage enabled. If you disabled OpenLineage in your Deployment, you need to enable it to use Astro alerts. See [Disable OpenLineage](set-up-data-lineage.md#disable-openlineage) to find how to disable and re-enable OpenLineage.
 
 :::
 
