@@ -137,13 +137,13 @@ The following table lists the operating systems and architectures supported by e
 
 | Astro Runtime | Operating System (OS)  | Architecture    |
 | ------------- | ---------------------- | --------------- |
-| 4             | Debian 11.3 (bullseye) | AMD64           |
+| 4             | Debian 11.1 (bullseye) | AMD64           |
 | 5             | Debian 11.3 (bullseye) | AMD64           |
-| 6             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 7             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 8             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 9             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 10            | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 6             | Debian 11.5 (bullseye) | AMD64 and ARM64 |
+| 7             | Debian 11.5 (bullseye) | AMD64 and ARM64 |
+| 8             | Debian 11.7 (bullseye) | AMD64 and ARM64 |
+| 9             | Debian 11.7 (bullseye) | AMD64 and ARM64 |
+| 10            | Debian 11.8 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 
