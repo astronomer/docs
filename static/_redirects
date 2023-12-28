@@ -312,6 +312,7 @@
 # CLI restructuring redirects
 /astro/cli/run-airflow-locally#troubleshoot-KubernetesPodOperator-issues /astro/cli/troubleshoot-locally#troubleshoot-KubernetesPodOperator-issues 301
 /astro/cli/run-airflow-locally#ports-are-not-available-for-my-local-airflow-webserver /astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver 301
+/astro/import-export-connections-variables#from-the-cloud-ui /astro/cli/local-connections#from-the-cloud-ui 301
 
 
 # redirect links out in the wild (beyond our control)

@@ -20,7 +20,7 @@ This document includes instructions to configure high-level Organization setting
 
 ## Update your Organization name
 
-Your Organization name is a human-readable name that appears in the Cloud UI and in the Astro CLI. Updating your Organization name is a cosmetic change that has no affect on any unique Organization information, such as your Organization ID or short name, which persists for the lifetime of the Organization. 
+Your Organization name is a human-readable name that appears in the Cloud UI and in the Astro CLI. Updating your Organization name is a cosmetic change that has no affect on any unique Organization information, such as your Organization ID or short name, which persists for the lifetime of the Organization.
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. This opens the **General** Organization page.
 2. In the **Organization Detail** section, click **Edit Details**.
@@ -28,7 +28,7 @@ Your Organization name is a human-readable name that appears in the Cloud UI and
 
 ## Configure environment secrets fetching for the Astro Environment Manager
 
-When members of your Organization test an Astro project using the Astro CLI, they can pull connections configured in the [Astro Environment Manager](#create-and-link-connections) to their local Airflow environment based on their Workspace credentials. See [Import and export Airflow connections and variables](import-export-connections-variables.md#from-the-cloud-ui) for more details. 
+When members of your Organization test an Astro project using the Astro CLI, they can pull connections configured in the [Astro Environment Manager](#create-and-link-connections) to their local Airflow environment based on their Workspace credentials. See [Import and export Airflow connections and variables](cli/local-connections.md#from-the-cloud-ui) for more details.
 
 You can enable or disable this feature based on whether you want Organization members to access Astro-configured connection details from their local machines.
 
