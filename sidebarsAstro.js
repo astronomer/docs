@@ -373,9 +373,14 @@ module.exports = {
       id: "cli/develop-project",
     },
     {
-      type: "doc",
-      label: "Run Airflow locally",
-      id: "cli/run-airflow-locally",
+      type: "category",
+      label: "Work locally",
+      link: {type: "doc", id: "cli/work-locally"},
+      items: [
+        "cli/run-airflow-locally",
+        "cli/local-connections",
+        "cli/troubleshoot-locally"
+      ]
     },
     {
       type: "doc",
