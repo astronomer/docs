@@ -5,6 +5,12 @@ id: release-notes
 description: Astronomer Software release notes.
 ---
 
+<p>
+    <a href="/astro-software-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
+
 This document contains release notes for each version of Astronomer Software.
 
 This page contains release notes for all recent Astronomer Software versions. 
