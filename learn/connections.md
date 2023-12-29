@@ -29,7 +29,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md/).
+- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
 
