@@ -23,8 +23,9 @@
     "@docusaurus/preset-classic": "3.0.1",
     "@docusaurus/theme-mermaid": "^3.0.1",
     "@fontsource/inter": "^4.5.0",
-    "@mdx-js/react": "^1.6.21",
+    "@mdx-js/react": "^3.0.0",
     "@svgr/webpack": "^5.5.0",
+    "prism-react-renderer": "^2.1.0",
     "analytics-node": "^6.2.0",
     "classnames": "^2.3.2",
     "clsx": "^1.1.1",
@@ -41,6 +42,9 @@
     "stable": "^0.1.8",
     "url-loader": "^4.1.1",
     "xml": "^1.0.1"
+  },
+  "engines": {
+    "node": ">=18.0"
   },
   "browserslist": {
     "production": [

@@ -5,7 +5,9 @@ import AdmonitionTypeInfo from '@theme/Admonition/Type/Info';
 import AdmonitionTypeWarning from '@theme/Admonition/Type/Warning';
 import AdmonitionTypeDanger from '@theme/Admonition/Type/Danger';
 import AdmonitionTypeCaution from '@theme/Admonition/Type/Caution';
-import AdmonitionTypeCLi from '@theme/Admonition/Type/Cli';
+import AdmonitionTypeCli from '@theme/Admonition/Type/Cli';
+import AdmonitionTypeHighlight from '@theme/Admonition/Type/Highlight';
+
 
 const admonitionTypes = {
   note: AdmonitionTypeNote,
@@ -13,8 +15,10 @@ const admonitionTypes = {
   info: AdmonitionTypeInfo,
   warning: AdmonitionTypeWarning,
   danger: AdmonitionTypeDanger,
-  cli: AdmonitionTypeCLi,
+  cli: AdmonitionTypeCli,
+  highlight: AdmonitionTypeHighlight,
 };
+
 // Undocumented legacy admonition type aliases
 // Provide hardcoded/untranslated retrocompatible label
 // See also https://github.com/facebook/docusaurus/issues/7767
