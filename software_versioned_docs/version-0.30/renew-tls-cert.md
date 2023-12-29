@@ -115,7 +115,7 @@ Once you set up a TLS certificate for Astronomer, you'll need to establish a pro
    kubectl get certificates -n astronomer
    ```
 
-6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the Software installation guide ([AWS](install-aws-standard.md#step-5-create-a-kubernetes-tls-secret), [GCP](install-gcp-standard.md#step-5-create-a-kubernetes-tls-secret), [AKS](install-azure-standard.md/#step-5-create-a-kubernetes-tls-secret)).
+6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the Software installation guide ([AWS](install-aws-standard.md#step-5-create-a-kubernetes-tls-secret), [GCP](install-gcp-standard.md#step-5-create-a-kubernetes-tls-secret), [AKS](install-azure-standard.md#step-5-create-a-kubernetes-tls-secret)).
 
 ## Manually renew TLS certificates
 
