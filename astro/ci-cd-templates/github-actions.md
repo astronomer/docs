@@ -399,7 +399,6 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration. When you make a commit to a specified branch, this workflow sets your Deployment API credentials as environment variables, installs the latest version of the Astro CLI, checks to see if your `dags` folder has changes, and then either completes a full code deploy or a DAG-only code deploy.
 
-
     ```yaml
     name: Astronomer CI - Deploy code
 
