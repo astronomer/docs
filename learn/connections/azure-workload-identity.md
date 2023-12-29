@@ -78,7 +78,7 @@ Then, select the Azure workload identity option from the grid menu and enter you
 
 If you are not running Airflow on Astro, or if you prefer to manage connections directly from Airflow, you can add the connection using the Airflow UI. 
 
-![example_conn](/img/examples/connection-azure-workload-identity-6.png)
+![example_airflow_conn](/img/examples/connection-azure-workload-identity-6.png)
 
 1. In the Airflow UI, go to **Admin** > **Connections**.
 2. Click **+** to add a new connection, then select `Azure` as the connection type.
