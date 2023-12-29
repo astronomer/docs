@@ -1,11 +1,9 @@
 ---
 sidebar_label: 'Use Astro connection locally'
-title: 'Work with Astro connections locally'
+title: 'Work locally with Astro connections'
 id: local-connections
 description: Use connections created in the Astro Environment Manager locally.
 ---
-
-## From the Cloud UI
 
 You can share Airflow connections created through the [Environment Manager in the Cloud UI](create-and-link-connections.md) with local Airflow projects. These connections are not visible from the Airflow UI when you run your project locally.
 
