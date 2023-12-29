@@ -156,7 +156,6 @@ module.exports = {
       items: [
         'airflow-sagemaker',
         'airflow-kafka',
-        'connections/azure-workload-identity',
         'connections/azure-blob-storage',
         'airflow-azure-container-instances',
         'airflow-azure-data-explorer',
@@ -174,6 +173,7 @@ module.exports = {
             'airflow-azure-data-factory-integration',
           ],
         },
+        'connections/azure-workload-identity',
         'connections/bigquery',
         'airflow-cohere',
         {
