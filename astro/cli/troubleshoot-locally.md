@@ -5,6 +5,8 @@ id: troubleshoot-locally
 description: Address and resolve common issues with local development.
 ---
 
+Use the following topics to resolve common issues with running an Astro project in a local environment.
+
 ## Troubleshoot KubernetesPodOperator issues
 
 View local Kubernetes logs to troubleshoot issues with Pods that are created by the KubernetesPodOPerator. See [Test and Troubleshoot the KubernetesPodOperator Locally](https://docs.astronomer.io/learn/kubepod-operator#run-the-kubernetespodoperator-locally).
@@ -42,11 +44,7 @@ For example, if your `packages.txt` file contains several packages and you recei
 
 5. Open your Astro project `packages.txt` file and add the package references you removed in Step 1 individually until you find the package that is the source of the error.
 
-## Common issues
-
-Use the following topics to resolve common issues with running an Astro project in a local environment.
-
-### Why aren't my new DAGs visible in the Airflow UI?
+## New DAGs aren't visible in the Airflow UI
 
 Make sure that no DAGs have duplicate `dag_ids`. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
 
@@ -56,7 +54,7 @@ To have the scheduler check for new DAGs more frequently, you can set the [`AIRF
 
 In Astro Runtime 7.0 and later, the Airflow UI **Code** page includes a **Parsed at** value which shows when a DAG was last parsed. This value can help you determine when a DAG was last rendered in the Airflow UI. To view the **Parsed at** value in the Airflow UI, click **DAGs**, select a DAG, and then click **Code**. The **Parsed at** value appears at the top of the DAG code pane.
 
-### Why are my DAGs running slowly?
+## DAGs running slowly
 
 If your Astro project contains many DAGs or tasks, then you might experience performance issues in your local Airflow environment.
 
@@ -81,7 +79,7 @@ If you are using Podman, you can run `podman machine set --cpus 4 --memory 4096`
 
 :::
 
-### My Astro project won't load after running `astro dev start`
+## Astro project won't load after running `astro dev start`
 
 If you're running the Astro CLI on a Mac computer that's built with the Apple M1 chip, your Astro project might take more than 5 mins to start after running `astro dev start`. This is a current limitation of Astro Runtime and the Astro CLI.
 
@@ -108,7 +106,7 @@ These logs should help you understand why your webserver or scheduler is unhealt
 - Misconfigured Dockerfile or Docker override file.
 - Misconfigured Airflow settings including `packages.txt` or `requirements.txt`.
 
-### Ports are not available for my local Airflow webserver
+## Ports are not available for my local Airflow webserver
 
 By default, the Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database in a local Airflow environment. If these ports are already in use on your local computer, an error message similar to the following appears:
 
@@ -121,7 +119,7 @@ To resolve a port availability error, you have the following options:
 - Stop all running Docker containers and restart your local environment using `astro dev restart`.
 - Change the default ports for these components. For example, you can use `astro config set webserver.port 8081` for the webserver and `astro config set postgres.port 5433` for Postgres. See [Configure CLI](cli/configure-cli.md) for all available configurations.
 
-#### Stop all running Docker containers
+### Stop all running Docker containers
 
 1. Run `docker ps` to identify the Docker containers running on your computer.
 2. Copy the values in the `CONTAINER ID` column.
@@ -130,7 +128,7 @@ To resolve a port availability error, you have the following options:
     - Run `docker stop <container_id>` to stop a specific Docker container. Replace `<container_id>` with one of the values you copied in step 2.
     - Run `docker stop $(docker ps -q)` to stop all running Docker containers.
 
-#### Change the default port assignment
+### Change the default port assignment
 
 If port 8080 or 5432 are in use on your machine by other services, the Airflow webserver and metadata database won't be able to start. To run these components on different ports, run the following commands in your Astro project:
 
