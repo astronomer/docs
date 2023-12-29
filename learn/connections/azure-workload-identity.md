@@ -16,6 +16,7 @@ This guide explains how to set up an Azure Workload Identity connection using th
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/). You can also run Azure CLI commands through the Azure web portal as well! 
 - A Hosted [Astro deployment](https://docs.astronomer.io/astro/cli/get-started-cli).
 - An Azure Entra ID Managed Identity that you want your Astro workloads in this deployment to run as. For information on how to create one, please refer to the [Azure documentation](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp)
 
@@ -25,7 +26,12 @@ You can also use the Azure Workload Identity connection option when running OSS 
 
 ## Get connection details
 
-In order to create a workload identity for your deployment that leverages your Entra ID managed identity, you'll need to execute an Azure CLI command that links your Airflow deployment and managed identity. To simplify this process, Astro has a command generator located in a pop up menu under the **Details** tab of your Deployment overview.
+In order to create a workload identity for your deployment that leverages your Entra ID managed identity, you'll need to execute an Azure CLI command that links your Airflow deployment and managed identity.  The two required credentials to create this workload identity, Managed Identity Name and Resource Group, are both available from the Azure Managed Identity resource overview screen: 
+
+![identity-details-screen](/img/examples/connection-azure-workload-identity-3.png)
+
+
+To simplify the process of using these credentials to create a workload identity, Astro has a command generator located in a pop up menu under the **Details** tab of your Deployment overview.
 
 
 ![details-screen](/img/examples/connection-azure-workload-identity-1.png)
@@ -39,10 +45,6 @@ If you plan to use the same workload identity for multiple deployments, you'll n
 
 :::
 
-
-The two required credentials, Managed Identity Name and Resource Group, are both available from the Azure Managed Identity resource overview screen: 
-
-![identity-details-screen](/img/examples/connection-azure-workload-identity-3.png)
 
 After you've entered those credentials into the pop up menu, copy the code block from under `Run in terminal:` and either open the Azure CLI directly from the web portal, or from a local terminal window that has the Azure CLI installed. Then, paste the code block and run it to create your Workload Identity. After the Workload Identity has been created and authenticated to the Deployment, you'll be returned a json package that contains all the necessary details for adding the connection to Airflow. Specifically, you'll need to copy the `clientId` and `tenantId` fields. 
 
@@ -76,7 +78,11 @@ Then, select the Azure workload identity option from the grid menu and enter you
 
 If you are not running Airflow on Astro, or if you prefer to manage connections directly from Airflow, you can add the connection using the Airflow UI. 
 
-In the Airflow UI, go to **Admin** > **Connections**. Click **+** to add a new connection, then select `Azure` as the connection type. Enter the `clientId` and `tenantId` fields you retrieved from [Get connection details](#get-connection-details). You can also specify a `subscriptionId` for a specific service if you need to do so. 
+![example_conn](/img/examples/connection-azure-workload-identity-6.png)
+
+1. In the Airflow UI, go to **Admin** > **Connections**.
+2. Click **+** to add a new connection, then select `Azure` as the connection type.
+3. Enter the `clientId` and `tenantId` fields you retrieved from [Get connection details](#get-connection-details) and enter them into the `Managed Identity Client ID` and `Workload Identity Tenant ID` fields respectively. You can also specify a `subscriptionId` for a specific service if you need to do so. 
 
 
 
