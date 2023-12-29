@@ -52,7 +52,7 @@ Using branch-based Deployments with the Astro Environment Manager allows your te
 After a Workspace Owner creates connections, DAG authors can develop DAGs without needing to reconfigure connections between development and production:
 
 - A DAG author creates a new development branch of an Astro project. The CI/CD pipeline for the repository deploys their branch to the development Deployment on Astro. This is known as a [multi-branch CI/CD pipeline](set-up-ci-cd.md#multiple-environments).
-- The DAG author has access to development resources because the Workspace Author configured a default Airflow connection for the Deployment. The author can [pull this connection onto their local machine](local-connections.md#from-the-cloud-ui) for testing purposes, or test by deploying to the development Deployment on Astro.
+- The DAG author has access to development resources because the Workspace Author configured a default Airflow connection for the Deployment. The author can [pull this connection onto their local machine](cli/local-connections.md#from-the-cloud-ui) for testing purposes, or test by deploying to the development Deployment on Astro.
 - When the DAG author finishes development, they merge their development branch into production. The CI/CD pipeline deploys this change to the production Deployment.
 - When the DAG author's code runs in the production Deployment, it now accesses production resources based on the overrides configured by the Workspace Owner.
 
