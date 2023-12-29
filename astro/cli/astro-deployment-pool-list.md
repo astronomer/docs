@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: "img/term-icon.png" }
 
 :::info
 
-This command is only available for Deployments on Astro.
+This command is only available on Astro.
 
 :::
 
