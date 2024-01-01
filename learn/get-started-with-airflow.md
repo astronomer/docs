@@ -295,8 +295,11 @@ You can find [example DAGs](https://registry.astronomer.io/dags) in the Astronom
 
 1. Go to the [Astronomer Registry](https://registry.astronomer.io/).
 2. In the search bar, search for `TaskFlow API`.
-3. Go to the **DAGs** tab and open the **TaskFlow API ETL Example** DAG.
-4. In the DAG's information page, click the **Code** tab and copy the contents of the DAG code.
+3. Click on the **TaskFlow API ETL Example DAG**.
+4. In the DAG's information page, click the **Code** tab and copy the DAG code.
+
+    ![Copy DAG code from the Astronomer Registry](/img/tutorials/get-started-with-airflow_copy_dag_code.png)
+
 5. Paste the code into a new `.py` in the `dags` folder of your Astro project.
 6. Run the DAG from the Airflow UI.
 
