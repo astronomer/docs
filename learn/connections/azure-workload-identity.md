@@ -16,7 +16,7 @@ This guide explains how to set up an Azure Workload Identity connection using th
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/). You can also run Azure CLI commands through the Azure web portal as well! 
+- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) or access to the Azure web portal.
 - A Hosted [Astro deployment](https://docs.astronomer.io/astro/cli/get-started-cli).
 - An Azure Entra ID Managed Identity that you want your Astro workloads in this deployment to run as. For information on how to create one, please refer to the [Azure documentation](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp)
 
