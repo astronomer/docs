@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Use Astro connection locally'
-title: 'Work locally with Astro connections'
+sidebar_label: 'Pull connections from Astro'
+title: 'Work locally with Airflow connections hosted on Astro'
 id: local-connections
 description: Use connections created in the Astro Environment Manager locally.
 ---
 
-You can share Airflow connections created through the [Environment Manager in the Cloud UI](create-and-link-connections.md) with local Airflow projects. These connections are not visible from the Airflow UI when you run your project locally.
+You can share Airflow connections created through the [Astro Environment Manager](create-and-link-connections.md) with local Airflow projects. These connections are not visible from the Airflow UI when you run your project locally.
 
 When you start a local project using `astro dev start`, you specify either the Workspace or Deployment that you want to import connections from. When you start your project with these settings, the Astro CLI fetches the necessary connections from Astro. Then, after the local Airflow containers start, the Astro CLI populates the metadata database with the connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
 

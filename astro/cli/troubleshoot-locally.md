@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Troubleshoot locally'
-title: 'Troubleshoot local development'
+sidebar_label: 'Troubleshoot a local environment'
+title: 'Troubleshoot a local Airflow environment'
 id: troubleshoot-locally
 description: Address and resolve common issues with local development.
 ---

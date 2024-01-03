@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Work locally'
-title: 'Run your Astro project locally'
+sidebar_label: 'Overview'
+title: 'Run Airflow locally'
 id: work-locally
 description: Work with your Astro project in a local environment by running Airflow and DAGs locally.
 ---
 
-Running Airflow locally with the Astro CLI can be an easy way to preview and debug DAG changes quickly before deploying your code to Astro. By locally running your DAGs, you can fix issues with your DAGs without consuming infrastructure resources or waiting on code deploy processes.
+Running Airflow locally with the Astro CLI lets you preview and debug DAG changes before deploying to production. In a local Airflow environment, you can fix issues with your DAGs without consuming infrastructure resources or waiting on code deploy processes. See the following documentation to get started:
 
 - [Run Airflow locally](cli/run-airflow-locally.md)
 - [Test your DAGs](cli/test-your-astro-project-locally.md)
