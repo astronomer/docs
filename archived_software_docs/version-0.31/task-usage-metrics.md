@@ -9,14 +9,14 @@ Task usage metrics provide an overview of your Airflow task runs and can help yo
 
 ## Enable task usage metrics
 
-To enable task usage metrics for your entire Astronomer installation, configure the following values in your `config,yaml` file:
+To enable task usage metrics for your entire Astronomer installation, configure the following values in your `config.yaml` file:
 
 ```yaml
 global:
   taskUsageMetricsEnabled: true
 ```
 
-After you set this configuration, Astronomer Software begins to run a cron job for collecting task usage metrics at the 57th minute of every hour, sending them to Astronomer support, and displaying them in the Software UI every. By default, your Astronomer installation retains this data for 90 days. 
+After you set this configuration, Astronomer Software begins to run a cron job for collecting task usage metrics at the 57th minute of every hour, sending them to Astronomer support, and displaying them in the Software UI every. By default, your Astronomer installation retains this data for 90 days.
 
 ## Set up task usage metrics on a Deployment (_Required only for Astro Runtime < 7.2_)
 
