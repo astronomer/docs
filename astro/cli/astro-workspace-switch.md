@@ -29,21 +29,21 @@ values={[
 ## Usage
 
 ```sh
-astro workspace switch <workspace_id>
+astro workspace switch
 ```
 
 ## Options
 
 | Option                    | Description                                                                                  | Valid Values           |
 | ------------------------- | -------------------------------------------------------------------------------------------- | ---------------------- |
-| `workspace_id` (Optional) | The ID of the workspace you want to switch to. Otherwise, the CLI prompts you to choose one. | Any valid Workspace ID |
+| `<workspace_id>` (Optional) | The ID of the Workspace you want to switch to. If not specified, the CLI prompts you to choose one. | Any valid Workspace ID |
 
 ## Example
 
 Run `astro workspace switch <workspace-id>` to switch between Workspaces.
 
 ```sh
-astro workspace switch [ADD EXAMPLE ID]
+astro workspace switch clqw6uskr000008l9370y04jd
 ```
 
 You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. On Astro, if you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
@@ -58,7 +58,7 @@ You can find a Workspace's ID by running `astro workspace list`, or by opening y
 ## Usage
 
 ```sh
-astro workspace switch <workspace_id> <options>
+astro workspace switch <options>
 ```
 
 ## Options
@@ -66,7 +66,7 @@ astro workspace switch <workspace_id> <options>
 | Option              | Description                                                                                  | Valid Values           |
 | ------------------- | -------------------------------------------------------------------------------------------- | ---------------------- |
 | `<workspace_id>`    | The ID of the workspace you want to switch to. Otherwise, the CLI prompts you to choose one. | Any valid Workspace ID |
-| `-p`, `--paginated` | Choose whether or not to paginate the list of available Workspaces to choose from.           | `TRUE` or `FALSE`      |
+| `-p`, `--paginated` | Choose whether or not to paginate the list of available Workspaces.           | `TRUE` or `FALSE`      |
 | `-s`, `--page-size` | The length of the list per page when paginate is set to `TRUE`.                              | Any integer            |
 
 ## Example

@@ -16,7 +16,7 @@ The behavior and format of this command differs depending on what Astronomer pro
 
 :::
 
-List all Teams in your current Workspace as well as their level of [user permissions](https://docs.astronomer.io/astro/user-permissions) within the Workspace.
+List all Teams in your current Workspace, as well as their level of user permissions within the Workspace.
 
 <Tabs
 defaultValue="astro"
@@ -56,14 +56,14 @@ astro workspace team list
 ## Usage
 
 ```sh
-astro workspace team list <flags>
+astro workspace team list <options>
 ```
 
 ## Options
 
 | Option           | Description                                      | Valid Values           |
 | ---------------- | ------------------------------------------------ | ---------------------- |
-| `<workspace_id>` | The Workspace you want to associate the team to. | Any valid Workspace ID |
+| `<workspace_id>` | The Workspace you want to list Teams for. | Any valid Workspace ID |
 
 ## Output
 

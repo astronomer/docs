@@ -16,7 +16,7 @@ The behavior and format of this command differs depending on what Astronomer pro
 
 :::
 
-Create an Astro Workspace.
+Create a Workspace.
 
 <Tabs
     defaultValue="astro"
@@ -67,7 +67,7 @@ astro workspace create <options>
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `--description`   | The description for the Workspace.                                                                                                      | Any string    |
-| `--label`          | The label for your new Workspace.                                                                                                             | Any string    |
+| `--label`          | The label for the Workspace.                                                                                                             | Any string    |
 
 ## Examples
 
