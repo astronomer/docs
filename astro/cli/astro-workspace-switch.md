@@ -61,6 +61,8 @@ You can find a Workspace's ID by running `astro workspace list`, or by opening y
 astro workspace switch <options>
 ```
 
+You can find a Workspace's ID by running `astro workspace list`.
+
 ## Options
 
 | Option              | Description                                                                                  | Valid Values           |
@@ -68,12 +70,6 @@ astro workspace switch <options>
 | `<workspace_id>`    | The ID of the workspace you want to switch to. Otherwise, the CLI prompts you to choose one. | Any valid Workspace ID |
 | `-p`, `--paginated` | Choose whether or not to paginate the list of available Workspaces.           | `TRUE` or `FALSE`      |
 | `-s`, `--page-size` | The length of the list per page when paginate is set to `TRUE`.                              | Any integer            |
-
-## Example
-
-Run `astro workspace switch <workspace-id>` to switch between Workspaces.
-
-You can find a Workspace's ID by running `astro workspace list`.
 
 ## Related commands
 
