@@ -29,7 +29,11 @@ If you want to use Microsoft Entra Workload ID with a generic Apache Airflow pro
 
 ## Get connection details
 
-In order to create a workload identity for your deployment that leverages your Entra ID managed identity, you'll need to execute an Azure CLI command that links your Airflow deployment and managed identity.  The two required credentials to create this workload identity, Managed Identity Name and Resource Group, are both available from the Azure Managed Identity resource overview screen: 
+To create a workload identity for your Airflow environment, you first need to link your Airflow environment to your Entra ID managed identity.
+
+1. In your Azure portal, open the **Managed Identities** menu.
+2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID**, and **Resource group name**.
+3. Run the following command to create a workload identity for your Airflow environment [INSERT COMMAND]
 
 ![identity-details-screen](/img/examples/connection-azure-workload-identity-3.png)
 
