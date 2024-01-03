@@ -33,7 +33,15 @@ To create a workload identity for your Airflow environment, you first need to li
 
 1. In your Azure portal, open the **Managed Identities** menu.
 2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID**, and **Resource group name**.
-3. Run the following command to create a workload identity for your Airflow environment [INSERT COMMAND]
+3. Run the following command to create a workload identity for your Airflow environment, replacing the `managed identity` and `resource group` values with your own. 
+   
+```bash
+workloads=( scheduler triggerer worker )
+for workload in "${workloads[@]}"; do
+    az identity federated-credential create --name siderean-battery-0433-$workload --identity-name 042-t49320-jg9j42390-yhjy9t-jgbjnhwre9 --resource-group vk-9043=qj-tqg9vhn24809ht-ghgv9-023qhu0-rt --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-$workload-serviceaccount
+done
+az identity federated-credential create --name siderean-battery-0433-kpo --identity-name 042-t49320-jg9j42390-yhjy9t-jgbjnhwre9 --resource-group vk-9043=qj-tqg9vhn24809ht-ghgv9-023qhu0-rt --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-kpo
+```
 
 ![identity-details-screen](/img/examples/connection-azure-workload-identity-3.png)
 
