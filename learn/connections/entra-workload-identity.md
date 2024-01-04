@@ -33,20 +33,19 @@ To create a workload identity for your Airflow environment, you first need to li
 
 1. In your Azure portal, open the **Managed Identities** menu.
 2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID**, and **Resource group name**.
-3. Run the following command to create a workload identity for your Airflow environment, replacing the `managed identity` and `resource group` values with your own. 
+3. Run the following command to create a workload identity for your Airflow environment, replacing the `<managed-identity>` and `<resource-group>` values with your managed identity **Name** and **Resource group name** respectively. 
    
 ```bash
 workloads=( scheduler triggerer worker )
 for workload in "${workloads[@]}"; do
     az identity federated-credential create --name siderean-battery-0433-$workload --identity-name 042-t49320-jg9j42390-yhjy9t-jgbjnhwre9 --resource-group vk-9043=qj-tqg9vhn24809ht-ghgv9-023qhu0-rt --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-$workload-serviceaccount
 done
-az identity federated-credential create --name siderean-battery-0433-kpo --identity-name 042-t49320-jg9j42390-yhjy9t-jgbjnhwre9 --resource-group vk-9043=qj-tqg9vhn24809ht-ghgv9-023qhu0-rt --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-kpo
+az identity federated-credential create --name siderean-battery-0433-kpo --identity-name <managed-identity> --resource-group <resource-group> --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-kpo
 ```
 
 ![identity-details-screen](/img/examples/connection-azure-workload-identity-3.png)
 
 If you're using Astro, follow the steps in [Authorize Deployments to Cloud resources](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud?tab=azure#setup) to create a workload identity for your Deployment.
-
 
 ## Create your connection
 
@@ -57,7 +56,7 @@ To create your connection in the Airflow UI:
 3. Enter the `clientId` and `tenantId` fields you retrieved from [Get connection details](#get-connection-details) and enter them into the **Managed Identity Client ID** and **Workload Identity Tenant ID** fields respectively. You can also specify a **subscriptionId** for a specific service if required.
 4. Click **Save**.
 
-To create your connection in Astro, follow the steps to [create a new connection in the Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections). Select the **Azure workload identity** connection type and enter your **Client ID** and **Tenant ID**. If you need to specify a **Subscription ID** for a specific service, you can open up the **More options** dropdown menu and add it there.
+To create your connection in Astro, follow the steps to [create a new connection in the Astro Environment Manager](https://docs.astronomer.io/astro/create-and-link-connections). Select the **Azure workload identity** connection type and enter your **Client ID** and **Tenant ID**. If you need to specify a **Subscription ID** for a specific service, you can open the **More options** dropdown menu and add it there.
 
 ![create_connectionmenu](/img/examples/connection-azure-workload-identity-4.png)
 ![example_conn](/img/examples/connection-azure-workload-identity-5.png)
