@@ -173,7 +173,7 @@ module.exports = {
             'airflow-azure-data-factory-integration',
           ],
         },
-        'connections/azure-workload-identity',
+        'connections/entra-workload-identity',
         'connections/bigquery',
         'airflow-cohere',
         {
