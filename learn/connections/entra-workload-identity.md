@@ -1,6 +1,6 @@
 ---
 title: "Create a Microsoft Entra Workload ID connection in Airflow"
-id: entra-workload-id
+id: entra-workload-identity
 sidebar_label: "Microsoft Entra Workload ID"
 description: Learn how to create an Azure Workload Identity connection in Airflow.
 sidebar_custom_props: { icon: 'img/integrations/azure.png' }
