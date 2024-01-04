@@ -42,19 +42,9 @@ All Astro clusters include a set of external IP addresses that persist for the l
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
-4. Add the IP addresses to the allowlist of any external services that you want your cluster to access.
+4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
 
-After you allowlist a cluster's IP address, all Deployments in that cluster are allowed to access your external resources.
-
-### Allowlist external IP addresses for a Deployment
-
-To grant access to your external resources on per-Deployment basis, or if you are using a standard cluster, allowlist the IPs only for specific Deployments. For each Deployment that you want to allowlist:
-
-1. In the Cloud UI, select a Deployment, then click Details.
-2. Copy the IP addresses under External IPs.
-3. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
-
-When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
+After you allowlist a cluster's IP addresses, all Deployments in that cluster are allowed to access your GCP resources. When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer managed control plane.
 
 ## Create a private connection between Astro and GCP
 
