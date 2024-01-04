@@ -38,7 +38,7 @@ To create a workload identity for your Airflow environment, you first need to li
 ```bash
 workloads=( scheduler triggerer worker )
 for workload in "${workloads[@]}"; do
-    az identity federated-credential create --name siderean-battery-0433-$workload --identity-name 042-t49320-jg9j42390-yhjy9t-jgbjnhwre9 --resource-group vk-9043=qj-tqg9vhn24809ht-ghgv9-023qhu0-rt --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-$workload-serviceaccount
+    az identity federated-credential create --name siderean-battery-0433-$workload --identity-name <managed-identity> --resource-group <resource-group> --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-$workload-serviceaccount
 done
 az identity federated-credential create --name siderean-battery-0433-kpo --identity-name <managed-identity> --resource-group <resource-group> --issuer https://westus2.oic.prod-aks.azure.com/b84efac8-cfee-467a-b223-23b9aea1486d/f1346028-6d70-4fde-b691-a7a9fa947caf/ --subject system:serviceaccount:siderean-battery-0433:siderean-battery-0433-kpo
 ```
