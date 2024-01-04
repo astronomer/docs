@@ -46,7 +46,7 @@ The following example shows how you can use a `pod_override` configuration in yo
 import pendulum
 import time
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.decorators import task
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator

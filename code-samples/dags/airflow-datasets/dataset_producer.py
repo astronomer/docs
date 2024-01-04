@@ -1,5 +1,5 @@
 from pendulum import datetime
-from airflow import Dataset
+from airflow.datasets import Dataset
 from airflow.decorators import dag, task
 
 API = "https://www.thecocktaildb.com/api/json/v1/1/random.php"

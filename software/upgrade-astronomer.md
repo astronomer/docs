@@ -239,6 +239,22 @@ If you set `sysAdminScalabilityImprovementsEnabled` in your `config.yaml` file, 
 
 ### Upgrade to Astronomer Software 0.31
 
+#### Upgrade Airflow Helm chart to 1.9.4 for all Deployments
+
+If your Deployments are using version 1.9.3 or earlier of the Airflow Helm chart, their task logs will be missing when you upgrade to Astronomer Software 0.31. To upgrade your Deployments' Airflow Helm chart versions during your platform upgrade, ensure that you set ` --set astronomer.houston.upgradeDeployments.enabled=true` for your upgrade command like in the following example:
+
+```zsh
+helm upgrade --namespace $NAMESPACE \
+            -f ./config.yaml \
+            --reset-values \
+            --version $ASTRO_VERSION \
+            --debug \
+            --timeout 20m \
+            --set astronomer.houston.upgradeDeployments.enabled=true \
+            $RELEASE_NAME \
+            astronomer/astronomer
+```
+
 #### New default resource limits and requests 
 
 Astronomer Software 0.31 includes new default resource limits and requests on the following resources: 

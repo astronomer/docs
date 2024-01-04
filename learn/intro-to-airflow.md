@@ -110,7 +110,7 @@ The following Airflow components must be running at all times:
 
 - **Webserver**: A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
 - **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html)**: A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
-- **[Database](airflow-database.md)**: A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL, MsSQL, and SQLite are also supported.
+- **[Database](airflow-database.md)**: A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
 - **[Executor](airflow-executors-explained.md)**: The mechanism that defines how the available computing resources are used to execute tasks. An executor is running within the scheduler whenever Airflow is up.
 
 Additionally, you may also have the following situational components:

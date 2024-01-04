@@ -9,7 +9,7 @@ sidebar_custom_props: { icon: 'img/integrations/great-expectations.png' }
 import CodeBlock from '@theme/CodeBlock';
 import gx_dag from '!!raw-loader!../code-samples/dags/airflow-great-expectations/gx_dag.py';
 
-[Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against data in a [Source Data System](https://docs.greatexpectations.io/docs/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/0.15.50/guides/connecting_to_your_data/in_memory/pandas/). Astronomer, with help from Superconductive, maintains the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
+[Great Expectations](https://greatexpectations.io) (GX) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in JSON or YAML, then run validations using those [Expectation Suites](https://docs.greatexpectations.io/docs/terms/expectation_suite/) against data in a [Source Data System](https://docs.greatexpectations.io/docs/oss/guides/setup/optional_dependencies/cloud/connect_gx_source_data_system) or a [pandas DataFrame](https://docs.greatexpectations.io/docs/0.15.50/guides/connecting_to_your_data/in_memory/pandas/). Astronomer, with help from Superconductive, maintains the [Great Expectations Airflow Provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest) that gives users a convenient method for running validations directly from their DAGs.
 
 This tutorial shows how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest/modules/GreatExpectationsOperator) in an Airflow DAG, leveraging automatic creation of a default [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and connecting via an [Airflow connection](connections.md).
 
@@ -29,7 +29,7 @@ This tutorial takes approximately 20 minutes to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- The basics of Great Expectations. See [GX Quickstart](https://docs.greatexpectations.io/docs/tutorials/getting_started/tutorial_overview).
+- The basics of Great Expectations. See [GX Quickstart](https://docs.greatexpectations.io/docs/oss/tutorials/quickstart).
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
@@ -75,7 +75,7 @@ The Great Expectations Airflow Provider requires a GX project to be present in y
     context = context.convert_to_file_context()
     ```
 
-2. Go to your `include` folder and run the `gx_init_script.py` file to instantiate a [Data Context](https://docs.greatexpectations.io/docs/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context) at `include/great_expectations`.
+2. Go to your `include` folder and run the `gx_init_script.py` file to instantiate a [Data Context](https://docs.greatexpectations.io/docs/oss/guides/setup/configuring_data_contexts/instantiating_data_contexts/instantiate_data_context) at `include/great_expectations`.
 
     ```sh
     $ cd include

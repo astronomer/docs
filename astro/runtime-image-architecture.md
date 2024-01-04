@@ -11,7 +11,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
 - Exclusive features to enrich the task execution experience, including smart task concurrency defaults and high availability configurations.
-- The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html)
+- The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html).
 - The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
 - A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
 - A custom security manager that enforces user roles and permissions as defined by Astro. See [User permissions](user-permissions.md).
@@ -46,6 +46,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 7             | 2.5                    |
 | 8             | 2.6                    |
 | 9             | 2.7                    |
+| 10            | 2.8                    |
 
 For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
@@ -114,6 +115,7 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 | 7             | 3.9            |
 | 8             | 3.10           |
 | 9             | 3.11           |
+| 10            | 3.11           |
 
 Starting with Astro Runtime 9, if you require a different version of Python than what's included in the base distribution, you can use a Python distribution of Astro Runtime. See [Distribution](#distribution).
 
@@ -154,12 +156,13 @@ The following table lists the operating systems and architectures supported by e
 
 | Astro Runtime | Operating System (OS)  | Architecture    |
 | ------------- | ---------------------- | --------------- |
-| 4             | Debian 11.3 (bullseye) | AMD64           |
+| 4             | Debian 11.1 (bullseye) | AMD64           |
 | 5             | Debian 11.3 (bullseye) | AMD64           |
-| 6             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 7             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 8             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 9             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 6             | Debian 11.5 (bullseye) | AMD64 and ARM64 |
+| 7             | Debian 11.5 (bullseye) | AMD64 and ARM64 |
+| 8             | Debian 11.7 (bullseye) | AMD64 and ARM64 |
+| 9             | Debian 11.7 (bullseye) | AMD64 and ARM64 |
+| 10            | Debian 11.8 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 

@@ -93,7 +93,7 @@ Next create and run the example DAG.
 import json
 from datetime import datetime, timedelta
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.providers.http.operators.http import SimpleHttpOperator
 
 default_args = {
@@ -181,7 +181,7 @@ This example DAG executes two Talend jobs, one of which is dependent on the othe
 ```python
 from datetime import datetime, timedelta
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow import configuration as conf
 from airflow.operators.email import EmailOperator
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator

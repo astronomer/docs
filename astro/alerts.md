@@ -15,17 +15,21 @@ Unlike Airflow callbacks and SLAs, Astro alerts require no changes to DAG code. 
 
 :::info
 
-Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLineage enabled. If you disabled OpenLineage in your Deployment, you need to enable it to use Astro alerts. See [Enable/Disable OpenLineage](set-up-data-lineage.md#enabledisable-openlineage).
+To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 :::
-
-To configure Airflow notifications, see [Airflow email notifications](airflow-email-notifications.md) and [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 ## Prerequisites
 
 - An [Astro project](cli/develop-project.md).
-- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#enabledisable-openlineage).
+- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Astro alerts, and it must also have [OpenLineage enabled](set-up-data-lineage.md#disable-openlineage).
 - A Slack workspace, PagerDuty service, or email address.
+
+:::info
+
+Astro alerts requires OpenLineage. By default, every Astro Deployment has OpenLineage enabled. If you disabled OpenLineage in your Deployment, you need to enable it to use Astro alerts. See [Disable OpenLineage](set-up-data-lineage.md#disable-openlineage) to find how to disable and re-enable OpenLineage.
+
+:::
 
 <!-- Sensitive header used in product - do not change without a redirect-->
 
@@ -109,15 +113,15 @@ The **DAG Trigger** communication channel works differently from other communica
   import datetime
   from typing import Any
 
-  from airflow import DAG
+  from airflow.models.dag import DAG
   from airflow.operators.python import PythonOperator
-  
+
   with DAG(
       dag_id="register_incident",
       start_date=datetime.datetime(2023, 1, 1),
       schedule=None,
   ):
-  
+
       def _register_incident(params: dict[str, Any]):
           # Here you can run arbitrary Python code. Example DAG run conf payload:
           # {
@@ -126,11 +130,11 @@ The **DAG Trigger** communication channel works differently from other communica
           #     "alertId": "d75e7517-88cc-4bab-b40f-660dd79df216",
           #     "message": "[Astro Alerts] Pipeline failure detected on DAG fail_dag. \\nStart time: 2023-11-17 17:32:54 UTC. \\nFailed at: 2023-11-17 17:40:10 UTC. \\nAlert notification time: 2023-11-17 17:40:10 UTC. \\nClick link to investigate in Astro UI: https://cloud.astronomer.io/clkya6zgv000401k8zafabcde/dags/clncyz42l6957401bvfuxn8zyxw/fail_dag/c6fbe201-a3f1-39ad-9c5c-817cbf99d123?utm_source=alert\"\\n"
           # }
-  
+
           # Example:
           failed_dag = params["dagName"]
           print(f"Register an incident in my system for DAG {failed_dag}.")
-  
+
       PythonOperator(task_id="register_incident", python_callable=_register_incident)
 
   ```
@@ -202,15 +206,19 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 6. Add DAGs or tasks that your alert applies to.
 
-    - **DAG failure**: Click **DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
+    - **DAG failure**: Click **+ DAG** to choose the Deployment and the DAG that you want to send an alert about if it fails.
 
     - **DAG success**: Click **DAG** and choose the Deployment and the DAG that you want to send an alert about when it completes.
 
     - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
 
-     You can add more DAGs or tasks after you create your alert.
+    - **Absolute Time**: This alert triggers when a given DAG does not have a successful DAG run within a defined time window. Click **+ DAG** and choose the Deployment and the DAG that you want the alert to assess. Then, select the **Days of Week** the alert should observe, the **Verification Time** when it should look for a DAG success, and the **Lookback Period** for how long it should look back for a verification time.
 
-7. Click **Create alert**.
+    For example, if an alert has a **Verification Time** of 3:00 PM and a **Lookback Period** of 60 minutes, it will trigger whenever the given DAG does not produce a successful DAG run from 2:00 to 3:00 PM. Astro applies the times you specify based on the time zone of your current web browser session, then translates them to UTC in your Airflow environment.
+
+7. (Optional) Repeat Step 6 for additional DAGs or tasks that you want to alert on.
+
+8. Click **Create alert**.
 
 ## Step 3: (Optional) Test your DAG failure alert
 

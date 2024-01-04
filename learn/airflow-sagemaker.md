@@ -160,7 +160,7 @@ predictions on the Iris dataset. To use the DAG, add Airflow variables for `role
 then fill in the information directly below with the target AWS S3 locations, and model and training job names.
 """
 import textwrap
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.decorators import task
 from airflow.providers.amazon.aws.operators.sagemaker import SageMakerModelOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook

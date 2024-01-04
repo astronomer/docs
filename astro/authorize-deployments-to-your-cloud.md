@@ -20,7 +20,7 @@ This guide explains how to authorize your Deployment to a cloud using workload i
 
 ## Prerequisites
 
-The Astro cluster running your Deployment must be connected to your cloud's network.
+The Astro cluster running your Deployment must be connected to your cloud's network. See [Networking overview](networking-overview.md).
 
 ## What is workload identity?
 
@@ -169,6 +169,12 @@ In this setup, you'll authorize an existing user-assigned managed identity to a 
 - A [Microsoft Entra ID tenant](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-create-new-tenant) with Global Administrator or Application Administrator privileges.
 - A user-assigned managed identity on Azure. See [Azure documentation](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?source=recommendations&pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity).
 - The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+:::caution
+
+You can only use the same user-assigned managed identity for up to five Deployments. If you need to authorize more than five Deployments to Azure, you need to create more than one user-managed identity. For more information, see [Microsoft Entra documentation](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations#general-federated-identity-credential-considerations).
+
+:::
 
 #### Step 1: Authorize the managed identity in Azure
 

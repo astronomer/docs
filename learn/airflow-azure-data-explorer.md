@@ -91,7 +91,7 @@ Your connection should look similar to this:
 In your Astro project `dags/` folder, create a new file called `adx-pipeline.py`. Paste the following code into the file:
 
 ```python
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.providers.microsoft.azure.operators.adx import AzureDataExplorerQueryOperator
 from datetime import datetime, timedelta
 

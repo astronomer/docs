@@ -1,5 +1,5 @@
 from pendulum import datetime
-from airflow import Dataset
+from airflow.datasets import Dataset
 from airflow.decorators import dag, task
 
 INSTRUCTIONS = Dataset("file://localhost/airflow/include/cocktail_instructions.txt")

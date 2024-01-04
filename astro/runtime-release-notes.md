@@ -20,6 +20,55 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+## Astro Runtime 10.0.0
+
+- Release date: December 18, 2023
+- Airflow version: 2.8.0
+
+### Airflow 2.8
+
+Astro Runtime 10.0.0 includes same-day support for Apache Airflow 2.8, which includes a number of new features and improvements. Most notably, Airflow 2.8 includes the following changes:
+
+- The new object storage features make it easier to work with popular object storage systems like S3 and GCS. You can use new  abstract object types to work with files in multiple different object storage systems without writing system-specific code.
+- You can now specify extra index URLs in the PythonVirtualEnvOperator, which makes it easier to spin up virtual environments that include private Python packages. 
+- The Airflow UI **Grid** view now supports filtering on multiple run states at once so that you can compare runs across states.
+
+For more information about the major changes in this release, see the [Airflow blog](https://airflow.apache.org/blog/airflow-2.8.0/).
+
+### Additional improvements
+
+- When you export logs to Datadog from Astro, you can now filter the logs in Datadog by log type.
+
+### Bug fixes
+
+- Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
+- Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
+- Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
+## Astro Runtime 9.7.0
+
+- Release date: December 22, 2023
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Account for change in UTC offset when calculating next schedule ([#35887](https://github.com/apache/airflow/pull/35887))
+- Fix for infinite recursion due to secrets_masker ([#35048](https://github.com/apache/airflow/pull/35048))
+- Fix updating variables during variable imports ([#33932](https://github.com/apache/airflow/pull/33932))
+- Allow 'airflow variables export' to print to stdout ([#33279](https://github.com/apache/airflow/pull/33279))
+- Check that dag_ids passed in request are consistent ([#34366](https://github.com/apache/airflow/pull/34366))
+- Make raw HTML descriptions configurable ([#35460](https://github.com/apache/airflow/pull/35460))
+- Change Trigger UI to use HTTP POST in web UI ([#36026](https://github.com/apache/airflow/pull/36026))
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.18.4. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1184-2023-12-07) for a complete list of changes.
+- You can now customize the color of the Airflow UI navigation bar text by setting the `AIRFLOW__NAVBAR_TEXT_COLOR` environment variable.
+
+### Bug fixes
+
+- Fixed an issue where task logs on Astro Azure clusters were not encoded properly, resulting in authentication errors.
+
 ## Astro Runtime 9.6.0
 
 - Release date: November 30, 2023
@@ -559,6 +608,17 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
+
+## Astro Runtime 6.9.0
+
+- Release date: December 22, 2023
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Check for DAG ID in query param from url as well as kwargs ([32014](https://github.com/apache/airflow/pull/32014))
+- Check that dag_ids passed in request are consistent ([34366](https://github.com/apache/airflow/pull/34366))
+- Fix updating variables during variable imports ([33932](https://github.com/apache/airflow/pull/33932))
 
 ## Astro Runtime 6.8.0
 
