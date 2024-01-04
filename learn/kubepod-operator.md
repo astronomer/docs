@@ -122,11 +122,11 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ]}>
 <TabItem value="windows and mac">
 
-1. Copy the `docker-desktop` context from the Kubernetes configuration file and save it as a separate file in the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster.
+1. Use the following commands to copy the `docker-desktop` context from the Kubernetes configuration file and save it as a separate file in the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster.
 
     ```bash
-    kubectl config set-context docker-desktop
-    kubectl config view -- minify --raw > <Astro project directory>/include/.kube
+    kubectl config use-context docker-desktop
+    kubectl config view --minify --raw > <Astro project directory>/include/.kube
     ```
 
     After running these commands, you will find a `config` file in the `/include/.kube/` folder of your Astro project which resembles this example:
