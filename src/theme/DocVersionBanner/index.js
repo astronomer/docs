@@ -42,7 +42,7 @@ function UnmaintainedVersionLabel({siteTitle, versionMetadata}) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}>
       {
-        'The documentation for Astronomer Software version {versionLabel} is no longer actively maintained. It is updated only to ensure technical accuracy and reflect current functionality.'
+        'This is documentation for Astronomer Software version {versionLabel}, which is not the latest version of Astronomer Software. It is updated only for technical accuracy and to reflect the current functionality of version {versionLabel}.'
       }
     </Translate>
   );
