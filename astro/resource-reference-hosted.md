@@ -64,7 +64,7 @@ Currently, standard clusters are available on the following clouds and regions:
 
 <Tabs
     defaultValue="aws"
-    groupId= "dedicated-cluster-configurations"
+    groupId= "standard-cluster-regions"
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
@@ -72,11 +72,12 @@ Currently, standard clusters are available on the following clouds and regions:
     ]}>
 <TabItem value="aws">
 
-| Code           | Region                |
-| -------------- | --------------------- |
-| `eu-central-1` | Europe (Frankfurt)    |
-| `us-east-1`    | US East (N. Virginia) |
-| `us-west-2`    | US West (Oregon)      |
+| Code             | Region                   |
+| ---------------- | ------------------------ |
+| `ap-southeast-1` | Asia Pacific (Singapore) |
+| `eu-central-1`   | Europe (Frankfurt)       |
+| `us-east-1`      | US East (N. Virginia)    |
+| `us-west-2`      | US West (Oregon)         |
 
 </TabItem>
 
@@ -111,7 +112,7 @@ Currently, dedicated clusters are available on the following clouds and regions:
 
 <Tabs
     defaultValue="aws"
-    groupId= "dedicated-cluster-configurations"
+    groupId= "dedicated-cluster-regions"
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
