@@ -15,7 +15,7 @@ This document contains release notes for each version of Astronomer Software.
 
 This page contains release notes for all recent Astronomer Software versions. 
 
-0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+Version 0.34 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to version 0.34, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
 :::info 
 
@@ -24,9 +24,37 @@ Because Astronomer has separate [maintenance life cycles](release-lifecycle-poli
 If you're upgrading to receive a specific change, ensure the release note for the change appears either:
 
 - Within your target minor version.
-- In a patch version that was released before the first release of your target minor version. For example, a change in 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch.
+- In a patch version that was released before the first release of your target minor version. For example, a change in version 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch.
 
 :::
+
+## 0.34.0
+
+Release date: January 29, 2023
+
+### Change resource provisioning strategy per Deployment
+
+You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run.
+
+### Deploy only DAGs with `astro deploy -—dags`
+
+You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates.
+
+### Additional improvements
+
+- You can now configure a global label that is applied to all Astronomer Software Pods.
+- You can now filter on `release_name` when you make a `deployments()` query to the Houston API.
+- You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate.
+- You can now make a `createDeployment` or `upsertDeployment` query by specifying a Workspace name or label instead of a Workspace ID.
+- You now have the option to disable the `astro-cli` Pod to free up resources on your cluster.
+- You can now install Astronomer Software on Red Hat OpenShift without the need to add security context restraints (SCC) for specific services.
+- Astronomer Software now redeploys your Deployment when you switch your executor type.
+- You can now define a [storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/) for NFS-based Deployments.
+
+### Bug fixes
+
+- Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
+- Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
 
 ## 0.33.2 
 
