@@ -259,6 +259,8 @@ If your Astro project requires additional build-time arguments to build an image
 
 The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
 
+You can choose to use
+
 ### Prerequisites
 
 - An Astro project hosted in a GitHub repository.
@@ -273,7 +275,16 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
   - Key: `ASTRO_API_TOKEN`
   - Secret: `<your-token>`
 
-3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration:
+3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration. You can choose to use either a Secrets backend or to store your `ASTRO_API_TOKEN` as a GitHub secret.
+
+  <Tabs
+    defaultValue="standard"
+    groupId= "store-secrets"
+    values={[
+        {label: 'GitHub Secret', value: 'github-secret'},
+        {label: 'Secrets Backend', value: 'secrets-backend'},
+    ]}>
+  <TabItem value="github-secret">
 
     ```yaml
     name: Astronomer CI - Create preview Deployment
@@ -297,6 +308,35 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
             action: create-deployment-preview
             deployment-id: <main-deployment-id>
     ```
+  </TabItem>
+  <TabItem value="secrets-backend">
+
+    ```yaml
+    create:
+      branches:
+      - '**'
+      - '!main'
+
+      env:
+        ## Sets Deployment API key credentials as environment variables
+        ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
+
+      jobs:
+        deploy:
+          runs-on: ubuntu-latest
+          steps:
+          - name: Create Deployment Preview
+            uses: astronomer/deploy-action@v0.3
+            with:
+              action: create-deployment-preview
+              deployment-name: "test"
+            id: create-dep-prev
+          - name: Create Secret Variables
+            run: |
+              astro deployment variable update --deployment-id ${{steps.create-dep-prev.outputs.preview-id}} AIRFLOW__SECRETS__BACKEND_KWARGS=${{ secrets.AIRFLOW__SECRETS__BACKEND_KWARGS }} --secret
+      ```
+    </TabItem>
+    </Tabs>
 
 4. In the same folder, create a new YAML file named `deploy-to-preview.yml` that includes the following configuration:
 
@@ -373,13 +413,13 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
 
     All four workflow files must have the same Deployment ID specified. The actions use this Deployment ID to create and delete preview Deployments based on your main Deployment.
 
+### Use a secrets backend for preview Deployment
+
 ## Private network templates
 
 If you use GitHub Enterprise and can't use the public Astronomer [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace, use the following templates to implement CI/CD.
 
 You can configure your CI/CD pipelines to deploy a full project image or your `dags` directory.
-
-
 
 <Tabs
     defaultValue="standard"
