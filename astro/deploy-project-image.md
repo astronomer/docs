@@ -18,7 +18,7 @@ See [DAGs-only Deploys](deploy-dags.md) to learn more about how to deploy your D
 - The [Astro CLI](cli/overview.md) is installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for local development, you must install Astro CLI 1.4.0 or later to deploy to Astro.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
 - An [Astro project](cli/develop-project.md#create-an-astro-project).
-- [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
+- [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ## Step 1: Authenticate to Astro
 

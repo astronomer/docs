@@ -385,7 +385,7 @@ Release date: February 27, 2023
 
 You can now configure the Astro CLI to run Airflow locally and deploy to Astro using [Podman](https://podman.io/). Podman is an alternative container engine to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
-To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](configure-cli.md#run-the-astro-cli-using-podman).
+To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ### Bug fixes
 
