@@ -388,15 +388,20 @@ module.exports = {
       id: "cli/release-notes",
     },
     {
+      type: "doc",
+      label: "Release policy",
+      id: "cli/release-lifecycle-policy",
+    },
+    {
       type: "category",
       label: "Advanced",
       items: [
         "cli/configure-cli",
+        "cli/use-podman",
         "cli/customize-dockerfile",
         "cli/private-python-packages",
         "cli/authenticate-to-clouds",
         "cli/airflowignore",
-        "cli/release-lifecycle-policy"
       ],
     },
     {
