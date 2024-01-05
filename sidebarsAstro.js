@@ -377,6 +377,7 @@ module.exports = {
       label: "Run Airflow locally",
       link: {type: "doc", id: "cli/work-locally"},
       items: [
+        "cli/work-locally"
         "cli/run-airflow-locally",
         "cli/local-connections",
         "cli/troubleshoot-locally"
