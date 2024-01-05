@@ -18,7 +18,7 @@ By default, the Astro CLI uses [Docker](https://www.docker.com/) as its containe
 
 <Tabs
 defaultValue="mac"
-groupId= "cli-podman"
+groupId= "configure-the-astro-cli-to-use-podman"
 values={[
 {label: 'Mac', value: 'mac'},
 {label: 'WSL2 on Windows', value: 'windows'},
