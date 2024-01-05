@@ -15,9 +15,9 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 10.0.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro CLI Version**: {{CLI_VER}} ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.21.0 ([Release notes](cli/release-notes.md))
+**Latest Astro Runtime Version**: {{RUNTIME_VER}} ([Release notes](runtime-release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
@@ -33,6 +33,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 ## December 12, 2023
 
 ### Bug fixes
+
 
 - Fixed an issue where the Cloud UI would produce an error if you updated an environment variable on an Astro Hybrid Deployment running the Kubernetes Executor.
 
