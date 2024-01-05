@@ -278,7 +278,7 @@ You can choose to use
 3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration. You can choose to use either a Secrets backend or to store your `ASTRO_API_TOKEN` as a GitHub secret.
 
   <Tabs
-    defaultValue="standard"
+    defaultValue="github-secret"
     groupId= "store-secrets"
     values={[
         {label: 'GitHub Secret', value: 'github-secret'},
