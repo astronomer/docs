@@ -167,7 +167,47 @@ microk8s.config > /include/.kube/config
 </TabItem>
 </Tabs>
 
-#### Step 3: Run your container
+#### Step 3: Create Kubernetes Connection in the Airflow UI
+
+To run a Kubernetes pod locally, you can use the following .json template. First, edit the template with the values you gather in the previous step,
+
+```json
+{
+    "apiVersion": "v1",
+    "clusters": [
+        {
+            "cluster": {
+                "certificate-authority-data": "<certificate-authority-data>",
+                "server": "https://kubernetes.docker.internal:6443"
+            },
+            "name": "docker-desktop"
+        }
+    ],
+    "contexts": [
+        {
+            "context": {
+                "cluster": "docker-desktop",
+                "user": "docker-desktop"
+            },
+            "name": "docker-desktop"
+        }
+    ],
+    "current-context": "docker-desktop",
+    "kind": "Config",
+    "preferences": {},
+    "users": [
+        {
+            "name": "docker-desktop",
+            "user": {
+                "client-certificate-data": "<client-certificate-data>",
+                "client-key-data": "<client-key-data>"
+            }
+        }
+    ]
+}
+```
+
+#### Step 4: Run your container
 
 To use the KubernetesPodOperator, you must define the configuration of each task and the Kubernetes Pod in which it runs, including its namespace and Docker image.
 
