@@ -7,6 +7,8 @@ description: Run commands in your local Airflow environment.
 
 This document explains how to use the Astro CLI to start a local Airflow environment on your computer and interact with your Astro project. To learn more about unit testing for your DAGs or testing project dependencies when changing Python or Astro Runtime versions, see [Test your project locally](test-your-astro-project-locally.md).
 
+You can find common issues and resolutions in the [troubleshoot a local environment](troubleshoot-locally.md) section.
+
 ## Start a local Airflow environment
 
 To begin running your project in a local Airflow environment, run:
