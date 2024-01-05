@@ -50,7 +50,7 @@ nginx:
 
 :::info 
 
-A number of configurations, including those for user permissions and identity providers, must be set in the `astronomer.houston.config` section of the Astronomer Helm chart, but the default values for `houston.config` are not available for reference in the Astronomer Helm repo. To view the default configurations for this section, see the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.34/default.yaml).
+A number of configurations, including those for user permissions and identity providers, must be set in the `astronomer.houston.config` section of the Astronomer Helm chart, but the default values for `houston.config` are not available for reference in the Astronomer Helm repo. To view the default configurations for this section, see the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.33/default.yaml).
 
 :::
 
