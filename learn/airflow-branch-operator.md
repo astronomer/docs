@@ -2,12 +2,8 @@
 title: "Branching in Airflow"
 sidebar_label: "Branches"
 id: airflow-branch-operator
+description: "Learn about Airflow’s multiple options for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator."
 ---
-
-<head>
-  <meta name="description" content="Learn about Airflow’s multiple options for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
-  <meta name="og:description" content="Learn about the options available in Airflow for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

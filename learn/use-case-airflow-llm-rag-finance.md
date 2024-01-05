@@ -20,7 +20,7 @@ This is a proof of concept pipeline, please do not make any financial decisions 
 
 ![A screenshot of the streamlit application created in this use case with a augmented GPT created answer for the question "What space technology should I invest in today?".](/img/examples/use-case-airflow-llm-rag-finance_streamlit_app_answer.png)
 
-:::caution
+:::warning
 
 The Weavitate Airflow provider is currently in beta and subject to change. After the provider is released, this use case will be updated and the provider source code will be available.
 

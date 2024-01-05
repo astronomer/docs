@@ -5,7 +5,7 @@ id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
 
-:::warning Deprecation Notice: Deployment API Keys 
+:::danger Deprecation Notice: Deployment API Keys 
 
 Deployment API keys are deprecated in favor of [Deployment API tokens](deployment-api-tokens.md).
 

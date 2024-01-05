@@ -17,7 +17,7 @@ This document describes how to configure individual task Pods for different use 
 
 ## Customize a task's Kubernetes Pod
 
-:::warning
+:::danger
 
 While you can customize all values for a worker Pod, Astronomer does not recommend configuring complex Kubernetes infrastructure in your Pods, such as sidecars. These configurations have not been tested by Astronomer.
 
@@ -92,7 +92,7 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your Deployment. After the task finishes, the Pod terminates gracefully.
 
-:::caution Astro Hosted
+:::warning Astro Hosted
 
 For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
 

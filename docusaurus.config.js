@@ -38,7 +38,7 @@ module.exports = {
       //... other Algolia params
     },
     prism: {
-      additionalLanguages: ['docker'],
+      additionalLanguages: ["bash", "json", "docker", "python"],
     },
     colorMode: {
       disableSwitch: false,
@@ -203,15 +203,15 @@ module.exports = {
           routeBasePath: 'astro',
           path: 'astro',
           admonitions: {
-            tag: ':::',
             keywords: [
               'caution',
-              'warning',
+              'danger',
               'info',
               'tip',
               'cli',
               'highlight'
             ],
+            extendDefaults: true,
           },
         },
         sitemap: {
@@ -237,6 +237,12 @@ module.exports = {
           {
             id: 'iam',
             spec: 'https://api.astronomer.io/spec/iam/v1beta1',
+          },
+          {
+            id: 'using-remote-url',
+            // Remote File
+            spec: 'https://redocly.github.io/redoc/openapi.yaml',
+            route: '/examples/using-remote-url/',
           },
         ],
         // Theme Options for modifying how redoc renders them

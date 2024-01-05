@@ -70,7 +70,7 @@ Astro is now available as an Azure Native ISV Service. If your team is consideri
 
 See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
-### Create Airflow connections in the Cloud UI and link them to Deployments
+### Create Airflow connections in the Cloud UI and link them to Deployments 
 
 You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
 
@@ -100,7 +100,7 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 ### Roll back Deployments to previous versions of your code
 
-:::caution
+:::warning
 
 This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
@@ -171,7 +171,7 @@ Deployment API tokens are now generally available and replace Deployment API key
 
 See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
 
-:::caution
+:::warning
 
 Deployment API tokens are a direct replacement for Deployment API keys, which are now supported only on a limited basis on Astro.
 
@@ -219,7 +219,7 @@ Deployment API tokens replace Deployment API keys as the most secure and customi
 
 Unlike Deployment API keys, you can set an expiration date for Deployment API tokens and rotate them to better manage access to your Deployment. See [Deployment API tokens](https://docs.astronomer.io/astro/deployment-api-tokens) to learn how to create and manage Deployment API tokens.
 
-:::caution
+:::warning
 
 Deployment API tokens are a direct replacement for Deployment API keys. Therefore, Astronomer recommends always using Deployment API tokens over API keys. While you can still continue to use and manage existing Deployment API keys, Astronomer will soon require using Deployment API tokens.
 
@@ -601,7 +601,7 @@ Additionally, you can configure custom cells to use your team's custom operators
 
 ### IMDSv2 is now enforced on AWS clusters
 
-:::warning Breaking change
+:::danger Breaking change
 
 If your DAGs assume IAM roles to directly access metadata on your cluster using IMDSv1, this change can result in DAG run failures. Upgrade your DAGs to use IMDSv2 for all cluster metadata requests.
 
@@ -2099,7 +2099,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 ## September 28, 2021
 
-:::warning
+:::danger
 
 This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](set-up-ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 

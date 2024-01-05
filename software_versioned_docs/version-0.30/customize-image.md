@@ -280,7 +280,7 @@ To install Python packages from a private GitHub repository on Astronomer Softwa
 - A private GitHub repository for each of your custom Python packages.
 - A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
 
-:::warning
+:::danger
 
 If your organization enforces SAML single sign-on (SSO), you must first authorize your key to be used with that authentication method. For instructions, see [GitHub documentation](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
 
@@ -313,7 +313,7 @@ This example assumes that the name of each of your Python packages is identical 
    FROM quay.io/astronomer/astro-runtime:5.0.6-base AS stage1
    ```
 
-  :::caution
+  :::warning
 
   Make sure to use the `-base` version of the Astro Runtime image that you want to customize. This image tag is  customizable and does not include default build logic. For more information, see [Distributions](runtime-image-architecture.md#distribution).
 
@@ -413,7 +413,7 @@ To build from a private repository, you need:
 
 Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](https://pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
 
-:::caution
+:::warning
 
 Ensure that the name of the package on the private repository does not clash with any existing python packages. The order that pip will search indices might produce unexpected results.
 
@@ -429,7 +429,7 @@ Ensure that the name of the package on the private repository does not clash wit
    quay.io/astronomer/astro-runtime:5.0.6-base AS stage1
    ```
 
-   :::caution
+   :::warning
 
     Make sure to use the `-base` version of the Astro Runtime image that you want to customize. This image tag is  customizable and does not include default build logic. For more information, see [Distributions](runtime-image-architecture.md#distribution).
 

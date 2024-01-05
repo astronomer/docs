@@ -2,13 +2,8 @@
 title: "An introduction to Apache Airflow"
 sidebar_label: "Introduction to Airflow"
 id: intro-to-airflow
+description: "Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources."
 ---
-
-<head>
-  <meta name="description" content="Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources." />
-  <meta name="og:description" content="Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources." />
-</head>
-
 
 [Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. It has over 9 million downloads per month and an active OSS community. Airflow allows data practitioners to define their data pipelines as Python code in a highly extensible and infinitely scalable way.
 

@@ -38,7 +38,7 @@ To manage your Astro workflows programmatically, you must install the Astro CLI 
 
 To make your API token accessible to the Astro CLI, you need to set specific environment variables in your CI/CD tool or automation environment.
 
-:::caution
+:::warning
 
 Because these environment variables store sensitive credentials, Astronomer recommends encrypting the variable values before using them in your script. You can do this either directly in your automation tool or in a secrets backend. 
 

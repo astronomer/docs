@@ -514,7 +514,7 @@ If you have Airflow pods in the state "ImagePullBackoff", check the pod descript
 
 To help you make the most of Astronomer Software, check out the following additional resources:
 
-* [Renew TLS Certificates on Astronomer Software](renew-tls-cert.md/)
+* [Renew TLS Certificates on Astronomer Software](renew-tls-cert.md)
 * [Integrating an Auth System](integrate-auth-system.md)
 * [Configuring Platform Resources](configure-platform-resources.md)
 * [Managing Users on Astronomer Software](manage-platform-users.md)

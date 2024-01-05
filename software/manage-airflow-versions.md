@@ -101,7 +101,7 @@ The Astro CLI then generates test results in your Astro project that identify de
 
     For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
-  :::warning
+  :::danger
 
   After you upgrade your Airflow version, you can't revert to an earlier version.
 

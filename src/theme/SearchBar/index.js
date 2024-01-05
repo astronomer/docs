@@ -1,34 +1,33 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import React, { useState, useRef, useCallback, useMemo } from 'react';
-import { createPortal } from 'react-dom';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { useHistory } from '@docusaurus/router';
-import { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
-import Link from '@docusaurus/Link';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
+import {DocSearchButton, useDocSearchKeyboardEvents} from '@docsearch/react';
 import Head from '@docusaurus/Head';
-import { isRegexpStringMatch, useSearchPage } from '@docusaurus/theme-common/internal';
-import { DocSearchButton, useDocSearchKeyboardEvents } from '@docsearch/react';
+import Link from '@docusaurus/Link';
+import {useHistory} from '@docusaurus/router';
+import {
+  isRegexpStringMatch,
+  useSearchLinkCreator,
+} from '@docusaurus/theme-common';
+import {
+  useSearchResultUrlProcessor,
+} from '@docusaurus/theme-search-algolia/client';
+import Translate, { translate } from '@docusaurus/Translate';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {createPortal} from 'react-dom';
+import translations from '@theme/SearchTranslations';
 import useAlgoliaContextualFacetFilters from '../hooks/useAlgoliaContextualFacetFilters.js';
 // OUR CUSTOM HOOK ^^^^^^^^^^^^^^^
-import Translate, { translate } from '@docusaurus/Translate';
-import styles from './styles.module.css';
+
 let DocSearchModal = null;
-function Hit({ hit, children }) {
-  return <Link to={hit.url.replace('#docusaurus_skipToContent_fallback', '')}>{children}</Link>;
+function Hit({hit, children}) {
+  return <Link to={hit.url}>{children}</Link>;
 }
-function ResultsFooter({ state, onClose }) {
-  const { generateSearchPageLink } = useSearchPage();
+function ResultsFooter({state, onClose}) {
+  const createSearchLink = useSearchLinkCreator();
   return (
-    <Link to={generateSearchPageLink(state.query)} onClick={onClose}>
+    <Link to={createSearchLink(state.query)} onClick={onClose}>
       <Translate
         id="theme.SearchBar.seeAll"
-        values={{ count: state.context.nbHits }}>
+        values={{count: state.context.nbHits}}>
         {'See all {count} results'}
       </Translate>
     </Link>
@@ -38,28 +37,21 @@ function mergeFacetFilters(f1, f2) {
   const normalize = (f) => (typeof f === 'string' ? [f] : f);
   return [...normalize(f1), ...normalize(f2)];
 }
-function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
-  var _a, _b;
-  const { siteMetadata } = useDocusaurusContext();
+function DocSearch({contextualSearch, externalUrlRegex, ...props}) {
+  const {siteMetadata} = useDocusaurusContext();
+  const processSearchResultUrl = useSearchResultUrlProcessor();
   const contextualSearchFacetFilters = useAlgoliaContextualFacetFilters();
-  const configFacetFilters =
-    (_b =
-      (_a = props.searchParameters) === null || _a === void 0
-        ? void 0
-        : _a.facetFilters) !== null && _b !== void 0
-      ? _b
-      : [];
+  const configFacetFilters = props.searchParameters?.facetFilters ?? [];
   const facetFilters = contextualSearch
     ? // Merge contextual search filters with config filters
-    mergeFacetFilters(contextualSearchFacetFilters, configFacetFilters)
+      mergeFacetFilters(contextualSearchFacetFilters, configFacetFilters)
     : // ... or use config facetFilters
-    configFacetFilters;
-  // we let user override default searchParameters if he wants to
+      configFacetFilters;
+  // We let user override default searchParameters if she wants to
   const searchParameters = {
     ...props.searchParameters,
     facetFilters,
   };
-  const { withBaseUrl } = useBaseUrlUtils();
   const history = useHistory();
   const searchContainer = useRef(null);
   const searchButtonRef = useRef(null);
@@ -73,7 +65,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
       import('@docsearch/react/modal'),
       import('@docsearch/react/style'),
       import('./styles.css'),
-    ]).then(([{ DocSearchModal: Modal }]) => {
+    ]).then(([{DocSearchModal: Modal}]) => {
       DocSearchModal = Modal;
     });
   }, []);
@@ -88,11 +80,8 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     });
   }, [importDocSearchModalIfNeeded, setIsOpen]);
   const onClose = useCallback(() => {
-    var _a;
     setIsOpen(false);
-    (_a = searchContainer.current) === null || _a === void 0
-      ? void 0
-      : _a.remove();
+    searchContainer.current?.remove();
   }, [setIsOpen]);
   const onInput = useCallback(
     (event) => {
@@ -104,7 +93,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     [importDocSearchModalIfNeeded, setIsOpen, setInitialQuery],
   );
   const navigator = useRef({
-    navigate({ itemUrl }) {
+    navigate({itemUrl}) {
       // Algolia results could contain URL's from other domains which cannot
       // be served through history and should navigate with window.location
       if (isRegexpStringMatch(externalUrlRegex, itemUrl)) {
@@ -115,19 +104,14 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     },
   }).current;
   const transformItems = useRef((items) =>
-    items.map((item) => {
-      // If Algolia contains a external domain, we should navigate without
-      // relative URL
-      if (isRegexpStringMatch(externalUrlRegex, item.url)) {
-        return item;
-      }
-      // We transform the absolute URL into a relative URL.
-      const url = new URL(item.url);
-      return {
-        ...item,
-        url: withBaseUrl(`${url.pathname}${url.hash}`),
-      };
-    }),
+    props.transformItems
+      ? // Custom transformItems
+        props.transformItems(items)
+      : // Default transformItems
+        items.map((item) => ({
+          ...item,
+          url: processSearchResultUrl(item.url),
+        })),
   ).current;
   const resultsFooterComponent = useMemo(
     () =>
@@ -155,6 +139,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
   });
   const translatedSearchLabel = translate({
     id: 'theme.SearchBar.label',
+    message: 'Search',
     message: 'Find what you\'re looking for',
     description: 'The ARIA label and placeholder for search button',
   });
@@ -171,19 +156,17 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
         />
       </Head>
 
-      <div className={styles.searchBox}>
-        <DocSearchButton
-          onTouchStart={importDocSearchModalIfNeeded}
-          onFocus={importDocSearchModalIfNeeded}
-          onMouseOver={importDocSearchModalIfNeeded}
-          onClick={onOpen}
-          ref={searchButtonRef}
-          translations={{
-            buttonText: translatedSearchLabel,
-            buttonAriaLabel: translatedSearchLabel,
-          }}
-        />
-      </div>
+      <DocSearchButton
+        onTouchStart={importDocSearchModalIfNeeded}
+        onFocus={importDocSearchModalIfNeeded}
+        onMouseOver={importDocSearchModalIfNeeded}
+        onClick={onOpen}
+        ref={searchButtonRef}
+        translations={{
+          buttonText: translatedSearchLabel,
+          buttonAriaLabel: translatedSearchLabel,
+        }}
+      />
 
       {isOpen &&
         DocSearchModal &&
@@ -202,6 +185,8 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
             })}
             {...props}
             searchParameters={searchParameters}
+            placeholder={translations.placeholder}
+            translations={translations.modal}
           />,
           searchContainer.current,
         )}
@@ -209,6 +194,6 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
   );
 }
 export default function SearchBar() {
-  const { siteConfig } = useDocusaurusContext();
+  const {siteConfig} = useDocusaurusContext();
   return <DocSearch {...siteConfig.themeConfig.algolia} />;
 }

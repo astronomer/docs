@@ -2,12 +2,8 @@
 title: "Airflow operators"
 sidebar_label: "Operators"
 id: what-is-an-operator
+description: "Learn the basics of operators, which are the building blocks of Airflow DAGs. See an example of how to implement several common operators available in Apache Airflow."
 ---
-
-<head>
-  <meta name="description" content="Learn the basics of operators, which are the building blocks of Airflow DAGs. See an example of how to implement several common operators available in Apache Airflow." />
-  <meta name="og:description" content="Learn the basics of operators, which are the building blocks of Airflow DAGs. See an example of how to implement several common operators available in Apache Airflow." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -30,7 +30,7 @@ After you complete this tutorial, you'll be able to:
 - Explain best practices of using custom XCom backends.
 - Explain the possibility of customizing other BaseXCom methods for extended functionality.
 
-:::caution
+:::warning
 
 While a custom XCom backend allows you to store virtually unlimited amounts of data as XCom, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link).
 

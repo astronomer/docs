@@ -450,6 +450,13 @@ table::-webkit-scrollbar-thumb {
   );
 }
 
+.alert--warning {
+  --ifm-alert-background-color-highlight: hsl(
+    var(--orange-400),
+    var(15%)
+  );
+}
+
 .alert--caution {
   --ifm-alert-background-color-highlight: hsl(
     var(--orange-400),
@@ -752,6 +759,11 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
   position: absolute;
   top: 0;
   right: 0;
+}
+
+img {
+  width: auto;
+  height: auto;
 }
 
 /** Remix Redocly Styles **/

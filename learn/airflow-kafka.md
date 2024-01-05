@@ -14,7 +14,7 @@ import walking_my_pet from '!!raw-loader!../code-samples/dags/airflow-kafka/walk
 [Apache Kafka](https://kafka.apache.org/documentation/) is an open source tool for handling event streaming. Combining Kafka and Airflow allows you to build powerful pipelines that integrate streaming data with batch processing.
 In this tutorial, you'll learn how to install and use the [Kafka Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-apache-kafka/versions/latest) to interact directly with Kafka topics.
 
-:::caution
+:::warning
 
 While it is possible to manage a Kafka cluster with Airflow, be aware that Airflow itself should not be used for streaming or low-latency processes. See the [Best practices](#best-practices) section for more information.
 

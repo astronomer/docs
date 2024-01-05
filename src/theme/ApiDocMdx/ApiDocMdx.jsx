@@ -27,8 +27,8 @@ const ApiDocMdx = ({ id }) => {
             theme: {
                 // TODO: Investigate what the best breakpoints should be
                 breakpoints: {
-                    medium: '98rem',
-                    large: '98rem',
+                    medium: '130rem',
+                    large: '130rem',
                 },
             },
         };

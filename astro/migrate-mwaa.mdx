@@ -108,7 +108,7 @@ To complete this setup from the command line:
 
 2. Open your Astro project `requirements.txt` file and add all Python packages from your source Airflow environment's `requirements.txt` file. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket.
 
-    :::caution 
+    :::warning 
 
     To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 
@@ -145,7 +145,7 @@ To complete this setup from the command line:
     
     Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported.
 
-    :::caution 
+    :::warning 
 
     To avoid breaking dependency upgrades, Astronomer recommends pinning your packages to the versions running in your soure Airflow environment. For example, if you're running `apache-airflow-providers-snowflake` version 3.3.0 on MWAA, you would add `apache-airflow-providers-snowflake==3.3.0` to your Astro `requirements.txt` file.
 

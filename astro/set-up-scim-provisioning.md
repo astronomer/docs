@@ -155,7 +155,7 @@ Complete the manual setup if you configured your existing Astro app without usin
     | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |
     | displayName                                                 | displayName     |
 
-  :::caution
+  :::warning
 
   This setup assumes that `userPrincipalName` contains your users' email. If you use a field other than `userPrincipalName` to define your user email, replace `userPrincipalName` with the attribute you use.
 

@@ -5,7 +5,7 @@ id: upgrade-ac
 description: Upgrade your Apache Airflow environment by installing the latest version of Astronomer Certified.
 ---
 
-:::warning
+:::danger
 
 No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
 

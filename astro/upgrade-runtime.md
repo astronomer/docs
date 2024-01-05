@@ -2,12 +2,8 @@
 sidebar_label: 'Upgrade Astro Runtime'
 title: 'Upgrade Astro Runtime'
 id: upgrade-runtime
+description: "Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available."
 ---
-
-<head>
-  <meta name="description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
-  <meta name="og:description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
-</head>
 
 import {siteVariables} from '@site/src/versions';
 
@@ -94,7 +90,7 @@ astro deploy
 
 For more information about deploying to Astro, see [Deploy code](deploy-code.md).
 
-:::caution
+:::warning
 
 After you upgrade a Deployment on Astro to a new version of Astro Runtime, the only way to downgrade is to [roll back to a previous deploy](deploy-history.md). If you attempt to downgrade a Deployment by updating your Dockerfile, the Astro CLI produces an error and your request to deploy does not succeed.
 

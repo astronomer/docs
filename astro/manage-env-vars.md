@@ -50,7 +50,7 @@ After you set an environment variable key, only the environment variable value c
 
 If you want to store environment variables with an external version control tool, Astronomer recommends setting them in your `Dockerfile`. This file is automatically created when you first initialize an Astro project using `astro dev init`.
 
-:::caution
+:::warning
 
 Environment variables set in your `Dockerfile` are stored in plain text. For this reason, Astronomer recommends storing sensitive environment variables using the Cloud UI or a third-party secrets backend. For more information, see [Configure a secrets backend](secrets-backend.md).
 
@@ -110,7 +110,7 @@ To export the contents of your `.env` file to an Astro Deployment, run the follo
 astro deployment variable update --deployment-id <your-deployment-id> --load .env
 ```
 
-:::caution
+:::warning
 
 When you use the `.env` file to add or update environment variables on Astro, it will overwrite all existing variables in your Astro Deployment. To update only select environment variables, run `astro deployment variable create` without the `--load` option. For example, the following command creates two new environment variables without affecting existing Deployment environment variables:
 
