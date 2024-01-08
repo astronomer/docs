@@ -26,7 +26,7 @@ Workspace Owners and Operators can create and assign connections, while Workspac
 
 When you create an Airflow connection in the Environment Manager, Astro stores Airflow connection details in an Astronomer-hosted secrets manager, and then applies connections to Deployments as Kubernetes secrets. Specifically the following steps occur:
 
-- Astro stores the connection details in an Astronomer-hosted secrets manager.
+- Astro stores the connection details in a secure secrets manager hosted by Astronomer.
 - When a connection is assigned to a Deployment, Astro uses Airflow's provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html) to mount the Kubernetes Secrets.
 - When your DAGs use your connections, Airflow reads the connection details from the filesystem using the Airflow local filesystem secrets backend.
 
