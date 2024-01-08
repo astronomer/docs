@@ -85,9 +85,11 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     - VPC ID of the external VPC
     - CIDR block of the external VPC
 
-2. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
+2. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
 
-3. Configure the following values for your VPC peering connection using the information you copied in Step 1:
+3. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
+
+4. Configure the following values for your VPC peering connection using the information you copied in Step 1:
 
     - **Peering Name**: Provide a name for the VPC peering connection. 
     - **AWS account ID**: Enter the account ID of the external VPC.
@@ -95,8 +97,8 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     - **Destination VPC region**: Enter the region of the VPC external VPC.
     - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC.
 
-4. Click **Create Connection**. The Cloud UI provides an AWS CLI command to accept the connection. 
-5. Run the provided command using the AWS CLI.
+5. Click **Create Connection**. The Cloud UI provides an AWS CLI command to accept the connection. 
+6. Run the provided command using the AWS CLI.
 
 After you configure a VPC peering connection, you must create routes to define how your cluster connects to the external VPC network.
 
