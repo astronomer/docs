@@ -286,6 +286,13 @@ To create a hibernation schedule:
 4. (Optional) Specify additional hibernation schedules for your Deployment.
 5. Select **Update Deployment** to save your changes.
 
+:::info
+
+Note that all cron schedules are interpreted in the UTC timezone. So, for example, if you want your Deployment to
+hibernate at 1700 EST, you should use `0 22 * * *` as the cron expression.
+
+:::
+
 When your hibernation schedule starts:
 
 - Your Deployment shows a **Hibernating** status in the Cloud UI:
@@ -300,17 +307,17 @@ When your hibernation schedule starts:
 
 #### Manually hibernate a Deployment
 
-Instead of creating a regular hibernation schedule. You can manually hibernate a development Deployment from the Cloud UI. This is recommended if you're not sure when you'll need to use the Deployment again after hibernating it. 
+Instead of creating a regular hibernation schedule, you can manually hibernate a development Deployment from the Cloud UI. This is recommended if you're not sure when you'll need to use the Deployment again after hibernating it.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Hibernate Deployment**.
 3. Configure the manual hibernation period, then click **Confirm**.
 
-If you need to run a task or DAG on a Deployment that is currently in hibernation, you can also manually wake up a Deployment from hibernation before the end of its schedule. 
+If you need to run a task or DAG on a Deployment that is currently in hibernation, you can manually wake up a Deployment from hibernation before the end of its schedule.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake up from Hibernation**.
-3. Select **Remove override and return to normal schedule**, then click **Confirm**. Alternatively, you can adjust the existing manual hibernation period if you don't immediately need to wake up the Deployment.
+3. Select the appropriate option from the dialog: if you need to wake immediately for an indefinite period and ignore any configured schedules, select **Wake until further notice**. If you know how long you want the deployment to be awake, select **Wake until set time and date** and specify a time. If you want to go back to the normal schedules and remove the override, select **Remove override and return to normal schedule**. Once you've made your selection, click **Confirm**.
 
 ## See also
 
