@@ -103,7 +103,8 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
 
 2. At the root of your Git repository, add a [`Jenkinsfile`](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    <pre><code parentName="pre">{`pipeline {
+    ```
+    pipeline {
         agent any
         stages {
             stage('Set Environment Variables') {
@@ -139,7 +140,8 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
                 cleanWs()
             }
         }
-    }`}</code></pre>
+    }
+    ```
 
     This `Jenkinsfile` triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
@@ -164,7 +166,8 @@ If your Astro project requires additional build-time arguments to build an image
 
 2. At the root of your Astro Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-<pre><code parentName="pre">{`pipeline {
+```
+pipeline {
         agent any
         stages {
             stage('Deploy to Astronomer') {
@@ -190,7 +193,8 @@ If your Astro project requires additional build-time arguments to build an image
                 cleanWs()
             }
         }
-    }`}</code></pre>
+    }
+    ```
 
 This `Jenkinsfile` triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
@@ -215,7 +219,8 @@ Use the following template to implement DAG-only deploys to a single Deployment 
 
 2. At the root of your Git repository, add a [`Jenkinsfile`](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    <pre><code parentName="pre">{`pipeline {
+    ```
+    pipeline {
         agent any
         stages {
             stage('Dag Only Deploy to Astronomer') {
@@ -245,5 +250,6 @@ Use the following template to implement DAG-only deploys to a single Deployment 
                 cleanWs()
             }
         }
-    }`}</code></pre>
+    }
+    ```
 

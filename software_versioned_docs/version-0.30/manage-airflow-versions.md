@@ -65,7 +65,9 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 1. In your Astro project, open your `Dockerfile`.
 2. Update the `FROM` line of your project's `Dockerfile` to reference a new Astronomer image. For example, to upgrade to the latest version of Astro Runtime, you would change the `FROM` line to:
 
-    <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}`}</code></pre>
+    ```dockerfile
+    FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
+    ```
 
     For a list of currently supported versions of Astro Runtime, see [Astro Runtime lifecycle schedule](/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 

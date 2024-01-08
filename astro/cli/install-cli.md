@@ -119,9 +119,11 @@ By default, the Astro CLI uses Docker as its container management engine for run
 
     To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command specifies the latest available version of the Astro CLI:
 
-<pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v {{CLI_VER}}`}</code></pre>
+    ```sh
+    winget install -e --id Astronomer.Astro -v {{CLI_VER}}
+    ```
 
-2. Run the following command to access the location of the CLI executable:
+1. Run the following command to access the location of the CLI executable:
 
     ```sh
     $env:path.split(";")
@@ -129,9 +131,9 @@ By default, the Astro CLI uses Docker as its container management engine for run
     
     From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
 
-3. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
+2. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
 
-4. Run `astro version` to confirm the Astro CLI is installed properly.
+3. Run `astro version` to confirm the Astro CLI is installed properly.
 
 #### Resolve installation issues
 
@@ -187,7 +189,9 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install the most recent release of the CLI, you would run:
 
-<pre><code parentName="pre">{`curl -sSL install.astronomer.io | sudo bash -s -- v{{CLI_VER}}`}</code></pre>
+```sh
+curl -sSL install.astronomer.io | sudo bash -s -- v{{CLI_VER}}
+```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
 
