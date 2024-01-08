@@ -4,7 +4,7 @@ title: 'Run your first DAG with GitHub Actions'
 id: 'first-dag-github-actions'
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
 

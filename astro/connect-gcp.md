@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/gcp.png' }
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Google Cloud Platform (GCP) resources.
 

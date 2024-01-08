@@ -11,6 +11,19 @@ module.exports = {
   onBrokenMarkdownLinks: 'throw',
   markdown: {
     mermaid: true,
+    preprocessor: ({ filePath, fileContent }) => {
+      function updateValues() {
+        var mapObj = {
+          '{{CLI_VER}}':"1.21.0",
+          '{{RUNTIME_VER}}':"10.0.0",
+        };
+        var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
+        return fileContent.replaceAll(re, function(matched){
+          return mapObj[matched];
+        });
+      }
+      return updateValues();
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/favicon.svg',

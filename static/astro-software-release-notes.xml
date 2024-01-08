@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Fri, 29 Dec 2023 12:47:22 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.33.2</title><link>https://docs.astronomer.io/software/release-notes#0332</link><pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0332</guid><description><![CDATA[<p>Release date: November 20, 2023</p><h3>Change to behavior for interacting with deprecated Runtime versions</h3><p>In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the <code>enableSystemAdminCanUseNonSupportedRuntime</code> key has been replaced with <code>enableSystemAdminCanUseAllRuntimes</code>. To set the new flag, add the following configuration to your <code>config.yaml</code> file:</p><pre><code class="language-yaml">astronomer:
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Fri, 05 Jan 2024 17:14:17 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.33.2</title><link>https://docs.astronomer.io/software/release-notes#0332</link><pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0332</guid><description><![CDATA[<p>Release date: November 20, 2023</p><h3>Change to behavior for interacting with deprecated Runtime versions</h3><p>In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the <code>enableSystemAdminCanUseNonSupportedRuntime</code> key has been replaced with <code>enableSystemAdminCanUseAllRuntimes</code>. To set the new flag, add the following configuration to your <code>config.yaml</code> file:</p><pre><code class="language-yaml">astronomer:
    houston:
       config:
          deployments:
@@ -173,6 +173,62 @@
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417">CVE-2023-39417</a></li>
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920">CVE-2023-37920</a></li>
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945">CVE-2023-35945</a></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>0.32.5</title><link>https://docs.astronomer.io/software/release-notes#0325</link><pubDate>Fri, 08 Dec 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0325</guid><description><![CDATA[<p>Release date: December 8, 2023</p><h3>Additional improvements</h3><ul>
+<li>
+<p>You can now configure a global index name prefix to use for both <a href="export-task-logs.md">Fluentd and sidecar-based logging</a>, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your <code>config.yaml</code> file:</p>
+<pre><code class="language-yaml">global:
+  logging:
+    indexNamePrefix: &lt;your-index-prefix&gt;
+</code></pre>
+</li>
+<li>
+<p>Deprecated Kubernetes 1.23.</p>
+</li>
+<li>
+<p>Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.</p>
+</li>
+<li>
+<p>You can now set the following configuration to bypass proxy support when Astronomer Software redirects to Azure login. This might be required in some circumstances when importing identity provider groups as Teams:</p>
+<pre><code class="language-yaml">astronomer:
+  houston:
+    config:
+      auth:
+        microsoft:
+          useExternalProxy: false
+</code></pre>
+</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where deleting a user from Astronomer Software without deleting the user from an Idp Team could result in the user not being active if they're re-added.</li>
+<li>Fixed an issue that allowed user creation with the Houston API when SCIM was enabled and <code>userManagement.enable</code> was <code>false</code>.</li>
+<li>Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down.</li>
+<li>Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.</li>
+<li>Fixed an issue where you couldn't update the value for an existing secret environment variable.</li>
+<li>Fixed an issue where you couldn't search for a user in the Software UI by their user ID.</li>
+<li>Fixed an issue where you couldn't access Grafana or Kibana on GKE V2 clusters.</li>
+<li>Fixed an issue where the <code>invites</code> query returned an error instead of an empty array when no users invites were found.</li>
+<li>Fixed the following vulnerabilities:
+<ul>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325">CVE-2023-39325</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5363">CVE-2023-5363</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-43787">CVE-2023-43787</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911">CVE-2023-4911</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5678">CVE-2023-5678</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37788">CVE-2023-37788</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32002">CVE-2023-32002</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32006">CVE-2023-32006</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32559">CVE-2023-32559</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37434">CVE-2022-37434</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-48174">CVE-2022-48174</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39320">CVE-2023-39320</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29402">CVE-2023-29402</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29404">CVE-2023-29404</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29405">CVE-2023-29405</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37788">CVE-2023-37788</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-40577">CVE-2023-40577</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253">CVE-2023-2253</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41721">CVE-2022-41721</a></li>
 </ul>
 </li>
 </ul>]]></description></item><item><title>0.32.4</title><link>https://docs.astronomer.io/software/release-notes#0324</link><pubDate>Wed, 18 Oct 2023 23:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0324</guid><description><![CDATA[<p>Release date: October 19, 2023</p><h3>Additional improvements</h3><p>You can now create a default Kibana index when installing Software.</p><h3>Bug fixes</h3><ul>

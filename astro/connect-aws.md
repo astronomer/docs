@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/aws.png' }
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Use this document to learn how you can grant Astro cluster and its Deployments access to your external AWS resources.
 
