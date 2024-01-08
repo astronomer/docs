@@ -259,7 +259,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
 
-You can choose to use
+You can choose to save your access credential information in either Github Secrets or with your own secrets backend. If you use a [secrets backend](secrets-backend.md) to manage your credentials, you can configure your Github Action to use and store them.
 
 ### Prerequisites
 
@@ -275,16 +275,7 @@ You can choose to use
   - Key: `ASTRO_API_TOKEN`
   - Secret: `<your-token>`
 
-3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration. You can choose to use either a Secrets backend or to store your `ASTRO_API_TOKEN` as a GitHub secret.
-
-  <Tabs
-    defaultValue="github-secret"
-    groupId= "store-secrets"
-    values={[
-        {label: 'GitHub Secret', value: 'github-secret'},
-        {label: 'Secrets Backend', value: 'secrets-backend'},
-    ]}>
-  <TabItem value="github-secret">
+3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration.
 
     ```yaml
     name: Astronomer CI - Create preview Deployment
@@ -295,7 +286,7 @@ You can choose to use
           - "**"
 
     env:
-      ## Set your API token as a GitHub secret
+      ## Sets Deployment API key credentials as environment variables or GitHub Secret depending on your configuration
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:
@@ -308,37 +299,16 @@ You can choose to use
             action: create-deployment-preview
             deployment-id: <main-deployment-id>
     ```
-  </TabItem>
-  <TabItem value="secrets-backend">
 
-    ```yaml
-    create:
-      branches:
-      - '**'
-      - '!main'
+4. (Optional) If you want to use a secrets backend instead of GitHub secrets, add the following code to the end of the `steps` section in your `create-deployment-preview.yml` file.
 
-      env:
-        ## Sets Deployment API key credentials as environment variables
-        ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
-
-      jobs:
-        deploy:
-          runs-on: ubuntu-latest
-          steps:
-          - name: Create Deployment Preview
-            uses: astronomer/deploy-action@v0.3
-            with:
-              action: create-deployment-preview
-              deployment-name: "test"
-            id: create-dep-prev
-          - name: Create Secret Variables
+  ```yaml
+            - name: Create Secret Variables
             run: |
               astro deployment variable update --deployment-id ${{steps.create-dep-prev.outputs.preview-id}} AIRFLOW__SECRETS__BACKEND_KWARGS=${{ secrets.AIRFLOW__SECRETS__BACKEND_KWARGS }} --secret
-      ```
-    </TabItem>
-    </Tabs>
+  ```
 
-4. In the same folder, create a new YAML file named `deploy-to-preview.yml` that includes the following configuration:
+5. In the same folder, create a new YAML file named `deploy-to-preview.yml` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Deploy code to preview
@@ -363,7 +333,7 @@ You can choose to use
             deployment-id: <main-deployment-id>
     ```
 
-5. In the same folder, create a new YAML file named `delete-preview-deployment.yml` that includes the following configuration:
+6. In the same folder, create a new YAML file named `delete-preview-deployment.yml` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Delete Preview Deployment
@@ -387,7 +357,7 @@ You can choose to use
             deployment-id: <main-deployment-id>
     ```
 
-6. In the same folder, create a new YAML file named `deploy-to-main-deployment.yml` that includes the following configuration:
+7. In the same folder, create a new YAML file named `deploy-to-main-deployment.yml` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Deploy code to main Deployment
@@ -412,8 +382,6 @@ You can choose to use
     ```
 
     All four workflow files must have the same Deployment ID specified. The actions use this Deployment ID to create and delete preview Deployments based on your main Deployment.
-
-### Use a secrets backend for preview Deployment
 
 ## Private network templates
 
