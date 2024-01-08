@@ -5,7 +5,7 @@ id: upgrade-runtime
 description: "Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available."
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
@@ -58,7 +58,9 @@ The Astro CLI then generates test results in your Astro project that identify de
 
     To upgrade to the latest version of Runtime, for example, change the `FROM` statement in your Dockerfile to:
 
-    <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
+    ```
+    FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
+    ```
 
     You must always specify the major, minor, and patch version of any given Astro Runtime version.
 

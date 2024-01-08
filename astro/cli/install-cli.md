@@ -7,7 +7,7 @@ description: "Instructions for installing, upgrading, and uninstalling the Astro
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 You can find information about installing, upgrading, and uninstalling the Astro CLI.
 
@@ -119,7 +119,7 @@ By default, the Astro CLI uses Docker as its container management engine for run
 
     To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command specifies the latest available version of the Astro CLI:
 
-<pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}`}</code></pre>
+<pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v {{CLI_VER}}`}</code></pre>
 
 2. Run the following command to access the location of the CLI executable:
 
@@ -187,7 +187,7 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install the most recent release of the CLI, you would run:
 
-<pre><code parentName="pre">{`curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}`}</code></pre>
+<pre><code parentName="pre">{`curl -sSL install.astronomer.io | sudo bash -s -- v{{CLI_VER}}`}</code></pre>
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
 

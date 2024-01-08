@@ -7,7 +7,6 @@ description: Customize your Astronomer image, including adding dependencies and 
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
 
 ## Overview
 

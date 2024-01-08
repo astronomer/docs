@@ -5,7 +5,7 @@ id: deploy-project-image
 description: Deploy a complete Astro project to a Deployment as a Docker image.
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 In a full deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
 

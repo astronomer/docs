@@ -5,7 +5,7 @@ id: manage-airflow-versions
 description: Adjust and upgrade Airflow versions on Astronomer Software.
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 ## Overview
 
@@ -97,7 +97,7 @@ The Astro CLI then generates test results in your Astro project that identify de
 1. In your Astro project, open your `Dockerfile`.
 2. Change the Docker image in the `FROM` statement of your `Dockerfile` to a new version of Astro Runtime. For example, to upgrade to the latest version of Runtime, you would change the `FROM` statement in your Dockerfile to:
 
-    <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
+    <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}`}</code></pre>
 
     For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 

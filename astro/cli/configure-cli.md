@@ -9,7 +9,7 @@ description: "Learn how to modify project-level settings by updating the .astro/
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Every Astro project includes a file called `.astro/config.yaml` that supports various project-level settings, including:
 

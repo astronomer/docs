@@ -7,7 +7,7 @@ description: "Learn how to run your first Apache Airflow DAG on Astro with the A
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with the Astro CLI.
 
