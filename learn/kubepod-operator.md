@@ -215,9 +215,7 @@ Then, run `astro dev start` with the Astro CLI to spin up a local Airflow enviro
 
 To use the KubernetesPodOperator, you must define the configuration of each task and the Kubernetes Pod in which it runs, including its namespace and Docker image.
 
-This example DAG runs a `hello-world` Docker image. The namespace is determined dynamically based on whether you're running the DAG in your local environment or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
-
-Once you've updated the definition of KubernetesPodOperator tasks in your Astro project, run `astro dev start` with the Astro CLI to test your DAGs in a local Airflow environment.
+This example DAG runs a `hello-world` Docker image using the `k8s_conn` connection you defined in the previous step to run it on your local Kubernetes cluster.
 
 <CodeBlock language="python">{kpo_example_1}</CodeBlock>
 
