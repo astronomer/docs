@@ -85,30 +85,32 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     - VPC ID of the external VPC
     - CIDR block of the external VPC
 
-2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
+2. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
 
-    - **Stack name**: Enter a meaningful name for your stack.
-    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+3. Configure the following values for your VPC peering connection using the information you copied in Step 1:
 
-3. After the stack is created, go to the **Outputs** tab and copy the value from the **PeerRole ARN** field.
+    - **Peering Name**: Provide a name for the VPC peering connection. 
+    - **AWS account ID**: Enter the account ID of the external VPC.
+    - **Destination VPC ID**: Enter the VPC ID.
+    - **Destination VPC region**: Enter the region of the VPC external VPC.
+    - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC.
 
-4. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, and copy the **ID** of the cluster.
+4. Click **Create Connection**. The Cloud UI provides an AWS CLI command to accept the connection. 
+5. Run the provided command using the AWS CLI.
 
-5. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following details:
+After you configure a VPC peering connection, you must create routes to define how your cluster connects to the external VPC network.
 
-    - AWS region of the external VPC from Step 1
-    - VPC ID of the external VPC from Step 1
-    - AWS account ID of the external VPC from Step 1
-    - CIDR block of the external VPC from Step 1
-    - **PeerRole ARN** from Step 3
-    - Astro cluster **ID** from Step 4
+1. Open the **Routes** tab, then click **+ Route**.
 
-    Astronomer support will initiate a peering request and create the routing table entries in the Astro VPC.
+2. Configure the following details for your route:
 
-6. Wait for Astronomer support to send you the Astro VPC CIDR and VPC peering ID. Then, the owner of the external VPC needs to [add a route](https://docs.aws.amazon.com/vpc/latest/userguide/WorkWithRouteTables.html#AddRemoveRoutes) in the external VPC, using the Astro VPC CIDR as the **Destination** and the VPC peering ID as the **Target**.
+    - **Route ID**: Provide a name for the route. 
+    - **Destination**: Enter the specific address from the CIDR block that the cluster should network with.
+    - **Target**: Select the VPC peering connection you configured. 
 
-7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
+3. Click **Create Route**, then wait for the route status to switch from **Pending** to **Active**. 
 
+After the route is active, your cluster is connected to the external VPC.
 
 #### DNS considerations for VPC peering
 
