@@ -62,7 +62,7 @@ Each version of Astronomer Software specifies a version of the [Astronomer-distr
 
 Use the following table to see the Airflow Helm chart version for each supported version of Astronomer Software. To view the Airflow Helm chart for an unsupported version of Astronomer Software, open the default Astronomer Helm chart in the [`astronomer/astronomer` repository](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml), select the **Tag** for your desired version, and find the value for `airflowChartVersion` in the version's Helm chart.
 
-| Astronomer platform version | Airflow Helm chart version |
+| Astronomer platform version | Astronomer Airflow Helm chart version |
 | --------------------------- | -------------------------- |
 | 0.30.0                      | 1.7.0                      |
 | 0.30.1                      | 1.7.0                      |
