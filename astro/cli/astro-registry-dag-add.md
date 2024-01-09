@@ -2,14 +2,20 @@
 sidebar_label: "astro registry dag add"
 title: "astro registry dag add"
 id: astro-registry-dag-add
-description: Download a DAG from the Astronomer registry to your project. 
+description: Download a DAG from the Astronomer registry to your project.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Download a DAG from the [Astronomer Registry](https://registry.astronomer.io/) to your Astro project. 
+:::info
 
-## Usage 
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
+Download a DAG from the [Astronomer Registry](https://registry.astronomer.io/) to your Astro project.
+
+## Usage
 
 ```sh
 astro registry dag add

@@ -4,7 +4,7 @@ title: "astro workspace team remove"
 id: astro-workspace-team-remove
 description: Remove Teams from a Workspace.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 import Tabs from '@theme/Tabs';
@@ -28,20 +28,10 @@ values={[
 ## Usage
 
 ```sh
-astro workspace team remove <team-id> --workspace-id <workspace-id>
+astro workspace team remove
 ```
 
-You can retrieve a Team's ID in one of two ways:
-
-- Access the Team in the Software UI and copy the last part of the URL in your web browser. For example, if your Team is located at `BASEDOMAIN.astronomer.io/w/cx897fds98csdcsdafasdot8g7/team/cl4iqjamcnmfgigl4852flfgulye`, your Team ID would be `cl4iqjamcnmfgigl4852flfgulye`.
-- Run [`astro workspace team list`](#astro-workspace-team-list) and copy the value in the `ID` column.
-
-#### Options
-
-| Option           | Description                                             | Possible Values                                                            |
-| ---------------- | ------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `<team-id>`      | The ID for the Team. Use to override CLI prompts.       | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`. |
-| `--workspace-id` | The Workspace for the Team Use to override CLI prompts. | Any valid Workspace ID                                                     |
+When you remove a team from Astro, the CLI displays a list of Teams in the Workspace and prompts you to select the team to remove.
 
 </TabItem>
 <TabItem value="software">

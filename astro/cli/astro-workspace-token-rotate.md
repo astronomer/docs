@@ -4,8 +4,14 @@ title: "astro workspace token rotate"
 id: astro-workspace-token-rotate
 description: Rotate a Workspace API token.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Rotate a Workspace API token in your current Workspace.
 

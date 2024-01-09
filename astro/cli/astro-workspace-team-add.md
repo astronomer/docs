@@ -4,14 +4,16 @@ title: "astro workspace team add"
 id: astro-workspace-team-add
 description: Add a Team to your Workspace.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::info
+
 The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change between product contexts.
+
 :::
 
 Add a Team to your current Workspace and grant it a Workspace role.

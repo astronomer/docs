@@ -2,12 +2,18 @@
 sidebar_label: "astro deployment pool update"
 title: "astro deployment pool update"
 id: astro-deployment-pool-update
-description: Update a Deployment's Airflow pool. 
+description: Update a Deployment's Airflow pool.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Update the value for a Deployment's Airflow pool. 
+:::info
+
+This command is only available on Astro.
+
+:::
+
+Update the value for a Deployment's Airflow pool.
 
 ## Usage
 
