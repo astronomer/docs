@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Log out of the Astro CLI. This command does not affect your current login session in the Cloud UI.
+Log out of the Astro CLI. This command does not affect your current web browser login session in either Astro or Astronomer Software.
 
 ## Usage
 
