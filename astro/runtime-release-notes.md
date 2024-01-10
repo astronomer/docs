@@ -45,6 +45,20 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
+## Astro Runtime 9.8.0
+
+- Release date: January 10, 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- You can now set `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP` and `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM` in a Deployment to change the names of the AWS Cloudwatch log groups and streams that Astro uses to organize log events. Create custom names for log streams and groups if you need to set targeted policies for these objects in Cloudwatch, or if you otherwise want to change how task logs are grouped. See [Export task logs to AWS Cloudwatch](export-cloudwatch.md).
+- To improve scheduler performance, the default value for `AIRFLOW__SCHEDULER__MAX_TIS_PER_QUERY` is now `512`.
+
+### Bug fixes
+
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
+
 ## Astro Runtime 9.7.0
 
 - Release date: December 22, 2023
