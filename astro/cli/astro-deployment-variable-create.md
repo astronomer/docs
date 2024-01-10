@@ -4,12 +4,12 @@ title: "astro deployment variable create"
 id: astro-deployment-variable-create
 description: Reference documentation for astro deployment variable create.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 :::info
 
-This command is available only if you're using Astro. It is not available for Astronomer Software.
+This command is only available on Astro.
 
 :::
 

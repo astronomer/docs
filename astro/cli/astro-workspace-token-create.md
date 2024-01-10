@@ -4,8 +4,14 @@ title: "astro workspace token create"
 id: astro-workspace-token-create
 description: Create a Workspace API token.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Create a Workspace API token in your current Workspace.
 

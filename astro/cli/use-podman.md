@@ -8,7 +8,6 @@ toc_max_heading_level: 2
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
 
 The Astro CLI requires a container management engine to run Apache Airflow components on your local machine and deploy to Astro. For example, the `astro dev start` and `astro deploy` commands both require containers.
 
