@@ -21,9 +21,11 @@ At this time, you can only export Airflow task logs from Astro to Cloudwatch. Me
 
 You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/) using an IAM role or user. This allows you to view and manage task logs across all Deployments from a centralized observability plane.
 
+By default, Astro sets a unique log stream for each Deployment, and log groups are defined to include log streams from Deployments which share the same Workspace and cluster. You can override these definitions using Deployment environment variables if you want to change how your task logs are organized on Cloudwatch. See [AWS documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html) for more information about log groups and log streams.
+
 ### Prerequisites
 
-- Your Deployment must run Astro Runtime 9.4+. See [Upgrade Astro Runtime](upgrade-runtime.md).
+- Your Deployment must run Astro Runtime 9 or later. See [Upgrade Astro Runtime](upgrade-runtime.md).
 
 ### Setup
 
@@ -66,3 +68,11 @@ You can forward Airflow task logs from a Deployment to [AWS Cloudwatch](https://
     - **Value**: `<your-cloudwatch-region>`
 
     :::
+
+4. (Optional) Set the following environment variables if you require custom naming for your log streams or log groups. For example, you might set these names to make them more readable for Cloudwatch admins who need to set targeted policies for log groups, or to organize log streams only by cluster instead of cluster and Workspace:
+
+    - **Key 1**: `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP`
+    - **Value 1**: Your log group name.
+
+    - **Key 2**: `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM`
+    - **Value 2**: Your log stream name.

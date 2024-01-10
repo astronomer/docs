@@ -4,15 +4,12 @@ title: "astro workspace service-account"
 id: astro-workspace-service-account
 description: Manage Workspace service accounts (Software only).
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+:::info
 
-:::info  
-
-This command is available only if you're authenticated to an Astronomer Software installation. 
+This command is available only if you're authenticated to an Astronomer Software installation.
 
 :::
 

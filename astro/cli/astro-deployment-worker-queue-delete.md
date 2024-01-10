@@ -3,8 +3,14 @@ sidebar_label: "astro deployment worker-queue delete"
 title: "astro deployment worker-queue delete"
 id: astro-deployment-worker-queue-delete
 description: Delete a Deployment worker queue.
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Delete an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro.
 
@@ -25,7 +31,7 @@ astro deployment worker-queue delete
 
 
 
-## Related commands 
+## Related commands
 
 - [`astro deployment worker-queue update`](cli/astro-deployment-worker-queue-update.md)
 - [`astro deployment worker-queue create`](cli/astro-deployment-worker-queue-create.md)
