@@ -69,7 +69,7 @@ By default, Astro sets a unique log stream for each Deployment, and log groups a
 
     :::
 
-4. (Optional) Set the following environment variables if you require custom naming for your log streams or log groups. For example, you might set these names to make them more readable for Cloudwatch admins who need to set targeted policies for task logs, or to organize log streams only by cluster instead of cluster and Workspace:
+4. (Optional) Set the following environment variables if you require custom naming for your log streams or log groups. For example, you might set these names to make them more readable for Cloudwatch admins who need to set targeted policies for log groups, or to organize log streams only by cluster instead of cluster and Workspace:
 
     - **Key 1**: `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP`
     - **Value 1**: Your log group name.
