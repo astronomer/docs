@@ -52,7 +52,7 @@ For version compatibility information, see the [Runtime release notes](runtime-r
 
 ## Default environment variables
 
-The following table lists the Airflow environment variables that have different default values on Astro Runtime. Unlike [global environment variables](platform-variables.md) set on the data plane, you can override the values of these variables for specific use cases. To edit the values of the default Airflow environment variables, see [Set environment variables on Astro](manage-env-vars.md).
+The following table lists the Airflow environment variables that have different default values on Astro Runtime as of Astro Runtime version {{RUNTIME_VER}}. Unlike [global environment variables](platform-variables.md) set on the data plane, you can override the values of these variables for specific use cases. To edit the values of the default Airflow environment variables, see [Set environment variables on Astro](manage-env-vars.md).
 
 | Environment Variable                                            | Description                                                                                                                                                                                 | Value                                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |

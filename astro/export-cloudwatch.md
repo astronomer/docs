@@ -25,7 +25,7 @@ By default, Astro sets a unique log stream for each Deployment, and log groups a
 
 ### Prerequisites
 
-- Your Deployment must run Astro Runtime 9.4+. See [Upgrade Astro Runtime](upgrade-runtime.md).
+- Your Deployment must run Astro Runtime 9 or later. See [Upgrade Astro Runtime](upgrade-runtime.md).
 
 ### Setup
 
