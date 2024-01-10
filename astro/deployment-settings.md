@@ -286,6 +286,17 @@ To create a hibernation schedule:
 4. (Optional) Specify additional hibernation schedules for your Deployment.
 5. Select **Update Deployment** to save your changes.
 
+:::tip
+
+You can use the following example cron expressions to implement common Deployment hibernation schedules:
+
+| Schedule | Start schedule | End schedule |
+|----------|----------------|---------------|
+| Hibernate from 5:00 PM to 9:00 AM| 0 17 * * * | 0 9 * * * |
+| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5 | 0 9 * * 1 |
+
+:::
+
 :::info
 
 Note that all cron schedules are interpreted in the UTC timezone. So, for example, if you want your Deployment to
@@ -317,7 +328,13 @@ If you need to run a task or DAG on a Deployment that is currently in hibernatio
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake up from Hibernation**.
-3. Select the appropriate option from the dialog: if you need to wake immediately for an indefinite period and ignore any configured schedules, select **Wake until further notice**. If you know how long you want the deployment to be awake, select **Wake until set time and date** and specify a time. If you want to go back to the normal schedules and remove the override, select **Remove override and return to normal schedule**. Once you've made your selection, click **Confirm**.
+3. Select one of the following options for how you want your Deployment to wake up:
+	
+    - **Wake until further notice**: Your Deployment wakes up immediately for an indefinite period and ignores any configured hibernation schedules. 
+    - **Wake until set time and date**: Specify a time that the Deployment should go back into hibernation after waking up. 
+    - **Remove override and return to normal schedule**: The Deployment returns to following your configured hibernation schedules.
+	
+4. Click **Confirm**.
 
 ## See also
 
