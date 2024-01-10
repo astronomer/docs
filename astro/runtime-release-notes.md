@@ -20,6 +20,16 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+## Astro Runtime 10.1.0
+
+- Release date: January 10, 2024
+- Airflow version: 2.8.0
+
+### Additional improvements
+
+- You can now set `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP` and `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM` in a Deployment to change the names of the AWS Cloudwatch log groups and streams that Astro uses to organize log events. Create custom names for log streams and groups if you need to set targeted policies for these objects in Cloudwatch, or if you otherwise want to change how task logs are grouped. See [Export task logs to AWS Cloudwatch](export-cloudwatch.md).
+- To improve scheduler performance, the default value for `AIRFLOW__SCHEDULER__MAX_TIS_PER_QUERY` is now `512`.
+
 ## Astro Runtime 10.0.0
 
 - Release date: December 18, 2023
@@ -611,7 +621,7 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 
 ## Astro Runtime 6.9.1
 
-- Release date: January 9, 2023
+- Release date: January 9, 2024
 - Airflow version: 2.4.3
 
 ### Early access Airflow bug fixes
