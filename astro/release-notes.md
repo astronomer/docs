@@ -21,6 +21,19 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## January 9, 2023
+
+### Additional improvements
+
+- When you create a Deployment, the Cloud UI now shows the Airflow version of your Deployment instead of the equivalent Astro Runtime version.
+- Enabled point-in-time restore (PITR) on Hybrid GCP clusters to improve resiliency to outages. Note that this might result in increased costs for cloud storage.
+
+### Bug fixes
+
+- Fixed an issue where you occasionally couldn't access the Airflow UI for a Deployment with the error "No healthy upstream".
+- Fixed an issue where deleting a user with no Workspace membership from an Organization would affect how their Workspace membership appeared in other, unrelated Organizations.
+- Fixed an issue where the **Open in Airflow** button on the DAG details page in the Cloud UI did not open the Airflow UI as expected.
+
 ## December 20, 2023
 
 ### Bug fixes 
