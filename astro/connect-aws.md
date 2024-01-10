@@ -105,22 +105,10 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
     - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC.
 
 5. Click **Create Connection**. The connection appears as **Pending**.
-6. Next to the connection's **Pending** status, click **Complete Activation**. 
+6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**. 
 7. In the modal that appears, follow the instructions to accept the connection from your external VPC and create routes from the external VPC to Astro.
 
-After you configure a VPC peering connection, you must create routes to define how your cluster connects to the external VPC network.
-
-1. Open the **Routes** tab, then click **+ Route**.
-
-2. Configure the following details for your route:
-
-    - **Route ID**: Provide a name for the route. 
-    - **Destination**: Enter the specific address from the CIDR block that the cluster should network with.
-    - **Target**: Select the VPC peering connection you configured. 
-
-3. Click **Create Route**, then wait for the route status to switch from **Pending** to **Active**. 
-
-After the route is active, your cluster is connected to the external VPC.
+A few minutes after you complete the instructions in the modal, the connection status changes from **Pending** to **Active**. 
 
 :::info Alternative Astro Hybrid setup 
 
@@ -160,6 +148,20 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
 
 :::
+
+### Configure additional routes for a VPC connection
+
+To create additional routes for existing VPC connections: 
+
+1. Open the **Routes** tab, then click **+ Route**.
+
+2. Configure the following details for your route:
+
+    - **Route ID**: Provide a name for the route. 
+    - **Destination**: Enter the CIDR block of the external VPC.
+    - **Target**: Select the VPC peering connection you configured. 
+
+3. Click **Create Route**, then wait for the route status to switch from **Pending** to **Active**. 
 
 #### DNS considerations for VPC peering
 
