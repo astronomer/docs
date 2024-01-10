@@ -40,6 +40,24 @@ You can now set a **Resource Strategy** for each Deployment to fine-tune how Ast
 
 You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates.
 
+### Migrate from NATS Streaming to Jetstream
+
+[NATS Streaming](https://github.com/nats-io/nats-streaming-server?tab=readme-ov-file#warning--deprecation-notice-warning) (stan), which on Astronomer Software is responsible for scheduling deploys to Airflow, was deprecated in June 2023 and replaced by a built-in component called [Jetstream](https://docs.nats.io/nats-concepts/jetstream). Astronomer Software still uses NATS Streaming by default, but you can migrate to JetStream by setting the following configuration in your `config,yaml` file:
+
+```yaml
+global:
+  nats:
+    enabled: true
+    replicas: 3
+    jetStream:
+      enabled: true
+      tls: false
+  stan:
+    enabled: false
+```
+
+After you apply this configuration to your platform, the stan component of Astronomer Software is disabled and all message queues will utilize JetStream.
+
 ### Additional improvements
 
 - You can now configure a global label that is applied to all Astronomer Software Pods.
