@@ -76,7 +76,3 @@ By default, Astro sets a unique log stream for each Deployment, and log groups a
 
     - **Key 2**: `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM`
     - **Value 2**: Your log stream name.
-  
-
-  
-    
