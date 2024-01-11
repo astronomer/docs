@@ -5,9 +5,11 @@ id: local-connections
 description: Use connections created in the Astro Environment Manager locally.
 ---
 
-You can share Airflow connections created through the [Astro Environment Manager](create-and-link-connections.md) with local Airflow projects. These connections are not visible from the Airflow UI when you run your project locally.
+You can share Airflow connections created through the [Astro Environment Manager](create-and-link-connections.md) with local Airflow projects. These connections are not visible from the Airflow UI when you run your project locally, instead, they are synced from the Astro Environment Manager using the Astro CLI for the Workspace and Deployment that you want to work with.
 
-When you start a local project using `astro dev start`, you specify either the Workspace or Deployment that you want to import connections from. When you start your project with these settings, the Astro CLI fetches the necessary connections from Astro. Then, after the local Airflow containers start, the Astro CLI populates the metadata database with the connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
+This means that instead of [importing connection details](import-export-connections-variables.md#using-the-astro-cli-local-environments-only) from Astro to your local Airflow metadatabase, you can configure your CLI to retrieve connection details from the Environment Manager using the Astro API. The CLI then adds your connection details directly to your local Airflow metadata database, so you don't need to manage a `.env` file, secrets backend, or `airflow_settings.yaml` file to keep connection information consistent between your local and cloud-based Deployments.
+
+To use connections from the Environment Manager locally, start a local project using `astro dev start`, and then specify either the Workspace or Deployment that you want to import connections from. When you start your project with these settings, the Astro CLI fetches the necessary connections from Astro. Then, after the local Airflow containers start, the Astro CLI populates the metadata database with the connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
 
 ### Prerequisites
 
@@ -59,3 +61,5 @@ When you start a local project using `astro dev start`, you specify either the W
     If you see the error `Error: showSecrets on organization with id is not allowed`, your [Organization Owner](user-permissions.md#organization-roles) needs to enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally. See [Configure environment secrets fetching for the Astro Environment Manager](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager).
 
     :::
+
+Congratulations! You set up your Astro CLI to retrieve connections from the environment manager to use when working locally. Now you can run DAGs locally that use connections set in the Astro Environment manager.
