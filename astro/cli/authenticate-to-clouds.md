@@ -73,13 +73,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /Users/<username>/.aws:/home/astro/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:rw
         webserver:
             volumes:
-            - /Users/<username>/.aws:/home/astro/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:rw
         triggerer:
             volumes:
-            - /Users/<username>/.aws:/home/astro/.aws:ro
+            - /Users/<username>/.aws:/home/astro/.aws:rw
     ```
     
     </TabItem>
@@ -90,13 +90,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /home/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /home/<username>/.aws:/usr/local/airflow/.aws:rw
         webserver:
             volumes:
-            - /home/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /home/<username>/.aws:/usr/local/airflow/.aws:rw
         triggerer:
             volumes:
-            - /home/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /home/<username>/.aws:/usr/local/airflow/.aws:rw
     ```
     
     </TabItem>
@@ -107,13 +107,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:rw
         webserver:
             volumes:
-            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:rw
         triggerer:
             volumes:
-            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
+            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:rw
     ```
 
     </TabItem>
@@ -188,13 +188,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
         webserver:
             volumes:
-            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
         triggerer:
             volumes:
-            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
     ```
     
     </TabItem>
@@ -205,13 +205,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
         webserver:
             volumes:
-            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
         triggerer:
             volumes:
-            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
     ```
     
     </TabItem>
@@ -222,13 +222,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
         webserver:
             volumes:
-            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
         triggerer:
             volumes:
-            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:rw
     ```
     
     </TabItem>
@@ -296,13 +296,13 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     services:
         scheduler:
             volumes:
-            - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
+            - /Users/<username>/.azure:/usr/local/airflow/.azure:rw
         webserver:
             volumes:
-            - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
+            - /Users/<username>/.azure:/usr/local/airflow/.azure:rw
         triggerer:
             volumes:
-            - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
+            - /Users/<username>/.azure:/usr/local/airflow/.azure:rw
     ```
     
     </TabItem>
