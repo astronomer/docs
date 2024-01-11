@@ -286,6 +286,23 @@ To create a hibernation schedule:
 4. (Optional) Specify additional hibernation schedules for your Deployment.
 5. Select **Update Deployment** to save your changes.
 
+:::tip
+
+You can use the following example cron expressions to implement common Deployment hibernation schedules:
+
+| Schedule | Start schedule | End schedule |
+|----------|----------------|---------------|
+| Hibernate from 5:00 PM to 9:00 AM| 0 17 * * * | 0 9 * * * |
+| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5 | 0 9 * * 1 |
+
+:::
+
+:::warning
+
+Astro sets all cron schedules for hibernation in UTC. If you're running a Deployment in another time zone, you must convert the cron expression for your time zone to UTC. For example, if you want your Deployment to hibernate at 17:00 EST, you use `0 22 * * *` (22:00 UTC) as the cron expression.
+
+:::
+
 When your hibernation schedule starts:
 
 - Your Deployment shows a **Hibernating** status in the Cloud UI:
@@ -300,17 +317,23 @@ When your hibernation schedule starts:
 
 #### Manually hibernate a Deployment
 
-Instead of creating a regular hibernation schedule. You can manually hibernate a development Deployment from the Cloud UI. This is recommended if you're not sure when you'll need to use the Deployment again after hibernating it. 
+Instead of creating a regular hibernation schedule, you can manually hibernate a development Deployment from the Cloud UI. This is recommended if you're not sure when you'll need to use the Deployment again after hibernating it.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Hibernate Deployment**.
 3. Configure the manual hibernation period, then click **Confirm**.
 
-If you need to run a task or DAG on a Deployment that is currently in hibernation, you can also manually wake up a Deployment from hibernation before the end of its schedule. 
+If you need to run a task or DAG on a Deployment that is currently in hibernation, you can manually wake up a Deployment from hibernation before the end of its schedule.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake up from Hibernation**.
-3. Select **Remove override and return to normal schedule**, then click **Confirm**. Alternatively, you can adjust the existing manual hibernation period if you don't immediately need to wake up the Deployment.
+3. Select one of the following options for how you want your Deployment to wake up:
+	
+    - **Wake until further notice**: Your Deployment wakes up immediately for an indefinite period and ignores any configured hibernation schedules. 
+    - **Wake until set time and date**: Specify a time that the Deployment should go back into hibernation after waking up. 
+    - **Remove override and return to normal schedule**: The Deployment returns to following your configured hibernation schedules.
+	
+4. Click **Confirm**.
 
 ## See also
 
