@@ -297,10 +297,9 @@ You can use the following example cron expressions to implement common Deploymen
 
 :::
 
-:::info
+:::warning
 
-Note that all cron schedules are interpreted in the UTC timezone. So, for example, if you want your Deployment to
-hibernate at 1700 EST, you should use `0 22 * * *` as the cron expression.
+Astro sets all cron schedules for hibernation in UTC. If you're running a Deployment in another time zone, you must convert the cron expression for your time zone to UTC. For example, if you want your Deployment to hibernate at 17:00 EST, you use `0 22 * * *` (22:00 UTC) as the cron expression.
 
 :::
 
