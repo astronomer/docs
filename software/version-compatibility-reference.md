@@ -84,8 +84,6 @@ Use the following table to see the Airflow Helm chart version for each supported
 | 0.33.1                      | 1.9.4                      |
 | 0.33.2                      | 1.9.5                      |
 
-
-
 ## Legacy version compatibility reference
 
 The following table shows version compatibility information for all versions of Astronomer Software which are no longer supported:
