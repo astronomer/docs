@@ -261,7 +261,9 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
 
 You can choose to save your access credential information in either Github Secrets or with your own secrets backend. If you use a [secrets backend](secrets-backend.md) to manage your credentials, you can configure your Github Action to use and store them.
 
-### Deployment preview implementation
+### Standard Deployment preview
+
+The standard Deployment preview uses GitHub secrets and an Astro Deployment API token to create a preview Deployment as part of your CI/CD pipeline.
 
 #### Prerequisites
 
@@ -302,15 +304,7 @@ You can choose to save your access credential information in either Github Secre
             deployment-id: <main-deployment-id>
     ```
 
-4. (Optional) If you want to use a secrets backend instead of GitHub secrets, add the following code to the end of the `steps` section in your `create-deployment-preview.yml` file.
-
-  ```yaml
-            - name: Create Secret Variables
-            run: |
-              astro deployment variable update --deployment-id ${{steps.create-dep-prev.outputs.preview-id}} AIRFLOW__SECRETS__BACKEND_KWARGS=${{ secrets.AIRFLOW__SECRETS__BACKEND_KWARGS }} --secret
-  ```
-
-5. In the same folder, create a new YAML file named `deploy-to-preview.yml` that includes the following configuration:
+4. In the same folder, create a new YAML file named `deploy-to-preview.yml` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Deploy code to preview
@@ -335,7 +329,7 @@ You can choose to save your access credential information in either Github Secre
             deployment-id: <main-deployment-id>
     ```
 
-6. In the same folder, create a new YAML file named `delete-preview-deployment.yml` that includes the following configuration:
+5. In the same folder, create a new YAML file named `delete-preview-deployment.yml` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Delete Preview Deployment
@@ -359,7 +353,7 @@ You can choose to save your access credential information in either Github Secre
             deployment-id: <main-deployment-id>
     ```
 
-7. In the same folder, create a new YAML file named `deploy-to-main-deployment.yml` that includes the following configuration:
+6. In the same folder, create a new YAML file named `deploy-to-main-deployment.yml` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Deploy code to main Deployment
@@ -385,7 +379,11 @@ You can choose to save your access credential information in either Github Secre
 
     All four workflow files must have the same Deployment ID specified. The actions use this Deployment ID to create and delete preview Deployments based on your main Deployment.
 
-### Deployment preview and secrets backend implementation
+### Secrets backend Deployment preview
+
+If you use a [secrets backend](secrets-backend.md) to manage your access credentials and other sensitive information, you can configure your Github Action to use and store them while working with Deployment previews.
+
+Unlike the standard Deployment preview setup, you need to add some additional configuration information to both your GitHub Secrets and GitHub workflow include information about your Secrets Backend kwargs. This information instructs the CI/CD pipeline to refer to your Secrets Backend to read and write access credentials.
 
 #### Prerequisites
 
