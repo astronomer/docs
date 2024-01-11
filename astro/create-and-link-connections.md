@@ -22,6 +22,28 @@ Workspace Owners and Operators can create and assign connections, while Workspac
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
+## How connections are stored
+
+When you create an Airflow connection in the Environment Manager, Astro stores Airflow connection details in an Astronomer-hosted secrets manager, and then applies connections to Deployments as Kubernetes secrets. Specifically the following steps occur:
+
+- Astro stores the connection details in a secure secrets manager hosted by Astronomer.
+- When a connection is assigned to a Deployment, Astro uses Airflow's provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html) to mount the Kubernetes Secrets.
+- When your DAGs use your connections, Airflow reads the connection details from the filesystem using the Airflow local filesystem secrets backend.
+
+This process occurs every time you create or update a connection.
+
+When you use connections for local development, the Astro CLI reads the connections from the Astro API and injects them into the local Airflow instance's metadata database.
+
+### Fetching environment secrets
+
+The Astro CLI can automatically retrieve connections from the Cloud UI when you start your local airflow instance, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
+
+:::tip
+
+By default, connections can't be exported locally. However, if you want to work with connections locally, the Organization Owner can enable **Environment Secrets Fetching** in the Cloud UI. See [Import and export Airflow connections from the Cloud UI](import-export-connections-variables.md#from-the-cloud-ui).
+
+:::
+
 ## Prerequisites
 
 - Workspace Operator or Workspace Owner [user permissions](user-permissions.md)
