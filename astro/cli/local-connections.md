@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Pull connections from Astro'
+sidebar_label: 'Use Airflow connections from Astro'
 title: 'Work locally with Airflow connections hosted on Astro'
 id: local-connections
 description: Use connections created in the Astro Environment Manager locally.
@@ -10,6 +10,7 @@ You can share Airflow connections created through the [Astro Environment Manager
 When you start a local project using `astro dev start`, you specify either the Workspace or Deployment that you want to import connections from. When you start your project with these settings, the Astro CLI fetches the necessary connections from Astro. Then, after the local Airflow containers start, the Astro CLI populates the metadata database with the connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
 
 ### Prerequisites
+
 - The latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
 - Either a Workspace or Deployment with at least one connection [configured through the Cloud UI](create-and-link-connections.md)
 - A local [Astro Project](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-project)
@@ -43,7 +44,7 @@ When you start a local project using `astro dev start`, you specify either the W
 
 4. Start your project locally.
 
-    - **Using connections linked to all Deployments in a workspace**
+    - **Using connections linked to all Deployments in a Workspace**
     ```zsh
     astro dev start --workspace-id [workspace-id]
     ```

@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Overview'
-title: 'Local Airflow overview'
+title: 'Run Airflow locally'
 id: local-airflow-overview
 description: Work with your Astro project in a local environment by running Airflow and DAGs locally.
 ---
@@ -20,5 +20,3 @@ See the following documentation to get started:
 When you set connections using the [Astro Environment Manager](create-and-link-connections.md), you can easily use them in your local environment to test your DAGs and deployment settings without having to manage access credentials in multiple environments. You can configure the Astro CLI can automatically [sync your Deployment connection credentials](cli/local-connections.md) with your local project.
 
 Unlike importing or exporting connections and variables, using Astro Connections locally doesn't require you to manually store or manage your connection details.
-
-- [Use Astro connections locally](cli/local-connections.md)
