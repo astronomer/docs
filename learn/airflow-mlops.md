@@ -72,6 +72,8 @@ In practice, following modern DevOps patterns when using Airflow for MLOps means
 - Define all infrastructure as code and use the same CI/CD process for infrastructure as for your Airflow code.
 - Store model artifacts in a versioned system. This can be a dedicated tool like MLFlow or an object storage solution.
 
+![Diagram showing how Airflow code and configuration is stored in a version control system and deployed to different Airflow environments.](/img/guides/airflow-mlops_devops.png)
+
 ### Data Engineering for MLOps
 
 There is no MLOps without data. You need to have robust data engineering workflows in place in order to confidently train, test and deploy ML models in production. Apache Airflow has been used by millions of data engineers to create reliable best practice data pipelines, providing a strong foundation for you MLOps workflows.
