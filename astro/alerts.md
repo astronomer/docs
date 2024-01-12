@@ -23,17 +23,6 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 Each Astro alert has a communication channel and a trigger type. The communication channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger. 
 
-### Communication channels
-
-You can send Astro alerts to the following communication channels
-
-- Slack
-- PagerDuty
-- Email
-- DAG trigger
-
-The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
-
 ### Trigger types 
 
 You can trigger an alert to a communication channel using one of the following trigger types:
@@ -48,6 +37,17 @@ You can trigger an alert to a communication channel using one of the following t
 You can only set a task duration trigger for an individual task. Alerting on task group duration is not supported.
 
 :::
+
+### Communication channels
+
+You can send Astro alerts to the following communication channels
+
+- Slack
+- PagerDuty
+- Email
+- DAG trigger
+
+The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
 
 ## Prerequisites
 
