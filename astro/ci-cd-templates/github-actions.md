@@ -399,7 +399,6 @@ Unlike the standard Deployment preview setup, you need to add some additional co
 
   - Key: `ASTRO_API_TOKEN`
   - Secret: `<your-token>`
-
   - Key: `AIRFLOW__SECRETS__BACKEND_KWARGS`
   - Secret: `<your-kwargs>`
 
