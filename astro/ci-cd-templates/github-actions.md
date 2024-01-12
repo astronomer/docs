@@ -407,7 +407,7 @@ Unlike the standard Deployment preview setup, you need to add some additional co
 3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration.
 
     ```yaml
-    name: Astronomer CI - Create preview Deployment
+    name: Astronomer CI - Create preview Deployment with Secrets Backend
 
     on:
       create:
@@ -422,12 +422,14 @@ Unlike the standard Deployment preview setup, you need to add some additional co
       deploy:
         runs-on: ubuntu-latest
         steps:
-        - name: Create preview Deployment
-          uses: astronomer/deploy-action@v0.2
-          with:
-            action: create-deployment-preview
-            deployment-id: <main-deployment-id>
-            - name: Create Secret Variables
+        - steps:
+          - name: Create Deployment Preview
+            uses: astronomer/deploy-action@v0.3
+            with:
+              action: create-deployment-preview
+              deployment-name: "test"
+              id: create-dep-prev
+          - name: Create Secret Variables
             run: |
               astro deployment variable update --deployment-id ${{steps.create-dep-prev.outputs.preview-id}} AIRFLOW__SECRETS__BACKEND_KWARGS=${{ secrets.AIRFLOW__SECRETS__BACKEND_KWARGS }} --secret
   ```
