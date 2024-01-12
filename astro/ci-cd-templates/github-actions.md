@@ -259,7 +259,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
 
-You can choose to save your access credential information in either Github Secrets or with your own secrets backend. If you use a [secrets backend](secrets-backend.md) to manage your credentials, you can configure your Github Action to use and store them.
+When you set up a Standard Deployment preview templates with the Deploy Action, it uses GitHub Secrets to manage the credentials needed for your CI/CD pipeline. However, you can also use GitHub Secrets to store the credentials necessary to integrate your [preview deployment pipeline with a secrets backend](#deployment-preview-template-with-secrets-backend-implementation), so you can access environment variables, connections, and other resources that are managed by your organization's [secrets backend](secrets-backend.md).
 
 ### Standard Deployment preview template
 
