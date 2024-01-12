@@ -15,7 +15,7 @@ See the following documentation to get started:
 - [Test your DAGs](cli/test-your-astro-project-locally.md)
 - [Trouleshoot locally](cli/troubleshoot-locally.md)
 
-## Sync connection details
+## Sync connection details from Astro
 
 When you set connections using the [Astro Environment Manager](create-and-link-connections.md), you can easily use them in your local environment to test your DAGs and deployment settings without having to manage access credentials in multiple environments. You can configure the Astro CLI can automatically [sync your Deployment connection credentials](cli/local-connections.md) with your local project.
 

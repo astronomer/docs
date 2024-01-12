@@ -5,7 +5,7 @@ id: troubleshoot-locally
 description: Address and resolve common issues with local development.
 ---
 
-Use the following topics to resolve common issues with running an Astro project in a local environment.
+Use the following topics to resolve common issues with running an Astro project in a local Airflow environment.
 
 ## Troubleshoot KubernetesPodOperator issues
 
