@@ -9,7 +9,7 @@ Use the following CI/CD templates to automate deploying Apache Airflow DAGs from
 
 The templates for AWS CodeBuild use [image deploy](template-overview.md#template-types) templates. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_.
 
-If you use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) on Astro and are interested in a DAG deploy CI/CD template, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
+If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro and are interested in a DAG deploy CI/CD template, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
@@ -59,7 +59,7 @@ Your `buildspec.yml` file now triggers a code push to an Astro Deployment every 
 
 To automate code deploys across multiple Deployments using AWS CodeBuild, complete the following setup.
 
-This setup requires two Deployments on Astro and two branches in your Git repository. The example assumes that one Deployment is a development environment, and that the other Deployment is a production environment. To learn more, see [Multiple environments](set-up-ci-cd.md#multiple-environments).
+This setup requires two Deployments on Astro and two branches in your Git repository. The example assumes that one Deployment is a development environment, and that the other Deployment is a production environment. To learn more, see [Multiple environments](astro/set-up-ci-cd#multiple-environments).
 
 1. In your AWS CodeBuild pipeline configuration, add the following environment variables:
 
