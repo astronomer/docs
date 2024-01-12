@@ -45,6 +45,12 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
 
 4. (Optional) Configure other details for your Deployment, including cluster, executor, and worker resources. If you have no specific resource requirements for running Airflow, the default configurations should work in most cases. For all available Deployment options, see [Deployment settings](deployment-settings.md).
 
+    :::tip
+
+    Astronomer strongly recommends configuring a **Contact Email** in the **Advanced** section of your Deployment configuration. This allows Astronomer support to notify you in case there's an infrastructure issue with your Deployment. See [Configure Deployment contact emails](deployment-settings.md#configure-deployment-contact-emails).
+
+    :::
+
 5. Click **Create Deployment**.
 
      A confirmation message appears indicating that the Deployment is in progress. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
