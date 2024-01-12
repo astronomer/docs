@@ -47,21 +47,20 @@ Deployment details define how users can view and interact with your Deployment. 
 
 4. Click **Update Deployment**.
 
-### Configure Deployment email alerts
+### Configure Deployment contact emails
 
-Email alerts are used by Astronomer support to notify recipients in the case of an issue with a Deployment. This can include a problem with your scheduler or workers.
+Configure a contact email to get proactive alerts directly from Astronomer support. Astronomer support uses contact emails to notify recipients in case there's an issue with the infrastructure for your Deployment, such as a problem with your scheduler or worker components. 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Details** tab.
+2. Click the **Details** tab. In the **Advanced** menu, click **Edit**.
 
 3. To add an alert email:
-    - Click **Edit Emails** in the **Other** area.
+    - In the **Contact Emails** section, click **Add Email**.
     - Enter an email address and then click **Add**.
 
 4. To delete an alert email address:
-    - Click **Edit Emails** in the **Other** area.
-    - Click **Delete** next to the email you want to delete.
+    - In the **Contact Emails** section, click **Delete** next to the email you want to delete.
     - Click **Yes, Continue**.
 
 In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.

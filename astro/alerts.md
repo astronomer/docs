@@ -18,6 +18,36 @@ To configure Airflow notifications, see [Airflow email notifications](airflow-em
 
 :::
 
+## Alert types
+
+Each Astro alert has a communication channel and a trigger type. The communication channel determines the format and destination of an alert, and the trigger type defines what causes the alert trigger. 
+
+### Trigger types 
+
+You can trigger an alert to a communication channel using one of the following trigger types:
+
+- **DAG failure**: The alert triggers whenever the specified DAG fails.
+- **DAG success**: The alert triggers whenever the specified DAG completes
+- **Task duration**: The alert triggers when a specified task takes longer than expected to complete.
+- **Absolute Time**: The alert triggers when a given DAG does not have a successful DAG run within a defined time window. 
+
+:::info
+
+You can only set a task duration trigger for an individual task. Alerting on task group duration is not supported.
+
+:::
+
+### Communication channels
+
+You can send Astro alerts to the following communication channels
+
+- Slack
+- PagerDuty
+- Email
+- DAG trigger
+
+The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
+
 ## Prerequisites
 
 - An [Astro project](cli/develop-project.md).
@@ -154,12 +184,6 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 3. Enter your **Alert Name** and choose the alert type, **DAG Success**, **DAG Failure**, or **Task Duration**.
 
-  :::info
-
-  You can only use Task Duration alerts with individual tasks. Alerting on task group duration is not supported.
-
-  :::
-
 4. Choose the **Communication Channels** where you want to send your alert.
 
 5. Add your communication channel information.
@@ -211,7 +235,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
     - **Task duration**: Click **Task** and choose the Deployment, DAG, and task name. Enter the **Duration** for how long a task should take to run before you send an alert to your communication channels.
 
-    - **Absolute Time**: This alert triggers when a given DAG does not have a successful DAG run within a defined time window. Click **+ DAG** and choose the Deployment and the DAG that you want the alert to assess. Then, select the **Days of Week** the alert should observe, the **Verification Time** when it should look for a DAG success, and the **Lookback Period** for how long it should look back for a verification time.
+    - **Absolute Time**: Click **+ DAG** and choose the Deployment and the DAG that you want the alert to assess. Then, select the **Days of Week** that the alert should observe, the **Verification Time** when it should look for a DAG success, and the **Lookback Period** for how long it should look back for a verification time.
 
     For example, if an alert has a **Verification Time** of 3:00 PM and a **Lookback Period** of 60 minutes, it will trigger whenever the given DAG does not produce a successful DAG run from 2:00 to 3:00 PM. Astro applies the times you specify based on the time zone of your current web browser session, then translates them to UTC in your Airflow environment.
 
