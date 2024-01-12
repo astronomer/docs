@@ -37,6 +37,16 @@ In this step, you add two environment variables that define the type of Secrets 
 
 2. (Optional) Run a DAG locally  using `Variable.get("<your-variable-key>")` to check that your variables are accessible.
 
+::: tip Assign an access role to Airflow
+
+You can [define the role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerole) that Airflow has to read, write, and delete secrets in your secrets backend by including `role_arn` when you define backend kwargs.
+
+```text
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables", "role_arn": "arn:aws:iam::############:role/Airflow_ParameterStoreRole"}'
+```
+
+:::
+
 ## Step 3: Add AWS access credentials
 
 After defining the secrets backend and the arguments required for Airflow to use it, you need to authorize your Deployment to access it.
