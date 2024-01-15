@@ -3,6 +3,17 @@
 /js/script.outbound-links.js https://plausible.io/js/script.outbound-links.js 200
 /api/event https://plausible.io/api/event 200
 
+# redirect to main astronomer.io privacy page
+/privacy https://www.astronomer.io/privacy/ 301
+
+# redirect 404 errors
+/astro/ci-cd-templates/astro/deploy-code /astro/set-up-ci-cd 301
+/docs.astronomer.io/learn /learn 301
+/astro/astro/cli/release-notes /astro/cli/release-notes 301
+/astro/api/organization-api-tokens.md /astro/organization-api-tokens 301
+/astro/ci-cd-templates/astro/set-up-ci-cd /astro/set-up-ci-cd 301
+/img/integrations/snowpark.png /learn/airflow-snowpark 301
+
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
 /software/0.33/* /software/:splat
 
