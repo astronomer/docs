@@ -171,7 +171,7 @@ With Airflow you can orchestrate actions in any MLOps tool that has an API. For 
 To learn more about using Airflow for MLOps, check out the following resources:
 
 - Reference architectures: 
-    - [Ask Astro](https://github.com/astronomer/ask-astro) LLM Retrieval Augmented Generation pipeline.
+    - [Ask Astro: LLM Retrieval Augmented Generation pipeline](https://github.com/astronomer/ask-astro).
 - Webinars:
     - [Orchestrate next-generation AI tools: Explore six new Airflow providers](https://www.astronomer.io/events/webinars/orchestrate-next-generation-ai-tools-explore-six-new-airflow-providers/).
     - [Airflow at Faire: Democratizing Machine Learning at Scale](https://www.astronomer.io/events/webinars/airflow-at-faire-democratizing-machine-learning-at-scale/).
