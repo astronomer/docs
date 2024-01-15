@@ -271,9 +271,7 @@ def airflow_with_snowpark_tutorial():
             max_iter=10000, input_cols=feature_cols, label_cols=label_col
         )
 
-        feature_cols = [
-            str(col).replace('"', '') for col in feature_cols
-        ]
+        feature_cols = [str(col).replace('"', "") for col in feature_cols]
 
         if use_snowpark_warehouse:
             snowpark_session.use_warehouse(snowpark_warehouse)
@@ -302,11 +300,9 @@ def airflow_with_snowpark_tutorial():
             ).collect()
 
         y_pred_proba.columns = [
-            str(col).replace('"', '') for col in y_pred_proba.columns
+            str(col).replace('"', "") for col in y_pred_proba.columns
         ]
-        y_pred.columns = [
-            str(col).replace('"', '') for col in y_pred.columns
-        ]
+        y_pred.columns = [str(col).replace('"', "") for col in y_pred.columns]
 
         prediction_results = pd.concat(
             [
