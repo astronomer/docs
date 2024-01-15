@@ -261,7 +261,7 @@ Use Deployment hibernation to ensure that:
 
 - You only pay for the resources that you need, when you need them.
 - You don't have to delete a Deployment in order to avoid the cost of the Deployment.
-- You don't have to recreate development environments and re-enter Deployment configurations.
+- You don't have to recreate development environments and re-enter Deployment configurations. 
 
 #### Create a hibernation schedule
 
@@ -309,10 +309,12 @@ When your hibernation schedule starts:
     ![A Deployment with a Hibernating status on the Deployments page of the Cloud UI](/img/docs/hibernating-status.png)
 
 - Any task that was previously running will be killed and marked as failed.
-- Tasks and DAGs do not run. Scheduled tasks will fail.
+- Tasks and DAGs do not run. Task instances that were already running or scheduled at the time of hibernation will fail and trigger any related notifications.
 - No Deployment resources are available. This includes the scheduler, webserver, and all workers.
 - You can't access the Airflow UI for the Deployment.
 - You can't deploy project images or DAGs to the Deployment.
+
+When your hibernation schedule ends, the Deployment will rerun any failed tasks from DAGs with `catchup=true`. To avoid incurring additional resource costs, Astronomer recommends disabling catchup on DAGs in hibernating Deployments.
 
 #### Manually hibernate a Deployment
 
