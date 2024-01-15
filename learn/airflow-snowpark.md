@@ -99,15 +99,15 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Download the `whl` file for the Astro Snowflake provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/astro_provider_snowflake-0.0.0-py3-none-any.whl) and save it in your Astro project's `include` directory.
+2. Download the `whl` file for the Astro Snowflake provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/astro_provider_snowpark-0.0.0-py3-none-any.whl) and save it in your Astro project's `include` directory.
 
 3. Create a new file in your Astro project's root directory called `requirements-snowpark.txt`. This file contains all Python packages that you install in your reuseable Snowpark environment.
 
     ```text
     psycopg2-binary
-    snowflake_snowpark_python[pandas]==1.5.1
+    snowflake_snowpark_python[pandas]>=1.11.1
+    /tmp/astro_provider_snowpark-0.0.0-py3-none-any.whl
     virtualenv
-    /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
     ```
 
 4. Change the content of the `Dockerfile` of your Astro project to the following, which imports the `whl` file and creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
@@ -115,10 +115,10 @@ The example code from this tutorial is also available on [GitHub](https://github
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
 
-    FROM quay.io/astronomer/astro-runtime:9.1.0-python-3.9-base
+    FROM quay.io/astronomer/astro-runtime:10.1.0
 
     # Copy the whl file to the image
-    COPY include/astro_provider_snowflake-0.0.0-py3-none-any.whl /tmp
+    COPY include/astro_provider_snowpark-0.0.0-py3-none-any.whl /tmp
 
     # Create the virtual environment
     PYENV 3.8 snowpark requirements-snowpark.txt
@@ -137,11 +137,12 @@ The example code from this tutorial is also available on [GitHub](https://github
 6. Add the following packages to your `requirements.txt` file. The Astro Snowflake provider is installed from the `whl` file.
 
     ```text
-    apache-airflow-providers-snowflake==4.1.0
-    snowflake-snowpark-python[pandas]==1.5.1
-    snowflake-ml-python==1.0.7
-    matplotlib==3.7.3
-    /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
+    apache-airflow-providers-snowflake==5.2.0
+    apache-airflow-providers-amazon==8.15.0
+    snowflake-snowpark-python[pandas]==1.11.1
+    snowflake-ml-python==1.1.2
+    matplotlib==3.8.1
+    /tmp/astro_provider_snowpark-0.0.0-py3-none-any.whl
     ```
 
 :::warning
@@ -183,9 +184,10 @@ For more information on creating a Snowflake connection, see [Create a Snowflake
 8. (Optional) If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
 
     ```text
-    AIRFLOW__CORE__XCOM_BACKEND='astronomer.providers.snowflake.xcom_backends.snowflake.SnowflakeXComBackend'
-    AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE='SNOWPARK_XCOM_DB.SNOWPARK_XCOM_SCHEMA.XCOM_TABLE'
-    AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE='SNOWPARK_XCOM_DB.SNOWPARK_XCOM_SCHEMA.XCOM_STAGE'
+    AIRFLOW__CORE__XCOM_BACKEND='snowpark_provider.xcom_backends.snowflake.SnowflakeXComBackend'
+    AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE='AIRFLOW_XCOM_DB.AIRFLOW_XCOM_SCHEMA.XCOM_TABLE'
+    AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE='AIRFLOW_XCOM_DB.AIRFLOW_XCOM_SCHEMA.XCOM_STAGE'
+    AIRFLOW__CORE__XCOM_SNOWFLAKE_CONN_NAME='snowflake_default'
     ```
 
 ## Step 2: Add your data

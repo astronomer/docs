@@ -14,7 +14,6 @@ from astro import sql as aql
 from astro.files import File
 from astro.sql.table import Table
 from airflow.models.baseoperator import chain
-from astronomer.providers.snowflake.utils.snowpark_helpers import SnowparkTable
 
 
 # toggle to True if you are using the Snowflake XCOM backend and want to
@@ -173,18 +172,26 @@ def airflow_with_snowpark_tutorial():
     @task.snowpark_python(
         snowflake_conn_id=SNOWFLAKE_CONN_ID,
     )
-    def transform_table_step_one(df: SnowparkTable):
+    def transform_table_step_one(df):
         from snowflake.snowpark.functions import col
         import pandas as pd
+        import re
 
-        filtered_data = df.filter(
+        pattern = r"table=([^&]+)&schema=([^&]+)&database=([^&]+)"
+        match = re.search(pattern, df.uri)
+
+        formatted_result = f"{match.group(3)}.{match.group(2)}.{match.group(1)}"
+
+        df_snowpark = snowpark_session.table(formatted_result)
+
+        filtered_data = df_snowpark.filter(
             (col("AFTERNOON_BEVERAGE") == "coffee")
             | (col("AFTERNOON_BEVERAGE") == "tea")
             | (col("AFTERNOON_BEVERAGE") == "snow_mocha")
             | (col("AFTERNOON_BEVERAGE") == "hot_chocolate")
             | (col("AFTERNOON_BEVERAGE") == "wine")
         ).collect()
-        filtered_df = pd.DataFrame(filtered_data, columns=df.columns)
+        filtered_df = pd.DataFrame(filtered_data, columns=df_snowpark.columns)
 
         return filtered_df
 
@@ -265,7 +272,7 @@ def airflow_with_snowpark_tutorial():
         )
 
         feature_cols = [
-            str(col).replace("'", "").replace('"', "") for col in feature_cols
+            str(col).replace('"', '') for col in feature_cols
         ]
 
         if use_snowpark_warehouse:
@@ -279,7 +286,7 @@ def airflow_with_snowpark_tutorial():
         y_pred_proba = classifier.predict_proba(test_data_scaled_encoded)
 
         # register the Snowpark model in the Snowflake model registry
-        model_id = registry.log_model(
+        registry.log_model(
             model=classifier,
             model_version=uuid4().urn,
             model_name="Ski Beverage Classifier",
@@ -294,15 +301,22 @@ def airflow_with_snowpark_tutorial():
                 SUSPEND;"""
             ).collect()
 
+        y_pred_proba.columns = [
+            str(col).replace('"', '') for col in y_pred_proba.columns
+        ]
+        y_pred.columns = [
+            str(col).replace('"', '') for col in y_pred.columns
+        ]
+
         prediction_results = pd.concat(
             [
                 y_pred_proba[
                     [
-                        "predict_proba_snow_mocha",
-                        "predict_proba_tea",
-                        "predict_proba_coffee",
-                        "predict_proba_hot_chocolate",
-                        "predict_proba_wine",
+                        "PREDICT_PROBA_snow_mocha",
+                        "PREDICT_PROBA_tea",
+                        "PREDICT_PROBA_coffee",
+                        "PREDICT_PROBA_hot_chocolate",
+                        "PREDICT_PROBA_wine",
                     ]
                 ],
                 y_pred[["OUTPUT_AFTERNOON_BEVERAGE"]],
@@ -337,11 +351,11 @@ def airflow_with_snowpark_tutorial():
         y_test = prediction_results["prediction_results"]["AFTERNOON_BEVERAGE"]
         y_proba = prediction_results["prediction_results"][
             [
-                "predict_proba_coffee",
-                "predict_proba_hot_chocolate",
-                "predict_proba_snow_mocha",
-                "predict_proba_tea",
-                "predict_proba_wine",
+                "PREDICT_PROBA_coffee",
+                "PREDICT_PROBA_hot_chocolate",
+                "PREDICT_PROBA_snow_mocha",
+                "PREDICT_PROBA_tea",
+                "PREDICT_PROBA_wine",
             ]
         ]
         y_score = y_proba.to_numpy()
