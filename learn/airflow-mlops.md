@@ -111,6 +111,8 @@ In practice, following modern model operations patterns when using Airflow for M
 - Using Airflow to orchestrate model training, fine-tuning, testing and deployment. 
 - Having Airflow tasks monitor the performance of your model and perform automated actions such as re-training, re-deploying or alerting if the performance drops below a certain threshold.
 
+![Diagram showing different Airflow DAGs relating to model operations in an MLOps pipeline](/img/guides/airflow-mlops_ml_dags.png)
+
 ### Business
 
 The final component of MLOps is the business side. This component will vary widely depending on your organization and use case and can include:
