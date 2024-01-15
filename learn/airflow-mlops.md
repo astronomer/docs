@@ -91,10 +91,12 @@ Apart from the foundations mentioned above, second day data quality operations i
 In practice, following modern data engineering patterns when using Airflow for MLOps means:
 
 - Following general [Airflow best practices](dag-best-practices.md) for DAG writing, such as keeping tasks atomic and idempotent.
-- Using Airflow to orchestrate data ingestion from sources such as APIs, source databases and object storage into a working location for your ML model. This might be a vector database, a relational database or an object storage solution depending on your use case.
+- Using Airflow to orchestrate data ingestion from sources such as APIs, source databases and object storage into a working location for your ML model. This might be a vector database, a relational database or an object storage solution depending on your use case.preform
 - Incorporating data quality checks into your Airflow pipelines, with critical data quality checks halting the pipeline or alerting you if they fail.
 - Using Airflow to orchestrate data preprocessing and feature engineering steps.
 - Moving data to permanent cold storage after it has been used for training and testing.
+
+![Diagram showing an example ETL/ELT pipeline for Machine Learning.](/img/guides/airflow-mlops_de.png)
 
 ### Model operations and compute considerations
 
@@ -107,7 +109,7 @@ Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airfl
 In practice, following modern model operations patterns when using Airflow for MLOps means:
 
 - Using Airflow to orchestrate model training, fine-tuning, testing and deployment. 
-- Having Airflow tasks monitor the performance of your model and preform automated actions such as re-training, re-deploying or alerting if the performance drops below a certain threshold.
+- Having Airflow tasks monitor the performance of your model and perform automated actions such as re-training, re-deploying or alerting if the performance drops below a certain threshold.
 
 ### Business
 
