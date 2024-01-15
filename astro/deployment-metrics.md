@@ -7,7 +7,7 @@ description: "Learn how to monitor Deployment performance, health, and total tas
 
 The Cloud UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
 
-To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md).
+To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md). To track Deployment health and specific incidents, see [Deployment health and incidents](deployment-health-incidents.md).
 
 ## Deployment analytics
 
@@ -84,22 +84,6 @@ These metrics contain information about your Deployment's configured [Airflow po
     - **Starving**: The number of tasks that can't be scheduled when there are 0 available pool slots
 
     A large number of starving tasks could indicate that you should reconfigure your pools to run more tasks in parallel.
-
-## Deployment health
-
-After you create a Deployment, its real-time health status appears at the top of the Deployment information page. Deployment health indicates if the components within your Deployment are running as expected.
-
-![Deployment Health status](/img/docs/deployment-health.png)
-
-The following are the possible Deployment health statuses:
-
-- **Creating** (Grey): Astro is still provisioning Deployment resources. It is not yet available to run DAGs. See [Create a Deployment](create-deployment.md).
-- **Deploying** (Grey): A code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
-- **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
-- **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
-- **Unknown** (Grey): The Deployment status can't be determined.
-
-If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the logs in the [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Deployment overview
 
