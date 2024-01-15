@@ -172,7 +172,6 @@ To learn more about using Airflow for MLOps, check out the following resources:
 
 - Reference architectures: 
     - [Ask Astro](https://github.com/astronomer/ask-astro) LLM Retrieval Augmented Generation pipeline.
-    - [Anomaly detection MLOps pipeline: Snowstorm](https://github.com/astronomer/snowstorm).
 - Webinars:
     - [Orchestrate next-generation AI tools: Explore six new Airflow providers](https://www.astronomer.io/events/webinars/orchestrate-next-generation-ai-tools-explore-six-new-airflow-providers/).
     - [Airflow at Faire: Democratizing Machine Learning at Scale](https://www.astronomer.io/events/webinars/airflow-at-faire-democratizing-machine-learning-at-scale/).
