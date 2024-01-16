@@ -1,20 +1,22 @@
 ---
 sidebar_label: 'Use Airflow connections from Astro'
-title: 'Work locally with Airflow connections hosted on Astro'
+title: 'Use Airflow connections hosted on Astro in a local environment'
 id: local-connections
-description: Use connections created in the Astro Environment Manager locally.
+description: Test DAGs locally with Airflow connections that you created in the Astro Environment Manager.
 ---
 
-You can share Airflow connections created through the [Astro Environment Manager](create-and-link-connections.md) with local Airflow projects. These connections are not visible from the Airflow UI when you run your project locally, instead, they are synced from the Astro Environment Manager using the Astro CLI for the Workspace and Deployment that you want to work with.
+When you create Airflow connections for a Deployment on Astro with the [Environment Manager](create-and-link-connections.md), you can also use them to test DAGs locally. This is the easiest way to share connection details between a Deployment on Astro and your local Airflow environment.
 
-This means that instead of [importing connection details](import-export-connections-variables.md#using-the-astro-cli-local-environments-only) from Astro to your local Airflow metadatabase, you can configure your CLI to retrieve connection details from the Environment Manager using the Astro API. The CLI then adds your connection details directly to your local Airflow metadata database, so you don't need to manage a `.env` file, secrets backend, or `airflow_settings.yaml` file to keep connection information consistent between your local and cloud-based Deployments.
+Using connections from the Astro Environment Manager in a local Airflow environment means that instead of creating a connection twice or manually importing connection details, you can configure the Astro CLI to use any connections that are already configured for a particular Deployment or Workspace. The CLI then adds your connection details directly to your local Airflow metadata database, so you don't need to manage a `.env` file, secrets backend, or `airflow_settings.yaml` file to keep connection information consistent between your local environment and your Deployments on Astro.
 
 To use connections from the Environment Manager locally, start a local project using `astro dev start`, and then specify either the Workspace or Deployment that you want to import connections from. When you start your project with these settings, the Astro CLI fetches the necessary connections from Astro. Then, after the local Airflow containers start, the Astro CLI populates the metadata database with the connections. This ensures that the connections are encrypted in the metadata database and not easily accessible by an end user.
+
+Connection details in the Astro Environment Manager are not visible from the Airflow UI when you run your project locally. Instead, they are synced using the Astro CLI for the Workspace and Deployment that you want to work with.
 
 ### Prerequisites
 
 - The latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
-- Either a Workspace or Deployment with at least one connection [configured through the Cloud UI](create-and-link-connections.md)
+- Either a Workspace or Deployment with at least one connection [configured through the Astro Environment Manager in the Cloud UI](create-and-link-connections.md)
 - A local [Astro Project](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-project)
 - Astro Runtime 9.3.0 or greater
 - `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER` user permissions
@@ -44,7 +46,7 @@ To use connections from the Environment Manager locally, start a local project u
     astro deployment list
     ```
 
-4. Start your project locally.
+4. Start your project locally specifying the Deployment or Workspace ID from Step 3.
 
     - **Using connections linked to all Deployments in a Workspace**
     ```zsh
@@ -62,4 +64,4 @@ To use connections from the Environment Manager locally, start a local project u
 
     :::
 
-Congratulations! You set up your Astro CLI to retrieve connections from the environment manager to use when working locally. Now you can run DAGs locally that use connections set in the Astro Environment manager.
+Congratulations! You set up your local Airflow environment with the Astro CLI to use connections created in the Astro Environment Manager. Now, you can run and test DAGs locally that automatically use these connections without any additional setup.

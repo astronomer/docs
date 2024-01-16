@@ -19,7 +19,7 @@ If you use the Astro Environment Manager to [create connections](create-and-link
 
 :::
 
-## From the Airflow UI/metadata database
+## From the Airflow UI and metadata database
 
 When you use the Airflow UI to store your Airflow connections and variables, they are stored in Airflow's metadata database. If your variables are stored in Airflow's metadata database, you can use the Airflow UI to import and export them in bulk.
 
