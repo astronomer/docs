@@ -21,6 +21,25 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## January 16, 2023
+
+### Self-service VPC configuration for AWS 
+
+<HostedBadge/>
+
+:::warning
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+You can now configure a network connection between Astro and an AWS VPC without contacting Astronomer support. Astro automatically handles creating a connection request and provides instructions for completing the setup yourself. See [Create a privatge connection between Astro and AWS](https://docs.astronomer.io/astro/connect-aws?tab=VPC%20peering#create-a-private-connection-between-astro-and-aws).
+
+### Additional improvements
+
+- The Cloud UI Deployment analytics page now shows **CPU Usage Per Pod (%)** and **Memory Usage Per Pod (MB)** as a percentage of your total available resources rather than the resources of a single worker Pod, such that these metrics will never show Deployment resources usage as exceeding 100%.
+- The maximum value for worker queue **Max # of workers** has increased from 30 to 100.
+
 ## January 9, 2023
 
 ### Additional improvements
@@ -46,7 +65,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 ## December 12, 2023
 
 ### Bug fixes
-
 
 - Fixed an issue where the Cloud UI would produce an error if you updated an environment variable on an Astro Hybrid Deployment running the Kubernetes Executor.
 
