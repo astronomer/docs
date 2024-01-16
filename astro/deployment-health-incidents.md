@@ -43,9 +43,6 @@ The following table contains all types of Deployment incidents. Use each of the 
 | Scheduler Heartbeat Not Found           | The Airflow scheduler has not sent a heartbeat for longer than expected.                           |
 | Airflow Database Storage Unusually High | The metadata database has tables that are larger than expected.                                    |
 | Worker Queue at Capacity                | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
-| Monitoring Failure                      | Astro failed to monitor the Deployment.                                                            |
-| Job Scheduling Disabled                 | The Airflow scheduler is currently disabled and will not automatically schedule new tasks.         |
-| Airflow Component Unhealthy             | At least one Airflow component has been unable to start successfully.                              |
 | Worker Queue Does Not Exist             | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
 
 Use the following topics to address each of these incidents.
@@ -79,21 +76,6 @@ At least one worker queue in your Deployment is running the maximum possible num
 
 To limit this notification for a worker queue, increase its **Max # Workers** setting or choose a larger **Worker Type**. See [Configure worker queues](https://docs.astronomer.io/astro/configure-worker-queues).
 
-### Monitoring Failure
-
-Astro has failed to monitor your Deployment.
-
-If you receive this incident notification, Astronomer Support has already been notified and no action is required from you. Ensure that you [configured a Deployment contact email](deployment-settings.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
-
-### Job Scheduling Disabled
-
-The Airflow scheduler is currently disabled and will not automatically schedule new tasks. To trigger a task run in this state, you must manually trigger a DAG run.
-
-To resume all scheduling, remove any overrides to the `AIRFLOW__SCHEDULER__USE_JOB_SCHEDULE` environment variable. This variable can be set either in the Cloud UI or in your Astro project Dockerfile.
-
-### Airflow Component Unhealthy
-
-At least one Airflow component has been unable to start successfully. This could be due to a misconfiguration or resource constraints. For more information, see **Details** for this alert or submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
 ### Worker Queue Does Not Exist
 
