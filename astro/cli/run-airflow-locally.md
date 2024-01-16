@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Run Astro in a local Airflow environment'
+sidebar_label: 'Work with a local Airflow environment'
 title: 'Run your Astro project in a local Airflow environment with the CLI'
 id: run-airflow-locally
 description: Run commands in your local Airflow environment.
