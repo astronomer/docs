@@ -446,6 +446,8 @@ Ensure that the name of the package on the private repository does not clash wit
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install Python and OS-Level Packages
+
+    USER root
     COPY packages.txt .
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
 
@@ -460,9 +462,10 @@ Ensure that the name of the package on the private repository does not clash wit
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH='/home/astro/.local/bin:$PATH'
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
+    USER astro
     ```
 
     In order, these commands:
