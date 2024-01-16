@@ -74,6 +74,12 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 :::
 
+:::warning
+
+Self-service VPC configuration on Astro Hosted is in [Public Preview](feature-previews.md#astro-feature-previews).
+
+:::
+
 ### Prerequisites
 
 - An external VPC on AWS
@@ -108,7 +114,21 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**. 
 7. In the modal that appears, follow the instructions to accept the connection from your external VPC and create routes from the external VPC to Astro.
 
-A few minutes after you complete the instructions in the modal, the connection status changes from **Pending** to **Active**. 
+A few minutes after you complete the instructions in the modal, the connection status changes from **Pending** to **Active**. A new default route appears in **Routes** with your configured CIDR block.
+
+:::info Troubleshooting VPC connection statuses
+
+Astro might show additional information in your connection status if it has an issue when it creates the connection. The following are all possible connection statuses.
+
+- **Pending** (Without **Complete Activation**): Astro is sending the peering request to the external VPC. Wait 1-2 minutes for request to be created and sent.
+- **Pending** (With **Complete Activation**): The peering connection request has been created and sent. Click **Complete Activation** to finish the setup.
+- **Active** = The peering connection was successfully created and accepted.
+- **Failed** = The peering connection request was rejected. Delete the failed connection and retry using a new connection configuration. If you don't delete the failed connection, Astro will retry creating the peering request whenever you create a new VPC connection.
+- **Not Found** = Astro failed to create the peering request. Wait 5 minutes for Astro to retry. If the status hasn't changed after 5 minutes, delete the connection and retry using a new connection configuration.
+
+Note that a VPC connection can be listed as **Active** even when it has an incorrectly configured CIDR block. To reconfigure your CIDR block without deleting your connection, delete the route that was generated when you configured the connection and create a new route with the correct CIDR block.
+
+:::
 
 :::info Alternative Astro Hybrid setup 
 
