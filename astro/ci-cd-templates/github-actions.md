@@ -85,7 +85,7 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             deployment-id: <your-deployment-id>
     ```
@@ -131,7 +131,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             deployment-id: <dev-deployment-id>
       prod-push:
@@ -142,7 +142,7 @@ The following template can be used to create a multiple branch CI/CD pipeline us
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             deployment-id: <prod-deployment-id>
     ```
@@ -198,7 +198,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             deployment-id: <your-deployment-id>
             image-name: ${{ steps.image_tag.outputs.image_tag }}
@@ -240,7 +240,7 @@ If your Astro project requires additional build-time arguments to build an image
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             deployment-id: <your-deployment-id>
             image-name: ${{ steps.image_tag.outputs.image_tag }}
@@ -298,7 +298,7 @@ The standard Deployment preview template uses GitHub secrets and an Astro Deploy
         runs-on: ubuntu-latest
         steps:
         - name: Create preview Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             action: create-deployment-preview
             deployment-id: <main-deployment-id>
@@ -323,7 +323,7 @@ The standard Deployment preview template uses GitHub secrets and an Astro Deploy
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to preview
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             action: deploy-deployment-preview
             deployment-id: <main-deployment-id>
@@ -347,7 +347,7 @@ The standard Deployment preview template uses GitHub secrets and an Astro Deploy
         runs-on: ubuntu-latest
         steps:
         - name: Delete preview Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             action: delete-deployment-preview
             deployment-id: <main-deployment-id>
@@ -372,7 +372,7 @@ The standard Deployment preview template uses GitHub secrets and an Astro Deploy
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to main Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             deployment-id: <main-deployment-id>
     ```
@@ -451,7 +451,7 @@ This template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment va
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to preview
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             action: deploy-deployment-preview
             deployment-id: <main-deployment-id>
@@ -475,7 +475,7 @@ This template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment va
         runs-on: ubuntu-latest
         steps:
         - name: Delete preview Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             action: delete-deployment-preview
             deployment-id: <main-deployment-id>
@@ -500,7 +500,7 @@ This template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment va
         runs-on: ubuntu-latest
         steps:
         - name: Deploy code to main Deployment
-          uses: astronomer/deploy-action@v0.2
+          uses: astronomer/deploy-action@v0.4
           with:
             deployment-id: <main-deployment-id>
     ```
