@@ -11,7 +11,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
 - Exclusive features to enrich the task execution experience, including smart task concurrency defaults and high availability configurations.
-- The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html)
+- The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html).
 - The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
 - A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
 - A custom security manager that enforces user roles and permissions as defined by Astro. See [User permissions](user-permissions.md).
@@ -46,18 +46,20 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 7             | 2.5                    |
 | 8             | 2.6                    |
 | 9             | 2.7                    |
+| 10            | 2.8                    |
 
 For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
 ## Default environment variables
 
-The following table lists the Airflow environment variables that have different default values on Astro Runtime. Unlike [global environment variables](platform-variables.md) set on the data plane, you can override the values of these variables for specific use cases. To edit the values of the default Airflow environment variables, see [Set environment variables on Astro](manage-env-vars.md).
+The following table lists the Airflow environment variables that have different default values on Astro Runtime as of version {{RUNTIME_VER}}. Unlike [global environment variables](platform-variables.md) set on the data plane, you can override the values of these variables for specific use cases. To edit the values of the default Airflow environment variables, see [Set environment variables on Astro](manage-env-vars.md).
 
 | Environment Variable                                            | Description                                                                                                                                                                                 | Value                                                                        |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL`                     | The time in seconds that Airflow waits before re-scanning the `dags` directory for new files. Note that this environment variable is set for all Deployments regardless of Runtime version. | `30`                                                                         |
 | `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                         | The maximum time in seconds that tasks running with the Celery executor can remain in a `queued` state before they are automatically rescheduled.                                           | `600`                                                                        |
 | `AIRFLOW_CORE_PARALLELISM`                                      | The maximum number of task instances that can run concurrently for each scheduler in your Deployment.                                                                                       | `[number-of-running-workers-for-all-worker-queues] * [max-tasks-per-worker]` |
+| `AIRFLOW__SCHEDULER__MAX_TIS_PER_QUERY` | The batch size of queries to the metadata database in the main scheduling loop. | 512 |
 | `AIRFLOW__KUBERNETES_EXECUTOR__WORKER_PODS_CREATION_BATCH_SIZE` | The number of worker Pods that can be created each time the scheduler parses DAGs. This setting limits the number of tasks that can be scheduled at one time.                               | `16`                                                                         |
 
 
@@ -114,6 +116,7 @@ docker run --rm <runtime-image> pip freeze | grep <provider>
 | 7             | 3.9            |
 | 8             | 3.10           |
 | 9             | 3.11           |
+| 10            | 3.11           |
 
 Starting with Astro Runtime 9, if you require a different version of Python than what's included in the base distribution, you can use a Python distribution of Astro Runtime. See [Distribution](#distribution).
 
@@ -154,12 +157,13 @@ The following table lists the operating systems and architectures supported by e
 
 | Astro Runtime | Operating System (OS)  | Architecture    |
 | ------------- | ---------------------- | --------------- |
-| 4             | Debian 11.3 (bullseye) | AMD64           |
+| 4             | Debian 11.1 (bullseye) | AMD64           |
 | 5             | Debian 11.3 (bullseye) | AMD64           |
-| 6             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 7             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 8             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
-| 9             | Debian 11.3 (bullseye) | AMD64 and ARM64 |
+| 6             | Debian 11.5 (bullseye) | AMD64 and ARM64 |
+| 7             | Debian 11.5 (bullseye) | AMD64 and ARM64 |
+| 8             | Debian 11.7 (bullseye) | AMD64 and ARM64 |
+| 9             | Debian 11.7 (bullseye) | AMD64 and ARM64 |
+| 10            | Debian 11.8 (bullseye) | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 

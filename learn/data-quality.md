@@ -152,7 +152,7 @@ You can find more information on how to use Great Expectations with Airflow in t
 
 :::
 
-Great Expectations is an open source data validation framework that allows the user to define data quality checks in JSON. The checks, also known as Expectation Suites, can be run in a DAG using the GreatExpectationsOperator from the [Great Expectations provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest). All currently available Expectations can be viewed on the [Great Expectations website](https://greatexpectations.io/expectations) and creation of [Custom Expectations](https://docs.greatexpectations.io/docs/guides/expectations/custom_expectations_lp) is possible.
+Great Expectations is an open source data validation framework that allows the user to define data quality checks in JSON. The checks, also known as Expectation Suites, can be run in a DAG using the GreatExpectationsOperator from the [Great Expectations provider](https://registry.astronomer.io/providers/airflow-provider-great-expectations/versions/latest). All currently available Expectations can be viewed on the [Great Expectations website](https://greatexpectations.io/expectations) and creation of [Custom Expectations](https://docs.greatexpectations.io/docs/oss/guides/expectations/custom_expectations_lp/) is possible.
 
 The easiest way to use Great Expectations with Airflow is to initialize a Great Expectations project in a directory accessible to your Airflow environment and using the automatic creation of a [Checkpoint](https://docs.greatexpectations.io/docs/terms/checkpoint) and [Datasource](https://docs.greatexpectations.io/docs/terms/datasource) from an [Airflow connection](connections.md) by the GreatExpectationsOperator. This basic usage of the GreatExpectationsOperator does not need in-depth Great Expectations knowledge and full customization is possible. 
 
@@ -211,7 +211,7 @@ The following example runs the same data quality checks as the SQL check operato
 
 :::info
 
-For each of the checks in this example, an Expectation already exists. This is not always the case, and for more complicated checks you may need to define a [custom Expectation](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview).
+For each of the checks in this example, an Expectation already exists. This is not always the case, and for more complicated checks you may need to define a [custom Expectation](https://docs.greatexpectations.io/docs/oss/guides/expectations/custom_expectations_lp).
 
 :::
 

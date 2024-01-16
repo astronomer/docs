@@ -2,12 +2,8 @@
 sidebar_label: 'Deployments'
 title: 'View metrics for Astro Deployments'
 id: deployment-metrics
+description: "Learn how to monitor Deployment performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting."
 ---
-
-<head>
-  <meta name="description" content="Learn how to monitor Deployment performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting." />
-  <meta name="og:description" content="Learn how to monitor Deployment performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting." />
-</head>
 
 The Cloud UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
 
@@ -30,7 +26,7 @@ These metrics contain information about your Deployment's DAG runs and task runs
 - **DAG/ Task Runs**: This metric graphs the total number of DAG/ task runs.
 - **Runs per Status**: This metric graphs the number of failed and successful DAG/ task runs, plotted based on the DAG/ task run start time. Use this metric to see exactly when recent DAG/ task runs succeeded or failed.
 
-  :::caution
+  :::warning
 
   The DAG runs metric does not record DAG run timeouts as failed runs. To see timed out DAG runs, you must go into the Airflow UI to check on the statuses of each DAG run there.
 

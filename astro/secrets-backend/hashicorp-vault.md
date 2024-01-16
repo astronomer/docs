@@ -20,7 +20,7 @@ If you use a different secrets backend tool or want to learn the general approac
 - A [Deployment](create-deployment.md) on Astro.
 - [The Astro CLI](cli/overview.md).
 - A local or hosted Vault server. See [Starting the Server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) or [Create a Vault Cluster on HCP](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault).
-- An [Astro project](cli/get-started-cli.md#step-1-create-an-astro-project).
+- An [Astro project](cli/develop-project.md#create-an-astro-project).
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
 - Your Vault Server's URL. If you're using a local server, this should be `http://127.0.0.1:8200/`.
 
@@ -90,7 +90,7 @@ vault kv put -mount=airflow connections/<your-connection-name> conn_uri=<connect
 
 To format existing connections in URI format, see [Import and export connections](import-export-connections-variables.md#using-the-astro-cli-local-environments-only).
 
-:::caution
+:::warning
 
 Do not use custom key names for your secrets. Airflow requires the key name `value` for all Airflow variables and the key name `conn_uri` for all Airflow connections as shown in the previous commands.
 

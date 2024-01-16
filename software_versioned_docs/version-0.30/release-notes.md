@@ -701,7 +701,7 @@ Release date: September 12, 2022
 
 Release date: August 29, 2022
 
-:::warning Breaking Change for Azure Database for PostgreSQL
+:::danger Breaking Change for Azure Database for PostgreSQL
 
 A change in 0.30 enabled the `trgm` extension for PostgreSQL. If you use Azure Database for PostgreSQL as your database backend, you need to enable the `pg_trgm` extension before upgrading to Software 0.30 using either Azure portal or the Azure CLI. See [Azure documentation](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions) for configuration steps.
 
@@ -779,7 +779,7 @@ Release date: September 13, 2022
 
 Release date: August 5, 2022
 
-:::warning Breaking change
+:::danger Breaking change
 
 There is an [unresolved Kubernetes bug](https://github.com/kubernetes/kubernetes/issues/65106) that occurs when you upgrade Helm charts that include duplicate keys in an `env` array. If you have a Helm chart with duplicate keys and upgrade to Astronomer Software 0.29.3+, all key-value pairs with the duplicate key are removed from your environment.
 
@@ -883,7 +883,7 @@ The process for configuring namespace pools has been simplified. As an alternati
 
 Release date: January 26, 2023
 
-:::warning Breaking change
+:::danger Breaking change
 
 (https://github.com/kubernetes/kubernetes/issues/65106) that occurs when you upgrade Helm charts that include duplicate keys in an `env` array. If you have a Helm chart with duplicate keys and upgrade to Astronomer Software 0.29.3+, all key-value pairs with the duplicate key are removed from your environment.
 
@@ -1102,7 +1102,7 @@ global:
 
 ### CLI Support for Podman
 
-By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
+By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ### Bug Fixes
 

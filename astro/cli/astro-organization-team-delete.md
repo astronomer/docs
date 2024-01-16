@@ -4,8 +4,14 @@ title: "astro organization team delete"
 id: astro-organization-team-delete
 description: Delete a Team from your Organization.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Delete a Team from your Organization.
 

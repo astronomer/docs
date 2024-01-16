@@ -5,13 +5,15 @@ id: import-idp-groups
 description: Import your identity provider's organization structure into Astronomer Software.
 ---
 
-You can import existing identity provider (IdP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions for a specific Workspace or Deployment. Importing existing IdP groups as Teams lets you quickly onboard staff to Astronomer and provides better control of multiple user permissions.
+You can import existing identity provider (IdP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions for a specific Workspace or Deployment. Configuring Teams lets you quickly onboard staff to Astronomer and provides better control of user permissions.
 
 Astronomer Teams function similar to users. You can:
 
 - Assign Teams to both Workspaces and Deployments.
 - Assign Viewer, Editor, or Admin roles to a Team.
 - View information about users and permissions from the Astronomer UI.
+
+After you configure [SCIM](integrate-auth-system.md#manage-users-and-teams-with-scim), you can use templates to add or remove Teams on Astronomer Software and manage groups of users directly from your IdP. That way, when you create new user groups in the future, you can automatically apply a batch of permissions that they need to access Astronomer Software. 
 
 ## Implementation considerations
 
@@ -22,7 +24,7 @@ Before you implement Teams, consider the following:
 - To remove a Team from your Software installation, you have to delete it from the Astronomer Software UI or the Houston API. Deleting an IdP group from your IdP UI doesn't automatically delete the associated Team.
 - If a user is added or removed from your original IdP group, that change applies to the related Astronomer Team only after the user logs back in to Astronomer.
 
-:::caution "Most Permissive" Role Priority
+:::warning "Most Permissive" Role Priority
 
 Astronomer user roles function on a "most permissive" policy: If a user has roles defined at both the Workspace and the Team level, then that user will continue to have the most permissive role between the two contexts. This policy has a few implications for implementing Team:
 
@@ -44,7 +46,9 @@ To complete this setup, you need:
 - An OAuth authorization code flow. See [Configure a custom OAuth flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
 - An IdP group.
 
-## Step 1: Enable Astronomer teams
+Astronomer also recommends setting up [SCIM](integrate-auth-system.md#manage-users-and-teams-with-scim) so that you can manage user groups as Teams directly from your IdP.
+
+## Step 1: Enable Astronomer Teams
 
 In your `config.yaml` file, set the following value.
 

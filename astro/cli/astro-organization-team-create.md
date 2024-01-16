@@ -4,8 +4,14 @@ title: "astro organization team create"
 id: astro-organization-team-create
 description: Create a new Team in your Organization.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Create a new Team in your Organization.
 
@@ -15,7 +21,7 @@ Create a new Team in your Organization.
 astro organization team create --name "<team-name>"
 ```
 
-## Options 
+## Options
 
 | Option    | Description                                                                                                                                       | Valid Values                                                                                                                             |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |

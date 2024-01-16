@@ -7,6 +7,12 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
 Test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. Specifically, this command will run the following tests:
 
 - Identify major and minor version changes of the Python packages in your upgrade version.

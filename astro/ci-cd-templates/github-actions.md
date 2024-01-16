@@ -14,7 +14,13 @@ GitHub Action templates use the Astronomer-maintained `deploy-action`, which is 
 - Test DAGs as part of the deploy process and prevent deploying if any of the tests fail. These tests are defined in the `tests` directory of your Astro project.
 - Create a preview Deployment to test your code before deploying to production. A Deployment preview is an Astro Deployment that mirrors the configuration of an existing Deployment.
 
-See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action. 
+See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
+
+:::info
+
+If you use GitHub Enterprise and cannot access the Astronomer Deploy Action, see [Private network templates](#private-network-templates).
+
+:::
 
 Read the following sections to choose the right template for your use case. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation. If you do not have access to Astronomer's `deploy-action`, use the [private network templates](#private-network-templates).
 
@@ -29,11 +35,11 @@ To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.m
 
 Each CI/CD template implementation might have additional requirements.
 
-:::caution
+:::warning
 
 If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) to execute jobs from GitHub Actions, the Astro CLI's `config.yaml` file, which stores default deploy details, might be shared across your organization and hence multiple CI/CD pipelines. To reduce the risk of accidentally deploying to the wrong Deployment, ensure the following:
 
-- Add `ASTRO_API_TOKEN` to your repository and include a check in your GitHub workflow to verify that it exists. 
+- Add `ASTRO_API_TOKEN` to your repository and include a check in your GitHub workflow to verify that it exists.
 - Use Deployment API tokens, which are scoped only to one Deployment, instead of Workspace or Organization API tokens.
 - Specify `deployment-id` or `deployment-name` in your action. For example, `astro deploy <deployment-id>` or `astro deploy -n <deployment-name>`.
 - Add the command `astro logout` at the end of your workflow to ensure that your authentication token is cleared from the `config.yaml` file.
@@ -88,7 +94,7 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
 
 <TabItem value="multibranch">
 
-The following template can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. 
+The following template can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment.
 
 #### Configuration requirements
 
@@ -251,20 +257,20 @@ If your Astro project requires additional build-time arguments to build an image
 
 ## Deployment preview templates
 
-The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline. 
+The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
 
 ### Prerequisites
 
 - An Astro project hosted in a GitHub repository.
 - A [Workspace API token](workspace-api-tokens.md).
-- A [Deployment](create-deployment.md). 
+- A [Deployment](create-deployment.md).
 
 ### Deployment preview implementation
 
 1. Copy and save the Deployment ID for your Astro deployment.
 2. Set the following [GitHub secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) in the repository hosting your Astro project:
 
-  - Key: `ASTRO_API_TOKEN` 
+  - Key: `ASTRO_API_TOKEN`
   - Secret: `<your-token>`
 
 3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration:
@@ -276,11 +282,11 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
       create:
         branches:
           - "**"
-    
+
     env:
       ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
-    
+
     jobs:
       deploy:
         runs-on: ubuntu-latest
@@ -301,11 +307,11 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
       pull_request:
         branches:
           - main
-    
+
     env:
       ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
-    
+
     jobs:
       deploy:
         runs-on: ubuntu-latest
@@ -329,7 +335,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
     env:
       ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
-    
+
     jobs:
       deploy:
         runs-on: ubuntu-latest
@@ -350,11 +356,11 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
       push:
         branches:
           - main
-    
+
     env:
       ## Set your API token as a GitHub secret
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
-    
+
     jobs:
       deploy:
         runs-on: ubuntu-latest
@@ -370,6 +376,10 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
 ## Private network templates
 
 If you use GitHub Enterprise and can't use the public Astronomer [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace, use the following templates to implement CI/CD.
+
+You can configure your CI/CD pipelines to deploy a full project image or your `dags` directory.
+
+
 
 <Tabs
     defaultValue="standard"
@@ -387,7 +397,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
    - `ASTRO_API_TOKEN`: The value for your Workspace or Organization API token.
 
-2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration. When you make a commit to a specified branch, this workflow sets your Deployment API credentials as environment variables, installs the latest version of the Astro CLI, checks to see if your `dags` folder has changes, and then either completes a full code deploy or a DAG-only code deploy.
 
     ```yaml
     name: Astronomer CI - Deploy code
@@ -398,28 +408,52 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           - main
 
     env:
-      ## Sets API token as an environment variable
+      ## Sets Deployment API credentials as environment variables
       ASTRO_API_TOKEN: ${{ secrets.ASTRO_API_TOKEN }}
 
     jobs:
       build:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest # add the appropriate image
         steps:
-        - name: checkout repo
-          uses: actions/checkout@v3
-        - name: Deploy to Astro
-          run: |
-            curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy <your-deployment-id>
+            # Install the Astro CLI (current version)
+            - name: checkout repo
+              uses: actions/checkout@v3
+              with:
+                fetch-depth: 2
+                clean: false
+            - name: Install the CLI
+              run: curl -sSL install.astronomer.io | sudo bash -s
+            # Determine if only DAG files have changes
+            - name: Deploy to Astronomer
+              run: |
+                files=$(git diff --name-only $(git rev-parse HEAD~1) -- .)
+                dags_only=1
+                for file in $files; do
+                if [[ $file != dags/* ]]; then
+                    echo "$file is not a dag, triggering a full image build"
+                    dags_only=0
+                    break
+                fi
+                done
+                ### If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
+                if [ $dags_only == 1 ]
+                then
+                    astro deploy --dags
+                fi
+                ### If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
+                if [ $dags_only == 0 ]
+                then
+                    astro deploy
+                fi
     ```
 
 </TabItem>
 
 <TabItem value="multibranch">
 
-The following setup can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment.
+The following setup can be used to create a multiple branch CI/CD pipeline using GitHub Actions to push a [full image deploy](deploy-project-image.md) to Astro. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment.
 
-#### Prerequisites 
+#### Prerequisites
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
@@ -478,7 +512,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
 
 <TabItem value="custom">
 
-If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action). This template always pushes your entire project [as an image](deploy-project-image.md) to Astro.
 
 #### Prerequisites
 
@@ -570,7 +604,7 @@ For example, to create a CI/CD pipeline that deploys a project which [installs P
           astro deploy <your-deployment-id> --image-name ${{ steps.image_tag.outputs.image_tag }}
   ```
 
-  
+
 :::info
 
 If you need guidance configuring a CI/CD pipeline for a more complex use case involving custom Runtime images, reach out to [Astronomer support](https://support.astronomer.io/).

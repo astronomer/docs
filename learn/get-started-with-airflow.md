@@ -163,12 +163,11 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
 2. Open `my-dag.py` in your IDE. Add the required imports for Python packages:
 
     ```python
-    from airflow import DAG
-    from airflow.operators.python import PythonOperator
-    from airflow.operators.bash import BashOperator
-
     from datetime import datetime, timedelta
 
+    from airflow.models.dag import DAG
+    from airflow.operators.bash import BashOperator
+    from airflow.operators.python import PythonOperator
     ```
 
     The first line imports the `DAG` class, the second and third lines import Airflow operators that are used in this example, and the last line imports two objects from the [datetime package](https://docs.python.org/3/library/datetime.html), which are required to define the schedule of a DAG.
@@ -184,7 +183,6 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
         """Multiplies a number by 23 and prints the results to Airflow logs."""
         result = number * 23
         print(result)
-
     ```
 
 4. Add a `dag` object, which is an instance of the `DAG` class:
@@ -195,16 +193,16 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
         start_date=datetime(2022,7,28),
         schedule=timedelta(minutes=30),
         catchup=False,
-        tags= ["tutorial"],
+        tags=["tutorial"],
         default_args={
             "owner": MY_NAME,
             "retries": 2,
             "retry_delay": timedelta(minutes=5)
         }
-    ) as dag:
+    ):
     ```
 
-    `with DAG(...) as dag:` instantiates a DAG context in which tasks can be defined and given dependencies. The instantiation includes several important arguments:
+    `with DAG(...):` instantiates a DAG context in which tasks can be defined and given dependencies. The instantiation includes several important arguments:
 
     - `dag_id` (Required): The name of the DAG that appears in the Airflow UI. Each DAG must have a unique name, and Astronomer recommends using the same name for the DAG file and the `dag_id`.
     - `start_date` (Required): The date and time when the DAG is scheduled to start running, given as a datetime object. In this example, the DAG is triggered on its schedule as long as the current time is 0:00 UTC on July 28th, 2022 or later.
@@ -220,7 +218,6 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
         task_id="say_my_name",
         bash_command=f"echo {MY_NAME}"
     )
-
     ```
 
     An operator is a Python class containing the logic to define the work to be completed by a single task. The first task (`t1`) uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) to run a bash command that prints the `MY_NAME` variable to the terminal. The first parameter of the task (`task_id`) defines the name of the task that appears in the Airflow UI. Each task requires a unique `task_id`.
@@ -276,7 +273,6 @@ In the log output, you should see the string you set for the `MY_NAME` constant:
 [2022-07-29, 15:17:19 UTC] {subprocess.py:92} INFO - MY_NAME
 [2022-07-29, 15:17:19 UTC] {subprocess.py:96} INFO - Command exited with return code 0
 [2022-07-29, 15:17:19 UTC] {taskinstance.py:1415} INFO - Marking task as SUCCESS. dag_id=my_first_dag, task_id=say_my_name, execution_date=20220729T144715, start_date=20220729T151718, end_date=20220729T151719
-
 ```
 
 Repeat steps 1-3 for the `multiply_my_number_by_23` task. The task logs should include the results of our multiplication operation.
@@ -295,8 +291,11 @@ You can find [example DAGs](https://registry.astronomer.io/dags) in the Astronom
 
 1. Go to the [Astronomer Registry](https://registry.astronomer.io/).
 2. In the search bar, search for `TaskFlow API`.
-3. Go to the **DAGs** tab and open the **TaskFlow API ETL Example** DAG.
-4. In the DAG's information page, click the **Code** tab and copy the contents of the DAG code.
+3. Click on the **TaskFlow API ETL Example DAG**.
+4. In the DAG's information page, click the **Code** tab and copy the DAG code.
+
+    ![Copy DAG code from the Astronomer Registry](/img/tutorials/get-started-with-airflow_copy_dag_code.png)
+
 5. Paste the code into a new `.py` in the `dags` folder of your Astro project.
 6. Run the DAG from the Airflow UI.
 

@@ -2,12 +2,8 @@
 title: "Astro Runtime maintenance and lifecycle policy"
 sidebar_label: "Maintenance policy"
 id: runtime-version-lifecycle-policy
+description: "Learn how Astronomer releases and maintains versions of Astro Runtime."
 ---
-
-<head>
-  <meta name="description" content="Learn how Astronomer releases and maintains Astro Runtime. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework." />
-  <meta name="og:description" content="Learn how Astronomer releases and maintains Astro Runtime. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework." />
-</head>
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
 
@@ -83,8 +79,9 @@ The following table contains the exact lifecycle for each published version of A
 | ----------------------------------------------------- | --------------- | ------------------ | ----------------------- |
 | [5](runtime-release-notes.md#astro-runtime-500) (LTS) | 2.3             | April 30, 2022     | April 2024              |
 | [6](runtime-release-notes.md#astro-runtime-600) (LTS) | 2.4             | September 19, 2022 | March 2024              |
-| [8](runtime-release-notes.md#astro-runtime-800)       | 2.6             | April 30, 2023     | November 2023           |
 | [9](runtime-release-notes.md#astro-runtime-900) (LTS) | 2.7             | August 18, 2023    | January 2025            |
+| [10](runtime-release-notes.md#astro-runtime-1000) | 2.8                  |December 18, 2023    | June 2024            |
+
 
 If you have any questions or concerns, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
@@ -92,11 +89,13 @@ If you have any questions or concerns, contact [Astronomer support](https://clou
 
 The following table contains all major Runtime releases that are no longer supported. Astronomer is not obligated to answer support questions regarding these versions.
 
-| Runtime version                                 | Airflow version | Release date     | End of maintenance date |
-| ----------------------------------------------- | --------------- | ---------------- | ----------------------- |
-| [3](runtime-release-notes.md#astro-runtime-300) | 2.1.1           | August 12, 2021  | February 2022           |
-| [4](runtime-release-notes.md#astro-runtime-400) (LTS)  | 2.2             | March 10, 2022   | September 2023          |
-| [7](runtime-release-notes.md#astro-runtime-700) | 2.5             | December 3, 2022 | July 2023               |
+| Runtime version                                       | Airflow version | Release date     | End of maintenance date |
+| ----------------------------------------------------- | --------------- | ---------------- | ----------------------- |
+| [3](runtime-release-notes.md#astro-runtime-300)       | 2.1.1           | August 12, 2021  | February 2022           |
+| [4](runtime-release-notes.md#astro-runtime-400) (LTS) | 2.2             | March 10, 2022   | September 2023          |
+| [7](runtime-release-notes.md#astro-runtime-700)       | 2.5             | December 3, 2022 | July 2023               |
+| [8](runtime-release-notes.md#astro-runtime-800)       | 2.6             | April 30, 2023   | November 2023           |
+
 
 ## Related documentation
 

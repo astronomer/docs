@@ -2,12 +2,8 @@
 title: "Airflow components"
 sidebar_label: "Core components"
 id: airflow-components
+description: "Understand the core components of Apache Airflow 2.0+. Review their functions and find out which components to run for specific use cases."
 ---
-
-<head>
-  <meta name="description" content="Understand the core components of Apache Airflow 2.0+. Review their functions and find out which components to run for specific use cases." />
-  <meta name="og:description" content="Understand the core components of Apache Airflow 2.0 and later. Review their functions and find out which components to run for specific use cases." />
-</head>
 
 When working with Airflow, understanding the underlying infrastructure components and how they function can help you develop and run your DAGs, troubleshoot issues, and successfully run Airflow.
 
@@ -25,7 +21,7 @@ The following Apache Airflow core components are running at all times:
 
 - **Webserver:** A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
 - **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html):** A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
-- **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL, MsSQL, and SQLite are also supported.
+- **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
 - **[Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html):** The mechanism for running tasks. An executor is running within the scheduler whenever Airflow is operational.
 
 If you run Airflow locally using the [Astro CLI](https://docs.astronomer.io/astro/install-cli), you'll notice that when you start Airflow using `astrocloud dev start`, it will spin up three containers, one for each of the core components.

@@ -5,11 +5,28 @@ id: release-notes
 description: Astronomer Software release notes.
 ---
 
+<p>
+    <a href="/astro-software-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
+
 This document contains release notes for each version of Astronomer Software.
 
 This page contains release notes for all recent Astronomer Software versions. 
 
 0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+
+:::info 
+
+Because Astronomer has separate [maintenance life cycles](release-lifecycle-policy.md) for each minor version of Astronomer Software, a later patch version of Astronomer Software is not guaranteed to have all changes included in previous minor versions. When a release note appears more than once on this page, the related change was introduced to multiple minor versions of Astronomer Software at different times. 
+
+If you're upgrading to receive a specific change, ensure the release note for the change appears either:
+
+- Within your target minor version.
+- In a patch version that was released before the first release of your target minor version. For example, a change in 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch.
+
+:::
 
 ## 0.33.2 
 
@@ -158,6 +175,64 @@ This feature is off by default. You can enable it by setting  `deployments.pgBou
     - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)
     - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+
+## 0.32.5
+
+Release date: December 8, 2023
+
+### Additional improvements
+
+- You can now configure a global index name prefix to use for both [Fluentd and sidecar-based logging](export-task-logs.md), which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
+
+    ```yaml
+    global:
+      logging:
+        indexNamePrefix: <your-index-prefix>
+    ```
+    
+- Deprecated Kubernetes 1.23.
+- Astronomer Software now throws an error if you attempt to install it with an unsupported version of Kubernetes.
+- You can now set the following configuration to bypass proxy support when Astronomer Software redirects to Azure login. This might be required in some circumstances when importing identity provider groups as Teams: 
+
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          auth:
+            microsoft:
+              useExternalProxy: false
+    ```
+
+### Bug fixes
+
+- Fixed an issue where deleting a user from Astronomer Software without deleting the user from an Idp Team could result in the user not being active if they're re-added.
+- Fixed an issue that allowed user creation with the Houston API when SCIM was enabled and `userManagement.enable` was `false`.
+- Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down.
+- Fixed an issue where using the Houston API to query for a Deployment that didn't exist returned a non-descriptive error.
+- Fixed an issue where you couldn't update the value for an existing secret environment variable.
+- Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
+- Fixed an issue where you couldn't access Grafana or Kibana on GKE V2 clusters.
+- Fixed an issue where the `invites` query returned an error instead of an empty array when no users invites were found.
+- Fixed the following vulnerabilities:
+    - [CVE-2023-39325](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325)
+    - [CVE-2023-5363](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5363)
+    - [CVE-2023-43787](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-43787)
+    - [CVE-2023-4911](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-4911)
+    - [CVE-2023-5678](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5678)
+    - [CVE-2023-37788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37788)
+    - [CVE-2023-32002](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32002)
+    - [CVE-2023-32006](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32006)
+    - [CVE-2023-32559](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32559)
+    - [CVE-2022-37434](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37434)
+    - [CVE-2022-48174](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-48174)
+    - [CVE-2023-39320](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39320)
+    - [CVE-2023-29402](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29402)
+    - [CVE-2023-29404](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29404)
+    - [CVE-2023-29405](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-29405)
+    - [CVE-2023-37788](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37788)
+    - [CVE-2023-40577](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-40577)
+    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)
+    - [CVE-2022-41721](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41721)
 
 ## 0.32.4
 
@@ -757,7 +832,7 @@ Release date: September 12, 2022
 
 Release date: August 29, 2022
 
-:::warning Breaking Change for Azure Database for PostgreSQL
+:::danger Breaking Change for Azure Database for PostgreSQL
 
 A change in 0.30 enabled the `trgm` extension for PostgreSQL. If you use Azure Database for PostgreSQL as your database backend, you need to enable the `pg_trgm` extension before upgrading to Software 0.30 using either Azure portal or the Azure CLI. See [Azure documentation](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions) for configuration steps.
 
@@ -796,7 +871,7 @@ As part of this change, you can now configure `jwt.authDuration` in your [Housto
 
 Release date: October 11, 2022
 
-:::warning Breaking change
+:::danger Breaking change
 
 (https://github.com/kubernetes/kubernetes/issues/65106) that occurs when you upgrade Helm charts that include duplicate keys in an `env` array. If you have a Helm chart with duplicate keys and upgrade to Astronomer Software 0.29.3+, all key-value pairs with the duplicate key are removed from your environment.
 
@@ -1150,7 +1225,7 @@ global:
 
 ### CLI Support for Podman
 
-By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
+By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ### Bug Fixes
 

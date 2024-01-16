@@ -3,14 +3,10 @@ sidebar_label: 'Astro Runtime'
 title: 'Astro Runtime release notes'
 id: runtime-release-notes
 toc_min_heading_level: 2
+description: A summary of the latest Astro Runtime features and functionality. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework.
 ---
 
-import {siteVariables} from '@site/src/versions';
 
-<head>
-  <meta name="description" content="This is where you’ll find information about the latest Astro Runtime features and functionality. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework." />
-  <meta name="og:description" content="This is where you’ll find information about the latest Astro Runtime features and functionality. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework." />
-</head>
 
 <!--version-specific-->
 
@@ -23,6 +19,79 @@ import {siteVariables} from '@site/src/versions';
 Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. 
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
+
+## Astro Runtime 10.1.0
+
+- Release date: January 10, 2024
+- Airflow version: 2.8.0
+
+### Additional improvements
+
+- You can now set `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP` and `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM` in a Deployment to change the names of the AWS Cloudwatch log groups and streams that Astro uses to organize log events. Create custom names for log streams and groups if you need to set targeted policies for these objects in Cloudwatch, or if you otherwise want to change how task logs are grouped. See [Export task logs to AWS Cloudwatch](export-cloudwatch.md).
+- To improve scheduler performance, the default value for `AIRFLOW__SCHEDULER__MAX_TIS_PER_QUERY` is now `512`.
+
+## Astro Runtime 10.0.0
+
+- Release date: December 18, 2023
+- Airflow version: 2.8.0
+
+### Airflow 2.8
+
+Astro Runtime 10.0.0 includes same-day support for Apache Airflow 2.8, which includes a number of new features and improvements. Most notably, Airflow 2.8 includes the following changes:
+
+- The new object storage features make it easier to work with popular object storage systems like S3 and GCS. You can use new  abstract object types to work with files in multiple different object storage systems without writing system-specific code.
+- You can now specify extra index URLs in the PythonVirtualEnvOperator, which makes it easier to spin up virtual environments that include private Python packages. 
+- The Airflow UI **Grid** view now supports filtering on multiple run states at once so that you can compare runs across states.
+
+For more information about the major changes in this release, see the [Airflow blog](https://airflow.apache.org/blog/airflow-2.8.0/).
+
+### Additional improvements
+
+- When you export logs to Datadog from Astro, you can now filter the logs in Datadog by log type.
+
+### Bug fixes
+
+- Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
+- Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
+- Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
+## Astro Runtime 9.8.0
+
+- Release date: January 10, 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- You can now set `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP` and `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM` in a Deployment to change the names of the AWS Cloudwatch log groups and streams that Astro uses to organize log events. Create custom names for log streams and groups if you need to set targeted policies for these objects in Cloudwatch, or if you otherwise want to change how task logs are grouped. See [Export task logs to AWS Cloudwatch](export-cloudwatch.md).
+- To improve scheduler performance, the default value for `AIRFLOW__SCHEDULER__MAX_TIS_PER_QUERY` is now `512`.
+
+### Bug fixes
+
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
+
+## Astro Runtime 9.7.0
+
+- Release date: December 22, 2023
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Account for change in UTC offset when calculating next schedule ([#35887](https://github.com/apache/airflow/pull/35887))
+- Fix for infinite recursion due to secrets_masker ([#35048](https://github.com/apache/airflow/pull/35048))
+- Fix updating variables during variable imports ([#33932](https://github.com/apache/airflow/pull/33932))
+- Allow 'airflow variables export' to print to stdout ([#33279](https://github.com/apache/airflow/pull/33279))
+- Check that dag_ids passed in request are consistent ([#34366](https://github.com/apache/airflow/pull/34366))
+- Make raw HTML descriptions configurable ([#35460](https://github.com/apache/airflow/pull/35460))
+- Change Trigger UI to use HTTP POST in web UI ([#36026](https://github.com/apache/airflow/pull/36026))
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.18.4. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1184-2023-12-07) for a complete list of changes.
+- You can now customize the color of the Airflow UI navigation bar text by setting the `AIRFLOW__NAVBAR_TEXT_COLOR` environment variable.
+
+### Bug fixes
+
+- Fixed an issue where task logs on Astro Azure clusters were not encoded properly, resulting in authentication errors.
 
 ## Astro Runtime 9.6.0
 
@@ -342,7 +411,7 @@ For a complete list of the changes, see the [Apache Airflow 2.6.1 release notes]
 - Release date: April 30, 2023
 - Airflow version: 2.6.0
 
-:::warning Breaking change
+:::danger Breaking change
 
 Runtime 8 includes changes that can result in DAGs running differently after upgrading. It also includes a major bug that was subsequently fixed in Runtime 8.1. To use Airflow 2.6, Astronomer recommends upgrading directly to Runtime 8.1. See [Runtime upgrade considerations](upgrade-runtime.md#runtime-8-airflow-26) for more information.
 
@@ -564,6 +633,27 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
 
+## Astro Runtime 6.9.1
+
+- Release date: January 9, 2024
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Account for change in UTC offset when calculating next schedule ([35887](https://github.com/apache/airflow/pull/35887))
+- Fix scheduler crash when you clear a previous run of a normal task that is now a mapped task ([31352](https://github.com/apache/airflow/pull/31352))
+
+## Astro Runtime 6.9.0
+
+- Release date: December 22, 2023
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Check for DAG ID in query param from url as well as kwargs ([32014](https://github.com/apache/airflow/pull/32014))
+- Check that dag_ids passed in request are consistent ([34366](https://github.com/apache/airflow/pull/34366))
+- Fix updating variables during variable imports ([33932](https://github.com/apache/airflow/pull/33932))
+
 ## Astro Runtime 6.8.0
 
 - Release date: November 24, 2023
@@ -703,7 +793,7 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 
 ### ARM64-based images for faster local development with Apple M1
 
-:::caution
+:::warning
 
 To deploy a project using Astro Runtime 6.0.4 or later from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the Astro CLI](cli/install-cli.md).
 

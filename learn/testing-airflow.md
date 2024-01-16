@@ -2,12 +2,8 @@
 title: "Test Airflow DAGs"
 sidebar_label: "Test DAGs"
 id: testing-airflow
+description: "Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing."
 ---
-
-<head>
-  <meta name="description" content="Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing." />
-  <meta name="og:description" content="Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -231,7 +227,7 @@ To use `dag.test()`, you only need to add a few lines of code to the end of your
 <TabItem value="traditional">
 
 ```python {14-15}
-from airflow import DAG
+from airflow.models.dag import DAG
 from pendulum import datetime
 from airflow.operators.empty import EmptyOperator
 
@@ -368,7 +364,7 @@ You then write a `test_evencheckoperator.py` file with unit tests similar to the
 ```python
 import unittest
 from datetime import datetime
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.models import TaskInstance
 
 DEFAULT_DATE = datetime(2021, 1, 1)

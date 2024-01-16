@@ -2,12 +2,8 @@
 title: "Manage Airflow code"
 sidebar_label: "Manage Airflow code"
 id: managing-airflow-code
+description: "Learn best practices for Airflow project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects."
 ---
-
-<head>
-  <meta name="description" content="Learn best practices for Airflow project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects." />
-  <meta name="og:description" content="Learn best practices for Airflow project organization, such as when to separate out DAGs into multiple projects and how to manage code used across different projects." />
-</head>
 
 One of the tenets of Apache Airflow is that pipelines are defined as code. This allows you to treat your pipelines as you would any other piece of software and use best practices such as version control and CI/CD. As you scale the use of Airflow within your organization, it becomes important to manage your Airflow code in a way that is organized and sustainable.
 
@@ -60,9 +56,9 @@ Occasionally, some use cases require DAGs from multiple projects to be deployed 
 
 ## Reusing code
 
-Code such as custom hooks, operators, or DAG templates that are reused between projects should be stored in a repository that's separate from your individual project repositories. This ensures that any changes to the re-used code only need to be made once and are applied across all projects where that code is used.
+Code, such as custom hooks, operators, or DAG templates that are reused between projects, should be stored in a repository that's separate from your individual project repositories. This ensures that any changes to the re-used code only need to be made once and are applied across all projects where that code is used. See [Sharing code across projects](https://docs.astronomer.io/learn/sharing-code-multiple-projects) for more on how to structure and set up a project for shared code.
 
-You can pull code from separate repositories into one of your Airflow projects. If you are working with Astronomer, see [Customize your image on Astronomer Software](https://docs.astronomer.io/software/customize-image#build-from-a-private-repository). Depending on your repository setup, it may also be possible to manage this with your CI/CD tool.
+You can pull code from separate repositories into your Airflow projects. If you are working with Astronomer, see [Install Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages) for Astro or [Customize your image on Astronomer Software](https://docs.astronomer.io/software/customize-image#build-from-a-private-repository) for Software. Depending on your repository setup, it may also be possible to manage this with your CI/CD tool.
 
 ## Development flow
 

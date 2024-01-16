@@ -2,12 +2,8 @@
 title: "Branching in Airflow"
 sidebar_label: "Branches"
 id: airflow-branch-operator
+description: "Learn about Airflow’s multiple options for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator."
 ---
-
-<head>
-  <meta name="description" content="Learn about Airflow’s multiple options for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
-  <meta name="og:description" content="Learn about the options available in Airflow for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -156,7 +152,7 @@ branch_python_operator_decorator_example()
 ```python
 """Example DAG demonstrating the usage of the BranchPythonOperator."""
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.utils.edgemodifier import Label
@@ -280,7 +276,7 @@ short_circuit_operator_decorator_example()
 ```python
 """Example DAG demonstrating the usage of the ShortCircuitOperator."""
 
-from airflow import DAG
+from airflow.models.dag import DAG
 from airflow.models.baseoperator import chain
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import ShortCircuitOperator
@@ -331,7 +327,8 @@ Airflow offers a few other branching operators that work similarly to the Branch
 - [BranchSQLOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
 - [BranchDayOfWeekOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter.
 - [BranchDateTimeOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdatetimeoperator): Branches based on whether the current time is between `target_lower` and `target_upper` times.
-- [ExternalBranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.ExternalBranchPythonOperator): Branches based on a Python function like the [BranchPythonOperator](#taskbranch-branchpythonoperator) but runs in a virtual environment like the [ExternalPythonOperator](external-python-operator.md) (available in Airflow 2.7+).
+- [ExternalBranchPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.ExternalBranchPythonOperator): Branches based on a Python function like the [BranchPythonOperator](#taskbranch-branchpythonoperator), but runs in a preexisting virtual environment like the [ExternalPythonOperator](external-python-operator.md) (available in Airflow 2.7+).
+- [BranchPythonVirtualenvOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/python/index.html#airflow.operators.python.BranchPythonVirtualenvOperator): Branches based on a Python function like the [BranchPythonOperator](#taskbranch-branchpythonoperator), but runs in newly created virtual environment like the [PythonVirtualenvOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/PythonVirtualenvOperator) (available in Airflow 2.8+). The environment can be cached by providing a `venv_cache_path`.
 
 All of these operators take `follow_task_ids_if_true` and `follow_task_ids_if_false` parameters which provide the list of task(s) to include in the branch based on the logic returned by the operator.
 

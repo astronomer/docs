@@ -6,7 +6,7 @@ description: Reference of all supported configurations for new Astro clusters on
 sidebar_custom_props: { icon: 'img/azure.png' }
 ---
 
-:::caution
+:::warning
 
 This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
@@ -22,7 +22,7 @@ Read the following document for a reference of our default resources as well as 
 
 | Resource                                                                                                                 | Description                                                                                                                                                                                                                                                                               | Quantity/ Default Size                                                                        | Configurable                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| [Azure Kubernetes Service (AKS) Cluster](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)                    | Runs the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                          | 1x                                                                                            | Yes. See [Manage clusters](manage-hybrid-clusters.md#).                                                       |
+| [Azure Kubernetes Service (AKS) Cluster](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)                    | Runs the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                          | 1x                                                                                            | Yes. See [Manage clusters](manage-hybrid-clusters.md).                                                       |
 | [Resource Group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) | A container for cluster resources.                                                                                                                                                                                                                                                        | 1x                                                                                            |                                                                                                               |
 | Worker node pool                                                                                                         | A node pool that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of Standard_D4d_v5 nodes                                                              | Yes. See [Manage worker node pools](manage-hybrid-clusters.md#about-worker-node-pools).                       |
 | Airflow node pool                                                                                                        | A node pool that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of Standard_D4d_v5 nodes                                                              |                                                                                                               |
@@ -47,7 +47,6 @@ You can host Astro Hybrid clusters in the following Azure regions:
 | `canadacentral`    | Canada Central     |
 | `centralindia`     | Central India      |
 | `centralus`        | Central US         |
-| `eastasia`         | East Asia          |
 | `eastus`           | East US            |
 | `eastus2`          | East US 2          |
 | `francecentral`    | France Central     |
@@ -72,8 +71,18 @@ The following Azure Database for PostgreSQL instance types are supported on Astr
 
 - Standard_D2ds_v4 (2 CPU, 8 GiB MEM)
 - Standard_D4ds_v4 (4 CPU, 16 GiB MEM)
+- Standard_D8ds_v4 (8 CPU, 32 GiB MEM)
+- Standard_D16ds_v4 (16 CPU, 64 GiB MEM)
+- Standard_D32ds_v4 (32 CPU, 128 GiB MEM)
+- Standard_D48ds_v4 (48 CPU, 192 GiB MEM)
+- Standard_D64ds_v4 (64 CPU, 256 GiB MEM)
 - Standard_E2ds_v4 (2 CPU, 16 GiB MEM)
 - Standard_E4ds_v4 (4 CPU, 32 GiB MEM)
+- Standard_E8ds_v4 (8 CPU, 64 GiB MEM)
+- Standard_E16ds_v4 (16 CPU, 128 GiB MEM)
+- Standard_E20ds_v4 (20 CPU, 160 GiB MEM)
+- Standard_E32ds_v4 (32 CPU, 256 GiB MEM)
+- Standard_E48ds_v4 (48 CPU, 384 GiB MEM)
 
 For detailed information about each instance type, see the [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/). If you're interested in an Azure Database for PostgreSQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 

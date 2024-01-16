@@ -2,12 +2,18 @@
 sidebar_label: "astro organization team user"
 title: "astro organization team user"
 id: astro-organization-team-user
-description: Manage users in an Astro Team. 
+description: Manage users in an Astro Team.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Manage users in an Astro Team. 
+:::info
+
+This command is only available on Astro.
+
+:::
+
+Manage users in an Astro Team.
 
 ## Usage
 
@@ -17,13 +23,13 @@ This command has several subcommands
 
 Add a user to a Team.
 
-#### Usage 
+#### Usage
 
 ```sh
-astro organization team user add 
+astro organization team user add
 ```
 
-#### Options 
+#### Options
 
 | Option      | Description                                        | Valid Values     |
 | ----------- | -------------------------------------------------- | ---------------- |
@@ -34,23 +40,23 @@ astro organization team user add
 
 List all users in a Team
 
-#### Usage 
+#### Usage
 
 ```sh
-astro organization team user list 
+astro organization team user list
 ```
 
 ### astro organization user team remove
 
 Remove a user from a Team.
 
-#### Usage 
+#### Usage
 
 ```sh
-astro organization team user remove 
+astro organization team user remove
 ```
 
-#### Options 
+#### Options
 
 | Option      | Description                                        | Valid Values     |
 | ----------- | -------------------------------------------------- | ---------------- |

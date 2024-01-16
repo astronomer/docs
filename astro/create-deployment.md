@@ -2,12 +2,8 @@
 sidebar_label: 'Create a Deployment'
 title: 'Create a Deployment'
 id: create-deployment
+description: "Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline."
 ---
-
-<head>
-  <meta name="description" content="Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline." />
-  <meta name="og:description" content="Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline." />
-</head>
 
 An Astro Deployment is an Airflow environment that is powered by [Astro Runtime](runtime-image-architecture.md). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
 
@@ -23,7 +19,7 @@ To create a Deployment, you must choose a cluster type to host the Deployment:
 
 - A **dedicated cluster** is a single-tenant Kubernetes cluster that's used exclusively by your team. Choose this option if:
 
-    - You need private networking support.
+    - You need private networking support between Astro and your cloud or on-premise data services.
     - You want to use a specific cloud provider or region that is not supported on standard clusters.
     - You need to run Airflow environments in separate clusters for business or security reasons.
     
@@ -48,6 +44,12 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
 3. Enter a **Name** for the Deployment.
 
 4. (Optional) Configure other details for your Deployment, including cluster, executor, and worker resources. If you have no specific resource requirements for running Airflow, the default configurations should work in most cases. For all available Deployment options, see [Deployment settings](deployment-settings.md).
+
+    :::tip
+
+    Astronomer strongly recommends configuring a **Contact Email** in the **Advanced** section of your Deployment configuration. This allows Astronomer support to notify you in case there's an infrastructure issue with your Deployment. See [Configure Deployment contact emails](deployment-settings.md#configure-deployment-contact-emails).
+
+    :::
 
 5. Click **Create Deployment**.
 

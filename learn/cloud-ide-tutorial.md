@@ -49,7 +49,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 (Optional) To complete steps [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
 
-- An Astro Deployment in your Workspace. See [Create a Deployment](https://docs.astronomer.io/astro/cli/get-started-cli#step-1-create-an-astro-project).
+- An Astro Deployment in your Workspace. See [Create a Deployment](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-projectt).
 - A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A Personal Access Token for your GitHub account. To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 - An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database. If you do not have a database account, you can still complete the main steps in this tutorial by using the in-memory database and skipping Steps [3](#step-3-optional-configure-a-connection) and [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro).
@@ -340,7 +340,7 @@ Export your pipeline by committing it to your connected GitHub repository.
 
     ![Commit to GitHub dialogue showing a new branch called cloud-ide-branch being created from the main branch with the commit message 'Woof!'.](/img/tutorials/cloud-ide-tutorial_new_branch.png)
 
-  :::caution
+  :::warning
 
   If a file with the same name as your Astro Cloud IDE pipeline already exists in your GitHub repository, the Astro Cloud IDE will overwrite the existing file. For this reason, Astronomer recommends using a separate branch for commits from your Astro Cloud IDE environment than for commits from other sources to the same repository.
 

@@ -79,7 +79,7 @@ To add a Team to a Workspace:
 
 5. Click **Add**.
 
-:::caution
+:::warning
 
 If a user already exists on a Workspace before being invited via a Team, the user context with the most permissive role will be applied to the Workspace. For more information, read [Import IDP Groups](import-idp-groups.md).
 
@@ -139,7 +139,7 @@ To add a team to a Deployment:
 
     ![Screen for adding a Team to a Deployment](/img/software/add-team-deployment.png)
 
-:::caution
+:::warning
 
 If a user already exists on a Deployment before being invited via a Team, the user context with the most permissive role will be applied to the Deployment. For more information, read [Import IDP Groups](import-idp-groups.md).
 

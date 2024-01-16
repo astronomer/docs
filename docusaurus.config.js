@@ -9,8 +9,22 @@ module.exports = {
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
   onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'warn',
   markdown: {
     mermaid: true,
+    preprocessor: ({ filePath, fileContent }) => {
+      function updateValues() {
+        var mapObj = {
+          '{{CLI_VER}}':"1.21.0",
+          '{{RUNTIME_VER}}':"10.1.0",
+        };
+        var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
+        return fileContent.replaceAll(re, function(matched){
+          return mapObj[matched];
+        });
+      }
+      return updateValues();
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/favicon.svg',
@@ -38,7 +52,7 @@ module.exports = {
       //... other Algolia params
     },
     prism: {
-      additionalLanguages: ['docker'],
+      additionalLanguages: ["bash", "json", "docker", "python"],
     },
     colorMode: {
       disableSwitch: false,
@@ -203,15 +217,15 @@ module.exports = {
           routeBasePath: 'astro',
           path: 'astro',
           admonitions: {
-            tag: ':::',
             keywords: [
               'caution',
-              'warning',
+              'danger',
               'info',
               'tip',
               'cli',
               'highlight'
             ],
+            extendDefaults: true,
           },
         },
         sitemap: {
@@ -237,6 +251,12 @@ module.exports = {
           {
             id: 'iam',
             spec: 'https://api.astronomer.io/spec/iam/v1beta1',
+          },
+          {
+            id: 'using-remote-url',
+            // Remote File
+            spec: 'https://redocly.github.io/redoc/openapi.yaml',
+            route: '/examples/using-remote-url/',
           },
         ],
         // Theme Options for modifying how redoc renders them

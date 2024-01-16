@@ -6,9 +6,15 @@ description: Import Airflow objects from a configuration file.
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Import Airflow variables, connections, and pools from a configuration file to a locally running Airflow environment. 
+:::info
 
-## Usage 
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
+Import Airflow variables, connections, and pools from a configuration file to a locally running Airflow environment.
+
+## Usage
 
 After starting your local Airflow environment with `astro dev start`, run:
 
@@ -16,29 +22,29 @@ After starting your local Airflow environment with `astro dev start`, run:
 astro dev object import
 ```
 
-By default, the command imports all variables, connections, and pools from `airflow_settings.yaml` to your project. You do not need to restart your environment for these changes to take effect. 
+By default, the command imports all variables, connections, and pools from `airflow_settings.yaml` to your project. You do not need to restart your environment for these changes to take effect.
 
 ## Options
 
 | Option              | Description                                                                                                        | Possible Values             |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| `-c`,`--connections` | Import connections from a given local file | ``|                                                                      
+| `-c`,`--connections` | Import connections from a given local file | ``|
 | `-p`,`--pools`            | Import pools from a given local file | ``                 |
 | `-s`,`--settings-file`            | Location of the file from which to import Airflow objects. The default file path is `~/.airflow_settings.yaml`.                                 | Any valid filepath              |
 | `-v`,`--variables`            | Import variables from a given local file | ``                 |
 
 
-## Examples 
+## Examples
 
 ```sh
-astro dev object import --pools 
+astro dev object import --pools
 # Imports pools from `airflow_settings.yaml` to a locally running Airflow environment
 
 astro dev object import --settingsfile="myairflowobjects.yaml"
 # Imports all Airflow objects from `myairflowobjects.yaml` to a locally running Airflow environment
 ```
 
-## Related commands 
+## Related commands
 
 - [`astro dev object export`](cli/astro-dev-object-export.md)
 - [`astro deployment variable create`](cli/astro-deployment-variable-create.md)

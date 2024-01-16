@@ -145,7 +145,7 @@ For this tutorial you will create two DAGs to generate and interpret lineage met
     ```python
     from datetime import datetime, timedelta
 
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.providers.postgres.operators.postgres import PostgresOperator
 
     create_table_query= '''
@@ -198,7 +198,7 @@ For this tutorial you will create two DAGs to generate and interpret lineage met
     ```python
     from datetime import datetime, timedelta
 
-    from airflow import DAG
+    from airflow.models.dag import DAG
     from airflow.providers.postgres.operators.postgres import PostgresOperator
 
     aggregate_reporting_query = '''

@@ -7,7 +7,6 @@ description: Learn how to create and configure worker queues to create best-fit 
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
 
 By default, all tasks using the Celery executor run in a `default` worker queue. You can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to these queues in your DAG code. For more information about Airflow executors on Astro, see [Manage Airflow executors on Astro](executors-overview.md).
 

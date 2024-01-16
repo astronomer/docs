@@ -7,7 +7,7 @@ description: Establish a local testing environment and deploy to Astronomer Soft
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 ## Overview
 
@@ -109,7 +109,7 @@ astro version
 If the installation was successful, you should see the following output:
 
 <pre><code parentName="pre">{`% astro version
-Astro CLI Version: ${siteVariables.cliVersion}`}</code></pre>
+Astro CLI Version: {{CLI_VER}}`}</code></pre>
 
 ## Upgrade the CLI
 

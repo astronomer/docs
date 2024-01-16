@@ -2,12 +2,8 @@
 title: "Manage task and task group dependencies in Airflow"
 sidebar_label: "Task dependencies"
 id: managing-dependencies
+description: "Learn how to manage dependencies between tasks and TaskGroups in Apache Airflow, including how to set dynamic dependencies."
 ---
-
-<head>
-  <meta name="description" content="Learn how to manage dependencies between tasks and TaskGroups in Apache Airflow, including how to set dynamic dependencies." />
-  <meta name="og:description" content="Learn how to manage dependencies between tasks and TaskGroups in Apache Airflow, including how to set dynamic dependencies." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

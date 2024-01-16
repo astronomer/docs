@@ -2,12 +2,8 @@
 sidebar_label: 'Command reference'
 title: 'Astro CLI command reference'
 id: reference
+description: "A reference for all available Astro command-line interface (CLI) commands and settings."
 ---
-
-<head>
-  <meta name="description" content="This is where you’ll find all of the available Astro command-line interface (CLI) commands and settings." />
-  <meta name="og:description" content="This is where you’ll find all of the available Astro command-line interface (CLI) commands and settings." />
-</head>
 
 This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To get started with the Astro CLI, see [Get Started](cli/install-cli.md).
 

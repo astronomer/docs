@@ -20,7 +20,7 @@ In this tutorial, you'll learn how to:
 - Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
 - Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset to predict skiers' afternoon beverage choice.
 
-:::caution
+:::warning
 
 The provider used in this tutorial is currently in beta and both its contents and decorators are subject to change. After the official release, this tutorial will be updated.
 
@@ -144,7 +144,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
     ```
 
-:::caution
+:::warning
 
 The Astro Snowflake provider is currently in beta. Classes from this provider might be subject to change and will be included in the [Snowflake provider](https://registry.astronomer.io/providers/apache-airflow-providers-snowflake/versions/latest) in a future release. 
 

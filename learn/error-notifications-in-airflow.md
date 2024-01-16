@@ -2,12 +2,8 @@
 title: "Manage Airflow DAG notifications"
 sidebar_label: "DAG notifications"
 id: error-notifications-in-airflow
+description: Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs.
 ---
-
-<head>
-  <meta name="description" content="Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs." />
-  <meta name="og:description" content="Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -66,6 +62,12 @@ If you want to deliver alerts to email, use [email notifications](#email-notific
 If a [notifier class](#notifiers) exists for your use case, you should always use these methods instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html) and the [Apprise wiki](https://github.com/caronc/apprise/wiki) for a list of services the Apprise notifier can connect to. 
 
 A notifier can be provided to any callback parameter (`*callback`). Only use custom [Airflow callbacks](#airflow-callbacks) when no notifier is available for your use case.
+
+:::tip
+
+To execute custom code based on events happening anywhere in your Airflow environment, for example whenever any dataset is updated or any task instance fails, you can use [Airflow listeners](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/listeners.html#listeners). See the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial for an example.
+
+:::
 
 ## Email notifications
 

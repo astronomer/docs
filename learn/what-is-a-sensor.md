@@ -2,12 +2,8 @@
 title: "Airflow sensors"
 sidebar_label: "Sensors"
 id: what-is-a-sensor
+description: "Get an overview of Airflow sensors and see the new sensor-related features included in Airflow 2. Learn best practices for implementing sensors in production."
 ---
-
-<head>
-  <meta name="description" content="Get an overview of Airflow sensors and see the new sensor-related features included in Airflow 2. Learn best practices for implementing sensors in production." />
-  <meta name="og:description" content="Get an overview of Airflow sensors and see the new sensor-related features included in Airflow 2. Learn best practices for implementing sensors in production." />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

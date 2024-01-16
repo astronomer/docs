@@ -6,7 +6,7 @@ description: Reference of all supported infrastructure and configurations for ne
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 
-:::caution
+:::warning
 
 This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 

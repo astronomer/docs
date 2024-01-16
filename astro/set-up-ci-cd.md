@@ -32,14 +32,14 @@ When deciding on a strategy, keep the size of your data team and the importance 
 
 - How many different environments do you need and want to invest in to adequately test your DAGs before deploying them to production?
 - Do you need to limit your DAG authors' access to sensitive project configurations? If so, do you need to host your Astro project in multiple repositories?
-  
+
 Read the following topics to learn which combination of environments and repositories is right for your team. Advanced data teams might follow a custom CI/CD strategy that is not described here and is optimized for a particular use case or team structure. If you're not sure which CI/CD strategy is right for you, contact your customer success representative.
 
 ### Environments
 
 When you create a CI/CD pipeline, you must first determine how many environments you need to test your DAGs in. This typically depends on how critical these DAGs are to your business and how much your team expects to spend in infrastructure.
 
-Each environment requires a Deployment on Astro, as well as its own GitHub branch and implementation in your CI/CD pipeline. 
+Each environment requires a Deployment on Astro, as well as its own GitHub branch and implementation in your CI/CD pipeline.
 
 #### Single environment
 
@@ -55,7 +55,7 @@ This method assumes that you have:
 With this method, you can configure a CI/CD pipeline that deploys code to Astro every time a change is made to an Astro project file in your Git repository. To deploy a change to your project:
 
 - Create a new, temporary branch in your Git repository against the `main` branch.
-- Make a change to your Astro project and push those changes to the branch. 
+- Make a change to your Astro project and push those changes to the branch.
 - Test all project changes locally with the Astro CLI. See [Test your Astro project locally](cli/test-your-astro-project-locally.md) and [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md).
 - Open a pull request for review.
 - When the pull request is approved and merged to the `main` branch, the change is automatically deployed to your Deployment on Astro and available in the Airflow UI.
@@ -125,15 +125,15 @@ This strategy is recommended if:
 - A single team is responsible for both developing DAGs and maintaining Deployments on Astro.
 - You don't require a dedicated repository for DAGs across your organization.
 - Less than 30 people interact with or contribute to your Astro project.
-  
+
 #### Multiple repositories
 
 Depending on your organization, you might be required to maintain multiple repositories for a single Astro project. Data teams that implement this strategy typically manage DAGs in one repository and Astro project settings, such as Python packages and worker configuration, in another repository.
 
 This strategy is recommended if:
 
-- You have strict security requirements for who can update specific project files.  
-- You want to minimize complexity for project contributors at the expense of a more complex CI/CD pipeline. 
+- You have strict security requirements for who can update specific project files.
+- You want to minimize complexity for project contributors at the expense of a more complex CI/CD pipeline.
 
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
@@ -147,17 +147,11 @@ classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 
 One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally and ensure that updates from your Admin repo doesn't erase your DAGs. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes.
 
-:::warning
-
-When you do a full image deploy of a repository, it also updates DAGs by default. This means that if you deploy your project configurations and it doesn't have your most recent DAG code, your Deployment's current DAGs are erased or reverted by the image deploy. Therefore, Astronomer recommends ensuring that any DAG changes are simultaneously updated in the repository where you manage project configurations.
-
-:::
-
 This strategy requires [DAG-only deploys](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment) on the target Deployment and setting up your CI/CD pipeline on both Git repositories.
 
 ### Store DAGs in storage bucket
 
-Similar to the multiple repository strategy, this strategy separates the management of DAGs and project configuration. DAGs are stored in an [S3](https://aws.amazon.com/s3/) or [Google Cloud Storage (GCS)](https://cloud.google.com/storage) bucket, while Astro project configuration files are stored in a Git repository. 
+Similar to the multiple repository strategy, this strategy separates the management of DAGs and project configuration. DAGs are stored in an [S3](https://aws.amazon.com/s3/) or [Google Cloud Storage (GCS)](https://cloud.google.com/storage) bucket, while Astro project configuration files are stored in a Git repository.
 
 ```mermaid
 flowchart LR;
@@ -166,7 +160,7 @@ flowchart LR;
     id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
     id4[DAG author's local Astro project]-->|Push DAG changes|id2[DAG bucket]
     id2-->|"DAG-only deploy" | id3[Astro Deployment]
-    id5-->|"Full project deploy </br> (CI/CD)"|id3
+    id5-->|"Image-only deploy </br> (CI/CD)"|id3
 ```
 
 If you migrated to Astro from Amazon Managed Workflows for Apache Airflow (MWAA) or Google Cloud Composer (GCC), this strategy is useful for maintaining a similar workflow for DAG authors. For example, you can set up a Lambda function to push DAGs to your Astronomer Deployment whenever DAG files are updated in your specific S3 bucket.
@@ -178,7 +172,7 @@ When you set up a CI/CD workflow on Astro, you will:
 - Select a CI/CD strategy after reviewing this document and the requirements of your team.
 - Set up your repositories and permissions based on your CI/CD strategy.
 - Add an Astronomer [CI/CD template](ci-cd-templates/template-overview.md) to your repositories.
-- Modify the Astronomer template or GitHub action to meet the requirements of your organization. 
+- Modify the Astronomer template or GitHub action to meet the requirements of your organization.
 
 If you use GitHub, Astronomer recommends using the [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action) that is maintained by Astronomer.
 

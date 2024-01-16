@@ -21,7 +21,7 @@ Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https:
 * PostgreSQL superuser permissions
 * If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 
-:::caution
+:::warning
 
 Astronomer Software is not compatible with Azure Single Server.
 

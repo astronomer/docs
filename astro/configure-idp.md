@@ -8,7 +8,6 @@ toc_max_heading_level: 3
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
 
 This guide provides the steps for integrating identity providers on Astro to enable Single Sign-On (SSO) for your users. After you complete the integration for your organization:
 
@@ -126,7 +125,7 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 
 #### Step 2: Copy your SSO bypass link
 
-:::caution
+:::warning
 
 Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
 
@@ -174,7 +173,7 @@ Follow [Microsoft Documentation](https://learn.microsoft.com/en-us/entra/identit
 
 Follow [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 4.
 
-:::caution
+:::warning
 
 If you configure an expiring secret, make sure to record the expiration date and renew the secret before this date to avoid interruptions to your service.
 
@@ -216,7 +215,7 @@ If your Microsoft Entra ID is configured to require admin approval on API permis
 
 #### Step 5: Copy your SSO bypass link
 
-:::caution
+:::warning
 
 Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
 
@@ -307,7 +306,7 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
     
 #### Step 2: Copy your SSO bypass link
 
-:::caution
+:::warning
 
 Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
 
@@ -409,7 +408,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
     
 #### Step 2: Copy your SSO bypass link
 
-:::caution
+:::warning
 
 Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
 

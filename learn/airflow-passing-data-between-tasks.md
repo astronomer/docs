@@ -2,12 +2,8 @@
 title: "Pass data between tasks"
 sidebar_label: "Pass data between tasks"
 id: airflow-passing-data-between-tasks
+description: "Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom."
 ---
-
-<head>
-  <meta name="description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
-  <meta name="og:description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
-</head>
 
 import CodeBlock from '@theme/CodeBlock';
 import airflow_passing_data_between_tasks_xcom from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_xcom.py';
@@ -80,7 +76,16 @@ When you use the standard XCom backend, the size-limit for an XCom is determined
 
 You can see that these limits aren't very big. If you think your data passed via XCom might exceed the size of your metadata database, either use a custom XCom backend or [intermediary data storage](#intermediary-data-storage).
 
-The second limitation in using the standard XCom backend is that only certain types of data can be serialized. Airflow supports JSON serialization, as well as pandas DataFrame serialization in version 2.6 and later. If you need to serialize other data types you can do so using a [custom XCom backend](custom-xcom-backends-tutorial.md).
+The second limitation in using the standard XCom backend is that only certain types of data can be serialized. 
+
+By default, Airflow supports serializations for:
+
+- [JSON](https://www.json.org/json-en.html).
+- [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) (Airflow version 2.6+).
+- [Delta Lake tables](https://delta.io/) (Airflow version 2.8+).
+- [Apache Iceberg tables](https://iceberg.apache.org/) (Airflow version 2.8+).
+
+If you need to serialize other data types you can do so using a [custom XCom backend](custom-xcom-backends-tutorial.md).
 
 ### Custom XCom backends
 

@@ -6,12 +6,7 @@ description: Reference of all supported configurations for new Astro clusters on
 sidebar_custom_props: { icon: "img/aws.png" }
 ---
 
-<head>
-  <meta name="description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
-  <meta name="og:description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
-</head>
-
-:::caution
+:::warning
 
 This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
@@ -184,7 +179,7 @@ The following table lists all available instance types for worker node pools, as
 
 If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
 
-:::caution
+:::warning
 
 Astronomer doesn’t recommend using `t` series instance types in standard mode for production workloads, because CPU utilization for `t` instance types in standard mode can be throttled.
 

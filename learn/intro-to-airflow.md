@@ -2,13 +2,8 @@
 title: "An introduction to Apache Airflow"
 sidebar_label: "Introduction to Airflow"
 id: intro-to-airflow
+description: "Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources."
 ---
-
-<head>
-  <meta name="description" content="Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources." />
-  <meta name="og:description" content="Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources." />
-</head>
-
 
 [Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. It has over 9 million downloads per month and an active OSS community. Airflow allows data practitioners to define their data pipelines as Python code in a highly extensible and infinitely scalable way.
 
@@ -115,7 +110,7 @@ The following Airflow components must be running at all times:
 
 - **Webserver**: A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
 - **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html)**: A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
-- **[Database](airflow-database.md)**: A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL, MsSQL, and SQLite are also supported.
+- **[Database](airflow-database.md)**: A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
 - **[Executor](airflow-executors-explained.md)**: The mechanism that defines how the available computing resources are used to execute tasks. An executor is running within the scheduler whenever Airflow is up.
 
 Additionally, you may also have the following situational components:

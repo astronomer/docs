@@ -1,14 +1,9 @@
 ---
 title: "An introduction to the Airflow UI"
 sidebar_label: "The Airflow UI"
-description: "An overview of the Airflow UI"
 id: airflow-ui
+description: "Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations."
 ---
-
-<head>
-  <meta name="description" content="Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations." />
-  <meta name="og:description" content="Explore the Airflow UI, which helps you monitor and troubleshoot your data pipelines. Learn about some of its key features and visualizations." />
-</head>
 
 One of the main features of Airflow is its [user interface (UI)](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), which provides insights into your DAGs and DAG runs. The UI is essential for understanding, monitoring, and troubleshooting your pipelines.
 
@@ -70,12 +65,14 @@ When a DAG run, task instance, or [task group](task-groups.md) instance is selec
 
 ![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
 
-There are 4 tabs available within the **Grid** view:
+There are several tabs available within the **Grid** view:
 
 - **Details**: Shows more details about the DAG, DAG run or task instance.
 - **Graph**: Shows a graph representation of the DAG.
 - **Gantt**: Shows the duration of each task instance in a DAG run as a Gantt chart.
 - **Code**: Shows the DAG code.
+- **Logs**: (only available when a task instance is selected) Shows the logs of a task instance.
+- **XCom**: (only available when a task instance is selected) Shows the XComs pushed by a task instance.
 
 :::tip
 

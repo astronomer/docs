@@ -2,16 +2,12 @@
 sidebar_label: 'Install the CLI'
 title: 'Install the Astro CLI'
 id: install-cli
+description: "Instructions for installing, upgrading, and uninstalling the Astro command-line interface (CLI)."
 ---
-
-<head>
-  <meta name="description" content="Instructions for installing, upgrading, and uninstalling the Astro command-line interface (CLI). The Astro CLI lets you get started with Apache Airflow quickly and it can be used with all Astronomer products." />
-  <meta name="og:description" content="The Astro CLI helps you get started with writing DAGs and running Apache Airflow on your local machine. Learn how to install, upgrade, and uninstall the Astro CLI. " />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 You can find information about installing, upgrading, and uninstalling the Astro CLI.
 
@@ -41,7 +37,7 @@ Install the Astro CLI on a Mac operating system with a single command.
 - [Homebrew](https://brew.sh/)
 - Optional. [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
-By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 #### Installation
 
@@ -111,7 +107,7 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 - Windows 10 1709 (build 16299) or later or Windows 11.
 - Optional. [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
-By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 #### Installation
 
@@ -123,9 +119,11 @@ By default, the Astro CLI uses Docker as its container management engine for run
 
     To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command specifies the latest available version of the Astro CLI:
 
-<pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}`}</code></pre>
+    ```sh
+    winget install -e --id Astronomer.Astro -v {{CLI_VER}}
+    ```
 
-2. Run the following command to access the location of the CLI executable:
+1. Run the following command to access the location of the CLI executable:
 
     ```sh
     $env:path.split(";")
@@ -133,9 +131,9 @@ By default, the Astro CLI uses Docker as its container management engine for run
     
     From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
 
-3. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
+2. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
 
-4. Run `astro version` to confirm the Astro CLI is installed properly.
+3. Run `astro version` to confirm the Astro CLI is installed properly.
 
 #### Resolve installation issues
 
@@ -155,7 +153,7 @@ This is where you'll find information about installing the Astro CLI on a Window
 - Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
 - Windows 10 or Windows 11.
 
-By default, the Astro CLI uses Docker as its container management engine. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 #### Installation
 
@@ -179,7 +177,7 @@ This is where you'll find information about installing the Astro CLI on Linux.
 
 - Optional. [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
-By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](cli/configure-cli.md?tab=mac#run-the-astro-cli-using-podman) for prerequisites and configuration steps.
+By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
 #### Installation
 
@@ -191,7 +189,9 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install the most recent release of the CLI, you would run:
 
-<pre><code parentName="pre">{`curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}`}</code></pre>
+```sh
+curl -sSL install.astronomer.io | sudo bash -s -- v{{CLI_VER}}
+```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
 

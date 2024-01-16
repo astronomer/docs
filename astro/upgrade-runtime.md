@@ -2,14 +2,10 @@
 sidebar_label: 'Upgrade Astro Runtime'
 title: 'Upgrade Astro Runtime'
 id: upgrade-runtime
+description: "Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available."
 ---
 
-<head>
-  <meta name="description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
-  <meta name="og:description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
-</head>
 
-import {siteVariables} from '@site/src/versions';
 
 New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
@@ -62,22 +58,25 @@ The Astro CLI then generates test results in your Astro project that identify de
 
     To upgrade to the latest version of Runtime, for example, change the `FROM` statement in your Dockerfile to:
 
-    <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
+    ```
+    FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
+    ```
 
     You must always specify the major, minor, and patch version of any given Astro Runtime version.
+
+3. Save the changes to your `Dockerfile`.
 
 ## Step 5: Test Astro Runtime locally
 
 Astronomer recommends testing new versions of Astro Runtime locally before upgrading a Deployment on Astro.
 
-1. Save the changes to your `Dockerfile`.
-2. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
-3. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
-4. Confirm that your local upgrade was successful by scrolling to the bottom of any page. You should see your new Astro Runtime version in the footer as well as the version of Airflow it is based on.
+1. Open your project directory in your terminal and run `astro dev restart`. This restarts the Docker containers for the Airflow webserver, scheduler, triggerer, and Postgres metadata database.
+2. Access the Airflow UI of your local environment by navigating to `http://localhost:8080` in your browser.
+3. Confirm that your local upgrade was successful by scrolling to the end of any page. The new Astro Runtime version is listed in the footer as well as the version of Airflow it is based on.
 
     ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
 
-5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
+4. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
 ### Step 6: (Optional) Upgrade and test provider packages
 
@@ -93,7 +92,7 @@ astro deploy
 
 For more information about deploying to Astro, see [Deploy code](deploy-code.md).
 
-:::caution
+:::warning
 
 After you upgrade a Deployment on Astro to a new version of Astro Runtime, the only way to downgrade is to [roll back to a previous deploy](deploy-history.md). If you attempt to downgrade a Deployment by updating your Dockerfile, the Astro CLI produces an error and your request to deploy does not succeed.
 
@@ -117,7 +116,7 @@ Consider the following when you upgrade Astro Runtime:
 
 - All versions of the Astro CLI support all versions of Astro Runtime. There are no dependencies between the two products.
 - Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Version-specific upgrade considerations](upgrade-runtime.md#version-upgrade-considerations).
-- Astronomer does not support downgrading a Deployment on Astro to a lower version of Astro Runtime.
+- You can't downgrade a Deployment on Astro to a lower version of Astro Runtime unless you [roll back to a previous deploy](deploy-history.md).
 
 To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](runtime-release-notes.md). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
