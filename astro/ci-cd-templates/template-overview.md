@@ -1,8 +1,8 @@
 ---
-sidebar_label: Template overview
-title: Template overview
+sidebar_label: Template options
+title: Template options
 id: template-overview
-description: Use pre-built templates to get started with automating code Deploys 
+description: Use pre-built templates to get started with automating code deploys
 ---
 
 Astronomer CI/CD templates are customizable, pre-built code samples that help you configure automated workflows with popular CI/CD tools, such as GitHub Actions or Jenkins. Use the templates to create a workflow that automates deploying code to Astro according to your team's CI/CD requirements and strategy.
@@ -30,7 +30,7 @@ CI/CD templates that use the DAG deploy workflow:
     - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment.
     - If any file not in the `dags` folder has changed, run `astro deploy`. This triggers two subprocesses. One that creates a Docker image for your Astro project, authenticates to Astro using your Deployment API token, and pushes the image to your Deployment. A second that pushes your `dags` folder to your Deployment.
 
-This process is equivalent to the following shell script: 
+This process is equivalent to the following shell script:
 
 ```bash
 # Set Deployment API token credentials as environment variables
@@ -60,7 +60,7 @@ then
 fi
 ```
 
-## Image deploy templates  
+## Image deploy templates
 
 _Image based templates_ build a Docker image and push it to Astro whenever you update any file in your Astro project. This type of template works well for development workflows that include complex Docker customization or logic.
 
@@ -89,7 +89,7 @@ To implement this feature, you need a CI/CD workflow that:
 
 - Creates the preview Deployment when you create a new branch.
 - Deploys code changes to Astro when you make updates in the branch.
-- Deletes the preview Deployment when you delete the branch. 
+- Deletes the preview Deployment when you delete the branch.
 - Deploys your changes to your base Deployment after you merge your changes into your main branch.
 
 If you use GitHub Actions as your CI/CD tool, you can find preview Deployment templates as part of the [Astronomer GitHub action in the GitHub Marketplace](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates). This GitHub action includes sub-actions for each of these four steps. To learn more, see [GitHub Actions](ci-cd-templates/github-actions.md).
@@ -98,7 +98,7 @@ To configure your own automated workflow for preview Deployments with another CI
 
 #### Create a preview Deployment
 
-In a Deployment preview CI/CD pipeline, you run this script when you create a feature branch off of the main branch of your Astro project. 
+In a Deployment preview CI/CD pipeline, you run this script when you create a feature branch off of the main branch of your Astro project.
 
 ```bash
 # Install the Astro CLI
@@ -118,7 +118,7 @@ sed -i "s|  name:.*|  name: $BRANCH_DEPLOYMENT_NAME}|g"  deployment-preview-temp
 # Create new preview Deployment based on the Deployment template file
 astro deployment create --deployment-file deployment-preview-template.yaml
 
-# Deploy new code to the deployment preview 
+# Deploy new code to the deployment preview
 astro deploy -n $BRANCH_DEPLOYMENT_NAME
 ```
 
