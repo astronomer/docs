@@ -76,7 +76,6 @@ At least one worker queue in your Deployment is running the maximum possible num
 
 To limit this notification for a worker queue, increase its **Max # Workers** setting or choose a larger **Worker Type**. See [Configure worker queues](https://docs.astronomer.io/astro/configure-worker-queues).
 
-
 ### Worker Queue Does Not Exist
 
 There is at least 1 task that is configured to run on a worker queue that does not exist. Instances of this task will remain in the queued state until the worker queue is created.
