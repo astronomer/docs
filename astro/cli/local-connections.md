@@ -2,7 +2,7 @@
 sidebar_label: 'Use Airflow connections from Astro'
 title: 'Use Airflow connections hosted on Astro in a local environment'
 id: local-connections
-description: Test DAGs locally with Airflow connections that you created in the Astro Environment Manager.
+description: Use DAGs locally with Airflow connections that you created in the Astro Environment Manager.
 ---
 
 When you create Airflow connections for a Deployment on Astro with the [Environment Manager](create-and-link-connections.md), you can also use them to test DAGs locally. This is the easiest way to share connection details between a Deployment on Astro and your local Airflow environment.
