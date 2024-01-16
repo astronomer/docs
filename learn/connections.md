@@ -43,8 +43,8 @@ Airflow connections can be created by using one of the following methods:
 - [Environment variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#environment-variables)
 - The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection)
 - A [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) (a system for managing secrets external to Airflow)
-- The [`airflow.cfg` file](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html)
 - The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli)
+- The [`airflow_settings.yaml` file](https://docs.astronomer.io/astro/cli/develop-project#configure-airflow_settingsyaml-local-development-only) for Astro CLI users
 
 :::info
 
