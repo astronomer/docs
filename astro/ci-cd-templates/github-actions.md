@@ -259,11 +259,11 @@ If your Astro project requires additional build-time arguments to build an image
 
 The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
 
-When you set up a Standard Deployment preview templates with the Deploy Action, it uses GitHub Secrets to manage the credentials needed for your CI/CD pipeline. However, you can also use GitHub Secrets to store the credentials necessary to integrate your [preview deployment pipeline with a secrets backend](#deployment-preview-template-with-secrets-backend-implementation), so you can access environment variables, connections, and other resources that are managed by your organization's [secrets backend](secrets-backend.md).
+The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can also use a secret to store the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections for testing purposes. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
 
 ### Standard Deployment preview template
 
-The standard Deployment preview uses GitHub secrets and an Astro Deployment API token to create a preview Deployment as part of your CI/CD pipeline.
+The standard Deployment preview template uses GitHub secrets and an Astro Deployment API token to create a preview Deployment whenever you create a new feature branch off of your main branch.
 
 #### Prerequisites
 
@@ -381,26 +381,26 @@ The standard Deployment preview uses GitHub secrets and an Astro Deployment API 
 
 ### Deployment preview template with secrets backend implementation
 
-If you use a [secrets backend](secrets-backend.md) to manage your access credentials and other sensitive information, you can configure your Github Action to grant preview Deployments access to your secrets backend. This means that DAGs in the preview Deployment can access secrets such as Airflow variables and connections for testing purposes.
+If you use a [secrets backend](secrets-backend.md) to manage Airflow objects such as variables and connections, you can configure your action to grant preview Deployments access to your secrets backend. This means that DAGs in the preview Deployment can access your secret Airflow objects for testing purposes.
 
-Unlike the standard Deployment preview setup, you need to add some additional configuration to GitHub including information. Specifically, this template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment variable to store information and credentials for your secrets backend.
+This template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment variable to store information and credentials for your secrets backend.
 
 #### Prerequisites
 
 - An Astro project hosted in a GitHub repository.
 - A [Workspace API token](workspace-api-tokens.md).
 - A [Deployment](create-deployment.md).
-- A [Secrets backend](secrets-backend.md).
+- A [secrets backend](secrets-backend.md).
 
 #### Setup
 
 1. Copy and save the Deployment ID for your Astro deployment.
 2. Set the following [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) in the repository hosting your Astro project. This includes your Astro API Token, so that GitHub has permissions to deploy code to your Deployments or Workspaces, and your secrets backend information stored in `AIRFLOW__SECRETS__BACKEND_KWARGS`. See [Configure a secrets backend](secrets-backend.md) for more information about configuring your secrets backend as an environment variable.
 
-  - Key 1: `ASTRO_API_TOKEN`
-  - Secret 1: `<your-token>`
-  - Key 2: `AIRFLOW__SECRETS__BACKEND_KWARGS`
-  - Secret 2: `<your-kwargs>`
+    - **Key 1**: `ASTRO_API_TOKEN`
+    - **Secret 1**: `<your-token>`
+    - **Key 2**: `AIRFLOW__SECRETS__BACKEND_KWARGS`
+    - **Secret 2**: `<your-kwargs>`
 
 3. In your project repository, create a new YAML file in `.github/workflows` named `create-deployment-preview.yml` that includes the following configuration.
 
@@ -430,7 +430,7 @@ Unlike the standard Deployment preview setup, you need to add some additional co
           - name: Create Secret Variables
             run: |
               astro deployment variable update --deployment-id ${{steps.create-dep-prev.outputs.preview-id}} AIRFLOW__SECRETS__BACKEND_KWARGS=${{ secrets.AIRFLOW__SECRETS__BACKEND_KWARGS }} --secret
-  ```
+    ```
 
 4. In the same folder, create a new YAML file named `deploy-to-preview.yml` that includes the following configuration:
 
