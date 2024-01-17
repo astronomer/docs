@@ -38,6 +38,12 @@ Run the following command to build and deploy only your non-DAG files to a Deplo
 astro deploy --image
 ```
 
+:::warning
+
+To successfully trigger an image-only deploy, your Deployment must have at least one deployed DAG. To trigger an image-only deploy on a new Deployment, you must first trigger either a [project deploy](deploy-project-image.md) or a DAG-only deploy.
+
+:::
+
 :::tip
 
 If you use [prebuilt Docker images](deploy-project-image.md#deploy-a-prebuilt-docker-image) for your image deploys, you can use both the `--image-name` and `--image` flags to update your image without updating your `dags` folder.
