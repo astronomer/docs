@@ -23,17 +23,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## January 16, 2023
 
-### Self-service VPC configuration for AWS 
-
-<HostedBadge/>
-
-:::warning
-
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
-
-:::
-
-You can now configure a network connection between Astro and an AWS VPC without contacting Astronomer support. Astro automatically handles creating a connection request and provides instructions for completing the setup yourself. See [Create a privatge connection between Astro and AWS](https://docs.astronomer.io/astro/connect-aws?tab=VPC%20peering#create-a-private-connection-between-astro-and-aws).
 
 ### Additional improvements
 
