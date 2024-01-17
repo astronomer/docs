@@ -1,17 +1,17 @@
 ---
-sidebar_label: 'Deployment health and incidents'
-title: 'View and address Deployment incidents'
+sidebar_label: 'Deployment health incidents'
+title: 'View and address Deployment health incidents'
 id: deployment-health-incidents
 description: A list of all possible Deployment incident types and steps for resolving each one.
 ---
 
 :::caution
 
-This feature is in [Private preview](feature-previews.md).
+This feature is in [Private preview](feature-previews.md). To access this feature or learn more, [contact Astronomer](https://www.astronomer.io/contact/). All customers are eligible to use this feature upon request.
 
 :::
 
-Astro monitors your Deployment and notifies you when specific conditions or metrics are met to ensure that you're up to date on your Deployment's performance. Use your Deployment health status to quickly check if your Deployment has any issues that need immediate attention.
+Astro monitors your Deployment and displays notifications when issues arise that could affect your Deployment's functionality or performance. Use your Deployment health status to quickly check if your Deployment has any issues that need immediate attention.
 
 ## Deployment health
 
@@ -19,15 +19,15 @@ After you create a Deployment, its real-time health status appears at the top of
 
 ![Deployment Health status](/img/docs/deployment-health.png)
 
-The following are the possible health statuses your Deployments can have:
+The following are possible health statuses your Deployments can have:
 
 - **Creating** (Grey): Astro is still provisioning Deployment resources. It is not yet available to run DAGs. See [Create a Deployment](create-deployment.md).
-- **Deploying** (Grey): A code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
+- **Deploying** (Grey): A code deploy or environment update is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
 - **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
 - **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
 - **Unknown** (Grey): The Deployment status can't be determined.
 
-Your Deployment health status will show a number next to the status if a [Deployment incident](#deployment-incidents) occurred since you last viewed it.
+Your Deployment health status will also show a number next to the status if a [Deployment health incident](#deployment-incidents) is currently active. Incidents are classified as **Warning** or **Critical** level.
 
 If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the logs in the [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 

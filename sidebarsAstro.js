@@ -181,6 +181,7 @@ module.exports = {
           label: "Data lineage",
           items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
+        "deployment-health-incidents",
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
