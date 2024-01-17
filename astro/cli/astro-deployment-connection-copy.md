@@ -53,6 +53,7 @@ astro deployment connection copy --source-id cl03oiq7d80402nwn7fsl3dmv --target 
 
 # copy connections stored in the Deployment "My Deployment" to another Deployment "My Other Deployment"
 astro deployment connection copy --source-name="My Deployment" --target-name="My Other Deployment"
+```
 
 ## Related Commands
 
