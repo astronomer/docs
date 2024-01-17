@@ -155,7 +155,6 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
     ```text
     AIRFLOW__CORE__ALLOWED_DESERIALIZATION_CLASSES=airflow\.* astro\.*
-    AIRFLOW__CORE__XCOM_SNOWFLAKE_CONN_NAME='snowflake_default'
     AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{
         "conn_type": "snowflake",
         "login": "<username>",
