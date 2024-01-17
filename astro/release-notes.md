@@ -21,8 +21,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## January 16, 2023
-
+## January 16, 2024
 
 ### Additional improvements
 
