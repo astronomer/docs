@@ -78,6 +78,12 @@ To limit this notification for a worker queue, increase its **Max # Workers** se
 
 ### Worker Queue Does Not Exist
 
-There is at least 1 task that is configured to run on a worker queue that does not exist. Instances of this task will remain in the queued state until the worker queue is created.
+At least one task is configured to run on a worker queue that does not exist. Instances of this task will remain in the queued state until the worker queue is created.
 
 To run these task instances, ensure that you have properly specified an existing worker queue's name in your task definition. See [Configure worker queues](configure-worker-queues.md#assign-tasks-to-a-worker-queue).
+
+## See also
+
+- [Deployment metrics](deployment-metrics.md)
+- [Astro alerts](alerts.md)
+- [Deployment logs](view-logs.md)
