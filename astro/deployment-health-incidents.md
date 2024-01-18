@@ -66,7 +66,7 @@ Your Deployment metadata database is currently storing tables that are larger th
 The following are a few ways to reduce the amount of XCom data in the metadata database:
 
 - Configure an external backend for XCom data, such as AWS S3. See the [Astronomer XCom Backend Tutorial](https://docs.astronomer.io/learn/xcom-backend-tutorial).
-- Implement intermediary data storage for tasks so that Airflow doesn't store large amounts of data when passing data between tasks. See [Astronomer documentation].
+- Implement intermediary data storage for tasks so that Airflow doesn't store large amounts of data when passing data between tasks. See [Intermediary data storage](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks#intermediary-data-storage).
 
 If you receive this incident notification and don't utilize XComs, submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
