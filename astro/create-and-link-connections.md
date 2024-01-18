@@ -5,6 +5,8 @@ id: create-and-link-connections
 description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
 You can create and manage Airflow connections for Deployments with the Astro Environment Manager in the Cloud UI. The Environment Manager uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
 
 <HostedBadge/>
