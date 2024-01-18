@@ -24,7 +24,7 @@ The following Apache Airflow core components are running at all times:
 - **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
 - **[Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html):** The mechanism for running tasks. An executor is running within the scheduler whenever Airflow is operational.
 
-If you run Airflow locally using the [Astro CLI](https://docs.astronomer.io/astro/install-cli), you'll notice that when you start Airflow using `astrocloud dev start`, it will spin up three containers, one for each of the core components.
+If you run Airflow locally using the [Astro CLI](https://docs.astronomer.io/astro/install-cli), you'll notice that when you start Airflow using `astro dev start`, it will spin up three containers, one for each of the core components.
 
 In addition to these core components, there are a few situational components that are used only to run tasks or make use of certain features:
 
