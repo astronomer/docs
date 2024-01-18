@@ -168,7 +168,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
 Create a new file called `indexurl.txt` that contains the extra index URL used to access your private PuPI index. For example:
 
-```sh
+```text
 https://myuser:mycompany.com/api/pypi/pypi/simple
 ```
 
