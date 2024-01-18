@@ -13,7 +13,7 @@ After you create connections and variables in an Airflow environment, you might 
 
 Based on the [management strategy for your connections and variables](manage-connections-variables.md), their storage location will vary. Use this document to learn how to export and import them from one environment to another.
 
-::: tip
+:::tip
 
 If you use the Astro Environment Manager to [create connections](create-and-link-connections.md), instead of importing and exporting connections from Airflow, you can configure the CLI to automatically retrieve connection details from Astro when you're working locally. See [Work locally with Airflow connections hosted on Astro](cli/local-connections.md) to set up this configuration and learn more about how Astro stores and syncs connection information.
 
