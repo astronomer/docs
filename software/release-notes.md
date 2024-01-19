@@ -38,6 +38,7 @@ Release date: January 19, 2024
 
 ### Bug fixes
 
+- Fixed an issue in 0.33.2 where you couldn't migrate a Deployment from Astronomer Certified to Astro Runtime. 
 - Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.
 - Fixed the following vulnerabilities:
 
