@@ -28,6 +28,28 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.33.3
+
+Release date: January 19, 2024
+
+### Additional improvements
+
+- Upgraded Elasticsearch to [8.9.2](https://www.elastic.co/guide/en/elasticsearch/reference/current/release-notes-8.9.2.html).
+
+### Bug fixes
+
+- Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-25653](https://nvd.nist.gov/vuln/detail/CVE-2023-25653)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2023-2976](https://nvd.nist.gov/vuln/detail/CVE-2023-2976)
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)
+    - [CVE-2021-40690](https://nvd.nist.gov/vuln/detail/CVE-2021-40690)
+    - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
+    - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
+
 ## 0.33.2 
 
 Release date: November 20, 2023
