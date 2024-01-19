@@ -57,7 +57,7 @@ When Astronomer identifies a significant bug in Astro Runtime, a fix is backport
 
 When Astronomer identifies a significant security vulnerability in Astro Runtime, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
 
-Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, see how to [Submit a support request](https://docs.astronomer.io/astro/astro-support).
+Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions.
 
 ### Security scan results on Quay.io
 
