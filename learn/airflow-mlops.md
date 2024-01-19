@@ -16,7 +16,7 @@ In this guide you learn:
 
 :::tip  
 
-Ready to get started? Check out the recommended resources showcasing ML implementations with Airflow:
+Ready to get started? Check out the recommended resources showcasing machine learning (ML) implementations with Airflow:
 
 - [Ask Astro](https://github.com/astronomer/ask-astro) LLM Retrieval Augmented Generation pipeline reference architecture ([Blog post deep dive](https://www.astronomer.io/blog/ask-astro-operationalizing-data-ingest-for-retrieval-augmented-generation-with-llms-part-3/)).
 - [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping/) webinar.
@@ -45,6 +45,16 @@ The benefits of using Airflow for MLOps are:
 - **Ready for day 2 Ops**: Airflow is a mature orchestrator, coming with built-in functionality such as [automatic retries](rerunning-dags.md#automatically-retry-tasks), complex [dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) logic, as well as the option to make pipelines [dynamic](dynamic-tasks.md).
 - **Integrations**: Airflow has a large ecosystem of [integrations](https://registry.astronomer.io/providers), including many popular [MLOps tools](#airflow-integrations-for-mlops).
 - **Shared platform**: Airflow is used by both data engineers and ML engineers, which allows teams to create direct dependencies between their pipelines, for example by using [Airflow Datasets](airflow-datasets.md).
+
+### Airflow for LLMOps
+
+**Large Language Model Operations** (LLMOps) is a subset of MLOps that describes interactions with large language models (LLMs). In contrast to traditional ML models, LLMs are often too large to be trained from scratch and LLMOps techniques instead revolve around adapting existing LLMs to new use cases.
+
+The three main techniques for LLMOps are:
+
+- **Prompt engineering**: This is the simplest technique to influence the output of an LLM. You can use Airflow to create a pipeline that ingests user prompts and modifies them according to your needs, before sending them to the LLM inference endpoint.
+- **Retrieval augmented generation** (RAG): RAG pipelines retrieve relevant context from domain-specific and often proprietary data to improve the output of an LLM. See [Ask Astro](https://github.com/astronomer/ask-astro) for an Airflow RAG reference architecture.
+- **Fine-tuning**: Fine-tuning LLMs typically involves retraining the final layers of an LLM on a specific dataset. This often requires more complex pipelines and a larger amount of [compute](#model-operations-and-compute-considerations) that can be orchestrated with Airflow.
 
 ## Components of MLOps
 
