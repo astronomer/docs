@@ -1,5 +1,5 @@
 ---
-title: "Best practices for using Airflow for orchestrating MLOps pipelines"
+title: "Best practices for using Airflow to orchestrate MLOps pipelines"
 sidebar_label: "MLOps"
 description: "Learn how to use Airflow to run machine learning in production."
 id: airflow-mlops
