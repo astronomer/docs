@@ -1,11 +1,11 @@
 ---
-title: "Best practices for using Airflow to orchestrate MLOps pipelines"
+title: "Best practices for orchestrating MLOps pipelines with Airflow"
 sidebar_label: "MLOps"
 description: "Learn how to use Airflow to run machine learning in production."
 id: airflow-mlops
 ---
 
-**Machine Learning Operations** (MLOps) is an umbrella term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns with Apache Airflow providing core functional support for all steps.
+**Machine Learning Operations** (MLOps) is an umbrella term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns with Apache Airflow providing tool agnostic orchestration capabilities for all steps.
 
 In this guide you learn:
 
@@ -35,17 +35,16 @@ To get the most benefits from this guide, you need an understanding of:
 
 Apache Airflow sits at the heart of the modern MLOps stack. Because it is tool agnostic, Airflow can orchestrate all actions in any MLOps tool that has an API. Combined with already being the de-facto standard for orchestrating data pipelines, Airflow is the perfect tool for data engineers and machine learning engineers to standardize their workflows and collaborate on pipelines.
 
-Airflow is a natural fit for MLOps because it is:
+The benefits of using Airflow for MLOps are:
 
-- **Python native**: You use Python code to define Airflow pipelines, which makes it easy to integrate the most popular machine learning tools and embed your ML operations in a best practice CI/CD workflow. Additionally, Airflow comes with a built-in [pythonic interface](airflow-decorators.md) that works well with modern machine learning code.
+- **Python native**: You use Python code to define Airflow pipelines, which makes it easy to integrate the most popular machine learning tools and embed your ML operations in a best practice CI/CD workflow. By using the [decorators](airflow-decorators.md) of the TaskFlow API you can turn existing scripts into Airflow tasks.
 - **Extensible**: Airflow itself is written in Python, which makes it extensible with [custom modules](airflow-importing-custom-hooks-operators.md) and [Airflow plugins](using-airflow-plugins.md).
 - **Monitoring and alerting**: Airflow comes with production-ready monitoring and alerting modules like [Airflow notifiers](error-notifications-in-airflow.md#notifiers), [extensive logging features](logging.md), and [Airflow listeners](airflow-listeners.md). They enable you to have fine-grained control over how you monitor your ML operations and how Airflow alerts you if something goes wrong.
 - **Pluggable compute**: When using Airflow you can [pick and choose](#model-operations-and-compute-considerations) the compute you want to use for each task. This allows you to use the the perfect environment and resources for every single action in your ML pipeline. For example, you can run your data engineering tasks on a Spark cluster and your model training tasks on a GPU instance.
 - **Data agnostic**: Airflow is data agnostic, which means it can be used to orchestrate any data pipeline, regardless of the data format or storage solution. You can plug in any new data storage, such as the latest vector database or your favorite RDBMS, with minimal effort.
 - **Ready for day 2 Ops**: Airflow is a mature orchestrator, coming with built-in functionality such as [automatic retries](rerunning-dags.md#automatically-retry-tasks), complex [dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) logic, as well as the option to make pipelines [dynamic](dynamic-tasks.md).
 - **Integrations**: Airflow has a large ecosystem of [integrations](https://registry.astronomer.io/providers), including many popular [MLOps tools](#airflow-integrations-for-mlops).
-
-These features and many more make Airflow the place where data engineers and machine learning engineers meet.
+- **Shared platform**: Airflow is used by both data engineers and ML engineers, which allows teams to create direct dependencies between their pipelines, for example by using [Airflow Datasets](airflow-datasets.md).
 
 ## Components of MLOps
 
@@ -58,7 +57,7 @@ MLOps describes different patterns in how organizations can productionize machin
 
 ### DevOps for MLOps
 
-DevOps best practices are based on the goals of having both all aspects of your data and machine learning pipeline expressed as code and a set of behaviors when interacting with your code base. Since you define Airflow pipelines in Python code, you can apply DevOps best practices when using Airflow. This includes:
+Since you define Airflow pipelines in Python code, you can apply DevOps best practices when using Airflow. This includes:
 
 - **Version control**. All code and configuration should be stored in a version control system like [Git](https://git-scm.com/). Version control allows you to track all changes of your pipeline, ML model and environment over time and roll back to previous versions if needed. Astro customers can take advantage of [Deployment rollbacks](https://docs.astronomer.io/astro/deploy-history).
 - **Continuous integration/ continuous delivery** ([CI/CD](https://resources.github.com/ci-cd/)). It is a standard Software best practice for all code to undergo automatic testing, linting, and deployment. This ensures that your code is always in a working state and that any changes are automatically deployed to production. Airflow integrates with all major CI/CD tools, see [CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) for popular templates.
@@ -83,7 +82,7 @@ Give special considerations to the following:
 - [**Data quality**](data-quality.md) and data cleaning. If your data is of bad quality, your model predictions will be too. Astronomer recommends incorporating data quality checks and data cleaning steps into your data pipelines to define and monitor the requirements your data has to fulfill in order for downstream ML operations to be successful. Airflow supports integration with any data quality tool that has an API, and has pre-built integrations for tools such as [Great Expectations](airflow-great-expectations.md) and [Soda Core](soda-data-quality.md).
 - **Data preprocessing and feature engineering**. It is common for data to undergo several transformation steps before it is ready to be used as input for an ML model. These steps can include simple [preprocessing steps](https://scikit-learn.org/stable/modules/preprocessing.html) like scaling, one-hot-encoding, or imputation of missing values. It can also include more complex steps like [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), or [feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html). Airflow allows you to run preprocessing and feature engineering steps in a pythonic way using [Airflow decorators](airflow-decorators.md).
 - **Data storage**. 
-    - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can, for example, be an object storage solution, a relational database management system (RDBMS), or a vector database. Airflow integrates with all these options, with tools such as [Airflow object storage] and the [Astro Python SDK](https://docs.astronomer.io/learn/astro-python-sdk) simplifying common operations. 
+    - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can, for example, be an object storage solution, a relational database management system (RDBMS), or a vector database. Airflow integrates with all these options, with tools such as [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) and the [Astro Python SDK](https://docs.astronomer.io/learn/astro-python-sdk) simplifying common operations. 
     - Model artifacts. Model artifacts include model parameters, hyperparameters, and other metadata. Airflow integrates with specialized version control systems such as [MLFlow](airflow-mlflow.md) or [Weights & Biases](airflow-weights-and-biases.md).
 
 Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](airflow-openlineage.md) and data cataloging as well as monitoring of data drift.
@@ -100,9 +99,14 @@ In practice, following modern data engineering patterns when using Airflow for M
 
 ### Model operations and compute considerations
 
-After you establish strong DevOps and data engineering foundations, you can start to implement model operations. Again, Airflow shines by giving you free choice over your tooling. 
+After you establish strong DevOps and data engineering foundations, you can start to implement model operations.
 
-Additionally, Airflow gives you full flexibility to decide where you want to leverage compute. Some organizations choose to use external compute for all of their heavy workloads, for example by leveraging the [KubernetesPodOperator](kubepod-operator.md) (and its decorator version `@task.kubernetes`) to execute tasks on any Kubernetes cluster. 
+With Airflow you can use your ML tools and compute locations of choice. Some organizations choose to use external compute for all of their heavy workloads, for example:
+
+- **External Kubernetes clusters**: with the [KubernetesPodOperator](kubepod-operator.md) (and its decorator version `@task.kubernetes`).
+- **Databricks**: with the [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) and [Databricks Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest).
+- **Spark**: with modules from the [Spark Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-apache-spark/versions/latest).
+- **External compute**: in [AWS](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest), [Azure](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest) and [Google Cloud](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest) using the respective Airflow providers.
 
 Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airflow infrastructure with larger worker nodes for compute intensive tasks. Astro customers can leverage the [worker queues](https://docs.astronomer.io/astro/configure-worker-queues) feature, which lets them decide the exact specifications for the workers each task can run on. This means that Airflow only uses large workers for the biggest workloads, saving compute and cost.
 
@@ -165,6 +169,12 @@ With Airflow, you can orchestrate actions in any MLOps tool that has an API. Man
 - [Pgvector](airflow-pgvector.md). A extension enabling vector operations in PostgreSQL.
 - [Pinecone](airflow-pinecone.md). A vector proprietary database.
 - (Beta) [Snowpark](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest). A interface to run non-SQL code in Snowflake, includes the machine learning library [Snowpark ML](https://docs.snowflake.com/developer-guide/snowpark-ml/index).
+
+Additionally, the provider packages for the main cloud providers include modules to interact with their ML tools and compute options:
+
+- [AWS](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest)
+- [Azure](https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/latest)
+- [Google Cloud](https://registry.astronomer.io/providers/apache-airflow-providers-google/versions/latest)
 
 ## Other Resources
 
