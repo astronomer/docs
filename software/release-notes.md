@@ -32,10 +32,6 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 Release date: January 19, 2024
 
-### Additional improvements
-
-- Upgraded Elasticsearch to [8.9.2](https://www.elastic.co/guide/en/elasticsearch/reference/current/release-notes-8.9.2.html).
-
 ### Bug fixes
 
 - Fixed an issue where the Workspace list page in the Software UI would show an error if any Workspace had an empty description.
