@@ -20,6 +20,20 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+## Astro Runtime 10.2.0
+
+- Release date: January 19, 2024
+- Airflow version: 2.8.1
+
+## Airflow 2.8.1
+
+Astro Runtime 10.2.0 includes same-day support for Apache Airflow 2.8.1. Airflow 2.8.1 contains a number of bug fixes including:
+
+- Fix scheduler exiting with code 0 on exceptions ([#36880](https://github.com/apache/airflow/pull/36800))
+- Fix Callback exception when a removed task is the last one in the task instance list ([#36693](https://github.com/apache/airflow/pull/36693))
+
+For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-1-2024-01-19).
+
 ## Astro Runtime 10.1.0
 
 - Release date: January 10, 2024
