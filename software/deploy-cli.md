@@ -100,7 +100,7 @@ For more information about what gets built into your image, read [Customize your
 
 DAG-only deploys are the fastest way to deploy code to Astronomer Software. They are recommended if you only need to deploy changes made to the `dags` directory of your Astro project.
 
-DAG-only deploys are enabled by default on all Deployments on Astronomer Software. When they are enabled, you must still do a full project deploy when you make a change to any file in your Astro project that is not in the `dags` directory, or when you [upgrade Astro Runtime](manage-airflow-versions.md).
+When this feature is enabled, you must still do a full project deploy when you make a change to any file in your Astro project that is not in the `dags` directory, or when you [upgrade Astro Runtime](manage-airflow-versions.md).
 
 DAG-only deploys have the following benefits:
 
