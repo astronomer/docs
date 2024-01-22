@@ -80,6 +80,7 @@ module.exports = {
         items: [
           'configure-deployment',
           'environment-variables',
+          'customize-resource-usage'
           ],
         },
         {

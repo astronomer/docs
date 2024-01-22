@@ -1,4 +1,6 @@
-# This file contains non-secret configurations.
+# This is a reference configuration file that contains source code from Astronomer's private Houston API repository.
+# It is maintained by Astronomer's documentation team and should be used as a reference to help you configure
+# the `astronomer.houston.config` section of your `config.yaml` file on Astronomer Software.
 
 # API webserver configuration.
 webserver:
@@ -607,6 +609,9 @@ deployments:
   # Enable git sync dag deployment
   gitSyncDagDeployment: false
 
+  # Enable Dag-only deployment
+  dagOnlyDeployment: false
+
   # Enable astro runtime image type
   astroRuntimeEnabled: true
 
@@ -784,6 +789,9 @@ deployments:
         - pgbouncer
         - triggerer
       defaultExtraAu: 0
+      defaultExtraCapacity:
+        cpu: 0
+        memory: 0
     - name: CeleryExecutor
       enabled: true
       components:
@@ -796,6 +804,9 @@ deployments:
         - redis
         - triggerer
       defaultExtraAu: 0
+      defaultExtraCapacity:
+        cpu: 0
+        memory: 0
     - name: KubernetesExecutor
       enabled: true
       components:
@@ -805,6 +816,9 @@ deployments:
         - pgbouncer
         - triggerer
       defaultExtraAu: 10
+      defaultExtraCapacity:
+        cpu: 1000
+        memory: 3840
 
   defaultDistribution: buster
 
