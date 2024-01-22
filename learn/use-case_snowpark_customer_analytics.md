@@ -26,7 +26,7 @@ This workflow includes the following processes and presents them in a [Streamlit
 - Extract, transform, and load with [Snowpark Python provider for Airflow](https://github.com/astronomer/astro-provider-snowflake)
 - Ingest with Astronomer's [python SDK for Airflow](https://github.com/astronomer/astro-sdk)
 - Audio file transcription with [OpenAI Whisper](https://github.com/openai/whisper)
-- Natural language embeddings with [OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings) and the [Weaviate provider for Airflow](https://github.com/astronomer/airflow-provider-weaviate)
+- Natural language embeddings with [OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings) and the [Weaviate provider for Airflow](https://registry.astronomer.io/providers/apache-airflow-providers-weaviate/versions/latest)
 - Vector search with [Weaviate](https://weaviate.io/)
 - Sentiment classification with [LightGBM](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html)  
 - ML model management with [Snowflake ML](https://docs.snowflake.com/LIMITEDACCESS/snowflake-ml-modeling)
