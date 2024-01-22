@@ -57,7 +57,7 @@ When Astronomer identifies a significant bug in Astro Runtime, a fix is backport
 
 When Astronomer identifies a significant security vulnerability in Astro Runtime, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
 
-Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
+Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions.
 
 ### Security scan results on Quay.io
 
@@ -81,7 +81,7 @@ The following table contains the exact lifecycle for each published version of A
 | [5.0.x](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-500) | 2.3.0-2.3.4            | April 30, 2022     | December 2022           |
 | [6.0.x](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-600) | 2.4.0-2.4.2            | September 19, 2022 | March 2024              |
 
-### Long-term support (LTS) releases 
+### Long-term support (LTS) releases
 
 | Runtime Version                                     | Apache Airflow version | Release Date       | End of Maintenance Date |
 | --------------------------------------------------- | ---------------------- | ------------------ | ----------------------- |
