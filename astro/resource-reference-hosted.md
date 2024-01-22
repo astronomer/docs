@@ -34,8 +34,8 @@ If you're on your organization's network and can't access Astro, make a request 
 - `https://auth.astronomer.io/`
 - `https://updates.astronomer.io/`
 - `https://install.astronomer.io/`
-- `https://astro-<your-org>.datakin.com/`
-- `https://<your-org>.astronomer.run/`
+- `https://astro-<organization-short-name>.datakin.com/`
+- `https://<organization-short-name>.astronomer.run/`
 
 ## Deployment resources
 

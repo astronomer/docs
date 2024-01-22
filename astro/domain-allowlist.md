@@ -1,13 +1,11 @@
 ---
-sidebar_label: "Allowlist domains"
-title: "Add domains to your allowlist"
+sidebar_label: "Allowlist Astro domains"
+title: "Add Astro domains to your network's allowlist"
 id: allowlist-domains
-description: List of domains to add to your organization's network allowlist.
+description: A list of Astro domains to add to your organization's network allowlist.
 ---
 
-## Add domains to allowlist
-
-If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+To use Astro in a network that requires you to allowlist new domains, make a request to allowlist the following domains on your network:
 
 - `https://cloud.astronomer.io/`
 - `https://api.astronomer.io/`
@@ -15,5 +13,7 @@ If you're on your organization's network and can't access Astro, make a request 
 - `https://auth.astronomer.io/`
 - `https://updates.astronomer.io/`
 - `https://install.astronomer.io/`
-- `https://astro-<your-org>.datakin.com/`
-- `https://<your-org>.astronomer.run/`
+- `https://astro-<organization-short-name>.datakin.com/`
+- `https://<organization-short-name>.astronomer.run/`
+
+To locate the value for `<organization-short-name>` in the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Copy the value listed under **Organization Short Name**.
