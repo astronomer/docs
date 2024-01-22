@@ -40,6 +40,7 @@ Release date: January 19, 2024
 - Fixed the following vulnerabilities:
 
     - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
     - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
 
 ## 0.33.2 
