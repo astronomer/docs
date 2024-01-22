@@ -333,6 +333,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        "allowlist-domains",
         "feature-previews",
         {
           type: "category",
