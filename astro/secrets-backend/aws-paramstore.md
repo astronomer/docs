@@ -29,44 +29,48 @@ In this step, you add two environment variables that define the type of secrets 
 - `AIRFLOW__SECRETS__BACKEND` defines the type of secrets backend you want to use and the Airflow provider package required to use it.
 - `AIRFLOW_SECRETS_BACKEND_KWARGS` specifies the values needed for Airflow to connect to your secrets backend tool.
 
-1. Add the following environment variables to your Astro project's `.env` file:
+1. Add the following environment variables to your Astro project's Dockerfile:
 
-    ```text
+    ```dockerfile
     ENV AIRFLOW__SECRETS__BACKEND="airflow.providers.amazon.aws.secrets.systems_manager.SystemsManagerParameterStoreBackend"
     ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}'
     ```
 
+    :::tip
+
+    You can also choose to add the configuration variables to your `.env` file instead of your Dockerfile. Instead of using the variable format, `ENV <environment-variable-name>`, you just declare `<environment-variable-name>`. For example, instead of `ENV AIRFLOW_SECRETS_BACKEND`, you use `AIRFLOW_SECRETS_BACKEND`.
+
+    :::
+
 2. (Optional) Run a DAG locally  using `Variable.get("<your-variable-key>")` to check that your variables are accessible.
 
-::: tip Assign an access role to Airflow
+## Step 3: (Optional) Assign an access role to Airflow
 
 If you manage permissions using [roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerole), you can specify a role that Airflow assumes to read, write, and delete secrets in your secrets backend. Specify the role's ARN using `role_arn` in `AIRFLOW__SECRETS__BACKEND_KWARGS` as shown in the following example:
 
-```text
+```dockerfile
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables", "role_arn": "arn:aws:iam::############:role/Airflow_ParameterStoreRole"}'
 ```
 
-:::
+## Step 4: Add AWS access credentials
 
-## Step 3: Add AWS access credentials
-
-After defining the secrets backend and the arguments required for Airflow to use it, you need to authorize your Deployment to access it.
+After defining the secrets backend and the arguments required for Airflow to use it, you need to authorize your local Deployment to access it.
 
 1. Retrieve the following values from [AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html):
 
-    - `AWS_ACCESS_KEY_ID`
-    - `AWS_SECRET_ACCESS_KEY`
-    - `AWS_DEFAULT_REGION`
+    - Access Key ID for your `AWS_ACCESS_KEY_ID`
+    - The secret value for your access key `AWS_SECRET_ACCESS_KEY`
+    - The [default region](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html) to use for your secrets backend for `AWS_DEFAULT_REGION`
 
-2. Add your secrets backend access credentials to your Astro project's `.env` file:
+2. Add your secrets backend access credentials to your Astro project's Dockerfile:
 
-    ```text
+    ```dockerfile
     ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
     ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
     ENV AWS_DEFAULT_REGION=$AWS_REGION
     ```
 
-## Step 4: Deploy environment variables to Astro
+## Step 5: Deploy environment variables to Astro
 
 1. Run the following commands to export your secrets backend configurations as environment variables to Astro.
 
@@ -76,4 +80,4 @@ After defining the secrets backend and the arguments required for Airflow to use
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}' --secret
     ```
 
-2. Remove the environment variables from your `.env` file or store your `.env` file in a safe location, where you won't accidentally push to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
+2. Remove the environment variables from your Dockerfile or store your Dockerfile in a safe location, where you won't accidentally push to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
