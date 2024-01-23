@@ -169,7 +169,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 
 ### Configure additional routes for a VPC connection
 
-To create additional routes for existing VPC connections: 
+Your initial VPC connection connects Astro to your VPC through a primary VPC block. You can create additional routes for secondary CIDR blocks to connect Astro to other data services or systems within the external VPC.
 
 1. Open the **Routes** tab, then click **+ Route**.
 
