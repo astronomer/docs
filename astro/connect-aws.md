@@ -83,13 +83,12 @@ Self-service VPC configuration on Astro Hosted is in [Public Preview](feature-pr
 ### Prerequisites
 
 - An external VPC on AWS
-- Organization Owner permissions
+- [Organization Owner](user-permissions.md#organization-roles) permissions
 
 ### Setup
 
 To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
-To create a VPC peering connection between an Astro VPC and an AWS VPC, you must create a temporary assumable role. The Astro AWS account will assume this role to initiate a VPC peering connection.
 
 1. Open the AWS console of the AWS account with the external VPC and copy the following:
 
@@ -122,9 +121,9 @@ Astro might show additional information in your connection status if it has an i
 
 - **Pending** (Without **Complete Activation**): Astro is sending the peering request to the external VPC. Wait 1-2 minutes for request to be created and sent.
 - **Pending** (With **Complete Activation**): The peering connection request has been created and sent. Click **Complete Activation** to finish the setup.
-- **Active** = The peering connection was successfully created and accepted.
-- **Failed** = The peering connection request was rejected. Delete the failed connection and retry using a new connection configuration. If you don't delete the failed connection, Astro will retry creating the peering request whenever you create a new VPC connection.
-- **Not Found** = Astro failed to create the peering request. Wait 5 minutes for Astro to retry. If the status hasn't changed after 5 minutes, delete the connection and retry using a new connection configuration.
+- **Active**: The peering connection was successfully created and accepted.
+- **Failed**: The peering connection request was rejected. Delete the failed connection and retry using a new connection configuration. If you don't delete the failed connection, Astro will retry creating the peering request whenever you create a new VPC connection.
+- **Not Found**: Astro failed to create the peering request. Wait 5 minutes for Astro to retry. If the status hasn't changed after 5 minutes, delete the connection and retry using a new connection configuration.
 
 Note that a VPC connection can be listed as **Active** even when it has an incorrectly configured CIDR block. To reconfigure your CIDR block without deleting your connection, delete the route that was generated when you configured the connection and create a new route with the correct CIDR block.
 
