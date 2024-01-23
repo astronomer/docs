@@ -89,7 +89,6 @@ Self-service VPC configuration on Astro Hosted is in [Public Preview](feature-pr
 
 To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
-
 1. Open the AWS console of the AWS account with the external VPC and copy the following:
 
     - AWS account ID
@@ -177,10 +176,10 @@ To create additional routes for existing VPC connections:
 2. Configure the following details for your route:
 
     - **Route ID**: Provide a name for the route. 
-    - **Destination**: Enter the CIDR block of the external VPC.
+    - **Destination**: Enter a CIDR block or specific subnets of the external VPC.
     - **Target**: Select the VPC peering connection you configured. 
 
-3. Click **Create Route**, then wait for the route status to switch from **Pending** to **Active**. 
+3. Click **Create Route**, then wait a few minutes for the route to be created.
 
 #### DNS considerations for VPC peering
 
