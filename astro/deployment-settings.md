@@ -49,7 +49,7 @@ Deployment details define how users can view and interact with your Deployment. 
 
 ### Configure Deployment contact emails
 
-Configure a contact email to get proactive alerts directly from Astronomer support. Astronomer support uses contact emails to notify recipients in case there's an issue with the infrastructure for your Deployment, such as a problem with your scheduler or worker components. 
+Configure a contact email to get proactive alerts directly from Astronomer support. Astronomer support uses contact emails to notify recipients in case there's an issue with the infrastructure for your Deployment, such as a problem with your scheduler or worker components.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -150,7 +150,7 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
 
      For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
-  
+
      :::warning Astro Hosted
 
      For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
@@ -188,6 +188,16 @@ The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/co
 Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can provision the scheduler with varying amounts of CPU and memory.
 
 Unlike workers, schedulers do not autoscale. The resources you set for them are the resources you have regardless of usage. For more information about how scheduler configuration affects resources usage, see [Pricing](https://astronomer.io/pricing).
+
+#### Scheduler size
+
+Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes for Astro Hosted:
+
+| Scheduler size | vCPU | Memory |
+| -------------- | ---- | ------ |
+| Small          | 1    | 2G     |
+| Medium         | 2    | 4G     |
+| Large          | 4    | 8G     |
 
 #### Update scheduler size
 
@@ -261,7 +271,7 @@ Use Deployment hibernation to ensure that:
 
 - You only pay for the resources that you need, when you need them.
 - You don't have to delete a Deployment in order to avoid the cost of the Deployment.
-- You don't have to recreate development environments and re-enter Deployment configurations. 
+- You don't have to recreate development environments and re-enter Deployment configurations.
 
 #### Create a hibernation schedule
 
@@ -329,11 +339,11 @@ If you need to run a task or DAG on a Deployment that is currently in hibernatio
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake up from Hibernation**.
 3. Select one of the following options for how you want your Deployment to wake up:
-	
-    - **Wake until further notice**: Your Deployment wakes up immediately for an indefinite period and ignores any configured hibernation schedules. 
-    - **Wake until set time and date**: Specify a time that the Deployment should go back into hibernation after waking up. 
+
+    - **Wake until further notice**: Your Deployment wakes up immediately for an indefinite period and ignores any configured hibernation schedules.
+    - **Wake until set time and date**: Specify a time that the Deployment should go back into hibernation after waking up.
     - **Remove override and return to normal schedule**: The Deployment returns to following your configured hibernation schedules.
-	
+
 4. Click **Confirm**.
 
 ## See also

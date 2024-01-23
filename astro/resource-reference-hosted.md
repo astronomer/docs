@@ -41,16 +41,6 @@ If you're on your organization's network and can't access Astro, make a request 
 
 Astro supports Deployments with varying levels of resource usage.
 
-### Scheduler
-
-Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes:
-
-| Scheduler size | vCPU | Memory |
-| -------------- | ---- | ------ |
-| Small          | 1    | 2G     |
-| Medium         | 2    | 4G     |
-| Large          | 4    | 8G     |
-
 ### Worker type
 
 Each Deployment worker queue has a _worker type_ that determines how many resources are available to your Airflow workers for running tasks. A worker type is a virtualized instance of CPU and memory on your cluster that is specific to the Astro platform. The underlying node instance type running your worker can vary based on how Astro optimizes resource usage on your cluster.

@@ -351,3 +351,4 @@
 /astro/manage-hybrid-clusters#authorize-workspaces-to-a-cluster /astro/authorize-workspaces-to-a-cluster 301
 /astro/deployment-settings#transfer-a-deployment-to-another-workspace /astro/transfer-a-deployment 301
 runtime-image-architecture#default-environment-variables /astro/platform-variables.md#default-runtime-environment-variables 301
+/astro/resource-reference-hosted#scheduler-size /astro/deployment-settings#scheduler-size 301
