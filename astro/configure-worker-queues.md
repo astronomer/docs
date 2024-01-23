@@ -44,7 +44,7 @@ You can configure each worker queue on Astro with the following settings:
 - **Min # Workers / Max # Workers**: The minimum and maximum number of workers that can run at a time. The number of workers autoscales based on **Concurrency** and the current number of tasks in a `queued` or `running` state.
 - **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information, see [Worker type](#worker-type).
 
-:::info Alternative Astro Hybrid setup
+### Hybrid worker type setup
 
 On Astro Hybrid clusters, worker type is defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on a Hybrid AWS cluster hosted on your cloud. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
 
@@ -58,9 +58,7 @@ Your Organization can enable up to 10 additional different worker types for each
 
 For more information on requesting cluster changes, see [Manage Hybrid clusters](manage-hybrid-clusters.md).
 
-:::
-
-## Worker type
+### Hosted worker types
 
 Each Deployment worker queue has a _worker type_ that determines how many resources are available to your Airflow workers for running tasks. A worker type is a virtualized instance of CPU and memory on your cluster that is specific to the Astro platform. The underlying node instance type running your worker can vary based on how Astro optimizes resource usage on your cluster.
 
