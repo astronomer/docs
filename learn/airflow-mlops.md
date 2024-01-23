@@ -10,6 +10,7 @@ id: airflow-mlops
 In this guide you learn:
 
 - How Airflow fits into the MLOps landscape.
+- How Airflow can be used for large language model operations (LLMOps).
 - How Airflow can help you implement best practices for different MLOps components.
 - Which Airflow features and integrations are especially useful for MLOps.
 - Where to find additional resources and reference implementations on using Airflow for MLOps.
@@ -28,10 +29,12 @@ Ready to get started? Check out the recommended resources showcasing machine lea
 
 To get the most benefits from this guide, you need an understanding of:
 
-- The basics of [Machine Learning](https://mlu-explain.github.io/).
+- The basics of [Machine Learning](https://www.coursera.org/specializations/machine-learning-introduction).
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 
 ## Why use Airflow for MLOps?
+
+**Machine learning operations** (MLOps) encompasses all patterns, tools and best practices related to running machine learning models in production.
 
 Apache Airflow sits at the heart of the modern MLOps stack. Because it is tool agnostic, Airflow can orchestrate all actions in any MLOps tool that has an API. Combined with already being the de-facto standard for orchestrating data pipelines, Airflow is the perfect tool for data engineers and machine learning engineers to standardize their workflows and collaborate on pipelines.
 
@@ -45,6 +48,7 @@ The benefits of using Airflow for MLOps are:
 - **Ready for day 2 Ops**: Airflow is a mature orchestrator, coming with built-in functionality such as [automatic retries](rerunning-dags.md#automatically-retry-tasks), complex [dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) logic, as well as the option to make pipelines [dynamic](dynamic-tasks.md).
 - **Integrations**: Airflow has a large ecosystem of [integrations](https://registry.astronomer.io/providers), including many popular [MLOps tools](#airflow-integrations-for-mlops).
 - **Shared platform**: Both data engineers and ML engineers use Airflow, which allows teams to create direct dependencies between their pipelines, such as using [Airflow Datasets](airflow-datasets.md).
+- **Use existing expertise**: Many organizations are already using Apache Airflow for their data engineering workflows and have developed best practices and custom tooling around it. This means that data engineers and ML engineers alike can build upon existing processes and tools to orchestrate and monitor ML pipelines.
 
 ### Airflow for LLMOps
 
@@ -60,10 +64,18 @@ The three main techniques for LLMOps are:
 
 MLOps describes different patterns in how organizations can productionize machine learning models. [Gift and Deza (2021)](https://www.oreilly.com/library/view/practical-mlops/9781098103002/) coined the _Rule of 25%_ for MLOps, suggesting that MLOps best practices can be divided into four components:
 
+- 25% Business
 - 25% DevOps
 - 25% Data (Engineering)
 - 25% Models
-- 25% Business
+
+### Business
+
+The first component of MLOps is to make sure there is strategic aligment with all stakeholders. This component will vary widely depending on your organization and use case and can include:
+
+- **Business strategy**: Defining what ML is used for in an organization and what trade-offs are acceptable. Often, models can be optimized for different metrics, for example high recall or high precision, and domain experts are needed to determine the right metrics and model strategy. 
+- **Model governance**: Creating and following regulations for how your organization uses machine learning. This often depends on relevant regulations like GDPR or HIPAA. Airflow has a built-in integration option with [Open Lineage](airflow-openlineage.md), the open-source standard for tracking data lineage, which is a key component of model governance.
+- **Experimentation**: It is common to perform exploratory data analysis and test potential ML applications on small subsets of data in a notebook environment before moving to production. Tools like [Jupyter notebooks](https://jupyter.org/) are widely used and run Python code you can later convert to tasks in Airflow DAGs.
 
 ### DevOps for MLOps
 
@@ -127,13 +139,6 @@ In practice, following modern model operations patterns when using Airflow for M
 
 ![Diagram showing different Airflow DAGs relating to model operations in an MLOps pipeline](/img/guides/airflow-mlops_ml_dags.png)
 
-### Business
-
-The final component of MLOps is the business side. This component will vary widely depending on your organization and use case and can include:
-
-- **Business strategy**: Defining what ML is used for in an organization and what trade-offs are acceptable. Often, models can be optimized for different metrics, for example high recall or high precision, and domain experts are needed to determine the right metrics and model strategy. 
-- **Model governance**: Creating and following regulations for how your organization uses machine learning. This often depends on relevant regulations like GDPR or HIPAA. Airflow has a built-in integration option with [Open Lineage](airflow-openlineage.md), the open-source standard for tracking data lineage, which is a key component of model governance.
-
 ## How Airflow addresses MLOps challenges
 
 When using Apache Airflow for MLOps, there are three main patterns you can follow:
@@ -161,6 +166,10 @@ A specific set of Airflow features can help you implement MLOps best practices:
 - [Branching](airflow-branch-operator.md): Airflow allows you to branch your DAG based on the outcome of a task. You can use this to create different paths in your DAG based on the outcome of a task. For example, you can branch your DAG based on the performance of a model on a test set and only deploy the model if it performs above a certain threshold.
 
     ![DAG with a branching task deciding whether or not a model is retrained and redeployed.](/img/guides/airflow-mlops_branching.png)
+
+- [Alerts and Notifications](error-notifications-in-airflow.md): Airflow has a wide variety of options to alert you of events in your pipelines, such as DAG or task failures. It is a best practice to set up alerts for critical events in your ML pipelines, such as a drop in model performance or a data quality check failure. Astronomer customers can use [Astro Alerts](https://docs.astronomer.io/astro/alerts).
+
+    ![Screenshot of an Astro alert in a Slack channel.](/img/guides/airflow-mlops_alerts.png)
 
 - [Automatic retries](rerunning-dags.md#automatically-retry-tasks): Airflow allows you to configure tasks to automatically retry if they fail according to custom set delays. This feature is critical to protect your pipeline against outages of external tools or rate limits and can be configured at the global, DAG, or the individual task level.
 
