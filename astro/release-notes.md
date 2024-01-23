@@ -21,7 +21,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## January 23, 2024
+## January 24, 2024
 
 ### Self-service VPC configuration for AWS 
 
