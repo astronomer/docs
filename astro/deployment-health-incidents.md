@@ -39,7 +39,7 @@ Astro automatically monitors your Deployments and sends messages when your Deplo
 
 ![A Deployment Health incident message appearing after a user hovers over the Deployment health status](/img/docs/incident-unfurl.png)
 
-The following table contains all types of Deployment incidents. Use each of the linked topics to resolve any incidents that occur in your own Deployments. 
+The following table contains all types of Deployment incidents. Use each of the linked topics to resolve any incidents that occur in your own Deployments.
 
 | Incident name                           | Description                                                                                        |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------- |
@@ -53,15 +53,15 @@ Use the following topics to address each of these incidents.
 
 ### Tasks Stuck in Queued
 
-There are tasks stuck in queued which are waiting to be assigned to a worker. This can happen when workers aren't properly scaling or are experiencing issues. 
+There are tasks stuck in queued which are waiting to be assigned to a worker. This can happen when workers aren't properly scaling or are experiencing issues.
 
-This type of incident requires no initial user action. Instead, Astronomer Support receives a notification, and you will receive an email from Astronomer Support if this issue can't be resolved. Ensure that you [configured a Deployment contact email](deployment-settings.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
+This type of incident requires no initial user action. Instead, Astronomer Support receives a notification, and you will receive an email from Astronomer Support if this issue can't be resolved. Ensure that you [configured a Deployment contact email](deployment-details.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
 
-### Scheduler Heartbeat Not Found 
+### Scheduler Heartbeat Not Found
 
-This could be a sign that the scheduler is down. Tasks will keep running, but new tasks will not be scheduled. 
+This could be a sign that the scheduler is down. Tasks will keep running, but new tasks will not be scheduled.
 
-If you receive this incident notification, Astronomer Support has already been notified and no action is required from you. Ensure that you [configured a Deployment contact email](deployment-settings.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
+If you receive this incident notification, Astronomer Support has already been notified and no action is required from you. Ensure that you [configured a Deployment contact email](deployment-details.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
 
 ### Airflow Database Storage Unusually High
 

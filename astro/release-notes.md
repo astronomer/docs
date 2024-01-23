@@ -43,11 +43,11 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## December 20, 2023
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where creating an alert for a DAG through the Astro API would apply the alert to the incorrect Deployment.
 - Fixed an issue where Deployment worker Pods could crash when running the Kubernetes executor.
-- Fixed an issue where Deployment API key expiration dates were not applied correctly if you configured multiple API keys at once. 
+- Fixed an issue where Deployment API key expiration dates were not applied correctly if you configured multiple API keys at once.
 - Fixed an issue where logging features could be disrupted if you set `AZURE_CLIENT_ID `as an environment variable. Note that this fix applies only to Astro Runtime 10 and later.
 
 ## December 12, 2023
@@ -90,7 +90,7 @@ Astro is now available as an Azure Native ISV Service. If your team is consideri
 
 See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
-### Create Airflow connections in the Cloud UI and link them to Deployments 
+### Create Airflow connections in the Cloud UI and link them to Deployments
 
 You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
 
@@ -683,7 +683,7 @@ See [Documentation refactor for Astro Hybrid](#documentation-refactor-for-astro-
 
 One of the biggest risks of running the Kubernetes executor or KubernetesPodOperator is that your tasks can accidentally request more resources than expected, which can drive up costs. To limit this risk, you can now configure default and maximum Pod resources from the Cloud UI. If a task tries to request Pod resources that are more than your configured limits, the task fails.
 
-See [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources) for setup steps.
+See [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources) for setup steps.
 
 ### Documentation refactor for Astro Hybrid
 
@@ -1334,7 +1334,7 @@ To learn more, see [Export Airflow metrics to Datadog](deployment-metrics.md#exp
 
 - The Cloud UI now automatically ensures that worker queue names are valid as you type in real time.
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
-- You can now configure [worker queues](deployment-settings.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
+- You can now configure [worker queues](deployment-resources.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
 ### Bug fixes
 
@@ -1384,7 +1384,7 @@ Astro's worker sizing enables a few benefits:
 - A higher level of reliability. This worker sizing model results in less volatility and a lower frequency of cluster autoscaling events, which lowers the frequency of errors such as zombie tasks and missing task logs.
 - The legacy **AU** unit is no longer applicable in the context of the worker. You only have to think about CPU, memory, and worker type.
 
-Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](deployment-settings.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#worker-node-types), [GCP](resource-reference-gcp-hybrid.md#worker-node-types), and [Azure](resource-reference-azure-hybrid.md#worker-node-types) resource references.
+Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](deployment-resources.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#worker-node-types), [GCP](resource-reference-gcp-hybrid.md#worker-node-types), and [Azure](resource-reference-azure-hybrid.md#worker-node-types) resource references.
 
 ### New Maximum Tasks per Worker setting
 
