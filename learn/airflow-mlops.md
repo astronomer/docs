@@ -44,7 +44,7 @@ The benefits of using Airflow for MLOps are:
 - **Data agnostic**: Airflow is data agnostic, which means it can be used to orchestrate any data pipeline, regardless of the data format or storage solution. You can plug in any new data storage, such as the latest vector database or your favorite RDBMS, with minimal effort.
 - **Ready for day 2 Ops**: Airflow is a mature orchestrator, coming with built-in functionality such as [automatic retries](rerunning-dags.md#automatically-retry-tasks), complex [dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) logic, as well as the option to make pipelines [dynamic](dynamic-tasks.md).
 - **Integrations**: Airflow has a large ecosystem of [integrations](https://registry.astronomer.io/providers), including many popular [MLOps tools](#airflow-integrations-for-mlops).
-- **Shared platform**: Airflow is used by both data engineers and ML engineers, which allows teams to create direct dependencies between their pipelines, for example by using [Airflow Datasets](airflow-datasets.md).
+- **Shared platform**: Both data engineers and ML engineers use Airflow, which allows teams to create direct dependencies between their pipelines, such as using [Airflow Datasets](airflow-datasets.md).
 
 ### Airflow for LLMOps
 
@@ -111,7 +111,7 @@ In practice, following modern data engineering patterns when using Airflow for M
 
 After you establish strong DevOps and data engineering foundations, you can start to implement model operations.
 
-With Airflow you can use your ML tools and compute locations of choice. Some organizations choose to use external compute for all of their heavy workloads, for example:
+With Airflow you can use the ML tools and compute locations of your choice. Some organizations choose to use external compute for all of their heavy workloads, for example:
 
 - **External Kubernetes clusters**: with the [KubernetesPodOperator](kubepod-operator.md) (and its decorator version `@task.kubernetes`).
 - **Databricks**: with the [Astro Databricks provider](https://github.com/astronomer/astro-provider-databricks) and [Databricks Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-databricks/versions/latest).
@@ -138,7 +138,7 @@ The final component of MLOps is the business side. This component will vary wide
 
 When using Apache Airflow for MLOps, there are three main patterns you can follow:
 
-- Using Apache Airflow to orchestrate actions in other MLOps tools. Airflow is a tool agnostic orchestrator, which means it can also orchestrate all actions in ML specific tools like [MLFlow](airflow-mlflow.md) or [AWS SageMaker](airflow-sagemaker.md). 
+- Using Apache Airflow to orchestrate actions in other MLOps tools. Airflow is a tool-agnostic orchestrator, which means it can also orchestrate all actions in ML specific tools like [MLFlow](airflow-mlflow.md) or [AWS SageMaker](airflow-sagemaker.md). 
 - Combine orchestration of actions in other tools with ML operations running within Airflow. For example, you can create vector embeddings in a Python function in Airflow and then use these embeddings to train a model in [Google Datalab](https://cloud.google.com/monitoring/datalab/set-up-datalab). Modules like the [`@task.kubernetes`](kubepod-operator.md#use-the-taskkubernetes-decorator) or [`@task.external_python_operator`](external-python-operator) make it easy to run any Python code in isolation with optimized environments and resources.
 - Run all your MLOps using Python modules inside Airflow tasks. Since Airflow can run any Python code and [scale indefinitely](airflow-scaling-workers.md), you can use it as an all-purpose MLOps tool.
 
