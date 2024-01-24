@@ -23,7 +23,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## January 24, 2024
 
-### Self-service VPC Peering and Route Management for AWS 
+### Self-service VPC peering and route management for AWS 
 
 <HostedBadge/>
 
