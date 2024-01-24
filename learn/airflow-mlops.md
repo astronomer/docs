@@ -50,7 +50,7 @@ The benefits of using Airflow for MLOps are:
 - **Shared platform**: Both data engineers and ML engineers use Airflow, which allows teams to create direct dependencies between their pipelines, such as using [Airflow Datasets](airflow-datasets.md).
 - **Use existing expertise**: Many organizations are already using Apache Airflow for their data engineering workflows and have developed best practices and custom tooling around it. This means that data engineers and ML engineers alike can build upon existing processes and tools to orchestrate and monitor ML pipelines.
 
-### Airflow for LLMOps
+## Why use Airflow for LLMOps?
 
 **Large Language Model Operations** (LLMOps) is a subset of MLOps that describes interactions with large language models (LLMs). In contrast to traditional ML models, LLMs are often too large to be trained from scratch and LLMOps techniques instead revolve around adapting existing LLMs to new use cases.
 
