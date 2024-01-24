@@ -180,7 +180,7 @@ With Airflow, you can orchestrate actions in any MLOps tool that has an API. Man
 - [AWS SageMaker](airflow-sagemaker.md). A tool to train and deploy machine learning models on AWS.
 - [Databricks](airflow-databricks.md). A tool to run Apache Spark workloads.
 - [Cohere](airflow-cohere.md). A tool to train and deploy LLMs.
-- [OpenAI](airflow-openai.md). A tool to train and deploy large models, including `GPT4` and `DALLE3`.
+- [OpenAI](airflow-openai.md). A tool to train and deploy large models, including `GPT-4` and `DALL·E 3`.
 - [MLFlow](airflow-mlflow.md). An open source tool to track and version data preprocessing and machine learning models.
 - [Weights & Biases](airflow-weights-and-biases.md). A tool to track and visualize machine learning experiments.
 - [Weaviate](airflow-weaviate.md). An open source vector database. 
