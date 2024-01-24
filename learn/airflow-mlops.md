@@ -188,6 +188,7 @@ With Airflow, you can orchestrate actions in any MLOps tool that has an API. Man
 - [Pgvector](airflow-pgvector.md). A extension enabling vector operations in PostgreSQL.
 - [Pinecone](airflow-pinecone.md). A vector proprietary database.
 - (Beta) [Snowpark](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest). A interface to run non-SQL code in Snowflake, includes the machine learning library [Snowpark ML](https://docs.snowflake.com/developer-guide/snowpark-ml/index).
+- [Azure ML](https://azure.microsoft.com/en-us/free/machine-learning). A tool to train and deploy machine learning models on Azure.
 
 Additionally, the provider packages for the main cloud providers include modules to interact with their ML tools and compute options:
 
