@@ -18,6 +18,17 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+:::info 
+
+Because Astronomer has separate [maintenance life cycles](runtime-version-lifecycle-policy.md) for each major version of Astro Runtime, the same change can be introduced multiple times across major versions, resulting in multiple release notes.
+
+If you're upgrading to receive a specific change, ensure the release note for the change appears either:
+
+- Within your target major version.
+- In any minor or patch version that was released before the first release (`X.0.0`) of your target major version. For example, a change in Astro Runtime 9.9.0, which released January 10 2024, is not guaranteed to appear in Runtime 10.0.0, which released December 8 2023, unless there is a release note for it in a subsequent Runtime 10 patch. However, a change in Astro Runtime 9.6.0, which released November 30 2023, is guaranteed to exist in Runtime 10.0.0 even though there's no release note for it in the Runtime 10 series.
+
+:::
+
 ## Astro Runtime 10.2.0
 
 - Release date: January 19, 2024
