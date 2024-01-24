@@ -21,7 +21,7 @@ Release date: January 24, 2023
 
 ### New flag to mount secrets to Astro project image
 
-Use the new `--build-secrets` flag with the following commands to mount a secret value to your Astro project image:
+Use the new `--build-secrets` flag with the following commands to mount a secret value to an Astro project image:
 
 - `astro deploy`
 - `astro dev parse`
