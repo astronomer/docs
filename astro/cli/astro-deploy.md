@@ -113,6 +113,7 @@ When you run `astro deploy`, you'll be prompted to select from a list of all Dep
 
 | Option                    | Description                                                                        | Possible Values         |
 | ------------------------- | ---------------------------------------------------------------------------------- | ----------------------- |
+| `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
 | `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt | Any valid Deployment ID |
 | `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes           | None                    |
 | `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified         | None                    |
