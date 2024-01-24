@@ -143,7 +143,7 @@ Deploying a prebuilt Docker image allows you to:
 
 - Test a single Docker image across Deployments instead of rebuilding it each time.
 - Reduce the time it takes to deploy. If your Astro project has a number of packages that take a long time to install, it can be more efficient to build it separately.
-- Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/private-python-packages.md?tab=pypi#install-python-packages-from-private-sources).
+- Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/private-python-packages.md?tab=pypi#install-python-packages-from-a-private-pypi-index).
 
 To deploy your Astro project as a prebuilt Docker image:
 
