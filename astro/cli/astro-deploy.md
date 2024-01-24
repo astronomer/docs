@@ -52,6 +52,7 @@ astro deploy <options>
 | Option                    | Description                                                                                                                                                      | Possible Values                                                  |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt                                                                               | Any valid Deployment ID                                          |
+| `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
 | `-d`, `--dags`            | Deploy only your `dags` directory. See [DAG-only deploys](deploy-code.md#dag-only-deploys)                                                                       | None                                                             |
 | `-n`, `--deployment-name` | The name of the Deployment to deploy to. Use as an alternative to `<deployment-id>`                                                                              | Any valid Deployment name                                        |
 | `--description`           | A description for your code deploy. Descriptions appear in the Cloud UI in your Deployment's **Deploy History**                                                  | None                                                             |
@@ -112,6 +113,7 @@ When you run `astro deploy`, you'll be prompted to select from a list of all Dep
 
 | Option                    | Description                                                                        | Possible Values         |
 | ------------------------- | ---------------------------------------------------------------------------------- | ----------------------- |
+| `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
 | `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt | Any valid Deployment ID |
 | `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes           | None                    |
 | `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified         | None                    |

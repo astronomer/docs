@@ -15,6 +15,23 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: 1.21.0, 1.20.1, and 1.19.4. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
 
+## Astro CLI 1.22.0
+
+Release date: January 24, 2023
+
+### New flag to mount secrets to Astro project image
+
+Use the new `--build-secrets` flag with the following commands to mount a secret value to an Astro project image:
+
+- `astro deploy`
+- `astro dev parse`
+- `astro dev pytest`
+- `astro dev restart`
+- `astro dev start`
+- `astro dev upgrade test`
+
+This flag is equivalent to running [`docker build --secret`](https://docs.docker.com/build/building/secrets/#secret-mounts) for your Astro Runtime image build. Use this flag to simplify build steps for customizing the Astro Runtime image, for example when you need to [install Python packages from a private source](https://docs.astronomer.io/astro/cli/private-python-packages?tab=pypi#install-python-packages-from-private-sources) .
+
 ## Astro CLI 1.21.0
 
 Release date: December 4, 2023
