@@ -83,6 +83,7 @@ Self-service VPC configuration on Astro Hosted is in [Public Preview](feature-pr
 ### Prerequisites
 
 - An external VPC on AWS
+- A CIDR block for your external VPC in the RFC 1918 range
 - [Organization Owner](user-permissions.md#organization-roles) permissions
 
 ### Setup
