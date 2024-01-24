@@ -66,7 +66,7 @@ If you identify a vulnerability that results in relevant risk for your organizat
 
 - **Security vulnerabilities:** When Astronomer identifies a significant security vulnerability in Astro Runtime, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
 
-Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
+Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions.
 
 ## Astro Runtime lifecycle schedule
 
@@ -84,7 +84,7 @@ The following table contains the exact lifecycle for each published version of A
 | [7](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-700) | 2.5                    | December 3, 2022   | June 2023               |
 | [8](https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-700) | 2.6                    | April 30, 2023   | October 2023               |
 
-### Long-term support (LTS) releases 
+### Long-term support (LTS) releases
 
 | Runtime Version                                 | Apache Airflow version | Release Date       | End of Maintenance Date |
 | ----------------------------------------------- | ---------------------- | ------------------ | ----------------------- |

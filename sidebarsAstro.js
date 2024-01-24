@@ -181,6 +181,7 @@ module.exports = {
           label: "Data lineage",
           items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
+        "deployment-health-incidents",
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
@@ -332,6 +333,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        "allowlist-domains",
         "feature-previews",
         {
           type: "category",

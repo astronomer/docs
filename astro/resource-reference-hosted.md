@@ -20,15 +20,28 @@ For Astro Hybrid resource reference material, see:
 
 :::
 
-This page contains reference information for all supported Astro Hosted Deployment and cluster resource configurations. Use this information to determine whether Astro supports the type of Airflow environment you want to run. 
+This page contains reference information for all supported Astro Hosted Deployment and cluster resource configurations. Use this information to determine whether Astro supports the type of Airflow environment you want to run.
 
 If you're interested in a cloud region or resource size that's not mentioned here, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
+
+## Add domains to allowlist
+
+If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
+
+- `https://cloud.astronomer.io/`
+- `https://api.astronomer.io/`
+- `https://images.astronomer.cloud/`
+- `https://auth.astronomer.io/`
+- `https://updates.astronomer.io/`
+- `https://install.astronomer.io/`
+- `https://astro-<organization-short-name>.datakin.com/`
+- `https://<organization-short-name>.astronomer.run/`
 
 ## Deployment resources
 
 Astro supports Deployments with varying levels of resource usage.
 
-### Scheduler 
+### Scheduler
 
 Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes:
 
@@ -44,7 +57,7 @@ Each Deployment worker queue has a _worker type_ that determines how many resour
 
 Each virtualized instance of your worker type is a _worker_. Celery workers can run multiple tasks at once, while Kubernetes workers only scale up and down to run a single task at a time. For more information about configuring worker behavior, see [Worker queues](configure-worker-queues.md).
 
-The following table lists all available worker types on Astro Deployments. 
+The following table lists all available worker types on Astro Deployments.
 
 | Worker Type | vCPU | Memory | Max task concurrency |
 | ----------- | ---- | ------ | -------------------- |
@@ -54,7 +67,7 @@ The following table lists all available worker types on Astro Deployments.
 | A40         | 8    | 16GiB  | 120                  |
 | A60         | 12   | 24GiB  | 240                  |
 
-All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
+All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker.
 
 ## Standard cluster regions
 

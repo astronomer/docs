@@ -495,11 +495,6 @@ def get_relevant_articles(reworded_prompt, limit=5, certainty=0.75):
 
     client = weaviate.Client("http://weaviate:8081", auth_client_secret=my_credentials)
 
-    client = weaviate.Client(
-        url="http://weaviate:8081",
-        auth_client_secret=weaviate.AuthApiKey("adminkey"),
-    )
-
     input_text = reworded_prompt
 
     nearVector = get_embedding(input_text)
