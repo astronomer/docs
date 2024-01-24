@@ -42,7 +42,7 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
 
 ### Migrate from NATS Streaming to Jetstream
 
-[NATS Streaming](https://github.com/nats-io/nats-streaming-server?tab=readme-ov-file#warning--deprecation-notice-warning) (stan), which on Astronomer Software is responsible for scheduling deploys to Airflow, was deprecated in June 2023 and replaced by a built-in component called [Jetstream](https://docs.nats.io/nats-concepts/jetstream). Astronomer Software still uses NATS Streaming by default, but you can migrate to JetStream by setting the following configuration in your `config,yaml` file:
+[NATS Streaming](https://github.com/nats-io/nats-streaming-server?tab=readme-ov-file#warning--deprecation-notice-warning) (stan), which is responsible for scheduling deploys to Airflow on Astronomer Software, was deprecated in June 2023 and replaced by a built-in component called [Jetstream](https://docs.nats.io/nats-concepts/jetstream). Astronomer Software still uses NATS Streaming by default, but you can migrate to JetStream by setting the following configuration in your `config.yaml` file:
 
 ```yaml
 global:
@@ -58,21 +58,53 @@ global:
 
 After you apply this configuration to your platform, the stan component of Astronomer Software is disabled and all message queues will utilize JetStream.
 
+### 
+
 ### Additional improvements
 
-- You can now configure a global label that is applied to all Astronomer Software Pods.
+- You can now configure a global label that is applied to all Astronomer Software Pods. <!-- Can't relocate issue for this one-->
 - You can now filter on `release_name` when you make a `deployments()` query to the Houston API.
-- You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate.
+- You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your `config.yaml` file and apply the configuration to your cluster:
+
+    ```yaml
+    astronomer:
+      privateCaCertsAddToHost:
+        enabled: true
+        hostDirectory: /path/to/docker/certs.d
+        addToContainerd: false
+        containerdCertConfigPath: /path/to/containerd/certs.d
+        containerdConfigToml: ~
+        containerdnodeAffinitys: []
+    ```
+
 - You can now make a `createDeployment` or `upsertDeployment` query by specifying a Workspace name or label instead of a Workspace ID.
-- You now have the option to disable the `astro-cli` Pod to free up resources on your cluster.
+- You can now disable the `astro-cli` Pod to free up resources on your cluster. This Pod is typically only used in airgapped clusters that can't access `https://install.astronomer.io`. To disable the Pod, add the following configuration to your `config.yaml` file and apply the change to your cluster:
+
+    ```yaml
+    astronomer:
+      install:
+        cli-enabled: true
+    ```
+
 - You can now install Astronomer Software on Red Hat OpenShift without the need to add security context restraints (SCC) for specific services.
 - Astronomer Software now redeploys your Deployment when you switch your executor type.
 - You can now define a [storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/) for NFS-based Deployments.
 
 ### Bug fixes
 
+- The Houston API now validates `updateDeployment` queries to ensure that Deployment resource limits and requests are set correctly.
+- Fixed an issue where Deployments would occasionally not recreate the correct resources when switching from the Kubernetes executor to the Celery executor.
+- Fixed an issue where deploys could fail when using a self-signed certificate signed by a private certificate authority.
 - Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
 - Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-46233](https://nvd.nist.gov/vuln/detail/CVE-2023-46233)
+    - [GHSA-36jr-mh4h-2g58](https://github.com/advisories/GHSA-36jr-mh4h-2g58)
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)
+    - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p)
+    - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
+
 
 ## 0.33.2 
 
