@@ -64,7 +64,7 @@ The three main techniques for LLMOps are:
 
 MLOps describes different patterns in how organizations can productionize machine learning models. MLOps consists of four main components:
 
-- **BusinessOps**: the processes and activities in an organization that are needed to implement MLOps workflows.
+- **BusinessOps**: the processes and activities in an organization that are needed to deliver any outcome, including successful MLOps workflows.
 - **DevOps**: the software development (dev) and IT operations (ops) practices that are needed for the delivery of any high quality software, including machine learning based applications.
 - **DataOps**: the practices and tools surrounding data engineering and data analytics to build the foundation for machine learning implementations.
 - **ModelOps**: automated governance, management and monitoring of machine learning models in production.
