@@ -62,22 +62,21 @@ The three main techniques for LLMOps are:
 
 ## Components of MLOps
 
-MLOps describes different patterns in how organizations can productionize machine learning models. [Gift and Deza (2021)](https://www.oreilly.com/library/view/practical-mlops/9781098103002/) coined the _Rule of 25%_ for MLOps, suggesting that MLOps best practices can be divided into four components:
+MLOps describes different patterns in how organizations can productionize machine learning models. MLOps consists of four main components:
 
-- 25% Business
-- 25% DevOps
-- 25% Data (Engineering)
-- 25% Models
+- **BusinessOps**: the processes and activities in an organization that are needed to define and align on the use of machine learning.
+- **DevOps**: the software development (dev) and IT operations (ops) practices that are needed for the delivery of any high quality software, including machine learning based applications.
+- **DataOps**: the practices and tools surrounding data engineering and data analytics to build the foundation for machine learning implementations.
+- **ModelOps**: automated governance, management and monitoring of machine learning models in production.
 
-### Business
+### BusinessOps
 
 The first component of MLOps is to make sure there is strategic aligment with all stakeholders. This component will vary widely depending on your organization and use case and can include:
 
 - **Business strategy**: Defining what ML is used for in an organization and what trade-offs are acceptable. Often, models can be optimized for different metrics, for example high recall or high precision, and domain experts are needed to determine the right metrics and model strategy. 
 - **Model governance**: Creating and following regulations for how your organization uses machine learning. This often depends on relevant regulations like GDPR or HIPAA. Airflow has a built-in integration option with [Open Lineage](airflow-openlineage.md), the open-source standard for tracking data lineage, which is a key component of model governance.
-- **Experimentation**: It is common to perform exploratory data analysis and test potential ML applications on small subsets of data in a notebook environment before moving to production. Tools like [Jupyter notebooks](https://jupyter.org/) are widely used and run Python code you can later convert to tasks in Airflow DAGs.
 
-### DevOps for MLOps
+### DevOps
 
 Since you define Airflow pipelines in Python code, you can apply DevOps best practices when using Airflow. This includes:
 
@@ -95,7 +94,7 @@ In practice, following modern DevOps patterns when using Airflow for MLOps means
 
 ![Diagram showing how Airflow code and configuration is stored in a version control system and deployed to different Airflow environments.](/img/guides/airflow-mlops_devops.png)
 
-### Data Engineering for MLOps
+### DataOps
 
 There is no MLOps without data. You need to have robust data engineering workflows in place in order to confidently train, test, and deploy ML models in production. Apache Airflow has been used by millions of data engineers to create reliable best practice data pipelines, providing a strong foundation for you MLOps workflows.
 
@@ -119,7 +118,7 @@ In practice, following modern data engineering patterns when using Airflow for M
 
 ![Diagram showing an example ETL/ELT pipeline for Machine Learning.](/img/guides/airflow-mlops_de.png)
 
-### Model operations and compute considerations
+### ModelOps
 
 After you establish strong DevOps and data engineering foundations, you can start to implement model operations.
 
@@ -134,6 +133,7 @@ Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airfl
 
 In practice, following modern model operations patterns when using Airflow for MLOps means:
 
+- Performing exploratory data analysis and test potential ML applications on small subsets of data in a notebook environment before moving to production. Tools like [Jupyter notebooks](https://jupyter.org/) are widely used and run Python code you can later convert to tasks in Airflow DAGs.
 - Using Airflow to orchestrate model training, fine-tuning, testing and deployment. 
 - Having Airflow tasks monitor the performance of your model and perform automated actions such as re-training, re-deploying, or alerting if the performance drops below a certain threshold.
 
