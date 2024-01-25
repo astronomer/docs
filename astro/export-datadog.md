@@ -35,19 +35,19 @@ You can forward Airflow task logs from a Deployment to [Datadog](https://www.dat
 
   :::info
 
-  By default, the Astro Datadog integration also sends a Deployment's [Airflow metrics](deployment-metrics.md#export-airflow-metrics-to-datadog) to Datadog. To send only task logs to Datadog, add the following environment variable:
+  By default, the Astro Datadog integration also sends a Deployment's [Airflow metrics](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) to Datadog. To send only task logs to Datadog, add the following environment variable:
 
     - **Key**: `ASTRO_DATADOG_METRICS_DISABLED`
     - **Value**: `true`
 
   :::
 
-3. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
+1. (Optional) Set the following [environment variable](environment-variables.md) on your Deployment to send your logs to a specific [Datadog site](https://docs.datadoghq.com/getting_started/site/):
 
     - **Key**: `DATADOG_SITE`
     - **Value**: Your Datadog **Site Parameter**. For example, `datadoghq.com`.
    
-4. (Optional) For Astro Runtime 9.2.0 and greater, set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
+2. (Optional) For Astro Runtime 9.2.0 and greater, set the following [environment variable](environment-variables.md) on your Deployment to [add specific tags to your logs](https://docs.datadoghq.com/getting_started/tagging/):
 
     - **Key**: `ASTRO_DATADOG_TASK_LOGS_TAGS`
     - **Value**: `<tag-key-1>:<tag-value-1>,<tag-key-2>:<tag-value-2>`
@@ -67,7 +67,7 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. In the Cloud UI, select a Workspace and then select an Astro Deployment for which you want to export metrics.
-3. Create a new [environment variable](environment-variables.md#set-environment-variables-in-the-cloud-ui) in your Deployment with the Datadog API key from step 1:
+3. Create a new [environment variable](manage-env-vars.md#using-the-cloud-ui) in your Deployment with the Datadog API key from step 1:
    
    - **Key:** `DATADOG_API_KEY`
    - **Value:** `<Your-Datadog-API-key>`.
