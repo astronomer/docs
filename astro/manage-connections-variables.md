@@ -134,7 +134,7 @@ You can configure system-level environment variables both locally and on Astro. 
 #### Benefits
 
 - If you use an `.env` file for your local Airflow environment and your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables.
-- You can export environment variables from a local Airflow environment to Astro using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#environment-variables).
+- You can export environment variables from a local Airflow environment to Astro using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#from-environment-variables).
 - You can override Airflow variables set in the Airflow UI. See [Environment variable priority](environment-variables.md#environment-variable-priority)
 - You can create your connections and variables as environment variables from the Cloud UI. See [Use environment variables](manage-env-vars.md#using-the-cloud-ui).
 - Environment variables marked as **Secret** are encrypted in the Astronomer control plane. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-in-the-cloud-ui) for details.
@@ -147,7 +147,7 @@ You can configure system-level environment variables both locally and on Astro. 
 - The environment variables are defined in plain text in your `.env` file.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are not as secure or centralized compared to a [secrets backend](secrets-backend.md).
-- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [Import and export Airflow objects](import-export-connections-variables.md#environment-variables).
+- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [Import and export Airflow objects](import-export-connections-variables.md#from-environment-variables).
 
 ## Other strategies
 
