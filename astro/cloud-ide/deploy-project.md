@@ -78,7 +78,7 @@ Follow these steps to deploy to Astro whenever you merge commits to a `main` or 
 
 :::warning
 
-When the deploy workflow first runs from your repository, it automatically enables DAG-only deploys on your Deployment. DAG-only deploying is a feature that allows you to deploy your DAGs directory independently of the rest of your Astro project. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+When the deploy workflow first runs from your repository, it automatically enables DAG-only deploys on your Deployment. DAG-only deploying is a feature that allows you to deploy your DAGs directory independently of the rest of your Astro project. See [Deploy DAGs only](deploy-dags.md).
 
 :::
 

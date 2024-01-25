@@ -129,7 +129,7 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
-3. (Optional) Test your DAGs locally. See [Restart your local environment](cli/develop-project.md#restart-your-local-environment).
+3. (Optional) Test your DAGs locally. See [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 
 4. Deploy the image to Astro using the Astro CLI:
 
@@ -186,7 +186,7 @@ Ensure that this file is accessible from your Astro project. You will mount this
 
    :::info
 
-   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](/astro/runtime-version-lifecycle-policy.md#distribution).
+   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](/astro/runtime-image-architecture.md#distribution).
 
    :::
 

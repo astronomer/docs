@@ -16,7 +16,7 @@ Publicly accessible endpoints allow you to quickly connect your Astro clusters o
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-aws) to AWS in a few different ways.
 
-After you create a connection from your cluster to AWS, you might also need to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#aws).
+After you create a connection from your cluster to AWS, you might also need to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md).
 
 ## Standard and dedicated cluster support for AWS networking
 
@@ -279,4 +279,4 @@ When Astronomer support confirms that DNS forwarding was successfully implemente
 ## See Also
 
 - [Manage Airflow connections and variables](manage-connections-variables.md)
-- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#aws)
+- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md)

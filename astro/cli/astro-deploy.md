@@ -53,7 +53,7 @@ astro deploy <options>
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt                                                                               | Any valid Deployment ID                                          |
 | `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
-| `-d`, `--dags`            | Deploy only your `dags` directory. See [DAG-only deploys](deploy-code.md#dag-only-deploys)                                                                       | None                                                             |
+| `-d`, `--dags`            | Deploy only your `dags` directory. See [DAG-only deploys](deploy-dags.md)                                                                       | None                                                             |
 | `-n`, `--deployment-name` | The name of the Deployment to deploy to. Use as an alternative to `<deployment-id>`                                                                              | Any valid Deployment name                                        |
 | `--description`           | A description for your code deploy. Descriptions appear in the Cloud UI in your Deployment's **Deploy History**                                                  | None                                                             |
 | `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`.                                                                   | Any valid filepath to an `.env` file                             |
@@ -81,7 +81,7 @@ To configure the Astro CLI to use a given Deployment and directory as a default 
 astro deploy ckvvfp9tf509941drl4vela81n --save
 ```
 
-To [use a custom Docker image](release-notes.md#deploy-a-custom-docker-image-with-new---image-name-flag) from your local Docker registry to build your Astro project:
+To use a custom Docker image from your local Docker registry to build your Astro project:
 
 ```bash
 astro deploy --image-name your-custom-runtime-image

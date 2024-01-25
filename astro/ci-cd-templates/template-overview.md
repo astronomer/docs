@@ -9,7 +9,7 @@ Astronomer CI/CD templates are customizable, pre-built code samples that help yo
 
 Template types differ based on the deploy method they use and how many branches or environments they require. This document contains information about the following template types:
 
-- _DAG deploy templates_ that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) in Astro and either deploy DAGs or your entire Astro project depending on the files that you update.
+- _DAG deploy templates_ that use the [DAG-only deploy feature](deploy-dags.md) in Astro and either deploy DAGs or your entire Astro project depending on the files that you update.
 - _Image deploy templates_ that build a Docker image and push it to Astro whenever you update any file in your Astro project, including your DAG directory.
 - _Preview Deployment templates_ that automatically create and delete Deployments when you create or delete a feature branch from your main Astro project branch.
 
@@ -23,7 +23,7 @@ _DAG deploy templates_ check the changes in your Astro project and trigger eithe
 
 CI/CD templates that use the DAG deploy workflow:
 
-- Require that each Deployment have the DAG-only deploy feature enabled. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable-disable-dag-only-deploys-on-a-deployment).
+- Require that each Deployment have the DAG-only deploy feature enabled. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable-or-disable-dag-only-deploys-on-a-deployment).
 - Use a [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md). This value must be set using the `ASTRO_API_TOKEN` environment variable.
 - Install the latest version of the Astro CLI.
 - Trigger the following Astro CLI commands depending on which files were updated by the commit:

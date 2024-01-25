@@ -24,8 +24,8 @@ To configure these settings, follow the steps below.
 This file was created when you installed Astronomer using one of the following guides:
 
 * [AWS EKS Installation Guide](install-aws-standard.md#step-8-configure-your-helm-chart)
-* [GCP GKE Installation Guide](install-gcp-standard.md#step-7-configure-your-helm-chart)
-* [Azure AKS Installation Guide](install-azure-standard.md#step-7-configure-your-helm-chart)
+* [GCP GKE Installation Guide](install-gcp-standard.md#step-8-configure-your-helm-chart)
+* [Azure AKS Installation Guide](install-azure-standard.md#step-8-configure-your-helm-chart)
 
 ## Step 2: Update Key-Value Pairs
 

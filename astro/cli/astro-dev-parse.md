@@ -13,7 +13,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 :::
 
-Parse the DAGs in a locally hosted Astro project to quickly check them for errors. For more information about testing DAGs locally, read [Test your Astro project locally](cli/test-your-astro-project-locally.md#run-tests-with-the-astro-cli).
+Parse the DAGs in a locally hosted Astro project to quickly check them for errors. For more information about testing DAGs locally, read [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 
 ## Usage
 
