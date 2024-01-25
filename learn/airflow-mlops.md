@@ -5,7 +5,7 @@ description: "Learn how to use Airflow to run machine learning in production."
 id: airflow-mlops
 ---
 
-**Machine Learning Operations** (MLOps) is a broad term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns with Apache Airflow, providing tool agnostic orchestration capabilities for all steps.
+**Machine Learning Operations** (MLOps) is a broad term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns, with Apache Airflow providing tool agnostic orchestration capabilities for all steps.
 
 In this guide you learn:
 
@@ -98,7 +98,7 @@ In practice, following modern DevOps patterns when using Airflow for MLOps means
 
 ### DataOps
 
-There is no MLOps without data. You need to have robust data engineering workflows in place in order to confidently train, test, and deploy ML models in production. Apache Airflow has been used by millions of data engineers to create reliable best practice data pipelines, providing a strong foundation for you MLOps workflows.
+There is no MLOps without data. You need to have robust data engineering workflows in place in order to confidently train, test, and deploy ML models in production. Apache Airflow has been used by millions of data engineers to create reliable best practice data pipelines, providing a strong foundation for your MLOps workflows.
 
 Give special considerations to the following:
 
