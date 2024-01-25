@@ -29,7 +29,7 @@ Update the configuration for a Deployment on Astro.
 
 :::info
 
-To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment).
+To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md).
 
 :::
 

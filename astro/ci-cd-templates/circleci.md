@@ -250,11 +250,11 @@ If your Astro project requires additional build-time arguments to build an image
 
 A [DAG deploy template](template-overview#dag-deploy-templates) uses the `--dags` flag in the `astro deploy` command in the Astro CLI  to push only DAGs to your Deployment.
 
-This CI/CD pipeline deploys your DAGs to Astro when one or more files in your `dags` folder are modified. It deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+This CI/CD pipeline deploys your DAGs to Astro when one or more files in your `dags` folder are modified. It deploys the rest of your Astro project as a Docker image when other files or directories are also modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-dags.md).
 
 ### Configuration requirements
 
-For each Deployment that you use with DAG deploy templates, you must [enable DAG deploys](deploy-code.md#deploy-dags-only).
+For each Deployment that you use with DAG deploy templates, you must [enable DAG deploys](deploy-dags.md).
 
 ### Single branch implementation
 

@@ -129,7 +129,7 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
-3. (Optional) Test your DAGs locally. See [Restart your local environment](cli/develop-project.md#restart-your-local-environment).
+3. (Optional) Test your DAGs locally. See [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 
 4. Deploy the image to Astro using the Astro CLI:
 

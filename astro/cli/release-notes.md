@@ -506,7 +506,7 @@ To learn more, see [Test your Astro project locally](cli/test-your-astro-project
 
 ### Additional improvements
 
-- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-dags.md).
 - The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered in logical groupings instead of by alphabetical order.
 
 ### Bug fixes
@@ -530,7 +530,7 @@ Deploying only DAGs:
 
 When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](set-up-ci-cd.md).
+To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-dags.md). For example CI/CD workflows with this feature enabled, see [CI/CD](set-up-ci-cd.md).
 
 ### New `astro deployment inspect` command
 
