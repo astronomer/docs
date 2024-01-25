@@ -74,6 +74,63 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 :::
 
+:::warning
+
+Self-service VPC configuration on Astro Hosted is in [Public Preview](feature-previews.md#astro-feature-previews).
+
+:::
+
+### Prerequisites
+
+- An external VPC on AWS
+- A CIDR block for your external VPC in the RFC 1918 range
+- [Organization Owner](user-permissions.md#organization-roles) permissions
+
+### Setup
+
+To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
+
+1. Open the AWS console of the AWS account with the external VPC and copy the following:
+
+    - AWS account ID
+    - AWS region
+    - VPC ID of the external VPC
+    - CIDR block of the external VPC
+
+2. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+
+3. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
+
+4. Configure the following values for your VPC peering connection using the information you copied in Step 1:
+
+    - **Peering Name**: Provide a name for the VPC peering connection. 
+    - **AWS account ID**: Enter the account ID of the external VPC.
+    - **Destination VPC ID**: Enter the VPC ID.
+    - **Destination VPC region**: Enter the region of the external VPC.
+    - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC.
+
+5. Click **Create Connection**. The connection appears as **Pending**.
+6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**. 
+7. In the modal that appears, follow the instructions to accept the connection from your external VPC and create routes from the external VPC to Astro.
+
+A few minutes after you complete the instructions in the modal, the connection status changes from **Pending** to **Active**. A new default route appears in **Routes** with your configured CIDR block.
+
+:::info Troubleshooting VPC connection statuses
+
+Astro might show additional information in your connection status if it has an issue when it creates the connection. The following are all possible connection statuses.
+
+- **Pending** (Without **Complete Activation**): Astro is sending the peering request to the external VPC. Wait 1-2 minutes for request to be created and sent.
+- **Pending** (With **Complete Activation**): The peering connection request has been created and sent. Click **Complete Activation** to finish the setup.
+- **Active**: The peering connection was successfully created and accepted.
+- **Failed**: The peering connection request was rejected. Delete the failed connection and retry using a new connection configuration. If you don't delete the failed connection, Astro will retry creating the peering request whenever you create a new VPC connection.
+- **Not Found**: Astro failed to create the peering request. Wait 5 minutes for Astro to retry. If the status hasn't changed after 5 minutes, delete the connection and retry using a new connection configuration.
+
+Note that a VPC connection can be listed as **Active** even when it has an incorrectly configured CIDR block. To reconfigure your CIDR block without deleting your connection, delete the route that was generated when you configured the connection and create a new route with the correct CIDR block.
+
+:::
+
+:::info Alternative Astro Hybrid setup 
+
 To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
 To create a VPC peering connection between an Astro VPC and an AWS VPC, you must create a temporary assumable role. The Astro AWS account will assume this role to initiate a VPC peering connection.
@@ -109,12 +166,25 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 
 7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
 
+:::
+
+### Configure additional routes for a VPC connection
+
+Your initial VPC connection connects Astro to your external VPC through a primary CIDR block. To connect Astro to other data services or systems within the external VPC, you can create additional routes to secondary CIDR blocks or subnets within the primary CIDR block. You can also complete this setup if you recently configured a new service in your external VPC and want to connect it with Astro without updating your base VPC connection.
+
+1. Open the **Routes** tab, then click **+ Route**.
+
+2. Configure the following details for your route:
+
+    - **Route ID**: Provide a name for the route. 
+    - **Destination**: Enter the subnet of the service in the external VPC.
+    - **Target**: Select the VPC peering connection you configured. 
+
+3. Click **Create Route**, then wait a few minutes for the route to be created.
 
 #### DNS considerations for VPC peering
 
-To resolve DNS hostnames from your external VPC, every Astro VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
-
-If your external VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows Astro clusters to resolve the public DNS hostnames of the external VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If your external VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting on AWS. This allows Astro clusters and Deployments to resolve the public DNS hostnames of the external VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your external VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astro VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/).
 
