@@ -1111,7 +1111,7 @@ You can now configure worker queues with the following `n2` worker types on Goog
 - `n2-highcpu-8`
 - `n2-highcpu-16`
 
-For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp-hybrid.md#worker-node-size-resource-reference).
+For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types).
 
 ### Additional improvements
 

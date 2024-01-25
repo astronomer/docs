@@ -251,7 +251,7 @@ These commands can be used to manage API tokens as part of an automated workflow
 
 - You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
-- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment.
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-cicd-deploys) on a given Deployment.
 - You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted.
 
 ## Astro CLI 1.15.1
@@ -779,7 +779,7 @@ astrocloud auth login
 astro login
 ```
 
-For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade. For instructions, see [Migrate from `astrocloud` to `astro`](cli/install-cli.md#migrate-from-astrocloud-to-astro).
+For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade.
 
 :::warning Possible Breaking Change
 
@@ -835,7 +835,7 @@ Release date: April 14, 2022
 
 ### New command to create and update environment variables
 
-`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](cli/develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
+`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables via a `.env` file locally, this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
 
 For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
