@@ -58,8 +58,6 @@ global:
 
 After you apply this configuration to your platform, the stan component of Astronomer Software is disabled and all message queues will utilize JetStream.
 
-### 
-
 ### Additional improvements
 
 - You can now configure a global label that is applied to all Astronomer Software Pods. <!-- Can't relocate issue for this one-->
@@ -104,6 +102,16 @@ After you apply this configuration to your platform, the stan component of Astro
     - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)
     - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p)
     - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
+    - [CVE-2023-25653](https://nvd.nist.gov/vuln/detail/CVE-2023-25653)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2023-2976](https://nvd.nist.gov/vuln/detail/CVE-2023-2976)
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)
+    - [CVE-2023-40690](https://nvd.nist.gov/vuln/detail/CVE-2023-40690)
+    - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)
+    - [CVE-2021-33914](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
 
 
 ## 0.33.2 
