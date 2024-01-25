@@ -245,7 +245,7 @@ astro dev start --env .env
 
 ## Install Python packages from private sources
 
-Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](customize-image.md#add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](customize-image.md#install-python-packages-from-private-sources). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
 Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
 

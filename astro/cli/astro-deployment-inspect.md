@@ -29,7 +29,7 @@ When using the `--key` flag, specify the complete path of the key you want to re
 astro deployment inspect -n <deployment-name> --key metadata.cluster_id
 ```
 
-See [Template file contents](manage-deployments-as-code.md#template-file-reference) for all possible values to return.
+See [Template file contents](deployment-file-reference.md) for all possible values to return.
 
 ## Options
 

@@ -46,7 +46,7 @@ All versions of Astro Runtime version 4.2.0 and later support the triggerer and 
 ## Astronomer Certified prerequisites
 
 - Astronomer Certified version 2.2 or later.
-- The `astronomer-providers` package added to your Astro project `requirements.txt` file. [Add Python and OS-level packages](https://docs.astronomer.io/software/customize-image#add-python-and-os-level-packages).
+- The `astronomer-providers` package added to your Astro project `requirements.txt` file. [Add Python and OS-level packages](https://docs.astronomer.io/software/customize-image#install-python-packages-from-private-sources).
 
 ## Using deferrable operators
 

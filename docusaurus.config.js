@@ -9,13 +9,13 @@ module.exports = {
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
   onBrokenMarkdownLinks: 'throw',
-  onBrokenAnchors: 'warn',
+  onBrokenAnchors: 'throw',
   markdown: {
     mermaid: true,
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER}}':"1.21.0",
+          '{{CLI_VER}}':"1.22.0",
           '{{RUNTIME_VER}}':"10.2.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"),"gi");

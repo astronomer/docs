@@ -119,7 +119,7 @@ response = requests.get(
 
 ## Hard reset your local environment
 
-In most cases, [restarting your local project](cli/develop-project.md#restart-your-local-environment) is sufficient for testing and making changes to your project. However, it is sometimes necessary to kill your Docker containers and metadata database for testing purposes. To do so, run the following command:
+In most cases, [restarting your local project](cli/run-airflow-locally.md#restart-a-local-airflow-environment) is sufficient for testing and making changes to your project. However, it is sometimes necessary to kill your Docker containers and metadata database for testing purposes. To do so, run the following command:
 
 ```sh
 astro dev kill

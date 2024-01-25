@@ -141,7 +141,7 @@ The base Astro Runtime Docker images have the following format:
 - `quay.io/astronomer/astro-runtime:<version>`
 - `quay.io/astronomer/astro-runtime:<version>-base`
 
-An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
+An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](cli/private-python-packages.md).
 
 ### Python version distributions
 

@@ -116,6 +116,7 @@ module.exports = {
             'deferrable-operators',
             'dynamically-generating-dags',
             'kubepod-operator',
+            'airflow-mlops',
             'using-airflow-plugins',
             'airflow-pools',
             'airflow-setup-teardown',

@@ -36,7 +36,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 
 - **Home**: View the status of your Deployments and select recently accessed Deployments.
 - **Deployments:** Create new Deployments and see key metrics about existing Deployments in the Workspace. For more information, see [Create a Deployment](create-deployment.md).
-- **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-runs).
+- **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-and-task-runs).
 - **Workspace Settings:** Update Workspace details, including Workspace user permissions, the Workspace name, and the Workspace description.
 
 ## Update general Workspace settings

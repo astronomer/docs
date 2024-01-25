@@ -11,12 +11,12 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/airflow-snowpark/airflow_with_snowpark_tutorial.py';
 
-[Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is a framework that contains runtimes and libraries to run non-SQL code in [Snowflake](https://www.snowflake.com/en/). Snowpark comes with a [comprehensive machine learning library](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) optimized for Snowflake. 
+[Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is the set of runtimes and libraries that securely deploy and process Python and other programming code in [Snowflake](https://www.snowflake.com/en/). This includes [Snowpark ML](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index), the Python library and underlying infrastructure for end-to-end ML workflows in Snowflake. Snowpark ML has 2 components: [Snowpark ML Modeling](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling) for model development, and Snowpark ML Operations including the [Snowpark Model Registry](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-mlops-model-registry), for model deployment and management.
 
 In this tutorial, you'll learn how to: 
 
 - Create a [custom XCom backend](custom-xcom-backends-tutorial.md) in Snowflake.
-- Create and use a model registry in Snowflake.
+- Create and use the Snowpark Model Registry in Snowflake.
 - Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
 - Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset to predict skiers' afternoon beverage choice.
 
@@ -32,11 +32,11 @@ The provider used in this tutorial is currently in beta and both its contents an
 
 Snowpark allows you to use Python to perform transformations and machine learning operations on data stored in Snowflake.
 
-Integrating Snowpark with Airflow offers the benefits of:
+Integrating Snowpark for Python with Airflow offers the benefits of:
 
-- Running machine learning models directly in Snowflake, without having to move data out of your Snowflake database.
+- Running machine learning models directly in Snowflake, without having to move data out of Snowflake.
 - Expressing data transformations in Snowflake in Python instead of SQL.
-- Storing and versioning your machine learning models in a model registry inside Snowflake.
+- Storing and versioning your machine learning models using the Snowpark Model Registry inside Snowflake.
 - Using Snowpark's compute resources instead of your Airflow cluster resources for machine learning.
 - Using Airflow for Snowpark Python orchestration to enable automation, auditing, logging, retry, and complex triggering for powerful workflows.
 

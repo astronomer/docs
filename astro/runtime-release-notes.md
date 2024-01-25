@@ -6,8 +6,6 @@ toc_min_heading_level: 2
 description: A summary of the latest Astro Runtime features and functionality. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework.
 ---
 
-
-
 <!--version-specific-->
 
 <p>
@@ -68,6 +66,16 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
+## Astro Runtime 9.9.0
+
+- Release date: January 24, 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Stop deserializing pickle when enable_xcom_pickling is False ([#36255](https://github.com/apache/airflow/pull/36255))
+- Check DAG read permission before accessing DAG code ([#36257](https://github.com/apache/airflow/pull/36257))
 
 ## Astro Runtime 9.8.0
 
@@ -144,7 +152,7 @@ To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apac
 
 ### Additional improvements
 
-- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). See [Export logs to AWS cloudwatch](view-logs.md#export-task-logs-to-aws-cloudwatch).
+- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). See [Export logs to AWS cloudwatch](export-cloudwatch.md).
 - Upgraded `google-cloud-aiplatform` to 1.35.0. 
 - Upgraded [Shapely](https://shapely.readthedocs.io/en/stable/manual.html) to 2.0.2.
 - Added a link for Astronomer Academy to the **Astronomer** menu in the Airflow UI.
@@ -183,7 +191,7 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 ### Additional Improvements
 
-- On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
+- On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](export-datadog.md) for setup instructions.
 
 ## Astro Runtime 9.1.0
 
@@ -202,7 +210,7 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 ### Additional improvements
 
-- You can now [export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) from Azure and GCP clusters.
+- You can now [export task logs to Datadog](export-datadog.md) from Azure and GCP clusters.
 - Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 
@@ -646,6 +654,16 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
+
+## Astro Runtime 6.9.2
+
+- Release date: January 24, 2024
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Stop deserializing pickle when enable_xcom_pickling is False ([#36255](https://github.com/apache/airflow/pull/36255))
+- Check DAG read permission before accessing DAG code ([#36257](https://github.com/apache/airflow/pull/36257))
 
 ## Astro Runtime 6.9.1
 
