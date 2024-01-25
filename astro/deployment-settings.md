@@ -177,7 +177,7 @@ For example, if your Deployment has a CPU quota of 150vCPU and a memory quota of
 
 On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory.
 
-To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#hybrid-clusters-only-change-the-kubernetes-executors-worker-node-type).
+To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#astro-hybrid-only-change-the-kubernetes-executors-worker-node-type).
 
 :::
 
@@ -199,7 +199,7 @@ Unlike workers, schedulers do not autoscale. The resources you set for them are 
 3. In the **Advanced** section, choose a scheduler size. See [Scheduler size](#scheduler-size).
 4. Click **Update Deployment**.
 
-    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 :::info Alternative Astro Hybrid setup
 

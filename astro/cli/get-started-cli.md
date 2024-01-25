@@ -78,4 +78,4 @@ After you have finished Getting Started with the CLI, you can configure your CLI
 
 - [Configure the CLI](configure-cli.md)
 - [Authenticate to cloud services](authenticate-to-clouds.md)
-- [Build and run a project locally](cli/develop-project.md#build-and-run-a-project-locally)
+- [Build and run a project locally](cli/run-airflow-locally.md)

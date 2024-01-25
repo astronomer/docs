@@ -19,10 +19,10 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 - Share the connection with multiple Deployments within the Workspace.
 - Override fields in the connection for individual Deployments.
-- Use configured connections in local Airflow environments. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
+- Use configured connections in local Airflow environments. See [Import and export connections and variables](cli/local-connections.md).
 - Use connections in branch-based deploys and PR previews.
 
-Workspace Owners and Operators can create and assign connections, while Workspace Authors can view configured connections and use them in Deployments. If your Organization has [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) enabled, you can additionally use configured connections, including ones that contain secrets, in local development environments. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
+Workspace Owners and Operators can create and assign connections, while Workspace Authors can view configured connections and use them in Deployments. If your Organization has [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) enabled, you can additionally use configured connections, including ones that contain secrets, in local development environments. See [Import and export connections and variables](cli/local-connections.md).
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
 
@@ -44,7 +44,7 @@ The Astro CLI can automatically retrieve connections from the Cloud UI when you 
 
 :::tip
 
-By default, connections can't be exported locally. However, if you want to work with connections locally, the Organization Owner can enable **Environment Secrets Fetching** in the Cloud UI. See [Import and export Airflow connections from the Cloud UI](import-export-connections-variables.md#from-the-cloud-ui).
+By default, connections can't be exported locally. However, if you want to work with connections locally, the Organization Owner can enable [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) in the Cloud UI.
 
 :::
 

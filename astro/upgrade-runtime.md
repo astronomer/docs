@@ -49,7 +49,7 @@ You can use the Astro CLI to anticipate and address problems before upgrading to
 astro dev upgrade-test --runtime-version <upgraded-runtime-version>
 ```
 
-The Astro CLI then generates test results in your Astro project that identify dependency conflicts and import errors that you would experience using the new Astro Runtime version. Review these results and make the recommended changes to reduce the risk of your project generating errors after you upgrade. For more information about using this command and the test results, see [Test before upgrade your Astro project](cli/test-your-astro-project-locally.md#test-before-upgrading-your-astro-project).
+The Astro CLI then generates test results in your Astro project that identify dependency conflicts and import errors that you would experience using the new Astro Runtime version. Review these results and make the recommended changes to reduce the risk of your project generating errors after you upgrade. For more information about using this command and the test results, see [Test before upgrade your Astro project](cli/test-your-astro-project-locally.md#test-before-an-astro-runtime-upgrade).
 
 ## Step 4: Update Your Dockerfile
 

@@ -106,7 +106,7 @@ When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your pro
 
 :::info
 
-This process is different if your Deployment has DAG-only deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable--disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
+This process is different if your Deployment has DAG-only deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable-or-disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
 
 :::
 

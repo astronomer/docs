@@ -11,7 +11,7 @@ There are three ways to create a Deployment:
 
 - Manually, using the Cloud UI. This is the most basic way to create a Deployment and is the focus of this document.
 - Programmatically, using [`astro deployment create`](cli/astro-deployment-create.md).
-- Programmatically, using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md#create-a-deployment-from-a-template-file).
+- Programmatically, using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md).
 
 To create a Deployment, you must choose a cluster type to host the Deployment:
 
@@ -57,7 +57,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
      
 You can continue to access your other Deployments by selecting the **Deployments** link.
     
-For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
+For more information about possible Deployment health statuses, see [Deployment health](deployment-health-incidents.md).
 
 ## Next steps
 
