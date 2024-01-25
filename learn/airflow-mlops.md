@@ -69,7 +69,7 @@ MLOps describes different patterns in how organizations can productionize machin
 - **DataOps**: the practices and tools surrounding data engineering and data analytics to build the foundation for machine learning implementations.
 - **ModelOps**: automated governance, management and monitoring of machine learning models in production.
 
-Organizations often are at different stages of maturity for each of these components when starting their MLOps journey. Using Apache Airflow to orchestrate MLOps pipelines can help you progress in all of them.
+Organizations are often at different stages of maturity for each of these components when starting their MLOps journey. Using Apache Airflow to orchestrate MLOps pipelines can help you progress in all of them.
 
 ### BusinessOps
 
