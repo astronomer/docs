@@ -15,9 +15,15 @@ Astro provides [a Dashboard](https://cloud.astronomer.io/dashboards) with summar
 
 ## Organization Overview
 
+This section is about the data available in the organization overview tab.
+
 ## Deployment Detail
 
+You can filter down to deployment level to see higher granularity of information.
+
 ## DAG SLA
+
+This view allows you to set an SLA time and make sure your DAGs are completing by then.
 
 ## Billing details (Hosted Only)
 
