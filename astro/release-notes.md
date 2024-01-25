@@ -21,6 +21,28 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## January 24, 2024
+
+### Self-service VPC peering and route management for AWS 
+
+<HostedBadge/>
+
+:::warning
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+You can now configure a network connection between Astro and an AWS VPC without contacting Astronomer support. Astro automatically handles creating a connection request and provides instructions for completing the setup yourself. After you create a VPC connection, you can configure routes whenever you need to connect to an additional service in your external VPC. See [Create a private connection between Astro and AWS](https://docs.astronomer.io/astro/connect-aws?tab=VPC%20peering#create-a-private-connection-between-astro-and-aws).
+
+### Additional improvements
+
+- There is no longer a minimum on the amount of CPU and memory that you can request for Kubernetes Pods.
+  
+### Bug fixes
+
+- Fixed an issue in Astro Hybrid where refreshing the browser could occasionally reset a worker queue's worker type setting.
+
 ## January 16, 2024
 
 ### Additional improvements
