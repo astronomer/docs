@@ -5,7 +5,7 @@ description: "Learn how to use Airflow to run machine learning in production."
 id: airflow-mlops
 ---
 
-**Machine Learning Operations** (MLOps) is an umbrella term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns with Apache Airflow providing tool agnostic orchestration capabilities for all steps.
+**Machine Learning Operations** (MLOps) is a broad term encompassing everything needed to run machine learning models in production. MLOps is a rapidly evolving field with many different best practices and behavioral patterns with Apache Airflow, providing tool agnostic orchestration capabilities for all steps.
 
 In this guide you learn:
 
@@ -17,7 +17,7 @@ In this guide you learn:
 
 :::tip  
 
-Ready to get started? Check out the recommended resources showcasing machine learning (ML) implementations with Airflow:
+Ready to get started? Check out the recommended resources that showcase machine learning (ML) implementations with Airflow:
 
 - [Ask Astro](https://github.com/astronomer/ask-astro) LLM Retrieval Augmented Generation pipeline reference architecture ([Blog post deep dive](https://www.astronomer.io/blog/ask-astro-operationalizing-data-ingest-for-retrieval-augmented-generation-with-llms-part-3/)).
 - [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping/) webinar.
@@ -34,7 +34,7 @@ To get the most benefits from this guide, you need an understanding of:
 
 ## Why use Airflow for MLOps?
 
-**Machine learning operations** (MLOps) encompasses all patterns, tools and best practices related to running machine learning models in production.
+**Machine learning operations** (MLOps) encompasses all patterns, tools, and best practices related to running machine learning models in production.
 
 Apache Airflow sits at the heart of the modern MLOps stack. Because it is tool agnostic, Airflow can orchestrate all actions in any MLOps tool that has an API. Combined with already being the de-facto standard for orchestrating data pipelines, Airflow is the perfect tool for data engineers and machine learning engineers to standardize their workflows and collaborate on pipelines.
 
@@ -71,18 +71,18 @@ MLOps describes different patterns in how organizations can productionize machin
 
 ### BusinessOps
 
-The first component of MLOps is to make sure there is strategic aligment with all stakeholders. This component will vary widely depending on your organization and use case and can include:
+The first component of MLOps is to make sure there is strategic aligment with all stakeholders. This component varies widely depending on your organization and use case and can include:
 
 - **Business strategy**: Defining what ML is used for in an organization and what trade-offs are acceptable. Often, models can be optimized for different metrics, for example high recall or high precision, and domain experts are needed to determine the right metrics and model strategy. 
-- **Model governance**: Creating and following regulations for how your organization uses machine learning. This often depends on relevant regulations like GDPR or HIPAA. Airflow has a built-in integration option with [Open Lineage](airflow-openlineage.md), the open-source standard for tracking data lineage, which is a key component of model governance.
+- **Model governance**: Creating and following regulations for how your organization uses machine learning. This often depends on relevant regulations, like GDPR or HIPAA. Airflow has a built-in integration option with [Open Lineage](airflow-openlineage.md), the open-source standard for tracking data lineage, which is a key component of model governance.
 
 ### DevOps
 
 Since you define Airflow pipelines in Python code, you can apply DevOps best practices when using Airflow. This includes:
 
-- **Version control**. All code and configuration should be stored in a version control system like [Git](https://git-scm.com/). Version control allows you to track all changes of your pipeline, ML model and environment over time and roll back to previous versions if needed. Astro customers can take advantage of [Deployment rollbacks](https://docs.astronomer.io/astro/deploy-history).
+- **Version control**. All code and configuration should be stored in a version control system like [Git](https://git-scm.com/). Version control allows you to track all changes of your pipeline, ML model, and environment over time and roll back to previous versions if needed. Astro customers can take advantage of [Deployment rollbacks](https://docs.astronomer.io/astro/deploy-history).
 - **Continuous integration/ continuous delivery** ([CI/CD](https://resources.github.com/ci-cd/)). It is a standard Software best practice for all code to undergo automatic testing, linting, and deployment. This ensures that your code is always in a working state and that any changes are automatically deployed to production. Airflow integrates with all major CI/CD tools, see [CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/template-overview) for popular templates.
-- **Infrastructure as code** ([IaC](https://en.wikipedia.org/wiki/Infrastructure_as_code)). Ideally, all infrastructure is defined as code and follows the same CI/CD process as your pipeline and model code. This allows you to control and, if necessary, roll back environment changes or quickly deploy new instances of your model.
+- **Infrastructure as code** ([IaC](https://en.wikipedia.org/wiki/Infrastructure_as_code)). Ideally, all infrastructure is defined as code and follows the same CI/CD process as your pipeline and model code. This allows you to control and, if necessary, roll back environment changes, or quickly deploy new instances of your model.
 
 In practice, following modern DevOps patterns when using Airflow for MLOps means:
 
@@ -104,14 +104,14 @@ Give special considerations to the following:
 - **Data preprocessing and feature engineering**. It is common for data to undergo several transformation steps before it is ready to be used as input for an ML model. These steps can include simple [preprocessing steps](https://scikit-learn.org/stable/modules/preprocessing.html) like scaling, one-hot-encoding, or imputation of missing values. It can also include more complex steps like [feature selection](https://scikit-learn.org/stable/modules/feature_selection.html#feature-selection), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), or [feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html). Airflow allows you to run preprocessing and feature engineering steps in a pythonic way using [Airflow decorators](airflow-decorators.md).
 - **Data storage**. 
     - Training and testing data. The best way to store your data highly depends on your data and type of ML. Data engineering includes ingesting data and moving it to the ideal platform for your ML model to access. This can, for example, be an object storage solution, a relational database management system (RDBMS), or a vector database. Airflow integrates with all these options, with tools such as [Airflow object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) and the [Astro Python SDK](https://docs.astronomer.io/learn/astro-python-sdk) simplifying common operations. 
-    - Model artifacts. Model artifacts include model parameters, hyperparameters, and other metadata. Airflow integrates with specialized version control systems such as [MLFlow](airflow-mlflow.md) or [Weights & Biases](airflow-weights-and-biases.md).
+    - Model artifacts. Model artifacts include model parameters, hyperparameters, and other metadata. Airflow integrates with specialized version control systems such as [MLFlow](airflow-mlflow.md) or [Weights and Biases](airflow-weights-and-biases.md).
 
-Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](airflow-openlineage.md) and data cataloging as well as monitoring of data drift.
+Apart from the foundations mentioned above, second day data quality operations in MLOps often include advanced topics like data governance, [data lineage](airflow-openlineage.md), and data cataloging as well as monitoring of data drift.
 
 In practice, following modern data engineering patterns when using Airflow for MLOps means:
 
 - Following general [Airflow best practices](dag-best-practices.md) for DAG writing, such as keeping tasks atomic and idempotent.
-- Using Airflow to orchestrate data ingestion from sources such as APIs, source databases and object storage into a working location for your ML model. This might be a vector database, a relational database, or an object storage solution depending on your use case.
+- Using Airflow to orchestrate data ingestion from sources such as APIs, source databases, and object storage into a working location for your ML model. This might be a vector database, a relational database, or an object storage solution depending on your use case.
 - Incorporating data quality checks into your Airflow pipelines, with critical data quality checks halting the pipeline or alerting you if they fail.
 - Using Airflow to orchestrate data preprocessing and feature engineering steps.
 - Moving data to permanent cold storage after it has been used for training and testing.
@@ -134,7 +134,7 @@ Other Airflow users decide to [scale up](airflow-scaling-workers.md) their Airfl
 In practice, following modern model operations patterns when using Airflow for MLOps means:
 
 - Performing exploratory data analysis and test potential ML applications on small subsets of data in a notebook environment before moving to production. Tools like [Jupyter notebooks](https://jupyter.org/) are widely used and run Python code you can later convert to tasks in Airflow DAGs.
-- Using Airflow to orchestrate model training, fine-tuning, testing and deployment. 
+- Using Airflow to orchestrate model training, fine-tuning, testing, and deployment. 
 - Having Airflow tasks monitor the performance of your model and perform automated actions such as re-training, re-deploying, or alerting if the performance drops below a certain threshold.
 
 ![Diagram showing different Airflow DAGs relating to model operations in an MLOps pipeline](/img/guides/airflow-mlops_ml_dags.png)
