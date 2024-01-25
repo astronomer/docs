@@ -1369,7 +1369,7 @@ This feature enables the ability to:
 
 For example, if you have a task that requires significantly more CPU than memory, you can assign it to a queue that's configured with workers that are optimized for compute usage.
 
-To learn more about configuring worker queues, see [Configure Deployment resources](deployment-settings.md#worker-queues).
+To learn more about configuring worker queues, see [Configure Deployment resources](configure-worker-queues.md).
 
 ### New worker sizing
 
@@ -1382,7 +1382,7 @@ Astro's worker sizing enables a few benefits:
 - A higher level of reliability. This worker sizing model results in less volatility and a lower frequency of cluster autoscaling events, which lowers the frequency of errors such as zombie tasks and missing task logs.
 - The legacy **AU** unit is no longer applicable in the context of the worker. You only have to think about CPU, memory, and worker type.
 
-Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](deployment-settings.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [GCP](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types), and [Azure](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types) resource references.
+Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-worker-queues.md). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [GCP](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types), and [Azure](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types) resource references.
 
 ### New Maximum Tasks per Worker setting
 
@@ -1538,8 +1538,6 @@ You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-
 - `us-west2` (Los Angeles)
 - `us-west4` (Nevada)
 
-For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
-
 ## June 16, 2022
 
 ### Submit Support Requests in the Cloud UI
@@ -1584,8 +1582,6 @@ Specifically, you can now run the following commands with Deployment API keys:
 ### Support for the `us-east4` GCP region
 
 You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-cluster) in the `us-east4` region, which is located in northern Virginia, USA.
-
-For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ## May 26, 2022
 
