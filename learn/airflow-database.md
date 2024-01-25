@@ -76,7 +76,7 @@ The scheduler depends on the Airflow metadata database to keep track of past and
 - **Task Instances** contains a record of every task run with a variety of attributes such as the priority weight, duration, or the URL to the task log.
 - **Task Reschedule** lists tasks that have been rescheduled.
 - **Triggers** shows all currently running [triggers](deferrable-operators.md).
-- **SLA Misses** keeps track of tasks that missed their [SLA](error-notifications-in-airflow.md#airflow-slas).
+- **SLA Misses** keeps track of tasks that missed their SLA.
 
 ### Other tables
 

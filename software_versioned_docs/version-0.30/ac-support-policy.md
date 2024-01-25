@@ -56,9 +56,6 @@ It is considered safe to upgrade to minor and patch versions within a major vers
 ### Hotfix Versions
 
 All hotfix releases of AC have a [corresponding changelog](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/CHANGELOG.md) which specifies the date the hotfix was released and all individual changes made to it. Bugs that are reported by the wider Airflow community are often fixed in AC before they are fixed in the subsequent open source release.
-
-For information on how to upgrade to the latest hotfix release, read [Upgrade to an AC Patch Version](manage-airflow-versions.md#patch-versions-of-astronomer-certified).
-
 ### Distribution
 
 AC Docker images come in two variants:

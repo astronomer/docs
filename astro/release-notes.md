@@ -857,7 +857,7 @@ You can now schedule a 30-minute office hour meeting in the **Help** menu next t
 
 ![Button to book office hours in the Cloud UI](/img/release-notes/office-hours.png)
 
-For more information, see [Book office hours in the Cloud UI](astro-support.md#book-office-hours-in-the-cloud-ui).
+For more information, see [Book office hours in the Cloud UI](astro-support.md#book-office-hours).
 
 ### Additional improvements
 
@@ -917,7 +917,7 @@ For Organization Owners, this migration has the following additional effects:
 - You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
 - Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
 
-For more information about how these changes can affect the Astro log in experience, see the [Login FAQ](log-in-to-astro.md#frequently-asked-questions). To configure authentication behavior, see [Configure SSO](configure-idp.md#advanced-setup).
+To configure authentication behavior, see [Configure SSO](configure-idp.md#advanced-setup).
 
 ### New Hosted regions available
 
@@ -969,8 +969,6 @@ In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can n
 
 You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
 
-To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](manage-hybrid-clusters.md#authorize-workspaces-to-a-cluster).
-
 ### New Deployment health statuses and information in the Cloud UI
 
 The Cloud UI now includes three additional [Deployment health statuses](deployment-health-incidents.md) that you might see when creating or pushing code to a Deployment.
@@ -979,7 +977,7 @@ The Cloud UI now includes three additional [Deployment health statuses](deployme
 - The **Deploying** status indicates that a code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
 - The **Unknown** status indicates that Deployment status can't be determined.
 
-Additionally, the Deployment information page in the Cloud UI now includes fields for **Docker Image** and **DAG Bundle Version** that show unique timestamps and tags based on your latest code deploy. Use this information as the source of truth for which version of your code is currently running on the Deployment. See [Deploy code](deploy-code.md#step-3-validate-your-changes).
+Additionally, the Deployment information page in the Cloud UI now includes fields for **Docker Image** and **DAG Bundle Version** that show unique timestamps and tags based on your latest code deploy. Use this information as the source of truth for which version of your code is currently running on the Deployment.
 
 ### View OpenLineage facets for lineage job runs
 
@@ -1033,7 +1031,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 ### Additional improvements
 
 - Ingress to the Airflow UI and API on Astro clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
-- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/open-support-request). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](manage-hybrid-clusters.md##view-clusters).
+- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/open-support-request). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab.
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 
@@ -1073,7 +1071,7 @@ For more information about a specific cell type, see [Run SQL in the Astro Cloud
 
 ### Additional improvements
 
-- You can now configure OneLogin and Ping Identity as identity providers on Astro. See [Configure your identity provider](configure-idp.md#configure-your-identity-provider).
+- You can now configure OneLogin and Ping Identity as identity providers on Astro.
 - Workspace Members can now view **Workspace settings** in the Cloud UI.
 - Node groups that are collapsed in the lineage graph in the Cloud UI now show only the total number of connected **Jobs** and **Datasets**, instead of listing each job and dataset. This makes the lineage graph easier to navigate.
 
@@ -1334,7 +1332,7 @@ To learn more, see [Export Airflow metrics to Datadog](export-datadog.md).
 
 - The Cloud UI now automatically ensures that worker queue names are valid as you type in real time.
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
-- You can now configure [worker queues](deployment-settings.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
+- You can now configure worker queues to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
 ### Bug fixes
 
@@ -1400,8 +1398,6 @@ A new **Worker Count (Min-Max)** configuration is now available in the Deploymen
 
 Use this setting to fine-tune worker autoscaling behavior in your Deployment. By default, the minimum number of workers is 1 and the maximum is 10.
 
-To learn more, see [Worker queue settings](deployment-settings.md#worker-queue-settings).
-
 ### Support for multiple Organizations
 
 A single user account can now belong to multiple Organizations. A user with multiple Organizations can switch to another Organization by clicking on their current Organization's name in the Cloud UI and then clicking **Switch Organization**.
@@ -1411,8 +1407,6 @@ Note that switching Organizations with the Astro CLI is not yet supported. For m
 ### New Azure region (Australia East)
 
 You can now [create an Astro cluster on Azure](manage-hybrid-clusters.md#create-a-cluster) in Australia East (New South Wales).
-
-For a list of all Azure regions that Astro supports, see [Azure resource reference](resource-reference-azure-hybrid.md#supported-regions).
 
 ### New Google Cloud Platform regions
 
@@ -1442,7 +1436,7 @@ You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-
 The following user roles have new and modified permissions:
 
 - Organization Owners now have Workspace Admin permissions for all Workspaces in their Organization. This role can now access Organization Workspaces, Deployments, and usage data.
-- Organization Billing Admins can now view [usage](deployment-metrics.md#astro-usage) for all Workspaces in their Organization regardless of their Workspace permissions.
+- Organization Billing Admins can now view usage for all Workspaces in their Organization regardless of their Workspace permissions.
 - Workspace Editors can now delete any Deployment in their Workspace.
 
 ### Automatic access for new users authenticating with an identity provider
@@ -1487,7 +1481,7 @@ For more information on Deployment configurations, see [Deployment settings](dep
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
 - Organizations now need only a single AWS external ID for all clusters. Previously, each cluster required a unique external ID, which added complexity to the installation and cluster creation process.
-- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](manage-organization-users.md#remove-users-from-an-organization).
+- You can now remove a user from an Organization from the Cloud UI.
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
 ## July 14, 2022
@@ -1520,8 +1514,6 @@ You can now [create an Astro cluster on GCP](manage-hybrid-clusters.md#create-a-
 - `europe-west6` (Zurich)
 - `northamerica-northeast1` (Montreal)
 - `us-west3` (Salt Lake City)
-
-For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp-hybrid.md#gcp-region).
 
 ### Additional improvements
 
@@ -1660,7 +1652,7 @@ To widen our support for various use cases and levels of scale, we've expanded t
 - [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
 - [Memory Optimized R6i instances](https://aws.amazon.com/ec2/instance-types/r6i/)
 
-For a full list of node instance types that are supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#node-instance-type). To modify an existing Astro cluster to use any of these instance types, see [Modify a Cluster](manage-hybrid-clusters.md).
+To modify an existing Astro cluster to use any of these instance types, see [Modify a Cluster](manage-hybrid-clusters.md).
 
 ### Additional improvements
 
@@ -1675,8 +1667,6 @@ The Cloud UI now renders an error if you try to modify the **Worker Resources** 
 If your Astro cluster is configured with the `m5d.8xlarge` node type, for example, the Cloud UI will show an error if you try to set **Worker Resources** to 350 AU. This is because the maximum worker size an `m5d.8xlarge` node can support is 307 AU.
 
 ![Worker size error](/img/release-notes/worker-size-error.png)
-
-For a reference of all node instance types Astro supports and their corresponding worker size limits, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#node-instance-type), [Resources required for Astro on Azure](resource-reference-azure-hybrid.md#node-instance-type), or  [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md#node-instance-type).
 
 ## April 14, 2022
 
@@ -1727,8 +1717,6 @@ You can now [create new Clusters](manage-hybrid-clusters.md#create-a-cluster) in
 - `ap-northeast-3` (Osaka)
 - `me-south-1` (Bahrain)
 
-For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](resource-reference-aws-hybrid.md#aws-region).
-
 ### Additional improvements
 
 - The Cloud UI now includes a button that links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
@@ -1773,7 +1761,7 @@ The Docker image that is running on the Airflow webserver of your Deployment is 
 
 When you push code to a Deployment on Astro via the Astro CLI or CI/CD, reference this tag in the Airflow UI to verify that your changes were successfully applied.
 
-This feature requires Astro Runtime [4.0.10+](runtime-release-notes.md#4010). To upgrade a Deployment to the latest Runtime version, see [Upgrade Runtime](upgrade-runtime.md).
+To upgrade a Deployment to the latest Runtime version, see [Upgrade Runtime](upgrade-runtime.md).
 
 :::info
 
@@ -1853,7 +1841,7 @@ You can view key metrics about recent DAG runs through the new **DAGs** page in 
 
 ![DAGs page](/img/docs/dags-page.png)
 
-For more information about the **DAGs** page, see [Deployment metrics](deployment-metrics.md#dag-runs).
+For more information about the **DAGs** page, see [Deployment metrics](deployment-metrics.md#dag-and-task-runs).
 
 ### Additional improvements
 
@@ -1968,8 +1956,6 @@ Fixed various bugs in the Cloud UI to better handle nulls and unknowns in Deploy
 Total task volume for your Organization is now available in a new **Usage** tab in the Cloud UI. Astro is priced based on successful task runs, so this view can help you monitor both Astro cost as well as Airflow usage in aggregate and between Deployments.
 
 ![Usage tab in the Cloud UI](/img/docs/usage.png)
-
-For more information about the **Usage** tab, read [Deployment metrics](deployment-metrics.md#usage).
 
 ### New AWS regions available
 
