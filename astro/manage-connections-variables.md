@@ -46,7 +46,7 @@ This means that Astro first checks secrets backends, then the Environment Manage
 If you use the same `Connection ID` in these resources with different credentials, Airflow ignores any duplicates and applies the highest priority configuration.
 
 :::tip
-If you only want to test connections or export connections in  a JSON or URI format, use the Airflow UI to [manage your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui).  You can then use the Astro CLI commands to export the connections in a URI or JSON format. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-metadata-database).
+If you only want to test connections or export connections in  a JSON or URI format, use the Airflow UI to [manage your connection](https://docs.astronomer.io/learn/connections#defining-connections-in-the-airflow-ui).  You can then use the Astro CLI commands to export the connections in a URI or JSON format. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-and-metadata-database).
 :::
 
 ## Compare strategies
@@ -88,14 +88,14 @@ You can create Airflow connections and variables is through the Airflow UI. This
 
 - The UI has features for correctly formatting and testing your connections.
 - It's easy to change variables or connections to test different use cases on the fly.
-- You can export and import your variables from the Airflow UI using JSON files and the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-metadata-database).
+- You can export and import your variables from the Airflow UI using JSON files and the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#from-the-airflow-ui-and-metadata-database).
 - Connections and variables are encrypted and stored in the Airflow metadata database.
 
 #### Limitations
 
 - You cannot export or import connections from the UI for security reasons.
 - Managing many connections or variables can become unwieldy.
-- In a local environment, you lose your connections and variables if you delete your metadata database with `astro dev kill`.
+- In a local environment, you lose your connections and variables if you delete your metadata database with `astro dev kill`.
 
 ### Secrets backend
 
