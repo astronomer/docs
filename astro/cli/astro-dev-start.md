@@ -15,7 +15,7 @@ The behavior and format of this command are the same for both Astro and Software
 
 Build your Astro project into a Docker image and spin up a local Docker container for each Airflow component.
 
-This command can be used to build an Astro project and run it locally. For more information, see [Build and run a project locally](cli/develop-project.md#build-and-run-a-project-locally).
+This command can be used to build an Astro project and run it locally. For more information, see [Build and run a project locally](cli/run-airflow-locally.md).
 
 ## Usage
 

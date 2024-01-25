@@ -23,7 +23,7 @@ Refer to [Template overview](template-overview.md) to see generic templates expr
 
 ## Image deploy templates
 
-[Image deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
+[Image deploy templates](template-overview.md) build a Docker image and push it to Astro whenever you update any file in your Astro project.
 
 <Tabs
     defaultValue="standard"

@@ -50,7 +50,7 @@ On Astro Hybrid clusters, worker type is defined as a node instance type that is
 
 Your Organization can enable up to 10 additional different worker types for each Hybrid cluster. After a worker type is enabled on an Astro Hybrid cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
-1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws-hybrid.md#worker-node-types), [Azure](resource-reference-azure-hybrid.md#worker-node-size-resource-reference), or [GCP resource references](resource-reference-gcp-hybrid.md#worker-node-size-resource-reference).
+1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [Azure](resource-reference-azure-hybrid.md#worker-node-size-resource-reference), or [GCP resource references](resource-reference-gcp-hybrid.md#worker-node-size-resource-reference).
 2. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information: 
   
     - The name of your cluster. 
@@ -173,7 +173,7 @@ If you need to change the worker type of an existing worker queue, Astronomer re
 3. Expand the **Execution** section if it is not already expanded.
 4. Update the worker queue settings, and then click **Update Deployment**.
 
-    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 :::tip Update Airflow Pool
 

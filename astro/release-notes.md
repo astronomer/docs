@@ -528,7 +528,7 @@ You can now create Hosted dedicated clusters in the following regions:
     - `us-west3` - Salt Lake City, North America
     - `us-west4` - Nevada, North America
 
-See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#dedicated-cluster-configurations) for all available configurations.
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#dedicated-cluster-regions) for all available configurations.
 
 ### Bug fixes
 
@@ -973,7 +973,7 @@ To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](man
 
 ### New Deployment health statuses and information in the Cloud UI
 
-The Cloud UI now includes three additional [Deployment health statuses](deployment-metrics.md#deployment-health) that you might see when creating or pushing code to a Deployment.
+The Cloud UI now includes three additional [Deployment health statuses](deployment-health-incidents.md) that you might see when creating or pushing code to a Deployment.
 
 - The **Creating** status indicates that Astro is still provisioning the resources for the Deployment.
 - The **Deploying** status indicates that a code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
@@ -1164,7 +1164,7 @@ Specifically, the tab includes the following improvements:
 
 You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace.
 
-See [Transfer a Deployment to another Workspace](deployment-settings.md#transfer-a-deployment-to-another-workspace).
+See [Transfer a Deployment to another Workspace](transfer-a-deployment.md).
 
 ### Additional improvements
 
@@ -1301,7 +1301,7 @@ You can now access your Account Dashboard to manage your user account settings a
 
 ### Additional improvements
 
-- You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws-hybrid.md#worker-node-types).
+- You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types).
 - New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
 
 ### Bug fixes
@@ -1384,7 +1384,7 @@ Astro's worker sizing enables a few benefits:
 - A higher level of reliability. This worker sizing model results in less volatility and a lower frequency of cluster autoscaling events, which lowers the frequency of errors such as zombie tasks and missing task logs.
 - The legacy **AU** unit is no longer applicable in the context of the worker. You only have to think about CPU, memory, and worker type.
 
-Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](deployment-settings.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#worker-node-types), [GCP](resource-reference-gcp-hybrid.md#worker-node-types), and [Azure](resource-reference-azure-hybrid.md#worker-node-types) resource references.
+Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](deployment-settings.md#worker-queues). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [GCP](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types), and [Azure](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types) resource references.
 
 ### New Maximum Tasks per Worker setting
 
@@ -1714,7 +1714,7 @@ A few additional notes about this upgrade:
 - You can ignore any lineage logs that indicate an error or failed process, such as the first line in the example logs above. These logs will more accurately reflect the state of your lineage functionality once lineage features are launched on Astro.
 - Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code.md). Until you do so, this change will not be applied.
 - Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
-- When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
+- When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://docs.astronomer.io/learn/airflow-openlineage).
 
@@ -1927,7 +1927,7 @@ To simplify Deployment configuration and reflect current functionality:
 - The worker Termination Grace Period was removed from the Cloud UI
 - This value was permanently set to 24 hours for all Deployments on Astro
 
-This does not change or affect execution behavior for new or existing Deployments. For more information, read [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
+This does not change or affect execution behavior for new or existing Deployments. For more information, read [What Happens During a Code Deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 ### Additional improvements
 
