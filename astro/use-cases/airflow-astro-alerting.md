@@ -21,7 +21,7 @@ This use case shows how to combine Airflow and Astro alerts for a couple of comm
 This use case depends on the following Astro and Airflow features to create different types of alerts for your pipelines:
 
 - Configuring DAG SLAs and failure notifications using [Astro alerts](alerts.md).
-- Implementing [Airflow callbacks](error-notifications-in-airflow.md) for custom task-level alerts. 
+- Implementing [Airflow callbacks](https://docs.astronomer.io/learn/error-notifications-in-airflow#airflow-callbacks) for custom task-level alerts. 
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ However, you can extend this use case to encompass any number of Astro Deploymen
 
 To implement this use case:
 
-1. In the DAG in your Astro project, add an `on_success_callback` that uses the pre-built SlackNotifier to one task (not the DAG's `default_args`). See [Example pre-built notifier: Slack](error-notifications-in-airflow.md#example-pre-built-notifier-slack).  
+1. In the DAG in your Astro project, add an `on_success_callback` that uses the pre-built SlackNotifier to one task (not the DAG's `default_args`). See [Example pre-built notifier: Slack](https://docs.astronomer.io/learn/error-notifications-in-airflow#example-pre-built-notifier-slack).  
 2. Deploy your project to your Astro Deployment. See [Deploy code to Astro](deploy-code.md).
 3. Add a connection to Slack in the Astro Cloud UI. See [Create Airflow connections in the Cloud UI](create-and-link-connections.md). This connection will be used by your SlackNotifier. Make sure the connection ID matches what you used in your DAG code in Step 1.
 4. Configure an Astro DAG failure alert for your DAG using the communication channel of your choice. See [Set up Astro alerts](alerts.md).
@@ -83,4 +83,4 @@ Generally, Astronomer recommends choosing the following alerts for these common 
 ## See also
 
 - [Set up Astro alerts](alerts.md)
-- [Manage Airflow DAG notifications](error-notifications-in-airflow.md)
+- [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow)
