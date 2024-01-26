@@ -67,6 +67,12 @@ The more information you can provide about the issue you're experiencing, the qu
 
 If you've already copied task logs or Airflow component logs, send them as a part of your request. The more context you can provide, the better.
 
+### Check recommended support articles
+
+If you draft your support ticket on the [Astronomer support portal](https://support.astronomer.io), the portal automatically recommends support articles to you based on the content in your ticket. Astronomer recommends looking through these recommendations to see if your issue has a documented solution before submitting your ticket. 
+
+You can also proactively search support articles without submitting a support ticket on the [Astronomer knowledge base](https://support.astronomer.io/hc/en-us).
+
 ## Submit a support request on the Astronomer support portal
 
 If you're new to Astronomer, you'll need to create an account on the Astronomer support portal to submit a support request. Astronomer recommends that you use the same email address that you use to access Astronomer Software. If you're working with a team and want to view support tickets created by other team members, use your work email or the domain you share with other team members for your account (for example, `@astronomer.io`). If your team uses more than one email domain (for example, `@astronomer.io`), contact Astronomer and ask to have the additional domains added to your organization.

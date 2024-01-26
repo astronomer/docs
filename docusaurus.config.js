@@ -162,15 +162,19 @@ module.exports = {
       bottomNav: {
         items: [
           {
-            label: 'Book Office Hours',
+            label: 'Support Knowledge Base',
+            href: 'https://support.astronomer.io/hc/en-us',
+          },
+          {
+            label: 'Office Hours',
             href: 'https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade',
           },
           {
-            label: 'Watch a webinar',
+            label: 'Webinars',
             href: 'https://www.astronomer.io/events/webinars/?referral=docs-sidebar',
           },
           {
-            label: 'Astro status',
+            label: 'Astro Status',
             href: 'https://status.astronomer.io/?referral=docs-sidebar',
           }
         ]

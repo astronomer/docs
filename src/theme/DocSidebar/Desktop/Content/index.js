@@ -43,16 +43,26 @@ export default function DocSidebarDesktopContent({ path, sidebar, className }) {
         <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
           <DocSidebarItems items={sidebar} activePath={path} level={1} />
         </ul>
+        {path.indexOf('/software') > -1 && (
+          <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list', styles.menu__listBottom)}>
+            <li>
+              <a href="https://support.astronomer.io/hc/en-us">Support Knowledge Base</a>
+            </li>
+          </ul>
+        )}
         {!path.indexOf('/software') > -1 && (
           <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list', styles.menu__listBottom)}>
             <li>
-              <a href="https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade">Book Office Hours</a>
+              <a href="https://support.astronomer.io/hc/en-us">Support Knowledge Base</a>
             </li>
             <li>
-              <a href="https://www.astronomer.io/events/webinars/?referral=docs-sidebar">Watch a webinar</a>
+              <a href="https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade">Office Hours</a>
             </li>
             <li>
-              <a href="https://status.astronomer.io/?referral=docs-sidebar">Astro status</a>
+              <a href="https://www.astronomer.io/events/webinars/?referral=docs-sidebar">Webinars</a>
+            </li>
+            <li>
+              <a href="https://status.astronomer.io/?referral=docs-sidebar">Astro Status</a>
             </li>
           </ul>
         )}
