@@ -24,7 +24,7 @@ Because Astronomer has separate [maintenance life cycles](release-lifecycle-poli
 If you're upgrading to receive a specific change, ensure the release note for the change appears either:
 
 - Within your target minor version.
-- In a patch version that was released before the first release of your target minor version. For example, a change in 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch. However, all changes in 0.32.1, which released June 12, 2023, are guaranteed to be in the 0.32 series because the version was released before 0.32.0.
+- In a patch version that was released before the first release of your target minor version. For example, a change in 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch. However, all changes in 0.32.1, which released June 12, 2023, are guaranteed to be in the 0.33 series because the version was released before 0.33.0.
 
 :::
 
