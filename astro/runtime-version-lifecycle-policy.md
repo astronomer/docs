@@ -31,7 +31,9 @@ The maintenance period for an Astro Runtime version depends on its release chann
 | Stable          | 6 months or 3 months after the next major Astro Runtime release, whichever is longer |
 | LTS             | 18 months or 6 months after the next LTS Astro Runtime release, whichever is longer  |
 
-For each major Runtime version, only the latest `minor.patch` version is supported at any given time. If you report an issue with an Astro Runtime version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, any user who reports an issue with Astro Runtime 4.0.2 will be asked to upgrade to the latest 4.x.y version as soon as it's generally available.
+For each major Runtime version, only the latest `minor.patch` version receives fixes. Because Runtime versions are immutable, anytime new features or fixes are added to the Astro Runtime, they are released as a patch version of the Runtime.
+
+If you report an issue with an Astro Runtime version that is not latest patch, the Astronomer Support team might ask that you to upgrade if the reported issue requires a bug fix. For example if you require a bug fix or security fix, any user working with Astro Runtime 9.0.0 will be asked to upgrade to the latest patch of Runtime 9, to 9.x.y version. However, if you use the latest Runtime version patch and you require a bug or security fix, then that fix is included in the next patch version when it is released.
 
 Within the maintenance window of each Astro Runtime version, the following is true:
 
