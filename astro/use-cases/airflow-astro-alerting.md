@@ -28,7 +28,7 @@ This use case depends on the following Astro and Airflow features to create diff
 This use case assumes you have:
 
 - At least one [Astro Deployment](create-deployment). Your deployment must run Astro Runtime 7.1.0 or later and it must have OpenLineage enabled.
-- An [Astro project](develop-project.md) with at least one DAG. Your DAG should have at least two tasks.
+- An [Astro project](https://docs.astronomer.io/astro/cli/develop-project) with at least one DAG. Your DAG should have at least two tasks.
 
 However, you can extend this use case to encompass any number of Astro Deployments and DAGs.
 
