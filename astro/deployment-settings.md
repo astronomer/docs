@@ -11,9 +11,9 @@ After you create an Astro Deployment, you can modify its settings using the Clou
 
 Use [Deployment details](deployment-details.md) to manage the administration of your Deployment. This includes includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro:
 
-- Update a Deployment name and description.
-- Add or delete a Deployment alert email.
-- Transfer a Deployment to another Workspace in your Organization.
+- Deployment names and descriptions.
+- Deployment contact emails.
+- Rules for what types of deploys are allowed.
 - Delete a Deployment.
 
 ## Deployment resources

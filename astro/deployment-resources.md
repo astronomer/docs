@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Configure resources'
+sidebar_label: 'Deployment resources'
 title: 'Configure Deployment resources'
 id: deployment-resources
 description: "Configure your Deployment resource settings to optimze Deployment performance."
 ---
 
-Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
+Your Deployment resources are the computational resources Astro uses to run Airflow in the cloud. Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
 
 ## Update Airflow configurations
 

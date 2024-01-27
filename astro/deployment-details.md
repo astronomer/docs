@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deployment settings'
-title: 'Deployment settings'
+sidebar_label: 'Deployment details'
+title: 'Deployment details'
 id: deployment-details
 description: "Edit information about your Deployment, like metadata settings, observability settings, and user access settings."
 ---
