@@ -43,8 +43,6 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
     ]}>
 <TabItem value="standard">
 
-Each CI/CD template implementation might have additional requirements.
-
 To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
@@ -217,7 +215,7 @@ If your Astro project requires additional build-time arguments to build an image
             astro deploy <your-deployment-id> --image-name ${{ steps.image_tag.outputs.image_tag }}
     ```
 
-For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](cli/develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
+For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](cli/private-python-packages.md), you would use the following configuration:
 
   ```yaml
   name: Astronomer CI - Custom base image

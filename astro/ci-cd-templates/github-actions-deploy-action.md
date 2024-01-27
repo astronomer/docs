@@ -86,7 +86,7 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
 
 The following template can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment.
 
-#### Prerequisites
+#### Configuration requirements
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
@@ -194,7 +194,7 @@ If your Astro project requires additional build-time arguments to build an image
             image-name: ${{ steps.image_tag.outputs.image_tag }}
     ```
 
-    For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](cli/develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
+    For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](cli/private-python-packages.md), you would use the following configuration:
 
     ```yaml
     name: Astronomer CI - Custom base image
