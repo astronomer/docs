@@ -47,6 +47,8 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
 
 Templates that use the Astronomer `deploy-action` trigger both image deploys and DAG deploys. If you committed changes only to DAG files, the action triggers a DAG deploy. If you committed changes to any other file, the action triggers an image deploy.
 
+- [GitHub Actions Template using Deploy Action](/ci-cd-templates/github-actions-deploy-actions.md)
+
 ## Deployment preview templates
 
 The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
@@ -57,14 +59,20 @@ The Deployment preview templates use GitHub secrets to manage the credentials ne
 
 The standard Deployment preview template uses GitHub secrets and an Astro Deployment API token to create a preview Deployment whenever you create a new feature branch off of your main branch.
 
-### Deployment preview template with secrets backend implementation
+- [Standard Deployment preview](/ci-cd-templates/github-actions-deployment-preview.md#standard-deployment-preview-template)
+
+### Deployment preview with secrets backend
 
 If you use a [secrets backend](secrets-backend.md) to manage Airflow objects such as variables and connections, you can configure your action to grant preview Deployments access to your secrets backend. This means that DAGs in the preview Deployment can access your secret Airflow objects for testing purposes.
 
 This template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment variable to store information and credentials for your secrets backend.
 
+- [Deployment preview with secrets backend](/ci-cd-templates/github-actions-deployment-preview.md#deployment-preview-template-with-secrets-backend-implementation)
+
 ## Private network templates
 
 If you use GitHub Enterprise and can't use the public Astronomer [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace, use the following templates to implement CI/CD.
 
-You can configure your CI/CD pipelines to deploy a full project image or your `dags` directory.
+You can configure your CI/CD pipelines to deploy a full project image or your `dags` directory to a preview environment.
+
+- [Private network templates](/ci-cd-templates/github-actions-private-network.md)

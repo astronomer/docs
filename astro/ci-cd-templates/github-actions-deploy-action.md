@@ -1,7 +1,7 @@
 ---
 sidebar_label: Standard Deploy Action
-title: Astro CI/CD templates for GitHub Actions
-id: github-actions
+title: GitHub Actions Template using Deploy Action
+id: github-actions-template
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using GitHub Actions.
 ---
 
