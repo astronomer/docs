@@ -30,4 +30,4 @@ The Astro CLI has the following global flags that can be used with any command:
 
 ### Global configuration options
 
-- `g`, `--global`: You set global configurations for the Astro CLI by running `astro config --global`. See [Configure the CLI](configure-cli.md#global-configuration-options) for more information.
+- `g`, `--global`: You set global configurations for the Astro CLI by running `astro config --global`. See [Configure the CLI](configure-cli.md) for more information.

@@ -51,4 +51,4 @@ Astro is designed to secure sensitive information about your external systems. S
 
 ## Patch management in Astro Runtime
 
-Astronomer continuously checks for available security fixes for all software used in Astro Runtime and is committed to delivering these fixes in a timely manner. For more information, see [Security fixes](runtime-version-lifecycle-policy.md#security-fixes).
+Astronomer continuously checks for available security fixes for all software used in Astro Runtime and is committed to delivering these fixes in a timely manner. For more information, see [Security fixes](runtime-version-lifecycle-policy.md#security).

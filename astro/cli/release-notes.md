@@ -15,6 +15,23 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: 1.21.0, 1.20.1, and 1.19.4. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
 
+## Astro CLI 1.22.0
+
+Release date: January 24, 2023
+
+### New flag to mount secrets to Astro project image
+
+Use the new `--build-secrets` flag with the following commands to mount a secret value to an Astro project image:
+
+- `astro deploy`
+- `astro dev parse`
+- `astro dev pytest`
+- `astro dev restart`
+- `astro dev start`
+- `astro dev upgrade test`
+
+This flag is equivalent to running [`docker build --secret`](https://docs.docker.com/build/building/secrets/#secret-mounts) for your Astro Runtime image build. Use this flag to simplify build steps for customizing the Astro Runtime image, for example when you need to [install Python packages from a private source](https://docs.astronomer.io/astro/cli/private-python-packages?tab=pypi#install-python-packages-from-private-sources) .
+
 ## Astro CLI 1.21.0
 
 Release date: December 4, 2023
@@ -234,7 +251,7 @@ These commands can be used to manage API tokens as part of an automated workflow
 
 - You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
-- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment.
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-cicd-deploys) on a given Deployment.
 - You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted.
 
 ## Astro CLI 1.15.1
@@ -489,7 +506,7 @@ To learn more, see [Test your Astro project locally](cli/test-your-astro-project
 
 ### Additional improvements
 
-- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-dags.md).
 - The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered in logical groupings instead of by alphabetical order.
 
 ### Bug fixes
@@ -513,7 +530,7 @@ Deploying only DAGs:
 
 When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](set-up-ci-cd.md).
+To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-dags.md). For example CI/CD workflows with this feature enabled, see [CI/CD](set-up-ci-cd.md).
 
 ### New `astro deployment inspect` command
 
@@ -641,7 +658,7 @@ Release date: July 19, 2022
 
 ### Deploy a custom Docker image with new `--image-name` flag
 
-You can now deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`, as long as the image is based on Astro Runtime and is available in a local Docker registry. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
+You can now deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`, as long as the image is based on Astro Runtime and is available in a local Docker registry. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/private-python-packages.md).
 
 Using this flag, you can automate deploying custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows in different pipelines.
 
@@ -762,7 +779,7 @@ astrocloud auth login
 astro login
 ```
 
-For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade. For instructions, see [Migrate from `astrocloud` to `astro`](cli/install-cli.md#migrate-from-astrocloud-to-astro).
+For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade.
 
 :::warning Possible Breaking Change
 
@@ -818,7 +835,7 @@ Release date: April 14, 2022
 
 ### New command to create and update environment variables
 
-`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](cli/develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
+`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables via a `.env` file locally, this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
 
 For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 

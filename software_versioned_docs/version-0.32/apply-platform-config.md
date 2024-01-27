@@ -27,8 +27,8 @@ If you're interested in upgrading Astronomer to a new patch version of the platf
 This file was created when you installed Astronomer using one of the following guides:
 
 * [AWS EKS installation guide](install-aws-standard.md#step-8-configure-your-helm-chart)
-* [GCP GKE installation guide](install-gcp-standard.md#step-7-configure-your-helm-chart)
-* [Azure AKS installation guide](install-azure-standard.md#step-7-configure-your-helm-chart)
+* [GCP GKE installation guide](install-gcp-standard.md#step-8-configure-your-helm-chart)
+* [Azure AKS installation guide](install-azure-standard.md#step-8-configure-your-helm-chart)
 
 :::tip
 

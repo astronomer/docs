@@ -41,7 +41,7 @@ RUN pip install --no-cache-dir --user <your-python-package>
 
 To install a specific version of a Python-level package, include your package version in a pip [constraints file](https://pip-python3.readthedocs.io/en/latest/user_guide.html#constraints-files) and copy it into your Dockerfile. 
 
-> **Note:** The process for installing dependencies is different if you are using the Astro CLI to deploy your Docker image to Astronomer. For an Astronomer platform-based setup, see [Install packages via the Astro CLI](install-packages.md#install-packages-via-the-astronomer-cli).
+> **Note:** The process for installing dependencies is different if you are using the Astro CLI to deploy your Docker image to Astronomer. For an Astronomer platform-based setup, see [Install packages via the Astro CLI](customize-image.md#add-python-and-os-level-dependencies.
 
 Once you rebuild your image with `docker-build`, the image will have access to any packages that you specified. To confirm that a package was installed:
 

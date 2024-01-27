@@ -37,7 +37,7 @@ Deployment [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/c
 
 [Kubernetes Event Driven Autoscaling](https://keda.sh/) (KEDA) computes these calculations every ten seconds. When KEDA determines that it can scale down a worker, it waits for five minutes after the last running task on the worker finishes before terminating the worker Pod.
 
-When you push code to a Deployment, workers running tasks from before the code push do not scale down until those tasks is complete. To learn more about how changes to a Deployment can affect worker resource allocation, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+When you push code to a Deployment, workers running tasks from before the code push do not scale down until those tasks is complete. To learn more about how changes to a Deployment can affect worker resource allocation, see [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
 ## Configure Celery worker scaling
 

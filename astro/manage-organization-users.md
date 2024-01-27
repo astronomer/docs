@@ -17,7 +17,7 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 ## Add a user to an Organization
 
-If your Organization has [configured an identity provider (IdP) with Astro](configure-idp#configure-your-sso-identity-provider), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. To change this behavior, see [Disable just-in-time provisioning](configure-idp.md#disable-just-in-time-provisioning).
+If your Organization has [configured an identity provider (IdP) with Astro](configure-idp#configure-your-sso-identity-provider), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. To change this behavior, see [Disable just-in-time provisioning](configure-idp.md#configure-just-in-time-provisioning).
 
 You can also manually add users to an Organization. You must manually add users in the following circumstances:
 

@@ -152,7 +152,7 @@ To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apac
 
 ### Additional improvements
 
-- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). See [Export logs to AWS cloudwatch](view-logs.md#export-task-logs-to-aws-cloudwatch).
+- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). See [Export logs to AWS cloudwatch](export-cloudwatch.md).
 - Upgraded `google-cloud-aiplatform` to 1.35.0. 
 - Upgraded [Shapely](https://shapely.readthedocs.io/en/stable/manual.html) to 2.0.2.
 - Added a link for Astronomer Academy to the **Astronomer** menu in the Airflow UI.
@@ -191,7 +191,7 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 ### Additional Improvements
 
-- On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
+- On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](export-datadog.md) for setup instructions.
 
 ## Astro Runtime 9.1.0
 
@@ -210,7 +210,7 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 ### Additional improvements
 
-- You can now [export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) from Azure and GCP clusters.
+- You can now [export task logs to Datadog](export-datadog.md) from Azure and GCP clusters.
 - Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 
