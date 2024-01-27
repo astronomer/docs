@@ -97,7 +97,7 @@ The `configuration` section contains all of the basic settings that you can conf
 
 - [Create a Deployment](create-deployment.md#create-a-deployment).
 - [Update a Deployment name and description](deployment-details.md#update-a-deployment-name-and-description).
-- [Scheduler resources](deployment-resources.md#scheduler-resources).
+- [Scheduler size](deployment-resources.md#scheduler-size).
 
 ### `deployment.worker_queues`
 

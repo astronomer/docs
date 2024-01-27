@@ -23,7 +23,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## January 25, 2024
 
-### Self-service VPC peering and route management for AWS 
+### Self-service VPC peering and route management for AWS
 
 <HostedBadge/>
 
@@ -38,7 +38,7 @@ You can now configure a network connection between Astro and an AWS VPC without 
 ### Additional improvements
 
 - There is no longer a minimum on the amount of CPU and memory that you can request for Kubernetes Pods.
-  
+
 ### Bug fixes
 
 - Fixed an issue in Astro Hybrid where refreshing the browser could occasionally reset a worker queue's worker type setting.
@@ -1354,7 +1354,7 @@ To learn more, see [Export Airflow metrics to Datadog](export-datadog.md).
 
 - The Cloud UI now automatically ensures that worker queue names are valid as you type in real time.
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
-- You can now configure [worker queues](deployment-resources.md#worker-queues) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
+- You can now configure [worker queues](configure-worker-queues.md#worker-queue-settings) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
 ### Bug fixes
 
