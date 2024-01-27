@@ -47,7 +47,7 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
 
 Templates that use the Astronomer `deploy-action` trigger both image deploys and DAG deploys. If you committed changes only to DAG files, the action triggers a DAG deploy. If you committed changes to any other file, the action triggers an image deploy.
 
-- [GitHub Actions Template using Deploy Action](/ci-cd-templates/github-actions-deploy-actions.md)
+- [GitHub Actions Template using Deploy Action](/ci-cd-templates/github-actions-deploy-action.md)
 
 ## Deployment preview templates
 
