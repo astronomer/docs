@@ -19,6 +19,18 @@ You can find the Dashboards in your **Organization settings** menu, by clicking 
 
 Only users with **Organization Owners** and **Organization Admins** [user permissions](user-permissions.md#organization-roles) can access reporting Dashboards.
 
+## Export data from reporting Dashboards
+
+You can set up your reporting Dashboard to email you data reports on a given time interval or as an alert when certain criteria are met. Or, you can export your data in a one-time action.
+
+1. Hover your cursor anywhere in the Dashboard window or over a specific data element, to see the detailed menu view. This menu includes **Filters**, the option to **Maximize element**, or **Expand menu** further.
+
+2. Expand the menu, and then you can choose
+    - **Sort** the x-axis data
+    - **Alert when...** to define criterial when Astro will send you a data export of the element or dashboard
+    - **Export** to download the data in a file format of your choosing, like `.csv`.
+    - **Refresh data** to reload the data you're viewing in the Dashboard or element.
+
 ## Organization Explorer
 
 The **Organization Explorer** tab provides at-a-glance summaries about activity in your Organization's Deployment and DAGs in your entire Organization, or filtered by Workspace or Deployment name.
@@ -49,11 +61,20 @@ You can filter the data shown in the reports by the following:
 
 ## Deployment Detail
 
-You can filter down to deployment level to see higher granularity of information.
+The **Deployment Detail** report shows a table of all your non-deleted Deployments in your Organization, indexed by Workspace Name. You can filter this table by **Workspace Name** or **Deployment Name** Additionally, the task counts, DAG counts, and unique operator counts are shown for the latest completed month.
+
+This report view also highlights if you have any Deployments that use a version of the Astro Runtime that are either unsupported or are expected to reach end of maintenance in the next six months.
 
 ## DAG SLA
 
-This view allows you to set an SLA time and make sure your DAGs are completing by then.
+If you have a service level agreement (SLA) where your DAGs need to complete by a certain consistent time, you can use this view to compare DAG completion times with an SLA time. This view can help you report the frequency your Organization meets their SLA obligations.
+
+1. Choose the **DAG ID** that you want to check DAG run completion times for. If you have a large number of DAGs in your Organization, you can first filter by **Workspace Name** and **Deployment Name** before choosing your DAG ID.
+2. Select the time interval over which you want to look at the DAG data.
+3. Define the **SLA Time (UTC)**
+4. Choose the time interval you want to aggregate the data with by choosing **Day**, **Week**, or **Month** in **Display by**.
+
+The report generates a line graph that shows the **Median End Time** of the DAG, the **Average End Time**, and the **SLA** time you defined.
 
 ## Billing details (Hosted Only)
 
