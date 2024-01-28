@@ -50,6 +50,8 @@ You can filter the data shown in the reports by the following:
 
 ### Organization explorer data
 
+In the Dashboard, you can take a detailed view of the following different reporting elements. Each has its own section where you can filter the data within the element, export reports, or set up an email alert.
+
 * **Deployments** - The number of Deployments in a Workspace, indexed by time.
 * **Task Counts by Success/Failure** - Segmented bar chart showing the counts of successful and failed tasks in the selected Workspace, indexed by time.
 * **Active DAG counts** -
@@ -81,3 +83,25 @@ The report generates a line graph that shows the **Median End Time** of the DAG,
 In the **Cost Breakdown** tab of your Dashboard, you can find detailed information regarding your accumulated cost per time period.
 
 ## Operator usage
+
+You can examine how
+
+### Operator usage data filters
+
+You can filter the data shown in the reports by the following:
+
+* **Date**
+* **Filter operators by string**: Use a string as a search query for the Operator you want to examine.
+* **Operator**: Select the Operator from a menu of options or search for one.
+* **Workspace Name**
+* **Deployment Name**
+
+### Operator usage data details
+
+In the Dashboard, you can take a detailed view of the following different reporting elements. Each has its own section where you can filter the data within the element, export reports, or set up an email alert.
+
+* **Operators by Task/Distinct DAG Count** - This view shows you the top operators used in your Organization, ordered by the count of tasks and distinct DAGs. You can use expand each row to examine the **Workspace Name** and **Deployment Name** specifically. This data answers the question, *What are the top operators used across my organization?*
+* **Workspace Operator Usage by Task/Distinct DAG Count** - This view shows you the most used Workspaces based on total Task Count and Distinct DAGs. You can then expand each row to find the most frequently used Operators in each Deployment in that Workspace. This data answers the question, *Which workspace is using the selected operators the most?*
+* **Task Usage By Period, Failed/Successful** - An aggregate view of the number of tasks that failed or succeeded in the selected Workspace and Deployment over the defined time period.
+* **Task Usage By Period, Workspace** - An aggregate view of the number of tasks by Workspace over the defined time period.
+
