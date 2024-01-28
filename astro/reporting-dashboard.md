@@ -78,13 +78,33 @@ If you have a service level agreement (SLA) where your DAGs need to complete by 
 
 The report generates a line graph that shows the **Median End Time** of the DAG, the **Average End Time**, and the **SLA** time you defined.
 
-## Billing details (Hosted Only)
+## Billing Details (Hosted Only)
 
-In the **Cost Breakdown** tab of your Dashboard, you can find detailed information regarding your accumulated cost per time period.
+In the **Cost Breakdown** tab of your Dashboard, you can find detailed information regarding your accumulated cost per time period, depending on the Workspace Name and Deployment.
+
+### Cost breakdown data filters
+
+You can filter the data shown in the reports by the following:
+
+* **Date**
+* **Workspace Name**: Choose which Workspaces' details you want to examine in detail.
+* **Deployment Name**: Choose which Deployments' details you want to examine in detail.
+
+### Cost breakdown data details
+
+- **Total spend** - The total cost per time period.
+- **Deployment spend**- The cost per time period related to your Deployment scheduler configuration.
+- **Compute spend** - The cost per time period related to your Worker runtime.
+- **Workspaces** - The Number of Workspaces in your Organization.
+- **Deployments** - The Number of Deployments in your Organization
+- **Workspace Spend** - A segmented bar chart that shows the **Deployment** and **Compute** spend amount, organized by Workspace.
+- **Spend for all Workspaces** - A segmented bar chart that shows the aggregated cost over time, with each segment representing the cost of a specific Workspace.
+- **Spend by Workspace Deployments** - <!--needs feedback from data team-->
+- **Detailed Spend for Deployments** - This detailed table describes the accumulated cost in terms of **Billable metrics**, which are the same metrics used in your invoices.
 
 ## Operator usage
 
-You can examine how
+You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail.
 
 ### Operator usage data filters
 
@@ -93,8 +113,8 @@ You can filter the data shown in the reports by the following:
 * **Date**
 * **Filter operators by string**: Use a string as a search query for the Operator you want to examine.
 * **Operator**: Select the Operator from a menu of options or search for one.
-* **Workspace Name**
-* **Deployment Name**
+* **Workspace Name**: Choose which Workspaces' details you want to examine in detail.
+* **Deployment Name**: Choose which Deployments' details you want to examine in detail.
 
 ### Operator usage data details
 
