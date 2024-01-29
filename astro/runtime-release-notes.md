@@ -20,7 +20,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 :::info 
 
-Because Astronomer has separate [maintenance life cycles](runtime-version-lifecycle-policy.md) for each major version of Astro Runtime, the same change can be introduced multiple times across major versions, resulting in multiple identical release notes.
+Because Astronomer has separate [maintenance life cycles](runtime-version-lifecycle-policy.md) for each major version of Astro Runtime, the same change can be introduced multiple times across major versions, resulting in multiple identical release notes. When a new major version releases, such as Astro Runtime 8.0.0, all changes from previously released versions are included in the new major version.
 
 If you're upgrading to receive a specific change, ensure the release note for the change appears either:
 
