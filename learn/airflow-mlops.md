@@ -176,7 +176,7 @@ A specific set of Airflow features can help you implement MLOps best practices:
 
 - [Automatic retries](rerunning-dags.md#automatically-retry-tasks): Airflow allows you to configure tasks to automatically retry if they fail according to custom set delays. This feature is critical to protect your pipeline against outages of external tools or rate limits and can be configured at the global, DAG, or the individual task level.
 
-- [Backfills and Reruns](rerunning-dags.md#backfill): In Airflow you can rerun previous DAG runs and create new (backfill) DAG runs for any historical period. When your DAGs are defined to run on increments of time-dimensioned data and are idempotent, this allows you to retroactively change features and create new ones on historical data. This is a key feature for creating features stores containing time-dimensioned features to train and test your models.
+- [Backfills and Reruns](rerunning-dags.md#backfill): In Airflow you can rerun previous DAG runs and create new (backfill) DAG runs for any historical period. When your DAGs are defined to run on increments of time-dimensioned data and are idempotent, this allows you to retroactively change features and create new ones on historical data. This is a key pattern for creating features stores containing time-dimensioned features to train and test your models.
 
 ### Airflow integrations for MLOps
 
