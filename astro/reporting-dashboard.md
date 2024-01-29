@@ -11,31 +11,29 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 :::
 
-Astro provides [a Dashboard](https://cloud.astronomer.io/dashboards) with a consolidated view of important metrics about your Organization's use of Astro. This includes data about your Deployment performance, DAG statistics, DAG SLA, operator use, and cost breakdown.
+Astro provides [a Dashboard](https://cloud.astronomer.io/dashboards) with a consolidated view of important metrics about your Organization's use of Astro. This includes the following Dashboards:
 
-## Access reporting Dashboards
+- Organization explorer
+- Deployment detail
+- DAG SLA
+- Billing details (Hosted only)
+- Operator Use
 
-You can find the Dashboards in your **Organization settings** menu, by clicking **Dashboards**.
+These Dashboards show in depth view about your Organization's DAG performance, Operator use, Deployment details, and cost breakdown. This data allows you to quickly identify any problems or opportunities to optimize the Deployments in your Workspace. For example, you can use the Deployment detail page to identify any unexpected DAG behaviors, like more compute use than expected, and then examine the Billing details page to identify any associated costs that behavior might incur.
+
+You can find the reporting Dashboards in your **Organization settings** menu, by clicking **Dashboards**.
+
+:::info
 
 Only users with **Organization Owners** and **Organization Admins** [user permissions](user-permissions.md#organization-roles) can access reporting Dashboards.
 
-## Export data from reporting Dashboards
-
-You can set up your reporting Dashboard to email you data reports on a given time interval or as an alert when certain criteria are met. Or, you can export your data in a one-time action.
-
-1. Hover your cursor anywhere in the Dashboard window or over a specific data element, to see the detailed menu view. This menu includes **Filters**, the option to **Maximize element**, or **Expand menu** further.
-
-2. Expand the menu, and then you can choose
-    - **Sort** the x-axis data
-    - **Alert when...** to define criterial when Astro will send you a data export of the element or dashboard
-    - **Export** to download the data in a file format of your choosing, like `.csv`.
-    - **Refresh data** to reload the data you're viewing in the Dashboard or element.
+:::
 
 ## Organization Explorer
 
 The **Organization Explorer** tab provides at-a-glance summaries about activity in your Organization's Deployment and DAGs in your entire Organization, or filtered by Workspace or Deployment name.
 
-This tab allows you to quickly inspect the activity and performance of your Deployments, and compare them to one another which means you can quickly identify any Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
+This tab allows you to quickly inspect the activity and performance of your Deployments, and compare them to one another. This means you can quickly identify any Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
 All Dashboards include sharing how recently the data was updated in the **Data available through**.
 
@@ -125,3 +123,14 @@ In the Dashboard, you can take a detailed view of the following different report
 * **Task Usage By Period, Failed/Successful** - An aggregate view of the number of tasks that failed or succeeded in the selected Workspace and Deployment over the defined time period.
 * **Task Usage By Period, Workspace** - An aggregate view of the number of tasks by Workspace over the defined time period.
 
+## Export data from reporting Dashboards
+
+You can set up your reporting Dashboard to email you data reports on a given time interval or as an alert when certain criteria are met. Or, you can export your data in a one-time action.
+
+1. Hover your cursor anywhere in the Dashboard window or over a specific data element, to see the detailed menu view. This menu includes **Filters**, the option to **Maximize element**, or **Expand menu** further.
+
+2. Expand the menu, and then you can choose
+    - **Sort** the x-axis data
+    - **Alert when...** to define criterial when Astro will send you a data export of the element or dashboard
+    - **Export** to download the data in a file format of your choosing, like `.csv`.
+    - **Refresh data** to reload the data you're viewing in the Dashboard or element.
