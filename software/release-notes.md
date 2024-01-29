@@ -19,7 +19,7 @@ This page contains release notes for all recent Astronomer Software versions.
 
 :::info 
 
-Because Astronomer has separate [maintenance life cycles](release-lifecycle-policy.md) for each minor version of Astronomer Software, the same change can be introduced multiple times across minor versions, resulting in multiple identical release notes.
+Because Astronomer has separate [maintenance life cycles](release-lifecycle-policy.md) for each minor version of Astronomer Software, the same change can be introduced multiple times across minor versions, resulting in multiple identical release notes. When a new minor version releases, such as version 0.33.0, all changes from previously released versions are included in the new minor version.
 
 If you're upgrading to receive a specific change, ensure the release note for the change appears either:
 
