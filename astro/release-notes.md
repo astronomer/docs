@@ -25,7 +25,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### New messages for Deployment health status
 
-</HostedBadge>
+<HostedBadge/>
 
 :::warning
 
@@ -35,7 +35,7 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 Astro now automatically monitors Deployments and notifies you when a Deployment isn't running as expected, such as when it can't detect a heartbeat in a scheduler. These notifications, known as Deployment incidents, appear in your Deployment's health status in the Cloud UI.
 
-See [Deployment health incidents](deployment-health-incidents.md) to learn more about each available incident type and how to address them.
+See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) to learn more about each available incident type and how to address them.
 
 ![An example of an incident message in a Deployment health status](/img/releas-notes/incident-unfurl.png)
 
