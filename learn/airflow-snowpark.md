@@ -99,26 +99,21 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Download the `whl` file for the Astro Snowflake provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/astro_provider_snowpark-0.0.0-py3-none-any.whl) and save it in your Astro project's `include` directory.
-
-3. Create a new file in your Astro project's root directory called `requirements-snowpark.txt`. This file contains all Python packages that you install in your reuseable Snowpark environment.
+2. Create a new file in your Astro project's root directory called `requirements-snowpark.txt`. This file contains all Python packages that you install in your reuseable Snowpark environment.
 
     ```text
     psycopg2-binary
     snowflake_snowpark_python[pandas]>=1.11.1
-    /tmp/astro_provider_snowpark-0.0.0-py3-none-any.whl
+    git+https://github.com/astronomer/astro-provider-snowflake.git
     virtualenv
     ```
 
-4. Change the content of the `Dockerfile` of your Astro project to the following, which imports the `whl` file and creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
+3. Change the content of the `Dockerfile` of your Astro project to the following, which creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
 
-    FROM quay.io/astronomer/astro-runtime:10.1.0
-
-    # Copy the whl file to the image
-    COPY include/astro_provider_snowpark-0.0.0-py3-none-any.whl /tmp
+    FROM quay.io/astronomer/astro-runtime:10.2.0
 
     # Create the virtual environment
     PYENV 3.8 snowpark requirements-snowpark.txt
@@ -128,13 +123,14 @@ The example code from this tutorial is also available on [GitHub](https://github
     RUN python3.8 -m pip install -r /tmp/requirements-snowpark.txt
     ```
 
-5. Add the following package to your `packages.txt` file:
+4. Add the following package to your `packages.txt` file:
 
     ```text
     build-essential
+    git
     ```
 
-6. Add the following packages to your `requirements.txt` file. The Astro Snowflake provider is installed from the `whl` file.
+5. Add the following packages to your `requirements.txt` file. The Astro Snowflake provider is installed from the `whl` file.
 
     ```text
     apache-airflow-providers-snowflake==5.2.0
@@ -142,7 +138,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     snowflake-snowpark-python[pandas]==1.11.1
     snowflake-ml-python==1.1.2
     matplotlib==3.8.1
-    /tmp/astro_provider_snowpark-0.0.0-py3-none-any.whl
+    git+https://github.com/astronomer/astro-provider-snowflake.git
     ```
 
 :::warning
@@ -156,20 +152,20 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
     ```text
     AIRFLOW__CORE__ALLOWED_DESERIALIZATION_CLASSES=airflow\.* astro\.*
     AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{
-        "conn_type": "snowflake",
-        "login": "<username>",
-        "password": "<password>",
-        "schema": "MY_SKI_DATA_SCHEMA",
+        "conn_type":"snowflake",
+        "login":"<username>",
+        "password":"<password>",
+        "schema":"MY_SKI_DATA_SCHEMA",
         "extra":
             {
-                "account": "<account>",
-                "warehouse": "<warehouse>",
-                "database": "MY_SKI_DATA_DATABASE",
-                "region": "<region>",
-                "role": "<role>",
-                "authenticator": "snowflake",
-                "session_parameters": null,
-                "application": "AIRFLOW"
+                "account":"<account>",
+                "warehouse":"<warehouse>",
+                "database":"MY_SKI_DATA_DATABASE",
+                "region":"<region>",
+                "role":"<role>",
+                "authenticator":"snowflake",
+                "session_parameters":null,
+                "application":"AIRFLOW"
             }
         }'
     ```
@@ -277,6 +273,6 @@ Congratulations! You trained a classification model in Snowpark using Airflow. T
 
 Corresponding traditional operators are available:
 
-- [SnowparkPythonOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkPythonOperator), which you can import from the [whl file](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/astro_provider_snowpark-0.0.0-py3-none-any.whl) using `from snowpark_provider.operators.snowpark import SnowparkPythonOperator`.
-- [SnowparkExternalPythonOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkExternalPythonOperator), available from the whl file using `from snowpark_provider.operators.snowpark import SnowparkExternalPythonOperator`.
+- [SnowparkPythonOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkPythonOperator), which you can import using `from snowpark_provider.operators.snowpark import SnowparkPythonOperator`.
+- [SnowparkExternalPythonOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkExternalPythonOperator), available using `from snowpark_provider.operators.snowpark import SnowparkExternalPythonOperator`.
 - [SnowparkVirtualenvOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkVirtualenvOperator), with the import `from snowpark_provider.operators.snowpark import SnowparkVirtualenvOperator`.
