@@ -21,6 +21,16 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## January 30, 2024
+
+### Additional improvements 
+
+- You can now access [Ask Astro](https://ask.astronomer.io/) from the Cloud UI **Help** menu:
+
+    ![The support menu, accessed using the Help button in the top menu of the Cloud UI](/img/docs/release-notes/ask-astro.png)
+
+- User role titles are now consistently formatted across the Cloud UI.
+
 ## January 25, 2024
 
 ### Self-service VPC peering and route management for AWS 
