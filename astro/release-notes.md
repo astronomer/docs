@@ -37,7 +37,7 @@ Astro now automatically monitors Deployments and notifies you when a Deployment 
 
 See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) to learn more about each available incident type and how to address them.
 
-![An example of an incident message in a Deployment health status](/img/releas-notes/incident-unfurl.png)
+![An example of an incident message in a Deployment health status](/img/release-notes/incident-unfurl.png)
 
 ### Additional improvements 
 
