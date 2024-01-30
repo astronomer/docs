@@ -15,6 +15,10 @@ This document describes how to configure individual task Pods for different use 
 
 :::
 
+## Prerequisites
+
+- An Astro Deployment using Astro Runtime version 8.1.0 or later.
+
 ## Customize a task's Kubernetes Pod
 
 :::danger
