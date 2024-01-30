@@ -39,17 +39,17 @@ Astro automatically monitors your Deployments and sends messages when your Deplo
 
 ![A Deployment Health incident message appearing after a user hovers over the Deployment health status](/img/docs/incident-unfurl.png)
 
-The following table contains all types of Deployment incidents. Use each of the linked topics to resolve any incidents that occur in your own Deployments. 
+The following table contains all types of Deployment incidents.
 
-| Incident name                           | Description                                                                                        |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Tasks Stuck in Queued                   | There are tasks that have been in a queued state for over 20 minutes.                              |
-| Scheduler Heartbeat Not Found           | The Airflow scheduler has not sent a heartbeat for longer than expected.                           |
-| Airflow Database Storage Unusually High | The metadata database has tables that are larger than expected.                                    |
-| Worker Queue at Capacity                | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
-| Worker Queue Does Not Exist             | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
+| Incident name                           | Severity | Description                                                                                        |
+| --------------------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
+| Tasks Stuck in Queued                   | Warning  | There are tasks that have been in a queued state for over 20 minutes.                              |
+| Scheduler Heartbeat Not Found           | Critical | The Airflow scheduler has not sent a heartbeat for longer than expected.                           |
+| Airflow Database Storage Unusually High | Warning  | The metadata database has tables that are larger than expected.                                    |
+| Worker Queue at Capacity                | Warning  | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
+| Worker Queue Does Not Exist             | Warning  | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
 
-Use the following topics to address each of these incidents.
+A **warning** incident indicates that specific tasks or DAGs might fail, while a **critical** incident indicates that your entire Deployment might not work as expected. Use the following topics to address each of these incidents. 
 
 ### Tasks Stuck in Queued
 
