@@ -179,7 +179,7 @@ For more information on creating a Snowflake connection, see [Create a Snowflake
 8. (Optional) If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
 
     ```text
-    AIRFLOW__CORE__XCOM_BACKEND='snowpark_provider.xcom_backends.snowflake.SnowflakeXComBackend'
+    AIRFLOW__CORE__XCOM_BACKEND=snowpark_provider.xcom_backends.snowflake.SnowflakeXComBackend
     AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE='AIRFLOW_XCOM_DB.AIRFLOW_XCOM_SCHEMA.XCOM_TABLE'
     AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE='AIRFLOW_XCOM_DB.AIRFLOW_XCOM_SCHEMA.XCOM_STAGE'
     AIRFLOW__CORE__XCOM_SNOWFLAKE_CONN_NAME='snowflake_default'
