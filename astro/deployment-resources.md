@@ -99,8 +99,6 @@ Scheduler resources must be set for each Deployment and are managed separately f
 
 Unlike workers, schedulers do not autoscale. The resources you set for them are the resources you have regardless of usage. For more information about how scheduler configuration affects resources usage, see [Pricing](https://astronomer.io/pricing).
 
-### Scheduler size
-
 Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes for Astro Hosted:
 
 | Scheduler size | vCPU | Memory |
