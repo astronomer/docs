@@ -51,9 +51,9 @@ On Astro Hybrid clusters, worker type is defined as a node instance type that is
 Your Organization can enable up to 10 additional different worker types for each Hybrid cluster. After a worker type is enabled on an Astro Hybrid cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
 1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [Azure](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types), or [GCP resource references](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types).
-2. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information: 
-  
-    - The name of your cluster. 
+2. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
+
+    - The name of your cluster.
     - The name of the worker type(s) you want to enable for your cluster. For example, `m6i.2xlarge`.
 
 For more information on requesting cluster changes, see [Manage Hybrid clusters](manage-hybrid-clusters.md).
@@ -66,13 +66,13 @@ Each virtualized instance of your worker type is a _worker_. Celery workers can 
 
 The following table lists all available worker types on Astro Deployments.
 
-| Worker Type | vCPU | Memory | Max task concurrency |
-| ----------- | ---- | ------ | -------------------- |
-| A5          | 1    | 2GiB   | 15                   |
-| A10         | 2    | 4GiB   | 30                   |
-| A20         | 4    | 8GiB   | 60                   |
-| A40         | 8    | 16GiB  | 120                  |
-| A60         | 12   | 24GiB  | 240                  |
+| Worker Type | vCPU | Memory | Temp Memory | Max task concurrency |
+| ----------- | ---- | ------ | ----------- | -------------------- |
+| A5          | 1    | 2GiB   | 10 GiB      | 15                   |
+| A10         | 2    | 4GiB   | 10 GiB      | 30                   |
+| A20         | 4    | 8GiB   | 10 GiB      | 60                   |
+| A40         | 8    | 16GiB  | 10 GiB      | 120                  |
+| A60         | 12   | 24GiB  | 10 GiB      | 240                  |
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker.
 
