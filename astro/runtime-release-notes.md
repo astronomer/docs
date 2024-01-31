@@ -78,21 +78,6 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
-## Astro Runtime 9.10.0
-
-- Release date: January 31, 2024
-- Airflow version: 2.7.3
-
-### Early access Airflow bug fixes
-
-- Fix bug introduced by replacing spaces by + in run_id ([#36877](https://github.com/apache/airflow/pull/36877))
-
-### Bug fixes
-
-- Fixed an issue where some logging features would not work for DAG runs with spaces in their DAG run IDs.
-- Astro Runtime now relies on logic `apache-airflow-providers-openlineage` to determine whether OpenLineage should be enabled or disabled in a given environment, which makes the behavior more consistent between different environments and implementations. 
-- Fixed an issue where `airflow tasks test <dag_id> <task_id>` always generated an error that stated it was unable to find a foreign key for the table `ab_user`.
-
 ## Astro Runtime 9.9.0
 
 - Release date: January 24, 2024
