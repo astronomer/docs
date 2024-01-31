@@ -52,7 +52,7 @@ A **warning** incident indicates that specific tasks or DAGs might fail, while a
 
 ### Scheduler Heartbeat Not Found 
 
-The scheduler has not sent a heartbeat for longer than 30 seconds. This could be a sign that the scheduler is down. Tasks will keep running, but new tasks will not be scheduled. 
+The scheduler has not sent a heartbeat for longer than 10 minutes. This could be a sign that the scheduler is down. Tasks will keep running, but new tasks will not be scheduled. 
 
 If you receive this incident notification, Astronomer Support has already been notified and no action is required from you. Ensure that you [configured a Deployment contact email](deployment-settings.md#configure-deployment-contact-emails) so that you can be notified if this issue requires additional follow-ups.
 
