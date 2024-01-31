@@ -31,7 +31,7 @@ Your Deployment health status will also show a number next to the status if a [D
 
 ![A Deployment health status](/img/docs/health-status.png)
 
-You can click on **View details** to view more information about the incident.
+You can click on **View details** to get more information about the incident.
 
 ![Deployment health incident details](/img/docs/health-status-details.png)
 
