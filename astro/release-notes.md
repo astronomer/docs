@@ -29,7 +29,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 :::warning
 
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
 :::
 
