@@ -35,7 +35,7 @@ If your Deployment is unhealthy or the status can't be determined, check the sta
 
 ## Deployment incidents
 
-Astro automatically monitors your Deployments and sends messages when your Deployment isn't running optimally or as expected. These messages are known as _Deployment incidents_.
+Astro automatically monitors your Deployments and sends messages when your Deployment isn't running optimally or as expected. These messages are known as _Deployment incidents_. To get more information about the incident, click on **View details**.
 
 ![A Deployment Health incident message appearing after a user hovers over the Deployment health status](/img/docs/incident-unfurl.png)
 
@@ -48,10 +48,6 @@ The following table contains all types of Deployment incidents. Use each of the 
 | Airflow Database Storage Unusually High | The metadata database has tables that are larger than expected.                                    |
 | Worker Queue at Capacity                | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
 | Worker Queue Does Not Exist             | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
-
-To get more information about the incident, click on **View details**.
-
-![Deployment health incident details](/img/docs/health-status-details.png)
 
 Use the following topics to address each of these incidents.
 
@@ -86,9 +82,13 @@ To limit this notification for a worker queue, increase its **Max # Workers** se
 
 ### Worker Queue Does Not Exist
 
-At least one task is configured to run on a worker queue that does not exist. Instances of this task will remain in the queued state until the worker queue is created.
+At least one task is configured to run on a worker queue that does not exist. Instances of this task will remain in the queued state until the worker queue is created. When this incident is triggered:
 
-To run these task instances, ensure that you have properly specified an existing worker queue's name in your task definition. See [Configure worker queues](configure-worker-queues.md#assign-tasks-to-a-worker-queue).
+1. Hover over the incident and click **View details**.
+2. See the DAG and task IDs that reference a worker queue that does not exist. The name of the **QUEUE** reflects how the worker queue is referenced in your task definition.
+3. Copy the worker queue name under **QUEUE** and either create a new worker queue with that exact name or rename an existing worker queue in your Deployment to match it. As long as a worker queue with the exact name exists in your Deployment, you do not have to modify your task code. See [Configure worker queues](configure-worker-queues.md#assign-tasks-to-a-worker-queue).
+
+![Deployment health incident details](/img/docs/health-status-details.png)
 
 ## See also
 
