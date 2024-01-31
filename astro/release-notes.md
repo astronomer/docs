@@ -43,7 +43,7 @@ See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-he
 
 - You can now access [Ask Astro](https://ask.astronomer.io/) from the Cloud UI **Help** menu:
 
-    ![The support menu, accessed using the Help button in the top menu of the Cloud UI](/img/docs/release-notes/ask-astro.png)
+    ![The support menu, accessed using the Help button in the top menu of the Cloud UI](/img/release-notes/ask-astro.png)
 
 - User role titles are now consistently formatted across the Cloud UI.
 
