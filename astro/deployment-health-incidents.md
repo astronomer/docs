@@ -39,7 +39,7 @@ Astro automatically monitors your Deployments and sends messages when your Deplo
 
 ![A Deployment Health incident message appearing after a user hovers over the Deployment health status](/img/docs/incident-unfurl.png)
 
-The following table contains all types of Deployment incidents.
+The following table contains all types of Deployment incidents. A **warning** incident indicates that specific tasks or DAGs might fail, while a **critical** incident indicates that your entire Deployment might not work as expected.
 
 | Incident name                           | Severity | Description                                                                                        |
 | --------------------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
