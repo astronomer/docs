@@ -33,8 +33,8 @@ When you run the command, the CLI prompts you for a provider to download. To ret
 ## Examples
 
 ```sh
-# Download version 1.2.0 of a provider
-astro registry provider add apache-airflow-providers-airbyte --version 1.2.0
+# Download version 3.3.1 of a provider
+astro registry provider add apache-airflow-providers-airbyte --version 3.3.1
 ```
 
 ## Related commands
