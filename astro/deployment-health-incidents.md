@@ -31,10 +31,6 @@ Your Deployment health status will also show a number next to the status if a [D
 
 ![A Deployment health status](/img/docs/health-status.png)
 
-You can click on **View details** to get more information about the incident.
-
-![Deployment health incident details](/img/docs/health-status-details.png)
-
 If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the logs in the [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Deployment incidents
@@ -52,6 +48,10 @@ The following table contains all types of Deployment incidents. Use each of the 
 | Airflow Database Storage Unusually High | The metadata database has tables that are larger than expected.                                    |
 | Worker Queue at Capacity                | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
 | Worker Queue Does Not Exist             | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
+
+To get more information about the incident, click on **View details**.
+
+![Deployment health incident details](/img/docs/health-status-details.png)
 
 Use the following topics to address each of these incidents.
 
