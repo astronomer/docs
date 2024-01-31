@@ -12,6 +12,14 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
 
 The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can also use a secret to store the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections for testing purposes. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
 
+Because Deployment preview templates use the `deploy-action` template, which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro). This action automates the deploy process and includes additional features for more complex automation workflows. Specifically, the action can automatically:
+
+- Choose a deploy type based on the files that were changed in a commit. This allows you to use the same template for DAG deploys and image deploys.
+- Test DAGs as part of the deploy process and prevent deploying if any of the tests fail. These tests are defined in the `tests` directory of your Astro project.
+- Create a preview Deployment to test your code before deploying to production. A Deployment preview is an Astro Deployment that mirrors the configuration of an existing Deployment.
+
+This means that the `deploy-action` triggers both image deploys and DAG deploys depending on the type of file changes that you made. If you committed changes only to DAG files, the action triggers a DAG deploy. If you committed changes to any other file, the action triggers an image deploy. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
+
 :::info
 
 If you use GitHub Enterprise and cannot access the Astronomer Deploy Action, see [Private network templates](#private-network-templates).
