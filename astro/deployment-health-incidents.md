@@ -48,7 +48,7 @@ The following table contains all types of Deployment incidents. A **warning** in
 | Worker Queue at Capacity                | Warning  | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
 | Worker Queue Does Not Exist             | Warning  | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
 
-A **warning** incident indicates that specific tasks or DAGs might fail, while a **critical** incident indicates that your entire Deployment might not work as expected. Use the following topics to address each of these incidents. 
+Use the following topics to address each of these incidents. 
 
 ### Scheduler Heartbeat Not Found 
 
