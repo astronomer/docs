@@ -46,6 +46,8 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
 
 :::
 
+## Setup
+
 <Tabs
     defaultValue="standard"
     groupId= "deploy-action-templates"
