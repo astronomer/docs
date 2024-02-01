@@ -1,8 +1,8 @@
 ---
-title: 'Using registry backends in Astronomer Software'
+title: 'Using external registry backends in Astronomer Software'
 sidebar_label: 'Use a registry backend'
 id: registry-backend
-description: Configure a registry backend to work with the Astronomer platform.
+description: Configure an external registry backend to work with the Astronomer platform.
 ---
 
 Astronomer Software requires a Docker Registry to store the Docker Images generated every time a user pushes code or makes a configuration change to an Airflow Deployment on Astronomer.
