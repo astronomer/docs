@@ -19,21 +19,21 @@ Astro provides [a Dashboard](https://cloud.astronomer.io/dashboards) with a cons
 - Billing details (Hosted only)
 - Operator Use
 
-These Dashboards show in depth view about your Organization's DAG performance, Operator use, Deployment details, and cost breakdown. This data allows you to quickly identify any problems or opportunities to optimize the Deployments in your Workspace. For example, you can use the Deployment detail page to identify any unexpected DAG behaviors, like more compute use than expected, and then examine the Billing details page to identify any associated costs that behavior might incur.
+Dashboards help you quickly identify any problems or opportunities to optimize how your team uses Airflow. For example, you can use the Deployment detail page to identify unexpected DAG behaviors, like unusually high compute usage, and then check the Billing details dashboard to identify any associated costs incurred by that behavior.
 
-You can find the reporting Dashboards in your **Organization settings** menu, by clicking **Dashboards**.
+To view Astro dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 
 :::info
 
-Only users with **Organization Owners** and **Organization Admins** [user permissions](user-permissions.md#organization-roles) can access reporting Dashboards.
+Only users with **Organization Billing Admin** [user permissions](user-permissions.md#organization-roles) can access reporting dashboards.
 
 :::
 
 ## Organization Explorer
 
-The **Organization Explorer** tab provides at-a-glance summaries about activity in your Organization's Deployment and DAGs in your entire Organization, or filtered by Workspace or Deployment name.
+The **Organization Explorer** tab provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
 
-This tab allows you to quickly inspect the activity and performance of your Deployments, and compare them to one another. This means you can quickly identify any Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
+This tab allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
 All Dashboards include sharing how recently the data was updated in the **Data available through**.
 
@@ -41,14 +41,13 @@ All Dashboards include sharing how recently the data was updated in the **Data a
 
 You can filter the data shown in the reports by the following:
 
-* **Time period**
-* **Workspace name** - Choose which Workspaces' data you want to view. By default, if you don't select any Workspaces, the report shows the aggregated view of all Workspaces.
-* **Deployment name** - Choose which Deployments' data you want to view. By default, if you don't select any Deployment, the report shows the aggregated view of all Deployments.
-* **Display by** - Select the time interval you want to view over. This view can be as granular as the **Day** or view data aggregated by **Week** or **Month**.
+- **Time period** - Choose the date range that you want to view data for.
+- **Workspace name** - Choose which Workspaces' data you want to view. By default, if you don't select any Workspaces, the report shows the aggregated view of all Workspaces.
+- **Deployment name** - Choose which Deployments' data you want to view. By default, if you don't select any Deployment, the report shows the aggregated view of all Deployments.
+- **Display by** - Select the time interval you want the data organized by. The dashboard can show you data in  **Day**, **Week**, or **Month** intervals.
 
 ### Organization explorer data
 
-In the Dashboard, you can take a detailed view of the following different reporting elements. Each has its own section where you can filter the data within the element, export reports, or set up an email alert.
 
 * **Deployments** - The number of Deployments in a Workspace, indexed by time.
 * **Task Counts by Success/Failure** - Segmented bar chart showing the counts of successful and failed tasks in the selected Workspace, indexed by time.
@@ -61,24 +60,26 @@ In the Dashboard, you can take a detailed view of the following different report
 
 ## Deployment Detail
 
-The **Deployment Detail** report shows a table of all your non-deleted Deployments in your Organization, indexed by Workspace Name. You can filter this table by **Workspace Name** or **Deployment Name** Additionally, the task counts, DAG counts, and unique operator counts are shown for the latest completed month.
+The **Deployment Detail** report shows a table of all Deployments in your Organization, indexed by Workspace Name. For each Deployment, the dashboard shows your Deployment configurations as awell as usage metrics including task run counts, DAG run counts, and operator counts.
 
-This report view also highlights if you have any Deployments that use a version of the Astro Runtime that are either unsupported or are expected to reach end of maintenance in the next six months.
+Use this dashboard to check that your Deployment has the appropriate resources based on the number of DAGs it runs. You can also use this dashboard to check whether your Astro Runtime version is in support or needs to be upgraded.
 
 ## DAG SLA
 
-If you have a service level agreement (SLA) where your DAGs need to complete by a certain consistent time, you can use this view to compare DAG completion times with an SLA time. This view can help you report the frequency your Organization meets their SLA obligations.
+The DAG SLA dashboard allows you to simulate a service level agreement (SLA) for when a DAG should complete and then compare your DAG runs against the SLA. Use this dashboard to ensure that your Organization meets your SLA obligations, or to create and alert on new SLAs.
+
+To use this dashboard, you must first define an SLA and the DAGs which should be compared against the SLA.
 
 1. Choose the **DAG ID** that you want to check DAG run completion times for. If you have a large number of DAGs in your Organization, you can first filter by **Workspace Name** and **Deployment Name** before choosing your DAG ID.
 2. Select the time interval over which you want to look at the DAG data.
 3. Define the **SLA Time (UTC)**
 4. Choose the time interval you want to aggregate the data with by choosing **Day**, **Week**, or **Month** in **Display by**.
 
-The report generates a line graph that shows the **Median End Time** of the DAG, the **Average End Time**, and the **SLA** time you defined.
+The report generates a line graph that shows the **Median End Time** of the DAG, the **Average End Time**, compared to the **SLA** time you defined.
 
 ## Billing Details (Hosted Only)
 
-In the **Cost Breakdown** tab of your Dashboard, you can find detailed information regarding your accumulated cost per time period, depending on the Workspace Name and Deployment.
+In the **Cost Breakdown** tab of your Dashboard, you can find detailed information about how much you spend on Astro over time for each of your Workspaces and Deployments. Use this data alongside your other dashboards to identify the biggest opportunities for cost reduction in your Organization.
 
 ### Cost breakdown data filters
 
@@ -102,7 +103,7 @@ You can filter the data shown in the reports by the following:
 
 ## Operator usage
 
-You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail.
+You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. 
 
 ### Operator usage data filters
 
