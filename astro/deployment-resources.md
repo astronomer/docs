@@ -181,6 +181,10 @@ Use Deployment hibernation to ensure that:
 - You don't have to delete a Deployment in order to avoid the cost of the Deployment.
 - You don't have to recreate development environments and re-enter Deployment configurations.
 
+### Prerequisites
+
+You can hibernate a Deployment only if you enabled **Development Mode** when you [created the Deployment](create-deployment.md). Deployments without this setting enabled can't be hibernated.
+
 ### Create a hibernation schedule
 
 Before you create a hibernation schedule for a Deployment, consider the following constraints:
