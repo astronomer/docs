@@ -23,7 +23,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## January 25, 2024
 
-### Self-service VPC peering and route management for AWS 
+### Self-service VPC peering and route management for AWS
 
 <HostedBadge/>
 
@@ -38,7 +38,7 @@ You can now configure a network connection between Astro and an AWS VPC without 
 ### Additional improvements
 
 - There is no longer a minimum on the amount of CPU and memory that you can request for Kubernetes Pods.
-  
+
 ### Bug fixes
 
 - Fixed an issue in Astro Hybrid where refreshing the browser could occasionally reset a worker queue's worker type setting.
@@ -65,11 +65,11 @@ You can now configure a network connection between Astro and an AWS VPC without 
 
 ## December 20, 2023
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where creating an alert for a DAG through the Astro API would apply the alert to the incorrect Deployment.
 - Fixed an issue where Deployment worker Pods could crash when running the Kubernetes executor.
-- Fixed an issue where Deployment API key expiration dates were not applied correctly if you configured multiple API keys at once. 
+- Fixed an issue where Deployment API key expiration dates were not applied correctly if you configured multiple API keys at once.
 - Fixed an issue where logging features could be disrupted if you set `AZURE_CLIENT_ID `as an environment variable. Note that this fix applies only to Astro Runtime 10 and later.
 
 ## December 12, 2023
@@ -112,7 +112,7 @@ Astro is now available as an Azure Native ISV Service. If your team is consideri
 
 See [Install Astro from the Astro marketplace](https://docs.astronomer.io/astro/install-azure) for setup steps. To learn more about Astronomer's partnership with Microsoft, see [Introducing Apache Airflow™ on Astro – an Azure Native ISV Service](https://www.astronomer.io/blog/introducing-apache-airflow-on-astro-an-azure-native-isv-service/).
 
-### Create Airflow connections in the Cloud UI and link them to Deployments 
+### Create Airflow connections in the Cloud UI and link them to Deployments
 
 You can now create Airflow connections in the Cloud UI through the new Environment Manager menu. The Environment Manager lets you create Airflow connections directly in the Cloud UI and stores all connections in an Astro-managed secrets backend. You can then share connections between Deployments and set default connections so that your team members always have access to external resources when they create new Deployments. See [Create Airflow connections in the Cloud UI](https://docs.astronomer.io/astro/create-and-link-connections).
 
@@ -768,7 +768,7 @@ To review the new process for creating SSO connections, see [Set up authenticati
 
 ### Preview Deployments
 
-You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions.md#deployment-preview-templates) to configure your Astro pipelines to:
+You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions-deployment-preview.md) to configure your Astro pipelines to:
 - Create the preview Deployment when you create a new branch.
 - Deploy code changes to Astro when you make updates in the branch.
 - Delete the preview Deployment when you delete the branch.

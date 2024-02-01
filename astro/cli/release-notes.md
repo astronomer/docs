@@ -344,7 +344,7 @@ You can now use the `-—clean-output` flag with the following commands to make 
 - `astro deployment create`
 - `astro deployment update`
 
-This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions.md).
+This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions-deploy-action.md).
 
 ### New environment variable `ASTRO_HOME`
 
