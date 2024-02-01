@@ -146,7 +146,6 @@ module.exports = {
                   type: "category",
                   label: "Github Actions",
                   items: [
-                    "ci-cd-templates/github-actions",
                     "ci-cd-templates/github-actions-template",
                     "ci-cd-templates/github-actions-deployment-preview",
                     "ci-cd-templates/github-actions-private-network",
