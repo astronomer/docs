@@ -82,11 +82,11 @@ To limit this notification for a worker queue, increase its **Max # Workers** se
 
 ### Worker Queue Does Not Exist
 
-At least one task is configured to run on a worker queue that does not exist. Instances of this task will remain in the queued state until the worker queue is created. When this incident is triggered:
+At least one task is configured to run on a worker queue that does not exist. Instances of this task will remain in the queued state until the worker queue is created. To resolve this incident:
 
-1. Hover over the incident and click **View details**.
-2. See the DAG and task IDs that reference a worker queue that does not exist. The name of the **QUEUE** reflects how the worker queue is referenced in your task definition.
-3. Copy the worker queue name under **QUEUE** and either create a new worker queue with that exact name or rename an existing worker queue in your Deployment to match it. As long as a worker queue with the exact name exists in your Deployment, you do not have to modify your task code. See [Configure worker queues](configure-worker-queues.md#assign-tasks-to-a-worker-queue).
+1. Hover over the Deployment health status and click **View details** for the incident.
+2. Check the DAG and task IDs that reference the non-existent worker queue. The non-existent worker queue name referenced from your DAG code is listed under **Queue**.
+3. For each affected DAG, you can either create a new worker queue with the exact name as shown in **Queue** or update your DAG code to reference an existing worker queue. See [Configure worker queues](configure-worker-queues.md#assign-tasks-to-a-worker-queue).
 
 ![Deployment health incident details](/img/docs/health-status-details.png)
 
