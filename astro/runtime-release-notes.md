@@ -29,6 +29,26 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 10.3.0
+
+- Release date: February 1, 2024
+- Airflow version: 2.8.1
+
+### Early access Airflow bug fixes
+
+- Fix bug introduced by replacing spaces by + in run_id ([#36877](https://github.com/apache/airflow/pull/36877))
+- Remove superfluous `@Sentry.enrich_errors` ([#37002](https://github.com/apache/airflow/pull/37002))
+
+### Additional improvements
+
+- Upgraded the Astro SDK to [1.8.0](https://github.com/astronomer/astro-sdk/releases/tag/1.8.0).
+
+### Bug fixes
+
+- Fixed an issue where some logging features would not work for DAG runs with spaces in their DAG run IDs.
+- Astro Runtime now relies on logic `apache-airflow-providers-openlineage` to determine whether OpenLineage should be enabled or disabled in a given environment, which makes the behavior more consistent between different environments and implementations. 
+- Fixed an issue where `airflow tasks test <dag_id> <task_id>` always generated an error that stated it was unable to find a foreign key for the table `ab_user`.
+
 ## Astro Runtime 10.2.0
 
 - Release date: January 19, 2024
