@@ -48,7 +48,7 @@ Using a combination of Astro alerts and Airflow notifications allows your team t
 
 - Task-level alerts with custom logic, for example if you want to be notified of success or failure only for a specific task, or want to run custom code if a task succeeds or fails, are straightforward to implement in Airflow. Task-level success or failure alerts or alerts with custom logic are not currently supported with Astro alerts.
 - DAG-level success or failure alerts can be accomplished using either Airflow notifications or Astro alerts, but on Astro they are easy to configure and do not require any code changes. To implement these alerts with Airflow, you would need to update your DAG code and possibly complete more configuration for your communication channel (e.g. setting up an SMTP server for email alerts).
-- Absolute time alerts are straightforward to implement with Astro alerts, but are not currently supported in Airflow.
+- Absolute time alerts, for when you need your DAG to complete by a certain time of day, should be implemented using Astro alerts. They are not currently supported in Airflow
 
 In some cases, whether you set up an alert on Astro or in Airflow will be dependent on how your DAGs were configured before you moved to Astro. For example, if all of your DAGs have email on failure notifications configured already, it will likely be easier for you to configure an SMTP server on Astro and rely on the existing notification rather than implementing a new Astro alert for each DAG. On the other hand, if you are developing new DAGs on Astro, it will likely be easier to implement Astro alerts which require less configuration for the communication channels.
 
