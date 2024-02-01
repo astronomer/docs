@@ -17,7 +17,7 @@ The following are the registry backend tools supported by Astronomer:
 
 :::info
 
-This document explains only how to set up a registry for hosting your deployment images in cloud object storage. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md). Or, to host all images in a high-security environment with no connections to public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
+This document explains only how to set up a registry for hosting your Deployment images in external cloud object storage. To create a custom registry for Deployment images within your Astronomer Software cluster, see [Configure a custom image registry for Deployment images](custom-image-registry.md). Or, to host all images in a high-security environment with no connections to public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
 
 :::
 
