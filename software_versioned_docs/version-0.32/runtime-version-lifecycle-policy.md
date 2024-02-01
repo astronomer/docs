@@ -30,7 +30,7 @@ The maintenance period for an Astro Runtime version depends on its release chann
 | Stable          | 6 months or 3 months after the next major Runtime release (whichever is longer) |
 | LTS             | 18 months                                                                       |
 
-Astronomer policy provides backward-compatibility guarantees for upgrades within a major version however, for each supported major Runtime version, bug fixes are delivered only through new `minor.patch` versions. If you report an issue with a supported Astro Runtime image that is not on the latest `minor.patch` version, Astronomer Support might ask that you to upgrade your Astro Runtime version to see if that resolves the issue.
+Astronomer policy provides backward-compatibility guarantees for upgrades within a major version however, for each supported major Runtime version, bug fixes are delivered only through new `minor.patch` versions. If you report an issue with a supported Astro Runtime image that is not on the latest `minor.patch` version, Astronomer Support might ask that you upgrade your Astro Runtime version to see if that resolves the issue.
 
 For example, if you report an issue occurring on a Deployment running Astro Runtime 9.0.0, Astronomer support might ask you to first upgrade to the latest `9.minor.patch` version before troubleshooting your issue any further. If the issue still persists after upgrading, any fixes to that issue will be delivered in a new minor or patch release.
 
