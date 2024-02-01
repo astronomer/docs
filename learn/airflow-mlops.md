@@ -45,6 +45,7 @@ The benefits of using Airflow for MLOps are:
 - **Monitoring and alerting**: Airflow comes with production-ready monitoring and alerting modules like [Airflow notifiers](error-notifications-in-airflow.md#notifiers), [extensive logging features](logging.md), and [Airflow listeners](airflow-listeners.md). They enable you to have fine-grained control over how you monitor your ML operations and how Airflow alerts you if something goes wrong.
 - **Pluggable compute**: When using Airflow you can [pick and choose](#model-operations-and-compute-considerations) the compute you want to use for each task. This allows you to use the the perfect environment and resources for every single action in your ML pipeline. For example, you can run your data engineering tasks on a Spark cluster and your model training tasks on a GPU instance.
 - **Data agnostic**: Airflow is data agnostic, which means it can be used to orchestrate any data pipeline, regardless of the data format or storage solution. You can plug in any new data storage, such as the latest vector database or your favorite RDBMS, with minimal effort.
+- **Incremental and idempotent pipelines**: Airflow allows you to define pipelines that operate on data collected in a specified timeframe and to perform [backfills and reruns](rerunning-dags.md#backfill) of a set of idempotent tasks. This lends itself well to creating feature stores, especially for time-dimensioned features, which form the basis of advanced model training and selection.
 - **Ready for day 2 Ops**: Airflow is a mature orchestrator, coming with built-in functionality such as [automatic retries](rerunning-dags.md#automatically-retry-tasks), complex [dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) logic, as well as the option to make pipelines [dynamic](dynamic-tasks.md).
 - **Integrations**: Airflow has a large ecosystem of [integrations](https://registry.astronomer.io/providers), including many popular [MLOps tools](#airflow-integrations-for-mlops).
 - **Shared platform**: Both data engineers and ML engineers use Airflow, which allows teams to create direct dependencies between their pipelines, such as using [Airflow Datasets](airflow-datasets.md).
@@ -174,6 +175,8 @@ A specific set of Airflow features can help you implement MLOps best practices:
     ![Screenshot of an Astro alert in a Slack channel.](/img/guides/airflow-mlops_alerts.png)
 
 - [Automatic retries](rerunning-dags.md#automatically-retry-tasks): Airflow allows you to configure tasks to automatically retry if they fail according to custom set delays. This feature is critical to protect your pipeline against outages of external tools or rate limits and can be configured at the global, DAG, or the individual task level.
+
+- [Backfills and Reruns](rerunning-dags.md#backfill): In Airflow, you can rerun previous DAG runs and create backfill DAG runs for any historical period. If your DAGs run on increments of time-dimensioned data and are idempotent, you can retroactively change features and create new ones based on historical data. This is a key pattern for creating feature stores containing time-dimensioned features to train and test your models.
 
 ### Airflow integrations for MLOps
 
