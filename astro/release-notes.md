@@ -21,6 +21,32 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## January 30, 2024
+
+### New messages for Deployment health status
+
+<HostedBadge/>
+
+:::warning
+
+This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+:::
+
+Astro now automatically monitors Deployments and notifies you when a Deployment isn't running as expected, such as when it can't detect a heartbeat in a scheduler. These notifications, known as Deployment incidents, appear in your Deployment's health status in the Cloud UI.
+
+See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) to learn more about each available incident type and how to address them.
+
+![An example of an incident message in a Deployment health status](/img/release-notes/incident-unfurl.png)
+
+### Additional improvements 
+
+- You can now access [Ask Astro](https://ask.astronomer.io/) from the Cloud UI **Help** menu:
+
+    ![The support menu, accessed using the Help button in the top menu of the Cloud UI](/img/release-notes/ask-astro.png)
+
+- User role titles are now consistently formatted across the Cloud UI.
+
 ## January 25, 2024
 
 ### Self-service VPC peering and route management for AWS 
