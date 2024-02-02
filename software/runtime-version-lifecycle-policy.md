@@ -30,9 +30,9 @@ The maintenance period for an Astro Runtime version depends on its release chann
 | Stable          | 6 months or 3 months after the next major Astro Runtime release, whichever is longer |
 | LTS             | 18 months or 6 months after the next LTS Astro Runtime release, whichever is longer  |
 
-For each supported major Runtime version, bug fixes are delivered only through new `minor.patch` versions. If you report an issue with a supported Astro Runtime image that is not on the latest `minor.patch` version, Astronomer Support might ask that you upgrade your Astro Runtime version to see if that resolves the issue. Astronomer strives to provide backwards compatibility for all upgrades within the version. For example, you can upgrade directly from 9.0.0 to 9.4.0 and expect no breaking changes unless otherwise stated in documentation.
+For each supported major Runtime version, bug fixes are delivered only through new `minor.patch` versions. If you report an issue with a supported Astro Runtime image that is not on the latest `minor.patch` version, Astronomer Support might ask that you upgrade your Astro Runtime version to see if that resolves the issue. 
 
-For example, if you report an issue occurring on a Deployment running Astro Runtime 9.0.0, Astronomer support might ask you to first upgrade to the latest `9.minor.patch` version before troubleshooting your issue any further. If the issue still persists after upgrading, any fixes to that issue will be delivered in a new minor or patch release.
+For example, if you report an issue occurring on a Deployment running Astro Runtime 9.0.0, Astronomer support might ask you to first upgrade to the latest `9.minor.patch` version before troubleshooting your issue any further. If the issue still persists after upgrading, any fixes to that issue will be delivered in a new minor or patch release. Astronomer strives to provide backwards compatibility for all upgrades within the version. For example, you can upgrade directly from 9.0.0 to 9.4.0 and expect no breaking changes unless otherwise stated in documentation.
 
 Within the maintenance window of each Astro Runtime version, the following is true:
 
