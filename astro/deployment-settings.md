@@ -5,20 +5,20 @@ id: deployment-settings
 description: "Manage Deployment settings to customize your Deployment for your use case."
 ---
 
-After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There are two categories of options for configuring your Astro Deployment to best meet your needs: Deployment details and resource configuration.
+After you create an Astro Deployment, you can modify its settings using the Cloud UI and Astro CLI to tailor its performance. There are two categories of Deployment configurations: Deployment _details_ and _resources_.
 
 ## Deployment details
 
-Use [Deployment details](deployment-details.md) to manage the administration of your Deployment. This includes includes actions like updating information about your Deployment or transferring it to another Workspace. The following actions allow you to organize and label your Deployments within your Workspace in a way that best fits how your team works with Astro:
+[Deployment details](deployment-details.md) are high level settings that define how users can interact with the Deployment. These settings include:
 
 - Deployment names and descriptions.
 - Deployment contact emails.
 - Rules for what types of deploys are allowed.
-- Delete a Deployment.
+- Your Deployment's current Workspace.
 
 ## Deployment resources
 
-You also have [configuration options](deployment-resources.md) that allow you to customize the resource use, infrastructure, and performance of your Deployment. This means you can optimize how your Deployment uses resources, so you can improve the efficiency of your Deployment processing, optimize compute resources and cost, or enable advanced use cases with intensive workloads. The following configuration options enable you to customize your Deployment to get the most out of your resources on Astro:
+[Deployment resources](deployment-resources.md) let you customize the resource use, infrastructure, and performance of your Deployment. Use these settings to optimize Deployment processing, optimize compute resources and cost, and enable advanced use cases with intensive workloads. The following configuration options are available for customizing your resource use:
 
 - Change the Deployment executor.
 - Configure Kubernetes Pod resources.
