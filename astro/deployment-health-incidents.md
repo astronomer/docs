@@ -35,7 +35,7 @@ If your Deployment is unhealthy or the status can't be determined, check the sta
 
 ## Deployment incidents
 
-Astro automatically monitors your Deployments and sends messages when your Deployment isn't running optimally or as expected. These messages are known as _Deployment incidents_. To get view information about the incident, click on **View details**.
+Astro automatically monitors your Deployments and sends messages when your Deployment isn't running optimally or as expected. These messages are known as _Deployment incidents_. To view information about the incident, hover over the incident and click **View details**.
 
 ![A Deployment Health incident message appearing after a user hovers over the Deployment health status](/img/docs/incident-unfurl.png)
 
