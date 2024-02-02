@@ -83,5 +83,5 @@ The following information isn't rolled back:
 
 A rollback's effect on running tasks depends on whether the rollback downgrades your Deployment:
 
-- If a rollback downgrades a Deployment to a previous version of Astro Runtime, all currently running tasks fail immediately. If a task has any remaining retries, those retries will run after the deploy is rolled back. 
+- If a rollback downgrades a Deployment to a previous version of Astro Runtime, all currently running tasks fail immediately. If a task has any remaining retries, those retries will run after the rollback is complete.
 - If a rollback doesn't include a downgrade, any currently running tasks from before the rollback continue to run your latest code, while new Pods for downstream tasks run the code from the rollback version. This is identical behavior to pushing new code as described in [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
