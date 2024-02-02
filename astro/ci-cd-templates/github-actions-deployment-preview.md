@@ -1,6 +1,6 @@
 ---
-sidebar_label: Deployment previews templates
-title: GitHub Actions templates for Deployment previews
+sidebar_label: Preview Deployment templates
+title: GitHub Actions templates for preview Deployments
 id: github-actions-deployment-preview
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to a preview Deployment using GitHub Actions.
 ---
@@ -8,9 +8,9 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
+The Astronomer [deploy action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
 
-The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can also use a secret to store the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections for testing purposes. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
+The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can also use a secret to store the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections during tests. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
 
 Because Deployment preview templates use the `deploy-action` template, which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro). This action automates the deploy process and includes additional features for more complex automation workflows. Specifically, the action can automatically:
 

@@ -1,6 +1,6 @@
 ---
-sidebar_label: Standard Deploy Action
-title: GitHub Actions Template using Deploy Action
+sidebar_label: Standard deploy templates
+title: GitHub Actions templates for deploys to Astro
 id: github-actions-template
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using GitHub Actions.
 ---
@@ -50,7 +50,7 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
 
 <Tabs
     defaultValue="standard"
-    groupId= "deploy-action-templates"
+    groupId= "setup"
     values={[
         {label: 'Single branch', value: 'standard'},
         {label: 'Multiple branch', value: 'multibranch'},

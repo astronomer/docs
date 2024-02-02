@@ -1,6 +1,6 @@
 ---
 sidebar_label: Private network templates
-title: GitHub Actions template for Private Networks
+title: GitHub Actions templates for deploying to Astro from private networks
 id: github-actions-private-network
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro on private networks using GitHub Actions.
 ---
@@ -8,7 +8,7 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-If you do not have access to Astronomer's `deploy-action`, use one of the following [private network templates](#private-network-templates). These templates also work for if you use GitHub Enterprise and can't use the public Astronomer [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace.
+If you don't have access to the Astronomer [deploy action](https://github.com/astronomer/deploy-action) because you can't access the public internet from your GitHub repository, use one of the following private network templates to deploy to Astro. 
 
 Read the following sections to choose the right template for your use case. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
 
@@ -35,7 +35,7 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
 ## Setup
 <Tabs
     defaultValue="standard"
-    groupId= "private-network-templates"
+    groupId= "setup"
     values={[
         {label: 'Single branch', value: 'standard'},
         {label: 'Multiple branch', value: 'multibranch'},
