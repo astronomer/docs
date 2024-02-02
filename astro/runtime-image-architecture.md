@@ -84,7 +84,7 @@ The latest version of the Astro Runtime image has the following open source prov
 - Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
 - Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
 - Common SQL [`apache-airflow-providers-common-sql`](https://pypi.org/project/apache-airflow-providers-common-sql/)
-- Datadog [`apache-airflow-providers-datadog](https://pypi.org/project/apache-airflow-providers-datadog/)*
+- Datadog [`apache-airflow-providers-datadog`](https://pypi.org/project/apache-airflow-providers-datadog/)*
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)*
 - FTP [`apache-airflow-providers-ftp`](https://pypi.org/project/apache-airflow-providers-ftp/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)*
