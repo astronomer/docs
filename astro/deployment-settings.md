@@ -25,7 +25,7 @@ After you create an Astro Deployment, you can modify its settings using the Clou
 - Change Scheduler resources.
 - Enforce CI/CD Deploys.
 - Enable High Availability.
-- Update your Airflow configuration.
+- Customize your Airflow environment using environment variables.
 
 For advanced Deployment resource configurations, see [Manage Airflow executors on Astro](executors-overview.md) and [Configure worker queues](configure-worker-queues.md).
 
