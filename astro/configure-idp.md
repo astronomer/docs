@@ -158,8 +158,8 @@ This section provides setup steps for setting up Microsoft Entra ID as your IdP 
 To integrate Azure as your IdP for Astro you must have:
 
 - An Azure subscription.
-- A [Microsoft Entra ID tenant](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-create-new-tenant) with `Global Administrator` privileges.
-- [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
+- [Cloud Application Administrator](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator) permissions on Microsoft Entra ID.
+- [Organization Owner](user-permissions.md) permissions in the Organization you're configuring.
 - At least one [verified domain](manage-domains.md).
 
 #### Step 1: Register Astro as an application on Azure
@@ -168,18 +168,36 @@ Follow the [Microsoft documentation](https://learn.microsoft.com/en-us/entra/ide
 
 #### Step 2: Configure SSO on Astro
 
-Follow the steps in [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity/saas-apps/astro-tutorial#configure-microsoft-entra-sso) to configure Microsoft Entra SSO to connect to Astro. Be sure to download the PEM certificate from teh **SAML Signing Certificate** option for the next step.
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+2. In the **SSO Configuration** menu, click **Configure SSO**.
+3. Configure the following values for your connection:
 
-#### Step 3: Send configuration information to Astronomer support
+    - **Connection Type**: Select **SAML**.
+    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Microsoft Entra ID.
+    - **Automatic Membership**: Set the default role for users who join your Organization through Microsoft Entra ID and without an explicit invite from Astro.
 
-Submit a request to [Astronomer support](https://cloud.astronomer.io/support) to connect Astro to Microsoft Entra ID. In your request, provide the following information:
+4. Copy the **Single Sign-On URL** and **Audience URI (SP Entity ID)** for Step 3.
+5. Keep this configuration window open. You'll return to it in Step 4.
 
-- Your PEM certificate
-- ["appropriate copied URLs from Microsoft Entra admin center"??]
+#### Step 3: Configure SSO on Azure
 
-After you submit your request, Astronomer support creates the SSO connection and notifies you when the connection is ready to use.
+In a new tab, open the [Microsoft Entra admin center](https://entra.microsoft.com/) and follow the steps in [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity/saas-apps/astro-tutorial#configure-microsoft-entra-sso) to configure Microsoft Entra SSO for Astro. In the **Basic SAML Configuration** section of your configuration, set the following values:
 
-#### Step 4: Copy your SSO bypass link
+- **Identifier (Entity ID)**: Enter the value for **Audience URI (SP ENTITY ID)** you copied in the previous step.
+- **Reply URL (Assertion Consumer Service URL)**: Enter the value for **Single Sign-On URL** you copied in the previous step.
+ 
+After you complete the configuration, download the PEM certificate from the **SAML Signing Certificate** section for Step 4.
+
+#### Step 4: Finalize the SSO connection in Astro
+
+1. Return to the Cloud UI. In the configuration screen for your SSO connection, configure the following values:
+
+    - **PEM Certificate**: Enter the PEM certificate you downloaded in Step 3.
+    - **Identity Provider Single Sign-on URL**: Enter the URL you copied in Step 3.
+
+2. Click **Create**. Your Entra ID integration appears as an entry in **SSO Configuration**.
+
+#### Step 5: Copy your SSO bypass link
 
 :::warning
 
@@ -196,7 +214,7 @@ An SSO bypass link allows you to authenticate to your Organization without using
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
 
 
-#### Step 5: Assign users to your Microsoft Entra ID application
+#### Step 6: Assign users to your Microsoft Entra ID application
 
 Follow [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal?pivots=portal) to assign users from your organization to your new application.
 
