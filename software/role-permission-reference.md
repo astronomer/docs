@@ -27,6 +27,7 @@ The following tables show high level comparisons of the different permitted acti
 | View task usage information for the Deployment                                                                                                                                     | ✔️                     | ✔️                     | ✔️                    |
 | View Deployment Admin users                                                                                                                                                        |                       | ✔️                     | ✔️                    |
 | Modify the Deployment's settings                                                                                                                                                   |                       | ✔️                     | ✔️                    |
+| Upgrade the Deployment's Astro Runtime version                                                                                                                                     |                       | ✔️                     | ✔️                    |
 | Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for the Deployment, including modifying task runs and DAG runs |                       | ✔️                     | ✔️                    |
 | Push code to the Deployment using the Astro CLI                                                                                                                                    |                       | ✔️                     | ✔️                    |
 | Create, update, and delete a Deployment-level service account                                                                                                                      |                       | ✔️                     | ✔️                    |
@@ -35,6 +36,7 @@ The following tables show high level comparisons of the different permitted acti
 | Delete the Deployment                                                                                                                                                              |                       |                       | ✔️                    |
 | Update Deployment-level permissions for users within the Deployment                                                                                                                |                       |                       | ✔️                    |
 | Update Deployment-level permissions for Teams within the Deployment                                                                                                                |                       |                       | ✔️                    |
+| Upgrade the Deployment to an unsupported version of Astro Runtime                                                                                                                  |                       |                       | ✔️                    |
 
 ### Default Workspace user permissions
 
@@ -50,12 +52,16 @@ The following tables show high level comparisons of the different permitted acti
 | View Workspace admin users.                                                                        |                      | ✔️                    | ✔️                   |
 | Modify the Workspace, including Workspace Name, Description, and user access                       |                      | ✔️                    | ✔️                   |
 | Create a Deployment in the Workspace                                                               |                      | ✔️                    | ✔️                   |
+| Update any Deployment in the Workspace                                                             |                      | ✔️                    | ✔️                   |
+| Upgrade any Deployment in the Workspace                                                            |                      | ✔️                    | ✔️                   |
 | Create, modify, and delete Workspace-level service accounts                                        |                      | ✔️                    | ✔️                   |
 | View pending user invites for the Workspace                                                        |                      |                      | ✔️                   |
 | Delete the Workspace                                                                               |                      |                      | ✔️                   |
 | Update [IAM](integrate-iam.md) for the Workspace                                                   |                      |                      | ✔️                   |
 | View all users in Teams belonging to the Workspace                                                 |                      |                      | ✔️                   |
 | View all users in the Workspace                                                                    |                      |                      | ✔️                   |
+| Upgrade any Deployment in the Workspace to an unsupported version of Astro Runtime                 |                      |                      | ✔️                   |
+
 
 
 ### Default System user permissions
@@ -89,6 +95,9 @@ The following tables show high level comparisons of the different permitted acti
 | Bypass email verification for any user                                                                                                            |                   |                   | ✔️                |
 | Create, update, or delete a Workspace                                                                                                             |                   |                   | ✔️                |
 | Airflow [admin permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#admin) for all Deployments         |                   |                   | ✔️                |
+| Create a Deployment in any Workspace                                                                                                              |                   |                   | ✔️                |
+| Update a Deployment in any Workspace                                                                                                              |                   |                   | ✔️                |
+| Create a Deployment with an unsupported version of Astro Runtime                                                                                  |                   |                   | ✔️                |
 
 ## Default role permissions lists
 

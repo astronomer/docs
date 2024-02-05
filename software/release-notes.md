@@ -32,6 +32,37 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 Release date: January 29, 2023
 
+### Updated permissions for upgrading Deployments to unsupported Astro Runtime versions
+
+:::danger Breaking change
+
+This update includes a breaking change to the Astronomer Software Helm chart. The setting `enableSystemAdminCanUseAllRuntimes` no longer exists and has been replaced with:
+
+```yaml
+astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+```
+
+This new setting changes whether all Admin-level users can view and upgrade to deprecated versions of Astro Runtime from the Software UI.
+
+:::
+
+By default, any user with an Admin-level role (Deployment Admin, Workspace Admin, System Admin) can now upgrade a Deployment to an unsupported version of Astro Runtime using the Astro CLI and the Houston API. 
+
+You can additionally set the following value in your `config.yaml` file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:
+
+```yaml
+```yaml
+astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+```
+
 ### Change resource provisioning strategy per Deployment
 
 You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run.
