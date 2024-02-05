@@ -84,6 +84,7 @@ module.exports = {
             label: 'Deploy options',
             items: [
             'deploy-cli',
+            'deploy-dags',
             'deploy-git-sync',
             'deploy-nfs',
               ],

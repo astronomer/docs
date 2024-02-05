@@ -7,12 +7,13 @@ description: How to push DAGs to your Airflow Deployment on Astronomer Software 
 
 To run your code on Astronomer Software, you need to deploy it to a Deployment. You can deploy part or all of an Astro project to an Astro Deployment using the Astro CLI.
 
-If you've used the Astro CLI to develop locally, the process for deploying your DAGs to an Airflow Deployment on Astronomer should be equally familiar. The Astro CLI builds your DAGs into a Docker image alongside all the other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. The resulting image is then used to generate a set of Docker containers for each core Airflow component.
+When you deploy a project, the Astro CLI builds your all files in your Astro project, including DAGs, into a Docker image. It then pushes this mage to an image registry on your Astronomer Software cluster where your Deployment can access the image and apply it to its running Airflow containers.
 
 For guidance on automating this process, refer to [Deploy to Astronomer via CI/CD](ci-cd.md). To learn how to add Python and OS-level packages or otherwise customize your Docker image, read [Customize your image](customize-image.md).
 
-In addition to deploying using the Astro CLI, you can configure an alternative deploy mechanism for your DAGs. For more information, see: 
+This document covers deploying a complete project image to Astro. To deploy DAGs only, see:
 
+- [Deploy DAGs using the Astro CLI](deploy-dags.md)
 - [Deploy DAGs to an NFS volume](deploy-nfs.md)
 - [Deploy DAGs using git-sync](deploy-nfs.md).
 
@@ -95,45 +96,3 @@ Everything in the project directory where you ran `$ astro dev init` is bundled 
 Astronomer exclusively deploys the code in your project and does not push any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables set locally in the Airflow UI.
 
 For more information about what gets built into your image, read [Customize your image](customize-image.md).
-
-## Deploy DAGs only using the Astro CLI
-
-DAG-only deploys are the fastest way to deploy code to Astronomer Software. They are recommended if you only need to deploy changes made to the `dags` directory of your Astro project.
-
-When this feature is enabled, you must still do a full project deploy when you make a change to any file in your Astro project that is not in the `dags` directory, or when you [upgrade Astro Runtime](manage-airflow-versions.md).
-
-DAG-only deploys have the following benefits:
-
-- DAG-only deploys are significantly faster than project deploys.
-- Deployments pick up DAG-only deploys without restarting. This results in a more efficient use of workers and no downtime for your Deployments.
-- If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys.
-- You can use DAG deploys to update your DAGs when you have slow upload speed on your internet connection.
-
-### Enable the feature
-
-[Insert instructions]
-
-### Trigger a DAG-only deploy
-
-To trigger a DAG-only deploy, run the following command from the terminal or your CI/CD process:
-
-```sh
-astro deploy --dags
-```
-
-### How DAG-only deploys work
-
-Each Deployment includes a server that processes DAG only deploys called the `dag-server`. When a user triggers a DAG-only deploy to a Deployment:
-
-- The Astro CLI bundles the DAG code as a TAR file and pushes it to the server.
-- The server sends a signal to each Airflow component in the Deployment that there's new code to run.
-- The Airflow components download the new DAG code and begin running it. 
-
-If you deploy DAGs to a Deployment that is running a previous version of your code, then the following happens:
-
-- Tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the code deploy.
-- One or more new workers are created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
-
-    These new workers execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` continues to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they are both scheduled on new Celery workers running your latest code.
-
-    This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.

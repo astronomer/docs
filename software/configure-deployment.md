@@ -154,24 +154,25 @@ After applying this change, the **Release Name** field in the Software UI become
 
 ![Custom Release Name Field](/img/software/custom-release-name.png)
 
-## DAG deploy mechanisms
+## Code deploy mechanisms
 
-You can use two different DAG deploy mechanisms on Astronomer:
+Astronomer Software supports a few different methods for deploying code to a Deployment. You can:
 
-- Image-based deploys
-- NFS volume-based deploys
+- Deploy [project images](deploy-cli.md) or [DAGs only](deploy-dags.md) using the Astro CLI.
+- Deploy DAGs using an [NFS volume](deploy-nfs.md).
+- Deploy DAGs using [Git sync](git-sync.md).
 
-### Image-based deploys
+### Astro CLI deploys
 
-By default, you can deploy DAGs to an Airflow Deployment by building them into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy DAGs via the CLI](deploy-cli.md).
+By default, you can deploy DAGs to an Airflow Deployment by building them into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md). 
 
-This mechanism builds your DAGs into a Docker image alongside all other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins.
+This mechanism builds your DAGs into a Docker image alongside all other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. 
 
 The resulting image is then used to generate a set of Docker containers for each of Airflow's core components. Every time you run `astro deploy` in the Astro CLI, your DAGs are rebuilt into a new Docker image and all Docker containers are restarted.
 
-Since the image-based deploy does not require additional setup, we recommend it for those getting started with Airflow.
+You can also enable [DAG only deploys](deploy-dags.md) to deploy only your `dags` directory without building a Docker image.
 
-### Volume-based deploys
+### Volume-based DAG deploys
 
 For advanced teams who deploy DAG changes more frequently, Astronomer also supports an [NFS volume-based](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) deploy mechanism.
 
@@ -179,7 +180,7 @@ Using this mechanism, you can deploy DAGs to an Airflow Deployment on Astronomer
 
 To deploy DAGs to a Deployment via an NFS volume, you must first enable the feature at the platform level. For more information, read [Deploy DAGs via NFS volume](deploy-nfs.md).
 
-### Git-sync deploys
+### Git-sync DAG deploys
 
 For teams using a Git-based workflow for DAG development, Astronomer supports a [git-sync](https://github.com/kubernetes/git-sync) deploy mechanism.
 
