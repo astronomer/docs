@@ -15,6 +15,10 @@ There are three options for deploying code to a Deployment:
 
 For each deploy option, you can either trigger the deploy manually or through CI/CD. CI/CD pipelines can include both image deploys and DAG-only deploys, and they can deploy to multiple different Deployments based on different branches in your git repository. See [CI/CD overview](set-up-ci-cd.md).
 
+## Code deploy limitations
+
+DAG-only deploys work using a DAG downloader sidecar included with each Deployment scheduler, triggerer, and worker. Because this sidecar isn't included with the webserver, non-DAG code included in your Astro project `dags` directory, such as scripts, will fail to render in the Airflow UI for an Astro Deployment. To render non-DAG resources in the Airflow UI, such as SQL files, add these files to your Astro project `include` directory instead.
+
 ## See also
 
 - [Create an Astro project](cli/develop-project.md#create-an-astro-project)

@@ -5,11 +5,9 @@ id: deploy-project-image
 description: Deploy a complete Astro project to a Deployment as a Docker image.
 ---
 
+By default, when you deploy code the Astro CLI takes every file in your Astro project excluding your DAGs directory and builds them into a Docker image. This includes your `Dockerfile`, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment and deploys your DAGs separately to the Deployment scheduler, triggerer, and workers.
 
-
-In a full deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
-
-Use this document to learn how full deploys work and how to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
+Use this document to learn how project image deploys work and how to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 See [DAGs-only Deploys](deploy-dags.md) to learn more about how to deploy your DAGs and images separately.
 
@@ -96,7 +94,7 @@ Read this section for a more detailed description of the project deploy process.
 Your Deployment uses the following components to process your code deploy:
 
 - A proprietary operator for deploying Docker images to your Airflow containers
-- A sidecar for downloading DAGs attached to each Airflow component container
+- A sidecar for downloading DAGs built into each each scheduler, triggerer, and Airflow worker
 - A blob storage container hosted by Astronomer
 
 When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your project as an image to an Astronomer-hosted Docker registry. The proprietary operator pulls the images from a Docker registry, then updates the running image for all Airflow containers in your Deployment. DAG changes are deployed through a separate and simultaneous process:
