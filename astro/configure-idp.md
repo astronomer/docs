@@ -192,7 +192,7 @@ After you complete the configuration, download the PEM certificate from the **SA
 
 1. Return to the Cloud UI. In the configuration screen for your SSO connection, configure the following values:
 
-    - **PEM Certificate**: Enter the PEM certificate you downloaded in Step 3.
+    - **X.509 Certificate**: Enter the PEM certificate you downloaded in Step 3.
     - **Identity Provider Single Sign-on URL**: Enter the URL you copied in Step 3.
 
 2. Click **Create**. Your Entra ID integration appears as an entry in **SSO Configuration**.
