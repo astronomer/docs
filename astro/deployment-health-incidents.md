@@ -36,6 +36,9 @@ Your Deployment health status will also show a number next to the status if a [D
 If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the logs in the [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Deployment incidents
+
+<HostedBadge/>
+
 Astro automatically monitors your Deployments and sends messages when your Deployment isn't running optimally or as expected. These messages are known as _Deployment incidents_. To view information about the incident, hover over the incident and click **View details**.
 
 ![A Deployment Health incident message appearing after a user hovers over the Deployment health status](/img/docs/incident-unfurl.png)
