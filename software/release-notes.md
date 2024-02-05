@@ -55,7 +55,6 @@ By default, any user with an Admin-level role (Deployment Admin, Workspace Admin
 You can additionally set the following value in your `config.yaml` file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:
 
 ```yaml
-```yaml
 astronomer:
    houston:
       config:
