@@ -4,7 +4,7 @@ title: 'Manage Airflow executors on Astro'
 id: 'executors-overview'
 ---
 
-The Airflow executor determines which worker resources run your scheduled tasks. 
+The Airflow executor determines which worker resources run your scheduled tasks.
 
 On Astro, every Deployment requires an executor and you can change the executor at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
 
@@ -17,7 +17,7 @@ The difference between executors is based on how tasks are distributed across wo
 - Celery executor
 - Kubernetes executor
 
-Read the following topics to learn about the benefits and limitations of each executor. For information about how to change the executor of an existing Deployment, see [Update the Deployment executor](deployment-settings.md#update-the-deployment-executor).
+Read the following topics to learn about the benefits and limitations of each executor. For information about how to change the executor of an existing Deployment, see [Update the Deployment executor](deployment-resources.md#update-the-deployment-executor).
 
 ### Celery executor
 
@@ -39,14 +39,14 @@ See [Manage the Celery executor](celery-executor.md) to learn more about how to 
 
 ### Kubernetes executor
 
-The Kubernetes executor runs each task in an individual container. For each task that needs to run, the executor dynamically launches a Kubernetes Pod on your Astro cluster to run the task. When the task completes, the Pod terminates and its resources are released to the cluster. 
+The Kubernetes executor runs each task in an individual container. For each task that needs to run, the executor dynamically launches a Kubernetes Pod on your Astro cluster to run the task. When the task completes, the Pod terminates and its resources are released to the cluster.
 
 On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
 The Kubernetes executor is a good option for some use cases. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
 - You have long-running tasks that might require more than 24 hours to execute.
-- Your tasks are compute-intensive or you are processing large volumes of data within the task. Kubernetes executor tasks run separately in a dedicated Pod per task. 
+- Your tasks are compute-intensive or you are processing large volumes of data within the task. Kubernetes executor tasks run separately in a dedicated Pod per task.
 - Your tasks can tolerate some startup latency (often seconds)
 - Your tasks require task or dependency isolation.
 - You have had issues running certain tasks reliably with the Celery executor.

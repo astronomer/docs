@@ -11,7 +11,7 @@ When you [inspect a Deployment](cli/astro-deployment-inspect.md) to generate a D
 
 A _Deployment template file_ is different from the _Deployment file_. A template file does not have the `metadata` and `environment_variables` section, and the `name` and `description` fields are empty. Deployment template files are used to create new Deployments, while a Deployment file of an existing Deployment can be used to update its configuration. To create a Deployment template file in YAML format, run `astro deployment inspect <your-deployment-id> --template > your-deployment.yaml`.
 
-Use this document as a reference for all fields in both Deployment files and Deployment template files. 
+Use this document as a reference for all fields in both Deployment files and Deployment template files.
 
 ## Deployment file example
 
@@ -71,7 +71,7 @@ The following sections describe each section in the file.
 
 You can create, update, or delete environment variables in the `environment_variables` section of the template file. This is equivalent to configuring environment variables in the **Variables** page of a Deployment in the Cloud UI. Each variable in this section must include a `key` and a `value`.
 
-By default, each variable is created as a non-secret variable. To set any new or existing environment variables as secret, specify `is_secret: true` in the same section as the key and value. For example: 
+By default, each variable is created as a non-secret variable. To set any new or existing environment variables as secret, specify `is_secret: true` in the same section as the key and value. For example:
 
 ```yaml
  - is_secret: true
@@ -79,13 +79,13 @@ By default, each variable is created as a non-secret variable. To set any new or
     value: test_project
 ```
 
-When you inspect a Deployment, the value of secret environment variables do not appear in the Deployment file.  
+When you inspect a Deployment, the value of secret environment variables do not appear in the Deployment file.
 
-To delete an environment variable, remove the lines that contain its key, its value, and other associated fields. Then, reapply the file to the Deployment. Any variables that exist on the Deployment, but are not included in the most recently applied Deployment file, are deleted. 
+To delete an environment variable, remove the lines that contain its key, its value, and other associated fields. Then, reapply the file to the Deployment. Any variables that exist on the Deployment, but are not included in the most recently applied Deployment file, are deleted.
 
 If you commit a template file to a GitHub repository, do not add secret environment variables in the file. Instead, add them manually in the Cloud UI. This ensures that you do not commit secret values to a version control tool in plain-text.
 
-:::warning  
+:::warning
 
 When you add environment variables using a Deployment file, you must provide a `value` for your environment variable. Leaving this value blank or as an empty string (`""`) will cause the `astro deployment create` command to fail.
 
@@ -96,8 +96,8 @@ When you add environment variables using a Deployment file, you must provide a `
 The `configuration` section contains all of the basic settings that you can configure from the Deployment **Details** page in the Cloud UI. See:
 
 - [Create a Deployment](create-deployment.md#create-a-deployment).
-- [Update a Deployment name and description](deployment-settings.md#update-a-deployment-name-and-description).
-- [Scheduler resources](deployment-settings.md#scheduler-size).
+- [Update a Deployment name and description](deployment-details.md#update-a-deployment-name-and-description).
+- [Scheduler size](deployment-resources.md#scheduler-size).
 
 ### `deployment.worker_queues`
 
@@ -108,6 +108,6 @@ If you don't enter specific values for the `default` worker queue for a Deployme
 
 ### Other fields
 
-- `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid. 
+- `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid.
 - `deployment_type` can be `HOSTED_SHARED` or `HOSTED_DEDICATED` for Astro Hosted depending on your [cluster type](cli/astro-deployment-create.md#options). Use `HOSTED_SHARED` for standard clusters and `HOSTED_DEDICATED` for dedicated clusters. For Astro Hybrid, the only option is `HYBRID`.
-- `cluster_name` is be the region name for Hosted standard clusters. For Astro Hybrid and Astro Hosted dedicated clusters, it's the name for the cluster that appears in the Cloud UI. 
+- `cluster_name` is be the region name for Hosted standard clusters. For Astro Hybrid and Astro Hosted dedicated clusters, it's the name for the cluster that appears in the Cloud UI.

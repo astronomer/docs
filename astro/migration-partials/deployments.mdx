@@ -42,7 +42,7 @@ This setup varies slightly for Astro Hybrid users. See [Deployment settings](dep
     | 2.4             | 6.3.0 (Airflow 2.4.3)  |
 
   :::info
-  
+
   ¹The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
 
   :::
@@ -52,39 +52,39 @@ This setup varies slightly for Astro Hybrid users. See [Deployment settings](dep
 
     To configure and use dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md). If you don't have the option of choosing between standard or dedicated, that means you are an Astro Hybrid user and must choose a cluster that has been configured for your Organization. See [Manage Hybrid clusters](manage-hybrid-clusters.md).
 
-    - **Executor**: Choose the same executor as in your source Airflow environment. 
+    - **Executor**: Choose the same executor as in your source Airflow environment.
     - **Scheduler**: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
 
     | Environment size         | Scheduler size | CPU / memory |
-    | ------------------------ | --- | ------------------------ | 
-    | Small (Up to ~50 DAGs)   | Small   | 1vCPU, 2GiB          |     
+    | ------------------------ | --- | ------------------------ |
+    | Small (Up to ~50 DAGs)   | Small   | 1vCPU, 2GiB          |
     | Medium (Up to ~250 DAGs) | Medium  | 2vCPU, 4GiB²           |
     | Large (Up to ~1000 DAGs) | Large | 4vCPU, 8GiB²         |
 
   :::info
 
-  ²Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource use on Astro. See [Deployment settings](/astro/deployment-settings.md)
+  ²Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource use on Astro. See [Configure Deployment resources](/astro/deployment-resources.md)
 
   :::
 
     - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-worker-queues.md).
     - **Min / Max # Workers**: Set the same minimum and maximum worker count as in source Airflow environment.
-    - **KPO Pods**: (Optional) If you use the KubernetesPodOperator or Kubernetes Executor, set limits on how many resources your tasks can request. 
+    - **KPO Pods**: (Optional) If you use the KubernetesPodOperator or Kubernetes Executor, set limits on how many resources your tasks can request.
 
 4. Click **Create Deployment**.
 5. Specify any system-level environment variables as Astro environment variables. See [Environment variables](manage-env-vars.md#using-the-cloud-ui).
-6. Set an email to receive alerts from Astronomer support about your Deployments. See [Add Or Delete A Deployment Alert Email](deployment-settings.md#configure-deployment-contact-emails).
+6. Set an email to receive alerts from Astronomer support about your Deployments. See [Configure Deployment contact emails](deployment-details.md#configure-deployment-contact-emails).
 
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
 
-:::info 
+:::info
 
 This option is available only on [Astro Hybrid](hybrid-overview.md).
 
 :::
 
-1. On your local machine, create a directory with the name of the source Airflow environment. In this directory, create a file called `config.yaml`. 
+1. On your local machine, create a directory with the name of the source Airflow environment. In this directory, create a file called `config.yaml`.
 2. Open `config.yaml` and add the following:
 
    ```yaml
@@ -125,7 +125,7 @@ This option is available only on [Astro Hybrid](hybrid-overview.md).
     | 2.2             | 4.2.9 (Airflow 2.2.5)  |
     | 2.4             | 6.3.0 (Airflow 2.4.3)  |
 
-  :::info  
+  :::info
 
   ¹The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
 
@@ -139,7 +139,7 @@ This option is available only on [Astro Hybrid](hybrid-overview.md).
     | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB²           |
     | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB²         |
 
-  :::info 
+  :::info
 
   ² Some of the following recommendations for CPU and memory are smaller than what you have in the equivalent source environment. Although you might not need more CPU or memory than what's recommended, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
 
@@ -155,7 +155,7 @@ This option is available only on [Astro Hybrid](hybrid-overview.md).
     | --------- | ------------- | --------------- |
     | M5.XLARGE | E2-STANDARD-4 | STANDARD_D4D_V5 |
 
-    - `<alert-email>`: Set an email to receive alerts from Astronomer support about your Deployments. See [Add Or Delete A Deployment Alert Email](deployment-settings.md#configure-deployment-contact-emails).
+    - `<alert-email>`: Set an email to receive alerts from Astronomer support about your Deployments. See [Set up Astro alerts](alerts.md).
 
     After you finish entering these values, your `config.yaml` file should look something like the following:
 
