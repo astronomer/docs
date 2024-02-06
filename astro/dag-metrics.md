@@ -1,13 +1,15 @@
 ---
 sidebar_label: 'DAGs'
-title: 'View metrics for DAGs'
+title: 'View DAG metrics in Astro'
 id: dag-metrics
 description: "Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting."
 ---
 
-The **DAGs** page in the Cloud UI lets you view and manage each DAG running on your Workspace, as well as find detailed information about your DAG and its code. These summary and detailed metrics allow you to see information such as the outcomes of your DAG runs and DAG's code. You can use this to check your DAG's performance, debug issues in your DAG code and schedule, and confirm your DAG alerts have been configured correctly.
+The **DAGs** page in the Cloud UI lets you view and manage each DAG running on your Workspace. You can view high level metrics about each DAG in a summary table, or select specific DAGs to view DAG code and the status of DAG runs. Use the **DAGs** page to check the performance of DAGs and debug issues in your DAG code based on your DAG run statuses.
 
-To access the **DAGs** page, you can either click **DAGs** on your sidebar or click **View DAGs** on a Deployment's information page.
+To access the **DAGs** page, either click **DAGs** on the left sidebar or click **View DAGs** on a Deployment's information page.
+
+![The DAGs page in the Cloud UI, showing summary information for two DAGs](/img/docs/dag-metrics.png)
 
 ## DAGs overview
 
@@ -26,8 +28,9 @@ The **DAGs** page shows the following summary information about the DAGs for all
 
 ## View detailed metrics for a DAG
 
-To view more detailed information about a specific DAG, you can either **Open in Airflow** or select the DAG to manage it from the Cloud UI. After you open the detailed view of a specific DAG, you can find both the same summary metrics visible on the DAGs overview page and detailed views of the DAG bar chart, graph, and code.
+To view more detailed information about a specific DAG in the Cloud UI, select the DAG from the **DAGs** page. This view contains the same metrics from the **DAGs** page, plus detailed views of the DAG run chart, graph, and code. See [Manage DAGs](manage-dags.md) to learn how to manually mark and trigger DAG runs from this view.
 
+![The detailed information page for a DAG, accessible from the DAGs view in the Cloud UI](/img/docs/dag-detail-metrics.png)
 
 ## See also 
 
