@@ -13,9 +13,9 @@ If you're interested in customizing the pre-built dashboards to create other vie
 
 ## Metrics sources
 
-The following metrics are available through Grafana to use in pre-built and custom dashboards:
+The following metrics are available to use in pre-built and custom dashboards on Grafana:
 
-- All kube-state metrics. These metrics tell you about the state of Kubernetes components such as your Deployments and stateful sets. See the [kubestate repository](https://github.com/kubernetes/kube-state-metrics/tree/main/docs) for information on each available metric.
+- Kube-state metrics. These metrics tell you about the state of Kubernetes components such as your Deployments and stateful sets. See the [kubestate repository](https://github.com/kubernetes/kube-state-metrics/tree/main/docs) for information on each available metric.
 - Statsd metrics. These metrics tell you about Airflow components and objects, such as your scheduler, executor, and tasks. See the [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml#L376) for all exported metrics.
 - Postgres metrics. These metrics tell you about the state of your Astronomer Software cluster database. See the [Prometheus GitHub](https://github.com/prometheus-community/postgres_exporter/tree/master/collector) for a list of all available metrics. 
 - Blackbox exporter metrics. The blackbox exporter probes various endpoints over HTTP, HTTPS, DNS, TCP, and ICMP and sends metrics about the results. 
