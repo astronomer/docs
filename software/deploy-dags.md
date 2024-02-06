@@ -50,4 +50,4 @@ If you deploy DAGs to a Deployment that is running a previous version of your co
 
     This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
 
-When you run `astro deploy` to deploy a complete project image, your non-DAG files are deployed as a Docker image while your DAG files are deployed directly to the `dag-server`.
+When you run `astro deploy` to deploy a complete project image, the Astro CLI builds all project files including your DAGs into a Docker image as described in [Deploy a project image](deploy-cli.md).
