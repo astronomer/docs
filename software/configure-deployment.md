@@ -156,9 +156,9 @@ After applying this change, the **Release Name** field in the Software UI become
 
 ## Code deploy mechanisms
 
-Astronomer Software supports a few different methods for deploying code to a Deployment. You can:
+Deploying code is the process of applying code from your local machine to an Astronomer Software Deployment. A code deploy can include an entire Astro project as a Docker image, or just the code in your Astro project `dags` directory. Astronomer Software supports a few different methods for deploying code to a Deployment. You can:
 
-- Deploy [project images](deploy-cli.md) or [DAGs only](deploy-dags.md) using the Astro CLI.
+- Deploy [project images](deploy-cli.md) or [DAGs only](deploy-dags.md) using the Astro CLI. Deploying a project image is the only way to deploy Airflow-level configurations and dependencies to a Deployment.
 - Deploy DAGs using an [NFS volume](deploy-nfs.md).
 - Deploy DAGs using [Git sync](git-sync.md).
 
@@ -170,7 +170,7 @@ This mechanism builds your DAGs into a Docker image alongside all other files in
 
 The resulting image is then used to generate a set of Docker containers for each of Airflow's core components. Every time you run `astro deploy` in the Astro CLI, your DAGs are rebuilt into a new Docker image and all Docker containers are restarted.
 
-You can also enable [DAG only deploys](deploy-dags.md) to deploy only your `dags` directory without building a Docker image.
+You can also enable [DAG only deploys](deploy-dags.md) to deploy only your `dags` directory without building a Docker image. Note that you will still need access to Docker to authenticate to Astronomer Software before you can deploy DAGs.
 
 ### Volume-based DAG deploys
 

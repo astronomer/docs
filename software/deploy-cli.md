@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Deploy code using the CLI'
+sidebar_label: 'Deploy a project image'
 title: 'Deploy code to Astronomer Software using the Astro CLI'
 id: deploy-cli
 description: How to push DAGs to your Airflow Deployment on Astronomer Software using the Astro CLI.
@@ -75,7 +75,7 @@ When you're ready to deploy your DAGs, run:
 astro deploy
 ```
 
-This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. After you execute the command, all files in your Astro project directory are built into a new Docker image and Docker containers for all Airflow components are restarted.
+This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. After you execute the command, all files in your Astro project directory are built into a new Docker image, the image is pushed to the Astronomer Software registry, and the Docker containers for all Airflow components in the Deployment are restarted.
 
 :::info
 

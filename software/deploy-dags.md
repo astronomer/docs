@@ -45,7 +45,6 @@ Each Deployment includes a Pod that processes DAG only deploys called the `dag-s
 If you deploy DAGs to a Deployment that is running a previous version of your code, then the following happens:
 
 - Tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the DAG deploy.
-- One or more new workers are created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
 
     These new workers execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` continues to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they are both scheduled on new Celery workers running your latest code.
 
