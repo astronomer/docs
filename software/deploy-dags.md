@@ -14,18 +14,18 @@ DAG-only deploys have the following benefits:
 - DAG-only deploys are faster than project deploys.
 - Deployments pick up DAG-only deploys without restarting. This results in a more efficient use of workers and no downtime for your Deployments.
 - If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys.
-- You can use DAG deploys to update your DAGs when you have slow upload speed on your internet connection.
+- DAG deploys transmit significantly less data in most cases, which makes them quicker than image deploys when upload speeds to the Deployment are slow.
 
 ## Enable the feature
 
-By default, the Astro CLI only supports complete project image deploys. To enable DAG-only deploys:
+By default, Deployments are configured only for complete project image deploys. To enable DAG-only deploys:
 
 1. Open your Deployment in the Astronomer Software UI.
 2. In the **Settings** tab under the **DAG Deployment** section, change the **Mechanism** to **DAG Only Deployment**. 
 
 ## Trigger a DAG-only deploy
 
-To trigger a DAG-only deploy, run the following command from the terminal:
+Run the following command to trigger a DAG-only deploy:
 
 ```sh
 astro deploy --dags

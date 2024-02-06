@@ -5,7 +5,7 @@ id: deploy-cli
 description: How to push DAGs to your Airflow Deployment on Astronomer Software using the Astro CLI.
 ---
 
-To run your code on Astronomer Software, you need to deploy it to a Deployment. You can deploy part or all of an Astro project to an Astro Deployment using the Astro CLI.
+To run your code on Astronomer Software, you need to deploy it to an Airflow Deployment. You can deploy part or all of an Astro project to an Airflow Deployment using the Astro CLI.
 
 When you deploy a project, the Astro CLI builds your all files in your Astro project, including DAGs, into a Docker image. It then pushes this mage to an image registry on your Astronomer Software cluster where your Deployment can access the image and apply it to its running Airflow containers.
 
