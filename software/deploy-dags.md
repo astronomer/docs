@@ -31,19 +31,20 @@ Run the following command to trigger a DAG-only deploy:
 astro deploy --dags
 ```
 
-You can still run `astro deploy` to trigger a complete project deploy. When you do this, the Astro CLI builds all project files into a Docker image except for your DAGs, which it deploys through the DAG deploy mechanism.
+You can still run `astro deploy` to trigger a complete project deploy. When you do this, the Astro CLI builds all project files including your DAGs into a Docker image as described in [Deploy a project image](deploy-cli.md).
 
 ## How DAG-only deploys work
 
-Each Deployment includes a Pod that processes DAG only deploys called the `dag-server`. When a user triggers a DAG-only deploy to a Deployment:
+Each Deployment includes a Pod that processes DAG only deploys called the `dag-server`, and each Airflow component has a sidecar container to download new DAGs when they are available. When a user triggers a DAG-only deploy to a Deployment:
 
-- The Astro CLI bundles the DAG code as a TAR file and pushes it to the server.
+- The Astro CLI bundles the DAG code as a .tar.gz file and uploads it to the server.
 - The server sends a signal to the Deployment DAG downloader sidecar that there are new DAGs to download.
-- The Airflow components download the new DAG code from the DAG downloader sidecar and begin running the code.
+- The DAG downloader in each Airflow component downloads the new DAGs from the DAG server.
+- Airflow scans the dags directory on its configured interval and processes the changed files.
 
 If you deploy DAGs to a Deployment that is running a previous version of your code, then the following happens:
 
-- Tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the code deploy.
+- Tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the DAG deploy.
 - One or more new workers are created alongside your existing workers and immediately start executing scheduled tasks based on your latest code.
 
     These new workers execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` continues to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they are both scheduled on new Celery workers running your latest code.
