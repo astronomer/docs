@@ -65,34 +65,34 @@ If the command succeeds, the API returns a list of Workspaces similar to the fol
 
 ```json {15}
 {
-  "workspaces": [
-    {
-      "cicdEnforcedDefault": true,
-      "createdAt": "2023-09-08T12:00:00Z",
-      "createdBy": {
-        "apiTokenName": "my-token",
-        "avatarUrl": "https://avatar.url",
-        "fullName": "Jane Doe",
-        "id": "clm8qv74h000008mlf08scq7k",
-        "subjectType": "USER",
-        "username": "user1@company.com"
-      },
-      "description": "This is a test workspace",
-      "id": "clm8t5u4q000008jq4qoc3036",
-      "name": "My Workspace",
-      "organizationId": "clm8t5u4q000008jq4qoc3036",
-      "organizationName": "My Organization",
-      "updatedAt": "2023-09-08T13:30:00Z",
-      "updatedBy": {
-        "apiTokenName": "my-token",
-        "avatarUrl": "https://avatar.url",
-        "fullName": "Jane Doe",
-        "id": "clm8qv74h000008mlf08scq7k",
-        "subjectType": "USER",
-        "username": "user1@company.com"
-      }
-    }
-  ]
+    "workspaces": [
+        {
+            "cicdEnforcedDefault": true,
+            "createdAt": "2023-09-08T12:00:00Z",
+            "createdBy": {
+                "apiTokenName": "my-token",
+                "avatarUrl": "https://avatar.url",
+                "fullName": "Jane Doe",
+                "id": "clm8qv74h000008mlf08scq7k",
+                "subjectType": "USER",
+                "username": "user1@company.com"
+            },
+            "description": "This is a test workspace",
+            "id": "clm8t5u4q000008jq4qoc3036",
+            "name": "My Workspace",
+            "organizationId": "clm8t5u4q000008jq4qoc3036",
+            "organizationName": "My Organization",
+            "updatedAt": "2023-09-08T13:30:00Z",
+            "updatedBy": {
+                "apiTokenName": "my-token",
+                "avatarUrl": "https://avatar.url",
+                "fullName": "Jane Doe",
+                "id": "clm8qv74h000008mlf08scq7k",
+                "subjectType": "USER",
+                "username": "user1@company.com"
+            }
+        }
+    ]
 }
 ```
 

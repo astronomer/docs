@@ -246,8 +246,8 @@ Complete the following steps to retrieve these values:
         ```json
 
             {
-            "role_arn": "<your-role-arn>",
-            "region_name": "<your-region>"
+                "role_arn": "<your-role-arn>",
+                "region_name": "<your-region>"
             }
 
         ```

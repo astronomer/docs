@@ -82,61 +82,61 @@ The following configuration is an example of how you can configure a custom oper
 
 ```json
 {
-  "display": {
-    "label": "Call Internal API",
-    "description":"A custom cell type to call an internal API"
-  },
-  "behavior": {
-    "runnable": true,
-    "generatesData":true,
-    "namingStrategy": "increment",
-    "excludeFromGraph": false,
-    "returnsRawValue": false
-  },
-  "generation": {
-    "type": "invoke",
-    "invoke": {
-      "functionName": "InternalAPIOperator",
-      "imports": [
-        "from include.operators.api import InternalAPIOperator"
-      ]
-    }
-  },
-  "configs": [
-    {
-      "key": "endpoint",
-      "dataType": "string",
-      "display": {
-        "label": "Endpoint",
-        "description": "The endpoint to hit. Starts with a /"
-      },
-      "validity": {
-        "mandatory": true
-      }
+    "display": {
+        "label": "Call Internal API",
+        "description": "A custom cell type to call an internal API"
     },
-    {
-      "key": "method",
-      "dataType": "string",
-      "display": {
-        "label": "HTTP Method"
-      },
-      "validity": {
-        "mandatory": true,
-        "domain": {
-          "source": "stringList",
-          "valuesStringList": [
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE",
-            "HEAD",
-            "OPTIONS",
-            "PATCH"
-          ]
+    "behavior": {
+        "runnable": true,
+        "generatesData": true,
+        "namingStrategy": "increment",
+        "excludeFromGraph": false,
+        "returnsRawValue": false
+    },
+    "generation": {
+        "type": "invoke",
+        "invoke": {
+            "functionName": "InternalAPIOperator",
+            "imports": [
+                "from include.operators.api import InternalAPIOperator"
+            ]
         }
-      }
-    }
-  ]
+    },
+    "configs": [
+        {
+            "key": "endpoint",
+            "dataType": "string",
+            "display": {
+                "label": "Endpoint",
+                "description": "The endpoint to hit. Starts with a /"
+            },
+            "validity": {
+                "mandatory": true
+            }
+        },
+        {
+            "key": "method",
+            "dataType": "string",
+            "display": {
+                "label": "HTTP Method"
+            },
+            "validity": {
+                "mandatory": true,
+                "domain": {
+                    "source": "stringList",
+                    "valuesStringList": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "HEAD",
+                        "OPTIONS",
+                        "PATCH"
+                    ]
+                }
+            }
+        }
+    ]
 }
 ```
 

@@ -84,8 +84,8 @@ Now that your Deployment is authorized, you can connect it to your cloud using a
 
         ```json
         {
-        "role_arn": "<your-role-arn>",
-        "region_name": "<your-region>"
+            "role_arn": "<your-role-arn>",
+            "region_name": "<your-region>"
         }
         ```
 
