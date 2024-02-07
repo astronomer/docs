@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Reporting dashboard'
-title: "Reporting dashboard"
+sidebar_label: 'Reporting dashboards'
+title: "View metrics across your Organization with Astro reporting dashboards"
 id: reporting-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
 ---
@@ -15,15 +15,17 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 Astro provides a collection of dashboards that include important metrics about your Organization's use of Astro. These dashboards include:
 
-- Organization explorer
-- Deployment detail
+- Organization Explorer
+- Deployment Detail
 - DAG SLA
 - Cost Breakdown (Hosted only)
 - Operator Use
 
-Dashboards help you quickly identify any problems or opportunities to optimize how your team uses Airflow. For example, you can use the Deployment detail page to identify unexpected DAG behaviors, like unusually high compute use, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
+Dashboards help you quickly identify opportunities to optimize how your team uses Airflow. For example, you can use the Deployment Detail page to identify unexpected DAG behaviors, like unusually high compute use, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
 
-To view Astro dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). Each dashboard shows the last time that it was updated, in the **Data available through** section.
+To view Astro dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). 
+
+Use the tabs at the bottom of the Cloud UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
 
 :::info
 
@@ -33,32 +35,31 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 ## Organization Explorer
 
-The **Organization Explorer** tab provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
+The **Organization Explorer** dashboard provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
 
 This tab allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. For example, you can filter the data shown by time period, Workspace name, or Deployment name, to view data such as the number of successful or failed tasks within Workspaces or Deployments. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
-By examining your data at the Organization level, you can quickly identify Deployments with large numbers of failing tasks by simply looking at the graphs or charts for outliers. Then, you can filter by time period to see if there have been similar events in the past and when.
+By examining your data at the Organization level, you can identify Deployments with large numbers of failing tasks by looking at the graphs or charts for outliers. Then, you can filter by time period to see if there have been similar events in the past and when.
 
-![Quickly examine summaries about your Organization's DAG activity at the DAG and Workspace level.](/img/docs/dash-organization-overview.png)
-
+![The main section of the Organization Overview dashboard, showing Deployments and task counts over time as a bar chart](/img/docs/dash-organization-overview.png)
 
 ## Deployment Detail
 
-The **Deployment Detail** dashboard shows a table of all Deployments in your Organization, indexed by Workspace Name. For each Deployment, the dashboard shows your Deployment configurations as well as use metrics like task run counts, DAG run counts, and operator counts.
+The **Deployment Detail** dashboard shows a table of all Deployments in your Organization, indexed by Workspace name. For each Deployment, the dashboard shows your Deployment configurations as well as use metrics like task run counts, DAG run counts, and operator counts.
 
-Use this dashboard to check that your Deployment has the appropriate resources based on the number of DAGs it runs. You can also use this dashboard to check whether your Astro Runtime version is currently supported or if you need to upgrade it.
+Use this dashboard to check that your Deployment has the appropriate resources based on the number of DAGs it runs. You can also use this dashboard to check whether a Deployment's Astro Runtime version is currently supported.
 
 ![View data about Deployment health and DAG success.](/img/docs/dash-deployment-detail.png)
 
 ## DAG SLA
 
-The DAG SLA dashboard allows you to simulate a service level agreement (SLA) for when a DAG should complete and then compare how frequently your DAG runs complete within the SLA. Use this dashboard to check how frequently your Organization meets your SLA obligations, or to create an alert on new SLAs.
+The DAG SLA dashboard allows you to simulate a service level agreement (SLA) for when a DAG should complete and then compare how frequently your DAG runs complete within the SLA. Use this dashboard to check how frequently your Organization meets your SLA obligations, or to create an alert when specific SLAs are breached.
 
 ![Examine how frequently DAGs meet your SLA.](/img/docs/dash-DAG-SLA.png)
 
-### Set up an SLA
+### Create an SLA simulation
 
-To create an SLA, you must first define an SLA and then select the DAGs you want to compare it to.
+To simulate an SLA, you must first define an SLA and then apply it to specific DAGs.
 
 1. Choose the **DAG ID** that you want to check DAG run completion times for. If you have a large number of DAGs in your Organization, you can first filter by **Workspace Name** and **Deployment Name** before choosing your DAG ID.
 2. Select the time interval over which you want to look at the DAG data.
@@ -70,15 +71,13 @@ The report generates a line graph that shows the **Median End Time** of the DAG,
 ## Cost Breakdown
 <HostedBadge/>
 
-In the **Cost Breakdown** tab of your Dashboard, you can find detailed information about how much you spend on Astro over time for each of your Workspaces and Deployments. Use this data alongside your other dashboards to identify the biggest opportunities for cost reduction in your Organization.
+In the **Cost Breakdown** dashboard, you can find detailed information about how much you spend on Astro over time for each of your Workspaces and Deployments. Use this data alongside your other dashboards to identify the biggest opportunities for cost reduction in your Organization.
 
 ![View the cost of your different Astro resources.](/img/docs/dash-cost-breakdown.png)
 
 ## Operator use
 
-You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. This dashboard provides data to answer the questions, *What are the top operators used across my organization?* and *Which workspace is using the selected operators the most?*.
-
-You can filter your data, export reports, or set up an email alert, which sends a copy of the data to an email address under certain circumstances.
+The **Operator Use** dashboard shows how your Deployments and Workspaces use Operators, as well as how often tasks succeed and fail when using specific operators. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. This dashboard provides data to answer the questions, *What are the top operators used across my organization?* and *Which workspace is using the selected operators the most?*.
 
 ![Examine how frequently DAGs meet your SLA.](/img/docs/dash-DAG-SLA.png)
 
