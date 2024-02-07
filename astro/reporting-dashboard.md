@@ -5,6 +5,8 @@ id: reporting-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
 :::warning
 
 This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
