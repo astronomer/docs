@@ -33,33 +33,15 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 The **Organization Explorer** tab provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
 
-This tab allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
+This tab allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. For example, you can filter the data shown by time period, Workspace name, or Deployment name, to view data such as the number of successful or failed tasks within Workspaces or Deployments. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
-### Organization explorer filter parameters
-
-You can filter the data shown in the reports by the following:
-
-- **Time period** - Choose the date range that you want to view data for.
-- **Workspace name** - Choose which Workspaces' data you want to view. By default, if you don't select any Workspaces, the report shows the aggregated view of all Workspaces.
-- **Deployment name** - Choose which Deployments' data you want to view. By default, if you don't select any Deployment, the report shows the aggregated view of all Deployments.
-- **Display by** - Select the time interval you want the data organized by. The dashboard can show you data in  **Day**, **Week**, or **Month** intervals.
-
-### Organization explorer data
-
-* **Deployments** - The number of Deployments in a Workspace, indexed by time.
-* **Task Counts by Success/Failure** - Segmented bar chart showing the counts of successful and failed tasks in the selected Workspace, indexed by time.
-* **Active DAG counts** -
-* **Task Counts by Workspace** - A line graph of the count of tasks in selected Workspaces over time. If you select more
-* **Workspace summary in last 30 Days**
-    - Top 10 Workspaces by code push count
-    - Top 10 Workspaces by active DAG count
-    - Top 10 Workspaces by unique operator count
+By examining your data at the Organization level, you can quickly identify Deployments with large numbers of failing tasks by simply looking at the graphs or charts for outliers. Then, you can filter by time period to see if there have been similar events in the past and when.
 
 ## Deployment Detail
 
-The **Deployment Detail** report shows a table of all Deployments in your Organization, indexed by Workspace Name. For each Deployment, the dashboard shows your Deployment configurations as awell as use metrics including task run counts, DAG run counts, and operator counts.
+The **Deployment Detail** dashboard shows a table of all Deployments in your Organization, indexed by Workspace Name. For each Deployment, the dashboard shows your Deployment configurations as well as use metrics like task run counts, DAG run counts, and operator counts.
 
-Use this dashboard to check that your Deployment has the appropriate resources based on the number of DAGs it runs. You can also use this dashboard to check whether your Astro Runtime version is in support or needs to be upgraded.
+Use this dashboard to check that your Deployment has the appropriate resources based on the number of DAGs it runs. You can also use this dashboard to check whether your Astro Runtime version is currently supported or if you need to upgrade it.
 
 ## DAG SLA
 
@@ -77,26 +59,6 @@ The report generates a line graph that shows the **Median End Time** of the DAG,
 ## Cost Breakdown (Hosted Only)
 
 In the **Cost Breakdown** tab of your Dashboard, you can find detailed information about how much you spend on Astro over time for each of your Workspaces and Deployments. Use this data alongside your other dashboards to identify the biggest opportunities for cost reduction in your Organization.
-
-### Cost breakdown data filters
-
-You can filter the data shown in the reports by the following:
-
-* **Date**
-* **Workspace Name**: Choose which Workspaces' details you want to examine in detail.
-* **Deployment Name**: Choose which Deployments' details you want to examine in detail.
-
-### Cost breakdown data details
-
-- **Total spend** - The total cost per time period.
-- **Deployment spend**- The cost per time period related to your Deployment scheduler configuration.
-- **Compute spend** - The cost per time period related to your Worker runtime.
-- **Workspaces** - The Number of Workspaces in your Organization.
-- **Deployments** - The Number of Deployments in your Organization
-- **Workspace Spend** - A segmented bar chart that shows the **Deployment** and **Compute** spend amount, organized by Workspace.
-- **Spend for all Workspaces** - A segmented bar chart that shows the aggregated cost over time, with each segment representing the cost of a specific Workspace.
-- **Spend by Workspace Deployments** - <!--needs feedback from data team-->
-- **Detailed Spend for Deployments** - This detailed table describes the accumulated cost in terms of **Billable metrics**, which are the same metrics used in your invoices.
 
 ## Operator use
 
