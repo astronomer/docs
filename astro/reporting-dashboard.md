@@ -45,9 +45,11 @@ Use this dashboard to check that your Deployment has the appropriate resources b
 
 ## DAG SLA
 
-The DAG SLA dashboard allows you to simulate a service level agreement (SLA) for when a DAG should complete and then compare your DAG runs against the SLA. Use this dashboard to ensure that your Organization meets your SLA obligations, or to create and alert on new SLAs.
+The DAG SLA dashboard allows you to simulate a service level agreement (SLA) for when a DAG should complete and then compare how frequently your DAG runs complete within the SLA. Use this dashboard to check how frequently your Organization meets your SLA obligations, or to create an alert on new SLAs.
 
-To use this dashboard, you must first define an SLA and the DAGs which should be compared against the SLA.
+### Set up an SLA
+
+To create an SLA, you must first define an SLA and then select the DAGs you want to compare it to.
 
 1. Choose the **DAG ID** that you want to check DAG run completion times for. If you have a large number of DAGs in your Organization, you can first filter by **Workspace Name** and **Deployment Name** before choosing your DAG ID.
 2. Select the time interval over which you want to look at the DAG data.
@@ -62,26 +64,9 @@ In the **Cost Breakdown** tab of your Dashboard, you can find detailed informati
 
 ## Operator use
 
-You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected.
+You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. This dashboard provides data to answer the questions, *What are the top operators used across my organization?* and *Which workspace is using the selected operators the most?*.
 
-### Operator use data filters
-
-You can filter the data shown in the reports by the following:
-
-* **Date**
-* **Filter operators by string**: Use a string as a search query for the Operator you want to examine.
-* **Operator**: Select the Operator from a menu of options or search for one.
-* **Workspace Name**: Choose which Workspaces' details you want to examine in detail.
-* **Deployment Name**: Choose which Deployments' details you want to examine in detail.
-
-### Operator use data details
-
-In the Dashboard, you can take a detailed view of the following different reporting elements. Each has its own section where you can filter the data within the element, export reports, or set up an email alert.
-
-* **Operators by Task/Distinct DAG Count** - This view shows you the top operators used in your Organization, ordered by the count of tasks and distinct DAGs. You can use expand each row to examine the **Workspace Name** and **Deployment Name** specifically. This data answers the question, *What are the top operators used across my organization?*
-* **Workspace Operator Usage by Task/Distinct DAG Count** - This view shows you the most used Workspaces based on total Task Count and Distinct DAGs. You can then expand each row to find the most frequently used Operators in each Deployment in that Workspace. This data answers the question, *Which workspace is using the selected operators the most?*
-* **Task Usage By Period, Failed/Successful** - An aggregate view of the number of tasks that failed or succeeded in the selected Workspace and Deployment over the defined time period.
-* **Task Usage By Period, Workspace** - An aggregate view of the number of tasks by Workspace over the defined time period.
+You can filter your data, export reports, or set up an email alert, which sends a copy of the data to an email address under certain circumstances.
 
 ## Export data from reporting dashboards
 
