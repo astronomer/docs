@@ -11,7 +11,7 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 :::
 
-Astro provides [a Dashboard](https://cloud.astronomer.io/dashboards) with a consolidated view of important metrics about your Organization's use of Astro. This includes the following Dashboards:
+Astro provides a collection of dashboards that include important metrics about your Organization's use of Astro. These dashboards include:
 
 - Organization explorer
 - Deployment detail
@@ -19,9 +19,9 @@ Astro provides [a Dashboard](https://cloud.astronomer.io/dashboards) with a cons
 - Billing details (Hosted only)
 - Operator Use
 
-Dashboards help you quickly identify any problems or opportunities to optimize how your team uses Airflow. For example, you can use the Deployment detail page to identify unexpected DAG behaviors, like unusually high compute usage, and then check the Billing details dashboard to identify any associated costs incurred by that behavior.
+Dashboards help you quickly identify any problems or opportunities to optimize how your team uses Airflow. For example, you can use the Deployment detail page to identify unexpected DAG behaviors, like unusually high compute use, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
 
-To view Astro dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
+To view Astro dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). Each dashboard shows the last time that it was updated, in the **Data available through** section.
 
 :::info
 
@@ -35,8 +35,6 @@ The **Organization Explorer** tab provides at-a-glance summaries about activity 
 
 This tab allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
-All Dashboards include sharing how recently the data was updated in the **Data available through**.
-
 ### Organization explorer filter parameters
 
 You can filter the data shown in the reports by the following:
@@ -47,7 +45,6 @@ You can filter the data shown in the reports by the following:
 - **Display by** - Select the time interval you want the data organized by. The dashboard can show you data in  **Day**, **Week**, or **Month** intervals.
 
 ### Organization explorer data
-
 
 * **Deployments** - The number of Deployments in a Workspace, indexed by time.
 * **Task Counts by Success/Failure** - Segmented bar chart showing the counts of successful and failed tasks in the selected Workspace, indexed by time.
@@ -60,7 +57,7 @@ You can filter the data shown in the reports by the following:
 
 ## Deployment Detail
 
-The **Deployment Detail** report shows a table of all Deployments in your Organization, indexed by Workspace Name. For each Deployment, the dashboard shows your Deployment configurations as awell as usage metrics including task run counts, DAG run counts, and operator counts.
+The **Deployment Detail** report shows a table of all Deployments in your Organization, indexed by Workspace Name. For each Deployment, the dashboard shows your Deployment configurations as awell as use metrics including task run counts, DAG run counts, and operator counts.
 
 Use this dashboard to check that your Deployment has the appropriate resources based on the number of DAGs it runs. You can also use this dashboard to check whether your Astro Runtime version is in support or needs to be upgraded.
 
@@ -77,7 +74,7 @@ To use this dashboard, you must first define an SLA and the DAGs which should be
 
 The report generates a line graph that shows the **Median End Time** of the DAG, the **Average End Time**, compared to the **SLA** time you defined.
 
-## Billing Details (Hosted Only)
+## Cost Breakdown (Hosted Only)
 
 In the **Cost Breakdown** tab of your Dashboard, you can find detailed information about how much you spend on Astro over time for each of your Workspaces and Deployments. Use this data alongside your other dashboards to identify the biggest opportunities for cost reduction in your Organization.
 
@@ -101,11 +98,11 @@ You can filter the data shown in the reports by the following:
 - **Spend by Workspace Deployments** - <!--needs feedback from data team-->
 - **Detailed Spend for Deployments** - This detailed table describes the accumulated cost in terms of **Billable metrics**, which are the same metrics used in your invoices.
 
-## Operator usage
+## Operator use
 
-You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. 
+You can examine how your Deployments and Workspaces use Operators, and the frequency that their tasks succeed and fail. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected.
 
-### Operator usage data filters
+### Operator use data filters
 
 You can filter the data shown in the reports by the following:
 
@@ -115,7 +112,7 @@ You can filter the data shown in the reports by the following:
 * **Workspace Name**: Choose which Workspaces' details you want to examine in detail.
 * **Deployment Name**: Choose which Deployments' details you want to examine in detail.
 
-### Operator usage data details
+### Operator use data details
 
 In the Dashboard, you can take a detailed view of the following different reporting elements. Each has its own section where you can filter the data within the element, export reports, or set up an email alert.
 
@@ -124,7 +121,7 @@ In the Dashboard, you can take a detailed view of the following different report
 * **Task Usage By Period, Failed/Successful** - An aggregate view of the number of tasks that failed or succeeded in the selected Workspace and Deployment over the defined time period.
 * **Task Usage By Period, Workspace** - An aggregate view of the number of tasks by Workspace over the defined time period.
 
-## Export data from reporting Dashboards
+## Export data from reporting dashboards
 
 You can set up your reporting Dashboard to email you data reports on a given time interval or as an alert when certain criteria are met. Or, you can export your data in a one-time action.
 
