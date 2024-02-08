@@ -21,6 +21,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## February 6, 2024
+
+### Bug fixes
+
+- Fixed an issue where all Deployment task logs included the error `Not exporting configs to configmap...`
+
 ## January 30, 2024
 
 ### New messages for Deployment health status
