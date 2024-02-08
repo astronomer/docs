@@ -5,7 +5,7 @@ id: dag-metrics
 description: "Learn how to monitor Pipeline performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting."
 ---
 
-The **DAGs** page in the Cloud UI lets you view and manage each DAG running on your Workspace. You can view high level metrics about each DAG in a summary table, or select specific DAGs to view DAG code and the status of DAG runs. Use the **DAGs** page to check the performance of DAGs and debug issues in your DAG code based on your DAG run statuses.
+The **DAGs** page in the Cloud UI lets you view and manage all DAGs in your Workspace from a single place. You can view high level metrics about each DAG in a summary table, or select specific DAGs to view DAG code and the status of DAG runs without needing to open the Airflow UI. Use the **DAGs** page to check the performance of DAGs and debug issues in your DAG code based on your DAG run statuses.
 
 To access the **DAGs** page, either click **DAGs** on the left sidebar or click **View DAGs** on a Deployment's information page.
 
