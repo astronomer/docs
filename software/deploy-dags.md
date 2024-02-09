@@ -7,7 +7,7 @@ description: Learn how to enable and trigger DAG-only deploys on Astronomer Soft
 
 DAG-only deploys are the fastest way to deploy code to Astronomer Software. They are recommended if you only need to deploy changes made to the `dags` directory of your Astro project.
 
-When this feature is enabled, you must still do a full project deploy when you make a change to any file in your Astro project that isn't in the `dags` directory, or when you [upgrade Astro Runtime](manage-airflow-versions.md).
+When this feature is configured for a Deployment, you must still do a full project deploy when you make a change to any file in your Astro project that isn't in the `dags` directory, or when you [upgrade Astro Runtime](manage-airflow-versions.md).
 
 DAG-only deploys have the following benefits:
 
@@ -73,7 +73,11 @@ Run the following command to trigger a DAG-only deploy:
 astro deploy --dags <deployment-id>
 ```
 
-You can still run `astro deploy` to trigger a complete project deploy. When you do this, the Astro CLI builds all project files including your DAGs into a Docker image as described in [Deploy a project image](deploy-cli.md).
+:::info
+
+You can still run `astro deploy` to trigger a complete project deploy. When you do this, the Astro CLI builds all project files excluding DAGs into a Docker image and deploys the image. It then deploys your DAGs separately using the DAG deploy mechanism.
+
+:::
 
 ## How DAG-only deploys work
 
