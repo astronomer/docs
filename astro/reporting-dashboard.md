@@ -53,7 +53,7 @@ Use this dashboard to check that your Deployment has the appropriate resources b
 
 ## DAG run detail
 
-This dashboard shows the average and median ending time of a specific DAG run, aggregated by a chosen time period, month, week or day. You can use this view to visually inspect when particular DAGs complete their first run, which allows you to see trends over time. This means you can make changes to your resources, such as Deployment settings or DAG code, and then check their performance over time, allowig you to highlight the impact of those changes.
+This dashboard shows the average and median ending time of a specific DAG run, aggregated by a chosen time period, month, week or day. You can use this view to visually inspect when particular DAGs complete their first run, which allows you to see trends over time. Check this dashboard when you make changes to Deployment resources or DAG code to track their effects on performance over time.
 
 You can also use this dashboard to [simulate a service level agreement](#create-an-sla-simulation) (SLA) for when a DAG should complete, and then compare how frequently your DAG runs complete within the SLA.
 
