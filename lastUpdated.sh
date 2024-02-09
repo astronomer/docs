@@ -65,8 +65,8 @@ function clean_output {
 
 function commit {
     wait
-    git config --global user.name "github-actions"
-    git config --global user.email "github-actions@github.com"
+    git config --global user.name "jwitz"
+    git config --global user.email "jwitz@astronomer.io"
     git add .
     git commit -m "Reassess docs freshness"
     git push
