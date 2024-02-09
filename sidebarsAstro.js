@@ -174,7 +174,7 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics", "reporting-dashboard"],
         },
         {
           type: "category",
@@ -182,7 +182,6 @@ module.exports = {
           items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
         "deployment-health-incidents",
-        "reporting-dashboard",
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
