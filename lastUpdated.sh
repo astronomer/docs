@@ -69,6 +69,7 @@ function commit {
     git config --global user.email "github-actions@github.com"
     git add .
     git commit -m "Reassess docs freshness"
+    git push
 }
 
 main "$@"
