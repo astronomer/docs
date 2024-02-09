@@ -13,7 +13,7 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 :::
 
-Astro provides a collection of dashboards that include important metrics about your Organization's use of Astro. These dashboards include:
+Astro provides a collection of dashboards that include important metrics about your Organization's use of Astro, which you can use to manage Deployments and resources. These dashboards include:
 
 - Organization Explorer
 - Deployment Detail
@@ -21,9 +21,9 @@ Astro provides a collection of dashboards that include important metrics about y
 - Cost Breakdown (Hosted only)
 - Operator Use
 
-Dashboards help you quickly identify opportunities to optimize how your team uses Airflow. For example, you can use the Deployment Detail page to identify unexpected DAG behaviors, like unusually high compute use, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
+Dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and tasks within DAGs. For example, you can use the **Deployment Detail** page to identify unexpected DAG behaviors, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly switch between DAGs in a dashboard to identify trends like unusually high compute use, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
 
-To view Astro dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). 
+To view Astro dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 
 Use the tabs at the bottom of the Cloud UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
 
@@ -37,7 +37,7 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 The **Organization Explorer** dashboard provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
 
-This tab allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. For example, you can filter the data shown by time period, Workspace name, or Deployment name, to view data such as the number of successful or failed tasks within Workspaces or Deployments. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
+This data allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. For example, you can filter the data shown by time period, Workspace name, or Deployment name, to view data such as the number of successful or failed tasks within Workspaces or Deployments. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
 By examining your data at the Organization level, you can identify Deployments with large numbers of failing tasks by looking at the graphs or charts for outliers. Then, you can filter by time period to see if there have been similar events in the past and when.
 
@@ -89,6 +89,6 @@ You can set up your reporting Dashboard to email you data reports on a given tim
 
 2. Expand the menu, and then you can choose
     - **Sort** the x-axis data
-    - **Alert when...** to define criterial when Astro will send you a data export of the element or dashboard
+    - **Alert when...** to define criteria for Astro to send you a Sigma data export of the element or dashboard that you want data about.
     - **Export** to download the data in a file format of your choosing, like `.csv`.
     - **Refresh data** to reload the data you're viewing in the Dashboard or element.
