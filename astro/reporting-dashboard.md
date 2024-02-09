@@ -89,8 +89,6 @@ In the **Cost Breakdown** dashboard, you can find detailed information about how
 
 The **Operator Use** dashboard shows how your Deployments and Workspaces use Operators, as well as how often tasks succeed and fail when using specific operators. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. This dashboard provides data to answer the questions, *What are the top operators used across my organization?* and *Which workspace is using the selected operators the most?*.
 
-![Examine how frequently DAGs meet your SLA.](/img/docs/dash-DAG-SLA.png)
-
 <!--
 ## Export data from reporting dashboards
 
