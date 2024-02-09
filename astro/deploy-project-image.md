@@ -46,9 +46,9 @@ astro deploy
 
 This command returns a list of Deployments available in your Workspace and prompts you to pick one.
 
-After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
+After you select a Deployment, the CLI parses your DAGs and runs a suite of pytests to ensure that they don't contain basic errors. This testing process is equivalent to running `astro dev parse` and `astro dev pytest` in a local Airflow environment. If any of your DAGs fail this testing process, the deploy to Astro also fails. To force a deploy even if your project has errors, you can run `astro deploy --force`. For more information about using pytests, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
-If your code passes the parse, the Astro CLI deploys your project in two separate, simultaneous processes:
+If your code passes the testing phase, the Astro CLI deploys your project in two separate, simultaneous processes:
 
 - The Astro CLI uploads your `dags` directory to Astronomer-hosted blob storage. Your Deployment downloads the DAGs from the blob storage and applies the code to all of its running Airflow containers.
 - The Astro CLI builds all other project files into a Docker image and deploys this to an Astronomer-hosted Docker registry. The Deployment then applies the image to all of its running Airflow containers.
@@ -65,14 +65,6 @@ Push access denied, repository does not exist or may require authorization: serv
 Unable to find image 'barren-ionization-0185/airflow:latest' locally
 Error response from daemon: pull access denied for barren-ionization-0185/airflow, repository does not exist or may require 'docker login'
 ```
-
-:::
-
-:::tip
-
-To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy also fails. This can help you prevent your team from deploying DAGs to Astro that contain errors.
-
-For more information about using Pytest, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
 :::
 
