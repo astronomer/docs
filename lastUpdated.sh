@@ -66,7 +66,10 @@ function clean_output {
 function commit {
     wait
     git add .
-    git status
+    git config --global user.name "jwitz"
+    git config --global user.email "jwitz@astronomer.io"
+    git commit -a -m "Load metrics"
+    git push
 }
 
 main "$@"
