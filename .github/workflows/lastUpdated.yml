@@ -5,15 +5,18 @@ jobs:
   exportmetrics:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-      name: Checkout repo
-      with:
-        token: ${{ secrets.COMMIT_KEY }}
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
       run: ./lastUpdated.sh
       shell: bash
+    - uses: actions/checkout@v4
+    - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Reassess docs freshness"
+          git push
     - uses: jakejarvis/s3-sync-action@master
       name: Sync to S3
       with:
