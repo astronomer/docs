@@ -37,7 +37,7 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 The **Organization Explorer** dashboard provides at-a-glance summaries about activity across your Organization's Deployments. You can also filter to view summaries for specific Workspaces or Deployments.
 
-This data allows you compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. For example, you can filter the data shown by time period, Workspace name, or Deployment name, to view data such as the number of successful or failed tasks within Workspaces or Deployments. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
+This tab allows you to compare the activity and performances of Deployments to one another. You can identify Deployments, DAGs, or tasks that have had recent behavior changes or are performing in an unexpected way. For example, you can filter the data shown by time period, Workspace name, or Deployment name, to view data such as the number of successful or failed tasks within Workspaces or Deployments. Hovering your cursor over any of the charts brings up a detailed view of the data, indexed by date.
 
 By examining your data at the Organization level, you can identify Deployments with large numbers of failing tasks by looking at the graphs or charts for outliers. Then, you can filter by time period to see if there have been similar events in the past and when.
 
@@ -91,6 +91,7 @@ The **Operator Use** dashboard shows how your Deployments and Workspaces use Ope
 
 ![Examine how frequently DAGs meet your SLA.](/img/docs/dash-DAG-SLA.png)
 
+<!--
 ## Export data from reporting dashboards
 
 You can set up your reporting Dashboard to email you data reports on a given time interval or as an alert when certain criteria are met. Or, you can export your data in a one-time action.
@@ -102,3 +103,4 @@ You can set up your reporting Dashboard to email you data reports on a given tim
     - **Alert when...** to define criteria for Astro to send you a Sigma data export of the element or dashboard that you want data about.
     - **Export** to download the data in a file format of your choosing, like `.csv`.
     - **Refresh data** to reload the data you're viewing in the Dashboard or element.
+-->
