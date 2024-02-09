@@ -53,11 +53,19 @@ Use this dashboard to check that your Deployment has the appropriate resources b
 
 ## DAG SLA
 
-The DAG SLA dashboard allows you to simulate a service level agreement (SLA) for when a DAG should complete and then compare how frequently your DAG runs complete within the SLA. Use this dashboard to check how frequently your Organization meets your SLA obligations, or to create an alert when specific SLAs are breached.
+The following graph shows the average and median ending time of the DAG run aggregated by the chosen time period (Month, Week or Day).
 
-![Examine how frequently DAGs meet your SLA.](/img/docs/dash-DAG-SLA.png)
+:::note
+
+The report only includes the first successful occurrence of each **DAG Run ID**. Manual DAG runs and sub-daily DAGs are excluded.
+
+:::
+
+![Examine the time of day when your DAG runs typically complete.](/img/docs/dash-DAG-run-detail.png)
 
 ### Create an SLA simulation
+
+The DAG Run Details dashboard allows you to simulate a service level agreement (SLA) for when a DAG should complete, and then compare how frequently your DAG runs complete within the SLA. Use this view to check how frequently your Organization meets your SLA obligations, or to create an alert when specific SLAs are breached.
 
 To simulate an SLA, you must first define an SLA and then apply it to specific DAGs.
 
