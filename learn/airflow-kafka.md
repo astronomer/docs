@@ -176,7 +176,7 @@ Airflow can run a function when a specific message appears in your Kafka topic. 
 
 :::info
 
-Since the function provided to the `apply_function` parameter is being imported into the [Triggerer](https://docs.astronomer.io/learn/deferrable-operators#terms-and-concepts) compoment of Airflow, which does not periodically restart, you need to restart your Airflow instance to apply changes to the `apply_function` of the AwaitMessageTriggerFunctionSensor when working locally. To do so run `astro dev restart` in your terminal. Changes to the `event_triggered_function` of the AwaitMessageTriggerFunctionSensor do not require a restart of your Airflow instance.
+When working locally, you need to restart your Airflow instance to apply changes to the `apply_function` of the AwaitMessageTriggerFunctionSensor because the function is imported into the [Triggerer](https://docs.astronomer.io/learn/deferrable-operators#terms-and-concepts), which does not periodically restart. To do so, run `astro dev restart` in your terminal. Changes to the `event_triggered_function` of the AwaitMessageTriggerFunctionSensor do not require a restart of your Airflow instance.
 
 :::
 
