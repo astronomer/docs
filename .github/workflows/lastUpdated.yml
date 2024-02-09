@@ -5,6 +5,9 @@ jobs:
   exportmetrics:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
+    - run: |
+          git checkout main
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
