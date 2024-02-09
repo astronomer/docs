@@ -20,7 +20,7 @@ DAG-only deploys have the following benefits:
 
 :::danger
 
-When you enable DAG-only Deployments, all DAGs in your Deployment will be erased. To continue running your DAGs, you must redeploy them using `astro deploy --dags`. 
+When you enable DAG-only Deployments, all DAGs in your Deployment will be removed. To continue running your DAGs, you must redeploy them using `astro deploy --dags`. 
 
 :::
 
@@ -29,14 +29,14 @@ By default, Deployments are configured only for complete project image deploys. 
 1. Open your Deployment in the Astronomer Software UI.
 2. In the **Settings** tab under the **DAG Deployment** section, change the **Mechanism** to **DAG Only Deployment**. 
 3. Click **Deploy changes**
-4. Redeploy any DAGs that were erased as a result of the configuration change. See [Trigger a DAG-only deploy](#trigger-a-dag-only-deploy)
+4. Redeploy your DAGs using `astro deploy --dags`. See [Trigger a DAG-only deploy](#trigger-a-dag-only-deploy). This step is required due to all DAGs in your deployed image being erased when you enable the feature. 
 
 ## Trigger a DAG-only deploy
 
 Run the following command to trigger a DAG-only deploy:
 
 ```sh
-astro deploy --dags
+astro deploy --dags <deployment-id>
 ```
 
 You can still run `astro deploy` to trigger a complete project deploy. When you do this, the Astro CLI builds all project files including your DAGs into a Docker image as described in [Deploy a project image](deploy-cli.md).
