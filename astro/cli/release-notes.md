@@ -15,9 +15,34 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: 1.21.0, 1.20.1, and 1.19.4. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
 
+## Astro CLI 1.23.0
+
+Release date: February 14, 2024
+
+### New fields to update Kubernetes worker types, CPU, and memory
+
+You can now use the new `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker-queue.
+
+With this new functionality, you can no longer change your Kubernetes worker configuration with the following commands:
+
+* `astro deployment create --from-file`
+* `astro deployment update --from-file`
+* `astro deployment worker-queue create`
+* `astro deployment worker-queue update`
+
+### Changes to other existing flags
+
+- `astro deployment logs --key-word`
+- `astro deployment create --cluster-type` is now `astro deployment create --type`
+- `astro deployment create --enforce-cicd` to `astro deployment create --cicd-enforcement`
+
+### Other changes
+
+- The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement.
+
 ## Astro CLI 1.22.0
 
-Release date: January 24, 2023
+Release date: January 24, 2024
 
 ### New flag to mount secrets to Astro project image
 

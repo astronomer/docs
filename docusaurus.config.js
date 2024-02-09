@@ -15,7 +15,7 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER}}':"1.22.0",
+          '{{CLI_VER}}':"1.23.0",
           '{{RUNTIME_VER}}':"10.3.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
