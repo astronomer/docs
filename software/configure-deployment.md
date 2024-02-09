@@ -164,17 +164,17 @@ Deploying code is the process of applying code from your local machine to an Ast
 
 ### Astro CLI deploys
 
-By default, you can deploy DAGs to an Airflow Deployment by building them into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md). 
+By default, you can deploy code to an Airflow Deployment by building it into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md). 
 
-This mechanism builds your DAGs into a Docker image alongside all other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. 
+This mechanism builds your DAGs into a Docker image alongside all other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins.
 
 The resulting image is then used to generate a set of Docker containers for each of Airflow's core components. Every time you run `astro deploy` in the Astro CLI, your DAGs are rebuilt into a new Docker image and all Docker containers are restarted.
 
 You can also enable [DAG only deploys](deploy-dags.md) to deploy only your `dags` directory without building a Docker image. Note that you will still need access to Docker to authenticate to Astronomer Software before you can deploy DAGs.
 
-### Volume-based DAG deploys
+### NFS volume-based DAG deploys
 
-For advanced teams who deploy DAG changes more frequently, Astronomer also supports an [NFS volume-based](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) deploy mechanism.
+For advanced teams who deploy DAG changes more frequently, Astronomer also supports an [NFS volume-based](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) DAG deploy mechanism.
 
 Using this mechanism, you can deploy DAGs to an Airflow Deployment on Astronomer by adding the corresponding Python files to a shared file system on your network. Compared to image-based deploys, NFS volume-based deploys limit downtime and enable continuous deployment.
 
