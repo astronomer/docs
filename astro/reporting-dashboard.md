@@ -67,7 +67,7 @@ The report only includes the first successful occurrence of each **DAG Run ID**.
 
 ### Create an SLA simulation
 
-Use this view to check how frequently your Organization meets your SLA obligations, or to create an alert when specific SLAs are breached.
+Use this view to check how frequently your Organization meets your SLA obligations, or to identify if specific SLAs are breached.
 
 To simulate an SLA, you must first define an SLA and then apply it to specific DAGs.
 
