@@ -14,10 +14,6 @@ jobs:
     - name: Run build script
       run: ./lastUpdated.sh
       shell: bash
-    - uses: EndBug/add-and-commit@v9
-      with:
-        author_name: Jacob Witz
-        author_email: jwitz@astronomer.io
     - uses: jakejarvis/s3-sync-action@master
       name: Sync to S3
       with:
