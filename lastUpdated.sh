@@ -66,6 +66,7 @@ function clean_output {
 function commit {
     wait
     git add .
+    git commit -m "Reassess docs freshness"
 }
 
 main "$@"
