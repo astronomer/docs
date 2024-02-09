@@ -174,6 +174,11 @@ Airflow can run a function when a specific message appears in your Kafka topic. 
 
     The AwaitMessageTriggerFunctionSensor always runs and listens. If the task fails, like if a malformed message is consumed, the DAG completes as `failed` and automatically starts its next DAG run because of the [`@continuous` schedule](scheduling-in-airflow.md#continuous-timetable).
 
+:::info
+
+Since the function provided to the `apply_function` parameter is being imported into the [Triggerer](https://docs.astronomer.io/learn/deferrable-operators#terms-and-concepts) compoment of Airflow, which does not periodically restart, you need to restart your Airflow instance to apply changes to the `apply_function` of the AwaitMessageTriggerFunctionSensor when working locally. To do so run `astro dev restart` in your terminal. Changes to the `event_triggered_function` of the AwaitMessageTriggerFunctionSensor do not require a restart of your Airflow instance.
+
+:::
 
 ## Step 5: Create a downstream DAG
 
