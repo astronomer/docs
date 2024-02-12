@@ -89,5 +89,3 @@ If you deploy DAGs to a Deployment that is running a previous version of your co
     These new workers execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` continues to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they are both scheduled on new Celery workers running your latest code.
 
     This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
-
-When you run `astro deploy` to deploy a complete project image, the Astro CLI builds all project files including your DAGs into a Docker image as described in [Deploy a project image](deploy-cli.md).
