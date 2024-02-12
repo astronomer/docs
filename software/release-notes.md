@@ -30,7 +30,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## 0.34.0
 
-Release date: January 29, 2023
+Release date: February 12, 2024
 
 ### Updated permissions for upgrading Deployments to unsupported Astro Runtime versions
 
