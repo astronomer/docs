@@ -81,12 +81,6 @@ You can still run `astro deploy` to trigger a complete project deploy. When you 
 
 ## How DAG-only deploys work
 
-Each Deployment includes a Pod that processes DAG only deploys called the `dag-server`, and each Airflow component has a sidecar container to download new DAGs when they are available. When a user triggers a DAG-only deploy to a Deployment:
-
-- The Astro CLI bundles the DAG code as a `.tar.gz` file and uploads it to the server.
-- The server sends a signal to the Deployment DAG downloader sidecar that there are new DAGs to download.
-- The DAG downloader in each Airflow component downloads the new DAGs from the DAG server.
-- Airflow scans the dags directory on its configured interval and processes the changed files.
 
 If you deploy DAGs to a Deployment that is running a previous version of your code, then the following happens:
 
