@@ -87,17 +87,17 @@ The following tables contain the exact lifecycle for each published version of A
 
 ### Stable
 
-| Software Version | Release Date    | End of Maintenance Date |
-| ---------------- | --------------- | ----------------------- |
-| 0.30             | August 29, 2022 | August 2023             |
-| 0.32             | April 28, 2023   | April 2024             |
-| 0.33             | October 13, 2023    | April 2024            |
-| 0.34            | January 23, 2023    | July 2024            |
+| Software Version | Release Date     | End of Maintenance Date |
+| ---------------- | ---------------- | ----------------------- |
+| 0.30             | August 29, 2022  | August 2023             |
+| 0.32             | April 28, 2023   | April 2024              |
+| 0.33             | October 13, 2023 | April 2024              |
+| 0.34             | January 29, 2023 | July 2024               |
 
 ### LTS
 
-| Software Version | Release Date  | End of Maintenance Date |
-| ---------------- | ------------- | ----------------------- |
-| 0.30             | Aug 29, 2022  | August 2023             |
+| Software Version | Release Date   | End of Maintenance Date |
+| ---------------- | -------------- | ----------------------- |
+| 0.30             | Aug 29, 2022   | August 2023             |
 | 0.32             | April 28, 2023 | April 2024              |
 

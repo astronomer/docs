@@ -560,7 +560,7 @@ deployments:
   fluentdIndexPrefix: fluentd
   enableHoustonInternalAuthorization: false
   resourceProvisioningStrategy:
-    astroUnitsEnabled: false
+    astroUnitsEnabled: true
 
   # This is a multiplying factor as a percentage/100 of the limits.
   # Constraints - [0 < overProvisioningFactor <= 1]
@@ -678,8 +678,8 @@ deployments:
 
   # feature flag that controls whether a system admin can create or upgrade airflows of deprecated versions
   enableSystemAdminCanCreateDeprecatedAirflows: false
-  # feature flag that controls whether a system admin can create or upgrade runtime of all versions; deprecated and non-latest ver
-  enableSystemAdminCanUseAllRuntimes: true
+  # feature flag that controls whether a user can create or upgrade runtime of all versions; deprecated and non-latest ver
+  enableListAllRuntimeVersions: true
 
   # Log out final helm values whenever they are generated, before deployment.
   logHelmValues: false
@@ -703,6 +703,31 @@ deployments:
     pullPolicy: IfNotPresent
     port: 8084
     annotations: {}
+
+  dagDeploy:
+    enabled: false
+    images:
+      dagServer:
+        repository: quay.io/astronomer/ap-dag-deploy
+        tag: 0.3.0
+        imagePullPolicy: IfNotPresent
+    server:
+      resources:
+        limits:
+          memory: 384Mi
+          cpu: 100m
+        requests:
+          memory: 384Mi
+          cpu: 100m
+    client:
+      resources:
+        limits:
+          memory: 384Mi
+          cpu: 200m
+        requests:
+          memory: 384Mi
+          cpu: 200m
+    securityContext: {}
 
   loggingSidecar:
     enabled: false

@@ -1,16 +1,21 @@
 ---
-sidebar_label: 'Deploy DAGs via CLI'
-title: 'Deploy DAGs to Astronomer Software via CLI'
+sidebar_label: 'Deploy a project image'
+title: 'Deploy code to Astronomer Software using the Astro CLI'
 id: deploy-cli
 description: How to push DAGs to your Airflow Deployment on Astronomer Software using the Astro CLI.
 ---
 
+To run your code on Astronomer Software, you need to deploy it to an Airflow Deployment. You can deploy part or all of an Astro project to an Airflow Deployment using the Astro CLI.
 
-If you've used the Astro CLI to develop locally, the process for deploying your DAGs to an Airflow Deployment on Astronomer should be equally familiar. The Astro CLI builds your DAGs into a Docker image alongside all the other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. The resulting image is then used to generate a set of Docker containers for each core Airflow component.
+When you deploy a project, the Astro CLI builds your all files in your Astro project, including DAGs, into a Docker image. It then pushes this image to an image registry on your Astronomer Software cluster where your Deployment accesses the image and uses it to run Airflow containers.
 
 For guidance on automating this process, refer to [Deploy to Astronomer via CI/CD](ci-cd.md). To learn how to add Python and OS-level packages or otherwise customize your Docker image, read [Customize your image](customize-image.md).
 
-Alternatively, you can configure an external NFS volume for DAG deploys. For more information, read [Deploy DAGs to an NFS volume](deploy-nfs.md).
+This document covers deploying a complete project image to Astro. To deploy DAGs only, see:
+
+- [Deploy DAGs using the Astro CLI](deploy-dags.md)
+- [Deploy DAGs to an NFS volume](deploy-nfs.md)
+- [Deploy DAGs using git-sync](deploy-nfs.md).
 
 :::info
 
@@ -70,7 +75,7 @@ When you're ready to deploy your DAGs, run:
 astro deploy
 ```
 
-This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. Once this command is executed, all files in your Astro project directory are built into a new Docker image and Docker containers for all Airflow components are restarted.
+This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. After you execute the command, all files in your Astro project directory are built into a new Docker image, the image is pushed to the Astronomer Software registry, and the containers for all Airflow components in the Deployment are restarted.
 
 :::info
 
@@ -91,13 +96,3 @@ Everything in the project directory where you ran `$ astro dev init` is bundled 
 Astronomer exclusively deploys the code in your project and does not push any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables set locally in the Airflow UI.
 
 For more information about what gets built into your image, read [Customize your image](customize-image.md).
-
-## Next steps: Organize Astronomer
-
-While the specific needs of your organization might require a slightly different structure than what's described here, these are some general best practices to consider when working with Astronomer:
-
-**Workspaces:** We recommend having 1 Workspace per team of Airflow users, so that anyone on this team has access to the same set of Deployments under that Workspace.
-
-**Deployments:** Most use cases will call for a "Production" and "Dev" Deployment, both of which exist within a single Workspace and are accessible to a shared set of users. From there, you can [set permissions](workspace-permissions.md) to give users in the Workspace access to specific Deployments.
-
-**Code:** As for the code itself, we’ve seen effective organization where external code is partitioned by function and/or business case, so one directly for SQL, one for data processing tasks, one for data validation, etc.

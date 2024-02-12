@@ -39,7 +39,6 @@ module.exports = {
       'kubernetes-executor',
         ],
       },
-      'deploy-cli',
       'upgrade-astro-cli',
     ],
     },
@@ -81,6 +80,16 @@ module.exports = {
           'configure-deployment',
           'environment-variables',
           'customize-resource-usage'
+          {
+            type: 'category',
+            label: 'Deploy options',
+            items: [
+            'deploy-cli',
+            'deploy-dags',
+            'deploy-git-sync',
+            'deploy-nfs',
+              ],
+          },
           ],
         },
         {
