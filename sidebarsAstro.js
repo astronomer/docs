@@ -320,6 +320,7 @@ module.exports = {
       label: 'Use cases',
       items: [
         'use-cases/connections-branch-deploys',
+        'use-cases/airflow-vs-astro-alerts'
       ],
     },
     {
