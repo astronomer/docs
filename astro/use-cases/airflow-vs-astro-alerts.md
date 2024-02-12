@@ -16,14 +16,12 @@ When you combine Airflow notifications with Astro alerts, you can:
 
 This guide provides guidance on when to use Astro or Airflow alerts, as well as an example implementation covering a couple of common alerting scenarios.
 
-
 ## Feature overview
 
 This guide highlights when to use the following Astro and Airflow features to create different types of alerts for your pipelines:
 
 - [Astro alerts](https://docs.astronomer.io/astro/alerts) for configuring DAG SLAs and failure notifications.
 - [Airflow callbacks](https://docs.astronomer.io/learn/error-notifications-in-airflow#airflow-callbacks) for custom task-level alerts. 
-
 
 ## Best practice guidance
 
@@ -63,7 +61,6 @@ Astronomer recommends choosing the following alerts for these common scenarios:
 | Stop a running task after some amount of time|           |                             |                  |              | X                |
 | Trigger another DAG based on an alert       | X           |                             |                  |              |                  |
 
-
 ## Example
 
 This example shows how to implement a combination of Airflow and Astro alerts to cover notifications for common scenarios including DAG failures, specific task failures, and pipeline SLAs.
@@ -86,7 +83,6 @@ To implement this use case:
 3. Add a connection to Slack in the Astro Cloud UI. See [Create Airflow connections in the Cloud UI](create-and-link-connections.md). This connection will be used by your SlackNotifier, so make sure the connection ID matches what you used in your DAG code in Step 1.
 4. In your Astro Deployment, configure an Astro **DAG failure** alert for your DAG using the communication channel of your choice. See [Set up Astro alerts](https://docs.astronomer.io/astro/alerts).
 5. Configure an Astro **Absolute time** alert for your DAG based on the amount of time you expect your DAG to complete in. Use the communication channel of your choice. See [Set up Astro alerts](https://docs.astronomer.io/astro/alerts).
-
 
 ## See also
 
