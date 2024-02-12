@@ -15,6 +15,8 @@ import external_python_operator_dag from '!!raw-loader!../code-samples/dags/airf
 
 It is common to require isolated environments for specific Airflow tasks, for example when needing to run tasks using conflicting versions of Python or Python packages. 
 
+![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
+
 In Airflow you have several options to isolate tasks, you can your custom Python code in:
 
 - A newly created virtual environment with the [`@task.virtualenv` decorator / PythonVirtualEnvOperator (PVEO)].
@@ -72,7 +74,7 @@ Astronomer's distribution of Airflow, the Astro Runtime has images available for
 
 ## Choosing an isolated environment option
 
-![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
+
 
 When choosing an isolated environment option, first you need to decide if you want to run your code in a dedicated Kubernetes pod or a Python virtual environment.
 
