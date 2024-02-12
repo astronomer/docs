@@ -7,6 +7,7 @@ The @task.virtualenv decorator is used to run any Python code in a new isolated 
 from airflow.decorators import dag, task
 import pandas as pd
 
+
 @dag(
     start_date=None,
     schedule=None,
@@ -31,7 +32,7 @@ def virtualenv_decorator_dag():
         ],  # pendulum is needed to use the logical date
     )
     def my_isolated_task(
-        upstream_task_output: dict
+        upstream_task_output: dict,
     ):  # note that not all objects from the context can be used!
         """
         This function runs in an isolated environment.
