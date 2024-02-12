@@ -21,14 +21,14 @@ In Airflow you have several options to isolate tasks, you can your custom Python
 - An existing virtual environment with the [`@task.external_python` decorator / ExternalPythonOperator (EPO)]. 
 - A dedicated Kubernetes pod with the [`@task.kubernetes` decorator / KubernetesPodOperator (KPO)].
 
-Additionally, you can run most traditional operators inside a dedicated Kubernetes pod with the [IsolatedOperator] and use [virtual branching operators]() to execute conditional task logic inside a virtual environment.
+Additionally, you can run most traditional operators inside a dedicated Kubernetes pod with the [IsolatedOperator] and use [virtual branching operators] to execute conditional task logic inside a virtual environment.
 
 In this guide you'll learn how to:
 
 - Use the `@task.virtualenv` decorator / PythonVirtualEnvOperator.
 - Use the `@task.external_python` decorator / ExternalPythonOperator.
 - Use the `@task.kubernetes` decorator / KubernetesPodOperator for basic use cases. For a more in-depth explanation of the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md).
-- Execute conditional task logic in a virtual environment with [virtual branching operators]().
+- Execute conditional task logic in a virtual environment with [virtual branching operators].
 
 :::tip Other ways to learn
 
@@ -37,7 +37,7 @@ There are multiple resources for learning about this topic. See also:
 - Astronomer Academy: [Airflow: The ExternalPythonOperator](https://academy.astronomer.io/astro-runtime-the-externalpythonoperator).
 - Astronomer Academy: [Airflow: The KubernetesPodOperator](https://academy.astronomer.io/astro-runtime-the-kubernetespodoperator-1).
 - Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments-video/).
-- Learn from code: []().
+- Learn from code: [].
 
 :::
 
@@ -80,7 +80,7 @@ A dedicated Kubernetes pod allows you to have full control over the environment 
 
 There are 3 options to run your code in a dedicated Kubernetes pod with Airflow:
 
-- To run a traditional operator in an isolated environment, use the [IsolatedOperator]() to run your operator code inside a dedicated Kubernetes pod. To use the IsolatedOperator, you need to have access to a Kubernetes cluster. 
+- To run a traditional operator in an isolated environment, use the [IsolatedOperator] to run your operator code inside a dedicated Kubernetes pod. To use the IsolatedOperator, you need to have access to a Kubernetes cluster. 
 - To run any custom Python code in a dedicated Kubernetes pod, use the `@task.kubernetes` decorator or the KubernetesPodOperator (KPO). You need to have a Docker image with Python and the necessary packages for your code, as well as access to a Kubernetes cluster. Astronomer recommends to use the `@task.kubernetes` decorator over the KPO if you need to pass data into or out of the pod, as it makes handling [XCom](airflow-passing-data-between-tasks.md) easier.
 - To run an existing Docker image without any additional Python code, use the [KubernetesPodOperator](kubepod-operator.md) (KPO). You need to provide Docker image to run, as well as access to a Kubernetes cluster.
 
