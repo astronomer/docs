@@ -50,7 +50,7 @@ In other cases, Astro alerts are always the better option. If you need to implem
 
 ### Recommended alerts
 
-Generally, Astronomer recommends choosing the following alerts for these common scenarios:
+Astronomer recommends choosing the following alerts for these common scenarios:
 
 | Scenario                                   | Astro alert | Airflow email notification | Airflow callback | Airflow SLA | Airflow timeout |
 |--------------------------------------------|-------------|-----------------------------|------------------|--------------|------------------|
