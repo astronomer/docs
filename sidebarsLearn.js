@@ -115,6 +115,7 @@ module.exports = {
             'airflow-datasets',
             'deferrable-operators',
             'dynamically-generating-dags',
+            'airflow-isolated-environments',
             'kubepod-operator',
             'airflow-mlops',
             'using-airflow-plugins',
