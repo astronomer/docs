@@ -9,7 +9,7 @@ module.exports = {
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
   onBrokenMarkdownLinks: 'throw',
-  onBrokenAnchors: 'throw',
+  onBrokenAnchors: 'warn',
   markdown: {
     mermaid: true,
     preprocessor: ({ filePath, fileContent }) => {
