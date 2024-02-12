@@ -58,9 +58,9 @@ For a detailed breakdown of each executor, see [Airflow executors explained](htt
 
 ## Select a resource strategy
 
-A Deployment's resource strategy defines how you can allocate CPU and memory to the Deployment's Airflow components. Astronomer Software offers two different **Resource strategies**: **Custom Resources** and **Astronomer Units (AUs)**.
+A Deployment's **Resource Strategy** defines how you can allocate CPU and memory to the Deployment's Airflow components. Astronomer Software offers two different resource strategies: **Custom Resources** and **Astronomer Units (AUs)**.
 
-An AU is equivalent to 0.1 CPU and 0.375 GiB of memory. If you set your resource strategy to **Astronomer Units**, you can only scale components based on this resource ratio. 
+An AU is equivalent to 0.1 CPU and 0.375 GiB of memory. If you set your resource strategy to **Astronomer Units**, you can only scale components based on this resource ratio. Components must use the same AU value for both CPU and memory.
 
 If you set your resource strategy to **Custom Resources**, you can freely set CPU and memory for each component without a predetermined ratio. See [Customize resource usage](customize-resource-usage.md).
 
@@ -77,7 +77,7 @@ Apache Airflow requires two primary components:
 - The Airflow Webserver
 - The Airflow Scheduler
 
-To scale either resource, simply adjust the corresponding slider in the Software UI to increase its available computing power.
+To scale either resource, adjust the corresponding slider in the Software UI to increase its available computing resources.
 
 Read the following sections to help you determine which core resources to scale and when.
 
@@ -99,7 +99,7 @@ If you experience delays in task execution, which you can track via the [Gantt C
 
 Airflow 2.0 comes with the ability for users to run multiple schedulers concurrently to ensure high-availability, zero recovery time, and faster performance. By adjusting the **Scheduler Count** slider in the Software UI, you can provision up to 4 schedulers on any Deployment running Airflow 2.0+ on Astronomer.
 
-Each individual scheduler will be provisioned with the resources specified in **Scheduler Resources**. For example, if you set **Scheduler Resources** to 10 AU and **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow schedulers using 10 AU each for a total of 20 AU.
+Each individual scheduler will be provisioned with the resources specified in **Scheduler Resources**. For example, if you set the CPU figure in **Scheduler Resources** to 5 CPUs and set **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow schedulers using 5 CPUs each for a total of 10 CPUs.
 
 To increase the speed at which tasks are scheduled and ensure high-availability, Astronomer recommends provisioning 2 or more Airflow schedulers for production environments. For more information on the Airflow 2.0 scheduler, refer to Astronomer's ["The Airflow 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
 
@@ -127,7 +127,7 @@ To optimize for flexibility and availability, the Celery executor works with a s
 
 By adjusting the **Worker Count** slider, users can provision up to 20 Celery workers on any Airflow Deployment.
 
-Each individual worker will be provisioned with the resources specified in **Worker Resources**. If you set **Worker Resources** to 10 AU and **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery workers using 10 AU each for a total of 30 AU. **Worker Resources** has a maximum of 100 AU (10 CPU, 37.5 GB Memory).
+Each individual worker will be provisioned with the resources specified in **Worker Resources**. If you set the CPU figure in **Worker Resources** to 5 CPUs and set **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery workers using 5 CPUs each for a total of 15 CPUs.
 
 ### Worker termination grace period
 
