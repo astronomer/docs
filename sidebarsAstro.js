@@ -316,7 +316,7 @@ module.exports = {
       label: 'Use cases',
       items: [
         'use-cases/connections-branch-deploys',
-        'use-cases/multi-channel-alerting-systems'
+        'use-cases/airflow-vs-astro-alerts'
       ],
     },
     {

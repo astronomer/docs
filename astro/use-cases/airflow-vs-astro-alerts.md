@@ -1,54 +1,36 @@
 ---
-title: 'Set up a multi-channel alerting system for your Airflow pipelines on Astro'
-sidebar_label: 'Multi-channel alerting systems'
-id: multi-channel-alerting-systems
+title: 'When to use Airflow or Astro alerts for your pipelines on Astro'
+sidebar_label: 'Airflow vs Astro alerts'
+id: airflow-vs-astro-alerts
 ---
 
 When orchestrating data pipelines, it's key that you know when something goes wrong. It could be that a business critical DAG failed or that a DAG that provides data for another team took longer than normal to complete. A common consideration when running Airflow at scale is how to alert your team in different scenarios.
 
-Airflow has built-in notification mechanisms for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://docs.astronomer.io/astro/alerts) provide an additional level of observability.
+Airflow has built-in notification mechanisms for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://docs.astronomer.io/astro/alerts) provide an additional level of observability. For many use cases, Astronomer recommends using a combination of Airflow and Astro alerts to best cover all alerting scenarios.
 
 When you combine Airflow notifications with Astro alerts, you can:
 
 - Use Astro alerts to configure DAG failure or success alerts for common communication channels like Slack, PagerDuty, or email.
-- Use Astro alerts to implement pipeline SLAs based on task duration.
+- Use Astro alerts to implement pipeline SLAs based on task duration or absolute time.
 - Use Airflow email notifications and callbacks for custom task-level alerting logic.
 
-This guide shows how to combine Airflow and Astro alerts for a couple of common scenarios. For general guidance on when to use which type of alert, see the [Explanation](#explanation) section.
+This guide provides guidance on when to use Astro or Airflow alerts, as well as an example implementation covering a couple of common alerting scenarios.
 
 ## Feature overview
 
-This use case depends on the following Astro and Airflow features to create different types of alerts for your pipelines:
+This guide highlights when to use the following Astro and Airflow features to create different types of alerts for your pipelines:
 
 - [Astro alerts](https://docs.astronomer.io/astro/alerts) for configuring DAG SLAs and failure notifications.
 - [Airflow callbacks](https://docs.astronomer.io/learn/error-notifications-in-airflow#airflow-callbacks) for custom task-level alerts. 
 
-## Prerequisites
+## Best practice guidance
 
-This use case assumes you have:
-
-- At least one [Astro Deployment](https://docs.astronomer.io/astro/create-deployment). Your Deployment must run Astro Runtime 7.1.0 or later and it must have OpenLineage enabled.
-- An [Astro project](https://docs.astronomer.io/astro/cli/develop-project) with at least one DAG. Your DAG should have at least two tasks.
-
-However, you can extend this use case to encompass any number of Astro Deployments and DAGs.
-
-## Implementation
-
-To implement this use case:
-
-1. Open the DAG in your Astro project and configure a pre-built SlackNotifier for one of its tasks as a task-level argument. See [Example pre-built notifier: Slack](https://docs.astronomer.io/learn/error-notifications-in-airflow#example-pre-built-notifier-slack) for sample code.  
-2. Deploy your project to your Astro Deployment. See [Deploy code to Astro](https://docs.astronomer.io/astro/deploy-code).
-3. Add a connection to Slack in the Astro Cloud UI. See [Create Airflow connections in the Cloud UI](create-and-link-connections.md). This connection will be used by your SlackNotifier, so make sure the connection ID matches what you used in your DAG code in Step 1.
-4. In your Astro Deployment, configure an Astro **DAG failure** alert for your DAG using the communication channel of your choice. See [Set up Astro alerts](https://docs.astronomer.io/astro/alerts).
-5. Configure an Astro **Absolute time** alert for your DAG based on the amount of time you expect your DAG to complete in. Use the communication channel of your choice. See [Set up Astro alerts](https://docs.astronomer.io/astro/alerts).
-
-## Explanation
-
-Using a combination of Astro alerts and Airflow notifications allows your team to implement alerting logic using the best tool for each scenario. You might need different types of alerts that are better suited towards one option or the other, as shown in the example in this use case:
+Using a combination of Astro alerts and Airflow notifications allows your team to implement alerting logic using the best tool for each scenario. You might need different types of alerts that are better suited towards one option or the other, for example:
 
 - **Task-level alerts with custom logic** are recommended if you want be notified of success or failure only for a specific task, or you want to run custom code if a task succeeds or fails. Task-level success or failure alerts or alerts with custom logic are not currently supported with Astro alerts, but they're straightforward to implement in Airflow.
-- DAG-level success or failure alerts can be created using either Airflow notifications or Astro alerts, but on Astro they are easy to configure and don't require any code changes. To implement these alerts with Airflow, you need to update your DAG code and complete additional configuration for your communication channel (for example, setting up an SMTP server for email alerts).
-- Absolute time alerts are recommended when you need your DAG to complete by a certain time of day. These types of alerts are available only on Astro.
+- **DAG-level success or failure alerts** can be created using either Airflow notifications or Astro alerts, but on Astro they are easy to configure and don't require any code changes. To implement these alerts with Airflow, you need to update your DAG code and complete additional configuration for your communication channel (for example, setting up an SMTP server for email alerts).
+- **Absolute time alerts** are recommended when you need your DAG to complete by a certain time of day. These types of alerts are available only on Astro.
+- **Task duration alerts** are recommended when you need to know if your task has taken longer than a certain amount of time to complete. These types of alerts are easy to implement with Astro alerts, but are unintuitive in Airflow.
 
 In some cases, whether you set up an alert on Astro or in Airflow will depend on how your DAGs were configured before you moved to Astro. For example, if all of your DAGs already have email-on-failure notifications configured, it will likely be easier for you to configure an SMTP server on Astro and rely on the existing notification than implement a new Astro alert for each DAG. On the other hand, if you are developing new DAGs on Astro, it will likely be easier to implement Astro alerts which require less configuration for the communication channels.
 
@@ -79,6 +61,28 @@ Generally, Astronomer recommends choosing the following alerts for these common 
 | Stop a running task after some amount of time|           |                             |                  |              | X                |
 | Trigger another DAG based on an alert       | X           |                             |                  |              |                  |
 
+## Example
+
+This example shows how to implement a combination of Airflow and Astro alerts to cover notifications for common scenarios including DAG failures, specific task failures, and pipeline SLAs.
+
+### Prerequisites
+
+To implement the alerts shown in this example, you need:
+
+- At least one [Astro Deployment](https://docs.astronomer.io/astro/create-deployment). Your Deployment must run Astro Runtime 7.1.0 or later and it must have OpenLineage enabled.
+- An [Astro project](https://docs.astronomer.io/astro/cli/develop-project) with at least one DAG. Your DAG should have at least two tasks.
+
+However, you can extend this example to encompass any number of Astro Deployments and DAGs.
+
+### Implementation
+
+To implement this use case:
+
+1. Open the DAG in your Astro project and configure a pre-built SlackNotifier for one of its tasks as a task-level argument. See [Example pre-built notifier: Slack](https://docs.astronomer.io/learn/error-notifications-in-airflow#example-pre-built-notifier-slack) for sample code.  
+2. Deploy your project to your Astro Deployment. See [Deploy code to Astro](https://docs.astronomer.io/astro/deploy-code).
+3. Add a connection to Slack in the Astro Cloud UI. See [Create Airflow connections in the Cloud UI](create-and-link-connections.md). This connection will be used by your SlackNotifier, so make sure the connection ID matches what you used in your DAG code in Step 1.
+4. In your Astro Deployment, configure an Astro **DAG failure** alert for your DAG using the communication channel of your choice. See [Set up Astro alerts](https://docs.astronomer.io/astro/alerts).
+5. Configure an Astro **Absolute time** alert for your DAG based on the amount of time you expect your DAG to complete in. Use the communication channel of your choice. See [Set up Astro alerts](https://docs.astronomer.io/astro/alerts).
 
 ## See also
 
