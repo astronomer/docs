@@ -180,7 +180,7 @@ If you would like to see a more complete working example please visit our [full 
 
 For CI/CD pipelines that push code to a production Deployment, Astronomer recommends adding a unit test after the image build step to ensure that you don't push a Docker image with breaking changes. To run a basic unit test, add a step in your CI/CD pipeline that executes `docker run` and then runs `pytest tests` in a container that is based on your newly built image before it's pushed to your registry.
 
-For example, you can add the following command as a step in a [Drone](ci-cd.md#DroneCI) pipeline:
+For example, you can add the following command as a step in a [Drone](#DroneCI) pipeline:
 
 > **Note:** `BASE_DOMAIN` and `RELEASE_NAME` are pre-configured environment variables in the CI/CD tool, and `DRONE_BUILD_NUMBER` is an environment variable provided by the job execution in DroneCI.
 

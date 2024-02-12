@@ -133,7 +133,7 @@ If you configure both options in your `config.yaml` file, then `astronomer.comma
 
 ## Step 5: Fetch Airflow Updates
 
-By default, Astronomer checks for Airflow updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-certified`, which returns a JSON file with version details. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
+By default, Astronomer checks for Airflow updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-runtime`, which returns a JSON file with version details. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
 
 - You can download the JSON and host it in a location that's accessible within your airgapped environment, for example:
     - AWS S3
@@ -152,7 +152,7 @@ To complete this setup:
 1. Host an updates JSON in a Kubernetes configmap by running the following commands:
 
     ```bash
-    $ curl -L https://updates.astronomer.io/astronomer-certified --output astronomer-certified.json
+    $ curl -L https://updates.astronomer.io/astronomer-runtime --output astronomer-certified.json
     $ kubectl create configmap astronomer-certified --from-file=astronomer-certified.json=./astronomer-certified.json -n astronomer
     ```
 
