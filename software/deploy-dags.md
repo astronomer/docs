@@ -79,10 +79,13 @@ You can still run `astro deploy` to trigger a complete project deploy. When you 
 
 :::
 
-## How DAG-only deploys work
+:::info
 
 If you deploy DAGs to a Deployment that is running a previous version of your code, then tasks that are `running` continue to run on existing workers and are not interrupted unless the task does not complete within 24 hours of the DAG deploy.
 
 These new workers execute downstream tasks of DAG runs that are in progress. For example, if you deploy to Astronomer when `Task A` of your DAG is running, `Task A` continues to run on an old Celery worker. If `Task B` and `Task C` are downstream of `Task A`, they are both scheduled on new Celery workers running your latest code.
 
 This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
+
+
+:::
