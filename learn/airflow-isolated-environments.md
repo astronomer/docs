@@ -9,9 +9,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import virtualenv_decorator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/virtualenv_decorator_dag.py';
-import python_virtualenv_operator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/python_virtualenv_operator_dag';
-import external_python_decorator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_decorator_dag';
-import external_python_operator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_operator_dag';
+import python_virtualenv_operator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/python_virtualenv_operator_dag.py';
+import external_python_decorator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_decorator_dag.py';
+import external_python_operator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_operator_dag.py';
 
 It is common to require isolated environments for specific Airflow tasks, for example when needing to run tasks using conflicting versions of Python or Python packages. 
 
@@ -99,6 +99,8 @@ If your isolated task contains branching logic, use the branching versions of th
 - To run branching code in a newly created virtual environment, use the `@task.branch_virtualenv` decorator or the BranchPythonVirtualenvOperator.
 
 ## `@task.external_python` decorator / ExternalPythonOperator
+
+To use the `@task.external_python` decorator or the ExternalPythonOperator you need to create a separate Python environment to reference. You can use any Python binary created by any means. The easiest way to create a Python environment when using the Astro CLI is with the 
 
 ```dockerfile
 # syntax=quay.io/astronomer/airflow-extensions:v1
