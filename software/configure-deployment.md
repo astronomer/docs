@@ -34,6 +34,7 @@ To create an Airflow Deployment on Astronomer:
 
     On this tab you can modify resources for your Deployment. Specifically, you can:
 
+    - Choose a strategy for how you configure resources to Airflow components. See [Customize resource usage](customize-resource-usage.md).
     - Select an Airflow executor
     - Allocate resources to your Airflow scheduler and webserver
     - Set scheduler count (*Airflow 2.0+ only*)
@@ -55,6 +56,20 @@ Though it largely depends on your use case, we recommend the Local executor for 
 
 For a detailed breakdown of each executor, see [Airflow executors explained](https://docs.astronomer.io/learn/airflow-executors-explained).
 
+## Select a resource strategy
+
+A Deployment's **Resource Strategy** defines how you can allocate CPU and memory to the Deployment's Airflow components. Astronomer Software offers two different resource strategies: **Custom Resources** and **Astronomer Units (AUs)**.
+
+An AU is equivalent to 0.1 CPU and 0.375 GiB of memory. If you set your resource strategy to **Astronomer Units**, you can only scale components based on this resource ratio. Components must use the same AU value for both CPU and memory.
+
+If you set your resource strategy to **Custom Resources**, you can freely set CPU and memory for each component without a predetermined ratio. See [Customize resource usage](customize-resource-usage.md).
+
+:::info
+
+If you still want a constant ratio of CPU to memory but want to change the specific ratio, you can change the amount of resources an AU represents. See [Overprovision Deployments](cluster-resource-provisioning).
+
+:::
+
 ## Scale core resources
 
 Apache Airflow requires two primary components:
@@ -62,7 +77,7 @@ Apache Airflow requires two primary components:
 - The Airflow Webserver
 - The Airflow Scheduler
 
-To scale either resource, simply adjust the corresponding slider in the Software UI to increase its available computing power.
+To scale either resource, adjust the corresponding slider in the Software UI to increase its available computing resources.
 
 Read the following sections to help you determine which core resources to scale and when.
 
@@ -70,15 +85,13 @@ Read the following sections to help you determine which core resources to scale 
 
 The Airflow webserver is responsible for rendering the [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
 
-If a function within the Airflow UI is slow or unavailable, we recommend increasing the AU allocated towards the webserver. The default resource allocation is 5 AU.
-
-> **Note:** Introduced in Airflow 1.10.7, [DAG Serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html?highlight=dag%20serialization) removes the need for the webserver to regularly parse all DAG files, making the component significantly more light-weight and performant. DAG Serialization is enabled by default in Airflow 1.10.12+ and is required in Airflow 2.0.
+If a function within the Airflow UI is slow or unavailable, Astronomer recommends increasing the resources allocated towards the webserver.
 
 ### Airflow scheduler
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met.
 
-If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, we recommend increasing the AU allocated towards the scheduler. The default resource allocation is 10 AU.
+If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, Astronomer recommends increasing the resources allocated towards the scheduler. 
 
 > **Tip:** To set alerts that notify you via email when your Airflow scheduler is underprovisioned, refer to [Airflow alerts](airflow-alerts.md).
 
@@ -86,9 +99,9 @@ If you experience delays in task execution, which you can track via the [Gantt C
 
 Airflow 2.0 comes with the ability for users to run multiple schedulers concurrently to ensure high-availability, zero recovery time, and faster performance. By adjusting the **Scheduler Count** slider in the Software UI, you can provision up to 4 schedulers on any Deployment running Airflow 2.0+ on Astronomer.
 
-Each individual scheduler will be provisioned with the AU specified in **Scheduler Resources**. For example, if you set **Scheduler Resources** to 10 AU and **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow schedulers using 10 AU each for a total of 20 AU.
+Each individual scheduler will be provisioned with the resources specified in **Scheduler Resources**. For example, if you set the CPU figure in **Scheduler Resources** to 5 CPUs and set **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow schedulers using 5 CPUs each for a total of 10 CPUs.
 
-To increase the speed at which tasks are scheduled and ensure high-availability, we recommend provisioning 2 or more Airflow schedulers for production environments. For more information on the Airflow 2.0 scheduler, refer to Astronomer's ["The Airflow 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
+To increase the speed at which tasks are scheduled and ensure high-availability, Astronomer recommends provisioning 2 or more Airflow schedulers for production environments. For more information on the Airflow 2.0 scheduler, refer to Astronomer's ["The Airflow 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
 
 ### Triggerer
 
@@ -102,9 +115,9 @@ On Astronomer, resources required for the [KubernetesPodOperator](kubepodoperato
 
 The Kubernetes executor and KubernetesPodOperator each spin up an individual Kubernetes pod for each task that needs to be executed, then spin down the pod once that task is completed.
 
-The amount of AU (CPU and Memory) allocated to **Extra Capacity** maps to [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) on the [Kubernetes Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in which your Airflow Deployment lives on Astronomer. More specifically, **Extra Capacity** represents the maximum possible resources that could be provisioned to a pod at any given time.
+The amount of CPU and Memory allocated to **Extra Capacity** maps to [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) on the [Kubernetes Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in which your Airflow Deployment lives on Astronomer. More specifically, **Extra Capacity** represents the maximum possible resources that could be provisioned to a pod at any given time.
 
-AU allocated to **Extra Capacity** does not affect scheduler or webserver performance and does not represent actual usage. It will not be charged as a fixed resource.
+Resources allocated to **Extra Capacity** do not affect scheduler or webserver performance and do not represent actual usage. 
 
 ## Celery executor: Configure workers
 
@@ -114,7 +127,7 @@ To optimize for flexibility and availability, the Celery executor works with a s
 
 By adjusting the **Worker Count** slider, users can provision up to 20 Celery workers on any Airflow Deployment.
 
-Each individual worker will be provisioned with the AU specified in **Worker Resources**. If you set **Worker Resources** to 10 AU and **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery workers using 10 AU each for a total of 30 AU. **Worker Resources** has a maximum of 100 AU (10 CPU, 37.5 GB Memory).
+Each individual worker will be provisioned with the resources specified in **Worker Resources**. If you set the CPU figure in **Worker Resources** to 5 CPUs and set **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery workers using 5 CPUs each for a total of 15 CPUs.
 
 ### Worker termination grace period
 
@@ -154,32 +167,33 @@ After applying this change, the **Release Name** field in the Software UI become
 
 ![Custom Release Name Field](/img/software/custom-release-name.png)
 
-## DAG deploy mechanisms
+## Code deploy mechanisms
 
-You can use two different DAG deploy mechanisms on Astronomer:
+Deploying code is the process of applying code from your local machine to an Astronomer Software Deployment. A code deploy can include an entire Astro project as a Docker image, or just the code in your Astro project `dags` directory. Astronomer Software supports a few different methods for deploying code to a Deployment. You can:
 
-- Image-based deploys
-- NFS volume-based deploys
+- Deploy [project images](deploy-cli.md) or [DAGs only](deploy-dags.md) using the Astro CLI. Deploying a project image is the only way to deploy Airflow-level configurations and dependencies to a Deployment.
+- Deploy DAGs using an [NFS volume](deploy-nfs.md).
+- Deploy DAGs using [Git sync](git-sync.md).
 
-### Image-based deploys
+### Astro CLI deploys
 
-By default, you can deploy DAGs to an Airflow Deployment by building them into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy DAGs via the CLI](deploy-cli.md).
+By default, you can deploy code to an Airflow Deployment by building it into a Docker image and pushing that image to the Astronomer Registry via the CLI or API. This workflow is described in [Deploy code via the CLI](deploy-cli.md). 
 
 This mechanism builds your DAGs into a Docker image alongside all other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins.
 
 The resulting image is then used to generate a set of Docker containers for each of Airflow's core components. Every time you run `astro deploy` in the Astro CLI, your DAGs are rebuilt into a new Docker image and all Docker containers are restarted.
 
-Since the image-based deploy does not require additional setup, we recommend it for those getting started with Airflow.
+You can also enable [DAG only deploys](deploy-dags.md) to deploy only your `dags` directory without building a Docker image. Note that you will still need access to Docker to authenticate to Astronomer Software before you can deploy DAGs.
 
-### Volume-based deploys
+### NFS volume-based DAG deploys
 
-For advanced teams who deploy DAG changes more frequently, Astronomer also supports an [NFS volume-based](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) deploy mechanism.
+For advanced teams who deploy DAG changes more frequently, Astronomer also supports an [NFS volume-based](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) DAG deploy mechanism.
 
 Using this mechanism, you can deploy DAGs to an Airflow Deployment on Astronomer by adding the corresponding Python files to a shared file system on your network. Compared to image-based deploys, NFS volume-based deploys limit downtime and enable continuous deployment.
 
 To deploy DAGs to a Deployment via an NFS volume, you must first enable the feature at the platform level. For more information, read [Deploy DAGs via NFS volume](deploy-nfs.md).
 
-### Git-sync deploys
+### Git-sync DAG deploys
 
 For teams using a Git-based workflow for DAG development, Astronomer supports a [git-sync](https://github.com/kubernetes/git-sync) deploy mechanism.
 

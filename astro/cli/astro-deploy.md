@@ -113,8 +113,9 @@ When you run `astro deploy`, you'll be prompted to select from a list of all Dep
 
 | Option                    | Description                                                                        | Possible Values         |
 | ------------------------- | ---------------------------------------------------------------------------------- | ----------------------- |
+| `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt. Required for DAG only deploys. | Any valid Deployment ID |
+| `-d`, `--dags`            | Deploy only your `dags` directory. Works only if DAG-only deploys are enabled for the Deployment.                       | 
 | `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
-| `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt | Any valid Deployment ID |
 | `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes           | None                    |
 | `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified         | None                    |
 | `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys   | None                    |
