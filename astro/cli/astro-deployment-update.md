@@ -29,7 +29,7 @@ Update the configuration for a Deployment on Astro.
 
 :::info
 
-To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment).
+To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md).
 
 :::
 
@@ -41,13 +41,13 @@ astro deployment update <deployment-id> <flags>
 
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate an API token, then specify the `ASTRO_API_TOKEN` environment variable in the system running the Astro CLI:
 
-- `ASTRONOMER_KEY_ID`
-- `ASTRONOMER_KEY_SECRET`
+```bash
+export ASTRO_API_TOKEN=<your-token>
+```
 
-After setting the variables, this command works for a Deployment and you don't need to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
-
+See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens.md), and [Deployment](deployment-api-tokens.md) API token documentation for more details about ways to use API tokens.
 :::
 
 ## Options
@@ -55,7 +55,7 @@ After setting the variables, this command works for a Deployment and you don't n
 | Option                         | Description                                                                                                                                                                                                                             | Possible Values                                                                                                                                |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--dag-deploy`                 | Enable or disable DAG-only deploys for the Deployment.                                                                                                                                                                                  | Either `enable` or `disable`. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) before using `disable` to disable the feature. |
-| `--deployment-file`            | Location of the Deployment file to update the Deployment with. The file format can be JSON or YAML. See [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment). | A valid file path to any YAML or JSON Deployment file                                                                                          |
+| `--deployment-file`            | Location of the Deployment file to update the Deployment with. The file format can be JSON or YAML. See [Create a Deployment with a Deployment File](manage-deployments-as-code.md). | A valid file path to any YAML or JSON Deployment file                                                                                          |
 | `<deployment-id>` (_Required_) | The ID of the Deployment to update                                                                                                                                                                                                      | Any valid Deployment ID                                                                                                                        |
 | `--deployment-name`            | The name of the Deployment to update. Use as an alternative to `<deployment-id>`.                                                                                                                                                       | Any valid Deployment name                                                                                                                      |
 | `-d`,`--description`           | The description for the Deployment                                                                                                                                                                                                      | Any string. Multiple-word descriptions should be specified in quotations (`"`)                                                                 |

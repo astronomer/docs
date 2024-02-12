@@ -7,7 +7,7 @@ description: "Learn how to monitor Deployment performance, health, and total tas
 
 The Cloud UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
 
-To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md).
+To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md). To track Deployment health and specific incidents, see [Deployment health and incidents](deployment-health-incidents.md).
 
 ## Deployment analytics
 
@@ -46,18 +46,15 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
 
 #### Available metrics
 
-- **CPU Usage Per Pod (%)**: This metric graphs the peak CPU usage for all workers and schedulers for a given interval. Different worker and scheduler Pods appear as differently colored lines on this chart. For scheduler metrics, the maximum allowable CPU for each scheduler Pod appears as a dotted red line.
+- **CPU Usage Per Pod (%)**: This metric graphs the peak CPU usage for all workers and schedulers as a percentage of your maximum CPU capacity. Different worker and scheduler Pods appear as differently colored lines on this chart. For scheduler metrics, the maximum allowable CPU for each scheduler Pod appears as a dotted red line. Hover over a given interval to view the specific number of CPUs being used.
 
-    The percentage value is proportional to the usage of a single CPU core by a worker Pod. For this reason, the utilization percentage value for a worker Pod with multiple CPU cores can be greater than 100%. For example, because the maximum utilization percentage value for a single CPU core is 100%, the utilization percentage value for a worker Pod with four assigned CPU cores can be as much as 400%. 
+- **Memory Usage Per Pod (MB)**: This metric graphs the peak memory usage for all workers and schedulers as a percentage of your maximum memory capacity. Different worker and scheduler Pods will appear as differently colored lines on this chart. This metric should be at or below 50% of your total allowed memory at any given time. For scheduler metrics, the maximum allowable memory for each scheduler Pod appears as a dotted red line.
 
-- **Memory Usage Per Pod (MB)**: This metric graphs the peak memory usage for all workers and schedulers for a given interval. Different worker and scheduler Pods will appear as differently colored lines on this chart. This metric should be at or below 50% of your total allowed memory at any given time. For scheduler metrics, the maximum allowable memory for each scheduler Pod appears as a dotted red line.
-
-:::info
-
-  The number of workers per Deployment autoscales based on a combination of worker concurrency and the number of `running` and `queued` tasks. This means that the total available CPU and memory for a single Deployment may change at any time.
-
-:::
-
+    :::info
+    
+    The number of workers per Deployment autoscales based on a combination of worker concurrency and the number of `running` and `queued` tasks. This means that the total available CPU and memory for a single Deployment may change at any time.
+    
+    :::
 
 - **Network Usage Per Pod (MB)**: This metric graphs each worker/ scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
 - **Pod Count per Status**: This metric graphs the number of worker/ scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
@@ -84,22 +81,6 @@ These metrics contain information about your Deployment's configured [Airflow po
     - **Starving**: The number of tasks that can't be scheduled when there are 0 available pool slots
 
     A large number of starving tasks could indicate that you should reconfigure your pools to run more tasks in parallel.
-
-## Deployment health
-
-After you create a Deployment, its real-time health status appears at the top of the Deployment information page. Deployment health indicates if the components within your Deployment are running as expected.
-
-![Deployment Health status](/img/docs/deployment-health.png)
-
-The following are the possible Deployment health statuses:
-
-- **Creating** (Grey): Astro is still provisioning Deployment resources. It is not yet available to run DAGs. See [Create a Deployment](create-deployment.md).
-- **Deploying** (Grey): A code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
-- **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
-- **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
-- **Unknown** (Grey): The Deployment status can't be determined.
-
-If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, review the logs in the [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Deployment overview
 

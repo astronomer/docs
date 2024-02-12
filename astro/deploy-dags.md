@@ -26,11 +26,25 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
+:::warning
+
+Unlike image deploys, DAG deploys do not include pytests as part of the deploy process by default. This means that DAG deploys have the risk of including faulty code that would otherwise be caught in an image deploy. 
+
+To have the same testing process in DAG deploys, run `astro deploy --dags --pytest`. Note that this can increase the time your deploys take. See [Test your Astro project](cli/test-your-astro-project-locally.md) for more information about how to use the Astro CLI's pytest features.
+
+:::
+
 ## Trigger an image-only deploy
 
-Even if you primarily use DAG-only deploys, you still need to occasionally make image deploys to update your Astro runtime version or install dependencies. However, depending on your CI/CD strategy, triggering a full project deploy with `astro deploy` might affect your existing DAGs.
+Even if you primarily use DAG-only deploys, you still need to occasionally make image deploys to update your Astro Runtime version or install dependencies. However, depending on your CI/CD strategy, triggering a full project deploy with `astro deploy` might affect your existing DAGs.
 
 When you trigger an image-only deploy, it builds every non-DAG file in your Astro project as a Docker image and deploys the image to all Airflow components in a Deployment. This includes your `Dockerfile`, plugins, and all Python and OS-level packages. DAGs are not deployed, and your Deployment DAG folder and DAG bundle version are not affected. Image-only deploys are only available when you have DAGs-only deploys enabled.
+
+:::warning
+
+To successfully trigger an image-only deploy, your Deployment must have at least one deployed DAG. To trigger an image-only deploy on a new Deployment, you must first trigger either a [project deploy](deploy-project-image.md) or a DAG-only deploy.
+
+:::
 
 Run the following command to build and deploy only your non-DAG files to a Deployment:
 

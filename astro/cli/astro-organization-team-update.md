@@ -4,8 +4,14 @@ title: "astro organization team update"
 id: astro-organization-team-update
 description: Update a Team in your Organization.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Update a Team in your Organization.
 
@@ -15,7 +21,7 @@ Update a Team in your Organization.
 astro organization team update <flags>
 ```
 
-## Options 
+## Options
 
 | Option    | Description                                                                                                                                       | Valid Values                                                                                                                             |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |

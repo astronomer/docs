@@ -4,8 +4,14 @@ title: "astro workspace list"
 id: astro-workspace-list
 description: List Workspaces.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
 
 Generates a list of all Workspaces within your current Organization that you have access to.
 

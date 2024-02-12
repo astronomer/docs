@@ -6,8 +6,6 @@ toc_min_heading_level: 2
 description: A summary of the latest Astro Runtime features and functionality. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework.
 ---
 
-import {siteVariables} from '@site/src/versions';
-
 <!--version-specific-->
 
 <p>
@@ -19,6 +17,61 @@ import {siteVariables} from '@site/src/versions';
 Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. 
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
+
+:::info 
+
+Because Astronomer has separate [maintenance life cycles](runtime-version-lifecycle-policy.md) for each major version of Astro Runtime, the same change can be introduced multiple times across major versions, resulting in multiple identical release notes. When a new major version releases, such as Astro Runtime 8.0.0, all changes from previously released versions are included in the new major version.
+
+If you're upgrading to receive a specific change, ensure the release note for the change appears either:
+
+- Within your target major version.
+- In any minor or patch version that was released before the first release (`X.0.0`) of your target major version. For example, a change in Astro Runtime 9.9.0, which released January 10 2024, is not guaranteed to appear in Runtime 10.0.0, which released December 8 2023, unless there is a release note for it in a subsequent Runtime 10 patch. However, a change in Astro Runtime 9.6.0, which released November 30 2023, is guaranteed to exist in Runtime 10.0.0 because 9.6.0 was released prior to 10.0.0.
+
+:::
+
+## Astro Runtime 10.3.0
+
+- Release date: February 1, 2024
+- Airflow version: 2.8.1
+
+### Early access Airflow bug fixes
+
+- Fix bug introduced by replacing spaces by + in run_id ([#36877](https://github.com/apache/airflow/pull/36877))
+- Remove superfluous `@Sentry.enrich_errors` ([#37002](https://github.com/apache/airflow/pull/37002))
+
+### Additional improvements
+
+- Upgraded the Astro SDK to [1.8.0](https://github.com/astronomer/astro-sdk/releases/tag/1.8.0).
+
+### Bug fixes
+
+- Fixed an issue where some logging features would not work for DAG runs with spaces in their DAG run IDs.
+- Astro Runtime now relies on logic `apache-airflow-providers-openlineage` to determine whether OpenLineage should be enabled or disabled in a given environment, which makes the behavior more consistent between different environments and implementations. 
+- Fixed an issue where `airflow tasks test <dag_id> <task_id>` always generated an error that stated it was unable to find a foreign key for the table `ab_user`.
+
+## Astro Runtime 10.2.0
+
+- Release date: January 19, 2024
+- Airflow version: 2.8.1
+
+## Airflow 2.8.1
+
+Astro Runtime 10.2.0 includes same-day support for Apache Airflow 2.8.1. Airflow 2.8.1 contains a number of bug fixes including:
+
+- Fix scheduler exiting with code 0 on exceptions ([#36880](https://github.com/apache/airflow/pull/36800))
+- Fix Callback exception when a removed task is the last one in the task instance list ([#36693](https://github.com/apache/airflow/pull/36693))
+
+For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-1-2024-01-19).
+
+## Astro Runtime 10.1.0
+
+- Release date: January 10, 2024
+- Airflow version: 2.8.0
+
+### Additional improvements
+
+- You can now set `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP` and `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM` in a Deployment to change the names of the AWS Cloudwatch log groups and streams that Astro uses to organize log events. Create custom names for log streams and groups if you need to set targeted policies for these objects in Cloudwatch, or if you otherwise want to change how task logs are grouped. See [Export task logs to AWS Cloudwatch](export-cloudwatch.md).
+- To improve scheduler performance, the default value for `AIRFLOW__SCHEDULER__MAX_TIS_PER_QUERY` is now `512`.
 
 ## Astro Runtime 10.0.0
 
@@ -44,6 +97,45 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
+## Astro Runtime 9.10.0
+
+- Release date: January 31, 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Fix bug introduced by replacing spaces by + in run_id ([#36877](https://github.com/apache/airflow/pull/36877))
+
+### Bug fixes
+
+- Fixed an issue where some logging features would not work for DAG runs with spaces in their DAG run IDs.
+- Astro Runtime now relies on logic `apache-airflow-providers-openlineage` to determine whether OpenLineage should be enabled or disabled in a given environment, which makes the behavior more consistent between different environments and implementations. 
+- Fixed an issue where `airflow tasks test <dag_id> <task_id>` always generated an error that stated it was unable to find a foreign key for the table `ab_user`.
+
+## Astro Runtime 9.9.0
+
+- Release date: January 24, 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Stop deserializing pickle when enable_xcom_pickling is False ([#36255](https://github.com/apache/airflow/pull/36255))
+- Check DAG read permission before accessing DAG code ([#36257](https://github.com/apache/airflow/pull/36257))
+
+## Astro Runtime 9.8.0
+
+- Release date: January 10, 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- You can now set `ASTRO_CLOUDWATCH_TASK_LOGS_LOG_GROUP` and `ASTRO_CLOUDWATCH_TASK_LOGS_GROUP_STREAM` in a Deployment to change the names of the AWS Cloudwatch log groups and streams that Astro uses to organize log events. Create custom names for log streams and groups if you need to set targeted policies for these objects in Cloudwatch, or if you otherwise want to change how task logs are grouped. See [Export task logs to AWS Cloudwatch](export-cloudwatch.md).
+- To improve scheduler performance, the default value for `AIRFLOW__SCHEDULER__MAX_TIS_PER_QUERY` is now `512`.
+
+### Bug fixes
+
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 
 ## Astro Runtime 9.7.0
 
@@ -106,7 +198,7 @@ To learn more, see the [Apache Airflow 2.7.3 release notes](https://airflow.apac
 
 ### Additional improvements
 
-- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). See [Export logs to AWS cloudwatch](view-logs.md#export-task-logs-to-aws-cloudwatch).
+- On Astro, you can now export Airflow task logs to [AWS Cloudwatch](https://aws.amazon.com/cloudwatch/). See [Export logs to AWS cloudwatch](export-cloudwatch.md).
 - Upgraded `google-cloud-aiplatform` to 1.35.0. 
 - Upgraded [Shapely](https://shapely.readthedocs.io/en/stable/manual.html) to 2.0.2.
 - Added a link for Astronomer Academy to the **Astronomer** menu in the Airflow UI.
@@ -145,7 +237,7 @@ To learn more, see the [Apache Airflow 2.7.2 release notes](https://airflow.apac
 
 ### Additional Improvements
 
-- On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) for setup instructions.
+- On Astro, you can now create custom tags when exporting Airflow task logs to Datadog, which allows you to easily filter, aggregate, and compare data. See [Export task logs to Datadog](export-datadog.md) for setup instructions.
 
 ## Astro Runtime 9.1.0
 
@@ -164,7 +256,7 @@ To learn more, see the [Apache Airflow 2.7.1 release notes](https://airflow.apac
 
 ### Additional improvements
 
-- You can now [export task logs to Datadog](view-logs.md#export-task-logs-to-datadog) from Azure and GCP clusters.
+- You can now [export task logs to Datadog](export-datadog.md) from Azure and GCP clusters.
 - Upgraded `openlineage-airflow` to 1.1.0. See the [OpenLineage release notes](https://openlineage.io/docs/releases/1_1_0/) for a complete list of changes.
 - Upgraded `astro-sdk-python` to 1.7.0, which adds support for Excel files. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
 
@@ -608,6 +700,26 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
+
+## Astro Runtime 6.9.2
+
+- Release date: January 24, 2024
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Stop deserializing pickle when enable_xcom_pickling is False ([#36255](https://github.com/apache/airflow/pull/36255))
+- Check DAG read permission before accessing DAG code ([#36257](https://github.com/apache/airflow/pull/36257))
+
+## Astro Runtime 6.9.1
+
+- Release date: January 9, 2024
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Account for change in UTC offset when calculating next schedule ([35887](https://github.com/apache/airflow/pull/35887))
+- Fix scheduler crash when you clear a previous run of a normal task that is now a mapped task ([31352](https://github.com/apache/airflow/pull/31352))
 
 ## Astro Runtime 6.9.0
 

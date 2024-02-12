@@ -95,7 +95,11 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "create-deployment",
-        "deployment-settings",
+        {
+          type: "category",
+          label: "Deployment settings",
+          items: ["deployment-settings", "deployment-details", "deployment-resources"],
+        },
         {
           type: "category",
           label: "Executors",
@@ -174,13 +178,14 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics", "reporting-dashboard"],
         },
         {
           type: "category",
           label: "Data lineage",
           items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
+        "deployment-health-incidents",
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
@@ -332,6 +337,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        "allowlist-domains",
         "feature-previews",
         {
           type: "category",
@@ -373,9 +379,14 @@ module.exports = {
       id: "cli/develop-project",
     },
     {
-      type: "doc",
+      type: "category",
       label: "Run Airflow locally",
-      id: "cli/run-airflow-locally",
+      items: [
+        "cli/local-airflow-overview",
+        "cli/run-airflow-locally",
+        "cli/local-connections",
+        "cli/troubleshoot-locally"
+      ]
     },
     {
       type: "doc",
@@ -388,15 +399,20 @@ module.exports = {
       id: "cli/release-notes",
     },
     {
+      type: "doc",
+      label: "Release policy",
+      id: "cli/release-lifecycle-policy",
+    },
+    {
       type: "category",
       label: "Advanced",
       items: [
         "cli/configure-cli",
+        "cli/use-podman",
         "cli/customize-dockerfile",
         "cli/private-python-packages",
         "cli/authenticate-to-clouds",
         "cli/airflowignore",
-        "cli/release-lifecycle-policy"
       ],
     },
     {

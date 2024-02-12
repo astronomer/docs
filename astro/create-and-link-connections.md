@@ -5,6 +5,10 @@ id: create-and-link-connections
 description: "Create Airflow connections and link them to multiple Deployments in the Astro Environment Manager."
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
+<HostedBadge/>
+
 You can create and manage Airflow connections for Deployments with the Astro Environment Manager in the Cloud UI. The Environment Manager uses an Astro-managed secrets backend to store connection configurations as Kubernetes Secrets.
 
 Using the Environment Manager, you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend. You can also create a connection once and use it across multiple Airflow Deployments.
@@ -15,12 +19,34 @@ Compared to creating a connection in the Airflow UI, when you create a connectio
 
 - Share the connection with multiple Deployments within the Workspace.
 - Override fields in the connection for individual Deployments.
-- Use configured connections in local Airflow environments. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
+- Use configured connections in local Airflow environments. See [Import and export connections and variables](cli/local-connections.md).
 - Use connections in branch-based deploys and PR previews.
 
-Workspace Owners and Operators can create and assign connections, while Workspace Authors can view configured connections and use them in Deployments. If your Organization has [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) enabled, you can additionally use configured connections, including ones that contain secrets, in local development environments. See [Import and export connections and variables](import-export-connections-variables.md#from-the-astro-cloud-ui).
+Workspace Owners and Operators can create and assign connections, while Workspace Authors can view configured connections and use them in Deployments. If your Organization has [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) enabled, you can additionally use configured connections, including ones that contain secrets, in local development environments. See [Import and export connections and variables](cli/local-connections.md).
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
+
+## How connections are stored
+
+When you create an Airflow connection in the Environment Manager, Astro stores Airflow connection details in an Astronomer-hosted secrets manager, and then applies connections to Deployments as Kubernetes Secrets. Specifically the following steps occur:
+
+- Astro stores the connection details in a secure secrets manager hosted by Astronomer.
+- When a connection is assigned to a Deployment, Astro uses Airflow's provided [local filesystem secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/local-filesystem-secrets-backend.html) to mount your connections as Kubernetes Secrets.
+- When your DAGs use your connections, Airflow reads the connection details from the filesystem using the Airflow local filesystem secrets backend.
+
+This process occurs every time you create or update a connection.
+
+When you use connections for local development, the Astro CLI reads the connections from the Astro API and injects them into the local Airflow instance's metadata database.
+
+### Fetching environment secrets
+
+The Astro CLI can automatically retrieve connections from the Cloud UI when you start your local airflow instance, which means you can use your connection details without needing to manage credentials between local and deployed environments. Local environments fetch connection information the same way as for Deployments, so they require an active internet connection and for you to be logged in with the Astro CLI. You can only fetch environment secrets from Deployments that belong to Workspaces where you are at least a Workspace Member.
+
+:::tip
+
+By default, connections can't be exported locally. However, if you want to work with connections locally, the Organization Owner can enable [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) in the Cloud UI.
+
+:::
 
 ## Prerequisites
 

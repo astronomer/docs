@@ -4,8 +4,14 @@ title: "astro organization user update"
 id: astro-organization-user-update
 description: Update users in your Organization.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Update user Organization roles in your current Astro Organization.
 
@@ -13,7 +19,7 @@ Update user Organization roles in your current Astro Organization.
 
 Run `astro organization user update` to update a user's Organization role. The CLI prompts you for the user email address associated with their account.
 
-## Options 
+## Options
 
 | Option    | Description                                                                                                                                       | Valid Values                                                                                                                             |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |

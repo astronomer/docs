@@ -5,19 +5,14 @@ jobs:
   exportmetrics:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-      name: Checkout repo
-      with:
-        token: ${{ secrets.COMMIT_KEY }}
+    - uses: actions/checkout@v4
+    - run: |
+          git checkout main
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
       run: ./lastUpdated.sh
       shell: bash
-    - uses: EndBug/add-and-commit@v9
-      with:
-        author_name: Jacob Witz
-        author_email: jwitz@astronomer.io
     - uses: jakejarvis/s3-sync-action@master
       name: Sync to S3
       with:

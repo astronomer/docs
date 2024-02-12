@@ -7,6 +7,12 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
 Run unit tests for your data pipelines on Astro with `pytest`, a testing framework for Python. When you run this command, the Astro CLI creates a local Python environment that includes your DAG code, dependencies, and Astro Runtime Docker image. The CLI then runs any pytests in the `tests` directory of your Astro project and shows you the results of those tests in your terminal.
 
 The command runs `pytest` in a container. If your test generates artifacts, such as code coverage reports, you can output the artifacts to the `include` folder of your Astro project so they can be accessed after the test has finished.
@@ -32,6 +38,7 @@ astro dev pytest
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `<pytest-filepath>`  | The filepath to an alternative pytest file or directory. Must be within the `tests` directory                                                         | Any valid filepath within the `tests` directory                  |
 | `-a`, `--args` | Arguments to pass to pytest. Surround the args in quotes. | Any set of pytest command arguments surrounded by quotes |
+| `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
 | `-e`, `--env`        | The filepath to your environment variables. The default is `.env`)                                                                                    | Any valid filepath within your Astro project                     |
 | `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 

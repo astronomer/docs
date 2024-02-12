@@ -11,6 +11,72 @@ This page contains release notes for all recent Astronomer Software versions.
 
 0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.33.3
+
+Release date: January 19, 2024
+
+### Bug fixes
+
+- Fixed an issue where the Workspace list page in the Software UI would show an error if any Workspace had an empty description.
+- Fixed an issue in 0.33.2 where you couldn't migrate a Deployment from Astronomer Certified to Astro Runtime. 
+- Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
+    - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
+
+## 0.33.2 
+
+Release date: November 20, 2023
+
+### Change to behavior for interacting with deprecated Runtime versions
+
+In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the `enableSystemAdminCanUseNonSupportedRuntime` key has been replaced with `enableSystemAdminCanUseAllRuntimes`. To set the new flag, add the following configuration to your `config.yaml` file:
+
+```yaml
+astronomer:
+   houston:
+      config:
+         deployments:
+            enableSystemAdminCanUseAllRuntimes: true   
+```
+
+### Additional improvements
+
+- You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
+
+    ```yaml
+    global:
+       logging:
+          indexNamePrefix: <your-index-prefix>
+    ```
+- Deprecated Kubernetes 1.23
+
+### Bug fixes
+
+- Fixed an issue where deploys were failing for Deployments that used older versions of the Airflow Helm chart.
+- Fixed an issue where some dashboards in Grafana were not visible if you didn't manually log in to Grafana as an admin.
+- Fixed an issue where the Software UI showed Deployments as healthy even if the triggerer Pod was down.
+- Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
+- Fixed an issue where the `invites` query returned an error instead of an empty array when no users invites were found.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-43787](https://nvd.nist.gov/vuln/detail/CVE-2023-43787)
+    - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g)
+    - [CVE-2023-32002](https://nvd.nist.gov/vuln/detail/CVE-2023-32002)
+    - [CVE-2023-32006](https://nvd.nist.gov/vuln/detail/CVE-2023-32006)
+    - [CVE-2023-32559](https://nvd.nist.gov/vuln/detail/CVE-2023-32559)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2023-24540](https://nvd.nist.gov/vuln/detail/CVE-2023-24540)
+    - [CVE-2023-24538](https://nvd.nist.gov/vuln/detail/CVE-2023-24538)
+    - [CVE-2023-45133](https://nvd.nist.gov/vuln/detail/CVE-2023-45133)
+    - [CVE-2022-48174](https://nvd.nist.gov/vuln/detail/CVE-2023-48174)
+    - [CVE-2023-39320](https://nvd.nist.gov/vuln/detail/CVE-2023-39320)
+    - [CVE-2023-29402](https://nvd.nist.gov/vuln/detail/CVE-2023-29402)
+    - [CVE-2023-29404](https://nvd.nist.gov/vuln/detail/CVE-2023-29404)
+    - [CVE-2023-29405](https://nvd.nist.gov/vuln/detail/CVE-2023-29405)
+  
 ## 0.33.1
 
 Release date: October 13, 2023
@@ -1008,8 +1074,6 @@ Release date: February 15, 2022
 
 You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.
 
-For more information about configuring this feature, read [Import IDP Groups](import-idp-groups.md). To learn more about adding and setting permissions for Teams via the Astronomer UI, read [User Permissions](workspace-permissions.md#via-teams).
-
 ### Additional Improvements
 
 - Astronomer now supports `prefer` and `require` SSL modes for connecting to PGBouncer. You can set this SSL mode via the `global.ssl.mode` value in your `config.yaml` file. Note that in v0.28.0, this feature works only with AWS and Azure.
@@ -1096,7 +1160,7 @@ global:
 
 ### CLI Support for Podman
 
-By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
+By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ### Bug Fixes
 

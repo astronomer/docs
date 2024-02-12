@@ -5,7 +5,7 @@ id: deploy-project-image
 description: Deploy a complete Astro project to a Deployment as a Docker image.
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 In a full deploy, the Astro CLI takes every file in your Astro project to builds them into a Docker image. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages. The CLI then deploys the image to all Airflow components in a Deployment.
 
@@ -18,7 +18,7 @@ See [DAGs-only Deploys](deploy-dags.md) to learn more about how to deploy your D
 - The [Astro CLI](cli/overview.md) is installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for local development, you must install Astro CLI 1.4.0 or later to deploy to Astro.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
 - An [Astro project](cli/develop-project.md#create-an-astro-project).
-- [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
+- [Docker](https://www.docker.com/products/docker-desktop) or [Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ## Step 1: Authenticate to Astro
 
@@ -46,9 +46,9 @@ astro deploy
 
 This command returns a list of Deployments available in your Workspace and prompts you to pick one.
 
-After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
+After you select a Deployment, the CLI parses your DAGs and runs a suite of pytests to ensure that they don't contain basic errors. This testing process is equivalent to running `astro dev parse` and `astro dev pytest` in a local Airflow environment. If any of your DAGs fail this testing process, the deploy to Astro also fails. To force a deploy even if your project has errors, you can run `astro deploy --force`. For more information about using pytests, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
-If your code passes the parse, the Astro CLI deploys your project in two separate, simultaneous processes:
+If your code passes the testing phase, the Astro CLI deploys your project in two separate, simultaneous processes:
 
 - The Astro CLI uploads your `dags` directory to Astronomer-hosted blob storage. Your Deployment downloads the DAGs from the blob storage and applies the code to all of its running Airflow containers.
 - The Astro CLI builds all other project files into a Docker image and deploys this to an Astronomer-hosted Docker registry. The Deployment then applies the image to all of its running Airflow containers.
@@ -65,14 +65,6 @@ Push access denied, repository does not exist or may require authorization: serv
 Unable to find image 'barren-ionization-0185/airflow:latest' locally
 Error response from daemon: pull access denied for barren-ionization-0185/airflow, repository does not exist or may require 'docker login'
 ```
-
-:::
-
-:::tip
-
-To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy also fails. This can help you prevent your team from deploying DAGs to Astro that contain errors.
-
-For more information about using Pytest, see [Troubleshoot your local Airflow environment](cli/run-airflow-locally.md) and [Testing Airflow DAGs](https://docs.astronomer.io/learn/testing-airflow).
 
 :::
 
@@ -106,7 +98,7 @@ When you run `astro deploy`, the Astro CLI deploys all non-DAG files in your pro
 
 :::info
 
-This process is different if your Deployment has DAG-only deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable--disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
+This process is different if your Deployment has DAG-only deploys disabled, which is the default setting for all Astro Hybrid Deployments. See [Enable/disable DAG-only deploys on a Deployment](deploy-dags.md#enable-or-disable-dag-only-deploys-on-a-deployment) for how the process changes when DAG-only deploys are disabled.
 
 :::
 
@@ -143,7 +135,7 @@ Deploying a prebuilt Docker image allows you to:
 
 - Test a single Docker image across Deployments instead of rebuilding it each time.
 - Reduce the time it takes to deploy. If your Astro project has a number of packages that take a long time to install, it can be more efficient to build it separately.
-- Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
+- Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/private-python-packages.md?tab=pypi#install-python-packages-from-a-private-pypi-index).
 
 To deploy your Astro project as a prebuilt Docker image:
 

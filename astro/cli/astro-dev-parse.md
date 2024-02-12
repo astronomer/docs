@@ -7,7 +7,13 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Parse the DAGs in a locally hosted Astro project to quickly check them for errors. For more information about testing DAGs locally, read [Test your Astro project locally](cli/test-your-astro-project-locally.md#run-tests-with-the-astro-cli).
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
+Parse the DAGs in a locally hosted Astro project to quickly check them for errors. For more information about testing DAGs locally, read [Test your Astro project locally](cli/test-your-astro-project-locally.md).
 
 ## Usage
 
@@ -19,6 +25,7 @@ astro dev parse
 
 | Option               | Description                                                                                                                                           | Possible Values                                                  |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
 | `-e`, `--env`        | The filepath to your environment variables. (The default is `.env`)                                                                                   | Any valid filepath within your Astro project                     |
 | `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 

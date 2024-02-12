@@ -6,9 +6,15 @@ description: Export Airflow objects from a local Airflow environment.
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
 Export Airflow variables, connections, and pools from a locally running environment to a local file and format of your choice. By default, the command exports all Airflow objects to the `airflow_settings.yaml` file in your Astro project.
 
-## Usage 
+## Usage
 
 After starting your local Airflow environment with `astro dev start`, run:
 
@@ -31,18 +37,18 @@ By default, the command exports all variables, connections, and pools as YAML co
 | `-s`,`--settings-file`            | Location of the file to export Airflow objects to as YAML configuration. The default file path is `airflow_settings.yaml`.                                 | Any valid filepath              |
 | `-v`,`--variables`            | Export variables to a given local file | ``                 |
 
-## Examples 
+## Examples
 
 ```sh
-astro dev object export --pools 
+astro dev object export --pools
 # Exports only pools from the local Airflow environment to `airflow_settings.yaml`
 
 astro dev object export --env-export --env="myairflowenv.env"
-# Exports all Airflow objects from the local Airflow environment as 
+# Exports all Airflow objects from the local Airflow environment as
 # Astro variables to a file in the project named `myairflowenv.env`
 ```
 
-## Related commands 
+## Related commands
 
 - [`astro dev object import`](cli/astro-dev-object-import.md)
 - [`astro deployment variable create`](cli/astro-deployment-variable-create.md)

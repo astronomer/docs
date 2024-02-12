@@ -7,6 +7,12 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+This command is only available on Astro.
+
+:::
+
 Copy Airflow connections from one Astro Deployment to another. Airflow connections are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
@@ -47,6 +53,7 @@ astro deployment connection copy --source-id cl03oiq7d80402nwn7fsl3dmv --target 
 
 # copy connections stored in the Deployment "My Deployment" to another Deployment "My Other Deployment"
 astro deployment connection copy --source-name="My Deployment" --target-name="My Other Deployment"
+```
 
 ## Related Commands
 

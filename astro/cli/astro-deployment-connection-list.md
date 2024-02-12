@@ -4,10 +4,16 @@ title: "astro deployment connection list"
 id: astro-deployment-connection-list
 description: List Airflow connections in a Deployment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-List the Airflow connections stored in a Deployment's metadata database. 
+:::info
+
+This command is only available on Astro.
+
+:::
+
+List the Airflow connections stored in a Deployment's metadata database.
 
 ## Usage
 
@@ -15,7 +21,7 @@ List the Airflow connections stored in a Deployment's metadata database.
 astro deployment connection list
 ```
 
-This command only lists Airflow connections that were configured through the Airflow UI or otherwise stored in the Airflow metadata database. 
+This command only lists Airflow connections that were configured through the Airflow UI or otherwise stored in the Airflow metadata database.
 
 ## Options
 

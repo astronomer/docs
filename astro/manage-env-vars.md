@@ -5,7 +5,7 @@ id: manage-env-vars
 description: Learn how to manage environment variables on Astro
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 On Astro, you can create, update, or delete environment variables for a Deployment in the following ways:
 
@@ -60,11 +60,11 @@ Environment variables set in your `Dockerfile` are stored in plain text. For thi
 
 2. To add the environment variables, declare an ENV command with the environment variable key and value. For example, the following `Dockerfile` sets two environment variables:
 
-    <pre><code parentName="pre">
-    {`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
+    ```sh
+    FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
     ENV AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG=1
-    ENV AIRFLOW_VAR_MY_VAR=25`}
-    </code></pre>
+    ENV AIRFLOW_VAR_MY_VAR=25
+    ```
 
 3. Save your Dockerfile and run `astro deploy` to deploy your variables to an Astro Deployment. To apply your changes locally, use `astro dev restart` to rebuild your image.
 

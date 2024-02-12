@@ -4,8 +4,14 @@ title: "astro deployment inspect"
 id: astro-deployment-inspect
 description: Inspect a Deployment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+This command is only available on Astro.
+
+:::
 
 Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state as shown in the Cloud UI. When the `--key` flag is used, it returns only the values specified with the flag.
 
@@ -23,7 +29,7 @@ When using the `--key` flag, specify the complete path of the key you want to re
 astro deployment inspect -n <deployment-name> --key metadata.cluster_id
 ```
 
-See [Template file contents](manage-deployments-as-code.md#template-file-reference) for all possible values to return. 
+See [Template file contents](deployment-file-reference.md) for all possible values to return.
 
 ## Options
 

@@ -5,14 +5,14 @@ id: environment-variables
 description: Overview of environment variables on Astro
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 On Astro, an _Environment Variable_ is a key-value configuration stored in a configuration file that applies to a specific Deployment. You can use environment variables to configure custom environment variables for your Deployment, customize core settings of Airflow and its pre-installed providers, or store Airflow connections and variables.
 
 Some scenarios where you might use environment variables in your Deployment include:
 
 - Adding a token or a URL that is required by your Airflow DAGs or tasks.
-- Integrating with Datadog or other third-party tooling to [export Deployment metrics](deployment-metrics.md#export-airflow-metrics-to-datadog).
+- Integrating with Datadog or other third-party tooling to [export Deployment metrics](export-datadog.md).
 - Specifying a tag that's added to all resources created by the Deployment and indicates whether a resource is for development or production.
 
 Some examples of customizing core settings of Airflow or any of its pre-installed providers include:
@@ -84,7 +84,7 @@ There are some scenarios when you might want to use a mix of methods or strategi
 | You want to use version control to manage your environment variables from a code repository. | [`Dockerfile`](manage-env-vars.md#using-your-dockerfile) to version control your environment configuration.                                                                                                                                                        |
 | You want to carry over environment variables when you promote code from a development environment to a production environment. | [`Dockerfile`](manage-env-vars.md#using-your-dockerfile) to deploy environment variables from project code using CI/CD.                                                                                                                                                        |
 | You are part of a production support team analyzing DAG failures and want to turn on debugging-related environment variables temporarily.                                                                                                                                                             | [Cloud UI](manage-env-vars.md#using-the-cloud-ui) for ease of use.                                                                                                                                                                                                 |
-| You're developing locally, and you want to use a secret credential in your DAGs.                                                                                                                                                                               | [Use the `.env` file](manage-env-vars.md#using-astro-cli) locally. This allows you to avoid accidentally sending credentials to your code repository because `.env` is part of `.gitignore`. You can then export the `.env` file to your Deployment using the Astro CLI. |
+| You're developing locally, and you want to use a secret credential in your DAGs.                                                                                                                                                                               | [Use the `.env` file](manage-env-vars.md#manage-environment-variables-locally) locally. This allows you to avoid accidentally sending credentials to your code repository because `.env` is part of `.gitignore`. You can then export the `.env` file to your Deployment using the Astro CLI. |
 | You use environment variables to store your Airflow connections and variables, and you have to reconfigure these between Deployments based on the environment type.                                                                                                     | [Cloud UI](manage-env-vars.md#using-the-cloud-ui) for visibility.                                                                                                                                                                                                  |
-| You want the features of the Cloud UI for environment variables, but you also keep track of the non-secret environment variables in your code repository.                                                                                                                    | Use the [Astro CLI](manage-env-vars.md#in-your-astro-deployment) and an automation script to add or update the non-secret environment variables in your Deployment from your code repository.                                                                     |
+| You want the features of the Cloud UI for environment variables, but you also keep track of the non-secret environment variables in your code repository.                                                                                                                    | Use the [Astro CLI](manage-env-vars.md#using-the-cloud-ui) and an automation script to add or update the non-secret environment variables in your Deployment from your code repository.                                                                     |
 

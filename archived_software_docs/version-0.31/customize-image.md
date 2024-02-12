@@ -7,7 +7,7 @@ description: Customize your Astronomer image, including adding dependencies and 
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 The Astro CLI is intended to make it easier to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The following guidelines describe a few of the methods you can use to customize the Docker Image that gets pushed to Airflow every time you rebuild your image locally using `$ astro dev start` or deploy to Astronomer using `$ astro deploy`.
 
@@ -248,7 +248,7 @@ astro dev start --env .env
 
 ## Install Python packages from private sources
 
-Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](customize-image.md#add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](customize-image.md#install-python-packages-from-private-sources). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
 Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
 

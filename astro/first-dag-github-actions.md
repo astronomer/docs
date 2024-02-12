@@ -4,18 +4,18 @@ title: 'Run your first DAG with GitHub Actions'
 id: 'first-dag-github-actions'
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with GitHub Actions.
 
 Specifically, you will:
 
-- Authenticate and log in to Astro. 
-- Create a Deployment. 
+- Authenticate and log in to Astro.
+- Create a Deployment.
 - Fork an example GitHub repository with a new Astro project.
 - Configure GitHub Actions.
 - Trigger the GitHub Action to deploy an example DAG to Astro.
-- Trigger a run of the example DAG in the Airflow UI. 
+- Trigger a run of the example DAG in the Airflow UI.
 
 The steps take about 15 minutes. If you prefer to use a CLI, you can alternatively create and run your first DAG [using the Astro CLI](first-dag-cli.md) in the same amount of time.
 
@@ -37,8 +37,9 @@ If you're on your organization's network and can't access Astro, make a request 
 - `https://auth.astronomer.io/`
 - `https://updates.astronomer.io/`
 - `https://install.astronomer.io/`
-- `https://astro-<your-org>.datakin.com/`
-- `https://<your-org>.astronomer.run/`
+- `https://install.astronomer.io/`
+- `https://astro-<organization-short-name>.datakin.com/`
+- `https://<organization-short-name>.astronomer.run/`
 
 :::
 
@@ -50,13 +51,13 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
 2. On the **Deployments** page, click **+ Deployment**.
 
-3. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
+3. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs.
 
 4. Click **Create Deployment**.
 
     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment are healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
-    
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Deployment settings](deployment-settings.md).
+
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-health-incidents.md). Or, to learn more about how to customize your Deployment settings, see [Deployment settings](deployment-settings.md).
 
 :::tip
 
@@ -68,13 +69,13 @@ If you don't see the **Deploy your first DAG** option your Deployment page, clic
 
 ## Step 2: Fork the example project repository
 
-This repository contains an _Astro project_, which is a collection of files required for running Airflow on Astro. An Astro project includes folders for DAG files, plugins, dependencies, and more. Specifically, this Astro project includes an example DAG which, when you run it, retrieves a list of countries from an Astro S3 data store and filters the list through a data transform.  
+This repository contains an _Astro project_, which is a collection of files required for running Airflow on Astro. An Astro project includes folders for DAG files, plugins, dependencies, and more. Specifically, this Astro project includes an example DAG which, when you run it, retrieves a list of countries from an Astro S3 data store and filters the list through a data transform.
 
 1. Open [the example project repository](https://github.com/astronomer/astro-example-dags/fork) in a new tab or browser window.
 
 2. **Choose an owner** from your available options.
 
-3. Keep the selection to **Copy the `main` branch only**. 
+3. Keep the selection to **Copy the `main` branch only**.
 
 4. Click **Create fork**.
 
@@ -84,7 +85,7 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
 1. Open two browser windows: one with the [Cloud UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
 
-2. In the Cloud UI, choose the Deployment where you want to deploy your Astro project. 
+2. In the Cloud UI, choose the Deployment where you want to deploy your Astro project.
 
 3. In GitHub, open your forked repository and click **Actions**.
 
@@ -92,11 +93,11 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
   The [workflow](https://github.com/astronomer/astro-example-dags/blob/main/.github/workflows/deploy-to-astro.yaml) is a script that uses API tokens to deploy DAGs from a GitHub repository to your Deployment, without requiring any local development.
 
-5. Choose the **Astronomer CI - Deploy Code** workflow. 
+5. Choose the **Astronomer CI - Deploy Code** workflow.
 
 6. Click **Run workflow**. This opens a modal to enter information about your Astro Deployment.
 
-7. In the Cloud UI, copy your **Deployment ID** from the Deployment information. 
+7. In the Cloud UI, copy your **Deployment ID** from the Deployment information.
 
 8. In GitHub, paste your **Deployment ID**.
 
@@ -114,13 +115,13 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
 12. In GitHub, paste the API Token in the **API Token** field on your GitHub Actions workflow page.
 
-13. Click **Run workflow**. 
+13. Click **Run workflow**.
 
 This automatically deploys the example DAGs in your Astro project to your Deployment.
 
 ## Step 4: View your DAG run results
 
-Open your Deployment in the Cloud UI and click **DAGs** in the left sidebar, then click **S3**. From this page, you can see that the `s3` DAG has run exactly once. 
+Open your Deployment in the Cloud UI and click **DAGs** in the left sidebar, then click **S3**. From this page, you can see that the `s3` DAG has run exactly once.
 
 ![Detailed view of the S3 DAG run outcome.](/img/docs/s3-complete.png)
 

@@ -116,6 +116,7 @@ module.exports = {
             'deferrable-operators',
             'dynamically-generating-dags',
             'kubepod-operator',
+            'airflow-mlops',
             'using-airflow-plugins',
             'airflow-pools',
             'airflow-setup-teardown',
@@ -176,6 +177,7 @@ module.exports = {
             'airflow-azure-data-factory-integration',
           ],
         },
+        'connections/entra-workload-identity',
         'connections/bigquery',
         'airflow-cohere',
         {

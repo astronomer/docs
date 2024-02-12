@@ -611,10 +611,6 @@ html[data-theme="dark"] aside.theme-doc-sidebar-container {
   padding-bottom: 0;
 }
 
-.plugin-id-software ul[class*='menu__listBottom'] {
-  display: none !important;
-}
-
 .theme-doc-version-badge {
   font-weight: 400;
   font-size: 15px;
@@ -781,4 +777,8 @@ img {
 /** Add anchor scroll to top padding/margin */
 [data-section-id] {
   scroll-margin-top: 120px;
+}
+
+.hidden {
+  display: none !important;
 }

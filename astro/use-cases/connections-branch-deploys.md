@@ -4,9 +4,9 @@ sidebar_label: 'Connections and branch-based deploys'
 id: connections-branch-deploys
 ---
 
-Airflow DAGs often interact with a multitude of external systems, such as data warehouses and APIs. DAGs access these systems using [Airflow connections](manage-connections-variables.md). A common logistical consideration when running Airflow at scale is deciding how to manage connections between development and production environments. Different environment types require different levels of access to external resources. 
+Airflow DAGs often interact with a multitude of external systems, such as data warehouses and APIs. DAGs access these systems using [Airflow connections](manage-connections-variables.md). A common logistical consideration when running Airflow at scale is deciding how to manage connections between development and production environments. Different environment types require different levels of access to external resources.
 
-Astro's [branch-based development](automation-overview.md) and [connection management](manage-connections-variables.md) features allow you to automatically share specific Airflow connections with Astro Deployments based on their development context. 
+Astro's [branch-based development](automation-overview.md) and [connection management](manage-connections-variables.md) features allow you to automatically share specific Airflow connections with Astro Deployments based on their development context.
 
 When you combine branch-based deploys and connection management, you can:
 
@@ -44,24 +44,24 @@ Now, when a DAG author deploys to either a production or development Deployment 
 
 ## Explanation
 
-Using branch-based Deployments with the Astro Environment Manager allows your team to focus on the parts of Astro that matter most for their roles. For example, using the Astro Environment Manager means that you only need one administrative user to manage connections across multiple Deployments:  
+Using branch-based Deployments with the Astro Environment Manager allows your team to focus on the parts of Astro that matter most for their roles. For example, using the Astro Environment Manager means that you only need one administrative user to manage connections across multiple Deployments:
 
 - A Workspace Owner [creates an Airflow connection](create-and-link-connections.md#create-a-connection) in the Astro Environment Manager that connects to external development resources. They share this connection to all Deployments by default by turning on the [**Linked to all Deployments** setting](https://docs.astronomer.io/astro/create-and-link-connections#configure-connection-sharing-for-a-workspace).
-- In the production Deployment, the Workspace Owner [overrides the linked connection](create-and-link-connections.md#override-connection-fields) to instead connect to production resources on the same external system. Because the connection ID and code are the same, this override requires no updates at the DAG level. 
+- In the production Deployment, the Workspace Owner [overrides the linked connection](create-and-link-connections.md#override-connection-fields) to instead connect to production resources on the same external system. Because the connection ID and code are the same, this override requires no updates at the DAG level.
 
 After a Workspace Owner creates connections, DAG authors can develop DAGs without needing to reconfigure connections between development and production:
 
 - A DAG author creates a new development branch of an Astro project. The CI/CD pipeline for the repository deploys their branch to the development Deployment on Astro. This is known as a [multi-branch CI/CD pipeline](set-up-ci-cd.md#multiple-environments).
-- The DAG author has access to development resources because the Workspace Author configured a default Airflow connection for the Deployment. The author can [pull this connection onto their local machine](import-export-connections-variables.md#from-the-cloud-ui) for testing purposes, or test by deploying to the development Deployment on Astro.
+- The DAG author has access to development resources because the Workspace Author configured a default Airflow connection for the Deployment. The author can [pull this connection onto their local machine](cli/local-connections.md) for testing purposes, or test by deploying to the development Deployment on Astro.
 - When the DAG author finishes development, they merge their development branch into production. The CI/CD pipeline deploys this change to the production Deployment.
-- When the DAG author's code runs in the production Deployment, it now accesses production resources based on the overrides configured by the Workspace Owner. 
+- When the DAG author's code runs in the production Deployment, it now accesses production resources based on the overrides configured by the Workspace Owner.
 
 This use case provides several benefits for both Workspace managers and DAG authors:
 
 - When you use branch-based deploys, your CI/CD pipeline automatically deploys your branches to development Deployments. This saves resources and reduces the complexity of development for DAG authors.
 - Workspace Operators and Owners can manage connections without needing access to DAG code.
 - DAG authors only need a connection ID to connect their DAGs, meaning they can focus on data engineering instead of connection configuration.
-- Connection IDs don't need to be updated when you promote code to production, reducing development timelines and reducing the number of resources to manage. 
+- Connection IDs don't need to be updated when you promote code to production, reducing development timelines and reducing the number of resources to manage.
 
 ## See also
 

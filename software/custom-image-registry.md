@@ -6,7 +6,7 @@ description: Replace Astronomer's built-in container image registry with your ow
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Astronomer Software includes access to a Docker image registry that is managed by Astronomer. Every time a user deploys to Astronomer Software, a Docker image is generated and pushed to this registry. Depending on your deploy method, these Docker images can include OS and Python dependencies, DAG code, and the Airflow service.
 
@@ -19,14 +19,6 @@ If your organization can't support the Astronomer default internal registry, you
 A custom registry can still connect to public networks or internet. Therefore, this procedure is different if you're installing Astronomer in an airgapped environment. If you need to create a custom registry for a system that can't connect to the public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
 
 :::
-
-## Implementation considerations
-
-Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes using continuous integration and continuous delivery (CI/CD) pipelines. In this implementation, you use your CI/CD tool to:
-
-- Build your Astro project into a container image.
-- Deploy the image to your custom registry.
-- Run a query to push the image from your registry to Astronomer Software.
 
 ## Prerequisites
 
@@ -122,7 +114,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::info
 
-  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace. Make sure to specify different custom registries using `--docker-server`. You don't need to add the annotation if you're not synccing secrets between Deployments.
+  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace. Make sure to specify different custom registries using `--docker-server`. You don't need to add the annotation if you're not syncing secrets between Deployments.
 
 
   :::
@@ -175,9 +167,9 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
 ## Push code to a custom registry
 
-You can use the Astro CLI to push build and push images from a Kubernetes cluster to your custom registry. Based on the Helm configurations in your Kubernetes cluster, the Astro CLI automatically detects your custom image registry and pushes your image to it. It then calls the Houston API to update your Deployment to pull the new image from the registry.
+You can use the Astro CLI to push build and push images to your custom registry. Based on the Helm configurations in your Astronomer cluster, the Astro CLI automatically detects your custom image registry and pushes your image to it. It then calls the Houston API to update your Deployment to pull the new image from the registry.
 
-Within your Kubernetes cluster, open your Astro project and run:
+After you configure your custom registry, open your Astro project and run:
 
 ```sh
 astro deploy

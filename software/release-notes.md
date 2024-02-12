@@ -19,12 +19,12 @@ Version 0.34 is the latest stable version of Astronomer Software, while 0.32 rem
 
 :::info 
 
-Because Astronomer has separate [maintenance life cycles](release-lifecycle-policy.md) for each minor version of Astronomer Software, a later patch version of Astronomer Software is not guaranteed to have all changes included in previous minor versions. When a release note appears more than once on this page, the related change was introduced to multiple minor versions of Astronomer Software at different times. 
+Because Astronomer has separate [maintenance life cycles](release-lifecycle-policy.md) for each minor version of Astronomer Software, the same change can be introduced multiple times across minor versions, resulting in multiple identical release notes. When a new minor version releases, such as version 0.33.0, all changes from previously released versions are included in the new minor version.
 
 If you're upgrading to receive a specific change, ensure the release note for the change appears either:
 
 - Within your target minor version.
-- In a patch version that was released before the first release of your target minor version. For example, a change in version 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch.
+- In a patch version that was released before the first release of your target minor version. For example, a change in 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch. However, all changes in 0.32.1, which released June 12, 2023, are guaranteed to be in the 0.33 series, because 0.32.1 was released before 0.33.0.
 
 :::
 
@@ -124,7 +124,21 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
     - [CVE-2021-33914](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
     - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
 
+## 0.33.3
 
+Release date: January 19, 2024
+
+### Bug fixes
+
+- Fixed an issue where the Workspace list page in the Software UI would show an error if any Workspace had an empty description.
+- Fixed an issue in 0.33.2 where you couldn't migrate a Deployment from Astronomer Certified to Astro Runtime. 
+- Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
+    - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
+   
 ## 0.33.2 
 
 Release date: November 20, 2023
@@ -1234,8 +1248,6 @@ Release date: February 15, 2022
 
 You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.
 
-For more information about configuring this feature, read [Import IDP Groups](import-idp-groups.md). To learn more about adding and setting permissions for Teams via the Astronomer UI, read [User Permissions](workspace-permissions.md#via-teams).
-
 ### Additional Improvements
 
 - Astronomer now supports `prefer` and `require` SSL modes for connecting to PGBouncer. You can set this SSL mode via the `global.ssl.mode` value in your `config.yaml` file. Note that in v0.28.0, this feature works only with AWS and Azure.
@@ -1322,7 +1334,7 @@ global:
 
 ### CLI Support for Podman
 
-By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
+By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ### Bug Fixes
 

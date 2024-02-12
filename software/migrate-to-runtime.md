@@ -5,7 +5,7 @@ id: migrate-to-runtime
 description: Run an upgrade progress to migrate your Software Deployment from Astronomer Certified (AC) to Astro Runtime.
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 All versions of Astronomer Certified (AC) are no longer supported on Astronomer Software. Astronomer recommends migrating all of your Deployments to use an Astro Runtime image as soon as possible. Astro Runtime builds on the reliability of AC with new features that center on usability and performance. 
 

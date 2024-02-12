@@ -8,7 +8,6 @@ toc_max_heading_level: 3
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
 
 This guide provides the steps for integrating identity providers on Astro to enable Single Sign-On (SSO) for your users. After you complete the integration for your organization:
 
@@ -53,7 +52,7 @@ At a high level, to configure an SSO identity provider (IdP) you will:
 
 <Tabs
     defaultValue="Okta"
-    groupId= "configure-your-identity-provider"
+    groupId= "configure-your-sso-identity-provider"
     values={[
         {label: 'Okta', value: 'Okta'},
         {label: 'Microsoft Entra ID', value: 'ME-ID'},
@@ -159,60 +158,44 @@ This section provides setup steps for setting up Microsoft Entra ID as your IdP 
 To integrate Azure as your IdP for Astro you must have:
 
 - An Azure subscription.
-- A [Microsoft Entra ID tenant](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-create-new-tenant) with `Global Administrator` privileges.
-- [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
+- [Cloud Application Administrator](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference#cloud-application-administrator) permissions on Microsoft Entra ID.
+- [Organization Owner](user-permissions.md) permissions in the Organization you're configuring.
 - At least one [verified domain](manage-domains.md).
 
 #### Step 1: Register Astro as an application on Azure
 
-Follow [Microsoft Documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) to register a new app. When configuring the application, set the following values:
+Follow the [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity/saas-apps/astro-tutorial#add-astro-from-the-gallery) to add Astro from the gallery to your list of managed SaaS applications.
 
-- **Name** and **Supported account types**: Set these according to your organization's needs.
-- **Redirect URI**: Select **Web** and specify `https://auth.astronomer.io/login/callback`.
+#### Step 2: Configure SSO on Astro
 
-#### Step 2: Create a client secret
+1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+2. In the **SSO Configuration** menu, click **Configure SSO**.
+3. Configure the following values for your connection:
 
-Follow [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 4.
-
-:::warning
-
-If you configure an expiring secret, make sure to record the expiration date and renew the secret before this date to avoid interruptions to your service.
-
-:::
-
-#### Step 3: Configure API permissions
-
-Follow [Microsoft's documentation](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis#add-permissions-to-access-web-apis) to add the following **Delegated** permissions to **Microsoft Graph**:
-
-- `OpenId.email`
-- `OpenId.openid`
-- `OpenId.profile`
-- `User.Read`
-
-:::info
-
-If your Microsoft Entra ID is configured to require admin approval on API permissions, make sure to also click the **Grant admin consent** button at the top of your permissions list.
-
-:::
-
-#### Step 4: Create an SSO connection to Microsoft Entra ID
-
-1. Assign yourself to Astro from Microsoft Entra ID. See [Assign users and groups to an Application](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal?pivots=portal).
-2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
-3. In the **SSO Configuration** menu, click **Configure SSO**.
-4. Configure the following values for your connection:
-
-    - **Connection type**: Select **Microsoft Entra ID**.
+    - **Connection Type**: Select **SAML**.
     - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Microsoft Entra ID.
     - **Automatic Membership**: Set the default role for users who join your Organization through Microsoft Entra ID and without an explicit invite from Astro.
-    - **Microsoft Entra ID Domain**: Retrieve this value from your Microsoft Entra ID directory's overview page in the Microsoft Azure portal.
-    - **Application (client) ID**: Retrieve this from the **Overview** page of your Microsoft Entra ID application.
-    - **Client ID and Client secret**: Enter the values you coped from [Step 2: Create a client secret](#step-2-create-a-client-secret)
 
-5. If you already completed [Step 1: Register Astro as an application on Azure](#step-1-register-astro-as-an-application-on-azure), skip the Cloud UI instructions to configure a Redirect URI.
-6. Click **Create**. Your Microsoft Entra ID integration appears as an entry in **SSO Configuration**.
-7. In **SSO Configuration**, click **Activate**. You are redirected to Microsoft Entra ID to test your configuration. After you have successfully authenticated, you are redirected to Astro.
-8. Click **Activate SSO**.
+4. Copy the **Single Sign-On URL** and **Audience URI (SP Entity ID)** for Step 3.
+5. Keep this configuration window open. You'll return to it in Step 4.
+
+#### Step 3: Configure SSO on Azure
+
+In a new tab, open the [Microsoft Entra admin center](https://entra.microsoft.com/) and follow the steps in [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity/saas-apps/astro-tutorial#configure-microsoft-entra-sso) to configure Microsoft Entra SSO for Astro. In the **Basic SAML Configuration** section of your configuration, set the following values:
+
+- **Identifier (Entity ID)**: Enter the value for **Audience URI (SP ENTITY ID)** you copied in the previous step.
+- **Reply URL (Assertion Consumer Service URL)**: Enter the value for **Single Sign-On URL** you copied in the previous step.
+ 
+After you complete the configuration, download the PEM certificate from the **SAML Signing Certificate** section for Step 4.
+
+#### Step 4: Finalize the SSO connection in Astro
+
+1. Return to the Cloud UI. In the configuration screen for your SSO connection, configure the following values:
+
+    - **X.509 Certificate**: Enter the PEM certificate you downloaded in Step 3.
+    - **Identity Provider Single Sign-on URL**: Enter the URL you copied in Step 3.
+
+2. Click **Create**. Your Entra ID integration appears as an entry in **SSO Configuration**.
 
 #### Step 5: Copy your SSO bypass link
 

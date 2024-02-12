@@ -7,18 +7,18 @@ description: "Learn how to run your first Apache Airflow DAG on Astro with the A
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Astro is the industry's leading managed service for Apache Airflow. To quickly learn how Astro works, follow the steps in this quickstart to create an Airflow environment and run your first DAG with the Astro CLI.
 
 Specifically, you will:
 
 - Install the CLI.
-- Authenticate and log in to Astro. 
-- Create a Deployment. 
-- Create an Astro project. 
+- Authenticate and log in to Astro.
+- Create a Deployment.
+- Create an Astro project.
 - Deploy DAGs to Astro with the Astro CLI.
-- Trigger a run of an example DAG in the Airflow UI. 
+- Trigger a run of an example DAG in the Airflow UI.
 
 This tutorial takes about 15 minutes. If you're new to Airflow and want a more in-depth tutorial, see [Airflow 101 Learning Path](https://academy.astronomer.io/path/airflow-101).
 
@@ -38,9 +38,8 @@ If you're on your organization's network and can't access Astro, make a request 
 - `https://auth.astronomer.io/`
 - `https://updates.astronomer.io/`
 - `https://install.astronomer.io/`
-- `https://astro-<your-org>.datakin.com/`
-- `https://<your-org>.astronomer.run/`
-
+- `https://astro-<organization-short-name>.datakin.com/`
+- `https://<organization-short-name>.astronomer.run/`
 :::
 
 ## Step 1: Install the Astro CLI
@@ -99,8 +98,8 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
     ```sh
     $env:path.split(";")
     ```
-    
-    From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. 
+
+    From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`.
 
 4. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
 
@@ -136,13 +135,13 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
 2. On the **Deployments** page, click **+ Deployment**.
 
-3. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs. 
+3. In the **Name** field, enter a name for your Deployment. You can leave the other fields at their default values. This creates a basic Deployment on a standard Astronomer-hosted cluster. You can delete the Deployment after you finish testing your example DAG runs.
 
 4. Click **Create Deployment**.
 
     A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in the Deployment are healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
-    
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Deployment settings](deployment-settings.md).
+
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-health-incidents.md). Or, to learn more about how to customize your Deployment settings, see [Deployment settings](deployment-settings.md).
 
 ## Step 3: Create an Astro project
 
@@ -199,8 +198,8 @@ DAG-only deploys are an Astro feature that you can use to quickly update your As
 
     After running this command, you are prompted to open your web browser and enter your credentials to the Cloud UI. The Cloud UI then automatically authenticates you to the CLI. The next time you log in, you can run `astro login` without specifying a domain. If you run into issues logging in, check to make sure that you have the latest version of the Astro CLI. See [Upgrade the CLI](cli/install-cli.md#upgrade-the-cli).
 
-2. Run the following command to deploy your DAGs to Astro: 
-   
+2. Run the following command to deploy your DAGs to Astro:
+
     ```sh
     astro deploy --dags
     ```
@@ -223,7 +222,7 @@ Newly-deployed DAGs are paused by default and will not start running automatical
 
     ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
-    These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. 
+    These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in.
 
 4. Click on the name of the DAG, **example-dag-basic**, to open the **Grid** view for the DAG. To see if your DAG ran successfully, the most recent entry in the grid should have green squares for all of your tasks.
 
