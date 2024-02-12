@@ -151,13 +151,13 @@ my_isolated_task = ExternalPythonOperator(
 </TabItem>
 <TabItem value="taskflow-xcom">
 
-<CodeBlock language="python">{virtualenv_decorator_dag}</CodeBlock>
+<CodeBlock language="python">{external_python_decorator_dag}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional-xcom">
 
-<CodeBlock language="python">{python_virtualenv_operator_dag}</CodeBlock>
+<CodeBlock language="python">{external_python_operator_dag}</CodeBlock>
 
 </TabItem>
 
