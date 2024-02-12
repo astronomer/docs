@@ -29,8 +29,10 @@ In this guide you'll learn how to:
 
 - Use the `@task.virtualenv` decorator / PythonVirtualEnvOperator.
 - Use the `@task.external_python` decorator / ExternalPythonOperator.
-- Use the `@task.kubernetes` decorator / KubernetesPodOperator for basic use cases. For a more in-depth explanation of the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md).
+- Use the IsolatedOperator.
 - Execute conditional task logic in a virtual environment with [virtual branching operators].
+
+To learn how to use the `@task.kubernetes` decorator and the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md).
 
 :::tip Other ways to learn
 
@@ -74,8 +76,6 @@ Astronomer's distribution of Airflow, the Astro Runtime has images available for
 
 ## Choosing an isolated environment option
 
-
-
 When choosing an isolated environment option, first you need to decide if you want to run your code in a dedicated Kubernetes pod or a Python virtual environment.
 
 A dedicated Kubernetes pod allows you to have full control over the environment and resources used, but requires access to a Kubernetes cluster. If you want to isolate a traditional operator, a Kubernetes pod is the only option.
@@ -102,7 +102,9 @@ If your isolated task contains branching logic, use the branching versions of th
 
 ## `@task.external_python` decorator / ExternalPythonOperator
 
-To use the `@task.external_python` decorator or the ExternalPythonOperator you need to create a separate Python environment to reference. You can use any Python binary created by any means. The easiest way to create a Python environment when using the Astro CLI is with the 
+To use the `@task.external_python` decorator or the ExternalPythonOperator you need to create a separate Python environment to reference. You can use any Python binary created by any means. 
+
+The easiest way to create a Python environment when using the Astro CLI is with the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv). The BuildKit can be used by adding a comment on the first line of the Dockerfile as shown below. Adding this comment enables you to create virtual environments with the `PYENV` keyword.
 
 ```dockerfile
 # syntax=quay.io/astronomer/airflow-extensions:v1
@@ -114,13 +116,23 @@ FROM quay.io/astronomer/astro-runtime:10.3.0-python-3.11
 PYENV 3.9 epo_pyenv epo_requirements.txt
 ```
 
+:::note
+
+To use the BuildKit the [Docker BuildKit Backend](https://docs.docker.com/build/buildkit/) needs to be enabled. This is the default as of Docker Desktop version 23.0 but might need to be enabled manually in older versions of Docker.
+
+:::
+
+You can add any Python packages to the virtual environment by putting it into a separate requirements file, in our example using the name `epo_requirements.txt`. Make sure to pin all package versions.
+
 ```text
 pandas==1.4.4
 ```
 
+After restarting your Airflow environment you can use this Python binary by referencing the environment variable `ASTRO_PYENV_<my-pyenv-name>`. 
+
 <Tabs
     defaultValue="taskflow"
-    groupId="task.virtualenv-decorator-pythonvirtualenvoperator"
+    groupId="task.external_python-decorator-externalpythonoperator"
     values={[
         {label: 'TaskFlow API simple', value: 'taskflow'},
         {label: 'Traditional syntax simple', value: 'traditional'},
@@ -129,10 +141,14 @@ pandas==1.4.4
     ]}>
 <TabItem value="taskflow">
 
+To run any Python function in your virtual environment, use the `@task.external_python` decorator on it and set the `python` parameter to the location of your Python binary.
+
 ```python
     @task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
     def my_isolated_task():
         import pandas as pd
+        import sys
+        print(f"The python version in the virtual env is: {sys.version}")
         print(f"The pandas version in the virtual env is: {pd.__version__}")
         # your code to run in the isolated environment
 ```
@@ -140,9 +156,13 @@ pandas==1.4.4
 </TabItem>
 <TabItem value="traditional">
 
+To run any Python function in your virtual environment, provide it to the `python_callable` parameter of the ExternalPythonOperator and set the `python` parameter to the location of your Python binary.
+
 ```python
 def my_isolated_function():
     import pandas as pd
+    import sys
+    print(f"The python version in the virtual env is: {sys.version}")
     print(f"The pandas version in the virtual env is: {pd.__version__}")
 
 my_isolated_task = ExternalPythonOperator(
@@ -155,11 +175,15 @@ my_isolated_task = ExternalPythonOperator(
 </TabItem>
 <TabItem value="taskflow-xcom">
 
+You can pass information into and out of the `@task.external_python` decorated task the same way as you would when interacting with a `@task` decorated task, see also [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
+
 <CodeBlock language="python">{external_python_decorator_dag}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional-xcom">
+
+You can pass information into the ExternalPythonOperator by using a [Jinja template](templating.md) retrieving [XCom](airflow-passing-data-between-tasks.md) values from the [Airflow context](airflow-context.md). To pass information out of the ExternalPythonOperator, return it from the `python_callable`.
 
 <CodeBlock language="python">{external_python_operator_dag}</CodeBlock>
 
@@ -168,6 +192,8 @@ my_isolated_task = ExternalPythonOperator(
 </Tabs>
 
 ## `@task.virtualenv` decorator / PythonVirtualEnvOperator
+
+
 
 <Tabs
     defaultValue="taskflow"
@@ -272,9 +298,6 @@ def my_isolated_task(
 
 </Tabs>
 
-
-
-## `@task.kubernetes` decorator / KubernetesPodOperator
 
 ## IsolatedOperator
 

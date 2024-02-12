@@ -37,7 +37,6 @@ def external_python_decorator_dag():
         This function runs in an isolated environment.
         Args:
             upstream_task_output (dict): contains a number and a word.
-            logical_date: The logical_date of the DAG.
         Returns:
             pd.DataFrame: A dictionary containing the transformed inputs.
         """
