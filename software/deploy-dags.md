@@ -87,5 +87,4 @@ These new workers execute downstream tasks of DAG runs that are in progress. For
 
 This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
 
-
 :::
