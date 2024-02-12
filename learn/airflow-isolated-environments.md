@@ -10,6 +10,8 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import virtualenv_decorator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/virtualenv_decorator_dag.py';
 import python_virtualenv_operator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/python_virtualenv_operator_dag';
+import external_python_decorator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_decorator_dag';
+import external_python_operator_dag from '!!raw-loader!../code-samples/dags/airflow-isolated-environments/external_python_operator_dag';
 
 It is common to require isolated environments for specific Airflow tasks, for example when needing to run tasks using conflicting versions of Python or Python packages. 
 
@@ -79,7 +81,7 @@ A dedicated Kubernetes pod allows you to have full control over the environment 
 There are 3 options to run your code in a dedicated Kubernetes pod with Airflow:
 
 - To run a traditional operator in an isolated environment, use the [IsolatedOperator]() to run your operator code inside a dedicated Kubernetes pod. To use the IsolatedOperator, you need to have access to a Kubernetes cluster. 
-- To run any custom Python code in a dedicated Kubernetes pod, use the `@task.kubernetes` decorator or the KubernetesPodOperator (KPO). You need to have a Docker image with Python and the necessary packages for your code, as well as access to a Kubernetes cluster. Astronomer recommends to use the `@task.kubernetes` decorator over the KPO if you need to pass data into or out of the pod, as it makes handling [XCom](passing-data-between-tasks.md) easier.
+- To run any custom Python code in a dedicated Kubernetes pod, use the `@task.kubernetes` decorator or the KubernetesPodOperator (KPO). You need to have a Docker image with Python and the necessary packages for your code, as well as access to a Kubernetes cluster. Astronomer recommends to use the `@task.kubernetes` decorator over the KPO if you need to pass data into or out of the pod, as it makes handling [XCom](airflow-passing-data-between-tasks.md) easier.
 - To run an existing Docker image without any additional Python code, use the [KubernetesPodOperator](kubepod-operator.md) (KPO). You need to provide Docker image to run, as well as access to a Kubernetes cluster.
 
 A Python virtual environment is easier to set up since it does not require a Docker image or Kubernetes cluster, but does not provide the same level of control over the environment and resources used. 
@@ -89,7 +91,7 @@ If you want to run your code in a Python virtual environment, you have 2 options
 - To run your code in an existing virtual environment, use the `@task.external_python` decorator or the ExternalPythonOperator (EPO). This is a good option if you want to reuse a virtual environment in multiple tasks, the environment is created at build time, which speeds up the task execution. Astronomer 
 - To run your code in a newly created virtual environment, use the `@task.virtualenv` decorator or the PythonVirtualEnvOperator (PVEO). This is a good option if you want the virtual environment to be created at Runtime instead of build time. The environment can be cached by providing a `venv_cache_path`.
 
-Astronomer recommends to use the decorator versions over the operators, as they simplify handling of [XCom](passing-data-between-tasks.md).
+Astronomer recommends to use the decorator versions over the operators, as they simplify handling of [XCom](airflow-passing-data-between-tasks.md).
 
 If your isolated task contains branching logic, use the branching versions of the virtual environment decorators and operators:
 
@@ -97,6 +99,69 @@ If your isolated task contains branching logic, use the branching versions of th
 - To run branching code in a newly created virtual environment, use the `@task.branch_virtualenv` decorator or the BranchPythonVirtualenvOperator.
 
 ## `@task.external_python` decorator / ExternalPythonOperator
+
+```dockerfile
+# syntax=quay.io/astronomer/airflow-extensions:v1
+
+FROM quay.io/astronomer/astro-runtime:10.3.0-python-3.11
+
+# create a virtual environment for the ExternalPythonOperator and @task.external_python decorator
+# using Python 3.9 and install the packages from epo_requirements.txt
+PYENV 3.9 epo_pyenv epo_requirements.txt
+```
+
+```text
+pandas==1.4.4
+```
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="task.virtualenv-decorator-pythonvirtualenvoperator"
+    values={[
+        {label: 'TaskFlow API simple', value: 'taskflow'},
+        {label: 'Traditional syntax simple', value: 'traditional'},
+        {label: 'TaskFlow API with XCom', value: 'taskflow-xcom'},
+        {label: 'Traditional syntax with XCom', value: 'traditional-xcom'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+    @task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
+    def my_isolated_task():
+        import pandas as pd
+        print(f"The pandas version in the virtual env is: {pd.__version__}")
+        # your code to run in the isolated environment
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+def my_isolated_function():
+    import pandas as pd
+    print(f"The pandas version in the virtual env is: {pd.__version__}")
+
+my_isolated_task = ExternalPythonOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    python=os.environ["ASTRO_PYENV_epo_pyenv"]
+)
+```
+
+</TabItem>
+<TabItem value="taskflow-xcom">
+
+<CodeBlock language="python">{virtualenv_decorator_dag}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional-xcom">
+
+<CodeBlock language="python">{python_virtualenv_operator_dag}</CodeBlock>
+
+</TabItem>
+
+</Tabs>
 
 ## `@task.virtualenv` decorator / PythonVirtualEnvOperator
 
@@ -112,10 +177,11 @@ If your isolated task contains branching logic, use the branching versions of th
 <TabItem value="taskflow">
 
 ```python
-@task.virtualenv(requirements=["pandas==1.5.1"])
+@task.virtualenv(requirements=["pandas==1.5.1"])  # add your requirements to the list
 def my_isolated_task(): 
     import pandas as pd
     print(f"The pandas version in the virtual env is: {pd.__version__}")"
+    # your code to run in the isolated environment
 ```
 
 </TabItem>
@@ -125,13 +191,14 @@ def my_isolated_task():
 def my_isolated_function():
     import pandas as pd
     print(f"The pandas version in the virtual env is: {pd.__version__}")
+    # your code to run in the isolated environment
 
 my_isolated_task = PythonVirtualenvOperator(
     task_id="my_isolated_task",
     python_callable=my_isolated_function,
     requirements=[
         "pandas==1.5.1",
-    ]
+    ]  # add your requirements to the list
 )
 ```
 
@@ -203,11 +270,12 @@ def my_isolated_task(
 
 
 
-
-
-
 ## `@task.kubernetes` decorator / KubernetesPodOperator
 
 ## IsolatedOperator
 
 ## Virtual branching operators
+
+## Use context variables in isolated environments
+
+## Use Airflow packages in isolated environments
