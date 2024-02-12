@@ -65,7 +65,8 @@ def python_virtualenv_operator_dag():
             "pandas==1.5.1",
         ],
         op_kwargs={
-            "num": "{{ ti.xcom_pull(task_ids='upstream_task')['num']}}",  # note that render_template_as_native_obj=True in the DAG definition
+            # note that render_template_as_native_obj=True in the DAG definition
+            "num": "{{ ti.xcom_pull(task_ids='upstream_task')['num']}}",
             "word": "{{ ti.xcom_pull(task_ids='upstream_task')['word']}}",
         },
     )

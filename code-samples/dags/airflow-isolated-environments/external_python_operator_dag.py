@@ -66,7 +66,8 @@ def external_python_operator_dag():
         python_callable=my_isolated_function,
         python=os.environ["ASTRO_PYENV_epo_pyenv"],
         op_kwargs={
-            "num": "{{ ti.xcom_pull(task_ids='upstream_task')['num']}}",  # note that render_template_as_native_obj=True in the DAG definition
+            # note that render_template_as_native_obj=True in the DAG definition
+            "num": "{{ ti.xcom_pull(task_ids='upstream_task')['num']}}",
             "word": "{{ ti.xcom_pull(task_ids='upstream_task')['word']}}",
         },
     )

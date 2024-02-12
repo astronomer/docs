@@ -23,16 +23,17 @@ In Airflow you have several options to isolate tasks, you can your custom Python
 - An existing virtual environment with the [`@task.external_python` decorator / ExternalPythonOperator (EPO)]. 
 - A dedicated Kubernetes pod with the [`@task.kubernetes` decorator / KubernetesPodOperator (KPO)].
 
-Additionally, you can run most traditional operators inside a dedicated Kubernetes pod with the [IsolatedOperator] and use [virtual branching operators] to execute conditional task logic inside a virtual environment.
+Additionally, you can run most traditional operators inside a dedicated Kubernetes pod with the [IsolatedOperator](https://github.com/astronomer/apache-airflow-providers-isolation/) and use [virtual branching operators](#virtual-branching-operators) to execute conditional task logic inside a virtual environment.
 
 In this guide you'll learn how to:
 
 - Use the `@task.virtualenv` decorator / PythonVirtualEnvOperator.
 - Use the `@task.external_python` decorator / ExternalPythonOperator.
-- Use the IsolatedOperator.
-- Execute conditional task logic in a virtual environment with [virtual branching operators].
+- Execute conditional task logic in a virtual environment with virtual branching operators.
 
 To learn how to use the `@task.kubernetes` decorator and the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md).
+
+To learn more about the IsolatedOperator, see the [Isolation provider README](https://github.com/astronomer/apache-airflow-providers-isolation).
 
 :::tip Other ways to learn
 
@@ -41,7 +42,7 @@ There are multiple resources for learning about this topic. See also:
 - Astronomer Academy: [Airflow: The ExternalPythonOperator](https://academy.astronomer.io/astro-runtime-the-externalpythonoperator).
 - Astronomer Academy: [Airflow: The KubernetesPodOperator](https://academy.astronomer.io/astro-runtime-the-kubernetespodoperator-1).
 - Webinar: [Running Airflow Tasks in Isolated Environments](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments-video/).
-- Learn from code: [].
+- Learn from code: [Isolated environments example DAGs repository](https://github.com/astronomer/learn-demos/tree/airflow-isolated-environments).
 
 :::
 
@@ -128,7 +129,7 @@ You can add any Python packages to the virtual environment by putting it into a 
 pandas==1.4.4
 ```
 
-After restarting your Airflow environment you can use this Python binary by referencing the environment variable `ASTRO_PYENV_<my-pyenv-name>`. 
+After restarting your Airflow environment you can use this Python binary by referencing the environment variable `ASTRO_PYENV_<my-pyenv-name>`. If you are using an alternative method to create you Python binary, you need to set the `python` parameter of the decorator/operator to the location of your Python binary.
 
 <Tabs
     defaultValue="taskflow"
@@ -144,13 +145,13 @@ After restarting your Airflow environment you can use this Python binary by refe
 To run any Python function in your virtual environment, use the `@task.external_python` decorator on it and set the `python` parameter to the location of your Python binary.
 
 ```python
-    @task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
-    def my_isolated_task():
-        import pandas as pd
-        import sys
-        print(f"The python version in the virtual env is: {sys.version}")
-        print(f"The pandas version in the virtual env is: {pd.__version__}")
-        # your code to run in the isolated environment
+@task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
+def my_isolated_task():
+    import pandas as pd
+    import sys
+    print(f"The python version in the virtual env is: {sys.version}")
+    print(f"The pandas version in the virtual env is: {pd.__version__}")
+    # your code to run in the isolated environment
 ```
 
 </TabItem>
@@ -159,6 +160,8 @@ To run any Python function in your virtual environment, use the `@task.external_
 To run any Python function in your virtual environment, provide it to the `python_callable` parameter of the ExternalPythonOperator and set the `python` parameter to the location of your Python binary.
 
 ```python
+# from airflow.operators.python import ExternalPythonOperator
+
 def my_isolated_function():
     import pandas as pd
     import sys
@@ -184,6 +187,7 @@ You can pass information into and out of the `@task.external_python` decorated t
 <TabItem value="traditional-xcom">
 
 You can pass information into the ExternalPythonOperator by using a [Jinja template](templating.md) retrieving [XCom](airflow-passing-data-between-tasks.md) values from the [Airflow context](airflow-context.md). To pass information out of the ExternalPythonOperator, return it from the `python_callable`.
+Note that Jinja templates will be rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
 
 <CodeBlock language="python">{external_python_operator_dag}</CodeBlock>
 
@@ -191,9 +195,11 @@ You can pass information into the ExternalPythonOperator by using a [Jinja templ
 
 </Tabs>
 
+To get a list of all parameters of the `@task.external_python` decorator /  ExternalPythonOperator, see the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/ExternalPythonOperator).
+
 ## `@task.virtualenv` decorator / PythonVirtualEnvOperator
 
-
+To use the `@task.virtualenv` decorator or the PythonVirtualenvOperator to create a virtual environment with the same Python version as your Airflow environment but potentially conflicting packages, you do not need to create a Python binary up front. The decorator/operator will create a virtual environment for you at runtime.
 
 <Tabs
     defaultValue="taskflow"
@@ -206,6 +212,8 @@ You can pass information into the ExternalPythonOperator by using a [Jinja templ
     ]}>
 <TabItem value="taskflow">
 
+Add the pinned versions of the packages you need to the `requirements` parameter of the `@task.virtualenv` decorator. The decorator will create a new virtual environment at runtime.
+
 ```python
 @task.virtualenv(requirements=["pandas==1.5.1"])  # add your requirements to the list
 def my_isolated_task(): 
@@ -217,7 +225,11 @@ def my_isolated_task():
 </TabItem>
 <TabItem value="traditional">
 
+Add the pinned versions of the packages you need to the `requirements` parameter of the PythonVirtualenvOperator. The operator will create a new virtual environment at runtime.
+
 ```python
+# from airflow.operators.python import PythonVirtualenvOperator
+
 def my_isolated_function():
     import pandas as pd
     print(f"The pandas version in the virtual env is: {pd.__version__}")
@@ -235,11 +247,16 @@ my_isolated_task = PythonVirtualenvOperator(
 </TabItem>
 <TabItem value="taskflow-xcom">
 
+You can pass information into and out of the `@task.virtualenv` decorated task the same way as you would when interacting with a `@task` decorated task, see also [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
+
 <CodeBlock language="python">{virtualenv_decorator_dag}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional-xcom">
+
+You can pass information into the PythonVirtualenvOperator by using a [Jinja template](templating.md) retrieving [XCom](airflow-passing-data-between-tasks.md) values from the [Airflow context](airflow-context.md). To pass information out of the PythonVirtualenvOperator, return it from the `python_callable`.
+Note that Jinja templates will be rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
 
 <CodeBlock language="python">{python_virtualenv_operator_dag}</CodeBlock>
 
@@ -247,7 +264,7 @@ my_isolated_task = PythonVirtualenvOperator(
 
 </Tabs>
 
-
+If you want to build a virtual environment at runtime with a different Python version than your Airflow environment, you can use the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv) to install a different Python version for your operator/decorator to use.
 
 
 ```dockerfile
@@ -258,6 +275,13 @@ FROM quay.io/astronomer/astro-runtime:10.3.0-python-3.11
 PYENV 3.10 pyenv_3_10
 ```
 
+:::note
+
+To use the BuildKit the [Docker BuildKit Backend](https://docs.docker.com/build/buildkit/) needs to be enabled. This is the default as of Docker Desktop version 23.0 but might need to be enabled manually in older versions of Docker.
+
+:::
+
+The Python version can be referenced directly using the `python` parameter of the decorator/operator.
 
 <Tabs
     defaultValue="taskflow"
@@ -270,39 +294,56 @@ PYENV 3.10 pyenv_3_10
 
 ```python
 @task.virtualenv(
-    requirements=[
-        "pandas==1.5.1",
-        "pendulum==3.0.0",
-    ],  # pendulum is needed to use the logical date
-    python_version="3.10",
+    requirements=["pandas==1.5.1"], 
+    python_version="3.10",  # specify the Python version
 )
-def my_isolated_task(
-    upstream_task_output: dict, logical_date
-):  # note that not all objects from the context can be used!
+def my_isolated_task():
     import pandas as pd
     import sys
-
     print(f"The python version in the virtual env is: {sys.version}")
     print(f"The pandas version in the virtual env is: {pd.__version__}")
-    print(f"The logical_date is {logical_date}")
-
-    return upstream_task_output
+    # your code to run in the isolated environment
 ```
 
 </TabItem>
 <TabItem value="traditional">
 
+```python
+#from airflow.operators.python import PythonVirtualenvOperator
 
+def my_isolated_function():
+    import pandas as pd
+    import sys
+    print(f"The python version in the virtual env is: {sys.version}")
+    print(f"The pandas version in the virtual env is: {pd.__version__}")
+    # your code to run in the isolated environment
+
+my_isolated_task = PythonVirtualenvOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    requirements=["pandas==1.5.1"],
+    python_version="3.10",  # specify the Python version
+)
+```
 
 </TabItem>
 
 </Tabs>
 
+:::tip
 
-## IsolatedOperator
+To get a list of all parameters of the `@task.virtualenv` decorator / PythonVirtualenvOperator, see the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/pythonvirtualenvoperator).
+
+:::
 
 ## Virtual branching operators
 
 ## Use context variables in isolated environments
 
 ## Use Airflow packages in isolated environments
+
+:::warning
+
+Using Airflow packages inside of isolated environments can lear to unexpected behavior and is not recommended. 
+
+:::
