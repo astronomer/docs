@@ -6,7 +6,6 @@ description: Use the Telescope CLI to collect Airflow metrics and usage data for
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
 
 [Telescope](https://github.com/astronomer/telescope) is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at different times. This information can help Astronomer support diagnose and resolve issues in  your environments.
 

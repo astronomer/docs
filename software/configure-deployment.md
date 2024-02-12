@@ -173,7 +173,7 @@ Deploying code is the process of applying code from your local machine to an Ast
 
 - Deploy [project images](deploy-cli.md) or [DAGs only](deploy-dags.md) using the Astro CLI. Deploying a project image is the only way to deploy Airflow-level configurations and dependencies to a Deployment.
 - Deploy DAGs using an [NFS volume](deploy-nfs.md).
-- Deploy DAGs using [Git sync](git-sync.md).
+- Deploy DAGs using [Git sync](deploy-git-sync.md).
 
 ### Astro CLI deploys
 

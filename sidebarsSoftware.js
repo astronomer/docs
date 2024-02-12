@@ -79,7 +79,7 @@ module.exports = {
         items: [
           'configure-deployment',
           'environment-variables',
-          'customize-resource-usage'
+          'customize-resource-usage',
           {
             type: 'category',
             label: 'Deploy options',
