@@ -61,6 +61,8 @@ Astronomer recommends choosing the following alerts for these common scenarios:
 | Stop a running task after some amount of time|           |                             |                  |              | X                |
 | Trigger another DAG based on an alert       | X           |                             |                  |              |                  |
 
+For more information on different types of alerts, check out the documentation linked in [See also](#see-also).
+
 ## Example
 
 This example shows how to implement a combination of Airflow and Astro alerts to cover notifications for common scenarios including DAG failures, specific task failures, and pipeline SLAs.
@@ -88,3 +90,4 @@ To implement this use case:
 
 - [Set up Astro alerts](https://docs.astronomer.io/astro/alerts)
 - [Manage Airflow DAG notifications](https://docs.astronomer.io/learn/error-notifications-in-airflow)
+- [Airflow timeouts](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#timeouts)
