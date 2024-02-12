@@ -4,7 +4,7 @@ sidebar_label: 'Multi-channel alerting systems'
 id: multi-channel-alerting-systems
 ---
 
-When orchestrating data pipelines, it's key that you know when something goes wrong, whether that's a business critical pipeline failing or a DAG that provides data for another team taking longer than normal to complete. A common consideration when running Airflow at scale is how to alert your team in different scenarios.
+When orchestrating data pipelines, it's key that you know when something goes wrong. It could be that a business critical DAG failed or that a DAG that provides data for another team took longer than normal to complete. A common consideration when running Airflow at scale is how to alert your team in different scenarios.
 
 Airflow has built-in notification mechanisms for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://docs.astronomer.io/astro/alerts) provide an additional level of observability.
 
@@ -14,7 +14,7 @@ When you combine Airflow notifications with Astro alerts, you can:
 - Use Astro alerts to implement pipeline SLAs based on task duration.
 - Use Airflow email notifications and callbacks for custom task-level alerting logic.
 
-This use case shows how to combine Airflow and Astro alerts for a couple of common scenarios. For general guidance on when to use which type of alert, see the [Explanation](#explanation) section.
+This guide shows how to combine Airflow and Astro alerts for a couple of common scenarios. For general guidance on when to use which type of alert, see the [Explanation](#explanation) section.
 
 ## Feature overview
 
@@ -27,7 +27,7 @@ This use case depends on the following Astro and Airflow features to create diff
 
 This use case assumes you have:
 
-- At least one [Astro Deployment](https://docs.astronomer.io/astro/create-deployment). Your deployment must run Astro Runtime 7.1.0 or later and it must have OpenLineage enabled.
+- At least one [Astro Deployment](https://docs.astronomer.io/astro/create-deployment). Your Deployment must run Astro Runtime 7.1.0 or later and it must have OpenLineage enabled.
 - An [Astro project](https://docs.astronomer.io/astro/cli/develop-project) with at least one DAG. Your DAG should have at least two tasks.
 
 However, you can extend this use case to encompass any number of Astro Deployments and DAGs.
@@ -46,7 +46,7 @@ To implement this use case:
 
 Using a combination of Astro alerts and Airflow notifications allows your team to implement alerting logic using the best tool for each scenario. You might need different types of alerts that are better suited towards one option or the other, as shown in the example in this use case:
 
-- **Task-level alerts with custom logic** are recommended if you want be notified of success or failure only for a specific task, or you want to run custom code if a task succeeds or fails. Task-level success or failure alerts or alerts with custom logic are not currently supported with Astro alerts, but they're straightforward to implement in Airflow
+- **Task-level alerts with custom logic** are recommended if you want be notified of success or failure only for a specific task, or you want to run custom code if a task succeeds or fails. Task-level success or failure alerts or alerts with custom logic are not currently supported with Astro alerts, but they're straightforward to implement in Airflow.
 - DAG-level success or failure alerts can be created using either Airflow notifications or Astro alerts, but on Astro they are easy to configure and don't require any code changes. To implement these alerts with Airflow, you need to update your DAG code and complete additional configuration for your communication channel (for example, setting up an SMTP server for email alerts).
 - Absolute time alerts are recommended when you need your DAG to complete by a certain time of day. These types of alerts are available only on Astro.
 
@@ -54,7 +54,7 @@ In some cases, whether you set up an alert on Astro or in Airflow will depend on
 
 :::info
 
-Programmatically creating Astro alerts, which may be helpful if you have a large number of DAGs, is coming soon.
+Programmatically creating Astro alerts is coming soon. This will make it easy to configure alerts for a large number of DAGs without  having to create each alert manually.
 
 :::
 
