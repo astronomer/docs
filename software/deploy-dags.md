@@ -63,7 +63,7 @@ By default, Deployments are configured only for complete project image deploys. 
 1. Open your Deployment in the Astronomer Software UI.
 2. In the **Settings** tab under the **DAG Deployment** section, change the **Mechanism** to **DAG Only Deployment**. 
 3. Click **Deploy changes**
-4. Redeploy your DAGs using `astro deploy --dags`. See [Trigger a DAG-only deploy](#trigger-a-dag-only-deploy). This step is required due to all DAGs in your deployed image being erased when you enable the feature. 
+4. Redeploy your DAGs using `astro deploy --dags`. See [Trigger a DAG-only deploy](#trigger-a-dag-only-deploy). This step is required because all DAGs in your deployed image will be deleted from your Deployment when you enable the feature. 
 
 ## Trigger a DAG-only deploy
 
