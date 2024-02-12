@@ -21,6 +21,34 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## February 13, 2024
+
+### New Astro reporting dashboards show metrics for Deployments across your Organization
+
+:::warning
+
+This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
+
+:::
+
+The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Reporting dashboards](reporting-dashboard.md) for summaries of each available dashboard.
+
+### New worker types
+
+Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](resource-reference-hosted.md#deployment-resources) for more information about each worker type.
+
+### Additional improvements
+
+- When you submit a support request from the Cloud UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support. 
+- Workspace Members can now access the **Clusters** view in the Airflow UI for a Deployment.
+
+### Bug fixes
+
+- Fixed an issue where network connections between clusters could occasionally be disrupted.
+- When you retrieve information about a Deployment through the Astro API, the API now returns an empty value for `EnvironmentVariables` if the Deployment has no environment variables.
+- Deleting a Workspace through the Astro API now deletes all Astro Cloud IDE projects associated with the Workspace.
+- Fixed an issue where you could not clear optional fields in a Deployment's configuration using the Astro API.
+
 ## February 6, 2024
 
 ### Bug fixes
