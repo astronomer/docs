@@ -64,11 +64,11 @@ astronomer:
 
 ### Change resource provisioning strategy per Deployment
 
-You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run.
+You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See [Customize resource usage](customize-resource-usage.md) for more information.
 
 ### Deploy only DAGs with `astro deploy -—dags`
 
-You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates.
+You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates. See [Deploy DAGs](deploy-dags.md) for more information.
 
 ### Additional improvements
 
