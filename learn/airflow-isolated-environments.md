@@ -23,7 +23,7 @@ In Airflow you have several options to isolate tasks, you can your custom Python
 - An existing virtual environment with the [`@task.external_python` decorator / ExternalPythonOperator (EPO)]. 
 - A dedicated Kubernetes pod with the [`@task.kubernetes` decorator / KubernetesPodOperator (KPO)].
 
-Additionally, you can run most traditional operators inside a dedicated Kubernetes pod with the [IsolatedOperator](https://github.com/astronomer/apache-airflow-providers-isolation/) and use [virtual branching operators](#virtual-branching-operators) to execute conditional task logic inside a virtual environment.
+Additionally, you can run most traditional operators inside a dedicated Kubernetes pod with the [IsolatedOperator](https://github.com/astronomer/apache-airflow-providers-isolation/) and use [virtual branching operators](#virtual-branching-decorators--operators) to execute conditional task logic inside a virtual environment.
 
 In this guide you'll learn how to:
 
@@ -74,6 +74,10 @@ If one of your tasks requires a different version of one of the Python packages 
 Astronomer's distribution of Airflow, the Astro Runtime has images available for Python 3.11, 3.10, 3.9 and 3.8 (see: [Quay.io astronomer/astro-runtime](https://quay.io/repository/astronomer/astro-runtime?tab=tags)). We recommend to use the Astro Runtime with the Astro CLI to run Airflow locally in Docker to ensure a reproducible environment separated from your local machine.
 
 :::
+
+### Limitations
+
+secrets backends, airflow context. 
 
 ## Choosing an isolated environment option
 
@@ -336,9 +340,183 @@ To get a list of all parameters of the `@task.virtualenv` decorator / PythonVirt
 
 :::
 
-## Virtual branching operators
+## Virtual branching decorators / operators
+
+To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators.
+
+<Tabs
+    defaultValue="taskflow-epo"
+    groupId="virtual-branching-decorators-operators"
+    values={[
+        {label: '@task.external_python', value: 'taskflow-epo'},
+        {label: 'ExternalBranchPythonOperator', value: 'traditional-epo'},
+        {label: '@task.virtualenv', value: 'taskflow-venv'},
+        {label: 'BranchPythonVirtualenvOperator', value: 'traditional-venv'},
+    ]}>
+<TabItem value="taskflow-epo">
+
+```python
+@task.branch_external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
+def my_isolated_task():
+    import pandas as pd
+    import random
+    print(f"The pandas version in the virtual env is: {pd.__version__}")
+
+    num = random.randint(0, 100)
+
+    if num > 50:
+        return "downstream_task_a"  # return the task_id of the downstream task that should be executed
+    else:
+        return "downstream_task_b"
+```
+
+</TabItem>
+<TabItem value="traditional-epo">
+
+```python
+# from airflow.operators.python import BranchExternalPythonOperator
+
+def my_isolated_function():
+    import pandas as pd
+    import random
+    print(f"The pandas version in the virtual env is: {pd.__version__}")
+
+    num = random.randint(0, 100)
+
+    if num > 50:
+        return "downstream_task_a"  # return the task_id of the downstream task that should be executed
+    else:
+        return "downstream_task_b"
+
+my_isolated_task = BranchExternalPythonOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    python=os.environ["ASTRO_PYENV_epo_pyenv"]
+)
+```
+
+</TabItem>
+<TabItem value="taskflow-venv">
+
+```python
+@task.branch_virtualenv(requirements=["pandas==1.5.3"])
+def my_isolated_task():
+    import pandas as pd
+    import random
+    print(f"The pandas version in the virtual env is: {pd.__version__}")
+
+    num = random.randint(0, 100)
+
+    if num > 50:
+        return "downstream_task_a"  # return the task_id of the downstream task that should be executed
+    else:
+        return "downstream_task_b"
+```
+
+</TabItem>
+
+<TabItem value="traditional-venv">
+
+```python
+# from airflow.operators.python import BranchPythonVirtualenvOperator
+
+def my_isolated_function():
+    import pandas as pd
+    import random
+    print(f"The pandas version in the virtual env is: {pd.__version__}")
+
+    num = random.randint(0, 100)
+
+    if num > 50:
+        return "downstream_task_a"  # return the task_id of the downstream task that should be executed
+    else:
+        return "downstream_task_b"
+
+my_isolated_task = BranchPythonVirtualenvOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    requirements=["pandas==1.5.1"],
+)
+```
+</TabItem>
+</Tabs>
 
 ## Use context variables in isolated environments
+
+Some variables from the [Airflow context](airflow-context.md) can be passed to isolated environments, for example the `logical_date` of the DAG run.
+Due to compatibility issues, objects from the context such as `ti` cannot be passed to isolated environments, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/latest/howto/operator/python.html#id1).
+
+<Tabs
+    defaultValue="taskflow-epo"
+    groupId="context-variables-in-isolated-environments"
+    values={[
+        {label: '@task.external_python', value: 'taskflow-epo'},
+        {label: 'ExternalPythonOperator', value: 'traditional-epo'},
+        {label: '@task.virtualenv', value: 'taskflow-venv'},
+        {label: 'PythonVirtualenvOperator', value: 'traditional-venv'},
+    ]}>
+<TabItem value="taskflow-epo">
+    
+```python
+@task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
+def my_isolated_task(logical_date):  # note that to be able to use the logical date, pendulum needs to be installed in the epo_pyenv
+    print(f"The logical date is: {logical_date}")
+    # your code to run in the isolated environment 
+
+my_isolated_task()
+```
+</TabItem>
+<TabItem value="traditional-epo">
+
+```python
+def my_isolated_function(logical_date_from_op_kwargs):
+    print(f"The logical date is: {logical_date_from_op_kwargs}")
+    # your code to run in the isolated environment 
+
+my_isolated_task = ExternalPythonOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    python=os.environ["ASTRO_PYENV_epo_pyenv"],
+    op_kwargs={
+        "logical_date_from_op_kwargs": "{{ logical_date }}",
+    },
+)
+```
+</TabItem>
+<TabItem value="taskflow-venv">
+
+```python
+@task.virtualenv(
+    requirements=[
+        "pandas==1.5.1",
+        "pendulum==3.0.0",
+    ],  # pendulum is needed to use the logical date
+)
+def my_isolated_task(logical_date):
+    print(f"The logical date is: {logical_date}")
+    # your code to run in the isolated environment
+```
+
+</TabItem>
+<TabItem value="traditional-venv">
+    
+```python
+def my_isolated_function(logical_date_from_op_kwargs):
+    print(f"The logical date is: {logical_date_from_op_kwargs}")
+    # your code to run in the isolated environment 
+
+my_isolated_task = PythonVirtualenvOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    requirements=[
+        "pandas==1.5.1",
+        "pendulum==3.0.0",
+    ],  # pendulum is needed to use the logical date
+    op_kwargs={
+        "logical_date_from_op_kwargs": "{{ logical_date }}"
+    },
+)
+```
 
 ## Use Airflow packages in isolated environments
 
