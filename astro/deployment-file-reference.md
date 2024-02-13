@@ -56,10 +56,10 @@ deployment:
         deployment_type: STANDARD
         cloud_provider: gcp
         region: us-east4
-        default_task_pod_cpu: "0.25" ## new field
-        default_task_pod_memory: 0.5Gi ## new field
-        resource_quota_cpu: "10" ## new field
-        resource_quota_memory: 20Gi ## new field
+        default_task_pod_cpu: "0.25"
+        default_task_pod_memory: 0.5Gi
+        resource_quota_cpu: "10"
+        resource_quota_memory: 20Gi
     worker_queues: ## worker_queues only used when executor is CELERY
         - name: default
           max_worker_count: 10
@@ -69,8 +69,8 @@ deployment:
 		alert_emails:
         - test-email@testdomain.io
     metadata:
-        deployment_id:
-        workspace_id:
+        deployment_id: clskyu7fk000108lagyc10fya
+        workspace_id: clskyv2hr000008jz48ijdbwk
         cluster_id: us-central1
         release_name: N/A
         airflow_version: 2.6.3
@@ -78,7 +78,7 @@ deployment:
         status: CREATING
         created_at: 2023-07-21T08:40:02.531Z
         updated_at: 2023-07-21T08:40:02.532Z
-        deployment_url:
+        deployment_url: clskyu7fk000108lagyc10fya.<domain-name>
         webserver_url:
         workload_identity:
 ```
@@ -108,12 +108,12 @@ deployment:
         executor: CELERY
         scheduler_au: 5
         scheduler_count: 1
-        cluster_name:
-        workspace_name:
+        cluster_name: demo-cluster
+        workspace_name: demo-workspace
         deployment_type: HYBRID
         cloud_provider: "aws"
         region: "us-west-2"
-				default_worker_type: m5.xlarge ## default_worker_type only exist when executor is KUBERNETES
+				default_worker_type: m5.xlarge ## default_worker_type only exists when executor is KUBERNETES
     worker_queues: ## worker_queues is only used when executor is CELERY
         - name: default
           max_worker_count: 10
@@ -121,19 +121,20 @@ deployment:
           worker_concurrency: 16
           worker_type: m5.xlarge
     metadata:
-        deployment_id:
-        workspace_id:
-        cluster_id:
-        release_name:
+        deployment_id: clskxpb35000008l69kzp5psq
+        workspace_id: clskytztd000008lad0i5c993
+        cluster_id: clskyu7fk000108lagyc10fya
+        release_name: clskyy4h8000208jz60olha0w-release
         airflow_version: 2.8.1
         current_tag: 10.3.0
         status: HEALTHY
         created_at: 2024-02-09T20:38:11.749Z
         updated_at: 2024-02-09T20:38:11.749Z
-        deployment_url:
+        deployment_url: cloud.astronomer.io/clskytztd000008lad0i5c993/deployments/clskxpb35000008l69kzp5psq/overview
         webserver_url:
-        workload_identity:
+        workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
 		alert_emails:
+      - clskz1jo1000408jz4w8wan2q@astronomer.io
 ```
 
 
