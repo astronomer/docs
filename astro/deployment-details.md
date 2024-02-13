@@ -55,7 +55,7 @@ You can also update your Workspace so that any new Deployments in the Workspace 
 
 :::info
 
-When CI/CD enforcement is enabled for a Deployment, you cannot enable or disable [DAG-only deploys](deploy-dags.md) for the Deployment.
+When CI/CD enforcement is enabled for a Deployment, you cannot enable or disable [DAG-only deploys](deploy-dags.md) for the Deployment. For new Deployments on Astro Hosted, DAG-only deploys are enabled by default and you only need to complete these steps if you want to disable the feature.
 
 To enable or disable DAG-only deploys when CI/CD enforcement is turned on:
 
