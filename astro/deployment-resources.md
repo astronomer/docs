@@ -116,7 +116,7 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI,
 </TabItem>
 <TabItem value="deployment-file">
 
-If you manage your Deployments as code, and automate creating Deployments by using a [Deployment file](deployment-config-reference.md) configuration, use the following fields to customize your Kubernetes pod resources.
+If you manage your Deployments as code, and automate creating Deployments by using a [Deployment file](deployment-file-reference.md) configuration, use the following fields to customize your Kubernetes pod resources.
 
 1. Add the following fields to the `deployment.configuration` of your Deployment file. The following example shows the configuration with
 
