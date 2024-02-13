@@ -132,6 +132,7 @@ configuration:
 2. Save your configuration file and deploy your code changes.
 
 </TabItem>
+</Tabs>
 
 After you change the Pod size, wait for a couple of minutes before running your tasks to allow Astro to apply the changes to your Pod's ConfigMap.
 
