@@ -29,8 +29,10 @@ In this guide you'll learn:
 
 - How to use the `@task.virtualenv` decorator / PythonVirtualEnvOperator.
 - How to use the `@task.external_python` decorator / ExternalPythonOperator.
-- Basic use of the `@task.kubernetes` decorator / KubernetesPodOperator. To learn about the `@task.kubernetes` decorator and the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md).
+- Basic use of the `@task.kubernetes` decorator / KubernetesPodOperator. To learn more about the `@task.kubernetes` decorator and the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
 - Execute conditional task logic in a virtual environment with virtual branching operators.
+- How to use some Airflow context variables in isolated environments.
+- How to use Airflow variables in isolated environments.
 
 To learn more about the IsolatedOperator, see the [Isolation provider README](https://github.com/astronomer/apache-airflow-providers-isolation).
 
