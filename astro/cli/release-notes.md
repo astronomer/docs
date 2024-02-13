@@ -53,10 +53,10 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 - Inputs for `deployment_type` are now `STANDARD`, `DEDICATED`, and `HYBRID`. This input is not case sensitive
 - Inputs for the `executor` field are now `CELERY` and `KUBERNETES` are the new inputs for the executor field. `CeleryExecutor` and `KubernetesExecutor` still work, but cause deprecation notices. This input is not case sensitive, so, for example, `celeryexecutor` still works.
 
-</HostedBadge>
+<HostedBadge/>
 - `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Hosted deployments.
 
-</HybridBadge>
+</HybridBadge/>
 - `default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
 
 ### Other changes
