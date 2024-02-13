@@ -39,10 +39,9 @@ In addition to alert emails for your Deployments, Astronomer recommends configur
 
 ## Enforce CI/CD deploys
 
-By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment:
+By default, any user can deploy code either directly from the Astro CLI or from a CI/CD process that is authenticated with an API token. To help your team protect production environments from manual code deploys that circumvent your organization's CI/CD processes and checks, you can configure a Deployment so that users can't deploy code manually using the Astro CLI. 
 
-- The Deployment accepts code deploys only if the deploys are triggered with a Deployment API token, Workspace API token, or Organization API token.
-- You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
+After you enable CI/CD enforcement on a Deployment, the Deployment accepts a deploy only if the deploy is authenticated using a Deployment API token, Workspace API token, or Organization API token. Astronomer recommends enabling this setting for all production environments.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -53,6 +52,20 @@ By default, Deployments accept code deploys from any authenticated source. When 
 3. In the **Advanced** section, find **CI/CD Enforcement** and click the toggle to **On**.
 
 You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
+
+:::info
+
+When CI/CD enforcement is enabled for a Deployment, you cannot enable or disable [DAG-only deploys](deploy-dags.md) for the Deployment.
+
+To enable or disable DAG-only deploys when CI/CD enforcement is turned on:
+
+1. Turn **CI/CD Enforcement** to **Off**.
+2. Enable or disable the DAG-only deploy feature. See [Enable or disable DAG-only deploys](deploy-dags.md#enable-or-disable-dag-only-deploys).
+3. Turn **CI/CD Enforcememt** back to **On**.
+
+You have to only complete these steps once. Once the DAG-only deploy feature is enabled or disabled, you can turn CI/CD enforcement on or off at any time.
+
+:::
 
 ## Delete a Deployment
 
