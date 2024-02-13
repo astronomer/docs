@@ -517,6 +517,8 @@ my_isolated_task = PythonVirtualenvOperator(
     },
 )
 ```
+</TabItem>
+</Tabs>
 
 ## Use Airflow packages in isolated environments
 
