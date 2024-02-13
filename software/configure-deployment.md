@@ -255,7 +255,9 @@ You can programmatically create or update Deployments with all possible configur
 
 ## Clean Deployment task metadata
 
-You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) for all of your Deployments and exports the results for each Deployment as a file to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. 
+You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) for all of your Deployments and exports the results for each Deployment as a file to your external storage service. The plugin executes the cleanup from the `webserver` pod. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. 
+
+> Note: the plugin `airflow-dbcleanup-plugin` v1.0.1 already exists in Runtime version 8.0.0 and above. Step 1. can be skipped.
 
 1. For each of your Deployments, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
 
@@ -263,9 +265,12 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
-2. Configure an Airflow connection to your external storage service in JSON or URI format so that it can be stored as an environment variable. You must use a service account to authenticate to your service. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection.
-3. Store the connection environment variable as a Kubernetes Secret on your Astronomer cluster. See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret).
-4. Add the following configuration to your `config.yaml` file and change the default values as needed.
+2. Configure the credentials for the external storage service so that the deployment webserver pod can export the log file of cleanup plugin in JSON or URI Format. You can use the credential for the external storage service using environment variables. 
+The credentials can be stored using one of two methods:
+- `Airflow Connections` (See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection)
+- `Kubernetes Secrets` ( See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) to configure via kibernetes secrets.). The secret can be created in `astronomer` namespace for global configuration. To pass the secret to all the deployments annotate the secret `kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"`.
+
+3. Add the following configuration to your `config.yaml` file and change the default values as needed.
    
     ```yaml
     houston:
@@ -301,4 +306,16 @@ You can run a cron job to automatically archive task and DAG metadata from your 
         tables: ""
     ```
 
-5. Push the configuration change. See [Apply a config change](apply-platform-config.md).
+4. Push the configuration change. See [Apply a config change](apply-platform-config.md).
+
+:::info
+
+The `dryRun` only prints the set of information that will be modified in the serial output of the webserver pod and does not export the detailed logs in a file to the external storage service. To view the dryRun events of the cleanup, check the webserver pod logs for each individual deployment.
+
+:::
+
+:::danger
+
+Warning: This cleanup removes information that is created before days specified in `olderThan` variable and will clean up even if the information is actively required by running dags and tasks.
+
+:::
