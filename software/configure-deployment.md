@@ -255,7 +255,7 @@ You can programmatically create or update Deployments with all possible configur
 
 ## Clean Deployment task metadata
 
-You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) for all of your Deployments and exports the results for each Deployment as a file to your external storage service. The plugin executes the cleanup from the `webserver` pod. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. 
+You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) programmatically for all of your Deployments and exports the results for each Deployment as a file to your external storage service. The plugin executes the cleanup from the `webserver` pod. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. 
 
 > Note: the plugin `airflow-dbcleanup-plugin` v1.0.1 already exists in Runtime version 8.0.0 and above. Step 1. can be skipped.
 
@@ -265,7 +265,7 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
-2. Configure the credentials for the external storage service so that the deployment webserver pod can export the log file of cleanup plugin in JSON or URI Format. You can use the credential for the external storage service using environment variables. 
+2. Configure the credentials for the external storage service so that webserver pod can export the log file of cleanup plugin in JSON or URI Format. You can use the credential for the external storage service using environment variables. 
 The credentials can be stored using one of two methods:
 - `Airflow Connections` (See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection)
 - `Kubernetes Secrets` ( See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) to configure via kibernetes secrets.). The secret can be created in `astronomer` namespace for global configuration. To pass the secret to all the deployments annotate the secret `kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"`.
