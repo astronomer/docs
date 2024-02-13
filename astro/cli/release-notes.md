@@ -56,7 +56,7 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 <HostedBadge/>
 - `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Hosted deployments.
 
-</HybridBadge/>
+<HybridBadge/>
 - `default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
 
 ### Other changes
