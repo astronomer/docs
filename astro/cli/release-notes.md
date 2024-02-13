@@ -22,28 +22,30 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 Release date: February 14, 2024
 
-### New fields to update Kubernetes worker types, CPU, and memory
-
-You can now use the new `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker-queue.
-
-With this new functionality, you can't use the following commands to change your Kubernetes worker configuration:
-
-* `astro deployment create --from-file`
-* `astro deployment update --from-file`
-* `astro deployment worker-queue create`
-* `astro deployment worker-queue update`
-
 ### Changes to existing CLI command flags
 
 These flags have been updated, but will continue to work with a deprecation notice.
 
-- `astro deployment logs --key-word` ia a new that allows you to search your Audit logs for an exact key word or phrase.
-- `astro deployment create --cluster-type` is now `astro deployment create --type`
-- `astro deployment create --enforce-cicd` is now `astro deployment create --cicd-enforcement`
+- `astro deployment logs --key-word` ia a new flag that allows you to search your Audit logs for an exact key word or phrase.
+- `astro deployment create --cluster-type` is now `astro deployment create --type`.
+- `astro deployment create --enforce-cicd` is now `astro deployment create --cicd-enforcement`.
 
-### Changes to Deployment file configurations
+### New fields to update Kubernetes worker types, CPU, and memory
 
 If you use a [Deployment file](deployment-file-reference.md) to manage your Deployments as code, there are some new and changed fields.
+
+You can now use the new `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
+
+With this new functionality, you can't use the following commands to change your Kubernetes worker configuration if you've configured your Deployment file:
+
+- `astro deployment create --from-file`
+- `astro deployment update --from-file`
+- `astro deployment worker-queue create`
+- `astro deployment worker-queue update`
+
+Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memory`, `--resource-quota-cpu`, or `--resource-quota-memory` flags with [`astro deployment create`](astro-deployment-create.md) and [`astro deployment update`](astro-deployment-update.md) to edit your Kubernetes worker configuration.
+
+### Changes to Deployment file configurations
 
 - `cluster_name` is not used for standard deployments.
 - Inputs for `scheduler_size` are case insensitive.
