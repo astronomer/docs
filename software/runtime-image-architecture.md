@@ -5,7 +5,7 @@ id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
 ---
 
-import RuntimeImageArchitecture from '../_runtime-image-architecture.mdx';
+import RuntimeImageArchitecture from '../runtime-image-architecture.mdx';
 
 <RuntimeImageArchitecture product="Software" />
 
