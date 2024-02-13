@@ -299,7 +299,7 @@ The Python version can be referenced directly using the `python` parameter of th
 
 <Tabs
     defaultValue="taskflow"
-    groupId="as_setup-and-as_teardown-methods"
+    groupId="task.virtualenv-decorator-pythonvirtualenvoperator"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -524,7 +524,7 @@ Due to compatibility issues, other objects from the context such as `ti` cannot 
 
 <Tabs
     defaultValue="taskflow-epo"
-    groupId="context-variables-in-isolated-environments"
+    groupId="use-airflow-context-variables-in-isolated-environments"
     values={[
         {label: '@task.external_python', value: 'taskflow-epo'},
         {label: 'ExternalPythonOperator', value: 'traditional-epo'},
