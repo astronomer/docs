@@ -19,7 +19,7 @@ It is common to require isolated environments for specific Airflow tasks, for ex
 
 In Airflow you have several options to isolate tasks, you can your custom Python code in:
 
-- A newly created virtual environment with the [`@task.virtualenv` decorator / PythonVirtualEnvOperator (PVEO)](#taskvirtualenv-decorator--pythonvirtualenvoperator).
+- A newly created virtual environment with the [`@task.virtualenv` decorator / PythonVirtualenvOperator (PVEO)](#taskvirtualenv-decorator--pythonvirtualenvoperator).
 - An existing virtual environment with the [`@task.external_python` decorator / ExternalPythonOperator (EPO)](#taskexternal_python-decorator--externalpythonoperator). 
 - A dedicated Kubernetes pod with the [`@task.kubernetes` decorator / KubernetesPodOperator (KPO)](#taskkubernetes-decorator--kubernetespodoperator).
 
@@ -27,7 +27,7 @@ Additionally, you can run most traditional operators inside a dedicated Kubernet
 
 In this guide you'll learn:
 
-- How to use the `@task.virtualenv` decorator / PythonVirtualEnvOperator.
+- How to use the `@task.virtualenv` decorator / PythonVirtualenvOperator.
 - How to use the `@task.external_python` decorator / ExternalPythonOperator.
 - Basic use of the `@task.kubernetes` decorator / KubernetesPodOperator. To learn more about the `@task.kubernetes` decorator and the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
 - Execute conditional task logic in a virtual environment with virtual branching operators.
@@ -84,7 +84,7 @@ Common limitations include:
 
 - You [cannot pass all Airflow context variables](https://airflow.apache.org/docs/apache-airflow/latest/howto/operator/python.html#id1) to a virtual decorator, since Airflow does not support serializing `var`, `ti` and `task_instance` objects. See, [Use Airflow context variables in isolated environments](#use-airflow-context-variables-in-isolated-environments) 
 - You do not have access to your [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) from within the isolated environment. To access your secrets consider passing them in through [Jinja templating](templating.md). See, [Use Airflow variables in isolated environments](#use-airflow-variables-in-isolated-environments).
-- Installing Airflow itself and Airflow provider packages in the environment provided to the `@task.external_python` decorator or the ExternalPythonOperator can lead to unexpected behavior. If you need to use Airflow and Airflow providers module inside your virtual environment, Astronomer recommends to choose the `@task.virtualenv` decorator or the PythonVirtualEnvOperator instead. See, [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+- Installing Airflow itself and Airflow provider packages in the environment provided to the `@task.external_python` decorator or the ExternalPythonOperator can lead to unexpected behavior. If you need to use Airflow and Airflow providers module inside your virtual environment, Astronomer recommends to choose the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead. See, [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
 
 ## Choosing an isolated environment option
 
@@ -103,7 +103,7 @@ A Python virtual environment is easier to set up since it does not require a Doc
 If you want to run your code in a Python virtual environment, you have 2 options:
 
 - To run your code in an **existing virtual environment**, use the `@task.external_python` decorator or the ExternalPythonOperator (EPO). This is a good option if you want to reuse a virtual environment in multiple tasks, the environment is created at build time, which speeds up the task execution. Astronomer 
-- To run your code in a **newly created virtual environment**, use the `@task.virtualenv` decorator or the PythonVirtualEnvOperator (PVEO). This is a good option if you want the virtual environment to be created at Runtime instead of build time. The environment can be cached by providing a `venv_cache_path`.
+- To run your code in a **newly created virtual environment**, use the `@task.virtualenv` decorator or the PythonVirtualenvOperator (PVEO). This is a good option if you want the virtual environment to be created at Runtime instead of build time. The environment can be cached by providing a `venv_cache_path`.
 
 Astronomer recommends to use the decorator versions over the operators, as they simplify handling of [XCom](airflow-passing-data-between-tasks.md).
 
@@ -211,7 +211,7 @@ Note that Jinja templates will be rendered as strings unless you set `render_tem
 
 To get a list of all parameters of the `@task.external_python` decorator /  ExternalPythonOperator, see the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/ExternalPythonOperator).
 
-## `@task.virtualenv` decorator / PythonVirtualEnvOperator
+## `@task.virtualenv` decorator / PythonVirtualenvOperator
 
 To use the `@task.virtualenv` decorator or the PythonVirtualenvOperator to create a virtual environment with the same Python version as your Airflow environment but potentially conflicting packages, you do not need to create a Python binary up front. The decorator/operator will create a virtual environment for you at runtime.
 
@@ -220,9 +220,9 @@ To use the `@task.virtualenv` decorator or the PythonVirtualenvOperator to creat
     groupId="task.virtualenv-decorator-pythonvirtualenvoperator"
     values={[
         {label: '@task.virtualenv simple', value: 'taskflow'},
-        {label: 'PythonVirtualEnvOperator simple', value: 'traditional'},
+        {label: 'PythonVirtualenvOperator simple', value: 'traditional'},
         {label: '@task.virtualenv with XCom', value: 'taskflow-xcom'},
-        {label: 'PythonVirtualEnvOperator with XCom', value: 'traditional-xcom'},
+        {label: 'PythonVirtualenvOperator with XCom', value: 'traditional-xcom'},
     ]}>
 <TabItem value="taskflow">
 
@@ -613,8 +613,8 @@ Using Airflow packages inside of isolated environments can lead to unexpected be
 
 :::
 
-If you need to use Airflow and Airflow providers module inside your virtual environment, use the `@task.virtualenv` decorator or the PythonVirtualEnvOperator instead of the `@task.external_python` decorator or the ExternalPythonOperator.
-As of Airflow 2.8 you can cache the virtual environment for reuse by providing a `venv_cache_path` to the `@task.virtualenv` decorator / PythonVirtualEnvOperator to speed up subsequent runs of your task.
+If you need to use Airflow and Airflow providers module inside your virtual environment, use the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead of the `@task.external_python` decorator or the ExternalPythonOperator.
+As of Airflow 2.8 you can cache the virtual environment for reuse by providing a `venv_cache_path` to the `@task.virtualenv` decorator / PythonVirtualenvOperator to speed up subsequent runs of your task.
 
 <Tabs
     defaultValue="taskflow"
