@@ -95,7 +95,6 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
     ```
 
 - Astronomer Software now redeploys your Deployment when you switch your executor type.
-- You can now define a [storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/) for NFS-based Deployments.
 
 ### Bug fixes
 
