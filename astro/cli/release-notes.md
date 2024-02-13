@@ -48,10 +48,10 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 ### Changes to Deployment file configurations
 
 - `cluster_name` is not used for standard deployments.
-- Inputs for `scheduler_size` are case insensitive.
-- Inputs for `cloud_provider` are `gcp`, `aws`, and `azure`. This input is not case sensitive
+- Inputs for `scheduler_size` are not case sensitive.
+- Inputs for `cloud_provider` are `gcp`, `aws`, and `azure`. This input is not case sensitive.
 - Inputs for `deployment_type` are now `STANDARD`, `DEDICATED`, and `HYBRID`. This input is not case sensitive
-- Inputs for the `executor` field are now `CELERY` and `KUBERNETES` are the new inputs for the executor field. `CeleryExecutor` and `KubernetesExecutor` still work, but cause deprecation notices. This input is not case sensitive, so `celeryexecutor` still works.
+- Inputs for the `executor` field are now `CELERY` and `KUBERNETES` are the new inputs for the executor field. `CeleryExecutor` and `KubernetesExecutor` still work, but cause deprecation notices. This input is not case sensitive, so, for example, `celeryexecutor` still works.
 
 </HostedBadge>
 - `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Hosted deployments.
@@ -61,7 +61,7 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 
 ### Other changes
 
-- The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement or if you have the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables set.
+- The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement. Or, it also does not auto-select a Deployment if you have the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables set.
 
 ## Astro CLI 1.22.0
 
