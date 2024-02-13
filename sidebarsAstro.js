@@ -317,10 +317,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Use cases',
+      label: 'Best practices',
       items: [
-        'use-cases/connections-branch-deploys',
-        'use-cases/airflow-vs-astro-alerts'
+        'best-practices/connections-branch-deploys',
+        'best-practices/airflow-vs-astro-alerts'
       ],
     },
     {
