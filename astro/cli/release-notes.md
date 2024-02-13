@@ -23,7 +23,7 @@ Release date: February 14, 2024
 
 You can now use the new `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker-queue.
 
-With this new functionality, you can no longer change your Kubernetes worker configuration with the following commands:
+With this new functionality, you can't use the following commands to change your Kubernetes worker configuration:
 
 * `astro deployment create --from-file`
 * `astro deployment update --from-file`
@@ -32,13 +32,15 @@ With this new functionality, you can no longer change your Kubernetes worker con
 
 ### Changes to other existing flags
 
+These flags have been updated, but will continue to work with a deprecation notice.
+
 - `astro deployment logs --key-word`
 - `astro deployment create --cluster-type` is now `astro deployment create --type`
 - `astro deployment create --enforce-cicd` to `astro deployment create --cicd-enforcement`
 
 ### Other changes
 
-- The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement.
+- The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement or if you have the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables set.
 
 ## Astro CLI 1.22.0
 
