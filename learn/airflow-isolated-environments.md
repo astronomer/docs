@@ -362,6 +362,65 @@ To get a list of all parameters of the `@task.virtualenv` decorator / PythonVirt
 
 :::
 
+## `@task.kubernetes decorator` / KubernetesPodOperator
+
+To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need provide Docker image as well as have access to a Kubernetes cluster. The example below shows how to use the modules to run in a task in a separate Kubernetes pod inside the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="task.kubernetes-decorator-kubepodoperator"
+    values={[
+        {label: '@task.kubernetes', value: 'taskflow'},
+        {label: 'KubernetesPodOperator', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+    
+```python
+# from airflow.configuration import conf
+
+# if you are running Airflow on Kubernetes, you can get 
+# the current namespace from the Airflow conf
+namespace = conf.get("kubernetes", "NAMESPACE")
+
+@task.kubernetes(
+    image="<YOUR IMAGE>",
+    in_cluster=True,
+    namespace=namespace,
+    name="<YOUR POD NAME>",
+    get_logs=True,
+    log_events_on_failure=True,
+    do_xcom_push=True,
+)
+def my_isolated_task(num: int):
+    return num + 1
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+# from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
+# from airflow.configuration import conf
+
+# if you are running Airflow on Kubernetes, you can get 
+# the current namespace from the Airflow conf
+namespace = conf.get("kubernetes", "NAMESPACE")
+
+my_isolated_task = KubernetesPodOperator(
+    task_id="my_isolated_task",
+    namespace=namespace,
+    # your Docker image contains the scripts to run in the isolated environment  
+    image="<YOUR IMAGE>",
+    name="<YOUR POD NAME>",
+    in_cluster=True,
+    is_delete_operator_pod=True,
+    get_logs=True,
+)
+```
+</TabItem>
+</Tabs>
+
 ## Virtual branching decorators / operators
 
 To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators.
@@ -465,65 +524,6 @@ my_isolated_task = BranchPythonVirtualenvOperator(
     task_id="my_isolated_task",
     python_callable=my_isolated_function,
     requirements=["pandas==1.5.1"],
-)
-```
-</TabItem>
-</Tabs>
-
-## @task.kubernetes decorator / KubernetesPodOperator
-
-To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need provide Docker image as well as have access to a Kubernetes cluster. The example below shows how to use the modules to run in a task in a separate Kubernetes pod inside the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
-
-<Tabs
-    defaultValue="taskflow"
-    groupId="task.kubernetes-decorator-kubepodoperator"
-    values={[
-        {label: '@task.kubernetes', value: 'taskflow'},
-        {label: 'KubernetesPodOperator', value: 'traditional'},
-    ]}>
-
-<TabItem value="taskflow">
-    
-```python
-# from airflow.configuration import conf
-
-# if you are running Airflow on Kubernetes, you can get 
-# the current namespace from the Airflow conf
-namespace = conf.get("kubernetes", "NAMESPACE")
-
-@task.kubernetes(
-    image="<YOUR IMAGE>",
-    in_cluster=True,
-    namespace=namespace,
-    name="<YOUR POD NAME>",
-    get_logs=True,
-    log_events_on_failure=True,
-    do_xcom_push=True,
-)
-def my_isolated_task(num: int):
-    return num + 1
-```
-
-</TabItem>
-<TabItem value="traditional">
-
-```python
-# from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
-# from airflow.configuration import conf
-
-# if you are running Airflow on Kubernetes, you can get 
-# the current namespace from the Airflow conf
-namespace = conf.get("kubernetes", "NAMESPACE")
-
-my_isolated_task = KubernetesPodOperator(
-    task_id="my_isolated_task",
-    namespace=namespace,
-    # your Docker image contains the scripts to run in the isolated environment  
-    image="<YOUR IMAGE>",
-    name="<YOUR POD NAME>",
-    in_cluster=True,
-    is_delete_operator_pod=True,
-    get_logs=True,
 )
 ```
 </TabItem>
