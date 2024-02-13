@@ -67,20 +67,7 @@ deployment:
           worker_concurrency: 5
           worker_type: A5
 		alert_emails:
-        - test-email@testdomain.io
-    metadata:
-        deployment_id: clskyu7fk000108lagyc10fya
-        workspace_id: clskyv2hr000008jz48ijdbwk
-        cluster_id: us-central1
-        release_name: N/A
-        airflow_version: 2.6.3
-        current_tag: 8.7.0
-        status: CREATING
-        created_at: 2023-07-21T08:40:02.531Z
-        updated_at: 2023-07-21T08:40:02.532Z
-        deployment_url: clskyu7fk000108lagyc10fya.<domain-name>
-        webserver_url:
-        workload_identity:
+        - test-emailclskz4wu5000508jz4gm25q5j@testdomain.io
 ```
 </TabItem>
 <TabItem value="hybrid">
@@ -131,7 +118,7 @@ deployment:
         created_at: 2024-02-09T20:38:11.749Z
         updated_at: 2024-02-09T20:38:11.749Z
         deployment_url: cloud.astronomer.io/clskytztd000008lad0i5c993/deployments/clskxpb35000008l69kzp5psq/overview
-        webserver_url:
+        webserver_url: testing.astronomer.run/
         workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
 		alert_emails:
       - clskz1jo1000408jz4w8wan2q@astronomer.io
