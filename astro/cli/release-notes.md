@@ -54,15 +54,12 @@ The following changes have been made to the format of [Deployment files](deploym
 - Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
 - Possible values for `deployment_type` are now `standard`, `dedicated`, and `hybrid`. This input is not case sensitive
 - Possible values for for the `executor` field are now `celery` and `kubernetes`. `CeleryExecutor` and `KubernetesExecutor` still work, but they cause deprecation notices. This input is not case sensitive, so, for example, `celeryexecutor` still works.
-
-<HostedBadge/>
 - (_Astro Hosted only_) `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Astro Hosted deployments.
-
-<HybridBadge/>
-- `default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
+- (_Astro Hybrid only_)`default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
 
 ### Additional improvements
 
+- `astro deployment logs --key-word` is a new flag that allows you to search your audit logs for an exact key word or phrase.
 - The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement. Or, it also does not auto-select a Deployment if you have the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables set.
 
 ## Astro CLI 1.22.0
