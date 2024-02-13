@@ -5,6 +5,9 @@ id: deployment-resources
 description: "Configure your Deployment resource settings to optimze Deployment performance."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Your Deployment resources are the computational resources Astro uses to run Airflow in the cloud. Update Deployment resource settings to optimize performance and reduce the cost of running Airflow in the cloud.
 
 ## Update Airflow configurations
@@ -44,7 +47,17 @@ See [Configure an executor](executors-overview.md) for more information about ea
 
 The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure Pods in your DAG code to define individual task environments, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected.
 
-Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
+Set safeguards by configuring default Pod limits and requests from the Cloud UI, through the Astro CLI, or with a Deployment configuration. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
+
+<Tabs
+    groupId= "create-a-cluster"
+    values={[
+        {label: 'Cloud UI', value: 'cloud-ui'},
+        {label: 'Astro CLI', value: 'astro-cli'},
+        {label: 'Deployment file', value: 'deployment-file'},
+    ]}>
+
+<TabItem value="cloud-ui">
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -68,6 +81,57 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
      :::
 
 4. Click **Update Deployment**.
+</TabItem>
+<TabItem value="astro-cli">
+
+1. Authenticate to Astro on the CLI.
+    ```bash
+    astro login astronomer.io
+    ```
+2. Configure the default task pod resources for your Deployment.
+    - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment.
+    ```bash
+    astro deployment create --resource-quota-cpu "10"
+    ```
+    - **Memory Quota**: The maximum combined memory usage across all running Pods on your Deployment.
+    ```bash
+    astro deployment create --resource-quota-memory 20Gi
+    ```
+    - **Default Pod Size**:
+        - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
+            ```bash
+            astro deployment create --default-task-pod-cpu "0.25"
+            ```
+        - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
+            ```bash
+            astro deployment create --default-task-pod-memory 0.5Gi
+            ```
+     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
+
+     :::warning Astro Hosted
+
+     For Astro Hosted environments, if you set resource requests to be less than the maximum limit, Astro automatically requests the maximum limit that you set. This means that you might consume more resources than you expected if you set the limit much higher than the resource request you need. Check your [Billing and usage](manage-billing.md) to view your resource use and associated charges.
+
+     :::
+</TabItem>
+<TabItem value="deployment-file">
+
+If you manage your Deployments as code, and automate creating Deployments by using a [Deployment file](deployment-config-reference.md) configuration, use the following fields to customize your Kubernetes pod resources.
+
+1. Add the following fields to the `deployment.configuration` of your Deployment file. The following example shows the configuration with
+
+```yaml
+configuration:
+    executor: KUBERNETES
+        default_task_pod_cpu: "0.25"
+        default_task_pod_memory: 0.5Gi
+        resource_quota_cpu: "10"
+        resource_quota_memory: 20Gi
+```
+
+2. Save your configuration file and deploy your code changes.
+
+</TabItem>
 
 After you change the Pod size, wait for a couple of minutes before running your tasks to allow Astro to apply the changes to your Pod's ConfigMap.
 
