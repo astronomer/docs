@@ -172,7 +172,7 @@ To complete this setup:
 1. Host an updates JSON in a Kubernetes configmap by running the following commands:
 
     ```bash
-    $ curl -L https://updates.astronomer.io/astronomer-runtime --output astronomer-certified.json
+    $ curl -L https://updates.astronomer.io/astronomer-certified --output astronomer-certified.json
     $ curl -L https://updates.astronomer.io/astronomer-runtime --output astronomer-runtime.json
     $ kubectl create configmap astronomer-certified --from-file=astronomer-certified.json=./astronomer-certified.json -n astronomer
     $ kubectl create configmap astronomer-runtime --from-file=astronomer-runtime.json=./astronomer-runtime.json -n astronomer
