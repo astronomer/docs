@@ -21,7 +21,7 @@ This document describes how to configure individual task Pods for different use 
 
 :::caution
 
-If you use the Kubernetes executor on Astro, you can't change the [PYTHONPATH](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/modules_management.html) of your Astro project from its default value. If you do, the Kubernetes executor is unable to read `airflow_local_settings.py` and fails to start up new Pods.
+If you use the Kubernetes executor on Astro, you can't change the [PYTHONPATH](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/modules_management.html) of your Astro project from its default value. If you do, the Kubernetes executor will be unable to read `airflow_local_settings.py` and will fail to start up new Pods.
 
 :::
 
