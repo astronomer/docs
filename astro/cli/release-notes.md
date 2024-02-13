@@ -24,7 +24,7 @@ Release date: February 14, 2024
 
 ### Changes to existing CLI command flags
 
-The following flags have been updated, but will continue to work with a deprecation notice until the next major release of the Astro CLI:
+The following flags have been updated, but will continue to work with a deprecation notice until the v1.25.0 release of the Astro CLI:
 
 - `astro deployment logs --key-word` ia a new flag that allows you to search your Audit logs for an exact key word or phrase.
 - `astro deployment create --cluster-type` is now `astro deployment create --type`.
@@ -36,7 +36,7 @@ The following flags have been updated, but will continue to work with a deprecat
 
 You now use the `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
 
-With this new functionality, you can't use the following commands to change your Kubernetes worker configuration if you've configured your Deployment file:
+With this new functionality, the following commands to update a Deployment running the Kubernetes executor continue to work, but display a deprecation notice:
 
 - `astro deployment create --from-file`
 - `astro deployment update --from-file`
@@ -52,8 +52,8 @@ The following changes have been made to the format of [Deployment files](deploym
 - `cluster_name` is no longer used for standard Deployment files.
 - `scheduler_size` is no longer case sensitive.
 - Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
-- Possible values for `deployment_type` are now `standard`, `dedicated`, and `hybrid`. This input is not case sensitive
-- Possible values for for the `executor` field are now `celery` and `kubernetes`. `CeleryExecutor` and `KubernetesExecutor` still work, but they cause deprecation notices. This input is not case sensitive, so, for example, `celeryexecutor` still works.
+- Possible values for `deployment_type` now include `standard`, `dedicated`, and `hybrid` in addition to the existing values of `hosted_shared`, `hosted_dedicated`, and `hosted_standard`. This input is not case sensitive
+- Possible values for for the `executor` field are now include `celery` and `kubernetes`. `CeleryExecutor` and `KubernetesExecutor` still work. This input is not case sensitive, so, for example, `celeryexecutor` still works.
 - (_Astro Hosted only_) `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Astro Hosted deployments.
 - (_Astro Hybrid only_)`default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
 

@@ -46,7 +46,7 @@ When you filter logs using the command flags `--error`, `--warn`, `--info`, and 
 | `-w`,`--warn`       | Show only logs with a log level of `WARNING`                                             | None |
 | `-i`,`--info`       | Show only logs with a log level of `INFO`                                                | None |
 | `--key-word`        | Search the Deployment logs for a specific keyword.                                       | None |
-| `-c`,`--log-count`  | The number of log lines to show. The default is `500`                                    | Any integer less than or equal to 500                                                     |
+| `-c`,`--log-count`  | The number of log lines to show. The default is `500`                                    | Any integer. If you request a number of log lines to show that exceeds the total number of logs, then it shows all existing logs.                                                     |
 | `--workspace-id`    | Specify a Workspace to show logs for a Deployment outside of your current Workspace      | Any valid Workspace ID                                                                      |
 
 ## Examples

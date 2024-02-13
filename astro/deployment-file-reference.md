@@ -114,7 +114,7 @@ deployment:
         cloud_provider: "aws"
         region: "us-west-2"
 				default_worker_type: m5.xlarge ## default_worker_type only exist when executor is KUBERNETES
-    worker_queues: ## worker_queues is only when executor is CELERY now
+    worker_queues: ## worker_queues is only used when executor is CELERY
         - name: default
           max_worker_count: 10
           min_worker_count: 0
