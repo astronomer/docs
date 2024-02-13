@@ -720,3 +720,5 @@ my_isolated_task = ExternalPythonOperator(
     },
 )
 ```
+</TabItem>
+</Tabs>
