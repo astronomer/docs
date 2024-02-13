@@ -5,6 +5,9 @@ id: release-notes
 description: "A record of the latest Astro command-line interface (CLI) features and bug fixes."
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
+
 <p>
     <a href="/astro-cli-release-notes.xml" target="_blank">
         <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
@@ -30,13 +33,29 @@ With this new functionality, you can't use the following commands to change your
 * `astro deployment worker-queue create`
 * `astro deployment worker-queue update`
 
-### Changes to other existing flags
+### Changes to existing CLI command flags
 
 These flags have been updated, but will continue to work with a deprecation notice.
 
-- `astro deployment logs --key-word`
+- `astro deployment logs --key-word` ia a new that allows you to search your Audit logs for an exact key word or phrase.
 - `astro deployment create --cluster-type` is now `astro deployment create --type`
-- `astro deployment create --enforce-cicd` to `astro deployment create --cicd-enforcement`
+- `astro deployment create --enforce-cicd` is now `astro deployment create --cicd-enforcement`
+
+### Changes to Deployment file configurations
+
+If you use a [Deployment file](deployment-file-reference.md) to manage your Deployments as code, there are some new and changed fields.
+
+- `cluster_name` is not used for standard deployments.
+- Inputs for `scheduler_size` are case insensitive.
+- Inputs for `cloud_provider` are `gcp`, `aws`, and `azure`. This input is not case sensitive
+- Inputs for `deployment_type` are now `STANDARD`, `DEDICATED`, and `HYBRID`. This input is not case sensitive
+- Inputs for the `executor` field are now `CELERY` and `KUBERNETES` are the new inputs for the executor field. `CeleryExecutor` and `KubernetesExecutor` still work, but cause deprecation notices. This input is not case sensitive, so `celeryexecutor` still works.
+
+</HostedBadge>
+- `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Hosted deployments.
+
+</HybridBadge>
+- `default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
 
 ### Other changes
 

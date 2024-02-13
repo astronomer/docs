@@ -15,7 +15,7 @@ Use this document as a reference for all fields in both Deployment files and Dep
 
 ## Deployment file example
 
-The following is an example Deployment file that includes all possible key-value pairs:
+The following is an example Deployment file that includes all possible key-value pairs for Astro Hosted:
 
 ```yaml
 deployment:
@@ -29,27 +29,31 @@ deployment:
           updated_at: "2023-06-22T14:02:27.892Z"
           value: ""
     configuration:
-        name: test
+        name: test-standard
         description: ""
-        runtime_version: 8.7.0
-        dag_deploy_enabled: false
+        runtime_version: 10.3.0
+        dag_deploy_enabled: true
         ci_cd_enforcement: false
-        scheduler_size: small
+        scheduler_size: SMALL
         is_high_availability: false
-        executor: CeleryExecutor
-        scheduler_au: 10
-        scheduler_count: 1
-        cluster_name: us-central1
+        executor: CELERY
+        cluster_name: "" ## Only used when deployment_type is DEDICATED
         workspace_name: least-permission
-        deployment_type: HOSTED_SHARED
+        deployment_type: STANDARD
         cloud_provider: gcp
-        region: us-central1
-    worker_queues:
+        region: us-east4
+        default_task_pod_cpu: "0.25" ## new field
+        default_task_pod_memory: 0.5Gi ## new field
+        resource_quota_cpu: "10" ## new field
+        resource_quota_memory: 20Gi ## new field
+    worker_queues: ## worker_queues only used when executor is CELERY
         - name: default
           max_worker_count: 10
           min_worker_count: 0
           worker_concurrency: 5
-          worker_type: a5
+          worker_type: A5
+		alert_emails:
+        - test-email@testdomain.io
     metadata:
         deployment_id: clkcbz5d01458926ewbjzubt3fx
         workspace_id: clk7zoqbf00f901hka4c66q2d
@@ -101,13 +105,12 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use celery executor. This section is not applicable to Deployments that use Kubernetes executor.
+The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use Celery executor. This section is not applicable to Deployments that use Kubernetes executor.
 
 If you don't enter specific values for the `default` worker queue for a Deployment, Astro uses default values based on the worker types available on your cluster. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI uses default values for any other unspecified fields.
-
 
 ### Other fields
 
 - `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid.
 - `deployment_type` can be `HOSTED_SHARED` or `HOSTED_DEDICATED` for Astro Hosted depending on your [cluster type](cli/astro-deployment-create.md#options). Use `HOSTED_SHARED` for standard clusters and `HOSTED_DEDICATED` for dedicated clusters. For Astro Hybrid, the only option is `HYBRID`.
-- `cluster_name` is be the region name for Hosted standard clusters. For Astro Hybrid and Astro Hosted dedicated clusters, it's the name for the cluster that appears in the Cloud UI.
+- `cluster_name` is the name for the cluster that appears in the Cloud UI for Astro Hosted and Hybrid.
