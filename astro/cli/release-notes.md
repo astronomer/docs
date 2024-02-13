@@ -24,17 +24,17 @@ Release date: February 14, 2024
 
 ### Changes to existing CLI command flags
 
-These flags have been updated, but will continue to work with a deprecation notice.
+The following flags have been updated, but will continue to work with a deprecation notice until the next major release of the Astro CLI:
 
 - `astro deployment logs --key-word` ia a new flag that allows you to search your Audit logs for an exact key word or phrase.
 - `astro deployment create --cluster-type` is now `astro deployment create --type`.
 - `astro deployment create --enforce-cicd` is now `astro deployment create --cicd-enforcement`.
 
-### New fields to update Kubernetes worker types, CPU, and memory
+### Kubernetes worker configurations are now consistent with the Astro Cloud UI
 
-If you use a [Deployment file](deployment-file-reference.md) to manage your Deployments as code, there are some new and changed fields.
+[Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Cloud UI.
 
-You can now use the new `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
+You now use the `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
 
 With this new functionality, you can't use the following commands to change your Kubernetes worker configuration if you've configured your Deployment file:
 
@@ -47,19 +47,21 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 
 ### Changes to Deployment file configurations
 
-- `cluster_name` is not used for standard deployments.
-- Inputs for `scheduler_size` are not case sensitive.
-- Inputs for `cloud_provider` are `gcp`, `aws`, and `azure`. This input is not case sensitive.
-- Inputs for `deployment_type` are now `STANDARD`, `DEDICATED`, and `HYBRID`. This input is not case sensitive
-- Inputs for the `executor` field are now `CELERY` and `KUBERNETES` are the new inputs for the executor field. `CeleryExecutor` and `KubernetesExecutor` still work, but cause deprecation notices. This input is not case sensitive, so, for example, `celeryexecutor` still works.
+The following changes have been made to the format of [Deployment files](deployment-file-reference.md):
+
+- `cluster_name` is no longer used for standard Deployment files.
+- `scheduler_size` is no longer case sensitive.
+- Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
+- Possible values for `deployment_type` are now `standard`, `dedicated`, and `hybrid`. This input is not case sensitive
+- Possible values for for the `executor` field are now `celery` and `kubernetes`. `CeleryExecutor` and `KubernetesExecutor` still work, but they cause deprecation notices. This input is not case sensitive, so, for example, `celeryexecutor` still works.
 
 <HostedBadge/>
-- `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Hosted deployments.
+- (_Astro Hosted only_) `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Astro Hosted deployments.
 
 <HybridBadge/>
 - `default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
 
-### Other changes
+### Additional improvements
 
 - The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement. Or, it also does not auto-select a Deployment if you have the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables set.
 

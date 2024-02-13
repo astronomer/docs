@@ -43,7 +43,6 @@ By default, Deployments accept code deploys from any authenticated source. When 
 
 - The Deployment accepts code deploys only if the deploys are triggered with a Deployment API token, Workspace API token, or Organization API token.
 - You can't enable [DAG-only deploys](deploy-dags.md) for the Deployment.
-- Code auto-deploys to the specified Deployment if you do a manual code deploy with the CLI.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 

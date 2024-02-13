@@ -31,18 +31,22 @@ Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cl
 ```sh
 astro deployment logs
 ```
+:::info
 
+When you filter logs using the command flags `--error`, `--warn`, `--info`, and `--key-word`, you can specify only one filter flag per command.
+
+:::
 ## Options
 
 | Option              | Description                                                                              | Possible Values                                                                             |
 | ------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `<deployment-id>`   | The ID of the Deployment to show logs for                                                | Any valid Deployment ID                                                                     |
 | `--deployment-name` | The name of the Deployment to show logs for. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                                                   |
-| `-e`,`--error`      | Show only logs with a log level of `ERROR`                                               | You can only use one of the `--error`, `--warn`, `--info`, or `--key-word` flags at a time. |
-| `-w`,`--warn`       | Show only logs with a log level of `WARNING`                                             | You can only use one of the `--error`, `--warn`, `--info`, or `--key-word` flags at a time. |
-| `-i`,`--info`       | Show only logs with a log level of `INFO`                                                | You can only use one of the `--error`, `--warn`, `--info`, or `--key-word` flags at a time. |
-| `--key-word`        | Search the Deployment logs for a specific keyword.                                       | You can only use one of the `--error`, `--warn`, `--info`, or `--key-word` flags at a time. |
-| `-c`,`--log-count`  | The number of log lines to show. The default is `500`                                    | Any integer less than or equal to 500.                                                      |
+| `-e`,`--error`      | Show only logs with a log level of `ERROR`                                               | None |
+| `-w`,`--warn`       | Show only logs with a log level of `WARNING`                                             | None |
+| `-i`,`--info`       | Show only logs with a log level of `INFO`                                                | None |
+| `--key-word`        | Search the Deployment logs for a specific keyword.                                       | None |
+| `-c`,`--log-count`  | The number of log lines to show. The default is `500`                                    | Any integer less than or equal to 500                                                     |
 | `--workspace-id`    | Specify a Workspace to show logs for a Deployment outside of your current Workspace      | Any valid Workspace ID                                                                      |
 
 ## Examples
