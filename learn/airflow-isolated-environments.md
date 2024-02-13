@@ -146,10 +146,10 @@ After restarting your Airflow environment you can use this Python binary by refe
     defaultValue="taskflow"
     groupId="task.external_python-decorator-externalpythonoperator"
     values={[
-        {label: 'TaskFlow API simple', value: 'taskflow'},
-        {label: 'Traditional syntax simple', value: 'traditional'},
-        {label: 'TaskFlow API with XCom', value: 'taskflow-xcom'},
-        {label: 'Traditional syntax with XCom', value: 'traditional-xcom'},
+        {label: '@task.external_python simple', value: 'taskflow'},
+        {label: 'ExternalPythonOperator simple', value: 'traditional'},
+        {label: '@task.external_python with XCom', value: 'taskflow-xcom'},
+        {label: 'ExternalPythonOperator with XCom', value: 'traditional-xcom'},
     ]}>
 <TabItem value="taskflow">
 
@@ -219,10 +219,10 @@ To use the `@task.virtualenv` decorator or the PythonVirtualenvOperator to creat
     defaultValue="taskflow"
     groupId="task.virtualenv-decorator-pythonvirtualenvoperator"
     values={[
-        {label: 'TaskFlow API simple', value: 'taskflow'},
-        {label: 'Traditional syntax simple', value: 'traditional'},
-        {label: 'TaskFlow API with XCom', value: 'taskflow-xcom'},
-        {label: 'Traditional syntax with XCom', value: 'traditional-xcom'},
+        {label: '@task.virtualenv simple', value: 'taskflow'},
+        {label: 'PythonVirtualEnvOperator simple', value: 'traditional'},
+        {label: '@task.virtualenv with XCom', value: 'taskflow-xcom'},
+        {label: 'PythonVirtualEnvOperator with XCom', value: 'traditional-xcom'},
     ]}>
 <TabItem value="taskflow">
 
@@ -301,8 +301,8 @@ The Python version can be referenced directly using the `python` parameter of th
     defaultValue="taskflow"
     groupId="task.virtualenv-decorator-pythonvirtualenvoperator"
     values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
+        {label: '@task.virtualenv', value: 'taskflow'},
+        {label: 'PythonVirtualenvOperator', value: 'traditional'},
     ]}>
 <TabItem value="taskflow">
 
@@ -466,8 +466,8 @@ To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need p
     defaultValue="taskflow"
     groupId="task.kubernetes-decorator-kubepodoperator"
     values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional syntax', value: 'traditional'},
+        {label: '@task.kubernetes', value: 'taskflow'},
+        {label: 'KubernetesPodOperator', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -548,6 +548,7 @@ my_isolated_task()
 <TabItem value="traditional-epo">
 
 ```python
+# from airflow.operators.python import ExternalPythonOperator
 # import os
 
 def my_isolated_function(logical_date_from_op_kwargs):
@@ -583,6 +584,8 @@ def my_isolated_task(logical_date):
 <TabItem value="traditional-venv">
     
 ```python
+# from airflow.operators.python import PythonVirtualenvOperator
+
 def my_isolated_function(logical_date_from_op_kwargs):
     print(f"The logical date is: {logical_date_from_op_kwargs}")
     # your code to run in the isolated environment 
@@ -611,14 +614,14 @@ Using Airflow packages inside of isolated environments can lead to unexpected be
 :::
 
 If you need to use Airflow and Airflow providers module inside your virtual environment, use the `@task.virtualenv` decorator or the PythonVirtualEnvOperator instead of the `@task.external_python` decorator or the ExternalPythonOperator.
-As of Airflow 2.8 you can cache the virtual environment for reuse by providing a `venv_cache_path` to the `@task.virtualenv` decorator / PythonVirtualEnvOperator.
+As of Airflow 2.8 you can cache the virtual environment for reuse by providing a `venv_cache_path` to the `@task.virtualenv` decorator / PythonVirtualEnvOperator to speed up subsequent runs of your task.
 
 <Tabs
     defaultValue="taskflow"
     groupId="use-airflow-packages-in-isolated-environments"
     values={[
-        {label: '@task.external_python', value: 'taskflow'},
-        {label: 'ExternalPythonOperator', value: 'traditional'},
+        {label: '@task.virtualenv', value: 'taskflow'},
+        {label: 'PythonVirtualenvOperator', value: 'traditional'},
     ]}>
 <TabItem value="taskflow">
 
