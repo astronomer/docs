@@ -16,6 +16,12 @@ DAG-only deploys have the following benefits:
 - If you have a CI/CD process that includes both DAG and image-based deploys, you can use your repository's permissions to control which users can perform which kinds of deploys.
 - DAG deploys transmit significantly less data in most cases, which makes them quicker than image deploys when upload speeds to the Deployment are slow.
 
+:::danger
+
+When you [update a Deployment](#configure-dag-only-deploys-on-a-deployment) to support DAG-only deploys, all DAGs in your Deployment will be removed. To continue running your DAGs, you must redeploy them using `astro deploy --dags`.
+
+:::
+
 ## Enable the feature on an Astronomer cluster
 
 By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, add the following configuration to your `config.yaml` file:
@@ -32,19 +38,19 @@ dagOnlyDeployment:
         memory: "256Mi"
       limits:
         cpu: "500m"
-        memory: "1024Mi" 
+        memory: "1024Mi"
     }
 ```
 
 :::info
 
-When you enable DAG only deploys on a given Deployment, Astronomer Software spins up a component in the Deployment called the DAG deploy server. The default resources for the DAG deploy server are 1 CPU and 1.5 GB of memory, which allows you to push up to 15MB of compressed DAGs per deploy. To deploy more than 15MB of compressed DAGs at a time, increase the CPU and memory in the `resources` configuration by 1 CPU and 1.5MB for each additional 15MB of DAGs you want to upload. For more information, see [How DAG-only deploys work](#how-dag-only-deploys-work).
+When you enable DAG only deploys on a given Deployment, Astronomer Software spins up a component in the Deployment called the DAG deploy server. The default resources for the DAG deploy server are 1 CPU and 1.5 GB of memory, which allows you to push up to 15MB of compressed DAGs per deploy. To deploy more than 15MB of compressed DAGs at a time, increase the CPU and memory in the `resources` configuration by 1 CPU and 1.5MB for each additional 15MB of DAGs you want to upload. For more information, see [How DAG-only deploys work](#trigger-a-dag-only-deploy).
 
 :::
 
 :::warning
 
-If you use a [third-party ingress controller](third-party-ingress-controllers.md), you can't upload more than 8MB of compressed DAGs regardless of your DAG server size. 
+If you use a [third-party ingress controller](third-party-ingress-controllers.md), you can't upload more than 8MB of compressed DAGs regardless of your DAG server size.
 
 :::
 
@@ -52,18 +58,12 @@ Then, push the configuration change. See [Apply a config change](https://docs.as
 
 ## Configure DAG-only deploys on a deployment
 
-:::danger
-
-When you update a Deployment to support DAG-only deploys, all DAGs in your Deployment will be removed. To continue running your DAGs, you must redeploy them using `astro deploy --dags`. 
-
-:::
-
 By default, Deployments are configured only for complete project image deploys. To enable DAG-only deploys:
 
 1. Open your Deployment in the Astronomer Software UI.
-2. In the **Settings** tab under the **DAG Deployment** section, change the **Mechanism** to **DAG Only Deployment**. 
+2. In the **Settings** tab under the **DAG Deployment** section, change the **Mechanism** to **DAG Only Deployment**.
 3. Click **Deploy changes**
-4. Redeploy your DAGs using `astro deploy --dags`. See [Trigger a DAG-only deploy](#trigger-a-dag-only-deploy). This step is required because all DAGs in your deployed image will be deleted from your Deployment when you enable the feature. 
+4. Redeploy your DAGs using `astro deploy --dags`. See [Trigger a DAG-only deploy](#trigger-a-dag-only-deploy). This step is required because all DAGs in your deployed image will be deleted from your Deployment when you enable the feature.
 
 ## Trigger a DAG-only deploy
 
