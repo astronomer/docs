@@ -32,9 +32,11 @@ The following flags have been updated, but will continue to work with a deprecat
 
 ### Kubernetes worker configurations are now consistent with the Astro Cloud UI
 
-[Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Cloud UI.
+You can now use Deployment files or the Astro CLI to [create or update Kubernetes worker configurations](astro/deployment-resources.md#configure-kubernetes-pod-resources).
 
-You now use the `default_task_pod_cpu`, `default_task_pod_memory`, and `default_worker_type` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
+[Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Cloud UI. This also allows you to create or update Kubernetes worker configurations directly, instead of requiring you to update the worker resources by changing the Kubernetes worker queue configuration.
+
+You can now use the `default_task_pod_cpu`, `default_task_pod_memory`, `default_worker_type`, `resource_quota_cpu`, and `resource_quota_memory` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
 
 With this new functionality, the following commands to update a Deployment running the Kubernetes executor continue to work, but display a deprecation notice:
 
@@ -43,7 +45,7 @@ With this new functionality, the following commands to update a Deployment runni
 - `astro deployment worker-queue create`
 - `astro deployment worker-queue update`
 
-Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memory`, `--resource-quota-cpu`, or `--resource-quota-memory` flags with [`astro deployment create`](astro-deployment-create.md) and [`astro deployment update`](astro-deployment-update.md) to edit your Kubernetes worker configuration.
+Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memory`, `--resource-quota-cpu`, or `--resource-quota-memory` flags with [`astro deployment create`](astro-deployment-create.md) and [`astro deployment update`](astro-deployment-update.md) to edit your Kubernetes worker configuration using the Astro CLI.
 
 ### Changes to Deployment file configurations
 
