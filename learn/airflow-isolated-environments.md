@@ -140,6 +140,12 @@ You can add any Python packages to the virtual environment by putting it into a 
 pandas==1.4.4
 ```
 
+:::warning
+
+Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is not recommended. If you need to use Airflow and Airflow providers module inside your virtual environment, Astronomer recommends to choose the `@task.virtualenv` decorator or the PythonVirtualenvOperator. See, [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+
+:::
+
 After restarting your Airflow environment you can use this Python binary by referencing the environment variable `ASTRO_PYENV_<my-pyenv-name>`. If you are using an alternative method to create you Python binary, you need to set the `python` parameter of the decorator/operator to the location of your Python binary.
 
 <Tabs
@@ -214,6 +220,12 @@ To get a list of all parameters of the `@task.external_python` decorator /  Exte
 ## `@task.virtualenv` decorator / PythonVirtualenvOperator
 
 To use the `@task.virtualenv` decorator or the PythonVirtualenvOperator to create a virtual environment with the same Python version as your Airflow environment but potentially conflicting packages, you do not need to create a Python binary up front. The decorator/operator will create a virtual environment for you at runtime.
+
+:::warning
+
+Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is generally not recommended. See, [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+
+:::
 
 <Tabs
     defaultValue="taskflow"
@@ -605,6 +617,59 @@ my_isolated_task = PythonVirtualenvOperator(
 </TabItem>
 </Tabs>
 
+## Use Airflow variables in isolated environments
+
+You can inject Airflow variables into isolated environments by using [Jinja templating](templating.md) in the `op_kwargs` argument of the PythonVirtualenvOperator or ExternalPythonOperator. This is a good way to pass secrets into your isolated environment, which will be masked in the logs according to the rules described in [Hide sensitive information in Airflow variables](airflow-variables.md#hide-sensitive-information-in-airflow-variables).
+
+<Tabs
+    defaultValue="traditional-venv"
+    groupId="use-airflow-variables-in-isolated-environments"
+    values={[
+        {label: 'PythonVirtualenvOperator', value: 'traditional-venv'},
+        {label: 'ExternalPythonOperator', value: 'traditional-epo'},
+    ]}>
+
+<TabItem value="traditional-venv">
+
+```python
+# from airflow.operators.python import PythonVirtualenvOperator
+
+def my_isolated_function(password_from_op_kwargs):
+    print(f"The password is: {password_from_op_kwargs}")
+
+my_isolated_task = PythonVirtualenvOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    requirements=["pandas==1.5.1"],
+    python_version="3.10",
+    op_kwargs={
+        "password_from_op_kwargs": "{{ var.value.my_secret }}",
+    },
+)
+```
+
+</TabItem>
+<TabItem value="traditional-epo">
+
+```python
+# from airflow.operators.python import ExternalPythonOperator
+# import os
+
+def my_isolated_function(password_from_op_kwargs):
+    print(f"The password is: {password_from_op_kwargs}")
+
+my_isolated_task = ExternalPythonOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    python=os.environ["ASTRO_PYENV_epo_pyenv"],
+    op_kwargs={
+        "password_from_op_kwargs": "{{ var.value.my_secret }}",
+    },
+)
+```
+</TabItem>
+</Tabs>
+
 ## Use Airflow packages in isolated environments
 
 :::warning
@@ -675,55 +740,3 @@ my_isolated_task = PythonVirtualenvOperator(
 </TabItem>
 </Tabs>
 
-## Use Airflow variables in isolated environments
-
-You can inject Airflow variables into isolated environments by using [Jinja templating](templating.md) in the `op_kwargs` argument of the PythonVirtualenvOperator or ExternalPythonOperator. This is a good way to pass secrets into your isolated environment, which will be masked in the logs according to the rules described in [Hide sensitive information in Airflow variables](airflow-variables.md#hide-sensitive-information-in-airflow-variables).
-
-<Tabs
-    defaultValue="traditional-venv"
-    groupId="use-airflow-variables-in-isolated-environments"
-    values={[
-        {label: 'PythonVirtualenvOperator', value: 'traditional-venv'},
-        {label: 'ExternalPythonOperator', value: 'traditional-epo'},
-    ]}>
-
-<TabItem value="traditional-venv">
-
-```python
-# from airflow.operators.python import PythonVirtualenvOperator
-
-def my_isolated_function(password_from_op_kwargs):
-    print(f"The password is: {password_from_op_kwargs}")
-
-my_isolated_task = PythonVirtualenvOperator(
-    task_id="my_isolated_task",
-    python_callable=my_isolated_function,
-    requirements=["pandas==1.5.1"],
-    python_version="3.10",
-    op_kwargs={
-        "password_from_op_kwargs": "{{ var.value.my_secret }}",
-    },
-)
-```
-
-</TabItem>
-<TabItem value="traditional-epo">
-
-```python
-# from airflow.operators.python import ExternalPythonOperator
-# import os
-
-def my_isolated_function(password_from_op_kwargs):
-    print(f"The password is: {password_from_op_kwargs}")
-
-my_isolated_task = ExternalPythonOperator(
-    task_id="my_isolated_task",
-    python_callable=my_isolated_function,
-    python=os.environ["ASTRO_PYENV_epo_pyenv"],
-    op_kwargs={
-        "password_from_op_kwargs": "{{ var.value.my_secret }}",
-    },
-)
-```
-</TabItem>
-</Tabs>
