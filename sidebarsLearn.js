@@ -146,7 +146,6 @@ module.exports = {
         'airflow-object-storage-tutorial',
         'airflow-sql-data-quality',
         'astro-python-sdk',
-        'external-python-operator',
         'custom-airflow-ui-docs-tutorial',
       ],
     },
