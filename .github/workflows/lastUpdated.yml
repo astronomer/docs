@@ -10,7 +10,7 @@ jobs:
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
-      run: chmod +x lastUpdated.sh
+      run: ./lastUpdated.sh
       shell: bash
     - uses: jakejarvis/s3-sync-action@master
       name: Sync to S3
