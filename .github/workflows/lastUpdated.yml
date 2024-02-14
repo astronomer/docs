@@ -7,13 +7,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       name: Checkout repo
-      with:
-        token: ${{secrets.PAT}}
-    - name: Install ack
-      run: sudo apt-get install ack
-    - name: Run build script
-      run: ./lastUpdated.sh
-      shell: bash
     - uses: jakejarvis/s3-sync-action@master
       name: Sync to S3
       with:
