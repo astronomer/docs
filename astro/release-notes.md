@@ -40,7 +40,7 @@ The new **Dashboards** page includes a suite of dashboards that you can use to a
 
 ### Bug fixes
 
-- Fixed an issue where network connections between clusters could occasionally be disrupted.
+- Fixed an issue where network connections between clusters could be disrupted occasionally.
 - When you retrieve information about a Deployment through the Astro API, the API now returns an empty value for `EnvironmentVariables` if the Deployment has no environment variables.
 - Deleting a Workspace through the Astro API now deletes all Astro Cloud IDE projects associated with the Workspace.
 - Fixed an issue where you could not clear optional fields in a Deployment's configuration using the Astro API.
