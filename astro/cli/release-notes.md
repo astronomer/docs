@@ -40,8 +40,6 @@ You can now use the `default_task_pod_cpu`, `default_task_pod_memory`, `default_
 
 With this new functionality, the following commands to update a Deployment running the Kubernetes executor continue to work, but display a deprecation notice:
 
-- `astro deployment create --from-file`
-- `astro deployment update --from-file`
 - `astro deployment worker-queue create`
 - `astro deployment worker-queue update`
 
