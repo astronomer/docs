@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
-          git checkout usage action
+          git checkout usage-action
           git pull origin main -f
     - name: Install ack
       run: sudo apt-get install ack
