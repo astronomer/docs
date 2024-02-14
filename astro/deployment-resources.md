@@ -46,9 +46,9 @@ The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](ku
 
 Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
 
-::: info
+:::info
 
-You can also configure default pod limits and resources with the [`astro deployment create`](cli/astro-deployment-create.md) and [`astro deployment update`](cli/astro-deployment-update.md) Astro CLI commands, or by adding the configurations to a [Deployment file](deployment-file-reference.md), if you manage your Deployment as code.
+To manage Kubernetes resources programmatically, you can set default Pod limits and resources with the [`astro deployment create`](cli/astro-deployment-create.md) and [`astro deployment update`](cli/astro-deployment-update.md) Astro CLI commands, or by adding the configurations to a [Deployment file](deployment-file-reference.md).
 
 :::
 
