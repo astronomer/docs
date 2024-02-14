@@ -32,7 +32,7 @@ The following flags have been updated, but will continue to work with a deprecat
 
 ### Kubernetes worker configurations are now consistent with the Astro Cloud UI
 
-You can now use Deployment files or the Astro CLI to [create or update Kubernetes worker configurations](astro/deployment-resources.md#configure-kubernetes-pod-resources).
+You can now use Deployment files or the Astro CLI to create or update Kubernetes worker configurations.
 
 [Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Cloud UI. This also allows you to create or update Kubernetes worker configurations directly, instead of requiring you to update the worker resources by changing the Kubernetes worker queue configuration.
 
