@@ -31,7 +31,7 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 :::
 
-The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Reporting dashboards](reporting-dashboard.md) for summaries of each available dashboard.
+The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Reporting dashboards](https://docs.astronomer.io/astro/reporting-dashboard) for summaries of each available dashboard.
 
 ### Additional improvements
 
