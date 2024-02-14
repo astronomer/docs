@@ -424,7 +424,7 @@ Virtual branching operators allow you to run conditional task logic in an isolat
 - `@task.branch_external_python` decorator or BranchExternalPythonOperator: Run conditional task logic in an existing virtual Python environment.
 - `@task.branch_virtualenv` decorator or BranchPythonVirtualenvOperator: Run conditional task logic in a newly created virtual Python environment.
 
-To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators. You can learn more about branching in Airflow in the [Branching in Airflow](airflow-branching-operator.md) guide.
+To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators. You can learn more about branching in Airflow in the [Branching in Airflow](airflow-branch-operator.md) guide.
 
 <Tabs
     defaultValue="taskflow-epo"
