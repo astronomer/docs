@@ -9,9 +9,7 @@ jobs:
     - run: |
           git config --global user.email "jwitz@astronomer.io"
           git config --global user.name "Jacob Witz"
-          git config pull.rebase false
-          git checkout usage-action
-          git pull origin main -f --allow-unrelated-histories
+          git checkout main
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script

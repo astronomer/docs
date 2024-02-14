@@ -67,6 +67,7 @@ function commit {
     wait
     git config --global user.name "jwitz"
     git config --global user.email "jwitz@astronomer.io"
+    git checkout usage-action
     git add .
     git commit -m "Reassess docs freshness"
     git push
