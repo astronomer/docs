@@ -6,10 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: |
-          git config --global user.email "jwitz@astronomer.io"
-          git config --global user.name "Jacob Witz"
-          git checkout main
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
