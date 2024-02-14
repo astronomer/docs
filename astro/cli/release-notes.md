@@ -60,7 +60,9 @@ The following changes have been made to the format of [Deployment files](deploym
 ### Additional improvements
 
 - `astro deployment logs --key-word` is a new flag that allows you to search your audit logs for an exact key word or phrase.
-- The CLI no longer auto-selects the Deployments where your code deploys when you use it for Deployments that don't have CI/CD enforcement. Or, it also does not auto-select a Deployment if you have the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables set.
+- If you log in to Astro from the CLI, you need to select a Deployment when you deploy code. Previously, the Astro CLI used auto-select to automatically choose a Deployment for code deploys based on the CLI context. Now, by default, the CLI does not auto-selects the Deployments where your code deploys when you use it. However there are the following exceptions:
+    - If you log in to Astro with an API token using the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables, auto-select is enabled. This is important because it ensures that if you have CI/CD scripts that rely on auto-select, they will continue to work.
+    - There is a new config, `auto_select`. If `auto-select` is set to `true` in the config file, auto-select is always enabled.
 
 ## Astro CLI 1.22.0
 
