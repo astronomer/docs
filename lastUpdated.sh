@@ -35,7 +35,7 @@ function main {
 function ack_file_info {
     local format="$1"
     echo commit, age, hash, filename > .github/metrics/log.csv 
-    ack -g '^((astro)|(software/)|(learn))' -t markdown |\
+    ack -g '^(astro|software|learn/)' -t markdown |\
     $FILTER |\
     xargs -I § git log -1 --pretty="format:%ct,${format},%h,§;" §
 }
@@ -60,15 +60,15 @@ function sort_cleaned_input {
 # Trim commit timestamps from output
 function clean_output {
     cut -f 2- >> .github/metrics/log.csv
-    sleep 10
+    sleep 1m
 }
 
 function commit {
     wait
+    git add .
     git config --global user.name "jwitz"
     git config --global user.email "jwitz@astronomer.io"
-    git add .
-    git commit -m "Reassess docs freshness"
+    git commit -a -m "Load metrics"
     git push
 }
 
