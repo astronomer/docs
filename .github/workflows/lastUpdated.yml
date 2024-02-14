@@ -9,7 +9,7 @@ jobs:
     - run: |
           git config pull.rebase false
           git checkout usage-action
-          git pull origin main -f
+          git pull origin main -f --allow-unrelated-histories
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
