@@ -46,6 +46,12 @@ The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](ku
 
 Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
 
+:::info
+
+To manage Kubernetes resources programmatically, you can set default Pod limits and resources with the [`astro deployment create`](cli/astro-deployment-create.md) and [`astro deployment update`](cli/astro-deployment-update.md) Astro CLI commands, or by adding the configurations to a [Deployment file](deployment-file-reference.md).
+
+:::
+
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Options** menu and select **Edit Deployment**.
@@ -68,28 +74,6 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
      :::
 
 4. Click **Update Deployment**.
-
-After you change the Pod size, wait for a couple of minutes before running your tasks to allow Astro to apply the changes to your Pod's ConfigMap.
-
-Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
-
-The CPU and memory quotas also determine the **Max Pod Size**, which is the maximum amount of resources that a task can request.
-
-:::warning
-
-For Deployments running on dedicated clusters, the largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**, even if your quota is larger.
-
-For example, if your Deployment has a CPU quota of 150vCPU and a memory quota of 300GiB, your **Max Pod Size** might only be 12 vCPU and 24GiB RAM. If you try to run a task that requests 20vCPU, the task won't run even though it's within your quotas.
-
-:::
-
-:::info Alternative Astro Hybrid setup
-
-On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory.
-
-To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#astro-hybrid-only-change-the-kubernetes-executors-worker-node-type).
-
-:::
 
 ## Scheduler size
 
