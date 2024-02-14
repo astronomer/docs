@@ -15,15 +15,9 @@ import external_python_operator_dag from '!!raw-loader!../code-samples/dags/airf
 
 It is very common to run a task with different dependencies than your Airflow environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
-![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
-
 In Airflow you have several options for running custom Python code in isolated environments. Additionally, you can run most traditional operators inside a dedicated Kubernetes pod and use virtual branching operators to execute conditional task logic inside a virtual environment.
 
 In this guide, you'll learn how to choose the right isolated environment option for your use case, how to implement different virtual environment operators and decorators, and how to access Airflow context and variables in isolated environments.
-
-
-
-To learn more about the IsolatedOperator, see the [Isolation provider README](https://github.com/astronomer/apache-airflow-providers-isolation).
 
 :::tip Other ways to learn
 
@@ -47,21 +41,18 @@ To get the most out of this guide, you should have an understanding of:
 
 ## When to use isolated environments
 
-Isolated environments enable you to pin specific versions of Python and Python packages for individual tasks, which may conflict with the versions used by the Airflow environment or other Airflow tasks.
+There are two situations in which you might want to run a task in an isolated environment:
 
-Apache Airflow is compatible Python 3.8, 3.9, 3.10, 3.11, see [Prerequisites](https://airflow.apache.org/docs/apache-airflow/stable/installation/prerequisites.html). If you need to run a task using a different version of Python than your Airflow environment, you need to use an isolated environment.
+- Your task requires a **different version of Python** than your Airflow environment. Apache Airflow is compatible with and available in Python 3.8, 3.9, 3.10, 3.11, see [Prerequisites](https://airflow.apache.org/docs/apache-airflow/stable/installation/prerequisites.html). The Astro Runtime has [images](https://quay.io/repository/astronomer/astro-runtime?tab=tags) available for all supported Python versions, to run Airflow inside Docker in a reproducible environment.
+- Your task requires **different versions of Python packages** that conflict with the versions installed in your Airflow environment. To know which Python packages are pinned to which versions within Airflow, you can retrieve the full list of constraints for each Airflow version by going to:
 
-To know which Python packages are pinned to which versions within Airflow, you can retrieve the full list of constraints for each Airflow version by going to:
+    ```text
+    https://raw.githubusercontent.com/apache/airflow/constraints-<AIRFLOW VERSION>/constraints-<PYTHON VERSION>.txt
+    ```
 
-```text
-https://raw.githubusercontent.com/apache/airflow/constraints-<AIRFLOW VERSION>/constraints-<PYTHON VERSION>.txt
-```
+:::tip Airflow Best Practice
 
-If one of your tasks requires a different version of one of the Python packages listed, you need to use an isolated environment as well.
-
-:::info
-
-Astronomer's distribution of Airflow, the Astro Runtime has images available for Python 3.11, 3.10, 3.9 and 3.8 (see: [Quay.io astronomer/astro-runtime](https://quay.io/repository/astronomer/astro-runtime?tab=tags)). We recommend to use the Astro Runtime with the Astro CLI to run Airflow locally in Docker to ensure a reproducible environment separated from your local machine.
+Make sure to pin all package versions, both in your core Airflow environment (`requirements.txt`) and in your isolated environments. This will help you avoid unexpected behavior due to package updates that might create version conflicts.
 
 :::
 
@@ -77,31 +68,45 @@ Common limitations include:
 
 ## Choosing an isolated environment option
 
-When choosing an isolated environment option, first you need to decide if you want to run your code in a dedicated Kubernetes pod or a Python virtual environment.
+![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
 
-A dedicated Kubernetes pod allows you to have full control over the environment and resources used, but requires access to a Kubernetes cluster. If you want to isolate a traditional operator, a Kubernetes pod is the only option.
+Depending on your use case you can choose from the following isolated environment options:
 
-There are 3 options to run your code in a dedicated Kubernetes pod with Airflow:
+| Use Case | [IsolatedOperator](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#taskkubernetes) | [KubernetesPodOperator](#taskkubernetes) | [`@task.external_python`](#taskexternal_python) | [`@task.virtualenv1](#taskvirtualenv) | [`@task.branch_external_python`](#taskbranch_external_python--taskbranch_virtualenv) | [`@task.branch_virtualenv`](#taskbranch_external_python--taskbranch_virtualenv) |
+|----------|----------|----------|----------|----------|----------|----------|----------|
+| Run a traditional operator in a K8s Pod | :white_check_mark: | | | | | | |
+| Run a Python task in a K8s Pod | | :white_check_mark: | :white_check_mark: | | | | |
+| Run a Docker image without additional Python code in a K8s Pod | | | :white_check_mark: | | | | |
+| Run a Python task in an existing virtual environment | | | | :white_check_mark: | | | |
+| Run a Python task in a new virtual environment | | | | | :white_check_mark: | | |
+| Run branching code in an existing virtual environment | | | | | | :white_check_mark: | |
+| Run branching code in a new virtual environment | | | | | | | :white_check_mark: |
 
-- To run a **traditional operator** in an isolated environment, use the [IsolatedOperator] to run your operator code inside a dedicated Kubernetes pod. To use the IsolatedOperator, you need to have access to a Kubernetes cluster. 
-- To run **any custom Python code** in a dedicated Kubernetes pod, use the `@task.kubernetes` decorator or the KubernetesPodOperator (KPO). You need to have a Docker image with Python and the necessary packages for your code, as well as access to a Kubernetes cluster. Astronomer recommends to use the `@task.kubernetes` decorator over the KPO if you need to pass data into or out of the pod, as it makes handling [XCom](airflow-passing-data-between-tasks.md) easier.
-- To run an **existing Docker image** without any additional Python code, use the [KubernetesPodOperator](kubepod-operator.md) (KPO). You need to provide Docker image to run, as well as access to a Kubernetes cluster.
+The virtual environment decorators have operator equivalents with the same functionality. Astronomer recommends to use the decorators over the operators, as they simplify handling of [XCom](airflow-passing-data-between-tasks.md).
 
-A Python virtual environment is easier to set up since it does not require a Docker image or Kubernetes cluster, but does not provide the same level of control over the environment and resources used. 
+- `@task.external_python` decorator: ExternalPythonOperator
+- `@task.virtualenv` decorator: PythonVirtualenvOperator
+- `@task.branch_external_python` decorator: BranchExternalPythonOperator
+- `@task.branch_virtualenv` decorator: BranchPythonVirtualenvOperator
 
-If you want to run your code in a Python virtual environment, you have 2 options:
+Using a pre-existing virtual environment is faster and recommended if you need to reuse your virtual environment across multiple tasks. Creating a new virtual environment at runtime is slower but can be useful if you need to install different packages for each run of your task. The new environment can be cached by providing a `venv_cache_path`.
 
-- To run your code in an **existing virtual environment**, use the `@task.external_python` decorator or the ExternalPythonOperator (EPO). This is a good option if you want to reuse a virtual environment in multiple tasks, the environment is created at build time, which speeds up the task execution. Astronomer 
-- To run your code in a **newly created virtual environment**, use the `@task.virtualenv` decorator or the PythonVirtualenvOperator (PVEO). This is a good option if you want the virtual environment to be created at Runtime instead of build time. The environment can be cached by providing a `venv_cache_path`.
+The IsolatedOperator, `@task.kubernetes` decorator or KubernetesPodOperator all you to have full control over the environment and resources used but they require you need to have access to a Kubernetes cluster. Running a task in a Python virtual environment is easier to set up since it does not require a Kubernetes cluster, but does not provide the same level of control over the environment and resources used and depending on your use case you might need to create a Python binary.
 
-Astronomer recommends to use the decorator versions over the operators, as they simplify handling of [XCom](airflow-passing-data-between-tasks.md).
+| Requirements | [IsolatedOperator](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#taskkubernetes) | [KubernetesPodOperator](#taskkubernetes) | [`@task.external_python`](#taskexternal_python) | [`@task.virtualenv1](#taskvirtualenv) | [`@task.branch_external_python`](#taskbranch_external_python--taskbranch_virtualenv) | [`@task.branch_virtualenv`](#taskbranch_external_python--taskbranch_virtualenv) |
+|----------|----------|----------|----------|----------|----------|----------|----------|
+| A Kubernetes cluster | :white_check_mark: | :white_check_mark:  |  :white_check_mark: | | | | |
+| A Docker image with Python installed | | :white_check_mark: | | | | | |
+| Any Docker image | :white_check_mark: | | :white_check_mark: | | | | |
+| A Python binary | | | | :white_check_mark: | (:white_check_mark:)*  | :white_check_mark: | (:white_check_mark:)*  |
 
-If your isolated task contains branching logic, use the branching versions of the virtual environment decorators and operators:
+*Only if you need to use a different Python version than your Airflow environment.
 
-- To run branching code in an existing virtual environment, use the `@task.branch_external_python` decorator or the ExternalBranchPythonOperator.
-- To run branching code in a newly created virtual environment, use the `@task.branch_virtualenv` decorator or the BranchPythonVirtualenvOperator.
+Astronomer recommends to use the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv) to create a Python binary. See, [`@task.external_python`](#taskexternal_python).
 
 ## `@task.external_python`
+
+The ExternalPython operator (`@task.external_python` decorator or ExternalPythonOperator) runs a Python function in an existing virtual Python environment, isolated from your Airflow environment. 
 
 To use the `@task.external_python` decorator or the ExternalPythonOperator you need to create a separate Python environment to reference. You can use any Python binary created by any means. 
 
@@ -206,9 +211,9 @@ Note that Jinja templates will be rendered as strings unless you set `render_tem
 
 To get a list of all parameters of the `@task.external_python` decorator /  ExternalPythonOperator, see the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/ExternalPythonOperator).
 
-## `@task.virtualenv` decorator / PythonVirtualenvOperator
+## `@task.virtualenv`
 
-The Virtualenv operator (`@task.virtualenv` or PythonVirtualenvOperator) creates a new virtual environment each time the task runs.
+The Virtualenv operator (`@task.virtualenv` or PythonVirtualenvOperator) creates a new virtual environment each time the task runs. If you are only specifying different package versions, you do not need to create or specify a Python binary.
 
 :::warning
 
@@ -279,7 +284,7 @@ Note that Jinja templates will be rendered as strings unless you set `render_tem
 
 </Tabs>
 
-If your task requires a different Python version than your Airflow environment, need to install that Python version in your Airflow environment so the Virtualenv task can use it. You can use the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv) to install a different Python version in your Dockerfile.
+If your task requires a different Python version than your Airflow environment, you need to install that Python version in your Airflow environment so the Virtualenv task can use it. You can use the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv) to install a different Python version in your Dockerfile.
 
 
 ```dockerfile
@@ -351,9 +356,11 @@ To get a list of all parameters of the `@task.virtualenv` decorator / PythonVirt
 
 :::
 
-## `@task.kubernetes decorator` / KubernetesPodOperator
+## `@task.kubernetes`
 
-To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need provide Docker image as well as have access to a Kubernetes cluster. The example below shows how to use the modules to run in a task in a separate Kubernetes pod inside the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
+The Kubernetes operator (`@task.kubernetes` decorator or KubernetesPodOperator) runs an Airflow task in a dedicated Kubernetes pod. The `@task.kubernetes` decorator is used to run any custom Python code in a separate Kubernetes pod on a Docker image with Python installed, while the KubernetesPodOperator is used to run any existing Docker image.
+
+To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need provide a Docker image as well as have access to a Kubernetes cluster. The example below shows how to use the modules to run in a task in a separate Kubernetes pod inside the same namespace and Kubernetes cluster as your Airflow environment. For more information on how to use the KubernetesPodOperator, see [Use the KubernetesPodOperator](kubepod-operator.md) and [Run the KubernetesPodOperator on Astro](https://docs.astronomer.io/astro/kubernetespodoperator).
 
 <Tabs
     defaultValue="taskflow"
@@ -410,16 +417,21 @@ my_isolated_task = KubernetesPodOperator(
 </TabItem>
 </Tabs>
 
-## Virtual branching decorators / operators
+## `@task.branch_external_python` / `@task.branch_virtualenv`
 
-To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators.
+Virtual branching operators allow you to run conditional task logic in an isolated Python environment.
+
+- `@task.branch_external_python` decorator or BranchExternalPythonOperator: Run conditional task logic in an existing virtual Python environment.
+- `@task.branch_virtualenv` decorator or BranchPythonVirtualenvOperator: Run conditional task logic in a newly created virtual Python environment.
+
+To run conditional task logic in an isolated environment, use the branching versions of the virtual environment decorators and operators. You can learn more about branching in Airflow in the [Branching in Airflow](airflow-branching-operator.md) guide.
 
 <Tabs
     defaultValue="taskflow-epo"
     groupId="virtual-branching-decorators-operators"
     values={[
         {label: '@task.external_python', value: 'taskflow-epo'},
-        {label: 'ExternalBranchPythonOperator', value: 'traditional-epo'},
+        {label: 'BranchExternalPythonOperator', value: 'traditional-epo'},
         {label: '@task.virtualenv', value: 'taskflow-venv'},
         {label: 'BranchPythonVirtualenvOperator', value: 'traditional-venv'},
     ]}>
