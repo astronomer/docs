@@ -60,13 +60,14 @@ deployment:
         default_task_pod_memory: 0.5Gi
         resource_quota_cpu: "10"
         resource_quota_memory: 20Gi
+        default_worker_type: m5.xlarge ## Only used when executor is KUBERNETES
     worker_queues: ## worker_queues only used when executor is CELERY
         - name: default
           max_worker_count: 10
           min_worker_count: 0
           worker_concurrency: 5
           worker_type: A5
-		alert_emails:
+    alert_emails:
         - test-emailclskz4wu5000508jz4gm25q5j@testdomain.io
 ```
 </TabItem>
@@ -100,7 +101,7 @@ deployment:
         deployment_type: HYBRID
         cloud_provider: "aws"
         region: "us-west-2"
-				default_worker_type: m5.xlarge ## default_worker_type only exists when executor is KUBERNETES
+        default_worker_type: m5.xlarge ## default_worker_type only exists when executor is KUBERNETES
     worker_queues: ## worker_queues is only used when executor is CELERY
         - name: default
           max_worker_count: 10
@@ -120,8 +121,8 @@ deployment:
         deployment_url: cloud.astronomer.io/clskytztd000008lad0i5c993/deployments/clskxpb35000008l69kzp5psq/overview
         webserver_url: testing.astronomer.run/
         workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
-		alert_emails:
-      - clskz1jo1000408jz4w8wan2q@astronomer.io
+    alert_emails:
+        - clskz1jo1000408jz4w8wan2q@astronomer.io
 ```
 
 
