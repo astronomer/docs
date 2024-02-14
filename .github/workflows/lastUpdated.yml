@@ -7,6 +7,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       name: Checkout repo
+      with:
+        token: ${{secrets.PAT}}
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
