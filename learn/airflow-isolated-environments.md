@@ -68,9 +68,9 @@ Common limitations include:
 
 ## Choosing an isolated environment option
 
-![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
-
 Airflow provides several options for running tasks in isolated environments.
+
+![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
 
 To run tasks in a dedicated Kubernetes Pod you can use:
 
@@ -106,15 +106,15 @@ The IsolatedOperator, `@task.kubernetes` decorator or KubernetesPodOperator all 
 | Requirements| [IO](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#taskkubernetes) | [KPO](#taskkubernetes) | [EPO](#taskexternal_python) | [PVO](#taskvirtualenv) | [BEPO](#taskbranch_external_python--taskbranch_virtualenv) | [BPVO](#taskbranch_external_python--taskbranch_virtualenv) |
 |----------|----------|----------|----------|----------|----------|----------|----------|
 | A Kubernetes cluster | :white_check_mark: | :white_check_mark:  |  :white_check_mark: | | | | |
-| A Docker image with Python installed | | :white_check_mark: | | | | | |
-| Any Docker image | :white_check_mark: | | :white_check_mark: | | | | |
+| A Docker image (with or without Python installed) | :white_check_mark: | | :white_check_mark: | | | | |
+| A Docker image (with Python installed) | | :white_check_mark: | | | | | |
 | A Python binary | | | | :white_check_mark: | (:white_check_mark:)*  | :white_check_mark: | (:white_check_mark:)*  |
 
 *Only if you need to use a different Python version than your Airflow environment.
 
 Astronomer recommends to use the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv) to create a Python binary. See, [`@task.external_python`](#taskexternal_python).
 
-## `@task.external_python`
+## External Python operator
 
 The ExternalPython operator (`@task.external_python` decorator or ExternalPythonOperator) runs a Python function in an existing virtual Python environment, isolated from your Airflow environment. 
 
@@ -221,7 +221,7 @@ Note that Jinja templates will be rendered as strings unless you set `render_tem
 
 To get a list of all parameters of the `@task.external_python` decorator /  ExternalPythonOperator, see the [Astronomer Registry](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/ExternalPythonOperator).
 
-## `@task.virtualenv`
+## Virtualenv operator
 
 The Virtualenv operator (`@task.virtualenv` or PythonVirtualenvOperator) creates a new virtual environment each time the task runs. If you are only specifying different package versions, you do not need to create or specify a Python binary.
 
@@ -366,7 +366,7 @@ To get a list of all parameters of the `@task.virtualenv` decorator / PythonVirt
 
 :::
 
-## `@task.kubernetes`
+## Kubernetes pod operator
 
 The Kubernetes operator (`@task.kubernetes` decorator or KubernetesPodOperator) runs an Airflow task in a dedicated Kubernetes pod. The `@task.kubernetes` decorator is used to run any custom Python code in a separate Kubernetes pod on a Docker image with Python installed, while the KubernetesPodOperator is used to run any existing Docker image.
 
@@ -427,7 +427,7 @@ my_isolated_task = KubernetesPodOperator(
 </TabItem>
 </Tabs>
 
-## `@task.branch_external_python` / `@task.branch_virtualenv`
+## Virtual branching operators
 
 Virtual branching operators allow you to run conditional task logic in an isolated Python environment.
 
