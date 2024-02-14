@@ -7,6 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: |
+          git config pull.rebase false
           git checkout usage-action
           git pull origin main -f
     - name: Install ack
