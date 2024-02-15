@@ -85,9 +85,9 @@ To run tasks in a Python virtual environment you can use:
 - [`@task.branch_external_python`](#virtual-branching-operators) decorator / BranchExternalPythonOperator (BEPO)
 - [`@task.branch_virtualenv`](#virtual-branching-operators) decorator / BranchPythonVirtualenvOperator (BPVO)
 
-The virtual environment decorators have operator equivalents with the same functionality. Astronomer recommends to use the decorators over the operators, as they simplify handling of [XCom](airflow-passing-data-between-tasks.md).
+The virtual environment decorators have operator equivalents with the same functionality. Astronomer recommends using decorators where possible because they simplify handling of [XCom](airflow-passing-data-between-tasks.md).
 
-Which option you choose depends on your use case and the requirements of your task. The table below provides an overview of the different options and their use cases.
+Which option you choose depends on your use case and the requirements of your task. The table below shows which operators are best for which use cases.
 
 | Use Case | [IO](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
 |----------|----------|----------|----------|----------|----------|----------|----------|
@@ -99,9 +99,9 @@ Which option you choose depends on your use case and the requirements of your ta
 | Run branching code in an existing virtual environment | | | | | | :white_check_mark: | |
 | Run branching code in a new virtual environment | | | | | | | :white_check_mark: |
 
-Using a pre-existing virtual environment is faster and recommended if you need to reuse your virtual environment across multiple tasks. Creating a new virtual environment at runtime is slower but can be useful if you need to install different packages for each run of your task. The new environment can be cached by providing a `venv_cache_path`.
+Using a pre-existing virtual environment is faster and recommended if your virtual environment can be used by multiple tasks. Creating a new virtual environment at runtime is slower but can be useful if you need to install different packages for each run of your task. The new environment can be cached by providing a `venv_cache_path`.
 
-The IsolatedOperator, `@task.kubernetes` decorator or KubernetesPodOperator all you to have full control over the environment and resources used but they require you need to have access to a Kubernetes cluster. Running a task in a Python virtual environment is easier to set up since it does not require a Kubernetes cluster, but does not provide the same level of control over the environment and resources used and depending on your use case you might need to create a Python binary.
+Another consideration when choosing an operator is the infrastructure you have available. Operators that run tasks in Kubernetes pods allow you to have full control over the environment and resources used, but they require a Kubernetes cluster. Operators that run tasks in Python virtual environments are easier to set up, but do not provide the same level of control over the environment and resources used.
 
 | Requirements | [IO](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
 |----------|----------|----------|----------|----------|----------|----------|----------|
@@ -110,9 +110,8 @@ The IsolatedOperator, `@task.kubernetes` decorator or KubernetesPodOperator all 
 | A Docker image (with Python installed) | | :white_check_mark: | | | | | |
 | A Python binary | | | | :white_check_mark: | (:white_check_mark:)*  | :white_check_mark: | (:white_check_mark:)*  |
 
-*Only if you need to use a different Python version than your Airflow environment.
+*Only required if you need to use a different Python version than your Airflow environment.
 
-Astronomer recommends to use the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv) to create a Python binary. See, [`@task.external_python`](#external-python-operator).
 
 ## External Python operator
 
