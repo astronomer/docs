@@ -98,8 +98,8 @@ Which option you choose depends on your use case and the requirements of your ta
 | Run a Python task in a new virtual environment | | | | | :white_check_mark: | | |
 | Run branching code in an existing virtual environment | | | | | | :white_check_mark: | |
 | Run branching code in a new virtual environment | | | | | | | :white_check_mark: |
-| Reuse the same virtual environment for multiple tasks | | | | | :white_check_mark: | | |
-| Install different packages for each run of a task | | | | | :white_check_mark: | | |
+| Reuse the same virtual environment for multiple tasks | | | | :white_check_mark: | | :white_check_mark: | |
+| Install different packages for each run of a task | | | | | :white_check_mark: | | :white_check_mark: |
 
 Another consideration when choosing an operator is the infrastructure you have available. Operators that run tasks in Kubernetes pods allow you to have full control over the environment and resources used, but they require a Kubernetes cluster. Operators that run tasks in Python virtual environments are easier to set up, but do not provide the same level of control over the environment and resources used.
 
