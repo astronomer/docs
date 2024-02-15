@@ -262,7 +262,7 @@ This feature is off by default. You can enable it by setting  `deployments.pgBou
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`.
 - When you create or update a Deployment and select a Runtime version, the Astronomer UI now shows only the latest supported Astro Runtime patch for each supported Astro Runtime major version.
 - You can now set `deployments.canUpsertDeploymentFromUI: false` to prevent all users besides System Admins from updating Deployments and environment variables through the Astronomer UI.
-- You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
+- You can now overprovision the `triggerer-log-groomer` component.
 
 ### Bug fixes
 
