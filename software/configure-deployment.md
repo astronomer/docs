@@ -255,7 +255,7 @@ You can programmatically create or update Deployments with all possible configur
 
 ## Clean Deployment task metadata
 
-You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) programmatically for all of your Deployments and exports the results for each Deployment as a file to your external storage service. The plugin executes the cleanup from the `webserver` pod. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. 
+You can run a cron job to automatically archive task and DAG metadata from your Deployment. This job runs [`airflow db clean`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#clean) programmatically for all of your Deployments and exports the results each Deployment as files to your external storage service. To run this job for a Deployment, you must install the Astronomer-maintained `airflow-dbcleanup-plugin` on the Deployment. This plugin executes the cleanup job from your Deployment's `webserver` Pod. 
 
 
 1. For Deployments running Runtime 7 or earlier, add the following line to the `requirements.txt` file of your Deployment's Astro project. Replace `<latest-version>` with the latest available version in the [`airflow-dbcleanup-plugin` GitHub repository](https://github.com/astronomer/airflow-dbcleanup-plugin/releases).
