@@ -126,7 +126,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
     ```bash
     kubectl config set-context docker-desktop
-    kubectl config view -- minify --raw > <Astro project directory>/include/.kube
+    kubectl config view --minify --raw > <Astro project directory>/include/.kube/config
     ```
 
     After running these commands, you will find a `config` file in the `/include/.kube/` folder of your Astro project which resembles this example:

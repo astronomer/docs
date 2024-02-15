@@ -9,13 +9,13 @@ module.exports = {
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
   onBrokenMarkdownLinks: 'throw',
-  onBrokenAnchors: 'throw',
+  onBrokenAnchors: 'warn',
   markdown: {
     mermaid: true,
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER}}':"1.22.0",
+          '{{CLI_VER}}':"1.23.0",
           '{{RUNTIME_VER}}':"10.3.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
@@ -137,9 +137,14 @@ module.exports = {
     softwareNav: {
       items: [
         {
-          label: '0.33 (Latest)',
+          label: '0.34 (Latest)',
           to: '/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.33',
+          to: '/software/',
+          activeBaseRegex: `(software\/0.33)+`,
         },
         {
           label: '0.32',
@@ -285,7 +290,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.33',
+            label: '0.34',
             path: '',
             banner: 'none',
           },

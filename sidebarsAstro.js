@@ -95,7 +95,11 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "create-deployment",
-        "deployment-settings",
+        {
+          type: "category",
+          label: "Deployment settings",
+          items: ["deployment-settings", "deployment-details", "deployment-resources"],
+        },
         {
           type: "category",
           label: "Executors",
@@ -174,7 +178,7 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+          items: ["dag-metrics", "deployment-metrics", "organization-metrics", "reporting-dashboard"],
         },
         {
           type: "category",
@@ -313,9 +317,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Use cases',
+      label: 'Best practices',
       items: [
-        'use-cases/connections-branch-deploys',
+        'best-practices/connections-branch-deploys',
+        'best-practices/airflow-vs-astro-alerts'
       ],
     },
     {

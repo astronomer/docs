@@ -7,17 +7,23 @@ id: 'kubernetes-executor'
 On Astro, you can configure Kubernetes executor in the following ways:
 
 - Change the resource usage for the default Pods on which your tasks run in the Cloud UI.
-- Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration in your DAG code. 
+- Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration in your DAG code.
 
 :::info
 
-This document describes how to configure individual task Pods for different use cases. To configure defaults for all Kubernetes executor task pods, see [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources).
+This document describes how to configure individual task Pods for different use cases. To configure defaults for all Kubernetes executor task pods, see [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources).
 
 :::
 
 ## Prerequisites
 
 - An Astro Deployment using Astro Runtime version 8.1.0 or later.
+
+:::caution
+
+If you use the Kubernetes executor on Astro, you can't change the [PYTHONPATH](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/modules_management.html) of your Astro project from its default value. If you do, the Kubernetes executor will be unable to read `airflow_local_settings.py` and will fail to start up new Pods.
+
+:::
 
 ## Customize a task's Kubernetes Pod
 
@@ -38,11 +44,11 @@ For each task running with the Kubernetes executor, you can customize its indivi
 2. Add a `pod_override` configuration to the DAG file containing the task. See the [`kubernetes-client`](https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1Container.md) GitHub for a list of all possible settings you can include in the configuration.
 3. Specify the `pod_override` in the task's parameters.
 
-See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests) for an example `pod_override` configuration. 
+See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests) for an example `pod_override` configuration.
 
 ### Example: Set CPU or memory limits and requests
 
-You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](deployment-settings.md#configure-kubernetes-pod-resources).
+You can request a specific amount of resources for a Kubernetes worker Pod so that a task always has enough resources to run successfully. When requesting resources, make sure that your requests don't exceed the resource limits in your [default Pod](deployment-resources.md#configure-kubernetes-pod-resources).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
@@ -109,7 +115,7 @@ On Astro Deployments, secret [environment variable](environment-variables.md) va
 However, if you can’t use Python, or you are using a pre-defined code that expects specific keys for environment variables, you must pull the secret value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
 
 1. Add the following import to your DAG file:
-   
+
     ```python
     from airflow.kubernetes.secret import Secret
     ```
@@ -134,7 +140,7 @@ However, if you can’t use Python, or you are using a pre-defined code that exp
 5. In the executable for the task, call the secret value using `os.environ[env_name]`.
 
 In the following example, a secret named `MY_SECRET` is pulled from `env-secrets` and printed to logs.
- 
+
 ```python
 import pendulum
 from kubernetes.client import models as k8s
@@ -209,7 +215,7 @@ A Deployment on Astro Hybrid that uses the Kubernetes executor runs worker Pods 
 
 ## See also
 
-- [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources)
+- [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources)
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
 - [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
 - [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)

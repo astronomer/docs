@@ -5,6 +5,8 @@ id: manage-connections-variables
 description: "Learn about different strategies for managing Airflow connections and variables in local environments and on Astro"
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+
 *Airflow connections* are used for storing credentials and other information necessary for connecting to external services. *Airflow variables* are a generic way to store and retrieve arbitrary content or settings as a simple key value store within Airflow.
 
 Use this document to select the right Airflow connection and variable management strategies for your team.
@@ -55,6 +57,8 @@ The following sections explain the benefits, limitations, and implementations of
 
 ### Astro Cloud UI Environment Manager
 
+<HostedBadge/>
+
 Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Cloud UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis.
 
 #### Benefits
@@ -76,7 +80,7 @@ Astro includes connection management system that behaves like you are using an A
 
 :::info
 
-To see how you can use connections set in the Astro Cloud UI Environment Manager in a best practice, branch-based Deployment setup, see the [Manage Astro connections in branch-based deploy workflows](use-cases/connections-branch-deploys.md) use case.
+To see how you can use connections set in the Astro Cloud UI Environment Manager in a best practice, branch-based Deployment setup, see the [Manage Astro connections in branch-based deploy workflows](best-practices/connections-branch-deploys.md) use case.
 
 :::
 

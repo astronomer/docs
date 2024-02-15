@@ -15,7 +15,7 @@
 /img/integrations/snowpark.png /learn/airflow-snowpark 301
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.33/* /software/:splat
+/software/0.34/* /software/:splat
 
 # redirect relative links for deprecated Software docs to archive page. Version-specific
 /software/0.16/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.16/:splat.md 301
@@ -350,4 +350,9 @@
 /astro/astro-ips /astro/connect-aws#public-endpoints 301
 /astro/manage-hybrid-clusters#authorize-workspaces-to-a-cluster /astro/authorize-workspaces-to-a-cluster 301
 /astro/deployment-settings#transfer-a-deployment-to-another-workspace /astro/transfer-a-deployment 301
-runtime-image-architecture#default-environment-variables /astro/platform-variables.md#default-runtime-environment-variables 301
+/runtime-image-architecture#default-environment-variables /astro/platform-variables.md#default-runtime-environment-variables 301
+/astro/resource-reference-hosted#worker-type /astro/deployment-resources#hosted-worker-types 301
+
+# redirect Astro use-cases to renamed best-practices section
+/astro/use-cases/connections-branch-deploys /astro/best-practices/connections-branch-deploys
+/astro/use-cases/airflow-vs-astro-alerts /astro/best-practices/airflow-vs-astro-alerts
