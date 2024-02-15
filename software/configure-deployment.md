@@ -317,6 +317,6 @@ The `dryRun` only prints the set of information that will be modified in the ser
 
 :::danger
 
-Warning: This cleanup removes information that is created before days specified in `olderThan` variable and will clean up even if the information is actively required by running dags and tasks.
+The cleanup job deletes any data that's older than the number of days specified in your `olderThan` configuration. Ensure that none of your historical data is required to run current DAGs or tasks before enabling this feature. 
 
 :::
