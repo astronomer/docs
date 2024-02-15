@@ -52,14 +52,14 @@ To cut over a DAG, pause the DAG in the source Airflow and unpause the DAG in As
 
 #### Monitor analytics
 
-As you cut over DAGs, view [Deployment metrics](deployment-metrics.md) to get a sense of how many resources your Deployment is using. Use this information to adjust your worker queues and resource usage accordingly, or to tell when a DAG isn't running as expected.
+As you cut over DAGs, view [Deployment metrics](deployment-metrics) to get a sense of how many resources your Deployment is using. Use this information to adjust your worker queues and resource usage accordingly, or to tell when a DAG isn't running as expected.
 
 #### Modify instance types or use worker queues
 
-If your current worker type doesn't have the right amount of resources for your workflows, see [Deployment settings](deployment-settings.md) to learn about configuring worker types on your Deployments.
+If your current worker type doesn't have the right amount of resources for your workflows, see [Deployment settings](deployment-settings) to learn about configuring worker types on your Deployments.
 
-You can additionally configure [worker queues](configure-worker-queues.md) to assign each of your tasks to different worker instance types. View your [Deployment metrics](deployment-metrics.md) to help you determine what changes are required. 
+You can additionally configure [worker queues](configure-worker-queues) to assign each of your tasks to different worker instance types. View your [Deployment metrics](deployment-metrics) to help you determine what changes are required. 
 
 #### Enable DAG-only deploys
 
-Deploying to Astro with DAG-only deploys enabled can make deploys faster in cases where you've only modified your `dags` directory. To enable the DAG-only deploy feature, see [Deploy DAGs only](deploy-dags.md).
+Deploying to Astro with DAG-only deploys enabled can make deploys faster in cases where you've only modified your `dags` directory. To enable the DAG-only deploy feature, see [Deploy DAGs only](deploy-dags).
