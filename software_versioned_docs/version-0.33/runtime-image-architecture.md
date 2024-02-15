@@ -131,8 +131,6 @@ Starting with Astro Runtime 9, Astronomer maintains different distributions Astr
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-Each Python distribution also has an alternative `quay.io/astronomer/astro-runtime:<version>-base` distribution that you can use to further customize the image.
-
 ## System distribution
 
 The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
