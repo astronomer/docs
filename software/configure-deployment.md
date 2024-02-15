@@ -264,6 +264,8 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     https://github.com/astronomer/airflow-dbcleanup-plugin/releases/download/<latest-version>/astronomer_dbcleanup_plugin-<latest-version>-py3-none-any.whl
     ```
 
+    You can skip this step for Deployments running Astro Runtime 8 or later.
+    
 2. Authorize your Deployments to your external storage service so that the webserver Pod can export the results of your cleanup jobs in JSON or URI Format. You can authorize your Deployment using one of the following methods:
 The credentials can be stored using one of two methods:
 - `Airflow Connections` (See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection)
