@@ -62,7 +62,7 @@ astronomer:
 
 ### Change resource provisioning strategy per Deployment
 
-You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See [Customize resource usage](customize-resource-usage.md) for more information.
+You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See [Customize resource usage](https://docs.astronomer.io/software/customize-resource-usage) for more information.
 
 ### Deploy only DAGs with `astro deploy -—dags`
 
