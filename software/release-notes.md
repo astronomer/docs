@@ -13,7 +13,7 @@ description: Astronomer Software release notes.
 
 This document contains release notes for each version of Astronomer Software.
 
-Version 0.34 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to version 0.34, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+Version 0.34 is the latest long-term support (LTS) version of Astronomer Software. To upgrade to version 0.34, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
 :::info 
 
@@ -62,7 +62,7 @@ astronomer:
 
 ### Change resource provisioning strategy per Deployment
 
-You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See [Customize resource usage](customize-resource-usage.md) for more information.
+You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See [Customize resource usage](https://docs.astronomer.io/software/customize-resource-usage) for more information.
 
 ### Deploy only DAGs with `astro deploy -—dags`
 
