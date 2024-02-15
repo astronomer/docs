@@ -22,6 +22,10 @@ When you [update a Deployment](#configure-dag-only-deploys-on-a-deployment) to s
 
 :::
 
+## Prerequisites
+
+- Astro CLI version 1.23 or later
+
 ## Enable the feature on an Astronomer cluster
 
 By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, add the following configuration to your `config.yaml` file:
