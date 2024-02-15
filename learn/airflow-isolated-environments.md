@@ -52,7 +52,7 @@ There are two situations in which you might want to run a task in an isolated en
 
 :::tip Airflow Best Practice
 
-Make sure to pin all package versions, both in your core Airflow environment (`requirements.txt`) and in your isolated environments. This will help you avoid unexpected behavior due to package updates that might create version conflicts.
+Make sure to pin all package versions, both in your core Airflow environment (`requirements.txt`) and in your isolated environments. This helps you avoid unexpected behavior due to package updates that might create version conflicts.
 
 :::
 
@@ -70,8 +70,6 @@ Common limitations include:
 
 Airflow provides several options for running tasks in isolated environments.
 
-![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
-
 To run tasks in a dedicated Kubernetes Pod you can use:
 
 - [IsolatedOperator](https://github.com/astronomer/apache-airflow-providers-isolation) (IO)
@@ -87,6 +85,8 @@ To run tasks in a Python virtual environment you can use:
 
 The virtual environment decorators have operator equivalents with the same functionality. Astronomer recommends using decorators where possible because they simplify handling of [XCom](airflow-passing-data-between-tasks.md).
 
+![Graph of options for isolated environments in Airflow.](/img/guides/airflow-isolated-environments_isolated_env_options_graph.png)
+
 Which option you choose depends on your use case and the requirements of your task. The table below shows which operators are best for which use cases.
 
 | Use Case | [IO](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
@@ -98,6 +98,8 @@ Which option you choose depends on your use case and the requirements of your ta
 | Run a Python task in a new virtual environment | | | | | :white_check_mark: | | |
 | Run branching code in an existing virtual environment | | | | | | :white_check_mark: | |
 | Run branching code in a new virtual environment | | | | | | | :white_check_mark: |
+| Reuse the same virtual environment for multiple tasks | | | | | :white_check_mark: | | |
+| Install different packages for each run of a task | | | | | :white_check_mark: | | |
 
 Using a pre-existing virtual environment is faster and recommended if your virtual environment can be used by multiple tasks. Creating a new virtual environment at runtime is slower but can be useful if you need to install different packages for each run of your task. The new environment can be cached by providing a `venv_cache_path`.
 
@@ -210,7 +212,7 @@ You can pass information into and out of the `@task.external_python` decorated t
 <TabItem value="traditional-xcom">
 
 You can pass information into the ExternalPythonOperator by using a [Jinja template](templating.md) retrieving [XCom](airflow-passing-data-between-tasks.md) values from the [Airflow context](airflow-context.md). To pass information out of the ExternalPythonOperator, return it from the `python_callable`.
-Note that Jinja templates will be rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
+Note that Jinja templates are rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
 
 <CodeBlock language="python">{external_python_operator_dag}</CodeBlock>
 
@@ -241,7 +243,7 @@ Installing Airflow itself and Airflow provider packages in isolated environments
     ]}>
 <TabItem value="taskflow">
 
-Add the pinned versions of the packages you need to the `requirements` parameter of the `@task.virtualenv` decorator. The decorator will create a new virtual environment at runtime.
+Add the pinned versions of the packages you need to the `requirements` parameter of the `@task.virtualenv` decorator. The decorator creates a new virtual environment at runtime.
 
 ```python
 @task.virtualenv(requirements=["pandas==1.5.1"])  # add your requirements to the list
@@ -254,7 +256,7 @@ def my_isolated_task():
 </TabItem>
 <TabItem value="traditional">
 
-Add the pinned versions of the packages you need to the `requirements` parameter of the PythonVirtualenvOperator. The operator will create a new virtual environment at runtime.
+Add the pinned versions of the packages you need to the `requirements` parameter of the PythonVirtualenvOperator. The operator creates a new virtual environment at runtime.
 
 ```python
 # from airflow.operators.python import PythonVirtualenvOperator
@@ -285,7 +287,7 @@ You can pass information into and out of the `@task.virtualenv` decorated task t
 <TabItem value="traditional-xcom">
 
 You can pass information into the PythonVirtualenvOperator by using a [Jinja template](templating.md) retrieving [XCom](airflow-passing-data-between-tasks.md) values from the [Airflow context](airflow-context.md). To pass information out of the PythonVirtualenvOperator, return it from the `python_callable`.
-Note that Jinja templates will be rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
+Note that Jinja templates are rendered as strings unless you set `render_template_as_native_obj=True` in the DAG definition.
 
 <CodeBlock language="python">{python_virtualenv_operator_dag}</CodeBlock>
 
@@ -629,7 +631,7 @@ my_isolated_task = PythonVirtualenvOperator(
 
 ## Use Airflow variables in isolated environments
 
-You can inject Airflow variables into isolated environments by using [Jinja templating](templating.md) in the `op_kwargs` argument of the PythonVirtualenvOperator or ExternalPythonOperator. This is a good way to pass secrets into your isolated environment, which will be masked in the logs according to the rules described in [Hide sensitive information in Airflow variables](airflow-variables.md#hide-sensitive-information-in-airflow-variables).
+You can inject Airflow variables into isolated environments by using [Jinja templating](templating.md) in the `op_kwargs` argument of the PythonVirtualenvOperator or ExternalPythonOperator. This is a good way to pass secrets into your isolated environment, which are masked in the logs according to the rules described in [Hide sensitive information in Airflow variables](airflow-variables.md#hide-sensitive-information-in-airflow-variables).
 
 <Tabs
     defaultValue="traditional-venv"
