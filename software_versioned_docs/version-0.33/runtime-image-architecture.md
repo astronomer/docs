@@ -131,7 +131,7 @@ Starting with Astro Runtime 9, Astronomer maintains different distributions Astr
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-Each Python distribution also includes an alternative `quay.io/astronomer/astro-runtime:<version>-base` distribution if you need to further customize the image.
+Each Python distribution also has an alternative `quay.io/astronomer/astro-runtime:<version>-base` distribution that you can use to further customize the image.
 
 ## System distribution
 
