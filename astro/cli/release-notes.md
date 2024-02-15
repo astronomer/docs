@@ -59,6 +59,7 @@ The following changes have been made to the format of [Deployment files](deploym
 
 ### Additional improvements
 
+- You can now trigger a DAG-only deploy on Astronomer Software using `astro deploy --dags`. See [Deploy DAGs on Astronomer Software](https://docs.astronomer.io/software/deploy-dags).
 - `astro deployment logs --key-word` is a new flag that allows you to search your audit logs for an exact key word or phrase.
 - If you log in to Astro from the CLI, you need to select a Deployment when you deploy code. Previously, the Astro CLI used auto-select to automatically choose a Deployment for code deploys based on the CLI context. Now, by default, the CLI does not auto-selects the Deployments where your code deploys when you use it. However there are the following exceptions:
     - If you log in to Astro with an API token using the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables, auto-select is enabled. This is important because it ensures that if you have CI/CD scripts that rely on auto-select, they will continue to work.
