@@ -101,8 +101,6 @@ Which option you choose depends on your use case and the requirements of your ta
 | Reuse the same virtual environment for multiple tasks | | | | | :white_check_mark: | | |
 | Install different packages for each run of a task | | | | | :white_check_mark: | | |
 
-Using a pre-existing virtual environment is faster and recommended if your virtual environment can be used by multiple tasks. Creating a new virtual environment at runtime is slower but can be useful if you need to install different packages for each run of your task. The new environment can be cached by providing a `venv_cache_path`.
-
 Another consideration when choosing an operator is the infrastructure you have available. Operators that run tasks in Kubernetes pods allow you to have full control over the environment and resources used, but they require a Kubernetes cluster. Operators that run tasks in Python virtual environments are easier to set up, but do not provide the same level of control over the environment and resources used.
 
 | Requirements | [IO](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
