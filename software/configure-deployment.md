@@ -309,9 +309,9 @@ The credentials can be stored using one of two methods:
 
 4. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
-:::info
+:::tip
 
-The `dryRun` only prints the set of information that will be modified in the serial output of the webserver pod and does not export the detailed logs in a file to the external storage service. To view the dryRun events of the cleanup, check the webserver pod logs for each individual deployment.
+Set `dryRun: true` to test this feature without deleting any data. When dry runs are enabled, the cleanup job will only print the data that it plans to modify in the serial output of the webserver Pod. To view the dryRun events of the cleanup job, check the logs of your webserver Pod for each Deployment.
 
 :::
 
