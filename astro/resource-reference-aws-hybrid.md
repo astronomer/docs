@@ -90,7 +90,7 @@ The following AWS RDS instance types are supported on Astro:
 - db.m6g.8xlarge
 - db.m6g.12xlarge
 - db.m6g.16xlarge
- 
+
 ### db.r5
 
 - db.r5.large
@@ -177,7 +177,7 @@ The following table lists all available instance types for worker node pools, as
 | t3.xlarge        | 2 CPUs  | 14.5 GiB MEM   |
 | t3.2xlarge       | 6 CPUs  | 30.5 GiB MEM   |
 
-If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
+If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). For more information about configuring worker size on Astro, see [Deployment resources](deployment-resources.md).
 
 :::warning
 

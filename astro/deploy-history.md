@@ -38,12 +38,6 @@ If you deploy to Astro through CI/CD, Astronomer recommends adding the Git commi
 
 ## Roll back to a past deploy
 
-:::warning
-
-This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
-
-:::
-
 :::danger
 
 Astronomer recommends triggering Deployment rollbacks only as a last resort for recent deploys that aren't working as expected. Deployment rollbacks can be disruptive, especially if you triggered multiple deploys between your current version and the rollback version. See [What happens during a deploy rollback](#what-happens-during-a-deploy-rollback) before you trigger a rollback to anticipate any unexpected effects.
@@ -81,4 +75,7 @@ The following information isn't rolled back:
 - Any other Deployment settings that you configure through the Cloud UI, such as your Deployment name and description. 
 - For Runtime version downgrades, any data related to features that are not available in the rollback version are erased from the metadata database and not recoverable.
 
-After you trigger a rollback, any currently running tasks from before the rollback continue to run your latest code, while new Pods for downstream tasks run the code from the rollback version. This is identical behavior to pushing new code as described in [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
+A rollback's effect on running tasks depends on whether the rollback downgrades your Deployment:
+
+- If a rollback downgrades a Deployment to a previous version of Astro Runtime, all currently running tasks fail immediately. If a task has any remaining retries, those retries will run after the rollback is complete.
+- If a rollback doesn't include a downgrade, any currently running tasks from before the rollback continue to run your latest code, while new Pods for downstream tasks run the code from the rollback version. This is identical behavior to pushing new code as described in [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).

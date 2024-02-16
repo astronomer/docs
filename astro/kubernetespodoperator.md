@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
 
-This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-settings.md#configure-kubernetes-pod-resources).
+This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources).
 
 ## Benefits
 
@@ -118,7 +118,7 @@ For Astro Hosted environments, if you set resource requests to be less than the 
 
 On Astro Hybrid, this configuration works only on AWS clusters where you have enabled `m5d` and `m6id` worker types. These worker types have NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
 
-The task which mounts a temporary directory must run on a worker queue that uses either `m5d` and `m6id` worker types. See [Modify a cluster](manage-hybrid-clusters.md) for instructions on enabling `m5d` and `m6id` workers on your cluster. See [Configure a worker queue](configure-worker-queues.md) to configure a worker queue to use one of these worker types. 
+The task which mounts a temporary directory must run on a worker queue that uses either `m5d` and `m6id` worker types. See [Modify a cluster](manage-hybrid-clusters.md) for instructions on enabling `m5d` and `m6id` workers on your cluster. See [Configure a worker queue](configure-worker-queues.md) to configure a worker queue to use one of these worker types.
 
 :::
 
@@ -153,7 +153,7 @@ example_volume_test = KubernetesPodOperator(
     volumes=[volume],
 )
 ```
- 
+
 ## Run images from a private registry
 
 By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If your images are hosted on the container registry native to your cloud provider, you can grant access to the images directly. Otherwise, if you are using any other private registry, you need to create a Kubernetes Secret containing credentials to the registry, then specify the Kubernetes Secret in your DAG.
@@ -220,7 +220,7 @@ Policy-based setup is available only on Astro Hosted dedicated clusters and Astr
 If your Docker image is hosted in an Amazon ECR repository, add a permissions policy to the repository to allow the KubernetesPodOperator to pull the Docker image. You don't need to create a Kubernetes secret, or specify the Kubernetes secret in your DAG. Docker images hosted in Amazon ECR repositories can only be pulled from AWS clusters.
 
 1. Log in to the Amazon ECR Dashboard and then select **Menu** > **Repositories**.
-2. Click the **Private** tab and then click the name of the repository that hosts the Docker image. 
+2. Click the **Private** tab and then click the name of the repository that hosts the Docker image.
 3. Click **Permissions** in the left menu.
 4. Click **Edit policy JSON**.
 5. Copy and paste the following policy into the **Edit JSON** pane:
@@ -244,7 +244,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
     }
     ```
 
-    Replace `<AstroAccountID>` with your Astro AWS account ID. 
+    Replace `<AstroAccountID>` with your Astro AWS account ID.
 
 6. Click **Save** to create a new permissions policy named **AllowImagePullAstro**.
 7. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator).
@@ -271,7 +271,7 @@ If your Docker image is hosted in Google Artifact Registry repository, add a per
 3. Click the checkbox next to the repository that you want to use.
 4. In the **Properties** pane that appears, click **ADD PRINCIPAL** in the **PERMISSIONS** tab.
 5. In the **Add Principals** text box, paste the Compute Engine default service account ID that was provided to you by Astronomer Support.
-6. In the **Assign Roles** selector, search for `Artifact Registry Reader` and select the role that appears. 
+6. In the **Assign Roles** selector, search for `Artifact Registry Reader` and select the role that appears.
 7. Click **Save** to grant read access for the registry  to Astro.
 8. [Set up the KubernetesPodOperator](#set-up-the-kubernetespodoperator). When you configure an instantiation of the KubernetesPodOperator, replace `<your-docker-image>` with the Google Artifact Registry image URI. To retrieve the URI:
 
@@ -287,7 +287,7 @@ If your Docker image is hosted in Google Artifact Registry repository, add a per
 Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
 
 1. Add the following import to your DAG file:
-   
+
     ```python
     from airflow.kubernetes.secret import Secret
     ```
@@ -298,7 +298,7 @@ Astro [environment variables](environment-variables.md) marked as secrets are st
     secret_env = Secret(deploy_type="env", deploy_target="<VARIABLE_KEY>", secret="env-secrets", key="<VARIABLE_KEY>")
     namespace = conf.get("kubernetes", "NAMESPACE")
     ```
-   
+
 3. Reference the key for the environment variable, formatted as `$VARIABLE_KEY` in the task using the KubernetesPodOperator.
 
 In the following example, a secret named `MY_SECRET` is pulled from `env-secrets` and printed to logs.
@@ -333,7 +333,7 @@ with DAG(
         secrets=[secret_env],
     )
 ```
-  
+
 ## Related documentation
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)

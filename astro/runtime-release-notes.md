@@ -18,6 +18,37 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
+:::info 
+
+Because Astronomer has separate [maintenance life cycles](runtime-version-lifecycle-policy.md) for each major version of Astro Runtime, the same change can be introduced multiple times across major versions, resulting in multiple identical release notes. When a new major version releases, such as Astro Runtime 8.0.0, all changes from previously released versions are included in the new major version.
+
+If you're upgrading to receive a specific change, ensure the release note for the change appears either:
+
+- Within your target major version.
+- In any minor or patch version that was released before the first release (`X.0.0`) of your target major version. For example, a change in Astro Runtime 9.9.0, which released January 10 2024, is not guaranteed to appear in Runtime 10.0.0, which released December 8 2023, unless there is a release note for it in a subsequent Runtime 10 patch. However, a change in Astro Runtime 9.6.0, which released November 30 2023, is guaranteed to exist in Runtime 10.0.0 because 9.6.0 was released prior to 10.0.0.
+
+:::
+
+## Astro Runtime 10.3.0
+
+- Release date: February 1, 2024
+- Airflow version: 2.8.1
+
+### Early access Airflow bug fixes
+
+- Fix bug introduced by replacing spaces by + in run_id ([#36877](https://github.com/apache/airflow/pull/36877))
+- Remove superfluous `@Sentry.enrich_errors` ([#37002](https://github.com/apache/airflow/pull/37002))
+
+### Additional improvements
+
+- Upgraded the Astro SDK to [1.8.0](https://github.com/astronomer/astro-sdk/releases/tag/1.8.0).
+
+### Bug fixes
+
+- Fixed an issue where some logging features would not work for DAG runs with spaces in their DAG run IDs.
+- Astro Runtime now relies on logic `apache-airflow-providers-openlineage` to determine whether OpenLineage should be enabled or disabled in a given environment, which makes the behavior more consistent between different environments and implementations. 
+- Fixed an issue where `airflow tasks test <dag_id> <task_id>` always generated an error that stated it was unable to find a foreign key for the table `ab_user`.
+
 ## Astro Runtime 10.2.0
 
 - Release date: January 19, 2024
@@ -66,6 +97,21 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
+## Astro Runtime 9.10.0
+
+- Release date: January 31, 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Fix bug introduced by replacing spaces by + in run_id ([#36877](https://github.com/apache/airflow/pull/36877))
+
+### Bug fixes
+
+- Fixed an issue where some logging features would not work for DAG runs with spaces in their DAG run IDs.
+- Astro Runtime now relies on logic `apache-airflow-providers-openlineage` to determine whether OpenLineage should be enabled or disabled in a given environment, which makes the behavior more consistent between different environments and implementations. 
+- Fixed an issue where `airflow tasks test <dag_id> <task_id>` always generated an error that stated it was unable to find a foreign key for the table `ab_user`.
 
 ## Astro Runtime 9.9.0
 

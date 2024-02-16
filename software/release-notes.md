@@ -13,20 +13,116 @@ description: Astronomer Software release notes.
 
 This document contains release notes for each version of Astronomer Software.
 
-This page contains release notes for all recent Astronomer Software versions. 
-
-0.33 is the latest stable version of Astronomer Software, while 0.32 remains the latest long-term support (LTS) release. To upgrade to 0.33, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
+Version 0.34 is the latest long-term support (LTS) version of Astronomer Software. To upgrade to version 0.34, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
 :::info 
 
-Because Astronomer has separate [maintenance life cycles](release-lifecycle-policy.md) for each minor version of Astronomer Software, a later patch version of Astronomer Software is not guaranteed to have all changes included in previous minor versions. When a release note appears more than once on this page, the related change was introduced to multiple minor versions of Astronomer Software at different times. 
+Because Astronomer has separate [maintenance life cycles](release-lifecycle-policy.md) for each minor version of Astronomer Software, the same change can be introduced multiple times across minor versions, resulting in multiple identical release notes. When a new minor version releases, such as version 0.33.0, all changes from previously released versions are included in the new minor version.
 
 If you're upgrading to receive a specific change, ensure the release note for the change appears either:
 
 - Within your target minor version.
-- In a patch version that was released before the first release of your target minor version. For example, a change in 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch.
+- In a patch version that was released before the first release of your target minor version. For example, a change in 0.32.5, which released 12/8/2023, is not guaranteed to appear in the 0.33 series, which released 9/8/2023, unless there is a release note for it in an 0.33 patch. However, all changes in 0.32.1, which released June 12, 2023, are guaranteed to be in the 0.33 series, because 0.32.1 was released before 0.33.0.
 
 :::
+
+## 0.34.0
+
+Release date: February 12, 2024
+
+### Updated permissions for upgrading Deployments to unsupported Astro Runtime versions
+
+:::danger Breaking change
+
+This update includes a breaking change to the Astronomer Software Helm chart. The setting `enableSystemAdminCanUseAllRuntimes` no longer exists and has been replaced with:
+
+```yaml
+astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+```
+
+This new setting changes whether all Admin-level users can view and upgrade to deprecated versions of Astro Runtime from the Software UI.
+
+:::
+
+By default, any user with an Admin-level role (Deployment Admin, Workspace Admin, System Admin) can now upgrade a Deployment to an unsupported version of Astro Runtime using the Astro CLI and the Houston API. 
+
+You can additionally set the following value in your `config.yaml` file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:
+
+```yaml
+astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+```
+
+### Change resource provisioning strategy per Deployment
+
+You can now set a **Resource Strategy** for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See [Customize resource usage](https://docs.astronomer.io/software/customize-resource-usage) for more information.
+
+### Deploy only DAGs with `astro deploy -—dags`
+
+You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates. See [Deploy DAGs](deploy-dags.md) for more information.
+
+### Additional improvements
+
+- You can now configure a global label that is applied to all Astronomer Software Pods.
+- You can now filter on `release_name` when you make a `deployments()` query to the Houston API.
+- You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your `config.yaml` file and apply the configuration to your cluster:
+
+    ```yaml
+    astronomer:
+      privateCaCertsAddToHost:
+        enabled: true
+        hostDirectory: /path/to/docker/certs.d
+        addToContainerd: false
+        containerdCertConfigPath: /path/to/containerd/certs.d
+        containerdConfigToml: ~
+        containerdnodeAffinitys: []
+    ```
+
+- You can now make a `createDeployment` or `upsertDeployment` query by specifying a Workspace name or label instead of a Workspace ID.
+- You can now disable the `astro-cli` Pod to free up resources on your cluster. This Pod is typically only used in airgapped clusters that can't access `https://install.astronomer.io`. To disable the Pod, add the following configuration to your `config.yaml` file and apply the change to your cluster:
+
+    ```yaml
+    astronomer:
+      install:
+        cli-enabled: true
+    ```
+
+- Astronomer Software now redeploys your Deployment when you switch your executor type.
+- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars). <!-- https://github.com/astronomer/issues/issues/6113 -->
+
+### Bug fixes
+
+- Fixed an issue where Astronomer users would occasionally not be associated with their related Azure AD/ Microsoft Entra ID accounts when added to Astronomer using SCIM. <!-- https://github.com/astronomer/issues/issues/5913 -->
+- The Houston API now validates `updateDeployment` queries to ensure that Deployment resource limits and requests are set correctly.
+- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  <!-- https://github.com/astronomer/issues/issues/5990 -->
+- Fixed an issue where Deployments would occasionally not recreate the correct resources when switching from the Kubernetes executor to the Celery executor.
+- Fixed an issue where deploys could fail when using a self-signed certificate signed by a private certificate authority.
+- Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
+- Fixed an issue where you couldn't search for a user in the Software UI by their user ID.
+- Fixed the following vulnerabilities:
+
+    - [CVE-2023-46233](https://nvd.nist.gov/vuln/detail/CVE-2023-46233)
+    - [GHSA-36jr-mh4h-2g58](https://github.com/advisories/GHSA-36jr-mh4h-2g58)
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)
+    - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p)
+    - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
+    - [CVE-2023-25653](https://nvd.nist.gov/vuln/detail/CVE-2023-25653)
+    - [CVE-2023-36665](https://nvd.nist.gov/vuln/detail/CVE-2023-36665)
+    - [CVE-2023-2976](https://nvd.nist.gov/vuln/detail/CVE-2023-2976)
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)
+    - [CVE-2023-40690](https://nvd.nist.gov/vuln/detail/CVE-2023-40690)
+    - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
+    - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)
+    - [CVE-2021-33914](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)
 
 ## 0.33.3
 
@@ -42,7 +138,7 @@ Release date: January 19, 2024
     - [CVE-2023-2253](https://nvd.nist.gov/vuln/detail/CVE-2023-2253)
     - [CVE-2023-37788](https://nvd.nist.gov/vuln/detail/CVE-2023-37788)
     - [GHSA-fr2g-9hjm-wr23](https://github.com/advisories/GHSA-fr2g-9hjm-wr23)
-
+   
 ## 0.33.2 
 
 Release date: November 20, 2023
@@ -190,6 +286,50 @@ This feature is off by default. You can enable it by setting  `deployments.pgBou
     - [CVE-2023-39417](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417)
     - [CVE-2023-37920](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920)
     - [CVE-2023-35945](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945)
+
+## 0.32.6
+
+Release date: February 16, 2024
+
+### Additional improvements
+
+- Added support for [Kubernetes 1.29](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md)
+- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars). Your registry details are now automatically pulled from your core private registry configuration. 
+- Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
+
+### Bug fixes
+
+- Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
+- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  
+- Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.
+- Fixed an issue where you couldn't specify an image pull secret for the `certCopier` image, meaning that you couldn't pull it from a private registry.
+- Resolved the following vulnerabilities:
+
+    - [CVE-2023-39325](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325)
+    - [CVE-2023-52425](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-52425)
+    - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g)
+    - [CVE-2023-7104](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-7104)
+    - [CVE-2023-34054](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-34054)
+    - [CVE-2023-34062](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-34062)
+    - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p)
+    - [CVE-2023-1370](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1370)
+    - [CVE-2024-0985](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-0985)
+    - [CVE-2024-21626](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21626)
+    - [CVE-2023-47090](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47090)
+    - [CVE-2023-46129](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46129)
+    - [CVE-2023-46233](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46233)
+    - [GHSA-36jr-mh4h-2g58](https://github.com/advisories/GHSA-36jr-mh4h-2g58)
+    - [GHSA-9763-4f94-gfch](https://github.com/advisories/GHSA-9763-4f94-gfch)
+    - [CVE-2023-49569](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-49569)
+    - [CVE-2023-49568](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-49568)
+    - [CVE-2023-47108](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47108)
+    - [CVE-2023-45142](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45142)
+    - [CVE-2022-2625](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2625)
+    - [CVE-2023-5869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5869)
+    - [CVE-2023-2253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253)
+    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2022-21698)
+    - [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194)
+    - [CVE-2021-38561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561)
 
 ## 0.32.5
 

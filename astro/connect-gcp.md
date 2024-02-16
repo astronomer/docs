@@ -25,7 +25,7 @@ Standard clusters have different connection options than dedicated clusters.
 Standard clusters can connect to GCP in the following ways:
 
 - Using [static external IP addresses](#allowlist-external-ip-addresses-for-a-cluster).
-- Using Private Service Connect to all managed [Google APIs](https://cloud.google.com/vpc/docs/about-accessing-google-apis-endpoints).
+- Using Private Service Connect to all managed [Google APIs](https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-apis-global).
 
 Dedicated clusters can use all of the same connection options as standard clusters. Additionally, they support a number of private connectivity options including:
 

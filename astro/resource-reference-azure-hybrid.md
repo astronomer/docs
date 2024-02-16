@@ -63,11 +63,11 @@ You can host Astro Hybrid clusters in the following Azure regions:
 
 Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-¹ If you want to host Astro in a dedicated account owned by your Organization in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
+¹ If you want to host Astro in a dedicated account owned by your Organization in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 ## Supported Azure Database for PostgreSQL instance types
 
-The following Azure Database for PostgreSQL instance types are supported on Astro: 
+The following Azure Database for PostgreSQL instance types are supported on Astro:
 
 - Standard_D2ds_v4 (2 CPU, 8 GiB MEM)
 - Standard_D4ds_v4 (4 CPU, 16 GiB MEM)
@@ -103,7 +103,7 @@ The following table lists all available instance types for worker node pools, as
 | Standard_B4ms      | 2 CPUs | 14.5 GiB MEM |
 | Standard_B8ms      | 6 CPUs | 30.5 GiB MEM |
 
-If your Organization needs an instance type that supports a larger worker size, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Deployment settings](deployment-settings.md).
+If your Organization needs an instance type that supports a larger worker size, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Deployment resources](deployment-resources.md).
 
 ## Related documentation
 

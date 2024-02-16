@@ -7,7 +7,7 @@ description: View logs for your Deployments both locally and on Astro.
 
 View task and Airflow component logs to troubleshoot your data pipelines and better understand the health of both your tasks and their execution environment.
 
-Airflow has two different log types: 
+Airflow has two different log types:
 
 - _Component logs_ record the performance of your Airflow components.
 - _Task logs_ records events emitted by your DAG as each task executes.
@@ -21,7 +21,7 @@ Task logs can additionally be exported to third-party observability platforms. S
 
 Airflow has four core components: the scheduler, triggerer, worker, and webserver. Each component records its process in component logs. These logs can be used to monitor overall performance, troubleshoot errors, and optimize resources.
 
-- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. These logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-settings.md#scheduler-size).
+- _Scheduler logs_ describe the performance of the scheduler, which is responsible for scheduling and queueing task runs. These logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](deployment-resources.md#scheduler-size).
 
 - _Triggerer logs_ describe the performance of the triggerer, the Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
@@ -29,9 +29,9 @@ Airflow has four core components: the scheduler, triggerer, worker, and webserve
 
 - _Webserver logs_ relate to the health and performance of [the Airflow UI](https://docs.astronomer.io/learn/intro-to-airflow#airflow-components). If the Airflow UI at any point does not load, for example, webserver logs might indicate why.
 
-### Airflow component log levels 
+### Airflow component log levels
 
-Logs and messages might also be associated with one of the following _log levels_: 
+Logs and messages might also be associated with one of the following _log levels_:
 
 - **Error**: Emitted when a process fails or does not complete. For example, these logs might indicate a missing DAG file, an issue with your scheduler's connection to the Airflow database, or an irregularity with your scheduler's heartbeat.
 - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
@@ -39,7 +39,7 @@ Logs and messages might also be associated with one of the following _log levels
 
 ### View Airflow component logs in the Cloud UI
 
-You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. 
+You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page.
 
 1. In the Cloud UI, select a Workspace and then a Deployment.
 
@@ -55,13 +55,13 @@ Typically, this indicates that the Deployment you selected does not currently ha
 
 #### Filter options
 
-You can use the following options to specify the types of logs or messages that you want to view. 
+You can use the following options to specify the types of logs or messages that you want to view.
 
 - **String search**: Enter a string, keyword, or phrase to find in your logs. You can also search with suffix wildcards by adding a `*` to your search query. For example, `acti*` returns results that include `action` and `acting`. The string search does not include fuzzy matching, so misspelled strings or incomplete strings without a wildcard, `*`, return zero results.
 
-- **Time range**: Filter the logs displayed based on time. 
+- **Time range**: Filter the logs displayed based on time.
 
-- **Log type**: Filter based on whether the log message is from a scheduler, worker, webserver, or trigger. 
+- **Log type**: Filter based on whether the log message is from a scheduler, worker, webserver, or trigger.
 
 ### View Airflow component logs locally
 
@@ -89,9 +89,9 @@ Task logs for Astro Deployments are retained for 90 days. The task log retention
 
 You can also access local Airflow task logs in your local [Airflow UI](https://docs.astronomer.io/learn/airflow-ui#logs) or [printed to the terminal](https://docs.astronomer.io/learn/logging#log-locations).
 
-### Airflow task log levels 
+### Airflow task log levels
 
-Similar to the Airflow component log levels, task logs might also be associated with one of the following log levels, that you can search or filter with: 
+Similar to the Airflow component log levels, task logs might also be associated with one of the following log levels, that you can search or filter with:
 
 - **Error**
 - **Warn**
@@ -105,14 +105,14 @@ To access task logs from the Cloud UI:
 
 1. In the Cloud UI, select a Workspace.
 2. Click **DAGs**.
-3. Click the DAG you want to view task logs for. 
+3. Click the DAG you want to view task logs for.
 4. Click a task run in the DAG run grid.
 5. Click the **Logs** tab to switch from **Graph** view.
 
 ### View task logs in the Airflow UI
 
-1.  Access the Airflow UI. 
-  * To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**. 
+1.  Access the Airflow UI.
+  * To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**.
   * To access the Airflow UI in a local environment, open a browser and go to `http://localhost:8080`.
 2. Click a DAG.
 3. Click **Graph**.

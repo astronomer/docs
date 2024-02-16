@@ -41,34 +41,6 @@ If you're on your organization's network and can't access Astro, make a request 
 
 Astro supports Deployments with varying levels of resource usage.
 
-### Scheduler
-
-Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes:
-
-| Scheduler size | vCPU | Memory |
-| -------------- | ---- | ------ |
-| Small          | 1    | 2G     |
-| Medium         | 2    | 4G     |
-| Large          | 4    | 8G     |
-
-### Worker type
-
-Each Deployment worker queue has a _worker type_ that determines how many resources are available to your Airflow workers for running tasks. A worker type is a virtualized instance of CPU and memory on your cluster that is specific to the Astro platform. The underlying node instance type running your worker can vary based on how Astro optimizes resource usage on your cluster.
-
-Each virtualized instance of your worker type is a _worker_. Celery workers can run multiple tasks at once, while Kubernetes workers only scale up and down to run a single task at a time. For more information about configuring worker behavior, see [Worker queues](configure-worker-queues.md).
-
-The following table lists all available worker types on Astro Deployments.
-
-| Worker Type | vCPU | Memory | Max task concurrency |
-| ----------- | ---- | ------ | -------------------- |
-| A5          | 1    | 2GiB   | 15                   |
-| A10         | 2    | 4GiB   | 30                   |
-| A20         | 4    | 8GiB   | 60                   |
-| A40         | 8    | 16GiB  | 120                  |
-| A60         | 12   | 24GiB  | 240                  |
-
-All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker.
-
 ## Standard cluster regions
 
 A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astronomer. Astronomer maintains standard clusters in a limited regions and clouds, with support for more regions and clouds coming soon.
