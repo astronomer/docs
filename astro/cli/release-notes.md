@@ -66,7 +66,8 @@ The following changes have been made to the format of [Deployment files](deploym
     - There is a new config, `auto_select`. If `auto-select` is set to `true` in the config file, auto-select is always enabled.
 
 ### Bug fixes
-- Fixed a bug where `astro dev pytest --args` and `astro dev pytest --build-secrets` would fail.
+
+- Fixed an issue where `astro dev pytest --args` and `astro dev pytest --build-secrets` could fail.
 
 ## Astro CLI 1.22.0
 
