@@ -292,7 +292,7 @@ Note that Jinja templates are rendered as strings unless you set `render_templat
 
 </Tabs>
 
-Since the `requirements` parameter of the PythonVirtualenvOperator is [templatable](templating.md), you can use [Jinja templating](templating.md) to pass information at runtime, for example to install different packages for each run of the task.
+Since the `requirements` parameter of the PythonVirtualenvOperator is [templatable](templating.md), you can use [Jinja templating](templating.md) to pass information at runtime, for example to install a different version of pandas for each run of the task.
 
 ```python
 # from airflow.decorators import task
