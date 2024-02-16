@@ -15,9 +15,7 @@ import external_python_operator_dag from '!!raw-loader!../code-samples/dags/airf
 
 It is very common to run a task with different dependencies than your Airflow environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
-In Airflow you have several options for running custom Python code in isolated environments. Additionally, you can run most traditional operators inside a dedicated Kubernetes pod and use virtual branching operators to execute conditional task logic inside a virtual environment.
-
-In this guide, you'll learn how to choose the right isolated environment option for your use case, how to implement different virtual environment operators and decorators, and how to access Airflow context and variables in isolated environments.
+In Airflow you have several options for running custom Python code in isolated environments. In this guide, you'll learn how to choose the right isolated environment option for your use case, how to implement different virtual environment operators and decorators, and how to access Airflow context and variables in isolated environments.
 
 :::tip Other ways to learn
 
@@ -72,7 +70,6 @@ Airflow provides several options for running tasks in isolated environments.
 
 To run tasks in a dedicated Kubernetes Pod you can use:
 
-- [IsolatedOperator](https://github.com/astronomer/apache-airflow-providers-isolation) (IO)
 - [`@task.kubernetes`](#kubernetes-pod-operator) decorator 
 - [KubernetesPodOperator](#kubernetes-pod-operator) (KPO)
 
@@ -89,26 +86,25 @@ The virtual environment decorators have operator equivalents with the same funct
 
 Which option you choose depends on your use case and the requirements of your task. The table below shows which operators are best for which use cases.
 
-| Use Case | [IO](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
+| Use Case | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
 |----------|----------|----------|----------|----------|----------|----------|----------|
-| Run a traditional operator in a K8s Pod | :white_check_mark: | | | | | | |
-| Run a Python task in a K8s Pod | | :white_check_mark: | :white_check_mark: | | | | |
-| Run a Docker image without additional Python code in a K8s Pod | | | :white_check_mark: | | | | |
-| Run a Python task in an existing virtual environment | | | | :white_check_mark: | | | |
-| Run a Python task in a new virtual environment | | | | | :white_check_mark: | | |
-| Run branching code in an existing virtual environment | | | | | | :white_check_mark: | |
-| Run branching code in a new virtual environment | | | | | | | :white_check_mark: |
-| Reuse the same virtual environment for multiple tasks | | | | :white_check_mark: | | :white_check_mark: | |
-| Install different packages for each run of a task | | | | | :white_check_mark: | | :white_check_mark: |
+| Run a Python task in a K8s Pod | :white_check_mark: | :white_check_mark: | | | | |
+| Run a Docker image without additional Python code in a K8s Pod | | :white_check_mark: | | | | |
+| Run a Python task in an existing virtual environment | | | :white_check_mark: | | | |
+| Run a Python task in a new virtual environment | | | | :white_check_mark: | | |
+| Run branching code in an existing virtual environment | | | | | :white_check_mark: | |
+| Run branching code in a new virtual environment | | | | | | :white_check_mark: |
+| Reuse the same virtual environment for multiple tasks | | | :white_check_mark: | | :white_check_mark: | |
+| Install different packages for each run of a task | | | | :white_check_mark: | | :white_check_mark: |
 
 Another consideration when choosing an operator is the infrastructure you have available. Operators that run tasks in Kubernetes pods allow you to have full control over the environment and resources used, but they require a Kubernetes cluster. Operators that run tasks in Python virtual environments are easier to set up, but do not provide the same level of control over the environment and resources used.
 
-| Requirements | [IO](https://github.com/astronomer/apache-airflow-providers-isolation) | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
+| Requirements | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
 |----------|----------|----------|----------|----------|----------|----------|----------|
-| A Kubernetes cluster | :white_check_mark: | :white_check_mark:  |  :white_check_mark: | | | | |
-| A Docker image (with or without Python installed) | :white_check_mark: | | :white_check_mark: | | | | |
-| A Docker image (with Python installed) | | :white_check_mark: | | | | | |
-| A Python binary | | | | :white_check_mark: | (:white_check_mark:)*  | :white_check_mark: | (:white_check_mark:)*  |
+| A Kubernetes cluster | | :white_check_mark:  |  :white_check_mark: | | | | |
+| A Docker image (with or without Python installed) | | :white_check_mark: | | | | |
+| A Docker image (with Python installed) | :white_check_mark: | | | | | |
+| A Python binary | | | :white_check_mark: | (:white_check_mark:)*  | :white_check_mark: | (:white_check_mark:)*  |
 
 *Only required if you need to use a different Python version than your Airflow environment.
 
