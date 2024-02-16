@@ -101,7 +101,7 @@ Another consideration when choosing an operator is the infrastructure you have a
 
 | Requirements | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
 |----------|----------|----------|----------|----------|----------|----------|
-| A Kubernetes cluster | | :white_check_mark:  |  :white_check_mark: | | | | |
+| A Kubernetes cluster | :white_check_mark:  |  :white_check_mark: | | | | | |
 | A Docker image (with or without Python installed) | | :white_check_mark: | | | | |
 | A Docker image (with Python installed) | :white_check_mark: | | | | | |
 | A Python binary | | | :white_check_mark: | (:white_check_mark:)*  | :white_check_mark: | (:white_check_mark:)*  |
