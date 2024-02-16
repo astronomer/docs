@@ -294,15 +294,15 @@ Release date: February 16, 2024
 ### Additional improvements
 
 - Added support for [Kubernetes 1.29](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md)
-- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars). Your registry details are now automatically pulled from your core private registry configuration. <!-- https://github.com/astronomer/issues/issues/6113 -->
-- Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces. <!-- https://github.com/astronomer/issues/issues/66084113 -->
+- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars). Your registry details are now automatically pulled from your core private registry configuration. 
+- Fixed an issue where container status and usage did not appear in the **Metrics** tab for Deployments with pre-created namespaces.
 
 ### Bug fixes
 
 - Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
-- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  <!-- https://github.com/astronomer/issues/issues/5990 -->
+- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  
 - Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.
-- Fixed an issue where you couldn't specify an image pull secret for the `certCopier` image, meaning that you couldn't pull it from a private registry. <!-- https://github.com/astronomer/issues/issues/6102 -->
+- Fixed an issue where you couldn't specify an image pull secret for the `certCopier` image, meaning that you couldn't pull it from a private registry.
 - Resolved the following vulnerabilities:
 
     - [CVE-2023-39325](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325)
