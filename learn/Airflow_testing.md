@@ -168,11 +168,11 @@ astro dev run dags test my_dag '2023-01-29'
 
 ### The Astro CLI
 
-The Astro CLI includes many commands to help simplify many of these common testing procedures. For more details, please visit the dedicated page: [Test your Astro project locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally).
+The Astro CLI includes a suite of commands to help simplify common testing workflows. See [Test your Astro project locally](https://docs.astronomer.io/astro/cli/test-your-astro-project-locally).
 
 ### Test DAGs in a CI/CD pipeline
 
-You can use CI/CD tools to test and deploy your Airflow code. For more information on how to do so, please visit our dedicated page: [CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd).
+You can use CI/CD tools to test and deploy your Airflow code. By installing the Astro CLI into your CI/CD process, you can test your DAGs before deploying them to a production environment. See [set up CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd) for example implementations.
 
 ## Add test data or files for local testing
 
