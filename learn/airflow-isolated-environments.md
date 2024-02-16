@@ -87,7 +87,7 @@ The virtual environment decorators have operator equivalents with the same funct
 Which option you choose depends on your use case and the requirements of your task. The table below shows which operators are best for which use cases.
 
 | Use Case | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
-|----------|----------|----------|----------|----------|----------|----------|----------|
+|----------|----------|----------|----------|----------|----------|----------|
 | Run a Python task in a K8s Pod | :white_check_mark: | :white_check_mark: | | | | |
 | Run a Docker image without additional Python code in a K8s Pod | | :white_check_mark: | | | | |
 | Run a Python task in an existing virtual environment | | | :white_check_mark: | | | |
@@ -100,7 +100,7 @@ Which option you choose depends on your use case and the requirements of your ta
 Another consideration when choosing an operator is the infrastructure you have available. Operators that run tasks in Kubernetes pods allow you to have full control over the environment and resources used, but they require a Kubernetes cluster. Operators that run tasks in Python virtual environments are easier to set up, but do not provide the same level of control over the environment and resources used.
 
 | Requirements | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
-|----------|----------|----------|----------|----------|----------|----------|----------|
+|----------|----------|----------|----------|----------|----------|----------|
 | A Kubernetes cluster | | :white_check_mark:  |  :white_check_mark: | | | | |
 | A Docker image (with or without Python installed) | | :white_check_mark: | | | | |
 | A Docker image (with Python installed) | :white_check_mark: | | | | | |
