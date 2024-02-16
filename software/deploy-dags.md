@@ -105,7 +105,12 @@ Create a service account that has access to your Deployment and copy its associa
 
 Your automated workflow must include the following two steps:
 
-1. From your Astro project directory, run `tar -czf dags.tgz dags` to zip your `dags` directory into a `.tgz` file. This file should be accessible from the rest of your automated process.
+1. Create a `.tgz` file that contains only the contents of your Astro project `dags` folder. This file should be accessible from the rest of your automated process. For example, you can do this using the following command:
+
+    ```sh
+    tar -czf dags.tgz dags` to zip your `dags
+    ```
+
 2. Run a `POST` request to the endpoint `https://deployments.basedomain/<deployment-release-name>/dags/upload` to upload your `.tgz` file to your Deployment. For example, making the request using curl would look similar to the following:
 
     ```sh
