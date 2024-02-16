@@ -95,7 +95,7 @@ Which option you choose depends on your use case and the requirements of your ta
 | Run branching code in an existing virtual environment | | | | | :white_check_mark: | |
 | Run branching code in a new virtual environment | | | | | | :white_check_mark: |
 | Reuse the same virtual environment for multiple tasks | | | :white_check_mark: | | :white_check_mark: | |
-| Install different packages for each run of a task | | | | :white_check_mark: | | :white_check_mark: |
+| Install different packages for each run of a task | | | | :white_check_mark: (traditional operator) | | :white_check_mark: (traditional operator) |
 
 Another consideration when choosing an operator is the infrastructure you have available. Operators that run tasks in Kubernetes pods allow you to have full control over the environment and resources used, but they require a Kubernetes cluster. Operators that run tasks in Python virtual environments are easier to set up, but do not provide the same level of control over the environment and resources used.
 
@@ -161,6 +161,7 @@ After restarting your Airflow environment you can use this Python binary by refe
 To run any Python function in your virtual environment, use the `@task.external_python` decorator on it and set the `python` parameter to the location of your Python binary.
 
 ```python
+# from airflow.decorators import task
 # import os
 
 @task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
@@ -240,6 +241,8 @@ Installing Airflow itself and Airflow provider packages in isolated environments
 Add the pinned versions of the packages you need to the `requirements` parameter of the `@task.virtualenv` decorator. The decorator creates a new virtual environment at runtime.
 
 ```python
+# from airflow.decorators import task
+
 @task.virtualenv(requirements=["pandas==1.5.1"])  # add your requirements to the list
 def my_isolated_task(): 
     import pandas as pd
@@ -289,6 +292,29 @@ Note that Jinja templates are rendered as strings unless you set `render_templat
 
 </Tabs>
 
+Since the `requirements` parameter of the PythonVirtualenvOperator is [templatable](templating.md), you can use [Jinja templating](templating.md) to pass information at runtime, for example to install different packages for each run of the task.
+
+```python
+# from airflow.decorators import task
+# from airflow.models.baseoperator import chain
+# from airflow.operators.python import PythonVirtualenvOperator
+
+@task
+def get_pandas_version():
+    pandas_version = "1.5.1"  # retrieve the pandas version according to your logic
+    return pandas_version
+
+my_isolated_task = PythonVirtualenvOperator(
+    task_id="my_isolated_task",
+    python_callable=my_isolated_function,
+    requirements=[
+        "pandas=={{ ti.xcom_pull(task_ids='get_pandas_version') }}",
+    ],
+)
+
+chain(get_pandas_version(), my_isolated_task)
+```
+
 If your task requires a different Python version than your Airflow environment, you need to install that Python version in your Airflow environment so the Virtualenv task can use it. You can use the [Astronomer PYENV BuildKit](https://github.com/astronomer/astro-provider-venv) to install a different Python version in your Dockerfile.
 
 
@@ -318,6 +344,8 @@ The Python version can be referenced directly using the `python` parameter of th
 <TabItem value="taskflow">
 
 ```python
+# from airflow.decorators import task
+
 @task.virtualenv(
     requirements=["pandas==1.5.1"], 
     python_version="3.10",  # specify the Python version
@@ -378,6 +406,7 @@ To use the `@task.kubernetes` decorator or the KubernetesPodOperator, you need p
 <TabItem value="taskflow">
     
 ```python
+# from airflow.decorators import task
 # from airflow.configuration import conf
 
 # if you are running Airflow on Kubernetes, you can get 
@@ -443,6 +472,7 @@ To run conditional task logic in an isolated environment, use the branching vers
 <TabItem value="taskflow-epo">
 
 ```python
+# from airflow.decorators import task
 # import os
 
 @task.branch_external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
@@ -491,6 +521,8 @@ my_isolated_task = BranchExternalPythonOperator(
 <TabItem value="taskflow-venv">
 
 ```python
+# from airflow.decorators import task
+
 @task.branch_virtualenv(requirements=["pandas==1.5.3"])
 def my_isolated_task():
     import pandas as pd
@@ -552,6 +584,7 @@ Due to compatibility issues, other objects from the context such as `ti` cannot 
 <TabItem value="taskflow-epo">
     
 ```python
+# from airflow.decorators import task
 # import os
 
 # note that to be able to use the logical date, pendulum needs to be installed in the epo_pyenv
@@ -587,6 +620,8 @@ my_isolated_task = ExternalPythonOperator(
 <TabItem value="taskflow-venv">
 
 ```python
+# from airflow.decorators import task
+
 @task.virtualenv(
     requirements=[
         "pandas==1.5.1",
@@ -697,6 +732,8 @@ As of Airflow 2.8 you can cache the virtual environment for reuse by providing a
 <TabItem value="taskflow">
 
 ```python
+# from airflow.decorators import task
+
 @task.virtualenv(
     requirements=[
         "apache-airflow-providers-snowflake==5.3.0",
@@ -722,6 +759,8 @@ my_isolated_task()
 <TabItem value="traditional">
 
 ```python
+# from airflow.operators.python import PythonVirtualenvOperator
+
 def my_isolated_function():
     from airflow.providers.snowflake.hooks.snowflake import SnowflakeHook
     import pandas as pd
