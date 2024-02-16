@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Astro CLI Testing Tools'
-title: 'Test your Astro project with the Astro CLI'
+sidebar_label: 'Test your DAGs'
+title: 'Test your Astro project'
 id: test-your-astro-project-locally
 description: Check your Airflow DAGs for errors before you run them locally or deploy to Astro.
 ---
