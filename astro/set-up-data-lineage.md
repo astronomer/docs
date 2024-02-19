@@ -20,7 +20,7 @@ This guide provides information about how lineage metadata is automatically extr
 
 Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/default-extractors) for popular Airflow operators.
 
-The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
+The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.mdx) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
 
 Each operator generates different lineage metadata based on its default extractor. For more information about operators with default extractors and what lineage metadata they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
 

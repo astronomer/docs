@@ -99,5 +99,5 @@ The following table contains all major Runtime releases that are no longer suppo
 
 ## Related documentation
 
-- [Astro Runtime architecture](runtime-image-architecture.md)
+- [Astro Runtime architecture](runtime-image-architecture.mdx)
 - [Astro Runtime release notes](runtime-release-notes.md)
