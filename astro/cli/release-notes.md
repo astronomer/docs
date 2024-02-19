@@ -31,7 +31,7 @@ Use the following new commands to hibernate development Deployments regardless o
 - [`astro deployment hibernate`](https://docs.astronomer.io/astro/cli/astro-deployment-hibernate)
 - [`astro deployment wake-up`](https://docs.astronomer.io/astro/cli/astro-deployment-wake-up)
 
-You can additionally now create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
+Additionally, you can create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
 
 ## Astro CLI 1.23.0
 
