@@ -105,7 +105,7 @@ Create a service account that has access to your Deployment and copy its associa
 
 Your automated workflow must include the following two steps:
 
-1. Create a `.tgz` file that contains only the contents of your Astro project `dags` folder. This file should be accessible from the rest of your automated process. For example, you can do this using the following command:
+1. Create a `.tgz` file that contains only the `dags` folder of your Astro project. This file should be accessible from the rest of your automated process. For example, you can do this using the following command:
 
     ```sh
     tar -czf dags.tgz dags
