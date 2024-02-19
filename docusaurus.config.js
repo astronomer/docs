@@ -232,7 +232,8 @@ module.exports = {
               'info',
               'tip',
               'cli',
-              'highlight'
+              'highlight',
+              'privatepreview'
             ],
             extendDefaults: true,
           },

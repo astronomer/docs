@@ -7,6 +7,8 @@ import AdmonitionTypeDanger from '@theme/Admonition/Type/Danger';
 import AdmonitionTypeCaution from '@theme/Admonition/Type/Caution';
 import AdmonitionTypeCli from '@theme/Admonition/Type/Cli';
 import AdmonitionTypeHighlight from '@theme/Admonition/Type/Highlight';
+import AdmonitionTypePrivatePreview from '@theme/Admonition/Type/PrivatePreview';
+
 
 
 const admonitionTypes = {
@@ -17,6 +19,7 @@ const admonitionTypes = {
   danger: AdmonitionTypeDanger,
   cli: AdmonitionTypeCli,
   highlight: AdmonitionTypeHighlight,
+  privatepreview: AdmonitionTypePrivatePreview,
 };
 
 // Undocumented legacy admonition type aliases
