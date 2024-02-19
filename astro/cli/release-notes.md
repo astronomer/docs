@@ -65,6 +65,10 @@ The following changes have been made to the format of [Deployment files](deploym
     - If you log in to Astro with an API token using the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables, auto-select is enabled. This is important because it ensures that if you have CI/CD scripts that rely on auto-select, they will continue to work.
     - There is a new config, `auto_select`. If `auto-select` is set to `true` in the config file, auto-select is always enabled.
 
+### Bug fixes
+
+- Fixed an issue where `astro dev pytest --args` and `astro dev pytest --build-secrets` could fail.
+
 ## Astro CLI 1.22.0
 
 Release date: January 24, 2024
