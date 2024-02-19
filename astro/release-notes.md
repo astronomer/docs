@@ -15,7 +15,7 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro CLI Version**: {{CLI_VER}} ([Release notes](runtime-release-notes.md))
+**Latest Astro CLI Version**: {{CLI_VER_LATEST}} ([Release notes](runtime-release-notes.md))
 
 **Latest Astro Runtime Version**: {{RUNTIME_VER}} ([Release notes](runtime-release-notes.md))
 
