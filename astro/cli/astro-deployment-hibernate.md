@@ -12,7 +12,7 @@ Hibernate an Astro development Deployment for a set amount of time. Overrides an
 ## Usage
 
 ```sh
-astro deployment hibernate [one of --until/ --for/ --resumeschedule]
+astro deployment hibernate [one of --until/ --for/ --resume-schedule]
 ```
 
 ## Options

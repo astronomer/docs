@@ -63,10 +63,10 @@ deployment:
         default_worker_type: m5.xlarge ## Only used when executor is KUBERNETES
         is_development_mode: true
         hibernation_schedules:
-          - hibernate_at_cron: "1 * * * * "
-            wake_at_cron: "2 * * * *"
+          - hibernate_at: "1 * * * * "
+            wake_at: "2 * * * *"
             description: "My hibernation description"
-            is_enabled: true
+            enabled: true
     worker_queues: ## worker_queues only used when executor is CELERY
         - name: default
           max_worker_count: 10

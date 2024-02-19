@@ -12,7 +12,7 @@ Wake up an Astro development Deployment from hibernation. Overrides any existing
 ## Usage
 
 ```sh
-astro deployment hibernate [one of --until/ --for/ --resumeschedule]
+astro deployment hibernate [one of --until/ --for/ --resume-schedule]
 ```
 
 ## Options
