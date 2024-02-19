@@ -61,6 +61,12 @@ deployment:
         resource_quota_cpu: "10"
         resource_quota_memory: 20Gi
         default_worker_type: m5.xlarge ## Only used when executor is KUBERNETES
+        is_development_mode: true
+        hibernation_schedules:
+          - hibernate_at_cron: "1 * * * * "
+            wake_at_cron: "2 * * * *"
+            description: "My hibernation description"
+            is_enabled: true
     worker_queues: ## worker_queues only used when executor is CELERY
         - name: default
           max_worker_count: 10

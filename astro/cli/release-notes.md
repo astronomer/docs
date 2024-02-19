@@ -16,7 +16,22 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-- **Stable versions**: 1.23.0, 1.22.0, and 1.21.0. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+- **Stable versions**: 1.24.0, 1.23.0, and 1.22.0. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+
+## Astro CLI 1.24.0
+
+Release date: February 19, 2024
+
+### Support for hibernating development Deployments
+
+You can now use the Astro CLI to hibernate or wake up a development Deployment. These commands work well in automated processes where a Deployment requires flexibility for when it hibernates. Note that you can hibernate a Deployment only if you enabled **Development Mode** when you [created the Deployment](create-deployment.md).
+
+Use the following new commands to hibernate development Deployments regardless of their existing hibernation schedule:
+
+- [`astro deployment hibernate`](https://docs.astronomer.io/astro/cli/astro-deployment-hibernate)
+- [`astro deployment wake-up`](https://docs.astronomer.io/astro/cli/astro-deployment-wake-up)
+
+You can additionally now create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
 
 ## Astro CLI 1.23.0
 
