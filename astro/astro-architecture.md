@@ -58,7 +58,7 @@ _Astro Runtime_ is a [debian-based Docker image](https://quay.io/repository/astr
 
 Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.md) to Astro Runtime versions, so that you can keep your DAGs running for longer without disruption.
 
-See [Astro Runtime Architecture and features](runtime-image-architecture.md) for a complete feature list.
+See [Astro Runtime Architecture and features](runtime-image-architecture.mdx) for a complete feature list.
 
 ### Workspace
 
