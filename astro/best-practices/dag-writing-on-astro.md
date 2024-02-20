@@ -138,7 +138,7 @@ This example show a simple DAG that follows the best practices for writing Airfl
     ```
 
 3. Add at least one task to your DAG definition. Set the `queue` parameter to assign the task to a specific worker queue. 
-4. Configure the pre-existing DAG validation tests in the `tests/dags` directory for your needs. A common test is to check if the `catchup` parameter is set to `False`:
+4. Configure the pre-existing DAG validation tests in the `tests/dags` directory for your needs. A common test is to enforce the `catchup` parameter is set to `False`:
 
     ```python
     @pytest.mark.parametrize(
