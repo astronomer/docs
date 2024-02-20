@@ -5,7 +5,7 @@ id: platform-variables
 description: A list of environment variables that are set globally on Astro and should not be modified.
 ---
 
-This document is a reference for all environment variables on Astronomer with different default values than open source Apache Airflow. You can override [default Runtime environment variables](runtime-image-architecture.md#default-environment-variables), but you can't override [system environment variables](#system-environment-variables).
+This document is a reference for all environment variables on Astronomer with different default values than open source Apache Airflow. You can override [default Runtime environment variables](runtime-image-architecture.mdx#default-environment-variables), but you can't override [system environment variables](#system-environment-variables).
 
 For information on setting your own environment variables, see [Environment variables](manage-env-vars.md).
 
@@ -23,10 +23,10 @@ If you need to set one of these variables for a particular use case, contact [As
 
 | Environment Variable                                               | Description                                                                                                                     | Value                                                      |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_TIMEOUT`         | The amount of time that the Celery executor waits for a response from the Celery backend before throwing an error.                           | `30`                                                       |
-| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_CONNECT_TIMEOUT` | The amount of time that the Celery executor will attempt to connect to the Celery backend before retrying.                                   | `5`                                                        |
-| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_KEEPALIVE`       | Whether the Celery executor will check whether the connection to the Celery backend is still alive.                                          | `True`                                                     |
-| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT`       | Whether the Celery executor will retry a connection to the Celery backend when the connection fails.                                         | `True`                                                     |
+| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_TIMEOUT`         | The amount of time that the Celery executor waits for a response from the Celery backend before throwing an error.              | `30`                                                       |
+| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_CONNECT_TIMEOUT` | The amount of time that the Celery executor will attempt to connect to the Celery backend before retrying.                      | `5`                                                        |
+| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_KEEPALIVE`       | Whether the Celery executor will check whether the connection to the Celery backend is still alive.                             | `True`                                                     |
+| `AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT`       | Whether the Celery executor will retry a connection to the Celery backend when the connection fails.                            | `True`                                                     |
 | `AIRFLOW__LOGGING__DAG_PROCESSOR_LOG_TARGET`                       | Routes scheduler logs to stdout                                                                                                 | `stdout`                                                   |
 | `AIRFLOW__LOGGING__REMOTE_LOGGING`                                 | Enables remote logging                                                                                                          | `True`                                                     |
 | `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`                         | Location of remote logging storage                                                                                              | `baseLogFolder`                                            |

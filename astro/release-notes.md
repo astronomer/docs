@@ -21,7 +21,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## February 20, 2024
+## February 21, 2024
 
 ### New worker types
 
@@ -40,7 +40,7 @@ AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_KEEPALIVE=True
 AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT=True
 ```
 
-For more information about each of these variables, see [Platform variables](platform-varaibles.md)
+For more information about each of these variables, see [Platform variables](platform-variables.md)
 
 ### Ephemeral storage limit on schedulers 
 
