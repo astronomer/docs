@@ -47,7 +47,7 @@ After initializing a new project with the Astro CLI by running `astro dev init`,
 
 :::tip
 
-If you are unable to install the Astro CLI on your local machine, due to company policy or other reasons, you can use it in GitHub Codespaces by forking the [Astro CLI Codespaces] repository.
+If you are unable to install the Astro CLI on your local machine, due to company policy or other reasons, you can use it in GitHub Codespaces by forking the [Astro CLI Codespaces](https://github.com/astronomer/astro-cli-codespaces) repository.
 
 :::
 
