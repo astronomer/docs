@@ -59,7 +59,7 @@ Airflow pipelines are Python code and all software engineering best practices ap
 - Create [dedicated branches for development, staging and production](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-environments).
 - Use a CI/CD pipeline to automate testing and deployment. See [Develop a CI/CD workflow for deploying code to Astro](https://docs.astronomer.io/astro/set-up-ci-cd).
 
-![Airflow CI/CD pipeline showing a 3 branch structure with a dev branch corresponding to Local Development, a staging branch corresponding to a staging Deployment and a production branch corresponding to the Production deployment. CI/CD is present at all steps of the workflow.](https://docs.astronomer.io/img/docs/airflow-cicd-3-branches.png)
+![Airflow CI/CD pipeline showing a 3 branch structure with a dev branch corresponding to Local Development, a staging branch corresponding to a staging Deployment and a production branch corresponding to the Production deployment. CI/CD is present at all steps of the workflow.](/img/docs/airflow-cicd-3-branches.png)
 
 Your Airflow pipelines should be tested and validated before deployment:
 
