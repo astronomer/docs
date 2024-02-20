@@ -38,7 +38,7 @@ Dedicated clusters can connect to AWS in the same ways as standard clusters. Add
 - Transit Gateways
 - AWS PrivateLink
 
-If you require a private connection between Astro and AWS, Astronomer recommends configuring a dedicated cluster. See [Create a dedicated cluster](create-dedicated-cluster.md).
+If you require a private connection between Astro and AWS, Astronomer recommends configuring a dedicated cluster. See [Create a dedicated cluster](create-dedicated-cluster.md). Transitive connectivity to on-premise networks is also possible through your managed VPCs. However, architectures with a demarcation point between Astro and your on-premise network are not supported.
 
 ## Access a public AWS endpoint
 

@@ -74,25 +74,19 @@ Repeat these steps for each Astro Deployment that needs to access your AWS resou
 
 ### Step 2: Create an Airflow connection
 
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection.
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Cloud UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
-1. In the Airflow UI for your Deployment, go to **Admin** > **Connections**. Click **+** to add a new connection, then select the connection type as **Amazon Web Services**. 
+- **Connection Id**: Enter a name for the connection.
+- **Extra**: 
 
-2. Complete the following fields:
-    - **Connection Id**: Enter a name for the connection.
-    - **Extra**: 
+    ```json
+    {
+    "role_arn": "<your-role-arn>",
+    "region_name": "<your-region>"
+    }
+    ```
 
-        ```json
-        {
-        "role_arn": "<your-role-arn>",
-        "region_name": "<your-region>"
-        }
-        ```
-
-3. Click **Save**. 
-    
-    If you don't see **Amazon Web Services** as a connection type, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
-
+If you don't see **Amazon Web Services** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Amazon/versions/latest) for the latest package.
 
 </TabItem>
 
@@ -145,18 +139,12 @@ Repeat these steps for each Deployment that needs to access your GCP resources.
 
 #### Step 2: Create an Airflow connection
 
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection.
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create a **Google Cloud** connection in the [Cloud UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
-1. In the Airflow UI for your Deployment, go to **Admin** > **Connections**. Click **+** to add a new connection, then select the connection type as **Google Cloud**. 
+- **Connection Id**: Enter a name for the connection.
+- **Project Id**: Enter the ID of your Google Cloud Project where your services are running.
 
-2. Fill out the following fields:
-
-    - **Connection Id**: Enter a name for the connection.
-    - **Project Id**: Enter the ID of your Google Cloud Project where your services are running.
-
-3. Click **Save**. 
-    
-    If you don't see **Google Cloud** as a connection type, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Google/versions/latest) for the latest package.
+If you don't see **Google Cloud** as a connection type in the Airflow UI, ensure you have installed its provider package in your Astro project's `requirements.txt` file. See **Use Provider** in the [Astronomer Registry](https://registry.astronomer.io/providers/Google/versions/latest) for the latest package.
 
 </TabItem>
 
