@@ -102,7 +102,7 @@ Using service accounts provides the greatest amount of flexibility for authorizi
 2. In the Cloud UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
 3. In the **Workload Identity** dropdown menu, select **ADD GCP Service Account**
 4. Enter your GCP service account ID when prompted, then copy and run the provided gcloud CLI command. 
-5. Click **Save**. The service account is now selectable as a workload identity for the Deployment.f
+5. Click **Save**. The service account is now selectable as a workload identity for the Deployment.
 6. Complete one of the following options for your Deployment to access your cloud resources:
 
     - Create a **Google Cloud** connection type in Airflow and configure the following values:
