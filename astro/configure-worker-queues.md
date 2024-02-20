@@ -59,6 +59,8 @@ The following table lists all available worker types on Astro Deployments.
 | A20         | 4    | 8GiB   | 10 GiB            | 20                       | 60                   |
 | A40         | 8    | 16GiB  | 10 GiB            | 40                       | 120                  |
 | A60         | 12   | 24GiB  | 10 GiB            | 60                       | 180                  |
+| A120        | 24   | 48GiB  | 10 GiB            | 120                      | 360                  |
+| A160        | 32   | 64GiB  | 10 GiB            | 160                      | 480                  |
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker.
 
