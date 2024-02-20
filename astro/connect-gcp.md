@@ -95,11 +95,11 @@ Use Private Service Connect (PSC) to create private connections from Astro to GC
 
 Astro clusters are by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis#supported-apis). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
 
-A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
-
+You can check if the service to which you’re attempting to connect Airflows is available through the All Google APIs target by running: 
 ```bash
 gcloud services list --available --filter="name:googleapis.com"
 ```
+If you do NOT see your service listed, please open a support case with Astronomer support to set up the necessary PSC connectivity. 
 
 </TabItem>
 
