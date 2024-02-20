@@ -124,7 +124,7 @@ This example show a simple DAG that follows the best practices for writing Airfl
         default_args={
             "retries": 3,  # Set retries to > 0
             "owner": "Astro"  # Define an owner
-        }
+        },
         owner_links={
             "Astro": "mailto:my_email@my_company.com"  # Define a link for the owner
         },
