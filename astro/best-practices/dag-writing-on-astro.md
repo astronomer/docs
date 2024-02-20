@@ -26,10 +26,13 @@ If you are new to Airflow in general, we recommend starting with the following r
 
 ## Feature overview
 
-- [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
-- [Worker queues](https://docs.astronomer.io/astro/configure-worker-queues).
-- [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables)
-- [Astro alerts](https://docs.astronomer.io/astro/alerts)
+- [Astro CLI](overview.md).
+- [CI/CD on Astro](set-up-ci-cd.md).
+- [Worker queues](configure-worker-queues.md).
+- [Astro Cloud UI Environment Manager](manage-connections-variables.md)
+- [Astro alerts](alerts.md)
+- [Kubernetes Executor](executors-overview.md)
+- [KubernetesPodOperator](kubernetespodoperator.md)
 
 ## Best practice guidance 
 
@@ -99,7 +102,7 @@ This example show a simple DAG that follows the best practices for writing Airfl
 ### Prerequisites
 
 - At least one [Astro Deployment](create-deployment.md) with at least one [worker queue](https://docs.astronomer.io/astro/configure-worker-queues) defined.
-- An [Astro project](https://docs.astronomer.io/astro/cli/overview) initialized with the Astro CLI.
+- An [Astro project](https://docs.astronomer.io/astro/cli/overview) initialized with the Astro CLI. If you do not have a project ready you can fork the [Astro CLI Codespaces](https://github.com/astronomer/astro-cli-codespaces) repository.
 
 ### Implementation
 
