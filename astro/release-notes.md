@@ -29,7 +29,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](resource-reference-hosted.md#deployment-resources) for more information about each worker type.
 
-### New platform variables to ensure reliability with the Celery executor
+### New platform variables to improve Celery executor reliability
 
 Astro Deployments now have the following environment variables set by default. This is to ensure that the Celery executor doesn't freeze when it attempts to connect with a Pod in the Celery backend that has unexpectedly terminated.
 
