@@ -21,7 +21,7 @@ astro deployment hibernate [one of --until/ --for/ --resume-schedule]
 | ------------------------ | ------------------------------------------------------------------- | ---------------------------------------------------- |
 | `-n`,`--deployment-name` | The name of the development Deployment to wake up.                  | Any valid Deployment name                            |
 | `-u, --until`            | Specify the awake period using an end date and time.                | Any future date in the format `YYYY-MM-DDT00:00:00Z` |
-| `-d, --for`              | Specify the awake period using a duration.                          | Any amount of time in the format `YhZm`            |
+| `-d, --for`              | Specify the awake period using a duration.                          | Any amount of time in the format `XhYm`            |
 | `-r, --resume-schedule`  | Remove any overrides and resume regular hibernation schedule.       | None                                                 |
 | `-f, --force`            | The CLI will not prompt to confirm before waking up the Deployment. | None                                                 |
 
