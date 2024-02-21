@@ -28,22 +28,32 @@ When you [update a Deployment](#configure-dag-only-deploys-on-a-deployment) to s
 
 ## Enable the feature on an Astronomer cluster
 
-By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, add the following configuration to your `config.yaml` file:
+By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, set `global.dagOnlyDeployment.enabled` to `true` in your `config.yaml` file, e.g.:
 
 ```yaml
-dagOnlyDeployment:
+global:
+  dagOnlyDeployment:
     enabled: true
-    image: quay.io/astronomer/ap-dag-deploy:0.3.2
-    securityContext:
-      fsGroup: 50000
-    resources: {
+```
+
+## Additional configurable options
+
+You may configure certain other configurable options related to dag-deployment, including the amount of resources available to the container as per the example below:
+
+```yaml
+global:
+  dagOnlyDeployment:
+    enabled: true
+    resources:
       requests:
         cpu: "100m"
         memory: "256Mi"
       limits:
         cpu: "500m"
         memory: "1024Mi"
-    }
+    image: quay.io/astronomer/ap-dag-deploy:0.3.2
+    securityContext:
+      fsGroup: 50000
 ```
 
 :::info
