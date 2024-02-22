@@ -5,7 +5,7 @@ id: create-deployment
 description: "Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline."
 ---
 
-An Astro Deployment is an Airflow environment that is powered by [Astro Runtime](runtime-image-architecture.md). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
+An Astro Deployment is an Airflow environment that is powered by [Astro Runtime](runtime-image-architecture.mdx). It runs all core Airflow components, including the Airflow webserver, scheduler, and workers, plus additional tooling for reliability and observability.
 
 There are three ways to create a Deployment:
 
@@ -56,7 +56,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
      A confirmation message appears indicating that the Deployment is in progress. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
 
 You can continue to access your other Deployments by selecting the **Deployments** link.
-    
+
 For more information about possible Deployment health statuses, see [Deployment health](deployment-health-incidents.md).
 
 ## Next steps
