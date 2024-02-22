@@ -27,7 +27,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <HostedBadge/>
 
-Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](resource-reference-hosted.md#deployment-resources) for more information about each worker type.
+Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#deployment-resources) for more information about each worker type.
 
 ### New platform variables to improve Celery executor reliability
 
