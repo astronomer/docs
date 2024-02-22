@@ -24,7 +24,7 @@ Release date: February 19, 2024
 
 ### Support for hibernating development Deployments
 
-You can now use the Astro CLI to hibernate or wake up a development Deployment. These commands work well in automated processes where a Deployment requires flexibility for when it hibernates. Note that you can hibernate a Deployment only if you enabled **Development Mode** when you [created the Deployment](create-deployment.md).
+You can now use the Astro CLI to hibernate or wake up a development Deployment. These commands work well in automated processes where a Deployment requires flexibility for when it hibernates. Note that you can hibernate a Deployment only if you enable **Development Mode** when you [create the Deployment](create-deployment.md).
 
 Use the following new commands to hibernate development Deployments regardless of their existing hibernation schedule:
 
