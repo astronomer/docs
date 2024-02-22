@@ -352,6 +352,7 @@
 /astro/deployment-settings#transfer-a-deployment-to-another-workspace /astro/transfer-a-deployment 301
 /runtime-image-architecture#default-environment-variables /astro/platform-variables.md#default-runtime-environment-variables 301
 /astro/resource-reference-hosted#worker-type /astro/deployment-resources#hosted-worker-types 301
+/astro/resource-reference-hosted#deployment-resources /astro/deployment-resources 301
 
 # redirect Astro use-cases to renamed best-practices section
 /astro/use-cases/connections-branch-deploys /astro/best-practices/connections-branch-deploys
