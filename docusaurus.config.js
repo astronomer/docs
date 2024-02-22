@@ -321,18 +321,18 @@ module.exports = {
   ],
   scripts: [
     {
-      src: 'https://docs.astronomer.io/scripts/segment.js',
+      src: '/scripts/segment.js',
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/scripts/consent-manager.js',
+      src: '/scripts/consent-manager.js',
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/scripts/consent-manager-config.js',
+      src: '/scripts/consent-manager-config.js',
     },
     {
-      src: "https://docs.astronomer.io/scripts/set-tab.js",
+      src: "/scripts/set-tab.js",
       async: true,
       defer: true,
     },
@@ -342,7 +342,7 @@ module.exports = {
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/scripts/remix-redocly.js',
+      src: '/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },
