@@ -21,6 +21,41 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## February 21, 2024
+
+### New worker types
+
+<HostedBadge/>
+
+Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#deployment-resources) for more information about each worker type.
+
+### New platform variables to improve Celery executor reliability
+
+Astro Deployments now have the following environment variables set by default. This is to ensure that the Celery executor doesn't freeze when it attempts to connect with a Pod in the Celery backend that has unexpectedly terminated.
+
+```
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_TIMEOUT=30
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_CONNECT_TIMEOUT=5
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_KEEPALIVE=True
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT=True
+```
+
+For more information about each of these variables, see [Platform variables](https://docs.astronomer.io/astro/platform-variables)
+
+### Ephemeral storage limit on schedulers 
+
+Astro now limits that amount of ephemeral storage in a scheduler to 5Gi. If a scheduler attempts to use more than 5Gi of ephemeral storage, it will be terminated.
+
+It is rare for schedulers to require more than 5Gi of ephemeral storage. If your schedulers start to terminate after this update, ensure the following:
+
+- Your Deployment is not producing large amounts of temporary files without cleaning them up.
+- If you're using the BingAds Python SDK, your Deployment uses version 13.0.14 or later. Earlier releases include a [bug](https://github.com/BingAds/BingAds-Python-SDK/issues/117) that generates large amounts of temporary files. 
+
+### Bug fixes
+
+- You can no longer create Teams using the Astro API in an Organization that has SCIM provisioning enabled.
+- Astro API responses have been standardized to always return cloud provider names in uppercase (for example, `AWS`).
+
 ## February 13, 2024
 
 ### New Astro reporting dashboards show metrics for Deployments across your Organization
