@@ -7,8 +7,7 @@ description: "View information about your Organization, Deployments, DAGs, and c
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-:::privatepreview 
-:::
+:::privatepreview
 
 Astro provides dashboards that share important metrics about your Organization's use of Astro, which you can use to manage Deployments and resources. These dashboards include:
 
@@ -76,6 +75,7 @@ To simulate an SLA, you must first define an SLA and then apply it to specific D
 The report generates a line graph that shows the **Median End Time** of the DAG, the **Average End Time**, compared to the **SLA** time you defined.
 
 ## Cost Breakdown
+
 <HostedBadge/>
 
 In the **Cost Breakdown** dashboard, you can find detailed information about how much you spend on Astro over time for each of your Workspaces and Deployments. Use this data alongside your other dashboards to identify the biggest opportunities for cost reduction in your Organization.
