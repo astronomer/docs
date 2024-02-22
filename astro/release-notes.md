@@ -40,7 +40,7 @@ AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_KEEPALIVE=True
 AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT=True
 ```
 
-For more information about each of these variables, see [Platform variables](platform-variables.md)
+For more information about each of these variables, see [Platform variables](https://docs.astronomer.io/astro/platform-variables)
 
 ### Ephemeral storage limit on schedulers 
 
