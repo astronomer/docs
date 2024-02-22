@@ -86,28 +86,25 @@ The virtual environment decorators have operator equivalents with the same funct
 
 Which option you choose depends on your use case and the requirements of your task. The table below shows which operators are best for particular use cases.
 
-| Use Case | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
-|----------|----------|----------|----------|----------|----------|----------|
-| Run a Python task in a K8s Pod | :white_check_mark: | :white_check_mark: | | | | |
-| Run a Docker image without additional Python code in a K8s Pod | | :white_check_mark: | | | | |
-| Run a Python task in an existing virtual environment | | | :white_check_mark: | | | |
-| Run a Python task in a new virtual environment | | | | :white_check_mark: | | |
-| Run branching code in an existing virtual environment | | | | | :white_check_mark: | |
-| Run branching code in a new virtual environment | | | | | | :white_check_mark: |
-| Reuse the same virtual environment for multiple tasks | | | :white_check_mark: | | :white_check_mark: | |
-| Install different packages for each run of a task | | | | :white_check_mark: (traditional operator) | | :white_check_mark: (traditional operator) |
+| Use Case | Implementation Options |
+|----------|----------|
+| Run a Python task in a K8s Pod | [`@task.kubernetes`](#kubernetes-pod-operator), [KubernetesPodOperator](#kubernetes-pod-operator) |
+| Run a Docker image without additional Python code in a K8s Pod | [KubernetesPodOperator](#kubernetes-pod-operator) |
+| Run a Python task in an existing (reusable) virtual environment | `@task.external_python`, [ExternalPythonOperator](#external-python-operator) |
+| Run a Python task in a new virtual environment | `@task.virtualenv`, [PythonVirtualenvOperator](#virtualenv-operator)|
+| Run branching code in an existing (reusable) virtual environment | `@task.branch_external_python`, [BranchExternalPythonOperator](#virtual-branching-operators) |
+| Run branching code in a new virtual environment | `@task.branch_virtualenv`, [BranchPythonVirtualenvOperator](#virtual-branching-operators) |
+| Install different packages for each run of a task | [PythonVirtualenvOperator](#virtualenv-operator), [BranchPythonVirtualenvOperator](#virtual-branching-operators) |
 
 Another consideration when choosing an operator is the infrastructure you have available. Operators that run tasks in Kubernetes pods allow you to have full control over the environment and resources used, but they require a Kubernetes cluster. Operators that run tasks in Python virtual environments are easier to set up, but do not provide the same level of control over the environment and resources used.
 
-| Requirements | [`@task.kubernetes`](#kubernetes-pod-operator) | [KPO](#kubernetes-pod-operator) | [EPO](#external-python-operator) | [PVO](#virtualenv-operator) | [BEPO](#virtual-branching-operators) | [BPVO](#virtual-branching-operators) |
-|----------|----------|----------|----------|----------|----------|----------|
-| A Kubernetes cluster | :white_check_mark:  |  :white_check_mark: | | | | | |
-| A Docker image (with or without Python installed) | | :white_check_mark: | | | | |
-| A Docker image (with Python installed) | :white_check_mark: | | | | | |
-| A Python binary | | | :white_check_mark: | (:white_check_mark:)*  | :white_check_mark: | (:white_check_mark:)*  |
+| Requirements | Operators / Decorators |
+|----------|----------|
+| A Kubernetes cluster | [`@task.kubernetes`](#kubernetes-pod-operator), [KubernetesPodOperator](#kubernetes-pod-operator) |
+| A Docker image | [`@task.kubernetes`](#kubernetes-pod-operator) (with Python installed), [KubernetesPodOperator](#kubernetes-pod-operator) (with or without Python installed) |
+| A Python binary | [`@task.external_python`](#external-python-operator), [ExternalPythonOperator](#external-python-operator), `@task.virtualenv` (\*), [PythonVirtualenvOperator](#virtualenv-operator) (\*), `@task.branch_external_python`, [BranchExternalPythonOperator](#virtual-branching-operators), `@task.branch_virtualenv` (\*), [BranchPythonVirtualenvOperator](#virtual-branching-operators) (\*) |
 
 *Only required if you need to use a different Python version than your Airflow environment.
-
 
 ## External Python operator
 
@@ -174,7 +171,7 @@ def my_isolated_task():
 </TabItem>
 <TabItem value="traditional">
 
-To run any Python function in your virtual environment,  define the `python_callable` parameter of the ExternalPythonOperator with your Python function, and set the `python` parameter to the location of your Python binary.
+To run any Python function in your virtual environment, define the `python_callable` parameter of the ExternalPythonOperator with your Python function, and set the `python` parameter to the location of your Python binary.
 
 ```python
 # from airflow.operators.python import ExternalPythonOperator
