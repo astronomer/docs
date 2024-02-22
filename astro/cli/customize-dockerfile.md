@@ -17,7 +17,7 @@ By default, the Astro project Dockerfile only includes a `FROM` statement that s
 
 ## Use an alternative Astro Runtime distribution
 
-Starting with Astro Runtime 9, each version of Astro Runtime has a separate distribution for each currently supported Python version. Use an alternative Python distribution if any of your dependencies require a Python version other than the [default Runtime Python version](runtime-image-architecture.md#python-versioning).
+Starting with Astro Runtime 9, each version of Astro Runtime has a separate distribution for each currently supported Python version. Use an alternative Python distribution if any of your dependencies require a Python version other than the [default Runtime Python version](runtime-image-architecture.mdx#python-versioning).
 
 To use a specific Python distribution, update the first line in your Astro project `Dockerfile` to reference the required distribution:
 
