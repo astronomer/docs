@@ -36,9 +36,9 @@ global:
     enabled: true
 ```
 
-## Additional configurable options
+:::info 
 
-You may configure certain other configurable options related to dag-deployment, including the amount of resources available to the container as per the example below:
+If you need to customize the resources available to the DAG deploy mechanism on your Astronomer Software cluster, update your configuration to include the following values:
 
 ```yaml
 global:
@@ -46,15 +46,19 @@ global:
     enabled: true
     resources:
       requests:
+        # Update values as required for your cluster
         cpu: "100m"
         memory: "256Mi"
       limits:
+        # Update values as required for your cluster
         cpu: "500m"
         memory: "1024Mi"
     image: quay.io/astronomer/ap-dag-deploy:0.3.2
     securityContext:
       fsGroup: 50000
 ```
+
+:::
 
 :::info
 
