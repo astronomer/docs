@@ -20,7 +20,7 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 ## Astro CLI 1.24.0
 
-Release date: February 19, 2024
+Release date: February 22, 2024
 
 ### Support for hibernating development Deployments
 
