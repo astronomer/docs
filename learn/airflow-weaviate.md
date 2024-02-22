@@ -67,7 +67,7 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Add the following two packages to your `requirements.txt` file to install the [Weaviate Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/index.html) and the [Weaviate Python client](https://weaviate.io/developers/weaviate/client-libraries/python_v3) in your Astro project:
+2. Add the following two packages to your `requirements.txt` file to install the [Weaviate Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-weaviate/stable/index.html) and the [Weaviate Python client](https://weaviate.io/developers/weaviate/client-libraries/python) in your Astro project:
 
     ```text
     apache-airflow-providers-weaviate==1.0.0

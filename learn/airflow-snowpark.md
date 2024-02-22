@@ -3,7 +3,7 @@ title: "Orchestrate Snowpark Machine Learning Workflows with Apache Airflow"
 sidebar_label: "Snowpark Tutorial"
 description: "Learn how to integrate Snowpark and Airflow."
 id: airflow-snowpark
-sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
+sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 ---
 
 import Tabs from '@theme/Tabs';

@@ -92,3 +92,30 @@ These new workers execute downstream tasks of DAG runs that are in progress. For
 This means that DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
 
 :::
+
+## Deploy DAG-only deploys programmatically
+
+Astronomer Software Deployment includes a REST API endpoint that you can use to upload DAGs programmatically. 
+
+### Prerequisites
+
+Create a service account that has access to your Deployment and copy its associated API key. See [Create a service account using the Software UI](ci-cd.md#create-a-service-account-using-the-software-ui). Alternatively, go to `https://app.BASEDOMAIN/token` and copy the generated token to authenticate with your own user credentials. 
+
+### Setup
+
+Your automated workflow must include the following two steps:
+
+1. Create a `.tgz` file that contains only the `dags` folder of your Astro project. This file should be accessible from the rest of your automated process. For example, you can do this using the following command:
+
+    ```sh
+    tar -czf dags.tgz dags
+    ```
+
+2. Run a `POST` request to the endpoint `https://deployments.basedomain/<deployment-release-name>/dags/upload` to upload your `.tgz` file to your Deployment. For example, making the request using curl would look similar to the following:
+
+    ```sh
+    curl --location 'https://deployments.basedomain/<deployment-release-name>/dags/upload' \
+    --header 'Authorization: Bearer <your-service-account-token>' \
+    --form 'dags.tar.gz=@<your-dags-tgz-location>'
+    ```
+
