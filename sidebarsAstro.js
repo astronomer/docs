@@ -60,6 +60,14 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Astro Environment Manager",
+          items: [
+            "create-and-link-connections",
+            "create-airflow-vars-in-astro",
+          ],
+        },
+        {
+          type: "category",
           label: "Cloud IDE",
           items: [
             "cloud-ide/overview",
