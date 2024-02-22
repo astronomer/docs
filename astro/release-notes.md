@@ -44,16 +44,12 @@ For more information about each of these variables, see [Platform variables](pla
 
 ### Ephemeral storage limit on schedulers 
 
-Astro now limits that amount of ephemeral storage in a scheduler can to 5Gi. If a scheduler attempts to use more than 5Gi of ephemeral storage, it will be terminated.
+Astro now limits that amount of ephemeral storage in a scheduler to 5Gi. If a scheduler attempts to use more than 5Gi of ephemeral storage, it will be terminated.
 
 It is rare for schedulers to require more than 5Gi of ephemeral storage. If your schedulers start to terminate after this update, ensure the following:
 
 - Your Deployment is not producing large amounts of temporary files without cleaning them up.
 - If you're using the BingAds Python SDK, your Deployment uses version 13.0.14 or later. Earlier releases include a [bug](https://github.com/BingAds/BingAds-Python-SDK/issues/117) that generates large amounts of temporary files. 
-
-### Additional improvements
-
-- You can now enable or disable [DAG-only deploys](deploy-dags.md) when you create a Deployment in the Cloud UI. Note that changing this setting on existing Deployments is still possible only by using the Astro CLI.
 
 ### Bug fixes
 
