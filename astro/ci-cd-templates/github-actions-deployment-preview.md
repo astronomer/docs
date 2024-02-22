@@ -8,19 +8,18 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Astronomer [deploy action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline.
+The Astronomer [deploy action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline, a configuration that allows you to test your code before deploying to production in an Astro Deployment that mirrors the configuration of an existing Deployment.
 
 The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can also use a secret to store the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections during tests. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
 
-Because Deployment preview templates use the `deploy-action` template, which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro), it automates the deploy process and includes additional features for more complex automation workflows. Specifically, the action can automatically:
+Because Deployment preview templates also use the [`deploy-action` template](github-actions-deploy-action.md), which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro), it automates the deploy process and includes additional features for more complex automation workflows. Specifically, the action can automatically:
 
 - Choose a deploy type based on the files that were changed in a commit. This allows you to use the same template for DAG deploys and image deploys.
 - Test DAGs as part of the deploy process and prevent deploying if any of the tests fail. These tests are defined in the `tests` directory of your Astro project.
-- Create a preview Deployment to test your code before deploying to production. A Deployment preview is an Astro Deployment that mirrors the configuration of an existing Deployment.
 
 This means that the `deploy-action` triggers both image deploys and DAG deploys depending on the type of file changes that you made. If you committed changes only to DAG files, the action triggers a DAG deploy. If you committed changes to any other file, the action triggers an image deploy. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
 
-Read the following sections to choose the right template for your use case. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation. If you do not have access to Astronomer's `deploy-action`, use the [private network templates](#private-network-templates).
+Read the following sections to choose the right template for your use case. If your team builds custom Docker images, use the _custom image_ implementation. If you do not have access to Astronomer's `deploy-action`, use the [private network templates](#private-network-templates).
 
 To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
