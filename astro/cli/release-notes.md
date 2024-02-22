@@ -33,6 +33,16 @@ Use the following new commands to hibernate development Deployments regardless o
 
 Additionally, you can create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
 
+### Additional improvements
+
+- You can now configure a custom workload identity when you create a Deployment using a Deployment file. 
+- Added support for the upcoming custom role management feature on Astro
+
+### Bug fixes
+
+- Fixed an issue where `astro deployment variable list --save` didn't format secret environment variables correctly.
+- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token. 
+
 ## Astro CLI 1.23.0
 
 Release date: February 14, 2024
