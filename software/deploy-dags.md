@@ -28,7 +28,7 @@ When you [update a Deployment](#configure-dag-only-deploys-on-a-deployment) to s
 
 ## Enable the feature on an Astronomer cluster
 
-By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, set `global.dagOnlyDeployment.enabled` to `true` in your `config.yaml` file, e.g.:
+By default, DAG-only deploys are disabled for all Deployments on Astronomer Software. To enable the feature, set `global.dagOnlyDeployment.enabled` to `true` in your `config.yaml` file:
 
 ```yaml
 global:
