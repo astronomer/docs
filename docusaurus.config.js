@@ -233,7 +233,11 @@ module.exports = {
               'tip',
               'cli',
               'highlight',
-              'privatepreview'
+              'privatepreview',
+              'publicpreview',
+              'cliastroonly',
+              'clisoftwareonly',
+              'cliastroandsoftware'
             ],
             extendDefaults: true,
           },
