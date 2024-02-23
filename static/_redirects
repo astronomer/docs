@@ -81,7 +81,7 @@
 /deferrable-operators /astro/deferrable-operators 301
 /deploy-code /astro/deploy-code 301
 /deployment-metrics /astro/deployment-metrics 301
-/develop-project /astro/develop-project 301
+/develop-project /astro/cli/develop-project 301
 /disaster-recovery /astro/disaster-recovery 301
 /environment-variables /astro/environment-variables 301
 /install-aws /astro/install-aws 301
@@ -115,7 +115,7 @@
 /cloud/deferrable-operators /astro/deferrable-operators 301
 /cloud/deploy-code /astro/deploy-code 301
 /cloud/deployment-metrics /astro/deployment-metrics 301
-/cloud/develop-project /astro/develop-project 301
+/cloud/develop-project /astro/cli/develop-project 301
 /cloud/disaster-recovery /astro/disaster-recovery 301
 /cloud/environment-variables /astro/environment-variables 301
 /cloud/install-aws /astro/install-aws 301
@@ -324,7 +324,8 @@
 /astro/cli/run-airflow-locally#troubleshoot-KubernetesPodOperator-issues /astro/cli/troubleshoot-locally#troubleshoot-KubernetesPodOperator-issues 301
 /astro/cli/run-airflow-locally#ports-are-not-available-for-my-local-airflow-webserver /astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver 301
 /astro/import-export-connections-variables#from-the-cloud-ui /astro/cli/local-connections#from-the-cloud-ui 301
-
+/astro/run-airflow-locally /astro/cli/local-airflow-overview 301
+/astro/develop-project /astro/cli/develop-project 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301
