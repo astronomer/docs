@@ -1,6 +1,6 @@
 ---
 sidebar_label: Preview Deployment templates
-title: GitHub Actions templates for preview Deployments
+title: GitHub Actions templates for deploying code to preview Deployments on Astro
 id: github-actions-deployment-preview
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to a preview Deployment using GitHub Actions.
 ---
@@ -8,20 +8,11 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Astronomer [deploy action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline, a configuration that allows you to test your code before deploying to production in an Astro Deployment that mirrors the configuration of an existing Deployment.
+The Astronomer [deploy action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes several sub-actions that can be used together to create a complete [Deployment preview](ci-cd-templates/template-overview.md#preview-deployment-templates) pipeline, a configuration that allows you to test your code changes in an ephemeral development Deployment before promoting your changes to a production Astro Deployment.
 
-The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can also use a secret to store the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections during tests. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
+The Deployment preview templates use GitHub secrets to manage the credentials needed for GitHub to authenticate to Astro. You can specify the credentials for your [secrets backend](secrets-backend.md) so that preview Deployments have access to secret Airflow variables or connections during tests. See [Deployment preview template with secrets backend implementation](#deployment-preview-template-with-secrets-backend-implementation).
 
-Because Deployment preview templates also use the [`deploy-action` template](github-actions-deploy-action.md), which is available in the [GitHub Marketplace](https://github.com/marketplace/actions/deploy-apache-airflow-dags-to-astro), it automates the deploy process and includes additional features for more complex automation workflows. Specifically, the action can automatically:
-
-- Choose a deploy type based on the files that were changed in a commit. This allows you to use the same template for DAG deploys and image deploys.
-- Test DAGs as part of the deploy process and prevent deploying if any of the tests fail. These tests are defined in the `tests` directory of your Astro project.
-
-This means that the `deploy-action` triggers both image deploys and DAG deploys depending on the type of file changes that you made. If you committed changes only to DAG files, the action triggers a DAG deploy. If you committed changes to any other file, the action triggers an image deploy. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
-
-Read the following sections to choose the right template for your use case. If your team builds custom Docker images, use the _custom image_ implementation. If you do not have access to Astronomer's `deploy-action`, use the [private network templates](#private-network-templates).
-
-To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
+Deployment preview templates use Astronomer's [`deploy-action`](github-actions-deploy-action.md) to automates the deploy process, meaning it can selectively deploy parts of your project based on which files you changed. See [Standard deploy templates](ci-cd-templates/github-actions-deploy-action.md) for more information about the `deploy-action`.
 
 ## Prerequisites
 
@@ -30,7 +21,7 @@ To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.m
 - A [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md).
 - Access to [GitHub Actions](https://github.com/features/actions).
 
-Each implementation might have additional requirements.
+Specific templates might have additional requirements.
 
 :::warning
 
@@ -46,12 +37,6 @@ If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-you
 ## Standard Deployment preview template
 
 The standard Deployment preview template uses GitHub secrets and an Astro Deployment API token to create a preview Deployment whenever you create a new feature branch off of your main branch.
-
-### Prerequisites
-
-- An Astro project hosted in a GitHub repository.
-- A [Workspace API token](workspace-api-tokens.md).
-- A [Deployment](create-deployment.md).
 
 ### Setup
 
@@ -169,10 +154,7 @@ This template makes use of the `AIRFLOW__SECRETS__BACKEND_KWARGS` environment va
 
 ### Prerequisites
 
-- An Astro project hosted in a GitHub repository.
-- A [Workspace API token](workspace-api-tokens.md).
-- A [Deployment](create-deployment.md).
-- A [secrets backend](secrets-backend.md).
+- A [secrets backend](secrets-backend.md), such as Hashicorp Vault.
 
 ### Setup
 
