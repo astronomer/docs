@@ -56,7 +56,6 @@ Astro provides a few Deployment role templates that you can use as the basis for
 
 ## Assign users and Teams to Deployments
 
-Before you assign a custom Deployment role to a user or Team, ensure that the user entity doesn't have Workspace Admin or Workspace Member permissions. Otherwise, the user entity will already have all available Deployment permissions and the Deployment role will have no effect.
 
 1. In the Cloud UI, open the Deployment where you want to assign the user entity.
 2. Click **Access**, then click **Users** or **Teams** depending on what kind of user entity you want to assign to the Deployment.
@@ -72,4 +71,4 @@ By default, Deployment API tokens have Deployment Admin permissions. You can alt
 2. Click **Access**, then click **API Tokens**.
 3. Click **+ Deployment API Token**.
 4. In the window that appears, select give your new Deployment API key a name, custom role, and expiration date.
-5. Click **Add User**/ **Add Team**.
+5. Click **Add Deployment API token**.
