@@ -19,11 +19,12 @@ In situations where you need fine-grained Deployment access, you can create cust
 
 ## Prerequisites
 
-- Organization Owner permissions
+- Organization Owner permissions to create, update, and delete custom roles.
+- Workspace Owner permissions or Deployment Admin permissions to assign and change Deployment roles for users.
 
 ## Create a custom Deployment role
 
-Custom Deployment roles are created and managed at the Organization level. After you create a custom Deployment role, you can assign users the role from any Deployment in the Organization. 
+Custom Deployment roles are created and managed at the Organization level. After you create a custom Deployment role, you can assign users, teams, and Deployment API tokens the role from any Deployment in the Organization. 
 
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
@@ -43,14 +44,14 @@ Custom Deployment roles are created and managed at the Organization level. After
 
 6. Click **Create role**.
 
-Your role is now available to assign at the Deployment level. See [Assign users, Teams, and API tokens to Deployments](#assign-users-teams-and-api-tokens-to-deployments).
+Your role is now available to assign at the Deployment level. See [Assign users and Teams to Deployments](#assign-users-and-teams-to-deployments) / [Create Deployment API tokens with custom Deployment roles](#create-deployment-api-tokens-with-custom-deployment-roles).
 
 ### Deployment role templates
 
 Astro provides a few Deployment role templates that you can use as the basis for custom roles. These roles are not hard-coded and exist only as templates. 
 
-- **Deployment Viewer**: This is similar to the [Airflow viewer](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#viewer) viewer role. It grants the user entity view-only permissions for the Airflow UI excluding the **Admin** tab.
-- **Deployment Author**: This is similar to the [Airflow user](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) role. It grants the user entity permissions to deploy code and manage DAG and task runs from the Airflow UI.
+- **Deployment Viewer**: This is similar to the [Airflow Viewer](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#viewer) viewer role. It grants the user entity view-only permissions for the Airflow UI excluding the **Admin** tab.
+- **Deployment Author**: This is similar to the [Airflow User](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) role. It grants the user entity permissions to deploy code and manage DAG and task runs from the Airflow UI.
 - **Deployment Operator**: This is similar to the [Airflow Op](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#op) role. It grants the user entity permissions to update Deployment API tokens and Airflow objects from both the Airflow UI and the Cloud UI.
 
 ## Assign users and Teams to Deployments
