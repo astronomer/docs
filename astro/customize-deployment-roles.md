@@ -11,11 +11,11 @@ This feature is in [Private Preview](feature-previews.md).
 
 :::
 
-A user's Deployment role determines their level of access to a specific Deployment in a Workspace. By default, users, Teams, and Deployment API tokens that have Workspace Author permissions or above have Deployment Admin permissions to all Deployments in the Workspace.
+A user entity's Deployment role determines their level of access to a specific Deployment in a Workspace. User entities with Workspace Member permissions or higher have some level of access to all Deployments in a Workspace, and these permissions can be heightened using Deployment roles.
 
 There are some circumstances where users should have limited access to Deployments in a Workspace. For example, all users might need full access to a development Deployment, but only administrative users should have access to a production Deployment.
 
-In situations where you need fine-grained Deployment access, you can create custom Deployment roles and assign them to users with Workspace Accessor or Workspace Viewer permissions. When you grant a user a Deployment role, they have a specific level of access to a specific Deployment. Use custom Deployment roles to enable users to collaborate in the same Workspace only with the minimum permissions they require.
+In situations where you need fine-grained Deployment access, you can create custom Deployment roles and assign them to users with Workspace Accessor or Workspace Member roles. When you grant a user a Deployment role, they have a specific level of access to a specific Deployment. Use custom Deployment roles to enable users to collaborate in the same Workspace only with the minimum permissions they require.
 
 ## Prerequisites
 
