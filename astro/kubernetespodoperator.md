@@ -17,7 +17,7 @@ This document describes how to configure individual Pods for different use cases
 You can use the KubernetesPodOperator to:
 
 - Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.
-- Run tasks in a Kubernetes cluster outside of Astro. This can be helpful when you need to run individual tasks on infrastructure that isn't currently supported by Astro, such as GPU nodes or other third-party services.
+- Run tasks in a Kubernetes cluster outside of Astro. This can be helpful when you need to run individual tasks on infrastructure that isn't currently supported by Astro, such as GPU nodes or other third-party services. This also provides a solution to ensure any data does not leave your private network.
 - Specify CPU and memory as task-level limits or minimums to optimize performance and reduce costs.
 - Write task logic in a language other than Python. This gives you flexibility and can enable new use cases across teams.
 - Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
@@ -75,7 +75,7 @@ This is the minimum configuration required to run tasks with the KubernetesPodOp
 
 ## Configure task-level Pod resources
 
-Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, which means that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
+Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are only limited by the node it runs on, which means that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
 To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `container_resources` argument of the KubernetesPodOperator. For example:
 
