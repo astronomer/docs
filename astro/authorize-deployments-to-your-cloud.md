@@ -120,7 +120,7 @@ Using service accounts provides the greatest amount of flexibility for authorizi
 
 ### Alternative setup: Authorize your Deployment through GCP service account impersonation
 
-If your organization has requirements over how service accounts are managed outside of your cloud, you can manually configure [GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) to allow your Deployment's default workload identity to assume a service account in your GCP project.
+If your organization has requirements over how service accounts are managed outside of your cloud, you can manually configure [GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) to allow your Deployment's default workload identity to impersonate a service account in your GCP project.
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
 2. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
