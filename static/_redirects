@@ -325,7 +325,7 @@
 /astro/cli/run-airflow-locally#ports-are-not-available-for-my-local-airflow-webserver /astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver 301
 /astro/import-export-connections-variables#from-the-cloud-ui /astro/cli/local-connections#from-the-cloud-ui 301
 /astro/run-airflow-locally /astro/cli/local-airflow-overview 301
-/astro/cli/run-airflow-locally /astro/cli/local-airflow-overview 301
+/astro/develop-project /astro/cli/develop-project 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301
