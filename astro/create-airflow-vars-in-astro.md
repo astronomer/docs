@@ -9,5 +9,25 @@ import HostedBadge from '@site/src/components/HostedBadge';
 
 <HostedBadge/>
 
+## How Airflow variables are stored
+
+### Fetching variables
+
+## Prerequisites
+
+- Workspace Operator or Workspace Owner [user permissions](user-permissions.md)
+- A Deployment on Astro. See [Create a Deployment](create-deployment.md)
+- Astro Runtime 9.3.0 or greater
+
+## Create a variable
+
+## Link variables to Deployments
+
+## Configure variable sharing for a Workspace
+
+## Override variable fields
+
+
+
 
 

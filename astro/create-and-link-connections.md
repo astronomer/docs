@@ -13,15 +13,6 @@ You can create and manage Airflow connections for Deployments with the Astro Env
 
 Using the Environment Manager, you can quickly and securely create connections once and share them to multiple Deployments without having to set up your own secrets backend. You can also create a connection once and use it across multiple Airflow Deployments.
 
-For example, you can configure a connection with the credentials for a sandbox or development environment. Then, you can later configure your connection to be applied to all Deployments in the workspace by default. This means that when you create new Deployments, they automatically have access to your development environment. Later, you can edit the connection to point to your production resources by using [field overrides](#override-connection-fields).
-
-Compared to creating a connection in the Airflow UI, when you create a connection in the Cloud UI, you can:
-
-- Share the connection with multiple Deployments within the Workspace.
-- Override fields in the connection for individual Deployments.
-- Use configured connections in local Airflow environments. See [Import and export connections and variables](cli/local-connections.md).
-- Use connections in branch-based deploys and PR previews.
-
 Workspace Owners and Operators can create and assign connections, while Workspace Authors can view configured connections and use them in Deployments. If your Organization has [**Environment Secrets Fetching**](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager) enabled, you can additionally use configured connections, including ones that contain secrets, in local development environments. See [Import and export connections and variables](cli/local-connections.md).
 
 ![Example of the Connections tab in the Astro Environment Manager page](/img/docs/connections-env-mgmt.png)
