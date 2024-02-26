@@ -859,7 +859,7 @@ To review the new process for creating SSO connections, see [Set up authenticati
 
 ### Preview Deployments
 
-You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions.md#deployment-preview-templates) to configure your Astro pipelines to:
+You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions-deployment-preview.md) to configure your Astro pipelines to:
 - Create the preview Deployment when you create a new branch.
 - Deploy code changes to Astro when you make updates in the branch.
 - Delete the preview Deployment when you delete the branch.
