@@ -30,7 +30,7 @@ Secrets backend integrations are configured individually with each Astronomer So
 
 :::info
 
-If you enable a secrets backend on Astronomer Software, you can continue to define Airflow variables and connections either [as environment variables](environment-variables.md#add-airflow-connections-and-variables-as-environment-variables) or in the Airflow UI as needed. If you define variables and connections in the Airflow UI, they are stored as encrypted values in the Airflow metadata database.
+If you enable a secrets backend on Astronomer Software, you can continue to define Airflow variables and connections either [as environment variables](environment-variables.md#adding-airflow-connections-and-variables-as-environment-variables) or in the Airflow UI as needed. If you define variables and connections in the Airflow UI, they are stored as encrypted values in the Airflow metadata database.
 
 Airflow checks for the value of an Airflow variable or connection in the following order:
 

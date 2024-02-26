@@ -13,7 +13,7 @@ To update a Deployment's [Airflow configurations](https://airflow.apache.org/doc
 
 ## Update environment objects
 
-You can add, update, and delete Airflow connections that were added through the Astro UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#astro-cloud-ui-environment-manager), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Astro UI](create-and-link-connections.md) for more options.
+You can add, update, and delete Airflow connections that were added through the Astro UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#astro-environment-manager), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Astro UI](create-and-link-connections.md) for more options.
 
 ## Deployment executor
 
