@@ -2109,7 +2109,7 @@ You can now set secret environment variables via the Astro UI. The values of sec
 
 ![Secrets checkbox available in the Astro UI](/img/release-notes/secrets-feature.png)
 
-For more information, read [Set environment variables via the Astro UI](manage-env-vars.md#using-the-cloud-ui).
+For more information, read [Set environment variables via the Astro UI](manage-env-vars.md#using-the-astro-ui).
 
 ### Additional improvements
 

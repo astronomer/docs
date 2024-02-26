@@ -60,7 +60,7 @@ When CI/CD enforcement is enabled for a Deployment, you cannot enable or disable
 To enable or disable DAG-only deploys when CI/CD enforcement is turned on:
 
 1. Turn **CI/CD Enforcement** to **Off**.
-2. Enable or disable the DAG-only deploy feature. See [Enable or disable DAG-only deploys](deploy-dags.md#enable-or-disable-dag-only-deploys).
+2. Enable or disable the DAG-only deploy feature. See [Enable or disable DAG-only deploys](deploy-dags.md#enable-or-disable-dag-only-deploys-on-a-deployment).
 3. Turn **CI/CD Enforcememt** back to **On**.
 
 You have to only complete these steps once. Once the DAG-only deploy feature is enabled or disabled, you can turn CI/CD enforcement on or off at any time.

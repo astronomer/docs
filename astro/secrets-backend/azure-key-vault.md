@@ -62,7 +62,7 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
     astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
     ```
     
-    In the Astro UI, mark `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret**. See [Set environment variables in the Astro UI](manage-env-vars.md#using-the-cloud-ui).
+    In the Astro UI, mark `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret**. See [Set environment variables in the Astro UI](manage-env-vars.md#using-the-astro-ui).
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
   
