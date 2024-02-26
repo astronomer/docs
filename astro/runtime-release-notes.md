@@ -112,6 +112,23 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
+## Astro Runtime 9.11.0
+
+- Release date: February 26, 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Simplify DAG trigger UI ([#34567](https://github.com/apache/airflow/pull/34567))
+- Hide logical date and run id in trigger UI form ([#35284](https://github.com/apache/airflow/pull/35284))
+- Allow pre-population of trigger form values via URL parameters ([#37497](https://github.com/apache/airflow/pull/37497))
+- Fix regression on trigger form error display on form validation ([#37672](https://github.com/apache/airflow/pull/37672))
+- Revert the sequence of initializing configuration defaults ([#37155](https://github.com/apache/airflow/pull/37155))
+- Bugfix Triggering DAG with parameters is mandatory when show_trigger_form_if_no_params is enabled ([#37063](https://github.com/apache/airflow/pull/37063))
+- Revert "Fix future DagRun rarely triggered by race conditions when max_active_runs reached its upper limit. ([#37596](https://github.com/apache/airflow/pull/37596))
+- Revoking audit_log permission from all users except admin ([#37501](https://github.com/apache/airflow/pull/37501))
+- Check permissions for ImportError ([#37468](https://github.com/apache/airflow/pull/37468))
+
 ## Astro Runtime 9.10.0
 
 - Release date: January 31, 2024
