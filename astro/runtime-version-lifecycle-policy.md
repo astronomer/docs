@@ -77,12 +77,12 @@ Occasionally, Astronomer might deviate from the defined response policy and back
 
 The following table contains the exact lifecycle for each published version of Astro Runtime. These timelines are based on the LTS and Stable [release channel maintenance policies](#release-channels).
 
-| Runtime version                                                      | Airflow version | Release date       | End of maintenance date |
-| -------------------------------------------------------------------- | --------------- | ------------------ | ----------------------- |
-| [5](runtime-release-notes.md#astro-runtime-500) (LTS) - Latest Patch | 2.3             | April 30, 2022     | April 2024              |
-| [6](runtime-release-notes.md#astro-runtime-600) (LTS) - Latest Patch | 2.4             | September 19, 2022 | March 2024              |
-| [9](runtime-release-notes.md#astro-runtime-900) (LTS) - Latest Patch | 2.7             | August 18, 2023    | January 2025            |
-| [10](runtime-release-notes.md#astro-runtime-1000)                    | 2.8             | December 18, 2023  | June 2024               |
+| Runtime version                                                       | Airflow version | Release date       | End of maintenance date |
+| --------------------------------------------------------------------- | --------------- | ------------------ | ----------------------- |
+| [5](runtime-release-notes.md#astro-runtime-500) - Latest Patch (LTS)  | 2.3             | April 30, 2022     | April 2024              |
+| [6](runtime-release-notes.md#astro-runtime-600)  - Latest Patch (LTS) | 2.4             | September 19, 2022 | March 2024              |
+| [9](runtime-release-notes.md#astro-runtime-900)  - Latest Patch (LTS) | 2.7             | August 18, 2023    | January 2025            |
+| [10](runtime-release-notes.md#astro-runtime-1000) - Latest Patch      | 2.8             | December 18, 2023  | June 2024               |
 
 If you have any questions or concerns, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
