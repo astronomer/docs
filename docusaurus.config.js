@@ -16,7 +16,7 @@ module.exports = {
       function updateValues() {
         var mapObj = {
           '{{CLI_VER}}': "1.23.0",
-          '{{RUNTIME_VER}}': "10.3.0",
+          '{{RUNTIME_VER}}': "10.4.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
         return fileContent.replaceAll(re, function (matched) {
