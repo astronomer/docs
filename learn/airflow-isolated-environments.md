@@ -62,7 +62,7 @@ Common limitations include:
 
 - You [cannot pass all Airflow context variables](https://airflow.apache.org/docs/apache-airflow/latest/howto/operator/python.html#id1) to a virtual decorator, since Airflow does not support serializing `var`, `ti`, and `task_instance` objects. See [Use Airflow context variables in isolated environments](#use-airflow-context-variables-in-isolated-environments).
 - You do not have access to your [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) from within the isolated environment. To access your secrets, consider passing them in through [Jinja templating](templating.md). See [Use Airflow variables in isolated environments](#use-airflow-variables-in-isolated-environments).
-- Installing Airflow itself, or Airflow provider packages in the environment provided to the `@task.external_python` decorator or the ExternalPythonOperator, can lead to unexpected behavior. If you need to use Airflow or an Airflow providers module inside your virtual environment, Astronomer recommends using the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+- Installing Airflow itself, or Airflow provider packages in the environment provided to the `@task.external_python` decorator or the ExternalPythonOperator, can lead to unexpected behavior. If you need to use Airflow or an Airflow provider module inside your virtual environment, Astronomer recommends using the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
 
 ## Choosing an isolated environment option
 
@@ -136,7 +136,7 @@ pandas==1.4.4
 
 :::warning
 
-Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is not recommended. If you need to use Airflow and Airflow providers module inside your virtual environment, Astronomer recommends to choose the `@task.virtualenv` decorator or the PythonVirtualenvOperator. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
+Installing Airflow itself and Airflow provider packages in isolated environments can lead to unexpected behavior and is not recommended. If you need to use Airflow or Airflow provider modules inside your virtual environment, Astronomer recommends to choose the `@task.virtualenv` decorator or the PythonVirtualenvOperator. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
 
 :::
 
@@ -713,7 +713,7 @@ Using Airflow packages inside of isolated environments can lead to unexpected be
 
 :::
 
-If you need to use Airflow or an Airflow providers module inside your virtual environment, use the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead of the `@task.external_python` decorator or the ExternalPythonOperator.
+If you need to use Airflow or an Airflow provider module inside your virtual environment, use the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead of the `@task.external_python` decorator or the ExternalPythonOperator.
 As of Airflow 2.8, you can cache the virtual environment for reuse by providing a `venv_cache_path` to the `@task.virtualenv` decorator, PythonVirtualenvOperator, to speed up subsequent runs of your task.
 
 <Tabs
