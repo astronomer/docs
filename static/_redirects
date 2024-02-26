@@ -358,3 +358,6 @@
 # redirect Astro use-cases to renamed best-practices section
 /astro/use-cases/connections-branch-deploys /astro/best-practices/connections-branch-deploys
 /astro/use-cases/airflow-vs-astro-alerts /astro/best-practices/airflow-vs-astro-alerts
+
+# redirect deprecated talend doc to new blog post
+/learn/airflow-talend-integration https://www.astronomer.io/blog/orchestrate-talend-with-airflow/

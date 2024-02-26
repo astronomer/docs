@@ -252,7 +252,6 @@ module.exports = {
           ],
         },
         'soda-data-quality',
-        'airflow-talend-integration',
         'airflow-weaviate',
         'airflow-weights-and-biases',
       ],
