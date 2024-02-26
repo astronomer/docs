@@ -39,7 +39,7 @@ When using a Deployment API key, keep the following in mind:
 
 ## Create an API key
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **API Keys** tab.
 
@@ -85,7 +85,7 @@ For more information and examples, see [Automate code deploys with CI/CD](set-up
 
 If you delete an API key, make sure that no existing CI/CD pipelines are using it. Once deleted, an API key and secret cannot be recovered. If you unintentionally delete an API key, create a new one and update any CI/CD workflows that used the deleted API key.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **API Keys** tab.
 

@@ -40,13 +40,13 @@ Within the maintenance window of each Astro Runtime version, the following is tr
 - A set of Docker images corresponding to that version are available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 - Astronomer will regularly publish bug or security fixes identified as high priority.
 - Support for paying customers running a maintained version of Astro Runtime is provided by [Astronomer Support](https://cloud.astronomer.io/open-support-request).
-- A user can create a new Deployment with the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
+- A user can create a new Deployment with the Astro UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Astro UI assumes the latest patch.
 
 When the maintenance window for a given version of Runtime ends, the following is true:
 
 - Astronomer is not obligated to answer questions regarding a Deployment that is running an unsupported version.
-- New Deployments cannot be created on Astro with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Cloud UI, API, or Astro CLI.
-- The Deployment view of the Cloud UI will show a warning that encourages the user to upgrade if the Deployment is running that version.
+- New Deployments cannot be created on Astro with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Astro UI, API, or Astro CLI.
+- The Deployment view of the Astro UI will show a warning that encourages the user to upgrade if the Deployment is running that version.
 - The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to that version.
 
 Astronomer will not interrupt service for Deployments running Astro Runtime versions that are no longer in maintenance. Unsupported versions of Astro Runtime are available for local development and testing with the Astro CLI.

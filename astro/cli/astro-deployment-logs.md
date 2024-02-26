@@ -24,7 +24,7 @@ values={[
 ]}>
 <TabItem value="astro">
 
-Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) over the last 24 hours for a given Deployment on Astro. These are the same logs that appear in the **Logs** tab of the Cloud UI.
+Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) over the last 24 hours for a given Deployment on Astro. These are the same logs that appear in the **Logs** tab of the Astro UI.
 
 ## Usage
 

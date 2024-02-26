@@ -13,7 +13,7 @@ To update a Deployment's [Airflow configurations](https://airflow.apache.org/doc
 
 ## Update environment objects
 
-You can add, update, and delete Airflow connections that were added through the Cloud UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#astro-cloud-ui-environment-manager), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Cloud UI](create-and-link-connections.md) for more options.
+You can add, update, and delete Airflow connections that were added through the Astro UI from your Deployment page. To edit a Deployment's [linked connections](manage-connections-variables.md#astro-cloud-ui-environment-manager), click the **Environment** tab, and then select the connection you want to **Edit**. See [Create connections with the Astro UI](create-and-link-connections.md) for more options.
 
 ## Deployment executor
 
@@ -26,7 +26,7 @@ All Deployments use the Celery executor by default. See [Choose an executor](exe
 
 ### Update the Deployment executor
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
@@ -44,7 +44,7 @@ See [Configure an executor](executors-overview.md) for more information about ea
 
 The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](kubernetespodoperator.md) both use Kubernetes Pods to execute tasks. While you still need to configure Pods in your DAG code to define individual task environments, you can set some safeguards on Astro so that tasks in your Deployment don't request more CPU or memory than expected.
 
-Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
+Set safeguards by configuring default Pod limits and requests from the Astro UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
 
 :::info
 
@@ -52,7 +52,7 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
 
 :::
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Options** menu and select **Edit Deployment**.
 
@@ -93,7 +93,7 @@ Astronomer Deployments run a single scheduler. You can configure your scheduler 
 
 ### Update scheduler size
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
@@ -107,7 +107,7 @@ Astronomer Deployments run a single scheduler. You can configure your scheduler 
 
 To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
     ![Edit Deployment in options menu](/img/docs/edit-deployment.png)
@@ -127,7 +127,7 @@ By default, the Pods running your Deployment's Airflow components are distribute
 
 Because this setting results in more resource usage, it can increase the cost of your Deployment. See [Pricing](https://astronomer.io/pricing).
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
@@ -157,7 +157,7 @@ When you create a Deployment on Astro, you pay for the infrastructure resources 
 
 For example, if you only need to test a DAG during working hours, you can set a hibernation schedule for 5:00 PM until 9:00 AM on Monday through Friday. During this time, your Deployment settings are preserved and your cost on Astro for the Deployment is $0. When the hibernation schedule ends, you can resume using the Deployment. Waking up a Deployment from hibernation is faster than creating a new Deployment and preserves all of your configurations.
 
-![Example of setting a hibernation schedule in the Cloud UI. A schedule is being set so that the Deployment hibernates outside of work hours.](/img/docs/hibernating-schedule.png)
+![Example of setting a hibernation schedule in the Astro UI. A schedule is being set so that the Deployment hibernates outside of work hours.](/img/docs/hibernating-schedule.png)
 
 Use Deployment hibernation to ensure that:
 
@@ -180,7 +180,7 @@ Before you create a hibernation schedule for a Deployment, consider the followin
 
 To create a hibernation schedule:
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, then select a Deployment.
 2. Click **Details**. In the **Advanced** section of your Deployment configuration, click **Edit**.
 3. Configure the following values in **Hibernation schedules**:
      - **Start Schedule**: Specify a cron schedule for your Deployment resources to scale to zero.
@@ -210,9 +210,9 @@ Astro sets all cron schedules for hibernation in UTC. If you're running a Deploy
 
 When your hibernation schedule starts:
 
-- Your Deployment shows a **Hibernating** status in the Cloud UI:
+- Your Deployment shows a **Hibernating** status in the Astro UI:
 
-    ![A Deployment with a Hibernating status on the Deployments page of the Cloud UI](/img/docs/hibernating-status.png)
+    ![A Deployment with a Hibernating status on the Deployments page of the Astro UI](/img/docs/hibernating-status.png)
 
 - Any task that was previously running will be killed and marked as failed.
 - Tasks and DAGs do not run. Task instances that were already running or scheduled at the time of hibernation will fail and trigger any related notifications.
@@ -224,15 +224,15 @@ When your hibernation schedule ends, the Deployment will start any DAG runs for 
 
 ### Manually hibernate a Deployment
 
-Instead of creating a regular hibernation schedule, you can manually hibernate a development Deployment from the Cloud UI. This is recommended if you're not sure when you'll need to use the Deployment again after hibernating it.
+Instead of creating a regular hibernation schedule, you can manually hibernate a development Deployment from the Astro UI. This is recommended if you're not sure when you'll need to use the Deployment again after hibernating it.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Hibernate Deployment**.
 3. Configure the manual hibernation period, then click **Confirm**.
 
 If you need to run a task or DAG on a Deployment that is currently in hibernation, you can manually wake up a Deployment from hibernation before the end of its schedule.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **More Actions** menu of the Deployment you want to update, then select **Wake up from Hibernation**.
 3. Select one of the following options for how you want your Deployment to wake up:
 

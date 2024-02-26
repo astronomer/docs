@@ -44,7 +44,7 @@ To grant a Deployment access to a service that is running in an AWS account not 
 
 To authorize your Deployment, create an IAM role that is assumed by the Deployment's workload identity:
 
-1. In the Cloud UI, select your Deployment and then click **Details**. Copy the Deployment's **Workload Identity**.
+1. In the Astro UI, select your Deployment and then click **Details**. Copy the Deployment's **Workload Identity**.
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 4. Click **Roles** and in the **Role name** column, select the role you created in Step 2.
@@ -74,7 +74,7 @@ Repeat these steps for each Astro Deployment that needs to access your AWS resou
 
 ### Step 2: Create an Airflow connection
 
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Cloud UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create an **Amazon Web Services** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
 - **Connection Id**: Enter a name for the connection.
 - **Extra**: 
@@ -97,7 +97,7 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 [GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) allows your Deployment's workload identity to assume an existing service account in your GCP project. This is the most secure authorization setup because your Deployment only uses generated, short-lived credentials for a service account, rather than a persistent and static service account key. 
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
-2. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
+2. In the Astro UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
 3. In the Google Cloud Console, open the **IAM & Admin > Service Accounts** menu, then open the service account you just created. 
 4. In the **Actions** column, click **Manage Permissions**, then click **Grant Access**. In the modal that appears, enter your Deployment's workload identity service account in the **Add Principals** field and select the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) in the **Assign Roles** field.
 5. Complete one of the following options for your Deployment to access your cloud resources:
@@ -125,7 +125,7 @@ To grant a Deployment access to a service that is running in a GCP account not m
 
 To authorize your Deployment, grant the required access to your Deployment's workload identity:
 
-1. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
+1. In the Astro UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
 
 2. Grant your Deployment's workload identity an IAM role that has access to your external data service. To do this with the Google Cloud CLI, run:
 
@@ -139,7 +139,7 @@ Repeat these steps for each Deployment that needs to access your GCP resources.
 
 #### Step 2: Create an Airflow connection
 
-Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create a **Google Cloud** connection in the [Cloud UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
+Now that your Deployment is authorized, you can connect it to your cloud using an Airflow connection. Either create a **Google Cloud** connection in the [Astro UI](create-and-link-connections.md) or the Airflow UI for your Deployment and specify the following fields:
 
 - **Connection Id**: Enter a name for the connection.
 - **Project Id**: Enter the ID of your Google Cloud Project where your services are running.
@@ -176,16 +176,16 @@ You can only use the same user-assigned managed identity for up to five Deployme
 
 1. In your Azure portal, open the **Managed Identities** menu.
 2. Search for your managed identity, click **Properties**, then copy its **Name**, **Client ID**, **Tenant ID**, and **Resource group** name. 
-4. In the Cloud UI, select your Deployment, click **Details**, then click **How to Configure...** under **Workload Identity**.
+4. In the Astro UI, select your Deployment, click **Details**, then click **How to Configure...** under **Workload Identity**.
 5. In **Managed Identity**, enter the Name of the managed identity you assigned to the resource. 
 6. In **Resource Group**, enter the **Resource group** name that your managed identity belongs to.
 7. Using the Azure CLI, copy and run the provided command in your local terminal.
-8. After the command completes, click **Close** on the modal in the Cloud UI.
+8. After the command completes, click **Close** on the modal in the Astro UI.
 9. (Optional) repeat Steps 4 - 8 for any other Deployments that need to be authorized to Azure.
 
 #### Step 3: Create an Airflow connection
 
-1. In the Cloud UI, click **Environment** in the main menu to open the **Connections** page.
+1. In the Astro UI, click **Environment** in the main menu to open the **Connections** page.
 2. Click **+ Connection** to add a new connection for your Workspace.
 3. Search for **Azure**, then select the **Managed identity** option.
 4. Configure your Airflow connection with the information you copied in the previous steps.

@@ -50,7 +50,7 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     
     ![The Azure SSO URL and the 'copy to clipboard' button](/img/docs/azure-sso.png)
     
-    Share this URL with anyone at your company who needs to access your newly created Organization. Any users that access Astro with this URL will automatically be added to your Organization as an Organization Member. You can add them to your Workspace from Astro’s Cloud UI so they can start deploying code and running DAGs. See [Manage users in your Astro Workspace](https://docs.astronomer.io/astro/manage-workspace-users).
+    Share this URL with anyone at your company who needs to access your newly created Organization. Any users that access Astro with this URL will automatically be added to your Organization as an Organization Member. You can add them to your Workspace from the Astro UI so they can start deploying code and running DAGs. See [Manage users in your Astro Workspace](https://docs.astronomer.io/astro/manage-workspace-users).
 
     :::info 
 
@@ -66,7 +66,7 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     
     :::
     
-2. Click **Go to Astro**. You will be redirected and logged in to the Cloud UI, which is Astro’s primary interface for managing your Airflow environments. 
+2. Click **Go to Astro**. You will be redirected and logged in to the Astro UI, which is Astro’s primary interface for managing your Airflow environments. 
 3. Follow the [Astro quickstart](https://docs.astronomer.io/astro/first-dag-cli) to run your first DAG on Astro.
 
 ## Install Astro from the Azure Marketplace using a personal email

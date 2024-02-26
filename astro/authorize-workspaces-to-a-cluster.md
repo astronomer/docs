@@ -16,7 +16,7 @@ Use this document to learn restrict a cluster so that only authorized Workspaces
 
 ## Authorize your workspace
 
-1. In the Cloud UI, click your Workspace name to view more options, then click **Organization Settings**.
+1. In the Astro UI, click your Workspace name to view more options, then click **Organization Settings**.
 2. Click **Clusters** and then select a cluster.
 3. Go to the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
 4. Click **Restricted** and select the Workspaces that you want to authorize to the cluster.

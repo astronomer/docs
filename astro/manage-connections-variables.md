@@ -55,11 +55,11 @@ If you only want to test connections or export connections in  a JSON or URI for
 
 The following sections explain the benefits, limitations, and implementations of each strategy in more detail.
 
-### Astro Cloud UI Environment Manager
+### Astro Environment Manager
 
 <HostedBadge/>
 
-Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Cloud UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis.
+Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Astro UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis.
 
 #### Benefits
 
@@ -72,15 +72,15 @@ Astro includes connection management system that behaves like you are using an A
 
 #### Limitations
 
-- If you create a connection in the Cloud UI, you also need to add its related provider package to the `requirements.txt` file in your Astro project.
+- If you create a connection in the Astro UI, you also need to add its related provider package to the `requirements.txt` file in your Astro project.
 - Only available with Astro Runtime 9.3.0 and greater.
-- You can't see connections defined in the Cloud UI in the Airflow UI.
+- You can't see connections defined in the Astro UI in the Airflow UI.
 - You need`WORKSPACE_OPERATOR` or `WORKSPACE_OWNER` user permissions.
 - You can't programmatically import connections to the Environment Manager from your local environment.
 
 :::info
 
-To see how you can use connections set in the Astro Cloud UI Environment Manager in a best practice, branch-based Deployment setup, see the [Manage Astro connections in branch-based deploy workflows](best-practices/connections-branch-deploys.md) use case.
+To see how you can use connections set in the Astro Environment Manager in a best practice, branch-based Deployment setup, see the [Manage Astro connections in branch-based deploy workflows](best-practices/connections-branch-deploys.md) use case.
 
 :::
 
@@ -140,7 +140,7 @@ You can configure system-level environment variables both locally and on Astro. 
 - If you use an `.env` file for your local Airflow environment and your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables.
 - You can export environment variables from a local Airflow environment to Astro using the Astro CLI. See [Import and export connections and variables](import-export-connections-variables.md#from-environment-variables).
 - You can override Airflow variables set in the Airflow UI. See [Environment variable priority](environment-variables.md#environment-variable-priority)
-- You can create your connections and variables as environment variables from the Cloud UI. See [Use environment variables](manage-env-vars.md#using-the-cloud-ui).
+- You can create your connections and variables as environment variables from the Astro UI. See [Use environment variables](manage-env-vars.md#using-the-cloud-ui).
 - Environment variables marked as **Secret** are encrypted in the Astronomer control plane. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-in-the-cloud-ui) for details.
 - This approach limits the number of open connections to your metadata database, especially if you are using your connections and variables outside of task definitions.
 
@@ -151,7 +151,7 @@ You can configure system-level environment variables both locally and on Astro. 
 - The environment variables are defined in plain text in your `.env` file.
 - Connections must be formatted as either a URI or serialized JSON.
 - Environment variables are not as secure or centralized compared to a [secrets backend](secrets-backend.md).
-- You cannot directly export your environment variables from the Cloud UI to a local Airflow environment. See [Import and export Airflow objects](import-export-connections-variables.md#from-environment-variables).
+- You cannot directly export your environment variables from the Astro UI to a local Airflow environment. See [Import and export Airflow objects](import-export-connections-variables.md#from-environment-variables).
 
 ## Other strategies
 

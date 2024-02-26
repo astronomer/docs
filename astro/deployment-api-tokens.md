@@ -20,7 +20,7 @@ Unlike Workspace API tokens and Organization API tokens, Deployment API tokens a
 
 ## Create a Deployment API token
 
-1. In the Cloud UI, open your Workspace, then open the Deployment you want to create an API token for.
+1. In the Astro UI, open your Workspace, then open the Deployment you want to create an API token for.
 
 2. Click **API Tokens**.
 
@@ -40,7 +40,7 @@ Unlike Workspace API tokens and Organization API tokens, Deployment API tokens a
 
 If you delete a Deployment API token, make sure that no existing CI/CD workflows are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
-1. In the Cloud UI, open your Workspace, then open the Deployment that the API token belongs to.
+1. In the Astro UI, open your Workspace, then open the Deployment that the API token belongs to.
 
 2. Click **Edit** next to your API token.
 
@@ -54,11 +54,11 @@ Rotating a Deployment API token lets you renew a token without needing to reconf
 
 When you rotate a Deployment API token, you receive a new valid token from Astro that can be used in your existing workflows. The previous token value becomes invalid and any workflows using those previous values stop working.
 
-1. In the Cloud UI, open your Workspace, then open the Deployment that the API token belongs to.
+1. In the Astro UI, open your Workspace, then open the Deployment that the API token belongs to.
 
 2. Click **Edit** next to your API token.
 
-3. Click **Rotate token**. The Cloud UI rotates the token and shows the new token value.
+3. Click **Rotate token**. The Astro UI rotates the token and shows the new token value.
 
 4. Copy the new token value and store it in a safe place. You will not be able to retrieve this value from Astro again.
 

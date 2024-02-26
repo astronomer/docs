@@ -28,7 +28,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 <TabItem value="aws">
 
-1. In the Cloud UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
    
 2. Click **Cluster** > **+ Cluster**.
   
@@ -45,7 +45,7 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
 <TabItem value="gcp">
 
-1. In the Cloud UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
    
 2. Click **Cluster** > **+ Cluster**.
    
@@ -75,7 +75,7 @@ To set a maintenance window, first choose a maintenance window time and read thr
 
 <TabItem value="azure">
 
-1. In the Cloud UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, click the name of of your Workspace in the upper left corner, then click **Organization Settings**.
    
 2. Click **Cluster** > **+ Cluster**.
    

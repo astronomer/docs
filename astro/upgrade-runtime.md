@@ -102,7 +102,7 @@ Generally speaking, Deployment rollbacks to lower Runtime versions are recommend
 
 ## Step 8: Confirm your upgrade on Astro
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click **Open Airflow**.
 3. In the Airflow UI, scroll to the bottom of any page. You should see your new Runtime version in the footer:
 
@@ -156,7 +156,7 @@ Astro Runtime 8.4.0 upgrades `apache-airflow-providers-cncf-kubernetes` to 7.0.0
 
 ##### Upgrade directly to Astro Runtime 8.1
 
-Astro Runtime 8.0 introduced a number of bugs and dependency conflicts which were subsequently fixed in Runtime 8.1. As a result, Astro Runtime 8.0 is not available in the Cloud UI and no longer supported by Astronomer. To use Airflow 2.6, upgrade directly to Runtime 8.1.
+Astro Runtime 8.0 introduced a number of bugs and dependency conflicts which were subsequently fixed in Runtime 8.1. As a result, Astro Runtime 8.0 is not available in the Astro UI and no longer supported by Astronomer. To use Airflow 2.6, upgrade directly to Runtime 8.1.
 
 ##### Package dependency conflicts
 

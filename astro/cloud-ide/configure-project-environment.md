@@ -5,7 +5,7 @@ id: configure-project-environment
 description: Learn how to configure environment variables, connections, and dependencies for use in your Astro cloud IDE pipelines.
 ---
 
-Configure your Astro Cloud IDE project environment, including Airflow dependencies, variables, and connections, in the Cloud UI. You can use your environment configurations in any pipeline within your project.
+Configure your Astro Cloud IDE project environment, including Airflow dependencies, variables, and connections, in the Astro UI. You can use your environment configurations in any pipeline within your project.
 
 Environment configuration in the Astro Cloud IDE is similar to Astro project and Airflow configuration, but more options are provided to minimize the time you spend configuring text files. 
 
@@ -19,7 +19,7 @@ Environment configuration in the Astro Cloud IDE is similar to Astro project and
 
 Setting Python package requirements in the Astro Cloud IDE is equivalent to setting them in the Astro project `requirements.txt` file or running `pip install <package>`.
 
-1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
+1. In the Astro UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 
@@ -37,7 +37,7 @@ The process for configuring environment variables in the Astro Cloud IDE and in 
 
 In the Astro Cloud IDE, you can additionally specify whether an environment variable should be used as an Airflow variable or a system level environment variable.
 
-1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
+1. In the Astro UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 
@@ -78,7 +78,7 @@ SELECT {{ var.value.MY_KEY }} FROM mytable;
 
 You can configure Airflow connections in the Astro Cloud IDE in the same way that you can in the [Airflow UI](https://docs.astronomer.io/learn/connections). You can then reference the connection in your Python cells as code or in SQL cells as a configuration.
 
-1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
+1. In the Astro UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 
@@ -100,7 +100,7 @@ To use a connection in a Python cell, pass the connection ID to any function tha
 
 To use a connection in a SQL or Warehouse SQL cell:
 
-1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
+1. In the Astro UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 

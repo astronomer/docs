@@ -21,4 +21,4 @@ List the roles that an Organization API token has throughout the Organization, i
 astro organization token roles <token-id>
 ```
 
-Retrieve the ID for a token by running `astro organization token list` or viewing Organization tokens from the Cloud UI.
+Retrieve the ID for a token by running `astro organization token list` or viewing Organization tokens from the Astro UI.

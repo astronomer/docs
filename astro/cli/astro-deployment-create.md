@@ -24,7 +24,7 @@ values={[
 ]}>
 <TabItem value="astro">
 
-Create a Deployment on Astro. This command is functionally identical to using the Cloud UI to [create a Deployment](create-deployment.md).
+Create a Deployment on Astro. This command is functionally identical to using the Astro UI to [create a Deployment](create-deployment.md).
 
 ## Usage
 

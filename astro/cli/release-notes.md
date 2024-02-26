@@ -34,7 +34,7 @@ The following flags have been updated, but will continue to work with a deprecat
 
 You can now use Deployment files or the Astro CLI to create or update Kubernetes worker configurations.
 
-[Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Cloud UI. This also allows you to create or update Kubernetes worker configurations directly, instead of requiring you to update the worker resources by changing the Kubernetes worker queue configuration.
+[Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Astro UI. This also allows you to create or update Kubernetes worker configurations directly, instead of requiring you to update the worker resources by changing the Kubernetes worker queue configuration.
 
 You can now use the `default_task_pod_cpu`, `default_task_pod_memory`, `default_worker_type`, `resource_quota_cpu`, and `resource_quota_memory` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
 
@@ -497,7 +497,7 @@ Astro CLI version 1.9 includes three new commands that make it possible to progr
 - `astro deployment create --deployment-file`: Create a new Deployment with the configurations specified in a template file.
 - `astro deployment update --deployment-file`: Update an existing Deployment based on the values in a Deployment file.
 
-You can use template and Deployment files to define Astro Deployments as code. For example, if your team regularly creates and deletes Deployments for testing, you can use template files to avoid manually copying configurations in the Cloud UI. For more information, see [Astro CLI command reference](cli/astro-deployment-create.md).
+You can use template and Deployment files to define Astro Deployments as code. For example, if your team regularly creates and deletes Deployments for testing, you can use template files to avoid manually copying configurations in the Astro UI. For more information, see [Astro CLI command reference](cli/astro-deployment-create.md).
 
 ### New `--dag-file` flag for `astro run`
 
@@ -588,7 +588,7 @@ To use this feature, you must enable it for each Deployment. See [Deploy DAGs on
 
 ### New `astro deployment inspect` command
 
-You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. This includes worker queue settings, Astro Runtime version, and more. Use this command to quickly understand the state of your Deployment as code and as an alternative to viewing it in the Cloud UI.
+You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. This includes worker queue settings, Astro Runtime version, and more. Use this command to quickly understand the state of your Deployment as code and as an alternative to viewing it in the Astro UI.
 
 For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
 
@@ -696,7 +696,7 @@ For more information, see the [CLI command reference](cli/astro-dev-bash.md).
 
 ### New command to invite a user to an Astro Organization
 
-You can invite new users to an Astro Organization with the new `astro user invite` command. Previously, you could only invite users to Astro with the Cloud UI.
+You can invite new users to an Astro Organization with the new `astro user invite` command. Previously, you could only invite users to Astro with the Astro UI.
 
 For more information, see the [CLI command reference](cli/astro-organization-user-invite.md).
 
@@ -727,9 +727,9 @@ For more information about this command, see the [CLI command reference](cli/ast
 
 ### New token login method for Astro
 
-Astro CLI users can now log into Astro on a machine that does not have access to a browser by running `astro login --token-login`. This is an alternative to `astro login`, which automatically opens the Cloud UI in a browser on your machine.
+Astro CLI users can now log into Astro on a machine that does not have access to a browser by running `astro login --token-login`. This is an alternative to `astro login`, which automatically opens the Astro UI in a browser on your machine.
 
-If you run the command with this flag, the CLI provides a link to the Cloud UI that you can manually open in a web browser. You then copy an authentication token from the UI and enter it in the CLI. If you're using a browserless machine with the Astro CLI, this enables you to log in. For a browserless login, you can open the link and copy the token on a separate machine from the one running the Astro CLI.
+If you run the command with this flag, the CLI provides a link to the Astro UI that you can manually open in a web browser. You then copy an authentication token from the UI and enter it in the CLI. If you're using a browserless machine with the Astro CLI, this enables you to log in. For a browserless login, you can open the link and copy the token on a separate machine from the one running the Astro CLI.
 
 For more information about this command, see the [CLI command reference](cli/astro-login.md).
 
@@ -889,7 +889,7 @@ Release date: April 14, 2022
 
 ### New command to create and update environment variables
 
-`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables via a `.env` file locally, this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
+`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables via a `.env` file locally, this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Astro UI.
 
 For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
@@ -988,7 +988,7 @@ You can now use `astro deployment update` to update certain configurations for a
 - Scheduler replicas
 - Worker resources
 
-This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Deployment settings](deployment-settings.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
+This is the same set of configurations that you can modify with the **Edit Configuration** view in the Astro UI. For more information on modifying a Deployment, see [Deployment settings](deployment-settings.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
 
 ## 1.2.0 (`astrocloud`)
 
@@ -1026,9 +1026,9 @@ In addition to running tests locally, you can also run pytest as part of the Ast
 
 ### New command to view Deployment scheduler Logs
 
-If you prefer to troubleshoot DAGs and monitor your Deployments from the command line, you can now run `astro deployment logs`, a new Astro CLI command that allows you to view the same scheduler logs that appear in the **Logs** tab of the Cloud UI.
+If you prefer to troubleshoot DAGs and monitor your Deployments from the command line, you can now run `astro deployment logs`, a new Astro CLI command that allows you to view the same scheduler logs that appear in the **Logs** tab of the Astro UI.
 
-When you run this command, all scheduler logs emitted by a Deployment over the last 24 hours appear in your terminal. Similarly to the Cloud UI, you can filter logs by log level using command flags. For more information about this command, see the [CLI command reference](cli/astro-deployment-logs.md).
+When you run this command, all scheduler logs emitted by a Deployment over the last 24 hours appear in your terminal. Similarly to the Astro UI, you can filter logs by log level using command flags. For more information about this command, see the [CLI command reference](cli/astro-deployment-logs.md).
 
 ### New commands to create and delete Deployments on Astro
 
@@ -1037,7 +1037,7 @@ You can now use the Astro CLI to create and delete Deployments on Astro with two
 - `astro deployment create`
 - `astro deployment delete`
 
-These commands are functionally identical to the [Deployment configuration](deployment-settings.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
+These commands are functionally identical to the [Deployment configuration](deployment-settings.md) and deletion process in the Astro UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
 
 ## 1.1.0 (`astrocloud`)
 
@@ -1079,7 +1079,7 @@ We strongly recommend that all users install the Astro CLI and delete the `./ast
 
 The Astro CLI introduces an easy way to authenticate. Instead of requiring that users manually pass authentication tokens, the new CLI consists of a simple, browser-based login process.
 
-Built with refresh tokens, the Astro CLI also does not require that users re-authenticate every 24 hours, as was the case with `./astro`. As long as you remain authenticated via the Cloud UI, your session via the Astro CLI will remain valid. You can expect to be asked to re-authenticate only once every few months instead of on a daily basis.
+Built with refresh tokens, the Astro CLI also does not require that users re-authenticate every 24 hours, as was the case with `./astro`. As long as you remain authenticated via the Astro UI, your session via the Astro CLI will remain valid. You can expect to be asked to re-authenticate only once every few months instead of on a daily basis.
 
 ### Improved local development
 

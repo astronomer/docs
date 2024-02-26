@@ -46,7 +46,7 @@ All Astro clusters include a set of external IP addresses that persist for the l
 
 ### Allowlist external IP addresses for a cluster
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
 4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
@@ -97,7 +97,7 @@ To set up a private connection between an Astro VPC and an AWS VPC, you can crea
     - VPC ID of the external VPC
     - CIDR block of the external VPC
 
-2. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+2. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
 
 3. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
 
@@ -145,11 +145,11 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 2. Create a temporary role using the [role creation stack template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://cre-addon-infrastructure-us-east-1.s3.amazonaws.com/astro-peering-role.yaml). In the **Quick create stack** template that opens, complete the following fields:
 
     - **Stack name**: Enter a meaningful name for your stack.
-    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+    - **Peer Owner IDs**: Enter your cluster's AWS account ID. To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID on Astro Hybrid, click the name of your Workspace in the upper left corner of the Astro UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
 
 3. After the stack is created, go to the **Outputs** tab and copy the value from the **PeerRole ARN** field.
 
-4. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, and copy the **ID** of the cluster.
+4. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. Click **Clusters**, select your cluster, and copy the **ID** of the cluster.
 
 5. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following details:
 
@@ -224,11 +224,11 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 #### Setup
 
-1. In the Cloud UI, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings** > **Clusters*. Open your cluster from the table that appears and copy its **ID**.
+1. In the Astro UI, click the name of your Workspace in the upper left corner of the Astro UI, then click **Organization Settings** > **Clusters*. Open your cluster from the table that appears and copy its **ID**.
 2. In your AWS console, copy the ID of your existing transit gateway (TGW).
 3. [Create a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) and [share the TGW with your cluster's Astro AWS account](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#tgw-sharing).
 
-    To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Cloud UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
+    To retrieve your cluster's AWS account ID on Astro Hosted, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). To retrieve your cluster's AWS account ID in the Astro Hybrid, click the name of your Workspace in the upper left corner of the Astro UI, click **Organization Settings**, then click **Clusters**. Open your cluster and copy its **Account ID**.
 
 4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
 
@@ -314,7 +314,7 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field.
 
-    To get the Astro AWS account ID, click the name of your Workspace in the upper left corner of the Cloud UI, then click **Organization Settings**. From the **General** page, copy the **AWS External ID**.
+    To get the Astro AWS account ID, click the name of your Workspace in the upper left corner of the Astro UI, then click **Organization Settings**. From the **General** page, copy the **AWS External ID**.
 
 7. Click **Create resource share**.
 

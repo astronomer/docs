@@ -12,14 +12,14 @@ In addition to product documentation, the following resources are available to h
 
 If you're experiencing an issue or have a question that requires Astronomer expertise, use one of the following methods to contact Astronomer support:
 
-- Submit a support request in the [Cloud UI](https://cloud.astronomer.io/open-support-request).
+- Submit a support request in the [Astro UI](https://cloud.astronomer.io/open-support-request).
 - Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us).
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io).
 - Call +1 (831) 777-2768.
 
 ## Best practices for support request submissions
 
-The following are the best practices for submitting support requests in the Cloud UI or the Astronomer support portal:
+The following are the best practices for submitting support requests in the Astro UI or the Astronomer support portal:
 
 ### Always indicate priority
 
@@ -77,9 +77,9 @@ If you draft your support ticket on the [Astronomer support portal](https://supp
 
 You can also proactively search support articles without submitting a support ticket on the [Astronomer knowledge base](https://support.astronomer.io/hc/en-us).
 
-## Submit a support request in the Cloud UI
+## Submit a support request in the Astro UI
 
-1. In the Cloud UI, click **Help** > **Submit Support Request**.
+1. In the Astro UI, click **Help** > **Submit Support Request**.
 
     ![Submit Support Request menu location](/img/docs/support-request-location.png)
 
@@ -93,7 +93,7 @@ You can also proactively search support articles without submitting a support ti
 
 ## Submit a support request on the Astronomer support portal
 
-Astronomer recommends that you submit support requests in the Cloud UI. If you can't access the Cloud UI, sign in to the [Astronomer support portal](https://support.astronomer.io) and create a new support request. 
+Astronomer recommends that you submit support requests in the Astro UI. If you can't access the Astro UI, sign in to the [Astronomer support portal](https://support.astronomer.io) and create a new support request. 
 
 If you're new to Astronomer, you'll need to create an account on the Astronomer support portal to submit a support request. Astronomer recommends that you create an account with the same email address that you use to access Astro. This allows you to view support tickets from other team members that have email addresses with the same domain.
 

@@ -18,7 +18,7 @@ Before you create your Deployment, copy the following information from your sour
 - Environment variables
 
 <Tabs>
-<TabItem value="ui" label="Option 1: Cloud UI" default>
+<TabItem value="ui" label="Option 1: Astro UI" default>
 
 :::info Alternative setup for Astro Hybrid
 
@@ -26,7 +26,7 @@ This setup varies slightly for Astro Hybrid users. See [Deployment settings](/as
 
 :::
 
-1. In the Cloud UI, select a Workspace.
+1. In the Astro UI, select a Workspace.
 
 2. On the **Deployments** page, click **Deployment**.
 
@@ -149,7 +149,7 @@ This option is available only on [Astro Hybrid](hybrid-overview).
     - `<cluster-name>`: Specify name of the Astro cluster in which you want to create this Deployment.
     - `<workspace-name>`: The name of the Workspace you created.
     - `<max-worker-count>/ <min-worker-count>`: Specify the same minimum and maximum worker count as in source Airflow environment.
-    - `<worker-type>`: Specify the worker type for your default worker queue. You can see which worker types are available for your cluster in the **Clusters** menu of the Cloud UI. If you did not customize the available worker types for your cluster, the default available worker types are:
+    - `<worker-type>`: Specify the worker type for your default worker queue. You can see which worker types are available for your cluster in the **Clusters** menu of the Astro UI. If you did not customize the available worker types for your cluster, the default available worker types are:
 
     | AWS       | GCP           | Azure           |
     | --------- | ------------- | --------------- |
