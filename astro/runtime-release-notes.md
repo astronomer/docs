@@ -29,6 +29,20 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 10.4.0
+
+- Release date: February 26, 2024
+- Airflow version: 2.8.2
+
+### Airflow 2.8.2
+
+Astro Runtime 10.4.0 includes same-day support for Apache Airflow 2.8.2. Airflow 2.8.2 contains a number of bug fixes including:
+
+- Base date for fetching DAG grid view must include selected run_id ([#34887](https://github.com/apache/airflow/pull/34887))
+- Change AirflowTaskTimeout to inherit BaseException ([#35653](https://github.com/apache/airflow/pull/35653))
+
+For more information, see the [Apache Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-8-2-2024-02-26).
+
 ## Astro Runtime 10.3.0
 
 - Release date: February 1, 2024
