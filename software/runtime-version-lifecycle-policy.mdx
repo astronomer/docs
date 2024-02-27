@@ -1,0 +1,29 @@
+---
+title: "Astro Runtime maintenance and lifecycle policy"
+sidebar_label: "Astro Runtime maintenance policy"
+id: runtime-version-lifecycle-policy
+---
+
+import PolicyPart1 from "../docs-partials/runtime-versioning-and-lifecycle-policy-1.mdx";
+import PolicyPart2 from "../docs-partials/runtime-versioning-and-lifecycle-policy-2.mdx";
+
+<PolicyPart1>
+
+For each supported major Runtime version, bug fixes are delivered only through new `minor.patch` versions. If you report an issue with a supported Astro Runtime image that is not on the latest `minor.patch` version, Astronomer Support might ask that you upgrade your Astro Runtime version to see if that resolves the issue.
+
+For example, if you report an issue occurring on a Deployment running Astro Runtime 9.0.0, Astronomer support might ask you to first upgrade to the latest `9.minor.patch` version before troubleshooting your issue any further. If the issue still persists after upgrading, any fixes to that issue will be delivered in a new minor or patch release. Astronomer strives to provide backwards compatibility for all upgrades within the version. For example, you can upgrade directly from 9.0.0 to 9.4.0 and expect no breaking changes unless otherwise stated in documentation.
+
+Within the maintenance window of each Astro Runtime version, the following is true:
+
+- A set of Docker images corresponding to that version are available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+- Astronomer will regularly publish bug or security fixes identified as high priority.
+- Support for paying customers running a maintained version of Astro Runtime is provided by [Astronomer Support](https://cloud.astronomer.io/open-support-request).
+- A user can create a new Deployment with the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
+
+When the maintenance window for a given version of Runtime ends, the following is true:
+
+- Astronomer is not obligated to answer questions regarding a Deployment that is running an unsupported version.
+- Only System Admins can create new Deployments on Astronomer Software with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Software UI.
+- The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to that version.
+
+<PolicyPart2>

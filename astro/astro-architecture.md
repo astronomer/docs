@@ -56,7 +56,7 @@ To run DAGs in a Deployment, you must either deploy an Astro project manually fr
 
 _Astro Runtime_ is a [debian-based Docker image](https://quay.io/repository/astronomer/astro-runtime) that bundles Apache Airflow with optimized configurations and add-ons that make your Airflow experience reliable, fast, and scalable. Astronomer releases an Astro Runtime distribution for each version of Apache airflow.
 
-Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.md) to Astro Runtime versions, so that you can keep your DAGs running for longer without disruption.
+Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.mdx) to Astro Runtime versions, so that you can keep your DAGs running for longer without disruption.
 
 See [Astro Runtime Architecture and features](runtime-image-architecture.mdx) for a complete feature list.
 
