@@ -159,7 +159,7 @@ Let's explore the available views in the **DAGs** page. To access different DAG 
 
   :::
 
-## Step 6: Make a change to the `example_astronauts` DAG
+## Step 6: Make a change to example DAG
 
 Now that you can run DAGs and navigate the UI, let's make a change to the `example_astronauts` DAG and run it again.
 
@@ -180,7 +180,6 @@ Now that you can run DAGs and navigate the UI, let's make a change to the `examp
 
     ```text
     [2024-02-27, 15:11:28 UTC] {logging_mixin.py:188} INFO - Satoshi Furukawa is currently in space flying on the ISS! Hi! :)
-    [2024-02-27, 15:11:28 UTC] {python.py:202} INFO - Done. Returned value was: None
     ```
 
 ## Step 7: Write a new DAG
