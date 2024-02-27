@@ -5,10 +5,33 @@ id: runtime-version-lifecycle-policy
 description: "Learn how Astronomer releases and maintains versions of Astro Runtime."
 ---
 
-import PolicyPart1 from "../docs-partials/runtime-versioning-and-lifecycle-policy-1.mdx";
-import PolicyPart2 from "../docs-partials/runtime-versioning-and-lifecycle-policy-2.mdx";
+import LifecycleTable from "../docs-partials/runtime-lifecycle-table.mdx";
 
-<PolicyPart1 />
+Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
+
+Astronomer maintenance and lifecycle policies are part of the distribution and define the period that specific Astro Runtime versions are supported and how frequently updates are provided.
+
+## Release channels
+
+To meet the unique needs of different operating environments, Astro Runtime versions are associated with the following release channels:
+
+- **Stable:** Includes the latest Astronomer and Apache Airflow features, available on release
+- **Long-term Support (LTS):** Includes additional testing, stability, and maintenance for a core set of features
+
+All major Astro Runtime versions belong to the Astro Runtime stable release channel. The LTS release channel is a subset of the stable release channel and includes additional stability, reliability, and support. For more information on how Astro Runtime is versioned, see [Runtime versioning](runtime-image-architecture.mdx#runtime-versioning).
+
+For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of Astro Runtime as soon as they are made generally available. This should be regardless of release channel. New versions of Runtime are issued regularly and include timely support for the latest major, minor, and patch versions of Airflow.
+
+For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel exclusively.
+
+## Astro Runtime maintenance policy
+
+The maintenance period for an Astro Runtime version depends on its release channel:
+
+| Release Channel | Maintenance Duration                                                                 |
+| --------------- | ------------------------------------------------------------------------------------ |
+| Stable          | 6 months or 3 months after the next major Astro Runtime release, whichever is longer |
+| LTS             | 18 months or 6 months after the next LTS Astro Runtime release, whichever is longer  |
 
 For each supported major Runtime version, bug fixes are delivered only through new `minor.patch` versions. If you report an issue with a supported Astro Runtime image that is not on the latest `minor.patch` version, Astronomer Support might ask that you upgrade your Astro Runtime version to see if that resolves the issue.
 
@@ -30,4 +53,26 @@ When the maintenance window for a given version of Runtime ends, the following i
 
 Astronomer will not interrupt service for Deployments running Astro Runtime versions that are no longer in maintenance. Unsupported versions of Astro Runtime are available for local development and testing with the Astro CLI.
 
-<PolicyPart2 />
+### End of maintenance date
+
+Maintenance is discontinued the last day of the month for a given version. For example, if the maintenance window for a version of Astro Runtime is January - June of a given year, that version will be maintained by Astronomer until the last day of June.
+
+## Security
+
+Astronomer continuously checks for available security fixes for software used in Astro Runtime. This process includes scanning language dependencies, container images, and open source threat intelligence sources. When a security fix is available, Astronomer evaluates potential risks for organizations using Astro Runtime and determines deployment priority. Low priority fixes are deployed following the regular maintenance policy as described in [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.md#astro-runtime-maintenance-policy).
+
+If a vulnerability is not yet addressed in a third-party dependency and no official fix is available, Astronomer attempts to address the vulnerability or its impact with environmental mitigations. Whenever possible, Astronomer collaborates with the upstream project to support a timely delivery of the official fix. This process also covers images publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and provides context for their vulnerability scanning results.
+
+If you identify a vulnerability that results in relevant risk for your organization, contact [Astronomer security](mailto:security@astronomer.io).
+
+### Backport policy for bug and security fixes
+
+- **Functional bugs:** When Astronomer identifies a significant functional bug in Astro Runtime, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. To avoid the impact of previously identified bugs, Astronomer recommends that you consistently upgrade Astro Runtime to the latest stable version.
+
+- **Security vulnerabilities:** When Astronomer identifies a significant security vulnerability in Astro Runtime, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
+
+Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions.
+
+## Astro Runtime lifecycle schedule
+
+<LifecycleTable />
