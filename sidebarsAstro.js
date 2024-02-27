@@ -54,16 +54,16 @@ module.exports = {
           label: "Connections and variables",
           items: [
             "manage-connections-variables",
-            "create-and-link-connections",
+            {
+              type: "category",
+              label: "Connections and variables",
+              items: [
+                "astro-UI-airflow-resources",
+                "create-and-link-connections",
+                "create-airflow-vars-in-astro",
+              ],
+            },
             "import-export-connections-variables",
-          ],
-        },
-        {
-          type: "category",
-          label: "Astro Environment Manager",
-          items: [
-            "create-and-link-connections",
-            "create-airflow-vars-in-astro",
           ],
         },
         {
