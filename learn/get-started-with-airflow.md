@@ -157,7 +157,7 @@ Let's explore the available views in the **DAGs** page. To access different DAG 
 
   :::
 
-## Step 6: Make a change to example DAG
+## Step 6: Make a change to the example DAG
 
 Now that you can run DAGs and navigate the UI, let's make a change to the `example_astronauts` DAG and run it again.
 
