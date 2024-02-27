@@ -162,7 +162,6 @@ module.exports = {
         'airflow-kafka',
         'connections/azure-blob-storage',
         'airflow-azure-container-instances',
-        'airflow-azure-data-explorer',
         {
           type: 'category',
           label: 'Azure Data Factory',
