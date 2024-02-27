@@ -17,6 +17,7 @@ After you complete this tutorial, you'll be able to:
 - Create and start a local Airflow environment using the Astro CLI.
 - Manually trigger a DAG run in the Airflow UI.
 - Navigate the Airflow UI.
+- Edit the code of an existing DAG.
 - Write a simple Airflow DAG from scratch using the `@task` decorator and the BashOperator.
 
 :::tip Other ways to learn
