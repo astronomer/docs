@@ -85,11 +85,11 @@ Unlike workers, schedulers do not autoscale. The resources you set for them are 
 
 Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes for Astro Hosted:
 
-| Scheduler size | vCPU | Memory |
-| -------------- | ---- | ------ |
-| Small          | 1    | 2G     |
-| Medium         | 2    | 4G     |
-| Large          | 4    | 8G     |
+| Scheduler size | vCPU | Memory | Ephemeral storage |
+| -------------- | ---- | ------ | ----------------- |
+| Small          | 1    | 2G     | 5Gi               |
+| Medium         | 2    | 4G     | 5Gi               |
+| Large          | 4    | 8G     | 5Gi              |
 
 ### Update scheduler size
 
@@ -195,10 +195,10 @@ To create a hibernation schedule:
 
 You can use the following example cron expressions to implement common Deployment hibernation schedules:
 
-| Schedule | Start schedule | End schedule |
-|----------|----------------|---------------|
-| Hibernate from 5:00 PM to 9:00 AM| 0 17 * * * | 0 9 * * * |
-| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5 | 0 9 * * 1 |
+| Schedule                                               | Start schedule | End schedule |
+| ------------------------------------------------------ | -------------- | ------------ |
+| Hibernate from 5:00 PM to 9:00 AM                      | 0 17 * * *     | 0 9 * * *    |
+| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5     | 0 9 * * 1    |
 
 :::
 

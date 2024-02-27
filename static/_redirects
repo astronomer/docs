@@ -13,6 +13,7 @@
 /astro/api/organization-api-tokens.md /astro/organization-api-tokens 301
 /astro/ci-cd-templates/astro/set-up-ci-cd /astro/set-up-ci-cd 301
 /img/integrations/snowpark.png /learn/airflow-snowpark 301
+/learn/external-python-operator /learn/airflow-isolated-environments 301
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
 /software/0.34/* /software/:splat
@@ -81,7 +82,7 @@
 /deferrable-operators /astro/deferrable-operators 301
 /deploy-code /astro/deploy-code 301
 /deployment-metrics /astro/deployment-metrics 301
-/develop-project /astro/develop-project 301
+/develop-project /astro/cli/develop-project 301
 /disaster-recovery /astro/disaster-recovery 301
 /environment-variables /astro/environment-variables 301
 /install-aws /astro/install-aws 301
@@ -115,7 +116,7 @@
 /cloud/deferrable-operators /astro/deferrable-operators 301
 /cloud/deploy-code /astro/deploy-code 301
 /cloud/deployment-metrics /astro/deployment-metrics 301
-/cloud/develop-project /astro/develop-project 301
+/cloud/develop-project /astro/cli/develop-project 301
 /cloud/disaster-recovery /astro/disaster-recovery 301
 /cloud/environment-variables /astro/environment-variables 301
 /cloud/install-aws /astro/install-aws 301
@@ -324,7 +325,8 @@
 /astro/cli/run-airflow-locally#troubleshoot-KubernetesPodOperator-issues /astro/cli/troubleshoot-locally#troubleshoot-KubernetesPodOperator-issues 301
 /astro/cli/run-airflow-locally#ports-are-not-available-for-my-local-airflow-webserver /astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver 301
 /astro/import-export-connections-variables#from-the-cloud-ui /astro/cli/local-connections#from-the-cloud-ui 301
-
+/astro/run-airflow-locally /astro/cli/local-airflow-overview 301
+/astro/develop-project /astro/cli/develop-project 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301
@@ -352,7 +354,12 @@
 /astro/deployment-settings#transfer-a-deployment-to-another-workspace /astro/transfer-a-deployment 301
 /runtime-image-architecture#default-environment-variables /astro/platform-variables.md#default-runtime-environment-variables 301
 /astro/resource-reference-hosted#worker-type /astro/deployment-resources#hosted-worker-types 301
+/astro/resource-reference-hosted#deployment-resources /astro/deployment-resources 301
 
 # redirect Astro use-cases to renamed best-practices section
 /astro/use-cases/connections-branch-deploys /astro/best-practices/connections-branch-deploys
 /astro/use-cases/airflow-vs-astro-alerts /astro/best-practices/airflow-vs-astro-alerts
+
+# redirect deprecated docs to new blog posts
+/learn/airflow-talend-integration https://www.astronomer.io/blog/orchestrate-talend-with-airflow/
+/learn/airflow-azure-data-explorer https://www.astronomer.io/blog/orchestrate-adx-with-airflow/

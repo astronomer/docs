@@ -146,7 +146,15 @@ module.exports = {
               label: "CI/CD templates",
               items: [
                 "ci-cd-templates/template-overview",
-                "ci-cd-templates/github-actions",
+                {
+                  type: "category",
+                  label: "Github Actions",
+                  items: [
+                    "ci-cd-templates/github-actions-template",
+                    "ci-cd-templates/github-actions-deployment-preview",
+                    "ci-cd-templates/github-actions-private-network",
+                  ],
+                },
                 "ci-cd-templates/jenkins",
                 "ci-cd-templates/gitlab",
                 "ci-cd-templates/aws-s3",

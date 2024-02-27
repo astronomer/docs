@@ -109,9 +109,9 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::info
 
-  See GitHub's documentation for all available [SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints). 
-  
-  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint. 
+  See GitHub's documentation for all available [SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints).
+
+  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint.
 
   :::
 
@@ -243,7 +243,7 @@ Ensure that this file is accessible from your Astro project. You will mount this
     ```sh
     astro dev start --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt .
     ```
-  
+
 2. (Optional) Run the following command to deploy to Astro:
 
     ```sh
