@@ -94,24 +94,21 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 ### Attach a service account to your Deployment
 
-You can attach a custom GCP service account to your Deployment to grant the Deployment all of the permissions belonging to the service account. Astro uses [GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) to allow your Deployment's workload identity to assume the configured service account. 
+You can attach a custom GCP service account to your Deployment to grant the Deployment all of the service account's permissions.
 
 Using service accounts provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that should all have the same level of access to your cloud.
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
 2. In the Cloud UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
-3. In the **Workload Identity** dropdown menu, select **ADD GCP Service Account**
+3. In the **Workload Identity** dropdown menu, select **Customer Managed Identity**
 4. Enter your GCP service account ID when prompted, then copy and run the provided gcloud CLI command. 
-5. Click **Save**. The service account is now selectable as a workload identity for the Deployment.
+5. Click **Update Deployment**. The service account is now selectable as a workload identity for the Deployment.
 6. Complete one of the following options for your Deployment to access your cloud resources:
 
     - Create a **Google Cloud** connection type in Airflow and configure the following values:
       - **Connection Id**: Enter a name for the connection.
       - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
         
-    Note that this implementation requires `apache-airflow-providers-google >= 10.8.0`. See [Add Python, OS-level packages, and Airflow providers](https://docs.astronomer.io/astro/cli/develop-project#add-python-os-level-packages-and-airflow-providers).
-
-   - Specify the impersonation chain in code when you instantiate a Google Cloud operator. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html#direct-impersonation-of-a-service-account). Note that if you configure both a connection type and an operator, the operator-level configuration takes precedence.
     - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
 
     ```zsh
