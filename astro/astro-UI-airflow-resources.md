@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Create connections in Astro'
-title: 'Create Airflow resources in the Astro UI'
+sidebar_label: 'How the Astro UI stores and fetches details'
+title: 'How the Astro UI stores and fetches Airflow connection and variable details'
 id: astro-UI-airflow-resources
 description: "Learn about how the Astro UI allows you to create Airflow connections and variables, then link them across Deployments."
 ---
