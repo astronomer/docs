@@ -30,9 +30,7 @@ def external_python_decorator_dag():
         return {"num": 1, "word": "hello"}
 
     @task.external_python(python=os.environ["ASTRO_PYENV_epo_pyenv"])
-    def my_isolated_task(
-        upstream_task_output: dict,
-    ):  # note that not all objects from the context can be used!
+    def my_isolated_task(upstream_task_output: dict):
         """
         This function runs in an isolated environment.
         Args:

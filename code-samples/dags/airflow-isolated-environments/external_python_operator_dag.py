@@ -67,6 +67,7 @@ def external_python_operator_dag():
         python=os.environ["ASTRO_PYENV_epo_pyenv"],
         op_kwargs={
             # note that render_template_as_native_obj=True in the DAG definition
+            # to render num as an integer
             "num": "{{ ti.xcom_pull(task_ids='upstream_task')['num']}}",
             "word": "{{ ti.xcom_pull(task_ids='upstream_task')['word']}}",
         },

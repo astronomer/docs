@@ -26,14 +26,8 @@ def virtualenv_decorator_dag():
         print(f"The pandas version in the upstream task is: {pd.__version__}")
         return {"num": 1, "word": "hello"}
 
-    @task.virtualenv(
-        requirements=[
-            "pandas==1.5.1",
-        ],  # pendulum is needed to use the logical date
-    )
-    def my_isolated_task(
-        upstream_task_output: dict,
-    ):  # note that not all objects from the context can be used!
+    @task.virtualenv(requirements=["pandas==1.5.1"])
+    def my_isolated_task(upstream_task_output: dict):
         """
         This function runs in an isolated environment.
         Args:

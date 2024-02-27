@@ -61,11 +61,10 @@ def python_virtualenv_operator_dag():
     my_isolated_task = PythonVirtualenvOperator(
         task_id="my_isolated_task",
         python_callable=my_isolated_function,
-        requirements=[
-            "pandas==1.5.1",
-        ],
+        requirements=["pandas==1.5.1"],
         op_kwargs={
             # note that render_template_as_native_obj=True in the DAG definition
+            # to render num as an integer
             "num": "{{ ti.xcom_pull(task_ids='upstream_task')['num']}}",
             "word": "{{ ti.xcom_pull(task_ids='upstream_task')['word']}}",
         },
