@@ -27,7 +27,7 @@ The Celery executor is a good option for most use cases. Specifically, the Celer
 
 - You're just getting started with Airflow.
 - You don't have tasks that require more than 24 hours to execute. Celery workers give their tasks only 24 hours to finish so they can restart in the event of a code deploy.
-- You want to use different worker types based on the type of task you're running. See [Configure worker queues](configure-worker-queues.md).
+- You want to use different worker types based on the type of task you're running. See [Configure worker queues](configure-worker-queues.mdx).
 - You have many short-running tasks.
 - Your tasks require the shortest startup latency (often milliseconds).
 - You don't require task or dependency isolation.

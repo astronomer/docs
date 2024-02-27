@@ -700,7 +700,7 @@ You can now create a dedicated cluster in the following Azure regions:
 - `westeurope`
 - `uswest2`
 
-See [Astro Hosted resource reference](resource-reference-hosted.md) for more information.
+See [Astro Hosted resource reference](resource-reference-hosted.mdx) for more information.
 
 ### Additional improvements
 
@@ -1445,7 +1445,7 @@ To learn more, see [Export Airflow metrics to Datadog](export-datadog.md).
 
 - The Cloud UI now automatically ensures that worker queue names are valid as you type in real time.
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
-- You can now configure [worker queues](configure-worker-queues.md#worker-queue-settings) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
+- You can now configure [worker queues](configure-worker-queues.mdx#worker-queue-settings) to have a minimum **Worker count** of 0 workers. Note that depending on your cloud provider and Deployment configurations, some Deployments still might not be able to scale to 0 workers.
 
 ### Bug fixes
 
@@ -1482,7 +1482,7 @@ This feature enables the ability to:
 
 For example, if you have a task that requires significantly more CPU than memory, you can assign it to a queue that's configured with workers that are optimized for compute usage.
 
-To learn more about configuring worker queues, see [Configure Deployment resources](configure-worker-queues.md).
+To learn more about configuring worker queues, see [Configure Deployment resources](configure-worker-queues.mdx).
 
 ### New worker sizing
 
@@ -1495,7 +1495,7 @@ Astro's worker sizing enables a few benefits:
 - A higher level of reliability. This worker sizing model results in less volatility and a lower frequency of cluster autoscaling events, which lowers the frequency of errors such as zombie tasks and missing task logs.
 - The legacy **AU** unit is no longer applicable in the context of the worker. You only have to think about CPU, memory, and worker type.
 
-Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-worker-queues.md). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [GCP](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types), and [Azure](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types) resource references.
+Worker sizing on Astro is now defined in the context of worker queues. For more information about worker sizing, see [Configure Deployment resources](configure-worker-queues.mdx). For a list of supported worker types, see the [AWS](resource-reference-aws-hybrid.md#supported-worker-node-pool-instance-types), [GCP](resource-reference-gcp-hybrid.md#supported-worker-node-pool-instance-types), and [Azure](resource-reference-azure-hybrid.md#supported-worker-node-pool-instance-types) resource references.
 
 ### New Maximum Tasks per Worker setting
 

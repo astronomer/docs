@@ -83,7 +83,7 @@ At least one task is configured to run on a worker queue that does not exist. In
 
 1. Hover over the Deployment health status and click **View details** for the incident.
 2. Check the DAG and task IDs that reference the non-existent worker queue. The non-existent worker queue name referenced from your DAG code is listed under **Queue**.
-3. For each affected DAG, you can either create a new worker queue with the exact name as shown in **Queue** or update your DAG code to reference an existing worker queue. See [Configure worker queues](configure-worker-queues.md#assign-tasks-to-a-worker-queue).
+3. For each affected DAG, you can either create a new worker queue with the exact name as shown in **Queue** or update your DAG code to reference an existing worker queue. See [Configure worker queues](configure-worker-queues.mdx#assign-tasks-to-a-worker-queue).
 
 ## See also
 

@@ -12,7 +12,7 @@ This command is only available on Astro.
 
 :::
 
-Create a [worker queue](configure-worker-queues.md) in a Deployment on Astro. This command is functionally identical to creating a worker queue in the Cloud UI.
+Create a [worker queue](configure-worker-queues.mdx) in a Deployment on Astro. This command is functionally identical to creating a worker queue in the Cloud UI.
 
 ## Usage
 

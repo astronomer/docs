@@ -165,7 +165,7 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use the Celery executor. This section is not applicable to Deployments that use Kubernetes executor.
+The `worker_queues` section defines the [worker queues](configure-worker-queues.mdx) for Deployments that use the Celery executor. This section is not applicable to Deployments that use Kubernetes executor.
 
 If you don't enter specific values for the `default` worker queue for a Deployment, Astro uses default values based on the worker types available on your cluster. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI uses default values for any other unspecified fields.
 

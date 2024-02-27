@@ -183,7 +183,7 @@ A Kubernetes _node pool_ is a group of nodes within a cluster that share the sam
 - A _worker type_, which is one of your cloud provider's available node instance types.
 - A _maximum node count_, which is the maximum number of nodes that can run concurrently in the worker node pool across all Deployments.
 
-During the Astro cluster creation process, you provide Astronomer with a default worker type and a maximum node count to configure a default worker node pool. This node pool is used for the default worker queues for all of your Deployments. When you request Astronomer support to add a [new worker type](#configure-node-instance-type) to your cluster, a new worker node pool of that type is created on the cluster. You can then configure [worker queues](configure-worker-queues.md) that use the new worker type. 
+During the Astro cluster creation process, you provide Astronomer with a default worker type and a maximum node count to configure a default worker node pool. This node pool is used for the default worker queues for all of your Deployments. When you request Astronomer support to add a [new worker type](#configure-node-instance-type) to your cluster, a new worker node pool of that type is created on the cluster. You can then configure [worker queues](configure-worker-queues.mdx) that use the new worker type. 
 
 Your default worker node pool always runs a minimum of one node, while additional worker node pools can scale to zero. Additional nodes spin up as required based on the auto-scaling logic of your Deployment Airflow executor and your worker queues.
 

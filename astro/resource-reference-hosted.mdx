@@ -7,6 +7,7 @@ description: Reference of all supported infrastructure for new Astro Hosted clus
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import WorkerTypeTable from "../docs-partials/worker-type-table.mdx";
 
 :::warning
 
@@ -36,6 +37,12 @@ If you're on your organization's network and can't access Astro, make a request 
 - `https://install.astronomer.io/`
 - `https://astro-<organization-short-name>.datakin.com/`
 - `https://<organization-short-name>.astronomer.run/`
+
+## Astro worker machine types
+
+Astro Deployments use the following worker machine types to run tasks. If you use the Celery executor, you can configure a [worker queue](configure-worker-queues.mdx) to run tasks on a specific machine type. If you use the Kubernetes executor, Astro automatically chooses which worker machine types to use based on how many resources your tasks request. 
+
+<WorkerTypeTable>
 
 ## Standard cluster regions
 
@@ -83,7 +90,6 @@ Currently, standard clusters are available on the following clouds and regions:
 </TabItem>
 
 </Tabs>
-
 
 ## Dedicated cluster regions
 
