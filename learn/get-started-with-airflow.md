@@ -11,11 +11,10 @@ This tutorial is for people who are new to Apache Airflow and want to run it loc
 
 After you complete this tutorial, you'll be able to:
 
-- Run a local Airflow environment using the Astro CLI.
-- Manage the Astro project directory.
-- Write a new DAG.
+- Create and start a local Airflow environment using the Astro CLI.
+- Manually trigger a DAG run in the Airflow UI.
 - Navigate the Airflow UI.
-- Use code from the Astronomer Registry.
+- Write a simple Airflow DAG from scratch using the `@task` decorator and the BashOperator.
 
 :::tip Other ways to learn
 
@@ -28,7 +27,7 @@ There are multiple resources for learning about this topic. See also:
 
 ## Time to complete
 
-This tutorial takes approximately 1 hour to complete.
+This tutorial takes approximately 45 minutes to complete.
 
 ## Assumed knowledge
 
@@ -45,7 +44,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Create an Astro project
 
-To run data pipelines on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally.
+To run data pipelines on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally. This can be done with the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 
 1. Create a new directory for your Astro project:
 
