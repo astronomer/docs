@@ -39,8 +39,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- A terminal that accepts bash commands. This is pre-installed on most operating systems.
-- [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - An integrated development environment (IDE) for Python development, such as [VSCode](https://code.visualstudio.com/).
 - (Optional) A local installation of [Python 3](https://www.python.org/downloads/) to improve your Python developer experience.
@@ -329,46 +327,6 @@ Repeat steps 1-3 for the `print_reaction` task. The task logs should include the
 [2024-02-27, 13:57:08 UTC] {subprocess.py:97} INFO - Command exited with return code 0
 ```
 
-## Step 9: (Optional) Use the Astronomer Registry
-
-The example DAG you wrote used the `@task` decorator of the TaskFlow API and the traditional [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator) which is part of core Airflow. 
-
-As soon as you start using Airflow with other tools in your data ecosystem you will likely want to use specialized operators to interact with those tools. These operators are collected in Python packages called Airflow providers and the best place to learn about them is the [Astronomer Registry](https://registry.astronomer.io/providers).
-
-You can also find plenty of [example DAGs](https://registry.astronomer.io/dags) in the Astronomer Registry that demonstrate more complex use cases and integrations. As the final step of this tutorial, you'll add an example DAG to your Astro project:
-
-1. Go to the [Astronomer Registry](https://registry.astronomer.io/).
-2. In the search bar, search for `TaskFlow API`.
-3. Click on the **TaskFlow API ETL Example DAG**.
-4. In the DAG's information page, click the **Code** tab and copy the DAG code.
-
-    ![Copy DAG code from the Astronomer Registry](/img/tutorials/get-started-with-airflow_copy_dag_code.png)
-
-5. Paste the code into a new `.py` in the `dags` folder of your Astro project.
-6. Run the DAG from the Airflow UI.
-
-This DAG demonstrates a simple three task ETL pipeline using the TaskFlow API. One advantage of using the TaskFlow API is that Airflow can infer the dependencies between tasks when you pass the output of one task as an argument to another task. In the example DAG line:
-
-```python
-store_data(process_data(extract_bitcoin_price()))
-```
-
-creates the same dependency structure as:
-
-```python
-chain(extract_bitcoin_price(), process_data(), store_data())
-```
-
 ## Next steps
 
-Astronomer offers a variety of resources like this tutorial to learn more about how to use Airflow.
-
-- [Astronomer Webinars](https://www.astronomer.io/events/webinars/) cover concepts and use cases in-depth and offer the possibility to ask us questions live on air.
-- [Astronomer Learn](https:/docs.astronomer.io/learn/) covers both entry and expert level concepts in Airflow.
-- [Astronomer Academy](https://academy.astronomer.io/) offers many video tutorials and the option to purchase full length Airflow courses and to take exams to get certified.
-
-Don't know where to start? For beginners, the next resources we recommend are:
-
-- [Managing connections in Airflow](connections.md): Learn how to connect Airflow to third party products and services.
-- [Develop a project](https://docs.astronomer.io/astro/cli/develop-project): Learn about all of the ways you can configure your Astro project and local Airflow environment.
-- [DAG Writing Best Practices](dag-best-practices.md): Learn how to write efficient, secure, and scalable DAGs.
+Congratulations! You've written and run your first DAG in Airflow. You've also learned how to navigate the Airflow UI and view task logs. To continue learning about Airflow, see [Get started with Apache Airflow, Part 2: Providers, connections, and variables](get-started-with-airflow-part-2.md).
