@@ -39,9 +39,9 @@ See [Manage the Celery executor](celery-executor.md) to learn more about how to 
 
 ### Kubernetes executor
 
-The Kubernetes executor runs each task in an individual container. For each task that needs to run, the executor dynamically launches a Kubernetes Pod on your Astro cluster to run the task. When the task completes, the Pod terminates and its resources are released to the cluster.
+The Kubernetes executor runs each task in an individual Kubernetes Pod that's defined either by the task or your Deployment. When a task completes, its Pod is terminated and the resources are returned to your cluster. On Astro, the infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer. 
 
-On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
+You can specify the configuration of a task's Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg. Any task without a `pod_override` runs using the [default Pod](deployment-resources.md#configure-kubernetes-pod-resources) as configured on your Deployment. 
 
 The Kubernetes executor is a good option for some use cases. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
@@ -51,9 +51,13 @@ The Kubernetes executor is a good option for some use cases. Specifically, the K
 - Your tasks require task or dependency isolation.
 - You have had issues running certain tasks reliably with the Celery executor.
 
-You can specify the configuration of the task's Pod, including CPU and memory, as part of your DAG definition using the [Kubernetes Python Client](https://github.com/kubernetes-client/python) and the `pod_override` arg.
-
 If you're running a high task volume or cannot tolerate startup latency, Astronomer recommends the Celery executor. To learn more about using the Kubernetes executor, see [Manage the Kubernetes executor](kubernetes-executor.md).
+
+:::info Running costs for the Kubernetes executor
+
+On Astro Hosted, the Kubernetes executor runs Pods on the smallest possible [Astro machine type](configure-worker-queues.md#hosted-worker-types) that can support the Pod. For example, if a Pod has a limit of 1 vCPU and 2.5 Gib memory, it will run on an A10 machine type. Astro attempts to group as many possible Pods on the same worker instance before provisioning a new worker machine. This is why charges for the Kubernetes executor appear as Astro machine type usage on your billing.
+
+:::
 
 :::tip
 
