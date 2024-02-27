@@ -41,8 +41,8 @@ To get the most out of this guide, you should have an understanding of:
 
 There are two situations when you might want to run a task in an isolated environment:
 
-- Your task requires a **different version of Python** than your Airflow environment. Apache Airflow is compatible with and available in Python 3.8, 3.9, 3.10, 3.11. The Astro Runtime has [images](https://quay.io/repository/astronomer/astro-runtime?tab=tags) available for all supported Python versions, so you can run Airflow inside Docker in a reproducible environment. See [Prerequisites](https://airflow.apache.org/docs/apache-airflow/stable/installation/prerequisites.html) for more information.
-- Your task requires **different versions of Python packages** which conflict with the package versions installed in your Airflow environment. To know which Python packages are pinned to which versions within Airflow, you can retrieve the full list of constraints for each Airflow version by going to:
+- Your task requires a **different version of Python** than your Airflow environment. Apache Airflow is compatible with and available in Python 3.8, 3.9, 3.10 and 3.11. The Astro Runtime has [images](https://quay.io/repository/astronomer/astro-runtime?tab=tags) available for all supported Python versions, so you can run Airflow inside Docker in a reproducible environment. See [Prerequisites](https://airflow.apache.org/docs/apache-airflow/stable/installation/prerequisites.html) for more information.
+- Your task requires **different versions of Python packages** that conflict with the package versions installed in your Airflow environment. To know which Python packages are pinned to which versions within Airflow, you can retrieve the full list of constraints for each Airflow version by going to:
 
     ```text
     https://raw.githubusercontent.com/apache/airflow/constraints-<AIRFLOW VERSION>/constraints-<PYTHON VERSION>.txt
