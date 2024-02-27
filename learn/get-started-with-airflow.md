@@ -69,7 +69,7 @@ The Astro project is built to run Airflow with Docker. [Docker](https://docs.doc
 
 The default Astro project structure includes a collection of folders and files that you can use to run and customize Airflow. For this tutorial, you only need to know the following files and folders:
 
-- `/dags`: A directory of DAG files. Each Astro project includes one example DAG `example_astronauts`. For more information on DAGs, see [Introduction to Airflow DAGs](dags.md).
+- `/dags`: A directory of DAG files. Each Astro project includes one example DAG: `example_astronauts`. For more information on DAGs, see [Introduction to Airflow DAGs](dags.md).
 - `Dockerfile`: This is where you specify your version of [Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture), which is a runtime software based on Apache Airflow that is built and maintained by Astronomer. The CLI generates new Astro projects with the latest version of Runtime, which is equivalent to the latest version of Airflow. For advanced use cases, you can also configure this file with Docker-based commands to run locally at build time.
 
 ## Step 2: Start Airflow
@@ -109,7 +109,7 @@ Each DAG is listed with a few of its properties, including tags, owner, previous
 
 A **DAG run** is an instance of a DAG running on a specific date. Let's trigger a run of the `example_astronauts` DAG that was generated with your Astro project.
 
-To provide a basic demonstration of an ETL pipeline, this DAG queries the [Open Notify API](https://github.com/open-notify/Open-Notify-API) to get a list of all astronauts currently in space, passes that list to a second task and dynamically prints a statement to the Airflow logs for each astronaut. 
+To provide a basic demonstration of an ETL pipeline, this DAG queries the [Open Notify API](https://github.com/open-notify/Open-Notify-API) to get a list of all astronauts currently in space, passes that list to a second task, and dynamically prints a statement to the Airflow logs for each astronaut. 
 
 1. Before you can run any DAG in Airflow, you have to unpause it. To unpause `example_astronauts`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
 
@@ -205,7 +205,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     """
     ```
 
-    Adding a docstring to your DAG is a best practice. It helps you and others understand what the DAG does and how it works and it can be converted to a [DAG Doc] by setting `doc_md=__doc__` in the DAG definition. 
+    Adding a docstring to your DAG is a best practice. It helps you and others understand what the DAG does and how it works and it can be converted to a [DAG Doc](custom-airflow-ui-docs-tutorial.md) by setting `doc_md=__doc__` in the DAG definition. 
 
 3. After the docstring, add the import statements of your Python packages:
 
@@ -282,7 +282,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     )
     ```
 
-    An operator is a Python class containing the logic to define the work to be completed by a single task. This second task `print_reaction` uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/bashoperator) to run a bash command that prints `This is awesome!` to the logs. The first parameter of the task (`task_id`) defines the name of the task that appears in the Airflow UI. 
+    For common tasks in Airflow, you can use pre-built operators instead of writing your own function. An operator is a Python class containing the logic to define the work to be completed by a single task. This second task, `print_reaction`, uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/bashoperator) to run a bash command that prints `This is awesome!` to the logs. The first parameter of the task (`task_id`) defines the name of the task that appears in the Airflow UI. 
 
 7. Define the dependencies between the two tasks using the `chain` function:
 
@@ -304,7 +304,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
 ## Step 8: Run the new DAG
 
-To view your new DAG in the Airflow UI, enter `http://localhost:8080/` in your browser. As long as Airflow is running, it automatically picks up any new changes in your `/dags` directory. Existing files are parsed for changes every 30 seconds, while new files can be detected every 5 minutes.
+Go back to the Airflow UI to view your new DAG. Airflow will parse the `/dags` directory for changes to existing files  every 30 seconds and new files every 5 minutes.
 
 :::tip
 
