@@ -5,6 +5,9 @@ id: get-started-with-airflow
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import example_astronauts from '!!raw-loader!../code-samples/dags/get-started-with-airflow/example_astronauts.py';
+
 Getting started with Apache Airflow locally is easy with the Astro CLI.
 
 This tutorial is for people who are new to Apache Airflow and want to run it locally with open source tools.
@@ -156,7 +159,31 @@ Let's explore the available views in the **DAGs** page. To access different DAG 
 
   :::
 
-## Step 6: Write a new DAG
+## Step 6: Make a change to the `example_astronauts` DAG
+
+Now that you can run DAGs and navigate the UI, let's make a change to the `example_astronauts` DAG and run it again.
+
+1. Open the `example_astronauts.py` file in your IDE. This file is located in the `/dags` folder of your Astro project.
+
+    <CodeBlock language="python">{example_astronauts}</CodeBlock>
+
+    This DAG is a simple example of an ETL pipeline with two tasks: 
+
+    - The first task, `get_astronauts`, queries the [Open Notify API](https://github.com/open-notify/Open-Notify-API) for information about astronauts currently in space. It pushes the number of people currently in space to the Airflow XCom table under the `number_of_people_in_space` key. The XCom table is used to pass information between Airflow tasks and we will use this value again in a new DAG in [Step 6](#step-6-write-a-new-dag). The task returns the list of dictionaries containing the name and the spacecraft of all astronauts currently in space, which implicitly stores this information in the Airflow XCom table as well, using the key `return_value`. Learn more about XCom in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
+    - The second task, `print_astronaut_craft` is a dynamically mapped Airflow task. Creating one dynamically mapped task for each astronaut in space, which each prints a statement to the logs for one astronaut. Dynamic task mapping is a versatile feature of Airflow that allows you to create a variable number of tasks at runtime. For more information, see [Dynamic task mapping in Airflow](airflow-dynamic-task-mapping.md).
+
+2. Let's change the greeting we use for each Astronaut in the `print_astronaut_craft` task! Got to line 73 of the DAG file and change the string passed to the `greeting` parameter in the `.partial()` method from `"Hello! :)"` to `"Hi! :)"`, then save your changes. All parameters defined in `.partial()` will stay the same in between mapped task instances.
+
+3. Go back to the Airflow UI and trigger a new run of the `example_astronauts` DAG using the same steps as in [Step 4](#step-4-trigger-a-dag-run).
+
+4. Navigate to the task logs of any mapped task instance of the `print_astronaut_craft` task as shown in [Step 5.1](#step-5-explore-the-airflow-ui) to see your new greeting. Your logs should look similar to this:
+
+    ```text
+    [2024-02-27, 15:11:28 UTC] {logging_mixin.py:188} INFO - Satoshi Furukawa is currently in space flying on the ISS! Hi! :)
+    [2024-02-27, 15:11:28 UTC] {python.py:202} INFO - Done. Returned value was: None
+    ```
+
+## Step 7: Write a new DAG
 
 Now that we can run DAGs and navigate the UI, let's write our own DAG and run it. 
 
@@ -276,7 +303,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
 8. Save your code.
 
-## Step 7: Run the new DAG
+## Step 8: Run the new DAG
 
 To view your new DAG in the Airflow UI, enter `http://localhost:8080/` in your browser. As long as Airflow is running, it automatically picks up any new changes in your `/dags` directory. Existing files are parsed for changes every 30 seconds, while new files can be detected every 5 minutes.
 
@@ -300,7 +327,7 @@ When your new DAG appears in the Airflow UI, you can run it to test it.
 
 3. The `my_astronauts_dag` is scheduled to run whenever the `current_astronauts` Dataset is updated by a successful run of the `get_astronauts` task in the `example_astronauts` DAG. Trigger another manual run of the `example_astronauts` DAG to see the `my_astronauts_dag` run again, as soon as the `get_astronauts` task has completed.
 
-## Step 8: View task logs
+## Step 9: View task logs
 
 When you tell Airflow to print something to the terminal, the output appears in Airflow task logs. Task logs are an important feature for troubleshooting DAGs. If a task in your DAG fails, task logs are the best place to investigate why.
 
