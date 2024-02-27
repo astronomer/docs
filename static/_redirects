@@ -13,6 +13,7 @@
 /astro/api/organization-api-tokens.md /astro/organization-api-tokens 301
 /astro/ci-cd-templates/astro/set-up-ci-cd /astro/set-up-ci-cd 301
 /img/integrations/snowpark.png /learn/airflow-snowpark 301
+/learn/external-python-operator /learn/airflow-isolated-environments 301
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
 /software/0.34/* /software/:splat
