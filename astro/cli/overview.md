@@ -40,5 +40,5 @@ With the Astro CLI, you can:
 <LinkCardGrid>
   <LinkCard truncate label="Astro CLI Quickstart" description="Start a new Airflow project with just a few commands." href="/astro/cli/get-started-cli" />
   <LinkCard truncate label="Release notes" description="Review the latest changes to the Astro CLI." href="/astro/cli/local-airflow-overview" />
-  <LinkCard truncate label="Command reference" description="Learn about all available Astro CLI commands." href="/astro/cli/command-reference" />
+  <LinkCard truncate label="Command reference" description="Learn about all available Astro CLI commands." href="/astro/cli/reference" />
 </LinkCardGrid>
