@@ -7,7 +7,7 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Hibernate an Astro development Deployment for a set amount of time. Overrides any existing hibernation schedule and sets the Deployment to hibernate for a specific duration or until a specific time. 
+[Hibernate an Astro development Deployment](deployment-resources.md#hibernate-a-development-deployment) for a set amount of time. Overrides any existing hibernation schedule and sets the Deployment to hibernate for a specific duration or until a specific date. 
 
 ## Usage
 
