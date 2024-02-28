@@ -347,7 +347,7 @@ module.exports = {
       defer: true,
     },
   ],
-  clientModules: [
-    require.resolve('./segment-page.mjs'),
-  ],
+  // clientModules: [
+  //   require.resolve('./segment-page.mjs'),
+  // ],
 };
