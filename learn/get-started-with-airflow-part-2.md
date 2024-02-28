@@ -235,7 +235,7 @@ The second task uses the HttpOperator to send a `GET` request to the `/iss-now.j
 
 The third task uses the [TaskFlow API's](airflow-decorators.md) `@task` decorator to run a regular Python function processing the coordinates returned by the `get_iss_coordinates` task and printing the city and country of the ISS location to the task logs. The coordinates are passed to the function as an argument using `get_iss_coordinates.output`, which accesses the value returned by the `get_iss_coordinates` task from the XCom table.
 
-This is an example of how you can use a traditional operator (HttpOperator) and a TaskFlow API task to perform similar operations, in this case querying an API. 
+This is an example of how you can use a traditional operator (HttpOperator) and a TaskFlow API task to perform similar operations, in this case querying an API. Which way of task writing you choose depends on your use case and often comes down to personal preference.
 
 ```python
     @task
