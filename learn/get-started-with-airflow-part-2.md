@@ -203,8 +203,11 @@ Next, the DAG context is instantiated using the [`@dag` decorator](airflow-decor
 def find_the_iss():
 ```
 
-The DAG itself has three tasks. The first task uses the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor) to check whether the commit message `Where is the ISS right now?` has been added to your GitHub repository with the help of the `commit_message_checker` function described previously. 
-It utilizes the Airflow variable (`my_github_repo`) and connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The `Variable.get()` method uses `apache/airflow` as the default value if it has not been defined by the user. The sensor checks for the tag every 5 seconds and will time out after one hour. It is best practice to always set a `timeout` because the default value is quite long at 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
+The DAG itself has three tasks. 
+
+The first task uses the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor) to check whether the commit message `Where is the ISS right now?` has been added to your GitHub repository with the help of the `commit_message_checker` function described previously. 
+
+This task utilizes both, the Airflow variable (`my_github_repo`) and the Airflow connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The [sensor](what-is-a-sensor.md) checks for the tag every 5 seconds (`poke_interval`) and will time out after one hour (`timeout`). It is best practice to always set a `timeout` because the default value is quite long at 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
 
 ```python
     github_sensor = GithubSensor(
