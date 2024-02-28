@@ -15,7 +15,7 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER}}':"1.24.0",
+          '{{CLI_VER}}': "1.24.0",
           '{{RUNTIME_VER}}': "10.4.0",
         };
         var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
@@ -334,11 +334,6 @@ module.exports = {
     {
       src: "/scripts/set-tab.js",
       async: true,
-      defer: true,
-    },
-    {
-      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
-      "data-domain": 'docs.astronomer.io',
       defer: true,
     },
     {
