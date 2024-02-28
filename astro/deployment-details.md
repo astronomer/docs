@@ -13,7 +13,7 @@ Deployment details define how users can view and interact with your Deployment. 
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-    <img src={require("../static/img/docs/edit-deployment.png").default} alt="Example banner" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+    <img src={require("../static/img/docs/edit-deployment.png").default} alt="Edit Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. In the **Basic** section, update the Deployment **Name** or **Description**.
 
@@ -47,7 +47,7 @@ After you enable CI/CD enforcement on a Deployment, the Deployment accepts a dep
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
-    <img src={require("../static/img/docs/edit-deployment.png").default} alt="Example banner" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+    <img src={require("../static/img/docs/edit-deployment.png").default} alt="Edit Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. In the **Advanced** section, find **CI/CD Enforcement** and click the toggle to **On**.
 
@@ -74,6 +74,6 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
-    <img src={require("../static/img/docs/delete-deployment.png").default} alt="Example banner" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+    <img src={require("../static/img/docs/delete-deployment.png").default} alt="Delete Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. Enter `Delete` and click **Yes, Continue**.
