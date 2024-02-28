@@ -107,7 +107,7 @@ To set up a private connection between an Astro VPC and an AWS VPC, you can crea
     - **AWS account ID**: Enter the account ID of the external VPC.
     - **Destination VPC ID**: Enter the VPC ID.
     - **Destination VPC region**: Enter the region of the external VPC.
-    - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC. The smallest supported VPC CIDR that Astro supports is `/21`, and the default is `/20`.
+    - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC.
 
 5. Click **Create Connection**. The connection appears as **Pending**.
 6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**.
