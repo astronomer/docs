@@ -1,0 +1,111 @@
+---
+sidebar_label: 'Scale resources'
+title: 'Configure resources for Astronomer Software Deployments'
+id: deploy-code-overview
+description: Configure Deployment components to use the right amount of computational resources for your use case.
+---
+
+## Select an executor
+
+The Airflow [executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow scheduler to decide what resources will complete tasks as they're queued. The difference between executors comes down to their available resources and how they utilize those resources to distribute work.
+
+Astronomer supports 3 executors:
+
+- [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html)
+- [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html)
+- [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html)
+
+Though it largely depends on your use case, we recommend the Local executor for development environments and the Celery or Kubernetes executors for production environments operating at scale.
+
+For a detailed breakdown of each executor, see [Airflow executors explained](https://docs.astronomer.io/learn/airflow-executors-explained).
+
+## Select a resource strategy
+
+A Deployment's **Resource Strategy** defines how you can allocate CPU and memory to the Deployment's Airflow components. Astronomer Software offers two different resource strategies: **Custom Resources** and **Astronomer Units (AUs)**.
+
+An AU is equivalent to 0.1 CPU and 0.375 GiB of memory. If you set your resource strategy to **Astronomer Units**, you can only scale components based on this resource ratio. Components must use the same AU value for both CPU and memory.
+
+If you set your resource strategy to **Custom Resources**, you can freely set CPU and memory for each component without a predetermined ratio. See [Customize resource usage](customize-resource-usage.md).
+
+:::info
+
+If you still want a constant ratio of CPU to memory but want to change the specific ratio, you can change the amount of resources an AU represents. See [Overprovision Deployments](cluster-resource-provisioning).
+
+:::
+
+## Scale core resources
+
+Apache Airflow requires two primary components:
+
+- The Airflow Webserver
+- The Airflow Scheduler
+
+To scale either resource, adjust the corresponding slider in the Software UI to increase its available computing resources.
+
+Read the following sections to help you determine which core resources to scale and when.
+
+### Airflow webserver
+
+The Airflow webserver is responsible for rendering the [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
+
+If a function within the Airflow UI is slow or unavailable, Astronomer recommends increasing the resources allocated towards the webserver.
+
+### Airflow scheduler
+
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met.
+
+If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, Astronomer recommends increasing the resources allocated towards the scheduler. 
+
+> **Tip:** To set alerts that notify you via email when your Airflow scheduler is underprovisioned, refer to [Airflow alerts](airflow-alerts.md).
+
+#### Scheduler count
+
+Airflow 2.0 comes with the ability for users to run multiple schedulers concurrently to ensure high-availability, zero recovery time, and faster performance. By adjusting the **Scheduler Count** slider in the Software UI, you can provision up to 4 schedulers on any Deployment running Airflow 2.0+ on Astronomer.
+
+Each individual scheduler will be provisioned with the resources specified in **Scheduler Resources**. For example, if you set the CPU figure in **Scheduler Resources** to 5 CPUs and set **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow schedulers using 5 CPUs each for a total of 10 CPUs.
+
+To increase the speed at which tasks are scheduled and ensure high-availability, Astronomer recommends provisioning 2 or more Airflow schedulers for production environments. For more information on the Airflow 2.0 scheduler, refer to Astronomer's ["The Airflow 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
+
+### Triggerer
+
+Airflow 2.2 introduces the triggerer, which is a component for running tasks with [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html). Like the scheduler, the triggerer is highly-available: If a triggerer shuts down unexpectedly, the tasks it was deferring can be recovered and moved to another triggerer.
+
+By adjusting the **Triggerer** slider in the Software UI, you can provision up to 2 triggerers on any Deployment running Airflow 2.2+. To take advantage of the Triggerer's high availability, we recommend provisioning 2 triggerers for production Deployments.
+
+## Kubernetes executor: Set extra capacity
+
+On Astronomer, resources required for the [KubernetesPodOperator](kubepodoperator.md) or the [Kubernetes Executor](kubernetes-executor.md) are set as **Extra Capacity**.
+
+The Kubernetes executor and KubernetesPodOperator each spin up an individual Kubernetes pod for each task that needs to be executed, then spin down the pod once that task is completed.
+
+The amount of CPU and Memory allocated to **Extra Capacity** maps to [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) on the [Kubernetes Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in which your Airflow Deployment lives on Astronomer. More specifically, **Extra Capacity** represents the maximum possible resources that could be provisioned to a pod at any given time.
+
+Resources allocated to **Extra Capacity** do not affect scheduler or webserver performance and do not represent actual usage. 
+
+## Celery executor: Configure workers
+
+To optimize for flexibility and availability, the Celery executor works with a set of independent Celery workers across which it can delegate tasks. On Astronomer, you're free to configure your Celery workers to fit your use case.
+
+### Worker count
+
+By adjusting the **Worker Count** slider, users can provision up to 20 Celery workers on any Airflow Deployment.
+
+Each individual worker will be provisioned with the resources specified in **Worker Resources**. If you set the CPU figure in **Worker Resources** to 5 CPUs and set **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery workers using 5 CPUs each for a total of 15 CPUs.
+
+### Worker termination grace period
+
+On Astronomer, Celery workers restart following every code deploy to your Airflow Deployment. This is to make sure that workers are executing with the most up-to-date code. To minimize disruption during task execution, however, Astronomer supports the ability to set a **Worker Termination Grace Period**.
+
+If a deploy is triggered while a Celery worker is executing a task and **Worker Termination Grace Period** is set, the worker will continue to process that task up to a certain number of minutes before restarting itself. By default, the grace period is ten minutes.
+
+> **Tip:** The **Worker Termination Grace Period** is an advantage to the Celery executor. If your Airflow Deployment runs on the Local executor, the scheduler will restart immediately upon every code deploy or configuration change and potentially interrupt task execution.
+
+## Set environment variables
+
+Environment variables can be used to set [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) and custom values, both of which can be applied to your Airflow Deployment either locally or on Astronomer.
+
+These can include setting Airflow Parallelism, an SMTP service for alerts, or a [secrets backend](secrets-backend.md) to manage Airflow connections and variables.
+
+Environment variables can be set for your Airflow Deployment either in the **Variables** tab of the Software UI or in your `Dockerfile`. If you're developing locally, they can also be added to a local `.env` file. For more information on configuring environment variables, read [Environment variables on Astronomer](environment-variables.md).
+
+> **Note**: Environment variables are distinct from [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html?highlight=variables) and [XComs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html), which you can configure directly via the Airflow UI and are used for inter-task communication.
