@@ -12,8 +12,7 @@ This tutorial is aimed at people who are new to Apache Airflow and want to run i
 After you complete this tutorial, you'll be able to:
 
 - Create and start a local Airflow environment using the Astro CLI.
-- Manually trigger a DAG run in the [Airflow UI](airflow-ui.md).
-- Navigate the Airflow UI.
+- Navigate the [Airflow UI](airflow-ui.md).
 - Write a simple Airflow DAG from scratch using the `@task` [decorator](airflow-decorators.md) and the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator).
 
 :::tip Other ways to learn
@@ -100,7 +99,7 @@ To access the Airflow UI, open `http://localhost:8080/` in a browser and log in 
 
 The default page in the Airflow UI is the **DAGs** page, which shows an overview of all DAGs in your Airflow environment:
 
-![View of starter DAG in the Airflow UI](/img/tutorials/get-started-with-airflow_ui_with_starter_dags.png)
+![Screenshot of the DAGs page of the Airflow UI showing the example_astronauts DAG with no run history yet.](/img/tutorials/get-started-with-airflow_ui_with_starter_dags.png)
 
 Each DAG is listed with a few of its properties, including tags, owner, previous runs, schedule, timestamp of the last and next run, and the states of recent tasks. Because you haven't run any DAGs yet, the **Runs** and **Recent Tasks** sections are empty. Let's fix that!
 
@@ -111,17 +110,17 @@ The `example_astronauts` DAG that was generated with your Astro project is a sim
 - `get_astronauts`: queries the [Open Notify API](https://github.com/open-notify/Open-Notify-API) for information about astronauts currently in space. The task returns the list of dictionaries containing the name and the spacecraft of all astronauts currently in space, which is passed to the second task in the DAG. This tutorial does not go into depth on how to pass data between tasks, but you can learn more about it in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
 - `print_astronaut_craft`: is a dynamically mapped Airflow task. Creating one dynamically mapped task instance for each astronaut in space, which each prints a statement to the logs for one astronaut. Dynamic task mapping is a versatile feature of Airflow that allows you to create a variable number of tasks at runtime. This feature is covered in more depth in the [Create dynamic Airflow tasks](dynamic-tasks.md) guide.
 
-A **DAG run** is an instance of a DAG running on a specific date. Let's trigger a run of the `example_astronauts` DAG that was generated with your Astro project.
+A **DAG run** is an instance of a DAG running on a specific date. Let's trigger a run of the `example_astronauts` DAG!
 
 1. Before you can run any DAG in Airflow, you have to unpause it. To unpause `example_astronauts`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
 
-    ![Unpause DAG slider in the Airflow UI](/img/tutorials/get-started-with-airflow_unpause_dag.png)
+    ![Screenshot of the DAGs view of the Airflow UI with an arrow pointing to the toggle on the right side of the DAG name you can click to unpause the DAG.](/img/tutorials/get-started-with-airflow_unpause_dag.png)
 
 2. While all DAGs can run on a schedule defined in their code, you can manually trigger a DAG run at any time from the Airflow UI. Manually trigger `example_astronauts` by clicking the play button under the **Actions** column. During development, running DAGs on demand can help you identify and resolve issues.
 
 After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG start to populate with data.
 
-![DAG running in the Airflow UI](/img/tutorials/get-started-with-airflow_dag_running.png)
+![Screenshot of the DAGs view of the Airflow UI showing the unpaused example_astronauts DAG with one previous successful DAG run and one run currently in progress.](/img/tutorials/get-started-with-airflow_dag_running.png)
 
 These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
 
@@ -131,27 +130,27 @@ The navigation bar in the Airflow UI contains 8 tabs, each with different inform
 
 Let's explore the available views in the **DAGs** page. To access different DAG views for `example_astronauts`:
 
-1. Click the name of the DAG.
+1. Click the name of the DAG to access the default **Grid** view, which shows the state of completed and currently running tasks.
 
-    The default DAG view is the **Grid** view, which shows the state of completed and currently running tasks. Each column in the grid represents a complete DAG run, and each block in the column represents a specific task instance. This view is useful for seeing DAG runs over time and troubleshooting previously failed task instances.
+    Each column in the grid represents a complete DAG run, and each block in the column represents a specific task instance. This view is useful for seeing DAG runs over time and troubleshooting previously failed task instances.
 
     ![Screenshot of the Airflow Grid view showing two DAG runs of the example_astronauts DAG.](/img/tutorials/get-started-with-airflow_grid_view.png)
 
     Click on a green square to display additional information about the related task instance on the right side of the Airflow UI. The task instance view includes tabs with additional information for the task instance, such as its logs and historic runs. This is one of many available views that show details about your DAG.
 
-    ![Access task logs](/img/tutorials/get-started-with-airflow_access_task_instance.gif)
+    ![Gif showing how to access the task logs of a regular task instance by clicking on its task instance square in the Grid view and then on the Logs tab.](/img/tutorials/get-started-with-airflow_access_task_instance.gif)
 
-    To access information about dynamically mapped task instances of a a dynamically mapped task, click the green square of the task instance and then click on **[] Mapped task** to get a list of all dynamically mapped task instances. Click on any entry in the list to access information about the dynamically mapped task instance, such as the logs.
+    To access information about [dynamically mapped](dynamic-tasks.md) task instances of a a dynamically mapped task, click the green square of the task instance and then click on **[] Mapped task** to get a list of all dynamically mapped task instances. Click on any entry in the list to access information about the dynamically mapped task instance, such as the logs.
 
-    ![Access task logs of a dynamically mapped task instance](/img/tutorials/get-started-with-airflow_access_mapped_task_instance.gif)
+    ![Gif showing how to access the task logs of a dynamically mapped task instance by clicking on its task instance square in the Grid view, then on the Mapped tasks Tab and lastly on the Logs tab.](/img/tutorials/get-started-with-airflow_access_mapped_task_instance.gif)
 
 2. In the **Grid** view, click the **Graph** tab. This view shows task dependencies and relationships and can help you troubleshoot dependency issues. When you select a DAG run in the Grid view, the Graph tab shows the last state of each task instance in this DAG run.
 
-    ![Graph view](/img/tutorials/get-started-with-airflow_graph_view_dagrun.gif)
+    ![Gif showing how to access the Graph view of a DAG by clicking the Graph tab, then seeing the Graph you of a specific DAG run by clicking the DAG run column.](/img/tutorials/get-started-with-airflow_graph_view_dagrun.gif)
 
 3. In the **Grid** view, click the **Code** tab to display your DAG source code. Viewing code in the Airflow UI helps you confirm which version of your code is currently running on Airflow.
 
-    ![Code view](/img/tutorials/get-started-with-airflow_code_view.png)
+    ![Screenshot of the Code tab in the Grid view showing the start of the DAG code of the example_astronauts DAG.](/img/tutorials/get-started-with-airflow_code_view.png)
 
   :::info
 
@@ -165,7 +164,7 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
 
 In this step, you'll write a DAG that:
 
-- Retrieves the number of people currently in space from the Airflow XCom table and prints it to the logs. This table is part of the Airflow metadata database and is used to pass messages between tasks. The `example_astronauts` DAG already pushed the number of astronauts to XCom, when you run it in [Step 4](#step-4-trigger-a-dag-run).
+- Retrieves the number of people currently in space from the Airflow XCom table and prints it to the logs. This table is part of the Airflow metadata database and is used to [pass data between tasks](airflow-passing-data-between-tasks.md). The `example_astronauts` DAG already pushed the number of astronauts to XCom, when you ran it in [Step 4](#step-4-trigger-a-dag-run).
 - Runs a bash statement reacting to the number of people in space.
 
 You'll copy most of the code, trigger the DAG, and then confirm the expected output is returned.
@@ -281,7 +280,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
 ## Step 7: Run the new DAG
 
-Go back to the Airflow UI to view your new DAG. Airflow will parse the `/dags` directory for changes to existing files  every 30 seconds and new files every 5 minutes.
+Go back to the Airflow UI to view your new DAG. Airflow will parse the `/dags` directory for changes to existing files every 30 seconds and new files every 5 minutes.
 
 :::tip
 
@@ -293,7 +292,6 @@ astro dev run dags reserialize
 
 :::
 
-
 When your new DAG appears in the Airflow UI, you can run it to test it.
 
 1. Start the new DAG and trigger a run like you did in [Step 4](#step-4-trigger-a-dag-run).
@@ -301,7 +299,7 @@ When your new DAG appears in the Airflow UI, you can run it to test it.
 
     ![Screenshot of the Airflow Grid view showing a successful run of the my_astronauts_dag DAG.](/img/tutorials/get-started-with-airflow_grid_view_my_astronauts_dag.png)
 
-3. The `my_astronauts_dag` is scheduled to run whenever the `current_astronauts` Dataset is updated by a successful run of the `get_astronauts` task in the `example_astronauts` DAG. Trigger another manual run of the `example_astronauts` DAG to see the `my_astronauts_dag` run again, as soon as the `get_astronauts` task has completed.
+3. The `my_astronauts_dag` is scheduled to run whenever the `current_astronauts` [Dataset](airflow-datasets.md) is updated by a successful run of the `get_astronauts` task in the `example_astronauts` DAG. Trigger another manual run of the `example_astronauts` DAG to see the `my_astronauts_dag` run again, as soon as the `get_astronauts` task has completed.
 
 ## Step 8: View task logs
 
