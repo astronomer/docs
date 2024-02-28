@@ -21,6 +21,16 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## February 27, 2024
+
+### Use a custom service account to authorize Deployments to GCP
+
+You can now attach a custom GCP [service account](https://cloud.google.com/iam/docs/service-account-overview) to your Deployment to grant the Deployment all of the service account's permissions to your cloud. Using a custom service account provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that should all have the same level of access to your cloud. For setup steps, see [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
+
+### Bug fixes
+
+- Fixed an issue where the Astro API failed to list Deployments after you deleted a hibernation override setting.
+
 ## February 21, 2024
 
 ### New worker types
@@ -859,7 +869,7 @@ To review the new process for creating SSO connections, see [Set up authenticati
 
 ### Preview Deployments
 
-You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions.md#deployment-preview-templates) to configure your Astro pipelines to:
+You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions-deployment-preview.md) to configure your Astro pipelines to:
 - Create the preview Deployment when you create a new branch.
 - Deploy code changes to Astro when you make updates in the branch.
 - Delete the preview Deployment when you delete the branch.
