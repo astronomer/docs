@@ -337,17 +337,12 @@ module.exports = {
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
-      "data-domain": 'docs.astronomer.io',
-      defer: true,
-    },
-    {
       src: '/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },
   ],
-  // clientModules: [
-  //   require.resolve('./segment-page.mjs'),
-  // ],
+  clientModules: [
+    require.resolve('./segment-page.mjs'),
+  ],
 };
