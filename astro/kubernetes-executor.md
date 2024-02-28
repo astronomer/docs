@@ -7,7 +7,7 @@ description: Learn how to configure the Pods that the Kubernetes executor runs y
 
 The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings. 
 
-This document explains how to customize individual Pods for tasks that run with the Kubernetes executor. To configure the default Pod specification for a Deployment, see [Deployment resources](deployment-resources.md#configure-kubernetes-pod-resources). To learn whether the Kubernetes executor is suitable for your use case, see [Executors overview](executors-overview.md).
+This document explains how to customize worker Pods at the task level. To configure the default Pod for a Deployment, see [Deployment resources](deployment-resources.md#configure-kubernetes-pod-resources). To learn whether the Kubernetes executor is suitable for your use case, see [Executors overview](executors-overview.md).
 
 :::info
 
