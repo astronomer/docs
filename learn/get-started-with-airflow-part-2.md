@@ -272,7 +272,8 @@ This is an example of how you can use a traditional operator (HttpOperator) and 
     log_iss_location_obj = log_iss_location(get_iss_coordinates.output)
 ```
 
-Lastly, the dependency between the three tasks is set so that the `get_iss_coordinates` task only runs after the `github_sensor` task is successful and the `log_iss_location` task only runs after the `get_iss_coordinates` task is successful. This is done using the `chain` method from the `airflow.models.baseoperator` module. You can learn more about setting dependencies between tasks in the [Manage task and task group dependencies in Airflow](managing-dependencies.md) guide.
+Lastly, the dependency between the three tasks is set so that the `get_iss_coordinates` task only runs after the `github_sensor` task is successful and the `log_iss_location` task only runs after the `get_iss_coordinates` task is successful. This is done using the `chain` method. You can learn more about setting dependencies between tasks in the [Manage task and task group dependencies in Airflow](managing-dependencies.md) guide.
+
 The last line of the DAG file calls the `find_the_iss` function to create the DAG.
 
 ```python
