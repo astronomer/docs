@@ -8,7 +8,9 @@ export default (function () {
   return {
     onRouteDidUpdate() {
       if (!window.analytics) return;
-      window.analytics.page();
+      setTimeout(() => {
+        window.analytics.page();
+      }, 0);
     },
   };
 })();
