@@ -96,11 +96,11 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 You can attach a custom GCP service account to your Deployment to grant the Deployment all of the service account's permissions.
 
-Using service accounts provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that should all have the same level of access to your cloud.
+Using service accounts provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that all have the same level of access to your cloud.
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
 2. In the Cloud UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
-3. In the **Workload Identity** dropdown menu, select **Customer Managed Identity**
+3. In the **Workload Identity** menu, select **Customer Managed Identity**
 4. Enter your GCP service account ID when prompted, then copy and run the provided gcloud CLI command. 
 5. Click **Update Deployment**. The service account is now selectable as a workload identity for the Deployment.
 6. Complete one of the following options for your Deployment to access your cloud resources:
