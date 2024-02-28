@@ -23,11 +23,11 @@ If your company uses Azure, Astronomer recommends installing Astro through the A
 
 After you've created your Astro user account, you'll be asked to create an Organization and your first Workspace.
 
-An _Organization_ is the highest management level on Astro. An Organization contains _Workspaces_, which are collections of _Deployments_, or Airflow environments, that are typically owned by a single team. You can manage user roles and permissions both at the Organization and Workspace levels. For more information about Astro architecture and key concepts on how Astro works, see [About Astro](astro-architecture.md).
+An _Organization_ is the highest management level on Astro. An Organization contains _Workspaces_, which are collections of _Deployments_, or Airflow environments, that are typically owned by a single team. You can manage user roles and permissions both at the Organization and Workspace levels. For more information about Astro's key concepts and components, see [About Astro](astro-architecture.md).
 
 To start your trial, Astronomer recommends using the name of your company as the name of your Organization and naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Cloud UI after you finish activating your trial.
 
-![Create an Organization and Workspace](/img/docs/start-trial.png)
+<img src={require("../static/img/docs/start-trial.png").default} alt="Create an Organization and Workspace" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 ## Next steps
 
