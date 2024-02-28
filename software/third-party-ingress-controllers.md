@@ -13,11 +13,12 @@ While using the default ingress controller is the best choice for most organizat
 
 To complete this setup, you need to supply your own ingress controller. Astronomer fully supports the following types of ingress controllers:
 
-- kong
-- haproxy
-- ingress-nginx
-- traefik
-- contour
+- OpenShift
+- Kong
+- HAProxy
+- Ingress-nginx
+- Traefik
+- Contour
 
 If you want to use an ingress controller that isn't listed here, please contact your Astronomer representative.
 
