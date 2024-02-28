@@ -7,7 +7,7 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Wake up an Astro development Deployment from hibernation. Overrides any existing hibernation schedule and sets the Deployment to run for a specific duration or until a specific time. 
+Wake up an Astro development Deployment from [hibernation](deployment-resources.md#hibernate-a-development-deployment). Overrides any existing hibernation schedule and sets the Deployment to run for a specific duration or until a specific time. 
 
 ## Usage
 
