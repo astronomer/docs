@@ -37,7 +37,7 @@ If you do not have a GitHub account, you can create one for free on the [GitHub 
 
 ## Step 1: Create your DAG
 
-In this second part of the Get Started with Airflow tutorial, you add a third DAG to your Astro project. This time you copy the DAG code from the [Astronomer Registry](registry.astronomer.io), which is a resource containing both, information about Airflow providers and modules, as well as many example DAGs.
+In this second part of the Get Started with Airflow tutorial, you add a third DAG to your Astro project. This time you copy the DAG code from the [Astronomer Registry](https://registry.astronomer.io/), which is a resource containing both, information about Airflow providers and modules, as well as many example DAGs.
 
 The new DAG interacts with GitHub and two external APIs to print the location of the International Space Station (ISS) to your task logs after a specific commit message is pushed to your GitHub repository.
 
