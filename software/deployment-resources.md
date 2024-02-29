@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Scale Airflow components and resources'
 title: 'Configure resources for Airflow components on Astronomer Software Deployments'
-id: deploy-code-overview
+id: deployment-resources
 description: Configure Deployment components to use the right amount of computational resources for your use case.
 ---
 
@@ -37,12 +37,14 @@ If you still want a constant ratio of CPU to memory but want to change the speci
 
 ## Scale core resources
 
-Apache Airflow requires two primary components:
+Apache Airflow requires four primary components:
 
-- The Airflow Webserver
-- The Airflow Scheduler
+- The Webserver
+- The Scheduler
+- The executor (and the workers it runs)
+- The triggerer
 
-To scale either resource, adjust the corresponding slider in the Software UI to increase its available computing resources.
+To scale these resources, adjust the corresponding slider in the Software UI to increase its available resources. The units associated with these sliders will vary based on your [resource strategy](#select-a-resource-strategy). 
 
 Read the following sections to help you determine which core resources to scale and when.
 
@@ -66,23 +68,17 @@ To set alerts that notify you via email when your Airflow scheduler is underprov
 
 #### Scheduler count
 
-Airflow 2.0 comes with the ability for users to run multiple schedulers concurrently to ensure high-availability, zero recovery time, and faster performance. By adjusting the **Scheduler Count** slider in the Software UI, you can provision up to 4 schedulers on any Deployment running Airflow 2.0+ on Astronomer.
+Airflow 2.0 comes with the ability for users to run multiple schedulers concurrently to ensure high-availability, zero recovery time, and faster performance. You can provision up to 4 schedulers on any Deployment.
 
 Each individual scheduler will be provisioned with the resources specified in **Scheduler Resources**. For example, if you set the CPU figure in **Scheduler Resources** to 5 CPUs and set **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow schedulers using 5 CPUs each for a total of 10 CPUs.
 
-To increase the speed at which tasks are scheduled and ensure high-availability, Astronomer recommends provisioning 2 or more Airflow schedulers for production environments. For more information on the Airflow 2.0 scheduler, refer to Astronomer's ["The Airflow 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
+To increase the speed at which tasks are scheduled and ensure high-availability, Astronomer recommends provisioning 2 or more Airflow schedulers for production environments.
 
 ### Triggerer
 
 Airflow 2.2 introduces the triggerer, which is a component for running tasks with [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html). Like the scheduler, the triggerer is highly-available: If a triggerer shuts down unexpectedly, the tasks it was deferring can be recovered and moved to another triggerer.
 
 By adjusting the **Triggerer** slider in the Software UI, you can provision up to 2 triggerers on any Deployment running Airflow 2.2+. To take advantage of the Triggerer's high availability, we recommend provisioning 2 triggerers for production Deployments.
-
-### Worker count
-
-By adjusting the **Worker Count** slider, users can provision up to 20 Celery workers on any Airflow Deployment.
-
-Each individual worker will be provisioned with the resources specified in **Worker Resources**. If you set the CPU figure in **Worker Resources** to 5 CPUs and set **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery workers using 5 CPUs each for a total of 15 CPUs.
 
 ### (Kubernetes executor only) Set extra capacity
 
@@ -98,10 +94,14 @@ Resources allocated to **Extra Capacity** do not affect scheduler or webserver p
 
 To optimize for flexibility and availability, the Celery executor works with a set of independent Celery workers across which it can delegate tasks. On Astronomer, you're free to configure your Celery workers to fit your use case.
 
+#### Worker count
+
+By adjusting the **Worker Count** slider, users can provision up to 20 Celery workers on any Airflow Deployment.
+
+Each individual worker will be provisioned with the resources specified in **Worker Resources**. If you set the CPU figure in **Worker Resources** to 5 CPUs and set **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery workers using 5 CPUs each for a total of 15 CPUs.
+
 #### Worker termination grace period
 
 On Astronomer, Celery workers restart following every code deploy to your Airflow Deployment. This is to make sure that workers are executing with the most up-to-date code. To minimize disruption during task execution, however, Astronomer supports the ability to set a **Worker Termination Grace Period**.
 
 If a deploy is triggered while a Celery worker is executing a task and **Worker Termination Grace Period** is set, the worker will continue to process that task up to a certain number of minutes before restarting itself. By default, the grace period is ten minutes.
-
-> **Tip:** The **Worker Termination Grace Period** is an advantage to the Celery executor. If your Airflow Deployment runs on the Local executor, the scheduler will restart immediately upon every code deploy or configuration change and potentially interrupt task execution.

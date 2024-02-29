@@ -78,12 +78,16 @@ module.exports = {
         label: 'Manage Deployments',
         items: [
           'configure-deployment',
+          'create-deployment',
+          'deployment-resources',
+          'clean-up-and-delete-deployment',
           'environment-variables',
           'customize-resource-usage',
           {
             type: 'category',
             label: 'Deploy options',
             items: [
+            'deploy-code-overview',
             'deploy-cli',
             'deploy-dags',
             'deploy-git-sync',

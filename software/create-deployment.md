@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Create a Deployment'
 title: 'Create a Deployment on Astronomer Software'
-id: configure-deployment
+id: create-deployment
 description: Configure an Airflow Deployment's resources on Astronomer Software.
 ---
 
@@ -38,7 +38,7 @@ To create an Airflow Deployment on Astronomer:
     - Set worker count (*Celery only*)
     - Adjust your worker termination grace period (*Celery only*)
 
-## Customize release names
+## Customize Deployment release names
 
 An Airflow Deployment's release name on Astronomer is a unique, immutable identifier for that Deployment that corresponds to its Kubernetes namespace and that renders in Grafana, Kibana, and other platform-level monitoring tools. 
 

@@ -5,7 +5,7 @@ id: clean-up-and-delete-deployments
 description: Configure your Airflow Deployment's resources on Astronomer Software.
 ---
 
-Use this document to learn how to manage the deletion and cleanup of Deployments on your Astronomer Software cluster. 
+This document explains how to manage the deletion and cleanup of Deployments on your Astronomer Software cluster. 
 
 ## Delete a Deployment
 
@@ -21,7 +21,7 @@ Astronomer recommends regularly doing a database audit to confirm that you hard 
 
 :::
 
-### Automate Deployment deletion clean up 
+### Configure Deployment hard delete jobs
 
 Astronomer runs a cronjob to hard delete the deleted Deployment's metadata database and Deployment entry in your Astronomer database at midnight on a specified day. You can enable whether this cronjob runs or not, how many days after your soft delete to run the cronjob, and what time of day to run the cronjob by editing `astronomer.houston.cleanupDeployments` in your Astronomer Helm chart.
 
@@ -41,7 +41,7 @@ The following is an example of how you might configure the cronjob in your Helm 
     olderThan: 14
 ```
 
-### Hard delete a Deployment
+### Manually hard delete a Deployment
 
 To reuse a custom release name given to an existing Deployment after a soft delete but before Astronomer automatically cleans up any persisting Deployment records, you need to hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. 
 
