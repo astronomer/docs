@@ -165,7 +165,6 @@ Astronomer support sends you a notification when your cluster is created. After 
 |----------|-------------|
 | Details  | General permanent configurations, including cluster name, IDs, and connectivity options.  | 
 | Worker Types | The available worker types for configuring worker queues on your cluster. See [Manage worker types](#manage-worker-types). | 
-| Tags | (AWS only) Configured cluster tags. See [Add tags to your cluster](#add-tags-to-your-cluster-aws-only).| 
 | Workspace Authorization | List of Workspaces that can create Deployments on this cluster. See [Authorize Workspaces to a cluster](#authorize-workspaces-to-a-cluster). |
 
 ## Manage worker types
@@ -233,18 +232,4 @@ Astro uses the following databases:
 | GCP            | [Cloud SQL](https://cloud.google.com/sql)                                               | [Supported Cloud SQL instance types](resource-reference-gcp-hybrid.md#supported-cloud-sql-instance-types) |
 | Azure          | [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/) | [Supported Azure Database for PostgreSQL instance types](resource-reference-azure-hybrid.md#supported-azure-database-for-postgresql-instance-types) |
 
-
 To request support for a different database instance type or to modify the database instance type after cluster creation, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
-
-## Add tags to your cluster (AWS only)
-
-You can request Astronomer Support to add [tags](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html) to your AWS clusters. Specifically, the tags are applied to the following components in your data plane:
-
-- EKS cluster
-- RDS metadata database
-- S3 logging bucket
-- IAM roles
-  
-Tags can help your team identify your Astro clusters and associate them with a particular purpose or owner within your cloud provider ecosystem. 
-
-You can raise a request with [Astronomer Support](https://cloud.astronomer.io/open-support-request) to add or remove tags. To view your current cluster tags, see [View clusters](#view-clusters).
