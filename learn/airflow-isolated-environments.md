@@ -28,6 +28,12 @@ There are multiple resources for learning about this topic. See also:
 
 :::
 
+:::info
+
+This guide covers options to isolate individual tasks in Airflow. If you want to run all of your Airflow tasks in dedicated Kubernetes pods, consider using the [Kubernetes Executor](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor). Astronomer customers can set their Deployments to use the KubernetesExecutor in the Astro UI, see [Manage Airflow executors on Astro](https://docs.astronomer.io/astro/executors-overview). 
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
