@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Clean up and delete Deployments'
 title: 'Clean up and delete Astronomer Software Deployments'
-id: clean-up-and-delete-deployments
+id: clean-up-and-delete-deployment
 description: Configure your Airflow Deployment's resources on Astronomer Software.
 ---
 
