@@ -37,7 +37,7 @@ If you do not have a GitHub account, you can create one for free on the [GitHub 
 
 ## Step 1: Create your DAG
 
-In this second part of the Get Started with Airflow tutorial, you will add a third DAG to your Astro project that interacts with GitHub and two external APIs to print the location of the International Space Station (ISS) to your task logs after a specific commit message is pushed to your GitHub repository.
+In this second part of the Get Started with Airflow tutorial, you will add a third DAG to your Astro project. The new DAG interacts with GitHub and two external APIs to print the location of the International Space Station (ISS) to your task logs after a specific commit message is pushed to your GitHub repository.
 
 1. Create a new Python file in the `dags` directory of your Astro project called `find_the_iss.py`.
 2. Open the Astronomer Registry page for the [`find_the_iss`](https://registry.astronomer.io/dags/object_storage_use_case/versions/latest) example DAG. Click `</>` and copy the DAG code that appears.
@@ -207,7 +207,7 @@ The DAG itself has three tasks.
 
 The first task uses the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor) to check whether the commit message `Where is the ISS right now?` has been added to your GitHub repository with the help of the `commit_message_checker` function described previously. 
 
-This task utilizes both, the Airflow variable (`my_github_repo`) and the Airflow connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The [sensor](what-is-a-sensor.md) checks for the tag every 5 seconds (`poke_interval`) and will time out after one hour (`timeout`). It is best practice to always set a `timeout` because the default value is quite long at 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
+This task utilizes the Airflow variable (`my_github_repo`) and the Airflow connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The [sensor](what-is-a-sensor.md) checks for the tag every 5 seconds (`poke_interval`) and will time out after one hour (`timeout`). It is best practice to always set a `timeout` because the default value is 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
 
 ```python
     github_sensor = GithubSensor(
