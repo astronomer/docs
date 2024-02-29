@@ -71,12 +71,11 @@ To simulate an SLA, you must first define an SLA and then apply it to specific D
 
 1. Select the **Time Period** over which you want to look at the DAG run data.
 2. Choose the **DAG ID** that you want to check DAG run completion times for. If you have a large number of DAGs in your Organization, you can first filter by **Workspace Name** and **Deployment Name** before choosing your DAG ID.
-3. Choose the metric you want to use to summarize your DAG run end time, such as the **Average** or **Median** DAG run end time.
-4. Choose how you want to aggregate the data by **Month**, **Week**, or **Day**. The default is **Week**.
-3. Define the **SLA Time (UTC)**
-4. Choose the time interval you want to aggregate the data with by choosing **Day**, **Week**, or **Month** in **Display by**.
+3. In the **Compute** section, choose the method that the dashboard uses to summarize your DAG run end times. For example, if you select **Median**, the dashboard shows the medium DAG run end time for each time interval.
+4. In the **Display by** section, choose whether you want to aggregate the data by **Month**, **Week**, or **Day**. The default is **Week**.
+4. Specify the **SLA Time (UTC)** to compare with your DAG run end times.
 
-The report generates two graphs. The first shows the computed **DAG Run End Time** of the DAG, such as the **Average End Time**, compared to the **SLA** time you defined. The second chart shows a summary of the DAG run duration in minutes, based on the **Compute** selection you made.
+The report generates two graphs. The first shows your summarized **DAG Run End Times** compared to the **SLA** time you defined. The second chart shows a summary of the same DAG runs, but charts their run time using duration instead of end time.
 
 ## Cost Breakdown
 <HostedBadge/>
