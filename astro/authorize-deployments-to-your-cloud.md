@@ -8,6 +8,7 @@ toc_max_heading_level: 2
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import HostedBadge from '@site/src/components/HostedBadge';
 
 When you create an Airflow connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment. 
 
@@ -93,6 +94,8 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 <TabItem value="gcp">
 
 ### Attach a service account to your Deployment
+
+<HostedBadge/>
 
 You can attach a custom GCP service account to your Deployment to grant the Deployment all of the service account's permissions.
 
