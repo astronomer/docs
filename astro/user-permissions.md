@@ -30,7 +30,6 @@ An Organization role grants a user or API token some level of access to an Astro
 | Update Organization billing information and settings                  |                         | ✔️                              | ✔️                      |
 | View usage for all Workspaces in the **Usage** tab                    |                         | ✔️                              | ✔️                      |
 | View Organization-level metrics dashboards on the **Dashboards** page |                         | ✔️                              | ✔️                      |
-| View the **Billing** page                                             |                         | ✔️                              | ✔️                      |
 | Create, update, and delete clusters                                   |                         |                                | ✔️                      |
 | Create a new Workspace                                                |                         |                                | ✔️                      |
 | Workspace Owner permissions to all Workspaces                         |                         |                                | ✔️                      |
