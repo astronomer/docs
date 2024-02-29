@@ -108,7 +108,7 @@ Each DAG is listed with a few of its properties, including tags, owner, previous
 The `example_astronauts` DAG that was generated with your Astro project is a simple ETL pipeline with two tasks:
 
 - `get_astronauts`: queries the [Open Notify API](https://github.com/open-notify/Open-Notify-API) for information about astronauts currently in space. The task returns the list of dictionaries containing the name and the spacecraft of all astronauts currently in space, which is passed to the second task in the DAG. This tutorial does not go into depth on how to pass data between tasks, but you can learn more about it in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
-- `print_astronaut_craft`: is a dynamically mapped Airflow task. Creating one dynamically mapped task instance for each astronaut in space, which each prints a statement to the logs for one astronaut. Dynamic task mapping is a versatile feature of Airflow that allows you to create a variable number of tasks at runtime. This feature is covered in more depth in the [Create dynamic Airflow tasks](dynamic-tasks.md) guide.
+- `print_astronaut_craft`: is a dynamically mapped Airflow task. It creates one dynamically mapped task instance for each astronaut in space, which prints a statement to the logs for that astronaut. Dynamic task mapping is a versatile feature of Airflow that allows you to create a variable number of tasks at runtime. This feature is covered in more depth in the [Create dynamic Airflow tasks](dynamic-tasks.md) guide.
 
 A **DAG run** is an instance of a DAG running on a specific date. Let's trigger a run of the `example_astronauts` DAG!
 
@@ -303,7 +303,7 @@ When your new DAG appears in the Airflow UI, you can run it to test it.
 
 ## Step 8: View task logs
 
-When you tell Airflow to print something to the terminal, the output appears in Airflow task logs. Task logs are an important feature for troubleshooting DAGs. If a task in your DAG fails, task logs are the best place to investigate why.
+When one of your tasks prints something, the output appears in Airflow task logs. Task logs are an important feature for troubleshooting DAGs. If a task in your DAG fails, task logs are the best place to investigate why.
 
 1. In the Airflow UI, open the **Grid** view.  
 2. Click the `print_num_people_in_space` task to access details of the task instance.
