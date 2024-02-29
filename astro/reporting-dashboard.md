@@ -63,7 +63,7 @@ The report only includes the first successful occurrence of each **DAG Run ID**.
 
 :::
 
-![Examine the time of day when your DAG runs typically complete compared to an SLA time of 4:00PM.](/img/docs/dash-DAG-run-detail.png)
+![Examine the time of day when your DAG runs typically complete compared to an example SLA time of 1:30AM and the duration of your DAG runs in minutes.](/img/docs/dash-DAG-run-detail.png)
 
 ### Create an SLA simulation
 
@@ -71,12 +71,13 @@ Use this view to check how frequently your Organization meets your SLA obligatio
 
 To simulate an SLA, you must first define an SLA and then apply it to specific DAGs.
 
-1. Choose the **DAG ID** that you want to check DAG run completion times for. If you have a large number of DAGs in your Organization, you can first filter by **Workspace Name** and **Deployment Name** before choosing your DAG ID.
-2. Select the time interval over which you want to look at the DAG data.
-3. Define the **SLA Time (UTC)**
-4. Choose the time interval you want to aggregate the data with by choosing **Day**, **Week**, or **Month** in **Display by**.
+1. Select the **Time Period** over which you want to look at the DAG run data.
+2. Choose the **DAG ID** that you want to check DAG run completion times for. If you have a large number of DAGs in your Organization, you can first filter by **Workspace Name** and **Deployment Name** before choosing your DAG ID.
+3. In the **Compute** section, choose the method that the dashboard uses to summarize your DAG run end times. For example, if you select **Median**, the dashboard shows the medium DAG run end time for each time interval.
+4. In the **Display by** section, choose whether you want to aggregate the data by **Month**, **Week**, or **Day**. The default is **Week**.
+4. Specify the **SLA Time (UTC)** to compare with your DAG run end times.
 
-The report generates a line graph that shows the **Median End Time** of the DAG, the **Average End Time**, compared to the **SLA** time you defined.
+The report generates two graphs. The first shows your summarized **DAG Run End Times** compared to the **SLA** time you defined. The second chart shows a summary of the same DAG runs, but charts their run time using duration instead of end time.
 
 ## Cost Breakdown
 <HostedBadge/>
