@@ -170,13 +170,13 @@ In this step, you'll write a DAG that:
 You'll copy most of the code, trigger the DAG, and then confirm the expected output is returned.
 
 1. Create a new Python file in the `/dags` folder named `my_astronauts_dag.py`.
-2. Open `my_astronauts_dag.py` in your IDE. Add the docstring explaining what this DAG will do at the top of the file:
+2. Open `my_astronauts_dag.py` in your IDE. Add the docstring explaining what this DAG does at the top of the file:
 
     ```python 
     """
     ## Print the number of people currently in space
 
-    This DAG will pull the number of people currently in space. The number is pulled
+    This DAG pulls the number of people currently in space. The number is pulled
     from XCom and was pushed by the `get_astronauts` task in the `example_astronauts` DAG.
     """
     ```
@@ -218,7 +218,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
     `@dag` instantiates a DAG context in which tasks can be defined and given dependencies. The instantiation includes several important arguments:
 
-    - `dag_id`: The name of the DAG that appears in the Airflow UI. If no `dag_id` is specified, the name of the Python function will be used as the DAG ID. Each DAG must have a unique name, and Astronomer recommends using the same name for the DAG file and the `dag_id`.
+    - `dag_id`: The name of the DAG that appears in the Airflow UI. If no `dag_id` is specified, the name of the Python function is used as the DAG ID. Each DAG must have a unique name, and Astronomer recommends using the same name for the DAG file and the `dag_id`.
     - `start_date`: The date and time when the DAG is scheduled to start running, given as a datetime object. In this example, the DAG is triggered on its schedule as long as the current time is 0:00 UTC on January 1st, 2024 or later.
     - `schedule`: The frequency the DAG runs. There are many options to define the schedule of a DAG, including as a [timedelta object](https://docs.python.org/3/library/datetime.html#timedelta-objects), a [CRON expression](https://crontab.guru/), or as a macro such as `@daily`. If you don't set this value, the DAG runs every 24 hours after the `start_date`. In this example, the DAG is scheduled to run whenever the `example_astronauts` DAG's `get_astronauts` task completes successfully using an Airflow Dataset, for more information see [Datasets and data-aware scheduling in Airflow](airflow-datasets.md).
     - `catchup`: Defines whether the DAG reruns all DAG runs that were scheduled before today's date. The default value is `True`, but it is recommended that you set this argument to `False` unless you are explicitly running your DAG to backfill runs.
@@ -245,7 +245,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
         print(f"There are currently {num_people_in_space} people in space.")
     ```
 
-    The `@task` decorator is used to define a task in the TaskFlow API. By default, the `task_id` will be the name of the Python function. Each task in an Airflow DAG requires a unique `task_id`. This `print_num_people_in_space` task pulls the number of people in space from XCom and prints it to the logs. Learn more about XCom in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
+    The `@task` decorator is used to define a task in the TaskFlow API. By default, the `task_id` is the name of the Python function. Each task in an Airflow DAG requires a unique `task_id`. This `print_num_people_in_space` task pulls the number of people in space from XCom and prints it to the logs. Learn more about XCom in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
 
     You can put this decorator on top of any Python function to turn your code into an Airflow task. This is one of the features that makes Airflow so powerful: Any action that can be defined in Python, no matter how complex, can be orchestrated using Airflow.
 
@@ -280,7 +280,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
 ## Step 7: Run the new DAG
 
-Go back to the Airflow UI to view your new DAG. Airflow will parse the `/dags` directory for changes to existing files every 30 seconds and new files every 5 minutes.
+Go back to the Airflow UI to view your new DAG. Airflow parses the `/dags` directory for changes to existing files every 30 seconds and new files every 5 minutes.
 
 :::tip
 
