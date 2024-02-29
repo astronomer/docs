@@ -211,68 +211,68 @@ The DAG itself has three tasks:
 
     This task utilizes the Airflow variable (`my_github_repo`) and the Airflow connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The [sensor](what-is-a-sensor.md) checks for the tag every 5 seconds (`poke_interval`) and times out after one hour (`timeout`). It is best practice to always set a `timeout` because the default value is 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
 
-    ```python
-        github_sensor = GithubSensor(
-            task_id="github_sensor",
-            github_conn_id="my_github_conn",
-            method_name="get_repo",
-            method_params={"full_name_or_id": YOUR_GITHUB_REPO_NAME},
-            result_processor=lambda repo: commit_message_checker(repo, YOUR_COMMIT_MESSAGE),
-            timeout=60 * 60,
-            poke_interval=5,
-        )
-    ```
+```python
+    github_sensor = GithubSensor(
+        task_id="github_sensor",
+        github_conn_id="my_github_conn",
+        method_name="get_repo",
+        method_params={"full_name_or_id": YOUR_GITHUB_REPO_NAME},
+        result_processor=lambda repo: commit_message_checker(repo, YOUR_COMMIT_MESSAGE),
+        timeout=60 * 60,
+        poke_interval=5,
+    )
+```
 
 - The second task uses the HttpOperator to send a `GET` request to the `/iss-now.json` endpoint of the [Open Notify API](http://open-notify.org/Open-Notify-API/) to retrieve the current location of the ISS. The response is logged to the Airflow task logs and pushed to the [XCom](airflow-passing-data-between-tasks.md) table in the Airflow metadata database to be retrieved by downstream tasks.
 
-    ```python
-        get_iss_coordinates = HttpOperator(
-            task_id="get_iss_coordinates",
-            http_conn_id="open_notify_api_conn",
-            endpoint="/iss-now.json",
-            method="GET",
-            log_response=True,
-        )
-    ```
+```python
+    get_iss_coordinates = HttpOperator(
+        task_id="get_iss_coordinates",
+        http_conn_id="open_notify_api_conn",
+        endpoint="/iss-now.json",
+        method="GET",
+        log_response=True,
+    )
+```
 
 - The third task uses the [TaskFlow API's](airflow-decorators.md) `@task` decorator to run a regular Python function processing the coordinates returned by the `get_iss_coordinates` task and printing the city and country of the ISS location to the task logs. The coordinates are passed to the function as an argument using `get_iss_coordinates.output`, which accesses the value returned by the `get_iss_coordinates` task from the XCom table.
 
     This is an example of how you can use a traditional operator (HttpOperator) and a TaskFlow API task to perform similar operations, in this case querying an API. Which way of task writing you choose depends on your use case and often comes down to personal preference.
 
-    ```python
-        @task
-        def log_iss_location(location: str) -> dict:
-            """
-            This task prints the current location of the International Space Station to the logs.
-            Args:
-                location (str): The JSON response from the API call to the Open Notify API.
-            Returns:
-                dict: The JSON response from the API call to the Reverse Geocode API.
-            """
-            import requests
-            import json
+```python
+    @task
+    def log_iss_location(location: str) -> dict:
+        """
+        This task prints the current location of the International Space Station to the logs.
+        Args:
+            location (str): The JSON response from the API call to the Open Notify API.
+        Returns:
+            dict: The JSON response from the API call to the Reverse Geocode API.
+        """
+        import requests
+        import json
 
-            location_dict = json.loads(location)
+        location_dict = json.loads(location)
 
-            lat = location_dict["iss_position"]["latitude"]
-            lon = location_dict["iss_position"]["longitude"]
+        lat = location_dict["iss_position"]["latitude"]
+        lon = location_dict["iss_position"]["longitude"]
 
-            r = requests.get(
-                f"https://api.bigdatacloud.net/data/reverse-geocode-client?{lat}?{lon}"
-            ).json()
+        r = requests.get(
+            f"https://api.bigdatacloud.net/data/reverse-geocode-client?{lat}?{lon}"
+        ).json()
 
-            country = r["countryName"]
-            city = r["locality"]
+        country = r["countryName"]
+        city = r["locality"]
 
-            task_logger.info(
-                f"The International Space Station is currently over {city} in {country}."
-            )
+        task_logger.info(
+            f"The International Space Station is currently over {city} in {country}."
+        )
 
-            return r
+        return r
 
-        # calling the @task decorated task with the output of the get_iss_coordinates task
-        log_iss_location_obj = log_iss_location(get_iss_coordinates.output)
-    ```
+    # calling the @task decorated task with the output of the get_iss_coordinates task
+    log_iss_location_obj = log_iss_location(get_iss_coordinates.output)
+```
 
 Lastly, the dependency between the three tasks is set so that the `get_iss_coordinates` task only runs after the `github_sensor` task is successful and the `log_iss_location` task only runs after the `get_iss_coordinates` task is successful. This is done using the `chain` method. You can learn more about setting dependencies between tasks in the [Manage task and task group dependencies in Airflow](managing-dependencies.md) guide.
 
