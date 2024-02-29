@@ -63,6 +63,8 @@ The report only includes the first successful occurrence of each **DAG Run ID**.
 
 :::
 
+![Examine the time of day when your DAG runs typically complete compared to an example SLA time of 1:30AM and the duration of your DAG runs in minutes.](/img/docs/dash-DAG-run-detail.png)
+
 ### Create an SLA simulation
 
 Use this view to check how frequently your Organization meets your SLA obligations, or to identify if specific SLAs are breached.
