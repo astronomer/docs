@@ -66,7 +66,7 @@ When creating isolated environments in Airflow, you might not be able to use com
 
 Common limitations include:
 
-- You [cannot pass all Airflow context variables](https://airflow.apache.org/docs/apache-airflow/latest/howto/operator/python.html#id1) to a virtual decorator, since Airflow does not support serializing `var`, `ti`, and `task_instance` objects. See [Use Airflow context variables in isolated environments](#use-airflow-context-variables-in-isolated-environments).
+- You [cannot pass all Airflow context variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#id1) to a virtual decorator, since Airflow does not support serializing `var`, `ti`, and `task_instance` objects. See [Use Airflow context variables in isolated environments](#use-airflow-context-variables-in-isolated-environments).
 - You do not have access to your [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) from within the isolated environment. To access your secrets, consider passing them in through [Jinja templating](templating.md). See [Use Airflow variables in isolated environments](#use-airflow-variables-in-isolated-environments).
 - Installing Airflow itself, or Airflow provider packages in the environment provided to the `@task.external_python` decorator or the ExternalPythonOperator, can lead to unexpected behavior. If you need to use Airflow or an Airflow provider module inside your virtual environment, Astronomer recommends using the `@task.virtualenv` decorator or the PythonVirtualenvOperator instead. See [Use Airflow packages in isolated environments](#use-airflow-packages-in-isolated-environments).
 
@@ -566,7 +566,7 @@ my_isolated_task = BranchPythonVirtualenvOperator(
 
 ## Use Airflow context variables in isolated environments
 
-Some variables from the [Airflow context](airflow-context.md) can be passed to isolated environments, for example the `logical_date` of the DAG run. Due to compatibility issues, other objects from the context such as `ti` cannot be passed to isolated environments. For more information, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/latest/howto/operator/python.html#id1).
+Some variables from the [Airflow context](airflow-context.md) can be passed to isolated environments, for example the `logical_date` of the DAG run. Due to compatibility issues, other objects from the context such as `ti` cannot be passed to isolated environments. For more information, see the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#id1).
 
 <Tabs
     defaultValue="taskflow-epo"
