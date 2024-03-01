@@ -16,10 +16,7 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-<<<<<<< HEAD
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
-=======
-- **Stable versions**: 1.24.1, 1.23.0, and 1.22.0. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
 
 ## Astro CLI 1.24.1
 
@@ -54,7 +51,6 @@ Additionally, you can create new development Deployments and configure long-term
 
 - Fixed an issue where `astro deployment variable list --save` didn't format secret environment variables correctly.
 - Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token. 
->>>>>>> c9bba326cbbf496e52a428f24b5d14fce17cbefc
 
 ## Astro CLI 1.23.0
 
