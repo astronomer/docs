@@ -83,7 +83,7 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 
 The following changes have been made to the format of [Deployment files](deployment-file-reference.md):
 
-- `cluster_name` is no longer used for standard Deployment files.
+- You no longer have to specify a `cluster_name` for standard Deployment files. 
 - `scheduler_size` is no longer case sensitive.
 - Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
 - Possible values for `deployment_type` now include `standard`, `dedicated`, and `hybrid` in addition to the existing values of `hosted_shared`, `hosted_dedicated`, and `hosted_standard`. This input is not case sensitive
