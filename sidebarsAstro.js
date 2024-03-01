@@ -194,7 +194,6 @@ module.exports = {
             label: "Reporting Dashboard",
             items: ["reporting-dashboard",
             "reporting-dash-exports",
-            "reporting-dsah-alerts",
             ],
           },
           ],
