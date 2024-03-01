@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Set up reporting data exports'
 title: "Export data reports and set up alerts"
-id: reporting-dashboard-exports
+id: reporting-dash-exports
 description: "Export data from reporting dashboards or configure conditional exports as alerts."
 ---
 
