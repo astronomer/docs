@@ -17,7 +17,7 @@ By default, the Astro project Dockerfile only includes a `FROM` statement that s
 
 ## Use an alternative Astro Runtime distribution
 
-Starting with Astro Runtime 9, each version of Astro Runtime has a separate distribution for each currently supported Python version. Use an alternative Python distribution if any of your dependencies require a Python version other than the [default Runtime Python version](runtime-image-architecture.md#python-versioning).
+Starting with Astro Runtime 9, each version of Astro Runtime has a separate distribution for each currently supported Python version. Use an alternative Python distribution if any of your dependencies require a Python version other than the [default Runtime Python version](runtime-image-architecture.mdx#python-versioning).
 
 To use a specific Python distribution, update the first line in your Astro project `Dockerfile` to reference the required distribution:
 
@@ -56,7 +56,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
     RUN update-ca-certificates
     USER astro
     ```
-    
+
 2. (Optional) Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
 3. [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment) or deploy to Astro. See [Deploy code](deploy-code.md).

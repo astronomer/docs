@@ -15,13 +15,13 @@ module.exports = {
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER_LATEST}}':"1.24.0",
+          '{{CLI_VER_LATEST}}':"1.24.1",
           '{{CLI_VER_2}}':"1.23.0",
           '{{CLI_VER_3}}':"1.22.0",
-          '{{RUNTIME_VER}}':"10.3.0",
+          '{{RUNTIME_VER}}':"10.4.0",
         };
-        var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
-        return fileContent.replaceAll(re, function(matched){
+        var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
+        return fileContent.replaceAll(re, function (matched) {
           return mapObj[matched];
         });
       }
@@ -323,15 +323,15 @@ module.exports = {
   ],
   scripts: [
     {
-      src: './scripts/segment.js',
+      src: '/scripts/segment.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager.js',
+      src: '/scripts/consent-manager.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager-config.js',
+      src: '/scripts/consent-manager-config.js',
     },
     {
       src: "/scripts/set-tab.js",
@@ -339,12 +339,7 @@ module.exports = {
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
-      "data-domain": 'docs.astronomer.io',
-      defer: true,
-    },
-    {
-      src: './scripts/remix-redocly.js',
+      src: '/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },
