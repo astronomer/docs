@@ -186,7 +186,18 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics", "deployment-metrics", "organization-metrics", "reporting-dashboard"],
+          items: ["dag-metrics",
+           "deployment-metrics",
+           "organization-metrics",
+           {
+            type: "category",
+            label: "Reporting Dashboard",
+            items: ["reporting-dashboard",
+            "reporting-dash-exports",
+            "reporting-dsah-alerts",
+            ],
+          },
+          ],
         },
         {
           type: "category",

@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Reporting dashboards'
+sidebar_label: 'View Organization reporting dashboards'
 title: "View metrics across your Organization with Astro reporting dashboards"
 id: reporting-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
