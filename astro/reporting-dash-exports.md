@@ -21,7 +21,7 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 Hover over the dashboard element whose data you want to export, and then expand the additional options menu to choose to either **Export** your data or **Alert when** to email your data to you when it meets your specified criteria.
 
-![Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert.](/img/docs/dash-email-alert.png)
+![Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert.](/img/docs/dash-open-menu.png)
 
 ## Download data
 
