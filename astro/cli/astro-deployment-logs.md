@@ -4,24 +4,24 @@ title: "astro deployment logs"
 id: astro-deployment-logs
 description: Show Airflow component logs for a Deployment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::info  
+:::info
 
-The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts. 
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts.
 
 :::
 
 <Tabs
-    defaultValue="astro"
-    values={[
-        {label: 'Astro', value: 'astro'},
-        {label: 'Software', value: 'software'},
-    ]}>
+defaultValue="astro"
+values={[
+{label: 'Astro', value: 'astro'},
+{label: 'Software', value: 'software'},
+]}>
 <TabItem value="astro">
 
 Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cloud-ui) over the last 24 hours for a given Deployment on Astro. These are the same logs that appear in the **Logs** tab of the Cloud UI.
@@ -31,18 +31,23 @@ Show [Airflow component logs](view-logs.md#view-airflow-component-logs-in-the-cl
 ```sh
 astro deployment logs
 ```
+:::info
 
+When you filter logs using the command flags `--error`, `--warn`, `--info`, and `--key-word`, you can specify only one filter flag per command.
+
+:::
 ## Options
 
-| Option              | Description                                                                              | Possible Values                        |
-| ------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------- |
-| `<deployment-id>`   | The ID of the Deployment to show logs for                                                | Any valid Deployment ID                |
-| `--deployment-name` | The name of the Deployment to show logs for. Use as an alternative to `<deployment-id>`. | Any valid Deployment name              |
-| `-e`,`--error`      | Show only logs with a log level of `ERROR`                                               | None                                   |
-| `-w`,`--warn`       | Show only logs with a log level of `WARNING`                                             | None                                   |
-| `-i`,`--info`       | Show only logs with a log level of `INFO`                                                | None                                   |
-| `-c`,`--log-count`  | The number of log lines to show. The default is `500`                                    | Any integer less than or equal to 500. |
-| `--workspace-id`    | Specify a Workspace to show logs for a Deployment outside of your current Workspace      | Any valid Workspace ID                 |
+| Option              | Description                                                                              | Possible Values                                                                             |
+| ------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `<deployment-id>`   | The ID of the Deployment to show logs for                                                | Any valid Deployment ID                                                                     |
+| `--deployment-name` | The name of the Deployment to show logs for. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                                                   |
+| `-e`,`--error`      | Show only logs with a log level of `ERROR`                                               | None |
+| `-w`,`--warn`       | Show only logs with a log level of `WARNING`                                             | None |
+| `-i`,`--info`       | Show only logs with a log level of `INFO`                                                | None |
+| `--key-word`        | Search the Deployment logs for a specific keyword.                                       | None |
+| `-c`,`--log-count`  | The number of log lines to show. The default is `500`                                    | Any integer. If you request a number of log lines to show that exceeds the total number of logs, then it shows all existing logs.                                                     |
+| `--workspace-id`    | Specify a Workspace to show logs for a Deployment outside of your current Workspace      | Any valid Workspace ID                                                                      |
 
 ## Examples
 
@@ -76,14 +81,13 @@ astro deployment logs <deployment-id> triggerer
 
 ## Options
 
-| Option                            | Description                                                        | Possible values                                         |
-| --------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
-| `<deployment-id>` (_Required)     | The ID of the Deployment for which you want to view logs           | Any valid Deployment ID                                 |
-| `<airflow-component>` (_Required) | The Airflow component for which you want to view logs              | `scheduler`, `webserver`, `workers`, or `triggerer`     |
-| `--follow`                        | Subscribes to watch more logs                                      | None                                                    |
-| `--search`                        | Searches for the specified string within the logs you're following | Any string                                              |
-| `--since`                         | Limits past logs to those generated in the lookback window         | Lookback time in `h` or `m` (for example, `5m` or `2h`) |
-
+| Option                             | Description                                                        | Possible values                                         |
+| ---------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------- |
+| `<deployment-id>` (\_Required)     | The ID of the Deployment for which you want to view logs           | Any valid Deployment ID                                 |
+| `<airflow-component>` (\_Required) | The Airflow component for which you want to view logs              | `scheduler`, `webserver`, `workers`, or `triggerer`     |
+| `--follow`                         | Subscribes to watch more logs                                      | None                                                    |
+| `--search`                         | Searches for the specified string within the logs you're following | Any string                                              |
+| `--since`                          | Limits past logs to those generated in the lookback window         | Lookback time in `h` or `m` (for example, `5m` or `2h`) |
 
 ## Examples
 
@@ -106,4 +110,3 @@ $ astro deployment logs webserver example-deployment-uuid --since 25m
 - [`astro dev logs`](cli/astro-dev-logs.md)
 - [`astro dev run`](cli/astro-dev-run.md)
 - [`astro dev ps`](cli/astro-dev-ps.md)
-

@@ -1,13 +1,13 @@
 ---
 sidebar_label: 'Kubernetes executor'
-title: 'Configure the Kubernetes executor'
+title: 'Configure tasks to run with the Kubernetes executor'
 id: 'kubernetes-executor'
+description: Learn how to configure the Pods that the Kubernetes executor runs your tasks in.
 ---
 
-On Astro, you can configure Kubernetes executor in the following ways:
+The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings. 
 
-- Change the resource usage for the default Pods on which your tasks run in the Cloud UI.
-- Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration in your DAG code.
+This document explains how to customize worker Pods at the task level. To configure the default Pod for a Deployment, see [Deployment resources](deployment-resources.md#configure-kubernetes-pod-resources). To learn whether the Kubernetes executor is suitable for your use case, see [Executors overview](executors-overview.md).
 
 :::info
 
@@ -18,6 +18,12 @@ This document describes how to configure individual task Pods for different use 
 ## Prerequisites
 
 - An Astro Deployment using Astro Runtime version 8.1.0 or later.
+
+:::caution
+
+If you use the Kubernetes executor on Astro, you can't change the [PYTHONPATH](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/modules_management.html) of your Astro project from its default value. If you do, the Kubernetes executor will be unable to read `airflow_local_settings.py` and will fail to start up new Pods.
+
+:::
 
 ## Customize a task's Kubernetes Pod
 

@@ -113,7 +113,7 @@ astro dev bash --scheduler "pip freeze | grep <package-name>"
 If you have conflicting package versions or need to run multiple Python versions, you can run tasks in different environments using a few different operators:
 
 - [KubernetesPodOperator](kubepod-operator.md): Runs a task in a separate Kubernetes Pod.
-- [ExternalPythonOperator](external-python-operator): Runs a task in a predefined virtual environment.
+- [ExternalPythonOperator](airflow-isolated-environments.md): Runs a task in a predefined virtual environment.
 - [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): Runs a task in a temporary virtual environment.
 
 If many Airflow tasks share a set of alternate package and version requirements a common pattern is to run them in two or more separate Airflow deployments. 

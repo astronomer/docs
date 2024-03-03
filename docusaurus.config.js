@@ -9,17 +9,17 @@ module.exports = {
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
   onBrokenMarkdownLinks: 'throw',
-  onBrokenAnchors: 'throw',
+  onBrokenAnchors: 'warn',
   markdown: {
     mermaid: true,
     preprocessor: ({ filePath, fileContent }) => {
       function updateValues() {
         var mapObj = {
-          '{{CLI_VER}}':"1.22.0",
-          '{{RUNTIME_VER}}':"10.3.0",
+          '{{CLI_VER}}': "1.24.1",
+          '{{RUNTIME_VER}}': "10.4.0",
         };
-        var re = new RegExp(Object.keys(mapObj).join("|"),"gi");
-        return fileContent.replaceAll(re, function(matched){
+        var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
+        return fileContent.replaceAll(re, function (matched) {
           return mapObj[matched];
         });
       }
@@ -137,9 +137,14 @@ module.exports = {
     softwareNav: {
       items: [
         {
-          label: '0.33 (Latest)',
+          label: '0.34 (Latest)',
           to: '/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.33',
+          to: '/software/',
+          activeBaseRegex: `(software\/0.33)+`,
         },
         {
           label: '0.32',
@@ -285,7 +290,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.33',
+            label: '0.34',
             path: '',
             banner: 'none',
           },
@@ -316,15 +321,15 @@ module.exports = {
   ],
   scripts: [
     {
-      src: './scripts/segment.js',
+      src: '/scripts/segment.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager.js',
+      src: '/scripts/consent-manager.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager-config.js',
+      src: '/scripts/consent-manager-config.js',
     },
     {
       src: "/scripts/set-tab.js",
@@ -332,12 +337,7 @@ module.exports = {
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
-      "data-domain": 'docs.astronomer.io',
-      defer: true,
-    },
-    {
-      src: './scripts/remix-redocly.js',
+      src: '/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },

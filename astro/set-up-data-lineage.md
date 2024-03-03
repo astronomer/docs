@@ -20,7 +20,7 @@ This guide provides information about how lineage metadata is automatically extr
 
 Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/default-extractors) for popular Airflow operators.
 
-The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
+The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.mdx) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
 
 Each operator generates different lineage metadata based on its default extractor. For more information about operators with default extractors and what lineage metadata they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
 
@@ -38,7 +38,7 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
     OPENLINEAGE_EXTRACTORS='<path-to-extractor-class-1>;<path-to-extractor-class-2>;<path-to-extractor-class-x>'
     ```
 
-    Specify the path to your extractor class as relative to the base of your Astro project directory (for example, `include/myExtractorClass`). If you are importing only one custom extractor, do not include a semicolon after the file path. 
+    Specify the path to your extractor class as relative to the base of your Astro project directory (for example, `include/myExtractorClass`). If you are importing only one custom extractor, do not include a semicolon after the file path.
 
 ## Extract lineage metadata from Airflow operators using custom inlets and outlets
 
@@ -125,7 +125,7 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
 
-If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request). 
+If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 #### Prerequisites
 
@@ -175,19 +175,19 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Setup
 
-1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder. The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations. Then, add the following lines to your DAGs: 
+1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder. The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations. Then, add the following lines to your DAGs:
 
     ```python
     # Required imports for Great Expectations
     import os
     from pathlib import Path
     from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
-    # Set base path for Data Context 
+    # Set base path for Data Context
     base_path = Path(__file__).parents[2]
 
     ...
 
-    # Example task using GreatExpectationsOperator 
+    # Example task using GreatExpectationsOperator
     ge_task = GreatExpectationsOperator(
       task_id="ge_task",
       # Set directory for the Data Context
@@ -197,9 +197,9 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
     ```
 
    If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't provide a Checkpoint file or Checkpoint Config, you can skip steps 2 and 3.
-   
+
 2. In each of your Checkpoint files, add `OpenLineageValidationAction` to your `action_list` like in the following example:
-    
+
     ```yaml{10-17}
     name: my.simple.chk
     config_version: 1.0
@@ -268,13 +268,13 @@ Astronomer recommends enabling this feature only for Deployments with non-sensit
 
 ## Generate custom facets for OpenLineage events
 
-[OpenLineage facets](https://openlineage.io/docs/spec/facets/) are JSON objects that provide additional context about a given job run. By default, a job run for an Airflow task includes facets that show the source code for the task, whether the task run was successful, and who owns the task. All default facets for a job run appear as **Standard Facets** in the **Info** tab of your data pipeline's lineage graph. 
+[OpenLineage facets](https://openlineage.io/docs/spec/facets/) are JSON objects that provide additional context about a given job run. By default, a job run for an Airflow task includes facets that show the source code for the task, whether the task run was successful, and who owns the task. All default facets for a job run appear as **Standard Facets** in the **Info** tab of your data pipeline's lineage graph.
 
 You can configure both Airflow and external systems to generate custom facets that contain more specific information about job runs. Custom facets appear as **Custom Facets** in the **Info** tab of your data pipeline's lineage graph. To create a custom facet, see [OpenLineage Documentation](https://openlineage.io/docs/spec/facets/custom-facets).
 
 ## Disable OpenLineage
 
-By default, OpenLineage is enabled for all Astro Deployments. If you don't want your Deployment to collect or send lineage data, you can disable OpenLineage. 
+By default, OpenLineage is enabled for all Astro Deployments. If you don't want your Deployment to collect or send lineage data, you can disable OpenLineage.
 
 Before you disable OpenLineage, keep the following in mind:
 

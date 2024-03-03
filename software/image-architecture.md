@@ -7,7 +7,7 @@ description: Reference documentation for Astronomer Certified, Astronomer Softwa
 
 :::danger
 
-No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
+No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.mdx).
 
 :::
 
@@ -36,13 +36,13 @@ Every supported version of the Astronomer Certified Python wheel is available at
 
 ## Image Requirements
 
-Running Airflow with the Astronomer Certified Docker image requires specific versions for key system components.  
+Running Airflow with the Astronomer Certified Docker image requires specific versions for key system components.
 
 - Python: 3.6, 3.7, 3.8, 3.9
 - Database: PostgreSQL (11, 12), MySQL (5.7, 8.0+)
 - System Distribution: Debian 10 (Buster)
 
-> **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. 
+> **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7.
 These requirements are slightly different for running only the Python wheel. For the Python wheel, you can use:
 
 - Python: 3.6, 3.7, 3.8, 3.9

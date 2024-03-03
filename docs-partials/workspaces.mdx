@@ -1,0 +1,18 @@
+In your Astro Organization, you can create _Workspaces_, which are a collection of users that have access to the same Deployments. Workspaces are typically owned by a single team.
+
+You can choose to use an existing Workspace, or create a new one. However, you must have at least one Workspace to complete your migration.
+
+1. Follow the steps in [Manage Workspaces](manage-workspaces) to create a Workspace in the Cloud UI for your migrated Airflow environments. Astronomer recommends naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Cloud UI after you finish the migration.
+
+2. Follow the steps in [Manage Astro users](manage-workspace-users#add-a-user-to-a-workspace) to add users from your team to the Workspace. See [Astro user permissions](user-permissions#workspace-roles) for details about each available Workspace user role.
+
+:::cli astro
+
+You can add users to a Workspace an Organization using the Astro CLI. See:
+
+- [`astro workspace user add`](cli/astro-workspace-user-add) 
+- [`astro organization user invite`](cli/astro-organization-user-invite)
+
+:::
+
+You can automate adding batches of users to Astro with shell scripts. See [Add a group of users to Astro using the Astro CLI](manage-workspace-users#add-a-group-of-users-to-a-workspace-using-the-astro-cli).

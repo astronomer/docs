@@ -1,4 +1,109 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Fri, 12 Jan 2024 10:38:36 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.33.2</title><link>https://docs.astronomer.io/software/release-notes#0332</link><pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0332</guid><description><![CDATA[<p>Release date: November 20, 2023</p><h3>Change to behavior for interacting with deprecated Runtime versions</h3><p>In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the <code>enableSystemAdminCanUseNonSupportedRuntime</code> key has been replaced with <code>enableSystemAdminCanUseAllRuntimes</code>. To set the new flag, add the following configuration to your <code>config.yaml</code> file:</p><pre><code class="language-yaml">astronomer:
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><pubDate>Wed, 28 Feb 2024 10:57:45 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.34.0</title><link>https://docs.astronomer.io/software/release-notes#0340</link><pubDate>Mon, 12 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0340</guid><description><![CDATA[<p>Release date: February 12, 2024</p><h3>Updated permissions for upgrading Deployments to unsupported Astro Runtime versions</h3><p>:::danger Breaking change</p><p>This update includes a breaking change to the Astronomer Software Helm chart. The setting <code>enableSystemAdminCanUseAllRuntimes</code> no longer exists and has been replaced with:</p><pre><code class="language-yaml">astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+</code></pre><p>This new setting changes whether all Admin-level users can view and upgrade to deprecated versions of Astro Runtime from the Software UI.</p><p>:::</p><p>By default, any user with an Admin-level role (Deployment Admin, Workspace Admin, System Admin) can now upgrade a Deployment to an unsupported version of Astro Runtime using the Astro CLI and the Houston API.</p><p>You can additionally set the following value in your <code>config.yaml</code> file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:</p><pre><code class="language-yaml">astronomer:
+   houston:
+      config:
+         deployments:
+            enableListAllRuntimeVersions: true   
+</code></pre><h3>Change resource provisioning strategy per Deployment</h3><p>You can now set a <strong>Resource Strategy</strong> for each Deployment to fine-tune how Astronomer Software reserves resources for the Deployment within the cluster. The new resource strategies don't use AUs, meaning you can specify the exact CPU/ Memory requests and limits based on the needs of the Deployment. For example, you can configure a Deployment to have significantly more memory than CPU in extra capacity so that memory-intensive tasks are always guaranteed to run. See <a href="https://docs.astronomer.io/software/customize-resource-usage">Customize resource usage</a> for more information.</p><h3>Deploy only DAGs with <code>astro deploy -—dags</code></h3><p>You can now deploy only the DAGs folder of an Astro project to a Deployment. If you only need to deploy DAG code changes, DAG-only deploys are faster and safer than a full image deploy. This also allows you to configure CI/CD pipelines that allow certain team members to only push DAGs, while allowing other team members to push Astro project configuration updates. See <a href="deploy-dags.md">Deploy DAGs</a> for more information.</p><h3>Additional improvements</h3><ul>
+<li>
+<p>You can now configure a global label that is applied to all Astronomer Software Pods.</p>
+</li>
+<li>
+<p>You can now filter on <code>release_name</code> when you make a <code>deployments()</code> query to the Houston API.</p>
+</li>
+<li>
+<p>You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your <code>config.yaml</code> file and apply the configuration to your cluster:</p>
+<pre><code class="language-yaml">astronomer:
+  privateCaCertsAddToHost:
+    enabled: true
+    hostDirectory: /path/to/docker/certs.d
+    addToContainerd: false
+    containerdCertConfigPath: /path/to/containerd/certs.d
+    containerdConfigToml: ~
+    containerdnodeAffinitys: []
+</code></pre>
+</li>
+<li>
+<p>You can now make a <code>createDeployment</code> or <code>upsertDeployment</code> query by specifying a Workspace name or label instead of a Workspace ID.</p>
+</li>
+<li>
+<p>You can now disable the <code>astro-cli</code> Pod to free up resources on your cluster. This Pod is typically only used in airgapped clusters that can't access <code>https://install.astronomer.io</code>. To disable the Pod, add the following configuration to your <code>config.yaml</code> file and apply the change to your cluster:</p>
+<pre><code class="language-yaml">astronomer:
+  install:
+    cli-enabled: true
+</code></pre>
+</li>
+<li>
+<p>Astronomer Software now redeploys your Deployment when you switch your executor type.</p>
+</li>
+<li>
+<p>You no longer have to manually define your private registry in the configuration for <a href="https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars">Vector logging sidecars.</a>. &lt;!-- https://github.com/astronomer/issues/issues/6113 --&gt;</p>
+</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>
+<p>Fixed an issue where Astronomer users would occasionally not be associated with their related Azure AD/ Microsoft Entra ID accounts when added to Astronomer using SCIM. &lt;!-- https://github.com/astronomer/issues/issues/5913 --&gt;</p>
+</li>
+<li>
+<p>The Houston API now validates <code>updateDeployment</code> queries to ensure that Deployment resource limits and requests are set correctly.</p>
+</li>
+<li>
+<p>Fixed an issue where the <strong>Core Container Status</strong> section of the <strong>Metrics</strong> tab would occasionally show unhealthy containers with a healthy status.  &lt;!-- https://github.com/astronomer/issues/issues/5990 --&gt;</p>
+</li>
+<li>
+<p>Fixed an issue where Deployments would occasionally not recreate the correct resources when switching from the Kubernetes executor to the Celery executor.</p>
+</li>
+<li>
+<p>Fixed an issue where deploys could fail when using a self-signed certificate signed by a private certificate authority.</p>
+</li>
+<li>
+<p>Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.</p>
+</li>
+<li>
+<p>Fixed an issue where you couldn't search for a user in the Software UI by their user ID.</p>
+</li>
+<li>
+<p>Fixed the following vulnerabilities:</p>
+<ul>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-46233">CVE-2023-46233</a></li>
+<li><a href="https://github.com/advisories/GHSA-36jr-mh4h-2g58">GHSA-36jr-mh4h-2g58</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-1370">CVE-2023-1370</a></li>
+<li><a href="https://github.com/advisories/GHSA-xpw8-rcwv-8f8p">GHSA-xpw8-rcwv-8f8p</a></li>
+<li><a href="https://github.com/advisories/GHSA-fr2g-9hjm-wr23">GHSA-fr2g-9hjm-wr23</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-25653">CVE-2023-25653</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-36665">CVE-2023-36665</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-2976">CVE-2023-2976</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-1370">CVE-2023-1370</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-40690">CVE-2023-40690</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-2253">CVE-2023-2253</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-37788">CVE-2023-37788</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2022-21698">CVE-2022-21698</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-33194">CVE-2021-33914</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2021-38561">CVE-2021-38561</a></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>0.33.3</title><link>https://docs.astronomer.io/software/release-notes#0333</link><pubDate>Fri, 19 Jan 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0333</guid><description><![CDATA[<p>Release date: January 19, 2024</p><h3>Bug fixes</h3><ul>
+<li>
+<p>Fixed an issue where the Workspace list page in the Software UI would show an error if any Workspace had an empty description.</p>
+</li>
+<li>
+<p>Fixed an issue in 0.33.2 where you couldn't migrate a Deployment from Astronomer Certified to Astro Runtime.</p>
+</li>
+<li>
+<p>Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.</p>
+</li>
+<li>
+<p>Fixed the following vulnerabilities:</p>
+<ul>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-2253">CVE-2023-2253</a></li>
+<li><a href="https://nvd.nist.gov/vuln/detail/CVE-2023-37788">CVE-2023-37788</a></li>
+<li><a href="https://github.com/advisories/GHSA-fr2g-9hjm-wr23">GHSA-fr2g-9hjm-wr23</a></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>0.33.2</title><link>https://docs.astronomer.io/software/release-notes#0332</link><pubDate>Mon, 20 Nov 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0332</guid><description><![CDATA[<p>Release date: November 20, 2023</p><h3>Change to behavior for interacting with deprecated Runtime versions</h3><p>In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the <code>enableSystemAdminCanUseNonSupportedRuntime</code> key has been replaced with <code>enableSystemAdminCanUseAllRuntimes</code>. To set the new flag, add the following configuration to your <code>config.yaml</code> file:</p><pre><code class="language-yaml">astronomer:
    houston:
       config:
          deployments:
@@ -173,6 +278,53 @@
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39417">CVE-2023-39417</a></li>
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-37920">CVE-2023-37920</a></li>
 <li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-35945">CVE-2023-35945</a></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>0.32.6</title><link>https://docs.astronomer.io/software/release-notes#0326</link><pubDate>Fri, 16 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0326</guid><description><![CDATA[<p>Release date: February 16, 2024</p><h3>Additional improvements</h3><ul>
+<li>Added support for <a href="https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md">Kubernetes 1.29</a></li>
+<li>You no longer have to manually define your private registry in the configuration for <a href="https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars">Vector logging sidecars.</a>. Your registry details are now automatically pulled from your core private registry configuration.</li>
+<li>Fixed an issue where container status and usage did not appear in the <strong>Metrics</strong> tab for Deployments with pre-created namespaces.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>
+<p>Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.</p>
+</li>
+<li>
+<p>Fixed an issue where the <strong>Core Container Status</strong> section of the <strong>Metrics</strong> tab would occasionally show unhealthy containers with a healthy status.</p>
+</li>
+<li>
+<p>Fixed an issue where a Deployment would incorrectly appear as unhealthy if you scaled down its number of triggerers to zero.</p>
+</li>
+<li>
+<p>Fixed an issue where you couldn't specify an image pull secret for the <code>certCopier</code> image, meaning that you couldn't pull it from a private registry.</p>
+</li>
+<li>
+<p>Resolved the following vulnerabilities:</p>
+<ul>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-39325">CVE-2023-39325</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-52425">CVE-2023-52425</a></li>
+<li><a href="https://github.com/advisories/GHSA-m425-mq94-257g">GHSA-m425-mq94-257g</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-7104">CVE-2023-7104</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-34054">CVE-2023-34054</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-34062">CVE-2023-34062</a></li>
+<li><a href="https://github.com/advisories/GHSA-xpw8-rcwv-8f8p">GHSA-xpw8-rcwv-8f8p</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1370">CVE-2023-1370</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-0985">CVE-2024-0985</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21626">CVE-2024-21626</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47090">CVE-2023-47090</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46129">CVE-2023-46129</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46233">CVE-2023-46233</a></li>
+<li><a href="https://github.com/advisories/GHSA-36jr-mh4h-2g58">GHSA-36jr-mh4h-2g58</a></li>
+<li><a href="https://github.com/advisories/GHSA-9763-4f94-gfch">GHSA-9763-4f94-gfch</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-49569">CVE-2023-49569</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-49568">CVE-2023-49568</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-47108">CVE-2023-47108</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-45142">CVE-2023-45142</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2625">CVE-2022-2625</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5869">CVE-2023-5869</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2253">CVE-2023-2253</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=2022-21698">CVE-2022-21698</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33194">CVE-2021-33194</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561">CVE-2021-38561</a></li>
 </ul>
 </li>
 </ul>]]></description></item><item><title>0.32.5</title><link>https://docs.astronomer.io/software/release-notes#0325</link><pubDate>Fri, 08 Dec 2023 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#0325</guid><description><![CDATA[<p>Release date: December 8, 2023</p><h3>Additional improvements</h3><ul>
@@ -1020,7 +1172,7 @@ Fixed an issue in the Software UI where a text search returned duplicate entries
 <li>Fixed an issue where System and Workspace Admins were able to delete users that were part of an <a href="import-idp-groups.md">IDP team</a></li>
 </ul>]]></description></item><item><title>v0.28.1</title><link>https://docs.astronomer.io/software/release-notes#v0281</link><pubDate>Tue, 22 Feb 2022 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#v0281</guid><description><![CDATA[<p>Release date: February 22, 2022</p><h3>Bug fixes</h3><ul>
 <li>Fixed an issue where users could not successfully log in through Azure AD</li>
-</ul>]]></description></item><item><title>v0.28.0</title><link>https://docs.astronomer.io/software/release-notes#v0280</link><pubDate>Tue, 15 Feb 2022 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#v0280</guid><description><![CDATA[<p>Release date: February 15, 2022</p><h3>Import Identity Provider User Groups as Teams</h3><p>You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.</p><p>For more information about configuring this feature, read <a href="import-idp-groups.md">Import IDP Groups</a>. To learn more about adding and setting permissions for Teams via the Astronomer UI, read <a href="workspace-permissions.md#via-teams">User Permissions</a>.</p><h3>Additional Improvements</h3><ul>
+</ul>]]></description></item><item><title>v0.28.0</title><link>https://docs.astronomer.io/software/release-notes#v0280</link><pubDate>Tue, 15 Feb 2022 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/software/release-notes#v0280</guid><description><![CDATA[<p>Release date: February 15, 2022</p><h3>Import Identity Provider User Groups as Teams</h3><p>You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.</p><h3>Additional Improvements</h3><ul>
 <li>Astronomer now supports <code>prefer</code> and <code>require</code> SSL modes for connecting to PGBouncer. You can set this SSL mode via the <code>global.ssl.mode</code> value in your <code>config.yaml</code> file. Note that in v0.28.0, this feature works only with AWS and Azure.</li>
 <li>You can now set <a href="https://grafana.com/docs/grafana/latest/administration/configuration/#override-configuration-with-environment-variables">Grafana environment variables</a> using the <code>grafana.extraEnvVars</code> setting in your <code>config.yaml</code> file.</li>
 <li>Added a new <strong>Ephemeral Storage Overwrite Gigabytes</strong> slider to the Git Sync configuration screen. You can configure this slider to allocate more memory for syncing larger Git repos.</li>

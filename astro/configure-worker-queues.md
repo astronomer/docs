@@ -35,6 +35,12 @@ By configuring multiple worker queues and assigning tasks to these queues based 
 
 You can assign Task A to a worker queue that is configured to use the A20 worker type, which is optimized for running compute-heavy tasks. Then, you can assign Task B to a worker queue that is configured to use the A5 worker type, which is smaller and optimized for general usage.
 
+## Default worker queue
+
+Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the `default` worker queue.
+
+You can change all settings of the default worker queue except for its name.
+
 ## Worker queue settings
 
 You can configure each worker queue on Astro with the following settings:
@@ -42,23 +48,25 @@ You can configure each worker queue on Astro with the following settings:
 - **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
 - **Concurrency:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. The default for your worker type is suitable for most use cases.
 - **Min # Workers / Max # Workers**: The minimum and maximum number of workers that can run at a time. The number of workers autoscales based on **Concurrency** and the current number of tasks in a `queued` or `running` state.
-- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information, see [Worker type](#worker-type).
+- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information, see the following section on hosted worker types.
 
 ### Hosted worker types
 
 Each Deployment worker queue has a _worker type_ that determines how many resources are available to your Airflow workers for running tasks. A worker type is a virtualized instance of CPU and memory on your cluster that is specific to the Astro platform. The underlying node instance type running your worker can vary based on how Astro optimizes resource usage on your cluster.
 
-Each virtualized instance of your worker type is a _worker_. Celery workers can run multiple tasks at once, while Kubernetes workers only scale up and down to run a single task at a time. For more information about configuring worker behavior, see [Worker queues](configure-worker-queues.md).
+Each virtualized instance of your worker type is a _worker_. Celery workers can run multiple tasks at once, while Kubernetes workers only scale up and down to run a single task at a time.
 
 The following table lists all available worker types on Astro Deployments.
 
-| Worker Type | vCPU | Memory | Ephemeral storage | Max task concurrency |
-| ----------- | ---- | ------ | ----------------- | -------------------- |
-| A5          | 1    | 2GiB   | 10 GiB            | 15                   |
-| A10         | 2    | 4GiB   | 10 GiB            | 30                   |
-| A20         | 4    | 8GiB   | 10 GiB            | 60                   |
-| A40         | 8    | 16GiB  | 10 GiB            | 120                  |
-| A60         | 12   | 24GiB  | 10 GiB            | 240                  |
+| Worker Type | vCPU | Memory | Ephemeral storage | Default task concurrency | Max task concurrency |
+| ----------- | ---- | ------ | ----------------- | ------------------------ | -------------------- |
+| A5          | 1    | 2GiB   | 10 GiB            | 5                        | 15                   |
+| A10         | 2    | 4GiB   | 10 GiB            | 10                       | 30                   |
+| A20         | 4    | 8GiB   | 10 GiB            | 20                       | 60                   |
+| A40         | 8    | 16GiB  | 10 GiB            | 40                       | 120                  |
+| A60         | 12   | 24GiB  | 10 GiB            | 60                       | 180                  |
+| A120        | 24   | 48GiB  | 10 GiB            | 120                      | 360                  |
+| A160        | 32   | 64GiB  | 10 GiB            | 160                      | 480                  |
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker.
 
@@ -77,12 +85,6 @@ Your Organization can enable up to 10 additional different worker types for each
 For more information on requesting cluster changes, see [Manage Hybrid clusters](manage-hybrid-clusters.md).
 
 :::
-
-## Default worker queue
-
-Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the `default` worker queue.
-
-You can change all settings of the default worker queue except for its name.
 
 ## Create a worker queue
 

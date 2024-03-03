@@ -5,6 +5,9 @@ id: release-notes
 description: "A record of the latest Astro command-line interface (CLI) features and bug fixes."
 ---
 
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
+
 <p>
     <a href="/astro-cli-release-notes.xml" target="_blank">
         <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
@@ -13,11 +16,96 @@ description: "A record of the latest Astro command-line interface (CLI) features
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-- **Stable versions**: 1.21.0, 1.20.1, and 1.19.4. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+- **Stable versions**: 1.24.1, 1.23.0, and 1.22.0. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+
+## Astro CLI 1.24.1
+
+Release date: February 29, 2024
+
+### Bug fixes
+
+- Fixed an issue where the Astro CLI would experience a code panic if you tried to set a hibernation schedule for a Deployment that didn't exist.
+- Fixed an issue where the Astro CLI would send and retrieve hibernation schedules for non-development Deployments.
+
+## Astro CLI 1.24.0
+
+Release date: February 27, 2024
+
+### Support for hibernating development Deployments
+
+You can now use the Astro CLI to hibernate or wake up a development Deployment. These commands work well in automated processes where a Deployment requires flexibility for when it hibernates. Note that you can hibernate a Deployment only if you enable **Development Mode** when you [create the Deployment](create-deployment.md).
+
+Use the following new commands to hibernate development Deployments regardless of their existing hibernation schedule:
+
+- [`astro deployment hibernate`](https://docs.astronomer.io/astro/cli/astro-deployment-hibernate)
+- [`astro deployment wake-up`](https://docs.astronomer.io/astro/cli/astro-deployment-wake-up)
+
+Additionally, you can create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
+
+### Additional improvements
+
+- You can now configure a custom workload identity when you create a Deployment using a Deployment file. 
+- Added support for the upcoming custom role management feature on Astro
+
+### Bug fixes
+
+- Fixed an issue where `astro deployment variable list --save` didn't format secret environment variables correctly.
+- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token. 
+
+## Astro CLI 1.23.0
+
+Release date: February 14, 2024
+
+### Changes to existing CLI command flags
+
+The following flags have been updated, but will continue to work with a deprecation notice until the v1.25.0 release of the Astro CLI:
+
+- `astro deployment logs --key-word` ia a new flag that allows you to search your Audit logs for an exact key word or phrase.
+- `astro deployment create --cluster-type` is now `astro deployment create --type`.
+- `astro deployment create --enforce-cicd` is now `astro deployment create --cicd-enforcement`.
+
+### Kubernetes worker configurations are now consistent with the Astro Cloud UI
+
+You can now use Deployment files or the Astro CLI to create or update Kubernetes worker configurations.
+
+[Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Cloud UI. This also allows you to create or update Kubernetes worker configurations directly, instead of requiring you to update the worker resources by changing the Kubernetes worker queue configuration.
+
+You can now use the `default_task_pod_cpu`, `default_task_pod_memory`, `default_worker_type`, `resource_quota_cpu`, and `resource_quota_memory` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
+
+With this new functionality, the following commands to update a Deployment running the Kubernetes executor continue to work, but display a deprecation notice:
+
+- `astro deployment worker-queue create`
+- `astro deployment worker-queue update`
+
+Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memory`, `--resource-quota-cpu`, or `--resource-quota-memory` flags with [`astro deployment create`](astro-deployment-create.md) and [`astro deployment update`](astro-deployment-update.md) to edit your Kubernetes worker configuration using the Astro CLI.
+
+### Changes to Deployment file configurations
+
+The following changes have been made to the format of [Deployment files](deployment-file-reference.md):
+
+- You no longer have to specify a `cluster_name` for standard Deployment files. 
+- `scheduler_size` is no longer case sensitive.
+- Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
+- Possible values for `deployment_type` now include `standard`, `dedicated`, and `hybrid` in addition to the existing values of `hosted_shared`, `hosted_dedicated`, and `hosted_standard`. This input is not case sensitive
+- Possible values for for the `executor` field are now include `celery` and `kubernetes`. `CeleryExecutor` and `KubernetesExecutor` still work. This input is not case sensitive, so, for example, `celeryexecutor` still works.
+- (_Astro Hosted only_) `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Astro Hosted deployments.
+- (_Astro Hybrid only_)`default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
+
+### Additional improvements
+
+- You can now trigger a DAG-only deploy on Astronomer Software using `astro deploy --dags`. See [Deploy DAGs on Astronomer Software](https://docs.astronomer.io/software/deploy-dags).
+- `astro deployment logs --key-word` is a new flag that allows you to search your audit logs for an exact key word or phrase.
+- If you log in to Astro from the CLI, you need to select a Deployment when you deploy code. Previously, the Astro CLI used auto-select to automatically choose a Deployment for code deploys based on the CLI context. Now, by default, the CLI does not auto-selects the Deployments where your code deploys when you use it. However there are the following exceptions:
+    - If you log in to Astro with an API token using the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables, auto-select is enabled. This is important because it ensures that if you have CI/CD scripts that rely on auto-select, they will continue to work.
+    - There is a new config, `auto_select`. If `auto-select` is set to `true` in the config file, auto-select is always enabled.
+
+### Bug fixes
+
+- Fixed an issue where `astro dev pytest --args` and `astro dev pytest --build-secrets` could fail.
 
 ## Astro CLI 1.22.0
 
-Release date: January 24, 2023
+Release date: January 24, 2024
 
 ### New flag to mount secrets to Astro project image
 
@@ -344,7 +432,7 @@ You can now use the `-—clean-output` flag with the following commands to make 
 - `astro deployment create`
 - `astro deployment update`
 
-This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions.md).
+This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions-deploy-action.md).
 
 ### New environment variable `ASTRO_HOME`
 

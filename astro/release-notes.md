@@ -21,6 +21,81 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## February 27, 2024
+
+### Use a custom service account to authorize Deployments to GCP
+
+You can now attach a custom GCP [service account](https://cloud.google.com/iam/docs/service-account-overview) to your Deployment to grant the Deployment all of the service account's permissions to your cloud. Using a custom service account provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that should all have the same level of access to your cloud. For setup steps, see [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
+
+### Bug fixes
+
+- Fixed an issue where the Astro API failed to list Deployments after you deleted a hibernation override setting.
+
+## February 21, 2024
+
+### New worker types
+
+<HostedBadge/>
+
+Astro Hosted Deployments now support A120 and A160 workers, which include enough CPU and memory to handle the most resource-intensive tasks in your DAGs. See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted#deployment-resources) for more information about each worker type.
+
+### New platform variables to improve Celery executor reliability
+
+Astro Deployments now have the following environment variables set by default. This is to ensure that the Celery executor doesn't freeze when it attempts to connect with a Pod in the Celery backend that has unexpectedly terminated.
+
+```
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_TIMEOUT=30
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_CONNECT_TIMEOUT=5
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__SOCKET_KEEPALIVE=True
+AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT=True
+```
+
+For more information about each of these variables, see [Platform variables](https://docs.astronomer.io/astro/platform-variables)
+
+### Ephemeral storage limit on schedulers 
+
+Astro now limits that amount of ephemeral storage in a scheduler to 5Gi. If a scheduler attempts to use more than 5Gi of ephemeral storage, it will be terminated.
+
+It is rare for schedulers to require more than 5Gi of ephemeral storage. If your schedulers start to terminate after this update, ensure the following:
+
+- Your Deployment is not producing large amounts of temporary files without cleaning them up.
+- If you're using the BingAds Python SDK, your Deployment uses version 13.0.14 or later. Earlier releases include a [bug](https://github.com/BingAds/BingAds-Python-SDK/issues/117) that generates large amounts of temporary files. 
+
+### Bug fixes
+
+- You can no longer create Teams using the Astro API in an Organization that has SCIM provisioning enabled.
+- Astro API responses have been standardized to always return cloud provider names in uppercase (for example, `AWS`).
+
+## February 13, 2024
+
+### New Astro reporting dashboards show metrics for Deployments across your Organization
+
+:::warning
+
+This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
+
+:::
+
+The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Reporting dashboards](https://docs.astronomer.io/astro/reporting-dashboard) for summaries of each available dashboard.
+
+### Additional improvements
+
+- When you submit a support request from the Cloud UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support. 
+- Workspace Members can now access the **Clusters** view in the Airflow UI for a Deployment.
+
+### Bug fixes
+
+- Fixed an issue where network connections between clusters could be disrupted occasionally.
+- When you retrieve information about a Deployment through the Astro API, the API now returns an empty value for `EnvironmentVariables` if the Deployment has no environment variables.
+- Deleting a Workspace through the Astro API now deletes all Astro Cloud IDE projects associated with the Workspace.
+- Fixed an issue where you could not clear optional fields in a Deployment's configuration using the Astro API.
+
+## February 6, 2024
+
+### Bug fixes
+
+- Fixed an issue where all Deployment task logs included the error `Not exporting configs to configmap...`
+
 ## January 30, 2024
 
 ### New messages for Deployment health status
@@ -794,7 +869,7 @@ To review the new process for creating SSO connections, see [Set up authenticati
 
 ### Preview Deployments
 
-You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions.md#deployment-preview-templates) to configure your Astro pipelines to:
+You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions-deployment-preview.md) to configure your Astro pipelines to:
 - Create the preview Deployment when you create a new branch.
 - Deploy code changes to Astro when you make updates in the branch.
 - Delete the preview Deployment when you delete the branch.

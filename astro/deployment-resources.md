@@ -46,6 +46,12 @@ The [Kubernetes executor](kubernetes-executor.md) and [KubernetesPodOperator](ku
 
 Set safeguards by configuring default Pod limits and requests from the Cloud UI. If a task requests more CPU or memory than is currently allowed in your configuration, the task fails.
 
+:::info
+
+To manage Kubernetes resources programmatically, you can set default Pod limits and resources with the [`astro deployment create`](cli/astro-deployment-create.md) and [`astro deployment update`](cli/astro-deployment-update.md) Astro CLI commands, or by adding the configurations to a [Deployment file](deployment-file-reference.md).
+
+:::
+
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Options** menu and select **Edit Deployment**.
@@ -69,28 +75,6 @@ Set safeguards by configuring default Pod limits and requests from the Cloud UI.
 
 4. Click **Update Deployment**.
 
-After you change the Pod size, wait for a couple of minutes before running your tasks to allow Astro to apply the changes to your Pod's ConfigMap.
-
-Your CPU and memory quotas determine how many tasks can run at once on your Deployment. For example, if your Deployment has a CPU quota of 3vCPU and a memory quota of 6GiB, and a task requests this amount, then your Deployment can run only that task until it completes.
-
-The CPU and memory quotas also determine the **Max Pod Size**, which is the maximum amount of resources that a task can request.
-
-:::warning
-
-For Deployments running on dedicated clusters, the largest possible CPU and memory quotas can exceed the largest possible **Max Pod Size**. Because tasks run in a single Pod, your tasks can't request resources that exceed the **Max Pod Size**, even if your quota is larger.
-
-For example, if your Deployment has a CPU quota of 150vCPU and a memory quota of 300GiB, your **Max Pod Size** might only be 12 vCPU and 24GiB RAM. If you try to run a task that requests 20vCPU, the task won't run even though it's within your quotas.
-
-:::
-
-:::info Alternative Astro Hybrid setup
-
-On Astro Hybrid, Kubernetes executor Pods run on a worker node in your Astro cluster. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods. By default, each task runs in a dedicated Kubernetes Pod with up to 1 CPU and 384 Mi of memory.
-
-To give your tasks more or less resources, change the worker type in the task's worker queue and then change your resource requests using a `pod_override` configuration. See [(Hybrid clusters only) Change the Kubernetes executor's worker node type](kubernetes-executor.md#astro-hybrid-only-change-the-kubernetes-executors-worker-node-type).
-
-:::
-
 ## Scheduler size
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
@@ -101,11 +85,11 @@ Unlike workers, schedulers do not autoscale. The resources you set for them are 
 
 Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes for Astro Hosted:
 
-| Scheduler size | vCPU | Memory |
-| -------------- | ---- | ------ |
-| Small          | 1    | 2G     |
-| Medium         | 2    | 4G     |
-| Large          | 4    | 8G     |
+| Scheduler size | vCPU | Memory | Ephemeral storage |
+| -------------- | ---- | ------ | ----------------- |
+| Small          | 1    | 2G     | 5Gi               |
+| Medium         | 2    | 4G     | 5Gi               |
+| Large          | 4    | 8G     | 5Gi              |
 
 ### Update scheduler size
 
@@ -211,10 +195,10 @@ To create a hibernation schedule:
 
 You can use the following example cron expressions to implement common Deployment hibernation schedules:
 
-| Schedule | Start schedule | End schedule |
-|----------|----------------|---------------|
-| Hibernate from 5:00 PM to 9:00 AM| 0 17 * * * | 0 9 * * * |
-| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5 | 0 9 * * 1 |
+| Schedule                                               | Start schedule | End schedule |
+| ------------------------------------------------------ | -------------- | ------------ |
+| Hibernate from 5:00 PM to 9:00 AM                      | 0 17 * * *     | 0 9 * * *    |
+| Hibernate on weekends (Friday 5:00PM to Monday 9:00AM) | 0 17 * * 5     | 0 9 * * 1    |
 
 :::
 

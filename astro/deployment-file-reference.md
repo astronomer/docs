@@ -5,6 +5,12 @@ id: deployment-file-reference
 description: View all possible values that you can include in a Deployment file when managing Deployments as code.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
+
 After you create an Astro Deployment, you can use the Astro CLI to create a Deployment file that contains its unique configurations represented as code. That includes worker queues, environment variables, Astro Runtime version, and more. You can use Deployment files to manage Deployments programmatically on Astro.
 
 When you [inspect a Deployment](cli/astro-deployment-inspect.md) to generate a Deployment file, its current configuration is generated as a YAML _Deployment file_. The file includes the name, description, and metadata that is unique to the Deployment.
@@ -15,7 +21,15 @@ Use this document as a reference for all fields in both Deployment files and Dep
 
 ## Deployment file example
 
-The following is an example Deployment file that includes all possible key-value pairs:
+<Tabs
+defaultValue="hosted"
+values={[
+{label: 'Hosted', value: 'hosted'},
+{label: 'Hybrid', value: 'hybrid'},
+]}>
+<TabItem value="hosted">
+
+The following is an example Deployment file that includes all possible key-value pairs for Astro Hosted:
 
 ```yaml
 deployment:
@@ -29,41 +43,103 @@ deployment:
           updated_at: "2023-06-22T14:02:27.892Z"
           value: ""
     configuration:
-        name: test
+        name: test-standard
         description: ""
-        runtime_version: 8.7.0
+        runtime_version: 10.3.0
+        dag_deploy_enabled: true
+        ci_cd_enforcement: false
+        scheduler_size: SMALL
+        is_high_availability: false
+        executor: CELERY
+        cluster_name: "" ## Only used when deployment_type is DEDICATED
+        workspace_name: least-permission
+        deployment_type: STANDARD
+        cloud_provider: gcp
+        region: us-east4
+        default_task_pod_cpu: "0.25"
+        default_task_pod_memory: 0.5Gi
+        resource_quota_cpu: "10"
+        resource_quota_memory: 20Gi
+        default_worker_type: m5.xlarge ## Only used when executor is KUBERNETES
+        is_development_mode: true
+        hibernation_schedules:
+          - hibernate_at: "1 * * * * "
+            wake_at: "2 * * * *"
+            description: "My hibernation description"
+            enabled: true
+        worker_queues: ## worker_queues only used when executor is CELERY
+          - name: default
+            max_worker_count: 10
+            min_worker_count: 0
+            worker_concurrency: 5
+            worker_type: A5
+        workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
+    alert_emails:
+        - test-emailclskz4wu5000508jz4gm25q5j@testdomain.io
+```
+</TabItem>
+<TabItem value="hybrid">
+
+The following is an example Deployment file that includes all possible key-value pairs for Astro Hybrid:
+
+```yaml
+deployment:
+		environment_variables:
+        - is_secret: false
+          key: TEST
+          updated_at: "2024-02-12T15:56:38.46620671Z"
+          value: TESTVALUE
+        - is_secret: true
+          key: TEST2
+          updated_at: "2024-02-12T15:56:38.46621831Z"
+          value: ""
+    configuration:
+        name: test
+        description: "hybrid deployment"
+        runtime_version: 10.3.0
         dag_deploy_enabled: false
         ci_cd_enforcement: false
-        scheduler_size: small
         is_high_availability: false
-        executor: CeleryExecutor
-        scheduler_au: 10
+        executor: CELERY
+        scheduler_au: 5
         scheduler_count: 1
-        cluster_name: us-central1
-        workspace_name: least-permission
-        deployment_type: HOSTED_SHARED
-        cloud_provider: gcp
-        region: us-central1
-    worker_queues:
-        - name: default
-          max_worker_count: 10
-          min_worker_count: 0
-          worker_concurrency: 5
-          worker_type: a5
+        cluster_name: demo-cluster
+        workspace_name: demo-workspace
+        deployment_type: HYBRID
+        cloud_provider: "aws"
+        region: "us-west-2"
+        default_worker_type: m5.xlarge ## default_worker_type only exists when executor is KUBERNETES
+        hibernation_schedules:
+          - hibernate_at: "1 * * * * "
+            wake_at: "2 * * * *"
+            description: "My hibernation description"
+            enabled: true
+        worker_queues: ## worker_queues is only used when executor is CELERY
+          - name: default
+            max_worker_count: 10
+            min_worker_count: 0
+            worker_concurrency: 16
+            worker_type: m5.xlarge
+        workload_identity: arn:aws:iam::clskz0os1000308jz2prn0s8u:role/clskyy4h8000208jz60olha0w-release
     metadata:
-        deployment_id: clkcbz5d01458926ewbjzubt3fx
-        workspace_id: clk7zoqbf00f901hka4c66q2d
-        cluster_id: us-central1
-        release_name: N/A
-        airflow_version: 2.6.3
-        current_tag: 8.7.0
-        status: CREATING
-        created_at: 2023-07-21T08:40:02.531Z
-        updated_at: 2023-07-21T08:40:02.532Z
-        deployment_url: cloud.astronomer.io/clk7zoqbf00f901hka4c66q2d/deployments/clkcbz5d01458926ewbjzubt3fx/analytics
-        webserver_url: org.astronomer.run/dzubt3fx
-        workload_identity: astro-native-magnify-8566@proj.iam.gserviceaccount.com
+        deployment_id: clskxpb35000008l69kzp5psq
+        workspace_id: clskytztd000008lad0i5c993
+        cluster_id: clskyu7fk000108lagyc10fya
+        release_name: clskyy4h8000208jz60olha0w-release
+        airflow_version: 2.8.1
+        current_tag: 10.3.0
+        status: HEALTHY
+        created_at: 2024-02-09T20:38:11.749Z
+        updated_at: 2024-02-09T20:38:11.749Z
+        deployment_url: cloud.astronomer.io/clskytztd000008lad0i5c993/deployments/clskxpb35000008l69kzp5psq/overview
+        webserver_url: testing.astronomer.run/
+    alert_emails:
+        - clskz1jo1000408jz4w8wan2q@astronomer.io
 ```
+
+
+</TabItem>
+</Tabs>
 
 The following sections describe each section in the file.
 
@@ -101,13 +177,12 @@ The `configuration` section contains all of the basic settings that you can conf
 
 ### `deployment.worker_queues`
 
-The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use celery executor. This section is not applicable to Deployments that use Kubernetes executor.
+The `worker_queues` section defines the [worker queues](configure-worker-queues.md) for Deployments that use the Celery executor. This section is not applicable to Deployments that use Kubernetes executor.
 
 If you don't enter specific values for the `default` worker queue for a Deployment, Astro uses default values based on the worker types available on your cluster. Each additional worker queue must include a `name` and `worker_type`. The Astro CLI uses default values for any other unspecified fields.
-
 
 ### Other fields
 
 - `scheduler_size` and `is_high_availability` are not applicable to Astro Hybrid.
 - `deployment_type` can be `HOSTED_SHARED` or `HOSTED_DEDICATED` for Astro Hosted depending on your [cluster type](cli/astro-deployment-create.md#options). Use `HOSTED_SHARED` for standard clusters and `HOSTED_DEDICATED` for dedicated clusters. For Astro Hybrid, the only option is `HYBRID`.
-- `cluster_name` is be the region name for Hosted standard clusters. For Astro Hybrid and Astro Hosted dedicated clusters, it's the name for the cluster that appears in the Cloud UI.
+- `cluster_name` is the name for the cluster that appears in the Cloud UI for Astro Hosted and Hybrid.
