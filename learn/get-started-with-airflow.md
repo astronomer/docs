@@ -282,7 +282,12 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
 9. Save your code. Your DAG should look like this:
 
-    <CodeBlock language="python">{my_astronauts_dag}</CodeBlock>
+<details>
+<summary>Click to view the full DAG code</summary>
+<div>
+    <div><CodeBlock language="python">{my_astronauts_dag}</CodeBlock></div>
+</div>
+</details>
 
 ## Step 7: Run the new DAG
 
