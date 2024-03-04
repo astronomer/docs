@@ -7,9 +7,9 @@ description: "View information about your Organization, Deployments, DAGs, and c
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-:::warning
+:::info Enterprise
 
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
+Organization reporting dashboards are only available if you have an Enterprise product plan.
 
 :::
 

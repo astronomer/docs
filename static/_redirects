@@ -68,6 +68,7 @@
 # deprecated docs
 /astro/known-limitations /astro 301
 /astro/data-lineage-support-and-compatibility /astro/set-up-data-lineage 301
+/astro/organization-metrics /astro/reporting-dashboard 301
 
 # redirect base domain cloud links to astro path
 /add-user /astro/add-user 301

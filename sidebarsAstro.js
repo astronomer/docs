@@ -188,7 +188,6 @@ module.exports = {
           label: "View metrics",
           items: ["dag-metrics",
            "deployment-metrics",
-           "organization-metrics",
            {
             type: "category",
             label: "Reporting dashboards",

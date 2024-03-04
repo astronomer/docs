@@ -5,11 +5,12 @@ id: reporting-dash-exports
 description: "Export data from reporting dashboards or configure conditional exports as alerts."
 ---
 
-:::warning
+:::info Enterprise
 
-This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-previews). Please reach out to your customer success manager to enable this feature.
+Organization reporting dashboards are only available if you have an Enterprise product plan.
 
 :::
+
 
 You can export data from your reporting dashboards, either as a file download, sent to an email address, or sent to an email address on a regular schedule. The reporting dashboard also offers you the ability to set up a *reporting dashboard alert*, or a scheduled data export that occurs when the data set meets certain conditional critera.
 
