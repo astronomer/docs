@@ -6,7 +6,7 @@ id: get-started-with-airflow-part-2
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import my_astronauts_dag from '!!raw-loader!../code-samples/dags/get-started-with-airflow/my_astronauts_dag.py';
+import find_the_iss from '!!raw-loader!../code-samples/dags/get-started-with-airflow-part-2/find_the_iss.py';
 
 Use this tutorial after completing [Part 1: Write your first DAG](get-started-with-airflow.md) to learn about how to connect Airflow to external systems.
 
