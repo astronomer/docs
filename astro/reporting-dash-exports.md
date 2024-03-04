@@ -21,8 +21,6 @@ As an Astro administrator, you might want to export reporting data to share with
 
 When you export reporting data, Astro exports the last [1.0 million rows of data](https://help.sigmacomputing.com/docs/download-export-and-upload-limitations) from a specific dashboard in the file format of your choice. Use this document to learn about the different ways you can trigger the export process.
 
-![Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert.](/img/docs/dash-open-menu.png)
-
 ## Prerequisites
 
 - Only users with **Organization Billing Admin** [user permissions](user-permissions.md#organization-roles) can access Organization dashboards.
@@ -30,7 +28,9 @@ When you export reporting data, Astro exports the last [1.0 million rows of data
 ## Download reporting data
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
-2. Open the **Export** menu
+2. Open the **Export** menu.
+<img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+
 3. Choose the file format that you want to use to download your data. Astro generates your data export and saves it to your Downloads folder.
 
 ## Export reporting data to email
@@ -39,6 +39,9 @@ Instead of downloading your data directly, you can choose to email it to a speci
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu and then select **Send now**.
+
+<img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+
 3. Enter the recipient's email address and optionally edit the subject line and email body message.
     :::tip
 
@@ -56,6 +59,9 @@ When you receive a report via email, the sender appears as **Sigma Computing**. 
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu for the reporting element you want to schedule an email export for and select **Schedule**.
+
+<img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+
 3. Enter the recipient's email address and optionally edit the subject line and email body message.
 
     :::tip
@@ -71,6 +77,9 @@ If you toggle **Condition** when setting up your schedule, it allows you to conf
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu for the reporting element you want to set up an alert for.
+
+<img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+
 2. Click **Alert when**, or toggle **Condition** when setting up your scheduled email data report, to define when you want the reporting dashboard to send a data report to a defined email address.
 
 <img src={require("../static/img/docs/dash-export-alert.png").default} alt="Configure the conditions that trigger the reporting dashboard to send you a data report for a particular dashboard element." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
