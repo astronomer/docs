@@ -310,6 +310,13 @@ astronomer:
       url: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-certified
     updateRuntimeCheck: # Configure URL for Airflow updates check
       url: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
+    config:
+      deployments:
+        helm:
+          airflow:
+            extraEnv:
+            - name: AIRFLOW__ASTRONOMER__UPDATE_URL
+              value: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
 ```
 
 ## Step 6: Install Astronomer using Helm
