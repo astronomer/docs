@@ -64,7 +64,7 @@ Airflow provides many benefits, including:
 - **High extensibility**: Since Airflow pipelines are written in Python, you can build on top of the existing codebase and extend the functionality of Airflow to meet your needs. Anything you can do in Python, you can do in Airflow.
 - **CI/CD for data pipelines**: With all the logic of your workflows defined in Python, it is possible to implement best practice CI/CD processes for your data pipelines.
 - **Infinite scalability**: Given enough computing power, you can orchestrate as many processes as you need, no matter the complexity of your pipelines.
-- **Dynamic data pipelines**: Airflow offers the ability to create [dynamically mapped tasks](dynamic-tasks.md) to adjust your workflows based on the data you are processing at runtime.
+- **Dynamic data pipelines**: Airflow offers the ability to create [dynamic tasks](dynamic-tasks.md) to adjust your workflows based on the data you are processing at runtime.
 - **Active OSS community**: With millions of users and thousands of contributors, Airflow is here to stay and grow. Join the [Airflow Slack](https://apache-airflow-slack.herokuapp.com/) to become part of the community.
 - **Observability**: The Airflow UI provides an immediate overview of all your data pipelines and can provide the source of truth for workflows in your whole data ecosystem.
 
