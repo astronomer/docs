@@ -167,3 +167,7 @@ To learn more about the Airflow infrastructure, see [Airflow Components](airflow
 - [Official Airflow Documentation](https://airflow.apache.org/docs/): The official documentation for Apache Airflow.
 - [Airflow GitHub](https://github.com/apache/airflow): The official GitHub repository for Apache Airflow.
 - [Airflow Slack](https://apache-airflow-slack.herokuapp.com/): The official Airflow Slack workspace, the best place to ask your Airflow questions!
+
+## Next steps
+
+Now that you have a basic understanding of Apache Airflow, you are ready to write your first DAG by following the the [Get started with Apache Airflow](get-started-with-airflow.md) tutorial.
