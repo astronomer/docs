@@ -73,7 +73,7 @@ If you toggle **Condition** when setting up your schedule, it allows you to conf
 2. Open the **Export** menu for the reporting element you want to set up an alert for.
 2. Click **Alert when**, or toggle **Condition** when setting up your scheduled email data report, to define when you want the reporting dashboard to send a data report to a defined email address.
 
-![Configure the conditions that trigger the reporting dashboard to send you a data report for a particular dashboard element.](/img/docs/dash-export-alert.png)
+<img src={require("../static/img/docs/dash-export-alert.png").default} alt="Configure the conditions that trigger the reporting dashboard to send you a data report for a particular dashboard element." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
-Like with an emailed dashboard report, when you receive a dashboard alert, the sender appears as **Sigma Computing**. The subject line also includes the name of the dashboard element's data you exported.
+Like with an emailed dashboard report, when you receive a dashboard alert in an email, the sender appears as **Sigma Computing**. The subject line also includes the name of the dashboard element's data you exported.
 

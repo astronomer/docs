@@ -89,17 +89,3 @@ In the **Cost Breakdown** dashboard, you can find detailed information about how
 ## Operator use
 
 The **Operator Use** dashboard shows how your Deployments and Workspaces use Operators, as well as how often tasks succeed and fail when using specific operators. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. This dashboard provides data to answer the questions, *What are the top operators used across my organization?* and *Which workspace is using the selected operators the most?*.
-
-<!--
-## Export data from reporting dashboards
-
-You can set up your reporting Dashboard to email you data reports on a given time interval or as an alert when certain criteria are met. Or, you can export your data in a one-time action.
-
-1. Hover your cursor anywhere in the Dashboard window or over a specific data element, to see the detailed menu view. This menu includes **Filters**, the option to **Maximize element**, or **Expand menu** further.
-
-2. Expand the menu, and then you can choose
-    - **Sort** the x-axis data
-    - **Alert when...** to define criteria for Astro to send you a Sigma data export of the element or dashboard that you want data about.
-    - **Export** to download the data in a file format of your choosing, like `.csv`.
-    - **Refresh data** to reload the data you're viewing in the Dashboard or element.
--->
