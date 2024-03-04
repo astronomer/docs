@@ -26,7 +26,7 @@ To complete this tutorial, you'll need to know:
 
 ## Prerequisites
 
-- The Astro project created by completing [Part 1: Write your first DAG](get-started-with-airflow.md).
+- The completed project from [Part 1: Write your first DAG](get-started-with-airflow.md).
 - A GitHub account with a personal access token and at least one repository. If you don’t have a GitHub repository you can follow the [steps in the GitHub documentation](https://docs.github.com/en/get-started/quickstart/create-a-repo) on how to create one.
 
 :::info
@@ -37,7 +37,7 @@ If you do not have a GitHub account, you can create one for free on the [GitHub 
 
 ## Step 1: Create your DAG
 
-In this second part of the Get Started with Airflow tutorial, you add a third DAG to your Astro project. This time you copy the DAG code from the [Astronomer Registry](https://registry.astronomer.io/), which is a resource containing both, information about Airflow providers and modules, as well as many example DAGs.
+In this second part of Astronomer's introduction to Airflow, you'll add a third DAG to your Astro project. Instead of writing the DAG yourself, you'll copy the DAG code from the [Astronomer Registry](https://registry.astronomer.io/), which contains documentation for Airflow providers and modules as well as many example DAGs.
 
 The new DAG interacts with GitHub and two external APIs to print the location of the International Space Station (ISS) to your task logs after a specific commit message is pushed to your GitHub repository.
 
@@ -54,7 +54,7 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 
     ![Screenshot of the Airflow UI Showing an Import Error saying: ModuleNotFoundError: No module named 'airflow.providers.github'](/img/tutorials/get-started-with-airflow-part-2_ImportError.png)
 
-    This error is due to a missing provider package. Provider packages are Python packages maintained separately from core Airflow that contain hooks and operators for interacting with external services. You can browse all available providers in the [Astronomer Registry](https://registry.astronomer.io/).
+    This error is due to a missing provider package. **_Provider packages_** are Python packages maintained separately from core Airflow that contain hooks and operators for interacting with external services. You can browse all available providers in the [Astronomer Registry](https://registry.astronomer.io/).
 
     Your DAG uses operators from two Airflow provider packages: the [HTTP provider](https://registry.astronomer.io/providers/http/versions/latest) and the [GitHub provider](https://registry.astronomer.io/providers/github/versions/latest). While the HTTP provider is pre-installed in the Astro Runtime image, the GitHub provider is not, which causes the DAG import error.
 
@@ -70,7 +70,7 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 
 After restarting your Airflow instance, you should not see the DAG import error from [Step 2](#step-2-add-a-provider-package). Next, you need to add an Airflow variable to be used in the [GithubSensor](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest/modules/GithubSensor).
 
-[Airflow variables](airflow-variables.md) are key value pairs that can be accessed from any DAG in your Airflow environment. Because the variable `my_github_repo` is used in the DAG code with a default of `apache/airflow`, you'll need to create the variable and give it a value in the Airflow UI to wait for a commit in your own repository.
+[**Airflow variables**](airflow-variables.md) are key value pairs that can be accessed from any DAG in your Airflow environment. Because the variable `my_github_repo` is used in the DAG code with a default of `apache/airflow`, you'll need to create the variable and give it a value in the Airflow UI to wait for a commit in your own repository.
 
 1. Go to **Admin** > **Variables** to open the list of Airflow variables. Since no Airflow variables have been defined yet, it is empty.
 
@@ -82,7 +82,7 @@ After restarting your Airflow instance, you should not see the DAG import error 
 
 ## Step 4: Create a GitHub connection
 
-An [Airflow connection](connections.md) is a set of configurations for connecting with an external tool in the data ecosystem. If you use a hook or operator that connects to an external system, it likely needs a connection.
+An [**Airflow connection**](connections.md) is a set of configurations for connecting with an external tool in the data ecosystem. If you use a hook or operator that connects to an external system, it likely needs a connection.
 
 In your example DAG, you used two operators that interact with two external systems, which means you need to define two different connections.
 
@@ -109,7 +109,7 @@ You should now have two connections as shown in the following screenshot:
 
 Now that your Airflow environment is configured correctly, look at the DAG code you copied from the repository to see how your new variable and connections are used at the code level.
 
-At the top of the file, the DAG is described in a docstring. It is an Airflow best practice to always describe your DAGs up front and include any additional connections or variables that are required for the DAG to work.
+At the top of the file, the DAG is described in a docstring. It's highly recommended to always document your DAGs  and include any additional connections or variables that are required for the DAG to work.
 
 ```python
 """
@@ -153,7 +153,7 @@ YOUR_GITHUB_REPO_NAME = Variable.get(
 YOUR_COMMIT_MESSAGE = "Where is the ISS right now?"  # Replace with your commit message
 ```
 
-Below, a function is defined to be used in the GithubSensor. This function processes the repository object returned by the [`get_repo` method](https://pygithub.readthedocs.io/en/latest/examples/Repository.html) of the [PyGitHub](https://pygithub.readthedocs.io/en/latest/index.html) package, using `.get_commits()` to retrieve the last 10 commits to the repository and compare them to the commit message defined in `YOUR_COMMIT_MESSAGE`. If the message is found, the function returns `True`, otherwise `False`. Note that the function is defined at the top level of the DAG file for convenience but could also be defined in a separate module, located in the `include` directory and reused across multiple DAGs.
+In the next section, a function is defined to be used in the GithubSensor. This function processes the repository object returned by the [`get_repo` method](https://pygithub.readthedocs.io/en/latest/examples/Repository.html) of the [PyGitHub](https://pygithub.readthedocs.io/en/latest/index.html) package, using `.get_commits()` to retrieve the last 10 commits to the repository and compare them to the commit message defined in `YOUR_COMMIT_MESSAGE`. If the message is found, the function returns `True`, otherwise `False`. Note that the function is defined at the top level of the DAG file for convenience but could also be defined in a separate module, located in the `include` directory and reused across multiple DAGs.
 
 ```python
 def commit_message_checker(repo: Any, trigger_message: str) -> bool | None:
@@ -235,9 +235,9 @@ The DAG itself has three tasks:
         )
     ```
 
-- The third task uses the [TaskFlow API's](airflow-decorators.md) `@task` decorator to run a regular Python function processing the coordinates returned by the `get_iss_coordinates` task and printing the city and country of the ISS location to the task logs. The coordinates are passed to the function as an argument using `get_iss_coordinates.output`, which accesses the value returned by the `get_iss_coordinates` task from the XCom table.
+- The third task uses the [TaskFlow API's](airflow-decorators.md) `@task` decorator to run a Python function that processes the coordinates returned by the `get_iss_coordinates` task and prints the city and country of the ISS's location to the task logs. The coordinates are passed to the function as an argument using `get_iss_coordinates.output`, which accesses the data returned by the `get_iss_coordinates` task from XComs.
 
-    This is an example of how you can use a traditional operator (HttpOperator) and a TaskFlow API task to perform similar operations, in this case querying an API. Which way of task writing you choose depends on your use case and often comes down to personal preference.
+    The following is an example of how you can use a traditional operator (HttpOperator) and a TaskFlow API task to perform similar operations, in this case querying an API. The best way to write tasks depends on your use case and often comes down to personal preference.
 
     ```python
         @task
@@ -290,7 +290,7 @@ find_the_iss()
 
     ![DAG running](/img/tutorials/get-started-with-airflow-part-2_GraphView.png)
 
-2. Create a new commit in your GitHub repository by changing any file then running:
+2. Create a new commit in your GitHub repository by changing any file, then running:
 
     ```bash
     git add <file>
@@ -298,8 +298,8 @@ find_the_iss()
     git push
     ```
 
-3. Watch for the `github_sensor` task to finish successfully. The `get_iss_coordinates` task should start right after, and after it completes successfully the `log_iss_location` task runs.
-4. In the **Grid** view, click on the green box representing the successful task run for `log_iss_location`. Check the **Log** tab of the task instance to learn where the ISS is right now!
+3. Watch for the `github_sensor` task to finish successfully. The `get_iss_coordinates` task should start right after, and after it completes the `log_iss_location` task runs.
+4. In the **Grid** view, click the green box representing the successful task run for `log_iss_location`. Check the **Log** tab of the task instance to learn where the ISS is right now!
 
 ```
 [2024-02-28, 15:28:20 UTC] {find_the_iss.py:113} INFO - The International Space Station is currently over Sian Ka'an in Mexico.
