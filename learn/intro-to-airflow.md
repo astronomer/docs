@@ -135,7 +135,7 @@ Of course there is much more to Airflow than just DAGs and tasks. Here are a few
 - **Airflow variables**: Airflow variables are key-value pairs that can be used to store information in your Airflow environment. For more information, see [Use Airflow variables](airflow-variables.md).
 - **XComs**: XCom is short for "cross-communication", you can use XCom to pass information between your Airflow tasks. For more information, see [Passing data between tasks](airflow-passing-data-between-tasks.md).
 - **Airflow REST API**: The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) allows Airflow to interact with RESTful web services.
-- **Airflow plugins**: Airflow plugins are a way to further extend the functionality of Airflow. For more information, see [Airflow plugins](using-airflow-plugins.md). Note that custom hooks and operators do not need to be installed as plugins, but can be used directly imported into your DAGs as Python modules.
+- **Airflow plugins**: Airflow plugins are a way to further extend the functionality of Airflow. For more information, see [Airflow plugins](using-airflow-plugins.md). Note that [custom hooks and operators](airflow-importing-custom-hooks-operators.md) do not need to be installed as plugins, but can be used directly imported into your DAGs as Python modules.
 
 ## Airflow components
 
