@@ -5,6 +5,9 @@ description: "Learn the core Apache Airflow concepts of using providers and conn
 id: get-started-with-airflow-part-2
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import my_astronauts_dag from '!!raw-loader!../code-samples/dags/get-started-with-airflow/my_astronauts_dag.py';
+
 Use this tutorial after completing [Part 1: Write your first DAG](get-started-with-airflow.md) to learn about how to connect Airflow to external systems.
 
 After you complete this tutorial, you'll be able to:
@@ -47,7 +50,14 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 
     ![Screenshot of the Astronomer Registry showing the DAG code](/img/tutorials/get-started-with-airflow-part-2_registry_code_copy.png)
 
-3. Paste the code into `find_the_iss.py`.
+3. Paste the code into `find_the_iss.py`. Your code should look like this:
+
+<details>
+<summary>Click to view the full DAG code</summary>
+<div>
+    <div><CodeBlock language="python">{find_the_iss}</CodeBlock></div>
+</div>
+</details>
 
 ## Step 2: Add a provider package
 
