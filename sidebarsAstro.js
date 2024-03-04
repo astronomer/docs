@@ -190,7 +190,7 @@ module.exports = {
            "deployment-metrics",
            {
             type: "category",
-            label: "Reporting dashboards",
+            label: "Organization dashboards",
             items: ["reporting-dashboard",
             "reporting-dash-exports",
             ],

@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Access dashboards'
+sidebar_label: 'Access Organization dashboards'
 title: "View metrics across your Organization with Astro reporting dashboards"
 id: reporting-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
@@ -23,9 +23,9 @@ Astro provides dashboards that share important metrics about your Organization's
 
 Dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and tasks within DAGs. For example, you can use the **Deployment Detail** dashboard to identify unexpected DAG behaviors, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly switch between DAGs in a dashboard to identify trends like unusually high compute use, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
 
-To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). In addition to vieweing the dashboards in the Astro UI, you can also [export and email individual reports](reporting-dash-exports.md).
+To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). In addition to vieweing the dashboards in the Astro UI, you can also [export and email individual reports](reporting-dash-exports.md).
 
-Use the tabs at the bottom of the Cloud UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
+Use the tabs at the bottom of the Astro UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
 
 :::info
 

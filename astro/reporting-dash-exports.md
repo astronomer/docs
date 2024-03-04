@@ -16,7 +16,7 @@ You can export data from your reporting dashboards, either as a file download, s
 
 As an Astro administrator, you might want to export reporting data to share with other team members or to keep a record of key performance indicators. Astro supports several different methods for exporting reporting data based on how and when you want to receive the data. Specifically, you can export data:
 
-- Manually through the Cloud UI.
+- Manually through the Astro UI.
 - On a regular schedule.
 - Whenever a certain condition is met, such as a metric reaching a specific threshold.
 
@@ -28,7 +28,7 @@ When you export reporting data, Astro exports the last [1.0 million rows of data
 
 ## Download reporting data
 
-1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
+1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu.
 <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
@@ -38,7 +38,7 @@ When you export reporting data, Astro exports the last [1.0 million rows of data
 
 Instead of downloading your data directly, you can choose to email it to a specified address.
 
-1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
+1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu and then select **Send now**.
 
 <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
@@ -58,7 +58,7 @@ When you receive a report via email, the sender appears as **Sigma Computing**. 
 
 ### Schedule an emailed data report
 
-1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
+1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu for the reporting element you want to schedule an email export for and select **Schedule**.
 
 <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
@@ -76,7 +76,7 @@ If you toggle **Condition** when setting up your schedule, it allows you to conf
 
 ## Set up a reporting dashboard alert
 
-1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
+1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu for the reporting element you want to set up an alert for.
 
 <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
