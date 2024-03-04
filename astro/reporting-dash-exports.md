@@ -29,7 +29,7 @@ When you export reporting data, Astro exports the last [1.0 million rows of data
 ## Download reporting data
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
-2. Open the **Export** menu.
+2. Open the **Export** menu on the chart or table that you want to export.
 <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. Choose the file format that you want to use to download your data. Astro generates your data export and saves it to your Downloads folder.
