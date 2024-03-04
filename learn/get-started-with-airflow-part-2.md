@@ -26,7 +26,7 @@ To complete this tutorial, you'll need to know:
 
 ## Prerequisites
 
-- The [Astro CLI](docs.astronomer.io/astro/cli/get-started-cli) version 1.25.0 or later.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli) version 1.25.0 or later.
 - The completed project from [Part 1: Write your first DAG](get-started-with-airflow.md).
 - A GitHub account with a personal access token and at least one repository. If you don’t have a GitHub repository you can follow the [steps in the GitHub documentation](https://docs.github.com/en/get-started/quickstart/create-a-repo) on how to create one.
 
