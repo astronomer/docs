@@ -35,7 +35,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Quickstart
 
-If you already have some Airflow experience or prefer to learn by doing, install the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started) and run the following command to create and start new Airflow project with an example workflow:
+If you already have some Airflow experience or prefer to learn by doing, install the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started) and run the following command to create and start a new Airflow project with an example workflow:
 
 ```bash
 astro dev init
