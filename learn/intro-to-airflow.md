@@ -10,12 +10,14 @@ import example_astronauts from '!!raw-loader!../code-samples/dags/intro-to-airfl
 
 [Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. It is downloaded millions of times per month and has a large and active open source community. The core principle of Airflow is to define data pipelines as code, allowing for dynamic and scalable workflows.
 
-This guide offers an introduction to Apache Airflow and its core concepts. You'll learn:
+This guide offers an introduction to Apache Airflow and its core concepts. You'll learn about:
 
 - Milestones in the history of Apache Airflow.
 - Why you should use Airflow.
 - Common use cases of Airflow.
-- Core Airflow concepts.
+- Important Airflow concepts.
+- The components of the Airflow infrastructure.
+- Where to find resources to learn more about Airflow.
 
 :::tip Other ways to learn
 
