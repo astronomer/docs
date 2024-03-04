@@ -5,15 +5,15 @@ id: get-started-with-airflow
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
 
-Getting started with [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/index.html) locally is easy with the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+Getting started with [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/index.html) is easy with the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 
-This tutorial is aimed at people who are new to Apache Airflow and want to run it locally with open source tools to create and run their first [DAG](dags.md) (Directed Acyclic Graph).
+Follow this tutorial if you're new to Apache Airflow and want to create and run your first data pipeline.
 
 After you complete this tutorial, you'll be able to:
 
 - Create and start a local Airflow environment using the Astro CLI.
 - Navigate the [Airflow UI](airflow-ui.md).
-- Write a simple Airflow DAG from scratch using the `@task` [decorator](airflow-decorators.md) and the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator).
+- Write a simple directed acyclic graph (DAG) from scratch using the `@task` [decorator](airflow-decorators.md) and the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator).
 
 :::tip Other ways to learn
 
@@ -43,7 +43,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Create an Astro project
 
-To run data pipelines on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally. This can be done with the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+To run data pipelines on Astro, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally. This can be done with the [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 
 1. Create a new directory for your Astro project:
 
@@ -67,7 +67,7 @@ The Astro project is built to run Airflow with Docker. [Docker](https://docs.doc
 
 The default Astro project structure includes a collection of folders and files that you can use to run and customize Airflow. For this tutorial, you only need to know the following files and folders:
 
-- `/dags`: A directory of DAG files. Each Astro project includes one example DAG: `example_astronauts`. For more information on DAGs, see [Introduction to Airflow DAGs](dags.md).
+- `/dags`: A directory of DAG files. Each Astro project includes an example DAG called `example_astronauts`. For more information on DAGs, see [Introduction to Airflow DAGs](dags.md).
 - `Dockerfile`: This is where you specify your version of [Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture), which is a runtime software based on Apache Airflow that is built and maintained by Astronomer. The CLI generates new Astro projects with the latest version of Runtime, which is equivalent to the latest version of Airflow. For advanced use cases, you can also configure this file with Docker-based commands to run locally at build time.
 
 ## Step 2: Start Airflow
@@ -93,7 +93,7 @@ astro config set postgres.port <available-port>
 
 ## Step 3: Log in to the Airflow UI
 
-The [Airflow UI](airflow-ui.md) is essential for managing Airflow. It contains information about your current DAG Runs and is the best place to create and update Airflow connections to third-party data services.
+The [Airflow UI](airflow-ui.md) is essential for managing Airflow. It contains information about your DAGs and is the best place to create and update Airflow connections to third-party data services.
 
 To access the Airflow UI, open `http://localhost:8080/` in a browser and log in with `admin` for both your username and password.
 
@@ -105,14 +105,14 @@ Each DAG is listed with a few of its properties, including tags, owner, previous
 
 ## Step 4: Trigger a DAG run
 
-The `example_astronauts` DAG that was generated with your Astro project is a simple ETL pipeline with two tasks:
+The `example_astronauts` DAG in your Astro project is a simple ETL pipeline with two tasks:
 
-- `get_astronauts`: queries the [Open Notify API](https://github.com/open-notify/Open-Notify-API) for information about astronauts currently in space. The task returns the list of dictionaries containing the name and the spacecraft of all astronauts currently in space, which is passed to the second task in the DAG. This tutorial does not go into depth on how to pass data between tasks, but you can learn more about it in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
-- `print_astronaut_craft`: is a dynamically mapped Airflow task. It creates one dynamically mapped task instance for each astronaut in space, which prints a statement to the logs for that astronaut. Dynamic task mapping is a versatile feature of Airflow that allows you to create a variable number of tasks at runtime. This feature is covered in more depth in the [Create dynamic Airflow tasks](dynamic-tasks.md) guide.
+- `get_astronauts` queries the [Open Notify API](https://github.com/open-notify/Open-Notify-API) for information about astronauts currently in space. The task returns the list of dictionaries containing the name and the spacecraft of all astronauts currently in space, which is passed to the second task in the DAG. This tutorial does not explain how to pass data between tasks, but you can learn more about it in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
+- `print_astronaut_craft` is a task that uses dynamic mapping to create and run a task instance for each Astronaut in space. Each of these tasks prints a statement about its mapped astronaut. Dynamic task mapping is a versatile feature of Airflow that allows you to create a variable number of tasks at runtime. This feature is covered in more depth in the [Create dynamic Airflow tasks](dynamic-tasks.md) guide.
 
 A **DAG run** is an instance of a DAG running on a specific date. Let's trigger a run of the `example_astronauts` DAG!
 
-1. Before you can run any DAG in Airflow, you have to unpause it. To unpause `example_astronauts`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
+1. Before you can trigger a DAG run in Airflow, you have to unpause the DAG. To unpause `example_astronauts`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
 
     ![Screenshot of the DAGs view of the Airflow UI with an arrow pointing to the toggle on the right side of the DAG name you can click to unpause the DAG.](/img/tutorials/get-started-with-airflow_unpause_dag.png)
 
@@ -126,11 +126,11 @@ These circles represent different [states](https://airflow.apache.org/docs/apach
 
 ## Step 5: Explore the Airflow UI
 
-The navigation bar in the Airflow UI contains 8 tabs, each with different information about your Airflow environment. For more information about what you can find in each tab, see [The Airflow UI](airflow-ui.md).
+The navigation bar in the Airflow UI contains tabs with different information about your Airflow environment. For more information about what you can find in each tab, see [The Airflow UI](airflow-ui.md).
 
 Let's explore the available views in the **DAGs** page. To access different DAG views for `example_astronauts`:
 
-1. Click the name of the DAG to access the default **Grid** view, which shows the state of completed and currently running tasks.
+1. Click the name of the DAG to access the **Grid** view, which shows the status of running and completed tasks.
 
     Each column in the grid represents a complete DAG run, and each block in the column represents a specific task instance. This view is useful for seeing DAG runs over time and troubleshooting previously failed task instances.
 
@@ -140,7 +140,7 @@ Let's explore the available views in the **DAGs** page. To access different DAG 
 
     ![Gif showing how to access the task logs of a regular task instance by clicking on its task instance square in the Grid view and then on the Logs tab.](/img/tutorials/get-started-with-airflow_access_task_instance.gif)
 
-    To access information about [dynamically mapped](dynamic-tasks.md) task instances of a a dynamically mapped task, click the green square of the task instance and then click on **[] Mapped task** to get a list of all dynamically mapped task instances. Click on any entry in the list to access information about the dynamically mapped task instance, such as the logs.
+    To access information about mapped task instances of a dynamically mapped task, click the green square of the mapping task instance and then click on **[] Mapped task** to view a list of all dynamically mapped task instances. Click on any entry in the list to access information about the dynamically mapped task instance.
 
     ![Gif showing how to access the task logs of a dynamically mapped task instance by clicking on its task instance square in the Grid view, then on the Mapped tasks Tab and lastly on the Logs tab.](/img/tutorials/get-started-with-airflow_access_mapped_task_instance.gif)
 
@@ -164,7 +164,8 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
 
 In this step, you'll write a DAG that:
 
-- Retrieves the number of people currently in space from the Airflow XCom table and prints it to the logs. This table is part of the Airflow metadata database and is used to [pass data between tasks](airflow-passing-data-between-tasks.md). The `example_astronauts` DAG already pushed the number of astronauts to XCom, when you ran it in [Step 4](#step-4-trigger-a-dag-run).
+- Retrieves the number of people currently in space from the Airflow XCom table. This table is part of the Airflow metadata database and is used to pass data between tasks and DAGs. The `example_astronauts` DAG already pushed the number of astronauts to XCom when you ran it in [Step 4](#step-4-trigger-a-dag-run).
+- Prints the number of people currently in space to logs.
 - Runs a bash statement reacting to the number of people in space.
 
 You'll copy most of the code, trigger the DAG, and then confirm the expected output is returned.
@@ -181,7 +182,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     """
     ```
 
-    Adding a docstring to your DAG is a best practice. It helps you and others understand what the DAG does and how it works and it can be converted to a [DAG Doc](custom-airflow-ui-docs-tutorial.md) by setting `doc_md=__doc__` in the DAG definition. 
+    Adding a docstring to your DAG is highly recommended. It helps you and others understand what the DAG does and how it works. It can also be converted to a [DAG Doc](custom-airflow-ui-docs-tutorial.md) by setting `doc_md=__doc__` in the DAG definition. 
 
 3. After the docstring, add the import statements of your Python packages:
 
@@ -220,7 +221,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
     - `dag_id`: The name of the DAG that appears in the Airflow UI. If no `dag_id` is specified, the name of the Python function is used as the DAG ID. Each DAG must have a unique name, and Astronomer recommends using the same name for the DAG file and the `dag_id`.
     - `start_date`: The date and time when the DAG is scheduled to start running, given as a datetime object. In this example, the DAG is triggered on its schedule as long as the current time is 0:00 UTC on January 1st, 2024 or later.
-    - `schedule`: The frequency the DAG runs. There are many options to define the schedule of a DAG, including as a [timedelta object](https://docs.python.org/3/library/datetime.html#timedelta-objects), a [CRON expression](https://crontab.guru/), or as a macro such as `@daily`. If you don't set this value, the DAG runs every 24 hours after the `start_date`. In this example, the DAG is scheduled to run whenever the `example_astronauts` DAG's `get_astronauts` task completes successfully using an Airflow Dataset, for more information see [Datasets and data-aware scheduling in Airflow](airflow-datasets.md).
+    - `schedule`: The frequency at which the DAG runs. If you don't set this value, the DAG runs every 24 hours after the `start_date`. In this example, the DAG is scheduled to run whenever the `example_astronauts` DAG's `get_astronauts` task completes successfully using an Airflow dataset. There are many options to define the schedule of a DAG. For more information, see [DAG scheduling and time tables in Airflow](https://docs.astronomer.io/learn/scheduling-in-airflow).
     - `catchup`: Defines whether the DAG reruns all DAG runs that were scheduled before today's date. The default value is `True`, but it is recommended that you set this argument to `False` unless you are explicitly running your DAG to backfill runs.
     - `default_args`: A dictionary of arguments to be passed to every task in the DAG. In this example, the `default_args` change the owner of the DAG and set the default number of retries in case of a failure for all tasks in the DAG to 3. You can pass any arguments to all your tasks by setting them in `default_args` and override them for specific tasks by setting them in the task definition.
     - `tags`: Defines the **Tags** that appear in the **DAGs** page of the Airflow UI. These can help you organize DAGs in more complex projects.
@@ -245,9 +246,11 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
         print(f"There are currently {num_people_in_space} people in space.")
     ```
 
-    The `@task` decorator is used to define a task in the TaskFlow API. By default, the `task_id` is the name of the Python function. Each task in an Airflow DAG requires a unique `task_id`. This `print_num_people_in_space` task pulls the number of people in space from XCom and prints it to the logs. Learn more about XCom in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
+    The `@task` decorator lets you define Python functions with very little boilerplate code. This is the syntax of the TaskFlow API, which is Airflow's lightweight framework for defining tasks. This `print_num_people_in_space` task pulls the number of people in space from XCom and prints it to the logs. Learn more about XCom in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
 
     You can put this decorator on top of any Python function to turn your code into an Airflow task. This is one of the features that makes Airflow so powerful: Any action that can be defined in Python, no matter how complex, can be orchestrated using Airflow.
+    
+    Each task in an Airflow DAG requires a unique `task_id`. Here we can see why that's important: the `num_people_in_space` task can call the unique `get_astronauts` task to pull the data it generated from XCom.
 
 6. Add a second task to your DAG:
 
@@ -258,7 +261,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     )
     ```
 
-    For common tasks in Airflow, you can use pre-built [operators](what-is-an-operator.md) instead of writing your own function. An operator is a Python class containing the logic to define the work to be completed by a single task. This second task, `print_reaction`, uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/bashoperator) to run a bash command that prints `This is awesome!` to the logs. The first parameter of the task (`task_id`) defines the name of the task that appears in the Airflow UI. 
+    For common operations, you can use pre-built [operators](what-is-an-operator.md) instead of writing your own function. An operator is a Python class containing the logic to define the work to be completed by a single task. `print_reaction` uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/bashoperator) to run a bash command.
 
 7. Define the dependencies between the two tasks using the `chain` function:
 
@@ -299,7 +302,7 @@ When your new DAG appears in the Airflow UI, you can run it to test it.
 
     ![Screenshot of the Airflow Grid view showing a successful run of the my_astronauts_dag DAG.](/img/tutorials/get-started-with-airflow_grid_view_my_astronauts_dag.png)
 
-3. The `my_astronauts_dag` is scheduled to run whenever the `current_astronauts` [Dataset](airflow-datasets.md) is updated by a successful run of the `get_astronauts` task in the `example_astronauts` DAG. Trigger another manual run of the `example_astronauts` DAG to see the `my_astronauts_dag` run again, as soon as the `get_astronauts` task has completed.
+3. The `my_astronauts_dag` is scheduled to run whenever the `current_astronauts` dataset is updated by a successful run of the `get_astronauts` task in the `example_astronauts` DAG. Trigger another manual run of the `example_astronauts` DAG to see the `my_astronauts_dag` run again after the `get_astronauts` task completes.
 
 ## Step 8: View task logs
 
