@@ -5,6 +5,9 @@ id: get-started-with-airflow
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import my_astronauts_dag from '!!raw-loader!../code-samples/dags/get-started-with-airflow/my_astronauts_dag.py';
+
 Getting started with [Apache Airflow](https://airflow.apache.org/docs/apache-airflow/stable/index.html) is easy with the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 
 Follow this tutorial if you're new to Apache Airflow and want to create and run your first data pipeline.
@@ -194,14 +197,6 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     from pendulum import datetime
     ```
 
-    The imported packages are:
-
-    - The `dag` and `task` decorators from Airflow, which are used to define the DAG and TaskFlow API tasks. For more information, see [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md). 
-    - A traditional Airflow operator that simplifies running a bash command, the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/BashOperator).
-    - The `Dataset` class from Airflow, which is used to schedule this DAG to run whenever the `example_astronauts` DAG's `get_astronauts` task completes successfully. For more information, see [Datasets and data-aware scheduling in Airflow](airflow-datasets.md).
-    - The `chain` function from Airflow, which is used to define task dependencies. For more information, see [Manage task and task group dependencies in Airflow](managing-dependencies.md).
-    - The `datetime` class from the [pendulum package](https://pendulum.eustace.io/), which is used to define the `start_date` of the DAG.
-
 4. Instantiate a DAG using the `@dag` decorator on top of a Python function:
 
     ```python
@@ -279,7 +274,9 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 
     This notation is unique to Airflow and is functionally equivalent to the `chain` function shown above.
 
-8. Save your code.
+8. Save your code. Your DAG should look like this:
+
+    <CodeBlock language="python">{my_astronauts_dag}</CodeBlock>
 
 ## Step 7: Run the new DAG
 
@@ -333,3 +330,14 @@ Repeat steps 1-3 for the `print_reaction` task. The task logs should include the
 ## Next steps
 
 Congratulations! You've written and run your first DAG in Airflow. You've also learned how to navigate the Airflow UI and view task logs. To continue learning about Airflow, see [Get started with Apache Airflow, Part 2: Providers, connections, and variables](get-started-with-airflow-part-2.md).
+
+## See also
+
+- [An introduction to the Airflow UI](airflow-ui.md)
+- [Introduction to Airflow DAGs](dags.md)
+- [Airflow operators](what-is-an-operator.md)
+- [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md)
+- [Datasets and data-aware scheduling in Airflow](airflow-datasets.md)
+- [Pass data between tasks](airflow-passing-data-between-tasks.md)
+- [Manage task and task group dependencies in Airflow](managing-dependencies.md)
+- [Create dynamic Airflow tasks](dynamic-tasks.md)
