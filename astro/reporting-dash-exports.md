@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Set up reporting data exports'
+sidebar_label: 'Export reporting data'
 title: "Export data reports and set up alerts"
 id: reporting-dash-exports
 description: "Export data from reporting dashboards or configure conditional exports as alerts."
@@ -19,21 +19,27 @@ Only users with **Organization Billing Admin** [user permissions](user-permissio
 
 :::
 
-Hover over the dashboard element whose data you want to export, and then expand the additional options menu to choose to either **Export** your data or **Alert when** to email your data to you when it meets your specified criteria.
+As an Astro administrator, you might want to export reporting data to share with other team members or to keep a record of key performance indicators. Astro supports several different methods for exporting reporting data based on how and when you want to receive the data. Specifically, you can export data:
+
+- Manually through the Cloud UI.
+- On a regular schedule.
+- Whenever a certain condition is met, such as a metric reaching a specific threshold.
+
+When you export reporting data, Astro exports the last 1.0M of data from a specific dashboard in the file format of your choice. Use this document to learn about the different ways you can trigger the export process.
 
 ![Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert.](/img/docs/dash-open-menu.png)
 
-## Download data
+## Download reporting data
 
 In the **Export** menu, you can choose to download up to 1.0 M rows of data in a particular file format.
 
-## Email a data export
+### Export reporting data to email
 
 Instead of downloading your data directly, you can choose to email it to a specified address by choosing **Export** > **Send now**. Enter the recipient's email address and optionally edit the subject line and email body message. Then, in the **Attachments** section, select the report you want to send and file format to include it as. You can choose the from the same file types available for a one-time data download. To send more than one report, click **+ Add**.
 
 :::tip
 
-When you configure a data export or alert that is sent to an email address, you can choose to run the report with their level of user permissions by clicking **Run queries as recipient** in the **More options** section.
+If you need to send data to a member of your team with fewer permissions on Astro, you can export the report with the recipient's level of user permissions by clicking **Run queries as recipient** in the **More options** section.
 
 :::
 

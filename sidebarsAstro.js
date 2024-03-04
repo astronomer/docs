@@ -191,7 +191,7 @@ module.exports = {
            "organization-metrics",
            {
             type: "category",
-            label: "Reporting Dashboard",
+            label: "Reporting dashboards,
             items: ["reporting-dashboard",
             "reporting-dash-exports",
             ],
