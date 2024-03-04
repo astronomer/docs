@@ -26,6 +26,7 @@ To complete this tutorial, you'll need to know:
 
 ## Prerequisites
 
+- The [Astro CLI](docs.astronomer.io/astro/cli/get-started-cli) version 1.25.0 or later.
 - The completed project from [Part 1: Write your first DAG](get-started-with-airflow.md).
 - A GitHub account with a personal access token and at least one repository. If you don’t have a GitHub repository you can follow the [steps in the GitHub documentation](https://docs.github.com/en/get-started/quickstart/create-a-repo) on how to create one.
 
@@ -50,7 +51,9 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 
 ## Step 2: Add a provider package
 
-1. Open the Airflow UI to confirm that your DAG was pushed to your environment. On the **DAGs** page, you should see a "DAG Import Error" like the one shown here:
+1. If your Airflow project is not running locally yet, run `astro dev start` in the your Astro project directory to start your Airflow environment.
+
+2. Open the Airflow UI to confirm that your DAG was pushed to your environment. On the **DAGs** page, you should see a "DAG Import Error" like the one shown here:
 
     ![Screenshot of the Airflow UI Showing an Import Error saying: ModuleNotFoundError: No module named 'airflow.providers.github'](/img/tutorials/get-started-with-airflow-part-2_ImportError.png)
 
@@ -58,13 +61,14 @@ The new DAG interacts with GitHub and two external APIs to print the location of
 
     Your DAG uses operators from two Airflow provider packages: the [HTTP provider](https://registry.astronomer.io/providers/http/versions/latest) and the [GitHub provider](https://registry.astronomer.io/providers/github/versions/latest). While the HTTP provider is pre-installed in the Astro Runtime image, the GitHub provider is not, which causes the DAG import error.
 
-2. Open the [GitHub provider page](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest) in the Astronomer Registry.
+3. Open the [GitHub provider page](https://registry.astronomer.io/providers/apache-airflow-providers-github/versions/latest) in the Astronomer Registry.
 
-    ![GitHub Provider](/img/tutorials/get-started-with-airflow-part-2_GitHubProvider.png)
+4. Copy the provider name and version by clicking **Use Provider** in the top right corner.
 
-3. Copy the provider name and version by clicking **Use Provider** in the top right corner.
-4. Paste the provider name and version into the `requirements.txt` file of your Astro project. Make sure to only add `apache-airflow-providers-github=<version>` without `pip install`.
-5. Restart your Airflow environment by running `astro dev restart`. Unlike DAG code changes, package dependency changes require a complete restart of Airflow.
+    ![Screenshot of the Astronomer Registry showing the GitHub provider page with the Use Provider button highlighted.](/img/tutorials/get-started-with-airflow-part-2_GitHubProvider.png)
+
+5. Paste the provider name and version into the `requirements.txt` file of your Astro project. Make sure to only add `apache-airflow-providers-github=<version>` without `pip install`.
+6. Restart your Airflow environment by running `astro dev restart`. Unlike DAG code changes, package dependency changes require a complete restart of Airflow.
 
 ## Step 3: Add an Airflow variable
 
@@ -109,7 +113,7 @@ You should now have two connections as shown in the following screenshot:
 
 Now that your Airflow environment is configured correctly, look at the DAG code you copied from the repository to see how your new variable and connections are used at the code level.
 
-At the top of the file, the DAG is described in a docstring. It's highly recommended to always document your DAGs  and include any additional connections or variables that are required for the DAG to work.
+At the top of the file, the DAG is described in a docstring. It's highly recommended to always document your DAGs and include any additional connections or variables that are required for the DAG to work.
 
 ```python
 """
@@ -212,66 +216,66 @@ The DAG itself has three tasks:
     This task utilizes the Airflow variable (`my_github_repo`) and the Airflow connection (`my_github_connection`) to access the correct repository with the appropriate credentials. The [sensor](what-is-a-sensor.md) checks for the tag every 5 seconds (`poke_interval`) and times out after one hour (`timeout`). It is best practice to always set a `timeout` because the default value is 7 days, which can impact performance if left unchanged in DAGs that run on a higher frequency.
 
     ```python
-        github_sensor = GithubSensor(
-            task_id="github_sensor",
-            github_conn_id="my_github_conn",
-            method_name="get_repo",
-            method_params={"full_name_or_id": YOUR_GITHUB_REPO_NAME},
-            result_processor=lambda repo: commit_message_checker(repo, YOUR_COMMIT_MESSAGE),
-            timeout=60 * 60,
-            poke_interval=5,
-        )
+    github_sensor = GithubSensor(
+        task_id="github_sensor",
+        github_conn_id="my_github_conn",
+        method_name="get_repo",
+        method_params={"full_name_or_id": YOUR_GITHUB_REPO_NAME},
+        result_processor=lambda repo: commit_message_checker(repo, YOUR_COMMIT_MESSAGE),
+        timeout=60 * 60,
+        poke_interval=5,
+    )
     ```
 
 - The second task uses the HttpOperator to send a `GET` request to the `/iss-now.json` endpoint of the [Open Notify API](http://open-notify.org/Open-Notify-API/) to retrieve the current location of the ISS. The response is logged to the Airflow task logs and pushed to the [XCom](airflow-passing-data-between-tasks.md) table in the Airflow metadata database to be retrieved by downstream tasks.
 
     ```python
-        get_iss_coordinates = HttpOperator(
-            task_id="get_iss_coordinates",
-            http_conn_id="open_notify_api_conn",
-            endpoint="/iss-now.json",
-            method="GET",
-            log_response=True,
-        )
+    get_iss_coordinates = HttpOperator(
+        task_id="get_iss_coordinates",
+        http_conn_id="open_notify_api_conn",
+        endpoint="/iss-now.json",
+        method="GET",
+        log_response=True,
+    )
     ```
 
 - The third task uses the [TaskFlow API's](airflow-decorators.md) `@task` decorator to run a Python function that processes the coordinates returned by the `get_iss_coordinates` task and prints the city and country of the ISS's location to the task logs. The coordinates are passed to the function as an argument using `get_iss_coordinates.output`, which accesses the data returned by the `get_iss_coordinates` task from XComs.
 
-    The following is an example of how you can use a traditional operator (HttpOperator) and a TaskFlow API task to perform similar operations, in this case querying an API. The best way to write tasks depends on your use case and often comes down to personal preference.
+    The second and third task are an example of how you can use a traditional operator (HttpOperator) and a TaskFlow API task to perform similar operations, in this case querying an API. The best way to write tasks depends on your use case and often comes down to personal preference.
 
     ```python
-        @task
-        def log_iss_location(location: str) -> dict:
-            """
-            This task prints the current location of the International Space Station to the logs.
-            Args:
-                location (str): The JSON response from the API call to the Open Notify API.
-            Returns:
-                dict: The JSON response from the API call to the Reverse Geocode API.
-            """
-            import requests
-            import json
+    @task
+    def log_iss_location(location: str) -> dict:
+        """
+        This task prints the current location of the International Space Station to the logs.
+        Args:
+            location (str): The JSON response from the API call to the Open Notify API.
+        Returns:
+            dict: The JSON response from the API call to the Reverse Geocode API.
+        """
+        import requests
+        import json
 
-            location_dict = json.loads(location)
+        location_dict = json.loads(location)
 
-            lat = location_dict["iss_position"]["latitude"]
-            lon = location_dict["iss_position"]["longitude"]
+        lat = location_dict["iss_position"]["latitude"]
+        lon = location_dict["iss_position"]["longitude"]
 
-            r = requests.get(
-                f"https://api.bigdatacloud.net/data/reverse-geocode-client?{lat}?{lon}"
-            ).json()
+        r = requests.get(
+            f"https://api.bigdatacloud.net/data/reverse-geocode-client?{lat}?{lon}"
+        ).json()
 
-            country = r["countryName"]
-            city = r["locality"]
+        country = r["countryName"]
+        city = r["locality"]
 
-            task_logger.info(
-                f"The International Space Station is currently over {city} in {country}."
-            )
+        task_logger.info(
+            f"The International Space Station is currently over {city} in {country}."
+        )
 
-            return r
+        return r
 
-        # calling the @task decorated task with the output of the get_iss_coordinates task
-        log_iss_location_obj = log_iss_location(get_iss_coordinates.output)
+    # calling the @task decorated task with the output of the get_iss_coordinates task
+    log_iss_location_obj = log_iss_location(get_iss_coordinates.output)
     ```
 
 Lastly, the dependency between the three tasks is set so that the `get_iss_coordinates` task only runs after the `github_sensor` task is successful and the `log_iss_location` task only runs after the `get_iss_coordinates` task is successful. This is done using the `chain` method. You can learn more about setting dependencies between tasks in the [Manage task and task group dependencies in Airflow](managing-dependencies.md) guide.
