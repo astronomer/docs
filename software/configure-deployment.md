@@ -267,9 +267,13 @@ You can run a cron job to automatically archive task and DAG metadata from your 
     You can skip this step for Deployments running Astro Runtime 8 or later.
     
 2. Authorize your Deployments to your external storage service so that the webserver Pod can export the results of your cleanup jobs in JSON or URI Format. You can authorize your Deployment using one of the following methods:
-The credentials can be stored using one of two methods:
-- `Airflow Connections` (See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#storing-connections-in-environment-variables) to learn how to configure your connection)
-- `Kubernetes Secrets` ( See [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) to configure via kibernetes secrets.). The secret can be created in `astronomer` namespace for global configuration. To pass the secret to all the deployments annotate the secret `kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"`.
+
+    - Configure an [Airflow connection] in the Deployment that connects to your external storage service.
+    - To configure a global connection for all Deployments, create a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret) containing an Airflow connection to your external storage service. The connection must be defined in either JSON or URI format. To pass the secret to all the Deployments, annotate the secret using the following command: 
+    
+    ```sh
+    kubectl annotate secret <secret-name> "astronomer.io/commander-sync"="platform=astronomer"
+    ```
 
 3. Add the following configuration to your `config.yaml` file and change the default values as needed.
    
