@@ -224,21 +224,21 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 5. Add a task to your DAG:
 
     ```python
-    @task
-    def print_num_people_in_space(**context) -> None:
-        """
-        This task pulls the number of people currently in space from XCom. The number is
-        pushed by the `get_astronauts` task in the `example_astronauts` DAG.
-        """
+        @task
+        def print_num_people_in_space(**context) -> None:
+            """
+            This task pulls the number of people currently in space from XCom. The number is
+            pushed by the `get_astronauts` task in the `example_astronauts` DAG.
+            """
 
-        num_people_in_space = context["ti"].xcom_pull(
-            dag_id="example_astronauts",
-            task_ids="get_astronauts",
-            key="number_of_people_in_space",
-            include_prior_dates=True,
-        )
+            num_people_in_space = context["ti"].xcom_pull(
+                dag_id="example_astronauts",
+                task_ids="get_astronauts",
+                key="number_of_people_in_space",
+                include_prior_dates=True,
+            )
 
-        print(f"There are currently {num_people_in_space} people in space.")
+            print(f"There are currently {num_people_in_space} people in space.")
     ```
 
     The `@task` decorator lets you define Python functions with very little boilerplate code. This is the syntax of the TaskFlow API, which is Airflow's lightweight framework for defining tasks. This `print_num_people_in_space` task pulls the number of people in space from XCom and prints it to the logs. Learn more about XCom in the [Pass data between tasks](airflow-passing-data-between-tasks.md) guide.
@@ -250,10 +250,10 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 6. Add a second task to your DAG:
 
     ```python
-    print_reaction = BashOperator(
-        task_id="print_reaction",
-        bash_command="echo This is awesome!",
-    )
+        print_reaction = BashOperator(
+            task_id="print_reaction",
+            bash_command="echo This is awesome!",
+        )
     ```
 
     For common operations, you can use pre-built [operators](what-is-an-operator.md) instead of writing your own function. An operator is a Python class containing the logic to define the work to be completed by a single task. `print_reaction` uses the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/versions/latest/modules/bashoperator) to run a bash command.
@@ -261,7 +261,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
 7. Define the dependencies between the two tasks using the `chain` function:
 
     ```python
-    chain(print_num_people_in_space(), print_reaction)
+        chain(print_num_people_in_space(), print_reaction)
     ```
 
     The `chain` function is used to define task dependencies. In this example, `print_num_people_in_space` is **upstream** of `print_reaction`, meaning that `print_num_people_in_space` must finish before `print_reaction` can start. For more information on how to define task dependencies, see [Managing Dependencies in Apache Airflow](managing-dependencies.md).
@@ -269,12 +269,18 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     Alternatively you can use bitshift operators to define the dependencies between the two tasks:
 
     ```python
-    print_num_people_in_space >> print_reaction
+        print_num_people_in_space >> print_reaction
     ```
 
     This notation is unique to Airflow and is functionally equivalent to the `chain` function shown above.
 
-8. Save your code. Your DAG should look like this:
+8. Lastly, call the DAG function:
+
+    ```python
+    my_astronauts_dag()
+    ```
+
+9. Save your code. Your DAG should look like this:
 
     <CodeBlock language="python">{my_astronauts_dag}</CodeBlock>
 
