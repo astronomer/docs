@@ -75,7 +75,7 @@ If you toggle **Condition** when setting up your schedule, it allows you to conf
 
 ## Create a reporting dashboard alert
 
-You can create an alert in your reporting dashboard, allowing Astro to send you a data report in an email if your data meets certain conditions or criteria.
+A reporting dashboard alert is an email containing a message and a data export that Astro sends when specific criteria are met in one of your reporting metrics. Use reporting dashboard alerts to quickly receive messages and data when your metrics reach a specific threshold, such as when task failures exceed a certain amount.
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu for the reporting element you want to set up an alert for.
@@ -86,5 +86,5 @@ You can create an alert in your reporting dashboard, allowing Astro to send you 
 
 <img src={require("../static/img/docs/dash-export-alert.png").default} alt="Configure the conditions that trigger the reporting dashboard to send you a data report for a particular dashboard element." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
-Similar to an emailed dashboard report, when you receive a reporting dashboard alert in an email, the sender appears as **Sigma Computing**. The subject line also includes the name of the dashboard element's data you exported.
+When you receive a reporting dashboard alert in an email, the sender appears as **Sigma Computing**. The subject line also includes the name of the dashboard element's data you exported.
 
