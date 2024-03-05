@@ -232,7 +232,12 @@ module.exports = {
               'info',
               'tip',
               'cli',
-              'highlight'
+              'highlight',
+              'privatepreview',
+              'publicpreview',
+              'cliastroonly',
+              'clisoftwareonly',
+              'cliastroandsoftware'
             ],
             extendDefaults: true,
           },
