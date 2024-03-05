@@ -7,7 +7,7 @@ description: "Export data from reporting dashboards or configure conditional exp
 
 :::info
 
-Organization reporting dashboards are only available at the Enterprise product tier.
+Organization reporting dashboards are only available if you have an Enterprise product plan.
 
 :::
 
