@@ -1,13 +1,18 @@
 ---
 title: "Create and assign custom roles for Astro Deployments"
 id: customize-deployment-roles
-unlisted: true
 description: Customize your users' permissions for Airflow environments on Astro.
 ---
 
 :::caution
 
 This feature is in [Private Preview](feature-previews.md).
+
+:::
+
+:::caution
+
+This feature is available only in the Enterprise tier.
 
 :::
 
@@ -56,19 +61,10 @@ Astro provides a few Deployment role templates that you can use as the basis for
 
 ## Assign users and Teams to Deployments
 
+Using Deployment roles, you can add users and Teams directly to Deployments without first assigning them to a Workspace. If they don't already belong to the Workspace, Astro grants them the _Workspace Accessor_ role. A Workspace Accessor only has permissions to access their assigned Deployments within the Workspace. All other Deployments and Workspace settings are hidden.
 
 1. In the Cloud UI, open the Deployment where you want to assign the user entity.
 2. Click **Access**, then click **Users** or **Teams** depending on what kind of user entity you want to assign to the Deployment.
 3. Click **+ User**/ **+ Team**.
 4. In the window that appears, select the user entity you want to add, then select the role they will have in the Deployment.
 5. Click **Add User**/ **Add Team**.
-
-## Create Deployment API tokens with custom Deployment roles
-
-By default, Deployment API tokens have Deployment Admin permissions. You can alternatively create or update Deployment API tokens to use any of your configured custom Deployment roles. 
-
-1. In the Cloud UI, open the Deployment where you want to assign the user entity.
-2. Click **Access**, then click **API Tokens**.
-3. Click **+ Deployment API Token**.
-4. In the window that appears, select give your new Deployment API key a name, custom role, and expiration date.
-5. Click **Add Deployment API token**.

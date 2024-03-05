@@ -218,6 +218,7 @@ module.exports = {
           label: "Deployments",
           items: [
             "deployment-api-tokens",
+            "customize-deployment-roles",
             "authorize-deployments-to-your-cloud",
             "transfer-a-deployment",
           ],
