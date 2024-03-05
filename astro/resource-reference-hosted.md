@@ -37,10 +37,6 @@ If you're on your organization's network and can't access Astro, make a request 
 - `https://astro-<organization-short-name>.datakin.com/`
 - `https://<organization-short-name>.astronomer.run/`
 
-## Deployment resources
-
-Astro supports Deployments with varying levels of resource usage.
-
 ## Standard cluster regions
 
 A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astronomer. Astronomer maintains standard clusters in a limited regions and clouds, with support for more regions and clouds coming soon.
