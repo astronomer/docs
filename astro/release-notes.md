@@ -21,6 +21,21 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## March 5, 2024
+
+### Customize Deployment-level permissions using Deployment roles
+
+### Export data from reporting dashboards
+
+### Additional improvements
+
+- The Cloud UI has been renamed to the Astro UI across all help text and documentation.
+
+### Bug fixes
+
+- Fixed an issue where usage per Pod metrics did not render correctly in the Deployment **Analytics** page.
+- Fixed an issue where the Astro UI didn't show all available Teams when selecting Teams to add to a Workspace.
+
 ## February 27, 2024
 
 ### Use a custom service account to authorize Deployments to GCP
