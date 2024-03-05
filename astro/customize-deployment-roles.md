@@ -1,5 +1,6 @@
 ---
 title: "Create and assign custom roles for Astro Deployments"
+sidebar_label: Custom Deployment roles 
 id: customize-deployment-roles
 description: Customize your users' permissions for Airflow environments on Astro.
 ---

@@ -347,6 +347,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        'deployment-role-reference',
         "allowlist-domains",
         "feature-previews",
         {
