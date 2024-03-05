@@ -8,7 +8,7 @@ description: Learn about each possible permission that you can assign to custom 
 :::privatepreview
 :::
 
-:::caution
+:::info
 
 This feature is available only in the Enterprise tier.
 
