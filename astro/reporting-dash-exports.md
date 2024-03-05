@@ -64,13 +64,6 @@ When you receive a report via email, the sender appears as **Sigma Computing**. 
 
 3. Enter the recipient's email address and optionally edit the subject line and email body message.
 
-    :::tip
-
-    If you need to send data to a member of your team with fewer permissions on Astro, you can export the report with the recipient's level of user permissions by clicking **Run queries as recipient** in the **More options** section. The exported report omits all data that the team member can't access with their existing role.
-
-    :::
-
-
 If you toggle **Condition** when setting up your schedule, it allows you to configure a conditional data export, or *reporting dashboard alert*. Instead of sending a report at a specific time interval, it sends a data report when your data meets criteria that you define.
 
 ## Create a reporting dashboard alert
