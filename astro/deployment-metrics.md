@@ -38,9 +38,9 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
 ### Airflow workers and schedulers
 
-These metrics contain information about the Kubernetes Pods running your workers and schedulers. Different worker and scheduler Pods will appear on these charts as differently colored lines. 
+These metrics contain infrastructure use information about your workers and schedulers. Unique worker and scheduler instances appear on these charts as different colored lines.
 
-Hover over the graph to view a graph legend. If a given worker queue spins a worker down and back up again within a given interval, the newly spun up worker appears as a new color on the graph. 
+Hover over the graph to view a graph legend. If a given worker queue spins a worker down and back up again within a given interval, the newly spun up worker appears as a new color on the graph.
 
 ![Worker analytics in the Cloud UI](/img/docs/analytics-workers.png)
 
@@ -51,9 +51,9 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
 - **Memory Usage Per Pod (MB)**: This metric graphs the peak memory usage for all workers and schedulers as a percentage of your maximum memory capacity. Different worker and scheduler Pods will appear as differently colored lines on this chart. This metric should be at or below 50% of your total allowed memory at any given time. For scheduler metrics, the maximum allowable memory for each scheduler Pod appears as a dotted red line.
 
     :::info
-    
+
     The number of workers per Deployment autoscales based on a combination of worker concurrency and the number of `running` and `queued` tasks. This means that the total available CPU and memory for a single Deployment may change at any time.
-    
+
     :::
 
 - **Network Usage Per Pod (MB)**: This metric graphs each worker/ scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
@@ -131,6 +131,6 @@ The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibili
 
 ## See also
 
-- [Organization metrics](organization-metrics.md)
+- [Organization reporting dashboard](reporting-dashboard.md)
 - [Export task logs and metrics to Datadog](export-datadog.md)
 - [Export task logs to AWS Cloudwatch](export-cloudwatch.md)
