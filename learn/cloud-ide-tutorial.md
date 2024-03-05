@@ -358,7 +358,7 @@ Export your pipeline by committing it to your connected GitHub repository.
 
 Astro supports CI/CD with GitHub Actions. You can use GitHub Actions to deploy your DAG to Astro automatically when you commit changes to your DAG from within the Cloud IDE to a branch that is configured for CI/CD.
 
-1. Follow the steps in the Astro documentation on setting up a [GitHub Actions workflow](https://docs.astronomer.io/astro/ci-cd-templates/github-actions) for your `cloud-ide-branch` branch.
+1. Follow the steps in the Astro documentation on setting up a [GitHub Actions workflow](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-template) for your `cloud-ide-branch` branch.
 
 2. Make a small change to your code, such as adding a comment in the `train_model` cell and commit the change. This second commit will trigger GitHub Actions again.
 
