@@ -23,17 +23,30 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## March 5, 2024
 
+### Export data from reporting dashboards
+
+You can now export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
+
 ### Customize Deployment-level permissions using Deployment roles
 
-### Export data from reporting dashboards
+:::privatepreview
+:::
+
+Custom Deployment roles are a new way to define granular permissions for Astro users. For the first time, you can set a user's permissions at the Deployment level and define which specific parts of a Deployment they can access or modify. Use custom Deployment roles to have users collaborate in the same Workspace with only the minimum permissions they require. See [Customize Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) for more information.
+
+### New Deployment registry cache to improve resiliency
+
+Deployments now include a cache of Astronomer's image registry that stores the current Astro Runtime image for your Deployment. Because Deployments now always have access to their running image, image registry outages should no longer result in failed DAG runs.
 
 ### Additional improvements
 
+- Removed nonfunctional network usage per Pod metrics from the Deployment **Analytics** page.
+- The deprecation date for Deployment API keys has been changed from April 1, 2024 to June 1, 2024.
 - The Cloud UI has been renamed to the Astro UI across all help text and documentation.
 
 ### Bug fixes
 
-- Fixed an issue where usage per Pod metrics did not render correctly in the Deployment **Analytics** page.
+- Fixed an issue where CPU usage per Pod metrics did not render correctly in the Deployment **Analytics** page.
 - Fixed an issue where the Astro UI didn't show all available Teams when selecting Teams to add to a Workspace.
 
 ## February 27, 2024
