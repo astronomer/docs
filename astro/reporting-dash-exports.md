@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Export reporting data'
-title: "Export data reports and set up alerts"
+title: "Export Astro reporting data"
 id: reporting-dash-exports
 description: "Export data from reporting dashboards or configure conditional exports as alerts."
 ---
@@ -84,7 +84,7 @@ A reporting dashboard alert is an email containing a message and a data export t
 
 3. Click **Alert when**. In the **Condition** section that appears, define when you want the reporting dashboard to send the data report.
 
-<img src={require("../static/img/docs/dash-export-alert.png").default} alt="Configure the conditions that trigger the reporting dashboard to send you a data report for a particular dashboard element." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+    <img src={require("../static/img/docs/dash-export-alert.png").default} alt="Configure the conditions that trigger the reporting dashboard to send you a data report for a particular dashboard element." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 When you receive a reporting dashboard alert in an email, the sender appears as **Sigma Computing**. The subject line also includes the name of the dashboard element's data you exported.
 
