@@ -6,7 +6,7 @@ import IconInfo from '@theme/Admonition/Icon/Info';
 const infimaClassName = 'alert alert--info';
 const defaultProps = {
   icon: <IconInfo />,
-  children: <div class="admonitionContent">This command is available for both Astro and Astronomer Software.</div>,
+  children: <div class="admonitionContent">This command is available for both Astro and Astronomer Software. Any difference in usage will be documented in separate tabs for each product. </div>,
   title: (
     <Translate
       id="theme.admonition.Info"
