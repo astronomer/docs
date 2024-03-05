@@ -23,9 +23,11 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## March 5, 2024
 
-### Export data from reporting dashboards
+### Reporting dashboards are now generally available
 
-You can now export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
+[Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now generally available to use for examining key metrics across your Organization.
+
+You can also export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
 
 ### Customize Deployment-level permissions using Deployment roles
 
@@ -41,7 +43,7 @@ Deployments now include a cache of Astronomer's image registry that stores the c
 ### Additional improvements
 
 - Removed nonfunctional network usage per Pod metrics from the Deployment **Analytics** page.
-- The deprecation date for Deployment API keys has been changed from April 1, 2024 to June 1, 2024.
+- The deprecation date for Deployment API keys has been changed to June 1, 2024.
 - The Cloud UI has been renamed to the Astro UI across all help text and documentation.
 - Due to a minor change to Astronomer cluster architecture, you can add custom tags to Hybrid clusters on AWS.
 
