@@ -8,6 +8,7 @@ toc_max_heading_level: 2
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import HostedBadge from '@site/src/components/HostedBadge';
 
 When you create an Airflow connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment. 
 
@@ -92,9 +93,34 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 <TabItem value="gcp">
 
-### Authorize your Deployment through GCP Service Account Impersonation
+### Attach a service account to your Deployment
 
-[GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) allows your Deployment's workload identity to assume an existing service account in your GCP project. This is the most secure authorization setup because your Deployment only uses generated, short-lived credentials for a service account, rather than a persistent and static service account key. 
+<HostedBadge/>
+
+You can attach a custom GCP service account to your Deployment to grant the Deployment all of the service account's permissions.
+
+Using service accounts provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that all have the same level of access to your cloud.
+
+1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
+2. In the Cloud UI, select your Deployment, then click **Details**. In the **Advanced** section, click **Edit**.
+3. In the **Workload Identity** menu, select **Customer Managed Identity**
+4. Enter your GCP service account ID when prompted, then copy and run the provided gcloud CLI command. 
+5. Click **Update Deployment**. The service account is now selectable as a workload identity for the Deployment.
+6. Complete one of the following options for your Deployment to access your cloud resources:
+
+    - Create a **Google Cloud** connection type in Airflow and configure the following values:
+      - **Connection Id**: Enter a name for the connection.
+      - **Impersonation Chain**: Enter the ID of the service account that your Deployment should impersonate.
+        
+    - To access resources in a secrets backend, run the following command to create an environment variable that grants access to the secrets backend:
+
+    ```zsh
+    astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>", "impersonation_chain": "<your-gcp-service-account>"}
+    ```
+
+### Alternative setup: Authorize your Deployment through GCP service account impersonation
+
+If your organization has requirements over how service accounts are managed outside of your cloud, you can manually configure [GCP service account impersonation](https://cloud.google.com/docs/authentication/use-service-account-impersonation) to allow your Deployment's default workload identity to impersonate a service account in your GCP project.
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
 2. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
@@ -125,7 +151,7 @@ To grant a Deployment access to a service that is running in a GCP account not m
 
 To authorize your Deployment, grant the required access to your Deployment's workload identity:
 
-1. In the Cloud UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
+1. In the Cloud UI, select your Deployment, then click **Details**. In the **Workload Identity** dropdown menu, select **Default Identity**. Then, copy the workload identity that appears next to the dropdown menu.
 
 2. Grant your Deployment's workload identity an IAM role that has access to your external data service. To do this with the Google Cloud CLI, run:
 

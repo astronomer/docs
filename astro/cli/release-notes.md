@@ -16,7 +16,41 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-- **Stable versions**: 1.23.0, 1.22.0, and 1.21.0. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+- **Stable versions**: 1.24.1, 1.23.0, and 1.22.0. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+
+## Astro CLI 1.24.1
+
+Release date: February 29, 2024
+
+### Bug fixes
+
+- Fixed an issue where the Astro CLI would experience a code panic if you tried to set a hibernation schedule for a Deployment that didn't exist.
+- Fixed an issue where the Astro CLI would send and retrieve hibernation schedules for non-development Deployments.
+
+## Astro CLI 1.24.0
+
+Release date: February 27, 2024
+
+### Support for hibernating development Deployments
+
+You can now use the Astro CLI to hibernate or wake up a development Deployment. These commands work well in automated processes where a Deployment requires flexibility for when it hibernates. Note that you can hibernate a Deployment only if you enable **Development Mode** when you [create the Deployment](create-deployment.md).
+
+Use the following new commands to hibernate development Deployments regardless of their existing hibernation schedule:
+
+- [`astro deployment hibernate`](https://docs.astronomer.io/astro/cli/astro-deployment-hibernate)
+- [`astro deployment wake-up`](https://docs.astronomer.io/astro/cli/astro-deployment-wake-up)
+
+Additionally, you can create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
+
+### Additional improvements
+
+- You can now configure a custom workload identity when you create a Deployment using a Deployment file. 
+- Added support for the upcoming custom role management feature on Astro
+
+### Bug fixes
+
+- Fixed an issue where `astro deployment variable list --save` didn't format secret environment variables correctly.
+- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token. 
 
 ## Astro CLI 1.23.0
 
@@ -49,7 +83,7 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 
 The following changes have been made to the format of [Deployment files](deployment-file-reference.md):
 
-- `cluster_name` is no longer used for standard Deployment files.
+- You no longer have to specify a `cluster_name` for standard Deployment files. 
 - `scheduler_size` is no longer case sensitive.
 - Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
 - Possible values for `deployment_type` now include `standard`, `dedicated`, and `hybrid` in addition to the existing values of `hosted_shared`, `hosted_dedicated`, and `hosted_standard`. This input is not case sensitive
@@ -398,7 +432,7 @@ You can now use the `-—clean-output` flag with the following commands to make 
 - `astro deployment create`
 - `astro deployment update`
 
-This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions.md).
+This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions-deploy-action.md).
 
 ### New environment variable `ASTRO_HOME`
 

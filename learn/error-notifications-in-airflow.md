@@ -57,7 +57,7 @@ The OSS notification library [Apprise](https://github.com/caronc/apprise) contai
 
 It's best practice to use pre-built solutions whenever possible. This approach makes your DAGs more robust by reducing custom code and standardizing notifications across different Airflow environments.
 
-If you want to deliver alerts to email, use [email notifications](#email-notifications) for task failures or retries and the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for other events such as successful task runs. To receive alerts for tasks taking longer than expected, use [SLAs](#airflow-service-level-agreements).
+If you want to deliver alerts to email, use [email notifications](#email-notifications) for task failures or retries and the [SmtpNotifier](https://airflow.apache.org/docs/apache-airflow-providers-smtp/stable/_api/airflow/providers/smtp/notifications/smtp/index.html) for other events such as successful task runs.
 
 If a [notifier class](#notifiers) exists for your use case, you should always use these methods instead of a custom callback. See the Airflow documentation for [an up-to-date list of available Notifiers](https://airflow.apache.org/docs/apache-airflow-providers/core-extensions/notifications.html) and the [Apprise wiki](https://github.com/caronc/apprise/wiki) for a list of services the Apprise notifier can connect to. 
 
@@ -428,6 +428,12 @@ t1 = PythonOperator(
 
 [Airflow service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period. 
 
+:::tip
+
+Airflow SLAs can be unintuitive, and do not work the way most users expect. If you are an Astronomer customer, consider using the [Astro Task duration or Absolute time alerts](https://docs.astronomer.io/astro/alerts#trigger-types). 
+
+:::
+
 Exceeding an SLA does not stop a task from running. If you want tasks to stop running after a certain time, use [timeouts](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#timeouts).
 
 You can set an SLA for all tasks in your DAG by defining `'sla'` as a default argument, as shown in the following example DAG:
@@ -452,7 +458,7 @@ You can set an SLA for all tasks in your DAG by defining `'sla'` as a default ar
 </TabItem>
 </Tabs>
 
-SLAs have some unique behaviors that you should consider before you implement them:
+Airflow SLAs have some unique behaviors that you should consider before you implement them:
 
 - SLAs are relative to the DAG execution date, not the task start time. For example, in the previous DAG the `sla_task` will miss the 30 second SLA because it takes at least 40 seconds to complete. The `t1` task will also miss the SLA, because it is executed more than 30 seconds after the DAG execution date. In that case, the `sla_task` will be considered blocking to the `t1` task.
 - SLAs will only be evaluated on scheduled DAG Runs. They will not be evaluated on manually triggered DAG Runs.
@@ -490,67 +496,4 @@ There is no functionality to disable email alerting for SLAs. If you have an `'e
 
 ## Astronomer notifications
 
-If you are running Airflow with Astronomer Software or Astro, there are a number of options available for managing your Airflow notifications. All of the previous methods for sending task notifications from Airflow can be implemented on Astronomer. See the [Astronomer Software](https://docs.astronomer.io/software/airflow-alerts) and [Astro](https://docs.astronomer.io/astro/airflow-alerts) documentation to learn how to leverage notifications on the platform, including how to set up SMTP to enable email notifications.
-
-Astronomer also provides deployment and platform-level alerting to notify you if any aspect of your Airflow or Astronomer infrastructure is unhealthy. For more on that, including how to customize notifications for Software users, see [Alerting in Astronomer Software](https://docs.astronomer.io/software/platform-alerts).
-
-## Legacy: Slack notifications pre-2.6
-
-:::info
-
-In Airflow 2.6+ you can use the [SlackNotifier](#pre-built-notifier-slack) to send notifications to Slack from within Airflow in a modularized and standardized way.
-
-:::
-
-If you are on an Airflow version older than 2.6 and want to implement Slack notifications, follow this example.
-It uses the [Slack provider](https://registry.astronomer.io/providers/slack) `SlackWebhookOperator` with a Slack Webhook to send messages. This is the method Slack recommends to post messages from apps.
-
-1. From your Slack workspace, create a Slack app and an incoming Webhook. See [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks). 
-2. Copy the Slack Webhook URL. You'll use it in your Python function.
-3. Create an Airflow connection to provide your Slack Webhook to Airflow. Choose an HTTP connection type. Enter [`https://hooks.slack.com/services/`](https://hooks.slack.com/services/) as the Host, and enter the remainder of your Webhook URL from the last step as the Password (formatted as `T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`). 
-
-    ![Slack Connection](/img/guides/slack_webhook_connection.png)
-
-    In Airflow 2.0 or later, you'll need to install the `apache-airflow-providers-slack` provider package to use the `SlackWebhookOperator`.
-
-4. Create a Python function to use as your `on_failure_callback` method. Within the function, define the information you want to send and invoke the `SlackWebhookOperator` to send the message similar to this example:
-
-    ```python
-    from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
-
-    def slack_notification(context):
-        slack_msg = """
-                :red_circle: Task Failed. 
-                *Task*: {task}  
-                *Dag*: {dag} 
-                *Execution Time*: {exec_date}  
-                *Log Url*: {log_url} 
-                """.format(
-            task=context.get("task_instance").task_id,
-            dag=context.get("task_instance").dag_id,
-            ti=context.get("task_instance"),
-            exec_date=context.get("execution_date"),
-            log_url=context.get("task_instance").log_url,
-        )
-        failed_alert = SlackWebhookOperator(
-            task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
-        )
-        return failed_alert.execute(context=context)
-
-    @dag(
-        start_date=datetime(2023, 1, 1),
-        schedule="@daily",
-        catchup=False
-    )
-    def post_to_slack():
-        @task(
-            on_success_callback=slack_notification
-        )
-        def post_to_slack():
-            return 10
-
-    post_to_slack()
-
-    ```
-
-5. Define your `on_failure_callback` parameter in your DAG either as a `default_arg` for the whole DAG, or for specific tasks. Set it equal to the function you created in the previous step.
+Airflow's built-in notification mechanisms are great for common use cases, but they have some limitations. For the cases where Airflow notifications aren't sufficient, [Astro alerts](https://docs.astronomer.io/astro/alerts) provide an additional level of observability. For guidance on when to choose Airflow notifications or Astro alerts, see [When to use Airflow or Astro alerts for your pipelines on Astro](https://docs.astronomer.io/astro/best-practices/airflow-vs-astro-alerts).
