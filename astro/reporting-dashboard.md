@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Reporting dashboards'
+sidebar_label: 'Access Organization dashboards'
 title: "View metrics across your Organization with Astro reporting dashboards"
 id: reporting-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
@@ -7,7 +7,11 @@ description: "View information about your Organization, Deployments, DAGs, and c
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-:::privatepreview
+:::info Enterprise
+
+Organization reporting dashboards are only available if you have an Enterprise product plan.
+
+:::
 
 Astro provides dashboards that share important metrics about your Organization's use of Astro, which you can use to manage Deployments and resources. These dashboards include:
 
@@ -17,11 +21,11 @@ Astro provides dashboards that share important metrics about your Organization's
 - Cost Breakdown (Hosted only)
 - Operator Use
 
-Dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and tasks within DAGs. For example, you can use the **Deployment Detail** dashboard to identify unexpected DAG behaviors, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly switch between DAGs in a dashboard to identify trends like unusually high compute use, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
+Dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and operators within DAGs. For example, you can use the **Organization Overview** or **Deployment Detail** dashboard to identify unexpected activity, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly check your dashboards to identify trends like unusually high or low rates of task successes, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
 
-To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Cloud UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
+To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). In addition to viewing the dashboards in the Astro UI, you can also [export and email individual reports](reporting-dash-exports.md).
 
-Use the tabs at the bottom of the Cloud UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
+Use the tabs at the bottom of the Astro UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
 
 :::info
 
@@ -86,17 +90,3 @@ In the **Cost Breakdown** dashboard, you can find detailed information about how
 ## Operator use
 
 The **Operator Use** dashboard shows how your Deployments and Workspaces use Operators, as well as how often tasks succeed and fail when using specific operators. Use this data to identify types of operators that could be replaced with more efficient alternatives, or to find operators that fail more than expected. This dashboard provides data to answer the questions, *What are the top operators used across my organization?* and *Which workspace is using the selected operators the most?*.
-
-<!--
-## Export data from reporting dashboards
-
-You can set up your reporting Dashboard to email you data reports on a given time interval or as an alert when certain criteria are met. Or, you can export your data in a one-time action.
-
-1. Hover your cursor anywhere in the Dashboard window or over a specific data element, to see the detailed menu view. This menu includes **Filters**, the option to **Maximize element**, or **Expand menu** further.
-
-2. Expand the menu, and then you can choose
-    - **Sort** the x-axis data
-    - **Alert when...** to define criteria for Astro to send you a Sigma data export of the element or dashboard that you want data about.
-    - **Export** to download the data in a file format of your choosing, like `.csv`.
-    - **Refresh data** to reload the data you're viewing in the Dashboard or element.
--->
