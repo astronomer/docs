@@ -8,22 +8,11 @@ description: "Learn how to run the KubernetesPodOperator on Astro. This operator
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
+The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://docs.astronomer.io/learn/kubepod-operator).
 
-This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources).
+On Astro, the infrastructure required to run the KubernetesPodOperator is built into every Deployment and is managed by Astronomer. Astro supports setting a default Pod configuration so that any task Pods without specific resource requests and limits cannot exceed your expected resource usage for the Deployment.
 
-## Benefits
-
-You can use the KubernetesPodOperator to:
-
-- Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.
-- Run tasks in a Kubernetes cluster outside of Astro. This can be helpful when you need to run individual tasks on infrastructure that isn't currently supported by Astro, such as GPU nodes or other third-party services.
-- Specify CPU and memory as task-level limits or minimums to optimize performance and reduce costs.
-- Write task logic in a language other than Python. This gives you flexibility and can enable new use cases across teams.
-- Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
-- Set Kubernetes-native configurations in a YAML file, including volumes, secrets, and affinities.
-
-On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperator is built into every cluster and is managed by Astronomer.
+Some task-level configurations will differ on Astro compared to other Airflow environments. Use this document to learn how to configure individual task Pods for different use cases on Astro. To configure the default Pod resources for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources).
 
 ## Known limitations
 
@@ -43,9 +32,9 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - An [Astro project](cli/develop-project.md#create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
 
-## Set up the KubernetesPodOperator
+## Set up the KubernetesPodOperator on Astro
 
-To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:
+The following snippet is the minimum configuration you'll need to create a KubernetesPodOperator task on Astro:
 
 ```python
 from airflow.configuration import conf
@@ -69,13 +58,11 @@ KubernetesPodOperator(
 For each instantiation of the KubernetesPodOperator, you must specify the following values:
 
 - `namespace = conf.get("kubernetes", "NAMESPACE")`: Every Deployment runs on its own Kubernetes namespace within a cluster. Information about this namespace can be programmatically imported as long as you set this variable.
-- `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. The value you specify is assumed to be an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, see [Pull images from a Private Registry](kubernetespodoperator.md#run-images-from-a-private-registry).
-
-This is the minimum configuration required to run tasks with the KubernetesPodOperator on Astro. To further customize the way your tasks are run, see the topics below.
+- `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. Astro assumes that this value is an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, see [Pull images from a Private Registry](kubernetespodoperator.md#run-images-from-a-private-registry).
 
 ## Configure task-level Pod resources
 
-Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, which means that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
+Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Unless otherwise specified in your task-level configuration, the amount of resources your task Pod can use is defined by your [default Pod resource configuration](deployment-resources.md#configure-kubernetes-pod-resources). To further optimize your resource usage, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
 To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `container_resources` argument of the KubernetesPodOperator. For example:
 
