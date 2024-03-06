@@ -431,7 +431,7 @@ Some platforms which can host Kubernetes clusters have their own specialised ope
 
 4. Make sure your default credentials include a valid and active key for your username. See [Programmatic access](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).
 
-5. Make a copy of `~/.aws/credentials` and `~/.aws/config` available to your Airflow environment. If you run Airflow using the Astro CLI, create a new directory called `.aws` in the `include` folder of your Astro project and copy both files into it.
+5. Make a copy of `~/.aws/credentials` and `~/.aws/config` available to your Airflow environment. If you run Airflow using the Astro CLI, see [Authenticate to cloud services](https://docs.astronomer.io/astro/cli/authenticate-to-clouds?tab=aws#prerequisites) for steps to mount these credentials to your local Airflow environment.
 
 6. [Create a new EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) and assign the newly created role to it.
 

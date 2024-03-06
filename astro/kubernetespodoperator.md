@@ -321,6 +321,18 @@ with DAG(
     )
 ```
 
+## Launch a Pod in an external cluster
+
+To launch a Pod in an external cluster from an Astro Deployment, you have to:
+
+- Create a [network connection](https://docs.astronomer.io/astro/networking-overview) between the Astro Deployment and your external cluster.
+- Add a `kubeconfig` file for the external cluster to your Astro project `include` folder, then deploy your changes to Astro.
+- Set `in_cluster=false` and `config_file = <your-kubeconfig-file>` in your task configuration.
+
+See the [Astronomer Learn guide](https://docs.astronomer.io/learn/kubepod-operator#example-use-kubernetespodoperator-to-run-a-pod-in-a-separate-cluster) for complete setup steps.
+
+To test a task in a local environment using the Astro CLI, you must additionally mount credentials to the external cluster so that your local Airflow environment has permissions to launch a Pod in the external cluster. See [Authenticate to cloud services with user credentials](cli/authenticate-to-clouds.md) for setup steps.
+
 ## Related documentation
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
