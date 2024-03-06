@@ -48,10 +48,10 @@ To install the latest version of the Astro CLI, run the following command:
 brew install astro
 ```
 
-To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, to install Astro CLI version {{CLI_VER}}, you would run the following command:
+To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, to install Astro CLI version {{CLI_VER_LATEST}}, you would run the following command:
 
 ```sh
-brew install astro@{{CLI_VER}}
+brew install astro@{{CLI_VER_LATEST}}
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](/astro/cli/release-notes.md).
