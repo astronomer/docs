@@ -106,7 +106,7 @@ astro version
 If the installation was successful, you should see the following output:
 
 <pre><code parentName="pre">{`% astro version
-Astro CLI Version: {{CLI_VER}}`}</code></pre>
+Astro CLI Version: {{CLI_VER_LATEST}}`}</code></pre>
 
 
 ## Upgrade the CLI
