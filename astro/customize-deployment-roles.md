@@ -29,6 +29,8 @@ In situations where you need fine-grained Deployment access, you can create cust
 
 Custom Deployment roles are created and managed at the Organization level. After you create a custom Deployment role, you can assign users, teams, and Deployment API tokens the role from any Deployment in the Organization. 
 
+Deployment roles are additive, meaning that a user with multiple Deployment roles has all of the permissions of each Deployment role as well as their Workspace role. For example, if a user belongs to a Team with a custom Deployment role that includes permissions to edit Airflow variables, and they also have a personal custom Deployment role that includes permissions to edit connections, then the user has permissions to edit both Airflow variables and connections in the Deployment. 
+
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
 2. Go to **Access Management**, then click **Roles**.
