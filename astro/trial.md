@@ -11,7 +11,7 @@ Use this guide to get started with Astro, the best place to run Apache Airflow.
 
 ## Start a trial
 
-Go to [Try Astro](https://www.astronomer.io/try-astro/) to activate your free 14-day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
+Go to [Try Astro](https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner&utm_medium=docs&utm_content=astro-trial&utm_source=body) to activate your free 14-day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
 
 :::tip
 
