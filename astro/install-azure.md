@@ -6,8 +6,10 @@ id: install-azure
 ---
 
 import AstroBadge from '@site/src/components/AstroBadge'
+import SoftwareBadge from '@site/src/components/SoftwareBadge'
 
 <AstroBadge/>
+<SoftwareBadge />
 
 [Astro](https://docs.astronomer.io/astro) is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data.
 
