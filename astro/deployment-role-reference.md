@@ -56,13 +56,13 @@ This document contains all available permissions that you can assign to a [custo
 
 ### Deployment Airflow DAG
 
-- `deployment.airflow.dag.get`: View DAGs in the Airflow UI.
-- `deployment.airflow.dag.update`: Update DAGs in the Airflow UI.
-- `deployment.airflow.dag.delete`: Delete DAGs in the Airflow UI.
+- `deployment.airflow.dag.get`: View DAGs in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.dag.update`: Update DAGs in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.dag.delete`: Delete DAGs in the Airflow UI or Astro UI **DAGs** page.
 
 ## Deployment Airflow DagCode
 
-- `deployment.airflow.dagCode.get`: View the source code for DAGs in the Airflow UI.
+- `deployment.airflow.dagCode.get`: View the source code for DAGs in the Airflow UI or Astro UI **DAGs** page.
 
 ## Deployment Airflow DagDependencies
 
@@ -70,10 +70,10 @@ This document contains all available permissions that you can assign to a [custo
 
 ### Deployment Airflow DAGRun
 
-- `deployment.airflow.dagRun.get`: View DAG runs in the Airflow UI.
-- `deployment.airflow.dagRun.create`: Create DAG runs in the Airflow UI.
-- `deployment.airflow.dagRun.update`: Update DAG runs in the Airflow UI.
-- `deployment.airflow.dagRun.delete`: Delete DAG runs in the Airflow UI.
+- `deployment.airflow.dagRun.get`: View DAG runs in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.dagRun.create`: Create DAG runs in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.dagRun.update`: Update DAG runs in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.dagRun.delete`: Delete DAG runs in the Airflow UI or Astro UI **DAGs** page.
 
 ## Deployment Airflow Datasets
 
@@ -112,18 +112,18 @@ This document contains all available permissions that you can assign to a [custo
 
 ## Deployment Airflow TaskInstance
 
-- `deployment.airflow.taskInstance.get`: View task instances in the Airflow UI.
-- `deployment.airflow.taskInstance.create`: Create task instances in the Airflow UI.
-- `deployment.airflow.taskInstance.update`: Update task instances in the Airflow UI.
-- `deployment.airflow.taskInstance.delete`: Delete task instances in the Airflow UI.
+- `deployment.airflow.taskInstance.get`: View task instances in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.taskInstance.create`: Create task instances in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.taskInstance.update`: Update task instances in the Airflow UI or Astro UI **DAGs** page.
+- `deployment.airflow.taskInstance.delete`: Delete task instances in the Airflow UI or Astro UI **DAGs** page.
 
 ## Deployment Airflow TaskLog
 
-- `deployment.airflow.taskLog.get`: View task logs in the Airflow UI.
+- `deployment.airflow.taskLog.get`: View task logs in the Airflow UI or Astro UI **DAGs** page.
 
 ## Deployment Airflow TaskReschedule
 
-- `deployment.airflow.taskReschedule.get`: View task reschedules in the Airflow UI.
+- `deployment.airflow.taskReschedule.get`: View task reschedules in the Airflow UI or Astro UI **DAGs** page.
 
 ## Deployment Airflow Trigger
 
@@ -152,7 +152,9 @@ This document contains all available permissions that you can assign to a [custo
 - `deployment.alerts.update`: Update Deployment-level Astro alerts in the Astro UI or through the Astro API.
 - `deployment.alerts.delete`: Delete Deployment-level Astro alerts in the Astro UI or through the Astro API.
 
-## Deployment ApiKeys
+## Deployment ApiKeys (Deprecated)
+
+Astro API Keys are deprecated and will no longer be available on June 1, 2024. If you still use API Keys, you can use these permissions. Learn more about using [Deployment API Tokens](deployment-api-tokens.md), which replace Deployment API Key functionality.
 
 - `deployment.apiKeys.get`: View Deployment API keys.
 - `deployment.apiKeys.delete`: Delete Deployment API keys.
@@ -180,18 +182,18 @@ This document contains all available permissions that you can assign to a [custo
 
 ## Deployment Logs
 
-- `deployment.airflow.logs.get`: View Deployment logs in the Astro UI.
+- `deployment.logs.get`: View Deployment logs in the Astro UI.
 
 ## Deployment Metrics
 
-- `deployment.airflow.metrics.get`: View Deployment **Analytics** in the Astro UI.
+- `deployment.metrics.get`: View Deployment **Analytics** in the Astro UI.
 
 ## Deployment Teams
 
-- `deployment.airflow.teams.get`: View Teams belonging to a Deployment.
-- `deployment.airflow.teams.delete`: Update Team membership to a Deployment.
+- `deployment.teams.get`: View Teams belonging to a Deployment.
+- `deployment.teams.delete`: Update Team membership to a Deployment.
 
 ## Deployment Users
 
-- `deployment.airflow.users.get`: View users belonging to a Deployment.
-- `deployment.airflow.teams.delete`: Update user membership to a Deployment. 
+- `deployment.users.get`: View users belonging to a Deployment.
+- `deployment.users.delete`: Update user membership to a Deployment.
