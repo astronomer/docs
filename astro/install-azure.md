@@ -5,6 +5,10 @@ description: "Learn how to install Astro from the Azure marketplace, which is re
 id: install-azure
 ---
 
+import AstroBadge from '@site/src/components/AstroBadge'
+
+<AstroBadge/>
+
 [Astro](https://docs.astronomer.io/astro) is a managed service for data orchestration that is built for the cloud and powered by Apache Airflow. Your Airflow infrastructure is managed entirely by Astronomer, enabling you to shift your focus from infrastructure to data.
 
 If your company uses Azure or already manages applications using [Azure Native ISV Services](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), Astronomer recommends installing and accessing Astro through the Azure Marketplace. When you install Astro as an Azure Native ISV Service, you can manage resource usage and billing alongside your existing Azure applications. Additionally, the Azure Native ISV Service is already integrated with Microsoft Entra ID, so you can add users from your team to Astro without any additional single sign-on (SSO) configuration.
