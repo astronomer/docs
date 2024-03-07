@@ -21,7 +21,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## March 5, 2024
+## March 7, 2024
 
 ### Reporting dashboards are now generally available
 
