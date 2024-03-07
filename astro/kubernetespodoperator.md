@@ -323,15 +323,140 @@ with DAG(
 
 ## Launch a Pod in an external cluster
 
-To launch a Pod in an external cluster from an Astro Deployment, you have to:
+If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. In setups where both clusters are used by the same AWS or GCP account, this can be managed with roles and permissions.
 
-- Create a [network connection](https://docs.astronomer.io/astro/networking-overview) between the Astro Deployment and your external cluster.
-- Add a `kubeconfig` file for the external cluster to your Astro project `include` folder, then deploy your changes to Astro.
-- Set `in_cluster=false` and `config_file = <your-kubeconfig-file>` in your task configuration.
+This example shows how to set up an EKS cluster on AWS and run a Pod on it from an Airflow instance where cross-account access is not available. The same process applicable to other Kubernetes services such as GKE.
 
-See the [Astronomer Learn guide](https://docs.astronomer.io/learn/kubepod-operator#example-use-kubernetespodoperator-to-run-a-pod-in-a-separate-cluster) for complete setup steps.
+:::info
 
-To test a task in a local environment using the Astro CLI, you must additionally mount credentials to the external cluster so that your local Airflow environment has permissions to launch a Pod in the external cluster. See [Authenticate to cloud services with user credentials](cli/authenticate-to-clouds.md) for setup steps.
+To launch Pods in external clusters from a local Airflow environment, you must additionally mount credentials for the external cluster so that your local Airflow environment has permissions to launch a Pod in the external cluster. See [Authenticate to cloud services with user credentials](cli/authenticate-to-clouds.md) for setup steps.
+
+:::
+
+### Prerequisites
+
+- A [network connection](https://docs.astronomer.io/astro/networking-overview) between your Astro Deployment and your external cluster.
+
+### Step 1: Set up your external cluster
+
+1. [Create an EKS cluster IAM role](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html#create-service-role) with a unique name and add the following permission policies:
+
+    - `AmazonEKSWorkerNodePolicy`
+    - `AmazonEKS_CNI_Policy`
+    - `AmazonEC2ContainerRegistryReadOnly`
+
+2. [Update the trust policy](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) of this new role to include the [workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) of your Deployment. This step ensures that the role can be assumed by your Deployment.
+
+    ```json
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+        "Effect": "Allow",
+        "Principal": {
+            "AWS": "arn:aws:iam::<aws account id>:<your user>",
+            "Service": [
+                "ec2.amazonaws.com",
+                "eks.amazonaws.com"
+            ]
+        },
+        "Action": "sts:AssumeRole"
+        }
+    ]
+    }
+    ```
+
+3. If you don't already have a cluster, [create a new EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) and assign the newly created role to it.
+
+### Step 2: Retrieve the KubeConfig file from the EKS cluster
+
+1. Use a `KubeConfig` file to remotely connect to your new cluster. On AWS, you can run the following command to retrieve it:
+
+    ```bash
+    aws eks --region <your-region> update-kubeconfig --name <cluster-name>
+    ```
+
+    This command copies information relating to the new cluster into your existing `KubeConfig` file at `~/.kube/config`.
+
+2. Check this file before making it available to Airflow. It should appear similar to the following configuration. Add any missing configurations to the file.
+
+    ```yaml
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority-data: <your certificate>
+        server: <your AWS server address>
+    name: <arn of your cluster>
+    contexts:
+    - context:
+        cluster: <arn of your cluster>
+        user: <arn of your cluster>
+    name: <arn of your cluster>
+    current-context: <arn of your cluster>
+    kind: Config
+    preferences: {}
+    users:
+    - name: <arn of your cluster>
+    user:
+        exec:
+        apiVersion: client.authentication.k8s.io/v1alpha1
+        args:
+        - --region
+        - <your cluster's AWS region>
+        - eks
+        - get-token
+        - --cluster-name
+        - <name of your cluster>
+        - --profile
+        - default
+        command: aws
+        interactiveMode: IfAvailable
+        provideClusterInfo: false
+    ```
+
+### Step 3: Create a Kubernetes cluster connection
+
+Astronomer recommends creating an Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project. 
+
+1. Create a `kubeconfig` configuration that grants Airflow access to your external cluster. See
+2. In either the Airflow UI or the Astro environment manager, create a new **Kubernetes** connection. In the **Kube Config** field, paste the `kubeconfig` configuration you retrieved from your cluster.
+3. Set the **In Cluster** field to `False`.
+4. Click **Create connection**.
+
+You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster. 
+
+### Step 4: Configure your task
+
+In your KubernetesPodOperator task configuration, ensure that you set `in_cluster=false` and `config_file = <your-kubeconfig-file>` in your task configuration. In the following example, the task launches a Pod in an external cluster based on the configuration defined in the `k8s` connection.
+
+```python
+run_on_EKS = KubernetesPodOperator(
+        task_id="run_on_EKS",
+        kubernetes_conn_id="k8s", 
+        cluster_context="<your-cluster-id>",
+        namespace="astro-remote-kpo",
+        name="example_pod",
+        image="ubuntu",
+        cmds=["bash", "-cx"],
+        arguments=["echo hello"],
+        get_logs=True,
+        startup_timeout_seconds=240,
+    )
+```
+
+### Example DAG
+
+The following DAG utilizes several classes from the Amazon provider package to dynamically spin up and delete Pods for each task in a newly created node group. If your remote Kubernetes cluster already has a node group available, you only need to define your task in the KubernetesPodOperator itself.
+
+The example DAG contains 5 consecutive tasks:
+
+- Create a node group according to the users' specifications (in the example using GPU resources).
+- Use a sensor to check that the cluster is running correctly.
+- Use the KubernetesPodOperator to run any valid Docker image in a Pod on the newly created node group on the remote cluster. The example DAG uses the standard `Ubuntu` image to print "hello" to the console using a `bash` command.
+- Delete the node group.
+- Verify that the node group has been deleted.
+
+<CodeBlock language="python">{kpo_separate_cluster_example}</CodeBlock>
 
 ## Related documentation
 

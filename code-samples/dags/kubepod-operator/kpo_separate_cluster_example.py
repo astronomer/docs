@@ -9,19 +9,19 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
 )
 
 # import EKS related packages from the Amazon Provider
-from airflow.providers.amazon.aws.hooks.eks import EKSHook, NodegroupStates
+from airflow.providers.amazon.aws.hooks.eks import EksHook, NodegroupStates
 from airflow.providers.amazon.aws.operators.eks import (
-    EKSCreateNodegroupOperator,
-    EKSDeleteNodegroupOperator,
+    EksCreateNodegroupOperator,
+    EksDeleteNodegroupOperator,
 )
-from airflow.providers.amazon.aws.sensors.eks import EKSNodegroupStateSensor
+from airflow.providers.amazon.aws.sensors.eks import EksNodegroupStateSensor
 
 
 # custom class to create a node group with Nodes on EKS
-class EKSCreateNodegroupWithNodesOperator(EKSCreateNodegroupOperator):
+class EksCreateNodegroupWithNodesOperator(EksCreateNodegroupOperator):
     def execute(self, context):
         # instantiating an EKSHook on the basis of the AWS connection (Step 5)
-        eks_hook = EKSHook(
+        eks_hook = EksHook(
             aws_conn_id=self.aws_conn_id,
             region_name=self.region,
         )
@@ -48,7 +48,7 @@ with DAG(
     dag_id="KPO_remote_EKS_cluster_example_dag",
 ) as dag:
     # task 1 creates the node group
-    create_gpu_nodegroup = EKSCreateNodegroupWithNodesOperator(
+    create_gpu_nodegroup = EksCreateNodegroupWithNodesOperator(
         task_id="create_gpu_nodegroup",
         cluster_name="<your cluster name>",
         nodegroup_name="gpu-nodes",
@@ -71,9 +71,7 @@ with DAG(
     )
 
     # task 3 the KubernetesPodOperator running a task
-    # here, cluster_context and the config_file are defined at the task level
-    # it is of course also possible to abstract these values
-    # in a Kubernetes Cluster Connection
+    # here, cluster_context and the kubernetes_conn_id are defined at the task level.
     run_on_EKS = KubernetesPodOperator(
         task_id="run_on_EKS",
         cluster_context="<arn of your cluster>",
@@ -85,12 +83,12 @@ with DAG(
         get_logs=True,
         is_delete_operator_pod=False,
         in_cluster=False,
-        config_file="/usr/local/airflow/include/config",
+        kubernetes_conn_id="k8s", 
         startup_timeout_seconds=240,
     )
 
     # task 4 deleting the node group
-    delete_gpu_nodegroup = EKSDeleteNodegroupOperator(
+    delete_gpu_nodegroup = EksDeleteNodegroupOperator(
         task_id="delete_gpu_nodegroup",
         cluster_name="<your cluster name>",
         nodegroup_name="gpu-nodes",
@@ -99,7 +97,7 @@ with DAG(
     )
 
     # task 5 checking that the node group was deleted successfully
-    check_nodegroup_termination = EKSNodegroupStateSensor(
+    check_nodegroup_termination = EksNodegroupStateSensor(
         task_id="check_nodegroup_termination",
         cluster_name="<your cluster name>",
         nodegroup_name="gpu-nodes",
