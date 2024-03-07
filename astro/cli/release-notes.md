@@ -60,7 +60,7 @@ Release date: February 14, 2024
 
 The following flags have been updated, but will continue to work with a deprecation notice until the v1.25.0 release of the Astro CLI:
 
-- `astro deployment logs --key-word` ia a new flag that allows you to search your Audit logs for an exact key word or phrase.
+- `astro deployment logs --key-word` ia a new flag that allows you to search your Deployment's logs for an exact key word or phrase.
 - `astro deployment create --cluster-type` is now `astro deployment create --type`.
 - `astro deployment create --enforce-cicd` is now `astro deployment create --cicd-enforcement`.
 
