@@ -280,7 +280,7 @@ You'll copy most of the code, trigger the DAG, and then confirm the expected out
     my_astronauts_dag()
     ```
 
-9. Save your code. Your DAG should look like this:
+9. Save your code. Your completed DAG should look like this:
 
 <details>
 <summary>Click to view the full DAG code</summary>
