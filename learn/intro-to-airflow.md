@@ -12,7 +12,7 @@ import example_astronauts from '!!raw-loader!../code-samples/dags/intro-to-airfl
 
 This guide offers an introduction to Apache Airflow and its core concepts. You'll learn about:
 
-- Milestones in the history of Apache Airflow.
+- The history of Apache Airflow.
 - Why you should use Airflow.
 - Common use cases of Airflow.
 - Important Airflow concepts.
@@ -34,15 +34,6 @@ There are multiple resources for learning about this topic. See also:
 To get the most out of this guide, you should have an understanding of:
 
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
-
-## Get started
-
-If you already have some Airflow experience or prefer to learn by doing, install the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started) and run the following command to create and start a new Airflow project with an example workflow:
-
-```bash
-astro dev init
-astro dev start
-```
 
 ## Airflow history
 
@@ -79,8 +70,8 @@ Airflow is used by many data professionals at [companies of all sizes and types]
 
 Some common use cases of Airflow include:
 
-- **ETL/ELT for analytics**: [90% of Airflow users](https://airflow.apache.org/survey/) use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns. Often, these pipelines support critical operational processes. For an example use case, see [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
-- **ETL/ELT for business operations**: 68% of Airflow users have used Airflow to orchestrate data supporting their business directly, creating data-powered applications and products, often in combination with MLOps pipelines. For an example use case, see [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping-video/).
+- **ETL/ELT**: [90% of Airflow users](https://airflow.apache.org/survey/) use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns. Often, these pipelines support critical operational processes. For an example use case, see [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
+- **Business operations**: 68% of Airflow users have used Airflow to orchestrate data supporting their business directly, creating data-powered applications and products, often in combination with MLOps pipelines. For an example use case, see [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping-video/).
 - **MLOps**: 28% of Airflow users are already orchestrating Machine Learning Operations (MLOps) with Apache Airflow. An overview of best practices when using Airflow for MLOps can be found in [Best practices for orchestrating MLOps pipelines with Airflow](airflow-mlops.md). For an example use case, see [Use Cohere and OpenSearch to analyze customer feedback in an MLOps pipeline](use-case-llm-customer-feedback.md).
 - **Managing infrastructure**: Airflow can be used to spin up and down infrastructure, for example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. For an example use case, see [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
 
@@ -136,25 +127,15 @@ Of course there is much more to Airflow than just DAGs and tasks. Here are a few
 - **Airflow variables**: Airflow variables are key-value pairs that can be used to store information in your Airflow environment. For more information, see [Use Airflow variables](airflow-variables.md).
 - **XComs**: XCom is short for "cross-communication", you can use XCom to pass information between your Airflow tasks. For more information, see [Passing data between tasks](airflow-passing-data-between-tasks.md).
 - **Airflow REST API**: The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) allows Airflow to interact with RESTful web services.
-- **Airflow plugins**: Airflow plugins are a way to further extend the functionality of Airflow. For more information, see [Airflow plugins](using-airflow-plugins.md). Note that [custom hooks and operators](airflow-importing-custom-hooks-operators.md) do not need to be installed as plugins, but can be used directly imported into your DAGs as Python modules.
 
-## Airflow components
+## Running Airflow
 
-When working with Airflow, it can be helpful to understand the components of its infrastructure.
+There are many ways to run Airflow, Astronomer recommends: 
 
-The following Airflow components are mandatory for any Airflow installation:
+- To use the open-source [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and free to use for everyone.
+- To use [Astro](https://astronomer.io/try-astro) to run Airflow in production. A free trial is available.
 
-- **Webserver**: A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
-- **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html)**: A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
-- **[Database](airflow-database.md)**: A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
-- **[Executor](airflow-executors-explained.md)**: The mechanism that defines how the available computing resources are used to execute tasks. An executor is running within the scheduler whenever Airflow is up.
-
-Additionally, you may also have the following situational components:
-
-- **Triggerer**: A separate process which supports [deferrable operators](deferrable-operators.md). This component is optional and must be run separately.
-- **Worker**: The process that executes tasks, as defined by the executor. Depending on which executor you choose, you may or may not have workers as part of your Airflow infrastructure.
-
-To learn more about the Airflow infrastructure, see [Airflow Components](airflow-components.md).
+To learn more about other options for running Airflow, see [the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html). All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, the scheduler, the database, and the executor. See [Airflow components](airflow-components.md) for more information.
 
 ## Resources
 
