@@ -35,7 +35,7 @@ To get the most out of this guide, you should have an understanding of:
 
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 
-## Quickstart
+## Get started
 
 If you already have some Airflow experience or prefer to learn by doing, install the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started) and run the following command to create and start a new Airflow project with an example workflow:
 
@@ -44,7 +44,7 @@ astro dev init
 astro dev start
 ```
 
-## Milestones
+## Airflow history
 
 - 2015: Airflow started as an open source project at Airbnb. In 2015, Airbnb was growing rapidly and struggling to manage the vast quantities of internal data it generated every day. To satisfy the need for a robust scheduling tool, [Maxime Beauchemin](https://maximebeauchemin.medium.com/) created Airflow to allow Airbnb to quickly author, iterate, and monitor batch data pipelines.
 - 2016: Airflow officially joined the Apache Foundation Incubator.
@@ -64,7 +64,6 @@ Airflow provides many benefits, including:
 
 - **Tool agnosticism**: Airflow can connect to any application in your data ecosystem that allows connections through an API and prebuilt modules exist for many common data tools.
 - **High extensibility**: Since Airflow pipelines are written in Python, you can build on top of the existing codebase and extend the functionality of Airflow to meet your needs. Anything you can do in Python, you can do in Airflow.
-- **CI/CD for data pipelines**: With all the logic of your workflows defined in Python, it is possible to implement best practice CI/CD processes for your data pipelines.
 - **Infinite scalability**: Given enough computing power, you can orchestrate as many processes as you need, no matter the complexity of your pipelines.
 - **Dynamic data pipelines**: Airflow offers the ability to create [dynamic tasks](dynamic-tasks.md) to adjust your workflows based on the data you are processing at runtime.
 - **Active OSS community**: With millions of users and thousands of contributors, Airflow is here to stay and grow. Join the [Airflow Slack](https://apache-airflow-slack.herokuapp.com/) to become part of the community.
@@ -74,16 +73,16 @@ Airflow provides many benefits, including:
 
 ## Airflow use cases
 
-Airflow is used by many data professionals with a wide range of backgrounds and use cases in [companies of all sizes and types](https://github.com/apache/airflow/blob/main/INTHEWILD.md). Data engineers, data scientists, ML engineers, and data analysts all need to perform actions on data in a complex web of dependencies. With Airflow you can orchestrate these actions and dependencies in a single platform, no matter which tools you are using and how complex your pipelines are.
+Airflow is used by many data professionals at [companies of all sizes and types](https://github.com/apache/airflow/blob/main/INTHEWILD.md). Data engineers, data scientists, ML engineers, and data analysts all need to perform actions on data in a complex web of dependencies. With Airflow, you can orchestrate these actions and dependencies in a single platform, no matter which tools you are using and how complex your pipelines are.
 
 ![Symbolic graph with Airflow shown as the center of the data ecosystem, with arrows pointing out from Airflow to logos of a variety of common data tools.](/img/guides/intro-to-airflow_airflow_in_ecosystem.png)
 
 Some common use cases of Airflow include:
 
-- **ETL/ELT for analytics**: [90% of Airflow users](https://airflow.apache.org/survey/), use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns related to data analytics, which makes it the most common use case. Often, these pipelines support critical operational processes like regulatory reports. For an example use case, see [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
+- **ETL/ELT for analytics**: [90% of Airflow users](https://airflow.apache.org/survey/) use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns. Often, these pipelines support critical operational processes. For an example use case, see [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
 - **ETL/ELT for business operations**: 68% of Airflow users have used Airflow to orchestrate data supporting their business directly, creating data-powered applications and products, often in combination with MLOps pipelines. For an example use case, see [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping-video/).
 - **MLOps**: 28% of Airflow users are already orchestrating Machine Learning Operations (MLOps) with Apache Airflow. An overview of best practices when using Airflow for MLOps can be found in [Best practices for orchestrating MLOps pipelines with Airflow](airflow-mlops.md). For an example use case, see [Use Cohere and OpenSearch to analyze customer feedback in an MLOps pipeline](use-case-llm-customer-feedback.md).
-- **Spinning up and down infrastructure**: Airflow can be used to spin up and down infrastructure, for example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. For an example use case, see [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+- **Managing infrastructure**: Airflow can be used to spin up and down infrastructure, for example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. For an example use case, see [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
 
 Of course, these are just a few examples, you can orchestrate almost any kind of batch workflows with Airflow.
 
@@ -91,7 +90,7 @@ Of course, these are just a few examples, you can orchestrate almost any kind of
 
 To navigate Airflow resources, it is helpful to have a general understanding of the following Airflow concepts.
 
-### Core concepts
+### Running pipelines
 
 - **DAG**: Directed Acyclic Graph. An Airflow DAG is a workflow defined as a graph, where all dependencies between nodes are directed and nodes do not self-reference, meaning there are no circular dependencies. For more information on Airflow DAGs, see [Introduction to Airflow DAGs](dags.md).
 - **DAG run**: The execution of a DAG at a specific point in time. A DAG run can be one of four different types: [`scheduled`](scheduling-in-airflow.md), `manual`, [`dataset_triggered`](airflow-datasets.md) or [`backfill`](rerunning-dags.md).
@@ -112,7 +111,7 @@ The Screenshot below shows one simple DAG called `example_astronauts` with two t
 
 It is a core best practice to keep tasks as atomic as possible, meaning that each task should perform a single action. Additionally, tasks should be idempotent, which means they produce the same output every time they are run with the same input. See [DAG writing best practices in Apache Airflow](dag-best-practices.md).
 
-### Building blocks
+### Writing pipelines
 
 Airflow tasks are defined in Python code. You can define tasks using:
 
@@ -159,11 +158,8 @@ To learn more about the Airflow infrastructure, see [Airflow Components](airflow
 
 ## Resources
 
-- [Astro CLI](https://docs.astronomer.io/astro/cli/get-started): The easiest way to run a local Airflow environment.
 - [Astronomer Webinars](https://www.astronomer.io/events/webinars/): Live deep dives into Airflow and Astronomer topics, all previous webinars are available to watch on-demand.
-- [Astronomer Learn](https:/docs.astronomer.io/learn/): (you are here!) A collection of guides and tutorials on Airflow. 
 - [Astronomer Academy](https://academy.astronomer.io/): In depth video courses on Airflow and Astronomer topics.
-- [Astronomer Registry](https://registry.astronomer.io/): A collection of Airflow providers, with detailed information about each provider and its operators, as well as example DAGs showing how to use them.
 - [Official Airflow Documentation](https://airflow.apache.org/docs/): The official documentation for Apache Airflow.
 - [Airflow GitHub](https://github.com/apache/airflow): The official GitHub repository for Apache Airflow.
 - [Airflow Slack](https://apache-airflow-slack.herokuapp.com/): The official Airflow Slack workspace, the best place to ask your Airflow questions!
