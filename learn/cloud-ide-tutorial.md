@@ -45,7 +45,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- An Astro account. If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/) and follow the onboarding flow to create your first Organization and Workspace.
+- An Astro account. If you do not already have an Astro account, [sign up for a free trial](https://www.astronomer.io/try-astro/?utm_medium=docs&utm_content=learn-cloud-ide-tutorial&utm_source=body) and follow the onboarding flow to create your first Organization and Workspace.
 
 (Optional) To complete steps [11](#step-11-optional-connect-your-github-to-the-astro-cloud-ide) - [14](#step-14-optional-run-your-dag-on-astro) at the end of this tutorial, you will also need:
 
