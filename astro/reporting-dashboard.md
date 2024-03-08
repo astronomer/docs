@@ -7,6 +7,9 @@ description: "View information about your Organization, Deployments, DAGs, and c
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
+:::publicpreview
+:::
+
 :::info Enterprise
 
 Organization reporting dashboards are only available if you have an Enterprise product plan.

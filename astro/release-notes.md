@@ -25,7 +25,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Reporting dashboards are now generally available
 
-[Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now generally available to use for examining key metrics across your Organization.
+[Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
 
 You can also export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
 

@@ -5,6 +5,9 @@ id: reporting-dash-exports
 description: "Export data from reporting dashboards or configure conditional exports as alerts."
 ---
 
+:::publicpreview
+:::
+
 :::info
 
 Organization reporting dashboards are only available if you have an Enterprise product plan.
