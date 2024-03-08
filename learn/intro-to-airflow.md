@@ -132,8 +132,8 @@ Of course there is much more to Airflow than just DAGs and tasks. Here are a few
 
 There are many ways to run Airflow, Astronomer recommends: 
 
-- To use the open-source [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and free to use for everyone.
-- To use [Astro](https://astronomer.io/try-astro) to run Airflow in production. A free trial is available.
+- To use the open-source [**Astro CLI**](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and free to use for everyone.
+- To use [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. A free trial is available.
 
 To learn more about other options for running Airflow, see [the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html). All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, the scheduler, the database, and the executor. See [Airflow components](airflow-components.md) for more information.
 
