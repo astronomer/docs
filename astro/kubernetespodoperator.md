@@ -420,23 +420,22 @@ To launch Pods in external clusters from a local Airflow environment, you must a
 
 Astronomer recommends creating an Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project. 
 
-1. Create a `kubeconfig` configuration that grants Airflow access to your external cluster. See
-2. In either the Airflow UI or the Astro environment manager, create a new **Kubernetes** connection. In the **Kube Config** field, paste the `kubeconfig` configuration you retrieved from your cluster.
-3. Set the **In Cluster** field to `False`.
-4. Click **Create connection**.
+1. Convert the `kubeconfig` configuration you retrieved from your cluster to JSON format.
+2. In either the Airflow UI or the Astro environment manager, create a new **Kubernetes Cluster Connection** connection. In the **Kube config (JSON format)** field, paste the `kubeconfig` configuration you retrieved from your cluster after converting it from `yaml` to `json` format.
+4. Click **Save**.
 
 You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster. 
 
 ### Step 4: Configure your task
 
-In your KubernetesPodOperator task configuration, ensure that you set `in_cluster=false` and `config_file = <your-kubeconfig-file>` in your task configuration. In the following example, the task launches a Pod in an external cluster based on the configuration defined in the `k8s` connection.
+In your KubernetesPodOperator task configuration, ensure that you set `cluster-context` and `namespace` for your remote cluster. In the following example, the task launches a Pod in an external cluster based on the configuration defined in the `k8s` connection.
 
 ```python
 run_on_EKS = KubernetesPodOperator(
         task_id="run_on_EKS",
         kubernetes_conn_id="k8s", 
         cluster_context="<your-cluster-id>",
-        namespace="astro-remote-kpo",
+        namespace="<your-namespace>",
         name="example_pod",
         image="ubuntu",
         cmds=["bash", "-cx"],
