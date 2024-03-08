@@ -9,9 +9,9 @@ description: Create Deployment API keys to make requests to Airflow's REST API a
 
 Deployment API keys are deprecated in favor of [Deployment API tokens](deployment-api-tokens.md).
 
-You can continue to use existing Deployment API keys but you cannot create new API keys after October 31, 2023. After this date, Deployments with zero API keys will no longer display the **API Keys** tab and you won't be able to create new Deployment API keys. If you want to continue using API keys after October 31, ensure that you always have at least one API key configured for the Deployment prior to October 31.
+You can continue to use existing Deployment API keys but you cannot create new API keys after October 31, 2023. After this date, Deployments with zero API keys will no longer display the **API Keys** tab and you won't be able to create new Deployment API keys.
 
-You will have to convert existing API keys into Deployment API tokens by **June 1, 2024** when API Keys are no longer supported.
+You will have to convert existing API keys into Deployment API tokens by **June 1, 2024**, which is the data that API keys will no longer work.
 
 If you have any questions, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
