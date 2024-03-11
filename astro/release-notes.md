@@ -23,7 +23,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## March 7, 2024
 
-### Reporting dashboards are now generally available
+### Reporting dashboards are now in public preview
 
 [Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
 
@@ -83,14 +83,14 @@ AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT=True
 
 For more information about each of these variables, see [Platform variables](https://docs.astronomer.io/astro/platform-variables)
 
-### Ephemeral storage limit on schedulers 
+### Ephemeral storage limit on schedulers
 
 Astro now limits that amount of ephemeral storage in a scheduler to 5Gi. If a scheduler attempts to use more than 5Gi of ephemeral storage, it will be terminated.
 
 It is rare for schedulers to require more than 5Gi of ephemeral storage. If your schedulers start to terminate after this update, ensure the following:
 
 - Your Deployment is not producing large amounts of temporary files without cleaning them up.
-- If you're using the BingAds Python SDK, your Deployment uses version 13.0.14 or later. Earlier releases include a [bug](https://github.com/BingAds/BingAds-Python-SDK/issues/117) that generates large amounts of temporary files. 
+- If you're using the BingAds Python SDK, your Deployment uses version 13.0.14 or later. Earlier releases include a [bug](https://github.com/BingAds/BingAds-Python-SDK/issues/117) that generates large amounts of temporary files.
 
 ### Bug fixes
 
@@ -111,7 +111,7 @@ The new **Dashboards** page includes a suite of dashboards that you can use to a
 
 ### Additional improvements
 
-- When you submit a support request from the Cloud UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support. 
+- When you submit a support request from the Cloud UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support.
 - Workspace Members can now access the **Clusters** view in the Airflow UI for a Deployment.
 
 ### Bug fixes
@@ -145,7 +145,7 @@ See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-he
 
 ![An example of an incident message in a Deployment health status](/img/release-notes/incident-unfurl.png)
 
-### Additional improvements 
+### Additional improvements
 
 - You can now access [Ask Astro](https://ask.astronomer.io/) from the Cloud UI **Help** menu:
 
