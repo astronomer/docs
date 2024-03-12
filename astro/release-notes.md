@@ -43,7 +43,7 @@ Deployments now include a cache of Astronomer's image registry that stores the c
 ### Additional improvements
 
 - Removed nonfunctional network usage per Pod metrics from the Deployment **Analytics** page.
-- The end-of-life date for Deployment API keys has been changed to June 1, 2024.
+- The end-of-life date for Deployment API keys is June 1, 2024.
 - The Cloud UI has been renamed to the Astro UI across all help text and documentation.
 - Due to a minor change to Astronomer cluster architecture, you can no longer add custom tags to Hybrid clusters on AWS.
 
