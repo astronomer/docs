@@ -62,8 +62,8 @@ Alternatively, you can manually create a template file without using an existing
           workspace_name: <your-workspace-name>
           scheduler_size: small
   ```
-  
-  Note that for Deployments on a standard cluster, the `region` and `cluster-name` parameters must both contain the region name for the standard cluster. See [Available regions for your cloud provider](resource-reference-hosted.md#standard-cluster-configurations). 
+
+  Note that for Deployments on a standard cluster, the `region` and `cluster-name` parameters must both contain the region name for the standard cluster. See [Available regions for your cloud provider](resource-reference-hosted.md#standard-cluster-regions).
 
   </TabItem>
 
@@ -84,27 +84,27 @@ Alternatively, you can manually create a template file without using an existing
           workspace_name: <your-workspace-name>
           scheduler_size: small
   ```
-  
+
   The `cluster_name` field must include the name of the dedicated cluster that exists in your Astro Organization.
 
   </TabItem>
 
   </Tabs>
-  
+
     These are the minimum values required to create a Deployment using a template file. Any configurations not specified are set to default values. To add more configurations, see [Deployment file reference](deployment-file-reference.md).
 
 2.  Adjust the template file values for the Deployment you want to create. When working with template files, keep the following in mind:
 
-    - The `name` field must include a unique name within the Workspace. 
+    - The `name` field must include a unique name within the Workspace.
 
     - The `workspace_name` field must include a valid Workspace name that exists in your Astro Organization.
-    
-    - The possible values for `cloud_provider`, `executor`, and `scheduler_size` are the same possible values when you create a Deployment with [`astro deployment create`](cli/astro-deployment-create.md#options). 
 
-    - See [Airflow and Astro Runtime version parity](runtime-image-architecture.md#astro-runtime-and-apache-airflow-parity) to choose your Astro Runtime version.
+    - The possible values for `cloud_provider`, `executor`, and `scheduler_size` are the same possible values when you create a Deployment with [`astro deployment create`](cli/astro-deployment-create.md#options).
+
+    - See [Airflow and Astro Runtime version parity](runtime-image-architecture.mdx#astro-runtime-and-apache-airflow-parity) to choose your Astro Runtime version.
 
   See [Deployment file reference](deployment-file-reference.md) for a list of all configurable Deployment template file values.
-  
+
 
 3. Run the following command to create the Deployment:
 
@@ -117,7 +117,7 @@ Alternatively, you can manually create a template file without using an existing
    ```bash
    astro deployment list
    ```
-   
+
 4. (Optional) Reconfigure any Airflow connections or variables from the Deployment that you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Airflow](manage-connections-variables.md).
 
 ## Update a Deployment using a Deployment file
@@ -126,13 +126,13 @@ A Deployment file is a complete snapshot of an existing Deployment at the point 
 
 When you update a Deployment with a Deployment file, keep the following in mind:
 
-- You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](deployment-settings.md#transfer-a-deployment-to-another-workspace).
+- You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](transfer-a-deployment.md).
 - You can't change the Astro Runtime version of the Deployment. To upgrade Astro Runtime, you must update the Dockerfile in your Astro project. See [Upgrade Astro Runtime](upgrade-runtime.md).
 - Environment variables marked as secret in the Cloud UI will be exported with a blank `value` to your Deployment file. To redeploy using the Deployment file, you either need to provide the `value` again in the Deployment file or delete the object for the variable. Otherwise, `astro deployment create` will fail. See [`deployment.environment_variables`](#deploymentenvironment_variables) for more details.
 
-:::warning 
+:::danger
 
-When you update a Deployment with a Deployment file, you must push a complete Deployment file that lists all of your existing worker queues. If a worker queue exists on Astro but doesn't exist in your Deployment file, the worker queue is deleted when you push your Deployment file. 
+When you update a Deployment with a Deployment file, you must push a complete Deployment file that lists all of your existing worker queues. If a worker queue exists on Astro but doesn't exist in your Deployment file, the worker queue is deleted when you push your Deployment file.
 
 :::
 

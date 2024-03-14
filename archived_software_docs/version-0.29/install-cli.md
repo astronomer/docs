@@ -7,7 +7,7 @@ description: Establish a local testing environment and deploy to Astronomer Soft
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 
 The Astro CLI is the easiest way to run Apache Airflow on your machine. From the Astro CLI, you can run a local Apache Airflow environment with a dedicated webserver, scheduler and Postgres database. Once you create an Astronomer Software project, you can customize it (for example, add Python or OS-level packages or add plugins) and test it on your local machine.
@@ -106,7 +106,7 @@ astro version
 If the installation was successful, you should see the following output:
 
 <pre><code parentName="pre">{`% astro version
-Astro CLI Version: ${siteVariables.cliVersion}`}</code></pre>
+Astro CLI Version: {{CLI_VER_LATEST}}`}</code></pre>
 
 
 ## Upgrade the CLI

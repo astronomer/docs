@@ -450,6 +450,13 @@ table::-webkit-scrollbar-thumb {
   );
 }
 
+.alert--warning {
+  --ifm-alert-background-color-highlight: hsl(
+    var(--orange-400),
+    var(15%)
+  );
+}
+
 .alert--caution {
   --ifm-alert-background-color-highlight: hsl(
     var(--orange-400),
@@ -604,10 +611,6 @@ html[data-theme="dark"] aside.theme-doc-sidebar-container {
   padding-bottom: 0;
 }
 
-.plugin-id-software ul[class*='menu__listBottom'] {
-  display: none !important;
-}
-
 .theme-doc-version-badge {
   font-weight: 400;
   font-size: 15px;
@@ -754,6 +757,11 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
   right: 0;
 }
 
+img {
+  width: auto;
+  height: auto;
+}
+
 /** Remix Redocly Styles **/
 
 /** hide all the error responses **/
@@ -769,4 +777,13 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
 /** Add anchor scroll to top padding/margin */
 [data-section-id] {
   scroll-margin-top: 120px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/** Fix redocusaurus nav accordions **/
+[id*='tag/'] {
+  scroll-margin-top: 0px;
 }

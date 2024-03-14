@@ -2,13 +2,8 @@
 title: "An introduction to Apache Airflow"
 sidebar_label: "Introduction to Airflow"
 id: intro-to-airflow
+description: "Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources."
 ---
-
-<head>
-  <meta name="description" content="Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources." />
-  <meta name="og:description" content="Learn what Apache Airflow is and what problems it solves. Get free access to valuable learning resources." />
-</head>
-
 
 [Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. It has over 9 million downloads per month and an active OSS community. Airflow allows data practitioners to define their data pipelines as Python code in a highly extensible and infinitely scalable way.
 
@@ -63,7 +58,7 @@ Airflow provides many benefits, including:
 
 ## When to use Airflow
 
-Airflow can be used for almost any batch data pipeline, and there are a significant number of [documented use cases](https://soundcloud.com/the-airflow-podcast/use-cases) in the community. Because of its extensibility, Airflow is particularly powerful for orchestrating jobs with complex dependencies in multiple external systems.
+Airflow can be used for almost any batch data pipeline, and there are a significant number of [documented use cases](https://soundcloud.com/the-airflow-podcast) in the community. Because of its extensibility, Airflow is particularly powerful for orchestrating jobs with complex dependencies in multiple external systems.
 
 The following diagram illustrates a complex use case that can be accomplished with Airflow. By writing pipelines in code and using Airflow providers, you can integrate with any number of different systems with just a single platform for orchestration and monitoring.
 

@@ -69,7 +69,7 @@ astro login <basedomain>
 
 | Option                | Description                                                                              | Possible Values |
 | --------------------- | ---------------------------------------------------------------------------------------- | --------------- |
-| `--l`, `--login-link` | Generate a login link to login on a separate device for cloud CLI login                  | None            |
+| `-l`, `--login-link` | Generate a login link to login on a separate device for cloud CLI login                  | None            |
 | `-o`, `--oauth`       | Skip the prompt for local authentication, proceed directly to OAuth token authentication | None            |
 
 

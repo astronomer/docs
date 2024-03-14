@@ -7,7 +7,7 @@ export default function LinkCard() {
     <Link className={styles.hostedBadge} id="hostedBadge">
         <div className={styles.hostedBadge}>
         <a target="_blank" href="https://docs.astronomer.io/astro/astro-architecture">
-            <img src="/img/Badge_Hosted.png" alt="This feature is available only on Astro Hosted." title="This feature is available only on AstroHosted." />
+            <img src="/img/Badge_Hosted.png" alt="This feature is available only on Astro Hosted." title="This feature is available only on Astro Hosted." />
         </a>
         </div>
     </Link>

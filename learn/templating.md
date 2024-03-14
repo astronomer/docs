@@ -2,12 +2,8 @@
 title: "Use Airflow templates"
 sidebar_label: "Jinja templates"
 id: templating
+description: "Learn about Jinja templating in Apache Airflow and see examples of how to pass dynamic information into task instances at runtime."
 ---
-
-<head>
-  <meta name="description" content="Learn about Jinja templating in Apache Airflow and see examples of how to pass dynamic information into task instances at runtime. " />
-  <meta name="og:description" content="Learn about Jinja templating in Apache Airflow and see examples of how to pass dynamic information into task instances at runtime. " />
-</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

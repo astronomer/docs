@@ -76,7 +76,7 @@ The scheduler depends on the Airflow metadata database to keep track of past and
 - **Task Instances** contains a record of every task run with a variety of attributes such as the priority weight, duration, or the URL to the task log.
 - **Task Reschedule** lists tasks that have been rescheduled.
 - **Triggers** shows all currently running [triggers](deferrable-operators.md).
-- **SLA Misses** keeps track of tasks that missed their [SLA](error-notifications-in-airflow.md#airflow-slas).
+- **SLA Misses** keeps track of tasks that missed their SLA.
 
 ### Other tables
 
@@ -96,7 +96,7 @@ There are additional tables in the metadata database storing data ranging from D
 
 - Memory in the Airflow metadata database can be limited depending on your setup, and running low on memory in your metadata database can cause performance issues in Airflow. This is one of the many reasons why Astronomer advises against moving large amounts of data with XCom, and recommends using a cleanup and archiving mechanism in any production deployments.
 
-- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/) with a built-in scalable and resilient metadata database.
+- Since the metadata database is critical for the scalability and resiliency of your Airflow deployment, it is best practice to use a managed database service for production environments, for example [AWS RDS](https://aws.amazon.com/rds/) or [Google Cloud SQL](https://cloud.google.com/sql). Alternatively, you can use a managed Airflow service like [Astro](https://www.astronomer.io/try-astro/?utm_medium=docs&utm_content=learn-airflow-database&utm_source=body) with a built-in scalable and resilient metadata database.
 
 - When configuring a database backend, make sure your version is fully supported by checking the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html#choosing-database-backend).
 

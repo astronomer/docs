@@ -77,7 +77,7 @@ To add a Team to a Workspace:
 
 5. Click **Add**.
 
-:::caution
+:::warning
 
 If a user already exists on a Workspace before being invited via a Team, the user context with the most permissive role will be applied to the Workspace. For more information, read [Import IdP Groups](import-idp-groups.md).
 
@@ -137,7 +137,7 @@ To add a team to a Deployment:
 
     ![Screen for adding a Team to a Deployment](/img/software/add-team-deployment.png)
 
-:::caution
+:::warning
 
 If a user already exists on a Deployment before being invited via a Team, the user context with the most permissive role will be applied to the Deployment. For more information, read [Import IdP Groups](import-idp-groups.md).
 
@@ -313,5 +313,5 @@ Deployment Viewers cannot deploy to, modify, or delete anything within an Airflo
 
 As an Astronomer Software user, you're free to customize all user permissions at the platform-level. For more information, read:
 
-- [Manage Users on Astronomer Software](manage-platform-users.md#customize-permissions)
+- [Manage Users on Astronomer Software](manage-platform-users.md#customize-role-permissions)
 - [Integrate an auth system](integrate-auth-system.md)

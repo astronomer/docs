@@ -1,8 +1,8 @@
 ---
-title: 'Using registry backends in Astronomer Software'
+title: 'Using external registry backends in Astronomer Software'
 sidebar_label: 'Use a registry backend'
 id: registry-backend
-description: Configure a registry backend to work with the Astronomer platform.
+description: Configure an external registry backend to work with the Astronomer platform.
 ---
 
 Astronomer Software requires a Docker Registry to store the Docker Images generated every time a user pushes code or makes a configuration change to an Airflow Deployment on Astronomer.
@@ -17,7 +17,7 @@ The following are the registry backend tools supported by Astronomer:
 
 :::info
 
-This document explains only how to set up a registry for hosting Astronomer's system images. To create a custom registry for Deployment images, see [Configure a custom image registry for Deployment images](custom-image-registry.md). Or, to host all images in a high-security environment with no connections to public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
+This document explains only how to set up a registry for hosting your Deployment images in external cloud object storage. To create a custom registry for Deployment images within your Astronomer Software cluster, see [Configure a custom image registry for Deployment images](custom-image-registry.md). Or, to host all images in a high-security environment with no connections to public networks or internet, see [Install Astronomer in an airgapped environment](install-airgapped.md).
 
 :::
 
@@ -76,7 +76,7 @@ nginx:
 
 #################################
 ## SMTP configuration
-#################################  
+#################################
 astronomer:
   houston:
     config:
@@ -144,7 +144,7 @@ To use AWS S3 as a registry backend solution, you'll need:
     $ kubectl create secret generic astronomer-s3-access-key --from-literal=accesskey=<your-access-key> -n <your-namespace>
     $ kubectl create secret generic astronomer-s3-secret-key --from-literal=secretkey=<your-secret-key> -n <your-namespace>
     ```
-   
+
 4. Select one of the following options:
 
   - To authenticate to AWS with your registry credentials, add this entry to the `config.yaml` file:
@@ -157,7 +157,7 @@ To use AWS S3 as a registry backend solution, you'll need:
           region: us-east-1
           regionendpoint: <your-region-endpoint>
           bucket: <your-bucket-name>
-        extraEnvVars: 
+        extraEnvVars:
           - name: REGISTRY_STORAGE_S3_REGION
             value: <your-s3-region>
           - name: REGISTRY_STORAGE_S3_ACCESSKEY
@@ -182,7 +182,7 @@ To use AWS S3 as a registry backend solution, you'll need:
           region: us-east-1
           regionendpoint: <your-region-endpoint>
           bucket: <your-bucket-name>
-        extraEnvVars: 
+        extraEnvVars:
           - name: REGISTRY_STORAGE_S3_REGION
             value: <your-s3-region>
     ```
@@ -211,7 +211,7 @@ astronomer:
       bucket: my-s3-bucket
       encrypt: true
       keyid: my-kms-key-id
-    extraEnvVars: 
+    extraEnvVars:
       - name: REGISTRY_STORAGE_S3_REGION
         value: <your-s3-region>
       - name: REGISTRY_STORAGE_S3_ACCESSKEY
@@ -233,15 +233,15 @@ astronomer:
 To avoid hardcoding credentials for your registry backend, add the following configuration to your `config.yaml` file:
 
 ```yaml
-registry: 
-    serviceAccount: 
-      # Specifies whether a service account should be created 
-      create: true 
-      # Annotations to add to the service account 
-      annotations: 
+registry:
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: true
+      # Annotations to add to the service account
+      annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::xxxxxxxxxxxxxx:role/<your-iam-role>
-    s3: 
-      enabled: true 
+    s3:
+      enabled: true
       region: <your-region>
       bucket: <your-registry-backend>
 ```
@@ -279,7 +279,7 @@ astronomer:
       accountkey: my-account-key
       container: my-container-name
       realm: core.windows.net
-    extraEnvVars: 
+    extraEnvVars:
       - name: REGISTRY_STORAGE_AZURE_REGION
         value: <your-azure-region>
       - name: REGISTRY_STORAGE_AZURE_ACCOUNTNAME

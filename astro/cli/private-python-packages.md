@@ -109,9 +109,9 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::info
 
-  See GitHub's documentation for all available [SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints). 
-  
-  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint. 
+  See GitHub's documentation for all available [SSH key fingerprints](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints).
+
+  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint.
 
   :::
 
@@ -129,7 +129,7 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
-3. (Optional) Test your DAGs locally. See [Restart your local environment](cli/develop-project.md#restart-your-local-environment).
+3. (Optional) Test your DAGs locally. See [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment).
 
 4. Deploy the image to Astro using the Astro CLI:
 
@@ -164,7 +164,17 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
 :::
 
-#### Step 2: Update Dockerfile
+#### Step 2: Define your extra index URL
+
+Create a new file called `indexurl.txt` that contains the extra index URL used to access your private PuPI index. For example:
+
+```text
+https://myuser:mycompany.com/api/pypi/pypi/simple
+```
+
+Ensure that this file is accessible from your Astro project. You will mount this value as a secret when you build your Astro project image.
+
+#### Step 3: Update Dockerfile
 
 1. (Optional) Copy and save any existing build steps in your `Dockerfile`.
 
@@ -176,7 +186,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
    :::info
 
-   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](/astro/runtime-version-lifecycle-policy.md#distribution).
+   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](/astro/runtime-image-architecture.mdx#distribution).
 
    :::
 
@@ -197,7 +207,9 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     FROM stage1 AS stage2
     # Install Python packages
     ARG PIP_EXTRA_INDEX_URL
-    ENV PIP_EXTRA_INDEX_URL=${PIP_EXTRA_INDEX_URL}
+    RUN --mount=type=secret,id=indexurl \
+        PIP_EXTRA_INDEX_URL=$(cat indexurl)
+
     COPY requirements.txt .
     USER root
     RUN pip install --no-cache-dir -q -r requirements.txt
@@ -226,25 +238,17 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
 #### Step 3: Build a custom Docker image
 
-1. Run the following command to automatically generate a unique image name:
+1. Run the following command to test your DAGs locally with your privately installed packages:
 
     ```sh
-    image_name=astro-$(date +%Y%m%d%H%M%S)
+    astro dev start --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt .
     ```
 
-2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<private-pypi-repo-domain-name>`, `<repo-username>` and `<repo-password>` with your own values.
+2. (Optional) Run the following command to deploy to Astro:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t $image_name .
+    astro deploy --build-secrets id=indexurl,src=$HOME/path/to/indexurl.txt .
     ```
-
-3. (Optional) Test your DAGs locally or deploy your image to Astro. See [Build and Run a Project Locally](#build-and-run-a-project-locally) or [Deploy Code to Astro](/astro/deploy-code.md).
-
-    ```sh
-    astro dev start --image-name $image_name
-    ```
-  
-4. (Optional) Deploy the image to a Deployment on Astro using the Astro CLI.
 
 Your Astro project can now use Python packages from your private PyPi index.
 

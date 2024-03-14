@@ -20,12 +20,6 @@ This is a proof of concept pipeline, please do not make any financial decisions 
 
 ![A screenshot of the streamlit application created in this use case with a augmented GPT created answer for the question "What space technology should I invest in today?".](/img/examples/use-case-airflow-llm-rag-finance_streamlit_app_answer.png)
 
-:::caution
-
-The Weavitate Airflow provider is currently in beta and subject to change. After the provider is released, this use case will be updated and the provider source code will be available.
-
-:::
-
 ## Before you start
 
 Before trying this example, make sure you have:
@@ -37,7 +31,7 @@ Before trying this example, make sure you have:
 
 ## Clone the project
 
-Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` connection and as `OPENAI_API_KEY`.
+Clone the example project from the [Astronomer GitHub](https://github.com/astronomer/use-case-airflow-llm-rag-finance). To keep your credentials secure when you deploy this project to your own git repository, make sure to create a file called `.env` with the contents of the `.env_example` file in the project root directory. You need to provide your own API key for the [Alpha Vantage API](https://www.alphavantage.co/support/#api-key) (`ALPHAVANTAGE_KEY`) and your own [OpenAI API key](https://platform.openai.com/docs/api-reference/introduction) in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` connection and as `OPENAI_APIKEY`.
 
 The repository is configured to spin up and use a local Weaviate instance. If you'd like to use an existing Weaviate instance, change the `host` parameter in the `AIRFLOW_CONN_WEAVIATE_DEFAULT` connection in the `.env` file.
 
@@ -92,30 +86,56 @@ This use case shows a pattern for retrieval-augmented generation LLMOps. Note th
 
 The [`finbuddy_load_news`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/dags/ingestion/finbuddy_load_news.py) DAG contains all tasks necessary to automatically and continually ingest new news articles into Weaviate. It is scheduled to run everyday at midnight UTC.
 
-The first task of the DAG checks if the Weaviate instance from the `WEAVIATE_CONN_ID` connection ID contains a schema with the same definition as the schema provided to `class_object_data` parameter. The schema for the news articles contains fields for metadata such as the `url`, `title`, or `source`. You can find the full schema at [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json). 
+The first task of the DAG checks if the Weaviate instance from the `WEAVIATE_CONN_ID` connection ID contains a class schema with the same name as the name provided to `class_name` parameter. The schema for the `NEWS` class contains fields for metadata such as the `url`, `title`, or `source`. You can find the full schema at [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json). 
 
-The WeaviateCheckSchemaBranchOperator [branches](airflow-branch-operator.md) the DAG into two paths depending on whether or not the schema already exists. If the schema already exists, the DAG continues with the `schema_already_exists` task, skipping schema creation. If the schema does not exist, the DAG continues with the `create_schema` task, creating the schema before continuing with the ingestion pipeline.
+The [`@task.branch`](airflow-branch-operator.md) decorator branches the DAG into two paths depending on whether or not the schema already exists. If the schema already exists, the DAG continues with the `schema_already_exists` task, skipping schema creation. If the schema does not exist, the DAG continues with the `create_schema` task, creating the schema before continuing with the ingestion pipeline.
 
 ```python
-check_schema = WeaviateCheckSchemaBranchOperator(
-    task_id="check_schema",
-    weaviate_conn_id=WEAVIATE_CONN_ID,
-    class_object_data="file://include/data/schema.json",
-    follow_task_ids_if_true=["schema_already_exists"],
-    follow_task_ids_if_false=["create_schema"],
-)
+@task.branch
+def check_schema(conn_id: str, class_name: str) -> bool:
+    "Check if the provided class already exists and decide on the next step."
+    hook = WeaviateHook(conn_id)
+    client = hook.get_client()
+
+    if not client.schema.get()["classes"]:
+        print("No classes found in this weaviate instance.")
+        return "create_schema"
+
+    existing_classes_names_with_vectorizer = [
+        x["class"] for x in client.schema.get()["classes"]
+    ]
+
+    if class_name in existing_classes_names_with_vectorizer:
+        print(f"Schema for class {class_name} exists.")
+        return "schema_already_exists"
+    else:
+        print(f"Class {class_name} does not exist yet.")
+        return "create_schema"
 ```
 
 ![Start of the graph view of the finbuddy_load_news DAG showing the branching between `schema_already_exists` and `create_schema`.](/img/examples/use-case-airflow-llm-rag-finance_schema_part.png)
 
-The WeaviateCreateSchemaOperator defines the task that creates the schema and retrieves the schema definition from [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json).
+The [WeaviateHook](https://registry.astronomer.io/providers/apache-airflow-providers-weaviate/versions/latest/modules/WeaviateHook)'s `.create_class` method defines creates a new class with the schema retrieved from [`include/data/schema.json`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/data/schema.json).
 
 ```python
-create_schema = WeaviateCreateSchemaOperator(
-    task_id="create_schema",
-    weaviate_conn_id=WEAVIATE_CONN_ID,
-    class_object_data="file://include/data/schema.json",
-)
+@task
+def create_schema(
+    conn_id: str, class_name: str, vectorizer: str, schema_json_path: str
+):
+    "Create a class with the provided name, schema and vectorizer."
+    import json
+
+    weaviate_hook = WeaviateHook(conn_id)
+
+    with open(schema_json_path) as f:
+        schema = json.load(f)
+        class_obj = next(
+            (item for item in schema["classes"] if item["class"] == class_name),
+            None,
+        )
+        class_obj["vectorizer"] = vectorizer
+
+    weaviate_hook.create_class(class_obj)
 ```
 
 After the schema is ready to take in new embeddings, the tasks defining ingestion paths for different news sources are created in a loop from a list of dictionaries that contain task parameters for each news source. This structure allows you to easily add more sources without needing to change the code of the DAG itself. 
@@ -167,7 +187,7 @@ You can add more news sources by adding a dictionary to the `news_sources` list 
 
 :::
 
-For each `news_source` in `news_sources`, four tasks are instantiated.
+For each `news_source` in `news_sources`, five tasks are instantiated.
 
 The first task makes a call to the respective news API to collect the article metadata in a dictionary and pass it to [XCom](airflow-passing-data-between-tasks.md). The function used in this task varies between news sources and is retrieved from the `extract_function` parameter of the `news_source` dictionary. Both, the `start_time` and `limit` for the API call are given to the extract function as positional arguments.
 
@@ -292,9 +312,9 @@ def split_text(records):
     return df.to_dict(orient="records")
 ```
 
-After creating chunks of text, the last step of the pipeline is to ingest the data into Weaviate. You can either compute the vector embeddings locally using the `import_data_local_embed` function, or use the `import_data` function and let Weaviate create the embeddings for you using [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). Both functions are located in [`include/tasks/ingest.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/ingest.py). This behavior can be toggled by setting `EMBEDD_LOCALLY` to `True` or `False` at the top of the DAG file. 
+After creating chunks of text, the last two steps of the pipeline deal with preparing the data for ingestion and ingesting it into Weaviate. You can either compute the vector embeddings locally using the `import_data_local_embed` function, or use the `import_data` function and let Weaviate create the embeddings for you using [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). Both functions are located in [`include/tasks/ingest.py`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/tasks/ingest.py). This behavior can be toggled by setting `EMBEDD_LOCALLY` to `True` or `False` at the top of the DAG file. 
 
-The ingest task uses the `@task.weaviate_import` decorator and is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries of news article chunks, creating one mapped task instance per chunk.
+The ingest task uses the [WeaviateIngestOperator](https://registry.astronomer.io/providers/apache-airflow-providers-weaviate/versions/latest/modules/WeaviateIngestOperator) and is [dynamically mapped](dynamic-tasks.md) over the list of dictionaries of prepared news article chunks, creating one mapped task instance per chunk.
 
 ```python
 
@@ -303,25 +323,50 @@ EMBEDD_LOCALLY = False
 # ...
 
 if EMBEDD_LOCALLY:
-    task.weaviate_import(
-        ingest.import_data_local_embed,
-        task_id=f"weaviate_import_{news_source['name']}",
-        weaviate_conn_id=WEAVIATE_CONN_ID,
+    embed_obj = (
+        task(
+            ingest.import_data_local_embed,
+            task_id=f"prep_for_ingest_{news_source['name']}",
+        )
+        .partial(
+            class_name=WEAVIATE_CLASS_NAME,
+        )
+        .expand(record=split_texts)
+    )
+
+    import_data = WeaviateIngestOperator.partial(
+        task_id=f"import_data_local_embed_{news_source['name']}",
+        conn_id=WEAVIATE_CONN_ID,
+        class_name=WEAVIATE_CLASS_NAME,
+        vector_col="vectors",
         retries=3,
         retry_delay=30,
         trigger_rule="all_done",
-    ).partial(class_name="NEWS").expand(record=split_texts)
+    ).expand(input_data=embed_obj)
+
 else:
-    task.weaviate_import(
-        ingest.import_data,
-        task_id=f"weaviate_import_{news_source['name']}",
-        weaviate_conn_id=WEAVIATE_CONN_ID,
+    embed_obj = (
+        task(
+            ingest.import_data,
+            task_id=f"prep_for_ingest_{news_source['name']}",
+        )
+        .partial(
+            class_name=WEAVIATE_CLASS_NAME,
+        )
+        .expand(record=split_texts)
+    )
+
+    import_data = WeaviateIngestOperator.partial(
+        task_id=f"import_data_{news_source['name']}",
+        conn_id=WEAVIATE_CONN_ID,
+        class_name=WEAVIATE_CLASS_NAME,
         retries=3,
         retry_delay=30,
-    ).partial(class_name="NEWS").expand(record=split_texts)
+        trigger_rule="all_done",
+    ).expand(input_data=embed_obj)
 ```
 
-The ingestion function passed to the `@task.weaviate_import` decorator differs depending on whether the embeddings are pre-computed locally or not.
+The ingestion function passed to the `@task` decorator in the `prep_for_ingest...` task differs depending on whether the embeddings are pre-computed locally or not.
 
 <Tabs
     defaultValue="cloudembedd"
@@ -333,18 +378,12 @@ The ingestion function passed to the `@task.weaviate_import` decorator differs d
 
 <TabItem value="cloudembedd">
 
-If there is no `embedding_column` parameter defined, the `@task.weaviate_import` decorator assumes that Weaviate computes the embeddings using the vectorizer you provided in the `DEFAULT_VECTORIZER_MODULE` environment variable in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). 
+If there is no `vector_col` parameter defined, the WeaviateIngestOperator decorator assumes that Weaviate computes the embeddings using the vectorizer you provided in the `DEFAULT_VECTORIZER_MODULE` environment variable in the [`docker-compose.override.yaml`](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/docker-compose.override.yml) file. In this use case, the default vectorizer is [`text2vec-openai`](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-openai). The only preparation necessary by the ingestion function is to add a UUID to each news article chunk and to convert the dataframe to a list of dictionaries.
 
 ```python
 def import_data(
     record,
     class_name: str,
-    upsert=False,
-    uuid_source_column="url",
-    batch_size=1000,
-    error_threshold=0,
-    batched_mode=True,
-    verbose=False,
 ):
     df = pd.DataFrame(record, index=[0])
 
@@ -354,32 +393,18 @@ def import_data(
 
     print(f"Passing {len(df)} objects for embedding and import.")
 
-    return {
-        "data": df,
-        "class_name": class_name,
-        "upsert": upsert,
-        "uuid_column": "uuid",
-        "error_threshold": error_threshold,
-        "batched_mode": batched_mode,
-        "batch_size": batch_size,
-        "verbose": verbose,
-    }
+    return df.to_dict(orient="records")
 ```
 
 </TabItem>
 <TabItem value="localembedd">
 
-If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that for existing embeddings, the `embedding_column` parameter of the dictionary returned by the ingestion function needs to be set to the name of the column containing the embeddings (`vectors` in this example).  
+If you choose to embed locally, an open-source model specialized for financial information, [FinBERT](https://huggingface.co/ProsusAI/finbert), is retrieved from [HuggingFace](https://huggingface.co/). Note that for existing embeddings, the `vector_col` parameter needs to be specified in the downstream WeaviateIngestOperator task. The `import_data_local_embed` function adds the locally computed vectors to the `vectors` key, creates a UUID for each news article chunk, and converts the dataframe to a list of dictionaries for ingestion into Weaviate.
 
 ```python
 def import_data_local_embed(
     record,
-    class_name: str,
-    upsert=False,
-    embedding_column="vector",
-    uuid_source_column="url",
-    error_threshold=0,
-    verbose=False,
+    class_name: str
 ):
     print("Embedding locally.")
     text = record["full_text"]
@@ -414,23 +439,16 @@ def import_data_local_embed(
         lambda x: generate_uuid5(identifier=x.to_dict(), namespace=class_name), axis=1
     )
 
-    print(f"Passing {len(df)} pre-embedded objects for import.")
+    print(f"Passing {len(df)} locally embedded objects for import.")
 
-    return {
-        "data": df,
-        "class_name": class_name,
-        "upsert": upsert,
-        "embedding_column": embedding_column,
-        "uuid_column": "uuid",
-        "error_threshold": error_threshold,
-        "verbose": verbose,
-    }
+    return df.to_dict(orient="records")
 ```
 
 :::info
 
 Local embedding is much slower than embedding via a cloud based vectorizer. Astronomer recommends using a [cloud based vectorizer](https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules) for production use cases.
-If you use local embeddings, you also need to set `EMBEDD_LOCALLY` to `True` at the start of the [streamlit app](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) file and match the models used for embedding between the news articles and the user input in the app.
+If you use local embeddings, you also need to set `EMBEDD_LOCALLY` to `True` at the start of the [streamlit app](https://github.com/astronomer/use-case-airflow-llm-rag-finance/blob/main/include/streamlit/streamlit_app.py) file to match the models used for embedding between the news articles and the user input in the app.
+When switching between models you need to empty the Weaviate database and re-ingest the data to ensure that the dimensions of the embeddings match.
 
 :::
 
@@ -481,6 +499,8 @@ def get_embedding(text):
             last_hidden_state = outputs.last_hidden_state
             mean_tensor = last_hidden_state.mean(dim=1)
             embeddings = mean_tensor.numpy()
+
+        embeddings = embeddings[0].tolist()
     else:
         model = "text-embedding-ada-002"
         embeddings = openai.Embedding.create(input=[text], model=model)["data"][0][
@@ -491,9 +511,6 @@ def get_embedding(text):
 
 
 def get_relevant_articles(reworded_prompt, limit=5, certainty=0.75):
-    my_credentials = weaviate.AuthApiKey("adminkey")
-
-    client = weaviate.Client("http://weaviate:8081", auth_client_secret=my_credentials)
 
     client = weaviate.Client(
         url="http://weaviate:8081",
@@ -504,25 +521,46 @@ def get_relevant_articles(reworded_prompt, limit=5, certainty=0.75):
 
     nearVector = get_embedding(input_text)
 
-    result = (
-        client.query.get("NEWS", ["title", "url", "full_text", "time_published"])
-        .with_near_vector({"vector": nearVector, "certainty": certainty})
-        .with_limit(limit)
-        .do()
-    )
+    count = client.query.get("NEWS", ["full_text"]).do()
+    st.write(f"Total articles in NEWS: {len(count['data']['Get']['NEWS'])}")
+
+    if EMBEDD_LOCALLY:
+        result = (
+            client.query.get("NEWS", ["title", "url", "full_text", "published_at"])
+            .with_near_vector({"vector": nearVector, "certainty": certainty})
+            .with_limit(limit)
+            .do()
+        )
+
+    else:
+        result = (
+            client.query.get("NEWS", ["title", "url", "full_text", "published_at"])
+            .with_near_vector({"vector": nearVector, "certainty": certainty})
+            .with_limit(limit)
+            .do()
+        )
 
     return result["data"]["Get"]["NEWS"]
 
 
 def get_response(articles, query):
-    prompt = """
-    You are a friendly trading bot reading the morning news 
-    for your favorite day trader. 
+    prompt = """You are a friendly trading bot reading the morning news for your favorite day trader. 
     Answer their question while taking the following articles into account: """
-    
+
     for article in articles:
+        article_title = article["title"] if article["title"] else "unknown"
+        article_published_at = (
+            article["published_at"] if article["published_at"] else "unknown"
+        )
+
+        article_full_text = article["full_text"] if article["full_text"] else "no text"
+
         article_info = (
-            article["title"] + " was published at " + article["time_published"] + " Full text: " + article["full_text"]
+            article_title
+            + " was published at "
+            + article_published_at
+            + " Full text: "
+            + article_full_text
         )
         prompt += " " + article_info + " "
 
@@ -534,10 +572,11 @@ def get_response(articles, query):
     Remember to SUBTLY steer the trader towards climate sustainable investments, 
     humans need the earth to survive. Don't say that outright though. 
     Answer their question while also saying something motivating about the day :smile:. 
-    Your answer: """
+    Your answer:"""
 
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    chat_completion = openai.ChatCompletion.create(model="gpt-4", messages=[{"role": "user", "content": prompt}])
+    chat_completion = openai.ChatCompletion.create(
+        model="gpt-4", messages=[{"role": "user", "content": prompt}]
+    )
 
     return chat_completion
 ```

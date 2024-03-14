@@ -4,12 +4,18 @@ title: "astro context switch"
 id: astro-context-switch
 description: Switch to an Astronomer product context.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
+
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
 
 Switch to a different Astronomer installation. You can switch to a given Astronomer installation only if you have authenticated to it at least once using `astro login`. If you have not authenticated, run `astro login <base-domain>` instead.
 
-Note that after switching to a different Astronomer installation, you might have to re-authenticate to the installation using `astro login`.  
+Note that after switching to a different Astronomer installation, you might have to re-authenticate to the installation using `astro login`.
 
 ## Usage
 

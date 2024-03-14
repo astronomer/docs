@@ -5,13 +5,11 @@ id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
 
-:::warning Deprecation Notice: Deployment API Keys 
+:::danger Deprecation Notice: Deployment API Keys
 
 Deployment API keys are deprecated in favor of [Deployment API tokens](deployment-api-tokens.md).
 
-You can continue to use existing Deployment API keys but you cannot create new API keys after October 31, 2023. After this date, Deployments with zero API keys will no longer display the **API Keys** tab and you won't be able to create new Deployment API keys. If you want to continue using API keys after October 31, ensure that you always have at least one API key configured for the Deployment prior to October 31.
-
-You will have to convert existing API keys into Deployment API tokens in the future when API Keys are no longer supported, however, the deadline for converting API keys has not yet been determined.
+You must convert existing API keys into Deployment API tokens by **June 1, 2024**, after which API keys will no longer work.
 
 If you have any questions, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
@@ -35,7 +33,7 @@ When using a Deployment API key, keep the following in mind:
 - A Deployment API key ID and secret are permanently valid.
 - Deployment API keys are deleted permanently if their corresponding Deployment is deleted.
 - A Deployment API key is not bound to the user who creates it. When a user who created the API key is removed from the Workspace, or their permissions change, the Deployment and CI/CD workflows that use the API key are not affected.
-- Any user or service with access to an API key and secret can access the corresponding Deployment. The only way to delete this access is to [delete the API key](api-keys.md#delete-an-api-key) or [delete the Deployment](deployment-settings.md#delete-a-deployment).
+- Any user or service with access to an API key and secret can access the corresponding Deployment. The only way to delete this access is to [delete the API key](api-keys.md#delete-an-api-key) or [delete the Deployment](deployment-details.md#delete-a-deployment).
 
 ## Create an API key
 

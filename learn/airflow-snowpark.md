@@ -3,7 +3,7 @@ title: "Orchestrate Snowpark Machine Learning Workflows with Apache Airflow"
 sidebar_label: "Snowpark Tutorial"
 description: "Learn how to integrate Snowpark and Airflow."
 id: airflow-snowpark
-sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
+sidebar_custom_props: { icon: 'img/integrations/snowpark.png' }
 ---
 
 import Tabs from '@theme/Tabs';
@@ -11,16 +11,16 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/airflow-snowpark/airflow_with_snowpark_tutorial.py';
 
-[Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is a framework that contains runtimes and libraries to run non-SQL code in [Snowflake](https://www.snowflake.com/en/). Snowpark comes with a [comprehensive machine learning library](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index) optimized for Snowflake. 
+[Snowpark](https://www.snowflake.com/en/data-cloud/snowpark/) is the set of runtimes and libraries that securely deploy and process Python and other programming code in [Snowflake](https://www.snowflake.com/en/). This includes [Snowpark ML](https://docs.snowflake.com/en/developer-guide/snowpark-ml/index), the Python library and underlying infrastructure for end-to-end ML workflows in Snowflake. Snowpark ML has 2 components: [Snowpark ML Modeling](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-modeling) for model development, and Snowpark ML Operations including the [Snowpark Model Registry](https://docs.snowflake.com/en/developer-guide/snowpark-ml/snowpark-ml-mlops-model-registry), for model deployment and management.
 
 In this tutorial, you'll learn how to: 
 
 - Create a [custom XCom backend](custom-xcom-backends-tutorial.md) in Snowflake.
-- Create and use a model registry in Snowflake.
+- Create and use the Snowpark Model Registry in Snowflake.
 - Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
 - Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset to predict skiers' afternoon beverage choice.
 
-:::caution
+:::warning
 
 The provider used in this tutorial is currently in beta and both its contents and decorators are subject to change. After the official release, this tutorial will be updated.
 
@@ -32,11 +32,11 @@ The provider used in this tutorial is currently in beta and both its contents an
 
 Snowpark allows you to use Python to perform transformations and machine learning operations on data stored in Snowflake.
 
-Integrating Snowpark with Airflow offers the benefits of:
+Integrating Snowpark for Python with Airflow offers the benefits of:
 
-- Running machine learning models directly in Snowflake, without having to move data out of your Snowflake database.
+- Running machine learning models directly in Snowflake, without having to move data out of Snowflake.
 - Expressing data transformations in Snowflake in Python instead of SQL.
-- Storing and versioning your machine learning models in a model registry inside Snowflake.
+- Storing and versioning your machine learning models using the Snowpark Model Registry inside Snowflake.
 - Using Snowpark's compute resources instead of your Airflow cluster resources for machine learning.
 - Using Airflow for Snowpark Python orchestration to enable automation, auditing, logging, retry, and complex triggering for powerful workflows.
 
@@ -99,26 +99,21 @@ The example code from this tutorial is also available on [GitHub](https://github
     $ astro dev init
     ```
 
-2. Download the `whl` file for the Astro Snowflake provider beta version from the [Astronomer Github repository](https://github.com/astronomer/learn-tutorials-data/blob/main/wheel_files/astro_provider_snowflake-0.0.0-py3-none-any.whl) and save it in your Astro project's `include` directory.
-
-3. Create a new file in your Astro project's root directory called `requirements-snowpark.txt`. This file contains all Python packages that you install in your reuseable Snowpark environment.
+2. Create a new file in your Astro project's root directory called `requirements-snowpark.txt`. This file contains all Python packages that you install in your reuseable Snowpark environment.
 
     ```text
     psycopg2-binary
-    snowflake_snowpark_python[pandas]==1.5.1
+    snowflake_snowpark_python[pandas]>=1.11.1
+    git+https://github.com/astronomer/astro-provider-snowflake.git
     virtualenv
-    /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
     ```
 
-4. Change the content of the `Dockerfile` of your Astro project to the following, which imports the `whl` file and creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
+3. Change the content of the `Dockerfile` of your Astro project to the following, which creates a virtual environment by using the [Astro venv buildkit](https://github.com/astronomer/astro-provider-venv). The requirements added in the previous step are installed in that virtual environment. This tutorial includes Snowpark Python tasks that are running in virtual environments, which is a common pattern in production to simplify dependency management. This Dockerfile creates a virtual environment called `snowpark` with the Python version 3.8 and the packages specified in `requirements-snowpark.txt`. 
 
     ```dockerfile
     # syntax=quay.io/astronomer/airflow-extensions:latest
 
-    FROM quay.io/astronomer/astro-runtime:9.1.0-python-3.9-base
-
-    # Copy the whl file to the image
-    COPY include/astro_provider_snowflake-0.0.0-py3-none-any.whl /tmp
+    FROM quay.io/astronomer/astro-runtime:10.2.0
 
     # Create the virtual environment
     PYENV 3.8 snowpark requirements-snowpark.txt
@@ -128,23 +123,25 @@ The example code from this tutorial is also available on [GitHub](https://github
     RUN python3.8 -m pip install -r /tmp/requirements-snowpark.txt
     ```
 
-5. Add the following package to your `packages.txt` file:
+4. Add the following package to your `packages.txt` file:
 
     ```text
     build-essential
+    git
     ```
 
-6. Add the following packages to your `requirements.txt` file. The Astro Snowflake provider is installed from the `whl` file.
+5. Add the following packages to your `requirements.txt` file. The Astro Snowflake provider is installed from the `whl` file.
 
     ```text
-    apache-airflow-providers-snowflake==4.1.0
-    snowflake-snowpark-python[pandas]==1.5.1
-    snowflake-ml-python==1.0.7
-    matplotlib==3.7.3
-    /tmp/astro_provider_snowflake-0.0.0-py3-none-any.whl
+    apache-airflow-providers-snowflake==5.2.0
+    apache-airflow-providers-amazon==8.15.0
+    snowflake-snowpark-python[pandas]==1.11.1
+    snowflake-ml-python==1.1.2
+    matplotlib==3.8.1
+    git+https://github.com/astronomer/astro-provider-snowflake.git
     ```
 
-:::caution
+:::warning
 
 The Astro Snowflake provider is currently in beta. Classes from this provider might be subject to change and will be included in the [Snowflake provider](https://registry.astronomer.io/providers/apache-airflow-providers-snowflake/versions/latest) in a future release. 
 
@@ -154,22 +151,21 @@ The Astro Snowflake provider is currently in beta. Classes from this provider mi
 
     ```text
     AIRFLOW__CORE__ALLOWED_DESERIALIZATION_CLASSES=airflow\.* astro\.*
-    AIRFLOW__CORE__XCOM_SNOWFLAKE_CONN_NAME='snowflake_default'
     AIRFLOW_CONN_SNOWFLAKE_DEFAULT='{
-        "conn_type": "snowflake",
-        "login": "<username>",
-        "password": "<password>",
-        "schema": "MY_SKI_DATA_SCHEMA",
+        "conn_type":"snowflake",
+        "login":"<username>",
+        "password":"<password>",
+        "schema":"MY_SKI_DATA_SCHEMA",
         "extra":
             {
-                "account": "<account>",
-                "warehouse": "<warehouse>",
-                "database": "MY_SKI_DATA_DATABASE",
-                "region": "<region>",
-                "role": "<role>",
-                "authenticator": "snowflake",
-                "session_parameters": null,
-                "application": "AIRFLOW"
+                "account":"<account>",
+                "warehouse":"<warehouse>",
+                "database":"MY_SKI_DATA_DATABASE",
+                "region":"<region>",
+                "role":"<role>",
+                "authenticator":"snowflake",
+                "session_parameters":null,
+                "application":"AIRFLOW"
             }
         }'
     ```
@@ -183,9 +179,10 @@ For more information on creating a Snowflake connection, see [Create a Snowflake
 8. (Optional) If you want to use a Snowflake custom XCom backend, add the following additional variables to your `.env`. Replace the values with the name of your own database, schema, table, and stage if you are not using the suggested values.
 
     ```text
-    AIRFLOW__CORE__XCOM_BACKEND='astronomer.providers.snowflake.xcom_backends.snowflake.SnowflakeXComBackend'
-    AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE='SNOWPARK_XCOM_DB.SNOWPARK_XCOM_SCHEMA.XCOM_TABLE'
-    AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE='SNOWPARK_XCOM_DB.SNOWPARK_XCOM_SCHEMA.XCOM_STAGE'
+    AIRFLOW__CORE__XCOM_BACKEND=snowpark_provider.xcom_backends.snowflake.SnowflakeXComBackend
+    AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE='AIRFLOW_XCOM_DB.AIRFLOW_XCOM_SCHEMA.XCOM_TABLE'
+    AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE='AIRFLOW_XCOM_DB.AIRFLOW_XCOM_SCHEMA.XCOM_STAGE'
+    AIRFLOW__CORE__XCOM_SNOWFLAKE_CONN_NAME='snowflake_default'
     ```
 
 ## Step 2: Add your data
@@ -215,7 +212,7 @@ The DAG in this tutorial runs a classification model on synthetic data to predic
     - `transform_table_step_one`: Transforms the data in the Snowflake table using Snowpark syntax to filter to only include rows of skiers that ordered the beverages we are interested in. Computation of this task runs within Snowpark. The resulting table is written to [XCom](airflow-passing-data-between-tasks.md) as a pandas DataFrame. 
 
     - `transform_table_step_two`: Transforms the pandas DataFrame created by the upstream task to filter only for serious skiers (those who skied at least one hour that day).
-    This task uses the `@task.snowpark_ext_python` decorator, running the code in the Snowpark virtual environment created in Step 1. The binary provided to the `python` parameter of the decorator determines which virtual environment to run a task in. The `@task.snowpark_ext_python` decorator works analogously to the [@task.external_python decorator](external-python-operator.md), except the code is executed within Snowpark's compute.
+    This task uses the `@task.snowpark_ext_python` decorator, running the code in the Snowpark virtual environment created in Step 1. The binary provided to the `python` parameter of the decorator determines which virtual environment to run a task in. The `@task.snowpark_ext_python` decorator works analogously to the [@task.external_python decorator](airflow-isolated-environments.md), except the code is executed within Snowpark's compute.
 
     - `train_beverage_classifier`: Trains a [Snowpark Logistic Regression model](https://docs.snowflake.com/en/developer-guide/snowpark-ml/reference/latest/api/modeling/snowflake.ml.modeling.linear_model.LogisticRegression) on the dataset, saves the model to the model registry, and creates predictions from a test dataset. This task uses the `@task.snowpark_virtualenv` decorator to run the code in a newly created virtual environment within Snowpark's compute. The `requirements` parameter of the decorator specifies the packages to install in the virtual environment. The model predictions are saved to XCom as a pandas DataFrame.
 
@@ -273,3 +270,9 @@ Congratulations! You trained a classification model in Snowpark using Airflow. T
 - `@task.snowpark_python` runs your code in a standard Snowpark environment. Use this decorator if you need to run code in Snowpark that does not require any additional packages that aren't preinstalled in a standard Snowpark environment. The corresponding traditional operator is the SnowparkPythonOperator.
 - `@task.snowpark_ext_python` runs your code in a pre-existing virtual environment within Snowpark. Use this decorator when you want to reuse virtual environments in different tasks in the same Airflow instances, or your virtual environment takes a long time to build. The corresponding traditional operator is the SnowparkExternalPythonOperator.
 - `@task.snowpark_virtualenv` runs your code in a virtual environment in Snowpark that is created at runtime for that specific task. Use this decorator when you want to tailor a virtual environment to a task and don't need to reuse it. The corresponding traditional operator is the SnowparkVirtualenvOperator.
+
+Corresponding traditional operators are available:
+
+- [SnowparkPythonOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkPythonOperator), which you can import using `from snowpark_provider.operators.snowpark import SnowparkPythonOperator`.
+- [SnowparkExternalPythonOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkExternalPythonOperator), available using `from snowpark_provider.operators.snowpark import SnowparkExternalPythonOperator`.
+- [SnowparkVirtualenvOperator](https://registry.astronomer.io/providers/astro-provider-snowflake/versions/latest/modules/SnowparkVirtualenvOperator), with the import `from snowpark_provider.operators.snowpark import SnowparkVirtualenvOperator`.

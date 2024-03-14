@@ -4,32 +4,31 @@ title: "astro deployment update"
 id: astro-deployment-update
 description: Update a Deployment.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::info  
+:::info
 
-The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts. 
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts.
 
 :::
 
 <Tabs
-    defaultValue="astro"
-    values={[
-        {label: 'Astro', value: 'astro'},
-        {label: 'Software', value: 'software'},
-    ]}>
+defaultValue="astro"
+values={[
+{label: 'Astro', value: 'astro'},
+{label: 'Software', value: 'software'},
+]}>
 <TabItem value="astro">
 
-
-Update the configuration for a Deployment on Astro. 
+Update the configuration for a Deployment on Astro.
 
 :::info
 
-To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment).
+To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md).
 
 :::
 
@@ -41,31 +40,35 @@ astro deployment update <deployment-id> <flags>
 
 :::tip
 
-To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+This command is recommended for automated workflows. To run this command in an automated process such as a [CI/CD pipeline](set-up-ci-cd.md), you can generate an API token, then specify the `ASTRO_API_TOKEN` environment variable in the system running the Astro CLI:
 
-- `ASTRONOMER_KEY_ID`
-- `ASTRONOMER_KEY_SECRET`
+```bash
+export ASTRO_API_TOKEN=<your-token>
+```
 
-After setting the variables, this command works for a Deployment and you don't need to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
-
+See [Organization](organization-api-tokens.md), [Workspace](workspace-api-tokens.md), and [Deployment](deployment-api-tokens.md) API token documentation for more details about ways to use API tokens.
 :::
 
 ## Options
 
-| Option                         | Description                                                                                                                                                                                                                             | Possible Values                                                                                                                                |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--dag-deploy`                 | Enable or disable DAG-only deploys for the Deployment.                                                                                                                                                                                  | Either `enable` or `disable`. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) before using `disable` to disable the feature. |
-| `--deployment-file`            | Location of the Deployment file to update the Deployment with. The file format can be JSON or YAML. See [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment). | A valid file path to any YAML or JSON Deployment file                                                                                          |
-| `<deployment-id>` (_Required_) | The ID of the Deployment to update                                                                                                                                                                                                      | Any valid Deployment ID                                                                                                                        |
-| `--deployment-name`            | The name of the Deployment to update. Use as an alternative to `<deployment-id>`.                                                                                                                                                       | Any valid Deployment name                                                                                                                      |
-| `-d`,`--description`           | The description for the Deployment                                                                                                                                                                                                      | Any string. Multiple-word descriptions should be specified in quotations (`"`)                                                                 |
-| `--enforce-cicd`               | Specify that the Deployment can only accept code deploys from API tokens and keys.                                                                                                                                                      | None                                                                                                                                           |
-| `-e`,`--executor`              | The executor to use for the Deployment                                                                                                                                                                                                  | CeleryExecutor or KubernetesExecutor                                                                                                           |
-| `-l`,`--name`                  | The Deployment's name                                                                                                                                                                                                                   | Any string. Multiple-word descriptions should be specified in quotations                                                                       |
-| `-s`,`--scheduler-au`          | The number of AU to allocate towards the Deployment's Scheduler(s). The default is`5`.                                                                                                                                                  | Integer between `0` and `24`                                                                                                                   |
-| `-r`,`--scheduler-replicas`    | The number of scheduler replicas for the Deployment. The default is `1`.                                                                                                                                                                | Integer between `0` and `4`                                                                                                                    |
-| `-f`,`--force`                 | Force a Deployment update                                                                                                                                                                                                               | None                                                                                                                                           |
-| `-w`,`--workspace-id`          | Specify a Workspace to update a Deployment outside of your current Workspace                                                                                                                                                            | Any valid Workspace ID                                                                                                                         |
+| Option                         | Description                                                                                                                                                                          | Possible Values                                                                                                                                                                                                                     |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--dag-deploy`                 | Enable or disable DAG-only deploys for the Deployment.                                                                                                                               | Either `enable` or `disable`. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) before using `disable` to disable the feature.                                                                         |
+| `--deployment-file`            | Location of the Deployment file to update the Deployment with. The file format can be JSON or YAML. See [Create a Deployment with a Deployment File](manage-deployments-as-code.md). | A valid file path to any YAML or JSON Deployment file                                                                                                                                                                               |
+| `<deployment-id>` (_Required_) | The ID of the Deployment to update                                                                                                                                                   | Any valid Deployment ID                                                                                                                                                                                                             |
+| `--deployment-name`            | The name of the Deployment to update. Use as an alternative to `<deployment-id>`.                                                                                                    | Any valid Deployment name                                                                                                                                                                                                           |
+| `-d`,`--description`           | The description for the Deployment                                                                                                                                                   | Any string. Multiple-word descriptions should be specified in quotations (`"`)                                                                                                                                                      |
+| `--cicd-enforcement`           | Specify that the Deployment can only accept code deploys from API tokens and keys. Note that in CLI versions before 1.23, this flag was `--enforce-cicd`.                            | None                                                                                                                                                                                                                                |
+| `--default-task-pod-cpu`         | (Astro Hosted only) The default task Pod CPUs to use for the Deployment. See [Customize a task's Kubernetes Pod](kubernetes-executor.md#customize-a-tasks-kubernetes-pod) for more information. |    A numeric value such as `0.25`. This number cannot exceed the values you configured in your [Default pod resources](deployment-resources.md#configure-kubernetes-pod-resources) in the UI or in your Deployment configuration file.                                                    |
+| `--default-task-pod-memory`         | (Astro Hosted only) The default task pod memory to use for the Deployment in Gi. See [Customize a task's Kubernetes Pod](kubernetes-executor.md#customize-a-tasks-kubernetes-pod) for more information. |   A numeric value followed by `Gi`, such as `0.5Gi`. This number cannot exceed the values you configured in your [Default pod resources](deployment-resources.md#configure-kubernetes-pod-resources) in the UI or in your Deployment configuration file.                               |
+| `-e`,`--executor`              | The executor to use for the Deployment                                                                                                                                               | CeleryExecutor or KubernetesExecutor                                                                                                                                                                                                |
+| `-f`,`--force`                 | Force a Deployment update                                                                                                                                                            | None                                                                                                                                                                                                                                |
+| `-l`,`--name`                  | The Deployment's name                                                                                                                                                                | Any string. Multiple-word descriptions should be specified in quotations                                                                                                                                                            |
+| `--resource-quota-cpu`         | (Astro Hosted only) The Deployment's CPU resource quota for Kubernetes Pods. See [Customize a task's Kubernetes Pod](kubernetes-executor.md#customize-a-tasks-kubernetes-pod) for more information. |    A numeric value such as `10`. This number cannot exceed the values you configured in your [Default pod resources](deployment-resources.md#configure-kubernetes-pod-resources) in the UI or in your [Deployment file](deployment-file-reference.md) configuration file.                                                    |
+| `--resource-quota-memory`         | (Astro Hosted only) The Deployment's memory resource quota for Kubernetes Pods in Gi. See [Customize a task's Kubernetes Pod](kubernetes-executor.md#customize-a-tasks-kubernetes-pod) for more information. |    A numeric value followed by `Gi`, such as `20Gi`. This number cannot exceed the values you configured in your [Default pod resources](deployment-resources.md#configure-kubernetes-pod-resources) in the UI or in your [Deployment file](deployment-file-reference.md) configuration file.                                                    |
+| `-s`,`--scheduler-au`          | The number of AU to allocate towards the Deployment's Scheduler(s). The default is`5`.                                                                                               | Integer between `0` and `24`                                                                                                                                                                                                        |
+| `-r`,`--scheduler-replicas`    | The number of scheduler replicas for the Deployment. The default is `1`.                                                                                                             | Integer between `0` and `4`                                                                                                                                                                                                         |
+| `-w`,`--workspace-id`          | Specify a Workspace to update a Deployment outside of your current Workspace                                                                                                         | Any valid Workspace ID                                                                                                                                                                                                              |
 
 ## Examples
 
@@ -95,14 +98,14 @@ astro deployment update <deployment-id>
 ## Options
 
 | Option                         | Description                                                                                                                                                        | Possible Values                                                                                                                     |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | --- |
 | `<deployment-id>` (_Required_) | The ID for the Deployment to update                                                                                                                                | Any valid Deployment ID                                                                                                             |
-| `-a`,`--airflow-version`       | The version of Astronomer Certified to use for the Deployment                                                                                                      | Any supported version of Astronomer Certified                                                                                       |  |
+| `-a`,`--airflow-version`       | The version of Astronomer Certified to use for the Deployment                                                                                                      | Any supported version of Astronomer Certified                                                                                       |     |
 | `-c`, `--cloud-role`           | An AWS or GCP IAM role to append to your Deployment's webserver, scheduler, and worker Pods                                                                        | Any string                                                                                                                          |
 | `-t`, `--dag-deployment-type`  | The DAG deploy method for the Deployment                                                                                                                           | Can be either `image`, `git_sync`, or `volume`. The default is `image`                                                              |
 | `-d`,`--description`           | The description for the Deployment                                                                                                                                 | Any string. Multiple-word descriptions should be specified in quotations (`"`)                                                      |
 | `-e`, `--executor`             | The executor type for the Deployment                                                                                                                               | `local`, `celery`, or `kubernetes`. The default value is `celery`                                                                   |
-| `-b`, `--git-branch-name`      | The branch name of the git repo to sync your Deployment from. Must be specified with `--dag-deployment-type=git_sync`                                              | Any valid git branch name                                                                                                           |  |
+| `-b`, `--git-branch-name`      | The branch name of the git repo to sync your Deployment from. Must be specified with `--dag-deployment-type=git_sync`                                              | Any valid git branch name                                                                                                           |     |
 | `-u`, `--git-repository-url`   | The URL for the git repository to sync your Deployment from. Must be specified with `--dag-deployment-type=git_sync`                                               | Any valid git repository URL                                                                                                        |
 | `-v`, `--git-revision`         | The commit reference of the branch that you want to sync with your Deployment. Must be specified with `--dag-deployment-type=git_sync`                             | Any valid git revision                                                                                                              |
 | `--known-hosts`                | The public key for your Git provider, which can be retrieved using `ssh-keyscan -t rsa <provider-domain>`. Must be specified with `--dag-deployment-type=git_sync` | Any valid public key                                                                                                                |

@@ -7,6 +7,12 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
 Show webserver, scheduler, and triggerer logs from your local Airflow environment.
 
 ## Usage

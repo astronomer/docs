@@ -34,7 +34,7 @@ In cases where SMTP credentials are difficult to acquire, enabling this flag mig
 
 To enable public signups, add the following yaml snippet to your `config.yaml` file:
 
-```
+```yaml
 astronomer:
   houston:
     config:
@@ -44,7 +44,7 @@ astronomer:
 
 An example `config.yaml` file would look like:
 
-```
+```yaml
 global:
   baseDomain: mybasedomain
   tlsSecret: astronomer-tls
@@ -121,7 +121,7 @@ Permissions are defined on Astronomer as `scope.entity.action`, where:
 - `entity`: The object or role being operated on
 - `action`: The verb describing the operation being performed on the `entity`
 
-For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level service account in any Deployment to which they belong. To view the available platform permissions and default role configurations, see [Reference: System permissions](manage-platform-users.md#reference-system-permissions).
+For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level service account in any Deployment to which they belong. To view the available platform permissions and default role configurations, see [Reference: System permissions](role-permission-reference.md).
 
 A permission for a given `scope` only applies to the parts of the scope where a user has been invited. For example, a user with a role including the `workspace.serviceAccounts.get` permission can view service accounts only in the Workspaces they belong to.
 
@@ -141,7 +141,7 @@ There are several chains of inheritance in the Software RBAC system. In the foll
 
 <!--- Version-specific -->
 
-Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.33/default.yaml) and determine the following:
+Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.34/default.yaml) and determine the following:
 
 - What role you want to configure. For example, `DEPLOYMENT_EDITOR`.
 - What permission(s) you want to add or remove from the role, For example, `deployment.images.push`.

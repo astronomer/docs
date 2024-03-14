@@ -2,12 +2,8 @@
 title: "Pass data between tasks"
 sidebar_label: "Pass data between tasks"
 id: airflow-passing-data-between-tasks
+description: "Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom."
 ---
-
-<head>
-  <meta name="description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
-  <meta name="og:description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
-</head>
 
 import CodeBlock from '@theme/CodeBlock';
 import airflow_passing_data_between_tasks_xcom from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_xcom.py';

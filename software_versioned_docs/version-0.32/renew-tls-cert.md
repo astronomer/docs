@@ -10,7 +10,7 @@ After you set up a transport layer security (TLS) certificate for Astronomer, yo
 * **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. Astronomer recommends this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
 * **Manual renewal**: Manual renewal works similarly to the initial certificate creation process, except that you replace your existing certificate by creating a new certificate. Astronomer recommends this method for large organizations that have their own processes for issuing certificates.
 
-:::caution
+:::warning
 
 By default, [Certbot](https://certbot.eff.org/) uses Elliptic Curve Digital Signature Algorithm (ECDSA) keys to sign certificates. If you're using Certbot to renew your TLS certificate, you must include `-key-type rsa --rsa-key-size 2048` in your command to sign your certificate with an RSA key. If you don't use RSA keys, deploys fail and error messages appear in the registry and Houston logs. For example, you can run the following command to sign your certificate with an RSA key:
 
@@ -125,7 +125,7 @@ sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rs
    kubectl get certificates -n astronomer
    ```
 
-6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the Software installation guide ([AWS](install-aws-standard.md#step-5-create-a-kubernetes-tls-secret)/[GCP](install-gcp-standard.md#step-5-create-a-kubernetes-tls-secret)/[AKS](install-azure-standard.md/#step-5-create-a-kubernetes-tls-secret)).
+6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the Software installation guide ([AWS](install-aws-standard.md#step-5-create-a-kubernetes-tls-secret), [GCP](install-gcp-standard.md#step-5-create-a-kubernetes-tls-secret), [AKS](install-azure-standard.md#step-5-create-a-kubernetes-tls-secret)).
 
 ## Manually renew TLS certificates
 

@@ -2,12 +2,8 @@
 title: "Using the BashOperator"
 id: bashoperator
 sidebar_label: BashOperator
+description: "Learn how to use the BashOperator to run bash commands and bash scripts. Review examples of how to run scripts in other languages than Python."
 ---
-
-<head>
-  <meta name="description" content="Learn how to use the BashOperator to run bash commands and bash scripts. Review examples of how to run scripts in other languages than Python." />
-  <meta name="og:description" content="Learn how to use the BashOperator to run bash commands and bash scripts. Review examples of how to run scripts in other languages than Python." />
-</head>
 
 import CodeBlock from '@theme/CodeBlock';
 import bash_two_commands_example_dag from '!!raw-loader!../code-samples/dags/bashoperator/bash_two_commands_example_dag.py';

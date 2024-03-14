@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: 'img/gcp.png' }
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Use this document to learn how you can grant an Astro cluster and its Deployments access to your external Google Cloud Platform (GCP) resources.
 
@@ -16,7 +16,7 @@ Publicly accessible endpoints allow you to quickly connect your Astro clusters o
 
 If you have stricter security requirements, you can [create a private connection](#create-a-private-connection-between-astro-and-gcp) to GCP in a few different ways.
 
-After you create a connection from your cluster to GCP, you might also need to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#gcp).
+After you create a connection from your cluster to GCP, you might also need to individually authorize Deployments to access specific resources. See [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md).
 
 ## Standard and dedicated cluster support for GCP networking
 
@@ -25,7 +25,7 @@ Standard clusters have different connection options than dedicated clusters.
 Standard clusters can connect to GCP in the following ways:
 
 - Using [static external IP addresses](#allowlist-external-ip-addresses-for-a-cluster).
-- Using Private Service Connect to all managed [Google APIs](https://cloud.google.com/vpc/docs/about-accessing-google-apis-endpoints).
+- Using Private Service Connect to all managed [Google APIs](https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-apis-global).
 
 Dedicated clusters can use all of the same connection options as standard clusters. Additionally, they support a number of private connectivity options including:
 
@@ -42,19 +42,9 @@ All Astro clusters include a set of external IP addresses that persist for the l
 1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
-4. Add the IP addresses to the allowlist of any external services that you want your cluster to access.
+4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
 
-After you allowlist a cluster's IP address, all Deployments in that cluster are allowed to access your external resources.
-
-### Allowlist external IP addresses for a Deployment
-
-To grant access to your external resources on per-Deployment basis, or if you are using a standard cluster, allowlist the IPs only for specific Deployments. For each Deployment that you want to allowlist:
-
-1. In the Cloud UI, select a Deployment, then click Details.
-2. Copy the IP addresses under External IPs.
-3. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
-
-When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer-managed control plane.
+After you allowlist a cluster's IP addresses, all Deployments in that cluster have network connectivity to GCP. When you use publicly accessible endpoints to connect to GCP, traffic moves directly between your Astro cluster and the GCP API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them.
 
 ## Create a private connection between Astro and GCP
 
@@ -103,7 +93,7 @@ After both VPC peering connections have been created, the connection becomes act
 
 Use Private Service Connect (PSC) to create private connections from Astro to GCP services without connecting over the public internet. See [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) to learn more.
 
-Astro clusters are by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis#supported-apis). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
+Astro clusters are by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-apis-global). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
 
 A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
 
@@ -118,4 +108,4 @@ gcloud services list --available --filter="name:googleapis.com"
 ## See Also
 
 - [Manage Airflow connections and variables](manage-connections-variables.md)
-- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md#gcp)
+- [Authorize your Deployment using workload identity](authorize-deployments-to-your-cloud.md)

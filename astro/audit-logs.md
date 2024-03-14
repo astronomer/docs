@@ -4,7 +4,7 @@ id: audit-logs
 sidebar_label: Export audit logs
 ---
 
-:::caution
+:::warning
 
 This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
@@ -26,15 +26,7 @@ Audit logs are retained for 90 days. Organization Owner permissions are required
 
 :::cli
 
-You can also export logs using the Astro CLI.
-
-1. Run the following command to enable the feature:
-
-   ```sh
-   astro config set -g beta.audit_logs true
-   ```
-
-2. Run the following command to export audit logs as a GZIP file to your current directory:
+You can also export logs using the Astro CLI. Run the following command to export audit logs as a GZIP file to your current directory:
 
    ```sh
    astro organization audit-logs export --organization-name="<your-organization-name>"

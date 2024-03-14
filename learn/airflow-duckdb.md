@@ -3,12 +3,8 @@ title: "Use DuckDB with Apache Airflow"
 sidebar_label: "DuckDB"
 id: airflow-duckdb
 sidebar_custom_props: { icon: 'img/integrations/duckdb.png' }
+description: "Learn how to use DuckDB with Airflow."
 ---
-
-<head>
-  <meta name="description" content="Learn how to use DuckDB with Airflow." />
-  <meta name="og:description" content="Learn how to use DuckDB with Airflow." />
-</head>
 
 import CodeBlock from '@theme/CodeBlock';
 import duckdb_tutorial_dag_1 from '!!raw-loader!../code-samples/dags/airflow-duckdb/duckdb_tutorial_dag_1.py';

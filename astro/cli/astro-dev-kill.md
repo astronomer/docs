@@ -7,9 +7,15 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
 Force-stop and remove all running containers for your local Airflow environment. Unlike [`astro dev stop`](astro-dev-stop.md), which only pauses running containers, `astro dev kill` deletes all data associated with your local Postgres database. This includes Airflow connections, logs, and task history.
 
-For more information, read [Hard reset your local environment](cli/run-airflow-locally.md#hard-reset-your-local-environment) or [Build and run a project locally](cli/develop-project.md#build-and-run-a-project-locally).
+For more information, read [Hard reset your local environment](cli/run-airflow-locally.md#hard-reset-your-local-environment) or [Build and run a project locally](cli/run-airflow-locally.md).
 
 ## Usage
 

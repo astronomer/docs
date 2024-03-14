@@ -4,10 +4,16 @@ title: 'astro logout'
 id: astro-logout
 description: Reference documentation for astro logout.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Log out of the Astro CLI. This command does not affect your current login session in the Cloud UI.
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
+Log out of the Astro CLI. This command does not affect your current web browser login session in either Astro or Astronomer Software.
 
 ## Usage
 

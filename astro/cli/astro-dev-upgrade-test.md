@@ -7,12 +7,18 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
 Test your local Astro project against a new version of Astro Runtime to prepare for an upgrade. Specifically, this command will run the following tests:
 
 - Identify major and minor version changes of the Python packages in your upgrade version.
 - Identify DAG import errors that will appear after you upgrade.
 
-See [Test before upgrading your Astro project](cli/test-your-astro-project-locally.md#test-before-upgrading-your-astro-project) for more detailed information about usage and test results.
+See [Test before upgrading your Astro project](cli/test-your-astro-project-locally.md) for more detailed information about usage and test results.
 
 ## Usage
 
@@ -27,6 +33,7 @@ By default, the command runs all three available tests on your project against t
 | Option                       | Description                                                                                                                                                                                                                             | Possible Values                                                                                        |
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `-a`, `--airflow-version`    | The equivalent of Airflow you want to upgrade to. The default is the latest available version. Note that the Astro CLI will still test against an Astro Runtime image based on the Airflow version you specify.                         | Any valid [Airflow version](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html). |
+| `--build-secrets` | Run `docker build --secret` to mount a secret value to your Docker image. | `id=<your-secret-id>, src=<path-to-secret> .` See [Docker documentation](https://docs.docker.com/build/building/secrets/#secret-mounts). |
 | `-d`, `--dag-test`           | Only run DAG tests. These tests check whether your DAGs will generate import errors after you upgrade.                                                                                                                                  | None                                                                                                   |
 | `-i`, `--deployment-id`      | Specify a Deployment ID to test with an image from an Astro Deployment instead of the image listed in your Astro project Dockerfile.                                                                                                    | Any valid Deployment ID.                                                                               |
 | `-n`, `--image-name`         | A custom image with an upgraded image tag to test against. The CLI creates a new Dockerfile in your project named `upgrade-test-<old version>--<new version>/Dockerfile` that includes your upgraded image, then tests against that Dockerfile. | A valid image URL                                                                                                   |

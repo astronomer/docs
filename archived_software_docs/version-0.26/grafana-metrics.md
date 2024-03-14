@@ -15,7 +15,7 @@ If you're interested in customizing the pre-built dashboards to create other vie
 
 ## Access Grafana
 
-By default, users with [System Admin permissions](manage-platform-users.md#system-roles) can access Grafana. To access Grafana from the Software UI:
+By default, users with [System Admin permissions](role-permission-reference.md#default-role-permissions-lists) can access Grafana. To access Grafana from the Software UI:
 
 1. As a System Admin, open Grafana from the Software UI:
 

@@ -36,7 +36,7 @@ An _Organization_ is the highest management level on Astro. An Organization cont
     - **Subscription:** Select the subscription you provided to Astronomer.
     - **Resource group:** Either create or select a resource group. Astronomer recommends creating a new resource group for Astro.
     - **Resource name:** Enter a name for the Astro resource, such as `astro-airflow`.
-    - **Region:** Select a region to host a placeholder Astro Azure resource. This should always be `EASTUS`. Note that this region has no effect on your Astro Hosted Airflow environments. You can still create Airflow environments in any supported Azure region.
+    - **Region:** Select a region to host a placeholder Astro Azure resource. Note that this region has no effect on your Astro Hosted Airflow environments. You can still create Airflow environments in any supported Azure region.
     - **Astro Organization name:** Enter a name for your Astro Organization. Astronomer recommends using the name of your company or organization.
     - **Workspace name:** Enter the name for the Workspace where you will manage and run Deployments. Astronomer recommends using the name of your team or project.
 

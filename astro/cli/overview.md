@@ -6,11 +6,6 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' } 
 ---
 
-<head>
-  <meta name="description" content="Learn more about the Astro command-line interface (CLI) and the commands that you can run. The Astro CLI lets you get started with Apache Airflow quickly." />
-  <meta name="og:description" content="Learn more about the Astro command-line interface (CLI) and the commands that you can run. The Astro CLI lets you get started with Apache Airflow quickly." />
-</head>
-
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
@@ -40,9 +35,10 @@ With the Astro CLI, you can:
 - Parse, debug, and test DAGs in a dedicated testing environment.
 - Manage your Astro resources, including Workspaces and Deployments.
 
-## Core commands
+## Get started
 
-- [`astro dev init`](cli/astro-dev-init.md): Create an Astro project.
-- [`astro dev start`](cli/astro-dev-start.md): Run Airflow locally.
-- [`astro dev restart`](cli/astro-dev-restart.md): Rebuild your Astro project.
-- [`astro deploy`](cli/astro-deploy.md): Deploy your code to Astro.
+<LinkCardGrid>
+  <LinkCard truncate label="Astro CLI Quickstart" description="Start a new Airflow project with just a few commands." href="/astro/cli/get-started-cli" />
+  <LinkCard truncate label="Release notes" description="Review the latest changes to the Astro CLI." href="/astro/cli/local-airflow-overview" />
+  <LinkCard truncate label="Command reference" description="Learn about all available Astro CLI commands." href="/astro/cli/reference" />
+</LinkCardGrid>

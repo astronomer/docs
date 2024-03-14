@@ -4,18 +4,24 @@ title: "astro registry provider add"
 id: astro-registry-provider-add
 description: Add a provider package to your project.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Download a provider package from the [Astronomer Registry](https://registry.astronomer.io/) to the `requirements.txt` file of your Astro project. 
+:::info
 
-## Usage 
+The behavior and format of this command are the same for both Astro and Software.
+
+:::
+
+Download a provider package from the [Astronomer Registry](https://registry.astronomer.io/) to the `requirements.txt` file of your Astro project.
+
+## Usage
 
 ```sh
 astro registry provider add
 ```
 
-When you run the command, the CLI prompts you for a provider to download. To retrieve the provider name, open the provider in the Astronomer registry and copy the URL between `providers/` and `/versions`. For example, in the URL `https://registry.astronomer.io/providers/apache-airflow-providers-airbyte/versions/3.3.1`, copy `apache-airflow-providers-airbyte`. 
+When you run the command, the CLI prompts you for a provider to download. To retrieve the provider name, open the provider in the Astronomer registry and copy the URL between `providers/` and `/versions`. For example, in the URL `https://registry.astronomer.io/providers/apache-airflow-providers-airbyte/versions/3.3.1`, copy `apache-airflow-providers-airbyte`.
 
 ## Options
 
@@ -27,8 +33,8 @@ When you run the command, the CLI prompts you for a provider to download. To ret
 ## Examples
 
 ```sh
-# Download version 1.2.0 of a provider
-astro registry provider add apache-airflow-providers-airbyte --version 1.2.0
+# Download version 3.3.1 of a provider
+astro registry provider add apache-airflow-providers-airbyte --version 3.3.1
 ```
 
 ## Related commands

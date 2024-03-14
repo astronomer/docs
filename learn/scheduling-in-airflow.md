@@ -2,12 +2,8 @@
 title: "DAG scheduling and timetables in Airflow"
 sidebar_label: "Schedule DAGs"
 id: scheduling-in-airflow
+description: "Get to know Airflow scheduling concepts and different ways to schedule a DAG. Learn how timetables in Airflow 2.2 bring new flexibility to DAG scheduling."
 ---
-
-<head>
-  <meta name="description" content="Get to know Airflow scheduling concepts and different ways to schedule a DAG. Learn how timetables in Airflow 2.2 bring new flexibility to DAG scheduling." />
-  <meta name="og:description" content="Get to know Airflow scheduling concepts and different ways to schedule a DAG. Learn how timetables in Airflow 2.2 bring new flexibility to DAG scheduling." />
-</head>
 
 One of the fundamental features of Apache Airflow is the ability to schedule jobs. Historically, Airflow users scheduled their DAGs by specifying a `schedule` with a cron expression, a timedelta object, or a preset Airflow schedule. Timetables, released in Airflow 2.2, allow users to create their own custom schedules using Python, effectively eliminating the limitations of cron. With timetables, you can now schedule DAGs to run at any time. Datasets, introduced in Airflow 2.4, let you schedule your DAGs on updates to a dataset rather than a time-based schedule. For more information about datasets, see [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md).
 
@@ -141,7 +137,7 @@ As of Airflow 2.6, you can run a DAG continuously with a pre-defined timetable. 
 
 This schedule will create one continuous DAG run, with a new run starting as soon as the previous run has completed, regardless of whether the previous run succeeded or failed. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
 
-:::caution
+:::warning
 
 Airflow is designed to handle orchestration of data pipelines in batches, and this feature is not intended for streaming or low-latency processes. If you need to run pipelines more frequently than every minute, consider using Airflow in combination with tools designed specifically for that purpose like [Apache Kafka](airflow-kafka.md).
 

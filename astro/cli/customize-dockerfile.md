@@ -6,7 +6,7 @@ id: customize-dockerfile
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 
 By default, the Astro project Dockerfile only includes a `FROM` statement that specifies your Astro Runtime version. However, you can extend your Dockerfile to use a different distribution or run additional buildtime arguments. Use this document to learn which Dockerfile customizations are supported both locally and on Astro.
@@ -17,7 +17,7 @@ By default, the Astro project Dockerfile only includes a `FROM` statement that s
 
 ## Use an alternative Astro Runtime distribution
 
-Starting with Astro Runtime 9, each version of Astro Runtime has a separate distribution for each currently supported Python version. Use an alternative Python distribution if any of your dependencies require a Python version other than the [default Runtime Python version](runtime-image-architecture.md#python-versioning).
+Starting with Astro Runtime 9, each version of Astro Runtime has a separate distribution for each currently supported Python version. Use an alternative Python distribution if any of your dependencies require a Python version other than the [default Runtime Python version](runtime-image-architecture.mdx#python-versioning).
 
 To use a specific Python distribution, update the first line in your Astro project `Dockerfile` to reference the required distribution:
 
@@ -37,9 +37,10 @@ To run additional commands as your Astro project is built into a Docker image, a
 
 For example, if you want to run `ls` when your image builds, your `Dockerfile` would look like this:
 
-<pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
+```
+FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
 RUN ls
-`}</code></pre>
+```
 
 This is supported both on Astro and in the context of local development.
 
@@ -55,7 +56,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
     RUN update-ca-certificates
     USER astro
     ```
-    
+
 2. (Optional) Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
-3. [Restart your local environment](cli/develop-project.md#restart-your-local-environment) or deploy to Astro. See [Deploy code](deploy-code.md).
+3. [Restart your local environment](cli/run-airflow-locally.md#restart-a-local-airflow-environment) or deploy to Astro. See [Deploy code](deploy-code.md).

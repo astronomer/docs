@@ -7,7 +7,7 @@ description: Customize your Astronomer image, including adding dependencies and 
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 The Astro CLI is intended to make it easier to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The following guidelines describe a few of the methods you can use to customize the Docker Image that gets pushed to Airflow every time you rebuild your image locally using `$ astro dev start` or deploy to Astronomer using `$ astro deploy`.
 
@@ -248,7 +248,7 @@ astro dev start --env .env
 
 ## Install Python packages from private sources
 
-Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](customize-image.md#add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](customize-image.md#install-python-packages-from-private-sources). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
 Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
 
@@ -283,7 +283,7 @@ To install Python packages from a private GitHub repository on Astronomer Softwa
 - A private GitHub repository for each of your custom Python packages.
 - A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
 
-:::warning
+:::danger
 
 If your organization enforces SAML single sign-on (SSO), you must first authorize your key to be used with that authentication method. For instructions, see [GitHub documentation](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
 
@@ -315,9 +315,9 @@ This example assumes that the name of each of your Python packages is identical 
    FROM quay.io/astronomer/astro-runtime:5.0.6-base AS stage1
    ```
 
-  :::caution
+  :::warning
 
-  Make sure to use the `-base` version of the Astro Runtime image that you want to customize. This image tag is  customizable and does not include default build logic. For more information, see [Distributions](runtime-image-architecture.md#distribution).
+  Make sure to use the `-base` version of the Astro Runtime image that you want to customize. This image tag is  customizable and does not include default build logic. For more information, see [Distributions](runtime-image-architecture.mdx#distribution).
 
   :::
 
@@ -415,7 +415,7 @@ To build from a private repository, you need:
 
 Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](https://pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
 
-:::caution
+:::warning
 
 Ensure that the name of the package on the private repository does not clash with any existing python packages. The order that pip will search indices might produce unexpected results.
 
@@ -431,9 +431,9 @@ Ensure that the name of the package on the private repository does not clash wit
    quay.io/astronomer/astro-runtime:5.0.6-base AS stage1
    ```
 
-   :::caution
+   :::warning
 
-    Make sure to use the `-base` version of the Astro Runtime image that you want to customize. This image tag is  customizable and does not include default build logic. For more information, see [Distributions](runtime-image-architecture.md#distribution).
+    Make sure to use the `-base` version of the Astro Runtime image that you want to customize. This image tag is  customizable and does not include default build logic. For more information, see [Distributions](runtime-image-architecture.mdx#distribution).
 
    :::
 
@@ -446,6 +446,8 @@ Ensure that the name of the package on the private repository does not clash wit
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install Python and OS-Level Packages
+
+    USER root
     COPY packages.txt .
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
 
@@ -460,9 +462,10 @@ Ensure that the name of the package on the private repository does not clash wit
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH='/home/astro/.local/bin:$PATH'
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
+    USER astro
     ```
 
     In order, these commands:

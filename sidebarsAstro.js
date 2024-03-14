@@ -95,7 +95,11 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "create-deployment",
-        "deployment-settings",
+        {
+          type: "category",
+          label: "Deployment settings",
+          items: ["deployment-settings", "deployment-details", "deployment-resources"],
+        },
         {
           type: "category",
           label: "Executors",
@@ -142,7 +146,15 @@ module.exports = {
               label: "CI/CD templates",
               items: [
                 "ci-cd-templates/template-overview",
-                "ci-cd-templates/github-actions",
+                {
+                  type: "category",
+                  label: "Github Actions",
+                  items: [
+                    "ci-cd-templates/github-actions-template",
+                    "ci-cd-templates/github-actions-deployment-preview",
+                    "ci-cd-templates/github-actions-private-network",
+                  ],
+                },
                 "ci-cd-templates/jenkins",
                 "ci-cd-templates/gitlab",
                 "ci-cd-templates/aws-s3",
@@ -174,13 +186,23 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics", "deployment-metrics", "organization-metrics"],
+          items: ["dag-metrics",
+           "deployment-metrics",
+           {
+            type: "category",
+            label: "Organization dashboards",
+            items: ["reporting-dashboard",
+            "reporting-dash-exports",
+            ],
+          },
+          ],
         },
         {
           type: "category",
           label: "Data lineage",
           items: ["data-lineage-concepts", "set-up-data-lineage", "data-lineage"],
         },
+        "deployment-health-incidents",
         "alerts",
         "airflow-email-notifications",
         "audit-logs",
@@ -213,6 +235,7 @@ module.exports = {
           label: "Deployments",
           items: [
             "deployment-api-tokens",
+            "customize-deployment-roles",
             "authorize-deployments-to-your-cloud",
             "transfer-a-deployment",
           ],
@@ -312,9 +335,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Use cases',
+      label: 'Best practices',
       items: [
-        'use-cases/connections-branch-deploys',
+        'best-practices/connections-branch-deploys',
+        'best-practices/airflow-vs-astro-alerts'
       ],
     },
     {
@@ -332,6 +356,8 @@ module.exports = {
           ],
         },
         'platform-variables',
+        'deployment-role-reference',
+        "allowlist-domains",
         "feature-previews",
         {
           type: "category",
@@ -373,9 +399,14 @@ module.exports = {
       id: "cli/develop-project",
     },
     {
-      type: "doc",
+      type: "category",
       label: "Run Airflow locally",
-      id: "cli/run-airflow-locally",
+      items: [
+        "cli/local-airflow-overview",
+        "cli/run-airflow-locally",
+        "cli/local-connections",
+        "cli/troubleshoot-locally"
+      ]
     },
     {
       type: "doc",
@@ -388,15 +419,20 @@ module.exports = {
       id: "cli/release-notes",
     },
     {
+      type: "doc",
+      label: "Release policy",
+      id: "cli/release-lifecycle-policy",
+    },
+    {
       type: "category",
       label: "Advanced",
       items: [
         "cli/configure-cli",
+        "cli/use-podman",
         "cli/customize-dockerfile",
         "cli/private-python-packages",
         "cli/authenticate-to-clouds",
         "cli/airflowignore",
-        "cli/release-lifecycle-policy"
       ],
     },
     {
@@ -465,6 +501,7 @@ module.exports = {
             },
             'cli/astro-deployment-create',
             'cli/astro-deployment-delete',
+            'cli/astro-deployment-hibernate',
             'cli/astro-deployment-inspect',
             'cli/astro-deployment-list',
             'cli/astro-deployment-logs',
@@ -486,6 +523,7 @@ module.exports = {
             'cli/astro-deployment-variable-create',
             'cli/astro-deployment-variable-list',
             'cli/astro-deployment-variable-update',
+            'cli/astro-deployment-wake-up',
             'cli/astro-deployment-worker-queue-create',
             'cli/astro-deployment-worker-queue-delete',
             'cli/astro-deployment-worker-queue-update',

@@ -20,7 +20,7 @@ export default function NavbarMobileSidebarLayout({
         <a className={cn(styles.button, styles.button__outline)} href="https://www.astronomer.io/?referral=docs-nav-button" target="_blank">
           Learn about Astronomer
         </a>
-        <a className={styles.button} href="https://www.astronomer.io/try-astro/?referral=docs-nav-button" target="_blank">
+        <a className={styles.button} href="https://www.astronomer.io/try-astro/?referral=docs-nav-button&utm_medium=docs&utm_content=web&utm_source=top_nav" target="_blank">
           Try Astro
         </a>
       </div>

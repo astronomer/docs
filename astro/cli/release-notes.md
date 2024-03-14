@@ -2,12 +2,11 @@
 sidebar_label: 'Release notes'
 title: 'Astro CLI release notes'
 id: release-notes
+description: "A record of the latest Astro command-line interface (CLI) features and bug fixes."
 ---
 
-<head>
-  <meta name="description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
-  <meta name="og:description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
-</head>
+import HostedBadge from '@site/src/components/HostedBadge';
+import HybridBadge from '@site/src/components/HybridBadge';
 
 <p>
     <a href="/astro-cli-release-notes.xml" target="_blank">
@@ -17,7 +16,109 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-- **Stable versions**: 1.21.0, 1.20.1, and 1.19.4. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+- **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
+
+## Astro CLI 1.24.1
+
+Release date: February 29, 2024
+
+### Bug fixes
+
+- Fixed an issue where the Astro CLI would experience a code panic if you tried to set a hibernation schedule for a Deployment that didn't exist.
+- Fixed an issue where the Astro CLI would send and retrieve hibernation schedules for non-development Deployments.
+
+## Astro CLI 1.24.0
+
+Release date: February 27, 2024
+
+### Support for hibernating development Deployments
+
+You can now use the Astro CLI to hibernate or wake up a development Deployment. These commands work well in automated processes where a Deployment requires flexibility for when it hibernates. Note that you can hibernate a Deployment only if you enable **Development Mode** when you [create the Deployment](create-deployment.md).
+
+Use the following new commands to hibernate development Deployments regardless of their existing hibernation schedule:
+
+- [`astro deployment hibernate`](https://docs.astronomer.io/astro/cli/astro-deployment-hibernate)
+- [`astro deployment wake-up`](https://docs.astronomer.io/astro/cli/astro-deployment-wake-up)
+
+Additionally, you can create new development Deployments and configure long-term hibernation schedules for them using `astro deployment create`.
+
+### Additional improvements
+
+- You can now configure a custom workload identity when you create a Deployment using a Deployment file. 
+- Added support for the upcoming custom role management feature on Astro
+
+### Bug fixes
+
+- Fixed an issue where `astro deployment variable list --save` didn't format secret environment variables correctly.
+- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token. 
+
+## Astro CLI 1.23.0
+
+Release date: February 14, 2024
+
+### Changes to existing CLI command flags
+
+The following flags have been updated, but will continue to work with a deprecation notice until the v1.25.0 release of the Astro CLI:
+
+- `astro deployment logs --key-word` ia a new flag that allows you to search your Deployment's logs for an exact key word or phrase.
+- `astro deployment create --cluster-type` is now `astro deployment create --type`.
+- `astro deployment create --enforce-cicd` is now `astro deployment create --cicd-enforcement`.
+
+### Kubernetes worker configurations are now consistent with the Astro Cloud UI
+
+You can now use Deployment files or the Astro CLI to create or update Kubernetes worker configurations.
+
+[Deployment files](deployment-file-reference.md) now include some new and updated fields for Deployment configuration to match the options available in the Cloud UI. This also allows you to create or update Kubernetes worker configurations directly, instead of requiring you to update the worker resources by changing the Kubernetes worker queue configuration.
+
+You can now use the `default_task_pod_cpu`, `default_task_pod_memory`, `default_worker_type`, `resource_quota_cpu`, and `resource_quota_memory` fields in a Deployment file to update your Kubernetes workers instead of creating or updating a Kubernetes default worker queue.
+
+With this new functionality, the following commands to update a Deployment running the Kubernetes executor continue to work, but display a deprecation notice:
+
+- `astro deployment worker-queue create`
+- `astro deployment worker-queue update`
+
+Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memory`, `--resource-quota-cpu`, or `--resource-quota-memory` flags with [`astro deployment create`](astro-deployment-create.md) and [`astro deployment update`](astro-deployment-update.md) to edit your Kubernetes worker configuration using the Astro CLI.
+
+### Changes to Deployment file configurations
+
+The following changes have been made to the format of [Deployment files](deployment-file-reference.md):
+
+- You no longer have to specify a `cluster_name` for standard Deployment files. 
+- `scheduler_size` is no longer case sensitive.
+- Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
+- Possible values for `deployment_type` now include `standard`, `dedicated`, and `hybrid` in addition to the existing values of `hosted_shared`, `hosted_dedicated`, and `hosted_standard`. This input is not case sensitive
+- Possible values for for the `executor` field are now include `celery` and `kubernetes`. `CeleryExecutor` and `KubernetesExecutor` still work. This input is not case sensitive, so, for example, `celeryexecutor` still works.
+- (_Astro Hosted only_) `default_task_pod_cpu`, `default_task_pod_memory`, `resource_quota_cpu`, and `resource_quota_memory` are new fields for Astro Hosted deployments.
+- (_Astro Hybrid only_)`default_worker_type` is a new field for Hybrid deployments that use the Kubernetes executor.
+
+### Additional improvements
+
+- You can now trigger a DAG-only deploy on Astronomer Software using `astro deploy --dags`. See [Deploy DAGs on Astronomer Software](https://docs.astronomer.io/software/deploy-dags).
+- `astro deployment logs --key-word` is a new flag that allows you to search your audit logs for an exact key word or phrase.
+- If you log in to Astro from the CLI, you need to select a Deployment when you deploy code. Previously, the Astro CLI used auto-select to automatically choose a Deployment for code deploys based on the CLI context. Now, by default, the CLI does not auto-selects the Deployments where your code deploys when you use it. However there are the following exceptions:
+    - If you log in to Astro with an API token using the `ASTRO_API_TOKEN`, `ASTRONOMER_KEY_ID`, or `ASTRONOMER_KEY_SECRET` environment variables, auto-select is enabled. This is important because it ensures that if you have CI/CD scripts that rely on auto-select, they will continue to work.
+    - There is a new config, `auto_select`. If `auto-select` is set to `true` in the config file, auto-select is always enabled.
+
+### Bug fixes
+
+- Fixed an issue where `astro dev pytest --args` and `astro dev pytest --build-secrets` could fail.
+
+## Astro CLI 1.22.0
+
+Release date: January 24, 2024
+
+### New flag to mount secrets to Astro project image
+
+Use the new `--build-secrets` flag with the following commands to mount a secret value to an Astro project image:
+
+- `astro deploy`
+- `astro dev parse`
+- `astro dev pytest`
+- `astro dev restart`
+- `astro dev start`
+- `astro dev upgrade test`
+
+This flag is equivalent to running [`docker build --secret`](https://docs.docker.com/build/building/secrets/#secret-mounts) for your Astro Runtime image build. Use this flag to simplify build steps for customizing the Astro Runtime image, for example when you need to [install Python packages from a private source](https://docs.astronomer.io/astro/cli/private-python-packages?tab=pypi#install-python-packages-from-private-sources) .
 
 ## Astro CLI 1.21.0
 
@@ -238,7 +339,7 @@ These commands can be used to manage API tokens as part of an automated workflow
 
 - You can now specify the `--cluster-type "dedicated"` flag when using `astro deployment create` to create a Deployment on a dedicated cluster in Astro Hosted.
 - You can now retrieve a Deployment's Workload Identity when using `astro deployment inspect`.
-- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-settings.md#enforce-ci-cd-deploys) on a given Deployment.
+- You can now specify the `--enforce-cicd` flag with `astro deployment create` and `astro deployment update` to [enforce CI/CD](deployment-details.md#enforce-cicd-deploys) on a given Deployment.
 - You can now [manage Deployments as code](manage-deployments-as-code.md) on Astro Hosted.
 
 ## Astro CLI 1.15.1
@@ -318,7 +419,7 @@ Release date: April 11, 2023
 
 Release date: March 30, 2023
 
-:::caution
+:::warning
 
 The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to [`astro organization user invite`](/cli/astro-organization-user-invite.md) before Astro CLI v1.15.0 is released.
 
@@ -331,7 +432,7 @@ You can now use the `-—clean-output` flag with the following commands to make 
 - `astro deployment create`
 - `astro deployment update`
 
-This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions.md).
+This is helpful for users automating actions with deployment files, like using the Deploy Action template with [Github Actions](/astro/ci-cd-templates/github-actions-deploy-action.md).
 
 ### New environment variable `ASTRO_HOME`
 
@@ -385,7 +486,7 @@ Release date: February 27, 2023
 
 You can now configure the Astro CLI to run Airflow locally and deploy to Astro using [Podman](https://podman.io/). Podman is an alternative container engine to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
-To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](configure-cli.md#run-the-astro-cli-using-podman).
+To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](https://docs.astronomer.io/astro/cli/use-podman).
 
 ### Bug fixes
 
@@ -493,7 +594,7 @@ To learn more, see [Test your Astro project locally](cli/test-your-astro-project
 
 ### Additional improvements
 
-- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-dags.md).
 - The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered in logical groupings instead of by alphabetical order.
 
 ### Bug fixes
@@ -517,7 +618,7 @@ Deploying only DAGs:
 
 When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](set-up-ci-cd.md).
+To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-dags.md). For example CI/CD workflows with this feature enabled, see [CI/CD](set-up-ci-cd.md).
 
 ### New `astro deployment inspect` command
 
@@ -645,7 +746,7 @@ Release date: July 19, 2022
 
 ### Deploy a custom Docker image with new `--image-name` flag
 
-You can now deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`, as long as the image is based on Astro Runtime and is available in a local Docker registry. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/develop-project.md#install-python-packages-from-private-sources).
+You can now deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`, as long as the image is based on Astro Runtime and is available in a local Docker registry. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](cli/private-python-packages.md).
 
 Using this flag, you can automate deploying custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows in different pipelines.
 
@@ -766,9 +867,9 @@ astrocloud auth login
 astro login
 ```
 
-For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade. For instructions, see [Migrate from `astrocloud` to `astro`](cli/install-cli.md#migrate-from-astrocloud-to-astro).
+For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade.
 
-:::caution Possible Breaking Change
+:::warning Possible Breaking Change
 
 If you currently have CI/CD pipelines that install the `astrocloud` executable of the Astro CLI, we encourage you to update them to use the latest version of `astro` to ensure reliability. All `astrocloud` commands will continue to work for some time but will be deprecated by Astronomer soon.
 
@@ -822,7 +923,7 @@ Release date: April 14, 2022
 
 ### New command to create and update environment variables
 
-`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](cli/develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
+`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables via a `.env` file locally, this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
 
 For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
@@ -903,7 +1004,7 @@ To better protect your Deployments from unexpected errors, `astro deploy` now au
 
 For more information about `astro deploy`, see [CLI command reference](cli/astro-deploy.md).
 
-:::warning Breaking Change
+:::danger Breaking Change
 
 For Deployments running Astro Runtime 4.1.0+, `astro deploy` will no longer complete the code push to your Deployment if your DAGs contain basic errors. If any files in your Astro project contain these errors, then certain deploys might stop working after you upgrade the Astro CLI to 1.3.0.
 

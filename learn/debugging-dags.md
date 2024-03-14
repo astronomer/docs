@@ -113,7 +113,7 @@ astro dev bash --scheduler "pip freeze | grep <package-name>"
 If you have conflicting package versions or need to run multiple Python versions, you can run tasks in different environments using a few different operators:
 
 - [KubernetesPodOperator](kubepod-operator.md): Runs a task in a separate Kubernetes Pod.
-- [ExternalPythonOperator](external-python-operator): Runs a task in a predefined virtual environment.
+- [ExternalPythonOperator](airflow-isolated-environments.md): Runs a task in a predefined virtual environment.
 - [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): Runs a task in a temporary virtual environment.
 
 If many Airflow tasks share a set of alternate package and version requirements a common pattern is to run them in two or more separate Airflow deployments. 
@@ -212,7 +212,7 @@ When you check your task logs to debug a failure, you may not see any logs. On t
 
 Generally, logs fail to appear when a process dies in your scheduler or worker and communication is lost. The following are some debugging steps you can try:
 
-- Try rerunning the task by [clearing the task instance](rerunning-dags.md#rerun-tasks) to see if the logs appear during the rerun.
+- Try rerunning the task by [clearing the task instance](rerunning-dags.md#manually-rerun-tasks-or-dags) to see if the logs appear during the rerun.
 - Increase your `log_fetch_timeout_sec` parameter to greater than the 5 second default. This parameter controls how long the webserver waits for the initial handshake when fetching logs from the worker machines, and having extra time here can sometimes resolve issues.
 - Increase the resources available to your workers (if using the Celery executor) or scheduler (if using the local executor).
 - If you're using the Kubernetes executor and a task fails very quickly (in less than 15 seconds), the pod running the task spins down before the webserver has a chance to collect the logs from the pod. If possible, try building in some wait time to your task depending on which operator you're using. If that isn't possible, try to diagnose what could be causing a near-immediate failure in your task. This is often related to either lack of resources or an error in the task configuration.
@@ -233,7 +233,7 @@ The following are some debugging steps you can try:
 - Change the `<external tool>_default` connection to use your connection details or define a new connection with a different name and pass the new name to the hook or operator.
 - Define connections using Airflow environment variables instead of adding them in the Airflow UI. Make sure you're not defining the same connection in multiple places. If you do, the environment variable takes precedence.
 - Test if your credentials work when used in a direct API call to the external tool.
-- Test your connections using the Airflow UI or the Airflow CLI. See [Testing connections](connections.md#testing-connections).
+- Test your connections using the Airflow UI or the Airflow CLI. See [Testing connections](connections.md#test-a-connection).
 
     ![Test Connections](/img/guides/test_connections_2.png)
 

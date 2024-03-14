@@ -115,7 +115,9 @@ module.exports = {
             'airflow-datasets',
             'deferrable-operators',
             'dynamically-generating-dags',
+            'airflow-isolated-environments',
             'kubepod-operator',
+            'airflow-mlops',
             'using-airflow-plugins',
             'airflow-pools',
             'airflow-setup-teardown',
@@ -144,7 +146,6 @@ module.exports = {
         'airflow-object-storage-tutorial',
         'airflow-sql-data-quality',
         'astro-python-sdk',
-        'external-python-operator',
         'custom-airflow-ui-docs-tutorial',
       ],
     },
@@ -161,7 +162,6 @@ module.exports = {
         'airflow-kafka',
         'connections/azure-blob-storage',
         'airflow-azure-container-instances',
-        'airflow-azure-data-explorer',
         {
           type: 'category',
           label: 'Azure Data Factory',
@@ -176,6 +176,7 @@ module.exports = {
             'airflow-azure-data-factory-integration',
           ],
         },
+        'connections/entra-workload-identity',
         'connections/bigquery',
         'airflow-cohere',
         {
@@ -250,7 +251,6 @@ module.exports = {
           ],
         },
         'soda-data-quality',
-        'airflow-talend-integration',
         'airflow-weaviate',
         'airflow-weights-and-biases',
       ],
@@ -272,7 +272,6 @@ module.exports = {
           'use-case-llm-customer-feedback',
           'use-case-airflow-ml-datasets',
           'use-case-airflow-mlflow',
-          'use-case-ml-airflow-snowpark-weaviate'
       ],
     },
     'airflow-glossary'

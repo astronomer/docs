@@ -5,7 +5,7 @@ id: migrate-to-runtime
 description: Run an upgrade progress to migrate your Software Deployment from Astronomer Certified (AC) to Astro Runtime.
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 Astro Runtime builds on the reliability of Astronomer Certified (AC) with new features that center on usability and performance.
 
@@ -27,7 +27,7 @@ Astro Runtime includes additional features which are not available in AC images,
 - The `astronomer-providers` package, which is an open source collection of Apache Airflow providers and modules maintained by Astronomer.
 - Airflow UI improvements, such as showing the Deployment Docker image tag in the footer of all UI pages.
 
-See [Runtime Architecture](runtime-image-architecture.md) for more detailed information about Runtime's distribution and features.
+See [Runtime Architecture](runtime-image-architecture.mdx) for more detailed information about Runtime's distribution and features.
 
 All versions of AC have an equivalent version of Astro Runtime. To see the equivalent version of Astro Runtime for a Deployment running AC, open the Deployment in the Software UI and go to **Settings**. The equivalent version of Astro Runtime is shown in the **Migrate to Runtime-[Version number]** button.
 
@@ -56,7 +56,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
     - [AC Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
     - [Astro Runtime Lifecycle Schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
 
-  :::warning
+  :::danger
 
   Astronomer does not support Airflow downgrades. After you upgrade your Airflow version, you can't revert to an earlier version.
 

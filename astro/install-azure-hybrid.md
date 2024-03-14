@@ -11,7 +11,7 @@ description: 'Use this document to complete the installation of Astro Hybrid in 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::caution
+:::warning
 
 This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
@@ -219,7 +219,7 @@ After you provide Astronomer support with the setup information for your cluster
 
 ## Create a Deployment and confirm the install
 
-When Astronomer support confirms that your Astro cluster has been created, you can confirm it in the [Cloud UI](https://cloud.astronomer.io) by clicking on the Astronomer icon in the top left corner, then click on **Clusters** to see your cluster. You can then [create a Deployment](first-dag-cli.md#step-1-create-a-deployment) and start to [develop and deploy your DAGs](first-dag-cli.md#step-2-create-an-astro-project).
+When Astronomer support confirms that your Astro cluster has been created, you can confirm it in the [Cloud UI](https://cloud.astronomer.io) by clicking on the Astronomer icon in the top left corner, then click on **Clusters** to see your cluster. You can then [create a Deployment](create-deployment.md) and start to [develop and deploy your DAGs](deploy-project-image.md).
 
 ## Next steps
 

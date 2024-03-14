@@ -24,7 +24,7 @@ Before you implement Teams, consider the following:
 - To remove a Team from your Software installation, you have to delete it from the Astronomer Software UI or the Houston API. Deleting an IdP group from your IdP UI doesn't automatically delete the associated Team.
 - If a user is added or removed from your original IdP group, that change applies to the related Astronomer Team only after the user logs back in to Astronomer.
 
-:::caution "Most Permissive" Role Priority
+:::warning "Most Permissive" Role Priority
 
 Astronomer user roles function on a "most permissive" policy: If a user has roles defined at both the Workspace and the Team level, then that user will continue to have the most permissive role between the two contexts. This policy has a few implications for implementing Team:
 
@@ -82,7 +82,7 @@ By default, Astronomer assumes that the name of your group claim is `groups`. If
 
 After configuring your IdP group, at least one user belonging to the group has to log in to Software before the group appears as a Team in the Software UI. To quickly import many groups at once, add a user to all groups and then log in to Astronomer Software UI with the user's credentials.
 
-After configuring and importing user groups, Workspace Admins and Deployment Admins can configure those groups as Teams using the Astronomer Software UI. To learn more about adding and setting permissions for Teams in the Astronomer Software UI, see [User Permissions](workspace-permissions.md#via-teams).
+After configuring and importing user groups, Workspace Admins and Deployment Admins can configure those groups as Teams using the Astronomer Software UI.
 
 ## Disable individual user management 
 

@@ -170,6 +170,22 @@ Here, `<airflow-executor>` can be `LocalExecutor`, `CeleryExecutor`, or `Kuberne
 
 ### Create or update a Deployment with configurations
 
+:::info 
+
+The `upsertDeployment` mutation is behind a feature flag. To enable this feature, set the following configuration in your `config.yaml` file:
+
+```yaml
+astronomer:
+  houston:
+    config:
+      deployments:
+        upsertDeploymentEnabled: true
+```
+
+Then push the configuration change to your cluster. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+
+:::
+
 The `upsertDeployment` mutation can be used to both create and update Deployments with all possible Deployment configurations. If you query `upsertDeployment` without a `deploymentUuid`, the Houston API creates a new Deployment according to your specifications. If you specify an existing `deploymentUuid`, the Houston API updates the Deployment with that ID. All queries to create a Deployment require specifying a `workspaceUuid`.
 
 The following query creates a new Deployment in a custom namespace `test-new-dep` and configures a Deployment environment variable `AIRFLOW__CORE__COLORED_LOG_FORMAT`.

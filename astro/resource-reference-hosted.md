@@ -8,7 +8,7 @@ description: Reference of all supported infrastructure for new Astro Hosted clus
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::caution
+:::warning
 
 This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
 
@@ -20,41 +20,22 @@ For Astro Hybrid resource reference material, see:
 
 :::
 
-This page contains reference information for all supported Astro Hosted Deployment and cluster resource configurations. Use this information to determine whether Astro supports the type of Airflow environment you want to run. 
+This page contains reference information for all supported Astro Hosted Deployment and cluster resource configurations. Use this information to determine whether Astro supports the type of Airflow environment you want to run.
 
 If you're interested in a cloud region or resource size that's not mentioned here, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-## Deployment resources
+## Add domains to allowlist
 
-Astro supports Deployments with varying levels of resource usage.
+If you're on your organization's network and can't access Astro, make a request to allowlist the following domains on your network:
 
-### Scheduler 
-
-Astronomer Deployments run a single scheduler. You can configure your scheduler to have different amounts of resources based on how many tasks you need to schedule. The following table lists all possible scheduler sizes:
-
-| Scheduler size | vCPU | Memory |
-| -------------- | ---- | ------ |
-| Small          | 1    | 2G     |
-| Medium         | 2    | 4G     |
-| Large          | 4    | 8G     |
-
-### Worker type
-
-Each Deployment worker queue has a _worker type_ that determines how many resources are available to your Airflow workers for running tasks. A worker type is a virtualized instance of CPU and memory on your cluster that is specific to the Astro platform. The underlying node instance type running your worker can vary based on how Astro optimizes resource usage on your cluster.
-
-Each virtualized instance of your worker type is a _worker_. Celery workers can run multiple tasks at once, while Kubernetes workers only scale up and down to run a single task at a time. For more information about configuring worker behavior, see [Worker queues](configure-worker-queues.md).
-
-The following table lists all available worker types on Astro Deployments. 
-
-| Worker Type | vCPU | Memory | Max task concurrency |
-| ----------- | ---- | ------ | -------------------- |
-| A5          | 1    | 2GiB   | 15                   |
-| A10         | 2    | 4GiB   | 30                   |
-| A20         | 4    | 8GiB   | 60                   |
-| A40         | 8    | 16GiB  | 120                  |
-| A60         | 12   | 24GiB  | 240                  |
-
-All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker. 
+- `https://cloud.astronomer.io/`
+- `https://api.astronomer.io/`
+- `https://images.astronomer.cloud/`
+- `https://auth.astronomer.io/`
+- `https://updates.astronomer.io/`
+- `https://install.astronomer.io/`
+- `https://astro-<organization-short-name>.datakin.com/`
+- `https://<organization-short-name>.astronomer.run/`
 
 ## Standard cluster regions
 
@@ -64,7 +45,7 @@ Currently, standard clusters are available on the following clouds and regions:
 
 <Tabs
     defaultValue="aws"
-    groupId= "dedicated-cluster-configurations"
+    groupId= "standard-cluster-regions"
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
@@ -72,11 +53,12 @@ Currently, standard clusters are available on the following clouds and regions:
     ]}>
 <TabItem value="aws">
 
-| Code           | Region                |
-| -------------- | --------------------- |
-| `eu-central-1` | Europe (Frankfurt)    |
-| `us-east-1`    | US East (N. Virginia) |
-| `us-west-2`    | US West (Oregon)      |
+| Code             | Region                   |
+| ---------------- | ------------------------ |
+| `ap-southeast-1` | Asia Pacific (Singapore) |
+| `eu-central-1`   | Europe (Frankfurt)       |
+| `us-east-1`      | US East (N. Virginia)    |
+| `us-west-2`      | US West (Oregon)         |
 
 </TabItem>
 
@@ -111,7 +93,7 @@ Currently, dedicated clusters are available on the following clouds and regions:
 
 <Tabs
     defaultValue="aws"
-    groupId= "dedicated-cluster-configurations"
+    groupId= "dedicated-cluster-regions"
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},

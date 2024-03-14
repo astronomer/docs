@@ -8,7 +8,7 @@ toc_max_heading_level: 3
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
+
 
 Astro supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astro allows you to automatically provision and deprovision users and [Teams](manage-teams.md) based on templates for access and permissions. It also provides better observability through your identity provider for when users and Teams are created or modified across your organization. Specifically, you can utilize SCIM provisioning to complete the following Astro actions from your identity provider platform:
 
@@ -155,7 +155,7 @@ Complete the manual setup if you configured your existing Astro app without usin
     | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |
     | displayName                                                 | displayName     |
 
-  :::caution
+  :::warning
 
   This setup assumes that `userPrincipalName` contains your users' email. If you use a field other than `userPrincipalName` to define your user email, replace `userPrincipalName` with the attribute you use.
 

@@ -7,6 +7,12 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
+:::info
+
+This command is only available on Astro.
+
+:::
+
 Create Airflow pools in a Deployment. Airflow pools are stored in the Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
@@ -46,6 +52,7 @@ astro deployment pool create --deployment-id cl03oiq7d80402nwn7fsl3dmv --name my
 
 # create pool stored in the Deployment "My Deployment"
 astro deployment pool create --deployment-name="My Deployment" --name my-pool --slots 10
+```
 
 ## Related Commands
 

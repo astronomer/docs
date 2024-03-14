@@ -5,7 +5,7 @@ id: manage-env-vars
 description: Learn how to manage environment variables on Astro
 ---
 
-import {siteVariables} from '@site/src/versions';
+
 
 On Astro, you can create, update, or delete environment variables for a Deployment in the following ways:
 
@@ -50,7 +50,7 @@ After you set an environment variable key, only the environment variable value c
 
 If you want to store environment variables with an external version control tool, Astronomer recommends setting them in your `Dockerfile`. This file is automatically created when you first initialize an Astro project using `astro dev init`.
 
-:::caution
+:::warning
 
 Environment variables set in your `Dockerfile` are stored in plain text. For this reason, Astronomer recommends storing sensitive environment variables using the Cloud UI or a third-party secrets backend. For more information, see [Configure a secrets backend](secrets-backend.md).
 
@@ -60,11 +60,11 @@ Environment variables set in your `Dockerfile` are stored in plain text. For thi
 
 2. To add the environment variables, declare an ENV command with the environment variable key and value. For example, the following `Dockerfile` sets two environment variables:
 
-    <pre><code parentName="pre">
-    {`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
+    ```sh
+    FROM quay.io/astronomer/astro-runtime:{{RUNTIME_VER}}
     ENV AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG=1
-    ENV AIRFLOW_VAR_MY_VAR=25`}
-    </code></pre>
+    ENV AIRFLOW_VAR_MY_VAR=25
+    ```
 
 3. Save your Dockerfile and run `astro deploy` to deploy your variables to an Astro Deployment. To apply your changes locally, use `astro dev restart` to rebuild your image.
 
@@ -110,7 +110,7 @@ To export the contents of your `.env` file to an Astro Deployment, run the follo
 astro deployment variable update --deployment-id <your-deployment-id> --load .env
 ```
 
-:::caution
+:::warning
 
 When you use the `.env` file to add or update environment variables on Astro, it will overwrite all existing variables in your Astro Deployment. To update only select environment variables, run `astro deployment variable create` without the `--load` option. For example, the following command creates two new environment variables without affecting existing Deployment environment variables:
 

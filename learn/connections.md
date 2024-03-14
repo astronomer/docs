@@ -2,12 +2,8 @@
 title: "Manage connections in Apache Airflow"
 sidebar_label: "Connections"
 id: connections
+description: "Learn how to set up, manage, and maintain different types of connections in Apache Airflow. Use example connection configurations as the basis for your own connections."
 ---
-
-<head>
-  <meta name="description" content="Learn how to set up, manage, and maintain different types of connections in Apache Airflow. Use example connection configurations as the basis for your own connections." />
-  <meta name="og:description" content="Learn how to set up, manage, and maintain different types of connections in Apache Airflow. Use example connection configurations as the basis for your own connections." />
-</head>
 
 import CodeBlock from '@theme/CodeBlock';
 import snowflake_to_slack_dag from '!!raw-loader!../code-samples/dags/connections/snowflake_to_slack_dag.py';
@@ -33,7 +29,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md/).
+- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow hooks. See [Hooks 101](what-is-a-hook.md).
 
@@ -47,8 +43,8 @@ Airflow connections can be created by using one of the following methods:
 - [Environment variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#environment-variables)
 - The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection)
 - A [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) (a system for managing secrets external to Airflow)
-- The [`airflow.cfg` file](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html)
 - The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli)
+- The [`airflow_settings.yaml` file](https://docs.astronomer.io/astro/cli/develop-project#configure-airflow_settingsyaml-local-development-only) for Astro CLI users
 
 :::info
 

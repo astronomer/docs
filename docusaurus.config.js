@@ -9,8 +9,24 @@ module.exports = {
   noIndex: false,
   onBrokenLinks: 'throw', // 'warn' for drafts, 'throw' for prod
   onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'warn',
   markdown: {
     mermaid: true,
+    preprocessor: ({ filePath, fileContent }) => {
+      function updateValues() {
+        var mapObj = {
+          '{{CLI_VER_LATEST}}': "1.24.1",
+          '{{CLI_VER_2}}': "1.23.0",
+          '{{CLI_VER_3}}': "1.22.0",
+          '{{RUNTIME_VER}}': "10.5.0",
+        };
+        var re = new RegExp(Object.keys(mapObj).join("|"), "gi");
+        return fileContent.replaceAll(re, function (matched) {
+          return mapObj[matched];
+        });
+      }
+      return updateValues();
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/favicon.svg',
@@ -38,7 +54,7 @@ module.exports = {
       //... other Algolia params
     },
     prism: {
-      additionalLanguages: ['docker'],
+      additionalLanguages: ["bash", "json", "docker", "python"],
     },
     colorMode: {
       disableSwitch: false,
@@ -97,7 +113,7 @@ module.exports = {
       buttons: {
         primary: {
           label: "Try Astro",
-          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner"
+          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner&utm_medium=docs&utm_content=astr&utm_source=body"
         },
         secondary: {
           label: "Learn about Astronomer",
@@ -123,9 +139,14 @@ module.exports = {
     softwareNav: {
       items: [
         {
-          label: '0.33 (Latest)',
+          label: '0.34 (Latest)',
           to: '/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.33',
+          to: '/software/',
+          activeBaseRegex: `(software\/0.33)+`,
         },
         {
           label: '0.32',
@@ -148,15 +169,19 @@ module.exports = {
       bottomNav: {
         items: [
           {
-            label: 'Book Office Hours',
+            label: 'Support Knowledge Base',
+            href: 'https://support.astronomer.io/hc/en-us',
+          },
+          {
+            label: 'Office Hours',
             href: 'https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade',
           },
           {
-            label: 'Watch a webinar',
+            label: 'Webinars',
             href: 'https://www.astronomer.io/events/webinars/?referral=docs-sidebar',
           },
           {
-            label: 'Astro status',
+            label: 'Astro Status',
             href: 'https://status.astronomer.io/?referral=docs-sidebar',
           }
         ]
@@ -203,15 +228,20 @@ module.exports = {
           routeBasePath: 'astro',
           path: 'astro',
           admonitions: {
-            tag: ':::',
             keywords: [
               'caution',
-              'warning',
+              'danger',
               'info',
               'tip',
               'cli',
-              'highlight'
+              'highlight',
+              'privatepreview',
+              'publicpreview',
+              'cliastroonly',
+              'clisoftwareonly',
+              'cliastroandsoftware'
             ],
+            extendDefaults: true,
           },
         },
         sitemap: {
@@ -238,6 +268,12 @@ module.exports = {
             id: 'iam',
             spec: 'https://api.astronomer.io/spec/iam/v1beta1',
           },
+          {
+            id: 'using-remote-url',
+            // Remote File
+            spec: 'https://redocly.github.io/redoc/openapi.yaml',
+            route: '/examples/using-remote-url/',
+          },
         ],
         // Theme Options for modifying how redoc renders them
         theme: {
@@ -261,7 +297,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.33',
+            label: '0.34',
             path: '',
             banner: 'none',
           },
@@ -292,15 +328,15 @@ module.exports = {
   ],
   scripts: [
     {
-      src: './scripts/segment.js',
+      src: '/scripts/segment.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager.js',
+      src: '/scripts/consent-manager.js',
       defer: true,
     },
     {
-      src: './scripts/consent-manager-config.js',
+      src: '/scripts/consent-manager-config.js',
     },
     {
       src: "/scripts/set-tab.js",
@@ -308,12 +344,7 @@ module.exports = {
       defer: true,
     },
     {
-      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
-      "data-domain": 'docs.astronomer.io',
-      defer: true,
-    },
-    {
-      src: './scripts/remix-redocly.js',
+      src: '/scripts/remix-redocly.js',
       async: true,
       defer: true,
     },
