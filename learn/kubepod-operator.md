@@ -279,7 +279,7 @@ The components of the connection can also be set or overwritten at the task leve
 
 If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. 
 
-The way that you connect to an external cluster will vary based on where your cluster is hosted and where your Airflow environment is hosted, but generally the following all need to be true to launch a Pod in an external cluster:
+The way that you connect to an external cluster will vary based on where your cluster is hosted and where your Airflow environment is hosted, but generally the following conditions must be met to launch a Pod in an external cluster:
 
 - Your Airflow environment must have a network connection to the external cluster
 - Your Airflow environment must have permissions to spin up Pods in the external cluster

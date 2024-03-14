@@ -325,7 +325,7 @@ with DAG(
 
 ## Launch a Pod in an external cluster
 
-If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. In setups where both clusters are used by the same AWS or GCP account, this can be managed with roles and permissions.
+If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. In setups where both clusters are used by the same AWS or GCP account, you can manage separate clusters with roles and permissions.
 
 This example shows how to set up an EKS cluster on AWS and run a Pod on it from an Airflow instance where cross-account access is not available. The same process applicable to other Kubernetes services such as GKE.
 
@@ -368,7 +368,7 @@ To launch Pods in external clusters from a local Airflow environment, you must a
     }
     ```
 
-3. If you don't already have a cluster, [create a new EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) and assign the newly created role to it.
+3. If you don't already have a cluster, [create a new EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) and assign the new role to it.
 
 ### Step 2: Retrieve the KubeConfig file from the EKS cluster
 
@@ -418,7 +418,7 @@ To launch Pods in external clusters from a local Airflow environment, you must a
 
 ### Step 3: Create a Kubernetes cluster connection
 
-Astronomer recommends creating an Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project. 
+Astronomer recommends creating a Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project. 
 
 1. Convert the `kubeconfig` configuration you retrieved from your cluster to JSON format.
 2. In either the Airflow UI or the Astro environment manager, create a new **Kubernetes Cluster Connection** connection. In the **Kube config (JSON format)** field, paste the `kubeconfig` configuration you retrieved from your cluster after converting it from `yaml` to `json` format.
@@ -432,26 +432,25 @@ In your KubernetesPodOperator task configuration, ensure that you set `cluster-c
 
 ```python
 run_on_EKS = KubernetesPodOperator(
-        task_id="run_on_EKS",
-        kubernetes_conn_id="k8s", 
-        cluster_context="<your-cluster-id>",
-        namespace="<your-namespace>",
-        name="example_pod",
-        image="ubuntu",
-        cmds=["bash", "-cx"],
-        arguments=["echo hello"],
-        get_logs=True,
-        startup_timeout_seconds=240,
-    )
-```
+    task_id="run_on_EKS",
+    kubernetes_conn_id="k8s", 
+    cluster_context="<your-cluster-id>",
+    namespace="<your-namespace>",
+    name="example_pod",
+    image="ubuntu",
+    cmds=["bash", "-cx"],
+    arguments=["echo hello"],
+    get_logs=True,
+    startup_timeout_seconds=240,
+)
 
 ### Example DAG
 
-The following DAG utilizes several classes from the Amazon provider package to dynamically spin up and delete Pods for each task in a newly created node group. If your remote Kubernetes cluster already has a node group available, you only need to define your task in the KubernetesPodOperator itself.
+The following DAG uses several classes from the [Amazon provider package](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest) to dynamically spin up and delete Pods for each task in a newly created node group. If your remote Kubernetes cluster already has a node group available, you only need to define your task in the KubernetesPodOperator itself.
 
 The example DAG contains 5 consecutive tasks:
 
-- Create a node group according to the users' specifications (in the example using GPU resources).
+- Create a node group according to the users' specifications (For the example that uses GPU resources).
 - Use a sensor to check that the cluster is running correctly.
 - Use the KubernetesPodOperator to run any valid Docker image in a Pod on the newly created node group on the remote cluster. The example DAG uses the standard `Ubuntu` image to print "hello" to the console using a `bash` command.
 - Delete the node group.
