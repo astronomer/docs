@@ -835,21 +835,29 @@ astronomer:
 
 Dedicated namespace pools are strongly recommended for the security of any Astronomer Software installation. They allow you to grant Astronomer Software permissions at the namespace level and limit cluster-level permission.
 
-See [Configure a Kubernetes namespace pool for Astronomer Software](namespace-pools.md) to learn how to configure pre-created namespaces in your `values.yaml` file. When you decide on a namespace pool implementation, apply the required changes to your cluster and `values.yaml` file. Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
+See [Configure a Kubernetes namespace pool for Astronomer Software](namespace-pools.md) to learn how to configure pre-created namespaces in your `values.yaml` file. When you decide on a namespace pool implementation, apply the required changes to your cluster and `values.yaml` file. 
+
+Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
 ## Step 15: Use a third-party ingress controller
 
-Astronomer Software is its most secure when you supply a pre-existing ingress controller that meets your organization's strict security standards. Follow the steps in [Use a third-party ingress controller](third-party-ingress-controllers.md) to configure your `values.yaml` file to host your third-party ingress controller. Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
+Astronomer Software is its most secure when you supply a pre-existing ingress controller that meets your organization's strict security standards. Follow the steps in [Use a third-party ingress controller](third-party-ingress-controllers.md) to configure your `values.yaml` file to host your third-party ingress controller. 
+
+Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
 ## Step 16: Configure sidecar logging
 
-Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster. See [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars) to learn how to configure logging sidecars in your `values.yaml` file. Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
+Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster. See [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars) to learn how to configure logging sidecars in your `values.yaml` file. 
+
+Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
 ## Step 17: Integrate an external identity provider
 
-See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice so that your users can join Astronomer Software in accordance with your organization's security requirements.
+Astronomer Software includes integrations for several of the most popular identity providers (IdPs), such as Okta and Microsoft Entra ID. Configuring an external IdP allows you to automatically provision and manage users in accordance with your organization's security requirements. See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice in your `config.yaml` file. 
 
-## Step 17: Install Astronomer using Helm
+Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
+
+## Step 18: Install Astronomer using Helm
 
 Before completing this step, ensure that you made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
 
@@ -865,7 +873,7 @@ helm pull astronomer/astronomer
 helm install astronomer -f values.yaml -n astronomer astronomer.tgz
 ```
 
-## Step 18: Verify Pods are up
+## Step 19: Verify Pods are up
 
 To verify all pods are up and running, run:
 
@@ -919,7 +927,7 @@ astronomer-registry-0                                      1/1     Running      
 
 If you are seeing issues here, check out our [guide on debugging your installation](debug-install.md).
 
-## Step 19: Configure DNS
+## Step 20: Configure DNS
 
 The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
 
@@ -951,13 +959,13 @@ alertmanager.astro.mydomain.com
 prometheus.astro.mydomain.com
 ```
 
-## Step 20: Verify you can access the Software UI
+## Step 21: Verify you can access the Software UI
 
 Go to `app.BASEDOMAIN` to see the Software UI.
 
 Consider this your new Airflow control plane. From the Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
-## Step 21: Verify your TLS setup
+## Step 22: Verify your TLS setup
 
 To check if your TLS certificates were accepted, log in to the Software UI. Then, go to `app.BASEDOMAIN/token` and run:
 
