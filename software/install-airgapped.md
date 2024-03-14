@@ -8,13 +8,15 @@ id: install-airgapped
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explains how to install Astronomer Software into an airgapped environment. An airgapped environment is a locked-down environment with no access to or from the public internet. 
+This guide explains how to install Astronomer Software into an airgapped environment. An airgapped environment is a locked-down environment with no access to or from the public internet. Astronomer recommends that all new Astronomer Software installations should run in an airgapped environment.
 
-You'll configure a new namespace within your Kubernetes cluster and set up infrastructure so that the namespace can access all of the following resources from a private network:
+To complete this setup, you'll configure a new namespace in your Kubernetes cluster and set up infrastructure so that the namespace can access all of the following resources from a private network:
 
 - Docker images from `quay.io/astronomer` or `docker.io`
 - Astronomer Helm charts from `helm.astronomer.io`
 - Astronomer version information from `updates.astronomer.io`
+
+You'll also configure various Astronomer features that are essential to running Airflow securely and reliably within your airgapped environment. 
 
 ## Prerequisites
 
@@ -185,12 +187,6 @@ If you received a globally trusted certificate or created a self-signed certific
 kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath> -n astronomer
 ```
 
-If you created a certificate using Let's Encrypt, the `astronomer-tls` secret already exists in your Kubernetes cluster. Run the following command to confirm it exists: 
-
-```bash
-kubectl describe secret astronomer-tls --namespace astronomer
-```
-
 If you received a certificate from a private CA, follow these steps instead:
 
 1. Add the root certificate provided by your security team to an [Opaque Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/#secret-types) in the Astronomer namespace by running the following command:
@@ -286,7 +282,7 @@ A few additional configuration notes:
 - (Azure only) If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 - (Azure only) If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `values.yaml`.
 
-## Step 8: Confirm base configuration for your Helm chart
+## Step 8: Confirm the base configuration for your Helm chart
 
 Your `values.yaml` file will store a set of values for Astronomer Software that specify everything from user role definitions to the Airflow images you want to support. You'll continually modify this file and apply it to your platform you grow with Astronomer Software and want to take advantage of new features.
 
@@ -537,6 +533,7 @@ astronomer:
 ```
 
 </TabItem>
+</Tabs>
 
 ## Step 9: Configure a private Docker registry
 
@@ -640,7 +637,7 @@ There are two Helm charts required for Astronomer:
 
 The Astronomer Helm chart can be downloaded using `helm pull` and applied locally if desired.
 
-Commander, which is Astronomer's provisioning component, uses the Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
+Commander, which is Astronomer's provisioning component, uses the Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander in an airgapped environment:
 
 - Use the built-in Airflow Helm chart in the Commander Docker image.
 - Host the Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
@@ -923,33 +920,21 @@ If you are seeing issues here, check out our [guide on debugging your installati
 
 ## Step 19: Configure DNS
 
-Now that you've successfully installed Astronomer, a new load balancer will have spun up in your AWS account. This load balancer routes incoming traffic to our NGINX ingress controller.
+The Astronomer load balancer routes incoming traffic to your NGINX ingress controller. After you install Astronomer Software, the load balancer will spin up in your cloud provider account.
 
-Run `$ kubectl get svc -n astronomer` to view your load balancer's CNAME, located under the `EXTERNAL-IP` column for the `astronomer-nginx` service.
+Run `$ kubectl get svc -n astronomer` to view your load balancer's CNAME, located under the `EXTERNAL-IP` column for the `astronomer-nginx` service. It should look similar to the following:
 
 ```sh
 $ kubectl get svc -n astronomer
 NAME                                 TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)                                      AGE
 astronomer-alertmanager              ClusterIP      172.20.48.232    <none>                                                                    9093/TCP                                     24d
-astronomer-cli-install               ClusterIP      172.20.95.132    <none>                                                                    80/TCP                                       24d
-astronomer-commander                 ClusterIP      172.20.167.227   <none>                                                                    8880/TCP,50051/TCP                           24d
-astronomer-elasticsearch             ClusterIP      172.20.161.0     <none>                                                                    9200/TCP,9300/TCP                            24d
-astronomer-elasticsearch-discovery   ClusterIP      172.20.225.200   <none>                                                                    9300/TCP                                     24d
-astronomer-elasticsearch-exporter    ClusterIP      172.20.2.113     <none>                                                                    9108/TCP                                     24d
-astronomer-elasticsearch-nginx       ClusterIP      172.20.154.232   <none>                                                                    9200/TCP                                     24d
-astronomer-grafana                   ClusterIP      172.20.120.247   <none>                                                                    3000/TCP                                     24d
-astronomer-houston                   ClusterIP      172.20.25.26     <none>                                                                    8871/TCP                                     24d
-astronomer-kibana                    ClusterIP      172.20.134.149   <none>                                                                    5601/TCP                                     24d
-astronomer-kube-state                ClusterIP      172.20.123.56    <none>                                                                    8080/TCP,8081/TCP                            24d
-astronomer-kubed                     ClusterIP      172.20.4.200     <none>                                                                    443/TCP                                      24d
+[...]
 astronomer-nginx                     LoadBalancer   172.20.54.142    ELB_ADDRESS.us-east-1.elb.amazonaws.com                                   80:31925/TCP,443:32461/TCP,10254:32424/TCP   24d
 astronomer-nginx-default-backend     ClusterIP      172.20.186.254   <none>                                                                    8080/TCP                                     24d
-astronomer-astro-ui                  ClusterIP      172.20.186.166   <none>                                                                    8080/TCP                                     24d
-astronomer-prometheus                ClusterIP      172.20.72.196    <none>                                                                    9090/TCP                                     24d
-astronomer-registry                  ClusterIP      172.20.100.102   <none>                                                                    5000/TCP                                     24d
+[...]                         
 ```
 
-You will need to create a new CNAME record through your DNS provider using the ELB CNAME listed above. If you're using Amazon Route 53, see [Creating records by using the Amazon Route 53 console](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html).
+You will need to create a new CNAME record through your DNS provider using the external IP listed for for `astronomer-nginx`.
 
 You can create a single wildcard CNAME record such as `*.astro.mydomain.com`, or alternatively create individual CNAME records for the following routes:
 
@@ -964,9 +949,6 @@ install.astro.mydomain.com
 alertmanager.astro.mydomain.com
 prometheus.astro.mydomain.com
 ```
-
-Example wildcard CNAME record:
-![aws-elb](/img/software/route53.png)
 
 ## Step 20: Verify you can access the Software UI
 
@@ -1018,20 +1000,3 @@ If you have Airflow pods in the state `ImagePullBackoff`, check the pod descript
 - Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
 
 If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `values.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
-
-## What's next
-
-To help you make the most of Astronomer Software, check out the following additional resources:
-* [Renew TLS Certificates on Astronomer Software](renew-tls-cert.md)
-* [Integrating an Auth System](integrate-auth-system.md)
-* [Configuring Platform Resources](configure-platform-resources.md)
-* [Managing Users on Astronomer Software](manage-platform-users.md)
-
-### Astronomer support team
-
-If you have any feedback or need help during this process and aren't in touch with our team already, a few resources to keep in mind:
-
-* [Community Forum](https://forum.astronomer.io): General Airflow + Astronomer FAQs
-* [Astronomer Support Portal](https://support.astronomer.io/hc/en-us/): Platform or Airflow issues
-
-For detailed guidelines on reaching out to Astronomer Support, reference our guide [here](support.md).
