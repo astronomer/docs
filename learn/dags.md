@@ -242,7 +242,7 @@ In Airflow, you can configure when and how your DAG runs by setting parameters i
 
 There are many additional parameters that can be set on the DAG object. 
 
-Some parameters relate to adding information to the DAG or change its appearance in the Airflow UI:
+Some parameters relate to adding information to the DAG or change its appearance in the **Airflow UI**:
 
 - `description`: A short string that will be displayed in the Airflow UI next to the DAG name.
 - `doc_md`: A string that will be rendered as [DAG documentation](custom-airflow-ui-docs-tutorial.md) in the Airflow UI. Tip: use `__doc__` to use the docstring of the Python file.
@@ -251,13 +251,13 @@ Some parameters relate to adding information to the DAG or change its appearance
 - `default_view`: The default view of the DAG in the Airflow UI. Defaults to `grid`.
 - `orientation`: The orientation of the DAG graph in the Airflow UI. Defaults to `LR` (left to right).
 
-There are parameters that relate to Jinja templating, such as:
+There are parameters that relate to **Jinja templating**, such as:
 
 - `template_searchpath`: A list of folders where [Jinja](templating.md) will look for templates. The path of the DAG file is included by default.
 - `render_template_as_native_obj`: Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`.
 - `user_defined_macros`: A dictionary of macros that will be available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates).
 
-Two other helpful parameters relate to scaling in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
+Two other helpful parameters relate to **scaling** in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
 
 - `max_active_tasks`: The number of task instances allowed to run concurrently for all DAG runs of this DAG.
 - `max_active_runs`: The number of active DAG runs allowed to run concurrently for this DAG.
