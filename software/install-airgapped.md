@@ -845,12 +845,13 @@ Astronomer Software is its most secure when you supply a pre-existing ingress co
 
 Running a logging sidecar to export Airflow task logs is essential for running Astronomer Software in a multi-tenant cluster. See [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars) to learn how to configure logging sidecars in your `values.yaml` file. Do not apply the configuration to your cluster yet as described in the linked documentation - you'll be applying your complete platform configuration all at once later in this setup.
 
+## Step 17: Integrate an external identity provider
+
+See [Integrate an auth system](integrate-auth-system.md) to configure the identity provider of your choice so that your users can join Astronomer Software in accordance with your organization's security requirements.
+
 ## Step 17: Install Astronomer using Helm
 
-Before completing this step, double-check that the following statements are true:
-
-- You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
-- You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
+Before completing this step, ensure that you made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
 
 After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:
 
