@@ -125,7 +125,7 @@ A DAG run can have the following statuses:
 - `queued`: The time after which the DAG run can be created has passed but the scheduler has not created task instances for it yet.
 - `running`: The DAG run is eligible to have task instances scheduled.
 - `success`: All task instances are in a terminal state (`success`, `skipped`, `failed` or `upstream_failed`) and all leaf tasks (tasks with no downstream tasks) are either in the state `success` or `skipped`.
-- `failed`: All task instances are in a terminal state (`success`, `skipped`, `failed` or `upstream_failed`) and at least one leaf task is in the state `failed` or `upstream_failed`.
+- `failed`: All task instances are in a terminal state and at least one leaf task is in the state `failed` or `upstream_failed`.
 
 ## Write a DAG
 
