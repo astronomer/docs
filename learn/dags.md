@@ -186,6 +186,7 @@ taskflow_dag()
 <TabItem value="traditional">
 
 ```python
+# Import all packages needed at the top level of the DAG
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from pendulum import datetime
