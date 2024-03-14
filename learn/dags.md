@@ -240,24 +240,36 @@ In Airflow, you can configure when and how your DAG runs by setting parameters i
 - `schedule`: The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`.
 - `catchup`: Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is unpaused. This parameter defaults to `True`. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs, see [Catchup](rerunning-dags.md#catchup) for more information.
 
-There are many additional parameters that can be set on the DAG object:
+There are many additional parameters that can be set on the DAG object. 
+
+Some parameters relate to adding information to the DAG or change its appearance in the Airflow UI:
 
 - `description`: A short string that will be displayed in the Airflow UI next to the DAG name.
-- `end_date`: The date beyond which no further DAG runs will be scheduled. Defaults to `None`.
+- `doc_md`: A string that will be rendered as [DAG documentation](custom-airflow-ui-docs-tutorial.md) in the Airflow UI. Tip: use `__doc__` to use the docstring of the Python file.
+- `owner_links`: A dictionary with the key being the DAG owner and the value being a URL to link to when clicking on the owner in the Airflow UI. Commonly used as a mailto link to the owner's email address. Note that the `owner` parameter is set at the task level, usually by defining it in the `default_args` dictionary.
+- `tags`: A list of tags shown in the Airflow UI to help with filtering DAGs.
+- `default_view`: The default view of the DAG in the Airflow UI. Defaults to `grid`.
+- `orientation`: The orientation of the DAG graph in the Airflow UI. Defaults to `LR` (left to right).
+
+There are parameters that relate to Jinja templating, such as:
+
 - `template_searchpath`: A list of folders where [Jinja](templating.md) will look for templates. The path of the DAG file is included by default.
 - `render_template_as_native_obj`: Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`.
 - `user_defined_macros`: A dictionary of macros that will be available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates).
-- `default_args`: A dictionary of parameters that will be applied to all tasks in the DAG. These parameters will be passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level.
-- `params`: A dictionary of DAG-level Airflow params. See [Airflow params](airflow-params.md) for more information.
+
+Two other helpful parameters relate to scaling in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
+
 - `max_active_tasks`: The number of task instances allowed to run concurrently for all DAG runs of this DAG.
 - `max_active_runs`: The number of active DAG runs allowed to run concurrently for this DAG.
+
+Other DAG parameters include:
+
+- `end_date`: The date beyond which no further DAG runs will be scheduled. Defaults to `None`.
+- `default_args`: A dictionary of parameters that will be applied to all tasks in the DAG. These parameters will be passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level.
+- `params`: A dictionary of DAG-level Airflow params. See [Airflow params](airflow-params.md) for more information.
 - `dagrun_timeout`: The time it takes for a DAG run of this DAG to time out and be marked as `failed`.
-- `default_view`: The default view of the DAG in the Airflow UI. Defaults to `grid`.
-- `orientation`: The orientation of the DAG graph in the Airflow UI. Defaults to `LR` (left to right).
 - `access_control`: Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). Astronomer recommends customers to use [Astro's RBAC features](https://docs.astronomer.io/astro/user-permissions) instead.
 - `is_paused_upon_creation`: Whether the DAG is paused when it is created. When not set, the Airflow config `core.dags_are_paused_at_creation` is used, which defaults to `True`.
-- `owner_links`: A dictionary with the key being the DAG owner and the value being a URL to link to when clicking on the owner in the Airflow UI. Commonly used as a mailto link to the owner's email address.
-- `tags`: A list of tags shown in the Airflow UI to help with filtering DAGs.
 - `fail_stop`: In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`.
 
 Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-level callbacks](error-notifications-in-airflow.md#airflow-callbacks) for more information.
