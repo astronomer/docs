@@ -18,7 +18,6 @@ The third task is defined using the BashOperator, which is a traditional
 operator, allowing you to run a bash command.
 """
 
-from airflow import Dataset
 from airflow.decorators import dag, task
 from airflow.operators.bash import BashOperator
 from airflow.models.baseoperator import chain
