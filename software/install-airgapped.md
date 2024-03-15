@@ -97,6 +97,7 @@ To avoid these issues, Astronomer recommends installing Astronomer Software on a
 
 
 </TabItem>
+</Tabs>
 
 ## Step 1: Choose a base domain
 
