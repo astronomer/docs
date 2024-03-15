@@ -17,7 +17,7 @@ import AstroCard from '@site/src/components/AstroCard';
 
 <LinkCardGrid>
   <LinkCard label="Get started with Apache Airflow - Tutorial" description="Set up Airflow locally and run your first DAG in under an hour." href="/learn/get-started-with-airflow" icon="/img/airflow-logo.png" />
-  <LinkCard label="Start your Astro trial" description="Learn how to get started running Airflow with Astro and run your first DAG in the cloud" href="https://docs.astronomer.io/astro/trial" icon="/img/astro-monogram.svg" />
+  <LinkCard label="Start your Astro trial" description="Learn how to get started running Airflow with Astro and run your first DAG in the cloud." href="https://docs.astronomer.io/astro/trial" icon="/img/astro-monogram.svg" />
 </LinkCardGrid>
 
 ## Featured Airflow concepts
