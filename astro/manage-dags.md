@@ -4,6 +4,27 @@ title: "Manage DAG runs from the Cloud UI"
 id: manage-dags
 ---
 
+As a data engineer or data 
+
+## Access the Airflow UI for a Deployment
+
+Every Astro Deployment runs its own webserver and instance of the Airflow UI. If you want to manage your DAG and task runs through the Airflow UI, you can access it either through the Astro UI or the Astro CLI.
+
+To access the Airflow UI for your Deployment in the Astro UI:
+
+1. In the Astro UI, open your Deployment.
+2. Click **Open Airflow**.
+
+To access a Deployment's Airflow UI from the Astro CLI, run the following command:
+
+```sh
+astro deployment inspect -n <deployment-name> -k metadata.webserver_url
+```
+
+This command returns the URL to access your Deployment's webserver. Copy the URL into a web browser and hit enter to directly open the Airflow UI for your Deployment.
+
+## Manage DAGs from the Astro UI
+
 You can perform some common Airflow UI actions from the Cloud UI, including:
 
 - Marking DAG and task runs as succeeded/failed.
@@ -14,7 +35,7 @@ These actions are available on the **DAGs** page, where you can see detailed inf
 
 ![DAGs page](/img/docs/DAGs-overview.png)
 
-## Access the DAGs page in the Cloud UI
+To access the **DAGs** page:
 
 1. In the Cloud UI, select a Deployment.
 2. Click **DAGs**.
