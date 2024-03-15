@@ -79,11 +79,20 @@ Some common use cases of Airflow include:
 
 Of course, these are just a few examples, you can orchestrate almost any kind of batch workflows with Airflow.
 
+## Running Airflow
+
+There are many ways to run Airflow, some of which are easier than others. Astronomer recommends: 
+
+- Using the open-source [**Astro CLI**](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and is free to use for everyone.
+- Using [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. A free trial is available.
+
+All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, the scheduler, the database, and the executor. See [Airflow components](airflow-components.md) for more information.
+
 ## Airflow concepts
 
 To navigate Airflow resources, it is helpful to have a general understanding of the following Airflow concepts.
 
-### Running pipelines
+### Pipeline basics
 
 - **DAG**: Directed Acyclic Graph. An Airflow DAG is a workflow defined as a graph, where all dependencies between nodes are directed and nodes do not self-reference, meaning there are no circular dependencies. For more information on Airflow DAGs, see [Introduction to Airflow DAGs](dags.md).
 - **DAG run**: The execution of a DAG at a specific point in time. A DAG run can be one of four different types: [`scheduled`](scheduling-in-airflow.md), `manual`, [`dataset_triggered`](airflow-datasets.md) or [`backfill`](rerunning-dags.md).
@@ -129,15 +138,6 @@ Of course there is much more to Airflow than just DAGs and tasks. Here are a few
 - **Airflow variables**: Airflow variables are key-value pairs that can be used to store information in your Airflow environment. For more information, see [Use Airflow variables](airflow-variables.md).
 - **XComs**: XCom is short for "cross-communication", you can use XCom to pass information between your Airflow tasks. For more information, see [Passing data between tasks](airflow-passing-data-between-tasks.md).
 - **Airflow REST API**: The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) allows Airflow to interact with RESTful web services.
-
-## Running Airflow
-
-There are many ways to run Airflow, some of which are easier than others. Astronomer recommends: 
-
-- Using the open-source [**Astro CLI**](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and is free to use for everyone.
-- Using [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. A free trial is available.
-
-All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, the scheduler, the database, and the executor. See [Airflow components](airflow-components.md) for more information.
 
 ## Resources
 
