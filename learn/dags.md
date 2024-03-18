@@ -30,8 +30,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
-- Airflow operators. See [Operators 101](what-is-an-operator.md).
+- What Airflow is. See [Introduction to Apache Airflow](intro-to-airflow.md).
 
 ## What is a DAG?
 
@@ -226,11 +225,13 @@ Astronomer recommends creating one Python file for each DAG and naming it after 
 
 ### DAG-level parameters
 
-In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task. The DAGs in the previous section have the following parameters defined:
+In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task. In this section we cover all DAG-level parameters.
+
+The DAGs in the previous section have the following parameters defined:
 
 - `dag_id`: The name of the DAG. This must be unique for each DAG in the Airflow environment. When using the `@dag` decorator and not providing the `dag_id` parameter name, the function name is used as the `dag_id`. When using the `DAG` class, this parameter is required.
 - `start_date`: The date and time after which the DAG starts being scheduled. Note that the first actual run of the DAG may be later than this date depending on how you define the schedule. See [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) for more information. This parameter may be required depending on your Airflow version and `schedule`.
-- `schedule`: The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`.
+- `schedule`: The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`. This parameter replaces the deprecated `schedule_interval` and `timetable` parameters.
 - `catchup`: Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is unpaused. This parameter defaults to `True`. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs, see [Catchup](rerunning-dags.md#catchup) for more information.
 
 There are many additional parameters that can be set on the DAG object. 
@@ -247,13 +248,15 @@ Some parameters relate to adding information to the DAG or change its appearance
 There are parameters that relate to **Jinja templating**, such as:
 
 - `template_searchpath`: A list of folders where [Jinja](templating.md) looks for templates. The path of the DAG file is included by default.
+- `template_undefined`: The behavior of Jinja when a variable is undefined. Defaults to [StrictUndefined](https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.StrictUndefined).
 - `render_template_as_native_obj`: Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`.
 - `user_defined_macros`: A dictionary of macros that are available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates).
 
 Two other helpful parameters relate to **scaling** in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
 
-- `max_active_tasks`: The number of task instances allowed to run concurrently for all DAG runs of this DAG.
+- `max_active_tasks`: The number of task instances allowed to run concurrently for all DAG runs of this DAG. This parameter replaces the deprecated `concurrency`.
 - `max_active_runs`: The number of active DAG runs allowed to run concurrently for this DAG.
+- `max_consecutive_failed_dag_runs` (experimental): maximum number of consecutive failed DAG runs, after which the scheduler will disable this DAG.
 
 Other DAG parameters include:
 
@@ -263,6 +266,7 @@ Other DAG parameters include:
 - `dagrun_timeout`: The time it takes for a DAG run of this DAG to time out and be marked as `failed`.
 - `access_control`: Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). This cannot be implemented on Astro. Astronomer recommends customers to use [Astro's RBAC features](https://docs.astronomer.io/astro/user-permissions) instead.
 - `is_paused_upon_creation`: Whether the DAG is paused when it is created. When not set, the Airflow config `core.dags_are_paused_at_creation` is used, which defaults to `True`.
+- `auto_register`: Defaults to `True` and can be set to `False` to prevent DAGs using a `with` context from being automatically registered which can be relevant in some advanced dynamic DAG generation use cases. See [Registering dynamic DAGs](https://airflow.apache.org/docs/apache-airflow/stable/howto/dynamic-dag-generation.html#registering-dynamic-dags).
 - `fail_stop`: In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`.
 
 Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-level callbacks](error-notifications-in-airflow.md#airflow-callbacks) for more information.
@@ -271,3 +275,4 @@ Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-lev
 
 - [Get started with Apache Airflow](get-started-with-airflow.md) tutorial for a hands-on introduction to writing your first simple DAG.
 - [Airflow operators](what-is-an-operator.md) and [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md) for more information on how to define tasks in a DAG.
+- [Intro to Airflow: Get Started Writing Pipelines for Any Use Case](https://www.astronomer.io/events/webinars/intro-to-airflow-get-started-writing-pipelines-for-any-use-case-video/) webinar for a one-hour webinar introducing Airflow and how to write DAGs.
