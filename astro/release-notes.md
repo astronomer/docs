@@ -21,6 +21,26 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## March 19, 2024
+
+### Custom Deployment roles are now in public preview
+
+:::publicpreview
+:::
+
+The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
+
+In addition to this change, you can now use CLI commands to interact with and assign Deployment roles, including the new role **Workplace accessor**.
+
+### Export data from Reporting Dashboards with webhooks
+
+:::publicpreview
+:::
+
+In addition to exporting report data with downloads or email, you can now export reporting data using webhooks.
+
+Note that Webhook exports is a [Sigma beta feature](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
+
 ## March 7, 2024
 
 ### Reporting dashboards are now in public preview
