@@ -12,7 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import example_astronauts_three_tasks from '!!raw-loader!../code-samples/dags/dags/example_astronauts_three_tasks.py';
 import complex_dag_structure from '!!raw-loader!../code-samples/dags/dags/complex_dag_structure.py';
 
-In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow, they contain a collection of tasks with defined dependencies between them that you want to execute on a schedule. An Airflow DAG is defined in Python code and visualized in the Airflow UI. DAGs can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
+In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow; they contain a collection of tasks and dependencies that you want to execute on a schedule. An Airflow DAG is defined in Python code and visualized in the Airflow UI. DAGs can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
 
 The following screenshot shows a [complex DAG graph](#example-complex-dag-run) in the Airflow UI. After reading this guide, you'll be able to understand the elements of this graph, as well as know how to define DAGs and use DAG parameters.
 
@@ -220,7 +220,7 @@ with DAG(
 
 :::tip
 
-Astronomer recommends creating one Python file for each DAG and naming it after the `dag_id` as a best practice for organizing your Airflow project. At scale it is common to dynamically generate DAGs using Python code, see [Dynamically generate DAGs in Airflow](dynamically-generating-dags.md) for more information.
+Astronomer recommends creating one Python file for each DAG and naming it after the `dag_id` as a best practice for organizing your Airflow project. For certain advanced use cases it may be appropriate to dynamically generate DAGs using Python code, see [Dynamically generate DAGs in Airflow](dynamically-generating-dags.md) for more information.
 
 :::
 
@@ -270,5 +270,4 @@ Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-lev
 ## See also 
 
 - [Get started with Apache Airflow](get-started-with-airflow.md) tutorial for a hands-on introduction to writing your first simple DAG.
-- [Introduction to Apache Airflow](intro-to-airflow.md) for an overview of Airflow concepts.
 - [Airflow operators](what-is-an-operator.md) and [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md) for more information on how to define tasks in a DAG.
