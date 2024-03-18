@@ -20,9 +20,8 @@ To get the most out of this guide, you should have an understanding of:
 The following Apache Airflow core components are running at all times: 
 
 - **Webserver:** A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
-- **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html):** A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
+- **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html):** A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run. The **Executor**, which is a configuration property of the scheduler, determines how tasks are run. There are different executors available, see [Executors](#executors) for more information.
 - **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL and SQLite are also supported.
-- **[Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html):** The mechanism for running tasks. An executor is running within the scheduler whenever Airflow is operational.
 
 If you run Airflow locally using the [Astro CLI](https://docs.astronomer.io/astro/install-cli), you'll notice that when you start Airflow using `astro dev start`, it will spin up three containers, one for each of the core components.
 
