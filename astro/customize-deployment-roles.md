@@ -5,7 +5,7 @@ id: customize-deployment-roles
 description: Customize your users' permissions for Airflow environments on Astro.
 ---
 
-:::privatepreview
+:::publicpreview
 :::
 
 :::info
