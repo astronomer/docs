@@ -25,6 +25,8 @@ In situations where you need fine-grained Deployment access, you can create cust
 - Organization Owner permissions to create, update, and delete custom roles.
 - Workspace Owner permissions or Deployment Admin permissions to assign and change Deployment roles for users.
 
+See the [User permissions reference](user-permissions.md) for more information about user roles.
+
 ## Create a custom Deployment role
 
 You manage and create custom Deployment roles at the Organization level. After you create a custom Deployment role, you can assign users, teams, and Deployment API tokens the role from any Deployment in the Organization.
