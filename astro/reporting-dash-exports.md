@@ -35,22 +35,19 @@ When you export reporting data, Astro exports the last [one million rows of data
 
 3. Choose the file format that you want to download your data in. Astro generates your data export and saves it to your local computer.
 
-## Export reporting data to email
+## Export reporting data
 
-Instead of downloading your data directly, you can choose to email it to a specified address.
+Instead of downloading your data directly, you can choose to email it to a specified address or configure a webhook to send it to.
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu and then select **Send now**.
 
     <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
-3. Enter the recipient's email address and optionally edit the subject line and email body message.
+3. Enter the where you want to send the data report.
+    - **Email** - Enter the recipient's email address and optionally edit the subject line and email body message.
+    - **Webhook** - ([Sigma Beta](https://help.sigmacomputing.com/docs/webhook-exports)) Add the webhook URL where you want to export your data to.
 
-    :::tip
-
-    If you need to send data to a member of your team with fewer permissions on Astro, you can export the report with the recipient's level of user permissions by clicking **Run queries as recipient** in the **More options** section.
-
-    :::
 4. In the **Attachments** section, select the report you want to send and file format to include it as. You can choose from the same file types that are available for a one-time data download.
 5. (Optional) To send more than one report, click **+ Add**, and then select the report you want to send and its file format.
 
@@ -58,20 +55,22 @@ When you receive a report via email, the sender appears as **Sigma Computing**. 
 
 ![Example email alert shows the sender as Sigma with information about the report in the subject line.](/img/docs/dash-email-alert.png)
 
-### Schedule an emailed data report
+### Schedule a data report
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
-2. Open the **Export** menu for the reporting element you want to schedule an email export for and select **Schedule exports...**.
+2. Open the **Export** menu for the reporting element you want to schedule an export for and select **Schedule exports...**.
 
     <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
-3. Enter the recipient's email address and optionally edit the subject line and email body message.
+3. Enter the where you want to send the data report.
+    - **Email** - Enter the recipient's email address and optionally edit the subject line and email body message.
+    - **Webhook** - ([Sigma Beta](https://help.sigmacomputing.com/docs/webhook-exports)) Add the webhook URL where you want to export your data to.
 
 If you toggle **Condition** when setting up your schedule, it allows you to configure a conditional data export, or *reporting dashboard alert*. Instead of sending a report at a specific time interval, it sends a data report when your data meets criteria that you define.
 
 ## Create a reporting dashboard alert
 
-A reporting dashboard alert is an email containing a message and a data export that Astro sends when specific criteria are met in one of your reporting metrics. Use reporting dashboard alerts to quickly receive messages and data when your metrics reach a specific threshold, such as when task failures exceed a certain amount.
+A reporting dashboard alert contains a message and a data export that Astro sends when specific criteria are met in one of your reporting metrics. Use reporting dashboard alerts to quickly receive messages and data when your metrics reach a specific threshold, such as when task failures exceed a certain amount.
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu for the reporting element you want to set up an alert for.
