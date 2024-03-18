@@ -23,6 +23,18 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## March 19, 2024
 
+### New Astro Hosted regions added for Azure
+
+<HostedBadge/>
+
+You can now create Hosted dedicated clusters in the following Azure regions:
+
+- `centralus`
+- `westus3`
+- `southcentralus`
+
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+
 ### Custom Deployment roles are now in public preview
 
 :::publicpreview
@@ -40,6 +52,13 @@ In addition to this change, you can now use CLI commands to interact with and as
 In addition to exporting report data with downloads or email, you can now export reporting data using webhooks.
 
 Note that Webhook exports is a [Sigma beta feature](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
+
+### Additional improvements
+
+- Added a new **Credits** tab to the Organization Billing page, so you can see your Astro Trial credit balance. <!--https://github.com/astronomer/astro/pull/19805, https://github.com/astronomer/astro/issues/18723-->
+- For Astro Hybrid, the maximum worker concurrency increased from `64` to `256`. <!--https://github.com/astronomer/astro/pull/19701, https://github.com/astronomer/astro/pull/19715-->
+
+
 
 ## March 7, 2024
 

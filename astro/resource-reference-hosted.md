@@ -44,13 +44,13 @@ A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astr
 Currently, standard clusters are available on the following clouds and regions:
 
 <Tabs
-    defaultValue="aws"
-    groupId= "standard-cluster-regions"
-    values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
-    ]}>
+defaultValue="aws"
+groupId= "standard-cluster-regions"
+values={[
+{label: 'AWS', value: 'aws'},
+{label: 'GCP', value: 'gcp'},
+{label: 'Azure', value: 'azure'},
+]}>
 <TabItem value="aws">
 
 | Code             | Region                   |
@@ -74,16 +74,18 @@ Currently, standard clusters are available on the following clouds and regions:
 
 <TabItem value="azure">
 
-| Code         | Region                    |
-| ------------ | ------------------------- |
-| `eastus2`    | Virginia, North America   |
-| `westus2`    | Washington, North America |
-| `westeurope` | Netherlands, Europe       |
+| Code             | Region                    |
+| ---------------- | ------------------------- |
+| `centralus`      | Iowa, North America       |
+| `eastus2`        | Virginia, North America   |
+| `southcentralus` | Texas, North America      |
+| `westus2`        | Washington, North America |
+| `westus3`        | Arizona, North America    |
+| `westeurope`     | Netherlands, Europe       |
 
 </TabItem>
 
 </Tabs>
-
 
 ## Dedicated cluster regions
 
@@ -92,13 +94,13 @@ A _dedicated cluster_ is cluster that Astronomer provisions solely for use by yo
 Currently, dedicated clusters are available on the following clouds and regions:
 
 <Tabs
-    defaultValue="aws"
-    groupId= "dedicated-cluster-regions"
-    values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
-    ]}>
+defaultValue="aws"
+groupId= "dedicated-cluster-regions"
+values={[
+{label: 'AWS', value: 'aws'},
+{label: 'GCP', value: 'gcp'},
+{label: 'Azure', value: 'azure'},
+]}>
 <TabItem value="aws">
 
 | Code             | Name                      |
