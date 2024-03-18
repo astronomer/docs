@@ -149,4 +149,4 @@ Of course there is much more to Airflow than just DAGs and tasks. Here are a few
 
 ## Next steps
 
-Now that you have a basic understanding of Apache Airflow, you are ready to write your first DAG by following the the [Get started with Apache Airflow](get-started-with-airflow.md) tutorial.
+Now that you have a basic understanding of Apache Airflow, you are ready to write your first DAG by following the [Get started with Apache Airflow](get-started-with-airflow.md) tutorial.
