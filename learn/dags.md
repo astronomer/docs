@@ -102,15 +102,6 @@ Once you start writing more complex DAGs, you will see additional elements of di
 
 ![Screenshot of the Airflow UI showing the Grid view with the Graph tab selected. A DAG run of a complex DAG is shown with annotations showing a dynamically mapped task, a branching task, an edge label, a dynamically mapped task group, regular task groups, setup/ teardown tasks as well as a Dataset.](/img/guides/dags_complex_DAG_annotated.png)
 
-- **Dynamically mapped task**: A task that is [dynamically created](dynamic-tasks.md) at runtime based on changing user defined input. The number of task instances is shown in `[]` behind the task id. Task groups can also be [dynamically mapped](task-groups#generate-task-groups-dynamically-at-runtime).
-- **Branching task**: A task that creates a conditional branch in the DAG. See [Branching in Airflow](airflow-branch-operator.md) for more information.
-- **Edge label**: A label on the edge between two tasks. These labels are often helpful to annotate branch decisions in a DAG graph. 
-- **Task group**: A task group is a tool to logically and visually group tasks in an Airflow DAG. See [Airflow task groups](task-groups.md) for more information.
-- **Setup/teardown tasks**: When using Airflow to manage infrastructure it can be helpful to define tasks as setup and teardown tasks to take advantage of additional intelligent dependency behavior. You can recognize setup and teardown tasks by little arrows next to the task id in the task node and the dotted line connecting them. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md) for more information.
-- **Dataset**: Datasets are shown in the DAG graph. If a DAG is scheduled on a dataset, it is shown upstream of the first task of the DAG. If a task in the DAG updates a dataset, it is shown after the respective task as in the previous screenshot. See [Airflow datasets](airflow-datasets.md) for more information.
-
-You can learn more about how to set complex dependencies between tasks and task groups in the [Managing Dependencies](managing-dependencies.md) guide.
-
 <details>
 <summary>Click to view the full DAG code used for the Screenshot</summary>
 <div>
@@ -120,6 +111,15 @@ You can learn more about how to set complex dependencies between tasks and task 
     </div>
 </div>
 </details>
+
+- **Dynamically mapped task**: A task that is [dynamically created](dynamic-tasks.md) at runtime based on changing user defined input. The number of task instances is shown in `[]` behind the task id. Task groups can also be [dynamically mapped](task-groups#generate-task-groups-dynamically-at-runtime).
+- **Branching task**: A task that creates a conditional branch in the DAG. See [Branching in Airflow](airflow-branch-operator.md) for more information.
+- **Edge label**: A label on the edge between two tasks. These labels are often helpful to annotate branch decisions in a DAG graph. 
+- **Task group**: A task group is a tool to logically and visually group tasks in an Airflow DAG. See [Airflow task groups](task-groups.md) for more information.
+- **Setup/teardown tasks**: When using Airflow to manage infrastructure it can be helpful to define tasks as setup and teardown tasks to take advantage of additional intelligent dependency behavior. You can recognize setup and teardown tasks by little arrows next to the task id in the task node and the dotted line connecting them. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md) for more information.
+- **Dataset**: Datasets are shown in the DAG graph. If a DAG is scheduled on a dataset, it is shown upstream of the first task of the DAG. If a task in the DAG updates a dataset, it is shown after the respective task as in the previous screenshot. See [Airflow datasets](airflow-datasets.md) for more information.
+
+You can learn more about how to set complex dependencies between tasks and task groups in the [Managing Dependencies](managing-dependencies.md) guide.
 
 ## Write a DAG
 
