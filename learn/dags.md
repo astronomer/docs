@@ -12,10 +12,7 @@ import CodeBlock from '@theme/CodeBlock';
 import example_astronauts_three_tasks from '!!raw-loader!../code-samples/dags/dags/example_astronauts_three_tasks.py';
 import complex_dag_structure from '!!raw-loader!../code-samples/dags/dags/complex_dag_structure.py';
 
-A **DAG** is a **directed acyclic graph**, a mathematical structure consisting of nodes and edges. In Airflow, a DAG represents the unit of one data pipeline or workflow.
-Within an Airflow DAG, each node represents a task and each edge represents a dependency between tasks. 
-
-DAGs are defined in Python code and visualized in the Airflow UI. They can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
+In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow, they contain a collection of tasks with defined dependencies between them that you want to execute on a schedule. An Airflow DAG is defined in Python code and visualized in the Airflow UI. DAGs can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
 
 The following screenshot shows a complex DAG graph in the Airflow UI. After reading this guide, you'll be able to understand the elements of this graph, as well as know how to define DAGs and use DAG parameters.
 
@@ -38,7 +35,8 @@ To get the most out of this guide, you should have an understanding of:
 
 ## What is a DAG?
 
-In Airflow, a DAG is a data pipeline or workflow defined in Python code. DAGs are the main organizational unit in Airflow. They contain a collection of tasks with defined dependencies between them that you want to execute on a schedule. Each DAG has a unique `dag_id`.
+A **DAG** is a **directed acyclic graph**, a mathematical structure consisting of nodes and edges. In Airflow, a DAG represents the unit of one data pipeline or workflow.
+Within an Airflow DAG, each node represents a task and each edge represents a dependency between tasks. Each DAG has a unique `dag_id`.
 
 The mathematical properties of DAGs make them useful for building data pipelines:
 
@@ -50,7 +48,7 @@ The mathematical properties of DAGs make them useful for building data pipelines
 
     ![Visualization of two graphs with 4 nodes each. The first graph is acyclic, there are no circles defined between the nodes. In the second graph a dependency is added between task 4 and task 1, meaning task 1 depends on task 4. This creates a circle because task 4 is downstream of task 1. Only the first graph would be possible to define in Airflow.](/img/guides/dags_acyclic_vs_cyclic.png)
 
-Aside from these requirements, DAGs in Airflow can be as complicated as you need! You can define tasks that will run in parallel or sequentially, implement conditional branches, and visually group tasks together in [task groups](task-groups.md).
+Aside from these requirements, DAGs in Airflow can be as complicated as you need! You can define tasks that run in parallel or sequentially, implement conditional branches, and visually group tasks together in [task groups](task-groups.md).
 
 Each task in a DAG performs one unit of work. Tasks can be anything from a simple Python function to a complex data transformation or a call to an external service. They are defined using [Airflow operators](what-is-an-operator.md) or [Airflow decorators](airflow-decorators.md). The dependencies between tasks can be set in different ways, see [Managing Dependencies](managing-dependencies.md).
 
@@ -67,7 +65,7 @@ The following screenshot shows a simple DAG graph with 3 sequential tasks.
 
 ## What is a DAG run?
 
-An instance of a DAG running at a specific point in time is called a **DAG run**. Each DAG run has a unique `dag_run_id`. The history of previous DAG runs is stored in the [Airflow metadata database](airflow-database.md).
+An instance of a DAG running at a specific point in time is called a **DAG run**. An instance of a task running at a specific point in time is called a **task instance**. Each DAG run has a unique `dag_run_id` and contains one or more task instances. The history of previous DAG runs is stored in the [Airflow metadata database](airflow-database.md).
 
 In the Airflow UI you can view previous runs of a DAG in the Grid view and select individual DAG runs by clicking on the respective duration bar. The DAG run graph looks similar to the DAG graph with additional information about the status of each task instance in the DAG run.
 
@@ -86,10 +84,17 @@ A DAG run graph in the Airflow UI contains information about the DAG run, as wel
 
 The previous screenshot shows 4 successful DAG runs, one for each DAG run type:
 
-- **backfill**: The first DAG run shown was created by a [backfill](rerunning-dags.md#backfill). You can see a circled arrow on the DAG run bar.
+- **backfill**: The first DAG run shown was created by a [backfill](rerunning-dags.md#backfill). You can see an arrow on the DAG run bar.
 - **scheduled**: The second DAG run was created by the Airflow scheduler based on the DAG's defined schedule. This DAG run bar has no additional icon and is the DAG run selected in the screenshot.
 - **manual**: The third DAG run was started manually by a user in the Airflow UI or using the Airflow CLI. You can see a play icon on the DAG run bar.
 - **dataset_triggered**: The fourth DAG run was started by a [dataset](airflow-datasets.md). You can see a dataset icon on the DAG run bar.
+
+A DAG run can have the following statuses:
+
+- `queued`: The time after which the DAG run can be created has passed but the scheduler has not created task instances for it yet.
+- `running`: The DAG run is eligible to have task instances scheduled.
+- `success`: All task instances are in a terminal state (`success`, `skipped`, `failed` or `upstream_failed`) and all leaf tasks (tasks with no downstream tasks) are either in the state `success` or `skipped`. All 4 DAG runs in the screenshot are in the state `success`.
+- `failed`: All task instances are in a terminal state and at least one leaf task is in the state `failed` or `upstream_failed`.
 
 ### Example complex DAG run
 
@@ -97,12 +102,12 @@ Once you start writing more complex DAGs, you will see additional elements of di
 
 ![Screenshot of the Airflow UI showing the Grid view with the Graph tab selected. A DAG run of a complex DAG is shown with annotations showing a dynamically mapped task, a branching task, an edge label, a dynamically mapped task group, regular task groups, setup/ teardown tasks as well as a Dataset.](/img/guides/dags_complex_DAG_annotated.png)
 
-- **Dynamically mapped task**: A task that is [dynamically created](dynamic-tasks.md) at runtime based on changing user defined input. The number of task instances is shown in `[]` behind the task id. Task groups can also be dynamically mapped.
+- **Dynamically mapped task**: A task that is [dynamically created](dynamic-tasks.md) at runtime based on changing user defined input. The number of task instances is shown in `[]` behind the task id. Task groups can also be [dynamically mapped](task-groups#generate-task-groups-dynamically-at-runtime).
 - **Branching task**: A task that creates a conditional branch in the DAG. See [Branching in Airflow](airflow-branch-operator.md) for more information.
 - **Edge label**: A label on the edge between two tasks. These labels are often helpful to annotate branch decisions in a DAG graph. 
 - **Task group**: A task group is a tool to logically and visually group tasks in an Airflow DAG. See [Airflow task groups](task-groups.md) for more information.
 - **Setup/teardown tasks**: When using Airflow to manage infrastructure it can be helpful to define tasks as setup and teardown tasks to take advantage of additional intelligent dependency behavior. You can recognize setup and teardown tasks by little arrows next to the task id in the task node and the dotted line connecting them. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md) for more information.
-- **Dataset**: Datasets are shown in the DAG graph. If a DAG is scheduled on a dataset, it will be shown upstream of the first task of the DAG. If a task in the DAG updates a dataset, it is shown after the respective task as in the previous screenshot. See [Airflow datasets](airflow-datasets.md) for more information.
+- **Dataset**: Datasets are shown in the DAG graph. If a DAG is scheduled on a dataset, it is shown upstream of the first task of the DAG. If a task in the DAG updates a dataset, it is shown after the respective task as in the previous screenshot. See [Airflow datasets](airflow-datasets.md) for more information.
 
 You can learn more about how to set complex dependencies between tasks and task groups in the [Managing Dependencies](managing-dependencies.md) guide.
 
@@ -116,18 +121,9 @@ You can learn more about how to set complex dependencies between tasks and task 
 </div>
 </details>
 
-### DAG run status
-
-A DAG run can have the following statuses:
-
-- `queued`: The time after which the DAG run can be created has passed but the scheduler has not created task instances for it yet.
-- `running`: The DAG run is eligible to have task instances scheduled.
-- `success`: All task instances are in a terminal state (`success`, `skipped`, `failed` or `upstream_failed`) and all leaf tasks (tasks with no downstream tasks) are either in the state `success` or `skipped`.
-- `failed`: All task instances are in a terminal state and at least one leaf task is in the state `failed` or `upstream_failed`.
-
 ## Write a DAG
 
-DAGs in Airflow are defined in a Python script that is placed in an Airflow project's `DAG_FOLDER`, which is `dags/` when using the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli). Airflow will automatically parse all files in this folder to load any new DAGs every 5 minutes and update any existing DAGs every 30 seconds. You can force a new parsing of the DAGs by running `astro dev run dags reserialize` ([`airflow dags reserialize`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#reserialize)).
+DAGs in Airflow are defined in a Python script that is placed in an Airflow project's `DAG_FOLDER`, which is `dags/` when using the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli). Airflow automatically parses all files in this folder to load any new DAGs every 5 minutes and update any existing DAGs every 30 seconds. You can force a new parsing of the DAGs by running `astro dev run dags reserialize` ([`airflow dags reserialize`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#reserialize)).
 
 There are two main ways to define a DAG:
 
@@ -222,13 +218,11 @@ with DAG(
 </TabItem>
 </Tabs>
 
-
 :::tip
 
 Astronomer recommends creating one Python file for each DAG and naming it after the `dag_id` as a best practice for organizing your Airflow project. At scale it is common to dynamically generate DAGs using Python code, see [Dynamically generate DAGs in Airflow](dynamically-generating-dags.md) for more information.
 
 :::
-
 
 ### DAG-level parameters
 
@@ -243,8 +237,8 @@ There are many additional parameters that can be set on the DAG object.
 
 Some parameters relate to adding information to the DAG or change its appearance in the **Airflow UI**:
 
-- `description`: A short string that will be displayed in the Airflow UI next to the DAG name.
-- `doc_md`: A string that will be rendered as [DAG documentation](custom-airflow-ui-docs-tutorial.md) in the Airflow UI. Tip: use `__doc__` to use the docstring of the Python file.
+- `description`: A short string that is displayed in the Airflow UI next to the DAG name.
+- `doc_md`: A string that is rendered as [DAG documentation](custom-airflow-ui-docs-tutorial.md) in the Airflow UI. Tip: use `__doc__` to use the docstring of the Python file.
 - `owner_links`: A dictionary with the key being the DAG owner and the value being a URL to link to when clicking on the owner in the Airflow UI. Commonly used as a mailto link to the owner's email address. Note that the `owner` parameter is set at the task level, usually by defining it in the `default_args` dictionary.
 - `tags`: A list of tags shown in the Airflow UI to help with filtering DAGs.
 - `default_view`: The default view of the DAG in the Airflow UI. Defaults to `grid`.
@@ -252,9 +246,9 @@ Some parameters relate to adding information to the DAG or change its appearance
 
 There are parameters that relate to **Jinja templating**, such as:
 
-- `template_searchpath`: A list of folders where [Jinja](templating.md) will look for templates. The path of the DAG file is included by default.
+- `template_searchpath`: A list of folders where [Jinja](templating.md) looks for templates. The path of the DAG file is included by default.
 - `render_template_as_native_obj`: Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`.
-- `user_defined_macros`: A dictionary of macros that will be available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates).
+- `user_defined_macros`: A dictionary of macros that are available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates).
 
 Two other helpful parameters relate to **scaling** in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
 
@@ -264,7 +258,7 @@ Two other helpful parameters relate to **scaling** in Airflow. For more informat
 Other DAG parameters include:
 
 - `end_date`: The date beyond which no further DAG runs will be scheduled. Defaults to `None`.
-- `default_args`: A dictionary of parameters that will be applied to all tasks in the DAG. These parameters will be passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level.
+- `default_args`: A dictionary of parameters that are applied to all tasks in the DAG. These parameters are passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level.
 - `params`: A dictionary of DAG-level Airflow params. See [Airflow params](airflow-params.md) for more information.
 - `dagrun_timeout`: The time it takes for a DAG run of this DAG to time out and be marked as `failed`.
 - `access_control`: Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). Astronomer recommends customers to use [Astro's RBAC features](https://docs.astronomer.io/astro/user-permissions) instead.
@@ -272,3 +266,9 @@ Other DAG parameters include:
 - `fail_stop`: In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`.
 
 Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-level callbacks](error-notifications-in-airflow.md#airflow-callbacks) for more information.
+
+## See also 
+
+- [Get started with Apache Airflow](get-started-with-airflow.md) tutorial for a hands-on introduction to writing your first simple DAG.
+- [Introduction to Apache Airflow](intro-to-airflow.md) for an overview of Airflow concepts.
+- [Airflow operators](what-is-an-operator.md) and [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md) for more information on how to define tasks in a DAG.
