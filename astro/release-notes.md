@@ -59,7 +59,6 @@ Note that Webhook exports is a [Sigma beta feature](https://help.sigmacomputing.
 - For Astro Hybrid, the maximum worker concurrency increased from `64` to `256`. <!--https://github.com/astronomer/astro/pull/19701, https://github.com/astronomer/astro/pull/19715-->
 
 
-
 ## March 7, 2024
 
 ### Reporting dashboards are now in public preview
