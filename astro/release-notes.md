@@ -42,21 +42,21 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
-In addition to this change, you can now use CLI commands to interact with and assign Deployment roles, including the new role **Workplace accessor**.
+In addition to this change, you can now use CLI commands to interact with and assign Deployment roles, including the new roles **Workplace accessor** and **Deployment Admin**. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions) and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
 
 ### Export data from Reporting Dashboards with webhooks
 
 :::publicpreview
 :::
 
-In addition to exporting report data with downloads or email, you can now export reporting data using webhooks.
+In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks.
 
 Note that Webhook exports is a [Sigma beta feature](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
 
 ### Additional improvements
 
-- Added a new **Credits** tab to the Organization Billing page, so you can see your Astro Trial credit balance. <!--https://github.com/astronomer/astro/pull/19805, https://github.com/astronomer/astro/issues/18723-->
-- For Astro Hybrid, the maximum worker concurrency increased from `64` to `256`. <!--https://github.com/astronomer/astro/pull/19701, https://github.com/astronomer/astro/pull/19715-->
+- Added a new **Credits** tab to the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing), so you can see your Astro Trial credit balance.
+- For Astro Hybrid, the maximum worker concurrency increased from `64` to `256`.
 
 
 ## March 7, 2024

@@ -6,6 +6,7 @@ description: "Change your billing details and view your current spend from the C
 ---
 
 import HostedBadge from '@site/src/components/HostedBadge';
+
 <HostedBadge/>
 
 Astro Hosted meters and bills based on consumption of cloud resources associated with clusters, Deployments, and workers. Pricing is charged at an hourly rate, but is measured by the second. See [Pricing](https://www.astronomer.io/pricing/) for complete pricing and billing details.
