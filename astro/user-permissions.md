@@ -85,7 +85,10 @@ The following table lists the specific permissions that each Workspace role has:
 
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
 
-## Deployment Admin role (Public Preview)
+## Deployment Admin role
+
+:::publicpreview
+:::
 
 This feature is available for Team tier and above.
 
