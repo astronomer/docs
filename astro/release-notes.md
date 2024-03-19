@@ -42,7 +42,13 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
-In addition to this change, you can now use the new roles **Workplace accessor** and **Deployment Admin** to refine how you control who has access to your Deployments. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions) and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
+In addition to this change, you can now use the new roles, **Workplace accessor** and **Deployment Admin** to refine how you control who has access to your Deployments. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions) and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
+
+New Asro CLI commands enable you to use the CLI to interact with and update your users' Deployment roles with the following commands:
+
+* [`astro organization role list`](https://docs.astronomer.io/astro/cli/astro-organization-role-list)
+* [`astro deployment user`](https://docs.astronomer.io/astro/cli/astro-deployment-user)
+* [`astro deployment team`](https://docs.astronomer.io/astro/cli/astro-deployment-team)
 
 
 ### Export data from Reporting Dashboards with webhooks
