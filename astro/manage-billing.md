@@ -60,9 +60,9 @@ Each chart on this page shows your usage over the last 30, 60, or 90 days for ea
 
 The charts are organized by component type. For a given component type, the chart shows usage for all instances of a given component type across your Organization. Therefore, it's possible to have more than 24 hours of usage for a given day. For example, if you have two **Deployment with Medium Schedulers** running for 24 hours in a day, the usage chart will show that your total usage for the day was 48 hours.
 
-## View your trial credits
+## View your credits
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
 2. Click **Credits**.
 
-When you sign up for an [Astro Trial](trial.md), you receive $300 in free trial credits. You can see your available credit balance and total consumption.
+You can see your available credit balance and total consumption, including your credit balance when you sign up for an [Astro Trial](trial.md), to keep track of your $300 in free trial credits.

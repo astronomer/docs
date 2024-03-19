@@ -55,7 +55,7 @@ Note that Webhook exports is a [Sigma beta feature](https://help.sigmacomputing.
 
 ### Additional improvements
 
-- Added a new **Credits** tab to the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing), so you can see your Astro Trial credit balance.
+- Added a new **Credits** tab to the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing), so you can see your credit balance.
 - For Astro Hybrid, the maximum worker concurrency increased from `64` to `256`.
 
 
