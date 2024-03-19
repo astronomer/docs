@@ -236,8 +236,6 @@ The DAGs in the previous section have the following parameters defined:
 | `schedule`   | The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`. This parameter replaces the deprecated `schedule_interval` and `timetable` parameters. |
 | `catchup`    | Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is unpaused. This parameter defaults to `True`. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs, see [Catchup](rerunning-dags.md#catchup) for more information. |
 
-There are many additional parameters that can be set on the DAG object. 
-
 Some parameters relate to adding information to the DAG or change its appearance in the **Airflow UI**:
 
 | Parameter                           | Description |
@@ -258,7 +256,7 @@ There are parameters that relate to **Jinja templating**, such as:
 | `render_template_as_native_obj`  | Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`. |
 | `user_defined_macros`            | A dictionary of macros that are available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates). |
 
-Two other helpful parameters relate to **scaling** in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
+Three other helpful parameters relate to **scaling** in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
@@ -277,7 +275,7 @@ Other DAG parameters include:
 | `access_control`          | Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). This cannot be implemented on Astro. Astronomer recommends customers to use [Astro's RBAC features](https://docs.astronomer.io/astro/user-permissions) instead. |
 | `is_paused_upon_creation` | Whether the DAG is paused when it is created. When not set, the Airflow config `core.dags_are_paused_at_creation` is used, which defaults to `True`. |
 | `auto_register`           | Defaults to `True` and can be set to `False` to prevent DAGs using a `with` context from being automatically registered which can be relevant in some advanced dynamic DAG generation use cases. See [Registering dynamic DAGs](https://airflow.apache.org/docs/apache-airflow/stable/howto/dynamic-dag-generation.html#registering-dynamic-dags). |
-| `fail_stop`               | In Airflow 2.7+ you can set
+| `fail_stop`               |  In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`. |
 
 Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-level callbacks](error-notifications-in-airflow.md#airflow-callbacks) for more information.
 
