@@ -4,7 +4,7 @@ title: "astro organization team list"
 id: astro-organization-team-list
 description: List all Teams in your current Organization.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' }
+sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
 :::info
@@ -23,13 +23,14 @@ astro organization team list
 
 ## Output
 
-| Column        | Description                                                                  | Data type     |
-| ------------- | ---------------------------------------------------------------------------- | ------------- |
-| `ID`          | The Team ID in the Organization.                                             | String        |
-| `NAME`        | Team name.                                                                   | String        |
-| `DESCRIPTION` | The description for the Team.                                           | String        |
-| `IDP MANAGED` | Whether the Team is managed through an identity provider. | Boolean       |
-| `CREATE DATE` | The date and time that the Team was created in the Organization.             | Date (`YYYY-MM-DDTHH:MM:SSZ`)         |
+| Column        | Description                                                      | Data type                                                                                    |
+| ------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ID`          | The Team ID in the Organization.                                 | String                                                                                       |
+| `NAME`        | Team name.                                                       | String                                                                                       |
+| `DESCRIPTION` | The description for the Team.                                    | String                                                                                       |
+| `ORG ROLE`    | The Team's role in the Organization.                             | Possible values are ORGANIZATION_MEMBER, ORGANIZATION_BILLING_ADMIN, and ORGANIZATION_OWNER. |
+| `IDP MANAGED` | Whether the Team is managed through an identity provider.        | Boolean                                                                                      |
+| `CREATE DATE` | The date and time that the Team was created in the Organization. | Date (`YYYY-MM-DDTHH:MM:SSZ`)                                                                |
 
 ## Related commands
 

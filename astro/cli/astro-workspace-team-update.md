@@ -37,11 +37,11 @@ To find a Team ID in the Cloud UI, click your Workspace name in the upper left c
 
 #### Options
 
-| Option           | Description                                              | Possible Values                                                                                          |
-| ---------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--workspace-id` | The Workspace for the Team. Use to override CLI prompts. | Any valid Workspace ID.                                                                                  |
-| `<team-id>`      | The ID for the Team. Use to override CLI prompts.        | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`.                               |
-| `--role`         | The Team's role in the Workspace.                        | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, and `WORKSPACE_OWNER`. |
+| Option           | Description                                              | Possible Values                                                                                                               |
+| ---------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `--workspace-id` | The Workspace for the Team. Use to override CLI prompts. | Any valid Workspace ID.                                                                                                       |
+| `<team-id>`      | The ID for the Team. Use to override CLI prompts.        | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`.                                                    |
+| `--role`         | The Team's role in the Workspace.                        | Possible values are `WORKSPACE_ACCESSOR`,`WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, and `WORKSPACE_OWNER`. |
 
 </TabItem>
 <TabItem value="software">

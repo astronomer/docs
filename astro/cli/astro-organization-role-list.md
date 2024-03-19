@@ -20,7 +20,7 @@ View a list of all the roles in your Organizations.
 
 ## Usage
 
-Run `astro organization role list` to view a list of the custom and default user roles in your Organization and their IDs. By default, only custom roles are displayed.
+Run `astro organization role list` to view a list of the custom and default user roles in your Organization and their IDs. By default, only custom roles are displayed. To create a custom role, see [Create and assign custom Deployment roles](customize-deployment-roles.md)
 
 If you want to view the Astro-defined user roles and their IDs, you need to add the `--include-default-roles` flag. For example,
 
