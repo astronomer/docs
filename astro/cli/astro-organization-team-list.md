@@ -28,7 +28,7 @@ astro organization team list
 | `ID`          | The Team ID in the Organization.                                 | String                                                                                       |
 | `NAME`        | Team name.                                                       | String                                                                                       |
 | `DESCRIPTION` | The description for the Team.                                    | String                                                                                       |
-| `ORG ROLE`    | The Team's role in the Organization.                             | Possible values are ORGANIZATION_MEMBER, ORGANIZATION_BILLING_ADMIN, and ORGANIZATION_OWNER. |
+| `ORG ROLE`    | The Team's role in the Organization.                             | Possible values are `ORGANIZATION_MEMBER`, `ORGANIZATION_BILLING_ADMIN`, and `ORGANIZATION_OWNER`. |
 | `IDP MANAGED` | Whether the Team is managed through an identity provider.        | Boolean                                                                                      |
 | `CREATE DATE` | The date and time that the Team was created in the Organization. | Date (`YYYY-MM-DDTHH:MM:SSZ`)                                                                |
 
