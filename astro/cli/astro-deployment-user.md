@@ -47,7 +47,7 @@ astro deployment user add --email=<user-email-address> --deployment-id=<user-dep
 | ------------------------------ | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `--deployment-id` (_Required_) | The ID for the Deployment that the user is added to | Any valid Deployment ID                                                                                                       |
 | `-e`,`--email` (_Required_)    | The user's email                                    | Any valid email address                                                                                                       |
-| `--role` (_Required_)          | The role assigned to the user                       | Possible values are `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. The default value is `DEPLOYMENT_VIEWER` |
+| `--role` (_Required_)          | The role assigned to the user                       | Possible values are `DEPLOYMENT_ADMIN` or the custom role name. The default is `DEPLOYMENT_ADMIN`. |
 | `--workspace-id`               | The workspace assigned to the Deployment            | Any valid Workspace ID                                                                                                        |
 
 ### astro deployment user list
@@ -101,7 +101,7 @@ astro deployment user update --email=<email=address> --deployment-id=<deployment
 | ---------------------------- | ------------------------------------ | ------------------------ |
 | `--deployment-id` (Required) | The Deployment that you're searching | Any valid Deployment ID. |
 | `-e`,`--email` (_Required_)  | The user's email                     | Any valid email address  |
-| `--role` | The role for the user. | Possible values are `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. The default value is `DEPLOYMENT_VIEWER`. |
+| `--role` | The role for the user. | Possible values are `DEPLOYMENT_ADMIN` or the custom role name. The default value is `DEPLOYMENT_ADMIN`. |
 
 #### Related documentation
 
@@ -130,7 +130,7 @@ astro deployment user add --email=<user-email-address> --deployment-id=<user-dep
 | ------------------------------ | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `--deployment-id` (_Required_) | The ID for the Deployment that the user is added to | Any valid Deployment ID                                                                                                       |
 | `-e`,`--email` (_Required_)    | The user's email                                    | Any valid email address                                                                                                       |
-| `--role` (_Required_)          | The role assigned to the user                       | Possible values are `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. The default value is `DEPLOYMENT_VIEWER` |
+| `--role` (_Required_)          | The role assigned to the user                       | 1DEPLOYMENT_ADMIN1 or the custom role name. Default is `DEPLOYMENT_ADMIN`. |
 
 #### Related documentation
 

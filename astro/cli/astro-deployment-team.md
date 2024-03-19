@@ -33,7 +33,7 @@ This command includes four subcommands: `add`, `list`, `update`, and `remove`.
 
 ```sh
 astro deployment team add --deployment-id=<your-deployment-id> <team-id> --role --workspace-id
-astro deployment team list <deployment-id> <team-id> --role --workspace-id
+astro deployment team list --deployment-id=<deployment-id> <team-id> --role --workspace-id
 astro deployment team update --deployment-id=<your-deployment-id> <team-id> --role --workspace-id
 astro deployment team remove --deployment-id=<your-deployment-id> <team-id> --role --workspace-id
 ```
