@@ -35,14 +35,15 @@ You can now create Hosted dedicated clusters in the following Azure regions:
 
 See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
 
-### Custom Deployment roles are now in public preview
+### Additional Deployment-level permissions customization
 
 :::publicpreview
 :::
 
 The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
-In addition to this change, you can now use CLI commands to interact with and assign Deployment roles, including the new roles **Workplace accessor** and **Deployment Admin**. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions) and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
+In addition to this change, you can now use the new roles **Workplace accessor** and **Deployment Admin** to refine how you control who has access to your Deployments. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions) and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
+
 
 ### Export data from Reporting Dashboards with webhooks
 
