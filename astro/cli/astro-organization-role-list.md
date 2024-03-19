@@ -34,7 +34,7 @@ astro organization role list --include-default-roles
 
 | Option                  | Description                                                                      | Possible Values                  |
 | ----------------------- | -------------------------------------------------------------------------------- | -------------------------------- |
-| --include-default-roles | Display the Astro-defined [user roles](user-permissions.md) in the organization. | Any of the available user roles. |
+| `--include-default-roles` | Display the Astro-defined [user roles](user-permissions.md) in the organization. | Any of the available user roles. |
 
 ## Output
 
