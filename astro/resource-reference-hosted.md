@@ -74,14 +74,11 @@ values={[
 
 <TabItem value="azure">
 
-| Code             | Region                    |
-| ---------------- | ------------------------- |
-| `centralus`      | Iowa, North America       |
-| `eastus2`        | Virginia, North America   |
-| `southcentralus` | Texas, North America      |
-| `westus2`        | Washington, North America |
-| `westus3`        | Arizona, North America    |
-| `westeurope`     | Netherlands, Europe       |
+| Code         | Region                    |
+| ------------ | ------------------------- |
+| `eastus2`    | Virginia, North America   |
+| `westus2`    | Washington, North America |
+| `westeurope` | Netherlands, Europe       |
 
 </TabItem>
 
@@ -122,20 +119,23 @@ values={[
 
 <TabItem value="azure">
 
-| Code            | Region         |
-| --------------- | -------------- |
-| `australiaeast` | Australia East |
-| `brazilsouth`   | Brazil South   |
-| `canadacentral` | Canada Central |
-| `centralindia`  | Central India  |
-| `eastus2`       | East US        |
-| `eastus2`       | East US 2      |
-| `francecentral` | France Central |
-| `japaneast`     | Japan East     |
-| `northeurope`   | North Europe   |
-| `uksouth`       | UK South       |
-| `westeurope`    | West Europe    |
-| `westus2`       | West US 2      |
+| Code             | Region           |
+| ---------------- | ---------------- |
+| `australiaeast`  | Australia East   |
+| `brazilsouth`    | Brazil South     |
+| `canadacentral`  | Canada Central   |
+| `centralindia`   | Central India    |
+| `centralus`      | Central US       |
+| `eastus2`        | East US          |
+| `eastus2`        | East US 2        |
+| `francecentral`  | France Central   |
+| `japaneast`      | Japan East       |
+| `northeurope`    | North Europe     |
+| `uksouth`        | UK South         |
+| `southcentralus` | South Central US |
+| `westeurope`     | West Europe      |
+| `westus2`        | West US 2        |
+| `westus3`        | West US 3        |
 
 </TabItem>
 
