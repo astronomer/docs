@@ -16,7 +16,7 @@ The behavior and format of this command differs depending on what Astronomer pro
 
 :::
 
-Manage Deployment-level Teams.
+Manage Deployment-level users.
 
 <Tabs
 defaultValue="astro"
@@ -34,10 +34,6 @@ This command has several subcommands. Read the following sections to learn how t
 ### astro deployment user add
 
 Give an existing user in a Workspace access to a Deployment within that Workspace. You must be a Deployment Admin for the given Deployment to run this command.
-
-Flags:
--h, --help help for add
--r, --role string The role for the new user. Possible values are DEPLOYMENT_ADMIN or the custom role name. (default "DEPLOYMENT_ADMIN")
 
 #### Usage
 
@@ -105,7 +101,6 @@ astro deployment user update --email=<email=address> --deployment-id=<deployment
 | ---------------------------- | ------------------------------------ | ------------------------ |
 | `--deployment-id` (Required) | The Deployment that you're searching | Any valid Deployment ID. |
 | `-e`,`--email` (_Required_)  | The user's email                     | Any valid email address  |
-
 | `--role` | The role for the user. | Possible values are `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. The default value is `DEPLOYMENT_VIEWER`. |
 
 #### Related documentation
