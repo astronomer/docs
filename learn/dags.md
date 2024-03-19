@@ -231,7 +231,7 @@ The DAGs in the previous section have the following parameters defined:
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
-| `dag_id`     | The name of the DAG. This must be unique for each DAG in the Airflow environment. When using the `@dag` decorator and not providing the `dag_id` parameter name, the function name is used as the `dag_id`. When using the `DAG` class, this parameter is required. |
+| `dag_id`                            | The name of the DAG. This must be unique for each DAG in the Airflow environment. When using the `@dag` decorator and not providing the `dag_id` parameter name, the function name is used as the `dag_id`. When using the `DAG` class, this parameter is required. |
 | `start_date` | The date and time after which the DAG starts being scheduled. Note that the first actual run of the DAG may be later than this date depending on how you define the schedule. See [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) for more information. This parameter may be required depending on your Airflow version and `schedule`. |
 | `schedule`   | The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`. This parameter replaces the deprecated `schedule_interval` and `timetable` parameters. |
 | `catchup`    | Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is unpaused. This parameter defaults to `True`. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs, see [Catchup](rerunning-dags.md#catchup) for more information. |
@@ -240,7 +240,7 @@ Some parameters relate to adding information to the DAG or change its appearance
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
-| `description`   | A short string that is displayed in the Airflow UI next to the DAG name. |
+| `description`                       | A short string that is displayed in the Airflow UI next to the DAG name. |
 | `doc_md`        | A string that is rendered as [DAG documentation](custom-airflow-ui-docs-tutorial.md) in the Airflow UI. Tip: use `__doc__` to use the docstring of the Python file. |
 | `owner_links`   | A dictionary with the key being the DAG owner and the value being a URL to link to when clicking on the owner in the Airflow UI. Commonly used as a mailto link to the owner's email address. Note that the `owner` parameter is set at the task level, usually by defining it in the `default_args` dictionary. |
 | `tags`          | A list of tags shown in the Airflow UI to help with filtering DAGs. |
@@ -251,9 +251,9 @@ There are parameters that relate to **Jinja templating**, such as:
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
-| `template_searchpath`            | A list of folders where [Jinja](templating.md) looks for templates. The path of the DAG file is included by default. |
+| `template_searchpath`               | A list of folders where [Jinja](templating.md) looks for templates. The path of the DAG file is included by default. |
 | `template_undefined`             | The behavior of Jinja when a variable is undefined. Defaults to [StrictUndefined](https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.StrictUndefined). |
-| `render_template_as_native_obj`  | Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`. |
+| `render_template_as_native_obj`     | Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`. |
 | `user_defined_macros`            | A dictionary of macros that are available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates). |
 
 Three other helpful parameters relate to **scaling** in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
@@ -268,7 +268,7 @@ Other DAG parameters include:
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
-| `end_date`                | The date beyond which no further DAG runs will be scheduled. Defaults to `None`. |
+| `end_date`                          | The date beyond which no further DAG runs will be scheduled. Defaults to `None`. |
 | `default_args`            | A dictionary of parameters that are applied to all tasks in the DAG. These parameters are passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level. |
 | `params`                  | A dictionary of DAG-level Airflow params. See [Airflow params](airflow-params.md) for more information. |
 | `dagrun_timeout`          | The time it takes for a DAG run of this DAG to time out and be marked as `failed`. |
