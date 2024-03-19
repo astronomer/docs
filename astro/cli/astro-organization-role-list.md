@@ -20,15 +20,29 @@ View a list of all the roles in your Organizations.
 
 ## Usage
 
-Run `astro organization role list` to view a list of the [user roles](user-permissions.md) in your Organization and their IDs.
+Run `astro organization role list` to view a list of the custom user roles in your Organization and their IDs.
+
+If you want to view the default user roles and their IDs, you need to add the `--include-default-roles` flag. For example,
+
+```sh
+
+astro organization role list --include-default-roles
+
+```
+
+## Options
+
+| Option                  | Description                                                                | Possible Values                  |
+| ----------------------- | -------------------------------------------------------------------------- | -------------------------------- |
+| --include-default-roles | Display the default [user roles](user-permissions.md) in the organization. | Any of the available user roles. |
 
 ## Output
 
-| Output        | Description                                                   | Data Type |
-| ------------- | ------------------------------------------------------------- | --------- |
-| `NAME`        | The name of the Organizations that you have access to.        | String    |
-| `ID`          | The user ID.                                                  | String    |
-| `DESCRIPTION` | A description of the user role you can assign permissions to. | String    |
+| Output        | Description                     | Data Type |
+| ------------- | ------------------------------- | --------- |
+| `NAME`        | The name of the role.           | String    |
+| `ID`          | The user ID.                    | String    |
+| `DESCRIPTION` | A description of the user role. | String    |
 
 ## Related Commands
 
