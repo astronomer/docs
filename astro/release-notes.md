@@ -50,7 +50,7 @@ In addition to this change, you can now use the new roles **Workplace accessor**
 :::publicpreview
 :::
 
-In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks.
+In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks, so you can send your Astronomer data to your webhook endpoints such as Segment, Airtable, or Marketo.
 
 Note that Webhook exports is a [Sigma beta feature](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
 
