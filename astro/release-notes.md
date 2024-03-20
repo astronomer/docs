@@ -35,7 +35,7 @@ You can now create Hosted dedicated clusters in the following Azure regions:
 
 See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
 
-### Additional Deployment-level permissions customization
+### Custom Deployment roles are now in Public Preview
 
 :::publicpreview
 :::
