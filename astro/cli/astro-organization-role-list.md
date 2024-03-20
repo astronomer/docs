@@ -7,8 +7,6 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
-:::publicpreview
-:::
 
 :::info
 
@@ -16,7 +14,7 @@ This command is only available on Astro.
 
 :::
 
-View a list of all the roles in your Organizations.
+View a list of all roles in an Organization.
 
 ## Usage
 

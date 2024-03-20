@@ -48,7 +48,7 @@ To find a Team ID in the Cloud UI, click your Workspace name in the upper left c
 | ------------------------------ | --------------------------- | --------------------------------------------------------------- |
 | `--deployment-id` (_Required_) | The Deployment for the Team | Any valid Deployment ID                                         |
 | `<team-id>` (_Required_)       | The Team's ID               | Any valid Team ID                                               |
-| `--role`                       | The role for the team.      | Possible values are `DEPLOYMENT_ADMIN` or the custom role name. |
+| `--role`                       | The role for the team.      | `DEPLOYMENT_ADMIN` or a custom role name. |
 | `--workspace-id`             | The Workspace from which to remove the user  | Any valid Workspace ID  |
 
 
