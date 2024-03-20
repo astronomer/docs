@@ -8,10 +8,7 @@ sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
 
-:::info
-
-This command is only available on Astro.
-
+:::astroonly
 :::
 
 View a list of all roles in an Organization.
