@@ -62,7 +62,7 @@ The charts are organized by component type. For a given component type, the char
 
 ## View your credits
 
+You can check your available credit balance and total credit consumption in the Astro UI. This includes [Astro Trial](trial.md) credits as well as any other credits you might have accrued during your time using Astro.
+
 1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Billing**.
 2. Click **Credits**.
-
-You can see your available credit balance and total consumption, including your credit balance when you sign up for an [Astro Trial](trial.md), to keep track of your $300 in free trial credits.
