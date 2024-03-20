@@ -41,8 +41,9 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Develop",
+      label: "Develop DAGs",
       items: [
+        'astro-dags-overview',
         {
           type: 'link',
           label: 'Develop your Astro project',
@@ -58,6 +59,10 @@ module.exports = {
             "import-export-connections-variables",
           ],
         },
+        "upgrade-runtime",
+        "view-logs",
+        "manage-dags",
+        "airflow-api",
         {
           type: "category",
           label: "Cloud IDE",
@@ -76,8 +81,6 @@ module.exports = {
             "cloud-ide/custom-cell-reference"
           ],
         },
-        "upgrade-runtime",
-        "airflow-api",
       ],
     },
     {
@@ -127,7 +130,6 @@ module.exports = {
             "secrets-backend/gcp-secretsmanager",
           ],
         },
-        "manage-dags",
       ],
     },
     {
@@ -180,9 +182,8 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Observability",
+      label: "Platform observability",
       items: [
-        "view-logs",
         {
           type: "category",
           label: "View metrics",
