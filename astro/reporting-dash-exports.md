@@ -37,16 +37,16 @@ When you export reporting data, Astro exports the last [one million rows of data
 
 ## Export reporting data
 
-Instead of downloading your data directly, you can choose to email it to a specified address or configure a webhook to send it to.
+Instead of downloading your data directly, you can email it or send it to an external service through a webhook.
 
 1. To view Astro reporting dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards).
 2. Open the **Export** menu and then select **Send now**.
 
     <img src={require("../static/img/docs/dash-open-menu.png").default} alt="Expand the menu to view all options for downloading data, emailing data, scheduling a data export, and setting up a data alert." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
-3. Enter the where you want to send the data report.
+3. Choose where you want to send the data report.
     - **Email** - Enter the recipient's email address and optionally edit the subject line and email body message.
-    - **Webhook** - ([Sigma Beta](https://help.sigmacomputing.com/docs/webhook-exports)) Add the webhook URL where you want to export your data to.
+    - **Webhook** - ([Sigma feature in beta](https://help.sigmacomputing.com/docs/webhook-exports)) Add the webhook URL where you want to export your data to.
 
 4. In the **Attachments** section, select the report you want to send and file format to include it as. You can choose from the same file types that are available for a one-time data download.
 5. (Optional) To send more than one report, click **+ Add**, and then select the report you want to send and its file format.
@@ -64,7 +64,7 @@ When you receive a report via email, the sender appears as **Sigma Computing**. 
 
 3. Enter the where you want to send the data report.
     - **Email** - Enter the recipient's email address and optionally edit the subject line and email body message.
-    - **Webhook** - ([Sigma Beta](https://help.sigmacomputing.com/docs/webhook-exports)) Add the webhook URL where you want to export your data to.
+    - **Webhook** - ([Sigma feature in beta](https://help.sigmacomputing.com/docs/webhook-exports)) Add the webhook URL where you want to export your data to.
 
 If you toggle **Condition** when setting up your schedule, it allows you to configure a conditional data export, or *reporting dashboard alert*. Instead of sending a report at a specific time interval, it sends a data report when your data meets criteria that you define.
 
