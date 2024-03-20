@@ -4,6 +4,9 @@ title: 'Manage Astro billing'
 id: manage-billing
 description: "Change your billing details and view your current spend from the Cloud UI."
 ---
+import HostedBadge from '@site/src/components/HostedBadge';
+
+<HostedBadge/>
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
