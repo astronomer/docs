@@ -87,14 +87,6 @@ To manage a user's Workspace permissions, see [Manage Worksapce users](manage-wo
 
 ## Deployment roles
 
-:::publicpreview
-:::
-
-:::info
-
-This feature is available for Team tier and above.
-
-:::
 
 There are two types of Deployment roles: the default Deployment Admin role and [custom Deployment roles](customize-deployment-roles.md).
 
