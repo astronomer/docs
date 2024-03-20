@@ -4,15 +4,15 @@ title: "astro workspace user update"
 id: astro-workspace-user-update
 description: Update a Workspace user.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' } 
+sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::info  
+:::info
 
-The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts. 
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts.
 
 :::
 
@@ -37,7 +37,7 @@ astro workspace user update --role <user-role>
 | Option                | Description                                          | Valid Values                                                                     |
 | --------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `<email>`             | The email address of the user whose role you want to update. | Any valid email                                                                  |
-| `--role` (_Required_) | The user's role in the Workspace.                    | Valid values are `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role` (_Required_) | The user's role in the Workspace.                    | Valid values are `WORKSPACE_ACCESSOR`, `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, `WORKSPACE_AUTHOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
 

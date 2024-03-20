@@ -5,7 +5,7 @@ id: deployment-role-reference
 description: Learn about each possible permission that you can assign to custom Deployment roles
 ---
 
-:::privatepreview
+:::publicpreview
 :::
 
 :::info
