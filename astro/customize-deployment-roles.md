@@ -5,7 +5,7 @@ id: customize-deployment-roles
 description: Customize your users' permissions for Airflow environments on Astro.
 ---
 
-:::privatepreview
+:::publicpreview
 :::
 
 :::info
@@ -24,6 +24,8 @@ In situations where you need fine-grained Deployment access, you can create cust
 
 - Organization Owner permissions to create, update, and delete custom roles.
 - Workspace Owner permissions or Deployment Admin permissions to assign and change Deployment roles for users.
+
+See the [User permissions reference](user-permissions.md) for more information about user roles.
 
 ## Create a custom Deployment role
 

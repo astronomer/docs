@@ -14,13 +14,13 @@ Astro has hierarchical RBAC. Within a given Workspace or Organization, senior ro
 The Astro role hierarchies in order of inheritance are:
 
 - Organization Owner > Organization Billing Admin > Organization Member
-- Workspace Owner > Workspace Operator > Workspace Author > Workspace Member
+- Workspace Owner > Workspace Operator > Workspace Author > Workspace Member > Workspace Accessor (Public Preview)
 
 Additionally, Organization Owners inherit Workspace Owner permissions for all Workspaces in the Organization.
 
 ## Organization roles
 
-An Organization role grants a user or API token some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace whereas an API token's access is based on it's scope. The following table lists the available Organization roles:
+An Organization role grants a user or API token some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace whereas an API token's access is based on its scope. The following table lists the available Organization roles:
 
 | Permission                                                            | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
 | --------------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
@@ -47,7 +47,8 @@ To manage users in an Organization, see [Manage Organization users](manage-organ
 
 A Workspace role grants a user or API token some level of access to a specific Workspace. If a user or API token has some level of access to a Workspace, that access applies to all Deployments in the Workspace.
 
-- A **Workspace Member** has the least permissions in a Workspace and can only view the most basic details about Deployments and DAGs. Give a user this role if they need to be able to monitor a DAG run or view Deployment health, but they shouldn't make any changes to a Deployment themselves.
+- A **Workspace Accessor** has the fewest permissions in a Workspace. A Workspace Accessor can only see basic information about the Workspace in which they have the role. They can only be granted further permissions through a Deployment role. If you grant a user a Deployment role without first assigning them a Workspace role, they'll automatically be granted the Workspace Accessor role for the Workspace. For more information, see [Customize Deployment roles](customize-deployment-roles.md).
+- A **Workspace Member** can view the most basic details about Deployments, DAGs, tasks, logs, and alerts. Give a user this role if they need to be able to monitor a DAG run or view Deployment health, but they shouldn't make any changes to a Deployment themselves.
 - A **Workspace Author** has all of the same permissions as a Workspace Member, plus the ability to update DAG code and run DAGs in the Airflow UI, plus limited permissions to configure Deployment-level observability features such as Astro alerts. Give a user this role if they are primarily DAG developers and don't need to manage the environments their DAGs run in.
 - A **Workspace Operator** has all the same permissions as a Workspace Author, plus the ability to manage Deployment-level configurations, such as environment variables. Give a user this role if they need to manage the environments that DAGs run in.
 - A **Workspace Owner** has all the same permissions as a Workspace Operator, plus the ability to manage user membership in the Workspace. Give a user this role if they need to administrate membership to the Workspace.
@@ -83,6 +84,15 @@ The following table lists the specific permissions that each Workspace role has:
 | Assign Teams to or remove from Workspaces                                                                              |                      |                      |                        | ✔️                   |
 
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
+
+## Deployment roles
+
+
+There are two types of Deployment roles: the default Deployment Admin role and [custom Deployment roles](customize-deployment-roles.md).
+
+Deployment Admin roles have the same permissions as the [Workspace Operator](#workspace-roles) role but only Deplyment-level operations in a specific Deployment. For example, a Deployment Admin can create a Deployment [environment variable](environment-variables.md) but, unlike a Workspace Operator, they can't create an [Astro alert](alerts.md) because alerts are configured at the Workspace level.
+
+A custom Deployment role is a role that your Organization has configured to have specific Deployment-level permissions. For a complete list of available custom Deployment role permissions, see [Deployment role reference](deployment-role-reference.md).
 
 ## Relationship between user roles and Team roles
 

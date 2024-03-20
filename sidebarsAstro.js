@@ -568,6 +568,7 @@ module.exports = {
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
+            "cli/astro-organization-role-list",
             "cli/astro-organization-team-create",
             "cli/astro-organization-team-delete",
             "cli/astro-organization-team-list",
