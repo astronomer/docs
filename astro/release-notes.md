@@ -40,28 +40,23 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 :::publicpreview
 :::
 
-The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) for Enterprise tier users.
+The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) for Enterprise tier Organizations.
 
-Enterprise-tier users can additionally use the new **Workplace Accessor** and **Deployment Admin** roles to define which users have access to specific Deployments in your Workspace. See more in the [User permissions reference](https://docs.astronomer.io/astro/user-permissions#workspace-roles), [Deployment Admin](https://docs.astronomer.io/astro/user-permissions#deployment-roles), and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
+You can additionally use the new **Workplace Accessor** and **Deployment Admin** roles to define which users have access to specific Deployments in your Workspace. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions#workspace-roles) and and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
 
-New Asro CLI commands enable you to use the CLI to interact with and update your users' Deployment roles with the following commands:
 
-- [`astro organization role list`](https://docs.astronomer.io/astro/cli/astro-organization-role-list)
-- [`astro deployment user`](https://docs.astronomer.io/astro/cli/astro-deployment-user)
-- [`astro deployment team`](https://docs.astronomer.io/astro/cli/astro-deployment-team)
-
-### Export data from reporting dashboards with webhooks
+### Export data from reporting dashboards using webhooks
 
 :::publicpreview
 :::
 
 In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
 
-Note that Webhook exports is a [Sigma beta feature](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
+Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
 
 ### Additional improvements
 
-- You can now use the new **Credits** tab to the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing) so you can see your credit balance.
+- You can now use the new **Credits** tab in the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing) to see your credit balance.
 - On Astro Hybrid, the maximum worker concurrency on a worker queue has increased from `64` to `256`.
 
 
