@@ -26,7 +26,7 @@ Your Dockerfile is also where you can define additional runtime arguments that t
 You can run your DAGs in several different environments across the Astro ecosystem. Each has its own purpose in the development lifecycle. 
 
 - **Local Airflow environment**: You can run DAGs on your local machine using the Astro CLI. This development method is most useful if you need to quickly iterate and test changes, such as when fixing a bug, or you're just getting started with Airflow. 
-- **Deployment**: When you deploy your DAGs to Astro, they run on a managed Deployment. Use Deployments to run production code, or create a development Deployment to test changes over a longer period of time than you could in a local Airflow environment. For more information about how to structure Deployments for specific development workflows, see [Connections and branch-based deploys](connections-branch-deploys.md).
+- **Deployment**: When you deploy your DAGs to Astro, they run on a managed Deployment. Use Deployments to run production code, or create a development Deployment to test changes over a longer period of time than you could in a local Airflow environment. For more information about how to structure Deployments for specific development workflows, see [Connections and branch-based deploys](best-practices/connections-branch-deploys.md).
 
 ## DAG feature integrations
 
