@@ -6,7 +6,7 @@ sidebar_label: Export audit logs
 
 import TeamBadge from '@site/src/components/TeamBadge';
 
-</TeamBadge>
+<TeamBadge/>
 
 :::warning
 
