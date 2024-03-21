@@ -45,6 +45,7 @@ An Airflow connection is a set of configurations that send requests to the API o
 
 Airflow connections can be created by using one of the following methods:
 
+- The [Astro Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager), which is the recommended way for Astro customers to manage connections.
 - The [Airflow UI](airflow-ui.md)
 - [Environment variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#environment-variables)
 - The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection)
