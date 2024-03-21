@@ -8,7 +8,7 @@ sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
 
-:::astroonly
+:::cliastroonly
 :::
 
 View a list of all roles in an Organization.
