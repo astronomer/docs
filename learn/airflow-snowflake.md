@@ -26,6 +26,12 @@ Additionally, [More on the Airflow Snowflake integration](#more-on-the-airflow-s
 - Using the Astro SDK for the next generation of DAG authoring for Snowflake query tasks.
 - General best practices and considerations when interacting with Snowflake from Airflow.
 
+:::tip
+
+To learn how you can use Airflow to improve your Snowflake cost management see [Introducing SnowPatrol - Snowflake Anomaly Detection and Cost Management with Machine Learning and Airflow](https://www.astronomer.io/blog/introducing-snowpatrol/).
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 30 minutes to complete.
