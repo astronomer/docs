@@ -6,6 +6,10 @@ id: release-notes
 
 import HostedBadge from '@site/src/components/HostedBadge';
 import HybridBadge from '@site/src/components/HybridBadge';
+import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
+import TeamBadge from '@site/src/components/TeamBadge';
+import BusinessBadge from '@site/src/components/BusinessBadge';
+
 
 <p class="rssButton">
   <a href="/astro-release-notes.xml" target="_blank">
@@ -37,15 +41,19 @@ See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-
 
 ### Custom Deployment roles are now in Public Preview
 
+<EnterpriseBadge/>
+
 :::publicpreview
 :::
 
-The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) for Enterprise tier Organizations.
+The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
 You can additionally use the new **Workplace Accessor** and **Deployment Admin** roles to define which users have access to specific Deployments in your Workspace. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions#workspace-roles) and and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
 
 
 ### Export data from reporting dashboards using webhooks
+
+<EnterpriseBadge/>
 
 :::publicpreview
 :::
@@ -58,7 +66,6 @@ Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomput
 
 - You can now use the new **Credits** tab in the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing) to see your credit balance.
 - On Astro Hybrid, the maximum worker concurrency on a worker queue has increased from `64` to `256`.
-
 
 ## March 7, 2024
 

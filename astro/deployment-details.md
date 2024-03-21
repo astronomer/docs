@@ -5,6 +5,8 @@ id: deployment-details
 description: "Edit information about your Deployment, like metadata settings, observability settings, and user access settings."
 ---
 
+import BusinessBadge from '@site/src/components/BusinessBadge';
+
 Deployment details define how users can view and interact with your Deployment. They include metadata settings, observability settings, and user access settings.
 
 ## Update a Deployment name and description
@@ -38,6 +40,8 @@ Configure a contact email to get proactive alerts directly from Astronomer suppo
 In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.
 
 ## Enforce CI/CD deploys
+
+<BusinessBadge/>
 
 By default, any user can deploy code either directly from the Astro CLI or from a CI/CD process that is authenticated with an API token. To help your team protect production environments from manual code deploys that circumvent your organization's CI/CD processes and checks, you can configure a Deployment so that users can't deploy code manually using the Astro CLI. 
 

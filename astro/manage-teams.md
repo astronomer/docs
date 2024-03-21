@@ -5,6 +5,10 @@ id: manage-teams
 description: Create, delete, and update Teams on Astro.
 ---
 
+import BusinessBadge from '@site/src/components/BusinessBadge';
+
+<BusinessBadge/>
+
 As an Organization Owner or Workspace Owner, you can use Teams to batch assign Organization and Workspace roles to groups of users. Organization Owners create, update, or delete Teams. Then, either Organization Owners or Workspace Owners can assign Teams to different Workspaces and define their [Workspace permissions](user-permissions.md#workspace-roles).
 
 A _Team_ is a group of users in an Organization that share the same Organization and Workspace permissions. You can use Teams to securely assign permissions for a large group of users across multiple Workspaces. For example, you can create a Team of DAG authors, then assign that Team to each of your development Workspaces as a Workspace author.
