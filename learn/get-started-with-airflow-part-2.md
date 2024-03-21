@@ -46,7 +46,7 @@ In this second part of Astronomer's introduction to Airflow, you'll add a third 
 The new DAG interacts with GitHub and two external APIs to print the location of the International Space Station (ISS) to your task logs after a specific commit message is pushed to your GitHub repository.
 
 1. Create a new Python file in the `dags` directory of your Astro project called `find_the_iss.py`.
-2. Open the Astronomer Registry page for the [`find_the_iss`](https://registry.astronomer.io/dags/object_storage_use_case/versions/latest) example DAG. Click `</>` and copy the DAG code that appears.
+2. Open the Astronomer Registry page for the [`find_the_iss`](https://registry.astronomer.io/dags/find_the_iss/versions/latest) example DAG. Click `</>` and copy the DAG code that appears.
 
     ![Screenshot of the Astronomer Registry showing the DAG code](/img/tutorials/get-started-with-airflow-part-2_registry_code_copy.png)
 
