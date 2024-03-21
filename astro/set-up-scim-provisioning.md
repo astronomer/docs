@@ -57,7 +57,7 @@ Okta's Astro integration supports the following SCIM actions:
 <TabItem value= "Okta">
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
-2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**.
+2. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**.
 3. On the **General** page, copy your **Organization ID** to use later in this setup.
 4. Go to **Settings > Authentication**. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 5. In the Okta admin dashboard, open your Astro app integration and click **Provisioning**.
@@ -73,7 +73,7 @@ Okta's Astro integration supports the following SCIM actions:
   
     See [Okta documentation](https://developer.okta.com/docs/guides/scim-provisioning-integration-connect/main/#to-app) for more information on configuring these values.
 
-9.  Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
+9.  Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Astro UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
 
 </TabItem>
 <TabItem value="OktaManual">
@@ -81,13 +81,13 @@ Okta's Astro integration supports the following SCIM actions:
 Complete the manual setup if you configured your existing Astro app without using the Okta app catalogue.
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
-2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+2. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
 5. In the Okta admin dashboard, add SCIM provisioning to your existing Astro app integration. Then, open your app in Okta and go to **Provisioning** > **Integration** to configure the following values: 
 
     - **Supported provisioning actions**: Select **Push New Users**, **Push Profile Updates**, and **Push Groups**.
-    - **SCIM connector base URL**: Enter the SCIM integration URL you copied from the Cloud UI.
+    - **SCIM connector base URL**: Enter the SCIM integration URL you copied from the Astro UI.
     - **Unique identifier field for users**: `email`.
     - **Authentication Mode**: Choose **HTTP Header** and paste your Organization API token in the **Bearer** field.
   
@@ -109,13 +109,13 @@ Complete the manual setup if you configured your existing Astro app without usin
 
     See [Okta documentation](https://developer.okta.com/docs/guides/scim-provisioning-integration-connect/main/#to-app) for more information on configuring these values.
 
-7. Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Cloud UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
+7. Create user groups and push them to Astro. User groups pushed to Astro appear as [Teams](manage-teams.md) in the Astro UI. See [Okta documentation](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-enable-group-push.htm) for setup steps.
 
 </TabItem>
 <TabItem value="ME-ID">
 
 1. Create an Organization API token with Organization Owner permissions. See [Organization API tokens](organization-api-tokens.md). Copy the token to use later in this setup.
-2. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+2. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 3. In the **Advanced Settings** menu, click **Edit Settings**, then click the **SCIM integration** toggle to on.
 4. Copy the **SCIM Integration URL** that appears.
 5. Append the [Microsoft Entra ID feature flag parameter](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/application-provisioning-config-problem-scim-compatibility#flags-to-alter-the-scim-behavior) `?aadOptscim062020` to your **SCIM Integration URL** and recopy it. For example, if your SCIM Integration URL is `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0`, your final URL would be `https://api.astronomer.io/scim/v2/cknaqyipv05731evsry6cj4n0?aadOptscim062020`. The feature flag is required for fully compliant SCIM behavior in Microsoft Entra ID.

@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 :::warning
 
-This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Astro UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
 
 For Astro Hybrid resource reference material, see:
 
@@ -86,7 +86,7 @@ values={[
 
 ## Dedicated cluster regions
 
-A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Cloud UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
+A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Astro UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
 Currently, dedicated clusters are available on the following clouds and regions:
 

@@ -721,7 +721,7 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 - Upgraded `openlineage-airflow` to 0.18.0, which includes new support for Airflow operators like the `SQLExecuteQueryOperator`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.18.0) for more information.
 - Upgraded `apache-airflow-providers-microsoft-azure` to 5.0.1, which includes a bug fix to revert `offset` and `length` to be optional arguments.
 - Upgraded `certifi` to 2022.12.7.
-- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Cloud UI.
+- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Astro UI.
 
 ## Astro Runtime 7.0.0
 
@@ -918,7 +918,7 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 - Upgraded `apache-airflow-providers-microsoft-azure` to 5.0.1, which includes a bug fix to revert `offset` and `length` to be optional arguments.
 - You can now run Astro Runtime images on Red Hat OpenShift.
 - In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
-- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Cloud UI.
+- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Astro UI.
 - You can now add comments to the `packages.txt` file of an Astro project.
 
 ## Astro Runtime 6.0.4
@@ -1113,9 +1113,9 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers` to 1.13.0, which includes a collection of minor enhancements and bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1130-2022-12-16).
-- Upgraded `openlineage-airflow` to 0.18.0, which includes new support for Airflow operators like the `SQLExecuteQueryOperator`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.18.0) for more information.
-- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Cloud UI.
+- Upgraded `astronomer-providers` to 1.13.0, which includes a collection of minor enhancements and bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1130-2022-12-16). 
+- Upgraded `openlineage-airflow` to 0.18.0, which includes new support for Airflow operators like the `SQLExecuteQueryOperator`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.18.0) for more information. 
+- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Astro UI.
 
 ## Astro Runtime 5.0.13
 
@@ -1228,7 +1228,7 @@ These changes were backported from Apache Airflow 2.3.4, which is not yet genera
 
 ### Additional improvements
 
-- The Cloud UI no longer shows source code for [supported Airflow operators](https://openlineage.io/docs/integrations/about#capability-matrix) by default. To reenable this feature for a given Deployment, create an [environment variable](environment-variables.md) with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`.
+- The Astro UI no longer shows source code for [supported Airflow operators](https://openlineage.io/docs/integrations/about#capability-matrix) by default. To reenable this feature for a given Deployment, create an [environment variable](environment-variables.md) with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`.
 - Upgraded `openlineage-airflow` to version `0.12.0`, which includes support for Spark 3.3.0 and Apache Flink. For a list of all changes, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 - Upgraded `astronomer-providers` to version `1.7.1`, which includes new deferrable operators and improvements to documentation. For more information, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.7.1/CHANGELOG.rst).
 - Upgraded `apache-airflow-providers-amazon` to version `4.1.0`, which includes a bug fix for integrating with AWS Secrets Manager.

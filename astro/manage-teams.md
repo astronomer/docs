@@ -13,7 +13,7 @@ You can also assign different roles for each Workspace. For example, you can hav
 
 ## Create a Team
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 
@@ -34,7 +34,7 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 
 ## Update existing Teams
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Access Management**.
 
 2. Click **Teams**.
 
@@ -47,7 +47,7 @@ You can now [add your Team to a Workspace](manage-teams.md#add-a-team-to-a-works
 
 ## Add a Team to a Workspace
 
-1. In the Cloud UI, select a Workspace and click **Workspace Settings** > **Access Management**.
+1. In the Astro UI, select a Workspace and click **Workspace Settings** > **Access Management**.
 
 2. Click **Teams**.
 

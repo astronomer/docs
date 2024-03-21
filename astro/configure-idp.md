@@ -81,7 +81,7 @@ The Astro integration with Okta supports the following authentication options:
 
 To set up Okta as your IdP, you will create a Security Assertion Markup Language (SAML) connection to Okta.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 2. In the **SSO Configuration** menu, click **Configure SSO**.
 3. Configure the following values for your connection:
 
@@ -107,13 +107,13 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 
 6. Open the Astro application you just configured, click **Sign On**, then click **Edit**. Configure the following values:
 
-    - **Connection Name**: Enter the **Connection Name** you copied from the Cloud UI.
+    - **Connection Name**: Enter the **Connection Name** you copied from the Astro UI.
     - **Application username format**: **Email**.
     - **Update application username on**: `Create and update`.
   
 7. Copy the values for **Sign-on URL**, **Sign out URL**, and **X.509 Certificate** from the **Metadata Details** section.
 8. Assign yourself to the Astro app integration from Okta. See [Assign an app integration to a user](https://help.okta.com/en-us/Content/Topics/Provisioning/lcm/lcm-assign-app-user.htm).
-9.  Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
+9.  Return to the Astro UI. In the configuration screen for your SAML connection, configure the following values:
 
     - **Identity Provider Single Sign-on URL**: Enter your **Single Sign-on URL**.
     - **Identity Provider Sign-out URL**: Enter your **Single Sign-out URL**.
@@ -127,13 +127,13 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 
 :::warning
 
-Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
+Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Astro UI.
 
 :::
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
    
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -168,7 +168,7 @@ Follow the [Microsoft documentation](https://learn.microsoft.com/en-us/entra/ide
 
 #### Step 2: Configure SSO on Astro
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 2. In the **SSO Configuration** menu, click **Configure SSO**.
 3. Configure the following values for your connection:
 
@@ -190,7 +190,7 @@ After you complete the configuration, download the PEM certificate from the **SA
 
 #### Step 4: Finalize the SSO connection in Astro
 
-1. Return to the Cloud UI. In the configuration screen for your SSO connection, configure the following values:
+1. Return to the Astro UI. In the configuration screen for your SSO connection, configure the following values:
 
     - **X.509 Certificate**: Enter the PEM certificate you downloaded in Step 3.
     - **Identity Provider Single Sign-on URL**: Enter the URL you copied in Step 3.
@@ -201,13 +201,13 @@ After you complete the configuration, download the PEM certificate from the **SA
 
 :::warning
 
-Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
+Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Astro UI.
 
 :::
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
       
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -218,7 +218,7 @@ If you don't want to maintain an SSO bypass link, click **Delete**. You can alwa
 
 Follow [Microsoft documentation](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal?pivots=portal) to assign users from your organization to your new application.
 
-When a user assigned to the application accesses Astro, they will be brought automatically to Microsoft Entra ID after entering their email in the Cloud UI.
+When a user assigned to the application accesses Astro, they will be brought automatically to Microsoft Entra ID after entering their email in the Astro UI.
 
 </TabItem>
 
@@ -236,7 +236,7 @@ This section provides setup steps for setting up OneLogin as your IdP on Astro. 
 
 To set up OneLogin as your IdP, you will create a Security Assertion Markup Language (SAML) connection to OneLogin.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
 2. In the **SSO Configuration** menu, click **Configure SSO**.
 3. Configure the following values for your connection:
 
@@ -279,7 +279,7 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
     
 14. Assign yourself to the Astro app integration from OneLogin. See [Assigning apps to users](https://onelogin.service-now.com/kb_view_customer.do?sysparm_article=KB0010387).
     
-15. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
+15. Return to the Astro UI. In the configuration screen for your SAML connection, configure the following values:
 
     - **Identity Provider Single Sign-on URL**: Enter the value you copied from **SAML 2.0 Endpoint (HTTP)**.
     - **X.509 Certificate**: Enter the **X.509 Certificate** that you downloaded.
@@ -292,13 +292,13 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
 
 :::warning
 
-Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
+Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Astro UI.
 
 :::
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
       
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -326,7 +326,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 #### Step 1: Configure Ping Identity
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
       
 2. In the **SSO Configuration** menu, click **Configure SSO**.
    
@@ -379,7 +379,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
     
 19. Assign yourself to Astro from Ping Identity. See [Editing a user](https://docs.pingidentity.com/r/en-us/pingone/p1_t_edituser?section=gnn1564020489010).
     
-20. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
+20. Return to the Astro UI. In the configuration screen for your SAML connection, configure the following values:
 
     - **Identity Provider Single Sign-on URL**: Enter the value you copied from the **Single Sign-on Service** field.
     - **X.509 Certificate**: Enter the X.509 Certificate that you downloaded.
@@ -394,13 +394,13 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 :::warning
 
-Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Cloud UI.
+Do not share your single sign-on (SSO) bypass link. With an SSO bypass link, anyone with an email and a password can log in to Astro. Astronomer recommends periodically regenerating the link from the **Settings** tab in the Astro UI.
 
 :::
 
 An SSO bypass link allows you to authenticate to your Organization without using SSO. This link should be used to access your Organization only when you can't access Astro due to an issue your identity provider.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
       
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
@@ -410,7 +410,7 @@ If you don't want to maintain an SSO bypass link, click **Delete**. You can alwa
 
 Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
 
-When a user assigned to the application accesses Astro, they are automatically signed in to Ping Identity after entering their email in the Cloud UI.
+When a user assigned to the application accesses Astro, they are automatically signed in to Ping Identity after entering their email in the Astro UI.
 
 </TabItem>
 
@@ -424,7 +424,7 @@ Astro supports just-in-time provisioning by default for all single sign-on (SSO)
 
 To enable or disable just-in-time provisioning:
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
    
 2. In the **SSO Configuration** menu, click the pencil icon to edit your SSO connection.
 
@@ -440,7 +440,7 @@ To restrict available authentication options on Astro for your organization, con
 
 Regenerating your SSO bypass link voids your existing SSO bypass link so that any former users with the existing link can't log in to Astro. 
 
-1. In the Cloud UI, click the **Settings** tab.
+1. In the Astro UI, click the **Settings** tab.
    
 2. Click **Regenerate** to create a new bypass link and void the old one. 
 

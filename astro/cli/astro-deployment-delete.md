@@ -24,9 +24,9 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-Delete a Deployment on Astro. This command is functionally identical to deleting a Deployment in the Cloud UI.
+Delete a Deployment on Astro. This command is functionally identical to deleting a Deployment in the Astro UI.
 
-When you run `astro deployment delete`, you are prompted to select from a list of Deployments that you can access in your Workspace. You can bypass this prompt and specify a Deployment name or ID in the command. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
+When you run `astro deployment delete`, you are prompted to select from a list of Deployments that you can access in your Workspace. You can bypass this prompt and specify a Deployment name or ID in the command. To retrieve a Deployment ID, open your Deployment in the Astro UI and copy the value in the **ID** section of the Deployment page. You can also run `astro deployment list` to find a Deployment ID or name.
 
 :::info
 

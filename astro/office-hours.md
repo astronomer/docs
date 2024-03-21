@@ -30,6 +30,6 @@ Before you book an office hours appointment, please browse the documentation, [A
 
 To book office hours, click **Book office hours** in the documentation sidebar navigation. Then, schedule a 30-minute virtual meeting on the Calendly form. In the form, provide details about any issues and questions that you want to discuss during the meeting.
 
-Alternatively, you can click **Help** > **Book Office Hours** in the [Cloud UI](https://cloud.astronomer.io). 
+Alternatively, you can click **Help** > **Book Office Hours** in the [Astro UI](https://cloud.astronomer.io). 
 
 ![A screenshot showing the menu in cloud.astronomer.io which contains a Book Office Hours entry](/img/docs/office-hours-location.png)

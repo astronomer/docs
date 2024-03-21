@@ -21,7 +21,7 @@ There are two ways to use API tokens to interact with a Workspace:
 
 ### Create a Workspace API token
 
-1. In the Cloud UI, open your Workspace.
+1. In the Astro UI, open your Workspace.
    
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
    
@@ -42,7 +42,7 @@ There are two ways to use API tokens to interact with a Workspace:
 
 You might want to add an Organization API token if your Organization API token only has Organization Member permissions, but you want to grant it Workspace Owner permissions for several Workspaces.
 
-1. In the Cloud UI, open your Workspace.
+1. In the Astro UI, open your Workspace.
    
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
    
@@ -56,7 +56,7 @@ You might want to add an Organization API token if your Organization API token o
 
 If you delete a Workspace API token, make sure that no existing CI/CD pipelines are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
-1. In the Cloud UI, open your Workspace.
+1. In the Astro UI, open your Workspace.
    
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
 
@@ -71,7 +71,7 @@ If you delete a Workspace API token, make sure that no existing CI/CD pipelines 
 
 If you delete a Workspace API token or remove an Organization API token from your Workspace, make sure that no existing CI/CD pipelines are using the token. After you delete a Workspace API token, it can't be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
-1. In the Cloud UI, open your Workspace.
+1. In the Astro UI, open your Workspace.
    
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
 
@@ -87,13 +87,13 @@ When you rotate a Workspace API token, you receive a new valid token from Astro 
 
 To rotate an Organization API token with Workspace permissions, see [Organization API tokens](organization-api-tokens.md).
 
-1. In the Cloud UI, open your Workspace.
+1. In the Astro UI, open your Workspace.
    
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
 
 3. Click **Edit** next to your API token.
 
-4. Click **Rotate token**. The Cloud UI rotates the token and shows the new token value. 
+4. Click **Rotate token**. The Astro UI rotates the token and shows the new token value. 
 
 5. Copy the new token value and store it in a safe place. You will not be able to retrieve this value from Astro again. 
 

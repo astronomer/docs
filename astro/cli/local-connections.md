@@ -16,7 +16,7 @@ Connection details in the Astro Environment Manager are not visible from the Air
 ### Prerequisites
 
 - The latest version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)
-- Either a Workspace or Deployment with at least one connection [configured through the Astro Environment Manager in the Cloud UI](create-and-link-connections.md)
+- Either a Workspace or Deployment with at least one connection [configured through the Astro Environment Manager in the Astro UI](create-and-link-connections.md)
 - A local [Astro Project](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-project)
 - Astro Runtime 9.3.0 or greater
 - `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER` user permissions
@@ -24,7 +24,7 @@ Connection details in the Astro Environment Manager are not visible from the Air
 
 ### Setup
 
-1. Enable local development access to connections created in the Cloud UI.
+1. Enable local development access to connections created in the Astro UI.
 
     ```zsh
     # -g sets this config globally
@@ -60,7 +60,7 @@ Connection details in the Astro Environment Manager are not visible from the Air
 
     :::info
 
-    If you see the error `Error: showSecrets on organization with id is not allowed`, your [Organization Owner](user-permissions.md#organization-roles) needs to enable **Environment Secrets Fetching** in the **Organization Settings** on the Cloud UI before you can use your connections locally. See [Configure environment secrets fetching for the Astro Environment Manager](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager).
+    If you see the error `Error: showSecrets on organization with id is not allowed`, your [Organization Owner](user-permissions.md#organization-roles) needs to enable **Environment Secrets Fetching** in the **Organization Settings** on the Astro UI before you can use your connections locally. See [Configure environment secrets fetching for the Astro Environment Manager](organization-settings.md#configure-environment-secrets-fetching-for-the-astro-environment-manager).
 
     :::
 
