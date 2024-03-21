@@ -409,8 +409,8 @@ To launch Pods in external clusters from a local Airflow environment, you must a
         - get-token
         - --cluster-name
         - <name of your cluster>
-        - --profile
-        - default
+        - --role
+        - <your-assume-role-arn>
         command: aws
         interactiveMode: IfAvailable
         provideClusterInfo: false
@@ -443,6 +443,7 @@ run_on_EKS = KubernetesPodOperator(
     get_logs=True,
     startup_timeout_seconds=240,
 )
+```
 
 ### Example DAG
 
