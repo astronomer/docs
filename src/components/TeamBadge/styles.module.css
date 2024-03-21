@@ -1,7 +1,7 @@
 .teamBadge {
-    display: flex;
-    overflow: hidden;
-    width: 30%;
-    height: 30%;
-    min-width: 180px;
-  }
+  display: inline-block;
+  overflow: hidden;
+  width: 180px;
+  height: 30%;
+  min-width: 180px;
+}
