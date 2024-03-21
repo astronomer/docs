@@ -4,10 +4,6 @@ id: audit-logs
 sidebar_label: Export audit logs
 ---
 
-import TeamBadge from '@site/src/components/TeamBadge';
-
-<TeamBadge/>
-
 :::warning
 
 This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
