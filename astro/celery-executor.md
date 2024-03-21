@@ -43,7 +43,7 @@ When you push code to a Deployment, workers running tasks from before the code p
 
 For each worker queue on your Deployment, you have to specify certain settings that affect worker autoscaling behavior. If you're new to Airflow, Astronomer recommends using the defaults in Astro for each of these settings.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Worker Queues** tab and then click **Edit** to edit a worker queue.
 

@@ -16,7 +16,7 @@ Transferring a Deployment can be helpful when your team needs to change user acc
 
 ## Transfer a Deployment to another Workspace 
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu and select **Transfer Deployment**. 
 
     ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)

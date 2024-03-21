@@ -8,9 +8,9 @@ Organization metrics help Organization Owners and Billing Admins track resource 
 
 ## Astro usage
 
-The **Usage** page shows the total number of successful task runs across all Deployments in your Organization. To access the **Usage** page, click your Workspace name in the upper left corner of the Cloud UI and click **Organization Settings**. Then, click **Usage**.
+The **Usage** page shows the total number of successful task runs across all Deployments in your Organization. To access the **Usage** page, click your Workspace name in the upper left corner of the Astro UI and click **Organization Settings**. Then, click **Usage**.
 
-![Usage tab in the Cloud UI](/img/docs/usage.png)
+![Usage tab in the Astro UI](/img/docs/usage.png)
 
 The bar chart on the left shows your Organization's total successful task runs per day for the past 31 days, with each day's volume sorted by Deployment. Each color in the bar chart represents a different Deployment. To see each Deployment's number of successful task runs for a given day, you can hover over the bar chart for that day with your mouse.
 

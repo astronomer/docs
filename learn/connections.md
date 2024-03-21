@@ -48,7 +48,7 @@ Airflow connections can be created by using one of the following methods:
 
 :::info
 
-Astro users can additionally take advantage of the [Astro Cloud UI Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Airflow environments. See [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
+Astro users can additionally take advantage of the [Astro Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Airflow environments. See [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
 
 :::
 

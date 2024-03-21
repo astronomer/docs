@@ -48,7 +48,7 @@ If the command was successful, then you receive a response that begins similarly
 
 Copy the top-level `id` from this response. This is your Organization ID.
 
-While you could have retrieved this value manually from the Cloud UI, using the API lets you script this workflow and execute it on a regular basis.
+While you could have retrieved this value manually from the Astro UI, using the API lets you script this workflow and execute it on a regular basis.
 
 ## Step 2: Request Workspace details from the API
 
@@ -130,7 +130,7 @@ Now that you have both an Organization ID and a Workspace ID, you can create a W
 
     If the request was successful, the API will return a response with your new token's details.
 
-2. In the Cloud UI, go to **Workspace Settings** > **Access Management** > **API Tokens** and find your Workspace API token. You should see your updated description under **Description**.
+2. In the Astro UI, go to **Workspace Settings** > **Access Management** > **API Tokens** and find your Workspace API token. You should see your updated description under **Description**.
 
 ## Next steps
 

@@ -117,4 +117,4 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 10. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).
 11. Add your DAGs to the `dags` folder in your storage bucket.
-12. In the Cloud UI, select a Workspace, click **Deployments**, and then select your Deployment. Confirm that your deploy worked by checking the Deployment **DAG bundle version**. The version's name should include the time that you added the DAGs to your GCS bucket. 
+12. In the Astro UI, select a Workspace, click **Deployments**, and then select your Deployment. Confirm that your deploy worked by checking the Deployment **DAG bundle version**. The version's name should include the time that you added the DAGs to your GCS bucket. 

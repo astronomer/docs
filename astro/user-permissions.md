@@ -58,7 +58,7 @@ The following table lists the specific permissions that each Workspace role has:
 | Permission                                                                                                             | **Workspace Member** | **Workspace Author** | **Workspace Operator** | **Workspace Owner** |
 | ---------------------------------------------------------------------------------------------------------------------- | -------------------- | -------------------- | ---------------------- | ------------------- |
 | View Workspace users                                                                                                   | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
-| View all Deployments in the Cloud UI                                                                                   | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
+| View all Deployments in the Astro UI                                                                                   | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View DAGs in the Airflow UI                                                                                            | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Airflow task logs                                                                                                 | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
 | View Airflow datasets                                                                                                  | ✔️                    | ✔️                    | ✔️                      | ✔️                   |
@@ -86,7 +86,6 @@ The following table lists the specific permissions that each Workspace role has:
 To manage a user's Workspace permissions, see [Manage Worksapce users](manage-workspace-users.md#add-a-user-to-a-workspace).
 
 ## Deployment roles
-
 
 There are two types of Deployment roles: the default Deployment Admin role and [custom Deployment roles](customize-deployment-roles.md).
 

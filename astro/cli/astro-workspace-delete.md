@@ -21,7 +21,7 @@ Delete an Astro Workspace.
 astro workspace delete <workspace-id>
 ```
 
-You can find a Workspace's ID by running `astro workspace list`. Alternatively, in Astro, you can find a Workspace ID by opening the Workspace and going to **Workspace Settings** > **General** in the Cloud UI. If you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
+You can find a Workspace's ID by running `astro workspace list`. Alternatively, in Astro, you can find a Workspace ID by opening the Workspace and going to **Workspace Settings** > **General** in the Astro UI. If you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
 
 ## Related commands
 

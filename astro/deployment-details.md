@@ -9,7 +9,7 @@ Deployment details define how users can view and interact with your Deployment. 
 
 ## Update a Deployment name and description
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
@@ -23,7 +23,7 @@ Deployment details define how users can view and interact with your Deployment. 
 
 Configure a contact email to get proactive alerts directly from Astronomer support. Astronomer support uses contact emails to notify recipients in case there's an issue with the infrastructure for your Deployment, such as a problem with your scheduler or worker components.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Details** tab. In the **Advanced** menu, click **Edit**.
 
@@ -43,7 +43,7 @@ By default, any user can deploy code either directly from the Astro CLI or from 
 
 After you enable CI/CD enforcement on a Deployment, the Deployment accepts a deploy only if the deploy is authenticated using a Deployment API token, Workspace API token, or Organization API token. Astronomer recommends enabling this setting for all production environments.
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
 
@@ -60,7 +60,7 @@ When CI/CD enforcement is enabled for a Deployment, you cannot enable or disable
 To enable or disable DAG-only deploys when CI/CD enforcement is turned on:
 
 1. Turn **CI/CD Enforcement** to **Off**.
-2. Enable or disable the DAG-only deploy feature. See [Enable or disable DAG-only deploys](deploy-dags.md#enable-or-disable-dag-only-deploys).
+2. Enable or disable the DAG-only deploy feature. See [Enable or disable DAG-only deploys](deploy-dags.md#enable-or-disable-dag-only-deploys-on-a-deployment).
 3. Turn **CI/CD Enforcememt** back to **On**.
 
 You have to only complete these steps once. Once the DAG-only deploy feature is enabled or disabled, you can turn CI/CD enforcement on or off at any time.
@@ -71,7 +71,7 @@ You have to only complete these steps once. Once the DAG-only deploy feature is 
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
     <img src={require("../static/img/docs/delete-deployment.png").default} alt="Delete Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />

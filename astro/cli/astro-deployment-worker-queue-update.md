@@ -12,7 +12,7 @@ This command is only available on Astro.
 
 :::
 
-Update the settings for an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Cloud UI.
+Update the settings for an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Astro UI.
 
 ## Usage
 
