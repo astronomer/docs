@@ -22,17 +22,18 @@ Unlike Workspace API tokens and Organization API tokens, Deployment API tokens a
 
 1. In the Astro UI, open your Workspace, then open the Deployment you want to create an API token for.
 
-2. Click **API Tokens**.
+2. Click **Access**.
 
-3. Click **+ API Token**.
+3. Click **API Tokens**, then click **+ Deployment API Token**. In the dropdown menu that appears, click **Add Deployment API token**.
 
 4. Configure the new Deployment API token:
 
     - **Name**: The name for the API token.
-    - **Description**: Optional. The Description for the API token.
+    - **Description**: (Optional) The Description for the API token.
+    - **Deployment Role**: (Enterprise tier only) Choose the Deployment-level role and permissions that the API token will have. See [Customize Deployment roles](customize-deployment-roles.md).
     - **Expiration**: The number of days that the API token can be used before it expires.
 
-5. Click **Create API token**. A confirmation screen showing the token appears.
+5. Click **Add API token**. A confirmation screen showing the token appears.
 
 6. Copy the token and store it in a safe place. You will not be able to retrieve this value from Astro again.
 
@@ -46,7 +47,7 @@ If you delete a Deployment API token, make sure that no existing CI/CD workflows
 
 3. Update the name or description of your token, then click **Save Changes**.
 
-4. Optional. To delete a Deployment API token, click **Delete API Token**, enter `Delete`, and then click **Yes, Continue**.
+4. (Optional) To delete a Deployment API token, click **Delete API Token**, enter `Delete`, and then click **Yes, Continue**.
 
 ## Rotate a Deployment API token
 

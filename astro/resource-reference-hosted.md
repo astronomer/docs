@@ -44,13 +44,13 @@ A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astr
 Currently, standard clusters are available on the following clouds and regions:
 
 <Tabs
-    defaultValue="aws"
-    groupId= "standard-cluster-regions"
-    values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
-    ]}>
+defaultValue="aws"
+groupId= "standard-cluster-regions"
+values={[
+{label: 'AWS', value: 'aws'},
+{label: 'GCP', value: 'gcp'},
+{label: 'Azure', value: 'azure'},
+]}>
 <TabItem value="aws">
 
 | Code             | Region                   |
@@ -84,7 +84,6 @@ Currently, standard clusters are available on the following clouds and regions:
 
 </Tabs>
 
-
 ## Dedicated cluster regions
 
 A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Astro UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
@@ -92,13 +91,13 @@ A _dedicated cluster_ is cluster that Astronomer provisions solely for use by yo
 Currently, dedicated clusters are available on the following clouds and regions:
 
 <Tabs
-    defaultValue="aws"
-    groupId= "dedicated-cluster-regions"
-    values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
-    ]}>
+defaultValue="aws"
+groupId= "dedicated-cluster-regions"
+values={[
+{label: 'AWS', value: 'aws'},
+{label: 'GCP', value: 'gcp'},
+{label: 'Azure', value: 'azure'},
+]}>
 <TabItem value="aws">
 
 | Code             | Name                      |
@@ -120,20 +119,23 @@ Currently, dedicated clusters are available on the following clouds and regions:
 
 <TabItem value="azure">
 
-| Code            | Region         |
-| --------------- | -------------- |
-| `australiaeast` | Australia East |
-| `brazilsouth`   | Brazil South   |
-| `canadacentral` | Canada Central |
-| `centralindia`  | Central India  |
-| `eastus2`       | East US        |
-| `eastus2`       | East US 2      |
-| `francecentral` | France Central |
-| `japaneast`     | Japan East     |
-| `northeurope`   | North Europe   |
-| `uksouth`       | UK South       |
-| `westeurope`    | West Europe    |
-| `westus2`       | West US 2      |
+| Code             | Region           |
+| ---------------- | ---------------- |
+| `australiaeast`  | Australia East   |
+| `brazilsouth`    | Brazil South     |
+| `canadacentral`  | Canada Central   |
+| `centralindia`   | Central India    |
+| `centralus`      | Central US       |
+| `eastus2`        | East US          |
+| `eastus2`        | East US 2        |
+| `francecentral`  | France Central   |
+| `japaneast`      | Japan East       |
+| `northeurope`    | North Europe     |
+| `uksouth`        | UK South         |
+| `southcentralus` | South Central US |
+| `westeurope`     | West Europe      |
+| `westus2`        | West US 2        |
+| `westus3`        | West US 3        |
 
 </TabItem>
 

@@ -35,6 +35,12 @@ By configuring multiple worker queues and assigning tasks to these queues based 
 
 You can assign Task A to a worker queue that is configured to use the A20 worker type, which is optimized for running compute-heavy tasks. Then, you can assign Task B to a worker queue that is configured to use the A5 worker type, which is smaller and optimized for general usage.
 
+## Default worker queue
+
+Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the `default` worker queue.
+
+You can change all settings of the default worker queue except for its name.
+
 ## Worker queue settings
 
 You can configure each worker queue on Astro with the following settings:
@@ -79,12 +85,6 @@ Your Organization can enable up to 10 additional different worker types for each
 For more information on requesting cluster changes, see [Manage Hybrid clusters](manage-hybrid-clusters.md).
 
 :::
-
-## Default worker queue
-
-Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the `default` worker queue.
-
-You can change all settings of the default worker queue except for its name.
 
 ## Create a worker queue
 

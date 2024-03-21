@@ -250,7 +250,13 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 :::info
 
-This connection option is only available for dedicated Astro Hosted clusters and Astro Hybrid.
+On Astro Hosted standard clusters, only the following AWS PrivateLink endpoints are supported:
+
+- [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) - Gateway Endpoint
+- [Amazon Elastic Compute Cloud (Amazon EC2) Autoscaling](https://docs.aws.amazon.com/general/latest/gr/as.html) - Interface Endpoint
+- [Amazon Elastic Container Registry (ECR)](https://docs.aws.amazon.com/AmazonECR/latest/userguide/vpc-endpoints.html) - Interface Endpoints for ECR API and Docker Registry API
+- [Elastic Load Balancing (ELB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-vpc-endpoints.html) - Interface Endpoint
+- [AWS Security Token Service (AWS STS)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_sts_vpce.html) - Interface Endpoint
 
 :::
 

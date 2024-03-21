@@ -1,13 +1,11 @@
 ---
 sidebar_label: 'Kubernetes executor'
-title: 'Configure the Kubernetes executor'
+title: 'Configure tasks to run with the Kubernetes executor'
 id: 'kubernetes-executor'
+description: Learn how to configure the Pods that the Kubernetes executor runs your tasks in.
 ---
 
-On Astro, you can configure Kubernetes executor in the following ways:
-
-- Change the resource usage for the default Pods on which your tasks run in the Astro UI.
-- Customize individual Pods for tasks, including CPU and memory requests, using a `pod_override` configuration in your DAG code.
+The Kubernetes executor runs each Airflow task in a dedicated Kubernetes [Pod](https://kubernetes.io/docs/concepts/workloads/pods/). On Astro, you can customize these Pods on a per-task basis using a `pod_override` configuration. If a task doesn't contain a `pod_override` configuration, it runs using the default Pod as configured in your Deployment resource settings. 
 
 :::info
 
@@ -15,7 +13,7 @@ This document describes how to configure individual task Pods for different use 
 
 :::
 
-## Prerequisites
+## Prerequisites\
 
 - An Astro Deployment using Astro Runtime version 8.1.0 or later.
 

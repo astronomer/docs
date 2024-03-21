@@ -147,7 +147,7 @@ In practice, following modern model operations patterns when using Airflow for M
 When using Apache Airflow for MLOps, there are three main patterns you can follow:
 
 - Using Apache Airflow to orchestrate actions in other MLOps tools. Airflow is a tool-agnostic orchestrator, which means it can also orchestrate all actions in ML specific tools like [MLFlow](airflow-mlflow.md) or [AWS SageMaker](airflow-sagemaker.md). 
-- Combine orchestration of actions in other tools with ML operations running within Airflow. For example, you can create vector embeddings in a Python function in Airflow and then use these embeddings to train a model in [Google Datalab](https://cloud.google.com/monitoring/datalab/set-up-datalab). Modules like the [`@task.kubernetes`](kubepod-operator.md#use-the-taskkubernetes-decorator) or [`@task.external_python_operator`](external-python-operator) make it easy to run any Python code in isolation with optimized environments and resources.
+- Combine orchestration of actions in other tools with ML operations running within Airflow. For example, you can create vector embeddings in a Python function in Airflow and then use these embeddings to train a model in [Google Datalab](https://cloud.google.com/monitoring/datalab/set-up-datalab). Modules like the [`@task.kubernetes`](kubepod-operator.md#use-the-taskkubernetes-decorator) or [`@task.external_python_operator`](airflow-isolated-environments.md) make it easy to run any Python code in isolation with optimized environments and resources.
 - Run all your MLOps using Python modules inside Airflow tasks. Since Airflow can run any Python code and [scale indefinitely](airflow-scaling-workers.md), you can use it as an all-purpose MLOps tool.
 
 ### Airflow features for MLOps

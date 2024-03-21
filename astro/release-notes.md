@@ -15,11 +15,91 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro CLI Version**: {{CLI_VER}} ([Release notes](runtime-release-notes.md))
+**Latest Astro CLI Version**: {{CLI_VER_LATEST}} ([Release notes](runtime-release-notes.md))
 
 **Latest Astro Runtime Version**: {{RUNTIME_VER}} ([Release notes](runtime-release-notes.md))
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
+
+## March 19, 2024
+
+### New Azure regions available on Astro Hosted
+
+<HostedBadge/>
+
+You can now create Hosted dedicated clusters in the following Azure regions:
+
+- `centralus`
+- `westus3`
+- `southcentralus`
+
+See [Astro Hosted resource reference](https://docs.astronomer.io/astro/resource-reference-hosted) for more information.
+
+### Custom Deployment roles are now in Public Preview
+
+:::publicpreview
+:::
+
+The ability to customize Deployment-level permissions with Deployment roles is now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) for Enterprise tier Organizations.
+
+You can additionally use the new **Workplace Accessor** and **Deployment Admin** roles to define which users have access to specific Deployments in your Workspace. See more in [User permissions reference](https://docs.astronomer.io/astro/user-permissions#workspace-roles) and and [Create and assign custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles).
+
+
+### Export data from reporting dashboards using webhooks
+
+:::publicpreview
+:::
+
+In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
+
+Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
+
+### Additional improvements
+
+- You can now use the new **Credits** tab in the [Organization Billing page](https://docs.astronomer.io/astro/manage-billing) to see your credit balance.
+- On Astro Hybrid, the maximum worker concurrency on a worker queue has increased from `64` to `256`.
+
+
+## March 7, 2024
+
+### Reporting dashboards are now in public preview
+
+[Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
+
+You can also export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
+
+### Customize Deployment-level permissions using Deployment roles
+
+:::privatepreview
+:::
+
+Custom Deployment roles are a new way to define granular permissions for Astro users. For the first time, you can set a user's permissions at the Deployment level and define which specific parts of a Deployment they can access or modify. Use custom Deployment roles to have users collaborate in the same Workspace with only the minimum permissions they require. See [Customize Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) for more information.
+
+### New Deployment registry cache to improve resiliency
+
+Deployments now include a cache of Astronomer's image registry that stores the current Astro Runtime image for your Deployment. Because Deployments now always have access to their running image, image registry outages should no longer result in failed DAG runs.
+
+### Additional improvements
+
+- Removed nonfunctional network usage per Pod metrics from the Deployment **Analytics** page.
+- The end-of-life date for Deployment API keys is June 1, 2024.
+- The Cloud UI has been renamed to the Astro UI across all help text and documentation.
+- Due to a minor change to Astronomer cluster architecture, you can no longer add custom tags to Hybrid clusters on AWS.
+
+### Bug fixes
+
+- Fixed an issue where CPU usage per Pod metrics did not render correctly in the Deployment **Analytics** page.
+- Fixed an issue where the Astro UI didn't show all available Teams when selecting Teams to add to a Workspace.
+
+## February 27, 2024
+
+### Use a custom service account to authorize Deployments to GCP
+
+You can now attach a custom GCP [service account](https://cloud.google.com/iam/docs/service-account-overview) to your Deployment to grant the Deployment all of the service account's permissions to your cloud. Using a custom service account provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that should all have the same level of access to your cloud. For setup steps, see [Authorize Deployments to your cloud](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud).
+
+### Bug fixes
+
+- Fixed an issue where the Astro API failed to list Deployments after you deleted a hibernation override setting.
 
 ## February 21, 2024
 
@@ -42,14 +122,14 @@ AIRFLOW__CELERY_BROKER_TRANSPORT_OPTIONS__RETRY_ON_TIMEOUT=True
 
 For more information about each of these variables, see [Platform variables](https://docs.astronomer.io/astro/platform-variables)
 
-### Ephemeral storage limit on schedulers 
+### Ephemeral storage limit on schedulers
 
 Astro now limits that amount of ephemeral storage in a scheduler to 5Gi. If a scheduler attempts to use more than 5Gi of ephemeral storage, it will be terminated.
 
 It is rare for schedulers to require more than 5Gi of ephemeral storage. If your schedulers start to terminate after this update, ensure the following:
 
 - Your Deployment is not producing large amounts of temporary files without cleaning them up.
-- If you're using the BingAds Python SDK, your Deployment uses version 13.0.14 or later. Earlier releases include a [bug](https://github.com/BingAds/BingAds-Python-SDK/issues/117) that generates large amounts of temporary files. 
+- If you're using the BingAds Python SDK, your Deployment uses version 13.0.14 or later. Earlier releases include a [bug](https://github.com/BingAds/BingAds-Python-SDK/issues/117) that generates large amounts of temporary files.
 
 ### Bug fixes
 
@@ -104,7 +184,7 @@ See [Deployment health incidents](https://docs.astronomer.io/astro/deployment-he
 
 ![An example of an incident message in a Deployment health status](/img/release-notes/incident-unfurl.png)
 
-### Additional improvements 
+### Additional improvements
 
 - You can now access [Ask Astro](https://ask.astronomer.io/) from the Astro UI **Help** menu:
 
@@ -859,7 +939,7 @@ To review the new process for creating SSO connections, see [Set up authenticati
 
 ### Preview Deployments
 
-You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions.md#deployment-preview-templates) to configure your Astro pipelines to:
+You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions-deployment-preview.md) to configure your Astro pipelines to:
 - Create the preview Deployment when you create a new branch.
 - Deploy code changes to Astro when you make updates in the branch.
 - Delete the preview Deployment when you delete the branch.

@@ -42,7 +42,7 @@ To add a Team to a specific Workspace, specify the Workspace using the `--worksp
 | Option           | Description                                                               | Valid Values                                                                                                                           |
 | ---------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `--team-id`      | The ID for the Team to add to a Workspace. Bypasses the selection prompt. | Any valid Team ID. You can find available Team ID's by running `astro organization team list`.                                         |
-| `-r`, `--role`   | The Team's role in the Workspace.                                         | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_MEMBER`. |
+| `-r`, `--role`   | The Team's role in the Workspace.                                         | Possible values are `WORKSPACE_ACCESSOR`, `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_MEMBER`. |
 | `--workspace-id` | The ID for the Workspace where you want to add the Team.                  | Any valid Workspace ID. Default is the current Workspace context you are working in.                                                   |
 
 </TabItem>

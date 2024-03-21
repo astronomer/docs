@@ -27,7 +27,7 @@ Astro upgrades can include breaking changes, especially when you're upgrading to
 
 ## Step 2: (Optional) Pin provider package versions
 
-Major Astro Runtime upgrades can include major upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes. 
+Major Astro Runtime upgrades can include major upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes.
 
 For the most stable upgrade path, Astronomer recommends pinning all provider package versions from your current Runtime version before upgrading. To check the version of all provider packages installed in your Runtime version, run:
 
@@ -45,7 +45,7 @@ apache-airflow-providers-databricks==4.0.0
 
 You can use the Astro CLI to anticipate and address problems before upgrading to a newer version of Astro Runtime. Before you upgrade, run the following command to run tests against the version of Astro Runtime you're upgrading to:
 
-```bash 
+```bash
 astro dev upgrade-test --runtime-version <upgraded-runtime-version>
 ```
 
@@ -80,7 +80,7 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 
 ### Step 6: (Optional) Upgrade and test provider packages
 
-If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test east provider package upgrade locally before deploying to Astro. 
+If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test east provider package upgrade locally before deploying to Astro.
 
 ## Step 7: Deploy to Astronomer
 
@@ -188,7 +188,7 @@ There is an incompatibility between Astro Runtime 8 and the following provider p
 
 That can be resolved by pinning `apache-airflow-providers-google==10.9.0` or greater in your `requirements.txt` file.
 
-This incompatibility results in breaking the GKEStartPodOperator. This operator inherits from the KubernetesPodOperator, but then overrides the hook attribute with the GKEPodHook. In the included version of the `cncf-kubernetes` providers package, the KubernetesPodOperator uses a new method, `get_xcom_sidecar_container_resources`. This method is present in the KubernetesHook, but not the GKEPodHook. Therefore, when it is called it causes the task execution to break. 
+This incompatibility results in breaking the GKEStartPodOperator. This operator inherits from the KubernetesPodOperator, but then overrides the hook attribute with the GKEPodHook. In the included version of the `cncf-kubernetes` providers package, the KubernetesPodOperator uses a new method, `get_xcom_sidecar_container_resources`. This method is present in the KubernetesHook, but not the GKEPodHook. Therefore, when it is called it causes the task execution to break.
 
 #### Runtime 6 (Airflow 2.4)
 

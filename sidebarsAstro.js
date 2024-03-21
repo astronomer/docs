@@ -146,7 +146,15 @@ module.exports = {
               label: "CI/CD templates",
               items: [
                 "ci-cd-templates/template-overview",
-                "ci-cd-templates/github-actions",
+                {
+                  type: "category",
+                  label: "Github Actions",
+                  items: [
+                    "ci-cd-templates/github-actions-template",
+                    "ci-cd-templates/github-actions-deployment-preview",
+                    "ci-cd-templates/github-actions-private-network",
+                  ],
+                },
                 "ci-cd-templates/jenkins",
                 "ci-cd-templates/gitlab",
                 "ci-cd-templates/aws-s3",
@@ -178,7 +186,16 @@ module.exports = {
         {
           type: "category",
           label: "View metrics",
-          items: ["dag-metrics", "deployment-metrics", "organization-metrics", "reporting-dashboard"],
+          items: ["dag-metrics",
+           "deployment-metrics",
+           {
+            type: "category",
+            label: "Organization dashboards",
+            items: ["reporting-dashboard",
+            "reporting-dash-exports",
+            ],
+          },
+          ],
         },
         {
           type: "category",
@@ -218,6 +235,7 @@ module.exports = {
           label: "Deployments",
           items: [
             "deployment-api-tokens",
+            "customize-deployment-roles",
             "authorize-deployments-to-your-cloud",
             "transfer-a-deployment",
           ],
@@ -338,6 +356,7 @@ module.exports = {
           ],
         },
         'platform-variables',
+        'deployment-role-reference',
         "allowlist-domains",
         "feature-previews",
         {
@@ -482,6 +501,7 @@ module.exports = {
             },
             'cli/astro-deployment-create',
             'cli/astro-deployment-delete',
+            'cli/astro-deployment-hibernate',
             'cli/astro-deployment-inspect',
             'cli/astro-deployment-list',
             'cli/astro-deployment-logs',
@@ -503,6 +523,7 @@ module.exports = {
             'cli/astro-deployment-variable-create',
             'cli/astro-deployment-variable-list',
             'cli/astro-deployment-variable-update',
+            'cli/astro-deployment-wake-up',
             'cli/astro-deployment-worker-queue-create',
             'cli/astro-deployment-worker-queue-delete',
             'cli/astro-deployment-worker-queue-update',
@@ -546,6 +567,7 @@ module.exports = {
           items: [
             "cli/astro-organization-list",
             "cli/astro-organization-switch",
+            "cli/astro-organization-role-list",
             "cli/astro-organization-team-create",
             "cli/astro-organization-team-delete",
             "cli/astro-organization-team-list",

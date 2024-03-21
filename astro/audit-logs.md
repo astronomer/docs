@@ -62,6 +62,12 @@ The following table lists the common fields shared by all categories of event da
 | `sourceIp`       | The IP address of the originating request.                                                                            |
 | `userAgent`      | The application used to make the request.                                                                             |
 
+:::info
+
+To link the user ID back to a user, [Organization Owners](user-permissions.md) can use the Astro Access Management UI at **Organization Settings** > **Access Management**.
+
+:::
+
 ### API event fields
 
 Audit log events can be generated from the v1 API or the v2 API. Each API generates different fields for the same actions, and your audit log might include events from both APIs. Audit log event frequency for the v1 API are expected to decline as Astronomer transitions to the v2 API.

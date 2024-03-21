@@ -30,7 +30,7 @@ If the command was successful, then you receive a response that begins similarly
 {
   "organizations": [
     {
-      "billingEmail": "billing@company.com",
+      "billingEmail": "billing@example.com",
       "createdAt": "2022-11-22T04:37:12T",
       "createdBySubject": {
         "apiTokenName": "my-token",
@@ -38,7 +38,7 @@ If the command was successful, then you receive a response that begins similarly
         "fullName": "Jane Doe",
         "id": "clm8qv74h000008mlf08scq7k",
         "subjectType": "USER",
-        "username": "user1@company.com"
+        "username": "user1@example.com"
       },
       "id": "clmaxoarx000008l2c5ayb9pt",
       "isScimEnabled": false,
@@ -75,7 +75,7 @@ If the command succeeds, the API returns a list of Workspaces similar to the fol
         "fullName": "Jane Doe",
         "id": "clm8qv74h000008mlf08scq7k",
         "subjectType": "USER",
-        "username": "user1@company.com"
+        "username": "user1@example.com"
       },
       "description": "This is a test workspace",
       "id": "clm8t5u4q000008jq4qoc3036",
@@ -89,7 +89,7 @@ If the command succeeds, the API returns a list of Workspaces similar to the fol
         "fullName": "Jane Doe",
         "id": "clm8qv74h000008mlf08scq7k",
         "subjectType": "USER",
-        "username": "user1@company.com"
+        "username": "user1@example.com"
       }
     }
   ]
