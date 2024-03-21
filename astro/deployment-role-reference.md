@@ -6,8 +6,8 @@ description: Learn about each possible permission that you can assign to custom 
 ---
 
 import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
-<EnterpriseBadge/>
 
+<EnterpriseBadge/>
 
 :::publicpreview
 :::
