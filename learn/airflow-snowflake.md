@@ -28,7 +28,7 @@ Additionally, [More on the Airflow Snowflake integration](#more-on-the-airflow-s
 
 :::tip
 
-To learn how you can use Airflow to improve your Snowflake cost management see [Introducing SnowPatrol - Snowflake Anomaly Detection and Cost Management with Machine Learning and Airflow](https://www.astronomer.io/blog/introducing-snowpatrol/).
+To learn how you can use Airflow to improve your Snowflake cost management, see [Introducing SnowPatrol - Snowflake Anomaly Detection and Cost Management with Machine Learning and Airflow](https://www.astronomer.io/blog/introducing-snowpatrol/).
 
 :::
 
