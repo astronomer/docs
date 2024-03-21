@@ -4,14 +4,15 @@ id: audit-logs
 sidebar_label: Export audit logs
 ---
 
+import TeamBadge from '@site/src/components/TeamBadge';
+
+</TeamBadge>
+
 :::warning
 
 This feature is in [Public Preview](https://docs.astronomer.io/astro/feature-previews).
 
 :::
-
-import TeamBadge from '@site/src/components/TeamBadge';
-</TeamBadge>
 
 Astro audit logs record administrative activities and events in your Organization. You can use the audit logs to determine who did what, where, and when. You can also use audit logs to ensure your Organization is meeting its security and regulatory requirements. For example, you can use audit logs to determine when users were added to your Organization or to individual Workspaces.
 
