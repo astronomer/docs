@@ -41,7 +41,7 @@ In addition to alert emails for your Deployments, Astronomer recommends configur
 
 ## Enforce CI/CD deploys
 
-import BusinessBadge from '@site/src/components/BusinessBadge';
+<BusinessBadge/>
 
 By default, any user can deploy code either directly from the Astro CLI or from a CI/CD process that is authenticated with an API token. To help your team protect production environments from manual code deploys that circumvent your organization's CI/CD processes and checks, you can configure a Deployment so that users can't deploy code manually using the Astro CLI.
 
