@@ -105,6 +105,25 @@ module.exports = {
           position: 'left',
           activeClassName: 'navbar__link--active',
         },
+        {
+          type: 'dropdown',
+          label: 'More',
+          position: 'left',
+          items: [
+            {
+              label: 'Astronomer Registry',
+              href: 'https://registry.astronomer.io/',
+            },
+            {
+              label: 'Cosmos',
+              href: 'https://astronomer.github.io/astronomer-cosmos/',
+            },
+            {
+              label: 'Astro SDK',
+              href: 'https://astro-sdk-python.readthedocs.io/en/stable/',
+            },
+          ]
+        },
       ],
     },
     astroCard: {
