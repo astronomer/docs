@@ -6,14 +6,11 @@ description: "View information about your Organization, Deployments, DAGs, and c
 ---
 
 import HostedBadge from '@site/src/components/HostedBadge';
+import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
+
+<EnterpriseBadge/>
 
 :::publicpreview
-:::
-
-:::info Enterprise
-
-Organization reporting dashboards are only available if you have an Enterprise product plan.
-
 :::
 
 Astro provides dashboards that share important metrics about your Organization's use of Astro, which you can use to manage Deployments and resources. These dashboards include:
