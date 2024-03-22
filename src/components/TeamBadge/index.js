@@ -6,7 +6,7 @@ export default function LinkCard() {
   return (
     <Link className={styles.teamBadge} id="teamBadge">
         <div className={styles.teamBadge}>
-        <a target="_blank" href="https://docs.astronomer.io/astro/astro-architecture">
+        <a target="_blank" href="https://www.astronomer.io/pricing/">
             <img src="/img/Badge_Team.png" alt="This feature is available only if you are on the Team tier or above." title="This feature is available only if you are on the Team tier or above." />
         </a>
         </div>
