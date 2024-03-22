@@ -98,7 +98,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
       verbs: ["get", "create", "delete"]
     - apiGroups: [""]
       resources: ["secrets"]
-      verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watc
+      verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
     - apiGroups: [""]
       resources: ["namespaces"]
       verbs: ["get", "list", "patch", "update", "watch"]
@@ -110,7 +110,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
       verbs: ["*"]
     - apiGroups: [""]
       resources: ["persistentvolumeclaims"]
-      verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patc
+      verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patch"]
     - apiGroups: [""]
       resources: ["pods"]
       verbs: ["get", "list", "watch"]
