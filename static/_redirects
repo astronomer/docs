@@ -325,8 +325,9 @@
 /astro/astro-use-case/use-case-astro-connections /astro/use-cases/connections-branch-deploys 301
 
 # API redirects
-/api/* https://astronomer.docs.buildwithfern.com/api/:splat 200!
 /api https://astronomer.docs.buildwithfern.com/api/overview 200!
+/api/* https://astronomer.docs.buildwithfern.com/api/:splat 200!
+
 
 # CLI restructuring redirects
 /astro/cli/run-airflow-locally#troubleshoot-KubernetesPodOperator-issues /astro/cli/troubleshoot-locally#troubleshoot-KubernetesPodOperator-issues 301
