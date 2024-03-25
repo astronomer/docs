@@ -16,7 +16,7 @@ To create a cluster on Astro Hosted, see [Create a dedicated cluster](create-ded
 An Astro Hybrid cluster runs your Astro Deployments in isolated namespaces on your cloud. Your organization might choose to have one or multiple clusters to meet certain networking, governance, or use case requirements. You can always start with one cluster and [create additional clusters](#create-a-cluster) later. New clusters on Astro typically have default configurations that are suitable for standard use cases. You can request [Astronomer support](https://support.astronomer.io) to edit the configuration of an existing cluster. For example, you might need to:
 
 - Add a [worker type](#manage-worker-type), which creates a new [worker node pool](#about-worker-node-pools) in your cluster and allows your team to select that worker type in a Deployment.
-- Increase or decrease the maximum number of worker nodes for a given worker type that your cluster can scale-up to. 
+- Increase or decrease the maximum number of worker nodes for a given worker type that your cluster can scale-up to.
 - Create a VPC connection or a transit gateway connection between your Astro cluster and a target VPC.
 
 Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Astro UI and Airflow UI continue to be available and your Airflow tasks are not interrupted.
@@ -126,7 +126,7 @@ To create a new Astro cluster on Azure for your Organization, submit a request t
 
 If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Network (VNet) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/19` is implemented.
 
-For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure-hybrid.md).  
+For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure-hybrid.md).
 
 ### GCP
 
@@ -139,13 +139,13 @@ To create a new Astro cluster on Google Cloud Platform (GCP) for your Organizati
 - Your preferred maximum node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-standard-4` nodes, one Small General Purpose CloudSQL instance (2vCPU, 8GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md). 
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/22, `e2-standard-4` nodes, one Small General Purpose CloudSQL instance (2vCPU, 8GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp-hybrid.md).
 
 :::info Configure cluster maintenance windows
 
 All GCP dedicated clusters are subscribed to the [GKE regular release channel](https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels), meaning that Google automatically upgrades the cluster and its nodes whenever an upgrade is available.
 
-After you create a GCP cluster, you can control when these upgrades happen by requesting a [maintenance window](https://cloud.google.com/kubernetes-engine/docs/how-to/maintenance-windows-and-exclusions#maintenance-window) for the cluster. Maintenance windows determine when and how Google updates your cluster. You can use maintenance windows to ensure that upgrades don't happen while critical DAGs are running on your cluster. 
+After you create a GCP cluster, you can control when these upgrades happen by requesting a [maintenance window](https://cloud.google.com/kubernetes-engine/docs/how-to/maintenance-windows-and-exclusions#maintenance-window) for the cluster. Maintenance windows determine when and how Google updates your cluster. You can use maintenance windows to ensure that upgrades don't happen while critical DAGs are running on your cluster.
 
 To set a maintenance window, first choose a maintenance window time and read through the [maintenance window considerations](https://cloud.google.com/kubernetes-engine/docs/how-to/maintenance-windows-and-exclusions#considerations) to make sure that the time is optimized for your cluster. Then, contact [Astronomer Support](https://cloud.astronomer.io/open-support-request) and provide your cluster ID and desired maintenance window.
 
@@ -157,15 +157,15 @@ Astronomer support sends you a notification when your cluster is created. After 
 
 ## View clusters
 
-1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
-2. Click **Clusters** to view a list of the clusters that are available to your Organization. 
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+2. Click **Clusters** to view a list of the clusters that are available to your Organization.
 3. Click a cluster to view its information. See the following table for more information about each available information page.
 
 | Tab name | Description |
 |----------|-------------|
-| Details  | General permanent configurations, including cluster name, IDs, and connectivity options.  | 
-| Worker Types | The available worker types for configuring worker queues on your cluster. See [Manage worker types](#manage-worker-types). | 
-| Workspace Authorization | List of Workspaces that can create Deployments on this cluster. See [Authorize Workspaces to a cluster](#authorize-workspaces-to-a-cluster). |
+| Details  | General permanent configurations, including cluster name, IDs, and connectivity options.  |
+| Worker Types | The available worker types for configuring worker queues on your cluster. See [Manage worker types](#manage-worker-types). |
+| Workspace Authorization | List of Workspaces that can create Deployments on this cluster. See [Authorize Workspaces to a cluster](authorize-workspaces-to-a-cluster.md). |
 
 ## Manage worker types
 
@@ -182,7 +182,7 @@ A Kubernetes _node pool_ is a group of nodes within a cluster that share the sam
 - A _worker type_, which is one of your cloud provider's available node instance types.
 - A _maximum node count_, which is the maximum number of nodes that can run concurrently in the worker node pool across all Deployments.
 
-During the Astro cluster creation process, you provide Astronomer with a default worker type and a maximum node count to configure a default worker node pool. This node pool is used for the default worker queues for all of your Deployments. When you request Astronomer support to add a [new worker type](#configure-node-instance-type) to your cluster, a new worker node pool of that type is created on the cluster. You can then configure [worker queues](configure-worker-queues.md) that use the new worker type. 
+During the Astro cluster creation process, you provide Astronomer with a default worker type and a maximum node count to configure a default worker node pool. This node pool is used for the default worker queues for all of your Deployments. When you request Astronomer support to add a [new worker type](#configure-node-instance-type) to your cluster, a new worker node pool of that type is created on the cluster. You can then configure [worker queues](configure-worker-queues.md) that use the new worker type.
 
 Your default worker node pool always runs a minimum of one node, while additional worker node pools can scale to zero. Additional nodes spin up as required based on the auto-scaling logic of your Deployment Airflow executor and your worker queues.
 
