@@ -1,5 +1,6 @@
 instances:
-  - url: astronomer.docs.buildwithfern.com
+  - url: astronomer.docs.buildwithfern.com/api
+  #  custom-domain: docs.astronomer.io/api
 title: Astro API Reference
 navigation:
   - section: Astro API

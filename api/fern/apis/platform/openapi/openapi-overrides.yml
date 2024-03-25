@@ -1,0 +1,234 @@
+paths:
+  /organizations:
+    get:
+      x-fern-sdk-group-name:
+        - organization
+      x-fern-sdk-method-name: ListOrganizations
+  /organizations/{organizationId}:
+    get:
+      x-fern-sdk-group-name:
+        - organization
+      x-fern-sdk-method-name: GetOrganization
+    post:
+      x-fern-sdk-group-name:
+        - organization
+      x-fern-sdk-method-name: UpdateOrganization
+  /organizations/{organizationId}/cluster-options:
+    get:
+      x-fern-sdk-group-name:
+        - options
+      x-fern-sdk-method-name: GetClusterOptions
+  /organizations/{organizationId}/clusters:
+    get:
+      x-fern-sdk-group-name:
+        - cluster
+      x-fern-sdk-method-name: ListClusters
+    post:
+      x-fern-sdk-group-name:
+        - cluster
+      x-fern-sdk-method-name: CreateCluster
+  /organizations/{organizationId}/clusters/{clusterId}:
+    get:
+      x-fern-sdk-group-name:
+        - cluster
+      x-fern-sdk-method-name: GetCluster
+    post:
+      x-fern-sdk-group-name:
+        - cluster
+      x-fern-sdk-method-name: UpdateCluster
+    delete:
+      x-fern-sdk-group-name:
+        - cluster
+      x-fern-sdk-method-name: DeleteCluster
+  /organizations/{organizationId}/deployment-options:
+    get:
+      x-fern-sdk-group-name:
+        - options
+      x-fern-sdk-method-name: GetDeploymentOptions
+  /organizations/{organizationId}/deployments:
+    get:
+      x-fern-sdk-group-name:
+        - deployment
+      x-fern-sdk-method-name: ListDeployments
+    post:
+      x-fern-sdk-group-name:
+        - deployment
+      x-fern-sdk-method-name: CreateDeployment
+  /organizations/{organizationId}/deployments/{deploymentId}:
+    get:
+      x-fern-sdk-group-name:
+        - deployment
+      x-fern-sdk-method-name: GetDeployment
+    post:
+      x-fern-sdk-group-name:
+        - deployment
+      x-fern-sdk-method-name: UpdateDeployment
+    delete:
+      x-fern-sdk-group-name:
+        - deployment
+      x-fern-sdk-method-name: DeleteDeployment
+  /organizations/{organizationId}/deployments/{deploymentId}/hibernation-override:
+    post:
+      x-fern-sdk-group-name:
+        - deployment
+      x-fern-sdk-method-name: UpdateDeploymentHibernationOverride
+    delete:
+      x-fern-sdk-group-name:
+        - deployment
+      x-fern-sdk-method-name: DeleteDeploymentHibernationOverride
+  /organizations/{organizationId}/workspaces:
+    get:
+      x-fern-sdk-group-name:
+        - workspace
+      x-fern-sdk-method-name: ListWorkspaces
+    post:
+      x-fern-sdk-group-name:
+        - workspace
+      x-fern-sdk-method-name: CreateWorkspace
+  /organizations/{organizationId}/workspaces/{workspaceId}:
+    get:
+      x-fern-sdk-group-name:
+        - workspace
+      x-fern-sdk-method-name: GetWorkspace
+    post:
+      x-fern-sdk-group-name:
+        - workspace
+      x-fern-sdk-method-name: UpdateWorkspace
+    delete:
+      x-fern-sdk-group-name:
+        - workspace
+      x-fern-sdk-method-name: DeleteWorkspace
+components:
+  schemas:
+    BasicSubjectProfile:
+      x-fern-type-name: BasicSubjectProfile
+    Cluster:
+      x-fern-type-name: Cluster
+    ClusterK8sTag:
+      x-fern-type-name: ClusterK8sTag
+    ClusterMetadata:
+      x-fern-type-name: ClusterMetadata
+    ClusterOptions:
+      x-fern-type-name: ClusterOptions
+    ClustersPaginated:
+      x-fern-type-name: ClustersPaginated
+    CreateAwsClusterRequest:
+      x-fern-type-name: CreateAwsClusterRequest
+    CreateAzureClusterRequest:
+      x-fern-type-name: CreateAzureClusterRequest
+    CreateClusterRequest:
+      x-fern-type-name: CreateClusterRequest
+    CreateDedicatedDeploymentRequest:
+      x-fern-type-name: CreateDedicatedDeploymentRequest
+    CreateDeploymentRequest:
+      x-fern-type-name: CreateDeploymentRequest
+    CreateGcpClusterRequest:
+      x-fern-type-name: CreateGcpClusterRequest
+    CreateHybridDeploymentRequest:
+      x-fern-type-name: CreateHybridDeploymentRequest
+    CreateNodePoolRequest:
+      x-fern-type-name: CreateNodePoolRequest
+    CreateStandardDeploymentRequest:
+      x-fern-type-name: CreateStandardDeploymentRequest
+    CreateWorkspaceRequest:
+      x-fern-type-name: CreateWorkspaceRequest
+    Deployment:
+      x-fern-type-name: Deployment
+    DeploymentEnvironmentVariable:
+      x-fern-type-name: DeploymentEnvironmentVariable
+    DeploymentEnvironmentVariableRequest:
+      x-fern-type-name: DeploymentEnvironmentVariableRequest
+    DeploymentHibernationOverride:
+      x-fern-type-name: DeploymentHibernationOverride
+    DeploymentHibernationOverrideRequest:
+      x-fern-type-name: DeploymentHibernationOverrideRequest
+    DeploymentHibernationSchedule:
+      x-fern-type-name: DeploymentHibernationSchedule
+    DeploymentHibernationSpec:
+      x-fern-type-name: DeploymentHibernationSpec
+    DeploymentHibernationSpecRequest:
+      x-fern-type-name: DeploymentHibernationSpecRequest
+    DeploymentHibernationStatus:
+      x-fern-type-name: DeploymentHibernationStatus
+    DeploymentInstanceSpecRequest:
+      x-fern-type-name: DeploymentInstanceSpecRequest
+    DeploymentOptions:
+      x-fern-type-name: DeploymentOptions
+    DeploymentScalingSpec:
+      x-fern-type-name: DeploymentScalingSpec
+    DeploymentScalingSpecRequest:
+      x-fern-type-name: DeploymentScalingSpecRequest
+    DeploymentScalingStatus:
+      x-fern-type-name: DeploymentScalingStatus
+    DeploymentsPaginated:
+      x-fern-type-name: DeploymentsPaginated
+    Error:
+      x-fern-type-name: Error
+    HybridWorkerQueueRequest:
+      x-fern-type-name: HybridWorkerQueueRequest
+    MachineSpec:
+      x-fern-type-name: MachineSpec
+    ManagedDomain:
+      x-fern-type-name: ManagedDomain
+    NodePool:
+      x-fern-type-name: NodePool
+    Organization:
+      x-fern-type-name: Organization
+    OrganizationsPaginated:
+      x-fern-type-name: OrganizationsPaginated
+    OverrideDeploymentHibernationBody:
+      x-fern-type-name: OverrideDeploymentHibernationBody
+    ProviderInstanceType:
+      x-fern-type-name: ProviderInstanceType
+    ProviderRegion:
+      x-fern-type-name: ProviderRegion
+    Range:
+      x-fern-type-name: Range
+    ResourceOption:
+      x-fern-type-name: ResourceOption
+    ResourceQuotaOptions:
+      x-fern-type-name: ResourceQuotaOptions
+    ResourceRange:
+      x-fern-type-name: ResourceRange
+    RuntimeRelease:
+      x-fern-type-name: RuntimeRelease
+    SchedulerMachine:
+      x-fern-type-name: SchedulerMachine
+    UpdateClusterRequest:
+      x-fern-type-name: UpdateClusterRequest
+    UpdateDedicatedClusterRequest:
+      x-fern-type-name: UpdateDedicatedClusterRequest
+    UpdateDedicatedDeploymentRequest:
+      x-fern-type-name: UpdateDedicatedDeploymentRequest
+    UpdateDeploymentRequest:
+      x-fern-type-name: UpdateDeploymentRequest
+    UpdateHybridClusterRequest:
+      x-fern-type-name: UpdateHybridClusterRequest
+    UpdateHybridDeploymentRequest:
+      x-fern-type-name: UpdateHybridDeploymentRequest
+    UpdateNodePoolRequest:
+      x-fern-type-name: UpdateNodePoolRequest
+    UpdateOrganizationRequest:
+      x-fern-type-name: UpdateOrganizationRequest
+    UpdateStandardDeploymentRequest:
+      x-fern-type-name: UpdateStandardDeploymentRequest
+    UpdateWorkspaceRequest:
+      x-fern-type-name: UpdateWorkspaceRequest
+    WorkerMachine:
+      x-fern-type-name: WorkerMachine
+    WorkerQueue:
+      x-fern-type-name: WorkerQueue
+    WorkerQueueOptions:
+      x-fern-type-name: WorkerQueueOptions
+    WorkerQueueRequest:
+      x-fern-type-name: WorkerQueueRequest
+    WorkloadIdentityOption:
+      x-fern-type-name: WorkloadIdentityOption
+    Workspace:
+      x-fern-type-name: Workspace
+    WorkspacesPaginated:
+      x-fern-type-name: WorkspacesPaginated
+  securitySchemes:  
+    JWT:
+      type: http
+      scheme: bearer

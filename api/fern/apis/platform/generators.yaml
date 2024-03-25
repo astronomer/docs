@@ -1,4 +1,7 @@
 default-group: local
+api: 
+  path: openapi/openapi.yml
+  overrides: openapi/openapi-overrides.yml
 groups:
   local:
     generators:

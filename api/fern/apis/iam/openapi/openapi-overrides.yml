@@ -1,0 +1,5 @@
+securitySchemes:  
+   JWT:
+     type: http
+     scheme: bearer
+
