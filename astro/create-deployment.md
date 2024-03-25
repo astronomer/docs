@@ -31,7 +31,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
 
 :::note
 
-If you're creating a Deployment to migrate to Astro Hosted from OSS Airflow, Astro Hybrid, or Software, and you need to use a deprecated version of the [Astro Runtime](runtie-version-lifecycle-policy.md), you can create Deployments with [deprecated versions of the Astro Runtime](upgrade-runtime.md#run-a-deprecated-astro-runtime).
+If you're creating a Deployment to migrate to Astro Hosted from OSS Airflow, Astro Hybrid, or Software, and you need to use a deprecated version of the [Astro Runtime](runtime-version-lifecycle-policy.md), you can create Deployments with [deprecated versions of the Astro Runtime](upgrade-runtime.md#run-a-deprecated-astro-runtime).
 
 By creating a Deployment with the Astro API that uses a deprecated Astro Runtime version, you can first migrate your code to Astro Hosted and then focus on updating the Astro Runtime, allowing you to migrate using a stepwise strategy.
 
