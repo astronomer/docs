@@ -5,15 +5,12 @@ id: deployment-role-reference
 description: Learn about each possible permission that you can assign to custom Deployment roles
 ---
 
+import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
+
+<EnterpriseBadge/>
+
 :::publicpreview
 :::
-
-:::info
-
-This feature is available only in the Enterprise tier.
-
-:::
-
 
 This document contains all available permissions that you can assign to a [custom Deployment role](customize-deployment-roles). Permissions are organized by the object that the permissions belong to.
 
