@@ -330,7 +330,7 @@
 /astro/api/get-started https://astronomer.docs.buildwithfern.com/api/get-started 301!
 /astro/api/versioning-and-support https://docs.astronomer.io/api/versioning-and-support 301!
 /astro/api/iam-api-reference https://docs.astronomer.io/api/platform-api-reference 301!
-astro//api/platform-api-reference https://docs.astronomer.io/api/platform-api-reference 301!
+/astro/api/platform-api-reference https://docs.astronomer.io/api/platform-api-reference 301!
 
 # CLI restructuring redirects
 /astro/cli/run-airflow-locally#troubleshoot-KubernetesPodOperator-issues /astro/cli/troubleshoot-locally#troubleshoot-KubernetesPodOperator-issues 301
