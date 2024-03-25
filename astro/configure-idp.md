@@ -432,12 +432,12 @@ To enable or disable just-in-time provisioning:
 3. In **Automatic Membership**, select the default Organization role for users who log in to Astro for the first time through your identity provider. To disable just-in-time provisioning, select **Disabled**.
 
 ### Restrict authentication options
-
 <BusinessBadge/>
 
 By default, users can choose any of the [available authentication methods](#supported-sso-identity-providers) when logging into Astro. You can remove specific authentication options, such as GitHub or Google, so that users can use only the methods that your Organization wants to support, like your third party identity provider.
 
-To restrict available authentication options on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
+1. In the Astro UI, click your Workspace name in the upper left corner, click **Organization Settings**, then click **Authentication**.
+2. In the **Advanced Settings** menu, click **Allow only Single Sign-On (SSO)**.
 
 ### Regenerate an SSO bypass link
 

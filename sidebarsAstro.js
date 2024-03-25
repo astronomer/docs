@@ -323,17 +323,6 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Astro API",
-      items: [
-        "api/overview",
-        "api/get-started",
-        "api/versioning-and-support",
-        "api/iam-api-reference",
-        "api/platform-api-reference",
-      ],
-    },
-    {
       type: 'category',
       label: 'Best practices',
       items: [
@@ -375,6 +364,11 @@ module.exports = {
         },
         "astro-glossary"
       ],
+    },
+    {
+      type: 'link',
+      label: 'Astro API',
+      href: 'https://docs.astronomer.io/api',
     },
   ],
   cli: [
