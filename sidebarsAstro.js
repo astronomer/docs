@@ -331,6 +331,11 @@ module.exports = {
       ],
     },
     {
+      type: 'link',
+      label: 'Astro API',
+      href: 'https://astronomer.docs.buildwithfern.com',
+    },
+    {
       type: "category",
       label: "Reference",
       items: [
