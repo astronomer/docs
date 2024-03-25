@@ -4,14 +4,11 @@ title: "Export Astro reporting data"
 id: reporting-dash-exports
 description: "Export data from reporting dashboards or configure conditional exports as alerts."
 ---
+import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
+
+<EnterpriseBadge/>
 
 :::publicpreview
-:::
-
-:::info
-
-Organization reporting dashboards are only available if you have an Enterprise product plan.
-
 :::
 
 As an Astro administrator, you can export reporting data to share with other team members or to keep a record of key performance indicators. Astro supports several different methods for exporting reporting data based on how and when you want to receive the data. Specifically, you can export data:
