@@ -325,7 +325,7 @@
 /astro/astro-use-case/use-case-astro-connections /astro/use-cases/connections-branch-deploys 301
 
 # API redirects
-/api https://docs.astronomer.io/api 200
+/api https://astronomer.docs.buildwithfern.com/api 200
 /astro/api/overview https://docs.astronomer.io/api/overview 301!
 /astro/api/get-started https://docs.astronomer.io/api/get-started 301!
 /astro/api/versioning-and-support https://docs.astronomer.io/api/versioning-and-support 301!
