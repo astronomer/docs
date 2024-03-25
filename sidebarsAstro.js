@@ -331,11 +331,6 @@ module.exports = {
       ],
     },
     {
-      type: 'link',
-      label: 'Astro API',
-      href: 'https://docs.astronomer.io/api',
-    },
-    {
       type: "category",
       label: "Reference",
       items: [
@@ -369,6 +364,11 @@ module.exports = {
         },
         "astro-glossary"
       ],
+    },
+    {
+      type: 'link',
+      label: 'Astro API',
+      href: 'https://docs.astronomer.io/api',
     },
   ],
   cli: [
