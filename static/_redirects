@@ -326,7 +326,7 @@
 
 # API redirects
 /api https://astronomer.docs.buildwithfern.com/api/overview 200!
-/api/* https://docs.astronomer.io/api/:splat 200!
+/api/* https://docs.astronomer.io/api/:splat 301!
 
 
 # CLI restructuring redirects
