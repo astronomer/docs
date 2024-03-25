@@ -25,6 +25,12 @@ There are multiple resources for learning about this topic. See also:
 
 :::
 
+:::info
+
+For Astro customers, Astronomer recommends to take advantage of the [Astro Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Airflow environments. See [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -39,18 +45,13 @@ An Airflow connection is a set of configurations that send requests to the API o
 
 Airflow connections can be created by using one of the following methods:
 
-- The [Airflow UI](airflow-ui.md)
-- [Environment variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#environment-variables)
-- The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection)
-- A [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) (a system for managing secrets external to Airflow)
-- The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli)
-- The [`airflow_settings.yaml` file](https://docs.astronomer.io/astro/cli/develop-project#configure-airflow_settingsyaml-local-development-only) for Astro CLI users
-
-:::info
-
-Astro users can additionally take advantage of the [Astro Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager) to store connections in an Astro-managed secrets backend. These connections can be shared across multiple deployed and local Airflow environments. See [Manage Astro connections in branch-based deploy workflows](https://docs.astronomer.io/astro/astro-use-case/use-case-astro-connections).
-
-:::
+- The [Astro Environment Manager](https://docs.astronomer.io/astro/manage-connections-variables#astro-cloud-ui-environment-manager), which is the recommended way for Astro customers to manage connections.
+- The [Airflow UI](airflow-ui.md).
+- [Environment variables](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#environment-variables).
+- The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection).
+- A [secrets backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html) (a system for managing secrets external to Airflow).
+- The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-cli).
+- The [`airflow_settings.yaml` file](https://docs.astronomer.io/astro/cli/develop-project#configure-airflow_settingsyaml-local-development-only) for Astro CLI users.
 
 This guide focuses on adding connections using the Airflow UI and environment variables. For more in-depth information on configuring connections using other methods, see the [REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection), [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) and [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 

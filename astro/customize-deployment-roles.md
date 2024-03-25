@@ -5,14 +5,13 @@ id: customize-deployment-roles
 description: Customize your users' permissions for Airflow environments on Astro.
 ---
 
+import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
+
+<EnterpriseBadge/>
+
 :::publicpreview
 :::
 
-:::info
-
-This feature is available only in the Enterprise tier.
-
-:::
 
 A user entity's Deployment role determines their level of access to a specific Deployment in a Workspace. User entities with [Workspace Member permissions](user-permissions.md#workspace-roles) or higher have some level of access to all Deployments in a Workspace, and these permissions can be increased using Deployment roles.
 
