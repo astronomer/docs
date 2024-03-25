@@ -28,7 +28,7 @@ colors:
 logo: 
   light: ./docs/assets/logo-light.svg
   dark: ./docs/assets/logo-dark.svg
-  href: https://www.astronomer.io/
+  href: https://docs.astronomer.io/api
 navbar-links:
   - type: primary
     text: Get Started Free
