@@ -8,6 +8,7 @@ toc_max_heading_level: 3
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import BusinessBadge from '@site/src/components/BusinessBadge';
 
 This guide provides the steps for integrating identity providers on Astro to enable Single Sign-On (SSO) for your users. After you complete the integration for your organization:
 
@@ -431,6 +432,7 @@ To enable or disable just-in-time provisioning:
 3. In **Automatic Membership**, select the default Organization role for users who log in to Astro for the first time through your identity provider. To disable just-in-time provisioning, select **Disabled**.
 
 ### Restrict authentication options
+<BusinessBadge/>
 
 By default, users can choose any of the [available authentication methods](#supported-sso-identity-providers) when logging into Astro. You can remove specific authentication options, such as GitHub or Google, so that users can use only the methods that your Organization wants to support, like your third party identity provider.
 

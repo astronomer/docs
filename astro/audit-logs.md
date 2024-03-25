@@ -3,6 +3,9 @@ title: "Export Astro audit logs"
 id: audit-logs
 sidebar_label: Export audit logs
 ---
+import TeamBadge from '@site/src/components/TeamBadge';
+
+<TeamBadge/>
 
 :::warning
 

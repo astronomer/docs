@@ -40,7 +40,10 @@ Configure a contact email to get proactive alerts directly from Astronomer suppo
 In addition to alert emails for your Deployments, Astronomer recommends configuring [Astro alerts](alerts.md) and subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe to the status page, you'll receive email notifications about system-wide incidents as they happen.
 
 ## Enforce CI/CD deploys
-By default, any user can deploy code either directly from the Astro CLI or from a CI/CD process that is authenticated with an API token. To help your team protect production environments from manual code deploys that circumvent your organization's CI/CD processes and checks, you can configure a Deployment so that users can't deploy code manually using the Astro CLI. 
+
+<BusinessBadge/>
+
+By default, any user can deploy code either directly from the Astro CLI or from a CI/CD process that is authenticated with an API token. To help your team protect production environments from manual code deploys that circumvent your organization's CI/CD processes and checks, you can configure a Deployment so that users can't deploy code manually using the Astro CLI.
 
 After you enable CI/CD enforcement on a Deployment, the Deployment accepts a deploy only if the deploy is authenticated using a Deployment API token, Workspace API token, or Organization API token. Astronomer recommends enabling this setting for all production environments.
 
