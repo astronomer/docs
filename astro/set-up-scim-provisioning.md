@@ -152,9 +152,9 @@ Complete the manual setup if you configured your existing Astro app without usin
 12. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
 13. In the **Attribute Mappings** table, add the following mappings:
 
-    | Microsoft Entra ID Attribute                            | Astro Attribute |
-    | ----------------------------------------------------------- | --------------- |
-    | userPrincipalName                                           | userName        |
+    | Microsoft Entra ID Attribute                                | Astro Attribute |
+    |-------------------------------------------------------------| --------------- |
+    | mail                                                        | userName        |
     | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |
     | displayName                                                 | displayName     |
 
