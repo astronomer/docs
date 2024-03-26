@@ -162,7 +162,7 @@ Complete the manual setup if you configured your existing Astro app without usin
 
   This setup assumes that `mail` contains your users' email. If you use a field other than `mail` to define your user email, replace `mail` with the attribute you use.
 
-  Whether you choose to use `mail` or a different attribute, you must use the same Microsoft Entra ID Attribute mfor both your SSO and SCIM configurations.
+  Whether you choose to use `mail` or a different attribute like `userPrincipleName`, you must use the same Microsoft Entra ID Attribute for both your SSO and SCIM configurations.
 
   :::
 
