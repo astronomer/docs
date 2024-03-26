@@ -39,9 +39,9 @@ Endpoints can return subsets of specific attributes based on the permissions of 
 
 The maximum number of API requests you can make with the same API token depends on the type of request you're making:
 
-- **`POST` requests**: You can make a make a maximum of 5 requests per second using the same API token.
+- **`POST` requests**: You can make a make a maximum of 10 requests per second using the same API token.
 - **`DELETE` requests**: You can make a make a maximum of 5 requests per second using the same API token.
-- **`GET` requests**: You can make a make a maximum of 10 requests per second using the same API token.
+- **`GET` requests**: You can make a make a maximum of 25 requests per second using the same API token.
 
 ## Idempotent requests
 
@@ -53,10 +53,11 @@ Astro supports different levels of [idempotency](https://en.wikipedia.org/wiki/I
 
 ## API status codes
 
-If the API returns a `200` code, your API request was a success. If the API returns a `40x` or `500` code, your request resulted in one of the following errors:
+If the API returns a `200` or `204` code, your API request was a success. If the API returns a `40x` or `500` code, your request resulted in one of the following errors:
 
 - `400`: **Bad Request** - Your request was not successful because it was not formatted properly, possibly due to missing required parameters. 
 - `401`: **Unauthorized** - Your request did not include an API token. 
+- `404`: **Resource Not Found** - The resource you're trying to access does not exist.
 - `403`: **Forbidden** - The API token you included did not have sufficient permissions to complete the request.
 - `500`: **Internal sever error** - The request could not be completed because of an error caused by Astro.
 
