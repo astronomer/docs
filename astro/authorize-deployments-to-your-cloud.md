@@ -10,6 +10,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HostedBadge from '@site/src/components/HostedBadge';
 
+<HostedBadge/>
+
 When you create an Airflow connection from a Deployment to access cloud resources, Airflow uses your connection details to access those services. You can add credentials to your Airflow connections to authenticate, but it can be risky to add secrets like passwords to your Airflow environment.
 
 To avoid adding secrets to your Airflow connection, you can directly authorize your Astro Deployment to access AWS or GCP cloud services using workload identity. Astronomer recommends using a workload identity in most cases to improve security and avoid managing credentials across your Deployments. If you have less strict security requirements, you can still use any of the methods described in [Airflow connection guides](https://docs.astronomer.io/learn/connections) to manage your connection authorization.
@@ -95,8 +97,6 @@ If you don't see **Amazon Web Services** as a connection type in the Airflow UI,
 
 ### Attach a service account to your Deployment
 
-<HostedBadge/>
-
 You can attach a custom GCP service account to your Deployment to grant the Deployment all of the service account's permissions.
 
 Using service accounts provides the greatest amount of flexibility for authorizing Deployments to your cloud. For example, you can use existing service accounts on new Deployments, or your can attach a single service account to multiple Deployments that all have the same level of access to your cloud.
@@ -124,7 +124,7 @@ If your organization has requirements over how service accounts are managed outs
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
 2. In the Astro UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
-3. In the Google Cloud Console, open the **IAM & Admin > Service Accounts** menu, then open the service account you just created. 
+3. In the Google Cloud Console, open the **IAM & Admin > Service Accounts** menu, then open the service account you just created.
 4. In the **Actions** column, click **Manage Permissions**, then click **Grant Access**. In the modal that appears, enter your Deployment's workload identity service account in the **Add Principals** field and select the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) in the **Assign Roles** field.
 5. Complete one of the following options for your Deployment to access your cloud resources:
 
@@ -175,8 +175,6 @@ If you don't see **Google Cloud** as a connection type in the Airflow UI, ensure
 </TabItem>
 
 <TabItem value="azure">
-
-<HostedBadge/>
 
 In this setup, you'll authorize an existing user-assigned managed identity to a resource on Azure, then give permissions to your Deployment to assume that managed identity.
 
