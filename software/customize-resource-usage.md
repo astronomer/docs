@@ -32,9 +32,10 @@ To limit users to only configure Deployments using custom resources, set the fol
 ```yaml
 astronomer:
   houston:
-    deployments:
-      resourceProvisioningStrategy:
-        astroUnitsEnabled: false
+    config:
+      deployments:
+        resourceProvisioningStrategy:
+          astroUnitsEnabled: false
 ```
 
 Then, save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
