@@ -152,15 +152,17 @@ Complete the manual setup if you configured your existing Astro app without usin
 12. In **Target Object Actions**, tick the checkboxes for **Create**, **Update**, and **Delete**.
 13. In the **Attribute Mappings** table, add the following mappings:
 
-    | Microsoft Entra ID Attribute                            | Astro Attribute |
-    | ----------------------------------------------------------- | --------------- |
-    | userPrincipalName                                           | userName        |
+    | Microsoft Entra ID Attribute                                | Astro Attribute |
+    |-------------------------------------------------------------| --------------- |
+    | mail                                                        | userName        |
     | Switch([IsSoftDeleted], , "False", "True", "True", "False") | active          |
     | displayName                                                 | displayName     |
 
   :::warning
 
-  This setup assumes that `userPrincipalName` contains your users' email. If you use a field other than `userPrincipalName` to define your user email, replace `userPrincipalName` with the attribute you use.
+  This setup assumes that `mail` contains your users' email. If you use a field other than `mail` to define your user email, replace `mail` with the attribute you use.
+
+  Whether you choose to use `mail` or a different attribute like `userPrincipleName`, you must use the same Microsoft Entra ID Attribute for both your SSO and SCIM configurations.
 
   :::
 
