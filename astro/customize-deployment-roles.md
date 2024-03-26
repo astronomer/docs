@@ -21,7 +21,7 @@ In situations where you need fine-grained Deployment access, you can create cust
 
 :::tip
 
-You can learn more about how Astro implements RBAC and see common use cases in the Astro Academy Learning Byte for [Custom Deployment Roles](https://academy.astronomer.io/learning-bytes-custom-deployment-roles).
+Watch the Astro Academy Learning Byte video for [Custom Deployment Roles](https://academy.astronomer.io/learning-bytes-custom-deployment-roles) to review some common use cases and learn more about how Astro implements RBAC.
 
 :::
 

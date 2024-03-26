@@ -25,7 +25,7 @@ Dashboards help you quickly identify opportunities to optimize how your team use
 
 :::tip
 
-You can learn more about how Astro provides visibility for platform admins into your teams' Airflow Deployments with the Astro Academy [Reporting](https://academy.astronomer.io/learning-bytes-reporting) Learning Byte.
+Watch the Astro Academy [Reporting](https://academy.astronomer.io/learning-bytes-reporting) Learning Byte video to learn more about how observe your teams' Airflow Deployments.
 
 :::
 

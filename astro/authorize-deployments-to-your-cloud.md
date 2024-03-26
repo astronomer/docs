@@ -21,7 +21,7 @@ This guide explains how to authorize your Deployment to a cloud using workload i
 
 :::tip
 
-You can learn more about what a managed identity is and how to set up passwordless authentication for the Google Cloud Provider with the Astro Academy [Customer Workload Managed Identity](https://academy.astronomer.io/learning-bytes-customer-workload-managed-identity) Learning Byte.
+Watch the Astro Academy [Customer Workload Managed Identity](https://academy.astronomer.io/learning-bytes-customer-workload-managed-identity) Learning Byte video to learn more about managed identities and how to set up passwordless authentication for GCP.
 
 :::
 
