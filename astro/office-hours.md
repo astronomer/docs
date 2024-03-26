@@ -8,7 +8,7 @@ import TeamBadge from '@site/src/components/TeamBadge';
 
 <TeamBadge/>
 
-Office hours are a way for you to meet with Astronomer data engineers and ask about Astro and Airflow features and best practices . Office hours are available weekly on a first-come, first-served basis. An office hour session is typically 30 minutes long.
+Office hours are a way for you to meet with Astronomer data engineers and ask about Astro and Airflow features and best practices. Office hours are available weekly on a first-come, first-served basis. An office hour session is typically 30 minutes long.
 
 :::warning
 
