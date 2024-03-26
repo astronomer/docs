@@ -5,7 +5,7 @@ id: upgrade-runtime
 description: "Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available."
 ---
 
-
+import HostedBadge from '@site/src/components/HostedBadge';
 
 New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
@@ -119,6 +119,25 @@ Consider the following when you upgrade Astro Runtime:
 - You can't downgrade a Deployment on Astro to a lower version of Astro Runtime unless you [roll back to a previous deploy](deploy-history.md).
 
 To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](runtime-release-notes.md). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+
+### Run a deprecated Astro Runtime version
+
+<HostedBadge/>
+
+If you're migrating to Astro from OSS Airflow or Astro Hybrid, where your Deployments run using an older version of Airflow or a deprecated version of the Astro Runtime, you can now use stepwise migration to complete your migration in stages. First, you can create Deployments with a deprecated version of the Astro Runtime using the Astro API to move to an Astro Hosted environment. Then, you can upgrade your code to the most up-to-date version of the Astro Runtime.
+
+Deployments that run deprected Astro Runtime versions will only receive support as [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.md#astro-runtime-maintenance-policy), and might advise you to upgrade your runtime to the latest version of Astro to resolve performance issues or bugs.
+
+:::info
+
+When you choose a deprecated version of Astro Runtime, Astronomer recommends always choosing the latest patch version that includes your desired Airflow version. Some earlier patch versions of Astro Runtime include unexpected behavior and can't be used even as a deprecated version. For more information about which versions are affected, see the [Version upgrade considerations](#version-upgrade-considerations).
+
+:::
+
+1. Contact [Astronomer support](astro-support.md) and request the ability to run deprecated versions of Astro Runtime.
+2. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
+
+After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md).
 
 ### Version upgrade considerations
 

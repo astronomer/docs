@@ -29,6 +29,15 @@ After you create a Deployment, you can deploy DAGs to it using the Astro CLI on 
 
 Every Deployment is hosted on an Astro cluster with its own dedicated resources that you can [customize](deployment-resources.md) to fine-tune your resource usage. To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace. See [Deployment network isolation](data-protection.md#deployment-network-isolation).
 
+:::info
+
+If you're migrating to Astro from OSS Airflow or another Astronomer product, and you currently use an older version of Airflow, you can still create Deployments with the corresponding version of Astro Runtime even if it is deprecated according to the [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.md#astro-runtime-maintenance-policy). This allows you to migrate your DAGs to Astro without needing to make any code changes and then immediately upgrade to a new version of Airflow. Note that after you migrate your DAGs, Astronomer recommends upgrading to a supported version of Astro Runtime as soon as you can.
+
+See [Run a deprecated Astro Runtime version](upgrade-runtime.md#run-a-deprecated-astro-runtime-version).
+
+:::
+
+
 ## Prerequisites
 
 - A [Workspace](manage-workspaces.md)
