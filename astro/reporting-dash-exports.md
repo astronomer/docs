@@ -19,6 +19,12 @@ As an Astro administrator, you can export reporting data to share with other tea
 
 When you export reporting data, Astro exports the last [one million rows of data](https://help.sigmacomputing.com/docs/download-export-and-upload-limitations) from a specific dashboard in the file format of your choice. Use this document to learn about the different ways you can trigger the export process.
 
+:::tip
+
+You can learn more about how Astro provides visibility for platform admins into your teams' Airflow Deployments with the Astro Academy [Reporting](https://academy.astronomer.io/learning-bytes-reporting) Learning Byte.
+
+:::
+
 ## Prerequisites
 
 - Only users with **Organization Billing Admin** [user permissions](user-permissions.md#organization-roles) can access Organization dashboards.
@@ -79,4 +85,3 @@ A reporting dashboard alert contains a message and a data export that Astro send
     <img src={require("../static/img/docs/dash-export-alert.png").default} alt="Configure the conditions that trigger the reporting dashboard to send you a data report for a particular dashboard element." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 When you receive a reporting dashboard alert in an email, the sender appears as **Sigma Computing**. The subject line also includes the name of the dashboard element's data you exported.
-

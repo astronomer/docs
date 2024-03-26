@@ -21,6 +21,12 @@ This guide explains how to authorize your Deployment to a cloud using workload i
 - Authorize your Deployment to your cloud services.
 - Create an Airflow connection to access your cloud services.
 
+:::tip
+
+You can learn more about what a managed identity is and how to set up passwordless authentication for the Google Cloud Provider with the Astro Academy [Customer Workload Managed Identity](https://academy.astronomer.io/learning-bytes-customer-workload-managed-identity) Learning Byte.
+
+:::
+
 ## Prerequisites
 
 The Astro cluster running your Deployment must be connected to your cloud's network. See [Networking overview](networking-overview.md).
