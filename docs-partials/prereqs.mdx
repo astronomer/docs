@@ -17,6 +17,14 @@ On the cloud service from which you're migrating, ensure that you have:
 - Read access to any source control tool that hosts your current Airflow code, such as GitHub.
 - Permission to create new repositories on your source control tool.
 - (Optional) Access to your secrets backend.
-- (Optional) Permission to create new CI/CD pipelines. 
+- (Optional) Permission to create new CI/CD pipelines.
 
 All source Airflow environments on 1.x need to be upgraded to at least Airflow 2.0 before you can migrate them. Astronomer professional services can help you with the upgrade process.
+
+:::info
+
+If you're migrating to Astro from OSS Airflow or another Astronomer product, and you currently use an older version of Airflow, you can still create Deployments with the corresponding version of Astro Runtime even if it is deprecated according to the [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.md#astro-runtime-maintenance-policy). This allows you to migrate your DAGs to Astro without needing to make any code changes and then immediately upgrade to a new version of Airflow. Note that after you migrate your DAGs, Astronomer recommends upgrading to a supported version of Astro Runtime as soon as you can.
+
+See [Run a deprecated Astro Runtime version](upgrade-runtime.md#run-a-deprecated-astro-runtime-version).
+
+:::
