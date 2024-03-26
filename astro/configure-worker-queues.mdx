@@ -57,7 +57,8 @@ The following table lists all available worker types on Astro Deployments.
 
 All worker types additionally have 10 GiB of ephemeral storage that your tasks can use when storing small amounts of data within the worker.
 
-:::info Hybrid worker type setup
+<details>
+  <summary><strong>Astro Hybrid worker type setup</strong></summary>
 
 On Astro Hybrid clusters, worker type is defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on a Hybrid AWS cluster hosted on your cloud. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
 
@@ -71,7 +72,7 @@ Your Organization can enable up to 10 additional different worker types for each
 
 For more information on requesting cluster changes, see [Manage Hybrid clusters](manage-hybrid-clusters.md).
 
-:::
+</details>
 
 ## Default worker queue
 
