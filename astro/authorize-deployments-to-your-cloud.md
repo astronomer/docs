@@ -19,6 +19,12 @@ This guide explains how to authorize your Deployment to a cloud using workload i
 - Authorize your Deployment to your cloud services.
 - Create an Airflow connection to access your cloud services.
 
+:::tip
+
+Watch the Astro Academy [Customer Workload Managed Identity](https://academy.astronomer.io/learning-bytes-customer-workload-managed-identity) Learning Byte video to learn more about managed identities and how to set up passwordless authentication for GCP.
+
+:::
+
 ## Prerequisites
 
 The Astro cluster running your Deployment must be connected to your cloud's network. See [Networking overview](networking-overview.md).
@@ -124,7 +130,7 @@ If your organization has requirements over how service accounts are managed outs
 
 1. [Create a service account](https://cloud.google.com/iam/docs/service-accounts-create) in the GCP project that you want your Deployment to access. Grant the service account any permissions that the Deployment will need in your GCP project. Copy the service account ID to use later in this setup.
 2. In the Astro UI, select your Deployment, then click **Details**. Copy the Deployment's **Workload Identity**.
-3. In the Google Cloud Console, open the **IAM & Admin > Service Accounts** menu, then open the service account you just created. 
+3. In the Google Cloud Console, open the **IAM & Admin > Service Accounts** menu, then open the service account you just created.
 4. In the **Actions** column, click **Manage Permissions**, then click **Grant Access**. In the modal that appears, enter your Deployment's workload identity service account in the **Add Principals** field and select the [`Service Account Token Creator`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountTokenCreator) in the **Assign Roles** field.
 5. Complete one of the following options for your Deployment to access your cloud resources:
 

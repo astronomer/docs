@@ -19,6 +19,12 @@ There are some circumstances where users should have limited access to Deploymen
 
 In situations where you need fine-grained Deployment access, you can create custom Deployment roles and assign them to users with Workspace Accessor or Workspace Member roles. If a user does not have a Workspace role when you assign them a Deployment role, Astro automatically gives them Workspace Accessor permissions. When you grant a user a Deployment role, they have a specific level of access to a specific Deployment. Use custom Deployment roles to enable users to collaborate in the same Workspace with only the minimum permissions they require.
 
+:::tip
+
+Watch the Astro Academy Learning Byte video for [Custom Deployment Roles](https://academy.astronomer.io/learning-bytes-custom-deployment-roles) to review some common use cases and learn more about how Astro implements RBAC.
+
+:::
+
 ## Prerequisites
 
 - Organization Owner permissions to create, update, and delete custom roles.
