@@ -55,7 +55,7 @@ If you're running a high task volume or cannot tolerate startup latency, Astrono
 
 :::info Running costs for the Kubernetes executor
 
-On Astro Hosted, the Kubernetes executor runs Pods on the smallest possible [Astro machine type](configure-worker-queues.md#hosted-worker-types) that can support the Pod. For example, if a Pod has a limit of 1 vCPU and 2.5 Gib memory, it will run on an A10 machine type. Astro attempts to group as many possible Pods on the same worker instance before provisioning a new worker machine. This is why charges for the Kubernetes executor appear as Astro machine type usage on your billing statements.
+On Astro Hosted, the Kubernetes executor runs Pods on the smallest possible [Astro machine type](configure-worker-queues.mdx#hosted-worker-types) that can support the Pod. For example, if a Pod has a limit of 1 vCPU and 2.5 Gib memory, it will run on an A10 machine type. Astro attempts to group as many possible Pods on the same worker instance before provisioning a new worker machine. This is why charges for the Kubernetes executor appear as Astro machine type usage on your billing statements.
 
 :::
 
