@@ -136,7 +136,7 @@ If the installation was successful, you should see the following output:
 
 ```sh
 astro version
-Astro CLI Version: {{CLI_VER}}
+Astro CLI Version: {{CLI_VER_LATEST}}
 ```
 
 ## Upgrade the CLI

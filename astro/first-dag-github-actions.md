@@ -47,7 +47,7 @@ If you're on your organization's network and can't access Astro, make a request 
 
 An Astro _Deployment_ is an instance of Apache Airflow that is powered by all core Airflow components, including a webserver, scheduler, and one or more workers. You deploy DAGs to a Deployment, and you can have one or more Deployments within your Workspace.
 
-1. Log in to the [Cloud UI](https://cloud.astronomer.io).
+1. Log in to the [Astro UI](https://cloud.astronomer.io).
 
 2. On the **Deployments** page, click **+ Deployment**.
 
@@ -61,7 +61,7 @@ An Astro _Deployment_ is an instance of Apache Airflow that is powered by all co
 
 :::tip
 
-Astro contains an in-product tutorial that guides you through Steps 2-4 of this document and includes shortcut buttons for some key Astro actions. If you prefer to finish the quickstart this way, open your **Deployments** page in the Cloud UI and choose your Deployment. In the **Deploy your first DAG** section, click **With GitHub Actions** and follow the steps in the window that appears.
+Astro contains an in-product tutorial that guides you through Steps 2-4 of this document and includes shortcut buttons for some key Astro actions. If you prefer to finish the quickstart this way, open your **Deployments** page in the Astro UI and choose your Deployment. In the **Deploy your first DAG** section, click **With GitHub Actions** and follow the steps in the window that appears.
 
 If you don't see the **Deploy your first DAG** option your Deployment page, click **Deploy DAGs ?** to open it.
 
@@ -83,9 +83,9 @@ This repository contains an _Astro project_, which is a collection of files requ
 
 This example repository also includes a pre-configured [Astronomer deploy action](https://github.com/astronomer/deploy-action), which you can use to set up a CI/CD deployment pipeline. In this step, you'll configure the GitHub action to deploy code from your forked repository to Astro and run the workflow.
 
-1. Open two browser windows: one with the [Cloud UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
+1. Open two browser windows: one with the [Astro UI](https://cloud.astronomer.io), and one with your forked GitHub repository.
 
-2. In the Cloud UI, choose the Deployment where you want to deploy your Astro project.
+2. In the Astro UI, choose the Deployment where you want to deploy your Astro project.
 
 3. In GitHub, open your forked repository and click **Actions**.
 
@@ -97,11 +97,11 @@ This example repository also includes a pre-configured [Astronomer deploy action
 
 6. Click **Run workflow**. This opens a modal to enter information about your Astro Deployment.
 
-7. In the Cloud UI, copy your **Deployment ID** from the Deployment information.
+7. In the Astro UI, copy your **Deployment ID** from the Deployment information.
 
 8. In GitHub, paste your **Deployment ID**.
 
-9. In the Cloud UI, click **API Tokens**.
+9. In the Astro UI, click **API Tokens**.
 
 10. Click **+ API Token** to create a new API token, and give the token a **Name** and an **Expiration**.
 
@@ -121,11 +121,11 @@ This automatically deploys the example DAGs in your Astro project to your Deploy
 
 ## Step 4: View your DAG run results
 
-Open your Deployment in the Cloud UI and click **DAGs** in the left sidebar, then click **S3**. From this page, you can see that the `s3` DAG has run exactly once.
+Open your Deployment in the Astro UI and click **DAGs** in the left sidebar, then click **S3**. From this page, you can see that the `s3` DAG has run exactly once.
 
 ![Detailed view of the S3 DAG run outcome.](/img/docs/s3-complete.png)
 
-The **DAGs** page of the Cloud UI includes the most commonly used information and actions from the Airflow UI in one place. If you prefer to view your DAG run in the Airflow UI, click **Open Airflow** in the upper right corner of the page.
+The **DAGs** page of the Astro UI includes the most commonly used information and actions from the Airflow UI in one place. If you prefer to view your DAG run in the Airflow UI, click **Open Airflow** in the upper right corner of the page.
 
 Congratulations! You deployed and ran your first DAG on Astro with GitHub Actions.
 

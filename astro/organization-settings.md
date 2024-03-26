@@ -7,7 +7,7 @@ description: Update high-level settings for an Astro Organization that apply to 
 
 An Organization is the highest management level on Astro. In addition to configuring infrastructure for your Organization, you can update Organization settings that apply to all clusters, Workspaces, Deployments, and users within the Workspace.
 
-This document includes instructions to configure high-level Organization settings from the Cloud UI. To configure more specific Organization-level infrastructure, see:
+This document includes instructions to configure high-level Organization settings from the Astro UI. To configure more specific Organization-level infrastructure, see:
 
 - [Manage users in an Astro Organization](manage-organization-users.md)
 - [Set up authentication and single sign-on for Astro](configure-idp.md)
@@ -20,9 +20,9 @@ This document includes instructions to configure high-level Organization setting
 
 ## Update your Organization name
 
-Your Organization name is a human-readable name that appears in the Cloud UI and in the Astro CLI. Updating your Organization name is a cosmetic change that has no affect on any unique Organization information, such as your Organization ID or short name, which persists for the lifetime of the Organization.
+Your Organization name is a human-readable name that appears in the Astro UI and in the Astro CLI. Updating your Organization name is a cosmetic change that has no affect on any unique Organization information, such as your Organization ID or short name, which persists for the lifetime of the Organization.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. This opens the **General** Organization page.
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. This opens the **General** Organization page.
 2. In the **Organization Detail** section, click **Edit Details**.
 3. Give your Organization a new **Organization Name**, then click **Update Organization**.
 
@@ -32,6 +32,6 @@ When members of your Organization create a local Airflow environment using the A
 
 You can enable or disable this feature based on whether you want Organization members to access Astro-configured connection details from their local machines.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. This opens the **General** Organization page.
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. This opens the **General** Organization page.
 2. In the **Organization Detail** section, click **Edit Details**.
 3. Click the **Environment Secrets Fetching** toggle to **Enabled** or **Disabled**, then click **Update Organization**.

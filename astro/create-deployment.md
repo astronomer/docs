@@ -9,7 +9,7 @@ An Astro Deployment is an Airflow environment that is powered by [Astro Runtime]
 
 There are three ways to create a Deployment:
 
-- Manually, using the Cloud UI. This is the most basic way to create a Deployment and is the focus of this document.
+- Manually, using the Astro UI. This is the most basic way to create a Deployment and is the focus of this document.
 - Programmatically, using [`astro deployment create`](cli/astro-deployment-create.md).
 - Programmatically, using a Deployment template file. See [Manage Deployments as code](manage-deployments-as-code.md).
 
@@ -35,7 +35,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
 
 ## Create a Deployment
 
-1. In the Cloud UI, go to **Deployments**.
+1. In the Astro UI, go to **Deployments**.
 
 2. Click **+ Deployment**.
 
@@ -56,7 +56,7 @@ Every Deployment is hosted on an Astro cluster with its own dedicated resources 
      A confirmation message appears indicating that the Deployment is in progress. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
 
 You can continue to access your other Deployments by selecting the **Deployments** link.
-    
+
 For more information about possible Deployment health statuses, see [Deployment health](deployment-health-incidents.md).
 
 ## Next steps

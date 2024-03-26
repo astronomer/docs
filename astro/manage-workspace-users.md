@@ -15,7 +15,7 @@ To add, edit, or remove Workspace users from a given Workspace, you need either 
 
 ## Add a user to a Workspace
 
-1. In the Cloud UI, click **Workspace Settings** > **Access Management**.
+1. In the Astro UI, click **Workspace Settings** > **Access Management**.
    
 2. In the **Users** tab, click **+ Member**.
    
@@ -29,7 +29,7 @@ You can also add groups of users to a Workspace through Teams. See [Manage Teams
 
 ## Update or remove a Workspace user
 
-1. In the Cloud UI, go to **Workspace Settings** > **Access Management**.
+1. In the Astro UI, go to **Workspace Settings** > **Access Management**.
 
 2. Click **Edit** next to the user's name.
 

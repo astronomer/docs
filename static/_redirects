@@ -13,6 +13,7 @@
 /astro/api/organization-api-tokens.md /astro/organization-api-tokens 301
 /astro/ci-cd-templates/astro/set-up-ci-cd /astro/set-up-ci-cd 301
 /img/integrations/snowpark.png /learn/airflow-snowpark 301
+/learn/external-python-operator /learn/airflow-isolated-environments 301
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
 /software/0.34/* /software/:splat
@@ -41,6 +42,8 @@
 /astro/connect-external-services https://docs.astronomer.io/astro/category/connect-to-external-resources 301
 /astro/configure-deployment-resources /astro/deployment-settings 301
 /astro/view-logs#export-task-logs-to-datadog-aws-only /astro/view-logs#export-task-logs-to-datadog 301
+/astro/reporting-dash-exports#export-reporting-data-to-email /astro/reporting-dash-exports#export-reporting-data 301
+/astro/reporting-dash-exports#schedule-an-emailed-data-report   /astro/reporting-dash-exports#schedule-a-data-report 301
 
 # tutorial redirects
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
@@ -67,6 +70,7 @@
 # deprecated docs
 /astro/known-limitations /astro 301
 /astro/data-lineage-support-and-compatibility /astro/set-up-data-lineage 301
+/astro/organization-metrics /astro/reporting-dashboard 301
 
 # redirect base domain cloud links to astro path
 /add-user /astro/add-user 301
@@ -320,6 +324,15 @@
 /astro/manage-connections-variables#cloud-ui-connections /astro/manage-connections-variables#astro-cloud-ui-environment-manager 301!
 /astro/astro-use-case/use-case-astro-connections /astro/use-cases/connections-branch-deploys 301
 
+# API redirects
+/api https://astronomer.docs.buildwithfern.com/api/overview 200!
+/api/* https://astronomer.docs.buildwithfern.com/api/:splat 200!
+/astro/api/overview https://docs.astronomer.io/api/overview 301!
+/astro/api/get-started https://docs.astronomer.io/api/get-started 301!
+/astro/api/versioning-and-support https://docs.astronomer.io/api/versioning-and-support 301!
+/astro/api/iam-api-reference https://docs.astronomer.io/api/iam-api-reference 301!
+/astro/api/platform-api-reference https://docs.astronomer.io/api/platform-api-reference 301!
+
 # CLI restructuring redirects
 /astro/cli/run-airflow-locally#troubleshoot-KubernetesPodOperator-issues /astro/cli/troubleshoot-locally#troubleshoot-KubernetesPodOperator-issues 301
 /astro/cli/run-airflow-locally#ports-are-not-available-for-my-local-airflow-webserver /astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver 301
@@ -358,3 +371,8 @@
 # redirect Astro use-cases to renamed best-practices section
 /astro/use-cases/connections-branch-deploys /astro/best-practices/connections-branch-deploys
 /astro/use-cases/airflow-vs-astro-alerts /astro/best-practices/airflow-vs-astro-alerts
+
+# redirect deprecated docs to new blog posts
+/learn/airflow-talend-integration https://www.astronomer.io/blog/orchestrate-talend-with-airflow/
+/learn/airflow-azure-data-explorer https://www.astronomer.io/blog/orchestrate-adx-with-airflow/
+/learn/use-case-ml-airflow-snowpark-weaviate https://www.astronomer.io/blog/ml-with-snowpark-and-airflow/

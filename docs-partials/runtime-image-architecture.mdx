@@ -81,7 +81,7 @@ Astro Runtime {{RUNTIME_VER}} includes the following pre-installed open source p
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
-- OpenLineage [`apache-airflow-providers-openlineage`](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html) 
+- OpenLineage [`apache-airflow-providers-openlineage`](https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/index.html)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
 
@@ -93,6 +93,12 @@ To determine the version of any provider package installed in your current Astro
 
 ```
 docker run --rm <runtime-image> pip freeze | grep <provider>
+```
+
+For example, to find the version of the current package for Astronomer providers, run the following command:
+
+```
+astro dev bash pip freeze | grep astronomer-providers
 ```
 
 ## Python versioning

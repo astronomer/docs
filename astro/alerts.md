@@ -174,11 +174,11 @@ The **DAG Trigger** communication channel works differently from other communica
 </TabItem>
 </Tabs>
 
-## Step 2: Create your Workspace alert in the Cloud UI
+## Step 2: Create your Workspace alert in the Astro UI
 
-In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
+In the Astro UI, you can enable alerts from the **Workspace Settings** page.
 
-1. In the Cloud UI, click **Alerts**.
+1. In the Astro UI, click **Alerts**.
 
 2. Click **Add Alert**.
 
@@ -247,7 +247,7 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 
 Astro alerts work whether your DAG run is manual or scheduled, so you can test your configured Astro alerts by failing your DAG manually.
 
-1. In the Cloud UI, click **DAGs**.
+1. In the Astro UI, click **DAGs**.
 
 2. Choose the DAG that has your alert configured.
 
@@ -257,7 +257,7 @@ Astro alerts work whether your DAG run is manual or scheduled, so you can test y
 
   ![Manually marking a successful DAG run as Failed.](/img/docs/astro_alerts_manual_fail.png)
 
-5. Check your Slack, PagerDuty, or Email alerts for your DAG failure alert. The alert includes information about the DAG, Workspace, Deployment, and data lineage associated with the failure as well as direct links to the Cloud UI.
+5. Check your Slack, PagerDuty, or Email alerts for your DAG failure alert. The alert includes information about the DAG, Workspace, Deployment, and data lineage associated with the failure as well as direct links to the Astro UI.
 
     ![Example of a Slack test alert.](/img/docs/slack_alerts_example.png)
 

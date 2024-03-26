@@ -11,7 +11,7 @@ import WorkerTypeTable from "../docs-partials/worker-type-table.mdx";
 
 :::warning
 
-This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
+This document applies only to [Astro Hosted](astro-architecture.md) and does not apply to Astro Hybrid. To see whether you're an Astro Hosted user, click your Workspace name in the upper left corner of the Astro UI, then click **Organization Settings**. On the **General** page, your Astro product type is listed under **Product Type**.
 
 For Astro Hybrid resource reference material, see:
 
@@ -51,13 +51,13 @@ A _standard cluster_ is a multi-tenant cluster that's hosted and managed by Astr
 Currently, standard clusters are available on the following clouds and regions:
 
 <Tabs
-    defaultValue="aws"
-    groupId= "standard-cluster-regions"
-    values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
-    ]}>
+defaultValue="aws"
+groupId= "standard-cluster-regions"
+values={[
+{label: 'AWS', value: 'aws'},
+{label: 'GCP', value: 'gcp'},
+{label: 'Azure', value: 'azure'},
+]}>
 <TabItem value="aws">
 
 | Code             | Region                   |
@@ -93,18 +93,18 @@ Currently, standard clusters are available on the following clouds and regions:
 
 ## Dedicated cluster regions
 
-A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Cloud UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
+A _dedicated cluster_ is cluster that Astronomer provisions solely for use by your Organization. You can create new dedicated clusters from the Astro UI in a variety of clouds and regions. To configure dedicated clusters, see [Create a dedicated cluster](create-dedicated-cluster.md).
 
 Currently, dedicated clusters are available on the following clouds and regions:
 
 <Tabs
-    defaultValue="aws"
-    groupId= "dedicated-cluster-regions"
-    values={[
-        {label: 'AWS', value: 'aws'},
-        {label: 'GCP', value: 'gcp'},
-        {label: 'Azure', value: 'azure'},
-    ]}>
+defaultValue="aws"
+groupId= "dedicated-cluster-regions"
+values={[
+{label: 'AWS', value: 'aws'},
+{label: 'GCP', value: 'gcp'},
+{label: 'Azure', value: 'azure'},
+]}>
 <TabItem value="aws">
 
 | Code             | Name                      |
@@ -126,20 +126,23 @@ Currently, dedicated clusters are available on the following clouds and regions:
 
 <TabItem value="azure">
 
-| Code            | Region         |
-| --------------- | -------------- |
-| `australiaeast` | Australia East |
-| `brazilsouth`   | Brazil South   |
-| `canadacentral` | Canada Central |
-| `centralindia`  | Central India  |
-| `eastus2`       | East US        |
-| `eastus2`       | East US 2      |
-| `francecentral` | France Central |
-| `japaneast`     | Japan East     |
-| `northeurope`   | North Europe   |
-| `uksouth`       | UK South       |
-| `westeurope`    | West Europe    |
-| `westus2`       | West US 2      |
+| Code             | Region           |
+| ---------------- | ---------------- |
+| `australiaeast`  | Australia East   |
+| `brazilsouth`    | Brazil South     |
+| `canadacentral`  | Canada Central   |
+| `centralindia`   | Central India    |
+| `centralus`      | Central US       |
+| `eastus2`        | East US          |
+| `eastus2`        | East US 2        |
+| `francecentral`  | France Central   |
+| `japaneast`      | Japan East       |
+| `northeurope`    | North Europe     |
+| `uksouth`        | UK South         |
+| `southcentralus` | South Central US |
+| `westeurope`     | West Europe      |
+| `westus2`        | West US 2        |
+| `westus3`        | West US 3        |
 
 </TabItem>
 

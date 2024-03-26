@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><pubDate>Mon, 26 Feb 2024 13:53:05 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 10.4.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</link><pubDate>Mon, 26 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</guid><description><![CDATA[<ul>
 <li>Release date: February 26, 2024</li>
 <li>Airflow version: 2.8.2</li>
@@ -887,3 +888,5 @@
 <li>Fixed an issue where tasks would fail when running with <code>run_as_user</code> (<a href="https://github.com/astronomer/airflow/commit/075622cbe">commit</a>)</li>
 <li>Fixed an issue where tasks would fail when running with <code>CeleryKubernetesExecutor</code> (<a href="https://github.com/astronomer/airflow/commit/90aaf3d48">commit</a>)</li>
 </ul>]]></description></item></channel></rss>
+=======
+>>>>>>> 4a363a40011afe9c49300b9ae27316728914d7e2

@@ -5,7 +5,7 @@ id: log-in-to-astro
 description: "Learn how you can use the Cloud user interface (UI) and the Astro command-line interface (CLI) to log in to Astro."
 ---
 
-You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, Deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Cloud UI or the Astro CLI for development on Astro.
+You can use the Astro UI and the Astro CLI to view and modify your Workspaces, Deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Astro UI or the Astro CLI for development on Astro.
 
 ## Prerequisites
 
@@ -13,9 +13,9 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 - The [Astro CLI](cli/overview.md).
 - An email address with a domain that matches the domain configured for your Organization.
 
-## Log in to the Cloud UI
+## Log in to the Astro UI
 
-Go to `https://cloud.astronomer.io`, and select one of the following options to access the Cloud UI:
+Go to `https://cloud.astronomer.io`, and select one of the following options to access the Astro UI:
 
 - To authenticate with single sign-on (SSO), enter your email and click **Continue**. If your Organization has SSO enabled, you'll be redirected to your identity provider authentication screen.
 - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
@@ -39,20 +39,20 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
 
     If this is your first time logging in, the Astronomer Authorize App dialog appears. Click **Accept** to allow Astronomer to access your profile and email and allow offline access.
 
- 4. Select one of the following options to access the Cloud UI:
+ 4. Select one of the following options to access the Astro UI:
 
     - Enter your email and click **Continue**.
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    Confirmation messages appear in the Cloud UI and in the Astro CLI indicating that your login was successful and that your computer is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, run [astro workspace switch](cli/astro-workspace-switch.md).
+    Confirmation messages appear in the Astro UI and in the Astro CLI indicating that your login was successful and that your computer is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, run [astro workspace switch](cli/astro-workspace-switch.md).
 
 ## Log in from a browserless system
 
 The following options are available if you're unable to use a browser for authentication:
 
 - Run `astro login -t` to log in with an authentication token. To obtain an authentication token on a separate machine, go to `https://cloud.astronomer.io/token`.
-- Run `astro login -l` to retrieve a Cloud UI log in URL and then copy the URL. In a separate terminal session, run `curl -u <user-email>:<password> <returned-url>`. This option doesn't work if you're using an identity provider (IdP) for account authentication.
+- Run `astro login -l` to retrieve an Astro UI log in URL and then copy the URL. In a separate terminal session, run `curl -u <user-email>:<password> <returned-url>`. This option doesn't work if you're using an identity provider (IdP) for account authentication.
 
 ## Access a different base domain
 
@@ -81,22 +81,22 @@ For Astro users, the base domain is `cloud.astronomer.io`. For Astronomer Softwa
 
 ## Switch Organizations
 
-You can belong to more than one Astro Organization. Having a role in an Organization does not guarantee access to the Organization through the Cloud UI. To access another Organization, you need to be able to authenticate with one of the enabled authentication methods.
+You can belong to more than one Astro Organization. Having a role in an Organization does not guarantee access to the Organization through the Astro UI. To access another Organization, you need to be able to authenticate with one of the enabled authentication methods.
 
-1. Log in to the Cloud UI. By default, the Cloud UI opens the first Organization that you joined.
+1. Log in to the Astro UI. By default, the Astro UI opens the first Organization that you joined.
 2. In the top navigation bar, click the name of your current Organization.
 3. Click **Switch Organization**.
 4. Select the Organization that you want to switch to.
 
 ## Reset your Astro password
 
-If you log in to Astro with a text password, you can reset your password from the Cloud UI login screen.
+If you log in to Astro with a text password, you can reset your password from the Astro UI login screen.
 
 1. Go to `cloud.astronomer.io`. If you are logged in, log out.
 2. On the login screen, enter your email address, then click **Continue**.
 3. Click **Forgot password?**
 
-    ![Button to reset password on the Cloud UI login page](/img/docs/reset-password.png)
+    ![Button to reset password on the Astro UI login page](/img/docs/reset-password.png)
 
 4. Confirm your user email address is correct, then click **Continue**. Astronomer sends an email with a password reset option to the user email address.
 5. Follow the instructions in the email sent by Astronomer to reset your password. 

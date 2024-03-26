@@ -9,7 +9,7 @@ You can import any Airflow operator available on the Astronomer Registry and run
 
 ## Use Airflow operator cells
 
-1. In the Cloud UI, select **Cloud IDE**.
+1. In the Astro UI, select **Cloud IDE**.
 
 2. Select a project.
 
@@ -47,7 +47,7 @@ To import a custom operator that your team uses into the Astro Cloud IDE, create
 
 1. If you're using a custom cell type to call custom operator code, [link your IDE project to a Git repository](deploy-project.md#commit-your-project-to-a-git-repository) and add your custom operator code to the `include` folder of your repository.
    
-2. In the Cloud UI, select **Cloud IDE**.
+2. In the Astro UI, select **Cloud IDE**.
 
 3. Select a project.
 

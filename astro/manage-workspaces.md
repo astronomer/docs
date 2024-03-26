@@ -26,13 +26,13 @@ To create a Workspace, you must have an [Organization-level](user-permissions.md
 
 To create a Workspace, click the **Add Workspace** button from the **Overview** tab.
 
-![Add Workspace button in the Cloud UI](/img/docs/add-workspace.png)
+![Add Workspace button in the Astro UI](/img/docs/add-workspace.png)
 
 During this initial setup, you can configure a Workspace's name and description. All further Workspace configuration is completed in the Workspace view.
 
 ## Workspace view
 
-To to enter your Workspace, click the Workspace in the **Overview** tab. When you click into a Workspace and see a list of that Workspace's Deployments, you are in the **Workspace view** of the Cloud UI. The Workspace view contains several pages for managing your Workspace which are accessible from a sidebar on the left of the screen:
+To to enter your Workspace, click the Workspace in the **Overview** tab. When you click into a Workspace and see a list of that Workspace's Deployments, you are in the **Workspace view** of the Astro UI. The Workspace view contains several pages for managing your Workspace which are accessible from a sidebar on the left of the screen:
 
 - **Home**: View the status of your Deployments and select recently accessed Deployments.
 - **Deployments:** Create new Deployments and see key metrics about existing Deployments in the Workspace. For more information, see [Create a Deployment](create-deployment.md).
@@ -41,7 +41,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 
 ## Update general Workspace settings
 
-1. In the Cloud UI, select a Workspace.
+1. In the Astro UI, select a Workspace.
 
 2. Click **Workspace Settings** and then click the **Details** tab.
 
@@ -53,7 +53,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 
 ## Delete a Workspace
 
-1. In the Cloud UI, select a Workspace.
+1. In the Astro UI, select a Workspace.
 
 2. Click **Workspace Settings**.
 

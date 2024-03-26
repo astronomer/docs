@@ -56,10 +56,10 @@ The images and tags which are required for your Software installation depend on 
 1. Run the following command to template the Astronomer Helm chart and fetch all of its rendered image tags. Make sure to substitute `<your-basedomain>` and `<your-astronomer-version>` with your information.
 
     ```bash
-    helm template --version <your-astronomer-version> astronomer/astronomer --set global.dagOnlyDeployment.enabled=True --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                           
+    helm template --version <your-astronomer-version> astronomer/astronomer --set global.dagOnlyDeployment.enabled=True --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
     ```
-    
-    This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image. 
+
+    This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image.
 2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
@@ -88,31 +88,31 @@ This configuration automatically pulls most Docker images required in the Astron
 
 ```yaml
 astronomer:
-    houston:
-      config:
-        deployments:
-          helm:
-            runtimeImages:
-              airflow:
-                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
-              flower:
-                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+  houston:
+    config:
+      deployments:
+        helm:
+          runtimeImages:
             airflow:
-              defaultAirflowRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
-              defaultRuntimeRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
-              images:
-                airflow:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
-                statsd:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-statsd-exporter
-                redis:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-redis
-                pgbouncer:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer
-                pgbouncerExporter:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
-                gitSync:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-git-sync
+              repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+            flower:
+              repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+          airflow:
+            defaultAirflowRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
+            defaultRuntimeRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+            images:
+              airflow:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
+              statsd:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-statsd-exporter
+              redis:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-redis
+              pgbouncer:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer
+              pgbouncerExporter:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
+              gitSync:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-git-sync
 ```
 
 ## Step 4: Fetch Airflow Helm charts
@@ -143,7 +143,7 @@ To configure a self-hosted Helm chart, add the following configuration to your `
 ```yaml
 # Example URL - replace with your own repository destination
 global:
-  helmRepo: "http://artifactory.company.com:32775/artifactory/astro-helm-chart"
+  helmRepo: "http://artifactory.example.com:32775/artifactory/astro-helm-chart"
 ```
 
 :::info
@@ -299,7 +299,7 @@ No matter what option you choose, the commands that you run should return the up
 
 ### Configuring a custom updates JSON URL
 
-After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:  
+After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:
 
 ```yaml
 astronomer:
@@ -310,6 +310,13 @@ astronomer:
       url: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-certified
     updateRuntimeCheck: # Configure URL for Airflow updates check
       url: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
+    config:
+      deployments:
+        helm:
+          airflow:
+            extraEnv: |
+            - name: AIRFLOW__ASTRONOMER__UPDATE_URL
+              value: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
 ```
 
 ## Step 6: Install Astronomer using Helm

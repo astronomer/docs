@@ -782,3 +782,8 @@ img {
 .hidden {
   display: none !important;
 }
+
+/** Fix redocusaurus nav accordions **/
+[id*='tag/'] {
+  scroll-margin-top: 0px;
+}

@@ -2,10 +2,10 @@
 sidebar_label: 'Deployments'
 title: 'View metrics for Astro Deployments'
 id: deployment-metrics
-description: "Learn how to monitor Deployment performance, health, and total task volume in the Cloud UI. These metrics can help you with resource allocation and issue troubleshooting."
+description: "Learn how to monitor Deployment performance, health, and total task volume in the Astro UI. These metrics can help you with resource allocation and issue troubleshooting."
 ---
 
-The Cloud UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
+The Astro UI exposes a suite of observability metrics that show real-time data related to the performance and health of your Deployments. These metrics are a useful reference as you troubleshoot issues and can inform how you allocate resources. They can also help you estimate the cost of your Deployments. This document explains each available metric and where to find them.
 
 To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md). To track Deployment health and specific incidents, see [Deployment health and incidents](deployment-health-incidents.md).
 
@@ -13,13 +13,13 @@ To view metrics for individual DAGs, see [DAG metrics](dag-metrics.md). To track
 
 The **Overview** page contains a suite of metrics for a given Deployment. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
 
-To view metrics for a Deployment, open the Deployment in the Cloud UI, click **Overview**, then click **Get Analytics**. The following topics contain information about each available metric.
+To view metrics for a Deployment, open the Deployment in the Astro UI, click **Overview**, then click **Get Analytics**. The following topics contain information about each available metric.
 
 ### DAG and task runs
 
 These metrics contain information about your Deployment's DAG runs and task runs over a given period of time.
 
-![DAG run analytics in the Cloud UI](/img/docs/analytics-dag-task-runs.png)
+![DAG run analytics in the Astro UI](/img/docs/analytics-dag-task-runs.png)
 
 #### Available metrics
 
@@ -38,11 +38,11 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
 ### Airflow workers and schedulers
 
-These metrics contain information about the Kubernetes Pods running your workers and schedulers. Different worker and scheduler Pods will appear on these charts as differently colored lines. 
+These metrics contain infrastructure use information about your workers and schedulers. Unique worker and scheduler instances appear on these charts as different colored lines.
 
-Hover over the graph to view a graph legend. If a given worker queue spins a worker down and back up again within a given interval, the newly spun up worker appears as a new color on the graph. 
+Hover over the graph to view a graph legend. If a given worker queue spins a worker down and back up again within a given interval, the newly spun up worker appears as a new color on the graph.
 
-![Worker analytics in the Cloud UI](/img/docs/analytics-workers.png)
+![Worker analytics in the Astro UI](/img/docs/analytics-workers.png)
 
 #### Available metrics
 
@@ -51,9 +51,9 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
 - **Memory Usage Per Pod (MB)**: This metric graphs the peak memory usage for all workers and schedulers as a percentage of your maximum memory capacity. Different worker and scheduler Pods will appear as differently colored lines on this chart. This metric should be at or below 50% of your total allowed memory at any given time. For scheduler metrics, the maximum allowable memory for each scheduler Pod appears as a dotted red line.
 
     :::info
-    
+
     The number of workers per Deployment autoscales based on a combination of worker concurrency and the number of `running` and `queued` tasks. This means that the total available CPU and memory for a single Deployment may change at any time.
-    
+
     :::
 
 - **Network Usage Per Pod (MB)**: This metric graphs each worker/ scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
@@ -69,7 +69,7 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
 
 These metrics contain information about your Deployment's configured [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html). They can give you insight into how your DAGs are handling concurrency.
 
-![Pool analytics in the Cloud UI](/img/docs/analytics-pools.png)
+![Pool analytics in the Astro UI](/img/docs/analytics-pools.png)
 
 #### Available metrics
 
@@ -91,7 +91,7 @@ Each Deployment includes four high-level performance charts about the `default` 
 - Worker CPU
 - Worker Memory
 
-![Metrics dashboard in the Cloud UI](/img/docs/deployment-metrics.png)
+![Metrics dashboard in the Astro UI](/img/docs/deployment-metrics.png)
 
 The data in these four charts is recorded hourly and is displayed in both UTC and your local browser timezone. Each bar across all graphs covers a complete hour while the entire time window for a single graph is 24 hours. For example, a single bar might represent `16:00` to `17:00` while the entire time window of the graph might represent `Nov 1 16:00` to `Nov 2 16:00`.
 
@@ -119,7 +119,7 @@ The bolded value above the graph denotes the total number of tasks that have run
 
 ### Resource usage
 
-The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibility into the resources being consumed by the workers in your Deployment as measured by CPU and memory consumption.
+The **Worker CPU** and **Worker Memory** charts in the Astro UI provide visibility into the resources being consumed by the workers in your Deployment as measured by CPU and memory consumption.
 
 **Worker CPU** records the peak CPU usage, while **Worker Memory** records the peak memory usage by worker nodes over hour-long intervals. The bolded values above each graph show the maximum CPU/ memory usage by a single worker at any point in time over the last 24 hours.
 
@@ -131,6 +131,6 @@ The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibili
 
 ## See also
 
-- [Organization metrics](organization-metrics.md)
+- [Organization reporting dashboard](reporting-dashboard.md)
 - [Export task logs and metrics to Datadog](export-datadog.md)
 - [Export task logs to AWS Cloudwatch](export-cloudwatch.md)
