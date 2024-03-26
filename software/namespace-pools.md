@@ -84,7 +84,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
     apiVersion: rbac.authorization.k8s.io/v1
     kind: Role
     metadata:
-      name: deployment-commander-role
+      name: astronomer-commander
       namespace: <your-namespace-name>
     rules:
     - apiGroups: ["*"]
@@ -201,7 +201,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: Role
-      name: deployment-commander-role # Should match name of Role
+      name: astronomer-commander # Should match name of Role
     subjects:
     - namespace: astronomer # Should match namespace where SA lives
       kind: ServiceAccount
