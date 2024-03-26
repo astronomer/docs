@@ -39,7 +39,7 @@ Astro API documentation is now hosted at [https://docs.astronomer.io/api](https:
 
 You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. This option is necessary if you're migrating existing Airflow environments to Astro or if you need to maintain deprecated environments for testing purposes. 
 
-Note that this feature is disabled by default. To use this feature, reach out to your customer success manager to and request for them to enable it for your Organization.
+Note that this feature is disabled by default. To use this feature, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request) and request for them to enable the feature.
 
 ### New GCP database instance types available
 
@@ -59,7 +59,7 @@ See [GCP Hybrid cluster settings](resource-reference-gcp-hybrid.md#supported-clo
 
 ### Bug fixes
 
-- Changing a worker type for an existing worker queue no longer resets the worker queue's concurrency configurations.
+- When you change a worker type for an existing worker queue, the Astro UI no longer resets the worker queue's concurrency configurations.
 - Fixed an issue where the Astro API did not return the correct value for `IsHibernating` when you queried Deployment information.
 
 ## March 19, 2024
