@@ -56,7 +56,7 @@ To run DAGs in a Deployment, you must either deploy an Astro project manually fr
 
 _Astro Runtime_ is a [debian-based Docker image](https://quay.io/repository/astronomer/astro-runtime) that bundles Apache Airflow with optimized configurations and add-ons that make your Airflow experience reliable, fast, and scalable. Astronomer releases an Astro Runtime distribution for each version of Apache airflow.
 
-Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.md) to Astro Runtime versions, so that you can keep your DAGs running for longer without disruption.
+Every Deployment and Astro project uses Astro Runtime at its core. Astronomer provides [extended support and bug fixes](runtime-version-lifecycle-policy.mdx) to Astro Runtime versions, so that you can keep your DAGs running for longer without disruption.
 
 See [Astro Runtime Architecture and features](runtime-image-architecture.mdx) for a complete feature list.
 
@@ -70,9 +70,9 @@ You can assign new users [Workspace roles](user-permissions.md#workspace-roles) 
 
 A _cluster_ in Astro is a Kubernetes cluster that hosts the infrastructure required to run your Airflow environments, also known as [Deployments](#deployment) in Astro. There are two types of clusters in Astro:
 
-- A _standard cluster_ is a multi-tenant cluster that's pre-configured by Astronomer. It's the default cluster type and the quickest way to get an Airflow environment up and running on Astro. Each Deployment in a standard cluster exists in its own isolated Kubernetes namespace. To run a Deployment in a standard cluster, you select a cloud provider and region when you create the Deployment. Then, Astro automatically creates your Deployment in an existing standard cluster based on your configuration. See [Standard cluster configurations](resource-reference-hosted.md#standard-cluster-regions) for a list of all cloud providers and regions where you can use standard clusters.
+- A _standard cluster_ is a multi-tenant cluster that's pre-configured by Astronomer. It's the default cluster type and the quickest way to get an Airflow environment up and running on Astro. Each Deployment in a standard cluster exists in its own isolated Kubernetes namespace. To run a Deployment in a standard cluster, you select a cloud provider and region when you create the Deployment. Then, Astro automatically creates your Deployment in an existing standard cluster based on your configuration. See [Standard cluster configurations](resource-reference-hosted.mdx#standard-cluster-regions) for a list of all cloud providers and regions where you can use standard clusters.
 
-- A _dedicated cluster_ is a single-tenant cluster that's used exclusively by Organizations with additional security and networking requirements. Compared to standard clusters, dedicated clusters provide more configuration options for [cloud providers and regions](resource-reference-hosted.md#dedicated-cluster-regions), as well as private network connectivity and [security](authorize-workspaces-to-a-cluster.md). Note that due to expanded resource usage, dedicated clusters cost more than standard clusters. See [Create a Dedicated cluster](create-dedicated-cluster.md) to get started with dedicated clusters.
+- A _dedicated cluster_ is a single-tenant cluster that's used exclusively by Organizations with additional security and networking requirements. Compared to standard clusters, dedicated clusters provide more configuration options for [cloud providers and regions](resource-reference-hosted.mdx#dedicated-cluster-regions), as well as private network connectivity and [security](authorize-workspaces-to-a-cluster.md). Note that due to expanded resource usage, dedicated clusters cost more than standard clusters. See [Create a Dedicated cluster](create-dedicated-cluster.md) to get started with dedicated clusters.
 
 For both cluster types, Astro manages all underlying infrastructure and provides secure connectivity options to all data services in your ecosystem.
 

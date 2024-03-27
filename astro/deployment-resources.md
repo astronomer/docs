@@ -103,7 +103,8 @@ Astronomer Deployments run a single scheduler. You can configure your scheduler 
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-project-image.md#what-happens-during-a-project-deploy).
 
-:::info Alternative Astro Hybrid setup
+<details>
+  <summary><strong>Alternative Astro Hybrid setup</strong></summary>
 
 To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
@@ -119,7 +120,7 @@ To configure the scheduler on an [Astro Hybrid](hybrid-overview.md) Deployment:
 
 4. Click **Update Deployment**.
 
-:::
+</details>
 
 ## Enable high availability
 
@@ -137,13 +138,14 @@ Because this setting results in more resource usage, it can increase the cost of
 
 4. Select **Update Deployment** to save your changes.
 
-:::info Alternative Astro Hybrid Setup
+<details>
+  <summary><strong>Alternative Astro Hybrid setup</strong></summary>
 
 On Astro Hybrid, PgBouncer is highly available by default for all Deployments. Schedulers are highly available if a Deployment uses two or more schedulers.
 
 Every Deployment has two PgBouncer Pods assigned to two different nodes to prevent zombie tasks. If you configure your Deployment with two schedulers, each scheduler Pod is assigned to a separate node to ensure availability. To limit cost, a Deployment that uses three or four schedulers can assign all scheduler Pods across two nodes.
 
-:::
+</details>
 
 ## Hibernate a development Deployment
 

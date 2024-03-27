@@ -6,13 +6,10 @@ description: Update a Deployment worker queue.
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-:::info
-
-This command is only available on Astro.
-
+:::cliastroonly
 :::
 
-Update the settings for an existing [worker queue](configure-worker-queues.md) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Astro UI.
+Update the settings for an existing [worker queue](configure-worker-queues.mdx) in a Deployment on Astro. This is functionally identical to updating the settings of a worker queue in the Astro UI.
 
 ## Usage
 

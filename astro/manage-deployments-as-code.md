@@ -63,7 +63,7 @@ Alternatively, you can manually create a template file without using an existing
           scheduler_size: small
   ```
 
-  Note that for Deployments on a standard cluster, the `region` and `cluster-name` parameters must both contain the region name for the standard cluster. See [Available regions for your cloud provider](resource-reference-hosted.md#standard-cluster-regions).
+  Note that for Deployments on a standard cluster, the `region` and `cluster-name` parameters must both contain the region name for the standard cluster. See [Available regions for your cloud provider](resource-reference-hosted.mdx#standard-cluster-regions).
 
   </TabItem>
 

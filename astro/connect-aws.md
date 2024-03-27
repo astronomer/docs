@@ -129,7 +129,8 @@ Note that a VPC connection can be listed as **Active** even when it has an incor
 
 :::
 
-:::info Alternative Astro Hybrid setup 
+<details>
+  <summary><strong>Alternative Astro Hybrid setup</strong></summary>
 
 To set up a private connection between an Astro VPC and an AWS VPC, you can create a VPC peering connection. VPC peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
@@ -166,7 +167,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, you must
 
 7. (Optional) Delete the stack that you created. This will delete the temporary assumable role.
 
-:::
+</details>
 
 ### Configure additional routes for a VPC connection
 
