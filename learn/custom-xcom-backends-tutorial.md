@@ -300,7 +300,7 @@ Configuring a custom XCom backend with Object Storage can be done by setting env
 2. Add the `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH` environment variable to your `.env` file to define the path in your GCS bucket where the XComs will be stored in the form of `<connection id>@<bucket name>/<path>`. Use the connection id of the Airflow connection you defined in [step 2](#step-2-set-up-your-airflow-connection) and replace `<my-bucket>` with your GCS bucket name.
 
     ```text
-    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="gcs://my_gcp_conn@<my-bucket>/xcom"
+    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="gs://my_gcp_conn@<my-bucket>/xcom"
     ```
 
 </TabItem>
@@ -310,7 +310,7 @@ Configuring a custom XCom backend with Object Storage can be done by setting env
 2. Add the `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH` environment variable to your `.env` file to define the path in your GCS bucket where the XComs will be stored in the form of `<connection id>@<blob name>/<path>`. Use the connection id of the Airflow connection you defined in [step 2](#step-2-set-up-your-airflow-connection) and replace `<my-blob>` with your GCS bucket name.
 
     ```text
-    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="wasb://my_azure_conn@<my-blob>/xcom"
+    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="azblob://my_azure_conn@<my-blob>/xcom"
     ```
 
 </TabItem>
