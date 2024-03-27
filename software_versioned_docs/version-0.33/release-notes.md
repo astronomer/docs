@@ -70,7 +70,7 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
 
 ### Additional improvements
 
-- You can now configure a global label that is applied to all Astronomer Software Pods. <!-- Can't relocate issue for this one-->
+- You can now configure a global label that is applied to all Astronomer Software Pods.
 - You can now filter on `release_name` when you make a `deployments()` query to the Houston API.
 - You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your `config.yaml` file and apply the configuration to your cluster:
 
@@ -95,10 +95,13 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
     ```
 
 - Astronomer Software now redeploys your Deployment when you switch your executor type.
+- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars). <!-- https://github.com/astronomer/issues/issues/6113 -->
 
 ### Bug fixes
 
+- Fixed an issue where Astronomer users would occasionally not be associated with their related Azure AD/ Microsoft Entra ID accounts when added to Astronomer using SCIM. <!-- https://github.com/astronomer/issues/issues/5913 -->
 - The Houston API now validates `updateDeployment` queries to ensure that Deployment resource limits and requests are set correctly.
+- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  <!-- https://github.com/astronomer/issues/issues/5990 -->
 - Fixed an issue where Deployments would occasionally not recreate the correct resources when switching from the Kubernetes executor to the Celery executor.
 - Fixed an issue where deploys could fail when using a self-signed certificate signed by a private certificate authority.
 - Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
@@ -124,6 +127,10 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
 ## 0.33.3
 
 Release date: January 19, 2024
+
+### Additional improvements 
+
+- Added support for [Kubernetes 1.29](https://kubernetes.io/blog/2023/12/13/kubernetes-v1-29-release/).
 
 ### Bug fixes
 
