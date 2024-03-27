@@ -176,7 +176,7 @@ Consider the following when you upgrade Astro Runtime:
 - All versions of the Astro CLI support all versions of Astro Runtime. There are no dependencies between the two products.
 - Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Version-specific upgrade considerations](#version-upgrade-considerations).
 
-To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes). For more information on Astro Runtime versioning and support, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.mdx). For a full collection of Astro Runtime Docker images, go to the [Astro Runtime repository on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
 ### Version upgrade considerations
 

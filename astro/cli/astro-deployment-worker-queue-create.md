@@ -6,13 +6,10 @@ description: Create a Deployment worker queue.
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-:::info
-
-This command is only available on Astro.
-
+:::cliastroonly
 :::
 
-Create a [worker queue](configure-worker-queues.md) in a Deployment on Astro. This command is functionally identical to creating a worker queue in the Astro UI.
+Create a [worker queue](configure-worker-queues.mdx) in a Deployment on Astro. This command is functionally identical to creating a worker queue in the Astro UI.
 
 ## Usage
 

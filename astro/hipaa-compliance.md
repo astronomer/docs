@@ -38,7 +38,7 @@ This document references the Astro control and data planes, which are core parts
 
 - Execute a Business Associate Agreement (BAA) with your public cloud provider to process PHI on cloud infrastructure.
 - [Configure an identity provider](configure-idp.md) (IdP) for single sign-on to your Astro Organization.
-- Use a [supported](runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule) (preferably latest patch) version of [Astro Runtime](runtime-image-architecture.mdx), to take advantage of the most recent security features and fixes.
+- Use a [supported](runtime-version-lifecycle-policy.mdx#astro-runtime-lifecycle-schedule) (preferably latest patch) version of [Astro Runtime](runtime-image-architecture.mdx), to take advantage of the most recent security features and fixes.
 - Use [supported and compatible versions](https://github.com/apache/airflow/blob/main/README.md#release-process-for-providers) of [Airflow providers](https://registry.astronomer.io/providers/?page=1), to take advantage of the most recent security features and fixes.
 - Create a [secrets backend](https://docs.astronomer.io/astro/secrets-backend) to access sensitive information and secrets from your data pipelines that will be used to access PHI. If you do not have a secrets backend, you must [store your environment variables as secrets](environment-variables.md).
 - Ensure all PHI data that is orchestrated or processed by the data plane is encrypted at rest and in transit at all times using modern cryptographic protocols and ciphers, and at no point can be read in clear text. For example, when reading data from an RDS instance, transforming it in the data plane, and writing it out to an S3 bucket.
