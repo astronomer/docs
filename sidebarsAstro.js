@@ -514,13 +514,25 @@ module.exports = {
             'cli/astro-deployment-team',
             'cli/astro-deployment-update',
             'cli/astro-deployment-user',
-            'cli/astro-deployment-variable-create',
-            'cli/astro-deployment-variable-list',
-            'cli/astro-deployment-variable-update',
+            {
+              type: "category",
+              label: "astro deployment variable",
+              items: [
+                'cli/astro-deployment-variable-create',
+                'cli/astro-deployment-variable-list',
+                'cli/astro-deployment-variable-update',
+              ],
+            },
             'cli/astro-deployment-wake-up',
-            'cli/astro-deployment-worker-queue-create',
-            'cli/astro-deployment-worker-queue-delete',
-            'cli/astro-deployment-worker-queue-update',
+            {
+              type: "category",
+              label: "astro deployment worker-queue",
+              items: [
+                'cli/astro-deployment-worker-queue-create',
+                'cli/astro-deployment-worker-queue-delete',
+                'cli/astro-deployment-worker-queue-update',
+              ],
+            },
           ],
         },
         {
