@@ -21,4 +21,6 @@ jobs:
       - name: Publish Docs
         env:
           FERN_TOKEN: ${{ secrets.FERN_TOKEN }}
-        run: fern generate --docs
+        run: |
+          cd api
+          fern generate --docs
