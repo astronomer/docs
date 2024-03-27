@@ -39,7 +39,7 @@ Astro API documentation is now hosted at [https://docs.astronomer.io/api](https:
 
 You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes. 
 
-Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled.
+Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled. See [Run a deprecated Astro Runtime version](https://docs.astronomer.io/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version) for more information.
 
 ### New GCP database instance types available
 
@@ -50,11 +50,11 @@ You can now use the following node instance types for database instances in GCP 
 - XLarge Compute Optimized (24 CPU, 48 GiB MEM)
 - XXLarge Compute Optimized (32 CPU, 64 GiB MEM)
   
-See [GCP Hybrid cluster settings](resource-reference-gcp-hybrid.md#supported-cloud-sql-instance-types) for a list of all available database instance types.
+See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid#supported-cloud-sql-instance-types) for a list of all available database instance types.
 
 ### Additional improvements
 
-- The Astro UI now includes tutorials for features that are not yet configured within your Organization.
+- The Astro UI now includes [Learning Bytes](https://academy.astronomer.io/learning-bytes-reporting) for features that are not yet configured within your Organization.
 - The Astro UI now loads the status for DAG and task runs more quickly.
 
 ### Bug fixes
