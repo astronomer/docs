@@ -128,6 +128,10 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
 
 Release date: January 19, 2024
 
+### Additional improvements 
+
+- Added support for [Kubernetes 1.29](https://kubernetes.io/blog/2023/12/13/kubernetes-v1-29-release/).
+
 ### Bug fixes
 
 - Fixed an issue where the Workspace list page in the Software UI would show an error if any Workspace had an empty description.
