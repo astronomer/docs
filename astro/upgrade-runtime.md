@@ -126,7 +126,7 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 If you're migrating to Astro from OSS Airflow or Astro Hybrid, where your Deployments run using an older version of Airflow or a deprecated version of the Astro Runtime, you can now use stepwise migration to complete your migration in stages. First, you can create Deployments with a deprecated version of the Astro Runtime using the Astro API to move to an Astro Hosted environment. Then, you can upgrade your code to the most up-to-date version of the Astro Runtime.
 
-Deployments that run deprected Astro Runtime versions will only receive support as [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.md#astro-runtime-maintenance-policy), and might advise you to upgrade your runtime to the latest version of Astro to resolve performance issues or bugs.
+Deployments that run deprecated Astro Runtime versions will only receive support as [Astro Runtime maintenance policy](runtime-version-lifecycle-policy.mdx#astro-runtime-maintenance-policy), and Astronomer might advise you to upgrade your runtime to the latest version of Astro to resolve performance issues or bugs.
 
 :::info
 
@@ -134,7 +134,7 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
 
 :::
 
-1. Contact [Astronomer support](astro-support.md) and request the ability to run deprecated versions of Astro Runtime.
+1. Contact your Astronomer account team and request the ability to run deprecated versions of Astro Runtime.
 2. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
 
 After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md).
