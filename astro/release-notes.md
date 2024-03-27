@@ -25,6 +25,43 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## March 26, 2024
+
+### Refactored Astro API documentation
+
+Astro API documentation is now hosted at [https://docs.astronomer.io/api](https://docs.astronomer.io/api). In the new API documentation center, you can:
+
+- Format and test API requests directly in your browser.
+- Export requests to Python, Javascript, and curl.
+- View weekly changelogs for the API.
+
+### Create Deployments with deprecated versions of Astro Runtime
+
+You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes. 
+
+Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled. See [Run a deprecated Astro Runtime version](https://docs.astronomer.io/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version) for more information.
+
+### New GCP database instance types available
+
+<HybridBadge/>
+
+You can now use the following node instance types for database instances in GCP clusters:
+
+- XLarge Compute Optimized (24 CPU, 48 GiB MEM)
+- XXLarge Compute Optimized (32 CPU, 64 GiB MEM)
+  
+See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid#supported-cloud-sql-instance-types) for a list of all available database instance types.
+
+### Additional improvements
+
+- The Astro UI now includes [Learning Bytes](https://academy.astronomer.io/learning-bytes-reporting) for features that are not yet configured within your Organization.
+- The Astro UI now loads the status for DAG and task runs more quickly.
+
+### Bug fixes
+
+- When you change a worker type for an existing worker queue, the Astro UI no longer resets the worker queue's concurrency configurations.
+- Fixed an issue where the Astro API did not return the correct value for `IsHibernating` when you queried Deployment information.
+
 ## March 19, 2024
 
 ### New Azure regions available on Astro Hosted
