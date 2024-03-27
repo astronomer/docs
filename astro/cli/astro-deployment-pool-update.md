@@ -53,6 +53,8 @@ astro deployment pool update --deployment-id cl03oiq7d80402nwn7fsl3dmv --name my
 # update pools stored in the Deployment "My Deployment"
 astro deployment pool update --deployment-name="My Deployment" --name my-pool --slots 10
 
+```
+
 ## Related Commands
 
 - [`astro deployment pool create`](cli/astro-deployment-pool-create.md)
