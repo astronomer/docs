@@ -498,11 +498,10 @@ SCIM works because the IdP pushes updates about users and teams to Astronomer So
     ```yaml
     astronomer:
       houston:
-        config:
-          secret:
-            - envName: "SCIM_AUTH_CODE_OKTA"
-              secretName: "okta-provisioning-secret"
-              secretKey: "okta_provisioning_account_secret"
+        secret:
+          - envName: "SCIM_AUTH_CODE_OKTA"
+            secretName: "okta-provisioning-secret"
+            secretKey: "okta_provisioning_account_secret"
     ```
 
 14. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
@@ -538,11 +537,10 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
     ```yaml
     astronomer:
       houston:
-        config:
-          secret:
-            - envName: "SCIM_AUTH_CODE_MICROSOFT"
-              secretName: "azure-provisioning-secret"
-              secretKey: "azure_provisioning_secret"
+        secret:
+          - envName: "SCIM_AUTH_CODE_MICROSOFT"
+            secretName: "azure-provisioning-secret"
+            secretKey: "azure_provisioning_secret"
     ```
 
 3. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
@@ -614,11 +612,10 @@ This setup is primarily used for encrypting the required secrets for [configurin
     ```yaml
     astronomer:
       houston:
-        config:
-          secret:
-            - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
-              secretName: "okta-secret"
-              secretKey: "okta_client_secret"
+        secret:
+          - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
+            secretName: "okta-secret"
+            secretKey: "okta_client_secret"
     ```
 
 4. Save and push your changes. See [Apply a config change](apply-platform-config.md).
