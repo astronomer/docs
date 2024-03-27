@@ -1,7 +1,8 @@
 """
 ## Toy DAG to show size dependant custom XCom serialization
 
-This DAG pushes two dicts to XCom, one below, one above 1000 bytes. It then pulls them and prints their sizes.
+This DAG pushes two dicts to XCom, one below, one above 1000 bytes. 
+It then pulls them and prints their sizes.
 """
 
 from airflow.decorators import dag, task

@@ -61,7 +61,7 @@ First, you need to set up the object storage container in your cloud provider wh
     ]}>
 <TabItem value="aws">
 
-1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html). Ensure that public access to the bucket is blocked.
+1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html). Ensure that public access to the bucket is blocked. You do not need to enable bucket versioning.
 
 2. [Create a new IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for Airflow to access your bucket. You can use the JSON configuration below or use the AWS GUI to replicate what you see in the screenshot. Replace `<your-bucket-name>` with the name of your S3 bucket.
 
@@ -89,13 +89,11 @@ First, you need to set up the object storage container in your cloud provider wh
     }
     ```
 
-    ![AWS IAM policy for the XCom backend](/img/guides/xcom_backend_aws_policy.png)
-
 3. Save your policy under the name `AirflowXComBackendAWSS3`. 
 
-4. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) called `airflow-xcom` with the AWS credential type `Access key - Programmatic access` and attach the `AirflowXComBackendAWSS3` policy to this user. Make sure to save the Access Key ID and the Secret Access Key.
+4. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) called `airflow-xcom` with the AWS credential type `Access key - Programmatic access` and [attach](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) the `AirflowXComBackendAWSS3` policy to this user. 
 
-    ![AWS IAM user for the XCom backend](/img/guides/xcom_backend_aws_user.png)
+5. [Create an access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) of the type `Third-party-service` for your `airflow-xcom` user. Make sure to save the Access Key ID and the Secret Access Key in a secure location to use in [step 3](#step-3-set-up-your-airflow-connection).
 
 :::info
 
@@ -107,9 +105,9 @@ For other ways to set up a connection between Airflow and AWS, see the [Amazon p
 
 <TabItem value="gcp">
 
-1. Log into your Google Cloud account and [create a new project](https://cloud.google.com/resource-manager/docs/creating-managing-projects). Ensure that public access to the bucket is blocked.
+1. Log into your Google Cloud account and [create a new project](https://cloud.google.com/resource-manager/docs/creating-managing-projects). 
 
-2. [Create a new bucket](https://cloud.google.com/storage/docs/creating-buckets) in your project.
+2. [Create a new bucket](https://cloud.google.com/storage/docs/creating-buckets) in your project with Uniform Access Control. Enforce public access prevention.
 
 3. [Create a custom IAM role](https://cloud.google.com/iam/docs/creating-custom-roles) called `AirflowXComBackendGCS` for Airflow to access your bucket. Assign 6 permissions:
 
@@ -120,11 +118,7 @@ For other ways to set up a connection between Airflow and AWS, see the [Amazon p
     - storage.objects.list
     - storage.objects.update
 
-    ![GCS IAM role](/img/guides/xcom_backend_gcs_role.png)
-
 4. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-xcom` and grant it access to your project by granting it the `AirflowXComBackendGCS` role.
-
-    ![GCS IAM role](/img/guides/xcom_backend_gcs_service_account.png)
 
 5. [Create a new key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your `airflow-xcom` service account and make sure to download the credentials in JSON format.
 
@@ -217,7 +211,13 @@ Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-prov
 
 ## Step 3: Set up your Airflow connection
 
-An Airflow connection is necessary to connect Airflow with your object storage container provider. There are [different ways](connections.md) to set up Airflow connections, in this tutorial we will use environment variables.
+An Airflow connection is necessary to connect Airflow with your object storage container provider. There are [different ways](connections.md) to set up Airflow connections, in this tutorial we will use the Airflow UI.
+
+1. Start your Astro project by running:
+
+    ```bash
+    astro dev start
+    ```
 
 <Tabs
     defaultValue="aws"
@@ -229,46 +229,40 @@ An Airflow connection is necessary to connect Airflow with your object storage c
     ]}>
 <TabItem value="aws">
 
-Add the following environment variable to your `.env` file. Replace `<your access key>` and `<your secret key>` with your AWS access key and secret key. The credentials used need to have access your [S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-policy-language-overview.html). To learn more about configuration options for the AWS connection, see the [Amazon provider](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) documentation.
+2. In the Airflow UI navigate to `Admin` -> `Connections` and click on `Create`. Fill in the following fields:
 
-```text
-AIRFLOW_CONN_MY_AWS_CONN='{
-    "conn_type": "aws",
-    "login": "<your access key in the format of >",
-    "password": "<your secret key>"
-}'
-```
+    - **Conn Id**: `my_aws_conn`
+    - **Conn Type**: `Amazon Web Services`
+    - **AWS Access Key ID**: `<your access key>`
+    - **AWS Secret Access Key**: `<your secret key>`
+
+    To learn more about configuration options for the AWS connection, see the [Amazon provider](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) documentation.
 
 </TabItem>
 <TabItem value="gcp">
 
-Add the following environment variable to your `.env` file. Replace `<your project id>` with your [Google project id](https://cloud.google.com/resource-manager/docs/creating-managing-projects) and  `<your key file path>` with the path to the JSON file containing your [GCP service account key](https://cloud.google.com/iam/docs/keys-create-delete). The service account key needs to have access to your [Google Cloud Storage bucket](https://cloud.google.com/storage/docs/access-control/iam-permissions). To learn more about configuration options for the Google connection, see the [Google provider](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html) documentation.
+2. In the Airflow UI navigate to `Admin` -> `Connections` and click on `Create`. Fill in the following fields:
 
-```text
-AIRFLOW_CONN_MY_GCP_CONN='{
-    "conn_type": "google_cloud_platform",
-    "extra": {
-        "project": "<your project id>",
-        "key_path": "<your key file path>",
-    }
-}'
-```
+    - **Conn Id**: `my_gcp_conn`
+    - **Conn Type**: `Google Cloud`
+    - **Project Id**: `<your project id>`
+    - **Keyfile JSON**: `<the contents from your keyfile JSON that you downloaded in step 1>`
+
+    To learn more about configuration options for the Google connection, see the [Google provider](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/connections/gcp.html) documentation.
 
 </TabItem>
 
 <TabItem value="azure">
 
-Add the following environment variable to your `.env` file. Replace `<your login>`, `<your password>`, and `<your blob storage account url>` with your Azure Blob Storage account credentials. The credentials used need to have access to your [Azure Blob Storage container](https://learn.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal). To learn more about configuration options for the Azure connection, see the [Microsoft Azure provider](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/wasb.html) documentation.
+2. In the Airflow UI navigate to `Admin` -> `Connections` and click on `Create`. Fill in the following fields:
 
+    - **Conn Id**: `my_azure_conn`
+    - **Conn Type**: `Microsoft Azure Blob Storage`
+    - **Account Name**: `<your account name>`
+    - **Account Key**: `<your account key>`
+    - **SAS Token**: `<your SAS token>`
 
-```text
-AIRFLOW_CONN_MY_AZURE_CONN='{
-    "conn_type": "wasb",
-    "login": "<your login>",
-    "password": "<your password>",
-    "host": "<your blob storage account url>"
-}'
-```
+    To learn more about configuration options for the Azure connection, see the [Microsoft Azure provider](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/wasb.html) documentation.
 
 </TabItem>
 </Tabs>
@@ -306,7 +300,7 @@ Configuring a custom XCom backend with Object Storage can be done by setting env
 2. Add the `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH` environment variable to your `.env` file to define the path in your GCS bucket where the XComs will be stored in the form of `<connection id>@<bucket name>/<path>`. Use the connection id of the Airflow connection you defined in [step 2](#step-2-set-up-your-airflow-connection) and replace `<my-bucket>` with your GCS bucket name.
 
     ```text
-    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="my_gcp_conn@<my-bucket>/xcom"
+    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="gcs://my_gcp_conn@<my-bucket>/xcom"
     ```
 
 </TabItem>
@@ -316,7 +310,7 @@ Configuring a custom XCom backend with Object Storage can be done by setting env
 2. Add the `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH` environment variable to your `.env` file to define the path in your GCS bucket where the XComs will be stored in the form of `<connection id>@<blob name>/<path>`. Use the connection id of the Airflow connection you defined in [step 2](#step-2-set-up-your-airflow-connection) and replace `<my-blob>` with your GCS bucket name.
 
     ```text
-    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="my_azure_conn@<my-blob>/xcom"
+    AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH="wasb://my_azure_conn@<my-blob>/xcom"
     ```
 
 </TabItem>
@@ -337,11 +331,11 @@ For this tutorial we will set the threshold to `1000` bytes, which means any XCo
 
 5. Restart your Airflow project by running:
 
-    ```sh
-    $ astro dev restart
+    ```bash
+    astro dev restart
     ```
 
-## Step 4: Test your custom XCom backend
+## Step 5: Test your custom XCom backend
 
 We will use a simple DAG to test your custom XCom backend. 
 
