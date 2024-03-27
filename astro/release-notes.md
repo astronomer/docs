@@ -37,9 +37,9 @@ Astro API documentation is now hosted at [https://docs.astronomer.io/api](https:
 
 ### Create Deployments with deprecated versions of Astro Runtime
 
-You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. This option is necessary if you're migrating existing Airflow environments to Astro or if you need to maintain deprecated environments for testing purposes. 
+You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes. 
 
-Note that this feature is disabled by default. To use this feature, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request) and request for them to enable the feature.
+Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled.
 
 ### New GCP database instance types available
 
