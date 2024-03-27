@@ -111,6 +111,7 @@ module.exports = {
           },
           items: [
             'logging',
+            'airflow-custom-xcom-backends',
             'data-quality',
             'airflow-datasets',
             'deferrable-operators',
