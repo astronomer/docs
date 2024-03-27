@@ -25,6 +25,12 @@ While a custom XCom backend allows you to store virtually unlimited amounts of d
 
 :::
 
+:::caution
+
+Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565). For other ways to set up custom XCom backends, see the [Options for custom XCom backends in Airflow](airflow-custom-xcom-backends.md) guide.
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 45 minutes to complete.
@@ -51,8 +57,7 @@ First, you need to set up the object storage container in your cloud provider wh
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
-        {label: 'Azure Blob Storage', value: 'azure'},
-        {label: 'MinIO (local)', value: 'local'}
+        {label: 'Azure Blob Storage', value: 'azure'}
     ]}>
 <TabItem value="aws">
 
@@ -174,7 +179,7 @@ To use the Object Storage XCom backend, you need to install the Common IO provid
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
-        {label: 'Azure Blob Storage', value: 'azure'},
+        {label: 'Azure Blob Storage', value: 'azure'}
     ]}>
 <TabItem value="aws">
 
@@ -221,7 +226,7 @@ An Airflow connection is necessary to connect Airflow with your object storage c
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
-        {label: 'Azure Blob Storage', value: 'azure'},
+        {label: 'Azure Blob Storage', value: 'azure'}
     ]}>
 <TabItem value="aws">
 
@@ -285,7 +290,7 @@ Configuring a custom XCom backend with Object Storage can be done by setting env
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
-        {label: 'Azure Blob Storage', value: 'azure'},
+        {label: 'Azure Blob Storage', value: 'azure'}
     ]}>
 <TabItem value="aws">
 
@@ -348,7 +353,7 @@ We will use a simple DAG to test your custom XCom backend.
 
 2. Manually trigger the `custom_xcom_backend_test` DAG in the Airflow UI and navigate to the XCom tab of the `push_objects` task. You should see that the `small_obj` XCom shows its value, meaning it was stored in the metadata database, since it is smaller than 1KB. The `big_dict` XCom shows shows the path to the object in the object storage containing the serialized value of the XCom. 
 
-    ![XCom tab of the push_objects task showing two key-value pairs: {"big_obj": "s3://ce-2-9-examples-bucket/xcom/custom_xcom_backend_test/manual__2024-03-27T13:18:52.642382+00:00/push_objects/8cf94ef7-b92e-4c65-a775-4e338c941f58.zip", "small_obj": {'a': 23} }.](/img/guides/custom-xcom-backends-tutorial_small_big_obj.png)
+    ![XCom tab of the push_objects task showing two key-value pairs: {"big_obj": "s3://ce-2-9-examples-bucket/xcom/custom_xcom_backend_test/manual__2024-03-27T13:18:52.642382+00:00/push_objects/8cf94ef7-b92e-4c65-a775-4e338c941f58.zip", "small_obj": {'a': 23} }.](/img/tutorials/custom-xcom-backends-tutorial_small_big_obj.png)
 
 ## Conclusion
 
