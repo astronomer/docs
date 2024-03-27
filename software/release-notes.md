@@ -95,13 +95,13 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
     ```
 
 - Astronomer Software now redeploys your Deployment when you switch your executor type.
-- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars). <!-- https://github.com/astronomer/issues/issues/6113 -->
+- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars).
 
 ### Bug fixes
 
-- Fixed an issue where Astronomer users would occasionally not be associated with their related Azure AD/ Microsoft Entra ID accounts when added to Astronomer using SCIM. <!-- https://github.com/astronomer/issues/issues/5913 -->
+- Fixed an issue where Astronomer users would occasionally not be associated with their related Azure AD/ Microsoft Entra ID accounts when added to Astronomer using SCIM.
 - The Houston API now validates `updateDeployment` queries to ensure that Deployment resource limits and requests are set correctly.
-- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  <!-- https://github.com/astronomer/issues/issues/5990 -->
+- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  
 - Fixed an issue where Deployments would occasionally not recreate the correct resources when switching from the Kubernetes executor to the Celery executor.
 - Fixed an issue where deploys could fail when using a self-signed certificate signed by a private certificate authority.
 - Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
