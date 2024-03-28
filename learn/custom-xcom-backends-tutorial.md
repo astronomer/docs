@@ -189,7 +189,7 @@ Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-prov
 
     ```text
     apache-airflow-providers-common-io==1.3.0
-    apache-airflow-providers-google==10.16.0
+    apache-airflow-providers-google==10.17.0
     ```
 
 </TabItem>
