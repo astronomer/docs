@@ -121,7 +121,7 @@ Any DAG that is scheduled with a dataset is considered a consumer DAG even if th
 
 </Tabs>
 
-Any number of datasets can be provided to the `schedule` parameter as a list. The DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully. 
+Any number of datasets can be provided to the `schedule` parameter as a list or as an expression using [conditional logic](#conditional-dataset-scheduling). If the Datasets are provided in a list, the DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully. 
 
 When you work with datasets, keep the following considerations in mind:
 
@@ -129,13 +129,14 @@ When you work with datasets, keep the following considerations in mind:
 - Airflow monitors datasets only within the context of DAGs and tasks. It does not monitor updates to datasets that occur outside of Airflow.
 - Consumer DAGs that are scheduled on a dataset are triggered every time a task that updates that dataset completes successfully. For example, if `task1` and `task2` both produce `dataset_a`, a consumer DAG of `dataset_a` runs twice - first when `task1` completes, and again when `task2` completes.
 - Consumer DAGs scheduled on a dataset are triggered as soon as the first task with that dataset as an outlet finishes, even if there are downstream producer tasks that also operate on the dataset.
-- Scheduling a DAG on a dataset update cannot currently be combined with any other type of schedule. For example, you can't schedule a DAG on an update to a dataset and a timetable.
+- In Airflow 2.9+, you can use conditional logic when scheduling a DAG on multiple Datasets, see [Conditional Dataset Scheduling](#conditional-dataset-scheduling).
+- In Airflow 2.9+, you can combine dataset and time-based scheduling, see [Combined Dataset and Time-based Scheduling](#combined-dataset-and-time-based-scheduling).
 
-For more information about datasets, see [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/datasets.html). 
+For more information about datasets, see [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html). 
 
 The **Datasets** tab, and the **DAG Dependencies** view in the Airflow UI give you observability for datasets and data dependencies in the DAG's schedule.
 
-On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is scheduled on two producer datasets (one in `dataset_upstream1` and `dataset_upstream2`), and its next run is pending one dataset update. At this point the `dataset_upstream` DAG has run and updated its dataset, but the `dataset_upstream2` DAG has not.
+On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is scheduled on two producer datasets (one in `dataset_upstream1` and `dataset_upstream2`). When Datasets are provided as a list, the DAG is scheduled to run after all Datasets in the list have received at least one update. In the screenshot below, the `dataset_downstream_1_2` DAG's next run is pending one dataset update. At this point the `dataset_upstream` DAG has run and updated its dataset, but the `dataset_upstream2` DAG has not.
 
 ![DAGs View](/img/guides/dags_view_dataset_schedule.png)
 
@@ -156,6 +157,165 @@ The **DAG Dependencies** view (found under the **Browse** tab) shows a graph of 
 DAGs that are triggered by datasets do not have the concept of a data interval. If you need information about the triggering event in your downstream DAG, you can use the parameter `triggering_dataset_events` from the context. This parameter provides a list of all the triggering dataset events with parameters `[timestamp, source_dag_id, source_task_id, source_run_id, source_map_index ]`.
 
 :::
+
+### Updating a dataset
+
+As of Airflow 2.9+ there are three ways to update a dataset:
+
+- A task with an outlet parameter that references the dataset completes successfully.
+- A `POST` request to the [datasets endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Dataset).
+- A manual update in the Airflow UI. 
+
+    ![Screenshot of the Airflow UI showing the view history of updates to a specific dataset in the datasets tab with the play button to update the dataset manually highlighted](/img/guides/airflow-datasets_manually_update_dataset.png)
+
+### Conditional dataset scheduling
+
+In Airflow 2.9 and later, you can use logical operators to combine any number of datasets provided to the `schedule` parameter. The logical operators supported are `|` for OR and `&` for AND. 
+
+For example, to schedule a DAG on an update to either `dataset1`, `dataset2`, `dataset3` or `dataset4`, you can use the following syntax. Note that the full statement is wrapped in `()`.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="conditional-dataset-scheduling"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+from airflow.decorators import dag
+from airflow.models.datasets import Dataset
+from pendulum import datetime
+
+@dag(
+    start_date=datetime(2024, 3, 1),
+    schedule=(
+        Dataset("dataset1")
+        | Dataset("dataset2")
+        | Dataset("dataset3")
+        | Dataset("dataset4")
+    ),  # Use () instead of [] to be able to use conditional dataset scheduling!
+    catchup=False,
+)
+def downstream1_on_any():
+
+    # your tasks here
+
+downstream1_on_any()
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+from airflow.models import DAG
+from airflow.models.datasets import Dataset
+from pendulum import datetime
+
+with DAG(
+    dag_id="downstream1_on_any",
+    start_date=datetime(2024, 3, 1),
+    schedule=(
+        Dataset("dataset1")
+        | Dataset("dataset2")
+        | Dataset("dataset3")
+        | Dataset("dataset4")
+    ),  # Use () instead of [] to be able to use conditional dataset scheduling!
+    catchup=False,
+):
+
+    # your tasks here
+```
+
+</TabItem>
+</Tabs>
+
+The `downstream1_on_any` DAG is triggered whenever any of the datasets `dataset1`, `dataset2`, `dataset3`, or `dataset4` are updated. When clicking on **x of 4 Datasets  updated** in the DAGs view, you can see the dataset expression that defines the schedule.
+
+![Screenshot of the Airflow UI with a pop up showing the dataset expression for the downstream1_on_any DAG listing the 4 datasets under "any"](/img/guides/airflow-datasets_dataset_expression_any.png)
+
+You can also combine the logical operators to create more complex expressions. For example, to schedule a DAG on an update to either `dataset1` or `dataset2` and either `dataset3` or `dataset4`, you can use the following syntax:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="conditional-dataset-scheduling"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+from airflow.decorators import dag
+from airflow.models.datasets import Dataset
+from pendulum import datetime
+
+@dag(
+    start_date=datetime(2024, 3, 1),
+    schedule=(
+        (Dataset("dataset1") | Dataset("dataset2"))
+        & (Dataset("dataset3") | Dataset("dataset4"))
+    ),  # Use () instead of [] to be able to use conditional dataset scheduling!
+    catchup=False
+)
+def downstream2_one_in_each_group():
+
+    # your tasks here
+
+downstream1_on_any()
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+from airflow.models import DAG
+from airflow.models.datasets import Dataset
+from pendulum import datetime
+
+with DAG(
+    dag_id="downstream2_one_in_each_group",
+    start_date=datetime(2024, 3, 1),
+    schedule=(
+        (Dataset("dataset1") | Dataset("dataset2"))
+        & (Dataset("dataset3") | Dataset("dataset4"))
+    ),  # Use () instead of [] to be able to use conditional dataset scheduling!
+    catchup=False,
+):
+
+    # your tasks here
+```
+
+</TabItem>
+</Tabs>
+
+The dataset expression this schedule creates is:
+
+```text
+{
+  "all": [
+    {
+      "any": [
+        "dataset1",
+        "dataset2"
+      ]
+    },
+    {
+      "any": [
+        "dataset3",
+        "dataset4"
+      ]
+    }
+  ]
+}
+```
+
+### Combined dataset and time-based scheduling
+
+
+
+
 ## Datasets with the Astro Python SDK
 
 If you are using the [Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk) version 1.1 or later, you do not need to make any code updates to use datasets. Datasets are automatically registered for any functions with output tables and you do not need to define any `outlet` parameters. 
