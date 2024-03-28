@@ -70,7 +70,7 @@ Functionality is added to a plugin by adding components to the class which defin
 - `flask_blueprints` and `appbuilder_views` offer the possibility to build a Flask project on top of Airflow.
 - `operator_extra_links` and `global_operator_extra_links` are ways to add links to Airflow task instances.
 - `macros` expand upon existing Jinja templates using custom functions.
-- `listeners` are an experimental feature to define custom code to execute whenever certain events happen anywhere in your Airflow instance.
+- `listeners` define custom code to execute whenever certain events happen anywhere in your Airflow instance.
 
 Other types of plugin components not covered in this guide include:
 
@@ -333,4 +333,4 @@ class MyListenerPlugin(AirflowPlugin):
     listeners = [listener_code]
 ```
 
-To see a full example of how to create and register a listener, check out the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial. This feature is currently experimental.
+To see a full example of how to create and register a listener, check out the [Use a listener to send a Slack notification when a Dataset is updated](airflow-listeners.md) tutorial.
