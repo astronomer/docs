@@ -65,9 +65,9 @@ For examples, refer to our [Create Airflow listeners tutorial](https://docs.astr
 
 ## Dataset concepts
 
-You can define datasets in your Airflow environment and use them to create dependencies between DAGs. To define a dataset, instantiate the `Dataset` class and provide a string to identify the location of the dataset. This string must be in the form of a valid Uniform Resource Identifier (URI). 
+You can define datasets in your Airflow environment and use them to create dependencies between DAGs. To define a dataset, instantiate the `Dataset` class and provide a string to identify the location of the dataset. This string must be in the form of a valid Uniform Resource Identifier (URI), see [What is valid URI?](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html#what-is-valid-uri) for detailed information.
 
-In Airflow 2.4, the URI is not used to connect to an external system and there is no awareness of the content or location of the dataset. However, using this naming convention helps you to easily identify the datasets that your DAG accesses and ensures compatibility with future Airflow features.
+Currently, the URI is not used to connect to an external system and there is no awareness of the content or location of the dataset. However, using this naming convention helps you to easily identify the datasets that your DAG accesses and ensures compatibility with future Airflow features.
 
 The dataset URI is saved as plain text, so it is recommended that you hide sensitive values using environment variables or a secrets backend.
 
