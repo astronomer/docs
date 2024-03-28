@@ -24,6 +24,7 @@ In this guide you'll learn:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
+- Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
 - Basic bash commands. See the [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html).
 
 ## How to use the BashOperator
@@ -52,6 +53,58 @@ If you expect a non-zero exit from a sub-command you can add the prefix `set -e;
 :::
 
 Both the `bash_command` and the `env` parameter can accept [Jinja templates](templating.md). However, the input given through Jinja templates to `bash_command` is not escaped or sanitized. If you are concerned about potentially harmful user input you can use the setup shown in the [BashOperator documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/bash.html).
+
+## How to use the bash decorator
+
+In Airflow 2.9+ you can use `@task.bash` to create bash statements using Python functions. The string returned by the function will be executed as a bash command. All BashOperator parameters can be passed to the decorator as keyword arguments.
+
+The task below runs the bash command `echo $MY_VAR` with the environment variable `MY_VAR` set to `Hello World`.
+
+```python
+# from airflow.decorators import task
+
+@task.bash(
+    env={"MY_VAR": "Hello World"}
+)
+def bash_task():
+    return 'echo $MY_VAR'
+```
+
+This decorator is especially useful when you want to run bash commands based on complex Python logic, including inputs from upstream tasks. The following example demonstrates how to use the `@task.bash` decorator to conditionally run different bash commands based on the output of an upstream task.
+
+```python
+# from airflow.decorators import task
+
+@task
+def upstream_task():
+    dog_owner_data = {
+        "names": ["Trevor", "Grant", "Marcy", "Carly", "Philip"],
+        "dogs": [1, 2, 2, 0, 4],
+    }
+
+    return dog_owner_data
+
+@task.bash
+def bash_task(dog_owner_data):
+    names_of_dogless_people = []
+    for name, dog in zip(dog_owner_data["names"], dog_owner_data["dogs"]):
+        if dog < 1:
+            names_of_dogless_people.append(name)
+
+    if names_of_dogless_people:
+        if len(names_of_dogless_people) == 1:
+            # this bash command is executed if only one person has no dog
+            return f'echo "{names_of_dogless_people[0]} urgently needs a dog!"'
+        else:
+            names_of_dogless_people_str = " and ".join(names_of_dogless_people)
+            # this bash command is executed if more than one person has no dog
+            return f'echo "{names_of_dogless_people_str} urgently need a dog!"'
+    else:
+        # this bash command is executed if everyone has at least one dog
+        return f'echo "All good, everyone has at least one dog!"'
+
+bash_task(dog_owner_data=upstream_task())
+```
 
 ## When to use the BashOperator
 
