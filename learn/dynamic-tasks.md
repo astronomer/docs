@@ -123,6 +123,10 @@ The **Grid View** shows task details and history for each mapped task. All mappe
 
 ![Mapped Grid](/img/guides/mapped_grid_view_2_4.png)
 
+### Custom instance names for mapped tasks
+
+By default, mapped task instances are shown in the Airflow UI with their `map_index`. 
+
 ## Mapping over the result of another operator
 
 You can use the output of an upstream operator as the input data for a dynamically mapped downstream task.
