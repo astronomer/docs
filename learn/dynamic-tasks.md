@@ -123,9 +123,88 @@ The **Grid View** shows task details and history for each mapped task. All mappe
 
 ![Mapped Grid](/img/guides/mapped_grid_view_2_4.png)
 
-### Custom instance names for mapped tasks
+### Display custom map index names
 
-By default, mapped task instances are shown in the Airflow UI with their `map_index`. 
+By default, the `map_index` shown in the Airflow UI for dynamically mapped tasks is their integer index, that corresponds to the order in which the tasks were created. In Airflow 2.9 and later, you can [customize the name](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/authoring-and-scheduling/dynamic-task-mapping.html#named-mapping) of each mapped task instance by using the `map_index_template` parameter that defines a [Jinja](templating.md) template which is rendered after the execution of the task instance. This means you can include information from within the task instance in the displayed `map_index`.
+
+A common use case for custom map index names is to display information about which input was used to generate the mapped task. For example, if you are mapping over a list of files, you can display the name of the file as the `map_index` in the Airflow UI.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="display-custom-map-index-names"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+When using the TaskFlow API, the most straightforward way to set the `map_index_template` is to set it a new Jinja variable that you define in the task function using the `context` object. 
+
+```python
+# from airflow.decorators import task
+
+@task
+def get_fruits() -> list[dict]:
+
+    r = requests.get(f"https://www.fruityvice.com/api/fruit/all").json()
+    return r
+
+@task(map_index_template="{{ my_mapping_variable }}")
+def map_fruits(fruit_info: dict):
+    from airflow.operators.python import get_current_context
+
+    fruit_name = fruit_info["name"]  # extract information from the input dictionary
+    context = get_current_context()  # get the current context
+    context["my_mapping_variable"] = fruit_name  # define the custom map index variable
+
+    print(f"{fruit_name} sugar content: {fruit_info['nutritions']['sugar']}")
+
+map_fruits.expand(fruit_info=get_fruits())
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+When using traditional operators, you set the `map_index_template` parameter in the `.partial()` method. You can access the input given to mapped parameters by using the `task.<parameter>`. 
+
+```python
+# from airflow.decorators import task
+# from airflow.operators.bash import BashOperator
+# from airflow.models.baseoperator import chain
+
+@task
+def get_fruits() -> list[dict]:
+
+    r = requests.get(f"https://www.fruityvice.com/api/fruit/all").json()
+
+    for fruit in r:
+        fruit.update(fruit.pop("nutritions"))
+
+    for fruit in r:
+        for k, v in fruit.items():
+            fruit[k] = str(v)
+            
+    # the function returns a list of dictionaries with fruit attributes
+    return r
+
+get_fruits_obj = get_fruits()
+
+map_fruits = BashOperator.partial(
+    task_id="map_fruits",
+    bash_command='echo "$name sugar content: $sugar"',
+    # access the dictionary passed to the `env` parameter
+    map_index_template="{{ task.env['name'] }}",
+).expand(env=get_fruits_obj)
+
+chain(get_fruits_obj, map_fruits)
+```
+
+</TabItem>
+</Tabs>
+
+This changes the `MAP INDEX` displayed in the **[] Mapped Tasks** tab of the dynamically mapped task to the name of the fruit that a task instance is processing.
+
+![Screenshot of the Airflow UI Mapped Tasks tab showing the MAP INDEX values of fruits instead of integers.](/img/guides/dynamic-tasks_named_mapping_tf.png)
 
 ## Mapping over the result of another operator
 
