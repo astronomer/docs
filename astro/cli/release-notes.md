@@ -18,6 +18,34 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md).
 
+## Astro CLI 1.25.0
+
+Release date: March 28, 2024
+
+### Manage Deployment API tokens with the Astro CLI
+
+You can now manage [Deployment API tokens](deployment-api-tokens.md) using the following CLI commands:
+
+- `astro deployment token create`
+- `astro deployment token list`
+- `astro deployment token update`
+- `astro deployment token rotate`
+- `astro deployment token delete`
+
+
+### Additional improvements
+
+- Updated the example DAGs created when a user runs `astro dev init`.
+- The CLI will now tell you if your API token is invalid.
+
+
+### Bug fixes
+
+- Fixed an issue with `deployment variable create` where it would cut off the new variables value at the first "=" character.
+- Fixed an issue where running a deployment command in a workspace without a deployment caused an error. Now users will be asked if they want to create a deployment if one does not exist.
+- Fixed an issue where `astro dev start —deployment-id` was not creating local connections correctly in some scenarios.
+- Fixed an issue where `astro deployment` commands could only list 20 deployments. Now the commands will list up to 1000 for each workspace.
+
 ## Astro CLI 1.24.1
 
 Release date: February 29, 2024
