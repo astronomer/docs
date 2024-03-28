@@ -15,7 +15,7 @@ import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/ai
 
 In this tutorial, you'll learn how to: 
 
-- Create a [custom XCom backend](airflow-custom-xcom-backend.md) in Snowflake.
+- Create a [custom XCom backend](airflow-custom-xcom-backends.md) in Snowflake.
 - Create and use the Snowpark Model Registry in Snowflake.
 - Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
 - Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset to predict skiers' afternoon beverage choice.

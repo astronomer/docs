@@ -66,7 +66,7 @@ You can view your XComs in the Airflow UI by going to **Admin** > **XComs**. You
 
 XComs should be used to pass small amounts of data between tasks. For example, task metadata, dates, model accuracy, or single value query results are all ideal data to use with XCom.
 
-While you can technically pass large amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](airflow-custom-xcom-backend.md) and [scaling your Airflow resources](airflow-scaling-workers.md).
+While you can technically pass large amounts of data with XCom, be very careful when doing so and consider using [a custom XCom backend](airflow-custom-xcom-backends.md) and [scaling your Airflow resources](airflow-scaling-workers.md).
 
 When you use the standard XCom backend, the size-limit for an XCom is determined by your metadata database. Common sizes are: 
 
@@ -85,11 +85,11 @@ By default, Airflow supports serializations for:
 - [Delta Lake tables](https://delta.io/) (Airflow version 2.8+).
 - [Apache Iceberg tables](https://iceberg.apache.org/) (Airflow version 2.8+).
 
-If you need to serialize other data types you can do so using a [custom XCom backend](airflow-custom-xcom-backend.md).
+If you need to serialize other data types you can do so using a [custom XCom backend](airflow-custom-xcom-backends.md).
 
 ### Custom XCom backends
 
-Using a [custom XCom backend](airflow-custom-xcom-backend.md) means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. To learn how to implement a custom XCom backend using Amazon S3, Google Cloud Storage or Azure blob Storage, follow this [step-by-step tutorial](custom-xcom-backends-tutorial.md).
+Using a [custom XCom backend](airflow-custom-xcom-backends.md) means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. To learn how to implement a custom XCom backend using Amazon S3, Google Cloud Storage or Azure blob Storage, follow this [step-by-step tutorial](custom-xcom-backends-tutorial.md).
 
 ### Example DAG using XComs
 

@@ -45,7 +45,7 @@ There are many use cases for setup and teardown tasks. For example, you might wa
 - Manage a Spark cluster to run heavy workloads.
 - Manage compute resources to train an ML model.
 - Manage the resources to run [data quality](data-quality.md) checks.
-- Set up storage in your [custom XCom backend](airflow-custom-xcom-backend.md) to hold data processed through Airflow tasks, then tear the extra storage down afterwards when the XCom data is no longer needed. 
+- Set up storage in your [custom XCom backend](airflow-custom-xcom-backends.md) to hold data processed through Airflow tasks, then tear the extra storage down afterwards when the XCom data is no longer needed. 
 
 ## Setup/ teardown concepts
 
