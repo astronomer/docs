@@ -129,8 +129,13 @@ When you work with datasets, keep the following considerations in mind:
 - Airflow monitors datasets only within the context of DAGs and tasks. It does not monitor updates to datasets that occur outside of Airflow.
 - Consumer DAGs that are scheduled on a dataset are triggered every time a task that updates that dataset completes successfully. For example, if `task1` and `task2` both produce `dataset_a`, a consumer DAG of `dataset_a` runs twice - first when `task1` completes, and again when `task2` completes.
 - Consumer DAGs scheduled on a dataset are triggered as soon as the first task with that dataset as an outlet finishes, even if there are downstream producer tasks that also operate on the dataset.
-- In Airflow 2.9+, you can use conditional logic when scheduling a DAG on multiple Datasets, see [Conditional Dataset Scheduling](#conditional-dataset-scheduling).
-- In Airflow 2.9+, you can combine dataset and time-based scheduling, see [Combined Dataset and Time-based Scheduling](#combined-dataset-and-time-based-scheduling).
+
+Airflow 2.9 added several new features to datasets:
+- [Conditional Dataset Scheduling](#conditional-dataset-scheduling)
+- [Combined Dataset and Time-based Scheduling](#combined-dataset-and-time-based-scheduling)
+- Datasets are now shown in the **Graph** view of a DAG in the Airflow UI. The `upstream1` DAG in the screenshot below is a consumer of the `dataset0` dataset, and has one task `update_dataset_1` that updates the `dataset1` dataset.
+
+    ![Screenshot of the Airflow UI showing the graph view of a DAG with a ](/img/guides/airflow-datasets_in_graph_view.png)
 
 For more information about datasets, see [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html). 
 
@@ -313,8 +318,70 @@ The dataset expression this schedule creates is:
 
 ### Combined dataset and time-based scheduling
 
+In Airflow 2.9 and later, you can combine dataset-based scheduling with time-based scheduling with the `DatasetOrTimeSchedule` timetable. A DAG scheduled with this timetable will run either when its `timetable` condition is met or when its `dataset` condition is met.
+
+The DAG shown below runs on a time-based schedule defined by the `0 0 * * *` cron expression, which is every day at midnight. The DAG also runs when either `dataset3` or `dataset4` is updated.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="combined-dataset-and-time-based-scheduling"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="taskflow">
+
+```python
+from airflow.decorators import dag, task
+from airflow.datasets import Dataset
+from pendulum import datetime
+from airflow.timetables.datasets import DatasetOrTimeSchedule
+from airflow.timetables.trigger import CronTriggerTimetable
 
 
+@dag(
+    start_date=datetime(2024, 3, 1),
+    schedule=DatasetOrTimeSchedule(
+        timetable=CronTriggerTimetable("0 0 * * *", timezone="UTC"),
+        datasets=(Dataset("dataset3") | Dataset("dataset4")),
+        # Use () instead of [] to be able to use conditional dataset scheduling!
+    ), 
+    catchup=False,
+)
+def toy_downstream3_dataset_and_time_schedule():
+
+    # your tasks here
+
+toy_downstream3_dataset_and_time_schedule()
+```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+from airflow.models import DAG
+from airflow.datasets import Dataset
+from pendulum import datetime
+from airflow.timetables.datasets import DatasetOrTimeSchedule
+from airflow.timetables.trigger import CronTriggerTimetable
+
+
+with DAG(
+    dag_id="toy_downstream3_dataset_and_time_schedule",
+    start_date=datetime(2024, 3, 1),
+    schedule=DatasetOrTimeSchedule(
+        timetable=CronTriggerTimetable("0 0 * * *", timezone="UTC"),
+        datasets=(Dataset("dataset3") | Dataset("dataset4")),
+        # Use () instead of [] to be able to use conditional dataset scheduling!
+    ), 
+    catchup=False,
+):
+    # your tasks here
+
+```
+
+</TabItem>
+</Tabs>
 
 ## Datasets with the Astro Python SDK
 
