@@ -276,6 +276,7 @@ Other DAG parameters include:
 | `is_paused_upon_creation` | Whether the DAG is paused when it is created. When not set, the Airflow config `core.dags_are_paused_at_creation` is used, which defaults to `True`. |
 | `auto_register`           | Defaults to `True` and can be set to `False` to prevent DAGs using a `with` context from being automatically registered which can be relevant in some advanced dynamic DAG generation use cases. See [Registering dynamic DAGs](https://airflow.apache.org/docs/apache-airflow/stable/howto/dynamic-dag-generation.html#registering-dynamic-dags). |
 | `fail_stop`               |  In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`. |
+| `dag_display_name`        | Airflow 2.9+ allows you to override the `dag_id` to display a different DAG name in the Airflow UI. This parameter allows special characters. |
 
 Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-level callbacks](error-notifications-in-airflow.md#airflow-callbacks) for more information.
 
