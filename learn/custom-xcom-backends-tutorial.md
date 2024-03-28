@@ -112,7 +112,6 @@ For other ways to set up a connection between Airflow and AWS, see the [Amazon p
 3. [Create a custom IAM role](https://cloud.google.com/iam/docs/creating-custom-roles) called `AirflowXComBackendGCS` for Airflow to access your bucket. Assign 6 permissions:
 
     - storage.buckets.list
-    - storage.buckets.create
     - storage.objects.create
     - storage.objects.delete
     - storage.objects.get
