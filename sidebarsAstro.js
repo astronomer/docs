@@ -46,10 +46,9 @@ module.exports = {
         'astro-dags-overview',
         {
           type: 'link',
-          label: 'Develop your Astro project',
+          label: 'Astro projects',
           href: 'https://docs.astronomer.io/astro/cli/develop-project',
         },
-        "kubernetespodoperator",
         {
           type: "category",
           label: "Connections and variables",
@@ -60,6 +59,7 @@ module.exports = {
           ],
         },
         "upgrade-runtime",
+        "kubernetespodoperator",
         "view-logs",
         "manage-dags",
         "airflow-api",
