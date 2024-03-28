@@ -49,13 +49,13 @@ The **DAG** view gives you detailed insights into a specific DAG, including its 
 
 On the left side you can see a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run, and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered by a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
 
-![Screenshot of the Airflow UI DAG view of an individual DAG. The left side with the Grid view is highlighted.](/img/guides/airflow-ui_grid_left_side.png)
+![Screenshot of the Airflow UI DAG view of an individual DAG. The left side with the DAG grid view is highlighted.](/img/guides/airflow-ui_grid_left_side.png)
 
 On the right side you can see further details about the item (DAG, DAG run or task instance) that is currently selected. 
 
 ![Screenshot of the Airflow UI DAG view of an individual DAG. The right side with the DAG details is highlighted.](/img/guides/airflow-ui_grid_right_side.png)
 
-When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the **Grid** view, several action buttons appear:
+When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the DAG grid, several action buttons appear:
 
 ![Screenshot of the Airflow UI DAG view shown when an individual task instances is selected with 3 additional buttons available.](/img/guides/airflow-ui_grid_actions.png)
 
@@ -63,7 +63,7 @@ When a DAG run, task instance, or [task group](task-groups.md) instance is selec
 - **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without running it. This option is often useful when the root cause of a task failure was fixed manually in the external data tool and there's no need to rerun the task. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
 - **Filter Tasks**: This button allows you to filter the tasks shown in the DAG grid and DAG graph based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task. 
 
-![Gif of the Airflow DAG view showing how applying the filters 'Filter downstream' and 'Filter upstream' affect the Grid to the left and the DAG graph.](/img/guides/airflow-ui_grid_filter.gif)
+![Gif of the Airflow DAG view showing how applying the filters 'Filter downstream' and 'Filter upstream' affect the grid to the left and the DAG graph.](/img/guides/airflow-ui_grid_filter.gif)
 
 There are several tabs available within the **DAG** view:
 
@@ -80,7 +80,7 @@ There are several tabs available within the **DAG** view:
 
 :::tip
 
-In Airflow 2.7 and later, the **Grid** view includes keyboard shortcuts. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
+In Airflow 2.7 and later, the DAG view includes keyboard shortcuts. You can see all available shortcuts by pressing `shift` + `/` while in the DAG view.
 
 :::
 
@@ -108,7 +108,7 @@ The **Graph** tab shows a  graph visualization of the tasks and dependencies in 
 
 :::note
 
-Earlier Airflow versions had a different **Graph** view that was not integrated into the **Grid** view. See the [Airflow documentation of your version](https://airflow.apache.org/docs/apache-airflow/2.6.3/ui.html#graph-view) for more information.
+Earlier Airflow versions had a different **Graph** view that was not integrated into the DAG view. See the [Airflow documentation of your version](https://airflow.apache.org/docs/apache-airflow/2.6.3/ui.html#graph-view) for more information.
 
 :::
 
@@ -188,7 +188,7 @@ Other views on the **Browse** tab include:
 - **Jobs:** Shows a list of all jobs that have been completed. This includes executed tasks as well as scheduler jobs.
 - **Audit Logs:** Shows a list of events that have occurred in your Airflow environment that can be used for auditing purposes.
 - **Task Reschedules:** Shows a list of all tasks that have been rescheduled.
-- **Triggers:** Shows any triggers that occurred in this Airflow environment. To learn more about triggers and related concepts added in Airflow 2.2, you can check out the guide on [Deferrable Operators](deferrable-operators.md).
+- **Triggers:** Shows any triggers that occurred in this Airflow environment. To learn more about triggers and related concepts, you can check out the guide on [Deferrable Operators](deferrable-operators.md).
 - **SLA Misses:** Shows any task instances that have missed their SLAs.
 
 ## Admin tab
