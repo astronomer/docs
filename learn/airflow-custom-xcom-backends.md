@@ -12,7 +12,10 @@ Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data be
 
 In this guide you learn:
 
-- 
+- Why you might want to use a custom XCom backend.
+- How to set up a custom XCom backend using the Object Storage XCom backend.
+- How to set up a custom XCom backend using a custom XCom backend class with custom serialization and deserialization methods.
+- How to override the `.clear()` method to delete XComs from a custom XCom backend when clearing tasks.
 
 :::warning
 
@@ -104,8 +107,8 @@ class MyCustomXComBackend(BaseXCom):
         **kwargs
     ):
         
-        # the connection to AWS is created by using the S3 hook with a AWS connection id
-        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        # the connection to AWS is created by using the S3 hook
+        hook = S3Hook(aws_conn_id="my_aws_conn_id")
         # make sure the file_id is unique, either by using combinations of
         # the task_id, run_id and map_index parameters or by using a uuid
         filename = "data_" + str(uuid.uuid4()) + ".json"
@@ -128,9 +131,8 @@ class MyCustomXComBackend(BaseXCom):
             replace=True
         )
 
-        # the connection to GCS is created by using the GCShook with 
-        # the conn id configured in Step 3
-        hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+        # the connection to GCS is created by using the GCS hook
+        hook = GCSHook(gcp_conn_id="my_gcs_conn_id")
 
         # load the local JSON file into the GCS bucket
         hook.upload(
@@ -192,8 +194,10 @@ If you want to further customize the functionality for your custom XCom backend,
 A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend, using the AWS version of the CustomXComBackendJSON XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
 
 <details>
-<summary>Click to an example override to the .clear() method</summary>
+<summary>Click to view an example override of the .clear() method</summary>
 <div>
+
+This clear method override can be added to the `MyCustomXComBackend` class shown previously to delete the XCom from the S3 bucket when the XCom is cleared from the Airflow metadata database. The deletion does not affect the XCom stored in Google Cloud Storage.
 
 ```python
 from airflow.utils.session import NEW_SESSION, provide_session
@@ -258,12 +262,12 @@ def clear(
         # decode the XCom binary to UTF-8
         reference_string = reference_string.decode('utf-8')
         
-        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-        key = reference_string.replace(CustomXComBackendJSON.PREFIX, '')
+        hook = S3Hook(aws_conn_id="my_aws_conn_id")
+        key = reference_string.replace(MyCustomXComBackend.PREFIX, '')
 
         # use the reference string to delete the object from the S3 bucket
         hook.delete_objects(
-            bucket=CustomXComBackendJSON.BUCKET_NAME,
+            bucket=MyCustomXComBackend.S3_BUCKET_NAME,
             keys=json.loads(key)
         )
 
