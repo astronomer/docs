@@ -150,7 +150,7 @@ For other ways to set up a connection between Airflow and Google Cloud, see the 
 
     ![Shared access token](/img/guides/xcom_backend_shared_access_token.png)
 
-4. Click on `Generate SAS token and URL` and copy the `Blob SAS URL`. This URL contains a secret and you will need it again later in this tutorial.
+4. Go to your Storage account and navigate to **Access keys**. Copy the **Key** and **Connection string** values and save them in a secure location to use in [step 3](#step-3-set-up-your-airflow-connection).
 
 
 :::info
@@ -258,9 +258,9 @@ An Airflow connection is necessary to connect Airflow with your object storage c
 
     - **Conn Id**: `my_azure_conn`
     - **Conn Type**: `Microsoft Azure Blob Storage`
-    - **Account Name**: `<your account name>`
-    - **Account Key**: `<your account key>`
-    - **SAS Token**: `<your SAS token>`
+    - **Account URL (Active Directory Auth)**: `<the URL of your Azure Storage account>`
+    - **Blob Storage Key (optional)**: `<access key to your Azure Storage account>`
+    - **Blob Storage Connection String (optional)**: `<connection string to your Azure Storage account>`
 
     To learn more about configuration options for the Azure connection, see the [Microsoft Azure provider](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/connections/wasb.html) documentation.
 
