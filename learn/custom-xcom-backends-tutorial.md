@@ -148,9 +148,7 @@ For other ways to set up a connection between Airflow and Google Cloud, see the 
     
     Set the duration the token will be valid and set **Allowed Protocols** to `HTTPS only`. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI, use the IP address of your computer.
 
-    ![Shared access token](/img/guides/xcom_backend_shared_access_token.png)
-
-4. Go to your Storage account and navigate to **Access keys**. Copy the **Key** and **Connection string** values and save them in a secure location to use in [step 3](#step-3-set-up-your-airflow-connection).
+4. Go to your Storage account and navigate to [**Access keys**](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage). Copy the **Key** and **Connection string** values and save them in a secure location to use in [step 3](#step-3-set-up-your-airflow-connection).
 
 
 :::info
