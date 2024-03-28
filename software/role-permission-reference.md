@@ -101,7 +101,7 @@ The following tables show high level comparisons of the different permitted acti
 
 ## Default role permissions lists
 
-The following sections list the permission values that each role has by default as defined in the Astronomer Helm chart. You can update these permissions in your `config.yaml` file if you want to change the permissions that each role has. See [Customize role permissions](manage-platform-users.md#customize-role-permissions). 
+The following sections list the permission values that each role has by default as defined in the Astronomer Helm chart. You can update these permissions in your `values.yaml` file if you want to change the permissions that each role has. See [Customize role permissions](manage-platform-users.md#customize-role-permissions). 
 
 These lists are also published in YAML form in the [Astronomer documentation repository](https://github.com/astronomer/docs/blob/main/software_configs/0.33/default.yaml).
 
