@@ -48,7 +48,7 @@ You can use pre-configured Airflow executors, or you can create a [custom execut
     - Your tasks require very specific resource configurations.
     - Your tasks run infrequently, and you don't want to incur worker resource costs when they aren't running.
 
-The [CeleryKubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery_kubernetes.html) and the [Dask Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/dask.html) are considered more experimental and are not as widely adopted as the other executors.
+- **[CeleryKubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery_kubernetes.html)**: Allows you to run both, a CeleryExecutor and a KubernetesExecutor in the same Airflow instance. Which executor a specific task uses is determined using the `queue` parameter. You need to install both, the [Celery](https://registry.astronomer.io/providers/apache-airflow-providers-celery/versions/latest) and [CNCF Kubernetes](https://registry.astronomer.io/providers/apache-airflow-providers-cncf-kubernetes/versions/latest) providers to use this executor.
 
 ## Managing Airflow infrastructure
 
