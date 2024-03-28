@@ -5,4 +5,291 @@ id: airflow-custom-xcom-backends
 description: 'Use this guide to learn about different ways to set up custom XCom backends.'
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
+Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. With **Airflow Custom XCom backends** you can configure where and how Airflow stores XComs, including using cloud-based object storage containers, as well as customizing serialization and deserialization methods.
+
+In this guide you learn:
+
+- 
+
+:::warning
+
+While a custom XCom backend allows you to store virtually unlimited amounts of data as XCom, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link&utm_medium=docs&utm_content=learn-xcom-backend-tutorial&utm_source=body).
+
+:::
+
+## Assumed Knowledge
+
+To get the most benefits from this guide, you need an understanding of:
+
+- XCom basics. See [Pass data between tasks](airflow-passing-data-between-tasks.md).
+- Basic knowledge of a cloud-based object storage service like [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/).
+
+## Why use a custom XCom backend?
+
+Common reasons to use a custom XCom backend include:
+
+- Needing more storage space for XCom than the Airflow metadata database can offer.
+- Running a production environment where you require custom retention, deletion, and backup policies for XComs.
+- Accessing XCom without accessing the metadata database.
+- Restricting types of allowed XCom values.
+- Save XCom in multiple locations simultaneously.
+
+It is also possible to use custom XCom backends to define custom serialization and deserialization methods for XComs if adding a serialization method to a class or registering a custom serializer is not feasible. See [Custom serialization and deserialization](#custom-serialization-and-deserialization) for more information.
+
+## How to set up a custom XCom backend
+
+There are two main ways to set up a custom XCom backend:
+
+- **Object Storage XCom backend**: Use this method to create a custom XCom backend when you want to store XComs in a cloud-based object storage service like AWS S3, GCP Cloud Storage, or Azure Blob Storage.
+- **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored for example, simultaneously storing XCom in two different locations.
+
+Additionally, some provider packages offer custom XCom backends that you can use out of the box, for example the [Snowpark provider](airflow-snowpark.md) which contains a custom XCom backend for Snowflake.
+
+### Use the Object Storage XCom backend
+
+Airflow 2.9+ added the possibility to create a custom XCom backend using the Object Storage feature. Object Storage XCom backends are part of the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) provider and can be defined only using environment variables. The following environment variables are available:
+
+- `AIRFLOW__CORE__XCOM_BACKEND`: The XCom backend to use. Set this to `airflow.providers.common.io.xcom.backend.XComObjectStoreBackend` to use the Object Storage XCom backend.
+- `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH`: The path to the object storage where XComs are stored. The path should be in the format `<your-scheme>://<your-connection-id@<your-bucket>/xcom`. For example, `s3://my-s3-connection@my-bucket/xcom`.
+- `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_THRESHOLD`: The threshold in bytes for XComs to be stored in the object storage. All objects smaller or equal to this threshold are stored in the metadata database. All objects larger than this threshold are stored in the object storage. The default value is `-1`, meaning all XComs are stored in the metadata database.
+- `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_COMPRESSION`: Optional. The compression algorithm to use when storing XComs in the object storage, for example `zip`. The default value is `None`.
+
+For a step-by-step tutorial on how to set up a custom XCom backend using the Object Storage XCom backend for Amazon S3, Google Cloud Storage and Azure Blob Storage, see the [Set up a custom XCom backend using Object Storage](custom-xcom-backends-tutorial.md).
+
+:::caution
+
+Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565).
+
+:::
+
+### Use a custom XCom backend class
+
+To create a custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
+
+The code below shows an example `MyCustomXComBackend` class that only allows JSON-serializeable XCom and stores them in both, Amazon S3 and Google Cloud Storage using a custom `serialize_value()` method. The `deserialize_value()` method retrieves the XCom from the Amazon S3 bucket and returns the value.
+
+The Airflow metadata database stores a reference string to the XCom, which is displayed in the XCom tab of the Airflow UI. The reference string is prefixed with `s3_and_gs://` to indicate that the XCom is stored in both Amazon S3 and Google Cloud Storage. You can add any serialization and deserialization logic to the `serialize_value()` and `deserialize_value()` methods that you need, see [Custom serialization and deserialization](#custom-serialization-and-deserialization) for more information.
+
+<details>
+<summary>Click to view the full custom XCom backend class example code</summary>
+<div>
+
+```python
+from airflow.models.xcom import BaseXCom
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from airflow.providers.google.cloud.hooks.gcs import GCSHook
+import json
+import uuid
+import os
+
+class MyCustomXComBackend(BaseXCom):
+    # the prefix is optional and used to make it easier to recognize
+    # which reference strings in the Airflow metadata database
+    # refer to an XCom that has been stored in remote storage
+    PREFIX = "s3_and_gs://"
+    S3_BUCKET_NAME = "s3-xcom-backend-example"
+    GS_BUCKET_NAME = "gcs-xcom-backend-example"
+
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
+        
+        # the connection to AWS is created by using the S3 hook with a AWS connection id
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        # make sure the file_id is unique, either by using combinations of
+        # the task_id, run_id and map_index parameters or by using a uuid
+        filename = "data_" + str(uuid.uuid4()) + ".json"
+        # define the full S3 key where the file should be stored
+        key = f"{run_id}/{task_id}/{filename}"
+
+        # write the value to a local temporary JSON file
+        # only allow JSON-serializeable values
+        with open(filename, 'a+') as f:
+            try:
+                json.dump(value, f)
+            except Exception as e:
+                raise ValueError(f"XCom value is not JSON-serializeable!: {e} ")
+
+        # load the local JSON file into the S3 bucket
+        hook.load_file(
+            filename=filename,
+            key=key,
+            bucket_name=MyCustomXComBackend.S3_BUCKET_NAME,
+            replace=True
+        )
+
+        # the connection to GCS is created by using the GCShook with 
+        # the conn id configured in Step 3
+        hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+
+        # load the local JSON file into the GCS bucket
+        hook.upload(
+            filename=filename,
+            object_name=gs_key,
+            bucket_name=MyCustomXComBackend.GS_BUCKET_NAME,
+        )
+
+        # remove the local temporary JSON file
+        os.remove(filename)
+
+        # define the string that will be saved to the Airflow metadata 
+        # database to refer to this XCom
+        reference_string = MyCustomXComBackend.PREFIX + s3_key
+
+        # use JSON serialization to write the reference string to the
+        # Airflow metadata database (like a regular XCom)
+        return BaseXCom.serialize_value(value=reference_string)
+
+    @staticmethod
+    def deserialize_value(result):
+        # retrieve the relevant reference string from the metadata database
+        reference_string = BaseXCom.deserialize_value(result=result)
+        
+        # create the S3 connection using the S3Hook and recreate the S3 key
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        key = reference_string.replace(MyCustomXComBackend.PREFIX, "")
+
+        # download the JSON file found at the location described by the 
+        # reference string to a temporary local folder
+        filename = hook.download_file(
+            key=key,
+            bucket_name=MyCustomXComBackend.S3_BUCKET_NAME,
+            local_path="/tmp"
+        )
+
+        # load the content of the local JSON file and return it to be used by
+        # the operator
+        with open(filename, 'r') as f:
+            output = json.load(f)
+
+        # remove the local temporary JSON file
+        os.remove(filename)
+
+        return output
+```
+
+</div>
+</details>
+
+To use a custom XCom backend class, you need to save it in a Python file in the `include` directory of your Airflow project. Then, set the `AIRFLOW__CORE__XCOM_BACKEND` environment variable in your Airflow instance to the path of the custom XCom backend class. If you run Airflow locally with the Astro CLI, you can set the environment variable in the `.env` file of your Astro project. On Astro, you can [set the environment variable in the Astro UI](https://docs.astronomer.io/astro/environment-variables).
+
+```text
+AIRFLOW__CORE__XCOM_BACKEND=include.<your-file-name>.MyCustomXComBackend
+```
+
+If you want to further customize the functionality for your custom XCom backend, you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
+
+A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend, using the AWS version of the CustomXComBackendJSON XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
+
+<details>
+<summary>Click to an example override to the .clear() method</summary>
+<div>
+
+```python
+from airflow.utils.session import NEW_SESSION, provide_session
+
+@classmethod
+@provide_session
+def clear(
+    cls,
+    execution_date = None,
+    dag_id = None,
+    task_id =  None,
+    session = NEW_SESSION,
+    *,
+    run_id = None,
+    map_index = None,
+) -> None:
+
+    from airflow.models import DagRun
+    from airflow.utils.helpers import exactly_one
+    import warnings
+    from airflow.exceptions import RemovedInAirflow3Warning
+
+    if dag_id is None:
+        raise TypeError("clear() missing required argument: dag_id")
+    if task_id is None:
+        raise TypeError("clear() missing required argument: task_id")
+
+    if not exactly_one(execution_date is not None, run_id is not None):
+        raise ValueError(
+            f"Exactly one of run_id or execution_date must be passed. "
+            f"Passed execution_date={execution_date}, run_id={run_id}"
+        )
+
+    if execution_date is not None:
+        message = "Passing 'execution_date' to 'XCom.clear()' is deprecated. Use 'run_id' instead."
+        warnings.warn(message, RemovedInAirflow3Warning, stacklevel=3)
+        run_id = (
+            session.query(DagRun.run_id)
+            .filter(DagRun.dag_id == dag_id, DagRun.execution_date == execution_date)
+            .scalar()
+        )
+
+    #### Customization start
+
+    # get the reference string from the Airflow metadata database
+    if map_index is not None:
+        reference_string = session.query(cls.value).filter_by(
+            dag_id=dag_id,
+            task_id=task_id,
+            run_id=run_id,
+            map_index=map_index
+        ).scalar()
+    else:
+        reference_string = session.query(cls.value).filter_by(
+            dag_id=dag_id,
+            task_id=task_id,
+            run_id=run_id
+        ).scalar()
+
+    if reference_string is not None:
+
+        # decode the XCom binary to UTF-8
+        reference_string = reference_string.decode('utf-8')
+        
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        key = reference_string.replace(CustomXComBackendJSON.PREFIX, '')
+
+        # use the reference string to delete the object from the S3 bucket
+        hook.delete_objects(
+            bucket=CustomXComBackendJSON.BUCKET_NAME,
+            keys=json.loads(key)
+        )
+
+    # retrieve the XCom record from the metadata database containing the reference string
+    query = session.query(cls).filter_by(
+        dag_id=dag_id,
+        task_id=task_id,
+        run_id=run_id
+    )
+    if map_index is not None:
+        query = query.filter_by(map_index=map_index)
+
+    # delete the XCom containing the reference string from metadata database
+    query.delete()
+```
+
+</div>
+</details>
+
+## Custom serialization and deserialization
+
+By default, Airflow includes [serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html) methods for common object types like [JSON](https://www.json.org/json-en.html), [pandas DataFrames](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [NumPy](https://numpy.org/). You can see all supported types in the [Airflow source code](https://github.com/apache/airflow/tree/main/airflow/serialization/serializers).
+
+In cases where you need to pass data objects through XCom that are not supported you have several options:
+
+- Enable [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling). This method is easy to implement for local testing, but not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). 
+- Register a custom serializer, see [Serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html).
+- Add a `serialize()` and `deserialize()` method to the class of the object you want to pass through XCom, see [Serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html).
+- Use a custom XCom backend to define custom serialization and deserialization methods, see [Use a custom XCom backend class](#use-a-custom-xcom-backend-class).
