@@ -32,12 +32,10 @@ You can now manage [Deployment API tokens](deployment-api-tokens.md) using the f
 - `astro deployment token rotate`
 - `astro deployment token delete`
 
-
 ### Additional improvements
 
-- Updated the example DAGs created when a user runs `astro dev init`.
-- The CLI will now tell you if your API token is invalid.
-
+- Updated the example DAGs that the Astro CLI creates when you run `astro dev init`.
+- The CLI now tells you if your API token is invalid.
 
 ### Bug fixes
 
@@ -72,13 +70,13 @@ Additionally, you can create new development Deployments and configure long-term
 
 ### Additional improvements
 
-- You can now configure a custom workload identity when you create a Deployment using a Deployment file. 
+- You can now configure a custom workload identity when you create a Deployment using a Deployment file.
 - Added support for the upcoming custom role management feature on Astro
 
 ### Bug fixes
 
 - Fixed an issue where `astro deployment variable list --save` didn't format secret environment variables correctly.
-- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token. 
+- Fixed an issue where you couldn't update a Deployment with a Deployment file using a Deployment API token.
 
 ## Astro CLI 1.23.0
 
@@ -111,7 +109,7 @@ Instead, you can use the new `--default-task-pod-cpu`, `--default-task-pod-memor
 
 The following changes have been made to the format of [Deployment files](deployment-file-reference.md):
 
-- You no longer have to specify a `cluster_name` for standard Deployment files. 
+- You no longer have to specify a `cluster_name` for standard Deployment files.
 - `scheduler_size` is no longer case sensitive.
 - Possible values for `cloud_provider` are now `gcp`, `aws`, and `azure`. This input is not case sensitive.
 - Possible values for `deployment_type` now include `standard`, `dedicated`, and `hybrid` in addition to the existing values of `hosted_shared`, `hosted_dedicated`, and `hosted_standard`. This input is not case sensitive
