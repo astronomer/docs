@@ -5,16 +5,13 @@ id: support
 description: Get Astronomer Software support when you need it.
 ---
 
-In addition to product documentation, the following resources are available to help you resolve issues:
-
-- [Astronomer Forum](https://forum.astronomer.io)
-- [Airflow guides](https://docs.astronomer.io/learn/)
-
 If you're experiencing an issue or have a question that requires Astronomer expertise, you can use one of the following methods to contact Astronomer support:
 
 - Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us)
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io)
 - Call +1 (831) 777-2768
+
+In addition to product documentation, the [Airflow guides](https://docs.astronomer.io/learn/) are available to help you resolve issues.
 
 ## Best practices for support request submissions
 
@@ -69,7 +66,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
 ### Check recommended support articles
 
-If you draft your support ticket on the [Astronomer support portal](https://support.astronomer.io), the portal automatically recommends support articles to you based on the content in your ticket. Astronomer recommends looking through these recommendations to see if your issue has a documented solution before submitting your ticket. 
+If you draft your support ticket on the [Astronomer support portal](https://support.astronomer.io), the portal automatically recommends support articles to you based on the content in your ticket. Astronomer recommends looking through these recommendations to see if your issue has a documented solution before submitting your ticket.
 
 You can also proactively search support articles without submitting a support ticket on the [Astronomer knowledge base](https://support.astronomer.io/hc/en-us).
 
