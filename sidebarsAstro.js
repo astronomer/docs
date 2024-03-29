@@ -512,6 +512,17 @@ module.exports = {
             'cli/astro-deployment-runtime-upgrade',
             'cli/astro-deployment-service-account',
             'cli/astro-deployment-team',
+            {
+              type: "category",
+              label: "astro deployment token",
+              items: [
+                'cli/astro-deployment-token-create',
+                'cli/astro-deployment-token-delete',
+                'cli/astro-deployment-token-list',
+                'cli/astro-deployment-token-rotate',
+                'cli/astro-deployment-token-update',
+              ],
+            },
             'cli/astro-deployment-update',
             'cli/astro-deployment-user',
             {
