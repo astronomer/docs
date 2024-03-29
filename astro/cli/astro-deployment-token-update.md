@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-Create an Astro [Deployment API Token](deployment-api-tokens.md)
+Update an Astro [Deployment API Token](deployment-api-tokens.md)
 
 To use your API token in an automated process, see [Authenticate an automation tool](automation-authentication.md).
 
