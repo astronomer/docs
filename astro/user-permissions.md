@@ -89,7 +89,7 @@ To manage a user's Workspace permissions, see [Manage Worksapce users](manage-wo
 
 There are two types of Deployment roles: the default Deployment Admin role and [custom Deployment roles](customize-deployment-roles.md).
 
-Deployment Admin roles have the same permissions as the [Workspace Operator](#workspace-roles) role but only Deplyment-level operations in a specific Deployment. For example, a Deployment Admin can create a Deployment [environment variable](environment-variables.md) but, unlike a Workspace Operator, they can't create an [Astro alert](alerts.md) because alerts are configured at the Workspace level.
+Deployment Admin roles have the same permissions as the [Workspace Operator](#workspace-roles) role but only Deployment-level operations in a specific Deployment. For example, a Deployment Admin can create a Deployment [environment variable](environment-variables.md) but, unlike a Workspace Operator, they can't create an [Astro alert](alerts.md) because alerts are configured at the Workspace level.
 
 A custom Deployment role is a role that your Organization has configured to have specific Deployment-level permissions. For a complete list of available custom Deployment role permissions, see [Deployment role reference](deployment-role-reference.md).
 
