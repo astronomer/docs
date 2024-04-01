@@ -9,7 +9,7 @@ import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
 
 <EnterpriseBadge/>
 
-To provide greater control over your cloud resources, you can set a rule so that only specific Workspaces can use a dedicated cluster. For example, you can configure a cluster so that only production-level Workspaces can create Deployments in the cluster.
+To provide greater control over your cloud resources, you can set a rule so that only specific Workspaces can use a specific cluster. For example, you can configure a cluster so that only production-level Workspaces can create Deployments in the cluster.
 
 Use this document to learn restrict a cluster so that only authorized Workspaces can use it.
 
