@@ -175,7 +175,7 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 
 ### Prerequisites
 
-- (Optional) [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
+- A container service like [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher) or Podman.
 
 By default, the Astro CLI uses Docker as its container management engine for running Airflow locally. However, if your organization uses Podman to run and manage containers, you can configure the Astro CLI to use it instead. See [Run the Astro CLI with Podman](https://docs.astronomer.io/astro/cli/use-podman?tab=mac#configure-the-astro-cli-to-use-podman) for prerequisites and configuration steps.
 
