@@ -125,17 +125,7 @@ By default, the Astro CLI uses Docker as its container management engine for run
     winget install -e --id Astronomer.Astro -v {{CLI_VER_LATEST}}
     ```
 
-1. Run the following command to access the location of the CLI executable:
-
-    ```sh
-    $env:path.split(";")
-    ```
-
-    From the text that appears, copy the path for the Astro CLI executable. It should be similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`.
-
-2. Paste the path into File Explorer or open the file path in terminal, then rename the Astro executable to `astro.exe`.
-
-3. Run `astro version` to confirm the Astro CLI is installed properly.
+2. Run `astro version` to confirm the Astro CLI is installed properly.
 
 ### Resolve installation issues
 
