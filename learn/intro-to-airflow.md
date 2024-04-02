@@ -8,13 +8,13 @@ description: "Learn what Apache Airflow is and what problems it solves. Get free
 import CodeBlock from '@theme/CodeBlock';
 import example_astronauts from '!!raw-loader!../code-samples/dags/intro-to-airflow/example_astronauts.py';
 
-[Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. It is downloaded millions of times per month and has a large and active open source community. The core principle of Airflow is to define data pipelines as code, allowing for dynamic and scalable workflows.
+[Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. Every month, millions of new and returning users download Airflow and it has a large, active open source community. The core principle of Airflow is to define data pipelines as code, allowing for dynamic and scalable workflows.
 
 This guide offers an introduction to Apache Airflow and its core concepts. You'll learn about:
 
 - The history of Apache Airflow.
 - Why you should use Airflow.
-- Common use cases of Airflow.
+- Common use cases for Airflow.
 - Important Airflow concepts.
 - The components of the Airflow infrastructure.
 - Where to find resources to learn more about Airflow.
@@ -37,7 +37,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Airflow history
 
-Over the past ten years, Airflow has grown to be the open source standard for data orchestration:
+Over the past ten years, Airflow grew to be the open source standard for data orchestration:
 
 - 2015: Airflow started as an open source project at Airbnb. In 2015, Airbnb was growing rapidly and struggling to manage the vast quantities of internal data it generated every day. To satisfy the need for a robust scheduling tool, [Maxime Beauchemin](https://maximebeauchemin.medium.com/) created Airflow to allow Airbnb to quickly author, iterate, and monitor batch data pipelines.
 - 2016: Airflow officially joined the Apache Foundation Incubator.
@@ -66,7 +66,7 @@ Airflow provides many benefits, including:
 
 ## Airflow use cases
 
-Airflow is used by many data professionals at [companies of all sizes and types](https://github.com/apache/airflow/blob/main/INTHEWILD.md). Data engineers, data scientists, ML engineers, and data analysts all need to perform actions on data in a complex web of dependencies. With Airflow, you can orchestrate these actions and dependencies in a single platform, no matter which tools you are using and how complex your pipelines are.
+Many data professionals at [companies of all sizes and types](https://github.com/apache/airflow/blob/main/INTHEWILD.md) use Airflow. Data engineers, data scientists, ML engineers, and data analysts all need to perform actions on data in a complex web of dependencies. With Airflow, you can orchestrate these actions and dependencies in a single platform, no matter which tools you are using and how complex your pipelines are.
 
 ![Symbolic graph with Airflow shown as the center of the data ecosystem, with arrows pointing out from Airflow to logos of a variety of common data tools.](/img/guides/intro-to-airflow_airflow_in_ecosystem.png)
 
@@ -75,7 +75,7 @@ Some common use cases of Airflow include:
 - **ETL/ELT**: [90% of Airflow users](https://airflow.apache.org/survey/) use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns. Often, these pipelines support critical operational processes. For an example use case, see [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
 - **Business operations**: 68% of Airflow users have used Airflow to orchestrate data supporting their business directly, creating data-powered applications and products, often in combination with MLOps pipelines. For an example use case, see [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping-video/).
 - **MLOps**: 28% of Airflow users are already orchestrating Machine Learning Operations (MLOps) with Apache Airflow. An overview of best practices when using Airflow for MLOps can be found in [Best practices for orchestrating MLOps pipelines with Airflow](airflow-mlops.md). For an example use case, see [Use Cohere and OpenSearch to analyze customer feedback in an MLOps pipeline](use-case-llm-customer-feedback.md).
-- **Managing infrastructure**: Airflow can be used to spin up and down infrastructure, for example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. For an example use case, see [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+- **Managing infrastructure**: Airflow can be used to spin up and tear down infrastructure. For example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. For an example use case, see [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
 
 Of course, these are just a few examples, you can orchestrate almost any kind of batch workflows with Airflow.
 
@@ -86,7 +86,7 @@ There are many ways to run Airflow, some of which are easier than others. Astron
 - Using the open-source [**Astro CLI**](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and is free to use for everyone.
 - Using [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. A free trial is available.
 
-All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, the scheduler, the database, and the executor. See [Airflow components](airflow-components.md) for more information.
+All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, scheduler, database, and executor. See [Airflow components](airflow-components.md) for more information.
 
 ## Airflow concepts
 
@@ -100,7 +100,7 @@ To navigate Airflow resources, it is helpful to have a general understanding of 
 - **Task instance**: The execution of a task at a specific point in time.
 - **Dynamic task**: An Airflow tasks that serves as a blueprint for a variable number of dynamically mapped tasks created at runtime. For more information, see [Dynamic tasks](dynamic-tasks.md).
 
-The Screenshot below shows one simple DAG called `example_astronauts` with two tasks, `get_astronauts` and `print_astronaut_craft`. The `get_astronauts` task is a regular task, while the `print_astronaut_craft` task is a dynamic task. The grid view of the Airflow UI shows individual DAG runs and task instances, while the graph displays the structure of the DAG. You can learn more about the Airflow UI in [An introduction to the Airflow UI](airflow-ui.md).
+The following screenshot shows one simple DAG, called `example_astronauts`, with two tasks, `get_astronauts` and `print_astronaut_craft`. The `get_astronauts` task is a regular task, while the `print_astronaut_craft` task is a dynamic task. The grid view of the Airflow UI shows individual DAG runs and task instances, while the graph displays the structure of the DAG. You can learn more about the Airflow UI in [An introduction to the Airflow UI](airflow-ui.md).
 
 ![Screenshot of the Airflow UI Grid view with the Graph tab selected showing a DAG graph with a regular and a dynamic task as well as a DAG run and Task instance.](/img/guides/intro-to-airflow_core_concepts_ui.png)
 
@@ -111,7 +111,7 @@ The Screenshot below shows one simple DAG called `example_astronauts` with two t
 </div>
 </details>
 
-It is a core best practice to keep tasks as atomic as possible, meaning that each task should perform a single action. Additionally, tasks should be idempotent, which means they produce the same output every time they are run with the same input. See [DAG writing best practices in Apache Airflow](dag-best-practices.md).
+It is a core best practice to keep tasks as atomic as possible, meaning that each task performs a single action. Additionally, tasks are idempotent, which means they produce the same output every time they are run with the same input. See [DAG writing best practices in Apache Airflow](dag-best-practices.md).
 
 ### Writing pipelines
 
@@ -125,18 +125,18 @@ There are a couple of special types of operators that are worth mentioning:
 - **Sensors**: [Sensors](what-is-a-sensor.md) are Operators that keep running until a certain condition is fulfilled. For example, the [HttpSensor](https://registry.astronomer.io/providers/apache-airflow-providers-http/versions/latest/modules/HttpSensor) waits for an Http request object to fulfill a user defined set of criteria.
 - **Deferrable Operators**: [Deferrable Operators](deferrable-operators.md) use the Python [asyncio](https://docs.python.org/3/library/asyncio.html) library to run tasks asynchronously. For example, the [DateTimeSensorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/HttpOperatorAsync) waits asynchronously for a specific date and time to occur. Note that your Airflow environment needs to run a triggerer component to use deferrable operators.
 
-Some commonly used building blocks like the BashOperator, the `@task` decorator or the PythonOperator are part of core Airflow and automatically installed in all Airflow instances. Additionally, many operators are maintained separately to Airflow in **Airflow provider packages**, which group modules interacting with a specific service.
+Some commonly used building blocks, like the BashOperator, the `@task` decorator, or the PythonOperator, are part of core Airflow and automatically installed in all Airflow instances. Additionally, many operators are maintained separately to Airflow in **Airflow provider packages**, which group modules interacting with a specific service into a package.
 
 You can browse all available operators and find detailed information about their parameters in the [Astronomer Registry](https://registry.astronomer.io/). For many common data tools, there are [integration tutorials](https://docs.astronomer.io/learn/category/integrations) available, showing a simple implementation of the provider package.
 
 ### Additional concepts
 
-Of course there is much more to Airflow than just DAGs and tasks. Here are a few additional concepts and features that you are likely to encounter:
+While there are much more to Airflow than just DAGs and tasks, here are a few additional concepts and features that you are likely to encounter:
 
 - **Airflow scheduling**: Airflow offers a variety of ways to schedule your DAGs. For more information, see [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md).
 - **Airflow connections**: Airflow connections offer a way to store credentials and other connection information for external systems and reference them in your DAGs. For more information, see [Manage connections in Apache Airflow](connections.md).
 - **Airflow variables**: Airflow variables are key-value pairs that can be used to store information in your Airflow environment. For more information, see [Use Airflow variables](airflow-variables.md).
-- **XComs**: XCom is short for "cross-communication", you can use XCom to pass information between your Airflow tasks. For more information, see [Passing data between tasks](airflow-passing-data-between-tasks.md).
+- **XComs**: XCom is short for *cross-communication*, you can use XCom to pass information between your Airflow tasks. For more information, see [Passing data between tasks](airflow-passing-data-between-tasks.md).
 - **Airflow REST API**: The [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) allows Airflow to interact with RESTful web services.
 
 ## Resources
