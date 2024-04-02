@@ -135,7 +135,7 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
 :::
 
 1. Contact your Astronomer account team and request the ability to run deprecated versions of Astro Runtime.
-2. Create a [Personal Access Token](https://cloud.astronomer.io/token) to use for authentication to Astro.
+2. Create a [Personal Access Token](https://cloud.astronomer.io/token)(PAT) to use for authentication to Astro.
     :::note
 
     You only need a PAT for the first Deployment in your Organization running a deprecated version of the Runtime.
