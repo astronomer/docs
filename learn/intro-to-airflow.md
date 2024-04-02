@@ -8,15 +8,15 @@ description: "Learn what Apache Airflow is and what problems it solves. Get free
 import CodeBlock from '@theme/CodeBlock';
 import example_astronauts from '!!raw-loader!../code-samples/dags/intro-to-airflow/example_astronauts.py';
 
-[Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. Every month, millions of new and returning users download Airflow and it has a large, active open source community. The core principle of Airflow is to define data pipelines as code, allowing for dynamic and scalable workflows.
+[Apache Airflow](https://airflow.apache.org/) is an open source tool for programmatically authoring, scheduling, and monitoring data pipelines. Every month, millions of new and returning users download Airflow and it has a large, active open source [community](https://airflow.apache.org/community/). The core principle of Airflow is to define data pipelines as code, allowing for dynamic and scalable workflows.
 
 This guide offers an introduction to Apache Airflow and its core concepts. You'll learn about:
 
 - The history of Apache Airflow.
 - Why you should use Airflow.
 - Common use cases for Airflow.
+- How to run Airflow.
 - Important Airflow concepts.
-- The components of the Airflow infrastructure.
 - Where to find resources to learn more about Airflow.
 
 :::tip Other ways to learn
@@ -40,7 +40,7 @@ To get the most out of this guide, you should have an understanding of:
 Over the past ten years, Airflow grew to be the open source standard for data orchestration:
 
 - 2015: Airflow started as an open source project at Airbnb. In 2015, Airbnb was growing rapidly and struggling to manage the vast quantities of internal data it generated every day. To satisfy the need for a robust scheduling tool, [Maxime Beauchemin](https://maximebeauchemin.medium.com/) created Airflow to allow Airbnb to quickly author, iterate, and monitor batch data pipelines.
-- 2016: Airflow officially joined the Apache Foundation Incubator.
+- 2016: Airflow officially joined the [Apache Foundation](https://www.apache.org/) Incubator.
 - 2019: Airflow graduated as a top-level Apache project.
 - 2020: Airflow 2.0 was released, bringing with it major upgrades and powerful new features.
 - 2020-present: Adoption of Airflow continues to accelerate as the community grows stronger. Consistent releases add new features and improvements.
@@ -75,7 +75,7 @@ Some common use cases of Airflow include:
 - **ETL/ELT**: [90% of Airflow users](https://airflow.apache.org/survey/) use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns. Often, these pipelines support critical operational processes. See [ELT with Airflow and dbt Core](use-case-airflow-dbt.md) for an example use case.
 - **Business operations**: 68% of Airflow users have used Airflow to orchestrate data supporting their business directly, creating data-powered applications and products, often in combination with MLOps pipelines. For an example use case, watch the [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping-video/) webinar.
 - **MLOps**: 28% of Airflow users are already orchestrating Machine Learning Operations (MLOps) with Apache Airflow. An overview of best practices when using Airflow for MLOps can be found in [Best practices for orchestrating MLOps pipelines with Airflow](airflow-mlops.md). See [Use Cohere and OpenSearch to analyze customer feedback in an MLOps pipeline](use-case-llm-customer-feedback.md) for a complex use case involving state-of-the-art ML tools.
-- **Managing infrastructure**: Airflow can be used to spin up and tear down infrastructure. For example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. The [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md) use case shows how you can combine this feature with data quality checks.
+- **Managing infrastructure**: Airflow can be used to spin up and tear down infrastructure. For example, to create and delete temporary tables in a database or spin up and down a Spark cluster. The [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md) use case shows how you can combine this feature with data quality checks.
 
 Of course, these are just a few examples, you can orchestrate almost any kind of batch workflows with Airflow.
 
@@ -84,7 +84,7 @@ Of course, these are just a few examples, you can orchestrate almost any kind of
 There are many ways to run Airflow, some of which are easier than others. Astronomer recommends: 
 
 - Using the open-source [**Astro CLI**](https://docs.astronomer.io/astro/cli/get-started-cli) to run Airflow locally. The Astro CLI is the easiest way to create a local Airflow instance running in [Docker](https://www.docker.com/) and is free to use for everyone.
-- Using [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. A free trial is available.
+- Using [**Astro**](https://astronomer.io/try-astro) to run Airflow in production. Astro is a fully-managed SaaS application for data orchestration that helps teams write and run data pipelines with Apache Airflow at any level of scale. A [free trial](https://astronomer.io/try-astro) is available.
 
 All Airflow installations include the mandatory Airflow components as part of their infrastructure: the webserver, scheduler, database, and executor. See [Airflow components](airflow-components.md) for more information.
 
@@ -105,7 +105,7 @@ The following screenshot shows one simple DAG, called `example_astronauts`, with
 ![Screenshot of the Airflow UI Grid view with the Graph tab selected showing a DAG graph with a regular and a dynamic task as well as a DAG run and Task instance.](/img/guides/intro-to-airflow_core_concepts_ui.png)
 
 <details>
-<summary>Click to view the full DAG code used for the Screenshot</summary>
+<summary>Click to view the full DAG code used for the screenshot</summary>
 <div>
     <div><CodeBlock language="python">{example_astronauts}</CodeBlock></div>
 </div>
