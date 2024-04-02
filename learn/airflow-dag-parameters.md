@@ -22,7 +22,7 @@ There are four basic DAG-level parameters. It is best practice to always set the
 
 ## UI parameters
 
-Some parameters add documentation to a DAG or change its appearance in the Airflow UI:
+Some parameters [add documentation](custom-airflow-ui-docs-tutorial.md) to a DAG or change its appearance in the Airflow UI:
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
