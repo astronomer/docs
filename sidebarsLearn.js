@@ -111,6 +111,7 @@ module.exports = {
           },
           items: [
             'logging',
+            'airflow-dag-parameters',
             'data-quality',
             'airflow-datasets',
             'deferrable-operators',

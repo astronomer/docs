@@ -37,7 +37,6 @@ To get the most out of this guide, you should have an understanding of:
 ## What is a DAG?
 
 A _DAG_ (directed acyclic graph) is a mathematical structure consisting of nodes and edges. In Airflow, a DAG represents a data pipeline or workflow with a start and an end.
-Within an Airflow DAG, each node represents a task and each edge represents a dependency between tasks.
 
 The mathematical properties of DAGs make them useful for building data pipelines:
 
@@ -48,6 +47,8 @@ The mathematical properties of DAGs make them useful for building data pipelines
 - **Acyclic**: There are no circular dependencies in a DAG. This means that a task cannot depend on itself, nor can it depend on a task that ultimately depends on it.
 
     ![Visualization of two graphs with 4 nodes each. The first graph is acyclic, there are no circles defined between the nodes. In the second graph a dependency is added between task 4 and task 1, meaning task 1 depends on task 4. This creates a circle because task 4 is downstream of task 1. Only the first graph would be possible to define in Airflow.](/img/guides/dags_acyclic_vs_cyclic.png)
+
+- **Graph**: A DAG is a graph, which is a structure consisting of nodes and edges. In Airflow, nodes are tasks and edges are dependencies between tasks.
 
 After a DAG meets these requirements, it can be as simple or as complicated as you need! You can define tasks that run in parallel or sequentially, implement conditional branches, and visually group tasks together in [task groups](task-groups.md).
 
@@ -68,7 +69,7 @@ The following screenshot shows a simple DAG graph with 3 sequential tasks.
 
 A _DAG run_ is an instance of a DAG running at a specific point in time. A _task instance_, also known as a task run, is an instance of a task running at a specific point in time. Each DAG run has a unique `dag_run_id` and contains one or more task instances. The history of previous DAG runs is stored in the [Airflow metadata database](airflow-database.md).
 
-In the Airflow UI, you can view previous runs of a DAG in the **Grid** view and select individual DAG runs by clicking on their respective duration bar. A DAG run graph looks similar to the DAG graph, but includes  additional information about the status of each task instance in the DAG run.
+In the Airflow UI, you can view previous runs of a DAG in the **Grid** view and select individual DAG runs by clicking on their respective duration bar. A DAG run graph looks similar to the DAG graph, but includes additional information about the status of each task instance in the DAG run.
 
 ![Screenshot of the Airflow UI showing the Grid view with the Graph tab selected. A simple DAG run is shown with 3 successful sequential tasks, get_astronauts, print_astronaut_craft (which is a dynamically mapped task with 7 mapped task instances) and print_reaction.](/img/guides/dags_simple_dag_run_graph.png)
 
@@ -231,60 +232,16 @@ Astronomer recommends creating one Python file for each DAG and naming it after 
 
 ### DAG-level parameters
 
-In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task. In this section we cover all DAG-level parameters.
+In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task.
 
-The DAGs in the previous section have the following parameters defined:
+The DAGs in the previous section have the following basic parameters defined:
 
-| Parameter                           | Description |
-|-------------------------------------|-------------|
-| `dag_id`                           &nbsp;| The name of the DAG. This must be unique for each DAG in the Airflow environment. When using the `@dag` decorator and not providing the `dag_id` parameter name, the function name is used as the `dag_id`. When using the `DAG` class, this parameter is required. |
-| `start_date` | The date and time after which the DAG starts being scheduled. Note that the first actual run of the DAG may be later than this date depending on how you define the schedule. See [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) for more information. This parameter may be required depending on your Airflow version and `schedule`. |
-| `schedule`   | The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`. This parameter replaces the deprecated `schedule_interval` and `timetable` parameters. |
-| `catchup`    | Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is unpaused. This parameter defaults to `True`. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs, see [Catchup](rerunning-dags.md#catchup) for more information. |
+- `dag_id`: The name of the DAG. This must be unique for each DAG in the Airflow environment. When using the `@dag` decorator and not providing the `dag_id` parameter name, the function name is used as the `dag_id`.
+- `start_date`: The date and time after which the DAG starts being scheduled.
+- `schedule`: The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information.
+- `catchup`: Whether the scheduler should [backfill all missed DAG runs](rerunning-dags.md#catchup) between the current date and the start date when the DAG is unpaused. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs.
 
-Some parameters relate to adding information to the DAG or change its appearance in the **Airflow UI**:
-
-| Parameter                           | Description |
-|-------------------------------------|-------------|
-| `description`                       | A short string that is displayed in the Airflow UI next to the DAG name. |
-| `doc_md`        | A string that is rendered as [DAG documentation](custom-airflow-ui-docs-tutorial.md) in the Airflow UI. Tip: use `__doc__` to use the docstring of the Python file. |
-| `owner_links`   | A dictionary with the key being the DAG owner and the value being a URL to link to when clicking on the owner in the Airflow UI. Commonly used as a mailto link to the owner's email address. Note that the `owner` parameter is set at the task level, usually by defining it in the `default_args` dictionary. |
-| `tags`          | A list of tags shown in the Airflow UI to help with filtering DAGs. |
-| `default_view`  | The default view of the DAG in the Airflow UI. Defaults to `grid`. |
-| `orientation`   | The orientation of the DAG graph in the Airflow UI. Defaults to `LR` (left to right). |
-
-There are parameters that relate to **Jinja templating**, such as:
-
-| Parameter                           | Description |
-|-------------------------------------|-------------|
-| `template_searchpath`               | A list of folders where [Jinja](templating.md) looks for templates. The path of the DAG file is included by default. |
-| `template_undefined`             | The behavior of Jinja when a variable is undefined. Defaults to [StrictUndefined](https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.StrictUndefined). |
-| `render_template_as_native_obj`     | Whether to render Jinja templates as native Python objects instead of strings. Defaults to `False`. |
-| `user_defined_macros`            | A dictionary of macros that are available in the DAG's Jinja templates. Use `user_defined_filters` to add filters and `jinja_environment_kwargs` for additional Jinja configuration. See [Macros: using custom functions and variables in templates](templating.md#macros-using-custom-functions-and-variables-in-templates). |
-
-Three other helpful parameters relate to **scaling** in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
-
-| Parameter                           | Description |
-|-------------------------------------|-------------|
-| `max_active_tasks`                  | The number of task instances allowed to run concurrently for all DAG runs of this DAG. This parameter replaces the deprecated `concurrency`. |
-| `max_active_runs`                   | The number of active DAG runs allowed to run concurrently for this DAG. |
-| `max_consecutive_failed_dag_runs`   | (experimental) The maximum number of consecutive failed DAG runs, after which the scheduler will disable this DAG. |
-
-Other DAG parameters include:
-
-| Parameter                           | Description |
-|-------------------------------------|-------------|
-| `end_date`                          | The date beyond which no further DAG runs will be scheduled. Defaults to `None`. |
-| `default_args`            | A dictionary of parameters that are applied to all tasks in the DAG. These parameters are passed directly to each operator, so they must be parameters that are part of the [`BaseOperator`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/baseoperator/index.html). You can override default arguments at the task level. |
-| `params`                  | A dictionary of DAG-level Airflow params. See [Airflow params](airflow-params.md) for more information. |
-| `dagrun_timeout`          | The time it takes for a DAG run of this DAG to time out and be marked as `failed`. |
-| `access_control`          | Specify optional permissions for roles specific to an individual DAG. See [DAG-level permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#dag-level-permissions). This cannot be implemented on Astro. Astronomer recommends customers to use [Astro's RBAC features](https://docs.astronomer.io/astro/user-permissions) instead. |
-| `is_paused_upon_creation` | Whether the DAG is paused when it is created. When not set, the Airflow config `core.dags_are_paused_at_creation` is used, which defaults to `True`. |
-| `auto_register`           | Defaults to `True` and can be set to `False` to prevent DAGs using a `with` context from being automatically registered which can be relevant in some advanced dynamic DAG generation use cases. See [Registering dynamic DAGs](https://airflow.apache.org/docs/apache-airflow/stable/howto/dynamic-dag-generation.html#registering-dynamic-dags). |
-| `fail_stop`               |  In Airflow 2.7+ you can set this parameter to `True` to stop DAG execution as soon as one task in this DAG fails. Any tasks that are still running are marked as `failed` and any tasks that have not run yet are marked as `skipped`. Note that you cannot have any [trigger rule](managing-dependencies.md#trigger-rules) other than `all_success` in a DAG with `fail_stop` set to `True`. |
-| `dag_display_name`        | Airflow 2.9+ allows you to override the `dag_id` to display a different DAG name in the Airflow UI. This parameter allows special characters. |
-
-Additionally you can set DAG-level callbacks in the DAG definition, see [DAG-level callbacks](error-notifications-in-airflow.md#airflow-callbacks) for more information.
+There are many more DAG-level parameters, see the [DAG-level parameters](airflow-dag-parameters.md) guide for a complete list.
 
 ## See also 
 
