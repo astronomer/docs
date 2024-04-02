@@ -336,7 +336,7 @@ With Datasets, you can make Airflow aware of updates to data objects. Using that
 
 <Tabs
     defaultValue="simple"
-    groupId="combined-dataset-and-time-based-scheduling"
+    groupId="dataset-driven-scheduling"
     values={[
         {label: 'Simple Dataset Schedule', value: 'simple'},
         {label: 'Conditional Dataset Schedule', value: 'conditional'},

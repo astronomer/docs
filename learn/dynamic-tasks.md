@@ -89,7 +89,7 @@ This `expand` function creates three mapped `add` tasks, one for each entry in t
 
 When you work with mapped tasks, keep the following in mind:
 
-- You can use the results of an upstream task as the input to a mapped task. The upstream task must return a value in a `dict` or `list` form. If you're using traditional operators and not [decorated tasks](https://airflow.apache.org/docs/apache-airflow/2.0.0/concepts.html#python-task-decorator)), the mapping values must be stored in XComs.
+- You can use the results of an upstream task as the input to a mapped task. The upstream task must return a value in a `dict` or `list` form. If you're using traditional operators and not [decorated tasks](airflow-decorators.md), the mapping values must be stored in XComs.
 - You can map over multiple parameters.
 - You can use the results of a mapped task as input to a downstream mapped task.
 - You can have a mapped task that results in no task instances. For example, when your upstream task that generates the mapping values returns an empty list. In this case, the mapped task is marked skipped, and downstream tasks are run according to the trigger rules you set. By default, downstream tasks are also skipped.
@@ -99,9 +99,9 @@ When you work with mapped tasks, keep the following in mind:
 - You can limit the number of mapped task instances for a particular task that run in parallel by setting the following parameters in your dynamically mapped task:
     - Set a limit across all DAG runs with the `max_active_tis_per_dag` parameter.
     - Set a limit for parallel runs within a single DAG with the `max_active_tis_per_dagrun` parameter.
-- XComs created by mapped task instances are stored in a list and can be accessed by using the map index of a specific mapped task instance. For example, to access the XComs created by the third mapped task instance (map index of 2) of `my_mapped_task`, use `ti.xcom_pull(task_ids=['my_mapped_task'])[2]`. In Airflow version 2.5 the `map_indexes` parameter was added to the `.xcom_pull()` function allowing to specify a list of map indexes of interest (`ti.xcom_pull(task_ids=['my_mapped_task'], map_indexes=[2])`).
+- XComs created by mapped task instances are stored in a list and can be accessed by using the map index of a specific mapped task instance. For example, to access the XComs created by the third mapped task instance (map index of 2) of `my_mapped_task`, use `ti.xcom_pull(task_ids=['my_mapped_task'])[2]`. The `map_indexes` parameter in the `.xcom_pull()` method allows you to specify a list of map indexes of interest (`ti.xcom_pull(task_ids=['my_mapped_task'], map_indexes=[2])`).
 
-For additional examples of how to apply dynamic task mapping functions, see [Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html) in the official Airflow documentation.
+For additional examples of how to apply dynamic task mapping functions, see [Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dynamic-task-mapping.html) in the official Airflow documentation.
 
 The Airflow UI provides observability for mapped tasks in the **Graph View** and the **Grid View**.
 
