@@ -44,7 +44,7 @@ Airflow tasks have two functions available to implement the map portion of dynam
 
 When mapping over multiple keyword argument sets, you need to use the function `expand_kwargs()` instead of `expand()`.
 
-In the following example, the task uses both, `.partial()` and `.expand()`, to dynamically generate three task runs:
+In the following example, the task uses both, `.partial()` and `.expand()`, to dynamically generate three task runs. Optionally, you can set a custom index to display in the UI using the `map_index_template` parameter in Airflow 2.9+.
 
 <Tabs
     defaultValue="taskflow"
@@ -57,15 +57,24 @@ In the following example, the task uses both, `.partial()` and `.expand()`, to d
 <TabItem value="taskflow">
 
 ```python
-@task
+@task(
+    # optionally, you can set a custom index to display in the UI (Airflow 2.9+)
+    map_index_template="{{ my_custom_map_index }}"
+)
 def add(x: int, y: int):
+
+    # get the current context and define the custom map index variable
+    from airflow.operators.python import get_current_context
+
+    context = get_current_context()
+    context["my_custom_map_index"] = "Input x=" + str(x)
+
     return x + y
 
 added_values = add.partial(y=10).expand(x=[1, 2, 3])
 ```
 
 </TabItem>
-
 <TabItem value="traditional">
 
 ```python
@@ -73,17 +82,18 @@ def add_function(x: int, y: int):
     return x + y
 
 added_values = PythonOperator.partial(
-    task_id="add",
+    task_id="add2",
     python_callable=add_function,
-    op_kwargs={"y": 10}
-).expand(op_args=[[1],[2],[3]])
-
-added_values
+    op_kwargs={"y": 10},
+    # optionally, you can set a custom index to display in the UI (Airflow 2.9+)
+    map_index_template="Input x={{ task.op_args[0] }}",
+).expand(op_args=[[1], [2], [3]])
 ```
 
 </TabItem>
-
 </Tabs>
+
+![Screenshot of the Airflow UI showing three dynamically mapped task instances created with the code snippets above.](/img/guides/dynamic-tasks_simple_example.png)
 
 This `expand` function creates three mapped `add` tasks, one for each entry in the `x` input list. The `partial` function specifies a value for `y` that remains constant in each task.
 
