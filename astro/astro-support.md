@@ -5,14 +5,16 @@ id: astro-support
 description: Get Astro support when you need it.
 ---
 
+In addition to product documentation, the following resources are available to help you resolve issues:
+
+- [Astronomer knowledge base](https://support.astronomer.io/hc/en-us)
+- [Airflow guides](https://docs.astronomer.io/learn/)
 If you're experiencing an issue or have a question that requires Astronomer expertise, use one of the following methods to contact Astronomer support:
 
 - Submit a support request in the [Astro UI](https://cloud.astronomer.io/open-support-request).
 - Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us).
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io).
 - Submit a support request by phone at +1 (831) 777-2768.
-
-In addition to product documentation, the [Airflow Guides](https://docs.astronomer.io/learn/) are available to help you resolve issues.
 
 ## Best practices for support request submissions
 
