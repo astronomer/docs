@@ -55,7 +55,7 @@ Data orchestration sits at the heart of any modern data stack and provides elabo
 
 Airflow provides many benefits, including:
 
-- **Tool agnosticism**: Airflow can connect to any application in your data ecosystem that allows connections through an API and prebuilt modules exist for many common data tools.
+- **Tool agnosticism**: Airflow can connect to any application in your data ecosystem that allows connections through an API. Prebuilt [operators](what-is-an-operator.md) exist to connect to many common data tools.
 - **High extensibility**: Since Airflow pipelines are written in Python, you can build on top of the existing codebase and extend the functionality of Airflow to meet your needs. Anything you can do in Python, you can do in Airflow.
 - **Infinite scalability**: Given enough computing power, you can orchestrate as many processes as you need, no matter the complexity of your pipelines.
 - **Dynamic data pipelines**: Airflow offers the ability to create [dynamic tasks](dynamic-tasks.md) to adjust your workflows based on the data you are processing at runtime.
@@ -72,10 +72,10 @@ Many data professionals at [companies of all sizes and types](https://github.com
 
 Some common use cases of Airflow include:
 
-- **ETL/ELT**: [90% of Airflow users](https://airflow.apache.org/survey/) use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns. Often, these pipelines support critical operational processes. For an example use case, see [ELT with Airflow and dbt Core](use-case-airflow-dbt.md).
-- **Business operations**: 68% of Airflow users have used Airflow to orchestrate data supporting their business directly, creating data-powered applications and products, often in combination with MLOps pipelines. For an example use case, see [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping-video/).
-- **MLOps**: 28% of Airflow users are already orchestrating Machine Learning Operations (MLOps) with Apache Airflow. An overview of best practices when using Airflow for MLOps can be found in [Best practices for orchestrating MLOps pipelines with Airflow](airflow-mlops.md). For an example use case, see [Use Cohere and OpenSearch to analyze customer feedback in an MLOps pipeline](use-case-llm-customer-feedback.md).
-- **Managing infrastructure**: Airflow can be used to spin up and tear down infrastructure. For example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. For an example use case, see [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md).
+- **ETL/ELT**: [90% of Airflow users](https://airflow.apache.org/survey/) use it for Extract-Transform-Load (ETL) and Extract-Load-Transfrom (ELT) patterns. Often, these pipelines support critical operational processes. See [ELT with Airflow and dbt Core](use-case-airflow-dbt.md) for an example use case.
+- **Business operations**: 68% of Airflow users have used Airflow to orchestrate data supporting their business directly, creating data-powered applications and products, often in combination with MLOps pipelines. For an example use case, watch the [The Laurel Algorithm: MLOps, AI, and Airflow for Perfect Timekeeping](https://www.astronomer.io/events/webinars/the-laurel-algorithm-mlops-ai-and-airflow-for-perfect-timekeeping-video/) webinar.
+- **MLOps**: 28% of Airflow users are already orchestrating Machine Learning Operations (MLOps) with Apache Airflow. An overview of best practices when using Airflow for MLOps can be found in [Best practices for orchestrating MLOps pipelines with Airflow](airflow-mlops.md). See [Use Cohere and OpenSearch to analyze customer feedback in an MLOps pipeline](use-case-llm-customer-feedback.md) for a complex use case involving state-of-the-art ML tools.
+- **Managing infrastructure**: Airflow can be used to spin up and tear down infrastructure. For example, to run create and delete temporary tables in a database or spin up and down a Spark cluster. The [Use Airflow setup/ teardown to run data quality checks in an MLOps pipeline](use-case-setup-teardown-data-quality.md) use case shows how you can combine this feature with data quality checks.
 
 Of course, these are just a few examples, you can orchestrate almost any kind of batch workflows with Airflow.
 
@@ -131,7 +131,7 @@ You can browse all available operators and find detailed information about their
 
 ### Additional concepts
 
-While there are much more to Airflow than just DAGs and tasks, here are a few additional concepts and features that you are likely to encounter:
+While there is much more to Airflow than just DAGs and tasks, here are a few additional concepts and features that you are likely to encounter:
 
 - **Airflow scheduling**: Airflow offers a variety of ways to schedule your DAGs. For more information, see [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md).
 - **Airflow connections**: Airflow connections offer a way to store credentials and other connection information for external systems and reference them in your DAGs. For more information, see [Manage connections in Apache Airflow](connections.md).
