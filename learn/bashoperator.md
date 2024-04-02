@@ -35,7 +35,7 @@ To get the most out of this guide, you should have an understanding of:
 The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is part of core Airflow and can be used to execute a single bash command, a set of bash commands or a bash script ending in `.sh`. The `@task.bash` decorator can be used to create bash statements using Python functions and is available as of Airflow 2.9.
 
 <Tabs
-    defaultValue="taskflow"
+    defaultValue="traditional"
     groupId="how-to-use-bashoperator"
     values={[
         {label: 'Traditional syntax', value: 'traditional'},
