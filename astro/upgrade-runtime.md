@@ -135,9 +135,15 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
 :::
 
 1. Contact your Astronomer account team and request the ability to run deprecated versions of Astro Runtime.
-2. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
+2. Create a [Personal Access Token](https://cloud.astronomer.io/token) to use for authentication to Astro.
+    :::note
 
-After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md).
+    You only need a PAT for the first Deployment in your Organization running a deprecated version of the Runtime.
+
+    :::
+3. Create a Deployment using the [Astro API](https://docs.astronomer.io/api/platform-api-reference/deployment/create-deployment). In your request, specify your deprecated Astro Runtime version using the `astroRuntimeVersions` property.
+
+After you create the Deployment, you can manage the Deployment using any interface, including the Astro CLI and [Astro UI](deployment-settings.md). You can also create additional Deployments with deprecated Runtimes using a [Deployment API Token](deployment-api-tokens.md).
 
 ### Version upgrade considerations
 
