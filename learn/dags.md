@@ -12,9 +12,11 @@ import CodeBlock from '@theme/CodeBlock';
 import example_astronauts_three_tasks from '!!raw-loader!../code-samples/dags/dags/example_astronauts_three_tasks.py';
 import complex_dag_structure from '!!raw-loader!../code-samples/dags/dags/complex_dag_structure.py';
 
-In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow; they contain a collection of tasks and dependencies that you want to execute on a schedule. An Airflow DAG is defined in Python code and visualized in the Airflow UI. DAGs can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
+In Airflow, a **DAG** is a data pipeline or workflow. DAGs are the main organizational unit in Airflow; they contain a collection of tasks and dependencies that you want to execute on a schedule. 
 
-The following screenshot shows a [complex DAG graph](#example-complex-dag-run) in the Airflow UI. After reading this guide, you'll be able to understand the elements of this graph, as well as know how to define DAGs and use DAG parameters.
+A DAG is defined in Python code and visualized in the Airflow UI. DAGs can be as simple as a single task or as complex as hundreds or thousands of tasks with complicated dependencies.
+
+The following screenshot shows a [complex DAG graph](#example-complex-dag-run) in the Airflow UI. After reading this guide, you'll be able to understand the elements in this graph, as well as know how to define DAGs and use DAG parameters.
 
 ![Screenshot from the Graph tab of the Airflow UI of a complex DAG with dynamically mapped tasks, task groups and setup/teardown tasks.](/img/guides/dags_complex_DAG.png)
 
@@ -34,22 +36,22 @@ To get the most out of this guide, you should have an understanding of:
 
 ## What is a DAG?
 
-A **DAG** is a **directed acyclic graph**, a mathematical structure consisting of nodes and edges. In Airflow, a DAG represents the unit of one data pipeline or workflow.
-Within an Airflow DAG, each node represents a task and each edge represents a dependency between tasks. Each DAG has a unique `dag_id`.
+A _DAG_ (directed acyclic graph) is a mathematical structure consisting of nodes and edges. In Airflow, a DAG represents a data pipeline or workflow with a start and an end.
+Within an Airflow DAG, each node represents a task and each edge represents a dependency between tasks.
 
 The mathematical properties of DAGs make them useful for building data pipelines:
 
-- **Directed**: There is a clear direction of flow between tasks. A task can either be upstream, downstream, or parallel to another task.
+- **Directed**: There is a clear direction of flow between tasks. A task can be either upstream, downstream, or parallel to another task.
 
     ![Visualization of two graphs with 3 nodes each. The first graph is directed, the arrow in between the nodes always points into one direction. The second graph is not directed, the arrow between the second and third node points in both directions. Only the first graph would be possible to define in Airflow.](/img/guides/dags_directed_vs_not_directed.png)
 
-- **Acyclic**: There cannot be any circular dependencies in your DAG. This means that a task cannot depend on itself, nor can it depend on a task that ultimately depends on it.
+- **Acyclic**: There are no circular dependencies in a DAG. This means that a task cannot depend on itself, nor can it depend on a task that ultimately depends on it.
 
     ![Visualization of two graphs with 4 nodes each. The first graph is acyclic, there are no circles defined between the nodes. In the second graph a dependency is added between task 4 and task 1, meaning task 1 depends on task 4. This creates a circle because task 4 is downstream of task 1. Only the first graph would be possible to define in Airflow.](/img/guides/dags_acyclic_vs_cyclic.png)
 
-Aside from these requirements, DAGs in Airflow can be as complicated as you need! You can define tasks that run in parallel or sequentially, implement conditional branches, and visually group tasks together in [task groups](task-groups.md).
+After a DAG meets these requirements, it can be as simple or as complicated as you need! You can define tasks that run in parallel or sequentially, implement conditional branches, and visually group tasks together in [task groups](task-groups.md).
 
-Each task in a DAG performs one unit of work. Tasks can be anything from a simple Python function to a complex data transformation or a call to an external service. They are defined using [Airflow operators](what-is-an-operator.md) or [Airflow decorators](airflow-decorators.md). The dependencies between tasks can be set in different ways, see [Managing Dependencies](managing-dependencies.md).
+Each task in a DAG performs one unit of work. Tasks can be anything from a simple Python function to a complex data transformation or a call to an external service. They are defined using [Airflow operators](what-is-an-operator.md) or [Airflow decorators](airflow-decorators.md). The dependencies between tasks can be set in different ways (see [Managing Dependencies](managing-dependencies.md)).
 
 The following screenshot shows a simple DAG graph with 3 sequential tasks.  
 
@@ -64,15 +66,15 @@ The following screenshot shows a simple DAG graph with 3 sequential tasks.
 
 ## What is a DAG run?
 
-An instance of a DAG running at a specific point in time is called a **DAG run**. An instance of a task running at a specific point in time is called a **task instance**. Each DAG run has a unique `dag_run_id` and contains one or more task instances. The history of previous DAG runs is stored in the [Airflow metadata database](airflow-database.md).
+A _DAG run_ is an instance of a DAG running at a specific point in time. A _task instance_, also known as a task run, is an instance of a task running at a specific point in time. Each DAG run has a unique `dag_run_id` and contains one or more task instances. The history of previous DAG runs is stored in the [Airflow metadata database](airflow-database.md).
 
-In the Airflow UI you can view previous runs of a DAG in the Grid view and select individual DAG runs by clicking on the respective duration bar. The DAG run graph looks similar to the DAG graph with additional information about the status of each task instance in the DAG run.
+In the Airflow UI, you can view previous runs of a DAG in the **Grid** view and select individual DAG runs by clicking on their respective duration bar. A DAG run graph looks similar to the DAG graph, but includes  additional information about the status of each task instance in the DAG run.
 
 ![Screenshot of the Airflow UI showing the Grid view with the Graph tab selected. A simple DAG run is shown with 3 successful sequential tasks, get_astronauts, print_astronaut_craft (which is a dynamically mapped task with 7 mapped task instances) and print_reaction.](/img/guides/dags_simple_dag_run_graph.png)
 
 ### DAG run properties
 
-A DAG run graph in the Airflow UI contains information about the DAG run, as well as the status of each task instance in the DAG run. The following screenshot shows the same simple DAG as in the previous section but with annotations explaining the different elements of the graph.
+A DAG run graph in the Airflow UI contains information about the DAG run, as well as the status of each task instance in the DAG run. The following screenshot shows the same DAG as in the previous section, but with annotations explaining the different elements of the graph.
 
 ![Screenshot of the Airflow UI showing the Grid view with the Graph tab selected. A DAG run with 3 tasks is shown. The annotations show the location of the dag_id and logical date (top of the screenshot), the task_id, task state and operator/decorator used in the nodes of the graph, as well as the number of dynamically mapped task instances in [] behind the task id and the DAG dependency layout to the right of the screen.](/img/guides/dags_simple_dag_run_graph_annotated.png)
 
@@ -81,28 +83,28 @@ A DAG run graph in the Airflow UI contains information about the DAG run, as wel
 - `task_id`: The unique identifier of the task.
 - `task state`: The status of the task instance in the DAG run. Possible states are `running`, `success`, `failed`, `skipped`, `restarting`, `up_for_retry`, `upstream_failed`, `queued`, `scheduled`, `none`, `removed`, `deferred`, and `up_for_reschedule`, they each cause the border of the node to be colored differently. See the OSS documentation on [task instances](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) for an explanation of each state.
 
-The previous screenshot shows 4 successful DAG runs, one for each DAG run type:
+The previous screenshot also shows the four common ways you can trigger a DAG run:
 
-- **backfill**: The first DAG run shown was created by a [backfill](rerunning-dags.md#backfill). You can see an arrow on the DAG run bar.
-- **scheduled**: The second DAG run was created by the Airflow scheduler based on the DAG's defined schedule. This DAG run bar has no additional icon and is the DAG run selected in the screenshot.
-- **manual**: The third DAG run was started manually by a user in the Airflow UI or using the Airflow CLI. You can see a play icon on the DAG run bar.
-- **dataset_triggered**: The fourth DAG run was started by a [dataset](airflow-datasets.md). You can see a dataset icon on the DAG run bar.
+- **Backfill**: The first DAG run was created using a [backfill](rerunning-dags.md#backfill). Backfilled DAG runs include a curved arrow on their DAG run duration bar.
+- **Scheduled**: The second DAG run, which is currently selected in the screenshot, was created by the Airflow scheduler based on the DAG's defined schedule. This is the default method for running DAGs.
+- **Manual**: The third DAG run was triggered manually by a user using the Airflow UI or the Airflow CLI. Manually triggered DAG runs include a play icon on the DAG run duration bar.
+- **Dataset triggered**: The fourth DAG run was started by a [dataset](airflow-datasets.md). DAG runs triggered by a dataset include a dataset icon on their DAG run duration bar.
 
 A DAG run can have the following statuses:
 
-- `queued`: The time after which the DAG run can be created has passed but the scheduler has not created task instances for it yet.
-- `running`: The DAG run is eligible to have task instances scheduled.
-- `success`: All task instances are in a terminal state (`success`, `skipped`, `failed` or `upstream_failed`) and all leaf tasks (tasks with no downstream tasks) are either in the state `success` or `skipped`. All 4 DAG runs in the screenshot are in the state `success`.
-- `failed`: All task instances are in a terminal state and at least one leaf task is in the state `failed` or `upstream_failed`.
+- **Queued**: The time after which the DAG run can be created has passed but the scheduler has not created task instances for it yet.
+- **Running**: The DAG run is eligible to have task instances scheduled.
+- **Success**: All task instances are in a terminal state (`success`, `skipped`, `failed` or `upstream_failed`) and all leaf tasks (tasks with no downstream tasks) are either in the state `success` or `skipped`. In the previous screenshot, all four DAG runs were successful.
+- **Failed**: All task instances are in a terminal state and at least one leaf task is in the state `failed` or `upstream_failed`.
 
-### Example complex DAG run
+### Complex DAG runs
 
-Once you start writing more complex DAGs, you will see additional elements of different Airflow features that are visualized in the DAG run graph. The following screenshot shows the same complex DAG as in the first section but with annotations explaining the different elements of the graph. Don't worry if you don't know about all these features yet, you will learn about them as you become more familiar with Airflow.
+When you start writing more complex DAGs, you will see additional Airflow features that are visualized in the DAG run graph. The following screenshot shows the same complex DAG as in the overview but with annotations explaining the different elements of the graph. Don't worry if you don't know about all these features yet - you will learn about them as you become more familiar with Airflow.
 
 ![Screenshot of the Airflow UI showing the Grid view with the Graph tab selected. A DAG run of a complex DAG is shown with annotations showing a dynamically mapped task, a branching task, an edge label, a dynamically mapped task group, regular task groups, setup/ teardown tasks as well as a Dataset.](/img/guides/dags_complex_DAG_annotated.png)
 
 <details>
-<summary>Click to view the full DAG code used for the Screenshot</summary>
+<summary>Click to view the full DAG code used for the screenshot</summary>
 <div>
     <div>
     The following code creates the same DAG structure as shown in the previous screenshot. Note that custom operators have been replaced with the BashOperator and EmptyOperator to make it possible to run the DAG without additional setup.
@@ -111,25 +113,29 @@ Once you start writing more complex DAGs, you will see additional elements of di
 </div>
 </details>
 
-- **Dynamically mapped task**: A task that is [dynamically created](dynamic-tasks.md) at runtime based on changing user defined input. The number of task instances is shown in `[]` behind the task id. Task groups can also be [dynamically mapped](task-groups#generate-task-groups-dynamically-at-runtime).
-- **Branching task**: A task that creates a conditional branch in the DAG. See [Branching in Airflow](airflow-branch-operator.md) for more information.
-- **Edge label**: A label on the edge between two tasks. These labels are often helpful to annotate branch decisions in a DAG graph. 
-- **Task group**: A task group is a tool to logically and visually group tasks in an Airflow DAG. See [Airflow task groups](task-groups.md) for more information.
-- **Setup/teardown tasks**: When using Airflow to manage infrastructure it can be helpful to define tasks as setup and teardown tasks to take advantage of additional intelligent dependency behavior. You can recognize setup and teardown tasks by little arrows next to the task id in the task node and the dotted line connecting them. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md) for more information.
-- **Dataset**: Datasets are shown in the DAG graph. If a DAG is scheduled on a dataset, it is shown upstream of the first task of the DAG. If a task in the DAG updates a dataset, it is shown after the respective task as in the previous screenshot. See [Airflow datasets](airflow-datasets.md) for more information.
+Some more complex features visible in this DAG graph are:
+
+- **Dynamically mapped tasks**: A dynamically mapped task is [created dynamically](dynamic-tasks.md) at runtime based on user-defined input. The number of dynamically mapped task instances is shown in brackets (`[]`) behind the task ID.
+- **Branching tasks**: A branching task creates a conditional branch in the DAG. See [Branching in Airflow](airflow-branch-operator.md) for more information.
+- **Edge labels**: Edge labels appear on the edge between two tasks. These labels are often helpful to annotate branch decisions in a DAG graph. 
+- **Task groups**: A task group is a tool to logically and visually group tasks in an Airflow DAG. See [Airflow task groups](task-groups.md) for more information.
+- **Setup/teardown tasks**: When using Airflow to manage infrastructure, it can be helpful to define tasks as setup and teardown tasks to take advantage of additional intelligent dependency behavior. Setup and teardown tasks appear with diagonal arrows next to their task IDs and are connected with a dotted line. See [Use setup and teardown tasks in Airflow](airflow-setup-teardown.md) for more information.
+- **Datasets**: Datasets are shown in the DAG graph. If a DAG is scheduled on a dataset, it is shown upstream of the first task of the DAG. If a task in the DAG updates a dataset, it is shown after the respective task as in the previous screenshot. See [Airflow datasets](airflow-datasets.md) for more information.
 
 You can learn more about how to set complex dependencies between tasks and task groups in the [Managing Dependencies](managing-dependencies.md) guide.
 
 ## Write a DAG
 
-DAGs in Airflow are defined in a Python script that is placed in an Airflow project's `DAG_FOLDER`, which is `dags/` when using the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli). Airflow automatically parses all files in this folder to load any new DAGs every 5 minutes and update any existing DAGs every 30 seconds. You can force a new parsing of the DAGs by running `astro dev run dags reserialize` ([`airflow dags reserialize`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#reserialize)).
+A DAG can be defined with a Python file placed in an Airflow project's `DAG_FOLDER`, which is `dags` when using the [Astro CLI](https://docs.astronomer.io/astro/cli/get-started-cli). Airflow automatically parses all files in this folder every 5 minutes to check for new DAGs, and it parses existing DAGs for code changes every 30 seconds. You can force a new DAG parse using [`airflow dags reserialize`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#reserialize), or `astro dev run dags reserialize` using the Astro CLI.
 
-There are two main ways to define a DAG:
+There are two types of syntax you can use to structure your DAG:
 
 - **TaskFlow API**: The TaskFlow API contains the `@dag` decorator. A function decorated with `@dag` defines a DAG. Note that you need to call the function at the end of the script for Airflow to register the DAG. All tasks are defined within the context of the DAG function.
 - **Traditional syntax**: You can create a DAG by instantiating a DAG context using the `DAG` class and defining tasks within that context.
 
-TaskFlow API and traditional syntax can be freely mixed, see [Mixing TaskFlow decorators with traditional operators](airflow-decorators.md#mixing-taskflow-decorators-with-traditional-operators) for more information.
+TaskFlow API and traditional syntax can be freely mixed. See [Mixing TaskFlow decorators with traditional operators](airflow-decorators.md#mixing-taskflow-decorators-with-traditional-operators) for more information. 
+
+The following is an example of the same DAG written using each type of syntax.
 
 <Tabs
     defaultValue="taskflow"
