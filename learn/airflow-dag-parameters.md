@@ -1,17 +1,17 @@
 ---
-title: "DAG-level parameters"
+title: "DAG-level parameters in Airflow" 
 sidebar_label: "DAG parameters"
 id: airflow-dag-parameters
-description: "Learn about all DAG-level parameters in Airflow."
+description: "Learn about all important DAG-level parameters in Airflow."
 ---
 
 In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task or [Airflow configs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) which affect the entire Airflow instance. 
 
 This guide covers all user-relevant DAG-level parameters in Airflow.
 
-## Basic
+## Basic DAG-level parameters
 
-There are four basic DAG-level parameters. It is a best practice to always set these parameters:
+There are four basic DAG-level parameters. It is best practice to always set these parameters in any DAG:
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
@@ -20,9 +20,9 @@ There are four basic DAG-level parameters. It is a best practice to always set t
 | `schedule`   | The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information. Defaults to `timedelta(days=1)`. This parameter replaces the deprecated `schedule_interval` and `timetable` parameters. |
 | `catchup`    | Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is unpaused. This parameter defaults to `True`. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs, see [Catchup](rerunning-dags.md#catchup) for more information. |
 
-## UI-related
+## UI parameters
 
-Some parameters relate to adding information to the DAG or change its appearance in the Airflow UI:
+Some parameters add documentation to a DAG or change its appearance in the Airflow UI:
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
@@ -33,7 +33,7 @@ Some parameters relate to adding information to the DAG or change its appearance
 | `default_view`  | The default view of the DAG in the Airflow UI. Defaults to `grid`. |
 | `orientation`   | The orientation of the DAG graph in the Airflow UI. Defaults to `LR` (left to right). |
 
-## Jinja templating
+## Jinja templating parameters
 
 There are parameters that relate to [Jinja templating](templating.md), such as:
 
@@ -46,7 +46,7 @@ There are parameters that relate to [Jinja templating](templating.md), such as:
 
 ## Scaling
 
-Three other helpful parameters relate to scaling in Airflow. For more information see [Scaling Airflow to optimize performance](airflow-scaling-workers.md):
+Some parameters can be used to scale your DAG's resource usage in Airflow. See [Scaling Airflow to optimize performance](airflow-scaling-workers.md) for more information.
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
@@ -54,7 +54,9 @@ Three other helpful parameters relate to scaling in Airflow. For more informatio
 | `max_active_runs`                   | The number of active DAG runs allowed to run concurrently for this DAG. |
 | `max_consecutive_failed_dag_runs`   | (experimental) The maximum number of consecutive failed DAG runs, after which the scheduler will disable this DAG. |
 
-## Callbacks
+## Callback parameters
+
+These parameters help you configure the behavior of [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks).
 
 | Parameter                           | Description |
 |-------------------------------------|-------------|
@@ -62,15 +64,14 @@ Three other helpful parameters relate to scaling in Airflow. For more informatio
 | `on_failure_callback`                   | A function to be executed after a failed DAG run. |
 | `sla_miss_callback`   | A function to be executed when a DAG misses its defined [Service Level Agreement (SLA)](error-notifications-in-airflow.md#airflow-service-level-agreements) |
 
-See [Airflow callbacks](error-notifications-in-airflow.md#airflow-callbacks) for more information.
 
 :::tip
 
-Astronomer customers can use Astro alerts instead of or in addition to Airflow callbacks. See [When to use Airflow or Astro alerts for your pipelines on Astro](https://docs.astronomer.io/astro/best-practices/airflow-vs-astro-alerts) for more information.
+On Astro, you can use Astro alerts instead of or in addition to Airflow callbacks. See [When to use Airflow or Astro alerts for your pipelines on Astro](https://docs.astronomer.io/astro/best-practices/airflow-vs-astro-alerts) for more information.
 
 :::
 
-## Other
+## Other parameters
 
 Other DAG parameters include:
 
