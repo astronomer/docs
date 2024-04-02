@@ -2,12 +2,15 @@
 title: "DAG scheduling and timetables in Airflow"
 sidebar_label: "Schedule DAGs"
 id: scheduling-in-airflow
-description: "Get to know Airflow scheduling concepts and different ways to schedule a DAG. Learn how timetables in Airflow 2.2 bring new flexibility to DAG scheduling."
+description: "Get to know Airflow scheduling concepts and different ways to schedule a DAG."
 ---
 
-One of the fundamental features of Apache Airflow is the ability to schedule jobs. Historically, Airflow users scheduled their DAGs by specifying a `schedule` with a cron expression, a timedelta object, or a preset Airflow schedule. Timetables, released in Airflow 2.2, allow users to create their own custom schedules using Python, effectively eliminating the limitations of cron. With timetables, you can now schedule DAGs to run at any time. Datasets, introduced in Airflow 2.4, let you schedule your DAGs on updates to a dataset rather than a time-based schedule. For more information about datasets, see [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md).
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG with a focus on timetables. All code used in this guide is available in the [airflow-scheduling-tutorial repository](https://github.com/astronomer/airflow-scheduling-tutorial).
+One of the fundamental features of Apache Airflow is the ability to schedule jobs. Historically, Airflow users scheduled their DAGs by specifying a `schedule` with a cron expression, a timedelta object, or a preset Airflow schedule. Recent versions of Airflow have added new ways to schedule DAGs, including [data-aware scheduling with datasets](airflow-datasets.md) and [timetables](#timetables).
+
+In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG.
 
 :::tip Other ways to learn
 
@@ -329,25 +332,95 @@ There are some limitations to keep in mind when implementing custom timetables:
 
 ## Dataset driven scheduling
 
-Datasets and data-driven DAG dependencies were introduced in Airflow 2.4. You can now make Airflow detect when a task in a DAG updates a data object. Using that awareness, other DAGs can be scheduled depending on updates to these datasets. To create a dataset-based schedule, you pass the names of the datasets as a list to the `schedule` parameter. For example:
+With Datasets, you can make Airflow aware of updates to data objects. Using that awareness, other DAGs can be scheduled on updates to these datasets. To create a dataset-based schedule, you pass the names of the dataset(s) to the `schedule` parameter. Airflow 2.9 added the ability to define conditional logic for your dataset schedules, as well as the option to combine timetables with dataset-based schedules.
+
+<Tabs
+    defaultValue="simple"
+    groupId="combined-dataset-and-time-based-scheduling"
+    values={[
+        {label: 'Simple Dataset Schedule', value: 'simple'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+<TabItem value="simple">
 
 ```python
+# from airflow.datasets import Dataset
+
+DATASETS_PATH = "s3://airflow-datasets"
+
 dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
 dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
 
 @dag(
     dag_id='dataset_dependent_example_dag',
     catchup=False,
-    start_date=datetime(2022, 8, 1),
-    schedule=[dataset1, dataset2],
-    tags=['consumes', 'dataset-scheduled'],
+    start_date=datetime(2024, 4, 1),
+    schedule=[dataset1, dataset2],  
+    # Passing a list of datasets will create an AND condition, 
+    # This scheduling option is available in Airflow 2.4+
 )
 ```
 
-This DAG runs only when `dataset1` and `dataset2` are updated. These updates can occur by tasks in different DAGs as long as they are located in the same Airflow environment.
+This DAG runs when both `dataset1` and `dataset2` is updated at least once. 
 
-In the Airflow UI, the DAG now has a schedule of **Dataset** and the **Next Run** column shows how many datasets the DAG depends on and how many of them have been updated.
+</TabItem>
+<TabItem value="conditional">
 
-![Dataset dependent DAG](/img/guides/2_4_DatasetDependentDAG.png)
+```python
+# from airflow.datasets import Dataset
+
+DATASETS_PATH = "s3://airflow-datasets"
+
+dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
+dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
+
+@dag(
+    dag_id='dataset_dependent_example_dag',
+    catchup=False,
+    start_date=datetime(2024, 4, 1),
+    schedule=(dataset1 | dataset2),  
+    # Use () instead of [] to be able to use conditional dataset scheduling!
+    # This scheduling option is available in Airflow 2.9+
+)
+```
+
+This DAG runs when either `dataset1` or `dataset2` is updated. 
+
+</TabItem>
+<TabItem value="time">
+
+```python
+# from airflow.datasets import Dataset
+# from airflow.timetables.datasets import DatasetOrTimeSchedule
+# from airflow.timetables.trigger import CronTriggerTimetable
+
+DATASETS_PATH = "s3://airflow-datasets"
+
+dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
+dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
+
+@dag(
+    dag_id='dataset_dependent_example_dag',
+    catchup=False,
+    start_date=datetime(2024, 4, 1),
+    schedule=DatasetOrTimeSchedule(
+        timetable=CronTriggerTimetable("0 0 * * *", timezone="UTC"),
+        datasets=(dataset1 | dataset2),
+    ), 
+    # Use () instead of [] to be able to use conditional dataset scheduling!
+    # This scheduling option is available in Airflow 2.9+
+)
+```
+
+This DAG runs every day at midnight UTC and additionally, whenever either `dataset1` or `dataset2` is updated.
+
+</TabItem>
+</Tabs>
+
+Dataset updates can occur by any tasks in any DAG of the same Airflow environment, by calls to the [dataset endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_upstream_dataset_events) or manually in the Airflow UI.
+
+In the Airflow UI, the DAG now has a schedule of **Dataset** and the **Next Run** column shows the datasets the DAG depends on and how many of them have been updated.
+
+![Dataset dependent DAG](/img/guides/scheduling-in-airflow_dags_view_dataset_dag.png)
 
 To learn more about datasets and data driven scheduling, see [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md) guide.
