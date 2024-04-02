@@ -28,7 +28,7 @@ To get the most out of this guide, you should have an understanding of:
 In Airflow, you can configure individual tasks to retry automatically in case of a failure. The default number of times a task will retry before failing permanently can be defined at the Airflow configuration level using the core config `default_task_retries`. You can set this configuration either in `airflow.cfg` or with the environment variable `AIRFLOW__CORE__DEFAULT_TASK_RETRIES`. 
 You can overwrite the `default_task_retries` of an Airflow environment at the task level by using the `retries` parameter.
 
-The `retry_delay` parameter (default: `timedelta(seconds=300)`) defines the time spent between retries. As of Airflow 2.6, you can set a maximum value for the retry delay in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which, by default, is set at 24 hours. Or, for individual tasks, you can set the maximum retry delay with the parameter, `max_retry_delay`.
+The `retry_delay` parameter (default: `timedelta(seconds=300)`) defines the time spent between retries. You can set a maximum value for the retry delay in the core Airflow config `max_task_retry_delay` (`AIRFLOW__CORE__MAX_TASK_RETRY_DELAY`), which, by default, is set at 24 hours. Or, for individual tasks, you can set the maximum retry delay with the parameter, `max_retry_delay`.
 
 To progressively increase the wait time between retries until `max_retry_delay` is reached, set `retry_exponential_backoff` to `True`.
 
@@ -84,7 +84,7 @@ Don't clear or change task statuses directly in the Airflow metastore. This can 
 
 ### Add notes to cleared tasks and DAGs
 
-As of Airflow 2.5, you can add notes to task instances and DAG runs from the **Grid View** in the Airflow UI. This feature is useful for tracking manual changes to task instances, such as reruns or task status changes. Astronomer recommends leaving a note on a task or DAG whenever you manually update a task instance through the Airflow UI.
+You can add notes to task instances and DAG runs from the **Grid View** in the Airflow UI. This feature is useful for tracking manual changes to task instances, such as reruns or task status changes. Astronomer recommends leaving a note on a task or DAG whenever you manually update a task instance through the Airflow UI.
 
 To add a note to a task instance or DAG run:
 

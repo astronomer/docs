@@ -205,11 +205,11 @@ In Airflow you can define actions to be taken due to different DAG or task state
 - `on_retry_callback`: Invoked when a task is retried. This callback only exists at the task level.
 - `sla_miss_callback`: Invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements). This callback is defined at the DAG level for DAGs with defined SLAs and will be applied to every task.
 
-You can provide any Python callable to the `*_callback` parameters. As of Airflow 2.6, you can also use [notifiers](#notifiers) for your callbacks, and you can provide several callback items to the same callback parameter in a list.
+You can provide any Python callable to the `*_callback` parameters, as well [Airflow notifiers](#notifiers). To execute multiple functions, you can provide several callback items to the same callback parameter in a list.
 
 ### Notifiers
 
-Airflow 2.6 added [notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html), which are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers can be passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
+[Airflow notifiers](https://airflow.apache.org/docs/apache-airflow/stable/howto/notifications.html) are pre-built or custom classes and can be used to standardize and modularize the functions you use to send notifications. Notifiers can be passed to the relevant `*_callback` parameter of your DAG depending on what event you want to trigger the notification.
 
 :::info
 

@@ -127,7 +127,7 @@ Custom timetables can be registered as part of an Airflow plugin. They must be a
 
 ### Continuous timetable
 
-As of Airflow 2.6, you can run a DAG continuously with a pre-defined timetable. To use the [ContinuousTimetable](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/timetables/simple/index.html#module-airflow.timetables.simple.ContinuousTimetable), set the schedule of your DAG to `"@continuous"` and set `max_active_runs` to 1.
+You can run a DAG continuously with a pre-defined timetable. To use the [ContinuousTimetable](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/timetables/simple/index.html#module-airflow.timetables.simple.ContinuousTimetable), set the schedule of your DAG to `"@continuous"` and set `max_active_runs` to 1.
 
 ```python
 @dag(
