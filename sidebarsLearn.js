@@ -73,6 +73,7 @@ module.exports = {
             'airflow-context',
             'cross-dag-dependencies',
             'airflow-importing-custom-hooks-operators',
+            'airflow-dag-parameters',
             'error-notifications-in-airflow',
             'dag-best-practices',
             'debugging-dags',
@@ -111,7 +112,6 @@ module.exports = {
           },
           items: [
             'logging',
-            'airflow-dag-parameters',
             'data-quality',
             'airflow-datasets',
             'deferrable-operators',
