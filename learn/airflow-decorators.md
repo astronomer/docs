@@ -328,7 +328,7 @@ There are several decorators available to use with Airflow. This list provides a
 - DAG decorator (`@dag()`), which creates a DAG.
 - TaskGroup decorator (`@task_group()`), which creates a [TaskGroup](task-groups.md).
 - Task decorator (`@task()`), which creates a Python task.
-- Task decorator (`@task.bash()`) which creates a [BashOperator](bashoperator.md#how-to-use-the-bash-decorator) task.
+- Bash decorator (`@task.bash()`) which creates a [BashOperator](bashoperator.md#how-to-use-the-bash-decorator) task.
 - Python Virtual Env decorator (`@task.virtualenv()`), which runs your Python task in a [virtual environment](https://www.astronomer.io/events/webinars/running-airflow-tasks-in-isolated-environments/).
 - Docker decorator (`@task.docker()`), which creates a [DockerOperator](https://registry.astronomer.io/providers/apache-airflow-providers-docker/versions/latest/modules/DockerOperator) task.
 - [Short circuit decorator](airflow-branch-operator.md#taskshort_circuit-shortcircuitoperator) (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False.
