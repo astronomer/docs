@@ -82,7 +82,7 @@ def add_function(x: int, y: int):
     return x + y
 
 added_values = PythonOperator.partial(
-    task_id="add2",
+    task_id="add",
     python_callable=add_function,
     op_kwargs={"y": 10},
     # optionally, you can set a custom index to display in the UI (Airflow 2.9+)

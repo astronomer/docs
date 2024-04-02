@@ -51,7 +51,6 @@ bash_task = BashOperator(
     bash_command="echo $MY_VAR",
     env={"MY_VAR": "Hello World"}
 )
-
 ```
 
 </TabItem>
