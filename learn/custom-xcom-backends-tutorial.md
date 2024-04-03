@@ -269,6 +269,12 @@ An Airflow connection is necessary to connect Airflow with your object storage c
 
 Configuring a custom XCom backend with Object Storage can be done by setting environment variables in your Astro project.
 
+:::info
+
+If you are setting up a custom XCom backend for an Astro deployment, you have to set the following environment variables for your deployment. See [Environment variables](https://docs.astronomer.io/astro/environment-variables) for instructions.
+
+:::
+
 1. Add the `AIRFLOW__CORE__XCOM_BACKEND` environment variable to your `.env` file. It defines the class to use for the custom XCom backend implementation.
 
     ```text
@@ -347,4 +353,4 @@ We will use a simple DAG to test your custom XCom backend.
 
 ## Conclusion
 
-Congratulations, you learned how to set up a custom XCom backend using Object Storage!
+Congratulations, you learned how to set up a custom XCom backend using Object Storage! Learn more about other options to set up custom XCom backends in the [Options for custom XCom backends in Airflow](airflow-custom-xcom-backends.md) guide.
