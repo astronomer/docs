@@ -27,6 +27,10 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## April 3, 2024
 
+### Additional improvements 
+
+- [Deployment hibernation](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) is now in public preview.
+
 ### Bug fixes
 
 - Fixed an issue where connections configured in the Astro UI were not mounted to triggerer Pods, resulting in failed runs for tasks that use deferrable operators.
