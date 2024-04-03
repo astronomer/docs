@@ -145,12 +145,14 @@ The following examples demonstrate how to use each method to template the `cwd` 
     defaultValue="task"
     groupId="templating-additional-fields"
     values={[
-        {label: 'Set the template_fields attribute of a task', value: 'task'},
+        {label: 'Set the `template_fields` attribute of a task', value: 'task'},
         {label: 'Create a custom Operator', value: 'operator'},
     ]}>
 <TabItem value="task">
 
 After defining a task and assigning it to a Python variable, you can modify its `template_fields` attribute. This allows you to enable Jinja templating for any field that is not templated by default.
+
+Prefer this method when you need to template a field only once. 
 
 ```python
     from airflow.decorators import dag
@@ -176,6 +178,8 @@ After defining a task and assigning it to a Python variable, you can modify its 
 Create a custom Operator by subclassing the desired Operator class and adding your desired field to `template_fields`.
 In this example, TemplatedBashOperator is a new operator that inherits the behavior of BashOperator and allows Jinja templating of the `cwd` field.
 
+Prefer this method if you need to template a field repeatedly.
+
 ```python
     from airflow.decorators import dag
     from airflow.operators.bash import BashOperator
@@ -197,7 +201,6 @@ In this example, TemplatedBashOperator is a new operator that inherits the behav
             bash_command="script.sh",
             cwd="/usr/local/airflow/{{ ds }}",
         )
-
 
     templating_dag()
 ```
