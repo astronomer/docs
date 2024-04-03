@@ -135,7 +135,7 @@ If your DAGs are either not running or running differently than you intended, co
 using `astro dev logs -s`. 
 - If too many runs of your DAG are being scheduled after you unpause it, you most likely need to set `catchup=False` in your DAG's parameters.
 
-If your DAG is running but not on the schedule you expected, review the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide. If you are using a custom timetable, ensure that the data interval for your DAG run does not precede the DAG start date.
+If your DAG is running but not on the schedule you expected, review the [DAG Schedule DAGs in Airflow](scheduling-in-airflow.md) guide. If you are using a custom timetable, ensure that the data interval for your DAG run does not precede the DAG start date.
 
 ## Common task issues
 

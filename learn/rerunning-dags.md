@@ -24,7 +24,7 @@ In this guide, you'll learn how to configure automatic retries, rerun tasks or D
 
 To get the most out of this guide, you should have an understanding of:
 
-- DAG scheduling. See [Scheduling and timetables in Airflow](scheduling-in-airflow.md)
+- DAG scheduling. See [Schedule DAGs in Airflow](scheduling-in-airflow.md)
 
 ## Automatically retry tasks
 

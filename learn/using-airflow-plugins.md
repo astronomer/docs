@@ -74,7 +74,7 @@ Functionality is added to a plugin by adding components to the class which defin
 
 Other types of plugin components not covered in this guide include:
 
-- `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG scheduling and timetables in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
+- `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG Schedule DAGs in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
 - `executors` add the possibility to use a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) in your Airflow instance.
 
 :::info

@@ -40,7 +40,7 @@ There are multiple resources for learning about this topic. See also:
 
 To get the most out of this guide, you should have an existing knowledge of:
 
-- Airflow scheduling concepts. See [Scheduling and Timetables in Airflow](scheduling-in-airflow.md).
+- Airflow scheduling concepts. See [Schedule DAGs in Airflow](scheduling-in-airflow.md).
 - Creating dependencies between DAGs. See [Cross-DAG Dependencies](cross-dag-dependencies.md).
 - The Astro Python SDK. See [Using the Astro Python SDK](https://docs.astronomer.io/tutorials/astro-python-sdk).
 
