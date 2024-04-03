@@ -11,10 +11,10 @@ navigation:
         path: ./docs/pages/get-started.mdx
       - page: Versioning and support
         path: ./docs/pages/versioning-and-support.mdx
-  - api: Platform API Reference
-    api-name: platform
   - api: IAM API Reference
     api-name: iam
+  - api: Platform API Reference
+    api-name: platform
 layout: 
   searchbar-placement: header
 favicon: ./docs/assets/favicon.svg
