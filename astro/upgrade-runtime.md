@@ -139,7 +139,7 @@ When you choose a deprecated version of Astro Runtime, Astronomer recommends alw
  
        :::info
 
-    You only need a PAT to create the first Deployment in your Organization running a deprecated version of Astro Runtime. You can then create all subsequent Deployments using either a Workspace or Organization API token.
+    You only need a PAT to create the first Deployment in your Organization running a deprecated version of Astro Runtime. You can then create all subsequent Deployments using either a Workspace or Organization API token with permissions to create a Deployment.
 
     :::
     
