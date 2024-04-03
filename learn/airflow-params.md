@@ -229,7 +229,7 @@ Aside from the `type` attribute, the `Param` class has several other attributes 
 - `const`: Defines a permanent default value and hides the param from the **Trigger DAG** UI. Note that you still need to provide a `default` value for the param.
 - `custom_html_form`: Allows you to create custom HTML on top of the provided features. As of Airflow 2.8 this feature is deprecated and will be replaced by a new implementation in the future.
 
-All `Param` attributes are optional to set. For string type params, you can additionally set `min_length` and `max_length` to define the minimum and maximum length of the input. Similarly, integer and number type params can have a `minimum` and `maximum` value.
+All `Param` attributes are optional to set. For string type params, you can additionally set `minLength` and `maxLength` to define the minimum and maximum length of the input. Similarly, integer and number type params can have a `minimum` and `maximum` value.
 
 ### Param examples in the Airflow UI
 
@@ -244,8 +244,8 @@ The code snippet below defines a mandatory string param with a few UI elements t
     title="Favorite orchestrator:",
     description="Enter your favorite data orchestration tool.",
     section="Important params",
-    min_length=1,
-    max_length=200,
+    minLength=1,
+    maxLength=200,
 )
 ```
 
