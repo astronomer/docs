@@ -180,6 +180,8 @@ In this example, TemplatedBashOperator is a new operator that inherits the behav
 
 Prefer this method if you need to template a field repeatedly.
 
+For existing projects, naming your custom operator the same as the existing one simplifies refactoring by allowing you to only modify imports, minimizing the required code changes.
+
 ```python
     from airflow.decorators import dag
     from airflow.operators.bash import BashOperator
