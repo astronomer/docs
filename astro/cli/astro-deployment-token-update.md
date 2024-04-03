@@ -46,7 +46,7 @@ astro deployment update --deployment-id=<deployment-id> [flags]
 
 ```bash
 # create a deployment token
-astro deployment token update
+astro deployment token update --deployment-id=clukapi6r000008l58530cg8i
 
 ```
 

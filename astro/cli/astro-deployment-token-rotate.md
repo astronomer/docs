@@ -20,7 +20,7 @@ To use your API token in an automated process, see [Authenticate an automation t
 ## Usage
 
 ```sh
-astro deployment token roate <token-ID> [flags]
+astro deployment token roate --deployment-id=<deployment-id> <token-ID> [flags]
 ```
 
 ## Options
@@ -34,7 +34,7 @@ astro deployment token roate <token-ID> [flags]
 ## Examples
 
 ```bash
-astro deployment token rotate [flags]
+astro deployment token rotate --deployment-id=clukapi6r000008l58530cg8i [flags]
 ```
 
 ## Related Commands

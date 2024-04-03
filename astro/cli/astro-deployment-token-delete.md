@@ -20,7 +20,7 @@ To configure how you use your API token in an automated process, see [Authentica
 ## Usage
 
 ```sh
-astro deployment token delete --deployment-id=<deployment-id> --workspace-id=<workspace-id>
+astro deployment token delete --deployment-id=<deployment-id>
 ```
 
 ## Options
@@ -34,7 +34,7 @@ astro deployment token delete --deployment-id=<deployment-id> --workspace-id=<wo
 
 ```bash
 # create a deployment token
-astro deployment token create
+astro deployment token delete --deployment-id=clukapi6r000008l58530cg8i
 
 ```
 

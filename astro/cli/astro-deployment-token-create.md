@@ -20,7 +20,7 @@ To use your API token in an automated process, see [Authenticate an automation t
 ## Usage
 
 ```sh
-astro deployment token create
+astro deployment token create --deployment-id=<deployment-id>
 ```
 
 ## Options
@@ -37,7 +37,7 @@ astro deployment token create
 
 ```bash
 # create a deployment token
-astro deployment token create
+astro deployment token create --deployment-id=clukapi6r000008l58530cg8i
 
 ```
 

@@ -4,7 +4,7 @@ title: "astro deployment token list"
 id: astro-deployment-token-list
 description: List your Deployment API tokens.
 hide_table_of_contents: true
-sidebar_custom_props: { icon: 'img/term-icon.png' }
+sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
 :::info
@@ -20,28 +20,33 @@ To use your API token in an automated process, see [Authenticate an automation t
 ## Usage
 
 ```sh
-astro deployment token list
+astro deployment token list --deployment-id=<deployment-id>
 ```
 
 ## Options
 
-| Option                         | Description                                                                            | Possible Values                                                                |
-| ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `--deployment-id` | The Deployment where you would like to manage tokens. | A valid Deployment ID |
-| `--verbosity` | The Log level | `debug`, `info`, `warn`, `error`, `fatal`, or `panic`. Default is `warn`. |
-| `--workspace-id` | The Workspace ID assigned to a Deployment. | A valid Workspace ID |
+| Option            | Description                                           | Possible Values                                                           |
+| ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------- |
+| `--deployment-id` | The Deployment where you would like to manage tokens. | A valid Deployment ID                                                     |
+| `--verbosity`     | The Log level                                         | `debug`, `info`, `warn`, `error`, `fatal`, or `panic`. Default is `warn`. |
+| `--workspace-id`  | The Workspace ID assigned to a Deployment.            | A valid Workspace ID                                                      |
 
 ## Output
 
-| Output  | Description                                       | Data Type |
-| ------- | ------------------------------------------------- | --------- |
-|    |    |    |
+| Output        | Description                                                          | Data Type |
+| ------------- | -------------------------------------------------------------------- | --------- |
+| `ID`          | The token ID.                                                        | String    |
+| `NAME`        | The name of the token.                                               | String    |
+| `DESCRIPTION` | (Optional) A description of the API Token.                           | String    |
+| `SCOPE`       | Whether the API Token is for Deployment, Workspace, or Organization. | String    |
+| `CREATED`     | How long ago the token was created in days.                          | String    |
+| `CEATED BY`   | The name of the person who created the token.                        | String    |
 
 ## Examples
 
 ```bash
 # create a deployment token
-astro deployment token list
+astro deployment token list --deployment-id=clukapi6r000008l58530cg8i
 
 ```
 
