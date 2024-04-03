@@ -145,7 +145,7 @@ The following examples demonstrate how to use each method to template the `cwd` 
     defaultValue="task"
     groupId="templating-additional-fields"
     values={[
-        {label: 'Set the `template_fields` attribute of a task', value: 'task'},
+        {label: 'Set the template_fields attribute', value: 'task'},
         {label: 'Create a custom Operator', value: 'operator'},
     ]}>
 <TabItem value="task">
@@ -163,7 +163,7 @@ Prefer this method when you need to template a field only once.
     @dag(schedule=None, start_date=days_ago(1))
     def templating_dag():
         bash_task = BashOperator(
-            task_id="set_template_field_after_task_instantiation",
+            task_id="set_template_field",
             bash_command="script.sh",
             cwd="/usr/local/airflow/{{ ds }}",
         )
@@ -198,8 +198,8 @@ For existing projects, naming your custom operator the same as the existing one 
 
     @dag(schedule=None, start_date=days_ago(1))
     def templating_dag():
-        bash_task = BashOperator(
-            task_id="set_template_field_after_task_instantiation",
+        bash_task = TemplatedBashOperator(
+            task_id="custom_operator",
             bash_command="script.sh",
             cwd="/usr/local/airflow/{{ ds }}",
         )
