@@ -29,6 +29,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements 
 
+- [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) are now generally available.
 - [Deployment hibernation](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) is now in public preview.
 
 ### Bug fixes
