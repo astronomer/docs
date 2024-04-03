@@ -47,6 +47,7 @@ module.exports = {
             'bashoperator',
             'connections',
             'dags',
+            'airflow-datasets',
             'what-is-a-hook',
             'managing-airflow-code',
             'airflow-openlineage',
@@ -112,7 +113,6 @@ module.exports = {
           items: [
             'logging',
             'data-quality',
-            'airflow-datasets',
             'deferrable-operators',
             'dynamically-generating-dags',
             'airflow-isolated-environments',
