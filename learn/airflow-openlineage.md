@@ -6,7 +6,7 @@ id: airflow-openlineage
 tags: [Lineage]
 ---
 
-[Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking and visualizing data from its origin to wherever it flows and is consumed downstream. Lineage is growing in importance as companies must rely on increasingly complex data ecosystems for making business-critical decisions. Data lineage can help with everything from understanding your data sources, to troubleshooting job failures, to managing PII, to ensuring compliance with data regulations.
+[Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking and visualizing data from its origin to wherever it flows and is consumed downstream. Lineage is growing in importance as companies must rely on increasingly complex data ecosystems to make business-critical decisions. Data lineage can help with everything from understanding your data sources, to troubleshooting job failures, to managing PII, to ensuring compliance with data regulations.
 
 It follows that data lineage has a natural integration with Apache Airflow. Airflow is often used as a one-stop-shop orchestrator for an organization’s data pipelines, which makes it an ideal platform for integrating data lineage to understand the movement of and interactions within your data.
 
@@ -98,7 +98,7 @@ If you are interested in exploring lineage locally with open source tools, you c
 
 ## Limitations
 
-- Column-level lineage support is currently limited to SQL-based operators other than BigQuery (except for `GCSToBigQueryOperator` and `BigQueryToGCSOperator`, which are supported).
+- Column-level lineage support is currently limited to the `SQLExecuteQueryOperator`-based operators listed in the (OpenLineage Provider docs)[https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/supported_classes.html]. The Google operators `GCSToBigQueryOperator` and `BigQueryToGCSOperator` also support column-level lineage.
 - Two core operators, `PythonOperator` and `BashOperator`, support OpenLineage, but as these are "black boxes" capable of running any code, your mileage may vary.
 
 :::note
