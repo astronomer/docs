@@ -7,12 +7,6 @@ description: A list of all possible Deployment incident types and steps for reso
 
 import HostedBadge from '@site/src/components/HostedBadge';
 
-:::caution
-
-This feature is in [Public preview](feature-previews.md).
-
-:::
-
 Astro monitors your Deployment and displays notifications when issues arise that could affect your Deployment's functionality or performance. Use your Deployment health status to quickly check if your Deployment has any issues that need immediate attention.
 
 ## Deployment health
@@ -27,9 +21,10 @@ The following are possible health statuses your Deployments can have:
 - **Deploying** (Grey): A code deploy or environment update is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
 - **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
 - **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
+- **Hibernating** (Grey): Your Deployment is currently hibernating.
 - **Unknown** (Grey): The Deployment status can't be determined.
 
-Your Deployment health status will also show a number next to the status if a [Deployment health incident](#deployment-incidents) is currently active. Incidents are classified as **Warning** or **Critical** level.
+Your Deployment health status will also show a number next to the status if a [Deployment health incident](#deployment-incidents) is currently active. Incidents are classified as **Info**, **Warning** or **Critical** level.
 
 ![A Deployment health status](/img/docs/health-status.png)
 
@@ -43,14 +38,15 @@ Astro automatically monitors your Deployments and sends messages when your Deplo
 
 ![A Deployment Health incident message appearing after a user hovers over the Deployment health status](/img/docs/incident-unfurl.png)
 
-The following table contains all types of Deployment incidents. A **warning** incident indicates that specific tasks or DAGs might fail, while a **critical** incident indicates that your entire Deployment might not work as expected.
+The following table contains all types of Deployment incidents. An **info** incident indicates that an issue has been identified but it will not impact the execution of DAGs or tasks. A **warning** incident indicates that specific tasks or DAGs might fail or that some action that should be taken on the Deployment. A **critical** incident indicates that your entire Deployment might not work as expected.
 
-| Incident name                           | Severity | Description                                                                                        |
-| --------------------------------------- | -------- | -------------------------------------------------------------------------------------------------- |
-| Scheduler Heartbeat Not Found           | Critical | The Airflow scheduler has not sent a heartbeat for longer than 10 minutes.                         |
-| Airflow Database Storage Unusually High | Warning  | The metadata database has tables that are larger than 20GiB.                                       |
-| Worker Queue at Capacity                | Warning  | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
-| Worker Queue Does Not Exist             | Warning  | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
+| Incident name                           | Severity        | Description                                                                                        |
+| --------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------- |
+| Scheduler Heartbeat Not Found           | Critical        | The Airflow scheduler has not sent a heartbeat for longer than 10 minutes.                         |
+| Airflow Database Storage Unusually High | Info or Warning | The metadata database has tables that are larger than 50GiB (Info) or 75GiB (Warning).             |
+| Worker Queue at Capacity                | Warning         | At least one worker queue in this Deployment is running the maximum number of tasks and workers.   |
+| Worker Queue Does Not Exist             | Warning         | There is at least 1 task instance that is configured to run on a worker queue that does not exist. |
+| Deprecated Runtime Version              | Warning         | Your Deployment is using a deprecated Astro Runtime version.                                       |
 
 Use the following topics to address each of these incidents.
 
@@ -62,14 +58,15 @@ If you receive this incident notification, Astronomer Support has already been n
 
 ### Airflow Database Storage Unusually High
 
-Your Deployment metadata database is currently storing tables that are larger than 20GiB. Click **View details** on the incident to view the affected tables.
+Your Deployment metadata database is currently storing tables that are larger than 50GiB (Info) or 75GiB (Warning). Click **View details** on the incident to view the affected tables. Even with large tables, Airflow will continue to operate as normal, but for very large tables (in the Warning range and above) you may begin to see degraded scheduler performance. As a result, you may need to clean up the relevant tables in the metadata DB to avoid the risk of delayed task runs.
 
-This is typically caused due to XCom data and can result in tables running out of storage. You can reduce the amount of XCom data in a table in a few different ways:
+The tables that are currently monitored for size are: `dag`, `dag_run`, `task_instance`, `job`, `log` and `xcom`.
 
+If `xcom` is listed in the affected tables, you should consider the following options:
 - Configure an external backend for XCom data, such as AWS S3. See the [Astronomer XCom Backend Tutorial](https://docs.astronomer.io/learn/xcom-backend-tutorial).
 - Implement intermediary data storage for tasks so that Airflow doesn't store large amounts of data when passing data between tasks. See [Intermediary data storage](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks#intermediary-data-storage).
 
-If you receive this incident notification and don't utilize XComs, submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
+For additional assistance in cleaning up large DB tables, submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
 ### Worker Queue at Capacity
 
@@ -84,6 +81,12 @@ At least one task is configured to run on a worker queue that does not exist. In
 1. Hover over the Deployment health status and click **View details** for the incident.
 2. Check the DAG and task IDs that reference the non-existent worker queue. The non-existent worker queue name referenced from your DAG code is listed under **Queue**.
 3. For each affected DAG, you can either create a new worker queue with the exact name as shown in **Queue** or update your DAG code to reference an existing worker queue. See [Configure worker queues](configure-worker-queues.mdx#assign-tasks-to-a-worker-queue).
+
+### Deprecated Runtime Version
+
+The Astro Runtime version being used by the Deployment has been deprecated. Airflow will continue to run as normal but you should upgrade as soon as possible.
+
+To upgrade to a [supported version](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy) please follow the [upgrade docs](https://docs.astronomer.io/astro/upgrade-runtime).
 
 ## See also
 
