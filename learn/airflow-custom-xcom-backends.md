@@ -13,13 +13,13 @@ Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data be
 In this guide you'll learn:
 
 - Why you might want to use a custom XCom backend.
-- How to set up a custom XCom backend using the Object Storage XCom backend.
-- How to use a XCom backend class with custom serialization and deserialization methods.
+- How to set up a custom XCom backend using the Object Storage custom XCom backend.
+- How to use a custom XCom backend class with custom serialization and deserialization methods.
 - How to override the `.clear()` method to delete XComs from a custom XCom backend when clearing tasks.
 
 :::warning
 
-While a custom XCom backend allows you to store virtually unlimited amounts of data as XCom, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link&utm_medium=docs&utm_content=learn-xcom-backend-tutorial&utm_source=body).
+While a custom XCom backend allows you to store virtually unlimited amounts of data as XComs, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link&utm_medium=docs&utm_content=learn-xcom-backend-tutorial&utm_source=body).
 
 :::
 
@@ -34,9 +34,9 @@ To get the most benefits from this guide, you need an understanding of:
 
 Common reasons to use a custom XCom backend include:
 
-- Needing more storage space for XCom than the Airflow metadata database can offer.
+- Needing more storage space for XComs than the Airflow metadata database can offer.
 - Running a production environment where you require custom retention, deletion, and backup policies for XComs.
-- Accessing XCom without accessing the metadata database.
+- Accessing XComs without accessing the metadata database.
 - Restricting types of allowed XCom values.
 - Saving XComs in multiple locations simultaneously.
 
@@ -46,21 +46,21 @@ It is also possible to use custom XCom backends to define custom serialization a
 
 There are two main ways to set up a custom XCom backend:
 
-- **Object Storage XCom backend**: Use this method to create a custom XCom backend when you want to store XComs in a cloud-based object storage service like AWS S3, GCP Cloud Storage, or Azure Blob Storage.
-- **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored, for example simultaneously storing XCom in two different locations.
+- **Object Storage custom XCom backend**: Use this method to create a custom XCom backend when you want to store XComs in a cloud-based object storage service like AWS S3, GCP Cloud Storage, or Azure Blob Storage.
+- **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored, for example simultaneously storing XComs in two different locations.
 
 Additionally, some provider packages offer custom XCom backends that you can use out of the box, for example the [Snowpark provider](airflow-snowpark.md) which contains a custom XCom backend for Snowflake.
 
 ### Use the Object Storage XCom backend
 
-Airflow 2.9+ added the possibility to create a custom XCom backend using the Object Storage feature. Object Storage XCom backends are part of the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) provider and can be defined only using environment variables. The following environment variables are available:
+Airflow 2.9+ added the possibility to create a custom XCom backend using the Object Storage feature. Object Storage custom XCom backends are part of the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) provider and can be defined only using environment variables. The following environment variables are available:
 
-- `AIRFLOW__CORE__XCOM_BACKEND`: The XCom backend to use. Set this to `airflow.providers.common.io.xcom.backend.XComObjectStoreBackend` to use the Object Storage XCom backend.
-- `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH`: The path to the object storage where XComs are stored. The path should be in the format `<your-scheme>://<your-connection-id@<your-bucket>/xcom`. For example, `s3://my-s3-connection@my-bucket/xcom`.
+- `AIRFLOW__CORE__XCOM_BACKEND`: The XCom backend to use. Set this to `airflow.providers.common.io.xcom.backend.XComObjectStoreBackend` to use the Object Storage custom XCom backend.
+- `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH`: The path to the object storage where XComs are stored. The path should be in the format `<your-scheme>://<your-connection-id@<your-bucket>/xcom`. For example, `s3://my-s3-connection@my-bucket/xcom`. The most common schemes are `s3`, `gs`, and `abfs` for Amazon S3, Google Cloud Storage, and Azure Blob Storage, respectively.
 - `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_THRESHOLD`: The threshold in bytes for XComs to be stored in the object storage. All objects smaller or equal to this threshold are stored in the metadata database. All objects larger than this threshold are stored in the object storage. The default value is `-1`, meaning all XComs are stored in the metadata database.
 - `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_COMPRESSION`: Optional. The compression algorithm to use when storing XComs in the object storage, for example `zip`. The default value is `None`.
 
-For a step-by-step tutorial on how to set up a custom XCom backend using the Object Storage XCom backend for Amazon S3, Google Cloud Storage and Azure Blob Storage, see the [Set up a custom XCom backend using Object Storage](custom-xcom-backends-tutorial.md).
+For a step-by-step tutorial on how to set up a custom XCom backend using the Object Storage custom XCom backend for Amazon S3, Google Cloud Storage and Azure Blob Storage, see the [Set up a custom XCom backend using Object Storage](custom-xcom-backends-tutorial.md).
 
 :::caution
 
@@ -72,7 +72,7 @@ Object storage is currently experimental and might be subject to breaking change
 
 To create a custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
 
-The code below shows an example `MyCustomXComBackend` class that only allows JSON-serializeable XComs and stores them in both, Amazon S3 and Google Cloud Storage using a custom `serialize_value()` method. The `deserialize_value()` method retrieves the XCom from the Amazon S3 bucket and returns the value.
+The code below shows an example `MyCustomXComBackend` class that only allows JSON-serializeable XComs and stores them in both, Amazon S3 and Google Cloud Storage using a custom `serialize_value()` method. The `deserialize_value()` method retrieves the XComs from the Amazon S3 bucket and returns the value.
 
 The Airflow metadata database stores a reference string to the XCom, which is displayed in the XCom tab of the Airflow UI. The reference string is prefixed with `s3_and_gs://` to indicate that the XCom is stored in both Amazon S3 and Google Cloud Storage. You can add any serialization and deserialization logic to the `serialize_value()` and `deserialize_value()` methods that you need, see [Custom serialization and deserialization](#custom-serialization-and-deserialization) for more information.
 
@@ -191,7 +191,7 @@ AIRFLOW__CORE__XCOM_BACKEND=include.<your-file-name>.MyCustomXComBackend
 
 If you want to further customize the functionality for your custom XCom backend, you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
 
-A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend, using the AWS version of the CustomXComBackendJSON XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
+A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend, using the AWS version of the `MyCustomXComBackend` XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
 
 <details>
 <summary>Click to view an example override of the .clear() method</summary>

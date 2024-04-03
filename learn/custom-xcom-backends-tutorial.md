@@ -11,9 +11,9 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import custom_xcom_backend_test from '!!raw-loader!../code-samples/dags/xcom-backend-tutorial/custom_xcom_backend_test.py';
 
-Airflow [custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XCom](airflow-passing-data-between-tasks.md#xcom). By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends using a custom XCom backend.
+Airflow [custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom). By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends using a custom XCom backend.
 
-The [Object Storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) XCom backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
+The [Object Storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) custom XCom backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
 
 This tutorial will show you how to set up a custom XCom backend using Object Storage for [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/).
 
@@ -21,7 +21,7 @@ You can learn more about other options to set up custom XCom backends in the [Op
 
 :::warning
 
-While a custom XCom backend allows you to store virtually unlimited amounts of data as XCom, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link&utm_medium=docs&utm_content=learn-xcom-backend-tutorial&utm_source=body).
+While a custom XCom backend allows you to store virtually unlimited amounts of data as XComs, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link&utm_medium=docs&utm_content=learn-xcom-backend-tutorial&utm_source=body).
 
 :::
 
@@ -162,7 +162,7 @@ For other ways to set up a connection between Airflow and Azure Blob Storage, se
 
 ## Step 2: Install the required provider packages
 
-To use the Object Storage XCom backend, you need to install the Common IO provider package and the provider package for your object storage container provider.
+To use the Object Storage custom XCom backend, you need to install the Common IO provider package and the provider package for your object storage container provider.
 
 <Tabs
     defaultValue="aws"
@@ -320,7 +320,7 @@ If you are setting up a custom XCom backend for an Astro deployment, you have to
 </TabItem>
 </Tabs>
 
-3. Add the `AIRFLOW__COMMON.IO__XCOM_OBJECTSTORAGE_THRESHOLD` environment variable to your `.env` file to determine when Airflow will store XCom in the object storage vs the metadata database. The default value is `-1` which will store all XComs in the metadata database. Set the value to `0` to store all XComs in the object storage. Any positive value means an XCom with a byte size greater than the threshold will be stored in the object storage and any XCom with a size equal to or less than the threshold will be stored in the metadata database. 
+3. Add the `AIRFLOW__COMMON.IO__XCOM_OBJECTSTORAGE_THRESHOLD` environment variable to your `.env` file to determine when Airflow will store XComs in the object storage vs the metadata database. The default value is `-1` which will store all XComs in the metadata database. Set the value to `0` to store all XComs in the object storage. Any positive value means any XCom with a byte size greater than the threshold will be stored in the object storage and any XCom with a size equal to or less than the threshold will be stored in the metadata database. 
 For this tutorial we will set the threshold to `1000` bytes, which means any XCom larger than 1KB will be stored in the object storage.
 
     ```text
