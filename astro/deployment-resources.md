@@ -151,7 +151,7 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 :::caution
 
-This feature is in [Private Preview](feature-previews.md). To access this feature or learn more, [contact Astronomer](https://www.astronomer.io/contact/). All customers are eligible to use this feature upon request.
+This feature is in [Public Preview](feature-previews.md).
 
 :::
 
