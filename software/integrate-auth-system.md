@@ -387,9 +387,7 @@ To use a custom Oauth authorization code flow:
               enabled: true
               clientId: ffhsdf78f734h2fsd
               clientSecret: FSDFSLDFJELLGJLSDFGJL42353425
-              # URL works only when IdP group imports are disabled. To import IdP groups from Okta to Software,
-              # use "https://<MYIdP>.okta.com/oauth2/default/.well-known/openid-configuration" instead
-              discoveryUrl: "https://<MYIdP>.okta.com/.well-known/openid-configuration"
+              discoveryUrl: "https://<your-idp-url>.okta.com/oauth2/default/.well-known/openid-configuration"
               authUrlParams:
                 audience: "GYHWEYHTHR443fFEW"
     ```
