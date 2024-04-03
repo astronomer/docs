@@ -8,13 +8,13 @@ description: 'Use this guide to learn about different ways to set up custom XCom
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. With **Airflow Custom XCom backends** you can configure where and how Airflow stores XComs, including using cloud-based object storage containers, as well as customizing serialization and deserialization methods.
+Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. With **Airflow Custom XCom backends** you can configure where and how Airflow stores XComs, and customize serialization and deserialization methods.
 
-In this guide you learn:
+In this guide you'll learn:
 
 - Why you might want to use a custom XCom backend.
 - How to set up a custom XCom backend using the Object Storage XCom backend.
-- How to set up a custom XCom backend using a custom XCom backend class with custom serialization and deserialization methods.
+- How to use a XCom backend class with custom serialization and deserialization methods.
 - How to override the `.clear()` method to delete XComs from a custom XCom backend when clearing tasks.
 
 :::warning
@@ -38,7 +38,7 @@ Common reasons to use a custom XCom backend include:
 - Running a production environment where you require custom retention, deletion, and backup policies for XComs.
 - Accessing XCom without accessing the metadata database.
 - Restricting types of allowed XCom values.
-- Save XCom in multiple locations simultaneously.
+- Saving XComs in multiple locations simultaneously.
 
 It is also possible to use custom XCom backends to define custom serialization and deserialization methods for XComs if adding a serialization method to a class or registering a custom serializer is not feasible. See [Custom serialization and deserialization](#custom-serialization-and-deserialization) for more information.
 
@@ -47,7 +47,7 @@ It is also possible to use custom XCom backends to define custom serialization a
 There are two main ways to set up a custom XCom backend:
 
 - **Object Storage XCom backend**: Use this method to create a custom XCom backend when you want to store XComs in a cloud-based object storage service like AWS S3, GCP Cloud Storage, or Azure Blob Storage.
-- **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored for example, simultaneously storing XCom in two different locations.
+- **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored, for example simultaneously storing XCom in two different locations.
 
 Additionally, some provider packages offer custom XCom backends that you can use out of the box, for example the [Snowpark provider](airflow-snowpark.md) which contains a custom XCom backend for Snowflake.
 
@@ -64,7 +64,7 @@ For a step-by-step tutorial on how to set up a custom XCom backend using the Obj
 
 :::caution
 
-Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565).
+Object storage is currently experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565).
 
 :::
 
@@ -72,7 +72,7 @@ Object storage is currently considered experimental and might be subject to brea
 
 To create a custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
 
-The code below shows an example `MyCustomXComBackend` class that only allows JSON-serializeable XCom and stores them in both, Amazon S3 and Google Cloud Storage using a custom `serialize_value()` method. The `deserialize_value()` method retrieves the XCom from the Amazon S3 bucket and returns the value.
+The code below shows an example `MyCustomXComBackend` class that only allows JSON-serializeable XComs and stores them in both, Amazon S3 and Google Cloud Storage using a custom `serialize_value()` method. The `deserialize_value()` method retrieves the XCom from the Amazon S3 bucket and returns the value.
 
 The Airflow metadata database stores a reference string to the XCom, which is displayed in the XCom tab of the Airflow UI. The reference string is prefixed with `s3_and_gs://` to indicate that the XCom is stored in both Amazon S3 and Google Cloud Storage. You can add any serialization and deserialization logic to the `serialize_value()` and `deserialize_value()` methods that you need, see [Custom serialization and deserialization](#custom-serialization-and-deserialization) for more information.
 

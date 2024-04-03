@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import custom_xcom_backend_test from '!!raw-loader!../code-samples/dags/xcom-backend-tutorial/custom_xcom_backend_test.py';
 
-Airflow [Custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XCom](airflow-passing-data-between-tasks.md#xcom). By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends to use a custom XCom backend.
+Airflow [Custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XCom](airflow-passing-data-between-tasks.md#xcom). By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends using a custom XCom backend.
 
 The [Object Storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) XCom backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
 
@@ -44,7 +44,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) with an Astro project running the Astro Runtime 11.0.0 or higher (Airflow 2.9.0 or higher). For options on setting up custom xcom backends with older versions of Airflow, see the [Options for custom XCom backends in Airflow](airflow-custom-xcom-backends.md) guide.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) with an Astro project running Astro Runtime 11.0.0 or higher (Airflow 2.9.0 or higher). For options on setting up custom XCom backends with older versions of Airflow, see the [Custom XCom backends](airflow-custom-xcom-backends.md) guide.
 - An account in either [AWS](https://aws.amazon.com/), [GCP](https://cloud.google.com/), or [Azure](https://azure.microsoft.com/) with permissions to create and configure an object storage container.
 
 ## Step 1: Set up your object storage container
@@ -93,7 +93,7 @@ First, you need to set up the object storage container in your cloud provider wh
 
 4. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) called `airflow-xcom` with the AWS credential type `Access key - Programmatic access` and [attach](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html) the `AirflowXComBackendAWSS3` policy to this user. 
 
-5. [Create an access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) of the type `Third-party-service` for your `airflow-xcom` user. Make sure to save the Access Key ID and the Secret Access Key in a secure location to use in [step 3](#step-3-set-up-your-airflow-connection).
+5. [Create an access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) of the type `Third-party-service` for your `airflow-xcom` user. Make sure to save the Access Key ID and the Secret Access Key in a secure location to use in [Step 3](#step-3-set-up-your-airflow-connection).
 
 :::info
 
@@ -347,4 +347,4 @@ We will use a simple DAG to test your custom XCom backend.
 
 ## Conclusion
 
-Congratulations! You learned how to set up a custom XCom backend using Object Storage!
+Congratulations, you learned how to set up a custom XCom backend using Object Storage!
