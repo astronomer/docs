@@ -1,35 +1,69 @@
 ---
-title: 'Cleaning up your Airflow Database with a Cleanup DAG'
-sidebar_label: 'Cleanup DAG'
+title: "Cleaning up your Airflow Database with a Cleanup DAG"
+sidebar_label: "Cleanup DAG"
 id: cleanup-dag
 ---
 
 ```python
-"""A Cleanup DAG used and maintained by Astronomer. All tasks in this DAG are executed by workers in the default worker queue."""
+"""A Cleanup DAG maintained by Astronomer."""
 
-from datetime import timedelta
+from datetime import UTC, datetime, timedelta
 
-from airflow import DAG
+from airflow.cli.commands.db_command import all_tables
+from airflow.decorators import dag
+from airflow.models.param import Param
 from airflow.operators.bash import BashOperator
-from airflow.utils.dates import days_ago
 
-with DAG(
+
+@dag(
     dag_id="astronomer_cleanup_dag",
     schedule_interval=None,
-    start_date=days_ago(2),
+    start_date=datetime(2024, 1, 1),
     catchup=False,
     is_paused_upon_creation=False,
-    dagrun_timeout=timedelta(minutes=30),
     description=__doc__,
     doc_md=__doc__,
     tags=["cleanup"],
-) as dag:
-    clean_db = BashOperator(
+    params={
+        "clean_before_timestamp": Param(
+            default=datetime.now(tz=UTC) - timedelta(days=90),
+            type="string",
+            format="date-time",
+            description="Delete records older than this timestamp. Default is 90 days ago.",
+        ),
+        "tables": Param(
+            default=[],
+            type=["null", "array"],
+            examples=all_tables,
+            description="List of tables to clean. Default is all tables.",
+        ),
+        "dry_run": Param(
+            default=False,
+            type="boolean",
+            description="Print the SQL queries that would be run, but do not execute them. Default is False.",
+        ),
+    },
+)
+def astronomer_cleanup_dag():
+    BashOperator(
         task_id="clean_db",
-        bash_command="airflow db clean --clean-before-timestamp {{ macros.ds_add(ds, -90) }} --verbose --yes",
-        depends_on_past=False,
-        priority_weight=2**31 - 1,
+        bash_command="""\
+            airflow db clean \
+             --clean-before-timestamp {{ params.clean_before_timestamp }} \
+        {% if params.dry_run -%}
+             --dry-run \
+        {% endif -%}
+             --skip-archive \
+        {% if params.tables -%}
+             --tables {{ params.tables|join(', ') }} \
+        {% endif -%}
+             --verbose \
+             --yes \
+        """,
         do_xcom_push=False,
     )
+
+
+astronomer_cleanup_dag()
 
 ```
