@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import custom_xcom_backend_test from '!!raw-loader!../code-samples/dags/xcom-backend-tutorial/custom_xcom_backend_test.py';
 
-Airflow [Custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XCom](airflow-passing-data-between-tasks.md#xcom). By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends using a custom XCom backend.
+Airflow [custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XCom](airflow-passing-data-between-tasks.md#xcom). By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends using a custom XCom backend.
 
 The [Object Storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) XCom backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
 

@@ -8,7 +8,7 @@ description: 'Use this guide to learn about different ways to set up custom XCom
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. With **Airflow Custom XCom backends** you can configure where and how Airflow stores XComs, and customize serialization and deserialization methods.
+Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. With **Airflow custom XCom backends** you can configure where and how Airflow stores XComs, and customize serialization and deserialization methods.
 
 In this guide you'll learn:
 
