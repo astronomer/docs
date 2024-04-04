@@ -58,15 +58,22 @@ If you receive this incident notification, Astronomer Support has already been n
 
 ### Airflow Database Storage Unusually High
 
-Your Deployment metadata database is currently storing tables that are larger than 50GiB (Info) or 75GiB (Warning). Click **View details** on the incident to view the affected tables. Even with large tables, Airflow will continue to operate as normal, but for very large tables (in the Warning range and above) you may begin to see degraded scheduler performance. As a result, you may need to clean up the relevant tables in the metadata DB to avoid the risk of delayed task runs.
+Your Deployment metadata database is currently storing tables that are larger than 50GiB (Info) or 75GiB (Warning). Click **View details** on the incident to view the affected tables. Even with large tables, Airflow will continue to operate as normal, but tables that are larger than 75GiB might cause degraded scheduler performance. As a result, you may need to clean up the relevant tables in the metadata database to avoid the risk of delayed task runs.
 
-The tables that are currently monitored for size are: `dag`, `dag_run`, `task_instance`, `job`, `log` and `xcom`.
+The tables that are currently monitored for size are:
 
-If `xcom` is listed in the affected tables, you should consider the following options:
+- `dag`
+- `dag_run`
+- `task_instance`
+- `job`
+- `log`
+- `xcom`
+
+If `xcom` is listed in the affected tables, consider taking one of the following actions:
 - Configure an external backend for XCom data, such as AWS S3. See the [Astronomer XCom Backend Tutorial](https://docs.astronomer.io/learn/xcom-backend-tutorial).
 - Implement intermediary data storage for tasks so that Airflow doesn't store large amounts of data when passing data between tasks. See [Intermediary data storage](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks#intermediary-data-storage).
 
-For additional assistance in cleaning up large DB tables, submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
+For additional assistance in cleaning up large tables, submit a request to [Astronomer Support](https://cloud.astronomer.io/open-support-request).
 
 ### Worker Queue at Capacity
 
@@ -84,9 +91,9 @@ At least one task is configured to run on a worker queue that does not exist. In
 
 ### Deprecated Runtime Version
 
-The Astro Runtime version being used by the Deployment has been deprecated. Airflow will continue to run as normal but you should upgrade as soon as possible.
+The Astro Runtime version being used by the Deployment has been deprecated. Airflow will continue to run as normal, but you should upgrade as soon as possible.
 
-To upgrade to a [supported version](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy) please follow the [upgrade docs](https://docs.astronomer.io/astro/upgrade-runtime).
+To upgrade to a [supported version](runtime-version-lifecycle-policy.mdx), see [Upgrade Astro Runtime](upgrade-runtime.md).
 
 ## See also
 
