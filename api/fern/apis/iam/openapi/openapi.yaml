@@ -198,6 +198,8 @@ components:
           description: The role of the API token.
           enum:
           - DEPLOYMENT_ADMIN
+          - WORKSPACE_OWNER
+          - WORKSPACE_OPERATOR
           - WORKSPACE_AUTHOR
           - WORKSPACE_MEMBER
           - WORKSPACE_ACCESSOR
