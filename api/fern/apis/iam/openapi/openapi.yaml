@@ -679,11 +679,12 @@ components:
       - role
       - workspaceId
       type: object
-  securitySchemes:
-    JWT:
-      in: header
-      name: Authorization
-      type: apiKey
+  securitySchemes:  
+    Bearer:
+      type: http
+      scheme: bearer
+security: 
+  - Bearer: []
 info:
   contact: {}
   description: Astro Identity and Access Management (IAM) API
