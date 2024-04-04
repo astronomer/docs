@@ -30,9 +30,6 @@ The Airflow topic [Cross-DAG Dependencies](https://airflow.apache.org/docs/apach
 
 In this guide, you'll review the methods for implementing cross-DAG dependencies, including how to implement dependencies if your dependent DAGs are located in different Airflow deployments.
 
-
-All code used in this  is available in the [cross-dag-dependencies-tutorial registry](https://github.com/astronomer/cross-dag-dependencies-tutorial).
-
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
