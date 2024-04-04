@@ -103,50 +103,56 @@ class MyCustomXComBackend(BaseXCom):
         task_id=None,
         dag_id=None,
         run_id=None,
-        map_index= None,
-        **kwargs
+        map_index=None,
+        **kwargs,
     ):
-        
-        # the connection to AWS is created by using the S3 hook
-        hook = S3Hook(aws_conn_id="my_aws_conn_id")
-        # make sure the file_id is unique, either by using combinations of
-        # the task_id, run_id and map_index parameters or by using a uuid
-        filename = "data_" + str(uuid.uuid4()) + ".json"
-        # define the full S3 key where the file should be stored
-        key = f"{run_id}/{task_id}/{filename}"
 
-        # write the value to a local temporary JSON file
-        # only allow JSON-serializeable values
-        with open(filename, 'a+') as f:
-            try:
-                json.dump(value, f)
-            except Exception as e:
-                raise ValueError(f"XCom value is not JSON-serializeable!: {e} ")
+        # make sure the value is JSON-serializable
+        try:
+            serialized_value = json.dumps(value)
+        except TypeError as e:
+            raise ValueError(f"XCom value is not JSON-serializable!: {e}")
 
-        # load the local JSON file into the S3 bucket
-        hook.load_file(
-            filename=filename,
-            key=key,
-            bucket_name=MyCustomXComBackend.S3_BUCKET_NAME,
-            replace=True
-        )
+        # instantiate a context with the value as a temporary JSON file
+        with tempfile.NamedTemporaryFile(mode="w+", delete=False) as tmp_file:
+            tmp_file.write(serialized_value)
+            tmp_file.flush()
+            tmp_file_name = tmp_file.name
 
-        # the connection to GCS is created by using the GCS hook
-        hook = GCSHook(gcp_conn_id="my_gcs_conn_id")
+            # the connection to AWS is created by using the S3 hook
+            hook = S3Hook(aws_conn_id="my_aws_conn_id")
+            # make sure the file_id is unique, either by using combinations of
+            # the task_id, run_id and map_index parameters or by using a uuid
+            filename = "data_" + str(uuid.uuid4()) + ".json"
+            # define the full S3 key where the file should be stored
+            key = f"{dag_id}/{run_id}/{task_id}/{map_index}/{key}_{filename}"
 
-        # load the local JSON file into the GCS bucket
-        hook.upload(
-            filename=filename,
-            object_name=gs_key,
-            bucket_name=MyCustomXComBackend.GS_BUCKET_NAME,
-        )
+            # load the local JSON file into the S3 bucket
+            hook.load_file(
+                filename=tmp_file_name,
+                key=key,
+                bucket_name=MyCustomXComBackend.S3_BUCKET_NAME,
+                replace=True,
+            )
 
-        # remove the local temporary JSON file
-        os.remove(filename)
+            # the connection to GCS is created by using the GCS hook
+            hook = GCSHook(gcp_conn_id="my_gcs_conn_id")
 
-        # define the string that will be saved to the Airflow metadata 
+            if hook.exists(MyCustomXComBackend.GS_BUCKET_NAME, key):
+                print(
+                    f"File {key} already exists in the bucket {MyCustomXComBackend.GS_BUCKET_NAME}."
+                )
+            else:
+                # load the local JSON file into the GCS bucket
+                hook.upload(
+                    filename=tmp_file_name,
+                    object_name=key,
+                    bucket_name=MyCustomXComBackend.GS_BUCKET_NAME,
+                )
+
+        # define the string that will be saved to the Airflow metadata
         # database to refer to this XCom
-        reference_string = MyCustomXComBackend.PREFIX + s3_key
+        reference_string = MyCustomXComBackend.PREFIX + key
 
         # use JSON serialization to write the reference string to the
         # Airflow metadata database (like a regular XCom)
@@ -154,28 +160,34 @@ class MyCustomXComBackend(BaseXCom):
 
     @staticmethod
     def deserialize_value(result):
-        # retrieve the relevant reference string from the metadata database
-        reference_string = BaseXCom.deserialize_value(result=result)
-        
-        # create the S3 connection using the S3Hook and recreate the S3 key
-        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        import logging
+
+        reference_string = BaseXCom.deserialize_value(result=result)y
+        hook = S3Hook(aws_conn_id="my_aws_conn")
         key = reference_string.replace(MyCustomXComBackend.PREFIX, "")
 
-        # download the JSON file found at the location described by the 
-        # reference string to a temporary local folder
-        filename = hook.download_file(
-            key=key,
-            bucket_name=MyCustomXComBackend.S3_BUCKET_NAME,
-            local_path="/tmp"
-        )
+        # Use a temporary directory to download the file
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            local_file_path = hook.download_file(
+                key=key,
+                bucket_name=MyCustomXComBackend.S3_BUCKET_NAME,
+                local_path=tmp_dir,
+            )
 
-        # load the content of the local JSON file and return it to be used by
-        # the operator
-        with open(filename, 'r') as f:
-            output = json.load(f)
+            # ensure the file is not empty and log its size
+            file_size = os.path.getsize(local_file_path)
+            logging.info(f"Downloaded file size: {file_size} bytes.")
+            if file_size == 0:
+                raise ValueError(
+                    f"The downloaded file is empty. Check the content of the S3 object at {key}."
+                )
 
-        # remove the local temporary JSON file
-        os.remove(filename)
+            with open(local_file_path, "r") as file:
+                try:
+                    output = json.load(file)
+                except json.JSONDecodeError as e:
+                    logging.error(f"Error decoding JSON from the file: {e}")
+                    raise
 
         return output
 ```
@@ -206,13 +218,13 @@ from airflow.utils.session import NEW_SESSION, provide_session
 @provide_session
 def clear(
     cls,
-    execution_date = None,
-    dag_id = None,
-    task_id =  None,
-    session = NEW_SESSION,
+    execution_date=None,
+    dag_id=None,
+    task_id=None,
+    session=NEW_SESSION,
     *,
-    run_id = None,
-    map_index = None,
+    run_id=None,
+    map_index=None,
 ) -> None:
 
     from airflow.models import DagRun
@@ -236,49 +248,35 @@ def clear(
         warnings.warn(message, RemovedInAirflow3Warning, stacklevel=3)
         run_id = (
             session.query(DagRun.run_id)
-            .filter(DagRun.dag_id == dag_id, DagRun.execution_date == execution_date)
+            .filter(
+                DagRun.dag_id == dag_id, DagRun.execution_date == execution_date
+            )
             .scalar()
         )
 
     #### Customization start
 
     # get the reference string from the Airflow metadata database
-    if map_index is not None:
-        reference_string = session.query(cls.value).filter_by(
-            dag_id=dag_id,
-            task_id=task_id,
-            run_id=run_id,
-            map_index=map_index
-        ).scalar()
-    else:
-        reference_string = session.query(cls.value).filter_by(
-            dag_id=dag_id,
-            task_id=task_id,
-            run_id=run_id
-        ).scalar()
-
-    if reference_string is not None:
-
-        # decode the XCom binary to UTF-8
-        reference_string = reference_string.decode('utf-8')
-        
-        hook = S3Hook(aws_conn_id="my_aws_conn_id")
-        key = reference_string.replace(MyCustomXComBackend.PREFIX, '')
-
-        # use the reference string to delete the object from the S3 bucket
-        hook.delete_objects(
-            bucket=MyCustomXComBackend.S3_BUCKET_NAME,
-            keys=json.loads(key)
-        )
-
-    # retrieve the XCom record from the metadata database containing the reference string
     query = session.query(cls).filter_by(
-        dag_id=dag_id,
-        task_id=task_id,
-        run_id=run_id
+        dag_id=dag_id, task_id=task_id, run_id=run_id
     )
+
+    print(query.all())
+
     if map_index is not None:
         query = query.filter_by(map_index=map_index)
+
+    # iterate through xcoms of this task and delete them from S3
+    xcom_entries = query.all()
+    for xcom_entry in xcom_entries:
+        reference_string = xcom_entry.value
+        if reference_string:
+            print(reference_string)
+            key = reference_string.replace(MyCustomXComBackend.PREFIX, "")
+            hook = S3Hook(aws_conn_id="my_aws_conn")
+            hook.delete_objects(
+                bucket=MyCustomXComBackend.S3_BUCKET_NAME, keys=[key]
+            )
 
     # delete the XCom containing the reference string from metadata database
     query.delete()
