@@ -97,7 +97,7 @@ When you work with mapped tasks, keep the following in mind:
 - You can have a mapped task that results in no task instances. For example, when your upstream task that generates the mapping values returns an empty list. In this case, the mapped task is marked skipped, and downstream tasks are run according to the trigger rules you set. By default, downstream tasks are also skipped.
 - Some parameters can't be mapped. For example, `task_id`, `pool`, and many `BaseOperator` arguments.
 - `expand()` only accepts keyword arguments.
-- The maximum amount of mapped task instances is determined by the `max_map_length` parameter in the [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). By default it is set to 1024.
+- The maximum amount of mapped task instances is determined by the `max_map_length` parameter in the [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#max-map-length). By default it is set to 1024.
 - You can limit the number of mapped task instances for a particular task that run in parallel by setting the following parameters in your dynamically mapped task:
     - Set a limit across all DAG runs with the `max_active_tis_per_dag` parameter.
     - Set a limit for parallel runs within a single DAG with the `max_active_tis_per_dagrun` parameter. This parameter is only available in Airflow 2.6+.
