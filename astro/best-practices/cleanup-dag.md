@@ -5,7 +5,7 @@ id: cleanup-dag
 ---
 
 ```python
-"""A Cleanup DAG maintained by Astronomer."""
+"""A Cleanup DAG maintained by Astronomer. Note that the database statement timeout is set to 5 minutes. This is to prevent the cleanup from hindering other operations. If you have large tables you want to clean, you may need to run the cleanup in smaller batches."""
 
 from datetime import UTC, datetime, timedelta
 
