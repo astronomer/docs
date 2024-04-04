@@ -149,10 +149,7 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 ## Hibernate a development Deployment
 
-:::caution
-
-This feature is in [Private Preview](feature-previews.md). To access this feature or learn more, [contact Astronomer](https://www.astronomer.io/contact/). All customers are eligible to use this feature upon request.
-
+:::publicpreview
 :::
 
 When you create a Deployment on Astro, you pay for the infrastructure resources that are required to run the Deployment for the duration that it's active. In development environments when you aren't always running tasks, you can _hibernate_, or scale down, all Deployment resources on a specified schedule. When you hibernate a Deployment, all Deployment configurations are preserved, but computing resources are scaled to zero.
