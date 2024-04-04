@@ -15,7 +15,7 @@ All images in this guide were taken from an [Astronomer Runtime](https://docs.as
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: UI](https://academy.astronomer.io/astro-runtime-airflow-ui) module.
+- Astronomer Academy: [Airflow: UI](https://academy.astronomer.io/path/airflow-101/astro-runtime-airflow-ui) module.
 - Webinar: [A Deep Dive into the Airflow UI](https://www.astronomer.io/events/webinars/a-deep-dive-into-the-airflow-ui/).
 
 :::
