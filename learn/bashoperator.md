@@ -32,7 +32,7 @@ To get the most out of this guide, you should have an understanding of:
 
 ## How to use the BashOperator and `@task.bash` decorator
 
-The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is part of core Airflow and can be used to execute a single bash command, a set of bash commands or a bash script ending in `.sh`. The `@task.bash` decorator can be used to create bash statements using Python functions and is available as of Airflow 2.9.
+The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is part of core Airflow and can be used to execute a single bash command, a set of bash commands, or a bash script ending in `.sh`. The `@task.bash` decorator can be used to create bash statements using Python functions and is available as of Airflow 2.9.
 
 <Tabs
     defaultValue="traditional"
@@ -104,7 +104,7 @@ The following are common use cases for the BashOperator and `@task.bash` decorat
 
 ## Example: Using Python to create bash commands
 
-In Airflow 2.9+ you can use `@task.bash` to create bash statements using Python functions. This decorator is especially useful when you want to run bash commands based on complex Python logic, including inputs from upstream tasks. The following example demonstrates how to use the `@task.bash` decorator to conditionally run different bash commands based on the output of an upstream task.
+In Airflow 2.9+, you can use `@task.bash` to create bash statements using Python functions. This decorator is especially useful when you want to run bash commands based on complex Python logic, including inputs from upstream tasks. The following example demonstrates how to use the `@task.bash` decorator to conditionally run different bash commands based on the output of an upstream task.
 
 ```python
 # from airflow.decorators import task

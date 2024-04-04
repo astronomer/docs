@@ -178,7 +178,7 @@ If you're running Airflow locally, apply your changes by refreshing the Airflow 
 
 ## Debug interactively with dag.test()
 
-The `dag.test()` method allows you to run all tasks in a DAG within a single serialized Python process without running the Airflow scheduler. The `dag.test()` method allows for faster iteration and use of IDE debugging tools when developing DAGs.
+The `dag.test()` method allows you to run all tasks in a DAG within a single serialized Python process, without running the Airflow scheduler. The `dag.test()` method lets you iterate faster and use IDE debugging tools when developing DAGs.
 
 This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 

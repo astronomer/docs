@@ -200,12 +200,12 @@ In Airflow you can define actions to be taken due to different DAG or task state
 
 - `on_success_callback`: Invoked when a task or DAG succeeds.
 - `on_failure_callback`: Invoked when a task or DAG fails.
-- `on_skipped_callback` : Invoked when a task is skipped. Added in Airflow 2.9, this callback only exists at the task level, and is only invoked when an AiflowSkipException is raised, not when a task is skipped due to other reasons like a trigger rule. See [Callback Types](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/callbacks.html#callback-types).
+- `on_skipped_callback` : Invoked when a task is skipped. Added in Airflow 2.9, this callback only exists at the task level, and is only invoked when an AiflowSkipException is raised, not when a task is skipped due to other reasons, like a trigger rule. See [Callback Types](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/callbacks.html#callback-types).
 - `on_execute_callback`: Invoked right before a task begins executing. This callback only exists at the task level.
 - `on_retry_callback`: Invoked when a task is retried. This callback only exists at the task level.
 - `sla_miss_callback`: Invoked when a task or DAG misses its defined [Service Level Agreement (SLA)](#airflow-service-level-agreements). This callback is defined at the DAG level for DAGs with defined SLAs and will be applied to every task.
 
-You can provide any Python callable to the `*_callback` parameters, as well [Airflow notifiers](#notifiers). To execute multiple functions, you can provide several callback items to the same callback parameter in a list.
+You can provide any Python callable to the `*_callback` parameters or [Airflow notifiers](#notifiers). To execute multiple functions, you can provide several callback items to the same callback parameter in a list.
 
 ### Notifiers
 

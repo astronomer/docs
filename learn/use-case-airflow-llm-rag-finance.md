@@ -150,7 +150,7 @@ Since this ingestion pipeline runs incrementally, the `start_time` is set to the
 
 :::info
 
-For more information on how Airflow handles DAG run dates see the [DAG Schedule DAGs in Airflow](scheduling-in-airflow.md) guide and for a full list of available templates, see the [Airflow Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html).
+For more information on how Airflow handles DAG run dates see the [Schedule DAGs in Airflow](scheduling-in-airflow.md) guide and for a full list of available templates, see the [Airflow Templates reference](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html).
 
 :::
 

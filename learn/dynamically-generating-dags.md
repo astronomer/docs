@@ -26,7 +26,7 @@ All code used in this guide is located in the [Astronomer Registry](https://gith
 
 :::tip
 
-You can use [dynamic task mapping](dynamic-tasks.md) to write DAGs that dynamically generate parallel tasks at runtime. Dynamic task mapping is a first-class Airflow feature, and is suitable for many dynamic use cases. Due to its higher degree of support and stability, we recommend exploring dynamic task mapping for your use case before implementing the dynamic DAG generation methods described in this guide.
+You can use [dynamic task mapping](dynamic-tasks.md) to write DAGs that dynamically generate parallel tasks at runtime. Dynamic task mapping is a first-class Airflow feature, and suitable for many dynamic use cases. Due to its higher degree of support and stability, Astronomer recommends exploring dynamic task mapping for your use case before implementing the dynamic DAG generation methods described in this guide.
 
 :::
 
@@ -400,5 +400,5 @@ Dynamically generating DAGs can cause performance issues when used at scale. Whe
 - If you are reaching out to a database to create your DAGs, you will be querying frequently. Be conscious of your database's ability to handle such frequent connections and any costs you may incur for each request from your data provider.
 - To help with potential performance issues, you can increase the `min_file_processing_interval` to a higher value. Consider this option if you know that your DAGs are not changing frequently and if you can tolerate some delay in the dynamic DAGs changing in response to the external source that generates them.
 
-[Fine-tuning your scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#fine-tuning-your-scheduler-performance) should help resolve potential performance issues. There is no single right way to implement or scale dynamically generated DAGs, but the flexibility of Airflow means there are many ways to arrive at a solution that works for your organization.
+[Fine-tuning your scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#fine-tuning-your-scheduler-performance) helps resolve potential performance issues. There is no single right way to implement or scale dynamically generated DAGs, but the flexibility of Airflow means there are many ways to arrive at a solution that works for your organization.
 

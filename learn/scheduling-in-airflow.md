@@ -114,11 +114,11 @@ The following are the limitations of a traditional schedule:
 - Schedule a DAG daily except for holidays.
 - Schedule a DAG at multiple times daily with uneven intervals. For example, 1:00 PM and 4:30 PM.
 
-These limitations can be overcome by using [timetables](#timetables).
+You can avoid these limitations by using [timetables](#timetables).
 
 ## Data-aware scheduling
 
-With **Datasets**, you can make Airflow aware of updates to data objects. Using that awareness, other DAGs can be scheduled on updates to these datasets. To create a dataset-based schedule, you pass the names of the dataset(s) to the `schedule` parameter. Airflow 2.9 added the ability to define conditional logic for your dataset schedules, as well as the option to combine timetables with dataset-based schedules.
+With **Datasets**, you can make Airflow aware of updates to data objects. Using that awareness, Airflow can schedule other DAGs when there are updates to these datasets. To create a dataset-based schedule, pass the names of the dataset(s) to the `schedule` parameter. Airflow 2.9 added the ability to define conditional logic for your dataset schedules, as well as the option to combine timetables with dataset-based schedules.
 
 <Tabs
     defaultValue="simple"
@@ -199,14 +199,14 @@ dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
 )
 ```
 
-This DAG runs every day at midnight UTC and additionally, whenever either `dataset1` or `dataset2` is updated.
+This DAG runs every day at midnight UTC and, additionally, whenever either `dataset1` or `dataset2` is updated.
 
 </TabItem>
 </Tabs>
 
-Dataset updates can occur by any tasks in any DAG of the same Airflow environment, by calls to the [dataset endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_upstream_dataset_events) or manually in the Airflow UI.
+Dataset can be updated by any tasks in any DAG of the same Airflow environment, by calls to the [dataset endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_upstream_dataset_events), or manually in the Airflow UI.
 
-In the Airflow UI, the DAG now has a schedule of **Dataset** and the **Next Run** column shows the datasets the DAG depends on and how many of them have been updated.
+In the Airflow UI, the DAG now has a schedule of **Dataset**. The **Next Run** column shows the datasets the DAG depends on and how many of them have been updated.
 
 ![Dataset dependent DAG](/img/guides/scheduling-in-airflow_dags_view_dataset_dag.png)
 

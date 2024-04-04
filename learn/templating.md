@@ -333,7 +333,7 @@ The rendered value is a string. Since the `sum_numbers` function unpacks the giv
 ('[', '1', ',', ' ', '2', ',', ' ', '3', ']')
 ```
 
-This is not going to work, so you must tell Jinja to return a native Python list instead of a string. Jinja supports this with Environments. The [default Jinja environment](https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.Environment) outputs strings, but you can configure a [NativeEnvironment](https://jinja.palletsprojects.com/en/3.0.x/nativetypes/#jinja2.nativetypes.NativeEnvironment) to render templates as native Python code with the `render_template_as_native_obj` argument on the DAG class.
+This rendered string won't work, so you must tell Jinja to return a native Python list instead of a string. Jinja supports this with Environments. The [default Jinja environment](https://jinja.palletsprojects.com/en/3.0.x/api/#jinja2.Environment) outputs strings, but you can configure a [NativeEnvironment](https://jinja.palletsprojects.com/en/3.0.x/nativetypes/#jinja2.nativetypes.NativeEnvironment) to render templates as native Python code with the `render_template_as_native_obj` argument on the DAG class.
 
 ```python
 def sum_numbers(*args):

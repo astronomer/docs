@@ -65,7 +65,7 @@ For examples, refer to our [Create Airflow listeners tutorial](https://docs.astr
 
 ## Dataset concepts
 
-You can define datasets in your Airflow environment and use them to create dependencies between DAGs. To define a dataset, instantiate the `Dataset` class and provide a string to identify the location of the dataset. This string must be in the form of a valid Uniform Resource Identifier (URI), see [What is valid URI?](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html#what-is-valid-uri) for detailed information.
+You can define datasets in your Airflow environment and use them to create dependencies between DAGs. To define a dataset, instantiate the `Dataset` class and provide a string to identify the location of the dataset. This string must be in the form of a valid Uniform Resource Identifier (URI). See [What is valid URI?](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html#what-is-valid-uri) for detailed information.
 
 Currently, the URI is not used to connect to an external system and there is no awareness of the content or location of the dataset. However, using this naming convention helps you to easily identify the datasets that your DAG accesses and ensures compatibility with future Airflow features.
 
@@ -141,7 +141,7 @@ For more information about datasets, see [Data-aware scheduling](https://airflow
 
 The **Datasets** tab, and the **DAG Dependencies** view in the Airflow UI give you observability for datasets and data dependencies in the DAG's schedule.
 
-On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is scheduled on two producer datasets (one in `dataset_upstream1` and `dataset_upstream2`). When Datasets are provided as a list, the DAG is scheduled to run after all Datasets in the list have received at least one update. In the screenshot below, the `dataset_downstream_1_2` DAG's next run is pending one dataset update. At this point the `dataset_upstream` DAG has run and updated its dataset, but the `dataset_upstream2` DAG has not.
+On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is scheduled on two producer datasets (one in `dataset_upstream1` and `dataset_upstream2`). When Datasets are provided as a list, the DAG is scheduled to run after all Datasets in the list have received at least one update. In the following screenshot, the `dataset_downstream_1_2` DAG's next run is pending one dataset update. At this point the `dataset_upstream` DAG has run and updated its dataset, but the `dataset_upstream2` DAG has not.
 
 ![DAGs View](/img/guides/dags_view_dataset_schedule.png)
 
@@ -177,7 +177,7 @@ As of Airflow 2.9+ there are three ways to update a dataset:
 
 In Airflow 2.9 and later, you can use logical operators to combine any number of datasets provided to the `schedule` parameter. The logical operators supported are `|` for OR and `&` for AND. 
 
-For example, to schedule a DAG on an update to either `dataset1`, `dataset2`, `dataset3` or `dataset4`, you can use the following syntax. Note that the full statement is wrapped in `()`.
+For example, to schedule a DAG on an update to either `dataset1`, `dataset2`, `dataset3`, or `dataset4`, you can use the following syntax. Note that the full statement is wrapped in `()`.
 
 <Tabs
     defaultValue="taskflow"
