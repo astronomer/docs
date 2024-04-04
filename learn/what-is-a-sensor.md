@@ -22,7 +22,7 @@ In this guide, you'll learn how sensors are used in Airflow, best practices for 
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Sensors](https://academy.astronomer.io/sensors-course) module.
+- Astronomer Academy: [Airflow: Sensors](https://academy.astronomer.io/path/airflow-101/sensors-course) module.
 
 :::
 
