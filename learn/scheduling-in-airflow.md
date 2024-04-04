@@ -204,7 +204,7 @@ This DAG runs every day at midnight UTC and, additionally, whenever either `data
 </TabItem>
 </Tabs>
 
-Dataset can be updated by any tasks in any DAG of the same Airflow environment, by calls to the [dataset endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_upstream_dataset_events), or manually in the Airflow UI.
+Datasets can be updated by any tasks in any DAG of the same Airflow environment, by calls to the [dataset endpoint of the Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_upstream_dataset_events), or manually in the Airflow UI.
 
 In the Airflow UI, the DAG now has a schedule of **Dataset**. The **Next Run** column shows the datasets the DAG depends on and how many of them have been updated.
 
