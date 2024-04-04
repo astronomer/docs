@@ -25,6 +25,21 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## April 3, 2024
+
+### Additional improvements 
+
+- [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) are now generally available.
+- [Deployment hibernation](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) is now in public preview.
+
+### Bug fixes
+
+- Fixed an issue where connections configured in the Astro UI were not mounted to triggerer Pods, resulting in failed runs for tasks that use deferrable operators.
+- Fixed an issue where a field in the **Snowflake - Private Key (Content)** connection type was not parsed correctly.
+- Fixed an issue where Organization Members could delete and update Astro alerts.
+- Fixed an issue where the Astro UI didn't show the correct amount of available ephemeral storage for the default worker queue.
+- Removed additional dependencies to make Astro more resilient to Quay outages.
+
 ## March 26, 2024
 
 ### Refactored Astro API documentation
