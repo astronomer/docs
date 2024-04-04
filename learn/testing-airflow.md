@@ -170,6 +170,12 @@ The Astro CLI includes a suite of commands to help simplify common testing workf
 
 You can use CI/CD tools to test and deploy your Airflow code. By installing the Astro CLI into your CI/CD process, you can test your DAGs before deploying them to a production environment. See [set up CI/CD](https://docs.astronomer.io/astro/set-up-ci-cd) for example implementations.
 
+:::info
+
+Astronomer customers can Astro's GitHub integration to connect their Airflow deployments to their GitHub repositories. See LINK.
+
+:::
+
 ## Add test data or files for local testing
 
 Use the `include` folder of your Astro project to store files for testing locally, such as test data or a dbt project file. The files in your `include` folder are included in your deploys to Astro, but they are not parsed by Airflow. Therefore, you don't need to specify them in `.airflowignore` to prevent parsing. 
