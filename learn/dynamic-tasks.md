@@ -126,6 +126,7 @@ Mapped tasks are identified with a set of brackets `[ ]` followed by the task ID
 The number in the brackets show in the DAG run graph, is updated for each DAG run to reflect how many mapped instances were created. The following screenshot shows a DAG run graph with two tasks, the latter having 49 dynamically mapped task instances.
 
 <img src={require("../static/img/guides/dynamic-tasks-graph_tab_simple.png").default} alt="Screenshot of the Graph tab in the Airflow UI Grid view showing a DAG run graph with two tasks, the latter having been mapped 49 times." style={{ width: "75%", maxWidth: "500px", height: "auto", display: "block", margin: "auto" }} />
+</br>
 
 To see the logs and XCom pushed by each dynamically mapped task instance, click on the dynamically mapped task, either in the DAG run graph or in the grid. Then click on **[] Mapped Tasks** and select the mapped task instance you want to inspect.
 
