@@ -20,9 +20,9 @@ If you're experiencing an issue or have a question that requires Astronomer expe
 
 The following are the best practices for submitting support requests in the Astro UI or the Astronomer support portal:
 
-### Check Astronomer services status
+### Check the Astro status page
 
-Before opening a ticket, you can first check the [Astronomer services status](https://status.astronomer.io/) to see if the problem you're experiencing has already been reported.
+Before you open a ticket for unexpected or disruptive behavior on Astro, check the [Astro status page](https://status.astronomer.io/) to see if the problem you're experiencing has already been reported.
 
 ### Always indicate priority
 
