@@ -20,6 +20,10 @@ If you're experiencing an issue or have a question that requires Astronomer expe
 
 The following are the best practices for submitting support requests in the Astro UI or the Astronomer support portal:
 
+### Check the Astro status page
+
+Before you open a ticket for unexpected or disruptive behavior on Astro, check the [Astro status page](https://status.astronomer.io/) to see if the problem you're experiencing has already been reported.
+
 ### Always indicate priority
 
 To help Astronomer support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
