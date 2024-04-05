@@ -165,7 +165,7 @@ The easiest way to use GX with Airflow is to let the GreatExpectationsOperator c
 
 By default, the `GreatExpectationsOperator` pushes a [CheckpointResult object](https://docs.greatexpectations.io/docs/terms/checkpoint/#checkpointresult) to XCom. You can instead  return a json-serializable dictionary by setting the `return_json_dict` parameter to `True`.
 
-If you do not want to use this built-in serialization, you can either enable XCom pickling by setting the environment variable `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://docs.astronomer.io/learn/airflow-custom-xcom-backends).
+If you do not want to use this built-in serialization, you can either enable XCom pickling by setting the environment variable `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`, or use a custom serialization method in a [custom XCom backend](https://docs.astronomer.io/learn/custom-backend-strategies).
 
 :::
 

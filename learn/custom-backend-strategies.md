@@ -1,7 +1,7 @@
 ---
 title: 'Strategies for custom XCom backends in Airflow'
 sidebar_label: 'Custom XCom backends'
-id: airflow-custom-xcom-backends
+id: custom-backend-strategies
 description: 'Use this guide to learn about different ways you can set up custom XCom backends.'
 ---
 
