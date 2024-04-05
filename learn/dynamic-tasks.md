@@ -699,7 +699,7 @@ The example DAG completes the following steps:
 </TabItem>
 </Tabs>
 
-The Graph View for the DAG looks similar to this image:
+The graph of this DAG looks similar to this image:
 
 ![ELT Graph](/img/guides/mapping_elt_graph.png)
 
