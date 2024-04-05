@@ -46,7 +46,7 @@ You can also use custom XCom backends to define custom serialization and deseria
 
 There are two main ways to set up a custom XCom backend:
 
-- **Object Storage Custom XCom Backend**: Use this method to create a custom XCom backend when you want to store XComs in a cloud-based object storage service like AWS S3, GCP Cloud Storage, or Azure Blob Storage. This option is recommended when you need to store XComs in a single remote location and the Object Storage Custom XCom Backend threshold and compression options meet your requirements.
+- **Object Storage Custom XCom Backend**: Use this method to create a custom XCom backend when you want to store XComs in a cloud-based object storage service like AWS S3, GCP Cloud Storage, or Azure Blob Storage. This option is recommended if you need to store XComs in a single remote location, and the Object Storage Custom XCom Backend threshold and compression options meet your requirements.
 - **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored, for example to simultaneously store XComs in two different locations.
 
 Additionally, some provider packages offer custom XCom backends that you can use out of the box. For example, the [Snowpark provider](airflow-snowpark.md) contains a custom XCom backend for Snowflake.

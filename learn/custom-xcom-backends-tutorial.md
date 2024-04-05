@@ -13,7 +13,7 @@ import custom_xcom_backend_test from '!!raw-loader!../code-samples/dags/xcom-bac
 
 By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments that use XCom to pass data between tasks, Astronomer recommends using a custom XCom backend. [Custom XCom backends](custom-xcom-backend-strategies.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom). 
 
-The Object Storage Custom XCom Backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
+The Object Storage XCom Backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in a remote object storage solution.
 
 This tutorial will show you how to set up a custom XCom backend using object storage for [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/).
 
