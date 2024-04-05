@@ -43,7 +43,7 @@ module.exports = {
       type: "category",
       label: "Develop DAGs",
       items: [
-        'astro-dags-overview',
+        'dags-overview',
         {
           type: 'link',
           label: 'Astro projects',
