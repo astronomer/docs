@@ -111,7 +111,7 @@ module.exports = {
           },
           items: [
             'logging',
-            'custom-backend-strategies',
+            'custom-xcom-backend-strategies',
             'data-quality',
             'airflow-datasets',
             'deferrable-operators',

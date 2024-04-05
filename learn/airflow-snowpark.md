@@ -15,7 +15,7 @@ import airflow_with_snowpark_tutorial from '!!raw-loader!../code-samples/dags/ai
 
 In this tutorial, you'll learn how to: 
 
-- Create a [custom XCom backend](custom-backend-strategies.md) in Snowflake.
+- Create a [custom XCom backend](custom-xcom-backend-strategies.md) in Snowflake.
 - Create and use the Snowpark Model Registry in Snowflake.
 - Use Airflow decorators to run code in Snowpark, both in a pre-built and custom virtual environment.
 - Run a [Logistic Regression model](https://mlu-explain.github.io/logistic-regression/) on a synthetic dataset to predict skiers' afternoon beverage choice.
@@ -68,7 +68,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 - A Snowflake account. A [30-day free trial](https://trial.snowflake.com/?owner=SPN-PID-365384) is available. You need to have at least one database and one schema created to store the data and models used in this tutorial.
 
-- (Optional) This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-backend-strategies.md) included in the provider. If you want to this custom XCom backend you will need to either:
+- (Optional) This tutorial includes instructions on how to use the Snowflake [custom XCom backend](custom-xcom-backend-strategies.md) included in the provider. If you want to this custom XCom backend you will need to either:
     - Run the DAG using a Snowflake account with `ACCOUNTADMIN` privileges to allow the DAG's first task to create the required database, schema, stage and table. See [Step 3.3](#step-3-create-your-dag) for more instructions. The free trial account has the required privileges.
     - Ask your Snowflake administrator to: 
         - Provide you with the name of an existing database, schema, and stage. You need to use these names in [Step 1.8](#step-1-configure-your-astro-project) for the `AIRFLOW__CORE__XCOM_SNOWFLAKE_TABLE` and `AIRFLOW__CORE__XCOM_SNOWFLAKE_STAGE` environment variables. 

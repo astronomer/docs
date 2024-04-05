@@ -205,7 +205,7 @@ Astronomer recommends that you consider the size of your data now and in the fut
 
 - Ensure your Airflow infrastructure has the necessary resources.
 - Use the Kubernetes Executor to isolate task processing and have more control over resources at the task level.
-- Use a [custom XCom backend](custom-backend-strategies.md) if you need to pass any data between the tasks so you don't overload your metadata database.
+- Use a [custom XCom backend](custom-xcom-backend-strategies.md) if you need to pass any data between the tasks so you don't overload your metadata database.
 
 ### Use intermediary data storage
 
