@@ -162,7 +162,7 @@ For other ways to set up a connection between Airflow and Azure Blob Storage, se
 
 ## Step 2: Install the required provider packages
 
-To use the Object Storage Custom XCom Backend, you need to install the Common IO provider package and the provider package for your object storage container provider.
+To use the Object Storage XCom Backend, you need to install the Common IO provider package and the provider package for your object storage container provider.
 
 <Tabs
     defaultValue="aws"
