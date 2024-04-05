@@ -38,7 +38,7 @@ Release date: April 5, 2024
 
 - NGinx now has a dedicated service account with only the required permissions for the service
 - You can now specify an image pull secret for the `privateCaCertsAddToHost.certCopier` image so that you can pull the image from a private registry.
-- (tentative for 0.34.1) You can now configure a standalone DAG processor for Deployments, which can help to improve scheduler performance. To run a standalone DAG processor container, add the following configuration to your `values.yaml` file:
+- You can now configure a standalone DAG processor for Deployments, which can help to improve scheduler performance. To run a standalone DAG processor container, add the following configuration to your `values.yaml` file:
 
     ```yaml
     deployments:
@@ -52,7 +52,7 @@ Release date: April 5, 2024
               value: "true"
     ```
 
-- The Software UI now includes a notification system so that Astronomer support can post messages related to specific versions of Astronomer Software. (tentative for 0.34.1)
+- The Software UI now includes a notification system so that Astronomer support can post messages related to specific versions of Astronomer Software.
 - Added support for [Kubernetes 1.29](https://kubernetes.io/blog/2023/12/13/kubernetes-v1-29-release/).
 - You can now define `additionalScrapeJobs` in the Prometheus Helm chart so that Prometheus scrapes additional jobs on the Astronomer Software cluster. For example, you could add the following configuration to `values.yaml` to scrape a static job:
 
@@ -72,8 +72,6 @@ Release date: April 5, 2024
 - Fixed an issue where skipping multiple pages of a list in the Software UI could skip an extra page.
 - Removed support for Kubernetes 1.24.
 - Fixed an issue where task usage metrics didn't work when using a private certificate authority.
-- Fixed an issue where DAG-only deploys didn't work on Deployments that existed before upgrading to 0.34.0.
-- Fixed an issue where the Airflow Helm chart could override scheduler affinities set at a global level (tentative for 0.34.1)
 - Resolved the following vulnerabilities:
 
     - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g) 
