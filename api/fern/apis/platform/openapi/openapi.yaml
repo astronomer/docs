@@ -2608,10 +2608,11 @@ components:
       - workspaces
       type: object
   securitySchemes:
-    JWT:
-      in: header
-      name: Authorization
-      type: apiKey
+    Bearer:
+      type: http
+      scheme: bearer
+security: 
+  - Bearer: []
 info:
   contact: {}
   description: Astro Platform API
@@ -3353,14 +3354,6 @@ paths:
           items:
             type: string
           type: array
-      - description: A list of names for Deployments to filter by. The API returns
-          details only for the specified Deployments.
-        in: query
-        name: names
-        schema:
-          items:
-            type: string
-          type: array
       - description: A list of IDs for Workspaces to filter on. The API returns details
           for all Deployments belonging only to the specified Workspaces.
         in: query
@@ -3778,15 +3771,6 @@ paths:
           information only for Workspaces which have been specified in this list.
         in: query
         name: workspaceIds
-        schema:
-          items:
-            type: string
-          type: array
-      - description: A list of names for specific Workspaces to filter by. The API
-          will list information only for Workspaces which have been specified in this
-          list.
-        in: query
-        name: names
         schema:
           items:
             type: string
