@@ -2,7 +2,7 @@
 title: 'Set up a custom XCom backend using object storage'
 sidebar_label: 'Set up an XCom backend'
 id: xcom-backend-tutorial
-description: 'Use this tutorial to learn how to set up a custom XCom backend with Object Storage.'
+description: 'Use this tutorial to learn how to set up a custom XCom backend with object storage.'
 ---
 
 import Tabs from '@theme/Tabs';
@@ -15,7 +15,7 @@ By default, Airflow uses the [metadata database](airflow-database.md) to store X
 
 The Object Storage Custom XCom Backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
 
-This tutorial will show you how to set up a custom XCom backend using Object Storage for [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/).
+This tutorial will show you how to set up a custom XCom backend using object storage for [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/).
 
 To learn more about other options for setting custom XCom backends, see [Strategies for custom XCom backends in Airflow](custom-backend-strategies.md).
 
@@ -174,7 +174,7 @@ To use the Object Storage Custom XCom Backend, you need to install the Common IO
     ]}>
 <TabItem value="aws">
 
-Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) and [Amazon](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest) provider packages to your `requirements.txt` file. Note that you need to install the `s3fs` extra to use the Amazon provider package with the [Object Storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) feature.
+Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) and [Amazon](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest) provider packages to your `requirements.txt` file. Note that you need to install the `s3fs` extra to use the Amazon provider package with the [object storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) feature.
 
     ```text
     apache-airflow-providers-common-io==1.3.0
@@ -267,7 +267,7 @@ An Airflow connection is necessary to connect Airflow with your object storage c
 
 ## Step 4: Configure your custom XCom backend
 
-Configuring a custom XCom backend with Object Storage can be done by setting environment variables in your Astro project.
+Configuring a custom XCom backend with object storage can be done by setting environment variables in your Astro project.
 
 :::info
 
@@ -353,4 +353,4 @@ We will use a simple DAG to test your custom XCom backend.
 
 ## Conclusion
 
-Congratulations, you learned how to set up a custom XCom backend using Object Storage! Learn more about other options to set up custom XCom backends in the [Strategies for custom XCom backends in Airflow](custom-backend-strategies.md) guide.
+Congratulations, you learned how to set up a custom XCom backend using object storage! Learn more about other options to set up custom XCom backends in the [Strategies for custom XCom backends in Airflow](custom-backend-strategies.md) guide.

@@ -60,7 +60,7 @@ Airflow 2.9+ added the possibility to create a custom XCom backend using object 
 - `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_THRESHOLD`: The threshold in bytes for XComs to be stored in the object storage. All objects smaller or equal to this threshold are stored in the metadata database. All objects larger than this threshold are stored in the object storage. The default value is `-1`, meaning all XComs are stored in the metadata database.
 - `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_COMPRESSION`: Optional. The compression algorithm to use when storing XComs in the object storage, for example `zip`. The default value is `None`.
 
-For a step-by-step tutorial on how to set up a custom XCom backend using the Object Storage Custom XCom Backend for Amazon S3, Google Cloud Storage and Azure Blob Storage, see the [Set up a custom XCom backend using Object Storage](custom-xcom-backends-tutorial.md).
+For a step-by-step tutorial on how to set up a custom XCom backend using the Object Storage Custom XCom Backend for Amazon S3, Google Cloud Storage and Azure Blob Storage, see the [Set up a custom XCom backend using object storage](custom-xcom-backends-tutorial.md).
 
 :::caution
 
