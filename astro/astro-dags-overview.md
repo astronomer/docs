@@ -32,8 +32,8 @@ You can run your DAGs in several different environments across the Astro ecosyst
 
 Astro includes several features that enhance existing Airflow features and integrate them with the Astro UI. 
 
-- On Astro, the Astro UI renders [Airflow tags](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html) defined in your DAGs. Use tags to let you filter DAGs across all Deployments from a single screen.
-- The [Astro Environment Manager](manage-connections-variables.md) allows you to manage Airflow connections directly from the Astro UI. Unlike with the Airflow UI, you can apply connections from the Environment Manager across multiple Deployments and Workspaces, as well as in a local Airflow environment. 
+- On Astro, the Astro UI renders [Airflow tags](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html) defined in your DAGs. Use tags to filter DAGs across all Deployments from a single screen.
+- The [Astro Environment Manager](manage-connections-variables.md) allows you to manage Airflow connections directly from the Astro UI. Unlike with connections defined in the Airflow UI, you can apply connections from the Environment Manager across multiple Deployments and Workspaces, as well as in a local Airflow environment. 
 - Astro has built in infrastructure to run the KubernetesPodOperator and Kubernetes executor, such as default Pod limits and requests. Resource limits and requests are set by default on Astro Deployments, meaning that tasks running in Kubernetes Pods will never request more resources than expected. See [Run the Kubernetes executor](kubernetes-executor.md) and [Run the KubernetesPodOperator](kubernetespodoperator.md) for more specific instructions and examples. 
 
 ## DAG observability
