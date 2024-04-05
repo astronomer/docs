@@ -1,11 +1,11 @@
 ---
-title: "Cleaning up your Airflow Database with a Cleanup DAG"
-sidebar_label: "Cleanup DAG"
-id: cleanup-dag
+title: "Cleaning up your Airflow Database with a DAG"
+sidebar_label: "DB Cleanup DAG"
+id: db-cleanup-dag
 ---
 
 ```python
-"""A Cleanup DAG maintained by Astronomer. Note that the database statement timeout is set to 5 minutes. This is to prevent the cleanup from hindering other operations. If you have large tables you want to clean, you may need to run the cleanup in smaller batches."""
+"""A DB Cleanup DAG maintained by Astronomer. Note that there is a global database statement timeout of 5 minutes, so if you have large tables you want to clean, you may need to run the cleanup in smaller batches."""
 
 from datetime import UTC, datetime, timedelta
 
@@ -16,7 +16,7 @@ from airflow.operators.bash import BashOperator
 
 
 @dag(
-    dag_id="astronomer_cleanup_dag",
+    dag_id="astronomer_db_cleanup_dag",
     schedule_interval=None,
     start_date=datetime(2024, 1, 1),
     catchup=False,
@@ -44,7 +44,7 @@ from airflow.operators.bash import BashOperator
         ),
     },
 )
-def astronomer_cleanup_dag():
+def astronomer_db_cleanup_dag():
     BashOperator(
         task_id="clean_db",
         bash_command="""\
@@ -64,6 +64,6 @@ def astronomer_cleanup_dag():
     )
 
 
-astronomer_cleanup_dag()
+astronomer_db_cleanup_dag()
 
 ```
