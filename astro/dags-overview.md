@@ -46,7 +46,7 @@ In local Airflow environments, you can use the Airflow UI to check your DAG runs
 
 On Astro, in addition to the Airflow UI, you have access to the **DAGs** page. From here, you can manage DAG and task runs for any Deployment in your Workspace. See [View logs](view-logs.md) [Manage DAG runs](manage-dags.md) for more information.
 
-Astro includes additional features for alerting on specific DAG status, such as Astro alerts. There are some circumstances where Astronomer recommends configuring Astro alerts instead of Airflow SLAs or failure notifications. See [When to use Airflow or Astro alerts for your pipelines on Astro](airflow-vs-astro-alerts.md).
+Astro includes additional features for alerting on specific DAG status, such as Astro alerts. There are some circumstances where Astronomer recommends configuring Astro alerts instead of Airflow SLAs or failure notifications. See [When to use Airflow or Astro alerts for your pipelines on Astro](best-practices/airflow-vs-astro-alerts.md).
 
 ## Astro open source packages
 
