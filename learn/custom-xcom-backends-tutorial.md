@@ -1,5 +1,5 @@
 ---
-title: 'Set up a custom XCom backend using Object Storage'
+title: 'Set up a custom XCom backend using object storage'
 sidebar_label: 'Set up an XCom backend'
 id: xcom-backend-tutorial
 description: 'Use this tutorial to learn how to set up a custom XCom backend with Object Storage.'
@@ -11,13 +11,13 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import custom_xcom_backend_test from '!!raw-loader!../code-samples/dags/xcom-backend-tutorial/custom_xcom_backend_test.py';
 
-Airflow [custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom). By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends using a custom XCom backend.
+By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, Astronomer recommends using a custom XCom backend. [Custom XCom backends](airflow-custom-xcom-backends.md) allow you to configure where Airflow stores information that is passed between tasks using [XComs](airflow-passing-data-between-tasks.md#xcom). 
 
-The [Object Storage](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/objectstorage.html) custom XCom backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
+The object storage custom XCom backend available in the [Common IO provider](https://airflow.apache.org/docs/apache-airflow-providers-common-io/stable/index.html) is the easiest way to store XComs in remote object storage solution.
 
 This tutorial will show you how to set up a custom XCom backend using Object Storage for [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/).
 
-You can learn more about other options to set up custom XCom backends in the [Options for custom XCom backends in Airflow](airflow-custom-xcom-backends.md) guide.
+To learn more about other options for setting custom XCom backends, see [Options for custom XCom backends in Airflow](airflow-custom-xcom-backends.md).
 
 :::warning
 
@@ -25,9 +25,9 @@ While a custom XCom backend allows you to store virtually unlimited amounts of d
 
 :::
 
-:::caution
+:::warning
 
-Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565). For other ways to set up custom XCom backends, see the [Options for custom XCom backends in Airflow](airflow-custom-xcom-backends.md) guide.
+Object storage is currently considered experimental and might be subject to breaking changes in future releases. For more information see [AIP-58](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=263430565). 
 
 :::
 
@@ -44,7 +44,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) with an Astro project running Astro Runtime 11.0.0 or higher (Airflow 2.9.0 or higher). For options on setting up custom XCom backends with older versions of Airflow, see the [Custom XCom backends](airflow-custom-xcom-backends.md) guide.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) with an Astro project running Astro Runtime 11.0.0 or higher (Airflow 2.9.0 or higher). To set up a custom XCom backend with older versions of Airflow, see [Custom XCom backends](airflow-custom-xcom-backends.md).
 - An account in either [AWS](https://aws.amazon.com/), [GCP](https://cloud.google.com/), or [Azure](https://azure.microsoft.com/) with permissions to create and configure an object storage container.
 
 ## Step 1: Set up your object storage container
@@ -209,7 +209,7 @@ Add the [Common IO](https://registry.astronomer.io/providers/apache-airflow-prov
 
 ## Step 3: Set up your Airflow connection
 
-An Airflow connection is necessary to connect Airflow with your object storage container provider. There are [different ways](connections.md) to set up Airflow connections, in this tutorial we will use the Airflow UI.
+An Airflow connection is necessary to connect Airflow with your object storage container provider. In this tutorial, you'll use the Airflow UI to configure your connection.
 
 1. Start your Astro project by running:
 

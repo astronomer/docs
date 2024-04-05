@@ -1,25 +1,25 @@
 ---
-title: 'Options for custom XCom backends in Airflow'
+title: 'Strategies for custom XCom backends in Airflow'
 sidebar_label: 'Custom XCom backends'
 id: airflow-custom-xcom-backends
-description: 'Use this guide to learn about different ways to set up custom XCom backends.'
+description: 'Use this guide to learn about different ways you can set up custom XCom backends.'
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. With **Airflow custom XCom backends** you can configure where and how Airflow stores XComs, and customize serialization and deserialization methods.
+Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. If you configure a custom XCom backend, you can define where and how Airflow stores XComs, as well as customize serialization and deserialization methods.
 
 In this guide you'll learn:
 
-- Why you might want to use a custom XCom backend.
+- When you should use a custom XCom backend.
 - How to set up a custom XCom backend using the Object Storage custom XCom backend.
 - How to use a custom XCom backend class with custom serialization and deserialization methods.
 - How to override the `.clear()` method to delete XComs from a custom XCom backend when clearing tasks.
 
 :::warning
 
-While a custom XCom backend allows you to store virtually unlimited amounts of data as XComs, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link&utm_medium=docs&utm_content=learn-xcom-backend-tutorial&utm_source=body).
+While a custom XCom backend allows you to store virtually unlimited amounts of data as XComs, you will need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/try-astro/?referral=docs-content-link&utm_medium=docs&utm_content=learn-xcom-backend-tutorial&utm_source=body).
 
 :::
 
@@ -34,26 +34,26 @@ To get the most benefits from this guide, you need an understanding of:
 
 Common reasons to use a custom XCom backend include:
 
-- Needing more storage space for XComs than the Airflow metadata database can offer.
-- Running a production environment where you require custom retention, deletion, and backup policies for XComs.
-- Accessing XComs without accessing the metadata database.
-- Restricting types of allowed XCom values.
-- Saving XComs in multiple locations simultaneously.
+- You need more storage space for XComs than the Airflow metadata database can offer.
+- You're running a production environment where you require custom retention, deletion, and backup policies for XComs.
+- You want to access XComs without accessing the metadata database.
+- You want to restrict types of allowed XCom values.
+- You want to save XComs in multiple locations simultaneously.
 
-It is also possible to use custom XCom backends to define custom serialization and deserialization methods for XComs if adding a serialization method to a class or registering a custom serializer is not feasible. See [Custom serialization and deserialization](#custom-serialization-and-deserialization) for more information.
+You can also use custom XCom backends to define custom serialization and deserialization methods for XComs if you need to add a serialization method to a class, or if registering a custom serializer is not feasible. See [Custom serialization and deserialization](#custom-serialization-and-deserialization) for more information.
 
 ## How to set up a custom XCom backend
 
 There are two main ways to set up a custom XCom backend:
 
 - **Object Storage custom XCom backend**: Use this method to create a custom XCom backend when you want to store XComs in a cloud-based object storage service like AWS S3, GCP Cloud Storage, or Azure Blob Storage.
-- **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored, for example simultaneously storing XComs in two different locations.
+- **Custom XCom backend class**: Use this method when you want to further customize how XComs are stored, for example to simultaneously store XComs in two different locations.
 
-Additionally, some provider packages offer custom XCom backends that you can use out of the box, for example the [Snowpark provider](airflow-snowpark.md) which contains a custom XCom backend for Snowflake.
+Additionally, some provider packages offer custom XCom backends that you can use out of the box. For example, the [Snowpark provider](airflow-snowpark.md) contains a custom XCom backend for Snowflake.
 
-### Use the Object Storage XCom backend
+### Use the Object Storage XCom Backend
 
-Airflow 2.9+ added the possibility to create a custom XCom backend using the Object Storage feature. Object Storage custom XCom backends are part of the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) provider and can be defined only using environment variables. The following environment variables are available:
+Airflow 2.9+ added the possibility to create a custom XCom backend using object storage. The Object Storage XCom Backend is part of the [Common IO](https://registry.astronomer.io/providers/apache-airflow-providers-common-io/versions/latest) provider and can be defined using the following environment variables:
 
 - `AIRFLOW__CORE__XCOM_BACKEND`: The XCom backend to use. Set this to `airflow.providers.common.io.xcom.backend.XComObjectStoreBackend` to use the Object Storage custom XCom backend.
 - `AIRFLOW__COMMON_IO__XCOM_OBJECTSTORAGE_PATH`: The path to the object storage where XComs are stored. The path should be in the format `<your-scheme>://<your-connection-id@<your-bucket>/xcom`. For example, `s3://my-s3-connection@my-bucket/xcom`. The most common schemes are `s3`, `gs`, and `abfs` for Amazon S3, Google Cloud Storage, and Azure Blob Storage, respectively.
@@ -289,7 +289,7 @@ def clear(
 
 By default, Airflow includes [serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html) methods for common object types like [JSON](https://www.json.org/json-en.html), [pandas DataFrames](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [NumPy](https://numpy.org/). You can see all supported types in the [Airflow source code](https://github.com/apache/airflow/tree/main/airflow/serialization/serializers).
 
-In cases where you need to pass data objects through XCom that are not supported you have several options:
+If you need to pass data objects through XCom that are not supported, you have several options:
 
 - Enable [pickling](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling). This method is easy to implement for local testing, but not suitable for production due to [security issues](https://docs.python.org/3/library/pickle.html). 
 - Register a custom serializer, see [Serialization](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/serializers.html).
