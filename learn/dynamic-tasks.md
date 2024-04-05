@@ -119,23 +119,17 @@ When you work with mapped tasks, keep the following in mind:
 
 For additional examples of how to apply dynamic task mapping functions, see [Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dynamic-task-mapping.html) in the official Airflow documentation.
 
-The Airflow UI provides observability for mapped tasks in the **Graph View** and the **Grid View**.
+The Airflow UI provides observability for mapped tasks in the **Grid View**.
 
-In the **Graph View**, mapped tasks are identified with a set of brackets `[ ]` followed by the task ID. The number in the brackets is updated for each DAG run to reflect how many mapped instances were created.
+Mapped tasks are identified with a set of brackets `[ ]` followed by the task ID. All mapped task instances are combined into one row on the grid.
 
-![Mapped Graph](/img/guides/mapped_task_graph.png)
+The number in the brackets show in the DAG run graph, is updated for each DAG run to reflect how many mapped instances were created. The following screenshot shows a DAG run graph with two tasks, the latter having 49 dynamically mapped task instances.
 
-Click the mapped task to display the **Mapped Instances** list and select a specific mapped task run to perform actions on.
+![Screenshot of the Graph tab in the Airflow UI Grid view showing a DAG run graph with two tasks, the latter having been mapped 49 times.](/img/guides/dynamic-tasks-graph_tab_simple.png)
 
-![Mapped Actions](/img/guides/mapped_instances_task_actions.png)
+To see the logs and XCom pushed by each dynamically mapped task instance, click on the dynamically mapped task, either in the DAG run graph or in the grid. Then click on **[] Mapped Tasks** and select the mapped task instance you want to inspect.
 
-Select one of the mapped instances to access links to other views such as Instance Details, Rendered, Log, XCom, and so on.
-
-![Mapped Views](/img/guides/mapped_instance_views.png)
-
-The **Grid View** shows task details and history for each mapped task. All mapped tasks are combined into one row on the grid. In the following image, this is shown as `mix_cross_and_zip [ ]`. Click the task to view details for each individual mapped instance below the `Mapped Tasks` tab.
-
-![Mapped Grid](/img/guides/mapped_grid_view_2_4.png)
+![Gif showing how to navigate to the logs of an individual mapped task instance in the Airflow UI.](/img/guides/dynamic-tasks_mapped_task_logs.gif)
 
 ## Mapping over the result of another operator
 
