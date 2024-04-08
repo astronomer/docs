@@ -28,7 +28,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ## 0.34.1
 
-Release date: April 5, 2024
+Release date: April 8, 2024
 
 ### Documentation refactor
 
