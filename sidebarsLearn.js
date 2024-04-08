@@ -74,6 +74,7 @@ module.exports = {
             'cross-dag-dependencies',
             'airflow-importing-custom-hooks-operators',
             'error-notifications-in-airflow',
+            'airflow-dag-parameters',
             'dag-best-practices',
             'debugging-dags',
             'dynamic-tasks',
