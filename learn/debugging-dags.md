@@ -47,7 +47,7 @@ Answering these questions will help you narrow down what kind of issue you're de
 
 :::info
 
-You can debug your DAG code with IDE debugging tools using the `dag.test()` method, which was added in Airflow 2.5. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest).
+You can debug your DAG code with IDE debugging tools using the `dag.test()` method. See [Debug interactively with dag.test()](testing-airflow.md#debug-interactively-with-dagtest).
 
 :::
 
@@ -127,7 +127,7 @@ If your DAGs are either not running or running differently than you intended, co
 
     ![Location of unpause toggle in the Airflow UI](/img/guides/paused_dag_2.png)
 
-    If you want all DAGs unpaused by default, you can set [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, remember to set `catchup=False` in your DAGs to prevent automatic backfilling of DAG runs. In Airflow 2.2 and later, paused DAGs are unpaused automatically when you manually trigger them.
+    If you want all DAGs unpaused by default, you can set [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, remember to set `catchup=False` in your DAGs to prevent automatic backfilling of DAG runs. Paused DAGs are unpaused automatically when you manually trigger them.
 
 - Double check that each DAG has a unique `dag_id`. If two DAGs with the same id are present in one Airflow instance the scheduler will pick one at random every 30 seconds to display.
 - Make sure your DAG has a `start_date` in the past. A DAG with a `start_date` in the future will result in a successful DAG run with no task runs. Do not use `datetime.now()` as a `start_date`.
@@ -136,7 +136,7 @@ If your DAGs are either not running or running differently than you intended, co
 using `astro dev logs -s`. 
 - If too many runs of your DAG are being scheduled after you unpause it, you most likely need to set `catchup=False` in your DAG's parameters.
 
-If your DAG is running but not on the schedule you expected, review the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide. If you are using a custom timetable, ensure that the data interval for your DAG run does not precede the DAG start date.
+If your DAG is running, but not on the schedule you expected, review the [DAG Schedule DAGs in Airflow](scheduling-in-airflow.md) guide. If you are using a custom timetable, ensure that the data interval for your DAG run does not precede the DAG start date.
 
 ## Common task issues
 
@@ -152,7 +152,7 @@ It is possible for a DAG to start but its tasks to be stuck in various states or
 - When running many instances of a task or DAG, be mindful of scaling parameters and configurations. Airflow has default settings that limit the amount of concurrently running DAGs and tasks. See [Scaling Airflow to optimize performance](airflow-scaling-workers.md) to learn more.
 - If you are using task decorators and your tasks are not showing up in the **Graph** and **Grid** view, make sure you are calling your tasks. See also [Introduction to Airflow decorators](airflow-decorators.md).
 - Check your task dependencies and trigger rules. See [Manage DAG and task dependencies in Airflow](managing-dependencies.md). Consider recreating your DAG structure with [EmptyOperators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/empty/index.html) to ensure that your dependencies are structured as expected.
-- As of Airflow 2.6, the [`task_queued_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#task-queued-timeout) parameter controls how long tasks can be in queued state before they are either retried or marked as failed. The default is 600 seconds.
+- The [`task_queued_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#task-queued-timeout) parameter controls how long tasks can be in queued state before they are either retried or marked as failed. The default is 600 seconds.
 - If you are using the CeleryExecutor in an Airflow version earlier than 2.6 and tasks get stuck in the `queued` state, consider turning on [`stalled_task_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#stalled-task-timeout).
 
 ### Tasks are failing 
@@ -186,7 +186,7 @@ After resolving your issue you may want to rerun your DAGs or tasks, see [Rerunn
 
 ### Issues with dynamically mapped tasks
 
-[Dynamic task mapping](dynamic-tasks.md) is a powerful feature that was introduced in Airflow 2.3 to allow you to dynamically adjust the number of tasks at runtime based on changing input parameters. Starting with Airflow 2.5.0 you can also dynamically map over task groups.
+[Dynamic task mapping](dynamic-tasks.md) is a powerful feature that allows you to dynamically adjust the number of tasks at runtime based on changing input parameters. It is also possible to [dynamically map over task groups](task-groups.md#generate-task-groups-dynamically-at-runtime).
 
 Possible causes of issues when working with dynamically mapped tasks include:
 
