@@ -9,7 +9,7 @@ Astro includes several features that enhance the Airflow development experience,
 
 ## Project structure
 
-To develop and run DAGs on Astronomer products, they must belong to an Astro project. An Astro project contains all files required to run your DAGs both locally and on Astronomer. In addition to DAG files, an Astro project includes dependencies, your Astro Runtime version, and any other files your workers need access to when you run tasks.
+To develop and run DAGs on Astronomer products, they must belong to an Astro project. An _Astro project_ contains all files required to run your DAGs both locally and on Astronomer. In addition to DAG files, an Astro project includes dependencies, your Astro Runtime version, and any other files your workers need access to when you run tasks.
 
 See [Create an Astro project](cli/get-started-cli.md) to learn more about how to create and run Astro projects.
 
@@ -17,7 +17,7 @@ See [Create an Astro project](cli/get-started-cli.md) to learn more about how to
 
 Each Astro project uses a specific version of Astro Runtime, which is Astronomer's version of Apache Airflow that includes additional observability and performance features. As you continue to develop within an Astro project, you'll need to upgrade your Astro Runtime version to take advantage of new Astro and Apache Airflow features and fixes. 
 
-Your Astro Runtime version is defined in your Astro project Dockerfile. Unlike Apache Airflow, upgrading Astro Runtime only requires you to change the version listed in your Astro project Dockerfile and rebuild your project. See [Upgrade Astro Runtime](upgrade-runtime.md).
+Your Astro Runtime version is defined in your Astro project Dockerfile. Unlike Apache Airflow, upgrading Astro Runtime does not require manually migrating your metadata database. To upgrade your version of Airflow, you change the Astro Runtime version listed in your project Dockerfile and rebuild your project. See [Upgrade Astro Runtime](upgrade-runtime.md).
 
 Your Dockerfile is also where you can define additional runtime arguments that trigger whenever your project builds. You can use these arguments to mount resources, such as API tokens, to your Airflow environment without including the specific resources in your project files. See [Customize your Dockerfile](cli/customize-dockerfile.md) for more details.
 
@@ -38,7 +38,7 @@ Astro includes several features that enhance existing Airflow features and integ
 
 - On Astro, the Astro UI renders [Airflow tags](https://airflow.apache.org/docs/apache-airflow/stable/howto/add-dag-tags.html) defined in your DAGs. Use tags to filter DAGs across all Deployments from a single screen.
 - The [Astro Environment Manager](manage-connections-variables.md) allows you to manage Airflow connections directly from the Astro UI. Unlike with connections defined in the Airflow UI, you can apply connections from the Environment Manager across multiple Deployments and Workspaces, as well as in a local Airflow environment. 
-- Astro has built in infrastructure to run the KubernetesPodOperator and Kubernetes executor, such as default Pod limits and requests. Resource limits and requests are set by default on Astro Deployments, meaning that tasks running in Kubernetes Pods will never request more resources than expected. See [Run the Kubernetes executor](kubernetes-executor.md) and [Run the KubernetesPodOperator](kubernetespodoperator.md) for more specific instructions and examples. 
+- Astro has built-in infrastructure to run the KubernetesPodOperator and Kubernetes executor, such as default Pod limits and requests. Resource limits and requests are set by default on Astro Deployments, meaning that tasks running in Kubernetes Pods never request more resources than expected. See [Run the Kubernetes executor](kubernetes-executor.md) and [Run the KubernetesPodOperator](kubernetespodoperator.md) for more specific instructions and examples. 
 
 ## DAG observability
 
@@ -50,7 +50,7 @@ Astro includes additional features for alerting on specific DAG status, such as 
 
 ## Astro open source packages
 
-Although they are not built in to Astro, Astronomer's open source packages are recommended to simplify your Airflow pipelines.
+Although they are not built into Astro, Astronomer's open source packages are recommended to simplify your Airflow pipelines.
 
 ### Orchestrate dbt Core projects using Cosmos
 
