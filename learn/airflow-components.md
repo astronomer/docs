@@ -9,6 +9,14 @@ When working with Airflow, understanding the underlying infrastructure component
 
 In this guide, you'll learn about the core components of Airflow and how to manage Airflow infrastructure for high availability. Some of the components and features described in this topic are unavailable in earlier Airflow versions.
 
+:::tip Other ways to learn
+
+There are multiple resources for learning about this topic. See also:
+
+- Astronomer Academy: [Airflow: Basics](https://academy.astronomer.io/path/airflow-101/airflow-basics) module.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:

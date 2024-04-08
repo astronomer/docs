@@ -13,7 +13,7 @@ In this guide, you'll learn Airflow scheduling concepts and the different ways y
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: DAG Scheduling](https://academy.astronomer.io/astro-runtime-scheduling) module.
+- Astronomer Academy: [Airflow: DAG Scheduling](https://academy.astronomer.io/path/airflow-101/astro-runtime-scheduling) module.
 - Webinar: [Scheduling in Airflow: A Comprehensive Introduction](https://www.astronomer.io/events/webinars/scheduling-in-airflow-comprehensive-intro/).
 
 :::

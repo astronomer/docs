@@ -65,7 +65,7 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.
 
-     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 1600 vCPU and maximum **Memory** quota is 3200 GiB.
+     For a Deployment running in a Hosted dedicated or shared cluster, the maximum possible **CPU** quota is 6400 vCPU and maximum **Memory** quota is 12800 GiB.
 
      :::warning Astro Hosted
 
@@ -149,10 +149,7 @@ Every Deployment has two PgBouncer Pods assigned to two different nodes to preve
 
 ## Hibernate a development Deployment
 
-:::caution
-
-This feature is in [Private Preview](feature-previews.md). To access this feature or learn more, [contact Astronomer](https://www.astronomer.io/contact/). All customers are eligible to use this feature upon request.
-
+:::publicpreview
 :::
 
 When you create a Deployment on Astro, you pay for the infrastructure resources that are required to run the Deployment for the duration that it's active. In development environments when you aren't always running tasks, you can _hibernate_, or scale down, all Deployment resources on a specified schedule. When you hibernate a Deployment, all Deployment configurations are preserved, but computing resources are scaled to zero.

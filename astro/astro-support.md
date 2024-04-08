@@ -7,9 +7,8 @@ description: Get Astro support when you need it.
 
 In addition to product documentation, the following resources are available to help you resolve issues:
 
-- [Astronomer Forum](https://forum.astronomer.io)
-- [Airflow Guides](https://docs.astronomer.io/learn/)
-
+- [Astronomer knowledge base](https://support.astronomer.io/hc/en-us)
+- [Airflow guides](https://docs.astronomer.io/learn/)
 If you're experiencing an issue or have a question that requires Astronomer expertise, use one of the following methods to contact Astronomer support:
 
 - Submit a support request in the [Astro UI](https://cloud.astronomer.io/open-support-request).
@@ -20,6 +19,10 @@ If you're experiencing an issue or have a question that requires Astronomer expe
 ## Best practices for support request submissions
 
 The following are the best practices for submitting support requests in the Astro UI or the Astronomer support portal:
+
+### Check the Astro status page
+
+Before you open a ticket for unexpected or disruptive behavior on Astro, check the [Astro status page](https://status.astronomer.io/) to see if the problem you're experiencing has already been reported.
 
 ### Always indicate priority
 
@@ -73,7 +76,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
 ### Check recommended support articles
 
-If you draft your support ticket on the [Astronomer support portal](https://support.astronomer.io), the portal automatically recommends support articles to you based on the content in your ticket. Astronomer recommends looking through these recommendations to see if your issue has a documented solution before submitting your ticket. 
+If you draft your support ticket on the [Astronomer support portal](https://support.astronomer.io), the portal automatically recommends support articles to you based on the content in your ticket. Astronomer recommends looking through these recommendations to see if your issue has a documented solution before submitting your ticket.
 
 You can also proactively search support articles without submitting a support ticket on the [Astronomer knowledge base](https://support.astronomer.io/hc/en-us).
 
@@ -86,14 +89,14 @@ You can also proactively search support articles without submitting a support ti
     Alternatively, you can directly access the support form by going to `https://cloud.astronomer.io/open-support-request`.
 
 2. Select a **Request Type**. Your request type determines which other fields appear in the support request.
-3. Complete the rest of the support request. 
+3. Complete the rest of the support request.
 4. Click **Submit**.
 
     You'll receive an email when your ticket is created and follow-up emails as Astronomer support replies to your request. To check the status of a support request, you can also sign in to the [Astronomer support portal](https://support.astronomer.io).
 
 ## Submit a support request on the Astronomer support portal
 
-Astronomer recommends that you submit support requests in the Astro UI. If you can't access the Astro UI, sign in to the [Astronomer support portal](https://support.astronomer.io) and create a new support request. 
+Astronomer recommends that you submit support requests in the Astro UI. If you can't access the Astro UI, sign in to the [Astronomer support portal](https://support.astronomer.io) and create a new support request.
 
 If you're new to Astronomer, you'll need to create an account on the Astronomer support portal to submit a support request. Astronomer recommends that you create an account with the same email address that you use to access Astro. This allows you to view support tickets from other team members that have email addresses with the same domain.
 
@@ -114,6 +117,6 @@ To add a teammate to an existing support request, cc them when replying on the s
 
 ## Book office hours
 
-If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hours meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines. 
+If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hours meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
 
 For more information about booking an office hour meeting, see [Book an office hours appointment](office-hours.md#book-an-office-hours-appointment).
