@@ -38,28 +38,25 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 Astro Runtime 11.0.0 includes same-day support for Apache Airflow 2.9, which includes a number of new features and improvements. Airflow 2.9 includes the following changes:
 
-- New data-aware scheduling functionality includes using conditional logic (AND and OR) or combining both dataset dependencies and time-based schedules.
-- You can now create your own labels for dynamically mapped tasks with templates, instead of identifying them by searching through index numbers.
-- Added the ability to store XComs in an object storage supported backend.
-- Delivered several significant improvements to the Airflow UI. For example, you can now filter, view, and create datasets through the Airflow UI..
-
-For more information about the major changes in this release, see the [Airflow Blog](https://airflow.apache.org/blog/airflow-2.9.0/) or the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#airflow-2-9-0-2024-04-08).
-
-### Upgrade to Python 3.12
-
-Airflow and the Astro Runtime now support Python 3.12. However, Pendulum 2 does not support Python 3.12. If you upgrade to Python 3.12 and want to use Airflow, you also need to upgrade to Pendulum 3.
-
-Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#official-support-for-python-3-12-38025) for more information about any limitations in Python 3.12 support.
-
-### Additional improvements
-
+- New data-aware scheduling lets you use conditional logic (AND / OR) to schedule DAGs.
+- You can now create your own labels for dynamically mapped tasks with templates, which makes it easier to search through mapped task instances.
+- External XCom backends can now be configured to use object storage.
+- Delivered several significant improvements to the Airflow UI. For example, you can now filter, view, and create datasets through the Airflow UI.
 - New Listener API methods are considered stable and suitable for use in production.
 - Added the ability to automatically pause a DAG after a pre-defined number of sequentially failed runs.
 - Dataset URIs are validated when you enter them, and must conform to the rules set in AIP-60. See the [Dataset documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html) for more information.
 
-### Bug fixes
+For more information about the major changes in this release, see the [Airflow Blog](https://airflow.apache.org/blog/airflow-2.9.0/) or the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#airflow-2-9-0-2024-04-08).
 
-- Fix a bug where after a task failed, and no longer exists in a DAG, you can now still access details about the DAG in the Grid View of the Airflow UI.
+#### Upgrade to Python 3.12
+
+Astro Runtime now supports Python 3.12. However, [Pendulum](https://pendulum.eustace.io/) 2 does not support Python 3.12. If you upgrade to Python 3.12 and want to use Airflow, you also need to upgrade to Pendulum 3.
+
+Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#official-support-for-python-3-12-38025) for more information about any limitations in Python 3.12 support.
+
+#### Airflow bug fixes
+
+- Fix a bug where after a task failed, and no longer exists in a DAG, you can now still access details about the DAG in the Grid View of the Airflow UI.([#38511](https://github.com/apache/airflow/pull/38511))
 - Fix a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`.
 - In the Python task decorator, you can only have `None` as the default parameter for context parameters.
 
