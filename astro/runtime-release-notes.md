@@ -41,7 +41,7 @@ Astro Runtime 11.0.0 includes same-day support for Apache Airflow 2.9, which inc
 - New data-aware scheduling functionality includes using conditional logic (AND and OR) or combining both dataset dependencies and time-based schedules.
 - You can now create your own labels for dynamically mapped tasks with templates, instead of identifying them by searching through index numbers.
 - Added the ability to store XComs in an object storage supported backend.
-- UI improvements that include filtering, viewing, and creating Datasets through the UI, the ability to localize `dag_id` and `task_id` names, task log grouping, and improvements to DAG-level views such as calendar, run duration, and the audit log.
+- Delivered several significant improvements to the Airflow UI. For example, you can now filter, view, and create datasets through the Airflow UI..
 
 For more information about the major changes in this release, see the [Airflow Blog](https://airflow.apache.org/blog/airflow-2.9.0/) or the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#airflow-2-9-0-2024-04-08).
 
