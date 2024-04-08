@@ -11,6 +11,8 @@ navigation:
         path: ./docs/pages/get-started.mdx
       - page: Versioning and support
         path: ./docs/pages/versioning-and-support.mdx
+      - page: Changelog
+        path: ./docs/pages/changelog.mdx
   - api: Platform API Reference
     api-name: platform
   - api: IAM API Reference
