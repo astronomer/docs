@@ -54,10 +54,10 @@ Airflow now supports Python 3.12. However, [Pendulum](https://pendulum.eustace.i
 
 Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#official-support-for-python-3-12-38025) for more information about any limitations in Python 3.12 support.
 
-#### Airflow bug fixes
+#### Bug fixes
 
-- Fix a bug where after a task failed, and no longer exists in a DAG, you can now still access details about the DAG in the Grid View of the Airflow UI.([#38511](https://github.com/apache/airflow/pull/38511))
-- Fix a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`.
+- Fixed a bug where after a task failed, and no longer exists in a DAG, you can now still access details about the DAG in the Grid View of the Airflow UI.
+- Fixed a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`.
 - In the Python task decorator, you can only have `None` as the default parameter for context parameters.
 
 ## Astro Runtime 10.6.0
