@@ -291,7 +291,7 @@ See the [Astro documentation](https://docs.astronomer.io/astro/kubernetespodoper
 
 ## Use the @task.kubernetes decorator
 
-The `@task.kubernetes` decorator was added in Airflow 2.4 and provides an alternative to the traditional KubernetesPodOperator when you run Python scripts in a separate Kubernetes Pod. The Docker image provided to the `@task.kubernetes` decorator must support executing Python scripts.
+The `@task.kubernetes` decorator provides an alternative to the traditional KubernetesPodOperator when you run Python scripts in a separate Kubernetes Pod. The Docker image provided to the `@task.kubernetes` decorator must support executing Python scripts.
 
 Like regular `@task` decorated functions, XComs can be passed to the Python script running in the dedicated Kubernetes pod. If `do_xcom_push` is set to `True` in the decorator parameters, the value returned by the decorated function is pushed to XCom. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
 
