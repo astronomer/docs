@@ -29,6 +29,34 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 11.0.0
+
+- Release date: April 8, 2024
+- Airflow version: 2.9.0
+
+### Airflow 2.9.0
+
+Astro Runtime 11.0.0 includes same-day support for Apache Airflow 2.9, which includes a number of new features and improvements. Airflow 2.9 includes the following changes:
+
+- New data-aware scheduling functionality includes using conditional logic (AND and OR) or combining both dataset dependencies and time-based schedules.
+- You can now create your own labels for dynamically mapped tasks with templates, instead of identifying them by searching through index numbers.
+- UI improvements that include filtering, viewing, and creating Datasets through the UI, the ability to localize `dag_id` and `task_id` names, task log grouping, and improvements to DAG-level views such as calendar, run duration, and the audit log.
+
+For more information about the major changes in this release, see the [Airflow Blog](https://airflow.apache.org/blog/airflow-2.9.0/).
+
+### Upgrade to Python 3.12
+
+Airflow and the Astro Runtime now support Python 3.12. However, Pendulum 2 does not support Python 3.12. If you upgrade to Python 3.12 and want to use Airflow, you also need to upgrade to Pendulum 3.
+
+### Additional improvements
+
+- New Listener API methods are considered stable and suitable for use in production
+
+
+### Bug fixes
+
+
+
 ## Astro Runtime 10.6.0
 
 - Release date: March 26, 2024
