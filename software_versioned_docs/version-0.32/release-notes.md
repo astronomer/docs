@@ -26,6 +26,55 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## 0.34.1
+
+Release date: April 8, 2024
+
+### Documentation refactor
+
+- To make the documentation more consistent with Helm standards, all instances of `config.yaml` have been replaced with `values.yaml`.
+
+### Additional improvements
+
+- NGinx now has a dedicated service account with only the required permissions for the service
+- You can now specify an image pull secret for the `privateCaCertsAddToHost.certCopier` image so that you can pull the image from a private registry.
+- Added support for [Kubernetes 1.29](https://kubernetes.io/blog/2023/12/13/kubernetes-v1-29-release/).
+- You can now define `additionalScrapeJobs` in the Prometheus Helm chart so that Prometheus scrapes additional jobs on the Astronomer Software cluster. For example, you could add the following configuration to `values.yaml` to scrape a static job:
+
+    ```yaml
+    astronomer:
+    prometheus:
+    additionalScrapeJobs:
+    - job_name: example-static-job
+      static_configs:
+      - targets:
+        - localhost:9090
+    ```
+
+### Bug fixes
+
+- Fixed an issue where the value for `houston.config.deployments.resourceProvisioningStrategy.astroUnitsEnabled` was not respected when creating Deployments using the Houston API.
+- Fixed an issue where skipping multiple pages of a list in the Software UI could skip an extra page.
+- Removed support for Kubernetes 1.24.
+- Fixed an issue where task usage metrics didn't work when using a private certificate authority.
+- Resolved the following vulnerabilities:
+
+    - [GHSA-m425-mq94-257g](https://github.com/advisories/GHSA-m425-mq94-257g) 
+    - [CVE-2023-7104](https://nvd.nist.gov/vuln/detail/CVE-2023-7104)
+    - [GHSA-xpw8-rcwv-8f8p](https://github.com/advisories/GHSA-xpw8-rcwv-8f8p) 
+    - [CVE-2023-1370](https://nvd.nist.gov/vuln/detail/CVE-2023-1370)    
+    - [CVE-2024-25062](https://nvd.nist.gov/vuln/detail/CVE-2024-25062)                                    
+    - [GHSA-36jr-mh4h-2g58](https://github.com/advisories/GHSA-36jr-mh4h-2g58) 
+    - [GHSA-9763-4f94-gfch](https://github.com/advisories/GHSA-9763-4f94-gfch)  
+    - [CVE-2024-21626](https://nvd.nist.gov/vuln/detail/CVE-2024-21626) 
+    - [CVE-2022-2625](https://nvd.nist.gov/vuln/detail/CVE-2022-2625) 
+    - [CVE-2024-0985](https://nvd.nist.gov/vuln/detail/CVE-2024-0985) 
+    - [CVE-2022-21698](https://nvd.nist.gov/vuln/detail/CVE-2022-21698)  
+    - [CVE-2021-33194](https://nvd.nist.gov/vuln/detail/CVE-2021-33194)  
+    - [CVE-2023-39325](https://nvd.nist.gov/vuln/detail/CVE-2023-39325) 
+    - [CVE-2021-38561](https://nvd.nist.gov/vuln/detail/CVE-2021-38561)  
+    - [CVE-2023-52425](https://nvd.nist.gov/vuln/detail/CVE-2023-52425)
+
 ## 0.34.0
 
 Release date: February 12, 2024
@@ -50,7 +99,7 @@ This new setting changes whether all Admin-level users can view and upgrade to d
 
 By default, any user with an Admin-level role (Deployment Admin, Workspace Admin, System Admin) can now upgrade a Deployment to an unsupported version of Astro Runtime using the Astro CLI and the Houston API. 
 
-You can additionally set the following value in your `config.yaml` file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:
+You can additionally set the following value in your `values.yaml` file to enable these users to view and upgrade to unsupported Runtime versions through the Software UI:
 
 ```yaml
 astronomer:
@@ -72,7 +121,7 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
 
 - You can now configure a global label that is applied to all Astronomer Software Pods.
 - You can now filter on `release_name` when you make a `deployments()` query to the Houston API.
-- You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your `config.yaml` file and apply the configuration to your cluster:
+- You can now use containerd-based Astro Runtime images on an Astronomer Software cluster with a self-managed private CA certificate. To configure a self-managed private CA certificate, add the following configuration to your `values.yaml` file and apply the configuration to your cluster:
 
     ```yaml
     astronomer:
@@ -86,7 +135,7 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
     ```
 
 - You can now make a `createDeployment` or `upsertDeployment` query by specifying a Workspace name or label instead of a Workspace ID.
-- You can now disable the `astro-cli` Pod to free up resources on your cluster. This Pod is typically only used in airgapped clusters that can't access `https://install.astronomer.io`. To disable the Pod, add the following configuration to your `config.yaml` file and apply the change to your cluster:
+- You can now disable the `astro-cli` Pod to free up resources on your cluster. This Pod is typically only used in airgapped clusters that can't access `https://install.astronomer.io`. To disable the Pod, add the following configuration to your `values.yaml` file and apply the change to your cluster:
 
     ```yaml
     astronomer:
@@ -95,13 +144,13 @@ You can now deploy only the DAGs folder of an Astro project to a Deployment. If 
     ```
 
 - Astronomer Software now redeploys your Deployment when you switch your executor type.
-- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars). 
+- You no longer have to manually define your private registry in the configuration for [Vector logging sidecars.](https://docs.astronomer.io/software/export-task-logs#customize-vector-logging-sidecars).
 
 ### Bug fixes
 
 - Fixed an issue where Astronomer users would occasionally not be associated with their related Azure AD/ Microsoft Entra ID accounts when added to Astronomer using SCIM.
 - The Houston API now validates `updateDeployment` queries to ensure that Deployment resource limits and requests are set correctly.
-- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status. 
+- Fixed an issue where the **Core Container Status** section of the **Metrics** tab would occasionally show unhealthy containers with a healthy status.  
 - Fixed an issue where Deployments would occasionally not recreate the correct resources when switching from the Kubernetes executor to the Celery executor.
 - Fixed an issue where deploys could fail when using a self-signed certificate signed by a private certificate authority.
 - Fixed an issue where Deployments would not have default configuration values as expected when a configuration was missing.
@@ -149,7 +198,7 @@ Release date: November 20, 2023
 
 ### Change to behavior for interacting with deprecated Runtime versions
 
-In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the `enableSystemAdminCanUseNonSupportedRuntime` key has been replaced with `enableSystemAdminCanUseAllRuntimes`. To set the new flag, add the following configuration to your `config.yaml` file:
+In 0.33.2, non-System Admin users can now update Deployments using deprecated versions of Astro Runtime. By default, non-System Admin users can now interact with Deployments using deprecated Runtime versions, but only System Admins can create new Deployments with deprecated Runtime versions. As a result of this change, the `enableSystemAdminCanUseNonSupportedRuntime` key has been replaced with `enableSystemAdminCanUseAllRuntimes`. To set the new flag, add the following configuration to your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -161,7 +210,7 @@ astronomer:
 
 ### Additional improvements
 
-- You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
+- You can now configure a global index name prefix to use for both Fluentd and sidecar-based logging, which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `values.yaml` file:
 
     ```yaml
     global:
@@ -200,9 +249,9 @@ Release date: October 13, 2023
 
 ### Additional improvements
 
-- You can now set `astronomer.auth.microsoft.useExternalProxy: false` in your `config.yaml` file to bypass proxy support for Azure logins.
+- You can now set `astronomer.auth.microsoft.useExternalProxy: false` in your `values.yaml` file to bypass proxy support for Azure logins.
 - You can now list System-level Service Accounts using the Houston API.
-- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `values.yaml` file.
 - The Kibana logging dashboard now includes a default index. 
 
 ### Bug fixes
@@ -258,7 +307,7 @@ Release date: September 8, 2023
 
 Astronomer Software can now automatically scale the size of PGBouncer connection pools based on your Airflow component counts and Airflow configuration, instead of solely based on total AU. This improves performance, scalability, and utilization of database connections across all Deployments. 
 
-This feature is off by default. You can enable it by setting  `deployments.pgBouncerResourceCalculationStrategy: airflowStratV2` in your `config.yaml` file. To revert back to previous behavior, set this key to `auStratV1` instead.
+This feature is off by default. You can enable it by setting  `deployments.pgBouncerResourceCalculationStrategy: airflowStratV2` in your `values.yaml` file. To revert back to previous behavior, set this key to `auStratV1` instead.
 
 ### Additional improvements
 
@@ -341,7 +390,7 @@ Release date: December 8, 2023
 
 ### Additional improvements
 
-- You can now configure a global index name prefix to use for both [Fluentd and sidecar-based logging](export-task-logs.md), which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `config.yaml` file:
+- You can now configure a global index name prefix to use for both [Fluentd and sidecar-based logging](export-task-logs.md), which allows Astronomer Software to retain logs when you migrate between logging solutions. To enable this feature, add the following lines to your `values.yaml` file:
 
     ```yaml
     global:
@@ -433,9 +482,9 @@ Release date: August 31, 2023
 
 - You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `Values.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.platform.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `global.loggingSidecar.indexPattern`.
-- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file.
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `values.yaml` file.
 - You can now [overprovision](cluster-resource-provisioning.md) the `triggerer-log-groomer` component.
-- You can now set `astronomer.houston.enableHoustonInternalAuthorization` in your `config.yaml` file to redirect all authorization requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.
+- You can now set `astronomer.houston.enableHoustonInternalAuthorization` in your `values.yaml` file to redirect all authorization requests from the ingress controller to the Houston API internal service endpoint. This can increase performance and decrease network latency.
 - Upgraded ElasticSearch to 8.x.
 - Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
 
@@ -480,8 +529,8 @@ Release date: June 12, 2023
 - Teams without any users are now automatically deleted when SCIM is disabled.
 - You can now authenticate to an external storage service for [archiving task metadata](configure-deployment.md#clean-deployment-task-metadata) using Workload Identity.
 - You can now set `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
-- You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
-- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
+- You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `values.yaml` file.
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `values.yaml` file. See [Configure a registry backend](registry-backend.md).
 
 ### Bug fixes
 
@@ -526,7 +575,7 @@ You can now clean task data from your Deployments by exporting it to an external
 
 ### Assign System-level permissions to Teams
 
-You can assign the System Admin, System Editor, and System Viewer permissions to teams by setting the following values in your `config.yaml` file:
+You can assign the System Admin, System Editor, and System Viewer permissions to teams by setting the following values in your `values.yaml` file:
 
 ```sh
 # Auth configuration.
@@ -553,8 +602,8 @@ Astronomer Software version 0.32 upgrades PostgreSQL from 11.18.0-1 to 15. If yo
 - The root user feature introduced in Astronomer Software version 0.31 has been deprecated. System Admins now have the highest level of permissions on the platform.
 - Workspaces are now required to have unique names. If you have existing Workspaces with identical names, upon upgrade the duplicate names will be appended with an underscore and a number.
 - If you configured [git-sync deploys](deploy-git-sync.md) for a Deployment, you can now [view error logs](deployment-logs.md) emitted from the git-sync Kubernetes Pod in the Software UI.
-- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `config.yaml` file.
-- You can now configure custom environment variables for ElasticSearch-based custom logging using the `astronomer.customLogging.extraEnv` value in your `config.yaml` file.
+- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `values.yaml` file.
+- You can now configure custom environment variables for ElasticSearch-based custom logging using the `astronomer.customLogging.extraEnv` value in your `values.yaml` file.
 - The `astronomer.houston.config.deployments.sysAdminScalabilityImprovementsEnabled` key has been replaced with `astronomer.houston.config.deployments.performanceOptimizationModeEnabled`  for improved performance across additional Software UI views.
 
 ### Bug fixes
@@ -625,9 +674,9 @@ Release date: February 2, 2023
 ### Additional improvements
 
 - Support for Kubernetes [1.25](https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/) and [1.26](https://kubernetes.io/blog/2022/12/09/kubernetes-v1-26-release/).
-- You can now configure custom annotations for Houston ingress by setting `astronomer.houston.ingress.annotation` in your `config.yaml` file. 
+- You can now configure custom annotations for Houston ingress by setting `astronomer.houston.ingress.annotation` in your `values.yaml` file. 
 - The System Admin **Deployments** list in the Software UI is now paginated. 
-- You can now use the following values in your `config.yaml` file to configure resource allocation for the git-sync relay service:
+- You can now use the following values in your `values.yaml` file to configure resource allocation for the git-sync relay service:
   
     - `astronomer.gitSyncRelay.gitSyncResources`
     - `astronomer.gitSyncRelay.gitDaemonResources`
@@ -722,7 +771,7 @@ Astronomer Software 0.31 includes new default resource limits and requests on th
 
 You might experience OOMKill errors or unexpected behavior after upgrading if you use resources beyond the new default limits. To minimize disruption, view resource usage for these components in [Grafana](grafana-metrics.md) prior to upgrade and compare this usage to the default resource limits in the [Astronomer Helm chart](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/values.yaml). 
 
-If your current usage is expected and higher than the default resource limits, update the limits in your `config.yaml` file before upgrading to Astronomer Software 0.31.
+If your current usage is expected and higher than the default resource limits, update the limits in your `values.yaml` file before upgrading to Astronomer Software 0.31.
 
 ### Additional improvements 
 
@@ -756,10 +805,10 @@ Release date: September 15, 2023
 
 ### Additional improvements
 
-- You can now configure credentials for a registry backend as Kubernetes secrets in your `config.yaml` file. See [Configure a registry backend](registry-backend.md).
+- You can now configure credentials for a registry backend as Kubernetes secrets in your `values.yaml` file. See [Configure a registry backend](registry-backend.md).
 - You can now disable Airflow and platform alerts on the Prometheus alerts dashboard by setting `prometheus.defaultAlerts.airflow.enabled` and `prometheus.defaultAlerts.airflow.enabled` to `false` in your Prometheus Helm chart. If you disable these alerts, you can still add back specific alerts or configure custom alerts using `prometheus.defaultAlerts.additionalAlerts`. See [Create custom alerts](platform-alerts.md#create-custom-alerts).
 - You no longer have to set `elasticsearch.curator.age.timestring` when you configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars). The only required value is now `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern`. 
-- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `config.yaml` file. 
+- You can now configure a service account specifically for your image registry using by setting `astronomer.registry.serviceaccount` in your `values.yaml` file. 
 - The Kibana logging dashboard now includes a default index. 
 - Added support for [Kubernetes 1.27](https://kubernetes.io/blog/2023/04/11/kubernetes-v1-27-release/).
 
@@ -806,13 +855,13 @@ Release date: May 26, 2023
 
 ### Additional improvements
 
-- You can now configure custom environment variables for ElasticSearch-based custom logging using the `astronomer.customLogging.extraEnv` value in your `config.yaml` file.
+- You can now configure custom environment variables for ElasticSearch-based custom logging using the `astronomer.customLogging.extraEnv` value in your `values.yaml` file.
 - You can now configure `prometheus.config.scrape_configs.kubernetes_apiservers.tls_config.insecure_skip_verify` in the Prometheus Helm chart.
-- You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `config.yaml` file.
-- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `config.yaml` file.
+- You can now set `astronomer.houston.config.deployments.helm.prometheus.certgenerator.extraAnnotations` in your `values.yaml` file.
+- You can now configure a custom indexing pattern for [Vector logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) by setting both `elasticsearch.curator.age.timestring` and `astronomer.houston.config.deployments.helm.loggingSidecar.indexPattern` in your `values.yaml` file.
 - The Software UI now shows a warning message for Deployments currently running an Astronomer Certified image. Only System Admins can create Deployments with deprecated Astronomer Certified images by setting `deployments.enableSystemAdminCanCreateDeprecatedAirflows` to `true`.
 - Grafana now includes an **Astronomer Houston Dashboard** that you can use to view Houston metrics. 
-- Improved signalling between primary Kubernetes containers and the logging sidecar so that you no longer have to set `global.loggingSidecar.terminationEndpoint` in your `config.yaml` file.
+- Improved signalling between primary Kubernetes containers and the logging sidecar so that you no longer have to set `global.loggingSidecar.terminationEndpoint` in your `values.yaml` file.
 
 ### Bug fixes
 
@@ -937,11 +986,11 @@ Release date: October 26, 2022
 ### Additional improvements
 
 - You can now configure custom Alertmanager receivers with their own rules and topics using `customReceiver` in the Alertmanager Helm chart.
-- You can now limit which Runtime versions are available for new Deployments using `astronomer.minAstroRuntimeVersion` and `astronomer.airflowMinimumAstroRuntimeVersion` in your `config.yaml` file.
+- You can now limit which Runtime versions are available for new Deployments using `astronomer.minAstroRuntimeVersion` and `astronomer.airflowMinimumAstroRuntimeVersion` in your `values.yaml` file.
 - You can now configure a `livenessProbe` and `readinessProbe` specific to Prometheus in the Prometheus Helm chart.
-- You can now pass extra environment variables to [logging sidecars](export-task-logs.md#configure-logging-sidecars) using `global.loggingSidecar.extraEnv` in your `config.yaml` file.  
-- You can now define resource requests for [logging sidecars](export-task-logs.md#configure-logging-sidecars) using `global.loggingSidecar.resources` in your `config.yaml` file. 
-- You can now configure whether introspection APIs are available in GraphQL using `astronomer.apollo.introspection` in your `config.yaml` file.
+- You can now pass extra environment variables to [logging sidecars](export-task-logs.md#configure-logging-sidecars) using `global.loggingSidecar.extraEnv` in your `values.yaml` file.  
+- You can now define resource requests for [logging sidecars](export-task-logs.md#configure-logging-sidecars) using `global.loggingSidecar.resources` in your `values.yaml` file. 
+- You can now configure whether introspection APIs are available in GraphQL using `astronomer.apollo.introspection` in your `values.yaml` file.
 
 ### Bug fixes
 
@@ -950,7 +999,7 @@ Release date: October 26, 2022
 - Fixed an issue where upgrading a Deployment from Airflow 1.10.15 to 2.3 prevented you from configuring Deployment resources in the Software UI.
 - Added protections for using Arm-based Runtime images in Software Deployments.
 - Fixed an issue where some Deployments failed when pulling secrets from a private Docker registry.
-- Fixed an issue where some email alerts for unhealthy Deployments would not send if `namespaceFreeFormEntry: true` was set in `config.yaml`.
+- Fixed an issue where some email alerts for unhealthy Deployments would not send if `namespaceFreeFormEntry: true` was set in `values.yaml`.
 - Fixed an issue where you could not view Deployment-level service accounts in the Software UI.
 - Fixed an issue where token refreshing could break when the token didn't have a properly formatted date.
 - Suppressed some extraneous ElasticSearch logs that made parsing logs for relevant information difficult.
@@ -1011,7 +1060,7 @@ As part of this change, you can now configure `jwt.authDuration` in your [Housto
 
 - Workspace users are now paginated in the Software UI.
 - You can now configure credentials for a private image registry by specifying a secret you create instead of a username and password. The secret is attached to any Pods that need to access the registry.
-- You can now specify `authUrlParams` for your identity provider (IdP) in `config.yaml`.
+- You can now specify `authUrlParams` for your identity provider (IdP) in `values.yaml`.
 - System Editors can no longer manage Teams or users in a Workspace. These permissions are now available only at the System Admin level.
 
 ### Bug fixes
@@ -1020,7 +1069,7 @@ As part of this change, you can now configure `jwt.authDuration` in your [Housto
 - Fixed an issue where applying an IAM role to a Deployment would reset the Deployment's **Extra Capacity** setting back to the default of 0 AU.
 - Fixed an issue where System Admins could receive an error when trying to view a Team imported from a different IdP than their current one.
 - When a System Admin makes a change to a Team, that change now appears in the UI without needing to refresh the page.
-- Configurations for disabling a specific executor type in `config.yaml` are now reflected in the Software UI.
+- Configurations for disabling a specific executor type in `values.yaml` are now reflected in the Software UI.
 - Fixed an issue where Workspace-level service accounts could view Deployment information from Deployments outside of their Workspace.
 - Fixed an issue where updating the role of a user in a Team using the Astro CLI would not throw an error as expected.
 - Fixed an issue where JSON web tokens persisted after a user logged out if `idpGroupsRefreshEnabled` was set to `false`.
@@ -1059,7 +1108,7 @@ Release date: September 13, 2022
 
 ### Additional improvements
 
-- You can now specify `authUrlParams` for your identity provider (IdP) in `config.yaml`
+- You can now specify `authUrlParams` for your identity provider (IdP) in `values.yaml`
 - Added error handling for upgrading a Software installation on an unsupported upgrade path
 
 ### Bug fixes
@@ -1159,7 +1208,7 @@ The process for configuring namespace pools has been simplified. As an alternati
 - You can now disable all network policies for Airflow components using the Astronomer Helm chart
 - System Admins can now view all Workspaces on their installation by default
 - User auth tokens for the Software UI are now stored in httpOnly cookies
-- When importing IdP groups as teams, you can now configure a `teamFilterRegex` in `config.yaml` to filter out IdP groups from being imported using regex
+- When importing IdP groups as teams, you can now configure a `teamFilterRegex` in `values.yaml` to filter out IdP groups from being imported using regex
 - Added support for audit logging when a user interacts with the Houston API. This includes actions within the Software UI
 
 ### Bug fixes
@@ -1167,7 +1216,7 @@ The process for configuring namespace pools has been simplified. As an alternati
 - Fixed an issue in Deployments running Airflow 2.3+ where logs for dynamically mapped tasks did not have a correct `log_id`
 - Fixed a typo in the `loadBalancerIP` key in the Nginx Helm chart
 - Fixed an issue where Azure AD connect sync did not work with Astronomer's Teams feature
-- Fixed an issue where upgrades would fail if you had changed `networkNSLabels` from `true` to `false` in `config.yaml`
+- Fixed an issue where upgrades would fail if you had changed `networkNSLabels` from `true` to `false` in `values.yaml`
 
 ## v0.28.8
 
@@ -1211,7 +1260,7 @@ Release date: September 21, 2022
 
 ### Additional improvements
 
-- You can now specify `authUrlParams` for your identity provider (IdP) in `config.yaml`
+- You can now specify `authUrlParams` for your identity provider (IdP) in `values.yaml`
 - Added support for Kubernetes 1.21, 1.22, and 1.23
 - Upgraded Prometheus to the LTS release of 2.37.0
 
@@ -1246,7 +1295,7 @@ Release date: April 8, 2022
 - Users added to Astronomer Software via an [IDP group](import-idp-groups.md) no longer need to be invited by email in order to join Astronomer.
 - Teams now support [Azure AD Connect sync](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts) for user groups.
 - System admins can no longer remove the last user from an active Workspace or Deployment. This ensures that a given Workspace or Deployment can always be deleted by an existing member. Similarly, Workspace Admins can no longer remove a Team if doing so results in a Workspace having zero Admins.
-- You can now map your IDP's groups claim to Astronomer's expected claim of `groups` via the `astronomer.houston.config.auth.openidConnect.<idp>.claimsMapping` setting in `config.yaml`.
+- You can now map your IDP's groups claim to Astronomer's expected claim of `groups` via the `astronomer.houston.config.auth.openidConnect.<idp>.claimsMapping` setting in `values.yaml`.
 ### Bug Fixes
 
 - Fixed an issue where deleted Teams did not disappear from the Software UI until you refreshed the page
@@ -1298,8 +1347,8 @@ You now can import existing identity provider (IDP) groups into Astronomer Softw
 
 ### Additional Improvements
 
-- Astronomer now supports `prefer` and `require` SSL modes for connecting to PGBouncer. You can set this SSL mode via the `global.ssl.mode` value in your `config.yaml` file. Note that in v0.28.0, this feature works only with AWS and Azure.
-- You can now set [Grafana environment variables](https://grafana.com/docs/grafana/latest/administration/configuration/#override-configuration-with-environment-variables) using the `grafana.extraEnvVars` setting in your `config.yaml` file.
+- Astronomer now supports `prefer` and `require` SSL modes for connecting to PGBouncer. You can set this SSL mode via the `global.ssl.mode` value in your `values.yaml` file. Note that in v0.28.0, this feature works only with AWS and Azure.
+- You can now set [Grafana environment variables](https://grafana.com/docs/grafana/latest/administration/configuration/#override-configuration-with-environment-variables) using the `grafana.extraEnvVars` setting in your `values.yaml` file.
 - Added a new **Ephemeral Storage Overwrite Gigabytes** slider to the Git Sync configuration screen. You can configure this slider to allocate more memory for syncing larger Git repos.
 - Added a new **Sync Timeout** slider to the Git Sync configuration screen. You can configure this slider to set a maximum allowed length of time for syncing a Git repo.
 
@@ -1363,7 +1412,7 @@ You can now configure a Git repo to continually push DAGs to an Astronomer Deplo
 
 ### External ElasticSearch Logging
 
-Custom ElasticSearch logging tools are now supported via new values in your `config.yaml` file:
+Custom ElasticSearch logging tools are now supported via new values in your `values.yaml` file:
 
 ```yaml
 # External ES logging
@@ -1390,7 +1439,7 @@ By default, the Astronomer CLI uses Docker to execute a few specific commands. A
 - Fixed an issue where redeployments could clobber existing annotations for namespaces
 - Fixed an issue where new Deployments could potentially generate invalid usernames for Celery and the metadata DB
 - Fixed an issue where scheduler, webserver, and worker logs were not accessible via the Astronomer CLI
-- Fixed an issue where where setting extra volumes via `config.yaml` did not work when NFS DAG deploys were enabled.
+- Fixed an issue where where setting extra volumes via `values.yaml` did not work when NFS DAG deploys were enabled.
 
 ## 0.26.7
 
@@ -1445,8 +1494,8 @@ The flag prints out different levels of logs depending on the value that you pas
 
 ### Minor Improvements
 
-- You can now create a custom set of cluster-level permissions for the Astronomer Commander service by setting `astronomer.global.clusterRoles: false` in your `config.yaml` file and pushing a new [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to a pre-created Kubernetes namespace.
-- In the `astronomer.houston.config` section of your `config.yaml` file, you can now configure a list of `allowedSystemLevelDomains []`. If you configure this list, only users with emails from domains specified in the list (for example, `<company>.com`) can be granted System Admin privileges.
+- You can now create a custom set of cluster-level permissions for the Astronomer Commander service by setting `astronomer.global.clusterRoles: false` in your `values.yaml` file and pushing a new [RoleBinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to a pre-created Kubernetes namespace.
+- In the `astronomer.houston.config` section of your `values.yaml` file, you can now configure a list of `allowedSystemLevelDomains []`. If you configure this list, only users with emails from domains specified in the list (for example, `<company>.com`) can be granted System Admin privileges.
 - Greatly improved load times for the **System Admin** page in the UI.
 - You can now specify a node port for 3rd party ingress controllers with a service type of `nodePort`.
 - The naming format of service account pods has been changed from `<release-name>-dags-prod-worker-serviceaccount` to `release_name-dags-prod-airflow-worker`.
@@ -1456,4 +1505,4 @@ The flag prints out different levels of logs depending on the value that you pas
 - Fixed an issue where you could not update an existing Deployment's IAM role via the Astronomer CLI
 - Fixed an issue where Deployments would not work on clusters with custom domains
 - Fixed error handling when interacting with a Deployment that wasn't fully spun up
-- Added a new validation step for Airflow Helm chart values configured in the `astronomer.houston.config.deployments.helm.airflow` section of `config.yaml`
+- Added a new validation step for Airflow Helm chart values configured in the `astronomer.houston.config.deployments.helm.airflow` section of `values.yaml`

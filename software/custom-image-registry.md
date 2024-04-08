@@ -57,8 +57,8 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::
 
-2. Open your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
-3. Add the following to your `config.yaml` file:
+2. Open your `values.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+3. Add the following to your `values.yaml` file:
 
     ```yaml
     astronomer:
@@ -119,9 +119,9 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::
 
-2. Open your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+2. Open your `values.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
 
-3. Add the following to your `config.yaml` file:
+3. Add the following to your `values.yaml` file:
 
     ```yaml
     astronomer:

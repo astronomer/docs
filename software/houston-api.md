@@ -172,7 +172,7 @@ Here, `<airflow-executor>` can be `LocalExecutor`, `CeleryExecutor`, or `Kuberne
 
 :::info 
 
-The `upsertDeployment` mutation is behind a feature flag. To enable this feature, set the following configuration in your `config.yaml` file:
+The `upsertDeployment` mutation is behind a feature flag. To enable this feature, set the following configuration in your `values.yaml` file:
 
 ```yaml
 astronomer:

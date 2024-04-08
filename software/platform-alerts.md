@@ -81,7 +81,7 @@ For more information on building and configuring receivers, refer to [Prometheus
 
 ### Push alert receivers to Astronomer
 
-To add a new receiver to Astronomer, add your receiver configuration to your `config.yaml` file and push the changes to your installation as described in [Apply a config change](apply-platform-config.md). The receivers you add must be specified in the same order and format as they appear in the Alertmanager Helm chart. Once you push the alerts to Astronomer, they are automatically added to the [Alertmanager ConfigMap](https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/templates/alertmanager-configmap.yaml).
+To add a new receiver to Astronomer, add your receiver configuration to your `values.yaml` file and push the changes to your installation as described in [Apply a config change](apply-platform-config.md). The receivers you add must be specified in the same order and format as they appear in the Alertmanager Helm chart. Once you push the alerts to Astronomer, they are automatically added to the [Alertmanager ConfigMap](https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/templates/alertmanager-configmap.yaml).
 
 ## Create custom alerts
 
@@ -107,7 +107,7 @@ prometheus:
           description: If more than 2 Airflow schedulers are not heartbeating for more than 5 minutes, this alert fires.
 ```
 
-To push custom alerts to Astronomer, add them to the `AdditionalAlerts` section of your `config.yaml` file and push the file with Helm as described in [Apply a config change](apply-platform-config.md).
+To push custom alerts to Astronomer, add them to the `AdditionalAlerts` section of your `values.yaml` file and push the file with Helm as described in [Apply a config change](apply-platform-config.md).
 
 After you've pushed the alert to Astronomer, make sure that you've configured a receiver to subscribe to the alert. For more information, read [Subscribe to Alerts](platform-alerts.md#subscribe-to-alerts).
 
