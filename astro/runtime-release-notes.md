@@ -42,20 +42,25 @@ Astro Runtime 11.0.0 includes same-day support for Apache Airflow 2.9, which inc
 - You can now create your own labels for dynamically mapped tasks with templates, instead of identifying them by searching through index numbers.
 - UI improvements that include filtering, viewing, and creating Datasets through the UI, the ability to localize `dag_id` and `task_id` names, task log grouping, and improvements to DAG-level views such as calendar, run duration, and the audit log.
 
-For more information about the major changes in this release, see the [Airflow Blog](https://airflow.apache.org/blog/airflow-2.9.0/).
+For more information about the major changes in this release, see the [Airflow Blog](https://airflow.apache.org/blog/airflow-2.9.0/) or the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#airflow-2-9-0-2024-04-08).
 
 ### Upgrade to Python 3.12
 
 Airflow and the Astro Runtime now support Python 3.12. However, Pendulum 2 does not support Python 3.12. If you upgrade to Python 3.12 and want to use Airflow, you also need to upgrade to Pendulum 3.
 
+Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/2.9.0/release_notes.html#official-support-for-python-3-12-38025) for more information about any limitations in Python 3.12 support.
+
 ### Additional improvements
 
-- New Listener API methods are considered stable and suitable for use in production
-
+- New Listener API methods are considered stable and suitable for use in production. <!--https://github.com/apache/airflow/pull/36376-->
+- Added the ability to automatically set a DAG to `off` after a pre-defined number of sequentially failed runs. <!--https://github.com/apache/airflow/pull/36935-->
+- Dataset URIs are validated when you enter them, and must conform to the rules set in AIP-60. See the [Dataset documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html) for more information.<!--https://github.com/apache/airflow/pull/37005-->
 
 ### Bug fixes
 
-
+- Fix a bug where after a task failed, and no longer exists in a DAG, you can now still access details about the DAG in the Grid View of the Airflow UI. <!--https://github.com/apache/airflow/pull/38511-->
+- Fix a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`. <!--https://github.com/apache/airflow/pull/37498-->
+- In the Python task decorator, you can only have `None` as the default parameter for context parameters. <!--https://github.com/apache/airflow/pull/38015-->
 
 ## Astro Runtime 10.6.0
 
