@@ -48,9 +48,9 @@ The mathematical properties of DAGs make them useful for building data pipelines
 
     ![Visualization of two graphs with 4 nodes each. The first graph is acyclic, there are no circles defined between the nodes. In the second graph a dependency is added between task 4 and task 1, meaning task 1 depends on task 4. This creates a circle because task 4 is downstream of task 1. Only the first graph would be possible to define in Airflow.](/img/guides/dags_acyclic_vs_cyclic.png)
 
-- **Graph**: A DAG is a graph, which is a structure consisting of nodes and edges. In Airflow, nodes are tasks and edges are dependencies between tasks.
+- **Graph**: A DAG is a graph, which is a structure consisting of nodes and edges. In Airflow, nodes are tasks and edges are dependencies between tasks. Defining workflows as graphs helps you visualize the entire workflow in a way that's easy to navigate and conceptualize.
 
-After a DAG meets these requirements, it can be as simple or as complicated as you need! You can define tasks that run in parallel or sequentially, implement conditional branches, and visually group tasks together in [task groups](task-groups.md).
+Beyond these requirements, a DAG can be as simple or as complicated as you need! You can define tasks that run in parallel or sequentially, implement conditional branches, and visually group tasks together in [task groups](task-groups.md).
 
 Each task in a DAG performs one unit of work. Tasks can be anything from a simple Python function to a complex data transformation or a call to an external service. They are defined using [Airflow operators](what-is-an-operator.md) or [Airflow decorators](airflow-decorators.md). The dependencies between tasks can be set in different ways (see [Managing Dependencies](managing-dependencies.md)).
 
@@ -234,14 +234,14 @@ Astronomer recommends creating one Python file for each DAG and naming it after 
 
 In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task.
 
-The DAGs in the previous section have the following basic parameters defined:
+The DAGs in the previous section have the following basic parameters defined. It's best practice to always define these parameters for any DAGs you create:
 
 - `dag_id`: The name of the DAG. This must be unique for each DAG in the Airflow environment. When using the `@dag` decorator and not providing the `dag_id` parameter name, the function name is used as the `dag_id`.
 - `start_date`: The date and time after which the DAG starts being scheduled.
 - `schedule`: The schedule for the DAG. There are many different ways to define a schedule, see [Scheduling in Airflow](scheduling-in-airflow.md) for more information.
 - `catchup`: Whether the scheduler should [backfill all missed DAG runs](rerunning-dags.md#catchup) between the current date and the start date when the DAG is unpaused. It is a best practice to always set it to `False` unless you specifically want to backfill missed DAG runs.
 
-There are many more DAG-level parameters, see the [DAG-level parameters](airflow-dag-parameters.md) guide for a complete list.
+There are many more DAG-level parameters that let you configure anything from resource usage to the DAG's appearance in the Airflow UI. See [DAG-level parameters](airflow-dag-parameters.md) for a complete list.
 
 ## See also 
 
