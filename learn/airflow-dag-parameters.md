@@ -52,7 +52,7 @@ Some parameters can be used to scale your DAG's resource usage in Airflow. See [
 |-------------------------------------|-------------|
 | `max_active_tasks`                  | The number of task instances allowed to run concurrently for all DAG runs of this DAG. This parameter replaces the deprecated `concurrency`. |
 | `max_active_runs`                   | The number of active DAG runs allowed to run concurrently for this DAG. |
-| `max_consecutive_failed_dag_runs`   | (experimental) The maximum number of consecutive failed DAG runs, after which the scheduler will disable this DAG. |
+| `max_consecutive_failed_dag_runs`   | (experimental, added in Airflow 2.9) The maximum number of consecutive failed DAG runs, after which the scheduler will disable this DAG. |
 
 ## Callback parameters
 
