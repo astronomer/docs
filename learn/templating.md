@@ -136,6 +136,80 @@ with DAG(..., template_searchpath="/tmp") as dag:
 </TabItem>
 </Tabs>
 
+### Templating additional fields
+
+If you need to template a field that is not listed in the operator's `template_fields`, you can either set the `template_fields` attribute on a task or create a custom operator.
+The following examples demonstrate how to use each method to template the `cwd` field of the BashOperator.
+
+<Tabs
+    defaultValue="task"
+    groupId="templating-additional-fields"
+    values={[
+        {label: 'Set the template_fields attribute', value: 'task'},
+        {label: 'Create a custom Operator', value: 'operator'},
+    ]}>
+<TabItem value="task">
+
+After defining a task and assigning it to a Python variable, you can modify its `template_fields` attribute. This allows you to enable Jinja templating for any field that is not templated by default.
+
+This method is preferable when you need to template a field only once. 
+
+```python
+    from airflow.decorators import dag
+    from airflow.operators.bash import BashOperator
+    from airflow.utils.dates import days_ago
+
+
+    @dag(schedule=None, start_date=days_ago(1))
+    def templating_dag():
+        bash_task = BashOperator(
+            task_id="set_template_field",
+            bash_command="script.sh",
+            cwd="/usr/local/airflow/{{ ds }}",
+        )
+        bash_task.template_fields = ("bash_command", "env", "cwd")
+
+    templating_dag()
+```
+
+</TabItem>
+<TabItem value="operator">
+
+You can create a custom operator with additional templated fields by subclassing the desired operator class and adding your desired field to the `template_fields` argument.
+In this example, TemplatedBashOperator is a new operator that inherits the behavior of BashOperator and allows Jinja templating of the `cwd` field.
+
+This method is preferred if you need to template a field repeatedly.
+
+For existing projects, naming your custom operator the same as the existing one simplifies refactoring by allowing you to only modify imports, minimizing the required code changes.
+
+```python
+    from airflow.decorators import dag
+    from airflow.operators.bash import BashOperator
+    from airflow.utils.dates import days_ago
+    from typing import TYPE_CHECKING
+
+    if TYPE_CHECKING:
+        from collections.abc import Sequence
+
+
+    class TemplatedBashOperator(BashOperator):
+        template_fields: Sequence[str] = ("bash_command", "env", "cwd")
+
+
+    @dag(schedule=None, start_date=days_ago(1))
+    def templating_dag():
+        bash_task = TemplatedBashOperator(
+            task_id="custom_operator",
+            bash_command="script.sh",
+            cwd="/usr/local/airflow/{{ ds }}",
+        )
+
+    templating_dag()
+```
+
+</TabItem>
+</Tabs>
+
 ### Disable templating
 
 As of Airflow 2.8 it is possible to use a wrapper class to disable templating for the input to a templatable field without needing to modify the operator itself. This is useful when you want to pass a string that contains Jinja syntax to an operator without it being rendered. For example, you may want to pass a Jinja template to a `BashOperator` that will not be rendered. This can be achieved by wrapping the string into the `literal` function:

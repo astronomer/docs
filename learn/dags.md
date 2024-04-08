@@ -21,7 +21,7 @@ In this guide, you'll learn DAG basics and about DAG parameters and how to defin
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: DAGs 101](https://academy.astronomer.io/dag-101-1) module.
+- Astronomer Academy: [Airflow: DAGs 101](https://academy.astronomer.io/path/airflow-101/dag-101-1) module.
 
 :::
 

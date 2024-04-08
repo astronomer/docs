@@ -21,7 +21,7 @@ In this guide you'll:
 
 There are multiple resources for learning about this topic. See also:
 
-- Astronomer Academy: [Airflow: Connections 101](https://academy.astronomer.io/connections-101) module.
+- Astronomer Academy: [Airflow: Connections 101](https://academy.astronomer.io/path/airflow-101/connections-101) module.
 
 :::
 

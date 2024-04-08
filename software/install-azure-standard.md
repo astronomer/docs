@@ -265,7 +265,7 @@ A few additional configuration notes:
 
 ## Step 8: Configure Your Helm chart
 
-:::info 
+:::info
 
 To use a third-party ingress controller for Astronomer, see [Third-Party Ingress Controllers](third-party-ingress-controllers.md).
 
@@ -311,7 +311,7 @@ global:
   # For development or proof-of-concept, you can use an in-cluster database
   postgresqlEnabled: false # Keep True if deploying a database on your AKS cluster.
 
-# SSL support for using SSL connections to encrypt client/server communication between database and Astronomer platform. Enable SSL if provisioning Azure Database for PostgreSQL - Flexible Server as it enforces SSL. Incluster postgres only supports sslmode.enabled = false. Change the setting with respect to the database provisioned. 
+# SSL support for using SSL connections to encrypt client/server communication between database and Astronomer platform. Enable SSL if provisioning Azure Database for PostgreSQL - Flexible Server as it enforces SSL. Incluster postgres only supports sslmode.enabled = false. Change the setting with respect to the database provisioned.
   ssl:
     enabled: true
     mode: "prefer"
@@ -393,7 +393,7 @@ After you run the previous commands, a set of Kubernetes pods are generated in y
 
 ### Alternative ArgoCD installation
 
-You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`.
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
@@ -403,15 +403,15 @@ Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://
 
     - **Path**: The filepath of your `values.yaml` file
     - **Namespace**: The namespace you want to use for Astronomer
-    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer
     - **Repository URL**: `https://helm.astronomer.io`
 
 3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
-   
-4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
-   
+
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI.
+
 5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
-   
+
 6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 
@@ -560,7 +560,7 @@ Check the Airflow namespace. If pods are changing at all, then the Houston API t
 If you have Airflow pods in the state `ImagePullBackoff`, check the pod description. If you see an x509 error, ensure that you have:
 
 - Configured containerd’s `config_path` to point to `/etc/containerd/certs.d`.
-- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
+- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart.
 
 If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `values.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
 
@@ -577,7 +577,7 @@ To help you make the most of Astronomer Software, Astronomer recommends reviewin
 
 If you have feedback or need help during the installation process, here are some recommended resources:
 
-* [Community Forum](https://forum.astronomer.io): General Airflow + Astronomer FAQs
+* [Community Forum](https://forum.astronomer.io): Search previously asked questions about Airflow + Astronomer FAQs
 * [Astronomer Support Portal](https://support.astronomer.io/hc/en-us/): Platform or Airflow issues
 
 For guidelines on contacting Astronomer Support, see [Submit a support request](support.md).
