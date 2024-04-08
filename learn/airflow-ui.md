@@ -9,7 +9,7 @@ One of the main features of Airflow is its [user interface (UI)](https://airflow
 
 This guide is an overview of some of the most useful features and visualizations in the Airflow UI. If you're not already using Airflow and want to get it up and running to follow along, see [Install the Astro CLI](https://docs.astronomer.io/astro/cli/get-started) to quickly run Airflow locally.
 
-All images in this guide were taken from an [Astronomer Runtime](https://docs.astronomer.io/astro/runtime-release-notes) Airflow image. Other than some modified colors and an additional **Astronomer** tab, the UI is the same as when using OSS Airflow. The images in this guide are from Airflow version 2.7, if you are using an older version of Airflow, some UI elements might be slightly different or missing.
+All images in this guide were taken from an [Astronomer Runtime](https://docs.astronomer.io/astro/runtime-release-notes) Airflow image. Other than some modified colors and an additional **Astronomer** tab, the UI is the same as when using OSS Airflow. The images in this guide are from Airflow version 2.9. If you are using an older version of Airflow, some UI elements might be slightly different or missing.
 
 :::tip Other ways to learn
 
@@ -31,7 +31,7 @@ To get the most out of this guide, you should have an understanding of:
 
 The **DAGs** view is the landing page when you sign in to Airflow. It shows a list of all your DAGs, the status of recent DAG runs and tasks, the time of the last DAG run, and basic metadata about the DAG like the owner and the schedule. To see the status of the DAGs update in real time, toggle **Auto-refresh**.
 
-![DAGs View](/img/guides/airflow-ui_DAGs_overview.png)
+![Screenshot of the Airflow UI DAGs view showing several DAGs with their run history and current run status.](/img/guides/airflow-ui_DAGs_overview.png)
 
 In the DAGs view you can:
 
@@ -43,40 +43,44 @@ In the DAGs view you can:
 
 To see more information about a specific DAG, click its name or use one of the links.
 
-## Grid view
+## Individual DAG view
 
-The **Grid** view is the main DAG view and gives you detailed insights into a specific DAG, including its DAG runs and task instances. 
+The **DAG** view gives you detailed insights into a specific DAG, including its DAG runs and task instances. 
 
-On the left side the **Grid** view shows a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run, and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered by a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
+On the left side you can see a grid representation of the DAG's previous runs, including their duration and the outcome of all individual task instances. Each column represents a DAG run, and each square represents a task instance in that DAG run. Task instances are color-coded according to their status. A small play icon on a DAG run indicates that a run was triggered manually, and a small dataset icon shows that a run was triggered by a [dataset update](https://astronomer.io/guides/airflow-datasets). If no icon is shown, the DAG ran according to its schedule.
 
-![Grid view left side](/img/guides/airflow-ui_grid_left_side.png)
+![Screenshot of the Airflow UI DAG view of an individual DAG. The left side with the DAG grid view is highlighted.](/img/guides/airflow-ui_grid_left_side.png)
 
 On the right side you can see further details about the item (DAG, DAG run or task instance) that is currently selected. 
 
-![Grid view right side](/img/guides/airflow-ui_grid_right_side.png)
+![Screenshot of the Airflow UI DAG view of an individual DAG. The right side with the DAG details is highlighted.](/img/guides/airflow-ui_grid_right_side.png)
 
-When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the **Grid** view, several action buttons appear:
+When a DAG run, task instance, or [task group](task-groups.md) instance is selected in the DAG grid, several action buttons appear:
 
-![Grid actions](/img/guides/airflow-ui_grid_actions.png)
+![Screenshot of the Airflow UI DAG view shown when an individual task instances is selected with 3 additional buttons available.](/img/guides/airflow-ui_grid_actions.png)
 
 - **Clear** / **Clear task** : This button will clear the selected DAG run, task group instance, or task instance and run it again. This is useful if you want to re-run a task or DAG run that has failed or during local development. After clicking **Clear task** you will be offered a detailed interface controlling which task instances should be cleared and rerun. See [Manually rerun tasks or DAGs](rerunning-dags.md#manually-rerun-tasks-or-dags).
 - **Mark state as...**: This button allows you to mark the selected DAG run, task group instance or task instance as successful or failed without running it. This option is often useful when the root cause of a task failure was fixed manually in the external data tool and there's no need to rerun the task. Many data teams leverage [Task Instance Notes and DAG Run Notes](rerunning-dags#add-notes-to-cleared-tasks-and-dags) in order to document the reason for marking a task instance as failed or successful.
-- **Clear Task Filter**: This button allows you to filter the tasks shown in the **Grid** view based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task. 
+- **Filter Tasks**: This button allows you to filter the tasks shown in the DAG grid and DAG graph based on task dependencies. For example, when you select **Filter downstream**, the UI shows only the tasks downstream of your selected task. 
 
-![Grid filter](/img/guides/airflow-ui_grid_filter.gif)
+![Gif of the Airflow DAG view showing how applying the filters 'Filter downstream' and 'Filter upstream' affect the grid to the left and the DAG graph.](/img/guides/airflow-ui_grid_filter.gif)
 
-There are several tabs available within the **Grid** view:
+There are several tabs available within the **DAG** view:
 
 - **Details**: Shows more details about the DAG, DAG run or task instance.
-- **Graph**: Shows a graph representation of the DAG.
+- **Graph**: Shows a graph representation of the DAG or DAG run.
 - **Gantt**: Shows the duration of each task instance in a DAG run as a Gantt chart.
 - **Code**: Shows the DAG code.
+- **Audit Logs**: Shows the audit logs of the DAG, DAG run or task instance.
+- **Run Duration**: (only available when the DAG itself is selected) Shows the duration of each DAG run over time.
+- **Calendar**: (only available when the DAG itself is selected) Shows the state of DAG runs overlaid on a calendar.
 - **Logs**: (only available when a task instance is selected) Shows the logs of a task instance.
 - **XCom**: (only available when a task instance is selected) Shows the XComs pushed by a task instance.
+- **Task Duration**: (only available when a task instance is selected) Shows the duration of task instances of a task over time.
 
 :::tip
 
-In Airflow 2.7 and later, the **Grid** view includes keyboard shortcuts. You can see all available shortcuts by pressing `shift` + `/` while in the **Grid** view.
+In Airflow 2.7 and later, the DAG view includes keyboard shortcuts. You can see all available shortcuts by pressing `shift` + `/` while in the DAG view.
 
 :::
 
@@ -84,28 +88,27 @@ In Airflow 2.7 and later, the **Grid** view includes keyboard shortcuts. You can
 
 The **Details** tab displays information about the DAG, individual DAG runs, and in-depth information about each task instance. Here you can find information like total historic runs of a DAG, the data interval start of a DAG run, and the duration of a task instance. 
 
-To access the details of a specific DAG run or task instance, you need first need to select it in the grid as shown in the following gif:
+To access the details of a specific DAG run or task instance, you need first need to select it in the DAG grid as shown in the following gif:
 
-![Grid view details](/img/guides/airflow-ui_grid_details.gif)
+![Gif showing how to select a specific DAG run or task instance in the DAG grid.](/img/guides/airflow-ui_grid_details.gif)
 
-When you select a task instance in the **Grid** view, four additional options appear underneath the tabs:
+When you select a task instance in the DAG grid, three additional options appear underneath the tabs:
 
-![Grid view task instance](/img/guides/airflow-ui_grid_ti_options.png)
+![Screenshot of details shown when a task instance is selected with three additional options.](/img/guides/airflow-ui_grid_ti_options.png)
 
 - **More Details:**  Shows all attributes of a task, including variables and templates.
 - **Rendered Template:** Shows the task's metadata after it has been templated.
-- **XCom:** Shows XComs created by that particular task instance.
 - **List Instances, all runs:** Shows a historical view of task instances and statuses for that particular task.
 
 ### Graph
 
-In Airflow version 2.6 and later, the **Grid** view includes an integrated graph visualization of the tasks and dependencies in your DAG. If you select a task or task group instance in the **Grid** column, the graph highlights and zooms to the selected task. You can also navigate complex DAGs using **Filter Tasks** and the minimap. This view is useful to explore the DAG structure and task dependencies.
+The **Graph** tab shows a  graph visualization of the tasks and dependencies in your DAG, including [Airflow datasets](airflow-datasets.md) a DAG is scheduled on or updates. If you select a task or task group instance in a DAG grid column, the graph highlights and zooms to the selected task. You can also navigate complex DAGs using **Filter Tasks** option and the minimap. This view is useful to explore the DAG structure and task dependencies.
 
-![Grid graph](/img/guides/airflow-ui_grid_graph.gif)
+![Gif showing how to navigate the DAG graph.](/img/guides/airflow-ui_grid_graph.gif)
 
 :::note
 
-Earlier Airflow versions had a different **Graph** view that was not integrated into the **Grid** view. See the [Airflow documentation of your version](https://airflow.apache.org/docs/apache-airflow/2.6.3/ui.html#graph-view) for more information.
+Earlier Airflow versions had a different **Graph** view that was not integrated into the DAG view. See the [Airflow documentation of your version](https://airflow.apache.org/docs/apache-airflow/2.6.3/ui.html#graph-view) for more information.
 
 :::
 
@@ -113,45 +116,44 @@ Earlier Airflow versions had a different **Graph** view that was not integrated 
 
 Under the **Code** tab you can access the code that generates the DAG you are viewing. While your code should live in source control, the **Code** tab provides a quick insight into what is going on in the DAG. DAG code can't be edited in the UI.
 
-![Grid code](/img/guides/airflow-ui_grid_code.png)
+![Screenshot of the Code tab of a DAG showing parts of the DAG code.](/img/guides/airflow-ui_grid_code.png)
 
 This tab shows code only from the file that generated the DAG. It does not show any code that may be imported in the DAG, such as custom hooks or operators or code in your `/include` directory.
 
+### Audit Logs
+
+The **Audit Logs** tab shows a list of events that have occurred in your Airflow environment relating to the DAG, DAG run or task instance you have selected. 
+
+![Screenshot of the Audit Logs tab showing a list of events that have occurred in the Airflow environment for one run of the complex_dag_structure_rainbow DAG.](/img/guides/airflow-ui_grid_audit_logs.png)
+
+### Run Duration
+
+The **Run Duration** tab shows a bar chart of the duration of each DAG run over time.
+
+![Screenshot of the Run Duration tab showing a bar graph of the duration of each DAG run over time.](/img/guides/airflow-ui_grid_run_duration.png)
+
 ### Logs
 
-To access the [logs](logging.md#log-locations) of a specific task instance, click on the **Logs** tab which appears in the **Grid** view, as soon as you select a task instance.
+To access the [logs](logging.md#log-locations) of a specific task instance, click on the **Logs** tab which appears as soon as you select a task instance. By default the logs of the task execution are shown, while the **Pre task execution logs** and the **Post task execution logs** are collapsed and can be expanded by clicking on the respective log item.
 
-![Grid logs](/img/guides/airflow-ui_grid_logs.gif)
-
-:::info Additional DAG views
-
-There are some additional DAG views that are available, but not discussed in this guide:
-
-- **Calendar** view: Shows the state of DAG runs overlaid on a calendar. States are represented by color. If there were multiple DAG runs on the same day with different states, the color is a gradient between green (success) and red (failure).
-- **Task Duration:** Shows a line graph of the duration of each task over time.
-- **Task Tries:** Shows a line graph of the number of tries for each task in a DAG run over time.
-- **Landing Times:** Shows a line graph of the time of day each task started over time.
-- **Details:** Shows details of the DAG configuration and DagModel debug information.
-- **Audit Log:** Shows selected events for all DAG runs.
-
-:::
+![Gif showing how to navigate to the logs of an individual task instance.](/img/guides/airflow-ui_grid_logs.gif)
 
 ## Cluster activity tab
 
-The cluster activity tab was added in Airflow 2.7 and shows aggregated metrics for the entire Airflow cluster. It includes live metrics, such as currently occupied slots in different [pools](airflow-pools.md), unpaused DAGs, and scheduler health.
+The cluster activity tab shows aggregated metrics for the entire Airflow cluster. It includes live metrics, such as currently occupied slots in different [pools](airflow-pools.md), unpaused DAGs, and scheduler health.
 It also includes historical metrics like the states of past DAG runs and task instances, as well as how each DAG run was triggered.
 
-![Cluster activity](/img/guides/airflow-ui_cluster_activity.png)
+![Screenshot of the Cluster Activity tab in the Airflow UI](/img/guides/airflow-ui_cluster_activity.png)
 
 ## Datasets tab
 
-The **Dataset** tab was introduced in Airflow 2.4 in support of the new [dataset-driven scheduling](airflow-datasets.md) feature. The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, as well as all dependencies between datasets and DAGs in a graph.
+The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, as well as all dependencies between datasets and DAGs in a graph.
 
-![Datasets](/img/guides/2_5_Datasets.png)
+![Screenshot of the Datasets tab of the Airflow UI showing several datasets and DAGs.](/img/guides/airflow-ui_datasets_tab.png)
 
-Click a dataset to open the history of all updates to the dataset that were recorded in the Airflow environment.
+Click a dataset to open the history of all updates to the dataset that were recorded in the Airflow environment. You can use the Play button to manually trigger an update to a Dataset.
 
-![Dataset History](/img/guides/2_5_DatasetsDetails.png)
+![Screenshot of the Datasets tab with an individual dataset selected, it is highlighted in the dependency view on the right.](/img/guides/airflow-ui_dataset_details.png)
 
 ## Security tab
 
@@ -163,7 +165,7 @@ On Astro, role-based access control is managed at the platform level. As a resul
 
 The **Security** tab links to multiple pages, including **List Users** and **List Roles**, that you can use to review and manage Airflow role-based access control (RBAC). For more information on working with RBAC, see [Security](https://airflow.apache.org/docs/apache-airflow/stable/security/index.html).
 
-![Security](/img/guides/2_4_SecurityTab.png)
+![Screenshot of the security tab in the Airflow UI selected.](/img/guides/airflow-ui_security_tab.png)
 
 If you are running Airflow on Astronomer, the Astronomer RBAC will extend into Airflow and take precedence. There is no need for you to use Airflow RBAC in addition to Astronomer RBAC. Astronomer RBAC can be managed from the Astronomer UI, so the **Security** tab might be less relevant for Astronomer users.
 
@@ -171,37 +173,37 @@ If you are running Airflow on Astronomer, the Astronomer RBAC will extend into A
 
 The **Browse** tab links to multiple pages that provide additional insight into and control over your DAG runs and task instances for all DAGs in one place.
 
-![Browse](/img/guides/2_4_BrowseTab.png)
+![Screeenshot of the Airflow UI with the Browse tab selected.](/img/guides/airflow-ui_browse_tab.png)
 
 The DAG runs and task instances pages are the easiest way to view and manipulate these objects in aggregate. If you need to re-run tasks in multiple DAG runs, you can do so from this page by selecting all relevant tasks and clearing their status.
 
-![Task Instance](/img/guides/2_4_ListTaskInstance.png)
+![Screenshot of the Airflow UI task instances list view with a filter applied for failed task instances, and the menu for task clearing selected.](/img/guides/airflow-ui_task_instances.png)
 
 The DAG Dependencies view shows a graphical representation of any [cross-DAG](cross-dag-dependencies.md) and dataset dependencies in your Airflow environment.
 
-![DAG Dependencies](/img/guides/2_4_DAGDependencies.png)
+![Screenshot of the DAG Dependencies view showing several DAGs and Datasets that depend on each other.](/img/guides/airflow-ui_DAG_dependencies.png)
 
 Other views on the **Browse** tab include:
 
 - **Jobs:** Shows a list of all jobs that have been completed. This includes executed tasks as well as scheduler jobs.
 - **Audit Logs:** Shows a list of events that have occurred in your Airflow environment that can be used for auditing purposes.
 - **Task Reschedules:** Shows a list of all tasks that have been rescheduled.
-- **Triggers:** Shows any triggers that occurred in this Airflow environment. To learn more about triggers and related concepts added in Airflow 2.2, you can check out the guide on [Deferrable Operators](deferrable-operators.md).
+- **Triggers:** Shows any triggers that occurred in this Airflow environment. To learn more about triggers and related concepts, you can check out the guide on [Deferrable Operators](deferrable-operators.md).
 - **SLA Misses:** Shows any task instances that have missed their SLAs.
 
 ## Admin tab
 
 The **Admin** tab links to pages for content related to Airflow administration that are not specific to any particular DAG. Many of these pages can be used to both view and modify your Airflow environment.
 
-![Admin](/img/guides/2_4_AdminTab.png)
+![Screenshot of the Airflow UI with the Admin tab selected.](/img/guides/airflow-ui_admin_tab.png)
 
 For example, the **Connections** page shows all Airflow connections stored in your environment. Click `+` to add a new connection. For more information, see [Managing your Connections in Apache Airflow](connections.md).
 
-![Connections](/img/guides/2_4_Connections.png)
+![Screenshot of the Connections page showing 2 Airflow connections that have been configured.](/img/guides/airflow-ui_connections_view.png)
 
 Similarly, the XComs page shows a list of all XComs stored in the metadata database and allows you to easily delete them.
 
-![XComs](/img/guides/2_4_XComs.png)
+![Screenshot of the XComs page listing four XComs.](/img/guides/airflow-ui_xcoms_list.png)
 
 Other pages on the **Admin** tab include:
 
@@ -220,7 +222,7 @@ The Docs tab provides links to external Airflow resources including:
 - [The Airflow GitHub repo](https://github.com/apache/airflow)
 - The REST API Swagger and the Redoc documentation
 
-![Docs](/img/guides/2_4_DocsTab.png)
+![Screenshot of the Airflow UI with the Docs tab selected.](/img/guides/airflow-ui_docs_tab.png)
 
 ## Conclusion
 
