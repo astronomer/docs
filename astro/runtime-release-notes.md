@@ -53,7 +53,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 ### Additional improvements
 
 - New Listener API methods are considered stable and suitable for use in production. <!--https://github.com/apache/airflow/pull/36376-->
-- Added the ability to automatically set a DAG to `off` after a pre-defined number of sequentially failed runs. <!--https://github.com/apache/airflow/pull/36935-->
+- Added the ability to automatically pause a DAG after a pre-defined number of sequentially failed runs.
 - Dataset URIs are validated when you enter them, and must conform to the rules set in AIP-60. See the [Dataset documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html) for more information.<!--https://github.com/apache/airflow/pull/37005-->
 
 ### Bug fixes
