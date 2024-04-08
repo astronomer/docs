@@ -37,8 +37,7 @@ Release date: April 5, 2024
 ### Additional improvements
 
 - NGinx now has a dedicated service account with only the required permissions for the service
-- You can now specify an image pull secret for the `privateCaCertsAddToHost.certCopier` image so that you can pull the image from a private registry.
-- The Software UI now includes a notification system so that Astronomer support can post messages related to specific versions of Astronomer Software.
+- You can now specify an image pull secret for the `privateCaCertsAddToHost.certCopier` image so that it can pull the image from a private registry.
 - Added support for [Kubernetes 1.29](https://kubernetes.io/blog/2023/12/13/kubernetes-v1-29-release/).
 - You can now define `additionalScrapeJobs` in the Prometheus Helm chart so that Prometheus scrapes additional jobs on the Astronomer Software cluster. For example, you could add the following configuration to `values.yaml` to scrape a static job:
 
