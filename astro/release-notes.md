@@ -27,7 +27,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## April 3, 2024
 
-### Additional improvements 
+### Additional improvements
 
 - [Deployment health incidents](https://docs.astronomer.io/astro/deployment-health-incidents) are now generally available.
 - [Deployment hibernation](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) is now in public preview.
@@ -52,7 +52,7 @@ Astro API documentation is now hosted at [https://docs.astronomer.io/api](https:
 
 ### Create Deployments with deprecated versions of Astro Runtime
 
-You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes. 
+You can now use the Astro API to create Deployments with deprecated versions of Astro Runtime. Using deprecated Astro Runtime versions is sometimes necessary if you're migrating existing Airflow environments to Astro, or if you need to maintain deprecated environments for testing purposes.
 
 Note that this feature is disabled by default. To use this feature, reach out to your account team and request for the feature to be enabled. See [Run a deprecated Astro Runtime version](https://docs.astronomer.io/astro/upgrade-runtime#run-a-deprecated-astro-runtime-version) for more information.
 
@@ -64,7 +64,7 @@ You can now use the following node instance types for database instances in GCP 
 
 - XLarge Compute Optimized (24 CPU, 48 GiB MEM)
 - XXLarge Compute Optimized (32 CPU, 64 GiB MEM)
-  
+
 See [GCP Hybrid cluster settings](https://docs.astronomer.io/astro/resource-reference-gcp-hybrid#supported-cloud-sql-instance-types) for a list of all available database instance types.
 
 ### Additional improvements
@@ -125,7 +125,7 @@ Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomput
 
 [Organization dashboards](https://docs.astronomer.io/astro/reporting-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
 
-You can also export data from reporting dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
+You can also export data from dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
 
 ### Customize Deployment-level permissions using Deployment roles
 
@@ -205,11 +205,11 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 :::
 
-The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Reporting dashboards](https://docs.astronomer.io/astro/reporting-dashboard) for summaries of each available dashboard.
+The new **Dashboards** page includes a suite of dashboards that you can use to asses the performance of Deployments and DAGs across your entire Organization. Each dashboard focuses on a different aspect of your data pipelines to show you opportunities for cost and performance improvements. You can additionally configure Astro to send you alerts when a given metric reaches a specific threshold. See [Organization Dashboards](https://docs.astronomer.io/astro/reporting-dashboard) for summaries of each available dashboard.
 
 ### Additional improvements
 
-- When you submit a support request from the Astro UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support. 
+- When you submit a support request from the Astro UI, you must now define an **Active Engagement Period** when you or a member of your team can engage with a member of Astronomer support.
 - Workspace Members can now access the **Clusters** view in the Airflow UI for a Deployment.
 
 ### Bug fixes
