@@ -71,7 +71,7 @@ When you receive a report via email, the sender appears as **Sigma Computing**. 
 
 If you toggle **Condition** when setting up your schedule, it allows you to configure a conditional data export, or *dashboard alert*. Instead of sending a report at a specific time interval, it sends a data report when your data meets criteria that you define.
 
-## Create a reporting dashboard alert
+## Create a dashboard alert
 
 A dashboard alert contains a message and a data export that Astro sends when specific criteria are met in one of your reporting metrics. Use dashboard alerts to quickly receive messages and data when your metrics reach a specific threshold, such as when task failures exceed a certain amount.
 

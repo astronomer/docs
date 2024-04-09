@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'View dashboards'
 title: "View metrics across your Organization with dashboards"
-id: reporting-dashboard
+id: organization-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
 ---
 

@@ -44,6 +44,8 @@
 /astro/view-logs#export-task-logs-to-datadog-aws-only /astro/view-logs#export-task-logs-to-datadog 301
 /astro/reporting-dash-exports#export-reporting-data-to-email /astro/reporting-dash-exports#export-reporting-data 301
 /astro/reporting-dash-exports#schedule-an-emailed-data-report   /astro/reporting-dash-exports#schedule-a-data-report 301
+/astro/reporting-dashboard /astro/organization-dashboard 301
+
 
 # tutorial redirects
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
@@ -70,7 +72,7 @@
 # deprecated docs
 /astro/known-limitations /astro 301
 /astro/data-lineage-support-and-compatibility /astro/set-up-data-lineage 301
-/astro/organization-metrics /astro/reporting-dashboard 301
+/astro/organization-metrics /astro/organization-dashboard 301
 
 # redirect base domain cloud links to astro path
 /add-user /astro/add-user 301
