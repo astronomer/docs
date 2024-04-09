@@ -56,7 +56,6 @@ By default, the credentials for Grafana are `admin:admin`. To change the passwor
 
     Replace `<new-password>` with your desired new password.
 
-
 4. Confirm that the change was applied by logging in to Grafana with the new credentials.
 
 ### Filter metrics by Airflow Deployment
