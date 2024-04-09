@@ -192,7 +192,7 @@ module.exports = {
             type: "category",
             label: "Organization dashboards",
             items: ["organization-dashboard",
-            "reporting-dash-exports",
+            "org-dash-exports",
             ],
           },
           ],

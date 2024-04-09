@@ -110,7 +110,7 @@ You can additionally use the new **Workplace Accessor** and **Deployment Admin**
 :::publicpreview
 :::
 
-In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
+In addition to exporting report data with downloads or email, you can now [export reporting data](https://docs.astronomer.io/astro/org-dash-exports) using webhooks. Use webhooks to send your reporting data to services such as Segment, Airtable, or Marketo.
 
 Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomputing.com/docs/webhook-exports) and might experience behavior changes.
 
@@ -125,7 +125,7 @@ Note that webhook exports are a [Sigma feature in beta](https://help.sigmacomput
 
 [Organization dashboards](https://docs.astronomer.io/astro/organization-dashboard) are now in [Public Preview](https://docs.astronomer.io/astro/feature-previews) to use for examining key metrics across your Organization.
 
-You can also export data from dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/reporting-dash-exports) for more information.
+You can also export data from dashboards in the format of your choice. Exports can be triggered on a regular schedule or as an alert when specific criteria are met in your data. Export reporting data to share with other team members or to keep a record of key performance indicators. See [Export reporting data](https://docs.astronomer.io/astro/org-dash-exports) for more information.
 
 ### Customize Deployment-level permissions using Deployment roles
 

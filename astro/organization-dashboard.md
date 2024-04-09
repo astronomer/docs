@@ -29,7 +29,7 @@ Watch the Astro Academy [Reporting](https://academy.astronomer.io/learning-bytes
 
 :::
 
-To view Organization Dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). In addition to viewing the dashboards in the Astro UI, you can also [export and email individual reports](reporting-dash-exports.md).
+To view Organization Dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). In addition to viewing the dashboards in the Astro UI, you can also [export and email individual reports](org-dash-exports.md).
 
 Use the tabs at the bottom of the Astro UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
 

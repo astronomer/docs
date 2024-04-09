@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Export reporting data'
 title: "Export Astro reporting data"
-id: reporting-dash-exports
+id: org-dash-exports
 description: "Export data from Organization Dashboards or configure conditional exports as alerts."
 ---
 import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
