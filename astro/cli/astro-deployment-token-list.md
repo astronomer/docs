@@ -7,10 +7,7 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 
-:::info
-
-This command is only available on Astro.
-
+:::cliastroonly
 :::
 
 List your Astro [Deployment API Token](deployment-api-tokens.md)
