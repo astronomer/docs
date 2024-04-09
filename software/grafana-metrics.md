@@ -30,30 +30,34 @@ By default, users with [System Admin permissions](role-permission-reference.md#d
 > **Note:** As a System Admin, you can see metrics in Grafana for all Airflow Deployments on your cluster. You do not have to be a member of a Workspace to access Grafana metrics for Deployments within that Workspace.
 
 
-## Changing the Grafana Admin Password
+### Change the Grafana admin password
 
-To change the password for the admin user in Grafana using the CLI tool, follow these steps:
+By default, the credentials for Grafana are `admin:admin`. To change the password:
 
-**Access the Grafana Pod:**
-```bash
-kubectl exec -it <grafana_pod_name> bash -n astronomer
-```
-Replace `<grafana_pod_name>` with your Grafana pod's name.
+1. Run the following command to access the Grafana Pod in your Astronomer installation:
 
-**Navigate to the Grafana Configuration Directory:**
-```bash
-cd $GF_PATHS_HOME
-```
+    ```bash
+    kubectl exec -it <grafana-pod-name> bash -n astronomer
+    ```
 
-**Reset the Admin Password:**
-```bash
-grafana-cli admin reset-admin-password '<new_password>'
-```
-Replace `<new_password>` with your desired new password.
+    Replace `<grafana-pod-name>` with thte name of your own Grafana Pod.
 
-**Verify Password Change:**
-After executing the command, the password for the admin user will be updated. You can verify the change by logging in to Grafana with the new credentials.
+2. Run the following command to open the Grafana configuration folder:
 
+    ```bash
+    cd $GF_PATHS_HOME
+    ```
+
+3. Run the following command to reset your Grafana password
+
+    ```bash
+    grafana-cli admin reset-admin-password '<new`-password>'
+    ```
+
+    Replace `<new-password>` with your desired new password.
+
+
+4. Confirm that the change was applied by logging in to Grafana with the new credentials.
 
 ### Filter metrics by Airflow Deployment
 
