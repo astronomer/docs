@@ -134,7 +134,31 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 :::
 
-The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through the Airflow REST API to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table.
+The **DAG Trigger** communication channel works differently from other communication channel types. Instead of sending a pre-formatted alert message, Astro makes a generic request through Airflow's [DagRuns REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG on Astro. You can configure the triggered DAG to complete any action, such as sending a message to your own incident management system or writing data about an incident to a table. 
+
+The following parameters are passed in the API call that hold the metadata about the Alert:
+
+- `conf`: This parameter holds the alert payload:
+  - `alertId`: A unique alert ID
+  - `alertType`: The type of alert triggered
+  - `dagName`: The name of the DAG that triggered the alert
+  - `message`: The detailed message with the cause of the alert
+  
+  
+  An example alert payload:
+  
+  ```json
+    {
+      "dagName": "fail_dag",
+      "alertType": "PIPELINE_FAILURE",
+      "alertId": "d75e7517-88cc-4bab-b40f-660dd79df216",
+      "message": "[Astro Alerts] Pipeline failure detected on DAG fail_dag. \\nStart time: 2023-11-17 17:32:54 UTC. \\nFailed at: 2023-11-17 17:40:10 UTC. \\nAlert notification time: 2023-11-17 17:40:10 UTC. \\nClick link to investigate in Astro UI: https://cloud.astronomer.io/clkya6zgv000401k8zafabcde/dags/clncyz42l6957401bvfuxn8zyxw/fail_dag/c6fbe201-a3f1-39ad-9c5c-817cbf99d123?utm_source=alert\"\\n"
+    }
+
+  ```
+- `note`: This parameter is set to `Triggering DAG on Airflow <url>`
+
+These parameters are accessible in the triggered DAG using the DAG params.
 
 1. Create a DAG that you want to run when the alert is triggered. For example, you can use the following DAG to run arbitrary Python code when the alert is triggered:
 
@@ -152,15 +176,6 @@ The **DAG Trigger** communication channel works differently from other communica
   ):
 
       def _register_incident(params: dict[str, Any]):
-          # Here you can run arbitrary Python code. Example DAG run conf payload:
-          # {
-          #     "dagName": "fail_dag",
-          #     "alertType": "PIPELINE_FAILURE",
-          #     "alertId": "d75e7517-88cc-4bab-b40f-660dd79df216",
-          #     "message": "[Astro Alerts] Pipeline failure detected on DAG fail_dag. \\nStart time: 2023-11-17 17:32:54 UTC. \\nFailed at: 2023-11-17 17:40:10 UTC. \\nAlert notification time: 2023-11-17 17:40:10 UTC. \\nClick link to investigate in Astro UI: https://cloud.astronomer.io/clkya6zgv000401k8zafabcde/dags/clncyz42l6957401bvfuxn8zyxw/fail_dag/c6fbe201-a3f1-39ad-9c5c-817cbf99d123?utm_source=alert\"\\n"
-          # }
-
-          # Example:
           failed_dag = params["dagName"]
           print(f"Register an incident in my system for DAG {failed_dag}.")
 
@@ -169,6 +184,7 @@ The **DAG Trigger** communication channel works differently from other communica
   ```
 
 2. Deploy the DAG to any Deployment in the Workspace where you want to create the alert. The DAG that triggers the alert and the DAG that the alert runs can be in different Deployments, but they must be deployed in the same Workspace.
+
 3. Create a [Deployment API token](deployment-api-tokens.md) for the Deployment where you deployed the DAG that the alert will run. Copy the token to use in the next step.
 
 </TabItem>
