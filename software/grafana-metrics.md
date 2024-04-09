@@ -40,7 +40,7 @@ By default, the credentials for Grafana are `admin:admin`. To change the passwor
     kubectl exec -it <grafana-pod-name> bash -n astronomer
     ```
 
-    Replace `<grafana-pod-name>` with thte name of your own Grafana Pod.
+    Replace `<grafana-pod-name>` with the name of your own Grafana Pod.
 
 2. Run the following command to open the Grafana configuration folder:
 
