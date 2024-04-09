@@ -45,6 +45,8 @@
 /astro/reporting-dash-exports#export-reporting-data-to-email /astro/reporting-dash-exports#export-reporting-data 301
 /astro/reporting-dash-exports#schedule-an-emailed-data-report   /astro/reporting-dash-exports#schedule-a-data-report 301
 /astro/reporting-dashboard /astro/organization-dashboard 301
+/astro/reporting-dash-exports /astro/org-dash-exports 301
+
 
 
 # tutorial redirects
