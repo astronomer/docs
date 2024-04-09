@@ -29,6 +29,32 @@ By default, users with [System Admin permissions](role-permission-reference.md#d
 
 > **Note:** As a System Admin, you can see metrics in Grafana for all Airflow Deployments on your cluster. You do not have to be a member of a Workspace to access Grafana metrics for Deployments within that Workspace.
 
+
+## Changing the Grafana Admin Password
+
+To change the password for the admin user in Grafana using the CLI tool, follow these steps:
+
+**Access the Grafana Pod:**
+```bash
+kubectl exec -it <grafana_pod_name> bash -n astronomer
+```
+Replace `<grafana_pod_name>` with your Grafana pod's name.
+
+**Navigate to the Grafana Configuration Directory:**
+```bash
+cd $GF_PATHS_HOME
+```
+
+**Reset the Admin Password:**
+```bash
+grafana-cli admin reset-admin-password '<new_password>'
+```
+Replace `<new_password>` with your desired new password.
+
+**Verify Password Change:**
+After executing the command, the password for the admin user will be updated. You can verify the change by logging in to Grafana with the new credentials.
+
+
 ### Filter metrics by Airflow Deployment
 
 Grafana dashboards that display cluster-level metrics often allow you to filter by `namespace` or `Deployment`. On Astronomer, every Airflow Deployment has a unique release name that is immutable and corresponds to a Kubernetes `namespace`. For example, all Pods for a Deployment whose release name is `elementary-zenith-7243` run within the `astronomer-elementary-zenith-7243` namespace on your cluster. Once you know the release name for a Deployment, you can use it in Grafana to show metrics only for that Deployment.
