@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'View dashboards'
-title: "View metrics across your Organization with dashboards"
+title: "View Organization Dashboards"
 id: organization-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
 ---
@@ -21,7 +21,7 @@ Astro provides dashboards that share important metrics about your Organization's
 - Cost Breakdown (Hosted only)
 - Operator Use
 
-Dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and operators within DAGs. For example, you can use the **Organization Overview** or **Deployment Detail** dashboard to identify unexpected activity, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly check your dashboards to identify trends like unusually high or low rates of task successes, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
+Organization Dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and operators within DAGs. For example, you can use the **Organization Overview** or **Deployment Detail** dashboard to identify unexpected activity, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly check your dashboards to identify trends like unusually high or low rates of task successes, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
 
 :::tip
 
