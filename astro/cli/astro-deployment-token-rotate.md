@@ -27,14 +27,14 @@ astro deployment token roate --deployment-id=<deployment-id> <token-ID> [flags]
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-c`,`--clean-output`           |    Print only the token as output. For use of the command in scripts.                                              | N/A |
+| `-c`,`--clean-output`           |    Print only the token as output. Use when writing scripts that run the command.                                           | N/A |
 | `-f`, `--force` | Rotate the Deployment API token without showing a warning. | N/A                                          |
 | `-t`,`--name`          | The name of the token to be rotated. If the name contains a space, specify the entire name within quotes "".          | String                                                         |
 
 ## Examples
 
 ```bash
-astro deployment token rotate --deployment-id=clukapi6r000008l58530cg8i [flags]
+astro deployment token rotate --deployment-id=clukapi6r000008l58530cg8i --name "My token"
 ```
 
 ## Related Commands

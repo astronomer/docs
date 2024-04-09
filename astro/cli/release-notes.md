@@ -16,7 +16,7 @@ import HybridBadge from '@site/src/components/HybridBadge';
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
-- **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about stable CLI versions and end of life support for CLI versions.
+- **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
 
 ## Astro CLI 1.25.0
 

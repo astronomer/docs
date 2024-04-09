@@ -27,9 +27,9 @@ astro deployment token list --deployment-id=<deployment-id>
 
 | Option            | Description                                           | Possible Values                                                           |
 | ----------------- | ----------------------------------------------------- | ------------------------------------------------------------------------- |
-| `--deployment-id` | The Deployment where you would like to manage tokens. | A valid Deployment ID                                                     |
-| `--verbosity`     | The Log level                                         | `debug`, `info`, `warn`, `error`, `fatal`, or `panic`. Default is `warn`. |
-| `--workspace-id`  | The Workspace ID assigned to a Deployment.            | A valid Workspace ID                                                      |
+| `--deployment-id` | The Deployment to list tokens for. | A valid Deployment ID                                                     |
+| `--verbosity`     | The log level.                                         | `debug`, `info`, `warn`, `error`, `fatal`, or `panic`. Default is `warn`. |
+| `--workspace-id`  | The Workspace ID for the Deployment.            | A valid Workspace ID                                                      |
 
 ## Output
 
@@ -37,17 +37,16 @@ astro deployment token list --deployment-id=<deployment-id>
 | ------------- | -------------------------------------------------------------------- | --------- |
 | `ID`          | The token ID.                                                        | String    |
 | `NAME`        | The name of the token.                                               | String    |
-| `DESCRIPTION` | (Optional) A description of the API Token.                           | String    |
-| `SCOPE`       | Whether the API Token is for Deployment, Workspace, or Organization. | String    |
+| `DESCRIPTION` | The description of the API Token.                           | String    |
+| `SCOPE`       | Whether the API Token is scoped to a Deployment, Workspace, or Organization. | String    |
 | `CREATED`     | How long ago the token was created in days.                          | String    |
-| `CEATED BY`   | The name of the person who created the token.                        | String    |
+| `CEATED BY`   | The name of the user entity who created the token.                        | String    |
 
 ## Examples
 
 ```bash
-# create a deployment token
+# List tokens for a single Deployment
 astro deployment token list --deployment-id=clukapi6r000008l58530cg8i
-
 ```
 
 ## Related Commands

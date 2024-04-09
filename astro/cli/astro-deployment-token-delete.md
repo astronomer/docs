@@ -13,9 +13,9 @@ This command is only available on Astro.
 
 :::
 
-Delete an Astro [Deployment API Token](deployment-api-tokens.md)
+Delete a [Deployment API Token](deployment-api-tokens.md).
 
-To configure how you use your API token in an automated process, see [Authenticate an automation tool](automation-authentication.md).
+See [Authenticate an automation tool](automation-authentication.md) to use your API token in an automated process.
 
 ## Usage
 
@@ -28,14 +28,13 @@ astro deployment token delete --deployment-id=<deployment-id>
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | `-f`,`--force`           |    Delete or remove the API token without showing a warning                                                | N/A |
-| `-t`,`--name`           |    The name of the token to be deleted. If the name contains a space, specify the entire name within quotes ""                                                | A string |
+| `-t`,`--name`           |    The name of the token to be deleted. If the name contains a space, specify the entire name within quotes ""                                                | String |
 
 ## Examples
 
 ```bash
-# create a deployment token
+# delete a deployment token
 astro deployment token delete --deployment-id=clukapi6r000008l58530cg8i
-
 ```
 
 ## Related Commands
