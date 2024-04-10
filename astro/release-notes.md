@@ -25,6 +25,20 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## April 9, 2024
+
+### Additional improvements
+
+- You can now manage [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) using the Astro API.
+- Improved the time it takes to load Deployment analytics in the Astro UI.
+- You can now view info-level incidents from the Deployment health status indicator in the Astro UI.
+- It is now possible for workers to use up to 6400 CPUs and 12800 GiB of memory on a single Deployment.
+
+### Bug fixes 
+
+- Fixed an issue where you couldn't configure boolean values for Airflow connections in the Astro UI.
+- Fixed an issue where Airflow connections configured through the Astro UI did not work with deferrable tasks.
+
 ## April 3, 2024
 
 ### Additional improvements 
