@@ -26,7 +26,7 @@ astro deployment token create --deployment-id=<deployment-id>
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | `-c`,`--clean-output`           |    Print only the token as output. For use of the command in scripts.                                                | `True` or `False` |
 | `-d`,`--description`           |    Description of the token. If the description contains a space, specify the entire description within quotes ""                                                | String |
-| `-e`,`--expiration`           |    Expiration of the token in days. If the flag isn't used the token won't have an expiration.                                                | Must be between 1 and 3650 days. |
+| `-e`,`--expiration`           |    Expiration of the token in days. If the flag isn't used the token won't have an expiration.                                                | An integer between 1 and 365 |
 | `-n`,`--name`           |    The token's name. If the name contains a space, specify the entire name within quotes `""`.                                                | String |
 | `-r`,`--role`           |    The role for the token. Possible values are `DEPLOYMENT_ADMIN` or a custom role name.                                                | Any valid Deployment role |
 
