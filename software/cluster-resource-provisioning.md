@@ -15,7 +15,7 @@ By default, Deployments specify CPU and memory [requests and limits](https://kub
 
 To change this behavior, you can change the amount of CPU and memory that an AU requests, allowing you to more efficiently provision resources based on the requirements for your Deployments. This is known as overprovisioning, because it allows more Airflow component instances to exist on a single Kubernetes node.
 
-1. Add the following configuration to your `config.yaml` file. Replace the values for `overProvisioningFactorMem` and `overProvisioningFactorCPU` with the factor by which you want to set your resource requests as a percentage of your resource limits.
+1. Add the following configuration to your `values.yaml` file. Replace the values for `overProvisioningFactorMem` and `overProvisioningFactorCPU` with the factor by which you want to set your resource requests as a percentage of your resource limits.
 
     ```yaml
     astronomer:
@@ -43,5 +43,5 @@ To change this behavior, you can change the amount of CPU and memory that an AU 
 
     By default, this configuration applies to all Airflow components. Any components that you remove from `overProvisioningComponents` will not have overprovisioning applied.
 
-2. Save the `config.yaml` file and push the configuration change to your platform. See [Apply a config change](apply-platform-config.md). After the change is applied, new Deployments automatically use the updated AU definition.
+2. Save the `values.yaml` file and push the configuration change to your platform. See [Apply a config change](apply-platform-config.md). After the change is applied, new Deployments automatically use the updated AU definition.
 3. Redeploy code to your existing Deployments to have them start using your updated AU definition. See [Deploy code](deploy-cli.md).

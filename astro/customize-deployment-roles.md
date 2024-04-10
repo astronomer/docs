@@ -5,14 +5,13 @@ id: customize-deployment-roles
 description: Customize your users' permissions for Airflow environments on Astro.
 ---
 
-:::privatepreview
+import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
+
+<EnterpriseBadge/>
+
+:::publicpreview
 :::
 
-:::info
-
-This feature is available only in the Enterprise tier.
-
-:::
 
 A user entity's Deployment role determines their level of access to a specific Deployment in a Workspace. User entities with [Workspace Member permissions](user-permissions.md#workspace-roles) or higher have some level of access to all Deployments in a Workspace, and these permissions can be increased using Deployment roles.
 
@@ -20,10 +19,18 @@ There are some circumstances where users should have limited access to Deploymen
 
 In situations where you need fine-grained Deployment access, you can create custom Deployment roles and assign them to users with Workspace Accessor or Workspace Member roles. If a user does not have a Workspace role when you assign them a Deployment role, Astro automatically gives them Workspace Accessor permissions. When you grant a user a Deployment role, they have a specific level of access to a specific Deployment. Use custom Deployment roles to enable users to collaborate in the same Workspace with only the minimum permissions they require.
 
+:::tip
+
+Watch the Astro Academy Learning Byte video for [Custom Deployment Roles](https://academy.astronomer.io/learning-bytes-custom-deployment-roles) to review some common use cases and learn more about how Astro implements RBAC.
+
+:::
+
 ## Prerequisites
 
 - Organization Owner permissions to create, update, and delete custom roles.
 - Workspace Owner permissions or Deployment Admin permissions to assign and change Deployment roles for users.
+
+See the [User permissions reference](user-permissions.md) for more information about user roles.
 
 ## Create a custom Deployment role
 

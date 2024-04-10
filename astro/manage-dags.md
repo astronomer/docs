@@ -1,9 +1,8 @@
 ---
 sidebar_label: 'DAG and task runs'
-title: "Manage DAG runs from the Cloud UI"
+title: "Manage DAG runs from the Astro UI"
 id: manage-dags
 ---
-
 
 As a data engineer or data scientist, you might need to view details about your DAGs' performance, including task logs, run status, and retries. You might additionally have to manually retry DAG runs or mark them as a specific status when troubleshooting any issues. 
 
@@ -28,25 +27,25 @@ This command returns the URL to access your Deployment's webserver. Copy the URL
 
 ## Manage DAGs from the Astro UI
 
-You can perform some common Airflow UI actions from the Cloud UI, including:
+You can perform some common Airflow UI actions from the Astro UI, including:
 
 - Marking DAG and task runs as succeeded/failed.
 - Retrying DAG and task runs.
 - Viewing DAG and task run statuses.
 
-These actions are available on the **DAGs** page, where you can see detailed information about a specific DAG. This page compiles the most commonly used information and actions from the Airflow UI into one place so that you can manage your DAGs without switching between the Airflow UI and Cloud UI.
+These actions are available on the **DAGs** page, where you can see detailed information about a specific DAG. This page compiles the most commonly used information and actions from the Airflow UI into one place so that you can manage your DAGs without switching between the Airflow UI and Astro UI.
 
 ![DAGs page](/img/docs/DAGs-overview.png)
 
-To access the **DAGs** page:
+### Access the DAGs page in the Astro UI
 
-1. In the Cloud UI, select a Deployment.
+1. In the Astro UI, select a Deployment.
 2. Click **DAGs**.
 3. Click the name of the DAG that you want to manage.
 
 ### Available actions
 
-The actions and views on this page are functionally identical to certain actions in the Airflow UI. Use the following table to understand each available Cloud UI action and its equivalent action in the Airflow UI. 
+The actions and views on this page are functionally identical to certain actions in the Airflow UI. Use the following table to understand each available Astro UI action and its equivalent action in the Airflow UI. 
 
 | User action                              | **DAGs** page workflow                                                 | Equivalent Airflow UI workflow                                                                                                  |
 | ---------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |

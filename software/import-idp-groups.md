@@ -50,7 +50,7 @@ Astronomer also recommends setting up [SCIM](integrate-auth-system.md#manage-use
 
 ## Step 1: Enable Astronomer Teams
 
-In your `config.yaml` file, set the following value.
+In your `values.yaml` file, set the following value.
 
 ```yaml
 # Auth configuration.
@@ -75,7 +75,7 @@ If you haven't already, add group claims to the IdP groups that you're importing
 
 By default, Astronomer assumes that the name of your group claim is `groups`. If you named your group claim something other than `groups`, complete the following setup:
 
-1. In your `config.yaml` file, set `houston.config.auth.openidConnect.<idp-provider>.claimsMapping` to the custom name of your group claim.
+1. In your `values.yaml` file, set `houston.config.auth.openidConnect.<idp-provider>.claimsMapping` to the custom name of your group claim.
 2. Save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
 
 ## Step 3: Add Teams to Workspaces and Deployments
@@ -86,7 +86,7 @@ After configuring and importing user groups, Workspace Admins and Deployment Adm
 
 ## Disable individual user management 
 
-To use Teams as the only user management system on Astronomer Software, add the following entry to your `config.yaml` file:
+To use Teams as the only user management system on Astronomer Software, add the following entry to your `values.yaml` file:
 
 ```yaml
 astronomer: 

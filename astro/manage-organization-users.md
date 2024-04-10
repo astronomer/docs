@@ -26,7 +26,7 @@ You can also manually add users to an Organization. You must manually add users 
 - You want to invite a user to an Organization from a domain that you don't own, such as a third party consultant.
 - You want to invite someone from your company to Astro as a role other than Organization Member.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
 2. Go to **Access Management**.
       
@@ -44,7 +44,7 @@ After you add the user, their information appears in the **Users** tab in **Acce
 
 See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
    
 2. Go to **Access Management**.
 

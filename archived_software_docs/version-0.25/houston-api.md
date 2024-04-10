@@ -118,7 +118,7 @@ To query for information about a user on the platform (e.g. "When was this user 
 
 ```graphql
 query User {
-  users(user: { email: "<name@mycompany.com>"} )
+  users(user: { email: "<name@example.com>"} )
   {
     id
     roleBindings {role}
@@ -409,7 +409,7 @@ With that information, run the following:
 mutation WorkspaceAddUser {
 	workspaceAddUser (
     workspaceUuid: "<workspace-id>"
-    email: "<email@mycompany.com>"
+    email: "<email@example.com>"
     role: WORKSPACE_ADMIN
   ) {
     users {emails {address} }

@@ -15,7 +15,7 @@ After you create a project in the Cloud IDE, you can deploy it to Astro and run 
 Astro Cloud IDE projects use the same structure as Astro projects created with the Astro CLI. You can download your pipeline code from the Astro Cloud IDE, copy it to an existing Astro project, and deploy that project to Astro using the [Astro CLI](cli/overview.md).
 
 1. Create an Astro project. See [Create a project](cli/develop-project.md#create-an-astro-project).
-2. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
+2. In the Astro UI, select a Workspace and then click **Cloud IDE**.
 3. Select the project you'd like to deploy.
 4. Select a pipeline that you want to export.
 5. Click **Code**, then click **Download**.
@@ -45,7 +45,7 @@ Your user account and PAT must have specific permissions depending on your Git v
 
 ### Connect your repository
 
-1. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
+1. In the Astro UI, select a Workspace and then click **Cloud IDE**.
 2. Select the project you'd like to deploy.
 3. In the **Git Repo** pane, click **Configure**.
 4. Configure the following values: 
@@ -97,7 +97,7 @@ The default workflow provided by the Astro Cloud IDE will:
 
 These actions are not dependent on each other, meaning that you can modify the following steps to deploy only a single production or development Deployment. 
 
-1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page.
+1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. To retrieve a Deployment ID, open your Deployment in the Astro UI and copy the value in the **ID** section of the Deployment page.
 2. Create a [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md). Copy the API token.
 3. Set the following environment variables in your Git repository as secrets:
    
@@ -124,7 +124,7 @@ Astronomer recommends creating a feature branch for every new pipeline and creat
 
    Your changes are automatically pushed to your Git repository, then deployed from your repository to your configured Deployments.
 
-6. Based on which branch you committed to, open the Deployment in the Cloud UI and click **Open Airflow** to confirm that your changes were successfully deployed.
+6. Based on which branch you committed to, open the Deployment in the Astro UI and click **Open Airflow** to confirm that your changes were successfully deployed.
 
 :::tip
 

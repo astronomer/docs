@@ -103,13 +103,14 @@ For Astro Hosted environments, if you set resource requests to be less than the 
 
 ### Mount a temporary directory
 
-:::info Alternative Astro Hybrid setup
+<details>
+  <summary><strong>Alternative Astro Hybrid setup</strong></summary>
 
 On Astro Hybrid, this configuration works only on AWS clusters where you have enabled `m5d` and `m6id` worker types. These worker types have NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
 
-The task which mounts a temporary directory must run on a worker queue that uses either `m5d` and `m6id` worker types. See [Modify a cluster](manage-hybrid-clusters.md) for instructions on enabling `m5d` and `m6id` workers on your cluster. See [Configure a worker queue](configure-worker-queues.md) to configure a worker queue to use one of these worker types.
+The task which mounts a temporary directory must run on a worker queue that uses either `m5d` and `m6id` worker types. See [Modify a cluster](manage-hybrid-clusters.md) for instructions on enabling `m5d` and `m6id` workers on your cluster. See [Configure a worker queue](configure-worker-queues.mdx) to configure a worker queue to use one of these worker types.
 
-:::
+</details>
 
 To run a task run the KubernetesPodOperator that utilizes your Deployment's ephemeral storage, mount an [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
 
@@ -168,7 +169,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 To run Docker images from a private registry on Astro, a Kubernetes Secret that contains credentials to your registry must be created. Injecting this secret into your Deployment's namespace will give your tasks access to Docker images within your private registry.
 
 1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file. If the generated `/docker/config.json` does not contain any credentials, copy your registry URL, username, and password.
-2. In the Cloud UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
+2. In the Astro UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
 3. Copy the value in the **NAMESPACE** field.
 4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the namespace of the Deployment.
 
@@ -409,8 +410,8 @@ To launch Pods in external clusters from a local Airflow environment, you must a
         - get-token
         - --cluster-name
         - <name of your cluster>
-        - --profile
-        - default
+        - --role
+        - <your-assume-role-arn>
         command: aws
         interactiveMode: IfAvailable
         provideClusterInfo: false
@@ -443,6 +444,7 @@ run_on_EKS = KubernetesPodOperator(
     get_logs=True,
     startup_timeout_seconds=240,
 )
+```
 
 ### Example DAG
 

@@ -523,7 +523,7 @@ commit, age, hash, filename
 1707143582,9 days ago,eadb9f73d,astro/resource-reference-aws-hybrid.md
 1707143582,9 days ago,eadb9f73d,astro/resource-reference-azure-hybrid.md
 1707143582,9 days ago,eadb9f73d,astro/resource-reference-gcp-hybrid.md
-1707143582,9 days ago,eadb9f73d,astro/resource-reference-hosted.md
+1707143582,9 days ago,eadb9f73d,astro/resource-reference-hosted.mdx
 1707143582,9 days ago,eadb9f73d,astro/set-up-ci-cd.md
 1707143582,9 days ago,eadb9f73d,astro/shared-responsibility-model.md
 1707143582,9 days ago,eadb9f73d,astro/user-permissions.md
@@ -536,7 +536,7 @@ commit, age, hash, filename
 1707386359,6 days ago,738acd328,astro/cli/astro-login.md
 1707387404,6 days ago,75cd5b2f9,astro/export-cloudwatch.md
 1707405775,6 days ago,71e59b674,astro/dag-metrics.md
-1707479149,5 days ago,a1147fc82,astro/configure-worker-queues.md
+1707479149,5 days ago,a1147fc82,astro/configure-worker-queues.mdx
 1707499572,5 days ago,4f174ada9,astro/reporting-dashboard.md
 1707736709,2 days ago,1f9663c5a,astro/deploy-dags.md
 1707736709,2 days ago,1f9663c5a,astro/deploy-project-image.md

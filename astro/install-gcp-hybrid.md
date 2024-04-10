@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 :::warning
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Astro UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
 To get started on Astro Hosted, see [Start a trial](trial.md).
 
@@ -76,7 +76,7 @@ The CIDR range sizes must be equal to or greater than the default range sizes fo
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
-2. Select one of the following options to access the Cloud UI:
+2. Select one of the following options to access the Astro UI:
 
     - Enter your password and click **Continue**.
     - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
@@ -151,7 +151,7 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 
 When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). 
 
-To confirm a successful installation, in the Cloud UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
+To confirm a successful installation, in the Astro UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
 
 ## Next steps
 

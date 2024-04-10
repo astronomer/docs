@@ -46,7 +46,7 @@ Run `astro workspace switch <workspace-id>` to switch between Workspaces.
 astro workspace switch clqw6uskr000008l9370y04jd
 ```
 
-You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Cloud UI. On Astro, if you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
+You can find a Workspace's ID by running `astro workspace list`, or by opening your Workspace and going to **Workspace Settings** > **General** in the Astro UI. On Astro, if you don't provide a Workspace ID, the CLI prompts you to pick from a list of Workspaces that you belong to in your current Organization.
 
 ## Related commands
 

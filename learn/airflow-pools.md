@@ -82,7 +82,7 @@ When tasks are assigned to a pool, they are scheduled as normal until all of the
 
 If you assign a task to a pool that doesn't exist, then the task isn't scheduled when the DAG runs. There are currently no errors or checks for this in the Airflow UI, so be sure to double check the name of the pool that you're assigning a task to.
 
-You can control which tasks within the pool are run first by assigning [priority weights](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/priority-weight.html). These are assigned at the pool level with the `priority_weights` parameter. The values can be any arbitrary integer (the default is 1), and higher values get higher priority in the executor queue.
+You can control which tasks in the pool run first by assigning [priority weights](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/priority-weight.html). These are assigned at the pool level with the `priority_weights` parameter. The values can be any arbitrary integer (the default is 1), and higher values get higher priority in the executor queue. In Airflow 2.9 and later, you can define your own custom `weight_rule`, see [Custom Weight Rule](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/stable/administration-and-deployment/priority-weight.html#custom-weight-rule).
 
 For example, in the DAG snippet below `task_a` and `task_b` are both assigned to the `single_task_pool` which has one slot. `task_b` has a priority weight of 2, while `task_a` has the default priority weight of 1. Therefore, `task_b` is executed first.
 

@@ -37,11 +37,11 @@ Logs and messages might also be associated with one of the following _log levels
 - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
 - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent and can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
 
-### View Airflow component logs in the Cloud UI
+### View Airflow component logs in the Astro UI
 
-You can access scheduler, triggerer, and task logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page.
+You can access scheduler, triggerer, and task logs in the Astro UI to find the past 24 hours of logs for any Deployment on its **Logs** page.
 
-1. In the Cloud UI, select a Workspace and then a Deployment.
+1. In the Astro UI, select a Workspace and then a Deployment.
 
 2. Click the **Logs** tab.
 
@@ -83,7 +83,7 @@ To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag 
 
 ## Airflow task logs
 
-Airflow task logs can help you troubleshoot a specific task instance that failed or retried. Based on your preference, you can choose to use to access task logs in the Cloud UI or the Airflow UI. Both provide filters, search, and download options for task logs and share other information about your DAG performance on the same page.
+Airflow task logs can help you troubleshoot a specific task instance that failed or retried. Based on your preference, you can choose to use to access task logs in the Astro UI or the Airflow UI. Both provide filters, search, and download options for task logs and share other information about your DAG performance on the same page.
 
 Task logs for Astro Deployments are retained for 90 days. The task log retention policy is not currently configurable.
 
@@ -99,11 +99,11 @@ Similar to the Airflow component log levels, task logs might also be associated 
 - **Debug**
 - **Critical**
 
-### View task logs on the Cloud UI
+### View task logs on the Astro UI
 
-To access task logs from the Cloud UI:
+To access task logs from the Astro UI:
 
-1. In the Cloud UI, select a Workspace.
+1. In the Astro UI, select a Workspace.
 2. Click **DAGs**.
 3. Click the DAG you want to view task logs for.
 4. Click a task run in the DAG run grid.
@@ -112,7 +112,7 @@ To access task logs from the Cloud UI:
 ### View task logs in the Airflow UI
 
 1.  Access the Airflow UI.
-  * To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**.
+  * To access the Airflow UI for a Deployment, open the Deployment in the Astro UI and click **Open Airflow**.
   * To access the Airflow UI in a local environment, open a browser and go to `http://localhost:8080`.
 2. Click a DAG.
 3. Click **Graph**.

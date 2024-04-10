@@ -9,7 +9,7 @@ Astro offers a suite of first-class features that make it easy to author, run, a
 
 ## Feature list
 
-- Worker auto-scaling, powered by the Airflow Celery executor and KEDA. See [Worker queues](configure-worker-queues.md).
+- Worker auto-scaling, powered by the Airflow Celery executor and KEDA. See [Worker queues](configure-worker-queues.mdx).
 - Astro Runtime, a collection of Docker images that provides a differentiated Airflow experience. See [Runtime image architecture](runtime-image-architecture.mdx).
 - Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project.
 - A fully managed experience for using the Kubernetes executor and KubernetesPodOperator.

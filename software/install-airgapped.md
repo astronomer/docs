@@ -25,7 +25,7 @@ To complete this setup, you need:
 - A PostgreSQL instance accessible from that environment.
 - PostgreSQL superuser permissions.
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
-- A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
+- A Helm configuration file for Astronomer named `values.yaml`. You can find sample `values.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 
 ## Step 1: Configure a private Docker registry
 
@@ -56,10 +56,10 @@ The images and tags which are required for your Software installation depend on 
 1. Run the following command to template the Astronomer Helm chart and fetch all of its rendered image tags. Make sure to substitute `<your-basedomain>` and `<your-astronomer-version>` with your information.
 
     ```bash
-    helm template --version <your-astronomer-version> astronomer/astronomer --set global.dagOnlyDeployment.enabled=True --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                           
+    helm template --version <your-astronomer-version> astronomer/astronomer --set global.dagOnlyDeployment.enabled=True --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
     ```
-    
-    This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image. 
+
+    This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image.
 2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
@@ -68,13 +68,13 @@ The images and tags which are required for your Software installation depend on 
 
 These commands generate a list of images required for your version of Astronomer. Add these images to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
 
-> **Note:** If you have already enabled or disabled Astronomer platform components in your `config.yaml`, you can pass `-f/--values config.yaml` to `helm template` to print a list specific to your `config.yaml` configuration.
+> **Note:** If you have already enabled or disabled Astronomer platform components in your `values.yaml`, you can pass `-f/--values values.yaml` to `helm template` to print a list specific to your `values.yaml` configuration.
 
-## Step 3: Add images to your config.yaml file
+## Step 3: Add images to your values.yaml file
 
 Regardless of whether you choose to mirror or manually pull/push images to your private registry, the returned images and/or tags must be made accessible within your network.
 
-To make these images accessible to Astronomer, specify your organization's private registry in the `global` section of your `config.yaml` file:
+To make these images accessible to Astronomer, specify your organization's private registry in the `global` section of your `values.yaml` file:
 
 ```yaml
 global:
@@ -84,35 +84,35 @@ global:
     # secretName: ~
 ```
 
-This configuration automatically pulls most Docker images required in the Astronomer Helm chart. You must also configure the following images individually in a separate section of your `config.yaml` file:
+This configuration automatically pulls most Docker images required in the Astronomer Helm chart. You must also configure the following images individually in a separate section of your `values.yaml` file:
 
 ```yaml
 astronomer:
-    houston:
-      config:
-        deployments:
-          helm:
-            runtimeImages:
-              airflow:
-                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
-              flower:
-                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+  houston:
+    config:
+      deployments:
+        helm:
+          runtimeImages:
             airflow:
-              defaultAirflowRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
-              defaultRuntimeRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
-              images:
-                airflow:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
-                statsd:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-statsd-exporter
-                redis:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-redis
-                pgbouncer:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer
-                pgbouncerExporter:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
-                gitSync:
-                  repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-git-sync
+              repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+            flower:
+              repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+          airflow:
+            defaultAirflowRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
+            defaultRuntimeRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+            images:
+              airflow:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
+              statsd:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-statsd-exporter
+              redis:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-redis
+              pgbouncer:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer
+              pgbouncerExporter:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
+              gitSync:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-git-sync
 ```
 
 ## Step 4: Fetch Airflow Helm charts
@@ -129,7 +129,7 @@ Commander, which is Astronomer's provisioning component, uses the Airflow Helm c
 - Use the built-in Airflow Helm chart in the Commander Docker image.
 - Host the Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
 
-To use the built-in Airflow Helm chart in the Commander Docker image, add the following configuration to your `config.yaml` file:
+To use the built-in Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -138,17 +138,17 @@ astronomer:
       enabled: true
 ```
 
-To configure a self-hosted Helm chart, add the following configuration to your `config.yaml` file:
+To configure a self-hosted Helm chart, add the following configuration to your `values.yaml` file:
 
 ```yaml
 # Example URL - replace with your own repository destination
 global:
-  helmRepo: "http://artifactory.company.com:32775/artifactory/astro-helm-chart"
+  helmRepo: "http://artifactory.example.com:32775/artifactory/astro-helm-chart"
 ```
 
 :::info
 
-If you configure both options in your `config.yaml` file, then `astronomer.commander.airGapped.enabled` takes precedence over `global.helmRepo`.
+If you configure both options in your `values.yaml` file, then `astronomer.commander.airGapped.enabled` takes precedence over `global.helmRepo`.
 
 :::
 
@@ -299,7 +299,7 @@ No matter what option you choose, the commands that you run should return the up
 
 ### Configuring a custom updates JSON URL
 
-After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:  
+After you have made the updates JSON accessible within your premises, you must configure the Helm chart to fetch updates from the custom URL:
 
 ```yaml
 astronomer:
@@ -314,7 +314,7 @@ astronomer:
       deployments:
         helm:
           airflow:
-            extraEnv:
+            extraEnv: |
             - name: AIRFLOW__ASTRONOMER__UPDATE_URL
               value: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
 ```
@@ -335,7 +335,7 @@ curl -L https://github.com/astronomer/astronomer/archive/v<your-image-tag>.tar.g
 helm pull astronomer/astronomer
 
 # ... If necessary, copy to a place where you can access Kubernetes ...
-helm install astronomer -f config.yaml -n astronomer astronomer.tgz
+helm install astronomer -f values.yaml -n astronomer astronomer.tgz
 ```
 
 After these commands finish, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.

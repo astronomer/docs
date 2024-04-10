@@ -39,7 +39,7 @@ All Astro clusters include a set of external IP addresses that persist for the l
 
 ### Allowlist external IP addresses for a cluster
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
 4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
