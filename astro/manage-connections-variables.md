@@ -57,7 +57,7 @@ The following sections explain the benefits, limitations, and implementations of
 
 <HostedBadge/>
 
-Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Astro UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis.
+Astro includes connection management system that behaves like you are using an Astro-managed secrets backend. After you create a connection in the Astro UI, you can share it with multiple Deployments in a Workspace and override connection values on a per-Deployment basis. See [Create connections in Astro](create-and-link-connections.md) for setup steps.
 
 #### Benefits
 

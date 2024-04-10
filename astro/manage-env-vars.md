@@ -5,8 +5,6 @@ id: manage-env-vars
 description: Learn how to manage environment variables on Astro
 ---
 
-
-
 On Astro, you can create, update, or delete environment variables for a Deployment in the following ways:
 
 - Using the Deployment's **Variables** tab in the Astro UI.
