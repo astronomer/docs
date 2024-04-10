@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'View dashboards'
-title: "View Organization Dashboards"
+title: "View Organization dashboards"
 id: organization-dashboard
 description: "View information about your Organization, Deployments, DAGs, and costs."
 ---
@@ -21,7 +21,7 @@ Astro provides dashboards that share important metrics about your Organization's
 - Cost Breakdown (Hosted only)
 - Operator Use
 
-Organization Dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and operators within DAGs. For example, you can use the **Organization Overview** or **Deployment Detail** dashboard to identify unexpected activity, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly check your dashboards to identify trends like unusually high or low rates of task successes, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
+Organization dashboards help you quickly identify opportunities to optimize how your team uses Airflow at different organizational levels, such as across your Organization, within Workspaces, in specific Deployments, and operators within DAGs. For example, you can use the **Organization Overview** or **Deployment Detail** dashboard to identify unexpected activity, without requiring you to examine the DAGs results in the Airflow UI. Instead, you can quickly check your dashboards to identify trends like unusually high or low rates of task successes, and then check the **Cost Breakdown** dashboard to identify any associated costs incurred by that behavior.
 
 :::tip
 
@@ -29,13 +29,13 @@ Watch the Astro Academy [Reporting](https://academy.astronomer.io/learning-bytes
 
 :::
 
-To view Organization Dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). In addition to viewing the dashboards in the Astro UI, you can also [export and email individual reports](org-dash-exports.md).
+To view Organization dashboards, click your Workspace name in the upper left corner of the Astro UI, click **Organization Settings**, and then click **Dashboards**. You can also access this page directly at [https://cloud.astronomer.io/dashboards](https://cloud.astronomer.io/dashboards). In addition to viewing the dashboards in the Astro UI, you can also [export and email individual reports](org-dash-exports.md).
 
 Use the tabs at the bottom of the Astro UI to switch between dashboards. Each dashboard shows the last time that it was updated in the **Data available through** section.
 
 :::info
 
-Only users with **Organization Billing Admin** [user permissions](user-permissions.md#organization-roles) can access Organization Dashboards.
+Only users with **Organization Billing Admin** [user permissions](user-permissions.md#organization-roles) can access Organization dashboards.
 
 :::
 
