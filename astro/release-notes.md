@@ -36,7 +36,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Bug fixes 
 
-- Fixed an issue where you couldn't correctly configure boolean values for Airflow connections in the Astro UI.
+- Fixed an issue where you couldn't configure boolean values for Airflow connections in the Astro UI.
 - Fixed an issue where Airflow connections configured through the Astro UI did not work with deferrable tasks.
 
 ## April 3, 2024
