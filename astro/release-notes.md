@@ -29,7 +29,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ### Additional improvements
 
-- You can now use the Astro API to apply custom Deployment roles to API tokens.
+- You can now manage [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) using the Astro API.
 - Improved the time it takes to load Deployment analytics in the Astro UI.
 - You can now view info-level incidents from the Deployment health status indicator in the Astro UI.
 - It is now possible for workers to use up to 6400 CPUs and 12800 GiB of memory on a single Deployment.
