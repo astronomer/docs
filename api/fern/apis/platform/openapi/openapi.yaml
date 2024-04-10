@@ -2608,11 +2608,10 @@ components:
       - workspaces
       type: object
   securitySchemes:
-    Bearer:
-      type: http
-      scheme: bearer
-security: 
-  - Bearer: []
+    JWT:
+      in: header
+      name: Authorization
+      type: apiKey
 info:
   contact: {}
   description: Astro Platform API
@@ -2917,6 +2916,14 @@ paths:
         required: true
         schema:
           type: string
+      - description: A list of names for Clusters to filter by. The API returns details
+          only for the specified Clusters.
+        in: query
+        name: names
+        schema:
+          items:
+            type: string
+          type: array
       - description: The cloud provider to list clusters for. Clusters from other
           providers will be filtered out of the results.
         in: query
@@ -3354,6 +3361,14 @@ paths:
           items:
             type: string
           type: array
+      - description: A list of names for Deployments to filter by. The API returns
+          details only for the specified Deployments.
+        in: query
+        name: names
+        schema:
+          items:
+            type: string
+          type: array
       - description: A list of IDs for Workspaces to filter on. The API returns details
           for all Deployments belonging only to the specified Workspaces.
         in: query
@@ -3771,6 +3786,15 @@ paths:
           information only for Workspaces which have been specified in this list.
         in: query
         name: workspaceIds
+        schema:
+          items:
+            type: string
+          type: array
+      - description: A list of names for specific Workspaces to filter by. The API
+          will list information only for Workspaces which have been specified in this
+          list.
+        in: query
+        name: names
         schema:
           items:
             type: string

@@ -228,6 +228,43 @@ components:
       - role
       - type
       type: object
+    CreateCustomRoleRequest:
+      properties:
+        description:
+          description: The role's description.
+          example: Subject can only view deployments.
+          type: string
+        name:
+          description: The role's name.
+          example: Deployment_Viewer
+          type: string
+        permissions:
+          description: The permissions included in the role.
+          example:
+          - '[''deployment.get'']'
+          items:
+            type: string
+          minItems: 1
+          type: array
+        restrictedWorkspaceIds:
+          description: The IDs of the Workspaces that the role is restricted to.
+          example:
+          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        scopeType:
+          description: The scope of the role.
+          enum:
+          - DEPLOYMENT
+          example: DEPLOYMENT
+          type: string
+      required:
+      - name
+      - permissions
+      - scopeType
+      type: object
     CreateTeamRequest:
       properties:
         description:
@@ -274,6 +311,37 @@ components:
       - inviteeEmail
       - role
       type: object
+    DefaultRole:
+      properties:
+        description:
+          description: The role's description.
+          example: Subject can only view deployments.
+          type: string
+        name:
+          description: The role's name.
+          example: Deployment_Viewer
+          type: string
+        permissions:
+          description: The role's permissions.
+          example:
+          - '[''deployment.get'']'
+          items:
+            type: string
+          type: array
+        scopeType:
+          description: The role's scope.
+          enum:
+          - DEPLOYMENT
+          - WORKSPACE
+          - ORGANIZATION
+          - SYSTEM
+          example: DEPLOYMENT
+          type: string
+      required:
+      - name
+      - permissions
+      - scopeType
+      type: object
     DeploymentRole:
       properties:
         deploymentId:
@@ -281,9 +349,7 @@ components:
           example: clm8t5u4q000008jq4qoc3031
           type: string
         role:
-          description: The role of the subject in the Deployment.
-          enum:
-          - DEPLOYMENT_ADMIN
+          description: The name of the role for the subject in the Deployment.
           example: DEPLOYMENT_ADMIN
           type: string
       required:
@@ -338,6 +404,213 @@ components:
       - inviter
       - organizationId
       type: object
+    PermissionEntry:
+      properties:
+        action:
+          description: The permission's action.
+          example: get
+          type: string
+        description:
+          description: The permission's description.
+          example: Subject is permitted to get the scope.
+          type: string
+      required:
+      - action
+      - description
+      type: object
+    PermissionGroup:
+      properties:
+        description:
+          description: The permission group's description.
+          example: Astro notification channel defines where alert messages can be
+            sent. For example, alert messages issued via email or slack.
+          type: string
+        name:
+          description: The permission group's name.
+          example: workspace.notificationChannels
+          type: string
+        permissions:
+          description: The permission group's permissions.
+          items:
+            $ref: '#/components/schemas/PermissionEntry'
+          type: array
+        scope:
+          description: The permission group's scope.
+          example: Workspace NotificationChannels
+          type: string
+      required:
+      - description
+      - name
+      - permissions
+      - scope
+      type: object
+    Role:
+      properties:
+        createdAt:
+          description: The time the role was created.
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/BasicSubjectProfile'
+        description:
+          description: The role's description.
+          example: Subject can only view deployments.
+          type: string
+        id:
+          description: The role's ID.
+          example: cluc9tapx000901qn2xrgqdmn
+          type: string
+        name:
+          description: The role's name.
+          example: Deployment_Viewer
+          type: string
+        restrictedWorkspaceIds:
+          description: The IDs of Workspaces that the role is restricted to.
+          example:
+          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          items:
+            type: string
+          type: array
+        scopeType:
+          description: The role's scope.
+          enum:
+          - DEPLOYMENT
+          - WORKSPACE
+          - ORGANIZATION
+          example: DEPLOYMENT
+          type: string
+        updatedAt:
+          description: The time the role was last updated.
+          type: string
+        updatedBy:
+          $ref: '#/components/schemas/BasicSubjectProfile'
+      required:
+      - createdAt
+      - createdBy
+      - id
+      - name
+      - restrictedWorkspaceIds
+      - scopeType
+      - updatedAt
+      - updatedBy
+      type: object
+    RoleTemplate:
+      properties:
+        description:
+          description: The role's description.
+          example: Subject can only view deployments.
+          type: string
+        name:
+          description: The role's name.
+          example: Deployment_Viewer
+          type: string
+        permissions:
+          description: The role's permissions.
+          example:
+          - '[''deployment.get'']'
+          items:
+            type: string
+          type: array
+        scopeType:
+          description: The role's scope.
+          enum:
+          - DEPLOYMENT
+          - WORKSPACE
+          - ORGANIZATION
+          - SYSTEM
+          example: DEPLOYMENT
+          type: string
+      required:
+      - name
+      - permissions
+      - scopeType
+      type: object
+    RoleWithPermission:
+      properties:
+        createdAt:
+          description: The time the role was created.
+          type: string
+        createdBy:
+          $ref: '#/components/schemas/BasicSubjectProfile'
+        description:
+          description: The role's description.
+          example: Subject can only view deployments.
+          type: string
+        id:
+          description: The role's ID.
+          example: cluc9tapx000901qn2xrgqdmn
+          type: string
+        name:
+          description: The role's name.
+          example: Deployment_Viewer
+          type: string
+        permissions:
+          description: The role's permissions.
+          example:
+          - '[''deployment.get'']'
+          items:
+            type: string
+          type: array
+        restrictedWorkspaceIds:
+          description: The IDs of Workspaces that the role is restricted to.
+          example:
+          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          items:
+            type: string
+          type: array
+        scopeType:
+          description: The role's scope.
+          enum:
+          - DEPLOYMENT
+          - WORKSPACE
+          - ORGANIZATION
+          example: DEPLOYMENT
+          type: string
+        updatedAt:
+          description: The time the role was last updated.
+          type: string
+        updatedBy:
+          $ref: '#/components/schemas/BasicSubjectProfile'
+      required:
+      - createdAt
+      - createdBy
+      - id
+      - name
+      - permissions
+      - restrictedWorkspaceIds
+      - scopeType
+      - updatedAt
+      - updatedBy
+      type: object
+    RolesPaginated:
+      properties:
+        defaultRoles:
+          description: The list of default roles.
+          items:
+            $ref: '#/components/schemas/DefaultRole'
+          type: array
+        limit:
+          description: The number of custom roles returned.
+          example: 1
+          type: integer
+        offset:
+          description: The offset of the custom roles.
+          example: 1
+          type: integer
+        roles:
+          description: The list of custom roles.
+          items:
+            $ref: '#/components/schemas/Role'
+          type: array
+        totalCount:
+          description: The total number of custom roles.
+          example: 1
+          type: integer
+      required:
+      - limit
+      - offset
+      - roles
+      - totalCount
+      type: object
     SubjectRoles:
       properties:
         deploymentRoles:
@@ -369,6 +642,11 @@ components:
           type: string
         createdBy:
           $ref: '#/components/schemas/BasicSubjectProfile'
+        deploymentRoles:
+          description: The Team's role in each Deployment it belongs to.
+          items:
+            $ref: '#/components/schemas/DeploymentRole'
+          type: array
         description:
           description: The Team's description.
           example: My Team description
@@ -528,6 +806,36 @@ components:
       required:
       - roles
       type: object
+    UpdateCustomRoleRequest:
+      properties:
+        description:
+          description: The role's description.
+          example: Subject can only view deployments.
+          type: string
+        name:
+          description: The role's name.
+          example: Deployment_Viewer
+          type: string
+        permissions:
+          description: The permissions included in the role.
+          example:
+          - '[''deployment.get'']'
+          items:
+            type: string
+          minItems: 1
+          type: array
+        restrictedWorkspaceIds:
+          description: The IDs of the Workspaces that the role is restricted to.
+          example:
+          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      required:
+      - name
+      - permissions
+      type: object
     UpdateTeamRequest:
       properties:
         description:
@@ -543,6 +851,12 @@ components:
       type: object
     UpdateTeamRolesRequest:
       properties:
+        deploymentRoles:
+          description: The user's updated Deployment roles. The Deployments you specify
+            must belong to the Team's Organization.
+          items:
+            $ref: '#/components/schemas/DeploymentRole'
+          type: array
         organizationRole:
           description: The Team's Organization roles.
           enum:
@@ -562,6 +876,12 @@ components:
       type: object
     UpdateUserRolesRequest:
       properties:
+        deploymentRoles:
+          description: The user's updated Deployment roles. Requires also specifying
+            an `OrganizationRole`.
+          items:
+            $ref: '#/components/schemas/DeploymentRole'
+          type: array
         organizationRole:
           description: The user's updated Organization role.
           enum:
@@ -588,6 +908,11 @@ components:
           example: "2022-11-22T04:37:12Z"
           format: date-time
           type: string
+        deploymentRoles:
+          description: The user's Deployment roles.
+          items:
+            $ref: '#/components/schemas/DeploymentRole'
+          type: array
         fullName:
           description: The user's full name.
           example: Jane Doe
@@ -681,12 +1006,11 @@ components:
       - role
       - workspaceId
       type: object
-  securitySchemes:  
-    Bearer:
-      type: http
-      scheme: bearer
-security: 
-  - Bearer: []
+  securitySchemes:
+    JWT:
+      in: header
+      name: Authorization
+      type: apiKey
 info:
   contact: {}
   description: Astro Identity and Access Management (IAM) API
@@ -694,6 +1018,60 @@ info:
   version: v1beta1
 openapi: 3.0.3
 paths:
+  /authorization/permission-groups:
+    get:
+      description: List the available permissions you can grant to a custom role.
+      operationId: ListPermissionGroups
+      parameters:
+      - description: Filter the returned permissions based on the scope they apply
+          to. Note that currently, the only available permissions are in the `DEPLOYMENT`
+          scope.
+        in: query
+        name: scopeType
+        schema:
+          enum:
+          - DEPLOYMENT
+          - WORKSPACE
+          - ORGANIZATION
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PermissionGroup'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: List authorization permission groups
+      tags:
+      - Authorization
   /organizations/{organizationId}/invites:
     post:
       description: Invite a user to an Organization.
@@ -814,6 +1192,430 @@ paths:
       - Invite
       x-permission:
       - action: organization.users.delete
+  /organizations/{organizationId}/role-templates:
+    get:
+      description: Get a list of available role templates in an Organization. A role
+        template can be used as the basis for creating a new custom role.
+      operationId: ListRoleTemplates
+      parameters:
+      - description: The Organization's ID.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: Filter role templates based on the scope of permissions they
+          include.
+        in: query
+        name: scopeTypes
+        schema:
+          items:
+            enum:
+            - DEPLOYMENT
+            - WORKSPACE
+            - ORGANIZATION
+            type: string
+          type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoleTemplate'
+                type: array
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Get role templates
+      tags:
+      - Role
+      x-permission:
+      - action: organization.customRoles.get
+  /organizations/{organizationId}/roles:
+    get:
+      description: List available user roles in an Organization.
+      operationId: ListRoles
+      parameters:
+      - description: The Organization's ID.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: Whether to include default Astro roles in the returned list.
+        in: query
+        name: includeDefaultRoles
+        schema:
+          type: boolean
+      - description: Filter the list of roles based on the scope of each role.
+        in: query
+        name: scopeTypes
+        schema:
+          items:
+            enum:
+            - DEPLOYMENT
+            - WORKSPACE
+            - ORGANIZATION
+            type: string
+          type: array
+      - description: Offset for pagination.
+        in: query
+        name: offset
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      - description: Limit for pagination.
+        in: query
+        name: limit
+        schema:
+          default: 20
+          minimum: 0
+          type: integer
+      - description: Sorting criteria, each criterion should conform to format 'fieldName:asc'
+          or 'fieldName:desc'.
+        in: query
+        name: sorts
+        schema:
+          items:
+            enum:
+            - name:asc
+            - name:desc
+            - scopeType:asc
+            - scopeType:desc
+            - description:asc
+            - description:desc
+            - createdAt:asc
+            - createdAt:desc
+            - updatedAt:asc
+            - updatedAt:desc
+            type: string
+          type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesPaginated'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: List roles
+      tags:
+      - Role
+      x-permission:
+      - action: organization.customRoles.get
+    post:
+      description: Create a custom role that you can assign to users, Teams, and API
+        tokens.
+      operationId: CreateCustomRole
+      parameters:
+      - description: The ID of the Organization where you want to create the custom
+          role.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomRoleRequest'
+        description: The request body for creating the custom role.
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleWithPermission'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Create a custom role
+      tags:
+      - Role
+      x-permission:
+      - action: organization.customRoles.create
+  /organizations/{organizationId}/roles/{customRoleId}:
+    delete:
+      description: Delete a custom role.
+      operationId: DeleteCustomRole
+      parameters:
+      - description: The ID of the Organization to which the role belongs.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The ID of the role to delete.
+        in: path
+        name: customRoleId
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Delete a custom role
+      tags:
+      - Role
+      x-permission:
+      - action: organization.customRoles.delete
+    post:
+      description: Update the metadata or included permissions for a custom role.
+      operationId: UpdateCustomRole
+      parameters:
+      - description: The ID of the Organization to which the role belongs.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The custom role's ID.
+        in: path
+        name: customRoleId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomRoleRequest'
+        description: The request body for updating the custom role.
+        required: true
+        x-originalParamName: body
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleWithPermission'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Update custom role
+      tags:
+      - Role
+      x-permission:
+      - action: organization.customRoles.update
+  /organizations/{organizationId}/roles/{roleId}:
+    get:
+      description: Get details about a custom role.
+      operationId: GetCustomRole
+      parameters:
+      - description: The ID of the Organization to which the role belongs.
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          type: string
+      - description: The role's ID.
+        in: path
+        name: roleId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleWithPermission'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+      security:
+      - JWT: []
+      summary: Get a custom role
+      tags:
+      - Role
+      x-permission:
+      - action: organization.customRoles.get
   /organizations/{organizationId}/teams:
     get:
       description: List all Teams in an Organization.
@@ -825,6 +1627,14 @@ paths:
         required: true
         schema:
           type: string
+      - description: A list of names for Teams to filter by. The API returns details
+          only for the specified Teams.
+        in: query
+        name: names
+        schema:
+          items:
+            type: string
+          type: array
       - description: Offset for pagination
         in: query
         name: offset
@@ -1930,6 +2740,12 @@ paths:
           specified, the API returns only users belonging to the specified Workspace.
         in: query
         name: workspaceId
+        schema:
+          type: string
+      - description: The ID of the Deployment to filter the list of users for. When
+          specified, the API returns only users belonging to the specified Deployment.
+        in: query
+        name: deploymentId
         schema:
           type: string
       - description: Offset for pagination
