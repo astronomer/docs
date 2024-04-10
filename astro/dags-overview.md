@@ -9,7 +9,7 @@ Astro includes several features that enhance the Airflow development experience,
 
 ## Project structure
 
-To develop and run DAGs on Astronomer products, they must belong to an Astro project. An _Astro project_ contains all files required to run your DAGs both locally and on Astronomer. In addition to DAG files, an Astro project includes dependencies, your Astro Runtime version, and any other files your workers need access to when you run tasks.
+To develop and run DAGs on Astronomer products, your DAGs must belong to an Astro project. An _Astro project_ contains all files required to run your DAGs both locally and on Astronomer. In addition to DAG files, an Astro project includes dependencies, your Astro Runtime version, and any other files your workers need access to when you run tasks.
 
 See [Create an Astro project](cli/get-started-cli.md) to learn more about how to create and run Astro projects.
 
