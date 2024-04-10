@@ -37,7 +37,7 @@ By default, the credentials for Grafana are `admin:admin`. To change the passwor
 1. Run the following command to access the Grafana Pod in your Astronomer installation:
 
     ```bash
-    kubectl exec -it <grafana-pod-name> bash -n astronomer
+    kubectl exec -it <grafana-pod-name> -n astronomer -- bash
     ```
 
     Replace `<grafana-pod-name>` with the name of your own Grafana Pod.
