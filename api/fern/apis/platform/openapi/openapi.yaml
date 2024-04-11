@@ -2607,7 +2607,7 @@ components:
       - totalCount
       - workspaces
       type: object
-securitySchemes:
+  securitySchemes:
     JWT:
       type: http
       scheme: bearer
