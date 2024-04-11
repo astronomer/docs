@@ -30,7 +30,7 @@ astro deployment token delete --deployment-id=<deployment-id>
 ## Examples
 
 ```bash
-# delete a deployment token
+# Delete a Deployment API token
 astro deployment token delete --deployment-id=clukapi6r000008l58530cg8i
 ```
 

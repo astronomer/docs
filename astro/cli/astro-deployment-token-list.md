@@ -10,9 +10,9 @@ sidebar_custom_props: { icon: "img/term-icon.png" }
 :::cliastroonly
 :::
 
-List your Astro [Deployment API Token](deployment-api-tokens.md)
+List all [API tokens](deployment-api-tokens.md) belonging to a Deployment.
 
-To use your API token in an automated process, see [Authenticate an automation tool](automation-authentication.md).
+To use an API token in an automated process, see [Authenticate an automation tool](automation-authentication.md).
 
 ## Usage
 

@@ -10,7 +10,7 @@ sidebar_custom_props: { icon: 'img/term-icon.png' }
 :::cliastroonly
 :::
 
-Rotate an Astro [Deployment API Token](deployment-api-tokens.md)
+Rotate an Astro [Deployment API Token](deployment-api-tokens.md).
 
 To use your API token in an automated process, see [Authenticate an automation tool](automation-authentication.md).
 

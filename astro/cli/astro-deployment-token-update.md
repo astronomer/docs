@@ -10,7 +10,7 @@ sidebar_custom_props: { icon: 'img/term-icon.png' }
 :::cliastroonly
 :::
 
-Update an Astro [Deployment API Token](deployment-api-tokens.md)
+Update an Astro [Deployment API Token](deployment-api-tokens.md).
 
 To use your API token in an automated process, see [Authenticate an automation tool](automation-authentication.md).
 
@@ -33,10 +33,10 @@ astro deployment token update --deployment-id=MOCK_DEP_ID
 
 ```bash
 # The CLI prompts you to input a role for a token with Token ID assigned to a specific Deployment
-astro deployment token update TOKEN_ID --deployment-id=clukapi6r000008l58530cg8i
+astro deployment token update <token-id> --deployment-id=clukapi6r000008l58530cg8i
 
 # The CLI prompts you to input a role for a token identified by its name
-astro deployment token update --deployment-id=clukapi6r000008l58530cg8i -name=TOKEN_NAME
+astro deployment token update --deployment-id=clukapi6r000008l58530cg8i --name="Token name"
 
 # The CLI prompts you to select the token from a list and input a role
 astro deployment token update --deployment-id=clukapi6r000008l58530cg8i
