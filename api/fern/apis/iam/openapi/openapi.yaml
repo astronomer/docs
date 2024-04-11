@@ -1007,9 +1007,11 @@ components:
       - workspaceId
       type: object
   securitySchemes:
-    Bearer:
+    JWT:
       type: http
       scheme: bearer
+security: 
+  - JWT: []
 info:
   contact: {}
   description: Astro Identity and Access Management (IAM) API
