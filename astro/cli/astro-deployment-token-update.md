@@ -33,7 +33,7 @@ astro deployment update --deployment-id=<deployment-id> [flags]
 | `--deployment-name` | Description of the Deployment. If the description contains a space, specify the entire description in quotes "". | String |
 | `-e`,`--executor`           |    The executor to use for the deployment.                                               | `CeleryExecutor` or `KubernetesExecutor`. |
 | `-f`,`--force`           |    Force update: Don't prompt a user before Deployment update.                                                | `True` or `False` |
-| `-a`,`--high-availability`           |    Enables High Availability for the Deployment.                                                | `True` or `False |
+| `-a`,`--high-availability`           |    Enables High Availability for the Deployment.                                                | `True` or `False` |
 | `-n`, `--name` | Update the Deployment's name. If the new name contains a space, specify the entire name within quotes "". | String |
 | `--resource-quota-cpu` | The Resource Quota CPU to use for the Deployment. | Numeric. The Resource Quota CPU to use for the Deployment. Example value: `10`. |
 | `--scheduler-size` | The size of Scheduler for the Deployment. | `small`, `medium`, `large` |
@@ -42,9 +42,17 @@ astro deployment update --deployment-id=<deployment-id> [flags]
 ## Examples
 
 ```bash
-# create a deployment token
+# The CLI prompts you to input a role for a token with Token ID assigned to a specific Deployment
+astro deployment token update TOKEN_ID --deployment-id=clukapi6r000008l58530cg8i
+
+# The CLI prompts you to input a role for a token identified by its name
+astro deployment token update --deployment-id=clukapi6r000008l58530cg8i -name=TOKEN_NAME
+
+# The CLI prompts you to select the token from a list and input a role
 astro deployment token update --deployment-id=clukapi6r000008l58530cg8i
 
+# This command assigns a token with the specified TOKEN_ID the role `Deployment Admin` to a Deployment with the following ID.
+astro deployment token update TOKEN_ID --deployment-id=clukapi6r000008l58530cg8i --role=DEPLOYMENT_ADMIN
 ```
 
 ## Related Commands
