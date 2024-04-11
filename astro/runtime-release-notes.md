@@ -70,7 +70,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Load providers configuration when gunicorn workers start ([#38795](https://github.com/apache/airflow/pull/38795))
 - Prevent large objects from being stored in the RTIF ([#38094](https://github.com/apache/airflow/pull/38094))
 - Load `consuming_dags` attr eagerly before dataset listener ([#36247](https://github.com/apache/airflow/pull/36247))
-- add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
+- Add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
 - Improve ExternalTaskSensor Async Implementation ([#36916](https://github.com/apache/airflow/pull/36916))
 
 ## Astro Runtime 10.6.0
@@ -198,7 +198,7 @@ For more information about the major changes in this release, see the [Airflow b
 - Load providers configuration when gunicorn workers start ([#38795](https://github.com/apache/airflow/pull/38795))
 - Prevent large objects from being stored in the RTIF ([#38094](https://github.com/apache/airflow/pull/38094))
 - Load `consuming_dags` attr eagerly before dataset listener ([#36247](https://github.com/apache/airflow/pull/36247))
-- add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
+- Add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
 - Improve ExternalTaskSensor Async Implementation ([#36916](https://github.com/apache/airflow/pull/36916))
 
 ## Astro Runtime 9.11.0
