@@ -2608,10 +2608,11 @@ components:
       - workspaces
       type: object
   securitySchemes:
-    JWT:
-      in: header
-      name: Authorization
-      type: apiKey
+    Bearer:
+      type: http
+      scheme: bearer
+security: 
+  - Bearer: []
 info:
   contact: {}
   description: Astro Platform API
