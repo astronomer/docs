@@ -17,7 +17,7 @@ To use your API token in an automated process, see [Authenticate an automation t
 ## Usage
 
 ```sh
-astro deployment update --deployment-id=<deployment-id> [flags]
+astro deployment token update --deployment-id=MOCK_DEP_ID
 ```
 
 ## Options
