@@ -60,6 +60,19 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Fixed a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`.
 - In the Python task decorator, you can only have `None` as the default parameter for context parameters.
 
+## Astro Runtime 10.7.0
+
+- Release date: April 11, 2024
+- Airflow version: 2.8.4
+
+### Early access Airflow bug fixes
+
+- Load providers configuration when gunicorn workers start ([#38795](https://github.com/apache/airflow/pull/38795))
+- Prevent large objects from being stored in the RTIF ([#38094](https://github.com/apache/airflow/pull/38094))
+- Load `consuming_dags` attr eagerly before dataset listener ([#36247](https://github.com/apache/airflow/pull/36247))
+- Add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
+- Improve ExternalTaskSensor Async Implementation ([#36916](https://github.com/apache/airflow/pull/36916))
+
 ## Astro Runtime 10.6.0
 
 - Release date: March 26, 2024
@@ -174,6 +187,19 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as `INFO` logs regardless of their actual log type.
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
+
+## Astro Runtime 9.12.0
+
+- Release date: April 11, 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Load providers configuration when gunicorn workers start ([#38795](https://github.com/apache/airflow/pull/38795))
+- Prevent large objects from being stored in the RTIF ([#38094](https://github.com/apache/airflow/pull/38094))
+- Load `consuming_dags` attr eagerly before dataset listener ([#36247](https://github.com/apache/airflow/pull/36247))
+- Add "return" statement to "yield" within a while loop in core triggers ([#38389](https://github.com/apache/airflow/pull/38389))
+- Improve ExternalTaskSensor Async Implementation ([#36916](https://github.com/apache/airflow/pull/36916))
 
 ## Astro Runtime 9.11.0
 
