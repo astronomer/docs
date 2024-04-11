@@ -1010,8 +1010,6 @@ components:
     Bearer:
       type: http
       scheme: bearer
-security: 
-  - Bearer: []
 info:
   contact: {}
   description: Astro Identity and Access Management (IAM) API

@@ -2607,10 +2607,6 @@ components:
       - totalCount
       - workspaces
       type: object
-  securitySchemes:
-    Bearer:
-      type: http
-      scheme: bearer
 security: 
   - Bearer: []
 info:
