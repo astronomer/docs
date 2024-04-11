@@ -2607,8 +2607,11 @@ components:
       - totalCount
       - workspaces
       type: object
+    JWT:
+      type: http
+      scheme: bearer
 security: 
-  - Bearer: []
+  - JWT: []
 info:
   contact: {}
   description: Astro Platform API
