@@ -139,6 +139,7 @@ module.exports = {
       items: [
         'airflow-listeners',
         'operator-extra-link-tutorial',
+        'cleanup-dag-tutorial',
         'xcom-backend-tutorial',
         'pycharm-local-dev',
         'vscode-local-dev',
