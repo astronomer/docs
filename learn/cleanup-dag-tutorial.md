@@ -6,7 +6,7 @@ description: 'Learn how to remove unnecessary data from the Airflow metadata dat
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import db_cleanup from '!!raw-loader!../code-samples/cleanup-dag-tutorial/db_cleanup.py';
+import db_cleanup from '!!raw-loader!../code-samples/dags/cleanup-dag-tutorial/db_cleanup.py';
 
 In addition to storing configuration about your Airflow environment, the Airflow [metadata database](https://docs.astronomer.io/learn/airflow-database) stores data about past and present task runs. The more you use Airflow, the more data the metadata DB stores about these task runs. Over a long enough time, this can result in a bloated metadata DB, which can affect performance across your Airflow environment.
 
