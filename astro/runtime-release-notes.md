@@ -238,7 +238,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Bug fixes
 
-- Fixed a bug where the `Cluster Activity` tab was missing.
+- Fixed a bug where the **Cluster Activity** tab was missing from the Airflow UI.
 
 ## Astro Runtime 9.10.0
 
