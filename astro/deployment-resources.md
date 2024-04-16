@@ -61,6 +61,7 @@ To manage Kubernetes resources programmatically, you can set default Pod limits 
 3. In the **Execution** section, configure the following values:
     - **CPU Quota**: The maximum combined CPU usage across all running Pods on your Deployment.
     - **Memory Quota**: The maximum combined memory usage across all running Pods on your Deployment.
+    - **Storage**: The available ephemeral storage in each Kubernetes Pod. Use ephemeral storage to store any data that needs to persist only for the duration of a task.
     - **Default Pod Size**:
         - **CPU**: The amount of CPUs that your tasks run with if no CPU usage is specified in their Pod configuration.
         - **Memory**: The amount of memory that your tasks run with if no memory usage is specified in their Pod configuration.

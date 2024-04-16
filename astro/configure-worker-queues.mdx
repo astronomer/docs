@@ -48,8 +48,9 @@ You can configure each worker queue on Astro with the following settings:
 
 - **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
 - **Concurrency:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. The default for your worker type is suitable for most use cases.
+- **Storage**: The available ephemeral storage in each worker. Use ephemeral storage to store any data that needs to persist only for the duration of a task.
 - **Min # Workers / Max # Workers**: The minimum and maximum number of workers that can run at a time. The number of workers autoscales based on **Concurrency** and the current number of tasks in a `queued` or `running` state.
-- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker’s total available CPU, memory, and storage is defined by its worker size. For more information, see the following section on hosted worker types.
+- **Worker Type:** The size of workers in the worker queue, for example A5 or A20. A worker's total available CPU, memory, and storage is defined by its worker size. For more information, see the following section on hosted worker types.
 
 ### Hosted worker types
 
