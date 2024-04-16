@@ -1,4 +1,4 @@
-name: Reload API spec
+name: Reload API spec - weekly
 
 on:
   repository_dispatch:
