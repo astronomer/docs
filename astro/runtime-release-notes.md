@@ -234,7 +234,7 @@ For more information about the major changes in this release, see the [Airflow b
 ### Additional Improvements
 
 - You can now edit and delete monitoring DAGs in the Astro UI.
-- Updated the version of `sqlparse` to `0.5.0.
+- Updated the version of `sqlparse` to `0.5.0`.
 
 ### Bug fixes
 
