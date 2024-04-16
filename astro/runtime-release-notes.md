@@ -218,6 +218,28 @@ For more information about the major changes in this release, see the [Airflow b
 - Revoking audit_log permission from all users except admin ([#37501](https://github.com/apache/airflow/pull/37501))
 - Check permissions for ImportError ([#37468](https://github.com/apache/airflow/pull/37468))
 
+## Astro Runtime 9.10.1
+
+- Release date: April, 16 2024
+- Airflow version: 2.7.3
+
+### Early access Airflow bug fixes
+
+- Providers now load when Gunicorn workers start ([#38795](https://github.com/apache/airflow/pull/38795))
+- You can now customize the size of objects stored in the rendered `taskinstance` field ([#38094](https://github.com/apache/airflow/pull/38094))
+- Fixed an issue where the dataset listener could cause an error by closing the session prematurely ([#36247](https://github.com/apache/airflow/pull/36247))
+- Fixed an issue where core triggers were not exiting a `while` loop as expected ([#38389](https://github.com/apache/airflow/pull/38389))
+- Updated the behavior of the asynchornous implementation of `ExternalTaskSensor` to work more similarly to the synchronous implementation([#36916](https://github.com/apache/airflow/pull/36916))
+
+### Additional Improvements
+
+- You can now edit and delete monitoring DAGs in the Astro UI.
+- Updated the version of `sqlparse` to `0.5.0.
+
+### Bug fixes
+
+- Fixed a bug where you could not access the cluster activity page as expected.
+
 ## Astro Runtime 9.10.0
 
 - Release date: January 31, 2024
