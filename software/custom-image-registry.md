@@ -77,7 +77,7 @@ A custom registry can still connect to public networks or internet. Therefore, t
 
   :::info
 
-  To use different registries for each Deployment, do not set `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host`. Also, When specifying the host, ensure to include both the registry and the repository in the format `<registry>/xxx/xxx`, where xxx/xxx represents the repository name and optionally a subdirectory within that repository.
+  To use different registries for each Deployment, do not set `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host`. When you specify the host, include both the registry and the repository in the format `<registry>/<repo-name>/<subdirectory>`, where `<repo-name>/<subdirectory>` represents a repository name and optionally a subdirectory within that repository.
   
   :::
 
