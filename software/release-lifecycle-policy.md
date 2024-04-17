@@ -77,7 +77,7 @@ If a major stability bug is identified by our team, a fix will be backported to 
 
 If a major security issue is identified, a fix will be backported and made available as a new patch version for _all_ supported stable and LTS releases. Major issues in this category are classified by a combination of impact and exploitability.
 
-In rare instances, the Astronomer team may make an exception and backport a bug or security fix to a release that is beyond the commitment stated above. To submit a request for consideration, please reach out to your customer success manager.
+In rare instances, the Astronomer team may make an exception and backport a bug or security fix to a release that is beyond the commitment stated above. To submit a request for consideration, please open a ticket with [support](support.md).
 
 ## Software lifecycle schedule
 
