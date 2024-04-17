@@ -25,6 +25,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## April 16, 2024
+
+### Bug fixes
+
+- Fixed an issue where you couldn't grant a custom Deployment role to a Deployment API token using the Astro API.
+
 ## April 9, 2024
 
 ### Additional improvements
