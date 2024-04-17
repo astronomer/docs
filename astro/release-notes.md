@@ -27,19 +27,6 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## April 16, 2024
 
-### Configure ephemeral storage for workers
-
-:::publicpreview
-:::
-
-You can now configure up to 100Gi of ephemeral storage for each Celery worker or Kubernetes worker Pod on your Deployment. Having additional ephemeral storage is useful if you need to:
-
-- Load large datasets onto workers for transformations.
-- Create and write large files to disk for external transfers.
-- Implement an alternative to external object storage for storing temporary data in task execution, such as XComs.
-
-Note that configuring more than 10Gi of ephemeral storage for Celery workers or 5Gi for Kubernetes worker Pods can result in additional charges for resource use. See [Configure worker queues](configure-worker-queues.mdx#worker-queue-settings) and [Deployment resources](deployment-resources.md#configure-kubernetes-pod-resources) to configure these values for both the Celery and Kubernetes executor.
-
 ### Bug fixes
 
 - Fixed an issue where you couldn't grant a custom Deployment role to a Deployment API token using the Astro API 
