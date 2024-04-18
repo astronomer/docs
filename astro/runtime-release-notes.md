@@ -60,6 +60,17 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Fixed a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`.
 - In the Python task decorator, you can only have `None` as the default parameter for context parameters.
 
+## Astro Runtime 10.8.0
+
+- Release date: April, 18 2024
+- Airflow version: 2.8.4
+
+### Additional improvements
+
+- Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release. 
+- Updated `sqlparse` to `0.5.0`.
+- Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
+
 ## Astro Runtime 10.7.0
 
 - Release date: April 11, 2024
@@ -188,6 +199,21 @@ For more information about the major changes in this release, see the [Airflow b
 - Fixed an issue in Astro where logging features could be disrupted if you set `AZURE_CLIENT_ID` as an environment variable.
 - Fixed an issue where Astro audit logs listed a user's name as `User` for trigger events instead of their IDs.
 
+## Astro Runtime 9.13.0
+
+- Release date: April, 18 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release. 
+- Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
+- Updated the version of `sqlparse` to `0.5.0`.
+
+### Bug fixes
+
+- Fixed a bug where the **Cluster Activity** tab was missing from the Airflow UI.
+
 ## Astro Runtime 9.12.0
 
 - Release date: April 11, 2024
@@ -218,6 +244,15 @@ For more information about the major changes in this release, see the [Airflow b
 - Revoking audit_log permission from all users except admin ([#37501](https://github.com/apache/airflow/pull/37501))
 - Check permissions for ImportError ([#37468](https://github.com/apache/airflow/pull/37468))
 
+## Astro Runtime 9.10.2
+
+- Release date: April, 18 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
+
 ## Astro Runtime 9.10.1
 
 - Release date: April, 16 2024
@@ -233,7 +268,6 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Additional Improvements
 
-- You can now edit and delete monitoring DAGs in the Astro UI.
 - Updated the version of `sqlparse` to `0.5.0`.
 
 ### Bug fixes
