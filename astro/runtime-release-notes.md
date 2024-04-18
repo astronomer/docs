@@ -220,7 +220,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ## Astro Runtime 9.10.2
 
-- Release date: April, 18 2024
+- Release date: April 18, 2024
 - Airflow version: 2.7.3
 
 ### Additional improvements
