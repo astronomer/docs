@@ -206,6 +206,11 @@ For more information about the major changes in this release, see the [Airflow b
 ### Additional improvements
 
 - Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
+- Updated the version of `sqlparse` to `0.5.0`.
+
+### Bug fixes
+
+- Fixed a bug where the **Cluster Activity** tab was missing from the Airflow UI.
 
 ## Astro Runtime 9.12.0
 
@@ -261,7 +266,6 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Additional Improvements
 
-- You can now edit and delete monitoring DAGs in the Astro UI.
 - Updated the version of `sqlparse` to `0.5.0`.
 
 ### Bug fixes
