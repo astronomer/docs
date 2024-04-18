@@ -8,7 +8,7 @@ unlisted: true
 :::privatepreview
 :::
 
-Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
+Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates both the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
 
 To deploy code through an integrated GitHub repository, you first connect a GitHub repository with your Astro project to an Astro Workspace. Then, you map a Git branch in that repository to an Astro Deployment. When a pull request is merged into your mapped branch, your code is automatically deployed to Astro.
 
@@ -54,18 +54,18 @@ Before you begin, ensure that you’re logged in to GitHub with permissions to r
 1. In your Workspace, click **Workspace Settings** > **Git Deploys.**
 2. Click **Install GitHub Application.** A window appears instructing you to authorize the **Astro App** on your personal GitHub account. Follow the prompts to authorize the application.
 3. Return to the Astro UI. From the **Git Deploys** screen, click **Connect Repository**.
-4. Select the Organization that contains the repository you want to integrate with Astro, then click **Continue**. A new window prompts you to allow **Astro App** to access either all repositories or specific repositories within your GitHub Organization. Astronomer recommends **Only selected repositories**.
+4. Select the Organization that contains the repository you want to integrate with Astro, then click **Continue**. A new window prompts you to allow **Astro App** to access either all repositories or specific repositories within your GitHub Organization. Astronomer recommends **Only select repositories**.
 5. Choose which repositories you want to enable the app for, then click **Request.**
 
     ![The GitHub authorization screen for connecting a repository to GitHub. GitHub requests for the Astro App to connect to at least one of your repositories](/img/docs/request-astro-app.png)
 
-5. Configure the following fields:
+6. Configure the following fields:
 
     - **Repository:** Select the repository you want to integrate with Astro.
     - **Astro Project Path:** Specify the path to your Astro project, up to and including the Astro project folder. For example, `/myorg/myprojects/my-astro-project`
 
-6. Click **Connect Repository**.
-7. Map specific branches in your repository to Deployments in your Workspace. When you map a branch to a Deployment, any commits to that branch trigger a code deploy to Astro. For example, you can map a development branch and your production branch to separate Deployments so that bugs in development don’t affect your production data pipelines.
+7. Click **Connect Repository**.
+8. Map specific branches in your repository to Deployments in your Workspace. When you map a branch to a Deployment, any commits to that branch trigger a code deploy to Astro. For example, you can map a development branch and your production branch to separate Deployments, so that bugs in development don’t affect your production data pipelines.
 
 Any commits to your mapped branches will now trigger a code deploy to the corresponding Deployment.
 
@@ -92,7 +92,7 @@ When you trigger a code deploy by committing a change to one of your mapped bran
 
 - Which user triggered the deploy.
 - At what time the deploy was triggered.
-- Which pull request or commit triggered the deploy. This includes the Git commit description and a link to your Pull Request if applicable.
+- Which pull request or commit triggered the deploy. This includes the Git commit description and a link to your pull request if applicable.
 
 ![The deploy history screen in the Astro UI with a GitHub deploy listed. The entry includes the commit that triggered the deploy and shows it was triggered by "GitHub App"](/img/docs/github-deploy-history.png)
 
