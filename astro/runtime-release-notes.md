@@ -60,6 +60,16 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 - Fixed a bug where Airflow would show `failed_upstream` when a dynamically mapped task was `skipped`.
 - In the Python task decorator, you can only have `None` as the default parameter for context parameters.
 
+## Astro Runtime 10.8.0
+
+- Release date: April, 18 2024
+- Airflow version: 2.8.4
+
+### Additional improvements
+
+- Updated `sqlparse` to `0.5.0`.
+- Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
+
 ## Astro Runtime 10.7.0
 
 - Release date: April 11, 2024
@@ -217,15 +227,6 @@ For more information about the major changes in this release, see the [Airflow b
 - Revert "Fix future DagRun rarely triggered by race conditions when max_active_runs reached its upper limit. ([#37596](https://github.com/apache/airflow/pull/37596))
 - Revoking audit_log permission from all users except admin ([#37501](https://github.com/apache/airflow/pull/37501))
 - Check permissions for ImportError ([#37468](https://github.com/apache/airflow/pull/37468))
-
-## Astro Runtime 9.10.2
-
-- Release date: April, 18 2024
-- Airflow version: 2.7.3
-
-### Additional improvements
-
-- Upgraded [Gunicorn](https://gunicorn.org/) to 22.0.0.
 
 ## Astro Runtime 9.10.1
 
