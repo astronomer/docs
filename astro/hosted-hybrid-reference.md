@@ -4,7 +4,7 @@ title: "Astro Hosted vs. Astro Hybrid feature differences"
 id: hosted-hybrid-reference
 ---
 
-[Astro Hosted](astro-architecture.md), also known simply as Astro, is a fully-managed SaaS application for Apache Airflow. [Astro Hybrid](hybrid-overview.md) is a self-hosted, Astronomer-managed Airflow service. Due to the difference in architecture between these products, some features are available only on a specific architecture.
+[Astro Hosted](astro-architecture.md), also known simply as **Astro**, is a fully-managed SaaS application for Apache Airflow. [Astro Hybrid](hybrid-overview.md) is a self-hosted, Astronomer-managed Airflow service. Due to the difference in architecture between these products, some features are available only on a specific architecture.
 
 Use this guide to understand which features are exclusive to Astro Hosted or Astro Hybrid. If a feature isn't listed here, it's available in both products. 
 
