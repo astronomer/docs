@@ -218,6 +218,15 @@ For more information about the major changes in this release, see the [Airflow b
 - Revoking audit_log permission from all users except admin ([#37501](https://github.com/apache/airflow/pull/37501))
 - Check permissions for ImportError ([#37468](https://github.com/apache/airflow/pull/37468))
 
+## Astro Runtime 9.10.2
+
+- Release date: April, 18 2024
+- Airflow version: 2.7.3
+
+### Additional improvements
+
+- Upgraded [Gunicorn](https://gunicorn.org/) to 22.0.0.
+
 ## Astro Runtime 9.10.1
 
 - Release date: April, 16 2024
