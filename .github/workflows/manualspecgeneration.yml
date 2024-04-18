@@ -17,4 +17,4 @@ jobs:
       uses: peter-evans/create-pull-request@v6
       with:
         git-token: ${{ secrets.API_PAT }}
-        title: '${{ steps.date.outputs.date } - Generate API spec and changelog'
+        title: '${{ steps.date.outputs.date }} - Generate API spec and changelog'
