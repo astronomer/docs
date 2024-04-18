@@ -1,18 +1,18 @@
 ---
 title: 'Deploy code with the Astro GitHub integration'
 id: deploy-github-integration
-description: Learn about the different ways you can deploy code to Astro.
+description: Learn how to automatically deploy Apache Airflow code to Astro from GitHub with a built-in integration.
 unlisted: true
 ---
 
 :::privatepreview
 :::
 
-Integrating GitHub with Astro is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
+Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
 
-To deploy code through an integrated GitHub repository, you first connect a GitHub repository with your Airflow code to an Astro Workspace. Then, you map a Git branch in that repository to an Astro Deployment. When a pull request is merged into your mapped branch, your code is automatically deployed to Astro.
+To deploy code through an integrated GitHub repository, you first connect a GitHub repository with your Astro project to an Astro Workspace. Then, you map a Git branch in that repository to an Astro Deployment. When a pull request is merged into your mapped branch, your code is automatically deployed to Astro.
 
-Compared to deploying code manually, using the Astro CLI, or through a custom CI/CD process, using the Astro’s GitHub integration:
+Compared to deploying code manually using the Astro CLI or through a custom CI/CD process, using Astro’s GitHub integration:
 
 - Allows you to enforce software development best practices without maintaining custom CI/CD scripts.
 - Makes it easy for developers to iterate on DAG code quickly.
@@ -35,7 +35,7 @@ The Astro GitHub integration is not supported if any of the following are true:
 - You need to deploy images from an external or private Docker registry.
 - You use the `--image-only` flag in the Astro CLI, or you need to exclude DAGs from specific deploys. This is usually the case if you have a multiple-repository deploy strategy as described in [Develop a CI/CD strategy](https://docs.astronomer.io/astro/set-up-ci-cd#multiple-repositories).
 - Your repository is hosted in an on-premises GitHub Enterprise server. To deploy code from an on-premises repository, see [Private network CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-private-network).
-- There are currently no checks to prevent you from downgrading your version of Astro Runtime. Astronomer recommends only downgrading Deployments using rollbacks.
+- There are currently no checks to prevent you from downgrading your version of Astro Runtime. Astronomer recommends only downgrading Deployments using [rollbacks](https://docs.astronomer.io/astro/deploy-history#roll-back-to-a-past-deploy).
 
 There is currently no limit or additional charge for deploying code to Astro with the GitHub integration, but Astronomer might reach out to discuss your usage if you trigger an unusually large number of deploys.
 
@@ -43,18 +43,19 @@ There is currently no limit or additional charge for deploying code to Astro wit
 
 - Workspace Admin permissions on an Astro Workspace.
 - A GitHub repository that contains an [Astro project](https://docs.astronomer.io/astro/cli/develop-project#create-an-astro-project). The Astro project can exist at any level in your repository.
-- A GitHub account with read and write permissions to the repositories containing your Astro project. If you don't have these permissions, send a request GitHub repository administrator when prompted by Astro.
+- A GitHub account with read and write permissions to the repositories containing your Astro project. If you don't have these permissions, send a request to your GitHub repository administrator when prompted by Astro.
 - At least one Astro Deployment.
 - At least one GitHub branch that you want to deploy to Astro.
 
 ## Connect a GitHub repository to a Workspace
 
-Before you begin, ensure that you’re logged in on GitHub with permissions to read code from the repository where you want to deploy code.
+Before you begin, ensure that you’re logged in to GitHub with permissions to read code from the repository where you want to deploy code.
 
 1. In your Workspace, click **Workspace Settings** > **Git Deploys.**
 2. Click **Install GitHub Application.** A window appears instructing you to authorize the **Astro App** on your personal GitHub account. Follow the prompts to authorize the application.
 3. Return to the Astro UI. From the **Git Deploys** screen, click **Connect Repository**.
-4. Select the Organization that contains the repository you want to integrate with Astro, then click **Continue**. A new window prompts you to allow **Astro App** to access either all repositories or specific repositories within your GitHub Organization. Choose which repositories you want to enable the app for, then click **Request.**
+4. Select the Organization that contains the repository you want to integrate with Astro, then click **Continue**. A new window prompts you to allow **Astro App** to access either all repositories or specific repositories within your GitHub Organization. Astronomer recommends **Only selected repositories**.
+5. Choose which repositories you want to enable the app for, then click **Request.**
 
     ![The GitHub authorization screen for connecting a repository to GitHub. GitHub requests for the Astro App to connect to at least one of your repositories](/img/docs/request-astro-app.png)
 
@@ -66,14 +67,22 @@ Before you begin, ensure that you’re logged in on GitHub with permissions to r
 6. Click **Connect Repository**.
 7. Map specific branches in your repository to Deployments in your Workspace. When you map a branch to a Deployment, any commits to that branch trigger a code deploy to Astro. For example, you can map a development branch and your production branch to separate Deployments so that bugs in development don’t affect your production data pipelines.
 
-Any commits to your mapped branches will now trigger a code deploy to the related Deployment.
+Any commits to your mapped branches will now trigger a code deploy to the corresponding Deployment.
 
 ## Deploy from GitHub to Astro
 
-To deploy code from your GitHub repository to Astro, make a commit to one of your mapped branches. This commit triggers the Astro App to deploy your Astro project.
+To deploy code from your GitHub repository to Astro, you can either:
 
-- If you only change your DAGs, your GitHub repository triggers a DAG-only deploy.
-- If you change a configuration in your project, your GitHub repository triggers a full project image deploy.
+- Make a direct commit to one of your mapped branches.
+- Merge a pull request against one of our mapped branches.
+
+Both of these actions triggers the Astro App to deploy your Astro project to the mapped Astro Deployment. When DAG-only deploys are enabled, your GitHub repository triggers:
+
+- A DAG-only deploy if only your DAGs are changed. 
+- A full project image deploy if you change a configuration in your project.
+
+If DAG-only deploys are disabled, all code changes will trigger a full project image deploy. To learn more about DAG-only deploys, see [Deploy DAGs to Astro](deploy-dags.md).
+
 
 You can check the status of your deploy in the Astro UI.
 
@@ -81,9 +90,9 @@ You can check the status of your deploy in the Astro UI.
 
 When you trigger a code deploy by committing a change to one of your mapped branches, details about the code deploy appear in the Astro UI. For past and currently running deploys, you can review:
 
-- Who triggered the deploy
-- When the deploy was triggered
-- Which pull request or commit triggered the deploy
+- Which user triggered the deploy.
+- At what time the deploy was triggered.
+- Which pull request or commit triggered the deploy. This includes the Git commit description and a link to your Pull Request if applicable.
 
 ![The deploy history screen in the Astro UI with a GitHub deploy listed. The entry includes the commit that triggered the deploy and shows it was triggered by "GitHub App"](/img/docs/github-deploy-history.png)
 
