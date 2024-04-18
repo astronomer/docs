@@ -206,9 +206,9 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Additional improvements
 
+- Added functionality for using plugins to generate custom views in the Airflow UI. This feature will be fully available on Astro in a future release. 
 - Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
 - Updated the version of `sqlparse` to `0.5.0`.
-- Added functionality for using plugins to generate custom views in the Airflow UI. This feature will be fully available on Astro in a future release. 
 
 ### Bug fixes
 
