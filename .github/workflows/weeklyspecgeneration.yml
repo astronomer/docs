@@ -20,5 +20,5 @@ jobs:
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
       with:
-        git-token: ${{ secrets.API_PAT }}
-        title: '${{ steps.date.outputs.date } - Generate API spec and changelog'
+        token: ${{secrets.GITHUB_TOKEN}}
+        title: '${{ steps.date.outputs.date }} - Generate API spec and changelog'
