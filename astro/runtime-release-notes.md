@@ -29,6 +29,16 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 11.1.0
+
+- Release date: April 19, 2024
+- Airflow version: 2.8.4
+
+### Additional improvements
+
+- Updated `sqlparse` to `0.5.0`.
+- Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0
+
 ## Astro Runtime 11.0.0
 
 - Release date: April 8, 2024
@@ -62,7 +72,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ## Astro Runtime 10.8.0
 
-- Release date: April, 18 2024
+- Release date: April 18, 2024
 - Airflow version: 2.8.4
 
 ### Additional improvements
@@ -201,7 +211,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ## Astro Runtime 9.13.0
 
-- Release date: April, 18 2024
+- Release date: April 18, 2024
 - Airflow version: 2.7.3
 
 ### Additional improvements
@@ -246,7 +256,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ## Astro Runtime 9.10.2
 
-- Release date: April, 18 2024
+- Release date: April 18, 2024
 - Airflow version: 2.7.3
 
 ### Additional improvements
@@ -255,7 +265,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ## Astro Runtime 9.10.1
 
-- Release date: April, 16 2024
+- Release date: April 16, 2024
 - Airflow version: 2.7.3
 
 ### Early access Airflow bug fixes
