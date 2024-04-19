@@ -196,16 +196,6 @@ components:
           type: string
         role:
           description: The role of the API token.
-          enum:
-          - DEPLOYMENT_ADMIN
-          - WORKSPACE_OWNER
-          - WORKSPACE_OPERATOR
-          - WORKSPACE_AUTHOR
-          - WORKSPACE_MEMBER
-          - WORKSPACE_ACCESSOR
-          - ORGANIZATION_OWNER
-          - ORGANIZATION_BILLING_ADMIN
-          - ORGANIZATION_MEMBER
           example: WORKSPACE_OWNER
           type: string
         tokenExpiryPeriodInDays:
@@ -241,7 +231,7 @@ components:
         permissions:
           description: The permissions included in the role.
           example:
-          - '[''deployment.get'']'
+          - deployment.get
           items:
             type: string
           minItems: 1
@@ -249,7 +239,7 @@ components:
         restrictedWorkspaceIds:
           description: The IDs of the Workspaces that the role is restricted to.
           example:
-          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          - cldbvzoi20182g8odxt8ehi5i
           items:
             type: string
           type: array
@@ -324,7 +314,7 @@ components:
         permissions:
           description: The role's permissions.
           example:
-          - '[''deployment.get'']'
+          - deployment.get
           items:
             type: string
           type: array
@@ -466,7 +456,7 @@ components:
         restrictedWorkspaceIds:
           description: The IDs of Workspaces that the role is restricted to.
           example:
-          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          - cldbvzoi20182g8odxt8ehi5i
           items:
             type: string
           type: array
@@ -506,7 +496,7 @@ components:
         permissions:
           description: The role's permissions.
           example:
-          - '[''deployment.get'']'
+          - deployment.get
           items:
             type: string
           type: array
@@ -546,14 +536,14 @@ components:
         permissions:
           description: The role's permissions.
           example:
-          - '[''deployment.get'']'
+          - deployment.get
           items:
             type: string
           type: array
         restrictedWorkspaceIds:
           description: The IDs of Workspaces that the role is restricted to.
           example:
-          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          - cldbvzoi20182g8odxt8ehi5i
           items:
             type: string
           type: array
@@ -819,7 +809,7 @@ components:
         permissions:
           description: The permissions included in the role.
           example:
-          - '[''deployment.get'']'
+          - deployment.get
           items:
             type: string
           minItems: 1
@@ -827,7 +817,7 @@ components:
         restrictedWorkspaceIds:
           description: The IDs of the Workspaces that the role is restricted to.
           example:
-          - '[''cldbvzoi20182g8odxt8ehi5i'']'
+          - cldbvzoi20182g8odxt8ehi5i
           items:
             type: string
           type: array
