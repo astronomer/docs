@@ -37,7 +37,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 ### Additional improvements
 
 - Updated `sqlparse` to `0.5.0`.
-- Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0
+- Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
 
 ## Astro Runtime 11.0.0
 
