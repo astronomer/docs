@@ -2609,10 +2609,9 @@ components:
       type: object
   securitySchemes:
     JWT:
-      type: http
-      scheme: bearer
-security: 
-  - JWT: []
+      in: header
+      name: Authorization
+      type: apiKey
 info:
   contact: {}
   description: Astro Platform API
