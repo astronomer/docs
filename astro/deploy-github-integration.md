@@ -52,12 +52,15 @@ There is currently no limit or additional charge for deploying code to Astro wit
 Before you begin, ensure that you’re logged in to GitHub with permissions to read code from the repository where you want to deploy code.
 
 1. In your Workspace, click **Workspace Settings** > **Git Deploys.**
-2. Click **Install GitHub Application.** A window appears instructing you to authorize the **Astro App** on your personal GitHub account. Follow the prompts to authorize the application.
+2. Click **Authorize GitHub Application.** A window appears instructing you to authorize the **Astro App** on your personal GitHub account. Follow the prompts to authorize the application.
+
+     <img src={require("../static/img/docs/authorize-astro-app.png").default} alt="The GitHub authorization screen for connecting a repository to GitHub. GitHub requests for the Astro App to have some of the permissions of your GitHub account" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
+
 3. Return to the Astro UI. From the **Git Deploys** screen, click **Connect Repository**.
 4. Select the Organization that contains the repository you want to integrate with Astro, then click **Continue**. A new window prompts you to allow **Astro App** to access either all repositories or specific repositories within your GitHub Organization. Astronomer recommends **Only select repositories**.
-5. Choose which repositories you want to enable the app for, then click **Request.**
+5. Choose which repositories you want to enable the app for, then click **Install.**
 
-    ![The GitHub authorization screen for connecting a repository to GitHub. GitHub requests for the Astro App to connect to at least one of your repositories](/img/docs/request-astro-app.png)
+    <img src={require("../static/img/docs/request-astro-app.png").default} alt="The GitHub installation screen for connecting a repository to Astro. GitHub requests for the Astro App to be installed in at least of your repositories." style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 6. Configure the following fields:
 
@@ -82,7 +85,6 @@ Both of these actions triggers the Astro App to deploy your Astro project to the
 - A full project image deploy if you change a configuration in your project.
 
 If DAG-only deploys are disabled, all code changes will trigger a full project image deploy. To learn more about DAG-only deploys, see [Deploy DAGs to Astro](deploy-dags.md).
-
 
 You can check the status of your deploy in the Astro UI.
 
