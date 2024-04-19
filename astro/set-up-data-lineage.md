@@ -7,7 +7,7 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
-:::publicpreview
+:::privatepreview
 :::
 
 [Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking data from its origin to wherever it is consumed downstream as it flows through a data pipeline. This includes connections between datasets and tables in a database as well as rich metadata about the tasks that create and transform data. You can observe data lineage to:
