@@ -28,7 +28,7 @@ Astronomer recommends using the latest available version of the Astro CLI for al
 
 For more detail about the changes in each Astronomer Software release, see the [Astronomer Software Release Notes](release-notes.md).
 
-All currently supported Astronomer-distributed images are compatible with all versions of Astronomer Software. Astro Runtime maintenance is independent of Software maintenance. For more information, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md).
+All currently supported Astronomer-distributed images are compatible with all versions of Astronomer Software. Astro Runtime maintenance is independent of Software maintenance. For more information, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.mdx).
 
 ### Kubernetes version support table and policy
 
@@ -48,9 +48,9 @@ See the following table for all supported Kubernetes versions in each maintained
 |       0.33.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |                 |
 |       0.33.1        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
 |       0.33.2        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
+|       0.33.3        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
 |       0.34.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
-
-
+|       0.34.1        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 

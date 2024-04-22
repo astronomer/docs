@@ -142,4 +142,4 @@ The following configuration is an example of how you can configure a custom oper
 
 This is how the cell will render in the pipeline editor:
 
-![How the example cell appears in the Cloud UI](/img/cloud-ide/custom-cell-example.png)
+![How the example cell appears in the Astro UI](/img/cloud-ide/custom-cell-example.png)

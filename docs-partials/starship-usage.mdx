@@ -20,7 +20,7 @@ Some environment variables or Airflow Settings, like global environment variable
 
 1. In the Airflow UI for your source Airflow environment, go to **Astronomer** > **Migration Tool 🚀**.
 
-    ![Location of the Astro migration menu in the Cloud UI](/img/docs/migration-menu.png)
+    ![Location of the Astro migration menu in the Astro UI](/img/docs/migration-menu.png)
 
 2. Click **Get Token**.
 3. If required, log in to [cloud.astronomer.io](https://cloud.astronomer.io).
@@ -70,7 +70,7 @@ Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/
 
 5. Replace the following placeholder values:
 
-    - `<your-deployment-url>`: To retrieve a deployment URL, open your Astro Airflow Deployment in the Cloud UI, click **Open Airflow**, and copy the Airflow UI URL excluding `/home` on the end of the URL. For example, if your deployment URL is `https://astronomer.astronomer.run/abcdt4ry/home`, you would enter `https://astronomer.astronomer.run/abcdt4ry`.
+    - `<your-deployment-url>`: To retrieve a deployment URL, open your Astro Airflow Deployment in the Astro UI, click **Open Airflow**, and copy the Airflow UI URL excluding `/home` on the end of the URL. For example, if your deployment URL is `https://astronomer.astronomer.run/abcdt4ry/home`, you would enter `https://astronomer.astronomer.run/abcdt4ry`.
     - `<your-astro-token>`: To retrieve an Astronomer token, go to [cloud.astronomer.io/token](https://cloud.astronomer.io/token) and log in using your Astro credentials. After you log in, copy the token that appears and paste it as the value.
 
 6. Click **Trigger**. After the DAG successfully runs, all connections, variables, and environment variables that are available from the Airflow UI are migrated to Astronomer.

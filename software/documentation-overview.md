@@ -48,4 +48,4 @@ The following topics are available to help make sure you're aware of the latest 
 
 - [Astronomer Software release notes](release-notes.md)
 - [Version compatibility reference](version-compatibility-reference.md)
-- [Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md)
+- [Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.mdx)

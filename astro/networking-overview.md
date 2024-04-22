@@ -5,13 +5,19 @@ id: networking-overview
 description: Learn about the fundamentals of creating network connections from Astro.
 ---
 
-To maximize the power of Airflow, your DAGs need to be able access data and services that exist outside of Astro. A _network connection_ is the basic requirement for accessing external resources from Astro. After you create a network connection, you can configure an Airflow connection to access specific resources that are available through the connection. 
+To maximize the power of Airflow, your DAGs need to be able access data and services that exist outside of Astro. A _network connection_ is the basic requirement for accessing external resources from Astro. After you create a network connection, you can configure an Airflow connection to access specific resources that are available through the connection.
 
-Network connections can be either public or private, and each type of connection has a different implementation for security and authorization. 
+Network connections can be either public or private, and each type of connection has a different implementation for security and authorization.
 
 In a public connection, data travels over the public internet to publicly accessible IP addresses on either side of the connection. For example, consider a Deployment that accesses an S3 bucket using an AWS connection with a configured AWS access key and secret. Because the only limitation for accessing the S3 bucket is API authentication, this is an example of a public connection.
 
-In a private connection, data travels over a private network through private IP addresses. Private connections have significantly more security requirements and are recommended whenever you're accessing sensitive or private data. 
+In a private connection, data travels over a private network through private IP addresses. Private connections have significantly more security requirements and are recommended whenever you're accessing sensitive or private data.
+
+:::info
+
+Astronomer can support alternative networking solutions that are not covered in documentation. If you have specific networking requirements that aren't covered in documentation, or you need help to create a custom network connection, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
+
+:::
 
 ## Network connection recommendations
 
@@ -26,3 +32,9 @@ To create a VPC peering connection on each support cloud see:
 - [Azure: Create a private connection between Astro and Azure](connect-azure.md?tab=VNet%20peering#create-a-private-connection-between-astro-and-azure)
 
 After you create your VPC peering connection, follow the steps in [Authorize your Deployment to cloud resources](authorize-deployments-to-your-cloud.md) for each Deployment that needs access to your cloud.
+
+:::info
+
+Astronomer monitors the health of Deployments and DAGs, but it doesn't monitor the status of network connections because they exist outside of Astronomer's observable control plane and data plane.
+
+:::

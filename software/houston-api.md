@@ -116,7 +116,7 @@ To query for information about a user on the platform (e.g. "When was this user 
 
 ```graphql
 query User {
-  users(user: { email: "<name@mycompany.com>"} )
+  users(user: { email: "<name@example.com>"} )
   {
     id
     roleBindings {role}
@@ -172,7 +172,7 @@ Here, `<airflow-executor>` can be `LocalExecutor`, `CeleryExecutor`, or `Kuberne
 
 :::info 
 
-The `upsertDeployment` mutation is behind a feature flag. To enable this feature, set the following configuration in your `config.yaml` file:
+The `upsertDeployment` mutation is behind a feature flag. To enable this feature, set the following configuration in your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -563,7 +563,7 @@ With that information, run the following:
 mutation WorkspaceAddUser {
 	workspaceAddUser (
     workspaceUuid: "<workspace-id>"
-    email: "<email@mycompany.com>"
+    email: "<email@example.com>"
     role: WORKSPACE_ADMIN
   ) {
     users {emails {address} }

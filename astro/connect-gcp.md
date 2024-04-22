@@ -39,7 +39,7 @@ All Astro clusters include a set of external IP addresses that persist for the l
 
 ### Allowlist external IP addresses for a cluster
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
 4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
@@ -93,7 +93,7 @@ After both VPC peering connections have been created, the connection becomes act
 
 Use Private Service Connect (PSC) to create private connections from Astro to GCP services without connecting over the public internet. See [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) to learn more.
 
-Astro clusters are by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis#supported-apis). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
+Astro clusters are by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-apis-global). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
 
 A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
 

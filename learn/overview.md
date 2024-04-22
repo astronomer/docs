@@ -13,27 +13,27 @@ import AstroCard from '@site/src/components/AstroCard';
 
 <p class="DocItem__header-description">Use tutorials and concepts to learn everything you need to know about Apache Airflow and Astro.</p>
 
-## New to Airflow?
+## New to Airflow and Astro?
 
 <LinkCardGrid>
-  <LinkCard label="Get started with Apache Airflow" description="Set up Airflow and run your first DAG in under an hour." href="/learn/get-started-with-airflow" icon="/img/airflow-logo.png" />
-  <LinkCard label="Write a DAG with the Astro Python SDK" description="Build a production-ready ETL pipeline with the Astro Python SDK." href="/learn/astro-python-sdk" icon="/img/astro-monogram.svg" />
+  <LinkCard label="Get started with Apache Airflow - Tutorial" description="Set up Airflow locally and run your first DAG in under an hour." href="/learn/get-started-with-airflow" icon="/img/airflow-logo.png" />
+  <LinkCard label="Start your Astro trial" description="Learn how to get started running Airflow with Astro and run your first DAG in the cloud." href="https://docs.astronomer.io/astro/trial" icon="/img/astro-monogram.svg" />
+</LinkCardGrid>
+
+## Featured Airflow concepts
+
+<LinkCardGrid>
+  <LinkCard label="Datasets and Data-Aware Scheduling in Airflow" description="Schedule Airflow DAGs based on updates to datasets." href="/learn/airflow-datasets" truncate />
+  <LinkCard label="MLOps with Airflow" description="Learn how to use Airflow for MLOps and LLMOps pipelines." href="/learn/airflow-mlops" truncate />
+  <LinkCard label="Dynamic Tasks in Airflow" description="Generate tasks dynamically at runtime." href="/learn/dynamic-tasks" truncate />
 </LinkCardGrid>
 
 ## Featured tutorials
 
 <LinkCardGrid>
   <LinkCard label="Get started with Apache Airflow, Part 2" description="Use providers and connect your Airflow instance to external tools." href="/learn/get-started-with-airflow-part-2" truncate />
-  <LinkCard label="Orchestrate Snowflake with Airflow" description="Get enhanced observability and compute savings while orchestrating your Snowflake jobs." href="/learn/airflow-snowflake" truncate />
-  <LinkCard label="Integrate OpenLineage and Airflow" description="Get lineage metadata from your DAGs using OpenLineage and Marquez." href="/learn/airflow-openlineage" truncate />
-</LinkCardGrid>
-
-## Featured Airflow concepts
-
-<LinkCardGrid>
-  <LinkCard label="Datasets and Data-Aware Scheduling in Airflow" description="Master the datasets feature in Airflow 2.4." href="/learn/airflow-datasets" truncate />
-  <LinkCard label="Data quality and Airflow" description="Learn data quality best practices and compare data quality tools." href="/learn/data-quality" truncate />
-  <LinkCard label="Dynamic Tasks in Airflow" description="Generate tasks dynamically at runtime." href="/learn/dynamic-tasks" truncate />
+  <LinkCard label="Orchestrate Snowflake Queries with Airflow" description="Run SQL based queries in Snowflake with Airflow." href="/learn/airflow-snowflake" truncate />
+  <LinkCard label="Orchestrate OpenAI operations with Apache Airflow" description="Learn how to integrate OpenAI with Airflow." href="/learn/airflow-openai" truncate />
 </LinkCardGrid>
 
 <AstroCard />

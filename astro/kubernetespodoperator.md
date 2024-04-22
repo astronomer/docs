@@ -7,23 +7,14 @@ description: "Learn how to run the KubernetesPodOperator on Astro. This operator
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import kpo_separate_cluster_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_separate_cluster_example.py';
 
-The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
+The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://docs.astronomer.io/learn/kubepod-operator).
 
-This document describes how to configure individual Pods for different use cases. To configure defaults for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources).
+On Astro, the infrastructure required to run the KubernetesPodOperator is built into every Deployment and is managed by Astronomer. Astro supports setting a default Pod configuration so that any task Pods without specific resource requests and limits cannot exceed your expected resource usage for the Deployment.
 
-## Benefits
-
-You can use the KubernetesPodOperator to:
-
-- Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.
-- Run tasks in a Kubernetes cluster outside of Astro. This can be helpful when you need to run individual tasks on infrastructure that isn't currently supported by Astro, such as GPU nodes or other third-party services.
-- Specify CPU and memory as task-level limits or minimums to optimize performance and reduce costs.
-- Write task logic in a language other than Python. This gives you flexibility and can enable new use cases across teams.
-- Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
-- Set Kubernetes-native configurations in a YAML file, including volumes, secrets, and affinities.
-
-On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperator is built into every cluster and is managed by Astronomer.
+Some task-level configurations will differ on Astro compared to other Airflow environments. Use this document to learn how to configure individual task Pods for different use cases on Astro. To configure the default Pod resources for all KubernetesPodOperator Pods, see [Configure Kubernetes Pod resources](deployment-resources.md#configure-kubernetes-pod-resources).
 
 ## Known limitations
 
@@ -43,9 +34,9 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - An [Astro project](cli/develop-project.md#create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
 
-## Set up the KubernetesPodOperator
+## Set up the KubernetesPodOperator on Astro
 
-To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:
+The following snippet is the minimum configuration you'll need to create a KubernetesPodOperator task on Astro:
 
 ```python
 from airflow.configuration import conf
@@ -69,13 +60,11 @@ KubernetesPodOperator(
 For each instantiation of the KubernetesPodOperator, you must specify the following values:
 
 - `namespace = conf.get("kubernetes", "NAMESPACE")`: Every Deployment runs on its own Kubernetes namespace within a cluster. Information about this namespace can be programmatically imported as long as you set this variable.
-- `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. The value you specify is assumed to be an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, see [Pull images from a Private Registry](kubernetespodoperator.md#run-images-from-a-private-registry).
-
-This is the minimum configuration required to run tasks with the KubernetesPodOperator on Astro. To further customize the way your tasks are run, see the topics below.
+- `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. Astro assumes that this value is an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, see [Pull images from a Private Registry](kubernetespodoperator.md#run-images-from-a-private-registry).
 
 ## Configure task-level Pod resources
 
-Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, which means that the operator could theoretically use any CPU and memory that's available in your Deployment to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
+Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Unless otherwise specified in your task-level configuration, the amount of resources your task Pod can use is defined by your [default Pod resource configuration](deployment-resources.md#configure-kubernetes-pod-resources). To further optimize your resource usage, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
 To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `container_resources` argument of the KubernetesPodOperator. For example:
 
@@ -114,13 +103,14 @@ For Astro Hosted environments, if you set resource requests to be less than the 
 
 ### Mount a temporary directory
 
-:::info Alternative Astro Hybrid setup
+<details>
+  <summary><strong>Alternative Astro Hybrid setup</strong></summary>
 
 On Astro Hybrid, this configuration works only on AWS clusters where you have enabled `m5d` and `m6id` worker types. These worker types have NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
 
-The task which mounts a temporary directory must run on a worker queue that uses either `m5d` and `m6id` worker types. See [Modify a cluster](manage-hybrid-clusters.md) for instructions on enabling `m5d` and `m6id` workers on your cluster. See [Configure a worker queue](configure-worker-queues.md) to configure a worker queue to use one of these worker types.
+The task which mounts a temporary directory must run on a worker queue that uses either `m5d` and `m6id` worker types. See [Modify a cluster](manage-hybrid-clusters.md) for instructions on enabling `m5d` and `m6id` workers on your cluster. See [Configure a worker queue](configure-worker-queues.mdx) to configure a worker queue to use one of these worker types.
 
-:::
+</details>
 
 To run a task run the KubernetesPodOperator that utilizes your Deployment's ephemeral storage, mount an [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
 
@@ -179,7 +169,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 To run Docker images from a private registry on Astro, a Kubernetes Secret that contains credentials to your registry must be created. Injecting this secret into your Deployment's namespace will give your tasks access to Docker images within your private registry.
 
 1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file. If the generated `/docker/config.json` does not contain any credentials, copy your registry URL, username, and password.
-2. In the Cloud UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
+2. In the Astro UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
 3. Copy the value in the **NAMESPACE** field.
 4. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the namespace of the Deployment.
 
@@ -333,6 +323,142 @@ with DAG(
         secrets=[secret_env],
     )
 ```
+
+## Launch a Pod in an external cluster
+
+If some of your tasks require specific resources such as a GPU, you might want to run them in a different cluster than your Airflow instance. In setups where both clusters are used by the same AWS or GCP account, you can manage separate clusters with roles and permissions.
+
+This example shows how to set up an EKS cluster on AWS and run a Pod on it from an Airflow instance where cross-account access is not available. The same process applicable to other Kubernetes services such as GKE.
+
+:::info
+
+To launch Pods in external clusters from a local Airflow environment, you must additionally mount credentials for the external cluster so that your local Airflow environment has permissions to launch a Pod in the external cluster. See [Authenticate to cloud services with user credentials](cli/authenticate-to-clouds.md) for setup steps.
+
+:::
+
+### Prerequisites
+
+- A [network connection](https://docs.astronomer.io/astro/networking-overview) between your Astro Deployment and your external cluster.
+
+### Step 1: Set up your external cluster
+
+1. [Create an EKS cluster IAM role](https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html#create-service-role) with a unique name and add the following permission policies:
+
+    - `AmazonEKSWorkerNodePolicy`
+    - `AmazonEKS_CNI_Policy`
+    - `AmazonEC2ContainerRegistryReadOnly`
+
+2. [Update the trust policy](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) of this new role to include the [workload identity](https://docs.astronomer.io/astro/authorize-deployments-to-your-cloud) of your Deployment. This step ensures that the role can be assumed by your Deployment.
+
+    ```json
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+        "Effect": "Allow",
+        "Principal": {
+            "AWS": "arn:aws:iam::<aws account id>:<your user>",
+            "Service": [
+                "ec2.amazonaws.com",
+                "eks.amazonaws.com"
+            ]
+        },
+        "Action": "sts:AssumeRole"
+        }
+    ]
+    }
+    ```
+
+3. If you don't already have a cluster, [create a new EKS cluster](https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html) and assign the new role to it.
+
+### Step 2: Retrieve the KubeConfig file from the EKS cluster
+
+1. Use a `KubeConfig` file to remotely connect to your new cluster. On AWS, you can run the following command to retrieve it:
+
+    ```bash
+    aws eks --region <your-region> update-kubeconfig --name <cluster-name>
+    ```
+
+    This command copies information relating to the new cluster into your existing `KubeConfig` file at `~/.kube/config`.
+
+2. Check this file before making it available to Airflow. It should appear similar to the following configuration. Add any missing configurations to the file.
+
+    ```yaml
+    apiVersion: v1
+    clusters:
+    - cluster:
+        certificate-authority-data: <your certificate>
+        server: <your AWS server address>
+    name: <arn of your cluster>
+    contexts:
+    - context:
+        cluster: <arn of your cluster>
+        user: <arn of your cluster>
+    name: <arn of your cluster>
+    current-context: <arn of your cluster>
+    kind: Config
+    preferences: {}
+    users:
+    - name: <arn of your cluster>
+    user:
+        exec:
+        apiVersion: client.authentication.k8s.io/v1alpha1
+        args:
+        - --region
+        - <your cluster's AWS region>
+        - eks
+        - get-token
+        - --cluster-name
+        - <name of your cluster>
+        - --role
+        - <your-assume-role-arn>
+        command: aws
+        interactiveMode: IfAvailable
+        provideClusterInfo: false
+    ```
+
+### Step 3: Create a Kubernetes cluster connection
+
+Astronomer recommends creating a Kubernetes cluster connection because it's more secure than adding an unencrypted `kubeconfig` file directly to your Astro project. 
+
+1. Convert the `kubeconfig` configuration you retrieved from your cluster to JSON format.
+2. In either the Airflow UI or the Astro environment manager, create a new **Kubernetes Cluster Connection** connection. In the **Kube config (JSON format)** field, paste the `kubeconfig` configuration you retrieved from your cluster after converting it from `yaml` to `json` format.
+4. Click **Save**.
+
+You can now specify this connection in the configuration of any KubernetesPodOperator task that needs to access your external cluster. 
+
+### Step 4: Configure your task
+
+In your KubernetesPodOperator task configuration, ensure that you set `cluster-context` and `namespace` for your remote cluster. In the following example, the task launches a Pod in an external cluster based on the configuration defined in the `k8s` connection.
+
+```python
+run_on_EKS = KubernetesPodOperator(
+    task_id="run_on_EKS",
+    kubernetes_conn_id="k8s", 
+    cluster_context="<your-cluster-id>",
+    namespace="<your-namespace>",
+    name="example_pod",
+    image="ubuntu",
+    cmds=["bash", "-cx"],
+    arguments=["echo hello"],
+    get_logs=True,
+    startup_timeout_seconds=240,
+)
+```
+
+### Example DAG
+
+The following DAG uses several classes from the [Amazon provider package](https://registry.astronomer.io/providers/apache-airflow-providers-amazon/versions/latest) to dynamically spin up and delete Pods for each task in a newly created node group. If your remote Kubernetes cluster already has a node group available, you only need to define your task in the KubernetesPodOperator itself.
+
+The example DAG contains 5 consecutive tasks:
+
+- Create a node group according to the users' specifications (For the example that uses GPU resources).
+- Use a sensor to check that the cluster is running correctly.
+- Use the KubernetesPodOperator to run any valid Docker image in a Pod on the newly created node group on the remote cluster. The example DAG uses the standard `Ubuntu` image to print "hello" to the console using a `bash` command.
+- Delete the node group.
+- Verify that the node group has been deleted.
+
+<CodeBlock language="python">{kpo_separate_cluster_example}</CodeBlock>
 
 ## Related documentation
 

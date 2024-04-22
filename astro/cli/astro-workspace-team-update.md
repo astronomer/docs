@@ -33,15 +33,15 @@ astro workspace team update <team-id> --workspace-id <workspace-id> --role=<syst
 
 To find a Team ID using the Astro CLI, run `astro workspace team list`.
 
-To find a Team ID in the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings** > **Access Management** > **Teams**. Search for your Team in the **Teams** table and copy its **ID**. The ID should look something like `clk17xqgm124q01hkrgilsr49`.
+To find a Team ID in the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings** > **Access Management** > **Teams**. Search for your Team in the **Teams** table and copy its **ID**. The ID should look something like `clk17xqgm124q01hkrgilsr49`.
 
 #### Options
 
-| Option           | Description                                              | Possible Values                                                                                          |
-| ---------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `--workspace-id` | The Workspace for the Team. Use to override CLI prompts. | Any valid Workspace ID.                                                                                  |
-| `<team-id>`      | The ID for the Team. Use to override CLI prompts.        | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`.                               |
-| `--role`         | The Team's role in the Workspace.                        | Possible values are `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, and `WORKSPACE_OWNER`. |
+| Option           | Description                                              | Possible Values                                                                                                               |
+| ---------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `--workspace-id` | The Workspace for the Team. Use to override CLI prompts. | Any valid Workspace ID.                                                                                                       |
+| `<team-id>`      | The ID for the Team. Use to override CLI prompts.        | Any valid Team ID. To retrieve a Team ID, run `astro workspace team list`.                                                    |
+| `--role`         | The Team's role in the Workspace.                        | Possible values are `WORKSPACE_ACCESSOR`,`WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR`, and `WORKSPACE_OWNER`. |
 
 </TabItem>
 <TabItem value="software">

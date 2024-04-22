@@ -5,6 +5,9 @@ sidebar_label: BashOperator
 description: "Learn how to use the BashOperator to run bash commands and bash scripts. Review examples of how to run scripts in other languages than Python."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import CodeBlock from '@theme/CodeBlock';
 import bash_two_commands_example_dag from '!!raw-loader!../code-samples/dags/bashoperator/bash_two_commands_example_dag.py';
 import bash_script_example_dag from '!!raw-loader!../code-samples/dags/bashoperator/bash_script_example_dag.py';
@@ -15,7 +18,7 @@ The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modul
 In this guide you'll learn:
 
 - When to use the BashOperator.
-- How to use the BashOperator.
+- How to use the BashOperator and `@task.bash` decorator.
 - How to use the BashOperator including executing bash commands and bash scripts.
 - How to run scripts in non-Python programming languages using the BashOperator.
 
@@ -24,13 +27,49 @@ In this guide you'll learn:
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
+- Airflow decorators. See [Introduction to the TaskFlow API and Airflow decorators](airflow-decorators.md).
 - Basic bash commands. See the [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html).
 
-## How to use the BashOperator
+## How to use the BashOperator and `@task.bash` decorator
 
-The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is part of core Airflow and can be used to execute a single bash command, a set of bash commands or a bash script ending in `.sh`.
+The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is part of core Airflow and can be used to execute a single bash command, a set of bash commands, or a bash script ending in `.sh`. The `@task.bash` decorator can be used to create bash statements using Python functions and is available as of Airflow 2.9.
 
-The following parameters can be provided to the operator:
+<Tabs
+    defaultValue="traditional"
+    groupId="how-to-use-bashoperator"
+    values={[
+        {label: 'Traditional syntax', value: 'traditional'},
+        {label: 'TaskFlow API', value: 'taskflow'},
+    ]}>
+<TabItem value="traditional">
+
+```python
+# from airflow.operators.bash import BashOperator
+
+bash_task = BashOperator(
+    task_id="bash_task",
+    bash_command="echo $MY_VAR",
+    env={"MY_VAR": "Hello World"}
+)
+```
+
+</TabItem>
+<TabItem value="taskflow">
+
+```python
+# from airflow.decorators import task
+
+@task.bash(env={"MY_VAR": "Hello World"})
+def bash_task():
+    return "echo $MY_VAR"  # the returned string is executed as a bash command
+
+bash_task()
+```
+
+</TabItem>
+</Tabs>
+
+The following parameters can be provided to the operator and decorator:
 
 - `bash_command`: Defines a single bash command, a set of commands, or a bash script to execute. This parameter is required.
 - `env`: Defines environment variables in a dictionary for the bash process. By default, the defined dictionary overwrites all existing environment variables in your Airflow environment, including those not defined in the provided dictionary. To change this behavior, you can set the `append_env` parameter. If you leave this parameter blank, the BashOperator inherits the environment variables from your Airflow environment.
@@ -55,12 +94,51 @@ Both the `bash_command` and the `env` parameter can accept [Jinja templates](tem
 
 ## When to use the BashOperator
 
-The following are common use cases for the BashOperator in Airflow DAGs:
+The following are common use cases for the BashOperator and `@task.bash` decorator in Airflow DAGs:
 
+- Creating and running bash commands based on complex Python logic.
 - Running a single or multiple bash commands in your Airflow environment.
 - Running a previously prepared bash script.
 - Running scripts in a programming language other than Python.
 - Running commands to initialize tools that lack specific operator support. For example [Soda Core](soda-data-quality.md).
+
+## Example: Using Python to create bash commands
+
+In Airflow 2.9+, you can use `@task.bash` to create bash statements using Python functions. This decorator is especially useful when you want to run bash commands based on complex Python logic, including inputs from upstream tasks. The following example demonstrates how to use the `@task.bash` decorator to conditionally run different bash commands based on the output of an upstream task.
+
+```python
+# from airflow.decorators import task
+
+@task
+def upstream_task():
+    dog_owner_data = {
+        "names": ["Trevor", "Grant", "Marcy", "Carly", "Philip"],
+        "dogs": [1, 2, 2, 0, 4],
+    }
+
+    return dog_owner_data
+
+@task.bash
+def bash_task(dog_owner_data):
+    names_of_dogless_people = []
+    for name, dog in zip(dog_owner_data["names"], dog_owner_data["dogs"]):
+        if dog < 1:
+            names_of_dogless_people.append(name)
+
+    if names_of_dogless_people:
+        if len(names_of_dogless_people) == 1:
+            # this bash command is executed if only one person has no dog
+            return f'echo "{names_of_dogless_people[0]} urgently needs a dog!"'
+        else:
+            names_of_dogless_people_str = " and ".join(names_of_dogless_people)
+            # this bash command is executed if more than one person has no dog
+            return f'echo "{names_of_dogless_people_str} urgently need a dog!"'
+    else:
+        # this bash command is executed if everyone has at least one dog
+        return f'echo "All good, everyone has at least one dog!"'
+
+bash_task(dog_owner_data=upstream_task())
+```
 
 ## Example: Execute two bash commands using one BashOperator
 

@@ -26,7 +26,7 @@ To install Astronomer on GCP, you'll need access to the following tools and perm
 
 There is a known bug on GCP GKE Dataplane V2 clusters that affects Astronomer Software installations. When Astronomer Software is installed on a GCP GKE Dataplane V2 cluster, the interaction between the Astronomer Nginx ingress controller and Cilium can cause dropped connections, dropped packets, and intermittent 504 timeout errors when accessing the Astronomer UI or Houston API.
 
-To avoid these issues, Astronomer recommends installing Astronomer Software on a GKE Dataplane V1 cluster. 
+To avoid these issues, Astronomer recommends installing Astronomer Software on a GKE Dataplane V1 cluster.
 
 :::
 
@@ -250,7 +250,7 @@ Astronomer by default requires a central Postgres database that will act as the 
 
 While you're free to configure any database, most GCP users on Astronomer run [Google Cloud SQL](https://cloud.google.com/sql/). For production environments, we _strongly_ recommend a managed Postgres solution.
 
-> **Note:** If you're setting up a development environment, this step is optional. Astronomer can be configured to deploy the PostgreSQL helm chart as the backend database with the following set in your `config.yaml`:
+> **Note:** If you're setting up a development environment, this step is optional. Astronomer can be configured to deploy the PostgreSQL helm chart as the backend database with the following set in your `values.yaml`:
 > ```
 > global:
 >   postgresqlEnabled: true
@@ -268,15 +268,15 @@ kubectl create secret generic astronomer-bootstrap \
 
 ## Step 8: Configure your Helm chart
 
-:::info 
+:::info
 
 To use a third-party ingress controller for Astronomer, see [Third-Party Ingress Controllers](third-party-ingress-controllers.md).
 
 :::
 
-As a next step, create a file named `config.yaml` in an empty directory.
+As a next step, create a file named `values.yaml` in an empty directory.
 
-For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
+For context, this `values.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `values.yaml` file is the best place to do so.
 
 In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/containerd/certs.d`, `ssl.enabled`, and `astronomer.houston.secret` with your own values. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
 
@@ -368,7 +368,7 @@ If you are installing Astronomer in an airgapped environment without access to t
 
 <!--- Version-specific -->
 
-Now that you have a GCP cluster set up and your `config.yaml` defined, you're ready to deploy all components of our platform.
+Now that you have a GCP cluster set up and your `values.yaml` defined, you're ready to deploy all components of our platform.
 
 First, run:
 
@@ -385,7 +385,7 @@ helm repo update
 This ensures that you pull the latest image from the Astronomer Helm repository. Now, run:
 
 ```sh
-helm install -f config.yaml --version=0.34 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f values.yaml --version=0.34 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
 This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.34.x`.  For example, to install Astronomer Software v0.34.0, you specify `--version=0.34.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
@@ -396,25 +396,25 @@ After you run the previous commands, a set of Kubernetes pods are generated in y
 
 ### Alternative ArgoCD installation
 
-You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`.
 
 Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
 
-1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
+1. Under the `global` section of your `values.yaml` file, add `enableArgoCDAnnotation: true`.
    
 2. Create a new ArgoCD app. When creating the app, configure the following:
 
-    - **Path**: The filepath of your `config.yaml` file
+    - **Path**: The filepath of your `values.yaml` file
     - **Namespace**: The namespace you want to use for Astronomer
-    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer
     - **Repository URL**: `https://helm.astronomer.io`
 
 3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
-   
-4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
-   
+
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI.
+
 5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
-   
+
 6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 ## Step 10: Verify that all Pods are up
@@ -553,10 +553,10 @@ Check the Airflow namespace. If pods are changing at all, then the Houston API t
 
 If you have Airflow pods in the state `ImagePullBackoff`, check the pod description. If you see an x509 error, ensure that you have:
 
-- Configured containerd’s `config_path` to point to `/etc/containerd/certs.d`. 
-- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. 
+- Configured containerd’s `config_path` to point to `/etc/containerd/certs.d`.
+- Added the `privateCaCertsAddToHost` key-value pairs to your Helm chart.
 
-If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `config.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
+If you missed these steps during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation. If you are using a base image such as CoreOS that does not permit values to be changed, or you otherwise can't modify `values.yaml`, contact [Astronomer support](https://support.astronomer.io) for additional configuration assistance.
 
 
 ## What's next
@@ -572,7 +572,7 @@ To help you make the most of Astronomer Software, check out the following additi
 
 If you have any feedback or need help during this process and aren't in touch with our team already, a few resources to keep in mind:
 
-* [Community Forum](https://forum.astronomer.io): General Airflow + Astronomer FAQs
+* [Community Forum](https://forum.astronomer.io): Search previously asked questions about Airflow + Astronomer FAQs
 * [Astronomer Support Portal](https://support.astronomer.io/hc/en-us/): Platform or Airflow issues
 
 For detailed guidelines on reaching out to Astronomer Support, reference our guide [here](support.md).

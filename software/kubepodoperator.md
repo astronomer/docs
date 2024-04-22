@@ -5,23 +5,13 @@ id: kubepodoperator
 description: Run the KubernetesPodOperator on Astronomer Software.
 ---
 
-The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
+The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most customizable Apache Airflow operators. A task using the KubernetesPodOperator runs in a dedicated, isolated Kubernetes Pod that terminates after the task completes. To learn more about the benefits and usage of the KubernetesPodOperator, see the [KubernetesPodOperator Learn guide](https://docs.astronomer.io/learn/kubepod-operator).
 
-## Benefits of the KubernetesPodOperator
-
-The KubernetesPodOperator enables you to:
-
-- Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.
-- Specify CPU and Memory as task-level limits or minimums to optimize for cost and performance.
-- Write task logic in a language other than Python. This gives you flexibility and can enable new use cases across teams.
-- Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
-- Set Kubernetes-native configurations in a YAML file, including volumes, secrets, and affinities.
+This guide explains how to complete specific goals using the KubernetesPodOperator on Astronomer Software. 
 
 ## Prerequisites
 
 - A running Airflow Deployment on Astronomer Software
-
-> **Note:** If you haven't already, Astronomer recommends testing the KubernetesPodOperator in your local environment. See [Running KubernetesPodOperator locally](https://docs.astronomer.io/learn/kubepod-operator).
 
 ## Set Up the KubernetesPodOperator
 
@@ -29,14 +19,15 @@ The KubernetesPodOperator enables you to:
 
 1. Run the following command to install the  `apache-airflow-providers-cncf-kubernetes` package:
 
-    ``bash
+    ```bash
     pip install apache-airflow-providers-cncf-kubernetes
-    ``
+    ```
+
 2. Run the following command to import the KubernetesPodOperator:
 
-    ``python
+    ```python
     from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
-    ``
+    ```
 ### Specify parameters
 
 Instantiate the operator based on your image and setup:

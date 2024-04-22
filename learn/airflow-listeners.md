@@ -20,7 +20,7 @@ If you only need to implement notifications for specific DAGs and tasks, conside
 
 :::caution
 
-Listeners are currently considered experimental and might be subject to breaking changes in future releases.
+The `on_dataset_created` and `on_dataset_changed` listeners are currently considered experimental and might be subject to breaking changes in future releases.
 
 :::
 
