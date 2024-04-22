@@ -78,7 +78,7 @@ A number of configurations, including those for user permissions and identity pr
 
     :::caution
    
-    Astronomer recommmends only setting `--no hooks` if your configuration change does not include a [platform upgrade](upgrade-astronomer.md). To apply platform configuration changes at the same time as a platform upgrade, remove the `--no hooks` flag from this command so that Astronomer Software can properly restart its components after an upgrade.
+    Astronomer recommmends setting `--no hooks` only if your configuration change does not include a [platform upgrade](upgrade-astronomer.md). To apply platform configuration changes at the same time as a platform upgrade, remove the `--no hooks` flag from this command so that Astronomer Software can properly restart its components after an upgrade.
 
    :::
 
