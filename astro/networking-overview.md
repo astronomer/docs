@@ -13,6 +13,12 @@ In a public connection, data travels over the public internet to publicly access
 
 In a private connection, data travels over a private network through private IP addresses. Private connections have significantly more security requirements and are recommended whenever you're accessing sensitive or private data.
 
+:::info
+
+Astronomer can support alternative networking solutions that are not covered in documentation. If you have specific networking requirements that aren't covered in documentation, or you need help to create a custom network connection, reach out to [Astronomer support](https://cloud.astronomer.io/open-support-request).
+
+:::
+
 ## Network connection recommendations
 
 If you're just starting out on Astro and you're working with publicly available services and testing data, you only need a public connection. For example, if you're accessing a publicly available API, you only need to configure an [HTTP Airflow connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) to establish a connection between your Deployment and the API.
@@ -29,6 +35,6 @@ After you create your VPC peering connection, follow the steps in [Authorize you
 
 :::info
 
-While Astronomer monitors the health of Deployments and DAGs, because networking connections extend outside of the resources Astronomer has observability into, Astronomer does not monitor specific network connectivity.
+Astronomer monitors the health of Deployments and DAGs, but it doesn't monitor the status of network connections because they exist outside of Astronomer's observable control plane and data plane.
 
 :::
