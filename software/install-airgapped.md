@@ -60,11 +60,13 @@ The images and tags which are required for your Software installation depend on 
     ```
 
     This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image.
+    
 2. Run the following command to determine the Astronomer Airflow Helm chart version:
  
     ```shell
     helm template astronomer/astronomer --version <your-astronomer-version>|grep 'Static helm' -A4| grep "version: " | sed -e 's/"//g' -e 's/version:[ ]//' -e 's/^ */v/g'
     ```
+
 3. Run the following command to template the Astronomer Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
