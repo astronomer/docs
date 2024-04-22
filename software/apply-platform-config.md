@@ -71,12 +71,18 @@ A number of configurations, including those for user permissions and identity pr
 2. Save your updated `values.yaml` file and run the following command to apply it as a Helm upgrade:
 
     ```bash
-    helm upgrade <your-platform-release-name> astronomer/astronomer -f <your-updated-config-yaml-file> -n <your-platform-namespace> --set astronomer.houston.upgradeDeployments.enabled=false
+    helm upgrade <your-platform-release-name> astronomer/astronomer -f <your-updated-config-yaml-file> -n <your-platform-namespace> --set astronomer.houston.upgradeDeployments.enabled=false --no-hooks
     ```
 
     Setting `astronomer.houston.upgradeDeployments.enabled=false` ensures that no Airflow components in Deployments are restarted during your upgrade.
 
-3. Run the following command to confirm that your configuration was applied:
+    :::caution
+   
+    Astronomer recommmends only setting `--no hooks` if your configuration change does not include a [platform upgrade](upgrade-astronomer.md). To apply platform configuration changes at the same time as a platform upgrade, remove the `--no hooks` flag from this command so that Astronomer Software can properly restart its components after an upgrade.
+
+   :::
+
+4. Run the following command to confirm that your configuration was applied:
 
     ```bash
     helm get values <your-platform-release-name> -n <your-platform-namespace>
