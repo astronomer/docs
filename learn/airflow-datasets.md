@@ -268,7 +268,7 @@ def downstream2_one_in_each_group():
 
     # your tasks here
 
-downstream1_on_any()
+downstream2_one_in_each_group()
 ```
 
 </TabItem>
