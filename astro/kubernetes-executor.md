@@ -13,7 +13,7 @@ This document describes how to configure individual task Pods for different use 
 
 :::
 
-## Prerequisites\
+## Prerequisites
 
 - An Astro Deployment using Astro Runtime version 8.1.0 or later.
 
