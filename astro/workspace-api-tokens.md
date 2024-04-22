@@ -40,7 +40,9 @@ There are two ways to use API tokens to interact with a Workspace:
 
 ### Assign an Organization API token to a Workspace
 
-To centralize API token management, you can add an Organization token to a Deployment instead of creating a dedicated Workspace API token. Workspace-scoped API tokens are useful if you want to manage API tokens from the Organization level while only granting tokens select access to Workspaces. 
+To centralize API token management, you can add an Organization token to a Workspace instead of creating a dedicated Workspace API token. Workspace-scoped API tokens are useful if you want to manage API tokens from the Organization level on a single screen, or you want to use a single API token for multiple Workspaces. 
+
+Note that you must have Organization Owner permissions to manage Workspace API tokens at the Organization level.
 
 1. In the Astro UI, open your Workspace.
    
