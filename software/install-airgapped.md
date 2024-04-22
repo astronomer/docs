@@ -65,7 +65,7 @@ The images and tags which are required for your Software installation depend on 
     ```shell
     helm template astronomer/astronomer --version <your-astronomer-version>|grep 'Static helm' -A4| grep "version: " | sed -e 's/"//g' -e 's/version:[ ]//' -e 's/^ */v/g'
     ```
-3. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
+3. Run the following command to template the Astronomer Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
     helm template --version <your-astronomer-airflow-chart-version> astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
@@ -127,16 +127,16 @@ astronomer:
 There are two Helm charts required for Astronomer:
 
 - The [Astronomer Helm chart](https://github.com/astronomer/astronomer) for the Astronomer Platform
-- The [Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
+- The [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart) for Airflow deployments in Astronomer Platform
 
 The Astronomer Helm chart can be downloaded using `helm pull` and applied locally if desired.
 
-Commander, which is Astronomer's provisioning component, uses the Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
+Commander, which is Astronomer's provisioning component, uses the Astronomer Airflow Helm chart to create Airflow deployments. You have two options to make the Helm chart available to Commander:
 
-- Use the built-in Airflow Helm chart in the Commander Docker image.
-- Host the Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
+- Use the built-in Astronomer Airflow Helm chart in the Commander Docker image.
+- Host the Astronomer Airflow Helm chart within your network. Not every cloud provider has a managed Helm registry, so you might want to check out [JFrog Artifactory](https://jfrog.com/artifactory) or [ChartMuseum](https://github.com/helm/chartmuseum).
 
-To use the built-in Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
+To use the built-in Astronomer Airflow Helm chart in the Commander Docker image, add the following configuration to your `values.yaml` file:
 
 ```yaml
 astronomer:
@@ -330,7 +330,7 @@ astronomer:
 
 Before completing this step, double-check that the following statements are true:
 
-- You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
+- You made Astronomer's Docker images, Astronomer Airflow Helm chart, and updates JSON accessible inside your network.
 - You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
 
 After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:
