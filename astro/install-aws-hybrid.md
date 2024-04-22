@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 :::warning
 
-This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Cloud UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
+This document applies only to [Astro Hybrid](hybrid-overview.md). To see whether you're an Astro Hybrid user, click your Workspace name in the upper left corner of the Astro UI, then click **Organization Settings**. Your Astro product type is listed under **Product Type** on the **General** page.
 
 To get started on Astro Hosted, see [Start a trial](trial.md).
 
@@ -85,7 +85,7 @@ If you want to continue with the second option, you'll additionally need:
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
-2. Select one of the following options to access the Cloud UI:
+2. Select one of the following options to access the Astro UI:
 
     - Enter your password and click **Continue**.
     - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
@@ -96,11 +96,11 @@ If you want to continue with the second option, you'll additionally need:
     
     To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-## Retrieve an external ID from the Cloud UI
+## Retrieve an external ID from the Astro UI
 
-You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the **AWS External ID** field will not appear in the Cloud UI.
+You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the **AWS External ID** field will not appear in the Astro UI.
 
-1. In the Cloud UI, click the **Settings** tab.
+1. In the Astro UI, click the **Settings** tab.
 
 2. Click **Show** in the **AWS External ID** field and then click **Copy**. This external ID is a unique identifier that Astro uses to connect to your AWS account. 
 
@@ -193,7 +193,7 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 
 When you receive confirmation that your Astro cluster has been created, Astronomer recommends that you create a Deployment and deploy DAGs. See [Create a Deployment](create-deployment.md). 
 
-To confirm a successful installation, in the Cloud UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
+To confirm a successful installation, in the Astro UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
 
 ## Next steps
 

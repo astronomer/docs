@@ -13,7 +13,7 @@ Use Markdown cells to add comments to your code and make it easier for Workspace
 
 ## Create pipeline documentation
 
-1. In the Cloud UI, select a Workspace and then select Cloud IDE.
+1. In the Astro UI, select a Workspace and then select Cloud IDE.
 
 2. Select a project.
 

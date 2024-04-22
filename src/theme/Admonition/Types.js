@@ -7,6 +7,11 @@ import AdmonitionTypeDanger from '@theme/Admonition/Type/Danger';
 import AdmonitionTypeCaution from '@theme/Admonition/Type/Caution';
 import AdmonitionTypeCli from '@theme/Admonition/Type/Cli';
 import AdmonitionTypeHighlight from '@theme/Admonition/Type/Highlight';
+import AdmonitionTypePrivatePreview from '@theme/Admonition/Type/PrivatePreview';
+import AdmonitionTypePublicPreview from '@theme/Admonition/Type/PublicPreview';
+import AdmonitionTypeCliAstroOnly from '@theme/Admonition/Type/CliAstroOnly';
+import AdmonitionTypeCliSoftwareOnly from '@theme/Admonition/Type/CliSoftwareOnly';
+import AdmonitionTypeCliAstroAndSoftware from '@theme/Admonition/Type/CliAstroAndSoftware';
 
 
 const admonitionTypes = {
@@ -17,6 +22,11 @@ const admonitionTypes = {
   danger: AdmonitionTypeDanger,
   cli: AdmonitionTypeCli,
   highlight: AdmonitionTypeHighlight,
+  privatepreview: AdmonitionTypePrivatePreview,
+  publicpreview: AdmonitionTypePublicPreview,
+  cliastroonly: AdmonitionTypeCliAstroOnly,
+  clisoftwareonly: AdmonitionTypeCliSoftwareOnly,
+  cliastroandsoftware: AdmonitionTypeCliAstroAndSoftware
 };
 
 // Undocumented legacy admonition type aliases

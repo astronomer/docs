@@ -7,12 +7,12 @@ hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
-Wake up an Astro development Deployment from [hibernation](deployment-resources.md#hibernate-a-development-deployment). Overrides any existing hibernation schedule and sets the Deployment to run for a specific duration or until a specific time. 
+Wake up an Astro development Deployment from [hibernation](deployment-resources.md#hibernate-a-development-deployment). Overrides any existing hibernation schedule and sets the Deployment to run for a specific duration or until a specific time.
 
 ## Usage
 
 ```sh
-astro deployment hibernate [one of --until/ --for/ --remove-override]
+astro deployment wake-up [one of --until/ --for/ --remove-override]
 ```
 
 ## Options
@@ -25,6 +25,6 @@ astro deployment hibernate [one of --until/ --for/ --remove-override]
 | `-r, --remove-override`  | Remove any overrides and resume regular hibernation schedule.       | None                                                 |
 | `-f, --force`            | The CLI will not prompt to confirm before waking up the Deployment. | None                                                 |
 
-## Related commands 
+## Related commands
 
 - [`astro deployment hibernate`](astro-deployment-hibernate.md)

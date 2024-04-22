@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><pubDate>Wed, 28 Feb 2024 10:57:45 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 10.4.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</link><pubDate>Mon, 26 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</guid><description><![CDATA[<ul>
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.xml" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><pubDate>Mon, 26 Feb 2024 13:53:05 GMT</pubDate><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 10.4.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</link><pubDate>Mon, 26 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-1040</guid><description><![CDATA[<ul>
 <li>Release date: February 26, 2024</li>
 <li>Airflow version: 2.8.2</li>
 </ul><h3>Airflow 2.8.2</h3><p>Astro Runtime 10.4.0 includes same-day support for Apache Airflow 2.8.2. Airflow 2.8.2 contains a number of bug fixes including:</p><ul>
@@ -41,19 +42,6 @@
 <li>Fixed an issue in Astro where all Airflow task logs exported to Datadog appeared as <code>INFO</code> logs regardless of their actual log type.</li>
 <li>Fixed an issue in Astro where logging features could be disrupted if you set <code>AZURE_CLIENT_ID</code> as an environment variable.</li>
 <li>Fixed an issue where Astro audit logs listed a user's name as <code>User</code> for trigger events instead of their IDs.</li>
-</ul>]]></description></item><item><title>Astro Runtime 9.11.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-9110</link><pubDate>Mon, 26 Feb 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-9110</guid><description><![CDATA[<ul>
-<li>Release date: February 26, 2024</li>
-<li>Airflow version: 2.7.3</li>
-</ul><h3>Early access Airflow bug fixes</h3><ul>
-<li>Simplify DAG trigger UI (<a href="https://github.com/apache/airflow/pull/34567">#34567</a>)</li>
-<li>Hide logical date and run id in trigger UI form (<a href="https://github.com/apache/airflow/pull/35284">#35284</a>)</li>
-<li>Allow pre-population of trigger form values via URL parameters (<a href="https://github.com/apache/airflow/pull/37497">#37497</a>)</li>
-<li>Fix regression on trigger form error display on form validation (<a href="https://github.com/apache/airflow/pull/37672">#37672</a>)</li>
-<li>Revert the sequence of initializing configuration defaults (<a href="https://github.com/apache/airflow/pull/37155">#37155</a>)</li>
-<li>Bugfix Triggering DAG with parameters is mandatory when show_trigger_form_if_no_params is enabled (<a href="https://github.com/apache/airflow/pull/37063">#37063</a>)</li>
-<li>Revert "Fix future DagRun rarely triggered by race conditions when max_active_runs reached its upper limit. (<a href="https://github.com/apache/airflow/pull/37596">#37596</a>)</li>
-<li>Revoking audit_log permission from all users except admin (<a href="https://github.com/apache/airflow/pull/37501">#37501</a>)</li>
-<li>Check permissions for ImportError (<a href="https://github.com/apache/airflow/pull/37468">#37468</a>)</li>
 </ul>]]></description></item><item><title>Astro Runtime 9.10.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-9100</link><pubDate>Wed, 31 Jan 2024 00:00:00 GMT</pubDate><guid>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-9100</guid><description><![CDATA[<ul>
 <li>Release date: January 31, 2024</li>
 <li>Airflow version: 2.7.3</li>
@@ -900,3 +888,5 @@
 <li>Fixed an issue where tasks would fail when running with <code>run_as_user</code> (<a href="https://github.com/astronomer/airflow/commit/075622cbe">commit</a>)</li>
 <li>Fixed an issue where tasks would fail when running with <code>CeleryKubernetesExecutor</code> (<a href="https://github.com/astronomer/airflow/commit/90aaf3d48">commit</a>)</li>
 </ul>]]></description></item></channel></rss>
+=======
+>>>>>>> 4a363a40011afe9c49300b9ae27316728914d7e2

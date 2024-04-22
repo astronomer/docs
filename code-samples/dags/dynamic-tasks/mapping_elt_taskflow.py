@@ -1,43 +1,43 @@
 from airflow.decorators import dag, task
-from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator
+from airflow.providers.snowflake.transfers.copy_into_snowflake import (
+    CopyFromExternalStageToSnowflakeOperator,
+)
 from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-from airflow.providers.amazon.aws.operators.s3_copy_object import S3CopyObjectOperator
-from airflow.providers.amazon.aws.operators.s3_delete_objects import (
-    S3DeleteObjectsOperator,
-)
+from airflow.providers.amazon.aws.operators.s3 import S3CopyObjectOperator
+from airflow.providers.amazon.aws.operators.s3 import S3DeleteObjectsOperator
 
 from pendulum import datetime
 
 
-@task
-def get_s3_files(current_prefix):
-    s3_hook = S3Hook(aws_conn_id="s3")
-
-    current_files = s3_hook.list_keys(
-        bucket_name="my-bucket",
-        prefix=current_prefix + "/",
-        start_after_key=current_prefix + "/",
-    )
-
-    return [[file] for file in current_files]
-
-
 @dag(
-    start_date=datetime(2022, 4, 2),
+    start_date=datetime(2024, 4, 2),
     catchup=False,
     template_searchpath="/usr/local/airflow/include",
     schedule="@daily",
 )
 def mapping_elt():
-    copy_to_snowflake = S3ToSnowflakeOperator.partial(
+
+    @task
+    def get_s3_files(current_prefix):
+        s3_hook = S3Hook(aws_conn_id="s3")
+
+        current_files = s3_hook.list_keys(
+            bucket_name="my-bucket",
+            prefix=current_prefix + "/",
+            start_after_key=current_prefix + "/",
+        )
+
+        return [[file] for file in current_files]
+
+    copy_to_snowflake = CopyFromExternalStageToSnowflakeOperator.partial(
         task_id="load_files_to_snowflake",
         stage="MY_STAGE",
         table="COMBINED_HOMES",
         schema="MYSCHEMA",
         file_format="(type = 'CSV',field_delimiter = ',', skip_header=1)",
         snowflake_conn_id="snowflake",
-    ).expand(s3_keys=get_s3_files(current_prefix="{{ ds_nodash }}"))
+    ).expand(files=get_s3_files(current_prefix="{{ ds_nodash }}"))
 
     move_s3 = S3CopyObjectOperator(
         task_id="move_files_to_processed",

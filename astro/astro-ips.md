@@ -12,7 +12,7 @@ A cluster's IP addresses are the same for as for all Deployments in the cluster.
 
 Retrieve external IP addresses for an individual Deployment if you are using standard clusters or otherwise don't have access to your Organization's **Clusters** page.
 
-1. In the Cloud UI, select a Deployment, then click **Details**.
+1. In the Astro UI, select a Deployment, then click **Details**.
 2. Copy the IP addresses under **External IPs**
 3. Optional. Add the IP addresses to the allowlist of any external services that need to interact with Astro. 
 
@@ -20,6 +20,6 @@ Retrieve external IP addresses for an individual Deployment if you are using sta
 
 Retrieve external IP addresses for an individual Deployment if you are using standard clusters or otherwise don't have access to your Organization's **Clusters** page.
 
-1. In the Cloud UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the **Details** page, copy the IP addresses listed under **External IPs**.

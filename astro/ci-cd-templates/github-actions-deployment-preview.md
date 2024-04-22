@@ -25,6 +25,12 @@ Specific templates might have additional requirements.
 
 :::warning
 
+Creating preview Deployments for Deployments that use a [private image registry](kubernetespodoperator.md#run-images-from-a-private-registry) is currently unsupported.
+
+:::
+
+:::warning
+
 If you use a [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners) to execute jobs from GitHub Actions, the Astro CLI's `config.yaml` file, which stores default deploy details, might be shared across your organization and hence multiple CI/CD pipelines. To reduce the risk of accidentally deploying to the wrong Deployment, ensure the following:
 
 - Add `ASTRO_API_TOKEN` to your repository and include a check in your GitHub workflow to verify that it exists.

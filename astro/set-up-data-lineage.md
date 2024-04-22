@@ -7,6 +7,9 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
+:::privatepreview
+:::
+
 [Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking data from its origin to wherever it is consumed downstream as it flows through a data pipeline. This includes connections between datasets and tables in a database as well as rich metadata about the tasks that create and transform data. You can observe data lineage to:
 
 - Trace the history of a dataset.
@@ -50,7 +53,7 @@ To specify inlets and outlets, see the [OpenLineage documentation](https://openl
 
 To send lineage metadata from an external system to Astro, you need to configure the external system's OpenLineage integration with a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to your Astro lineage backend.
 
-To locate your Deployment namespace in the Cloud UI, open the Deployment and copy the value in **Namespace**. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
+To locate your Deployment namespace in the Astro UI, open the Deployment and copy the value in **Namespace**. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
 
 Use the following topics to configure these values in supported external systems and send lineage metadata from those systems to Astro.
 
@@ -76,11 +79,11 @@ When you run an Airflow task with the `SnowflakeOperator`, the following data is
 - Output datasets
 - Quality metrics based on dataset and column-level checks, including successes and failures per run
 
-To view this data in the Cloud UI, click **Lineage**, select a SnowflakeOperator task, and then click the dataset. See [View data lineage](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
+To view this data in the Astro UI, click **Lineage**, select a SnowflakeOperator task, and then click the dataset. See [View data lineage](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
 
 :::tip
 
-Airflow tasks run with the `SnowflakeOperator` emit SQL source code that you can view in the Cloud UI. See [View SQL source code](#view-SQL-source-code).
+Airflow tasks run with the `SnowflakeOperator` emit SQL source code that you can view in the Astro UI. See [View SQL source code](#view-SQL-source-code).
 
 :::
 
@@ -119,7 +122,7 @@ After you save this configuration, lineage is enabled for all Spark jobs running
 
 #### Verify Setup
 
-To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. If your configuration is successful, your Spark job appears in the table of most recent runs. Click a job run to see it within a lineage graph.
+To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, click **Lineage** in the Astro UI and then click **Runs** in the left menu. If your configuration is successful, your Spark job appears in the table of most recent runs. Click a job run to see it within a lineage graph.
 
 ### OpenLineage and dbt Core with Airflow
 
@@ -160,7 +163,7 @@ If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [
 
 #### Verify setup
 
-To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
+To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Astro UI and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
 
 ### OpenLineage and Great Expectations with Airflow
 
@@ -224,7 +227,7 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Verify
 
-To confirm that your setup is successful, click **Lineage** in the Cloud UI and then click **Issues** in the left menu. Recent data quality assertion issues appear in the **All Issues** table.
+To confirm that your setup is successful, click **Lineage** in the Astro UI and then click **Issues** in the left menu. Recent data quality assertion issues appear in the **All Issues** table.
 
 If your code hasn't produced any data quality assertion issues, use the search bar to search for a dataset and view its node on the lineage graph for a recent job run. Click **Quality** to view metrics and assertion pass or fail counts.
 
@@ -255,11 +258,11 @@ In your Spark application, set the following properties to configure your lineag
 
 #### Verify
 
-To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. Your recent Spark job run appears in the table of most recent runs.
+To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, click **Lineage** in the Astro UI and then click **Runs** in the left menu. Your recent Spark job run appears in the table of most recent runs.
 
 ## View SQL source code
 
-The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](manage-env-vars.md) for each Astro Deployment:
+The SQL source code view for [supported Airflow operators](https://openlineage.io/docs/integrations/about/#capability-matrix) in the Astro UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](manage-env-vars.md) for each Astro Deployment:
 
 - Key: `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE`
 - Value: `False`
@@ -279,7 +282,7 @@ By default, OpenLineage is enabled for all Astro Deployments. If you don't want 
 Before you disable OpenLineage, keep the following in mind:
 
 - You can't use [Astro alerts](alerts.md) in a Deployment with OpenLineage disabled.
-- A Deployment with OpenLineage disabled will not send any data to the [**Lineage** page](data-lineage.md) in the Cloud UI.
+- A Deployment with OpenLineage disabled will not send any data to the [**Lineage** page](data-lineage.md) in the Astro UI.
 
 To disable OpenLIneage for a Deployment, set the following [environment variable](manage-env-vars.md):
 
