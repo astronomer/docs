@@ -87,6 +87,13 @@ Before Airflow 2.0 custom operators and hooks were added as plugins. This patter
 
 You can update the menu at the top of the Airflow UI to contain custom tabs with links to external websites. Adding top-level menu items and adding sub-items are both supported. 
 
+For example, the following code creates a plugin that adds two menu items.
+
+- `appbuilder_mitem_toplevel` is a top-level menu button named **Apache** that links to the [Apache homepage](https://www.apache.org/).
+- `appbuilder_mitem_subitem` is a sub-item which is added to the **Docs** menu. It has the name `Astro SDK Docs` and links out to [the documentation for the Astro SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
+
+Both additional menu items are added to the `app_builder_menu_items` component of a plugin called `Menu items plugin` which is defined in the `MyMenuItemsPlugin` class. 
+
 ```python
 from airflow.plugins_manager import AirflowPlugin
 
@@ -111,12 +118,49 @@ class MyMenuItemsPlugin(AirflowPlugin):
     appbuilder_menu_items = [appbuilder_mitem_toplevel, appbuilder_mitem_subitem]
 ```
 
-The code above creates a plugin that adds two menu items.
+:::info
 
-- `appbuilder_mitem_toplevel` is a top-level menu button named **Apache** that links to the [Apache homepage](https://www.apache.org/).
-- `appbuilder_mitem_subitem` is a sub-item which is added to the **Docs** menu. It has the name `Astro SDK Docs` and links out to [the documentation for the Astro SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
+If you want to use custom menu items in an Airflow environment hosted on Astro, you must modify the Python file containing your plugin:
 
-Both additional menu items are added to the `app_builder_menu_items` component of a plugin called `Menu items plugin` which is defined in the `MyMenuItemsPlugin` class. The screenshot below shows the additional menu items in the Airflow UI.
+- Add the following imports to the top of your Python file:
+
+    ```python
+    from airflow.configuration import conf
+    from airflow.www.auth import has_access
+    from airflow.security import permissions
+    ```
+
+- In your class definition for the flask app builder base view, add the `@has_access` decorator with the line `(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")`. For example:
+
+    ```python
+    class TestAppBuilderBaseView(AppBuilderBaseView): 
+    class_permission_name = "Custom Menu"
+    default_view = "test"
+
+    @expose("/")
+    @has_access(
+        [
+            (permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")
+        ]
+    )
+    ```
+
+- For any `appbuilder_menu_items`, you must add the base URL of your Airflow webserver to the URL for the menu item. For example:
+
+    ```python
+    baseUrl = conf.get("webserver", "base_url") 
+    my_new_endpoint = { 
+        "name": "Custom Menu",
+        "label": "DAGs Folder",
+        "href":  str(baseUrl) + "/testappbuilderbaseview",
+    }
+    ```
+
+    You can then specify the menu item, in this example `my_new_endpoint` in `appbuilder_menu_items`.
+
+```
+
+The screenshot below shows the additional menu items in the Airflow UI.
 
 ![Plugins Menu items](/img/guides/plugins_menu_items.png)
 
