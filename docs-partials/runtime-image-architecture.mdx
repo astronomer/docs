@@ -143,16 +143,25 @@ In all local environments created with the Astro CLI, Astro Runtime runs the [Lo
 
 ## Distribution
 
-Astro Runtime is distributed as a Debian-based Docker image. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+Astro Runtime is distributed as a Debian-based Docker image. An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. The default image tag is:
+
+```
+quay.io/astronomer/astro-runtime:<version>
+```
+
+You can modify this image tag in your Astro project Dockerfile to use different versions of Astro Runtime. The following topics explain each distribution type and how to specify them. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
 ### Base distributions
 
-The base Astro Runtime Docker images have the following format:
+The base Astro Runtime Docker image has the following format:
 
-- `quay.io/astronomer/astro-runtime:<version>`
-- `quay.io/astronomer/astro-runtime:<version>-base`
+```
+quay.io/astronomer/astro-runtime:<version>-base
+```
 
-An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages).
+A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](https://docs.astronomer.io/astro/cli/private-python-packages).
+
+For all other cases, Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. 
 
 ### Python version distributions
 
@@ -162,7 +171,35 @@ Starting with Astro Runtime 9, Astronomer maintains different distributions Astr
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-Each Python distribution also has an alternative `quay.io/astronomer/astro-runtime:<version>-base` distribution that you can use to further customize the image.
+### Slim distributions 
+
+Starting with Astro Runtime 11, Astronomer maintains a slim distribution of Astro Runtime. Slim Astro Runtime images only include the dependencies required for the basic funcionality of Astro. These packages are:
+
+[List TBD]
+
+Use the slim distribution of Astro Runtime if you want faster local builds and deploys, and you don't require the packages included in the default Astro Runtime distribution.
+
+### Combine distributions
+
+Distributions are additive, meaning that you can combine multiple distributions in your image tag if you have multiple image requirements. 
+
+Distributions must be specified in a specific order in your image tag. The order and format multi-distribution image tag is:
+
+```
+quay.io/astronomer/astro-runtime:<astro-runtime-version>-<python-distribution>-<slim-distribution>-<base-distribution>
+```
+
+You can add or remove any distribution specifications as needed. For example, to use the slim Astro Runtime distribution with Python 3.11 and a base image, your image tag would be:
+
+```
+quay.io/astronomer/astro-runtime:11.0.0-python-3.11-slim-base
+```
+
+If you wanted the same Python distribution and base image without the slim image, you would remove the `-slim-` from the image tag like in the following example:
+
+```
+quay.io/astronomer/astro-runtime:11.0.0-python-3.11-slim-base
+```
 
 ## System distribution
 
