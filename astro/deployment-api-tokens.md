@@ -39,7 +39,7 @@ Unlike Workspace API tokens and Organization API tokens, Deployment API tokens a
 
 ## Assign an Organization or Workspace API token to a Deployment
 
-To centralize API token management, you can add an Organization or Workspace API token to a Deployment instead of creating a dedicated Deployment API token. Deployment-scoped API tokens are useful if you want to manage API tokens from the Organization or Workspace level while only granting tokens specific access to Deployments. 
+To centralize API token management, you can add an Organization or Workspace API token to a Deployment instead of creating a dedicated Deployment API token. Deployment-scoped API tokens are useful if you want to manage API tokens from the Organization level on a single screen, or you want to use a single API token for multiple Deployments. 
 
 Deployment-scoped API tokens are functionally identical to dedicated Deployment API tokens, except that you can only rotate, update, or delete them within their original scope. 
 
