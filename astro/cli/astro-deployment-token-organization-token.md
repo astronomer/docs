@@ -3,7 +3,6 @@ sidebar_label: "astro deployment token organization-token"
 title: "astro deployment token organization-token"
 id: astro-deployment-token-organization-token
 description: Scope an Organization token to a specific Deployment.
-hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
