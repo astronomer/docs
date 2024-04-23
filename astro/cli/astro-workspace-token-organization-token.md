@@ -15,7 +15,7 @@ This command is only available on Astro.
 
 To centralize API token management, you can add an Organization token to a Workspace instead of creating a dedicated Workspace API token. Workspace-scoped API tokens are useful if you want to manage API tokens from the Organization level on a single screen, or you want to use a single API token for multiple Workspaces
 
-There are four sub-commands for managing a Workspace-scoped Organization token:
+There are four sub-commands for managing a Workspace-scoped Organization token.
 
 ## `astro workspace organization-token add`
 
@@ -59,7 +59,7 @@ astro workspace organization-token list
 | `ID`             | The API Token ID.                                                                         | String                                                                                    |
 | `NAME`           | The name of the API Token.                                                                | String                                                                                    |
 | `DESCRIPTION`    | The API Token description.                                                                | String                                                                                    |
-| `SCOPE`          | The scope level the API Token provides permissions for. Can be Organization or Workspace. | String                                                                                    |
+| `SCOPE`          | The scope level the API Token provides permissions for. Can be `ORGANIZATION` or `WORKSPACE`. | String                                                                                    |
 | `WORKSPACE_ROLE` | The type of Workspace Role the API Token has.                                             | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER`. |
 | `CREATED`        | How long ago the API Token was created, in days.                                          | String                                                                                    |
 | `CREATED BY`     | The name of the user who created the API Token.                                           | String                                                                                    |
