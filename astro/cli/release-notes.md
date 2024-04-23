@@ -18,6 +18,24 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 - **Stable versions**: {{CLI_VER_LATEST}}, {{CLI_VER_2}}, and {{CLI_VER_3}}. See [Astro CLI release and lifecycle policy](cli/release-lifecycle-policy.md) for more information about support for CLI versions.
 
+## Astro CLI 1.26.0
+
+Release date: April 24, 2024
+
+### Scope Organization and Workspace API tokens to Deployments and Workspaces
+
+You can centralize your API Token management by using the Astro CLI to add an Organization or Workspace API token to a specific Deployment or Workspace. This allows you to use a single API Token across multiple Deployments or Workspaces.
+
+- [`astro deployment token organization-token`](https://docs.astronomer.io/astro/cli/astro-deployment-token-organization-token)
+- [`astro deployment token workspace-token`](https://docs.astronomer.io/astro/cli/astro-deployment-workspace-token)
+- [`astro workspace token organization-token`](https://docs.astronomer.io/astro/cli/astro-workspace-token-organization-token)
+
+### Bug fixes
+
+- Fixed an issue where secret environment variables with an empty string in the deployment file were being updated as empty. The secret variable value now persists.
+- Fixed an issue where `deployment inspect` was outputting the wrong Airflow API URL.
+- Fixed a bug that caused some input checks for `astro deployment upgrade-checks` to invalidate some valid inputs.
+
 ## Astro CLI 1.25.0
 
 Release date: March 28, 2024
