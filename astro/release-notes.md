@@ -25,6 +25,14 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## April 23, 2024
+
+### Additional improvements
+
+- You can now prmotoe a [development Deployment](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
+- Workspace Members can now make and use [custom Airflow menu plugins](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can select `deployment.airflow.customMenu.get` in the role's permissions list. Note that this permission works only on Deployments running Astro Runtime 9 or later.
+- You can now filter the Workspaces and clusters lists in the Astro UI by name.
+
 ## April 16, 2024
 
 ### Bug fixes
