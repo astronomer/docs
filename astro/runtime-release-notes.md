@@ -947,6 +947,8 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 
 ### Airflow bug fixes
 
+- Listener: Simplify API by replacing SQLAlchemy event-listening by direct calls (29289)
+- Listener: move success hook to after SQLAlchemy commit (32988)
 - Fixed bug when updating DagRun state for paused DAGs
 - Fixed permissions for triggerer, datasets, and deleting DAGs on Astro with a non-Admin user
 
