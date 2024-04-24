@@ -44,12 +44,6 @@ To centralize API token management, you can add an Organization token to a Works
 
 Note that you must have Organization Owner permissions to manage Workspace API tokens at the Organization level.
 
-:::cli
-
-You can also use the Astro CLI to assign an Organization API token to a Workspace. See [`astro workspace token organization-token`](cli/astro-workspace-token-organization-token.md) for more information.
-
-:::
-
 1. In the Astro UI, open your Workspace.
 
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.

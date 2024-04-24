@@ -43,12 +43,6 @@ To centralize API token management, you can add an Organization or Workspace API
 
 Deployment-scoped API tokens are functionally identical to dedicated Deployment API tokens, except that you can only rotate, update, or delete them within their original scope.
 
-:::cli
-
-You can also use the Astro CLI to assign an Organization or Workspace API token to a Deployment. See [`astro deployment token organization-token`](cli/astro-deployment-token-organization-token.md) and [`astro deployment workspace-token`](cli/astro-deployment-token-workspace-token.md) for more information.
-
-:::
-
 1. In the Astro UI, open your Workspace, then open the Deployment you want to create an API token for.
 
 2. Click **Access**.
