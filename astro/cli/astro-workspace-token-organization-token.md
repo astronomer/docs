@@ -20,7 +20,7 @@ Add an Organization API token to a Workspace and grant it Workspace-specific per
 ### Usage
 
 ```sh
-astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-NAME --role=<workspace-role>
+astro workspace organization-token add --org-token-name=<organization-token-name> --role=<workspace-role>
 ```
 
 ### Options
@@ -34,7 +34,7 @@ astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZAT
 ### Example
 
 ```sh
-astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name="My Organization" --role=WORKSPACE_OWNER
+astro workspace organization-token add --org-token-name="My Organization" --role=WORKSPACE_OWNER
 ```
 
 ## astro workspace organization-token list
@@ -72,7 +72,7 @@ Remove an Organization API token from a Workspace.
 ### Usage
 
 ```sh
-astro workspace organization-token remove <ORG_TOKEN_ID> --org-token-name=ORG-TOKEN-NAME
+astro workspace organization-token remove --org-token-name=<organization-token-name>
 ```
 
 ### Options
@@ -95,7 +95,7 @@ Update the role an Organization API token has within a Workspace.
 ### Usage
 
 ```sh
-astro workspace organization-token update <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-TOKEN-NAME --workspace-id=<workspace-id> --role=WORKSPACE_MEMBER
+astro workspace organization-token update --org-token-name=<organization-token-name> --workspace-id=<workspace-id> --role=<workspace-role>
 ```
 
 ### Options
@@ -109,5 +109,5 @@ astro workspace organization-token update <ORG_TOKEN_ID> --org-token-name=ORGANI
 ### Example
 
 ```sh
-astro workspace organization-token add <ORG_TOKEN_ID> --workspace-id=clvdx7z3c000008kv5tdw5tc5 --org-token-name=MY-ORGANIZATION --role=WORKSPACE_AUTHOR
+astro workspace organization-token add --workspace-id=clvdx7z3c000008kv5tdw5tc5 --org-token-name="My organization token" --role=WORKSPACE_AUTHOR
 ```
