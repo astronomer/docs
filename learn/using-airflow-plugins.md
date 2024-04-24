@@ -149,8 +149,8 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
     from flask import Blueprint
     from flask_appbuilder import expose, BaseView as AppBuilderBaseView
     from airflow.configuration import conf
-    # from airflow.www.auth import has_access  # uncomment for Astro
-    # from airflow.security import permissions  # uncomment for Astro
+    # from airflow.www.auth import has_access  # uncomment to use the plugin on Astro
+    # from airflow.security import permissions  # uncomment to use the plugin on Astro
 
     # define a Flask blueprint
     my_blueprint = Blueprint(
@@ -165,7 +165,7 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
         default_view = "test"
 
         @expose("/")
-        # @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) # uncomment for Astro
+        # @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) # uncomment to use the plugin on Astro
         def test(self):
             # render the HTML file from the templates directory with content
             return self.render_template("test.html", content="awesome")
@@ -210,8 +210,8 @@ By clicking on **Test View** you can access the Flask View that was defined as `
 If you want to use custom menu items in an Airflow environment hosted on Astro, you must make sure to give your plugin the necessary permissions. To do this, use the `@has_access` decorator to give your BaseView method `ACTION_CAN_ACCESS_MENU` permissions.
 
     ```python
-    from airflow.www.auth import has_access  # uncomment for Astro
-    from airflow.security import permissions  # uncomment for Astro
+    from airflow.www.auth import has_access
+    from airflow.security import permissions 
 
     # ...
 
@@ -220,7 +220,7 @@ If you want to use custom menu items in an Airflow environment hosted on Astro, 
         default_view = "test"
 
         @expose("/")
-        @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) # uncomment for Astro
+        @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) 
         def test(self):
             # render the HTML file from the templates directory with content
             return self.render_template("test.html", content="awesome")
