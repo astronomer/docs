@@ -9,10 +9,6 @@ import EnterpriseBadge from '@site/src/components/EnterpriseBadge';
 
 <EnterpriseBadge/>
 
-:::publicpreview
-:::
-
-
 A user entity's Deployment role determines their level of access to a specific Deployment in a Workspace. User entities with [Workspace Member permissions](user-permissions.md#workspace-roles) or higher have some level of access to all Deployments in a Workspace, and these permissions can be increased using Deployment roles.
 
 There are some circumstances where users should have limited access to Deployments in a Workspace. For example, all users might need full access to a development Deployment, but only administrative users need access to a production Deployment.
