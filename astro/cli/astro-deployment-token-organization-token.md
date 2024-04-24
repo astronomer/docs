@@ -96,7 +96,7 @@ Update the role an Organization API token has within a Deployment.
 ### Usage
 
 ```sh
-astro deployment organization-token update --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN
+astro deployment organization-token update --org-token-name=<org-token-name> --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN
 ```
 
 ### Options

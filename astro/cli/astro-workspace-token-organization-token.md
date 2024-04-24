@@ -95,7 +95,7 @@ Update the role an Organization API token has within a Workspace.
 ### Usage
 
 ```sh
-astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-NAME --workspace-id=<workspace-id> --role=WORKSPACE_MEMBER
+astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-TOKEN-NAME --workspace-id=<workspace-id> --role=WORKSPACE_MEMBER
 ```
 
 ### Options

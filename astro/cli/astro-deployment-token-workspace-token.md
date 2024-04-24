@@ -102,7 +102,7 @@ Update the role a Workspace API token has within a Deployment.
 ### Usage
 
 ```sh
-astro deployment organization-token update --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN --workspace-token-name=<workspace-token-name>
+astro deployment organization-token update --workspace-token-name=<workspace-token-name> --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN
 ```
 
 ### Options
