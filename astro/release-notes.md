@@ -25,6 +25,26 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## April 23, 2024
+
+### Restrict a custom Deployment role to specific Workspaces
+
+You can now restrict the use of a custom Deployment role to specific Workspaces. Use Workspace role restriction when some Workspaces in your Organization have different requirements for how users interact with Deployments. See [Restrict a custom Deployment role to specific Workspaces](https://docs.astronomer.io/astro/customize-deployment-roles#restrict-a-custom-deployment-role-to-specific-workspaces) for setup steps.
+
+### Additional improvements
+
+- The [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) feature is now generally available.
+- You can now promote a [development Deployment](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
+- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later. 
+
+    Note that you might have to modify the code for your menu item plugins to make them work on Astro. See [Appbuilder menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
+    
+- You can now filter the Workspaces and clusters lists in the Astro UI by name.
+
+### Bug fixes
+
+- To improve the reliability of data lineage for customers who leverage it, data lineage is now a private preview feature that can be enabled upon request. To reenable data lineage for an Astro Organization, reach out to your account team.
+
 ## April 16, 2024
 
 ### Bug fixes
