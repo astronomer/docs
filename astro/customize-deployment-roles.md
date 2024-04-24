@@ -75,3 +75,19 @@ Using Deployment roles, you can add users and Teams directly to Deployments with
 3. Click **+ User**/ **+ Team**.
 4. In the window that appears, select the user entity you want to add, then select the role they will have in the Deployment.
 5. Click **Add User**/ **Add Team**.
+
+## Restrict a custom Deployment role to specific Workspaces
+
+By default, a custom role is available to use in all Workspaces. After you create a custom Deployment role, you can restrict it so that users can only be assigned the role within specific Workspaces. Use Workspace role restriction when some Workspaces in your Organization have different requirements for how users interact with Deployments.
+
+1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
+
+2. Go to **Access Management**, then click **Roles**.
+
+3. Click **Custom**, then select the custom role that you want to restrict. 
+
+4. In the menu that appears, click **Restricted Workspaces**, then click **Edit**.
+
+5. Click the **Workspace Restriction** toggle to on, then tick the checkbox for any Workspaces where you want the role to be usable.
+
+6. Click **Update Restricted Workspaces**.
