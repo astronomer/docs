@@ -226,7 +226,7 @@ If you want to use custom menu items in an Airflow environment hosted on Astro, 
             return self.render_template("test.html", content="awesome")
     ```
 
-Additionally you must make sure that the baseURL is correctly set for all new Airflow UI endpoints you are creating. You can import the `baseURL` dynamically from the Airflow configuration file as shown in the code snippet below.
+Additionally you must make sure that the `baseURL` is correctly set for all new Airflow UI endpoints you are creating. You can import the `baseURL` dynamically from the Airflow configuration file as shown in the previous example and the following code snippet.
 
     ```python
     from airflow.configuration import conf
