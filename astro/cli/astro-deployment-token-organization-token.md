@@ -26,7 +26,7 @@ astro deployment organization-token add --deployment-id=<my-deployment-id> --rol
 | Option                   | Description                                        | Valid Values                                                                          |
 | ------------------------ | -------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `--deployment-id`        | The Deployment ID where you want to manage tokens. | Any Deployment ID.                                                                    |
-| `-n`, `--org-token-name` | The name of the Oganization API Token.             | Any string. If the name contains a space, specify the entire name within quotes `""`. |
+| `-n`, `--org-token-name` | The name of the Oganization API token.             | Any string. If the name contains a space, specify the entire name within quotes `""`. |
 | `r`, `--role`            | The role the API token has in the Deployment.      | `DEPLOYMENT_ADMIN` or a custom role name.                                             |
 | `--workspace-id`         | The Workspace to which the Deployment belongs.     | Any Workspace ID.                                                                     |
 
@@ -57,13 +57,13 @@ astro deployment organization-token list --deployment-id=<your-deployment-id>
 
 | Output            | Description                                      | Data Type |
 | ----------------- | ------------------------------------------------ | --------- |
-| `ID`              | The API Token ID.                                | String    |
-| `NAME`            | The name of the API Token.                       | String    |
-| `DESCRIPTION`     | The API Token description.                       | String    |
+| `ID`              | The API token ID.                                | String    |
+| `NAME`            | The name of the API token.                       | String    |
+| `DESCRIPTION`     | The API token description.                       | String    |
 | `SCOPE`           | The original scope of the API token.             | String    |
 | `DEPLOYMENT_ROLE` | The API token's role in the Deployment.          | String    |
-| `CREATED`         | How long ago the API Token was created, in days. | String    |
-| `CREATED BY`      | The name of the user who created the API Token.  | String    |
+| `CREATED`         | How long ago the API token was created, in days. | String    |
+| `CREATED BY`      | The name of the user who created the API token.  | String    |
 
 ## astro deployment organization-token remove
 
@@ -103,7 +103,7 @@ astro deployment organization-token update --org-token-name=<org-token-name> --d
 
 | Option                   | Description                                                                | Valid Values                              |
 | ------------------------ | -------------------------------------------------------------------------- | ----------------------------------------- |
-| `--deployment-id`        | The Deployment ID you want to scope an Organization API Token to.          | Any Deployment ID.                        |
+| `--deployment-id`        | The Deployment ID you want to scope an Organization API token to.          | Any Deployment ID.                        |
 | `-r`, `--role`           | The Deployment role that you want to assign to the token.                              | `DEPLOYMENT_ADMIN` or a custom role name. |
 | `-n`, `--org-token-name` | The name of the Organization API token that you want to update. | Any string.                               |
 | `--workspace-id`         | The Workspace to which the Deployment belongs.                             | Any Workspace ID.                         |

@@ -20,16 +20,16 @@ Add an Organization API token to a Workspace and grant it Workspace-specific per
 ### Usage
 
 ```sh
-astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-NAME --role=WORKSPACE_MEMBER
+astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-NAME --role=<workspace-role>
 ```
 
 ### Options
 
 | Option                   | Description                                    | Valid Values                                                                              |
 | ------------------------ | ---------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `-n`, `--org-token-name` | The name of the Oganization API Token.         | Any string. If the name contains a space, specify the entire name within quotes `""`.     |
+| `-n`, `--org-token-name` | The name of the Oganization API token.         | Any string. If the name contains a space, specify the entire name within quotes `""`.     |
 | `-r`, `--role`           | The role the API token has in the Workspace.   | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER`. |
-| `--workspace-id`         | The Workspace to which the Deployment belongs. | Any Workspace ID.                                                                         |
+| `--workspace-id`         | The Workspace to add the token to. | Any Workspace ID.                                                                         |
 
 ### Example
 
@@ -51,19 +51,19 @@ astro workspace organization-token list
 
 | Option           | Description                                   | Valid Values      |
 | ---------------- | --------------------------------------------- | ----------------- |
-| `--workspace-id` | The Workspace to which the API Tokens belong. | Any Workspace ID. |
+| `--workspace-id` | The Workspace to which the API tokens belong. | Any Workspace ID. |
 
 ### Output
 
 | Output           | Description                                      | Data Type |
-| ---------------- | ------------------------------------------------ | --------- | ----------------------------------------------------------------------------------------- |
-| `ID`             | The API Token ID.                                | String    |
-| `NAME`           | The name of the API Token.                       | String    |
-| `DESCRIPTION`    | The API Token description.                       | String    |
+| ---------------- | ------------------------------------------------ | --------- |
+| `ID`             | The API token ID.                                | String    |
+| `NAME`           | The name of the API token.                       | String    |
+| `DESCRIPTION`    | The API token description.                       | String    |
 | `SCOPE`          | The original scope of the API token.             | String    |
-| `WORKSPACE_ROLE` | The API token's role in the Workspace.           | String    | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER`. |
-| `CREATED`        | How long ago the API Token was created, in days. | String    |
-| `CREATED BY`     | The name of the user who created the API Token.  | String    |
+| `WORKSPACE_ROLE` | The API token's role in the Workspace.           | String    |
+| `CREATED`        | How long ago the API token was created, in days. | String    |
+| `CREATED BY`     | The name of the user who created the API token.  | String    |
 
 ## astro workspace organization-token remove
 
@@ -80,7 +80,7 @@ astro workspace organization-token remove <ORG_TOKEN_ID> --org-token-name=ORG-TO
 | Option                  | Description                                                                   | Valid Values     |
 | ----------------------- | ----------------------------------------------------------------------------- | ---------------- |
 | `-n`,`--org-token-name` | The name of the Organization API token you want to remove from the Workspace. | Any string.      |
-| `--workspace-id`        | Workspace from where you want to remove an API token.                         | Any Workspace ID |
+| `--workspace-id`        | Workspace where you want to remove an API token.                         | Any Workspace ID. |
 
 ### Example
 
@@ -95,7 +95,7 @@ Update the role an Organization API token has within a Workspace.
 ### Usage
 
 ```sh
-astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-TOKEN-NAME --workspace-id=<workspace-id> --role=WORKSPACE_MEMBER
+astro workspace organization-token update <ORG_TOKEN_ID> --org-token-name=ORGANIZATION-TOKEN-NAME --workspace-id=<workspace-id> --role=WORKSPACE_MEMBER
 ```
 
 ### Options
@@ -104,7 +104,7 @@ astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZAT
 | ------------------------ | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `-n`, `--org-token-name` | The name of the Organization API token you want to update. | Any string.                                                                               |
 | `-r`, `--role`           | The Workspace role that you want to assign to the token.                                 | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER`. |
-| `--workspace-id`         | The Workspace to which the Deployment belongs.                         | Any Workspace ID                                                                          |
+| `--workspace-id`         | The Workspace where you want to update the token.                      | Any Workspace ID.                                                                          |
 
 ### Example
 

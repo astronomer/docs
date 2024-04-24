@@ -33,7 +33,7 @@ astro deployment workspace-token add --deployment-id=<my-deployment-id> --role=D
 ### Example
 
 ```sh
-astro deployment organization-token add --deployment-id=clvduhrvd000008l842ohcpvb  --role=DEPLOYMENT_ADMIN --workspace-token-name="My workspace token"
+astro deployment workspace-token add --deployment-id=clvduhrvd000008l842ohcpvb  --role=DEPLOYMENT_ADMIN --workspace-token-name="My workspace token"
 ```
 
 ## astro deployment workspace-token list
@@ -51,19 +51,19 @@ astro deployment workspace-token list --deployment-id=<your-deployment-id> --wor
 | Option            | Description                                      | Valid Values         |
 | ----------------- | ------------------------------------------------ | -------------------- |
 | `--deployment-id` | The ID of the Deployment to list API tokens for. | Any Deployment ID.   |
-| `--workspace-id`  | The Workspace to which the Deployment belongs.   | Any Workspace ID. ID |
+| `--workspace-id`  | The Workspace to which the Deployment belongs.   | Any Workspace ID. |
 
 ### Output
 
 | Output            | Description                                      | Data Type |
 | ----------------- | ------------------------------------------------ | --------- |
-| `ID`              | The API Token ID.                                | String    |
-| `NAME`            | The name of the API Token.                       | String    |
-| `DESCRIPTION`     | The API Token description.                       | String    |
+| `ID`              | The API token ID.                                | String    |
+| `NAME`            | The name of the API token.                       | String    |
+| `DESCRIPTION`     | The API token description.                       | String    |
 | `SCOPE`           | The original scope of the API token.             | String    |
 | `DEPLOYMENT_ROLE` | The API token's role in the Deployment.          | String    |
-| `CREATED`         | How long ago the API Token was created, in days. | String    |
-| `CREATED BY`      | The name of the user who created the API Token.  | String    |
+| `CREATED`         | How long ago the API token was created, in days. | String    |
+| `CREATED BY`      | The name of the user who created the API token.  | String    |
 
 ### Example
 
@@ -102,14 +102,14 @@ Update the role a Workspace API token has within a Deployment.
 ### Usage
 
 ```sh
-astro deployment organization-token update --workspace-token-name=<workspace-token-name> --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN
+astro deployment workspace-token update --workspace-token-name=<workspace-token-name> --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN
 ```
 
 ### Options
 
 | Option                         | Description                                                             | Valid Values                              |
 | ------------------------------ | ----------------------------------------------------------------------- | ----------------------------------------- |
-| `--deployment-id`              | The Deployment ID you want to scope a Workspace API Token to.           | Any Deployment ID.                        |
+| `--deployment-id`              | The Deployment ID you want to scope a Workspace API token to.           | Any Deployment ID.                        |
 | `-r`, `--role`                 | The Deployment role that you want to assign to the token.                           | `DEPLOYMENT_ADMIN` or a custom role name. |
 | `-n`, `--workspace-token-name` | The name of the Workspace API token you want to update. | Any string.                               |
 | `--workspace-id`               | The Workspace to which the Deployment belongs.                          | Any Workspace ID.                         |
@@ -117,5 +117,5 @@ astro deployment organization-token update --workspace-token-name=<workspace-tok
 ### Example
 
 ```sh
-astro deployment organization-token update --deployment-id=clvduhrvd000008l842ohcpvb --role=DEPLOYMENT_ADMIN --workspace-token-name="My workspace token"
+astro deployment workspace-token update --deployment-id=clvduhrvd000008l842ohcpvb --role=DEPLOYMENT_ADMIN --workspace-token-name="My workspace token"
 ```
