@@ -159,6 +159,7 @@ If you want to use custom menu items in an Airflow environment hosted on Astro, 
     You can then specify the menu item, in this example `my_new_endpoint` in `appbuilder_menu_items`.
 
 ```
+:::
 
 The screenshot below shows the additional menu items in the Airflow UI.
 
