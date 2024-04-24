@@ -118,49 +118,6 @@ class MyMenuItemsPlugin(AirflowPlugin):
     appbuilder_menu_items = [appbuilder_mitem_toplevel, appbuilder_mitem_subitem]
 ```
 
-:::info
-
-If you want to use custom menu items in an Airflow environment hosted on Astro, you must modify the Python file containing your plugin:
-
-- Add the following imports to the top of your Python file:
-
-    ```python
-    from airflow.configuration import conf
-    from airflow.www.auth import has_access
-    from airflow.security import permissions
-    ```
-
-- In your class definition for the flask app builder base view, add the `@has_access` decorator with the line `(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")`. For example:
-
-    ```python
-    class TestAppBuilderBaseView(AppBuilderBaseView): 
-    class_permission_name = "Custom Menu"
-    default_view = "test"
-
-    @expose("/")
-    @has_access(
-        [
-            (permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")
-        ]
-    )
-    ```
-
-- For any `appbuilder_menu_items`, you must add the base URL of your Airflow webserver to the URL for the menu item. For example:
-
-    ```python
-    baseUrl = conf.get("webserver", "base_url") 
-    my_new_endpoint = { 
-        "name": "Custom Menu",
-        "label": "DAGs Folder",
-        "href":  str(baseUrl) + "/testappbuilderbaseview",
-    }
-    ```
-
-    You can then specify the menu item, in this example `my_new_endpoint` in `appbuilder_menu_items`.
-
-```
-:::
-
 The screenshot below shows the additional menu items in the Airflow UI.
 
 ![Plugins Menu items](/img/guides/plugins_menu_items.png)
@@ -191,6 +148,9 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
     from airflow.plugins_manager import AirflowPlugin
     from flask import Blueprint
     from flask_appbuilder import expose, BaseView as AppBuilderBaseView
+    from airflow.configuration import conf
+    # from airflow.www.auth import has_access  # uncomment to use the plugin on Astro
+    # from airflow.security import permissions  # uncomment to use the plugin on Astro
 
     # define a Flask blueprint
     my_blueprint = Blueprint(
@@ -205,12 +165,16 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
         default_view = "test"
 
         @expose("/")
+        # @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) # uncomment to use the plugin on Astro
         def test(self):
             # render the HTML file from the templates directory with content
             return self.render_template("test.html", content="awesome")
 
     # instantiate MyBaseView
     my_view = MyBaseView()
+
+    # get the base URL of the Airflow webserver
+    baseUrl = conf.get("webserver", "base_url")
 
     # define the path to my_view in the Airflow UI
     my_view_package = {
@@ -219,6 +183,7 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
         # define the top-level menu item
         "category": "My Extra View",
         "view": my_view,
+        "href":  str(baseUrl) + "/testview",
     }
 
     # define the plugin class
@@ -239,6 +204,53 @@ This plugin will add a top-level menu item called **My Extra View** which contai
 By clicking on **Test View** you can access the Flask View that was defined as `my_view`. It shows the HTML template (`test.html`) rendered with the provided content.
 
 ![Test View](/img/guides/plugins_test_view.png)
+
+:::info
+
+If you want to use custom menu items in an Airflow environment hosted on Astro, you must make sure to give your plugin the necessary permissions. To do this, use the `@has_access` decorator to give your BaseView method `ACTION_CAN_ACCESS_MENU` permissions.
+
+    ```python
+    from airflow.www.auth import has_access
+    from airflow.security import permissions 
+
+    # ...
+
+    # create a flask appbuilder BaseView
+    class MyBaseView(AppBuilderBaseView):
+        default_view = "test"
+
+        @expose("/")
+        @has_access([(permissions.ACTION_CAN_ACCESS_MENU, "Custom Menu")]) 
+        def test(self):
+            # render the HTML file from the templates directory with content
+            return self.render_template("test.html", content="awesome")
+    ```
+
+Additionally you must make sure that the `baseURL` is correctly set for all new Airflow UI endpoints you are creating. You can import the `baseURL` dynamically from the Airflow configuration file as shown in the previous example and the following code snippet.
+
+    ```python
+    from airflow.configuration import conf
+
+    # ...
+
+    # instantiate MyBaseView
+    my_view = MyBaseView()
+
+    # get the base URL of the Airflow webserver
+    baseUrl = conf.get("webserver", "base_url")
+
+    # define the path to my_view in the Airflow UI
+    my_view_package = {
+        # define the menu sub-item name
+        "name": "Test View",
+        # define the top-level menu item
+        "category": "My Extra View",
+        "view": my_view,
+        "href":  str(baseUrl) + "/testview",
+    }
+    ```
+
+:::
 
 ### Operator extra links
 
