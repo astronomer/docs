@@ -998,10 +998,8 @@ components:
       type: object
   securitySchemes:
     JWT:
-      type: http
       scheme: bearer
-security: 
-  - JWT: []
+      type: http
 info:
   contact: {}
   description: Astro Identity and Access Management (IAM) API
@@ -2939,6 +2937,8 @@ paths:
       summary: Update a user's roles
       tags:
       - User
+security:
+- JWT: []
 servers:
 - url: https://api.astronomer.io/iam/v1beta1
 tags:

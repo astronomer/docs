@@ -2004,6 +2004,13 @@ components:
           description: Whether the Deployment has DAG deploys enabled.
           example: true
           type: boolean
+        isDevelopmentMode:
+          description: Whether the Deployment is for development only. If `false`,
+            the Deployment can be considered production for the purposes of support
+            case priority, but development-only features such as hibernation will
+            not be available. You can't update this value to `true` for existing non-development
+            Deployments.
+          type: boolean
         isHighAvailability:
           description: Whether the Deployment is configured for high availability.
             If `true`, multiple scheduler pods will be online.
@@ -2279,6 +2286,13 @@ components:
         isDagDeployEnabled:
           description: Whether the Deployment has DAG deploys enabled.
           example: true
+          type: boolean
+        isDevelopmentMode:
+          description: Whether the Deployment is for development only. If `false`,
+            the Deployment can be considered production for the purposes of support
+            case priority, but development-only features such as hibernation will
+            not be available. You can't update this value to `true` for existing non-development
+            Deployments.
           type: boolean
         isHighAvailability:
           description: Whether the Deployment is configured for high availability.
@@ -2609,10 +2623,8 @@ components:
       type: object
   securitySchemes:
     JWT:
-      type: http
       scheme: bearer
-security: 
-  - JWT: []
+      type: http
 info:
   contact: {}
   description: Astro Platform API
@@ -4115,6 +4127,8 @@ paths:
       - Workspace
       x-permission:
       - action: workspace.settings.update
+security:
+- JWT: []
 servers:
 - url: https://api.astronomer.io/platform/v1beta1
 tags:
