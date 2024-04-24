@@ -33,6 +33,10 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 - Workspace Members can now make and use [custom Airflow menu plugins](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can select `deployment.airflow.customMenu.get` in the role's permissions list. Note that this permission works only on Deployments running Astro Runtime 9 or later.
 - You can now filter the Workspaces and clusters lists in the Astro UI by name.
 
+### Bug fixes
+
+- To improve the reliability of data lineage for customers who leverage it, data lineage is now a private preview feature that can be enabled upon request. To reenable data lineage for an Astro Organization, reach out to your account team.
+
 ## April 16, 2024
 
 ### Bug fixes
