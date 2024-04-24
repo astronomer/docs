@@ -3,7 +3,6 @@ sidebar_label: "astro workspace token organization-token"
 title: "astro workspace token organization-token"
 id: astro-workspace-token-organization-token
 description: Scope an Organization token to a specific Workspace.
-hide_table_of_contents: true
 sidebar_custom_props: { icon: "img/term-icon.png" }
 ---
 

@@ -3,7 +3,6 @@ sidebar_label: "astro deployment token workspace-token"
 title: "astro deployment token workspace-token"
 id: astro-deployment-token-workspace-token
 description: Scope a Workspace token to a specific Deployment.
-hide_table_of_contents: true
 sidebar_custom_props: { icon: 'img/term-icon.png' }
 ---
 
