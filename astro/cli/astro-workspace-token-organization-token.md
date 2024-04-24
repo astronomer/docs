@@ -72,7 +72,7 @@ Remove an Organization API token from a Workspace.
 ### Usage
 
 ```sh
-astro workspace organization-token remove --org-token-name=<organization-token-name>
+astro workspace organization-token remove
 ```
 
 ### Options
@@ -85,7 +85,7 @@ astro workspace organization-token remove --org-token-name=<organization-token-n
 ### Example
 
 ```sh
-astro workspace organization-token remove --org-token-name="My org token"
+astro workspace organization-token remove
 ```
 
 ## astro workspace organization-token update
@@ -95,7 +95,7 @@ Update the role an Organization API token has within a Workspace.
 ### Usage
 
 ```sh
-astro workspace organization-token update --org-token-name=<organization-token-name> --workspace-id=<workspace-id> --role=<workspace-role>
+astro workspace organization-token update --workspace-id=<workspace-id> --role=<workspace-role>
 ```
 
 ### Options

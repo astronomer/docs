@@ -18,7 +18,7 @@ Add an Organization API token to a Deployment and grant it Deployment-specific p
 ### Usage
 
 ```sh
-astro deployment organization-token add --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN --org-token-name=<org-token-name> --workspace-id=<workspace-id>
+astro deployment organization-token add --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN --workspace-id=<workspace-id>
 ```
 
 ### Options
@@ -72,7 +72,7 @@ Remove an Organization API token from a Deployment.
 ### Usage
 
 ```sh
-astro deployment organization-token remove --deployment-id=<my-deployment-id> --org-token-name=<org-token-name>
+astro deployment organization-token remove --deployment-id=<my-deployment-id> 
 ```
 
 ### Options
@@ -96,7 +96,7 @@ Update the role an Organization API token has within a Deployment.
 ### Usage
 
 ```sh
-astro deployment organization-token update --org-token-name=<org-token-name> --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN
+astro deployment organization-token update --deployment-id=<my-deployment-id> --role=DEPLOYMENT_ADMIN
 ```
 
 ### Options
