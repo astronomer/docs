@@ -102,9 +102,9 @@ astro workspace organization-token add <ORG_TOKEN_ID> --org-token-name=ORGANIZAT
 
 | Option                   | Description                                                               | Valid Values                                                                              |
 | ------------------------ | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `-n`, `--org-token-name` | The name of the Organization API token you want to add to your Workspace. | Any string.                                                                               |
-| `-r`, `--role`           | The role the API token has in the Workspace.                              | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER`. |
-| `--workspace-id`         | Workspace where you want to update an API token.                          | Any Workspace ID                                                                          |
+| `-n`, `--org-token-name` | The name of the Organization API token you want to update. | Any string.                                                                               |
+| `-r`, `--role`           | The Workspace role that you want to assign to the token.                                 | One of `WORKSPACE_MEMBER`, `WORKSPACE_AUTHOR`, `WORKSPACE_OPERATOR` or `WORKSPACE_OWNER`. |
+| `--workspace-id`         | The Workspace to which the Deployment belongs.                         | Any Workspace ID                                                                          |
 
 ### Example
 

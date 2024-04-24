@@ -104,8 +104,8 @@ astro deployment organization-token update --deployment-id=<my-deployment-id> --
 | Option                   | Description                                                                | Valid Values                              |
 | ------------------------ | -------------------------------------------------------------------------- | ----------------------------------------- |
 | `--deployment-id`        | The Deployment ID you want to scope an Organization API Token to.          | Any Deployment ID.                        |
-| `-r`, `--role`           | The role the API token has in the Deployment.                              | `DEPLOYMENT_ADMIN` or a custom role name. |
-| `-n`, `--org-token-name` | The name of the Organization API token that you want to add to your Deployment. | Any string.                               |
+| `-r`, `--role`           | The Deployment role that you want to assign to the token.                              | `DEPLOYMENT_ADMIN` or a custom role name. |
+| `-n`, `--org-token-name` | The name of the Organization API token that you want to update. | Any string.                               |
 | `--workspace-id`         | The Workspace to which the Deployment belongs.                             | Any Workspace ID.                         |
 
 ### Example
