@@ -35,7 +35,9 @@ You can now restrict the use of a custom Deployment role to specific Workspaces.
 
 - The [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) feature is now generally available.
 - You can now promote a [development Deployment](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
-- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. Note that this permission works only on Deployments running Astro Runtime 9 or later. Note that you might have to modify the code for your menu item plugins for them to work on Astro. See [Appbuilder menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
+- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later. 
+
+    Note that you might have to modify the code for your menu item plugins for them to work on Astro. See [Appbuilder menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
 - You can now filter the Workspaces and clusters lists in the Astro UI by name.
 
 ### Bug fixes
