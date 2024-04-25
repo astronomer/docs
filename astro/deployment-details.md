@@ -13,7 +13,7 @@ Deployment details define how users can view and interact with your Deployment. 
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
+2. Click the **More Actions** menu of the Deployment you want to update, and select **Edit Deployment**.
 
     <img src={require("../static/img/docs/edit-deployment.png").default} alt="Edit Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
@@ -49,7 +49,7 @@ After you enable CI/CD enforcement on a Deployment, the Deployment accepts a dep
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
-2. Click the **Options** menu of the Deployment you want to update, and select **Edit Deployment**.
+2. Click the **More Actions** menu of the Deployment you want to update, and select **Edit Deployment**.
 
     <img src={require("../static/img/docs/edit-deployment.png").default} alt="Edit Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
@@ -76,8 +76,24 @@ You have to only complete these steps once. Once the DAG-only deploy feature is 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/open-support-request).
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
+2. Click the **More Actions** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
     <img src={require("../static/img/docs/delete-deployment.png").default} alt="Delete Deployment in options menu" style={{ width: "60%", maxWidth: "400px", height: "auto" }} />
 
 3. Enter `Delete` and click **Yes, Continue**.
+
+## Find a Deployment's external IP address
+
+Deployments have an associated external IP address, that is dynamically generated.
+
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Select the **Details** tab.
+3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
+
+:::tip
+
+Deployments have dynamically generated external IP addresses. If you want to [set up a networking connection](networking-overview.md#standard-and-dedicated-cluster-support) with a static IP address, you need the cluster-level external IP address, which persists as long as the cluster exists.
+
+:::
+
+
