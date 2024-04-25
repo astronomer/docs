@@ -38,3 +38,13 @@ After you create your VPC peering connection, follow the steps in [Authorize you
 Astronomer monitors the health of Deployments and DAGs, but it doesn't monitor the status of network connections because they exist outside of Astronomer's observable control plane and data plane.
 
 :::
+
+## Standard and dedicated cluster support
+
+Depending on the type of cloud provider you want to create a networking connection with and whether you have a standard or a dedicated cluster in your Astro Deployment, you have different configuration options.
+
+To learn more about networking connection support and cluster options, see:
+
+- [AWS: Standard and dedicated cluster support](connect-aws.md#standard-and-dedicated-cluster-support-for-aws-networking)
+- [GCP: Standard and dedicated cluster support](connect-gcp.md#standard-and-dedicated-cluster-support-for-gcp-networking)
+- [Azure: Standard and dedicated cluster support](connect-azure.md#standard-and-dedicated-cluster-support-for-azure-networking)

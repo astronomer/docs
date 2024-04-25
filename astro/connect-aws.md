@@ -44,6 +44,12 @@ If you require a private connection between Astro and AWS, Astronomer recommends
 
 All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your AWS resources through a valid Airflow connection.
 
+:::tip
+
+While you can find an external IP address for your Deployment, these IP addresses are dynamically generated, which means that your connection might fail if the IP address changes. A cluster-level external IP address persists, ensuring your cluster can access your cloud resources as long as the cluster exists.
+
+:::
+
 ### Allowlist external IP addresses for a cluster
 
 1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
@@ -97,20 +103,20 @@ To set up a private connection between an Astro VPC and an AWS VPC, you can crea
     - VPC ID of the external VPC
     - CIDR block of the external VPC
 
-2. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**. 
+2. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 
 3. Click **Clusters**, select your cluster, click **VPC Peering Connections**, then click **+ VPC Peering Connection**.
 
 4. Configure the following values for your VPC peering connection using the information you copied in Step 1:
 
-    - **Peering Name**: Provide a name for the VPC peering connection. 
+    - **Peering Name**: Provide a name for the VPC peering connection.
     - **AWS account ID**: Enter the account ID of the external VPC.
     - **Destination VPC ID**: Enter the VPC ID.
     - **Destination VPC region**: Enter the region of the external VPC.
     - **Destination VPC CIDR block**: Enter the CIDR block of the external VPC.
 
 5. Click **Create Connection**. The connection appears as **Pending**.
-6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**. 
+6. Wait a few minutes for the **Complete Activation** button to appear, then click **Complete Activation link**.
 7. In the modal that appears, follow the instructions to accept the connection from your external VPC and create routes from the external VPC to Astro.
 
 A few minutes after you complete the instructions in the modal, the connection status changes from **Pending** to **Active**. A new default route appears in **Routes** with your configured CIDR block.
@@ -177,9 +183,9 @@ Your initial VPC connection connects Astro to your external VPC through a primar
 
 2. Configure the following details for your route:
 
-    - **Route ID**: Provide a name for the route. 
+    - **Route ID**: Provide a name for the route.
     - **Destination**: Enter the subnet of the service in the external VPC.
-    - **Target**: Select the VPC peering connection you configured. 
+    - **Target**: Select the VPC peering connection you configured.
 
 3. Click **Create Route**, then wait a few minutes for the route to be created.
 

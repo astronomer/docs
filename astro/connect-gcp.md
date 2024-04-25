@@ -37,6 +37,12 @@ If you require a private connection between Astro and GCP, Astronomer recommends
 
 All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your GCP resources through a valid Airflow connection.
 
+:::tip
+
+While you can find an external IP address for your Deployment, these IP addresses are dynamically generated, which means that your connection might fail if the IP address changes. A cluster-level external IP address persists, ensuring your cluster can access your cloud resources as long as the cluster exists.
+
+:::
+
 ### Allowlist external IP addresses for a cluster
 
 1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
