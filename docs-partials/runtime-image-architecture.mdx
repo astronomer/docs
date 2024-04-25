@@ -141,7 +141,7 @@ In Airflow, the executor is responsible for determining how and where a task is 
 
 In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astro and Astronomer Software, you can use either the Celery executor or the Kubernetes executor.
 
-## Distribution
+## Image types
 
 Astro Runtime is distributed as a Debian-based Docker image. An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. The default image tag is:
 
@@ -149,9 +149,9 @@ Astro Runtime is distributed as a Debian-based Docker image. An Astro Runtime im
 quay.io/astronomer/astro-runtime:<version>
 ```
 
-You can modify this image tag in your Astro project Dockerfile to use different versions of Astro Runtime. The following sections explain each distribution type and how to specify them. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+You can modify this image tag in your Astro project Dockerfile to use different versions of Astro Runtime. The following sections explain each image type and how to specify them. For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
-### Base distributions
+### Base images
 
 The base Astro Runtime Docker image has the following format:
 
@@ -163,45 +163,56 @@ A `base` Astro Runtime image is recommended for complex use cases that require a
 
 For all other cases, Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the images running each core Airflow component. 
 
-### Python version distributions
+### Python version images
 
-Starting with Astro Runtime 9, Astronomer maintains different distributions Astro Runtime for each supported Python version. Python version distribution images have the following format:
+Starting with Astro Runtime 9, Astronomer maintains different Astro Runtime images for each supported Python version. Python version images have the following format:
 
 ```text
 quay.io/astronomer/astro-runtime:<runtime-version>-python-<python-version>
 ```
 
-### Slim distributions 
+### Slim images 
 
-Starting with Astro Runtime 11, Astronomer maintains a slim distribution of Astro Runtime. Slim Astro Runtime images only include the dependencies required for the basic funcionality of Astro. These packages are:
+Starting with Astro Runtime 11, Astronomer maintains a slim Astro Runtime image. Slim Astro Runtime images only include the dependencies required for the basic funcionality of Astro. These packages are:
 
-[List TBD]
+- `apache-airflow-providers-celery`
+- `apache-airflow-providers-common-io`
+- `apache-airflow-providers-common-sql`
+- `apache-airflow-providers-elasticsearch`
+- `apache-airflow-providers-fab`
+- `apache-airflow-providers-ftp`
+- `apache-airflow-providers-http`
+- `apache-airflow-providers-imap`
+- `apache-airflow-providers-postgres`
+- `apache-airflow-providers-smtp`
+- `apache-airflow-providers-sqlite`
+- `astronomer-kubernetes-executor`
 
-Use the slim distribution of Astro Runtime if you want faster local builds and deploys, and you don't require the packages included in the default Astro Runtime distribution.
+Use the slim Astro Runtime image if you want faster local builds and deploys, smaller footprint for security vulnerabilities and dependency conflicts, or you don't require the packages included in the default Astro Runtime distribution.
 
-### Combine distributions
+### Combine image types
 
-Distributions are additive, meaning that you can combine multiple distributions in your image tag if you have multiple image requirements. 
+Image types are additive, meaning that you can combine multiple types in your image tag to specify an image with multiple variations.
 
-Distributions must be specified in a specific order in your image tag. The order and format multi-distribution image tag is:
+Types must be specified in a specific order in your image tag. The order and format multi-type image tag is:
 
 ```
-quay.io/astronomer/astro-runtime:<astro-runtime-version>-<python-distribution>-<slim-distribution>-<base-distribution>
+quay.io/astronomer/astro-runtime:<astro-runtime-version>-<python-version-type>-<slim-type>-<base-type>
 ```
 
-You can add or remove any distribution specifications as needed. For example, to use the slim Astro Runtime distribution with Python 3.11 and a base image, your image tag would be:
+You can add or remove any types as needed. For example, to use the base, slim Astro Runtime image with Python 3.11, your image tag would be:
 
 ```
 quay.io/astronomer/astro-runtime:11.0.0-python-3.11-slim-base
 ```
 
-If you wanted the same Python distribution and base image without the slim image, you would remove the `-slim-` from the image tag like in the following example:
+If you wanted the same base image using Python 3.11, but you didn't want a slim image, you would remove the `-slim-` from the image tag like in the following example:
 
 ```
-quay.io/astronomer/astro-runtime:11.0.0-python-3.11-slim-base
+quay.io/astronomer/astro-runtime:11.0.0-python-3.11-base
 ```
 
-## System distribution
+## Operating system support
 
 The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
 
