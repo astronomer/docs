@@ -552,7 +552,7 @@ Finally, try running `$ astro deploy` on a test deployment. Create a deployment 
 ```sh
 $ mkdir demo
 $ cd demo
-$ astro dev init --use-astronomer-certified
+$ astro dev init
 $ astro deploy -f
 ```
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
