@@ -12,7 +12,7 @@ Astronomer's built-in GitHub integration is the fastest way to implement CI/CD f
 
 To deploy code through an integrated GitHub repository, you first connect a GitHub repository with your Astro project to an Astro Workspace. Then, you map a Git branch in that repository to an Astro Deployment. When a pull request is merged into your mapped branch, your code is automatically deployed to Astro.
 
-<img src={require("../static/img/docs/github-integration-map.png").default} alt="A diagram showing how branches in a GitHub repository directly correlate to specific Deployments in an Astro Workspace." style={{ width: "auto", maxWidth: "400px", height: "auto" }} />
+<img src={require("../static/img/docs/github-integration-map.png").default} alt="A diagram showing how branches in a GitHub repository directly correlate to specific Deployments in an Astro Workspace." />
 
 Compared to deploying code manually using the Astro CLI or through a custom CI/CD process, using Astro’s GitHub integration:
 
@@ -21,7 +21,7 @@ Compared to deploying code manually using the Astro CLI or through a custom CI/C
 - Enables you to see Git metadata directly in the Astro UI, including Git commit descriptions.
 - Gives you greater visibility into the status and detailed logs of an individual deploy.
 
-<img src={require("../static/img/docs/github-integration-deploy.png").default} alt="A diagram showing how when an engineer commits code to a branch, then after merging the branch to GitHub, the Astro project updates." style={{ width: "80%", maxWidth: "400px", height: "auto" }} />
+<img src={require("../static/img/docs/github-integration-deploy.png").default} alt="A diagram showing how when an engineer commits code to a branch, then after merging the branch to GitHub, the Astro project updates." />
 
 ## Best practices
 
