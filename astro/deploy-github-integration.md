@@ -12,12 +12,16 @@ Astronomer's built-in GitHub integration is the fastest way to implement CI/CD f
 
 To deploy code through an integrated GitHub repository, you first connect a GitHub repository with your Astro project to an Astro Workspace. Then, you map a Git branch in that repository to an Astro Deployment. When a pull request is merged into your mapped branch, your code is automatically deployed to Astro.
 
+<img src={require("../static/img/docs/github-integration-map.png").default} alt="A diagram showing how branches in a GitHub repository directly correlate to specific Deployments in an Astro Workspace." />
+
 Compared to deploying code manually using the Astro CLI or through a custom CI/CD process, using Astro’s GitHub integration:
 
 - Allows you to enforce software development best practices without maintaining custom CI/CD scripts.
 - Makes it easy for developers to iterate on DAG code quickly.
 - Enables you to see Git metadata directly in the Astro UI, including Git commit descriptions.
 - Gives you greater visibility into the status and detailed logs of an individual deploy.
+
+<img src={require("../static/img/docs/github-integration-deploy.png").default} alt="A diagram showing how when an engineer commits code to a branch, then after merging the branch to GitHub, the Astro project updates." />
 
 ## Best practices
 
@@ -81,7 +85,7 @@ To deploy code from your GitHub repository to Astro, you can either:
 
 Both of these actions triggers the Astro App to deploy your Astro project to the mapped Astro Deployment. When DAG-only deploys are enabled, your GitHub repository triggers:
 
-- A DAG-only deploy if only your DAGs are changed. 
+- A DAG-only deploy if only your DAGs are changed.
 - A full project image deploy if you change a configuration in your project.
 
 If DAG-only deploys are disabled, all code changes will trigger a full project image deploy. To learn more about DAG-only deploys, see [Deploy DAGs to Astro](deploy-dags.md).
