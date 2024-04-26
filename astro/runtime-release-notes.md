@@ -36,12 +36,12 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ### Early access Airflow bug fixes
 
-- Fixed a bug where `airflow db migrate` would throw an error. ([#39246](https://github.com/apache/airflow/pull/39246))
+- Fixed a bug where `airflow db migrate` would throw an error ([#39246](https://github.com/apache/airflow/pull/39246))
 
 ### Additional improvments
 
-- Added the [`apache-airflow-providers-mysql`](https://airflow.apache.org/docs/apache-airflow-providers-mysql/stable/index.html) provider.
-- Upgraded some OSS providers' minor and patch versions.
+- Added the [`apache-airflow-providers-mysql`](https://airflow.apache.org/docs/apache-airflow-providers-mysql/stable/index.html) provider
+- Upgraded some OSS providers' minor and patch versions
 
 ## Astro Runtime 11.1.0
 
