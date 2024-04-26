@@ -14,7 +14,7 @@ Environment configuration in the Astro Cloud IDE is similar to Astro project and
 - You can't set OS-level dependencies with the Astro Cloud IDE.
 - Only a subset of Airflow connections can be configured through Astro Cloud IDE templates. All other connections must be configured through a generic connection template.
 - Environment configurations are not saved when you export a data pipeline as a DAG. To run your data pipeline outside of the Astro Cloud IDE, you must reconfigure these values in the Airflow environment where you exported your data pipeline.
-- In order to connect the Cloud IDE to a 3rd party resource, such as GitLab, the resource cannot be private. It must be public.
+- To connect the Cloud IDE to a 3rd party resource, such as GitLab, the resource must be publicly accessible.
 
 ## Add Python package requirements
 

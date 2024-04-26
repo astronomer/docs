@@ -53,12 +53,6 @@ When you first run your project, your pipeline is built into a single DAG with t
 
 After clicking **Create**, the IDE opens the pipeline editor. This is where you'll write your pipeline code.
 
-:::note
-
-In order to connect the Cloud IDE to a 3rd party resource, such as GitLab, the resource cannot be private. It must be public.
-
-:::
-
 ## Step 3: Create a Python cell
 
 Cells are the building blocks for pipelines. They can complete a unit of work, such as a Python function or SQL query, or they can define assets for use throughout your pipeline. For this quickstart, you'll write a Python cell named `hello_world`.
