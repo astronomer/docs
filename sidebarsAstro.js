@@ -349,6 +349,7 @@ module.exports = {
         'deployment-role-reference',
         "allowlist-domains",
         "feature-previews",
+        "hosted-hybrid-reference",
         {
           type: "category",
           label: "Security",
