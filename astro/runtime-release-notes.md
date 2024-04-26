@@ -29,6 +29,20 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::
 
+## Astro Runtime 11.2.0
+
+- Release date: April 26, 2024
+- Airflow version: 2.9.0
+
+### Early access Airflow bug fixes
+
+- Fixed a bug where `airflow db migrate` would throw an error ([#39246](https://github.com/apache/airflow/pull/39246))
+
+### Additional improvments
+
+- Added the [`apache-airflow-providers-mysql`](https://airflow.apache.org/docs/apache-airflow-providers-mysql/stable/index.html) provider
+- Upgraded some OSS providers' minor and patch versions
+
 ## Astro Runtime 11.1.0
 
 - Release date: April 19, 2024
@@ -38,6 +52,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 - Updated `sqlparse` to `0.5.0`.
 - Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
+- Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release.
 
 ## Astro Runtime 11.0.0
 
@@ -77,7 +92,7 @@ Refer to the [Airflow release notes](https://airflow.apache.org/docs/apache-airf
 
 ### Additional improvements
 
-- Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release. 
+- Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release.
 - Updated `sqlparse` to `0.5.0`.
 - Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
 
@@ -216,7 +231,7 @@ For more information about the major changes in this release, see the [Airflow b
 
 ### Additional improvements
 
-- Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release. 
+- Added functionality for using plugins to generate custom menu items in the Airflow UI. This feature will be fully available on Astro in a future release.
 - Upgraded [Gunicorn](https://gunicorn.org/) to `22.0.0`.
 - Updated the version of `sqlparse` to `0.5.0`.
 
