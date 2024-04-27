@@ -323,7 +323,7 @@ astronomer:
       deployments:
         helm:
           airflow:
-            extraEnv: |
+            extraEnv:
             - name: AIRFLOW__ASTRONOMER__UPDATE_URL
               value: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
 ```
