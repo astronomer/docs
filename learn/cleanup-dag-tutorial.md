@@ -18,15 +18,14 @@ When a table in the metadata DB is larger than 50GB, you might start to experien
 
 The following tables in the database are at risk of becoming too large over time:
 
-- `job` 
 - `dag_run` 
-- `task_instance`
+- `job` 
 - `log` 
-- `dags` 
-- `task_reschedule`
-- `task_fail`
+- `rendered_task_instance_fields`
+- `task_instance`
+- `xcom`
 
-To keep your Airflow environment running at optimal performance, you can clean the metadata DB using the Airflow CLI `airflow db clean` command. This command was created as a way to safely clean up your metadata DB without modifying it directly, as this can cause dependency issues and corrupt your Airflow instance. This tutorial walks you through how to implement a cleanup DAG in Airflow so that you can clean your database using the command directly from the Airflow UI.
+To keep your Airflow environment running at optimal performance, you can clean the metadata DB using the Airflow CLI `airflow db clean` command. This command was created as a way to safely clean up your metadata DB without querying it directly. This tutorial walks you through how to implement a cleanup DAG in Airflow so that you can clean your database using the command directly from the Airflow UI.
 
 :::danger
 
@@ -39,7 +38,6 @@ Even when using `airflow db clean`, deleting data from the metadata database can
 
 Deleting data from the metadata database can be an extremely destructive action. If you delete data that future task runs depend on, it's difficult to recover the database to its previous state without interrupting your data pipelines. Before implementing the DAG in this tutorial, consider the following:
 
-- Only trigger a database cleanup if you need to. If your Airflow scheduler is running normally, there's no need to clean the DB. On Astro, you will receive alerts when specific tables contain enough data to cause performance issues.
 - Delete older data before newer data. The older the deleted data, the less likely it is to affect your currently running DAGs.
 - On Astro, the DAG will fail if it runs for longer than five minutes, which can happen if you have an exceptionally large amount of data to delete. If this happens, use the DAG's params to reduce the amount of data being deleted at once, either by reducing the time window for deletion or reducing the number of tables to clean.
 
