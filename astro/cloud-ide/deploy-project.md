@@ -30,16 +30,11 @@ Astro Cloud IDE projects use the same structure as Astro projects created with t
 
 The Cloud IDE includes Git vendor integrations for managing different versions and features of your Cloud IDE projects. Configuring a Git repository is also the first step to deploying your Cloud IDE project to Astro. Astronomer recommends setting up a separate Git repository for every Cloud IDE project.
 
-:::note
-
-In order to connect the Cloud IDE to a 3rd party resource, such as GitLab, the resource cannot be private. It must be public.
-
-:::
 
 ### Prerequisites
 
 - A Cloud IDE project. See the [Quickstart](/cloud-ide/quickstart.md#step-1-log-in-and-create-a-project).
-- A Git repository hosted with a supported Git vendor.
+- A Git repository hosted with a supported Git vendor. The Git repository must be publicly accessible.
 - A user account on your Git vendor with a personal access token (PAT).
 
 Your user account and PAT must have specific permissions depending on your Git vendor. See the following table to determine which permissions you need to configure for each supported Git vendor.
