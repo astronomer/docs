@@ -22,21 +22,22 @@ Astro Cloud IDE projects use the same structure as Astro projects created with t
 
     ![Code screen and download button](/img/cloud-ide/download-code.png)
 
-6. Add the downloaded Python file to the `dags` folder of your Astro project. 
-7. Manually configure the connections, dependencies, and variables from your Astro Cloud IDE project in your local Astro project. Automatic exporting for these resources coming soon. 
+6. Add the downloaded Python file to the `dags` folder of your Astro project.
+7. Manually configure the connections, dependencies, and variables from your Astro Cloud IDE project in your local Astro project. Automatic exporting for these resources coming soon.
 8. Optional. Deploy your Astro project. See [Deploy code](deploy-code.md).
 
 ## Commit your project to a Git repository
 
 The Cloud IDE includes Git vendor integrations for managing different versions and features of your Cloud IDE projects. Configuring a Git repository is also the first step to deploying your Cloud IDE project to Astro. Astronomer recommends setting up a separate Git repository for every Cloud IDE project.
 
-### Prerequisites 
+
+### Prerequisites
 
 - A Cloud IDE project. See the [Quickstart](/cloud-ide/quickstart.md#step-1-log-in-and-create-a-project).
-- A Git repository hosted with a supported Git vendor. 
-- A user account on your Git vendor with a personal access token (PAT). 
+- A Git repository hosted with a supported Git vendor. The Git repository must be publicly accessible.
+- A user account on your Git vendor with a personal access token (PAT).
 
-Your user account and PAT must have specific permissions depending on your Git vendor. See the following table to determine which permissions you need to configure for each supported Git vendor. 
+Your user account and PAT must have specific permissions depending on your Git vendor. See the following table to determine which permissions you need to configure for each supported Git vendor.
 
 | Git vendor                                                                                                                | PAT permissions                                                                                                                                                                                                                                           |
 | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -48,9 +49,9 @@ Your user account and PAT must have specific permissions depending on your Git v
 1. In the Astro UI, select a Workspace and then click **Cloud IDE**.
 2. Select the project you'd like to deploy.
 3. In the **Git Repo** pane, click **Configure**.
-4. Configure the following values: 
+4. Configure the following values:
 
-    - **Git Vendor**: Select the Git vendor that hosts your repository. 
+    - **Git Vendor**: Select the Git vendor that hosts your repository.
     - **Personal Access Token**: Enter your personal access token.
     - **Repository**: Enter the name of your Git repository. The format is `<owner>/<repository>`.
     - **Default Branch**: Select the branch you want to commit your project to.
@@ -61,7 +62,7 @@ Your user account and PAT must have specific permissions depending on your Git v
 
 ### Commit to your repository
 
-After you configure a Git repository, you can use the **Commit** button in the Cloud IDE to commit your changes to your repository. 
+After you configure a Git repository, you can use the **Commit** button in the Cloud IDE to commit your changes to your repository.
 
 1. Click **Commit**.
 2. Select a branch type in the **Branch Type** list and then enter a name for the branch in the **Branch Name** field.
@@ -95,18 +96,18 @@ The default workflow provided by the Astro Cloud IDE will:
 - Deploy your Cloud IDE project to your development Deployment when you commit to a `dev` branch.
 - Deploy your Cloud IDE project to your production Deployment when you commit to a `main` branch.
 
-These actions are not dependent on each other, meaning that you can modify the following steps to deploy only a single production or development Deployment. 
+These actions are not dependent on each other, meaning that you can modify the following steps to deploy only a single production or development Deployment.
 
 1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. To retrieve a Deployment ID, open your Deployment in the Astro UI and copy the value in the **ID** section of the Deployment page.
 2. Create a [Deployment API token](deployment-api-tokens.md), [Workspace API token](workspace-api-tokens.md), or [Organization API token](organization-api-tokens.md). Copy the API token.
 3. Set the following environment variables in your Git repository as secrets:
-   
+
     - `PROD_ASTRO_API_TOKEN`: The value for your production API token.
     - `DEV_ASTRO_API_TOKEN`: The value for your development API token.
     - `PROD_ASTRONOMER_DEPLOYMENT_ID` = The Deployment ID for your production Deployment.
-    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = The Deployment ID for your development Deployment. 
+    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = The Deployment ID for your development Deployment.
 
-    See [GitHub](https://docs.github.com/en/actions/learn-github-actions/variables) and [GitLab](https://docs.gitlab.com/ee/ci/variables/) documentation on setting environment variables.  
+    See [GitHub](https://docs.github.com/en/actions/learn-github-actions/variables) and [GitLab](https://docs.gitlab.com/ee/ci/variables/) documentation on setting environment variables.
 
 After configuring your repository, commits from any source to your `main` or `dev` branches are automatically deployed to Astro.
 
