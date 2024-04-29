@@ -68,13 +68,42 @@ This connection option is only available for dedicated Astro Hosted clusters and
 
 To set up a private connection between an Astro Virtual Network (VNet) and an Azure VNet, you can create a VNet peering connection. VNet peering ensures private and secure connectivity, reduces network transit costs, and simplifies network layouts.
 
-To create a VNet peering connection between an Astro VNet and an Azure VNet, contact [Astronomer support](https://cloud.astronomer.io/open-support-request) and provide the following information:
+1. Retrieve the following information from the target Azure cluster that you want to connect with:
 
-- Astro cluster ID and name
-- Azure TenantID and Subscription ID of the target VNet
-- Region of the target VNet
-- VNet ID of the target VNet
-- Classless Inter-Domain Routing (CIDR) block of the target VNet
+    - Azure Subscription ID.
+    - VNet ID.
+    - Resource Group ID.
+
+2. Run the following Azure CLI commands to give Astronomer support temporary permissions to establish a VNet peering connection:
+
+    ```sh
+    # add Astronomer Service Principal
+    az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
+    
+    # Grant sets of permissions to the Astronomer Service Principal
+    az role assignment create \
+      --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
+      --role "Network Contributor" \
+      --scope <vnet-id>
+    
+    az role assignment create \
+      --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
+      --role "Network Contributor" \
+      --scope <resource-group-id>
+    
+    az role assignment create \
+      --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 \
+      --role "Network Contributor" \
+      --scope <subscription-id>
+    ```
+
+3. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you have granted permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
+
+    - Astro cluster ID and name
+    - Azure TenantID and Subscription ID of the target VNet
+    - Region of the target VNet
+    - VNet ID of the target VNet
+    - Classless Inter-Domain Routing (CIDR) block of the target VNet
 
 After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VNet. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VNet needs to accept the peering request and create the routing table entries in the target VNet.
 
