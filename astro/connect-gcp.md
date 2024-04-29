@@ -24,7 +24,7 @@ Standard clusters have different connection options than dedicated clusters.
 
 Standard clusters can connect to GCP in the following ways:
 
-- Using [static external IP addresses](#allowlist-external-ip-addresses-for-a-cluster).
+- Using [static external IP addresses](#allowlist-external-ip-addresses).
 - Using Private Service Connect to all managed [Google APIs](https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-apis-global).
 
 Dedicated clusters can use all of the same connection options as standard clusters. Additionally, they support a number of private connectivity options including:
@@ -37,7 +37,7 @@ If you require a private connection between Astro and GCP, Astronomer recommends
 
 All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. When you create a Deployment in your workspace, Astro assigns it one of these external IP addresses. To facilitate communication between Astro and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your GCP resources through a valid Airflow connection.
 
-### Allowlist external IP addresses for a cluster
+### Allowlist external IP addresses
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Select the **Details** tab.

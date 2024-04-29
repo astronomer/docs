@@ -24,7 +24,7 @@ Standard clusters have different connection options than dedicated clusters.
 
 Standard clusters can connect to AWS in the following ways:
 
-- Using [static external IP addresses](#allowlist-external-ip-addresses-for-a-cluster)
+- Using [static external IP addresses](#allowlist-external-ip-addresses)
 - Using PrivateLink to connect with the following endpoints:
     - [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) - Gateway Endpoint
     - [Amazon Elastic Compute Cloud (Amazon EC2) Autoscaling](https://docs.aws.amazon.com/general/latest/gr/as.html) - Interface Endpoint
