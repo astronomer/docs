@@ -50,7 +50,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::warning
 
-Due to an [issue relating to custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you may run into an error when running the `astro dev start` command with this version of Astro Runtime. To resolve this issue, either upgrade to Astro Runtime `11.2.0` or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0`.  
+Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.  
 
 :::
 
@@ -67,7 +67,7 @@ Due to an [issue relating to custom plugins in Airflow](https://github.com/apach
 
 :::warning
 
-Due to an [issue relating to custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you may run into an error when running the `astro dev start` command with this version of Astro Runtime. To resolve this issue, either upgrade to Astro Runtime `11.2.0` or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0`.  
+Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.  
 
 :::
 
