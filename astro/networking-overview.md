@@ -23,9 +23,11 @@ Astronomer can support alternative networking solutions that are not covered in 
 
 If you're just starting out on Astro and you're working with publicly available services and testing data, you only need a public connection. For example, if you're accessing a publicly available API, you only need to configure an [HTTP Airflow connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) to establish a connection between your Deployment and the API.
 
+Depending on the type of cloud provider you want to create a networking connection with and whether you have a standard or a dedicated cluster in your Astro Deployment, you have different configuration options.
+
 To access or write data on your company's cloud, Astronomer strongly recommends establishing a private network connection between Astro and your cloud. For most use cases, Astronomer recommends creating a VPC peering connection between Astro and your cloud. After the connection is established, you can authorize individual Deployments to specific resources using workload identity. This method is simple to set up and ensures private and secure connectivity between Astro and any support cloud provider.
 
-To create a VPC peering connection on each support cloud see:
+To create a VPC peering connection to Astro, you must use a dedicated cluster. In general, dedicated clusters support more secure networking types, such as AWS PrivateLink and Azure VNet peering. See:
 
 - [AWS: Create a private connection between Astro and AWS](connect-aws.md?tab=VPC%20peering#create-a-private-connection-between-astro-and-aws)
 - [GCP: Create a private connection between Astro and GCP](connect-gcp.md?tab=VPC%20peering#create-a-private-connection-between-astro-and-gcp)
@@ -38,13 +40,3 @@ After you create your VPC peering connection, follow the steps in [Authorize you
 Astronomer monitors the health of Deployments and DAGs, but it doesn't monitor the status of network connections because they exist outside of Astronomer's observable control plane and data plane.
 
 :::
-
-## Standard and dedicated cluster support
-
-Depending on the type of cloud provider you want to create a networking connection with and whether you have a standard or a dedicated cluster in your Astro Deployment, you have different configuration options.
-
-To learn more about networking connection support and cluster options, see:
-
-- [AWS: Standard and dedicated cluster support](connect-aws.md#standard-and-dedicated-cluster-support-for-aws-networking)
-- [GCP: Standard and dedicated cluster support](connect-gcp.md#standard-and-dedicated-cluster-support-for-gcp-networking)
-- [Azure: Standard and dedicated cluster support](connect-azure.md#standard-and-dedicated-cluster-support-for-azure-networking)
