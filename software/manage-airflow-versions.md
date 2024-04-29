@@ -45,7 +45,7 @@ Starting the upgrade process doesn't interrupt or otherwise impact your Airflow 
 
 ### With the Astro CLI
 
-1. Run `astro auth login <base-domain>` to confirm you're authenticated.
+1. Run `astro login <base-domain>` to confirm you're authenticated.
 
 2. Run the following command to list your current Deployments.
 
