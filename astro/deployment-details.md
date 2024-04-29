@@ -84,16 +84,14 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 ## Find a Deployment's external IP address
 
-Deployments have an associated external IP address, that is dynamically generated.
+Deployments have associated external IP addresses.
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Select the **Details** tab.
 3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
 
-:::tip
+:::note
 
-Deployments have dynamically generated external IP addresses. If you want to [set up a networking connection](networking-overview.md#standard-and-dedicated-cluster-support) with a static IP address, you need the cluster-level external IP address, which persists as long as the cluster exists.
+If you are using a Standard Cluster and need to look up your external IP address for your cluster, you can use the Deployment External IP address.
 
 :::
-
-

@@ -35,22 +35,29 @@ If you require a private connection between Astro and Azure, Astronomer recommen
 
 ## Access a public Azure endpoint
 
-All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. To facilitate communication between an Astro cluster and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your Azure resources through a valid Airflow connection.
+All Astro clusters include a set of external IP addresses that persist for the lifetime of the cluster. When you create a Deployment in your workspace, Astro assigns it one of these external IP addresses. To facilitate communication between Astro and your cloud, you can allowlist these external IPs in your cloud. If you have no other security restrictions, this means that any cluster with an allowlisted external IP address can access your Azure resources through a valid Airflow connection.
 
-:::tip
+### Allowlist external IP addresses
 
-While you can find an external IP address for your Deployment, these IP addresses are dynamically generated, which means that your connection might fail if the IP address changes. A cluster-level external IP address persists, ensuring your cluster can access your cloud resources as long as the cluster exists.
+1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Select the **Details** tab.
+3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
 
-:::
+When you use publicly accessible endpoints to connect to Azure, traffic moves directly between your Astro cluster and the Azure API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them.
 
-### Allowlist external IP addresses for a cluster
+<details>
+  <summary><strong>Dedicated cluster external IP addresses</strong></summary>
+
+If you use Dedicated clusters and want to allowlist external IP addresses at the cluster level, instead of per-Deployment, you can find the list of external IP addresses the cluster uses in your **Organization settings**.
 
 1. In the Astro UI, click your Workspace name in the upper left corner, then click **Organization Settings**.
 2. Click **Clusters**, then select a cluster.
 3. In the Details page, copy the IP addresses listed under **External IPs**.
 4. Add the IP addresses to the allowlist of any external services that you want your cluster to access. You can also access these IP addresses from the **Details** page of any Deployment in the cluster.
 
-After you allowlist a cluster's IP addresses, all Deployments in that cluster have network connectivity to Azure. When you use publicly accessible endpoints to connect to Azure, traffic moves directly between your Astro cluster and the Azure API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them.
+Note that you still might also need to authorize your Deployment to some resources before it can access them.
+
+</details>
 
 ## Create a private connection between Astro and Azure
 
