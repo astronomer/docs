@@ -38,7 +38,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 - Fixed a bug where `airflow db migrate` would throw an error ([#39246](https://github.com/apache/airflow/pull/39246))
 
-### Additional improvments
+### Additional improvements
 
 - Added the [`apache-airflow-providers-mysql`](https://airflow.apache.org/docs/apache-airflow-providers-mysql/stable/index.html) provider
 - Upgraded some OSS providers' minor and patch versions
@@ -47,6 +47,12 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 - Release date: April 19, 2024
 - Airflow version: 2.9.0
+
+:::warning
+
+Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.  
+
+:::
 
 ### Additional improvements
 
@@ -58,6 +64,12 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 - Release date: April 8, 2024
 - Airflow version: 2.9.0
+
+:::warning
+
+Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.  
+
+:::
 
 ### Airflow 2.9.0
 
