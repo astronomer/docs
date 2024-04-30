@@ -82,7 +82,7 @@ You can retrieve a token in one of the following ways:
 - Create a [service account](ci-cd.md#step-1-create-a-service-account) and note its **API Key**. This is recommended for most production workflows.
 - Go to `https://app.<your-base-domain>/token`, log in with your user account, and copy the API token that appears. This is recommended if you want to test API requests with your own user credentials. API tokens retrieved this way expire after 24 hours or when an Admin users changes your level of access.
 
-You then need to add your token as an `authorization` header to your Houston API requests. For example, the following curl command uses `'authorization: <my-api-token>'` to authenticate a request to add a new Workspace user:
+You then need to add your token as an `Authorization` header to your Houston API requests. For example, the following curl command uses `'Authorization: <my-api-token>'` to authenticate a request to add a new Workspace user:
 
 ```sh
 curl 'https://houston.mybasedomain.io/v1' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://houston.mybasedomain.io' -H 'authorization: <my-api-token>' --data-binary '{"query":"mutation workspaceAddUser(\n    $workspaceUuid: Uuid = \"<your-workspace-uuid>\"\n    $email: String! = \"<user-email-address>\"\n    $role: Role! = <user-workspace-role>\n    $bypassInvite: Boolean! = true\n  ) {\n    workspaceAddUser(\n      workspaceUuid: $workspaceUuid\n      email: $email\n      role: $role\n      deploymentRoles: $deploymentRoles\n      bypassInvite: $bypassInvite\n    ) {\n      id\n    }\n  }"}' --compressed
