@@ -15,6 +15,7 @@ Consider the following before completing this setup:
 
 - NFS deploys don't work if you both use [namespace pools](namespace-pools.md) and set `global.clusterRoles` to `false` in your `values.yaml` file. The feature requires creating persistent volumes, which are a non-namespaced resource and can only be created by cluster roles.
 - You can configure NFS volumes only to deploy DAGs. To push dependencies or other requirements to your Airflow Deployment, you'll need to update your `requirements.txt` and `packages.txt` files and deploy using the [Astro CLI](deploy-cli.md) or [CI/CD](ci-cd.md). For more information on pushing code to your Airflow environment, see [Customize images](customize-image.md).
+- Please note that NFS-based deployments using Bottlerocket AMI are not currently supported due to limitations at the AMI level. While we typically utilize NFS volumes for mounting, this functionality is currently restricted within the Bottlerocket AMI. Consequently, we are investigating alternative approaches to resolve this issue within our Kubernetes manifests.
 - If you configure an NFS volume for an Airflow Deployment, you can't use the Astro CLI or an Astronomer service account to deploy DAGs . These options are available only for Deployments configured with an image-based deploy mechanism.
 - You can configure NFS volumes only for Airflow Deployments running Airflow 2.0+.
 
