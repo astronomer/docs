@@ -35,7 +35,6 @@ Even when using `airflow db clean`, deleting data from the metadata database can
 
 ## Warnings
 
-
 Deleting data from the metadata database can be an extremely destructive action. If you delete data that future task runs depend on, it's difficult to recover the database to its previous state without interrupting your data pipelines. Before implementing the DAG in this tutorial, consider the following:
 
 - Delete older data before newer data. The older the deleted data, the less likely it is to affect your currently running DAGs.
