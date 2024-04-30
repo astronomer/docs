@@ -47,7 +47,16 @@ query workspaceDeployment {
     status
     createdAt
     updatedAt
-    roleBindings {id, role, user{}} 
+    roleBindings {
+      id, 
+      role, 
+      user {
+        username,
+        emails {
+          primary
+        }
+      }
+    } 
   }
 }
 ```
@@ -94,21 +103,16 @@ To create a Deployment, you'll need Workspace Admin permissions and a -**Workspa
 This example mutation creates a Deployment with the Celery executor and the latest Runtime version. It then returns the Deployment's ID and configuration to confirm that it was successfully created. 
 
 ```graphql
-mutation CreateDeployment {
+mutation CreateNewDeployment{
   createDeployment(
     workspaceUuid: "<workspace-id>",
     type: "airflow",
     label: "<deployment-name>",
     executor:CeleryExecutor,
     runtimeVersion: "{{RUNTIME_VER}}"
-    )
-    {
-      id
-      executor
-      releaseName
-      workspace{label}
-      roleBindings{id}
-    }
+  ) {
+  id
+  }
 }
 ```
 
@@ -296,15 +300,16 @@ To add an existing Astronomer Software user to a Deployment, you'll need.
 - The ID of the user to add. To retrieve this, request the `id` value in a `users` query or run `astro workspace user list`.
 - The role to add the user as. Can be `DEPLOYMENT_ADMIN`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_VIEWER`.
 
-The following query adds a user to a Deployment as a Deployment viewer,. then returns the user and Deployment information back to the requester. 
+The following query adds a user to a Deployment as a Deployment viewer, then returns the user and Deployment information back to the requester. 
 
 ```graphql
 mutation AddDeploymentUser(
-		$userId: "f9182b1d-2f7c-4d33-920b-2124b1660d83"
-		$email: "usertoadd@mycompany.com"
-		$deploymentId: "<deploymentId>"
-		$role: DEPLOYMENT_VIEWER
-	) {
+  $userId: Id! = "f9182b1d-2f7c-4d33-920b-2124b1660d83", 
+  $email: String! = "usertoadd@mycompany.com", 
+  $deploymentId: Id! = "<some_id>",
+  $role: Role! = DEPLOYMENT_VIEWER
+)
+{
 		deploymentAddUserRole(
 			userId: $userId
 			email: $email
@@ -336,7 +341,7 @@ The following query removes a user, then returns information about the deleted u
 ```graphql
 mutation removeUser {
 	removeUser (
-    userUuid: "<user-id>"
+    id: "<user-id>"
   ) {
     uuid
     emails {address}
@@ -373,22 +378,21 @@ To run this mutation, you'll need:
 - Workspace Admin permissions
 - A -**Workspace ID**. To retrieve this value, run `astro workspace list`. Alternatively, open a Workspace in the Software UI and copy the value after `/w/` in your Workspace URL (for example `https://app.basedomain/w/<workspace-id>`).
 - The user's email address.
-- The user's desired role in the Workspace (`WORKSPACE_ADMIN`, `WORKSPACE_EDITOR`, `WORKSPACE_USER`).
+- The user's desired role in the Workspace (`WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, `WORKSPACE_ADMIN`).
 
-The following example mutation can be run to add a user to a Workspace as a `WORKSPACE_USER`.
+The following example mutation can be run to add a user to a Workspace as a `WORKSPACE_VIEWER`.
 
 ```graphql
 mutation workspaceAddUser(
     $workspaceUuid: Uuid = "<your-workspace-uuid>"
     $email: String! = "<user-email-address>"
-    $role: Role! = WORKSPACE_USER
+    $role: Role! = WORKSPACE_VIEWER
     $bypassInvite: Boolean! = true
   ) {
     workspaceAddUser(
       workspaceUuid: $workspaceUuid
       email: $email
       role: $role
-      deploymentRoles: $deploymentRoles
       bypassInvite: $bypassInvite
     ) {
       id
@@ -407,8 +411,8 @@ You can then run the following query to add the user as a System Admin.
 
 ```graphql
 mutation createSystemRoleBinding (
-    $userId: "<user-id>"
-    $role: SYSTEM_ADMIN
+    $userId: ID! = "<user-id>"
+    $role: Role! = SYSTEM_ADMIN
 ) {
   createSystemRoleBinding(
     userId: $userId
@@ -432,8 +436,8 @@ Then, in your GraphQL Playground, run the following:
 ```graphql
 mutation UpdateDeploymentVariables {
   updateDeploymentVariables(
-    deploymentUuid: "<deployment-id>",
-  	releaseName: "<deployment-release-name>",
+    deploymentUuid: ID! = "<deployment-id>",
+  	releaseName: String! = "<deployment-release-name>",
     environmentVariables: [
       {key: "<environment-variable-1>",
       value: "<environment-variable-value-1>",
