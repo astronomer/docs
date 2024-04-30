@@ -102,8 +102,6 @@ The Astronomer Houston API is available in a [GraphQL playground](https://www.ap
 
 You can now run Houston API queries directly in your browser using the **Play** button in the GraphQL playground. 
 
-## Resolving Houston API errors
-
 ## See also
 
 - [Houston API examples](houston-api-examples.md)
