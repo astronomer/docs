@@ -25,6 +25,23 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## April 30, 2024
+
+### Deploy automatically from GitHub using the official Astro GitHub integration
+
+:::privatepreview
+:::
+
+
+The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro without needing to configure a GitHub Action. Compared to using GitHub Actions, the Astro GitHub integration:
+
+- Allows you to enforce software development best practices without maintaining custom CI/CD scripts.
+- Enables developers to iterate on DAG code quickly.
+- Shows Git metadata directly in the Astro UI, including Git commit descriptions.
+- Gives you greater visibility into the status and detailed logs of an individual deploy.
+
+See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
+
 ## April 23, 2024
 
 ### Restrict a custom Deployment role to specific Workspaces
