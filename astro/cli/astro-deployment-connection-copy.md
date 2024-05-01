@@ -13,7 +13,7 @@ This command is only available on Astro.
 
 :::
 
-:::alert
+:::warning
 
 This command copies **all** connections from one instance to another, but does not copy encrypted data, like passwords, or some `extras`, such as when they contain private keys.
 
