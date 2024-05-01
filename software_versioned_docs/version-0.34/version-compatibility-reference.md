@@ -21,7 +21,6 @@ The following table shows version compatibility information for all currently su
 | v0.32               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 | v0.33               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 | v0.34               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
-| v0.35               | 11+      | 3.6 - 3.11 (_3.9-3.11 Require Airflow 2.2.0+_) | All Runtime versions |
 
 See [Kubernetes version support table and policy](#kubernetes-version-support-table-and-policy) for Astronomer platform compatibility with Kubernetes.
 
@@ -52,7 +51,6 @@ See the following table for all supported Kubernetes versions in each maintained
 |       0.33.3        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |
 |       0.34.0        |                 |                 |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️        |                 |
 |       0.34.1        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
-|       0.35.0        |                 |                 |                |        ✔️        |        ✔️        |        ✔️        |        ✔️        |        ✔️         |
 
 For more information on upgrading Kubernetes versions, follow the guidelines offered by your cloud provider.
 
