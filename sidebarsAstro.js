@@ -141,6 +141,7 @@ module.exports = {
           label: "CI/CD",
           items: [
             "set-up-ci-cd",
+            "deploy-github-integration",
             {
               type: "category",
               label: "CI/CD templates",
