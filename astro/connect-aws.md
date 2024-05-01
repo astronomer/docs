@@ -49,9 +49,9 @@ All Astro clusters include a set of external IP addresses that persist for the l
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Select the **Details** tab.
 3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
-4. Add the IP addresses to the allowlist of any external services that you want your Deployment to access. 
+4. Add the IP addresses to the allowlist of any external services that you want your Deployment to access.
 
-When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them.
+When you use publicly accessible endpoints to connect to AWS, traffic moves directly between your Astro cluster and the AWS API endpoint. Data in this traffic never reaches the Astronomer managed control plane. Note that you still might also need to authorize your Deployment to some resources before it can access them. For example, you can [Authorize deployments to your cloud with workload identity](authorize-deployments-to-your-cloud.md) so that you can avoid adding passwords or other access credentials to your Airflow connections.
 
 <details>
   <summary><strong>Dedicated cluster external IP addresses</strong></summary>
