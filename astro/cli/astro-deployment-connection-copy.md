@@ -15,7 +15,7 @@ This command is only available on Astro.
 
 :::alert
 
-This command copies ALL connections from one instance to another, but does not copy encrypted data such as passwords or some `extras` such as when it contains private keys.
+This command copies **all** connections from one instance to another, but does not copy encrypted data, like passwords, or some `extras`, such as when they contain private keys.
 
 :::
 
