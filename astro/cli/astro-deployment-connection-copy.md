@@ -13,6 +13,12 @@ This command is only available on Astro.
 
 :::
 
+:::warning
+
+This command copies **all** connections from one instance to another, but does not copy encrypted data, like passwords, or some `extras`, such as when they contain private keys.
+
+:::
+
 Copy Airflow connections from one Astro Deployment to another. Airflow connections are stored in the target Deployment's metadata database and appear in the Airflow UI.
 
 ## Usage
