@@ -82,16 +82,16 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 3. Enter `Delete` and click **Yes, Continue**.
 
-## Find a Deployment's external IP address
+## Find Deployment external IP addresses
 
-Deployments have associated external IP addresses.
+Each Astro Deployment has its own external IP addresses. Allowlist these addresses on any external service as a first step to create a connection between the Deployment and the service.
 
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Select the **Details** tab.
 3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
 
-:::note
+:::info
 
-If you are using a Standard Cluster and need to look up your external IP address for your cluster, you can use the Deployment External IP address.
+On standard clusters, the external IP address for the cluster is identical to the external IP address for all Deployments in the cluster.
 
 :::

@@ -23,8 +23,6 @@ Astronomer can support alternative networking solutions that are not covered in 
 
 If you're just starting out on Astro and you're working with publicly available services and testing data, you only need a public connection. For example, if you're accessing a publicly available API, you only need to configure an [HTTP Airflow connection](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/connections/http.html) to establish a connection between your Deployment and the API.
 
-Depending on the type of cloud provider you want to create a networking connection with and whether you have a standard or a dedicated cluster in your Astro Deployment, you have different configuration options.
-
 To access or write data on your company's cloud, Astronomer strongly recommends establishing a private network connection between Astro and your cloud. For most use cases, Astronomer recommends creating a VPC peering connection between Astro and your cloud. After the connection is established, you can authorize individual Deployments to specific resources using workload identity. This method is simple to set up and ensures private and secure connectivity between Astro and any support cloud provider.
 
 To create a VPC peering connection to Astro, you must use a dedicated cluster. In general, dedicated clusters support more secure networking types, such as AWS PrivateLink and Azure VNet peering. See:
