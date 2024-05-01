@@ -186,7 +186,7 @@ Ensure that this file is accessible from your Astro project. You will mount this
 
    :::info
 
-   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](/astro/runtime-image-architecture.md#distribution).
+   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.mdx#distribution).
 
    :::
 
