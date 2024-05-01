@@ -27,7 +27,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## April 30, 2024
 
-### Deploy directly from GitHub using the official Astro GitHub integration
+### Deploy automatically from GitHub using the official Astro GitHub integration
 
 :::privatepreview
 :::
