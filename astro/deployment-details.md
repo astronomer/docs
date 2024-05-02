@@ -89,9 +89,3 @@ Each Astro Deployment has its own external IP addresses. Allowlist these address
 1. In the Astro UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Select the **Details** tab.
 3. In the **Other** section, you can find the **External IPs** associated with the Deployment.
-
-:::info
-
-On standard clusters, the external IP address for the cluster is identical to the external IP address for all Deployments in the cluster.
-
-:::
