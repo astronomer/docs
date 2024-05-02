@@ -1,5 +1,6 @@
 ---
 title: 'Deploy code with the Astro GitHub integration'
+sidebar_label: 'Deploy code with GitHub'
 id: deploy-github-integration
 description: Learn how to automatically deploy Apache Airflow code to Astro from GitHub with a built-in integration.
 ---
