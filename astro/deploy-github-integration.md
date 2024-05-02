@@ -4,7 +4,7 @@ id: deploy-github-integration
 description: Learn how to automatically deploy Apache Airflow code to Astro from GitHub with a built-in integration.
 ---
 
-:::privatepreview
+:::publicpreview
 :::
 
 Astronomer's built-in GitHub integration is the fastest way to implement CI/CD for Apache Airflow and deploy code to Astro. Astro’s automatic deploy system eliminates both the need to implement GitHub Actions and gives you greater visibility into the code you’re running on Astro.
