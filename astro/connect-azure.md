@@ -105,7 +105,7 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
     - VNet ID of the target VNet
     - Classless Inter-Domain Routing (CIDR) block of the target VNet
 
-After receiving your request, Astronomer support creates a VNet peering connection from both sides. No other actions are needed from your side. Astronomer support will let you know when the connection is ready to use.
+After receiving your request, Astronomer support creates a VNet peering connection between the two VNets. No other actions are required from you. Astronomer support will notify you when the connection is ready to use.
 
 When the network connection is confirmed, you can delete the temporary roles you created using the [Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove#azure-cli).
 
