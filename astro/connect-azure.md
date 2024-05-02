@@ -107,6 +107,8 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
 
 After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VNet. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VNet needs to accept the peering request and create the routing table entries in the target VNet.
 
+When the network connection is confirmed, you can delete the temporary roles you created using the [Azure CLI](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-remove#azure-cli).
+
 </TabItem>
 
 <TabItem value="Azure Private Link">
