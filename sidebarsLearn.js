@@ -152,10 +152,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Integrations & Connections',
+      label: 'Integrations & connections',
       link: {
         type: 'generated-index',
-        title: 'Integrations & Connections',
+        title: 'Integrations & connections',
         description: 'Integrate Airflow with commonly used data engineering tools.',
       },
       items: [
