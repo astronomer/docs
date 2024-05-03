@@ -17,13 +17,11 @@ The open source [Astro Databricks provider](https://github.com/astronomer/astro-
 You can create a Databricks Workflow from existing Databricks notebooks as a task group in your Airflow DAG with just a few lines of code:
 
 ```python
-task_group = DatabricksWorkflowTaskGroup(
+with  DatabricksWorkflowTaskGroup(
     group_id="databricks_workflow",
     databricks_conn_id=DATABRICKS_CONN_ID,
     job_clusters=job_cluster_spec,
-)
-
-with task_group:
+) as task_group:
     notebook_1 = DatabricksNotebookOperator(
         task_id="notebook1",
         databricks_conn_id=DATABRICKS_CONN_ID,
@@ -94,7 +92,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 2. Add the [Astro Databricks provider package](https://github.com/astronomer/astro-provider-databricks) to your requirements.txt file.
 
     ```text
-    astro-provider-databricks==0.1.6
+    astro-provider-databricks
     ```
 
 3. Define the following environment variable in your `.env` file. This allows you to serialize Astro Databricks provider objects.
