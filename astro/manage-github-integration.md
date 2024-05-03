@@ -7,7 +7,23 @@ description: Learn the best practices to set up your GitHub Integration app with
 :::publicpreview
 :::
 
+<brief description of the integration and benefits it provides to platform admins and DAG authors>
+
+## How it Works
+
+<describes how the integration works to allow branches to directly relate to a deployment>
+
+### Deploys
+
+<when do code deploys happen>
+
+### Rollbacks
+
+<rollback specific info vs downgrades>
+
 ## Best practices
+
+< To make best use of the github integration, you need to consider the workflows that you want your users to follow>
 
 ## Limitations
 
