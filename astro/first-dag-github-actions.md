@@ -6,7 +6,8 @@ id: 'first-dag-github-actions'
 
 :::tip
 
-The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro without needing to configure a GitHub Action. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
+```suggestion
+The Astro GitHub integration is a new way to automatically deploy code from a GitHub repository to Astro without needing to configure a GitHub Action, allowing you to see Git metadata directly from your Astro Deployment. See [Deploy code with the Astro GitHub integration](deploy-github-integration.md) for more information.
 
 :::
 
