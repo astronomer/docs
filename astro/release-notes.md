@@ -27,6 +27,10 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 7, 2024
 
+### Additional improvements
+
+- You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used.
+
 ### Bug fixes
 
 - Fixed a bug where multiple users could not access [Organization Dashboards](https://docs.astronomer.io/astro/organization-dashboard) simultaneously.
