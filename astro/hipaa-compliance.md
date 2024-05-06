@@ -26,7 +26,7 @@ This document references the Astro control and data planes, which are core parts
 
 ### Astronomer obligations
 
-- Provide a single-tenant data plane to ensure that PHI data processed in the customer's data plane is not shared or accessible by other customers.
+- Provide a single-tenant data plane (Dedicated Astro Cluster) to ensure that PHI data processed in the customer's data plane is not shared or accessible by other customers.
 - Provide data plane cloud infrastructure options and configuration that enforce encryption in-transit and at rest.
 - Encrypt data in transit between control and data plane.
 - Encrypt data at rest in control and data plane.
