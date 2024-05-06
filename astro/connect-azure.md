@@ -99,11 +99,9 @@ To set up a private connection between an Astro Virtual Network (VNet) and an Az
 
 3. Contact [Astronomer support](https://cloud.astronomer.io/open-support-request) to tell them that you have granted permissions to the Astronomer Service Principal. In addition, provide the following details in your request:
 
-    - Astro cluster ID and name
+    - Astro cluster ID 
     - Azure TenantID and Subscription ID of the target VNet
-    - Region of the target VNet
     - VNet ID of the target VNet
-    - Classless Inter-Domain Routing (CIDR) block of the target VNet
 
 After receiving your request, Astronomer support creates a VNet peering connection between the two VNets. No other actions are required from you. Astronomer support will notify you when the connection is ready to use.
 
