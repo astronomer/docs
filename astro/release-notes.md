@@ -25,6 +25,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## May 7, 2024
+
+### Bug fixes
+
+- Fixed a bug where multiple users could not access [Organization Dashboards](https://docs.astronomer.io/astro/organization-dashboard) simultaneously.
+
 ## April 30, 2024
 
 ### Deploy automatically from GitHub using the official Astro GitHub integration
@@ -52,10 +58,10 @@ You can now restrict the use of a custom Deployment role to specific Workspaces.
 
 - The [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) feature is now generally available.
 - You can now promote a [development Deployment](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
-- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later. 
+- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later.
 
     Note that you might have to modify the code for your menu item plugins to make them work on Astro. See [Appbuilder menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
-    
+
 - You can now filter the Workspaces and clusters lists in the Astro UI by name.
 
 ### Bug fixes
@@ -77,7 +83,7 @@ You can now restrict the use of a custom Deployment role to specific Workspaces.
 - You can now view info-level incidents from the Deployment health status indicator in the Astro UI.
 - It is now possible for workers to use up to 6400 CPUs and 12800 GiB of memory on a single Deployment.
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where you couldn't configure boolean values for Airflow connections in the Astro UI.
 - Fixed an issue where Airflow connections configured through the Astro UI did not work with deferrable tasks.
