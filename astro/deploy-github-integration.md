@@ -68,7 +68,7 @@ Before you begin, ensure that you’re logged in to GitHub with permissions to r
 6. Configure the following fields:
 
     - **Repository:** Select the repository you want to integrate with Astro.
-    - **Astro Project Path:** Specify the path to your Astro project, up to and including the Astro project folder. For example, `/myorg/myprojects/my-astro-project`
+    - **Astro Project Path:** Specify the path to your Astro project relative to your GitHub repository directory, up to and including the Astro project folder. For example, for a project in `github-repository/myorg/myprojects/my-astro-project`, enter `myorg/myprojects/my-astro-project`. If the path is configured incorrectly, code does not deploy to Astro from GitHub. You can change this path by editing the **Branch Configuration** in the Astro UI.
 
 7. Click **Connect Repository**.
 8. Map specific branches in your repository to Deployments in your Workspace. When you map a branch to a Deployment, any commits to that branch trigger a code deploy to Astro. For example, you can map a development branch and your production branch to separate Deployments, so that bugs in development don’t affect your production data pipelines.
