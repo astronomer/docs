@@ -25,7 +25,7 @@ If you're just starting out on Astro and you're working with publicly available 
 
 To access or write data on your company's cloud, Astronomer strongly recommends establishing a private network connection between Astro and your cloud. For most use cases, Astronomer recommends creating a VPC peering connection between Astro and your cloud. After the connection is established, you can authorize individual Deployments to specific resources using workload identity. This method is simple to set up and ensures private and secure connectivity between Astro and any support cloud provider.
 
-To create a VPC peering connection on each support cloud see:
+To create a VPC peering connection to Astro, you must use a dedicated cluster. In general, dedicated clusters support more secure networking types, such as AWS PrivateLink and Azure VNet peering. See:
 
 - [AWS: Create a private connection between Astro and AWS](connect-aws.md?tab=VPC%20peering#create-a-private-connection-between-astro-and-aws)
 - [GCP: Create a private connection between Astro and GCP](connect-gcp.md?tab=VPC%20peering#create-a-private-connection-between-astro-and-gcp)
