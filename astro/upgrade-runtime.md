@@ -161,7 +161,7 @@ If an Astro Runtime version isn't included in this section, then there are no sp
 
 ##### Bug affecting users running a local Astro Runtime environment
 
-In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](https://github.com/apache/airflow/pull/39421)) prevented Astro Runtime environment locally for Astro Runtime versions 11.0.0, 11.1.0, and 11.2.0. Deployments running these versions on Astro are not affected.
+In Airflow 2.9, a bug affecting custom actions in Airflow plugins ([#39421](https://github.com/apache/airflow/pull/39421)) prevented users from running the Astro Runtime environment locally for Astro Runtime versions 11.0.0, 11.1.0, and 11.2.0. Deployments running these versions on Astro are not affected.
 
 To continue using these versions of the Astro runtime locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
