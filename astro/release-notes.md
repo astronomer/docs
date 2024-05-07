@@ -27,6 +27,10 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 ## May 7, 2024
 
+### Updates to address ranges for dedicated clusters on Google Cloud Provider
+
+Astro on GCP Dedicated Clusters use source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources, to minimize the risk and concern with IP overlap and exhaustion. Your target data sources will see connections from the VPC Subnet Range when using private networking, like VPC Peering or VPN. If you want to configure private connectivity, ensure the default subnet and peering ranges do not overlap with your target data source network when you're creating your dedicated cluster. See [Create a dedicated Astro cluster](https://docs.astronomer.io/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more details.
+
 ### Additional improvements
 
 - You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used.
