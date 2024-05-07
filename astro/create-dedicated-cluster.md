@@ -62,11 +62,14 @@ Dedicated clusters offer the self-service convenience of a fully managed service
 
     - **Pod Subnet Range**: Specify the range used by GKE Pods (Default: `100.64.0.0/16`).
     - **Service Subnet Range**: Specify the range used by nodes in your GKE cluster (Default: `100.65.0.0/22`).
-    - **Service Peering Range**: Specify the range used by Private Service connections ( Default: `100.66.0.0/21`)
+    - **Service Peering Range**: Specify the range used by Private Service connections (Default: `100.66.0.0/21`)
 
     If there is an overlap between the Advanced Configurations and your target data source networks, you can use the following alternative ranges:
 
-    - **RFC 1918**: 10.0.0.0/8, 10.0.0.0 – 10.255.255.255 OR 172.16.0.0/12, 172.16.0.0 – 172.31.255.255, OR 192.168.0.0/16, 192.168.0.0 – 192.168.255.255
+    - **RFC 1918**:
+        - 10.0.0.0/8, 10.0.0.0 – 10.255.255.255
+        - 172.16.0.0/12, 172.16.0.0 – 172.31.255.255
+        - 192.168.0.0/16, 192.168.0.0 – 192.168.255.255
     - **RFC 6598**: 100.64.0.0/10, specifically IP addresses from 100.64.0.0 to 100.127.255.255
 
 5. Click **Create cluster**. After Astro finishes creating the cluster, users in your Organization can select the cluster when they [create a Deployment](create-deployment.md).
