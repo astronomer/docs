@@ -51,6 +51,12 @@ If you're upgrading to receive a specific change, ensure the release note for th
 - Release date: April 26, 2024
 - Airflow version: 2.9.0
 
+:::warning
+
+Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+
+:::
+
 ### Early access Airflow bug fixes
 
 - Fixed a bug where `airflow db migrate` would throw an error ([#39246](https://github.com/apache/airflow/pull/39246))
@@ -67,7 +73,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::warning
 
-Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 :::
 
@@ -84,7 +90,7 @@ Due to an [issue related to using custom plugins in Airflow](https://github.com/
 
 :::warning
 
-Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 :::
 
