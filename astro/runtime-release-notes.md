@@ -36,7 +36,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ### Early access Airflow bug fixes
 
-- Fixed a bug affecting custom actions in the security manager ([#39421](https://github.com/apache/airflow/pull/39421))
+- Fixed a bug affecting custom actions in Airflow plugins that prevents users from running an Astro Runtime environment locally for Astro Runtime versions `11.0.0`-`11.2.0`. Deployments running these versions on Astro are not affected. To continue using `11.0.0`-`11.2.0` locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file ([#39421](https://github.com/apache/airflow/pull/39421))
 
 ### Additional improvements
 
@@ -50,6 +50,12 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 - Release date: April 26, 2024
 - Airflow version: 2.9.0
+
+:::warning
+
+Due to an [issue related to using custom FAB actions in Airflow plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+
+:::
 
 ### Early access Airflow bug fixes
 
@@ -67,7 +73,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 :::warning
 
-Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+Due to an [issue related to using custom FAB actions in Airflow plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 :::
 
@@ -84,7 +90,7 @@ Due to an [issue related to using custom plugins in Airflow](https://github.com/
 
 :::warning
 
-Due to an [issue related to using custom plugins in Airflow](https://github.com/apache/airflow/pull/39167), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.2.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
+Due to an [issue related to using custom FAB actions in Airflow plugins](https://github.com/apache/airflow/issues/39144), you might experience an error when you run this version of Astro Runtime locally using the Astro CLI. To resolve this issue, either upgrade directly to Astro Runtime 11.3.0 or set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` in your Astro project `.env` file.
 
 :::
 
