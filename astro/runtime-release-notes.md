@@ -36,7 +36,7 @@ If you're upgrading to receive a specific change, ensure the release note for th
 
 ### Early access Airflow bug fixes
 
-- Fixed a bug affecting custom actions in the security manager that prevents users from running an Astro Runtime environment locally for Astro Runtime versions `11.0.0`, `11.1.0`, or `11.2.0`. Deployments running these versions on Astro are not affected. To continue using `11.0.0`, `11.1.0`, or `11.2.0` locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` as an environment variable ([#39421](https://github.com/apache/airflow/pull/39421))
+- Fixed a bug affecting custom actions in Airflow plugins that prevents users from running an Astro Runtime environment locally for Astro Runtime versions `11.0.0`, `11.1.0`, or `11.2.0`. Deployments running these versions on Astro are not affected. To continue using `11.0.0`, `11.1.0`, or `11.2.0` locally, set `AIRFLOW__ASTRONOMER__UPDATE_CHECK_INTERVAL=0` as an environment variable ([#39421](https://github.com/apache/airflow/pull/39421))
 
 ### Additional improvements
 
