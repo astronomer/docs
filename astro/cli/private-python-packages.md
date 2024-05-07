@@ -13,7 +13,7 @@ Depending on where your private packages are stored, use one of the following se
 
 :::info
 
-Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see [GitHub Actions CI/CD templates](https://docs.astronomer.io/astro/ci-cd-templates/github-actions).
+Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see the GitHub Actions CI/CD templates for [Astro](https://docs.astronomer.io/astro/ci-cd-templates/github-actions-template?tab=custom#setup) and [Software](https://docs.astronomer.io/software/ci-cd#github-actions-cicd).
 
 :::
 
