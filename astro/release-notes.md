@@ -31,6 +31,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 Astro on GCP Dedicated Clusters uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources, to minimize the risk and concern with IP overlap and exhaustion. Your target data sources will see connections from Astro using the VPC Subnet Range when using private networking, like VPC Peering or VPN. If you want to configure private connectivity, ensure the default subnet and peering ranges do not overlap with your target data source network when you're creating your dedicated cluster. See [Create a dedicated Astro cluster](https://docs.astronomer.io/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more details.
 
+### Improvements to Astro performance
+
+As part of continued investment in the reliability, performance, and scalability of Astro, Astronomer is embarking on a migration of our public and private image registries. Astro Runtime clusters will benefit from more performant, globally distributed and geo-replicated image registries, with built-in registry resilience if a regional outage occurs. This is in addition to the previous release of the registry cache local to every Astro cluster.
+
+No end user or task runtime change or impact is expected as part of the backend cutover during the week of May 6th, 2024
+
 ### Additional improvements
 
 - You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used.
