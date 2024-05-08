@@ -33,13 +33,13 @@ Astro on GCP Dedicated Clusters uses source network address translation (SNAT) t
 
 ### Improvements to Astro performance
 
-As part of continued investment in the reliability, performance, and scalability of Astro, Astronomer is embarking on a migration of our public and private image registries. Astro Runtime clusters will benefit from more performant, globally distributed and geo-replicated image registries, with built-in registry resilience if a regional outage occurs. This is in addition to the previous release of the registry cache local to every Astro cluster.
+As part of continued investment in the reliability, performance, and scalability of Astro, Astronomer is embarking on a migration of public and private image registries. Astro Runtime clusters will benefit from more performant, globally distributed and geo-replicated image registries, with built-in registry resilience if a regional outage occurs. This is in addition to the previous release of the registry cache local to every Astro cluster.
 
-No end user or task runtime change or impact is expected as part of the backend cutover during the week of May 6th, 2024
+No end user or task runtime change or impact is expected as part of the backend cutover during the week of May 6th, 2024.
 
 ### Additional improvements
 
-- You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used.
+- You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used. For more information, see [Restricted Runtime Versions](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#restricted-runtime-versions).
 
 ### Bug fixes
 
