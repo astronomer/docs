@@ -25,6 +25,26 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
+## May 8, 2024
+
+### Updates to address ranges for dedicated clusters on Google Cloud Provider
+
+Astro on GCP Dedicated Clusters uses source network address translation (SNAT) that performs many-to-one IP address translations for connections to your data sources and defaults secondary ranges to RFC 6598 address space (non-standard Private IP addresses), to minimize the risk and concern with IP overlap and exhaustion. Your target data sources will see connections from Astro using the VPC Subnet Range when using private networking, like VPC Peering or VPN. If you want to configure private connectivity, ensure the default subnet and peering ranges do not overlap with your target data source network when you're creating your dedicated cluster. See [Create a dedicated Astro cluster](https://docs.astronomer.io/astro/create-dedicated-cluster?tab=gcp#create-a-cluster) for more details.
+
+### Improvements to Astro performance
+
+As part of continued investment in the reliability, performance, and scalability of Astro, Astronomer is embarking on a migration of public and private image registries. Astro Runtime clusters will benefit from more performant, globally distributed and geo-replicated image registries, with built-in registry resilience if a regional outage occurs. This is in addition to the previous release of the registry cache local to every Astro cluster.
+
+No end user or task runtime change or impact is expected as part of the backend cutover during the week of May 6th, 2024.
+
+### Additional improvements
+
+- You can no longer create Deployments using Astro Runtime versions marked as `yanked` in `https://updates.astronomer.io/astronomer-runtime`, even if your Organization has enabled creating Deployments with deprecated Runtime versions. These versions of the Astro Runtime have known issues and should not be used. For more information, see [Restricted Runtime Versions](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#restricted-runtime-versions).
+
+### Bug fixes
+
+- Fixed a bug where multiple users could not access [Organization Dashboards](https://docs.astronomer.io/astro/organization-dashboard) simultaneously.
+
 ## April 30, 2024
 
 ### Deploy automatically from GitHub using the official Astro GitHub integration
@@ -52,10 +72,10 @@ You can now restrict the use of a custom Deployment role to specific Workspaces.
 
 - The [custom Deployment roles](https://docs.astronomer.io/astro/customize-deployment-roles) feature is now generally available.
 - You can now promote a [development Deployment](https://docs.astronomer.io/astro/deployment-resources#hibernate-a-development-deployment) to a production Deployment by switching off the **Development Mode** toggle in the Deployment's configuration.
-- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later. 
+- Workspace Members can now see and use [custom Airflow menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items). To give a custom role this permission, you can add `deployment.airflow.customMenu.get` to the role's permissions list. This permission works only on Deployments running Astro Runtime 9 or later.
 
     Note that you might have to modify the code for your menu item plugins to make them work on Astro. See [Appbuilder menu items](https://docs.astronomer.io/learn/using-airflow-plugins#appbuilder-menu-items) for more information.
-    
+
 - You can now filter the Workspaces and clusters lists in the Astro UI by name.
 
 ### Bug fixes
@@ -77,7 +97,7 @@ You can now restrict the use of a custom Deployment role to specific Workspaces.
 - You can now view info-level incidents from the Deployment health status indicator in the Astro UI.
 - It is now possible for workers to use up to 6400 CPUs and 12800 GiB of memory on a single Deployment.
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where you couldn't configure boolean values for Airflow connections in the Astro UI.
 - Fixed an issue where Airflow connections configured through the Astro UI did not work with deferrable tasks.
