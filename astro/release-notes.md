@@ -25,7 +25,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 <!-- ALL LINKS TO INTERNAL DOCS MUST BE COMPLETE URLS INCLUDING HTTPS. Otherwise the links will break in RSS. -->
 
-## May 7, 2024
+## May 8, 2024
 
 ### Updates to address ranges for dedicated clusters on Google Cloud Provider
 
