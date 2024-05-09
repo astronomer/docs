@@ -53,7 +53,7 @@ Use this template to push code to from a GitLab repository to Astro.
     image: docker:latest
     services:
       - docker:dind
-    
+
     variables:
         ASTRO_API_TOKEN: ${ASTRO_API_TOKEN}
         DEPLOYMENT_ID: ${DEPLOYMENT_ID}
@@ -135,6 +135,14 @@ Use this template to push code to a development and a production Deployment in A
 
 The DAG deploy template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](astro/deploy-code.md).
 
+:::tip
+
+When you stage multiple commits locally that include DAG changes, and then push them all to your remote branch simultaneously, the DAG deploy template only deploys DAG code changes from the most recent commit. It might miss any code changes made in previous commits.
+
+Either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultanouesly.
+
+:::
+
 ### Single branch implementation
 
 Use this template to push code to from a GitLab repository to Astro.
@@ -147,7 +155,7 @@ Use this template to push code to from a GitLab repository to Astro.
     Astronomer recommends that you always [mask](https://docs.gitlab.com/ee/ci/variables/#mask-a-cicd-variable) your API token to prevent it from being accessible in plain text. You can also set the API token as an [external secret](https://docs.gitlab.com/ee/ci/secrets/index.html) for an extra layer of security.
 
 2. Go to the **Editor** option in your project's CI/CD section and commit the following:
-   
+
     ```yaml
     astro_smart_deploy:
       stage: deploy

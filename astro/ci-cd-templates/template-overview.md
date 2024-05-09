@@ -30,6 +30,14 @@ CI/CD templates that use the DAG deploy workflow:
     - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment.
     - If any file not in the `dags` folder has changed, run `astro deploy`. This triggers two subprocesses. One that creates a Docker image for your Astro project, authenticates to Astro using your Deployment API token, and pushes the image to your Deployment. A second that pushes your `dags` folder to your Deployment.
 
+:::tip
+
+When you stage multiple commits locally that include DAG changes, and then push them all to your remote branch simultaneously, the DAG deploy template only deploys DAG code changes from the most recent commit. It might miss any code changes made in previous commits.
+
+Either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultanouesly.
+
+:::
+
 This process is equivalent to the following shell script:
 
 ```bash

@@ -2,7 +2,7 @@
 sidebar_label: Jenkins
 title: Astro CI/CD templates for Jenkins
 id: jenkins
-description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Jenkins. 
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Jenkins.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -30,7 +30,7 @@ For more information on each template or to configure your own, see [Template ov
 Each CI/CD template implementation might have additional requirements.
 
 ## Image deploy templates
- 
+
 <Tabs
     defaultValue="standard"
     groupId= "image-deploy-templates"
@@ -205,6 +205,14 @@ This `Jenkinsfile` triggers a code push to Astro every time a commit or pull req
 ## DAG deploy templates
 
 The DAG deploy template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-dags.md).
+
+:::tip
+
+If you make multiple commits to a local branch with DAG changes, and then push them all to your remote branch simultaneously, the DAG deploy template only deploys DAG code changes in the most recent commit.
+
+Either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultanouesly.
+
+:::
 
 ### Single branch implementation
 

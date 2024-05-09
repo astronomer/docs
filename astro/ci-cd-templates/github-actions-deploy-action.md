@@ -252,3 +252,11 @@ If your Astro project requires additional build-time arguments to build an image
 
 </TabItem>
 </Tabs>
+
+:::tip
+
+When you stage multiple commits locally that include DAG changes, and then push them all to your remote branch simultaneously, the DAG deploy template only deploys DAG code changes from the most recent commit. It might miss any code changes made in previous commits.
+
+Either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultanouesly.
+
+:::

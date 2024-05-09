@@ -130,16 +130,16 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
         base_dir = '/tmp/astro'
         download_to_local(BUCKET, 'mkdemo/dags/', f'{base_dir}/dags')
         download_to_local(BUCKET, 'mkdemo/cli_binary/', base_dir)
-        
+
         os.chdir(base_dir)
         untar('./astro_cli.tar.gz', '.')
-        
+
         run_command('echo y | ./astro dev init')
         run_command(f"./astro deploy {deploymentId} --dags")
-        
+
         return {"statusCode": 200}
     ```
-    
+
 8. [Create a trigger](https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html) for your Lambda function with the following configuration:
 
     - **Source**: Select **S3**.
@@ -149,6 +149,15 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
     - **Suffix**: Enter `.py`.
 
 9. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).
+
+    :::tip
+
+    When you stage multiple commits locally that include DAG changes, and then push them all to your remote branch simultaneously, the DAG deploy template only deploys DAG code changes from the most recent commit. It might miss any code changes made in previous commits.
+
+    Either push commits individually or configure your repository to **Squash commits** for pull requests that merge multiple commits simultanouesly.
+
+    :::
+
 10. Add your DAGs to the `dags` folder in your storage bucket
-11. In the Astro UI, select a Workspace, click **Deployments**, and then select your Deployment. Confirm that your Lambda function worked by checking the Deployment **DAG bundle version**. The version's name should include the time that you added the DAGs to your S3 bucket. 
+11. In the Astro UI, select a Workspace, click **Deployments**, and then select your Deployment. Confirm that your Lambda function worked by checking the Deployment **DAG bundle version**. The version's name should include the time that you added the DAGs to your S3 bucket.
 
