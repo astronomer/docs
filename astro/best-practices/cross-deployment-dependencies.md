@@ -103,12 +103,12 @@ While you can also use the HttpOperator to make the API request to update the da
 
 #### Process
 
-1. In your upstream Deployment, which is the Deployment  for which you did **not** create an API Token, use **Variables** in the Astro UI to create an environment variable for your API token, and use `API_TOKEN` for the key.
+1. In your upstream Deployment, which is the Deployment for which you did **not** create an API Token, use **Variables** in the Astro UI to create an environment variable for your API token, and use `API_TOKEN` for the key.
 2. For your downstream Deployment, follow the guidance in [Airflow REST API](https://docs.astronomer.io/astro/airflow-api#step-2-retrieve-the-deployment-url) to obtain the Deployment URL for your downstream Deployment. 
 3. In your upstream Deployment, use Variables in the Astro UI to create an environment variable where you can store your downstream Deployment URL, using `DEPLOYMENT_URL` for the key.
 4. In the upstream Deployment, implement a listener following the guidance in the [Create Airflow listeners tutorial](https://docs.astronomer.io/learn/airflow-listeners). Use the following code in place of the `listeners_code.py` code provided there:
 
-```
+```python
 from airflow.datasets import Dataset
 from airflow.listeners import hookimpl
 import requests
@@ -139,7 +139,7 @@ def on_dataset_changed(dataset: Dataset):
 
 4. Add the following DAG to your Astro project.
 
-```
+```python
 from airflow.datasets import Dataset
 from airflow.decorators import dag, task
 from pendulum import datetime
@@ -171,7 +171,7 @@ producer_dag()
 
 For example:
 
-```
+```python
 from airflow.decorators import dag, task
 from datetime import datetime
 from airflow.operators.empty import EmptyOperator
