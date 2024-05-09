@@ -88,7 +88,6 @@ module.exports = {
         "deploy-project-image",
         "deploy-dags",
         "deploy-history",
-        "deploy-github-integration",
       ],
     },
     {
