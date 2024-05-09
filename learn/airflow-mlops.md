@@ -88,7 +88,7 @@ Since you define Airflow pipelines in Python code, you can apply DevOps best pra
 
 :::info
 
-Astronomer customers can Astro's GitHub integration to connect their Airflow deployments to their GitHub repositories. See LINK.
+Astronomer customers can use the Astro GitHub integration, which allows you to automatically deploy code from a GitHUb repository to an Astro deployment, viewing Git metadata in the Astro UI. See [Deploy code with the Astro GitHub integration](https://docs.astronomer.io/astro/deploy-github-integration). 
 
 :::
 
