@@ -330,6 +330,7 @@ module.exports = {
         'best-practices/airflow-vs-astro-alerts',
         'best-practices/connections-branch-deploys',
         'best-practices/dag-writing-on-astro'
+        'best-practices/cross-deployment-dependencies',
       ],
     },
     {
