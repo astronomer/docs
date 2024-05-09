@@ -38,7 +38,7 @@ You can use Astro alerts to implement cross-deployment DAG dependencies using th
 
 **Airflow Datasets:**
 
-Datasets represent a significant evolution in the way Airflow can be used to define dependencies and, for some, offer a more natural way of expressing pipelines than traditional DAGs. Datasets offer more flexibility for cross-deployment dependencies than Astro alerts, are the preferred method in the following scenarios:
+Datasets represent a significant evolution in the way Airflow can be used to define dependencies and, for some, offer a more natural way of expressing pipelines than traditional DAGs. Datasets, which offer more flexibility for cross-deployment dependencies than Astro alerts, are the preferred method in the following scenarios:
 - You need to implement dependencies in a many-to-one pattern, so you can make a DAG dependent on the completion of multiple other DAGs or tasks. This is not possible using Astro Alerts.
 - You need to implement dependencies in a one-to-many pattern, so one DAG or task triggers multiple DAGs or tasks. While this is also possible using Astro Alerts, it requires a separate alert for each dependency.
 
@@ -196,7 +196,7 @@ consumer_dag()
 
 ```
 
-After deploying both projects to their respective deployments on Astro, you should see your `consumer_dag` being triggered automatically by runs of your `producer_dag`. If the downstream DAG is not firing, verify that the upstream deployment's environment variables (the API token and deployment URL) correspond to the downstream deployment. Also, a properly functioning listener will emit an API response payload containing DAG run information related to the dataset. Check the task logs for output that looks similar to this:
+After deploying both projects to their respective Deployments on Astro, you should see runs of your `producer_dag` trigger your `consumer_dag` automatically. If the downstream DAG is not firing, verify that the upstream Deployment's environment variables, the API token and deployment URL, correspond to the downstream Deployment's API Token and Deployment URL. Also, a properly functioning listener will emit an API response payload containing DAG run information related to the dataset. Check the task logs for output that looks similar to this:
 
 ```
 {\'created_dagruns\': [], \'dataset_id\': 2, \'dataset_uri\': \'file://include/bears\', \'extra\': {\'from_rest_api\': True}, \'id\': 3, \'source_dag_id\': None, \'source_map_index\': -1, \'source_run_id\': None, \'source_task_id\': None, \'timestamp\': \'2024-05-07T21:52:40.295802+00:00\'}
